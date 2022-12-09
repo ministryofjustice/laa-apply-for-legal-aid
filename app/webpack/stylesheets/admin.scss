@@ -1,3 +1,5 @@
+@import "~govuk-frontend/govuk/settings/all";
+
 .admin-page {
   nav.app-navigation {
     @media (min-width: 40.0625em) {
@@ -19,8 +21,8 @@
 
         &.current-page {
           a {
-            color: white;
-            background-color: black;
+            color: govuk-colour("white");
+            background-color: govuk-colour("black");
           }
         }
       }

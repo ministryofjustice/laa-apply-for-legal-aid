@@ -51,12 +51,12 @@ div.no-results {
 }
 
 .govuk-details__summary.white_text {
-  color: white;
+  color: govuk-colour("white");
 }
 
 a.black_text_on_focus {
   &:focus {
-    color: black;
+    color: govuk-colour("black");
   }
 }
 

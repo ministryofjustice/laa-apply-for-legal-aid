@@ -1,3 +1,5 @@
+@import "~govuk-frontend/govuk/settings/all";
+
 // modal (background overlay)
 .modal {
   display: block;
@@ -32,7 +34,7 @@
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: govuk-colour("black");
   text-decoration: none;
   cursor: pointer;
 }

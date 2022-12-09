@@ -1,3 +1,5 @@
+@import "~govuk-frontend/govuk/settings/all";
+
 dl.govuk-list.inline-list {
   dt:before {
     content: "";
@@ -16,7 +18,7 @@ dl.govuk-list.inline-list {
 
 .govuk-panel {
   dl.govuk-list {
-    color: white;
+    color: govuk-colour("white");
     font-size: inherit;
   }
 }
