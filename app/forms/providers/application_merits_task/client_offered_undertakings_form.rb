@@ -6,8 +6,8 @@ module Providers
       attr_accessor :offered, :additional_information, :additional_information_true, :additional_information_false
 
       validates :offered, inclusion: { in: %w[true false] }
-      validates :additional_information_true, presence: true, if: :requires_additional_information?
-      validates :additional_information_false, presence: true, unless: :requires_additional_information?
+      validates :additional_information_true, presence: true, if: :requires_yes_additional_information?
+      validates :additional_information_false, presence: true, if: :requires_no_additional_information?
 
       def initialize(*args)
         super
@@ -15,14 +15,18 @@ module Providers
       end
 
       def save
-        attributes[:additional_information] = requires_additional_information? ? additional_information_true : additional_information_false
+        attributes[:additional_information] = requires_yes_additional_information? ? additional_information_true : additional_information_false
         super
       end
 
     private
 
-      def requires_additional_information?
+      def requires_yes_additional_information?
         offered.to_s == "true"
+      end
+
+      def requires_no_additional_information?
+        offered.to_s == "false"
       end
 
       def extrapolate_additional_information
