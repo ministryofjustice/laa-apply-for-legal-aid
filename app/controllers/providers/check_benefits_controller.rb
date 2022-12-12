@@ -4,8 +4,6 @@ module Providers
     include ApplicantDetailsCheckable
     include BenefitCheckSkippable
 
-    helper_method :should_use_ccms?
-
     def index
       details_checked! unless details_checked? || legal_aid_application.non_passported?
       @applicant = legal_aid_application.applicant
@@ -24,10 +22,6 @@ module Providers
 
     def check_benefits
       redirect_to problem_index_path unless legal_aid_application.add_benefit_check_result
-    end
-
-    def should_use_ccms?
-      UseCCMSArbiter.call(legal_aid_application)
     end
 
     def known_issue_prevents_benefit_check?

@@ -218,7 +218,7 @@ RSpec.describe Providers::CheckBenefitsController do
       let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider:) }
 
       context "with permissions passported" do
-        let(:provider) { create(:provider, :with_passported_permissions) }
+        let(:provider) { create(:provider) }
 
         it "allows us to continue" do
           get "/providers/applications/#{application.id}/check_benefits"
