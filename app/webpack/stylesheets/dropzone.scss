@@ -1,27 +1,29 @@
+// stylelint-disable declaration-no-important, selector-max-id
+
 .dropzone {
-  outline: 3px dashed govuk-colour('black');
-  border: none !important;
   display: flex;
-  text-align: center;
-  border-radius: 0 !important;
+  margin-top: 1em;
   padding: govuk-spacing(9) govuk-spacing(3);
   transition: outline-offset .1s ease-in-out, background-color .1s linear;
-  margin-top: 1em;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: 3px dashed govuk-colour("black");
+  text-align: center;
 }
 
 .dropzone label {
-  margin-bottom: 0;
   display: inline-block;
   width: auto;
+  margin-bottom: 0;
 }
 
 .dropzone p {
-  margin-bottom: 0;
   margin-right: 10px;
+  margin-bottom: 0;
   padding-top: 7px;
 }
 
-.dropzone [type=file] {
+.dropzone [type="file"] {
   position: absolute;
   left: -9999em;
 }
@@ -31,37 +33,37 @@
 }
 
 .dz-drag-hover {
-  background: #b1b4b6;
   outline-color: #6f777b;
+  background: #b1b4b6;
 }
 
 .dz--focused {
-  background-color: $govuk-focus-colour;
-  color: $govuk-focus-text-colour;
-  box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-focus-text-colour;
   outline: none;
+  color: $govuk-focus-text-colour;
+  background-color: $govuk-focus-colour;
+  box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-focus-text-colour;
 }
 
 .dz__error {
-  color: govuk-colour('red');
+  color: govuk-colour("red");
   font-weight: bold;
 }
 
 .dz__success {
-  color: govuk-colour('green');
+  color: govuk-colour("green");
   font-weight: bold;
 }
 
 .dz__error svg {
-  fill: currentColor;
-  float: left;
   margin-right: govuk-spacing(2);
+  float: left;
+  fill: currentcolor;
 }
 
 .dz__success svg {
-  fill: currentColor;
-  float: left;
   margin-right: govuk-spacing(2);
+  float: left;
+  fill: currentcolor;
 }
 
 #uploaded-files-table-container {
@@ -71,3 +73,5 @@
 .govuk-notification-banner {
   word-wrap: break-word;
 }
+
+// stylelint-enable declaration-no-important, selector-max-id

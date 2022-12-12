@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important
+
 .small-loading-image {
   height: 22px;
   vertical-align: middle;
@@ -12,15 +14,19 @@
   word-break: break-word;
 }
 
-.only-print, .only-print * {
+.only-print,
+.only-print * {
   display: none !important;
 }
 
 @media print {
-  .no-print, .no-print * {
+  .no-print,
+  .no-print * {
     display: none !important;
   }
-  .only-print, .only-print * {
+
+  .only-print,
+  .only-print * {
     display: inherit !important;
   }
 }
@@ -30,5 +36,7 @@
 }
 
 .show-empty {
-  min-height: 1px
+  min-height: 1px;
 }
+
+// stylelint-enable declaration-no-important

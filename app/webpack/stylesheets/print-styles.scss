@@ -1,135 +1,145 @@
+// stylelint-disable declaration-no-important, selector-max-id, selector-no-qualifying-type
+
 #print-logo {
+  display: none;
   padding-bottom: 12mm;
   font-family: sans-serif;
-  display:none;
-  font-weight:700;
   font-size: 8.45mm;
-  line-height:16mm;
-  
+  font-weight: 700;
+  line-height: 16mm;
+
   img {
-    height: 10mm;
+    display: inline;
     position: relative;
-    top: 0.2em;
-    display:inline
+    top: .2em;
+    height: 10mm;
   }
 }
 
-
 @media print {
-  
   main {
-    width:200mm;
+    width: 200mm;
   }
-  
-  /*font size adjustments*/
+
   .govuk-heading-xl {
-    font-size:8.45mm!important;
+    font-size: 8.45mm !important;
   }
+
   .govuk-heading-l {
-    font-size:6.9mm!important;
+    font-size: 6.9mm !important;
   }
+
   dl,
   tr,
   p.govuk-body,
-  .govuk-body>p,
+  .govuk-body > p,
   .govuk-list {
-    font-size:4.25mm!important;
-  }
-  .income_payments_and_assets td:first-child {
-    font-weight:bold;
+    font-size: 4.25mm !important;
   }
 
-  /*replacing missing bullets*/
-  .govuk-list.govuk-list--bullet>li>strong:before {
-    content:"● ";
+  .income_payments_and_assets td:first-child {
+    font-weight: bold;
   }
+
+  .govuk-list.govuk-list--bullet > li > strong:before {
+    content: "● ";
+  }
+
   .print-add-bullet {
-    position:relative;
-    &>li:before {
-      content:"●";
-      position:absolute;
-      left:0;
+    position: relative;
+
+    & > li:before {
+      content: "●";
+      position: absolute;
+      left: 0;
     }
   }
-  
-  
+
   .print-bottom-gap {
-    padding-bottom:3.5em;
+    padding-bottom: 3.5em;
   }
+
   #print-logo {
-    display:inline;
+    display: inline;
   }
+
   .govuk-grid-column-two-thirds {
-    width:100%!important;
+    width: 100% !important;
   }
+
   header {
-    display:none;
+    display: none;
   }
+
   dl.govuk-summary-list {
     .govuk-summary-list__key,
     .govuk-summary-list__value {
-      width:100mm!important;
-      text-align:left;
-      display:table-cell;
-      padding-top:2.65mm;
-      padding-bottom:2.65mm;
+      display: table-cell;
+      width: 100mm !important;
+      padding-top: 2.65mm;
+      padding-bottom: 2.65mm;
+      text-align: left;
     }
   }
-  
+
   .print-position-correction {
-    position:relative;
-    top:7mm;
+    position: relative;
+    top: 7mm;
   }
 
-  section.print-no-break, dl, h2 {
+  section.print-no-break,
+  dl,
+  h2 {
     page-break-inside: avoid;
   }
 
   .print-header-wrapper {
-    position:relative;
+    position: relative;
   }
 
   dl.govuk-list.inline-list.print-header {
-    position:fixed;
-    top:0;
-    left:8.5mm;
-    font-size:3.7mm;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 8.5mm;
     width: 100%;
-    z-index:10;
-    background-color:#fff;
-    
-    &>dt:before {
+    background-color: #ffffff;
+    font-size: 3.7mm;
+
+    & > dt:before {
       display: inline;
     }
-    &>dd:after {
+
+    & > dd:after {
       content: "";
-      padding-right:2em;
+      padding-right: 2em;
     }
   }
-  
+
   .print-remove-border,
   .print-remove-border * {
-    border:none;
-    padding-bottom:0;
-    margin-bottom:0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: none;
   }
 
   .open-banking-guidance-img {
-    max-width : 200px;
-    height : auto;
+    max-width: 200px;
+    height: auto;
   }
 }
 
 @page {
-  margin-top:10mm;
-  margin-bottom:10mm;
-  size:200mm 275mm; 
+  margin-top: 10mm;
+  margin-bottom: 10mm;
+  size: 200mm 275mm;
 }
 
-/*header overrides*/
 @media print and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  /* IE10+ CSS styles*/
+  // IE10+ CSS styles
   .print-header-wrapper {
-    position:static;
+    position: static;
   }
 }
+
+// stylelint-enable declaration-no-important, selector-max-id, selector-no-qualifying-type

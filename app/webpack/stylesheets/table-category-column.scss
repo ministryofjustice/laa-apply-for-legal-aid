@@ -1,9 +1,11 @@
 .table-category.table-category-vacant {
   visibility: hidden;
+
   &.table-category-preview {
     visibility: visible;
   }
 }
+
 .govuk-table__cell.tag-cell {
-  text-align:center;
+  text-align: center;
 }

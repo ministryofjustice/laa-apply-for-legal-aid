@@ -1,10 +1,12 @@
+// stylelint-disable selector-max-id
+
 @import "~govuk-frontend/govuk/settings/all";
 @import "~govuk-frontend/govuk/helpers/all";
 
 .govuk-header {
   #navigation {
-    line-height: 30px;
     margin-top: 0;
+    line-height: 30px;
 
     a {
       margin-left: 1em;
@@ -25,5 +27,7 @@
 }
 
 abbr[title] {
-  text-decoration:none;
+  text-decoration: none;
 }
+
+// stylelint-enable selector-max-id
