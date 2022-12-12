@@ -18,6 +18,7 @@ class TestProviderPopulator
     "EDWARD HAYES LLP" => [19_537, %w[1T462U:85605]],
     "LAWRENCE & CO SOLICITORS CDS LLP" => [33_230, %w[0Q974B:85981]],
     "Rose & Co." => [809, %w[6F910X:28 7F320X:29]],
+    "Keen & Co." => [101, %w[5F101X:30 7F101X:31]],
   }.freeze
 
   TEST_PROVIDERS = {
@@ -40,6 +41,7 @@ class TestProviderPopulator
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
     "cm" => ["Test Connor Co.", "connor.mcquillan@digital.justice.gov.uk", 113],
     "rose" => ["Rose & Co.", "rose.azadkhan@digital.justice.gov.uk", 114],
+    "mkeen" => ["Keen & Co.", "mike.keen@digital.justice.gov.uk", 115],
   }.freeze
 
   def run
