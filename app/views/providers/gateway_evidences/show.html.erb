@@ -63,7 +63,7 @@
   <% end %>
 <% end %>
 
-<script nonce="<%= content_security_policy_script_nonce %>">
+<script nonce="<%= request.content_security_policy_nonce %>">
   window.LAA_VARS = {
     images: {
       loading_small: <%= asset_pack_path('media/images/loading-small.gif').to_json.html_safe %>
