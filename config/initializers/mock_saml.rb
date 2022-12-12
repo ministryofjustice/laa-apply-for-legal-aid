@@ -37,6 +37,8 @@ Rails.configuration.x.application.mock_saml = ValidTestUsersStruct.new(
     TestCredentialsStruct.new("ahernk", "katharine.ahern@digital.justice.gov.uk"),
     TestCredentialsStruct.new("cm", "connor.mcquillan@digital.justice.gov.uk"),
     TestCredentialsStruct.new("jsugarman", "joel.sugarman@digital.justice.gov.uk"),
+    TestCredentialsStruct.new("rose", "rose.azadkhan@digital.justice.gov.uk"),
+    TestCredentialsStruct.new("mkeen", "mike.keen@digital.justice.gov.uk"),
   ],
   password: "password",
 )
