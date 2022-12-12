@@ -93,9 +93,6 @@ gem "wdm", ">= 0.1.0" if Gem.win_platform?
 # generating PDFs
 gem "wicked_pdf"
 
-# Manage security headers
-gem "secure_headers"
-
 # DFE formbuilder
 gem "govuk_design_system_formbuilder"
 
