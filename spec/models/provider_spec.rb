@@ -30,15 +30,6 @@ RSpec.describe Provider do
   end
 
   describe "#user_permissions" do
-    context "with no permissions for this provider, but one permission for firm" do
-      let(:firm) { create(:firm, :with_passported_permissions) }
-      let(:provider) { create(:provider, :with_no_permissions, firm:) }
-
-      it "returns the firms permissions" do
-        expect(provider.user_permissions).to eq [passported_permission]
-      end
-    end
-
     context "with no permissions for provider and their firm" do
       let(:firm) { create(:firm, :with_no_permissions) }
       let(:provider) { create(:provider, :with_no_permissions, firm:) }
@@ -52,23 +43,6 @@ RSpec.describe Provider do
         expect(AlertManager).to receive(:capture_message).with("Provider Firm has no permissions with firm id: #{firm.id}")
         provider.user_permissions
       end
-    end
-
-    context "when permissions exist for both firm and provider" do
-      let(:firm) { create(:firm, :with_passported_and_non_passported_permissions) }
-      let(:provider) { create(:provider, :with_passported_permissions, firm:) }
-
-      it "returns the permission for the provider" do
-        expect(provider.user_permissions).to eq [passported_permission]
-      end
-    end
-
-    def passported_permission
-      Permission.find_by(role: "application.passported.*")
-    end
-
-    def non_passported_permission
-      Permission.find_by(role: "application.non_passported.*")
     end
   end
 

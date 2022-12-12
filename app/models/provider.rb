@@ -37,14 +37,6 @@ class Provider < ApplicationRecord
     firm.nil? ? [] : firm.permissions
   end
 
-  def passported_permissions?
-    user_permissions.map(&:role).include?("application.passported.*")
-  end
-
-  def non_passported_permissions?
-    user_permissions.map(&:role).include?("application.non_passported.*")
-  end
-
   def bank_statement_upload_permissions?
     user_permissions.map(&:role).include?("application.non_passported.bank_statement_upload.*")
   end

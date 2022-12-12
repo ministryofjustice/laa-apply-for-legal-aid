@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Admin::Roles::PermissionsController do
   let(:admin_user) { create(:admin_user) }
-  let!(:firm) { create(:firm, :with_passported_permissions, name: "McKenzie, Brackman, Chaney and Kuzak") }
+  let!(:firm) { create(:firm, name: "McKenzie, Brackman, Chaney and Kuzak") }
 
   before { sign_in admin_user }
 
@@ -18,12 +18,6 @@ RSpec.describe Admin::Roles::PermissionsController do
       subject
       expect(response.body).to include(I18n.t("admin.roles.permissions.show.heading_1", firm_name: firm.name))
     end
-
-    it "shows the correct permissions" do
-      subject
-      expect(response.body).to include("application.passported._")
-      expect(response.body).not_to include("application.non_passported._")
-    end
   end
 
   describe "PATCH /index" do
@@ -38,11 +32,11 @@ RSpec.describe Admin::Roles::PermissionsController do
     end
 
     context "when Save and Continue button pressed with new permission changes" do
-      let!(:permission2) { create(:permission, :non_passported) }
+      let!(:permission) { create(:permission) }
       let!(:params) do
         {
           firm: {
-            permission_ids: [permission2.id, firm.permissions.first.id],
+            permission_ids: [permission.id],
           },
         }
       end
