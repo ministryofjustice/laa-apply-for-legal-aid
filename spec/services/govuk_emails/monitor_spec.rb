@@ -23,7 +23,10 @@ RSpec.describe GovukEmails::Monitor do
 
       it "does not enqueue a job to send email" do
         ActiveJob::Base.queue_adapter = :test
+
         expect { call }.not_to have_enqueued_job
+
+        ActiveJob::Base.queue_adapter = :sidekiq
       end
     end
 
@@ -76,9 +79,12 @@ RSpec.describe GovukEmails::Monitor do
 
         it "enqueues job to send email" do
           ActiveJob::Base.queue_adapter = :test
+
           expect { call }.to have_enqueued_job(ScheduledMailingsDeliveryJob)
                               .on_queue("default")
                               .at(:no_wait)
+
+          ActiveJob::Base.queue_adapter = :sidekiq
         end
       end
 
@@ -164,10 +170,13 @@ RSpec.describe GovukEmails::Monitor do
 
         it "enqueues 2 jobs to send emails" do
           ActiveJob::Base.queue_adapter = :test
+
           expect { call }.to have_enqueued_job(ScheduledMailingsDeliveryJob)
                               .on_queue("default")
                               .at(:no_wait)
                               .twice
+
+          ActiveJob::Base.queue_adapter = :sidekiq
         end
       end
     end
