@@ -9,24 +9,19 @@ Rails.application.config.content_security_policy do |policy|
                  "https://truelayer-provider-assets.s3.amazonaws.com"
   policy.object_src :none
   policy.style_src :self, :unsafe_inline
-
+  policy.script_src :self,
+                    "https://www.google-analytics.com",
+                    "https://www.googletagmanager.com"
   if Rails.env.development?
-    policy.script_src :self,
-                      "https://www.google-analytics.com",
-                      "https://www.googletagmanager.com",
-                      :unsafe_inline
     policy.connect_src :self,
                        "https://www.google-analytics.com",
                        "https://*.justice.gov.uk",
                        "http://localhost:*"
   else
-    policy.script_src :self,
-                      "https://www.google-analytics.com",
-                      "https://www.googletagmanager.com"
     policy.connect_src :self,
                        "https://www.google-analytics.com",
                        "https://*.justice.gov.uk"
   end
 end
-
-Rails.application.config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
+Rails.application.config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
