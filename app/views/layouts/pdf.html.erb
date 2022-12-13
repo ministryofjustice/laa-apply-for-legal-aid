@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><%= t("layouts.application.header.title") %></title>
-    <%= apply_webpacker_stylesheet_pack_tag("styles") %>
-    <%= render "layouts/govuk_base64_fonts" %>
+    <%= stylesheet_pack_tag "styles", media: "all" %>
   </head>
 
   <body class="govuk-template__body" style="padding-left: 3em; padding-top: 3em;">
