@@ -13,7 +13,7 @@ module Reports
   private
 
     def pdf_report
-      WickedPdf.new.pdf_from_string(html_report)
+      Grover.new(html_report).to_pdf
     end
 
     def ensure_case_ccms_reference_exists

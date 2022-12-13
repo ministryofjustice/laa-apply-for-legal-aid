@@ -89,7 +89,7 @@ gem "webpacker", "~> 5", ">= 5.4.3"
 gem "wdm", ">= 0.1.0" if Gem.win_platform?
 
 # generating PDFs
-gem "wicked_pdf"
+gem "grover"
 
 # DFE formbuilder
 gem "govuk_design_system_formbuilder"

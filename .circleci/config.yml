@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
   slack: circleci/slack@4.5.2
+  puppeteer: threetreeslight/puppeteer@0.1.2
 
 executors:
   basic-executor:
@@ -14,9 +15,9 @@ executors:
     docker:
       - image: cimg/ruby:3.1.2-browsers
         environment:
-          - RAILS_ENV=test
-          - TZ: "Europe/London"
-          - CI: true
+          RAILS_ENV: test
+          TZ: "Europe/London"
+          CACHE_VERSION: v1
   cloud-platform-executor:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.1
@@ -33,7 +34,7 @@ executors:
       - image: ministryofjustice/apply-ci:latest-3.1.2
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-          CI: true
+          CACHE_VERSION: v1
       - image: cimg/postgres:10.18
       - image: cimg/redis:5.0
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
@@ -99,24 +100,22 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v2.7-gems-cache-{{ checksum "Gemfile.lock" }}
-        - v2.7-gems-cache-
+        - v2.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v2.7-yarn-packages-cache-{{ checksum "yarn.lock" }}
-        - v2.7-yarn-packages-cache-
+        - v2.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v2.7-gems-cache-{{ checksum "Gemfile.lock" }}
+        key: v2.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v2.7-yarn-packages-cache-{{ checksum "yarn.lock" }}
+      key: v2.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
@@ -190,6 +189,7 @@ jobs:
     - *restore_js_packages_cache
     - *install_js_packages
     - *save_js_packages_cache
+    - puppeteer/install
     - run:
         name: Setup Code Climate test-reporter
         command: |
