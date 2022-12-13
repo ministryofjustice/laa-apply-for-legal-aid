@@ -17,15 +17,15 @@ Rails.application.config.content_security_policy do |policy|
                       :unsafe_inline
     policy.connect_src :self,
                        "https://www.google-analytics.com",
-                       "https://*.justice.gov.uk"
+                       "https://*.justice.gov.uk",
+                       "http://localhost:*"
   else
     policy.script_src :self,
                       "https://www.google-analytics.com",
                       "https://www.googletagmanager.com"
     policy.connect_src :self,
                        "https://www.google-analytics.com",
-                       "https://*.justice.gov.uk",
-                       "http://localhost:*"
+                       "https://*.justice.gov.uk"
   end
 end
 
