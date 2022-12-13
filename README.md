@@ -65,7 +65,6 @@ Documentation of certain parts of the system which are particularly complex can 
     * postgres
     * redis
     * yarn
-    * wkhtmltopdf
     * libreoffice
     * clamav
 
