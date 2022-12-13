@@ -191,6 +191,7 @@ Given("I have completed the non-passported means assessment and start the merits
     :with_transaction_period,
     :with_policy_disregards,
     :with_benefits_transactions,
+    :with_cfe_v5_result,
     :with_proceedings,
     explicit_proceedings: %i[da001],
     set_lead_proceeding: :da001,
@@ -300,7 +301,6 @@ Given("I start the means application and the applicant has uploaded transaction 
   # so should not be necessary, however in practice this means that the checkboxes are not being populated
   # on the page for the transactions pages so I have made the tests pass in the current format for now.
   @applicant = create :applicant,
-                      :employed,
                       with_bank_accounts: 1
 
   @legal_aid_application = create(
@@ -310,6 +310,7 @@ Given("I start the means application and the applicant has uploaded transaction 
     :with_policy_disregards,
     :with_transaction_period,
     :with_benefits_transactions,
+    :with_cfe_v5_result,
     :with_proceedings,
     applicant: @applicant,
     explicit_proceedings: [:da001],
@@ -338,8 +339,6 @@ Given("I start the means review journey with employment income for a single job 
     :provider_assessing_means,
   )
 
-  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
-
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -356,8 +355,6 @@ Given("I start the means review journey with no employment income from HMRC") do
     :provider_assessing_means,
     applicant: build(:applicant, :employed),
   )
-
-  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -376,8 +373,6 @@ Given("I start the means review journey with employment income for multiple jobs
     :with_non_passported_state_machine,
     :provider_assessing_means,
   )
-
-  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(

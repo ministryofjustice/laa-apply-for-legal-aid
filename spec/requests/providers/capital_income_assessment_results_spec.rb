@@ -16,7 +16,6 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
     let(:before_tasks) do
       create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
-      allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
       subject

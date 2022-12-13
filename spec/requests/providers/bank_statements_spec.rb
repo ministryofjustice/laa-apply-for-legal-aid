@@ -5,7 +5,7 @@ require "rails_helper"
 # 2. see cucumber features for full JS enabled integration tests.
 #
 RSpec.describe "Providers::BankStatementsController" do
-  let(:legal_aid_application) { create(:legal_aid_application, :provider_confirming_applicant_eligibility, attachments:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant, :provider_confirming_applicant_eligibility, :with_cfe_v5_result, attachments:) }
   let(:id) { legal_aid_application.id }
   let(:attachments) { [] }
   let(:provider) { legal_aid_application.provider }
@@ -349,7 +349,6 @@ RSpec.describe "Providers::BankStatementsController" do
           before do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
             permissions = [
-              create(:permission, :employed),
               create(:permission, :bank_statement_upload),
             ]
             provider.permissions << permissions

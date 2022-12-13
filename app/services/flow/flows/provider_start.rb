@@ -35,11 +35,7 @@ module Flow
           forward: lambda do |application|
             next_step = application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
 
-            if application.provider.employment_permissions?
-              application.employment_journey_ineligible? ? :use_ccms_employed : next_step
-            else
-              application.applicant_not_employed? ? next_step : :use_ccms_employed
-            end
+            application.employment_journey_ineligible? ? :use_ccms_employed : next_step
           end,
         },
         proceedings_types: {
@@ -159,7 +155,7 @@ module Flow
               :full_employment_details
             when :hmrc_single_employment, :unexpected_employment_data
               :employment_incomes
-            when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
+            when :applicant_not_employed
               if application.uploading_bank_statements?
                 :regular_incomes
               else

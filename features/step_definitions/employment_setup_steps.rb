@@ -1,13 +1,3 @@
-Given(/^the system is prepped for the employed journey$/) do
-  employment_permission = Permission.find_by(role: "application.non_passported.employment.*")
-  Provider.all.each do |provider|
-    next if provider.permissions.include?(employment_permission)
-
-    provider.permissions << employment_permission
-    provider.save!
-  end
-end
-
 Given(/^an applicant named (\S+) (\S+) has completed his true layer interaction$/) do |first_name, last_name|
   @applicant = FactoryBot.create :applicant,
                                  :employed,

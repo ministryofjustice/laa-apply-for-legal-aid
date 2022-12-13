@@ -6,16 +6,14 @@
   <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false) %>
 <% end %>
 
-<% if @legal_aid_application.provider.employment_permissions? %>
-  <% if @legal_aid_application.hmrc_employment_income? %>
-    <% if @legal_aid_application.has_multiple_employments? %>
-      <%= render 'shared/check_answers/full_employment_details', read_only: false %>
-    <% else %>
-      <%= render 'shared/check_answers/employed_income', read_only: false %>
-    <% end %>
-  <% elsif @legal_aid_application.applicant_employed? %>
+<% if @legal_aid_application.hmrc_employment_income? %>
+  <% if @legal_aid_application.has_multiple_employments? %>
     <%= render 'shared/check_answers/full_employment_details', read_only: false %>
+  <% else %>
+    <%= render 'shared/check_answers/employed_income', read_only: false %>
   <% end %>
+<% elsif @legal_aid_application.applicant_employed? %>
+  <%= render 'shared/check_answers/full_employment_details', read_only: false %>
 <% end %>
 
 <%= render(

@@ -32,7 +32,6 @@ Given("I have completed a non-passported application with open banking transacti
     set_lead_proceeding: :da002,
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
 
