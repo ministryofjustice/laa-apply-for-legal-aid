@@ -40,6 +40,7 @@ Feature: mini-loop additional merits questions
     And I click "Save and continue"
     Then I should be on a page showing "Has the client offered undertakings?"
     When I choose "Yes"
+    And I fill "application merits task undertaking additional information true field" with "Yes answer"
     And I click "Save and continue"
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
     When I fill "Full Name" with "John Doe Jr"

@@ -189,9 +189,12 @@ en:
         application_merits_task/undertaking:
           attributes:
             offered:
-              blank: Select yes if the client has offered undertakings
-            additional_information:
-              blank: Enter information to explain the merit of this application
+              inclusion: Select yes if the client has offered undertakings
+            additional_information_blank: &additional_information_blank Enter information to explain the merit of this application
+            additional_information_true:
+              blank: *additional_information_blank
+            additional_information_false:
+              blank: *additional_information_blank
         application_merits_task/urgency:
           attributes:
             nature_of_urgency:
