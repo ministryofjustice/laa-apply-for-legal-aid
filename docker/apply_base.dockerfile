@@ -32,7 +32,6 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-droid \
                   ttf-freefont \
                   ttf-liberation \
-                  wkhtmltopdf \
                   bash \
                   py3-pip
 RUN pip3 install awscli
