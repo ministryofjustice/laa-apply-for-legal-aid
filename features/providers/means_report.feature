@@ -370,3 +370,16 @@ Feature: Means report
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
       | h3  | Bank statements |
+
+  Scenario: For a non means tested journey
+    Given the feature flag for means_test_review_phase_one is enabled
+    And I have completed a non means tested application
+    When I view the means report
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+
+   And the "Client details" check your answers section should contain:
+    | question | answer |
+    | Age at computation date | 17 years old |

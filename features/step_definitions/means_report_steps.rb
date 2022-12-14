@@ -107,6 +107,24 @@ Given("I have completed a passported application") do
   login_as @legal_aid_application.provider
 end
 
+Given("I have completed a non means tested application") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_under_18_applicant,
+    :with_skipped_benefit_check_result,
+    :with_non_means_tested_state_machine,
+    :with_cfe_empty_result,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
+    :assessment_submitted,
+  )
+
+  login_as @legal_aid_application.provider
+end
+
 When("I view the means report") do
   visit(providers_legal_aid_application_means_report_path(@legal_aid_application, debug: true))
 end

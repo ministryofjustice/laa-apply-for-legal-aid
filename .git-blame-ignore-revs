@@ -1,0 +1,5 @@
+# Run this command to always ignore formatting commits in `git blame`
+# git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# Changing single-quote to double-quote
+90a8f3c03106bc66d6ea777f615a944e8d6f7ac2
