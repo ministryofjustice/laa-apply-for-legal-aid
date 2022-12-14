@@ -27,6 +27,29 @@ Feature: Mini-loop single proceeding
     And I enter the 'delegated functions on' date of 5 days ago
     When I click 'Save and continue'
     Then I should be on the 'limitations' page showing 'Inherent jurisdiction high court injunction'
+    When I choose 'No'
+    # for emergency cost override
+    And I click 'Save and continue'
+    Then I should be on a page with title matching "Does the client have a National Insurance number?"
+    When I choose 'Yes'
+    And I enter national insurance number "JA123456D"
+    And I click 'Save and continue'
+    Then I should be on a page with title "Check your answers"
+    And I click 'Save and continue'
+    Then I should be on a page with title "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on a page with title "Check your client's details"
+    When I choose 'These details are correct'
+    And I click 'Save and continue'
+    Then I should be on a page with title "Which passporting benefit does your client receive?"
+    When I choose 'Universal Credit'
+    And I click 'Save and continue'
+    Then I should be on a page with title "Do you have evidence that your client receives Universal Credit?"
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should be on a page with title "Do you want to make a substantive application now?"
+    And I should not see "WarningYou must submit a substantive application bySupport"
 
   @javascript @vcr
   Scenario: When the application has a single proceeding and I'm going to use an old delegated functions date

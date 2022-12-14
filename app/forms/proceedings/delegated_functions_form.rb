@@ -36,6 +36,7 @@ module Proceedings
       end
       super
     end
+    alias_method :save!, :save
 
   private
 

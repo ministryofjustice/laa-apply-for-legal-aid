@@ -22,8 +22,8 @@ class Proceeding < ApplicationRecord
 
   scope :in_order_of_addition, -> { order(:created_at) }
   scope :incomplete, -> { where(used_delegated_functions: nil) }
-  scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
-  scope :not_using_delegated_functions, -> { where(used_delegated_functions_on: nil) }
+  scope :using_delegated_functions, -> { where(used_delegated_functions: true).where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
+  scope :not_using_delegated_functions, -> { where.not(used_delegated_functions: true) }
 
   before_create do
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?

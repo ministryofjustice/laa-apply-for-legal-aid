@@ -9,10 +9,12 @@ RSpec.describe DelegatedFunctionsDateService do
     let!(:proceeding1) do
       create(:proceeding, :da001,
              legal_aid_application: laa,
+             used_delegated_functions: df_used?,
              used_delegated_functions_on: df_date,
              used_delegated_functions_reported_on: reported_date)
     end
     let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application: laa) }
+    let(:df_used?) { true }
     let(:df_date) { Date.new(2021, 5, 10) }
     let(:reported_date) { Date.new(2021, 5, 13) }
 
@@ -39,6 +41,7 @@ RSpec.describe DelegatedFunctionsDateService do
       end
 
       context "no DF used on any proceeding type" do
+        let(:df_used?) { nil }
         let(:df_date) { nil }
         let(:reported_date) { nil }
 
@@ -54,6 +57,7 @@ RSpec.describe DelegatedFunctionsDateService do
       let(:scheduled_time2) { Time.zone.local(2021, 5, 25, 9, 0, 0) }
 
       context "no delegated functions on any proceeding type" do
+        let(:df_used?) { false }
         let(:df_date) { nil }
         let(:reported_date) { nil }
 
