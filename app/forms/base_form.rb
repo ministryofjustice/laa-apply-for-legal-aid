@@ -54,6 +54,7 @@ class BaseForm
     model.attributes = clean_attributes(assignable_attributes)
     model.save(validate: false)
   end
+  alias_method :save!, :save
 
   # List of form attributes not to be passed to model
   def exclude_from_model
