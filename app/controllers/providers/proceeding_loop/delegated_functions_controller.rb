@@ -10,12 +10,19 @@ module Providers
 
       def update
         @form = Proceedings::DelegatedFunctionsForm.new(form_params)
-        DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
-        reset_proceeding_loop if @legal_aid_application.checking_answers? && Setting.enable_loop?
-        render :show unless save_continue_or_draft(@form)
+        render :show unless save_update_delegated_functions_continue_or_draft
       end
 
     private
+
+      def save_update_delegated_functions_continue_or_draft(**args)
+        draft_selected? ? @form.save_as_draft : @form.save!
+        return false if @form.invalid?
+
+        DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
+        reset_proceeding_loop if @legal_aid_application.checking_answers? && Setting.enable_loop?
+        continue_or_draft(**args)
+      end
 
       def proceeding
         @proceeding = Proceeding.find(proceeding_id_param)
