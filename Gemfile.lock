@@ -537,7 +537,6 @@ GEM
     redis (4.8.0)
     redis-namespace (1.9.0)
       redis (>= 4)
-    regexp-examples (1.5.1)
     regexp_parser (2.6.1)
     representable (3.2.0)
       declarative (< 0.1.0)
@@ -792,7 +791,6 @@ DEPENDENCIES
   rails
   rails-controller-testing
   redis-namespace
-  regexp-examples
   rexml
   rspec-rails (~> 6.0)
   rspec-sidekiq

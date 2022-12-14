@@ -544,7 +544,7 @@ private
   end
 
   def create_app_ref
-    self.application_ref = ReferenceNumberCreator.call if application_ref.blank?
+    self.application_ref = ReferenceNumber.generate if application_ref.blank?
   end
 
   def set_open_banking_consent_choice_at
