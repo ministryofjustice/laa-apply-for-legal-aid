@@ -1,12 +1,36 @@
+# see sheet for description of attributes
+# https://docs.google.com/spreadsheets/d/1hftRRmxBPcyll-akFbiCZgizdsr4uoMZnIaNKod9_lc/edit#gid=1199948510
+#
 require "rails_helper"
 
 module CCMS
   module Requestors
-    RSpec.describe CaseAddRequestor, :ccms do
-      context "XML request" do
-        let(:expected_tx_id) { "201904011604570390059770666" }
-        let(:firm) { create(:firm, name: "Firm1") }
-        let(:office) { create(:office, firm:) }
+    RSpec.describe NonMeansTestedCaseAddRequestor, :ccms do
+      context "with XML request" do
+        let(:requestor) { described_class.new(submission, {}) }
+        let(:xml) { requestor.formatted_xml }
+
+        let(:legal_aid_application) do
+          create(
+            :legal_aid_application,
+            :with_proceedings,
+            :with_under_18_applicant,
+            :with_skipped_benefit_check_result,
+            :with_non_means_tested_state_machine,
+            :with_cfe_empty_result,
+            :with_merits_statement_of_case,
+            :with_opponent,
+            :with_incident,
+            :with_chances_of_success,
+            prospect: success_prospect,
+            set_lead_proceeding: :da001,
+            provider:,
+            office:,
+          )
+        end
+
+        let(:success_prospect) { :likely }
+
         let(:provider) do
           create(:provider,
                  firm:,
@@ -14,33 +38,18 @@ module CCMS
                  username: 4_953_649)
         end
 
-        let!(:legal_aid_application) do
-          create(:legal_aid_application,
-                 :with_proceedings,
-                 :with_everything,
-                 :with_applicant_and_address,
-                 :with_positive_benefit_check_result,
-                 set_lead_proceeding: :da001,
-                 populate_vehicle: true,
-                 with_bank_accounts: 2,
-                 provider:,
-                 office:)
-        end
+        let(:firm) { create(:firm, name: "Firm1") }
+        let(:office) { create(:office, firm:) }
+
+        let(:expected_tx_id) { "201904011604570390059770666" }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
-        let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
-        let(:requestor) { described_class.new(submission, {}) }
-        let(:xml) { requestor.formatted_xml }
-        let!(:success_prospect) { :likely }
-        let!(:chances_of_success) do
-          create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:)
-        end
 
         before do
-          allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
+          allow(proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
+          allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
         end
 
         # uncomment this example to create a file of the payload for manual inspection
@@ -50,15 +59,52 @@ module CCMS
         #   expect(File.exist?(filename)).to be true
         # end
 
-        context "DevolvedPowersDate" do
-          context "on a Substantive case" do
+        context "with means entity config" do
+          it "omits VALUABLE_POSSESSION entity" do
+            entity_block = XmlExtractor.call(xml, :valuable_possessions_entity)
+            expect(entity_block).not_to be_present, "Expected block for VALUABLE_POSSESSION entity not to be generated, but was \n #{entity_block}"
+          end
+
+          it "omits BANKACC entity" do
+            entity_block = XmlExtractor.call(xml, :bank_accounts_entity)
+            expect(entity_block).not_to be_present, "Expected block for BANKACC entity not to be generated, but was \n #{entity_block}"
+          end
+
+          it "omits CARS_AND_MOTOR_VEHICLES entity" do
+            entity_block = XmlExtractor.call(xml, :vehicle_entity)
+            expect(entity_block).not_to be_present, "Expected block for CARS_AND_MOTOR_VEHICLES entity not to be generated, but was \n #{entity_block}"
+          end
+
+          it "omits CLI_NON_HM_WAGE_SLIP entity" do
+            entity_block = XmlExtractor.call(xml, :wage_slip_entity)
+            expect(entity_block).not_to be_present, "Expected block for CLI_NON_HM_WAGE_SLIP entity not to be generated, but was \n #{entity_block}"
+          end
+
+          it "omits EMPLOYMENT_CLIENT entity" do
+            entity_block = XmlExtractor.call(xml, :employment_entity)
+            expect(entity_block).not_to be_present, "Expected block for EMPLOYMENT_CLIENT entity not to be generated, but was \n #{entity_block}"
+          end
+
+          # TODO: what is the expected behaviour for sequences in this context and what is their impact on "injection"
+          # xit "assigns the sequence number to the next entity one higher than that for bank accounts" do
+          #   bank_account_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
+
+          #   means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
+          #   doc = Nokogiri::XML(means_proceeding_entity.to_s)
+          #   means_proceeding_sequence = doc.xpath("//SequenceNumber").text.to_i
+          #   expect(means_proceeding_sequence).to eq bank_account_sequence + 1
+          # end
+        end
+
+        context "with DevolvedPowersDate" do
+          context "with a Substantive case" do
             it "is omitted" do
               block = XmlExtractor.call(xml, :devolved_powers_date)
               expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
             end
           end
 
-          context "on a Delegated Functions case" do
+          context "with a Delegated Functions case" do
             before do
               legal_aid_application.proceedings.each do |proceeding|
                 proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
@@ -72,374 +118,139 @@ module CCMS
           end
         end
 
-        context "CHILD_PARTIES_C" do
-          context "section8 proceeding" do
-            before { allow_any_instance_of(Proceeding).to receive(:section8?).and_return true }
+        context "with ApplicationAmendmentType" do
+          context "with a Substantive case" do
+            it "is set to SUB" do
+              block = XmlExtractor.call(xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUB"
+            end
+          end
 
-            it "is true" do
+          context "with Delegated Functions used" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              end
+            end
+
+            it "is set to SUBDP" do
+              block = XmlExtractor.call(xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUBDP"
+            end
+          end
+        end
+
+        it "adds MEANS_REQD attribute with hard coded value false" do
+          block = XmlExtractor.call(xml, :global_means, "MEANS_REQD")
+          expect(block).to have_boolean_response(false)
+        end
+
+        it "MEANS_EVIDENCE_PROVIDED is false" do
+          block = XmlExtractor.call(xml, :global_means, "MEANS_EVIDENCE_PROVIDED")
+          expect(block).to have_boolean_response(false)
+        end
+
+        it "omits PASSPORTED_NINO" do
+          block = XmlExtractor.call(xml, :global_means, "PASSPORTED_NINO")
+          expect(block).not_to be_present, "Expected attribute block PASSPORTED_NINO not to be generated, but was \n #{block}"
+        end
+
+        it "omits IS_PASSPORTED" do
+          block = XmlExtractor.call(xml, :global_means, "IS_PASSPORTED")
+          expect(block).not_to be_present, "Expected attribute block IS_PASSPORTED not to be generated, but was \n #{block}"
+        end
+
+        context "with CHILD_PARTIES_C" do
+          context "with with section8 proceeding" do
+            before { allow(proceeding).to receive(:section8?).and_return true }
+
+            it "has response value of true" do
               block = XmlExtractor.call(xml, :proceeding_merits, "CHILD_PARTIES_C")
               expect(block).to have_boolean_response(true)
             end
           end
 
-          context "domestic abuse proceeding" do
-            before { allow_any_instance_of(Proceeding).to receive(:section8?).and_return false }
+          context "with domestic abuse proceeding" do
+            before { allow(proceeding).to receive(:section8?).and_return false }
 
-            it "is false" do
+            it "has response value of false" do
               block = XmlExtractor.call(xml, :proceeding_merits, "CHILD_PARTIES_C")
               expect(block).to have_boolean_response(false)
             end
           end
         end
 
-        context "PASSPORTED_NINO" do
-          let(:applicant) { legal_aid_application.applicant }
-
-          it "generates PASSPORTED NINO in global merits" do
-            block = XmlExtractor.call(xml, :global_means, "PASSPORTED_NINO")
-            expect(block).to have_text_response applicant.national_insurance_number
-            expect(block).to be_user_defined
-          end
+        it "omits GB_INFER_T_6WP1_66A" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INFER_T_6WP1_66A")
+          expect(block).not_to be_present, "Expected attribute block GB_INFER_T_6WP1_66A not to be generated, but was \n #{block}"
         end
 
-        context "GB_INFER_T_6WP1_66A" do
-          it "generates GB_INFER_T_6WP1_66A in global merits" do
-            block = XmlExtractor.call(xml, :global_merits, "GB_INFER_T_6WP1_66A")
-            expect(block).to have_text_response "CLIENT"
-            expect(block).not_to be_user_defined
-          end
+        it "omits CLIENT_ELIGIBILITY" do
+          block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
+          expect(block).not_to be_present, "Expected attribute block CLIENT_ELIGIBILITY not to be generated, but was \n #{block}"
         end
 
-        context "CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY" do
-          context "eligible" do
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+        it "omits PUI_CLIENT_ELIGIBILITY" do
+          block = XmlExtractor.call(xml, :global_means, "PUI_CLIENT_ELIGIBILITY")
+          expect(block).not_to be_present, "Expected attribute block PUI_CLIENT_ELIGIBILITY not to be generated, but was \n #{block}"
+        end
 
-            it "returns In Scope" do
-              block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
-              expect(block).to have_text_response "In Scope"
-              block = XmlExtractor.call(xml, :global_means, "PUI_CLIENT_ELIGIBILITY")
-              expect(block).to have_text_response "In Scope"
-            end
-          end
+        it "omits OUT_CAP_CONT" do
+          block = XmlExtractor.call(xml, :global_means, "OUT_CAP_CONT")
+          expect(block).not_to be_present, "Expected attribute block OUT_CAP_CONT not to be generated, but was \n #{block}"
+        end
 
-          context "not_eligible" do
-            let!(:cfe_result) { create(:cfe_v3_result, :not_eligible, submission: cfe_submission) }
+        context "with means currency attributes that required(?!) but not applicable" do
+          let(:attributes) { %w[INCOME_CONT CAP_CONT PUI_CLIENT_CAP_CONT] }
 
-            it "returns Out Of Scope" do
-              block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
-              expect(block).to have_text_response "Out Of Scope"
-              block = XmlExtractor.call(xml, :global_means, "PUI_CLIENT_ELIGIBILITY")
-              expect(block).to have_text_response "Out Of Scope"
-            end
-          end
-
-          context "contribution_required" do
-            let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
-
-            it "returns In Scope" do
-              block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
-              expect(block).to have_text_response "In Scope"
-              block = XmlExtractor.call(xml, :global_means, "PUI_CLIENT_ELIGIBILITY")
-              expect(block).to have_text_response "In Scope"
-            end
-          end
-
-          context "invalid response" do
-            let!(:cfe_result) do
-              create(:cfe_v3_result,
-                     :with_unknown_result,
-                     submission: cfe_submission)
-            end
-
-            it "raises" do
-              expect { xml }.to raise_error RuntimeError, "Unexpected assessment result: unknown"
+          it "returns zero", :aggregate_failures do
+            attributes.each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).to have_currency_response "0.00", "Expected attribute block #{attribute} to have currency value of 0.00, but was \n #{block}"
             end
           end
         end
 
-        context "INCOME_CONT" do
-          it "always returns zero" do
-            block = XmlExtractor.call(xml, :global_means, "INCOME_CONT")
-            expect(block).to have_currency_response "0.00"
-          end
-        end
-
-        context "CAP_CONT and similar attributes" do
-          let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT] }
-
-          context "eligble" do
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
-
-            it "returns zero" do
-              attributes.each do |attribute|
-                block = XmlExtractor.call(xml, :global_means, attribute)
-                expect(block).to have_currency_response "0.00"
-              end
-            end
-          end
-
-          context "not eligible" do
-            let!(:cfe_result) { create(:cfe_v3_result, :not_eligible, submission: cfe_submission) }
-
-            it "returns zero" do
-              attributes.each do |attribute|
-                block = XmlExtractor.call(xml, :global_means, attribute)
-                expect(block).to have_currency_response "0.00"
-              end
-              block = XmlExtractor.call(xml, :global_means, "PUI_CLIENT_CAP_CONT")
-              expect(block).to have_currency_response "0.00"
-            end
-          end
-
-          context "contribution_required" do
-            let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
-
-            it "returns the capital contribution" do
-              attributes.each do |attribute|
-                block = XmlExtractor.call(xml, :global_means, attribute)
-                expect(block).to have_currency_response "465.66"
-              end
-            end
-          end
-        end
-
-        context "valuable possessions entity" do
-          context "valuable possessions present" do
-            it "creates the entity" do
-              entity_block = XmlExtractor.call(xml, :valuable_possessions_entity)
-              expect(entity_block).to be_present
-            end
-          end
-
-          context "no valuable possessions present" do
-            before { legal_aid_application.other_assets_declaration.valuable_items_value = nil }
-
-            it "does not generate the bank accounts entity" do
-              block = XmlExtractor.call(xml, :valuable_possessions_entity)
-              expect(block).not_to be_present, "Expected block for valuable possessions entity not to be generated, but was \n #{block}"
-            end
-
-            it "assigns the sequence number of 1 to the next entity" do
-              bank_accounts_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
-              expect(bank_accounts_sequence).to eq 1
-            end
-          end
-        end
-
-        context "bank accounts entity" do
-          context "bank accounts present" do
-            it "creates the entity" do
-              entity_block = XmlExtractor.call(xml, :bank_accounts_entity)
-              expect(entity_block).to be_present
-            end
-          end
-
-          context "no bank accounts present" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     vehicle: nil,
-                     office:)
-            end
-
-            it "does not generate the bank accounts entity" do
-              block = XmlExtractor.call(xml, :bank_accounts_entity)
-              expect(block).not_to be_present, "Expected block for bank accounts entity not to be generated, but was \n #{block}"
-            end
-
-            it "assigns the sequence number to the next entity one higher than that for valuable possessions" do
-              valuable_possessions_entity = XmlExtractor.call(xml, :valuable_possessions_entity)
-              doc = Nokogiri::XML(valuable_possessions_entity.to_s)
-              valuable_possessions_sequence = doc.xpath("//SequenceNumber").text.to_i
-
-              means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
-              doc = Nokogiri::XML(means_proceeding_entity.to_s)
-              means_proceeding_sequence = doc.xpath("//SequenceNumber").text.to_i
-              expect(means_proceeding_sequence).to eq valuable_possessions_sequence + 1
-            end
-          end
-        end
-
-        context "car and vehicle entity" do
-          context "car and vehicle present" do
-            it "creates the entity" do
-              entity_block = XmlExtractor.call(xml, :vehicle_entity)
-              expect(entity_block).to be_present
-            end
-
-            context "CARANDVEH_INPUT_B_14WP2_28A - In regular use" do
-              it "is flase" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_B_14WP2_28A")
-                expect(block).to have_boolean_response legal_aid_application.vehicle.used_regularly?
-              end
-            end
-
-            context "CARANDVEH_INPUT_D_14WP2_27A - Date of purchase" do
-              it "is populated with the purchase date" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_D_14WP2_27A")
-                expect(block).to have_date_response legal_aid_application.vehicle.purchased_on.strftime("%d-%m-%Y")
-              end
-            end
-
-            context "CARANDVEH_INPUT_T_14WP2_20A - Make of vehicle" do
-              it "is populated with 'Make: unspecified'" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_T_14WP2_20A")
-                expect(block).to have_text_response("Make: unspecified")
-              end
-            end
-
-            context "CARANDVEH_INPUT_T_14WP2_21A - Model of vehicle" do
-              it "is populated with 'Model: unspecified'" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_T_14WP2_21A")
-                expect(block).to have_text_response("Model: unspecified")
-              end
-            end
-
-            context "CARANDVEH_INPUT_T_14WP2_22A - Registration number" do
-              it "is populated with 'Registration number: unspecified'" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_T_14WP2_22A")
-                expect(block).to have_text_response("Registration number: unspecified")
-              end
-            end
-
-            context "CARANDVEH_INPUT_C_14WP2_24A - Purchase price" do
-              it "is populated with zero" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_24A")
-                expect(block).to have_currency_response("0.00")
-              end
-            end
-
-            context "CARANDVEH_INPUT_C_14WP2_25A - Current market value" do
-              it "is populated with the estimated value" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_25A")
-                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicle.estimated_value))
-              end
-            end
-
-            context "CARANDVEH_INPUT_C_14WP2_26A - Value of loan outstanding" do
-              it "is populated with the payment remaining" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_26A")
-                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicle.payment_remaining))
-              end
-            end
-          end
-
-          context "no car and vehicle present" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     with_bank_accounts: 2,
-                     vehicle: nil,
-                     office:)
-            end
-
-            it "does not generate the vehicle entity" do
-              block = XmlExtractor.call(xml, :vehicle_entity)
-              expect(block).not_to be_present, "Expected block for vehicle entity not to be generated, but was \n #{block}"
-            end
-
-            it "assigns the sequence number to the next entity one higher than that for bank accounts" do
-              bank_account_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
-
-              means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
-              doc = Nokogiri::XML(means_proceeding_entity.to_s)
-              means_proceeding_sequence = doc.xpath("//SequenceNumber").text.to_i
-              expect(means_proceeding_sequence).to eq bank_account_sequence + 1
-            end
-          end
-        end
-
-        context "wage slips entity" do
-          context "no wage slips present" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     populate_vehicle: true,
-                     office:)
-            end
-
-            it "does not generate the wage slips entity" do
-              block = XmlExtractor.call(xml, :wage_slip_entity)
-              expect(block).not_to be_present, "Expected block for wage slips entity not to be generated, but was \n #{block}"
-            end
-
-            it "assigns the sequence number to the next entity one higher than that for vehicles" do
-              vehicle_entity = XmlExtractor.call(xml, :vehicle_sequence_entity)
-              doc = Nokogiri::XML(vehicle_entity.to_s)
-              vehicle_sequence = doc.xpath("//SequenceNumber").text.to_i
-
-              means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
-              doc = Nokogiri::XML(means_proceeding_entity.to_s)
-              means_proceeding_sequence = doc.xpath("//SequenceNumber").text.to_i
-              expect(means_proceeding_sequence).to eq vehicle_sequence + 1
-            end
-          end
-        end
-
-        context "employment entity" do
-          context "no employment details present" do
-            it "does not generate the employment entity" do
-              block = XmlExtractor.call(xml, :employment_entity)
-              expect(block).not_to be_present, "Expected block for wage slips entity not to be generated, but was \n #{block}"
-            end
-          end
-        end
-
-        context "ProceedingCaseId" do
+        context "with ProceedingCaseId" do
           let(:proceeding_case_id) { legal_aid_application.proceedings.first.proceeding_case_p_num }
 
-          context "ProceedingCaseId section" do
-            it "has a p number" do
-              block = XmlExtractor.call(xml, :proceeding_case_id)
-              expect(block.text).to eq proceeding_case_id
-            end
+          it "adds ProceedingCaseID to Proceedings block" do
+            block = XmlExtractor.call(xml, :proceeding_case_id)
+            expect(block.text).to eq(proceeding_case_id)
           end
 
-          context "in merits assessment block" do
-            it "has a p number" do
-              block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_ID")
-              expect(block).to have_text_response(proceeding_case_id)
-            end
+          it "adds PROCEEDING_ID attribute to merits assessment block" do
+            block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_ID")
+            expect(block).to have_text_response(proceeding_case_id)
           end
 
-          context "in means assessment block" do
-            it "has a p number" do
-              block = XmlExtractor.call(xml, :proceeding_means, "PROCEEDING_ID")
-              expect(block).to have_text_response(proceeding_case_id)
-            end
+          it "adds PROCEEDING_ID attribute to means assessment block" do
+            block = XmlExtractor.call(xml, :proceeding_means, "PROCEEDING_ID")
+            expect(block).to have_text_response(proceeding_case_id)
           end
         end
 
-        context "APPLICATION_CASE_REF" do
-          it "inserts the case reference from the submission record the global means sections" do
-            block = XmlExtractor.call(xml, :global_means, "APPLICATION_CASE_REF")
-            expect(block).to have_text_response submission.case_ccms_reference
-          end
-
-          it "inserts the case reference from the submission record the global merits sections" do
-            block = XmlExtractor.call(xml, :global_merits, "APPLICATION_CASE_REF")
-            expect(block).to have_text_response ccms_reference
-          end
+        it "adds APPLICATION_CASE_REF from the submission record means assessment block" do
+          block = XmlExtractor.call(xml, :global_means, "APPLICATION_CASE_REF")
+          expect(block).to have_text_response(ccms_reference)
         end
 
-        context "FAMILY_PROSPECTS_OF_SUCCESS" do
-          context "likely success prospect" do
+        it "adds APPLICATION_CASE_REF from the submission record merits assessment block" do
+          block = XmlExtractor.call(xml, :global_merits, "APPLICATION_CASE_REF")
+          expect(block).to have_text_response(ccms_reference)
+        end
+
+        context "with FAMILY_PROSPECTS_OF_SUCCESS" do
+          context "with likely success prospect" do
+            let(:success_prospect) { "likely" }
+
             it "returns the ccms equivalent prospect of success for likely" do
               block = XmlExtractor.call(xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
               expect(block).to have_text_response "Good"
             end
           end
 
-          context "marginal success prospect" do
+          context "with marginal success prospect" do
             let(:success_prospect) { "marginal" }
 
             it "returns the ccms equivalent prospect of success for marginal" do
@@ -448,7 +259,7 @@ module CCMS
             end
           end
 
-          context "not_known success prospect" do
+          context "with not_known success prospect" do
             let(:success_prospect) { "not_known" }
 
             it "returns the ccms equivalent prospect of success for not_known" do
@@ -457,7 +268,7 @@ module CCMS
             end
           end
 
-          context "poor success prospect" do
+          context "with poor success prospect" do
             let(:success_prospect) { "poor" }
 
             it "returns the ccms equivalent prospect of success for poor" do
@@ -466,7 +277,7 @@ module CCMS
             end
           end
 
-          context "borderline success prospect" do
+          context "with borderline success prospect" do
             let(:success_prospect) { "borderline" }
 
             it "returns the ccms equivalent prospect of success for borderline" do
@@ -476,291 +287,212 @@ module CCMS
           end
         end
 
-        context "DELEGATED_FUNCTIONS_DATE blocks" do
-          context "delegated functions used" do
+        context "with DELEGATED_FUNCTIONS_DATE" do
+          context "when using delegated functions" do
             before do
               legal_aid_application.proceedings.each do |proceeding|
                 proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
 
-            it "generates the delegated functions block in the means assessment section" do
+            it "adds the DELEGATED_FUNCTIONS_DATE attribute in the means assessment block" do
               block = XmlExtractor.call(xml, :global_means, "DELEGATED_FUNCTIONS_DATE")
               expect(block).to have_date_response(Time.zone.today.strftime("%d-%m-%Y"))
             end
 
-            it "generates the delegated functions block in the merits assessment section" do
+            it "adds the DELEGATED_FUNCTIONS_DATE attribute in the merits assessment section" do
               block = XmlExtractor.call(xml, :global_merits, "DELEGATED_FUNCTIONS_DATE")
               expect(block).to have_date_response(Time.zone.today.strftime("%d-%m-%Y"))
             end
           end
 
-          context "delegated functions not used" do
-            it "does not generate the delegated functions block in the means assessment section" do
+          context "when not using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "omits the DELEGATED_FUNCTIONS_DATE attribute in the means assessment section" do
               block = XmlExtractor.call(xml, :global_means, "DELEGATED_FUNCTIONS_DATE")
               expect(block).not_to be_present
             end
 
-            it "does not generates the delegated functions block in the merits assessment section" do
+            it "omits the DELEGATED_FUNCTIONS_DATE attribute in the merits assessment section" do
               block = XmlExtractor.call(xml, :global_merits, "DELEGATED_FUNCTIONS_DATE")
               expect(block).not_to be_present
             end
           end
         end
 
-        context "EMERGENCY_FC_CRITERIA" do
-          it "inserts emergency_fc criteria as hard coded string" do
-            block = XmlExtractor.call(xml, :global_merits, "EMERGENCY_FC_CRITERIA")
-            expect(block).to have_text_response "."
-          end
+        it "adds EMERGENCY_FC_CRITERIA as hard coded string" do
+          block = XmlExtractor.call(xml, :global_merits, "EMERGENCY_FC_CRITERIA")
+          expect(block).to have_text_response "."
         end
 
-        context "URGENT_HEARING_DATE" do
-          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
-
-          it "inserts ccms submission date as string" do
-            block = XmlExtractor.call(xml, :global_merits, "URGENT_HEARING_DATE")
-            expect(block).to have_date_response legal_aid_application.calculation_date.strftime("%d-%m-%Y")
-          end
+        # CHECK: what should this be for non means tested as value is set to legal_aid_appicat.calculation date
+        # for passported. This will be nil for non-means-tested unless using delegated functions
+        # I note that the example from Dave does not include this attribute!
+        #
+        it "omits the URGENT_HEARING_DATE attribute in the merits assessment section" do
+          block = XmlExtractor.call(xml, :global_merits, "URGENT_HEARING_DATE")
+          expect(block).not_to be_present
         end
 
-        context "APPLICATION_CASE_REF" do
-          it "inserts the ccms case reference from the submission into the attribute block" do
-            block = XmlExtractor.call(xml, :global_means, "APPLICATION_CASE_REF")
-            expect(block).to have_text_response ccms_reference
-          end
+        it "omits the GB_INPUT_B_2WP2_1A attribute in the means assessment section" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?" do
-          context "not a beneficiary" do
-            before { legal_aid_application.other_assets_declaration = create :other_assets_declaration, :all_nil }
-
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "is a beneficiary" do
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
+        it "omits the GB_INPUT_B_3WP2_1A attribute in the merits assessment section" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_3WP2_1A - applicant has financial interest in his main home" do
-          context "no financial interest" do
-            before { expect(legal_aid_application).to receive(:own_home?).and_return(false) }
-
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "a shared financial interest" do
-            before { expect(legal_aid_application).to receive(:own_home?).and_return(true) }
-
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
-        end
-
-        context "POLICE_NOTIFIED block" do
-          context "police notified" do
+        # CHECK: not in example payload but is merits related?
+        context "with POLICE_NOTIFIED block" do
+          context "when police notified" do
             before { opponent.update(police_notified: true) }
 
-            it "is true" do
+            it "adds POLICE_NOTIFIED attribute with true value" do
               block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
               expect(block).to have_boolean_response true
             end
           end
 
-          context "police NOT notified" do
+          context "when police NOT notified" do
             before { opponent.update(police_notified: false) }
 
-            it "is false" do
+            it "adds POLICE_NOTIFIED attribute with false value" do
               block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
               expect(block).to have_boolean_response false
             end
           end
         end
 
-        context "WARNING_LETTER_SENT" do
-          context "letter has not been sent" do
-            it "generates WARNING_LETTER_SENT block with false value" do
+        # CHECK: not in example payload but is merits related?
+        context "with WARNING_LETTER_SENT" do
+          context "when letter has not been sent" do
+            it "adds WARNING_LETTER_SENT attribute with false value" do
               block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
               expect(block).to have_boolean_response false
             end
 
-            it "includes correct text in INJ_REASON_NO_WARNING_LETTER block" do
+            it "adds INJ_REASON_NO_WARNING_LETTER attribute with expected text" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_REASON_NO_WARNING_LETTER")
               expect(block).to have_text_response "."
             end
           end
 
-          context "letter has been sent" do
+          context "when letter has been sent" do
             before { opponent.update(warning_letter_sent: true) }
 
-            it "generates WARNING_LETTER_SENT block with true value" do
+            it "adds WARNING_LETTER_SENT attribute with true value" do
               block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
               expect(block).to have_boolean_response true
             end
 
-            it "does not generate the INJ_REASON_NO_WARNING_LETTER block" do
+            it "omits INJ_REASON_NO_WARNING_LETTER attribute" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_REASON_NO_WARNING_LETTER")
               expect(block).not_to be_present, "Expected block for attribute INJ_REASON_NO_WARNING_LETTER not to be generated, but was in global_merits"
             end
           end
         end
 
-        context "INJ_RESPONDENT_CAPACITY" do
-          context "opponent has capacity" do
+        context "with INJ_RESPONDENT_CAPACITY" do
+          context "when opponent has capacity" do
             before { opponent.understands_terms_of_court_order = true }
 
-            it "is true" do
+            it "adds INJ_RESPONDENT_CAPACITY attribute with true value" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
               expect(block).to have_boolean_response true
             end
           end
 
-          context "opponent does not have capacity" do
+          context "when opponent does not have capacity" do
             before { opponent.understands_terms_of_court_order = false }
 
-            it "is false" do
+            it "adds INJ_RESPONDENT_CAPACITY attribute with false value" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
               expect(block).to have_boolean_response false
             end
           end
         end
 
-        context "GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?" do
-          context "not a beneficiary" do
-            before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
+        it "adds some boolean attributes with value hard coded to true", :aggregate_failures do
+          attributes = [
+            [:global_means, "APPLICATION_FROM_APPLY"],
+            [:global_means, "GB_INPUT_B_38WP3_2SCREEN"],
+            [:global_means, "GB_INPUT_B_38WP3_3SCREEN"],
+            [:global_means, "GB_DECL_B_38WP3_13A"],
+            [:global_means, "LAR_SCOPE_FLAG"],
+            [:global_merits, "APPLICATION_FROM_APPLY"],
+            [:global_merits, "CLIENT_HAS_DV_RISK"],
+            [:global_merits, "CLIENT_REQ_SEP_REP"],
+            [:global_merits, "DECLARATION_REVOKE_IMP_SUBDP"],
+            [:global_merits, "DECLARATION_WILL_BE_SIGNED"],
+            [:global_merits, "MERITS_DECLARATION_SCREEN"],
+            [:global_merits, "MERITS_EVIDENCE_PROVIDED"],
+            [:proceeding_means, "SCOPE_LIMIT_IS_DEFAULT"],
+            [:proceeding_merits, "LEAD_PROCEEDING"],
+            [:proceeding_merits, "SCOPE_LIMIT_IS_DEFAULT"],
+            [:global_means, "MEANS_SUBMISSION_PG_DISPLAYED"],
+            [:global_merits, "CASE_OWNER_STD_FAMILY_MERITS"],
+          ]
 
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "is a beneficiary" do
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
-        end
-
-        context "GB_INPUT_B_3WP2_1A - Applicant has a financial interest in main home?" do
-          context "no interest" do
-            before { expect(legal_aid_application).to receive(:own_home).and_return(false) }
-
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "has an interest" do
-            before { expect(legal_aid_application).to receive(:own_home).and_return(true) }
-
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
-              expect(block).to have_boolean_response true
-            end
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to have_boolean_response true
           end
         end
 
-        context "attributes hard coded to true" do
-          it "hard codes the attributes to true", :aggregate_failures do
-            attributes = [
-              [:global_means, "APPLICATION_FROM_APPLY"],
-              [:global_means, "GB_INPUT_B_38WP3_2SCREEN"],
-              [:global_means, "GB_INPUT_B_38WP3_3SCREEN"],
-              [:global_means, "GB_DECL_B_38WP3_13A"],
-              [:global_means, "LAR_SCOPE_FLAG"],
-              [:global_means, "MEANS_EVIDENCE_PROVIDED"],
-              [:global_means, "MEANS_SUBMISSION_PG_DISPLAYED"],
-              [:global_merits, "APPLICATION_FROM_APPLY"],
-              [:global_merits, "CASE_OWNER_STD_FAMILY_MERITS"],
-              [:global_merits, "CLIENT_HAS_DV_RISK"],
-              [:global_merits, "CLIENT_REQ_SEP_REP"],
-              [:global_merits, "DECLARATION_REVOKE_IMP_SUBDP"],
-              [:global_merits, "DECLARATION_WILL_BE_SIGNED"],
-              [:global_merits, "MERITS_DECLARATION_SCREEN"],
-              [:global_merits, "MERITS_EVIDENCE_PROVIDED"],
-              [:proceeding_means, "SCOPE_LIMIT_IS_DEFAULT"],
-              [:proceeding_merits, "LEAD_PROCEEDING"],
-              [:proceeding_merits, "SCOPE_LIMIT_IS_DEFAULT"],
-            ]
-
-            attributes.each do |entity_attribute_pair|
-              entity, attribute = entity_attribute_pair
-              block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to have_boolean_response true
+        context "with applicant details" do
+          it "adds applicant's DATE_OF_BIRTH attribute with dob value into means and merits assessment sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "DATE_OF_BIRTH")
+              expect(block).to have_date_response legal_aid_application.applicant.date_of_birth.strftime("%d-%m-%Y")
             end
+          end
+
+          it "adds applicant's FIRST_NAME attribute with value into means and merits assessment sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "FIRST_NAME")
+              expect(block).to have_text_response legal_aid_application.applicant.first_name
+            end
+          end
+
+          it "adds applicant's POST_CODE attribute with value into means and merits assessment sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "POST_CODE")
+              expect(block).to have_text_response legal_aid_application.applicant.address.postcode
+            end
+          end
+
+          it "adds applicant's SURNAME attribute with value into means and merits assessment sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "SURNAME")
+              expect(block).to have_text_response legal_aid_application.applicant.last_name
+            end
+          end
+
+          it "adds applicant's SURNAME_AT_BIRTH attribute with value into means and merits assessment sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "SURNAME_AT_BIRTH")
+              expect(block).to have_text_response legal_aid_application.applicant.last_name
+            end
+          end
+
+          it "adds applicant's CLIENT_AGE attribute with value into merits assessment section" do
+            block = XmlExtractor.call(xml, :global_merits, "CLIENT_AGE")
+            expect(block).to have_number_response legal_aid_application.applicant.age
           end
         end
 
-        context "applicant" do
-          context "DATE_OF_BIRTH" do
-            it "inserts applicant's date of birth as a string" do
-              %i[global_means global_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "DATE_OF_BIRTH")
-                expect(block).to have_date_response legal_aid_application.applicant.date_of_birth.strftime("%d-%m-%Y")
-              end
-            end
-          end
-
-          context "FIRST_NAME" do
-            it "inserts applicant's first name as a string" do
-              %i[global_means global_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "FIRST_NAME")
-                expect(block).to have_text_response legal_aid_application.applicant.first_name
-              end
-            end
-          end
-
-          context "POST_CODE" do
-            it "inserts applicant's postcode as a string" do
-              %i[global_means global_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "POST_CODE")
-                expect(block).to have_text_response legal_aid_application.applicant.address.postcode
-              end
-            end
-          end
-
-          context "SURNAME" do
-            it "inserts applicant's surname as a string" do
-              %i[global_means global_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "SURNAME")
-                expect(block).to have_text_response legal_aid_application.applicant.last_name
-              end
-            end
-          end
-
-          context "SURNAME_AT_BIRTH" do
-            it "inserts applicant's surname at birth as a string" do
-              %i[global_means global_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "SURNAME_AT_BIRTH")
-                expect(block).to have_text_response legal_aid_application.applicant.last_name
-              end
-            end
-          end
-
-          context "CLIENT_AGE" do
-            it "inserts applicant's age as a number" do
-              block = XmlExtractor.call(xml, :global_merits, "CLIENT_AGE")
-              expect(block).to have_number_response legal_aid_application.applicant.age
-            end
-          end
-        end
-
-        context "DATE_CLIENT_VISITED_FIRM" do
+        # CHECK: what should this be for a non means tested
+        # note that `legal_aid_application.calculation_date` will return nil if no delegated functions used on a
+        # non-means-tested case
+        xcontext "with DATE_CLIENT_VISITED_FIRM" do
           before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
 
           it "inserts today's date as a string" do
@@ -769,25 +501,24 @@ module CCMS
           end
         end
 
-        context "_SYSTEM_PUI_USERID" do
-          it "inserts provider's email address" do
-            %i[global_means global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, "_SYSTEM_PUI_USERID")
-              expect(block).to have_text_response legal_aid_application.provider.email
-            end
+        it "adds _SYSTEM_PUI_USERID attribute with provider's email address as value" do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, "_SYSTEM_PUI_USERID")
+            expect(block).to have_text_response legal_aid_application.provider.email
           end
         end
 
-        context "USER_PROVIDER_FIRM_ID" do
-          it "inserts provider's firm id as a number" do
-            %i[global_means global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, "USER_PROVIDER_FIRM_ID")
-              expect(block).to have_number_response legal_aid_application.provider.firm.ccms_id
-            end
+        it "adds USER_PROVIDER_FIRM_ID attribute with provider's firm id as the value into means and merits assessment sections" do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, "USER_PROVIDER_FIRM_ID")
+            expect(block).to have_number_response legal_aid_application.provider.firm.ccms_id
           end
         end
 
-        context "DATE_ASSESSMENT_STARTED" do
+        # CHECK: what should this be for a non means tested
+        # note that `legal_aid_application.calculation_date` will return nil if no delegated functions used on a
+        # non-means-tested case
+        xcontext "with DATE_ASSESSMENT_STARTED" do
           before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
 
           it "inserts today's date as a string" do
@@ -798,97 +529,86 @@ module CCMS
           end
         end
 
-        context "attributes omitted from payload" do
-          it "does not display the attributes in the payload" do
-            omitted_attributes.each do |entity_attribute_pair|
-              entity, attribute = entity_attribute_pair
-              block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
-            end
+        it "omits some attributes from the payload", :aggregate_failures do
+          omitted_attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
           end
         end
 
-        context "BAIL_CONDITIONS_SET" do
-          context "bail conditions set" do
+        context "with BAIL_CONDITIONS_SET" do
+          context "with bail conditions set" do
             before { opponent.bail_conditions_set = true }
 
-            it "is true" do
+            it "adds BAIL_CONDITIONS_SET attribute with value of true" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
               expect(block).to have_boolean_response true
             end
           end
 
-          context "bail conditions NOT set" do
+          context "with bail conditions NOT set" do
             before { opponent.bail_conditions_set = false }
 
-            it "is false" do
+            it "adds BAIL_CONDITIONS_SET attribute with value of false" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
               expect(block).to have_boolean_response false
             end
           end
         end
 
-        context "Benefit Checker" do
-          context "BEN_DOB" do
-            it "inserts applicant's date of birth as a string" do
-              block = XmlExtractor.call(xml, :global_means, "BEN_DOB")
-              expect(block).to have_date_response legal_aid_application.applicant.date_of_birth.strftime("%d-%m-%Y")
+        it "omits BEN_DOB" do
+          block = XmlExtractor.call(xml, :global_means, "BEN_DOB")
+          expect(block).not_to be_present, "Expected attribute block BEN_DOB not to be generated, but was \n #{block}"
+        end
+
+        it "omits BEN_NI_NO" do
+          block = XmlExtractor.call(xml, :global_means, "BEN_NI_NO")
+          expect(block).not_to be_present, "Expected attribute block BEN_NI_NO not to be generated, but was \n #{block}"
+        end
+
+        it "LAR_INFER_B_1WP1_36A is present with value of false" do
+          block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
+          expect(block).to have_boolean_response false
+        end
+
+        context "with APP_GRANTED_USING_DP" do
+          context "when using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              end
+            end
+
+            it "adds APP_GRANTED_USING_DP attribute with true value" do
+              block = XmlExtractor.call(xml, :global_merits, "APP_GRANTED_USING_DP")
+              expect(block).to have_boolean_response(true)
             end
           end
 
-          context "BEN_NI_NO" do
-            it "inserts applicant's national insurance number as a string" do
-              block = XmlExtractor.call(xml, :global_means, "BEN_NI_NO")
-              expect(block).to have_text_response legal_aid_application.applicant.national_insurance_number
+          context "when not using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "adds APP_GRANTED_USING_DP attribute with false value" do
+              block = XmlExtractor.call(xml, :global_merits, "APP_GRANTED_USING_DP")
+              expect(block).to have_boolean_response(false)
             end
           end
         end
 
-        context "LAR_INFER_B_1WP1_36A" do
-          context "benefit check result is yes" do
-            it "uses the DWP benefit check result" do
-              block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
-              expect(block).to have_boolean_response true
+        context "with APP_AMEND_TYPE" do
+          context "when using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              end
             end
-          end
 
-          context "benefit check result is no" do
-            let(:benefit_check_result) { create(:benefit_check_result, :negative) }
-
-            before { legal_aid_application.benefit_check_result = benefit_check_result }
-
-            it "uses the DWP benefit check result" do
-              block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
-              expect(block).to have_boolean_response false
-            end
-          end
-        end
-
-        context "APP_GRANTED_USING_DP" do
-          it "uses the DWP benefit check result" do
-            block = XmlExtractor.call(xml, :global_merits, "APP_GRANTED_USING_DP")
-            expect(block).to have_boolean_response legal_aid_application.used_delegated_functions?
-          end
-        end
-
-        context "APP_AMEND_TYPE" do
-          context "delegated function used" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     set_lead_proceeding: :da004,
-                     proceeding_count: 2,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider:,
-                     office:)
-            end
-            let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-
-            it "returns SUBDP" do
+            it "adds APP_AMEND_TYPE attribute with SUBDP value to means and mertis assessment sections" do
               %i[global_means global_merits].each do |entity|
                 block = XmlExtractor.call(xml, entity, "APP_AMEND_TYPE")
                 expect(block).to have_text_response "SUBDP"
@@ -896,8 +616,14 @@ module CCMS
             end
           end
 
-          context "delegated functions not used" do
-            it "returns SUB" do
+          context "when not using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "adds APP_AMEND_TYPE attribute with SUB value to means and mertis assessment sections" do
               %i[global_means global_merits].each do |entity|
                 block = XmlExtractor.call(xml, entity, "APP_AMEND_TYPE")
                 expect(block).to have_text_response "SUB"
@@ -906,275 +632,98 @@ module CCMS
           end
         end
 
-        context "EMERGENCY_FURTHER_INFORMATION" do
+        context "with EMERGENCY_FURTHER_INFORMATION" do
           let(:block) { XmlExtractor.call(xml, :global_merits, "EMERGENCY_FURTHER_INFORMATION") }
 
-          context "delegated function used" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     set_lead_proceeding: :da004,
-                     proceeding_count: 2,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider:,
-                     office:)
-            end
-            let!(:da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, :with_optional_text, proceeding: da004)
+          context "when using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              end
             end
 
-            it "returns hard coded statement" do
+            it "adds EMERGENCY_FURTHER_INFORMATION attribute with expected value" do
               expect(block).to have_text_response "."
             end
           end
 
-          context "delegated function not used" do
-            it "EMERGENCY_FURTHER_INFORMATION block is not present" do
+          context "with delegated function not used" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "omits EMERGENCY_FURTHER_INFORMATION attribute" do
               expect(block).not_to be_present
             end
           end
         end
 
-        context "GB_INPUT_B_15WP2_8A client is owed money" do
-          it "returns true when applicant is owed money" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_15WP2_8A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when applicant is NOT owed money" do
-            allow(legal_aid_application.other_assets_declaration).to receive(:money_owed_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_15WP2_8A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_15WP2_8A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_15WP2_8A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_14WP2_8A vehicle is owned" do
-          it "returns true when applicant owns a vehicle" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_14WP2_8A")
-            expect(block).to have_boolean_response true
-          end
-
-          context "GB_INPUT_B_14WP2_8A no vehicle owned" do
-            before { legal_aid_application.update(own_vehicle: false) }
-
-            it "returns false when applicant does NOT own a vehicle" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_14WP2_8A")
-              expect(block).to have_boolean_response false
-            end
-          end
+        it "omits GB_INPUT_B_14WP2_8A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_14WP2_8A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_16WP2_7A client interest in a trust" do
-          it "returns true when client has interest in a trust" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_16WP2_7A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when client has NO interest in a trust" do
-            allow(legal_aid_application.other_assets_declaration).to receive(:trust_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_16WP2_7A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_16WP2_7A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_16WP2_7A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_12WP2_2A client valuable possessions" do
-          it "returns true" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_12WP2_2A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "displays VALPOSSESS_INPUT_T_12WP2_7A" do
-            block = XmlExtractor.call(xml, :global_means, "VALPOSSESS_INPUT_T_12WP2_7A")
-            expect(block).to have_text_response "Aggregate of valuable possessions"
-          end
-
-          it "displays VALPOSSESS_INPUT_C_12WP2_8A" do
-            block = XmlExtractor.call(xml, :global_means, "VALPOSSESS_INPUT_C_12WP2_8A")
-            expect(block).to have_currency_response legal_aid_application.other_assets_declaration.valuable_items_value
-          end
-
-          context "when client has NO valuable possessions" do
-            before { allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil) }
-
-            it "returns false" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_12WP2_2A")
-              expect(block).to have_boolean_response false
-            end
-
-            it "does not display VALPOSSESS_INPUT_T_12WP2_7A or VALPOSSESS_INPUT_C_12WP2_8A" do
-              %i[VALPOSSESS_INPUT_T_12WP2_7A VALPOSSESS_INPUT_T_12WP2_8A].each do |attribute|
-                block = XmlExtractor.call(xml, :global_means, attribute)
-                expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
-              end
-            end
-          end
+        it "omits GB_INPUT_B_12WP2_2A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_12WP2_2A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_6WP2_1A client has timeshare" do
-          it "returns true when client has timeshare" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_6WP2_1A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when client does NOT have timeshare" do
-            allow(legal_aid_application.other_assets_declaration).to receive(:timeshare_property_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_6WP2_1A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_6WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_6WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_5WP2_1A client owns land" do
-          it "returns true when client owns land" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP2_1A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when client does NOT own land" do
-            allow(legal_aid_application.other_assets_declaration).to receive(:land_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP2_1A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_5WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_9WP2_1A client investments" do
-          let(:ns_val) { 0 }
-          let(:plc_shares_val) { 0 }
-          let(:peps_val) { 0 }
-          let(:policy_val) { 0 }
-
-          before do
-            legal_aid_application.savings_amount.update(national_savings: ns_val,
-                                                        plc_shares: plc_shares_val,
-                                                        peps_unit_trusts_capital_bonds_gov_stocks: peps_val,
-                                                        life_assurance_endowment_policy: policy_val)
-          end
-
-          context "no investments of any type" do
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "national savings only" do
-            let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
-
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
-
-          context "life_assurance_policy_only" do
-            let(:ns_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
-
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
-
-          context "multiple investments" do
-            let(:ns_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
-            let(:plc_shares_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
-            let(:peps_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
-            let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
-
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
+        it "omits GB_INPUT_B_9WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_4WP2_1A Does applicant own additional property?" do
-          context "applicant owns addtional property" do
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_4WP2_1A")
-              expect(block).to have_boolean_response true
-            end
-          end
-
-          context "applicant DOES NOT own additional property" do
-            before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
-
-            it "returns false when client does NOT own additiaonl property" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_4WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
+        it "omits GB_INPUT_B_4WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_4WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_5WP1_18A - does the applicant receive a passported benefit?" do
-          context "no passported benefit" do
-            before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false) }
-
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_18A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "receiving a passported benefit" do
-            before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true) }
-
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_18A")
-              expect(block).to have_boolean_response true
-            end
-          end
+        it "omits GB_INPUT_B_5WP1_18A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_18A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_7WP2_1A client bank accounts" do
-          it "returns true when client has bank accounts" do
-            random_value = rand(1...1_000_000.0).round(2)
-            allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(random_value)
-            allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(random_value)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
-            expect(block).to have_boolean_response true
-          end
-
-          context "GB_INPUT_B_7WP2_1A negative values in bank accounts" do
-            it "returns false when applicant has negative values in bank accounts" do
-              random_negative_value = -rand(1...1_000_000.0).round(2)
-              allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(random_negative_value)
-              allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(random_negative_value)
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "GB_INPUT_B_7WP2_1A no bank accounts" do
-            it "returns false when applicant does NOT have bank accounts" do
-              allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
-              allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
+        it "omits GB_INPUT_B_7WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_8WP2_1A client is signatory to other bank accounts" do
-          it "returns true when client is a signatory to other bank accounts" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_8WP2_1A")
-            expect(block).to have_boolean_response true
-          end
-
-          context "GB_INPUT_B_8WP2_1A client is not a signatory to other bank accounts" do
-            it "returns false when applicant is NOT a signatory to other bank accounts" do
-              allow(legal_aid_application.savings_amount).to receive(:other_person_account).and_return(nil)
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_8WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
+        it "omits GB_INPUT_B_8WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_8WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_D_18WP2_1A - application submission date" do
+        it "omits GB_INPUT_D_18WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_D_18WP2_1A")
+          expect(block).not_to be_present
+        end
+
+        # CHECK: is this even needed (not in example payload) what should this be for a non means tested
+        # note that `legal_aid_application.calculation_date` will return nil if no delegated functions used on a
+        # non-means-tested case
+        xcontext "with GB_INPUT_D_18WP2_1A - application submission date" do
           let(:dummy_date) { Faker::Date.between(from: 20.days.ago, to: Time.zone.today) }
 
           it "inserts the submission date into the attribute block" do
@@ -1184,223 +733,168 @@ module CCMS
           end
         end
 
-        context "GB_INPUT_B_10WP2_1A client other savings" do
-          it "returns true when client has other savings" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_10WP2_1A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when client does NOT have other savings" do
-            allow(legal_aid_application.savings_amount).to receive(:peps_unit_trusts_capital_bonds_gov_stocks).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_10WP2_1A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_10WP2_1A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_10WP2_1A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_13WP2_7A client other policies" do
-          it "returns true when client has other policies" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_13WP2_7A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when client does NOT have other policies" do
-            allow(legal_aid_application.savings_amount).to receive(:life_assurance_endowment_policy).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_13WP2_7A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_13WP2_7A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_13WP2_7A")
+          expect(block).not_to be_present
         end
 
-        context "GB_INPUT_B_11WP2_3A client other shares" do
-          it "returns true when client has other shares" do
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_11WP2_3A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when client does NOT have other shares" do
-            allow(legal_aid_application.savings_amount).to receive(:plc_shares).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_11WP2_3A")
-            expect(block).to have_boolean_response false
-          end
+        it "omits GB_INPUT_B_11WP2_3A attribute" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_11WP2_3A")
+          expect(block).not_to be_present
         end
 
-        context "GB_DECL_B_38WP3_11A application passported" do
-          it "returns true when application is passported" do
-            allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true)
-            block = XmlExtractor.call(xml, :global_means, "GB_DECL_B_38WP3_11A")
-            expect(block).to have_boolean_response true
-          end
-
-          it "returns false when application is not passported" do
-            allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false)
-            block = XmlExtractor.call(xml, :global_means, "GB_DECL_B_38WP3_11A")
-            expect(block).to have_boolean_response false
-          end
+        # CHECK: is in example payload but may not be needed
+        it "adds GB_DECL_B_38WP3_11A attribute with value of false" do
+          block = XmlExtractor.call(xml, :global_means, "GB_DECL_B_38WP3_11A")
+          expect(block).to have_boolean_response false
         end
 
-        context "attributes with specific hard coded values" do
-          context "attributes hard coded to specific values" do
-            it "hard codes country to GBR" do
-              block = XmlExtractor.call(xml, :global_means, "COUNTRY")
-              expect(block).to have_text_response "GBR"
-            end
-
-            it "DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings" do
-              attributes = [
-                [:global_means, "DEVOLVED_POWERS_CONTRACT_FLAG"],
-                [:global_merits, "DEVOLVED_POWERS_CONTRACT_FLAG"],
-              ]
-              attributes.each do |entity_attribute_pair|
-                entity, attribute = entity_attribute_pair
-                block = XmlExtractor.call(xml, entity, attribute)
-                expect(block).to have_text_response "Yes - Excluding JR Proceedings"
-              end
+        context "with attributes with specific hard coded values" do
+          it "adds DEVOLVED_POWERS_CONTRACT_FLAG attribute with expected hard coded" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "DEVOLVED_POWERS_CONTRACT_FLAG")
+              expect(block).to have_text_response "Yes - Excluding JR Proceedings"
             end
           end
 
-          it "returns a type of boolean hard coded to false" do
+          it "attributes with values hard coded to boolean false", :aggregate_failures do
             false_attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to have_boolean_response false
+              expect(block).to have_boolean_response(false), "Expected attribute #{attribute} to have hard coded boolean value of false"
             end
           end
 
-          it "CASES_FEES_DISTRIBUTED should be hard coded to 1" do
+          it "adds CASES_FEES_DISTRIBUTED attribute with hard coded value of 1" do
             block = XmlExtractor.call(xml, :global_merits, "CASES_FEES_DISTRIBUTED")
-            expect(block).to have_number_response 1
+            expect(block).to have_number_response(1)
           end
 
-          context "LEVEL_OF_SERVICE" do
-            it "is the service level number from the default level of service" do
-              %i[proceeding_merits proceeding_means].each do |entity|
-                block = XmlExtractor.call(xml, entity, "LEVEL_OF_SERVICE")
-                expect(block).to have_text_response proceeding.substantive_level_of_service.to_s
+          it "adds LEVEL_OF_SERVICE attribute with value from substantive level of service" do
+            %i[proceeding_means proceeding_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "LEVEL_OF_SERVICE")
+              expect(block).to have_text_response proceeding.substantive_level_of_service.to_s
+            end
+          end
+
+          it "adds PROCEEDING_LEVEL_OF_SERVICE attribute with value from substantive level of service name" do
+            block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
+            expect(block).to have_text_response proceeding.substantive_level_of_service_name
+          end
+
+          context "with CLIENT_INVOLVEMENT_TYPE" do
+            context "when proceeding has a client involvement type of Applicant, A" do
+              before do
+                legal_aid_application.proceedings.each do |proceeding|
+                  proceeding.update!(client_involvement_type_ccms_code: "A")
+                end
+              end
+
+              it "adds CLIENT_INVOLVEMENT_TYPE attributes with value of A in means proceedings and merits proceedings" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "CLIENT_INVOLVEMENT_TYPE")
+                  expect(block).to have_text_response "A"
+                end
+              end
+            end
+
+            context "when proceeding has a client involvement type of Defendant, D" do
+              before do
+                legal_aid_application.proceedings.each do |proceeding|
+                  proceeding.update!(client_involvement_type_ccms_code: "D")
+                end
+              end
+
+              it "adds CLIENT_INVOLVEMENT_TYPE attributes with value of D in means proceedings and merits proceedings" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "CLIENT_INVOLVEMENT_TYPE")
+                  expect(block).to have_text_response "D"
+                end
               end
             end
           end
 
-          context "PROCEEDING_LEVEL_OF_SERVICE" do
-            it "displays the name of the lead proceeding default level of service" do
-              block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
-              expect(block).to have_text_response proceeding.substantive_level_of_service_name
+          it "adds COST_LIMIT_CHANGED_FLAG attribute with hard coded text value of false in means and merits sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "COST_LIMIT_CHANGED_FLAG")
+              expect(block).to have_text_response "false"
             end
           end
 
-          it "CLIENT_INVOLVEMENT_TYPE should be hard coded to A" do
-            %i[proceeding_merits proceeding_means].each do |entity|
-              block = XmlExtractor.call(xml, entity, "CLIENT_INVOLVEMENT_TYPE")
-              expect(block).to have_text_response "A"
-            end
-          end
-
-          context "attributes hard coded to false" do
-            it "returns a type of text hard coded to false" do
-              %i[global_means global_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "COST_LIMIT_CHANGED_FLAG")
-                expect(block).to have_text_response "false"
-              end
-            end
-          end
-
-          it "CASES_FEES_DISTRIBUTED should be hard coded to 1" do
-            block = XmlExtractor.call(xml, :global_merits, "CASES_FEES_DISTRIBUTED")
-            expect(block).to have_number_response 1
-          end
-
-          it "NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION" do
+          it "adds NEW_APPL_OR_AMENDMENT attribute with hard coded text value of APPLICATION in means and merits sections" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "NEW_APPL_OR_AMENDMENT")
               expect(block).to have_text_response "APPLICATION"
             end
           end
 
-          it "USER_TYPE should be hard coded to EXTERNAL" do
+          it "adds USER_TYPE attribute with hard coded text value of EXTERNAL in means and merits sections" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "USER_TYPE")
               expect(block).to have_text_response "EXTERNAL"
             end
           end
 
-          it "COUNTRY should be hard coded to GBR" do
-            block = XmlExtractor.call(xml, :global_merits, "COUNTRY")
-            expect(block).to have_text_response "GBR"
+          it "adds COUNTRY attribute with hard coded text value of GBR in means and merits sections" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, "COUNTRY")
+              expect(block).to have_text_response "GBR"
+            end
           end
 
-          it "MARITIAL_STATUS should be hard coded to UNKNOWN" do
+          it "MARITIAL_STATUS should be hard coded to UNKNOWN in means assessment section" do
             block = XmlExtractor.call(xml, :global_means, "MARITIAL_STATUS")
             expect(block).to have_text_response "UNKNOWN"
           end
 
-          context "there is one scope limitation" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider:,
-                     office:)
+          context "with REQUESTED_SCOPE" do
+            context "when there is one scope limitation" do
+              it "adds REQUESTED_SCOPE attribute with the scope limitation code" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
+                  expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitations.first.code
+                end
+              end
             end
 
-            it "REQUESTED_SCOPE should be populated with the scope limitation code" do
-              %i[proceeding_merits proceeding_means].each do |entity|
-                block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
-                expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitations.first.code
+            xcontext "when there are multiple scope limitations" do
+              before do
+                da004 = create(:proceeding, :da004, legal_aid_application:, lead_proceeding: false)
+                create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: da004)
+              end
+
+              it "adds REQUESTED_SCOPE attribute with MULTIPLE in proceedings means and merits sections" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
+                  expect(block).to have_text_response "MULTIPLE"
+                end
               end
             end
           end
 
-          context "there are multiple scope limitations" do
-            let!(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     explicit_proceedings: [:da004],
-                     set_lead_proceeding: :da004,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider:,
-                     office:)
-            end
-            let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004)
-            end
-
-            it "REQUESTED_SCOPE should populated with MULTIPLE in proceedings section" do
-              %i[proceeding_means proceeding_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
-                expect(block).to have_text_response "MULTIPLE"
-              end
-            end
-          end
-
-          it "NEW_OR_EXISTING should be hard coded to NEW" do
+          it "adds NEW_OR_EXISTING attribute with NEW in proceedings means and merits sections" do
             %i[proceeding_means proceeding_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "NEW_OR_EXISTING")
               expect(block).to have_text_response "NEW"
             end
           end
 
-          it "POA_OR_BILL_FLAG should be hard coded to N/A" do
+          it "adds POA_OR_BILL_FLAG attribute with N/A in global means section" do
             block = XmlExtractor.call(xml, :global_means, "POA_OR_BILL_FLAG")
             expect(block).to have_text_response "N/A"
           end
 
-          it "MERITS_ROUTING should be hard coded to SFM" do
+          it "adds MERITS_ROUTING attribute with SFM in global merits section" do
             block = XmlExtractor.call(xml, :global_merits, "MERITS_ROUTING")
             expect(block).to have_text_response "SFM"
           end
 
-          it "IS_PASSPORTED should be hard coded to YES" do
-            block = XmlExtractor.call(xml, :global_means, "IS_PASSPORTED")
-            expect(block).to have_text_response "YES"
-          end
-
+          # CHECK: few of these are in example payload for NMT
           it "returns a hard coded response with the correct notification" do
             attributes = [
               [:proceeding_merits, "INJ_RECENT_INCIDENT_DETAIL"],
@@ -1419,127 +913,117 @@ module CCMS
           end
         end
 
-        context "legal framework attributes" do
-          it "populates REQ_COST_LIMITATION" do
+        context "with legal framework attributes" do
+          it "adds REQ_COST_LIMITATION attribute with value from application to means and merits assessment section" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "REQ_COST_LIMITATION")
               expect(block).to have_currency_response sprintf("%<value>.2f", value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
             end
           end
 
-          it "populates APP_IS_FAMILY" do
+          it "adds APP_IS_FAMILY attribute with value from application to merits assessment section" do
             block = XmlExtractor.call(xml, :global_merits, "APP_IS_FAMILY")
             expect(block).to have_boolean_response(proceeding.category_of_law == "Family")
           end
 
-          it "populates CAT_OF_LAW_DESCRIPTION" do
+          it "adds CAT_OF_LAW_DESCRIPTION attribute with value from application to merits assessment section" do
             block = XmlExtractor.call(xml, :global_merits, "CAT_OF_LAW_DESCRIPTION")
             expect(block).to have_text_response proceeding.category_of_law
           end
 
-          it "populates CAT_OF_LAW_HIGH_LEVEL" do
+          it "adds CAT_OF_LAW_HIGH_LEVEL attribute with value from application to merits assessment section" do
             block = XmlExtractor.call(xml, :global_merits, "CAT_OF_LAW_HIGH_LEVEL")
             expect(block).to have_text_response proceeding.category_of_law
           end
 
-          it "populates CAT_OF_LAW_MEANING" do
+          it "adds CAT_OF_LAW_MEANING attribute with value from application to merits assessment section" do
             block = XmlExtractor.call(xml, :global_merits, "CAT_OF_LAW_MEANING")
             expect(block).to have_text_response proceeding.meaning
           end
 
-          it "populates CATEGORY_OF_LAW" do
+          it "adds CATEGORY_OF_LAW attribute with value from application to means and merits assessment sections" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "CATEGORY_OF_LAW")
               expect(block).to have_text_response proceeding.category_law_code
             end
           end
 
-          it "populates DEFAULT_COST_LIMITATION_MERITS" do
+          it "adds DEFAULT_COST_LIMITATION_MERITS attribute with value from application to merits assessment sections" do
             block = XmlExtractor.call(xml, :global_merits, "DEFAULT_COST_LIMITATION_MERITS")
             expect(block).to have_currency_response sprintf("%<value>.2f", value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
           end
 
-          it "populates DEFAULT_COST_LIMITATION" do
+          it "adds DEFAULT_COST_LIMITATION attribute with value from application to means and merits assessment sections" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "DEFAULT_COST_LIMITATION")
               expect(block).to have_currency_response sprintf("%<value>.2f", value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
             end
           end
 
-          it "populates MATTER_TYPE" do
+          it "adds MATTER_TYPE attribute with value from application to means and merits assessment sections" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "MATTER_TYPE")
               expect(block).to have_text_response proceeding.ccms_matter_code
             end
           end
 
-          it "populates PROCEEDING_NAME" do
+          it "adds PROCEEDING_NAME attribute with value from application to means and merits assessment sections" do
             block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_NAME")
             expect(block).to have_text_response proceeding.ccms_code
           end
         end
 
-        context "SUBSTANTIVE_APP populates correctly" do
+        context "with SUBSTANTIVE_APP" do
           let(:block) { XmlExtractor.call(xml, :global_merits, "SUBSTANTIVE_APP") }
 
-          context "substantive" do
-            it "returns true" do
+          context "when not using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "adds SUBSTANTIVE_APP attribute with value of true to merits assessment section" do
               expect(block).to have_boolean_response true
             end
           end
 
-          context "delegated_functions" do
-            let!(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     set_lead_proceeding: :da004,
-                     explicit_proceedings: [:da004],
-                     populate_vehicle: true,
-                     provider:,
-                     office:)
-            end
-            let(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004)
+          context "when using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              end
             end
 
-            it "returns false" do
+            it "adds SUBSTANTIVE_APP attribute with value of false to merits assessment section" do
               expect(block).to have_boolean_response false
             end
           end
         end
 
-        context "PROCEEDING_APPLICATION_TYPE populates correctly" do
+        context "with PROCEEDING_APPLICATION_TYPE" do
           let(:block) { XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_APPLICATION_TYPE") }
 
-          context "substantive" do
-            it "returns Substantive" do
+          context "when not using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "adds PROCEEDING_APPLICATION_TYPE attribute with value of Substantive to proceeding merits section" do
               expect(block).to have_text_response "Substantive"
             end
           end
 
-          context "delegated functions" do
-            let!(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     set_lead_proceeding: :da004,
-                     explicit_proceedings: [:da004],
-                     populate_vehicle: true,
-                     with_bank_accounts: 1,
-                     provider:,
-                     office:)
-            end
-            let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004)
+          context "when using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              end
             end
 
-            it "returns Both" do
+            it "adds PROCEEDING_APPLICATION_TYPE attribute with value of Both to proceeding merits section" do
               expect(block).to have_text_response "Both"
             end
           end
@@ -1628,28 +1112,33 @@ module CCMS
           end
         end
 
-        context "APPLY_CASE_MEANS_REVIEW" do
-          context "in global means and global merits" do
-            let(:determiner) { double ManualReviewDeterminer }
+        # CHECK: should we hard code as true (manual review not required?)
+        # - false (manual review required)
+        # - true (manual review not required?)
+        # Note that #bypass_manual_review_in_ccms? should return true (manual review not required?) for
+        # non-means-tested applications anyway
+        context "with APPLY_CASE_MEANS_REVIEW" do
+          before { allow(ManualReviewDeterminer).to receive(:new).and_return(determiner) }
 
-            before { allow(ManualReviewDeterminer).to receive(:new).and_return(determiner) }
+          let(:determiner) { instance_double ManualReviewDeterminer }
 
-            context "Manual review required" do
-              it "set the attribute to false" do
-                allow(determiner).to receive(:manual_review_required?).and_return(true)
-                block = XmlExtractor.call(xml, :global_means, "APPLY_CASE_MEANS_REVIEW")
-                expect(block).to have_boolean_response false
-                block = XmlExtractor.call(xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+          context "when Manual review required" do
+            before { allow(determiner).to receive(:manual_review_required?).and_return(true) }
+
+            it "adds APPLY_CASE_MEANS_REVIEW attribute with value of false" do
+              %i[global_means global_merits].each do |entity|
+                block = XmlExtractor.call(xml, entity, "APPLY_CASE_MEANS_REVIEW")
                 expect(block).to have_boolean_response false
               end
             end
+          end
 
-            context "Manual review not required" do
-              it "sets the attribute to true" do
-                allow(determiner).to receive(:manual_review_required?).and_return(false)
-                block = XmlExtractor.call(xml, :global_means, "APPLY_CASE_MEANS_REVIEW")
-                expect(block).to have_boolean_response true
-                block = XmlExtractor.call(xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+          context "when Manual review not required" do
+            before { allow(determiner).to receive(:manual_review_required?).and_return(false) }
+
+            it "adds APPLY_CASE_MEANS_REVIEW attribute with value of true" do
+              %i[global_means global_merits].each do |entity|
+                block = XmlExtractor.call(xml, entity, "APPLY_CASE_MEANS_REVIEW")
                 expect(block).to have_boolean_response true
               end
             end
@@ -1729,6 +1218,8 @@ module CCMS
           [:global_means, "GB_INFER_C_31WP3_13A"],
           [:global_means, "GB_INFER_C_28WP4_10A"],
           [:global_means, "GB_INFER_C_28WP4_20A"],
+          [:global_means, "GB_INPUT_B_1WP2_36A"],
+          [:global_means, "GB_INPUT_B_1WP3_165A"],
           [:global_means, "GB_INPUT_B_1WP3_175A"],
           [:global_means, "GB_INPUT_B_1WP3_400A"],
           [:global_means, "GB_INPUT_B_1WP3_401A"],
@@ -1744,6 +1235,7 @@ module CCMS
           [:global_means, "GB_INPUT_B_13WP3_5A"],
           [:global_means, "GB_INPUT_B_13WP3_6A"],
           [:global_means, "GB_INPUT_B_13WP3_7A"],
+          [:global_means, "GB_INPUT_B_14WP2_7A"],
           [:global_means, "GB_INPUT_B_14WP3_1A"],
           [:global_means, "GB_INPUT_B_2WP3_214A"],
           [:global_means, "GB_INPUT_B_2WP4_2A"],
@@ -1793,10 +1285,10 @@ module CCMS
           [:global_means, "GB_INPUT_T_3WP2_3A"],
           [:global_means, "GB_INPUT_T_6WP3_229A"],
           [:global_means, "GB_PROC_B_1WP4_99A"],
+          [:global_means, "GB_RFLAG_B_2WP3_01A"],
           [:global_means, "LAR_RFLAG_B_37WP2_41A"],
           [:global_means, "MEANS_OPA_RELEASE"],
           [:global_means, "MEANS_REPORT_BACKLOG_TAG"],
-          [:global_means, "MEANS_REQD"],
           [:global_means, "MEANS_ROUTING"],
           [:global_means, "OUT_EMP_INFER_C_15WP3_11A"],
           [:global_means, "OUT_GB_INFER_C_14WP4_19A"],
@@ -1943,6 +1435,7 @@ module CCMS
           [:global_merits, "CASE_OWNER_SCU"],
           [:global_merits, "CASE_OWNER_VHCC"],
           [:global_merits, "CERTIFICATE_PREDICTED_COSTS"],
+          [:global_merits, "COPY_SEPARATE_STATEMENT"],
           [:global_merits, "CHILD_CLIENT"],
           [:global_merits, "CLIENT_CIVIL_PARTNER"],
           [:global_merits, "CLIENT_CIVIL_PARTNER_DISSOLVE"],
@@ -2203,10 +1696,7 @@ module CCMS
           [:global_means, "GB_INPUT_B_1WP2_14A"],
           [:global_means, "GB_INPUT_B_1WP2_22A"],
           [:global_means, "GB_INPUT_B_1WP2_27A"],
-          [:global_means, "GB_INPUT_B_1WP2_36A"],
-          [:global_means, "GB_INPUT_B_1WP3_165A"],
           [:global_means, "GB_INFER_B_1WP1_1A"],
-          [:global_means, "GB_INPUT_B_14WP2_7A"],
           [:global_means, "GB_INPUT_B_17WP2_7A"],
           [:global_means, "GB_INPUT_B_17WP2_8A"],
           [:global_means, "GB_INPUT_B_18WP2_2A"],
@@ -2308,7 +1798,6 @@ module CCMS
           [:global_means, "GB_PROC_B_41WP3_7A"],
           [:global_means, "GB_PROC_B_41WP3_8A"],
           [:global_means, "GB_PROC_B_41WP3_9A"],
-          [:global_means, "GB_RFLAG_B_2WP3_01A"],
           [:global_means, "GB_ROUT_B_43WP3_13A"],
           [:global_means, "HIGH_PROFILE"],
           [:global_means, "LAR_PROC_B_39WP3_53A"],
@@ -2325,7 +1814,6 @@ module CCMS
           [:global_merits, "ACTUAL_LIKELY_COSTS_EXCEED_25K"],
           [:global_merits, "AMENDMENT"],
           [:global_merits, "APP_BROUGHT_BY_PERSONAL_REP"],
-          [:global_merits, "COPY_SEPARATE_STATEMENT"],
           [:global_merits, "CLIENT_HAS_RECEIVED_LA_BEFORE"],
           [:global_merits, "COST_LIMIT_CHANGED"],
           [:global_merits, "COURT_ATTEND_IN_LAST_12_MONTHS"],

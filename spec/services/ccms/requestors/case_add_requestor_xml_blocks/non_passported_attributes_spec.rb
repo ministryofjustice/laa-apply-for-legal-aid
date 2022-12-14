@@ -46,15 +46,12 @@ module CCMS
         let(:applicant) { legal_aid_application.applicant }
         let(:default_cost) { legal_aid_application.lead_proceeding.substantive_cost_limitation }
 
-        # enable this context if you need to create a file of the payload for manual inspection
-        # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
-        context "save to a temporary file", skip: "not needed for testing, but re-enable if you want to save the XML to a file" do
-          it "creates a file" do
-            filename = Rails.root.join("tmp/generated_non_passported_ccms_payload_#{timestamp}.xml")
-            File.open(filename, "w") { |f| f.puts xml }
-            expect(File.exist?(filename)).to be true
-          end
-        end
+        # uncomment this example to create a file of the payload for manual inspection
+        # it 'create example payload file' do
+        #   filename = Rails.root.join('tmp/generated_non_means_tested_ccms_payload.xml')
+        #   File.open(filename, 'w') { |f| f.puts xml }
+        #   expect(File.exist?(filename)).to be true
+        # end
 
         context "hard coded false attributes" do
           it "generates the block with boolean value set to false" do

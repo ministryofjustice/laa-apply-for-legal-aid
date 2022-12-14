@@ -8,7 +8,7 @@ module CCMS
       let(:submission) { double CCMS::Submission, id: "34343434", legal_aid_application: }
       let(:legal_aid_application) { double LegalAidApplication }
       let(:entity_name) { :bank_acct }
-      let(:yaml_keys) { YAML.load_file(Rails.root.join("spec/fixtures/files/ccms_keys/standard_ccms_keys.yml")) }
+      let(:yaml_keys) { YAML.load_file(Rails.root.join("spec/fixtures/files/ccms_keys/standard_keys.yml")) }
       let(:xml) { double Nokogiri::XML::Builder }
       let(:options) { {} }
 

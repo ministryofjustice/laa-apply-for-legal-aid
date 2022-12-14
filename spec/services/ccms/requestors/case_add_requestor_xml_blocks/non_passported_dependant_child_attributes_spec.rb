@@ -141,7 +141,7 @@ module CCMS
                   expect(blocks.size).to eq dependants.adult_relative.size
                 end
 
-                it "hardcodes the value to false" do
+                it "hard-codes the value to false" do
                   blocks.each do |block|
                     expect(block).to have_boolean_response false
                   end

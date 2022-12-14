@@ -21,10 +21,6 @@ module CCMS
         not_nil_or_zero? @legal_aid_application.savings_amount.plc_shares
       end
 
-      def not_nil_or_zero?(value)
-        value.present? && value.nonzero?
-      end
-
       def attribute_configuration
         AttributeConfiguration.new(application_type: :non_passported).config
       end
