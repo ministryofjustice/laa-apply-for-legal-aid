@@ -5,7 +5,7 @@ http_interactions:
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
     body:
       encoding: UTF-8
-      string: '{"proceeding_type_ccms_code":"SE013","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3}'
+      string: '{"proceeding_type_ccms_code":"SE013","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":3}'
     headers:
       Content-Type:
       - application/json
@@ -21,11 +21,11 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 06 Oct 2022 06:30:06 GMT
+      - Thu, 15 Dec 2022 08:22:09 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '2345'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -43,18 +43,18 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"fd5e1d6f723a1fdb3fb359ad43b4c7bb"
+      - W/"fe7d4a007b02ddd1dd487818f5968325"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1f2ce827e0f26a7e6a8317138bb3dbae
+      - 57e2c168caf82c38de6e7211f281d7ff
       X-Runtime:
-      - '0.031896'
+      - '0.075220'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE013","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE013","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
         Representation","stage":8,"scope_limitations":[{"code":"FM007","meaning":"Blood
         Tests or DNA Tests","description":"Limited to all steps up to and including
         the obtaining of blood tests or DNA tests and thereafter a solicitor''s report.","additional_params":[]},{"code":"FM019","meaning":"Exchange
@@ -79,5 +79,5 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}]}}'
-  recorded_at: Thu, 06 Oct 2022 06:30:06 GMT
+  recorded_at: Thu, 15 Dec 2022 08:22:09 GMT
 recorded_with: VCR 6.1.0

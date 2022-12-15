@@ -80,18 +80,39 @@ RSpec.describe "EmergencyScopeLimitationsController", :vcr do
       end
 
       context "when the form is invalid" do
-        let(:params) do
-          {
-            proceeding: {
-              scope_codes: [""],
-              meaning_FM007: "Blood Tests or DNA Tests",
-              description_FM007: "Limited to all steps up to and including the obtaining of blood tests or DNA tests and thereafter a solicitor's report.",
-            },
-          }
+        context "when no scope limitation is selected" do
+          let(:params) do
+            {
+              proceeding: {
+                scope_codes: [""],
+                meaning_FM007: "Blood Tests or DNA Tests",
+                description_FM007: "Limited to all steps up to and including the obtaining of blood tests or DNA tests and thereafter a solicitor's report.",
+              },
+            }
+          end
+
+          it "shows an error" do
+            expect(response.body).to include(I18n.t("providers.proceeding_loop.select_a_scope_limitation_error"))
+          end
         end
 
-        it "shows an error if no scope limitation is selected" do
-          expect(response.body).to include(I18n.t("providers.proceeding_loop.select_a_scope_limitation_error"))
+        context "when a mandatory hearing date is missing" do
+          let(:params) do
+            {
+              proceeding: {
+                scope_codes: %w[CV027],
+                meaning_CV027: "Hearing/Adjournment",
+                description_CV027: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                hearing_date_CV027_1i: "",
+                hearing_date_CV027_2i: "",
+                hearing_date_CV027_3i: "",
+              },
+            }
+          end
+
+          it "shows an error" do
+            expect(response.body).to include(I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error", scope_limitation: "Hearing/Adjournment"))
+          end
         end
       end
     end

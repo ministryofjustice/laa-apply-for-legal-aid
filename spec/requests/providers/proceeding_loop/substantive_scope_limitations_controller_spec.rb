@@ -79,18 +79,46 @@ RSpec.describe "SubstantiveScopeLimitationsController", :vcr do
         end
 
         context "when the form is invalid" do
-          let(:params) do
-            {
-              proceeding: {
-                scope_codes: [""],
-                meaning_FM007: "Blood Tests or DNA Tests",
-                description_FM007: "Limited to all steps up to and including the obtaining of blood tests or DNA tests and thereafter a solicitor's report.",
-              },
-            }
+          context "when no scope limitation is selected" do
+            let(:params) do
+              {
+                proceeding: {
+                  scope_codes: [""],
+                  meaning_FM007: "Blood Tests or DNA Tests",
+                  description_FM007: "Limited to all steps up to and including the obtaining of blood tests or DNA tests and thereafter a solicitor's report.",
+                },
+              }
+            end
+
+            it "shows an error if no scope limitation is selected" do
+              expect(response.body).to include(I18n.t("providers.proceeding_loop.select_a_scope_limitation_error"))
+            end
           end
 
-          it "shows an error if no scope limitation is selected" do
-            expect(response.body).to include(I18n.t("providers.proceeding_loop.select_a_scope_limitation_error"))
+          context "when a mandatory limitation note is missing" do
+            let(:application) do
+              create(:legal_aid_application,
+                     :with_proceedings,
+                     :with_delegated_functions_on_proceedings,
+                     explicit_proceedings: %i[se013a],
+                     df_options: { SE013A: [10.days.ago, 10.days.ago] },
+                     substantive_application_deadline_on: 10.days.from_now)
+            end
+
+            let(:params) do
+              {
+                proceeding: {
+                  scope_codes: %w[APL13],
+                  meaning_APL13: "High Court-limited steps (resp)",
+                  description_APL13: "Limited to representation as respondent on an appeal to the High Court, limited to",
+                  limitation_note_APL13: "",
+                },
+              }
+            end
+
+            it "shows an error" do
+              expect(response.body).to include(I18n.t("providers.proceeding_loop.enter_limitation_note_error", scope_limitation: "High Court-limited steps (resp)"))
+            end
           end
         end
       end
