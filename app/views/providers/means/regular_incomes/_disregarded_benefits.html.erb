@@ -1,6 +1,0 @@
-<h2 class="govuk-heading-s"><%= t(".details_title") %></h2>
-<p class="govuk-body"><%= t('.details_text') %></p>
-<% form.disregarded_benefit_categories.each do |category| %>
-  <h2 class="govuk-heading-s"><%= t(".#{category}.heading") %></h2>
-  <%= list_from_translation_path(".means.regular_incomes.disregarded_benefits.#{category}", params: {'no_bullet': true}) %>
-<% end %>
