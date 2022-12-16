@@ -7,8 +7,6 @@ global_means:
     br100_meaning: means required
     response_type: boolean
     user_defined: false
-  # TODO: could hardcode as false (manual review required) or true (manual review not required?)
-  # Note that #bypass_manual_review_in_ccms? should return true (manual review not required?) for NMT
   APPLY_CASE_MEANS_REVIEW:
     :value: '#bypass_manual_review_in_ccms?'
     :br100_meaning: 'Manual review required by case worker (FALSE means manual review required)'
@@ -91,25 +89,14 @@ global_means:
   OUT_GB_INFER_C_26WP3_218A:
     generate_block?: false
   OUT_GB_INFER_C_34WP3_3A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Disposable income- Total deductions'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   APP_AMEND_TYPE:
     value: "#app_amendment_type"
     br100_meaning: 'App: The application or amendment type'
     response_type: text
     user_defined: true
   GB_DECL_T_38WP3_14A:
-    generate_block?: true
-    value: " ? Legal aid is not always free.  I may have to pay a contribution towards
-      my legal costs from my income and/or capital.  My legal aid may be withdrawn
-      if I fall in arrears of payment and I will be responsible for the outstanding
-      payments."
-    br100_meaning: The means declaration 1a paragraph 14
-    response_type: text
-    user_defined: false
+    generate_block?: false
   CATEGORY_OF_LAW:
     value: '#lead_proceeding_category_of_law_code'
     br100_meaning: the category of law
@@ -121,11 +108,7 @@ global_means:
     response_type: boolean
     user_defined: true
   OUT_GB_INFER_C_25WP3_167A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Client Redundancy'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_19WP2_106A:
     generate_block?: false
   OUT_GB_INFER_C_21WP4_1A:
@@ -219,10 +202,6 @@ global_means:
     user_defined: false
   GB_INPUT_B_8WP2_1A:
     generate_block?: false
-    value: '#applicant_is_signatory_to_other_person_accounts?'
-    br100_meaning: '3rd party accounts: The client is signatory to bank accounts?'
-    response_type: boolean
-    user_defined: true
   GB_PROC_B_41WP3_20A:
     value: false
     br100_meaning: 'R - Rent: Documents confirming amount paid'
@@ -252,10 +231,6 @@ global_means:
     user_defined: false
   GB_INPUT_B_16WP2_7A:
     generate_block?: false
-    value: '#applicant_has_interest_in_a_trust?'
-    br100_meaning: 'Trust: The client has an interest in a trust?'
-    response_type: boolean
-    user_defined: true
   GB_PROC_B_39WP3_41A:
     value: false
     br100_meaning: 'R - Other savings: Documents confirming nature and value'
@@ -691,10 +666,7 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_5WP1_18A:
-    value: '#application_applicant_receives_benefit?'
-    br100_meaning: 'Client: The client is receiving a passported benefit?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_GB_INFER_C_30WP4_1A:
     generate_block?: false
     value: 0.0
@@ -969,10 +941,6 @@ global_means:
     generate_block?: false
   GB_INPUT_B_7WP2_1A:
     generate_block?: false
-    value: '#applicant_has_other_savings?'
-    br100_meaning: 'Bank accounts: The client has bank accounts?'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_4WP2_1A:
     generate_block?: false
     value: '#applicant_owns_additional_property?'
@@ -1452,11 +1420,7 @@ global_means:
     response_type: currency
     user_defined: true
   OUT_GB_INFER_C_31WP3_6A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: Rent- Total Housing Benefit received'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_DECL_B_38WP3_11A:
     value: '#application_applicant_receives_benefit?'
     br100_meaning: The application is passported
@@ -1475,11 +1439,7 @@ global_means:
   GB_INPUT_B_13WP2_7A:
     generate_block?: false
   OUT_GB_INFER_C_23WP3_161A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Dividends'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_PROC_B_40WP3_53A:
     value: false
     br100_meaning: 'R - Money due: Copy of loan agreements'
@@ -1522,11 +1482,7 @@ global_means:
     response_type: boolean
     user_defined: true
   OUT_GB_INFER_C_23WP3_160A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Interest on savings'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_13WP3_5A:
     generate_block?: false
   GB_PROC_B_40WP3_40A:
@@ -1541,17 +1497,9 @@ global_means:
     response_type: boolean
     user_defined: false
   OUT_GB_INPUT_C_20WP3_371A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Client Benefits'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_26WP3_197A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Client gross income- Restraint order income'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_PROC_B_41WP3_8A:
     value: false
     br100_meaning: 'R - Client Other Income: Documents confirming amount received'
@@ -1644,11 +1592,7 @@ global_means:
   GB_INPUT_B_39WP3_52A:
     generate_block?: false
   OUT_GB_INFER_C_34WP3_9A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Total Gross Income Assessed'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_6WP3_240A:
     generate_block?: false
   LAR_PROC_B_40WP3_31A:
@@ -1657,20 +1601,11 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_DECL_T_38WP3_5A:
-    generate_block?: true
-    value: " ? The Legal Aid Agency may take away my legal aid so I will have to
-      pay back all my legal fees."
-    br100_meaning: The means declaration 1a paragraph 5
-    response_type: text
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_21WP2_104A:
     generate_block?: false
   SA_SCREEN10_1WP1_NONMEANS:
-    generate_block?: true
-    value: true
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: false
+    generate_block?: false
   LAR_PROC_B_39WP3_54A:
     value: false
     br100_meaning: 'R - Financial Help: Documents confirming amount received'
@@ -1683,25 +1618,14 @@ global_means:
   OUT_GB_INFER_C_33WP2_100A:
     generate_block?: false
   OUT_GB_INFER_C_31WP3_14A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: Housing costs- Total due to be paid'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   LAR_PROC_B_40WP3_30A:
     value: false
     br100_meaning: 'R - Self. Emp.:  Copy of financial accounts or balance sheet'
     response_type: boolean
     user_defined: false
   GB_DECL_T_38WP3_6A:
-    generate_block?: true
-    value: " - I agree to the Legal Aid Agency checking these facts with others such
-      as credit reference agencies, the Department of Work and Pensions and HM Revenue
-      and Customs and I authorise those people/organisations to provide the information
-      they are asked for."
-    br100_meaning: The means declaration 1a paragraph 6
-    response_type: text
-    user_defined: false
+    generate_block?: false
   USER_TYPE:
     value: EXTERNAL
     br100_meaning: the user type
@@ -1716,11 +1640,7 @@ global_means:
   GB_INPUT_B_8WP3_308A:
     generate_block?: false
   OUT_GB_INFER_C_22WP3_150A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Client Maintenance'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_13WP3_1A:
     generate_block?: false
   USER_PROVIDER_FIRM_ID:
@@ -1735,20 +1655,11 @@ global_means:
   GB_INPUT_B_3WP2_20A:
     generate_block?: false
   OUT_GB_INFER_C_23WP3_159A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Student Income'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   CLIENT_ELIGIBILITY:
     generate_block?: false
   GB_DECL_T_38WP3_7A:
-    generate_block?: true
-    value: 'I understand that I must co-operate fully and immediately with any enquiry
-      into my financial circumstances. I will:'
-    br100_meaning: The means declaration 1a paragraph 7
-    response_type: text
-    user_defined: false
+    generate_block?: false
   GB_PROC_B_41WP3_17A:
     value: false
     br100_meaning: 'R - Client Crim legal aid: Documents confirming contribution
@@ -1817,48 +1728,23 @@ global_means:
   OUT_GB_INFER_C_14WP4_19A:
     generate_block?: false
   GB_DECL_T_38WP3_16A:
-    generate_block?: true
-    value: " ? The more work my solicitor does, the more I may have to pay back."
-    br100_meaning: The means declaration 1a paragraph 16
-    response_type: text
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_18WP3_227A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: Client NI- Total contributions paid via all employment
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_38WP2_100A:
     generate_block?: false
   GB_DECL_T_38WP3_9A:
-    generate_block?: true
-    value: " - Tell the Legal Aid Agency immediately if anything I have said here
-      changes."
-    br100_meaning: The means declaration 1a paragraph 9
-    response_type: text
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_31WP3_11A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: B&L- Amount paid per month'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_14WP3_1A:
     generate_block?: false
   GB_INPUT_B_6WP3_232A:
     generate_block?: false
   OUT_GB_INFER_C_26WP3_219A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'RESULT: Gross Income- Total Frozen Income'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_18WP3_226A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: Client PAYE- Total contributions paid via all employment
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   MEANS_EVIDENCE_REQD:
     generate_block?: true
     value: false
@@ -1866,34 +1752,17 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_DECL_T_38WP3_17A:
-    generate_block?: true
-    value: " ? The Legal Aid Agency may register an interest-bearing charge against
-      my property."
-    br100_meaning: The means declaration 1a paragraph 17
-    response_type: text
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_3WP2_10A:
     generate_block?: false
   OUT_GB_INFER_C_31WP3_10A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: B&L- Total'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_12WP3_1A:
     generate_block?: false
   OUT_GB_INFER_C_26WP2_100A:
     generate_block?: false
   GB_DECL_T_38WP3_18A:
-    generate_block?: true
-    value: I understand if false or inaccurate information is provided and fraud
-      is identified, details will be passed to fraud prevention agencies to prevent
-      fraud and money laundering. For further details explaining how the information
-      held by fraud prevention agencies may be used, contact the Counter Fraud and
-      Investigations team on 020 3334 5588.
-    br100_meaning: The means declaration 1a paragraph 18
-    response_type: text
-    user_defined: false
+    generate_block?: false
   GB_INPUT_N_6WP3_231A:
     generate_block?: false
   OUT_GB_INFER_C_33WP2_103A:
@@ -1901,11 +1770,7 @@ global_means:
   GB_INPUT_B_3WP2_25A:
     generate_block?: false
   MEANS_OPA_RELEASE:
-    generate_block?: true
-    value: "18A"
-    br100_meaning: 'OPA Version '
-    response_type: text
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_11WP2_3A:
     generate_block?: false
   FIRST_NAME:
@@ -1929,22 +1794,14 @@ global_means:
     response_type: currency
     user_defined: false
   GB_DECL_T_38WP3_19A:
-    generate_block?: true
-    value: Signed:_______________________________
-    br100_meaning: The means declaration 1a paragraph 19
-    response_type: text
-    user_defined: false
+    generate_block?: false
   MARITIAL_STATUS:
     value: 'UNKNOWN'
     br100_meaning: marital status
     response_type: text
     user_defined: true
   OUT_GB_INFER_C_31WP3_12A:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: 'Int.Result: B&L- Amount paid per month for food etc'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_2WP3_214A:
     generate_block?: false
   GB_INPUT_B_6WP3_241A:
@@ -1973,34 +1830,18 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APP_INCLUDES_IMMIGRATION_PROCS:
-    generate_block?: true
-    value: false
-    br100_meaning: The Application Includes Immigration Proceedings
-    response_type: boolean
-    user_defined: false
+    generate_block?: false
   GB_INFER_T_6WP1_66A:
     generate_block?: false
   COPY_SEPARATE_STATEMENT:
     generate_block?: false
   PUB_AUTH_QUESTION_APPLIES:
-    generate_block?: true
-    value: false
-    br100_meaning: The Actions Against Public Authorities Question Is Appropriate
-    response_type: boolean
-    user_defined: false
+    generate_block?: false
+  # CHECK: is this relevant to non-means-tested applications
   APP_POTENTIAL_NON_MERITS:
-    generate_block?: true
-    value: false
-    br100_meaning: The Application Is Potentially Non-Means Non-Merits Tested Special
-      Children Act
-    response_type: boolean
-    user_defined: false
+    generate_block?: false
   DEC_CLIENT_TEXT_PARA6A:
-    generate_block?: true
-    value: 'I understand:'
-    br100_meaning: 'Dec: The Client''s Declaration Paragraph 6'
-    response_type: text
-    user_defined: false
+    generate_block?: false
   EVIDENCE_ICACU_LETTER:
     value: false
     br100_meaning: A copy of letter from international child abduction
@@ -2013,11 +1854,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   MERITS_SUBMISSION_PAGE:
-    generate_block?: true
-    value: true
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   DECLARATION_WILL_BE_SIGNED:
     value: true
     br100_meaning: 'Dec: Relevant Declaration Will Be Signed Prior To Submission
@@ -2025,11 +1862,7 @@ global_merits:
     response_type: boolean
     user_defined: true
   LEGAL_HELP_COSTS_TO_DATE:
-    generate_block?: true
-    value: 0.0
-    br100_meaning: The legal help costs to date
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   COURT_ATTEND_IN_LAST_12_MONTHS:
     value: false
     br100_meaning: 'Court: Client Has Attended Court On Any Family Matter Within
@@ -2057,13 +1890,9 @@ global_merits:
   ECFDV_23A:
     generate_block?: false
   FIRST_TIER_TRIBUNAL_IMM_ASY:
-    generate_block?: true
+    generate_block?: false
   CAFCASS_EXPT_RPT_RECEIVED:
-    generate_block?: true
-    value: false
-    br100_meaning: 'Court: A  CAFCASS Or Other Expert Report Has Been Received'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   DEC_CLIENT_TEXT_PARA15A:
     generate_block?: false
     value: Date:___/___/___
@@ -2106,6 +1935,7 @@ global_merits:
     response_type: text
     user_defined: true
   URGENT_HEARING_DATE:
+    generate_block?: false
     value: '#application_calculation_date'
     br100_meaning: 'Emg: The Date Of The Urgent Hearing'
     response_type: date
