@@ -1438,7 +1438,7 @@ en:
       show:
         page_title: Enter your client's email address
         label: Email address
-        hint: We'll use this to send your client a link to the service.+
+        hint: We'll use this to send your client a link to the service.
     proceeding_loop:
       single_proceeding: Proceeding 1
       multi_proceeding: Proceeding %{position} of %{total}
