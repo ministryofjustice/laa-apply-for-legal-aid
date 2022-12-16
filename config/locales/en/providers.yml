@@ -905,9 +905,9 @@ en:
           field_set_header: What is the outstanding mortgage on your client's home?
       restrictions:
         show:
-          h1-heading: Is your client prohibited from selling or borrowing against their assets?
-          restrictions_details: Tell us which assets they cannot sell or borrow against, and why
-          for_example: "For example, because:"
+          h1-heading: Is there anything else you need to tell us about your client’s assets?
+          restrictions_details: Tell us which government Cost of Living Payments should be disregarded, or which assets they cannot sell or borrow against, and why.
+          for_example: "For example, if their assets include government Cost of Living Payments that should be disregarded, or they are prohibited from selling or borrowing against their assets because:"
           examples:
             list: |
               they're bankrupt
