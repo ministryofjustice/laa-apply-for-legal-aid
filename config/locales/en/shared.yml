@@ -136,7 +136,17 @@ en:
           - "%{capital_contribution} from their disposable capital"
         line_2: Your client is ineligible for Section 8 proceedings.
         line_3: You still need to provide details of the case before we can grant legal aid.
-
+    cost_of_living:
+      header: Government Cost of Living Payments
+      text: Government Cost of Living Payments are disregarded from the financial eligibility calculation, for example
+      list:
+        - Pensioner Cost of Living Payment
+        - Cost of Living Payment
+        - Disability Cost of Living Payment
+        - Household support fund
+        - Council tax rebate
+        - Energy Bills Support Scheme (EBSS)
+        - Payments for those who are not served by mains gas
     means_report:
       item:
         deductions:
