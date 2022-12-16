@@ -10,19 +10,9 @@ module Providers
         pension
       ].freeze
 
-      DISREGARDED_BENEFIT_CATEGORIES = %w[
-        carer_and_disability
-        low_income
-        other
-      ].freeze
-
       INCOME_TYPES.each do |income_type|
         attr_accessor "#{income_type}_amount".to_sym,
                       "#{income_type}_frequency".to_sym
-      end
-
-      def disregarded_benefit_categories
-        DISREGARDED_BENEFIT_CATEGORIES
       end
 
     private
