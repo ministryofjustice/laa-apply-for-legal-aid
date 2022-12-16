@@ -1,0 +1,5 @@
+<%= govuk_details(summary_text: t('.title')) do %>
+  <h2 class="govuk-heading-s"><%= t("shared.cost_of_living.header") %></h2>
+  <%= render 'shared/means/cost_of_living_section' %>
+  <%= render 'shared/means/disregarded_benefits_section' %>
+<% end %>
