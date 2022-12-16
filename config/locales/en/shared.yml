@@ -372,7 +372,7 @@ en:
           question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
         providers:
           heading: Restrictions on your client's assets
-          question: Is your client prohibited from selling or borrowing against their assets? 
+          question: Is there anything else you need to tell us about your client’s assets?
       vehicles:
         providers:
           heading: Vehicles

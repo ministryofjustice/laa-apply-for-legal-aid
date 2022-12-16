@@ -71,7 +71,7 @@ Feature: Check pending employment
     Then I should be on a page showing "Which assets does your client have?"
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
+    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
 
     When I choose "No"
     And I click 'Save and continue'

@@ -13,7 +13,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I should be on a page showing "Which assets does your client have?"
     Then I check "My client has none of these assets"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets"
+    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
     Then I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"

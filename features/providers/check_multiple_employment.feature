@@ -75,7 +75,7 @@ Feature: Check multiple employment
 
     When I check "My client has none of these assets"
     And I click 'Save and continue'
-    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
+    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
 
     When I choose "No"
     And I click 'Save and continue'

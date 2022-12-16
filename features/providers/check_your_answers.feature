@@ -22,7 +22,7 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -52,7 +52,7 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing "Does your client own their home with anyone else?"
     Then I choose "No, they're the sole owner"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
     Then I choose 'Yes'
     And I fill 'Restrictions details' with "Restrictions include:"
     Then I click 'Save and continue'
@@ -115,7 +115,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -146,7 +146,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -195,7 +195,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'What % share of their home does your client legally own?'
       Then I click 'Save and continue'
-      Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+      Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
@@ -242,7 +242,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to add and remove restrictions via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+      Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
       Then I choose 'Yes'
       Then I fill "Restrictions details" with 'Restraint or freezing order'
       Then I click 'Save and continue'
@@ -250,7 +250,7 @@ Feature: Checking answers backwards and forwards
       And the answer for 'Restrictions' should be 'Yes'
       And the answer for 'Restrictions' should be 'Restraint or freezing order'
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+      Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
       Then I choose 'No'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
