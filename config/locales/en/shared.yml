@@ -147,6 +147,45 @@ en:
         - Council tax rebate
         - Energy Bills Support Scheme (EBSS)
         - Payments for those who are not served by mains gas
+    disregarded_benefits:
+      header: Disregarded benefits
+      text: The following benefits are disregarded from the financial eligibility calculation.
+      carer_disability:
+        heading: Carer and disability benefits
+        list:
+        - Attendance Allowance
+        - Carer's Allowance
+        - Community Care Direct Payments
+        - Constant Attendance Allowance
+        - Disability Living Allowance
+        - Exceptionally Severe Disablement Allowance
+        - Independent Living Fund
+        - Payments on account of benefit
+        - Personal Independence Payments (PIP)
+        - Severe Disablement Allowance
+        - Special Education Needs (SEN) Direct Payment
+        - Welsh Independent Living Grant
+      low_income:
+        heading: Low income benefits
+        list:
+        - Benefit Transfer Advance (Universal Credit)
+        - Budgeting Advance
+        - Council Tax Reduction
+        - Earnings Top-up (ETU)
+        - Housing Benefit
+        - Social Fund Funeral Payment
+        - Social Fund payments
+      other:
+        heading: Other benefits
+        list:
+        - Armed Forces Independence Payment
+        - Foster Carers Allowance
+        - Grenfell Tower Residents' Discretionary Fund
+        - Grenfell Tower fire victims payments
+        - War Pensions Scheme payments
+        - War Widow(er) Pension
+        - Widow's Pension lump sum payments
+        - Windrush Compensation Scheme Payments
     means_report:
       item:
         deductions:
