@@ -6,7 +6,8 @@
 
     <%= form.govuk_check_boxes_fieldset :other_assets,
                                         legend: { text: page_title, size: "xl", tag: 'h1'},
-                                        hint: { text: t('generic.select_all_that_apply')} do %>
+                                        hint: { text: t('.hint')} do %>
+      <%= render 'shared/means/cost_of_living_details' %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#other-assets-declaration-none-selected-true-field">
           <%= render partial: '/shared/forms/revealing_checkbox/attribute',

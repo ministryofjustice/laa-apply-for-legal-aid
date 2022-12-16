@@ -892,6 +892,7 @@ en:
       other_assets:
         show:
           h1-heading: Which assets does your client have?
+          hint: Select all that apply. Do not include any government Cost of Living Payments owed to your client.
           none_of_these: My client has none of these assets
         second_home_conditional_checkbox:
           check_box_second_home: Second property or holiday home

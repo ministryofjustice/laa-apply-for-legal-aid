@@ -547,6 +547,7 @@ en:
                 trust_value: Enter the estimated total value
                 hint:
                   check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
+                  check_box_money_owed_value: Do not include any government Cost of Living Payments owed to your client.
       shared_ownership_form:
         friend_family_member_or_other_individual: Yes, a friend, family member or other individual
         housing_assocation_or_landlord: Yes, a housing association or landlord
