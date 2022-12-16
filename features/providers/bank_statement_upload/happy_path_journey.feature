@@ -22,12 +22,13 @@ Feature: Bank statement upload journey happy path
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
-    And I should see govuk-details 'Disregarded benefits'
+    And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
     And the page is accessible
 
-    When I open the section 'Disregarded benefits'
+    When I open the section 'Government Cost of Living Payments and disregarded benefits'
     Then the following sections should exist:
       | tag | section |
+      | h2  | Government Cost of Living Payments |
       | h2  | Carer and disability benefits |
       | h2  | Low income benefits |
       | h2  | Other benefits |
