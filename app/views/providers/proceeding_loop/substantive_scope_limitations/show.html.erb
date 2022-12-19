@@ -19,7 +19,7 @@
               <% if ap["name"] == "hearing_date" %>
                 <%= render partial: "shared/scope_limitations/hearing_date", locals: { form: form, field_name: :"hearing_date_#{scope["code"]}" } %>
               <% elsif ap["name"] == "limitation_note" %>
-                <%= render partial: "shared/scope_limitations/limitation_note", locals: { form: form, field_name: :"limitation_note_#{scope["code"]}" } %>
+                <%= render partial: "shared/scope_limitations/limitation_note", locals: { form: form, scope: scope } %>
               <% end %>
             <% end %>
           <% end %>
