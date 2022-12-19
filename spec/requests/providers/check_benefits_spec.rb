@@ -217,22 +217,9 @@ RSpec.describe Providers::CheckBenefitsController do
     context "with application passported" do
       let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider:) }
 
-      context "with permissions passported" do
-        let(:provider) { create(:provider) }
-
-        it "allows us to continue" do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include("DWP records show that your client receives a passporting benefit")
-        end
-      end
-
-      context "with no permissions" do
-        let(:provider) { create(:provider, :with_no_permissions) }
-
-        it "allows us to continue" do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include("DWP records show that your client receives a passporting benefit")
-        end
+      it "displays positive DWP result content" do
+        get "/providers/applications/#{application.id}/check_benefits"
+        expect(response.body).to include("DWP records show that your client receives a passporting benefit")
       end
     end
   end

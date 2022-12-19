@@ -38,11 +38,6 @@ RSpec.describe Provider do
       it "returns false" do
         expect(provider.user_permissions).to be_empty
       end
-
-      it "notifies sentry" do
-        expect(AlertManager).to receive(:capture_message).with("Provider Firm has no permissions with firm id: #{firm.id}")
-        provider.user_permissions
-      end
     end
   end
 
