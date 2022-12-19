@@ -4,8 +4,15 @@ module Admin
   RSpec.describe FirmsController do
     let(:admin_user) { create(:admin_user) }
     let!(:firms) { create_list(:firm, 3) }
+    let(:permission) { create(:permission) }
 
-    before { sign_in admin_user }
+    before do
+      sign_in admin_user
+      firms.each do |firm|
+        firm.permissions << permission
+        firm.save!
+      end
+    end
 
     describe "GET admin/firms" do
       before { get admin_firms_path }

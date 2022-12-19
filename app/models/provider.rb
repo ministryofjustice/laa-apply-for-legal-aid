@@ -33,16 +33,7 @@ class Provider < ApplicationRecord
   end
 
   def firm_permissions
-    AlertManager.capture_message("Provider Firm has no permissions with firm id: #{firm.id}") if firm&.permissions&.empty?
     firm.nil? ? [] : firm.permissions
-  end
-
-  def passported_permissions?
-    user_permissions.map(&:role).include?("application.passported.*")
-  end
-
-  def non_passported_permissions?
-    user_permissions.map(&:role).include?("application.non_passported.*")
   end
 
   def bank_statement_upload_permissions?

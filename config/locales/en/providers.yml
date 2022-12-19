@@ -156,7 +156,7 @@ en:
               details of children involved
               details of any attempts to settle the matter
     check_benefits:
-      check_benefits_result:
+      index:
         details_used: "We used the following details to check your client's benefits status with the DWP:"
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
@@ -169,27 +169,6 @@ en:
           title: "DWP records show that your client receives a passporting benefit"
           must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
           provide_details: provide details of the case
-      how_we_checked: &how_we_checked
-        how_we_checked: How we checked your client's benefits status
-        details_used: "We used the following details to check your client's benefits status with the DWP:"
-        change_client_details_prefix: "Change your client's details"
-        change_client_details_suffix: " if you entered them incorrectly."
-      applicant_details:
-        <<: *how_we_checked
-      use_ccms:
-        accept_only: We currently only accept applications for people receiving one of these benefits.
-        apply_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        back_to_applications: Back to my applications
-        benefits:
-          list: |
-            Employment and Support Allowance (ESA)
-            Income Support
-            Jobseeker’s Allowance (JSA)
-            Pension Credit (Guarantee Credit)
-            Universal Credit
-        title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
-        head_title: You need to use CCMS for this application
-        we_checked: "We checked with the DWP and your client does not receive:"
     identify_types_of_incomes:
       update:
         none_selected: Select if your client receives any types of income

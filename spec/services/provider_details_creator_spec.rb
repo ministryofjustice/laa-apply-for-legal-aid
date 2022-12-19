@@ -24,25 +24,6 @@ RSpec.describe ProviderDetailsCreator do
         )
       end
 
-      it "adds non-passported permissions to the firm" do
-        ccms_firm = FirmStruct.new(1, "Test Firm")
-        ccms_office = OfficeStruct.new(1, "6D424Y")
-        provider = create(:provider, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
-
-        described_class.call(provider)
-
-        firm_roles = provider.firm.permissions.collect(&:role)
-        expect(firm_roles).to contain_exactly(
-          "application.passported.*",
-          "application.non_passported.*",
-        )
-      end
-
       it "creates the offices" do
         ccms_firm = FirmStruct.new(1, "Test Firm")
         ccms_office1 = OfficeStruct.new(1, "6D424Y")
