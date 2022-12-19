@@ -1,4 +1,8 @@
 class PassportedStateMachine < BaseStateMachine
+  def case_add_requestor
+    CCMS::Requestors::CaseAddRequestor
+  end
+
   aasm do
     state :provider_entering_means
     state :checking_passported_answers

@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe AddCaseService, :ccms do
-      subject { described_class.new(submission) }
+      subject(:instance) { described_class.new(submission) }
 
       let(:legal_aid_application) do
         create(:legal_aid_application,
@@ -12,17 +12,21 @@ module CCMS
                :with_domestic_abuse_summary,
                :with_chances_of_success,
                :with_everything_and_address,
-               :with_cfe_v3_result,
+               :with_passported_state_machine,
+               :with_cfe_v5_result,
                :with_positive_benefit_check_result,
                explicit_proceedings: [:da001],
                set_lead_proceeding: :da001,
                office_id: office.id,
                populate_vehicle: true)
       end
+
       let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
+
       let!(:chances_of_success) do
         create(:chances_of_success, :with_optional_text, proceeding:)
       end
+
       let(:applicant) { legal_aid_application.applicant }
       let(:office) { create(:office) }
       let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:) }
@@ -37,29 +41,74 @@ module CCMS
       end
 
       before do
-        # stub a post request - any body, any headers
         stub_request(:post, endpoint).to_return(body: response_body, status: 200)
-
-        # stub the transaction request id that we expect in the response
         allow_any_instance_of(CCMS::Requestors::CaseAddRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
-      context "when the operation is successful" do
+      context "with passported application" do
+        it "uses instance of CCMS::Requestors::CaseAddRequestor" do
+          allow(CCMS::Requestors::CaseAddRequestor).to receive(:new).and_call_original
+          instance.call
+          expect(CCMS::Requestors::CaseAddRequestor).to have_received(:new).once
+        end
+      end
+
+      context "with non-passported application" do
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_proceedings,
+                 :with_chances_of_success,
+                 :with_everything_and_address,
+                 :with_non_passported_state_machine,
+                 :with_cfe_v5_result,
+                 office_id: office.id)
+        end
+
+        it "uses instance of CCMS::Requestors::NonPassportedCaseAddRequestor" do
+          allow(CCMS::Requestors::NonPassportedCaseAddRequestor).to receive(:new).and_call_original
+          instance.call
+          expect(CCMS::Requestors::NonPassportedCaseAddRequestor).to have_received(:new).once
+        end
+      end
+
+      context "with non-means-tested application" do
+        before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_under_18_applicant,
+                 :with_proceedings,
+                 :with_skipped_benefit_check_result,
+                 :with_non_means_tested_state_machine,
+                 :with_cfe_empty_result,
+                 :with_opponent,
+                 :with_chances_of_success,
+                 office_id: office.id)
+        end
+
+        it "uses instance of CCMS::Requestors::NonMeansTestedCaseAddRequestor" do
+          allow(CCMS::Requestors::NonMeansTestedCaseAddRequestor).to receive(:new).and_call_original
+          instance.call
+          expect(CCMS::Requestors::NonMeansTestedCaseAddRequestor).to have_received(:new).once
+        end
+      end
+
+      context "when operation successful" do
         it "sets state to case_submitted" do
-          subject.call
+          instance.call
           expect(submission.aasm_state).to eq "case_submitted"
         end
 
         it "records the transaction id of the request" do
-          subject.call
+          instance.call
           expect(submission.case_add_transaction_id).to eq "20190301030405123456"
         end
 
-        context "and there are documents to upload" do
+        context "with documents to upload" do
           let(:submission) { create(:submission, :document_ids_obtained, legal_aid_application:) }
 
           it "writes a history record" do
-            expect { subject.call }.to change(SubmissionHistory, :count).by(1)
+            expect { instance.call }.to change(SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "document_ids_obtained"
             expect(history.to_state).to eq "case_submitted"
             expect(history.success).to be true
@@ -67,7 +116,7 @@ module CCMS
           end
 
           it "stores the reqeust body in the submission history record" do
-            subject.call
+            instance.call
             expect(history.request).to be_soap_envelope_with(
               command: "casebim:CaseAddRQ",
               transaction_id: "20190301030405123456",
@@ -79,14 +128,14 @@ module CCMS
           end
 
           it "stores the response body in the submission history record" do
-            subject.call
+            instance.call
             expect(history.response).to eq response_body
           end
         end
 
-        context "and there are no documents to upload" do
+        context "without documents to upload" do
           it "writes a history record" do
-            expect { subject.call }.to change(SubmissionHistory, :count).by(1)
+            expect { instance.call }.to change(SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "applicant_ref_obtained"
             expect(history.to_state).to eq "case_submitted"
             expect(history.success).to be true
@@ -94,7 +143,7 @@ module CCMS
           end
 
           it "stores the request body in the submission history record" do
-            subject.call
+            instance.call
             expect(history.request).to be_soap_envelope_with(
               command: "casebim:CaseAddRQ",
               transaction_id: "20190301030405123456",
@@ -105,20 +154,20 @@ module CCMS
           end
 
           it "writes the response body to the history record" do
-            subject.call
+            instance.call
             expect(history.response).to eq response_body
           end
         end
       end
 
-      context "when the operation is unsuccessful" do
-        context "and an error is raised when adding a case" do
+      context "when operation encounters error" do
+        context "with error while adding a case" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do
             fake_error = error.sample
             expect_any_instance_of(CCMS::Requestors::CaseAddRequestor).to receive(:call).and_raise(fake_error, "oops")
-            expect { subject.call }.to raise_error(fake_error, "oops")
+            expect { instance.call }.to raise_error(fake_error, "oops")
           end
 
           it "does not change the state" do
@@ -143,11 +192,11 @@ module CCMS
           end
         end
 
-        context "when there is an unsuccessful response from CCMS adding a case" do
+        context "when an unsuccessful response is received from CCMS" do
           let(:response_body) { ccms_data_from_file "case_add_response_failure.xml" }
 
           before do
-            expect { subject.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddCaseService failed with unsuccessful response for submission: #{submission.id}")
+            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddCaseService failed with unsuccessful response for submission: #{submission.id}")
           end
 
           it "does not change state" do

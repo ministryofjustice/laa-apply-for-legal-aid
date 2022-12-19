@@ -1,4 +1,8 @@
 class NonPassportedStateMachine < BaseStateMachine
+  def case_add_requestor
+    CCMS::Requestors::NonPassportedCaseAddRequestor
+  end
+
   aasm do
     state :provider_confirming_applicant_eligibility
     state :awaiting_applicant

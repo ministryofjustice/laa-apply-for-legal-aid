@@ -1,4 +1,8 @@
 class NonMeansTestedStateMachine < BaseStateMachine
+  def case_add_requestor
+    CCMS::Requestors::NonMeansTestedCaseAddRequestor
+  end
+
   # The following methods override events that are not applicable for a
   # non-means-tested journey but which, nonetheless, must be responded to when calls
   # are made to legal_aid_application#checking_answers? or refered to by other "helper"

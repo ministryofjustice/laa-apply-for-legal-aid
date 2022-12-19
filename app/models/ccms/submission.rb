@@ -26,6 +26,10 @@ module CCMS
       case_created: CCMS::Submitters::UploadDocumentsService,
     }.freeze
 
+    def case_add_requestor(options = {})
+      legal_aid_application.case_add_requestor.new(self, options)
+    end
+
     def process!(options = {})
       service = STATE_SERVICES[aasm_state.to_sym]
       raise CCMSError, "Submission #{id} - Unknown state: #{aasm_state}" if service.nil?
