@@ -288,7 +288,6 @@ RSpec/ContextWording:
     - 'spec/services/provider_after_login_service_spec.rb'
     - 'spec/services/provider_details_creator_spec.rb'
     - 'spec/services/provider_details_retriever_spec.rb'
-    - 'spec/services/reference_number_creator_spec.rb'
     - 'spec/services/reports/bank_transactions/bank_transaction_report_creator_spec.rb'
     - 'spec/services/reports/means_report_creator_spec.rb'
     - 'spec/services/reports/merits_report_creator_spec.rb'
@@ -578,7 +577,6 @@ RSpec/LetSetup:
     - 'spec/services/hmrc/parsed_response/persistor_spec.rb'
     - 'spec/services/populators/transaction_type_populator_spec.rb'
     - 'spec/services/provider_details_creator_spec.rb'
-    - 'spec/services/reference_number_creator_spec.rb'
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
     - 'spec/services/true_layer/importers/import_provider_service_spec.rb'
@@ -802,7 +800,6 @@ RSpec/NamedSubject:
     - 'spec/services/provider_details_creator_spec.rb'
     - 'spec/services/provider_details_retriever_spec.rb'
     - 'spec/services/provider_email_service_spec.rb'
-    - 'spec/services/reference_number_creator_spec.rb'
     - 'spec/services/reports/bank_transactions/bank_transaction_report_creator_spec.rb'
     - 'spec/services/reports/means_report_creator_spec.rb'
     - 'spec/services/reports/merits_report_creator_spec.rb'
@@ -1019,7 +1016,6 @@ RSpec/SubjectStub:
     - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/submitters/check_case_status_service_spec.rb'
     - 'spec/services/citizen_email_service_spec.rb'
-    - 'spec/services/reference_number_creator_spec.rb'
 
 # Offense count: 3
 # Configuration parameters: IgnoredPatterns.
@@ -1223,4 +1219,3 @@ Layout/LineContinuationLeadingSpace:
   Exclude:
     - 'spec/requests/providers/capital_assessment_results_spec.rb'
     - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
-

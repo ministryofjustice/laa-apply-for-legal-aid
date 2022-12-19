@@ -63,7 +63,6 @@ RSpec.describe LegalAidApplication do
     let!(:application2) { create(:legal_aid_application, applicant: jacob) }
     let(:ccms_submission) { create(:submission, case_ccms_reference: "300000000009") }
     let!(:application3) { create(:legal_aid_application, ccms_submission:) }
-    let(:non_alphanum) { /[^0-9a-zA-Z]/.random_example }
 
     it "matches application_ref" do
       [
@@ -71,7 +70,7 @@ RSpec.describe LegalAidApplication do
         "L123ABC",
         "l123abc",
         "L/123/ABC",
-        "L123#{non_alphanum}ABC",
+        "L123&ABC",
       ].each do |term|
         expect(described_class.search(term)).to include(application1), term
       end
@@ -87,7 +86,7 @@ RSpec.describe LegalAidApplication do
         "smog",
         "cobree",
         "sMOg",
-        "jac#{non_alphanum}ob",
+        "jac&ob",
       ].each do |term|
         expect(described_class.search(term)).to include(application2), term
       end
@@ -100,7 +99,7 @@ RSpec.describe LegalAidApplication do
         "0",
         "9",
         "09",
-        "0#{non_alphanum}9",
+        "0&9",
       ].each do |term|
         expect(described_class.search(term)).to include(application3), term
       end
