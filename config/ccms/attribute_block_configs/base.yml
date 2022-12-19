@@ -2048,6 +2048,12 @@ global_means:
     br100_meaning: 'RESULT: Client Land'
     response_type: currency
     user_defined: false
+  SA_SCREEN9_4WP1_CHILDUNDER16NA:
+    generate_block?: false
+    value: false
+    br100_meaning: 'Child: The client appears eligible'
+    response_type: boolean
+    user_defined: false
   SA_SCREEN10_1WP1_NONMEANS:
     generate_block?: false
     value: true

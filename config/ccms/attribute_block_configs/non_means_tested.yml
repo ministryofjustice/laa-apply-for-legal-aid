@@ -1604,6 +1604,12 @@ global_means:
     generate_block?: false
   OUT_GB_INFER_C_21WP2_104A:
     generate_block?: false
+  SA_SCREEN9_4WP1_CHILDUNDER16NA:
+    generate_block?: true
+    value: true
+    br100_meaning: 'Child: The client appears eligible'
+    response_type: boolean
+    user_defined: false
   SA_SCREEN10_1WP1_NONMEANS:
     generate_block?: false
   LAR_PROC_B_39WP3_54A:

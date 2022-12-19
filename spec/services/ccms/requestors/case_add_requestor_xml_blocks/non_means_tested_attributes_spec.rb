@@ -145,6 +145,11 @@ module CCMS
           expect(block).to have_boolean_response(false)
         end
 
+        it "adds SA_SCREEN9_4WP1_CHILDUNDER16NA with hard coded value of true" do
+          block = XmlExtractor.call(xml, :global_means, "SA_SCREEN9_4WP1_CHILDUNDER16NA")
+          expect(block).to have_boolean_response(true)
+        end
+
         it "MEANS_EVIDENCE_PROVIDED is false" do
           block = XmlExtractor.call(xml, :global_means, "MEANS_EVIDENCE_PROVIDED")
           expect(block).to have_boolean_response(false)

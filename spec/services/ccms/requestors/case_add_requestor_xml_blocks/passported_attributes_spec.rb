@@ -799,7 +799,7 @@ module CCMS
         end
 
         context "attributes omitted from payload" do
-          it "does not display the attributes in the payload" do
+          it "omits the following attributes from the payload" do
             omitted_attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
@@ -1916,6 +1916,7 @@ module CCMS
           [:global_means, "PUI_CLIENT_INCOME_CONT"],
           [:global_means, "RB_VERSION_DATE_MEANS"],
           [:global_means, "RB_VERSION_NUMBER_MEANS"],
+          [:global_means, "SA_SCREEN9_4WP1_CHILDUNDER16NA"],
           [:global_means, "SA_SCREEN10_1WP1_NONMEANS"],
           [:global_means, "SA_SCREEN3_17WP2_1CAPASSESS"],
           [:global_merits, "_SYSTEM_PUI_CONTEXT"],
