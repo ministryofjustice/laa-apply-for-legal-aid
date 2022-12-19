@@ -75,7 +75,7 @@ module LegalFramework
     end
 
     def loop_proceedings
-      Setting.enable_mini_loop? ? @lfa_response[:proceedings] : @lfa_response[:proceeding_types]
+      @lfa_response[:proceedings]
     end
   end
 end
