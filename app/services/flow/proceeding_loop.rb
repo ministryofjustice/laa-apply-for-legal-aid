@@ -16,7 +16,6 @@ module Flow
     end
 
     def next_step
-      return :used_multiple_delegated_functions unless Setting.enable_mini_loop?
       return :confirm_delegated_functions_date if date_confirmation_required
       return :delegated_functions if provider_needs_to_amend_date?
       return :limitations if at_end_of_loop?
