@@ -23,10 +23,6 @@ class Setting < ApplicationRecord
     setting.alert_via_sentry
   end
 
-  def self.enable_mini_loop?
-    setting.enable_mini_loop?
-  end
-
   def self.enable_loop?
     setting.enable_loop?
   end

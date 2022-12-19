@@ -40,7 +40,6 @@ en:
           allow_welsh_translation: Allow Welsh translation
           enable_ccms_submission: Allow CCMS submissions
           enable_evidence_upload: Enable the new evidence upload feature
-          enable_mini_loop: Enable mini loop for proceeding types/CIT and DF
           enable_loop: Enable loop for proceeding types/levels of service
           means_test_review_phase_one: Enable changes for MTR Phase 1
         hints:
@@ -51,7 +50,6 @@ en:
           allow_welsh_translation: Select Yes to translate the service into Welsh
           enable_ccms_submission: Yes by default, only set to No if CCMS is being taken offline
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
-          enable_mini_loop: Select Yes to turn on mini loop for proceeding type choices for CIT and DF
           enable_loop: Select Yes to turn on the extended loop for proceeding type choices for levels of service
           means_test_review_phase_one: Select Yes to turn on the Means Test Review Phase One changes
     submitted_applications_reports:

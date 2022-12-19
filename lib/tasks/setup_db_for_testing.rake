@@ -8,7 +8,6 @@ namespace :settings do
                     allow_welsh_translation: false,
                     enable_ccms_submission: true,
                     enable_evidence_upload: false,
-                    enable_mini_loop: false,
                     enable_loop: false)
 
     pp Setting.first
