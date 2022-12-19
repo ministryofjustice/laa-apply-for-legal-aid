@@ -32,7 +32,7 @@ module LegalFramework
             client_offer_of_undertakings: [],
           },
         },
-        proceeding_types: [
+        proceedings: [
           {
             ccms_code: application.proceedings.first.ccms_code,
             tasks: {

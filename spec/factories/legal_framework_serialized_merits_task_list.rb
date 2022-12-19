@@ -17,7 +17,7 @@ FactoryBot.define do
             laspo: [],
           },
         },
-        proceeding_types: [
+        proceedings: [
           {
             ccms_code: "DA001",
             tasks: {
@@ -49,7 +49,7 @@ FactoryBot.define do
               statement_of_case: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -77,7 +77,7 @@ FactoryBot.define do
               laspo: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -116,7 +116,7 @@ FactoryBot.define do
               statement_of_case: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -149,7 +149,7 @@ FactoryBot.define do
               client_offer_of_undertakings: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -179,7 +179,7 @@ FactoryBot.define do
               laspo: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -216,7 +216,7 @@ FactoryBot.define do
               laspo: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -256,7 +256,7 @@ FactoryBot.define do
               laspo: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -293,7 +293,7 @@ FactoryBot.define do
               why_matter_opposed: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {
@@ -327,7 +327,7 @@ FactoryBot.define do
               nature_of_urgency: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA002",
               tasks: {
@@ -354,7 +354,7 @@ FactoryBot.define do
               nature_of_urgency: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA002",
               tasks: {
@@ -388,7 +388,7 @@ FactoryBot.define do
               laspo: [],
             },
           },
-          proceeding_types: [
+          proceedings: [
             {
               ccms_code: "DA001",
               tasks: {

@@ -120,7 +120,7 @@ module LegalFramework
             children_application: [],
           },
         },
-        proceeding_types: [
+        proceedings: [
           {
             ccms_code: application.proceedings.first.ccms_code,
             tasks: {
@@ -145,7 +145,7 @@ module LegalFramework
             new_question_from_lfa: [], # This has been created in LFA but is not yet handled by a controller in Apply
           },
         },
-        proceeding_types: [
+        proceedings: [
           {
             ccms_code: application.proceedings.first.ccms_code,
             tasks: {
