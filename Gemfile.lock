@@ -382,8 +382,11 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.2.8)
-    mail (2.7.1)
+    mail (2.8.0)
       mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
     memoist (0.16.2)
@@ -609,7 +612,7 @@ GEM
       rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    savon (2.13.1)
+    savon (2.14.0)
       akami (~> 1.2)
       builder (>= 2.1.2)
       gyoku (~> 1.2)
@@ -800,7 +803,7 @@ DEPENDENCIES
   rubocop-govuk
   rubocop-performance
   ruby-saml-idp!
-  savon (~> 2.13.1)
+  savon (~> 2.14.0)
   selenium-webdriver
   sentry-rails (>= 4.8.0)
   sentry-ruby
