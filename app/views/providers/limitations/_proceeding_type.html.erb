@@ -9,13 +9,11 @@
                           suffix: proceeding.meaning) %>
   </dd>
 </div>
-<% if Setting.enable_mini_loop? %>
-  <div class="govuk-summary-list__row--no-border">
-    <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
-      <h3 class="govuk-heading-s"><%= t('.client_role') %><span class="govuk-!-font-weight-regular"><%= proceeding.client_involvement_type_description %></span></h3>
-    </dd>
-  </div>
-<% end %>
+<div class="govuk-summary-list__row--no-border">
+  <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
+    <h3 class="govuk-heading-s"><%= t('.client_role') %><span class="govuk-!-font-weight-regular"><%= proceeding.client_involvement_type_description %></span></h3>
+  </dd>
+</div>
 <div class="govuk-summary-list__row">
   <dd class="govuk-summary-list__key">
     <details class="govuk-details" data-module="govuk-details">

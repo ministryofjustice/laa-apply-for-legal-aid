@@ -20,28 +20,11 @@
           legal_aid_application: @legal_aid_application,
           read_only: @read_only
         ) %>
-    <% if Setting.enable_mini_loop? %>
-      <% @legal_aid_application.proceedings.in_order_of_addition.each do |proceeding| %>
-        <%= render(
-              'shared/check_answers/proceeding_details',
-              proceeding: proceeding,
-              read_only: @read_only
-            ) %>
-      <% end %>
-    <% else %>
-      <div class="govuk-grid-row" id="app-check-your-answers__delegated_functions">
-        <div class="govuk-grid-column-two-thirds">
-          <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
-        </div>
-        <div class="govuk-grid-column-one-third">
-          <p><%= link_to_accessible t('.change'), providers_legal_aid_application_used_multiple_delegated_functions_path(@legal_aid_application), class: 'govuk-link govuk-link-right' %></p>
-        </div>
-      </div>
-
+    <% @legal_aid_application.proceedings.in_order_of_addition.each do |proceeding| %>
       <%= render(
-              'shared/check_answers/delegated_functions',
-              legal_aid_application: @legal_aid_application,
-              read_only: @read_only
+            'shared/check_answers/proceeding_details',
+            proceeding: proceeding,
+            read_only: @read_only
           ) %>
     <% end %>
 
