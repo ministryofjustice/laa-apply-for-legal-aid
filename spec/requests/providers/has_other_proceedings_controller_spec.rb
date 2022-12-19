@@ -9,13 +9,11 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
-  let(:mini_loop?) { false }
   let(:permission) { create(:permission, :full_section_8) }
   let(:full_section_8?) { false }
   let(:mark_as_complete) { false }
 
   before do
-    allow(Setting).to receive(:enable_mini_loop?).and_return(mini_loop?)
     if mark_as_complete
       legal_aid_application.proceedings.in_order_of_addition.incomplete.each do |proceeding|
         proceeding.update!(used_delegated_functions: false)
@@ -65,7 +63,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
       it "redirects to the delegated functions page" do
-        expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application, legal_aid_application.proceedings.in_order_of_addition.incomplete.first))
       end
     end
 
@@ -73,23 +71,19 @@ RSpec.describe Providers::HasOtherProceedingsController do
       let(:legal_aid_application) { create(:legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: %i[da001 da002], set_lead_proceeding: true) }
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-      context "when the mini_loop flag is on" do
-        let(:mini_loop?) { true }
+      context "when all proceedings are complete" do
+        let(:mark_as_complete) { true }
 
-        context "when all proceedings are complete" do
-          let(:mark_as_complete) { true }
-
-          it "redirects to limitations" do
-            expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
-          end
+        it "redirects to limitations" do
+          expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
         end
+      end
 
-        context "when there are incomplete proceedings" do
-          let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.incomplete.first }
+      context "when there are incomplete proceedings" do
+        let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.incomplete.first }
 
-          it "redirects to the client involvement type" do
-            expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application, proceeding))
-          end
+        it "redirects to the client involvement type" do
+          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application, proceeding))
         end
       end
 
@@ -106,17 +100,9 @@ RSpec.describe Providers::HasOtherProceedingsController do
         context "when the provider has full section 8 permissions" do
           let(:full_section_8?) { true }
 
-          it "redirects to multiple delegated functions" do
-            expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
-          end
-
-          context "when the mini-loop is on" do
-            let(:mini_loop?) { true }
-
-            it "redirects to the first incomplete proceedings client involvement type page" do
-              proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
-              expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
-            end
+          it "redirects to the first incomplete proceedings client involvement type page" do
+            proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
+            expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
           end
         end
       end
@@ -146,17 +132,9 @@ RSpec.describe Providers::HasOtherProceedingsController do
         context "when the provider has full section 8 permissions" do
           let(:full_section_8?) { true }
 
-          it "redirects to multiple delegated functions" do
-            expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
-          end
-
-          context "when the mini-loop is on" do
-            let(:mini_loop?) { true }
-
-            it "redirects to the first incomplete proceedings client involvement type page" do
-              proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
-              expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
-            end
+          it "redirects to the first incomplete proceedings client involvement type page" do
+            proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
+            expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
           end
         end
       end
@@ -179,17 +157,9 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-      it "redirects to multiple delegated functions" do
-        expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
-      end
-
-      context "when the mini-loop is on" do
-        let(:mini_loop?) { true }
-
-        it "redirects to the first incomplete proceedings client involvement type page" do
-          proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
-          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
-        end
+      it "redirects to the first incomplete proceedings client involvement type page" do
+        proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
+        expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
       end
     end
 

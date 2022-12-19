@@ -6,8 +6,6 @@ RSpec.describe "ClientInvolvementTypeController", :vcr do
   let(:proceeding_id) { application.proceedings.first.id }
   let(:provider) { application.provider }
 
-  before { allow(Setting).to receive(:enable_mini_loop?).and_return(true) } # TODO: Remove when the mini-loop feature flag is removed
-
   describe "GET /providers/applications/:legal_aid_application_id/client_involvement_type/:proceeding_id" do
     subject(:get_cit) { get "/providers/applications/#{application_id}/client_involvement_type/#{proceeding_id}" }
 

@@ -4,7 +4,6 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
-  let(:mini_loop?) { false }
 
   before { login_as provider }
 
