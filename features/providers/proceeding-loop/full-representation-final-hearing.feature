@@ -2,8 +2,7 @@ Feature: Choosing full representation level of service in proceeding loop
 
   @javascript @vcr
   Scenario: When the provider changes the level of service to full representation from the default
-    Given the feature flag for enable_mini_loop is enabled
-    And the feature flag for enable_loop is enabled
+    Given the feature flag for enable_loop is enabled
     And I have started an application and reached the proceedings list
     When I choose 'Yes'
     And I click 'Save and continue'

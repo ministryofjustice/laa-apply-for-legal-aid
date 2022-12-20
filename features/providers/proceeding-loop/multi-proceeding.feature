@@ -2,8 +2,7 @@ Feature: proceeding-loop
 
   @javascript @vcr
   Scenario: When the application has multiple proceedings with delegated functions and I use the back button
-    Given the feature flag for enable_mini_loop is enabled
-    And I have started an application with multiple proceedings
+    Given I have started an application with multiple proceedings
     When I choose 'No'
     And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 2\nInherent jurisdiction high court injunction\nWhat is your client’s role in this proceeding?'
