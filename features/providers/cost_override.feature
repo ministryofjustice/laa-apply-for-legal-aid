@@ -18,10 +18,13 @@ Feature: Emergency cost override
     Then I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
-    When I select 'Non-molestation order'
-    And I enter the 'nonmolestation order used delegated functions on' date of 5 days ago
-    When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'Yes'
+    And I enter the 'delegated functions on' date of 5 days ago
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     And I should see 'Do you want to request a higher emergency cost limit?'
     When I choose 'No'
