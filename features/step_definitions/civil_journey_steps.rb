@@ -197,6 +197,7 @@ Given("I have completed the non-passported means assessment and start the merits
     set_lead_proceeding: :da001,
   )
 
+  create :legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
