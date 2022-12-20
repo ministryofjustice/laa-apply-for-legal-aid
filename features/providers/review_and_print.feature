@@ -9,9 +9,9 @@ Feature: Review and print your application
       | tag | section |
       | h2  | Client details |
       | h2  | What you're applying for |
-      | h2  | Delegated functions |
-      | h2  | Covered under a substantive certificate |
-      | h2  | Covered under a substantive certificate |
+      | h2  | What you're applying for |
+      | h2  | Extend, variation or discharge - Part IV |
+      | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h2  | Emergency cost limit |
       | h3  | Bank statements |
       | h2  | Your client's income |
@@ -33,8 +33,6 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
-      | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
 
     Then the following sections should not exist:
@@ -51,9 +49,9 @@ Feature: Review and print your application
       | tag | section |
       | h2  | Client details |
       | h2  | What you're applying for |
-      | h2  | Delegated functions |
-      | h2  | Covered under a substantive certificate |
-      | h2  | Covered under a substantive certificate |
+      | h2  | What you're applying for |
+      | h2  | Extend, variation or discharge - Part IV |
+      | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h2  | Emergency cost limit |
       | h3  | Bank statements |
       | h2  | Your client's income |
@@ -74,8 +72,6 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
-      | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
 
     Then the following sections should not exist:
@@ -92,9 +88,9 @@ Feature: Review and print your application
       | tag | section |
       | h2  | Client details |
       | h2  | What you're applying for |
-      | h2  | Delegated functions |
-      | h2  | Covered under an emergency certificate |
-      | h2  | Covered under a substantive certificate |
+      | h2  | What you're applying for |
+      | h2  | Extend, variation or discharge - Part IV |
+      | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h2  | Emergency cost limit |
       | h2  | Income, regular payments and assets |
       | h3  | Income |
@@ -110,8 +106,6 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
-      | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
 
     Then the following sections should not exist:
@@ -157,9 +151,9 @@ Feature: Review and print your application
       | tag | section |
       | h2  | Client details |
       | h2  | What you're applying for |
-      | h2  | Delegated functions |
-      | h2  | Covered under an emergency certificate |
-      | h2  | Covered under a substantive certificate |
+      | h2  | What you're applying for |
+      | h2  | Extend, variation or discharge - Part IV |
+      | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h2  | Emergency cost limit |
       | h2  | Income, regular payments and assets |
       | h3  | Income |
@@ -174,8 +168,6 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
-      | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
 
     Then the following sections should not exist:
@@ -213,9 +205,7 @@ Feature: Review and print your application
       | tag | section |
       | h2  | Client details |
       | h2  | What you're applying for |
-      | h2  | Delegated functions |
-      | h2  | Covered under a substantive certificate |
-      | h2  | Covered under a substantive certificate |
+      | h2  | Inherent jurisdiction high court injunction |
       | h2  | Income, regular payments and assets |
       | h1  | Print your application |
 
