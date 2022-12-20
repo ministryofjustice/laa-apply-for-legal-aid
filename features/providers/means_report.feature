@@ -51,7 +51,7 @@ Feature: Means report
     And the Proceeding eligibility questions should exist:
       | question |
       | Extend, variation or discharge - Part IV |
-      | Variation or discharge under section 5 protection from harassment act 1997r |
+      | Variation or discharge under section 5 protection from harassment act 1997 |
 
     And the Income result questions should exist:
       | question |
@@ -217,7 +217,7 @@ Feature: Means report
     And the Proceeding eligibility questions should exist:
       | question |
       | Extend, variation or discharge - Part IV |
-      | Variation or discharge under section 5 protection from harassment act 1997r |
+      | Variation or discharge under section 5 protection from harassment act 1997 |
 
     And the Income result questions should exist:
       | question |

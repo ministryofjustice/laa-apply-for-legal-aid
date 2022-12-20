@@ -125,23 +125,6 @@ Feature: Pathways from check your answers
     And I should be on a page showing 'Child arrangements order (contact)'
 
   @javascript @vcr
-  Scenario: I go back and change the delegated functions on an application with multiple proceedings
-    Given I complete the journey as far as check client details with multiple proceedings selected
-    When I click Check Your Answers Change link for 'Delegated functions'
-    Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'Occupation order'
-    Then I enter the 'occupation order used delegated functions on' date of 35 days ago
-    Then I select 'Inherent jurisdiction high court injunction'
-    Then I enter the 'inherent jurisdiction high court injunction used delegated functions on' date of 2 days ago
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check delegated functions dates'
-    When I click link 'Back'
-    Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
-    And I should be on a page showing 'Date you used delegated functions'
-    And I should see a 'occupation order used delegated functions on' date of 35 days ago
-    And I should see a 'inherent jurisdiction high court injunction used delegated functions on' date of 2 days ago
-
-  @javascript @vcr
   Scenario: I click the back button on the DWP override page
     Given I complete the non-passported journey as far as check your answers
     When I click 'Save and continue'
