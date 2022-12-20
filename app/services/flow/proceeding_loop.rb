@@ -37,7 +37,7 @@ module Flow
         when "client_involvement_type"
           :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
-          if !Setting.enable_loop? && @application.checking_answers?
+          if !Setting.enable_loop? && @application.checking_answers? && next_incomplete_proceeding.nil?
             :limitations
           elsif Setting.enable_loop?
             current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
