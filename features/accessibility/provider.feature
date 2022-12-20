@@ -32,9 +32,13 @@ Feature: Provider accessibility
     And the page is accessible
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
     And the page is accessible
-    When I select 'I have not used delegated functions'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    And the page is accessible
+    When I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"

@@ -231,6 +231,7 @@ Given("I start the merits application with bank transactions with no transaction
     :with_uncategorised_debit_transactions,
   )
 
+  create :legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
