@@ -215,22 +215,6 @@ en:
         singular:
           details_correct: This date is correct
           details_incorrect: I need to change this date
-
-    confirm_multiple_delegated_functions:
-      show:
-        heading: Check delegated functions dates
-        radios_heading: Are these dates correct?
-        table_caption: Delegated functions dates
-        error:
-          blank_plural: Select yes if these dates are correct
-          blank_singular: Select yes if this date is correct
-        plural:
-          warning_text: One or more of the dates you entered is over one month old.
-          details_incorrect: No, I need to change one or more of these dates
-        singular:
-          warning_text: The date you entered is over one month old.
-          details_incorrect: No, I need to change this date
-
     confirm_non_means_tested_applications:
       show:
         title:
@@ -1371,22 +1355,6 @@ en:
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
-    used_multiple_delegated_functions:
-      show:
-        heading: Which proceedings have you used delegated functions for?
-        extend_variation_or_discharge_part_iv: Extend, variation or discharge - Part IV
-        fgm_protection_order: FGM Protection Order
-        forced_marriage_protection_order: Forced marriage protection order
-        harassment_injunction: Harassment - injunction
-        inherent_jurisdiction_high_court_injunction: Inherent jurisdiction high court injunction
-        nonmolestation_order: Non-molestation order
-        occupation_order: Occupation order
-        variation_or_discharge_under_section_protection_from_harassment_act: Variation or discharge under section 5 protection from harassment act 1997
-        prohibited_steps_order_s8: Prohibited steps order
-        specified_issue_order_s8: Specific issue order
-        child_arrangements_order_contact: Child arrangements order (contact)
-        child_arrangements_order_residence: Child arrangements order (residence)
-        none_selected: I have not used delegated functions
     confirm_delegated_functions_dates:
       show:
         heading: "Confirm you used delegated functions on %{date}"
