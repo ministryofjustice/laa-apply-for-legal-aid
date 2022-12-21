@@ -22,12 +22,6 @@ RSpec.describe Proceeding do
                               :description,
                               :substantive_cost_limitation,
                               :delegated_functions_cost_limitation,
-                              :substantive_scope_limitation_code,
-                              :substantive_scope_limitation_meaning,
-                              :substantive_scope_limitation_description,
-                              :delegated_functions_scope_limitation_code,
-                              :delegated_functions_scope_limitation_meaning,
-                              :delegated_functions_scope_limitation_description,
                               :used_delegated_functions_on,
                               :used_delegated_functions_reported_on)
   }
@@ -84,16 +78,6 @@ RSpec.describe Proceeding do
 
       it { is_expected.to be true }
     end
-  end
-
-  describe "#delegated_functions_scope_limitation_meaning" do
-    # TODO: This is TEMP for coverage
-    # This was not being explicitly tested and caused a code-coverage drop, it can be
-    # removed once the helper methods for single scope limitation values are removed from
-    # the proceeding object
-    subject(:delegated_functions_scope_limitation_meaning) { proceeding.delegated_functions_scope_limitation_meaning }
-
-    it { is_expected.not_to be_nil }
   end
 
   describe "#proceeding_case_p_num" do
