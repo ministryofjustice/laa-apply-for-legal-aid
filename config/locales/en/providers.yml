@@ -563,9 +563,9 @@ en:
         benefit_evidence: evidence that your client receives %{benefit}
         employment_evidence: evidence of your client's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
-        court_application: the opponent's application to court for Section 8 proceedings (optional)
-        court_order: the opponent's court order for Section 8 proceedings
-        court_application_or_order: the opponent’s application to court or the court order for Section 8 proceedings
+        court_application: the application to court for Section 8 proceedings (optional)
+        court_order: the court order for Section 8 proceedings
+        court_application_or_order: the application to court or court order for Section 8 proceedings
         expert_report: expert reports, for example a CAFCASS report (optional)
         size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
         dropzone_message: Drag and drop files here or
