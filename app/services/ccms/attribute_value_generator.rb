@@ -304,7 +304,7 @@ module CCMS
       proceeding = options[:proceeding]
       return "MULTIPLE" if proceeding.used_delegated_functions? || multiple_scope_limitations?(proceeding)
 
-      proceeding.substantive_scope_limitation_code
+      proceeding.substantive_scope_limitations.first.code
     end
 
     def multiple_scope_limitations?(proceeding)
@@ -371,7 +371,10 @@ module CCMS
     end
 
     def proceeding_limitation_desc(options)
-      used_delegated_functions? ? "MULTIPLE" : options[:proceeding].substantive_scope_limitation_description
+      proceeding = options[:proceeding]
+      return "MULTIPLE" if proceeding.used_delegated_functions? || multiple_scope_limitations?(proceeding)
+
+      proceeding.substantive_scope_limitations.first.description
     end
 
     def proceeding_description(_options)
@@ -379,7 +382,10 @@ module CCMS
     end
 
     def proceeding_limitation_meaning(options)
-      used_delegated_functions? ? "MULTIPLE" : options[:proceeding].substantive_scope_limitation_meaning
+      proceeding = options[:proceeding]
+      return "MULTIPLE" if proceeding.used_delegated_functions? || multiple_scope_limitations?(proceeding)
+
+      proceeding.substantive_scope_limitations.first.meaning
     end
 
     def call_standard_method(method, options)

@@ -226,7 +226,7 @@ module CCMS
       end
 
       def generate_scope_limitations(xml, proceeding)
-        proceeding.scope_limitations.where(scope_type: :substantive).each do |scope_limitation|
+        proceeding.substantive_scope_limitations.each do |scope_limitation|
           xml.__send__(:"casebio:ScopeLimitation") do
             xml.__send__(:"casebio:ScopeLimitation", scope_limitation.code)
             xml.__send__(:"casebio:ScopeLimitationWording", scope_limitation.description)
@@ -235,7 +235,7 @@ module CCMS
         end
         return if proceeding.used_delegated_functions_on.nil?
 
-        proceeding.scope_limitations.where(scope_type: :emergency).each do |scope_limitation|
+        proceeding.emergency_scope_limitations.each do |scope_limitation|
           xml.__send__(:"casebio:ScopeLimitation") do
             xml.__send__(:"casebio:ScopeLimitation", scope_limitation.code)
             xml.__send__(:"casebio:ScopeLimitationWording", scope_limitation.description)
