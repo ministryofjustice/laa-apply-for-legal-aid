@@ -102,7 +102,7 @@ Feature: Check pending employment
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
 
-    Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
+    Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
     When I choose "Yes"
     And I click 'Save and continue'
 

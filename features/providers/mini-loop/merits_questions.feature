@@ -8,7 +8,7 @@ Feature: mini-loop additional merits questions
     When I visit the merits question page
     Then I should see "Latest incident details"
     And I should see "Opponent's name"
-    And I should see "Opponent's mental capacity"
+    And I should see "Mental capacity of all parties"
     And I should see "Domestic abuse summary"
     And I should see "Statement of case"
     And I should see "Client denial of allegation"
@@ -25,7 +25,7 @@ Feature: mini-loop additional merits questions
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
-    Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
+    Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
     When I choose "Yes"
     And I click 'Save and continue'
     Then I should be on a page showing "Domestic abuse summary"
@@ -52,7 +52,7 @@ Feature: mini-loop additional merits questions
     Then I should be on a page showing "Provide details of the case"
     And I should see "Latest incident details\nCOMPLETED"
     And I should see "Opponent's name\nCOMPLETED"
-    And I should see "Opponent's mental capacity\nCOMPLETED"
+    And I should see "Mental capacity of all parties\nCOMPLETED"
     And I should see "Domestic abuse summary\nCOMPLETED"
     And I should see "Statement of case\nCOMPLETED"
     And I should see "Client denial of allegation\nCOMPLETED"
