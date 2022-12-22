@@ -197,7 +197,7 @@ jobs:
           chmod +x ./tmp/cc-test-reporter
     - run:
         name: Precompile assets for tests
-        command: RAILS_ENV=test bundle exec rake assets:precompile
+        command: NODE_OPTIONS=--openssl-legacy-provider RAILS_ENV=test bundle exec rake assets:precompile
     - run:
         name: Run ruby tests
         command: |
@@ -238,7 +238,7 @@ jobs:
     - *save_js_packages_cache
     - run:
         name: Precompile assets for tests
-        command: RAILS_ENV=test bundle exec rake assets:precompile
+        command: NODE_OPTIONS=--openssl-legacy-provider RAILS_ENV=test bundle exec rake assets:precompile
     - run:
         name: Run integration tests
         command: |
