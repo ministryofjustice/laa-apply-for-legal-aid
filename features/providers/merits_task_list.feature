@@ -36,7 +36,7 @@ Feature: Merits task list
     Then I should be on a page showing "Provide a statement of case"
     When I fill "Application merits task statement of case statement field" with "Statement of case"
     And I click 'Save and continue'
-    Then I should be on the 'matter_opposed_reason' page showing "Why is the matter opposed by your client or the other party?"
+    Then I should be on the 'matter_opposed_reason' page showing "Why is the Section 8 matter opposed by your client or the other party?"
     And I fill "Reason" with "Because it is opposed."
     And I click 'Save and continue'
     Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
@@ -150,7 +150,7 @@ Feature: Merits task list
     Then I upload an evidence file named 'hello_world.pdf'
     And I should see 'UPLOADED'
     When I click 'Save and continue'
-    Then I should be on the 'matter_opposed_reason' page showing "Why is the matter opposed by your client or the other party?"
+    Then I should be on the 'matter_opposed_reason' page showing "Why is the Section 8 matter opposed by your client or the other party?"
     And I fill "Reason" with "Because it is opposed."
     And I click 'Save and continue'
     Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
