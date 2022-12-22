@@ -196,6 +196,9 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
           chmod +x ./tmp/cc-test-reporter
     - run:
+        name: Precompile assets for tests
+        command: RAILS_ENV=test bundle exec rake assets:precompile
+    - run:
         name: Run ruby tests
         command: |
           TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
@@ -233,6 +236,9 @@ jobs:
     - *restore_js_packages_cache
     - *install_js_packages
     - *save_js_packages_cache
+    - run:
+        name: Precompile assets for tests
+        command: RAILS_ENV=test bundle exec rake assets:precompile
     - run:
         name: Run integration tests
         command: |
