@@ -13,7 +13,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: cimg/ruby:3.1.2-browsers
+      - image: cimg/ruby:3.1.3-browsers
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
@@ -31,13 +31,15 @@ executors:
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest-3.1.2
+      - image: ministryofjustice/apply-ci:latest-3.1.3
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
           CACHE_VERSION: v1
+          NODE_OPTIONS: --openssl-legacy-provider
       - image: cimg/postgres:10.18
       - image: cimg/redis:5.0
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
+
 references:
   decrypt_secrets: &decrypt_secrets
     run:
@@ -92,6 +94,7 @@ references:
         kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
         kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_UAT_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
+
   update_packages: &update_packages
     run:
       name: Update packages
@@ -100,22 +103,22 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v2.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        - v3.1.3-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v2.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+        - v3.1.3-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v2.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        key: v3.1.3-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v2.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      key: v3.1.3-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
