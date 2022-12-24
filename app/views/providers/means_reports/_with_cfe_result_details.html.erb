@@ -1,8 +1,12 @@
+<% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
+<% @cfe_result = cfe_result if @cfe_result.nil? %>
+<% @manual_review_determiner = manual_review_determiner if @manual_review_determiner.nil? %>
+
 <% if @legal_aid_application.cfe_result.version >= 4 %>
-  <%= render 'proceeding_eligibility', results: @legal_aid_application.cfe_result.results_by_proceeding_type %>
+  <%= render "providers/means_reports/proceeding_eligibility", results: @legal_aid_application.cfe_result.results_by_proceeding_type %>
 <% end %>
 
-<%= render 'receives_benefits' %>
+<%= render "providers/means_reports/receives_benefits" %>
 
 <% if @legal_aid_application.non_passported? %>
   <h2 class="govuk-heading-m">
@@ -46,7 +50,7 @@
 
   <div class="govuk-!-padding-bottom-8"></div>
 
-  <%= render 'caseworker_review' %>
+  <%= render 'providers/means_reports/caseworker_review' %>
 <% end %>
 
 <section class="print-no-break">
@@ -61,10 +65,10 @@
   <%= t('.assets_heading') %>
 </h2>
 
-<%= render 'shared/check_answers/assets', read_only: true %>
+<%= render 'shared/check_answers/assets', read_only: true, journey_type: :providers %>
 
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
-    <%= render 'caseworker_review' %>
+    <%= render 'providers/means_reports/caseworker_review' %>
 <% end %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>

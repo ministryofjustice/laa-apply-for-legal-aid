@@ -1,0 +1,24 @@
+<h1 class="govuk-heading-xl">
+  <%= t("providers.means_reports.show.heading") %>
+</h1>
+
+<%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
+
+<h2 class="govuk-heading-m">
+  <%= t("providers.means_reports.show.client_details_heading") %>
+</h2>
+
+<%= render(
+      "shared/check_answers/client_details",
+      attributes: %i[first_name last_name date_of_birth age national_insurance_number],
+      legal_aid_application: @legal_aid_application,
+      applicant: @legal_aid_application.applicant,
+      read_only: true,
+    ) %>
+
+<%= render(
+      "providers/means_reports/with_cfe_result_details",
+      legal_aid_application: @legal_aid_application,
+      cfe_result: @cfe_result,
+      manual_review_determiner: @manual_review_determiner,
+    ) %>

@@ -4,8 +4,10 @@ module Reports
       return if valid_report_exists
 
       delete_attachment if report_attachment_exists
-      attachment = legal_aid_application.attachments.create!(attachment_type: "means_report",
-                                                             attachment_name: "means_report.pdf")
+      attachment = legal_aid_application.attachments.create!(
+        attachment_type: "means_report",
+        attachment_name: "means_report.pdf",
+      )
 
       attachment.document.attach(
         io: StringIO.new(pdf_report),
@@ -27,15 +29,18 @@ module Reports
 
       Providers::MeansReportsController.default_url_options = default_url_options
 
-      Providers::MeansReportsController.renderer.render(
-        template: "providers/means_reports/show",
-        layout: "pdf",
-        locals: {
-          legal_aid_application:,
-          cfe_result: legal_aid_application.cfe_result,
-          manual_review_determiner: CCMS::ManualReviewDeterminer.new(legal_aid_application),
-        },
+      Providers::MeansReportsController.render(report_component, layout: "pdf")
+    end
+
+    def report_component
+      Providers::Reports::Means.new(
+        legal_aid_application:,
+        manual_review_determiner:,
       )
+    end
+
+    def manual_review_determiner
+      CCMS::ManualReviewDeterminer.new(legal_aid_application)
     end
   end
 end

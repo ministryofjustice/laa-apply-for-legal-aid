@@ -3,16 +3,22 @@ module Providers
     authorize_with_policy_method :show_submitted_application?
 
     def show
-      @cfe_result = @legal_aid_application.cfe_result
-      @manual_review_determiner = CCMS::ManualReviewDeterminer.new(@legal_aid_application)
+      html = render_to_string(means_report, layout: "pdf")
+      pdf = Grover.new(html).to_pdf
+      send_data pdf, filename: "means_report.pdf", type: "application/pdf", disposition: "inline"
+    end
 
-      if params.key?(:debug)
-        render "show", layout: "pdf"
-      else
-        html = render_to_string "show", layout: "pdf"
-        pdf = Grover.new(html).to_pdf
-        send_data pdf, filename: "means_report.pdf", type: "application/pdf", disposition: "inline"
-      end
+  private
+
+    def means_report
+      Reports::Means.new(
+        legal_aid_application: @legal_aid_application,
+        manual_review_determiner:,
+      )
+    end
+
+    def manual_review_determiner
+      CCMS::ManualReviewDeterminer.new(@legal_aid_application)
     end
   end
 end

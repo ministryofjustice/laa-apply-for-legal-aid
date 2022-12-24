@@ -3,11 +3,11 @@
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
 
 <section class="print-no-break">
-  <%= render "shared/check_answers/property", read_only: %>
+  <%= render "shared/check_answers/property", read_only:, journey_type: %>
 </section>
 
 <section class="print-no-break">
-  <%= render "shared/check_answers/vehicles", read_only: %>
+  <%= render "shared/check_answers/vehicles", read_only:, journey_type: %>
 
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
@@ -33,7 +33,7 @@
       </dl>
     <% end %>
 
-    <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
+    <%= render "shared/check_answers/offline_savings_accounts", read_only:, journey_type: %>
   <% else %>
     <!-- passported and non-passported bank statement uploaded -->
 
@@ -72,7 +72,7 @@
         read_only:,
       ) %>
 
-  <%= render("shared/check_answers/restrictions", read_only:) if @legal_aid_application.own_capital? %>
+  <%= render("shared/check_answers/restrictions", read_only:, journey_type:) if @legal_aid_application.own_capital? %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.policy_disregards.present? %>

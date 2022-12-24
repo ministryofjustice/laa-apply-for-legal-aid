@@ -1,4 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+<% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
+
 <dl id="client-details-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <% if :first_name.in?(attributes) %>
     <%= check_answer_link(
