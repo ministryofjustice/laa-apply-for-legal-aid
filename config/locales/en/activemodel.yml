@@ -185,7 +185,7 @@ en:
         application_merits_task/matter_opposition:
           attributes:
             reason:
-              blank: Enter the reason the matter is opposed
+              blank: Enter why the Section 8 matter is opposed
         application_merits_task/undertaking:
           attributes:
             offered:
