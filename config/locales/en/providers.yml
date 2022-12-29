@@ -471,7 +471,6 @@ en:
           hearing-date-set: Has a date been set for the hearing?
           hearing-date: Enter the date
           hearing-date-hint: For example, 12 11 2007
-          additional-information: Give us any information you have about when the hearing is likely to be held
     has_national_insurance_numbers:
       show:
         page_title: Does the client have a National Insurance number?

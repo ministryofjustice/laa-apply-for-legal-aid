@@ -204,8 +204,6 @@ en:
             hearing_date:
               blank: Enter a valid hearing date
               date_not_valid: Enter a valid hearing date
-            additional_information:
-              blank: Enter any information about when the hearing is likely to be held
         application_merits_task/opponent:
           attributes:
             first_name:
