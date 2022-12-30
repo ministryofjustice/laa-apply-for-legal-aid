@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :provider do
     firm
     name { Faker::Name.name }
-    username { Faker::Internet.unique.username }
+    username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
     email { Faker::Internet.safe_email }
     portal_enabled { true }
 
