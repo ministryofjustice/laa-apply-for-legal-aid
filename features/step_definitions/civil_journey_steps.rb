@@ -874,6 +874,7 @@ Given("I click Check Your Answers Change link for {string}") do |question|
 end
 
 Given("I click Check Your Answers Change link for proceeding {string}") do |question|
+  steps %(Then the page should be axe clean skipping: region, aria-allowed-attr) if run_axe?
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__proceeding_#{question_id}" do
