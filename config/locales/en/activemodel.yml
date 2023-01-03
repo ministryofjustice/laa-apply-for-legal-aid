@@ -257,7 +257,7 @@ en:
             has_opponents_application:
               inclusion: Select yes if you have a copy of the opponent's application to the court or a copy of the court order
             reason_for_applying:
-              blank: Enter information to explain why you are applying for legal aid at this stage
+              blank: Enter why you're applying for legal aid at this stage and if the matter is at court
         applications/proceedings_form:
           attributes:
             code:

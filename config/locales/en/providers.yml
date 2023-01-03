@@ -357,7 +357,7 @@ en:
         show:
           h1_heading: Do you have a copy of the opponent's application to the court or a copy of the court order?
           hint_text: We will ask you to upload this evidence at the end of your application.
-          reason_question: Why are you applying for legal aid at this stage?
+          reason_question: Tell us why you're applying for legal aid at this stage and if the matter is at court.
       attempts_to_settle:
         show:
           h1-heading: What attempts have been made to settle the matter?
