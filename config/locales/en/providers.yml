@@ -411,7 +411,7 @@ en:
           page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
       matter_opposed_reasons:
         show:
-          page_heading: Why is the matter opposed by your client or the other party?
+          page_heading: Why is the Section 8 matter opposed by your client or the other party?
       opponents_names:
         show:
           h1-heading: Opponent's name

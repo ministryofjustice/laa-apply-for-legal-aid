@@ -142,7 +142,7 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedReasonsController 
 
         request
 
-        expect(page).to have_error_message("Enter the reason the matter is opposed")
+        expect(page).to have_error_message("Enter why the Section 8 matter is opposed")
         expect(legal_aid_application.matter_opposition).to be_nil
         expect(matter_opposed_task.state).to eq(:not_started)
       end
