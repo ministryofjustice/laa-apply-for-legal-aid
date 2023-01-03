@@ -419,7 +419,7 @@ en:
           last_name: Last name
       opponents_mental_capacities:
         show:
-          h1-heading: Does the opponent have the mental capacity to understand the terms of a court order?
+          h1-heading: Do all parties have the mental capacity to understand the terms of a court order?
           first_name: First name
           last_name: Last name
       domestic_abuse_summaries:
@@ -973,7 +973,7 @@ en:
       task_list_item:
         latest_incident_details: Latest incident details
         opponent_name: "Opponent's name"
-        opponent_mental_capacity: "Opponent's mental capacity"
+        opponent_mental_capacity: Mental capacity of all parties
         domestic_abuse_summary: Domestic abuse summary
         statement_of_case: Statement of case
         chances_of_success: Chances of success

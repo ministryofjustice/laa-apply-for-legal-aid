@@ -36,7 +36,7 @@ module Providers
           end
 
           it "displays opponent data" do
-            expect(response.body).to include("Does the opponent have the mental capacity to understand the terms of a court order?")
+            expect(response.body).to include("Do all parties have the mental capacity to understand the terms of a court order?")
           end
         end
       end
