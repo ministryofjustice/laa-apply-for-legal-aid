@@ -39,13 +39,11 @@ module Providers
         let(:hearing_date_1i) { Date.yesterday.year }
         let(:hearing_date_2i) { Date.yesterday.month }
         let(:hearing_date_3i) { Date.yesterday.day }
-        let(:additional_information) { "Some addditional information" }
         let(:params) do
           {
             application_merits_task_urgency: {
               nature_of_urgency:,
               hearing_date_set:,
-              additional_information:,
               "hearing_date(1i)": hearing_date_1i,
               "hearing_date(2i)": hearing_date_2i,
               "hearing_date(3i)": hearing_date_3i,
@@ -67,7 +65,6 @@ module Providers
             expect(urgency.nature_of_urgency).to eq "This is the nature of the urgency"
             expect(urgency.hearing_date_set).to be_falsey
             expect(urgency.hearing_date).to be_nil
-            expect(urgency.additional_information).to eq "Some addditional information"
           end
 
           it "redirects to the next page" do
@@ -84,7 +81,6 @@ module Providers
             expect(urgency.nature_of_urgency).to eq "This is the nature of the urgency"
             expect(urgency.hearing_date_set).to be true
             expect(urgency.hearing_date).to eq Date.yesterday
-            expect(urgency.additional_information).to eq ""
           end
 
           it "redirects to the next page" do

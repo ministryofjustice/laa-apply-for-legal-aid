@@ -12,7 +12,6 @@ module Providers
           hearing_date_1i:,
           hearing_date_2i:,
           hearing_date_3i:,
-          additional_information:,
         }
       end
       let(:nature_of_urgency) { "Hearing is tomorrow" }
@@ -20,7 +19,6 @@ module Providers
       let(:hearing_date_1i) { Date.tomorrow.year }
       let(:hearing_date_2i) { Date.tomorrow.month }
       let(:hearing_date_3i) { Date.tomorrow.day }
-      let(:additional_information) { nil }
 
       describe "#valid?" do
         context "when all fields are valid" do
@@ -50,15 +48,7 @@ module Providers
         context "when hearing_date_set is false" do
           let(:hearing_date_set) { "false" }
 
-          context "when additional_information is nil" do
-            it { expect(nature_of_urgency_form).to be_invalid }
-          end
-
-          context "when additional_information is not nil" do
-            let(:additional_information) { "The hearing is likely to be next week" }
-
-            it { expect(nature_of_urgency_form).to be_valid }
-          end
+          it { expect(nature_of_urgency_form).to be_valid }
         end
       end
     end

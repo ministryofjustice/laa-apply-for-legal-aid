@@ -7,8 +7,7 @@ module Providers
                     :hearing_date_set,
                     :hearing_date_1i,
                     :hearing_date_2i,
-                    :hearing_date_3i,
-                    :additional_information
+                    :hearing_date_3i
 
       attr_writer :hearing_date
 
@@ -19,7 +18,6 @@ module Providers
 
       validates :hearing_date, presence: true, if: :hearing_date_required?
       validates :hearing_date, date: true, allow_nil: true, if: :hearing_date_required?
-      validates :additional_information, presence: true, if: :additional_information_required?
 
       def initialize(*args)
         super
@@ -38,9 +36,7 @@ module Providers
       end
 
       def save
-        if hearing_date_required?
-          additional_information&.clear
-        else
+        unless hearing_date_required?
           hearing_date_1i&.clear
           hearing_date_2i&.clear
           hearing_date_3i&.clear
@@ -53,10 +49,6 @@ module Providers
 
       def hearing_date_required?
         !draft? && hearing_date_set.to_s == "true"
-      end
-
-      def additional_information_required?
-        !draft? && hearing_date_set.to_s == "false"
       end
 
       def exclude_from_model

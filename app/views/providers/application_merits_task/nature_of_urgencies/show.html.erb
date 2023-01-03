@@ -14,9 +14,7 @@
         <%= form.govuk_radio_button :hearing_date_set, true, link_errors: true, label: {text: t('generic.yes')} do %>
           <%= form.govuk_date_field :hearing_date, legend: { text: t('.hearing-date') }, hint: { text: t('.hearing-date-hint') } %>
         <% end %>
-        <%= form.govuk_radio_button :hearing_date_set, false, label: {text: t('generic.no')} do %>
-          <%= form.govuk_text_area :additional_information, label: {text: t('.additional-information')}, rows: 5 %>
-        <% end %>
+        <%= form.govuk_radio_button :hearing_date_set, false, label: {text: t('generic.no')} %>
       <% end %>
     <% end %>
     <div class="govuk-!-padding-bottom-4"></div>
