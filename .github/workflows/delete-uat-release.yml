@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Delete UAT release action
         id: delete_uat
-        uses: ministryofjustice/laa-civil-apply-delete-uat-release@v1.0.1
+        uses: ministryofjustice/laa-civil-apply-delete-uat-release@v1.0.2
         with:
           release_name_prefix: "apply-"
           k8s_cluster: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
