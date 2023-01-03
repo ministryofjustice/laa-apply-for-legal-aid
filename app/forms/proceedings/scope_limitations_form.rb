@@ -149,7 +149,7 @@ module Proceedings
         attr_name = date_field.method
         valid = !date_field.form_date_invalid?
 
-        errors.add attr_name.to_sym, I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error") unless valid
+        errors.add attr_name.to_sym, I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error", scope_limitation: meaning_for(code)) unless valid
       end
     end
 
@@ -158,7 +158,7 @@ module Proceedings
 
       limitation_notes.each do |code|
         if mandatory?("limitation_note", code) && limitation_note_for(code).blank? && scope_codes.include?(code)
-          errors.add "limitation_note_#{code}".to_sym, I18n.t("providers.proceeding_loop.enter_limitation_note_error")
+          errors.add "limitation_note_#{code}".to_sym, I18n.t("providers.proceeding_loop.enter_limitation_note_error", scope_limitation: meaning_for(code))
         end
       end
     end

@@ -390,7 +390,7 @@ en:
         date_hint: "For example %{options}."
         used_delegated_functions_on_label: Date you used delegated functions
         used_delegated_functions_on_hint: "For example, %{options}."
-        scope_limitations_label: Please provide the hearing date
+        scope_limitations_label: When is the hearing?
         scope_limitations_hint: "For example, %{options}."
       dependants:
         assets_value:
@@ -680,4 +680,4 @@ en:
         amount: How much student finance will you get this academic year?
     scope_limitations:
       limitation_note:
-        details: Please give details
+        details: Give details of the %{scope_limitation}
