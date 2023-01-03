@@ -695,9 +695,9 @@ en:
               benefit_evidence_missing: Upload evidence that your client receives %{benefit}
               content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
               employment_evidence_missing: Upload evidence of your client's employment
-              court_application_or_order_missing: Upload the opponent’s application to court or the court order for Section 8 proceedings
-              court_application_missing: Upload the opponent’s application to court for Section 8 proceedings
-              court_order_missing: Upload the opponent’s court order for Section 8 proceedings
+              court_application_or_order_missing: Upload the application to court or the court order for Section 8 proceedings
+              court_application_missing: Upload the application to court for Section 8 proceedings
+              court_order_missing: Upload the court order for Section 8 proceedings
               file_empty: The selected file is empty
               file_too_big: The selected file must be smaller than %{size}MB
               file_virus: "%{file_name} contains a virus"
