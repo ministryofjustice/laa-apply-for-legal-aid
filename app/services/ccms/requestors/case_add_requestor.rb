@@ -40,6 +40,10 @@ module CCMS
         MEANS_ENTITY_CONFIG_DIR.join("passported.yml")
       end
 
+      def not_nil_or_zero?(value)
+        value.present? && value.nonzero?
+      end
+
       def valuables_present?
         valuables.present?
       end

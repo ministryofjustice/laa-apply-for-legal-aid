@@ -1,233 +1,43 @@
 ---
-bank_acct:
-  BANKACC_INPUT_C_7WP2_18A:
-    value: "#bank_account_balance"
-    br100_meaning: 'Bank accounts: Current Balance'
-    response_type: currency
-    user_defined: true
-    generate_block?: false
-  BANKACC_INPUT_N_7WP2_5A:
-    value: "#bank_account_account_number"
-    br100_meaning: 'Bank accounts: Account number'
-    response_type: text
-    user_defined: true
-    generate_block?: false
-  BANKACC_INPUT_T_7WP2_6A:
-    value: "#bank_account_holder_type"
-    br100_meaning: 'Bank accounts: Account holders'
-    response_type: text
-    user_defined: true
-    generate_block?: false
-  BANKACC_INPUT_T_7WP2_4A:
-    value: "#bank_name"
-    br100_meaning: 'Bank accounts: Name of financial institution'
-    response_type: text
-    user_defined: true
-    generate_block?: false
-  BANKACC_INPUT_T_7WP2_3A:
-    value: "#bank_account_account_type_label"
-    br100_meaning: 'Bank accounts: The type of account'
-    response_type: text
-    user_defined: true
-    generate_block?: false
-  BANKACC_INPUT_B_7WP2_16A:
-    value: "#bank_account_has_tax_credits?"
-    br100_meaning: 'Bank accounts: Client tax credits paid in?'
-    response_type: boolean
-    user_defined: true
-  BANKACC_INPUT_B_7WP2_12A:
-    value: "#bank_account_has_wages?"
-    br100_meaning: 'Bank accounts: Client wages paid in?'
-    response_type: boolean
-    user_defined: true
-  BANKACC_INPUT_B_7WP2_14A:
-    value: "#bank_account_has_benefits?"
-    br100_meaning: 'Bank accounts: Client benefits, ex. tax credits, paid in?'
-    response_type: boolean
-    user_defined: true
-  LAR_BANKACC_INPUT_B_37WP2_1A:
-    value: false
-    br100_meaning: 'Bank accounts: Client benefits paid in?'
-    response_type: boolean
-    user_defined: true
-    generate_block?: true
-change_in_circumstances:
-  generate_block?: false
-  CHANGE_CIRC_INPUT_T_33WP3_6A:
-    value: None
-    br100_meaning: CHANGE_CIRC_INPUT_T_33WP3_6A
-    response_type: text
-    user_defined: true
-employment:
-  EMP_INPUT_B_3WP3_62A:
-    generate_block?: false
-    value: true
-    br100_meaning: 'Employment: Wage slips?'
-    response_type: boolean
-    user_defined: false
-  EMP_INPUT_B_3WP3_63A:
-    generate_block?: false
-    value: false
-    br100_meaning: 'Employment: L17?'
-    response_type: boolean
-    user_defined: false
-  EMP_INPUT_T_3WP3_2A:
-    generate_block?: false
-    value: Dave & Co
-    br100_meaning: 'Client Employment: Name of employer'
-    response_type: text
-    user_defined: true
-  EMP_INPUT_B_3WP3_60A:
-    generate_block?: false
-    value: false
-    br100_meaning: 'Client Employment: BIK?'
-    response_type: boolean
-    user_defined: true
-  EMP_INPUT_D_3WP3_5A:
-    generate_block?: false
-    value: 01-01-2019
-    br100_meaning: 'Client Employment: Date started'
-    response_type: date
-    user_defined: true
-  EMP_INFER_C_15WP3_12A:
-    generate_block?: false
-    value: 300.0
-    br100_meaning: 'Int.Result: Client Employment- Monthly PAYE'
-    response_type: currency
-    user_defined: false
-  EMP_INFER_C_15WP3_13A:
-    generate_block?: false
-    value: 100.0
-    br100_meaning: 'Int.Result: Client Employment- Monthly NI'
-    response_type: currency
-    user_defined: false
-  EMP_INPUT_T_3WP3_4A:
-    generate_block?: false
-    value: Genius
-    br100_meaning: 'Client Employment: Job title'
-    response_type: text
-    user_defined: true
-  EMP_INPUT_N_3WP3_6A:
-    generate_block?: false
-    value: 35
-    br100_meaning: 'Client Employment: Hours worked a week'
-    response_type: number
-    user_defined: true
-  EMP_INPUT_T_3WP3_29A:
-    generate_block?: false
-    value: BACS or other electronic automated transfer
-    br100_meaning: 'Client Employment: Method of  payment'
-    response_type: text
-    user_defined: true
-  EMP_INPUT_T_3WP3_28A:
-    generate_block?: false
-    value: Wage Slips
-    br100_meaning: 'Client Employment: Type of evidence used'
-    response_type: text
-    user_defined: true
-  OUT_EMP_INFER_C_15WP3_11A:
-    generate_block?: false
-    value: 1000.0
-    br100_meaning: 'Int.Result: Client Employment- Monthly gross pay'
-    response_type: currency
-    user_defined: false
-  EMP_INPUT_T_3WP3_23A:
-    generate_block?: false
-    value: Monthly
-    br100_meaning: 'Client Employment: Frequency of pay (wage slips)'
-    response_type: text
-    user_defined: true
-family_statement:
-  generate_block?: false
-  FAMILY_STMT_DETAIL:
-    value: This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence
-    br100_meaning: Statement:The Family Statement Of Case Detail
-    response_type: text
-    user_defined: true
-  FAMILY_STATEMENT_INSTANCE:
-    value: "-"
-    br100_meaning: Statement:The Family Statement Of Case Detail
-    response_type: text
-    user_defined: false
+
 global_means:
+  MEANS_REQD:
+    generate_block?: true
+    value: false
+    br100_meaning: means required
+    response_type: boolean
+    user_defined: false
   APPLY_CASE_MEANS_REVIEW:
     :value: '#bypass_manual_review_in_ccms?'
     :br100_meaning: 'Manual review required by case worker (FALSE means manual review required)'
     :response_type: boolean
     :user_defined: false
   IS_PASSPORTED:
-    value: 'YES'
-    br100_meaning: 'DWP Benefit Check: Response'
-    response_type: text
-    user_defined: true
+    generate_block?: false
   BEN_DOB:
-    value: '#applicant_date_of_birth'
-    br100_meaning: "DWP Benefit Check: Recipient's DOB"
-    response_type: date
-    user_defined: false
+    generate_block?: false
   BEN_NI_NO:
-    value: '#applicant_national_insurance_number'
-    br100_meaning: "DWP Benefit Check: National Insurance Number"
-    response_type: text
-    user_defined: false
+    generate_block?: false
   BEN_SURNAME:
-    value: '#applicant_last_name'
-    br100_meaning: "DWP Benefit Check: Recipient's Surname"
-    response_type: text
-    user_defined: false
-  COUNTRY:
-    value: GBR
-    br100_meaning: "Applicant's country of residence"
-    response_type: text
-    user_defined: true
+    generate_block?: false
+  BEN_AWARD_DATE:
+    generate_block?: false
   GB_INPUT_B_3WP2_27A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Main Dwelling: The client owns main dwelling?'
-    response_type: boolean
-    user_defined: true
   GB_DECL_T_38WP3_12A:
     generate_block?: false
-    value: " ? The Legal Aid Agency may cancel my legal aid and I will have to pay
-      back all of my legal fees."
-    br100_meaning: The means declaration 1a paragraph 12
-    response_type: text
-    user_defined: false
   OUT_GB_INFER_C_34WP3_1A:
     generate_block?: false
-    value: 990.0
-    br100_meaning: 'RESULT: Disposable income- Client deductions'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_34WP2_103A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Cars'
-    response_type: currency
-    user_defined: false
   GB_DECL_T_38WP3_116A:
     generate_block?: false
-    value: 'This declaration applies to all the information given in this application
-      as summarised below, and to any evidence provided in support:'
-    br100_meaning: The means declaration 1a paragraph 03
-    response_type: text
-    user_defined: false
   GB_INPUT_B_14WP2_8A:
-    value: '#application_own_vehicle?'
-    br100_meaning: 'Cars: The client owns car(s)?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_CAP_CONT:
-    value: "#means_assessment_capital_contribution"
-    br100_meaning: 'RESULT: Capital - Capital contribution'
-    response_type: currency
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_19WP2_104A:
     generate_block?: false
-    value: -2030.0
-    br100_meaning: 'Int.Result: Main Dwelling- Net value of equity'
-    response_type: currency
-    user_defined: false
   GB_PROC_B_41WP3_11A:
     value: false
     br100_meaning: 'R - Partner Redundancy: Documents confirming amount received'
@@ -235,10 +45,6 @@ global_means:
     user_defined: false
   GB_INPUT_B_6WP3_236A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Benefits: Working Tax Credit?'
-    response_type: boolean
-    user_defined: true
   GB_ROUT_B_43WP3_13A:
     value: false
     br100_meaning: The case is legally linked to another case owned by other?
@@ -255,46 +61,22 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_DECL_T_38WP3_13A:
-    generate_block?: false
     value: 'I understand:'
     br100_meaning: The means declaration 1a paragraph 13
     response_type: text
     user_defined: false
   GB_INFER_B_1WP3_419A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Bankruptcy: Subject to order?'
-    response_type: boolean
-    user_defined: false
   GB_INPUT_B_14WP2_7A:
-    value: false
-    br100_meaning: 'Cars: The client has use of a car owned by someone else?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_INPUT_B_3WP2_1A:
-    value: '#application_own_home?'
-    br100_meaning: 'Main Dwelling: The client owns/has financial interest?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_GB_INFER_C_20WP2_101A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Add. Property- Value of equity'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_37WP2_103A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Other capital'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_19WP2_105A:
     generate_block?: false
-    value: -1015.0
-    br100_meaning: 'Int.Result: Main Dwelling- Net value of equity when owned with
-      ex. partner'
-    response_type: currency
-    user_defined: false
   GB_PROC_B_41WP3_10A:
     value: false
     br100_meaning: 'R - Client Redundancy: Documents confirming amount received'
@@ -302,28 +84,12 @@ global_means:
     user_defined: false
   GB_INPUT_B_6WP3_235A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Benefits: Child Tax Credit?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_31WP2_103A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Shares'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_26WP3_218A:
     generate_block?: false
-    value: 1208.0
-    br100_meaning: 'RESULT: Gross Income- Total Unfrozen Income'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_34WP3_3A:
     generate_block?: false
-    value: 990.0
-    br100_meaning: 'RESULT: Disposable income- Total deductions'
-    response_type: currency
-    user_defined: false
   APP_AMEND_TYPE:
     value: "#app_amendment_type"
     br100_meaning: 'App: The application or amendment type'
@@ -331,13 +97,6 @@ global_means:
     user_defined: true
   GB_DECL_T_38WP3_14A:
     generate_block?: false
-    value: " ? Legal aid is not always free.  I may have to pay a contribution towards
-      my legal costs from my income and/or capital.  My legal aid may be withdrawn
-      if I fall in arrears of payment and I will be responsible for the outstanding
-      payments."
-    br100_meaning: The means declaration 1a paragraph 14
-    response_type: text
-    user_defined: false
   CATEGORY_OF_LAW:
     value: '#lead_proceeding_category_of_law_code'
     br100_meaning: the category of law
@@ -350,24 +109,12 @@ global_means:
     user_defined: true
   OUT_GB_INFER_C_25WP3_167A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Redundancy'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_19WP2_106A:
     generate_block?: false
-    value: -1015.0
-    br100_meaning: 'Int.Result: Client Main Dwelling- Value of equity'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_21WP4_1A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Self Emp/SubCon Income'
-    response_type: currency
-    user_defined: false
   INCOME_CONT:
-    value: '#means_assessment_income_contribution'
+    value: '#means_assessment_capital_contribution'
     br100_meaning: 'RESULT: Disposable income- Income contribution'
     response_type: currency
     user_defined: false
@@ -454,10 +201,7 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_8WP2_1A:
-    value: '#applicant_is_signatory_to_other_person_accounts?'
-    br100_meaning: '3rd party accounts: The client is signatory to bank accounts?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_PROC_B_41WP3_20A:
     value: false
     br100_meaning: 'R - Rent: Documents confirming amount paid'
@@ -486,10 +230,7 @@ global_means:
     response_type: text
     user_defined: false
   GB_INPUT_B_16WP2_7A:
-    value: '#applicant_has_interest_in_a_trust?'
-    br100_meaning: 'Trust: The client has an interest in a trust?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_PROC_B_39WP3_41A:
     value: false
     br100_meaning: 'R - Other savings: Documents confirming nature and value'
@@ -925,10 +666,7 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_5WP1_18A:
-    value: '#application_applicant_receives_benefit?'
-    br100_meaning: 'Client: The client is receiving a passported benefit?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_GB_INFER_C_30WP4_1A:
     generate_block?: false
     value: 0.0
@@ -1200,16 +938,11 @@ global_means:
     response_type: boolean
     user_defined: false
   PUI_CLIENT_ELIGIBILITY:
-    value: '#client_eligibility'
-    br100_meaning: Client Overall Provisonal Eligibility
-    response_type: text
-    user_defined: false
+    generate_block?: false
   GB_INPUT_B_7WP2_1A:
-    value: '#applicant_has_other_savings?'
-    br100_meaning: 'Bank accounts: The client has bank accounts?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_INPUT_B_4WP2_1A:
+    generate_block?: false
     value: '#applicant_owns_additional_property?'
     br100_meaning: 'Add. Property: The client has owns/ has financial interest in
       property?'
@@ -1349,16 +1082,9 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_6WP2_1A:
-    value: '#applicant_owns_timeshare?'
-    br100_meaning: 'Timeshare: The client owns or has a financial interest?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_INPUT_B_41WP3_20A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Employment:  L17 / Last 3 monthly or 6 weekly wage slips / contract'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_1WP4_1B:
     value: false
     br100_meaning: 'Self. Emp.: The client is self employed?'
@@ -1412,10 +1138,7 @@ global_means:
     response_type: currency
     user_defined: false
   GB_INPUT_B_5WP2_1A:
-    value: '#applicant_owns_land?'
-    br100_meaning: 'Land: The client owns or has a financial interest in land?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_PROC_B_40WP3_35A:
     value: false
     br100_meaning: 'R - Partner Business: Copy of Income Tax and NI liability letter'
@@ -1583,12 +1306,6 @@ global_means:
     br100_meaning: 'RESULT: Client Interim Gross Income'
     response_type: currency
     user_defined: false
-  MEANS_REQD:
-    generate_block?: false
-    value: true
-    br100_meaning: means required
-    response_type: boolean
-    user_defined: false
   GB_PROC_B_39WP3_16A:
     value: false
     br100_meaning: 'R - Restraint order: Copy of application to vary + copy of final
@@ -1659,33 +1376,15 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_2WP2_1A:
-    value: '#applicant_has_inheritance?'
-    br100_meaning: 'Will: The client is a beneficiary of a will?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_INPUT_B_9WP2_1A:
-    value: '#applicant_has_investments?'
-    br100_meaning: 'Investments: The client has investments?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_GB_INFER_C_35WP2_100A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Money due- Interim value '
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_8WP3_310A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Financial Support: Receives financial support?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_40WP2_101A:
     generate_block?: false
-    value: 3000.0
-    br100_meaning: 'RESULT: Capital- Lower Limit'
-    response_type: currency
-    user_defined: false
   GB_PROC_B_39WP3_18A:
     value: false
     br100_meaning: 'R - SMOD Other: Copy of calderbank offer or without prejudice
@@ -1693,33 +1392,17 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_10WP2_1A:
-    value: '#applicant_has_other_capital?'
-    br100_meaning: 'Other savings: The client has other savings?'
-    response_type: boolean
-    user_defined: true
-  BEN_AWARD_DATE:
     generate_block?: false
-    value: 01-04-2019
-    br100_meaning: Meaning not defined in BR100
-    response_type: date
-    user_defined: false
   GB_INPUT_B_1WP2_36A:
-    value: false
-    br100_meaning: 'Bankruptcy: The client is subject to a bankruptcy order?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   GB_INPUT_D_18WP2_1A:
-    value: '#application_calculation_date'
-    br100_meaning: 'Client: The date client was aware of litigation'
-    response_type: date
-    user_defined: true
+    generate_block?: false
   LAR_INFER_B_1WP1_36A:
-    value: "#benefit_check_passed?"
+    value: false
     br100_meaning: The client is passported
     response_type: boolean
     user_defined: false
   GB_INPUT_B_34WP3_32A:
-    generate_block?: false
     value: true
     br100_meaning: Income eligibility note has been displayed
     response_type: boolean
@@ -1731,10 +1414,6 @@ global_means:
     user_defined: false
   OUT_GB_INFER_C_25WP2_100A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Timeshare- Interim value'
-    response_type: currency
-    user_defined: false
   DEFAULT_COST_LIMITATION:
     value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: the default cost limitation
@@ -1742,17 +1421,12 @@ global_means:
     user_defined: true
   OUT_GB_INFER_C_31WP3_6A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Rent- Total Housing Benefit received'
-    response_type: currency
-    user_defined: false
   GB_DECL_B_38WP3_11A:
     value: '#application_applicant_receives_benefit?'
     br100_meaning: The application is passported
     response_type: boolean
     user_defined: false
   OUT_GB_INFER_C_15WP3_140A:
-    generate_block?: false
     value: 0.0
     br100_meaning: 'Int.Result: Client HM Employment- Local overseas allowance'
     response_type: currency
@@ -1763,16 +1437,9 @@ global_means:
     response_type: text
     user_defined: true
   GB_INPUT_B_13WP2_7A:
-    value: '#applicant_has_other_policies?'
-    br100_meaning: 'Policies: The client has policies not linked to mortgage/death?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_GB_INFER_C_23WP3_161A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Dividends'
-    response_type: currency
-    user_defined: false
   GB_PROC_B_40WP3_53A:
     value: false
     br100_meaning: 'R - Money due: Copy of loan agreements'
@@ -1786,30 +1453,13 @@ global_means:
     user_defined: false
   GB_INPUT_N_3WP2_4A:
     generate_block?: false
-    value: 3
-    br100_meaning: 'Main Dwelling: Number of bedrooms'
-    response_type: number
-    user_defined: true
   OUT_GB_INFER_C_32WP2_102A:
     generate_block?: false
-    value: 1000.0
-    br100_meaning: 'Int.Result: Client Val. Possessions- Interim value'
-    response_type: currency
-    user_defined: false
   MEANS_REPORT_BACKLOG_TAG:
     generate_block?: false
-    value: MANB, Normal, Substantive DF Asses
-    br100_meaning: 'Report: The means report tag'
-    response_type: text
-    user_defined: false
   OUT_GB_INFER_C_26WP3_182A:
     generate_block?: false
-    value: 1208.0
-    br100_meaning: 'RESULT: Client gross income- Net total'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_26WP3_194A:
-    generate_block?: false
     value: 0.0
     br100_meaning: 'RESULT: Client gross income- Frozen total'
     response_type: currency
@@ -1826,10 +1476,6 @@ global_means:
     user_defined: false
   OUT_GB_INFER_C_35WP2_103A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Money due'
-    response_type: currency
-    user_defined: false
   LAR_SCOPE_FLAG:
     value: true
     br100_meaning: 'App: LAR Scope Flag'
@@ -1837,16 +1483,8 @@ global_means:
     user_defined: true
   OUT_GB_INFER_C_23WP3_160A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Interest on savings'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_13WP3_5A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Mortgage: Repayment amount is being (part) paid?'
-    response_type: boolean
-    user_defined: true
   GB_PROC_B_40WP3_40A:
     value: false
     br100_meaning: 'R - Shares: Docs confirming value of capital held in share save
@@ -1860,16 +1498,8 @@ global_means:
     user_defined: false
   OUT_GB_INPUT_C_20WP3_371A:
     generate_block?: false
-    value: 208.0
-    br100_meaning: 'RESULT: Client Benefits'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_26WP3_197A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client gross income- Restraint order income'
-    response_type: currency
-    user_defined: false
   GB_PROC_B_41WP3_8A:
     value: false
     br100_meaning: 'R - Client Other Income: Documents confirming amount received'
@@ -1877,57 +1507,34 @@ global_means:
     user_defined: false
   GB_INPUT_T_3WP2_3A:
     generate_block?: false
-    value: Terrace
-    br100_meaning: 'Main Dwelling: Type of Property'
-    response_type: text
-    user_defined: true
   GB_INPUT_B_21WP3_389A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Benefits: Receives other benefits from state or a local
-      authority?'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_13WP3_6A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Mortgage: Some/all repayment is being made by another?'
-    response_type: boolean
-    user_defined: true
   GB_PROC_B_40WP3_51A:
     value: false
     br100_meaning: 'R - Money due: Copy of formal agreement'
     response_type: boolean
     user_defined: false
   OUT_GB_INFER_C_15WP3_142A:
-    generate_block?: false
     value: 0.0
     br100_meaning: 'Int.Result: Client HM Employment- London allowance'
     response_type: currency
     user_defined: false
   RB_VERSION_NUMBER_MEANS:
-    generate_block?: false
-    value: v2.27.12
+    value: v3.3.13
     br100_meaning: Version Number
     response_type: text
     user_defined: false
   GB_RFLAG_B_2WP3_01A:
-    value: false
-    br100_meaning: "**RISK** Employment: Reg 17 Deprivation & Redundancy"
-    response_type: boolean
-    user_defined: false
-  OUT_GB_INFER_C_31WP3_9A:
     generate_block?: false
+  OUT_GB_INFER_C_31WP3_9A:
     value: 0.0
     br100_meaning: 'Int.Result: Rent- Total for assessment'
     response_type: currency
     user_defined: false
   GB_INFER_B_3WP2_404A:
     generate_block?: false
-    value: true
-    br100_meaning: main dwelling additional information interview is complete
-    response_type: boolean
-    user_defined: false
   GB_INPUT_B_38WP3_2SCREEN:
     value: true
     br100_meaning: 'Dec: Supplier has been advised to obtain relevant signature'
@@ -1940,23 +1547,14 @@ global_means:
     user_defined: false
   GB_INPUT_B_13WP3_7A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Housing Costs: The client pays mortgage and rent'
-    response_type: boolean
-    user_defined: false
   COST_LIMIT_CHANGED_FLAG:
     value: false
     br100_meaning: cost limit changed flag
     response_type: text
     user_defined: true
   GB_INPUT_B_15WP2_8A:
-    value: '#applicant_owed_money?'
-    br100_meaning: 'Money due: The client is owed money, including through a private
-      mortgage?'
-    response_type: boolean
-    user_defined: true
-  OUT_GB_INFER_C_15WP3_141A:
     generate_block?: false
+  OUT_GB_INFER_C_15WP3_141A:
     value: 0.0
     br100_meaning: 'Int.Result: Client HM Employment- Excess rent allowance'
     response_type: currency
@@ -1967,22 +1565,14 @@ global_means:
     response_type: boolean
     user_defined: false
   MEANS_EVIDENCE_PROVIDED:
-    value: true
+    value: false
     br100_meaning: Meaning not defined in BR100
     response_type: boolean
     user_defined: true
   GB_INPUT_C_6WP3_228A:
     generate_block?: false
-    value: 192.0
-    br100_meaning: 'Client Child Benefit: Amount received'
-    response_type: currency
-    user_defined: true
   OUT_GB_INFER_C_18WP3_219A:
     generate_block?: false
-    value: 1000.0
-    br100_meaning: 'RESULT: Client Gross Wage'
-    response_type: currency
-    user_defined: false
   LAR_PROC_B_39WP3_53A:
     value: false
     br100_meaning: 'R - Inquest: Copy of means form for each additional person'
@@ -1995,41 +1585,16 @@ global_means:
     user_defined: false
   PROVIDER_CASE_REFERENCE:
     generate_block?: false
-    value: false
-    br100_meaning: Provider Case Reference
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_12WP3_3A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Maintenance Out: Pays maintenance?'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_39WP3_64A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Bank accounts: Certified copies or original statements for last
-      3 months'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_39WP3_52A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Main Dwelling: Documents confirming value , outstanding mortgage
-      and/ or loan'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_34WP3_9A:
     generate_block?: false
-    value: 1208.0
-    br100_meaning: 'RESULT: Total Gross Income Assessed'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_6WP3_240A:
-    value: false
-    br100_meaning: 'Client Benefits: State Pension?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   LAR_PROC_B_40WP3_31A:
     value: false
     br100_meaning: 'R - Bus. Part.: Copy of tax return'
@@ -2037,58 +1602,29 @@ global_means:
     user_defined: false
   GB_DECL_T_38WP3_5A:
     generate_block?: false
-    value: " ? The Legal Aid Agency may take away my legal aid so I will have to
-      pay back all my legal fees."
-    br100_meaning: The means declaration 1a paragraph 5
-    response_type: text
-    user_defined: false
   OUT_GB_INFER_C_21WP2_104A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Land'
-    response_type: currency
-    user_defined: false
   SA_SCREEN9_4WP1_CHILDUNDER16NA:
-    generate_block?: false
-    value: false
+    generate_block?: true
+    value: true
     br100_meaning: 'Child: The client appears eligible'
     response_type: boolean
     user_defined: false
   SA_SCREEN10_1WP1_NONMEANS:
     generate_block?: false
-    value: true
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: false
   LAR_PROC_B_39WP3_54A:
     value: false
     br100_meaning: 'R - Financial Help: Documents confirming amount received'
     response_type: boolean
     user_defined: false
   GB_INPUT_B_1WP3_165A:
-    value: false
-    br100_meaning: 'Restraint Order: The client has income subject to a restraint
-      (freezing) order?'
-    response_type: boolean
-    user_defined: false
+    generate_block?: false
   OUT_GB_INFER_C_26WP2_105A:
     generate_block?: false
-    value: 100.0
-    br100_meaning: 'Int.Result: Client Bank accounts- Interim value'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_33WP2_100A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Policies- Interim value '
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_31WP3_14A:
     generate_block?: false
-    value: 600.0
-    br100_meaning: 'Int.Result: Housing costs- Total due to be paid'
-    response_type: currency
-    user_defined: false
   LAR_PROC_B_40WP3_30A:
     value: false
     br100_meaning: 'R - Self. Emp.:  Copy of financial accounts or balance sheet'
@@ -2096,13 +1632,6 @@ global_means:
     user_defined: false
   GB_DECL_T_38WP3_6A:
     generate_block?: false
-    value: " - I agree to the Legal Aid Agency checking these facts with others such
-      as credit reference agencies, the Department of Work and Pensions and HM Revenue
-      and Customs and I authorise those people/organisations to provide the information
-      they are asked for."
-    br100_meaning: The means declaration 1a paragraph 6
-    response_type: text
-    user_defined: false
   USER_TYPE:
     value: EXTERNAL
     br100_meaning: the user type
@@ -2116,22 +1645,10 @@ global_means:
     user_defined: false
   GB_INPUT_B_8WP3_308A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Maintenance: Receives maintenance?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_22WP3_150A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Maintenance'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_13WP3_1A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Housing Costs: The client pays mortgage'
-    response_type: boolean
-    user_defined: false
   USER_PROVIDER_FIRM_ID:
     value: '#provider_firm_id'
     br100_meaning: the user provider firm id
@@ -2139,40 +1656,16 @@ global_means:
     user_defined: true
   SA_SCREEN3_17WP2_1CAPASSESS:
     generate_block?: false
-    value: true
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: false
   OUT_GB_INFER_C_38WP2_102A:
     generate_block?: false
-    value: 1100.0
-    br100_meaning: 'RESULT: Capital- Interim Combined Total'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_3WP2_20A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Main Dwelling: Subject to possession proceedings?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_23WP3_159A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Student Income'
-    response_type: currency
-    user_defined: false
   CLIENT_ELIGIBILITY:
-    value: '#client_eligibility'
-    br100_meaning: Client Overall Eligibility
-    response_type: text
-    user_defined: false
+    generate_block?: false
   GB_DECL_T_38WP3_7A:
     generate_block?: false
-    value: 'I understand that I must co-operate fully and immediately with any enquiry
-      into my financial circumstances. I will:'
-    br100_meaning: The means declaration 1a paragraph 7
-    response_type: text
-    user_defined: false
   GB_PROC_B_41WP3_17A:
     value: false
     br100_meaning: 'R - Client Crim legal aid: Documents confirming contribution
@@ -2237,147 +1730,55 @@ global_means:
     response_type: currency
     user_defined: false
   GB_INPUT_B_12WP2_2A:
-    value: '#applicant_has_valuable_possessions?'
-    br100_meaning: 'Val. possessions: The client has valuable possessions valued
-      at £500+?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   OUT_GB_INFER_C_14WP4_19A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Bus. Part. Capital'
-    response_type: currency
-    user_defined: false
   GB_DECL_T_38WP3_16A:
     generate_block?: false
-    value: " ? The more work my solicitor does, the more I may have to pay back."
-    br100_meaning: The means declaration 1a paragraph 16
-    response_type: text
-    user_defined: false
   OUT_GB_INFER_C_18WP3_227A:
     generate_block?: false
-    value: 100.0
-    br100_meaning: Client NI- Total contributions paid via all employment
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_38WP2_100A:
     generate_block?: false
-    value: 1100.0
-    br100_meaning: 'RESULT: Client Capital- Interim total'
-    response_type: currency
-    user_defined: false
   GB_DECL_T_38WP3_9A:
     generate_block?: false
-    value: " - Tell the Legal Aid Agency immediately if anything I have said here
-      changes."
-    br100_meaning: The means declaration 1a paragraph 9
-    response_type: text
-    user_defined: false
   OUT_GB_INFER_C_31WP3_11A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: B&L- Amount paid per month'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_14WP3_1A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Criminal Legal Aid: Pays a contribution towards criminal legal aid?'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_6WP3_232A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Client Benefits: Receives benefits from state or a local authority?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_26WP3_219A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Gross Income- Total Frozen Income'
-    response_type: currency
-    user_defined: false
   OUT_GB_INFER_C_18WP3_226A:
     generate_block?: false
-    value: 300.0
-    br100_meaning: Client PAYE- Total contributions paid via all employment
-    response_type: currency
-    user_defined: false
   MEANS_EVIDENCE_REQD:
+    generate_block?: true
     value: false
     br100_meaning: The provision of evidence is mandatory
     response_type: boolean
     user_defined: false
   GB_DECL_T_38WP3_17A:
     generate_block?: false
-    value: " ? The Legal Aid Agency may register an interest-bearing charge against
-      my property."
-    br100_meaning: The means declaration 1a paragraph 17
-    response_type: text
-    user_defined: false
   GB_INPUT_B_3WP2_10A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Main Dwelling: Owned with 3rd party, inc ex. partner?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_31WP3_10A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: B&L- Total'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_12WP3_1A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client: The client has persons residing with them?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_26WP2_100A:
     generate_block?: false
-    value: 100.0
-    br100_meaning: 'RESULT: Client Bank accounts'
-    response_type: currency
-    user_defined: false
   GB_DECL_T_38WP3_18A:
     generate_block?: false
-    value: I understand if false or inaccurate information is provided and fraud
-      is identified, details will be passed to fraud prevention agencies to prevent
-      fraud and money laundering. For further details explaining how the information
-      held by fraud prevention agencies may be used, contact the Counter Fraud and
-      Investigations team on 020 3334 5588.
-    br100_meaning: The means declaration 1a paragraph 18
-    response_type: text
-    user_defined: false
   GB_INPUT_N_6WP3_231A:
     generate_block?: false
-    value: 3
-    br100_meaning: 'Client Child Benefit: Number of children this is for'
-    response_type: number
-    user_defined: true
   OUT_GB_INFER_C_33WP2_103A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client Policies'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_3WP2_25A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Main Dwelling: Client/Partner has a deferred interest?'
-    response_type: boolean
-    user_defined: true
   MEANS_OPA_RELEASE:
     generate_block?: false
-    value: 12.2
-    br100_meaning: 'OPA Version '
-    response_type: text
-    user_defined: false
   GB_INPUT_B_11WP2_3A:
-    value: '#applicant_has_shares?'
-    br100_meaning: 'Shares: The client has shares in a public limited company?'
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   FIRST_NAME:
     value: '#applicant_first_name'
     br100_meaning: 'Client: First name'
@@ -2385,32 +1786,21 @@ global_means:
     user_defined: true
   GB_INPUT_B_6WP3_254A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Disregarded Benefits: Additional state benefits?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_27WP2_103A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Client 3rd party accounts'
-    response_type: currency
-    user_defined: false
   DATE_OF_BIRTH:
     value: '#applicant_date_of_birth'
     br100_meaning: 'Client: Date of Birth'
     response_type: date
     user_defined: true
   CAP_CONT:
-    value: "#means_assessment_capital_contribution"
+    generate_block?: true
+    value: 0.0
     br100_meaning: 'RESULT: Capital- Capital contribution'
     response_type: currency
     user_defined: false
   GB_DECL_T_38WP3_19A:
     generate_block?: false
-    value: Signed:_______________________________
-    br100_meaning: The means declaration 1a paragraph 19
-    response_type: text
-    user_defined: false
   MARITIAL_STATUS:
     value: 'UNKNOWN'
     br100_meaning: marital status
@@ -2418,34 +1808,14 @@ global_means:
     user_defined: true
   OUT_GB_INFER_C_31WP3_12A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: B&L- Amount paid per month for food etc'
-    response_type: currency
-    user_defined: false
   GB_INPUT_B_2WP3_214A:
     generate_block?: false
-    value: true
-    br100_meaning: 'Client Employment: Employed?'
-    response_type: boolean
-    user_defined: true
   GB_INPUT_B_6WP3_241A:
     generate_block?: false
-    value: false
-    br100_meaning: 'Client Benefits: Savings Credit?'
-    response_type: boolean
-    user_defined: true
   OUT_GB_INFER_C_21WP2_101A:
     generate_block?: false
-    value: 0.0
-    br100_meaning: 'Int.Result: Client Land- Value of equity'
-    response_type: currency
-    user_defined: false
   PASSPORTED_NINO:
-    user_defined: true
-    br100_meaning: "Passported: The Receipient's NINO"
-    response_type: text
-    generate_block?: true
-    value: '#applicant_national_insurance_number'
+    generate_block?: false
   APPLICATION_FROM_APPLY:
     :value: true
     :br100_meaning: 'The application has been made through the Apply service'
@@ -2456,7 +1826,10 @@ global_means:
     br100_meaning: The email address of the provider responsible for the application
     response_type: text
     user_defined: true
+
 global_merits:
+  # TODO: could hardcode as false (manual review required) or true (manual review not required?)
+  # Note that #bypass_manual_review_in_ccms? should return true (manual review not required?) for NMT
   APPLY_CASE_MEANS_REVIEW:
     :value: '#bypass_manual_review_in_ccms?'
     :br100_meaning: 'Manual review required by case worker(FALSE means manual review required)'
@@ -2464,40 +1837,17 @@ global_merits:
     :user_defined: false
   APP_INCLUDES_IMMIGRATION_PROCS:
     generate_block?: false
-    value: false
-    br100_meaning: The Application Includes Immigration Proceedings
-    response_type: boolean
-    user_defined: false
   GB_INFER_T_6WP1_66A:
-    generate_block?: true
-    value: 'CLIENT'
-    br100_meaning: "Passported: The person who receives passported benefit?"
-    response_type: text
-    user_defined: false
+    generate_block?: false
   COPY_SEPARATE_STATEMENT:
-    value: false
-    br100_meaning: The provider has a copy of separate statement
-    response_type: boolean
-    user_defined: true
+    generate_block?: false
   PUB_AUTH_QUESTION_APPLIES:
     generate_block?: false
-    value: false
-    br100_meaning: The Actions Against Public Authorities Question Is Appropriate
-    response_type: boolean
-    user_defined: false
+  # CHECK: is this relevant to non-means-tested applications
   APP_POTENTIAL_NON_MERITS:
     generate_block?: false
-    value: false
-    br100_meaning: The Application Is Potentially Non-Means Non-Merits Tested Special
-      Children Act
-    response_type: boolean
-    user_defined: false
   DEC_CLIENT_TEXT_PARA6A:
     generate_block?: false
-    value: 'I understand:'
-    br100_meaning: 'Dec: The Client''s Declaration Paragraph 6'
-    response_type: text
-    user_defined: false
   EVIDENCE_ICACU_LETTER:
     value: false
     br100_meaning: A copy of letter from international child abduction
@@ -2511,10 +1861,6 @@ global_merits:
     user_defined: false
   MERITS_SUBMISSION_PAGE:
     generate_block?: false
-    value: true
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: true
   DECLARATION_WILL_BE_SIGNED:
     value: true
     br100_meaning: 'Dec: Relevant Declaration Will Be Signed Prior To Submission
@@ -2523,10 +1869,6 @@ global_merits:
     user_defined: true
   LEGAL_HELP_COSTS_TO_DATE:
     generate_block?: false
-    value: '0'
-    br100_meaning: The legal help costs to date
-    response_type: currency
-    user_defined: false
   COURT_ATTEND_IN_LAST_12_MONTHS:
     value: false
     br100_meaning: 'Court: Client Has Attended Court On Any Family Matter Within
@@ -2551,28 +1893,12 @@ global_merits:
     user_defined: true
   COPY_DV_POLICE_CAUTION_2A:
     generate_block?: false
-    value: true
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: true
   ECFDV_23A:
     generate_block?: false
-    value: false
-    br100_meaning: Meaning not defined in BR100
-    response_type: boolean
-    user_defined: true
   FIRST_TIER_TRIBUNAL_IMM_ASY:
     generate_block?: false
-    value: false
-    br100_meaning: The Court Is The First-Tier Tribunal (Immigration And Asylum Chamber)
-    response_type: boolean
-    user_defined: false
   CAFCASS_EXPT_RPT_RECEIVED:
     generate_block?: false
-    value: false
-    br100_meaning: 'Court: A  CAFCASS Or Other Expert Report Has Been Received'
-    response_type: boolean
-    user_defined: true
   DEC_CLIENT_TEXT_PARA15A:
     generate_block?: false
     value: Date:___/___/___
@@ -2615,6 +1941,7 @@ global_merits:
     response_type: text
     user_defined: true
   URGENT_HEARING_DATE:
+    generate_block?: false
     value: '#application_calculation_date'
     br100_meaning: 'Emg: The Date Of The Urgent Hearing'
     response_type: date
@@ -4216,22 +3543,10 @@ global_merits:
     value: true
   GB_INPUT_T_6WP1_2A:
     generate_block?: false
-    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
-    response_type: boolean
-    user_defined: true
-    value: true
   SA_SCREEN2_6WP1_PASSPORTEDBEN:
     generate_block?: false
-    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
-    response_type: boolean
-    user_defined: true
-    value: true
   SA_SCREEN4_6WP1_PASSPORT:
     generate_block?: false
-    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
-    response_type: boolean
-    user_defined: true
-    value: true
   NON_MAND_EVIDENCE_COUNSEL_OP:
     value: false
     br100_meaning: 'copy existing counsels opinion re matter prev displayed on evi screen'
@@ -4542,33 +3857,6 @@ opponent_other_parties_merits:
     response_type: boolean
     user_defined: false
 
-
-
-
-
-
-
-
-
-
-
-main_dwelling:
-  generate_block?: false
-  MAINTHIRD_INPUT_T_3WP2_12A:
-    value: "#main_dwelling_third_party_name"
-    br100_meaning: 'Main Dwelling: Name of 3rd party'
-    response_type: text
-    user_defined: true
-  MAINTHIRD_INPUT_T_3WP2_13A:
-    value: "#main_dwelling_third_party_relationship"
-    br100_meaning: 'Main Dwelling: Relationship to 3rd party'
-    response_type: text
-    user_defined: true
-  MAINTHIRD_INPUT_N_3WP2_11A:
-    value: "#main_dwelling_third_party_percentage"
-    br100_meaning: 'Main Dwelling: % owned by 3rd party'
-    response_type: number
-    user_defined: true
 proceeding_means:
   CLIENT_INVOLVEMENT_TYPE:
     value: '#proceeding_client_involvement_type_ccms_code'
@@ -4582,10 +3870,6 @@ proceeding_means:
     user_defined: true
   PROC_UPPER_TRIBUNAL:
     generate_block?: false
-    value: 'No'
-    br100_meaning: Meaning not defined in BR100
-    response_type: text
-    user_defined: false
   LEVEL_OF_SERVICE:
     value: '#lead_proceeding_substantive_level_of_service'
     br100_meaning: Form of Service
@@ -4616,6 +3900,7 @@ proceeding_means:
     br100_meaning: the proceeding's code
     response_type: text
     user_defined: true
+
 proceeding_merits:
   MATRIMONIAL_PROCEEDING:
     generate_block?: false
@@ -5308,84 +4593,4 @@ proceeding_merits:
     response_type: boolean
     user_defined: false
     generate_block?: true
-valuable_possessions:
-  VALPOSSESS_INPUT_T_12WP2_7A:
-    generate_block?: '#applicant_has_valuable_possessions?'
-    value: Aggregate of valuable possessions
-    br100_meaning: 'Val. possessions: What it is'
-    response_type: text
-    user_defined: true
-  VALPOSSESS_INPUT_C_12WP2_8A:
-    generate_block?: '#applicant_has_valuable_possessions?'
-    value: "#valuable_possessions_aggregate_value"
-    br100_meaning: 'Val. possessions: Sale value'
-    response_type: currency
-    user_defined: true
-vehicles:
-  CARANDVEH_INPUT_B_14WP2_28A:
-    value: "#vehicle_used_regularly?"
-    br100_meaning: 'Cars: It is used for regular use?'
-    response_type: boolean
-    user_defined: true
-  CARANDVEH_INPUT_D_14WP2_27A:
-    value: "#vehicle_purchased_on"
-    br100_meaning: 'Cars: Date of purchase'
-    response_type: date
-    user_defined: true
-  CARANDVEH_INPUT_T_14WP2_20A:
-    value: 'Make: unspecified'
-    br100_meaning: 'Cars: Make'
-    response_type: text
-    user_defined: true
-  CARANDVEH_INPUT_T_14WP2_21A:
-    value: 'Model: unspecified'
-    br100_meaning: 'Cars: Model'
-    response_type: text
-    user_defined: true
-  CARANDVEH_INPUT_T_14WP2_22A:
-    value: 'Registration number: unspecified'
-    br100_meaning: 'Cars: Reg'
-    response_type: text
-    user_defined: true
-  CARANDVEH_INPUT_C_14WP2_24A:
-    value: 0.0
-    br100_meaning: 'Cars: Purchase price'
-    response_type: currency
-    user_defined: true
-  CARANDVEH_INPUT_C_14WP2_25A:
-    value: "#vehicle_estimated_value"
-    br100_meaning: 'Cars: Current market value'
-    response_type: currency
-    user_defined: true
-  CARANDVEH_INPUT_C_14WP2_26A:
-    value: "#vehicle_payment_remaining"
-    br100_meaning: 'Cars: Value of loan outstanding'
-    response_type: currency
-    user_defined: true
-wages:
-  CLI_NON_HM_WS_INPUT_C_3WP3_3A:
-    value: "#wage_slip_ni_deducted"
-    br100_meaning: 'Client Employment: Amount of wage slip NI'
-    response_type: currency
-    user_defined: true
-  CLI_NON_HM_WS_INPUT_C_3WP3_1A:
-    value: "#wage_slip_gross_pay"
-    br100_meaning: 'Client Employment: Amount of wage slip gross pay'
-    response_type: currency
-    user_defined: true
-  CLI_NON_HM_WS_INPUT_C_3WP3_2A:
-    value: "#wage_slip_paye_deducted"
-    br100_meaning: 'Client Employment: Amount of wage slip PAYE'
-    response_type: currency
-    user_defined: true
-  CLI_NON_HM_WS_INPUT_D_3WP3_5A:
-    value: "#wage_slip_pay_period"
-    br100_meaning: 'Client Employment:  Wage slip pay period'
-    response_type: date
-    user_defined: true
-  GB_INPUT_B_3WP3_393A:
-    generate_block?: false
-    value: true
-    br100_meaning: 'Client Employment: Wage slip included in assessment?'
-    response_type: boolean
-    user_defined: true
+

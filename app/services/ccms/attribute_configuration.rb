@@ -1,6 +1,6 @@
 module CCMS
   class AttributeConfiguration
-    VALID_APPLICATION_TYPES = %i[standard non_passported].freeze
+    VALID_APPLICATION_TYPES = %i[standard non_means_tested non_passported].freeze
 
     attr_reader :config
 
@@ -9,7 +9,7 @@ module CCMS
       raise ArgumentError, "Invalid application type" unless application_type.in?(VALID_APPLICATION_TYPES)
 
       @config = YAML.load_file(configuration_files[:standard])
-      @config.deep_merge! YAML.load_file(configuration_files[application_type]) if application_type == :non_passported
+      @config.deep_merge! YAML.load_file(configuration_files[application_type]) if application_type.in?(%i[non_passported non_means_tested])
       @config.deep_symbolize_keys!
     end
 
@@ -18,6 +18,7 @@ module CCMS
     def configuration_files
       {
         standard: Rails.root.join("config/ccms/attribute_block_configs/base.yml"),
+        non_means_tested: Rails.root.join("config/ccms/attribute_block_configs/non_means_tested.yml"),
         non_passported: Rails.root.join("config/ccms/attribute_block_configs/non_passported.yml"),
       }
     end

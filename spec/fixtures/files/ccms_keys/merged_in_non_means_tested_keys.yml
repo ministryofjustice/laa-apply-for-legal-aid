@@ -1,0 +1,26 @@
+---
+bank_acct:
+  BALANCE:
+    generate_block?: false
+  ACCOUNT_NUMBER:
+    generate_block?: false
+  HOLDERS:
+    generate_block?: false
+  BANK_NAME:
+    generate_block?: false
+employment:
+  EMPLOYER_NAME:
+    generate_block?: false
+  EMPLOYER_TYPE:
+    generate_block?: false
+applicant:
+  NAME:
+    :value: "#applicant name"
+    :br100_meaning: 'Applicant: name'
+    :response_type: text
+    :user_defined: false
+  AGE:
+    :value: "#applicant age"
+    :br100_meaning: 'Applicant: age'
+    :response_type: number
+    :user_defined: true

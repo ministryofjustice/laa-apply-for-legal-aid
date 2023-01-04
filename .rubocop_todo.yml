@@ -227,7 +227,6 @@ RSpec/ContextWording:
     - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/attribute_configuration_spec.rb'
     - 'spec/services/ccms/attribute_value_generator_spec.rb'
-    - 'spec/services/ccms/case_add_requestor_factory_spec.rb'
     - 'spec/services/ccms/manual_review_determiner_spec.rb'
     - 'spec/services/ccms/parsers/applicant_add_response_parser_spec.rb'
     - 'spec/services/ccms/parsers/applicant_search_response_parser_spec.rb'

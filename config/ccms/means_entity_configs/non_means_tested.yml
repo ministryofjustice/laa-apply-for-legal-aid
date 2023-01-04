@@ -1,0 +1,13 @@
+---
+- method: :generate_means_proceeding_entity
+  entity_name: PROCEEDING
+  yaml_section: :proceeding_means
+
+- method: :generate_opponent_other_parties_means_entity
+  entity_name: OPPONENT_OTHER_PARTIES
+  yaml_section: :opponent_other_parties_means
+
+- method: :generate_entity
+  entity_name: global
+  instance_label: "#submission_case_ccms_reference"
+  yaml_section: :global_means
