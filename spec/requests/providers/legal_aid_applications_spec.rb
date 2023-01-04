@@ -89,7 +89,7 @@ RSpec.describe "providers legal aid application requests" do
 
         it "does not show navigation links" do
           subject
-          expect(parsed_response_body.css(".pagination-container nav")).to be_empty
+          expect(parsed_response_body.css(".govuk-pagination")).to be_empty
         end
 
         context "and more applications than page size" do
@@ -104,7 +104,7 @@ RSpec.describe "providers legal aid application requests" do
 
           it "shows pagination" do
             subject
-            expect(parsed_response_body.css(".pagination-container nav").text).to match(/Previous\s+1\s+2\s+Next/)
+            expect(parsed_response_body.css(".govuk-pagination").text).to match(/12Next page/)
           end
         end
 
