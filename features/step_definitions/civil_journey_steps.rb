@@ -117,6 +117,7 @@ Given("I have a passported application with no assets on the {string} page") do 
     explicit_proceedings: [:da001],
     set_lead_proceeding: :da001,
   )
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
   login_as @legal_aid_application.provider
 end
 
@@ -197,6 +198,7 @@ Given("I have completed the non-passported means assessment and start the merits
     set_lead_proceeding: :da001,
   )
 
+  create :legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
@@ -230,6 +232,7 @@ Given("I start the merits application with bank transactions with no transaction
     :with_uncategorised_debit_transactions,
   )
 
+  create :legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -320,7 +323,7 @@ Given("I start the means application and the applicant has uploaded transaction 
   bank_account = @applicant.bank_accounts.first
   create_list :bank_transaction, 2, :credit, bank_account: bank_account, amount: rand(1...1_500.0).round(2)
   create_list :bank_transaction, 3, :debit, bank_account: bank_account,  amount: rand(1...1_500.0).round(2)
-
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -568,6 +571,7 @@ Given("I complete the passported journey as far as check your answers for client
     set_lead_proceeding: :da001,
     applicant:,
   )
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
   login_as @legal_aid_application.provider
 
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -706,6 +710,7 @@ Given("The means questions have been answered by the applicant") do
     explicit_proceedings: %i[da001 da005],
     set_lead_proceeding: :da001,
   )
+  create(:legal_framework_merits_task_list, :da001_da005_as_applicant, legal_aid_application: @legal_aid_application)
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,

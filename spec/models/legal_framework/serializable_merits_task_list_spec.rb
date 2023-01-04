@@ -107,7 +107,7 @@ module LegalFramework
             application_children: [],
           },
         },
-        proceeding_types: [
+        proceedings: [
           {
             ccms_code: "DA004",
             tasks: {

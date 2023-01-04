@@ -16,7 +16,6 @@ module Flow
     end
 
     def next_step
-      return :used_multiple_delegated_functions unless Setting.enable_mini_loop?
       return :confirm_delegated_functions_date if date_confirmation_required
       return :delegated_functions if provider_needs_to_amend_date?
       return :limitations if at_end_of_loop?
@@ -38,7 +37,7 @@ module Flow
         when "client_involvement_type"
           :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
-          if !Setting.enable_loop? && @application.checking_answers?
+          if !Setting.enable_loop? && @application.checking_answers? && next_incomplete_proceeding.nil?
             :limitations
           elsif Setting.enable_loop?
             current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults

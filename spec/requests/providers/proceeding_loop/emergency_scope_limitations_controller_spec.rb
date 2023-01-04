@@ -14,7 +14,6 @@ RSpec.describe "EmergencyScopeLimitationsController", :vcr do
   let(:provider) { application.provider }
 
   before do
-    allow(Setting).to receive(:enable_mini_loop?).and_return(true) # TODO: Remove when the mini-loop feature flag is removed
     allow(Setting).to receive(:enable_loop?).and_return(true) # TODO: Remove when the loop feature flag is removed
   end
 

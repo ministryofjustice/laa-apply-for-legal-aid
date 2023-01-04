@@ -32,9 +32,13 @@ Feature: Under 18 applicant journey with means test review phase one disabled
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
 
-    When I select 'I have not used delegated functions'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+
+    When I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page with title "What you're applying for"
 

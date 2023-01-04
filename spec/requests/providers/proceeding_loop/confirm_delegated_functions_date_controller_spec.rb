@@ -11,8 +11,6 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
   let(:proceeding_id) { application.proceedings.first.id }
   let(:provider) { application.provider }
 
-  before { allow(Setting).to receive(:enable_mini_loop?).and_return(true) } # TODO: Remove when the mini-loop feature flag is removed
-
   describe "GET /providers/applications/:legal_aid_application_id/confirm_delegated_functions_date/:proceeding_id" do
     subject(:get_cdf) { get "/providers/applications/#{application_id}/confirm_delegated_functions_date/#{proceeding_id}" }
 

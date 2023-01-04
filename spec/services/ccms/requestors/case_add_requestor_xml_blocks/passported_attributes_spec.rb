@@ -1376,7 +1376,7 @@ module CCMS
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
                 block = XmlExtractor.call(xml, entity, attribute)
-                expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitation_code
+                expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitations.first.code
               end
             end
           end

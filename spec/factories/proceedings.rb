@@ -66,7 +66,7 @@ FactoryBot.define do
     trait :da002 do
       lead_proceeding { false }
       ccms_code { "DA002" }
-      meaning { "Variation or discharge under section 5 protection from harassment act 1997r" }
+      meaning { "Variation or discharge under section 5 protection from harassment act 1997" }
       description do
         'to be represented on an application to vary or discharge an order under section 5 Protection from Harassment Act 1997
          where the parties are associated persons (as defined by Part IV Family Law Act 1996).'

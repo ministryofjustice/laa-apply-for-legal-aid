@@ -52,20 +52,6 @@ module Flow
             end
           end,
         },
-        used_multiple_delegated_functions: {
-          path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
-          forward: lambda do |_application, delegated_functions_used_over_month_ago|
-            delegated_functions_used_over_month_ago ? :confirm_multiple_delegated_functions : :limitations
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true,
-        },
-        confirm_multiple_delegated_functions: {
-          path: ->(application) { urls.providers_legal_aid_application_confirm_multiple_delegated_functions_path(application) },
-          forward: lambda do |_application, confirmed_dates|
-            confirmed_dates ? :limitations : :used_multiple_delegated_functions
-          end,
-        },
         limitations: {
           path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
           forward: :has_national_insurance_numbers,

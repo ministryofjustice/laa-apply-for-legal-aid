@@ -8,7 +8,7 @@ Feature: Checking client details answers backwards and forwards
       | tag | section |
       | h2  | Client details |
       | h2  | Proceedings |
-      | h2  | Delegated functions |
+      | h2  | Inherent jurisdiction high court injunction proceeding details |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:

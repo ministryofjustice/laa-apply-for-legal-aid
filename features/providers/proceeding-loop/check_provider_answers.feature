@@ -2,7 +2,6 @@ Feature: proceeding-loop check provider answers
 
   @javascript @vcr
   Scenario: When I want to change something for an application that has multiple proceedings
-    Given the feature flag for enable_mini_loop is enabled
     Given the feature flag for enable_loop is enabled
     And I have started an application with multiple proceedings and reached the check your answers page
     Then I should be on a page with title matching 'Check your answers'

@@ -15,6 +15,7 @@ Given(/^an applicant named (\S+) (\S+) has completed his true layer interaction$
   bank_account = @applicant.bank_accounts.first
   FactoryBot.create_list :bank_transaction, 2, :credit, bank_account: bank_account, amount: rand(1...1_500.0).round(2)
   FactoryBot.create_list :bank_transaction, 3, :debit, bank_account: bank_account,  amount: rand(1...1_500.0).round(2)
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
 
   HMRC::CreateResponsesService.call(@legal_aid_application)
   sleep 0.5 # give time for the after_update on HMRC::Response to do its thing

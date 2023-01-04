@@ -140,15 +140,29 @@ Feature: Civil application journeys
     Then I should be on a page showing 'You have added 3 proceedings'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'Occupation order'
-    Then I enter the 'occupation order used delegated functions on' date of 35 days ago
-    Then I select 'Harassment - injunction'
-    Then I enter the 'harassment injunction used delegated functions on' date of 2 days ago
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check delegated functions dates'
-    Then I choose a 'Yes' radio button
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 3\nFGM Protection Order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 3\nFGM Protection Order\nHave you used delegated functions for this proceeding?'
+    When I choose 'Yes'
+    And I enter the 'delegated functions on' date of 2 days ago
+    When I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 3\nOccupation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Defendant/respondent'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 3\nOccupation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'Yes'
+    And I enter the 'delegated functions on' date of 35 days ago
+    When I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 3\nOccupation order\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 3 of 3\nHarassment - injunction\nWhat is your client’s role in this proceeding?'
+    When I choose 'Defendant/respondent'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 3 of 3\nHarassment - injunction\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing 'Occupation order'
     Then I should be on a page showing 'Harassment - injunction'
@@ -168,10 +182,12 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Proceeding 2 Occupation order'
     Then I should be on a page showing 'Proceeding 3 Harassment - injunction'
     Then I should not see 'Legal Aid, Sentencing and Punishment of Offenders Act'
-    Then I should be on a page showing 'Delegated functions'
-    Then I should be on a page showing 'FGM Protection Order Not used'
-    Then I should be on a page showing 'Harassment - injunction' with a date of 2 days ago using '%-d %B %Y' format
-    Then I should be on a page showing 'Occupation order' with a date of 35 days ago using '%-d %B %Y' format
+    Then I should be on a page showing 'FGM Protection Order proceeding details'
+    Then I should be on a page showing 'Harassment - injunction proceeding details'
+    Then I should be on a page showing 'Occupation order proceeding details'
+    Then I should be on a page showing 'Delegated functions Not used'
+    Then I should be on a page showing 'Delegated functions' with a date of 2 days ago using '%-d %B %Y' format
+    Then I should be on a page showing 'Delegated functions' with a date of 35 days ago using '%-d %B %Y' format
 
   @javascript @vcr
   Scenario: Completes the application using address lookup
@@ -192,9 +208,12 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'I have not used delegated functions'
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
     Then I should be on a page with title "Does the client have a National Insurance number?"
@@ -250,9 +269,18 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'I have not used delegated functions'
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 2\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 2\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(residence\)\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(residence\)\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
     Then I should be on a page with title "Does the client have a National Insurance number?"
@@ -300,20 +328,23 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'Non-molestation order'
-    Then I enter the 'nonmolestation order used delegated functions on' date of 35 days ago
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Check delegated functions dates"
-    Then I choose a 'Yes' radio button
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'Yes'
+    And I enter the 'delegated functions on' date of 35 days ago
+    When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I click link "Back"
-    Then I should be on a page showing "Check delegated functions dates"
+    Then I should be on a page showing "The date you said you used delegated functions is over one month old."
     Then I choose "No, I need to change this date"
     Then I click 'Save and continue'
-    Then I enter the 'nonmolestation order used delegated functions on' date of 3 days ago
+    When I enter the 'delegated functions on' date of 3 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     And I should be on a page showing "Emergency certificate"
@@ -349,9 +380,12 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'I have not used delegated functions'
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     When I click 'Save and continue'
@@ -382,9 +416,12 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'I have not used delegated functions'
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     Then I click 'Save and continue'
@@ -453,9 +490,12 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'I have not used delegated functions'
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     When I click 'Save and continue'
@@ -956,10 +996,13 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
-    Then I select 'Non-molestation order'
-    Then I enter the 'nonmolestation order used delegated functions on' date of 5 days ago
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'Yes'
+    And I enter the 'delegated functions on' date of 5 days ago
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
 
   @javascript @vcr

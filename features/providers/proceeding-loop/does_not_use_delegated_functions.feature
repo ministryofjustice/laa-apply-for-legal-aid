@@ -2,8 +2,7 @@ Feature: Extended proceeding loop
 
   @javascript @vcr
   Scenario: When the application has a single proceeding and I'm not going to use delegated functions
-    Given the feature flag for enable_mini_loop is enabled
-    And the feature flag for enable_loop is enabled
+    Given the feature flag for enable_loop is enabled
     And I have started an application and reached the proceedings list
     When I choose 'No'
     And I click 'Save and continue'
