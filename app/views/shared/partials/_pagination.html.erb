@@ -1,0 +1,10 @@
+<% if local_assigns[:pagy] %>
+  <div class="app-pagination__container govuk-grid-row govuk-!-display-none-print">
+    <div class="govuk-grid-column-two-thirds">
+      <%= govuk_pagination(pagy:) %>
+    </div>
+    <div class="app-pagination__info govuk-grid-column-one-third govuk-body">
+      <%== pagy_info(pagy)&.chomp %>
+    </div>
+  </div>
+<% end %>

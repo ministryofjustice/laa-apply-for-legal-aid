@@ -24,11 +24,8 @@
           <% end %>
         </tbody>
       </table>
-      <% if local_assigns[:pagy] %>
-        <div class="govuk-body pagination-container">
-          <%== pagy_nav(pagy) if pagy.pages > 1 %>
-          <span class="page-info"><%== pagy_info(pagy)&.chomp %></span>
-        </div>
-      <% end %>
+
+      <%= render "shared/partials/pagination", pagy: @pagy %>
+
     </div>
   </div>
