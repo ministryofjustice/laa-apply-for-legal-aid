@@ -502,6 +502,7 @@ en:
           filename: Filename
           size: Size
           status: Status
+          action: This column contains delete buttons per upload
           uploaded: Uploaded
           title: Files added
       client_denial_of_allegations:
@@ -663,6 +664,7 @@ en:
         filename: Filename
         size: Size
         status: Status
+        action: This column contains delete buttons per upload
         uploaded: Uploaded
         title: Files added
         no_files: Files uploaded will appear here.
@@ -697,6 +699,7 @@ en:
         uploaded: Uploaded
         delete: Delete
         select_a_category: Select a category
+        action: This column contains delete buttons per upload
         select_a_category_label: "Select a category for %{filename}"
         update: Update
     gateway_evidences:
@@ -709,6 +712,7 @@ en:
         filename: Filename
         size: Size
         status: Status
+        action: This column contains delete buttons per upload
         uploaded: Uploaded
         title: Uploaded files
     has_other_dependants:
