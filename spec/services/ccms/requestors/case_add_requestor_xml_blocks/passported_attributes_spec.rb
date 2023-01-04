@@ -842,6 +842,13 @@ module CCMS
               expect(block).to have_text_response legal_aid_application.applicant.national_insurance_number
             end
           end
+
+          context "BEN_SURNAME" do
+            it "inserts applicant's surname as a string" do
+              block = XmlExtractor.call(xml, :global_means, "BEN_SURNAME")
+              expect(block).to have_text_response legal_aid_application.applicant.last_name
+            end
+          end
         end
 
         context "LAR_INFER_B_1WP1_36A" do
@@ -2203,6 +2210,7 @@ module CCMS
 
       def false_attributes
         [
+          [:global_means, "GB_INPUT_B_11WP3_367A"],
           [:global_means, "GB_INPUT_B_1WP2_14A"],
           [:global_means, "GB_INPUT_B_1WP2_22A"],
           [:global_means, "GB_INPUT_B_1WP2_27A"],
@@ -2214,14 +2222,17 @@ module CCMS
           [:global_means, "GB_INPUT_B_17WP2_8A"],
           [:global_means, "GB_INPUT_B_18WP2_2A"],
           [:global_means, "GB_INPUT_B_18WP2_4A"],
+          [:global_means, "GB_INPUT_B_18WP2_6A"],
           [:global_means, "GB_INPUT_B_1WP1_2A"],
           [:global_means, "GB_INPUT_B_1WP4_1B"],
           [:global_means, "GB_INPUT_B_1WP4_2B"],
           [:global_means, "GB_INPUT_B_1WP4_3B"],
           [:global_means, "GB_INPUT_B_39WP3_70B"],
           [:global_means, "GB_INPUT_B_41WP3_40A"],
+          [:global_means, "GB_INPUT_B_4WP3_209A"],
           [:global_means, "GB_INPUT_B_5WP1_22A"],
           [:global_means, "GB_INPUT_B_5WP1_3A"],
+          [:global_means, "GB_INPUT_B_6WP3_240A"],
           [:global_means, "GB_PROC_B_39WP3_14A"],
           [:global_means, "GB_PROC_B_39WP3_15A"],
           [:global_means, "GB_PROC_B_39WP3_16A"],
@@ -2334,6 +2345,7 @@ module CCMS
           [:global_merits, "COURT_ATTEND_IN_LAST_12_MONTHS"],
           [:global_merits, "DECLARATION_IDENTIFIER"],
           [:global_merits, "ECF_FLAG"],
+          [:global_merits, "ECFDV_18A"],
           [:global_merits, "EVID_DEC_AGAINST_INSTRUCTIONS"],
           [:global_merits, "EVIDENCE_AMD_CORRESPONDENCE"],
           [:global_merits, "EVIDENCE_AMD_COUNSEL_OPINION"],
