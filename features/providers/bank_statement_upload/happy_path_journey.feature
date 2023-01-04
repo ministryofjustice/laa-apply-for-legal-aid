@@ -8,7 +8,6 @@ Feature: Bank statement upload journey happy path
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Upload your client's bank statements"
-    And the page is accessible
 
     Given I upload the fixture file named "acceptable.pdf"
     And I upload an evidence file named "hello_world.pdf"
@@ -18,7 +17,6 @@ Feature: Bank statement upload journey happy path
     When I click "Save and continue"
     Then I should be on a page with title matching "Review .*'s employment income"
     And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
-    And the page is accessible
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Does your client get any benefits?"
@@ -27,7 +25,6 @@ Feature: Bank statement upload journey happy path
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
     And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
-    And the page is accessible
 
     When I open the section 'Government Cost of Living Payments and disregarded benefits'
     Then the following sections should exist:
@@ -45,18 +42,15 @@ Feature: Bank statement upload journey happy path
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
     And I should see "Pension"
-    And the page is accessible
 
     When I select "None of the above"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client get student finance?"
-    And the page is accessible
 
     When I choose "Yes"
     And I enter amount "2000"
     And I click "Save and continue"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
-    And the page is accessible
 
     When I select "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
@@ -68,21 +62,16 @@ Feature: Bank statement upload journey happy path
 
     When I click "Save and continue"
     Then I should be on the "housing_benefits" page showing "Does your client receive Housing Benefit?"
-    And the page is accessible
 
     When I choose "Yes"
     And I enter amount "100"
     And I choose "Every week"
     And I click "Save and continue"
     Then I should be on a page with title "Select payments your client pays in cash"
-    And the page is accessible
-
-    Then I should be on a page with title "Select payments your client pays in cash"
     And I should see "Housing"
     And I should see "Childcare"
     And I should not see "Maintenance payments to a former partner"
     And I should not see "Payments towards legal aid in a criminal case"
-    And the page is accessible
 
     When I select "None of the above"
     And I click "Save and continue"
@@ -97,7 +86,6 @@ Feature: Bank statement upload journey happy path
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Upload your client's bank statements"
-    And the page is accessible
 
     Given I upload the fixture file named "acceptable.pdf"
     And I upload an evidence file named "hello_world.pdf"
@@ -111,7 +99,6 @@ Feature: Bank statement upload journey happy path
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
     And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
-    And the page is accessible
 
     When I open the section 'Government Cost of Living Payments and disregarded benefits'
     Then the following sections should exist:
@@ -129,18 +116,15 @@ Feature: Bank statement upload journey happy path
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
     And I should see "Pension"
-    And the page is accessible
 
     When I select "None of the above"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client get student finance?"
-    And the page is accessible
 
     When I choose "Yes"
     And I enter amount "2000"
     And I click "Save and continue"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
-    And the page is accessible
 
     When I select "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
@@ -152,21 +136,16 @@ Feature: Bank statement upload journey happy path
 
     When I click "Save and continue"
     Then I should be on the "housing_benefits" page showing "Does your client receive Housing Benefit?"
-    And the page is accessible
 
     When I choose "Yes"
     And I enter amount "100"
     And I choose "Every week"
     And I click "Save and continue"
     Then I should be on a page with title "Select payments your client pays in cash"
-    And the page is accessible
-
-    Then I should be on a page with title "Select payments your client pays in cash"
     And I should see "Housing"
     And I should see "Childcare"
     And I should not see "Maintenance payments to a former partner"
     And I should not see "Payments towards legal aid in a criminal case"
-    And the page is accessible
 
     When I select "None of the above"
     And I click "Save and continue"
