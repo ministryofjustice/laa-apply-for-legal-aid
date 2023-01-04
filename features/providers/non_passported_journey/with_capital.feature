@@ -54,10 +54,12 @@ Feature: non_passported_journey with capital
     And I fill 'offline savings accounts' with '456.33'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
+    And I check 'Money not in a bank account'
+    Then I fill "savings-amount-cash-field" with "654.33"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "My client has none of these assets"
+    And I check 'Any valuable items worth £500 or more'
+    Then I fill "other-assets-declaration-valuable-items-value-field" with "546.33"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
     Then I choose 'Yes'
