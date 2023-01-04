@@ -1,56 +1,9 @@
-.pagination-container {
-  nav,
-  .page-info {
-    display: inline;
-    line-height: 2em;
-  }
+.app-pagination__container .app-pagination__info {
+  text-align: center;
 
-  .page-info {
+  @include govuk-media-query($from: tablet) {
     float: right;
-  }
-
-  .pagy-nav .page {
-    a {
-      padding: 0 10px;
-      text-decoration: none;
-    }
-
-    &.disabled,
-    &.active {
-      padding: 0 10px;
-    }
-
-    &.disabled a,
-    &.active a {
-      padding: 0;
-    }
-
-    &.prev a:before,
-    &.prev.disabled:before {
-      margin-right: 4px;
-      border-width: 3px 0 0 3px;
-    }
-
-    &.next a:after,
-    &.next.disabled:after {
-      margin-left: 4px;
-      border-width: 0 3px 3px 0;
-    }
-  }
-
-  .pagy-nav .page.prev.disabled:before,
-  .pagy-nav .page.next.disabled:after,
-  .pagy-nav .page.prev a:before,
-  .pagy-nav .page.next a:after {
-    content: "";
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    border-style: solid;
-    color: #0b0c0c;
-    background: transparent;
+    line-height: 2em;
+    text-align: right;
   }
 }
