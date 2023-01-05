@@ -281,6 +281,20 @@ Feature: Checking answers backwards and forwards
       Then I choose "Yes"
       And I click "Save and continue"
       Then I should be on a page showing 'Check your answers'
+      And the answer for "vehicles remaining payments" should be "£2,000"
+
+      When I click Check Your Answers Change link for 'vehicles remaining payments'
+      Then I should be on a page showing "Are there any payments left on the vehicle?"
+      Then the radio button response for "Vehicle payments remain" should be "Yes"
+      When I choose "No"
+      And I click "Save and continue"
+      And I click "Save and continue"
+      And I click "Save and continue"
+      Then I should be on a page showing 'Check your answers'
+      And the answer for "vehicles remaining payments" should be "No"
+      When I click Check Your Answers Change link for 'vehicles remaining payments'
+      Then I should be on a page showing "Are there any payments left on the vehicle?"
+      And the radio button response for "Vehicle payments remain" should be "No"
 
     @javascript
     Scenario: I submit the application and view the check_your_answers page
