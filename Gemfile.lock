@@ -603,8 +603,8 @@ GEM
     rubocop-rspec (2.15.0)
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
-    ruby-saml (1.14.0)
-      nokogiri (>= 1.10.5)
+    ruby-saml (1.15.0)
+      nokogiri (>= 1.13.10)
       rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
