@@ -26,7 +26,8 @@
     "stylelint": "^14.16.1",
     "stylelint-config-gds": "^0.2.0",
     "stylelint-order": "^5.0.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.11.1",
+    "puppeteer": "^19.2.0"
   },
   "resolutions": {
     "acorn": "^7.1.1",

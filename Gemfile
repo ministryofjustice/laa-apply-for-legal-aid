@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.1.3"
 
 gem "aasm", "~> 5.4.0"
 gem "active_model_serializers", "~> 0.10.13"
@@ -89,7 +89,7 @@ gem "webpacker", "~> 5", ">= 5.4.3"
 gem "wdm", ">= 0.1.0" if Gem.win_platform?
 
 # generating PDFs
-gem "wicked_pdf"
+gem "grover"
 
 # DFE formbuilder
 gem "govuk_design_system_formbuilder"

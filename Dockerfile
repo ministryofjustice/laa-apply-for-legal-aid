@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-3.1.2
+FROM ministryofjustice/apply-base:latest-3.1.3
 MAINTAINER apply for legal aid team
 
 # add non-root user and group with alpine first available uid, 1000
@@ -37,7 +37,7 @@ EXPOSE 3002
 
 COPY . .
 
-RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
+RUN NODE_OPTIONS=--openssl-legacy-provider bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
 
 # tidy up installation - these are installed in the apply-base image
 RUN apk del build-dependencies
