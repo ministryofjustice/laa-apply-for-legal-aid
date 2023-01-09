@@ -60,6 +60,8 @@ en:
           <<: *true_false
       application_merits_task_opponent:
         <<: *opponent
+      application_merits_task_statement_of_case:
+        statement: Enter your client's statement of case
       setting:
         mock_true_layer_data:
           <<: *true_false
