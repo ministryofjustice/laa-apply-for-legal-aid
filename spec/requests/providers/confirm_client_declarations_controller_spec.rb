@@ -1,95 +1,91 @@
 require "rails_helper"
 
 RSpec.describe Providers::ConfirmClientDeclarationsController do
-  let(:application) { create(:legal_aid_application) }
-  let(:provider) { application.provider }
+  let(:legal_aid_application) { create(:legal_aid_application) }
+
+  before do
+    freeze_time
+    login
+    request
+  end
 
   describe "GET /providers/applications/:id/confirm_client_declaration" do
-    subject(:request) { get providers_legal_aid_application_confirm_client_declaration_path(application) }
-
-    context "when the provider is not authenticated" do
-      before { request }
-
-      it_behaves_like "a provider not authenticated"
+    subject(:request) do
+      get providers_legal_aid_application_confirm_client_declaration_path(legal_aid_application)
     end
 
     context "when the provider is authenticated" do
-      before do
-        login_as provider
-        request
-      end
+      let(:login) { login_as legal_aid_application.provider }
 
-      it "returns http success" do
+      it "displays the declaration confirmation page", :aggregate_failures do
         expect(response).to have_http_status(:ok)
+        expect(page).to have_content("Confirm the following")
       end
+    end
 
-      it "displays the confirm client declaration page" do
-        expect(unescaped_response_body).to include(I18n.t("providers.confirm_client_declarations.show.h1-heading"))
-      end
+    context "when the provider is not authenticated" do
+      let(:login) { nil }
+
+      it_behaves_like "a provider not authenticated"
     end
   end
 
   describe "PATCH /providers/applications/:id/confirm_client_declaration" do
-    subject(:request) { patch providers_legal_aid_application_confirm_client_declaration_path(application), params: }
-
-    let(:params) do
-      {
-        legal_aid_application: { client_declaration_confirmed: },
-      }
+    subject(:request) do
+      patch providers_legal_aid_application_confirm_client_declaration_path(legal_aid_application),
+            params: params.merge(submit_button)
     end
+
+    let(:params) { { legal_aid_application: { client_declaration_confirmed: } } }
     let(:client_declaration_confirmed) { true }
+    let(:submit_button) { { continue_button: "Continue" } }
 
     context "when the provider is authenticated" do
-      before do
-        login_as provider
-        request
+      let(:login) { login_as legal_aid_application.provider }
+
+      context "when the provider confirms the declaration" do
+        it "updates the application and redirects to the next page", :aggregate_failures do
+          expect(legal_aid_application.reload.client_declaration_confirmed_at)
+            .to eq Time.current
+          expect(response).to redirect_to(
+            providers_legal_aid_application_review_and_print_application_path(legal_aid_application),
+          )
+        end
       end
 
-      context "when form submitted with continue button" do
-        let(:submit_button) do
-          {
-            continue_button: "Continue",
-          }
+      context "when the provider does not confirm the declaration" do
+        let(:client_declaration_confirmed) { "" }
+
+        it "doesn't update the application and displays an error", :aggregate_failures do
+          expect(legal_aid_application.reload.client_declaration_confirmed_at)
+            .to be_nil
+          expect(page).to have_error_message(
+            "Confirm this information is correct and that you'll get a signed " \
+            "declaration from your client",
+          )
         end
+      end
 
-        context "when client_declaration_confirmed checkbox checked" do
-          it "updates legal aid application client_declaration_confirmed" do
-            expect(application.reload.client_declaration_confirmed_at >= 2.seconds.ago).to be true
-          end
-        end
+      context "when the provider saves as draft" do
+        let(:client_declaration_confirmed) { "" }
+        let(:submit_button) { { draft_button: "Save as draft" } }
 
-        context "when client_declaration_confirmed checkbox unchecked" do
-          let(:client_declaration_confirmed) { nil }
-
-          it "does not update legal aid application client_declaration_confirmed" do
-            expect(application.reload.client_declaration_confirmed_at).to be_nil
-          end
-
-          it "displays an error" do
-            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.client_declaration_confirmed.blank"))
-          end
-        end
-
-        context "when form submitted using Save as draft button" do
-          let(:params) { { draft_button: "Save as draft" } }
-
-          it "redirect provider to provider's applications page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_applications_path)
-          end
-
-          it "sets the application as draft" do
-            request
-            expect(application.reload).to be_draft
-          end
+        it "sets the application as draft and redirects to the dashboard", :aggregate_failures do
+          expect(legal_aid_application.reload).to be_draft
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
       end
     end
 
-    context "when unauthenticated" do
-      before { request }
+    context "when the provider is not authenticated" do
+      let(:login) { nil }
+      let(:submit_button) { { continue_button: "Continue" } }
 
       it_behaves_like "a provider not authenticated"
     end
+  end
+
+  def have_error_message(text)
+    have_css(".govuk-error-summary__list > li", text:)
   end
 end
