@@ -1,17 +1,20 @@
 module LegalAidApplications
   class ConfirmClientDeclarationForm < BaseForm
+    include ActiveModel::Attributes
+
     form_for LegalAidApplication
 
-    attr_accessor :client_declaration_confirmed
+    attribute :client_declaration_confirmed, :boolean
 
-    validate :confirm_client_declaration_presence
+    validates :client_declaration_confirmed,
+              acceptance: true, allow_nil: false, unless: :draft?
 
-  private
+    def save
+      return false unless valid?
 
-    def confirm_client_declaration_presence
-      return if draft? || client_declaration_confirmed.present?
-
-      errors.add(:client_declaration_confirmed, I18n.t("activemodel.errors.models.legal_aid_application.attributes.client_declaration_confirmed.blank"))
+      model.update!(client_declaration_confirmed_at: Time.current)
     end
+
+    alias_method :save!, :save
   end
 end
