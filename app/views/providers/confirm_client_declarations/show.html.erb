@@ -16,7 +16,7 @@
     <% end %>
 
     <%= form.govuk_check_boxes_fieldset :client_declaration_confirmed, legend: nil do %>
-      <p><%= form.govuk_check_box :client_declaration_confirmed, true, '', multiple: false, label: { text: t('.confirmation_checkbox') } %></p>
+      <p><%= form.govuk_check_box :client_declaration_confirmed, true, '', link_errors: true, multiple: false, label: { text: t('.confirmation_checkbox') } %></p>
     <% end %>
 
     <%= next_action_buttons(
