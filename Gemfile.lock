@@ -665,7 +665,7 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    spring (4.1.0)
+    spring (4.1.1)
     strong_migrations (1.4.1)
       activerecord (>= 5.2)
     super_diff (0.9.0)
