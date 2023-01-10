@@ -41,12 +41,12 @@ RSpec.describe Admin::LegalAidApplicationsController do
     context "with pagination" do
       it "shows current total information" do
         subject
-        expect(response.body).to include("Showing 3 of 3")
+        expect(page).to have_css(".app-pagination__info", text: "Showing 3 of 3")
       end
 
       it "does not show navigation links" do
         subject
-        expect(parsed_response_body.css(".pagination-container nav")).to be_empty
+        expect(page).not_to have_css(".govuk-pagination")
       end
 
       context "and more applications than page size" do
@@ -55,12 +55,12 @@ RSpec.describe Admin::LegalAidApplicationsController do
 
         it "show page information" do
           subject
-          expect(response.body).to include("Showing 1 - 3 of 5 results")
+          expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
         end
 
         it "shows pagination" do
           subject
-          expect(parsed_response_body.css(".pagination-container nav").text).to match(/Previous\s+1\s+2\s+Next/)
+          expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
         end
       end
     end

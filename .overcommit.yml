@@ -29,7 +29,7 @@ PreCommit:
     command: ['yarn', 'run', 'standard']
     requires_files: true
     include: 'app/webpack/**/*.js'
-  Stylelint:
+  StyleLint:
     enabled: true
     command: ['yarn', 'run', 'stylelint']
     requires_files: true
