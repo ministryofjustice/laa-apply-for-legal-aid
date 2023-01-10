@@ -381,7 +381,7 @@ GEM
     launchy (2.5.2)
       addressable (~> 2.8)
     libreconv (0.9.5)
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.19.1)
@@ -771,7 +771,7 @@ DEPENDENCIES
   jwt
   launchy
   libreconv
-  listen (>= 3.0.5, < 3.8)
+  listen (>= 3.0.5, < 3.9)
   nesty
   net-imap
   net-pop
