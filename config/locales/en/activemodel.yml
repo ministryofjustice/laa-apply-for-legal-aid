@@ -447,7 +447,7 @@ en:
               blank: Enter the date you used delegated functions
               date_not_in_range: "The date you used delegated functions cannot be before %{months}"
             client_declaration_confirmed:
-              blank: You MUST confirm that you will obtain the necessary signed declarations/signatures and will retain them upon the client's file.
+              blank: Confirm the above is correct and that you'll get a signed declaration from your client
         other_assets_declaration:
           attributes:
             valuable_items_value:
