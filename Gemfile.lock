@@ -472,7 +472,7 @@ GEM
     pg (1.4.5)
     pg_dump_anonymize (0.1.2)
     prometheus_exporter (0.4.17)
-    pry (0.14.1)
+    pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
     pry-byebug (3.10.1)
