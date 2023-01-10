@@ -380,6 +380,28 @@ Feature: Means report
       | tag | section |
       | h2  | Client details |
 
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Proceeding eligibility |
+      | h2  | Passported means |
+      | h2  | Income result |
+      | h2  | Income |
+      | h3  | Employment income |
+      | h2  | Outgoings |
+      | h2  | Deductions |
+      | h2  | Caseworker Review |
+      | h2  | Capital result |
+      | h2  | Property, savings and other assets |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h2  | Which bank accounts does your client have? |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+      | h3  | Bank statements |
+      | h3  | Does your client have any savings accounts they cannot access online? |
+
    And the "Client details" check your answers section should contain:
     | question | answer |
     | Age at computation date | 17 years old |
