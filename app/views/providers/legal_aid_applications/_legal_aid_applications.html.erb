@@ -10,7 +10,7 @@
           <th class="nullcell" aria-hidden="true"></th>
           <%= sort_column_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t('.col_and_state') } %>
           <%= sort_column_th type: :alphabetic, content: t('.status'), currently_sorted: @initial_sort[:status] %>
-          <th class='govuk-table__header clear-all' scope='col'>Action</th>
+          <th class='govuk-table__header clear-all' scope='col'><%= t('.action') %></th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -57,8 +57,11 @@
                     class: 'govuk-button govuk-button--secondary govuk-!-margin-1 no-script',
                     suffix: t('.delete_suffix', reference: ref, applicant: application.applicant_full_name)
                     ) %>
-                  <button class="govuk-button govuk-button--secondary govuk-!-margin-1 script hidden" id="<%= ref %>-modal-btn"
-                          data-toggle="modal" data-target="<%= ref %>_modal"><%= t('.delete') %></button>
+                  <button class="govuk-button govuk-button--secondary govuk-!-margin-1 script hidden"
+                          id="<%= ref %>-modal-btn"
+                          data-toggle="modal"
+                          data-target="<%= ref %>_modal">
+                    <%= t('.delete') %> <span class="govuk-visually-hidden"><%= t('.delete_label', reference: application.application_ref, applicant_name: application.applicant.full_name) %></span></button>
               <% end %>
               </td>
             </tr>

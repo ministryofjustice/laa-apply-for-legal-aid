@@ -34,4 +34,4 @@ Feature: Deleting applications
   Scenario: I cannot delete a previously created application which has been submitted
     Given I have created and submitted an application
     When I visit the applications page
-    Then I should not see 'Delete'
+    Then I should not see a 'Delete' button

@@ -4,7 +4,7 @@ RSpec.describe "providers legal aid application requests" do
   describe "GET /providers/applications" do
     subject { get providers_legal_aid_applications_path(params) }
 
-    let(:legal_aid_application) { create(:legal_aid_application) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
     let(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
@@ -47,9 +47,9 @@ RSpec.describe "providers legal aid application requests" do
 
       context "when legal_aid_application current path set" do
         let!(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
-        let!(:legal_aid_application) { create(:legal_aid_application, provider_step: :applicant_details) }
-        let!(:other_provider_in_same_firm_application) { create(:legal_aid_application, provider: other_provider_in_same_firm, provider_step: :applicant_details) }
-        let!(:other_provider_application) { create(:legal_aid_application, provider: other_provider, provider_step: :applicant_details) }
+        let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, provider_step: :applicant_details) }
+        let!(:other_provider_in_same_firm_application) { create(:legal_aid_application, :with_applicant, provider: other_provider_in_same_firm, provider_step: :applicant_details) }
+        let!(:other_provider_application) { create(:legal_aid_application, :with_applicant, provider: other_provider, provider_step: :applicant_details) }
 
         it "includes a link to the legal aid application's current path" do
           subject
@@ -68,7 +68,7 @@ RSpec.describe "providers legal aid application requests" do
       end
 
       context "when legal_aid_application current path is unknown" do
-        let!(:legal_aid_application) { create(:legal_aid_application, provider_step: :unknown) }
+        let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, provider_step: :unknown) }
 
         it "links to start of journey" do
           subject
@@ -94,7 +94,7 @@ RSpec.describe "providers legal aid application requests" do
 
         context "and more applications than page size" do
           # Creating 4 additional means there are now 5 applications
-          let!(:additional_applications) { create_list(:legal_aid_application, 4, provider:) }
+          let!(:additional_applications) { create_list(:legal_aid_application, 4, :with_applicant, provider:) }
           let(:params) { { page_size: 3 } }
 
           it "show page information" do

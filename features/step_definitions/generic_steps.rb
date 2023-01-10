@@ -20,6 +20,14 @@ Then("I should see govuk-details {string}") do |text|
   expect(page).to have_selector(".govuk-details", text:)
 end
 
+And(/^I should (see|not see) a ['|"](.*?)['|"] button$/) do |visibility, text|
+  if visibility == "see"
+    expect(page).to have_selector("button", text:)
+  else
+    expect(page).not_to have_selector("button", text:)
+  end
+end
+
 Then("the following sections should exist:") do |table|
   table.hashes.each do |row|
     expect(page).to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
