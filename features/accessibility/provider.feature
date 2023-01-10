@@ -274,7 +274,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
     And the page is accessible
-    Then I select the first checkbox
+    Then I check "I confirm the above is correct and that I'll get a signed declaration from my client"
     Then I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
     And the page is accessible

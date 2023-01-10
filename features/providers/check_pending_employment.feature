@@ -138,7 +138,7 @@ Feature: Check pending employment
     When I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
 
-    When I check "I confirm the above is correct and that I'll obtain a signed declaration from my client."
+    When I check "I confirm the above is correct and that I'll get a signed declaration from my client"
     And I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
 
