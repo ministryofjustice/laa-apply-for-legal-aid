@@ -568,8 +568,8 @@ en:
         uploaded: Uploaded
         delete: Delete
         select_a_category: Select a category
+        select_a_category_label: "Select a category for %{filename}"
         update: Update
-        select_attachment_label: Select a label for the attachment
     gateway_evidences:
       show:
         h1-heading: Upload supporting evidence

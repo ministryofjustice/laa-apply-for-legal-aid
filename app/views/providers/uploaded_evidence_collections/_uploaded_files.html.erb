@@ -40,7 +40,7 @@
                                                @attachment_type_options,
                                                :first,
                                                :last,
-                                               label: nil,
+                                               label: { text: t('.select_a_category_label', filename: attachment.document.filename), class: 'govuk-visually-hidden' },
                                                options: { selected: selected },
                                                class: [select_error] %>
             </div>
