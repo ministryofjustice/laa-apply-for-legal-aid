@@ -38,6 +38,16 @@
         ) %>
   <% end %>
 
+  <% if Setting.means_test_review_phase_one? && :means_test.in?(attributes) %>
+    <%= check_answer_link(
+          name: :means_test,
+          url: nil,
+          question: t(".means_tested"),
+          answer: yes_no(!@legal_aid_application.non_means_tested?),
+          read_only:,
+        ) %>
+  <% end %>
+
   <% if :address.in?(attributes) %>
     <%= check_answer_link(
           name: :address,
