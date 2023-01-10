@@ -117,7 +117,7 @@ Feature: Provider accessibility
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And the page is accessible
     And I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
+    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
     And the page is accessible
     Then I select the first checkbox
     And I click 'Save and continue'
@@ -200,7 +200,7 @@ Feature: Provider accessibility
     Then I select "Any valuable items worth £500 or more"
     And I fill 'Valuable items value' with '600'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
     And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'

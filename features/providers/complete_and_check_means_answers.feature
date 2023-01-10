@@ -26,7 +26,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
 
     When I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
+    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
     When I select the first checkbox
     And I click 'Save and continue'
     And I click 'Save and continue'
@@ -74,7 +74,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page with title "Sort your client's income into categories"
 
     When I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
+    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
 
     When I select the first checkbox
     And I click 'Save and continue'

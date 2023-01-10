@@ -59,7 +59,7 @@ en:
       salary: Salary
       student_loan: Student loan
     page_titles:
-      benefits: Select benefits payments
+      benefits: Select any benefits your client got in the last 3 months
       child_care: Select childcare payments
       friends_or_family: Select payments from friends or family
       legal_aid: Select legal aid payments
@@ -70,9 +70,9 @@ en:
       rent_or_mortgage: Select housing payments
       salary: Select salary or wage payments
       student_loan: Select student loan or grant payments
-      excluded_benefits: Select disregarded benefits payments
+      excluded_benefits: Select government Cost of Living Payments and disregarded benefits
     benefits:
-      inset_text: Select every benefits payment your client received in the past 3 months.
+      inset_text: Do not include Housing Benefit, government Cost of Living Payments or any other disregarded benefits.
     child_care:
       inset_text: Select every childcare payment your client made in the past 3 months.
     excluded_benefits:

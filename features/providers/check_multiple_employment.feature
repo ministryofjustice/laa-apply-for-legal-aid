@@ -37,7 +37,7 @@ Feature: Check multiple employment
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
 
     And I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
+    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
 
     Then I select the first checkbox
     And I click 'Save and continue'
@@ -75,7 +75,7 @@ Feature: Check multiple employment
 
     When I check "My client has none of these assets"
     And I click 'Save and continue'
-    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
+    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
 
     When I choose "No"
     And I click 'Save and continue'

@@ -40,7 +40,7 @@
 #    Then I select "Land"
 #    Then I fill "Land value" with "50000"
 #    Then I click 'Save and continue'
-#    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
+#    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
 #    Then I choose 'Yes'
 #    Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
 #    Then I click 'Save and continue'
@@ -51,7 +51,7 @@
 #    Then I click link "Back"
 #    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
 #    Then I click link "Back"
-#    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
+#    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
 #    Then I click link "Back"
 #    Then I should be on a page showing "Which assets does your client have?"
 #    Then I click link "Back"

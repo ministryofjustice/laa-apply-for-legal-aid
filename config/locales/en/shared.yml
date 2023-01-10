@@ -136,7 +136,56 @@ en:
           - "%{capital_contribution} from their disposable capital"
         line_2: Your client is ineligible for Section 8 proceedings.
         line_3: You still need to provide details of the case before we can grant legal aid.
-
+    cost_of_living:
+      header: Government Cost of Living Payments
+      text: Government Cost of Living Payments are disregarded from the financial eligibility calculation, for example
+      list:
+        - Pensioner Cost of Living Payment
+        - Cost of Living Payment
+        - Disability Cost of Living Payment
+        - Household support fund
+        - Council tax rebate
+        - Energy Bills Support Scheme (EBSS)
+        - Payments for those who are not served by mains gas
+    disregarded_benefits:
+      header: Disregarded benefits
+      text: The following benefits are disregarded from the financial eligibility calculation.
+      carer_disability:
+        heading: Carer and disability benefits
+        list:
+        - Attendance Allowance
+        - Carer's Allowance
+        - Community Care Direct Payments
+        - Constant Attendance Allowance
+        - Disability Living Allowance
+        - Exceptionally Severe Disablement Allowance
+        - Independent Living Fund
+        - Payments on account of benefit
+        - Personal Independence Payments (PIP)
+        - Severe Disablement Allowance
+        - Special Education Needs (SEN) Direct Payment
+        - Welsh Independent Living Grant
+      low_income:
+        heading: Low income benefits
+        list:
+        - Benefit Transfer Advance (Universal Credit)
+        - Budgeting Advance
+        - Council Tax Reduction
+        - Earnings Top-up (ETU)
+        - Housing Benefit
+        - Social Fund Funeral Payment
+        - Social Fund payments
+      other:
+        heading: Other benefits
+        list:
+        - Armed Forces Independence Payment
+        - Foster Carers Allowance
+        - Grenfell Tower Residents' Discretionary Fund
+        - Grenfell Tower fire victims payments
+        - War Pensions Scheme payments
+        - War Widow(er) Pension
+        - Widow's Pension lump sum payments
+        - Windrush Compensation Scheme Payments
     means_report:
       item:
         deductions:
@@ -362,7 +411,7 @@ en:
           question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
         providers:
           heading: Restrictions on your client's assets
-          question: Is your client prohibited from selling or borrowing against their assets? 
+          question: Is there anything else you need to tell us about your client’s assets?
       vehicles:
         providers:
           heading: Vehicles
@@ -537,6 +586,7 @@ en:
                 trust_value: Enter the estimated total value
                 hint:
                   check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
+                  check_box_money_owed_value: Do not include any government Cost of Living Payments owed to your client.
       shared_ownership_form:
         friend_family_member_or_other_individual: Yes, a friend, family member or other individual
         housing_assocation_or_landlord: Yes, a housing association or landlord
