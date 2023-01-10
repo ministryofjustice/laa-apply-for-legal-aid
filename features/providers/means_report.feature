@@ -405,3 +405,4 @@ Feature: Means report
    And the "Client details" check your answers section should contain:
     | question | answer |
     | Age at computation date | 17 years old |
+    | Was the client means-tested? | No |
