@@ -84,12 +84,12 @@ RSpec.describe "providers legal aid application requests" do
       context "with pagination" do
         it "shows current total information" do
           subject
-          expect(response.body).to include("Showing 1 of 1")
+          expect(page).to have_css(".app-pagination__info", text: "Showing 1 of 1")
         end
 
         it "does not show navigation links" do
           subject
-          expect(parsed_response_body.css(".govuk-pagination")).to be_empty
+          expect(page).not_to have_css(".govuk-pagination")
         end
 
         context "and more applications than page size" do
@@ -99,12 +99,12 @@ RSpec.describe "providers legal aid application requests" do
 
           it "show page information" do
             subject
-            expect(response.body).to include("Showing 1 - 3 of 5")
+            expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
           end
 
           it "shows pagination" do
             subject
-            expect(parsed_response_body.css(".govuk-pagination").text).to match(/12Next page/)
+            expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
           end
         end
 
@@ -113,7 +113,7 @@ RSpec.describe "providers legal aid application requests" do
 
           it "is excluded from the list" do
             subject
-            expect(response.body).to include("Showing 1 of 1")
+            expect(page).to have_css(".app-pagination__info", text: "Showing 1 of 1")
           end
         end
       end
