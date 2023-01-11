@@ -89,8 +89,8 @@ RSpec.describe "provider restrictions request" do
                      df_options: { DA004: [Date.new(2020, 12, 19), Date.new(2020, 12, 19)] })
             end
 
-            it "redirects to check passported answers" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+            it "redirects to checking answers income page" do
+              expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(application))
             end
           end
         end
@@ -127,12 +127,12 @@ RSpec.describe "provider restrictions request" do
           end
         end
 
-        context "provider checking citizen's answers" do
+        context "provider checking answers" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-          it "redirects to means summary page" do
+          it "redirects to checking answers income page" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path)
           end
         end
       end

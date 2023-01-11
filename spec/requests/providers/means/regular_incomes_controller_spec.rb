@@ -149,7 +149,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
         patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
 
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
       end
     end

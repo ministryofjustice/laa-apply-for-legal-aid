@@ -31,8 +31,6 @@ RSpec.describe Providers::MeansSummariesController do
       get providers_legal_aid_application_means_summary_path(legal_aid_application)
     end
 
-    let!(:bank_transactions) { create_list(:bank_transaction, 3, transaction_type:, bank_account:) }
-
     before do
       login
       request
@@ -40,12 +38,6 @@ RSpec.describe Providers::MeansSummariesController do
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
-    end
-
-    it "displays the bank transaction data" do
-      total_amount = bank_transactions.sum(&:amount)
-      expect(total_amount).not_to be_zero
-      expect(response.body).to include(ActiveSupport::NumberHelper.gds_number_to_currency(total_amount))
     end
 
     it "displays the correct vehicles details" do

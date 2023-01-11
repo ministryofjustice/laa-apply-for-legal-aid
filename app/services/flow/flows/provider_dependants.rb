@@ -19,7 +19,7 @@ module Flow
                 :dependants
               end
             else
-              application.checking_non_passported_means? ? :means_summaries : :check_passported_answers
+              :check_answers_incomes
             end
           end,
         },
@@ -33,7 +33,7 @@ module Flow
             has_other_dependant ? :dependants : :check_answers_incomes
           },
           check_answers: lambda { |_application, has_other_dependant|
-            has_other_dependant ? :dependants : :means_summaries
+            has_other_dependant ? :dependants : :check_answers_incomes
           },
         },
         remove_dependants: {

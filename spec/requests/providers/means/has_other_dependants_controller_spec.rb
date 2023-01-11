@@ -38,12 +38,12 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
     context "when providers chooses no" do
       let(:has_other_dependant) { "false" }
 
-      it "redirects to the own home page" do
+      it "redirects to the check answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
       end
 
-      context "when provider is on passported journey" do
+      context "when provider is on non-passported journey without bank statement upload permissions" do
         before do
           legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
           legal_aid_application.update!(provider_received_citizen_consent: nil)
@@ -54,9 +54,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
             legal_aid_application.transaction_types << create(:transaction_type, :debit)
           end
 
-          it "redirects to the outgoings summary index page" do
+          it "redirects to the check answers income page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
           end
         end
 
@@ -65,9 +65,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
             legal_aid_application.transaction_types.destroy_all
           end
 
-          it "redirects to the own home page" do
+          it "redirects to the check answers income page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
           end
         end
       end
@@ -78,9 +78,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
           legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
-        it "redirects to the own home page" do
+        it "redirects to the check answers income page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
         end
       end
     end
@@ -117,9 +117,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
       let(:has_other_dependant) { "false" }
 
-      it "redirects to the means summary page" do
+      it "redirects to the check answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
       end
     end
   end

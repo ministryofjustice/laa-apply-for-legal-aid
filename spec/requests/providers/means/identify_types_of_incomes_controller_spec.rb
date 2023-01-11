@@ -262,9 +262,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
             legal_aid_application.transaction_types.credits.destroy_all
           end
 
-          it "redirects to means_summaries" do
+          it "redirects to checking answers income" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
           end
         end
 
