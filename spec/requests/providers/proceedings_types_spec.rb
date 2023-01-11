@@ -34,6 +34,25 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
         expect(response.body).not_to include("govuk-form-group--error")
       end
 
+      context "when the provider has full section 8 permissions" do
+        before do
+          provider.permissions << Permission.find_or_create_by(role: "application.full_section_8.*")
+        end
+
+        it "doesn't prompt users that they must enter a domestic abuse proceeding" do
+          subject
+          expect(response.body).to include(I18n.t("providers.proceedings_types.index.search_help_example_with_s8_permission"))
+          expect(response.body).not_to include(I18n.t("providers.proceedings_types.index.search_help_example"))
+        end
+      end
+
+      context "when the provider doesn't have full section 8 permissions" do
+        it "prompts users that they must enter a domestic abuse proceeding" do
+          subject
+          expect(response.body).to include(I18n.t("providers.proceedings_types.index.search_help_example"))
+        end
+      end
+
       describe "back link" do
         context "when the applicant's address used address lookup service", :vcr do
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address_lookup) }

@@ -1229,7 +1229,8 @@ en:
         no_results: No results found.
         proceeding: proceeding
         legacy_search_help_example: You can only apply for a single domestic abuse proceeding per application
-        search_help_example: Select one domestic abuse or Section 8 proceeding at a time. You must select at least one domestic abuse proceeding.
+        search_help_example: Select one proceeding at a time. You can choose more later. You must select at least one domestic abuse proceeding.
+        search_help_example_with_s8_permission: Select one proceeding at a time. You can choose more later.
         accessibility_message: Tab out of this box to select returned options
         accessibility_message_safari_browser: "You are in a search field, tab out to see results"
         you_have_selected: You have selected %{count}
