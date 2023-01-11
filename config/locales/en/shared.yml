@@ -269,6 +269,16 @@ en:
         first_name: First name
         last_name: Last name
         nino: National Insurance number
+      dependants:
+        has_dependants: Does your client have any dependants?
+        add-new: Add dependant
+        delete: Delete dependant
+        name: Name
+        date_of_birth: Date of birth
+        relationship: What is their relationship to your client?
+        in_full_time_education: Are they in full-time education or training?
+        income: Do they receive any income?
+        assets: Do they have assets worth more than £8,000?
       emergency_costs:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested

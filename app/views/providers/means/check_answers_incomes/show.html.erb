@@ -1,0 +1,13 @@
+<%= page_template(page_title: t('.h1-heading')) do %>
+
+<%= render 'providers/means/check_answers_incomes/income_assessment' %>
+
+<h3 class="govuk-heading-m"><%= t('.what_happens_next.heading') %></h3>
+<p class="govuk-body govuk-!-margin-bottom-8"><%= t('.what_happens_next.text') %></p>
+
+<%= next_action_buttons_with_form(
+      url: providers_legal_aid_application_means_check_answers_income_path,
+      method: :patch,
+      show_draft: true
+  ) %>
+<% end %>

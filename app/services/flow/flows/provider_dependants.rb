@@ -8,7 +8,7 @@ module Flow
             if application.has_dependants?
               :dependants
             else
-              :own_homes
+              :check_answers_incomes
             end
           end,
           check_answers: lambda do |application|
@@ -30,7 +30,7 @@ module Flow
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_means_has_other_dependants_path(application) },
           forward: lambda { |_application, has_other_dependant|
-            has_other_dependant ? :dependants : :own_homes
+            has_other_dependant ? :dependants : :check_answers_incomes
           },
           check_answers: lambda { |_application, has_other_dependant|
             has_other_dependant ? :dependants : :means_summaries

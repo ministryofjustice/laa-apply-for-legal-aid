@@ -221,6 +221,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
           forward: :own_homes,
         },
+        check_answers_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_means_check_answers_income_path(application) },
+          forward: :own_homes,
+        },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
           forward: :capital_income_assessment_results,
