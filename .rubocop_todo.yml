@@ -1063,35 +1063,6 @@ RSpec/VoidExpect:
   Exclude:
     - 'spec/requests/citizens/consent_spec.rb'
 
-# Offense count: 15
-# Configuration parameters: Database, Include.
-# SupportedDatabases: mysql, postgresql
-# Include: db/migrate/*.rb
-Rails/BulkChangeTable:
-  Exclude:
-    - 'db/migrate/20200106094725_add_provider_citizen_consented_to_legal_aid_applications.rb'
-    - 'db/migrate/20200724083605_add_new_provider_table_fields.rb'
-    - 'db/migrate/20200921143900_add_email_to_feedback.rb'
-    - 'db/migrate/20201023142248_add_rememberable_to_applicant.rb'
-    - 'db/migrate/20210222105725_add_new_status_to_scheduled_mailings.rb'
-    - 'db/migrate/20210408162032_add_delegated_functions_date_to_application_proceeding_types.rb'
-    - 'db/migrate/20210429174354_remove_delegated_functions_from_legal_aid_applications.rb'
-    - 'db/migrate/20210520071320_add_emergency_cost_limitation_to_legal_aid_application.rb'
-    - 'db/migrate/20210616092032_remove_proceeding_before_the_courts_from_chances_of_successes.rb'
-    - 'db/migrate/20210712112003_add_no_cash_income_and_outgoings.rb'
-    - 'db/migrate/20210913110123_drop_cost_limitations_from_proceeding_types.rb'
-    - 'db/migrate/20211103105546_add_extra_fields_to_proceedings.rb'
-    - 'db/migrate/20211126133758_add_new_employment_statuses_to_applicant.rb'
-    - 'db/migrate/20211209134144_add_employment_attrs_to_legal_aid_application.rb'
-
-# Offense count: 2
-# Configuration parameters: Include.
-# Include: db/migrate/*.rb
-Rails/CreateTableWithTimestamps:
-  Exclude:
-    - 'db/migrate/20200708102815_create_permissions_table.rb'
-    - 'db/migrate/20201214114039_create_active_storage_variant_records.active_storage.rb'
-
 # Offense count: 5
 # Configuration parameters: Include.
 # Include: app/helpers/**/*.rb
@@ -1100,16 +1071,6 @@ Rails/HelperInstanceVariable:
     - 'app/helpers/capital_helper.rb'
     - 'app/helpers/check_benefits_helper.rb'
     - 'app/helpers/layouts_helper.rb'
-
-# Offense count: 8
-# Configuration parameters: Include.
-# Include: db/**/*.rb
-Rails/ReversibleMigration:
-  Exclude:
-    - 'db/migrate/20200106113041_remove_uses_online_banking_from_applicants.rb'
-    - 'db/migrate/20200723102331_remove_citizen_uses_online_banking_from_legal_aid_applications.rb'
-    - 'db/migrate/20201119125243_remove_blazer.rb'
-    - 'db/migrate/20201127134906_remove_opponents_table.rb'
 
 # Offense count: 83
 # Cop supports --auto-correct.

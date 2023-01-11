@@ -24,6 +24,7 @@ AllCops:
   - 'ccms_integration/*'
   - 'tmp/**/*'
   - 'log/**/*'
+  - 'db/migrate/[2018-2022]*'
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
