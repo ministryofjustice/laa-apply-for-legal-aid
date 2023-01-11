@@ -263,6 +263,7 @@ en:
         address: Correspondence address
         age: "%{years} years old"
         age_question: Age at computation date
+        means_tested: Was the client means-tested?
         dob: Date of birth
         email: Email address
         first_name: First name
