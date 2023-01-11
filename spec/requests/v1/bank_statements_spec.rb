@@ -111,7 +111,7 @@ RSpec.describe "POST /v1/bank_statements" do
         it "does not save the object and raises a 400 error with text" do
           request
           expect(legal_aid_application.attachments.count).to be 0
-          expect(response.status).to eq 400
+          expect(response).to have_http_status(:bad_request)
           expect(response.body).to include("malware.doc contains a virus")
         end
       end
@@ -125,7 +125,7 @@ RSpec.describe "POST /v1/bank_statements" do
         it "does not save the object and raises a 500 error with text" do
           request
           expect(legal_aid_application.attachments.count).to match(0)
-          expect(response.status).to eq 400
+          expect(response).to have_http_status(:bad_request)
           expect(response.body).to include("There was a problem uploading your file - try again")
         end
       end
