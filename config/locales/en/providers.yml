@@ -243,17 +243,37 @@ en:
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
-        text: "%{applicant_name} agrees that:"
-        list:
-          a: they've instructed %{provider_firm_name} to represent them
-          b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
-          c: we can share their information with other government departments like DWP and HMRC
-          d: we can check their details with bank and credit reference agencies
-          e: they may have to pay towards legal aid
-          f: they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
-          g: the information they’ve given is complete and correct
-          h: they’ll report any changes to their financial situation immediately
-        sign_app_text: "If they give wrong or incomplete information, do not report changes, or are found to have committed benefit fraud, they may:"
+        means_tested:
+          text: "%{applicant_name} agrees that:"
+          list:
+            a: they've instructed %{provider_firm_name} to represent them
+            b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
+            c: we can share their information with other government departments like DWP and HMRC
+            d: we can check their details with bank and credit reference agencies
+            e: they may have to pay towards legal aid
+            f: they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
+            g: the information they’ve given is complete and correct
+            h: they’ll report any changes to their financial situation immediately
+          sign_app_text: "If they give wrong or incomplete information, do not report changes, or are found to have committed benefit fraud, they may:"
+        non_means_tested:
+          text: "You agree for %{applicant_name} that:"
+          list:
+            a: they are under 18
+            b: they've instructed %{provider_firm_name} to represent them
+            c_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
+            d: we can share their information with other government departments like DWP and HMRC
+            e: we can check their details with bank and credit reference agencies
+            f: they may have to pay towards legal aid
+            g: |
+              they may have to repay the legal costs if they keep or gain
+              property or money at the end of the case (the 'statutory charge')
+            h: |
+              if the case continues after their 18th birthday, we may reassess
+              their income and capital to check if they should contribute
+              towards legal costs
+            i: the information they’ve given is complete and correct
+            j: they’ll report any changes to their financial situation immediately
+          sign_app_text: "If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may:"
         warning:
           list: |
             be prosecuted
