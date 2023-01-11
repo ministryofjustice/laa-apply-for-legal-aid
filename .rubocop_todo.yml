@@ -1173,11 +1173,6 @@ Rake/DuplicateTask:
   Exclude:
     - 'Rakefile'
 
-# Offense count: 1
-Rake/MethodDefinitionInTask:
-  Exclude:
-    - 'lib/tasks/db.rake'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: AllowCoercion.

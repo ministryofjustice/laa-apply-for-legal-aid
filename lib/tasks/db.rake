@@ -1,3 +1,8 @@
+def build_postgres_url
+  "postgres://#{ENV.fetch('POSTGRES_USER', '')}:#{ENV.fetch('POSTGRES_PASSWORD', '')}" \
+    "@#{ENV.fetch('POSTGRES_HOST', '')}:5432/#{ENV.fetch('POSTGRES_DATABASE', '')}"
+end
+
 namespace :db do
   desc "Output anonymised DB as restore file"
   task export: :environment do
@@ -27,12 +32,5 @@ namespace :db do
     list_of_users.each do |user|
       puts user.email
     end
-  end
-
-private
-
-  def build_postgres_url
-    "postgres://#{ENV.fetch('POSTGRES_USER', '')}:#{ENV.fetch('POSTGRES_PASSWORD', '')}" \
-      "@#{ENV.fetch('POSTGRES_HOST', '')}:5432/#{ENV.fetch('POSTGRES_DATABASE', '')}"
   end
 end
