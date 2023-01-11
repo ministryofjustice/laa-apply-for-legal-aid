@@ -1185,12 +1185,3 @@ Style/DateTime:
   Exclude:
     - 'app/services/true_layer/api_client.rb'
     - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
-
-Rails/DeprecatedActiveModelErrorsMethods:
-  Exclude:
-    - 'spec/services/true_layer/bank_data_import_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_account_balance_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_provider_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_account_holders_service_spec.rb'

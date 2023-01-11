@@ -69,7 +69,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       end
 
       it "returns an error" do
-        expect(subject.errors.keys.first).to eq(:bank_data_import)
+        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:bank_data_import)
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       end
 
       it "returns an error" do
-        expect(subject.errors.keys.first).to eq(:bank_data_import)
+        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:bank_data_import)
       end
 
       it "saves the error in DB" do
