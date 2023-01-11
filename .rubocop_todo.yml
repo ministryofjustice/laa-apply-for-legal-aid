@@ -1202,8 +1202,3 @@ RSpec/Rails/HaveHttpStatus:
     - 'spec/requests/v1/bank_statements_spec.rb'
     - 'spec/requests/v1/statement_of_cases_spec.rb'
     - 'spec/requests/v1/uploaded_evidence_collections_spec.rb'
-
-Layout/LineContinuationLeadingSpace:
-  Exclude:
-    - 'spec/requests/providers/capital_assessment_results_spec.rb'
-    - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
