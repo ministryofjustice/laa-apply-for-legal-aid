@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :ccms_submission_history, class: CCMS::SubmissionHistory do
+  factory :ccms_submission_history, class: "CCMS::SubmissionHistory" do
     submission
 
     from_state { "initialised" }

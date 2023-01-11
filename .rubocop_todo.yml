@@ -252,30 +252,6 @@ RSpec/ExpectInHook:
     - 'spec/services/reports/mis/application_details_report_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'
 
-# Offense count: 18
-# Cop supports --auto-correct.
-# Configuration parameters: Include.
-# Include: spec/factories.rb, spec/factories/**/*.rb, features/support/factories/**/*.rb
-RSpec/FactoryBot/FactoryClassName:
-  Exclude:
-    - 'spec/factories/application_merits_task/involved_children.rb'
-    - 'spec/factories/attempts_to_settles.rb'
-    - 'spec/factories/ccms_submission_documents.rb'
-    - 'spec/factories/ccms_submission_histories.rb'
-    - 'spec/factories/ccms_submissions.rb'
-    - 'spec/factories/cfe_results.rb'
-    - 'spec/factories/cfe_results/v3/results.rb'
-    - 'spec/factories/cfe_results/v4/results.rb'
-    - 'spec/factories/cfe_submissions.rb'
-    - 'spec/factories/hmrc/responses.rb'
-    - 'spec/factories/legal_framework_merits_task_list.rb'
-    - 'spec/factories/legal_framework_serializable_merits_task.rb'
-    - 'spec/factories/legal_framework_serialized_merits_task_list.rb'
-    - 'spec/factories/legal_framework_submissions.rb'
-    - 'spec/factories/proceeding_merits_task/proceeding_linked_children.rb'
-    - 'spec/factories/submission_documents.rb'
-    - 'spec/factories/submissions.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 RSpec/FactoryBot/SyntaxMethods:

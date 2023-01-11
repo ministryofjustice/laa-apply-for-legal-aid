@@ -2,7 +2,7 @@ require Rails.root.join("spec/factory_helpers/hmrc_response/use_case_one.rb")
 
 module HMRC
   FactoryBot.define do
-    factory :hmrc_response, class: HMRC::Response do
+    factory :hmrc_response, class: "HMRC::Response" do
       legal_aid_application
       submission_id { SecureRandom.uuid }
       use_case { "one" }

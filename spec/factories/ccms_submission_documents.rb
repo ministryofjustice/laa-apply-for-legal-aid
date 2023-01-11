@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :ccms_submission_document, class: CCMS::SubmissionDocument do
+  factory :ccms_submission_document, class: "CCMS::SubmissionDocument" do
     submission
 
     attachment_id { SecureRandom.uuid }

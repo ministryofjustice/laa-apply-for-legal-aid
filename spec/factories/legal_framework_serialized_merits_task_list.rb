@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :legal_framework_serializable_merits_task_list, class: LegalFramework::SerializableMeritsTaskList do
+  factory :legal_framework_serializable_merits_task_list, class: "LegalFramework::SerializableMeritsTaskList" do
     initialize_with { new(**lfa_response) }
 
     lfa_response do
