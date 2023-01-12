@@ -1,25 +1,25 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl"><%= t('.apply_for_legal_aid_heading') %></h1>
+    <h1 class="govuk-heading-xl"><%= t(".apply_for_legal_aid_heading") %></h1>
 
     <%= govuk_inset_text do %>
-      <p class="govuk-body"><%= t('.must_be_provider') %></p>
+      <p class="govuk-body"><%= t(".must_be_provider") %></p>
     <% end %>
 
-    <p class="govuk-body"><%= t('.domestic_violence_or_abuse_only') %></p>
+    <p class="govuk-body"><%= t(".domestic_violence_or_abuse_only") %></p>
 
-    <p class="govuk-body"><%= t('.use_ccms_para_html') %></p>
+    <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
 
-    <h2 class="govuk-heading-m"><%= t('.before_you_start.heading') %></h2>
+    <h2 class="govuk-heading-m"><%= t(".before_you_start.heading") %></h2>
 
     <p class="govuk-body">
-      <%= t('.before_you_start.conditions') %>
+      <%= t(".before_you_start.conditions") %>
     </p>
 
     <%= link_to_accessible start_button_label(:start_now),
-                providers_legal_aid_applications_path,
-                role: 'button',
-                class: 'govuk-button govuk-button--start',
-                id: 'start' %>
+                           providers_legal_aid_applications_path,
+                           role: "button",
+                           class: "govuk-button govuk-button--start",
+                           id: "start" %>
   </div>
 </div>

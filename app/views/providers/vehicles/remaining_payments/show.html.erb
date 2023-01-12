@@ -1,31 +1,31 @@
 <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_vehicles_remaining_payment_path,
-        method: :patch,
-        local: true
+      model: @form,
+      url: providers_legal_aid_application_vehicles_remaining_payment_path,
+      method: :patch,
+      local: true,
     ) do |form| %>
-  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
     <%= form.govuk_radio_buttons_fieldset(:payments_remain,
-                                        legend: { size: 'xl', tag: 'h1', text: page_title },
-                                        hint: {text: t('.detail_of_payments_to_include')}) do %>
-    <%= form.govuk_radio_button(:payments_remain, true, link_errors: true, label: {text: t('generic.yes')} ) do %>
+                                          legend: { size: "xl", tag: "h1", text: page_title },
+                                          hint: { text: t(".detail_of_payments_to_include") }) do %>
+    <%= form.govuk_radio_button(:payments_remain, true, link_errors: true, label: { text: t("generic.yes") }) do %>
       <%= form.govuk_text_field(
-              :payment_remaining,
-              label: {text: t('.enter_amount_left_to_pay')},
-              value: number_to_currency_or_original_string(@form.payment_remaining),
-              prefix_text: t('currency.gbp'),
-              width: 'one-third',
-              ) %>
+            :payment_remaining,
+            label: { text: t(".enter_amount_left_to_pay") },
+            value: number_to_currency_or_original_string(@form.payment_remaining),
+            prefix_text: t("currency.gbp"),
+            width: "one-third",
+          ) %>
     <% end %>
-    <%= form.govuk_radio_button(:payments_remain, false, label: {text:  t('generic.no')}) %>
+    <%= form.govuk_radio_button(:payments_remain, false, label: { text: t("generic.no") }) %>
 
   <% end %>
 
   <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(
-          show_draft: true,
-          form: form
+        show_draft: true,
+        form:,
       ) %>
   <% end %>
 <% end %>

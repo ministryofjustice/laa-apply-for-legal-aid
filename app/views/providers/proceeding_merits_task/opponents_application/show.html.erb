@@ -2,26 +2,26 @@
       model: @form,
       url: providers_merits_task_list_opponents_application_path(@proceeding),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template(page_title: t('.h1_heading'),
-                    head_title: "#{@proceeding.meaning} - "+ t('.h1_heading'),
+  <%= page_template(page_title: t(".h1_heading"),
+                    head_title: "#{@proceeding.meaning} - " + t(".h1_heading"),
                     template: :basic,
                     back_link: {},
-                    form: form) do %>
+                    form:) do %>
 
     <%= form.govuk_radio_buttons_fieldset :has_opponents_application,
-                                          legend: {size: 'xl', tag: 'h1', text: page_title},
-                                          caption: { text: @proceeding.meaning, size: 'xl' },
+                                          legend: { size: "xl", tag: "h1", text: page_title },
+                                          caption: { text: @proceeding.meaning, size: "xl" },
                                           classes: "govuk-!-padding-bottom-4" do %>
 
       <%= form.govuk_radio_button :has_opponents_application, true, link_errors: true,
-                                  label: {text: t('generic.yes')}, hint: { text: t('.hint_text')} %>
-      <%= form.govuk_radio_button :has_opponents_application, false, label: {text: t('generic.no')} do %>
-        <%= form.govuk_text_area :reason_for_applying, label: {text: t('.reason_question')}, rows: 5 %>
+                                                                    label: { text: t("generic.yes") }, hint: { text: t(".hint_text") } %>
+      <%= form.govuk_radio_button :has_opponents_application, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :reason_for_applying, label: { text: t(".reason_question") }, rows: 5 %>
       <% end %>
     <% end %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

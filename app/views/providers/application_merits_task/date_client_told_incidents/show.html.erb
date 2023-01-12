@@ -2,22 +2,22 @@
       model: @form,
       url: providers_legal_aid_application_date_client_told_incident_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-    <%= page_template(page_title: t('.h1-heading'),
+    <%= page_template(page_title: t(".h1-heading"),
                       template: :basic,
                       back_link: {},
-                      form: form) do %>
+                      form:) do %>
 
-    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>
+    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: page_title } do %>
       <%= form.govuk_date_field :told_on, legend: { text: t("shared.forms.date_input_fields.told_on_label") },
-                                hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0))} %>
+                                          hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0)) } %>
       <%= form.govuk_date_field :occurred_on, legend: { text: t("shared.forms.date_input_fields.occurred_on_label") },
-                                hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0))} %>
+                                              hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0)) } %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

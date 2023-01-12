@@ -2,20 +2,17 @@
       model: @form,
       url: providers_legal_aid_application_client_involvement_type_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template page_title: @proceeding.meaning, template: :basic, form: form do %>
+  <%= page_template page_title: @proceeding.meaning, template: :basic, form: do %>
     <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <%= form.govuk_collection_radio_buttons(:client_involvement_type_ccms_code,
                                             @form.client_involvement_types,
                                             :ccms_code,
                                             :description,
-                                            legend: {size: 'm', tag: 'h2', text: t('.question')}) %>
+                                            legend: { size: "m", tag: "h2", text: t(".question") }) %>
 
-    <%= next_action_buttons(
-          form: form,
-          show_draft: true
-        ) %>
+    <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
 <% end %>

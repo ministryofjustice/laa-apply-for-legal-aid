@@ -1,14 +1,14 @@
-<%= page_template(page_title: t('.h1-heading')) do %>
-  <p class="govuk-body"><%= t('.statement') %></p>
+<%= page_template(page_title: t(".h1-heading")) do %>
+  <p class="govuk-body"><%= t(".statement") %></p>
   <ul class="govuk-list govuk-list--bullet print-add-bullet">
-    <%- t('.statement-bullets').each do |bullet| %>
+    <%- t(".statement-bullets").each do |bullet| %>
       <li><%= bullet %></li>
     <% end %>
   </ul>
   <%= next_action_buttons_with_form(
-          url: providers_legal_aid_applications_path,
-          method: :post,
-          show_draft: false,
-          continue_button_text: t('.continue_button')
+        url: providers_legal_aid_applications_path,
+        method: :post,
+        show_draft: false,
+        continue_button_text: t(".continue_button"),
       ) %>
 <% end %>

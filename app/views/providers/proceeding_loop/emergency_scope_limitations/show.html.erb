@@ -2,29 +2,29 @@
       model: @form,
       url: providers_legal_aid_application_emergency_scope_limitation_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template template: :basic, form: form do %>
+  <%= page_template template: :basic, form: do %>
     <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
-    <%= form.govuk_check_boxes_fieldset :scope_codes, legend: {size: 'm', tag: 'h2', text: t('.select_emergency_scope')},
-                                         hint: {text: t('generic.select_all_that_apply')} do %>
+    <%= form.govuk_check_boxes_fieldset :scope_codes, legend: { size: "m", tag: "h2", text: t(".select_emergency_scope") },
+                                                      hint: { text: t("generic.select_all_that_apply") } do %>
       <div class="deselect-group" data-deselect-ctrl="#emergency-scope-none-selected-true-field">
         <% @form.scopes.each_with_index do |scope| %>
           <%= form.hidden_field :"meaning_#{scope["code"]}", value: scope["meaning"] %>
           <%= form.hidden_field :"description_#{scope["code"]}", value: scope["description"] %>
-          <%= form.govuk_check_box :scope_codes, scope["code"], label: {text: scope["meaning"]} do %>
+          <%= form.govuk_check_box :scope_codes, scope["code"], label: { text: scope["meaning"] } do %>
             <% scope["additional_params"].each do |ap| %>
               <% if ap["name"] == "hearing_date" %>
-                <%= render partial: "shared/scope_limitations/hearing_date", locals: { form: form, field_name: :"hearing_date_#{scope["code"]}" } %>
+                <%= render partial: "shared/scope_limitations/hearing_date", locals: { form:, field_name: :"hearing_date_#{scope["code"]}" } %>
               <% elsif ap["name"] == "limitation_note" %>
-                <%= render partial: "shared/scope_limitations/limitation_note", locals: { form: form, scope: scope } %>
+                <%= render partial: "shared/scope_limitations/limitation_note", locals: { form:, scope: } %>
               <% end %>
             <% end %>
           <% end %>
         <% end %>
       </div>
     <% end %>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

@@ -2,21 +2,21 @@
               url: providers_legal_aid_application_has_other_proceedings_path,
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t('.page_title'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
 
     <% if @legal_aid_application.proceedings.any? %>
-      <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.proceedings.count, 'proceeding')}") %></h1>
+      <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.proceedings.count, "proceeding").to_s) %></h1>
       <div class="govuk-summary-list">
         <% @legal_aid_application.proceedings.order(:created_at).each do |proceeding| %>
           <dl class="govuk-summary-list__row" id="proceeding_type_<%= proceeding.ccms_code %>">
             <dt class="govuk-summary-list__value"><%= proceeding.meaning %></dt>
             <dd class="govuk-summary-list__actions">
               <%= link_to_accessible(
-                    t('.remove'),
+                    t(".remove"),
                     providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application, ccms_code: proceeding.ccms_code),
-                    class: 'govuk-link change-link',
+                    class: "govuk-link change-link",
                     method: :delete,
-                    suffix: proceeding.meaning
+                    suffix: proceeding.meaning,
                   ) %>
             </dd>
           </dl>
@@ -25,11 +25,8 @@
     <% end %>
 
     <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
-                                            legend: {text: content_for(:page_title), tag: 'h2', size: 'm'} %>
+                                            legend: { text: content_for(:page_title), tag: "h2", size: "m" } %>
 
-    <%= next_action_buttons(
-            form: form,
-            show_draft: true
-        ) %>
+    <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
 <% end %>

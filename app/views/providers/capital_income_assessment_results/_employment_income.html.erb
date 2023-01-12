@@ -1,11 +1,11 @@
-<h2 class="govuk-heading-m"><%= t('.title') %></h2>
+<h2 class="govuk-heading-m"><%= t(".title") %></h2>
 <table class="govuk-table">
   <tbody>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.monthly_income_before_tax'), value: gds_number_to_currency(@cfe_result.employment_income_gross_income) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.benefits_in_kind'), value: gds_number_to_currency(@cfe_result.employment_income_benefits_in_kind) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.tax'), value: gds_number_to_currency(@cfe_result.employment_income_tax) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.national_insurance'), value: gds_number_to_currency(@cfe_result.employment_income_national_insurance) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.fixed_employment_deduction'), value: gds_number_to_currency(@cfe_result.employment_income_fixed_employment_deduction) } %>
-  <%= render partial: 'shared/results_total_row', locals: { caption: t('.total'), value: gds_number_to_currency(@cfe_result.employment_income_net_employment_income) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".monthly_income_before_tax"), value: gds_number_to_currency(@cfe_result.employment_income_gross_income) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".benefits_in_kind"), value: gds_number_to_currency(@cfe_result.employment_income_benefits_in_kind) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".tax"), value: gds_number_to_currency(@cfe_result.employment_income_tax) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".national_insurance"), value: gds_number_to_currency(@cfe_result.employment_income_national_insurance) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".fixed_employment_deduction"), value: gds_number_to_currency(@cfe_result.employment_income_fixed_employment_deduction) } %>
+  <%= render partial: "shared/results_total_row", locals: { caption: t(".total"), value: gds_number_to_currency(@cfe_result.employment_income_net_employment_income) } %>
   </tbody>
 </table>

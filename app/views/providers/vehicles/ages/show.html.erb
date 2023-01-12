@@ -1,23 +1,23 @@
 <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_vehicles_age_path,
-        method: :patch,
-        local: true
+      model: @form,
+      url: providers_legal_aid_application_vehicles_age_path,
+      method: :patch,
+      local: true,
     ) do |form| %>
-  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
     <%= form.govuk_collection_radio_buttons(
-            :more_than_three_years_old,
-            yes_no_options,
-            :value,
-            :label,
-            legend: {size: 'xl', tag: 'h1', text: page_title},
-            ) %>
+          :more_than_three_years_old,
+          yes_no_options,
+          :value,
+          :label,
+          legend: { size: "xl", tag: "h1", text: page_title },
+        ) %>
 
     <div class="govuk-!-padding-bottom-4"></div>
     <%= next_action_buttons(
-            show_draft: true,
-            form: form
+          show_draft: true,
+          form:,
         ) %>
   <% end %>
 <% end %>

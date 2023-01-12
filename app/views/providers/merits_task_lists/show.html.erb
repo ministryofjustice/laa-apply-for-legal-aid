@@ -1,24 +1,24 @@
 <%= page_template(
-    page_title: t('.page_heading'),
-    back_link: { path: back_path },
-    show_errors_for: @merits_task_list
+      page_title: t(".page_heading"),
+      back_link: { path: back_path },
+      show_errors_for: @merits_task_list,
     ) do %>
 
-  <div id='task_list' class="<%= 'govuk-form-group--error' if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>">
-    <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
+  <div id='task_list' class="<%= "govuk-form-group--error" if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>">
+    <h2 class="govuk-heading-l"><%= t(".application_heading") %></h2>
 
     <% if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>
       <p class="govuk-error-message" id="task-list-error">
         <span class="govuk-visually-hidden">Error: </span>
-        <%= @merits_task_list&.errors[:task_list]&.first %>
+        <%= @merits_task_list.errors[:task_list].first %>
       </p>
     <% end %>
     <ol class="app-task-list">
-      <%= render 'task_list_section', name: t('.application_section_heading'), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
+      <%= render "task_list_section", name: t(".application_section_heading"), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
 
-      <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t('.proceeding_heading') %></h2>
+      <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t(".proceeding_heading") %></h2>
       <% @merits_tasks[:proceedings].each_with_index do |(_, proceeding), index| %>
-        <%= render 'task_list_section', name: proceeding[:name], tasks: proceeding[:tasks], ccms_code: @merits_tasks[:proceedings].keys[index], section_number: index + 2 %>
+        <%= render "task_list_section", name: proceeding[:name], tasks: proceeding[:tasks], ccms_code: @merits_tasks[:proceedings].keys[index], section_number: index + 2 %>
       <% end %>
     </ol>
   </div>
@@ -27,6 +27,6 @@
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_merits_task_list_path,
         method: :patch,
-        show_draft: true
+        show_draft: true,
       ) %>
 <% end %>

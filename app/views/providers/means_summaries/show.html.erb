@@ -1,18 +1,18 @@
-<%= page_template(page_title: t('.h1-heading')) do %>
+<%= page_template(page_title: t(".h1-heading")) do %>
 
-  <%= render 'providers/means_summaries/income_assessment' %>
+  <%= render "providers/means_summaries/income_assessment" %>
 
-  <h2 class="govuk-heading-l"><%= t('.capital-section-heading') %></h2>
+  <h2 class="govuk-heading-l"><%= t(".capital-section-heading") %></h2>
 
-  <%= render 'shared/check_answers/assets' %>
+  <%= render "shared/check_answers/assets" %>
 
-  <h3 class="govuk-heading-m"><%= t('.what_happens_next.heading') %></h3>
-  <p class="govuk-body govuk-!-margin-bottom-7"><%= t('.what_happens_next.text') %></p>
+  <h3 class="govuk-heading-m"><%= t(".what_happens_next.heading") %></h3>
+  <p class="govuk-body govuk-!-margin-bottom-7"><%= t(".what_happens_next.text") %></p>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_means_summary_path,
         method: :patch,
-        show_draft: true
+        show_draft: true,
       ) %>
 
 <% end %>

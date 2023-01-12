@@ -1,14 +1,14 @@
 <%= form_with(
-  model: @form,
-  url: providers_legal_aid_application_matter_opposed_reason_path(@legal_aid_application),
-  method: :patch
-) do |f| %>
+      model: @form,
+      url: providers_legal_aid_application_matter_opposed_reason_path(@legal_aid_application),
+      method: :patch,
+    ) do |f| %>
   <%= page_template page_title: t(".page_heading"), template: :basic, form: f do %>
     <%= f.govuk_text_area(
-      :reason,
-      rows: 10,
-      label: { tag: "h1", size: "xl", text: t(".page_heading"), class: "govuk-label govuk-label--xl govuk-!-margin-bottom-8" }
-    ) %>
+          :reason,
+          rows: 10,
+          label: { tag: "h1", size: "xl", text: t(".page_heading"), class: "govuk-label govuk-label--xl govuk-!-margin-bottom-8" },
+        ) %>
 
     <%= next_action_buttons(show_draft: true, form: f) %>
   <% end %>

@@ -1,17 +1,18 @@
-<%= page_template page_title: t('.heading'), back_link: :none do %>
+<%= page_template page_title: t(".heading"), back_link: :none do %>
   <% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
   <% @cfe_result = cfe_result if @cfe_result.nil? %>
   <% @manual_review_determiner = manual_review_determiner if @manual_review_determiner.nil? %>
 
-  <%= render 'shared/application_ref', legal_aid_application: @legal_aid_application %>
+  <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
 
-  <h2 class="govuk-heading-m"><%= t('.client_details_heading') %></h2>
+  <h2 class="govuk-heading-m"><%= t(".client_details_heading") %></h2>
 
   <%= render(
-        'shared/check_answers/client_details',
+        "shared/check_answers/client_details",
         attributes: %i[first_name last_name date_of_birth age means_test national_insurance_number],
         applicant: @legal_aid_application.applicant,
-        read_only: true) %>
+        read_only: true,
+      ) %>
 
   <%= render "with_cfe_result_details" unless @legal_aid_application.non_means_tested? %>
 

@@ -1,14 +1,14 @@
 <h2 class="govuk-heading-m">
-  <%= @cfe_result.jobs? ? t('.title') : t('.income') %>
+  <%= @cfe_result.jobs? ? t(".title") : t(".income") %>
 </h2>
 <table class="govuk-table">
   <tbody>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.benefits'), value: gds_number_to_currency(@cfe_result.monthly_state_benefits) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.friends_or_family'), value: gds_number_to_currency(@cfe_result.mei_friends_or_family) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.maintenance'), value: gds_number_to_currency(@cfe_result.mei_maintenance_in) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.property_or_lodger'), value: gds_number_to_currency(@cfe_result.mei_property_or_lodger) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.student_loan_or_grant'), value: gds_number_to_currency(@cfe_result.mei_student_loan) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.pension'), value: gds_number_to_currency(@cfe_result.mei_pension) } %>
-  <%= render partial: 'shared/results_total_row', locals: { caption: t('.total'), value: gds_number_to_currency(@cfe_result.total_gross_income) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".benefits"), value: gds_number_to_currency(@cfe_result.monthly_state_benefits) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".friends_or_family"), value: gds_number_to_currency(@cfe_result.mei_friends_or_family) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".maintenance"), value: gds_number_to_currency(@cfe_result.mei_maintenance_in) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".property_or_lodger"), value: gds_number_to_currency(@cfe_result.mei_property_or_lodger) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".student_loan_or_grant"), value: gds_number_to_currency(@cfe_result.mei_student_loan) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".pension"), value: gds_number_to_currency(@cfe_result.mei_pension) } %>
+  <%= render partial: "shared/results_total_row", locals: { caption: t(".total"), value: gds_number_to_currency(@cfe_result.total_gross_income) } %>
   </tbody>
 </table>

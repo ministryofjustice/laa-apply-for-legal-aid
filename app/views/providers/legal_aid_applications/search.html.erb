@@ -1,27 +1,27 @@
-<%= page_template page_title: t('.title'), template: :basic do %>
+<%= page_template page_title: t(".title"), template: :basic do %>
 
   <%= form_with(method: :get, local: true) do |form| %>
 
-    <%= render partial: 'shared/error' if @error %>
+    <%= render partial: "shared/error" if @error %>
 
-    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
       <div class="govuk-!-padding-bottom-4"></div>
       <%= form.govuk_text_field(
             :search_term,
-            label: {text: :search_term, hidden: true},
-            caption: {text: t('.hint')},
-            width: 'two-thirds',
-            value: @search_term
+            label: { text: :search_term, hidden: true },
+            caption: { text: t(".hint") },
+            width: "two-thirds",
+            value: @search_term,
           ) %>
     <% end %>
 
-    <%= form.govuk_submit t('.search_button') %>
+    <%= form.govuk_submit t(".search_button") %>
   <% end %>
 <% end %>
 
 <% if @legal_aid_applications && @legal_aid_applications.any? %>
-  <h3 class="govuk-heading-m"><%= t('.search_results') %></h3>
-  <%= render 'legal_aid_applications', legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
+  <h3 class="govuk-heading-m"><%= t(".search_results") %></h3>
+  <%= render "legal_aid_applications", legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
 <% elsif @search_term.present? %>
-  <h3 class="govuk-heading-m"><%= t('.empty_result') %></h3>
+  <h3 class="govuk-heading-m"><%= t(".empty_result") %></h3>
 <% end %>

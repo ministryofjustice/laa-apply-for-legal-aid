@@ -1,9 +1,9 @@
-<h2 class="govuk-heading-m"><%= t('.title') %></h2>
+<h2 class="govuk-heading-m"><%= t(".title") %></h2>
 <table class="govuk-table">
   <tbody>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.total_income'), value: gds_number_to_currency(@cfe_result.total_monthly_income_including_employment_income) } %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.total_outgoings'), value: gds_number_to_currency(@cfe_result.total_monthly_outgoings_including_tax_and_ni) } %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.total_deductions'), value: gds_number_to_currency(@cfe_result.total_deductions_including_fixed_employment_allowance) } %>
-    <%= render partial: 'shared/results_total_bold_row', locals: { caption: t('.total_disposable'), value: gds_number_to_currency(@cfe_result.total_disposable_income_assessed) } %>
+    <%= render partial: "shared/results_detail_row", locals: { caption: t(".total_income"), value: gds_number_to_currency(@cfe_result.total_monthly_income_including_employment_income) } %>
+    <%= render partial: "shared/results_detail_row", locals: { caption: t(".total_outgoings"), value: gds_number_to_currency(@cfe_result.total_monthly_outgoings_including_tax_and_ni) } %>
+    <%= render partial: "shared/results_detail_row", locals: { caption: t(".total_deductions"), value: gds_number_to_currency(@cfe_result.total_deductions_including_fixed_employment_allowance) } %>
+    <%= render partial: "shared/results_total_bold_row", locals: { caption: t(".total_disposable"), value: gds_number_to_currency(@cfe_result.total_disposable_income_assessed) } %>
   <tbody>
 </table>

@@ -1,27 +1,29 @@
-<%= page_template page_title: t('.h1_heading'), back_link: :none do %>
+<%= page_template page_title: t(".h1_heading"), back_link: :none do %>
 
-  <p class="govuk-heading-m govuk-!-margin-top-4"><%= t('.laa_reference') %>: <%= @legal_aid_application.application_ref %></p>
+  <p class="govuk-heading-m govuk-!-margin-top-4">
+    <%= t(".laa_reference") %>: <%= @legal_aid_application.application_ref %>
+  </p>
   <div class="govuk-!-padding-2"></div>
-  <p class="govuk-body"><%= t '.sent_email_text', email: @legal_aid_application.applicant.email %></p>
+  <p class="govuk-body"><%= t ".sent_email_text", email: @legal_aid_application.applicant.email %></p>
 
-  <%= link_to_accessible t('.change_email_button') ,
+  <%= link_to_accessible t(".change_email_button"),
                          providers_legal_aid_application_email_address_path,
-                         role: 'button',
-                         class: 'govuk-button govuk-button--secondary',
-                         id: 'change-email' %>
+                         role: "button",
+                         class: "govuk-button govuk-button--secondary",
+                         id: "change-email" %>
 
-  <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t '.happen_next_heading' %></h2>
+  <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t ".happen_next_heading" %></h2>
   <p class="govuk-body">
-   <%= t '.happen_next_text' %>
+   <%= t ".happen_next_text" %>
   </p>
   <p class="govuk-body">
-    <%= t '.let_you_know_text' %>
+    <%= t ".let_you_know_text" %>
   </p>
   <%= link_to_accessible(
-        t('.back_button'),
+        t(".back_button"),
         providers_legal_aid_applications_path,
-        class: 'govuk-button govuk-button',
-        id: 'continue',
-        role: 'button'
+        class: "govuk-button govuk-button",
+        id: "continue",
+        role: "button",
       ) %>
 <% end %>

@@ -1,19 +1,19 @@
 <%= page_template(
-      page_title: t('.h1-heading'),
-      back_link: { path: reset_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application), method: :patch }
+      page_title: t(".h1-heading"),
+      back_link: { path: reset_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application), method: :patch },
     ) do %>
 
-  <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
+  <h2 class="govuk-heading-l"><%= t(".h2-heading") %></h2>
 
-  <%= render 'shared/check_answers/assets' %>
+  <%= render "shared/check_answers/assets" %>
 
-  <h2 class="govuk-heading-m"><%= t('.chances_of_success_h2') %></h2>
+  <h2 class="govuk-heading-m"><%= t(".chances_of_success_h2") %></h2>
 
-  <p class="govuk-body"><%= t('.chances_of_success_body') %></p>
+  <p class="govuk-body"><%= t(".chances_of_success_body") %></p>
 
   <%= next_action_buttons_with_form(
         url: continue_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application),
         method: :patch,
-        show_draft: true
+        show_draft: true,
       ) %>
 <% end %>

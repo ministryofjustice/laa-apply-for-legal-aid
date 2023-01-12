@@ -1,25 +1,23 @@
 <%= form_with(
-        model: @form,
-        scope: :legal_aid_application,
-        url: providers_legal_aid_application_means_outstanding_mortgage_path,
-        method: :patch,
-        local: true) do |form| %>
-    <%= page_template(page_title: t('.h1-heading'), template: :basic, form: form) do %>
+      model: @form,
+      scope: :legal_aid_application,
+      url: providers_legal_aid_application_means_outstanding_mortgage_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+    <%= page_template(page_title: t(".h1-heading"), template: :basic, form:) do %>
 
-      <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: t('.field_set_header') }  do %>
+      <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".field_set_header") }  do %>
       <%= form.govuk_text_field(
-              :outstanding_mortgage_amount,
-              label: {text: :property_value, hidden: true},
-              value: number_to_currency_or_original_string(@form.outstanding_mortgage_amount),
-              prefix_text: t('currency.gbp'),
-              width: 'one-third',
-              ) %>
+            :outstanding_mortgage_amount,
+            label: { text: :property_value, hidden: true },
+            value: number_to_currency_or_original_string(@form.outstanding_mortgage_amount),
+            prefix_text: t("currency.gbp"),
+            width: "one-third",
+          ) %>
     <% end %>
 
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
 
   <% end %>
 <% end %>

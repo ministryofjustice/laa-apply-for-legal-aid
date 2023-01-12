@@ -1,40 +1,40 @@
-<%= page_template page_title: t('.heading'), template: :basic, back_link: :none do %>
+<%= page_template page_title: t(".heading"), template: :basic, back_link: :none do %>
   <div class="govuk-panel govuk-panel--confirmation">
     <h1 class="govuk-panel__title govuk-!-padding-top-4">
       <%= page_title %>
     </h1>
     <div class="govuk-panel__body">
-      <%= t('.your_case_reference_number') %><br>
+      <%= t(".your_case_reference_number") %><br>
       <strong><%= @legal_aid_application.application_ref %></strong>
     </div>
   </div>
 
-  <p class="govuk-body govuk-!-padding-top-4"><%= t('.confirmation_email_sent') %></p>
+  <p class="govuk-body govuk-!-padding-top-4"><%= t(".confirmation_email_sent") %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.need_to_do') %></h2>
-  <p class="govuk-body"><%= t('.print_application') %></p>
-  <p class="govuk-body"><%= t('.keep_file') %></p>
+  <h2 class="govuk-heading-m"><%= t(".need_to_do") %></h2>
+  <p class="govuk-body"><%= t(".print_application") %></p>
+  <p class="govuk-body"><%= t(".keep_file") %></p>
   <ul class="govuk-list govuk-list--bullet">
-    <li><%= t('.copy_application') %></li>
-    <li><%= t('.financial_evidence') %></li>
-    <li><%= t('.client_sign') %></li>
+    <li><%= t(".copy_application") %></li>
+    <li><%= t(".financial_evidence") %></li>
+    <li><%= t(".client_sign") %></li>
   </ul>
-  <p class="govuk-body"><%= t('.audit') %></p>
+  <p class="govuk-body"><%= t(".audit") %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.what_next') %></h2>
+  <h2 class="govuk-heading-m"><%= t(".what_next") %></h2>
 
-  <p class="govuk-body"><%= t('.application_to_be_checked') %></p>
-  <p class="govuk-body"><%= t('.decision_in_ccms_html') %></p>
+  <p class="govuk-body"><%= t(".application_to_be_checked") %></p>
+  <p class="govuk-body"><%= t(".decision_in_ccms_html") %></p>
 
   <%= govuk_inset_text do %>
-    <p class="govuk-body govuk-!-padding-bottom-2"><%= link_to_accessible t('.feedback_prefix'), new_feedback_path %><%= t('.feedback_suffix') %></p>
+    <p class="govuk-body govuk-!-padding-bottom-2"><%= link_to_accessible t(".feedback_prefix"), new_feedback_path %><%= t(".feedback_suffix") %></p>
   <% end %>
 
   <%= next_action_buttons_with_form(
-      url: providers_legal_aid_application_end_of_application_path,
-      method: :patch,
-      show_draft: true,
-      continue_button_text: t('.view_completed_application'),
-      draft_button_text: t('.back_to_your_applications')
-    ) %>
+        url: providers_legal_aid_application_end_of_application_path,
+        method: :patch,
+        show_draft: true,
+        continue_button_text: t(".view_completed_application"),
+        draft_button_text: t(".back_to_your_applications"),
+      ) %>
 <% end %>

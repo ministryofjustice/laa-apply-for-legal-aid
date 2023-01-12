@@ -1,6 +1,6 @@
 <%= page_template(
-      page_title: t('.h1-heading'),
-      back_link: { path: reset_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application), method: :patch }
+      page_title: t(".h1-heading"),
+      back_link: { path: reset_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application), method: :patch },
     ) do %>
 
   <%= render(
@@ -12,14 +12,14 @@
         allegation: @legal_aid_application&.allegation,
         undertaking: @legal_aid_application&.undertaking,
         urgency: @legal_aid_application&.urgency,
-        read_only: false
+        read_only: false,
       ) %>
   <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
-          url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
-          method: :patch,
-          show_draft: true
+        url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
+        method: :patch,
+        show_draft: true,
       ) %>
 
 <% end %>

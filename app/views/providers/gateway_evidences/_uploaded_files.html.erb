@@ -1,10 +1,10 @@
-<table class="govuk-table <%= 'hidden' if attachments.empty? %>">
-  <caption class="govuk-table__caption"><%= t('.title') %></caption>
+<table class="govuk-table <%= "hidden" if attachments.empty? %>">
+  <caption class="govuk-table__caption"><%= t(".title") %></caption>
   <thead class="govuk-table__head">
   <tr class="govuk-table__row">
-    <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
-    <th class="govuk-table__header" scope="col"><%= t('.size') %></th>
-    <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
+    <th class="govuk-table__header" scope="col"><%= t(".filename") %></th>
+    <th class="govuk-table__header" scope="col"><%= t(".size") %></th>
+    <th class="govuk-table__header" scope="col"><%= t(".status") %></th>
     <th class="govuk-table__header" scope="col"></th>
   </tr>
   </thead>
@@ -17,12 +17,12 @@
       <td class="govuk-table__cell"><%= govuk_tag(text: t(".uploaded")) %></td>
       <td class="govuk-table__cell">
         <%= button_to_accessible(
-              t('.delete'),
+              t(".delete"),
               providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
               method: :delete,
-              class: 'button-as-link',
+              class: "button-as-link",
               params: { attachment_id: attachment.id },
-              suffix: attachment.document.filename
+              suffix: attachment.document.filename,
             ) %>
       </td>
     </tr>

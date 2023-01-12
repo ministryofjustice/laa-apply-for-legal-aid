@@ -2,13 +2,13 @@
       url: providers_legal_aid_application_applicant_bank_account_path,
       model: @form,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
     <%= govuk_fieldset_header page_title %>
 
-    <p class="govuk-body"><%= t('.previously_told') %></p>
+    <p class="govuk-body"><%= t(".previously_told") %></p>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
@@ -16,11 +16,11 @@
           <% applicant_account.bank_accounts.each do |bank_account| %>
             <ul class="govuk-list govuk-!-margin-bottom-4">
               <li>
-                <strong><%= t('.account') %>: </strong>
+                <strong><%= t(".account") %>: </strong>
                 <%= bank_account.bank_and_account_name %>
               </li>
               <li>
-                <strong><%= t('.balance') %>: </strong>
+                <strong><%= t(".balance") %>: </strong>
                 <%= value_with_currency_unit(bank_account.balance, bank_account.currency) %>
               </li>
             </ul>
@@ -32,30 +32,27 @@
     <div class="govuk-!-padding-bottom-4"></div>
 
     <%= form.govuk_radio_buttons_fieldset :applicant_bank_account,
-                                          legend: { size: 'm', tag: 'h2', text: t('.offline_savings_accounts') },
-                                          hint: {text: t('.hints.offline_savings_accounts')} do %>
+                                          legend: { size: "m", tag: "h2", text: t(".offline_savings_accounts") },
+                                          hint: { text: t(".hints.offline_savings_accounts") } do %>
       <%= form.govuk_radio_button :applicant_bank_account,
                                   true,
                                   link_errors: true,
-                                  label: {text: t('generic.yes')},
+                                  label: { text: t("generic.yes") },
                                   checked: (@form.offline_savings_accounts.present? || @form.errors.include?(:offline_savings_accounts)) do %>
         <%= form.govuk_text_field(
               :offline_savings_accounts,
-              label: {text: t('.offline_savings_amount_label')},
+              label: { text: t(".offline_savings_amount_label") },
               value: number_to_currency_or_original_string(@form.offline_savings_accounts),
-              prefix_text: t('currency.gbp'),
-              width: 5
+              prefix_text: t("currency.gbp"),
+              width: 5,
             ) %>
       <% end %>
       <%= form.govuk_radio_button :applicant_bank_account,
                                   false,
                                   checked: (@legal_aid_application.checking_answers? && @form.offline_savings_accounts.nil?),
-                                  label: {text: t('generic.no')} %>
+                                  label: { text: t("generic.no") } %>
     <% end %>
 
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

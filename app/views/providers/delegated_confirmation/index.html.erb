@@ -1,24 +1,24 @@
 <% content_for(:panel) do %>
   <div class="govuk-panel govuk-panel--confirmation">
     <h1 class="govuk-panel__title">
-      <%= t '.page-heading' %>
+      <%= t ".page-heading" %>
     </h1>
     <div class="govuk-panel__body">
-    <%= t '.sub_title' %>
+    <%= t ".sub_title" %>
     <br>
     <strong><%= @legal_aid_application.application_ref %></strong>
     </div>
   </div>
 <% end %>
 
-<%= page_template page_title: t('.what_happens_next'), back_link: :none do %>
+<%= page_template page_title: t(".what_happens_next"), back_link: :none do %>
   <p class="govuk-body">
-    <%= t('.warning.application_deadline_date') %><%= @legal_aid_application.substantive_application_deadline_on %>.
+    <%= t(".warning.application_deadline_date") %><%= @legal_aid_application.substantive_application_deadline_on %>.
   </p>
   <%= link_to_accessible(
-        t('.back_home'),
+        t(".back_home"),
         providers_legal_aid_applications_path,
-        class: 'govuk-button govuk-button',
-        id: 'continue'
+        class: "govuk-button govuk-button",
+        id: "continue",
       ) %>
 <% end %>

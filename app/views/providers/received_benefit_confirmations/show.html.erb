@@ -1,8 +1,8 @@
- <%= page_template page_title: t('.h1-heading'), template: :basic, show_errors_for: @form do %>
-    <%= render partial: '/shared/forms/received_benefit_confirmation/form',
+ <%= page_template page_title: t(".h1-heading"), template: :basic, show_errors_for: @form do %>
+    <%= render partial: "/shared/forms/received_benefit_confirmation/form",
                locals: {
                  model: @form,
                  show_draft: true,
-                 url: providers_legal_aid_application_received_benefit_confirmation_path(@legal_aid_application)
+                 url: providers_legal_aid_application_received_benefit_confirmation_path(@legal_aid_application),
                } %>
  <% end %>

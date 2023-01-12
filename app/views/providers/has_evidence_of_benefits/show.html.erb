@@ -1,22 +1,20 @@
-<%= page_template page_title: t('.page_title', passporting_benefit: @passporting_benefit), template: :basic do %>
+<%= page_template page_title: t(".page_title", passporting_benefit: @passporting_benefit), template: :basic do %>
     <%= form_with(
           model: @form,
           url: providers_legal_aid_application_has_evidence_of_benefit_path,
           method: :patch,
-          local: true
-      ) do |form| %>
+          local: true,
+        ) do |form| %>
 
     <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit, # attribute name
-                                            yes_no_options(yes: t('.radio_hint_yes')), # collection
+                                            yes_no_options(yes: t(".radio_hint_yes")), # collection
                                             :value, # value method
                                             :label, # text method
-                                            :radio_hint, #hint method,
+                                            :radio_hint, # hint method,
                                             bold_labels: false,
-                                            legend: { text: content_for(:page_title), tag: 'h1', size: 'xl' },
-                                            hint: { text: t('.evidence_hint') } %>
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                            hint: { text: t(".evidence_hint") } %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

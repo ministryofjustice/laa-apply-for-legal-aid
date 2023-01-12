@@ -2,38 +2,38 @@
       model: @form,
       url: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
       method: :patch,
-      local: true
-  ) do |form| %>
+      local: true,
+    ) do |form| %>
 
-  <%= page_template page_title: t('.page_title'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_national_insurance_number,
-                                          legend: { text: page_title, size: 'xl', tag: 'h1' }) do %>
+                                          legend: { text: page_title, size: "xl", tag: "h1" }) do %>
 
       <p class="govuk-body govuk-!-margin-top-3 govuk-!-margin-bottom-6">
-        <%= t('.hint') %>
+        <%= t(".hint") %>
       </p>
 
       <%= form.govuk_radio_button(
-              :has_national_insurance_number,
-              true,
-              link_errors: true,
-              label: {text: t('generic.yes')},
+            :has_national_insurance_number,
+            true,
+            link_errors: true,
+            label: { text: t("generic.yes") },
           ) do %>
         <%= form.govuk_text_field(
               :national_insurance_number,
-              label: { text: t('.nino_label') },
-              width: 10
+              label: { text: t(".nino_label") },
+              width: 10,
             ) %>
       <% end %>
 
       <%= form.govuk_radio_button(
-              :has_national_insurance_number,
-              false,
-              label: {text: t('generic.no')}
+            :has_national_insurance_number,
+            false,
+            label: { text: t("generic.no") },
           ) %>
     <% end %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

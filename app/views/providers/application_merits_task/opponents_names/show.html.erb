@@ -2,25 +2,26 @@
       model: @form,
       url: providers_legal_aid_application_opponents_name_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
   <%= page_template(
-        page_title: t('.h1-heading'),
+        page_title: t(".h1-heading"),
         back_link: {},
-        form: form) do %>
+        form:,
+      ) do %>
 
     <%= form.govuk_text_field(
           :first_name,
-          label: { text: t('.first_name'), size: 'm' },
-          class: 'govuk-input govuk-input--width-20'
+          label: { text: t(".first_name"), size: "m" },
+          class: "govuk-input govuk-input--width-20",
         ) %>
 
     <%= form.govuk_text_field(
           :last_name,
-          label: { text: t('.last_name'), size: 'm' },
-          class: 'govuk-input govuk-input--width-20'
+          label: { text: t(".last_name"), size: "m" },
+          class: "govuk-input govuk-input--width-20",
         ) %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

@@ -1,24 +1,22 @@
 <%= form_with(
-        model: @form,
-        scope: :legal_aid_application,
-        url: providers_legal_aid_application_means_property_value_path,
-        method: :patch,
-        local: true) do |form| %>
-  <%= page_template page_title: t('.h1-heading'), form: form, template: :basic do %>
+      model: @form,
+      scope: :legal_aid_application,
+      url: providers_legal_aid_application_means_property_value_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".h1-heading"), form:, template: :basic do %>
 
     <%= form.govuk_text_field(
           :property_value,
-          label: {text: page_title, size: 'xl', tag: 'h1'},
-          hint: {text: t('.hint')},
+          label: { text: page_title, size: "xl", tag: "h1" },
+          hint: { text: t(".hint") },
           value: number_to_currency_or_original_string(@form.property_value),
-          prefix_text: t('currency.gbp'),
-          width: 'one-third',
-          ) %>
-
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
+          prefix_text: t("currency.gbp"),
+          width: "one-third",
         ) %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
 
   <% end %>
 <% end %>

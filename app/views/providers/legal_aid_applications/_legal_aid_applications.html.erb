@@ -1,48 +1,48 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <table class="govuk-table sortable table-merge_columns">
-      <caption class="govuk-visually-hidden"><%= t('.table_description') %></caption>
+      <caption class="govuk-visually-hidden"><%= t(".table_description") %></caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <%= sort_column_th type: :alphabetic, content: t('.applicant_name'), currently_sorted: @initial_sort[:applicant_name] %>
-          <%= sort_column_th type: :date, content: t('.created_at'), currently_sorted: @initial_sort[:created_at], combine_right: { at: 555, append: t('.col_and_ref') } %>
-          <%= sort_column_th type: :alphabetic, content: t('.application_ref_html'), currently_sorted: @initial_sort[:applicant_ref] %>
+          <%= sort_column_th type: :alphabetic, content: t(".applicant_name"), currently_sorted: @initial_sort[:applicant_name] %>
+          <%= sort_column_th type: :date, content: t(".created_at"), currently_sorted: @initial_sort[:created_at], combine_right: { at: 555, append: t(".col_and_ref") } %>
+          <%= sort_column_th type: :alphabetic, content: t(".application_ref_html"), currently_sorted: @initial_sort[:applicant_ref] %>
           <th class="nullcell" aria-hidden="true"></th>
-          <%= sort_column_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t('.col_and_state') } %>
-          <%= sort_column_th type: :alphabetic, content: t('.status'), currently_sorted: @initial_sort[:status] %>
-          <th class='govuk-table__header clear-all' scope='col'><%= t('.action') %></th>
+          <%= sort_column_th type: :alphabetic, content: t(".certificate_type"), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t(".col_and_state") } %>
+          <%= sort_column_th type: :alphabetic, content: t(".status"), currently_sorted: @initial_sort[:status] %>
+          <th class='govuk-table__header clear-all' scope='col'><%= t(".action") %></th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
         <% legal_aid_applications.each do |application| %>
           <% ref = application.application_ref %>
-          <%= render 'shared/partials/modal_dialogue', application: application %>
+          <%= render "shared/partials/modal_dialogue", application: %>
           <tr class="govuk-table__row">
-              <% link_text = application.applicant_full_name || t('generic.undefined') %>
+              <% link_text = application.applicant_full_name || t("generic.undefined") %>
               <%= sort_column_cell(
                     content: link_to_application(link_text, application),
-                    sort_by: link_text
+                    sort_by: link_text,
                   ) %>
 
               <%= sort_column_cell(
                     content: l(application.created_at.to_date, format: :short_date),
                     sort_by: application.created_at.to_i,
-                    combine_right: 555
+                    combine_right: 555,
                   ) %>
 
               <%= sort_column_cell(content: ref) %>
               <td class="nullcell" aria-hidden="true"></td>
               <%= sort_column_cell(sort_by: application.used_delegated_functions?.to_s, combine_right: 555) do %>
                 <% if application.used_delegated_functions? %>
-                  <%= t('.emergency') %>
+                  <%= t(".emergency") %>
                   <% if application.substantive_application_deadline_on? &&  application.summary_state == :in_progress %>
                     <br>
                     <span class="govuk-body-s">
-                      <%= t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
+                      <%= t(".substantive_due", date: l(application.substantive_application_deadline_on, format: :short_date)) %>
                     </span>
                   <% end %>
                 <% else %>
-                  <%= t('.substantive') %>
+                  <%= t(".substantive") %>
                 <% end %>
               <% end %>
 
@@ -52,16 +52,16 @@
               <td>
                 <% unless application.summary_state == :submitted %>
                 <%= link_to_accessible(
-                    t('.delete'),
-                    providers_legal_aid_application_delete_path(application),
-                    class: 'govuk-button govuk-button--secondary govuk-!-margin-1 no-script',
-                    suffix: t('.delete_suffix', reference: ref, applicant: application.applicant_full_name)
+                      t(".delete"),
+                      providers_legal_aid_application_delete_path(application),
+                      class: "govuk-button govuk-button--secondary govuk-!-margin-1 no-script",
+                      suffix: t(".delete_suffix", reference: ref, applicant: application.applicant_full_name),
                     ) %>
                   <button class="govuk-button govuk-button--secondary govuk-!-margin-1 script hidden"
                           id="<%= ref %>-modal-btn"
                           data-toggle="modal"
                           data-target="<%= ref %>_modal">
-                    <%= t('.delete') %> <span class="govuk-visually-hidden"><%= t('.delete_label', reference: application.application_ref, applicant_name: application.applicant.full_name) %></span></button>
+                    <%= t(".delete") %> <span class="govuk-visually-hidden"><%= t(".delete_label", reference: application.application_ref, applicant_name: application.applicant.full_name) %></span></button>
               <% end %>
               </td>
             </tr>

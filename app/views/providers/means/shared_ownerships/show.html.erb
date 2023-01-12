@@ -1,12 +1,13 @@
 <%= form_with(
-        model: @form,
-        scope: :legal_aid_application,
-        url: providers_legal_aid_application_means_shared_ownership_path(@legal_aid_application),
-        method: :patch,
-        local: true) do |form| %>
-  <%= page_template page_title: t('.heading_1'), template: :basic, form: form do %>
+      model: @form,
+      scope: :legal_aid_application,
+      url: providers_legal_aid_application_means_shared_ownership_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".heading_1"), template: :basic, form: do %>
 
-    <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { size: 'xl', tag: 'h1', text: page_title }) do %>
+    <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { size: "xl", tag: "h1", text: page_title }) do %>
       <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each do |reason| %>
         <% if reason == 'no_sole_owner' %>
           <%= form.govuk_radio_divider %>
@@ -15,9 +16,6 @@
       <% end %>
     <% end %>
 
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

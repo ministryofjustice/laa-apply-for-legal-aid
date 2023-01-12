@@ -1,27 +1,23 @@
-<%= page_template(
-      page_title: t('.heading_1'),
-      back_link: :none
-    ) do %>
+<%= page_template(page_title: t(".heading_1"), back_link: :none) do %>
 
   <%= link_to_accessible(start_button_label(:new_app),
-              providers_declaration_path,
-              class: 'govuk-button govuk-button--start',
-              role: 'button',
-              id: 'start',
-              method: :get
-      ) %>
+                         providers_declaration_path,
+                         class: "govuk-button govuk-button--start",
+                         role: "button",
+                         id: "start",
+                         method: :get) %>
 
 <% end %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m">
-      <%= t('.current_applications') %>
-      <%= link_to_accessible t('.search_applications'),
-                  search_providers_legal_aid_applications_path,
-                  class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-1' %>
+      <%= t(".current_applications") %>
+      <%= link_to_accessible t(".search_applications"),
+                             search_providers_legal_aid_applications_path,
+                             class: "govuk-button govuk-button--secondary govuk-!-margin-bottom-1" %>
     </h2>
   </div>
 </div>
 
-<%= render 'legal_aid_applications', legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
+<%= render "legal_aid_applications", legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
