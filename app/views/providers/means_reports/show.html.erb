@@ -13,5 +13,6 @@
         applicant: @legal_aid_application.applicant,
         read_only: true) %>
 
-  <%= render "with_cfe_result_details" %>
+  <%= render "with_cfe_result_details" unless @legal_aid_application.non_means_tested? %>
+
 <% end %>
