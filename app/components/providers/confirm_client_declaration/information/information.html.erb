@@ -1,0 +1,21 @@
+<p class="govuk-body">
+  <%= t(".intro", applicant_full_name:) %>
+</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <% t(".bullets", provider_firm_name:).each do |bullet| %>
+    <li><%== bullet %></li>
+  <% end %>
+</ul>
+
+<%= govuk_warning_text do %>
+  <%= t(".warning.text", applicant_full_name:) %>
+
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-2">
+    <% t(".warning.bullets").each do |bullet| %>
+      <li class="govuk-!-font-weight-bold">
+        <%= bullet %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

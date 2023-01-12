@@ -7,27 +7,9 @@
 
   <%= page_template page_title: t(".h1-heading"), form: form do %>
 
-    <% params = { provider_firm_name: @legal_aid_application.provider.firm.name } %>
-
-    <% if @legal_aid_application.non_means_tested? %>
-      <% i18n_prefix = "non_means_tested" %>
-    <% else %>
-      <% i18n_prefix = "means_tested" %>
-    <% end %>
-
-    <p class="govuk-body">
-      <%= t(".#{i18n_prefix}.text", applicant_name: @legal_aid_application.applicant_full_name) %>
-    </p>
-
-    <%= bullet_list_from_translation_array(
-          "providers.confirm_client_declarations.show.#{i18n_prefix}.list",
-          params: params
+    <%= render Providers::ConfirmClientDeclaration::Information.new(
+          legal_aid_application: @legal_aid_application
         ) %>
-
-    <%= govuk_warning_text do %>
-      <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
-      <%= list_from_translation_path ".confirm_client_declarations.show.warning" %>
-    <% end %>
 
     <%= form.govuk_check_boxes_fieldset :client_declaration_confirmed, legend: nil do %>
       <%= form.govuk_check_box(

@@ -823,6 +823,7 @@ DEPENDENCIES
   super_diff
   tzinfo-data
   vcr
+  view_component
   webdack-uuid_migration (~> 1.4.0)
   webdrivers (~> 5.2)
   webmock

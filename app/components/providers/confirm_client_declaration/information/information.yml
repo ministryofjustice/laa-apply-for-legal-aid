@@ -1,0 +1,47 @@
+en:
+  means_tested:
+    intro: "%{applicant_full_name} agrees that:"
+    bullets:
+      - they've instructed %{provider_firm_name} to represent them
+      - they've read the <a href="/privacy_policy">LAA privacy policy</a>
+      - we can share their information with other government departments like
+        DWP and HMRC
+      - we can check their details with bank and credit reference agencies
+      - they may have to pay towards legal aid
+      - they may have to repay the legal costs if they keep or gain property or
+        money at the end of the case (the 'statutory charge')
+      - the information they've given is complete and correct
+      - they'll report any changes to their financial situation immediately
+    warning:
+      text: >-
+        If they give wrong or incomplete information, do not report changes, or
+        are found to have committed benefit fraud, they may:
+      bullets:
+        - be prosecuted
+        - need to pay a financial penalty
+        - have their legal aid stopped and have to pay back the costs
+  non_means_tested:
+    intro: "You agree for %{applicant_full_name} that:"
+    bullets:
+      - they are under 18
+      - they've instructed %{provider_firm_name} to represent them
+      - they've read the <a href="/privacy_policy">LAA privacy policy</a>
+      - we can share their information with other government departments like
+        DWP and HMRC
+      - we can check their details with bank and credit reference agencies
+      - they may have to pay towards legal aid
+      - they may have to repay the legal costs if they keep or gain
+        property or money at the end of the case (the 'statutory charge')
+      - if the case continues after their 18th birthday, we may reassess
+        their income and capital to check if they should contribute
+        towards legal costs
+      - the information they've given is complete and correct
+      - they'll report any changes to their financial situation immediately
+    warning:
+      text: >-
+        If you have given wrong or incomplete information, or do not report
+        changes for %{applicant_full_name}, they may:
+      bullets:
+        - be prosecuted
+        - need to pay a financial penalty
+        - have their legal aid stopped and have to pay back the costs
