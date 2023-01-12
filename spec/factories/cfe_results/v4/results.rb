@@ -1,7 +1,7 @@
 module CFEResults
   module V4
     FactoryBot.define do
-      factory :cfe_v4_result, class: CFE::V4::Result do
+      factory :cfe_v4_result, class: "CFE::V4::Result" do
         submission factory: :cfe_submission
         legal_aid_application { submission.legal_aid_application }
         result { CFEResults::V4::MockResults.eligible.to_json }

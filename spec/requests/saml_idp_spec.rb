@@ -59,7 +59,7 @@ RSpec.describe SamlIdpController do
     def encode_saml_request
       # call providers/saml/sign_in to get encoded saml request
       get "/providers/saml/sign_in", params: new_params
-      expect(response.status).to eq 302
+      expect(response).to have_http_status(:found)
       redirect_uri = URI(response.header["Location"])
       expect(redirect_uri.path).to eq "/saml/auth"
       request_string = redirect_uri.query.sub(/^SAMLRequest=/, "")

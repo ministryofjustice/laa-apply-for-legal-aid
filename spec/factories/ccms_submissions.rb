@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :ccms_submission, class: CCMS::Submission do
+  factory :ccms_submission, class: "CCMS::Submission" do
     legal_aid_application
 
     trait :initialised do

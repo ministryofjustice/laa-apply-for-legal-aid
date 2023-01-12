@@ -372,7 +372,7 @@ FactoryBot.define do
 
     trait :with_involved_children do
       after(:create) do |application|
-        3.times { create(:involved_child, legal_aid_application: application) }
+        create_list(:involved_child, 3, legal_aid_application: application)
       end
     end
 

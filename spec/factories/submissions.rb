@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :submission, class: CCMS::Submission do
+  factory :submission, class: "CCMS::Submission" do
     legal_aid_application
 
     sequence(:case_ccms_reference) { |n| sprintf("300000%<number>06d", number: n) }

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :legal_framework_submission, class: LegalFramework::Submission do
+  factory :legal_framework_submission, class: "LegalFramework::Submission" do
     legal_aid_application
     request_id { SecureRandom.uuid }
   end

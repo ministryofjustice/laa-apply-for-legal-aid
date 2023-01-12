@@ -47,7 +47,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
       end
 
       it "returns an error" do
-        expect(subject.errors.keys.first).to eq(:import_account_holders)
+        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_account_holders)
       end
     end
   end

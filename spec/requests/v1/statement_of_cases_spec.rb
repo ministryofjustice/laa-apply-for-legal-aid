@@ -59,7 +59,7 @@ RSpec.describe "POST /v1/statement_of_case" do
         it "does not save the object and raises a 500 error with text" do
           subject
           expect(legal_aid_application.reload.attachments.length).to match(0)
-          expect(response.status).to eq 400
+          expect(response).to have_http_status(:bad_request)
           expect(response.body).to include(i18n_error_message)
         end
       end
@@ -72,7 +72,7 @@ RSpec.describe "POST /v1/statement_of_case" do
         it "does not save the object and raises a 500 error with text" do
           subject
           expect(legal_aid_application.reload.attachments.length).to match(0)
-          expect(response.status).to eq 400
+          expect(response).to have_http_status(:bad_request)
           expect(response.body).to include(I18n.t("#{i18n_error_path}.system_down"))
         end
       end

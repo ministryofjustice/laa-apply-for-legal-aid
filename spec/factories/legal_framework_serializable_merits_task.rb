@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :legal_framework_serializable_merits_task, class: LegalFramework::SerializableMeritsTask do
+  factory :legal_framework_serializable_merits_task, class: "LegalFramework::SerializableMeritsTask" do
     initialize_with { new(name, dependencies:) }
 
     dependencies { [:application_children] }

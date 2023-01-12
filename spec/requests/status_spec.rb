@@ -184,7 +184,7 @@ RSpec.describe StatusController, clamav: true do
 
       it "returns HTTP success" do
         get "/healthcheck"
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "returns the expected response report" do

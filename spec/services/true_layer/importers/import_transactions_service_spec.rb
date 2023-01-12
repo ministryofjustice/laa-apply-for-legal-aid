@@ -75,7 +75,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
       end
 
       it "returns an error" do
-        expect(subject.errors.keys.first).to eq(:import_transactions)
+        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_transactions)
       end
     end
   end
