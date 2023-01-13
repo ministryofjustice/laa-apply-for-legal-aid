@@ -2,65 +2,36 @@
       model: @form,
       url: providers_legal_aid_application_domestic_abuse_summary_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template(
-        page_title: t('.h1-heading'),
-        back_link: {},
-        form: form) do %>
+  <%= page_template(page_title: t(".h1-heading"), back_link: {}, form:) do %>
 
-    <%
-      questions = %i[warning_letter_sent].map do |attr|
-        OpenStruct.new(
-          title: t(".#{attr}"),
-          attribute: attr,
-          attribute_details: "#{attr}_details".to_sym,
-          )
-      end
-      questions += %i[police_notified].map do |attr|
-        OpenStruct.new(
-          title: t(".#{attr}"),
-          attribute: attr,
-          attribute_details_true: "#{attr}_details_true".to_sym,
-          attribute_details_false: "#{attr}_details_false".to_sym
-        )
-      end
-      questions += %i[bail_conditions_set].map do |attr|
-        OpenStruct.new(
-          title: t(".#{attr}"),
-          attribute: attr,
-          attribute_details: "#{attr}_details".to_sym,
-          )
-      end
-      police_notified_titles = {
-        yes: t('.police_notified_yes'),
-        no: t('.police_notified_no'),
-      }
-    %>
+    <%= form.govuk_radio_buttons_fieldset :warning_letter_sent, legend: { text: t(".warning_letter_sent") } do %>
+      <%= form.govuk_radio_button :warning_letter_sent, true, link_errors: true, label: { text: t("generic.yes") } %>
 
-    <% questions.each do |question| %>
-      <%= form.govuk_radio_buttons_fieldset question.attribute, legend: {text: question.title} do %>
-        <% if question.attribute == :police_notified %>
-          <%= form.govuk_radio_button question.attribute, true, link_errors: true, label: {text: t('generic.yes')} do %>
-            <%= form.govuk_text_area question.attribute_details_true, label: {text: police_notified_titles[:yes]}, rows: 5 %>
-          <% end %>
-          <%= form.govuk_radio_button question.attribute, false, label: {text: t('generic.no')} do %>
-            <%= form.govuk_text_area question.attribute_details_false, label: {text: police_notified_titles[:no]}, rows: 5 %>
-          <% end %>
-        <% elsif question.attribute == :bail_conditions_set %>
-          <%= form.govuk_radio_button question.attribute, true, link_errors: true, label: {text: t('generic.yes')} do %>
-            <%= form.govuk_text_area question.attribute_details, rows: 5 %>
-          <% end %>
-          <%= form.govuk_radio_button question.attribute, false, label: {text: t('generic.no')} %>
-        <% else %>
-          <%= form.govuk_radio_button question.attribute, true, link_errors: true, label: {text: t('generic.yes')} %>
-          <%= form.govuk_radio_button question.attribute, false, label: {text: t('generic.no')} do %>
-            <%= form.govuk_text_area question.attribute_details, rows: 5 %>
-          <% end %>
-        <% end %>
+      <%= form.govuk_radio_button :warning_letter_sent, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :warning_letter_sent_details, rows: 5 %>
       <% end %>
     <% end %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= form.govuk_radio_buttons_fieldset :police_notified, legend: { text: t(".police_notified") } do %>
+      <%= form.govuk_radio_button :police_notified, true, link_errors: true, label: { text: t("generic.yes") } do %>
+        <%= form.govuk_text_area :police_notified_details_true, label: { text: t(".police_notified_yes") }, rows: 5 %>
+      <% end %>
+
+      <%= form.govuk_radio_button :police_notified, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :police_notified_details_false, label: { text: t(".police_notified_no") }, rows: 5 %>
+      <% end %>
+    <% end %>
+
+    <%= form.govuk_radio_buttons_fieldset :bail_conditions_set, legend: { text: t(".bail_conditions_set") } do %>
+      <%= form.govuk_radio_button :bail_conditions_set, true, link_errors: true, label: { text: t("generic.yes") } do %>
+        <%= form.govuk_text_area :bail_conditions_set_details, rows: 5 %>
+      <% end %>
+
+      <%= form.govuk_radio_button :bail_conditions_set, false, label: { text: t("generic.no") } %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
