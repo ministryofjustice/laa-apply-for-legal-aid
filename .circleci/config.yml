@@ -35,7 +35,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
           CACHE_VERSION: v1
           NODE_OPTIONS: --openssl-legacy-provider
-      - image: cimg/postgres:10.18
+      - image: cimg/postgres:11.16
       - image: cimg/redis:5.0
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
 
