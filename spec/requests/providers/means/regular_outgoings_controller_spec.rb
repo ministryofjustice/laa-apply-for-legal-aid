@@ -147,7 +147,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         create(
           :legal_aid_application,
           :with_non_passported_state_machine,
-          :checking_non_passported_means,
+          :checking_means_income,
           no_debit_transaction_types_selected: false,
         )
       end

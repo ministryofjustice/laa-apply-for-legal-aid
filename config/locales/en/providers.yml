@@ -895,7 +895,17 @@ en:
           outgoings-heading: Your client's outgoings
           credits-section-heading: What payments does your client receive?
           debits-section-heading: What payments does your client make?
-          dependants-heading: Dependants
+        dependants:
+          heading: Dependants
+          has_dependants: Does your client have any dependants?
+          add-new: Add dependant
+          delete: Delete dependant
+          name: Name
+          date_of_birth: Date of birth
+          relationship: What is their relationship to your client?
+          in_full_time_education: Are they in full-time education or training?
+          income: Do they receive any income?
+          assets: Do they have assets worth more than £8,000?
       own_homes:
         show:
           h1-heading: Does your client own the home that they live in?

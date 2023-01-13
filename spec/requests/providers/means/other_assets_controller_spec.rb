@@ -182,8 +182,8 @@ RSpec.describe "provider other assets requests" do
             context "with provider checking answers" do
               let(:application) { create(:legal_aid_application, :without_own_home, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-              it "redirects to checking answers income page" do
-                expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(application))
+              it "redirects to means summary page" do
+                expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
               end
             end
           end

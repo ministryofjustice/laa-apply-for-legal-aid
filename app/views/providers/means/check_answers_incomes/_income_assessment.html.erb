@@ -27,11 +27,7 @@
 
 <%= render "shared/check_answers/student_finance", read_only: false %>
 
-<<<<<<< HEAD:app/views/providers/means_summaries/_income_assessment.html.erb
-<h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
-=======
 <h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t('.outgoings-heading') %></h2>
->>>>>>> add new check answers page for income section:app/views/providers/means/check_answers_incomes/_income_assessment.html.erb
 
 <%= render(
       "shared/check_answers/income_summary",
@@ -44,10 +40,6 @@
 
 <%= render("shared/check_answers/outgoings_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>
 
-<<<<<<< HEAD:app/views/providers/means_summaries/_income_assessment.html.erb
-<h2 class="govuk-heading-l"><%= t(".dependants.heading") %></h2>
-=======
-<h2 class="govuk-heading-l"><%= t('.dependants-heading') %></h2>
->>>>>>> add new check answers page for income section:app/views/providers/means/check_answers_incomes/_income_assessment.html.erb
+<h2 class="govuk-heading-l"><%= t('providers.means.check_answers_incomes.dependants.heading') %></h2>
 
 <%= render "shared/check_answers/dependants" %>

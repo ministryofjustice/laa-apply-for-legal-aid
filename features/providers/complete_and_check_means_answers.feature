@@ -40,6 +40,9 @@ Feature: Completing and checking means answers backwards and forwards
     Then I click 'Save and continue'
 
     When I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+
+    When I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     When I choose "No"
     And I click 'Save and continue'
@@ -95,6 +98,9 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I choose "No"
     And I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
     When I choose "No"

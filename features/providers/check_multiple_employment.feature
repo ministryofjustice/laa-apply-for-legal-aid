@@ -55,6 +55,9 @@ Feature: Check multiple employment
 
     When I choose "No"
     And I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
     When I choose "No"

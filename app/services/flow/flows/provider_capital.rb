@@ -38,19 +38,19 @@ module Flow
           forward: lambda do |application|
             application.income_types? ? :cash_incomes : :student_finances
           end,
-          check_answers: ->(application) { application.income_types? ? :cash_incomes : :check_answers_income },
+          check_answers: ->(application) { application.income_types? ? :cash_incomes : :check_answers_incomes },
         },
         cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
           forward: :student_finances,
-          check_answers: ->(application) { application.uploading_bank_statements? ? :check_answers_income : :income_summary },
+          check_answers: ->(application) { application.uploading_bank_statements? ? :check_answers_incomes : :income_summary },
         },
         student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_means_student_finance_path(application) },
           forward: lambda do |application|
             application.uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings
           end,
-          check_answers: :check_answers_income,
+          check_answers: :check_answers_incomes,
         },
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_outgoing_path(application) },
@@ -66,7 +66,7 @@ module Flow
           check_answers: lambda do |application|
             return :cash_outgoings if application.outgoing_types?
 
-            application.uploading_bank_statements? ? :check_answers_income : :outgoings_summary
+            application.uploading_bank_statements? ? :check_answers_incomes : :outgoings_summary
           end,
         },
         regular_outgoings: {
@@ -86,7 +86,7 @@ module Flow
             elsif application.outgoing_types?
               :cash_outgoings
             else
-              :check_answers_income
+              :check_answers_incomes
             end
           end,
         },
@@ -108,29 +108,29 @@ module Flow
               :has_dependants
             end
           end,
-          check_answers: ->(application) { application.uploading_bank_statements? ? :check_answers_income : :outgoings_summary },
+          check_answers: ->(application) { application.uploading_bank_statements? ? :check_answers_incomes : :outgoings_summary },
         },
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: :savings_and_investments,
-          check_answers: :check_answers_income,
+          check_answers: :check_answers_incomes,
         },
         offline_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
           forward: :savings_and_investments,
-          check_answers: ->(application) { application.checking_non_passported_means? ? :check_answers_income : :check_passported_answers },
+          check_answers: ->(application) { application.checking_non_passported_means? ? :check_answers_incomes : :check_passported_answers },
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: lambda do |application|
             application.outgoing_types? ? :outgoings_summary : :has_dependants
           end,
-          check_answers: :check_answers_income,
+          check_answers: :check_answers_incomes,
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
           forward: :has_dependants,
-          check_answers: :check_answers_income,
+          check_answers: :check_answers_incomes,
         },
         incoming_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
@@ -204,7 +204,7 @@ module Flow
               :identify_types_of_incomes
             end
           end,
-          check_answers: :check_answers_income,
+          check_answers: :check_answers_incomes,
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
@@ -215,7 +215,7 @@ module Flow
               :identify_types_of_incomes
             end
           end,
-          check_answers: :check_answers_income,
+          check_answers: :check_answers_incomes,
         },
         capital_introductions: {
           path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
