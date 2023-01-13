@@ -7,10 +7,10 @@
     <%= page_template page_title: t(".h1-heading"), form:, template: :basic do %>
 
     <% options = [
-        [:mortgage, t(".mortgage")],
-        [:owned_outright, t(".owned_outright")],
-        [:no, t(".no")]
-      ] %>
+         [:mortgage, t(".mortgage")],
+         [:owned_outright, t(".owned_outright")],
+         [:no, t(".no")],
+       ] %>
 
     <%= form.govuk_collection_radio_buttons(:own_home, options, :first, :second,
                                             legend: { size: "xl", tag: "h1", text: content_for(:page_title) }) %>

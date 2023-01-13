@@ -1,20 +1,19 @@
 <%= page_template(
-      page_title: t('.heading_1'),
+      page_title: t(".heading_1"),
       show_errors_for: @legal_aid_application,
-      back_link: @legal_aid_application.proceedings.empty? && @legal_aid_application.checking_answers? ? :none : {}
+      back_link: @legal_aid_application.proceedings.empty? && @legal_aid_application.checking_answers? ? :none : {},
     ) %>
 
-<%
-  error_message = @legal_aid_application.errors[:'proceeding-search-input']&.to_sentence
-  form_group_error_class = error_message.present? ? 'govuk-form-group--error' : ''
-  input_error_class = error_message.present? ? 'govuk-input--error' : ''
-%>
+<% error_message = @legal_aid_application.errors[:"proceeding-search-input"]&.to_sentence %>
+<% form_group_error_class = error_message.present? ? "govuk-form-group--error" : "" %>
+<% input_error_class = error_message.present? ? "govuk-input--error" : "" %>
+
 <div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0 <%= form_group_error_class %>">
   <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
     <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
-      <%= t '.heading_2' %>
+      <%= t ".heading_2" %>
       <div class="govuk-hint govuk-!-margin-top-0 govuk-!-width-two-thirds">
-        <%= @legal_aid_application.provider.full_section_8_permissions? ? t('.search_help_example_with_s8_permission') : t('.search_help_example') %>
+        <%= @legal_aid_application.provider.full_section_8_permissions? ? t(".search_help_example_with_s8_permission") : t(".search_help_example") %>
         <span class="govuk-visually-hidden">Enter search term, results will automatically return</span>
       </div>
     </label>
@@ -27,7 +26,7 @@
     </div>
 
     <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
-      <p><%= link_to_accessible t('.clear_search'), '#', class: 'govuk-link govuk-!-font-size-19', id: 'clear-proceeding-search' %></p>
+      <p><%= link_to_accessible t(".clear_search"), "#", class: "govuk-link govuk-!-font-size-19", id: "clear-proceeding-search" %></p>
     </div>
   </div>
 </div>
@@ -37,20 +36,21 @@
        data-uri="<%= Rails.configuration.x.legal_framework_api_host %>"
        value="<%= @excluded_codes %>">
 <%= form_with(
-  model: nil,
-  url: providers_legal_aid_application_proceedings_types_path,
-  local: true) do |form| %>
+      model: nil,
+      url: providers_legal_aid_application_proceedings_types_path,
+      local: true,
+    ) do |form| %>
   <div class="govuk-grid-row govuk-!-margin-top-0">
     <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
-        <%= form.govuk_radio_buttons_fieldset :id, legend: {text: nil, hidden: true} do %>
+        <%= form.govuk_radio_buttons_fieldset :id, legend: { text: nil, hidden: true } do %>
           <% @proceeding_types.each do |proceeding_type| %>
             <div id="<%= proceeding_type.ccms_code %>" class="govuk-grid-row proceeding-item">
               <%= form.govuk_radio_button(
-                      :id,
-                      proceeding_type.ccms_code,
-                      label: {text: proceeding_type.meaning},
-                      hint: {text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})"}
-                    ) %>
+                    :id,
+                    proceeding_type.ccms_code,
+                    label: { text: proceeding_type.meaning },
+                    hint: { text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})" },
+                  ) %>
             </div>
           <% end %>
         <% end %>
@@ -58,15 +58,12 @@
   </div>
   <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-body"><%= t '.no_results' %></span>
+      <span class="govuk-body"><%= t ".no_results" %></span>
     </div>
   </div>
   <div class="govuk-grid-row govuk-!-margin-top-5">
     <div class="govuk-grid-column-two-thirds">
-      <%= next_action_buttons(
-            form: form,
-            show_draft: true
-          ) %>
+      <%= next_action_buttons(form:, show_draft: true) %>
     </div>
   </div>
 <% end %>

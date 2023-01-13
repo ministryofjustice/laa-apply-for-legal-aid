@@ -1,31 +1,30 @@
-<%
-  form_group_error_class = @mandatory_evidence_errors.present? ? 'govuk-form-group--error' : ''
-%>
+<% form_group_error_class = @mandatory_evidence_errors.present? ? "govuk-form-group--error" : "" %>
+
 <%= form_with(
       model: @upload_form,
       url: providers_legal_aid_application_uploaded_evidence_collection_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
 
   <%= form.govuk_error_summary %>
 
-  <%= render partial: 'shared/forms/error_summary_hidden', locals: { field_id: 'uploaded-evidence-collection-original-file-field' } %>
+  <%= render partial: "shared/forms/error_summary_hidden", locals: { field_id: "uploaded-evidence-collection-original-file-field" } %>
 
-  <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+  <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
     <div class="govuk-!-padding-bottom-6"></div>
 
       <% if @required_documents.size == 1 %>
         <% if  @legal_aid_application.section_8_proceedings? %>
-          <div class="govuk-body"><%= t('.section_8_evidence') %></div>
+          <div class="govuk-body"><%= t(".section_8_evidence") %></div>
         <% elsif @evidence_type_translation.present? %>
-          <div class="govuk-body"><%= t('.single_item', evidence_type: @evidence_type_translation) %></div>
+          <div class="govuk-body"><%= t(".single_item", evidence_type: @evidence_type_translation) %></div>
         <% else %>
-          <div class="govuk-body"><%= t('.single_non_specific_item', item: t(".#{@required_documents.first}")) %></div>
+          <div class="govuk-body"><%= t(".single_non_specific_item", item: t(".#{@required_documents.first}")) %></div>
         <% end %>
       <% else %>
-        <div class="govuk-body"><%= t('.list_text') %></div>
+        <div class="govuk-body"><%= t(".list_text") %></div>
         <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
           <% @required_documents.each do |evidence| %>
             <li><%= t(".#{evidence}", benefit: @legal_aid_application&.dwp_override&.passporting_benefit&.titleize) %></li>
@@ -38,9 +37,9 @@
     <div class="dropzone__upload">
       <div class="govuk-form-group script hidden <%= form_group_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">
         <label class="govuk-label govuk-label--m" id="dropzone-label">
-          <%= t('.upload_file') %>
+          <%= t(".upload_file") %>
         </label>
-        <div class="govuk-hint"><%= t('.size_hint') %></div>
+        <div class="govuk-hint"><%= t(".size_hint") %></div>
         <% if @mandatory_evidence_errors %>
             <p id="dropzone-mandatory-error" class='govuk-error-message dropzone-error govuk-!-margin-bottom-1'>
               <% @mandatory_evidence_errors.each do |error| %>
@@ -57,8 +56,8 @@
         </p>
         <div class="dropzone" id="dropzone-form">
           <div class="dz-message" data-dz-message>
-            <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
-            <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></button>
+            <p class="govuk-body govuk-!-padding-top-2 script"><%= t(".dropzone_message") %></p>
+            <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t(".choose_files_btn") %></button>
           </div>
         </div>
       </div>
@@ -69,14 +68,14 @@
             <p class='govuk-error-message govuk-!-margin-top-1'><%= error.message %></p>
           <% end %>
         <% end %>
-        <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
-                                  hint: {text: t('.size_hint')},
-                                  classes: ['govuk-file-upload ' + form_group_error_class] %>
+        <%= form.govuk_file_field :original_file, label: { text: t("generic.attach_file"), size: "m" },
+                                                  hint: { text: t(".size_hint") },
+                                                  classes: ["govuk-file-upload #{form_group_error_class}"] %>
         <%= form.submit(
-              t('generic.upload'),
-              id: 'upload',
-              name: 'upload_button',
-              class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
+              t("generic.upload"),
+              id: "upload",
+              name: "upload_button",
+              class: "govuk-button govuk-button--secondary form-button moj-multi-file-upload__button",
             ) %>
       </div>
     </div>
