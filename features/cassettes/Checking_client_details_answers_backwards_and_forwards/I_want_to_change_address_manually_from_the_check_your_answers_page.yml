@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 10:49:52 GMT
+      - Tue, 17 Jan 2023 09:22:18 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -43,7 +43,7 @@ http_interactions:
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX\",\r\n
         \   \"query\" : \"postcode=XX11XX\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 0,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"94\",\r\n    \"output_srs\"
-        : \"EPSG:27700\"\r\n  }\r\n}"
-  recorded_at: Thu, 04 Aug 2022 10:49:52 GMT
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"98\",\r\n    \"lastupdate\"
+        : \"2023-01-16\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  }\r\n}"
+  recorded_at: Tue, 17 Jan 2023 09:22:18 GMT
 recorded_with: VCR 6.1.0

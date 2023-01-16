@@ -1,0 +1,116 @@
+Feature: non_passported_journey with means
+  @javascript @vcr
+  Scenario: I am able to complete the means questions and check answers
+    Given I start the means application and the applicant has uploaded transaction data
+    Then I should be on a page showing 'Your client has shared their financial information'
+
+    When I click 'Continue'
+    Then I should be on a page showing "Which payments does your client receive?"
+
+    When I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+
+    When I select "Benefits"
+    Then I enter benefits1 '100'
+    Then I enter benefits2 '100'
+    Then I enter benefits3 '100'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+
+    When I select 'Housing'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
+
+    When I select 'Housing payments'
+    Then I enter rent_or_mortgage1 '100'
+    Then I enter rent_or_mortgage2 '100'
+    Then I enter rent_or_mortgage3 '100'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's income into categories"
+
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    Then I should be on a page with title "Sort your client's income into categories"
+
+    When I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select housing payments'
+
+    When I select the first checkbox
+    And I click 'Save and continue'
+    Then I should be on a page with title "Sort your client's regular payments into categories"
+
+    When I click 'Save and continue'
+    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Your client’s bank accounts"
+
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which savings or investments does your client have?"
+
+    When I select "My client has none of these savings or investments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which assets does your client have?"
+
+    When I select "Land"
+    And I fill "Land value" with "50000"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
+
+    When I choose 'Yes'
+    And I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
+    And I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+
+    When I select 'England Infected Blood Support Scheme'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for "What payments does your client receive?"
+    Then I should be on a page with title "Which payments does your client receive?"
+
+    When I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+
+    When I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's income into categories"
+
+    When I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click 'Save and continue'
+    Then I should be on a page showing 'We need to check if'
+    And I should be on a page showing 'they received disregarded scheme or charity payments'
+
+    When I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
+
+    When I click link 'Latest incident details'
+    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'

@@ -1,0 +1,46 @@
+Feature: Search proceedings
+
+@javascript @vcr
+  Scenario: No results returned is seen on screen when invalid proceeding search entered
+    Given I am logged in as a provider
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Make a new application"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
+    Then I should be on the Applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1H 9EA'
+    Then I click find address
+    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
+    When the search for "cakes" is not successful
+    Then the result list on page returns a "No results found." message
+
+  @javascript @vcr
+  Scenario: I am able to clear proceeding on the proceeding page
+    Given I am logged in as a provider
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Make a new application"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
+    Then I should be on the Applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1H 9EA'
+    Then I click find address
+    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
+    And I search for proceeding 'dom'
+    Then proceeding suggestions has results
+    When I click clear search
+    Then the results section is empty
+    Then proceeding search field is empty
