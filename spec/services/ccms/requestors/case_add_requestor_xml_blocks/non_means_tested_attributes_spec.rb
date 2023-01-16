@@ -150,9 +150,9 @@ module CCMS
           expect(block).to have_boolean_response(true)
         end
 
-        it "MEANS_EVIDENCE_PROVIDED is false" do
-          block = XmlExtractor.call(xml, :global_means, "MEANS_EVIDENCE_PROVIDED")
-          expect(block).to have_boolean_response(false)
+        it "adds GB_INFER_B_1WP1_1A with hard coded value of true" do
+          block = XmlExtractor.call(xml, :global_means, "GB_INFER_B_1WP1_1A")
+          expect(block).to have_boolean_response(true)
         end
 
         it "omits PASSPORTED_NINO" do
@@ -186,7 +186,7 @@ module CCMS
         end
 
         it "omits GB_INFER_T_6WP1_66A" do
-          block = XmlExtractor.call(xml, :global_means, "GB_INFER_T_6WP1_66A")
+          block = XmlExtractor.call(xml, :global_merits, "GB_INFER_T_6WP1_66A")
           expect(block).not_to be_present, "Expected attribute block GB_INFER_T_6WP1_66A not to be generated, but was \n #{block}"
         end
 
@@ -200,13 +200,8 @@ module CCMS
           expect(block).not_to be_present, "Expected attribute block PUI_CLIENT_ELIGIBILITY not to be generated, but was \n #{block}"
         end
 
-        it "omits OUT_CAP_CONT" do
-          block = XmlExtractor.call(xml, :global_means, "OUT_CAP_CONT")
-          expect(block).not_to be_present, "Expected attribute block OUT_CAP_CONT not to be generated, but was \n #{block}"
-        end
-
-        context "with means currency attributes that required(?!) but not applicable" do
-          let(:attributes) { %w[INCOME_CONT CAP_CONT PUI_CLIENT_CAP_CONT] }
+        context "with means currency attributes that are required(?!) but not applicable" do
+          let(:attributes) { %w[INCOME_CONT CAP_CONT OUT_CAP_CONT PUI_CLIENT_CAP_CONT] }
 
           it "returns zero", :aggregate_failures do
             attributes.each do |attribute|
@@ -335,10 +330,6 @@ module CCMS
           expect(block).to have_text_response "."
         end
 
-        # CHECK: what should this be for non means tested as value is set to legal_aid_appicat.calculation date
-        # for passported. This will be nil for non-means-tested unless using delegated functions
-        # I note that the example from Dave does not include this attribute!
-        #
         it "omits the URGENT_HEARING_DATE attribute in the merits assessment section" do
           block = XmlExtractor.call(xml, :global_merits, "URGENT_HEARING_DATE")
           expect(block).not_to be_present
@@ -354,7 +345,6 @@ module CCMS
           expect(block).not_to be_present
         end
 
-        # CHECK: not in example payload but is merits related?
         context "with POLICE_NOTIFIED block" do
           context "when police notified" do
             before { opponent.update(police_notified: true) }
@@ -375,7 +365,6 @@ module CCMS
           end
         end
 
-        # CHECK: not in example payload but is merits related?
         context "with WARNING_LETTER_SENT" do
           context "when letter has not been sent" do
             it "adds WARNING_LETTER_SENT attribute with false value" do
@@ -431,6 +420,8 @@ module CCMS
             [:global_means, "GB_INPUT_B_38WP3_3SCREEN"],
             [:global_means, "GB_DECL_B_38WP3_13A"],
             [:global_means, "LAR_SCOPE_FLAG"],
+            [:global_means, "MEANS_EVIDENCE_PROVIDED"],
+            [:global_means, "MEANS_SUBMISSION_PG_DISPLAYED"],
             [:global_merits, "APPLICATION_FROM_APPLY"],
             [:global_merits, "CLIENT_HAS_DV_RISK"],
             [:global_merits, "CLIENT_REQ_SEP_REP"],
@@ -441,7 +432,6 @@ module CCMS
             [:proceeding_means, "SCOPE_LIMIT_IS_DEFAULT"],
             [:proceeding_merits, "LEAD_PROCEEDING"],
             [:proceeding_merits, "SCOPE_LIMIT_IS_DEFAULT"],
-            [:global_means, "MEANS_SUBMISSION_PG_DISPLAYED"],
             [:global_merits, "CASE_OWNER_STD_FAMILY_MERITS"],
           ]
 
@@ -494,18 +484,6 @@ module CCMS
           end
         end
 
-        # CHECK: what should this be for a non means tested
-        # note that `legal_aid_application.calculation_date` will return nil if no delegated functions used on a
-        # non-means-tested case
-        xcontext "with DATE_CLIENT_VISITED_FIRM" do
-          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
-
-          it "inserts today's date as a string" do
-            block = XmlExtractor.call(xml, :global_merits, "DATE_CLIENT_VISITED_FIRM")
-            expect(block).to have_date_response Time.zone.today.strftime("%d-%m-%Y")
-          end
-        end
-
         it "adds _SYSTEM_PUI_USERID attribute with provider's email address as value" do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, "_SYSTEM_PUI_USERID")
@@ -517,20 +495,6 @@ module CCMS
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, "USER_PROVIDER_FIRM_ID")
             expect(block).to have_number_response legal_aid_application.provider.firm.ccms_id
-          end
-        end
-
-        # CHECK: what should this be for a non means tested
-        # note that `legal_aid_application.calculation_date` will return nil if no delegated functions used on a
-        # non-means-tested case
-        xcontext "with DATE_ASSESSMENT_STARTED" do
-          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
-
-          it "inserts today's date as a string" do
-            %i[global_means global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, "DATE_ASSESSMENT_STARTED")
-              expect(block).to have_date_response Time.zone.today.strftime("%d-%m-%Y")
-            end
           end
         end
 
@@ -572,9 +536,44 @@ module CCMS
           expect(block).not_to be_present, "Expected attribute block BEN_NI_NO not to be generated, but was \n #{block}"
         end
 
+        it "omits BEN_SURNAME" do
+          block = XmlExtractor.call(xml, :global_means, "BEN_SURNAME")
+          expect(block).not_to be_present, "Expected attribute block BEN_SURNAME not to be generated, but was \n #{block}"
+        end
+
         it "LAR_INFER_B_1WP1_36A is present with value of false" do
           block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
           expect(block).to have_boolean_response false
+        end
+
+        context "with DELEG_FUNCTIONS_DATE_MERITS" do
+          context "when using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: dummy_date, used_delegated_functions_reported_on: dummy_date)
+              end
+            end
+
+            let(:dummy_date) { Time.zone.today }
+
+            it "adds DELEG_FUNCTIONS_DATE_MERITS attribute with date string" do
+              block = XmlExtractor.call(xml, :global_merits, "DELEG_FUNCTIONS_DATE_MERITS")
+              expect(block).to have_date_response(dummy_date.strftime("%d-%m-%Y"))
+            end
+          end
+
+          context "when not using delegated functions" do
+            before do
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions: false)
+              end
+            end
+
+            it "omits DELEG_FUNCTIONS_DATE_MERITS attribute block" do
+              block = XmlExtractor.call(xml, :global_merits, "DELEG_FUNCTIONS_DATE_MERITS")
+              expect(block).not_to be_present, "Expected block for attribute DELEG_FUNCTIONS_DATE_MERITS not to be generated, but was \n #{block}"
+            end
+          end
         end
 
         context "with APP_GRANTED_USING_DP" do
@@ -725,19 +724,6 @@ module CCMS
           expect(block).not_to be_present
         end
 
-        # CHECK: is this even needed (not in example payload) what should this be for a non means tested
-        # note that `legal_aid_application.calculation_date` will return nil if no delegated functions used on a
-        # non-means-tested case
-        xcontext "with GB_INPUT_D_18WP2_1A - application submission date" do
-          let(:dummy_date) { Faker::Date.between(from: 20.days.ago, to: Time.zone.today) }
-
-          it "inserts the submission date into the attribute block" do
-            allow(legal_aid_application).to receive(:calculation_date).and_return(dummy_date)
-            block = XmlExtractor.call(xml, :global_means, "GB_INPUT_D_18WP2_1A")
-            expect(block).to have_date_response dummy_date.strftime("%d-%m-%Y")
-          end
-        end
-
         it "omits GB_INPUT_B_10WP2_1A attribute" do
           block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_10WP2_1A")
           expect(block).not_to be_present
@@ -753,7 +739,6 @@ module CCMS
           expect(block).not_to be_present
         end
 
-        # CHECK: is in example payload but may not be needed
         it "adds GB_DECL_B_38WP3_11A attribute with value of false" do
           block = XmlExtractor.call(xml, :global_means, "GB_DECL_B_38WP3_11A")
           expect(block).to have_boolean_response false
@@ -858,8 +843,32 @@ module CCMS
           end
 
           context "with REQUESTED_SCOPE" do
-            context "when there is one scope limitation" do
-              it "adds REQUESTED_SCOPE attribute with the scope limitation code" do
+            context "when delegated functions are used on the proceeding" do
+              before do
+                proceeding = legal_aid_application.proceedings.first
+                proceeding.scope_limitations.destroy_all
+
+                proceeding.update!(used_delegated_functions: true,
+                                   used_delegated_functions_on: 1.day.ago,
+                                   used_delegated_functions_reported_on: 1.day.ago)
+              end
+
+              it "adds REQUESTED_SCOPE with value of MULTIPLE in proceeding means and merits section" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
+                  expect(block).to have_text_response "MULTIPLE"
+                end
+              end
+            end
+
+            context "when there is one scope limitation and no delegated functions on the proceeding" do
+              before do
+                proceeding = legal_aid_application.proceedings.first
+                proceeding.scope_limitations.destroy_all
+                create(:scope_limitation, :substantive, proceeding:)
+              end
+
+              it "adds REQUESTED_SCOPE attribute with value of the substantive scope limitation code" do
                 %i[proceeding_means proceeding_merits].each do |entity|
                   block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
                   expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitations.first.code
@@ -867,13 +876,14 @@ module CCMS
               end
             end
 
-            xcontext "when there are multiple scope limitations" do
+            context "when there are multiple scope limitations and no delegated functions on the proceeding" do
               before do
-                da004 = create(:proceeding, :da004, legal_aid_application:, lead_proceeding: false)
-                create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: da004)
+                proceeding = legal_aid_application.proceedings.first
+                proceeding.scope_limitations.destroy_all
+                create_list(:scope_limitation, 2, :substantive, proceeding:)
               end
 
-              it "adds REQUESTED_SCOPE attribute with MULTIPLE in proceedings means and merits sections" do
+              it "adds REQUESTED_SCOPE with value of MULTIPLE in proceeding means and merits section" do
                 %i[proceeding_means proceeding_merits].each do |entity|
                   block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
                   expect(block).to have_text_response "MULTIPLE"
@@ -899,8 +909,7 @@ module CCMS
             expect(block).to have_text_response "SFM"
           end
 
-          # CHECK: few of these are in example payload for NMT
-          it "returns a hard coded response with the correct notification" do
+          it "returns a hard coded response with value of '.'" do
             attributes = [
               [:proceeding_merits, "INJ_RECENT_INCIDENT_DETAIL"],
               [:global_merits, "INJ_REASON_POLICE_NOT_NOTIFIED"],
@@ -1037,12 +1046,12 @@ module CCMS
         context "with means OPPONENT_OTHER_PARTIES entity" do
           let(:entity) { :opponent_means }
 
-          it "hard-codes OTHER_PARTY_ID" do
+          it "generates OTHER_PARTY_ID" do
             block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
             expect(block).to have_text_response "OPPONENT_88000001"
           end
 
-          it "hard-codes OTHER_PARTY_NAME" do
+          it "adds OTHER_PARTY_NAME with value of full name of other party" do
             block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
             expect(block).to have_text_response opponent.full_name
           end
@@ -1076,17 +1085,17 @@ module CCMS
             expect(block).to have_text_response "Unknown"
           end
 
-          it "hard-codes OTHER_PARTY_ID" do
+          it "generates OTHER_PARTY_ID" do
             block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
             expect(block).to have_text_response "OPPONENT_88000001"
           end
 
-          it "hard-codes OTHER_PARTY_NAME" do
+          it "adds OTHER_PARTY_NAME with value of full name of other party" do
             block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
             expect(block).to have_text_response opponent.full_name
           end
 
-          it "hard-codes OTHER_PARTY_NAME_MERITS" do
+          it "adds OTHER_PARTY_NAME_MERITS with value of full name of other party" do
             block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
             expect(block).to have_text_response opponent.full_name
           end
@@ -1101,12 +1110,12 @@ module CCMS
             expect(block).to have_boolean_response true
           end
 
-          it "hard-codes RELATIONSHIP_CASE_OPPONENT" do
+          it "adds RELATIONSHIP_CASE_OPPONENT with derived value" do
             block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
             expect(block).to have_boolean_response true
           end
 
-          it "hard-codes RELATIONSHIP_TO_CASE" do
+          it "adds RELATIONSHIP_TO_CASE with derived value" do
             block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
             expect(block).to have_text_response "OPP"
           end
@@ -1117,11 +1126,6 @@ module CCMS
           end
         end
 
-        # CHECK: should we hard code as true (manual review not required?)
-        # - false (manual review required)
-        # - true (manual review not required?)
-        # Note that #bypass_manual_review_in_ccms? should return true (manual review not required?) for
-        # non-means-tested applications anyway
         context "with APPLY_CASE_MEANS_REVIEW" do
           before { allow(ManualReviewDeterminer).to receive(:new).and_return(determiner) }
 
@@ -1168,6 +1172,7 @@ module CCMS
           [:global_means, "CLIENT_PRISONER"],
           [:global_means, "CLIENT_VULNERABLE"],
           [:global_means, "CONFIRMED_NOT_PASSPORTED"],
+          [:global_means, "DATE_ASSESSMENT_STARTED"],
           [:global_means, "EMP_INPUT_B_3WP3_60A"],
           [:global_means, "EMP_INPUT_B_3WP3_62A"],
           [:global_means, "EMP_INPUT_B_3WP3_63A"],
@@ -1267,6 +1272,7 @@ module CCMS
           [:global_means, "GB_INPUT_B_6WP3_237A"],
           [:global_means, "GB_INPUT_B_6WP3_238A"],
           [:global_means, "GB_INPUT_B_6WP3_239A"],
+          [:global_means, "GB_INPUT_B_6WP3_240A"],
           [:global_means, "GB_INPUT_B_6WP3_241A"],
           [:global_means, "GB_INPUT_B_6WP3_254A"],
           [:global_means, "GB_INPUT_B_8WP3_308A"],
@@ -1295,6 +1301,7 @@ module CCMS
           [:global_means, "MEANS_OPA_RELEASE"],
           [:global_means, "MEANS_REPORT_BACKLOG_TAG"],
           [:global_means, "MEANS_ROUTING"],
+          [:global_means, "MEANS_TASK_AUTO_GEN"],
           [:global_means, "OUT_EMP_INFER_C_15WP3_11A"],
           [:global_means, "OUT_GB_INFER_C_14WP4_19A"],
           [:global_means, "OUT_GB_INFER_C_14WP4_3A"],
@@ -1465,6 +1472,8 @@ module CCMS
           [:global_merits, "CROWN_COURT"],
           [:global_merits, "CURRENT_CERT_EMERGENCY"],
           [:global_merits, "CURRENT_CERT_SUBSTANTIVE"],
+          [:global_merits, "DATE_ASSESSMENT_STARTED"],
+          [:global_merits, "DATE_CLIENT_VISITED_FIRM"],
           [:global_merits, "DEC_AGAINST_INSTRUCTIONS"],
           [:global_merits, "DEC_CLIENT_TEXT_PARA02A"],
           [:global_merits, "DEC_CLIENT_TEXT_PARA10A"],
@@ -1698,20 +1707,22 @@ module CCMS
 
       def false_attributes
         [
+          [:global_means, "GB_INPUT_B_11WP3_367A"],
           [:global_means, "GB_INPUT_B_1WP2_14A"],
           [:global_means, "GB_INPUT_B_1WP2_22A"],
           [:global_means, "GB_INPUT_B_1WP2_27A"],
-          [:global_means, "GB_INFER_B_1WP1_1A"],
           [:global_means, "GB_INPUT_B_17WP2_7A"],
           [:global_means, "GB_INPUT_B_17WP2_8A"],
           [:global_means, "GB_INPUT_B_18WP2_2A"],
           [:global_means, "GB_INPUT_B_18WP2_4A"],
+          [:global_means, "GB_INPUT_B_18WP2_6A"],
           [:global_means, "GB_INPUT_B_1WP1_2A"],
           [:global_means, "GB_INPUT_B_1WP4_1B"],
           [:global_means, "GB_INPUT_B_1WP4_2B"],
           [:global_means, "GB_INPUT_B_1WP4_3B"],
           [:global_means, "GB_INPUT_B_39WP3_70B"],
           [:global_means, "GB_INPUT_B_41WP3_40A"],
+          [:global_means, "GB_INPUT_B_4WP3_209A"],
           [:global_means, "GB_INPUT_B_5WP1_22A"],
           [:global_means, "GB_INPUT_B_5WP1_3A"],
           [:global_means, "GB_PROC_B_39WP3_14A"],
@@ -1814,7 +1825,6 @@ module CCMS
           [:global_means, "LAR_INPUT_B_37WP2_4A"],
           [:global_means, "LAR_PER_RES_INPUT_B_37WP2_7A"],
           [:global_means, "MEANS_EVIDENCE_REQD"],
-          [:global_means, "MEANS_TASK_AUTO_GEN"],
           [:global_merits, "ACTION_AGAINST_POLICE"],
           [:global_merits, "ACTUAL_LIKELY_COSTS_EXCEED_25K"],
           [:global_merits, "AMENDMENT"],
@@ -1824,6 +1834,7 @@ module CCMS
           [:global_merits, "COURT_ATTEND_IN_LAST_12_MONTHS"],
           [:global_merits, "DECLARATION_IDENTIFIER"],
           [:global_merits, "ECF_FLAG"],
+          [:global_merits, "ECFDV_18A"],
           [:global_merits, "EVID_DEC_AGAINST_INSTRUCTIONS"],
           [:global_merits, "EVIDENCE_AMD_CORRESPONDENCE"],
           [:global_merits, "EVIDENCE_AMD_COUNSEL_OPINION"],

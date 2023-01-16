@@ -51,6 +51,7 @@ bank_acct:
     response_type: boolean
     user_defined: true
     generate_block?: true
+
 change_in_circumstances:
   generate_block?: false
   CHANGE_CIRC_INPUT_T_33WP3_6A:
@@ -58,6 +59,7 @@ change_in_circumstances:
     br100_meaning: CHANGE_CIRC_INPUT_T_33WP3_6A
     response_type: text
     user_defined: true
+
 employment:
   EMP_INPUT_B_3WP3_62A:
     generate_block?: false
@@ -137,6 +139,7 @@ employment:
     br100_meaning: 'Client Employment: Frequency of pay (wage slips)'
     response_type: text
     user_defined: true
+
 family_statement:
   generate_block?: false
   FAMILY_STMT_DETAIL:
@@ -149,6 +152,7 @@ family_statement:
     br100_meaning: Statement:The Family Statement Of Case Detail
     response_type: text
     user_defined: false
+
 global_means:
   APPLY_CASE_MEANS_REVIEW:
     :value: '#bypass_manual_review_in_ccms?'
@@ -2456,6 +2460,7 @@ global_means:
     br100_meaning: The email address of the provider responsible for the application
     response_type: text
     user_defined: true
+
 global_merits:
   APPLY_CASE_MEANS_REVIEW:
     :value: '#bypass_manual_review_in_ccms?'
@@ -4542,16 +4547,6 @@ opponent_other_parties_merits:
     response_type: boolean
     user_defined: false
 
-
-
-
-
-
-
-
-
-
-
 main_dwelling:
   generate_block?: false
   MAINTHIRD_INPUT_T_3WP2_12A:
@@ -4569,6 +4564,7 @@ main_dwelling:
     br100_meaning: 'Main Dwelling: % owned by 3rd party'
     response_type: number
     user_defined: true
+
 proceeding_means:
   CLIENT_INVOLVEMENT_TYPE:
     value: '#proceeding_client_involvement_type_ccms_code'
@@ -4616,6 +4612,7 @@ proceeding_means:
     br100_meaning: the proceeding's code
     response_type: text
     user_defined: true
+
 proceeding_merits:
   MATRIMONIAL_PROCEEDING:
     generate_block?: false

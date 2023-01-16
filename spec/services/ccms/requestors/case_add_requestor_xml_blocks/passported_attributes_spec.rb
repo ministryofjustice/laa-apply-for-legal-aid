@@ -842,6 +842,13 @@ module CCMS
               expect(block).to have_text_response legal_aid_application.applicant.national_insurance_number
             end
           end
+
+          context "BEN_SURNAME" do
+            it "inserts applicant's surname as a string" do
+              block = XmlExtractor.call(xml, :global_means, "BEN_SURNAME")
+              expect(block).to have_text_response legal_aid_application.applicant.last_name
+            end
+          end
         end
 
         context "LAR_INFER_B_1WP1_36A" do
@@ -1331,50 +1338,52 @@ module CCMS
             expect(block).to have_text_response "UNKNOWN"
           end
 
-          context "there is one scope limitation" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider:,
-                     office:)
-            end
+          context "with REQUESTED_SCOPE" do
+            context "when delegated functions are used on the proceeding" do
+              before do
+                proceeding = legal_aid_application.proceedings.first
+                proceeding.scope_limitations.destroy_all
 
-            it "REQUESTED_SCOPE should be populated with the scope limitation code" do
-              %i[proceeding_merits proceeding_means].each do |entity|
-                block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
-                expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitations.first.code
+                proceeding.update!(used_delegated_functions: true,
+                                   used_delegated_functions_on: 1.day.ago,
+                                   used_delegated_functions_reported_on: 1.day.ago)
+              end
+
+              it "adds REQUESTED_SCOPE with value of MULTIPLE in proceeding means and merits section" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
+                  expect(block).to have_text_response "MULTIPLE"
+                end
               end
             end
-          end
 
-          context "there are multiple scope limitations" do
-            let!(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_proceedings,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     explicit_proceedings: [:da004],
-                     set_lead_proceeding: :da004,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider:,
-                     office:)
-            end
-            let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004)
+            context "when there is one scope limitation and no delegated functions on the proceeding" do
+              before do
+                proceeding = legal_aid_application.proceedings.first
+                proceeding.scope_limitations.destroy_all
+                create(:scope_limitation, :substantive, proceeding:)
+              end
+
+              it "adds REQUESTED_SCOPE attribute with value of the substantive scope limitation code" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
+                  expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitations.first.code
+                end
+              end
             end
 
-            it "REQUESTED_SCOPE should populated with MULTIPLE in proceedings section" do
-              %i[proceeding_means proceeding_merits].each do |entity|
-                block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
-                expect(block).to have_text_response "MULTIPLE"
+            context "when there are multiple scope limitations and no delegated functions on the proceeding" do
+              before do
+                proceeding = legal_aid_application.proceedings.first
+                proceeding.scope_limitations.destroy_all
+                create_list(:scope_limitation, 2, :substantive, proceeding:)
+              end
+
+              it "adds REQUESTED_SCOPE with value of MULTIPLE in proceeding means and merits section" do
+                %i[proceeding_means proceeding_merits].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "REQUESTED_SCOPE")
+                  expect(block).to have_text_response "MULTIPLE"
+                end
               end
             end
           end
@@ -2201,6 +2210,7 @@ module CCMS
 
       def false_attributes
         [
+          [:global_means, "GB_INPUT_B_11WP3_367A"],
           [:global_means, "GB_INPUT_B_1WP2_14A"],
           [:global_means, "GB_INPUT_B_1WP2_22A"],
           [:global_means, "GB_INPUT_B_1WP2_27A"],
@@ -2212,14 +2222,17 @@ module CCMS
           [:global_means, "GB_INPUT_B_17WP2_8A"],
           [:global_means, "GB_INPUT_B_18WP2_2A"],
           [:global_means, "GB_INPUT_B_18WP2_4A"],
+          [:global_means, "GB_INPUT_B_18WP2_6A"],
           [:global_means, "GB_INPUT_B_1WP1_2A"],
           [:global_means, "GB_INPUT_B_1WP4_1B"],
           [:global_means, "GB_INPUT_B_1WP4_2B"],
           [:global_means, "GB_INPUT_B_1WP4_3B"],
           [:global_means, "GB_INPUT_B_39WP3_70B"],
           [:global_means, "GB_INPUT_B_41WP3_40A"],
+          [:global_means, "GB_INPUT_B_4WP3_209A"],
           [:global_means, "GB_INPUT_B_5WP1_22A"],
           [:global_means, "GB_INPUT_B_5WP1_3A"],
+          [:global_means, "GB_INPUT_B_6WP3_240A"],
           [:global_means, "GB_PROC_B_39WP3_14A"],
           [:global_means, "GB_PROC_B_39WP3_15A"],
           [:global_means, "GB_PROC_B_39WP3_16A"],
@@ -2332,6 +2345,7 @@ module CCMS
           [:global_merits, "COURT_ATTEND_IN_LAST_12_MONTHS"],
           [:global_merits, "DECLARATION_IDENTIFIER"],
           [:global_merits, "ECF_FLAG"],
+          [:global_merits, "ECFDV_18A"],
           [:global_merits, "EVID_DEC_AGAINST_INSTRUCTIONS"],
           [:global_merits, "EVIDENCE_AMD_CORRESPONDENCE"],
           [:global_merits, "EVIDENCE_AMD_COUNSEL_OPINION"],
