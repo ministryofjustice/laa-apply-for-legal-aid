@@ -1,8 +1,5 @@
-<%
-  success_message = success_message
-  form_group_error_class = @categorisation_errors.present? ? 'govuk-form-group--error' : ''
-  select_error = ''
-%>
+<% form_group_error_class = @categorisation_errors.present? ? 'govuk-form-group--error' : '' %>
+<% select_error = '' %>
 
 <div class="<%= form_group_error_class %>">
   <table class="govuk-table <%= 'hidden' if attachments.empty? %>">
@@ -22,8 +19,6 @@
     </tr>
     </thead>
     <tbody class="govuk-table__body">
-
-    <span alert-live="assertive" class="govuk-visually-hidden"><%= success_message %></span>
 
     <%= form_with model: @uploaded_evidence_collection, url: providers_legal_aid_application_uploaded_evidence_collection_path do |form| %>
 

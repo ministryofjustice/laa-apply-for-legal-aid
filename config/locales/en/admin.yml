@@ -31,7 +31,6 @@ en:
       search:
         error: Please enter a search criteria
     settings:
-      notice: Settings have been updated
       show:
         heading_1: Settings
         labels:
@@ -52,6 +51,8 @@ en:
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           enable_loop: Select Yes to turn on the extended loop for proceeding type choices for levels of service
           means_test_review_phase_one: Select Yes to turn on the Means Test Review Phase One changes
+      update:
+        notice: Settings have been updated
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications
@@ -105,12 +106,13 @@ en:
         passported: 'Passported'
         non_passported: 'Non-Passported'
     roles:
-      notice: Permissions have been updated
       index:
         heading_1: Search for the Provider firm name
       permissions:
         show:
           heading_1: 'Select Firm permissions for %{firm_name}'
+        update:
+          notice: Permissions have been updated
     providers:
       index:
         heading_1: Provider users for firm %{firm_name}

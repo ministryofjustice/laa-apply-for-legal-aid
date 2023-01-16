@@ -1,5 +1,4 @@
 <%= render(partial: "shared/forms/error_summary", locals: { model: show_errors_for }) if show_errors_for %>
-<%= render(partial: "shared/forms/success_message", locals: { success_message: }) if success_message.present? %>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-<%= column_width %>">
     <%= form.govuk_error_summary if form %>

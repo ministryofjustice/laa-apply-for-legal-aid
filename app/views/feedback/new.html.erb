@@ -1,4 +1,4 @@
-<%= page_template page_title: t(".title"), show_errors_for: @feedback, back_link: back_button, success_message: do %>
+<%= page_template page_title: t(".title"), show_errors_for: @feedback, back_link: back_button do %>
   <%= form_for(@feedback, url: feedback_index_path) do |form| %>
     <% applicant_email_hint = @journey == :citizen ? t(".applicant_email_hint") : "" %>
     <%= form.govuk_collection_radio_buttons(
