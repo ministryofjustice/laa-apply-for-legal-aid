@@ -405,6 +405,15 @@ workflows:
           requires:
           - build_and_push
           <<: *generic-slack-fail-post-step
+      - hold_staging:
+          type: approval
+          requires:
+          - build_and_push
+      - deploy_staging:
+          context: laa-apply-for-legalaid-staging
+          requires:
+          - hold_staging
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
             - lint_checks
