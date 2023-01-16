@@ -1,7 +1,3 @@
-<%
-success_message = success_message
-%>
-
 <table class="govuk-table <%= 'hidden' if attachments.empty? %>">
   <caption class="govuk-table__caption"><%= t('.title') %></caption>
   <thead class="govuk-table__head">
@@ -13,8 +9,6 @@ success_message = success_message
   </tr>
   </thead>
   <tbody class="govuk-table__body">
-
-  <span alert-live="assertive" class="govuk-visually-hidden"><%= success_message %></span>
 
   <% attachments.order(:created_at).each do |attachment| %>
     <tr class="govuk-table__row">

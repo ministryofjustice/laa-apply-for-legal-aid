@@ -46,7 +46,6 @@ module PageTemplateHelper
     template: nil,
     form: nil,
     show_errors_for: nil,
-    success_message: nil,
     page_heading_options: {},
     &content
   )
@@ -65,7 +64,6 @@ module PageTemplateHelper
       content:,
       form:,
       show_errors_for:,
-      success_message:,
       page_heading_options:,
     )
   end

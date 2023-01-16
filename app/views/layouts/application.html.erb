@@ -56,7 +56,6 @@
         </div>
         <div class="govuk-grid-column-one-half">
           <p class="language-switcher">
-            <!-- TODO: Remove the below if clause when the Welsh language version is released to production -->
             <%= content_for(:language_switcher) if Setting.allow_welsh_translation? %>
           </p>
         </div>
@@ -67,15 +66,18 @@
           <%= image_pack_tag("crest.svg", alt: "government-crest", style: "height=58") %>
           Legal Aid Agency
         </div>
+
         <% if flash[:error] %>
           <div class="govuk-error-summary">
             <h2 class="govuk-error-summary__title"><%= flash[:error] %></h2>
           </div>
         <% end %>
+
         <% if flash[:notice] %>
-          <%= govuk_warning_text(icon_fallback_text: t(".header.notice")) do %>
-            <%= flash[:notice] %>
-          <% end %>
+          <%= govuk_notification_banner(
+                title_text: t("generic.important"),
+                text: flash[:notice],
+              ) %>
         <% end %>
 
         <%= yield %>
