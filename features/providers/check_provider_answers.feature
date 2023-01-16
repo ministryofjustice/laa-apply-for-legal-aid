@@ -81,3 +81,59 @@ Feature: Checking client details answers backwards and forwards
     And I should not see "What happens next"
     And I should not see "to check their benefit status"
 
+  @javascript @vcr
+  Scenario: I want to change first name from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'First name'
+    Then I enter the first name 'Bartholomew'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    When I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'First name' should be 'Bartholomew'
+
+  @javascript @vcr
+  Scenario: I want to change the proceeding type from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Proceedings'
+    And I click the first link 'Remove'
+    And I search for proceeding 'Non-molestation order'
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    When I choose 'Applicant/claimant/petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+    When I choose 'No'
+    When I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "default substantive cost limit"
+    When I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+
+  @javascript @vcr
+  Scenario: I want to change address from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Address'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1H 9EA'
+    Then I click find address
+    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+
+  @javascript @vcr
+  Scenario: I want to change address manually from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Address'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'XX1 1XX'
+    Then I click find address
+    Then I enter address line one 'Fake Road'
+    Then I enter city 'Fake City'
+    Then I enter postcode 'XX1 1XX'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
