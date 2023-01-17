@@ -143,7 +143,7 @@ Rails.application.routes.draw do
         resource :other_assets, only: %i[show update]
         resource :restrictions, only: %i[show update]
         resource :policy_disregards, only: %i[show update]
-        resource :check_answers_income, only: :show
+        resource :check_answers_incomes, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]

@@ -129,7 +129,7 @@ RSpec.describe Providers::Means::CashIncomesController do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_non_passported_state_machine,
-               :checking_non_passported_means)
+               :checking_means_income)
       end
 
       let(:params) { valid_params }
@@ -142,7 +142,7 @@ RSpec.describe Providers::Means::CashIncomesController do
 
         it "redirects to the checking answers income page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
         end
       end
 

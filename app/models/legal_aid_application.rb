@@ -77,6 +77,7 @@ class LegalAidApplication < ApplicationRecord
            :check_citizen_answers!,
            :check_merits_answers!,
            :check_non_passported_means!,
+           :check_means_income!,
            :check_passported_answers!,
            :complete_bank_transaction_analysis!,
            :complete_passported_means!,
@@ -99,6 +100,7 @@ class LegalAidApplication < ApplicationRecord
            :checking_citizen_answers?,
            :checking_merits_answers?,
            :checking_non_passported_means?,
+           :checking_means_income?,
            :checking_passported_answers?,
            :entering_applicant_details?,
            :generating_reports?,
@@ -363,7 +365,8 @@ class LegalAidApplication < ApplicationRecord
       checking_passported_answers? ||
       checking_merits_answers? ||
       checking_citizen_answers? ||
-      checking_non_passported_means?
+      checking_non_passported_means? ||
+      checking_means_income?
   end
 
   def receives_student_finance?

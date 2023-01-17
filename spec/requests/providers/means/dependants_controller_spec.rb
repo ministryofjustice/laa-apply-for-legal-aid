@@ -72,7 +72,7 @@ RSpec.describe Providers::Means::DependantsController do
     end
 
     context "while provider checking answers of citizen" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
 
       it "redirects to the has other dependants page" do
         expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))

@@ -140,7 +140,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
         legal_aid_application = create(
           :legal_aid_application,
           :with_non_passported_state_machine,
-          :checking_non_passported_means,
+          :checking_means_income,
           no_credit_transaction_types_selected: false,
         )
         provider = legal_aid_application.provider
@@ -149,7 +149,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
         patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
 
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
       end
     end
@@ -159,7 +159,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
         legal_aid_application = create(
           :legal_aid_application,
           :with_non_passported_state_machine,
-          :checking_non_passported_means,
+          :checking_means_income,
           no_credit_transaction_types_selected: true,
         )
         benefits = create(:transaction_type, :benefits)

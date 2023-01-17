@@ -4,10 +4,13 @@ module Providers
       before_action :set_transaction_types, only: :show
 
       def show
+        legal_aid_application.check_means_income! unless legal_aid_application.checking_means_income?
         legal_aid_application.set_transaction_period
       end
 
       def update
+        # binding.pry
+        legal_aid_application.provider_assess_means!
         continue_or_draft
       end
 

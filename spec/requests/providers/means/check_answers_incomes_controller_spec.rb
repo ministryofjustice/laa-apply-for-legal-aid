@@ -21,7 +21,7 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/means/check_answers_income" do
-    subject(:request) { get providers_legal_aid_application_means_check_answers_income_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { request }
@@ -50,7 +50,7 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/check_answers_income" do
-    subject(:request) { patch providers_legal_aid_application_means_check_answers_income_path(legal_aid_application), params: }
+    subject(:request) { patch providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application), params: }
 
     it "redirects to the own homes page" do
       expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))

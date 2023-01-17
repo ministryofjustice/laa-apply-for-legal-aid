@@ -40,7 +40,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
 
       it "redirects to the check answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
       end
 
       context "when provider is on non-passported journey without bank statement upload permissions" do
@@ -56,7 +56,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
 
           it "redirects to the check answers income page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
           end
         end
 
@@ -67,7 +67,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
 
           it "redirects to the check answers income page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
           end
         end
       end
@@ -80,7 +80,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
 
         it "redirects to the check answers income page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
         end
       end
     end
@@ -104,7 +104,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
     end
 
     context "when provider checking answers of citizen and more dependants" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
       let(:has_other_dependant) { "true" }
 
       it "redirects to the page to add another dependant" do
@@ -114,12 +114,12 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
     end
 
     context "when provider checking answers of citizen and no more dependants" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
       let(:has_other_dependant) { "false" }
 
       it "redirects to the check answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
       end
     end
   end

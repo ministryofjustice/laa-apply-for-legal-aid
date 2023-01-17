@@ -225,7 +225,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_non_passported_state_machine,
-               :checking_non_passported_means)
+               :checking_means_income)
       end
 
       let(:params) { { legal_aid_application: { none_selected: "true" } } }
@@ -243,7 +243,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
           it "redirects to checking answers income" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_income_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
           end
         end
 

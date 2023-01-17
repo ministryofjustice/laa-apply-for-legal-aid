@@ -222,7 +222,7 @@ module Flow
           forward: :own_homes,
         },
         check_answers_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_check_answers_income_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_check_answers_incomes_path(application) },
           forward: :own_homes,
         },
         means_summaries: {
