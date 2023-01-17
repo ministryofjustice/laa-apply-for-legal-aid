@@ -9,7 +9,6 @@ module Providers
       end
 
       def update
-        # binding.pry
         legal_aid_application.provider_assess_means!
         continue_or_draft
       end

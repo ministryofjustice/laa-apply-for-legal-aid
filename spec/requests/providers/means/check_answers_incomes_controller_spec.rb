@@ -11,7 +11,7 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
     create(:legal_aid_application,
            :with_negative_benefit_check_result,
            :with_non_passported_state_machine,
-           :provider_assessing_means,
+           :checking_means_income,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            df_options: { DA001: Time.zone.today },
@@ -23,6 +23,8 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
   describe "GET /providers/applications/:legal_aid_application_id/means/check_answers_income" do
     subject(:request) { get providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application) }
 
+    let!(:bank_transactions) { create_list(:bank_transaction, 3, transaction_type:, bank_account:) }
+
     context "when the provider is not authenticated" do
       before { request }
 
@@ -30,8 +32,6 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
     end
 
     context "when the provider is authenticated" do
-      let(:bank_transactions) { create_list(:bank_transaction, 3, transaction_type:, bank_account:) }
-
       before do
         login_as provider
         request
@@ -39,6 +39,10 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
+      end
+
+      it "sets the state to checking means income" do
+        expect(legal_aid_application.reload.checking_means_income?).to be true
       end
 
       it "displays the bank transaction data" do
@@ -50,7 +54,16 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/check_answers_income" do
-    subject(:request) { patch providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application), params: }
+    subject(:request) { patch providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application) }
+
+    before do
+      login_as provider
+      request
+    end
+
+    it "sets the state back to provider assessing means" do
+      expect(legal_aid_application.reload.provider_assessing_means?).to be true
+    end
 
     it "redirects to the own homes page" do
       expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))

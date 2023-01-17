@@ -21,6 +21,7 @@ en:
         awaiting_applicant: Submitted by provider
         checking_applicant_details: Checking answers
         checking_citizen_answers: Applicant checking answers
+        checking_means_income: Checking answers for means income section
         checking_merits_answers: Provider checking merits test answers
         checking_non_passported_means: In progress
         checked_merits_answers: Provider checked merits test answers
