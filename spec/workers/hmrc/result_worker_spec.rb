@@ -45,11 +45,13 @@ RSpec.describe HMRC::ResultWorker do
 
       before do
         allow(HMRC::Interface::ResultService).to receive(:call).with(hmrc_response).and_return(good_response)
+        allow(HMRC::ParsedResponse::Persistor).to receive(:call).with(hmrc_response).and_return(true)
       end
 
       it "returns the expected payload" do
         perform
         expect(hmrc_response.reload.response).to eq good_response
+        expect(HMRC::ParsedResponse::Persistor).to have_received(:call)
       end
     end
 
