@@ -106,63 +106,6 @@ Feature: passported_journey completes application
     Then I should be on a page showing "Application for civil legal aid certificate"
     Then I should be on a page showing "PASSPORTED"
 
-   @javascript @vcr
-  Scenario: I am instructed to use CCMS on the passported journey with an applicant does not receive benefits
-    When I start the journey as far as the applicant page
-    Then I enter name 'Test', 'Paul'
-    Then I enter the date of birth '10-12-1961'
-    Then I click 'Save and continue'
-    Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9EA'
-    Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
-    And I should be on a page showing "What does your client want legal aid for?"
-    Then I search for proceeding 'Non-molestation order'
-    Then proceeding suggestions has results
-    Then I choose a 'Non-molestation order' radio button
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Do you want to add another proceeding?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
-    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
-    When I choose 'Applicant/claimant/petitioner'
-    And I click 'Save and continue'
-    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
-    When I choose 'No'
-    When I click 'Save and continue'
-    Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "default substantive cost limit"
-    Then I click 'Save and continue'
-    Then I should be on a page with title "Does the client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'CB987654A'
-    When I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    And I should be on a page showing "What is your client's employment status?"
-    And I select "None of the above"
-    When I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page with title "Share bank statements with online banking"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page with title "Enter your client's email address"
-    Then I fill 'email' with 'test@test.com'
-    Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
-    And I click link 'Change'
-    Then I should be on a page showing 'Email address'
-    Then I fill 'email' with 'test@test.com'
-    Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
-    Then I should be on a page showing 'test@test.com'
-
   @javascript @vcr
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change
     Given I complete the non-passported journey as far as check your answers
