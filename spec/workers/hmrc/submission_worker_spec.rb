@@ -4,7 +4,7 @@ RSpec.describe HMRC::SubmissionWorker do
   subject(:worker) { described_class.new }
 
   let(:application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
-  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application) }
+  let(:hmrc_response) { create(:hmrc_response, :use_case_two, legal_aid_application: application) }
 
   it { is_expected.to be_a described_class }
 
