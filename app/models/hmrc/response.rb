@@ -2,7 +2,7 @@ module HMRC
   class Response < ApplicationRecord
     self.table_name = "hmrc_responses"
 
-    after_update :persist_employment_records
+    after_update :persist_employment_records, unless: :submission_started?
 
     USE_CASES = %w[one two].freeze
     belongs_to :legal_aid_application, inverse_of: :hmrc_responses
@@ -36,6 +36,10 @@ module HMRC
       return unless saved_changes?
 
       HMRC::ParsedResponse::Persistor.call(self)
+    end
+
+    def submission_started?
+      saved_change_to_url? && saved_change_to_submission_id?
     end
   end
 end
