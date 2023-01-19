@@ -77,6 +77,13 @@ Then("I scroll down") do
   page.execute_script "window.scrollBy(0,10000)"
 end
 
+Then("I temporarily resize browser window to width {int} height {int} and click {string}") do |width, height, link|
+  dimensions = page.driver.browser.manage.window.size
+  page.driver.browser.manage.window.resize_to(width, height)
+  click_link(link)
+  page.driver.browser.manage.window.resize_to(*dimensions)
+end
+
 # Search name and id attributes of input and textarea elements which contain the field string
 # Match examples:
 # <input name=field ... >

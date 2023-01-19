@@ -53,3 +53,15 @@ Feature: Cookies
 
     When I click link "change your cookie settings"
     Then I should be on a page with title 'Cookies on Apply for legal aid'
+
+  Scenario: I am able to return to my legal aid applications
+    Given I am logged in as a provider
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Make a new application"
+    And I click "Accept analytics cookies"
+
+    # required for test to pass locally with chrome headless
+    Then I temporarily resize browser window to width 1600 height 1000 and click "Apply for legal aid"
+
+    Then I am on the legal aid applications page

@@ -69,3 +69,48 @@ Feature: non_passported_journey with capital
     Then I select 'England Infected Blood Support Scheme'
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
+
+  @javascript @vcr
+  Scenario: Using the back button to change none_of_these checkboxes
+    Given I am checking the applicant's means answers
+    When I click Check Your Answers Change link for 'Savings and investments'
+    Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
+    When I select "My client has none of these savings or investments"
+    And I click "Save and continue"
+    And I click "Save and continue"
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    When I click link "Back"
+    When I click link "Back"
+    Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
+    When I deselect "My client has none of these savings or investments"
+    And I click "Save and continue"
+    Then I should be on the "savings_and_investment" page showing "Select if your client has any of these savings or investments"
+    When I select "My client has none of these savings or investments"
+    And I click "Save and continue"
+    And I click "Save and continue"
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    When I click Check Your Answers Change link for 'Other assets'
+    Then I should be on the "other_assets" page showing "Which assets does your client have?"
+    When I select "My client has none of these assets"
+    And I click "Save and continue"
+    Then I should be on a page showing "Check your answers"
+    When I click link "Back"
+    Then I should be on the "other_assets" page showing "Which assets does your client have?"
+    When I deselect "My client has none of these assets"
+    And I click "Save and continue"
+    Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
+    Then I select "My client has none of these assets"
+    Then I click "Save and continue"
+    Then I should be on a page showing "Check your answers"
+    And I click Check Your Answers Change link for 'policy disregards'
+    Then I should be on a page showing 'schemes or charities'
+    Then I select 'My client has received none of these payments'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
+    And the answer for all 'policy disregards' categories should be 'No'
+    Then I click Check Your Answers Change link for 'policy disregards'
+    And I deselect 'My client has received none of these payments'
+    Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'Select if your client has received any of these payments'
+    Then I select "My client has received none of these payments"
+    Then I click "Save and continue"
