@@ -74,7 +74,7 @@ Feature: non_passported_journey with capital
 
   @javascript @vcr
   Scenario: Using the back button to change none_of_these checkboxes
-    Given I am checking the applicant's means answers
+    Given I am checking answers on the means summary page
     When I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
     When I select "My client has none of these savings or investments"

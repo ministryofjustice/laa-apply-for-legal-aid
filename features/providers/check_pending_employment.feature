@@ -52,7 +52,8 @@ Feature: Check pending employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
+    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on a page showing "Pending"
 
     When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
@@ -83,7 +84,7 @@ Feature: Check pending employment
 
     When I check "My client has received none of these payments"
     And I click 'Save and continue'
-    Then I should be on a page showing "Pending"
+    Then I should be on the 'means_summary' page showing 'Check your answers'
 
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if John Pending can get legal aid"

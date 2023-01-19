@@ -170,7 +170,7 @@ Given("I start the journey as far as the client completed means page") do
   visit(providers_legal_aid_application_client_completed_means_path(@legal_aid_application))
 end
 
-Given("I am checking the applicant's means answers") do
+Given("I am checking answers on the means summary page") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -188,9 +188,8 @@ Given("I am checking the applicant's means income answers") do
     :application,
     :with_applicant,
     :with_everything,
-    :with_vehicle,
     :with_non_passported_state_machine,
-    :checking_income_answers,
+    :checking_means_income,
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_means_check_answers_incomes_path(@legal_aid_application))

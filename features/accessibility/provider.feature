@@ -89,7 +89,7 @@ Feature: Provider accessibility
 
   @javascript @vcr
   Scenario: I complete the non-passported means assessment and it is accessible
-    Given I start the merits application with bank transactions with no transaction type category
+    Given I start the means application
     And I used delegated functions
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     And the page is accessible

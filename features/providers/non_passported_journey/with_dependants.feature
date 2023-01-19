@@ -115,7 +115,15 @@ Feature: non_passported_journey with dependants
     And I should not see 'Pugsley Addams'
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
+    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    And I should see 'Wednesday Adams'
+    When I click Check Your Answers Change link for dependant '1'
+    Then I should be on a page showing 'Amend dependant details'
+    When I click 'Save and continue'
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
     When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -134,13 +142,5 @@ Feature: non_passported_journey with dependants
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or\ charities'
     When I select 'England Infected Blood Support Scheme'
-    And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
-    And I should see 'Wednesday Adams'
-    When I click Check Your Answers Change link for dependant '1'
-    Then I should be on a page showing 'Amend dependant details'
-    When I click 'Save and continue'
-    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
-    When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
