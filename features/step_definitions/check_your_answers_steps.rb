@@ -52,23 +52,14 @@ Then("the {string} section's questions and answers should match:") do |section, 
   expect_matching_questions_and_answers(actual_selector: "[data-check-your-answers-section=\"#{section}\"]", expected_table: table)
 end
 
-Then("the radio button response for {string} should be {string}") do |question, answer|
-  question.downcase!
-  question.gsub!(/\s+/, "-")
-  value = answer == "Yes" ? "-true" : ""
-  label = find("label[for='#{question}#{value}-field']")
-  input = label.sibling("input", visible: false)
-  expect(input).to be_checked
-end
-
 def expect_matching_questions_and_answers(actual_selector:, expected_table:)
   expected = expected_table.hashes.map(&:symbolize_keys)
-  actual = actual_questions_and_answers_in(selector: actual_selector)
+  actual = actual_questions_and_anwsers_in(selector: actual_selector)
 
   expect(actual).to match_array(expected)
 end
 
-def actual_questions_and_answers_in(selector:)
+def actual_questions_and_anwsers_in(selector:)
   actual = []
 
   within(selector) do
