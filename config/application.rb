@@ -93,7 +93,7 @@ module LaaApplyForLegalAid
 
     config.x.local_clamav = ENV.fetch("LOCAL_CLAMAV", nil)
     config.x.bc_use_dev_mock = ENV.fetch("BC_USE_DEV_MOCK", nil)
-    config.x.ordnanace_survey_api_key = ENV.fetch("ORDNANACE_SURVEY_API_KEY", nil)
+    config.x.ordnance_survey_api_key = ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil)
     config.x.secure_data_secret = ENV.fetch("SECURE_DATA_SECRET", "someSecret")
 
     config.x.status.build_date = ENV.fetch("BUILD_DATE", "Not Available")

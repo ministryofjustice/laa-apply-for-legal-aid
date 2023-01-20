@@ -24,7 +24,7 @@ which rely on external service stubs from VCR are not returning false positives.
   - check staging actually works (it has not in the past)
 
 ## Address lookup
-  - ensure `.env.test` has `ORDNANACE_SURVEY_API_KEY` set
+  - ensure `.env.test` has `ORDNANCE_SURVEY_API_KEY` set
 
 ## Legal Framework API
   - ensure `.env.test` has `LEGAL_FRAMEWORK_API_HOST` pointing to staging environment
