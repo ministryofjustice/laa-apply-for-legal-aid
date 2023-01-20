@@ -60,9 +60,9 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController do
     context "with payments remaining false" do
       let(:payments_remain) { "false" }
 
-      it "sets vehicle payment remaining to nil" do
+      it "sets vehicle payment remaining to zero" do
         subject
-        expect(vehicle.reload.payment_remaining).to be_nil
+        expect(vehicle.reload.payment_remaining).to be_zero
       end
     end
 
