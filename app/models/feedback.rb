@@ -1,6 +1,4 @@
 class Feedback < ApplicationRecord
-  include TranslatableModelAttribute
-
   enum satisfaction: {
     very_dissatisfied: 0,
     dissatisfied: 1,

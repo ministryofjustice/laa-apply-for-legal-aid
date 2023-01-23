@@ -1,6 +1,6 @@
 ---
 cy:
-  model_enum_translations:
+  enums:
     feedback:
       satisfaction:
         dissatisfied: deifsitassiD

@@ -1,5 +1,4 @@
 class LegalAidApplication < ApplicationRecord
-  include TranslatableModelAttribute
   include Discard::Model
   include DelegatedFunctions
 
