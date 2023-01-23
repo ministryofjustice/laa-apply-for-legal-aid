@@ -10,10 +10,12 @@
     </dt>
     <dd><%= @legal_aid_application.application_ref %></dd>
 
-    <dt>
-      <strong><%= t(".ccms_reference_html") %>:</strong>
-    </dt>
-    <dd><%= @legal_aid_application.case_ccms_reference %></dd>
+    <% if @legal_aid_application.case_ccms_reference %>
+      <dt>
+        <strong><%= t(".ccms_reference_html") %>:</strong>
+      </dt>
+      <dd><%= @legal_aid_application.case_ccms_reference %></dd>
+    <% end %>
   </dl>
 </div>
 
