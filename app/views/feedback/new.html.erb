@@ -12,24 +12,20 @@
           },
         ) %>
 
-    <%= Feedback.enum_radio_buttons(
-          form, :difficulty,
-          order: :reverse,
-          args: {
-            legend: {
-              text: t(".difficulty"),
-            },
-          }
+    <%= form.govuk_collection_radio_buttons(
+          :difficulty,
+          Feedback.difficulties.keys.reverse,
+          ->(option) { option },
+          ->(option) { t("model_enum_translations.feedback.difficulty.#{option}") },
+          legend: { text: t(".difficulty") },
         ) %>
 
-    <%= Feedback.enum_radio_buttons(
-          form, :satisfaction,
-          order: :reverse,
-          args: {
-            legend: {
-              text: t(".satisfaction"),
-            },
-          }
+    <%= form.govuk_collection_radio_buttons(
+          :satisfaction,
+          Feedback.satisfactions.keys.reverse,
+          ->(option) { option },
+          ->(option) { t("model_enum_translations.feedback.satisfaction.#{option}") },
+          legend: { text: t(".satisfaction") },
         ) %>
 
     <%= form.govuk_text_area(
