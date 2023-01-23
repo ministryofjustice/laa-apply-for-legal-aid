@@ -5,7 +5,7 @@ RSpec.describe AddressLookupService do
 
   let(:query_params) do
     {
-      key: ENV.fetch("ORDNANACE_SURVEY_API_KEY", nil),
+      key: ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil),
       postcode:,
       lr: "EN",
     }

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=YO4B0LJ
+    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANCE_SURVEY_API_KEY>&lr=EN&postcode=YO4B0LJ
     body:
       encoding: US-ASCII
       string: ''
