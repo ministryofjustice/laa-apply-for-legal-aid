@@ -17,7 +17,7 @@ VCR.configure do |vcr_config|
     uri.to_s.include?("__identify__") || uri.to_s =~ /127.0.0.1.*(session|shutdown)/
   end
   vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
-  vcr_config.filter_sensitive_data("<ORDNANACE_SURVEY_API_KEY>") { ENV.fetch("ORDNANACE_SURVEY_API_KEY", nil) }
+  vcr_config.filter_sensitive_data("<ORDNANCE_SURVEY_API_KEY>") { ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil) }
   vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV.fetch("BC_LSC_SERVICE_NAME", nil) }
   vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV.fetch("BC_CLIENT_ORG_ID", nil) }
   vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV.fetch("BC_CLIENT_USER_ID", nil) }

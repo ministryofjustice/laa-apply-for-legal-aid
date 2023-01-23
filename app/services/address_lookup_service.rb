@@ -17,7 +17,7 @@ private
 
   def query_params
     {
-      key: Rails.configuration.x.ordnanace_survey_api_key,
+      key: Rails.configuration.x.ordnance_survey_api_key,
       postcode:,
       lr: "EN",
     }
