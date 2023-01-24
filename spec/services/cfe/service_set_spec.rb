@@ -10,14 +10,12 @@ RSpec.describe CFE::ServiceSet do
 
       it "returns set of passported CFE::Service classes" do
         expect(call).to match([
-          CFE::CreateAssessmentService,
           CFE::CreateProceedingTypesService,
           CFE::CreateApplicantService,
           CFE::CreateCapitalsService,
           CFE::CreateVehiclesService,
           CFE::CreatePropertiesService,
           CFE::CreateExplicitRemarksService,
-          CFE::ObtainAssessmentResultService,
         ])
       end
     end
@@ -27,7 +25,6 @@ RSpec.describe CFE::ServiceSet do
 
       it "returns set of non passported CFE::Service classes" do
         expect(call).to match([
-          CFE::CreateAssessmentService,
           CFE::CreateProceedingTypesService,
           CFE::CreateApplicantService,
           CFE::CreateCapitalsService,
@@ -41,7 +38,6 @@ RSpec.describe CFE::ServiceSet do
           CFE::CreateIrregularIncomesService,
           CFE::CreateEmploymentsService,
           CFE::CreateCashTransactionsService,
-          CFE::ObtainAssessmentResultService,
         ])
       end
     end
@@ -51,7 +47,6 @@ RSpec.describe CFE::ServiceSet do
 
       it "returns set of non passported CFE::Service classes" do
         expect(call).to match([
-          CFE::CreateAssessmentService,
           CFE::CreateProceedingTypesService,
           CFE::CreateApplicantService,
           CFE::CreateCapitalsService,
@@ -63,7 +58,6 @@ RSpec.describe CFE::ServiceSet do
           CFE::CreateEmploymentsService,
           CFE::CreateRegularTransactionsService,
           CFE::CreateCashTransactionsService,
-          CFE::ObtainAssessmentResultService,
         ])
       end
     end

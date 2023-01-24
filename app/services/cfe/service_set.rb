@@ -3,18 +3,15 @@ module CFE
     attr_reader :object
 
     PASSPORTED_SERVICES = [
-      CreateAssessmentService,
       CreateProceedingTypesService,
       CreateApplicantService,
       CreateCapitalsService,
       CreateVehiclesService,
       CreatePropertiesService,
       CreateExplicitRemarksService,
-      ObtainAssessmentResultService,
     ].freeze
 
     NON_PASSPORTED_WITH_BANK_TRANSACTIONS_SERVICES = [
-      CreateAssessmentService,
       CreateProceedingTypesService,
       CreateApplicantService,
       CreateCapitalsService,
@@ -28,11 +25,9 @@ module CFE
       CreateIrregularIncomesService,
       CreateEmploymentsService,
       CreateCashTransactionsService,
-      ObtainAssessmentResultService,
     ].freeze
 
     NON_PASSPORTED_WITH_REGULAR_TRANSACTIONS_SERVICES = [
-      CreateAssessmentService,
       CreateProceedingTypesService,
       CreateApplicantService,
       CreateCapitalsService,
@@ -44,7 +39,6 @@ module CFE
       CreateEmploymentsService,
       CreateRegularTransactionsService,
       CreateCashTransactionsService,
-      ObtainAssessmentResultService,
     ].freeze
 
     def self.call(object)
