@@ -4,7 +4,7 @@ RSpec.describe HMRC::SubmissionWorker do
   subject(:worker) { described_class.new }
 
   let(:application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
-  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application) }
+  let(:hmrc_response) { create(:hmrc_response, :use_case_two, legal_aid_application: application) }
 
   it { is_expected.to be_a described_class }
 
@@ -25,12 +25,14 @@ RSpec.describe HMRC::SubmissionWorker do
 
       before do
         allow(HMRC::Interface::SubmissionService).to receive(:call).with(hmrc_response).and_return(good_response)
+        allow(HMRC::ParsedResponse::Persistor).to receive(:call).with(hmrc_response).and_return(false)
       end
 
       it "updates the hmrc_response" do
         perform
         expect(hmrc_response.reload.url).to eq good_response[:_links][0][:href]
         expect(hmrc_response.reload.submission_id).to eq good_response[:id]
+        expect(HMRC::ParsedResponse::Persistor).not_to have_received(:call)
       end
 
       it "starts a new check job" do
