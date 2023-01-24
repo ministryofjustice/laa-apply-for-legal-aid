@@ -292,9 +292,9 @@ Feature: Checking answers backwards and forwards
       Then I am on the read only version of the check your answers page
 
   @javascript
-  Scenario: I am able to see all necessary sections for a non-passported open banking flow
-    Given I have completed a non-passported application with open banking transactions
-    And I am viewing the means summary check your answers page
+  Scenario: I am able to see all necessary income sections for a non-passported open banking flow
+    Given I have completed the income section of a non-passported application with open banking transactions
+    And I am viewing the means income check your answers page
 
     Then the following sections should exist:
       | tag | section |
@@ -305,6 +305,13 @@ Feature: Checking answers backwards and forwards
       | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | What payments does your client make? |
+      | h2  | Dependants |
+
+    And I should not see "Payments your client receives in cash"
+    And I should not see "Payments your client makes in cash"
+
+    Then the following sections should not exist:
+      | tag | section |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -313,9 +320,6 @@ Feature: Checking answers backwards and forwards
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
-
-    And I should not see "Payments your client receives in cash"
-    And I should not see "Payments your client makes in cash"
 
     And the "What payments does your client receive?" section's questions and answers should match:
       | question | answer |
@@ -332,3 +336,31 @@ Feature: Checking answers backwards and forwards
       | Childcare payments | None |
       | Maintenance payments to a former partner | Yes, but none specified |
       | Payments towards legal aid in a criminal case | None |
+
+  @javascript
+  Scenario: I am able to see all necessary capital sections for a non-passported open banking flow
+    Given I have completed the income and capital sections of a non-passported application with open banking transactions
+    And I am viewing the means summary check your answers page
+
+    Then the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h2  | Your client's capital |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | What payments does your client receive? |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | What payments does your client make? |
+      | h3  | "Payments your client receives in cash" |
+      | h3  | "Payments your client makes in cash"    |

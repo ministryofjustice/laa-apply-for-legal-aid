@@ -60,7 +60,8 @@ module Flow
       @forward_step ||= step(:forward)
     end
 
-    def check_answers_step
+    def
+      check_answers_step
       return nil unless step?(:check_answers)
 
       @check_answers_step ||= step(:check_answers)

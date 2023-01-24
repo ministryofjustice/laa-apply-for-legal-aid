@@ -113,7 +113,7 @@ module Flow
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: :savings_and_investments,
-          check_answers: :check_answers_incomes,
+          check_answers: :means_summaries,
         },
         offline_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },

@@ -1,6 +1,37 @@
 require "rspec/expectations"
 
-Given("I have completed a non-passported application with open banking transactions") do
+Given("I have completed the income section of a non-passported application with open banking transactions") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_employed_applicant,
+    :with_single_employment,
+    :with_extra_employment_information,
+    :with_non_passported_state_machine,
+    :with_fixed_offline_savings_accounts,
+    :with_maintenance_in_category,
+    :with_fixed_benefits_transactions,
+    :with_fixed_benefits_cash_transactions,
+    :with_maintenance_in_category,
+    :with_fixed_rent_or_mortage_transactions,
+    :with_fixed_rent_or_mortage_cash_transactions,
+    :with_maintenance_out_category,
+    :with_transaction_period,
+    :with_open_banking_consent,
+    :with_consent,
+    :with_dependant,
+    :checking_means_income,
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
+Given("I have completed the income and capital sections of a non-passported application with open banking transactions") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -40,6 +71,10 @@ end
 
 And("I am viewing the means summary check your answers page") do
   visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
+end
+
+And("I am viewing the means income check your answers page") do
+  visit(providers_legal_aid_application_means_check_answers_incomes_path(@legal_aid_application))
 end
 
 Then("the {string} section's questions should exist:") do |section, table|
