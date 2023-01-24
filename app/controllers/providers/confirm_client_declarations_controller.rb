@@ -5,14 +5,10 @@ module Providers
     end
 
     def update
-      return continue_or_draft if draft_selected?
-
       @form = LegalAidApplications::ConfirmClientDeclarationForm.new(form_params)
-      if @form.valid?
-        legal_aid_application.update!(client_declaration_confirmed_at: Time.zone.now)
-        go_forward
-      else
-        render :show
+
+      unless save_continue_or_draft(@form)
+        render :show, status: :unprocessable_entity
       end
     end
 

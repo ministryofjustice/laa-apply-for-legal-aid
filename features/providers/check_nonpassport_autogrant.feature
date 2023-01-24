@@ -111,7 +111,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
-    Then I select the first checkbox
+    Then I check "I confirm the above is correct and that I'll get a signed declaration from my client"
     Then I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
     Then I click 'Submit and continue'
@@ -230,7 +230,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
-    Then I select the first checkbox
+    Then I check "I confirm the above is correct and that I'll get a signed declaration from my client"
     Then I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
     Then I click 'Submit and continue'

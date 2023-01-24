@@ -107,7 +107,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
-    And I select the first checkbox
+    And I check "I confirm the above is correct and that I'll get a signed declaration from my client"
 
     When I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
