@@ -61,11 +61,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: ordnanceSurveyApiKey
-  - name: RAILS_MASTER_KEY
+  - name: SECRET_KEY_BASE
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: railsMasterKey
+        key: secretKeyBase
   - name: SENTRY_DSN
     valueFrom:
       secretKeyRef:
