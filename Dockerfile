@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-3.1.3
+FROM ministryofjustice/apply-base:latest-3.2.0
 MAINTAINER apply for legal aid team
 
 # add non-root user and group with alpine first available uid, 1000
