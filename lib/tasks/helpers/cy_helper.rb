@@ -7,12 +7,12 @@ class CyHelper
     contacts
     currency
     dates
+    enums
     errors
     feedback
     generic
     helpers
     layouts
-    model_enum_translations
     privacy_policy
     shared
     transaction_types

@@ -30,7 +30,7 @@ private
   end
 
   def get_translation(type, key)
-    t "model_enum_translations.feedback.#{type}.#{key}"
+    t "enums.feedback.#{type}.#{key}"
   end
 
   def application_status

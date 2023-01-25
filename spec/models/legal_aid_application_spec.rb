@@ -760,7 +760,7 @@ RSpec.describe LegalAidApplication do
     context "with passported states" do
       it "has a translation for all states" do
         states.each do |state|
-          expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true)
+          expect(I18n.exists?("enums.legal_aid_application.state.#{state}")).to be(true)
         end
       end
     end
@@ -770,7 +770,7 @@ RSpec.describe LegalAidApplication do
 
       it "has a translation for all states" do
         states.each do |state|
-          expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true)
+          expect(I18n.exists?("enums.legal_aid_application.state.#{state}")).to be(true)
         end
       end
     end

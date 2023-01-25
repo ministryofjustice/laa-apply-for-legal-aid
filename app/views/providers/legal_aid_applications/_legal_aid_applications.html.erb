@@ -46,8 +46,8 @@
                 <% end %>
               <% end %>
 
-              <%= sort_column_cell(sort_by: application.enum_t(:summary_state)) do %>
-                <%= govuk_tag(text: application.enum_t(:summary_state), colour: application.summary_state == :submitted ? "green" : "blue") %>
+              <%= sort_column_cell(sort_by: t(application.summary_state, scope: %i[enums legal_aid_application summary_state])) do %>
+                <%= govuk_tag(text: t(application.summary_state, scope: %i[enums legal_aid_application summary_state]), colour: application.summary_state == :submitted ? "green" : "blue") %>
               <% end %>
               <td>
                 <% unless application.summary_state == :submitted %>

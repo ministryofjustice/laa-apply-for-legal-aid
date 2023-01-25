@@ -16,7 +16,7 @@
           :difficulty,
           Feedback.difficulties.keys.reverse,
           ->(option) { option },
-          ->(option) { t("model_enum_translations.feedback.difficulty.#{option}") },
+          ->(option) { t(option, scope: %i[enums feedback difficulty]) },
           legend: { text: t(".difficulty") },
         ) %>
 
@@ -24,7 +24,7 @@
           :satisfaction,
           Feedback.satisfactions.keys.reverse,
           ->(option) { option },
-          ->(option) { t("model_enum_translations.feedback.satisfaction.#{option}") },
+          ->(option) { t(option, scope: %i[enums feedback satisfaction]) },
           legend: { text: t(".satisfaction") },
         ) %>
 
