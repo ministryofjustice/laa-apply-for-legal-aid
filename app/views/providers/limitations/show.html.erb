@@ -1,5 +1,5 @@
 <% if @legal_aid_application.used_delegated_functions? %>
-    <%= render partial: 'providers/limitations/proceeding_types_with_df' %>
+  <%= render partial: "providers/limitations/proceeding_types_with_df" %>
 <% else %>
-  <%= render partial: 'providers/limitations/proceeding_types' %>
+  <%= render partial: "providers/limitations/proceeding_types" %>
 <% end %>

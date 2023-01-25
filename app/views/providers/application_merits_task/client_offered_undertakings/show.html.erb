@@ -2,26 +2,26 @@
       model: @form,
       url: providers_legal_aid_application_client_offered_undertakings_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template(page_title: t('.h1-heading'),
+  <%= page_template(page_title: t(".h1-heading"),
                     template: :basic,
                     back_link: {},
-                    form: form) do %>
-    <%= form.govuk_radio_buttons_fieldset :offered, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
-      <%= form.govuk_radio_button :offered, true, link_errors: true, label: {text: t('generic.yes')} do %>
+                    form:) do %>
+    <%= form.govuk_radio_buttons_fieldset :offered, legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <%= form.govuk_radio_button :offered, true, link_errors: true, label: { text: t("generic.yes") } do %>
         <%= form.govuk_text_area :additional_information_true,
-                                 label: {text: t('.yes-hint')},
+                                 label: { text: t(".yes-hint") },
                                  rows: 5 %>
       <% end %>
-      <%= form.govuk_radio_button :offered, false, label: {text: t('generic.no')} do %>
+      <%= form.govuk_radio_button :offered, false, label: { text: t("generic.no") } do %>
         <%= form.govuk_text_area :additional_information_false,
-                                 label: {text: t('.no-hint')},
+                                 label: { text: t(".no-hint") },
                                  rows: 5 %>
       <% end %>
     <% end %>
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

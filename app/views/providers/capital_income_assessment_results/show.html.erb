@@ -1,8 +1,8 @@
 <%= page_template(
-        page_title: t(".page_title", result: t(".result.#{@cfe_result.assessment_result}") ),
-        head_title: t(".tab_title.#{@cfe_result.assessment_result}" ),
-        template: :basic,
-        column_width: :full
+      page_title: t(".page_title", result: t(".result.#{@cfe_result.assessment_result}")),
+      head_title: t(".tab_title.#{@cfe_result.assessment_result}"),
+      template: :basic,
+      column_width: :full,
     ) do %>
 
   <div class="interruption-panel">
@@ -12,8 +12,8 @@
   <%= render "result_details" %>
 
   <%= next_action_buttons_with_form(
-          url: providers_legal_aid_application_capital_income_assessment_result_path(@legal_aid_application),
-          method: :patch,
-          show_draft: true
+        url: providers_legal_aid_application_capital_income_assessment_result_path(@legal_aid_application),
+        method: :patch,
+        show_draft: true,
       ) %>
 <% end %>

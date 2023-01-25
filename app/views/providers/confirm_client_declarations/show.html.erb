@@ -2,10 +2,10 @@
       model: @form,
       url: providers_legal_aid_application_confirm_client_declaration_path(@legal_aid_application),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
 
-  <%= page_template page_title: t(".h1-heading"), form: form do %>
+  <%= page_template page_title: t(".h1-heading"), form: do %>
 
     <% params = { provider_firm_name: @legal_aid_application.provider.firm.name } %>
 
@@ -21,7 +21,7 @@
 
     <%= bullet_list_from_translation_array(
           "providers.confirm_client_declarations.show.#{i18n_prefix}.list",
-          params: params
+          params:,
         ) %>
 
     <%= govuk_warning_text do %>
@@ -36,10 +36,10 @@
             "",
             link_errors: true,
             multiple: false,
-            label: { text: t(".confirmation_checkbox") }
+            label: { text: t(".confirmation_checkbox") },
           ) %>
     <% end %>
 
-    <%= next_action_buttons(form: form, show_draft: true) %>
+    <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
 <% end %>

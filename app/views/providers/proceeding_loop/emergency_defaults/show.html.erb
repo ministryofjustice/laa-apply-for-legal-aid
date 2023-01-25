@@ -2,25 +2,25 @@
       model: @form,
       url: providers_legal_aid_application_emergency_default_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template template: :basic, form: form do %>
+  <%= page_template template: :basic, form: do %>
     <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-4"><%= @proceeding.meaning %></h1>
 
-    <h2 class="govuk-heading-m"><%= t('.h2_header') %></h2>
+    <h2 class="govuk-heading-m"><%= t(".h2_header") %></h2>
 
     <div class="govuk-!-padding-1"></div>
 
-    <p><strong><%= t('.los_header') %></strong> <%= form.object.emergency_level_of_service_name %></p>
-    <p><strong><%= t('.scope_header') %></strong> <%= form.object.delegated_functions_scope_limitation_meaning %></p>
-    <p><strong><%= t('.scope_description_header') %></strong> <%= form.object.delegated_functions_scope_limitation_description %></p>
+    <p><strong><%= t(".los_header") %></strong> <%= form.object.emergency_level_of_service_name %></p>
+    <p><strong><%= t(".scope_header") %></strong> <%= form.object.delegated_functions_scope_limitation_meaning %></p>
+    <p><strong><%= t(".scope_description_header") %></strong> <%= form.object.delegated_functions_scope_limitation_description %></p>
 
     <div class="govuk-!-padding-2"></div>
 
     <%= form.govuk_radio_buttons_fieldset :accepted_emergency_defaults,
                                           inline: false,
-                                          legend: { size: 'm', tag: 'h2', text: t('.question') } do %>
+                                          legend: { size: "m", tag: "h2", text: t(".question") } do %>
 
       <%= form.hidden_field :emergency_level_of_service %>
       <%= form.hidden_field :emergency_level_of_service_name %>
@@ -29,13 +29,13 @@
       <%= form.hidden_field :delegated_functions_scope_limitation_description %>
       <%= form.hidden_field :delegated_functions_scope_limitation_code %>
 
-      <%= form.govuk_radio_button :accepted_emergency_defaults, true, label: { text: t('generic.yes')}, link_errors: true do %>
+      <%= form.govuk_radio_button :accepted_emergency_defaults, true, label: { text: t("generic.yes") }, link_errors: true do %>
         <% if form.object.additional_params.present? %>
-          <%= render partial: "shared/scope_limitations/#{form.object.additional_params.first.dig("name")}", locals: { form: form, field_name: :hearing_date } %>
+          <%= render partial: "shared/scope_limitations/#{form.object.additional_params.first['name']}", locals: { form:, field_name: :hearing_date } %>
         <% end %>
       <% end %>
-      <%= form.govuk_radio_button :accepted_emergency_defaults, false, label: { text: t("generic.no")} %>
+      <%= form.govuk_radio_button :accepted_emergency_defaults, false, label: { text: t("generic.no") } %>
     <% end %>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

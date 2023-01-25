@@ -3,21 +3,18 @@
               url: providers_legal_aid_application_means_percentage_home_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
 
     <%= form.govuk_text_field(
           :percentage_home,
           value: @form.percentage_home,
-          label: { size: 'xl', tag: 'h1', text: page_title },
-          hint: {text: t('.percentage_home')},
+          label: { size: "xl", tag: "h1", text: page_title },
+          hint: { text: t(".percentage_home") },
           width: 5,
-          suffix_text: '%'
+          suffix_text: "%",
         ) %>
 
     <div class="govuk-!-padding-bottom-4"></div>
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

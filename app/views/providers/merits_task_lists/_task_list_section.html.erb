@@ -7,10 +7,10 @@
     <% tasks.each do |task| %>
       <% next if task.state.eql?(:ignored) %>
       <%= task_list_item(
-              name: task.name,
-              status: task.state,
-              legal_aid_application: @legal_aid_application,
-              ccms_code: ccms_code
+            name: task.name,
+            status: task.state,
+            legal_aid_application: @legal_aid_application,
+            ccms_code:,
           ) %>
     <% end %>
   </ul>

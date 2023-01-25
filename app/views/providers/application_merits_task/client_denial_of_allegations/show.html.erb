@@ -2,21 +2,21 @@
       model: @form,
       url: providers_legal_aid_application_client_denial_of_allegation_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template(page_title: t('.h1-heading'),
+  <%= page_template(page_title: t(".h1-heading"),
                     template: :basic,
                     back_link: {},
-                    form: form) do %>
-    <%= form.govuk_radio_buttons_fieldset :denies_all, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
-      <%= form.govuk_radio_button :denies_all, true, link_errors: true, label: {text: t('generic.yes')} %>
-      <%= form.govuk_radio_button :denies_all, false, label: {text: t('generic.no')} do %>
-        <%= form.govuk_text_area :additional_information, label: {text: t('.no-hint')}, rows: 5 %>
+                    form:) do %>
+    <%= form.govuk_radio_buttons_fieldset :denies_all, legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <%= form.govuk_radio_button :denies_all, true, link_errors: true, label: { text: t("generic.yes") } %>
+      <%= form.govuk_radio_button :denies_all, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :additional_information, label: { text: t(".no-hint") }, rows: 5 %>
       <% end %>
 
     <% end %>
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

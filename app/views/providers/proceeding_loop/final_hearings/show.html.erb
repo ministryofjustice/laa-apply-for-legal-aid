@@ -2,25 +2,22 @@
       model: @form,
       url: providers_legal_aid_application_final_hearings_path(@legal_aid_application, @proceeding, params[:work_type]),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template page_title: @proceeding.meaning, template: :basic, form: form do %>
+  <%= page_template page_title: @proceeding.meaning, template: :basic, form: do %>
     <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <%= form.govuk_radio_buttons_fieldset(:listed,
-                                          legend: { size: 'm', tag: 'h2', text: t('.question')}) do %>
-      <%= form.govuk_radio_button :listed, true, link_errors: true, label: { text: t('generic.yes') } do %>
+                                          legend: { size: "m", tag: "h2", text: t(".question") }) do %>
+      <%= form.govuk_radio_button :listed, true, link_errors: true, label: { text: t("generic.yes") } do %>
         <%= form.govuk_date_field :date,
-                                  legend: { text: t(".hearing"), class: 'govuk-label govuk-date-input__label' },
-                                  hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5))} %>
+                                  legend: { text: t(".hearing"), class: "govuk-label govuk-date-input__label" },
+                                  hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5)) } %>
       <% end %>
-      <%= form.govuk_radio_button :listed, false, label: { text: t('generic.no') } do %>
-        <%= form.govuk_text_area :details, label: {text: t('.details')}, rows: 5 %>
+      <%= form.govuk_radio_button :listed, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :details, label: { text: t(".details") }, rows: 5 %>
       <% end %>
     <% end %>
-    <%= next_action_buttons(
-          form: form,
-          show_draft: true
-        ) %>
+    <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
 <% end %>

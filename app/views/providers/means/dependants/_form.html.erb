@@ -2,90 +2,87 @@
       model: @form,
       url: form_path,
       method: :patch,
-      local: true
-  ) do |form| %>
+      local: true,
+    ) do |form| %>
 
-  <%= page_template page_title: page_title, page_heading_options: { margin_bottom: 3 }, form: form do %>
+  <%= page_template page_title:, page_heading_options: { margin_bottom: 3 }, form: do %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
-    <%= form.govuk_text_field :name, width: 'three-quarters', label: { size: 'm', text: t('.name') } %>
+    <%= form.govuk_text_field :name, width: "three-quarters", label: { size: "m", text: t(".name") } %>
 
-    <%= form.govuk_date_field :date_of_birth, legend: { text: t('.date_of_birth') }, hint: { text: t('.dob_hint') } %>
+    <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint") } %>
 
-    <%= form.govuk_radio_buttons_fieldset :relationship, legend: {text: t('.relationship')} do %>
+    <%= form.govuk_radio_buttons_fieldset :relationship, legend: { text: t(".relationship") } do %>
       <% Dependant.relationships.keys.each do |relationship_type| %>
         <%= form.govuk_radio_button(
-                :relationship,
-                relationship_type,
-                link_errors: true,
-                label: {text: t(".option.#{relationship_type}")},
-                hint: {text: t(".option.hint.#{relationship_type}")},
+              :relationship,
+              relationship_type,
+              link_errors: true,
+              label: { text: t(".option.#{relationship_type}") },
+              hint: { text: t(".option.hint.#{relationship_type}") },
             ) %>
       <% end %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
     <%= form.govuk_collection_radio_buttons(
-            :in_full_time_education,
-            yes_no_options,
-            :value,
-            :label,
-            legend: { text: t('.in_full_time_education'), size: 'm', tag: 'h2' }
+          :in_full_time_education,
+          yes_no_options,
+          :value,
+          :label,
+          legend: { text: t(".in_full_time_education"), size: "m", tag: "h2" },
         ) %>
 
     <%= form.govuk_radio_buttons_fieldset :has_income,
-                                          hint: {text: t('.has_income.hint')},
-                                          legend: { text: t('.has_income.question'), size: 'm'} do %>
+                                          hint: { text: t(".has_income.hint") },
+                                          legend: { text: t(".has_income.question"), size: "m" } do %>
       <%= form.govuk_radio_button(
-              :has_income,
-              true,
-              link_errors: true,
-              label: {text: t('generic.yes')},
+            :has_income,
+            true,
+            link_errors: true,
+            label: { text: t("generic.yes") },
           ) do %>
           <%= form.govuk_text_field(
-                  :monthly_income,
-                  label: {text: t('.has_income.enter_monthly_income')},
-                  value: number_to_currency_or_original_string(@form.monthly_income),
-                  prefix_text: t('currency.gbp'),
-                  width: 'one-third'
+                :monthly_income,
+                label: { text: t(".has_income.enter_monthly_income") },
+                value: number_to_currency_or_original_string(@form.monthly_income),
+                prefix_text: t("currency.gbp"),
+                width: "one-third",
               ) %>
       <% end %>
       <%= form.govuk_radio_button(
-              :has_income,
-              false,
-              label: {text: t('generic.no')}
+            :has_income,
+            false,
+            label: { text: t("generic.no") },
           ) %>
     <% end %>
 
     <%= form.govuk_radio_buttons_fieldset :has_assets_more_than_threshold,
-                                          hint: {text: t('.has_assets_more_than_threshold.hint')},
-                                          legend: {text: t('.has_assets_more_than_threshold.question'), size: 'm'} do %>
+                                          hint: { text: t(".has_assets_more_than_threshold.hint") },
+                                          legend: { text: t(".has_assets_more_than_threshold.question"), size: "m" } do %>
       <%= form.govuk_radio_button(
-              :has_assets_more_than_threshold,
-              true,
-              link_errors: true,
-              label: {text: t('generic.yes')},
+            :has_assets_more_than_threshold,
+            true,
+            link_errors: true,
+            label: { text: t("generic.yes") },
           ) do %>
         <%= form.govuk_text_field(
-                :assets_value,
-                label: {text: t('.has_assets_more_than_threshold.enter_assets_value')},
-                value: number_to_currency_or_original_string(@form.assets_value),
-                prefix_text: t('currency.gbp'),
-                width: 'one-third'
+              :assets_value,
+              label: { text: t(".has_assets_more_than_threshold.enter_assets_value") },
+              value: number_to_currency_or_original_string(@form.assets_value),
+              prefix_text: t("currency.gbp"),
+              width: "one-third",
             ) %>
       <% end %>
       <%= form.govuk_radio_button(
-              :has_assets_more_than_threshold,
-              false,
-              label: {text: t('generic.no')},
+            :has_assets_more_than_threshold,
+            false,
+            label: { text: t("generic.no") },
           ) %>
       <% end %>
 
     <div class="govuk-!-padding-bottom-2"></div>
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

@@ -1,24 +1,24 @@
 <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_substantive_application_path,
-        method: :patch,
-        local: true
+      model: @form,
+      url: providers_legal_aid_application_substantive_application_path,
+      method: :patch,
+      local: true,
     ) do |form| %>
-  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
     <%= form.govuk_radio_buttons_fieldset(:substantive_application,
-                                            legend: { size: 'xl', tag: 'h1', text: page_title}) do %>
+                                          legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
       <p class="govuk-body govuk-body govuk-!-padding-top-6 govuk-!-padding-bottom-4">
-        <%= t '.information_on_next_actions' %>
+        <%= t ".information_on_next_actions" %>
       </p>
 
-      <%= form.govuk_radio_button :substantive_application, true, label: { text: t('generic.yes') } %>
-      <%= form.govuk_radio_button :substantive_application, false, label: { text: t('.no_start_later') } %>
+      <%= form.govuk_radio_button :substantive_application, true, label: { text: t("generic.yes") } %>
+      <%= form.govuk_radio_button :substantive_application, false, label: { text: t(".no_start_later") } %>
     <% end %>
 
-    <%= govuk_warning_text(text: t('.must_submit_by', deadline: @form.substantive_application_deadline_on) ) %>
+    <%= govuk_warning_text(text: t(".must_submit_by", deadline: @form.substantive_application_deadline_on)) %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

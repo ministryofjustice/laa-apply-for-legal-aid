@@ -1,53 +1,52 @@
 <% new_head_title = if @successfully_saved
-                      t('.success_message')
+                      t(".success_message")
                     else
-                      t('.page_title')
+                      t(".page_title")
                     end %>
 <%= form_with(model: @form,
               url: providers_cooky_path,
               method: :patch,
               local: true) do |form| %>
 
-  <%= page_template page_title: t('.page_title'), head_title: new_head_title, template: :basic, form: form do %>
+  <%= page_template page_title: t(".page_title"), head_title: new_head_title, template: :basic, form: do %>
 
     <% if @successfully_saved %>
       <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
-        <% notification_banner.heading(text: t('.success_message')) %>
+        <% notification_banner.heading(text: t(".success_message")) %>
         <%= link_to t(".go_back_link"), back_path %>
       <% end %>
     <% end %>
 
-    <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
+    <h1 class="govuk-heading-l"><%= t(".page_title") %></h1>
 
-    <p class="govuk-body"><%= t('.cookies_are_files') %></p>
-    <p class="govuk-body"><%= t('.we_use_cookies') %></p>
+    <p class="govuk-body"><%= t(".cookies_are_files") %></p>
+    <p class="govuk-body"><%= t(".we_use_cookies") %></p>
 
-    <h2 class="govuk-heading-m"><%= t('.heading_2') %></h2>
-    <p class="govuk-body"><%= t('.we_use_ga') %></p>
-    <p class="govuk-body"><%= t('.we_do_not_allow') %></p>
-    <p class="govuk-body"><%= t('.google_analytics') %></p>
+    <h2 class="govuk-heading-m"><%= t(".heading_2") %></h2>
+    <p class="govuk-body"><%= t(".we_use_ga") %></p>
+    <p class="govuk-body"><%= t(".we_do_not_allow") %></p>
+    <p class="govuk-body"><%= t(".google_analytics") %></p>
 
-    <%= list_from_translation_path('.cookies.show') %>
+    <%= list_from_translation_path(".cookies.show") %>
 
     <div class="govuk-!-padding-2"></div>
 
     <%= form.govuk_radio_buttons_fieldset :cookies_enabled,
-                                          legend: { size: 'm', tag: 'h2', text: t('.heading_2'), hidden: true } do %>
-      <%= form.govuk_radio_button :cookies_enabled, true, link_errors: true, label: {text: t('.use_this_cookie')} %>
-      <%= form.govuk_radio_button :cookies_enabled, false, label: {text: t('.do_not_use')} %>
+                                          legend: { size: "m", tag: "h2", text: t(".heading_2"), hidden: true } do %>
+      <%= form.govuk_radio_button :cookies_enabled, true, link_errors: true, label: { text: t(".use_this_cookie") } %>
+      <%= form.govuk_radio_button :cookies_enabled, false, label: { text: t(".do_not_use") } %>
     <% end %>
 
     <div class="govuk-!-padding-2"></div>
 
-    <h2 class="govuk-heading-m"><%= t('.heading_3') %></h2>
-    <p class="govuk-body"><%= t('.these_essential_cookies') %></p>
-    <p class="govuk-body"><%= t('.they_always_need') %></p>
+    <h2 class="govuk-heading-m"><%= t(".heading_3") %></h2>
+    <p class="govuk-body"><%= t(".these_essential_cookies") %></p>
+    <p class="govuk-body"><%= t(".they_always_need") %></p>
 
-    <%= link_to_accessible(t('.find_out_more_link'), 'https://www.gov.uk/help/cookie-details', class: 'govuk-link govuk-body') %>
+    <%= link_to_accessible(t(".find_out_more_link"), "https://www.gov.uk/help/cookie-details", class: "govuk-link govuk-body") %>
 
     <div class="govuk-!-padding-2"></div>
 
-    <%= form.submit(t('.save_changes_btn'), class: 'govuk-button form-button') %>
-
+    <%= form.submit(t(".save_changes_btn"), class: "govuk-button form-button") %>
   <% end %>
 <% end %>

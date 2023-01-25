@@ -1,11 +1,11 @@
-<%= page_template(page_title: t('.title')) do %>
+<%= page_template(page_title: t(".title")) do %>
 
   <p class="govuk-body">
-    <%= t('.activity') %>
+    <%= t(".activity") %>
   </p>
 
   <h2 class="govuk-heading-m">
-    <%= t '.section_2.heading' %>
+    <%= t(".section_2.heading") %>
   </h2>
 
   <dl class="govuk-summary-list">
@@ -15,10 +15,10 @@
       </dt>
       <dd class="govuk-summary-list__actions">
         <%= link_to_accessible(
-                t('generic.change'),
-                providers_legal_aid_application_email_address_path(anchor: :email),
-                class: 'govuk-link change-link',
-                suffix: 'email address'
+              t("generic.change"),
+              providers_legal_aid_application_email_address_path(anchor: :email),
+              class: "govuk-link change-link",
+              suffix: "email address",
             ) %>
       </dd>
     </div>
@@ -28,6 +28,6 @@
         url: providers_legal_aid_application_about_the_financial_assessment_path,
         method: :patch,
         show_draft: true,
-        continue_button_text: t('.send_client_link')
+        continue_button_text: t(".send_client_link"),
       ) %>
 <% end %>

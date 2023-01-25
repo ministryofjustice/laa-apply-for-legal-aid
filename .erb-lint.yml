@@ -9,8 +9,6 @@ linters:
     enabled: false
   Rubocop:
     enabled: true
-    exclude:
-      - "**/app/views/providers/**/*"
     rubocop_config:
       inherit_from:
         - .rubocop.yml

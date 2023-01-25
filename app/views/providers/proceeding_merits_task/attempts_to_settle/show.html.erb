@@ -2,26 +2,26 @@
       model: @form,
       url: providers_merits_task_list_attempts_to_settle_path(@proceeding),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
     <%= page_template(
-            page_title: t('.h1-heading'),
-            head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
-            template: :basic,
-            form: form
+          page_title: t(".h1-heading"),
+          head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
+          template: :basic,
+          form:,
         ) do %>
 
     <%= form.govuk_text_area(
           :attempts_made,
-          label: { size: 'xl', tag: 'h1', text: page_title },
-          caption: { text: @proceeding.meaning, size: 'xl' },
-          hint: { text: t('.hint-text') },
-          legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'},
-          rows: 8
+          label: { size: "xl", tag: "h1", text: page_title },
+          caption: { text: @proceeding.meaning, size: "xl" },
+          hint: { text: t(".hint-text") },
+          legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+          rows: 8,
         ) %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

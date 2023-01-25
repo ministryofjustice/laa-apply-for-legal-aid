@@ -2,22 +2,22 @@
       model: @form,
       url: providers_legal_aid_application_confirm_delegated_functions_date_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
 
-  <%= page_template page_title: @proceeding.meaning, template: :basic, form: form do %>
+  <%= page_template page_title: @proceeding.meaning, template: :basic, form: do %>
     <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl govuk-!-margin-top-2"><%= page_title %></h1>
 
     <%= govuk_warning_text(text: t(".warning_text")) %>
 
     <%= form.govuk_radio_buttons_fieldset :confirm_delegated_functions_date,
-                                          legend: { size: 'm', tag: 'h2', text: t('.question', date: @proceeding.used_delegated_functions_on.strftime('%-d %B %Y')) } do %>
-      <%= form.govuk_radio_button :confirm_delegated_functions_date, true, label: { text: t('generic.yes')}, link_errors: true %>
-      <%= form.govuk_radio_button :confirm_delegated_functions_date, false, label: { text: t(".details_incorrect")} %>
+                                          legend: { size: "m", tag: "h2", text: t(".question", date: @proceeding.used_delegated_functions_on.strftime("%-d %B %Y")) } do %>
+      <%= form.govuk_radio_button :confirm_delegated_functions_date, true, label: { text: t("generic.yes") }, link_errors: true %>
+      <%= form.govuk_radio_button :confirm_delegated_functions_date, false, label: { text: t(".details_incorrect") } %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

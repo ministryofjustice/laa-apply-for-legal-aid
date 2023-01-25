@@ -1,17 +1,17 @@
 <%= form_with(
-        url: providers_legal_aid_application_means_remove_dependant_path,
-        model: @form,
-        method: :patch,
-        local: true
+      url: providers_legal_aid_application_means_remove_dependant_path,
+      model: @form,
+      method: :patch,
+      local: true,
     ) do |form| %>
-    <%= page_template page_title: t('.page_title', name: @dependant.name), form: form,  template: :basic do %>
+    <%= page_template page_title: t(".page_title", name: @dependant.name), form:, template: :basic do %>
 
     <%= form.govuk_collection_radio_buttons :remove_dependant,
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" } %>
 
-    <%= next_action_buttons(form: form) %>
+    <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>

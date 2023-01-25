@@ -1,12 +1,12 @@
 <h2 class="govuk-heading-m">
-  <%= t('providers.means_reports.benefit_check_heading') %>
+  <%= t("providers.means_reports.benefit_check_heading") %>
 </h2>
 
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :receives_benefit,
-        question: t('providers.means_reports.benefit_check_question'),
+        question: t("providers.means_reports.benefit_check_question"),
         answer: yes_no(@legal_aid_application.applicant_receives_benefit?),
-        read_only: true
+        read_only: true,
       ) %>
 </dl>

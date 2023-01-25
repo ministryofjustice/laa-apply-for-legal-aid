@@ -3,15 +3,15 @@
     <h3 class="govuk-heading-m"><%= proceeding.meaning %></h3>
   </dd>
   <dd class="govuk-summary-list__actions">
-    <%= link_to_accessible(t('generic.change'),
-                          providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application),
-                          class: 'govuk-link change-link',
-                          suffix: proceeding.meaning) %>
+    <%= link_to_accessible(t("generic.change"),
+                           providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application),
+                           class: "govuk-link change-link",
+                           suffix: proceeding.meaning) %>
   </dd>
 </div>
 <div class="govuk-summary-list__row--no-border">
   <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
-    <h3 class="govuk-heading-s"><%= t('.client_role') %><span class="govuk-!-font-weight-regular"><%= proceeding.client_involvement_type_description %></span></h3>
+    <h3 class="govuk-heading-s"><%= t(".client_role") %><span class="govuk-!-font-weight-regular"><%= proceeding.client_involvement_type_description %></span></h3>
   </dd>
 </div>
 <div class="govuk-summary-list__row">
@@ -19,27 +19,27 @@
     <details class="govuk-details" data-module="govuk-details">
       <summary class="govuk-details__summary">
       <span class="govuk-details__summary-text"
-            title="<%= t('.details_heading') %>"
-            aria-label="<%= t('.details_heading') %>">
-        <%= t('.details_heading') %>
+            title="<%= t(".details_heading") %>"
+            aria-label="<%= t(".details_heading") %>">
+        <%= t(".details_heading") %>
       </span>
       </summary>
 
       <div class="govuk-details__text">
         <% if proceeding.used_delegated_functions_on %>
-          <h4 class="govuk-heading-m"><%= t('.emergency_certificate') %></h4>
-          <p><strong><%= t('.form_of_service') %></strong>
+          <h4 class="govuk-heading-m"><%= t(".emergency_certificate") %></h4>
+          <p><strong><%= t(".form_of_service") %></strong>
             <%= proceeding.emergency_level_of_service_name %>
           </p>
-          <p><strong><%= t('.allowable_work') %></strong>
+          <p><strong><%= t(".allowable_work") %></strong>
             <%= scope_limits(proceeding, "emergency") %>
           </p>
         <% end %>
-        <h4 class="govuk-heading-m"><%= t('.substantive_certificate') %></h4>
-        <p><strong><%= t('.form_of_service') %></strong>
+        <h4 class="govuk-heading-m"><%= t(".substantive_certificate") %></h4>
+        <p><strong><%= t(".form_of_service") %></strong>
           <%= proceeding.substantive_level_of_service_name %>
         </p>
-        <p><strong><%= t('.allowable_work') %></strong>
+        <p><strong><%= t(".allowable_work") %></strong>
           <%= scope_limits(proceeding, "substantive") %>
         </p>
       </div>

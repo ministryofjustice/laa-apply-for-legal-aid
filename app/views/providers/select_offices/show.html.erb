@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.h1-heading', firm: firm.name), template: :basic do %>
+<%= page_template page_title: t(".h1-heading", firm: firm.name), template: :basic do %>
   <%= form_with(model: @form, url: providers_select_office_path, method: :patch, local: true) do |form| %>
 
     <%= form.govuk_collection_radio_buttons(:selected_office_id,
@@ -6,11 +6,11 @@
                                             :id,
                                             :code,
                                             legend: {
-                                                text: content_for(:page_title),
-                                                tag: 'h1',
-                                                size: 'xl'
+                                              text: content_for(:page_title),
+                                              tag: "h1",
+                                              size: "xl",
                                             }) %>
 
-    <%= next_action_buttons(form: form) %>
+    <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>

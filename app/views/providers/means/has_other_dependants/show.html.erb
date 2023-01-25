@@ -1,33 +1,33 @@
 <%= form_with(
-        url: providers_legal_aid_application_means_has_other_dependants_path,
-        model: @form,
-        method: :patch,
-        local: true
+      url: providers_legal_aid_application_means_has_other_dependants_path,
+      model: @form,
+      method: :patch,
+      local: true,
     ) do |form| %>
 
-  <%= page_template page_title: t('.page_title'), head_title: t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}"), form: form, template: :basic do %>
+  <%= page_template page_title: t(".page_title"), head_title: t(".existing", count: pluralize(@legal_aid_application.dependants.count, "dependant").to_s), form:, template: :basic do %>
 
   <% if @legal_aid_application.has_dependants? %>
-    <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}") %></h1>
+    <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.dependants.count, "dependant").to_s) %></h1>
     <div class="govuk-summary-list">
       <% @legal_aid_application.dependants.order(:created_at, :number).each do |dependant| %>
         <dl class="govuk-summary-list__row" id="dependant_<%= dependant.number %>">
           <dt class="govuk-summary-list__value"><%= dependant.name %></dt>
           <dt class="govuk-summary-list__actions">
             <%= link_to_accessible(
-                  t('generic.change'),
+                  t("generic.change"),
                   providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant),
-                  class: 'govuk-link change-link',
-                  suffix: dependant.name
+                  class: "govuk-link change-link",
+                  suffix: dependant.name,
                 ) %>
           </dt>
           <dt class="govuk-summary-list__actions">
             <dd class="govuk-summary-list__actions">
               <%= link_to_accessible(
-                      t('.remove'),
-                      providers_legal_aid_application_means_remove_dependant_path(@legal_aid_application, dependant),
-                      class: 'govuk-link change-link',
-                      suffix: dependant.name
+                    t(".remove"),
+                    providers_legal_aid_application_means_remove_dependant_path(@legal_aid_application, dependant),
+                    class: "govuk-link change-link",
+                    suffix: dependant.name,
                   ) %>
             </dd>
           </dt>
@@ -40,8 +40,8 @@
                                           yes_no_options,
                                           :value,
                                           :label,
-                                          legend: {text: content_for(:page_title), size: 'm', tag: 'h2'} %>
+                                          legend: { text: content_for(:page_title), size: "m", tag: "h2" } %>
 
-  <%= next_action_buttons(form: form) %>
+  <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>

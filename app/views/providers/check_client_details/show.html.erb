@@ -1,47 +1,41 @@
-<%= page_template page_title: t('.title'), template: :basic do %>
+<%= page_template page_title: t(".title"), template: :basic do %>
   <%= form_with(
         model: @form,
         url: providers_legal_aid_application_check_client_details_path(@legal_aid_application),
         method: :patch,
-        local: true
+        local: true,
       ) do |form| %>
 
     <%= govuk_fieldset_header page_title %>
 
     <table class="govuk-table">
-      <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t('.table_caption') %></caption>
+      <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".table_caption") %></caption>
       <thead class="govuk-table__head">
       </thead>
       <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header"><%= t('.name') %></th>
+        <th scope="row" class="govuk-table__header"><%= t(".name") %></th>
         <td class="govuk-table__cell"><%= "#{@applicant.first_name} #{@applicant.last_name}" %></td>
       </tr>
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header"><%= t('.date_of_birth') %></th>
-        <td class="govuk-table__cell"><%= @applicant.date_of_birth.strftime('%e %B %Y') %></td>
+        <th scope="row" class="govuk-table__header"><%= t(".date_of_birth") %></th>
+        <td class="govuk-table__cell"><%= @applicant.date_of_birth.strftime("%e %B %Y") %></td>
       </tr>
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header"><%= t('.national_insurance_number') %></th>
+        <th scope="row" class="govuk-table__header"><%= t(".national_insurance_number") %></th>
         <td class="govuk-table__cell"><%= @applicant.national_insurance_number.gsub(/(.{2})(?=.)/, '\1 \2') %></td>
       </tr>
       </tbody>
     </table>
 
-    <% options = [
-                  OpenStruct.new(value: true, label: t('.details_correct')),
-                  OpenStruct.new(value: false, label: t('.details_incorrect'))
-                 ] %>
+    <% options = [[true, t(".details_correct")], [false, t(".details_incorrect")]] %>
 
     <%= form.govuk_collection_radio_buttons :check_client_details,
                                             options,
-                                            :value,
-                                            :label,
+                                            :first,
+                                            :second,
                                             legend: nil %>
 
-    <%= next_action_buttons(
-          show_draft: true,
-          form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

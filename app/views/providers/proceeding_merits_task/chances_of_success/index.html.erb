@@ -2,14 +2,14 @@
       model: @form,
       url: providers_merits_task_list_chances_of_success_index_path,
       method: :post,
-      local: true
+      local: true,
     ) do |form| %>
     <%= page_template(
-            page_title: t('.h1-heading'),
-            head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
-            template: :basic,
-            form: form,
-            back_link: {}
+          page_title: t(".h1-heading"),
+          head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
+          template: :basic,
+          form:,
+          back_link: {},
         ) do %>
 
     <%= form.govuk_collection_radio_buttons(
@@ -17,10 +17,10 @@
           yes_no_options,
           :value,
           :label,
-          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)},
-          caption: { text: @proceeding.meaning, size: 'xl' }
+          legend: { size: "xl", tag: "h1", text: content_for(:page_title) },
+          caption: { text: @proceeding.meaning, size: "xl" },
         ) %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

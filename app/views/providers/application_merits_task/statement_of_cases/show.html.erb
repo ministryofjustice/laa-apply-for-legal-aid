@@ -4,13 +4,13 @@
                     elsif @error_message || @successful_upload
                       "#{@successful_upload} #{@error_message}"
                     else
-                      t('.h1-heading')
+                      t(".h1-heading")
                     end %>
 <%= page_template(
-      page_title: t('.h1-heading'),
+      page_title: t(".h1-heading"),
       head_title: new_head_title,
       template: :basic,
-      back_link: {}
+      back_link: {},
     ) do %>
 
   <% if @successfully_deleted %>
@@ -20,20 +20,20 @@
   <% end %>
 
   <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_statement_of_case_path,
-          method: :patch,
-          local: true,
-          html: { id: 'file-upload-form' }
+        model: @form,
+        url: providers_legal_aid_application_statement_of_case_path,
+        method: :patch,
+        local: true,
+        html: { id: "file-upload-form" },
       ) do |form| %>
 
     <%= form.govuk_error_summary %>
 
-    <%= render partial: 'shared/forms/error_summary_hidden' %>
+    <%= render partial: "shared/forms/error_summary_hidden" %>
 
-    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
-      <p class="govuk-body"><%= t('generic.tell_us') %></p>
+      <p class="govuk-body"><%= t("generic.tell_us") %></p>
       <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
         <% (1..5).each do |bullet_number| %>
           <li><%= t(".bullet-#{bullet_number}") %></li>
@@ -45,9 +45,9 @@
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden" id="dropzone-form-group" aria-labelledby="dropzone-label">
             <label class="govuk-label govuk-label--m" id="dropzone-label">
-              <%= t('.upload_file') %>
+              <%= t(".upload_file") %>
             </label>
-            <div class="govuk-hint"><%= t('.size_hint') %></div>
+            <div class="govuk-hint"><%= t(".size_hint") %></div>
 
             <span class="hidden" aria-hidden="true" id="application-id"><%= @form.model.legal_aid_application_id %></span>
             <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/statement_of_cases"></span>
@@ -56,31 +56,31 @@
             </p>
             <div class="dropzone" id="dropzone-form">
               <div class="dz-message" data-dz-message>
-                <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
-                <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></button>
+                <p class="govuk-body govuk-!-padding-top-2 script"><%= t(".dropzone_message") %></p>
+                <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t(".choose_files_btn") %></button>
               </div>
             </div>
         </div>
 
         <div class="fallback no-script">
-          <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
-                                    hint: {text: t('.size_hint')},
-                                    classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
+          <%= form.govuk_file_field :original_file, label: { text: t("generic.attach_file"), size: "m" },
+                                                    hint: { text: t(".size_hint") },
+                                                    classes: ["govuk-file-upload moj-multi-file-upload__input"] %>
           <%= form.submit(
-                t('generic.upload'),
-                id: 'upload',
-                name: 'upload_button',
-                class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
+                t("generic.upload"),
+                id: "upload",
+                name: "upload_button",
+                class: "govuk-button govuk-button--secondary form-button moj-multi-file-upload__button",
               ) %>
 
         </div>
 
-        <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
+        <h2 class="govuk-heading-m"><%= t(".h2-heading") %></h2>
         <div id="uploaded-files-table-container">
-          <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+          <%= render partial: "uploaded_files", locals: { attachments: @form.model.original_attachments } %>
           <% if @form.model.original_attachments.empty? %>
             <p class="govuk-body">
-              <%= t('.no_files') %>
+              <%= t(".no_files") %>
             </p>
           <% end %>
         </div>
@@ -102,25 +102,25 @@
         model: @form,
         url: providers_legal_aid_application_statement_of_case_path,
         method: :patch,
-        local: true
-    ) do |form| %>
+        local: true,
+      ) do |form| %>
 
     <%= form.govuk_radio_divider %>
 
     <%= form.govuk_text_area :statement, rows: 15 %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
 
 <script nonce="<%= request.content_security_policy_nonce %>">
   window.LAA_VARS = {
     images: {
-      loading_small: <%= asset_pack_path('media/images/loading-small.gif').to_json.html_safe %>
+      loading_small: <%= asset_pack_path("media/images/loading-small.gif").to_json.html_safe %>
     },
     locales: {
       generic: {
-        uploading: <%= t('generic.uploading').to_json.html_safe %>
+        uploading: <%= t("generic.uploading").to_json.html_safe %>
       }
     }
   };

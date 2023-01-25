@@ -1,14 +1,14 @@
 <div class="interruption-panel">
-  <%= page_template(page_title: t('.title_html'), head_title: t('.head_title'), column_width: 'full', template: :basic) do %>
-    <%= page_heading(size: 'l') %>
+  <%= page_template(page_title: t(".title_html"), head_title: t(".head_title"), column_width: "full", template: :basic) do %>
+    <%= page_heading(size: "l") %>
     <div class="maximize-text-width">
-      <p class="govuk-body"><%= t '.sub_heading' %></p>
-      <%= list_from_translation_path '.use_ccms.show.online_banking_consent' %>
+      <p class="govuk-body"><%= t ".sub_heading" %></p>
+      <%= list_from_translation_path ".use_ccms.show.online_banking_consent" %>
     </div>
 
     <div>
-      <%= link_to_accessible t('.continue_in_ccms_html'), 'https://portal.legalservices.gov.uk', class: 'govuk-button white-button', role: 'button' %>
+      <%= link_to_accessible t(".continue_in_ccms_html"), "https://portal.legalservices.gov.uk", class: "govuk-button white-button", role: "button" %>
     </div>
-    <%= link_to_accessible t('.back_to_applications'), providers_legal_aid_applications_path, class: 'govuk-body black_text_on_focus' %>
+    <%= link_to_accessible t(".back_to_applications"), providers_legal_aid_applications_path, class: "govuk-body black_text_on_focus" %>
   <% end %>
 </div>

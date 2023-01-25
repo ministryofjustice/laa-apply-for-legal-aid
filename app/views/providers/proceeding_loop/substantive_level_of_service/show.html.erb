@@ -2,15 +2,15 @@
       model: @form,
       url: providers_legal_aid_application_substantive_level_of_service_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template template: :basic, form: form do %>
+  <%= page_template template: :basic, form: do %>
     <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
     <% if form.object.levels_of_service.length > 1 %>
-      <%= form.govuk_radio_buttons_fieldset(:substantive_level_of_service, legend: { text: t('.instruction'), tag: 'h2', size: 'm'} ) do %>
+      <%= form.govuk_radio_buttons_fieldset(:substantive_level_of_service, legend: { text: t(".instruction"), tag: "h2", size: "m" }) do %>
         <% form.object.levels_of_service.each do |level| %>
-          <% hint = level["name"] == "Full Representation" ? t('.hint_text') : '' %>
+          <% hint = level["name"] == "Full Representation" ? t(".hint_text") : "" %>
           <%= form.govuk_radio_button :substantive_level_of_service, level["level"],
                                       link_errors: true,
                                       label: { text: level["name"] },
@@ -20,12 +20,12 @@
     <% else %>
       <%= form.hidden_field :substantive_level_of_service, value: form.object.levels_of_service[0]["level"] %>
       <p>
-        <%= t('.cannot_change_default') %>
+        <%= t(".cannot_change_default") %>
       </p>
       <p>
-        <%= t('.continue_to_change_scope') %>
+        <%= t(".continue_to_change_scope") %>
       </p>
     <% end %>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

@@ -3,27 +3,27 @@
       scope: :address_lookup,
       url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
 
   <%= page_template(
-        page_title: t('.heading'),
+        page_title: t(".heading"),
         template: :basic,
-        form: form,
-        ) do %>
+        form:,
+      ) do %>
 
-    <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: t('.heading') }  do %>
+    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".heading") }  do %>
       <div class="govuk-!-padding-2"></div>
-      <%= form.govuk_text_field :postcode, label: {text: t('.label'), tag: 'h2', size: 'm'}, width: 10 %>
+      <%= form.govuk_text_field :postcode, label: { text: t(".label"), tag: "h2", size: "m" }, width: 10 %>
     <% end %>
 
     <%= next_action_buttons(
-          form: form,
+          form:,
           show_draft: true,
-          continue_id: 'find-address',
-          continue_button_text: t('.submit_button')
+          continue_id: "find-address",
+          continue_button_text: t(".submit_button"),
         ) %>
 
-    <p><%= link_to_accessible t('.address_manual_link'), providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
+    <p><%= link_to_accessible t(".address_manual_link"), providers_legal_aid_application_address_path, class: "govuk-link" %></p>
   <% end %>
 <% end %>

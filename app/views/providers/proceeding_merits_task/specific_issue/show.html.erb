@@ -2,32 +2,32 @@
       model: @form,
       url: providers_merits_task_list_specific_issue_path(@proceeding),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%
-    page_title_locale = if @proceeding.client_involvement_type_ccms_code == "A"
-                   ".h1-heading.applicant"
-                 else
-                   ".h1-heading.non-applicant"
-                 end
-  %>
+
+  <% page_title_locale = if @proceeding.client_involvement_type_ccms_code == "A"
+                           ".h1-heading.applicant"
+                         else
+                           ".h1-heading.non-applicant"
+                         end %>
+
   <%= page_template(
         page_title: t(page_title_locale),
         head_title: "#{@proceeding.meaning} - #{t(page_title_locale)}",
         template: :basic,
-        form: form
+        form:,
       ) do %>
     <%= form.govuk_text_area(
           :details,
-          label: {size: 'xl', tag: 'h1', text: page_title},
-          caption: { text: @proceeding.meaning, size: 'xl' },
-          hint: { text: t('.hint-text') },
-          legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'},
-          rows: 8
+          label: { size: "xl", tag: "h1", text: page_title },
+          caption: { text: @proceeding.meaning, size: "xl" },
+          hint: { text: t(".hint-text") },
+          legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+          rows: 8,
         ) %>
     <%= form.govuk_check_boxes_fieldset :confirmed, legend: nil do %>
-      <p><%= form.govuk_check_box :confirmed, true, '', multiple: false, link_errors: true, label: { text: t('.confirmed') } %></p>
+      <p><%= form.govuk_check_box :confirmed, true, "", multiple: false, link_errors: true, label: { text: t(".confirmed") } %></p>
     <% end %>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

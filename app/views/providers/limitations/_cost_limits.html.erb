@@ -2,25 +2,25 @@
   <%= t(title_translation_path) %>
 </h3>
 
-<p><%= t('.default_substantive_limit_is') %> <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></strong></p>
+<p><%= t(".default_substantive_limit_is") %> <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation, precision: 0) %></strong></p>
 
 <% if @legal_aid_application.substantive_cost_overridable? %>
   <%= form.govuk_radio_buttons_fieldset(:substantive_cost_override,
-                                        legend: { size: 's', tag: 'h3', text: t('.substantive_cost_override_question') }) do %>
-    <%= form.govuk_radio_button(:substantive_cost_override, true, link_errors: true, label: {text: t('generic.yes')} ) do %>
+                                        legend: { size: "s", tag: "h3", text: t(".substantive_cost_override_question") }) do %>
+    <%= form.govuk_radio_button(:substantive_cost_override, true, link_errors: true, label: { text: t("generic.yes") }) do %>
       <%= form.govuk_text_field(
             :substantive_cost_requested,
-            label: {text: t('.enter_substantive_cost_limit')},
+            label: { text: t(".enter_substantive_cost_limit") },
             value: number_to_currency_or_original_string(@form.substantive_cost_requested),
-            prefix_text: t('currency.gbp'),
-            width: 'one-third',
-            ) %>
+            prefix_text: t("currency.gbp"),
+            width: "one-third",
+          ) %>
 
       <%= form.govuk_text_area(
             :substantive_cost_reasons,
-            label: {text: t('.enter_substantive_cost_reasons')}
+            label: { text: t(".enter_substantive_cost_reasons") },
           ) %>
     <% end %>
-    <%= form.govuk_radio_button(:substantive_cost_override, false, label: {text:  t('generic.no')}) %>
+    <%= form.govuk_radio_button(:substantive_cost_override, false, label: { text: t("generic.no") }) %>
   <% end %>
 <% end %>

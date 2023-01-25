@@ -3,16 +3,17 @@
               method: :patch,
               local: true) do |form| %>
 
-  <%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), form: form, template: :basic do %>
+  <%= page_template page_title: t(".h1-heading", office_code: current_provider.selected_office.code), form:, template: :basic do %>
+
+    <% options = [[true, t("generic.yes")], [false, t(".no_another_office")]] %>
 
     <%= form.govuk_collection_radio_buttons :confirm_office,
-                                            [OpenStruct.new(value: true, label: t('generic.yes')),
-                                             OpenStruct.new(value: false, label: t('.no_another_office'))],
-                                            :value,
-                                            :label,
-                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
+                                            options,
+                                            :first,
+                                            :second,
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" } %>
 
     <div class="govuk-!-padding-bottom-2"></div>
-    <%= next_action_buttons(form: form) %>
+    <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>
