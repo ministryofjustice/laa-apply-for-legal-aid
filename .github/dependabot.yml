@@ -25,3 +25,5 @@ updates:
   open-pull-requests-limit: 10
   reviewers:
   - "ministryofjustice/laa-apply-for-legal-aid"
+  ignore:
+    - dependency-name: "puppeteer"
