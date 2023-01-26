@@ -114,7 +114,7 @@ GEM
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
-    axe-core-api (4.5.1)
+    axe-core-api (4.6.0)
       dumb_delegator
       virtus
     axe-core-cucumber (4.5.1)
