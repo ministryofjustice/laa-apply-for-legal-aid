@@ -2,34 +2,31 @@
               url: providers_legal_aid_application_means_other_assets_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
 
     <%= form.govuk_check_boxes_fieldset :other_assets,
-                                        legend: { text: page_title, size: "xl", tag: 'h1'},
-                                        hint: { text: t('.hint')} do %>
-      <%= render 'shared/means/cost_of_living_details' %>
+                                        legend: { text: page_title, size: "xl", tag: "h1" },
+                                        hint: { text: t(".hint") } do %>
+      <%= render "shared/means/cost_of_living_details" %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#other-assets-declaration-none-selected-true-field">
-          <%= render partial: '/shared/forms/revealing_checkbox/attribute',
+          <%= render partial: "/shared/forms/revealing_checkbox/attribute",
                      collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
-                     locals: { model: @form, form: form } %>
-          <%= render partial: '/providers/means/other_assets/second_home_conditional_checkbox', locals: { model: @form, form: form } %>
-          <%= render partial: '/shared/forms/revealing_checkbox/attribute',
+                     locals: { model: @form, form: } %>
+          <%= render partial: "/providers/means/other_assets/second_home_conditional_checkbox", locals: { model: @form, form: } %>
+          <%= render partial: "/shared/forms/revealing_checkbox/attribute",
                      collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
-                     locals: { model: @form, form: form } %>
+                     locals: { model: @form, form: } %>
         </div>
       </div>
 
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.none_of_these')} %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
 
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

@@ -2,20 +2,20 @@
       model: @form,
       url: providers_merits_task_list_vary_order_path(@proceeding),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template(page_title: t('.h1-heading'),
-                    head_title: t('.h1-heading'),
+  <%= page_template(page_title: t(".h1-heading"),
+                    head_title: t(".h1-heading"),
                     template: :basic,
                     back_link: {},
-                    form: form) do %>
+                    form:) do %>
     <%= form.govuk_text_area(
           :details,
-          label: {size: 'xl', tag: 'h1', text: page_title},
-          caption: { text: @proceeding.meaning, size: 'xl' },
-          hint: { text: t('.hint-text') },
-          rows: 8
+          label: { size: "xl", tag: "h1", text: page_title },
+          caption: { text: @proceeding.meaning, size: "xl" },
+          hint: { text: t(".hint-text") },
+          rows: 8,
         ) %>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

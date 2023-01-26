@@ -1,10 +1,10 @@
 <% pass_through = {
-                    applicant: @applicant,
-                    address: @address,
-                    read_only: @read_only
-                  } %>
+     applicant: @applicant,
+     address: @address,
+     read_only: @read_only,
+   } %>
 <% if @read_only %>
-  <%= render 'providers/check_provider_answers/read_only', pass_through %>
+  <%= render "providers/check_provider_answers/read_only", pass_through %>
 <% else %>
-  <%= render 'providers/check_provider_answers/standard', pass_through %>
+  <%= render "providers/check_provider_answers/standard", pass_through %>
 <% end %>

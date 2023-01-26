@@ -2,19 +2,20 @@
       model: @form,
       url: providers_legal_aid_application_opponents_mental_capacity_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
   <%= page_template(
-        page_title: t('.h1-heading'),
+        page_title: t(".h1-heading"),
         template: :basic,
         back_link: {},
-        form: form) do %>
-    <%= form.govuk_radio_buttons_fieldset :understands_terms_of_court_order, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
-      <%= form.govuk_radio_button :understands_terms_of_court_order, true, link_errors: true, label: {text: t('generic.yes')} %>
-      <%= form.govuk_radio_button :understands_terms_of_court_order, false, label: {text: t('generic.no')} do %>
+        form:,
+      ) do %>
+    <%= form.govuk_radio_buttons_fieldset :understands_terms_of_court_order, legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <%= form.govuk_radio_button :understands_terms_of_court_order, true, link_errors: true, label: { text: t("generic.yes") } %>
+      <%= form.govuk_radio_button :understands_terms_of_court_order, false, label: { text: t("generic.no") } do %>
         <%= form.govuk_text_area :understands_terms_of_court_order_details, rows: 5 %>
       <% end %>
     <% end %>
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

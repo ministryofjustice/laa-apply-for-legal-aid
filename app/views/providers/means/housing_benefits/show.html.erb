@@ -3,7 +3,7 @@
               method: :patch do |f| %>
   <%= page_template page_title: t(".page_heading"), template: :basic, form: f do %>
 
-    <%= f.govuk_radio_buttons_fieldset :transaction_type_ids, legend: {tag: "h1", size: "xl"} do %>
+    <%= f.govuk_radio_buttons_fieldset :transaction_type_ids, legend: { tag: "h1", size: "xl" } do %>
 
       <%= f.govuk_radio_button :transaction_type_ids,
                                @form.housing_benefit_transaction_type.id,
@@ -15,7 +15,7 @@
                                              @form.frequency_options,
                                              :itself,
                                              ->(option) { t("transaction_types.frequencies.#{option}") },
-                                             legend: {tag: "h2", size: "s"} %>
+                                             legend: { tag: "h2", size: "s" } %>
       <% end %>
 
       <%= f.govuk_radio_button :transaction_type_ids,

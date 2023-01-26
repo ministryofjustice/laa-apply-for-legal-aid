@@ -275,10 +275,6 @@ RSpec.describe "FeedbacksController" do
         get new_feedback_path
       end
 
-      it "displays success message" do
-        expect(unescaped_response_body).to match(I18n.t(".feedback.new.signed_out"))
-      end
-
       it "does not display a back button" do
         expect(unescaped_response_body).not_to match(I18n.t(".generic.back"))
       end

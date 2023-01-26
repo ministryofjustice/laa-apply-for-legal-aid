@@ -1,13 +1,10 @@
-<%
-  success_message = success_message
-  form_group_error_class = @categorisation_errors.present? ? 'govuk-form-group--error' : ''
-  select_error = ''
-%>
+<% form_group_error_class = @categorisation_errors.present? ? "govuk-form-group--error" : "" %>
+<% select_error = "" %>
 
 <div class="<%= form_group_error_class %>">
-  <table class="govuk-table <%= 'hidden' if attachments.empty? %>">
+  <table class="govuk-table <%= "hidden" if attachments.empty? %>">
     <caption class="govuk-table__caption govuk-heading-m">
-      <%= t('.title') %>
+      <%= t(".title") %>
       <% if @categorisation_errors %>
         <% @categorisation_errors.each do |error| %>
           <p class='govuk-error-message govuk-!-margin-bottom-0'><%= error.message %></p>
@@ -16,14 +13,12 @@
     </caption>
     <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
-      <th class="govuk-table__header" scope="col"><%= t('.select_a_category') %></th>
+      <th class="govuk-table__header" scope="col"><%= t(".filename") %></th>
+      <th class="govuk-table__header" scope="col"><%= t(".select_a_category") %></th>
       <th class="govuk-table__header" scope="col"></th>
     </tr>
     </thead>
     <tbody class="govuk-table__body">
-
-    <span alert-live="assertive" class="govuk-visually-hidden"><%= success_message %></span>
 
     <%= form_with model: @uploaded_evidence_collection, url: providers_legal_aid_application_uploaded_evidence_collection_path do |form| %>
 
@@ -34,26 +29,26 @@
           <td class="govuk-table__cell no-wrap">
             <div class="govuk-form-group govuk">
               <% if @categorisation_errors.present? %>
-                <% select_error = attachment.attachment_type == 'uncategorised' ? 'govuk-select--error' : '' %>
+                <% select_error = attachment.attachment_type == "uncategorised" ? "govuk-select--error" : "" %>
               <% end %>
               <%= form.govuk_collection_select attachment.id,
                                                @attachment_type_options,
                                                :first,
                                                :last,
-                                               label: { text: t('.select_a_category_label', filename: attachment.document.filename), class: 'govuk-visually-hidden' },
-                                               options: { selected: selected },
+                                               label: { text: t(".select_a_category_label", filename: attachment.document.filename), class: "govuk-visually-hidden" },
+                                               options: { selected: },
                                                class: [select_error] %>
             </div>
           </td>
           <td class="govuk-table__cell">
             <%= button_to_accessible(
-                  t('.delete'),
+                  t(".delete"),
                   providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
                   method: :patch,
-                  name: 'delete_button',
-                  class: 'button-as-link',
+                  name: "delete_button",
+                  class: "button-as-link",
                   params: { attachment_id: attachment.id },
-                  suffix: attachment.document.filename
+                  suffix: attachment.document.filename,
                 ) %>
           </td>
         </tr>

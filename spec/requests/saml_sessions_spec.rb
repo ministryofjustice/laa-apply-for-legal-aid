@@ -29,28 +29,11 @@ RSpec.describe "SamlSessionsController" do
       expect(session["feedback_return_path"]).to eq destroy_provider_session_path
     end
 
-    context "no mock saml" do
-      before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return("false")
-      end
-
-      it "redirects to the SAML sign_out URL" do
-        subject
-        expect(response).to redirect_to(new_feedback_path)
-      end
-    end
-
-    context "mock_saml" do
-      before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return("true")
-      end
-
-      after { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return("false") }
-
-      it "redirects to providers root" do
-        subject
-        expect(response).to redirect_to(providers_root_url)
-      end
+    it "redirects to the feedback page" do
+      subject
+      expect(response).to redirect_to(new_feedback_path)
+      follow_redirect!
+      expect(page).to have_content(I18n.t("saml_sessions.destroy.notice"))
     end
   end
 

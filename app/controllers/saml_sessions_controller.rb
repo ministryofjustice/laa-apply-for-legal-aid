@@ -17,11 +17,8 @@ class SamlSessionsController < Devise::SamlSessionsController
     session["signed_out"] = true
     session["feedback_return_path"] = destroy_provider_session_path
     sign_out current_provider
-    if IdPSettingsAdapter.mock_saml?
-      redirect_to providers_root_url
-    else
-      redirect_to new_feedback_path
-    end
+
+    redirect_to new_feedback_path, notice: t(".notice")
   end
 
   def after_sign_in_path_for(_provider)

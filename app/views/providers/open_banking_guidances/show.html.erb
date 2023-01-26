@@ -2,74 +2,74 @@
       model: @form,
       url: providers_legal_aid_application_open_banking_guidance_path(@legal_aid_application),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
 
-  <%= page_template page_title: t('.heading_h1'), form: form, template: :basic do %>
+  <%= page_template page_title: t(".heading_h1"), form:, template: :basic do %>
 
-    <h1 class="govuk-heading-xl"><%= t('.heading_h1') %></h1>
+    <h1 class="govuk-heading-xl"><%= t(".heading_h1") %></h1>
 
-    <p class="govuk-body"><%= t('.your_client_can') %></p>
-    <p class="govuk-body"><%= t('.its_a_fast') %></p>
+    <p class="govuk-body"><%= t(".your_client_can") %></p>
+    <p class="govuk-body"><%= t(".its_a_fast") %></p>
 
     <details class="govuk-details govuk-!-display-none-print" data-module="govuk-details">
       <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
-            <%= t('.details_summary') %>
+            <%= t(".details_summary") %>
           </span>
       </summary>
       <div class="govuk-details__text govuk-!-padding-bottom-1">
-        <%= t('.details_content_html') %>
-        <%= list_from_translation_path('.open_banking_consents.show.details') %>
+        <%= t(".details_content_html") %>
+        <%= list_from_translation_path(".open_banking_consents.show.details") %>
       </div>
     </details>
 
     <div class="govuk-!-padding-bottom-4 only-print">
-      <h3 class="govuk-heading-m"><%= t('.details_summary') %></h3>
-      <p class="govuk-body"><%= t('.details_content_para_one') %></p>
-      <p class="govuk-body"><%= t('.details_content_para_two') %></p>
-      <p class="govuk-body"><%= t('.details_content_para_three') %></p>
+      <h3 class="govuk-heading-m"><%= t(".details_summary") %></h3>
+      <p class="govuk-body"><%= t(".details_content_para_one") %></p>
+      <p class="govuk-body"><%= t(".details_content_para_two") %></p>
+      <p class="govuk-body"><%= t(".details_content_para_three") %></p>
       <ul class="govuk-list govuk-list--bullet print-add-bullet">
-        <% t('.details.list').split("\n").each do |bullet| %>
+        <% t(".details.list").split("\n").each do |bullet| %>
           <li><%= bullet %></li>
         <% end %>
       </ul>
     </div>
 
-    <h2 class="govuk-heading-l"><%= t('.heading_h2') %></h2>
+    <h2 class="govuk-heading-l"><%= t(".heading_h2") %></h2>
 
-    <h3 class="govuk-heading-m"><%= t('.list_heading_one') %></h3>
-    <p class="govuk-body"><%= t('.your_client_will') %></p>
-    <p class="govuk-body"><%= t('.theres_a_link') %></p>
+    <h3 class="govuk-heading-m"><%= t(".list_heading_one") %></h3>
+    <p class="govuk-body"><%= t(".your_client_will") %></p>
+    <p class="govuk-body"><%= t(".theres_a_link") %></p>
 
     <div class="govuk-!-padding-bottom-4 page_break_before">
-      <h3 class="govuk-heading-m"><%= t('.list_heading_two') %></h3>
-      <p class="govuk-body"><%= t('.your_client_selects') %></p>
-      <img src="<%= asset_pack_path 'media/images/open_banking/select_bank.png' %>" alt="<%= t('.image_alt_1') %>" class="govuk-!-display-none-print">
-      <img src="<%= asset_pack_path 'media/images/open_banking/select_bank.png' %>" alt="<%= t('.image_alt_1') %>" class="only-print open-banking-guidance-img">
+      <h3 class="govuk-heading-m"><%= t(".list_heading_two") %></h3>
+      <p class="govuk-body"><%= t(".your_client_selects") %></p>
+      <img src="<%= asset_pack_path "media/images/open_banking/select_bank.png" %>" alt="<%= t(".image_alt_1") %>" class="govuk-!-display-none-print">
+      <img src="<%= asset_pack_path "media/images/open_banking/select_bank.png" %>" alt="<%= t(".image_alt_1") %>" class="only-print open-banking-guidance-img">
     </div>
 
     <div class="govuk-!-padding-bottom-4">
-      <h3 class="govuk-heading-m"><%= t('.list_heading_three') %></h3>
-      <p class="govuk-body"><%= t('.your_client_chooses') %></p>
-      <img src="<%= asset_pack_path 'media/images/open_banking/sharing.png' %>" alt="<%= t('.image_alt_2') %>" class="govuk-!-display-none-print">
-      <img src="<%= asset_pack_path 'media/images/open_banking/sharing.png' %>" alt="<%= t('.image_alt_2') %>" class="only-print open-banking-guidance-img">
+      <h3 class="govuk-heading-m"><%= t(".list_heading_three") %></h3>
+      <p class="govuk-body"><%= t(".your_client_chooses") %></p>
+      <img src="<%= asset_pack_path "media/images/open_banking/sharing.png" %>" alt="<%= t(".image_alt_2") %>" class="govuk-!-display-none-print">
+      <img src="<%= asset_pack_path "media/images/open_banking/sharing.png" %>" alt="<%= t(".image_alt_2") %>" class="only-print open-banking-guidance-img">
     </div>
 
     <div class="govuk-!-padding-bottom-4 page_break_before">
-      <h3 class="govuk-heading-m"><%= t('.list_heading_four') %></h3>
-      <p class="govuk-body"><%= t('.your_client_will_see') %></p>
-      <img src="<%= asset_pack_path 'media/images/open_banking/success.png' %>" alt="<%= t('.image_alt_3') %>" class="govuk-!-display-none-print">
-      <img src="<%= asset_pack_path 'media/images/open_banking/success.png' %>" alt="<%= t('.image_alt_3') %>" class="only-print open-banking-guidance-img">
+      <h3 class="govuk-heading-m"><%= t(".list_heading_four") %></h3>
+      <p class="govuk-body"><%= t(".your_client_will_see") %></p>
+      <img src="<%= asset_pack_path "media/images/open_banking/success.png" %>" alt="<%= t(".image_alt_3") %>" class="govuk-!-display-none-print">
+      <img src="<%= asset_pack_path "media/images/open_banking/success.png" %>" alt="<%= t(".image_alt_3") %>" class="only-print open-banking-guidance-img">
     </div>
 
     <div class="govuk-!-padding-bottom-4">
-      <h3 class="govuk-heading-m"><%= t('.list_heading_five') %></h3>
-      <p class="govuk-body"><%= t('.you_need_to') %></p>
+      <h3 class="govuk-heading-m"><%= t(".list_heading_five") %></h3>
+      <p class="govuk-body"><%= t(".you_need_to") %></p>
     </div>
 
     <div class="govuk-!-padding-bottom-2">
-      <%= print_button t('.print_guidance_button') %>
+      <%= print_button t(".print_guidance_button") %>
     </div>
 
     <div class="govuk-!-padding-bottom-2 govuk-!-display-none-print">
@@ -77,12 +77,10 @@
                                               yes_no_options,
                                               :value,
                                               :label,
-                                              legend: {text: t(".can_your_client_share"), size: 'm', tag: 'h2'} %>
+                                              legend: { text: t(".can_your_client_share"), size: "m", tag: "h2" } %>
     </div>
 
-    <%= next_action_buttons(
-          show_draft: true,
-          form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
 
   <% end %>
 <% end %>

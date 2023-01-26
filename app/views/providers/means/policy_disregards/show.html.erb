@@ -2,26 +2,23 @@
               url: providers_legal_aid_application_means_policy_disregards_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
 
     <%= form.govuk_check_boxes_fieldset :policy_disregards,
-                                        legend: {text: page_title, size: 'xl', tag: 'h1'},
-                                        hint: {text: t('generic.select_all_that_apply')} do %>
+                                        legend: { text: page_title, size: "xl", tag: "h1" },
+                                        hint: { text: t("generic.select_all_that_apply") } do %>
 
-     <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
-       <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
-         <%= form.govuk_check_box checkbox, true, '', multiple: false, link_errors: true, label: {text: t(".#{checkbox}")} %>
-       <% end %>
-     </div>
+    <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
+      <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
+        <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
+      <% end %>
+    </div>
 
-     <%= form.govuk_radio_divider %>
-     <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.none_of_these')} %>
+    <%= form.govuk_radio_divider %>
+    <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
 
-   <% end %>
-
-   <%= next_action_buttons(
-           show_draft: true,
-           form: form
-       ) %>
   <% end %>
- <% end %>
+
+  <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

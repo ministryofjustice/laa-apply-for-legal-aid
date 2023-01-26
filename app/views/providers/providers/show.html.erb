@@ -1,23 +1,20 @@
-<%= page_template(
-      page_title: t('.page_title'),
-      column_width: 'full'
-    ) do %>
+<%= page_template(page_title: t(".page_title"), column_width: "full") do %>
   <table class="govuk-table">
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t('.name') %></th>
+        <th class="govuk-table__header" scope="row"><%= t(".name") %></th>
         <td class="govuk-table__cell"><%= @provider.name %></td>
       </tr>
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t('.username') %></th>
+        <th class="govuk-table__header" scope="row"><%= t(".username") %></th>
         <td class="govuk-table__cell"><%= @provider.username %></td>
       </tr>
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t('.email') %></th>
+        <th class="govuk-table__header" scope="row"><%= t(".email") %></th>
         <td class="govuk-table__cell"><%= @provider.email %></td>
       </tr>
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t('.account_number') %></th>
+        <th class="govuk-table__header" scope="row"><%= t(".account_number") %></th>
         <td class="govuk-table__cell"></td>
       </tr>
     </tbody>

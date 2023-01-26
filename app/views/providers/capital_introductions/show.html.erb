@@ -1,16 +1,16 @@
-<%= page_template page_title: t('.h1-heading') do %>
+<%= page_template page_title: t(".h1-heading") do %>
   <ol class="govuk-list govuk-list--number govuk-heading-m">
-    <li><%= t('.capital_list_heading') %></li>
-    <p class="govuk-body govuk-!-margin-top-4"><%= t('.capital_text') %></p>
-    <%= list_from_translation_path '.capital_introductions.show.capital_items' %>
+    <li><%= t(".capital_list_heading") %></li>
+    <p class="govuk-body govuk-!-margin-top-4"><%= t(".capital_text") %></p>
+    <%= list_from_translation_path ".capital_introductions.show.capital_items" %>
 
-    <li><%= t('.merits_list_heading') %></li>
-    <p class="govuk-body govuk-!-margin-top-4"><%= t('.merits_text') %></p>
-    <%= list_from_translation_path '.capital_introductions.show.merits_items' %>
+    <li><%= t(".merits_list_heading") %></li>
+    <p class="govuk-body govuk-!-margin-top-4"><%= t(".merits_text") %></p>
+    <%= list_from_translation_path ".capital_introductions.show.merits_items" %>
 
     <% if @legal_aid_application.section_8_proceedings? %>
       <div style="margin-top: -0.5em">
-        <%= list_from_translation_path '.capital_introductions.show.section_8_items' %>
+        <%= list_from_translation_path ".capital_introductions.show.section_8_items" %>
       </div>
     <% end %>
 
@@ -21,8 +21,8 @@
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_capital_introduction_path,
         method: :patch,
-        continue_button_text: t('generic.continue'),
-        show_draft: true
+        continue_button_text: t("generic.continue"),
+        show_draft: true,
       ) %>
 
 <% end %>

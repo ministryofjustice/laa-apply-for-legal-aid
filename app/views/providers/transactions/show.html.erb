@@ -1,9 +1,9 @@
-<%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), column_width: 'full', template: :default do %>
+<%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), column_width: "full", template: :default do %>
 
   <div class="govuk-body"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
 
   <% if %w[benefits excluded_benefits].include?(@transaction_type.name) %>
-    <%= render 'providers/means/regular_incomes/cost_of_living_and_disregarded_benefits' %>
+    <%= render "providers/means/regular_incomes/cost_of_living_and_disregarded_benefits" %>
   <% end %>
 
   <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
@@ -37,36 +37,36 @@
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
     <table class="govuk-table sortable table-merge_columns">
       <caption class="govuk-table__caption">
-        <%= content_tag(:span, t('.table_description', from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)), class: 'govuk-visually-hidden') if @bank_transactions.any? %>
-        <%= content_tag(:h2, t('date.date_period', from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)), aria: { hidden: 'true'}, class: 'govuk-heading-s') if @bank_transactions.any? %>
+        <%= content_tag(:span, t(".table_description", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)), class: "govuk-visually-hidden") if @bank_transactions.any? %>
+        <%= content_tag(:h2, t("date.date_period", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)), aria: { hidden: "true" }, class: "govuk-heading-s") if @bank_transactions.any? %>
       </caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th
             class="govuk-table__header select-clear-all"
             scope="col"
-            data-copy-select="<%= t '.col_select_all' %>"
-            data-copy-clear="<%= t '.col_clear_all' %>">
+            data-copy-select="<%= t ".col_select_all" %>"
+            data-copy-clear="<%= t ".col_clear_all" %>">
           </th>
 
           <%= sort_column_th(
                 type: :date,
-                content: t('.col_date'),
-                combine_right: { at: 555, append: t('.col_and_description') },
-                currently_sorted: :desc
+                content: t(".col_date"),
+                combine_right: { at: 555, append: t(".col_and_description") },
+                currently_sorted: :desc,
               ) %>
 
-          <%= sort_column_th type: :alphabetic, content: t('.col_description') %>
+          <%= sort_column_th type: :alphabetic, content: t(".col_description") %>
 
           <th class="nullcell" aria-hidden="true"></th>
 
           <%= sort_column_th(
                 type: :numeric,
-                content: t('.col_amount'),
-                combine_right: { at: 470, append: t('.col_and_category') }
+                content: t(".col_amount"),
+                combine_right: { at: 470, append: t(".col_and_category") },
               ) %>
 
-          <%= sort_column_th type: :alphabetic, content: t('.col_category') %>
+          <%= sort_column_th type: :alphabetic, content: t(".col_category") %>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -76,7 +76,7 @@
               <% if builder.object.transaction_type_id == nil %>
                 <div class="govuk-checkboxes__item">
                   <% checked = builder.object.transaction_type_id == @transaction_type.id %>
-                  <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked, 'aria-labelledby' => 'Date-' + builder.object.id + ' Description-' + builder.object.id + ' Amount-' + builder.object.id) %>
+                  <%= builder.check_box(class: "govuk-checkboxes__input", checked:, "aria-labelledby" => "Date-#{builder.object.id} Description-#{builder.object.id} Amount-#{builder.object.id}") %>
                   <label for="transaction_ids_<%= builder.object.id %>" class="govuk-label govuk-checkboxes__label table-checkbox_label"><span class="govuk-visually-hidden"><%= builder.object.description %>, <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %> on <%= l(builder.object.happened_at.to_date, format: :long_date) %></span></label>
                 </div>
               <% end %>
@@ -86,12 +86,12 @@
                   id: "Date-#{builder.object.id}",
                   content: l(builder.object.happened_at.to_date, format: :short_date),
                   combine_right: 555,
-                  sort_by: [builder.object.happened_at.to_i, builder.object.description]
+                  sort_by: [builder.object.happened_at.to_i, builder.object.description],
                 ) %>
 
             <%= sort_column_cell(
                   id: "Description-#{builder.object.id}",
-                  content: builder.object.description
+                  content: builder.object.description,
                 ) %>
 
             <td class="nullcell" aria-hidden="true"></td>
@@ -101,7 +101,7 @@
                   content: value_with_currency_unit(builder.object.amount, builder.object.currency),
                   combine_right: 470,
                   sort_by: builder.object.amount,
-                  numeric: true
+                  numeric: true,
                 ) %>
 
             <%= sort_category_column_cell builder.object, @transaction_type %>
@@ -111,6 +111,6 @@
       </tbody>
     </table>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

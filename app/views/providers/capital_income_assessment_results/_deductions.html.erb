@@ -1,10 +1,10 @@
-<h2 class="govuk-heading-m"><%= t('.title') %></h2>
+<h2 class="govuk-heading-m"><%= t(".title") %></h2>
 <table class="govuk-table">
   <tbody>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.dependants_allowance'), value: gds_number_to_currency(@cfe_result.dependants_allowance) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".dependants_allowance"), value: gds_number_to_currency(@cfe_result.dependants_allowance) } %>
   <% unless @legal_aid_application.uploading_bank_statements? %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.excluded_benefits'), value: gds_number_to_currency(@cfe_result.disregarded_state_benefits) } %>
+    <%= render partial: "shared/results_detail_row", locals: { caption: t(".excluded_benefits"), value: gds_number_to_currency(@cfe_result.disregarded_state_benefits) } %>
   <% end %>
-  <%= render partial: 'shared/results_total_row', locals: { caption: t('.total_deductions'), value: gds_number_to_currency(@cfe_result.total_deductions) } %>
+  <%= render partial: "shared/results_total_row", locals: { caption: t(".total_deductions"), value: gds_number_to_currency(@cfe_result.total_deductions) } %>
   </tbody>
 </table>

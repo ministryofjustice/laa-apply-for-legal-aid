@@ -1,10 +1,10 @@
-<h2 class="govuk-heading-m"><%= t('.title') %></h2>
+<h2 class="govuk-heading-m"><%= t(".title") %></h2>
 <table class="govuk-table">
   <tbody>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.housing_costs'), value: gds_number_to_currency(@cfe_result.moe_housing) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.childcare_costs'), value: gds_number_to_currency(@cfe_result.moe_childcare) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.maintenance_out'), value: gds_number_to_currency(@cfe_result.moe_maintenance_out) } %>
-  <%= render partial: 'shared/results_detail_row', locals: { caption: t('.legal_aid'), value: gds_number_to_currency(@cfe_result.moe_legal_aid) } %>
-  <%= render partial: 'shared/results_total_row', locals: { caption: t('.total_outgoings'), value: gds_number_to_currency(@cfe_result.total_monthly_outgoings) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".housing_costs"), value: gds_number_to_currency(@cfe_result.moe_housing) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".childcare_costs"), value: gds_number_to_currency(@cfe_result.moe_childcare) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".maintenance_out"), value: gds_number_to_currency(@cfe_result.moe_maintenance_out) } %>
+  <%= render partial: "shared/results_detail_row", locals: { caption: t(".legal_aid"), value: gds_number_to_currency(@cfe_result.moe_legal_aid) } %>
+  <%= render partial: "shared/results_total_row", locals: { caption: t(".total_outgoings"), value: gds_number_to_currency(@cfe_result.total_monthly_outgoings) } %>
   </tbody>
 </table>

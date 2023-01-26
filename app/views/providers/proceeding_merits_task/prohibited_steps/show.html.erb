@@ -2,20 +2,20 @@
       model: @form,
       url: providers_merits_task_list_prohibited_steps_path(@proceeding),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
-  <%= page_template(page_title: t('.h1-heading'),
-                    head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
+  <%= page_template(page_title: t(".h1-heading"),
+                    head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
                     template: :basic,
                     back_link: {},
-                    form: form) do %>
-    <%= form.govuk_radio_buttons_fieldset :uk_removal, legend: {size: 'xl', tag: 'h1', text: page_title}, classes: "govuk-!-padding-bottom-4" do %>
-      <%= form.govuk_radio_button :uk_removal, true, link_errors: true, label: {text: t('generic.yes')} %>
-      <%= form.govuk_radio_button :uk_removal, false, label: {text: t('generic.no')} do %>
-        <%= form.govuk_text_area :details, label: {text: t('.no-hint')}, rows: 5 %>
+                    form:) do %>
+    <%= form.govuk_radio_buttons_fieldset :uk_removal, legend: { size: "xl", tag: "h1", text: page_title }, classes: "govuk-!-padding-bottom-4" do %>
+      <%= form.govuk_radio_button :uk_removal, true, link_errors: true, label: { text: t("generic.yes") } %>
+      <%= form.govuk_radio_button :uk_removal, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :details, label: { text: t(".no-hint") }, rows: 5 %>
       <% end %>
     <% end %>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

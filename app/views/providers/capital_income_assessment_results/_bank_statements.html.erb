@@ -1,10 +1,10 @@
-<h3 class="govuk-heading-m"><%= t('.title') %></h3>
+<h3 class="govuk-heading-m"><%= t(".title") %></h3>
 <dl class="govuk-summary-list">
   <%= check_answer_link(
         name: :bank_statements,
         url: providers_legal_aid_application_bank_statements_path(@legal_aid_application),
-        question: t('.uploaded'),
+        question: t(".uploaded"),
         answer: attachments_with_size(bank_statements),
-        read_only: true
+        read_only: true,
       ) %>
 </dl>

@@ -103,21 +103,11 @@ private
     session.fetch(:feedback_return_path, :back)
   end
 
-  def success_message
-    return {} if citizen_journey?
-
-    provider_signed_in? ? {} : I18n.t("feedback.new.signed_out")
-  end
-
-  def citizen_journey?
-    citizen_path_regex.match? session[:feedback_return_path]
-  end
-
   def back_button
     provider_signed_in? ? {} : :none
   end
 
-  helper_method :back_path, :back_button, :success_message
+  helper_method :back_path, :back_button
 
   def update_return_path
     return if request.referer&.include?("/feedback/")
@@ -131,10 +121,6 @@ private
     return :citizen if %r{/citizens/}.match?(path)
 
     :unknown
-  end
-
-  def citizen_path_regex
-    @citizen_path_regex ||= Regexp.new(/\/citizens\//)
   end
 
   def submission_feedback?

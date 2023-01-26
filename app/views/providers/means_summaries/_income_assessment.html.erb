@@ -1,45 +1,45 @@
 <% bank_statement_upload = @legal_aid_application.uploading_bank_statements? %>
 
-<h2 class="govuk-heading-l"><%= t('.income-heading') %></h2>
+<h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
 <% if bank_statement_upload %>
-  <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false) %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false) %>
 <% end %>
 
 <% if @legal_aid_application.hmrc_employment_income? %>
   <% if @legal_aid_application.has_multiple_employments? %>
-    <%= render 'shared/check_answers/full_employment_details', read_only: false %>
+    <%= render "shared/check_answers/full_employment_details", read_only: false %>
   <% else %>
-    <%= render 'shared/check_answers/employed_income', read_only: false %>
+    <%= render "shared/check_answers/employed_income", read_only: false %>
   <% end %>
 <% elsif @legal_aid_application.applicant_employed? %>
-  <%= render 'shared/check_answers/full_employment_details', read_only: false %>
+  <%= render "shared/check_answers/full_employment_details", read_only: false %>
 <% end %>
 
 <%= render(
-      'shared/check_answers/income_summary',
-      income_type: t('.credits-section-heading'),
+      "shared/check_answers/income_summary",
+      income_type: t(".credits-section-heading"),
       url: @legal_aid_application.uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
-      transaction_types: @credit_transaction_types
+      transaction_types: @credit_transaction_types,
     ) %>
 
-<%= render('shared/check_answers/income_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
+<%= render("shared/check_answers/income_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>
 
-<%= render 'shared/check_answers/student_finance', read_only: false %>
+<%= render "shared/check_answers/student_finance", read_only: false %>
 
-<h2 class="govuk-heading-l"><%= t('.outgoings-heading') %></h2>
+<h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
 
 <%= render(
-      'shared/check_answers/income_summary',
-      income_type: t('.debits-section-heading'),
+      "shared/check_answers/income_summary",
+      income_type: t(".debits-section-heading"),
       url: @legal_aid_application.uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings,
-      transaction_types: @debit_transaction_types
+      transaction_types: @debit_transaction_types,
     ) %>
 
-<%= render('shared/check_answers/housing_benefit', read_only: false) if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
+<%= render("shared/check_answers/housing_benefit", read_only: false) if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
 
-<%= render('shared/check_answers/outgoings_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
+<%= render("shared/check_answers/outgoings_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>
 
-<h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>
+<h2 class="govuk-heading-l"><%= t(".dependants.heading") %></h2>
 
-<%= render 'shared/check_answers/dependants' %>
+<%= render "shared/check_answers/dependants" %>

@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m"><%= t('providers.means_reports.proceeding_eligibility') %></h2>
+<h2 class="govuk-heading-m"><%= t("providers.means_reports.proceeding_eligibility") %></h2>
 
 <dl id="proceeding-eligibility-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <% results.each do |proceeding_type, result| %>
@@ -7,6 +7,7 @@
           question: proceeding_type,
           answer: result,
           url: nil,
-          read_only: true) %>
+          read_only: true,
+        ) %>
   <% end %>
 </dl>

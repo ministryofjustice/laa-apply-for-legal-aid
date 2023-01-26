@@ -2,25 +2,22 @@
               url: providers_legal_aid_application_means_savings_and_investment_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
 
   <%= form.govuk_check_boxes_fieldset :bank_accounts,
-                                      legend: { text: page_title, size: "xl", tag: 'h1'},
-                                      hint: { text: t('generic.select_all_that_apply')} do %>
+                                      legend: { text: page_title, size: "xl", tag: "h1" },
+                                      hint: { text: t("generic.select_all_that_apply") } do %>
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
       <div class="deselect-group" data-deselect-ctrl="#savings-amount-none-selected-true-field">
-        <%= render partial: 'shared/forms/revealing_checkbox/attribute',
+        <%= render partial: "shared/forms/revealing_checkbox/attribute",
                    collection: attributes,
-                   locals: { model: @form, form: form } %>
+                   locals: { model: @form, form: } %>
       </div>
     </div>
     <%= form.govuk_radio_divider %>
-    <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.none_selected')} %>
+    <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_selected") } %>
   <% end %>
 
-  <%= next_action_buttons(
-          show_draft: true,
-          form: form
-      ) %>
+  <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

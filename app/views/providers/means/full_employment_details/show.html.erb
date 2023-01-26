@@ -2,31 +2,28 @@
               url: providers_legal_aid_application_means_full_employment_details_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <% page_heading = @legal_aid_application.has_multiple_employments? ? t('.page_heading_multi_jobs') : t('.page_heading_no_info') %>
+  <% page_heading = @legal_aid_application.has_multiple_employments? ? t(".page_heading_multi_jobs") : t(".page_heading_no_info") %>
 
-  <%= page_template page_title: page_heading, form: form do %>
+  <%= page_template page_title: page_heading, form: do %>
       <div class="govuk-!-padding-bottom-1"></div>
       <% if @legal_aid_application.has_multiple_employments? %>
-        <h2 class="govuk-body-l"><%= t('.mutiple_employment_info') %></h2>
+        <h2 class="govuk-body-l"><%= t(".mutiple_employment_info") %></h2>
       <% else %>
-        <h2 class="govuk-body-l"><%= t('.no_employment_info') %></h2>
+        <h2 class="govuk-body-l"><%= t(".no_employment_info") %></h2>
       <% end %>
-      <p class="govuk-body"><%= t('.enter_details') %></p>
+      <p class="govuk-body"><%= t(".enter_details") %></p>
       <ul class="govuk-list govuk-list--bullet">
-        <li><%= t '.details_1' %></li>
-        <li><%= t '.details_2' %></li>
-        <li><%= t '.details_3' %></li>
-        <li><%= t '.details_4' %></li>
+        <li><%= t ".details_1" %></li>
+        <li><%= t ".details_2" %></li>
+        <li><%= t ".details_3" %></li>
+        <li><%= t ".details_4" %></li>
       </ul>
 
       <%= form.govuk_text_area :full_employment_details,
-                                label: { text: t('.employment_details_header'), tag: 'h2', size: 'm' },
-                                hint: { text: t('.employment_details_hint') },
-                                rows: 10 %>
+                               label: { text: t(".employment_details_header"), tag: "h2", size: "m" },
+                               hint: { text: t(".employment_details_hint") },
+                               rows: 10 %>
 
-    <%= next_action_buttons(
-          show_draft: true,
-          form: form
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

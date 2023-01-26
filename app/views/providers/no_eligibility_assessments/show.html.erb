@@ -1,8 +1,8 @@
 <%= page_template(
       page_title: t(".page_title"),
-      head_title: t('.no_cfe_assessment'),
+      head_title: t(".no_cfe_assessment"),
       template: :basic,
-      column_width: :full
+      column_width: :full,
     ) do %>
 
   <div class="interruption-panel">
@@ -15,6 +15,6 @@
         url: providers_legal_aid_application_no_eligibility_assessment_path(@legal_aid_application),
         method: :patch,
         show_draft: true,
-        continue_button_text: t('.continue_button')
+        continue_button_text: t(".continue_button"),
       ) %>
 <% end %>

@@ -2,27 +2,27 @@
       model: @form,
       url: providers_merits_task_list_linked_children_path(@proceeding),
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
     <%= page_template(
-          page_title: t('.h1-heading'),
-          head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
+          page_title: t(".h1-heading"),
+          head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
           template: :basic,
-          form: form
+          form:,
         ) do %>
 
       <%= form.govuk_check_boxes_fieldset :linked_children,
-                                          legend: {size: 'xl', tag: 'h1', text: page_title},
-                                          caption: { text: @proceeding.meaning, size: 'xl' } do %>
-        <div id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></div>
+                                          legend: { size: "xl", tag: "h1", text: page_title },
+                                          caption: { text: @proceeding.meaning, size: "xl" } do %>
+        <div id="select-all-that-apply-hint" class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
 
         <% @form.value_list.each do |child| %>
-          <%= form.govuk_check_box :linked_children, child[:id], '', multiple: true, link_errors: true, label: {text: child[:name]}, checked: child[:is_checked] %>
+          <%= form.govuk_check_box :linked_children, child[:id], "", multiple: true, link_errors: true, label: { text: child[:name] }, checked: child[:is_checked] %>
         <% end %>
       <% end %>
 
       <div class="govuk-!-padding-bottom-2"></div>
 
-      <%= next_action_buttons(show_draft: true, form: form) %>
+      <%= next_action_buttons(show_draft: true, form:) %>
     <% end %>
 <% end %>

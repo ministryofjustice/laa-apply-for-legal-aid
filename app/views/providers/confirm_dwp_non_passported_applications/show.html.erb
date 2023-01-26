@@ -1,27 +1,28 @@
 <div class="interruption-panel">
-  <%= page_template(page_title: t('.tab_title'), column_width: :full, template: :basic) do %>
+  <%= page_template(page_title: t(".tab_title"), column_width: :full, template: :basic) do %>
 
     <%= form_with(
           model: @form,
           url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
           method: :patch,
-          local: true
+          local: true,
         ) do |form| %>
 
+      <% options = [[true, t("generic.yes")], [false, t(".no")]] %>
+
       <%= form.govuk_collection_radio_buttons :correct_dwp_result,
-                                              [OpenStruct.new(value: true, label: t('generic.yes')),
-                                               OpenStruct.new(value: false, label: t('.no'))],
-                                              :value,
-                                              :label,
-                                              legend: {text: t('.title_html'), tag: 'h1', size: 'l'},
-                                              classes: ['govuk-!-margin-top-4'] %>
+                                              options,
+                                              :first,
+                                              :second,
+                                              legend: { text: t(".title_html"), tag: "h1", size: "l" },
+                                              classes: ["govuk-!-margin-top-4"] %>
 
       <% if display_hmrc_inset_text? %>
         <%= govuk_inset_text(text: t(".hmrc_inset_text")) %>
       <% end %>
 
       <% if @form.errors.any? %>
-        <%= link_to_accessible @form.errors.map { |error| error.message }.first, "#correct_dwp_result-true-field", class: 'govuk-heading-s' %>
+        <%= link_to_accessible @form.errors.map(&:message).first, "#correct_dwp_result-true-field", class: "govuk-heading-s" %>
       <% end %>
 
       <div class="govuk-!-padding-bottom-4"></div>
@@ -30,7 +31,7 @@
             url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
             method: :patch,
             show_draft: true,
-            continue_button_text: t('generic.save_and_continue')
+            continue_button_text: t("generic.save_and_continue"),
           ) %>
     <% end %>
   <% end %>

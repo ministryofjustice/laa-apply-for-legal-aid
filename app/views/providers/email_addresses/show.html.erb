@@ -1,27 +1,27 @@
 <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_email_address_path,
-        method: :patch,
-        local: true
+      model: @form,
+      url: providers_legal_aid_application_email_address_path,
+      method: :patch,
+      local: true,
     ) do |form| %>
 
     <%= page_template(
-        page_title: t('.page_title'),
-        page_heading_options: { margin_bottom: 3 },
-        form: form
-      ) do %>
+          page_title: t(".page_title"),
+          page_heading_options: { margin_bottom: 3 },
+          form:,
+        ) do %>
 
     <div class="govuk-!-padding-bottom-6"></div>
 
     <%= form.govuk_text_field(
           :email,
-          width: 'three-quarters',
-          hint: {text: t('.hint')},
-          label: {text: t('.label')}
+          width: "three-quarters",
+          hint: { text: t(".hint") },
+          label: { text: t(".label") },
         ) %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
-    <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
