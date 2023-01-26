@@ -1,10 +1,12 @@
 class DigestExporter
+  class SpreadsheetEmpty < StandardError; end
+
   def self.call
     new.call
   end
 
   def initialize
-    log_message "DigestExporter starting"
+    log_message "Initializing"
     secret_file = StringIO.new(google_secret.to_json)
     @session = GoogleDrive::Session.from_service_account_key(secret_file)
     @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
@@ -21,16 +23,24 @@ class DigestExporter
 private
 
   def log_message(message)
+    message = "Digest::Exporter :: #{message}"
     message = Time.zone.now.strftime("%F %T.%L ") + message if Rails.env.development?
     Rails.logger.info message
   end
 
   def update_and_save_worksheet
-    log_message "updating cells"
+    log_message "update_and_save_worksheet"
+    log_message "updating cells, @rows.count: #{@rows.count}"
     @worksheet.update_cells(2, 1, @rows)
     log_message "saving worksheet"
     @worksheet.save
+    raise SpreadsheetEmpty, "Spreadsheet unexpectedly empty" if @worksheet.rows.count == 1
+
     log_message "All records written and worksheet saved"
+  rescue SpreadsheetEmpty => e
+    log_message "Job thinks it succeeded but the spreadsheet is empty"
+    AlertManager.capture_exception(e)
+    raise
   end
 
   def digest_ids
@@ -43,19 +53,23 @@ private
   end
 
   def save_digest_to_rows(digest_ids)
-    log_message "#{digest_ids.size} records to be saved"
+    log_message "save_digest_to_rows"
+    log_message "#{digest_ids.size} records to be added to @rows"
     digest_ids.each_with_index do |digest_id, _index|
       digest = ApplicationDigest.find(digest_id)
       @rows << digest.to_google_sheet_row
     end
+    log_message "@row.count: #{@rows.size}"
   end
 
   def delete_existing_data
+    log_message "delete_existing_data"
     # You can't delete all the rows in a worksheet, so we delete all but one, and we'll overwrite that
     # with the column headers
     @worksheet.delete_rows(1, @worksheet.max_rows - 1)
     @worksheet.save
     log_message "Existing data removed from spreadsheet"
+    log_message "@row.count: #{@rows.size}"
   end
 
   def write_header_row
