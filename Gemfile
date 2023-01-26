@@ -94,10 +94,10 @@ gem "wdm", ">= 0.1.0" if Gem.win_platform?
 gem "grover"
 
 # DFE formbuilder
-gem "govuk_design_system_formbuilder"
+gem "govuk_design_system_formbuilder", "4.0.0a1"
 
 # DFE ViewComponent library
-gem "govuk-components"
+gem "govuk-components", "4.0.0a2"
 
 # Catching unsafe migrations in development
 gem "strong_migrations"
