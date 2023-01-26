@@ -1,6 +1,5 @@
 class ImportBankDataWorker
   include Sidekiq::Worker
-  include Sidekiq::Status::Worker
   sidekiq_options retry: false
 
   attr_reader :legal_aid_application_id

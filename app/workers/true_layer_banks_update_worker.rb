@@ -1,7 +1,6 @@
 class TrueLayerBanksUpdateWorker
   DataRetrievalError = Class.new(StandardError)
   include Sidekiq::Worker
-  include Sidekiq::Status::Worker
 
   UPDATE_INTERVAL = 1.hour
 

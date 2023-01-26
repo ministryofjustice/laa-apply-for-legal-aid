@@ -1,5 +1,4 @@
 require "sidekiq"
-require "sidekiq-status"
 require "prometheus_exporter/client"
 require "prometheus_exporter/instrumentation"
 
@@ -10,19 +9,10 @@ module Dashboard; end
 
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url, namespace: } if redis_url
-
-  # accepts :expiration (optional)
-  Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
 end
 
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url, namespace: } if redis_url
-
-  # accepts :expiration (optional)
-  Sidekiq::Status.configure_server_middleware config, expiration: 30.minutes
-
-  # accepts :expiration (optional)
-  Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
 
   if Rails.env.production? && Rails.configuration.x.kubernetes_deployment
     config.server_middleware do |chain|

@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root to: "providers/start#index"
 
   require "sidekiq/web"
-  require "sidekiq-status/web"
   mount Sidekiq::Web => "/sidekiq"
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
