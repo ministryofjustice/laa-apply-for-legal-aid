@@ -9,6 +9,8 @@ namespace = ENV.fetch("HOST", "laa-apply")
 module Dashboard; end
 
 Sidekiq.configure_client do |config|
+  config.logger = Rails.logger
+  config.logger.level = Logger::WARN
   config.redis = { url: redis_url, namespace: } if redis_url
 
   # accepts :expiration (optional)
