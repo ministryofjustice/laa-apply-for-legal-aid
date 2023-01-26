@@ -197,10 +197,11 @@ en:
 
     confirm_dwp_non_passported_applications:
       show:
-        'no': No, my client receives a passporting benefit
+        option_no: No, my client receives a passporting benefit
         tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
-        title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not receive a passporting benefit – is this correct?
-        hmrc_inset_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
+        title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not receive a passporting benefit.
+        is_this_correct: Are the DWP records correct?
+        hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
 
     confirm_multiple_delegated_functions_dates:
       show:
