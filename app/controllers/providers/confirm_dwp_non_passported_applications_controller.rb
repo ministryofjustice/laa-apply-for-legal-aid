@@ -1,7 +1,7 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
     include ApplicantDetailsCheckable
-    helper_method :display_hmrc_inset_text?
+    helper_method :display_hmrc_text?
 
     def show
       delete_check_benefits_from_history
@@ -56,6 +56,6 @@ module Providers
       hmrc_call_enabled?
     end
 
-    alias_method :display_hmrc_inset_text?, :make_hmrc_call?
+    alias_method :display_hmrc_text?, :make_hmrc_call?
   end
 end

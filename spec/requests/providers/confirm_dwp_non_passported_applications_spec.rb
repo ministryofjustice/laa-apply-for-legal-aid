@@ -45,7 +45,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
 
       it "displays the HMRC inset text" do
         subject
-        expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text"))
+        expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_text"))
       end
     end
   end

@@ -3,7 +3,7 @@ Feature: Change applicant email address
   Scenario: I want to change the email address from the about financial assessment page
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     And I should be on a page showing "What is your client's employment status?"
@@ -30,7 +30,7 @@ Feature: Change applicant email address
   Scenario: I want to change the applicant email address once the email has been sent
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     And I should be on a page showing "What is your client's employment status?"

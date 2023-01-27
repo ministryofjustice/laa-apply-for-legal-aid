@@ -110,12 +110,12 @@ Feature: passported_journey completes application
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
     Then I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on a page showing "What is your client's employment status?"
     And I click link 'Back'
-    And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
     Then I choose 'No, my client receives a passporting benefit'
     And I click 'Save and continue'
     And I should be on a page showing "Check your client's details"
@@ -136,7 +136,7 @@ Feature: passported_journey completes application
   Scenario: A negative benefit check allows the solicitor to override the result
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
     Then I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your client's details"

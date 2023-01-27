@@ -1,38 +1,32 @@
-<div class="interruption-panel">
-  <%= page_template(page_title: t(".tab_title"), column_width: :full, template: :basic) do %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
 
-    <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
-          method: :patch,
-          local: true,
-        ) do |form| %>
+  <%= page_template(
+        page_title: t(".tab_title"),
+        template: :basic,
+        column_width: :full,
+        form:,
+      ) do %>
 
-      <% options = [[true, t("generic.yes")], [false, t(".no")]] %>
+    <div class="interruption-panel govuk-!-margin-bottom-6">
+      <h1 class="govuk-heading-l"><%= t(".title_html") %></h1>
+    </div>
 
-      <%= form.govuk_collection_radio_buttons :correct_dwp_result,
-                                              options,
-                                              :first,
-                                              :second,
-                                              legend: { text: t(".title_html"), tag: "h1", size: "l" },
-                                              classes: ["govuk-!-margin-top-4"] %>
+    <%= form.govuk_fieldset legend: { size: "l", tag: "h2", text: t(".is_this_correct") }, class: "govuk-!-margin-bottom-6" do %>
 
-      <% if display_hmrc_inset_text? %>
-        <%= govuk_inset_text(text: t(".hmrc_inset_text")) %>
+      <% if display_hmrc_text? %>
+        <p class="govuk-body"><%= t(".hmrc_text") %></p>
       <% end %>
 
-      <% if @form.errors.any? %>
-        <%= link_to_accessible @form.errors.map(&:message).first, "#correct_dwp_result-true-field", class: "govuk-heading-s" %>
-      <% end %>
+      <%= form.govuk_radio_button :correct_dwp_result, true, link_errors: true, label: { text: t("generic.yes") } %>
+      <%= form.govuk_radio_button :correct_dwp_result, false, label: { text: t(".option_no") } %>
 
-      <div class="govuk-!-padding-bottom-4"></div>
-
-      <%= next_action_buttons_with_form(
-            url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
-            method: :patch,
-            show_draft: true,
-            continue_button_text: t("generic.save_and_continue"),
-          ) %>
     <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
-</div>
+<% end %>
