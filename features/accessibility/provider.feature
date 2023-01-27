@@ -52,14 +52,14 @@ Feature: Provider accessibility
     Then I should be on a page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     And the page is accessible
 
   @javascript @vcr
   Scenario: I complete the financial assessment eligibility section for a non-passported application
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "What is your client's employment status?"

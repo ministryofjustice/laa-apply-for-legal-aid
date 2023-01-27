@@ -140,7 +140,7 @@ Feature: Applicant details
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     And I should be on a page showing "What is your client's employment status?"
@@ -207,7 +207,7 @@ Feature: Applicant details
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     And I should be on a page showing "What is your client's employment status?"
@@ -313,12 +313,12 @@ Feature: Applicant details
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS when the applicant is not eligible
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     And I should be on a page showing "What is your client's employment status?"
@@ -332,7 +332,7 @@ Feature: Applicant details
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     Then I choose 'No, my client receives a passporting benefit'
     Then I click "Save and continue"
     Then I should be on a page showing "Check your client's details"
