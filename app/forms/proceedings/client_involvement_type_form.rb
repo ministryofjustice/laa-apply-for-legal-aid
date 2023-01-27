@@ -4,12 +4,10 @@ module Proceedings
 
     attr_accessor :client_involvement_type_ccms_code
 
-    validates :client_involvement_type_ccms_code, presence: true
+    before_validation :assign_client_involvement_type_description,
+                      if: -> { client_involvement_type_ccms_code.present? }
 
-    def save
-      extrapolate_client_involvement_type_description if client_involvement_type_ccms_code
-      super
-    end
+    validates :client_involvement_type_ccms_code, presence: true
 
     def client_involvement_types
       @client_involvement_types ||= LegalFramework::ClientInvolvementTypes::All.call
@@ -17,8 +15,14 @@ module Proceedings
 
   private
 
-    def extrapolate_client_involvement_type_description
-      model.client_involvement_type_description = client_involvement_types.filter_map { |cit| cit.description if cit.ccms_code == client_involvement_type_ccms_code }.reduce
+    def assign_client_involvement_type_description
+      model.client_involvement_type_description = client_involvement_type.description
+    end
+
+    def client_involvement_type
+      client_involvement_types.find do |client_involvement_type|
+        client_involvement_type.ccms_code == client_involvement_type_ccms_code
+      end
     end
   end
 end
