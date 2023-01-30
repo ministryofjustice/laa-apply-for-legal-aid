@@ -6,7 +6,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_means_own_home_path(application) },
           forward: ->(application) { application.own_home_no? ? :vehicles : :property_values },
           carry_on_sub_flow: ->(application) { !application.own_home_no? },
-          check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
         property_values: {
           path: ->(application) { urls.providers_legal_aid_application_means_property_value_path(application) },

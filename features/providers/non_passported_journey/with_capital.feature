@@ -70,7 +70,7 @@ Feature: non_passported_journey with capital
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     Then I select 'England Infected Blood Support Scheme'
     Then I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
   @javascript @vcr
   Scenario: Using the back button to change none_of_these checkboxes
@@ -80,7 +80,7 @@ Feature: non_passported_journey with capital
     When I select "My client has none of these savings or investments"
     And I click "Save and continue"
     And I click "Save and continue"
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     When I click link "Back"
     When I click link "Back"
     Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
@@ -90,7 +90,7 @@ Feature: non_passported_journey with capital
     When I select "My client has none of these savings or investments"
     And I click "Save and continue"
     And I click "Save and continue"
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     When I click Check Your Answers Change link for 'Other assets'
     Then I should be on the "other_assets" page showing "Which assets does your client have?"
     When I select "My client has none of these assets"

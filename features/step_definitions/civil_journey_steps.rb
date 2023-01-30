@@ -180,7 +180,7 @@ Given("I am checking answers on the means summary page") do
     :provider_assessing_means,
   )
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
+  visit(providers_legal_aid_application_check_capital_answers_path(@legal_aid_application))
 end
 
 Given("I am checking the applicant's means income answers") do

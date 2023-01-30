@@ -1,5 +1,5 @@
 module Providers
-  class MeansSummariesController < ProviderBaseController
+  class CheckCapitalAnswersController < ProviderBaseController
     def show
       legal_aid_application.check_non_passported_means! unless legal_aid_application.checking_non_passported_means?
     end

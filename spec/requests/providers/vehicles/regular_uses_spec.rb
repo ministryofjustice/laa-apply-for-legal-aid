@@ -149,7 +149,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
 
       it "redirects to non-passported check answers page" do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(legal_aid_application))
       end
     end
 

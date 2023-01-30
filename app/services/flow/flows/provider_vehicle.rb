@@ -13,7 +13,7 @@ module Flow
               :offline_accounts
             end
           end,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
           carry_on_sub_flow: ->(application) { application.own_vehicle? },
         },
         vehicles_estimated_values: {
@@ -37,7 +37,7 @@ module Flow
               :offline_accounts
             end
           end,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
       }.freeze
     end

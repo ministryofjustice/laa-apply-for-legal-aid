@@ -97,7 +97,7 @@ RSpec.describe "provider own home requests" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
             it "redirects to the means summary page" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(legal_aid_application))
             end
           end
         end

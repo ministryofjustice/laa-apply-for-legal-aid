@@ -113,7 +113,7 @@ module Flow
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: :savings_and_investments,
-          check_answers: :means_summaries,
+          check_answers: :check_capital_answers,
         },
         offline_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
@@ -155,7 +155,7 @@ module Flow
             end
           end,
           carry_on_sub_flow: ->(application) { application.own_capital? },
-          check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(application) { application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
         other_assets: {
           path: ->(application) { urls.providers_legal_aid_application_means_other_assets_path(application) },
@@ -165,11 +165,11 @@ module Flow
             elsif application.capture_policy_disregards?
               :policy_disregards
             else
-              application.passported? ? :check_passported_answers : :means_summaries
+              application.passported? ? :check_passported_answers : :check_capital_answers
             end
           end,
           carry_on_sub_flow: ->(application) { application.other_assets? },
-          check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(application) { application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_means_restrictions_path(application) },
@@ -177,15 +177,15 @@ module Flow
             if application.capture_policy_disregards?
               :policy_disregards
             else
-              application.passported? ? :check_passported_answers : :means_summaries
+              application.passported? ? :check_passported_answers : :check_capital_answers
             end
           end,
-          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
         },
         policy_disregards: {
           path: ->(application) { urls.providers_legal_aid_application_means_policy_disregards_path(application) },
-          forward: ->(application) { application.passported? ? :check_passported_answers : :means_summaries },
-          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :means_summaries : :check_passported_answers },
+          forward: ->(application) { application.passported? ? :check_passported_answers : :check_capital_answers },
+          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
         },
         check_passported_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
@@ -225,8 +225,8 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_means_check_income_answers_path(application) },
           forward: :own_homes,
         },
-        means_summaries: {
-          path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
+        check_capital_answers: {
+          path: ->(application) { urls.providers_legal_aid_application_check_capital_answers_path(application) },
           forward: :capital_income_assessment_results,
         },
         no_eligibility_assessments: {

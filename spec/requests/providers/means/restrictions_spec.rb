@@ -90,7 +90,7 @@ RSpec.describe "provider restrictions request" do
             end
 
             it "redirects to check passported answers" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+              expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(application))
             end
           end
         end
@@ -132,7 +132,7 @@ RSpec.describe "provider restrictions request" do
 
           it "redirects to the means summary page" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
+            expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path)
           end
         end
       end

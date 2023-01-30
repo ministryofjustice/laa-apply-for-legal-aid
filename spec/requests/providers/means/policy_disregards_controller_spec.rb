@@ -87,7 +87,7 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
 
           it "redirects to means summary page" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
+            expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path)
           end
         end
       end

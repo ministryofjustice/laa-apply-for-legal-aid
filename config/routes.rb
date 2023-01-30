@@ -215,7 +215,7 @@ Rails.application.routes.draw do
       resources :bank_transactions, only: [] do
         patch "remove_transaction_type", on: :member
       end
-      resource :means_summary, only: %i[show update]
+      resource :check_capital_answers, only: %i[show update]
       resource :no_eligibility_assessment, only: %i[show update]
 
       resource :use_ccms, only: %i[show]

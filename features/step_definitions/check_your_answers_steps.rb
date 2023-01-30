@@ -70,7 +70,7 @@ Given("I have completed the income and capital sections of a non-passported appl
 end
 
 And("I am viewing the means summary check your answers page") do
-  visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
+  visit(providers_legal_aid_application_check_capital_answers_path(@legal_aid_application))
 end
 
 And("I am viewing the means income check your answers page") do

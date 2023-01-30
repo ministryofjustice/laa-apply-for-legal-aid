@@ -209,7 +209,7 @@ Feature: Provider accessibility
     Then I select 'England Infected Blood Support Scheme'
     And the page is accessible
     Then I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'
     Then I should be on the 'capital_income_assessment_result' page showing 'How we calculated your client\'s financial eligibility'

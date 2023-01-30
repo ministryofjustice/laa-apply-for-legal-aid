@@ -84,7 +84,7 @@ Feature: Check pending employment
 
     When I check "My client has received none of these payments"
     And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if John Pending can get legal aid"

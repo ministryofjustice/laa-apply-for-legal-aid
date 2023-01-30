@@ -145,7 +145,7 @@ Feature: Completing and checking means answers backwards and forwards
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
 
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
 
   @javascript
@@ -246,7 +246,7 @@ Feature: Completing and checking means answers backwards and forwards
     And I should be on a page showing 'Enter the total amount in all accounts.'
     Then I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     And the answer for 'has offline savings' should be 'No'
     And I should not see 'Amount in offline savings accounts'
 
@@ -261,7 +261,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I deselect 'Second property or holiday home'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     And the answer for 'Second home' should be 'No'
     And I should not see 'Second property or holiday home estimated value'
 
