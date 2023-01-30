@@ -21,11 +21,8 @@ module CCMS
     delegate :capital_contribution_required?, to: :cfe_result
 
     def initialize(legal_aid_application)
-      # TODO: this if/else needs tidying up in ap-3338 where we will create a blank cfe_result for these cases
       @legal_aid_application = legal_aid_application
-      if legal_aid_application.uploading_bank_statements?
-        nil
-      elsif legal_aid_application.cfe_result.nil?
+      if legal_aid_application.cfe_result.nil?
         raise "Unable to determine whether Manual review is required before means assessment"
       end
     end
