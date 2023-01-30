@@ -42,6 +42,7 @@ RSpec.describe Admin::SettingsController do
           enable_ccms_submission: "true",
           enable_loop: "true",
           means_test_review_phase_one: "true",
+          cfe_async_percent: 10,
         },
       }
     end

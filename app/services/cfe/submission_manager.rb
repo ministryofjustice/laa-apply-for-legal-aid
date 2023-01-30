@@ -10,13 +10,20 @@ module CFE
 
     def initialize(legal_aid_application_id)
       @legal_aid_application_id = legal_aid_application_id
+      @run_async = FeatureFlag::PercentageToday.call("CFE::Submissions", ENV.fetch("CFE_ASYNC_PERCENT", 0.1))
     end
 
     def call
       make_logged_call_to CreateAssessmentService
-      Async do |task|
+      if @run_async
+        Async do |task|
+          services.each do |service|
+            task.async { make_logged_call_to service }
+          end
+        end
+      else # TODO: test this
         services.each do |service|
-          task.async { make_logged_call_to service }
+          make_logged_call_to service
         end
       end
       make_logged_call_to ObtainAssessmentResultService
