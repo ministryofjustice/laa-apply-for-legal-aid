@@ -142,7 +142,7 @@ RSpec.describe Providers::Means::CashIncomesController do
 
         it "redirects to the checking answers income page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
         end
       end
 

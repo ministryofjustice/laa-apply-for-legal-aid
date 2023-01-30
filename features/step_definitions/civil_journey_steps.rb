@@ -192,7 +192,7 @@ Given("I am checking the applicant's means income answers") do
     :checking_means_income,
   )
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_means_check_answers_incomes_path(@legal_aid_application))
+  visit(providers_legal_aid_application_means_check_income_answers_path(@legal_aid_application))
 end
 
 Given("I have completed the non-passported means assessment and start the merits assessment") do

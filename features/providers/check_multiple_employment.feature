@@ -55,7 +55,7 @@ Feature: Check multiple employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     Then I should be on a page showing "Paisley also earns 50 gbp"
 
 

@@ -151,7 +151,7 @@ module Flow
               raise "Unexpected hmrc status #{status.inspect}"
             end
           end,
-          check_answers: :check_answers_incomes,
+          check_answers: :check_income_answers,
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },

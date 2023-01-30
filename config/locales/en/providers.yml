@@ -884,7 +884,7 @@ en:
         show:
           page_title: "Are you sure you want to remove %{name}?"
           error: Select yes if you wish to delete the dependant
-      check_answers_incomes:
+      check_income_answers:
         show:
           h1-heading: Check your answers
           what_happens_next:

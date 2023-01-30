@@ -61,7 +61,7 @@ Feature: non_passported_journey with means
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
     Then I should be on a page with title "Which payments does your client receive?"
@@ -73,7 +73,7 @@ Feature: non_passported_journey with means
     Then I should be on a page showing "Sort your client's income into categories"
 
     When I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
     When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"

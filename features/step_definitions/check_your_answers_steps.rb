@@ -74,7 +74,7 @@ And("I am viewing the means summary check your answers page") do
 end
 
 And("I am viewing the means income check your answers page") do
-  visit(providers_legal_aid_application_means_check_answers_incomes_path(@legal_aid_application))
+  visit(providers_legal_aid_application_means_check_income_answers_path(@legal_aid_application))
 end
 
 Then("the {string} section's questions should exist:") do |section, table|

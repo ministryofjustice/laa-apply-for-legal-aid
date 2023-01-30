@@ -27,7 +27,7 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
 
   When I choose "No"
   And I click 'Save and continue'
-  Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+  Then I should be on the 'check_income_answers' page showing 'Check your answers'
   And the answer for 'extra_employment_information' should be 'Yes'
   And the answer for 'extra_employment_information_details' should be 'some extra details about employment'
 
@@ -57,7 +57,7 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
 
   When I choose "No"
   And I click 'Save and continue'
-  Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+  Then I should be on the 'check_income_answers' page showing 'Check your answers'
   And the answer for 'full_employment_details' should be 'all the details about employment'
 
 @javascript
@@ -86,5 +86,5 @@ Scenario: Completing the means journey for an employed applicant with multiple j
 
   When I choose "No"
   And I click 'Save and continue'
-  Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+  Then I should be on the 'check_income_answers' page showing 'Check your answers'
   And the answer for 'full_employment_details' should be 'all the details about employment'

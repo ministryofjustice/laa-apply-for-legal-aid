@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::CheckAnswersIncomesController do
+RSpec.describe Providers::Means::CheckIncomeAnswersController do
   include ActionView::Helpers::NumberHelper
   let(:provider) { create(:provider) }
   let(:applicant) { create(:applicant) }
@@ -21,7 +21,7 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/means/check_answers_income" do
-    subject(:request) { get providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_means_check_income_answers_path(legal_aid_application) }
 
     let!(:bank_transactions) { create_list(:bank_transaction, 3, transaction_type:, bank_account:) }
 
@@ -54,7 +54,7 @@ RSpec.describe Providers::Means::CheckAnswersIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/check_answers_income" do
-    subject(:request) { patch providers_legal_aid_application_means_check_answers_incomes_path(legal_aid_application) }
+    subject(:request) { patch providers_legal_aid_application_means_check_income_answers_path(legal_aid_application) }
 
     before do
       login_as provider

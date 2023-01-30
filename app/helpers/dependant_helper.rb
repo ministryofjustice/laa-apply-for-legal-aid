@@ -28,42 +28,42 @@ module DependantHelper
 
   def _name(dependant)
     build_ostruct(
-      t("name", scope: "providers.means.check_answers_incomes.dependants"),
+      t("name", scope: "providers.means.check_income_answers.dependants"),
       dependant.name,
     )
   end
 
   def date_of_birth(dependant)
     build_ostruct(
-      t("date_of_birth", scope: "providers.means.check_answers_incomes.dependants"),
+      t("date_of_birth", scope: "providers.means.check_income_answers.dependants"),
       dependant.date_of_birth,
     )
   end
 
   def relationship(dependant)
     build_ostruct(
-      t("relationship", scope: "providers.means.check_answers_incomes.dependants"),
+      t("relationship", scope: "providers.means.check_income_answers.dependants"),
       dependant.relationship.nil? ? "" : t(dependant.relationship, scope: "shared.forms.dependants.relationship.option"),
     )
   end
 
   def in_full_time_education(dependant)
     build_ostruct(
-      t("in_full_time_education", scope: "providers.means.check_answers_incomes.dependants"),
+      t("in_full_time_education", scope: "providers.means.check_income_answers.dependants"),
       yes_no(dependant.in_full_time_education),
     )
   end
 
   def income(dependant)
     build_ostruct(
-      t("income", scope: "providers.means.check_answers_incomes.dependants"),
+      t("income", scope: "providers.means.check_income_answers.dependants"),
       dependant.has_income? ? gds_number_to_currency(dependant.monthly_income) : yes_no(dependant.has_income?),
     )
   end
 
   def assets(dependant)
     build_ostruct(
-      t("assets", scope: "providers.means.check_answers_incomes.dependants"),
+      t("assets", scope: "providers.means.check_income_answers.dependants"),
       dependant.has_assets_more_than_threshold? ? gds_number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?),
     )
   end

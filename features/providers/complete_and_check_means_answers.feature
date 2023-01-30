@@ -45,7 +45,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
   @javascript @vcr
   Scenario: I navigate to the Check your answers page and then add some outgoing transaction types
@@ -117,7 +117,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Sort your client's regular payments into categories"
 
     When I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
     When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
@@ -175,7 +175,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should see 'Dependant 1'
     And I should see 'Dependant 2'
     And the answer for 'dependants' should be 'Yes'
@@ -194,14 +194,14 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should see 'Dependant 1'
     And the answer for 'dependants' should be 'Yes'
     When I click Check Your Answers Change link for 'dependants'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'check_answers_incomes' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should not see 'Dependant 1'
     And the answer for 'dependants' should be 'No'
 

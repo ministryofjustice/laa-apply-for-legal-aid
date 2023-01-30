@@ -1,6 +1,6 @@
 module Providers
   module Means
-    class CheckAnswersIncomesController < ProviderBaseController
+    class CheckIncomeAnswersController < ProviderBaseController
       before_action :set_transaction_types, only: :show
 
       def show
