@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "standardjs": "standard",
-    "stylelint": "stylelint **/*.scss",
-    "test": "jest"
+    "stylelint": "stylelint app/assets/stylesheets",
+    "test": "jest",
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --style=compressed --load-path=node_modules"
   },
   "dependencies": {
     "@rails/activestorage": "^7.0.4",
@@ -16,11 +17,12 @@
     "jest": "^29.4.2",
     "jquery": "^3.6.3",
     "js-search": "^2.0.0",
-    "postcss": "^8.4.21"
+    "sass": "^1.57.1"
   },
   "devDependencies": {
     "jest-environment-jsdom": "^29.4.2",
     "jest-environment-jsdom-global": "^4.0.0",
+    "postcss": "^8.4.21",
     "puppeteer": "19.2.0",
     "standard": "^17.0.0",
     "stylelint": "^14.16.1",

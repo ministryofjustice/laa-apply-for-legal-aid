@@ -166,6 +166,8 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    cssbundling-rails (1.1.2)
+      railties (>= 6.0.0)
     cucumber (8.0.0)
       builder (~> 3.2, >= 3.2.4)
       cucumber-ci-environment (~> 9.0, >= 9.0.4)
@@ -465,6 +467,11 @@ GEM
     pg (1.4.5)
     pg_dump_anonymize (0.1.2)
     prometheus_exporter (0.4.17)
+    propshaft (0.6.4)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -738,6 +745,7 @@ DEPENDENCIES
   business
   byebug
   capybara (>= 3.36.0, < 4.0)
+  cssbundling-rails
   cucumber
   cucumber-rails (>= 2.4.0)
   database_cleaner
@@ -782,6 +790,7 @@ DEPENDENCIES
   pg
   pg_dump_anonymize
   prometheus_exporter (= 0.4.17)
+  propshaft
   pry-byebug
   pry-rescue
   pry-stack_explorer

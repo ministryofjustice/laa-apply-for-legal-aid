@@ -1,3 +1,9 @@
+$govuk-global-styles: true;
+$govuk-new-link-styles: true;
+$govuk-assets-path: "/";
+
+@import "govuk-frontend/govuk/all";
+
 // Project specific
 
 // Everything below this comment should be project specific.
@@ -29,7 +35,5 @@
 @import "citizens/spinner";
 @import "providers/legal_aid_applications";
 @import "providers/proceeding_types";
-$govuk-new-link-styles: true;
-@import "~dropzone/src/dropzone";
-@import "~dropzone/src/basic";
-@import "govuk-frontend";
+@import "dropzone/src/dropzone";
+@import "dropzone/src/basic";

@@ -208,6 +208,7 @@ jobs:
         command: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
           chmod +x ./tmp/cc-test-reporter
+    - run: bundle exec rails assets:precompile
     - run:
         name: Run ruby tests
         command: |
@@ -246,6 +247,7 @@ jobs:
     - *restore_js_packages_cache
     - *install_js_packages
     - *save_js_packages_cache
+    - run: bundle exec rails assets:precompile
     - run:
         name: Run integration tests
         command: |

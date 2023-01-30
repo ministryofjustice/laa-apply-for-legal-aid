@@ -85,6 +85,10 @@ gem "faker", ">=1.9.1"
 
 gem "webpacker", "~> 5"
 
+# Rails 7 asset management
+gem "cssbundling-rails"
+gem "propshaft"
+
 gem "wdm", ">= 0.1.0" if Gem.win_platform?
 
 # generating PDFs
