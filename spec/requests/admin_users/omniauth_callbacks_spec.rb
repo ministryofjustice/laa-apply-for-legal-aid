@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "admin users omniauth call back" do
-  around(:example) do |example|
+  around do |example|
     OmniAuth.config.test_mode = true
     example.run
     OmniAuth.config.mock_auth[:google_oauth2] = nil

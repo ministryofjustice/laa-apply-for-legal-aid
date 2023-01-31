@@ -2,7 +2,7 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe "applicants omniauth call back" do
-  around(:example) do |example|
+  around do |example|
     OmniAuth.config.test_mode = true
     example.run
     OmniAuth.config.mock_auth[:true_layer] = nil

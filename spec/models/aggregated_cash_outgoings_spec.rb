@@ -54,7 +54,7 @@ RSpec.describe AggregatedCashOutgoings do
       let(:month_3_date) { Date.new(2020, 10, 1) }
       let(:aco) { described_class.find_by(legal_aid_application_id: application.id) }
 
-      around(:each) do |example|
+      around do |example|
         travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
         example.run
         travel_back
