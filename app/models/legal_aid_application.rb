@@ -509,6 +509,14 @@ class LegalAidApplication < ApplicationRecord
     uploading_bank_statements? && housing_payments?
   end
 
+  def truelayer_path?
+    provider_received_citizen_consent == true
+  end
+
+  def bank_statement_upload_path?
+    client_not_given_consent_to_open_banking?
+  end
+
 private
 
   def client_not_given_consent_to_open_banking?
