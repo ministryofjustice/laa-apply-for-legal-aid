@@ -230,20 +230,16 @@ module CCMS
           end
         end
 
-        # TODO: This test needs to be re-enabled once the work on AP-3338 is complete
-        # or it may no longer be required at that stage and can be deleted
-        #
-        # context "with uploading_bank_statements" do
-        #   let(:provider) { create :provider, :with_bank_statement_upload_permissions }
-        #   let(:legal_aid_application) { create :legal_aid_application, attachments: [bank_statement], provider: }
-        #   let(:bank_statement) { create :attachment, :bank_statement }
-        #
-        #   let!(:cfe_result) { nil }
-        #
-        #   it "returns true" do
-        #     expect(subject).to be true
-        #   end
-        # end
+        context "with uploading_bank_statements" do
+          let(:provider) { create(:provider, :with_bank_statement_upload_permissions) }
+          let(:legal_aid_application) { create(:legal_aid_application, attachments: [bank_statement], provider:) }
+          let(:bank_statement) { create(:attachment, :bank_statement) }
+          let!(:cfe_result) { create(:cfe_v5_result, submission: cfe_submission) }
+
+          it "returns true" do
+            expect(subject).to be true
+          end
+        end
       end
     end
 
