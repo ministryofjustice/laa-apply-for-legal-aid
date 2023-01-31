@@ -6,6 +6,7 @@ module Dashboard
       subject(:dashboard_applicant_email) { described_class.new(application) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
+      let(:application) { create(:legal_aid_application, :with_applicant) }
       let(:datasets_client) { double Geckoboard::DatasetsClient }
       let(:dataset) { double Geckoboard::Dataset }
 
@@ -14,8 +15,6 @@ module Dashboard
         allow(geckoboard_client).to receive(:ping).and_return(true)
         allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
       end
-
-      let(:application) { create(:legal_aid_application, :with_applicant) }
 
       it { is_expected.to be_a described_class }
 

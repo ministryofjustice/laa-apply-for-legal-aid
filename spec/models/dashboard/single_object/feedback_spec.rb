@@ -6,6 +6,7 @@ module Dashboard
       subject(:dashboard_feedback) { described_class.new(feedback) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
+      let(:feedback) { create(:feedback, :from_provider, satisfaction: 2, difficulty: 4) }
       let(:datasets_client) { double Geckoboard::DatasetsClient }
       let(:dataset) { double Geckoboard::Dataset }
 
@@ -14,8 +15,6 @@ module Dashboard
         allow(geckoboard_client).to receive(:ping).and_return(true)
         allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
       end
-
-      let(:feedback) { create(:feedback, :from_provider, satisfaction: 2, difficulty: 4) }
 
       it { is_expected.to be_a described_class }
 
