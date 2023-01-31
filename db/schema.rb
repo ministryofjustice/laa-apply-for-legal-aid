@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_19_133711) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_31_084513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -144,6 +144,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_19_133711) do
     t.boolean "employed", default: false, null: false
     t.boolean "hmrc_data_used", default: false, null: false
     t.boolean "referred_to_caseworker", default: false, null: false
+    t.boolean "true_layer_path"
+    t.boolean "bank_statements_path"
+    t.boolean "true_layer_data"
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
