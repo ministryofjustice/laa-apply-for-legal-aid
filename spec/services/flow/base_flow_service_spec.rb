@@ -34,7 +34,7 @@ RSpec.describe Flow::BaseFlowService do
     end
 
     context "Welsh locale" do
-      around(:each) do |example|
+      around do |example|
         I18n.with_locale(:cy) { example.run }
       end
 

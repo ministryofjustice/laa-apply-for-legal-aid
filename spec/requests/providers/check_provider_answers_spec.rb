@@ -191,7 +191,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
       it 'changes the stage back to "entering_applicant_details' do
         subject
-        expect(application.reload.entering_applicant_details?).to be_truthy
+        expect(application.reload).to be_entering_applicant_details
       end
     end
   end

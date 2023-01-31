@@ -6,7 +6,7 @@ RSpec.describe LegalAidApplications::SharedOwnershipForm, type: :form do
   let(:params) { { shared_ownership: "No" } }
   let(:form_params) { params.merge(model: legal_aid_application) }
 
-  before(:each) do
+  before do
     @form = described_class.new(form_params)
   end
 

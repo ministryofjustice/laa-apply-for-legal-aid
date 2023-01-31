@@ -38,7 +38,7 @@ RSpec.describe "check your answers requests" do
     end
 
     it 'changes the state to "checking_citizen_answers"' do
-      expect(legal_aid_application.reload.checking_citizen_answers?).to be_truthy
+      expect(legal_aid_application.reload).to be_checking_citizen_answers
     end
 
     it "displays the name of the firm" do

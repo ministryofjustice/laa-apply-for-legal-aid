@@ -108,7 +108,7 @@ RSpec.describe "check merits answers requests" do
       end
 
       it 'changes the state to "checking_merits_answers"' do
-        expect(application.reload.checking_merits_answers?).to be_truthy
+        expect(application.reload).to be_checking_merits_answers
       end
 
       it "has a back link to the client declaration page" do

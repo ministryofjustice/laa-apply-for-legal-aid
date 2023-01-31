@@ -5,8 +5,6 @@ module OmniAuth
     RSpec.describe Client do
       subject(:client) { described_class.new }
 
-      it { is_expected.to respond_to :oauth_client, :access_token, :bearer_token }
-
       before do
         stub_request(:post, %r{(http|https).*laa-hmrc-interface.*\.cloud-platform\.service\.justice\.gov\.uk/oauth/token})
           .to_return(
@@ -15,6 +13,8 @@ module OmniAuth
             headers: { "Content-Type" => "application/json; charset=utf-8" },
           )
       end
+
+      it { is_expected.to respond_to :oauth_client, :access_token, :bearer_token }
 
       describe "#oauth_client" do
         subject { described_class.new.oauth_client }

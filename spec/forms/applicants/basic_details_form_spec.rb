@@ -3,16 +3,7 @@ require "rails_helper"
 RSpec.describe Applicants::BasicDetailsForm, type: :form do
   subject { described_class.new(params) }
 
-  describe ".model_name" do
-    it 'is "Applicant"' do
-      expect(described_class.model_name).to eq("Applicant")
-    end
-  end
-
-  let(:attributes) { attributes_for(:applicant) }
-  let(:legal_aid_application) { create(:legal_aid_application) }
-  let(:legal_aid_application_id) { legal_aid_application.id }
-
+  let(:params) { attributes.slice(*attr_list).merge(model: legal_aid_application.build_applicant) }
   let(:attr_list) do
     %i[
       first_name
@@ -20,8 +11,15 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       date_of_birth
     ]
   end
+  let(:legal_aid_application_id) { legal_aid_application.id }
+  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:attributes) { attributes_for(:applicant) }
 
-  let(:params) { attributes.slice(*attr_list).merge(model: legal_aid_application.build_applicant) }
+  describe ".model_name" do
+    it 'is "Applicant"' do
+      expect(described_class.model_name).to eq("Applicant")
+    end
+  end
 
   describe "#save" do
     let(:applicant) { Applicant.last }

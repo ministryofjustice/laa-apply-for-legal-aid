@@ -69,14 +69,14 @@ module CCMS
           allow(legal_aid_application).to receive(:calculation_date).and_return(Date.new(2020, 3, 25))
         end
 
+        before do
+          allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
+        end
+
         it "calls the savon soap client" do
           expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
           expect(requestor).to receive(:soap_client).and_return(soap_client_double)
           requestor.call
-        end
-
-        before do
-          allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
         end
 
         it "generates the expected xml" do

@@ -51,7 +51,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
       end
 
       it "flags outstanding_mortgage" do
-        expect(legal_aid_application.outstanding_mortgage?).to be_truthy
+        expect(legal_aid_application).to be_outstanding_mortgage
       end
 
       context "with an empty input" do
@@ -63,7 +63,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
         it "does not update model" do
           expect(legal_aid_application.outstanding_mortgage_amount).to be_nil
-          expect(legal_aid_application.outstanding_mortgage?).to be_falsey
+          expect(legal_aid_application).not_to be_outstanding_mortgage
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
         it "does not update model" do
           expect(legal_aid_application.outstanding_mortgage_amount).to be_nil
-          expect(legal_aid_application.outstanding_mortgage?).to be_falsey
+          expect(legal_aid_application).not_to be_outstanding_mortgage
         end
       end
 

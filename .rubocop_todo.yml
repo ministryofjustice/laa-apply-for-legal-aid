@@ -333,30 +333,6 @@ RSpec/FilePath:
     - 'spec/services/cleanup_capitial_attributes_spec.rb'
     - 'spec/services/mock_benefit_service_check_spec.rb'
 
-# Offense count: 15
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, each, example
-RSpec/HookArgument:
-  Exclude:
-    - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
-    - 'spec/helpers/check_answer_url_helper_spec.rb'
-    - 'spec/models/aggregated_cash_income_spec.rb'
-    - 'spec/models/aggregated_cash_outgoings_spec.rb'
-    - 'spec/requests/admin_users/omniauth_callbacks_spec.rb'
-    - 'spec/requests/applicants/omniauth_callbacks_spec.rb'
-    - 'spec/requests/citizens/bank_spec.rb'
-    - 'spec/requests/errors_spec.rb'
-    - 'spec/services/flow/base_flow_service_spec.rb'
-    - 'spec/services/page_history_service_spec.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-RSpec/HooksBeforeExamples:
-  Exclude:
-    - 'spec/lib/omni_auth/hmrc_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_spec.rb'
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
@@ -381,13 +357,6 @@ RSpec/InstanceVariable:
 RSpec/IteratedExpectation:
   Exclude:
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_dependant_child_attributes_spec.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-RSpec/LetBeforeExamples:
-  Exclude:
-    - 'spec/forms/applicants/basic_details_form_spec.rb'
-    - 'spec/forms/applicants/email_form_spec.rb'
 
 # Offense count: 201
 RSpec/LetSetup:
@@ -716,19 +685,6 @@ RSpec/OverwritingSetup:
     - 'spec/services/required_document_category_analyser_spec.rb'
     - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
 
-# Offense count: 12
-# Cop supports --auto-correct.
-# Configuration parameters: Strict, EnforcedStyle, AllowedExplicitMatchers.
-# SupportedStyles: inflected, explicit
-RSpec/PredicateMatcher:
-  Exclude:
-    - 'spec/forms/outstanding_mortgage_form_spec.rb'
-    - 'spec/requests/citizens/check_answers_spec.rb'
-    - 'spec/requests/providers/check_merits_answers_spec.rb'
-    - 'spec/requests/providers/check_passported_answers_spec.rb'
-    - 'spec/requests/providers/check_provider_answers_spec.rb'
-    - 'spec/requests/providers/means/own_home_spec.rb'
-
 # Offense count: 16
 RSpec/RepeatedDescription:
   Exclude:
@@ -775,22 +731,6 @@ RSpec/RepeatedExampleGroupDescription:
     - 'spec/services/ccms/parsers/applicant_add_status_response_parser_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_attributes_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-
-# Offense count: 22
-# Cop supports --auto-correct.
-RSpec/ScatteredLet:
-  Exclude:
-    - 'spec/jobs/dashboard/applicant_email_job_spec.rb'
-    - 'spec/jobs/dashboard/feedback_item_job_spec.rb'
-    - 'spec/jobs/dashboard/provider_data_job_spec.rb'
-    - 'spec/models/dashboard/single_object/applicant_email_spec.rb'
-    - 'spec/models/dashboard/single_object/feedback_spec.rb'
-    - 'spec/models/dashboard/single_object/provider_data_spec.rb'
-    - 'spec/requests/backable_spec.rb'
-    - 'spec/requests/citizens/identify_types_of_incomes_spec.rb'
-    - 'spec/requests/citizens/identify_types_of_outgoings_spec.rb'
-    - 'spec/requests/providers/check_merits_answers_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_variable_attributes_spec.rb'
 
 # Offense count: 6
 RSpec/ScatteredSetup:

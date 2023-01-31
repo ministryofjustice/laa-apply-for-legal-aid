@@ -602,17 +602,16 @@ module CCMS
         context "GB_INPUT_B_13WP3_14A" do
           context "when the applicant pays rent or mortgage" do
             let(:rent_or_mortgage_payment) { create(:transaction_type, :debit, name: "rent_or_mortgage") }
-
-            before do
-              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: rent_or_mortgage_payment)
-            end
-
             let(:attrs) do
               %w[
                 GB_INPUT_B_13WP3_14A
                 GB_INPUT_B_13WP3_1A
                 GB_INPUT_B_13WP3_36A
               ]
+            end
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: rent_or_mortgage_payment)
             end
 
             it "returns true" do

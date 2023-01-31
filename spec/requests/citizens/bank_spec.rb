@@ -55,7 +55,7 @@ RSpec.describe Citizens::BanksController do
     context "with Welsh locale" do
       before { post citizens_banks_path, params: { provider_id: } }
 
-      around(:each) do |example|
+      around do |example|
         I18n.with_locale(:cy) { example.run }
       end
 
