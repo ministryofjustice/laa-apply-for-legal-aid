@@ -163,7 +163,7 @@ RSpec.describe "check passported answers requests" do
       end
 
       it 'changes the state to "checking_passported_answers"' do
-        expect(application.reload.checking_passported_answers?).to be_truthy
+        expect(application.reload).to be_checking_passported_answers
       end
 
       context "applicant does not own home" do

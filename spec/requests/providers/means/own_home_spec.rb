@@ -58,7 +58,7 @@ RSpec.describe "provider own home requests" do
           end
 
           it "updates the record to match" do
-            expect(legal_aid_application.reload.own_home_owned_outright?).to be_truthy
+            expect(legal_aid_application.reload).to be_own_home_owned_outright
           end
         end
 
@@ -70,7 +70,7 @@ RSpec.describe "provider own home requests" do
           end
 
           it "updates the record to match" do
-            expect(legal_aid_application.reload.own_home_mortgage?).to be_truthy
+            expect(legal_aid_application.reload).to be_own_home_mortgage
           end
 
           context "when checking answers" do
@@ -116,7 +116,7 @@ RSpec.describe "provider own home requests" do
           end
 
           it "updates the record to match" do
-            expect(legal_aid_application.reload.own_home_owned_outright?).to be_truthy
+            expect(legal_aid_application.reload).to be_own_home_owned_outright
           end
         end
 
@@ -128,7 +128,7 @@ RSpec.describe "provider own home requests" do
           end
 
           it "updates the record to match" do
-            expect(legal_aid_application.reload.own_home_mortgage?).to be_truthy
+            expect(legal_aid_application.reload).to be_own_home_mortgage
           end
 
           context "when checking answers" do
@@ -148,7 +148,7 @@ RSpec.describe "provider own home requests" do
           end
 
           it "updates the record to match" do
-            expect(legal_aid_application.reload.own_home_no?).to be_truthy
+            expect(legal_aid_application.reload).to be_own_home_no
           end
 
           context "when checking answers" do
