@@ -27,7 +27,7 @@ spec:
       containers:
         # https://github.com/ministryofjustice/hmpps-utility-container-images
         - name: clamav
-          image: ghcr.io/ministryofjustice/hmpps-clamav:sha-478c089 # pin to previous non-root build
+          image: ghcr.io/ministryofjustice/hmpps-clamav:sha-0ae98e9
           imagePullPolicy: IfNotPresent
           ports:
             - name: clamav
