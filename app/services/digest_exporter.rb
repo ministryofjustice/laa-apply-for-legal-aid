@@ -11,8 +11,7 @@ class DigestExporter
     @session = GoogleDrive::Session.from_service_account_key(secret_file)
     @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
     @rows = []
-    delete_existing_data
-    write_header_row
+    reset_worksheet
   end
 
   def call
@@ -60,25 +59,24 @@ private
       @rows << digest.to_google_sheet_row
     end
     log_message "@row.count: #{@rows.size}"
+    log_message "@worksheet.rows.count: #{@worksheet.rows.count}"
   end
 
-  def delete_existing_data
-    log_message "delete_existing_data"
+  def reset_worksheet
+    log_message "reset_worksheet"
     # You can't delete all the rows in a worksheet, so we delete all but one, and we'll overwrite that
     # with the column headers
     @worksheet.delete_rows(1, @worksheet.max_rows - 1)
-    @worksheet.save
     log_message "Existing data removed from spreadsheet"
-    log_message "@row.count: #{@rows.size}"
-  end
 
-  def write_header_row
+    log_message "Writing #{ApplicationDigest.column_headers.count} column headers + extraction date"
     # Overwrite the 1 remaining row with column headers
     @worksheet.update_cells(1, 1, [ApplicationDigest.column_headers + extraction_date])
     @worksheet.save
 
     # It turns out that you have to re-initialise the worksheet, otherwise the deleted rows haven't really gone.
     @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
+    log_message "@worksheet.rows.count: #{@worksheet.rows.count}"
   end
 
   def extraction_date
