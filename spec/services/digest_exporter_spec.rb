@@ -24,7 +24,7 @@ RSpec.describe DigestExporter do
         expect(spreadsheet).to receive(:worksheets).and_return([worksheet]).at_least(2)
         expect(worksheet).to receive(:max_rows).and_return(10)
         expect(worksheet).to receive(:delete_rows).with(1, 9)
-        expect(worksheet).to receive(:save).exactly(3).times
+        expect(worksheet).to receive(:save).twice
         expect(worksheet).to receive(:update_cells).with(1, 1, [column_headings])
         expect(worksheet).to receive(:update_cells).with(2, 1, rows)
 
@@ -42,7 +42,7 @@ RSpec.describe DigestExporter do
           expect(spreadsheet).to receive(:worksheets).and_return([worksheet]).at_least(2)
           expect(worksheet).to receive(:max_rows).and_return(10)
           expect(worksheet).to receive(:delete_rows).with(1, 9)
-          expect(worksheet).to receive(:save).exactly(3).times
+          expect(worksheet).to receive(:save).twice
           expect(worksheet).to receive(:update_cells).with(1, 1, [column_headings])
           expect(worksheet).to receive(:update_cells).with(2, 1, rows)
           expect(AlertManager).to receive(:capture_exception).with(message_contains("Spreadsheet unexpectedly empty"))

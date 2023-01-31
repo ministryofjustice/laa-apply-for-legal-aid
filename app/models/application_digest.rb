@@ -42,6 +42,9 @@ class ApplicationDigest < ApplicationRecord
         employed: laa.applicant.employed?,
         hmrc_data_used: determine_hmrc_data_used?(laa),
         referred_to_caseworker: determine_caseworker_review?(laa),
+        true_layer_path: laa.truelayer_path?,
+        bank_statements_path: laa.bank_statement_upload_path?,
+        true_layer_data: laa.bank_transactions.any?,
       }
     end
 

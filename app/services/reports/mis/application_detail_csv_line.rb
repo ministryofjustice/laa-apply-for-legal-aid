@@ -166,6 +166,9 @@ module Reports
           "Free text required",
           "Free text optional",
           "Multi Employment",
+          "Bank statements path",
+          "Truelayer path",
+          "Truelayer data",
         ]
       end
 
@@ -196,6 +199,7 @@ module Reports
         opponent_details
         merits
         hmrc_data
+        banking_data
         sanitise
       end
 
@@ -384,6 +388,12 @@ module Reports
         @line << yesno(laa.full_employment_details.present?) # "Free text required",
         @line << yesno(laa.extra_employment_information_details.present?) # "Free text optional",
         @line << yesno(laa.has_multiple_employments?) # "Multi Employment",
+      end
+
+      def banking_data
+        @line << yesno(laa.bank_statement_upload_path?) # "Bank statements path",
+        @line << yesno(laa.truelayer_path?) # "Truelayer path",
+        @line << yesno(laa.bank_transactions.any?) # Truelayer data""
       end
 
       def yesno(value)
