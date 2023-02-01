@@ -212,23 +212,6 @@ en:
         total_income: Total income
         total_outgoings: Total outgoings
         total_deductions: Total deductions
-    cash_transactions:
-      amount: Amount
-      cash_heading: 'Physical cash:'
-      cash_hint: For example, banknotes and coins.
-      dates: "%{date_start}"
-      month: Month
-      benefits: Benefits
-      child_care: Childcare payments
-      excluded_benefits: Disregarded benefits
-      friends_or_family: Financial help from friends or family
-      legal_aid: Payments towards legal aid in a criminal case
-      maintenance_in: Maintenance payments from a former partner
-      maintenance_out: Maintenance payments to a former partner
-      pension: Pension
-      property_or_lodger: Income from a property or lodger
-      rent_or_mortgage: Housing payments
-      total: Total
     check_answers:
       assets:
         assets:

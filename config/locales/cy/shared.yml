@@ -107,23 +107,6 @@ cy:
         total_income: emocni latoT
         total_outgoings: sgniogtuo latoT
         total_deductions: snoitcuded latoT
-    cash_transactions:
-      amount: tnuomA
-      cash_heading: ":hsac lacisyhP"
-      cash_hint: ".snioc dna setonknab ,elpmaxe roF"
-      dates: "%{date_start}"
-      month: htnoM
-      benefits: stifeneB
-      child_care: stnemyap eracdlihC
-      excluded_benefits: stifeneb dedragersiD
-      friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
-      legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-      maintenance_in: rentrap remrof a morf stnemyap ecnanetniaM
-      maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
-      pension: noisneP
-      property_or_lodger: regdol ro ytreporp a morf emocnI
-      rent_or_mortgage: stnemyap gnisuoH
-      total: latoT
     check_answers:
       assets:
         assets:
