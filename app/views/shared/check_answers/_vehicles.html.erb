@@ -25,7 +25,7 @@
           name: :vehicles_remaining_payments,
           url: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
           question: t(".#{journey_type}.payment_remaining"),
-          answer: gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
+          answer: @legal_aid_application.vehicle.payment_remaining.nil? ? t("generic.no") : gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
           read_only:,
         ) %>
 

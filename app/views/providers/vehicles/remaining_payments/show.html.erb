@@ -5,11 +5,13 @@
       local: true,
     ) do |form| %>
   <%= page_template page_title: t(".heading"), template: :basic, form: do %>
-
     <%= form.govuk_radio_buttons_fieldset(:payments_remain,
                                           legend: { size: "xl", tag: "h1", text: page_title },
                                           hint: { text: t(".detail_of_payments_to_include") }) do %>
-    <%= form.govuk_radio_button(:payments_remain, true, link_errors: true, label: { text: t("generic.yes") }) do %>
+    <%= form.govuk_radio_button(:payments_remain, true,
+                                link_errors: true,
+                                label: { text: t("generic.yes") },
+                                checked: @form.payment_remaining.present?) do %>
       <%= form.govuk_text_field(
             :payment_remaining,
             label: { text: t(".enter_amount_left_to_pay") },
@@ -18,10 +20,10 @@
             width: "one-third",
           ) %>
     <% end %>
-    <%= form.govuk_radio_button(:payments_remain, false, label: { text: t("generic.no") }) %>
-
+    <%= form.govuk_radio_button(:payments_remain, false,
+                                label: { text: t("generic.no") },
+                                checked: (@legal_aid_application.checking_answers? && @form.payment_remaining.nil?)) %>
   <% end %>
-
   <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(
         show_draft: true,
