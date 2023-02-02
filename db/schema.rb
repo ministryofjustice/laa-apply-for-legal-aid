@@ -853,7 +853,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_145917) do
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
-    t.boolean "enable_loop", default: false, null: false
     t.boolean "means_test_review_phase_one", default: false, null: false
   end
 
