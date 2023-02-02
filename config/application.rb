@@ -139,7 +139,7 @@ module LaaApplyForLegalAid
       production: [],
     }
 
-    config.x.redis.base_url = ENV["REDIS_HOST"].present? && ENV["REDIS_PASSWORD"].present? ? "rediss://:#{ENV.fetch('REDIS_PASSWORD', nil)}@#{ENV.fetch('REDIS_HOST', nil)}:6379" : "redis://localhost:6379" # rubocop:disable Lint/RequireParentheses
+    config.x.redis.base_url = ENV["REDIS_HOST"].present? && ENV["REDIS_PASSWORD"].present? ? "rediss://:#{ENV.fetch('REDIS_PASSWORD', nil)}@#{ENV.fetch('REDIS_HOST', nil)}:6379" : "redis://localhost:6379"
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"

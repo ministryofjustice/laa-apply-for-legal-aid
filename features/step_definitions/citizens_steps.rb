@@ -11,8 +11,8 @@ Given("An application has been created") do
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
-  create :bank_account_holder, bank_provider: bank_provider
-  create :bank_account, bank_provider: bank_provider, currency: "GBP"
+  create(:bank_account_holder, bank_provider:)
+  create :bank_account, bank_provider:, currency: "GBP"
   Populators::TransactionTypePopulator.call
 end
 
@@ -49,8 +49,8 @@ Then("I visit the gather transactions page") do
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
-  create :bank_account_holder, bank_provider: bank_provider
-  create :bank_account, bank_provider: bank_provider, currency: "GBP"
+  create(:bank_account_holder, bank_provider:)
+  create :bank_account, bank_provider:, currency: "GBP"
 
   @legal_aid_application.update! transactions_gathered: true
   visit citizens_gather_transactions_path
@@ -77,8 +77,8 @@ Given("I have completed an application") do
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
-  create :bank_account_holder, bank_provider: bank_provider
-  create :bank_account, bank_provider: bank_provider, currency: "GBP"
+  create(:bank_account_holder, bank_provider:)
+  create :bank_account, bank_provider:, currency: "GBP"
   Populators::TransactionTypePopulator.call
   steps %(Then I visit the start of the financial assessment)
 end
