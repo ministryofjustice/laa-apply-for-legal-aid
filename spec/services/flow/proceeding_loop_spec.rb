@@ -6,12 +6,6 @@ RSpec.describe Flow::ProceedingLoop do
   describe ".next_step" do
     subject(:next_step) { described_class.next_step(legal_aid_application) }
 
-    before do
-      allow(Setting).to receive(:enable_loop?).and_return(loop_on?)
-    end
-
-    let(:loop_on?) { false }
-
     let(:legal_aid_application) do
       create(:legal_aid_application,
              :with_proceedings,
@@ -45,22 +39,14 @@ RSpec.describe Flow::ProceedingLoop do
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
-        context "when the loop feature flag is off" do
-          it { is_expected.to be :client_involvement_type }
+        context "when the proceeding has used delegated functions" do
+          let(:df_options) { { DA001: [10.days.ago, 10.days.ago], SE013: [10.days.ago, 10.days.ago], DA005: [nil, nil] } }
+
+          it { is_expected.to be :emergency_defaults }
         end
 
-        context "when the loop feature flag is on" do
-          let(:loop_on?) { true }
-
-          context "and the proceeding has used delegated functions" do
-            let(:df_options) { { DA001: [10.days.ago, 10.days.ago], SE013: [10.days.ago, 10.days.ago], DA005: [nil, nil] } }
-
-            it { is_expected.to be :emergency_defaults }
-          end
-
-          context "and the proceeding has not used delegated functions" do
-            it { is_expected.to be :substantive_defaults }
-          end
+        context "and the proceeding has not used delegated functions" do
+          it { is_expected.to be :substantive_defaults }
         end
 
         context "and the delegated_function date is over a month old" do
@@ -73,7 +59,6 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       context "and is on the emergency_defaults page" do
-        let(:loop_on?) { true }
         let(:provider_step) { "emergency_defaults" }
         let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.second }
 
@@ -93,7 +78,6 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       context "and is on the substantive_defaults page" do
-        let(:loop_on?) { true }
         let(:provider_step) { "substantive_defaults" }
         let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.second }
 
@@ -122,7 +106,6 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       context "and is on the emergency_level_of_service page" do
-        let(:loop_on?) { true }
         let(:provider_step) { "emergency_level_of_service" }
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
@@ -131,7 +114,6 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       context "and is on the substantive_level_of_service page" do
-        let(:loop_on?) { true }
         let(:provider_step) { "substantive_level_of_service" }
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
@@ -140,7 +122,6 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       context "and is on the emergency_scope_limitations page" do
-        let(:loop_on?) { true }
         let(:provider_step) { "emergency_scope_limitations" }
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
@@ -149,7 +130,6 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       context "and is on the substantive_scope_limitations page" do
-        let(:loop_on?) { true }
         let(:provider_step) { "substantive_scope_limitations" }
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
@@ -165,17 +145,7 @@ RSpec.describe Flow::ProceedingLoop do
         allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.last.id })
       end
 
-      context "when the loop feature flag is off" do
-        let(:loop_on?) { false }
-
-        it { is_expected.to be :limitations }
-      end
-
-      context "when the loop feature flag is on" do
-        let(:loop_on?) { true }
-
-        it { is_expected.to be :substantive_defaults }
-      end
+      it { is_expected.to be :substantive_defaults }
     end
 
     context "when the user is checking answers" do
@@ -190,7 +160,6 @@ RSpec.describe Flow::ProceedingLoop do
                provider_step:)
       end
       let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.second }
-      let(:loop_on?) { true }
 
       before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => proceeding.id }) }
 
@@ -198,16 +167,6 @@ RSpec.describe Flow::ProceedingLoop do
         let(:provider_step) { "substantive_scope_limitations" }
 
         it { is_expected.to be :limitations }
-      end
-
-      context "and is on the delegated_functions page" do
-        let(:provider_step) { "delegated_functions" }
-
-        context "and the full loop is off" do
-          let(:loop_on?) { false }
-
-          it { is_expected.to be :limitations }
-        end
       end
 
       context "and is on the substantive_defaults page" do
@@ -261,7 +220,7 @@ RSpec.describe Flow::ProceedingLoop do
     end
 
     context "when the user is on the final page of the second proceeding" do
-      let(:provider_step) { "delegated_functions" }
+      let(:provider_step) { "substantive_defaults" }
 
       before do
         allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => second_proceeding.id })

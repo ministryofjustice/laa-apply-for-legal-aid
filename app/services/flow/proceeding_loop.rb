@@ -1,7 +1,14 @@
 module Flow
   class ProceedingLoop
-    LOOP_CONTROLLERS = %w[client_involvement_type delegated_functions confirm_delegated_functions_date].freeze
-    EXTENDED_LOOP_CONTROLLERS = %w[emergency_defaults emergency_level_of_service emergency_scope_limitations substantive_defaults substantive_level_of_service substantive_scope_limitations].freeze
+    LOOP_CONTROLLERS = %w[client_involvement_type
+                          delegated_functions
+                          confirm_delegated_functions_date
+                          emergency_defaults
+                          emergency_level_of_service
+                          emergency_scope_limitations
+                          substantive_defaults
+                          substantive_level_of_service
+                          substantive_scope_limitations].freeze
 
     def initialize(application)
       @application = application
@@ -37,18 +44,12 @@ module Flow
         when "client_involvement_type"
           :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
-          if !Setting.enable_loop? && @application.checking_answers? && next_incomplete_proceeding.nil?
-            :limitations
-          elsif Setting.enable_loop?
-            current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
-          else
-            :client_involvement_type
-          end
+          current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
         when "emergency_defaults"
           current_proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
         when "substantive_defaults"
           if current_proceeding.accepted_substantive_defaults
-            if @application.checking_answers?
+            if @application.checking_answers? && next_incomplete_proceeding.nil?
               :limitations
             else
               :client_involvement_type
@@ -94,7 +95,7 @@ module Flow
     end
 
     def controllers
-      @controllers ||= Setting.enable_loop? ? LOOP_CONTROLLERS + EXTENDED_LOOP_CONTROLLERS : LOOP_CONTROLLERS
+      @controllers ||= LOOP_CONTROLLERS
     end
 
     def date_confirmation_required
