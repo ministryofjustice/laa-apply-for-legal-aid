@@ -29,3 +29,7 @@ AllCops:
 Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
+
+Style/ZeroLengthPredicate:
+  Exclude:
+    - app/controllers/status_controller.rb
