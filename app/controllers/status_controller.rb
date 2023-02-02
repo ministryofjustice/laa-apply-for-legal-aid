@@ -39,7 +39,7 @@ private
 
   def sidekiq_alive?
     ps = Sidekiq::ProcessSet.new
-    !ps.size.zero?
+    !ps.empty?
   rescue StandardError
     false
   end
@@ -47,7 +47,7 @@ private
   def sidekiq_queue_healthy?
     dead = Sidekiq::DeadSet.new
     retries = Sidekiq::RetrySet.new
-    dead.size.zero? && retries.size.zero?
+    dead.empty? && retries.empty?
   rescue StandardError
     false
   end

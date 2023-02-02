@@ -69,7 +69,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
           },
         }
 
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
+        patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
         expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
@@ -96,7 +96,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
           },
         }
 
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
+        patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
         expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false
@@ -124,7 +124,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
           },
         }
 
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
+        patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(page).to have_css("p", class: "govuk-error-message", text: "Enter the amount of benefits received")
@@ -147,7 +147,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
         login_as provider
         params = { providers_means_regular_income_form: { transaction_type_ids: ["", "none"] } }
 
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
+        patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
         expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
@@ -176,7 +176,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
           },
         }
 
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
+        patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
         expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false

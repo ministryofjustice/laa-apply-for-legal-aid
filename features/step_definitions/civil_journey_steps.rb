@@ -39,7 +39,7 @@ end
 
 Given("I have previously created multiple applications") do
   provider = create(:provider)
-  create_list :legal_aid_application, 3, :with_non_passported_state_machine, provider: provider
+  create_list(:legal_aid_application, 3, :with_non_passported_state_machine, provider:)
   create_list :legal_aid_application, 3, :with_passported_state_machine, :at_assessment_submitted, provider:
   @legal_aid_application = create(
     :application,
@@ -321,8 +321,8 @@ Given("I start the means application and the applicant has uploaded transaction 
   )
 
   bank_account = @applicant.bank_accounts.first
-  create_list :bank_transaction, 2, :credit, bank_account: bank_account, amount: rand(1...1_500.0).round(2)
-  create_list :bank_transaction, 3, :debit, bank_account: bank_account,  amount: rand(1...1_500.0).round(2)
+  create_list :bank_transaction, 2, :credit, bank_account:, amount: rand(1...1_500.0).round(2)
+  create_list :bank_transaction, 3, :debit, bank_account:,  amount: rand(1...1_500.0).round(2)
   create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -732,7 +732,7 @@ end
 
 Given("Bank transactions exist") do
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
-  bank_account = create :bank_account, bank_provider: bank_provider
+  bank_account = create(:bank_account, bank_provider:)
   create_list :bank_transaction, 6, :credit, bank_account:
 end
 
