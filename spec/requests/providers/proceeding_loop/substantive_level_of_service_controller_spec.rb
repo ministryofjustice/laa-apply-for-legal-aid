@@ -14,10 +14,6 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr do
   let(:proceeding_id) { proceeding.id }
   let(:provider) { application.provider }
 
-  before do
-    allow(Setting).to receive(:enable_loop?).and_return(true) # TODO: Remove when the loop feature flag is removed
-  end
-
   describe "GET /providers/applications/:legal_aid_application_id/substantive_level_of_service/:proceeding_id" do
     subject(:get_slos) { get "/providers/applications/#{application_id}/substantive_level_of_service/#{proceeding_id}" }
 

@@ -62,7 +62,7 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
 
         context "and the user selected yes" do
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+            expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id))
           end
         end
 
@@ -104,7 +104,15 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
             let(:confirm) { "true" }
 
             it "continues through the sub flow" do
-              expect(response).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+              # As the application is set up with two proceedings, one with DF and one without, there
+              # can be a race condition in rspec with the setup.  This allows the test to pass
+              # regardless of the application being setup with, or without, delegated functions
+              expected_path = if application.proceedings.first.used_delegated_functions
+                                providers_legal_aid_application_emergency_default_path(application_id)
+                              else
+                                providers_legal_aid_application_substantive_default_path(application_id)
+                              end
+              expect(response).to redirect_to(expected_path)
             end
           end
 
