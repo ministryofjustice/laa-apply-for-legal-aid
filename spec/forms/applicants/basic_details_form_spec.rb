@@ -53,7 +53,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context "with an invalid date" do
+    context "with an invalid date_of_birth string" do
       let(:attributes) { attributes_for(:applicant).merge(date_of_birth: "invalid-date") }
 
       it "does not persist model" do
@@ -66,8 +66,21 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context "with dob in the future" do
-      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: 3.days.from_now) }
+    context "with date_of_birth in the future" do
+      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: Date.tomorrow) }
+
+      it "does not persist model" do
+        expect { subject.save }.not_to change(Applicant, :count)
+      end
+
+      it "errors to be present" do
+        subject.save
+        expect(subject.errors[:date_of_birth]).to match_array(["Date of birth must be in the past"])
+      end
+    end
+
+    context "with date_of_birth earlier than ealiest allowed date" do
+      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: "1899-12-31".to_date) }
 
       it "does not persist model" do
         expect { subject.save }.not_to change(Applicant, :count)
@@ -79,7 +92,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context "with dob elements" do
+    context "with date_of_birth elements" do
       let(:params) do
         {
           first_name: attributes[:first_name],
@@ -101,7 +114,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context "with invalid dob elements" do
+    context "with invalid date_of_birth elements" do
       let(:params) do
         {
           first_name: attributes[:first_name],
