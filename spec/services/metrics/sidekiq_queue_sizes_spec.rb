@@ -4,7 +4,7 @@ RSpec.describe Metrics::SidekiqQueueSizes do
   describe "#call" do
     subject { described_class.call(prometheus_client) }
 
-    let(:queues) { %w[default mailers sidekiq_alive active_storage_analysis active_storage_purge] }
+    let(:queues) { %w[default mailers active_storage_analysis active_storage_purge] }
     let(:prometheus_client) { spy(PrometheusExporter::Client) }
     let(:collector_type) { PrometheusCollectors::SidekiqQueueCollector::COLLECTOR_TYPE }
 
