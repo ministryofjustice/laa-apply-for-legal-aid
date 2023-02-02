@@ -28,7 +28,7 @@ PreCommit:
     enabled: true
     command: ['yarn', 'run', 'standard']
     requires_files: true
-    include: 'app/webpack/**/*.js'
+    include: 'app/javascript/**/*.js'
   StyleLint:
     enabled: true
     command: ['yarn', 'run', 'stylelint']

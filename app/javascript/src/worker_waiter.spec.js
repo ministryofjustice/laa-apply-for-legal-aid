@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as Worker from 'worker_waiter'
+import * as Worker from './worker_waiter'
 
 jest.mock('axios')
 

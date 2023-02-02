@@ -366,6 +366,8 @@ GEM
     iniparse (1.5.0)
     interception (0.5)
     jmespath (1.6.2)
+    jsbundling-rails (1.1.1)
+      railties (>= 6.0.0)
     json (2.6.3)
     json_expressions (0.9.0)
     jsonapi-renderer (0.2.2)
@@ -498,8 +500,6 @@ GEM
       rack (>= 1.1)
     rack-protection (3.0.5)
       rack
-    rack-proxy (0.7.6)
-      rack
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.4.2)
@@ -631,7 +631,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    semantic_range (3.0.0)
     sentry-rails (5.8.0)
       railties (>= 5.0)
       sentry-ruby (~> 5.8.0)
@@ -715,11 +714,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webpacker (5.4.4)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     webrick (1.8.1)
     websocket (1.2.9)
     websocket-driver (0.7.5)
@@ -770,6 +764,7 @@ DEPENDENCIES
   hirb
   htmlentities
   i18n-tasks
+  jsbundling-rails
   json_expressions
   jwt
   launchy
@@ -827,7 +822,6 @@ DEPENDENCIES
   webdack-uuid_migration (~> 1.4.0)
   webdrivers (~> 5.2)
   webmock
-  webpacker (~> 5)
   webrick
 
 RUBY VERSION

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as ProceedingsTypes from 'proceedings'
+import * as ProceedingsTypes from './proceedings'
 
 jest.mock('axios')
 
