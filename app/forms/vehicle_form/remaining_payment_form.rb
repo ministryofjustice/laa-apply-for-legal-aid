@@ -17,7 +17,7 @@ module VehicleForm
     end
 
     def save
-      attributes[:payment_remaining] = nil if valid? && !payments_remain?
+      attributes[:payment_remaining] = 0 if valid? && !payments_remain?
       super
     end
 

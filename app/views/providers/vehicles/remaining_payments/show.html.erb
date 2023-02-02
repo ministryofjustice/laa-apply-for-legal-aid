@@ -11,7 +11,7 @@
     <%= form.govuk_radio_button(:payments_remain, true,
                                 link_errors: true,
                                 label: { text: t("generic.yes") },
-                                checked: @form.payment_remaining.present?) do %>
+                                checked: (@form.payment_remaining.present? && @form.payment_remaining != 0)) do %>
       <%= form.govuk_text_field(
             :payment_remaining,
             label: { text: t(".enter_amount_left_to_pay") },
@@ -22,7 +22,7 @@
     <% end %>
     <%= form.govuk_radio_button(:payments_remain, false,
                                 label: { text: t("generic.no") },
-                                checked: (@legal_aid_application.checking_answers? && @form.payment_remaining.nil?)) %>
+                                checked: @form.payment_remaining == 0) %>
   <% end %>
   <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(

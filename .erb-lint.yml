@@ -18,3 +18,7 @@ linters:
         Enabled: false
       Lint/UselessAssignment:
         Enabled: false
+      Style/NumericPredicate:
+        Exclude:
+          - 'app/views/providers/vehicles/remaining_payments/show.html.erb'
+
