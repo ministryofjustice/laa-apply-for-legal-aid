@@ -6,14 +6,12 @@ module Settings
                   :manually_review_all_cases,
                   :allow_welsh_translation,
                   :enable_ccms_submission,
-                  :enable_loop,
                   :means_test_review_phase_one
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
               :allow_welsh_translation,
               :enable_ccms_submission,
-              :enable_loop,
               :means_test_review_phase_one,
               presence: true
   end
