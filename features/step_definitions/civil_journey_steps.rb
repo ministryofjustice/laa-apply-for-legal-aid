@@ -980,6 +980,15 @@ Then("I enter a {string} for a {int} year old") do |name, number|
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
+Then(/^I enter the (.*) date of (\d+) month(?:s)? in the future$/) do |name, number|
+  name.gsub!(/\s+/, "_")
+  date = Time.zone.today + number.months
+  fields = page.all("input[id*=#{name}]")
+  fill_in(fields[0][:name].to_s, with: date.day)
+  fill_in(fields[1][:name].to_s, with: date.month)
+  fill_in(fields[2][:name].to_s, with: date.year)
+end
+
 Given("a {string} exists in the database") do |model|
   model.gsub!(/\s+/, "_")
   create model.to_sym
