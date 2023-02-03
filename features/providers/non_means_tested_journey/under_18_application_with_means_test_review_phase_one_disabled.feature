@@ -40,6 +40,11 @@ Feature: Under 18 applicant journey with means test review phase one disabled
 
     When I choose 'No'
     And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page with title "What you're applying for"
 
     When I click 'Save and continue'
