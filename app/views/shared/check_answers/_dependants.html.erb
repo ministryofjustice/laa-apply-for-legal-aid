@@ -3,11 +3,13 @@
     <%= check_answer_link(
           name: "dependants",
           url: providers_legal_aid_application_means_has_dependants_path,
-          question: t("providers.means_summaries.income_assessment.dependants.has_dependants"),
+          question: t("shared.check_answers.dependants.has_dependants"),
           answer: yes_no(@legal_aid_application.has_dependants),
         ) %>
   </dl>
+  <hr>
 </div>
+
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
     <%= check_answer_one_change_link(

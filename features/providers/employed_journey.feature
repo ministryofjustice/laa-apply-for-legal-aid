@@ -27,29 +27,7 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
 
   When I choose "No"
   And I click 'Save and continue'
-  Then I should be on a page showing "Does your client own the home that they live in?"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on a page showing "Does your client own a vehicle?"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on a page showing "Which savings or investments does your client have?"
-
-  Then I select "My client has none of these savings or investments"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Which assets does your client have?"
-  Then I select "My client has none of these assets"
-  Then I click 'Save and continue'
-  Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-  When I select "My client has received none of these payments"
-  And I click 'Save and continue'
-  Then I should be on the 'means_summary' page showing 'Check your answers'
+  Then I should be on the 'check_income_answers' page showing 'Check your answers'
   And the answer for 'extra_employment_information' should be 'Yes'
   And the answer for 'extra_employment_information_details' should be 'some extra details about employment'
 
@@ -79,28 +57,7 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
 
   When I choose "No"
   And I click 'Save and continue'
-  Then I should be on a page showing "Does your client own the home that they live in?"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on a page showing "Does your client own a vehicle?"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
-
-  Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Which savings or investments does your client have?"
-  Then I select "My client has none of these savings or investments"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Which assets does your client have?"
-  Then I select "My client has none of these assets"
-  Then I click 'Save and continue'
-  Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-  When I select "My client has received none of these payments"
-  And I click 'Save and continue'
-  Then I should be on the 'means_summary' page showing 'Check your answers'
+  Then I should be on the 'check_income_answers' page showing 'Check your answers'
   And the answer for 'full_employment_details' should be 'all the details about employment'
 
 @javascript
@@ -129,27 +86,5 @@ Scenario: Completing the means journey for an employed applicant with multiple j
 
   When I choose "No"
   And I click 'Save and continue'
-  Then I should be on a page showing "Does your client own the home that they live in?"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on a page showing "Does your client own a vehicle?"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on a page showing "Which savings or investments does your client have?"
-
-  Then I select "My client has none of these savings or investments"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Which assets does your client have?"
-  Then I select "My client has none of these assets"
-  Then I click 'Save and continue'
-  Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-  When I select "My client has received none of these payments"
-  And I click 'Save and continue'
-  Then I should be on the 'means_summary' page showing 'Check your answers'
+  Then I should be on the 'check_income_answers' page showing 'Check your answers'
   And the answer for 'full_employment_details' should be 'all the details about employment'

@@ -147,9 +147,9 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
     context "while checking answers" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-      it "redirects to non-passported check answers page" do
+      it "redirects to check capital answers page" do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(legal_aid_application))
       end
     end
 

@@ -55,6 +55,11 @@ Feature: Check multiple employment
 
     When I choose "No"
     And I click 'Save and continue'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
+    Then I should be on a page showing "Paisley also earns 50 gbp"
+
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
     When I choose "No"
@@ -83,7 +88,7 @@ Feature: Check multiple employment
 
     When I check "My client has received none of these payments"
     And I click 'Save and continue'
-    Then I should be on a page showing "Paisley also earns 50 gbp"
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if Ida Paisley can get legal aid"

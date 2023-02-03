@@ -37,5 +37,29 @@ RSpec.describe NonPassportedStateMachine do
                               .to("provider_assessing_means")
       end
     end
+
+    context "when from state checking_means_income" do
+      let(:legal_aid_application) { create(:legal_aid_application, :checking_means_income) }
+
+      it "sets state to provider_assessing_means" do
+        expect { event }.to change(legal_aid_application, :state)
+                              .from("checking_means_income")
+                              .to("provider_assessing_means")
+      end
+    end
+  end
+
+  describe "#check_means_income!" do
+    subject(:event) { legal_aid_application.check_means_income! }
+
+    context "when from state provider_assessing_means" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :provider_assessing_means) }
+
+      it "sets state to checking_means_income" do
+        expect { event }.to change(legal_aid_application, :state)
+                              .from("provider_assessing_means")
+                              .to("checking_means_income")
+      end
+    end
   end
 end

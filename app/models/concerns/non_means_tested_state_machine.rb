@@ -27,4 +27,8 @@ class NonMeansTestedStateMachine < BaseStateMachine
   def checking_non_passported_means?
     false
   end
+
+  def checking_means_income?
+    false
+  end
 end

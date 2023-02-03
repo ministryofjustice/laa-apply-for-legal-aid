@@ -143,6 +143,7 @@ Rails.application.routes.draw do
         resource :other_assets, only: %i[show update]
         resource :restrictions, only: %i[show update]
         resource :policy_disregards, only: %i[show update]
+        resource :check_income_answers, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
@@ -214,7 +215,7 @@ Rails.application.routes.draw do
       resources :bank_transactions, only: [] do
         patch "remove_transaction_type", on: :member
       end
-      resource :means_summary, only: %i[show update]
+      resource :check_capital_answers, only: %i[show update]
       resource :no_eligibility_assessment, only: %i[show update]
 
       resource :use_ccms, only: %i[show]

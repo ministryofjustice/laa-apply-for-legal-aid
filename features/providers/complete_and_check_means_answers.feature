@@ -6,17 +6,19 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+
     Then I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"
+
     When I select "None of the above"
     And I click 'Save and continue'
-
     Then I should be on a page showing "Does your client receive student finance?"
 
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+
     Then I select "Childcare"
     And I click 'Save and continue'
     Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
@@ -38,12 +40,12 @@ Feature: Completing and checking means answers backwards and forwards
     When I select the first checkbox
     And I click 'Save and continue'
     Then I click 'Save and continue'
-
     When I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
+
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
   @javascript @vcr
   Scenario: I navigate to the Check your answers page and then add some outgoing transaction types
@@ -95,6 +97,29 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I choose "No"
     And I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for "What payments does your client make?"
+    Then I should be on a page with title "Which payments does your client make?"
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Select payments your client makes in cash"
+
+    When I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's regular payments into categories"
+
+    When I click link 'Add another type of regular payment'
+    Then I should be on a page showing 'Which payments does your client make?'
+
+    When I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's regular payments into categories"
+
+    When I click 'Save and continue'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
     When I choose "No"
@@ -120,31 +145,12 @@ Feature: Completing and checking means answers backwards and forwards
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
 
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "What payments does your client make?"
-    Then I should be on a page with title "Which payments does your client make?"
-
-    When I click 'Save and continue'
-    Then I should be on a page with title "Select payments your client makes in cash"
-
-    When I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
-
-    When I click link 'Add another type of regular payment'
-    Then I should be on a page showing 'Which payments does your client make?'
-
-    When I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client makes in cash"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
-
-    When I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
   Scenario: I change the applicant answer about having any dependants to Yes and add dependants
-    Given I am checking the applicant's means answers
+    Given I am checking the applicant's means income answers
     Then the answer for 'dependants' should be 'No'
     Then I click Check Your Answers Change link for 'dependants'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
@@ -169,14 +175,14 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should see 'Dependant 1'
     And I should see 'Dependant 2'
     And the answer for 'dependants' should be 'Yes'
 
   @javascript
   Scenario: I change the applicant answer about having any dependants to No
-    Given I am checking the applicant's means answers
+    Given I am checking the applicant's means income answers
     Then the answer for 'dependants' should be 'No'
     Then I click Check Your Answers Change link for 'dependants'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
@@ -188,20 +194,20 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should see 'Dependant 1'
     And the answer for 'dependants' should be 'Yes'
     When I click Check Your Answers Change link for 'dependants'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should not see 'Dependant 1'
     And the answer for 'dependants' should be 'No'
 
   @javascript
   Scenario: I change the applicant answer about owning a vehicle
-    Given I am checking the applicant's means answers
+    Given I am checking answers on the check capital answers page
     Then I click Check Your Answers Change link for 'Vehicles'
     Then I should be on a page showing 'Does your client own a vehicle?'
     Then I choose 'No'
@@ -210,7 +216,7 @@ Feature: Completing and checking means answers backwards and forwards
 
   @javascript
   Scenario: I change the applicant answers about details of their vehicle
-    Given I am checking the applicant's means answers
+    Given I am checking answers on the check capital answers page
     Then I click Check Your Answers Change link for 'Vehicles'
     Then I choose 'Yes'
     Then I click 'Save and continue'
@@ -231,7 +237,7 @@ Feature: Completing and checking means answers backwards and forwards
 
   @javascript
   Scenario: I change the applicant answers about offline savings accounts
-    Given I am checking the applicant's means answers
+    Given I am checking answers on the check capital answers page
     Then I should be on a page showing 'Has savings accounts they cannot access online'
     And I should be on a page showing 'Amount in offline savings accounts'
     And the answer for 'has offline savings' should be 'Yes'
@@ -240,13 +246,13 @@ Feature: Completing and checking means answers backwards and forwards
     And I should be on a page showing 'Enter the total amount in all accounts.'
     Then I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     And the answer for 'has offline savings' should be 'No'
     And I should not see 'Amount in offline savings accounts'
 
   @javascript
-  Scenario: I go back and change the answer to second home from the means summary page
-    Given I am checking the applicant's means answers
+  Scenario: I go back and change the answer to second home from the check capital answers page
+    Given I am checking answers on the check capital answers page
     Then I should be on a page showing 'Which assets does your client have?'
     And I should be on a page showing 'Second property or holiday home estimated value'
     Then I click Check Your Answers Change link for 'other assets'
@@ -255,7 +261,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I deselect 'Second property or holiday home'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     And the answer for 'Second home' should be 'No'
     And I should not see 'Second property or holiday home estimated value'
 

@@ -6,7 +6,7 @@ module Providers
 
     def show
       legal_aid_application.set_transaction_period
-      legal_aid_application.provider_assess_means! unless legal_aid_application.checking_non_passported_means?
+      legal_aid_application.provider_assess_means! unless checking_answers?
     end
 
     def update
@@ -30,6 +30,10 @@ module Providers
     end
 
   private
+
+    def checking_answers?
+      legal_aid_application.checking_non_passported_means? or legal_aid_application.checking_means_income?
+    end
 
     def upload_button_pressed?
       params.key?(:upload_button)

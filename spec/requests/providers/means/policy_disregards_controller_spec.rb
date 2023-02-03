@@ -82,12 +82,12 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
           end
         end
 
-        context "with provider checking citizen's answers" do
+        context "with provider checking answers" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-          it "redirects to means summary page" do
+          it "redirects to check capital answers page" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
+            expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path)
           end
         end
       end

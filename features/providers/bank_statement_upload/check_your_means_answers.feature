@@ -1,9 +1,9 @@
 Feature: Bank statement upload check your answers
   @javascript
-  Scenario: I can view and change answers to means questions for non-passported, non-TrueLayer applications on behalf of employed clients
+  Scenario: I can view and change answers to means income questions for non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
-    And I have completed a non-passported employed application with bank statements as far as the end of the means section
-    Then I should be on the "means_summary" page showing "Check your answers"
+    And I have completed a non-passported employed application with bank statements as far as the end of the means income section
+    Then I should be on the "check_income_answers" page showing "Check your answers"
 
     And the following sections should exist:
       | tag | section |
@@ -17,6 +17,10 @@ Feature: Bank statement upload check your answers
       | h3  | What payments does your client make? |
       | h3  | Housing Benefit |
       | h3  | Payments your client makes in cash |
+      | h2  | Dependants |
+
+    And the following sections should not exist:
+      | tag | section |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -55,8 +59,7 @@ Feature: Bank statement upload check your answers
     Then I should see "hello_world.pdf UPLOADED"
 
     When I click "Save and continue"
-
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "hello_world.pdf"
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
@@ -71,7 +74,7 @@ Feature: Bank statement upload check your answers
 
     When I check "None of the above"
     And I click "Save and continue"
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
     And I should see "Every two weeks"
 
@@ -80,14 +83,14 @@ Feature: Bank statement upload check your answers
 
     When I check "My client receives none of these payments"
     And I click "Save and continue"
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
 
     When I click Check Your Answers Change link for "student finance"
     And I choose "Yes"
     And I enter amount "5000"
 
     When I click "Save and continue"
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
     And the answer for "student finance question" should be "Yes"
     And the answer for "student finance annual amount" should be "£5,000"
 
@@ -105,7 +108,7 @@ Feature: Bank statement upload check your answers
 
     When I check "None of the above"
     And I click "Save and continue"
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "£500.00"
     And I should see "Monthly"
 
@@ -127,19 +130,19 @@ Feature: Bank statement upload check your answers
 
     When I check "None of the above"
     And I click "Save and continue"
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
     Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
     And I check "My client makes none of these payments"
     And I click "Save and continue"
-    Then I should be on the "means_summary" page showing "Check your answers"
+    Then I should be on the "check_income_answers" page showing "Check your answers"
 
   @javascript
   Scenario: On the bank upload journey, the provider has employment permissions but the applicant is unemployed
     Given csrf is enabled
-    And I have completed a non-passported non-employed application with bank statements as far as the end of the means section
-    Then I should be on the "means_summary" page showing "Check your answers"
+    And I have completed a non-passported non-employed application with bank statements as far as the end of the means income section
+    Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should not see 'Employment income'
     And the following sections should exist:
       | tag | section |
@@ -147,9 +150,15 @@ Feature: Bank statement upload check your answers
       | h3  | Bank statements |
       | h2  | Your client's income |
       | h3  | What payments does your client receive? |
+      | h3  | Payments your client receives in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | What payments does your client make? |
+      | h3  | Payments your client makes in cash |
+      | h2  | Dependants |
+
+    And the following sections should not exist:
+      | tag | section |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |

@@ -147,6 +147,13 @@ FactoryBot.define do
       end
     end
 
+    trait :checking_means_income do
+      before(:create) do |application|
+        application.change_state_machine_type("NonPassportedStateMachine")
+        application.state_machine_proxy.update!(aasm_state: :checking_means_income)
+      end
+    end
+
     trait :checking_passported_answers do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :checking_passported_answers)

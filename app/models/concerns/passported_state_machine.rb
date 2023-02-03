@@ -55,4 +55,8 @@ class PassportedStateMachine < BaseStateMachine
   def provider_checking_or_checked_citizens_means_answers?
     false
   end
+
+  def checking_means_income?
+    false
+  end
 end

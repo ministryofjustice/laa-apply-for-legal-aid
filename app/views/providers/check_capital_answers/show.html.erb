@@ -1,7 +1,5 @@
 <%= page_template(page_title: t(".h1-heading")) do %>
 
-  <%= render "providers/means_summaries/income_assessment" %>
-
   <h2 class="govuk-heading-l"><%= t(".capital-section-heading") %></h2>
 
   <%= render "shared/check_answers/assets" %>
@@ -10,7 +8,7 @@
   <p class="govuk-body govuk-!-margin-bottom-7"><%= t(".what_happens_next.text") %></p>
 
   <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_means_summary_path,
+        url: providers_legal_aid_application_check_capital_answers_path,
         method: :patch,
         show_draft: true,
       ) %>

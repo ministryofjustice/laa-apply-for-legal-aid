@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::MeansSummariesController do
+RSpec.describe Providers::CheckCapitalAnswersController do
   include ActionView::Helpers::NumberHelper
   let(:provider) { create(:provider) }
   let(:applicant) { create(:applicant) }
@@ -26,12 +26,10 @@ RSpec.describe Providers::MeansSummariesController do
   end
   let(:login) { login_as provider }
 
-  describe "GET /providers/applications/:legal_aid_application_id/means_summary" do
+  describe "GET /providers/applications/:legal_aid_application_id/check_capital_answers" do
     subject(:request) do
-      get providers_legal_aid_application_means_summary_path(legal_aid_application)
+      get providers_legal_aid_application_check_capital_answers_path(legal_aid_application)
     end
-
-    let!(:bank_transactions) { create_list(:bank_transaction, 3, transaction_type:, bank_account:) }
 
     before do
       login
@@ -40,12 +38,6 @@ RSpec.describe Providers::MeansSummariesController do
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
-    end
-
-    it "displays the bank transaction data" do
-      total_amount = bank_transactions.sum(&:amount)
-      expect(total_amount).not_to be_zero
-      expect(response.body).to include(ActiveSupport::NumberHelper.gds_number_to_currency(total_amount))
     end
 
     it "displays the correct vehicles details" do
@@ -66,7 +58,7 @@ RSpec.describe Providers::MeansSummariesController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "applicant does not have vehicle" do
+    context "when applicant does not have vehicle" do
       let(:vehicle) { nil }
       let(:own_vehicle) { false }
 
@@ -83,10 +75,10 @@ RSpec.describe Providers::MeansSummariesController do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/means_summary" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/check_capital_answers" do
     subject(:request) do
-      get providers_legal_aid_application_means_summary_path(legal_aid_application)
-      patch providers_legal_aid_application_means_summary_path(legal_aid_application), params:
+      get providers_legal_aid_application_check_capital_answers_path(legal_aid_application)
+      patch providers_legal_aid_application_check_capital_answers_path(legal_aid_application), params:
     end
 
     let(:params) { {} }

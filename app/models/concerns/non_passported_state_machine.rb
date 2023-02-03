@@ -6,6 +6,7 @@ class NonPassportedStateMachine < BaseStateMachine
     state :checking_citizen_answers
     state :analysing_bank_transactions
     state :provider_assessing_means
+    state :checking_means_income
     state :checking_non_passported_means
 
     event :provider_confirm_applicant_eligibility do
@@ -55,6 +56,7 @@ class NonPassportedStateMachine < BaseStateMachine
     event :provider_assess_means do
       transitions from: %i[provider_confirming_applicant_eligibility
                            provider_assessing_means
+                           checking_means_income
                            checking_non_passported_means],
                   to: :provider_assessing_means
     end
@@ -70,6 +72,13 @@ class NonPassportedStateMachine < BaseStateMachine
     event :reset_to_applicant_entering_means do
       transitions from: :use_ccms, to: :applicant_entering_means,
                   after: proc { update!(ccms_reason: nil) }
+    end
+
+    event :check_means_income do
+      transitions from: %i[
+                    provider_assessing_means
+                  ],
+                  to: :checking_means_income
     end
   end
 

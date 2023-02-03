@@ -147,7 +147,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         create(
           :legal_aid_application,
           :with_non_passported_state_machine,
-          :checking_non_passported_means,
+          :checking_means_income,
           no_debit_transaction_types_selected: false,
         )
       end
@@ -162,9 +162,9 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         expect(legal_aid_application.reload.no_debit_transaction_types_selected).to be true
       end
 
-      it "redirects to the means summaries page" do
+      it "redirects to the checking answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
       end
     end
 
@@ -173,7 +173,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         create(
           :legal_aid_application,
           :with_non_passported_state_machine,
-          :checking_non_passported_means,
+          :checking_means_income,
           no_debit_transaction_types_selected: false,
         )
       end
@@ -206,7 +206,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         create(
           :legal_aid_application,
           :with_non_passported_state_machine,
-          :checking_non_passported_means,
+          :checking_means_income,
           no_debit_transaction_types_selected: false,
         )
       end

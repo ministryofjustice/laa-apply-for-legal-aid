@@ -78,30 +78,30 @@ RSpec.describe Providers::Means::HasDependantsController do
           expect { request }.to change { legal_aid_application.reload.has_dependants }.from(nil).to(false)
         end
 
-        it "redirects to the own home page" do
+        it "redirects to the check answers income page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
         end
       end
     end
 
-    context "when provider checking answers of citizen and no" do
+    context "when provider checking answers and no" do
       let(:legal_aid_application) do
         create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-               :checking_non_passported_means)
+               :checking_means_income)
       end
       let(:params) { { legal_aid_application: { has_dependants: "false" } } }
 
-      it "redirects to the means summary page" do
+      it "redirects to the check answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
       end
     end
 
-    context "when provider checking answers of citizen and no dependants and yes" do
+    context "when provider checking answers and no dependants and yes" do
       let(:legal_aid_application) do
         create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-               :checking_non_passported_means)
+               :checking_means_income)
       end
       let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 
@@ -114,7 +114,7 @@ RSpec.describe Providers::Means::HasDependantsController do
     context "when provider checking answers of citizen and previously added dependants and yes" do
       let(:legal_aid_application) do
         create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-               :checking_non_passported_means, :with_dependant)
+               :checking_means_income, :with_dependant)
       end
       let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 

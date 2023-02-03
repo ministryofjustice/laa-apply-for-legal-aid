@@ -170,7 +170,7 @@ Given("I start the journey as far as the client completed means page") do
   visit(providers_legal_aid_application_client_completed_means_path(@legal_aid_application))
 end
 
-Given("I am checking the applicant's means answers") do
+Given("I am checking answers on the check capital answers page") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -180,7 +180,19 @@ Given("I am checking the applicant's means answers") do
     :provider_assessing_means,
   )
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
+  visit(providers_legal_aid_application_check_capital_answers_path(@legal_aid_application))
+end
+
+Given("I am checking the applicant's means income answers") do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_everything,
+    :with_non_passported_state_machine,
+    :checking_means_income,
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_means_check_income_answers_path(@legal_aid_application))
 end
 
 Given("I have completed the non-passported means assessment and start the merits assessment") do

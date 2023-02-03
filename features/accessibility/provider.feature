@@ -89,8 +89,7 @@ Feature: Provider accessibility
 
   @javascript @vcr
   Scenario: I complete the non-passported means assessment and it is accessible
-    Given I start the merits application with bank transactions with no transaction type category
-    And I used delegated functions
+    Given I start the means application and the applicant has uploaded transaction data
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     And the page is accessible
     Then I click 'Continue'
@@ -143,6 +142,8 @@ Feature: Provider accessibility
     And the page is accessible
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on the 'check_income_answers' page showing 'Check your answers'
+    When I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     And the page is accessible
     Then I choose "Yes, with a mortgage or loan"
@@ -208,7 +209,7 @@ Feature: Provider accessibility
     Then I select 'England Infected Blood Support Scheme'
     And the page is accessible
     Then I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
+    Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'
     Then I should be on the 'capital_income_assessment_result' page showing 'How we calculated your client\'s financial eligibility'
