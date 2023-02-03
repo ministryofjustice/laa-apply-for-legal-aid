@@ -102,4 +102,17 @@ module ApplicationHelper
   def linked_children_names(proceeding)
     proceeding.involved_children.map(&:full_name).join("</br>").html_safe
   end
+
+  def govuk_footer_meta_items
+    {
+      t("layouts.application.footer.contact") => contact_path,
+      t("layouts.application.footer.feedback") => new_feedback_path,
+      # Currently we can only update and store cookie preferences for the provider, citizen users are shown the generic GOV.UK cookies page
+      t("layouts.application.footer.cookies") => (current_provider ? providers_cooky_path(current_provider) : "https://www.gov.uk/help/cookies"),
+      t("layouts.application.footer.privacy_policy") => privacy_policy_index_path,
+      t("layouts.application.footer.accessibility_statement") => accessibility_statement_index_path,
+      t("layouts.application.footer.terms") => "https://www.gov.uk/government/publications/laa-online-portal-help-and-information",
+      t("layouts.application.footer.digital_services_html") => "https://mojdigital.blog.gov.uk",
+    }.freeze
+  end
 end
