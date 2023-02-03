@@ -207,7 +207,7 @@ Feature: Completing and checking means answers backwards and forwards
 
   @javascript
   Scenario: I change the applicant answer about owning a vehicle
-    Given I am checking answers on the means summary page
+    Given I am checking answers on the check capital answers page
     Then I click Check Your Answers Change link for 'Vehicles'
     Then I should be on a page showing 'Does your client own a vehicle?'
     Then I choose 'No'
@@ -216,7 +216,7 @@ Feature: Completing and checking means answers backwards and forwards
 
   @javascript
   Scenario: I change the applicant answers about details of their vehicle
-    Given I am checking answers on the means summary page
+    Given I am checking answers on the check capital answers page
     Then I click Check Your Answers Change link for 'Vehicles'
     Then I choose 'Yes'
     Then I click 'Save and continue'
@@ -237,7 +237,7 @@ Feature: Completing and checking means answers backwards and forwards
 
   @javascript
   Scenario: I change the applicant answers about offline savings accounts
-    Given I am checking answers on the means summary page
+    Given I am checking answers on the check capital answers page
     Then I should be on a page showing 'Has savings accounts they cannot access online'
     And I should be on a page showing 'Amount in offline savings accounts'
     And the answer for 'has offline savings' should be 'Yes'
@@ -251,8 +251,8 @@ Feature: Completing and checking means answers backwards and forwards
     And I should not see 'Amount in offline savings accounts'
 
   @javascript
-  Scenario: I go back and change the answer to second home from the means summary page
-    Given I am checking answers on the means summary page
+  Scenario: I go back and change the answer to second home from the check capital answers page
+    Given I am checking answers on the check capital answers page
     Then I should be on a page showing 'Which assets does your client have?'
     And I should be on a page showing 'Second property or holiday home estimated value'
     Then I click Check Your Answers Change link for 'other assets'

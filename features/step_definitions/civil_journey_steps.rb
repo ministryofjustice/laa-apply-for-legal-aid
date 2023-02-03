@@ -170,7 +170,7 @@ Given("I start the journey as far as the client completed means page") do
   visit(providers_legal_aid_application_client_completed_means_path(@legal_aid_application))
 end
 
-Given("I am checking answers on the means summary page") do
+Given("I am checking answers on the check capital answers page") do
   @legal_aid_application = create(
     :application,
     :with_applicant,

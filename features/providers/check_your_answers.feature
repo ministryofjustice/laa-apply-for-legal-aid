@@ -340,7 +340,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to see all necessary capital sections for a non-passported open banking flow
     Given I have completed the income and capital sections of a non-passported application with open banking transactions
-    And I am viewing the means summary check your answers page
+    And I am viewing the means capital check your answers page
 
     Then the following sections should exist:
       | tag | section |

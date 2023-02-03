@@ -69,7 +69,7 @@ Given("I have completed the income and capital sections of a non-passported appl
   login_as @legal_aid_application.provider
 end
 
-And("I am viewing the means summary check your answers page") do
+And("I am viewing the means capital check your answers page") do
   visit(providers_legal_aid_application_check_capital_answers_path(@legal_aid_application))
 end
 

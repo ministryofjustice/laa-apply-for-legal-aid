@@ -14,7 +14,7 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
            :checking_means_income,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
-           df_options: { DA001: Time.zone.today },
+           df_options: { DA001: Date.current },
            applicant:,
            provider:,
            transaction_types: [transaction_type])
@@ -42,7 +42,7 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
       end
 
       it "sets the state to checking means income" do
-        expect(legal_aid_application.reload.checking_means_income?).to be true
+        expect(legal_aid_application.reload).to be_checking_means_income
       end
 
       it "displays the bank transaction data" do
@@ -62,7 +62,7 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
     end
 
     it "sets the state back to provider assessing means" do
-      expect(legal_aid_application.reload.provider_assessing_means?).to be true
+      expect(legal_aid_application.reload).to be_provider_assessing_means
     end
 
     it "redirects to the own homes page" do
