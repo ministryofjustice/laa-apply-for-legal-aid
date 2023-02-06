@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Applicants::BasicDetailsForm, type: :form do
-  subject { described_class.new(params) }
+  subject(:form) { described_class.new(params) }
 
   let(:params) { attributes.slice(*attr_list).merge(model: legal_aid_application.build_applicant) }
   let(:attr_list) do
@@ -25,18 +25,18 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     let(:applicant) { Applicant.last }
 
     it "creates a new applicant" do
-      expect { subject.save }.to change(Applicant, :count).by(1)
+      expect { form.save }.to change(Applicant, :count).by(1)
     end
 
     it "saves attributes to the new applicant" do
-      subject.save
+      form.save
       attr_list.each do |attribute|
         expect(applicant.send(attribute)).to eq(attributes[attribute]), "Should match #{attribute}"
       end
     end
 
     it "saved application belongs to legal_aid_application" do
-      subject.save
+      form.save
       expect(applicant).to eq(legal_aid_application.reload.applicant)
     end
 
@@ -44,42 +44,55 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       before { attr_list.delete(:first_name) }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change(Applicant, :count)
+        expect { form.save }.not_to change(Applicant, :count)
       end
 
       it "errors to be present" do
-        subject.save
-        expect(subject.errors[:first_name]).to match_array(["Enter first name"])
+        form.save
+        expect(form.errors[:first_name]).to match_array(["Enter first name"])
       end
     end
 
-    context "with an invalid date" do
+    context "with an invalid date_of_birth string" do
       let(:attributes) { attributes_for(:applicant).merge(date_of_birth: "invalid-date") }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change(Applicant, :count)
+        expect { form.save }.not_to change(Applicant, :count)
       end
 
-      it "errors to be present" do
-        subject.save
-        expect(subject.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+      it "adds expected error" do
+        form.save
+        expect(form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
       end
     end
 
-    context "with dob in the future" do
-      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: 3.days.from_now) }
+    context "with date_of_birth in the future" do
+      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: Date.tomorrow) }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change(Applicant, :count)
+        expect { form.save }.not_to change(Applicant, :count)
       end
 
-      it "errors to be present" do
-        subject.save
-        expect(subject.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+      it "adds expected error" do
+        form.save
+        expect(form.errors[:date_of_birth]).to match_array(["Date of birth must be in the past"])
       end
     end
 
-    context "with dob elements" do
+    context "with date_of_birth earlier than ealiest allowed date" do
+      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: "1899-12-31".to_date) }
+
+      it "does not persist model" do
+        expect { form.save }.not_to change(Applicant, :count)
+      end
+
+      it "adds expected error" do
+        form.save
+        expect(form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+      end
+    end
+
+    context "with date_of_birth elements" do
       let(:params) do
         {
           first_name: attributes[:first_name],
@@ -91,17 +104,17 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it "is valid" do
-        expect { subject.save }.to change(Applicant, :count)
+      it "creates applicant succesfully" do
+        expect { form.save }.to change(Applicant, :count)
       end
 
       it "saves the date" do
-        subject.save
+        form.save
         expect(Applicant.last.date_of_birth).to eq(attributes[:date_of_birth])
       end
     end
 
-    context "with invalid dob elements" do
+    context "with invalid date_of_birth elements" do
       let(:params) do
         {
           first_name: attributes[:first_name],
@@ -113,13 +126,13 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it "is not valid" do
-        expect { subject.save }.not_to change(Applicant, :count)
+      it "does not persist model" do
+        expect { form.save }.not_to change(Applicant, :count)
       end
 
-      it "sets errors" do
-        subject.save
-        expect(subject.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+      it "adds expected error" do
+        form.save
+        expect(form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
       end
     end
   end
@@ -128,11 +141,11 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     let(:applicant) { Applicant.last }
 
     it "creates a new applicant" do
-      expect { subject.save_as_draft }.to change(Applicant, :count).by(1)
+      expect { form.save_as_draft }.to change(Applicant, :count).by(1)
     end
 
     it "saves attributes to the new applicant" do
-      subject.save_as_draft
+      form.save_as_draft
       attr_list.each do |attribute|
         expect(applicant.send(attribute)).to eq(attributes[attribute]), "Should match #{attribute}"
       end
@@ -150,17 +163,17 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "will not save to the database" do
-        expect { subject.save_as_draft }.not_to change(Applicant, :count)
+        expect { form.save_as_draft }.not_to change(Applicant, :count)
       end
 
       it "will be invalid" do
-        subject.save_as_draft
-        expect(subject).to be_invalid
+        form.save_as_draft
+        expect(form).to be_invalid
       end
 
       it "will preserve the input" do
-        subject.save_as_draft
-        expect(subject.first_name).to eq("Fred")
+        form.save_as_draft
+        expect(form.first_name).to eq("Fred")
       end
     end
 
@@ -176,17 +189,17 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "will not save to the database" do
-        expect { subject.save_as_draft }.not_to change(Applicant, :count)
+        expect { form.save_as_draft }.not_to change(Applicant, :count)
       end
 
       it "will be invalid" do
-        subject.save_as_draft
-        expect(subject).to be_invalid
+        form.save_as_draft
+        expect(form).to be_invalid
       end
 
       it "will preserve the valid input" do
-        subject.save_as_draft
-        expect(subject.date_of_birth).to eq(Date.new(1999, 12, 31))
+        form.save_as_draft
+        expect(form.date_of_birth).to eq(Date.new(1999, 12, 31))
       end
     end
 
@@ -202,12 +215,12 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "will save to the database" do
-        expect { subject.save_as_draft }.to change(Applicant, :count)
+        expect { form.save_as_draft }.to change(Applicant, :count)
       end
 
       it "will be invalid" do
-        subject.save_as_draft
-        expect(subject).to be_valid
+        form.save_as_draft
+        expect(form).to be_valid
       end
     end
 
@@ -223,12 +236,12 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "will save to the database" do
-        expect { subject.save_as_draft }.to change(Applicant, :count)
+        expect { form.save_as_draft }.to change(Applicant, :count)
       end
 
       it "will be valid" do
-        subject.save_as_draft
-        expect(subject).to be_valid
+        form.save_as_draft
+        expect(form).to be_valid
       end
     end
 
@@ -245,18 +258,18 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      before { subject.save_as_draft }
+      before { form.save_as_draft }
 
       it "generates an error" do
-        expect(subject).to be_invalid
+        expect(form).to be_invalid
       end
     end
   end
 
   describe "#model" do
     it "returns a new applicant" do
-      expect(subject.model).to be_a(Applicant)
-      expect(subject.model).not_to be_persisted
+      expect(form.model).to be_a(Applicant)
+      expect(form.model).not_to be_persisted
     end
 
     context "with an existing applicant passed in" do
@@ -264,7 +277,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:params) { attributes.slice(*attr_list).merge(model: applicant) }
 
       it "returns the applicant" do
-        expect(subject.model).to eq(applicant)
+        expect(form.model).to eq(applicant)
       end
     end
 
@@ -273,23 +286,23 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:params) { { model: applicant } }
 
       it "populates attributes from model" do
-        expect(subject.first_name).to eq(applicant.first_name)
-        expect(subject.last_name).to eq(applicant.last_name)
+        expect(form.first_name).to eq(applicant.first_name)
+        expect(form.last_name).to eq(applicant.last_name)
       end
 
       it "populates dob fields from model" do
-        expect(subject.date_of_birth_1i).to eq(applicant.date_of_birth.year)
-        expect(subject.date_of_birth_2i).to eq(applicant.date_of_birth.month)
-        expect(subject.date_of_birth_3i).to eq(applicant.date_of_birth.day)
+        expect(form.date_of_birth_1i).to eq(applicant.date_of_birth.year)
+        expect(form.date_of_birth_2i).to eq(applicant.date_of_birth.month)
+        expect(form.date_of_birth_3i).to eq(applicant.date_of_birth.day)
       end
     end
   end
 
   describe "attributes" do
     it "matches passed in attributes" do
-      expect(subject.first_name).to be_present
+      expect(form.first_name).to be_present
       attr_list.each do |attribute|
-        expect(subject.send(attribute)).to eq(attributes[attribute]), "Should match #{attribute}"
+        expect(form.send(attribute)).to eq(attributes[attribute]), "Should match #{attribute}"
       end
     end
   end
