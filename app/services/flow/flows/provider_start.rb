@@ -63,10 +63,12 @@ module Flow
         },
         check_provider_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_provider_answers_path(application) },
-          forward: lambda do |application, no_means_test_required|
-            if no_means_test_required
+          forward: lambda do |application|
+            if application.non_means_tested?
               application.change_state_machine_type("NonMeansTestedStateMachine")
               :confirm_non_means_tested_applications
+            elsif application.under_16_blocked?
+              :use_ccms_under16s
             else
               application.applicant.national_insurance_number? ? :check_benefits : :no_national_insurance_numbers
             end
@@ -172,6 +174,9 @@ module Flow
         },
         use_ccms_employed: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_employed_index_path(application) },
+        },
+        use_ccms_under16s: {
+          path: ->(application) { urls.providers_legal_aid_application_use_ccms_under16s_path(application) },
         },
       }.freeze
     end

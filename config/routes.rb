@@ -220,6 +220,7 @@ Rails.application.routes.draw do
 
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
+      resource :use_ccms_under16s, only: %i[show]
       resource :no_national_insurance_number, only: %i[show update]
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]

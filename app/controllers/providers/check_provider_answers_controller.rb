@@ -17,7 +17,7 @@ module Providers
     def continue
       update_applicant_age_for_means_test_purposes!
 
-      continue_or_draft(no_means_test_required?)
+      continue_or_draft
     end
 
   private
@@ -33,10 +33,6 @@ module Providers
       as_of = legal_aid_application.used_delegated_functions_on || Date.current
 
       AgeCalculator.call(date_of_birth, as_of)
-    end
-
-    def no_means_test_required?
-      legal_aid_application.applicant.no_means_test_required?
     end
 
     def set_variables
