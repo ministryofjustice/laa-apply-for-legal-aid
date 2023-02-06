@@ -278,12 +278,11 @@ jobs:
           destination: coverage
 
   build_and_push:
-    executor: basic-executor
+    executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker
-    - *update_packages
-    - run: sudo apt-get install -y git-crypt
+    - setup_remote_docker:
+        version: 20.10.7
     - *decrypt_secrets
     - run:
         name: Build docker images
@@ -293,10 +292,10 @@ jobs:
           --build-arg BUILD_TAG="app-${CIRCLE_SHA1}" \
           --build-arg APP_BRANCH=${CIRCLE_BRANCH} \
           -t app . | while read line ; do echo "$(date +"%T") > $line" ; done ;
-    - *setup_aws_login
     - run:
         name: Push docker image to ECR repo
         command: |
+          aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${ECR_ENDPOINT}
           docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
 
