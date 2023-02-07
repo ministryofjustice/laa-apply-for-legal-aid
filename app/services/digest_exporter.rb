@@ -1,5 +1,5 @@
 class DigestExporter
-  class SpreadsheetEmpty < StandardError; end
+  class SpreadsheetError < StandardError; end
 
   def self.call
     new.call
@@ -9,7 +9,8 @@ class DigestExporter
     log_message "Initializing"
     secret_file = StringIO.new(google_secret.to_json)
     @session = GoogleDrive::Session.from_service_account_key(secret_file)
-    @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
+    @spreadsheet = @session.spreadsheet_by_key(spreadsheet_key)
+    @worksheet = @spreadsheet.worksheets[0]
     @rows = []
     reset_worksheet
   end
@@ -30,13 +31,13 @@ private
   def update_and_save_worksheet
     log_message "update_and_save_worksheet"
     log_message "updating cells, @rows.count: #{@rows.count}"
-    @worksheet.update_cells(2, 1, @rows)
+    @worksheet.update_cells(1, 1, @rows)
     log_message "saving worksheet"
     @worksheet.save
-    raise SpreadsheetEmpty, "Spreadsheet unexpectedly empty" if @worksheet.rows.count == 1
+    raise SpreadsheetError, "Spreadsheet unexpectedly empty" if @worksheet.rows.count == 1
 
     log_message "All records written and worksheet saved"
-  rescue SpreadsheetEmpty => e
+  rescue SpreadsheetError => e
     log_message "Job thinks it succeeded but the spreadsheet is empty"
     AlertManager.capture_exception(e)
     raise
@@ -46,6 +47,10 @@ private
     @digest_ids ||= initialize_digest_ids
   end
 
+  def column_headers
+    ApplicationDigest.column_headers
+  end
+
   def initialize_digest_ids
     log_message "Getting digest ids"
     ApplicationDigest.order(:created_at).pluck(:id)
@@ -53,29 +58,27 @@ private
 
   def save_digest_to_rows(digest_ids)
     log_message "save_digest_to_rows"
+    log_message "Adding #{column_headers.count + 1} column headers, ApplicationDigest.column_headers + extraction date, to @rows"
+    @rows << [column_headers + extraction_date].flatten
     log_message "#{digest_ids.size} records to be added to @rows"
     digest_ids.each_with_index do |digest_id, _index|
       digest = ApplicationDigest.find(digest_id)
       @rows << digest.to_google_sheet_row
     end
     log_message "@row.count: #{@rows.size}"
-    log_message "@worksheet.rows.count: #{@worksheet.rows.count}"
+    log_message "@worksheet.max_rows: #{@worksheet.max_rows}"
   end
 
   def reset_worksheet
+    return if @worksheet.max_rows == 1 && @worksheet.max_cols == 1
+
     log_message "reset_worksheet"
-    # You can't delete all the rows in a worksheet, so we delete all but one, and we'll overwrite that
-    # with the column headers
-    @worksheet.delete_rows(1, @worksheet.max_rows - 1)
+    clear_sheet("ROWS") unless @worksheet.max_rows == 1
+    clear_sheet("COLUMNS") unless @worksheet.max_cols == 1
+    @worksheet.reload
+    raise SpreadsheetError, "Spreadsheet not cleared" if @worksheet.max_rows > 1 || @worksheet.max_cols > 1
+
     log_message "Existing data removed from spreadsheet"
-
-    log_message "Writing #{ApplicationDigest.column_headers.count} column headers + extraction date"
-    # Overwrite the 1 remaining row with column headers
-    @worksheet.update_cells(1, 1, [ApplicationDigest.column_headers + extraction_date])
-    @worksheet.save
-
-    # It turns out that you have to re-initialise the worksheet, otherwise the deleted rows haven't really gone.
-    @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
     log_message "@worksheet.rows.count: #{@worksheet.rows.count}"
   end
 
@@ -102,5 +105,16 @@ private
       auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
       client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/laa-apply-service%40laa-apply-for-legal-aid.iam.gserviceaccount.com",
     }
+  end
+
+  def clear_sheet(type)
+    index = type.eql?("ROWS") ? :max_rows : :max_cols
+    range = Google::Apis::SheetsV4::DimensionRange.new(sheet_id: @worksheet.sheet_id,
+                                                       dimension: type,
+                                                       start_index: 1,
+                                                       end_index: @worksheet.send(index))
+
+    delete_dimension_request = Google::Apis::SheetsV4::DeleteDimensionRequest.new(range:)
+    @spreadsheet.batch_update([{ delete_dimension: delete_dimension_request }])
   end
 end
