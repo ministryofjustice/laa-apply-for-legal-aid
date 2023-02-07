@@ -1386,8 +1386,8 @@ en:
             a member of the armed forces
     use_ccms_under16s:
       show:
-        title_html: Use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
-        head_title: Use CCMS for this application
+        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to complete this application in CCMS
         warning: We're not currently accepting applications for clients under 16.
         continue_in_ccms_html: Apply in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
