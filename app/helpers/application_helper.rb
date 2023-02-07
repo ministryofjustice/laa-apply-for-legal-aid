@@ -16,12 +16,6 @@ module ApplicationHelper
     t ".#{[*controller, lazy_t].join('.')}", **args
   end
 
-  def menu_button
-    button_tag(t("generic.menu"),
-               type: "button", role: "button", class: "govuk-header__menu-button govuk-js-header-toggle",
-               aria: { controls: "navigation", label: t("generic.toggle_navigation") })
-  end
-
   def back_link(text: t("generic.back"), path: back_path, method: nil)
     return unless path
 
