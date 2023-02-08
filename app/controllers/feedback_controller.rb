@@ -116,9 +116,9 @@ private
   end
 
   def source
-    path = session[:feedback_return_path]
-    return :provider if %r{/providers/}.match?(path)
-    return :citizen if %r{/citizens/}.match?(path)
+    path = session[:feedback_return_path].to_s
+    return :provider if path.include?("/providers/")
+    return :citizen if path.include?("/citizens/")
 
     :unknown
   end

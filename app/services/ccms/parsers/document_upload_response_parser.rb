@@ -5,7 +5,7 @@ module CCMS
       TRANSACTION_ID_PATH = "//Body/DocumentUploadRS/TransactionID".freeze
 
       def success?
-        /Success/.match?(parse(:extracted_status))
+        parse(:extracted_status).include?("Success")
       end
 
     private

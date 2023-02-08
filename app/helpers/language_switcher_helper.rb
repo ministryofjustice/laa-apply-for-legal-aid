@@ -15,7 +15,7 @@ module LanguageSwitcherHelper
   end
 
   def citizen_page?
-    session[:journey_type] == "citizens" || %r{/assessment_already_completed}.match?(request.path)
+    session[:journey_type] == "citizens" || request.path.include?("/assessment_already_completed")
   end
 
   def pages_without_language_switcher
