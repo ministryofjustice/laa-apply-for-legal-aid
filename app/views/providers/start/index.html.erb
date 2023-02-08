@@ -2,19 +2,20 @@
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl"><%= t(".apply_for_legal_aid_heading") %></h1>
 
-    <%= govuk_inset_text do %>
-      <p class="govuk-body"><%= t(".must_be_provider") %></p>
-    <% end %>
+    <p class="govuk-body"><%= t(".must_be_provider") %></p>
 
-    <p class="govuk-body"><%= t(".domestic_violence_or_abuse_only") %></p>
+    <h2 class="govuk-heading-m"><%= t(".when_not_to_use_service.heading") %></h2>
+
+    <div class="maximize-text-width">
+      <p class="govuk-body"><%= t ".when_not_to_use_service.list_title" %></p>
+        <% if Setting.means_test_review_phase_one? %>
+          <%= list_from_translation_path ".start.index.when_not_to_use_service.list_items_post_mtr_phase_one" %>
+        <% else %>
+          <%= list_from_translation_path ".start.index.when_not_to_use_service.list_items" %>
+        <% end %>
+    </div>
 
     <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
-
-    <h2 class="govuk-heading-m"><%= t(".before_you_start.heading") %></h2>
-
-    <p class="govuk-body">
-      <%= t(".before_you_start.conditions") %>
-    </p>
 
     <%= link_to_accessible start_button_label(:start_now),
                            providers_legal_aid_applications_path,

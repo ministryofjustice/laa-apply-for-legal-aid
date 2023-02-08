@@ -90,3 +90,21 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
 
     When I click 'Save and continue'
     Then I should be on a page with title "No means test required"
+
+  @javascript
+  Scenario: I am warned not to use the service for under 16 year olds
+    Given the feature flag for means_test_review_phase_one is disabled
+    When I visit the application service
+    Then I should be on a page with title "Apply for legal aid"
+    And I should see "When not to use this service"
+    And I should see "is under 16 years old"
+
+  @javascript
+  Scenario: I am NOT warned not to use the service for under 16 year olds
+    Given the feature flag for means_test_review_phase_one is enabled
+    When I visit the application service
+    Then I should be on a page with title "Apply for legal aid"
+    And I should see "When not to use this service"
+    And I should not see "is under 16 years old"
+
+
