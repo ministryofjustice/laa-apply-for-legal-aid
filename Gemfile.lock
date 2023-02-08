@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/anedot/sidekiq-status.git
+  revision: 6ffd4c96f9bd4d52d8c304ee5de60d4ec2b5685b
+  ref: 6ffd4c9
+  specs:
+    sidekiq-status (2.1.3)
+      chronic_duration
+      sidekiq (>= 5.0, < 8.0)
+
+GIT
   remote: https://github.com/dev-develop/ruby-saml-idp.git
   revision: e8c9ba90a0f868e03d033133df1d2b035b9b65a9
   branch: master
@@ -654,9 +663,6 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.11.0)
-    sidekiq-status (2.1.3)
-      chronic_duration
-      sidekiq (>= 5.0)
     signet (0.17.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -821,7 +827,7 @@ DEPENDENCIES
   sentry-sidekiq
   shoulda-matchers (~> 5.3)
   sidekiq (~> 7.0)
-  sidekiq-status (~> 2.1.3)
+  sidekiq-status!
   simple_command
   simplecov
   simplecov-rcov

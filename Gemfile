@@ -62,7 +62,8 @@ gem "jwt"
 # background processing
 gem "redis-namespace"
 gem "sidekiq", "~> 7.0"
-gem "sidekiq-status", "~> 2.1.3"
+gem "sidekiq-status", git: "https://github.com/anedot/sidekiq-status.git", ref: "6ffd4c9"
+# gem "sidekiq-status", git: "https://github.com/anedot/sidekiq-status.git", branch: "sidekiq-7"
 
 # URL and path parsing
 gem "addressable"
