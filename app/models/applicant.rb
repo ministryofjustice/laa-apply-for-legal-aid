@@ -34,11 +34,19 @@ class Applicant < ApplicationRecord
   end
 
   def true_layer_token
-    true_layer_token_data[:token]
+    if encrypted_true_layer_token && encrypted_true_layer_token["token"]
+      encrypted_true_layer_token["token"]
+    else
+      true_layer_token_data[:token]
+    end
   end
 
   def true_layer_token_expires_at
-    Time.zone.parse(true_layer_token_data[:expires]) if true_layer_token_data[:expires]
+    if encrypted_true_layer_token && encrypted_true_layer_token["expires_at"]
+      Time.zone.parse(encrypted_true_layer_token["expires_at"])
+    elsif true_layer_token_data[:expires]
+      Time.zone.parse(true_layer_token_data[:expires])
+    end
   end
 
   def true_layer_token_data
