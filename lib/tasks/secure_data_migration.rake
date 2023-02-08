@@ -37,4 +37,38 @@ namespace :secure_data_migration do
       puts "Updated #{updated} of #{applicants.count} Applicants"
     end
   end
+
+  desc "Temporary task to destroy SecureData TrueLayer tokens"
+  task :destroy_true_layer_tokens, %i[commit sample] => :environment do |_task, args|
+    args = args.with_defaults(commit: "false", sample: nil)
+
+    # `true_layer_secure_data_id` is a string rather than a UUID, so we can't use `joins`
+    applicants = if args[:sample]
+      Applicant.where.not(
+        true_layer_secure_data_id: [nil, ""],
+        encrypted_true_layer_token: nil,
+      ).limit(args[:sample].to_i)
+    else
+      Applicant.where.not(
+        true_layer_secure_data_id: [nil, ""],
+        encrypted_true_layer_token: nil,
+      )
+    end
+
+    puts "Found #{applicants.count} Applicants with TrueLayer token data to migrate"
+    puts "Destroying SecureData TrueLayer tokens in batches of 50..."
+
+    applicants.in_batches(of: 50).each_with_index do |batch, batch_index|
+      secure_data = SecureData.where(id: batch.pluck(:true_layer_secure_data_id))
+
+      puts "Found #{secure_data.count} SecureData records to destroy"
+
+      next unless args[:commit] == "true"
+
+      secure_data.destroy_all
+
+      destroyed = [(batch_index + 1) * 50, applicants.count].min
+      puts "Destroyed #{destroyed} of #{applicants.count} SecureData TrueLayer tokens"
+    end
+  end
 end
