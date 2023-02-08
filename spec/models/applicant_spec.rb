@@ -402,4 +402,20 @@ RSpec.describe Applicant do
       end
     end
   end
+
+  describe "#employment_status" do
+    context "when employed" do
+      it "returns Employed" do
+        applicant = build(:applicant, :employed)
+        expect(applicant.employment_status).to eq "Employed"
+      end
+    end
+
+    context "when not employed" do
+      it "returns Not employed" do
+        applicant = build(:applicant, :not_employed)
+        expect(applicant.employment_status).to eq "Not employed"
+      end
+    end
+  end
 end

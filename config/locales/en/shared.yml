@@ -244,6 +244,7 @@ en:
         total: Total capital assessed
       client_details:
         address: Correspondence address
+        employment_status: Employment status
         age: "%{years} years old"
         age_question: Age at computation date
         means_tested: Was the client means-tested?
