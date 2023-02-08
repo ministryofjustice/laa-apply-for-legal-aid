@@ -78,8 +78,7 @@ gem "libreconv"
 gem "business"
 
 # Monitoring
-gem "prometheus_exporter", "=0.4.17"
-gem "webrick"
+gem "prometheus_exporter"
 
 # Generating Fake applications for tests and admin user
 gem "factory_bot_rails", ">= 6.2.0"

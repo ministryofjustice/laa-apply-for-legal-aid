@@ -483,7 +483,8 @@ GEM
       optimist (~> 3.0)
     pg (1.4.5)
     pg_dump_anonymize (0.1.2)
-    prometheus_exporter (0.4.17)
+    prometheus_exporter (2.0.8)
+      webrick
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -802,7 +803,7 @@ DEPENDENCIES
   pagy
   pg
   pg_dump_anonymize
-  prometheus_exporter (= 0.4.17)
+  prometheus_exporter
   pry-byebug
   pry-rescue
   pry-stack_explorer
@@ -840,7 +841,6 @@ DEPENDENCIES
   webdrivers (~> 5.2)
   webmock
   webpacker (~> 5)
-  webrick
 
 RUBY VERSION
    ruby 3.2.0p0
