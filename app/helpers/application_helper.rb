@@ -42,7 +42,7 @@ module ApplicationHelper
   def provider_header_navigation(header)
     if provider_signed_in?
       header.with_navigation_item(text: current_provider.username, href: providers_provider_path, active: false)
-      header.with_navigation_item(text: t("layouts.logout.provider"), href: destroy_provider_session_path, active: false, options: { method: :delete }, html_attributes: { method: :delete })
+      header.with_navigation_item(text: t("layouts.logout.provider"), href: destroy_provider_session_path, active: false, options: { method: :delete })
     else
       header.with_navigation_item(text: t("layouts.login"), href: providers_legal_aid_applications_path, active: false)
     end
@@ -51,7 +51,7 @@ module ApplicationHelper
   def admin_header_navigation(header)
     return unless admin_user_signed_in?
 
-    header.with_navigation_item(text: t("layouts.logout.admin"), href: destroy_admin_user_session_path, active: false, options: { method: :delete }, html_attributes: { method: :delete })
+    header.with_navigation_item(text: t("layouts.logout.admin"), href: destroy_admin_user_session_path, active: false, options: { method: :delete })
   end
 
   def list_from_translation_path(translation_path, params: {})
