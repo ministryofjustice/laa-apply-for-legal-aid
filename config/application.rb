@@ -30,6 +30,11 @@ module LaaApplyForLegalAid
       g.test_framework :rspec
     end
 
+    # ActiveRecord::Encryption keys generated with `bin/rails db:encryption:init`
+    config.active_record.encryption.primary_key = ENV.fetch("ENCRYPTION_PRIMARY_KEY", "fake-primary-key")
+    config.active_record.encryption.deterministic_key = ENV.fetch("ENCRYPTION_DETERMINISTIC_KEY", "fake-deterministic-key")
+    config.active_record.encryption.key_derivation_salt = ENV.fetch("ENCRYPTION_KEY_DERIVATION_SALT", "fake-key-derivation-salt")
+
     config.x.application.host             = ENV.fetch("HOST", nil)
     config.x.benefit_check.service_name   = ENV.fetch("BC_LSC_SERVICE_NAME", nil)
     config.x.benefit_check.client_org_id  = ENV.fetch("BC_CLIENT_ORG_ID", nil)
