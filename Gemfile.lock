@@ -813,6 +813,7 @@ DEPENDENCIES
   rack-pjax
   rails
   rails-controller-testing
+  redis
   redis-namespace
   rexml
   rspec-rails (~> 6.0)
