@@ -19,7 +19,7 @@
     "postcss": "^8.4.21"
   },
   "devDependencies": {
-    "jest-environment-jsdom": "^29.4.1",
+    "jest-environment-jsdom": "^29.4.2",
     "jest-environment-jsdom-global": "^4.0.0",
     "puppeteer": "19.2.0",
     "standard": "^17.0.0",
