@@ -1362,10 +1362,10 @@ en:
         sorted: Sorted
     use_ccms:
       show:
-        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
-        head_title: You need to complete this application in CCMS
-        sub_heading: "You cannot use this service if your client:"
-        continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to apply using CCMS
+        warning: "You cannot use this service if your client:"
+        continue_in_ccms_html: Applu using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         online_banking_consent:
           list: |
@@ -1374,10 +1374,10 @@ en:
             is employed
     use_ccms_employed:
       index:
-        title_html: Use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
-        head_title: Use CCMS for this application
+        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to apply using CCMS
         warning: We're not currently accepting applications for employed clients.
-        continue_in_ccms_html: Apply in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         warning_list_title: 'You cannot use this service if your client is:'
         ineligible_employed:
@@ -1386,16 +1386,11 @@ en:
             a member of the armed forces
     use_ccms_under16s:
       show:
-        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
-        head_title: You need to complete this application in CCMS
-        warning: We're not currently accepting applications for clients under 16.
-        continue_in_ccms_html: Apply in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to apply using CCMS
+        warning: You cannot use this service if your client is under 16 years old
+        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
-        list_title: 'You cannot use this service if your client:'
-        list_items:
-          list: |
-            is under 16 years old
-            was under 16 years old when the incident happened
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?

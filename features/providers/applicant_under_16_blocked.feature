@@ -43,7 +43,7 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
     Then I should be on a page showing 'Check your answers'
 
     When I click 'Save and continue'
-    Then I should be on a page showing "You need to complete this application in CCMS"
+    Then I should be on a page showing "You need to apply using CCMS"
     And the page is accessible
 
   @javascript @vcr
