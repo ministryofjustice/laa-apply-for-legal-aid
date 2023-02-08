@@ -54,6 +54,10 @@ FactoryBot.define do
       date_of_birth { 18.years.ago(as_of) + 1.day }
     end
 
+    trait :under_16 do
+      date_of_birth { 16.years.ago + 1.day }
+    end
+
     trait :with_true_layer_tokens do
       after(:build) do |applicant|
         applicant.store_true_layer_token(

@@ -14,6 +14,7 @@ class BaseStateMachine < ApplicationRecord
     no_applicant_consent
     non_passported
     offline_accounts
+    under_16_blocked
     unknown
   ].freeze
 
@@ -91,6 +92,7 @@ class BaseStateMachine < ApplicationRecord
       transitions from: %i[
                     initiated
                     entering_applicant_details
+                    checking_applicant_details
                     applicant_details_checked
                     delegated_functions_used
                     provider_confirming_applicant_eligibility

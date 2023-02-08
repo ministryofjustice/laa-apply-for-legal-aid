@@ -327,7 +327,7 @@ Feature: Applicant details
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'You need to complete this application in CCMS'
+    Then I should be on a page showing "You need to apply using CCMS"
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check

@@ -68,7 +68,7 @@ class LegalAidApplication < ApplicationRecord
 
   validate :validate_document_categories
 
-  delegate :bank_transactions, to: :applicant, allow_nil: true
+  delegate :bank_transactions, :under_16_blocked?, to: :applicant, allow_nil: true
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
   delegate :applicant_enter_means!,

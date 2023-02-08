@@ -217,6 +217,8 @@ RSpec.describe Providers::CheckProviderAnswersController do
         application.check_applicant_details!
       end
 
+      it_behaves_like "age_for_means_test_purposes updater"
+
       shared_examples "non means tested flow" do
         it "redirects to no means test required confirmation page" do
           request
@@ -225,6 +227,17 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
         it "marks application as non means tested" do
           expect { request }.to change { application.reload.non_means_tested? }.from(false).to(true)
+        end
+      end
+
+      shared_examples "under 16 blocked flow" do
+        it "redirects to use CCMS interruption page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_use_ccms_under16s_path(application))
+        end
+
+        it "marks application as under 16s blocked" do
+          expect { request }.to change { application.reload.under_16_blocked? }.from(false).to(true)
         end
       end
 
@@ -243,8 +256,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
           request
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
-
-        it_behaves_like "age_for_means_test_purposes updater"
       end
 
       context "when already non passported with negative benefit_check_result" do
@@ -259,7 +270,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
-          it_behaves_like "age_for_means_test_purposes updater"
 
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(NonPassportedStateMachine).to(NonMeansTestedStateMachine)
@@ -298,7 +308,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18_as_of, as_of: 7.days.ago) }
 
           it_behaves_like "non means tested flow"
-          it_behaves_like "age_for_means_test_purposes updater"
         end
       end
 
@@ -324,11 +333,30 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
-          it_behaves_like "age_for_means_test_purposes updater"
 
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
           end
+        end
+
+        context "with MTR phse one enabled and applicant under 16" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+          let(:applicant) { create(:applicant, :under_16) }
+
+          it_behaves_like "non means tested flow"
+
+          it "switches to non means tested state machine" do
+            expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
+          end
+        end
+
+        context "with MTR phse one disabled and applicant under 16" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
+
+          let(:applicant) { create(:applicant, :under_16) }
+
+          it_behaves_like "under 16 blocked flow"
         end
       end
 
@@ -355,11 +383,30 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
-          it_behaves_like "age_for_means_test_purposes updater"
 
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
           end
+        end
+
+        context "with MTR phase one enabled and applicant under 16" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+          let(:applicant) { create(:applicant, :under_16) }
+
+          it_behaves_like "non means tested flow"
+
+          it "switches to non means tested state machine" do
+            expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
+          end
+        end
+
+        context "with MTR phase one disabled and applicant under 16" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
+
+          let(:applicant) { create(:applicant, :under_16) }
+
+          it_behaves_like "under 16 blocked flow"
         end
       end
     end

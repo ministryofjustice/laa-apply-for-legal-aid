@@ -114,7 +114,7 @@ RSpec.describe Applicant do
       expect(age).to be 48
     end
 
-    context "when applicant does not require a means test" do
+    context "when MTR phase one enabled and applicant under 18" do
       before do
         allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
         applicant.age_for_means_test_purposes = 17
@@ -122,6 +122,28 @@ RSpec.describe Applicant do
 
       it "returns age stored in age_for_means_test_purposes" do
         expect(age).to be 17
+      end
+    end
+
+    context "when MTR phase one disabled and under 16" do
+      before do
+        allow(Setting).to receive(:means_test_review_phase_one?).and_return(false)
+      end
+
+      it "returns age stored in age_for_means_test_purposes" do
+        allow(applicant).to receive(:age_for_means_test_purposes).and_return(15)
+        expect(age).to be 15
+      end
+    end
+
+    context "when MTR phase one disabled and 16 or over" do
+      before do
+        allow(Setting).to receive(:means_test_review_phase_one?).and_return(false)
+      end
+
+      it "returns age calculated by AgeCalculator" do
+        allow(AgeCalculator).to receive(:call).and_return(45)
+        expect(age).to be 45
       end
     end
   end
@@ -184,6 +206,56 @@ RSpec.describe Applicant do
 
       context "with age_for_means_test_purposes of 18" do
         before { applicant.age_for_means_test_purposes = 18 }
+
+        it { is_expected.to be false }
+      end
+
+      context "with age_for_means_test_purposes of nil" do
+        before { applicant.age_for_means_test_purposes = nil }
+
+        it { is_expected.to be false }
+      end
+    end
+  end
+
+  describe "#under_16_blocked?" do
+    subject { applicant.under_16_blocked? }
+
+    let(:applicant) { build(:applicant) }
+
+    context "when means_test_review_phase_one? is enabled" do
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+      context "with age_for_means_test_purposes of 15" do
+        before { applicant.age_for_means_test_purposes = 15 }
+
+        it { is_expected.to be false }
+      end
+
+      context "with age_for_means_test_purposes of 16" do
+        before { applicant.age_for_means_test_purposes = 16 }
+
+        it { is_expected.to be false }
+      end
+
+      context "with age_for_means_test_purposes of nil" do
+        before { applicant.age_for_means_test_purposes = nil }
+
+        it { is_expected.to be false }
+      end
+    end
+
+    context "when means_test_review_phase_one? is disabled" do
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
+
+      context "with age_for_means_test_purposes of 15" do
+        before { applicant.age_for_means_test_purposes = 15 }
+
+        it { is_expected.to be true }
+      end
+
+      context "with age_for_means_test_purposes of 16" do
+        before { applicant.age_for_means_test_purposes = 16 }
 
         it { is_expected.to be false }
       end

@@ -1297,16 +1297,22 @@ en:
     start:
       index:
         apply_for_legal_aid_heading: Apply for legal aid
-        domestic_violence_or_abuse_only: Use this service to apply for civil legal aid in domestic violence or abuse cases.
-        must_be_provider: You must be a civil or family legal aid provider to use this service.
-        before_you_start:
-          conditions: |
-            You can only use this service if your client is single (unless their
-            partner is the opponent in the case).
-          heading: Before you start
+        must_be_provider: Civil and family legal aid providers can use this service to apply for civil legal aid.
+        when_not_to_use_service:
+          heading: When not to use this service
+          list_title: "Do not use this service if your client:"
+          list_items:
+            list: |
+              is under 16 years old
+              is self-employed
+              has a partner, unless the case is against the partner
+          list_items_post_mtr_phase_one:
+            list: |
+              is self-employed
+              has a partner, unless the case is against the partner
         use_ccms_para_html: |
-          Use the Client and Cost Management System (<abbr title='Client and
-          Cost Management System'>CCMS</abbr>) for all other applications.
+         You will need to apply using <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and
+          Cost Management System'>CCMS</abbr> (Client and Cost Management System)</a> instead.
     start_chances_of_successes:
       show:
         h1-heading: Provide details of the case
@@ -1362,10 +1368,10 @@ en:
         sorted: Sorted
     use_ccms:
       show:
-        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
-        head_title: You need to complete this application in CCMS
-        sub_heading: "You cannot use this service if your client:"
-        continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to apply using CCMS
+        warning: "You cannot use this service if your client:"
+        continue_in_ccms_html: Applu using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         online_banking_consent:
           list: |
@@ -1374,16 +1380,23 @@ en:
             is employed
     use_ccms_employed:
       index:
-        title_html: Use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
-        head_title: Use CCMS for this application
+        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to apply using CCMS
         warning: We're not currently accepting applications for employed clients.
-        continue_in_ccms_html: Apply in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         warning_list_title: 'You cannot use this service if your client is:'
         ineligible_employed:
           list: |
             self-employed
             a member of the armed forces
+    use_ccms_under16s:
+      show:
+        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to apply using CCMS
+        warning: You cannot use this service if your client is under 16 years old
+        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        back_to_applications: Back to my applications
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?

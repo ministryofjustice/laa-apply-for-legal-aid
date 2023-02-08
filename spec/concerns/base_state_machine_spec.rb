@@ -2,7 +2,7 @@ require "rails_helper"
 require "aasm/rspec"
 
 RSpec.describe BaseStateMachine do
-  subject { legal_aid_application.state_machine }
+  subject(:state_machine) { legal_aid_application.state_machine }
 
   let(:legal_aid_application) { create(:legal_aid_application, :with_base_state_machine) }
 
@@ -86,5 +86,23 @@ RSpec.describe BaseStateMachine do
 
       it { is_expected.to transition_from(:applicant_details_checked).to(:checking_merits_answers).on_event(event) }
     end
+  end
+
+  describe "#use_ccms" do
+    let(:event) { :use_ccms }
+
+    it { is_expected.to transition_from(:initiated).to(:use_ccms).on_event(event, :unknown) }
+    it { is_expected.to transition_from(:entering_applicant_details).to(:use_ccms).on_event(:use_ccms, :unknown) }
+    it { is_expected.to transition_from(:checking_applicant_details).to(:use_ccms).on_event(:use_ccms, :unknown) }
+    it { is_expected.to transition_from(:applicant_details_checked).to(:use_ccms).on_event(event, :unknown) }
+    it { is_expected.to transition_from(:delegated_functions_used).to(:use_ccms).on_event(event, :unknown) }
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :unknown) }
+
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :employed) }
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :no_online_banking) }
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :no_applicant_consent) }
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :non_passported) }
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :offline_accounts) }
+    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :under_16_blocked) }
   end
 end
