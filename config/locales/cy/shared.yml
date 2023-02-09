@@ -133,6 +133,7 @@ cy:
         total: dessessa latipac latoT
       client_details:
         address: sserdda ecnednopserroC
+        employment_status: sutats tnemyolpmE
         age: dlo sraey %{years}
         age_question: etad noitatupmoc ta egA
         means_tested: ?detset-snaem tneilc eht saW

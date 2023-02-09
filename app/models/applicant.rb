@@ -100,6 +100,6 @@ class Applicant < ApplicationRecord
   end
 
   def employment_status
-    employed? ? "Employed" : "Not employed"
+    employed? ? I18n.t("activemodel.attributes.applicant.employed") : I18n.t("activemodel.attributes.applicant.not_employed")
   end
 end

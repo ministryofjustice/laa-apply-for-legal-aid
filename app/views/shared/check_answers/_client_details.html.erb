@@ -61,7 +61,6 @@
   <% if :employment_status.in?(attributes) && !applicant.employed.nil? %>
     <%= check_answer_link(
           name: :employment_status,
-          url: nil,
           question: t(".employment_status"),
           answer: applicant.employment_status,
           read_only:,
