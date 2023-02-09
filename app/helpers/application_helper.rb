@@ -1,10 +1,6 @@
 module ApplicationHelper
   def home_link
-    link_url = "#"
-    link_url = providers_legal_aid_applications_url if request.path_info.include?("providers")
-    link_to_accessible(t("layouts.application.header.title"),
-                       link_url,
-                       class: "govuk-heading-m govuk-!-margin-bottom-0 govuk-header__link govuk-header__service-name")
+    request.path_info.include?("providers") ? providers_legal_aid_applications_url : "#"
   end
 
   def html_title
@@ -18,12 +14,6 @@ module ApplicationHelper
   def controller_t(lazy_t, **args)
     controller = controller_path.split("/")
     t ".#{[*controller, lazy_t].join('.')}", **args
-  end
-
-  def menu_button
-    button_tag(t("generic.menu"),
-               type: "button", role: "button", class: "govuk-header__menu-button govuk-js-header-toggle",
-               aria: { controls: "navigation", label: t("generic.toggle_navigation") })
   end
 
   def back_link(text: t("generic.back"), path: back_path, method: nil)
@@ -42,31 +32,26 @@ module ApplicationHelper
     parent
   end
 
-  def user_header_link
-    return admin_header_link if current_journey == :admin
+  def user_header_navigation(header)
+    return if current_journey == :citizens
+    return admin_header_navigation(header) if current_journey == :admin
 
-    provider_header_link
+    provider_header_navigation(header)
   end
 
-  def provider_header_link
+  def provider_header_navigation(header)
     if provider_signed_in?
-      render "shared/provider_header_link"
+      header.with_navigation_item(text: current_provider.username, href: providers_provider_path, active: false)
+      header.with_navigation_item(text: t("layouts.logout.provider"), href: destroy_provider_session_path, active: false, options: { method: :delete })
     else
-      render "shared/signed_out_header_link"
+      header.with_navigation_item(text: t("layouts.login"), href: providers_legal_aid_applications_path, active: false)
     end
   end
 
-  def admin_header_link
+  def admin_header_navigation(header)
     return unless admin_user_signed_in?
 
-    button = button_to_accessible(
-      t("layouts.logout.admin"),
-      destroy_admin_user_session_path,
-      method: :delete,
-      class: "button-as-link govuk-header__link",
-    )
-
-    content_tag(:li, button, class: "govuk-header__navigation-item")
+    header.with_navigation_item(text: t("layouts.logout.admin"), href: destroy_admin_user_session_path, active: false, options: { method: :delete })
   end
 
   def list_from_translation_path(translation_path, params: {})
