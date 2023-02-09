@@ -36,8 +36,9 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
         expect(response).to have_http_status(:ok)
       end
 
-      it "displays the confirm client declaration page" do
-        expect(unescaped_response_body).to include(I18n.t("providers.review_and_print_applications.show.heading"))
+      it "renders the confirm client declaration page" do
+        expect(response).to render_template("providers/review_and_print_applications/show")
+        expect(response.body).to include("Review and print your application")
       end
     end
   end
