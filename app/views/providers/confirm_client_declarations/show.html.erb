@@ -36,7 +36,7 @@
             "",
             link_errors: true,
             multiple: false,
-            label: { text: t(".confirmation_checkbox") },
+            label: { text: t(".#{i18n_prefix}.confirmation_checkbox", applicant_name: @legal_aid_application.applicant_full_name) },
           ) %>
     <% end %>
 

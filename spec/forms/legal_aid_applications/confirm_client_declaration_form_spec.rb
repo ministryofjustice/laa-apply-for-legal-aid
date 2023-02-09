@@ -16,6 +16,7 @@ RSpec.describe LegalAidApplications::ConfirmClientDeclarationForm do
       it "is invalid" do
         expect(form).to be_invalid
         expect(form.errors).to be_added(:client_declaration_confirmed, :accepted)
+        expect(form.errors.messages[:client_declaration_confirmed]).to include("Confirm this information is correct and that you'll get a signed declaration")
       end
     end
   end
