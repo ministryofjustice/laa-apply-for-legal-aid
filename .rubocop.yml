@@ -18,7 +18,6 @@ AllCops:
   SuggestExtensions: false
   Exclude:
   - 'db/schema.rb'
-  - 'db/data_schema.rb'
   - 'vendor/**/*'
   - 'node_modules/**/*'
   - 'ccms_integration/*'

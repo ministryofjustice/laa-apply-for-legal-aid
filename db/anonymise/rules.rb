@@ -86,7 +86,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     cfe_result: nil,
   },
   chances_of_successes: {},
-  data_migrations: {},
   debugs: {},
   dependants: {
     name: -> { Faker::Name.name },

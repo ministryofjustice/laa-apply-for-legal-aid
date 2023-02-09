@@ -5,7 +5,6 @@ ruby "3.2.0"
 
 gem "aasm", "~> 5.5.0"
 gem "active_model_serializers", "~> 0.10.13"
-gem "data_migrate"
 gem "discard", "~> 1.2"
 gem "geckoboard-ruby"
 gem "google_drive", ">= 3.0.7"
