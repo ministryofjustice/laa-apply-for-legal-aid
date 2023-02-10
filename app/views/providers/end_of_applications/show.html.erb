@@ -12,7 +12,13 @@
   <p class="govuk-body govuk-!-padding-top-4"><%= t(".confirmation_email_sent") %></p>
 
   <h2 class="govuk-heading-m"><%= t(".need_to_do") %></h2>
-  <p class="govuk-body"><%= t(".print_application") %></p>
+
+  <% if @legal_aid_application.non_means_tested? %>
+    <p class="govuk-body"><%= t(".print_application.under_18", applicant_name: @legal_aid_application.applicant_full_name) %></p>
+  <% else %>
+    <p class="govuk-body"><%= t(".print_application.over_18") %></p>
+  <% end %>
+
   <p class="govuk-body"><%= t(".keep_file") %></p>
   <ul class="govuk-list govuk-list--bullet">
     <li><%= t(".copy_application") %></li>

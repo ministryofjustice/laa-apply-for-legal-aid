@@ -519,9 +519,11 @@ en:
         your_case_reference_number: Your case reference number is
         confirmation_email_sent: We've sent you a confirmation email.
         need_to_do: What you need to do
-        print_application: Print the completed application and get your client to sign it.
+        print_application:
+          under_18: Print the completed application and get the person acting for %{applicant_name} to sign it. For example, a litigation friend, a professional children’s guardian or a parental order report.
+          over_18: Print the completed application and get your client to sign it.
         financial_evidence: any evidence you used to determine your client’s financial situation
-        client_sign: a signed copy of your client’s declaration
+        client_sign: a signed copy of the declaration
         keep_file: "Keep on file:"
         copy_application: a copy of the application
         audit: You may need to show these if you’re audited by the LAA in the future.
