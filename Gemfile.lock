@@ -284,15 +284,8 @@ GEM
       retriable (>= 2.0, < 4.a)
       rexml
       webrick
-    google-apis-drive_v3 (0.34.0)
-      google-apis-core (>= 0.9.1, < 2.a)
     google-apis-sheets_v4 (0.21.0)
       google-apis-core (>= 0.9.1, < 2.a)
-    google_drive (3.0.7)
-      google-apis-drive_v3 (>= 0.5.0, < 1.0.0)
-      google-apis-sheets_v4 (>= 0.4.0, < 1.0.0)
-      googleauth (>= 0.5.0, < 1.0.0)
-      nokogiri (>= 1.5.3, < 2.0.0)
     googleauth (0.17.1)
       faraday (>= 0.17.3, < 2.0)
       jwt (>= 1.4, < 3.0)
@@ -757,7 +750,7 @@ DEPENDENCIES
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   geckoboard-ruby
-  google_drive (>= 3.0.7)
+  google-apis-sheets_v4
   govuk-components
   govuk_design_system_formbuilder
   govuk_notify_rails (~> 2.2.0)
