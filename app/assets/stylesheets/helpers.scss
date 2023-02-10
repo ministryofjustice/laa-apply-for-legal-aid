@@ -19,6 +19,14 @@
   display: none !important;
 }
 
+.app-print-only {
+  display: none !important;
+
+  @include govuk-media-query($media-type: print) {
+    display: inherit !important;
+  }
+}
+
 @media print {
   .no-print,
   .no-print * {
