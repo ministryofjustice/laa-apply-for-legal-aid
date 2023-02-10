@@ -1,7 +1,5 @@
-<div class="govuk-list">
-  <ul class="govuk-list govuk-list--bullet">
-    <% items.each do |key, _v| %>
-      <li><%= t(key, scope: locale_path, **params) %></li>
-    <% end %>
-  </ul>
-</div>
+<ul class="govuk-list govuk-list--bullet print-add-bullet">
+  <% items.each do |key, _v| %>
+    <li><%= t(key, scope: locale_path, **params) %></li>
+  <% end %>
+</ul>
