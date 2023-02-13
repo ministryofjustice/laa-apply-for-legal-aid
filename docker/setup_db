@@ -5,4 +5,4 @@
 
 echo "Setup Database"
 bundle exec rake db:create
-bundle exec rake db:migrate:with_data db:seed
+bundle exec rake db:migrate db:seed

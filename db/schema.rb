@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_31_084513) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_145917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_084513) do
     t.boolean "armed_forces", default: false
     t.boolean "has_national_insurance_number"
     t.integer "age_for_means_test_purposes"
+    t.jsonb "encrypted_true_layer_token"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -348,9 +349,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_084513) do
     t.boolean "success_likely"
     t.uuid "proceeding_id", null: false
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
-  end
-
-  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

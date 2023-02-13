@@ -198,9 +198,6 @@ GEM
       rexml (~> 3.0)
       webrick (~> 1.7)
     cucumber-tag-expressions (4.1.0)
-    data_migrate (8.5.0)
-      activerecord (>= 5.0)
-      railties (>= 5.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.1)
@@ -750,7 +747,6 @@ DEPENDENCIES
   capybara (>= 3.36.0, < 4.0)
   cucumber
   cucumber-rails (>= 2.4.0)
-  data_migrate
   database_cleaner
   devise (>= 4.8.0)
   devise_saml_authenticatable (>= 1.7.0)

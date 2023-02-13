@@ -127,7 +127,6 @@ references:
       command: |
         bundle exec rake db:create db:schema:load
         bundle exec rake db:migrate db:seed
-        bundle exec rake data:migrate
 
 jobs:
   lint_checks:
