@@ -68,6 +68,22 @@ RSpec.describe Applicant do
     end
   end
 
+  describe "#store_true_layer_token" do
+    let(:applicant) { build(:applicant, encrypted_true_layer_token: nil) }
+
+    before { freeze_time }
+
+    it "saves the token and expiry time" do
+      applicant.store_true_layer_token(token: "test-token", expires: 1.year.ago)
+
+      expiry_time_in_json_format = 1.year.ago.iso8601(3)
+      expect(applicant.encrypted_true_layer_token).to match(
+        "token" => "test-token",
+        "expires_at" => expiry_time_in_json_format,
+      )
+    end
+  end
+
   context "with True Layer Token" do
     subject { applicant.store_true_layer_token token:, expires: token_expires_at }
 

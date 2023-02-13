@@ -359,5 +359,20 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: googleDataStudioUrl
+  - name: ENCRYPTION_PRIMARY_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: encryptionPrimaryKey
+  - name: ENCRYPTION_DETERMINISTIC_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: encryptionDeterministicKey
+  - name: ENCRYPTION_KEY_DERIVATION_SALT
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: encryptionKeyDerivationSalt
 
 {{- end }}

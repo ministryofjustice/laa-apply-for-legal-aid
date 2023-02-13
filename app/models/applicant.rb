@@ -15,6 +15,8 @@ class Applicant < ApplicationRecord
   has_many :bank_transactions, through: :bank_accounts
   belongs_to :true_layer_secure_data, class_name: :SecureData, optional: true
 
+  encrypts :encrypted_true_layer_token
+
   def email_address
     email
   end
@@ -25,7 +27,10 @@ class Applicant < ApplicationRecord
 
   def store_true_layer_token(token:, expires:)
     data = { token:, expires: }
-    update!(true_layer_secure_data_id: SecureData.create_and_store!(data))
+    update!(
+      true_layer_secure_data_id: SecureData.create_and_store!(data),
+      encrypted_true_layer_token: { token:, expires_at: expires },
+    )
   end
 
   def true_layer_token
