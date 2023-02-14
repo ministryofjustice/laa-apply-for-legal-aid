@@ -1,86 +1,93 @@
 require "rails_helper"
 
 RSpec.describe TrueLayer::BankDataImportService do
-  subject { described_class.call(legal_aid_application:) }
-
-  let(:token) { SecureRandom.hex }
-  let(:token_expires_at) { 1.hour.from_now }
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_transaction_period, :with_non_passported_state_machine) }
-  let(:applicant) { legal_aid_application.applicant }
-
-  before do
-    Setting.delete_all
-    applicant.store_true_layer_token(token:, expires: token_expires_at)
+  let(:legal_aid_application) do
+    create(
+      :legal_aid_application,
+      :with_transaction_period,
+      applicant:,
+    )
   end
 
+  let(:applicant) { build(:applicant, :with_encrypted_true_layer_token) }
+  let(:mock_data) { TrueLayerHelpers::MOCK_DATA }
+  let(:bank_provider) { applicant.bank_providers.last }
+
   describe "#call" do
-    let(:bank_provider) { applicant.bank_providers.find_by(token: applicant.true_layer_secure_data_id) }
-    let(:mock_data) { TrueLayerHelpers::MOCK_DATA }
-    let(:bank_error) { applicant.bank_errors.first }
-    let(:api_error) do
-      {
-        error_description: "Feature not supported by the provider",
-        error: :endpoint_not_supported,
-        error_details: { foo: :bar },
-      }
-    end
+    subject(:import_bank_data) { described_class.call(legal_aid_application:) }
 
     before { stub_true_layer }
 
-    it "imports the bank provider" do
-      expect { subject }.to change { applicant.bank_providers.count }.by(1)
-      expect(bank_provider.credentials_id).to eq(mock_data[:provider][:credentials_id])
-      expect(bank_provider.token_expires_at.utc.to_s).to eq(token_expires_at.utc.to_s)
-    end
+    context "when there are no API errors" do
+      it "imports the bank provider" do
+        expect { import_bank_data }
+          .to change { applicant.bank_providers.count }.by(1)
 
-    it "imports the bank accounts" do
-      expect { subject }.to change(BankAccount, :count).by(mock_data[:accounts].count)
-      mock_account_ids = mock_data[:accounts].pluck(:account_id).sort
-      expect(bank_provider.bank_accounts.pluck(:true_layer_id).sort).to eq(mock_account_ids)
-    end
+        expect(bank_provider).to have_attributes(
+          credentials_id: mock_data[:provider][:credentials_id],
+          true_layer_provider_id: mock_data[:provider][:provider][:provider_id],
+        )
+      end
 
-    it "imports the account balances" do
-      subject
-      mock_account_balances = mock_data[:accounts].map { |a| BigDecimal(a[:balance][:current].to_s).to_s }.sort
-      account_balances = bank_provider.bank_accounts.map { |a| BigDecimal(a.balance.to_s).to_s }.sort
-      expect(account_balances).to eq(mock_account_balances)
-    end
+      it "imports the bank accounts" do
+        expect { import_bank_data }
+          .to change(BankAccount, :count).by(mock_data[:accounts].count)
 
-    it "imports the bank account holders" do
-      expect { subject }.to change(BankAccountHolder, :count).by(mock_data[:account_holders].count)
-    end
+        expect(bank_provider.bank_accounts.pluck(:true_layer_id))
+          .to contain_exactly(*mock_data[:accounts].pluck(:account_id))
+      end
 
-    it "imports the transactions" do
-      mock_transaction_ids = mock_data[:accounts].flat_map { |a| a[:transactions].pluck(:transaction_id) }.sort
-      expect { subject }.to change(BankTransaction, :count).by(mock_transaction_ids.count)
+      it "imports the account balances" do
+        import_bank_data
 
-      transaction_ids = bank_provider.bank_accounts.flat_map(&:bank_transactions).pluck(:true_layer_id).sort
-      expect(transaction_ids).to eq(mock_transaction_ids)
-    end
+        mock_account_balances = mock_data[:accounts].map do |account|
+          account.fetch(:balance).fetch(:current)
+        end
 
-    it "is successful" do
-      expect(subject.success?).to be(true)
+        expect(bank_provider.bank_accounts.pluck(:balance))
+          .to contain_exactly(*mock_account_balances)
+      end
+
+      it "imports the bank account holders" do
+        expect { import_bank_data }
+          .to change(BankAccountHolder, :count)
+          .by(mock_data[:account_holders].count)
+      end
+
+      it "imports the transactions" do
+        mock_transaction_ids = mock_data[:accounts].flat_map do |account|
+          account.fetch(:transactions).pluck(:transaction_id)
+        end
+
+        expect { import_bank_data }
+          .to change(BankTransaction, :count).by(mock_transaction_ids.count)
+
+        transaction_ids = bank_provider
+          .bank_accounts
+          .flat_map(&:bank_transactions)
+          .pluck(:true_layer_id)
+
+        expect(transaction_ids).to contain_exactly(*mock_transaction_ids)
+      end
+
+      it "is successful" do
+        expect(import_bank_data).to be_success
+      end
     end
 
     context "when the provider API call is failing" do
-      before do
-        endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
-        stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
-      end
+      before { stub_true_layer_error(path: "data/v1/me") }
 
       it "returns an error" do
-        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:bank_data_import)
+        expect(import_bank_data.errors).to have_key(:bank_data_import)
       end
     end
 
     context "when a subsequent API call is failing" do
-      before do
-        endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/accounts"
-        stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
-      end
+      before { stub_true_layer_error(path: "data/v1/accounts") }
 
       it "does not import anything" do
-        expect { subject }
+        expect { import_bank_data }
           .to not_change(BankProvider, :count)
           .and not_change(BankAccount, :count)
           .and not_change(BankAccountHolder, :count)
@@ -88,14 +95,17 @@ RSpec.describe TrueLayer::BankDataImportService do
       end
 
       it "returns an error" do
-        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:bank_data_import)
+        expect(import_bank_data.errors).to have_key(:bank_data_import)
       end
 
-      it "saves the error in DB" do
-        subject
-        expect(bank_error.applicant).to eq(applicant)
-        expect(bank_error.bank_name).to eq(mock_data[:provider][:provider][:display_name])
-        expect(bank_error.error).to include(api_error.to_json)
+      it "saves the error" do
+        import_bank_data
+
+        expect(applicant.bank_errors.first).to have_attributes(
+          applicant:,
+          bank_name: mock_data[:provider][:provider][:display_name],
+          error: match(/:import_accounts/),
+        )
       end
     end
 
@@ -107,13 +117,17 @@ RSpec.describe TrueLayer::BankDataImportService do
       it "uses the Mock ApiClient" do
         expect(TrueLayer::ApiClient).not_to receive(:new)
         expect(TrueLayer::ApiClientMock).to receive(:new).and_call_original
-        subject
+        import_bank_data
       end
 
       it "imports the sample data" do
-        expect { subject }.to change { applicant.bank_providers.count }.by(1)
-        expect(bank_provider.credentials_id).to eq(sample_data::PROVIDERS.first[:credentials_id])
-        expect(bank_provider.bank_accounts.pluck(:true_layer_id).sort).to eq(sample_data::ACCOUNTS.pluck(:account_id).sort)
+        expect { import_bank_data }
+          .to change { applicant.bank_providers.count }.by(1)
+
+        expect(bank_provider.credentials_id)
+          .to eq(sample_data::PROVIDERS.first[:credentials_id])
+        expect(bank_provider.bank_accounts.pluck(:true_layer_id))
+          .to contain_exactly(*sample_data::ACCOUNTS.pluck(:account_id))
       end
     end
   end

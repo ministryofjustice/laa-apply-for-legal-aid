@@ -2,6 +2,8 @@ require "uri"
 require "omniauth"
 
 class Applicant < ApplicationRecord
+  self.ignored_columns += %w[true_layer_secure_data_id]
+
   devise :rememberable
 
   NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
@@ -13,7 +15,6 @@ class Applicant < ApplicationRecord
   has_many :bank_errors, dependent: :destroy
   has_many :bank_accounts, through: :bank_providers
   has_many :bank_transactions, through: :bank_accounts
-  belongs_to :true_layer_secure_data, class_name: :SecureData, optional: true
 
   encrypts :encrypted_true_layer_token
 
@@ -25,32 +26,13 @@ class Applicant < ApplicationRecord
     "#{first_name} #{last_name}".strip
   end
 
-  def store_true_layer_token(token:, expires:)
-    data = { token:, expires: }
-    update!(
-      true_layer_secure_data_id: SecureData.create_and_store!(data),
-      encrypted_true_layer_token: { token:, expires_at: expires },
-    )
-  end
-
   def true_layer_token
-    if encrypted_true_layer_token && encrypted_true_layer_token["token"]
-      encrypted_true_layer_token["token"]
-    else
-      true_layer_token_data[:token]
-    end
+    encrypted_true_layer_token&.fetch("token", nil)
   end
 
   def true_layer_token_expires_at
-    if encrypted_true_layer_token && encrypted_true_layer_token["expires_at"]
-      Time.zone.parse(encrypted_true_layer_token["expires_at"])
-    elsif true_layer_token_data[:expires]
-      Time.zone.parse(true_layer_token_data[:expires])
-    end
-  end
-
-  def true_layer_token_data
-    @true_layer_token_data = true_layer_secure_data.retrieve
+    expires_at = encrypted_true_layer_token&.fetch("expires_at", nil)
+    Time.zone.parse(expires_at) if expires_at
   end
 
   def age

@@ -21,7 +21,9 @@ module Applicants
   private
 
     def store_tokens
-      applicant.store_true_layer_token(token:, expires: token_expires_at)
+      applicant.update!(
+        encrypted_true_layer_token: { token:, expires_at: token_expires_at },
+      )
     end
 
     def token

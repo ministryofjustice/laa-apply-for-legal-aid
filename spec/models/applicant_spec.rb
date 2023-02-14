@@ -68,18 +68,24 @@ RSpec.describe Applicant do
     end
   end
 
-  describe "#store_true_layer_token" do
-    let(:applicant) { build(:applicant, encrypted_true_layer_token: nil) }
+  describe "#encrypted_true_layer_token" do
+    subject(:encrypted_true_layer_token) { applicant.encrypted_true_layer_token }
+
+    let(:applicant) do
+      build(
+        :applicant,
+        encrypted_true_layer_token: {
+          token: "test-token", expires_at: 1.day.ago
+        },
+      )
+    end
 
     before { freeze_time }
 
-    it "saves the token and expiry time" do
-      applicant.store_true_layer_token(token: "test-token", expires: 1.year.ago)
-
-      expiry_time_in_json_format = 1.year.ago.iso8601(3)
-      expect(applicant.encrypted_true_layer_token).to match(
+    it "returns the token" do
+      expect(encrypted_true_layer_token).to match(
         "token" => "test-token",
-        "expires_at" => expiry_time_in_json_format,
+        "expires_at" => 1.day.ago.iso8601(3),
       )
     end
   end
@@ -87,95 +93,50 @@ RSpec.describe Applicant do
   describe "#true_layer_token" do
     subject(:true_layer_token) { applicant.true_layer_token }
 
-    let(:applicant) do
-      create(
-        :applicant,
-        encrypted_true_layer_token:,
-        true_layer_secure_data_id: secure_data_id,
-      )
-    end
+    let(:applicant) { build(:applicant, encrypted_true_layer_token:) }
 
-    context "when there is encrypted data" do
-      let(:encrypted_true_layer_token) { { token: "encrypted-token" } }
-      let(:secure_data_id) { nil }
-
-      it "returns the token" do
-        expect(true_layer_token).to eq("encrypted-token")
-      end
-    end
-
-    context "when there is only SecureData" do
+    context "when the encrypted token is nil" do
       let(:encrypted_true_layer_token) { nil }
-      let(:secure_data_id) { SecureData.create_and_store!(token: "secure-token") }
 
-      it "returns the token" do
-        expect(true_layer_token).to eq("secure-token")
-      end
+      it { is_expected.to be_nil }
+    end
+
+    context "when the encrypted token does not contain a token" do
+      let(:encrypted_true_layer_token) { { expires_at: 1.year.ago } }
+
+      it { is_expected.to be_nil }
+    end
+
+    context "when the encrypted token contains a token" do
+      let(:encrypted_true_layer_token) { { token: "test-token" } }
+
+      it { is_expected.to eq("test-token") }
     end
   end
 
   describe "#true_layer_token_expires_at" do
     subject(:true_layer_token_expires_at) { applicant.true_layer_token_expires_at }
 
-    let(:applicant) do
-      create(
-        :applicant,
-        encrypted_true_layer_token:,
-        true_layer_secure_data_id: secure_data_id,
-      )
-    end
+    let(:applicant) { build(:applicant, encrypted_true_layer_token:) }
 
-    before { freeze_time }
-
-    context "when there is encrypted data" do
-      let(:encrypted_true_layer_token) { { expires_at: 1.year.ago } }
-      let(:secure_data_id) { nil }
-
-      it "returns the expiry time" do
-        expect(true_layer_token_expires_at).to eq(1.year.ago)
-      end
-    end
-
-    context "when there is only SecureData" do
+    context "when the encrypted token is nil" do
       let(:encrypted_true_layer_token) { nil }
-      let(:secure_data_id) { SecureData.create_and_store!(expires: 1.day.ago) }
 
-      it "returns the expiry time" do
-        expect(true_layer_token_expires_at).to eq(1.day.ago)
-      end
-    end
-  end
-
-  context "with True Layer Token" do
-    subject { applicant.store_true_layer_token token:, expires: token_expires_at }
-
-    let(:token) { SecureRandom.uuid }
-    # Note - JSON time doesn't include micro seconds so need to round to second to get consistent result
-    let(:token_expires_at) { 10.minutes.from_now.round(0) }
-    let(:data) { { token:, expires: token_expires_at } }
-    let(:applicant) { create(:applicant) }
-
-    it "stores the data securely" do
-      expect { subject }.to change(SecureData, :count).by(1)
+      it { is_expected.to be_nil }
     end
 
-    it "associates the applicant with the secure data" do
-      subject
-      expect(applicant.true_layer_secure_data_id).to eq(SecureData.last.id)
+    context "when the encrypted token does not contain an expiry time" do
+      let(:encrypted_true_layer_token) { { token: "test-token" } }
+
+      it { is_expected.to be_nil }
     end
 
-    describe "#true_layer_token" do
-      it "returns the original token" do
-        subject
-        expect(applicant.true_layer_token).to eq(token)
-      end
-    end
+    context "when the encrypted token contains an expiry time" do
+      let(:encrypted_true_layer_token) { { expires_at: 1.year.ago } }
 
-    describe "#true_layer_token_expires_at" do
-      it "returns the original expiry time" do
-        subject
-        expect(applicant.true_layer_token_expires_at).to eq(token_expires_at)
-      end
+      before { freeze_time }
+
+      it { is_expected.to eq(1.year.ago) }
     end
   end
 

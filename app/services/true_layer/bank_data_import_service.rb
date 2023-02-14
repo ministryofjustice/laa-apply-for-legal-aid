@@ -29,10 +29,6 @@ module TrueLayer
       applicant.true_layer_token
     end
 
-    def token_expires_at
-      applicant.true_layer_token_expires_at
-    end
-
     def import_bank_data
       import_bank_provider
       import_account_holders unless error
@@ -42,11 +38,8 @@ module TrueLayer
     end
 
     def import_bank_provider
-      command = Importers::ImportProviderService.call(
-        api_client:,
-        applicant:,
-        token_expires_at:,
-      )
+      command = Importers::ImportProviderService.call(api_client:, applicant:)
+
       if command.success?
         self.bank_provider = command.result
         self.bank_name = bank_provider.name

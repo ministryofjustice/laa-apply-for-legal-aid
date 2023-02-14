@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
   let(:bank_provider) { create(:bank_provider) }
-  let(:api_client) { TrueLayer::ApiClient.new(bank_provider.token) }
+  let(:api_client) { TrueLayer::ApiClient.new(SecureRandom.hex) }
 
   describe "#call" do
     subject { described_class.call(api_client, bank_provider) }

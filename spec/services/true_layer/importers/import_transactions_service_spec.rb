@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:mock_account) { TrueLayerHelpers::MOCK_DATA[:accounts].first }
   let(:bank_account) { create(:bank_account, true_layer_id: mock_account[:account_id]) }
-  let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
+  let(:api_client) { TrueLayer::ApiClient.new(SecureRandom.hex) }
 
   describe "#call" do
     subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
