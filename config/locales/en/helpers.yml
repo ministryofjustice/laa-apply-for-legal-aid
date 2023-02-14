@@ -75,8 +75,6 @@ en:
           <<: *true_false
         enable_evidence_upload:
           <<: *true_false
-        enable_loop:
-          <<: *true_false
     legend:
       providers_means_housing_benefit_form:
         transaction_type_ids: Does your client receive Housing Benefit?

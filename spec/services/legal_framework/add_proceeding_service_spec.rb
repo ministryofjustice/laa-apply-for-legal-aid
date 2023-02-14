@@ -33,46 +33,24 @@ module LegalFramework
           subject.call(**params)
         end
 
-        context "when the enable_loop feature flag" do
+        context "does not create scope_limitations for a proceeding" do
           before do
-            allow(Setting).to receive(:enable_loop?).and_return(enable_loop)
             subject.call(**params)
           end
 
           let(:proceeding) { legal_aid_application.proceedings.first }
 
-          context "is on" do
-            let(:enable_loop) { true }
-
-            it "does not create scope_limitations" do
-              expect(proceeding.reload.scope_limitations.count).to eq 0
-            end
-
-            it "does not populate the scope_limitation_attrs" do
-              expect(proceeding.substantive_level_of_service).to be_nil
-              expect(proceeding.substantive_level_of_service_name).to be_nil
-              expect(proceeding.substantive_level_of_service_stage).to be_nil
-              expect(proceeding.emergency_level_of_service).to be_nil
-              expect(proceeding.emergency_level_of_service_name).to be_nil
-              expect(proceeding.emergency_level_of_service_stage).to be_nil
-            end
+          it "does not create scope_limitations" do
+            expect(proceeding.reload.scope_limitations.count).to eq 0
           end
 
-          context "is off" do
-            let(:enable_loop) { false }
-
-            it "creates scope_limitations" do
-              expect(proceeding.reload.scope_limitations.count).to eq 2
-            end
-
-            it "populates the scope_limitation_attrs" do
-              expect(proceeding.substantive_level_of_service).to be 3
-              expect(proceeding.substantive_level_of_service_name).to eql "Full Representation"
-              expect(proceeding.substantive_level_of_service_stage).to be 8
-              expect(proceeding.emergency_level_of_service).to be 3
-              expect(proceeding.emergency_level_of_service_name).to eql "Full Representation"
-              expect(proceeding.emergency_level_of_service_stage).to be 8
-            end
+          it "does not populate the scope_limitation_attrs" do
+            expect(proceeding.substantive_level_of_service).to be_nil
+            expect(proceeding.substantive_level_of_service_name).to be_nil
+            expect(proceeding.substantive_level_of_service_stage).to be_nil
+            expect(proceeding.emergency_level_of_service).to be_nil
+            expect(proceeding.emergency_level_of_service_name).to be_nil
+            expect(proceeding.emergency_level_of_service_stage).to be_nil
           end
         end
       end

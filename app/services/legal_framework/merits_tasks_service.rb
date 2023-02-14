@@ -72,7 +72,6 @@ module LegalFramework
     def ignore_task?(task_name)
       [
         I18n.t(task_name, scope: "providers.merits_task_lists.task_list_item").include?("translation missing"),
-        (Setting.enable_loop?.eql?(false) && FULL_SECTION_8_TASKS.include?(task_name)),
       ].any?(true)
     end
   end

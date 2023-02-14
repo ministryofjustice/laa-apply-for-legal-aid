@@ -20,44 +20,42 @@
         proceeding:,
         read_only:,
       ) %>
-  <% if Setting.enable_loop? %>
-    <% if proceeding.used_delegated_functions? %>
-      <%= render(
-            "shared/check_answers/level_of_service",
-            proceeding:,
-            level_of_service: :emergency,
-            read_only:,
-          ) %>
-      <%= render(
-            "shared/check_answers/final_hearing",
-            proceeding:,
-            level_of_service: :emergency,
-            read_only:,
-          ) %>
-      <%= render(
-            "shared/check_answers/scope_limits",
-            proceeding:,
-            level_of_service: :emergency,
-            read_only:,
-          ) %>
-    <% end %>
+  <% if proceeding.used_delegated_functions? %>
     <%= render(
           "shared/check_answers/level_of_service",
           proceeding:,
-          level_of_service: :substantive,
+          level_of_service: :emergency,
           read_only:,
         ) %>
     <%= render(
           "shared/check_answers/final_hearing",
           proceeding:,
-          level_of_service: :substantive,
+          level_of_service: :emergency,
           read_only:,
         ) %>
     <%= render(
           "shared/check_answers/scope_limits",
           proceeding:,
-          level_of_service: :substantive,
+          level_of_service: :emergency,
           read_only:,
         ) %>
   <% end %>
+  <%= render(
+        "shared/check_answers/level_of_service",
+        proceeding:,
+        level_of_service: :substantive,
+        read_only:,
+      ) %>
+  <%= render(
+        "shared/check_answers/final_hearing",
+        proceeding:,
+        level_of_service: :substantive,
+        read_only:,
+      ) %>
+  <%= render(
+        "shared/check_answers/scope_limits",
+        proceeding:,
+        level_of_service: :substantive,
+        read_only:,
+      ) %>
 </dl>

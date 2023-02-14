@@ -20,7 +20,7 @@ module Providers
         return false if @form.invalid?
 
         DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
-        reset_proceeding_loop if @legal_aid_application.checking_answers? && Setting.enable_loop?
+        reset_proceeding_loop if @legal_aid_application.checking_answers?
         continue_or_draft(**args)
       end
 

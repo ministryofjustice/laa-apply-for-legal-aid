@@ -65,6 +65,14 @@ Feature: Applicant details
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 2 days ago
     When I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 3\nFGM Protection Order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 3\nFGM Protection Order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should see 'Proceeding 2 of 3\nOccupation order\nWhat is your client’s role in this proceeding?'
     When I choose 'Defendant/respondent'
     And I click 'Save and continue'
@@ -75,12 +83,25 @@ Feature: Applicant details
     Then I should see 'Proceeding 2 of 3\nOccupation order\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
     When I choose 'Yes'
     And I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 3\nOccupation order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+    When I choose 'Yes'
+    And I enter the 'proceeding hearing date' date of 1 month in the future
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 3\nOccupation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should see 'Proceeding 3 of 3\nHarassment - injunction\nWhat is your client’s role in this proceeding?'
     When I choose 'Defendant/respondent'
     And I click 'Save and continue'
     Then I should see 'Proceeding 3 of 3\nHarassment - injunction\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     When I click 'Save and continue'
+    Then I should see 'Proceeding 3 of 3\nHarassment - injunction'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing 'Occupation order'
     Then I should be on a page showing 'Harassment - injunction'
@@ -132,6 +153,11 @@ Feature: Applicant details
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    And the page is accessible
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
     Then I should be on a page with title "Does the client have a National Insurance number?"
@@ -193,12 +219,20 @@ Feature: Applicant details
     Then I should see 'Proceeding 1 of 2\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 2\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should see 'Proceeding 2 of 2\nChild arrangements order \(residence\)\nWhat is your client’s role in this proceeding?'
     When I choose 'Applicant/claimant/petitioner'
     And I click 'Save and continue'
     Then I should see 'Proceeding 2 of 2\nChild arrangements order \(residence\)\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     When I click 'Save and continue'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(residence\)'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
     Then I should be on a page with title "Does the client have a National Insurance number?"
@@ -256,14 +290,14 @@ Feature: Applicant details
     Then I should see 'Proceeding 1\nNon-molestation order\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What you're applying for"
-    Then I click link "Back"
-    Then I should be on a page showing "The date you said you used delegated functions is over one month old."
-    Then I choose "No, I need to change this date"
-    Then I click 'Save and continue'
-    When I enter the 'delegated functions on' date of 3 days ago
-    Then I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     And I should be on a page showing "Emergency certificate"
     And I should be on a page showing "default substantive cost limit"
@@ -304,6 +338,10 @@ Feature: Applicant details
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     When I click 'Save and continue'
@@ -376,4 +414,12 @@ Feature: Applicant details
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 5 days ago
     When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"

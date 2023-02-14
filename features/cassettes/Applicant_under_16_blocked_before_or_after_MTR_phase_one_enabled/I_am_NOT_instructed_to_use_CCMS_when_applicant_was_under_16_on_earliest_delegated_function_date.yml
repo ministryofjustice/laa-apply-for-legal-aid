@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 07 Feb 2023 12:53:46 GMT
+      - Tue, 14 Feb 2023 08:29:51 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -44,7 +44,7 @@ http_interactions:
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
         : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"98\",\r\n    \"lastupdate\"
-        : \"2023-02-06\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"2023-02-13\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"SUPER FIRM LTD, 84, PETTY FRANCE,
         LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"SUPER FIRM LTD\",\r\n
@@ -136,7 +136,7 @@ http_interactions:
         \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
         \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
         : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Tue, 07 Feb 2023 12:53:46 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:47 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -158,7 +158,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 07 Feb 2023 12:53:46 GMT
+      - Tue, 14 Feb 2023 08:29:52 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -184,9 +184,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - eff7a3ba3e92af9c6f1e2c1a28b5c1b2
+      - 2f88b16cc42208f3095bb1684c2cde92
       X-Runtime:
-      - '0.029274'
+      - '0.026854'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -312,7 +312,7 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Tue, 07 Feb 2023 12:53:46 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:48 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -334,7 +334,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 07 Feb 2023 12:53:47 GMT
+      - Tue, 14 Feb 2023 08:29:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -360,9 +360,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e6160a6a060a5273eb1f3f5a6032ce03
+      - 6291f190d3e4968d0dfa0e2143b9e623
       X-Runtime:
-      - '0.023841'
+      - '0.031846'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -488,7 +488,7 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Tue, 07 Feb 2023 12:53:47 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:49 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
@@ -510,7 +510,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 07 Feb 2023 12:53:47 GMT
+      - Tue, 14 Feb 2023 08:29:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -536,9 +536,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0b5467fe912a53225e839632de3d268e
+      - 7a2fbc78e885481cebbf3ea33beb68d7
       X-Runtime:
-      - '0.011181'
+      - '0.043070'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -556,7 +556,7 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Tue, 07 Feb 2023 12:53:47 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:49 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -578,7 +578,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 07 Feb 2023 12:53:48 GMT
+      - Tue, 14 Feb 2023 08:29:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -604,9 +604,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8cf8b4657589768beda5096ff0cacfe6
+      - 4f403b0f0333e5ddfe9fd570e10d9c8d
       X-Runtime:
-      - '0.005492'
+      - '0.008352'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -614,7 +614,7 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Tue, 07 Feb 2023 12:53:48 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:49 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -636,7 +636,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 07 Feb 2023 12:53:48 GMT
+      - Tue, 14 Feb 2023 08:29:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -662,9 +662,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3b77caa7bc0ae962d462741e4f0621e4
+      - 8ab2cce8b76e21c416970c82fcfee2b1
       X-Runtime:
-      - '0.003830'
+      - '0.005603'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -672,7 +672,7 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Tue, 07 Feb 2023 12:53:48 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:50 GMT
 - request:
     method: get
     uri: https://www.gov.uk/bank-holidays.json
@@ -713,7 +713,7 @@ http_interactions:
         https://img.youtube.com; script-src 'self' www.google-analytics.com ssl.google-analytics.com
         stats.g.doubleclick.net www.googletagmanager.com www.region1.google-analytics.com
         region1.google-analytics.com www.gstatic.com *.ytimg.com www.youtube.com www.youtube-nocookie.com
-        'nonce-uDQaiUdSAp841gqFD/kiqg=='; style-src 'self' www.gstatic.com 'unsafe-inline';
+        'nonce-zh1ZT3e9PhJfxLAKa0L/AQ=='; style-src 'self' www.gstatic.com 'unsafe-inline';
         font-src 'self'; connect-src 'self' *.publishing.service.gov.uk www.gov.uk
         *.dev.gov.uk www.google-analytics.com ssl.google-analytics.com stats.g.doubleclick.net
         www.googletagmanager.com www.region1.google-analytics.com region1.google-analytics.com
@@ -735,28 +735,274 @@ http_interactions:
       X-Frame-Options:
       - ALLOWALL
       X-Request-Id:
-      - e19ef668-41c4-4b68-866d-90b9fead5a0e
+      - 112573d5-3fa4-4cce-87a6-645fe306dd1e
       Fastly-Backend-Name:
       - origin
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 07 Feb 2023 12:53:49 GMT
+      - Tue, 14 Feb 2023 08:29:54 GMT
       Age:
-      - '2881'
+      - '446'
       X-Served-By:
-      - cache-lon4277-LON
+      - cache-lhr7345-LHR
       X-Cache:
       - HIT, HIT
       X-Cache-Hits:
-      - '5'
+      - '11'
       X-Timer:
-      - S1675774429.167711,VS0,VE0
+      - S1676363395.785210,VS0,VE0
       Vary:
       - Accept-Encoding
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJlbmdsYW5kLWFuZC13YWxlcyI6eyJkaXZpc2lvbiI6ImVuZ2xhbmQtYW5kLXdhbGVzIiwiZXZlbnRzIjpbeyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAxOC0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMTgtMDMtMzAiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFzdGVyIE1vbmRheSIsImRhdGUiOiIyMDE4LTA0LTAyIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA1LTA3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA1LTI4Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA4LTI3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDE4LTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDE4LTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDE5LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiR29vZCBGcmlkYXkiLCJkYXRlIjoiMjAxOS0wNC0xOSIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXN0ZXIgTW9uZGF5IiwiZGF0ZSI6IjIwMTktMDQtMjIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMTktMDUtMDYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTcHJpbmcgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMTktMDUtMjciLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTdW1tZXIgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMTktMDgtMjYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJDaHJpc3RtYXMgRGF5IiwiZGF0ZSI6IjIwMTktMTItMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMTktMTItMjYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJOZXcgWWVhcuKAmXMgRGF5IiwiZGF0ZSI6IjIwMjAtMDEtMDEiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDIwLTA0LTEwIiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhc3RlciBNb25kYXkiLCJkYXRlIjoiMjAyMC0wNC0xMyIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IChWRSBkYXkpIiwiZGF0ZSI6IjIwMjAtMDUtMDgiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTcHJpbmcgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjAtMDUtMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTdW1tZXIgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjAtMDgtMzEiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJDaHJpc3RtYXMgRGF5IiwiZGF0ZSI6IjIwMjAtMTItMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMjAtMTItMjgiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyMS0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMjEtMDQtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFzdGVyIE1vbmRheSIsImRhdGUiOiIyMDIxLTA0LTA1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIxLTA1LTAzIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIxLTA1LTMxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIxLTA4LTMwIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDIxLTEyLTI3Iiwibm90ZXMiOiJTdWJzdGl0dXRlIGRheSIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMjEtMTItMjgiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyMi0wMS0wMyIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiR29vZCBGcmlkYXkiLCJkYXRlIjoiMjAyMi0wNC0xNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXN0ZXIgTW9uZGF5IiwiZGF0ZSI6IjIwMjItMDQtMTgiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjItMDUtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTcHJpbmcgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjItMDYtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJQbGF0aW51bSBKdWJpbGVlIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIyLTA2LTAzIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIyLTA4LTI5Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmFuayBIb2xpZGF5IGZvciB0aGUgU3RhdGUgRnVuZXJhbCBvZiBRdWVlbiBFbGl6YWJldGggSUkiLCJkYXRlIjoiMjAyMi0wOS0xOSIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMjItMTItMjYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJDaHJpc3RtYXMgRGF5IiwiZGF0ZSI6IjIwMjItMTItMjciLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyMy0wMS0wMiIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiR29vZCBGcmlkYXkiLCJkYXRlIjoiMjAyMy0wNC0wNyIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXN0ZXIgTW9uZGF5IiwiZGF0ZSI6IjIwMjMtMDQtMTAiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjMtMDUtMDEiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCYW5rIGhvbGlkYXkgZm9yIHRoZSBjb3JvbmF0aW9uIG9mIEtpbmcgQ2hhcmxlcyBJSUkiLCJkYXRlIjoiMjAyMy0wNS0wOCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMy0wNS0yOSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMy0wOC0yOCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyMy0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAyMy0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyNC0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMjQtMDMtMjkiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFzdGVyIE1vbmRheSIsImRhdGUiOiIyMDI0LTA0LTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI0LTA1LTA2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI0LTA1LTI3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI0LTA4LTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDI0LTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDI0LTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDI1LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiR29vZCBGcmlkYXkiLCJkYXRlIjoiMjAyNS0wNC0xOCIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXN0ZXIgTW9uZGF5IiwiZGF0ZSI6IjIwMjUtMDQtMjEiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjUtMDUtMDUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTcHJpbmcgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjUtMDUtMjYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTdW1tZXIgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjUtMDgtMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJDaHJpc3RtYXMgRGF5IiwiZGF0ZSI6IjIwMjUtMTItMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMjUtMTItMjYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9XX0sInNjb3RsYW5kIjp7ImRpdmlzaW9uIjoic2NvdGxhbmQiLCJldmVudHMiOlt7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDE4LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiMm5kIEphbnVhcnkiLCJkYXRlIjoiMjAxOC0wMS0wMiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMTgtMDMtMzAiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA1LTA3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA1LTI4Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA4LTA2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgQW5kcmV34oCZcyBEYXkiLCJkYXRlIjoiMjAxOC0xMS0zMCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAxOC0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAxOC0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAxOS0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IjJuZCBKYW51YXJ5IiwiZGF0ZSI6IjIwMTktMDEtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDE5LTA0LTE5Iiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAxOS0wNS0wNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAxOS0wNS0yNyIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAxOS0wOC0wNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN0IEFuZHJld+KAmXMgRGF5IiwiZGF0ZSI6IjIwMTktMTItMDIiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAxOS0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAxOS0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyMC0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IjJuZCBKYW51YXJ5IiwiZGF0ZSI6IjIwMjAtMDEtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDIwLTA0LTEwIiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkgKFZFIGRheSkiLCJkYXRlIjoiMjAyMC0wNS0wOCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMC0wNS0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMC0wOC0wMyIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN0IEFuZHJld+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjAtMTEtMzAiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJDaHJpc3RtYXMgRGF5IiwiZGF0ZSI6IjIwMjAtMTItMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMjAtMTItMjgiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyMS0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IjJuZCBKYW51YXJ5IiwiZGF0ZSI6IjIwMjEtMDEtMDQiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMjEtMDQtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIxLTA1LTAzIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIxLTA1LTMxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIxLTA4LTAyIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgQW5kcmV34oCZcyBEYXkiLCJkYXRlIjoiMjAyMS0xMS0zMCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyMS0xMi0yNyIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDIxLTEyLTI4Iiwibm90ZXMiOiJTdWJzdGl0dXRlIGRheSIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJOZXcgWWVhcuKAmXMgRGF5IiwiZGF0ZSI6IjIwMjItMDEtMDMiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IjJuZCBKYW51YXJ5IiwiZGF0ZSI6IjIwMjItMDEtMDQiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMjItMDQtMTUiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIyLTA1LTAyIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIyLTA2LTAyIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiUGxhdGludW0gSnViaWxlZSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMi0wNi0wMyIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMi0wOC0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJhbmsgSG9saWRheSBmb3IgdGhlIFN0YXRlIEZ1bmVyYWwgb2YgUXVlZW4gRWxpemFiZXRoIElJIiwiZGF0ZSI6IjIwMjItMDktMTkiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3QgQW5kcmV34oCZcyBEYXkiLCJkYXRlIjoiMjAyMi0xMS0zMCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAyMi0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyMi0xMi0yNyIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDIzLTAxLTAyIiwibm90ZXMiOiJTdWJzdGl0dXRlIGRheSIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiIybmQgSmFudWFyeSIsImRhdGUiOiIyMDIzLTAxLTAzIiwibm90ZXMiOiJTdWJzdGl0dXRlIGRheSIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDIzLTA0LTA3Iiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMy0wNS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJhbmsgaG9saWRheSBmb3IgdGhlIGNvcm9uYXRpb24gb2YgS2luZyBDaGFybGVzIElJSSIsImRhdGUiOiIyMDIzLTA1LTA4Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIzLTA1LTI5Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIzLTA4LTA3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgQW5kcmV34oCZcyBEYXkiLCJkYXRlIjoiMjAyMy0xMS0zMCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyMy0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAyMy0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyNC0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IjJuZCBKYW51YXJ5IiwiZGF0ZSI6IjIwMjQtMDEtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDI0LTAzLTI5Iiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNC0wNS0wNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNC0wNS0yNyIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNC0wOC0wNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN0IEFuZHJld+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjQtMTItMDIiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyNC0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAyNC0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyNS0wMS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IjJuZCBKYW51YXJ5IiwiZGF0ZSI6IjIwMjUtMDEtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDI1LTA0LTE4Iiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNS0wNS0wNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNS0wNS0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNS0wOC0wNCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN0IEFuZHJld+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjUtMTItMDEiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyNS0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAyNS0xMi0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX1dfSwibm9ydGhlcm4taXJlbGFuZCI6eyJkaXZpc2lvbiI6Im5vcnRoZXJuLWlyZWxhbmQiLCJldmVudHMiOlt7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDE4LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMTgtMDMtMTkiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMTgtMDMtMzAiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFzdGVyIE1vbmRheSIsImRhdGUiOiIyMDE4LTA0LTAyIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA1LTA3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA1LTI4Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmF0dGxlIG9mIHRoZSBCb3luZSAoT3JhbmdlbWVu4oCZcyBEYXkpIiwiZGF0ZSI6IjIwMTgtMDctMTIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE4LTA4LTI3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDE4LTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDE4LTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDE5LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMTktMDMtMTgiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMTktMDQtMTkiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFzdGVyIE1vbmRheSIsImRhdGUiOiIyMDE5LTA0LTIyIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE5LTA1LTA2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE5LTA1LTI3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmF0dGxlIG9mIHRoZSBCb3luZSAoT3JhbmdlbWVu4oCZcyBEYXkpIiwiZGF0ZSI6IjIwMTktMDctMTIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDE5LTA4LTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDE5LTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDE5LTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDIwLTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjAtMDMtMTciLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDIwLTA0LTEwIiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhc3RlciBNb25kYXkiLCJkYXRlIjoiMjAyMC0wNC0xMyIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IChWRSBkYXkpIiwiZGF0ZSI6IjIwMjAtMDUtMDgiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTcHJpbmcgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjAtMDUtMjUiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJCYXR0bGUgb2YgdGhlIEJveW5lIChPcmFuZ2VtZW7igJlzIERheSkiLCJkYXRlIjoiMjAyMC0wNy0xMyIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMC0wOC0zMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyMC0xMi0yNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJveGluZyBEYXkiLCJkYXRlIjoiMjAyMC0xMi0yOCIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDIxLTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjEtMDMtMTciLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDIxLTA0LTAyIiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhc3RlciBNb25kYXkiLCJkYXRlIjoiMjAyMS0wNC0wNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMS0wNS0wMyIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMS0wNS0zMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJhdHRsZSBvZiB0aGUgQm95bmUgKE9yYW5nZW1lbuKAmXMgRGF5KSIsImRhdGUiOiIyMDIxLTA3LTEyIiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IlN1bW1lciBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMS0wOC0zMCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkNocmlzdG1hcyBEYXkiLCJkYXRlIjoiMjAyMS0xMi0yNyIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDIxLTEyLTI4Iiwibm90ZXMiOiJTdWJzdGl0dXRlIGRheSIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJOZXcgWWVhcuKAmXMgRGF5IiwiZGF0ZSI6IjIwMjItMDEtMDMiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlN0IFBhdHJpY2vigJlzIERheSIsImRhdGUiOiIyMDIyLTAzLTE3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiR29vZCBGcmlkYXkiLCJkYXRlIjoiMjAyMi0wNC0xNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJFYXN0ZXIgTW9uZGF5IiwiZGF0ZSI6IjIwMjItMDQtMTgiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJFYXJseSBNYXkgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjItMDUtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJTcHJpbmcgYmFuayBob2xpZGF5IiwiZGF0ZSI6IjIwMjItMDYtMDIiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJQbGF0aW51bSBKdWJpbGVlIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIyLTA2LTAzIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmF0dGxlIG9mIHRoZSBCb3luZSAoT3JhbmdlbWVu4oCZcyBEYXkpIiwiZGF0ZSI6IjIwMjItMDctMTIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIyLTA4LTI5Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmFuayBIb2xpZGF5IGZvciB0aGUgU3RhdGUgRnVuZXJhbCBvZiBRdWVlbiBFbGl6YWJldGggSUkiLCJkYXRlIjoiMjAyMi0wOS0xOSIsIm5vdGVzIjoiIiwiYnVudGluZyI6ZmFsc2V9LHsidGl0bGUiOiJCb3hpbmcgRGF5IiwiZGF0ZSI6IjIwMjItMTItMjYiLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJDaHJpc3RtYXMgRGF5IiwiZGF0ZSI6IjIwMjItMTItMjciLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ik5ldyBZZWFy4oCZcyBEYXkiLCJkYXRlIjoiMjAyMy0wMS0wMiIsIm5vdGVzIjoiU3Vic3RpdHV0ZSBkYXkiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjMtMDMtMTciLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDIzLTA0LTA3Iiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhc3RlciBNb25kYXkiLCJkYXRlIjoiMjAyMy0wNC0xMCIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyMy0wNS0wMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJhbmsgaG9saWRheSBmb3IgdGhlIGNvcm9uYXRpb24gb2YgS2luZyBDaGFybGVzIElJSSIsImRhdGUiOiIyMDIzLTA1LTA4Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIzLTA1LTI5Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmF0dGxlIG9mIHRoZSBCb3luZSAoT3JhbmdlbWVu4oCZcyBEYXkpIiwiZGF0ZSI6IjIwMjMtMDctMTIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDIzLTA4LTI4Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDIzLTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDIzLTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDI0LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjQtMDMtMTgiLCJub3RlcyI6IlN1YnN0aXR1dGUgZGF5IiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6Ikdvb2QgRnJpZGF5IiwiZGF0ZSI6IjIwMjQtMDMtMjkiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiRWFzdGVyIE1vbmRheSIsImRhdGUiOiIyMDI0LTA0LTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiRWFybHkgTWF5IGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI0LTA1LTA2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3ByaW5nIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI0LTA1LTI3Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQmF0dGxlIG9mIHRoZSBCb3luZSAoT3JhbmdlbWVu4oCZcyBEYXkpIiwiZGF0ZSI6IjIwMjQtMDctMTIiLCJub3RlcyI6IiIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI0LTA4LTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDI0LTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDI0LTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiTmV3IFllYXLigJlzIERheSIsImRhdGUiOiIyMDI1LTAxLTAxIiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiU3QgUGF0cmlja+KAmXMgRGF5IiwiZGF0ZSI6IjIwMjUtMDMtMTciLCJub3RlcyI6IiIsImJ1bnRpbmciOnRydWV9LHsidGl0bGUiOiJHb29kIEZyaWRheSIsImRhdGUiOiIyMDI1LTA0LTE4Iiwibm90ZXMiOiIiLCJidW50aW5nIjpmYWxzZX0seyJ0aXRsZSI6IkVhc3RlciBNb25kYXkiLCJkYXRlIjoiMjAyNS0wNC0yMSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkVhcmx5IE1heSBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNS0wNS0wNSIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IlNwcmluZyBiYW5rIGhvbGlkYXkiLCJkYXRlIjoiMjAyNS0wNS0yNiIsIm5vdGVzIjoiIiwiYnVudGluZyI6dHJ1ZX0seyJ0aXRsZSI6IkJhdHRsZSBvZiB0aGUgQm95bmUgKE9yYW5nZW1lbuKAmXMgRGF5KSIsImRhdGUiOiIyMDI1LTA3LTE0Iiwibm90ZXMiOiJTdWJzdGl0dXRlIGRheSIsImJ1bnRpbmciOmZhbHNlfSx7InRpdGxlIjoiU3VtbWVyIGJhbmsgaG9saWRheSIsImRhdGUiOiIyMDI1LTA4LTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQ2hyaXN0bWFzIERheSIsImRhdGUiOiIyMDI1LTEyLTI1Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfSx7InRpdGxlIjoiQm94aW5nIERheSIsImRhdGUiOiIyMDI1LTEyLTI2Iiwibm90ZXMiOiIiLCJidW50aW5nIjp0cnVlfV19fQ==
-  recorded_at: Tue, 07 Feb 2023 12:53:49 GMT
+  recorded_at: Tue, 14 Feb 2023 08:29:50 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":true,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 14 Feb 2023 08:29:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '477'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"f6e255747b495453398cd82197a149da"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2caeaee04128a8d6f9f695fb41a8a127
+      X-Runtime:
+      - '0.044866'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":true,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]}}'
+  recorded_at: Tue, 14 Feb 2023 08:29:50 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":true,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 14 Feb 2023 08:29:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '477'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"f6e255747b495453398cd82197a149da"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7d245fd0c88d854dcd797433f783fd8f
+      X-Runtime:
+      - '0.045943'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":true,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]}}'
+  recorded_at: Tue, 14 Feb 2023 08:29:51 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 14 Feb 2023 08:29:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '708'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d706d410fb223e39228ecf6b10af1ac0
+      X-Runtime:
+      - '0.022881'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]}}'
+  recorded_at: Tue, 14 Feb 2023 08:29:51 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 14 Feb 2023 08:29:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '708'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d2328f5b51da4412a8eca40081a2dba8
+      X-Runtime:
+      - '0.073911'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]}}'
+  recorded_at: Tue, 14 Feb 2023 08:29:52 GMT
 recorded_with: VCR 6.1.0

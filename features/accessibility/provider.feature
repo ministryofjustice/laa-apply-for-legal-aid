@@ -40,6 +40,18 @@ Feature: Provider accessibility
     And the page is accessible
     When I choose 'No'
     And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    And the page is accessible
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\n'
+    And I should see 'You cannot change the default level of service for the substantive application for this proceeding'
+    And I click 'Save and continue'
+    Then I should see 'For the substantive application, select the scope'
+    When I select 'Hearing'
+    And I enter the 'proceeding hearing date CV118' date of 2 months in the future
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     And the page is accessible
