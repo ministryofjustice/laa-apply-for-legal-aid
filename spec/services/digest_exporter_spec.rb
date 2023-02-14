@@ -1,57 +1,56 @@
 require "rails_helper"
+DummyPropertiesStruct = Struct.new(:sheet_id, :grid_properties)
+DummyGridPropertiesStruct = Struct.new(:row_count, :column_count)
 
 RSpec.describe DigestExporter do
   # Unable to get VCR to properly record interactions with Google Sheets, so here just testing the
   # expected methods are called
+
   describe ".call" do
-    let(:google_session) { double GoogleDrive::Session }
+    let(:service_creds) { double Google::Auth::ServiceAccountCredentials, fetch_access_token!: {} }
+    let(:sheet_service) { double Google::Apis::SheetsV4::SheetsService }
     let(:spreadsheet) { double "Spreadsheet" }
-    let(:worksheet) { double "Worksheet", rows: {} }
-    let(:column_headings) { ApplicationDigest.column_headers + [extracted_at] }
+    let(:worksheet) { double "Worksheet" }
+    let(:sheet_id) { "123456789" }
+    let(:properties) { DummyPropertiesStruct.new(sheet_id, DummyGridPropertiesStruct.new(10, 10)) }
     let(:fixed_time) { Time.zone.now }
-    let(:extracted_at) { "Extracted at: #{fixed_time.strftime('%Y-%m-%d %H:%M:%S %z')}" }
-    let(:rows) { ApplicationDigest.order(:created_at).map(&:to_google_sheet_row) }
 
     before do
-      allow(worksheet.rows).to receive(:count).and_return(10)
+      allow(worksheet).to receive(:properties).and_return(properties)
+      allow(properties.grid_properties).to receive(:row_count).and_return(10, 10, 1, 10)
+      allow(properties.grid_properties).to receive(:column_count).and_return(10, 10, 1, 10)
       create_list(:application_digest, 4)
     end
 
     it "loads all the digest records" do
       travel_to fixed_time do
-        expect(GoogleDrive::Session).to receive(:from_service_account_key).and_return(google_session)
-        expect(google_session).to receive(:spreadsheet_by_key).and_return(spreadsheet).once
-        expect(spreadsheet).to receive(:worksheets).and_return([worksheet]).once
-        expect(spreadsheet).to receive(:batch_update).twice
-        expect(worksheet).to receive(:max_rows).at_least(:once).and_return(10, 10, 10, 1, 10)
-        expect(worksheet).to receive(:max_cols).at_least(:once).and_return(10, 10, 1)
-        expect(worksheet).to receive(:sheet_id).at_least(:once).and_return("123456789")
-        expect(worksheet).to receive(:save).once
-        expect(worksheet).to receive(:update_cells).once
-        expect(worksheet).to receive(:reload).once
+        expect(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(service_creds)
+        expect(service_creds).to receive(:fetch_access_token!).once
+        expect(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service)
+        expect(sheet_service).to receive(:authorization=).once
+        expect(sheet_service).to receive(:get_spreadsheet).and_return(spreadsheet).twice
+        expect(spreadsheet).to receive(:sheets).and_return([worksheet]).twice
+        expect(sheet_service).to receive(:batch_update_spreadsheet).twice
+        expect(sheet_service).to receive(:update_spreadsheet_value).once
 
         described_class.call
       end
     end
 
     context "when saving records silently fails" do
-      before { allow(worksheet.rows).to receive(:count).and_return(1) }
+      before { allow(properties.grid_properties).to receive(:row_count).and_return(10) }
 
       it "calls raises an error and calls AlertManager" do
         travel_to fixed_time do
-          expect(GoogleDrive::Session).to receive(:from_service_account_key).and_return(google_session)
-          expect(google_session).to receive(:spreadsheet_by_key).and_return(spreadsheet).once
-          expect(spreadsheet).to receive(:worksheets).and_return([worksheet]).once
-          expect(spreadsheet).to receive(:batch_update).twice
-          expect(worksheet).to receive(:max_rows).at_least(:once).and_return(10, 10, 10, 1)
-          expect(worksheet).to receive(:max_cols).at_least(:once).and_return(10, 10, 1)
-          expect(worksheet).to receive(:sheet_id).at_least(:once).and_return("123456789")
-          expect(worksheet).to receive(:save).once
-          expect(worksheet).to receive(:update_cells).once
-          expect(worksheet).to receive(:reload).once
-          expect(AlertManager).to receive(:capture_exception).with(message_contains("Spreadsheet unexpectedly empty"))
+          expect(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(service_creds)
+          expect(service_creds).to receive(:fetch_access_token!).once
+          expect(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service)
+          expect(sheet_service).to receive(:authorization=).once
+          expect(sheet_service).to receive(:get_spreadsheet).and_return(spreadsheet).twice
+          expect(spreadsheet).to receive(:sheets).and_return([worksheet]).twice
+          expect(sheet_service).to receive(:batch_update_spreadsheet).twice
 
-          expect { described_class.call }.to raise_error(DigestExporter::SpreadsheetError)
+          expect { described_class.call }.to raise_error(DigestExporter::SpreadsheetError, "Spreadsheet not cleared")
         end
       end
     end
