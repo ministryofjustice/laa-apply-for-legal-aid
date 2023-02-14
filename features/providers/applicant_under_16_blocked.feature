@@ -30,6 +30,15 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 1 day ago
     And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+
     Then I should be on a page showing "What you're applying for"
     And I should be on a page showing "default substantive cost limit"
     And I should be on a page showing "Do you want to request a higher emergency cost limit?"
@@ -76,6 +85,15 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 1 day ago
     And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+
     Then I should be on a page showing "What you're applying for"
     And I should be on a page showing "default substantive cost limit"
     And I should be on a page showing "Do you want to request a higher emergency cost limit?"
