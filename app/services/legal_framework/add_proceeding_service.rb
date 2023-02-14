@@ -10,7 +10,7 @@ module LegalFramework
       @ccms_code = params[:ccms_code]
 
       ActiveRecord::Base.transaction do
-        Proceeding.create(proceeding_attrs)
+        Proceeding.create!(proceeding_attrs)
         LeadProceedingAssignmentService.call(@legal_aid_application)
       end
       true
