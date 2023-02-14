@@ -109,4 +109,8 @@ class Applicant < ApplicationRecord
 
     sprintf("%<amount>.2f", amount: cfe_result.mortgage_per_month || 0)
   end
+
+  def employment_status
+    employed? ? I18n.t("activemodel.attributes.applicant.employed") : I18n.t("activemodel.attributes.applicant.not_employed")
+  end
 end

@@ -18,6 +18,8 @@ cy:
         first_name: eman tsriF
         last_name: eman tsaL
         national_insurance_number: rebmun ecnarusnI lanoitaN
+        employed: deyolpmE
+        not_employed: deyolpme toN
       applicants/address_form:
         address_line_one: teerts dna gnidliuB
         address_line_two: ''

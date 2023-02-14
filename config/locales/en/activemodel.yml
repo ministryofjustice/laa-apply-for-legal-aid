@@ -18,6 +18,8 @@ en:
         first_name: First name
         last_name: Last name
         national_insurance_number: National Insurance number
+        employed: Employed
+        not_employed: Not employed
       applicants/address_form:
         address_line_one: Building and street
         address_line_two: ''

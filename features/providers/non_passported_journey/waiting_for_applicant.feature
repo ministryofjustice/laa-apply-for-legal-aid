@@ -25,3 +25,9 @@ Feature: non_passported_journey waiting for applicant
     Then I should be on the 'check_provider_answers' page showing 'Your application'
     And I should not see 'What happens next'
     But I should see 'Your client needs to complete their part of the application before you can continue.'
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+
+    And the "Client details" check your answers section should contain:
+      | Employment status | Not employed |
