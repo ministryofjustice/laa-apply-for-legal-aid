@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_141824) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_161035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -110,7 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_141824) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at", precision: nil
-    t.string "true_layer_secure_data_id"
     t.boolean "employed"
     t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
@@ -215,8 +214,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_141824) do
     t.uuid "applicant_id", null: false
     t.json "true_layer_response"
     t.string "credentials_id"
-    t.string "token"
-    t.datetime "token_expires_at", precision: nil
     t.string "name"
     t.string "true_layer_provider_id"
     t.datetime "created_at", precision: nil, null: false
