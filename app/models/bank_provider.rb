@@ -1,6 +1,4 @@
 class BankProvider < ApplicationRecord
-  self.ignored_columns += %w[token token_expires_at]
-
   belongs_to :applicant
 
   has_many :bank_account_holders, dependent: :destroy
