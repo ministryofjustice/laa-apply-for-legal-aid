@@ -12,16 +12,9 @@ Rails.application.config.content_security_policy do |policy|
   policy.script_src :self,
                     "https://www.google-analytics.com",
                     "https://www.googletagmanager.com"
-  if Rails.env.development?
-    policy.connect_src :self,
-                       "https://www.google-analytics.com",
-                       "https://*.justice.gov.uk",
-                       "http://localhost:*"
-  else
-    policy.connect_src :self,
-                       "https://www.google-analytics.com",
-                       "https://*.justice.gov.uk"
-  end
+  policy.connect_src :self,
+                     "https://www.google-analytics.com",
+                     "https://*.justice.gov.uk"
 end
 Rails.application.config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
 Rails.application.config.content_security_policy_nonce_directives = %w[script-src]

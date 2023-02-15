@@ -28,12 +28,12 @@ PreCommit:
     enabled: true
     command: ['yarn', 'run', 'standard']
     requires_files: true
-    include: 'app/webpack/**/*.js'
+    include: 'app/javascript/**/*.js'
   StyleLint:
     enabled: true
     command: ['yarn', 'run', 'stylelint']
     requires_files: true
-    include: 'app/webpack/**/*.scss'
+    include: 'app/assets/stylesheets/**/*.scss'
   DBAnonymizer:
     enabled: true
     command: ['ruby', './scripts/migration_hook.rb']

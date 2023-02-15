@@ -1,0 +1,30 @@
+// stylelint-disable selector-max-id
+
+.govuk-header {
+  #navigation {
+    margin-top: 0;
+    line-height: 30px;
+
+    a {
+      margin-left: 1em;
+      padding: 5px 0;
+    }
+  }
+
+  nav {
+    @include govuk-media-query($from: desktop) {
+      position: absolute;
+      top: 7px;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+// stylelint-enable selector-max-id

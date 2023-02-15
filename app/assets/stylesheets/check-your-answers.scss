@@ -1,0 +1,75 @@
+// Recommended - Use these styles for the check your answers pattern
+
+.app-check-your-answers {
+  @include govuk-font(19);
+  @include govuk-responsive-margin(3, "bottom");
+  border-top: 1px solid $govuk-border-colour;
+  @include govuk-responsive-padding(3, "top");
+
+  .govuk-grid-row div:first-child {
+    font-weight: bold;
+  }
+}
+
+.app-check-your-answers--long {
+  @include govuk-font(19);
+  @include govuk-responsive-margin(3, "bottom");
+  border-top: 1px solid $govuk-border-colour;
+  @include govuk-responsive-padding(3, "top");
+
+  .govuk-grid-row div:first-child {
+    width: 50%;
+    font-weight: bold;
+  }
+
+  .govuk-grid-row div:nth-child(2) {
+    width: 25%;
+  }
+
+  .govuk-grid-row div:last-child {
+    width: 25%;
+  }
+}
+
+.govuk-summary-list__row--no-border .govuk-summary-list__key,
+.govuk-summary-list__row--no-border .govuk-summary-list__value,
+.govuk-summary-list__row--no-border .govuk-summary-list__actions {
+  border: 0;
+}
+
+.govuk-summary-list {
+  border-collapse: collapse;
+}
+
+.govuk-summary-list__total-row {
+  @include govuk-media-query($from: tablet) {
+    display: table-row;
+  }
+  border-top: 3px solid #000000;
+  border-bottom: 1px solid #000000;
+  font-weight: bold;
+}
+
+.govuk-summary-list__key {
+  min-width: 8em;
+}
+
+.normal-word-break {
+  .govuk-summary-list__value {
+    word-break: normal;
+  }
+
+  .govuk-summary-list__key {
+    word-break: normal;
+  }
+}
+
+.align-text-right {
+  @include govuk-media-query($from: desktop) {
+    text-align: right;
+  }
+}
+
+.print-no-break > .govuk-body {
+  word-wrap: break-word;
+}

@@ -92,9 +92,6 @@ Rails.application.configure do
   config.active_storage.service = :amazon
   config.x.application.host_url = "https://#{config.x.application.host}"
 
-  # Verifies that versions and hashed value of the package contents in the project's package.json
-  config.webpacker.check_yarn_integrity = false
-
   config.x.policy_disregards_start_date = Date.parse(ENV.fetch("POLICY_DISREGARDS_START_DATE", "2021-1-8"))
 
   # set the id of the Digest Export spreadsheet to use in this environment

@@ -107,26 +107,12 @@ From the root of the project execute the following command:
 bin/setup
 ```
 
-### Webpack Error
+Once setup, you can run the dev binstub to run the server, sidekiq, and watch
+for JS and CSS changes.
 
-When localhost is returning ```Webpacker can't find styles.css in /Users/...```
-(and ```rake webpack: compile``` may be returning
-```Compilation failed: ModuleNotFoundError: Error: Can't resolve 'sass-loader' in /User...```)
-
-on *main* run:
 ```
-git pull
-bundle install
-rails db:migrate
-rm -rf node_modules
-rm -rf public/packs/
-rm -rf public/packs-test/
-yarn
-rake webpacker:compile
-RAILS_ENV=test rake webpacker:compile
+bin/dev
 ```
-
-Localhost should now be working.
 
 ### Encrypting sensitive data
 We use git-crypt to encrypt sensitive data so that it can be stored in the same repo as all the other code,

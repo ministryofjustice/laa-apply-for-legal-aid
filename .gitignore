@@ -24,6 +24,10 @@
 /public/system
 /public/assets
 
+# Asset pipeline
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
 # Ignore node_modules
 node_modules/
 
@@ -51,8 +55,6 @@ add_tranche_users.txt
 # Ignore Redis binary dump (dump.rdb) files
 *.rdb
 
-/public/packs
-/public/packs-test
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity

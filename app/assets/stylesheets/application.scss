@@ -1,0 +1,39 @@
+$govuk-global-styles: true;
+$govuk-new-link-styles: true;
+$govuk-assets-path: "/";
+
+@import "govuk-frontend/govuk/all";
+
+// Project specific
+
+// Everything below this comment should be project specific.
+// If you absolutely need to override gov.uk styles, don't,
+// instead create new classes or ids with a prefix based on the app name.
+
+@import "admin";
+@import "bank-selection";
+@import "check-your-answers";
+@import "govuk-mods";
+@import "govuk-secondary-button";
+@import "helpers";
+@import "interruption-panel";
+@import "language-switcher";
+@import "layout";
+@import "long-email-truncation";
+@import "modal-dialogue";
+@import "moj-banner";
+@import "dropzone";
+@import "narrow-table-display";
+@import "no-wrap";
+@import "pagination";
+@import "print-styles";
+@import "submissions";
+@import "table-category-column";
+@import "table-sort";
+@import "task-list";
+@import "width-style-correction";
+@import "citizens/spinner";
+@import "providers/legal_aid_applications";
+@import "providers/proceeding_types";
+@import "dropzone/src/dropzone";
+@import "dropzone/src/basic";

@@ -1,0 +1,6 @@
+.language-switcher {
+  @include govuk-typography-responsive($size: 16);
+  margin-top: govuk-spacing(3);
+  margin-bottom: govuk-spacing(3);
+  text-align: right;
+}
