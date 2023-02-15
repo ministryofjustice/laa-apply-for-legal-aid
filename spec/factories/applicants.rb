@@ -58,12 +58,9 @@ FactoryBot.define do
       date_of_birth { 16.years.ago + 1.day }
     end
 
-    trait :with_true_layer_tokens do
-      after(:build) do |applicant|
-        applicant.store_true_layer_token(
-          token: SecureRandom.hex,
-          expires: 1.hour.from_now,
-        )
+    trait :with_encrypted_true_layer_token do
+      encrypted_true_layer_token do
+        { token: SecureRandom.hex, expires_at: 1.hour.from_now }
       end
     end
 

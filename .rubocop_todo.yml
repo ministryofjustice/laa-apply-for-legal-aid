@@ -424,7 +424,6 @@ RSpec/LetSetup:
     - 'spec/services/provider_details_creator_spec.rb'
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
-    - 'spec/services/true_layer/importers/import_provider_service_spec.rb'
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
@@ -656,12 +655,10 @@ RSpec/NamedSubject:
     - 'spec/services/substantive_application_deadline_calculator_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'
     - 'spec/services/true_layer/api_client_spec.rb'
-    - 'spec/services/true_layer/bank_data_import_service_spec.rb'
     - 'spec/services/true_layer/banks_retriever_spec.rb'
     - 'spec/services/true_layer/importers/import_account_balance_service_spec.rb'
     - 'spec/services/true_layer/importers/import_account_holders_service_spec.rb'
     - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_provider_service_spec.rb'
     - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
     - 'spec/services/true_layer_error_decoder_spec.rb'
     - 'spec/services/use_ccms_arbiter_spec.rb'
@@ -670,7 +667,6 @@ RSpec/NamedSubject:
     - 'spec/workers/ccms/submission_process_worker_spec.rb'
     - 'spec/workers/hmrc/result_worker_spec.rb'
     - 'spec/workers/hmrc/submission_worker_spec.rb'
-    - 'spec/workers/import_bank_data_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
 # Offense count: 8

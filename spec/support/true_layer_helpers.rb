@@ -42,15 +42,19 @@ module TrueLayerHelpers
     stub_request(:get, endpoint).to_return(body: response_body)
   end
 
-  def stub_true_layer_error
+  def stub_true_layer_error(path: "")
     response_body = {
       error_description: "Feature not supported by the provider",
       error: :endpoint_not_supported,
       error_details: {},
     }.to_json
 
-    # the /o suffix to the regex ensures the regex gets cached and not run each time the
-    # regex is called.  It is enforced by Performance/ConstantRegexp
-    stub_request(:get, /#{TrueLayer::ApiClient::TRUE_LAYER_URL}/o).to_return(body: response_body, status: 501)
+    path = if path.present?
+             "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/#{path}"
+           else
+             /#{TrueLayer::ApiClient::TRUE_LAYER_URL}/o
+           end
+
+    stub_request(:get, path).to_return(body: response_body, status: 501)
   end
 end

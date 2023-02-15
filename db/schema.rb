@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_145917) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_141824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -222,6 +222,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_145917) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["applicant_id"], name: "index_bank_providers_on_applicant_id"
+    t.index ["true_layer_provider_id", "applicant_id"], name: "index_bank_providers_on_true_layer_provider_id_and_applicant_id", unique: true
   end
 
   create_table "bank_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
