@@ -1,10 +1,6 @@
 ---
 en:
   activerecord:
-    attributes:
-      benefit_type:
-        description: Description
-        exclude_from_gross_income: Exclude from Gross Income
     errors:
       models:
         address:
@@ -23,13 +19,6 @@ en:
           attributes:
             lead_proceeding:
               multiple: Only one application proceeding type can be nominated as lead proceeding
-        benefit_type:
-          attributes:
-            label:
-              blank: Label must be present
-              taken: The label is already used by another Benefit Type
-            description:
-              blank: Description must be present
         feedback:
           attributes:
             satisfaction:
