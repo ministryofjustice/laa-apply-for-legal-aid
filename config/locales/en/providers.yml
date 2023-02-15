@@ -1371,7 +1371,7 @@ en:
         title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         head_title: You need to apply using CCMS
         warning: "You cannot use this service if your client:"
-        continue_in_ccms_html: Applu using <abbr title='Client and Cost Management System'>CCMS</abbr>
+        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         online_banking_consent:
           list: |
