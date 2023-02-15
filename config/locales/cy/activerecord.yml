@@ -1,10 +1,6 @@
 ---
 cy:
   activerecord:
-    attributes:
-      benefit_type:
-        description: noitpircseD
-        exclude_from_gross_income: emocnI ssorG morf edulcxE
     errors:
       models:
         address:
@@ -19,13 +15,6 @@ cy:
               invalid: tamrof thgir eht ni ton si sserdda
             national_insurance_number:
               invalid: tamrof thgir eht ni ton si
-        benefit_type:
-          attributes:
-            label:
-              blank: tneserp eb tsum lebaL
-              taken: epyT tifeneB rehtona yb desu ydaerla si lebal ehT
-            description:
-              blank: tneserp eb tsum noitpircseD
         feedback:
           attributes:
             satisfaction:
