@@ -88,6 +88,7 @@ Rails.application.configure do
   config.x.logs_faraday_response = false
 
   Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST", nil)
+  Rails.application.routes.default_url_options[:protocol] = Rails.env.production? ? "https" : "http"
 
   config.active_storage.service = :amazon
   config.x.application.host_url = "https://#{config.x.application.host}"
