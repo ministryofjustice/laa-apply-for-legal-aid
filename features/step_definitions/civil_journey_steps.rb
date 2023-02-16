@@ -880,7 +880,7 @@ Then("the answer for all {string} categories should be {string}") do |field_name
 end
 
 Then("the delete modal should open") do
-  expect(page).to have_css(".modal-dialog", visible: true)
+  expect(page).to have_css(".modal-dialog")
 end
 
 Then("I click the close button for the modal") do
@@ -919,7 +919,7 @@ Then(/^I see the client details page$/) do
 end
 
 Then("I should be on the Applicant page") do
-  expect(page).to have_css("input#applicant-first-name-field")
+  expect(page).to have_field("applicant-first-name-field")
 end
 
 Then("I enter name {string}, {string}") do |first_name, last_name|

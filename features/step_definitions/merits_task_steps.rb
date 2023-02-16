@@ -15,7 +15,7 @@ Given("I previously created a passported application with multiple_proceedings a
 end
 
 Then(/I should be on the (.*?) page with (.*?) regex/) do |view_name, text|
-  expect(page.current_path).to end_with(view_name)
+  expect(page).to have_current_path(/#{view_name}/)
   expect(page).to have_content(/#{text}/)
 end
 
