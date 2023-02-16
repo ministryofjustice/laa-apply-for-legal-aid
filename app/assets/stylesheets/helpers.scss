@@ -21,6 +21,7 @@
 
 .app-print-only {
   display: none !important;
+  page-break-before: always;
 
   @include govuk-media-query($media-type: print) {
     display: inherit !important;
