@@ -1,6 +1,6 @@
 <%= page_template(page_title: t(".h1-heading")) do %>
   <p class="govuk-body"><%= t(".statement") %></p>
-  <ul class="govuk-list govuk-list--bullet print-add-bullet">
+  <ul class="govuk-list govuk-list--bullet">
     <%- t(".statement-bullets").each do |bullet| %>
       <li><%= bullet %></li>
     <% end %>
