@@ -63,6 +63,24 @@ Given("I have created and submitted an application") do
   login_as @legal_aid_application.provider
 end
 
+Given(/^I have created an application for a (\d*?) year old$/) do |age|
+  applicant = create(:applicant,
+                     age_for_means_test_purposes: age,
+                     date_of_birth: Time.zone.today - age.to_i.years)
+  @legal_aid_application = create(
+    :application,
+    :with_everything,
+    :with_passported_state_machine,
+    :checking_merits_answers,
+    :initiated,
+    applicant:,
+    provider: create(:provider),
+    provider_step: "confirm_client_declarations",
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_confirm_client_declaration_path(@legal_aid_application))
+end
+
 Given("I have created but not submitted an application") do
   @legal_aid_application = create(
     :application,
