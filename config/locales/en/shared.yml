@@ -69,8 +69,8 @@ en:
         f: they may have to pay towards legal aid
         g: they may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
         h: if the case continues after their 18th birthday, we may reassess their income and capital to check if they should contribute towards legal costs
-        h: the information they've given is complete and correct
-        i: they'll report any changes to their financial situation immediately
+        i: the information they've given is complete and correct
+        j: they'll report any changes to their financial situation immediately
       warning_list_summary: If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may
       warning_list: |
         be prosecuted
