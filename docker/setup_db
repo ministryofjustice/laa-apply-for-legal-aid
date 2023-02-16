@@ -1,8 +1,0 @@
-#!/bin/sh
-# Usage: setup_db
-# Description:
-# Setup and migrate the database if it doesn't exist.
-
-echo "Setup Database"
-bundle exec rake db:create
-bundle exec rake db:migrate db:seed

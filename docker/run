@@ -2,9 +2,14 @@
 
 set -e
 
+# Wait for postgres to be up and running
 ./docker/wait_for_pg
-./docker/setup_db
-# remove irb prompts from rails console
+
+# Prepare the database and always seed it
+bundle exec rails db:prepare db:seed
+
+# Remove irb prompts from rails console
 echo 'IRB.conf[:USE_AUTOCOMPLETE] = false' >> ~/.irbrc
 
+# Start the Puma server
 bundle exec puma -C config/puma.rb
