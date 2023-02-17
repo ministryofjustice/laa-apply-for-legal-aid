@@ -27,18 +27,18 @@ module Providers
           it_behaves_like "a provider not authenticated"
         end
 
-        context "with an existing opponent" do
-          let(:opponent) { create(:opponent) }
-          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014], opponent:) }
+        context "with an existing domestic_abuse_summary" do
+          let(:domestic_abuse_summary) { create(:domestic_abuse_summary) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014], domestic_abuse_summary:) }
 
           it "renders successfully" do
             expect(response).to have_http_status(:ok)
           end
 
           it "displays opponent data" do
-            expect(response.body).to include(opponent.warning_letter_sent_details)
-            expect(response.body).to include(opponent.police_notified_details)
-            expect(response.body).to include(opponent.bail_conditions_set_details)
+            expect(response.body).to include(domestic_abuse_summary.warning_letter_sent_details)
+            expect(response.body).to include(domestic_abuse_summary.police_notified_details)
+            expect(response.body).to include(domestic_abuse_summary.bail_conditions_set_details)
           end
         end
       end
@@ -51,36 +51,36 @@ module Providers
           )
         end
 
-        let(:sample_opponent) { build(:opponent, :police_notified_true) }
+        let(:sample_domestic_abuse_summary) { build(:domestic_abuse_summary, :police_notified_true) }
         let(:params) do
           {
-            application_merits_task_opponent: {
-              warning_letter_sent: sample_opponent.warning_letter_sent.to_s,
-              warning_letter_sent_details: sample_opponent.warning_letter_sent_details,
-              police_notified: sample_opponent.police_notified.to_s,
-              police_notified_details_true: sample_opponent.police_notified_details,
-              bail_conditions_set: sample_opponent.bail_conditions_set.to_s,
-              bail_conditions_set_details: sample_opponent.bail_conditions_set_details,
+            application_merits_task_domestic_abuse_summary: {
+              warning_letter_sent: sample_domestic_abuse_summary.warning_letter_sent.to_s,
+              warning_letter_sent_details: sample_domestic_abuse_summary.warning_letter_sent_details,
+              police_notified: sample_domestic_abuse_summary.police_notified.to_s,
+              police_notified_details_true: sample_domestic_abuse_summary.police_notified_details,
+              bail_conditions_set: sample_domestic_abuse_summary.bail_conditions_set.to_s,
+              bail_conditions_set_details: sample_domestic_abuse_summary.bail_conditions_set_details,
             },
           }
         end
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
-        let(:opponent) { legal_aid_application.reload.opponent }
+        let(:domestic_abuse_summary) { legal_aid_application.reload.domestic_abuse_summary }
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
           login_provider
         end
 
-        it "creates a new opponent with the values entered" do
-          expect { patch_das }.to change(::ApplicationMeritsTask::Opponent, :count).by(1)
-          expect(opponent.warning_letter_sent).to eq(sample_opponent.warning_letter_sent)
-          expect(opponent.warning_letter_sent_details).to eq(sample_opponent.warning_letter_sent_details)
-          expect(opponent.police_notified).to eq(sample_opponent.police_notified)
-          expect(opponent.police_notified_details).to eq(sample_opponent.police_notified_details)
-          expect(opponent.bail_conditions_set).to eq(sample_opponent.bail_conditions_set)
-          expect(opponent.bail_conditions_set_details).to eq(sample_opponent.bail_conditions_set_details)
+        it "creates a new domestic_abuse_summary with the values entered" do
+          expect { patch_das }.to change(::ApplicationMeritsTask::DomesticAbuseSummary, :count).by(1)
+          expect(domestic_abuse_summary.warning_letter_sent).to eq(sample_domestic_abuse_summary.warning_letter_sent)
+          expect(domestic_abuse_summary.warning_letter_sent_details).to eq(sample_domestic_abuse_summary.warning_letter_sent_details)
+          expect(domestic_abuse_summary.police_notified).to eq(sample_domestic_abuse_summary.police_notified)
+          expect(domestic_abuse_summary.police_notified_details).to eq(sample_domestic_abuse_summary.police_notified_details)
+          expect(domestic_abuse_summary.bail_conditions_set).to eq(sample_domestic_abuse_summary.bail_conditions_set)
+          expect(domestic_abuse_summary.bail_conditions_set_details).to eq(sample_domestic_abuse_summary.bail_conditions_set_details)
         end
 
         it "sets the task to complete" do
@@ -113,7 +113,7 @@ module Providers
         end
 
         context "when incomplete" do
-          let(:sample_opponent) { ::ApplicationMeritsTask::Opponent.new }
+          let(:sample_domestic_abuse_summary) { ::ApplicationMeritsTask::DomesticAbuseSummary.new }
 
           it "renders show" do
             patch_das

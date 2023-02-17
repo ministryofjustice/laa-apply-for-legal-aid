@@ -51,8 +51,6 @@ en:
         legal_aid_amount: Enter amount
       application_merits_task/opponent: &opponent
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
-        warning_letter_sent_details: Tell us why a warning letter has not been sent
-        bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
         police_notified_details: Tell us what action they've taken (if any), including dates and the outcome
         understands_terms_of_court_order:
           <<: *true_false
@@ -64,6 +62,9 @@ en:
           <<: *true_false
       application_merits_task_opponent:
         <<: *opponent
+      application_merits_task_domestic_abuse_summary:
+        warning_letter_sent_details: Tell us why a warning letter has not been sent
+        bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
       application_merits_task_statement_of_case:
         statement: Enter your client's statement of case
       setting:

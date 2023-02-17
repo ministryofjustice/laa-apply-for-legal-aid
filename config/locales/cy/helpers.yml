@@ -84,3 +84,6 @@ cy:
         allow_welsh_translation:
           'false': 'oN'
           'true': seY
+      application_merits_task_domestic_abuse_summary:
+        warning_letter_sent_details: tnes neeb ton sah rettel gninraw a yhw su lleT
+        bail_conditions_set_details: dne ot ylekil er'yeht etad eht gnidulcni ,snoitidnoc liab eht fo sliated eviG
