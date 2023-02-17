@@ -2,8 +2,6 @@ require "uri"
 require "omniauth"
 
 class Applicant < ApplicationRecord
-  self.ignored_columns += %w[true_layer_secure_data_id]
-
   devise :rememberable
 
   NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
