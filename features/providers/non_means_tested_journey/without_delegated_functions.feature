@@ -80,10 +80,10 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Save and continue'
     Then I should be on a page showing "Domestic abuse summary"
-    And I choose option "Application merits task opponent warning letter sent True field"
-    And I choose option "Application merits task opponent police notified True field"
+    And I choose option "application merits task domestic abuse summary warning letter sent True field"
+    And I choose option "application merits task domestic abuse summary police notified True field"
     And I fill "Police notified details" with "Foo bar"
-    And I choose option "Application merits task opponent bail conditions set True field"
+    And I choose option "application merits task domestic abuse summary bail conditions set True field"
     And I fill "Bail conditions set details" with "Foo bar"
 
     When I click 'Save and continue'

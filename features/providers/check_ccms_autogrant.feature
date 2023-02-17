@@ -44,11 +44,11 @@ Feature: Checking ccms means does NOT auto grant
     When I choose "Yes"
     And I click 'Save and continue'
     Then I should be on a page showing "Domestic abuse summary"
-    And I choose option "Application merits task opponent warning letter sent True field"
-    Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
-    Then I choose "application-merits-task-opponent-police-notified-true-field"
-    Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike test"
-    Then I choose "application-merits-task-opponent-bail-conditions-set-field"
+    And I choose option "application-merits-task-domestic-abuse-summary-warning-letter-sent-true-field"
+    Then I choose "application-merits-task-domestic-abuse-summary-warning-letter-sent-true-field"
+    Then I choose "application-merits-task-domestic-abuse-summary-police-notified-true-field"
+    Then I fill "application-merits-task-domestic-abuse-summary-police-notified-details-true-field" with "Mike test"
+    Then I choose "application-merits-task-domestic-abuse-summary-bail-conditions-set-field"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"
@@ -110,10 +110,10 @@ Feature: Checking ccms means does NOT auto grant
     When I choose "Yes"
     And I click 'Save and continue'
     Then I should be on a page showing "Domestic abuse summary"
-    Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
-    Then I choose "application-merits-task-opponent-police-notified-true-field"
-    Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike test"
-    Then I choose "application-merits-task-opponent-bail-conditions-set-field"
+    Then I choose "application-merits-task-domestic-abuse-summary-warning-letter-sent-true-field"
+    Then I choose "application-merits-task-domestic-abuse-summary-police-notified-true-field"
+    Then I fill "application-merits-task-domestic-abuse-summary-police-notified-details-true-field" with "Mike test"
+    Then I choose "application-merits-task-domestic-abuse-summary-bail-conditions-set-field"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"

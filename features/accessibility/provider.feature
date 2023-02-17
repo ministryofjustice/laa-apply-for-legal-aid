@@ -259,9 +259,9 @@ Feature: Provider accessibility
     And I click 'Save and continue'
     Then I should be on a page showing "Domestic abuse summary"
     And the page is accessible
-    Then I choose option "Application merits task opponent warning letter sent True field"
-    Then I choose option "Application merits task opponent police notified True field"
-    Then I choose option "Application merits task opponent bail conditions set True field"
+    Then I choose option "Application merits task domestic abuse summary warning letter sent True field"
+    Then I choose option "Application merits task domestic abuse summary police notified True field"
+    Then I choose option "Application merits task domestic abuse summary bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
