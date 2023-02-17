@@ -371,29 +371,54 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#generate_secure_id" do
-    subject { legal_aid_application.generate_secure_id }
+    subject(:generate_secure_id) { legal_aid_application.generate_secure_id }
 
     let(:legal_aid_application) { create(:legal_aid_application) }
     let(:secure_data) { SecureData.last }
 
     it "generates a new secure data object" do
-      expect { subject }.to change(SecureData, :count).by(1)
+      expect { generate_secure_id }.to change(SecureData, :count).by(1)
     end
 
     it "returns the generated id" do
-      expect(subject).to eq(secure_data.id)
+      expect(generate_secure_id).to eq(secure_data.id)
     end
 
     it "generates data that can be used to find legal_aid_application" do
-      data = SecureData.for(subject)[:legal_aid_application]
-      expect(data).to be_present
+      data = SecureData.for(generate_secure_id)[:legal_aid_application]
       expect(described_class.find_by(data)).to eq(legal_aid_application)
     end
 
     it "generates data that contains a date which is in 8 days" do
-      data = SecureData.for(subject)
-      expire_date = (Time.current + LegalAidApplication::SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day
-      expect(data[:expired_at]).to be_between(expire_date - 1.minute, expire_date + 1.minute)
+      freeze_time
+      data = SecureData.for(generate_secure_id)
+      expires_at = LegalAidApplication::SECURE_ID_DAYS_TO_EXPIRE.days.from_now.end_of_day
+      expect(data[:expired_at]).to eq(expires_at.to_s)
+    end
+
+    it "saves citizen url data" do
+      allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
+      freeze_time
+
+      generate_secure_id
+
+      expires_on = Date.current.days_since(
+        LegalAidApplication::CITIZEN_URL_EXPIRES_AFTER_IN_DAYS,
+      )
+
+      expect(legal_aid_application).to have_attributes(
+        citizen_url_id: "test-uuid",
+        citizen_url_expires_on: expires_on,
+      )
+    end
+
+    it "saves a citizen url that can be queried" do
+      allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
+
+      generate_secure_id
+      queried_record = described_class.find_by(citizen_url_id: "test-uuid")
+
+      expect(queried_record).to eq(legal_aid_application)
     end
   end
 

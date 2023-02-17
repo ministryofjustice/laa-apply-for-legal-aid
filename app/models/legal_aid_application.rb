@@ -7,10 +7,15 @@ class LegalAidApplication < ApplicationRecord
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
+
+  CITIZEN_URL_EXPIRES_AFTER_IN_DAYS = 8
   SECURE_ID_DAYS_TO_EXPIRE = 7
+
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
   MAX_SUBSTANTIVE_COST_LIMIT = 25_000
+
   CCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
+
   POLICY_DISREGARDS_START_DATE = Rails.configuration.x.policy_disregards_start_date
 
   belongs_to :applicant, optional: true, dependent: :destroy
@@ -54,6 +59,8 @@ class LegalAidApplication < ApplicationRecord
   has_many :employments, dependent: :destroy
   has_many :regular_transactions, dependent: :destroy
   has_one :matter_opposition, -> { order(created_at: :desc) }, class_name: "ApplicationMeritsTask::MatterOpposition", inverse_of: :legal_aid_application, dependent: :destroy
+
+  encrypts :citizen_url_id, deterministic: true
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -210,12 +217,19 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def generate_secure_id
-    SecureData.create_and_store!(
-      legal_aid_application: { id: },
-      expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
-      # So each secure data payload is unique
-      token: SecureRandom.hex,
-    )
+    transaction do
+      update!(
+        citizen_url_id: SecureRandom.uuid,
+        citizen_url_expires_on: CITIZEN_URL_EXPIRES_AFTER_IN_DAYS.days.from_now,
+      )
+
+      SecureData.create_and_store!(
+        legal_aid_application: { id: },
+        expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
+        # So each secure data payload is unique
+        token: SecureRandom.hex,
+      )
+    end
   end
 
   def set_transaction_period
