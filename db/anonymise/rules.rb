@@ -92,6 +92,11 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     name: -> { Faker::Name.name },
   },
   document_categories: {},
+  domestic_abuse_summaries: {
+    warning_letter_sent_details: Faker::Lorem.paragraph(sentence_count: 2),
+    police_notified_details: Faker::Lorem.paragraph(sentence_count: 2),
+    bail_conditions_set_details: Faker::Lorem.paragraph(sentence_count: 2),
+  },
   dwp_overrides: {},
   employments: {},
   employment_payments: {},
