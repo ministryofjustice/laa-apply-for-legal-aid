@@ -790,7 +790,7 @@ And(/^I should (see|not see) a govuk formatted date from ['|"](.*?)['|"] days ag
 end
 
 When(/^I click clear search$/) do
-  page.find("#clear-proceeding-search").click
+  page.find_by_id("clear-proceeding-search").click
 end
 
 Then(/^proceeding search field is empty$/) do
@@ -880,7 +880,7 @@ Then("the answer for all {string} categories should be {string}") do |field_name
 end
 
 Then("the delete modal should open") do
-  expect(page).to have_css(".modal-dialog", visible: true)
+  expect(page).to have_css(".modal-dialog")
 end
 
 Then("I click the close button for the modal") do
@@ -892,7 +892,7 @@ Then("the delete modal should not be visible") do
 end
 
 Then("I select a proceeding type and continue") do
-  find("#proceeding-list").first(:button, "Select and continue").click
+  find_by_id("proceeding-list").first(:button, "Select and continue").click
 end
 
 Then("I choose a proceeding type {string} radio button") do |radio_button_name|
@@ -900,7 +900,7 @@ Then("I choose a proceeding type {string} radio button") do |radio_button_name|
 end
 
 Then("I select proceeding type {int}") do |index|
-  find("#proceeding-list").all(:button, "Select")[index - 1].click
+  find_by_id("proceeding-list").all(:button, "Select")[index - 1].click
 end
 
 Then("I expect to see {int} proceeding types selected") do |number|
@@ -919,7 +919,7 @@ Then(/^I see the client details page$/) do
 end
 
 Then("I should be on the Applicant page") do
-  expect(page).to have_css("input#applicant-first-name-field")
+  expect(page).to have_field("applicant-first-name-field")
 end
 
 Then("I enter name {string}, {string}") do |first_name, last_name|
@@ -1066,7 +1066,7 @@ Then("I am on the read only version of the check your answers page") do
 end
 
 Then(/^I click How we checked your client's benefits status$/) do
-  page.find("#checked-status").click
+  page.find_by_id("checked-status").click
 end
 
 Then("I am on the {string} page") do |string|

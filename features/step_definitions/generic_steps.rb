@@ -22,9 +22,9 @@ end
 
 And(/^I should (see|not see) a ['|"](.*?)['|"] button$/) do |visibility, text|
   if visibility == "see"
-    expect(page).to have_selector("button", text:)
+    expect(page).to have_button(text:)
   else
-    expect(page).not_to have_selector("button", text:)
+    expect(page).not_to have_button(text:)
   end
 end
 
