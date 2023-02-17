@@ -486,6 +486,14 @@ FactoryBot.define do
       opponent { build(:opponent) }
     end
 
+    trait :with_parties_mental_capacity do
+      parties_mental_capacity { build(:parties_mental_capacity) }
+    end
+
+    trait :with_domestic_abuse_summary do
+      domestic_abuse_summary { build(:domestic_abuse_summary) }
+    end
+
     trait :with_restrictions do
       has_restrictions { true }
       restrictions_details { Faker::Lorem.paragraph }
@@ -527,6 +535,8 @@ FactoryBot.define do
       percentage_home { rand(1...99.0).round(2) }
       with_merits_statement_of_case
       with_opponent
+      with_parties_mental_capacity
+      with_domestic_abuse_summary
       with_restrictions
       with_incident
       with_vehicle
