@@ -398,6 +398,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_112837) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "domestic_abuse_summaries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.boolean "warning_letter_sent"
+    t.text "warning_letter_sent_details"
+    t.boolean "police_notified"
+    t.text "police_notified_details"
+    t.boolean "bail_conditions_set"
+    t.text "bail_conditions_set_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_domestic_abuse_summaries_on_legal_aid_application_id"
+  end
+
   create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "passporting_benefit"
@@ -971,6 +984,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_112837) do
   add_foreign_key "chances_of_successes", "proceedings"
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
+  add_foreign_key "domestic_abuse_summaries", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"
   add_foreign_key "employments", "legal_aid_applications"
