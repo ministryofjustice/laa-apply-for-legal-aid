@@ -63,8 +63,8 @@ en:
         b: they've instructed %{firm} to represent them
         c_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
         d_html: |
-          we can share their information with other government departments like Department for Work and Pensions
-          and HM Revenue and Customs
+          we can share their information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
+          and <abbr title="HM Revenue and Customs">HMRC</abbr>
         e: we can check their details with bank and credit reference agencies
         f: they may have to pay towards legal aid
         g: they may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
