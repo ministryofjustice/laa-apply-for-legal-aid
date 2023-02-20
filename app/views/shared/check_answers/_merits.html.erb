@@ -46,14 +46,14 @@
           name: :understands_terms_of_court_order,
           question: t(".items.understands_terms_of_court_order"),
           url: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
-          answer: yes_no(opponent.understands_terms_of_court_order),
-          no_border: !opponent.understands_terms_of_court_order,
+          answer: yes_no(parties_mental_capacity.understands_terms_of_court_order),
+          no_border: !parties_mental_capacity.understands_terms_of_court_order,
           read_only:,
         ) %>
   </dl>
-  <div class='govuk-body'><%= opponent.understands_terms_of_court_order_details %></div>
+  <div class='govuk-body'><%= parties_mental_capacity.understands_terms_of_court_order_details %></div>
 
-  <%= render "shared/check_answers/section_break" unless opponent.understands_terms_of_court_order %>
+  <%= render "shared/check_answers/section_break" unless parties_mental_capacity.understands_terms_of_court_order %>
 
   <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
     <dl class="govuk-summary-list govuk-!-margin-bottom-2">
@@ -61,26 +61,26 @@
             name: :warning_letter_sent,
             question: t(".items.warning_letter_sent"),
             url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-            answer: yes_no(opponent.warning_letter_sent),
-            no_border: !opponent.warning_letter_sent,
+            answer: yes_no(domestic_abuse_summary.warning_letter_sent),
+            no_border: !domestic_abuse_summary.warning_letter_sent,
             read_only:,
           ) %>
     </dl>
-    <div class='govuk-body'><%= opponent.warning_letter_sent_details %></div>
+    <div class='govuk-body'><%= domestic_abuse_summary.warning_letter_sent_details %></div>
 
-    <%= render "shared/check_answers/section_break" unless opponent.warning_letter_sent %>
+    <%= render "shared/check_answers/section_break" unless domestic_abuse_summary.warning_letter_sent %>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-2">
       <%= check_answer_link(
             name: :police_notified,
             question: t(".items.police_notified"),
             url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-            answer: yes_no(opponent.police_notified),
+            answer: yes_no(domestic_abuse_summary.police_notified),
             no_border: true,
             read_only:,
           ) %>
     </dl>
-    <div class='govuk-body'><%= opponent.police_notified_details %></div>
+    <div class='govuk-body'><%= domestic_abuse_summary.police_notified_details %></div>
 
     <%= render "shared/check_answers/section_break" %>
 
@@ -89,14 +89,14 @@
             name: :bail_conditions_set,
             question: t(".items.bail_conditions_set"),
             url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-            answer: yes_no(opponent.bail_conditions_set),
-            no_border: opponent.bail_conditions_set,
+            answer: yes_no(domestic_abuse_summary.bail_conditions_set),
+            no_border: domestic_abuse_summary.bail_conditions_set,
             read_only:,
           ) %>
     </dl>
-    <div class='govuk-body'><%= opponent.bail_conditions_set_details %></div>
+    <div class='govuk-body'><%= domestic_abuse_summary.bail_conditions_set_details %></div>
 
-    <%= render "shared/check_answers/section_break" if opponent.bail_conditions_set %>
+    <%= render "shared/check_answers/section_break" if domestic_abuse_summary.bail_conditions_set %>
   <% end %>
 </section>
 <div class="govuk-!-padding-bottom-6"></div>
