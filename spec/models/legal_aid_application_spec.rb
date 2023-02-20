@@ -373,31 +373,11 @@ RSpec.describe LegalAidApplication do
   describe "#generate_secure_id" do
     subject(:generate_secure_id) { legal_aid_application.generate_secure_id }
 
-    let(:legal_aid_application) { create(:legal_aid_application) }
-    let(:secure_data) { SecureData.last }
+    let(:legal_aid_application) { build(:legal_aid_application) }
 
-    it "generates a new secure data object" do
-      expect { generate_secure_id }.to change(SecureData, :count).by(1)
-    end
-
-    it "returns the generated id" do
-      expect(generate_secure_id).to eq(secure_data.id)
-    end
-
-    it "generates data that can be used to find legal_aid_application" do
-      data = SecureData.for(generate_secure_id)[:legal_aid_application]
-      expect(described_class.find_by(data)).to eq(legal_aid_application)
-    end
-
-    it "generates data that contains a date which is in 8 days" do
-      freeze_time
-      data = SecureData.for(generate_secure_id)
-      expires_at = LegalAidApplication::SECURE_ID_DAYS_TO_EXPIRE.days.from_now.end_of_day
-      expect(data[:expired_at]).to eq(expires_at.to_s)
-    end
+    before { allow(SecureRandom).to receive(:uuid).and_return("test-uuid") }
 
     it "saves citizen url data" do
-      allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
       freeze_time
 
       generate_secure_id
@@ -413,12 +393,14 @@ RSpec.describe LegalAidApplication do
     end
 
     it "saves a citizen url that can be queried" do
-      allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
-
       generate_secure_id
       queried_record = described_class.find_by(citizen_url_id: "test-uuid")
 
       expect(queried_record).to eq(legal_aid_application)
+    end
+
+    it "returns the generated citizen url id" do
+      expect(generate_secure_id).to eq("test-uuid")
     end
   end
 

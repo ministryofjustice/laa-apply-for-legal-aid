@@ -10,6 +10,8 @@ class SecureApplicationFinder
   end
 
   def legal_aid_application
+    LegalAidApplication.find_by!(citizen_url_id: secure_id)
+  rescue ActiveRecord::RecordNotFound
     LegalAidApplication.find_by! secure_data[:legal_aid_application]
   end
 
@@ -24,6 +26,10 @@ private
   end
 
   def expired?
-    secure_data[:expired_at] && secure_data[:expired_at] < Time.current
+    expires_on && expires_on < Time.current
+  end
+
+  def expires_on
+    legal_aid_application.citizen_url_expires_on.presence || secure_data[:expired_at]
   end
 end

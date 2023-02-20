@@ -217,19 +217,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def generate_secure_id
-    transaction do
-      update!(
-        citizen_url_id: SecureRandom.uuid,
-        citizen_url_expires_on: CITIZEN_URL_EXPIRES_AFTER_IN_DAYS.days.from_now,
-      )
-
-      SecureData.create_and_store!(
-        legal_aid_application: { id: },
-        expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
-        # So each secure data payload is unique
-        token: SecureRandom.hex,
-      )
-    end
+    update!(
+      citizen_url_id: SecureRandom.uuid,
+      citizen_url_expires_on: CITIZEN_URL_EXPIRES_AFTER_IN_DAYS.days.from_now,
+    )
+    citizen_url_id
   end
 
   def set_transaction_period
