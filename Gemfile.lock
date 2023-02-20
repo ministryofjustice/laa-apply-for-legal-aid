@@ -626,7 +626,6 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
-
     sidekiq (7.0.3)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -809,7 +808,6 @@ DEPENDENCIES
   webdack-uuid_migration (~> 1.4.0)
   webdrivers (~> 5.2)
   webmock
-  webrick
 
 RUBY VERSION
    ruby 3.2.0p0
