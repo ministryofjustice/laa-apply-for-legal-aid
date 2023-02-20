@@ -249,7 +249,7 @@ en:
           list:
             a: they've instructed %{provider_firm_name} to represent them
             b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
-            c: we can share their information with other government departments like DWP and HMRC
+            c_html: we can share their information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr> and <abbr title="HM Revenue and Customs">HMRC</abbr>
             d: we can check their details with bank and credit reference agencies
             e: they may have to pay towards legal aid
             f: they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
@@ -263,7 +263,7 @@ en:
             a: their date of birth on the application is correct based on the information you have
             b: they've instructed %{provider_firm_name} to represent them
             c_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
-            d: we can share their information with other government departments like DWP and HMRC
+            d_html: we can share their information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr> and <abbr title="HM Revenue and Customs">HMRC</abbr>
             e: we can check their details with bank and credit reference agencies
             f: they may have to pay towards legal aid
             g: |
