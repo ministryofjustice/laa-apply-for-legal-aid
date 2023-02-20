@@ -75,19 +75,19 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "displays the details of whether the opponent understands the terms of court order" do
-        expect(response.body).to include(application.opponent.understands_terms_of_court_order_details)
+        expect(response.body).to include(application.parties_mental_capacity.understands_terms_of_court_order_details)
       end
 
       it "displays the details of whether a warning letter has been sent" do
-        expect(response.body).to include(application.opponent.warning_letter_sent_details)
+        expect(response.body).to include(application.domestic_abuse_summary.warning_letter_sent_details)
       end
 
       it "displays the details of whether the police has been notified" do
-        expect(response.body).to include(application.opponent.police_notified_details)
+        expect(response.body).to include(application.domestic_abuse_summary.police_notified_details)
       end
 
       it "displays the details of whether the bail conditions have been set" do
-        expect(response.body).to include(application.opponent.bail_conditions_set_details)
+        expect(response.body).to include(application.domestic_abuse_summary.bail_conditions_set_details)
       end
 
       it "displays the statement of case" do
