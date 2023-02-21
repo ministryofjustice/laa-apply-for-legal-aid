@@ -27,15 +27,15 @@ module Providers
           it_behaves_like "a provider not authenticated"
         end
 
-        context "with an existing opponent" do
-          let(:opponent) { create(:opponent) }
-          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014], opponent:) }
+        context "with an existing parties_mental_capacity" do
+          let(:parties_mental_capacity) { create(:parties_mental_capacity) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014], parties_mental_capacity:) }
 
           it "renders successfully" do
             expect(response).to have_http_status(:ok)
           end
 
-          it "displays opponent data" do
+          it "displays parties_mental_capacity data" do
             expect(response.body).to include("Do all parties have the mental capacity to understand the terms of a court order?")
           end
         end
@@ -53,7 +53,7 @@ module Providers
         let(:understands_terms_of_court_order_details) { "New understands terms of court order details" }
         let(:params) do
           {
-            application_merits_task_opponent: {
+            application_merits_task_parties_mental_capacity: {
               understands_terms_of_court_order:,
               understands_terms_of_court_order_details:,
             },
@@ -61,15 +61,15 @@ module Providers
         end
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
-        let(:opponent) { legal_aid_application.reload.opponent }
+        let(:parties_mental_capacity) { legal_aid_application.reload.parties_mental_capacity }
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
           login_provider
         end
 
-        it "creates a new opponent with the values entered" do
-          expect { patch_understanding }.to change(::ApplicationMeritsTask::Opponent, :count).by(1)
+        it "creates a new parties_mental_capacity with the values entered" do
+          expect { patch_understanding }.to change(::ApplicationMeritsTask::PartiesMentalCapacity, :count).by(1)
         end
 
         it "sets the task to complete" do

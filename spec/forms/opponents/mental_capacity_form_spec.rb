@@ -9,8 +9,8 @@ RSpec.describe Opponents::MentalCapacityForm, type: :form do
       "understands_terms_of_court_order_details" => "New understands terms of court order details",
     }
   end
-  let(:opponent) { create(:opponent) }
-  let(:form_params) { params.merge(model: opponent) }
+  let(:parties_mental_capacity) { create(:parties_mental_capacity) }
+  let(:form_params) { params.merge(model: parties_mental_capacity) }
 
   describe "validation" do
     subject(:valid_form) { mental_capacity_form.valid? }
@@ -36,7 +36,7 @@ RSpec.describe Opponents::MentalCapacityForm, type: :form do
 
     it "updates the opponent with our chosen params" do
       save_form
-      expect(opponent).to have_attributes(
+      expect(parties_mental_capacity).to have_attributes(
         understands_terms_of_court_order: false,
         understands_terms_of_court_order_details: "New understands terms of court order details",
       )

@@ -2,7 +2,7 @@ module Providers
   module ApplicationMeritsTask
     class OpponentsMentalCapacitiesController < ProviderBaseController
       def show
-        @form = Opponents::MentalCapacityForm.new(model: opponent)
+        @form = Opponents::MentalCapacityForm.new(model: parties_mental_capacity)
       end
 
       def update
@@ -12,13 +12,13 @@ module Providers
 
     private
 
-      def opponent
-        @opponent ||= legal_aid_application.opponent || legal_aid_application.build_opponent
+      def parties_mental_capacity
+        @parties_mental_capacity ||= legal_aid_application.parties_mental_capacity || legal_aid_application.build_parties_mental_capacity
       end
 
       def form_params
-        merge_with_model(opponent) do
-          params.require(:application_merits_task_opponent).permit(
+        merge_with_model(parties_mental_capacity) do
+          params.require(:application_merits_task_parties_mental_capacity).permit(
             :understands_terms_of_court_order, :understands_terms_of_court_order_details
           )
         end
