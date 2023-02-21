@@ -71,7 +71,6 @@ module LaaApplyForLegalAid
     config.govuk_notify_templates = YAML.load_file(Rails.root.join("config/govuk_notify_templates.yml")).symbolize_keys
 
     config.x.support_email_address = "apply-for-civil-legal-aid@digital.justice.gov.uk".freeze
-    config.x.simulated_email_address = "simulate-delivered@notifications.service.gov.uk".freeze
     config.x.govuk_notify_api_key = ENV.fetch("GOVUK_NOTIFY_API_KEY", nil)
 
     config.x.admin_portal.allow_reset = ENV["ADMIN_ALLOW_RESET"] == "true"

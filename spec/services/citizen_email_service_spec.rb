@@ -4,8 +4,7 @@ require "sidekiq/testing"
 RSpec.describe CitizenEmailService do
   subject { described_class.new(application) }
 
-  let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
-  let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe", email: simulated_email_address) }
+  let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe", email: "test@example.com") }
   let(:firm) { create(:firm) }
   let(:provider) { create(:provider, firm:) }
   let(:application) { create(:application, applicant:, provider:) }
