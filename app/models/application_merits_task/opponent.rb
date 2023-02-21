@@ -4,17 +4,6 @@ module ApplicationMeritsTask
 
     belongs_to :legal_aid_application
 
-    self.ignored_columns += %w[
-      understands_terms_of_court_order
-      understands_terms_of_court_order_details
-      warning_letter_sent
-      warning_letter_sent_details
-      police_notified
-      police_notified_details
-      bail_conditions_set
-      bail_conditions_set_details
-    ]
-
     def ccms_relationship_to_case
       "OPP"
     end
