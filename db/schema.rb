@@ -705,6 +705,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_174503) do
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
 
+  create_table "parties_mental_capacities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.boolean "understands_terms_of_court_order"
+    t.text "understands_terms_of_court_order_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_parties_mental_capacities_on_legal_aid_application_id"
+  end
+
   create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "role"
     t.string "description"
@@ -1010,6 +1019,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_174503) do
   add_foreign_key "offices_providers", "providers"
   add_foreign_key "opponents", "legal_aid_applications"
   add_foreign_key "opponents_applications", "proceedings"
+  add_foreign_key "parties_mental_capacities", "legal_aid_applications"
   add_foreign_key "policy_disregards", "legal_aid_applications"
   add_foreign_key "proceedings", "legal_aid_applications"
   add_foreign_key "prohibited_steps", "proceedings"

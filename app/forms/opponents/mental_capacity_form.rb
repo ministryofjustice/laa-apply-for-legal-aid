@@ -1,6 +1,6 @@
 module Opponents
   class MentalCapacityForm < BaseForm
-    form_for ApplicationMeritsTask::Opponent
+    form_for ApplicationMeritsTask::PartiesMentalCapacity
 
     attr_accessor :understands_terms_of_court_order, :understands_terms_of_court_order_details
 

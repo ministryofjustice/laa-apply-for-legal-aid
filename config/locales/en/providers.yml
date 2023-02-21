@@ -425,8 +425,7 @@ en:
       opponents_mental_capacities:
         show:
           h1-heading: Do all parties have the mental capacity to understand the terms of a court order?
-          first_name: First name
-          last_name: Last name
+          understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
       domestic_abuse_summaries:
         show:
           h1-heading: Domestic abuse summary
