@@ -4,8 +4,7 @@ require "sidekiq/testing"
 RSpec.describe SubmitCitizenReminderService, :vcr do
   subject { described_class.new(application) }
 
-  let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
-  let(:provider) { create(:provider, email: simulated_email_address) }
+  let(:provider) { create(:provider, email: "test@example.com") }
   let(:application) { create(:application, :with_applicant, provider:) }
   let(:application_url) { "http://test.com" }
   let(:url_expiry_date) { (Time.zone.today + 7.days).strftime("%-d %B %Y") }
@@ -16,7 +15,7 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
     end
 
     context "sending the email" do
-      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, simulated_email_address, application_url, application.applicant.full_name, url_expiry_date) }
+      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, "test@example.com", application_url, application.applicant.full_name, url_expiry_date) }
 
       it "sends an email with the right parameters" do
         expect(mail.govuk_notify_personalisation).to eq(
