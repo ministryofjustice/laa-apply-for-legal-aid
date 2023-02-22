@@ -1,4 +1,6 @@
 class LegalAidApplication < ApplicationRecord
+  self.ignored_columns += %w[citizen_url_id citizen_url_expires_on]
+
   include Discard::Model
   include DelegatedFunctions
 
@@ -8,7 +10,6 @@ class LegalAidApplication < ApplicationRecord
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
 
-  CITIZEN_URL_EXPIRES_AFTER_IN_DAYS = 8
   SECURE_ID_DAYS_TO_EXPIRE = 7
 
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
@@ -59,8 +60,6 @@ class LegalAidApplication < ApplicationRecord
   has_many :employments, dependent: :destroy
   has_many :regular_transactions, dependent: :destroy
   has_one :matter_opposition, -> { order(created_at: :desc) }, class_name: "ApplicationMeritsTask::MatterOpposition", inverse_of: :legal_aid_application, dependent: :destroy
-
-  encrypts :citizen_url_id, deterministic: true
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -218,10 +217,7 @@ class LegalAidApplication < ApplicationRecord
 
   def generate_secure_id
     transaction do
-      update!(
-        citizen_url_id: SecureRandom.uuid,
-        citizen_url_expires_on: CITIZEN_URL_EXPIRES_AFTER_IN_DAYS.days.from_now,
-      )
+      Citizen::AccessToken.generate_for(legal_aid_application: self)
 
       SecureData.create_and_store!(
         legal_aid_application: { id: },
