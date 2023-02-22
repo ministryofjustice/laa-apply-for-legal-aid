@@ -18,6 +18,7 @@ module CCMS
                  savings_amount:,
                  provider:,
                  opponent:,
+                 domestic_abuse_summary:,
                  office:)
         end
         let(:applicant) do
@@ -34,6 +35,7 @@ module CCMS
           create(:chances_of_success, :with_optional_text, proceeding:)
         end
         let(:vehicle) { create(:vehicle, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
+        let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
         let(:other_assets_declaration) do
           create(:other_assets_declaration,
                  valuable_items_value: 144_524.74,
@@ -47,7 +49,7 @@ module CCMS
         let(:address) { create(:address, postcode: "GH08NY") }
         let(:provider) { create(:provider, username: "saturnina", firm:, email: "patrick_rath@example.net") }
         let(:firm) { create(:firm, ccms_id: 169) }
-        let(:opponent) { create(:opponent, first_name: "Joffrey", last_name: "Test-Opponent", police_notified: true) }
+        let(:opponent) { create(:opponent, first_name: "Joffrey", last_name: "Test-Opponent") }
         let(:submission) { create(:submission, :case_ref_obtained, case_ccms_reference: "300000000001", legal_aid_application:) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
         let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }

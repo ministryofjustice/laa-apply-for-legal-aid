@@ -28,6 +28,8 @@ module CCMS
         end
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:opponent) { legal_aid_application.opponent }
+        let(:domestic_abuse_summary) { legal_aid_application.domestic_abuse_summary }
+        let(:parties_mental_capacity) { legal_aid_application.parties_mental_capacity }
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
@@ -571,7 +573,7 @@ module CCMS
 
         context "POLICE_NOTIFIED block" do
           context "police notified" do
-            before { opponent.update(police_notified: true) }
+            before { domestic_abuse_summary.update(police_notified: true) }
 
             it "is true" do
               block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
@@ -580,7 +582,7 @@ module CCMS
           end
 
           context "police NOT notified" do
-            before { opponent.update(police_notified: false) }
+            before { domestic_abuse_summary.update(police_notified: false) }
 
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
@@ -603,7 +605,7 @@ module CCMS
           end
 
           context "letter has been sent" do
-            before { opponent.update(warning_letter_sent: true) }
+            before { domestic_abuse_summary.update(warning_letter_sent: true) }
 
             it "generates WARNING_LETTER_SENT block with true value" do
               block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
@@ -619,7 +621,7 @@ module CCMS
 
         context "INJ_RESPONDENT_CAPACITY" do
           context "opponent has capacity" do
-            before { opponent.understands_terms_of_court_order = true }
+            before { parties_mental_capacity.understands_terms_of_court_order = true }
 
             it "is true" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
@@ -628,7 +630,7 @@ module CCMS
           end
 
           context "opponent does not have capacity" do
-            before { opponent.understands_terms_of_court_order = false }
+            before { parties_mental_capacity.understands_terms_of_court_order = false }
 
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
@@ -810,7 +812,7 @@ module CCMS
 
         context "BAIL_CONDITIONS_SET" do
           context "bail conditions set" do
-            before { opponent.bail_conditions_set = true }
+            before { domestic_abuse_summary.bail_conditions_set = true }
 
             it "is true" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
@@ -819,7 +821,7 @@ module CCMS
           end
 
           context "bail conditions NOT set" do
-            before { opponent.bail_conditions_set = false }
+            before { domestic_abuse_summary.bail_conditions_set = false }
 
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
