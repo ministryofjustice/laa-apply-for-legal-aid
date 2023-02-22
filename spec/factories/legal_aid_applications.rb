@@ -483,7 +483,9 @@ FactoryBot.define do
     end
 
     trait :with_opponent do
-      opponent { build(:opponent) }
+      after(:create) do |application|
+        create_list(:opponent, 1, legal_aid_application: application)
+      end
     end
 
     trait :with_parties_mental_capacity do
