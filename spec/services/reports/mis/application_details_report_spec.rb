@@ -7,12 +7,16 @@ module Reports
         create_list(:legal_aid_application, 3,
                     :with_proceedings,
                     :with_applicant,
+                    :with_parties_mental_capacity,
+                    :with_domestic_abuse_summary,
                     :with_passported_state_machine)
       end
       let!(:submitted_applications) do
         create_list(:legal_aid_application, 3,
                     :with_passported_state_machine,
                     :with_applicant,
+                    :with_parties_mental_capacity,
+                    :with_domestic_abuse_summary,
                     :with_proceedings,
                     :with_chances_of_success,
                     :at_assessment_submitted,
@@ -22,6 +26,8 @@ module Reports
         create(:legal_aid_application,
                :with_passported_state_machine,
                :with_applicant,
+               :with_parties_mental_capacity,
+               :with_domestic_abuse_summary,
                :with_proceedings,
                :with_chances_of_success,
                :at_submitting_assessment,

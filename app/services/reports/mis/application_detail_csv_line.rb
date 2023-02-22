@@ -29,6 +29,8 @@ module Reports
                :property_value,
                :provider,
                :opponent,
+               :parties_mental_capacity,
+               :domestic_abuse_summary,
                :savings_amount,
                :merits_submitted_at,
                :policy_disregards,
@@ -61,13 +63,14 @@ module Reports
                :money_owed_value, to: :other_assets_declaration
 
       delegate :understands_terms_of_court_order?,
-               :understands_terms_of_court_order_details,
-               :warning_letter_sent?,
+               :understands_terms_of_court_order_details, to: :parties_mental_capacity
+
+      delegate :warning_letter_sent?,
                :warning_letter_sent_details,
                :police_notified?,
                :police_notified_details,
                :bail_conditions_set?,
-               :bail_conditions_set_details, to: :opponent
+               :bail_conditions_set_details, to: :domestic_abuse_summary
 
       delegate :firm,
                :username, to: :provider

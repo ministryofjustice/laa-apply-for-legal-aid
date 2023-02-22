@@ -23,6 +23,8 @@ module Reports
                savings_amount:,
                other_assets_declaration:,
                opponent:,
+               parties_mental_capacity:,
+               domestic_abuse_summary:,
                ccms_submission:,
                own_vehicle: false,
                merits_submitted_at: Time.current)
@@ -50,6 +52,8 @@ module Reports
                savings_amount:,
                other_assets_declaration:,
                opponent:,
+               parties_mental_capacity:,
+               domestic_abuse_summary:,
                ccms_submission:,
                own_vehicle: false,
                merits_submitted_at: Time.current)
@@ -71,6 +75,8 @@ module Reports
                savings_amount:,
                other_assets_declaration:,
                opponent:,
+               parties_mental_capacity:,
+               domestic_abuse_summary:,
                ccms_submission:,
                own_vehicle: false,
                merits_submitted_at: Time.current)
@@ -135,9 +141,17 @@ module Reports
       end
 
       let(:opponent) do
-        create(:opponent,
+        create(:opponent)
+      end
+
+      let(:parties_mental_capacity) do
+        create(:parties_mental_capacity,
                understands_terms_of_court_order:,
-               understands_terms_of_court_order_details:,
+               understands_terms_of_court_order_details:)
+      end
+
+      let(:domestic_abuse_summary) do
+        create(:domestic_abuse_summary,
                warning_letter_sent:,
                warning_letter_sent_details:,
                police_notified:,
@@ -527,13 +541,13 @@ module Reports
           context "opponent record exists" do
             it "generates the values" do
               expect(value_for("Opponent can understand?")).to eq "Yes"
-              expect(value_for("Ability to understand details")).to eq opponent.understands_terms_of_court_order_details
+              expect(value_for("Ability to understand details")).to eq parties_mental_capacity.understands_terms_of_court_order_details
               expect(value_for("Warning letter sent?")).to eq "Yes"
-              expect(value_for("Warning letter details")).to eq opponent.warning_letter_sent_details
+              expect(value_for("Warning letter details")).to eq domestic_abuse_summary.warning_letter_sent_details
               expect(value_for("Police notified?")).to eq "Yes"
-              expect(value_for("Police notification details")).to eq opponent.police_notified_details
+              expect(value_for("Police notification details")).to eq domestic_abuse_summary.police_notified_details
               expect(value_for("Bail conditions set?")).to eq "Yes"
-              expect(value_for("Bail details")).to eq opponent.bail_conditions_set_details
+              expect(value_for("Bail details")).to eq domestic_abuse_summary.bail_conditions_set_details
             end
           end
 
