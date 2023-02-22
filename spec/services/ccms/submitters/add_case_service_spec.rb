@@ -8,6 +8,8 @@ module CCMS
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_proceedings,
+               :with_parties_mental_capacity,
+               :with_domestic_abuse_summary,
                :with_chances_of_success,
                :with_everything_and_address,
                :with_cfe_v3_result,
