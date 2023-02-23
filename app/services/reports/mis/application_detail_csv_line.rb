@@ -28,7 +28,6 @@ module Reports
                :proceedings,
                :property_value,
                :provider,
-               :opponent,
                :parties_mental_capacity,
                :domestic_abuse_summary,
                :savings_amount,
@@ -149,7 +148,7 @@ module Reports
           "Number of children involved",
           "Supporting evidence uploaded?",
           "Number of items of evidence",
-          "Opponent can understand?",
+          "Parties can understand?",
           "Ability to understand details",
           "Warning letter sent?",
           "Warning letter details",
@@ -199,7 +198,8 @@ module Reports
         other_assets_details
         restrictions
         eligibility
-        opponent_details
+        parties_mental_capacity_attrs
+        domestic_abuse_summary_attrs
         merits
         hmrc_data
         banking_data
@@ -360,13 +360,16 @@ module Reports
         @line << gateway_evidence_count
       end
 
-      def opponent_details
-        opponent.present? ? opponent_attrs : 8.times { @line << "" }
-      end
+      def parties_mental_capacity_attrs
+        return 2.times { @line << "" } if parties_mental_capacity.blank?
 
-      def opponent_attrs
         @line << yesno(understands_terms_of_court_order?)
         @line << understands_terms_of_court_order_details
+      end
+
+      def domestic_abuse_summary_attrs
+        return 6.times { @line << "" } if domestic_abuse_summary.blank?
+
         @line << yesno(warning_letter_sent?)
         @line << warning_letter_sent_details
         @line << yesno(police_notified?)
