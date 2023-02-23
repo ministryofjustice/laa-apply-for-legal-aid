@@ -260,17 +260,19 @@ Rails.application.routes.draw do
         resources :involved_children, only: %i[new show update]
         resources :remove_involved_child, only: %i[show update]
 
+        resources :opponents_names, only: %i[new show update]
+        resources :remove_opponent, only: %i[show update]
+
         resource :client_denial_of_allegation, only: %i[show update]
         resource :client_offered_undertakings, only: %i[show update]
         resource :date_client_told_incident, only: %i[show update]
         resource :has_other_involved_children, only: %i[show update]
         resource :in_scope_of_laspo, only: %i[show update]
-        resource :opponents_name, only: %i[show update]
+        resource :has_other_opponent, only: %i[new show update]
         resource :opponents_mental_capacity, only: %i[show update]
         resource :domestic_abuse_summary, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
         resource :nature_of_urgencies, only: %i[show update]
-        resource :opponent, only: %i[show update]
         resource :statement_of_case, only: %i[show update destroy] do
           get "/list", to: "statement_of_cases#list"
         end

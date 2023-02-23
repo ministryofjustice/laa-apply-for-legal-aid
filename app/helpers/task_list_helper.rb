@@ -18,7 +18,8 @@ module TaskListHelper
 private
 
   def _task_url(name, legal_aid_application, status)
-    url = if application_has_no_involved_children?(legal_aid_application) && name.eql?(:children_application)
+    url = if (application_has_no_involved_children?(legal_aid_application) && name.eql?(:children_application)) ||
+        (application_has_no_opponents?(legal_aid_application) && name.eql?(:opponent_name))
             "new_providers_legal_aid_application_#{url_fragment(name)}_path".to_sym
           else
             "providers_legal_aid_application_#{new_url_fragment(name, status, legal_aid_application)}_path".to_sym
@@ -28,6 +29,10 @@ private
 
   def application_has_no_involved_children?(legal_aid_application)
     legal_aid_application.involved_children.empty?
+  end
+
+  def application_has_no_opponents?(legal_aid_application)
+    legal_aid_application.opponents.empty?
   end
 
   def proceeding_task_url(name, application, ccms_code)
@@ -42,6 +47,7 @@ private
 
   def new_url_fragment(name, status, application)
     name = "has_other_involved_children" if name.eql?(:children_application) && (status.eql?(:complete) || application.involved_children.any?)
+    name = "has_other_opponent" if name.eql?(:opponent_name) && (status.eql?(:complete) || application.opponents.any?)
     I18n.t("providers.merits_task_lists.task_list_item.urls.#{name}")
   end
 

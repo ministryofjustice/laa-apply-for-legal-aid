@@ -318,6 +318,7 @@ en:
           statement_of_case: Statement of case
           full_name: Name
           child: Child
+          opponent: Opponent
           linked_children: Which children are covered under this proceeding?
           attempts_to_settle: What attempts have been made to settle the matter?
           specific_issue: What specific issue do you want to determine at court?

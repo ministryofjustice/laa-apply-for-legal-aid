@@ -45,7 +45,7 @@ module CCMS
 
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-        let(:opponent) { legal_aid_application.opponent }
+        let(:opponent) { legal_aid_application.opponents.first }
         let(:parties_mental_capacity) { legal_aid_application.parties_mental_capacity }
         let(:domestic_abuse_summary) { legal_aid_application.domestic_abuse_summary }
         let(:ccms_reference) { "300000054005" }

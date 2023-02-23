@@ -406,8 +406,10 @@ en:
           remove: Remove
           add_another: Do you need to add another child?
       remove_involved_child:
-        show:
+        show: &remove_show
           page_title: Do you want to remove %{name} from the application?
+      remove_opponent:
+        show: *remove_show
       date_client_told_incidents:
         show:
           h1-heading: Latest incident details
@@ -418,10 +420,19 @@ en:
         show:
           page_heading: Why is the Section 8 matter opposed by your client or the other party?
       opponents_names:
-        show:
-          h1-heading: Opponent's name
+        show: &new
+          page_title: Opponent's name
+        new: *new
+        form:
           first_name: First name
           last_name: Last name
+      has_other_opponents:
+        show:
+          page_title: You have added %{count}
+          existing: You have added %{count}
+          table_caption: Opponents added
+          remove: Remove
+          add_another: Do you need to add another opponent?
       opponents_mental_capacities:
         show:
           h1-heading: Do all parties have the mental capacity to understand the terms of a court order?
@@ -486,6 +497,9 @@ en:
     has_other_involved_children:
       show:
         error: Select yes if you need to add another child
+    has_other_opponents:
+      show:
+        error: Select yes if you need to add another opponent
     declarations:
       show:
         h1-heading: Declaration
@@ -986,7 +1000,7 @@ en:
         proceeding_heading: Enter details for each proceeding
       task_list_item:
         latest_incident_details: Latest incident details
-        opponent_name: "Opponent's name"
+        opponent_name: "Opponents"
         opponent_mental_capacity: Mental capacity of all parties
         domestic_abuse_summary: Domestic abuse summary
         statement_of_case: Statement of case
@@ -1010,6 +1024,7 @@ en:
         urls:
           latest_incident_details: date_client_told_incident
           opponent_name: opponents_name
+          has_other_opponent: has_other_opponent
           opponent_mental_capacity: opponents_mental_capacity
           domestic_abuse_summary: domestic_abuse_summary
           statement_of_case: statement_of_case

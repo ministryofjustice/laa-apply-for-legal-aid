@@ -60,9 +60,39 @@ module Flow
           check_answers: :check_merits_answers,
         },
         opponents_names: {
-          path: ->(application) { urls.providers_legal_aid_application_opponents_name_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
+          path: ->(application) { urls.new_providers_legal_aid_application_opponents_name_path(application) },
+          forward: :has_other_opponents, # ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
+        },
+        start_opponent_task: {
+          # This allows the task list to check for opponents and route to has_other_opponents
+          # if they exist or show the new page if they do not
+          path: lambda do |application|
+            if application.opponents.any?
+              urls.providers_legal_aid_application_has_other_opponent_path(application)
+            else
+              urls.new_providers_legal_aid_application_opponents_name_path(application)
+            end
+          end,
+        },
+        has_other_opponents: {
+          path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
+          forward: lambda { |application, has_other_opponent|
+            if has_other_opponent
+              :opponents_names
+            else
+              Flow::MeritsLoop.forward_flow(application, :application)
+            end
+          },
+        },
+        remove_opponent: {
+          forward: lambda { |application|
+            if application.opponents.count.positive?
+              :has_other_opponents
+            else
+              :opponents_names
+            end
+          },
         },
         opponents_mental_capacities: {
           path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },

@@ -27,19 +27,25 @@
   </section>
 <% end %>
 
-<section class="print-no-break">
-  <h2 class="govuk-heading-m govuk-!-padding-top-6"><%= t ".opponent-heading" %></h2>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
-          name: :full_name,
-          question: t(".items.full_name"),
-          url: providers_legal_aid_application_opponents_name_path(@legal_aid_application),
-          answer: opponent.full_name,
-          read_only:,
-        ) %>
-  </dl>
-
-  <%= render "shared/check_answers/section_break" unless opponent.full_name %>
+<section class="print-no-break govuk-!-padding-top-6">
+  <%= check_answer_change_link(
+        name: :opponents,
+        url: providers_legal_aid_application_has_other_opponent_path(@legal_aid_application),
+        question: t(".opponent-heading"),
+        read_only:,
+      ) %>
+  <% opponents.order(:created_at).each_with_index do |opponent, i| %>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2 ">
+      <%= check_answer_no_link(
+            name: "opponent_#{i + 1}".to_sym,
+            question: "#{t('.items.opponent')} #{i + 1}",
+            answer: opponent.full_name,
+            no_border: false,
+            read_only:,
+          ) %>
+    </dl>
+  <% end %>
+</section>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
