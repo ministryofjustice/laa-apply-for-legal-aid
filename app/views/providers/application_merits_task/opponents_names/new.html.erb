@@ -3,7 +3,8 @@
       page_heading_options: { margin_bottom: 3 },
       show_errors_for: @form,
     ) do %>
+
   <%= render "form",
              form: @form,
-             form_path: providers_legal_aid_application_opponents_name_path %>
+             form_path: new_providers_legal_aid_application_opponents_name_path(@legal_aid_application, @form.model) %>
 <% end %>

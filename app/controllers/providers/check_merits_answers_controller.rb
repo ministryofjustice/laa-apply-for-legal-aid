@@ -1,7 +1,6 @@
 module Providers
   class CheckMeritsAnswersController < ProviderBaseController
     def show
-      legal_aid_application.create_opponent! unless legal_aid_application.opponent
       legal_aid_application.check_merits_answers! unless legal_aid_application.checking_merits_answers?
     end
 

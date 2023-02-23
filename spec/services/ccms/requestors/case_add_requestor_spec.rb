@@ -17,7 +17,7 @@ module CCMS
                  other_assets_declaration:,
                  savings_amount:,
                  provider:,
-                 opponent:,
+                 opponents:,
                  domestic_abuse_summary:,
                  office:)
         end
@@ -49,7 +49,7 @@ module CCMS
         let(:address) { create(:address, postcode: "GH08NY") }
         let(:provider) { create(:provider, username: "saturnina", firm:, email: "patrick_rath@example.net") }
         let(:firm) { create(:firm, ccms_id: 169) }
-        let(:opponent) { create(:opponent, first_name: "Joffrey", last_name: "Test-Opponent") }
+        let(:opponents) { create_list(:opponent, 1, first_name: "Joffrey", last_name: "Test-Opponent") }
         let(:submission) { create(:submission, :case_ref_obtained, case_ccms_reference: "300000000001", legal_aid_application:) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
         let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
@@ -64,6 +64,7 @@ module CCMS
 
         before do
           legal_aid_application.reload
+          legal_aid_application.update!(opponents:)
           allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return("FakeUser")
           allow(Rails.configuration.x.ccms_soa).to receive(:client_password).and_return("FakePassword")
           allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return("password_type")

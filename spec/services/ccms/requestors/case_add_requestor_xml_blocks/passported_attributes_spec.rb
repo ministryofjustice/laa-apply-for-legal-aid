@@ -27,7 +27,7 @@ module CCMS
                  office:)
         end
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-        let(:opponent) { legal_aid_application.opponent }
+        let(:opponent) { legal_aid_application.opponents.first }
         let(:domestic_abuse_summary) { legal_aid_application.domestic_abuse_summary }
         let(:parties_mental_capacity) { legal_aid_application.parties_mental_capacity }
         let(:ccms_reference) { "300000054005" }

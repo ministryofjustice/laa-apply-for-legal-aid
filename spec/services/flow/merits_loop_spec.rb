@@ -16,7 +16,7 @@ RSpec.describe Flow::MeritsLoop do
         before { merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
 
         it "returns the first :not_started task" do
-          expect(forward_flow).to eq :opponents_names
+          expect(forward_flow).to eq :start_opponent_task
         end
       end
 

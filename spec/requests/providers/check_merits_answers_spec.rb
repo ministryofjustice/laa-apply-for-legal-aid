@@ -56,7 +56,7 @@ RSpec.describe "check merits answers requests" do
 
       it "displays the correct URLs for changing values" do
         expect(response.body).to have_change_link(:incident_details, providers_legal_aid_application_date_client_told_incident_path)
-        expect(response.body).to have_change_link(:full_name, providers_legal_aid_application_opponents_name_path(application))
+        expect(response.body).to have_change_link(:opponents, providers_legal_aid_application_has_other_opponent_path(application))
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
         application.proceedings.each do |proceeding|
           expect(response.body).to have_change_link(:success_likely,

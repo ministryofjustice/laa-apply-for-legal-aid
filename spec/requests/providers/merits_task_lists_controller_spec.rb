@@ -66,7 +66,7 @@ RSpec.describe Providers::MeritsTaskListsController do
 
       it "calls the OpponentTaskUpdateService and replaces the opponent_details task and returns http success" do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Opponent&#39;s name")
+        expect(response.body).to include("Opponents")
         expect(response.body).to include("Mental capacity of all parties")
         expect(response.body).to include("Domestic abuse summary")
       end

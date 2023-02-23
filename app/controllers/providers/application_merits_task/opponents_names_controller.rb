@@ -5,6 +5,10 @@ module Providers
         @form = Opponents::NameForm.new(model: opponent)
       end
 
+      def new
+        @form = Opponents::NameForm.new(model: opponent)
+      end
+
       def update
         @form = Opponents::NameForm.new(form_params)
         render :show unless update_task_save_continue_or_draft(:application, :opponent_name)
@@ -13,7 +17,17 @@ module Providers
     private
 
       def opponent
-        @opponent ||= legal_aid_application.opponent || legal_aid_application.build_opponent
+        @opponent ||= opponent_exists? || build_new_opponent
+      end
+
+      def opponent_exists?
+        legal_aid_application.opponents.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        false
+      end
+
+      def build_new_opponent
+        ::ApplicationMeritsTask::Opponent.new(legal_aid_application:)
       end
 
       def form_params
