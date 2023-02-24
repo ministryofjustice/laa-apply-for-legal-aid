@@ -30,8 +30,16 @@ module XMLBlockMatchers
   RSpec::Matchers.define :have_text_response do |expected|
     result = nil
     match do |actual|
-      result = validate_expectation(actual, expected, "text")
-      result == :ok
+      if actual.is_a?(Nokogiri::XML::NodeSet) && expected.is_a?(Array)
+        result = []
+        actual.each_with_index do |_node, index|
+          result << validate_expectation(actual[index], expected[index], "text")
+        end
+        result.present? && result.all?(:ok)
+      else
+        result = validate_expectation(actual, expected, "text")
+        result == :ok
+      end
     end
 
     failure_message do
@@ -42,8 +50,16 @@ module XMLBlockMatchers
   RSpec::Matchers.define :have_boolean_response do |expected|
     result = nil
     match do |actual|
-      result = validate_expectation(actual, expected.to_s, "boolean")
-      result == :ok
+      if actual.is_a?(Nokogiri::XML::NodeSet) && expected.is_a?(Array)
+        result = []
+        actual.each_with_index do |_node, index|
+          result << validate_expectation(actual[index], expected[index].to_s, "boolean")
+        end
+        result.present? && result.all?(:ok)
+      else
+        result = validate_expectation(actual, expected.to_s, "boolean")
+        result == :ok
+      end
     end
 
     failure_message do

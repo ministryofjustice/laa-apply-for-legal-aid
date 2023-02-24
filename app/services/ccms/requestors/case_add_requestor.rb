@@ -123,7 +123,10 @@ module CCMS
       end
 
       def generate_other_parties(xml)
-        generate_opponent(xml, @legal_aid_application.opponents.first)
+        # generate_opponent(xml, @legal_aid_application.opponents.first)
+        @legal_aid_application.opponents.order(:created_at).each do |opponent|
+          generate_opponent(xml, opponent)
+        end
 
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
           generate_involved_child(xml, child)

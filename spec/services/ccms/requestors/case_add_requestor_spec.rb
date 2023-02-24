@@ -206,6 +206,21 @@ module CCMS
             end
           end
         end
+
+        context "when multiple opponents are added" do
+          let(:opponent_one) { create(:opponent, first_name: "Joffrey", last_name: "Test-Opponent") }
+          let(:opponent_two) { create(:opponent, first_name: "Sansa", last_name: "Opponent-Test") }
+          let(:opponents) { [opponent_one, opponent_two] }
+
+          before do
+            allow(opponent_one).to receive(:generate_ccms_opponent_id).and_return("123456")
+            allow(opponent_two).to receive(:generate_ccms_opponent_id).and_return("654321")
+          end
+
+          it "generates expected xml with multiple opponents" do
+            expect(expected_xml).to match(/Sansa Opponent-Test/)
+          end
+        end
       end
     end
   end
