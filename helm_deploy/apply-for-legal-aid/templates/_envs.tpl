@@ -215,11 +215,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: googleClientSecret
-  - name: SECURE_DATA_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: secureDataSecret
   - name: SIDEKIQ_WEB_UI_PASSWORD
     valueFrom:
       secretKeyRef:
