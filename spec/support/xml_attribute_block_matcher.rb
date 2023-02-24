@@ -30,7 +30,11 @@ module XMLBlockMatchers
   RSpec::Matchers.define :have_text_response do |expected|
     result = nil
     match do |actual|
-      result = validate_expectation(actual, expected, "text")
+      result = if expected.is_a?(Array)
+                 validate_multiple_expectations(actual, expected, "text")
+               else
+                 validate_expectation(actual, expected, "text")
+               end
       result == :ok
     end
 
@@ -42,7 +46,11 @@ module XMLBlockMatchers
   RSpec::Matchers.define :have_boolean_response do |expected|
     result = nil
     match do |actual|
-      result = validate_expectation(actual, expected.to_s, "boolean")
+      result = if expected.is_a?(Array)
+                 validate_multiple_expectations(actual, expected.map(&:to_s), "boolean")
+               else
+                 validate_expectation(actual, expected.to_s, "boolean")
+               end
       result == :ok
     end
 
@@ -105,6 +113,27 @@ module XMLBlockMatchers
     :ok
   end
 
+  def validate_multiple_expectations(actual, expected_values, expected_response_type)
+    return "Block not found" if actual.blank?
+
+    formatted_expected_values = []
+    expected_values.each do |expected_value|
+      formatted_expected_values << if formatted_decimal?(expected_value, expected_response_type)
+                                     sprintf("%<val>12.2f", val: expected_value).squish
+                                   else
+                                     expected_value
+                                   end
+    end
+
+    actual_response_types = actual.search("ResponseType").map(&:text)
+    return "Expected all response types to be '#{expected_response_type}', got '#{actual_response_types}'" unless actual_response_types.all?(expected_response_type)
+
+    actual_values = actual.search("ResponseValue").map(&:text)
+    return "Expected value '#{formatted_expected_values}', got '#{actual_values}'" unless compare_array(actual_values, formatted_expected_values)
+
+    :ok
+  end
+
   def formatted_decimal?(expected_value, expected_response_type)
     return true if expected_response_type == "currency"
 
@@ -113,5 +142,9 @@ module XMLBlockMatchers
     return false if expected_value.is_a?(Integer)
 
     true
+  end
+
+  def compare_array(array_one, array_two)
+    ((array_one - array_two) + (array_two - array_one)).blank?
   end
 end
