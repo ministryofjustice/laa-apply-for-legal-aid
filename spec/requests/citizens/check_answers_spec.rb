@@ -20,9 +20,8 @@ RSpec.describe "check your answers requests" do
 
   let(:has_restrictions) { true }
   let(:restrictions_details) { Faker::Lorem.paragraph }
-  let(:secure_id) { legal_aid_application.generate_secure_id }
 
-  before { get citizens_legal_aid_application_path(secure_id) }
+  before { sign_in_citizen_for_application(legal_aid_application) }
 
   describe "GET /citizens/check_answers" do
     subject { get "/citizens/check_answers" }

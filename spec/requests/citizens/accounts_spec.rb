@@ -25,7 +25,7 @@ RSpec.describe "citizen accounts request" do
     subject { get citizens_accounts_path }
 
     before do
-      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+      sign_in_citizen_for_application(legal_aid_application)
       subject
     end
 

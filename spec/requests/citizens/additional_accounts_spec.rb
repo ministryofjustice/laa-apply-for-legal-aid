@@ -2,11 +2,8 @@ require "rails_helper"
 
 RSpec.describe "citizen additional accounts request test" do
   let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
-  let(:application_id) { application.id }
-  let(:secure_id) { application.generate_secure_id }
-  let(:next_flow_step) { flow_forward_path }
 
-  before { get citizens_legal_aid_application_path(secure_id) }
+  before { sign_in_citizen_for_application(application) }
 
   describe "GET /citizens/additional_accounts" do
     before { get citizens_additional_accounts_path }
@@ -89,15 +86,8 @@ RSpec.describe "citizen additional accounts request test" do
 
   describe "PATCH/PUT /citizens/additional_accounts" do
     let(:params) { {} }
-    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
 
-    before do
-      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-      patch(
-        citizens_additional_account_path(id: :update),
-        params:,
-      )
-    end
+    before { patch citizens_additional_account_path(id: :update), params: }
 
     it "does not redirect if no choice submitted" do
       expect(response).to have_http_status(:ok)
@@ -116,7 +106,7 @@ RSpec.describe "citizen additional accounts request test" do
       end
 
       it "does not record choice on legal_aid_application" do
-        expect(legal_aid_application.reload).not_to be_has_offline_accounts
+        expect(application.reload).not_to have_offline_accounts
       end
     end
 
@@ -128,7 +118,7 @@ RSpec.describe "citizen additional accounts request test" do
       end
 
       it "records choice on legal_aid_application" do
-        expect(legal_aid_application.reload).to be_has_offline_accounts
+        expect(application.reload).to have_offline_accounts
       end
     end
   end

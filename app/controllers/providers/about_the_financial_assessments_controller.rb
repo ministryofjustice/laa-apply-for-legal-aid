@@ -11,13 +11,17 @@ module Providers
 
       if ready_for_citizen_to_enter_financial_details?
         legal_aid_application.await_applicant!
-        CitizenEmailService.new(legal_aid_application).send_email
-        SubmitCitizenReminderService.new(legal_aid_application).send_email
+        send_emails_to_citizen
       end
       go_forward
     end
 
   private
+
+    def send_emails_to_citizen
+      CitizenEmailService.new(legal_aid_application).send_email
+      SubmitCitizenReminderService.new(legal_aid_application).send_email
+    end
 
     def ready_for_citizen_to_enter_financial_details?
       !legal_aid_application.applicant_entering_means?

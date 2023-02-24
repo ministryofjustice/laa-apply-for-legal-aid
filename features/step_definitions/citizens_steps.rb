@@ -17,12 +17,12 @@ Given("An application has been created") do
 end
 
 Then("I visit the start of the financial assessment") do
-  visit citizens_legal_aid_application_path(secure_id)
+  sign_in_citizen_for_application(@legal_aid_application)
 end
 
 Then("I visit the start of the financial assessment in Welsh") do
   Setting.setting.update!(allow_welsh_translation: true)
-  visit citizens_legal_aid_application_path(secure_id)
+  sign_in_citizen_for_application(@legal_aid_application)
   click_link("Cymraeg")
 end
 
@@ -31,7 +31,7 @@ Then("I return to English") do
 end
 
 Then("I visit the first question about dependants") do
-  visit citizens_legal_aid_application_path(secure_id)
+  sign_in_citizen_for_application(@legal_aid_application)
   visit citizens_has_dependants_path
 end
 
@@ -62,10 +62,6 @@ end
 
 Then("I am directed to TrueLayer") do
   expect(current_url).to match(/truelayer.com/)
-end
-
-def secure_id
-  @secure_id ||= @legal_aid_application.generate_secure_id
 end
 
 Given("I have completed an application") do
@@ -102,4 +98,9 @@ end
 
 Then("I should have completed the dependants section of the journey") do
   steps %(Then I should be on a page showing "Which of the following payments do you make?")
+end
+
+def sign_in_citizen_for_application(legal_aid_application)
+  access_token = legal_aid_application.generate_citizen_access_token!
+  visit citizens_legal_aid_application_path(access_token.token)
 end

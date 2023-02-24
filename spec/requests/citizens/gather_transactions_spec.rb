@@ -21,7 +21,7 @@ RSpec.describe "citizen accounts request" do
     subject { get citizens_gather_transactions_path }
 
     before do
-      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+      sign_in_citizen_for_application(legal_aid_application)
       subject
     end
 
@@ -47,7 +47,7 @@ RSpec.describe "citizen accounts request" do
     before do
       expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)
       allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
-      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+      sign_in_citizen_for_application(legal_aid_application)
       subject
     end
 

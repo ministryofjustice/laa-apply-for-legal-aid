@@ -370,39 +370,17 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#generate_secure_id" do
-    subject(:generate_secure_id) { legal_aid_application.generate_secure_id }
+  describe "#generate_citizen_access_token!" do
+    subject(:generate_citizen_access_token!) { legal_aid_application.generate_citizen_access_token! }
 
     let(:legal_aid_application) { create(:legal_aid_application) }
-    let(:secure_data) { SecureData.last }
 
-    it "generates a new secure data object" do
-      expect { generate_secure_id }.to change(SecureData, :count).by(1)
-    end
-
-    it "returns the generated id" do
-      expect(generate_secure_id).to eq(secure_data.id)
-    end
-
-    it "generates data that can be used to find legal_aid_application" do
-      data = SecureData.for(generate_secure_id)[:legal_aid_application]
-      expect(described_class.find_by(data)).to eq(legal_aid_application)
-    end
-
-    it "generates data that contains a date which is in 8 days" do
-      freeze_time
-      data = SecureData.for(generate_secure_id)
-      expires_at = LegalAidApplication::SECURE_ID_DAYS_TO_EXPIRE.days.from_now.end_of_day
-      expect(data[:expired_at]).to eq(expires_at.to_s)
-    end
+    before { allow(SecureRandom).to receive(:uuid).and_return("test-token") }
 
     it "generates a citizen URL access token" do
-      allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
-
-      generate_secure_id
-
-      expect(Citizen::AccessToken.last).to have_attributes(
-        token: "test-uuid",
+      expect(generate_citizen_access_token!).to have_attributes(
+        token: "test-token",
+        expires_on: 8.days.from_now.to_date,
         legal_aid_application:,
       )
     end

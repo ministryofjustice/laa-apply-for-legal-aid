@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe Providers::Means::PropertyValuesController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-  let(:secure_id) { legal_aid_application.generate_secure_id }
 
   describe "GET /providers/applications/:id/means/property_value" do
     subject { get providers_legal_aid_application_means_property_value_path(legal_aid_application) }

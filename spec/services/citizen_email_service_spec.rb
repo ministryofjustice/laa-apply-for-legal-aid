@@ -1,46 +1,60 @@
 require "rails_helper"
-require "sidekiq/testing"
 
 RSpec.describe CitizenEmailService do
-  subject { described_class.new(application) }
+  include Rails.application.routes.url_helpers
 
-  let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe", email: "test@example.com") }
-  let(:firm) { create(:firm) }
-  let(:provider) { create(:provider, firm:) }
-  let(:application) { create(:application, applicant:, provider:) }
-  let(:secure_id) { SecureRandom.uuid }
-  let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}?locale=en" }
+  let(:legal_aid_application) do
+    create(
+      :legal_aid_application,
+      applicant:,
+      provider: build(:provider, firm: build(:firm, name: "Test Firm")),
+    )
+  end
+
+  let(:applicant) do
+    build(
+      :applicant,
+      first_name: "John",
+      last_name: "Doe",
+      email: "test@example.com",
+    )
+  end
 
   describe "#send_email" do
-    let(:mailer_args) do
-      [
-        application.application_ref,
-        applicant.email_address,
-        citizen_url,
-        applicant.full_name,
-        provider.firm.name,
-      ]
+    subject(:send_email) { described_class.new(legal_aid_application).send_email }
+
+    before do
+      allow(SecureRandom).to receive(:uuid).and_return("test-citizen-token")
+      legal_aid_application.generate_citizen_access_token!
     end
-    let(:scheduled_mail_attrs) do
-      [
+
+    it "sends an email" do
+      expect(ScheduledMailing).to receive(:send_now!).with(
         mailer_klass: NotifyMailer,
         mailer_method: :citizen_start_email,
-        legal_aid_application_id: application.id,
-        addressee: applicant.email_address,
-        arguments: mailer_args,
-      ]
-    end
+        legal_aid_application_id: legal_aid_application.id,
+        addressee: "test@example.com",
+        arguments: [
+          legal_aid_application.application_ref,
+          "test@example.com",
+          citizens_legal_aid_application_url("test-citizen-token"),
+          "John Doe",
+          "Test Firm",
+        ],
+      )
 
-    before { allow(subject).to receive(:secure_id).and_return(secure_id) }
-
-    it "schedules and email for immediate delivery" do
-      expect(ScheduledMailing).to receive(:send_now!).with(*scheduled_mail_attrs)
-      subject.send_email
+      send_email
     end
 
     it "notifies the dashboard" do
-      expect(subject).to receive(:notify_dashboard)
-      subject.send_email
+      allow(ActiveSupport::Notifications).to receive(:instrument)
+
+      send_email
+
+      expect(ActiveSupport::Notifications).to have_received(:instrument).with(
+        "dashboard.applicant_emailed",
+        legal_aid_application_id: legal_aid_application.id,
+      )
     end
   end
 end

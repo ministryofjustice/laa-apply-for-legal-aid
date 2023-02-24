@@ -31,7 +31,6 @@ RSpec/AnyInstance:
     - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
     - 'spec/requests/admin/settings_spec.rb'
     - 'spec/requests/applicants/omniauth_callbacks_spec.rb'
-    - 'spec/requests/citizens/resend_link_requests_spec.rb'
     - 'spec/requests/providers/applicant_employed_spec.rb'
     - 'spec/requests/providers/application_merits_task/statement_of_case_spec.rb'
     - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
@@ -211,7 +210,6 @@ RSpec/ContextWording:
     - 'spec/services/required_document_category_analyser_spec.rb'
     - 'spec/services/results_panel_selector_spec.rb'
     - 'spec/services/submit_application_reminder_service_spec.rb'
-    - 'spec/services/submit_citizen_reminder_service_spec.rb'
     - 'spec/services/submit_provider_reminder_service_spec.rb'
     - 'spec/services/substantive_application_deadline_calculator_spec.rb'
 
@@ -274,11 +272,7 @@ RSpec/FilePath:
     - 'spec/requests/citizens/bank_spec.rb'
     - 'spec/requests/citizens/cash_incomes_spec.rb'
     - 'spec/requests/citizens/cash_outgoings_spec.rb'
-    - 'spec/requests/citizens/consent_spec.rb'
-    - 'spec/requests/citizens/contact_provider_spec.rb'
     - 'spec/requests/citizens/identify_types_of_incomes_spec.rb'
-    - 'spec/requests/citizens/means_test_results_spec.rb'
-    - 'spec/requests/citizens/resend_link_requests_spec.rb'
     - 'spec/requests/errors_spec.rb'
     - 'spec/requests/problem_spec.rb'
     - 'spec/requests/providers/address_lookups_spec.rb'
@@ -500,9 +494,6 @@ RSpec/NamedSubject:
     - 'spec/requests/citizens/gather_transactions_spec.rb'
     - 'spec/requests/citizens/identify_types_of_incomes_spec.rb'
     - 'spec/requests/citizens/identify_types_of_outgoings_spec.rb'
-    - 'spec/requests/citizens/legal_aid_applications_spec.rb'
-    - 'spec/requests/citizens/means_test_results_spec.rb'
-    - 'spec/requests/citizens/resend_link_requests_spec.rb'
     - 'spec/requests/errors_spec.rb'
     - 'spec/requests/feedbacks_spec.rb'
     - 'spec/requests/problem_spec.rb'
@@ -619,7 +610,6 @@ RSpec/NamedSubject:
     - 'spec/services/ccms/submitters/upload_documents_service_spec.rb'
     - 'spec/services/cfe/create_properties_service_spec.rb'
     - 'spec/services/cfe/create_state_benefits_service_spec.rb'
-    - 'spec/services/citizen_email_service_spec.rb'
     - 'spec/services/dashboard_event_handler_spec.rb'
     - 'spec/services/delegated_functions_date_service_spec.rb'
     - 'spec/services/flow/base_flow_service_spec.rb'
@@ -648,9 +638,7 @@ RSpec/NamedSubject:
     - 'spec/services/reports/mis/non_passported_application_csv_line_spec.rb'
     - 'spec/services/reports/reports_creator_spec.rb'
     - 'spec/services/required_document_category_analyser_spec.rb'
-    - 'spec/services/secure_application_finder_spec.rb'
     - 'spec/services/submit_application_reminder_service_spec.rb'
-    - 'spec/services/submit_citizen_reminder_service_spec.rb'
     - 'spec/services/submit_provider_reminder_service_spec.rb'
     - 'spec/services/substantive_application_deadline_calculator_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'
@@ -787,7 +775,6 @@ RSpec/SubjectStub:
   Exclude:
     - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/submitters/check_case_status_service_spec.rb'
-    - 'spec/services/citizen_email_service_spec.rb'
 
 # Offense count: 3
 # Configuration parameters: IgnoredPatterns.
@@ -841,11 +828,6 @@ RSpec/VerifiedDoubles:
     - 'spec/services/metrics/sidekiq_queue_sizes_spec.rb'
     - 'spec/services/reports/bank_transactions/bank_transaction_report_creator_spec.rb'
     - 'spec/support/shared_context/ccms_soa_configuration_context.rb'
-
-# Offense count: 2
-RSpec/VoidExpect:
-  Exclude:
-    - 'spec/requests/citizens/consent_spec.rb'
 
 # Offense count: 5
 # Configuration parameters: Include.
