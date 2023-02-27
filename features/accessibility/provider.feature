@@ -253,6 +253,10 @@ Feature: Provider accessibility
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
+    Then I should be on a page showing "You have added 1 opponent"
+    And the page is accessible
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
     And the page is accessible
     When I choose "Yes"
