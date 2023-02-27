@@ -1,5 +1,4 @@
 require "rails_helper"
-require "sidekiq/testing"
 
 RSpec.describe "applicants omniauth call back" do
   around do |example|
@@ -17,7 +16,7 @@ RSpec.describe "applicants omniauth call back" do
   let(:bank_provider) { applicant.bank_providers.find_by(token:) }
 
   before do
-    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) if applicant
+    sign_in_citizen_for_application(legal_aid_application) if applicant
     OmniAuth.config.add_mock(
       :true_layer,
       credentials: {

@@ -10,8 +10,6 @@ class LegalAidApplication < ApplicationRecord
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
 
-  SECURE_ID_DAYS_TO_EXPIRE = 7
-
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
   MAX_SUBSTANTIVE_COST_LIMIT = 25_000
 
@@ -215,17 +213,8 @@ class LegalAidApplication < ApplicationRecord
     transaction_types.debits.any?
   end
 
-  def generate_secure_id
-    transaction do
-      Citizen::AccessToken.generate_for(legal_aid_application: self)
-
-      SecureData.create_and_store!(
-        legal_aid_application: { id: },
-        expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
-        # So each secure data payload is unique
-        token: SecureRandom.hex,
-      )
-    end
+  def generate_citizen_access_token!
+    Citizen::AccessToken.generate_for(legal_aid_application: self)
   end
 
   def set_transaction_period

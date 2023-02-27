@@ -5,13 +5,13 @@ RSpec.describe Citizens::ContactProvidersController do
 
   describe "GET /citizens/contact_provider" do
     before do
-      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+      sign_in_citizen_for_application(legal_aid_application)
       get citizens_contact_provider_path
     end
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
-      expect(unescaped_response_body).to include("Contact your solicitor")
+      expect(page).to have_content("Contact your solicitor")
     end
   end
 end

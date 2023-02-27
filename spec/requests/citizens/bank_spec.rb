@@ -2,12 +2,11 @@ require "rails_helper"
 
 RSpec.describe Citizens::BanksController do
   let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
-  let(:secure_id) { application.generate_secure_id }
   let!(:banks) { create(:true_layer_bank).banks }
   let(:enable_mock) { false }
 
   before do
-    get citizens_legal_aid_application_path(secure_id)
+    sign_in_citizen_for_application(application)
     allow(Rails.configuration.x.true_layer).to receive(:enable_mock).and_return(enable_mock)
   end
 
