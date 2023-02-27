@@ -396,29 +396,15 @@ RSpec.describe LegalAidApplication do
       expect(data[:expired_at]).to eq(expires_at.to_s)
     end
 
-    it "saves citizen url data" do
-      allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
-      freeze_time
-
-      generate_secure_id
-
-      expires_on = Date.current.days_since(
-        LegalAidApplication::CITIZEN_URL_EXPIRES_AFTER_IN_DAYS,
-      )
-
-      expect(legal_aid_application).to have_attributes(
-        citizen_url_id: "test-uuid",
-        citizen_url_expires_on: expires_on,
-      )
-    end
-
-    it "saves a citizen url that can be queried" do
+    it "generates a citizen URL access token" do
       allow(SecureRandom).to receive(:uuid).and_return("test-uuid")
 
       generate_secure_id
-      queried_record = described_class.find_by(citizen_url_id: "test-uuid")
 
-      expect(queried_record).to eq(legal_aid_application)
+      expect(Citizen::AccessToken.last).to have_attributes(
+        token: "test-uuid",
+        legal_aid_application:,
+      )
     end
   end
 

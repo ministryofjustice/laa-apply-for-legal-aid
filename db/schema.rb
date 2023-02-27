@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_17_111318) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_21_174503) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -347,6 +347,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_111318) do
     t.boolean "success_likely"
     t.uuid "proceeding_id", null: false
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
+  end
+
+  create_table "citizen_access_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "token", default: "", null: false
+    t.date "expires_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_citizen_access_tokens_on_legal_aid_application_id"
   end
 
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -967,6 +976,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_111318) do
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "chances_of_successes", "proceedings"
+  add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"
