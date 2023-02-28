@@ -1,6 +1,4 @@
 class LegalAidApplication < ApplicationRecord
-  self.ignored_columns += %w[citizen_url_id citizen_url_expires_on]
-
   include Discard::Model
   include DelegatedFunctions
 
