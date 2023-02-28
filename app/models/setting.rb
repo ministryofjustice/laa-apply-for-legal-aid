@@ -1,37 +1,33 @@
 class Setting < ApplicationRecord
-  def self.mock_true_layer_data?
-    setting.mock_true_layer_data?
+  ATTRIBUTES = %i[
+    mock_true_layer_data
+    manually_review_all_cases
+    allow_welsh_translation
+    enable_ccms_submission
+    means_test_review_phase_one
+    partner_means_assessment
+  ].freeze
+
+  def self.method_missing(method_name, *args, &)
+    attribute_or_predicate = method_name.to_s.tr("?", "").to_sym
+
+    if attribute_or_predicate.in?(ATTRIBUTES)
+      setting.public_send(method_name, *args, &)
+    else
+      super
+    end
   end
 
-  def self.bank_transaction_filename
-    setting.bank_transaction_filename
-  end
-
-  def self.manually_review_all_cases?
-    setting.manually_review_all_cases
-  end
-
-  def self.allow_welsh_translation?
-    setting.allow_welsh_translation
-  end
-
-  def self.enable_ccms_submission?
-    setting.enable_ccms_submission
-  end
-
-  def self.alert_via_sentry?
-    setting.alert_via_sentry
-  end
-
-  def self.means_test_review_phase_one?
-    setting.means_test_review_phase_one
-  end
-
-  def self.partner_means_assessment?
-    setting.partner_means_assessment
+  def self.respond_to_missing?(method_name, include_private = false)
+    attribute_or_predicate = method_name.to_s.tr("?", "").to_sym
+    attribute_or_predicate.in?(ATTRIBUTES) || super
   end
 
   def self.setting
     Setting.first || Setting.create!
+  end
+
+  def self.bank_transaction_filename
+    setting.bank_transaction_filename
   end
 end

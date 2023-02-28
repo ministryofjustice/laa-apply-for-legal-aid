@@ -2,19 +2,8 @@ module Settings
   class SettingForm < BaseForm
     form_for Setting
 
-    attr_accessor :mock_true_layer_data,
-                  :manually_review_all_cases,
-                  :allow_welsh_translation,
-                  :enable_ccms_submission,
-                  :means_test_review_phase_one,
-                  :partner_means_assessment
+    attr_accessor(*::Setting::ATTRIBUTES)
 
-    validates :mock_true_layer_data,
-              :manually_review_all_cases,
-              :allow_welsh_translation,
-              :enable_ccms_submission,
-              :means_test_review_phase_one,
-              :partner_means_assessment,
-              presence: true
+    validates_presence_of(*::Setting::ATTRIBUTES)
   end
 end

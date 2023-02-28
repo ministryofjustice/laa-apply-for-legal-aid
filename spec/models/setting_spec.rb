@@ -2,58 +2,57 @@ require "rails_helper"
 
 RSpec.describe Setting do
   describe ".setting" do
-    context "when there is no setting record" do
-      before { described_class.delete_all }
+    subject(:setting) { described_class.setting }
 
-      it "generates one with the default values" do
-        rec = described_class.setting
-        expect(rec.mock_true_layer_data?).to be false
-        expect(rec.manually_review_all_cases?).to be true
-        expect(rec.allow_welsh_translation?).to be false
-        expect(rec.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
-        expect(rec.alert_via_sentry?).to be true
-        expect(rec.partner_means_assessment?).to be false
+    context "when there is a setting record" do
+      let!(:existing_setting) { described_class.create! }
+
+      it "returns the existing record" do
+        expect(setting).to eq(existing_setting)
       end
     end
 
-    context "when a record already exists with non-default values" do
-      before do
-        described_class.setting.update!(
-          mock_true_layer_data: true,
-          manually_review_all_cases: false,
-          allow_welsh_translation: false,
-          enable_ccms_submission: false,
-          bank_transaction_filename: "my_special_file.csv",
-          alert_via_sentry: true,
-          partner_means_assessment: true,
-        )
+    context "when there is no setting record" do
+      it "creates one" do
+        expect { setting }.to change(described_class, :count).from(0).to(1)
       end
 
-      it "returns the existing record" do
-        rec = described_class.setting
-        expect(rec.mock_true_layer_data?).to be true
-        expect(rec.manually_review_all_cases?).to be false
-        expect(rec.allow_welsh_translation?).to be false
-        expect(rec.enable_ccms_submission?).to be false
-        expect(rec.bank_transaction_filename).to eq "my_special_file.csv"
-        expect(rec.alert_via_sentry?).to be true
-        expect(rec.partner_means_assessment?).to be true
+      it "returns a Setting with default values" do
+        expect(setting).to have_attributes(
+          mock_true_layer_data: false,
+          manually_review_all_cases: true,
+          allow_welsh_translation: false,
+          bank_transaction_filename: "db/sample_data/bank_transactions.csv",
+          alert_via_sentry: true,
+          partner_means_assessment: false,
+        )
       end
     end
   end
 
-  describe "class methods" do
-    before { described_class.destroy_all }
+  describe ".method_missing" do
+    context "when the method exists on the setting" do
+      it "returns the value" do
+        expect(described_class.partner_means_assessment?).to be(false)
+      end
+    end
 
-    it "returns the value with a class method" do
-      expect(described_class.mock_true_layer_data?).to be false
-      expect(described_class.manually_review_all_cases?).to be true
-      expect(described_class.allow_welsh_translation?).to be false
-      expect(described_class.enable_ccms_submission?).to be true
-      expect(described_class.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
-      expect(described_class.alert_via_sentry?).to be true
-      expect(described_class.means_test_review_phase_one?).to be false
-      expect(described_class.partner_means_assessment?).to be false
+    context "when the method does not exist on the setting" do
+      it "raises an error" do
+        expect { described_class.not_a_setting }.to raise_error(NoMethodError)
+      end
+    end
+  end
+
+  describe ".bank_transaction_filename" do
+    subject(:bank_transaction_filename) do
+      described_class.bank_transaction_filename
+    end
+
+    before { described_class.create!(bank_transaction_filename: "test.csv") }
+
+    it "returns the value" do
+      expect(bank_transaction_filename).to eq("test.csv")
     end
   end
 end

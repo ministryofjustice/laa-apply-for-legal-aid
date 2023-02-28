@@ -6,66 +6,18 @@
         local: true,
       ) do |form| %>
 
-    <%= form.govuk_collection_radio_buttons(
-          :mock_true_layer_data,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.mock_true_layer_data", bank_transaction_filename: Setting.bank_transaction_filename) },
-          legend: { text: t(".labels.mock_true_layer_data") },
-        ) %>
+      <% Setting::ATTRIBUTES.each do |attribute| %>
+        <%= form.govuk_collection_radio_buttons(
+              attribute,
+              yes_no_options,
+              :value,
+              :label,
+              inline: true,
+              hint: { text: t(".hints.#{attribute}") },
+              legend: { text: t(".labels.#{attribute}") },
+            ) %>
+      <% end %>
 
-    <%= form.govuk_collection_radio_buttons(
-          :manually_review_all_cases,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.manually_review_all_cases") },
-          legend: { text: t(".labels.manually_review_all_cases") },
-        ) %>
-
-    <%= form.govuk_collection_radio_buttons(
-          :allow_welsh_translation,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.allow_welsh_translation") },
-          legend: { text: t(".labels.allow_welsh_translation") },
-        ) %>
-
-    <%= form.govuk_collection_radio_buttons(
-          :enable_ccms_submission,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.enable_ccms_submission") },
-          legend: { text: t(".labels.enable_ccms_submission") },
-        ) %>
-
-    <%= form.govuk_collection_radio_buttons(
-          :means_test_review_phase_one,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.means_test_review_phase_one") },
-          legend: { text: t(".labels.means_test_review_phase_one") },
-        ) %>
-
-    <%= form.govuk_collection_radio_buttons(
-          :partner_means_assessment,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.partner_means_assessment") },
-          legend: { text: t(".labels.partner_means_assessment") },
-        ) %>
-
-    <%= form.submit(t("generic.submit"), class: "govuk-button form-button") %>
+    <%= form.submit t("generic.submit"), class: "govuk-button" %>
   <% end %>
 <% end %>

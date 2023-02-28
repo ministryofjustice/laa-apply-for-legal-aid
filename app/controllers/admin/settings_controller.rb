@@ -18,12 +18,7 @@ module Admin
   private
 
     def form_params
-      params.require(:setting).permit(:mock_true_layer_data,
-                                      :manually_review_all_cases,
-                                      :allow_welsh_translation,
-                                      :enable_ccms_submission,
-                                      :means_test_review_phase_one,
-                                      :partner_means_assessment)
+      params.require(:setting).permit(*Setting::ATTRIBUTES)
     end
 
     def setting

@@ -42,7 +42,10 @@ en:
           means_test_review_phase_one: Enable changes for MTR Phase 1
           partner_means_assessment: Enable Partner Means Assessment
         hints:
-          mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
+          mock_true_layer_data: >
+            Select Yes and TrueLayer data will be replaced by mock data from
+            db/sample_data/bank_transactions.csv. This path is configured with
+            the bank_transaction_filename setting.
           manually_review_all_cases: |
             All applications with capital contributions AND restrictions on assets will be routed to caseworker for review.
             Select Yes to additionally route all non-passported applications to caseworker for review.
