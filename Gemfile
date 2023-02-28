@@ -55,7 +55,7 @@ gem "browser"
 # Used to mock saml request in UAT
 gem "ruby-saml-idp", github: "dev-develop/ruby-saml-idp", branch: "master"
 
-# Used to encrypt JSON stored in SecureData
+# Used to encode sample (mock) TrueLayer transaction IDs as JSON
 gem "jwt"
 
 # background processing

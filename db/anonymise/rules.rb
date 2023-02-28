@@ -169,7 +169,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   statement_of_cases: {
     statement: -> { Faker::Lorem.sentence },
   },
-  secure_data: {},
   settings: {},
   specific_issues: {
     details: -> { Faker::Lorem.sentence },

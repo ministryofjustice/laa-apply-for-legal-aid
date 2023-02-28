@@ -32,7 +32,7 @@ RSpec.describe Applicant do
     end
 
     it "does not include model values we are not concerned with" do
-      expect(json_for_hmrc.keys).not_to include %i[id status created_at updated_at email employed true_layer_secure_data_id]
+      expect(json_for_hmrc.keys).not_to include %i[id status created_at updated_at email employed]
     end
   end
 
