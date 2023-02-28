@@ -27,6 +27,10 @@ class Setting < ApplicationRecord
     setting.means_test_review_phase_one
   end
 
+  def self.partner_means_assessment?
+    setting.partner_means_assessment
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
