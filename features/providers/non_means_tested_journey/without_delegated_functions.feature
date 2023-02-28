@@ -112,7 +112,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
-    And I check "I confirm the above is correct and that I'll get a signed declaration from my client"
+    And I check "I confirm the above is correct and will get a signed declaration from the person acting for Test User. For example, a litigation friend, a professional children’s guardian or a parental order report."
 
     When I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"

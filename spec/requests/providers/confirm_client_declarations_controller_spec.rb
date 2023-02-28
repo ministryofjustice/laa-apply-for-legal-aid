@@ -59,10 +59,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController do
         it "doesn't update the application and displays an error", :aggregate_failures do
           expect(legal_aid_application.reload.client_declaration_confirmed_at)
             .to be_nil
-          expect(page).to have_error_message(
-            "Confirm this information is correct and that you'll get a signed " \
-            "declaration from your client",
-          )
+          expect(page).to have_error_message("Confirm this information is correct and that you'll get a signed declaration")
         end
       end
 

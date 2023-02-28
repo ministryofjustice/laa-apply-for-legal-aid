@@ -1,21 +1,5 @@
-<h2 class="govuk-heading-l"><%= t(".confirm_following") %></h2>
-
-<p class="govuk-body"><%= t(".submission_list_summary") %>:</p>
-
-<ul class="govuk-list govuk-list--bullet print-add-bullet">
-  <% t(".submission_list", firm: @legal_aid_application.provider.firm_name).each_line do |submission| %>
-    <li><%= submission %></li>
-  <% end %>
-</ul>
-
-<%= govuk_warning_text do %>
-  <p class="govuk-body">
-    <strong><%= t(".warning_list_summary") %>:</strong>
-  </p>
-
-  <ul class="govuk-list govuk-list--bullet">
-    <% t(".warning_list").each_line do |warning| %>
-      <li><strong><%= warning %></strong></li>
-    <% end %>
-  </ul>
+<% if @legal_aid_application.non_means_tested? %>
+  <%= render "shared/printable_under_18_declaration" %>
+<% else %>
+  <%= render "shared/printable_over_18_declaration" %>
 <% end %>

@@ -40,8 +40,11 @@ class Applicant < ApplicationRecord
   end
 
   def no_means_test_required?
-    Setting.means_test_review_phase_one? &&
-      age_for_means_test_purposes.present? &&
+    Setting.means_test_review_phase_one? && under_18?
+  end
+
+  def under_18?
+    age_for_means_test_purposes.present? &&
       age_for_means_test_purposes < 18
   end
 

@@ -41,20 +41,6 @@
     font-weight: bold;
   }
 
-  .govuk-list.govuk-list--bullet > li > strong:before {
-    content: "● ";
-  }
-
-  .print-add-bullet {
-    position: relative;
-
-    & > li:before {
-      content: "●";
-      position: absolute;
-      left: 0;
-    }
-  }
-
   .print-bottom-gap {
     padding-bottom: 3.5em;
   }

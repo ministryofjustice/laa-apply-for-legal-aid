@@ -12,7 +12,11 @@
   <div class="no-print govuk-!-padding-top-6">
     <h1 class="govuk-heading-l"><%= t(".print_your_application") %></h1>
 
-    <p class="govuk-body"><%= t(".print_the_application") %></p>
+    <% if @legal_aid_application.non_means_tested? %>
+      <p class="govuk-body"><%= t(".print_the_application.non_means_tested", applicant_name: @legal_aid_application.applicant_full_name) %></p>
+    <% else %>
+      <p class="govuk-body"><%= t(".print_the_application.means_tested") %></p>
+    <% end %>
 
     <p class="govuk-body"><%= t(".keep_a_copy") %></p>
 

@@ -47,7 +47,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     end
 
     it "shows client declaration only when printing the page" do
-      expect(html.at_css("#client-declaration").classes).to include("only-print")
+      expect(html.at_css("#client-declaration").classes).to include("app-print-only")
     end
 
     it "hides print buttons when printing the page" do

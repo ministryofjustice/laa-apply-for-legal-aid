@@ -196,6 +196,9 @@ Feature: Review and print your application
     And I should not see "Maintenance payments to a former partner"
     And I should not see "Payments towards legal aid in a criminal case"
 
+    And I should see 'Print the application and get your client to sign the declaration.'
+    And I should not see 'Print the application and get the person acting for'
+
   Scenario: For a non-means tested journey
     Given the feature flag for means_test_review_phase_one is enabled
     Given I have completed a non-means tested journey with merits
@@ -210,6 +213,8 @@ Feature: Review and print your application
       | h1  | Print your application |
 
     And I should see 'NON MEANS TESTED'
+    And I should see 'Print the application and get the person acting for'
+    And I should see 'For example, a litigation friend, a professional children’s guardian or a parental order report.'
 
     Then the following sections should not exist:
       | tag | section |
