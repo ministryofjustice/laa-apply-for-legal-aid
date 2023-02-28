@@ -54,7 +54,9 @@ RSpec.describe "applicants omniauth call back" do
 
       it "persists expires_at" do
         subject
-        expect(applicant.reload.true_layer_token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
+        token = applicant.reload.encrypted_true_layer_token
+        token_expires_at = Time.zone.parse(token.fetch("expires_at"))
+        expect(token_expires_at).to eq(expires_at)
       end
     end
 
@@ -63,7 +65,8 @@ RSpec.describe "applicants omniauth call back" do
 
       it "does not persist expires_at" do
         subject
-        expect(applicant.reload.true_layer_token_expires_at).to be_nil
+        token = applicant.reload.encrypted_true_layer_token
+        expect(token.fetch("expires_at")).to be_nil
       end
     end
 

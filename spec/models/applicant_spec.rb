@@ -114,32 +114,6 @@ RSpec.describe Applicant do
     end
   end
 
-  describe "#true_layer_token_expires_at" do
-    subject(:true_layer_token_expires_at) { applicant.true_layer_token_expires_at }
-
-    let(:applicant) { build(:applicant, encrypted_true_layer_token:) }
-
-    context "when the encrypted token is nil" do
-      let(:encrypted_true_layer_token) { nil }
-
-      it { is_expected.to be_nil }
-    end
-
-    context "when the encrypted token does not contain an expiry time" do
-      let(:encrypted_true_layer_token) { { token: "test-token" } }
-
-      it { is_expected.to be_nil }
-    end
-
-    context "when the encrypted token contains an expiry time" do
-      let(:encrypted_true_layer_token) { { expires_at: 1.year.ago } }
-
-      before { freeze_time }
-
-      it { is_expected.to eq(1.year.ago) }
-    end
-  end
-
   describe "#age" do
     subject(:age) { legal_aid_application.applicant.age }
 
