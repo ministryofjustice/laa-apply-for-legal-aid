@@ -28,11 +28,6 @@ class Applicant < ApplicationRecord
     encrypted_true_layer_token&.fetch("token", nil)
   end
 
-  def true_layer_token_expires_at
-    expires_at = encrypted_true_layer_token&.fetch("expires_at", nil)
-    Time.zone.parse(expires_at) if expires_at
-  end
-
   def age
     return age_for_means_test_purposes if no_means_test_required? || under_16_blocked?
 
