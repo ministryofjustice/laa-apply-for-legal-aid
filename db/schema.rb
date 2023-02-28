@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_112243) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_112837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -855,6 +855,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_112243) do
     t.boolean "alert_via_sentry", default: true, null: false
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
     t.boolean "means_test_review_phase_one", default: false, null: false
+    t.boolean "partner_means_assessment", default: false, null: false
   end
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

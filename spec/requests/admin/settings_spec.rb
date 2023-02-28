@@ -41,6 +41,7 @@ RSpec.describe Admin::SettingsController do
           allow_welsh_translation: "true",
           enable_ccms_submission: "true",
           means_test_review_phase_one: "true",
+          partner_means_assessment: "true",
         },
       }
     end
@@ -55,6 +56,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.means_test_review_phase_one?).to be(true)
+      expect(setting.partner_means_assessment?).to be(true)
     end
 
     it "create settings if they do not exist" do
