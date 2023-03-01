@@ -138,13 +138,8 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   },
   offices_providers: {},
   opponents: {
-    full_name: -> { Faker::Name.name },
     first_name: -> { Faker::Name.first_name },
     last_name: -> { Faker::Name.last_name },
-    understands_terms_of_court_order_details: -> { Faker::Lorem.sentence },
-    warning_letter_sent_details: -> { Faker::Lorem.sentence },
-    police_notified_details: -> { Faker::Lorem.sentence },
-    bail_conditions_set_details: -> { Faker::Lorem.sentence },
   },
   opponents_applications: {
     reason_for_applying: -> { Faker::Lorem.sentence },
