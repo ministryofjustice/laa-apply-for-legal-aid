@@ -29,10 +29,11 @@ module CCMS
                                 |chances_of_success
                                 |dependant
                                 |opponent
+                                |domestic_abuse_summary
+                                |parties_mental_capacity
                                 |other_assets_declaration
                                 |other_party
                                 |proceeding
-                                |opponent
                                 |outgoing
                                 |savings_amount
                                 |income_type
@@ -46,6 +47,8 @@ module CCMS
     CHANCES_OF_SUCCESS = /^chances_of_success_(\S+)$/
     DEPENDANT_REGEX = /^dependant_(\S+)$/
     OPPONENT = /^opponent_(\S+)$/
+    DOMESTIC_ABUSE_SUMMARY = /^domestic_abuse_summary_(\S+)$/
+    PARTIES_MENTAL_CAPACITY = /^parties_mental_capacity_(\S+)$/
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/
     OTHER_PARTY = /^other_party_(\S+)$/
     PROCEEDING_REGEX = /^proceeding_(\S+)$/
@@ -226,7 +229,7 @@ module CCMS
     end
 
     def no_warning_letter_sent?(_options)
-      !legal_aid_application.opponent.warning_letter_sent
+      !legal_aid_application.domestic_abuse_summary.warning_letter_sent
     end
 
     def applicant_owns_main_home?(_options)
@@ -410,6 +413,10 @@ module CCMS
         legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp("?"))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
+      when PARTIES_MENTAL_CAPACITY
+        legal_aid_application.parties_mental_capacity.__send__(Regexp.last_match(1))
+      when DOMESTIC_ABUSE_SUMMARY
+        legal_aid_application.domestic_abuse_summary.__send__(Regexp.last_match(1))
       when OUTGOING
         legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp("?"))
       when SAVINGS_AMOUNT

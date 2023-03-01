@@ -614,6 +614,8 @@ Given("I complete the journey as far as check passported answers with multiple p
     :application,
     :with_applicant,
     :with_proceedings,
+    :with_parties_mental_capacity,
+    :with_domestic_abuse_summary,
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_transaction_period,

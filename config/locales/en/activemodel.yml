@@ -212,24 +212,28 @@ en:
               blank: Enter the opponent's first name
             last_name:
               blank: Enter the opponent's last name
+        application_merits_task/parties_mental_capacity:
+          attributes:
             understands_terms_of_court_order:
               blank: Select yes if all parties have the mental capacity to understand the terms of a court order
+            understands_terms_of_court_order_details:
+              blank: Tell us why you think the court would enforce a breach of an order
+        application_merits_task/domestic_abuse_summary:
+          attributes:
             warning_letter_sent:
               blank: Select yes if a warning letter has been sent to the opponent
+            warning_letter_sent_details:
+              blank: Tell us why a warning letter has not been sent
             police_notified:
               blank: Select yes if the police have been notified
             police_notified_details:
               blank: Select yes if the police have been notified
-            bail_conditions_set:
-              blank: Select yes if bail conditions have been set
-            understands_terms_of_court_order_details:
-              blank: Tell us why you think the court would enforce a breach of an order
-            warning_letter_sent_details:
-              blank: Tell us why a warning letter has not been sent
             police_notified_details_true:
               blank: Tell us what action the police have taken
             police_notified_details_false:
               blank: Tell us why the police have not been notified
+            bail_conditions_set:
+              blank: Select yes if bail conditions have been set
             bail_conditions_set_details:
               blank: Give details of the bail conditions
         opponent:

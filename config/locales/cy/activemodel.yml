@@ -156,26 +156,22 @@ cy:
               blank: eman tsrif s'tnenoppo eht retnE
             last_name:
               blank: eman tsal s'tnenoppo eht retnE
-            understands_terms_of_court_order:
-              blank: redro truoc a fo smret eht dnatsrednu ot yticapac latnem eht
-                sah tnenoppo eht fi sey tceleS
+        application_merits_task/domestic_abuse_summary:
+          attributes:
             warning_letter_sent:
               blank: tnenoppo eht ot tnes neeb sah rettel gninraw a fi sey tceleS
+            warning_letter_sent_details:
+              blank: tnes neeb ton sah rettel gninraw a yhw su lleT
             police_notified:
               blank: deifiton neeb evah ecilop eht fi sey tceleS
             police_notified_details:
               blank: deifiton neeb evah ecilop eht fi sey tceleS
-            bail_conditions_set:
-              blank: tes neeb evah snoitidnoc liab fi sey tceleS
-            understands_terms_of_court_order_details:
-              blank: redro na fo hcaerb a ecrofne dluow truoc eht kniht uoy yhw su
-                lleT
-            warning_letter_sent_details:
-              blank: tnes neeb ton sah rettel gninraw a yhw su lleT
             police_notified_details_true:
               blank: nekat evah ecilop eht noitca tahw su lleT
             police_notified_details_false:
               blank: deifiton neeb ton evah ecilop eht yhw su lleT
+            bail_conditions_set:
+              blank: tes neeb evah snoitidnoc liab fi sey tceleS
             bail_conditions_set_details:
               blank: snoitidnoc liab eht fo sliated eviG
         application_merits_task/statement_of_case:
