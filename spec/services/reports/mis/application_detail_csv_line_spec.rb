@@ -523,12 +523,35 @@ module Reports
           end
         end
 
-        context "opponent" do
-          context "no opponent record" do
+        context "parties_mental_capacity" do
+          context "does not exist" do
             it "generates blanks" do
-              legal_aid_application.update! opponent: nil
-              expect(value_for("Opponent can understand?")).to eq ""
+              legal_aid_application.update! parties_mental_capacity: nil
+              expect(value_for("Parties can understand?")).to eq ""
               expect(value_for("Ability to understand details")).to eq ""
+            end
+          end
+
+          context "exists" do
+            it "generates the values" do
+              expect(value_for("Parties can understand?")).to eq "Yes"
+              expect(value_for("Ability to understand details")).to eq parties_mental_capacity.understands_terms_of_court_order_details
+            end
+          end
+
+          context "data begins with a vulnerable character" do
+            before { firm.update!(name: "=malicious_code") }
+
+            it "returns the escaped text" do
+              expect(value_for("Firm name")).to eq "'=malicious_code"
+            end
+          end
+        end
+
+        context "domestic_abuse_summary" do
+          context "does not exist" do
+            it "generates blanks" do
+              legal_aid_application.update! domestic_abuse_summary: nil
               expect(value_for("Warning letter sent?")).to eq ""
               expect(value_for("Warning letter details")).to eq ""
               expect(value_for("Police notified?")).to eq ""
@@ -538,10 +561,8 @@ module Reports
             end
           end
 
-          context "opponent record exists" do
+          context "exists" do
             it "generates the values" do
-              expect(value_for("Opponent can understand?")).to eq "Yes"
-              expect(value_for("Ability to understand details")).to eq parties_mental_capacity.understands_terms_of_court_order_details
               expect(value_for("Warning letter sent?")).to eq "Yes"
               expect(value_for("Warning letter details")).to eq domestic_abuse_summary.warning_letter_sent_details
               expect(value_for("Police notified?")).to eq "Yes"

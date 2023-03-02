@@ -62,16 +62,6 @@ module Reports
                :inherited_assets_value,
                :money_owed_value, to: :other_assets_declaration
 
-      delegate :understands_terms_of_court_order?,
-               :understands_terms_of_court_order_details, to: :parties_mental_capacity
-
-      delegate :warning_letter_sent?,
-               :warning_letter_sent_details,
-               :police_notified?,
-               :police_notified_details,
-               :bail_conditions_set?,
-               :bail_conditions_set_details, to: :domestic_abuse_summary
-
       delegate :firm,
                :username, to: :provider
 
@@ -149,7 +139,7 @@ module Reports
           "Number of children involved",
           "Supporting evidence uploaded?",
           "Number of items of evidence",
-          "Opponent can understand?",
+          "Parties can understand?",
           "Ability to understand details",
           "Warning letter sent?",
           "Warning letter details",
@@ -199,7 +189,8 @@ module Reports
         other_assets_details
         restrictions
         eligibility
-        opponent_details
+        parties_mental_capacity_attrs
+        domestic_abuse_summary_attrs
         merits
         hmrc_data
         banking_data
@@ -360,19 +351,22 @@ module Reports
         @line << gateway_evidence_count
       end
 
-      def opponent_details
-        opponent.present? ? opponent_attrs : 8.times { @line << "" }
+      def parties_mental_capacity_attrs
+        return 2.times { @line << "" } if laa.parties_mental_capacity.nil? || laa.parties_mental_capacity.blank?
+
+        @line << yesno(laa&.parties_mental_capacity&.understands_terms_of_court_order?)
+        @line << laa&.parties_mental_capacity&.understands_terms_of_court_order_details
       end
 
-      def opponent_attrs
-        @line << yesno(understands_terms_of_court_order?)
-        @line << understands_terms_of_court_order_details
-        @line << yesno(warning_letter_sent?)
-        @line << warning_letter_sent_details
-        @line << yesno(police_notified?)
-        @line << police_notified_details
-        @line << yesno(bail_conditions_set?)
-        @line << bail_conditions_set_details
+      def domestic_abuse_summary_attrs
+        return 6.times { @line << "" } if laa.domestic_abuse_summary.nil? || laa.domestic_abuse_summary.blank?
+
+        @line << yesno(laa&.domestic_abuse_summary&.warning_letter_sent?)
+        @line << laa&.domestic_abuse_summary&.warning_letter_sent_details
+        @line << yesno(laa&.domestic_abuse_summary&.police_notified?)
+        @line << laa&.domestic_abuse_summary&.police_notified_details
+        @line << yesno(laa&.domestic_abuse_summary&.bail_conditions_set?)
+        @line << laa&.domestic_abuse_summary&.bail_conditions_set_details
       end
 
       def merits
