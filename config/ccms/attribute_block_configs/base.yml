@@ -4834,10 +4834,12 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   WARNING_LETTER_SENT:
+    generate_block?: '#domestic_abuse_summary_exists?'
     value: "#domestic_abuse_summary_warning_letter_sent"
     response_type: boolean
     user_defined: true
   POLICE_NOTIFIED:
+    generate_block?: '#domestic_abuse_summary_exists?'
     value: "#domestic_abuse_summary_police_notified?"
     response_type: boolean
     user_defined: true
@@ -4865,6 +4867,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   INJ_RESPONDENT_CAPACITY:
+    generate_block?: '#parties_mental_capacity_exists?'
     value: "#parties_mental_capacity_understands_terms_of_court_order?"
     br100_meaning: 'Inj: The Respondent Or Proposed Respondent Has Capacity'
     response_type: boolean
@@ -4947,6 +4950,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   BAIL_CONDITIONS_SET:
+    generate_block?: '#domestic_abuse_summary_exists?'
     value: "#domestic_abuse_summary_bail_conditions_set?"
     response_type: boolean
     user_defined: true
