@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_112837) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_132829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -661,14 +661,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_112837) do
 
   create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
-    t.boolean "understands_terms_of_court_order"
-    t.text "understands_terms_of_court_order_details"
-    t.boolean "warning_letter_sent"
-    t.text "warning_letter_sent_details"
-    t.boolean "police_notified"
-    t.text "police_notified_details"
-    t.boolean "bail_conditions_set"
-    t.text "bail_conditions_set_details"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.integer "ccms_opponent_id"

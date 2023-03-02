@@ -17,19 +17,23 @@ namespace :migrate do
                                                       .or(all_opponents.where.not(police_notified: nil))
                                                       .or(all_opponents.where.not(police_notified_details: nil))
                                                       .or(all_opponents.where.not(bail_conditions_set: nil))
-                                                      .or(all_opponents.where.not(bail_conditions_set_details: nil)).count
+                                                      .or(all_opponents.where.not(bail_conditions_set_details: nil))
     @expected_parties_mental_capacities = all_opponents.where.not(understands_terms_of_court_order: nil)
-                                                       .or(all_opponents.where.not(understands_terms_of_court_order_details: nil)).count
+                                                       .or(all_opponents.where.not(understands_terms_of_court_order_details: nil))
     Rails.logger.info "----------------------------------------"
-    Rails.logger.info "Expecting DAS: #{@expected_domestic_abuse_summaries}, PMC: #{@expected_parties_mental_capacities}"
+    Rails.logger.info "Expecting DAS: #{@expected_domestic_abuse_summaries.count}, PMC: #{@expected_parties_mental_capacities.count}"
     Rails.logger.info "------------ setup complete ------------"
     Rails.logger.info "processing #{progress.opponent_total} opponents"
     Rails.logger.info "----------------------------------------"
     ActiveRecord::Base.transaction do
-      all_opponents.in_batches do |batch|
+      @expected_domestic_abuse_summaries.in_batches do |batch|
         batch.each do |opponent|
-          create_domestic_abuse_summary_from(opponent, progress) if domestic_abuse_summary_required_for?(opponent)
-          create_parties_mental_capacity_from(opponent, progress) if parties_mental_capacity_required_for?(opponent)
+          create_domestic_abuse_summary_from(opponent, progress)
+        end
+      end
+      @expected_parties_mental_capacities.in_batches do |batch|
+        batch.each do |opponent|
+          create_parties_mental_capacity_from(opponent, progress)
         end
       end
       raise ActiveRecord::TransactionRollbackError if count_mismatch?
@@ -43,20 +47,10 @@ namespace :migrate do
   end
 end
 
-def domestic_abuse_summary_required_for?(opponent)
-  attributes = opponent.attributes.excluding(COMMON_ATTRIBUTES + OMC_ATTRIBUTES + SHARED_ATTRIBUTES)
-  attributes.values.any?
-end
-
 def create_domestic_abuse_summary_from(opponent, progress)
   attributes = opponent.attributes.excluding(COMMON_ATTRIBUTES + OMC_ATTRIBUTES)
   ApplicationMeritsTask::DomesticAbuseSummary.create!(attributes)
   progress.das += 1
-end
-
-def parties_mental_capacity_required_for?(opponent)
-  attributes = opponent.attributes.excluding(COMMON_ATTRIBUTES + DAS_ATTRIBUTES + SHARED_ATTRIBUTES)
-  attributes.values.any?
 end
 
 def create_parties_mental_capacity_from(opponent, progress)
@@ -67,7 +61,7 @@ end
 
 def count_mismatch?
   [
-    @expected_domestic_abuse_summaries != ApplicationMeritsTask::DomesticAbuseSummary.count,
-    @expected_parties_mental_capacities != ApplicationMeritsTask::PartiesMentalCapacity.count,
+    @expected_domestic_abuse_summaries.count != ApplicationMeritsTask::DomesticAbuseSummary.count,
+    @expected_parties_mental_capacities.count != ApplicationMeritsTask::PartiesMentalCapacity.count,
   ].any?
 end
