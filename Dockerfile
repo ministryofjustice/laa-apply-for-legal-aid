@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 ######################
 # Env vars needed for dependency install and asset precompilation
 
-COPY Gemfile* ./
+COPY Gemfile Gemfile.lock ./
 
 # only install production dependencies,
 # build nokogiri using libxml2-dev, libxslt-dev
