@@ -349,74 +349,6 @@ module CCMS
           expect(block).not_to be_present
         end
 
-        context "with POLICE_NOTIFIED block" do
-          context "when police notified" do
-            before { domestic_abuse_summary.update(police_notified: true) }
-
-            it "adds POLICE_NOTIFIED attribute with true value" do
-              block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
-              expect(block).to have_boolean_response true
-            end
-          end
-
-          context "when police NOT notified" do
-            before { domestic_abuse_summary.update(police_notified: false) }
-
-            it "adds POLICE_NOTIFIED attribute with false value" do
-              block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
-              expect(block).to have_boolean_response false
-            end
-          end
-        end
-
-        context "with WARNING_LETTER_SENT" do
-          context "when letter has not been sent" do
-            it "adds WARNING_LETTER_SENT attribute with false value" do
-              block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
-              expect(block).to have_boolean_response false
-            end
-
-            it "adds INJ_REASON_NO_WARNING_LETTER attribute with expected text" do
-              block = XmlExtractor.call(xml, :global_merits, "INJ_REASON_NO_WARNING_LETTER")
-              expect(block).to have_text_response "."
-            end
-          end
-
-          context "when letter has been sent" do
-            before { domestic_abuse_summary.update(warning_letter_sent: true) }
-
-            it "adds WARNING_LETTER_SENT attribute with true value" do
-              block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
-              expect(block).to have_boolean_response true
-            end
-
-            it "omits INJ_REASON_NO_WARNING_LETTER attribute" do
-              block = XmlExtractor.call(xml, :global_merits, "INJ_REASON_NO_WARNING_LETTER")
-              expect(block).not_to be_present, "Expected block for attribute INJ_REASON_NO_WARNING_LETTER not to be generated, but was in global_merits"
-            end
-          end
-        end
-
-        context "with INJ_RESPONDENT_CAPACITY" do
-          context "when opponent has capacity" do
-            before { parties_mental_capacity.understands_terms_of_court_order = true }
-
-            it "adds INJ_RESPONDENT_CAPACITY attribute with true value" do
-              block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
-              expect(block).to have_boolean_response true
-            end
-          end
-
-          context "when opponent does not have capacity" do
-            before { parties_mental_capacity.understands_terms_of_court_order = false }
-
-            it "adds INJ_RESPONDENT_CAPACITY attribute with false value" do
-              block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
-              expect(block).to have_boolean_response false
-            end
-          end
-        end
-
         it "adds some boolean attributes with value hard coded to true", :aggregate_failures do
           attributes = [
             [:global_means, "APPLICATION_FROM_APPLY"],
@@ -510,8 +442,8 @@ module CCMS
           end
         end
 
-        context "with BAIL_CONDITIONS_SET" do
-          context "with bail conditions set" do
+        context "with domestic_abuse_summary" do
+          context "and bail conditions set" do
             before { domestic_abuse_summary.bail_conditions_set = true }
 
             it "adds BAIL_CONDITIONS_SET attribute with value of true" do
@@ -520,13 +452,108 @@ module CCMS
             end
           end
 
-          context "with bail conditions NOT set" do
+          context "and bail conditions NOT set" do
             before { domestic_abuse_summary.bail_conditions_set = false }
 
             it "adds BAIL_CONDITIONS_SET attribute with value of false" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
               expect(block).to have_boolean_response false
             end
+          end
+
+          context "and police notified" do
+            before { domestic_abuse_summary.update(police_notified: true) }
+
+            it "adds POLICE_NOTIFIED attribute with true value" do
+              block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
+              expect(block).to have_boolean_response true
+            end
+          end
+
+          context "and police NOT notified" do
+            before { domestic_abuse_summary.update(police_notified: false) }
+
+            it "adds POLICE_NOTIFIED attribute with false value" do
+              block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
+              expect(block).to have_boolean_response false
+            end
+          end
+
+          context "and a warning letter has been sent" do
+            before { domestic_abuse_summary.update(warning_letter_sent: true) }
+
+            it "adds WARNING_LETTER_SENT attribute with true value" do
+              block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
+              expect(block).to have_boolean_response true
+            end
+
+            it "omits INJ_REASON_NO_WARNING_LETTER attribute" do
+              block = XmlExtractor.call(xml, :global_merits, "INJ_REASON_NO_WARNING_LETTER")
+              expect(block).not_to be_present, "Expected block for attribute INJ_REASON_NO_WARNING_LETTER not to be generated, but was in global_merits"
+            end
+          end
+
+          context "and a warning letter has not been sent" do
+            before { domestic_abuse_summary.update(warning_letter_sent: false) }
+
+            it "adds WARNING_LETTER_SENT attribute with false value" do
+              block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
+              expect(block).to have_boolean_response false
+            end
+
+            it "adds INJ_REASON_NO_WARNING_LETTER attribute with expected text" do
+              block = XmlExtractor.call(xml, :global_merits, "INJ_REASON_NO_WARNING_LETTER")
+              expect(block).to have_text_response "."
+            end
+          end
+        end
+
+        context "when domestic abuse summary not applicable to proceeding" do
+          before do
+            legal_aid_application.domestic_abuse_summary.delete
+            legal_aid_application.reload
+          end
+
+          it "omits the BAIL_CONDITIONS_SET block" do
+            block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
+            expect(block).not_to be_present
+          end
+
+          it "omits the POLICE_NOTIFIED block" do
+            block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
+            expect(block).not_to be_present
+          end
+        end
+
+        context "when parties mental capacity recorded" do
+          context "and opponent has capacity" do
+            before { parties_mental_capacity.understands_terms_of_court_order = true }
+
+            it "adds INJ_RESPONDENT_CAPACITY attribute with true value" do
+              block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
+              expect(block).to have_boolean_response true
+            end
+          end
+
+          context "and opponent does not have capacity" do
+            before { parties_mental_capacity.understands_terms_of_court_order = false }
+
+            it "adds INJ_RESPONDENT_CAPACITY attribute with false value" do
+              block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
+              expect(block).to have_boolean_response false
+            end
+          end
+        end
+
+        context "when parties mental capacity not applicable to proceeding" do
+          before do
+            legal_aid_application.parties_mental_capacity.delete
+            legal_aid_application.reload
+          end
+
+          it "omits the INJ_RESPONDENT_CAPACITY block" do
+            block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
+            expect(block).not_to be_present
           end
         end
 

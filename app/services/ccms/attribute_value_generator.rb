@@ -229,7 +229,15 @@ module CCMS
     end
 
     def no_warning_letter_sent?(_options)
-      !legal_aid_application.domestic_abuse_summary.warning_letter_sent
+      !legal_aid_application&.domestic_abuse_summary&.warning_letter_sent
+    end
+
+    def parties_mental_capacity_exists?(_options)
+      legal_aid_application&.parties_mental_capacity.present?
+    end
+
+    def domestic_abuse_summary_exists?(_options)
+      legal_aid_application&.domestic_abuse_summary.present?
     end
 
     def applicant_owns_main_home?(_options)
