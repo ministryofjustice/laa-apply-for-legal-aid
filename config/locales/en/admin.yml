@@ -30,6 +30,34 @@ en:
         data_view: Submission details
       search:
         error: Please enter a search criteria
+    ccms_queues:
+      index:
+        page_title: Incomplete CCMS Submissions
+        applicant_name: Client's name
+        references: CCMS & case reference
+        created_at: Date started
+        state: State
+        running: Expired
+        sidekiq:
+          in_retry: on retry queue
+          false: ""
+          running: Running
+      show:
+        submission: CCMS submission
+        created_at: Created at
+        updated_at: Updated at
+        status: Status
+        applicant_poll_count: Applicant poll count
+        case_poll_count: Case poll count
+        actions: Actions
+        restart: Restart at current step
+        restart_details: This will restart the submission at the current step and attempt to complete it another 10 times
+        reset: Reset submission
+        reset_details: This will reset the submission to `initialized` and restart it.  This will generate a new CCMS reference so you should alert the provider and caseworkers
+        submission_histories: Submission histories
+        request: Request
+        response: Response
+        expand: Expand
     settings:
       show:
         heading_1: Settings

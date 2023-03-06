@@ -65,6 +65,12 @@ Rails.application.routes.draw do
       delete :destroy_all, on: :collection
     end
     resource :settings, only: %i[show update]
+    resources :ccms_queues, only: %i[index show] do
+      member do
+        get "reset_and_restart"
+        get "restart_current_submission"
+      end
+    end
     resource :submitted_applications_report, only: %i[show]
     resource :feedback, controller: :feedback, only: %i[show]
     resources :reports, only: %i[index create]

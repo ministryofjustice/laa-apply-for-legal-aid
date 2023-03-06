@@ -2,9 +2,10 @@
 en:
   layouts:
     admin:
-      applications: Applications
+      applications: Apps
       edit_settings: Settings
-      submitted_applications_report: Submitted Applications
+      ccms_queue: CCMS
+      submitted_applications_report: Submitted
       feedback: Feedback
       reports: Reports
       user_admin: User admin

@@ -4,6 +4,7 @@ cy:
     admin:
       applications: snoitacilppA
       edit_settings: sgnitteS
+      ccms_queue: SMCC
       submitted_applications_report: snoitacilppA dettimbuS
       feedback: kcabdeeF
       reports: stropeR
