@@ -1,24 +1,25 @@
 #!/bin/bash
 
 # https://github.com/freayd/clamav-tools/blob/master/install-on-macos.sh
+# updated from above to work with M1 chip too
 
-CONFIG_FOLDER=/usr/local/etc/clamav
+CONFIG_FOLDER=$(brew --prefix)/etc/clamav
 CLAMD_CONFIG_FILE=$CONFIG_FOLDER/clamd.conf
 FRESHCLAM_CONFIG_FILE=$CONFIG_FOLDER/freshclam.conf
-DB_FOLDER=/usr/local/var/lib/clamav
+DB_FOLDER=$(brew --prefix)/var/lib/clamav
 TMP_FOLDER=$DB_FOLDER/tmp
-RUN_FOLDER=/usr/local/var/run/clamav
-LOG_FOLDER=/usr/local/var/log
+RUN_FOLDER=$(brew --prefix)/var/run/clamav
+LOG_FOLDER=$(brew --prefix)/var/log
 CLAMD_LOG_FILE=$LOG_FOLDER/clamd.log
 CLAMD_SOCKET_FILE=$RUN_FOLDER/clamd.socket
 CLAMD_ERROR_LOG_FILE=$LOG_FOLDER/clamd.error.log
 FRESHCLAM_LOG_FILE=$LOG_FOLDER/freshclam.log
 FRESHCLAM_ERROR_LOG_FILE=$LOG_FOLDER/freshclam.error.log
-BREW_SYMLINK_FOLDER=/usr/local/sbin
+BREW_SYMLINK_FOLDER=$(brew --prefix)/sbin
 
 if [ ! -d "$BREW_SYMLINK_FOLDER" ]; then
   sudo mkdir -p "$BREW_SYMLINK_FOLDER"
-  sudo chown -R `whoami`:admin /usr/local/sbin
+  sudo chown -R `whoami`:admin $(brew --prefix)/sbin
 fi
 
 ( brew list --versions clamav > /dev/null ) || brew install clamav || exit
@@ -73,7 +74,7 @@ sudo tee "$CLAMD_DAEMON_FILE" << EOF > /dev/null
     <string>${CLAMD_DAEMON_NAME}</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/local/sbin/clamd</string>
+        <string>$(brew --prefix)/sbin/clamd</string>
         <string>--foreground</string>
     </array>
     <key>KeepAlive</key>
@@ -92,7 +93,7 @@ sudo tee "$FRESHCLAM_DAEMON_FILE" << EOF > /dev/null
     <string>${FRESHCLAM_DAEMON_NAME}</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/local/bin/freshclam</string>
+        <string>$(brew --prefix)/bin/freshclam</string>
         <string>--daemon</string>
         <string>--foreground</string>
     </array>
