@@ -75,6 +75,10 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I fill "Last Name" with "Doe"
 
     When I click 'Save and continue'
+    Then I should be on a page showing "You have added 1 opponent"
+    When I choose "No"
+    And I click 'Save and continue'
+
     Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
     And I choose "Yes"
 

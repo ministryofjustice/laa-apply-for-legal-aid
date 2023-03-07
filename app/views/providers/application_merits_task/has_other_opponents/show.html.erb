@@ -1,0 +1,56 @@
+<%= form_with(
+      url: providers_legal_aid_application_has_other_opponent_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title", count: pluralize(@legal_aid_application.opponents.count, "opponent").to_s),
+                    template: :basic,
+                    form: do %>
+    <% if @legal_aid_application.opponents.count > 0 %>
+      <h1 class="govuk-heading-xl">
+        <%= t(".existing", count: pluralize(@legal_aid_application.opponents.count, "opponent").to_s) %>
+      </h1>
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".table_caption") %></caption>
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">Name</th>
+          <th class="govuk-table__header" colspan="3">Type</th>
+        </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        <% @legal_aid_application.opponents.order(:created_at).each do |opponent| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" id="opponent<%= opponent.id %>"><%= opponent.full_name %></td>
+            <td class="govuk-table__cell">Individual<%#= opponent.type %></td>
+            <td class="govuk-table__cell">
+              <%= link_to_accessible(
+                    t("generic.change"),
+                    providers_legal_aid_application_opponents_name_path(@legal_aid_application, opponent),
+                    class: "govuk-link change-link",
+                    suffix: opponent.full_name,
+                  ) %>
+            </td>
+            <td class="govuk-table__cell">
+              <%= link_to_accessible(
+                    t(".remove"),
+                    providers_legal_aid_application_remove_opponent_path(@legal_aid_application, opponent),
+                    class: "govuk-link change-link",
+                    suffix: opponent.full_name,
+                  ) %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <%= form.govuk_collection_radio_buttons :has_other_opponents,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: t(".add_another"), size: "l", tag: "h2" } %>
+
+  <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

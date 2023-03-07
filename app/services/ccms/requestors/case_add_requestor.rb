@@ -8,7 +8,7 @@ module CCMS
       attr_reader :ccms_attribute_keys, :submission
 
       delegate :involved_children,
-               :opponent, to: :legal_aid_application
+               :opponents, to: :legal_aid_application
 
       attr_accessor :legal_aid_application
 
@@ -123,7 +123,9 @@ module CCMS
       end
 
       def generate_other_parties(xml)
-        generate_opponent(xml, @legal_aid_application.opponent)
+        @legal_aid_application.opponents.order(:created_at).each do |opponent|
+          generate_opponent(xml, opponent)
+        end
 
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
           generate_involved_child(xml, child)
@@ -291,7 +293,7 @@ module CCMS
       end
 
       def other_parties
-        [opponent] + involved_children
+        opponents.all + involved_children
       end
 
       def predicate_true?(config)
@@ -429,7 +431,7 @@ module CCMS
                                            xml,
                                            :proceeding_merits,
                                            proceeding:,
-                                           opponent: @legal_aid_application.opponent,
+                                           opponent: @legal_aid_application.opponents.first,
                                            chances_of_success: proceeding.chances_of_success)
           end
         end

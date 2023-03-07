@@ -22,7 +22,7 @@ module Reports
                benefit_check_result:,
                savings_amount:,
                other_assets_declaration:,
-               opponent:,
+               opponents:,
                parties_mental_capacity:,
                domestic_abuse_summary:,
                ccms_submission:,
@@ -51,7 +51,7 @@ module Reports
                benefit_check_result:,
                savings_amount:,
                other_assets_declaration:,
-               opponent:,
+               opponents:,
                parties_mental_capacity:,
                domestic_abuse_summary:,
                ccms_submission:,
@@ -74,7 +74,7 @@ module Reports
                benefit_check_result:,
                savings_amount:,
                other_assets_declaration:,
-               opponent:,
+               opponents:,
                parties_mental_capacity:,
                domestic_abuse_summary:,
                ccms_submission:,
@@ -140,8 +140,8 @@ module Reports
                none_selected:)
       end
 
-      let(:opponent) do
-        create(:opponent)
+      let(:opponents) do
+        create_list(:opponent, 1)
       end
 
       let(:parties_mental_capacity) do

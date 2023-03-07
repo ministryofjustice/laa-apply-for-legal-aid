@@ -45,7 +45,7 @@ module CCMS
 
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-        let(:opponent) { legal_aid_application.opponent }
+        let(:opponent) { legal_aid_application.opponents.first }
         let(:parties_mental_capacity) { legal_aid_application.parties_mental_capacity }
         let(:domestic_abuse_summary) { legal_aid_application.domestic_abuse_summary }
         let(:ccms_reference) { "300000054005" }
@@ -1074,86 +1074,178 @@ module CCMS
           end
         end
 
-        context "with means OPPONENT_OTHER_PARTIES entity" do
-          let(:entity) { :opponent_means }
+        context "with a single opponent" do
+          context "with means OPPONENT_OTHER_PARTIES entity" do
+            let(:entity) { :opponent_means }
 
-          it "generates OTHER_PARTY_ID" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-            expect(block).to have_text_response "OPPONENT_88000001"
+            it "generates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response "OPPONENT_88000001"
+            end
+
+            it "adds OTHER_PARTY_NAME with value of full name of other party" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response opponent.full_name
+            end
+
+            it "hard-codes OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response "PERSON"
+            end
+
+            it "hard-codes RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response "OPP"
+            end
+
+            it "hard-codes RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response "UNKNOWN"
+            end
           end
 
-          it "adds OTHER_PARTY_NAME with value of full name of other party" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-            expect(block).to have_text_response opponent.full_name
-          end
+          context "with merits OPPONENT_OTHER_PARTIES entity" do
+            let(:entity) { :opponent_merits }
 
-          it "hard-codes OTHER_PARTY_TYPE" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-            expect(block).to have_text_response "PERSON"
-          end
+            it "hard-codes OPP_RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response "Opponent"
+            end
 
-          it "hard-codes RELATIONSHIP_TO_CASE" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-            expect(block).to have_text_response "OPP"
-          end
+            it "hard-codes OPP_RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response "Unknown"
+            end
 
-          it "hard-codes RELATIONSHIP_TO_CLIENT" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-            expect(block).to have_text_response "UNKNOWN"
+            it "generates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response "OPPONENT_88000001"
+            end
+
+            it "adds OTHER_PARTY_NAME with value of full name of other party" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response opponent.full_name
+            end
+
+            it "adds OTHER_PARTY_NAME_MERITS with value of full name of other party" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
+              expect(block).to have_text_response opponent.full_name
+            end
+
+            it "hard-codes OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response "PERSON"
+            end
+
+            it "hard-codes OTHER_PARTY_PERSON" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
+              expect(block).to have_boolean_response true
+            end
+
+            it "adds RELATIONSHIP_CASE_OPPONENT with derived value" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
+              expect(block).to have_boolean_response true
+            end
+
+            it "adds RELATIONSHIP_TO_CASE with derived value" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response "OPP"
+            end
+
+            it "hard-codes RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response "UNKNOWN"
+            end
           end
         end
 
-        context "with merits OPPONENT_OTHER_PARTIES entity" do
-          let(:entity) { :opponent_merits }
+        context "with multiple opponents" do
+          let(:opponent_one) { create(:opponent, first_name: "Joffrey", last_name: "Test-Opponent") }
+          let(:opponent_two) { create(:opponent, first_name: "Sansa", last_name: "Opponent-Test") }
 
-          it "hard-codes OPP_RELATIONSHIP_TO_CASE" do
-            block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CASE")
-            expect(block).to have_text_response "Opponent"
+          before { legal_aid_application.update!(opponents: [opponent_one, opponent_two]) }
+
+          context "with means OPPONENT_OTHER_PARTIES entity" do
+            let(:entity) { :opponent_means }
+
+            it "generates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response %w[OPPONENT_88000001 OPPONENT_88000002]
+            end
+
+            it "adds OTHER_PARTY_NAME with value of full name of other party" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response [opponent_one.full_name, opponent_two.full_name]
+            end
+
+            it "hard-codes OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response %w[PERSON PERSON]
+            end
+
+            it "hard-codes RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response %w[OPP OPP]
+            end
+
+            it "hard-codes RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response %w[UNKNOWN UNKNOWN]
+            end
           end
 
-          it "hard-codes OPP_RELATIONSHIP_TO_CLIENT" do
-            block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
-            expect(block).to have_text_response "Unknown"
-          end
+          context "with merits OPPONENT_OTHER_PARTIES entity" do
+            let(:entity) { :opponent_merits }
 
-          it "generates OTHER_PARTY_ID" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-            expect(block).to have_text_response "OPPONENT_88000001"
-          end
+            it "hard-codes OPP_RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response %w[Opponent Opponent]
+            end
 
-          it "adds OTHER_PARTY_NAME with value of full name of other party" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-            expect(block).to have_text_response opponent.full_name
-          end
+            it "hard-codes OPP_RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response %w[Unknown Unknown]
+            end
 
-          it "adds OTHER_PARTY_NAME_MERITS with value of full name of other party" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
-            expect(block).to have_text_response opponent.full_name
-          end
+            it "generates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response %w[OPPONENT_88000001 OPPONENT_88000002]
+            end
 
-          it "hard-codes OTHER_PARTY_TYPE" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-            expect(block).to have_text_response "PERSON"
-          end
+            it "adds OTHER_PARTY_NAME with value of full name of other party" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response [opponent_one.full_name, opponent_two.full_name]
+            end
 
-          it "hard-codes OTHER_PARTY_PERSON" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
-            expect(block).to have_boolean_response true
-          end
+            it "adds OTHER_PARTY_NAME_MERITS with value of full name of other party" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
+              expect(block).to have_text_response [opponent_one.full_name, opponent_two.full_name]
+            end
 
-          it "adds RELATIONSHIP_CASE_OPPONENT with derived value" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
-            expect(block).to have_boolean_response true
-          end
+            it "hard-codes OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response %w[PERSON PERSON]
+            end
 
-          it "adds RELATIONSHIP_TO_CASE with derived value" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-            expect(block).to have_text_response "OPP"
-          end
+            it "hard-codes OTHER_PARTY_PERSON" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
+              expect(block).to have_boolean_response [true, true]
+            end
 
-          it "hard-codes RELATIONSHIP_TO_CLIENT" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-            expect(block).to have_text_response "UNKNOWN"
+            it "adds RELATIONSHIP_CASE_OPPONENT with derived value" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
+              expect(block).to have_boolean_response [true, true]
+            end
+
+            it "adds RELATIONSHIP_TO_CASE with derived value" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response %w[OPP OPP]
+            end
+
+            it "hard-codes RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response %w[UNKNOWN UNKNOWN]
+            end
           end
         end
 

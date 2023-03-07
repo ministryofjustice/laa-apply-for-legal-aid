@@ -28,7 +28,6 @@ module Reports
                :proceedings,
                :property_value,
                :provider,
-               :opponent,
                :parties_mental_capacity,
                :domestic_abuse_summary,
                :savings_amount,

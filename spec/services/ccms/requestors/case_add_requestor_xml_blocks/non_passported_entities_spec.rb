@@ -33,7 +33,6 @@ module CCMS
         let!(:chances_of_success) do
           create(:chances_of_success, :with_optional_text, proceeding:)
         end
-        let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
