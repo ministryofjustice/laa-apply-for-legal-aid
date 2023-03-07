@@ -143,5 +143,58 @@ module CCMS
         end
       end
     end
+
+    describe "#sidekiq_running?" do
+      subject(:sidekiq_running?) { submission.sidekiq_running? }
+
+      context "when the submission.id is in the retry queue" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
+        before do
+          allow(Sidekiq::RetrySet).to receive(:new).and_return([sidekiq_entry])
+        end
+
+        it "returns :in_retry" do
+          expect(sidekiq_running?).to eq :in_retry
+        end
+      end
+
+      context "when the submission.id is currently running" do
+        before do
+          allow(Sidekiq::Workers).to receive(:new).and_return(["[\"FAKE:DATA:IDENTIFIER\", \"48ly\", {\"queue\"=>\"default\", \"payload\"=>{\"retry\"=>10, \"queue\"=>\"default\", \"args\"=>[\"#{submission.id}\", \"applicant_submitted\"], \"class\"=>\"CCMS::SubmissionProcessWorker\", \"jid\"=>\"97ead0dbe80ecb151b14ba46\", \"created_at\"=>1678181274.640068, \"enqueued_at\"=>1678196740.5113559, \"error_message\"=>\"Submission `#{submission.id}` failed at `applicant_submitted` on retry 9 with error CCMS::SubmissionStateUnchanged\", \"error_class\"=>\"CCMS::SentryIgnoreThisSidekiqFailError\", \"failed_at\"=>1678181277.234848, \"retry_count\"=>8, \"retried_at\"=>1678195277.342509}, \"run_at\"=>1678196740}]"])
+        end
+
+        it "returns :running" do
+          expect(sidekiq_running?).to eq :running
+        end
+      end
+
+      context "when the submission.id is not in any queue" do
+        it "returns :false" do
+          expect(sidekiq_running?).to be false
+        end
+      end
+    end
+
+    describe "#restart_existing_submission!" do
+      it "is an alias of process_async!" do
+        expect(submission.method(:restart_existing_submission!)).to eql(submission.method(:process_async!))
+      end
+    end
+
+    describe "#complete_restart!" do
+      subject(:complete_restart) { submission.complete_restart! }
+
+      let(:state) { :document_ids_obtained }
+      let(:applicant_poll_count) { 1 }
+      let(:case_poll_count) { 1 }
+
+      it "resets the values" do
+        expect(submission).to receive(:process_async!).once
+        expect { complete_restart }.to change(submission, :aasm_state).from("document_ids_obtained").to("initialised")
+                                                                      .and(change(submission, :applicant_poll_count).from(1).to(0))
+                                                                      .and(change(submission, :case_poll_count).from(1).to(0))
+      end
+    end
   end
 end
