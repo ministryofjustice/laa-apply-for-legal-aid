@@ -25,7 +25,7 @@
     "@babel/preset-env": "^7.20.2",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
-    "jest-environment-jsdom": "^29.4.3",
+    "jest-environment-jsdom": "^29.5.0",
     "jest-environment-jsdom-global": "^4.0.0",
     "postcss": "^8.4.21",
     "puppeteer": "19.2.0",
