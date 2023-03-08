@@ -25,9 +25,6 @@ Given("I have completed the income section of a non-passported application with 
     set_lead_proceeding: :da002,
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
-
   login_as @legal_aid_application.provider
 end
 
@@ -62,9 +59,6 @@ Given("I have completed the income and capital sections of a non-passported appl
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
   )
-
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
 
   login_as @legal_aid_application.provider
 end

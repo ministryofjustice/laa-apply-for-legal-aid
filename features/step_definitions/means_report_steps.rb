@@ -29,9 +29,6 @@ Given("I have completed a non-passported employed application with bank statemen
     attachments: [build(:attachment, :bank_statement)],
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
-
   login_as @legal_aid_application.provider
 end
 
@@ -66,9 +63,6 @@ Given("I have completed a non-passported application with truelayer") do
     set_lead_proceeding: :da002,
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
-
   login_as @legal_aid_application.provider
 end
 
@@ -100,9 +94,6 @@ Given("I have completed a passported application") do
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
   )
-
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
 
   login_as @legal_aid_application.provider
 end
