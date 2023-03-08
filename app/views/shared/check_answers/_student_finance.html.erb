@@ -1,39 +1,34 @@
-<% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
-  <div class="govuk-grid-row" id="app-check-your-answers__student_finance">
-    <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-m"><%= t(".heading") %></h3>
-    </div>
-    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
-      <% unless read_only %>
-        <p>
-          <%= link_to_accessible(
-                t("generic.change"),
-                providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-                class: "govuk-link change-link",
-                suffix: t(".heading"),
-              ) %>
-        </p>
-      <% end %>
-    </div>
+<div class="govuk-grid-row" id="app-check-your-answers__student_finance">
+  <div class="govuk-grid-column-two-thirds">
+    <h3 class="govuk-heading-m"><%= t(".heading") %></h3>
   </div>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_no_link(
-          name: :student_finance_question,
-          question: t(".does_your_client"),
-          answer: yes_no(@legal_aid_application.receives_student_finance?),
-          read_only: false,
-        ) %>
-
-    <% if @legal_aid_application.receives_student_finance? %>
-        <%= check_answer_no_link(
-              name: :student_finance_annual_amount,
-              question: t(".how_much"),
-              answer: gds_number_to_currency(@legal_aid_application.value_of_student_finance),
-              read_only: false,
+  <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+    <% unless read_only %>
+      <p>
+        <%= link_to_accessible(
+              t("generic.change"),
+              providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
+              class: "govuk-link change-link",
+              suffix: t(".heading"),
             ) %>
+      </p>
     <% end %>
-  </dl>
-<% else %>
-  <h3 class="govuk-heading-m"><%= t(".heading") %></h3>
-  <p><%= t(".info_html", student_finance: value_with_currency_unit(@legal_aid_application.value_of_student_finance, t("currency.gbp"))) %></p>
-<% end %>
+  </div>
+</div>
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_no_link(
+        name: :student_finance_question,
+        question: t(".does_your_client"),
+        answer: yes_no(@legal_aid_application.receives_student_finance?),
+        read_only: false,
+      ) %>
+
+  <% if @legal_aid_application.receives_student_finance? %>
+      <%= check_answer_no_link(
+            name: :student_finance_annual_amount,
+            question: t(".how_much"),
+            answer: gds_number_to_currency(@legal_aid_application.value_of_student_finance),
+            read_only: false,
+          ) %>
+  <% end %>
+</dl>

@@ -115,40 +115,27 @@ module Flow
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
           forward: lambda do |application|
-            if application.provider_received_citizen_consent?
-              :open_banking_guidances
-            else
-              application.uploading_bank_statements? ? :bank_statements : :use_ccms
-            end
+            application.provider_received_citizen_consent? ? :open_banking_guidances : :bank_statements
           end,
         },
 
         open_banking_guidances: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_guidance_path(application) },
-          forward: lambda do |application, client_can_use_truelayer|
-            if client_can_use_truelayer
-              :email_addresses
-            else
-              application.provider.bank_statement_upload_permissions? ? :bank_statements : :use_ccms
-            end
+          forward: lambda do |_application, client_can_use_truelayer|
+            client_can_use_truelayer ? :email_addresses : :bank_statements
           end,
         },
         bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
           forward: lambda do |application|
             status = HMRC::StatusAnalyzer.call(application)
-
             case status
             when :hmrc_multiple_employments, :no_hmrc_data
               :full_employment_details
             when :hmrc_single_employment, :unexpected_employment_data
               :employment_incomes
             when :applicant_not_employed
-              if application.uploading_bank_statements?
-                :regular_incomes
-              else
-                :identify_types_of_incomes
-              end
+              :regular_incomes
             else
               raise "Unexpected hmrc status #{status.inspect}"
             end

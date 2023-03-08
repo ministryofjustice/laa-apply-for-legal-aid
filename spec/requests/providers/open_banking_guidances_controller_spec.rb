@@ -81,28 +81,9 @@ RSpec.describe Providers::OpenBankingGuidancesController do
       context "when no is selected" do
         let(:can_client_use_truelayer) { "false" }
 
-        context "when provider has bank upload permissions" do
-          before do
-            permission = build(:permission, :bank_statement_upload)
-            legal_aid_application.provider.permissions << permission
-            request
-          end
-
-          it "redirects to the bank statement upload page" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_bank_statements_path
-          end
-        end
-
-        context "when provider does not have bank upload permissions" do
-          before do
-            legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          end
-
-          it "redirects to the use ccms page" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_use_ccms_path
-          end
+        it "redirects to the bank statement upload page" do
+          request
+          expect(response).to redirect_to providers_legal_aid_application_bank_statements_path
         end
       end
     end

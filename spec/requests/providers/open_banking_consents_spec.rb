@@ -88,17 +88,6 @@ RSpec.describe "does client use online banking requests" do
             expect(response).to redirect_to(providers_legal_aid_application_bank_statements_path(application))
           end
         end
-
-        context "when provider is not bank statement upload enabled" do
-          before do
-            application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          end
-
-          it "redirects to the use ccms page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
-          end
-        end
       end
 
       context "when no option is chosen" do
