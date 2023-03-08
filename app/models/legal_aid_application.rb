@@ -494,8 +494,6 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def uploading_bank_statements?
-    return false unless provider.bank_statement_upload_permissions?
-
     client_not_given_consent_to_open_banking? || attachments.bank_statement_evidence.exists?
   end
 
