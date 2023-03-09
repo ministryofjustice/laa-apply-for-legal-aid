@@ -37,10 +37,9 @@ en:
         references: CCMS & case reference
         created_at: Date started
         state: State
-        running: Expired
         sidekiq:
           in_retry: on retry queue
-          false: ""
+          false: Expired
           running: Running
       show:
         submission: CCMS submission
