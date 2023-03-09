@@ -9,8 +9,6 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
-  let(:permission) { create(:permission, :full_section_8) }
-  let(:full_section_8?) { false }
   let(:mark_as_complete) { false }
 
   before do
@@ -18,9 +16,6 @@ RSpec.describe Providers::HasOtherProceedingsController do
       legal_aid_application.proceedings.in_order_of_addition.incomplete.each do |proceeding|
         proceeding.update!(used_delegated_functions: false)
       end
-    end
-    if full_section_8?
-      legal_aid_application.provider.permissions << permission
     end
     login_as provider
   end
@@ -90,20 +85,9 @@ RSpec.describe Providers::HasOtherProceedingsController do
       context "and has deleted the domestic abuse proceeding but left the section 8" do
         let(:legal_aid_application) { create(:legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: [:se014], set_lead_proceeding: false) }
 
-        context "when the provider does not have full section 8 permissions" do
-          it "stays on the page and displays an error" do
-            expect(response).to have_http_status(:ok)
-            expect(page).to have_error_message("has_other_proceeding.must_add_domestic_abuse")
-          end
-        end
-
-        context "when the provider has full section 8 permissions" do
-          let(:full_section_8?) { true }
-
-          it "redirects to the first incomplete proceedings client involvement type page" do
-            proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
-            expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
-          end
+        it "redirects to the first incomplete proceedings client involvement type page" do
+          proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
+          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
         end
       end
     end
@@ -122,20 +106,9 @@ RSpec.describe Providers::HasOtherProceedingsController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, assign_lead_proceeding: false, explicit_proceedings: [:se013]) }
         let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-        context "when the provider does not have full section 8 permissions" do
-          it "stays on the page and displays an error" do
-            expect(response).to have_http_status(:ok)
-            expect(page).to have_error_message("has_other_proceeding.must_add_domestic_abuse")
-          end
-        end
-
-        context "when the provider has full section 8 permissions" do
-          let(:full_section_8?) { true }
-
-          it "redirects to the first incomplete proceedings client involvement type page" do
-            proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
-            expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
-          end
+        it "redirects to the first incomplete proceedings client involvement type page" do
+          proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
+          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
         end
       end
 

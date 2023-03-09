@@ -5,7 +5,6 @@ module LegalAidApplications
     attr_accessor :has_other_proceeding
 
     validates :has_other_proceeding, presence: true, unless: :draft?
-    validate :at_least_one_domestic_abuse, unless: -> { draft? || has_other_proceeding? || model.provider.full_section_8_permissions? }
 
     delegate :proceedings, to: :model
 
@@ -19,17 +18,8 @@ module LegalAidApplications
 
   private
 
-    def at_least_one_domestic_abuse
-      errors.add(:has_other_proceeding, :must_add_domestic_abuse) unless
-        proceedings_include_domestic_abuse?
-    end
-
     def exclude_from_model
       [:has_other_proceeding]
-    end
-
-    def proceedings_include_domestic_abuse?
-      proceedings.any?(&:domestic_abuse?)
     end
   end
 end
