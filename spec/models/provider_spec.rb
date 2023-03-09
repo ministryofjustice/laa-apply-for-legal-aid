@@ -118,22 +118,4 @@ RSpec.describe Provider do
       end
     end
   end
-
-  describe "#full_section_8_permissions?" do
-    context "when provider does not have full section 8 permissions" do
-      let(:provider) { create(:provider, :with_no_permissions) }
-
-      it "returns false" do
-        expect(provider.full_section_8_permissions?).to be false
-      end
-    end
-
-    context "when provider has full section 8 permissions" do
-      let(:provider) { create(:provider, :with_full_section_8_permissions) }
-
-      it "returns true" do
-        expect(provider.full_section_8_permissions?).to be true
-      end
-    end
-  end
 end
