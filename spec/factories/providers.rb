@@ -14,14 +14,6 @@ FactoryBot.define do
       username { "NEETADESOR" }
     end
 
-    trait :with_full_section_8_permissions do
-      permissions do
-        full_section_8 = Permission.find_by(role: "application.full_section_8.*")
-        full_section_8 = create(:permission, :full_section_8) if full_section_8.nil?
-        [full_section_8]
-      end
-    end
-
     trait :with_no_permissions do
       permissions { [] }
     end
