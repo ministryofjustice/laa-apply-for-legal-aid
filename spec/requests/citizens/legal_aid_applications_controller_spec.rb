@@ -38,6 +38,25 @@ RSpec.describe Citizens::LegalAidApplicationsController do
       expect(session["page_history_id"]).not_to be_nil
     end
 
+    context "when the applicant has reached the check your answers page" do
+      let(:legal_aid_application) do
+        create(
+          :application,
+          :with_applicant,
+          :with_non_passported_state_machine,
+          :checking_citizen_answers,
+          completed_at:,
+          applicant: build(:applicant, first_name: "Test", last_name: "Applicant"),
+          provider: build(:provider, firm: build(:firm, name: "Test Firm")),
+        )
+      end
+
+      it "redirects back there" do
+        request
+        expect(response).to redirect_to(citizens_check_answers_path)
+      end
+    end
+
     context "when no matching legal aid application exists" do
       let(:token) { SecureRandom.uuid }
 
