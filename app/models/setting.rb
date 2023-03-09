@@ -6,6 +6,7 @@ class Setting < ApplicationRecord
     enable_ccms_submission
     means_test_review_phase_one
     partner_means_assessment
+    new_flag
   ].freeze
 
   def self.method_missing(method_name, *args, &)

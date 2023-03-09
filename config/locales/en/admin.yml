@@ -41,6 +41,7 @@ en:
           enable_evidence_upload: Enable the new evidence upload feature
           means_test_review_phase_one: Enable changes for MTR Phase 1
           partner_means_assessment: Enable Partner Means Assessment
+          new_flag: New flag
         hints:
           mock_true_layer_data: >
             Select Yes and TrueLayer data will be replaced by mock data from
@@ -54,6 +55,7 @@ en:
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           means_test_review_phase_one: Select Yes to turn on the Means Test Review Phase One changes
           partner_means_assessment: Select Yes to allow Providers to complete the Partner Means Assessment
+          new_flag: A test flag to enable/disable new features
       update:
         notice: Settings have been updated
     submitted_applications_reports:
