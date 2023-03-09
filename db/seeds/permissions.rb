@@ -16,6 +16,13 @@ class PermissionsPopulator
       Rails.logger.info "Removing #{permission.role} permission from database"
       permission.destroy!
     end
+    ActorPermission.group(:permission_id).count.each do |permission_id, count|
+      next if Permission.find(permission_id)
+
+    rescue ActiveRecord::RecordNotFound
+      Rails.logger.info "Delete #{count} ActorPermissions for #{permission_id}"
+      ActorPermission.where(permission_id:).delete_all
+    end
   end
 end
 
