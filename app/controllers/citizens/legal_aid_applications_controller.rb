@@ -11,8 +11,12 @@ module Citizens
       return expired if application_error == :expired
 
       legal_aid_application.applicant.remember_me!
-      legal_aid_application.applicant_enter_means!
-      start_applicant_flow
+      if legal_aid_application.checking_citizen_answers?
+        continue_applicant_flow
+      else
+        legal_aid_application.applicant_enter_means!
+        start_applicant_flow
+      end
     end
 
   private
@@ -30,6 +34,13 @@ module Citizens
       refresh_session
       sign_applicant_in_via_devise(legal_aid_application.applicant)
       redirect_to citizens_legal_aid_applications_path
+    end
+
+    def continue_applicant_flow
+      sign_out current_provider if provider_signed_in?
+      refresh_session
+      sign_applicant_in_via_devise(legal_aid_application.applicant)
+      redirect_to citizens_check_answers_path
     end
 
     def sign_applicant_in_via_devise(applicant)
