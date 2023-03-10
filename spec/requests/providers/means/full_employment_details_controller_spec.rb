@@ -104,12 +104,6 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
         context "when the application is using the bank upload journey" do
           let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
 
-          before do
-            permission = create(:permission, :bank_statement_upload)
-            provider.permissions << permission
-            provider.save!
-          end
-
           it "redirects to the regular incomes page" do
             request
             expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(application))

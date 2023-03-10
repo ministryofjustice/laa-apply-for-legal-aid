@@ -1,6 +1,5 @@
 class PermissionsPopulator
   ROLES = {
-    "application.non_passported.bank_statement_upload.*" => "Can upload bank statements",
     "application.full_section_8.*" => "Can use full set of section 8 proceedings",
   }.freeze
 

@@ -332,15 +332,9 @@ RSpec.describe "Providers::BankStatementsController" do
           end
         end
 
-        context "when HMRC response status is applicant_not_employed, " \
-                "and application is using bank upload journey" do
+        context "when HMRC response status is applicant_not_employed" do
           before do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
-            permissions = [
-              create(:permission, :bank_statement_upload),
-            ]
-            provider.permissions << permissions
-            provider.save!
           end
 
           it "redirects to regular income page" do
