@@ -277,8 +277,8 @@ Devise.setup do |config|
     settings.name_identifier_format             = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
     settings.issuer                             = "apply"
     settings.authn_context                      = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
-    settings.idp_slo_target_url                 = laa_portal_config.idp_slo_target_url
-    settings.idp_sso_target_url                 = laa_portal_config.idp_sso_target_url
+    settings.idp_slo_service_url                 = laa_portal_config.idp_slo_target_url
+    settings.idp_sso_service_url                 = laa_portal_config.idp_sso_target_url
     settings.idp_cert = laa_portal_config.idp_cert
 
     settings.idp_cert_fingerprint_algorithm = laa_portal_config.idp_cert_fingerprint_algorithm

@@ -61,7 +61,7 @@ module LaaApplyForLegalAid
     config.x.laa_portal.idp_sso_target_url             = ENV.fetch("LAA_PORTAL_IDP_SSO_TARGET_URL", nil)
     config.x.laa_portal.idp_cert                       = ENV.fetch("LAA_PORTAL_IDP_CERT", nil)
     config.x.laa_portal.idp_cert_fingerprint_algorithm = ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM", nil)
-    config.x.laa_portal.mock_saml = ENV.fetch("LAA_PORTAL_MOCK_SAML", nil)
+    config.x.laa_portal.mock_saml = false
 
     config.x.laa_portal.certificate = ENV.fetch("LAA_PORTAL_CERTIFICATE", nil)
     config.x.laa_portal.secret_key = ENV.fetch("LAA_PORTAL_SECRET_KEY", nil)
