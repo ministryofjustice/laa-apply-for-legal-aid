@@ -31,7 +31,7 @@ gem "webdack-uuid_migration", "~> 1.4.0"
 gem "bootsnap", ">= 1.1.0", require: false
 
 # Authentication
-gem "devise", ">= 4.8.0" # User authentication
+gem "devise" # User authentication
 gem "devise_saml_authenticatable", ">= 1.7.0"
 gem "omniauth", ">= 2.0.0"
 gem "omniauth-google-oauth2", ">= 0.8.1"
