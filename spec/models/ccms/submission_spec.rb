@@ -176,14 +176,14 @@ module CCMS
       end
     end
 
-    describe "#restart_existing_submission!" do
+    describe "#restart_current_step!" do
       it "is an alias of process_async!" do
-        expect(submission.method(:restart_existing_submission!)).to eql(submission.method(:process_async!))
+        expect(submission.method(:restart_current_step!)).to eql(submission.method(:process_async!))
       end
     end
 
-    describe "#complete_restart!" do
-      subject(:complete_restart) { submission.complete_restart! }
+    describe "#restart_from_beginning!" do
+      subject(:complete_restart) { submission.restart_from_beginning! }
 
       let(:state) { :document_ids_obtained }
       let(:applicant_poll_count) { 1 }

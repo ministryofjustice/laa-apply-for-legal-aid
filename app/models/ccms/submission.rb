@@ -40,7 +40,7 @@ module CCMS
     def process_async!
       SubmissionProcessWorker.perform_async(id, aasm_state)
     end
-    alias_method :restart_existing_submission!, :process_async!
+    alias_method :restart_current_step!, :process_async!
 
     def sidekiq_running?
       return :running if Sidekiq::Workers.new.map(&:to_s).to_s.scan(id).count.positive?
@@ -49,7 +49,7 @@ module CCMS
       false
     end
 
-    def complete_restart!
+    def restart_from_beginning!
       update!(aasm_state: "initialised", case_poll_count: 0, applicant_poll_count: 0)
       process_async!
     end
