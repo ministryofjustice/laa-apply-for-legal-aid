@@ -1,6 +1,6 @@
 class PermissionsPopulator
   ROLES = {
-    "application.full_section_8.*" => "Can use full set of section 8 proceedings",
+    # "example.permission.group" => "Description of example group",
   }.freeze
 
   def self.run
