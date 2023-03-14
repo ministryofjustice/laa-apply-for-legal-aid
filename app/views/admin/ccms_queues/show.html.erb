@@ -15,113 +15,92 @@
     <h2 class="govuk-summary-card__title"><%= @legal_aid_application.application_ref %> (<%= @submission.case_ccms_reference %>)</h2>
   </div>
   <div class="govuk-summary-card__content">
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".created_at") %></dt>
-        <dd class="govuk-summary-list__value"><%= l(@submission.created_at, format: :long_date_time) %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".updated_at") %></dt>
-        <dd class="govuk-summary-list__value"><%= l(@submission.updated_at, format: :long_date_time) %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".status") %></dt>
-        <dd class="govuk-summary-list__value"><%= @submission.aasm_state %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".applicant_poll_count") %></dt>
-        <dd class="govuk-summary-list__value"><%= @submission.applicant_poll_count %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".case_poll_count") %></dt>
-        <dd class="govuk-summary-list__value"><%= @submission.case_poll_count %></dd>
-      </div>
-    </dl>
+    <%= govuk_summary_list(actions: false) do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key { t(".created_at") }
+            row.with_value { l(@submission.created_at, format: :long_date_time) }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".updated_at") }
+            row.with_value { l(@submission.updated_at, format: :long_date_time) }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".status") }
+            row.with_value { @submission.aasm_state }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".applicant_poll_count") }
+            row.with_value { @submission.applicant_poll_count.to_s }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".case_poll_count") }
+            row.with_value { @submission.case_poll_count.to_s }
+          end
+        end %>
   </div>
 </div>
 
-<h2 class="govuk-heading-l"><%= t(".actions") %></h2>
-<% if @submission.sidekiq_running? %>
-  <p>The original job is still pending in sidekiq</p>
-<% else %>
-  <div class="govuk-!-padding-bottom-6">
-    <details>
-      <summary class="govuk-heading-m govuk-details__summary">
-        <%= t(".restart") %>
-      </summary>
-      <section>
-        <p><%= t(".restart_details") %></p>
-        <p><%= link_to_accessible t(".restart"), restart_current_submission_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
-      </section>
-    </details>
-    <details>
-      <summary class="govuk-heading-m govuk-details__summary">
-        <%= t(".reset") %>
-      </summary>
-      <section>
-        <div class="govuk-!-padding-bottom-2">
-          <p><%= t(".reset_details") %></p>
-          <p><%= link_to_accessible t(".reset"), reset_and_restart_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
-        </div>
-      </section>
-    </details>
-  </div>
-<% end %>
+<div class="govuk-!-padding-bottom-6">
+  <h2 class="govuk-heading-l"><%= t(".actions") %></h2>
+  <% if @submission.sidekiq_running? %>
+    <p>The original job is still pending in sidekiq</p>
+  <% else %>
+    <%= govuk_details(summary_text: t(".restart")) do %>
+      <p><%= t(".restart_details") %></p>
+      <p><%= link_to_accessible t(".restart"), restart_current_submission_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
+    <% end %>
+    <%= govuk_details(summary_text: t(".reset")) do %>
+      <p><%= t(".reset_details") %></p>
+      <p><%= link_to_accessible t(".reset"), reset_and_restart_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
+    <% end %>
+  <% end %>
+</div>
+
 <h2 class="govuk-heading-l"><%= t(".submission_histories") %></h2>
 <% @submission.submission_history.order(:created_at).each do |history| %>
   <div class="govuk-summary-card">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title"><%= history.id %> (<%= history.from_state %> > <%= history.to_state %>)</h2>
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title"><%= history.id %> (<%= history.from_state %> > <%= history.to_state %>)</h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <%= govuk_summary_list(actions: false) do |summary_list|
+            summary_list.with_row do |row|
+              row.with_key { t(".from_state") }
+              row.with_value { history.from_state }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t(".to_state") }
+              row.with_value { history.to_state }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t("generic.success") }
+              row.with_value { history.success.to_s }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t(".request") }
+              row.with_value do
+                if history.request.nil?
+                  t(".request_is_nil")
+                else
+                  govuk_details(summary_text: t(".expand")) do
+                    history.request
+                  end
+                end
+              end
+            end
+            summary_list.with_row do |row|
+              row.with_key { t(".response") }
+              row.with_value do
+                if history.response.nil?
+                  t(".response_is_nil")
+                else
+                  govuk_details(summary_text: t(".expand")) do
+                    history.response
+                  end
+                end
+              end
+            end
+          end %>
+    </div>
   </div>
-  <div class="govuk-summary-card__content">
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">from_state</dt>
-        <dd class="govuk-summary-list__value"><%= history.from_state %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"> to_state</dt>
-        <dd class="govuk-summary-list__value"><%= history.to_state %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t("generic.success") %></dt>
-        <dd class="govuk-summary-list__value"><%= history.success %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".request") %></dt>
-        <dd class="govuk-summary-list__value">
-          <% if history.request.nil? %>
-            Request is nil
-          <% else %>
-            <details>
-              <summary class="govuk-heading-m govuk-details__summary">
-                <%= t(".expand") %>
-              </summary>
-              <section>
-                <%= history.request %>
-              </section>
-            </details>
-          <% end %>
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key"><%= t(".response") %></dt>
-        <dd class="govuk-summary-list__value">
-          <% if history.response.nil? %>
-              response is nil
-          <% else %>
-            <details>
-              <summary class="govuk-heading-m govuk-details__summary">
-                <%= t(".expand") %>
-              </summary>
-              <section>
-                <%= history.response %>
-              </section>
-            </details>
-          <% end %>
-        </dd>
-      </div>
-    </dl>
-  </div>
-</div>
 <% end %>

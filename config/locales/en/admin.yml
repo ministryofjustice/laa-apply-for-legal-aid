@@ -54,8 +54,12 @@ en:
         reset: Reset submission
         reset_details: This will reset the submission to `initialized` and restart it.  This will generate a new CCMS reference so you should alert the provider and caseworkers
         submission_histories: Submission histories
+        from_state: From state
+        to_state: To state
         request: Request
+        request_is_nil: Request is nil
         response: Response
+        response_is_nil: Response is nil
         expand: Expand
     settings:
       show:
