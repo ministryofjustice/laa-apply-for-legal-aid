@@ -12,21 +12,11 @@ module Admin
     end
 
     def reset_and_restart
-      result = submission.complete_restart! # return from service
-      status = result ? :notice : :error
-      core = "submission #{submission_id}"
-      message = status.eql?(:error) ? "Restarting #{core} failed" : "Reset and restarted #{core}"
-      flash[status] = message
-      redirect_to action: :show
+      execute_submission_method(:restart_from_beginning!)
     end
 
     def restart_current_submission
-      result = submission.restart_existing_submission!
-      status = result ? :notice : :error
-      core = "submission #{submission_id}"
-      message = status.eql?(:error) ? "Restarting #{core} failed" : "Restarted #{core}"
-      flash[status] = message
-      redirect_to action: :show
+      execute_submission_method(:restart_current_step!)
     end
 
   private
@@ -41,6 +31,14 @@ module Admin
 
     def submission_id
       params.require(:id)
+    end
+
+    def execute_submission_method(method)
+      result = submission.send(method)
+      status = result ? :notice : :error
+      message = status.eql?(:error) ? "Restarting submission #{submission_id} failed" : "#{method.to_s.humanize} submission #{submission_id}"
+      flash[status] = message
+      redirect_to action: :show
     end
   end
 end
