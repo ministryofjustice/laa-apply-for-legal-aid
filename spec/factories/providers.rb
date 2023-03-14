@@ -14,14 +14,6 @@ FactoryBot.define do
       username { "NEETADESOR" }
     end
 
-    trait :with_bank_statement_upload_permissions do
-      permissions do
-        bank_statement_upload = Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-        bank_statement_upload = create(:permission, :bank_statement_upload) if bank_statement_upload.nil?
-        [bank_statement_upload]
-      end
-    end
-
     trait :with_full_section_8_permissions do
       permissions do
         full_section_8 = Permission.find_by(role: "application.full_section_8.*")

@@ -6,8 +6,5 @@ class CreatePermissionsTable < ActiveRecord::Migration[6.0]
     end
 
     add_index :permissions, :role, unique: true
-
-    require Rails.root.join("db/seeds/permissions")
-    PermissionsPopulator.run
   end
 end

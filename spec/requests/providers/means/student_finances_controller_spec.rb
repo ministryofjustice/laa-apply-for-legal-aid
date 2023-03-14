@@ -120,17 +120,11 @@ RSpec.describe Providers::Means::StudentFinancesController do
         end
       end
 
-      context "when the provider has bank statement upload permissions" do
+      context "when the application is using the bank upload journey" do
         let(:legal_aid_application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
 
         let(:next_page) do
           providers_legal_aid_application_means_regular_outgoings_path(legal_aid_application)
-        end
-
-        before do
-          permission = create(:permission, :bank_statement_upload)
-          provider.permissions << permission
-          provider.save!
         end
 
         it "redirects to the regular outgoings page" do
@@ -142,7 +136,7 @@ RSpec.describe Providers::Means::StudentFinancesController do
         end
       end
 
-      context "when the provider does not have bank statement upload permissions" do
+      context "when the application is not using the bank upload journey" do
         let(:next_page) do
           providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application)
         end

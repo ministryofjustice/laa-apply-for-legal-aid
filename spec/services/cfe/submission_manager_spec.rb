@@ -58,7 +58,6 @@ module CFE
                  :applicant_entering_means,
                  :with_regular_transactions,
                  vehicle:,
-                 provider: build(:provider, :with_bank_statement_upload_permissions),
                  attachments: [build(:attachment, :bank_statement)])
         end
 
@@ -194,7 +193,6 @@ module CFE
                  :with_everything,
                  :with_negative_benefit_check_result,
                  :applicant_entering_means,
-                 provider: build(:provider, :with_bank_statement_upload_permissions),
                  attachments: [build(:attachment, :bank_statement)])
         end
 

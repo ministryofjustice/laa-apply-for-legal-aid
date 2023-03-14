@@ -31,8 +31,6 @@ Given("I have completed a bank statement upload application with merits") do
     attachments: [build(:attachment, :bank_statement)],
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
@@ -71,8 +69,6 @@ Given("I have completed truelayer application with merits") do
     set_lead_proceeding: :da002,
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
@@ -111,8 +107,6 @@ Given("I have completed truelayer application with merits and no student finance
     student_finance: false,
   )
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
 
   login_as @legal_aid_application.provider
 end
@@ -146,8 +140,6 @@ Given("I have completed a passported application with merits") do
     set_lead_proceeding: :da002,
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider

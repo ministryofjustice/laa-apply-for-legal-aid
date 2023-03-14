@@ -354,20 +354,6 @@ Feature: Applicant details
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
 
   @javascript @vcr
-  Scenario: I am instructed to use CCMS when the applicant is not eligible
-    Given I start the application with a negative benefit check result
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    And I should be on a page showing "What is your client's employment status?"
-    And I select "None of the above"
-    When I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    Then I choose 'No'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "You need to apply using CCMS"
-
-  @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"

@@ -77,27 +77,9 @@ RSpec.describe "does client use online banking requests" do
       context "when provider_received_citizen_consent is false" do
         let(:provider_received_citizen_consent) { "false" }
 
-        context "when provider is bank statement upload enabled" do
-          before do
-            permission = build(:permission, :bank_statement_upload)
-            application.provider.permissions << permission
-          end
-
-          it "redirects to the bank statement upload page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_bank_statements_path(application))
-          end
-        end
-
-        context "when provider is not bank statement upload enabled" do
-          before do
-            application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          end
-
-          it "redirects to the use ccms page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
-          end
+        it "redirects to the bank statement upload page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_bank_statements_path(application))
         end
       end
 

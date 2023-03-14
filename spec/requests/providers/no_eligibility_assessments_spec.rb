@@ -8,40 +8,37 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController" do
 
     let(:legal_aid_application) { create(:legal_aid_application, :with_attached_bank_statement, :with_transaction_period, :checking_non_passported_means, :with_proceedings, :with_employed_applicant) }
 
-    context "when provider has bank_statement_upload_permissions?" do
+    before do
+      login_provider
+    end
+
+    it "returns http success" do
+      request
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "displays the correct panel" do
+      request
+      expect(unescaped_response_body).to include(I18n.t(".providers.no_eligibility_assessments.show.cannot_calculate"))
+      expect(unescaped_response_body).to include(I18n.t(".providers.no_eligibility_assessments.show.caseworker_check"))
+      expect(unescaped_response_body).to include(I18n.t(".providers.no_eligibility_assessments.show.continue"))
+    end
+
+    it "writes an empty cfe_result if there is no HMRC data" do
+      request
+      expect(legal_aid_application.cfe_result.assessment_result).to eq "no_assessment"
+    end
+
+    context "when there is a hmrc response" do
       before do
-        legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-        login_provider
+        allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today)
+        allow(CFE::SubmissionManager).to receive(:call)
+        create(:hmrc_response, :use_case_one, legal_aid_application_id: legal_aid_application.id)
       end
 
-      it "returns http success" do
+      it "calls cfe when hmrc data exists" do
         request
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "displays the correct panel" do
-        request
-        expect(unescaped_response_body).to include(I18n.t(".providers.no_eligibility_assessments.show.cannot_calculate"))
-        expect(unescaped_response_body).to include(I18n.t(".providers.no_eligibility_assessments.show.caseworker_check"))
-        expect(unescaped_response_body).to include(I18n.t(".providers.no_eligibility_assessments.show.continue"))
-      end
-
-      it "writes an empty cfe_result if there is no HMRC data" do
-        request
-        expect(legal_aid_application.cfe_result.assessment_result).to eq "no_assessment"
-      end
-
-      context "when there is a hmrc response" do
-        before do
-          allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today)
-          allow(CFE::SubmissionManager).to receive(:call)
-          create(:hmrc_response, :use_case_one, legal_aid_application_id: legal_aid_application.id)
-        end
-
-        it "calls cfe when hmrc data exists" do
-          request
-          expect(CFE::SubmissionManager).to have_received(:call)
-        end
+        expect(CFE::SubmissionManager).to have_received(:call)
       end
     end
   end

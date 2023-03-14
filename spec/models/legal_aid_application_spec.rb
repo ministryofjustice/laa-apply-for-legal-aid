@@ -1722,42 +1722,29 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#uploading_bank_statements?" do
-    let(:laa) { create(:legal_aid_application, provider:, provider_received_citizen_consent: consent) }
+    let(:laa) { create(:legal_aid_application, provider_received_citizen_consent: consent) }
 
-    context "when provider does not have bank statement upload role" do
-      let(:provider) { create(:provider) }
-      let(:consent) { nil }
+    context "when client permission to use true layer received" do
+      let(:consent) { true }
 
       it "returns false" do
         expect(laa.uploading_bank_statements?).to be false
       end
     end
 
-    context "when provider has bank statement upload role" do
-      let(:provider) { create(:provider, :with_bank_statement_upload_permissions) }
+    context "when client permission to use true layer not received" do
+      let(:consent) { false }
 
-      context "when client permission to use true layer received" do
-        let(:consent) { true }
-
-        it "returns false" do
-          expect(laa.uploading_bank_statements?).to be false
-        end
+      it "returns true" do
+        expect(laa.uploading_bank_statements?).to be true
       end
+    end
 
-      context "when client permission to use true layer not received" do
-        let(:consent) { false }
+    context "when client permission to use true layer not specified" do
+      let(:consent) { nil }
 
-        it "returns true" do
-          expect(laa.uploading_bank_statements?).to be true
-        end
-      end
-
-      context "when client permission to use true layer not specified" do
-        let(:consent) { nil }
-
-        it "returns false" do
-          expect(laa.uploading_bank_statements?).to be false
-        end
+      it "returns false" do
+        expect(laa.uploading_bank_statements?).to be false
       end
     end
   end
