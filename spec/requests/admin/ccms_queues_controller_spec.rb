@@ -21,7 +21,7 @@ RSpec.describe Admin::CCMSQueuesController do
     end
 
     context "when there are no applications on the queue" do
-      it "has a link to the download csv path" do
+      it "displays a warning message" do
         get_index
         expect(response.body).to include("Queue is empty")
       end

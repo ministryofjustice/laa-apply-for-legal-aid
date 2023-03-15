@@ -34,11 +34,8 @@ module Admin
     end
 
     def execute_submission_method(method)
-      result = submission.send(method)
-      status = result ? :notice : :error
-      message = status.eql?(:error) ? "Restarting submission #{submission_id} failed" : "#{method.to_s.humanize} submission #{submission_id}"
-      flash[status] = message
-      redirect_to action: :show
+      submission.public_send(method)
+      redirect_to admin_ccms_queue_path(submission.id), notice: "#{method.to_s.humanize.sub('!', '')} submission #{submission_id}"
     end
   end
 end

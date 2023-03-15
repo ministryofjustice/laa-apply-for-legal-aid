@@ -44,7 +44,7 @@ module CCMS
 
     def sidekiq_running?
       return :running if Sidekiq::Workers.new.map(&:to_s).to_s.scan(id).count.positive?
-      return :in_retry if Sidekiq::RetrySet.new.map { |job| job.args.include?(id) }.any?(true)
+      return :in_retry if Sidekiq::RetrySet.new.any? { |job| job.args.include?(id) }
 
       false
     end
