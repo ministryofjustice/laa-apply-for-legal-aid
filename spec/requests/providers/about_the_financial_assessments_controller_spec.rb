@@ -11,10 +11,10 @@ RSpec.describe "about financial assessments requests" do
   let(:application_id) { application.id }
 
   describe "GET /providers/applications/:legal_aid_application_id/about_the_financial_assessment" do
-    subject { get "/providers/applications/#{application_id}/about_the_financial_assessment" }
+    subject(:submit_get) { get "/providers/applications/#{application_id}/about_the_financial_assessment" }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { submit_get }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -22,7 +22,7 @@ RSpec.describe "about financial assessments requests" do
     context "when the provider is authenticated" do
       before do
         login_as application.provider
-        subject
+        submit_get
       end
 
       it "returns success" do
@@ -67,13 +67,13 @@ RSpec.describe "about financial assessments requests" do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/about_the_financial_assessment/submit" do
-    subject { patch "/providers/applications/#{application_id}/about_the_financial_assessment", params: }
+    subject(:submit_patch) { patch "/providers/applications/#{application_id}/about_the_financial_assessment", params: }
 
     let(:mocked_email_service) { instance_double(CitizenEmailService) }
     let(:params) { {} }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { submit_patch }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -89,7 +89,7 @@ RSpec.describe "about financial assessments requests" do
         it "redirects to and error page without calling the email service" do
           expect(CitizenEmailService).not_to receive(:new)
 
-          subject
+          submit_patch
 
           expect(response).to redirect_to(error_path(:page_not_found))
         end
@@ -105,36 +105,55 @@ RSpec.describe "about financial assessments requests" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant) }
 
           it "does not change the application state" do
-            expect { subject }.not_to change { application.reload.state }
+            expect { submit_patch }.not_to change { application.reload.state }
           end
 
           it "sends a new email to the citizen" do
-            expect(CitizenEmailService).to receive(:new).with(application).and_return(mocked_email_service)
+            allow(CitizenEmailService).to receive(:new).with(application).and_return(mocked_email_service)
             expect(mocked_email_service).to receive(:send_email)
 
             begin
-              subject
+              submit_patch
             rescue StandardError
               nil
+            end
+          end
+
+          context "when a previously scheduled email exists" do
+            before { create(:scheduled_mailing, :due_later, :citizen_financial_reminder, addressee: starting_email, legal_aid_application: application) }
+
+            let(:starting_email) { "john.snow@knows_nothing.com" }
+
+            it "deletes the existing record" do
+              expect(ScheduledMailing.where(addressee: starting_email).count).to eq 1
+              expect { submit_patch }.to change(ScheduledMailing, :count).by(1) # it deletes the existing one, and then creates two new
+              expect(ScheduledMailing.where(addressee: starting_email).count).to eq 0
+              expect(ScheduledMailing.where(addressee: application.applicant.email).count).to eq 2
+            end
+          end
+
+          context "when no previously scheduled email exists" do
+            it "creates two new scheduled mailings" do
+              expect { submit_patch }.to change(ScheduledMailing, :count).by(2)
             end
           end
         end
 
         it 'changes the application state to "provider_submitted"' do
-          expect { subject }
+          expect { submit_patch }
             .to change { application.reload.state }
             .from("provider_confirming_applicant_eligibility").to("awaiting_applicant")
         end
 
         it "sends an e-mail to the citizen" do
-          expect(CitizenEmailService).to receive(:new).with(application).and_return(mocked_email_service)
+          allow(CitizenEmailService).to receive(:new).with(application).and_return(mocked_email_service)
           expect(mocked_email_service).to receive(:send_email)
 
-          subject
+          submit_patch
         end
 
         it "display confirmation page after calling the email service" do
-          subject
+          submit_patch
           expect(response).to redirect_to providers_legal_aid_application_application_confirmation_path(application_id)
         end
       end
@@ -143,17 +162,17 @@ RSpec.describe "about financial assessments requests" do
         let(:params) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          submit_patch
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          expect { subject }.to change { application.reload.draft? }.from(false).to(true)
+          expect { submit_patch }.to change { application.reload.draft? }.from(false).to(true)
         end
 
         it "does not send an email" do
           expect(CitizenEmailService).not_to receive(:new).with(application)
-          subject
+          submit_patch
         end
       end
     end
