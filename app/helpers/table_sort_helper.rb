@@ -26,10 +26,10 @@ module TableSortHelper
   #
   #   will generate a `td` tag with id '2'
   #
-  def sort_column_cell(args, &block)
+  def sort_column_cell(args, &)
     combine_right = args.delete(:combine_right)
     sort_by = args.delete(:sort_by)
-    content = args.delete(:content) || capture(&block)
+    content = args.delete(:content) || capture(&)
     merge_with_class! args, ["table-combine_right_if_narrow", "narrow_#{combine_right}"] if combine_right
     merge_with_class! args, %w[govuk-table__cell sortable-cell]
     args["data-sort-value"] = sort_by.is_a?(Array) ? sort_by.join : sort_by

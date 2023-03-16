@@ -31,9 +31,9 @@ module Citizens
       redirect_to error_path(:assessment_already_completed, default_url_options)
     end
 
-    def switch_locale(&action)
+    def switch_locale(&)
       locale = params[:locale] || I18n.default_locale
-      I18n.with_locale(locale, &action)
+      I18n.with_locale(locale, &)
     end
   end
 end
