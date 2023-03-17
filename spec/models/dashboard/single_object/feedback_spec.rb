@@ -35,7 +35,7 @@ module Dashboard
         end
 
         it "returns an array summarising the feedback" do
-          is_expected.to eql expected_response
+          expect(build_row).to eql expected_response
         end
       end
 

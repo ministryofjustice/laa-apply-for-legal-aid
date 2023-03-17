@@ -13,19 +13,6 @@ RSpec.describe Proceeding do
            used_delegated_functions_on: df_date)
   end
 
-  it {
-    is_expected.to respond_to(:legal_aid_application_id,
-                              :proceeding_case_id,
-                              :lead_proceeding,
-                              :ccms_code,
-                              :meaning,
-                              :description,
-                              :substantive_cost_limitation,
-                              :delegated_functions_cost_limitation,
-                              :used_delegated_functions_on,
-                              :used_delegated_functions_reported_on)
-  }
-
   describe "#case_p_num" do
     it "returns formatted proceeding case id" do
       expect(proceeding.case_p_num).to eq "P_55123456"

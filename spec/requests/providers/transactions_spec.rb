@@ -106,7 +106,7 @@ RSpec.describe Providers::TransactionsController do
 
   shared_examples_for "PATCH #providers/transactions" do
     it "saves the selected transactions" do
-      expect { subject }.to change { bank_transaction_B.reload.transaction_type }.from(nil).to(transaction_type)
+      expect { subject }.to change { bank_transaction2.reload.transaction_type }.from(nil).to(transaction_type)
     end
 
     it "does not change other applicants transactions" do
@@ -115,10 +115,10 @@ RSpec.describe Providers::TransactionsController do
   end
 
   describe "updating transactions" do
-    let!(:bank_transaction_A) { create(:bank_transaction, bank_account:, operation: transaction_type.operation, transaction_type:) }
-    let!(:bank_transaction_B) { create(:bank_transaction, bank_account:, operation: transaction_type.operation) }
+    let!(:bank_transaction1) { create(:bank_transaction, bank_account:, operation: transaction_type.operation, transaction_type:) }
+    let!(:bank_transaction2) { create(:bank_transaction, bank_account:, operation: transaction_type.operation) }
     let!(:bank_transaction_other_applicant) { create(:bank_transaction, operation: transaction_type.operation) }
-    let(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant] }
+    let(:selected_transactions) { [bank_transaction2, bank_transaction_other_applicant] }
     let(:params) do
       {
         transaction_type: transaction_type.name,
@@ -133,7 +133,7 @@ RSpec.describe Providers::TransactionsController do
 
       context "when being set to benefits" do
         let!(:benefits_transaction_type) { create(:transaction_type, :benefits) }
-        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, benefit_bank_transaction] }
+        let!(:selected_transactions) { [bank_transaction2, bank_transaction_other_applicant, benefit_bank_transaction] }
         let!(:benefit_bank_transaction) { create(:bank_transaction, :benefits, bank_account:, meta_data: nil) }
         let(:params) do
           {
@@ -159,7 +159,7 @@ RSpec.describe Providers::TransactionsController do
 
       context "when there are identified benefits" do
         let!(:benefits_transaction_type) { create(:transaction_type, :benefits) }
-        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, benefit_bank_transaction, child_benefit_bank_transaction] }
+        let!(:selected_transactions) { [bank_transaction2, bank_transaction_other_applicant, benefit_bank_transaction, child_benefit_bank_transaction] }
         let!(:benefit_bank_transaction) { create(:bank_transaction, :benefits, bank_account:, meta_data: nil) }
         let!(:child_benefit_bank_transaction) do
           create(:bank_transaction, :benefits, bank_account:, meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
@@ -178,7 +178,7 @@ RSpec.describe Providers::TransactionsController do
 
       context "when being set to friends_or_family" do
         let!(:friends_or_family_transaction_type) { create(:transaction_type, :friends_or_family) }
-        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, friends_or_family_bank_transaction] }
+        let!(:selected_transactions) { [bank_transaction2, bank_transaction_other_applicant, friends_or_family_bank_transaction] }
         let!(:friends_or_family_bank_transaction) { create(:bank_transaction, :friends_or_family, bank_account:, meta_data: nil) }
         let(:params) do
           {
@@ -217,7 +217,7 @@ RSpec.describe Providers::TransactionsController do
 
       context "when being set to rent" do
         let!(:outgoing_bank_transaction_type) { create(:transaction_type, :rent_or_mortgage) }
-        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, outgoing_bank_transaction] }
+        let!(:selected_transactions) { [bank_transaction2, bank_transaction_other_applicant, outgoing_bank_transaction] }
         let!(:outgoing_bank_transaction) { create(:bank_transaction, :rent_or_mortgage, bank_account:, meta_data: nil) }
         let(:params) do
           {

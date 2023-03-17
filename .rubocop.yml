@@ -1,7 +1,6 @@
-require:
-  - rubocop-performance
-
 inherit_from: .rubocop_todo.yml
+
+require: rubocop-performance
 
 inherit_gem:
   rubocop-govuk:
@@ -15,15 +14,10 @@ inherit_mode:
 
 AllCops:
   NewCops: enable
-  SuggestExtensions: false
   Exclude:
-  - 'db/schema.rb'
-  - 'vendor/**/*'
-  - 'node_modules/**/*'
-  - 'ccms_integration/*'
-  - 'tmp/**/*'
-  - 'log/**/*'
-  - 'db/migrate/[2018-2022]*'
+    - 'ccms_integration/*'
+    - 'log/**/*'
+    - 'db/migrate/*'
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
