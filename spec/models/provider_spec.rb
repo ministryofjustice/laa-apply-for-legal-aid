@@ -33,7 +33,6 @@ RSpec.describe Provider do
     context "with no permissions for provider and their firm" do
       let(:firm) { create(:firm, :with_no_permissions) }
       let(:provider) { create(:provider, :with_no_permissions, firm:) }
-      let(:AlertManager) { instance_double(Tracker) }
 
       it "returns false" do
         expect(provider.user_permissions).to be_empty
