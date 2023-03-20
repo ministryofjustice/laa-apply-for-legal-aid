@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_094303) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_21_081156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -705,6 +705,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_094303) do
     t.index ["legal_aid_application_id"], name: "index_parties_mental_capacities_on_legal_aid_application_id"
   end
 
+  create_table "partners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.boolean "has_national_insurance_number"
+    t.string "national_insurance_number"
+    t.uuid "legal_aid_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
+  end
+
   create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "role"
     t.string "description"
@@ -1006,6 +1018,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_094303) do
   add_foreign_key "opponents", "legal_aid_applications"
   add_foreign_key "opponents_applications", "proceedings"
   add_foreign_key "parties_mental_capacities", "legal_aid_applications"
+  add_foreign_key "partners", "legal_aid_applications"
   add_foreign_key "policy_disregards", "legal_aid_applications"
   add_foreign_key "proceedings", "legal_aid_applications"
   add_foreign_key "prohibited_steps", "proceedings"
