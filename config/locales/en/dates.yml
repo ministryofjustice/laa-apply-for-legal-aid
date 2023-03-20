@@ -1,5 +1,8 @@
 ---
 en:
+  time:
+    formats:
+      long_date_time: "%-d %B %Y @ %l:%M%p"
   date:
     formats:
       default: "%Y-%m-%d"
