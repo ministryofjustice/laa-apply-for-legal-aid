@@ -26,7 +26,14 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
   end
 
   describe "PATCH /providers/:application_id/has_national_insurance_number" do
-    subject! { patch providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application), params: }
+    subject(:patch_has_nino) { patch providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application), params: }
+
+    before do
+      allow(Setting).to receive(:partner_means_assessment?).and_return(enable_pma)
+      patch_has_nino
+    end
+
+    let(:enable_pma) { false }
 
     context "when form submitted with Save as draft button" do
       let(:params) { { applicant: { has_national_insurance_number: "" }, draft_button: "Save and come back later" } }
@@ -42,6 +49,14 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
       it "redirects to the check your answers page for the applicant" do
         expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
       end
+
+      context "when the MTR feature flag is on" do
+        let(:enable_pma) { true }
+
+        it "redirects to the client_has_partner page" do
+          expect(response).to redirect_to(providers_legal_aid_application_client_has_partner_path(legal_aid_application))
+        end
+      end
     end
 
     context "when no chosen" do
@@ -49,6 +64,14 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
 
       it "redirects to the check your answers page for the applicant" do
         expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      end
+
+      context "when the MTR feature flag is on" do
+        let(:enable_pma) { true }
+
+        it "redirects to the client_has_partner page" do
+          expect(response).to redirect_to(providers_legal_aid_application_client_has_partner_path(legal_aid_application))
+        end
       end
     end
 
