@@ -71,11 +71,12 @@
         <%= form.govuk_file_field :original_file, label: { text: t("generic.attach_file"), size: "m" },
                                                   hint: { text: t(".size_hint") },
                                                   classes: ["govuk-file-upload #{form_group_error_class}"] %>
-        <%= form.submit(
+        <%= form.govuk_submit(
               t("generic.upload"),
               id: "upload",
+              value: 'Upload',
               name: "upload_button",
-              class: "govuk-button govuk-button--secondary form-button moj-multi-file-upload__button",
+              class: "govuk-button--secondary moj-multi-file-upload__button",
             ) %>
       </div>
     </div>

@@ -1,19 +1,19 @@
-<% if show_continue %>
-  <%= form.submit(
-        continue_button_text,
-        id: continue_id,
-        name: "continue_button",
-        class: "govuk-button form-button govuk-!-display-none-print",
-        data: { module: "govuk-button" },
-      ) %>
-<% end %>
-<% if show_draft %>
-  <% left_margin = show_continue == true ? "govuk-!-margin-left-3" : "govuk-!-margin-left-0" %>
-  <%= form.submit(
-        draft_button_text,
-        name: "draft_button",
-        id: "draft_button",
-        class: "govuk-button form-button govuk-secondary-button #{left_margin} govuk-!-display-none-print",
-        data: { module: "govuk-button" },
-      ) %>
+<div class='govuk-button-group'>
+  <% if show_continue %>
+    <%= form.govuk_submit(
+          continue_button_text,
+          id: continue_id,
+          name: "continue_button",
+          class: "govuk-!-display-none-print",
+        ) %>
   <% end %>
+  <% if show_draft %>
+    <%= form.govuk_submit(
+          draft_button_text,
+          name: "draft_button",
+          id: "draft_button",
+          secondary: true,
+          class: "govuk-!-display-none-print",
+        ) %>
+  <% end %>
+</div>
