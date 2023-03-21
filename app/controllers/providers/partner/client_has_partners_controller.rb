@@ -7,7 +7,7 @@ module Providers
 
       def update
         @form = Providers::Partners::ClientHasPartnerForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+        render :show unless save_continue_or_draft(@form, has_partner: @form.has_partner?)
       end
 
     private

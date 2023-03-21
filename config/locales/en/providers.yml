@@ -510,6 +510,12 @@ en:
               - is an opponent in the case
               - has 'contrary interest' in the case - this means they want a different outcome to your client
           error: Select yes if your client has a partner
+    partners:
+      details:
+        show:
+          page_title: Enter the partner's details
+          has_national_insurance_number: Does the partner have a National Insurance number?
+          nino_label: Enter National Insurance number
     has_national_insurance_numbers:
       show:
         page_title: Does the client have a National Insurance number?
