@@ -4,15 +4,16 @@
           continue_button_text,
           id: continue_id,
           name: "continue_button",
-          value: 'Continue',
+          value: continue_button_text,
           class: "govuk-!-display-none-print",
         ) %>
   <% end %>
   <% if show_draft %>
     <%= form.govuk_submit(
           draft_button_text,
-          name: "draft_button",
           id: "draft_button",
+          name: "draft_button",
+          value: draft_button_text,
           secondary: true,
           class: "govuk-!-display-none-print",
         ) %>
