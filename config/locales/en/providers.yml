@@ -501,14 +501,14 @@ en:
           details_content_para_one: "A partner is someone your client is:"
           details_content_para_two: "Do not include anyone who:"
           details:
-            list_one: |
-              married to
-              in a civil partnership with
-              living with as if they were married or in a civil partnership
-            list_two: |
-              your client is permanently separated from
-              is an opponent in the case
-              has 'contrary interest' in the case - this means they want a different outcome to your client
+            list_one:
+              - married to
+              - in a civil partnership with
+              - living with as if they were married or in a civil partnership
+            list_two:
+              - your client is permanently separated from
+              - is an opponent in the case
+              - has 'contrary interest' in the case - this means they want a different outcome to your client
           error: Select yes if your client has a partner
     has_national_insurance_numbers:
       show:
