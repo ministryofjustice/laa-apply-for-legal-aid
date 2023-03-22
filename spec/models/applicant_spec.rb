@@ -12,7 +12,7 @@ RSpec.describe Applicant do
       end
     end
 
-    context "and the partner means test feature flag isoff" do
+    context "and the partner means test feature flag is off" do
       before { allow(Setting).to receive(:partner_means_assessment?).and_return(false) }
 
       it "pre-populates the has_partner field with false" do
