@@ -4,7 +4,7 @@ require "omniauth"
 class Applicant < ApplicationRecord
   devise :rememberable
 
-  attribute :has_partner, default: -> { Setting.partner_means_assessment? ? nil : false }
+  attribute :has_partner, :boolean, default: -> { Setting.partner_means_assessment? ? nil : false }
 
   NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
 
