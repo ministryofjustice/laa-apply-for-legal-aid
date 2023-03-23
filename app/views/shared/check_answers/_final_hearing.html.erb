@@ -1,4 +1,3 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
 <% final_hearings = proceeding.final_hearings.send(level_of_service) %>
 <% if final_hearings.any? %>
   <% final_hearing = final_hearings.first %>

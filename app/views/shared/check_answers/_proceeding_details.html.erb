@@ -9,53 +9,52 @@
                               class: "govuk-link govuk-link-right" %></p>
   </div>
 </div>
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= render(
-        "shared/check_answers/client_involvement_type_details",
-        proceeding:,
-        read_only:,
-      ) %>
-  <%= render(
-        "shared/check_answers/delegated_function_details",
-        proceeding:,
-        read_only:,
-      ) %>
-  <% if proceeding.used_delegated_functions? %>
-    <%= render(
-          "shared/check_answers/level_of_service",
-          proceeding:,
-          level_of_service: :emergency,
-          read_only:,
-        ) %>
-    <%= render(
-          "shared/check_answers/final_hearing",
-          proceeding:,
-          level_of_service: :emergency,
-          read_only:,
-        ) %>
-    <%= render(
-          "shared/check_answers/scope_limits",
-          proceeding:,
-          level_of_service: :emergency,
-          read_only:,
-        ) %>
+
+<%= govuk_summary_list(actions: false, classes: 'govuk-!-margin-bottom-9') do |summary_list| %>
+  <%= summary_list.with_row(classes: "#{proceeding.name}_client_involvement_type") do |row| %>
+    <%= row.with_key(text: t('.client_involvement_type_details.question'), classes: 'govuk-!-width-one-half') %>
+    <%= row.with_value { proceeding.client_involvement_type_description } %>
   <% end %>
+  
+  <%= summary_list.with_row(classes: "#{proceeding.name}_used_delegated_functions_on") do |row| %>
+    <%= row.with_key(text: t('.delegated_function_details.question'), classes: 'govuk-!-width-one-half') %>
+    <%= row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".delegated_function_details.not_used") } %>
+  <% end %>
+  
+  <% if proceeding.used_delegated_functions? %>
+    <%= summary_list.with_row(classes: "#{proceeding.name}_emergency_level_of_service_#{proceeding.id}") do |row| %>
+      <%= row.with_key(text: t(".level_of_service.emergency.question"), classes: 'govuk-!-width-one-half') %>
+      <%= row.with_value { proceeding.send("emergency_level_of_service_name") } %>
+    <% end %>
+
+    <%= render(
+      "shared/check_answers/final_hearing",
+      proceeding:,
+      level_of_service: :emergency,
+      read_only:,
+    ) %>
+
+    <%= summary_list.with_row(classes: "#{proceeding.name}_emergency_scope_limitations_#{proceeding.id}") do |row| %>
+      <%= row.with_key(text: t(".level_of_service.emergency.question"), classes: 'govuk-!-width-one-half') %>
+      <%= row.with_value { scope_limits(proceeding, 'emergency') } %>
+    <% end %>
+
+  <% end %>
+
+  <%= summary_list.with_row(classes: "#{proceeding.name}_substantive_level_of_service_#{proceeding.id}") do |row| %>
+    <%= row.with_key(text: t(".level_of_service.substantive.question"), classes: 'govuk-!-width-one-half') %>
+    <%= row.with_value { proceeding.send("substantive_level_of_service_name") } %>
+  <% end %>
+
   <%= render(
-        "shared/check_answers/level_of_service",
-        proceeding:,
-        level_of_service: :substantive,
-        read_only:,
-      ) %>
-  <%= render(
-        "shared/check_answers/final_hearing",
-        proceeding:,
-        level_of_service: :substantive,
-        read_only:,
-      ) %>
-  <%= render(
-        "shared/check_answers/scope_limits",
-        proceeding:,
-        level_of_service: :substantive,
-        read_only:,
-      ) %>
-</dl>
+    "shared/check_answers/final_hearing",
+    proceeding:,
+    level_of_service: :substantive,
+    read_only:,
+  ) %>
+
+  <%= summary_list.with_row(classes: "#{proceeding.name}_substantive_scope_limitations_#{proceeding.id}") do |row| %>
+    <%= row.with_key(text: t(".level_of_service.substantive.question"), classes: 'govuk-!-width-one-half') %>
+    <%= row.with_value { scope_limits(proceeding, 'substantive') } %>
+  <% end %>
+<% end %>
