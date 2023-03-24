@@ -1,0 +1,33 @@
+<%= form_with(
+      url: providers_legal_aid_application_client_has_partner_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title", count: pluralize(@legal_aid_application.opponents.count, "opponent").to_s),
+                    template: :basic,
+                    form: do %>
+    <%= form.govuk_collection_radio_buttons :has_partner,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            inline: true,
+                                            legend: { text: t(".page_title"), size: "xl", tag: "h1" } do %>
+
+        <p class="govuk-body"><%= t(".details_content_para_one") %></p>
+        <ul class="govuk-list govuk-list--bullet">
+          <% t(".details.list_one").each do |bullet| %>
+            <li><%= bullet %></li>
+          <% end %>
+        </ul>
+        <p class="govuk-body"><%= t(".details_content_para_two") %></p>
+        <ul class="govuk-list govuk-list--bullet">
+          <% t(".details.list_two").each do |bullet| %>
+            <li><%= bullet %></li>
+          <% end %>
+        </ul>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

@@ -1,6 +1,7 @@
 module Flow
   class ProviderFlowService < BaseFlowService
     steps = {}.deep_merge(Flows::ProviderStart::STEPS)
+              .deep_merge(Flows::ProviderPartner::STEPS)
               .deep_merge(Flows::ProviderProceedingLoop::STEPS)
               .deep_merge(Flows::ProviderDWPOverride::STEPS)
               .deep_merge(Flows::ProviderCapital::STEPS)
