@@ -26,5 +26,13 @@ FactoryBot.define do
     trait :under_16 do
       date_of_birth { 16.years.ago + 1.day }
     end
+
+    trait :with_address do
+      address_line_one { Faker::Address.building_number }
+      address_line_two { Faker::Address.street_address }
+      city { Faker::Address.city }
+      county { Faker::Address.city }
+      postcode { ["SW10 9LB", "W6 0LQ", "SW1A 1AA", "RG2 7PU", "BH22 7HR"].sample }
+    end
   end
 end

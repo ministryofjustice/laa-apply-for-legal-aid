@@ -714,6 +714,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_155942) do
     t.uuid "legal_aid_application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "shared_address_with_client"
+    t.string "address_line_one"
+    t.string "address_line_two"
+    t.string "city"
+    t.string "county"
+    t.string "postcode"
+    t.string "organisation"
+    t.boolean "lookup_used", default: false, null: false
+    t.string "lookup_id"
     t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
   end
 
