@@ -6,15 +6,25 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_client_has_partner_path(application) },
           forward: lambda do |_application, options|
             if options[:has_partner]
-              :details
+              :partner_details
             else
               :check_provider_answers
             end
           end,
         },
-        details: {
+        partner_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_details_path(application) },
-          forward: :check_provider_answers, # temp until next page is added and this flow is extended
+          forward: :shared_addresses,
+        },
+        shared_addresses: {
+          path: ->(application) { urls.providers_legal_aid_application_shared_address_path(application) },
+          forward: lambda do |_application, options|
+            if options[:shared_address]
+              :check_provider_answers
+            else
+              :partner_address_lookups
+            end
+          end,
         },
         partner_address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_partners_address_lookup_path(application) },
