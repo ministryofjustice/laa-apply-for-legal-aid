@@ -88,7 +88,7 @@ references:
     run:
       name: Kubectl deployment setup UAT
       command: |
-        $(aws ecr get-login --region eu-west-2 --no-include-email)
+        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${ECR_ENDPOINT}
         echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
         kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
         kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
