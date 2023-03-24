@@ -43,7 +43,7 @@ RSpec.describe Partners::SharedAddressForm, type: :form do
 
       it "adds custom blank error message" do
         error_messages = shared_address_form.errors.messages.values.flatten
-        expect(error_messages).to include("Select yes if the partner has the same address as your client")
+        expect(error_messages).to include("Select yes if the partner's correspondence address is the same as your client's")
       end
     end
   end

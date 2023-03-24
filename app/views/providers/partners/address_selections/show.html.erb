@@ -1,0 +1,47 @@
+<%= form_with(
+      model: @form,
+      scope: :address_selection,
+      url: providers_legal_aid_application_partners_address_selection_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+    <%= page_template(
+          page_title: t(".page_title"),
+          template: :basic,
+          form:,
+        ) do %>
+
+    <%= form.govuk_fieldset legend: { text: t(".heading"), tag: "h1", size: "xl" } do %>
+
+      <p class="govuk-label">
+        <%= t("generic.address.postcode") %>
+      </p>
+      <p class='govuk-body govuk-!-font-weight-bold' role='alert'>
+        <%= @form.postcode.insert(-4, " ") %>
+        <%= link_to_accessible(
+              t("generic.change"),
+              providers_legal_aid_application_partners_address_lookup_path(@legal_aid_application),
+              class: "govuk-body change-link change-postcode-link",
+              suffix: "postcode",
+            ) %>
+      </p>
+      <%= form.hidden_field :postcode %>
+
+      <% @addresses.each_with_index do |address, index| %>
+        <%= hidden_field_tag "address_selection[list][]", address.to_json, id: "address_selection_list_#{index}" %>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+      <%= form.govuk_collection_select :lookup_id,
+                                       @address_collection,
+                                       :id,
+                                       :address,
+                                       label: { text: t(".select_address_label") } %>
+
+      <p><%= link_to_accessible t(".link_text"), providers_legal_aid_application_partners_address_path(@legal_aid_application), class: "govuk-link" %></p>
+
+    <% end %>
+    <%= next_action_buttons continue_id: "select-address-button", show_draft: true, form: %>
+  <% end %>
+<% end %>

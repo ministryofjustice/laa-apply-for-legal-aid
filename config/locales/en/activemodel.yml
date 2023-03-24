@@ -301,6 +301,17 @@ en:
             national_insurance_number:
               blank: Enter a National Insurance number
               not_valid: Enter a valid National Insurance number
+            shared_address_with_client:
+              inclusion: Select yes if the partner's correspondence address is the same as your client's
+            address_line_one:
+              blank: Enter a building and street
+            city:
+              blank: Enter a town or city
+            lookup_id:
+              blank: Select an address from the list
+            postcode:
+              blank: Enter a postcode
+              invalid: Enter a real postcode
         attachment:
           attributes:
             attachment_type:

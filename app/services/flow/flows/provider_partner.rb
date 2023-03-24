@@ -16,6 +16,22 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_partners_details_path(application) },
           forward: :check_provider_answers, # temp until next page is added and this flow is extended
         },
+        partner_address_lookups: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_address_lookup_path(application) },
+          forward: :partner_address_selections,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: true,
+        },
+        partner_address_selections: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_address_selection_path(application) },
+          forward: :check_provider_answers,
+          check_answers: :check_provider_answers,
+        },
+        partner_addresses: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_address_path(application) },
+          forward: :check_provider_answers,
+          check_answers: :check_provider_answers,
+        },
       }.freeze
     end
   end

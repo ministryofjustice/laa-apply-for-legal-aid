@@ -1,0 +1,52 @@
+<% heading_type = @form.lookup_error.present? ? :lookup : :manual %>
+<%= form_with(
+      model: @form,
+      scope: :address,
+      url: providers_legal_aid_application_partners_address_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        form:,
+      ) do %>
+
+    <% if form.object.lookup_postcode.present? %>
+      <%= form.hidden_field :lookup_postcode %>
+      <div class='govuk-form-group'>
+        <%= label_tag t(".label_1"), class: "govuk-label" do %>
+          <%= t(".postcode") %>
+          <p class='govuk-body govuk-!-font-weight-bold'>
+            <%= form.object.lookup_postcode %>
+            <%= link_to_accessible(
+                  t("generic.change"),
+                  providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+                  class: "govuk-body change-link change-postcode-link",
+                ) %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if form.object.lookup_error.present? %>
+      <%= form.hidden_field :lookup_error %>
+      <%= govuk_inset_text(text: t("errors.address.#{form.object.lookup_error}")) %>
+    <% end %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <% group_error_class = @form.errors[:address_line_one].any? ? "govuk-form-group--error" : "" %>
+    <div class="govuk-form-group <%= group_error_class %>">
+      <%= form.govuk_text_field :address_line_one, label: { text: "Building and street" }, "aria-label": "Building and street line 1 of 2" %>
+      <%= form.govuk_text_field :address_line_two, label: { text: "Building and street", hidden: true },
+                                                   "aria-label": "Building and street line 2 of 2", field_with_error: :address_line_one %>
+    </div>
+
+    <%= form.govuk_text_field :city, width: "two-thirds" %>
+    <%= form.govuk_text_field :county, width: "two-thirds" %>
+    <%= form.govuk_text_field :postcode, hint: nil, width: 10 %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

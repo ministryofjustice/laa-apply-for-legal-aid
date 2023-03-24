@@ -17,7 +17,7 @@ RSpec.describe Addresses::PartnerAddressLookupForm, type: :form do
 
       it "has an error on postcode" do
         expect(form).to be_invalid
-        expect(form.errors[:postcode]).to match_array(["Enter a postcode in the right format"])
+        expect(form.errors[:postcode]).to match_array(["Enter a real postcode"])
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe Addresses::PartnerAddressLookupForm, type: :form do
 
       it "has an error on postcode" do
         expect(form).to be_invalid
-        expect(form.errors[:postcode]).to match_array(["Enter a postcode in the right format"])
+        expect(form.errors[:postcode]).to match_array(["Enter a real postcode"])
       end
     end
 
