@@ -96,8 +96,9 @@ gem "grover"
 # DFE formbuilder
 gem "govuk_design_system_formbuilder"
 
-# DFE ViewComponent library
+# ViewComponent
 gem "govuk-components"
+gem "view_component"
 
 # Catching unsafe migrations in development
 gem "strong_migrations"
