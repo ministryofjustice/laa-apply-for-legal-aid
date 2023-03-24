@@ -13,7 +13,7 @@ class BaseForm
       # If there are any errors on the form, in order to get the I18n keys, the ActiveModel::Naming module calls #model_name on the form **and all it's ancestors**,
       # so it will get called on this Base class. In this case, we just return our class - it won't get used and does no harm.
       #
-      return self if in?([BaseForm, BaseFileUploaderForm])
+      return self if name.match?(/Base.*Form/)
 
       @model_class || raise("Model class must be defined. Use: `form_for Class`")
     end
