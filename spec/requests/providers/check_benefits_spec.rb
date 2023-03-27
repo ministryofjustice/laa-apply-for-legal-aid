@@ -23,12 +23,6 @@ RSpec.describe Providers::CheckBenefitsController do
       expect(response).to have_http_status(:ok)
     end
 
-    describe "#pre_dwp_check?" do
-      it "returns true" do
-        expect(described_class.new.pre_dwp_check?).to be true
-      end
-    end
-
     it "generates a new check_benefit_result" do
       expect { subject }.to change(BenefitCheckResult, :count).by(1)
     end

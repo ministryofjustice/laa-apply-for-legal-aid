@@ -1,6 +1,5 @@
 module Providers
   class CheckBenefitsController < ProviderBaseController
-    include PreDWPCheckVisible
     include ApplicantDetailsCheckable
     include BenefitCheckSkippable
 

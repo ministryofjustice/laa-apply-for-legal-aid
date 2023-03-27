@@ -1,7 +1,5 @@
 module Providers
   class LimitationsController < ProviderBaseController
-    include PreDWPCheckVisible
-
     def show
       @form = LegalAidApplications::EmergencyCostOverrideForm.new(model: legal_aid_application)
       legal_aid_application.enter_applicant_details! unless no_state_change_required?

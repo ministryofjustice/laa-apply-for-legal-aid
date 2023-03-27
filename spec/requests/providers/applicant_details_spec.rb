@@ -33,12 +33,6 @@ RSpec.describe Providers::ApplicantDetailsController do
           expect(unescaped_response_body).to include(applicant.first_name)
         end
       end
-
-      describe "#pre_dwp_check?" do
-        it "returns true" do
-          expect(described_class.new.pre_dwp_check?).to be true
-        end
-      end
     end
   end
 

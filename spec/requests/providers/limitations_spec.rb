@@ -42,12 +42,6 @@ RSpec.describe Providers::LimitationsController do
         end
       end
     end
-
-    describe "#pre_dwp_check?" do
-      it "returns true" do
-        expect(described_class.new.pre_dwp_check?).to be true
-      end
-    end
   end
 
   describe "PATCH /providers/applications/:id/limitations" do

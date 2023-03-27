@@ -1,7 +1,6 @@
 module Providers
   module ProceedingLoop
     class EmergencyDefaultsController < ProviderBaseController
-      include PreDWPCheckVisible
       before_action :proceeding
 
       def show

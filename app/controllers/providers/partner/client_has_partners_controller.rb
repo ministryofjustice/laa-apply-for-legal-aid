@@ -1,8 +1,6 @@
 module Providers
   module Partner
     class ClientHasPartnersController < ProviderBaseController
-      include PreDWPCheckVisible
-
       def show
         @form = Providers::Partners::ClientHasPartnerForm.new(model: applicant)
       end

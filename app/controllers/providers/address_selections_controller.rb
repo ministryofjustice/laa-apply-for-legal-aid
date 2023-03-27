@@ -1,6 +1,5 @@
 module Providers
   class AddressSelectionsController < ProviderBaseController
-    include PreDWPCheckVisible
     AddressCollectionItem = Struct.new(:id, :address)
 
     def show

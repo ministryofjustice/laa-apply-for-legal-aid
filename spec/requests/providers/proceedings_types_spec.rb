@@ -61,12 +61,6 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
         end
       end
     end
-
-    describe "#pre_dwp_check?" do
-      it "returns true" do
-        expect(described_class.new.pre_dwp_check?).to be true
-      end
-    end
   end
 
   describe "create: POST /providers/applications/:legal_aid_application_id/proceedings_types" do
