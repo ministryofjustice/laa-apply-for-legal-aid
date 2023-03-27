@@ -650,7 +650,7 @@ GEM
     spring (4.1.1)
     strong_migrations (1.4.4)
       activerecord (>= 5.2)
-    super_diff (0.9.0)
+    super_diff (0.10.0)
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
