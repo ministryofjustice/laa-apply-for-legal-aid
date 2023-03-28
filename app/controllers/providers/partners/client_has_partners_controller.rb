@@ -1,5 +1,5 @@
 module Providers
-  module Partner
+  module Partners
     class ClientHasPartnersController < ProviderBaseController
       def show
         @form = Providers::Partners::ClientHasPartnerForm.new(model: applicant)

@@ -262,7 +262,7 @@ Rails.application.routes.draw do
         end
       end
 
-      scope module: :partner do
+      scope module: :partners do
         resource :client_has_partner, only: %i[show update]
       end
 

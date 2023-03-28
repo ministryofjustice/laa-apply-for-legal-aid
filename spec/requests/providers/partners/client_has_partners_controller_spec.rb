@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Partner::ClientHasPartnersController do
+RSpec.describe Providers::Partners::ClientHasPartnersController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 

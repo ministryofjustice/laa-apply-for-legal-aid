@@ -493,7 +493,7 @@ en:
           hearing-date-set: Has a date been set for the hearing?
           hearing-date: Enter the date
           hearing-date-hint: For example, 12 11 2007
-    partner:
+    partners:
       client_has_partners:
         show:
           page_title: Does your client have a partner?
@@ -510,7 +510,6 @@ en:
               - is an opponent in the case
               - has 'contrary interest' in the case - this means they want a different outcome to your client
           error: Select yes if your client has a partner
-    partners:
       details:
         show:
           page_title: Enter the partner's details
