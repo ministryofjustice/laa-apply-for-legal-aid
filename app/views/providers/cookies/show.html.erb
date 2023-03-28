@@ -12,7 +12,7 @@
 
     <% if @successfully_saved %>
       <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
-        <% notification_banner.heading(text: t(".success_message")) %>
+        <% notification_banner.with_heading(text: t(".success_message")) %>
         <%= link_to t(".go_back_link"), back_path %>
       <% end %>
     <% end %>
