@@ -62,12 +62,6 @@ RSpec.describe Providers::AddressSelectionsController do
         end
       end
     end
-
-    describe "#pre_dwp_check?" do
-      it "returns true" do
-        expect(described_class.new.pre_dwp_check?).to be true
-      end
-    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/address_selections" do

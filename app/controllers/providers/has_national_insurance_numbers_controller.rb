@@ -1,7 +1,5 @@
 module Providers
   class HasNationalInsuranceNumbersController < ProviderBaseController
-    include PreDWPCheckVisible
-
     def show
       @form = Applicants::HasNationalInsuranceNumberForm.new(model: applicant)
     end

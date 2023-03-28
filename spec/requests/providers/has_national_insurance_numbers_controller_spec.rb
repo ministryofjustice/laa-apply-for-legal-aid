@@ -7,10 +7,6 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
 
   before { login_as provider }
 
-  describe "#pre_dwp_check?" do
-    it { expect(described_class.new.pre_dwp_check?).to be true }
-  end
-
   describe "GET /providers/applications/:legal_aid_application_id/has_national_insurance_number" do
     subject! do
       get providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application)

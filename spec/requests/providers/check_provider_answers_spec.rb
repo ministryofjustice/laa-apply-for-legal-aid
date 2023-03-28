@@ -37,12 +37,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
         expect(response).to be_successful
       end
 
-      describe "#pre_dwp_check?" do
-        it "returns true" do
-          expect(described_class.new.pre_dwp_check?).to be true
-        end
-      end
-
       it "displays the correct page" do
         expect(unescaped_response_body).to include("Check your answers")
       end
