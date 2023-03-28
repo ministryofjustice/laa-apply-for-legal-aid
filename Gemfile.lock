@@ -233,7 +233,7 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    erb_lint (0.3.1)
+    erb_lint (0.4.0)
       activesupport
       better_html (>= 2.0.1)
       parser (>= 2.7.1.4)
@@ -728,7 +728,7 @@ DEPENDENCIES
   dibber
   discard (~> 1.2)
   dotenv-rails (>= 2.7.6)
-  erb_lint (= 0.3.1)
+  erb_lint (= 0.4.0)
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   geckoboard-ruby
