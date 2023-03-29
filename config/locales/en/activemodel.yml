@@ -280,6 +280,25 @@ en:
           attributes:
             details:
               blank: Enter reason for making a new application
+        partner:
+          attributes:
+            date_of_birth:
+              blank: Enter a valid date of birth
+              date_is_in_the_future: Date of birth must be in the past
+              date_not_valid: Enter a valid date of birth
+              earliest_allowed_date: Enter a valid date of birth
+            email:
+              blank: Enter an email address
+              invalid: Enter an email address in the correct format, such as name@example.com
+            first_name:
+              blank: Enter first name
+            has_national_insurance_number:
+              inclusion: Select yes if the client has a National Insurance number
+            last_name:
+              blank: Enter last name
+            national_insurance_number:
+              blank: Enter a National Insurance number
+              not_valid: Enter a valid National Insurance number
         attachment:
           attributes:
             attachment_type:

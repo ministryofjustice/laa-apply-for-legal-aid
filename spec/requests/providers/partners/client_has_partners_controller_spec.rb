@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Partner::ClientHasPartnersController do
+RSpec.describe Providers::Partners::ClientHasPartnersController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
@@ -36,8 +36,8 @@ RSpec.describe Providers::Partner::ClientHasPartnersController do
     context "when yes chosen" do
       let(:params) { { applicant: { has_partner: "true" } } }
 
-      it "redirects to the check your answers page for the applicant" do
-        expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      it "redirects to the partners_details page" do
+        expect(response).to redirect_to(providers_legal_aid_application_partners_details_path(legal_aid_application))
       end
     end
 

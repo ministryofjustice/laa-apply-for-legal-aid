@@ -262,8 +262,12 @@ Rails.application.routes.draw do
         end
       end
 
-      scope module: :partner do
+      scope module: :partners do
         resource :client_has_partner, only: %i[show update]
+      end
+
+      namespace :partners do
+        resource :details, only: %i[show update]
       end
 
       scope module: :application_merits_task do
