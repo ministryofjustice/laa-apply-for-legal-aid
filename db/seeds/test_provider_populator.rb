@@ -12,7 +12,6 @@ class TestProviderPopulator
     "Ahern & Co." => [808, %w[9F808X:21 3X808Z:22]],
     "Groves & Co." => [989, %w[7F809X:23 4X809Z:24]],
     "Sugarman & daughters" => [810, %w[6F810X:25 6X810Z:26]],
-    "Test Connor Co." => [118, %w[5F809X:27 5X809Z:28]],
     "User Research Assoc." => [11_475, %w[4F808X:26 4X808Z:27]],
     "EDWARD HAYES LLP" => [19_537, %w[1T462U:85605]],
     "LAWRENCE & CO SOLICITORS CDS LLP" => [33_230, %w[0Q974B:85981]],
@@ -37,7 +36,6 @@ class TestProviderPopulator
     "CG" => ["Groves & Co.", "chris.groves@digital.justice.gov.uk", 110],
     "jsugarman" => ["Sugarman & daughters", "joel.sugarman@digital.justice.gov.uk", 111],
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
-    "cm" => ["Test Connor Co.", "connor.mcquillan@digital.justice.gov.uk", 113],
     "rose" => ["Rose & Co.", "rose.azadkhan@digital.justice.gov.uk", 114],
     "mkeen" => ["Keen & Co.", "mike.keen@digital.justice.gov.uk", 115],
   }.freeze
