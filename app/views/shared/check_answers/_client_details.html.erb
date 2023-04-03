@@ -18,7 +18,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
-            html_attributes: { "aria-label": "#{t('generic.change')} {#{t('.last_name')}" },
+            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.last_name')}" },
           ) %>
     <% end %>
   <% end %>
@@ -30,7 +30,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
-            html_attributes: { "aria-label": "#{t('generic.change')} {#{t('.dob')}" },
+            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.dob')}" },
           ) %>
     <% end %>
   <% end %>
