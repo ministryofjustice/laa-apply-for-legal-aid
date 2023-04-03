@@ -7,7 +7,8 @@ module Providers
 
       def update
         @form = ::Partners::SharedAddressForm.new(form_params)
-        render :show unless save_continue_or_draft(@form, shared_address: @form.shared_address_with_client?)
+        run_method = @form.shared_address_with_client? ? :duplicate_applicants_address : nil
+        render :show unless save_run_continue_or_draft(@form, run_method, shared_address: @form.shared_address_with_client?)
       end
 
     private
