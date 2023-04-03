@@ -8,6 +8,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
       :at_entering_applicant_details,
       :with_proceedings,
       applicant:,
+      partner:,
       set_lead_proceeding: :da001,
     )
   end
@@ -17,6 +18,10 @@ RSpec.describe Providers::CheckProviderAnswersController do
   let(:parsed_html) { Nokogiri::HTML(response.body) }
   let(:proceeding_name) { application.lead_proceeding.name }
   let(:used_delegated_functions_answer) { parsed_html.at_css("#app-check-your-answers__#{proceeding_name}_used_delegated_functions_on .govuk-summary-list__value") }
+  let(:partner) { nil }
+  let(:pma_flag) { true }
+
+  before { allow(Setting).to receive(:partner_means_assessment?).and_return(pma_flag) }
 
   describe "GET /providers/applications/:legal_aid_application_id/check_provider_answers" do
     subject { get "/providers/applications/#{application_id}/check_provider_answers" }
@@ -94,6 +99,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
         expect(unescaped_response_body).to include(applicant.last_name)
         expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
         expect(unescaped_response_body).to include(applicant.national_insurance_number)
+        expect(unescaped_response_body).to include("Does your client have a partner?")
       end
 
       it "formats the address correctly" do
@@ -162,6 +168,27 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
         it "redirects to client completed means page" do
           expect(response).to redirect_to(providers_legal_aid_application_client_completed_means_path(application))
+        end
+      end
+
+      context "when the client has a partner" do
+        let(:applicant) { create(:applicant, :with_address, :with_partner) }
+        let(:partner) { create(:partner, :with_address) }
+
+        it "renders the partner block" do
+          expect(unescaped_response_body).to include("Partner's details")
+          expect(unescaped_response_body).to include(partner.first_name)
+          expect(unescaped_response_body).to include(partner.last_name)
+          expect(unescaped_response_body).to include(partner.date_of_birth.to_s)
+          expect(unescaped_response_body).to include(partner.national_insurance_number)
+        end
+      end
+
+      context "when the partner_means_assessment feature flag is off" do
+        let(:pma_flag) { false }
+
+        it "does not show the client has partner section" do
+          expect(unescaped_response_body).not_to include("Does your client have a partner?")
         end
       end
     end
