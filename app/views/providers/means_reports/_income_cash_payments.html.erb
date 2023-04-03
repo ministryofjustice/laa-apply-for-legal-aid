@@ -5,7 +5,7 @@
 <% credit_categories = TransactionType.credits.not_children %>
 
 <% if !@legal_aid_application.transaction_types.credits.exists? %>
-  <div class="govuk-body>"><%= t("generic.none") %></div>
+  <div class="govuk-body"><%= t("generic.none") %></div>
 <% end %>
 
 <dl id="income-cash-payments-questions" class="govuk-summary-list govuk-!-margin-bottom-9">

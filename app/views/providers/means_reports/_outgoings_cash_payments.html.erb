@@ -5,7 +5,7 @@
 <% debit_categories = TransactionType.debits %>
 
 <% if !@legal_aid_application.transaction_types.debits.exists? %>
-  <div class="govuk-body>"> <%= t("generic.none") %> </div>
+  <div class="govuk-body"> <%= t("generic.none") %> </div>
 <% end %>
 
 <dl id="outgoings-cash-payments-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
