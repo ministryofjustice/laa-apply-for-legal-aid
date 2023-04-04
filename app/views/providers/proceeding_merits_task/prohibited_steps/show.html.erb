@@ -13,6 +13,17 @@
       <%= form.govuk_radio_button :uk_removal, true, link_errors: true, label: { text: t("generic.yes") } %>
       <%= form.govuk_radio_button :uk_removal, false, label: { text: t("generic.no") } do %>
         <%= form.govuk_text_area :details, label: { text: t(".no-hint") }, rows: 5 %>
+
+        <%= form.govuk_check_boxes_fieldset :confirmed_not_change_of_name, multiple: false, legend: nil do %>
+          <%= form.govuk_check_box(
+                :confirmed_not_change_of_name,
+                true,
+                "",
+                multiple: false,
+                link_errors: true,
+                label: { text: t(".confirmed_not_change_of_name") },
+              ) %>
+        <% end %>
       <% end %>
     <% end %>
 
