@@ -21,7 +21,7 @@
       <% unless read_only %>
         <%= row.with_action(
               text: t("generic.change"),
-              href: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
+              href: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
               html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.property_value')}" },
             ) %>
       <% end %>

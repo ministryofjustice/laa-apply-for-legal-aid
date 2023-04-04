@@ -35,7 +35,7 @@
           <p><%= regular_transaction_amount %></p>
           <p><%= regular_transaction_frequency %></p>
         <% else %>
-          <%= answer_for_transaction_type(legal_aid_application:, transaction_type:) %>
+          <%= answer_for_transaction_type(legal_aid_application: @legal_aid_application, transaction_type:) %>
         <% end %>
       <% end %>
     <% end %>
