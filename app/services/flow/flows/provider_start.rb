@@ -66,6 +66,8 @@ module Flow
               :check_provider_answers
             end
           end,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: false,
         },
         # partner_flow called here
         check_provider_answers: {
