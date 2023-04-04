@@ -18,7 +18,8 @@
 
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
-    <%= check_answer_one_change_link(
+    <%= render(
+          "shared/check_answers/one_link_section",
           name: "dependants_#{index + 1}",
           url: providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant),
           question: "Dependant #{index + 1}: #{dependant.name}",

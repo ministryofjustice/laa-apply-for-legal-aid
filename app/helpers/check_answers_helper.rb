@@ -28,17 +28,6 @@ module CheckAnswersHelper
   end
 
   # Creates both the outer `div` and the inner list items
-  def check_answer_one_change_link(url:, question:, answer_hash:, name:, read_only: false)
-    render(
-      "shared/check_answers/one_link_section",
-      name:,
-      url:,
-      question:,
-      answer_hash:,
-      read_only:,
-    )
-  end
-
   def check_answer_change_link(name:, url:, question:, read_only: false)
     render(
       "shared/check_answers/only_link_section",
