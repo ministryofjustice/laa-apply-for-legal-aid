@@ -1,51 +1,72 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <h3 class="govuk-heading-m"><%= t("shared.check_answers.assets.property.heading") %></h3>
-<dl id="property-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= check_answer_link(
-        name: :own_home,
-        url: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
-        question: t("shared.check_answers.assets.property.own_home"),
-        answer: @legal_aid_application.own_home.blank? ? "" : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}"),
-        read_only:,
-      ) %>
+
+<%= govuk_summary_list(classes: "govuk-!-margin-bottom-9") do |summary_list| %>
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own_home" }) do |row| %>
+    <%= row.with_key(text: t("shared.check_answers.assets.property.own_home"), classes: "govuk-!-width-one-half") %>
+    <%= row.with_value { @legal_aid_application.own_home.blank? ? "" : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}") } %>
+    <% unless read_only %>
+      <%= row.with_action(
+            text: t("generic.change"),
+            href: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
+            html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.own_home')}" },
+          ) %>
+    <% end %>
+  <% end %>
 
   <% if @legal_aid_application.own_home? %>
-    <%= check_answer_link(
-          name: :property_value,
-          url: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
-          question: t("shared.check_answers.assets.property.property_value"),
-          answer: gds_number_to_currency(@legal_aid_application.property_value),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__property_value" }) do |row| %>
+      <%= row.with_key(text: t("shared.check_answers.assets.property.property_value"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { gds_number_to_currency(@legal_aid_application.property_value) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.property_value')}" },
+            ) %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <% if @legal_aid_application.own_home_mortgage? %>
-    <%= check_answer_link(
-          name: :outstanding_mortgage,
-          url: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
-          question: t("shared.check_answers.assets.property.outstanding_mortgage"),
-          answer: gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__outstanding_mortgage" }) do |row| %>
+      <%= row.with_key(text: t("shared.check_answers.assets.property.outstanding_mortgage"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.outstanding_mortgage')}" },
+            ) %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <% if @legal_aid_application.own_home? %>
-    <%= check_answer_link(
-          name: :shared_ownership,
-          url: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
-          question: t("shared.check_answers.assets.property.shared_ownership"),
-          answer: @legal_aid_application.shared_ownership.blank? ? "" : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}"),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__shared_ownership" }) do |row| %>
+      <%= row.with_key(text: t("shared.check_answers.assets.property.shared_ownership"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { @legal_aid_application.shared_ownership.blank? ? "" : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}") } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.shared_ownership')}" },
+            ) %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <% if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
-    <%= check_answer_link(
-          name: :percentage_home,
-          url: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
-          question: t("shared.check_answers.assets.property.percentage_home"),
-          answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__percentage_home" }) do |row| %>
+      <%= row.with_key(text: t("shared.check_answers.assets.property.percentage_home"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { number_to_percentage(@legal_aid_application.percentage_home, precision: 2) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.percentage_home')}" },
+            ) %>
+      <% end %>
+    <% end %>
   <% end %>
-</dl>
+<% end %>
