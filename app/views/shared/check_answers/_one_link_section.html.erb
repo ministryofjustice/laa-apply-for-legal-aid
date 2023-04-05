@@ -14,7 +14,6 @@
 </div>
 
 <%= govuk_summary_list(
-      actions: false,
       classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "app-check-your-answers__#{name}_items" },
     ) do |summary_list| %>
@@ -22,10 +21,9 @@
     <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
       <% name = item.name || "#{name}_#{index}" %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
-      <%= row.with_key(text: item.label, classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { safe_yes_or_no(item.amount_text) } %>
-    <% end %>
-
+        <%= row.with_key(text: item.label, classes: "govuk-!-width-one-half") %>
+        <%= row.with_value { safe_yes_or_no(item.amount_text) } %>
+      <% end %>
     <% end %>
   <% else %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
