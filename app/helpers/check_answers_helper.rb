@@ -38,18 +38,6 @@ module CheckAnswersHelper
     )
   end
 
-  # Not used currently, left in for now in case the future CYA changes require it
-  # def check_long_questions_single_change_link(url:, question:, answer_hash:, name:, read_only: false)
-  #   render(
-  #     "shared/check_answers/one_change_link_long_answers_section",
-  #     url:,
-  #     name:,
-  #     question:,
-  #     answer_hash:,
-  #     read_only:,
-  #   )
-  # end
-
   def check_long_question_no_link(question:, answer:, name:, no_border: false)
     render(
       "shared/check_answers/no_link_long_item",
