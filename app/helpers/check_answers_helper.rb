@@ -60,36 +60,6 @@ module CheckAnswersHelper
     )
   end
 
-  def check_answer_for_cash_transactions(name:, question:, legal_aid_application:, transaction_type:)
-    render(
-      "shared/check_answers/no_link_cash_transaction_item",
-      name:,
-      question:,
-      legal_aid_application:,
-      transaction_type:,
-    )
-  end
-
-  def check_answer_for_transaction_types(name:, question:, legal_aid_application:, transaction_type:)
-    render(
-      "shared/check_answers/no_link_transaction_type_item",
-      name:,
-      question:,
-      legal_aid_application:,
-      transaction_type:,
-    )
-  end
-
-  def check_answer_for_regular_transactions(name:, question:, legal_aid_application:, transaction_type:)
-    render(
-      "shared/check_answers/regular_transaction_item",
-      name:,
-      question:,
-      legal_aid_application:,
-      transaction_type:,
-    )
-  end
-
   def number_to_currency_or_na(number)
     number.to_d == BigDecimal("999_999_999_999.0") ? "N/a" : gds_number_to_currency(number)
   end
