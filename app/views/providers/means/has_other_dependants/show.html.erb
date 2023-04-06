@@ -9,7 +9,7 @@
       <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.dependants.count, "dependant").to_s) %></h1>
       <%= govuk_summary_list(classes: "has_other_dependants") do |summary_list| %>
         <% @legal_aid_application.dependants.order(:created_at, :number).each do |dependant| %>
-          <%= summary_list.with_row(html_attributes: { id: "dependent_#{dependant.number}" }) do |row| %>
+          <%= summary_list.with_row(html_attributes: { id: "dependant_#{dependant.number}" }) do |row| %>
             <%= row.with_value { dependant.name } %>
             <%= row.with_action(
                   text: t("generic.change"),
