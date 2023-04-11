@@ -654,7 +654,7 @@ GEM
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
-    sys-uname (1.2.2)
+    sys-uname (1.2.3)
       ffi (~> 1.1)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
