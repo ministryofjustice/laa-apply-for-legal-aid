@@ -722,15 +722,6 @@ en:
         evidence_hint: 'For example, a letter from the DWP, a bank statement from the last 3 months showing benefits paid in, or any other relevant documents.'
         radio_hint_yes: "You'll need to upload supporting evidence later."
     limitations:
-      proceeding_types:
-        h1-heading: What you're applying for
-        proceedings_heading: Proceedings
-        cost_heading: Cost limits
-        substantive_certificate: Substantive certificate
-        form_of_service: "Form of service: "
-        form_of_service_type: Full representation
-        incurrable_costs: "Costs you can incur: "
-        allowable_work: "Work you can do: "
       cost_limits:
         cost_heading: Cost limits
         substantive_certificate: Substantive certificate
@@ -738,20 +729,20 @@ en:
         substantive_cost_override_question: Do you want to request a higher substantive cost limit?
         enter_substantive_cost_limit: Enter a new substantive cost limit
         enter_substantive_cost_reasons: Tell us why you need a higher substantive cost limit
-      proceeding_types_with_df:
+      show:
         h1-heading: What you're applying for
         proceedings_heading: Proceedings
         cost_heading: Cost limits
+        form_of_service: "Form of service: "
+        form_of_service_type: Full representation
+        incurrable_costs: "Costs you can incur: "
+        allowable_work: "Work you can do: "
         cost_override_question: Do you want to request a higher emergency cost limit?
         enter_cost_limit: Enter a new emergency cost limit
         enter_cost_reasons: Tell us why you need a higher emergency cost limit
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
         default_limit_is: The default emergency cost limit is
-        form_of_service: "Form of service: "
-        form_of_service_type: Full representation
-        incurrable_costs: "Costs you can incur: "
-        allowable_work: "Work you can do: "
       proceeding_type:
         client_role: "Client role: "
         details_heading: Scope limitations
