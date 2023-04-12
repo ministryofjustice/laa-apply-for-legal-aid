@@ -25,12 +25,12 @@ RSpec.describe Providers::LimitationsController do
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
-        expect(unescaped_response_body).to include(I18n.t("providers.limitations.proceeding_types.h1-heading"))
+        expect(unescaped_response_body).to include(I18n.t("providers.limitations.show.h1-heading"))
       end
 
       it "puts scope limitations in a details section" do
-        expect(parsed_response_body.css("details").text).to include(I18n.t("providers.limitations.proceeding_types.substantive_certificate"))
-        expect(unescaped_response_body).not_to include(I18n.t("providers.limitations.proceeding_types_with_df.cost_override_question"))
+        expect(parsed_response_body.css("details").text).to include(I18n.t("providers.limitations.show.substantive_certificate"))
+        expect(unescaped_response_body).not_to include(I18n.t("providers.limitations.show.cost_override_question"))
       end
 
       context "when delegated functions have been used" do
@@ -38,7 +38,7 @@ RSpec.describe Providers::LimitationsController do
         let(:provider) { legal_aid_application.provider }
 
         it "shows the correct text" do
-          expect(unescaped_response_body).to include(I18n.t("providers.limitations.proceeding_types_with_df.cost_override_question"))
+          expect(unescaped_response_body).to include(I18n.t("providers.limitations.show.cost_override_question"))
         end
       end
     end
