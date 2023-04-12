@@ -14,30 +14,24 @@
 
     <% if read_only %>
       <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9" data-test="applicant-bank-accounts">
 
-        <%= check_answer_link(
-              name: :online_current_accounts,
-              url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-              question: t(".assets.current_account"),
-              answer: online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t("generic.none_declared"),
-              read_only:,
-            ) %>
-        <%= check_answer_link(
-              name: :online_savings_accounts,
-              url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-              question: t(".assets.savings_account"),
-              answer: online_savings_accounts.present? ? gds_number_to_currency(online_savings_accounts) : t("generic.none_declared"),
-              read_only:,
-            ) %>
-      </dl>
+      <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { "data-test": "applicant-bank-accounts" }) do |summary_list| %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__online_current_accounts" }) do |row| %>
+          <%= row.with_key(text: t(".assets.current_account"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t("generic.none_declared") } %>
+        <% end %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__online_savings_accounts" }) do |row| %>
+          <%= row.with_key(text: t(".assets.savings_account"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { online_savings_accounts.present? ? gds_number_to_currency(online_savings_accounts) : t("generic.none_declared") } %>
+        <% end %>
+      <% end %>
     <% end %>
 
     <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
   <% else %>
     <!-- passported and non-passported bank statement uploaded -->
-
-    <%= check_answer_one_change_link(
+    <%= render(
+          "shared/check_answers/one_link_section",
           name: :bank_accounts,
           url: check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
           question: t(".assets.bank_accounts"),
@@ -49,7 +43,8 @@
         ) %>
   <% end %>
 
-  <%= check_answer_one_change_link(
+  <%= render(
+        "shared/check_answers/one_link_section",
         name: :savings_and_investments,
         url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
         question: t(".assets.savings_and_investments"),
@@ -60,7 +55,8 @@
         read_only:,
       ) %>
 
-  <%= check_answer_one_change_link(
+  <%= render(
+        "shared/check_answers/one_link_section",
         name: :other_assets,
         url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
         question: t(".assets.other_assets"),
@@ -76,7 +72,8 @@
 
   <section class="print-no-break">
     <% if @legal_aid_application.policy_disregards.present? %>
-      <%= check_answer_one_change_link(
+      <%= render(
+            "shared/check_answers/one_link_section",
             name: :policy_disregards,
             url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
             question: t(".assets.policy_disregards"),

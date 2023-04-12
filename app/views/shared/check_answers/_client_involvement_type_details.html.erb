@@ -1,7 +1,0 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
-<%= check_answer_no_link(
-      name: :"#{proceeding.name}_client_involvement_type",
-      question: t(".question"),
-      answer: proceeding.client_involvement_type_description,
-      read_only:,
-    ) %>

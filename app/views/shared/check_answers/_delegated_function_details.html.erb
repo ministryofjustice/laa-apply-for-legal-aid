@@ -1,7 +1,0 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
-<%= check_answer_no_link(
-      name: :"#{proceeding.name}_used_delegated_functions_on",
-      question: t(".question"),
-      answer: proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".not_used"),
-      read_only:,
-    ) %>

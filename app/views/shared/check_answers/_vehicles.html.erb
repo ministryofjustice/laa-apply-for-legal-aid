@@ -3,46 +3,66 @@
   <%= t(".#{journey_type}.heading") %>
 </h3>
 
-<dl id="vehicles-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= check_answer_link(
-        name: :vehicles,
-        url: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),
-        question: t(".#{journey_type}.own"),
-        answer: yes_no(@legal_aid_application.own_vehicle?),
-        read_only:,
-      ) %>
+<%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { id: "vehicles-questions" }) do |summary_list| %>
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles" }) do |row| %>
+    <%= row.with_key(text: t(".#{journey_type}.own"), classes: "govuk-!-width-one-half") %>
+    <%= row.with_value { yes_no(@legal_aid_application.own_vehicle?) } %>
+    <% unless read_only %>
+      <%= row.with_action(
+            text: t("generic.change"),
+            href: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),
+            html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.own")}" },
+          ) %>
+    <% end %>
+  <% end %>
 
   <% if @legal_aid_application.own_vehicle? %>
-    <%= check_answer_link(
-          name: :vehicles_estimated_values,
-          url: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
-          question: t(".#{journey_type}.estimated_value"),
-          answer: gds_number_to_currency(@legal_aid_application.vehicle.estimated_value),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_estimated_values" }) do |row| %>
+      <%= row.with_key(text: t(".#{journey_type}.estimated_value"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicle.estimated_value) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.estimated_value")}" },
+            ) %>
+      <% end %>
+    <% end %>
 
-    <%= check_answer_link(
-          name: :vehicles_remaining_payments,
-          url: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
-          question: t(".#{journey_type}.payment_remaining"),
-          answer: gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_remaining_payments" }) do |row| %>
+      <%= row.with_key(text: t(".#{journey_type}.payment_remaining"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.payment_remaining")}" },
+            ) %>
+      <% end %>
+    <% end %>
 
-    <%= check_answer_link(
-          name: :vehicles_ages,
-          url: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
-          question: t(".#{journey_type}.more_than_three_years_old"),
-          answer: yes_no(@legal_aid_application.vehicle.more_than_three_years_old?),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_ages" }) do |row| %>
+      <%= row.with_key(text: t(".#{journey_type}.more_than_three_years_old"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { yes_no(@legal_aid_application.vehicle.more_than_three_years_old?) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.more_than_three_years_old")}" },
+            ) %>
+      <% end %>
+    <% end %>
 
-    <%= check_answer_link(
-          name: :vehicles_regular_uses,
-          url: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
-          question: t(".#{journey_type}.used_regularly"),
-          answer: yes_no(@legal_aid_application.vehicle.used_regularly),
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_regular_uses" }) do |row| %>
+      <%= row.with_key(text: t(".#{journey_type}.used_regularly"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { yes_no(@legal_aid_application.vehicle.used_regularly) } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
+              html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.used_regularly")}" },
+            ) %>
+      <% end %>
+    <% end %>
   <% end %>
-</dl>
+<% end %>

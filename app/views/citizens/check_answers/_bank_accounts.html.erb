@@ -3,24 +3,24 @@
 <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
   <h2 class="govuk-heading-m govuk-!-padding-top-4"><%= t("citizens.check_answers.index.bank_accounts.account") %> <%= index + 1 %></h2>
 
-  <dl class="govuk-summary-list govuk-!-padding-bottom-4">
-    <div class="govuk-summary-list__row">
-      <dd class="govuk-summary-list__key"><%= t("citizens.check_answers.index.bank_accounts.bank") %></dd>
-      <dd class="govuk-summary-list__value"><%= account.bank_provider.name %></dd>
-    </div>
-    <div class="govuk-summary-list__row">
-      <dd class="govuk-summary-list__key"><%= t("citizens.check_answers.index.bank_accounts.account_number") %></dd>
-      <dd class="govuk-summary-list__value"><%= account.account_number %></dd>
-    </div>
-    <div class="govuk-summary-list__row">
-      <dd class="govuk-summary-list__key"><%= t("citizens.check_answers.index.bank_accounts.sort_code") %></dd>
-      <dd class="govuk-summary-list__value"><%= account.sort_code %></dd>
-    </div>
-    <div class="govuk-summary-list__row">
-      <dd class="govuk-summary-list__key"><%= t("citizens.check_answers.index.bank_accounts.balance") %></dd>
-      <dd class="govuk-summary-list__value"><%= value_with_currency_unit(account.balance, account.currency) %></dd>
-    </div>
-  </dl>
+  <%= govuk_summary_list(actions: false, classes: "govuk-!-padding-bottom-4") do |summary_list| %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_key { t("citizens.check_answers.index.bank_accounts.bank") } %>
+      <%= row.with_value { account.bank_provider.name } %>
+    <% end %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_key { t("citizens.check_answers.index.bank_accounts.account_number") } %>
+      <%= row.with_value { account.account_number } %>
+    <% end %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_key { t("citizens.check_answers.index.bank_accounts.sort_code") } %>
+      <%= row.with_value { account.sort_code } %>
+    <% end %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_key { t("citizens.check_answers.index.bank_accounts.balance") } %>
+      <%= row.with_value { value_with_currency_unit(account.balance, account.currency) } %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <div class="govuk-body govuk-!-padding-bottom-4">

@@ -13,25 +13,29 @@
   <% end %>
 </div>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9" id="app-check-your-answers__<%= name %>_items">
+<%= govuk_summary_list(
+      classes: "govuk-!-margin-bottom-9",
+      html_attributes: { id: "app-check-your-answers__#{name}_items" },
+    ) do |summary_list| %>
   <% if answer_hash.present? %>
-
-      <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
-        <%= check_answer_no_link(
-              name: item.name || "#{name}_#{index}",
-              question: item.label,
-              answer: safe_yes_or_no(item.amount_text),
-              read_only:,
+    <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
+      <% name = item.name || "#{name}_#{index}" %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
+        <%= row.with_key(text: item.label, classes: "govuk-!-width-one-half") %>
+        <%= row.with_value { safe_yes_or_no(item.amount_text) } %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
+      <%= row.with_key(text: question, classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { t("generic.none_declared") } %>
+      <% unless read_only %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: url,
+              html_attributes: { "aria-label": t("generic.change") },
             ) %>
       <% end %>
-
-  <% else %>
-    <%= check_answer_link(
-          name:,
-          url:,
-          question:,
-          answer: t("generic.none_declared"),
-          read_only:,
-        ) %>
+    <% end %>
   <% end %>
-</dl>
+<% end %>

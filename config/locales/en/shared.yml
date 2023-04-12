@@ -385,11 +385,17 @@ en:
           client_involvement_type: Client involvement type
           client_involvement_type_applicant: Applicant
           proceeding: What does your client want legal aid for?
-      client_involvement_type_details:
-        question: Client role
-      delegated_function_details:
-        question: Delegated functions
-        not_used: Not used
+      proceeding_details:
+        client_involvement_type_details:
+          question: Client role
+        delegated_function_details:
+          question: Delegated functions
+          not_used: Not used
+        level_of_service:
+          emergency:
+            question: Emergency level of service
+          substantive:
+            question: Substantive level of service
       delegated_functions:
         not_used: Not used
         section_delegated:
@@ -400,11 +406,6 @@ en:
           question: Final hearing date
         details:
           question: Reasons for not listing final hearing
-      level_of_service:
-        emergency:
-          question: Emergency level of service
-        substantive:
-          question: Substantive level of service
       scope_limits:
         emergency:
           question: Emergency scope limitations

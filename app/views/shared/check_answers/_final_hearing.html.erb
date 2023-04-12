@@ -1,20 +1,15 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
 <% final_hearings = proceeding.final_hearings.send(level_of_service) %>
 <% if final_hearings.any? %>
   <% final_hearing = final_hearings.first %>
   <% if final_hearing.listed? %>
-    <%= check_answer_no_link(
-          name: :"#{proceeding.name}_final_hearing",
-          question: t(".date.question"),
-          answer: final_hearing.date,
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_final_hearing" }) do |row| %>
+      <%= row.with_key(text: t(".date.question"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { final_hearing.date&.strftime("%-d %B %Y") } %>
+    <% end %>
   <% else %>
-    <%= check_answer_no_link(
-          name: :"#{proceeding.name}_final_hearing",
-          question: t(".details.question"),
-          answer: final_hearing.details,
-          read_only:,
-        ) %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_final_hearing" }) do |row| %>
+      <%= row.with_key(text: t(".details.question"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { final_hearing.details } %>
+    <% end %>
   <% end %>
 <% end %>
