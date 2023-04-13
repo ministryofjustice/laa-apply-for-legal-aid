@@ -943,15 +943,17 @@ Then("I should be on the Applicant page") do
 end
 
 Then("I enter name {string}, {string}") do |first_name, last_name|
-  fill_in("applicant-first-name-field", with: first_name)
-  fill_in("applicant-last-name-field", with: last_name)
+  type = page.title.starts_with?("Enter your client's details") ? "applicant" : "partner"
+  fill_in("#{type}-first-name-field", with: first_name)
+  fill_in("#{type}-last-name-field", with: last_name)
 end
 
 Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   day, month, year = dob.split("-")
-  fill_in("applicant_date_of_birth_3i", with: day)
-  fill_in("applicant_date_of_birth_2i", with: month)
-  fill_in("applicant_date_of_birth_1i", with: year)
+  type = page.title.starts_with?("Enter your client's details") ? "applicant" : "partner"
+  fill_in("#{type}_date_of_birth_3i", with: day)
+  fill_in("#{type}_date_of_birth_2i", with: month)
+  fill_in("#{type}_date_of_birth_1i", with: year)
 end
 
 Then("I enter the email address {string}") do |email|

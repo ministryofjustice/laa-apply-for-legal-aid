@@ -1,0 +1,20 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_shared_address_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template(
+        page_title: t(".page_title"),
+        template: :basic,
+        form:,
+      ) do %>
+    <%= form.govuk_collection_radio_buttons :shared_address_with_client,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            inline: true,
+                                            legend: { text: t(".page_title"), size: "xl", tag: "h1" } %>
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

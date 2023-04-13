@@ -1,6 +1,8 @@
 module Providers
   module Partners
     class DetailsController < ProviderBaseController
+      prefix_step_with :partner
+
       def show
         @form = ::Partners::DetailsForm.new(model: partner)
       end

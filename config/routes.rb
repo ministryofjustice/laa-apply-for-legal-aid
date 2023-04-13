@@ -264,10 +264,14 @@ Rails.application.routes.draw do
 
       scope module: :partners do
         resource :client_has_partner, only: %i[show update]
+        resource :shared_address, only: %i[show update]
       end
 
       namespace :partners do
         resource :details, only: %i[show update]
+        resource :address, only: %i[show update]
+        resource :address_lookup, only: %i[show update]
+        resource :address_selection, only: %i[show update]
       end
 
       scope module: :application_merits_task do

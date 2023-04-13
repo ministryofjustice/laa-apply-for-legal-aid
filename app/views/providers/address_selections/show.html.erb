@@ -32,7 +32,6 @@
         <%= hidden_field_tag "address_selection[list][]", address.to_json, id: "address_selection_list_#{index}" %>
       <% end %>
 
-      <div class="govuk-!-padding-bottom-2"></div>
       <%= form.govuk_collection_select :lookup_id,
                                        @address_collection,
                                        :id,
