@@ -573,6 +573,40 @@ Given("I complete the journey as far as check client details with multiple proce
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
+Given("I complete the journey as far as check client details with a partner") do
+  applicant = create(:applicant, :with_partner)
+  create(
+    :address,
+    address_line_one: "Transport For London",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    lookup_used: true,
+    applicant:,
+  )
+  partner = create(:partner,
+                   address_line_one: "Transport For London",
+                   address_line_two: "98 Petty France",
+                   city: "London",
+                   county: nil,
+                   postcode: "SW1H 9EA",
+                   lookup_used: true,
+                   shared_address_with_client: true)
+  @legal_aid_application = create(
+    :application,
+    :with_proceedings,
+    :with_non_passported_state_machine,
+    :at_entering_applicant_details,
+    applicant:,
+    partner:,
+  )
+
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
 Given("I complete the passported journey as far as check your answers for client details") do
   applicant = create(
     :applicant,
@@ -1107,4 +1141,15 @@ end
 
 When("I click the browser back button") do
   page.go_back
+end
+
+Then(/^the value of the ['|"](.*)['|"] input should (be|not be) ['|"](.*)['|"]$/) do |id, visibility, answer|
+  id.downcase!
+  id.gsub!(/\s+/, "-")
+  input = page.find(:field, id:, type: "text", exact: false)
+  if visibility == "be"
+    expect(input.value).to eq answer
+  else
+    expect(input.value).not_to eq answer
+  end
 end
