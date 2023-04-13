@@ -25,4 +25,23 @@ RSpec.describe Partner do
       end
     end
   end
+
+  describe ".clear_stored_address" do
+    subject(:cleared_stored_address) { partner.clear_stored_address }
+
+    let(:partner) { create(:partner, :with_address) }
+
+    before { cleared_stored_address }
+
+    it "clears the address fields" do
+      expect(partner.reload).to have_attributes(
+        address_line_one: nil,
+        address_line_two: nil,
+        city: nil,
+        county: nil,
+        postcode: nil,
+        organisation: nil,
+      )
+    end
+  end
 end

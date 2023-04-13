@@ -20,6 +20,17 @@ class Partner < ApplicationRecord
     )
   end
 
+  def clear_stored_address
+    update!(
+      address_line_one: nil,
+      address_line_two: nil,
+      city: nil,
+      county: nil,
+      postcode: nil,
+      organisation: nil,
+    )
+  end
+
 private
 
   def applicants_address
