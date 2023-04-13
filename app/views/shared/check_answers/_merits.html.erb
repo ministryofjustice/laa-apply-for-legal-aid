@@ -231,25 +231,4 @@
   </section>
 <% end %>
 
-<% if @legal_aid_application.uploaded_evidence_collection %>
-  <div class="govuk-!-padding-bottom-6"></div>
-  <section class="print-no-break">
-    <%= check_answer_change_link(
-          name: :supporting_evidence,
-          url: providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
-          question: t(".evidence_upload_heading"),
-          read_only:,
-        ) %>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <% @legal_aid_application.uploaded_evidence_by_category.each do | category, attachments| %>
-      <%= check_answer_no_link(
-            name: category,
-            question: t(".evidence_types.#{category}"),
-            answer: attachments,
-            read_only:,
-          ) %>
-      <% end %>
-    </dl>
-  </section>
-<% end %>
+<%= render("shared/check_answers/supporting_evidence", read_only:) %>
