@@ -1,125 +1,15 @@
 <h2 class="govuk-heading-l"><%= t(".case-details-heading") %></h2>
 
-<% if @legal_aid_application.latest_incident %>
-  <section class="print-no-break">
-    <%= check_answer_change_link(
-          name: :incident_details,
-          url: providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application),
-          question: t(".latest-incident-heading"),
-          read_only:,
-        ) %>
+<%= render("shared/check_answers/latest_incident_details", read_only:, incident:) %>
 
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_no_link(
-            name: :notification_of_latest_incident,
-            question: t(".items.notification_of_latest_incident"),
-            answer: incident&.told_on,
-            read_only:,
-          ) %>
-
-      <%= check_answer_no_link(
-            name: :date_of_latest_incident,
-            question: t(".items.date_of_latest_incident"),
-            answer: incident&.occurred_on,
-            read_only:,
-          ) %>
-    </dl>
-  </section>
-<% end %>
-
-<section class="print-no-break govuk-!-padding-top-6">
-  <%= check_answer_change_link(
-        name: :opponents,
-        url: providers_legal_aid_application_has_other_opponent_path(@legal_aid_application),
-        question: t(".opponent-heading"),
-        read_only:,
-      ) %>
-  <% opponents.order(:created_at).each_with_index do |opponent, i| %>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2 ">
-      <%= check_answer_no_link(
-            name: "opponent_#{i + 1}".to_sym,
-            question: "#{t('.items.opponent')} #{i + 1}",
-            answer: opponent.full_name,
-            no_border: false,
-            read_only:,
-          ) %>
-    </dl>
-  <% end %>
-</section>
-
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
-          name: :understands_terms_of_court_order,
-          question: t(".items.understands_terms_of_court_order"),
-          url: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
-          answer: yes_no(parties_mental_capacity.understands_terms_of_court_order),
-          no_border: !parties_mental_capacity.understands_terms_of_court_order,
-          read_only:,
-        ) %>
-  </dl>
-  <div class='govuk-body'><%= parties_mental_capacity.understands_terms_of_court_order_details %></div>
-
-  <%= render "shared/check_answers/section_break" unless parties_mental_capacity.understands_terms_of_court_order %>
-
-  <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: :warning_letter_sent,
-            question: t(".items.warning_letter_sent"),
-            url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-            answer: yes_no(domestic_abuse_summary.warning_letter_sent),
-            no_border: !domestic_abuse_summary.warning_letter_sent,
-            read_only:,
-          ) %>
-    </dl>
-    <div class='govuk-body'><%= domestic_abuse_summary.warning_letter_sent_details %></div>
-
-    <%= render "shared/check_answers/section_break" unless domestic_abuse_summary.warning_letter_sent %>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: :police_notified,
-            question: t(".items.police_notified"),
-            url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-            answer: yes_no(domestic_abuse_summary.police_notified),
-            no_border: true,
-            read_only:,
-          ) %>
-    </dl>
-    <div class='govuk-body'><%= domestic_abuse_summary.police_notified_details %></div>
-
-    <%= render "shared/check_answers/section_break" %>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: :bail_conditions_set,
-            question: t(".items.bail_conditions_set"),
-            url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-            answer: yes_no(domestic_abuse_summary.bail_conditions_set),
-            no_border: domestic_abuse_summary.bail_conditions_set,
-            read_only:,
-          ) %>
-    </dl>
-    <div class='govuk-body'><%= domestic_abuse_summary.bail_conditions_set_details %></div>
-
-    <%= render "shared/check_answers/section_break" if domestic_abuse_summary.bail_conditions_set %>
-  <% end %>
-</section>
-<div class="govuk-!-padding-bottom-6"></div>
-<section class="print-no-break">
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
-    <%= check_answer_link(
-          name: :statement_of_case,
-          url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
-          answer: attachments_with_size(statement_of_case&.original_attachments),
-          question: t(".statement-of-case-heading"),
-          read_only:,
-          no_border: true,
-        ) %>
-  </dl>
-  <div class="govuk-body"><%= statement_of_case&.statement %></div>
-  <%= render "shared/check_answers/section_break" if statement_of_case&.statement %>
-</section>
+<%= render(
+      "shared/check_answers/opponent_details",
+      domestic_abuse_summary:,
+      opponents:,
+      parties_mental_capacity:,
+      read_only:,
+      statement_of_case:,
+    ) %>
 
 <% if @legal_aid_application.allegation %>
   <div class="govuk-!-padding-bottom-6"></div>
@@ -192,56 +82,21 @@
 <% end %>
 
 <% if @legal_aid_application.section_8_proceedings? %>
-  <section class="print-no-break govuk-!-padding-top-6">
-    <%= check_answer_change_link(
-          name: :involved_children,
-          url: providers_legal_aid_application_has_other_involved_children_path(@legal_aid_application),
-          question: t(".involved-children-heading"),
-          read_only:,
-        ) %>
-    <% @legal_aid_application.involved_children.each_with_index do |child, i| %>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-2 ">
-        <%= check_answer_no_link(
-              name: "involved_child_#{i + 1}".to_sym,
-              question: "#{t('.items.child')} #{i + 1}",
-              answer: "#{child.full_name} born on #{child.date_of_birth.strftime('%e %B %Y')}",
-              no_border: false,
-              read_only:,
-            ) %>
-      </dl>
-    <% end %>
-    <h2 class="govuk-heading-m govuk-!-padding-top-6"><%= t ".laspo.heading" %></h2>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <%= check_answer_link(
-            name: :in_scope_of_laspo,
-            url: providers_legal_aid_application_in_scope_of_laspo_path(@legal_aid_application),
-            question: t(".laspo.question"),
-            answer: yes_no(@legal_aid_application.in_scope_of_laspo),
-            read_only:,
-          ) %>
-    </dl>
-  </section>
+  <%= render(
+        "shared/check_answers/children_involved",
+        read_only:,
+      ) %>
+
+  <%= render(
+        "shared/check_answers/laspo",
+        read_only:,
+      ) %>
 <% end %>
 
-<% if @legal_aid_application.matter_opposition %>
-  <section class="print-no-break govuk-!-padding-top-6">
-    <%= check_answer_change_link(
-          name: :matter_opposed_reason_heading,
-          url: providers_legal_aid_application_matter_opposed_reason_path(@legal_aid_application),
-          question: t(".matter_opposed_reason_heading"),
-          read_only:,
-        ) %>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_no_link(
-            name: :matter_opposed_reason,
-            question: t(".items.matter_opposed_reason"),
-            answer: @legal_aid_application.matter_opposition.reason,
-            read_only:,
-          ) %>
-    </dl>
-  </section>
-<% end %>
+<%= render(
+      "shared/check_answers/matter_opposition",
+      read_only:,
+    ) %>
 
 <%# TODO: The gateway evidence may not exist for an application transitioning to MP feature %>
 <% if gateway_evidence %>
