@@ -12,7 +12,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: cimg/ruby:3.2.0-browsers
+      - image: cimg/ruby:3.2.2-browsers
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
@@ -30,7 +30,7 @@ executors:
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest-3.2.0
+      - image: ministryofjustice/apply-ci:latest-3.2.2
         environment:
           RAILS_ENV: test
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
@@ -103,22 +103,22 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v3.2.0-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        - v3.2.2-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v3.2.0-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+        - v3.2.2-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v3.2.0-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        key: v3.2.2-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v3.2.0-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      key: v3.2.2-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
@@ -230,9 +230,9 @@ jobs:
     parallelism: 3
     executor: test-executor
     steps:
+    - checkout
     - browser-tools/install-chrome
     - browser-tools/install-chromedriver
-    - checkout
     - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
