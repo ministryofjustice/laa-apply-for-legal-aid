@@ -87,6 +87,7 @@ module LaaApplyForLegalAid
     config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 
     config.x.check_financial_eligibility_host = ENV.fetch("CHECK_FINANCIAL_ELIGIBILITY_HOST", nil)
+    config.x.cfe_civil_host = ENV.fetch("CFE_CIVIL_HOST", nil)
 
     config.x.true_layer.client_id = ENV.fetch("TRUE_LAYER_CLIENT_ID", nil)
     config.x.true_layer.client_secret = ENV.fetch("TRUE_LAYER_CLIENT_SECRET", nil)
