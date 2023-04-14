@@ -230,9 +230,9 @@ jobs:
     parallelism: 3
     executor: test-executor
     steps:
+    - checkout
     - browser-tools/install-chrome
     - browser-tools/install-chromedriver
-    - checkout
     - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
