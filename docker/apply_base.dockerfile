@@ -1,4 +1,4 @@
-FROM ruby:3.2.0-alpine3.17
+FROM ruby:3.2.2-alpine3.17
 MAINTAINER apply for legal aid team
 
 ENV KUBECTL_VERSION=1.22.3
