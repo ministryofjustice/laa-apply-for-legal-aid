@@ -333,7 +333,6 @@ en:
           opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
           opponents_application_reason: Reason for applying for legal aid at this stage
           gateway_evidence: Upload supporting evidence
-          allegation_denies_all: Does the client wholly or substantially deny any allegations?
           undertaking_offered: Has the client offered undertakings?
           nature_of_urgency: What is the nature of the urgency?
           hearing_date_set: Has a date been set for the hearing?
@@ -349,6 +348,7 @@ en:
         matter_opposed_reason: Why is the Section 8 matter opposed by your client or the other party?
         matter_opposed_reason_heading: Why the matter is opposed
       opponent_details:
+        allegation_denies_all: Does the client wholly or substantially deny any allegations?
         bail_conditions_set: Have bail conditions been set?
         opponent: Opponent
         opponent-heading: Opponent details

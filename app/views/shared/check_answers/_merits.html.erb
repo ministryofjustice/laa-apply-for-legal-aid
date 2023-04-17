@@ -4,32 +4,13 @@
 
 <%= render(
       "shared/check_answers/opponent_details",
+      allegation:,
       domestic_abuse_summary:,
       opponents:,
       parties_mental_capacity:,
       read_only:,
       statement_of_case:,
     ) %>
-
-<% if @legal_aid_application.allegation %>
-  <div class="govuk-!-padding-bottom-6"></div>
-  <section class="print-no-break">
-    <h2 class="govuk-heading-m"><%= t(".client_denial_of_allegation_heading") %></h2>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: :allegation_denies_all,
-            url: providers_legal_aid_application_client_denial_of_allegation_path(@legal_aid_application),
-            question: t(".items.allegation_denies_all"),
-            answer: yes_no(allegation.denies_all),
-            no_border: true,
-            read_only:,
-          ) %>
-    </dl>
-    <div class='govuk-body'><%= allegation.additional_information %></div>
-    <%= render "shared/check_answers/section_break" if allegation.additional_information %>
-  </section>
-<% end %>
 
 <% if @legal_aid_application.undertaking %>
   <div class="govuk-!-padding-bottom-6"></div>
