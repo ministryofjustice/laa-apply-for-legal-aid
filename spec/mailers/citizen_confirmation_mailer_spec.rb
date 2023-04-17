@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CitizenConfirmationMailer do
   let(:app_id) { SecureRandom.uuid }
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
   let(:client_name) { Faker::Name.name }
   let(:citizen_completed_application_template) { Rails.configuration.govuk_notify_templates[:citizen_completed_application] }
 

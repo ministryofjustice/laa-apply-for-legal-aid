@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe SubmitCitizenFinancialReminderMailer do
   let(:application) { create(:legal_aid_application, :with_applicant, :with_everything, :with_non_passported_state_machine) }
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
   let(:provider_name) { Faker::Name.name }
   let(:application_url) { "http://test.com" }
   let(:url_expiry_date) { (Time.zone.today + 7.days).strftime("%-d %B %Y") }

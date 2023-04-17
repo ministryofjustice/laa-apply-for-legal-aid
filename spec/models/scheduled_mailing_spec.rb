@@ -4,7 +4,7 @@ RSpec.describe ScheduledMailing do
   let(:mailer_klass) { "NotifyMailer" }
   let(:mailer_method) { "notify" }
   let(:legal_aid_application) { create(:legal_aid_application) }
-  let(:addressee) { Faker::Internet.safe_email }
+  let(:addressee) { Faker::Internet.email }
   let(:mailer_args) { [:one, :two, "three"] }
   let(:frozen_time) { Time.zone.now }
   let(:future_time) { 2.hours.from_now }

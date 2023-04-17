@@ -46,7 +46,7 @@ RSpec.describe Providers::ApplicantDetailsController do
           "date_of_birth(1i)": "1981",
           "date_of_birth(2i)": "07",
           "date_of_birth(3i)": "11",
-          email: Faker::Internet.safe_email,
+          email: Faker::Internet.email,
         },
       }
     end
@@ -89,7 +89,7 @@ RSpec.describe Providers::ApplicantDetailsController do
                 "date_of_birth(1i)": "1999",
                 "date_of_birth(2i)": "07",
                 "date_of_birth(3i)": "11",
-                email: Faker::Internet.safe_email,
+                email: Faker::Internet.email,
               },
             }
           end
@@ -137,7 +137,7 @@ RSpec.describe Providers::ApplicantDetailsController do
                 "date_of_birth(1i)": "1981",
                 "date_of_birth(2i)": "07",
                 "date_of_birth(3i)": "11",
-                email: Faker::Internet.safe_email,
+                email: Faker::Internet.email,
               },
             }
           end
@@ -182,7 +182,7 @@ RSpec.describe Providers::ApplicantDetailsController do
               "date_of_birth(1i)": "1981",
               "date_of_birth(2i)": "6s",
               "date_of_birth(3i)": "11sa",
-              email: Faker::Internet.safe_email,
+              email: Faker::Internet.email,
             },
           }
         end

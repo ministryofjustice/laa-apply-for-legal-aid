@@ -3,7 +3,7 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday }
-    email { Faker::Internet.safe_email }
+    email { Faker::Internet.email }
     has_national_insurance_number { true }
     national_insurance_number { "JA123456D" }
     employed { false }
@@ -68,7 +68,7 @@ FactoryBot.define do
       first_name { "Langley" }
       last_name { "Yorke" }
       date_of_birth { Date.new(1992, 7, 22) }
-      email { Faker::Internet.safe_email }
+      email { Faker::Internet.email }
       national_insurance_number { "MN212451D" }
     end
 
@@ -76,7 +76,7 @@ FactoryBot.define do
       first_name { "Ida" }
       last_name { "Paisley" }
       date_of_birth { Date.new(1987, 11, 24) }
-      email { Faker::Internet.safe_email }
+      email { Faker::Internet.email }
       national_insurance_number { "OE726113A" }
     end
 
@@ -84,7 +84,7 @@ FactoryBot.define do
       first_name { "John" }
       last_name { "Pending" }
       date_of_birth { Date.new(2002, 9, 1) }
-      email { Faker::Internet.safe_email }
+      email { Faker::Internet.email }
       national_insurance_number { "KY123456D" }
     end
 
@@ -93,7 +93,7 @@ FactoryBot.define do
       first_name { "John" }
       last_name { "Jobseeker" }
       date_of_birth { Date.new(2005, 5, 5) }
-      email { Faker::Internet.safe_email }
+      email { Faker::Internet.email }
       national_insurance_number { "BB123456B" }
     end
 
