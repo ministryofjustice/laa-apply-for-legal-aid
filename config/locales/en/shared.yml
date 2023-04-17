@@ -626,16 +626,9 @@ en:
             borderline: You cannot predict the outcome.
             not_known: Work still needs to be done to determine the likelihood of success.
       types_of_income_form:
-        citizens:
-          none_of_these: I receive none of these payments
         providers:
           none_of_these: My client receives none of these payments
         hints:
-          citizens:
-            friends_or_family: "Select if a friend or relative regularly gives you money to help with living costs. Do not include one-off payments."
-            benefits: For example, Child Benefit or tax credits.
-            maintenance_in: This includes child maintenance.
-            pension: Include State, workplace and personal pensions.
           providers:
             friends_or_family: For example, money from a family member for rent or bills.
             benefits: For example, Child Benefit or tax credits.
@@ -647,19 +640,12 @@ en:
             Your solicitor will look at your bank statements and put your transactions into the categories you select.
             We need this information to check if you qualify financially for legal aid.
       types_of_outgoings_form:
-        citizens:
-          none_of_these: I make none of these payments
         providers:
           none_of_these: My client makes none of these payments
         hints:
           rent_or_mortgage: For example, rent, mortgage or board and lodging.
           child_care: For example, to a childminder, nanny or nursery.
           maintenance_out: This includes child maintenance.
-        expanded_explanation:
-          heading: Why am I being asked this?
-          list: |
-            Your solicitor will look at your bank statements and put your transactions into the categories you select.
-            We need this information to check if you qualify financially for legal aid.
     page-title:
       suffix: Apply for legal aid  - GOV.UK
     property_results:

@@ -24,25 +24,6 @@
       <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".#{journey_type}.none_of_these") } %>
     <% end %>
 
-    <% if journey == :citizen %>
-      <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text"
-            title="<%= t(".expanded_explanation.heading") %>"
-            aria-label="<%= t(".expanded_explanation.heading") %>">
-            <%= t(".expanded_explanation.heading") %>
-          </span>
-        </summary>
-
-        <div class="govuk-details__text">
-          <% t(".expanded_explanation.list").each_line do |para| %>
-            <p>
-              <%= para %>
-          <% end %>
-        </div>
-      </details>
-    <% end %>
-
     <%= next_action_buttons(
           show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
           form:,
