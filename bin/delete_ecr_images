@@ -12,7 +12,7 @@ images = JSON.parse(json_output)['imageDetails']
 
 images_to_delete = []
 images.each do |i|
-  date_pushed = DateTime.strptime(i['imagePushedAt'].to_s, '%s')
+  date_pushed = DateTime.strptime(i['imagePushedAt'].to_s, '%Y-%m-%dT%H:%M:%S%z')
   age_in_days = (DateTime.now - date_pushed).to_i
   images_to_delete << i if age_in_days > delete_if_older_than
 end
