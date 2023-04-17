@@ -530,6 +530,9 @@ en:
     has_other_opponents:
       show:
         error: Select yes if you need to add another opponent
+    remove_dependants:
+      show:
+        error: Select yes if you wish to delete the dependant
     declarations:
       show:
         h1-heading: Declaration
@@ -920,7 +923,6 @@ en:
       remove_dependants:
         show:
           page_title: "Are you sure you want to remove %{name}?"
-          error: Select yes if you wish to delete the dependant
       check_income_answers:
         show:
           h1-heading: Check your answers
