@@ -33,13 +33,7 @@
 
   <section class="proceeding_details print-no-break">
     <h2 class="govuk-heading-l"><%= t(".proceedings_details_heading") %></h2>
-    <% @legal_aid_application.proceedings.each do |proceeding| %>
-      <%= render(
-            "shared/check_answers/proceeding_details_section",
-            proceeding:,
-            read_only: true,
-          ) %>
-    <% end %>
+    <%= render("shared/check_answers/proceeding_details_section") %>
   </section>
 
   <% if @legal_aid_application.used_delegated_functions? %>
@@ -95,23 +89,16 @@
         ) %>
   </section>
 
-  <section id="client-declaration" class="app-print-only">
-    <div class="govuk-!-padding-bottom-6"></div>
+  <section id="client-declaration" class="app-print-only govuk-!-padding-top-6">
     <h2 class="govuk-heading-l"><%= t(".client_declaration.heading") %></h2>
 
     <%= render "shared/applicant_declaration" %>
 
-    <dl class="govuk-summary-list govuk-summary-list--no-border">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key print-bottom-gap">
-          <%= t(".client_declaration.signature") %>
-        </dt>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          <%= t(".client_declaration.date") %>
-        </dt>
-      </div>
-    </dl>
+    <p class="govuk-body govuk-!-font-weight-bold">
+      <%= t(".client_declaration.signature") %>
+    </p>
+    <p class="govuk-body govuk-!-font-weight-bold">
+      <%= t(".client_declaration.date") %>
+    </p>
   </section>
 </div>

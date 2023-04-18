@@ -4,25 +4,16 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <% @applicant_banks.each do |applicant_bank| %>
-
-      <dl class="govuk-summary-list govuk-!-margin-bottom-6">
-        <div class="govuk-summary-list__row normal-word-break">
-          <dt class="govuk-summary-list__key govuk-!-width-one-half">
-            <%= t ".account_holder_name_heading" %>
-          </dt>
-          <dd class="govuk-summary-list__value">
-            <%= applicant_bank.main_account_holder_name %>
-          </dd>
-        </div>
-        <div class="govuk-summary-list__row normal-word-break">
-          <dt class="govuk-summary-list__key govuk-!-width-one-half">
-            <%= t ".account_holder_address_heading" %>
-          </dt>
-          <dd class="govuk-summary-list__value">
-            <%= applicant_bank.main_account_holder_address %>
-          </dd>
-        </div>
-      </dl>
+      <%= govuk_summary_list(actions: false, classes: "govuk-!-padding-bottom-6") do |summary_list| %>
+        <%= summary_list.with_row do |row| %>
+          <%= row.with_key { t(".account_holder_name_heading") } %>
+          <%= row.with_value { applicant_bank.main_account_holder_name } %>
+        <% end %>
+        <%= summary_list.with_row do |row| %>
+          <%= row.with_key { t(".account_holder_address_heading") } %>
+          <%= row.with_value { applicant_bank.main_account_holder_address } %>
+        <% end %>
+      <% end %>
 
       <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".table_caption") %></caption>

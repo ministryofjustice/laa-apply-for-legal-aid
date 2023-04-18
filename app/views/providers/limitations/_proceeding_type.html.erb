@@ -1,48 +1,39 @@
-<div class="govuk-summary-list__row--no-border">
-  <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
     <h3 class="govuk-heading-m"><%= proceeding.meaning %></h3>
-  </dd>
-  <dd class="govuk-summary-list__actions">
-    <%= link_to_accessible(t("generic.change"),
-                           providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application),
-                           class: "govuk-link change-link",
-                           suffix: proceeding.meaning) %>
-  </dd>
-</div>
-<div class="govuk-summary-list__row--no-border">
-  <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
-    <h3 class="govuk-heading-s"><%= t(".client_role") %><span class="govuk-!-font-weight-regular"><%= proceeding.client_involvement_type_description %></span></h3>
-  </dd>
-</div>
-<div class="govuk-summary-list__row">
-  <dd class="govuk-summary-list__key">
-    <details class="govuk-details" data-module="govuk-details">
-      <summary class="govuk-details__summary">
-      <span class="govuk-details__summary-text"
-            title="<%= t(".details_heading") %>"
-            aria-label="<%= t(".details_heading") %>">
-        <%= t(".details_heading") %>
+  </div>
+  <div class="govuk-grid-column-one-quarter govuk-!-text-align-right">
+    <%= govuk_link_to(
+          t("generic.change"),
+          providers_legal_aid_application_has_other_proceedings_path,
+          class: "govuk-!-font-size-19",
+        ) %>
+  </div>
+  <div class='govuk-grid-column-full'>
+    <h3 class="govuk-heading-s">
+      <%= t(".client_role") %>
+      <span class="govuk-!-font-weight-regular">
+        <%= proceeding.client_involvement_type_description %>
       </span>
-      </summary>
-
-      <div class="govuk-details__text">
-        <% if proceeding.used_delegated_functions_on %>
-          <h4 class="govuk-heading-m"><%= t(".emergency_certificate") %></h4>
-          <p><strong><%= t(".form_of_service") %></strong>
-            <%= proceeding.emergency_level_of_service_name %>
-          </p>
-          <p><strong><%= t(".allowable_work") %></strong>
-            <%= scope_limits(proceeding, "emergency") %>
-          </p>
-        <% end %>
-        <h4 class="govuk-heading-m"><%= t(".substantive_certificate") %></h4>
+    </h3>
+    <%= govuk_details(summary_text: t(".details_heading"), html_attributes: { "data-module": "govuk-details" }) do %>
+      <% if proceeding.used_delegated_functions_on %>
+        <h4 class="govuk-heading-m"><%= t(".emergency_certificate") %></h4>
         <p><strong><%= t(".form_of_service") %></strong>
-          <%= proceeding.substantive_level_of_service_name %>
+          <%= proceeding.emergency_level_of_service_name %>
         </p>
         <p><strong><%= t(".allowable_work") %></strong>
-          <%= scope_limits(proceeding, "substantive") %>
+          <%= scope_limits(proceeding, "emergency") %>
         </p>
-      </div>
-    </details>
-  </dd>
+      <% end %>
+      <h4 class="govuk-heading-m"><%= t(".substantive_certificate") %></h4>
+      <p><strong><%= t(".form_of_service") %></strong>
+        <%= proceeding.substantive_level_of_service_name %>
+      </p>
+      <p><strong><%= t(".allowable_work") %></strong>
+        <%= scope_limits(proceeding, "substantive") %>
+      </p>
+    <% end %>
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  </div>
 </div>

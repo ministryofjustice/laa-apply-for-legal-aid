@@ -8,21 +8,19 @@
     <%= t(".section_2.heading") %>
   </h2>
 
-  <dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__value">
-        <%= @applicant.email %>
-      </dt>
-      <dd class="govuk-summary-list__actions">
-        <%= link_to_accessible(
-              t("generic.change"),
-              providers_legal_aid_application_email_address_path(anchor: :email),
-              class: "govuk-link change-link",
-              suffix: "email address",
-            ) %>
-      </dd>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <p class="govuk-body"><%= @applicant.email %></p>
     </div>
-  </dl>
+    <div class="govuk-grid-column-one-quarter govuk-!-text-align-right">
+      <%= govuk_link_to(
+            t("generic.change"),
+            providers_legal_aid_application_email_address_path(anchor: :email),
+            class: "govuk-!-font-size-19",
+          ) %>
+    </div>
+  </div>
+  <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_about_the_financial_assessment_path,

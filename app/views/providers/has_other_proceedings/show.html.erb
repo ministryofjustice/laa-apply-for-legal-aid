@@ -3,25 +3,23 @@
               method: :patch,
               local: true) do |form| %>
   <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
-
     <% if @legal_aid_application.proceedings.any? %>
       <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.proceedings.count, "proceeding").to_s) %></h1>
-      <div class="govuk-summary-list">
+      <%= govuk_summary_list do |summary_list| %>
         <% @legal_aid_application.proceedings.order(:created_at).each do |proceeding| %>
-          <dl class="govuk-summary-list__row" id="proceeding_type_<%= proceeding.ccms_code %>">
-            <dt class="govuk-summary-list__value"><%= proceeding.meaning %></dt>
-            <dd class="govuk-summary-list__actions">
-              <%= link_to_accessible(
-                    t(".remove"),
-                    providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application, ccms_code: proceeding.ccms_code),
-                    class: "govuk-link change-link",
-                    method: :delete,
-                    suffix: proceeding.meaning,
-                  ) %>
-            </dd>
-          </dl>
+          <%= summary_list.with_row(html_attributes: { id: "proceeding_type_#{proceeding.ccms_code}" }) do |row| %>
+            <%= row.with_value { proceeding.meaning } %>
+            <%= row.with_action(
+                  text: t(".remove"),
+                  href: providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application, ccms_code: proceeding.ccms_code),
+                  html_attributes: {
+                    "data-method": "delete",
+                    "aria-label": "#{t('.remove')} #{proceeding.meaning}",
+                  },
+                ) %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     <% end %>
 
     <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
