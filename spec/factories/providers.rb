@@ -3,7 +3,7 @@ FactoryBot.define do
     firm
     name { Faker::Name.name }
     username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
-    email { Faker::Internet.safe_email }
+    email { Faker::Internet.email }
     portal_enabled { true }
 
     trait :without_portal_enabled do

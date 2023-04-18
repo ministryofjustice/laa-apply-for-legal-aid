@@ -39,7 +39,7 @@ RSpec.describe "update client email address before application confirmation" do
     let(:params) do
       {
         applicant: {
-          email: Faker::Internet.safe_email,
+          email: Faker::Internet.email,
         },
       }
     end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe SubmitProviderFinancialReminderMailer do
   let(:application) { create(:legal_aid_application, :with_applicant) }
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
   let(:provider_name) { Faker::Name.name }
   let(:application_url) { "test" }
 

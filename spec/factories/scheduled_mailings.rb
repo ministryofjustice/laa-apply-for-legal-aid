@@ -5,7 +5,7 @@ FactoryBot.define do
     mailer_klass { "SubmitApplicationReminderMailer" }
     mailer_method { "notify_provider" }
     status { "processing" }
-    addressee { Faker::Internet.safe_email }
+    addressee { Faker::Internet.email }
     arguments { [legal_aid_application.id, "Bob Marley", "bob@wailing.jm"] }
     scheduled_at { Faker::Time.between(from: 1.minute.from_now, to: 2.months.from_now) }
     govuk_message_id { SecureRandom.uuid }

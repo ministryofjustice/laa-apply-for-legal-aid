@@ -10,7 +10,7 @@ RSpec.describe SubmitApplicationReminderMailer do
            df_options: { DA001: 10.days.ago },
            substantive_application_deadline_on: 10.days.from_now)
   end
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
   let(:provider_name) { Faker::Name.name }
 
   describe "#notify_provider" do

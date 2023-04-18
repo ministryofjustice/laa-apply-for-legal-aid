@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe NotifyMailer do
   let(:app_id) { SecureRandom.uuid }
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
   let(:client_name) { Faker::Name.name }
   let(:provider_firm) { Faker::Name.name }
   let(:application_url) { "/applications/#{app_id}/citizen/start" }

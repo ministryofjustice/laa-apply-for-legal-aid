@@ -11,7 +11,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
   end
   let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
   let(:applicant) { create(:applicant, email: nil) }
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
 
   describe ".model_name" do
     it 'is "Applicant"' do
@@ -42,7 +42,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
     end
 
     context "when stripping whitespace" do
-      let(:fake_email_address) { Faker::Internet.safe_email }
+      let(:fake_email_address) { Faker::Internet.email }
       let(:email) { "  #{fake_email_address}  " }
 
       it "updates the applicant email with the email address without whitespace" do
