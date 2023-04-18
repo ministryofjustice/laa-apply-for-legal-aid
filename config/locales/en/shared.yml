@@ -322,21 +322,12 @@ en:
         client_offer_of_undertakings_heading: Client offer of undertakings
         nature_of_urgency_heading: Nature of urgency and hearing date
         items:
-          prospects_of_success: Is the chance of a successful outcome 50% or better?
-          success_prospect: What is the chance of a successful outcome?
           statement_of_case: Statement of case
           full_name: Name
-          linked_children: Which children are covered under this proceeding?
-          attempts_to_settle: What attempts have been made to settle the matter?
-          specific_issue: What specific issue do you want to determine at court?
-          prohibited_steps: Is the prohibited step to prevent removal from the UK?
-          opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
-          opponents_application_reason: Reason for applying for legal aid at this stage
           gateway_evidence: Upload supporting evidence
           undertaking_offered: Has the client offered undertakings?
           nature_of_urgency: What is the nature of the urgency?
           hearing_date_set: Has a date been set for the hearing?
-          vary_order: Why are you making a new application?
       laspo:
         heading: LASPO
         question: Are the Section 8 proceedings you're applying for in scope of LASPO?
@@ -355,6 +346,16 @@ en:
         police_notified: Have the police been notified?
         understands_terms_of_court_order: Do all parties have the mental capacity to understand the terms of a court order?
         warning_letter_sent: Has a warning letter been sent to the opponent?
+      merits_proceeding_section:
+        attempts_to_settle: What attempts have been made to settle the matter?
+        linked_children: Which children are covered under this proceeding?
+        opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
+        opponents_application_reason: Reason for applying for legal aid at this stage
+        prohibited_steps: Is the prohibited step to prevent removal from the UK?
+        prospects_of_success: Is the chance of a successful outcome 50% or better?
+        success_prospect: What is the chance of a successful outcome?
+        specific_issue: What specific issue do you want to determine at court?
+        vary_order: Why are you making a new application?
       supporting_evidence:
         evidence_types:
           benefit_evidence: Benefit evidence
