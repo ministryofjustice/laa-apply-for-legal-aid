@@ -98,7 +98,7 @@
       <% end %>
     <% end %>
 
-    <% unless proceeding.prohibited_steps.uk_removal %>
+    <% if proceeding.prohibited_steps && !proceeding.prohibited_steps.uk_removal %>
       <p class='govuk-body'><%= proceeding.prohibited_steps.details %></p>
     <% end %>
     <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
