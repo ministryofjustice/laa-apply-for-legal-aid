@@ -231,8 +231,6 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - browser-tools/install-chrome
-    - browser-tools/install-chromedriver
     - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
@@ -242,6 +240,8 @@ jobs:
     - *install_js_packages
     - *save_js_packages_cache
     - run: bundle exec rails assets:precompile
+    - browser-tools/install-chrome
+    - browser-tools/install-chromedriver
     - run:
         name: Run integration tests
         command: |
