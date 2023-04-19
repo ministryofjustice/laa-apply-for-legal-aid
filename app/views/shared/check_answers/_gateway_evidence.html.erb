@@ -1,6 +1,6 @@
 <section class="print-no-break govuk-!-padding-top-6">
   <h2 class="govuk-heading-m"><%= t(".heading") %></h2>
-  <%= govuk_summary_list do |summary_list| %>
+  <%= govuk_summary_list(actions: !read_only) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__gateway_evidence" }) do |row| %>
       <%= row.with_key(text: t(".gateway_evidence"), classes: "govuk-!-width-one-half") %>
       <%= row.with_value do %>
@@ -10,13 +10,11 @@
           <% end %>
         </ul>
       <% end %>
-      <% unless read_only %>
-        <%= row.with_action(
-              text: t("generic.change"),
-              href: providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
-              visually_hidden_text: t(".gateway_evidence"),
-            ) %>
-      <% end %>
+      <%= row.with_action(
+            text: t("generic.change"),
+            href: providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
+            visually_hidden_text: t(".gateway_evidence"),
+          ) %>
     <% end %>
   <% end %>
 </section>
