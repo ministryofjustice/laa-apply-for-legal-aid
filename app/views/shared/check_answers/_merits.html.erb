@@ -12,92 +12,20 @@
       statement_of_case:,
     ) %>
 
-<% if @legal_aid_application.undertaking %>
-  <div class="govuk-!-padding-bottom-6"></div>
-  <section class="print-no-break">
-    <h2 class="govuk-heading-m"><%= t(".client_offer_of_undertakings_heading") %></h2>
+<%= render("shared/check_answers/undertaking", read_only:, undertaking:) if @legal_aid_application.undertaking %>
 
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: :undertaking_offered,
-            url: providers_legal_aid_application_client_offered_undertakings_path(@legal_aid_application),
-            question: t(".items.undertaking_offered"),
-            answer: yes_no(undertaking.offered),
-            no_border: true,
-            read_only:,
-          ) %>
-    </dl>
-    <div class='govuk-body'><%= undertaking.additional_information %></div>
-    <%= render "shared/check_answers/section_break" if undertaking.additional_information %>
-  </section>
-<% end %>
-
-<% if @legal_aid_application.urgency %>
-  <div class="govuk-!-padding-bottom-6"></div>
-  <section class="print-no-break">
-    <%= check_answer_change_link(
-          name: :nature_of_urgency_heading,
-          url: providers_legal_aid_application_nature_of_urgencies_path(@legal_aid_application),
-          question: t(".nature_of_urgency_heading"),
-          read_only:,
-        ) %>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_no_link(
-            name: :nature_of_urgency,
-            question: t(".items.nature_of_urgency"),
-            answer: urgency.nature_of_urgency,
-            read_only:,
-          ) %>
-    </dl>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_no_link(
-            name: :hearing_date_set,
-            question: t(".items.hearing_date_set"),
-            answer: sanitize("#{yes_no(urgency.hearing_date_set)}<br>#{urgency.hearing_date}#{urgency.additional_information}"),
-            read_only:,
-          ) %>
-    </dl>
-  </section>
-<% end %>
+<%= render("shared/check_answers/urgency", read_only:, urgency:) if @legal_aid_application.urgency %>
 
 <% if @legal_aid_application.section_8_proceedings? %>
-  <%= render(
-        "shared/check_answers/children_involved",
-        read_only:,
-      ) %>
+  <%= render("shared/check_answers/children_involved", read_only:) %>
 
-  <%= render(
-        "shared/check_answers/laspo",
-        read_only:,
-      ) %>
+  <%= render("shared/check_answers/laspo", read_only:) %>
 <% end %>
 
-<%= render(
-      "shared/check_answers/matter_opposition",
-      read_only:,
-    ) %>
+<%= render("shared/check_answers/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
 
 <%# TODO: The gateway evidence may not exist for an application transitioning to MP feature %>
-<% if gateway_evidence %>
-  <div class="govuk-!-padding-bottom-6"></div>
-
-  <section class="print-no-break">
-    <h2 class="govuk-heading-m">
-      <%= t ".gateway-evidence-heading" %>
-    </h2>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
-    <%= check_answer_link(
-          name: :gateway_evidence,
-          url: providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
-          question: t(".items.gateway_evidence"),
-          answer: attachments_with_size(gateway_evidence&.original_attachments),
-          read_only:,
-        ) %>
-    </dl>
-  </section>
-<% end %>
+<%= render("shared/check_answers/gateway_evidence", read_only:, gateway_evidence:) if gateway_evidence %>
 
 <%= render("shared/check_answers/merits_proceeding_section", read_only:) %>
 
