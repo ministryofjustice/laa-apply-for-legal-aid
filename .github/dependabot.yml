@@ -6,7 +6,7 @@ updates:
     - dependency-type: "all"
   schedule:
     interval: daily
-    time: "03:00"
+    time: "21:00"
     timezone: Europe/London
   open-pull-requests-limit: 10
   ignore:
@@ -20,7 +20,7 @@ updates:
   schedule:
     interval: weekly
     day: wednesday
-    time: "03:00"
+    time: "21:15"
     timezone: Europe/London
   open-pull-requests-limit: 10
   reviewers:
