@@ -274,6 +274,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: checkFinancialEligibilityHost
+  - name: CFE_CIVIL_HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: checkFinancialEligibilityCivilHost
   - name: APPLY_EMAIL
     valueFrom:
       secretKeyRef:
@@ -349,6 +354,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: googleSheetsSpreadsheetId
+  - name: CFE_COMPARISON_SHEET_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleSheetsCFEComparisonSpreadsheetId
   - name: GOOGLE_DATA_STUDIO_URL
     valueFrom:
       secretKeyRef:
