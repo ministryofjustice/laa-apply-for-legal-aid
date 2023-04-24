@@ -12,7 +12,7 @@
     <p class="govuk-body"><%= t(".your_client_can") %></p>
     <p class="govuk-body"><%= t(".its_a_fast") %></p>
 
-    <%= govuk_details(summary_text: t(".details_summary")) do %>
+    <%= govuk_details(summary_text: t(".details_summary"), classes: "govuk-!-display-none-print") do %>
       <%= t(".details_content_html") %>
       <%= list_from_translation_path(".open_banking_consents.show.details") %>
     <% end %>
