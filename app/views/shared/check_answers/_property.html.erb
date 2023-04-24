@@ -12,7 +12,7 @@
     <%= row.with_action(
           text: t("generic.change"),
           href: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
-          html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.own_home')}" },
+          visually_hidden_text: t("shared.check_answers.assets.property.own_home"),
         ) %>
   <% end %>
 
@@ -23,7 +23,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.property_value')}" },
+            visually_hidden_text: t("shared.check_answers.assets.property.property_value"),
           ) %>
     <% end %>
   <% end %>
@@ -35,7 +35,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.outstanding_mortgage')}" },
+            visually_hidden_text: t("shared.check_answers.assets.property.outstanding_mortgage"),
           ) %>
     <% end %>
   <% end %>
@@ -47,7 +47,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.shared_ownership')}" },
+            visually_hidden_text: t("shared.check_answers.assets.property.shared_ownership"),
           ) %>
     <% end %>
   <% end %>
@@ -59,7 +59,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.assets.property.percentage_home')}" },
+            visually_hidden_text: t("shared.check_answers.assets.property.percentage_home"),
           ) %>
     <% end %>
   <% end %>

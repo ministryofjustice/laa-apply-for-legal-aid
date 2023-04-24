@@ -15,7 +15,7 @@
     <%= row.with_action(
           text: t("generic.change"),
           href: providers_legal_aid_application_bank_statements_path(@legal_aid_application),
-          html_attributes: { "aria-label": "#{t('generic.change')} #{t('.bank_statement_question')}" },
+          visually_hidden_text: t(".bank_statement_question"),
         ) %>
   <% end %>
 <% end %>

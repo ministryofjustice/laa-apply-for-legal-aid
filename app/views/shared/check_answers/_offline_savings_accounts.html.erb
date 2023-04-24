@@ -36,7 +36,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.offline_savings_accounts')}" },
+            visually_hidden_text: t(".offline_savings_accounts"),
           ) %>
     <% end %>
   <% end %>

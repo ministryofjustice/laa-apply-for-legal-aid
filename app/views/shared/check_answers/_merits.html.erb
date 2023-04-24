@@ -24,7 +24,6 @@
 
 <%= render("shared/check_answers/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
 
-<%# TODO: The gateway evidence may not exist for an application transitioning to MP feature %>
 <%= render("shared/check_answers/gateway_evidence", read_only:, gateway_evidence:) if gateway_evidence %>
 
 <%= render("shared/check_answers/merits_proceeding_section", read_only:) %>

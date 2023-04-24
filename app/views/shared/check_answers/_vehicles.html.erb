@@ -14,7 +14,7 @@
     <%= row.with_action(
           text: t("generic.change"),
           href: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),
-          html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.own")}" },
+          visually_hidden_text: t(".#{journey_type}.own"),
         ) %>
   <% end %>
 
@@ -25,7 +25,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.estimated_value")}" },
+            visually_hidden_text: t(".#{journey_type}.estimated_value"),
           ) %>
     <% end %>
 
@@ -35,7 +35,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.payment_remaining")}" },
+            visually_hidden_text: t(".#{journey_type}.payment_remaining"),
           ) %>
     <% end %>
 
@@ -45,7 +45,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.more_than_three_years_old")}" },
+            visually_hidden_text: t(".#{journey_type}.more_than_three_years_old"),
           ) %>
     <% end %>
 
@@ -55,7 +55,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t(".#{journey_type}.used_regularly")}" },
+            visually_hidden_text: t(".#{journey_type}.used_regularly"),
           ) %>
     <% end %>
   <% end %>
