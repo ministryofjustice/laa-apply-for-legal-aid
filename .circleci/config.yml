@@ -22,6 +22,7 @@ executors:
       - image: ministryofjustice/cloud-platform-tools:2.3.0
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+          TZ: Europe/London
   notification-executor:
     docker:
       - image: 'cibuilds/base:latest'
@@ -74,15 +75,6 @@ references:
     run:
       name: Install Yarn packages
       command: yarn --frozen-lockfile
-
-  setup_aws_login: &setup_aws_login
-    run:
-      name: Setup aws login
-      command: |
-        sudo apt-get update
-        sudo apt-get install -y python3-pip
-        sudo pip3 install awscli
-        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${ECR_ENDPOINT}
 
   setup_uat_kubectl: &setup_uat_kubectl
     run:
@@ -354,15 +346,14 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}"
 
   clean_up_ecr:
-    executor: linting-executor
+    executor: cloud-platform-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - *setup_aws_login
-    - run:
-        name: Delete old images from ecr repo
-        command: |
-          ./bin/clean_up_ecr
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Delete old images from ecr repo
+          command: |
+            ./bin/clean_up_ecr
 
   delete_dependabot_deployment:
     executor: cloud-platform-executor
