@@ -7,6 +7,16 @@
         address: @address,
         read_only: @read_only,
       ) %>
+
+  <% if @legal_aid_application.applicant_has_partner? %>
+    <%= render(
+          "shared/check_answers/partner_details",
+          attributes: %i[first_name last_name date_of_birth national_insurance_number address],
+          partner: @partner,
+          read_only: @read_only,
+        ) %>
+  <% end %>
+
     <div class="govuk-grid-row" id="app-check-your-answers__proceedings">
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m"><%= t ".section_proceeding.heading" %></h2>

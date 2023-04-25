@@ -8,7 +8,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :first_name),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.first_name')}" },
+            visually_hidden_text: "#{t('.aria_prefix')} #{t('.first_name')}",
           ) %>
     <% end %>
   <% end %>
@@ -20,7 +20,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.last_name')}" },
+            visually_hidden_text: "#{t('.aria_prefix')} #{t('.last_name')}",
           ) %>
     <% end %>
   <% end %>
@@ -32,7 +32,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.dob')}" },
+            visually_hidden_text: "#{t('.aria_prefix')} #{t('.dob')}",
           ) %>
     <% end %>
   <% end %>
@@ -58,7 +58,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: change_address_link(applicant),
-            html_attributes: { "aria-label": "#{t('generic.change')} #{t('.address')}" },
+            visually_hidden_text: "#{t('.aria_prefix')} #{t('.address')}",
           ) %>
     <% end %>
   <% end %>
@@ -77,7 +77,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
-            html_attributes: { "aria-label": "#{t('generic.change')} {#{t('.nino')}" },
+            visually_hidden_text: "#{t('.aria_prefix')} {#{t('.nino')}",
           ) %>
     <% end %>
   <% end %>
@@ -89,7 +89,19 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :email),
-            html_attributes: { "aria-label": "#{t('generic.change')} {#{t('.email')}" },
+            visually_hidden_text: "#{t('.aria_prefix')} {#{t('.email')}",
+          ) %>
+    <% end %>
+  <% end %>
+
+  <% if Setting.partner_means_assessment? %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_partner" }) do |row| %>
+      <%= row.with_key(text: t(".has_partner"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value(text: yes_no(applicant.has_partner?)) %>
+      <%= row.with_action(
+            text: t("generic.change"),
+            href: providers_legal_aid_application_client_has_partner_path(@legal_aid_application),
+            visually_hidden_text: t(".has_partner_aria_label"),
           ) %>
     <% end %>
   <% end %>

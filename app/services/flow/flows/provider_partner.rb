@@ -15,6 +15,8 @@ module Flow
         partner_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_details_path(application) },
           forward: :shared_addresses,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: false,
         },
         shared_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_shared_address_path(application) },
@@ -25,6 +27,8 @@ module Flow
               :partner_address_lookups
             end
           end,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: ->(application) { !application&.partner&.shared_address_with_client? },
         },
         partner_address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_partners_address_lookup_path(application) },

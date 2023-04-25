@@ -97,6 +97,10 @@ FactoryBot.define do
       national_insurance_number { "BB123456B" }
     end
 
+    trait :with_partner do
+      has_partner { true }
+    end
+
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
     transient do
       with_bank_accounts { 0 }

@@ -7,7 +7,7 @@ module Providers
 
       def update
         @form = ::Partners::SharedAddressForm.new(form_params)
-        render :show unless save_continue_or_draft(@form, shared_address: @form.shared_address_with_client?)
+        render :show unless save_run_continue_or_draft(@form, method_to_run, shared_address: @form.shared_address_with_client?)
       end
 
     private
@@ -20,6 +20,18 @@ module Providers
         merge_with_model(partner) do
           params.require(:partner).permit(:shared_address_with_client)
         end
+      end
+
+      def method_to_run
+        if @form.shared_address_with_client?
+          :duplicate_applicants_address
+        elsif answer_changing_from_true_to_false
+          :clear_stored_address
+        end
+      end
+
+      def answer_changing_from_true_to_false
+        partner.shared_address_with_client == true && @form.shared_address_with_client? == false
       end
     end
   end

@@ -35,6 +35,7 @@ module Providers
 
     def set_variables
       @applicant = legal_aid_application.applicant
+      @partner = legal_aid_application.partner
       @read_only = legal_aid_application.read_only?
       @address = @applicant.addresses.first
     end

@@ -269,6 +269,7 @@ en:
         total: Total capital assessed
       client_details:
         address: Correspondence address
+        aria_prefix: client's
         employment_status: Employment status
         age: "%{years} years old"
         age_question: Age at computation date
@@ -278,6 +279,21 @@ en:
         first_name: First name
         last_name: Last name
         nino: National Insurance number
+        has_partner: Does your client have a partner?
+        has_partner_aria_label: Change whether your client has a partner
+      partner_details:
+        section_heading: Partner's details
+        aria_prefix: partner's
+        address: Correspondence address
+        age: "%{years} years old"
+        age_question: Age at computation date
+        means_tested: Was the client means-tested?
+        dob: Date of birth
+        email: Email address
+        first_name: First name
+        last_name: Last name
+        nino: National Insurance number
+        has_partner: Does your client have a partner?
       dependants:
         has_dependants: Does your client have any dependants?
         add-new: Add dependant
