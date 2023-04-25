@@ -1,22 +1,25 @@
 <% content_for(:panel) do %>
-  <div class="govuk-panel govuk-panel--confirmation">
-    <h1 class="govuk-panel__title govuk-!-padding-top-4">
-      <%= t(".completed_financial_assessment") %>
-    </h1>
-    <div class="govuk-panel__body">
-      <dl class="govuk-list inline-list">
-        <dt>
-          <strong><%= t(".name") %>:</strong>
+  <%= govuk_panel(title_text: t(".completed_financial_assessment")) do %>
+    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-list inline-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t(".name") %>:
         </dt>
-        <dd><%= @applicant.full_name %></dd>
+        <dd class="govuk-summary-list__value">
+          <%= @applicant.full_name %>
+        </dd>
+      </div>
 
-        <dt>
-          <strong><%= t(".reference_number") %>:</strong>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t(".reference_number") %>:
         </dt>
-        <dd><%= @legal_aid_application.application_ref %></dd>
-      </dl>
-    </div>
-  </div>
+        <dd class="govuk-summary-list__value">
+          <%= @legal_aid_application.application_ref %>
+        </dd>
+      </div>
+    </dl>
+  <% end %>
 <% end %>
 
 <%= page_template page_title: t(".page-heading"), head_title: t(".completed_financial_assessment"), back_link: :none do %>

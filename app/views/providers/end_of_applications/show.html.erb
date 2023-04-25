@@ -1,13 +1,9 @@
 <%= page_template page_title: t(".heading"), template: :basic, back_link: :none do %>
-  <div class="govuk-panel govuk-panel--confirmation">
-    <h1 class="govuk-panel__title govuk-!-padding-top-4">
-      <%= page_title %>
-    </h1>
-    <div class="govuk-panel__body">
-      <%= t(".your_case_reference_number") %><br>
-      <strong><%= @legal_aid_application.application_ref %></strong>
-    </div>
-  </div>
+
+  <%= govuk_panel(title_text: "Application complete") do %>
+    <%= t(".your_case_reference_number") %><br>
+    <strong><%= @legal_aid_application.application_ref %></strong>
+  <% end %>
 
   <p class="govuk-body govuk-!-padding-top-4"><%= t(".confirmation_email_sent") %></p>
 
