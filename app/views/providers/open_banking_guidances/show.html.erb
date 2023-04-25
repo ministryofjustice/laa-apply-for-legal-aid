@@ -12,17 +12,10 @@
     <p class="govuk-body"><%= t(".your_client_can") %></p>
     <p class="govuk-body"><%= t(".its_a_fast") %></p>
 
-    <details class="govuk-details govuk-!-display-none-print" data-module="govuk-details">
-      <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">
-            <%= t(".details_summary") %>
-          </span>
-      </summary>
-      <div class="govuk-details__text govuk-!-padding-bottom-1">
-        <%= t(".details_content_html") %>
-        <%= list_from_translation_path(".open_banking_consents.show.details") %>
-      </div>
-    </details>
+    <%= govuk_details(summary_text: t(".details_summary"), classes: "govuk-!-display-none-print") do %>
+      <%= t(".details_content_html") %>
+      <%= list_from_translation_path(".open_banking_consents.show.details") %>
+    <% end %>
 
     <div class="govuk-!-padding-bottom-4 only-print">
       <h3 class="govuk-heading-m"><%= t(".details_summary") %></h3>

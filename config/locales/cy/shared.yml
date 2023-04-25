@@ -326,15 +326,7 @@ cy:
           not_known: .sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
             kroW
       types_of_income_form:
-        citizens:
-          none_of_these: stnemyap eseht fo enon eviecer I
         hints:
-          citizens:
-            friends_or_family: ".stnemyap ffo-eno edulcni ton oD .stsoc gnivil htiw
-              pleh ot yenom uoy sevig ylraluger evitaler ro dneirf a fi tceleS"
-            benefits: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
-            maintenance_in: ".ecnanetniam dlihc sedulcni sihT"
-            pension: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
           providers:
             friends_or_family: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
               roF"
@@ -348,18 +340,10 @@ cy:
             .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
             .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
       types_of_outgoings_form:
-        citizens:
-          none_of_these: stnemyap eseht fo enon ekam I
         hints:
           rent_or_mortgage: ".gnigdol dna draob ro egagtrom ,tner ,elpmaxe roF"
           child_care: ".yresrun ro ynnan ,rednimdlihc a ot ,elpmaxe roF"
           maintenance_out: ".ecnanetniam dlihc sedulcni sihT"
-        expanded_explanation:
-          heading: "?siht deksa gnieb I ma yhW"
-          list: |2-
-
-            .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
-            .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
     page-title:
       suffix: dia lagel rof ylppA
     property_results:

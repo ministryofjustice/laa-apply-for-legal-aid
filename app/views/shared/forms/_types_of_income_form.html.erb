@@ -30,25 +30,6 @@
           ) %>
     <% end %>
 
-    <% if journey == :citizen %>
-      <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text"
-            title="<%= t(".expanded_explanation.heading") %>"
-            aria-label="<%= t(".expanded_explanation.heading") %>">
-            <%= t(".expanded_explanation.heading") %>
-          </span>
-        </summary>
-
-        <div class="govuk-details__text">
-          <% t(".expanded_explanation.list").each_line do |para| %>
-            <p>
-            <%= para %>
-          <% end %>
-        </div>
-    </details>
-    <% end %>
-
     <div class="govuk-!-padding-bottom-4"></div>
 
     <%= next_action_buttons(
