@@ -332,19 +332,50 @@ en:
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         case-details-heading: Case details
-        involved-children-heading: Children involved in this application
-        matter_opposed_reason_heading: Why the matter is opposed
-        laspo:
-          heading: LASPO
-          question: Are the Section 8 proceedings you're applying for in scope of LASPO?
-        opponent-heading: Opponent details
-        latest-incident-heading: Latest incident details
         statement-of-case-heading: Statement of case
-        gateway-evidence-heading: Supporting evidence
-        evidence_upload_heading: Supporting evidence
         client_denial_of_allegation_heading: Client denial of allegation
-        client_offer_of_undertakings_heading: Client offer of undertakings
-        nature_of_urgency_heading: Nature of urgency and hearing date
+        items:
+          statement_of_case: Statement of case
+          full_name: Name
+      gateway_evidence:
+        heading: Supporting evidence
+        gateway_evidence: Upload supporting evidence
+      laspo:
+        heading: LASPO
+        question: Are the Section 8 proceedings you're applying for in scope of LASPO?
+      latest_incident_details:
+        date_of_latest_incident: When did the incident occur?
+        latest-incident-heading: Latest incident details
+        notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
+      matter_opposition:
+        matter_opposed_reason: Why is the Section 8 matter opposed by your client or the other party?
+        matter_opposed_reason_heading: Why the matter is opposed
+      opponent_details:
+        allegation_denies_all: Does the client wholly or substantially deny any allegations?
+        bail_conditions_set: Have bail conditions been set?
+        opponent: Opponent
+        opponent-heading: Opponent details
+        police_notified: Have the police been notified?
+        understands_terms_of_court_order: Do all parties have the mental capacity to understand the terms of a court order?
+        warning_letter_sent: Has a warning letter been sent to the opponent?
+      undertaking:
+        heading: Client offer of undertakings
+        undertaking_offered: Has the client offered undertakings?
+      urgency:
+        heading: Nature of urgency and hearing date
+        hearing_date_set: Has a date been set for the hearing?
+        nature_of_urgency: What is the nature of the urgency?
+      merits_proceeding_section:
+        attempts_to_settle: What attempts have been made to settle the matter?
+        linked_children: Which children are covered under this proceeding?
+        opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
+        opponents_application_reason: Reason for applying for legal aid at this stage
+        prohibited_steps: Is the prohibited step to prevent removal from the UK?
+        prospects_of_success: Is the chance of a successful outcome 50% or better?
+        success_prospect: What is the chance of a successful outcome?
+        specific_issue: What specific issue do you want to determine at court?
+        vary_order: Why are you making a new application?
+      supporting_evidence:
         evidence_types:
           benefit_evidence: Benefit evidence
           employment_evidence: Employment evidence
@@ -353,32 +384,10 @@ en:
           court_order: Court order
           court_application: Court application
           expert_report: Expert report
-        items:
-          prospects_of_success: Is the chance of a successful outcome 50% or better?
-          success_prospect: What is the chance of a successful outcome?
-          statement_of_case: Statement of case
-          full_name: Name
-          child: Child
-          opponent: Opponent
-          linked_children: Which children are covered under this proceeding?
-          attempts_to_settle: What attempts have been made to settle the matter?
-          specific_issue: What specific issue do you want to determine at court?
-          prohibited_steps: Is the prohibited step to prevent removal from the UK?
-          opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
-          opponents_application_reason: Reason for applying for legal aid at this stage
-          understands_terms_of_court_order: Do all parties have the mental capacity to understand the terms of a court order?
-          warning_letter_sent: Has a warning letter been sent to the opponent?
-          police_notified: Have the police been notified?
-          bail_conditions_set: Have bail conditions been set?
-          notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
-          date_of_latest_incident: When did the incident occur?
-          gateway_evidence: Upload supporting evidence
-          allegation_denies_all: Does the client wholly or substantially deny any allegations?
-          undertaking_offered: Has the client offered undertakings?
-          nature_of_urgency: What is the nature of the urgency?
-          hearing_date_set: Has a date been set for the hearing?
-          vary_order: Why are you making a new application?
-          matter_opposed_reason: Why is the Section 8 matter opposed by your client or the other party?
+        evidence_upload_heading: Supporting evidence
+      children_involved:
+        involved-children-heading: Children involved in this application
+        child: Child
       full_employment_details:
         employment: Employment income
         full_employment_details: Your client's employment details

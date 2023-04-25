@@ -176,21 +176,6 @@ cy:
           ruoy fo tseb eht ot ,taht gnimrifnoc era uoy noitacilppa siht gnittimbus
           yB"
         case-details-heading: sliated esaC
-        opponent-heading: sliated tnenoppO
-        latest-incident-heading: sliated tnedicni tsetaL
-        items:
-          prospects_of_success: "?retteb ro %05 emoctuo lufsseccus a fo ecnahc eht
-            sI"
-          success_prospect: "?emoctuo lufsseccus a fo ecnahc eht si tahW"
-          statement_of_case: esac fo tnemetats a edivorP
-          understands_terms_of_court_order: "?redro truoc a fo smret eht dnatsrednu
-            ot yticapac latnem eht evah tnenoppo eht seoD"
-          warning_letter_sent: "?tnenoppo eht ot tnes neeb rettel gninraw a saH"
-          police_notified: "?deifiton neeb ecilop eht evaH"
-          bail_conditions_set: "?tes neeb snoitidnoc liab evaH"
-          notification_of_latest_incident: "?tnedicni esuba citsemod tsetal eht tuoba
-            uoy tcatnoc tneilc ruoy did nehW"
-          date_of_latest_incident: "?rucco tnedicni eht did nehW"
       no_link_cash_transaction_item:
         no_transactions: 'oN'
         html:

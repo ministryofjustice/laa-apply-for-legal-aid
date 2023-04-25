@@ -42,16 +42,16 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "displays the correct questions" do
-        scope = "shared.check_answers.merits.items"
-        expect(response.body).to include(I18n.t("notification_of_latest_incident", scope:))
-        expect(response.body).to include(I18n.t("date_of_latest_incident", scope:))
-        expect(response.body).to include(I18n.t("understands_terms_of_court_order", scope:))
-        expect(response.body).to include(I18n.t("warning_letter_sent", scope:))
-        expect(response.body).to include(I18n.t("police_notified", scope:))
-        expect(response.body).to include(I18n.t("bail_conditions_set", scope:))
-        expect(response.body).to include(I18n.t("statement_of_case", scope:))
-        expect(response.body).to include(I18n.t("prospects_of_success", scope:))
-        expect(response.body).to include(I18n.t("success_prospect", scope:))
+        scope = "shared.check_answers"
+        expect(response.body).to include(I18n.t("latest_incident_details.notification_of_latest_incident", scope:))
+        expect(response.body).to include(I18n.t("latest_incident_details.date_of_latest_incident", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.understands_terms_of_court_order", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.warning_letter_sent", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.police_notified", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.bail_conditions_set", scope:))
+        expect(response.body).to include(I18n.t("merits.items.statement_of_case", scope:))
+        expect(response.body).to include(I18n.t("merits_proceeding_section.prospects_of_success", scope:))
+        expect(response.body).to include(I18n.t("merits_proceeding_section.success_prospect", scope:))
       end
 
       it "displays the correct URLs for changing values" do
@@ -100,11 +100,11 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "displays linked children" do
-        expect(response.body).to include(I18n.t("shared.check_answers.merits.items.linked_children"))
+        expect(response.body).to include(I18n.t("shared.check_answers.merits_proceeding_section.linked_children"))
       end
 
       it "displays attempts to settle" do
-        expect(response.body).to include(I18n.t("shared.check_answers.merits.items.attempts_to_settle"))
+        expect(response.body).to include(I18n.t("shared.check_answers.merits_proceeding_section.attempts_to_settle"))
       end
 
       it 'changes the state to "checking_merits_answers"' do

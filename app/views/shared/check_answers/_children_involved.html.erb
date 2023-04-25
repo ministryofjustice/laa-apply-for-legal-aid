@@ -1,0 +1,17 @@
+<section class="print-no-break govuk-!-padding-top-6">
+  <%= check_answer_change_link(
+        name: :involved_children,
+        url: providers_legal_aid_application_has_other_involved_children_path(@legal_aid_application),
+        question: t(".involved-children-heading"),
+        read_only:,
+      ) %>
+
+  <%= govuk_summary_list(actions: false, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+    <% @legal_aid_application.involved_children.each_with_index do |child, i| %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__involved_child_#{i + 1}" }) do |row| %>
+        <%= row.with_key(text: "#{t('.child')} #{i + 1}", classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: "#{child.full_name} born on #{child.date_of_birth.strftime('%e %B %Y')}") %>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>
