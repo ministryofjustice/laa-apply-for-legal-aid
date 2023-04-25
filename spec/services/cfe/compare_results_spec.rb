@@ -22,14 +22,14 @@ RSpec.describe CFE::CompareResults do
         Setting.setting.update!(cfe_compare_run_at: nil)
       end
 
-      it "only compares submissions from the last 24 hours" do
+      it "only compares submissions created in the last 24 hours" do
+        # this ignores the submission created -2.days ago, but includes those from -12 & -6 hours
         expect(store_compare_result).to receive(:call).twice
         call
       end
 
       it "updates the setting run time" do
-        call
-        expect(Setting.setting.cfe_compare_run_at).not_to be_nil
+        expect { call }.to change { Setting.setting.cfe_compare_run_at }.from(nil).to(instance_of(ActiveSupport::TimeWithZone))
       end
     end
 
@@ -39,6 +39,7 @@ RSpec.describe CFE::CompareResults do
       end
 
       it "only compares submissions since the last run" do
+        # only expect the application created 6 hours ago
         expect(store_compare_result).to receive(:call).once
         call
       end

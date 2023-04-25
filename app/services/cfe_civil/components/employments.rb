@@ -26,11 +26,7 @@ module CFECivil
       end
 
       def employment_payments(employment)
-        data = []
-        employment.employment_payments.each do |payment|
-          data << individual_payment_data(payment)
-        end
-        data
+        employment.employment_payments.each_with_object([]) { |payment, data| data << individual_payment_data(payment) }
       end
 
       def individual_payment_data(payment)

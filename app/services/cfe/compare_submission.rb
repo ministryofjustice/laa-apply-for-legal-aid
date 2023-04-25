@@ -1,6 +1,6 @@
 module CFE
   class CompareSubmission
-    # This is intended as a temporary class while we switch from CFE-Legacy to CFE-Civil
+    # NOTE: This is intended as a temporary class while we switch from CFE-Legacy to CFE-Civil
     # Once that change over is complete, the aim is that this can be removed, along with
     # the save_result: attribute for submission_builder
 
@@ -18,7 +18,7 @@ module CFE
       raise StandardError, "Cannot compare CFE results" if missing_data?
 
       build_results
-      CFE::StoreCompareResult.call([Time.zone.now,
+      CFE::StoreCompareResult.call([Time.current,
                                     @legal_aid_application.cfe_result.created_at,
                                     current_env,
                                     @results.empty?,

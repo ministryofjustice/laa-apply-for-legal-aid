@@ -22,8 +22,7 @@ module CFECivil
       end
 
       def transactions(array)
-        result = []
-        array.each do |transaction|
+        array.each_with_object([]) do |transaction, result|
           result << {
             date: transaction.happened_at.strftime("%Y-%m-%d"),
             amount: transaction.amount.to_f,
@@ -31,7 +30,6 @@ module CFECivil
           }
           result.first[:flags] = transaction.flags if transaction.flags.present?
         end
-        result
       end
 
       def bank_transactions

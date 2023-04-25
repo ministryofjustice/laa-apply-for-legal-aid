@@ -1,5 +1,7 @@
 module CFE
   class StoreCompareResult
+    # NOTE: This is intended as a temporary class while we switch from CFE-Legacy to CFE-Civil
+    # Once that change over is complete, the aim is that this can be removed, along with
     SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 
     def self.call(value_array)
@@ -18,8 +20,8 @@ module CFE
       @rows = []
     end
 
-    def call(array)
-      @rows = [array]
+    def call(row)
+      @rows = [row]
       range = "Sheet1!A1:A"
       value_range = Google::Apis::SheetsV4::ValueRange.new(major_dimension: "ROWS",
                                                            range:,
@@ -44,7 +46,7 @@ module CFE
 
     def log_message(message)
       message = "#{self.class} :: #{message}"
-      message = Time.zone.now.strftime("%F %T.%L ") + message if Rails.env.development?
+      message = Time.current.strftime("%F %T.%L ") + message if Rails.env.development?
       Rails.logger.info message
     end
 

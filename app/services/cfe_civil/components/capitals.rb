@@ -73,15 +73,13 @@ module CFECivil
       def array_of_hashes_for(model, field_names_and_descriptions)
         return nil if model.nil?
 
-        items = []
-        field_names_and_descriptions.each do |field_name, field_description|
+        field_names_and_descriptions.each_with_object([]) do |(field_name, field_description), items|
           value = model.__send__(field_name)
           next if value.nil?
 
           value = value.round(2)
-          items << description_and_value(field_description, value) if not_nil_or_zero?(value)
+          items << description_and_value(field_description, value) if value&.nonzero?
         end
-        items
       end
 
       def description_and_value(description, value)
@@ -89,10 +87,6 @@ module CFECivil
           "description" => description,
           "value" => value,
         }
-      end
-
-      def not_nil_or_zero?(value)
-        value.present? && value.nonzero?
       end
 
       def savings_amount

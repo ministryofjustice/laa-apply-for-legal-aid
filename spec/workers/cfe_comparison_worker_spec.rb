@@ -15,7 +15,7 @@ RSpec.describe CFEComparisonWorker do
 
   context "when run before the target time" do
     it "schedules another run at 8pm for the same day" do
-      travel_to(Time.zone.now.change(hour: 14, minute: 0)) do
+      travel_to(Time.current.change(hour: 14, minute: 0)) do
         expected_date = Time.zone.now.change(hour: 20)
         expect { perform }.to change(described_class.jobs, :size).by(1)
         expect(described_class).to have_enqueued_sidekiq_job.at(expected_date)
@@ -25,8 +25,8 @@ RSpec.describe CFEComparisonWorker do
 
   context "when run at the scheduled time" do
     it "schedules another run at 8pm the following day" do
-      travel_to(Time.zone.now.change(hour: 20, minute: 0)) do
-        expected_date = Time.zone.now.advance(days: 1).change(hour: 20)
+      travel_to(Time.current.change(hour: 20, minute: 0)) do
+        expected_date = Time.current.advance(days: 1).change(hour: 20)
         expect { perform }.to change(described_class.jobs, :size).by(1)
         expect(described_class).to have_enqueued_sidekiq_job.at(expected_date)
       end

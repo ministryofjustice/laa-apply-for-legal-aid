@@ -10,9 +10,7 @@ module CFECivil
     private
 
       def dependants_data
-        array = []
-        legal_aid_application.dependants.each { |d| array << dependant_data(d) }
-        array
+        legal_aid_application.dependants.each_with_object([]) { |d, arr| arr << dependant_data(d) }
       end
 
       def dependant_data(dependant)

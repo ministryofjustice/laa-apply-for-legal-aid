@@ -30,15 +30,13 @@ module CFECivil
       end
 
       def transactions(array)
-        result = []
-        array.each do |transaction|
+        array.each_with_object([]) do |transaction, result|
           result << {
             date: transaction.transaction_date.strftime("%Y-%m-%d"),
             amount: transaction.amount.abs.to_f,
             client_id: transaction.id,
           }
         end
-        result
       end
     end
   end

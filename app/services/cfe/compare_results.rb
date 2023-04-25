@@ -1,5 +1,7 @@
 module CFE
   class CompareResults
+    # NOTE: This is intended as a temporary class while we switch from CFE-Legacy to CFE-Civil
+    # Once that change over is complete, the aim is that this can be removed, along with
     def self.call
       new.call
     end
@@ -27,7 +29,7 @@ module CFE
     end
 
     def run_time
-      @run_time ||= Time.zone.now
+      @run_time ||= Time.current
     end
 
     def last_run

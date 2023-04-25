@@ -10,26 +10,21 @@ module CFECivil
     private
 
       def build_transactions
-        result = []
-
-        bank_transactions.each do |transaction_type_id, array|
+        bank_transactions.each_with_object([]) do |(transaction_type_id, array), result|
           name = TransactionType.find(transaction_type_id).name
           type_hash = { name:, payments: transactions(array) }
           result << type_hash
         end
-        result
       end
 
       def transactions(array)
-        result = []
-        array.each do |transaction|
+        array.each_with_object([]) do |transaction, result|
           result << {
             payment_date: transaction.happened_at.strftime("%Y-%m-%d"),
             amount: transaction.amount.abs.to_f,
             client_id: transaction.id,
           }
         end
-        result
       end
 
       def bank_transactions

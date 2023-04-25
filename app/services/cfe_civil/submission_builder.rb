@@ -73,6 +73,7 @@ module CFECivil
         submission.save!
         history = write_submission_history(raw_response)
       end
+
       case raw_response.status
       when 200
         raw_response

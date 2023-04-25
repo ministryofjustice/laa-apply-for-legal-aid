@@ -10,12 +10,9 @@ module CFECivil
     private
 
       def other_income_data
-        array = []
-        transaction_types = grouped_transactions.keys.sort_by(&:name)
-        transaction_types.each do |transaction_type|
+        grouped_transactions.keys.sort_by(&:name).each_with_object([]) do |transaction_type, array|
           array << all_transactions_of_one_type(transaction_type, grouped_transactions[transaction_type])
         end
-        array
       end
 
       def all_transactions_of_one_type(transaction_type, transactions)
