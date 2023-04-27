@@ -16,7 +16,8 @@ module CFE
   private
 
     def compare_values_for(legal_aid_application)
-      v6 = CFECivil::SubmissionBuilder.call(legal_aid_application, save_result: false)
+      v6 = CFECivil::SubmissionBuilder.new(legal_aid_application, save_result: false)
+      v6.call
       CFE::CompareSubmission.call(legal_aid_application, v6)
     end
 

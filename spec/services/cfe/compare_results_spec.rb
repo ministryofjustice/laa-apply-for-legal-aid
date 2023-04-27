@@ -5,16 +5,17 @@ RSpec.describe CFE::CompareResults do
     subject(:call) { described_class.call }
 
     before do
-      travel(-2.days) { create(:legal_aid_application, :with_cfe_v5_result) }
-      travel(-12.hours) { create(:legal_aid_application, :with_cfe_v5_result) }
-      travel(-6.hours) { create(:legal_aid_application, :with_cfe_v5_result) }
+      travel(-2.days) { create(:legal_aid_application, :with_cfe_v5_result, transaction_period_finish_on: 5.days.ago) }
+      travel(-12.hours) { create(:legal_aid_application, :with_cfe_v5_result, transaction_period_finish_on: 5.days.ago) }
+      travel(-6.hours) { create(:legal_aid_application, :with_cfe_v5_result, transaction_period_finish_on: 5.days.ago) }
       allow(sub_builder).to receive(:cfe_result).and_return(fake_v6_result)
-      allow(CFECivil::SubmissionBuilder).to receive(:call).and_return(sub_builder)
+      allow(sub_builder).to receive(:request_body).and_return({})
+      allow(CFECivil::SubmissionBuilder).to receive(:new).and_return(sub_builder)
       allow(CFE::StoreCompareResult).to receive(:new).and_return(store_compare_result)
     end
 
     let(:fake_v6_result) { { version: "6", assessment: { id: "1234", submission_date: "1234" } }.to_json }
-    let(:sub_builder) { instance_double(CFECivil::SubmissionBuilder) }
+    let(:sub_builder) { instance_double(CFECivil::SubmissionBuilder, call: true) }
     let(:store_compare_result) { instance_double(CFE::StoreCompareResult, call: "something") }
 
     context "when run for the first time" do
