@@ -95,6 +95,7 @@ module CFESubmissionStateMachine
       event :results_obtained do
         transitions from: :explicit_remarks_created, to: :results_obtained, guard: :passported?
         transitions from: :cash_transactions_created, to: :results_obtained, guard: :non_passported?
+        transitions from: :initialised, to: :results_obtained, guard: :version_6?
       end
 
       event :fail do

@@ -7,5 +7,11 @@ module CFE
     has_one :result, class_name: "BaseResult"
 
     delegate :passported?, :non_passported?, :uploading_bank_statements?, to: :legal_aid_application
+
+    def version_6?
+      return false if cfe_result.nil?
+
+      JSON.parse(cfe_result)["version"].eql?("6")
+    end
   end
 end
