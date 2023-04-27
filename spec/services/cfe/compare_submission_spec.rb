@@ -23,6 +23,7 @@ RSpec.describe CFE::CompareSubmission do
       before do
         allow(cfe_result).to receive(:result).and_return(cfe_legacy_result)
         allow(submission_builder).to receive(:cfe_result).and_return(cfe_civil_result)
+        allow(submission_builder).to receive(:request_body).and_return({ "fake" => "return" })
       end
 
       it "calls CFE::StoreComparisonResult" do
@@ -39,6 +40,7 @@ RSpec.describe CFE::CompareSubmission do
       before do
         allow(cfe_result).to receive(:result).and_return(cfe_civil_result)
         allow(submission_builder).to receive(:cfe_result).and_return(cfe_civil_result)
+        allow(submission_builder).to receive(:request_body).and_return({ "fake" => "return" })
       end
 
       it "calls CFE::StoreComparisonResult" do
@@ -54,6 +56,7 @@ RSpec.describe CFE::CompareSubmission do
         allow(HostEnv).to receive(:environment).and_return(:uat)
         allow(cfe_result).to receive(:result).and_return(cfe_legacy_result)
         allow(submission_builder).to receive(:cfe_result).and_return(cfe_civil_result)
+        allow(submission_builder).to receive(:request_body).and_return({ "fake" => "return" })
       end
 
       it "calls CFE::StoreComparisonResult" do
