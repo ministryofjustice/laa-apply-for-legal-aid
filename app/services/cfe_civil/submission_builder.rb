@@ -18,11 +18,9 @@ module CFECivil
     end
 
     def request_body
-      request_data = {}
-      components.each do |service|
+      @request_body ||= components.each_with_object({}) do |service, request_data|
         request_data.merge! JSON.parse(service.new(@legal_aid_application).call)
       end
-      request_data
     end
 
     def submission
