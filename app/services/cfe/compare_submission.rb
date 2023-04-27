@@ -24,9 +24,10 @@ module CFE
                                     @results.empty?,
                                     @legal_aid_application.id,
                                     @legal_aid_application.cfe_result.id,
-                                    JSON.parse(@legal_aid_application.cfe_result.result).to_s,
-                                    JSON.parse(@submission_builder.cfe_result).to_s,
-                                    JSON.parse(@results.to_json).to_s])
+                                    JSON.pretty_generate(@submission_builder.request_body),
+                                    JSON.pretty_generate(JSON.parse(@legal_aid_application.cfe_result.result)),
+                                    JSON.pretty_generate(JSON.parse(@submission_builder.cfe_result)),
+                                    JSON.pretty_generate(JSON.parse(@results.to_json))])
       @results.empty?
     end
 
@@ -63,7 +64,7 @@ module CFE
       else
         return if compare_values(test_value, @v6_result.dig(*key))
 
-        @results[key.join("/")] = "Compare failed: CFE-Legacy=#{test_value}, CFE-Civil=#{@v6_result.dig(*key)}"
+        @results[key.join("/")] = "CFE-Legacy=#{test_value}, CFE-Civil=#{@v6_result.dig(*key)}"
       end
     end
 
