@@ -67,9 +67,10 @@ module CFECivil
     def query_cfe_service
       raw_response = post_request
       parsed_response = parse_json_response(raw_response.body)
+      history = build_submission_history(raw_response)
       if @save_result
+        history.save!
         submission.save!
-        history = write_submission_history(raw_response)
       end
 
       case raw_response.status
@@ -94,7 +95,7 @@ module CFECivil
       submission.cfe_result = @response.body
       if @save_result
         submission.results_obtained!
-        write_submission_history(@response, "POST")
+        build_submission_history(@response).save!
         write_cfe_result
       else
         submission
@@ -122,8 +123,8 @@ module CFECivil
       "Unprocessable entity: URL: #{history.url}, details: #{parsed_response['errors'].first}"
     end
 
-    def write_submission_history(raw_response, http_method = "POST")
-      submission.submission_histories.create!(
+    def build_submission_history(raw_response, http_method = "POST")
+      submission.submission_histories.build(
         url: cfe_url,
         http_method:,
         request_payload: request_body,
