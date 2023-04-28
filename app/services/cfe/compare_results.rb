@@ -22,7 +22,7 @@ module CFE
     end
 
     def legal_aid_applications
-      @legal_aid_applications ||= cfe_submissions.map(&:legal_aid_application)
+      @legal_aid_applications ||= cfe_submissions.map(&:legal_aid_application).uniq
     end
 
     def cfe_submissions
