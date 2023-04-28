@@ -180,7 +180,7 @@ GEM
       mime-types (~> 3.4, >= 3.4.1)
       multi_test (~> 1.1, >= 1.1.0)
       sys-uname (~> 1.2, >= 1.2.2)
-    cucumber-ci-environment (9.1.0)
+    cucumber-ci-environment (9.2.0)
     cucumber-core (11.0.0)
       cucumber-gherkin (~> 23.0, >= 23.0.1)
       cucumber-messages (~> 18.0, >= 18.0.0)
