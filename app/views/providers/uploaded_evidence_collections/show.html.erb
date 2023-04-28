@@ -17,7 +17,7 @@
 
   <% if @successfully_deleted %>
     <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
-      <% notification_banner.heading(text: @successfully_deleted) %>
+      <% notification_banner.with_heading(text: @successfully_deleted) %>
     <% end %>
   <% end %>
 
