@@ -4,7 +4,7 @@
   </h2>
 
   <%= govuk_accordion do |accordion| %>
-    <% accordion.section(heading_text: t(".income_calculation")) do %>
+    <% accordion.with_section(heading_text: t(".income_calculation")) do %>
       <p class="govuk-hint"><%= t(".hint_text") %></p>
 
       <% if @legal_aid_application.uploading_bank_statements? %>
@@ -21,7 +21,7 @@
       <%= render "disposable_income" %>
     <% end %>
 
-    <%= accordion.section(heading_text: t(".capital_calculation")) do %>
+    <%= accordion.with_section(heading_text: t(".capital_calculation")) do %>
       <%= render "shared/property_results" %>
       <%= render "shared/vehicle_results" %>
       <%= render "shared/savings_and_investments" %>

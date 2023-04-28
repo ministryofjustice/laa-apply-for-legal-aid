@@ -4,7 +4,7 @@
   </h2>
 
   <%= govuk_accordion do |accordion| %>
-    <% accordion.section(heading_text: t(".capital_calculation")) do %>
+    <% accordion.with_section(heading_text: t(".capital_calculation")) do %>
       <%= render "shared/property_results" %>
       <%= render "shared/vehicle_results" %>
       <%= render "shared/savings_and_investments" %>
