@@ -4,17 +4,23 @@ module CFECivil
       delegate :employments, to: :legal_aid_application
 
       def call
+        return {} unless employment_and_payments?
+
         { employment_income: employment_income_payload }.to_json
       end
 
     private
 
-      def employment_income_payload
-        payload = []
-        return payload unless legal_aid_application.hmrc_employment_income?
+      def employment_and_payments?
+        legal_aid_application.hmrc_employment_income? && legal_aid_application.employment_payments.present?
+      end
 
-        employments.each_with_index { |employment, index| payload << employment_data(employment, index + 1) }
-        payload
+      def employment_income_payload
+        index = 1
+        employments.each_with_object([]) do |employment, payload|
+          payload << employment_data(employment, index)
+          index += 1
+        end
       end
 
       def employment_data(employment, _job_num)

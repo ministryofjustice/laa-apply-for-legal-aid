@@ -8,10 +8,19 @@ RSpec.describe CFECivil::Components::Employments do
   context "when the applicant is not employed" do
     before { create(:applicant, :not_employed) }
 
-    it "renders the expected, empty, JSON" do
-      expect(call).to eq({
-        employment_income: [],
-      }.to_json)
+    it "renders the expected, empty hash" do
+      expect(call).to eq({})
+    end
+  end
+
+  context "when the applicant is employed but has no PAYE data" do
+    before do
+      create(:applicant, :employed)
+      create(:employment, legal_aid_application:)
+    end
+
+    it "renders the expected, empty hash" do
+      expect(call).to eq({})
     end
   end
 
