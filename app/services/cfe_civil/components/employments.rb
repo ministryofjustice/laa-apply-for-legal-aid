@@ -4,9 +4,11 @@ module CFECivil
       delegate :employments, to: :legal_aid_application
 
       def call
-        return {} unless employment_and_payments?
-
-        { employment_income: employment_income_payload }.to_json
+        if employment_and_payments?
+          { employment_income: employment_income_payload }.to_json
+        else
+          {}.to_json
+        end
       end
 
     private

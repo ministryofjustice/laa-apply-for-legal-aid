@@ -9,7 +9,7 @@ RSpec.describe CFECivil::Components::Employments do
     before { create(:applicant, :not_employed) }
 
     it "renders the expected, empty hash" do
-      expect(call).to eq({})
+      expect(call).to eq({}.to_json)
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe CFECivil::Components::Employments do
     end
 
     it "renders the expected, empty hash" do
-      expect(call).to eq({})
+      expect(call).to eq({}.to_json)
     end
   end
 
