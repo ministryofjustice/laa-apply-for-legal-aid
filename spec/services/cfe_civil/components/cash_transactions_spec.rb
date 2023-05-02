@@ -30,9 +30,9 @@ RSpec.describe CFECivil::Components::CashTransactions do
           {
             category: "benefits",
             payments: [
-              { date: "2023-01-01", amount: 345.0, client_id: benefits3.id },
-              { date: "2023-02-01", amount: 234.0, client_id: benefits2.id },
-              { date: "2023-03-01", amount: 123.0, client_id: benefits1.id },
+              { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: benefits3.id },
+              { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: benefits2.id },
+              { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: benefits1.id },
             ],
           },
         ],
@@ -40,9 +40,9 @@ RSpec.describe CFECivil::Components::CashTransactions do
           {
             category: "maintenance_out",
             payments: [
-              { date: "2023-01-01", amount: 345.0, client_id: maintenance_out3.id },
-              { date: "2023-02-01", amount: 234.0, client_id: maintenance_out2.id },
-              { date: "2023-03-01", amount: 123.0, client_id: maintenance_out1.id },
+              { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: maintenance_out3.id },
+              { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: maintenance_out2.id },
+              { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: maintenance_out1.id },
             ],
           },
         ],
