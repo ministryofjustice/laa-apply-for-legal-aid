@@ -625,7 +625,7 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    sidekiq-status (3.0.2)
+    sidekiq-status (3.0.3)
       chronic_duration
       sidekiq (>= 6.0, < 8)
     signet (0.17.0)
@@ -789,7 +789,7 @@ DEPENDENCIES
   sentry-sidekiq
   shoulda-matchers (~> 5.3)
   sidekiq (~> 6.5.7)
-  sidekiq-status (~> 3.0.2)
+  sidekiq-status (~> 3.0.3)
   simple_command
   simplecov
   simplecov-rcov
