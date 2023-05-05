@@ -8,8 +8,10 @@ RSpec.describe CFECivil::Components::CashTransactions do
   context "when there are no cash_transactions" do
     it "returns expected JSON structure" do
       expect(call).to eq({
-        income: [],
-        outgoings: [],
+        cash_transactions: {
+          income: [],
+          outgoings: [],
+        },
       }.to_json)
     end
   end
@@ -26,26 +28,28 @@ RSpec.describe CFECivil::Components::CashTransactions do
 
     it "returns expected JSON structure" do
       expect(call).to eq({
-        income: [
-          {
-            category: "benefits",
-            payments: [
-              { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: benefits3.id },
-              { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: benefits2.id },
-              { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: benefits1.id },
-            ],
-          },
-        ],
-        outgoings: [
-          {
-            category: "maintenance_out",
-            payments: [
-              { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: maintenance_out3.id },
-              { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: maintenance_out2.id },
-              { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: maintenance_out1.id },
-            ],
-          },
-        ],
+        cash_transactions: {
+          income: [
+            {
+              category: "benefits",
+              payments: [
+                { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: benefits3.id },
+                { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: benefits2.id },
+                { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: benefits1.id },
+              ],
+            },
+          ],
+          outgoings: [
+            {
+              category: "maintenance_out",
+              payments: [
+                { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: maintenance_out3.id },
+                { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: maintenance_out2.id },
+                { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: maintenance_out1.id },
+              ],
+            },
+          ],
+        },
       }.to_json)
     end
   end

@@ -58,13 +58,35 @@ module CFE
           process_key key.dup << sub_key
         end
       when Array
-        test_value.each_with_index do |_values, index|
-          process_key key.dup << index
+        if test_value.count == 1
+          test_value.each_with_index do |_values, index|
+            process_key key.dup << index
+          end
+        elsif test_value.count > 1
+          test_value.each do |values|
+            compare_array(key, values, @v6_result.dig(*key).find { |group| group[values.keys.first] == values[values.keys.first] })
+          end
         end
       else
+        return if ignore(key)
         return if compare_values(test_value, @v6_result.dig(*key))
 
         @results[key.join("/")] = "CFE-Legacy=#{test_value}, CFE-Civil=#{@v6_result.dig(*key)}"
+      end
+    end
+
+    def ignore(key)
+      [
+        /assessment-capital-capital_items-vehicles-\d-date_of_purchase/,
+        /assessment-capital-capital_items-properties-main_home-main_home_equity_disregard/,
+      ].any? { |pattern| pattern.match?(key.join("-")) }
+    end
+
+    def compare_array(key, v5_array, v6_array)
+      v5_array.each_key do |key_name|
+        next if compare_values(v5_array[key_name], v6_array[key_name])
+
+        @results[key.join("/")] = "CFE-Legacy=#{v5_array[key_name]}, CFE-Civil=#{v6_array[key_name]}"
       end
     end
 

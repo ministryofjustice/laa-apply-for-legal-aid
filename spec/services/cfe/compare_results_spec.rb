@@ -14,7 +14,7 @@ RSpec.describe CFE::CompareResults do
       allow(CFE::StoreCompareResult).to receive(:new).and_return(store_compare_result)
     end
 
-    let(:fake_v6_result) { { version: "6", assessment: { id: "1234", submission_date: "1234" } }.to_json }
+    let(:fake_v6_result) { file_fixture("cfe_civil_comparison/v6/compare_result.json").read }
     let(:sub_builder) { instance_double(CFECivil::SubmissionBuilder, call: true) }
     let(:store_compare_result) { instance_double(CFE::StoreCompareResult, call: "something") }
 

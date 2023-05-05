@@ -1,0 +1,254 @@
+{
+  "version": "5",
+  "timestamp": "2023-05-02T15:27:02.055Z",
+  "success": true,
+  "result_summary":
+  {
+    "overall_result":
+    {
+      "result": "eligible",
+      "capital_contribution": 0.0,
+      "income_contribution": 0.0,
+      "proceeding_types":
+      [
+        {
+          "ccms_code": "DA004",
+          "client_involvement_type": "A",
+          "upper_threshold": 0.0,
+          "lower_threshold": 0.0,
+          "result": "eligible"
+        }
+      ]
+    },
+    "gross_income":
+    {
+      "total_gross_income": 0.0,
+      "proceeding_types":
+      [
+        {
+          "ccms_code": "DA004",
+          "client_involvement_type": "A",
+          "upper_threshold": 999999999999.0,
+          "lower_threshold": 0.0,
+          "result": "pending"
+        }
+      ]
+    },
+    "disposable_income":
+    {
+      "dependant_allowance": 0.0,
+      "gross_housing_costs": 0.0,
+      "housing_benefit": 0.0,
+      "net_housing_costs": 0.0,
+      "maintenance_allowance": 0.0,
+      "total_outgoings_and_allowances": 0.0,
+      "total_disposable_income": 0.0,
+      "employment_income":
+      {
+        "gross_income": 0.0,
+        "benefits_in_kind": 0.0,
+        "tax": 0.0,
+        "national_insurance": 0.0,
+        "fixed_employment_deduction": 0.0,
+        "net_employment_income": 0.0
+      },
+      "income_contribution": 0.0,
+      "proceeding_types":
+      [
+        {
+          "ccms_code": "DA004",
+          "client_involvement_type": "A",
+          "upper_threshold": 999999999999.0,
+          "lower_threshold": 315.0,
+          "result": "pending"
+        }
+      ]
+    },
+    "capital":
+    {
+      "total_liquid": 600.0,
+      "total_non_liquid": 0.0,
+      "total_vehicle": 0.0,
+      "total_property": 0.0,
+      "total_mortgage_allowance": 999999999999.0,
+      "total_capital": 600.0,
+      "pensioner_capital_disregard": 0.0,
+      "subject_matter_of_dispute_disregard": 0.0,
+      "capital_contribution": 0.0,
+      "assessed_capital": 600.0,
+      "proceeding_types":
+      [
+        {
+          "ccms_code": "DA004",
+          "client_involvement_type": "A",
+          "upper_threshold": 999999999999.0,
+          "lower_threshold": 3000.0,
+          "result": "eligible"
+        }
+      ]
+    }
+  },
+  "assessment":
+  {
+    "id": "e1517698-c6b7-4f5a-bb35-6f7e78d9ab03",
+    "client_reference_id": "L-12R-5YR",
+    "submission_date": "2023-05-02",
+    "applicant":
+    {
+      "date_of_birth": "1996-04-28",
+      "involvement_type": "applicant",
+      "employed": null,
+      "has_partner_opponent": false,
+      "receives_qualifying_benefit": true,
+      "self_employed": false
+    },
+    "gross_income":
+    {
+      "employment_income":
+      [],
+      "irregular_income":
+      {
+        "monthly_equivalents":
+        {
+          "student_loan": 0.0,
+          "unspecified_source": 0.0
+        }
+      },
+      "state_benefits":
+      {
+        "monthly_equivalents":
+        {
+          "all_sources": 0.0,
+          "cash_transactions": 0.0,
+          "bank_transactions":
+          []
+        }
+      },
+      "other_income":
+      {
+        "monthly_equivalents":
+        {
+          "all_sources":
+          {
+            "friends_or_family": 0.0,
+            "maintenance_in": 0.0,
+            "property_or_lodger": 0.0,
+            "pension": 0.0
+          },
+          "bank_transactions":
+          {
+            "friends_or_family": 0.0,
+            "maintenance_in": 0.0,
+            "property_or_lodger": 0.0,
+            "pension": 0.0
+          },
+          "cash_transactions":
+          {
+            "friends_or_family": 0.0,
+            "maintenance_in": 0.0,
+            "property_or_lodger": 0.0,
+            "pension": 0.0
+          }
+        }
+      }
+    },
+    "disposable_income":
+    {
+      "monthly_equivalents":
+      {
+        "all_sources":
+        {
+          "child_care": 0.0,
+          "rent_or_mortgage": 0.0,
+          "maintenance_out": 0.0,
+          "legal_aid": 0.0
+        },
+        "bank_transactions":
+        {
+          "child_care": 0.0,
+          "rent_or_mortgage": 0.0,
+          "maintenance_out": 0.0,
+          "legal_aid": 0.0
+        },
+        "cash_transactions":
+        {
+          "child_care": 0.0,
+          "rent_or_mortgage": 0.0,
+          "maintenance_out": 0.0,
+          "legal_aid": 0.0
+        }
+      },
+      "childcare_allowance": 0.0,
+      "deductions":
+      {
+        "dependants_allowance": 0.0,
+        "disregarded_state_benefits": 0.0
+      }
+    },
+    "capital":
+    {
+      "capital_items":
+      {
+        "liquid":
+        [
+          {
+            "description": "Savings accounts",
+            "value": "300.0"
+          },
+          {
+            "description": "Current accounts",
+            "value": "300.0"
+          }
+        ],
+        "non_liquid":
+        [],
+        "vehicles":
+        [
+          {
+            "value": 300.0,
+            "loan_amount_outstanding": 0.0,
+            "date_of_purchase": "2021-05-02",
+            "in_regular_use": true,
+            "included_in_assessment": false,
+            "assessed_value": 0.0
+          }
+        ],
+        "properties":
+        {
+          "main_home":
+          {
+            "value": "0.0",
+            "outstanding_mortgage": "0.0",
+            "percentage_owned": "0.0",
+            "main_home": true,
+            "shared_with_housing_assoc": false,
+            "transaction_allowance": "0.0",
+            "allowable_outstanding_mortgage": "0.0",
+            "net_value": "0.0",
+            "net_equity": "0.0",
+            "main_home_equity_disregard": "100000.0",
+            "assessed_equity": "0.0"
+          },
+          "additional_properties":
+          [
+            {
+              "value": "0.0",
+              "outstanding_mortgage": "0.0",
+              "percentage_owned": "0.0",
+              "main_home": false,
+              "shared_with_housing_assoc": false,
+              "transaction_allowance": "0.0",
+              "allowable_outstanding_mortgage": "0.0",
+              "net_value": "0.0",
+              "net_equity": "0.0",
+              "main_home_equity_disregard": "0.0",
+              "assessed_equity": "0.0"
+            }
+          ]
+        }
+      }
+    },
+    "remarks":
+    {}
+  }
+}

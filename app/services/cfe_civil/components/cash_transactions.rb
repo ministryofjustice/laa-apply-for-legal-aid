@@ -5,8 +5,10 @@ module CFECivil
 
       def call
         {
-          income: build_cash_transactions_for(:credit),
-          outgoings: build_cash_transactions_for(:debit),
+          cash_transactions: {
+            income: build_cash_transactions_for(:credit),
+            outgoings: build_cash_transactions_for(:debit),
+          },
         }.to_json
       end
 
