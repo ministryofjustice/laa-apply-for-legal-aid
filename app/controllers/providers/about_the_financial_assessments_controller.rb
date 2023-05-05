@@ -19,6 +19,7 @@ module Providers
   private
 
     def send_emails_to_citizen
+      delete_previously_scheduled_mails
       CitizenEmailService.new(legal_aid_application).send_email
       SubmitCitizenReminderService.new(legal_aid_application).send_email
     end
@@ -33,6 +34,12 @@ module Providers
         journey: :providers,
         legal_aid_application:,
       )
+    end
+
+    def delete_previously_scheduled_mails
+      ScheduledMailing.where(legal_aid_application_id: legal_aid_application.id, status: "waiting").each do |scheduled|
+        scheduled.destroy! if scheduled.arguments[1] != legal_aid_application.applicant.email
+      end
     end
   end
 end
