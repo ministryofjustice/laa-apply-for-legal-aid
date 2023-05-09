@@ -94,5 +94,18 @@ RSpec.describe CFE::CompareSubmission do
 
       it { expect(call).to be false }
     end
+
+    context "when there is a result with a flat array area with mismatching values" do
+      let(:cfe_legacy_result) { file_fixture("cfe_civil_comparison/v5/flat_array.json").read }
+      let(:cfe_civil_result) { file_fixture("cfe_civil_comparison/v6/flat_array.json").read }
+
+      before do
+        allow(cfe_result).to receive(:result).and_return(cfe_legacy_result)
+        allow(submission_builder).to receive(:cfe_result).and_return(cfe_civil_result)
+        allow(submission_builder).to receive(:request_body).and_return({ "fake" => "return" })
+      end
+
+      it { expect(call).to be false }
+    end
   end
 end
