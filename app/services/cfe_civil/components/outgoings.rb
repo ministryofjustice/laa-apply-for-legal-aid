@@ -12,18 +12,20 @@ module CFECivil
       def build_transactions
         bank_transactions.each_with_object([]) do |(transaction_type_id, array), result|
           name = TransactionType.find(transaction_type_id).name
-          type_hash = { name:, payments: transactions(array) }
+          type_hash = { name:, payments: transactions(name, array) }
           result << type_hash
         end
       end
 
-      def transactions(array)
+      def transactions(name, array)
         array.each_with_object([]) do |transaction, result|
-          result << {
+          data_block = {
             payment_date: transaction.happened_at.strftime("%Y-%m-%d"),
             amount: transaction.amount.abs.to_f,
             client_id: transaction.id,
           }
+          data_block[:housing_cost_type] = legal_aid_application.own_home? ? "mortgage" : "rent" if name == "rent_or_mortgage"
+          result << data_block
         end
       end
 
