@@ -8,7 +8,9 @@ RSpec.describe CFECivil::Components::IrregularIncomes do
   context "when there are no irregular payments" do
     it "returns the expected, empty, JSON block" do
       expect(call).to eq({
-        payments: [],
+        irregular_incomes: {
+          payments: [],
+        },
       }.to_json)
     end
   end
@@ -20,13 +22,15 @@ RSpec.describe CFECivil::Components::IrregularIncomes do
 
     it "returns the expected JSON block" do
       expect(call).to eq({
-        payments: [
-          {
-            income_type: "student_loan",
-            frequency: "annual",
-            amount: 3628.07,
-          },
-        ],
+        irregular_incomes: {
+          payments: [
+            {
+              income_type: "student_loan",
+              frequency: "annual",
+              amount: 3628.07,
+            },
+          ],
+        },
       }.to_json)
     end
   end

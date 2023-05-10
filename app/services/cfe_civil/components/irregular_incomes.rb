@@ -5,7 +5,9 @@ module CFECivil
 
       def call
         {
-          payments: irregular_incomes.map(&:as_json),
+          irregular_incomes: {
+            payments: irregular_incomes.map(&:as_json),
+          },
         }.to_json
       end
     end
