@@ -64,7 +64,14 @@ module CFE
           end
         elsif test_value.count > 1
           test_value.each do |values|
-            compare_array(key, values, @v6_result.dig(*key).find { |group| group[values.keys.first] == values[values.keys.first] })
+            case values
+            when Hash
+              compare_array(key, values, @v6_result.dig(*key).find { |group| group[values.keys.first] == values[values.keys.first] })
+            when String
+              # this should be an array of strings so test the above level
+              result = test_value - @v6_result.dig(*key)
+              @results[key.join("/")] = "CFE-Legacy=#{test_value}, CFE-Civil=#{@v6_result.dig(*key)}" unless result.empty?
+            end
           end
         end
       else
