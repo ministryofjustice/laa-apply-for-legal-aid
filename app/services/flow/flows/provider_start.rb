@@ -11,8 +11,14 @@ module Flow
         },
         applicant_details: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
-          forward: :address_lookups,
-          check_answers: :has_national_insurance_numbers,
+          forward: lambda do |application|
+            if application.overriding_dwp_result?
+              :check_client_details
+            else
+              :has_national_insurance_numbers
+            end
+          end,
+          check_answers: :check_provider_answers,
         },
         address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_address_lookup_path(application) },
@@ -63,9 +69,11 @@ module Flow
         },
         has_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
-          forward: lambda do |_application|
+          forward: lambda do |application|
             if Setting.partner_means_assessment?
               :client_has_partners
+            elsif application.checking_applicant_details?
+              :check_client_details
             else
               :check_provider_answers
             end

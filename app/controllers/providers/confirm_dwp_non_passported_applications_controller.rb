@@ -5,14 +5,17 @@ module Providers
 
     def show
       delete_check_benefits_from_history
-      form
+      @form = Providers::ConfirmDWPNonPassportedApplicationsForm.new(model: partner)
     end
 
     def update
       return continue_or_draft if draft_selected?
 
-      if form.valid?
-        details_checked! if correct_dwp_result? && !details_checked?
+      @form = Providers::ConfirmDWPNonPassportedApplicationsForm.new(form_params)
+
+      if @form.valid?
+        update_joint_benefit_response
+        update_application_state
         HMRC::CreateResponsesService.call(legal_aid_application) if make_hmrc_call?
         return go_forward(correct_dwp_result?)
       end
@@ -22,18 +25,31 @@ module Providers
 
   private
 
-    def form
-      @form ||= BinaryChoiceForm.call(
-        journey: :provider,
-        radio_buttons_input_name: :correct_dwp_result,
-        form_params:,
-      )
+    def partner
+      @partner = legal_aid_application.partner
+    end
+
+    def update_joint_benefit_response
+      return if partner.nil?
+
+      partner.shared_benefit_with_applicant = @form.receives_joint_benefit?
+      partner.save!
     end
 
     def form_params
-      return {} unless params[:binary_choice_form]
+      merge_with_model(partner) do
+        return {} unless params[:partner]
 
-      params.require(:binary_choice_form).permit(:correct_dwp_result)
+        params.require(:partner).permit(:confirm_dwp_result)
+      end
+    end
+
+    def update_application_state
+      if correct_dwp_result?
+        details_checked! unless details_checked?
+      else
+        legal_aid_application.override_dwp_result! unless legal_aid_application.overriding_dwp_result?
+      end
     end
 
     def delete_check_benefits_from_history
@@ -45,7 +61,7 @@ module Providers
     end
 
     def correct_dwp_result?
-      form.correct_dwp_result?
+      @form.correct_dwp_result?
     end
 
     def hmrc_call_enabled?

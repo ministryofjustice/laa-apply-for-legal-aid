@@ -48,6 +48,29 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_text"))
       end
     end
+
+    context "when the application has a partner and the flag is turned on" do
+      let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
+
+      before do
+        login_as application.provider
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+      end
+
+      it "displays the joint passporting benefit option" do
+        subject
+        expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
+      end
+    end
+
+    context "when the application does not have a partner" do
+      before { allow(Setting).to receive(:partner_means_assessment?).and_return(false) }
+
+      it "does not display the joint passporting benefit option" do
+        subject
+        expect(unescaped_response_body).not_to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
+      end
+    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
@@ -69,8 +92,8 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         let(:params) do
           {
             continue_button: "Continue",
-            binary_choice_form: {
-              correct_dwp_result: "true",
+            partner: {
+              confirm_dwp_result: "dwp_correct",
             },
           }
         end
@@ -101,19 +124,70 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
       end
 
-      context "the solicitor wants to override the results" do
+      context "the solicitor wants to override the results with a non joint benefit" do
+        before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
+
+        let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
+        let(:partner) { application.partner }
+
         let(:params) do
           {
             continue_button: "Continue",
-            binary_choice_form: {
-              correct_dwp_result: "false",
+            partner: {
+              confirm_dwp_result: "joint_with_partner_false",
             },
           }
         end
 
-        it "keeps the application state to checking applicant details" do
+        it "sets the application state to overriding DWP result" do
           subject
-          expect(application.reload.state).to eq "checking_applicant_details"
+          expect(application.reload.state).to eq "overriding_dwp_result"
+        end
+
+        it "displays the check_client_details page" do
+          subject
+          expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
+        end
+
+        it "does not update the partner shared benefit field" do
+          subject
+          expect(partner.reload.shared_benefit_with_applicant).to be false
+        end
+
+        it "uses the passported state machine" do
+          subject
+          expect(application.reload.state_machine_proxy.type).to eq "PassportedStateMachine"
+        end
+
+        it "calls the HMRC::CreateResponsesService" do
+          subject
+          expect(HMRC::CreateResponsesService).to have_received(:call)
+        end
+      end
+
+      context "the solicitor wants to override the results with a partner" do
+        before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
+
+        let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
+        let(:partner) { application.partner }
+
+        let(:params) do
+          {
+            continue_button: "Continue",
+            partner: {
+              confirm_dwp_result: "joint_with_partner_true",
+            },
+          }
+        end
+
+        it "sets the application state to overriding DWP result" do
+          subject
+          expect(application.reload.state).to eq "overriding_dwp_result"
+        end
+
+        it "sets the partner shared benefit field to true" do
+          subject
+          expect(partner.reload.shared_benefit_with_applicant).to be true
         end
 
         it "displays the check_client_details page" do
@@ -135,7 +209,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       context "the solicitor does not select a radio button" do
         it "displays an error" do
           subject
-          expect(response.body).to include(I18n.t("providers.correct_dwp_results.show.error"))
+          expect(response.body).to include(I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
         end
       end
     end

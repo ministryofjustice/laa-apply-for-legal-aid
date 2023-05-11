@@ -113,6 +113,7 @@ class LegalAidApplication < ApplicationRecord
            :provider_checking_or_checked_citizens_means_answers?,
            :provider_entering_means?,
            :provider_entering_merits?,
+           :overriding_dwp_result?,
            :submitting_assessment?,
            :use_ccms?,
            :summary_state,
@@ -430,6 +431,10 @@ class LegalAidApplication < ApplicationRecord
 
   def applicant_details_checked!
     state_machine_proxy.applicant_details_checked!(self)
+  end
+
+  def override_dwp_result!
+    state_machine_proxy.override_dwp_result!(self)
   end
 
   def generate_reports!
