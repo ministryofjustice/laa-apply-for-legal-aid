@@ -110,9 +110,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_130906) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at", precision: nil
+    t.boolean "employed"
     t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
-    t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.boolean "has_national_insurance_number"
@@ -577,9 +577,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_130906) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
     t.datetime "client_declaration_confirmed_at", precision: nil
     t.boolean "substantive_cost_override"
@@ -723,6 +723,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_130906) do
     t.string "organisation"
     t.boolean "lookup_used", default: false, null: false
     t.string "lookup_id"
+    t.boolean "shared_benefit_with_applicant"
     t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
   end
 
