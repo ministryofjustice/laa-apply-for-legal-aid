@@ -99,7 +99,7 @@ module CFE
 
     def compare_values(v5_value, v6_value)
       if v6_value.is_a?(Numeric) || v5_value.is_a?(Numeric)
-        v6_value.to_d == v5_value.to_d
+        sprintf("%.2f", v6_value) == sprintf("%.2f", v5_value)
       else
         v6_value == v5_value
       end
