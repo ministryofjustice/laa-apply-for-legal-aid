@@ -1,6 +1,20 @@
 ---
 en:
   providers:
+    about_financial_means:
+      show:
+        h1-heading: What you need to do
+        partner_heading: Complete %{name}'s and their partner's financial assessment
+        no_partner_heading: Complete %{name}'s financial assessment
+        body-text: "As part of the financial assessment, you'll need to provide:"
+        bullets:
+          - details about their employment status
+          - all of their bank statements from the last 3 months either through
+            online banking or manual upload
+          - details about payments they receive
+          - details about money they pay out
+          - any dependants they may have
+          - details about their assets
     about_the_financial_assessments:
       show:
         activity: |

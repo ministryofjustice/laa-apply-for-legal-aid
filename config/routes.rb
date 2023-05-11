@@ -164,6 +164,7 @@ Rails.application.routes.draw do
       resource :has_national_insurance_number, only: %i[show update]
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
+      resource :about_financial_means, only: %i[show]
       resource :open_banking_consents, only: %i[show update], path: "does-client-use-online-banking"
       resource :open_banking_guidance, only: %i[show update]
       resource :bank_statements, only: %i[show update destroy] do

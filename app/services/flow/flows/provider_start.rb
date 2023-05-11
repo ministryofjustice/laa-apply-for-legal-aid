@@ -30,6 +30,10 @@ module Flow
           forward: :proceedings_types,
           check_answers: :check_provider_answers,
         },
+        about_financial_means: {
+          path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },
+          forward: :applicant_employed,
+        },
         applicant_employed: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
           forward: lambda do |application|
