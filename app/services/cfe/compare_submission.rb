@@ -86,6 +86,7 @@ module CFE
       [
         /assessment-capital-capital_items-vehicles-\d-date_of_purchase/,
         /assessment-capital-capital_items-properties-main_home-main_home_equity_disregard/,
+        /result_summary-capital-assessed_capital/,
       ].any? { |pattern| pattern.match?(key.join("-")) }
     end
 
