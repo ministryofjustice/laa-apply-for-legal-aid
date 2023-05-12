@@ -77,7 +77,7 @@ brew bundle
 
 Git-crypt is used for encryption. It uses either your personal public key or a symmetric key.
 
-1. To obtain the symmetric key you will need to get access to LastPass. Liase with a team member for this. Once you have the the key you can unlock:
+1. To obtain the symmetric key you will need to get access to 1Password. Liase with a team member for this. Once you have the the key you can unlock:
 
 ```sh
 git-crypt unlock path-to-symmetric-key
@@ -380,7 +380,7 @@ To enable full logs in the test environment, `ENV['RAILS_ENABLE_TEST_LOG']` must
 
 ### Staging and Production
 
-Staging and production databases are RDS instances on the MOJ Cloud Platform. Connection details are held in LastPass.
+Staging and production databases are RDS instances on the MOJ Cloud Platform. Connection details are held in 1Password.
 
 These databases are within the AWS VPC and are not publicly available. In order to connect
 to an RDS database from a local client, first run:
