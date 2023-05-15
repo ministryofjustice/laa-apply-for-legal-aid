@@ -12,7 +12,7 @@ module Providers
         @none_selected = none_selected.in?(params["transaction_type_ids"] || [])
         @legal_aid_application = params.delete(:legal_aid_application)
         @transaction_type_ids = params["transaction_type_ids"] || existing_transaction_type_ids
-
+        owner.present?
         assign_regular_transaction_attributes
 
         super
@@ -51,6 +51,21 @@ module Providers
       end
 
     private
+
+      def owner
+        raise(
+          NotImplementedError,
+          "#owner must be implemented in the subclass",
+        )
+      end
+
+      def owner_id
+        owner&.id
+      end
+
+      def owner_type
+        owner&.class.to_s
+      end
 
       def transaction_type_conditions
         raise(
@@ -119,6 +134,8 @@ module Providers
           RegularTransaction.find_or_initialize_by(
             legal_aid_application:,
             transaction_type:,
+            owner_id:,
+            owner_type:,
           )
         end
       end

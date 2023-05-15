@@ -1,6 +1,7 @@
 module Providers
   module Means
     class RegularOutgoingsForm < RegularTransactionForm
+      include ApplicantOwner
       OUTGOING_TYPES = %w[
         rent_or_mortgage
         child_care
