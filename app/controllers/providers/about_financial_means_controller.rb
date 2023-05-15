@@ -2,8 +2,11 @@ module Providers
   class AboutFinancialMeansController < ProviderBaseController
     def show
       @name = full_name
-      @application = legal_aid_application
-      @applicant = legal_aid_application.applicant
+      @applicant = applicant
+    end
+
+    def update
+      continue_or_draft
     end
 
   private
