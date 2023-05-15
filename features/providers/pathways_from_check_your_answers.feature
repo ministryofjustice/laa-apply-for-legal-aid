@@ -3,10 +3,12 @@ Feature: Pathways from check your answers
   @javascript @vcr
   Scenario: I do not use delegated functions
     Given I complete the journey as far as check your answers
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'What you need to do'
+    When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
     And I click 'Save and continue'
@@ -25,10 +27,12 @@ Feature: Pathways from check your answers
     Given I complete the journey as far as check your answers
     And a "bank holiday" exists in the database
     And I used delegated functions
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'What you need to do'
+    When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
     And I click 'Save and continue'
@@ -46,8 +50,10 @@ Feature: Pathways from check your answers
     And I used delegated functions
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'What you need to do'
+    When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
     And I click 'Save and continue'
