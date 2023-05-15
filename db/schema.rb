@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_084400) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_130906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -832,7 +832,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_084400) do
     t.string "frequency", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "owner_type"
+    t.uuid "owner_id"
     t.index ["legal_aid_application_id"], name: "index_regular_transactions_on_legal_aid_application_id"
+    t.index ["owner_type", "owner_id"], name: "index_regular_transactions_on_owner"
     t.index ["transaction_type_id"], name: "index_regular_transactions_on_transaction_type_id"
   end
 
