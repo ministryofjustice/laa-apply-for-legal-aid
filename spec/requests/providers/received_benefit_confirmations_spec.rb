@@ -86,9 +86,9 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
         expect { subject }.not_to change(DWPOverride, :count)
       end
 
-      it "continue to the proceedings search page" do
+      it "continue to the about financial means page" do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path(application))
+        expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(application))
       end
 
       it "transitions the application state to applicant details checked" do
