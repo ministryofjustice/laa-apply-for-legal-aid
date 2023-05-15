@@ -5,6 +5,7 @@ FactoryBot.define do
     date_of_birth { Faker::Date.birthday }
     has_national_insurance_number { true }
     national_insurance_number { "JA123456D" }
+    shared_benefit_with_applicant { false }
     legal_aid_application
 
     trait :under_18 do
@@ -33,6 +34,10 @@ FactoryBot.define do
       city { Faker::Address.city }
       county { Faker::Address.city }
       postcode { ["SW10 9LB", "W6 0LQ", "SW1A 1AA", "RG2 7PU", "BH22 7HR"].sample }
+    end
+
+    trait :with_shared_benefit do
+      shared_benefit_with_applicant { true }
     end
   end
 end

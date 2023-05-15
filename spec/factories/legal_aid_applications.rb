@@ -50,6 +50,11 @@ FactoryBot.define do
       partner { build(:partner) }
     end
 
+    trait :with_partner_and_joint_benefit do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, :with_shared_benefit) }
+    end
+
     trait :with_applicant_and_address_lookup do
       applicant { build(:applicant, :with_address_lookup) }
     end

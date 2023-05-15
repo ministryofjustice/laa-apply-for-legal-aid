@@ -38,39 +38,81 @@ RSpec.describe Providers::CheckClientDetailsController do
         expect(unescaped_response_body).to include(ni_number)
       end
     end
+
+    context "when the client has a partner, flag is on and the provider previously selected joint benefit with partner" do
+      let(:application) { create(:legal_aid_application, :with_partner_and_joint_benefit, :with_proceedings, :at_checking_applicant_details) }
+      let(:partner) { application.partner }
+
+      before do
+        login_as application.provider
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+        subject
+      end
+
+      it "displays the partner's full name" do
+        full_name = "#{partner.first_name} #{partner.last_name}"
+        expect(unescaped_response_body).to include(full_name)
+      end
+
+      it "displays the partner date of birth in the required format" do
+        dob_formatted = partner.date_of_birth.strftime("%e %B %Y")
+        expect(unescaped_response_body).to include(dob_formatted)
+      end
+
+      it "displays the partner national insurance number with 2 digit spacing" do
+        ni_number = partner.national_insurance_number.gsub(/(.{2})(?=.)/, '\1 \2')
+        expect(unescaped_response_body).to include(ni_number)
+      end
+    end
+
+    context "when the client does not have a partner" do
+      before do
+        login_as application.provider
+        subject
+      end
+
+      it "does not display partner details section" do
+        expect(unescaped_response_body).not_to include(I18n.t("providers.check_client_details.show.h2_partner"))
+      end
+    end
+
+    context "when the partner means journey flag is turned off" do
+      before do
+        login_as application.provider
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+        subject
+      end
+
+      it "does not display partner details section" do
+        expect(unescaped_response_body).not_to include(I18n.t("providers.check_client_details.show.h2_partner"))
+      end
+    end
+
+    context "when the partner means flag is on and the client has a partner but the benefit is not joint" do
+      let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
+
+      before do
+        login_as application.provider
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+        subject
+      end
+
+      it "does not display partner details section" do
+        expect(unescaped_response_body).not_to include(I18n.t("providers.check_client_details.show.h2_partner"))
+      end
+    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_client_details" do
-    subject { patch "/providers/applications/#{application_id}/check_client_details", params: }
+    subject { patch "/providers/applications/#{application_id}/check_client_details" }
 
     before do
       login_as application.provider
       subject
     end
 
-    context "with correct client details" do
-      let(:params) { { binary_choice_form: { check_client_details: "true" } } }
-
-      it "continue to the received benefit confirmations page" do
-        expect(response).to redirect_to(providers_legal_aid_application_received_benefit_confirmation_path(application))
-      end
-    end
-
-    context "with incorrect client details" do
-      let(:params) { { binary_choice_form: { check_client_details: "false" } } }
-
-      it "continue to the applicant details page" do
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_details_path(application))
-      end
-    end
-
-    context "with validation error" do
-      let(:params) { { binary_choice_form: { check_client_details: nil } } }
-
-      it "displays an error if nothing selected" do
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Select if your client&#39;s details are correct or not")
-      end
+    it "continues to the received benefit confirmations page" do
+      expect(response).to redirect_to(providers_legal_aid_application_received_benefit_confirmation_path(application))
     end
   end
 end
