@@ -894,14 +894,14 @@ FactoryBot.define do
 
       after(:create) do |application|
         application.transaction_types << (TransactionType.find_by(name: "housing_benefit") || create(:transaction_type, :housing_benefit))
-        create(:regular_transaction, :housing_benefit, legal_aid_application: application, amount: 1_200.00, frequency: "three_monthly")
+        create(:regular_transaction, :housing_benefit, legal_aid_application: application, amount: 1_200.00, frequency: "three_monthly", owner_id: application.applicant.id, owner_type: "Applicant")
       end
     end
 
     trait :with_rent_or_mortgage_regular_transaction do
       after(:create) do |application|
         application.transaction_types << (TransactionType.find_by(name: "rent_or_mortgage") || create(:transaction_type, :rent_or_mortgage))
-        create(:regular_transaction, :rent_or_mortgage, legal_aid_application: application, amount: 1_600.00, frequency: "three_monthly")
+        create(:regular_transaction, :rent_or_mortgage, legal_aid_application: application, amount: 1_600.00, frequency: "three_monthly", owner_id: application.applicant.id, owner_type: "Applicant")
       end
     end
 
