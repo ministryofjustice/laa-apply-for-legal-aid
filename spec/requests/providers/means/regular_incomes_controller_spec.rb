@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::Means::RegularIncomesController do
   describe "GET /providers/applications/:legal_aid_application_id/means/regular_incomes" do
     it "returns ok" do
-      legal_aid_application = create(:legal_aid_application)
+      legal_aid_application = create(:legal_aid_application, :with_applicant)
       provider = legal_aid_application.provider
       login_as provider
 
@@ -14,7 +14,8 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when the application has regular transactions" do
       it "renders the income data" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
+        applicant = legal_aid_application.applicant
         benefits = create(:transaction_type, :benefits)
         _transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -27,6 +28,8 @@ RSpec.describe Providers::Means::RegularIncomesController do
           transaction_type: benefits,
           amount: 500,
           frequency: "weekly",
+          owner_id: applicant.id,
+          owner_type: "Applicant",
         )
         provider = legal_aid_application.provider
         login_as provider
@@ -43,7 +46,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when the provider is not authenticated" do
       it "redirects to the provider login page" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
 
         get providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 
@@ -59,6 +62,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
       it "updates the application and redirects to the student finance page" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           no_credit_transaction_types_selected: false,
         )
         provider = legal_aid_application.provider
@@ -80,6 +84,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
       it "updates the application and redirects to the cash income page" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           no_credit_transaction_types_selected: true,
         )
         benefits = create(:transaction_type, :benefits)
@@ -110,6 +115,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
       it "returns unprocessable entity, renders errors, and does not update the application" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           no_credit_transaction_types_selected: nil,
         )
         benefits = create(:transaction_type, :benefits)
@@ -139,6 +145,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
       it "updates the application and redirects to the means summaries page" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           :with_non_passported_state_machine,
           :checking_means_income,
           no_credit_transaction_types_selected: false,
@@ -158,6 +165,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
       it "updates the application and redirects to the cash income page" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           :with_non_passported_state_machine,
           :checking_means_income,
           no_credit_transaction_types_selected: true,
@@ -188,7 +196,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when the provider is not authenticated" do
       it "redirects to the provider login page" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
 
         patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 

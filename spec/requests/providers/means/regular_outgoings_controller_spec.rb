@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::Means::RegularOutgoingsController do
   let(:legal_aid_application) do
     create(:legal_aid_application,
+           :with_applicant,
            :with_non_passported_state_machine,
            no_debit_transaction_types_selected: true)
   end
@@ -146,6 +147,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
       let(:legal_aid_application) do
         create(
           :legal_aid_application,
+          :with_applicant,
           :with_non_passported_state_machine,
           :checking_means_income,
           no_debit_transaction_types_selected: false,
@@ -172,6 +174,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
       let(:legal_aid_application) do
         create(
           :legal_aid_application,
+          :with_applicant,
           :with_non_passported_state_machine,
           :checking_means_income,
           no_debit_transaction_types_selected: false,
@@ -205,6 +208,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
       let(:legal_aid_application) do
         create(
           :legal_aid_application,
+          :with_applicant,
           :with_non_passported_state_machine,
           :checking_means_income,
           no_debit_transaction_types_selected: false,

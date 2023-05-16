@@ -3,9 +3,14 @@ require "rails_helper"
 # rubocop:disable Rails/SaveBang
 RSpec.describe Providers::Means::RegularOutgoingsForm do
   describe "#validate" do
+    let(:legal_aid_application) { build_stubbed(:legal_aid_application, :with_applicant) }
+
     context "when neither a outgoing type or none are selected" do
       it "is invalid" do
-        params = { "transaction_type_ids" => [""] }
+        params = {
+          "transaction_type_ids" => [""],
+          legal_aid_application:,
+        }
 
         form = described_class.new(params)
 
@@ -43,7 +48,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           "rent_or_mortgage_frequency" => "weekly",
           "child_care_amount" => "100",
           "child_care_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -62,7 +67,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           "rent_or_mortgage_frequency" => "",
           "child_care_amount" => "100",
           "child_care_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -81,7 +86,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           "rent_or_mortgage_frequency" => "invalid",
           "child_care_amount" => "100",
           "child_care_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -92,7 +97,10 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
     context "when none is selected" do
       it "is valid" do
-        params = { "transaction_type_ids" => ["", "none"] }
+        params = {
+          "transaction_type_ids" => ["", "none"],
+          legal_aid_application:,
+        }
 
         form = described_class.new(params)
 
@@ -102,7 +110,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
     context "when the correct attributes are provided" do
       it "is valid" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
         child_care = create(:transaction_type, :child_care)
         params = {
@@ -125,7 +133,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
   describe "#new" do
     context "when the application has regular transactions" do
       it "assigns attributes for the non-children debit transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         maintenance_out = create(:transaction_type, :maintenance_out)
         child = create(
           :transaction_type,
@@ -156,6 +164,8 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           transaction_type: maintenance_out,
           amount: 250,
           frequency: "weekly",
+          owner_id: legal_aid_application.applicant.id,
+          owner_type: "Applicant",
         )
 
         form = described_class.new(legal_aid_application:)
@@ -179,7 +189,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "does not update an application's transaction types" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
         transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -195,7 +205,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "does not update an application's regular transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
@@ -209,7 +219,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "does not update an application's cash transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         cash_transaction = create(:cash_transaction, legal_aid_application:)
         form = described_class.new(legal_aid_application:)
 
@@ -220,7 +230,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "does not update an application's housing benefit transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         transaction_type = create(:transaction_type, :housing_benefit)
         legal_aid_application_transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -261,7 +271,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
     context "when none is selected" do
       it "returns true" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         params = {
           "transaction_type_ids" => ["", "none"],
           legal_aid_application:,
@@ -294,7 +304,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "does not create any regular transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         params = {
           "transaction_type_ids" => ["", "none"],
           legal_aid_application:,
@@ -307,7 +317,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "destroys any existing regular outgoing transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         child_care = create(:transaction_type, :child_care)
         regular_income_transaction = create(
@@ -333,7 +343,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "destroys any existing housing benefit transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         transaction_type = create(:transaction_type, :housing_benefit)
         _legal_aid_application_transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -373,7 +383,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
     context "when the correct attributes are provided" do
       it "returns true" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
         params = {
           "transaction_type_ids" => ["", rent_or_mortgage.id],
@@ -391,6 +401,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       it "updates `no_debit_transaction_types_selected` on the application" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           no_debit_transaction_types_selected: true,
         )
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
@@ -408,7 +419,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
       end
 
       it "updates an application's regular transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
         child_care = create(:transaction_type, :child_care)
         maintenance_out = create(:transaction_type, :maintenance_out)
@@ -439,7 +450,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
       it "destroys any existing housing benefit transactions if housing " \
          "payments are not selected" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         child_care = create(:transaction_type, :child_care)
         transaction_type = create(:transaction_type, :housing_benefit)
         legal_aid_application_transaction_type = create(
@@ -470,7 +481,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
       it "does not destroy housing benefit transactions if housing payments " \
          "are selected" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
         transaction_type = create(:transaction_type, :housing_benefit)
         legal_aid_application_transaction_type = create(
@@ -503,6 +514,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
          "are not selected" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           applicant_in_receipt_of_housing_benefit: false,
         )
         child_care = create(:transaction_type, :child_care)
@@ -525,6 +537,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
          "payments are selected" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           applicant_in_receipt_of_housing_benefit: false,
         )
         rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)

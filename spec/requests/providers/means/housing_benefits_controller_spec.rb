@@ -18,6 +18,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
       it "renders the housing benefit data" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           applicant_in_receipt_of_housing_benefit: true,
         )
         transaction_type = create(:transaction_type, :housing_benefit)
@@ -32,6 +33,8 @@ RSpec.describe Providers::Means::HousingBenefitsController do
           frequency: "weekly",
           legal_aid_application:,
           transaction_type:,
+          owner_id: legal_aid_application.applicant.id,
+          owner_type: "Applicant",
         )
         provider = legal_aid_application.provider
         login_as provider
