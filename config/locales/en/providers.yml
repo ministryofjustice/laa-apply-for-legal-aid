@@ -603,15 +603,22 @@ en:
         back_to_your_applications: Back to your applications
     bank_statements:
       show:
-        h1-heading: Upload bank statements
-        info: We need statements for the most recent 3 months for all your client’s bank accounts. If delegated functions
-          have been used, then we need the most recent 3 months before the delegated functions date.  You must include
-          all current, savings, building society, Post Office, ISA and any other type of bank account.
-        warning: Statements must be readable. If we cannot read them it may delay a decision, or give an inaccurate assessment or rejection of your client’s case.
-        h2-heading: Uploaded files
+        heading_caption: Client's means assessment
+        h1-heading: Upload your client's bank statements
+        info: |
+          We need bank statements from the last 3 months for all of your client's
+          bank accounts. If delegated functions have been used, then we need the
+          most recent 3 months before the delegated functions date.
+
+          You must include all current, savings, building society, Post Office,
+          ISA and any other type of bank account.
         upload_file: Upload files
+        upload_paragraph: |
+          Statements must be readable, If we cannot read them, it may delay a decision
+          or give an inaccurate assessment of rejection of your client's case.
         size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF.
         dropzone_message: Drag and drop files here or
+        h2-heading: Uploaded files
         choose_files_btn: Choose files
         file_not_uploaded_error: Upload the selected file
       uploaded_files:
