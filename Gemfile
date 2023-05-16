@@ -124,6 +124,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "aasm-diagram", require: false
   gem "guard-cucumber"
   gem "guard-livereload"
   gem "guard-rspec"

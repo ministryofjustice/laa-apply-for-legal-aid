@@ -29,7 +29,7 @@
       <% end %>
     <% end %>
 
-    <% if Setting.partner_means_assessment? && @legal_aid_application.partner.shared_benefit_with_applicant? %>
+    <% if @legal_aid_application.shared_benefit_with_applicant? %>
       <h2 class="govuk-heading-m"><%= t(".h2_partner") %></h2>
 
       <%= govuk_summary_list do |summary_list| %>
