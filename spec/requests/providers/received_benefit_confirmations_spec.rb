@@ -28,7 +28,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       end
     end
 
-    context "when the provider has selected that the client gets a joint benefit with their partner" do
+    context "when the provider has previously selected that the client gets a joint benefit with their partner" do
       let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_partner_and_joint_benefit) }
       let(:application_id) { application.id }
 

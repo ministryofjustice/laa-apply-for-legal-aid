@@ -765,9 +765,10 @@ en:
         no_button: No, do not delete it
     has_evidence_of_benefits:
       show:
-        page_title: "Do you have evidence that your client receives %{passporting_benefit}?"
+        h1_no_partner: "Do you have evidence that your client receives %{passporting_benefit}?"
+        h1_partner: "Do you have evidence that your client is covered by their partner's %{passporting_benefit}?"
         hint: "For example, a letter from the DWP. A caseworker will request this after you've submitted your application."
-        evidence_hint: 'For example, a letter from the DWP, a bank statement from the last 3 months showing benefits paid in, or any other relevant documents.'
+        evidence_hint: 'For example, a letter from DWP or any other relevant documents.'
         radio_hint_yes: "You'll need to upload supporting evidence later."
     limitations:
       cost_limits:
