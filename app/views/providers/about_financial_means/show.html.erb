@@ -2,9 +2,9 @@
 
 <h2 class='govuk-heading-l'>
   <% if @applicant.has_partner? %>
-    <%= t(".partner_heading", name: @name) %>
+    <%= t(".partner_heading", name: @applicant.full_name) %>
   <% else %>
-    <%= t(".no_partner_heading", name: @name) %>
+    <%= t(".no_partner_heading", name: @applicant.full_name) %>
   <% end %>
 </h2>
 

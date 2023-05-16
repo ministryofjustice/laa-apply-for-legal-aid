@@ -1,9 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Providers::AboutFinancialMeansController do
-  let(:legal_aid_application) { create(:legal_aid_application, :applicant_details_checked, applicant:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :applicant_details_checked, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
-  let(:applicant) { create(:applicant) }
 
   describe "GET /providers/applications/:id/about_financial_means" do
     subject(:get_request) { get providers_legal_aid_application_about_financial_means_path(legal_aid_application) }
