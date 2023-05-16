@@ -33,7 +33,7 @@ RSpec.describe Providers::Draftable do
 
         it "redirects provider to next step of the submission" do
           subject
-          expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(application))
         end
 
         it "sets the application as no longer draft" do

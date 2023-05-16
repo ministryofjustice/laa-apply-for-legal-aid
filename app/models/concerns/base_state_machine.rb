@@ -57,6 +57,7 @@ class BaseStateMachine < ApplicationRecord
                     entering_applicant_details
                     applicant_details_checked
                     provider_confirming_applicant_eligibility
+                    overriding_dwp_result
                     use_ccms
                   ],
                   to: :checking_applicant_details

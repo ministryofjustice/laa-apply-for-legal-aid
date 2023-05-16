@@ -12,6 +12,7 @@ RSpec.describe BaseStateMachine do
     it { is_expected.to transition_from(:entering_applicant_details).to(:checking_applicant_details).on_event(event) }
     it { is_expected.to transition_from(:applicant_details_checked).to(:checking_applicant_details).on_event(event) }
     it { is_expected.to transition_from(:use_ccms).to(:checking_applicant_details).on_event(event) }
+    it { is_expected.to transition_from(:overriding_dwp_result).to(:checking_applicant_details).on_event(event) }
 
     context "when application requires mean testing" do
       before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(false) }

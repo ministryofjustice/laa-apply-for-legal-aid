@@ -123,7 +123,7 @@ RSpec.describe Providers::ApplicantDetailsController do
           it "redirects to check_your_answers page" do
             subject
 
-            expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application))
           end
         end
 

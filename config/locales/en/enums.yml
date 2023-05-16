@@ -17,6 +17,7 @@ en:
     legal_aid_application:
       state:
         applicant_details_checked: Answers checked
+        overriding_dwp_result: Overriding DWP result
         applicant_entering_means: Submitted by provider
         awaiting_applicant: Submitted by provider
         checking_applicant_details: Checking answers

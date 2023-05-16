@@ -33,8 +33,8 @@ RSpec.describe Providers::CheckClientDetailsController do
         expect(unescaped_response_body).to include(dob_formatted)
       end
 
-      it "displays the applicant national insurance number with 2 digit spacing" do
-        ni_number = application.applicant.national_insurance_number.gsub(/(.{2})(?=.)/, '\1 \2')
+      it "displays the applicant national insurance number" do
+        ni_number = application.applicant.national_insurance_number
         expect(unescaped_response_body).to include(ni_number)
       end
     end
@@ -59,8 +59,8 @@ RSpec.describe Providers::CheckClientDetailsController do
         expect(unescaped_response_body).to include(dob_formatted)
       end
 
-      it "displays the partner national insurance number with 2 digit spacing" do
-        ni_number = partner.national_insurance_number.gsub(/(.{2})(?=.)/, '\1 \2')
+      it "displays the partner national insurance number" do
+        ni_number = partner.national_insurance_number
         expect(unescaped_response_body).to include(ni_number)
       end
     end
