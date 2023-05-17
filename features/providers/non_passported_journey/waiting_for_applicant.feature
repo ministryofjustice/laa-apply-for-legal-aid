@@ -5,6 +5,8 @@ Feature: non_passported_journey waiting for applicant
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
     When I choose 'Yes'
     And I click 'Save and continue'
+    Then I should be on a page showing "What you need to do"
+    When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
     And I click 'Save and continue'

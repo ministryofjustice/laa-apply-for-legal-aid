@@ -7,7 +7,7 @@ module Flow
           forward: lambda do |application, confirm_dwp_non_passported|
             if confirm_dwp_non_passported
               application.change_state_machine_type("NonPassportedStateMachine")
-              :applicant_employed
+              :about_financial_means
             else
               application.check_applicant_details! unless application.checking_applicant_details?
               application.change_state_machine_type("PassportedStateMachine")
@@ -27,7 +27,7 @@ module Flow
               :has_evidence_of_benefits
             else
               application.change_state_machine_type("NonPassportedStateMachine")
-              :applicant_employed
+              :about_financial_means
             end
           end,
         },
@@ -39,7 +39,7 @@ module Flow
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
               application.change_state_machine_type("NonPassportedStateMachine")
-              :applicant_employed
+              :about_financial_means
             end
           end,
         },

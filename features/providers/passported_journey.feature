@@ -116,7 +116,7 @@ Feature: passported_journey completes application
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
     Then I choose 'Yes'
     And I click 'Save and continue'
-    Then I should be on a page showing "What is your client's employment status?"
+    Then I should be on a page showing "What you need to do"
     And I click link 'Back'
     And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
     Then I choose 'No, my client receives a passporting benefit'
@@ -152,7 +152,7 @@ Feature: passported_journey completes application
     Then I should be on a page showing 'Which passporting benefit does your client receive?'
     Then I choose 'None of these'
     And I click 'Save and continue'
-    Then I should be on a page showing "What is your client's employment status?"
+    Then I should be on a page showing "What you need to do"
     When I click link "Back"
     Then I choose 'Income Support'
     And I click 'Save and continue'
@@ -166,4 +166,4 @@ Feature: passported_journey completes application
     Then I choose 'No'
     Then I scroll down
     Then I click 'Save and continue'
-    Then I should be on a page showing "What is your client's employment status?"
+    Then I should be on a page showing "What you need to do"

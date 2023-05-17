@@ -95,8 +95,8 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
         expect(dwp_override.has_evidence_of_benefit).to be false
       end
 
-      it "redirects to the applicant_employed page" do
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path(legal_aid_application))
+      it "redirects to the about financial means page" do
+        expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(legal_aid_application))
       end
 
       it "updates the state machine type" do
