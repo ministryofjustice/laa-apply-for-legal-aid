@@ -36,9 +36,9 @@
 
     <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
-      <p class="govuk-body govuk-!-padding-top-4">
-        <%= t(".info") %>
-      </p>
+      <% t(".info").each do |item| %>
+        <p class="govuk-body"><%= item %></p>
+      <% end %>
 
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden <%= form_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">

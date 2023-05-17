@@ -609,13 +609,12 @@ en:
         h1-heading: Upload your client's bank statements
         h2-heading: Uploaded files
         heading_caption: Client's means assessment
-        info: |
-          We need bank statements from the last 3 months for all of your client's
+        info:
+          - "We need bank statements from the last 3 months for all of your client's
           bank accounts. If delegated functions have been used, then we need the
-          most recent 3 months before the delegated functions date.
-
-          You must include all current, savings, building society, Post Office,
-          ISA and any other type of bank account.
+          most recent 3 months before the delegated functions date."
+          - "You must include all current, savings, building society, Post Office,
+          ISA and any other type of bank account."
         size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF.
         upload_file: Upload files
         upload_paragraph: |
