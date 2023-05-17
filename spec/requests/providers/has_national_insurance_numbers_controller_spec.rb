@@ -46,11 +46,20 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
         expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
       end
 
-      context "when the MTR feature flag is on" do
+      context "when the partner means assessment feature flag is on" do
         let(:enable_pma) { true }
 
         it "redirects to the client_has_partner page" do
           expect(response).to redirect_to(providers_legal_aid_application_client_has_partner_path(legal_aid_application))
+        end
+      end
+
+      context "when the legal aid application is in overriding_dwp_result state" do
+        let(:legal_aid_application) { create(:legal_aid_application, :overriding_dwp_result) }
+        let(:enable_pma) { true }
+
+        it "redirects to check provider answers page" do
+          expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
         end
       end
     end

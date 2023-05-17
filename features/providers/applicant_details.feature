@@ -166,7 +166,7 @@ Feature: Applicant details
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you need to do"
@@ -243,7 +243,7 @@ Feature: Applicant details
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you need to do"
@@ -355,17 +355,16 @@ Feature: Applicant details
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
-    Then I choose 'No, my client receives a passporting benefit'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
+    Then I choose 'No, my client gets a passporting benefit'
     Then I click "Save and continue"
     Then I should be on a page showing "Check your client's details"
-    Then I choose 'I need to change these details'
-    Then I click 'Save and continue'
+    Then I click the first link 'Client name'
     Then I should be on a page showing "Enter your client's details"
     Then I enter name 'Kyle', 'Walker'
     Then I enter the date of birth '10-1-1980'

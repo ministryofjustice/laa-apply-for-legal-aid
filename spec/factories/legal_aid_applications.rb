@@ -191,6 +191,12 @@ FactoryBot.define do
       end
     end
 
+    trait :overriding_dwp_result do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :overriding_dwp_result)
+      end
+    end
+
     trait :provider_assessing_means do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :provider_assessing_means)

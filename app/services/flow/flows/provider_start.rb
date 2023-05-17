@@ -13,7 +13,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
           forward: lambda do |application|
             if application.overriding_dwp_result?
-              :check_client_details
+              :has_national_insurance_numbers
             else
               :address_lookups
             end
@@ -70,9 +70,7 @@ module Flow
         has_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
           forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :check_client_details
-            elsif Setting.partner_means_assessment?
+            if Setting.partner_means_assessment? && !application.overriding_dwp_result?
               :client_has_partners
             else
               :check_provider_answers
