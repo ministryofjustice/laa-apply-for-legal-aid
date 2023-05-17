@@ -8,7 +8,7 @@ Feature: Bank statement file upload
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page with title "Upload bank statements"
+    Then I should be on a page with title "Upload your client's bank statements"
     And the page is accessible
 
     When I upload the fixture file named 'empty_file.pdf'
@@ -24,7 +24,7 @@ Feature: Bank statement file upload
     Then I should see govuk error summary "too_large.pdf is larger than 7MB"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Upload bank statements"
+    Then I should be on a page with title "Upload your client's bank statements"
     And I should see govuk error summary "Upload your client's bank statements"
 
     When I upload the fixture file named 'acceptable.pdf'
@@ -34,7 +34,7 @@ Feature: Bank statement file upload
     Then I should be on a page with title matching "Review .*'s employment income"
 
     When I click link "Back"
-    Then I should be on a page with title "Upload bank statements"
+    Then I should be on a page with title "Upload your client's bank statements"
     And I should see 'acceptable.pdf UPLOADED'
 
     When I click 'Save and come back later'
@@ -47,7 +47,7 @@ Feature: Bank statement file upload
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page with title "Upload bank statements"
+    Then I should be on a page with title "Upload your client's bank statements"
     And the page is accessible
 
     Given I upload the fixture file named 'acceptable.pdf'

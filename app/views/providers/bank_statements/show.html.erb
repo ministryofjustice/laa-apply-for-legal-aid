@@ -7,6 +7,8 @@
                       t(".h1-heading")
                     end
    form_error_class = @form.errors.any? ? "govuk-form-group--error" : "" %>
+
+<span class="govuk-caption-xl"><%= t(".heading_caption") %></span>
 <%= page_template(
       page_title: t(".h1-heading"),
       head_title: new_head_title,
@@ -34,18 +36,17 @@
 
     <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
-        <p class="govuk-body govuk-!-padding-top-4">
-          <%= t(".info") %>
-        </p>
-
-      <%= govuk_warning_text(text: t(".warning")) %>
+      <% t(".info").each do |item| %>
+        <p class="govuk-body"><%= item %></p>
+      <% end %>
 
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden <%= form_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">
-            <label class="govuk-label govuk-label--m" id="dropzone-label">
-              <%= t(".upload_file") %>
-            </label>
-            <div class="govuk-hint"><%= t(".size_hint") %></div>
+          <label class="govuk-label govuk-label--m" id="dropzone-label">
+            <%= t(".upload_file") %>
+          </label>
+          <p><%= t(".upload_paragraph") %></p>
+          <div class="govuk-hint"><%= t(".size_hint") %></div>
           <% if @form.errors %>
             <p id="dropzone-mandatory-error" class='govuk-error-message dropzone-error govuk-!-margin-bottom-1'>
               <% @form.errors.errors.each do |error| %>
@@ -55,17 +56,17 @@
             </p>
           <% end %>
 
-            <span class="hidden" aria-hidden="true" id="application-id"><%= @form.legal_aid_application_id %></span>
-            <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/bank_statements"></span>
-            <p id="dropzone-file-error" class="govuk-error-message dropzone-error hidden">
-              <span class="govuk-visually-hidden">Error:</span>
-            </p>
-            <div class="dropzone" id="dropzone-form">
-              <div class="dz-message" data-dz-message>
-                <p class="govuk-body govuk-!-padding-top-2 script"><%= t(".dropzone_message") %></p>
-                <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t(".choose_files_btn") %></button>
-              </div>
+          <span class="hidden" aria-hidden="true" id="application-id"><%= @form.legal_aid_application_id %></span>
+          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/bank_statements"></span>
+          <p id="dropzone-file-error" class="govuk-error-message dropzone-error hidden">
+            <span class="govuk-visually-hidden">Error:</span>
+          </p>
+          <div class="dropzone" id="dropzone-form">
+            <div class="dz-message" data-dz-message>
+              <p class="govuk-body govuk-!-padding-top-2 script"><%= t(".dropzone_message") %></p>
+              <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t(".choose_files_btn") %></button>
             </div>
+          </div>
         </div>
 
         <div class="fallback no-script">

@@ -7,7 +7,7 @@ Feature: Bank statement upload journey happy path
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page with title "Upload bank statements"
+    Then I should be on a page with title "Upload your client's bank statements"
     And the page is accessible
 
     Given I upload the fixture file named "acceptable.pdf"
