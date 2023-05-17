@@ -3,11 +3,7 @@
               method: :patch,
               local: true) do |form| %>
 
-  <div class="moj-banner">
-    <div class="moj-banner__message">
-      <h2 class="govuk-heading-m"><%= t(".hmrc-information") %></h2>
-    </div>
-  </div>
+  <%= govuk_notification_banner(title_text: "Important") { |nb| nb.with_heading(text: t(".hmrc-information")) } %>
 
   <% if @eligible_employment_payments.any? && @applicant.not_employed? %>
     <% page_heading = "not_employed" %>
