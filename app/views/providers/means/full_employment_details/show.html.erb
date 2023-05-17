@@ -2,6 +2,8 @@
               url: providers_legal_aid_application_means_full_employment_details_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
+
+  <span class="govuk-caption-xl"><%= t("providers.means.client_caption") %></span>
   <% page_heading = @legal_aid_application.has_multiple_employments? ? t(".page_heading_multi_jobs") : t(".page_heading_no_info") %>
 
   <%= page_template page_title: page_heading, form: do %>

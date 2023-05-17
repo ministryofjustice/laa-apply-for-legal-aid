@@ -800,6 +800,7 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
     means:
+      client_caption: Client's means assessment
       cash_outgoings:
         show:
           page_heading: Select payments your client makes in cash
@@ -818,7 +819,8 @@ en:
           employment_details_hint: You'll need to upload supporting evidence later.
       employment_incomes:
         show:
-          hmrc-information: The information on this page has been provided by HMRC.
+          hmrc-information: HMRC have provided the information on this page.
+          inset_text: "We've used your client's National Insurance number to get this information from HMRC."
           employed: Review %{name}'s employment income
           not_employed: HMRC found a record of your client's employment
           hmrc_not_employed: "You told us your client is not employed but HMRC shared the following information with us:"

@@ -16,6 +16,12 @@ dl.govuk-list.inline-list {
   }
 }
 
+.govuk-table {
+  .no-border-bottom {
+    border-bottom: none;
+  }
+}
+
 .govuk-panel {
   dl.govuk-list {
     color: govuk-colour("white");

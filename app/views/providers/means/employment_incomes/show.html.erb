@@ -11,51 +11,54 @@
     <% page_heading = "employed" %>
   <% end %>
 
+  <span class="govuk-caption-xl"><%= t("providers.means.client_caption") %></span>
   <%= page_template page_title: t(".#{page_heading}", name: @applicant.full_name), template: :basic, form: do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
-    <% if @eligible_employment_payments.any? && @applicant.not_employed? %>
-        <div class="govuk-!-padding-bottom-6"></div>
-        <p class="govuk-body-l"> <%= t(".hmrc_not_employed") %> </p>
-    <% end %>
+      <%= govuk_inset_text(text: t(".inset_text")) %>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".table_caption") %></caption>
-        <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" style="width: 25%;" scope="col"><%= t(".date") %></th>
-          <th class="govuk-table__header" style="width: 10%;" scope="col" colspan="2"><%= t(".income") %></th>
-          <th class="govuk-table__header" style="width: 35%;" scope="col" colspan="2"><%= t(".deductions") %></th>
-        </tr>
-        </thead>
+      <% if @eligible_employment_payments.any? && @applicant.not_employed? %>
+          <p class="govuk-body-l"> <%= t(".hmrc_not_employed") %> </p>
+      <% end %>
 
-        <tbody class="govuk-table__body">
-        <% @employments.each do |employment| %>
-          <% employment.employment_payments.each do |payment| %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" style="width: 25%;"><%= l(payment.date, format: :short_date) %></td>
-            <td class="govuk-table__cell" style="width: 10%;"><strong><%= t(".gross") %></strong></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 10%;"><strong></strong><%= gds_number_to_currency(payment.gross) %></td>
-            <td class="govuk-table__cell" style="width: 35%;"><strong><%= t(".tax") %></strong>
-            <br>
-            <strong><%= t(".ni") %></strong>
-            </td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 20%;">
-              <%= gds_number_to_currency(payment.tax) %>
-              <br>
-              <%= gds_number_to_currency(payment.national_insurance) %>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+      <%= govuk_table do |table|
+            table.with_colgroup do |colgroup|
+              colgroup.with_col(span: 1)
+              colgroup.with_col(span: 2)
+              colgroup.with_col(span: 2)
+            end
+
+            table.with_head do |head|
+              head.with_row do |row|
+                row.with_cell(text: t(".date"))
+                row.with_cell(text: t(".income"), colspan: 2)
+                row.with_cell(text: t(".deductions"), colspan: 2)
+                row.with_cell
+              end
+            end
+
+            @employments.each do |employment|
+              employment.employment_payments.each do |payment|
+                table.with_body do |body|
+                  body.with_row do |row|
+                    row.with_cell(text: l(payment.date, format: :short_date), rowspan: 2)
+                    row.with_cell(text: t(".gross"), classes: "govuk-!-font-weight-bold", rowspan: 2)
+                    row.with_cell(text: gds_number_to_currency(payment.gross), numeric: true, rowspan: 2)
+                    row.with_cell(text: t(".tax"), classes: "govuk-!-font-weight-bold no-border-bottom")
+                    row.with_cell(text: gds_number_to_currency(payment.tax), numeric: true, classes: "no-border-bottom")
+                  end
+
+                  body.with_row do |row|
+                    row.with_cell(text: t(".ni"), classes: "govuk-!-font-weight-bold")
+                    row.with_cell(text: gds_number_to_currency(payment.national_insurance), numeric: true)
+                  end
+                end
+              end
+            end
+          end %>
+
       <%= form.govuk_radio_buttons_fieldset :extra_employment_information, legend: { text: t(".supplementary_question") }, hint: { text: t(".employment_hint") } do %>
         <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t("generic.yes") } do %>
         <%= form.govuk_text_area :extra_employment_information_details,
