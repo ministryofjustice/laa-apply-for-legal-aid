@@ -622,7 +622,6 @@ en:
         file_not_uploaded_error: Upload the selected file
         h1-heading: Upload your client's bank statements
         h2-heading: Uploaded files
-        heading_caption: Client's means assessment
         info:
           - "We need bank statements from the last 3 months for all of your client's
           bank accounts. If delegated functions have been used, then we need the
