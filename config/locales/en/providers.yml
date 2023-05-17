@@ -4,8 +4,8 @@ en:
     about_financial_means:
       show:
         h1-heading: What you need to do
-        partner_heading: Complete %{name}'s and their partner's financial assessment
-        no_partner_heading: Complete %{name}'s financial assessment
+        partner_heading: Complete you client's and their partner's financial assessments
+        no_partner_heading: Complete your client's financial assessment
         body-text: "As part of the financial assessment, you'll need to provide:"
         bullets:
           - details about their employment status
