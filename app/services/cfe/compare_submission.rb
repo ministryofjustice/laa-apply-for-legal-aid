@@ -90,6 +90,7 @@ module CFE
         /assessment-capital-capital_items-properties-main_home-transaction_allowance/,
         /assessment-capital-capital_items-properties-main_home-net_value/,
         /assessment-capital-capital_items-properties-main_home-net_equity/,
+        /assessment-applicant-self_employed/,
       ].any? { |pattern| pattern.match?(key.join("-")) }
     end
 
