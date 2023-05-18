@@ -44,7 +44,7 @@ Feature: Bank statement upload check your answers
 
     And the "What payments does your client make?" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\nTotal in the last three months |
+      | Housing payments | £1,600.00\nTotal in the last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
@@ -52,7 +52,7 @@ Feature: Bank statement upload check your answers
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
       | Does your client receive Housing Benefit? | Yes |
-      | Amount | £1,200.00\nTotal in the last three months |
+      | Amount | £1,200.00\nTotal in the last 3 months |
 
     When I click Check Your Answers Change link for "bank statements"
     And I upload an evidence file named "hello_world.pdf"
@@ -76,7 +76,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
-    And I should see "Every two weeks"
+    And I should see "Every 2 weeks"
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
