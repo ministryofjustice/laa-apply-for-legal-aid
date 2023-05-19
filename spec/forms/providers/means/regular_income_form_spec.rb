@@ -3,10 +3,14 @@ require "rails_helper"
 # rubocop:disable Rails/SaveBang
 RSpec.describe Providers::Means::RegularIncomeForm do
   describe "#validate" do
+    let(:legal_aid_application) { build_stubbed(:legal_aid_application, :with_applicant) }
+
     context "when neither a income type or none are selected" do
       it "is invalid" do
-        params = { "transaction_type_ids" => [""] }
-
+        params = {
+          "transaction_type_ids" => [""],
+          legal_aid_application:,
+        }
         form = described_class.new(params)
 
         expect(form).to be_invalid
@@ -24,7 +28,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           "benefits_frequency" => "weekly",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -43,7 +47,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           "benefits_frequency" => "weekly",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -62,7 +66,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           "benefits_frequency" => "",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -81,7 +85,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           "benefits_frequency" => "invalid",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
-        }
+        }.merge(legal_aid_application:)
 
         form = described_class.new(params)
 
@@ -92,7 +96,10 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
     context "when none is selected" do
       it "is valid" do
-        params = { "transaction_type_ids" => ["", "none"] }
+        params = {
+          "transaction_type_ids" => ["", "none"],
+          legal_aid_application:,
+        }
 
         form = described_class.new(params)
 
@@ -102,7 +109,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
     context "when the correct attributes are provided" do
       it "is valid" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         pension = create(:transaction_type, :pension)
         params = {
@@ -123,7 +130,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
   describe "#new" do
     context "when the application has regular transactions" do
       it "assigns attributes for the non-children credit transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         excluded_benefits = create(
           :transaction_type,
@@ -153,6 +160,8 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           transaction_type: benefits,
           amount: 250,
           frequency: "weekly",
+          owner_id: legal_aid_application.applicant.id,
+          owner_type: "Applicant",
         )
 
         form = described_class.new(legal_aid_application:)
@@ -178,7 +187,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "does not update an application's transaction types" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -194,7 +203,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "does not update an application's regular transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
@@ -208,7 +217,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "does not update an application's cash transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         cash_transaction = create(:cash_transaction, legal_aid_application:)
         form = described_class.new(legal_aid_application:)
 
@@ -227,7 +236,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         }
       end
 
-      let(:legal_aid_application) { create(:legal_aid_application) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
       let(:benefits) { create(:transaction_type, :benefits) }
       let(:child_care) { create(:transaction_type, :child_care) }
 
@@ -346,7 +355,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
     context "when the correct attributes are provided" do
       it "returns true" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         params = {
           "transaction_type_ids" => ["", benefits.id],
@@ -364,6 +373,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       it "updates `no_credit_transaction_types_selected` on the application" do
         legal_aid_application = create(
           :legal_aid_application,
+          :with_applicant,
           no_credit_transaction_types_selected: true,
         )
         benefits = create(:transaction_type, :benefits)
@@ -381,7 +391,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "updates the application's income transaction types" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         pension = create(:transaction_type, :pension)
         maintenance_in = create(:transaction_type, :maintenance_in)
@@ -426,7 +436,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "updates the application's income regular transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         pension = create(:transaction_type, :pension)
         maintenance_in = create(:transaction_type, :maintenance_in)
@@ -435,16 +445,22 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :regular_transaction,
           legal_aid_application:,
           transaction_type: maintenance_in,
+          owner_id: legal_aid_application.applicant.id,
+          owner_type: "Applicant",
         )
         existing_income_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: benefits,
+          owner_id: legal_aid_application.applicant.id,
+          owner_type: "Applicant",
         )
         outgoing_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: child_care,
+          owner_id: legal_aid_application.applicant.id,
+          owner_type: "Applicant",
         )
         params = {
           "transaction_type_ids" => ["", benefits.id, pension.id],
@@ -471,7 +487,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "updates the application's income cash transactions" do
-        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
         benefits = create(:transaction_type, :benefits)
         pension = create(:transaction_type, :pension)
         maintenance_in = create(:transaction_type, :maintenance_in)

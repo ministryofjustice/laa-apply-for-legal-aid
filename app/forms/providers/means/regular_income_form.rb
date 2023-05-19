@@ -1,6 +1,7 @@
 module Providers
   module Means
     class RegularIncomeForm < RegularTransactionForm
+      include ApplicantOwner
       INCOME_TYPES = %w[
         benefits
         friends_or_family
