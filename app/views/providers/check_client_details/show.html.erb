@@ -1,4 +1,4 @@
-<% page_title = @legal_aid_application.applicant.has_partner? ? t(".partner_title") : t(".client_only_title")
+<% page_title = @legal_aid_application.shared_benefit_with_applicant? ? t(".partner_title") : t(".client_only_title")
    checking_details_for_dwp = true %>
 <%= page_template page_title:, template: :basic do %>
 

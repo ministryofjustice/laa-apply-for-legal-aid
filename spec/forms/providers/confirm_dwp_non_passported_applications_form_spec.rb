@@ -42,21 +42,4 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsForm, type: :form d
       end
     end
   end
-
-  # describe "#initialize" do
-  #   context "the provider has previously selected that the client gets a joint passporting benefit" do
-  #     let(:application) { create(:legal_aid_application, :with_partner_and_joint_benefit) }
-  #     # let(:partner) { application.partner }
-  #     let(:partner) { create(:partner, shared_benefit_with_applicant: true) }
-
-  #     let(:params) {  partner }
-
-  #     it 'sets confirm_dwp_result to joint_with_partner_true' do
-
-  #       # expect(form.attributes["confirm_dwp_result"]).to eq "joint_with_partner_true"
-  #       binding.pry
-  #       expect(form).to have_attributes()
-  #     end
-  #   end
-  # end
 end

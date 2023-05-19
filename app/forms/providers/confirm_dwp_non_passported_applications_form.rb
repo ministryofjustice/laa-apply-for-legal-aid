@@ -12,10 +12,6 @@ module Providers
 
     validate :response_present?
 
-    def exclude_from_model
-      confirm_dwp_result
-    end
-
     def correct_dwp_result?
       attributes["confirm_dwp_result"] == "dwp_correct"
     end
@@ -29,14 +25,6 @@ module Providers
 
       if confirm_dwp_result.nil? || RESPONSE_ATTRIBUTES.exclude?(confirm_dwp_result)
         errors.add(:confirm_dwp_result, I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
-      end
-    end
-
-    def initialize(*args)
-      super
-
-      if model.shared_benefit_with_applicant
-        @confirm_dwp_result = "joint_with_partner_true"
       end
     end
   end
