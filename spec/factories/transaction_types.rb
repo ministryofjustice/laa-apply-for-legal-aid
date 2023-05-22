@@ -113,5 +113,11 @@ FactoryBot.define do
       operation { "debit" }
       sort_order { 180 }
     end
+
+    trait :state_benefits do
+      name { "state_benefits" }
+      operation { "credit" }
+      sort_order { 190 }
+    end
   end
 end
