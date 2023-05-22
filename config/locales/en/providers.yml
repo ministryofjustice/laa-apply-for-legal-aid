@@ -819,12 +819,16 @@ en:
       employment_incomes:
         show:
           hmrc-information: HMRC have provided the information on this page.
-          inset_text: "We've used your client's National Insurance number to get this information from HMRC."
+          inset_text: We used your client’s National Insurance number to get this information from HMRC.
           employed: Review %{name}'s employment income
           not_employed: HMRC found a record of your client's employment
-          hmrc_not_employed: "You told us your client is not employed but HMRC shared the following information with us:"
+          hmrc_not_employed: You told us your client is not employed, but HMRC shared this information with us.
           supplementary_question: Do you need to tell us anything else about your client's employment?
           employment_hint: For example, if they get cash in hand pay, have zero-hours contracts, or recently started or ended employment.
+          employment_situation: Tell us about your client's employment situation
+          employment_situation_hint: |
+            For example, if they recently ended employment. You can upload evidence,
+            like a P45, later on.
           table_caption: Your client's employment details
           date: Date
           income: Income

@@ -11,17 +11,17 @@
     <% page_heading = "employed" %>
   <% end %>
 
-  <span class="govuk-caption-xl"><%= t("providers.means.client_caption") %></span>
   <%= page_template page_title: t(".#{page_heading}", name: @applicant.full_name), template: :basic, form: do %>
 
+    <span class="govuk-caption-xl"><%= t("providers.means.client_caption") %></span>
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
-
-      <%= govuk_inset_text(text: t(".inset_text")) %>
 
       <% if @eligible_employment_payments.any? && @applicant.not_employed? %>
           <p class="govuk-body-l"> <%= t(".hmrc_not_employed") %> </p>
       <% end %>
+
+      <%= govuk_inset_text(text: t(".inset_text")) %>
 
       <%= govuk_table do |table|
             table.with_colgroup do |colgroup|
@@ -58,14 +58,21 @@
             end
           end %>
 
-      <%= form.govuk_radio_buttons_fieldset :extra_employment_information, legend: { text: t(".supplementary_question") }, hint: { text: t(".employment_hint") } do %>
-        <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t("generic.yes") } do %>
+      <% if @applicant.not_employed? %>
         <%= form.govuk_text_area :extra_employment_information_details,
-                                 label: { text: t(".enter_details") },
-                                 hint: { text: t(".details_hint") },
-                                 rows: 5 %>
+                                 label: { text: t(".employment_situation"), tag: "h2", size: "m" },
+                                 hint: { text: t(".employment_situation_hint") },
+                                 rows: 10 %>
+      <% else %>
+        <%= form.govuk_radio_buttons_fieldset :extra_employment_information, legend: { text: t(".supplementary_question") }, hint: { text: t(".employment_hint") } do %>
+          <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t("generic.yes") } do %>
+            <%= form.govuk_text_area :extra_employment_information_details,
+                                     label: { text: t(".enter_details") },
+                                     hint: { text: t(".details_hint") },
+                                     rows: 5 %>
+          <% end %>
+          <%= form.govuk_radio_button :extra_employment_information, false, label: { text: t("generic.no") } %>
         <% end %>
-        <%= form.govuk_radio_button :extra_employment_information, false, label: { text: t("generic.no") } %>
       <% end %>
     <% end %>
 
