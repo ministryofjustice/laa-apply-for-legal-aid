@@ -161,6 +161,9 @@ en:
           - "%{capital_contribution} from their disposable capital"
         line_2: Your client is ineligible for Section 8 proceedings.
         line_3: You still need to provide details of the case before we can grant legal aid.
+    cost_of_living_and_disregarded_benefits:
+      title:
+        Government Cost of Living Payments and disregarded benefits
     cost_of_living:
       header: Government Cost of Living Payments
       text: Government Cost of Living Payments are disregarded from the financial eligibility calculation, for example
