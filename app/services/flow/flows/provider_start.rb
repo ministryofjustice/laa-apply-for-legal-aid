@@ -156,13 +156,14 @@ module Flow
             when :unexpected_employment_data
               :unexpected_employment_incomes
             when :applicant_not_employed
-              :regular_incomes
+              :receives_state_benefits
             else
               raise "Unexpected hmrc status #{status.inspect}"
             end
           end,
           check_answers: :check_income_answers,
         },
+        # provider_means_state_benefits is called here
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
           forward: :about_the_financial_assessments,
