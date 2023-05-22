@@ -761,6 +761,15 @@ en:
         amount_hint: Check your student finance entitlement letter.
         amount_provider: Enter the amount they'll get this academic year
         amount: How much student finance will you get this academic year?
+      employment_income_table:
+        inset_text: We used your client's National Insurance number to get this information from HMRC.
+        date: Date
+        income: Income
+        deductions: Deductions
+        gross: Gross
+        tax: Tax
+        ni: National Insurance
+        table_caption: Your client's employment details
     scope_limitations:
       limitation_note:
         details: Give details of the %{scope_limitation}

@@ -818,26 +818,28 @@ en:
           employment_details_hint: You'll need to upload supporting evidence later.
       employment_incomes:
         show:
+          notification_banner_title: Important
           hmrc-information: HMRC have provided the information on this page.
-          inset_text: We used your client’s National Insurance number to get this information from HMRC.
-          employed: Review %{name}'s employment income
-          not_employed: HMRC found a record of your client's employment
-          hmrc_not_employed: You told us your client is not employed, but HMRC shared this information with us.
-          supplementary_question: Do you need to tell us anything else about your client's employment?
-          employment_hint: For example, if they get cash in hand pay, have zero-hours contracts, or recently started or ended employment.
-          employment_situation: Tell us about your client's employment situation
-          employment_situation_hint: |
-            For example, if they recently ended employment. You can upload evidence,
-            like a P45, later on.
-          table_caption: Your client's employment details
-          date: Date
-          income: Income
-          deductions: Deductions
-          gross: Gross
+          page_title: Review %{name}'s employment income
+          supplementary_question: |
+            Do you need to tell us anything else about your client's employment?
+          employment_hint: |
+            For example, if they get cash in hand pay, have zero-hours contracts,
+            or recently started or ended employment.
           enter_details: Enter details
           details_hint: You'll need to upload supporting evidence later.
-          tax: Tax
-          ni: National Insurance
+      unexpected_employment_incomes:
+        show:
+          notification_banner_title: Important
+          hmrc-information: HMRC have provided the information on this page.
+          page_title: HMRC found a record of your client's employment
+          hmrc_not_employed: |
+            You told us your client is not employed, but HMRC shared this information
+            with us.
+          supplementary_question: Tell us about your client's employment situation
+          supplementary_question_hint: |
+            For example, if they recently ended employment. You can upload evidence,
+            like a P45, later on.
       cash_incomes:
         show:
           page_heading: Select payments your client receives in cash

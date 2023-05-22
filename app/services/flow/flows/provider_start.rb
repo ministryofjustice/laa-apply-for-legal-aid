@@ -145,8 +145,10 @@ module Flow
             case status
             when :hmrc_multiple_employments, :no_hmrc_data
               :full_employment_details
-            when :hmrc_single_employment, :unexpected_employment_data
+            when :hmrc_single_employment
               :employment_incomes
+            when :unexpected_employment_data
+              :unexpected_employment_incomes
             when :applicant_not_employed
               :regular_incomes
             else
