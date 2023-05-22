@@ -1,22 +1,22 @@
 <%= page_template page_title: t(".h1-heading") do %>
-  <ol class="govuk-list govuk-list--number govuk-heading-m">
-    <li><%= t(".capital_list_heading") %></li>
-    <p class="govuk-body govuk-!-margin-top-4"><%= t(".capital_text") %></p>
-    <%= list_from_translation_path ".capital_introductions.show.capital_items" %>
 
-    <li><%= t(".merits_list_heading") %></li>
-    <p class="govuk-body govuk-!-margin-top-4"><%= t(".merits_text") %></p>
-    <%= list_from_translation_path ".capital_introductions.show.merits_items" %>
+  <div class="app-counter-list">
+    <h2 class="govuk-heading-m app-counter"><%= t(".capital_list_heading") %></h2>
+    <div class="govuk-!-padding-left-4">
+      <p class="govuk-body"><%= t(".capital_text") %></p>
+      <%= list_from_translation_path ".capital_introductions.show.capital_items" %>
+    </div>
 
-    <% if @legal_aid_application.section_8_proceedings? %>
-      <li style="margin-top: -0.5em">
+    <h2 class="govuk-heading-m app-counter"><%= t(".merits_list_heading") %></h2>
+    <div class="govuk-!-padding-left-4">
+      <p class="govuk-body"><%= t(".merits_text") %></p>
+      <%= list_from_translation_path ".capital_introductions.show.merits_items" %>
+
+      <% if @legal_aid_application.section_8_proceedings? %>
         <%= list_from_translation_path ".capital_introductions.show.section_8_items" %>
-      </li>
-    <% end %>
-    </li>
-  </ol>
-
-  <div class="govuk-!-padding-bottom-4"></div>
+      <% end %>
+    </div>
+  </div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_capital_introduction_path,

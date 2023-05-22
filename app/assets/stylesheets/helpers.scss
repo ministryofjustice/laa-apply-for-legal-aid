@@ -48,4 +48,12 @@
   min-height: 1px;
 }
 
+.app-counter-list {
+  counter-reset: list;
+}
+
+.app-counter:before {
+  counter-increment: list;
+  content: counter(list) ". ";
+}
 // stylelint-enable declaration-no-important
