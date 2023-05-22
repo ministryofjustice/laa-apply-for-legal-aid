@@ -332,6 +332,17 @@ RSpec.describe "Providers::BankStatementsController" do
           end
         end
 
+        context "when client is not employed but HMRC response has employment data" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :unexpected_employment_data
+          end
+
+          it "redirects to unexpected_employment_incomes" do
+            request
+            expect(response).to redirect_to providers_legal_aid_application_means_unexpected_employment_income_path(legal_aid_application)
+          end
+        end
+
         context "when HMRC response status is applicant_not_employed" do
           before do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
