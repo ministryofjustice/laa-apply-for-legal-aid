@@ -703,6 +703,9 @@ en:
     has_other_dependants:
       show:
         error: Select yes if they have other dependants
+    remove_state_benefits:
+      show:
+        error: Select yes if you wish to remove this benefit
     add_another_state_benefits:
       show:
         error: Select yes if they have received other benefits
@@ -1096,6 +1099,9 @@ en:
           remove: Remove
           warning:
             delete: Are you sure you want to delete this dependant?
+      remove_state_benefits:
+        show:
+          page_title: "Are you sure you want to remove %{name}?"
     check_capital_answers:
       show:
         h1-heading: Check your answers
