@@ -116,8 +116,8 @@ RSpec.describe Providers::ClientCompletedMeansController do
           context "when application is using bank upload journey" do
             before { allow_any_instance_of(LegalAidApplication).to receive(:uploading_bank_statements?).and_return(true) }
 
-            it "redirects to the regular incomes page" do
-              expect(subject).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
+            it "redirects to the receives state benefit page" do
+              expect(subject).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
             end
           end
         end
