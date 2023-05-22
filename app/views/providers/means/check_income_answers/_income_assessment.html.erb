@@ -16,6 +16,11 @@
   <%= render "shared/check_answers/full_employment_details", read_only: false %>
 <% end %>
 
+<%= render("shared/check_answers/benefits_income",
+           transactions_for: "applicant",
+           individual: @legal_aid_application.applicant,
+           state_benefits: @legal_aid_application.applicant.state_benefits) %>
+
 <%= render(
       "shared/check_answers/income_summary",
       income_type: t(".credits-section-heading"),

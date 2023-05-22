@@ -322,8 +322,19 @@ en:
         employment: Employment income
         employment_question: Do you need to tell us anything else about your client's employment?
         employment_details: Details
-      income_cash_payments:
-        heading: Payments your client receives in cash
+      benefits_income:
+        applicant:
+          heading: Client benefits
+          question: Does your client get any benefits?
+          change_aria: whether your client receives benefits
+        partner:
+          heading: Partner benefits
+          question: Does the partner get any benefits?
+          change_aria: whether the partner receives benefits
+        benefit_heading: "Benefit %{index}"
+        type: Benefit type
+        amount: Amount
+        frequency: Frequency
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
