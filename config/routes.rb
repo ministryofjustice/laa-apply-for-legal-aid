@@ -153,6 +153,7 @@ Rails.application.routes.draw do
         resource :check_income_answers, only: %i[show update]
         resource :add_other_state_benefits, only: %i[show update]
         resources :state_benefits, only: %i[new show update]
+        resource :receives_state_benefits, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
