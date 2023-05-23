@@ -3,7 +3,9 @@
               method: :patch,
               local: true) do |form| %>
 
-  <%= govuk_notification_banner(title_text: t(".notification_banner_title")) { |nb| nb.with_heading(text: t(".hmrc-information")) } %>
+  <% unless @form.errors.any? %>
+    <%= govuk_notification_banner(title_text: t(".notification_banner_title")) { |nb| nb.with_heading(text: t(".hmrc-information")) } %>
+  <% end %>
 
   <%= page_template page_title: t(".page_title", name: @applicant.full_name), template: :basic, form: do %>
 
