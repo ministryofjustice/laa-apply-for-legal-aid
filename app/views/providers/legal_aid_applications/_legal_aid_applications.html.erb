@@ -14,9 +14,9 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-        <% legal_aid_applications.each do |application| %>
+        <% legal_aid_applications.each_with_index do |application, index| %>
           <% ref = application.application_ref %>
-          <%= render "shared/partials/modal_dialogue", application: %>
+          <%= render "shared/partials/modal_dialogue", application:, index: %>
           <tr class="govuk-table__row">
               <% link_text = application.applicant_full_name || t("generic.undefined") %>
               <%= sort_column_cell(
