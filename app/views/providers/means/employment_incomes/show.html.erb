@@ -7,7 +7,7 @@
 
   <%= page_template page_title: t(".page_title", name: @applicant.full_name), template: :basic, form: do %>
 
-    <span class="govuk-caption-xl"><%= t("providers.means.client_caption") %></span>
+    <span class="govuk-caption-l"><%= t("providers.means.client_caption") %></span>
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 

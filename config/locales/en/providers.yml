@@ -810,12 +810,13 @@ en:
           no_employment_info: You told us your client is employed but HMRC could not confirm this.
           mutiple_employment_info: HMRC says your client had more than one job in the last 3 months.
           enter_details: "Enter details of your client's employment in the last 3 months, including:"
-          details_1: how much they earned before tax
-          details_2: how much National Insurance they paid
-          details_3: how much tax they paid
-          details_4: any benefits in kind they received
+          details:
+            - how much they earned before tax
+            - how much National Insurance they paid
+            - how much tax they paid
+            - any benefits in kind they received
+          evidence: A caseworker will ask for evidence of this.
           employment_details_header: Enter your client's employment details
-          employment_details_hint: You'll need to upload supporting evidence later.
       employment_incomes:
         show:
           notification_banner_title: Important
