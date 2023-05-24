@@ -30,6 +30,8 @@
     <% if @legal_aid_application.shared_benefit_with_applicant? %>
       <h2 class="govuk-heading-m"><%= t(".h2_partner") %></h2>
 
+      <p><%= t(".partner_text") %></p>
+
       <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9") do |summary_list| %>
         <% summary_list.with_row do |row| %>
           <% row.with_key { t(".name") } %>

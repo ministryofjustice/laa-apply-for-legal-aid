@@ -245,10 +245,9 @@ en:
         error: Select if your client's details are correct or not
         client_only_title: Check your client's details
         partner_title: Check your client's and their partner's details
-        h2_client: Client details
+        h2_client: Client's details
         h2_partner: Partner's details
-        details_correct: These details are correct
-        details_incorrect: I need to change these details
+        partner_text: These details must be correct for our caseworkers to review them. We will not use them to check DWP records.
         name: Name
         date_of_birth: Date of birth
         national_insurance_number: National Insurance number
