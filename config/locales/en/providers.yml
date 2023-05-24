@@ -773,7 +773,6 @@ en:
       show:
         h1_no_partner: "Do you have evidence that your client receives %{passporting_benefit}?"
         h1_partner: "Do you have evidence that your client is covered by their partner's %{passporting_benefit}?"
-        hint: "For example, a letter from the DWP. A caseworker will request this after you've submitted your application."
         evidence_hint: 'For example, a letter from DWP or any other relevant documents.'
         radio_hint_yes: "You'll need to upload supporting evidence later."
     limitations:
