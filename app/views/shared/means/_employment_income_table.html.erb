@@ -1,0 +1,36 @@
+<%= govuk_inset_text(text: t(".inset_text")) %>
+
+<%= govuk_table do |table|
+      table.with_colgroup do |colgroup|
+        colgroup.with_col(span: 1)
+        colgroup.with_col(span: 2)
+        colgroup.with_col(span: 2)
+      end
+
+      table.with_head do |head|
+        head.with_row do |row|
+          row.with_cell(text: t(".date"))
+          row.with_cell(text: t(".income"), colspan: 2)
+          row.with_cell(text: t(".deductions"), colspan: 2)
+        end
+      end
+
+      @employments.each do |employment|
+        employment.employment_payments.each do |payment|
+          table.with_body do |body|
+            body.with_row do |row|
+              row.with_cell(text: l(payment.date, format: :short_date), rowspan: 2)
+              row.with_cell(text: t(".gross"), classes: "govuk-!-font-weight-bold", rowspan: 2)
+              row.with_cell(text: gds_number_to_currency(payment.gross), numeric: true, rowspan: 2)
+              row.with_cell(text: t(".tax"), classes: "govuk-!-font-weight-bold no-border-bottom")
+              row.with_cell(text: gds_number_to_currency(payment.tax), numeric: true, classes: "no-border-bottom")
+            end
+
+            body.with_row do |row|
+              row.with_cell(text: t(".ni"), classes: "govuk-!-font-weight-bold")
+              row.with_cell(text: gds_number_to_currency(payment.national_insurance), numeric: true)
+            end
+          end
+        end
+      end
+    end %>

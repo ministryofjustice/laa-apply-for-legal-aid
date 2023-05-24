@@ -3,69 +3,24 @@
               method: :patch,
               local: true) do |form| %>
 
-  <div class="moj-banner">
-    <div class="moj-banner__message">
-      <h2 class="govuk-heading-m"><%= t(".hmrc-information") %></h2>
-    </div>
-  </div>
-
-  <% if @eligible_employment_payments.any? && @applicant.not_employed? %>
-    <% page_heading = "not_employed" %>
-  <% else %>
-    <% page_heading = "employed" %>
+  <% unless @form.errors.any? %>
+    <%= govuk_notification_banner(title_text: t(".notification_banner_title")) { |nb| nb.with_heading(text: t(".hmrc-information")) } %>
   <% end %>
 
-  <%= page_template page_title: t(".#{page_heading}", name: @applicant.full_name), template: :basic, form: do %>
+  <%= page_template page_title: t(".page_title", name: @applicant.full_name), template: :basic, form: do %>
 
+    <span class="govuk-caption-l"><%= t("providers.means.client_caption") %></span>
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
-    <% if @eligible_employment_payments.any? && @applicant.not_employed? %>
-        <div class="govuk-!-padding-bottom-6"></div>
-        <p class="govuk-body-l"> <%= t(".hmrc_not_employed") %> </p>
-    <% end %>
+      <%= render "shared/means/employment_income_table" %>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".table_caption") %></caption>
-        <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" style="width: 25%;" scope="col"><%= t(".date") %></th>
-          <th class="govuk-table__header" style="width: 10%;" scope="col" colspan="2"><%= t(".income") %></th>
-          <th class="govuk-table__header" style="width: 35%;" scope="col" colspan="2"><%= t(".deductions") %></th>
-        </tr>
-        </thead>
-
-        <tbody class="govuk-table__body">
-        <% @employments.each do |employment| %>
-          <% employment.employment_payments.each do |payment| %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" style="width: 25%;"><%= l(payment.date, format: :short_date) %></td>
-            <td class="govuk-table__cell" style="width: 10%;"><strong><%= t(".gross") %></strong></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 10%;"><strong></strong><%= gds_number_to_currency(payment.gross) %></td>
-            <td class="govuk-table__cell" style="width: 35%;"><strong><%= t(".tax") %></strong>
-            <br>
-            <strong><%= t(".ni") %></strong>
-            </td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 20%;">
-              <%= gds_number_to_currency(payment.tax) %>
-              <br>
-              <%= gds_number_to_currency(payment.national_insurance) %>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
       <%= form.govuk_radio_buttons_fieldset :extra_employment_information, legend: { text: t(".supplementary_question") }, hint: { text: t(".employment_hint") } do %>
         <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t("generic.yes") } do %>
-        <%= form.govuk_text_area :extra_employment_information_details,
-                                 label: { text: t(".enter_details") },
-                                 hint: { text: t(".details_hint") },
-                                 rows: 5 %>
+          <%= form.govuk_text_area :extra_employment_information_details,
+                                   label: { text: t(".enter_details") },
+                                   hint: { text: t(".details_hint") },
+                                   rows: 5 %>
         <% end %>
         <%= form.govuk_radio_button :extra_employment_information, false, label: { text: t("generic.no") } %>
       <% end %>

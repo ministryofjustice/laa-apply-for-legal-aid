@@ -9,8 +9,10 @@ module Flow
             case status
             when :hmrc_multiple_employments, :no_hmrc_data
               :full_employment_details
-            when :hmrc_single_employment, :unexpected_employment_data
+            when :hmrc_single_employment
               :employment_incomes
+            when :unexpected_employment_data
+              :unexpected_employment_incomes
             when :applicant_not_employed
               if application.uploading_bank_statements?
                 :regular_incomes
@@ -197,6 +199,17 @@ module Flow
         },
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
+          forward: lambda do |application|
+            if application.uploading_bank_statements?
+              :regular_incomes
+            else
+              :identify_types_of_incomes
+            end
+          end,
+          check_answers: :check_income_answers,
+        },
+        unexpected_employment_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_means_unexpected_employment_income_path(application) },
           forward: lambda do |application|
             if application.uploading_bank_statements?
               :regular_incomes

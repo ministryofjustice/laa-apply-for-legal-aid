@@ -2,12 +2,12 @@ require "rails_helper"
 
 RSpec.describe "employed incomes request" do
   let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, :with_single_employment, applicant:) }
-  let(:applicant) { create(:applicant, :employed) }
+  let(:applicant) { create(:applicant, :not_employed) }
   let(:provider) { application.provider }
   let(:setup_tasks) { {} }
 
-  describe "GET /providers/applications/:id/means/employed_income" do
-    subject(:get_employment_income) { get providers_legal_aid_application_means_employment_income_path(application) }
+  describe "GET /providers/applications/:id/means/unexpected_employed_income" do
+    subject(:get_employment_income) { get providers_legal_aid_application_means_unexpected_employment_income_path(application) }
 
     context "when the provider is not authenticated" do
       before do
@@ -28,30 +28,30 @@ RSpec.describe "employed incomes request" do
         expect(response).to have_http_status(:ok)
       end
 
-      context "when applicant is employed" do
-        let(:applicant) { create(:applicant, :employed) }
+      context "when applicant is not employed but has employment payment records" do
+        let(:setup_tasks) do
+          create(:employment, :with_payments_in_transaction_period, legal_aid_application: application)
+        end
 
-        it "displays correct text" do
-          expect(unescaped_response_body).to include(I18n.t("providers.means.employment_incomes.show.page_title", name: applicant.full_name))
-          expect(unescaped_response_body).not_to include(I18n.t("providers.means.employment_incomes.show.hmrc_not_employed"))
+        it "displays correct text when applicant is not_employed" do
+          expect(unescaped_response_body).to include(I18n.t("providers.means.unexpected_employment_incomes.show.page_title"))
+          expect(unescaped_response_body).to include(I18n.t("providers.means.unexpected_employment_incomes.show.hmrc_not_employed"))
         end
       end
     end
   end
 
-  describe "PATCH /providers/applications/:id/means/employed_income" do
-    subject(:request) { patch providers_legal_aid_application_means_employment_income_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:id/means/unexpected_employed_income" do
+    subject(:request) { patch providers_legal_aid_application_means_unexpected_employment_income_path(application), params: params.merge(submit_button) }
 
     let(:params) do
       {
         legal_aid_application: {
-          extra_employment_information:,
           extra_employment_information_details:,
         },
       }
     end
     let(:extra_employment_information_details) { Faker::Lorem.paragraph }
-    let(:extra_employment_information) { "true" }
 
     context "when the provider is authenticated" do
       before do
@@ -67,7 +67,6 @@ RSpec.describe "employed incomes request" do
 
         it "updates legal aid application restriction information" do
           request
-          expect(application.reload.extra_employment_information).to be true
           expect(application.reload.extra_employment_information_details).not_to be_empty
         end
 
@@ -94,15 +93,6 @@ RSpec.describe "employed incomes request" do
             request
             expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
           end
-
-          context "with no params" do
-            let(:extra_employment_information) { "" }
-
-            it "displays error" do
-              request
-              expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank"))
-            end
-          end
         end
       end
 
@@ -121,7 +111,6 @@ RSpec.describe "employed incomes request" do
           end
 
           it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.extra_employment_information).to be true
             expect(application.extra_employment_information_details).not_to be_empty
           end
 
