@@ -1,5 +1,7 @@
 module CFECivil
   class SubmissionBuilder
+    HEADER_VERSION = 1.0
+
     delegate :cfe_result, to: :submission
     attr_reader :legal_aid_application
 
@@ -37,6 +39,7 @@ module CFECivil
       {
         "Content-Type" => "application/json",
         "Accept" => "application/json;version=#{cfe_version}",
+        "UserAgent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
       }
     end
 

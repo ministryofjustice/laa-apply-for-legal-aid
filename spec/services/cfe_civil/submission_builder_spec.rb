@@ -28,6 +28,16 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
       allow(Rails.configuration.x).to receive(:cfe_civil_host).and_return(staging_host)
     end
 
+    context "when HostEnv is not set" do
+      before do
+        allow(HostEnv).to receive(:environment).and_return(nil)
+      end
+
+      it "still generates the expected JSON but uses 'missing' in the header" do
+        expect(call).to be_a CFE::V6::Result
+      end
+    end
+
     context "when not saving the result" do
       let(:save_result) { false } # this is only while running comparison
 
