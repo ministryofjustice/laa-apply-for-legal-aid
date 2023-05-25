@@ -31,11 +31,9 @@ Feature: Checking client details answers backwards and forwards
     Then I should be on a page with title "Enter your client's details"
 
     When I enter name 'Fred', 'Bloggs'
-    And I click 'Save and continue'
-    Then I should be on a page with title "Does the client have a National Insurance number?"
-
     When I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
+
     And the "Client details" check your answers section should contain:
       | question | answer |
       | First name | Fred |
@@ -80,17 +78,6 @@ Feature: Checking client details answers backwards and forwards
 
     And I should not see "What happens next"
     And I should not see "to check their benefit status"
-
-  @javascript @vcr
-  Scenario: I want to change first name from the check your answers page
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'First name'
-    Then I enter the first name 'Bartholomew'
-    When I click 'Save and continue'
-    Then I should be on a page with title "Does the client have a National Insurance number?"
-    When I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'First name' should be 'Bartholomew'
 
   @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page

@@ -9,7 +9,6 @@ module Flow
               application.change_state_machine_type("NonPassportedStateMachine")
               :about_financial_means
             else
-              application.check_applicant_details! unless application.checking_applicant_details?
               application.change_state_machine_type("PassportedStateMachine")
               :check_client_details
             end
@@ -17,7 +16,7 @@ module Flow
         },
         check_client_details: {
           path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
-          forward: ->(_application, correct_details) { correct_details ? :received_benefit_confirmations : :applicant_details },
+          forward: :received_benefit_confirmations,
         },
         received_benefit_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },

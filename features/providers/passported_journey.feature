@@ -113,18 +113,17 @@ Feature: passported_journey completes application
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
+    Then I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
     Then I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on a page showing "What you need to do"
     And I click link 'Back'
-    And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
-    Then I choose 'No, my client receives a passporting benefit'
+    And I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
+    Then I choose 'No, my client gets a passporting benefit'
     And I click 'Save and continue'
     And I should be on a page showing "Check your client's details"
-    Then I choose 'These details are correct'
     And I click 'Save and continue'
-    And I should be on a page showing 'Which passporting benefit does your client receive?'
+    And I should be on a page showing 'Which passporting benefit does your client get?'
     Then I choose 'Universal Credit'
     And I click 'Save and continue'
     Then I should be on a page showing 'Do you have evidence that your client receives Universal Credit?'
@@ -139,17 +138,15 @@ Feature: passported_journey completes application
   Scenario: A negative benefit check allows the solicitor to override the result
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit'
+    Then I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
     Then I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your client's details"
-    Then I choose 'I need to change these details'
-    And I click 'Save and continue'
+    Then I click the first link "Client name"
     Then I should be on a page showing "Enter your client's details"
     When I click link "Back"
-    Then I choose 'These details are correct'
     And I click 'Save and continue'
-    Then I should be on a page showing 'Which passporting benefit does your client receive?'
+    Then I should be on a page showing 'Which passporting benefit does your client get?'
     Then I choose 'None of these'
     And I click 'Save and continue'
     Then I should be on a page showing "What you need to do"

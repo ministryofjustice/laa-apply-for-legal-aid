@@ -12,6 +12,7 @@ RSpec.describe BaseStateMachine do
     it { is_expected.to transition_from(:entering_applicant_details).to(:checking_applicant_details).on_event(event) }
     it { is_expected.to transition_from(:applicant_details_checked).to(:checking_applicant_details).on_event(event) }
     it { is_expected.to transition_from(:use_ccms).to(:checking_applicant_details).on_event(event) }
+    it { is_expected.to transition_from(:overriding_dwp_result).to(:checking_applicant_details).on_event(event) }
 
     context "when application requires mean testing" do
       before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(false) }
@@ -37,6 +38,7 @@ RSpec.describe BaseStateMachine do
       it { is_expected.to transition_from(:checking_applicant_details).to(:applicant_details_checked).on_event(event) }
       it { is_expected.to transition_from(:use_ccms).to(:applicant_details_checked).on_event(event) }
       it { is_expected.to transition_from(:delegated_functions_used).to(:applicant_details_checked).on_event(event) }
+      it { is_expected.to transition_from(:overriding_dwp_result).to(:applicant_details_checked).on_event(event) }
     end
 
     context "when application requires mean testing" do
@@ -50,6 +52,13 @@ RSpec.describe BaseStateMachine do
 
       it { is_expected.to transition_from(:provider_entering_merits).to(:applicant_details_checked).on_event(event) }
     end
+  end
+
+  describe "#override_dwp_result" do
+    let(:event) { :override_dwp_result }
+
+    it { is_expected.to transition_from(:checking_applicant_details).to(:overriding_dwp_result).on_event(event) }
+    it { is_expected.to transition_from(:applicant_details_checked).to(:overriding_dwp_result).on_event(event) }
   end
 
   describe "#provider_enter_merits" do

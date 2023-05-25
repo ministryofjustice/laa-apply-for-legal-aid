@@ -31,6 +31,7 @@ class BaseStateMachine < ApplicationRecord
     state :entering_applicant_details
     state :checking_applicant_details
     state :applicant_details_checked
+    state :overriding_dwp_result
     state :provider_entering_merits
     state :checking_merits_answers
     state :generating_reports
@@ -56,6 +57,7 @@ class BaseStateMachine < ApplicationRecord
                     entering_applicant_details
                     applicant_details_checked
                     provider_confirming_applicant_eligibility
+                    overriding_dwp_result
                     use_ccms
                   ],
                   to: :checking_applicant_details
@@ -70,11 +72,20 @@ class BaseStateMachine < ApplicationRecord
                     provider_confirming_applicant_eligibility
                     use_ccms
                     delegated_functions_used
+                    overriding_dwp_result
                   ],
                   to: :applicant_details_checked,
                   after: proc { |legal_aid_application| CleanupCapitalAttributes.call(legal_aid_application) }
 
       transitions from: :provider_entering_merits, to: :applicant_details_checked, guard: proc { non_means_tested? }
+    end
+
+    event :override_dwp_result do
+      transitions from: %i[
+                    checking_applicant_details
+                    applicant_details_checked
+                  ],
+                  to: :overriding_dwp_result
     end
 
     event :provider_used_delegated_functions do

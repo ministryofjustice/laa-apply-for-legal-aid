@@ -56,4 +56,4 @@ Feature: Under 18 applicant journey with means test review phase one disabled
     Then I should be on a page with title "Check your answers"
 
     When I click 'Save and continue'
-    And I should be on a page showing "DWP records show that your client does not receive a passporting benefit"
+    And I should be on a page showing "DWP records show that your client does not get a passporting benefit"

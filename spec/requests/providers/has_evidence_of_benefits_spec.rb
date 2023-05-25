@@ -40,6 +40,26 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
         expect(response.body.gsub("&#39;", %('))).to include I18n.t("providers.has_evidence_of_benefits.show.radio_hint_yes")
       end
     end
+
+    context "when the provider has said their client does not receive a joint benefit with their partner" do
+      let(:benefit_text) { I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{legal_aid_application.dwp_override.passporting_benefit}") }
+
+      it "displays the correct page" do
+        expect(unescaped_response_body).to include(I18n.t("providers.has_evidence_of_benefits.show.h1_no_partner", passporting_benefit: benefit_text))
+      end
+    end
+
+    context "when the provider has previously selected that the client gets a joint benefit with their partner" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_partner_and_joint_benefit, :with_dwp_override) }
+      let(:benefit_text) { I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{legal_aid_application.dwp_override.passporting_benefit}") }
+      let(:application_id) { legal_aid_application.id }
+
+      before { allow(Setting).to receive(:partner_means_assessment?).and_return true }
+
+      it "displays the correct page" do
+        expect(unescaped_response_body).to include(I18n.t("providers.has_evidence_of_benefits.show.h1_partner", passporting_benefit: benefit_text))
+      end
+    end
   end
 
   describe "PATCH /providers/:application_id/has_evidence_of_benefit" do

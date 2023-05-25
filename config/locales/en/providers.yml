@@ -211,11 +211,13 @@ en:
 
     confirm_dwp_non_passported_applications:
       show:
-        option_no: No, my client receives a passporting benefit
-        tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
-        title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not receive a passporting benefit.
+        tab_title: DWP records show that your client does not get a passporting benefit – Apply for Legal Aid - GOV.UK
+        title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit
         is_this_correct: Are the DWP records correct?
+        option_no: No, my client gets a passporting benefit
+        option_partner: No, my client gets a joint passporting benefit with their partner
         hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
+        error: Select yes if the DWP records are correct
 
     confirm_multiple_delegated_functions_dates:
       show:
@@ -238,20 +240,23 @@ en:
             You do not need to do a means test as your client was under 18
             when you first used delegated functions on this case
         tab_title: No means test required
-
-    correct_dwp_results:
-      show:
-        error: Select yes if your client does not receive a passporting benefit.
     check_client_details:
       show:
         error: Select if your client's details are correct or not
-        title: Check your client's details
-        table_caption: Your client's details
-        details_correct: These details are correct
-        details_incorrect: I need to change these details
+        client_only_title: Check your client's details
+        partner_title: Check your client's and their partner's details
+        h2_client: Client's details
+        h2_partner: Partner's details
+        partner_text: These details must be correct for our caseworkers to review them. We will not use them to check DWP records.
         name: Name
         date_of_birth: Date of birth
         national_insurance_number: National Insurance number
+        client_name: Client name
+        client_date_of_birth: Client date of birth
+        client_national_insurance_number: Client national Insurance number
+        partner_name: Partner name
+        partner_date_of_birth: Partner date of birth
+        partner_national_insurance_number: Partner national Insurance number
     check_merits_answers:
       show:
         h1-heading: Check your answers
@@ -764,9 +769,9 @@ en:
         no_button: No, do not delete it
     has_evidence_of_benefits:
       show:
-        page_title: "Do you have evidence that your client receives %{passporting_benefit}?"
-        hint: "For example, a letter from the DWP. A caseworker will request this after you've submitted your application."
-        evidence_hint: 'For example, a letter from the DWP, a bank statement from the last 3 months showing benefits paid in, or any other relevant documents.'
+        h1_no_partner: "Do you have evidence that your client receives %{passporting_benefit}?"
+        h1_partner: "Do you have evidence that your client is covered by their partner's %{passporting_benefit}?"
+        evidence_hint: 'For example, a letter from DWP or any other relevant documents.'
         radio_hint_yes: "You'll need to upload supporting evidence later."
     limitations:
       cost_limits:
@@ -1366,7 +1371,8 @@ en:
         username: Username
     received_benefit_confirmations:
       show:
-        h1-heading: Which passporting benefit does your client receive?
+        h1_no_partner: Which passporting benefit does your client get?
+        h1_partner: Which joint passporting benefit does your client and their partner get?
     restrictions:
       show:
         h1-heading: Is your client prohibited from selling or borrowing against their assets?

@@ -312,6 +312,7 @@ en:
             postcode:
               blank: Enter a postcode
               invalid: Enter a real postcode
+            confirm_dwp_result: Select yes if the DWP records are correct
         attachment:
           attributes:
             attachment_type:

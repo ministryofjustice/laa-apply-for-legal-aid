@@ -24,7 +24,22 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       end
 
       it "displays the correct page" do
-        expect(unescaped_response_body).to include("Which passporting benefit does your client receive?")
+        expect(unescaped_response_body).to include(I18n.t("providers.received_benefit_confirmations.show.h1_no_partner"))
+      end
+    end
+
+    context "when the provider has previously selected that the client gets a joint benefit with their partner" do
+      let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_partner_and_joint_benefit) }
+      let(:application_id) { application.id }
+
+      before do
+        login_as application.provider
+        allow(Setting).to receive(:partner_means_assessment?).and_return true
+        subject
+      end
+
+      it "displays the correct page" do
+        expect(unescaped_response_body).to include(I18n.t("providers.received_benefit_confirmations.show.h1_partner"))
       end
     end
   end

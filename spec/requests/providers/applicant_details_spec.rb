@@ -123,6 +123,16 @@ RSpec.describe Providers::ApplicantDetailsController do
           it "redirects to check_your_answers page" do
             subject
 
+            expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application))
+          end
+        end
+
+        context "when the legal aid application is in overriding_dwp_result state" do
+          let(:application) { create(:legal_aid_application, :overriding_dwp_result) }
+
+          it "redirects to has_national_insurance_numbers page" do
+            subject
+
             expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(application))
           end
         end

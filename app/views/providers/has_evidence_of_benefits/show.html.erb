@@ -1,4 +1,5 @@
-<%= page_template page_title: t(".page_title", passporting_benefit: @passporting_benefit), template: :basic do %>
+<% page_title = @legal_aid_application.shared_benefit_with_applicant? ? t(".h1_partner", passporting_benefit: @passporting_benefit) : t(".h1_no_partner", passporting_benefit: @passporting_benefit) %>
+<%= page_template page_title:, template: :basic, show_errors_for: @form do %>
     <%= form_with(
           model: @form,
           url: providers_legal_aid_application_has_evidence_of_benefit_path,

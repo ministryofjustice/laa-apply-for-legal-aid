@@ -75,6 +75,7 @@ class LegalAidApplication < ApplicationRecord
 
   delegate :bank_transactions, :under_18?, :under_16_blocked?, to: :applicant, allow_nil: true
   delegate :full_name, :has_partner, :has_partner?, to: :applicant, prefix: true, allow_nil: true
+  delegate :shared_benefit_with_applicant, :shared_benefit_with_applicant?, to: :partner, allow_nil: true
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
   delegate :applicant_enter_means!,
            :await_applicant!,
@@ -113,6 +114,7 @@ class LegalAidApplication < ApplicationRecord
            :provider_checking_or_checked_citizens_means_answers?,
            :provider_entering_means?,
            :provider_entering_merits?,
+           :overriding_dwp_result?,
            :submitting_assessment?,
            :use_ccms?,
            :summary_state,
@@ -430,6 +432,10 @@ class LegalAidApplication < ApplicationRecord
 
   def applicant_details_checked!
     state_machine_proxy.applicant_details_checked!(self)
+  end
+
+  def override_dwp_result!
+    state_machine_proxy.override_dwp_result!(self)
   end
 
   def generate_reports!

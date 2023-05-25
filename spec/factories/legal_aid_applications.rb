@@ -42,6 +42,19 @@ FactoryBot.define do
       applicant { build(:applicant, :with_address, with_bank_accounts:) }
     end
 
+    trait :with_applicant_and_partner do
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
+      partner { build(:partner) }
+    end
+
+    trait :with_partner_and_joint_benefit do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, :with_shared_benefit) }
+    end
+
     trait :with_applicant_and_address_lookup do
       applicant { build(:applicant, :with_address_lookup) }
     end
@@ -175,6 +188,12 @@ FactoryBot.define do
     trait :generating_reports do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :generating_reports)
+      end
+    end
+
+    trait :overriding_dwp_result do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :overriding_dwp_result)
       end
     end
 
