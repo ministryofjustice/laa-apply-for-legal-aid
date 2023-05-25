@@ -65,9 +65,9 @@ Feature: Bank statement upload check your answers
     When I click Check Your Answers Change link for "What payments does your client receive?"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
 
-    When I check "Benefits"
-    And I fill "Benefits amount" with "1000"
-    And I choose "providers-means-regular-income-form-benefits-frequency-two-weekly-field"
+    When I check "Pension"
+    And I fill "Pension amount" with "1000"
+    And I choose "providers-means-regular-income-form-pension-frequency-two-weekly-field"
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"

@@ -16,7 +16,7 @@ Feature: Check multiple employment
     And I click 'Save and continue'
     Then I should be on a page showing "Which payments does your client receive?"
 
-    When I select 'Benefits'
+    When I select 'Pension'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"
 
@@ -37,7 +37,7 @@ Feature: Check multiple employment
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
 
     And I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
+    Then I should be on a page showing 'Select pension payments'
 
     Then I select the first checkbox
     And I click 'Save and continue'

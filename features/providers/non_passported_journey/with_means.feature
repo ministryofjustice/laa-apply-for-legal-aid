@@ -7,14 +7,14 @@ Feature: non_passported_journey with means
     When I click 'Continue'
     Then I should be on a page showing "Which payments does your client receive?"
 
-    When I select 'Benefits'
+    When I select 'Pension'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"
 
-    When I select "Benefits"
-    Then I enter benefits1 '100'
-    Then I enter benefits2 '100'
-    Then I enter benefits3 '100'
+    When I select "Pension"
+    Then I enter pension1 '100'
+    Then I enter pension2 '100'
+    Then I enter pension3 '100'
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client receive student finance?"
 
@@ -35,13 +35,13 @@ Feature: non_passported_journey with means
 
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
+    Then I should be on a page showing 'Select pension payments'
     Then I select the first checkbox
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
 
     When I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select any benefits your client got in the last 3 months'
+    Then I should be on a page showing 'Select pension payments'
     When I select the first checkbox
     And I click 'Save and continue'
     Then I should be on a page with title "Sort your client's income into categories"
