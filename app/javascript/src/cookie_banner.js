@@ -27,6 +27,8 @@ function initCookieBanner (cookieBanner) {
           const newContent = cookieBanner.querySelector(`#${btnValue}-content`)
           hide(mainContent)
           show(newContent)
+        }).catch((error) => {
+          console.error(error.message)
         })
       })
     }
