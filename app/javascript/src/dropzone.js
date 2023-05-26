@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', event => {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
     const chooseFilesBtn = document.querySelector('#dz-upload-button')
-    url.includes('bank_statement') ? ACCEPTED_FILES.push('text/csv') : ACCEPTED_FILES // eslint-disable-line no-unused-expressions
+
+    if (url.includes('bank_statement')) ACCEPTED_FILES.push('text/csv')
 
     chooseFilesBtn.addEventListener('click', (e) => {
       e.preventDefault() // prevent submitting form by default
