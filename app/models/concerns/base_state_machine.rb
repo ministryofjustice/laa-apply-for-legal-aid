@@ -5,7 +5,7 @@ class BaseStateMachine < ApplicationRecord
   delegate :non_means_tested?, to: :legal_aid_application
 
   def allow_ccms_submission?
-    EnableCCMSSubmission.call
+    EnableCCMSSubmission.call || ENV.fetch("LOCAL_CCMS_OVERRIDE", "false") == "true"
   end
 
   VALID_CCMS_REASONS = %i[
