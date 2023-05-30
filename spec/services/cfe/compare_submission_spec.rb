@@ -120,5 +120,18 @@ RSpec.describe CFE::CompareSubmission do
 
       it { expect(call).to be true }
     end
+
+    context "when the assessment/gross_income/employment_income/0/payments sequence does not match" do
+      let(:cfe_legacy_result) { file_fixture("cfe_civil_comparison/v5/payment_sequence_mismatch_array.json").read }
+      let(:cfe_civil_result) { file_fixture("cfe_civil_comparison/v6/payment_sequence_mismatch_array.json").read }
+
+      before do
+        allow(cfe_result).to receive(:result).and_return(cfe_legacy_result)
+        allow(submission_builder).to receive(:cfe_result).and_return(cfe_civil_result)
+        allow(submission_builder).to receive(:request_body).and_return({ "fake" => "return" })
+      end
+
+      it { expect(call).to be true }
+    end
   end
 end
