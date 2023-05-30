@@ -23,10 +23,6 @@
 
   <p class="govuk-body"><%= t(".online_banking_details") %></p>
 
-  <%= link_to_accessible start_button_label(:start_now),
-                         forward_path,
-                         class: "govuk-button govuk-button--start govuk-!-margin-top-2",
-                         role: "button",
-                         id: "start" %>
+  <%= govuk_start_button(text: t("generic.start_now"), href: forward_path, html_attributes: { id: "start" }) %>
 
 <% end %>
