@@ -8,7 +8,6 @@
                     end
    form_error_class = @form.errors.any? ? "govuk-form-group--error" : "" %>
 
-<span class="govuk-caption-l"><%= t("providers.means.client_caption") %></span>
 <%= page_template(
       page_title: t(".h1-heading"),
       head_title: new_head_title,
@@ -34,7 +33,8 @@
 
     <%= render partial: "shared/forms/error_summary_hidden" %>
 
-    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
+    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" },
+                            caption: { text: t("generic.client_means_caption"), size: "l" } do %>
 
       <% t(".info").each do |item| %>
         <p class="govuk-body"><%= item %></p>
@@ -48,7 +48,7 @@
           <p><%= t(".upload_paragraph") %></p>
           <div class="govuk-hint"><%= t(".size_hint") %></div>
           <% if @form.errors %>
-            <p id="dropzone-mandatory-error" class='govuk-error-message dropzone-error govuk-!-margin-bottom-1'>
+            <p id="dropzone-mandatory-error" class="govuk-error-message dropzone-error govuk-!-margin-bottom-1">
               <% @form.errors.errors.each do |error| %>
                 <span class="govuk-visually-hidden">Error:</span>
                 <%= error.message %>

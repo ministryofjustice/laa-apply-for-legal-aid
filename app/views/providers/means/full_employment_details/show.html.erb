@@ -3,10 +3,9 @@
               method: :patch,
               local: true) do |form| %>
 
-  <span class="govuk-caption-l"><%= t("providers.means.client_caption") %></span>
   <% page_heading = @legal_aid_application.has_multiple_employments? ? t(".page_heading_multi_jobs") : t(".page_heading_no_info") %>
 
-  <%= page_template page_title: page_heading, form: do %>
+  <%= page_template page_title: page_heading, caption: t("generic.client_means_caption"), form: do %>
       <% if @legal_aid_application.has_multiple_employments? %>
         <h2 class="govuk-body-l"><%= t(".mutiple_employment_info") %></h2>
       <% else %>
