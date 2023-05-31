@@ -24,6 +24,10 @@ module Providers
         { name: "housing_benefit" }
       end
 
+      def transaction_type_exclusions
+        {}
+      end
+
       def legal_aid_application_attributes
         { applicant_in_receipt_of_housing_benefit: housing_benefit_selected? }
       end

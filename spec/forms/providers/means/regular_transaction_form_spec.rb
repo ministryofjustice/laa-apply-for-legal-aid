@@ -11,6 +11,10 @@ RSpec.describe Providers::Means::RegularTransactionForm do
             "fake object"
           end
 
+          def transaction_type_exclusions
+            {}
+          end
+
           def legal_aid_application_attributes
             {}
           end
@@ -36,6 +40,69 @@ RSpec.describe Providers::Means::RegularTransactionForm do
 
           def transaction_type_conditions
             { operation: :credit, parent_id: nil }
+          end
+
+          def transaction_type_exclusions
+            {}
+          end
+
+          def legal_aid_application_attributes
+            {}
+          end
+        end
+      end
+
+      it "does not raise an error" do
+        params = { "transaction_type_ids" => ["", "none"] }
+
+        expect { conditions_implemented_form.new(params) }.not_to raise_error
+      end
+    end
+  end
+
+  describe "#transaction_type_exclusions" do
+    context "when the method is not implemented" do
+      let(:conditions_not_implemented_form) do
+        Class.new(described_class) do
+        private
+
+          def owner
+            "fake object"
+          end
+
+          def transaction_type_conditions
+            { operation: :credit, parent_id: nil }
+          end
+
+          def legal_aid_application_attributes
+            {}
+          end
+        end
+      end
+
+      it "raises an error" do
+        params = { "transaction_type_ids" => ["", "none"] }
+
+        expect { conditions_not_implemented_form.new(params) }
+          .to raise_error(NotImplementedError)
+      end
+    end
+
+    context "when the method is implemented" do
+      let(:conditions_implemented_form) do
+        Class.new(described_class) do
+        private
+
+          def owner
+            "fake object"
+          end
+
+          def transaction_type_conditions
+            { operation: :credit, parent_id: nil }
+          end
+
+          def transaction_type_exclusions
+            {}
           end
 
           def legal_aid_application_attributes
@@ -65,6 +132,10 @@ RSpec.describe Providers::Means::RegularTransactionForm do
           def transaction_type_conditions
             { operation: :credit, parent_id: nil }
           end
+
+          def transaction_type_exclusions
+            {}
+          end
         end
       end
 
@@ -91,6 +162,10 @@ RSpec.describe Providers::Means::RegularTransactionForm do
 
           def transaction_type_conditions
             { operation: :credit, parent_id: nil }
+          end
+
+          def transaction_type_exclusions
+            {}
           end
 
           def legal_aid_application_attributes
@@ -122,6 +197,10 @@ RSpec.describe Providers::Means::RegularTransactionForm do
             { operation: :credit, parent_id: nil }
           end
 
+          def transaction_type_exclusions
+            {}
+          end
+
           def legal_aid_application_attributes
             {}
           end
@@ -147,6 +226,10 @@ RSpec.describe Providers::Means::RegularTransactionForm do
 
           def transaction_type_conditions
             { operation: :credit, parent_id: nil }
+          end
+
+          def transaction_type_exclusions
+            {}
           end
 
           def legal_aid_application_attributes

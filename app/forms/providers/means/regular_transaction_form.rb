@@ -43,7 +43,7 @@ module Providers
       end
 
       def transaction_type_options
-        TransactionType.active.where(transaction_type_conditions)
+        TransactionType.active.where(transaction_type_conditions).where.not(transaction_type_exclusions)
       end
 
       def none_selected
@@ -71,6 +71,13 @@ module Providers
         raise(
           NotImplementedError,
           "#transaction_type_conditions must be implemented in the subclass",
+        )
+      end
+
+      def transaction_type_exclusions
+        raise(
+          NotImplementedError,
+          "#transaction_type_exclusions must be implemented in the subclass",
         )
       end
 

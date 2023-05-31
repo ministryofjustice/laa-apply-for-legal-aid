@@ -22,6 +22,10 @@ module Providers
         { operation: "debit", parent_id: nil }
       end
 
+      def transaction_type_exclusions
+        {}
+      end
+
       def legal_aid_application_attributes
         {
           no_debit_transaction_types_selected: none_selected?,
