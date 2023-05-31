@@ -17,10 +17,6 @@
 
     <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
 
-    <%= link_to_accessible start_button_label(:start_now),
-                           providers_legal_aid_applications_path,
-                           role: "button",
-                           class: "govuk-button govuk-button--start",
-                           id: "start" %>
+    <%= govuk_start_button(text: t("generic.start_now"), href: providers_legal_aid_applications_path, html_attributes: { id: "start" }) %>
   </div>
 </div>
