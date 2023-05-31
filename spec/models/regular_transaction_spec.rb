@@ -105,7 +105,7 @@ RSpec.describe RegularTransaction do
 
         frequencies = described_class.frequencies_for(benefits)
 
-        expect(frequencies).to match(%w[weekly two_weekly four_weekly three_monthly])
+        expect(frequencies).to match(%w[weekly two_weekly four_weekly])
       end
     end
 
