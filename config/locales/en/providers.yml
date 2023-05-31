@@ -816,10 +816,6 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
     means:
-      client_caption: Client's means assessment
-      cash_outgoings:
-        show:
-          page_heading: Select payments your client makes in cash
       full_employment_details:
         show:
           page_heading_no_info: HMRC has no record of your client's employment in the last 3 months
@@ -1291,41 +1287,7 @@ en:
     open_banking_consents:
       show:
         online_banking_question: Does your client use online banking?
-        heading: We need your client's bank statements from the last 3 months
-        info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
-        details_summary: What is TrueLayer?
-        details_content_html: |
-          <a href='https://truelayer.com/data' target="_blank">TrueLayer</a> is a trusted third-party financial service
-          provider that acts as a messenger between your client's bank and the LAA.
-          <br>
-          <br>
-          It allows your client to quickly and securely share their bank statements without having to gather physical bank statements.
-          <br>
-          <br>
-          They’re regulated by the Financial Conduct Authority (FCA) and will:
-        details:
-          list: |
-            not store your client's bank account details
-            not see your client's online banking sign-in details
-            not share your client's data with anyone other than the LAA
-            not have ongoing access to your client's bank accounts
-        provider_instructions:
-          heading: How your client can share their bank statements
-          list: |
-            They access 'Apply for legal aid' using a link we'll send them in an email.
-            They select the banks they use online banking with.
-            We redirect your client to their bank's website or app.
-            They give consent for TrueLayer to securely access their account details.
-            TrueLayer shares their bank statements with us.
-        radio_legend: Can your client share their bank statements with us via TrueLayer?
-        radio_no:
-          label: 'No'
-          hint: |
-            You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements
-        radio_yes:
-          label: 'Yes'
-          hint: |
-            Your client must have an email address and use online banking for all of their current accounts.
+        heading: We need this information to collect your client’s bank statements for the last 3 months.
     open_banking_guidances:
       show:
         heading_h1: Share bank statements with online banking

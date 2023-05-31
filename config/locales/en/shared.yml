@@ -23,8 +23,6 @@ en:
         no_button: No, do not delete it
       revealing_checkbox:
         providers:
-          cash_incomes:
-            hint: Select all that apply.
           means:
             cash_incomes:
               check_box_benefits: Benefits
@@ -503,9 +501,6 @@ en:
       savings_and_investments_form:
         none_selected: None of these
       outstanding_mortgage_form:
-        citizens:
-          outstanding_mortgages:
-            field_set_header: What is the outstanding mortgage on your home?
         providers:
           outstanding_mortgages:
             field_set_header: What is the outstanding mortgage on your client's home?
