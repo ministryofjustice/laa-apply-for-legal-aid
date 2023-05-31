@@ -121,6 +121,8 @@ function startModal (modal, previouslyFocusedElement, nonModalElems) {
       closeModal(modal)
       window.location.reload()
       previouslyFocusedElement.focus()
+    }).catch((error) => {
+      console.error(error.message)
     })
   })
 
