@@ -1,4 +1,4 @@
-<%= page_template page_title: t(".page_heading"), show_errors_for: @legal_aid_application do %>
+<%= page_template page_title: t(".page_heading"), caption: t("generic.client_means_caption"), show_errors_for: @legal_aid_application do %>
 
   <% errors = @legal_aid_application.errors.messages %>
 
@@ -7,7 +7,7 @@
   <p class="gov-body"><%= t(".you_need_to.text") %></p>
   <%= list_from_translation_path(".income_summary.index.you_need_to") %>
 
-  <ol class="app-task-list">
+  <ol class="app-task-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
     <% index = 0 %>
     <% @legal_aid_application.transaction_types.credits.each do |transaction_type| %>
       <% index += 1 unless transaction_type.child? %>
@@ -25,8 +25,6 @@
         <%= render partial: "add_other_income" %>
       <% end %>
   </ol>
-
-  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_income_summary_index_path,
