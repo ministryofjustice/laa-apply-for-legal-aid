@@ -66,7 +66,14 @@ module CFE
           test_value.each do |values|
             case values
             when Hash
-              compare_array(key, values, @v6_result.dig(*key).find { |group| group[values.keys.first] == values[values.keys.first] })
+              v6_values = @v6_result.dig(*key).find do |group|
+                group[values.keys.first] == values[values.keys.first] && group[values.keys.second].to_s == values[values.keys.second].to_s
+              end
+              if v6_values.nil?
+                @results[key.join("/")] = "CFE-Legacy=#{values.keys.first}, could not find matching array in CFE-Civil"
+              else
+                compare_array(key, values, v6_values)
+              end
             when String
               # this should be an array of strings so test the above level
               result = test_value - @v6_result.dig(*key)

@@ -206,7 +206,8 @@
         [
           {
             "description": "Current accounts",
-            "value": 300.0
+            "value": 300.0,
+            "test": "no error"
           },
           {
             "description": "Savings accounts",
