@@ -741,15 +741,6 @@ en:
       monthly_income_before_tax: Monthly income before tax
       national_insurance: National insurance
       tax: Tax
-    means:
-      student_finances:
-        field_set_header_provider: Does your client receive student finance?
-        field_set_header: Do you get student finance?
-        hint: This includes any type of student loan, grant or bursary.
-        amount_hint_provider: Check your client's student entitlement letter
-        amount_hint: Check your student finance entitlement letter.
-        amount_provider: Enter the amount they'll get this academic year
-        amount: How much student finance will you get this academic year?
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.
         date: Date
