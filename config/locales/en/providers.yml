@@ -884,11 +884,17 @@ en:
       identify_types_of_outgoings:
         show:
           page_heading: Which payments does your client make?
+          hints:
+            rent_or_mortgage: For example, rent, mortgage or board and lodging.
+            child_care: For example, to a childminder, nanny or nursery.
+            maintenance_out: This includes child maintenance.
+          none_of_these: My client makes none of these payments
         update:
           none_selected: Select if your client makes any regular payments
       cash_outgoings:
         show:
           page_heading: Select payments your client makes in cash
+          info: Cash means physical money like banknotes and coins.
       housing_benefits:
         show:
           labels:

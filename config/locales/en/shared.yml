@@ -33,7 +33,6 @@ en:
               check_box_property_or_lodger: Income from a property or lodger
               check_box_pension: Pension
             cash_outgoings:
-              hint: Enter the total cash amount you paid in each month, or enter 0 if you paid none.
               check_box_rent_or_mortgage: Housing payments
               check_box_child_care: Childcare payments
               check_box_maintenance_out: Maintenance payments to a former partner
@@ -473,9 +472,6 @@ en:
         page_title: Enter your client's details
         name: Name
         email_label: Email address
-      cash_outgoings_form:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980.
         date_of_birth_label: Date of birth
@@ -653,13 +649,6 @@ en:
         list: |
           Your solicitor will look at your bank statements and put your transactions into the categories you select.
           We need this information to check if you qualify financially for legal aid.
-      types_of_outgoings_form:
-        providers:
-          none_of_these: My client makes none of these payments
-        hints:
-          rent_or_mortgage: For example, rent, mortgage or board and lodging.
-          child_care: For example, to a childminder, nanny or nursery.
-          maintenance_out: This includes child maintenance.
     page-title:
       suffix: Apply for legal aid  - GOV.UK
     property_results:

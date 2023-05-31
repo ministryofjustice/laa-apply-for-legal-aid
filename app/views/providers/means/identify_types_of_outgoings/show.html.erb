@@ -1,7 +1,34 @@
-<%= render(
-      "shared/forms/types_of_outgoings_form",
-      page_title: t(".page_heading"),
-      journey: :provider,
-      form_path: providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
-      show_draft: true,
-    ) %>
+<%= form_with(
+      model: @legal_aid_application,
+      url: providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template page_title: t(".page_heading"), template: :basic, form: do %>
+
+    <%= form.govuk_check_boxes_fieldset :transaction_type_ids,
+                                        legend: { size: "xl", tag: "h1", text: page_title },
+                                        caption: { text: t("generic.client_means_caption"), size: "l" },
+                                        hint: { text: t("generic.select_all_that_apply") } do %>
+      <div class="deselect-group govuk-!-padding-bottom-1" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
+        <% TransactionType.debits.each do |transaction_type| %>
+          <%= form.govuk_check_box(
+                :transaction_type_ids,
+                transaction_type.id,
+                link_errors: true,
+                label: { text: t("transaction_types.names.#{journey_type}.#{transaction_type.name}") },
+                hint: { text: t(".hints.#{transaction_type.name}", default: "") },
+              ) %>
+        <% end %>
+      </div>
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+    <% end %>
+
+    <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form:,
+        ) %>
+  <% end %>
+<% end %>
