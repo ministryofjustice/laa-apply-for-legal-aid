@@ -325,14 +325,6 @@ cy:
           borderline: .emoctuo eht tciderp tonnac uoY
           not_known: .sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
             kroW
-      types_of_income_form:
-        hints:
-          providers:
-            friends_or_family: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
-              roF"
-            benefits: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
-            maintenance_in: ".ecnanetniam dlihc sedulcni sihT"
-            pension: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
         expanded_explanation:
           heading: "?siht deksa gnieb I ma yhW"
           list: |2-

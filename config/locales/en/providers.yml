@@ -184,6 +184,13 @@ en:
           must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
           provide_details: provide details of the case
     identify_types_of_incomes:
+      show:
+        none_of_these: My client receives none of these payments
+        hints:
+          friends_or_family: For example, money from a family member for rent or bills.
+          benefits: For example, Child Benefit or tax credits.
+          maintenance_in: This includes child maintenance.
+          pension: Include State, workplace and personal pensions.
       update:
         none_selected: Select if your client receives any types of income
     cookies:

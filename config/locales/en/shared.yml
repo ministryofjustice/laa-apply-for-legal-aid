@@ -667,20 +667,11 @@ en:
             poor: The chance of a successful outcome is poor.
             borderline: You cannot predict the outcome.
             not_known: Work still needs to be done to determine the likelihood of success.
-      types_of_income_form:
-        providers:
-          none_of_these: My client receives none of these payments
-        hints:
-          providers:
-            friends_or_family: For example, money from a family member for rent or bills.
-            benefits: For example, Child Benefit or tax credits.
-            maintenance_in: This includes child maintenance.
-            pension: Include State, workplace and personal pensions.
-        expanded_explanation:
-          heading: Why am I being asked this?
-          list: |
-            Your solicitor will look at your bank statements and put your transactions into the categories you select.
-            We need this information to check if you qualify financially for legal aid.
+      expanded_explanation:
+        heading: Why am I being asked this?
+        list: |
+          Your solicitor will look at your bank statements and put your transactions into the categories you select.
+          We need this information to check if you qualify financially for legal aid.
       types_of_outgoings_form:
         providers:
           none_of_these: My client makes none of these payments
