@@ -17,7 +17,7 @@ module Providers
 
       def set_transaction_types
         @credit_transaction_types = if legal_aid_application.uploading_bank_statements?
-                                      TransactionType.credits.without_disregarded_benefits
+                                      TransactionType.credits.without_disregarded_benefits.without_benefits
                                     else
                                       TransactionType.credits.without_housing_benefits
                                     end
