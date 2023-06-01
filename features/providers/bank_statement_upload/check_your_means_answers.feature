@@ -36,7 +36,6 @@ Feature: Bank statement upload check your answers
 
     And the "What payments does your client receive?" section's questions and answers should match:
       | question | answer |
-      | Benefits | None |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
