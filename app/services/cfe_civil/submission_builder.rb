@@ -39,7 +39,7 @@ module CFECivil
       {
         "Content-Type" => "application/json",
         "Accept" => "application/json;version=#{cfe_version}",
-        "UserAgent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
+        "User-Agent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
       }
     end
 
