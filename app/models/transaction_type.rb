@@ -67,7 +67,7 @@ class TransactionType < ApplicationRecord
     where(other_income: true)
   end
 
-  def label_name(journey: :citizens)
+  def label_name(journey: :providers)
     I18n.t("transaction_types.names.#{journey}.#{name}")
   end
 

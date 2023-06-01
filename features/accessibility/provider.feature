@@ -80,7 +80,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I select 'None of the above'
     And I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I should be on a page with title "Does your client use online banking?"
     And the page is accessible
     Then I choose 'Yes'
     Then I click 'Save and continue'
