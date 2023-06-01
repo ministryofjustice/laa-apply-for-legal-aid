@@ -481,6 +481,9 @@ en:
           payment_remaining: Are there any payments left on the vehicle?
           more_than_three_years_old: The vehicle was bought more than three years ago?
           used_regularly: Is the vehicle in regular use?
+      benefits_breakdown:
+        heading: Benefits breakdown
+
     forms:
       applicant_form:
         page_title: Enter your client's details
