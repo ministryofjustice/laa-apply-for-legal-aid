@@ -10,9 +10,9 @@
       <%= form.govuk_radio_buttons_fieldset(:provider_received_citizen_consent,
                                             caption: { text: t("generic.client_means_caption"), size: "l" },
                                             classes: ["govuk-!-margin-bottom-5"],
-                                            legend: { size: "xl", tag: "h1", text: t(".online_banking_question") }) do %>
+                                            legend: { size: "xl", tag: "h1", text: t(".heading") }) do %>
 
-        <p><%= t(".heading") %></p>
+        <p><%= t(".info") %></p>
 
         <%= form.govuk_radio_button(:provider_received_citizen_consent, true, link_errors: true, label: { text: t("generic.yes") }) %>
         <%= form.govuk_radio_button(:provider_received_citizen_consent, false, label: { text: t("generic.no") }) %>

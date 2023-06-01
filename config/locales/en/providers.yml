@@ -1286,8 +1286,8 @@ en:
         no_account_selected: None of these
     open_banking_consents:
       show:
-        online_banking_question: Does your client use online banking?
-        heading: We need this information to collect your client’s bank statements for the last 3 months.
+        heading: Does your client use online banking?
+        info: We need this information to collect your client’s bank statements for the last 3 months.
     open_banking_guidances:
       show:
         heading_h1: Share bank statements with online banking
