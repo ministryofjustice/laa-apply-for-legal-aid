@@ -5,9 +5,9 @@ RSpec.describe CFE::CompareResults do
     subject(:call) { described_class.call }
 
     before do
-      travel(-2.days) { create(:legal_aid_application, :with_cfe_v5_result, transaction_period_finish_on: 5.days.ago) }
-      travel(-12.hours) { create(:legal_aid_application, :with_cfe_v5_result, transaction_period_finish_on: 5.days.ago) }
-      travel(-6.hours) { create(:legal_aid_application, :with_cfe_v5_result, transaction_period_finish_on: 5.days.ago) }
+      travel(-2.days) { create(:legal_aid_application, :with_cfe_v5_result_obtained, transaction_period_finish_on: 5.days.ago) }
+      travel(-12.hours) { create(:legal_aid_application, :with_cfe_v5_result_obtained, transaction_period_finish_on: 5.days.ago) }
+      travel(-6.hours) { create(:legal_aid_application, :with_cfe_v5_result_obtained, transaction_period_finish_on: 5.days.ago) }
       allow(sub_builder).to receive(:cfe_result).and_return(fake_v6_result)
       allow(sub_builder).to receive(:request_body).and_return({})
       allow(CFECivil::SubmissionBuilder).to receive(:new).and_return(sub_builder)
