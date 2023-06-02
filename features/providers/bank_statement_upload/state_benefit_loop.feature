@@ -36,7 +36,6 @@ Feature: Bank statement upload journey state_benefit loop feature
     When I choose "Yes"
     And I click "Save and continue"
 
-    When I click "Save and continue"
     Then I should be on a page with title matching "Add benefit details"
     And I fill "Description" with "The doubt"
     And I fill "Amount" with "52.70"
@@ -69,3 +68,29 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I should see "You have added 1 benefit"
     And I should see "Child benefit"
     And I should not see "in kind"
+
+    When I choose "No"
+    And I click "Save and continue"
+
+    # TODO: Title not working on regular_income page
+    Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
+    When I select "My client receives none of these payments"
+    And I click "Save and continue"
+
+    Then I should be on a page with title "Does your client receive student finance?"
+    When I choose "No"
+    And I click "Save and continue"
+
+    # TODO: Title not working on regular_income page
+    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    When I select "My client makes none of these payments"
+    And I click "Save and continue"
+
+    Then I should be on a page with title matching "Does your client have any dependants?"
+    When I choose "No"
+    And I click "Save and continue"
+
+    Then I should be on a page with title matching "Check your answers"
+    And I should see "Child benefit"
+    And I should see "£21.80"
+    And I should see "Every week"

@@ -123,6 +123,7 @@ module Providers
             .public_send(model)
             .includes(:transaction_type)
             .where(transaction_type: transaction_type_conditions)
+            .where.not(transaction_type: transaction_type_exclusions)
             .where.not(transaction_type_id: transaction_type_ids)
             .destroy_all
         end

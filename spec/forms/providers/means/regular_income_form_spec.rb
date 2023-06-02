@@ -238,6 +238,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
       let(:benefits) { create(:transaction_type, :benefits) }
+      let(:pension) { create(:transaction_type, :pension) }
       let(:child_care) { create(:transaction_type, :child_care) }
 
       it "returns true" do
@@ -261,7 +262,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         outgoing_transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -280,7 +281,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         housing_benefit_transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -295,11 +296,30 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           .to contain_exactly(housing_benefit_transaction_type)
       end
 
+      it "does not destroy any existing benefit transaction types" do
+        _income_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: pension,
+        )
+        benefit_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .to contain_exactly(benefit_transaction_type)
+      end
+
       it "destroys any existing income regular transactions" do
         _income_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         outgoing_regular_transaction = create(
           :regular_transaction,
@@ -318,7 +338,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         housing_benefit_regular_transaction = create(
           :regular_transaction,
@@ -337,7 +357,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         outgoing_cash_transaction = create(
           :cash_transaction,
