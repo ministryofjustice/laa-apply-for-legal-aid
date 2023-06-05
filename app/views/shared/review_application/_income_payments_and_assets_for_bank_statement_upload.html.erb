@@ -16,12 +16,20 @@
     <% end %>
   </section>
 
+  <% if @legal_aid_application.uploading_bank_statements? %>
+    <%= render("shared/check_answers/benefits_income",
+               transactions_for: "applicant",
+               individual: @legal_aid_application.applicant,
+               state_benefits: @legal_aid_application.applicant.state_benefits,
+               read_only: true) %>
+  <% end %>
+
   <section class="print-no-break">
     <%= render(
           "shared/check_answers/income_summary",
           income_type: t(".credits-section-heading"),
           url: @legal_aid_application.uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
-          transaction_types: TransactionType.credits.without_disregarded_benefits,
+          transaction_types: TransactionType.credits.without_disregarded_benefits.without_benefits,
           read_only: true,
         ) %>
   </section>

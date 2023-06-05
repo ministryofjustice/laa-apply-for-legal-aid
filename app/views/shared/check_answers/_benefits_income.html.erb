@@ -1,5 +1,7 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+
 <h2 class="govuk-heading-m"><%= t(".#{transactions_for}.heading") %></h2>
-<%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { id: "state-benefit-section" }) do |summary_list| %>
+<%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-9", html_attributes: { id: "state-benefit-section" }) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits" }) do |row| %>
     <%= row.with_key(text: t(".#{transactions_for}.question"), classes: "govuk-!-width-one-half") %>
     <%= row.with_value { yes_no(individual.receives_state_benefits?) } %>
@@ -17,11 +19,13 @@
       <h2 class="govuk-heading-m"><%= t(".benefit_heading", index: index + 1) %></h2>
     </div>
 
-    <div class="govuk-grid-column-one-third align-text-right">
-      <p>
-        <%= govuk_link_to t("generic.change"), providers_legal_aid_application_means_state_benefit_path(@legal_aid_application, state_benefit) %>
-      </p>
-    </div>
+    <% unless read_only %>
+      <div class="govuk-grid-column-one-third align-text-right">
+        <p>
+          <%= govuk_link_to t("generic.change"), providers_legal_aid_application_means_state_benefit_path(@legal_aid_application, state_benefit) %>
+        </p>
+      </div>
+      <% end %>
   </div>
 
   <%= govuk_summary_list(
