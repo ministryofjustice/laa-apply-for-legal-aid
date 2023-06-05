@@ -26,7 +26,7 @@ module CFE
     end
 
     def cfe_submissions
-      @cfe_submissions ||= CFE::Submission.where(created_at: last_run..run_time)
+      @cfe_submissions ||= CFE::Submission.where(created_at: last_run..run_time, aasm_state: "results_obtained")
     end
 
     def run_time

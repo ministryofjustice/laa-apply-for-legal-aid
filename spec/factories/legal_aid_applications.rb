@@ -959,6 +959,14 @@ FactoryBot.define do
       end
     end
 
+    trait :with_cfe_v5_result_obtained do
+      after :create do |application|
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_v5_result, submission: cfe_submission)
+        cfe_submission.update(cfe_result: cfe_submission.result.result, aasm_state: "results_obtained")
+      end
+    end
+
     trait :with_cfe_empty_result do
       after :create do |application|
         cfe_submission = create(:cfe_submission, legal_aid_application: application)
