@@ -58,6 +58,8 @@ module CFE
           process_key key.dup << sub_key
         end
       when Array
+        return if override_message(key)
+
         if test_value.count == 1
           test_value.each_with_index do |_values, index|
             process_key key.dup << index
@@ -99,6 +101,24 @@ module CFE
         /assessment-capital-capital_items-properties-main_home-net_equity/,
         /assessment-applicant-self_employed/,
       ].any? { |pattern| pattern.match?(key.join("-")) }
+    end
+
+    def override_message(key)
+      overrides = {
+        "assessment/capital/capital_items/vehicles" => "override_vehicle",
+      }
+      override = overrides[key.join("/")]
+      return unless override
+
+      send(override, key)
+    end
+
+    def override_vehicle(key)
+      v5_value = @v5_result.dig(*key)
+      v6_value = @v6_result.dig(*key)
+      if v6_value.empty? && v5_value.present?
+        @results["assessment/capital/capital_items/vehicles"] = "CFE-Civil did not return a vehicle"
+      end
     end
 
     def compare_array(key, v5_array, v6_array)
