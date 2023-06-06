@@ -16,12 +16,12 @@ spec:
       maxSurge: 100%
   selector:
     matchLabels:
-      app: {{ template "apply-for-legal-aid.name" . }}
+      app: {{ template "apply-for-legal-aid.name" . }}-worker
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "apply-for-legal-aid.name" . }}
+        app: {{ template "apply-for-legal-aid.name" . }}-worker
         release: {{ .Release.Name }}
     spec:
       containers:
