@@ -16,7 +16,7 @@ Feature: non_passported_journey with means
     Then I enter pension2 '100'
     Then I enter pension3 '100'
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client receive student finance?"
+    Then I should be on a page showing "Does your client get student finance?"
 
     When I choose "No"
     And I click 'Save and continue'
@@ -24,7 +24,7 @@ Feature: non_passported_journey with means
 
     When I select 'Housing'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client makes in cash"
+    Then I should be on a page showing "Select payments your client pays in cash"
 
     When I select 'Housing payments'
     Then I enter rent_or_mortgage1 '100'

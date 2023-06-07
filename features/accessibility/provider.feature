@@ -115,7 +115,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client receive student finance?"
+    Then I should be on a page showing "Does your client get student finance?"
     And the page is accessible
     When I choose "No"
     And I click 'Save and continue'
@@ -123,7 +123,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I select 'Housing payments'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client makes in cash"
+    Then I should be on a page showing "Select payments your client pays in cash"
     And the page is accessible
     When I select "None of the above"
     And I click 'Save and continue'

@@ -52,7 +52,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
 
     it "render applicable page title" do
       request
-      expect(response.body).to include("Select payments your client makes in cash")
+      expect(response.body).to include("Select payments your client pays in cash")
     end
   end
 
