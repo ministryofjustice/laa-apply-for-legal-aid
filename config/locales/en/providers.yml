@@ -873,8 +873,10 @@ en:
           info: Cash means physical money like banknotes and coins.
       student_finances:
         show:
-          page_title: Does your client receive student finance?
-          hint: This includes any type of student loan, grant or bursary.
+          page_title: Does your client get student finance?
+          hint:
+            - This includes student loans, grants or bursaries your client gets.
+            - Do not include any tuition fee loans.
           amount_label: Enter the amount they'll get this academic year
           amount_hint: Check your client's student entitlement letter
       identify_types_of_outgoings:
@@ -889,7 +891,7 @@ en:
           none_selected: Select if your client makes any regular payments
       cash_outgoings:
         show:
-          page_heading: Select payments your client makes in cash
+          page_heading: Select payments your client pays in cash
           info: Cash means physical money like banknotes and coins.
       housing_benefits:
         show:
@@ -1287,7 +1289,7 @@ en:
     open_banking_consents:
       show:
         heading: Does your client use online banking?
-        info: We need this information to collect your client’s bank statements for the last 3 months.
+        info: We need this information to collect your client's bank statements for the last 3 months.
     open_banking_guidances:
       show:
         heading_h1: Share bank statements with online banking

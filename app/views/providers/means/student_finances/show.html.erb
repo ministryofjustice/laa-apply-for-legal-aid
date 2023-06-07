@@ -3,7 +3,11 @@
               method: :patch, local: true) do |form| %>
   <%= page_template page_title: t(".page_title"), form:, template: :basic do %>
     <%= form.govuk_radio_buttons_fieldset :student_finance,
-                                          hint: { text: t(".hint") },
+                                          hint: -> do
+                                            t(".hint").each do |hint_line| %>
+                                              <p class="govuk-hint"><%= hint_line %></p>
+                                            <% end
+                                          end,
                                           caption: { text: t("generic.client_means_caption"), size: "l" },
                                           legend: { text: content_for(:page_title), tag: "h1", size: "xl" } do %>
       <%= form.govuk_radio_button(:student_finance, true, label: { text: t("generic.yes") }, checked: @legal_aid_application.student_finance?) do %>

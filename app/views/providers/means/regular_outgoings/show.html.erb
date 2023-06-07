@@ -3,7 +3,9 @@
               method: :patch do |f| %>
   <%= page_template page_title:, template: :basic, form: f do %>
 
-    <%= f.govuk_check_boxes_fieldset :transaction_type_ids, legend: { tag: "h1", size: "xl" } do %>
+    <%= f.govuk_check_boxes_fieldset :transaction_type_ids,
+                                     legend: { tag: "h1", size: "xl" },
+                                     caption: { text: t("generic.client_means_caption"), size: "l" } do %>
 
       <% @form.transaction_type_options.each_with_index do |transaction_type, index| %>
         <%= f.govuk_check_box :transaction_type_ids,
