@@ -31,7 +31,7 @@ Feature: Bank statement upload check your answers
       | h2  | Payments from scheme or charities |
 
     And I should see "Uploaded bank statements"
-    And I should see 'Does your client receive student finance?'
+    And I should see 'Does your client get student finance?'
     And I should not see 'Does your client have any savings accounts they cannot access online?'
 
     And the "What payments does your client receive?" section's questions and answers should match:
@@ -94,7 +94,7 @@ Feature: Bank statement upload check your answers
     And the answer for "student finance annual amount" should be "£5,000"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
-    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "Maintenance payments to a former partner"
     And I fill "Maintenance out amount" with "500"
     And I choose "providers-means-regular-outgoings-form-maintenance-out-frequency-monthly-field"
@@ -103,7 +103,7 @@ Feature: Bank statement upload check your answers
     Then I should be on a page with title "Does your client receive Housing Benefit?"
 
     And I click "Save and continue"
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
 
     When I check "None of the above"
     And I click "Save and continue"
@@ -112,7 +112,7 @@ Feature: Bank statement upload check your answers
     And I should see "Monthly"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
-    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
     And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-monthly-field"
@@ -125,14 +125,14 @@ Feature: Bank statement upload check your answers
     And I choose "Every week"
 
     And I click "Save and continue"
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
 
     When I check "None of the above"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
-    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "My client makes none of these payments"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"

@@ -13,7 +13,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client receive student finance?"
+    Then I should be on a page showing "Does your client get student finance?"
 
     When I choose "No"
     And I click 'Save and continue'
@@ -21,7 +21,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     Then I select "Childcare"
     And I click 'Save and continue'
-    Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
+    Then I should be on the 'cash_outgoing' page showing "Select payments your client pays in cash"
 
     When I select "None of the above"
     And I click 'Save and continue'
@@ -61,7 +61,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client receive student finance?"
+    Then I should be on a page showing "Does your client get student finance?"
 
     When I choose "No"
     And I click 'Save and continue'
@@ -69,7 +69,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "Childcare"
     And I click 'Save and continue'
-    Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
+    Then I should be on the 'cash_outgoing' page showing "Select payments your client pays in cash"
 
     When I select "None of the above"
     And I click 'Save and continue'
@@ -103,7 +103,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page with title "Which payments does your client make?"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
 
     When I click 'Save and continue'
     Then I should be on a page showing "Sort your client's regular payments into categories"
@@ -112,7 +112,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing 'Which payments does your client make?'
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client makes in cash"
+    Then I should be on a page showing "Select payments your client pays in cash"
     And I click 'Save and continue'
     Then I should be on a page showing "Sort your client's regular payments into categories"
 

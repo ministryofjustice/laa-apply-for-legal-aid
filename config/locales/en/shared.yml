@@ -392,7 +392,7 @@ en:
           no_transactions: "No"
       student_finance:
         heading: Student finance
-        does_your_client: Does your client receive student finance?
+        does_your_client: Does your client get student finance?
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
       income_cash_payments:
