@@ -18,10 +18,10 @@ Feature: Cookies
   Scenario: I am able to update my cookie preferences via the cookies banner and Hide the notice
     Given I start the journey without cookie preferences
 
-    When I click 'Accept analytics cookies'
+    When I click link 'Accept analytics cookies'
     Then I should see "You've accepted analytics cookies."
 
-    When I click 'Hide'
+    When I click link 'Hide'
     Then I should not see "You've accepted analytics cookies."
 
   Scenario: I am able to view the cookies page from the cookies banner and save changes
@@ -37,7 +37,7 @@ Feature: Cookies
   Scenario: I am able to Accept analytics cookie and then change my cookie preferences via the cookies banner
     Given I start the journey without cookie preferences
 
-    When I click 'Accept analytics cookies'
+    When I click link 'Accept analytics cookies'
     Then I should see "You've accepted analytics cookies."
     And I should see "You can change your cookie settings at any time"
 
@@ -47,7 +47,7 @@ Feature: Cookies
   Scenario: I am able to Reject analytics cookie and then change my cookie preferences via the cookies banner
     Given I start the journey without cookie preferences
 
-    When I click 'Reject analytics cookies'
+    When I click link 'Reject analytics cookies'
     Then I should see "You've rejected analytics cookies."
     And I should see "You can change your cookie settings at any time"
 
@@ -59,7 +59,7 @@ Feature: Cookies
     Given I visit the application service
     And I click link "Start"
     And I click link "Make a new application"
-    And I click "Accept analytics cookies"
+    And I click link "Accept analytics cookies"
 
     # required for test to pass locally with chrome headless
     Then I temporarily resize browser window to width 1600 height 1000 and click "Apply for legal aid"

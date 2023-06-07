@@ -14,14 +14,16 @@ async function updateCookiePreferences (providerId, action) {
 function initCookieBanner (cookieBanner) {
   const buttons = cookieBanner.querySelectorAll('.govuk-button')
   buttons.forEach((btn) => {
-    if (btn.value === 'hide') {
+    if (btn.getAttribute('data-value') === 'hide') {
       btn.addEventListener('click', (e) => {
+        e.preventDefault()
         hide(cookieBanner)
       })
     } else {
       btn.addEventListener('click', (e) => {
+        e.preventDefault()
         const providerId = document.getElementById('provider-id').textContent.trim()
-        const btnValue = e.target.value
+        const btnValue = e.target.getAttribute('data-value')
         updateCookiePreferences(providerId, btnValue).then(() => {
           const mainContent = cookieBanner.querySelector('#main-cookie-content')
           const newContent = cookieBanner.querySelector(`#${btnValue}-content`)
@@ -36,7 +38,7 @@ function initCookieBanner (cookieBanner) {
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
-  const cookieBanner = document.querySelector('#cookie-banner')
+  const cookieBanner = document.querySelector('.govuk-cookie-banner')
   if (cookieBanner) {
     initCookieBanner(cookieBanner)
   }

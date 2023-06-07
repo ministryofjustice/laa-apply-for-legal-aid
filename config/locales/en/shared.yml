@@ -5,14 +5,14 @@ en:
       cookie_banner:
         title: Cookies on Apply for legal aid
         we_use_some: We use some essential cookies to make this service work.
-        wed_also_lie: "We'd also like to use analytics cookies so we can understand how you use the service and make improvements."
+        wed_also_like: "We'd also like to use analytics cookies so we can understand how you use the service and make improvements."
         accept: Accept analytics cookies
         reject: Reject analytics cookies
         view: View cookies
-        accepted: "You've accepted analytics cookies. You can "
-        rejected: "You've rejected analytics cookies. You can "
-        any_time: " at any time"
-        link_text: change your cookie settings
+        cookie_confirmation_msg_html: |
+          You've %{cookie_state} analytics cookies. You can <a class="govuk-link" href="%{cookie_path}">change your cookie settings</a> at any time
+        accepted: accepted
+        rejected: rejected
         hide: Hide this message
       modal_dialogue:
         page_title: Are you sure you want to delete this application?
