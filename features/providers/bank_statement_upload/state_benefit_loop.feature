@@ -77,12 +77,12 @@ Feature: Bank statement upload journey state_benefit loop feature
     When I select "My client receives none of these payments"
     And I click "Save and continue"
 
-    Then I should be on a page with title "Does your client receive student finance?"
+    Then I should be on a page with title "Does your client get student finance?"
     When I choose "No"
     And I click "Save and continue"
 
     # TODO: Title not working on regular_income page
-    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     When I select "My client makes none of these payments"
     And I click "Save and continue"
 
