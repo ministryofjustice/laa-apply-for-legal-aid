@@ -858,9 +858,37 @@ en:
           supplementary_question_hint: |
             For example, if they recently ended employment. You can upload evidence,
             like a P45, later on.
+          tax: Tax
+          ni: National Insurance
+      identify_types_of_incomes:
+        show:
+          page_heading: Which payments does your client receive?
+          none_of_these: My client receives none of these payments
+          hints:
+            friends_or_family: For example, money from a family member for rent or bills.
+            benefits: For example, Child Benefit or tax credits.
+            maintenance_in: This includes child maintenance.
+            pension: Include State, workplace and personal pensions.
+        update:
+          none_selected: Select if your client receives any types of income
       cash_incomes:
         show:
           page_heading: Select payments your client receives in cash
+          info: Cash means physical money like banknotes and coins.
+      student_finances:
+        show:
+          page_title: Does your client receive student finance?
+          hint: This includes any type of student loan, grant or bursary.
+          amount_label: Enter the amount they'll get this academic year
+          amount_hint: Check your client's student entitlement letter
+      identify_types_of_outgoings:
+        show:
+          page_heading: Which payments does your client make?
+        update:
+          none_selected: Select if your client makes any regular payments
+      cash_outgoings:
+        show:
+          page_heading: Select payments your client makes in cash
       housing_benefits:
         show:
           labels:
@@ -868,16 +896,6 @@ en:
               "yes": "Yes"
               "no": "No"
           page_heading: Does your client receive Housing Benefit?
-      identify_types_of_incomes:
-        show:
-          page_heading: Which payments does your client receive?
-        update:
-          none_selected: Select if your client receives any types of income
-      identify_types_of_outgoings:
-        show:
-          page_heading: Which payments does your client make?
-        update:
-          none_selected: Select if your client makes any regular payments
       regular_incomes:
         show:
           hints:

@@ -1,5 +1,37 @@
-<%= render(
-      "shared/forms/cash_income_form",
-      page_title: t(".page_heading"),
-      form_path: providers_legal_aid_application_means_cash_income_path,
-    ) %>
+<%= form_with(
+      model: @aggregated_cash_income,
+      url: providers_legal_aid_application_means_cash_income_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template page_title: t(".page_heading"), template: :basic, form: do %>
+
+    <%= form.govuk_check_boxes_fieldset :cash_income,
+                                        caption: { text: t("generic.client_means_caption"), size: "l" },
+                                        legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <p><%= t(".info") %></p>
+      <div id="select-all-that-apply-hint" class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
+      <div class="deselect-group" data-deselect-ctrl="#aggregated-cash-income-none-selected-true-field">
+        <% @legal_aid_application.transaction_types.not_children.credits.each do |transaction_type| %>
+          <%= render(
+                "shared/partials/revealing_checkbox",
+                name: transaction_type.name,
+                form:,
+                number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
+                model: @aggregated_cash_income,
+                input_prefix: t("currency.gbp"),
+              ) %>
+        <% end %>
+      </div>
+
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t("generic.none_selected") }, checked: @legal_aid_application.no_cash_income? %>
+    <% end %>
+
+    <%= next_action_buttons(
+          form:,
+          show_draft: false,
+        ) %>
+  <% end %>
+<% end %>

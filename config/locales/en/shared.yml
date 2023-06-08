@@ -22,25 +22,9 @@ en:
         yes_button: Yes, delete it
         no_button: No, do not delete it
       revealing_checkbox:
-        citizens:
-          cash_incomes:
-            hint: Enter the total cash amount you received in each month, or enter 0 if you received none.
-            check_box_benefits: Benefits
-            check_box_friends_or_family: Financial help from friends or family
-            check_box_maintenance_in: Maintenance payments from a former partner
-            check_box_property_or_lodger: Income from a property or lodger
-            check_box_pension: Pension
-          cash_outgoings:
-            hint: Enter the total cash amount you paid in each month, or enter 0 if you paid none.
-            check_box_rent_or_mortgage: Housing payments
-            check_box_child_care: Childcare payments
-            check_box_maintenance_out: Maintenance payments to a former partner
-            check_box_legal_aid: Payments towards legal aid in a criminal case
         providers:
           cash_incomes:
-            hint: Enter the total cash amount you received in each month, or enter 0 if you received none.
-          cash_outgoings:
-            hint: Enter the total cash amount you paid in each month, or enter 0 if you paid none.
+            hint: Select all that apply.
           means:
             cash_incomes:
               check_box_benefits: Benefits
@@ -490,9 +474,6 @@ en:
         name: Name
         email_label: Email address
       cash_outgoings_form:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
-      cash_income_form:
         info: Cash means physical money like banknotes and coins.
         none_selected: None of the above
       date_input_fields:
