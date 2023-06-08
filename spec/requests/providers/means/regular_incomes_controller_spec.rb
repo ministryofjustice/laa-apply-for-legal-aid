@@ -16,16 +16,16 @@ RSpec.describe Providers::Means::RegularIncomesController do
       it "renders the income data" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)
         applicant = legal_aid_application.applicant
-        benefits = create(:transaction_type, :benefits)
+        pension = create(:transaction_type, :pension)
         _transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         _regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
           amount: 500,
           frequency: "weekly",
           owner_id: applicant.id,
@@ -36,10 +36,10 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
         get providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 
-        expect(page).to have_checked_field("Benefits")
-        benefits_amount = page.find_field("providers-means-regular-income-form-benefits-amount-field").value
-        expect(benefits_amount).to eq("500.0")
-        frequency_amount = page.find_field("providers-means-regular-income-form-benefits-frequency-weekly-field").value
+        expect(page).to have_checked_field("Pension")
+        pension_amount = page.find_field("providers-means-regular-income-form-pension-amount-field").value
+        expect(pension_amount).to eq("500.0")
+        frequency_amount = page.find_field("providers-means-regular-income-form-pension-frequency-weekly-field").value
         expect(frequency_amount).to eq("weekly")
       end
     end
@@ -87,15 +87,15 @@ RSpec.describe Providers::Means::RegularIncomesController do
           :with_applicant,
           no_credit_transaction_types_selected: true,
         )
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         pension = create(:transaction_type, :pension)
         provider = legal_aid_application.provider
         login_as provider
         params = {
           providers_means_regular_income_form: {
-            transaction_type_ids: ["", benefits.id, pension.id],
-            benefits_amount: 250,
-            benefits_frequency: "weekly",
+            transaction_type_ids: ["", maintenance_in.id, pension.id],
+            maintenance_in_amount: 250,
+            maintenance_in_frequency: "weekly",
             pension_amount: 100,
             pension_frequency: "monthly",
           },
@@ -107,7 +107,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false
         identified_income = legal_aid_application.regular_transactions.credits
         expect(identified_income.pluck(:transaction_type_id, :amount, :frequency))
-          .to contain_exactly([benefits.id, 250, "weekly"], [pension.id, 100, "monthly"])
+          .to contain_exactly([maintenance_in.id, 250, "weekly"], [pension.id, 100, "monthly"])
       end
     end
 
@@ -118,13 +118,13 @@ RSpec.describe Providers::Means::RegularIncomesController do
           :with_applicant,
           no_credit_transaction_types_selected: nil,
         )
-        benefits = create(:transaction_type, :benefits)
+        pension = create(:transaction_type, :pension)
         maintenance_in_payment = create(:regular_transaction, :maintenance_in, legal_aid_application:)
         provider = legal_aid_application.provider
         login_as provider
         params = {
           providers_means_regular_income_form: {
-            transaction_type_ids: ["", benefits.id],
+            transaction_type_ids: ["", pension.id],
             benefits_amount: "",
             benefits_frequency: "",
           },
@@ -133,8 +133,8 @@ RSpec.describe Providers::Means::RegularIncomesController do
         patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(page).to have_css("p", class: "govuk-error-message", text: "Enter the amount of benefits received")
-        expect(page).to have_css("p", class: "govuk-error-message", text: "Select how often your client receives benefits")
+        expect(page).to have_css("p", class: "govuk-error-message", text: "Enter the amount of pension received")
+        expect(page).to have_css("p", class: "govuk-error-message", text: "Select how often your client receives pension")
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be_nil
         identified_income = legal_aid_application.regular_transactions.credits
         expect(identified_income).to contain_exactly(maintenance_in_payment)
@@ -170,15 +170,15 @@ RSpec.describe Providers::Means::RegularIncomesController do
           :checking_means_income,
           no_credit_transaction_types_selected: true,
         )
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         pension = create(:transaction_type, :pension)
         provider = legal_aid_application.provider
         login_as provider
         params = {
           providers_means_regular_income_form: {
-            transaction_type_ids: ["", benefits.id, pension.id],
-            benefits_amount: 250,
-            benefits_frequency: "weekly",
+            transaction_type_ids: ["", maintenance_in.id, pension.id],
+            maintenance_in_amount: 250,
+            maintenance_in_frequency: "weekly",
             pension_amount: 100,
             pension_frequency: "monthly",
           },
@@ -190,7 +190,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false
         identified_income = legal_aid_application.regular_transactions.credits
         expect(identified_income.pluck(:transaction_type_id, :amount, :frequency))
-          .to contain_exactly([benefits.id, 250, "weekly"], [pension.id, 100, "monthly"])
+          .to contain_exactly([maintenance_in.id, 250, "weekly"], [pension.id, 100, "monthly"])
       end
     end
 

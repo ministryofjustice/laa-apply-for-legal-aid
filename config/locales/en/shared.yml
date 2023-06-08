@@ -161,6 +161,9 @@ en:
           - "%{capital_contribution} from their disposable capital"
         line_2: Your client is ineligible for Section 8 proceedings.
         line_3: You still need to provide details of the case before we can grant legal aid.
+    cost_of_living_and_disregarded_benefits:
+      title:
+        Government Cost of Living Payments and disregarded benefits
     cost_of_living:
       header: Government Cost of Living Payments
       text: Government Cost of Living Payments are disregarded from the financial eligibility calculation, for example
@@ -319,8 +322,19 @@ en:
         employment: Employment income
         employment_question: Do you need to tell us anything else about your client's employment?
         employment_details: Details
-      income_cash_payments:
-        heading: Payments your client receives in cash
+      benefits_income:
+        applicant:
+          heading: Client benefits
+          question: Does your client get any benefits?
+          change_aria: whether your client receives benefits
+        partner:
+          heading: Partner benefits
+          question: Does the partner get any benefits?
+          change_aria: whether the partner receives benefits
+        benefit_heading: "Benefit %{index}"
+        type: Benefit type
+        amount: Amount
+        frequency: Frequency
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
@@ -467,6 +481,9 @@ en:
           payment_remaining: Are there any payments left on the vehicle?
           more_than_three_years_old: The vehicle was bought more than three years ago?
           used_regularly: Is the vehicle in regular use?
+      benefits_breakdown:
+        heading: Benefits breakdown
+
     forms:
       applicant_form:
         page_title: Enter your client's details

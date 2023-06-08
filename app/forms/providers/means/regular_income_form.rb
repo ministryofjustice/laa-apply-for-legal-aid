@@ -22,6 +22,10 @@ module Providers
         { operation: "credit", parent_id: nil }
       end
 
+      def transaction_type_exclusions
+        { name: "benefits" }
+      end
+
       def legal_aid_application_attributes
         { no_credit_transaction_types_selected: none_selected? }
       end

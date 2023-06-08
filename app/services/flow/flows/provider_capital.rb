@@ -15,7 +15,7 @@ module Flow
               :unexpected_employment_incomes
             when :applicant_not_employed
               if application.uploading_bank_statements?
-                :regular_incomes
+                :receives_state_benefits
               else
                 :identify_types_of_incomes
               end
@@ -201,7 +201,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
           forward: lambda do |application|
             if application.uploading_bank_statements?
-              :regular_incomes
+              :receives_state_benefits
             else
               :identify_types_of_incomes
             end
@@ -223,7 +223,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
           forward: lambda do |application|
             if application.uploading_bank_statements?
-              :regular_incomes
+              :receives_state_benefits
             else
               :identify_types_of_incomes
             end

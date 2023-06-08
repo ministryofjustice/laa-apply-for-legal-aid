@@ -15,6 +15,7 @@ class Applicant < ApplicationRecord
   has_many :bank_errors, dependent: :destroy
   has_many :bank_accounts, through: :bank_providers
   has_many :bank_transactions, through: :bank_accounts
+  has_many :regular_transactions, as: :owner
 
   encrypts :encrypted_true_layer_token
 
@@ -100,5 +101,9 @@ class Applicant < ApplicationRecord
 
   def employment_status
     employed? ? I18n.t("activemodel.attributes.applicant.employed") : I18n.t("activemodel.attributes.applicant.not_employed")
+  end
+
+  def state_benefits
+    regular_transactions.where(transaction_type_id: TransactionType.find_by(name: "benefits")).order(:created_at)
   end
 end

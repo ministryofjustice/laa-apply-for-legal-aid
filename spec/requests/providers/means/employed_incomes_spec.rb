@@ -74,9 +74,9 @@ RSpec.describe "employed incomes request" do
         context "when the application is using the bank upload journey" do
           let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
 
-          it "redirects to the regular income page" do
+          it "redirects to the receives state benefits page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(application))
           end
         end
 

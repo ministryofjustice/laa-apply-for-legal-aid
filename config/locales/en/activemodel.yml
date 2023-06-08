@@ -117,6 +117,8 @@ en:
               none_selected: Select one or more employment types or None of the above if not employed
             has_partner:
               inclusion: Select yes if the client has a partner
+            receives_state_benefits:
+              blank: Select yes if your client gets any benefits
         aggregated_cash_income:
           credits:
             attributes:
@@ -609,6 +611,16 @@ en:
               too_many_decimals: Enter a number with no more than 2 decimal places
             housing_benefit_frequency:
               inclusion: Select how often your client receives Housing Benefit
+        regular_transaction:
+          attributes:
+            description:
+              blank: Enter the name of the benefit
+            amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount of benefit received
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            frequency:
+              inclusion: Select how often your client gets the benefit
         providers/means/regular_income_form:
           attributes:
             benefits_amount:

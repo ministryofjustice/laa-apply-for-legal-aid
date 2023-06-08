@@ -47,6 +47,7 @@ class TransactionType < ApplicationRecord
   scope :not_children, -> { where(parent_id: nil) }
   scope :without_disregarded_benefits, -> { not_children }
   scope :without_housing_benefits, -> { where.not(name: "housing_benefit") }
+  scope :without_benefits, -> { where.not(name: "benefits") }
 
   def self.with_children(ids:)
     return none if ids.blank?

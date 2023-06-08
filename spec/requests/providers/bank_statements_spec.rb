@@ -348,9 +348,9 @@ RSpec.describe "Providers::BankStatementsController" do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
           end
 
-          it "redirects to regular income page" do
+          it "redirects to the receives_state_benefits page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
           end
         end
 

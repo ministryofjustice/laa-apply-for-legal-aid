@@ -20,12 +20,12 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
     context "when at least one income type is selected, but an amount is missing" do
       it "is invalid" do
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         pension = create(:transaction_type, :pension)
         params = {
-          "transaction_type_ids" => ["", benefits.id, pension.id],
-          "benefits_amount" => "",
-          "benefits_frequency" => "weekly",
+          "transaction_type_ids" => ["", maintenance_in.id, pension.id],
+          "maintenance_in_amount" => "",
+          "maintenance_in_frequency" => "weekly",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
         }.merge(legal_aid_application:)
@@ -33,18 +33,18 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         form = described_class.new(params)
 
         expect(form).to be_invalid
-        expect(form.errors).to be_added(:benefits_amount, :not_a_number, value: "")
+        expect(form.errors).to be_added(:maintenance_in_amount, :not_a_number, value: "")
       end
     end
 
     context "when at least one income type is selected, but an invalid amount is given" do
       it "is invalid" do
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         pension = create(:transaction_type, :pension)
         params = {
-          "transaction_type_ids" => ["", benefits.id, pension.id],
-          "benefits_amount" => "-1000",
-          "benefits_frequency" => "weekly",
+          "transaction_type_ids" => ["", maintenance_in.id, pension.id],
+          "maintenance_in_amount" => "-1000",
+          "maintenance_in_frequency" => "weekly",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
         }.merge(legal_aid_application:)
@@ -52,18 +52,18 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         form = described_class.new(params)
 
         expect(form).to be_invalid
-        expect(form.errors).to be_added(:benefits_amount, :greater_than, value: -1000, count: 0)
+        expect(form.errors).to be_added(:maintenance_in_amount, :greater_than, value: -1000, count: 0)
       end
     end
 
     context "when at least one income type is selected, but a frequency is missing" do
       it "is invalid" do
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         pension = create(:transaction_type, :pension)
         params = {
-          "transaction_type_ids" => ["", benefits.id, pension.id],
-          "benefits_amount" => "250",
-          "benefits_frequency" => "",
+          "transaction_type_ids" => ["", maintenance_in.id, pension.id],
+          "maintenance_in_amount" => "250",
+          "maintenance_in_frequency" => "",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
         }.merge(legal_aid_application:)
@@ -71,18 +71,18 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         form = described_class.new(params)
 
         expect(form).to be_invalid
-        expect(form.errors).to be_added(:benefits_frequency, :inclusion, value: "")
+        expect(form.errors).to be_added(:maintenance_in_frequency, :inclusion, value: "")
       end
     end
 
     context "when at least one income type is selected, but an invalid frequency is given" do
       it "is invalid" do
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         pension = create(:transaction_type, :pension)
         params = {
-          "transaction_type_ids" => ["", benefits.id, pension.id],
-          "benefits_amount" => "250",
-          "benefits_frequency" => "invalid",
+          "transaction_type_ids" => ["", maintenance_in.id, pension.id],
+          "maintenance_in_amount" => "250",
+          "maintenance_in_frequency" => "invalid",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
         }.merge(legal_aid_application:)
@@ -90,7 +90,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         form = described_class.new(params)
 
         expect(form).to be_invalid
-        expect(form.errors).to be_added(:benefits_frequency, :inclusion, value: "invalid")
+        expect(form.errors).to be_added(:maintenance_in_frequency, :inclusion, value: "invalid")
       end
     end
 
@@ -131,21 +131,21 @@ RSpec.describe Providers::Means::RegularIncomeForm do
     context "when the application has regular transactions" do
       it "assigns attributes for the non-children credit transactions" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)
-        benefits = create(:transaction_type, :benefits)
+        maintenance_in = create(:transaction_type, :maintenance_in)
         excluded_benefits = create(
           :transaction_type,
           :excluded_benefits,
-          parent_id: benefits.id,
+          parent_id: maintenance_in.id,
         )
         _excluded_benefits_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: excluded_benefits,
         )
-        _benefits_transaction_type = create(
+        _maintenance_in_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: maintenance_in,
         )
         _excluded_benefits_transaction = create(
           :regular_transaction,
@@ -154,10 +154,10 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           amount: 100,
           frequency: "weekly",
         )
-        _benefits_transaction = create(
+        _maintenance_in_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: maintenance_in,
           amount: 250,
           frequency: "weekly",
           owner_id: legal_aid_application.applicant.id,
@@ -166,9 +166,9 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
         form = described_class.new(legal_aid_application:)
 
-        expect(form.transaction_type_ids).to contain_exactly(benefits.id)
-        expect(form.benefits_amount).to eq(250)
-        expect(form.benefits_frequency).to eq("weekly")
+        expect(form.transaction_type_ids).to contain_exactly(maintenance_in.id)
+        expect(form.maintenance_in_amount).to eq(250)
+        expect(form.maintenance_in_frequency).to eq("weekly")
       end
     end
   end
@@ -238,6 +238,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
       let(:benefits) { create(:transaction_type, :benefits) }
+      let(:pension) { create(:transaction_type, :pension) }
       let(:child_care) { create(:transaction_type, :child_care) }
 
       it "returns true" do
@@ -261,7 +262,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         outgoing_transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -280,7 +281,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         housing_benefit_transaction_type = create(
           :legal_aid_application_transaction_type,
@@ -295,11 +296,30 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           .to contain_exactly(housing_benefit_transaction_type)
       end
 
+      it "does not destroy any existing benefit transaction types" do
+        _income_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: pension,
+        )
+        benefit_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .to contain_exactly(benefit_transaction_type)
+      end
+
       it "destroys any existing income regular transactions" do
         _income_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         outgoing_regular_transaction = create(
           :regular_transaction,
@@ -318,7 +338,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         housing_benefit_regular_transaction = create(
           :regular_transaction,
@@ -337,7 +357,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
-          transaction_type: benefits,
+          transaction_type: pension,
         )
         outgoing_cash_transaction = create(
           :cash_transaction,

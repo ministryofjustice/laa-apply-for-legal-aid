@@ -16,6 +16,6 @@ class RegularTransaction < ApplicationRecord
   end
 
   def self.frequencies_for(transaction_type)
-    transaction_type.name == "benefits" ? FREQUENCIES.without("monthly") : RegularTransaction::FREQUENCIES
+    transaction_type.name == "benefits" ? FREQUENCIES.excluding("monthly", "three_monthly") : FREQUENCIES
   end
 end

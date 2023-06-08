@@ -36,7 +36,6 @@ Feature: Bank statement upload check your answers
 
     And the "What payments does your client receive?" section's questions and answers should match:
       | question | answer |
-      | Benefits | None |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
@@ -44,7 +43,7 @@ Feature: Bank statement upload check your answers
 
     And the "What payments does your client make?" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\nTotal in the last three months |
+      | Housing payments | £1,600.00\nTotal in the last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
@@ -52,7 +51,7 @@ Feature: Bank statement upload check your answers
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
       | Does your client receive Housing Benefit? | Yes |
-      | Amount | £1,200.00\nTotal in the last three months |
+      | Amount | £1,200.00\nTotal in the last 3 months |
 
     When I click Check Your Answers Change link for "bank statements"
     And I upload an evidence file named "hello_world.pdf"
@@ -65,9 +64,9 @@ Feature: Bank statement upload check your answers
     When I click Check Your Answers Change link for "What payments does your client receive?"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
 
-    When I check "Benefits"
-    And I fill "Benefits amount" with "1000"
-    And I choose "providers-means-regular-income-form-benefits-frequency-two-weekly-field"
+    When I check "Pension"
+    And I fill "Pension amount" with "1000"
+    And I choose "providers-means-regular-income-form-pension-frequency-two-weekly-field"
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
@@ -76,7 +75,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
-    And I should see "Every two weeks"
+    And I should see "Every 2 weeks"
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
