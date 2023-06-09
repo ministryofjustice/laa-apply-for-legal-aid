@@ -525,7 +525,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.8.1)
-    redis-namespace (1.10.0)
+    redis-namespace (1.11.0)
       redis (>= 4)
     regexp_parser (2.8.0)
     representable (3.2.0)
