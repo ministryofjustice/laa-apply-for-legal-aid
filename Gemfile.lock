@@ -444,8 +444,9 @@ GEM
       rexml (~> 3.2)
     pagy (6.0.4)
     parallel (1.23.0)
-    parser (3.2.2.1)
+    parser (3.2.2.3)
       ast (~> 2.4.1)
+      racc
     patience_diff (1.2.0)
       optimist (~> 3.0)
     pg (1.5.3)
