@@ -653,15 +653,6 @@ en:
         uploaded: Uploaded
         title: Files added
         no_files: Files uploaded will appear here.
-    no_eligibility_assessments:
-      show:
-        page_title: A caseworker needs to review your application
-        no_cfe_assessment: A caseworker needs to review your application
-        heading: A caseworker needs to review your application
-        cannot_calculate: We cannot calculate your client's financial eligibility yet because you uploaded bank statements.
-        caseworker_check: A caseworker will check your client's bank statements to see if they need to pay towards legal aid.
-        continue: Continue your application to provide details of the case
-        continue_button: Save and continue
     uploaded_evidence_collections:
       upload_evidence:
         single_item: "Use this page to provide evidence of %{evidence_type}."
