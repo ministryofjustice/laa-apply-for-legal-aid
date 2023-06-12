@@ -1,7 +1,5 @@
 module Admin
   class CCMSQueuesController < AdminBaseController
-    before_action :authenticate_admin_user!
-
     def index
       @in_progress = CCMS::Submission.where.not(aasm_state: %w[completed abandoned]).order(created_at: :desc)
     end
