@@ -1,0 +1,23 @@
+<%= page_template page_title: t(".h1-heading") do %>
+
+  <p class="govuk-body-l"><%= t(".body-text") %></p>
+
+  <h3 class="govuk-heading-m"><%= t(".item-1") %></h3>
+  <p class="govuk-body"><%= t(".item-1-body") %></p>
+
+  <h3 class="govuk-heading-m"><%= t(".item-2") %></h3>
+  <p class="govuk-body"><%= t(".item-2-body") %></p>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".item-2-bullets").each do |bullet| %>
+      <li><%= bullet %></li>
+    <% end %>
+  </ul>
+
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_partners_about_financial_means_path,
+        method: :patch,
+        continue_button_text: t("generic.continue"),
+        show_draft: false,
+      ) %>
+
+<% end %>

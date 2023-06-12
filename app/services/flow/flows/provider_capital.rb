@@ -74,7 +74,9 @@ module Flow
         regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoings_path(application) },
           forward: lambda do |application|
-            if application.housing_payments?
+            if application.applicant.has_partner?
+              :partner_about_financial_means
+            elsif application.housing_payments?
               :housing_benefits
             elsif application.outgoing_types?
               :cash_outgoings
@@ -83,7 +85,9 @@ module Flow
             end
           end,
           check_answers: lambda do |application|
-            if application.housing_payments?
+            if application.applicant.has_partner?
+              :partner_about_financial_means
+            elsif application.housing_payments?
               :housing_benefits
             elsif application.outgoing_types?
               :cash_outgoings
@@ -91,6 +95,11 @@ module Flow
               :check_income_answers
             end
           end,
+        },
+        partner_about_financial_means: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
+          forward: :housing_benefits,
+          check_answers: :housing_benefits,
         },
         housing_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_means_housing_benefits_path(application) },
@@ -131,7 +140,13 @@ module Flow
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: :has_dependants,
+          forward: lambda do |application|
+            if application.applicant.has_partner?
+              :partner_about_financial_means
+            else
+              :has_dependants
+            end
+          end,
           check_answers: :check_income_answers,
         },
         incoming_transactions: {
