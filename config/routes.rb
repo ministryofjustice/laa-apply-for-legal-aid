@@ -228,7 +228,6 @@ Rails.application.routes.draw do
         patch "remove_transaction_type", on: :member
       end
       resource :check_capital_answers, only: %i[show update]
-      resource :no_eligibility_assessment, only: %i[show update]
 
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]

@@ -242,10 +242,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_check_capital_answers_path(application) },
           forward: :capital_income_assessment_results,
         },
-        no_eligibility_assessments: {
-          path: ->(application) { urls.providers_legal_aid_application_no_eligibility_assessment_path(application) },
-          forward: :merits_task_lists,
-        },
         capital_income_assessment_results: {
           path: ->(application) { urls.providers_legal_aid_application_capital_income_assessment_result_path(application) },
           forward: :merits_task_lists,
