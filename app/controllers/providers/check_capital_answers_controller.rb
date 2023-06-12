@@ -26,7 +26,11 @@ module Providers
     end
 
     def check_financial_eligibility
-      CFE::SubmissionManager.call(legal_aid_application.id)
+      if HostEnv.production?
+        CFE::SubmissionManager.call(legal_aid_application.id)
+      else
+        CFECivil::SubmissionBuilder.call(legal_aid_application, save_result: true)
+      end
     end
   end
 end
