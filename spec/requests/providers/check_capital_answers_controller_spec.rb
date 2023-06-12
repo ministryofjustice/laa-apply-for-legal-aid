@@ -92,7 +92,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
     context "when logged in as an authenticated provider" do
       before do
         login
-        allow(CFE::SubmissionManager).to receive(:call).with(legal_aid_application.id).and_return(cfe_result)
+        allow(CFE::SubmissionRouter).to receive(:call).with(legal_aid_application).and_return(cfe_result)
       end
 
       context "with a successful Check Financial Eligibility Service call" do
@@ -114,9 +114,9 @@ RSpec.describe Providers::CheckCapitalAnswersController do
             expect(response).to redirect_to(providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application))
           end
 
-          it "calls CFE::SubmissionManager" do
+          it "calls CFE::SubmissionRouter" do
             request
-            expect(CFE::SubmissionManager).to have_received(:call).with(legal_aid_application.id)
+            expect(CFE::SubmissionRouter).to have_received(:call).with(legal_aid_application)
           end
         end
 
@@ -132,7 +132,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
 
           it "calls CFE::SubmissionManager" do
             request
-            expect(CFE::SubmissionManager).to have_received(:call).with(legal_aid_application.id)
+            expect(CFE::SubmissionRouter).to have_received(:call).with(legal_aid_application)
           end
         end
 
@@ -151,7 +151,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
 
           it "does not calls CFE::SubmissionManager" do
             request
-            expect(CFE::SubmissionManager).not_to have_received(:call)
+            expect(CFE::SubmissionRouter).not_to have_received(:call)
           end
         end
       end
@@ -163,18 +163,6 @@ RSpec.describe Providers::CheckCapitalAnswersController do
           request
           expect(response).to redirect_to(problem_index_path)
         end
-      end
-    end
-
-    context "when in as authenticated provider with bank statement upload permissions" do
-      before do
-        login
-        legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-      end
-
-      it "expect cfe_result to be nil" do
-        request
-        expect(legal_aid_application.cfe_result).to be_nil
       end
     end
   end
