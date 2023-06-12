@@ -25,7 +25,7 @@ Feature: Check pending employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
 
     When I select 'Housing'
     And I click 'Save and continue'

@@ -17,7 +17,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
     Then I select "Childcare"
     And I click 'Save and continue'
     Then I should be on the 'cash_outgoing' page showing "Select payments your client pays in cash"
@@ -142,7 +142,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
     Then I select "Childcare"
     And I click 'Save and continue'
     Then I should be on the 'cash_outgoing' page showing "Select payments your client pays in cash"

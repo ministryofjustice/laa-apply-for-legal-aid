@@ -881,7 +881,7 @@ en:
           amount_hint: Check your client's student entitlement letter
       identify_types_of_outgoings:
         show:
-          page_heading: Which payments does your client make?
+          page_heading: Which of these payments does your client pay?
           hints:
             rent_or_mortgage: For example, rent, mortgage or board and lodging.
             child_care: For example, to a childminder, nanny or nursery.

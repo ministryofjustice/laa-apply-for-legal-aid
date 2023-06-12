@@ -26,7 +26,7 @@ Feature: Check multiple employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Which payments does your client make?"
+    Then I should be on a page showing "Which of these payments does your client pay?"
 
     When I select 'Housing payments'
     And I click 'Save and continue'

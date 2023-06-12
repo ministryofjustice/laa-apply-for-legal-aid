@@ -17,7 +17,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
 
     Then I select "Childcare"
     And I click 'Save and continue'
@@ -65,7 +65,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
 
     When I select "Childcare"
     And I click 'Save and continue'
@@ -100,7 +100,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing 'Check your answers'
 
     When I click Check Your Answers Change link for "What payments does your client make?"
-    Then I should be on a page with title "Which payments does your client make?"
+    Then I should be on a page with title "Which of these payments does your client pay?"
 
     When I click 'Save and continue'
     Then I should be on a page with title "Select payments your client pays in cash"
@@ -109,7 +109,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Sort your client's regular payments into categories"
 
     When I click link 'Add another type of regular payment'
-    Then I should be on a page showing 'Which payments does your client make?'
+    Then I should be on a page showing 'Which of these payments does your client pay?'
 
     When I click 'Save and continue'
     Then I should be on a page showing "Select payments your client pays in cash"
