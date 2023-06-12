@@ -46,6 +46,7 @@ module PageTemplateHelper
     template: nil,
     form: nil,
     show_errors_for: nil,
+    caption: nil,
     page_heading_options: {},
     &content
   )
@@ -54,11 +55,13 @@ module PageTemplateHelper
     has_errors = form&.object&.errors || show_errors_for&.errors
     page_title_possibly_with_error({ page_title:, head_title: }, has_errors)
     content = capture(&content) if content
+    content_for(:caption) if caption
     content_for(:language_switcher) { language_links if show_language_switcher? }
     render(
       "shared/page_templates/#{template}_page_template",
       page_title:,
       head_title:,
+      caption:,
       back_link:,
       column_width:,
       content:,

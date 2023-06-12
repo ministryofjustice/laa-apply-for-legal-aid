@@ -80,7 +80,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I select 'None of the above'
     And I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I should be on a page with title "Does your client use online banking?"
     And the page is accessible
     Then I choose 'Yes'
     Then I click 'Save and continue'
@@ -115,15 +115,15 @@ Feature: Provider accessibility
     And the page is accessible
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client receive student finance?"
+    Then I should be on a page showing "Does your client get student finance?"
     And the page is accessible
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Which payments does your client make?"
+    Then I should be on a page showing "Which of these payments does your client pay?"
     And the page is accessible
     When I select 'Housing payments'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client makes in cash"
+    Then I should be on a page showing "Select payments your client pays in cash"
     And the page is accessible
     When I select "None of the above"
     And I click 'Save and continue'

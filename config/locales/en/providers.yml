@@ -4,7 +4,7 @@ en:
     about_financial_means:
       show:
         h1-heading: What you need to do
-        partner_heading: Complete you client's and their partner's financial assessments
+        partner_heading: Complete your client's and their partner's financial assessments
         no_partner_heading: Complete your client's financial assessment
         body-text: "As part of the financial assessment, you'll need to provide:"
         bullets:
@@ -184,6 +184,13 @@ en:
           must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
           provide_details: provide details of the case
     identify_types_of_incomes:
+      show:
+        none_of_these: My client receives none of these payments
+        hints:
+          friends_or_family: For example, money from a family member for rent or bills.
+          benefits: For example, Child Benefit or tax credits.
+          maintenance_in: This includes child maintenance.
+          pension: Include State, workplace and personal pensions.
       update:
         none_selected: Select if your client receives any types of income
     cookies:
@@ -809,10 +816,6 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
     means:
-      client_caption: Client's means assessment
-      cash_outgoings:
-        show:
-          page_heading: Select payments your client makes in cash
       full_employment_details:
         show:
           page_heading_no_info: HMRC has no record of your client's employment in the last 3 months
@@ -851,9 +854,45 @@ en:
           supplementary_question_hint: |
             For example, if they recently ended employment. You can upload evidence,
             like a P45, later on.
+          tax: Tax
+          ni: National Insurance
+      identify_types_of_incomes:
+        show:
+          page_heading: Which payments does your client receive?
+          none_of_these: My client receives none of these payments
+          hints:
+            friends_or_family: For example, money from a family member for rent or bills.
+            benefits: For example, Child Benefit or tax credits.
+            maintenance_in: This includes child maintenance.
+            pension: Include State, workplace and personal pensions.
+        update:
+          none_selected: Select if your client receives any types of income
       cash_incomes:
         show:
           page_heading: Select payments your client receives in cash
+          info: Cash means physical money like banknotes and coins.
+      student_finances:
+        show:
+          page_title: Does your client get student finance?
+          hint:
+            - This includes student loans, grants or bursaries your client gets.
+            - Do not include any tuition fee loans.
+          amount_label: Enter the amount they'll get this academic year
+          amount_hint: Check your client's student entitlement letter
+      identify_types_of_outgoings:
+        show:
+          page_heading: Which of these payments does your client pay?
+          hints:
+            rent_or_mortgage: For example, rent, mortgage or board and lodging.
+            child_care: For example, to a childminder, nanny or nursery.
+            maintenance_out: This includes child maintenance.
+          none_of_these: My client makes none of these payments
+        update:
+          none_selected: Select if your client makes any regular payments
+      cash_outgoings:
+        show:
+          page_heading: Select payments your client pays in cash
+          info: Cash means physical money like banknotes and coins.
       housing_benefits:
         show:
           labels:
@@ -861,16 +900,6 @@ en:
               "yes": "Yes"
               "no": "No"
           page_heading: Does your client receive Housing Benefit?
-      identify_types_of_incomes:
-        show:
-          page_heading: Which payments does your client receive?
-        update:
-          none_selected: Select if your client receives any types of income
-      identify_types_of_outgoings:
-        show:
-          page_heading: Which payments does your client make?
-        update:
-          none_selected: Select if your client makes any regular payments
       regular_incomes:
         show:
           hints:
@@ -1259,42 +1288,8 @@ en:
         no_account_selected: None of these
     open_banking_consents:
       show:
-        online_banking_question: Does your client use online banking?
-        heading: We need your client's bank statements from the last 3 months
-        info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
-        details_summary: What is TrueLayer?
-        details_content_html: |
-          <a href='https://truelayer.com/data' target="_blank">TrueLayer</a> is a trusted third-party financial service
-          provider that acts as a messenger between your client's bank and the LAA.
-          <br>
-          <br>
-          It allows your client to quickly and securely share their bank statements without having to gather physical bank statements.
-          <br>
-          <br>
-          They’re regulated by the Financial Conduct Authority (FCA) and will:
-        details:
-          list: |
-            not store your client's bank account details
-            not see your client's online banking sign-in details
-            not share your client's data with anyone other than the LAA
-            not have ongoing access to your client's bank accounts
-        provider_instructions:
-          heading: How your client can share their bank statements
-          list: |
-            They access 'Apply for legal aid' using a link we'll send them in an email.
-            They select the banks they use online banking with.
-            We redirect your client to their bank's website or app.
-            They give consent for TrueLayer to securely access their account details.
-            TrueLayer shares their bank statements with us.
-        radio_legend: Can your client share their bank statements with us via TrueLayer?
-        radio_no:
-          label: 'No'
-          hint: |
-            You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements
-        radio_yes:
-          label: 'Yes'
-          hint: |
-            Your client must have an email address and use online banking for all of their current accounts.
+        heading: Does your client use online banking?
+        info: We need this information to collect your client's bank statements for the last 3 months.
     open_banking_guidances:
       show:
         heading_h1: Share bank statements with online banking

@@ -5,11 +5,12 @@
       local: true,
     ) do |form| %>
 
-    <%= page_template(
-          page_title: t(".page_title"),
-          page_heading_options: { margin_bottom: 3 },
-          form:,
-        ) do %>
+  <%= page_template(
+        page_title: t(".page_title"),
+        page_heading_options: { margin_bottom: 3 },
+        caption: t("generic.client_means_caption"),
+        form:,
+      ) do %>
 
     <div class="govuk-!-padding-bottom-6"></div>
 

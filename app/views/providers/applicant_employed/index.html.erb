@@ -14,6 +14,7 @@
 
     <%= form.govuk_check_boxes_fieldset :applicant,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
+                                        caption: { text: t("generic.client_means_caption"), size: "l" },
                                         hint: { text: t("generic.select_all_that_apply") } do %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#applicant-none-selected-true-field">

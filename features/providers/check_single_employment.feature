@@ -23,15 +23,15 @@ Feature: Check single employment
 
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client receive student finance?"
+    Then I should be on a page showing "Does your client get student finance?"
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
 
     When I select 'Housing'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client makes in cash"
+    Then I should be on a page showing "Select payments your client pays in cash"
 
     When I select "None of the above"
     And I click 'Save and continue'

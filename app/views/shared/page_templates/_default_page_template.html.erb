@@ -11,6 +11,9 @@
         </h2>
       <% end %>
     <% else %>
+      <% if caption %>
+        <span class="govuk-caption-l"><%= caption %></span>
+      <% end %>
       <%= page_heading(**page_heading_options) %>
     <% end %>
     <%= content %>

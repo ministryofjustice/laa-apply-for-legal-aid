@@ -1,24 +1,6 @@
 ---
 cy:
   shared:
-    partials:
-      revealing_checkbox:
-        citizens:
-          cash_incomes:
-            hint: ".enon deviecer uoy fi 0 retne ro ,htnom hcae ni deviecer uoy tnuoma
-              hsac latot eht retnE"
-            check_box_benefits: stifeneB
-            check_box_friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
-            check_box_maintenance_in: rentrap remrof a morf stnemyap ecnanetniaM
-            check_box_property_or_lodger: regdol ro ytreporp a morf emocnI
-            check_box_pension: noisneP
-          cash_outgoings:
-            hint: ".enon diap uoy fi 0 retne ro ,htnom hcae ni diap uoy tnuoma hsac
-              latot eht retnE"
-            check_box_rent_or_mortgage: stnemyap gnisuoH
-            check_box_child_care: stnemyap eracdlihC
-            check_box_maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
-            check_box_legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
     printable_under_18_declaration:
       confirm_following: gniwollof eht mrifnoC
       declaration_list_title: 'By signing this declaration, you agree for %{applicant_name} that:'
@@ -211,12 +193,6 @@ cy:
         page_title: sliated s'tneilc ruoy retnE
         name: emaN
         email_label: sserdda liamE
-      cash_outgoings_form:
-        info: hsac ni ekam uoy stnemyap tcele
-        none_selected: evoba eht fo enoN
-      cash_income_form:
-        info: .snioc dna setonknab ekil yenom lacisyhp snaem hsaC
-        none_selected: evoba eht fo enoN
       date_input_fields:
         date_of_birth_hint: '.0891 3 13 ,elpmaxe roF'
         date_of_birth_label: htrib fo etaD
@@ -325,25 +301,12 @@ cy:
           borderline: .emoctuo eht tciderp tonnac uoY
           not_known: .sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
             kroW
-      types_of_income_form:
-        hints:
-          providers:
-            friends_or_family: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
-              roF"
-            benefits: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
-            maintenance_in: ".ecnanetniam dlihc sedulcni sihT"
-            pension: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
-        expanded_explanation:
-          heading: "?siht deksa gnieb I ma yhW"
-          list: |2-
+      expanded_explanation:
+        heading: "?siht deksa gnieb I ma yhW"
+        list: |2-
 
-            .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
-            .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
-      types_of_outgoings_form:
-        hints:
-          rent_or_mortgage: ".gnigdol dna draob ro egagtrom ,tner ,elpmaxe roF"
-          child_care: ".yresrun ro ynnan ,rednimdlihc a ot ,elpmaxe roF"
-          maintenance_out: ".ecnanetniam dlihc sedulcni sihT"
+          .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
+          .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
     page-title:
       suffix: dia lagel rof ylppA
     property_results:
@@ -377,12 +340,3 @@ cy:
     restrictions:
       restrictions: stessa s'tneilc ruoy no snoitcirtseR
       none: enoN
-    means:
-      student_finances:
-        field_set_header_provider: "?ecnanif tneduts teg tneilc ruoy seoD"
-        field_set_header: "?ecnanif tneduts teg uoy oD"
-        hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
-        amount: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
-        amount_provider: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
-        amount_hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"
-        amount_hint_provider: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"

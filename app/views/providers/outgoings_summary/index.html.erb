@@ -1,4 +1,4 @@
-<%= page_template page_title: t(".page_heading"), show_errors_for: @legal_aid_application do %>
+<%= page_template page_title: t(".page_heading"), caption: t("generic.client_means_caption"), show_errors_for: @legal_aid_application do %>
 
   <% errors = @legal_aid_application.errors.messages %>
 
@@ -14,7 +14,7 @@
     <%= list_from_translation_path ".outgoings_summary.index" %>
   </p>
 
-  <ol class="app-task-list">
+  <ol class="app-task-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
     <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
       <%= render(
             "outgoing_type_item",
@@ -30,8 +30,6 @@
       <%= render partial: "add_other_outgoings" %>
     <% end %>
   </ol>
-
-  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_outgoings_summary_index_path,

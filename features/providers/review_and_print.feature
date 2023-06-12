@@ -141,7 +141,7 @@ Feature: Review and print your application
     Given I have completed truelayer application with merits and no student finance
     When I view the review and print your application page
     Then I should not see "Student loan"
-    And the answer to the "Does your client receive student finance?" question should be "No"
+    And the answer to the "Does your client get student finance?" question should be "No"
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits

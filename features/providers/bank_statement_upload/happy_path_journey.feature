@@ -49,13 +49,13 @@ Feature: Bank statement upload journey happy path
 
     When I select "None of the above"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client receive student finance?"
+    Then I should be on a page with title "Does your client get student finance?"
     And the page is accessible
 
     When I choose "Yes"
     And I enter amount "2000"
     And I click "Save and continue"
-    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And the page is accessible
 
     When I select "Housing payments"
@@ -74,10 +74,10 @@ Feature: Bank statement upload journey happy path
     And I enter amount "100"
     And I choose "Every week"
     And I click "Save and continue"
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
     And the page is accessible
 
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
     And I should see "Housing"
     And I should see "Childcare"
     And I should not see "Maintenance payments to a former partner"
@@ -133,13 +133,13 @@ Feature: Bank statement upload journey happy path
 
     When I select "None of the above"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client receive student finance?"
+    Then I should be on a page with title "Does your client get student finance?"
     And the page is accessible
 
     When I choose "Yes"
     And I enter amount "2000"
     And I click "Save and continue"
-    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And the page is accessible
 
     When I select "Housing payments"
@@ -158,10 +158,10 @@ Feature: Bank statement upload journey happy path
     And I enter amount "100"
     And I choose "Every week"
     And I click "Save and continue"
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
     And the page is accessible
 
-    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I should be on a page with title "Select payments your client pays in cash"
     And I should see "Housing"
     And I should see "Childcare"
     And I should not see "Maintenance payments to a former partner"

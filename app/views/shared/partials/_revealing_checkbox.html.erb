@@ -3,7 +3,7 @@
    error_class = nil %>
 
 <%= form.govuk_check_box field_name, true, "", link_errors: true, multiple: false, label: { text: controller_t("check_box_#{name}") } do %>
-  <div class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint") %></div>
+  <div class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint", default: "") %></div>
   <% (1..number_of_fields).each do |number| %>
     <% error = model.errors.messages["#{name}#{number}".to_sym][0] %>
     <% if error %>

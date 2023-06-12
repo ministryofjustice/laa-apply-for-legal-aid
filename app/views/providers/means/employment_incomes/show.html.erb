@@ -9,8 +9,8 @@
 
   <%= page_template page_title: t(".page_title", name: @applicant.full_name), template: :basic, form: do %>
 
-    <span class="govuk-caption-l"><%= t("providers.means.client_caption") %></span>
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
+                                          caption: { text: t("generic.client_means_caption"), size: "l" },
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
       <%= render "shared/means/employment_income_table" %>

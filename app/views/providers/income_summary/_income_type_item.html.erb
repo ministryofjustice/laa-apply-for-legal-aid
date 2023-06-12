@@ -22,7 +22,7 @@
       </div>
     <% end %>
     <% if error_message %>
-      <p id='<%= "error-#{name}" %>' class="govuk-error-message"><%= error_message %></p>
+      <p id='<%= "error-#{name}" %>' class="govuk-error-message govuk-!-padding-top-2"><%= error_message %></p>
     <% end %>
   </h2>
   <%= content_tag(:div, class: "app-task-list__items", id: "list-item-#{name}") do %>

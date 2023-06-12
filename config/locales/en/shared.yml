@@ -22,25 +22,7 @@ en:
         yes_button: Yes, delete it
         no_button: No, do not delete it
       revealing_checkbox:
-        citizens:
-          cash_incomes:
-            hint: Enter the total cash amount you received in each month, or enter 0 if you received none.
-            check_box_benefits: Benefits
-            check_box_friends_or_family: Financial help from friends or family
-            check_box_maintenance_in: Maintenance payments from a former partner
-            check_box_property_or_lodger: Income from a property or lodger
-            check_box_pension: Pension
-          cash_outgoings:
-            hint: Enter the total cash amount you paid in each month, or enter 0 if you paid none.
-            check_box_rent_or_mortgage: Housing payments
-            check_box_child_care: Childcare payments
-            check_box_maintenance_out: Maintenance payments to a former partner
-            check_box_legal_aid: Payments towards legal aid in a criminal case
         providers:
-          cash_incomes:
-            hint: Enter the total cash amount you received in each month, or enter 0 if you received none.
-          cash_outgoings:
-            hint: Enter the total cash amount you paid in each month, or enter 0 if you paid none.
           means:
             cash_incomes:
               check_box_benefits: Benefits
@@ -49,7 +31,6 @@ en:
               check_box_property_or_lodger: Income from a property or lodger
               check_box_pension: Pension
             cash_outgoings:
-              hint: Enter the total cash amount you paid in each month, or enter 0 if you paid none.
               check_box_rent_or_mortgage: Housing payments
               check_box_child_care: Childcare payments
               check_box_maintenance_out: Maintenance payments to a former partner
@@ -411,7 +392,7 @@ en:
           no_transactions: "No"
       student_finance:
         heading: Student finance
-        does_your_client: Does your client receive student finance?
+        does_your_client: Does your client get student finance?
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
       income_cash_payments:
@@ -489,12 +470,6 @@ en:
         page_title: Enter your client's details
         name: Name
         email_label: Email address
-      cash_outgoings_form:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
-      cash_income_form:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980.
         date_of_birth_label: Date of birth
@@ -526,9 +501,6 @@ en:
       savings_and_investments_form:
         none_selected: None of these
       outstanding_mortgage_form:
-        citizens:
-          outstanding_mortgages:
-            field_set_header: What is the outstanding mortgage on your home?
         providers:
           outstanding_mortgages:
             field_set_header: What is the outstanding mortgage on your client's home?
@@ -667,27 +639,11 @@ en:
             poor: The chance of a successful outcome is poor.
             borderline: You cannot predict the outcome.
             not_known: Work still needs to be done to determine the likelihood of success.
-      types_of_income_form:
-        providers:
-          none_of_these: My client receives none of these payments
-        hints:
-          providers:
-            friends_or_family: For example, money from a family member for rent or bills.
-            benefits: For example, Child Benefit or tax credits.
-            maintenance_in: This includes child maintenance.
-            pension: Include State, workplace and personal pensions.
-        expanded_explanation:
-          heading: Why am I being asked this?
-          list: |
-            Your solicitor will look at your bank statements and put your transactions into the categories you select.
-            We need this information to check if you qualify financially for legal aid.
-      types_of_outgoings_form:
-        providers:
-          none_of_these: My client makes none of these payments
-        hints:
-          rent_or_mortgage: For example, rent, mortgage or board and lodging.
-          child_care: For example, to a childminder, nanny or nursery.
-          maintenance_out: This includes child maintenance.
+      expanded_explanation:
+        heading: Why am I being asked this?
+        list: |
+          Your solicitor will look at your bank statements and put your transactions into the categories you select.
+          We need this information to check if you qualify financially for legal aid.
     page-title:
       suffix: Apply for legal aid  - GOV.UK
     property_results:
@@ -762,22 +718,7 @@ en:
           heading: Client declaration
           signature: "Client signature:"
           date: "Date:"
-    employment_income_table:
-      benefits_in_kind: Benefits in kind
-      employment_details: Employment details
-      heading: Income
-      monthly_income_before_tax: Monthly income before tax
-      national_insurance: National insurance
-      tax: Tax
     means:
-      student_finances:
-        field_set_header_provider: Does your client receive student finance?
-        field_set_header: Do you get student finance?
-        hint: This includes any type of student loan, grant or bursary.
-        amount_hint_provider: Check your client's student entitlement letter
-        amount_hint: Check your student finance entitlement letter.
-        amount_provider: Enter the amount they'll get this academic year
-        amount: How much student finance will you get this academic year?
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.
         date: Date
@@ -787,6 +728,13 @@ en:
         tax: Tax
         ni: National Insurance
         table_caption: Your client's employment details
+    employment_income_table:
+      benefits_in_kind: Benefits in kind
+      employment_details: Employment details
+      heading: Income
+      monthly_income_before_tax: Monthly income before tax
+      national_insurance: National insurance
+      tax: Tax
     scope_limitations:
       limitation_note:
         details: Give details of the %{scope_limitation}

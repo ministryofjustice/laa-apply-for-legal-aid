@@ -1,7 +1,8 @@
----
 en:
   transaction_types:
     names:
+      # TODO: remove this as we don't actually show transaction categories to citizens anymore, however these categories are still
+      # being used in a few places, and have tests and helper methods which will also need to be updated/removed
       citizens:
         benefits: Benefits
         child_care: Childcare payments
