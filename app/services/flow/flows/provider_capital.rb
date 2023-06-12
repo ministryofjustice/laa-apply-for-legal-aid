@@ -85,9 +85,7 @@ module Flow
             end
           end,
           check_answers: lambda do |application|
-            if application.applicant.has_partner?
-              :partner_about_financial_means
-            elsif application.housing_payments?
+            if application.housing_payments?
               :housing_benefits
             elsif application.outgoing_types?
               :cash_outgoings
