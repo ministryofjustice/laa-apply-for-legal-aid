@@ -12,6 +12,7 @@ RSpec.describe CFECivil::Components::Assessment do
         assessment: {
           client_reference_id: "L-T5T-R3F",
           submission_date: target_time.strftime("%Y-%m-%d"),
+          level_of_help: "certificated",
         },
       }.to_json)
     end

@@ -6,6 +6,7 @@ module CFECivil
           assessment: {
             client_reference_id: legal_aid_application.application_ref,
             submission_date: legal_aid_application.calculation_date.strftime("%Y-%m-%d"),
+            level_of_help: "certificated",
           },
         }.to_json
       end
