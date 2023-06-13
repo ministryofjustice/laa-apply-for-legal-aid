@@ -1,24 +1,23 @@
 <%= page_template page_title: t(".h1-heading") do %>
+  <h2 class='govuk-heading-l'>
+    <% if @applicant.has_partner? %>
+      <%= t(".partner_heading") %>
+    <% else %>
+      <%= t(".no_partner_heading") %>
+    <% end %>
+  </h2>
 
-<h2 class='govuk-heading-l'>
-  <% if @applicant.has_partner? %>
-    <%= t(".partner_heading") %>
-  <% else %>
-    <%= t(".no_partner_heading") %>
-  <% end %>
-</h2>
+  <p class="govuk-body"><%= t(".body-text") %></p>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".bullets").each do |bullet| %>
+      <li><%= bullet %></li>
+    <% end %>
+  </ul>
 
-<p class="govuk-body"><%= t(".body-text") %></p>
-<ul class="govuk-list govuk-list--bullet">
-  <% t(".bullets").each do |bullet| %>
-    <li><%= bullet %></li>
-  <% end %>
-</ul>
-
-<%= next_action_buttons_with_form(
-      url: providers_legal_aid_application_about_financial_means_path,
-      method: :patch,
-      continue_button_text: t("generic.continue"),
-      show_draft: true,
-    ) %>
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_about_financial_means_path,
+        method: :patch,
+        continue_button_text: t("generic.continue"),
+        show_draft: true,
+      ) %>
 <% end %>
