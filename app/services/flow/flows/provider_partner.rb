@@ -52,6 +52,11 @@ module Flow
           forward: :check_provider_answers,
           check_answers: :check_provider_answers,
         },
+        partner_employed: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
+          # forward: :foo,
+          # check_answers: :bar,
+        },
       }.freeze
     end
   end
