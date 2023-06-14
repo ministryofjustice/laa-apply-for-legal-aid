@@ -18,7 +18,7 @@
                                         hint: { text: t("generic.select_all_that_apply") } do %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#applicant-none-selected-true-field">
-          <% Applicants::EmployedForm::EMPLOYMENT_TYPES.each do |employment_type| %>
+          <% BaseEmployedForm::EMPLOYMENT_TYPES.each do |employment_type| %>
              <%= form.govuk_check_box employment_type, true, "", multiple: false, link_errors: true, label: { text: t(".#{employment_type}") } %>
            <% end %>
         </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_073818) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_14_094521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -725,6 +725,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_073818) do
     t.boolean "lookup_used", default: false, null: false
     t.string "lookup_id"
     t.boolean "shared_benefit_with_applicant"
+    t.boolean "employed"
+    t.boolean "self_employed"
+    t.boolean "armed_forces"
     t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
   end
 
