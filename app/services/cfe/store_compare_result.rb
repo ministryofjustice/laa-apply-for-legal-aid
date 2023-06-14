@@ -38,6 +38,9 @@ module CFE
 
     def worksheet_reload
       @spreadsheet = @sheet_service.get_spreadsheet(spreadsheet_key)
+      requests = [{ clear_basic_filter: { sheet_id: @spreadsheet.sheets[0].properties.sheet_id } }]
+      update_request = Google::Apis::SheetsV4::BatchUpdateSpreadsheetRequest.new(requests:)
+      @sheet_service.batch_update_spreadsheet(spreadsheet_key, update_request)
     end
 
     def spreadsheet_key

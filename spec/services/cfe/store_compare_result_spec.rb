@@ -6,7 +6,9 @@ module CFE
 
     let(:service_creds) { instance_double(Google::Auth::ServiceAccountCredentials, fetch_access_token!: {}) }
     let(:sheet_service) { instance_double(Google::Apis::SheetsV4::SheetsService) }
-    let(:spreadsheet) { instance_double(Google::Apis::SheetsV4::Spreadsheet) }
+    let(:spreadsheet) { instance_spy(Google::Apis::SheetsV4::Spreadsheet) }
+    let(:sheet) { instance_spy(Google::Apis::SheetsV4::Spreadsheet) }
+    let(:sheet_properties) { instance_spy(Google::Apis::SheetsV4::SheetProperties) }
     let(:sheet_id) { "123456789" }
     let(:data_submitted) { ["Fake", "data", true] }
     let(:append_value_response) { instance_double(Google::Apis::SheetsV4::AppendValuesResponse) }
@@ -15,6 +17,9 @@ module CFE
 
     before do
       allow(sheet_service).to receive(:append_spreadsheet_value).and_return(append_value_response)
+      allow(spreadsheet).to receive(:sheets).and_return([sheet])
+      allow(sheet).to receive(:properties).and_return(sheet_properties)
+      allow(sheet_properties).to receive(:sheet_id).and_return(sheet_id)
       allow(append_value_response).to receive(:updates).and_return(update_value_response)
       allow(update_value_response).to receive(:updated_range).and_return(output_response)
     end
@@ -26,6 +31,7 @@ module CFE
       expect(sheet_service).to receive(:authorization=).once
       expect(sheet_service).to receive(:get_spreadsheet).and_return(spreadsheet).once
       expect(sheet_service).to receive(:append_spreadsheet_value).once
+      expect(sheet_service).to receive(:batch_update_spreadsheet).once
 
       call_submit_data
     end
