@@ -23,8 +23,4 @@ private
   def clean_attributes(hash)
     hash.each { |k, v| hash[k] = "false" if v == "" }
   end
-
-  def error_message_for_none_selected
-    I18n.t("activemodel.errors.models.applicant.attributes.base.none_selected")
-  end
 end
