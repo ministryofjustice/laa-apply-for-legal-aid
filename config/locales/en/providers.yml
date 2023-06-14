@@ -521,6 +521,19 @@ en:
           hearing-date: Enter the date
           hearing-date-hint: For example, 12 11 2007
     partners:
+      about_financial_means:
+        show:
+          h1-heading: Complete the partner's financial assessment
+          body-text: "You need to:"
+          item-1: 1. Tell us about their employment
+          item-1-body: |
+            Share details about their employment status and review information from
+            HMRC if they are employed.
+          item-2: 2. Tell us about their income and outgoings
+          item-2-body: "We need to know if the partner:"
+          item-2-bullets:
+            - receives certain types of income (for example, benefits)
+            - has certain regular outgoings (for example, childcare)
       client_has_partners:
         show:
           page_title: Does your client have a partner?
