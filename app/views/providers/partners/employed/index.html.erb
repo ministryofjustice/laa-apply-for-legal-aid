@@ -1,7 +1,5 @@
-<%= page_template(
-      page_title: "What is the partner's employment status?",
-      template: :basic,
-      back_link: { text: t("generic.back") },
-    ) do %>
-
-<% end %>
+<%= render "shared/employment_status",
+           individual: :partner,
+           caption_individual: "partner",
+           heading_individual: "the partner",
+           url: providers_legal_aid_application_partners_employed_index_path(@legal_aid_application) %>

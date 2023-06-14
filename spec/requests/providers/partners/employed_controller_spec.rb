@@ -26,7 +26,10 @@ RSpec.describe Providers::Partners::EmployedController do
   end
 
   describe "POST /providers/applications/:legal_aid_application_id/partners/employed" do
-    subject(:post_request) { post providers_legal_aid_application_partners_employed_index_path(legal_aid_application), params: {} }
+    subject(:post_request) { post providers_legal_aid_application_partners_employed_index_path(legal_aid_application), params: }
+
+    let(:params) { {} }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
 
     context "when the provider is not authenticated" do
       before { post_request }
@@ -36,7 +39,6 @@ RSpec.describe Providers::Partners::EmployedController do
 
     context "with invalid params" do
       it "renders an error and does not update the record" do
-        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner)
         login_as provider
 
         post_request
@@ -49,58 +51,37 @@ RSpec.describe Providers::Partners::EmployedController do
     end
 
     context "with valid params" do
-      it "updates the record" do
-        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner)
-        login_as legal_aid_application.provider
+      let(:params) { { partner: { employed: "true" } } }
 
-        post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
-             params: { partner: { employed: "true" } }
+      it "updates the record" do
+        login_as provider
+
+        post_request
 
         partner = legal_aid_application.reload.partner
         expect(partner).to be_employed
       end
     end
 
-    context "when the application is ineligible for employment journey" do
-      it "redirects to the use ccms employed page" do
-        partner = create(:partner, self_employed: true)
-        legal_aid_application = create(:legal_aid_application, partner:)
-        provider = legal_aid_application.provider
+    context "when the partner is eligible for employment journey" do
+      it "redirects to has dependants page for applications" do
         login_as provider
 
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
              params: { partner: { employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
       end
     end
 
-    context "when the partner is eligible for employment journey" do
-      it "redirects to the substantive applications page for applications that used delegated functions" do
-        legal_aid_application = create(
-          :legal_aid_application,
-          :with_proceedings,
-          :with_delegated_functions_on_proceedings,
-          df_options: { DA001: [Date.yesterday, Date.current] },
-        )
-        provider = legal_aid_application.provider
+    context "when the application is ineligible for employment journey" do
+      it "redirects to the use ccms employed page" do
         login_as provider
 
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
-             params: { partner: { employed: "true" } }
+             params: { partner: { self_employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
-      end
-
-      it "redirects to the open banking consent page for applications that have not used delegated functions" do
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        login_as provider
-
-        post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
-             params: { partner: { employed: "true" } }
-
-        expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
       end
     end
   end

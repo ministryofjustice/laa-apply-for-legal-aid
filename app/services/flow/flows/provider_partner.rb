@@ -54,8 +54,13 @@ module Flow
         },
         partner_employed: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
-          # forward: :foo,
-          # check_answers: :bar,
+          forward: lambda do |application|
+            if application.partner.self_employed? || application.partner.armed_forces?
+              :use_ccms_employed
+            else
+              :has_dependants
+            end
+          end,
         },
       }.freeze
     end
