@@ -25,7 +25,7 @@ module OmniAuth
     private
 
       def new_access_token
-        oauth_client.client_credentials.get_token
+        oauth_client.client_credentials.get_token(scopes: "use_case_one,use_case_two")
       end
 
       def fake_bearer_token
