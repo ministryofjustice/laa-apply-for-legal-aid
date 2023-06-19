@@ -45,7 +45,7 @@ module Flow
           forward: lambda do |application|
             next_step = application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
 
-            application.employment_journey_ineligible? ? :use_ccms_employed : next_step
+            application.employment_journey_ineligible? ? :use_ccms_employment : next_step
           end,
         },
         proceedings_types: {
@@ -181,8 +181,8 @@ module Flow
         delete: {
           path: ->(application) { urls.providers_legal_aid_application_delete_path(application) },
         },
-        use_ccms_employed: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_employed_index_path(application) },
+        use_ccms_employment: {
+          path: ->(application) { urls.providers_legal_aid_application_use_ccms_employment_index_path(application) },
         },
         use_ccms_under16s: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_under16s_path(application) },

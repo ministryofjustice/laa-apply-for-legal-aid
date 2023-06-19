@@ -5,7 +5,7 @@
     <% if @legal_aid_application.employment_journey_ineligible? %>
       <div class="maximize-text-width">
         <p class="govuk-body"><%= t ".warning_list_title" %></p>
-        <%= list_from_translation_path ".use_ccms_employed.index.ineligible_employed" %>
+        <%= list_from_translation_path ".use_ccms_employment.index.ineligible_employed" %>
       </div>
     <% else %>
       <div class="maximize-text-width">

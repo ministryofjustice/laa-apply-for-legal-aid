@@ -1512,7 +1512,7 @@ en:
             does not use online banking for all of their current accounts
             will not give the LAA one-time access to their bank accounts
             is employed
-    use_ccms_employed:
+    use_ccms_employment:
       index:
         title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         head_title: You need to apply using CCMS

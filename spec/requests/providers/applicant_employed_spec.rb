@@ -25,7 +25,7 @@ RSpec.describe Providers::ApplicantEmployedController do
 
     context "when the application is in use_ccms state" do
       it "sets the state back to applicant details checked and removes the reason" do
-        legal_aid_application = create(:legal_aid_application, :use_ccms_employed)
+        legal_aid_application = create(:legal_aid_application, :use_ccms_self_employed)
         login_as legal_aid_application.provider
 
         get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application)
@@ -87,7 +87,7 @@ RSpec.describe Providers::ApplicantEmployedController do
         post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
              params: { applicant: { employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employment_index_path(legal_aid_application))
       end
     end
 
