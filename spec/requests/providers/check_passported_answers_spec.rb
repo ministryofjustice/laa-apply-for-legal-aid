@@ -278,7 +278,7 @@ RSpec.describe "check passported answers requests" do
 
       context "call to Check Financial Eligibility Service is successful" do
         before do
-          allow(CFE::SubmissionManager).to receive(:call).with(application.id).and_return(true)
+          allow(CFE::SubmissionRouter).to receive(:call).with(application).and_return(true)
           subject
         end
 
@@ -306,7 +306,7 @@ RSpec.describe "check passported answers requests" do
 
       context "call to Check Financial Eligibility Service is unsuccessful" do
         before do
-          allow(CFE::SubmissionManager).to receive(:call).with(application.id).and_return(false)
+          allow(CFE::SubmissionRouter).to receive(:call).with(application).and_return(false)
           subject
         end
 

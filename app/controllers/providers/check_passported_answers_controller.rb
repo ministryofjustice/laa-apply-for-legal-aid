@@ -31,7 +31,7 @@ module Providers
     def check_financial_eligibility
       result = false
       log_duration("CFE Submission :: Total call time for #{legal_aid_application.id}") do
-        result = CFE::SubmissionManager.call(legal_aid_application.id)
+        result = CFE::SubmissionRouter.call(legal_aid_application)
       end
       result
     end

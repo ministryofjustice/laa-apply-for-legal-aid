@@ -21,7 +21,7 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
                             used_regularly: true),
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
-    let(:staging_host) { "https://main-cfe-civil-uat.cloud-platform.service.justice.gov.uk/" }
+    let(:staging_host) { "https://cfe-civil-staging.cloud-platform.service.justice.gov.uk/" }
     let(:save_result) { true } # this is for once we switch to using CFECivil permanently
 
     before do
@@ -110,7 +110,7 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
                             used_regularly: true),
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
-    let(:staging_host) { "https://main-cfe-civil-uat.cloud-platform.service.justice.gov.uk/" }
+    let(:staging_host) { "https://cfe-civil-staging.cloud-platform.service.justice.gov.uk/" }
     let(:save_result) { true } # this is for once we switch to using CFECivil permanently
 
     context "when sending data to CFE fails with an unexpected error" do
