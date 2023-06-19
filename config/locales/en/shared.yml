@@ -738,3 +738,9 @@ en:
     scope_limitations:
       limitation_note:
         details: Give details of the %{scope_limitation}
+    employment_status:
+      heading_1: What is %{heading_individual}'s employment status?
+      employed: Employed
+      self_employed: Self-employed
+      armed_forces: Member of the armed forces
+      not_employed: None of the above

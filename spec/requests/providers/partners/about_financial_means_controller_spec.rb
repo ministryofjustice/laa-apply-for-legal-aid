@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Partners::AboutFinancialMeansController do
-  let(:legal_aid_application) { create(:legal_aid_application, :applicant_details_checked, :with_applicant) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/partners/about_financial_means" do
@@ -35,7 +35,7 @@ RSpec.describe Providers::Partners::AboutFinancialMeansController do
     end
 
     it "redirects to next page" do
-      expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+      expect(response).to redirect_to(providers_legal_aid_application_partners_employed_index_path(legal_aid_application))
     end
   end
 end

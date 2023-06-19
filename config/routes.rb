@@ -278,6 +278,7 @@ Rails.application.routes.draw do
         resource :address_lookup, only: %i[show update]
         resource :address_selection, only: %i[show update]
         resource :about_financial_means, only: %i[show update]
+        resources :employed, only: %i[index create]
       end
 
       scope module: :application_merits_task do

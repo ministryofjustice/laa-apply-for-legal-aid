@@ -303,6 +303,8 @@ en:
             national_insurance_number:
               blank: Enter a National Insurance number
               not_valid: Enter a valid National Insurance number
+            base:
+              none_selected: Select one or more employment types or None of the above if not employed
             shared_address_with_client:
               inclusion: Select yes if the partner's correspondence address is the same as your client's
             address_line_one:

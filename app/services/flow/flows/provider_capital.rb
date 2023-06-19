@@ -96,8 +96,7 @@ module Flow
         },
         partner_about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
-          # to be updated when next page is added to the flow
-          forward: :housing_benefits,
+          forward: :partner_employed,
         },
         housing_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_means_housing_benefits_path(application) },

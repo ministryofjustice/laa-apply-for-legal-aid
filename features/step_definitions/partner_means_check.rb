@@ -1,16 +1,6 @@
 Given("I complete the journey as far as regular outgoings") do
-  applicant = create(:applicant, :with_partner)
+  @legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner)
 
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
-    :with_employed_applicant,
-    :with_single_employment,
-    :with_extra_employment_information,
-    :with_non_passported_state_machine,
-    :provider_confirming_applicant_eligibility,
-    applicant:,
-  )
   login_as @legal_aid_application.provider
 
   visit(providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application))

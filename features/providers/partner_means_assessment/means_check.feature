@@ -8,6 +8,9 @@ Feature: partner_means_assessment means check
     And I click "Save and continue"
     Then I should be on a page with title "Complete the partner's financial assessment"
 
+    When I click "Save and continue"
+    Then I should be on a page with title "What is the partner's employment status?"
+
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to navigate to partners means check when doing open banking upload
     Given the feature flag for partner_means_assessment is enabled

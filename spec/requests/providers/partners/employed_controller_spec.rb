@@ -1,0 +1,88 @@
+require "rails_helper"
+
+RSpec.describe Providers::Partners::EmployedController do
+  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:provider) { legal_aid_application.provider }
+
+  describe "GET /providers/applications/:legal_aid_application_id/partners/employed" do
+    subject(:get_request) { get providers_legal_aid_application_partners_employed_index_path(legal_aid_application) }
+
+    context "when the provider is not authenticated" do
+      before { get_request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the provider is authenticated" do
+      before do
+        login_as provider
+        get_request
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
+  describe "POST /providers/applications/:legal_aid_application_id/partners/employed" do
+    subject(:post_request) { post providers_legal_aid_application_partners_employed_index_path(legal_aid_application), params: }
+
+    let(:params) { {} }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
+
+    context "when the provider is not authenticated" do
+      before { post_request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
+    context "with invalid params" do
+      it "renders an error and does not update the record" do
+        login_as provider
+
+        post_request
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("govuk-error-summary")
+        expect(response.body).to include(I18n.t("activemodel.errors.models.partner.attributes.base.none_selected"))
+        expect(legal_aid_application.reload.partner.employed).to be_nil
+      end
+    end
+
+    context "with valid params" do
+      let(:params) { { partner: { employed: "true" } } }
+
+      it "updates the record" do
+        login_as provider
+
+        post_request
+
+        partner = legal_aid_application.reload.partner
+        expect(partner).to be_employed
+      end
+    end
+
+    context "when the partner is eligible for employment journey" do
+      it "redirects to has dependants page for applications" do
+        login_as provider
+
+        post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
+             params: { partner: { employed: "true" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+      end
+    end
+
+    context "when the application is ineligible for employment journey" do
+      it "redirects to the use ccms employed page" do
+        login_as provider
+
+        post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
+             params: { partner: { self_employed: "true" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
+      end
+    end
+  end
+end
