@@ -15,8 +15,9 @@
     <% end %>
     <ol class="app-task-list">
       <%= render "task_list_section", name: t(".application_section_heading"), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
-
-      <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t(".proceeding_heading") %></h2>
+      <li>
+        <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t(".proceeding_heading") %></h2>
+      </li>
       <% @merits_tasks[:proceedings].each_with_index do |(_, proceeding), index| %>
         <%= render "task_list_section", name: proceeding[:name], tasks: proceeding[:tasks], ccms_code: @merits_tasks[:proceedings].keys[index], section_number: index + 2 %>
       <% end %>

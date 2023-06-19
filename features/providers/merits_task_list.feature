@@ -67,7 +67,6 @@ Feature: Merits task list
     Then I should be on a page showing 'Upload supporting evidence'
     And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
-    And the page is accessible
     Then I click Check Your Merits Answers Change link for 'Success Likely' for 'Inherent jurisdiction high court injunction'
     Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
     And I click 'Save and continue'

@@ -66,7 +66,15 @@ Then("I deselect {string}") do |option|
 end
 
 Then("I click {string}") do |button_name|
+  steps %(Then the page should be axe clean skipping: region, aria-allowed-attr) if run_axe?
   click_button(button_name)
+end
+
+def run_axe?
+  [
+    ENV.fetch("INC_AXE", nil),
+    ENV.fetch("CI", nil),
+  ].any?
 end
 
 Then("I click {string} {int} times") do |button_name, number|

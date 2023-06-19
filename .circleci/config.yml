@@ -219,7 +219,7 @@ jobs:
           - coverage_results
 
   integration_tests:
-    parallelism: 3
+    parallelism: 10
     executor: test-executor
     steps:
     - checkout
