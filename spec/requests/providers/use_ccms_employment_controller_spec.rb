@@ -25,7 +25,7 @@ RSpec.describe Providers::UseCCMSEmploymentController do
       end
 
       it "shows text to use CCMS" do
-        expect(response.body).to include(I18n.t("providers.use_ccms_employment.index.title_html"))
+        expect(response.body).to include(I18n.t("shared.use_ccms.title_html"))
       end
 
       it "calls the HMRC::CreateResponsesService" do
