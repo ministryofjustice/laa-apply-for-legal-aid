@@ -1502,35 +1502,20 @@ en:
         sorted: Sorted
     use_ccms:
       show:
-        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        head_title: You need to apply using CCMS
         warning: "You cannot use this service if your client:"
-        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        back_to_applications: Back to my applications
         online_banking_consent:
-          list: |
-            does not use online banking for all of their current accounts
-            will not give the LAA one-time access to their bank accounts
-            is employed
+          - does not use online banking for all of their current accounts
+          - will not give the LAA one-time access to their bank accounts
+          - is employed
     use_ccms_employment:
       index:
-        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        head_title: You need to apply using CCMS
-        warning: We're not currently accepting applications for employed clients.
-        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        back_to_applications: Back to my applications
         warning_list_title: 'You cannot use this service if your client is:'
         ineligible_employed:
-          list: |
-            self-employed
-            a member of the armed forces
+          - self-employed
+          - a member of the armed forces
     use_ccms_under16s:
       show:
-        title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        head_title: You need to apply using CCMS
         warning: You cannot use this service if your client is under 16 years old
-        continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
-        back_to_applications: Back to my applications
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?

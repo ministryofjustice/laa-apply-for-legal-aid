@@ -1,0 +1,21 @@
+<div class="interruption-panel">
+  <%= page_template(page_title: t(".title_html"), head_title: t(".head_title"), column_width: "full", template: :basic) do %>
+    <%= page_heading(size: "l") %>
+
+    <div class="maximize-text-width">
+      <p class="govuk-body"><%= body_text %></p>
+      <% if local_assigns[:list] %>
+        <ul class="govuk-list govuk-list--bullet">
+          <% list.each do |bullet| %>
+            <li><%= bullet %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class='govuk-button-group'>
+      <%= link_to_accessible t(".continue_in_ccms_html"), "https://portal.legalservices.gov.uk", class: "govuk-button white-button", role: "button" %>
+      <%= link_to_accessible t(".back_to_applications"), providers_legal_aid_applications_path, class: "govuk-body black_text_on_focus" %>
+    </div>
+  <% end %>
+</div>

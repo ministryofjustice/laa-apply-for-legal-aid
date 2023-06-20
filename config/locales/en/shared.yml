@@ -744,3 +744,9 @@ en:
       self_employed: Self-employed
       armed_forces: Member of the armed forces
       not_employed: None of the above
+    use_ccms:
+      head_title: You need to apply using CCMS
+      title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+      continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
+      back_to_applications: Back to my applications
+
