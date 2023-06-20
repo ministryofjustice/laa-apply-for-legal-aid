@@ -32,9 +32,20 @@ RSpec.describe Providers::UseCCMSEmploymentController do
         expect(HMRC::CreateResponsesService).to have_received(:call).once
       end
 
-      it "sets state to use_ccms and reason to self employed" do
-        expect(legal_aid_application.reload.state).to eq "use_ccms"
-        expect(legal_aid_application.ccms_reason).to eq "applicant_self_employed"
+      context "and the applicant is self employed" do
+        it "sets state to use_ccms and reason to applicant_self_employed" do
+          expect(legal_aid_application.reload.state).to eq "use_ccms"
+          expect(legal_aid_application.ccms_reason).to eq "applicant_self_employed"
+        end
+      end
+
+      context "and the applicant is a member of the armed forces" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_in_armed_forces) }
+
+        it "sets state to use_ccms and reason to applicant_armed_forcess" do
+          expect(legal_aid_application.reload.state).to eq "use_ccms"
+          expect(legal_aid_application.ccms_reason).to eq "applicant_armed_forces"
+        end
       end
     end
   end

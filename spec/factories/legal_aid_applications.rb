@@ -22,6 +22,10 @@ FactoryBot.define do
       applicant { build(:applicant, self_employed: true) }
     end
 
+    trait :with_applicant_in_armed_forces do
+      applicant { build(:applicant, armed_forces: true) }
+    end
+
     trait :with_single_employment do
       employments { [association(:employment)] }
     end
@@ -55,11 +59,13 @@ FactoryBot.define do
     end
 
     trait :with_applicant_and_self_employed_partner do
-      transient do
-        with_bank_accounts { 0 }
-      end
-      applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
+      applicant { build(:applicant, :with_address, :with_partner) }
       partner { build(:partner, self_employed: true) }
+    end
+
+    trait :with_applicant_and_partner_in_armed_forces do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, armed_forces: true) }
     end
 
     trait :with_partner_and_joint_benefit do

@@ -27,9 +27,20 @@ RSpec.describe Providers::Partners::UseCCMSEmploymentController do
         expect(response.body).to include(I18n.t("shared.use_ccms.title_html"))
       end
 
-      it "sets state to use_ccms and reason to partner_self_employed" do
-        expect(legal_aid_application.reload.state).to eq "use_ccms"
-        expect(legal_aid_application.ccms_reason).to eq "partner_self_employed"
+      context "and the partner is self employed" do
+        it "sets state to use_ccms and reason to partner_self_employed" do
+          expect(legal_aid_application.reload.state).to eq "use_ccms"
+          expect(legal_aid_application.ccms_reason).to eq "partner_self_employed"
+        end
+      end
+
+      context "and the partner is a member of the armed forces" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner_in_armed_forces) }
+
+        it "sets state to use_ccms and reason to partner_armed_forces" do
+          expect(legal_aid_application.reload.state).to eq "use_ccms"
+          expect(legal_aid_application.ccms_reason).to eq "partner_armed_forces"
+        end
       end
     end
   end
