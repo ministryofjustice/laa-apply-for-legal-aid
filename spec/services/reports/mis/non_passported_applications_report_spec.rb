@@ -32,7 +32,7 @@ module Reports
 
         it "returns data for all non-passorted applications after Sep 21st" do
           expect(lines[1]).to eq %(checking_citizen_answers,,#{username},#{email},#{created_at},,#{applicant.full_name},"")
-          expect(lines[2]).to match(/^use_ccms,self_employed,/)
+          expect(lines[2]).to match(/^use_ccms,applicant_self_employed,/)
           expect(lines[3]).to match(/^assessment_submitted,.*#{submission_date},.*$/)
         end
       end
