@@ -51,7 +51,7 @@ FactoryBot.define do
         with_bank_accounts { 0 }
       end
       applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
-      partner { build(:partner) }
+      partner { build(:partner, self_employed: true) }
     end
 
     trait :with_partner_and_joint_benefit do

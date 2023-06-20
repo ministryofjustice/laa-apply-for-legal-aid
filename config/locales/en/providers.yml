@@ -580,6 +580,12 @@ en:
           label_1: postcode
           postcode: Postcode
           submit_button: Find address
+      use_ccms_employment:
+        index:
+          warning_list_title: "You cannot use this service if your client's partner is:"
+          ineligible_employed:
+            - self-employed
+            - a member of the armed forces
     has_national_insurance_numbers:
       show:
         page_title: Does the client have a National Insurance number?

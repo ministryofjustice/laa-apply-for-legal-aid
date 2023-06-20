@@ -74,14 +74,25 @@ RSpec.describe Providers::Partners::EmployedController do
       end
     end
 
-    context "when the application is ineligible for employment journey" do
-      it "redirects to the use ccms employed page" do
+    context "when the partner is self employed" do
+      it "redirects to the use ccms page" do
         login_as provider
 
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
              params: { partner: { self_employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_partners_use_ccms_employment_index_path(legal_aid_application))
+      end
+    end
+
+    context "when the partner is in the armed forces" do
+      it "redirects to the use ccms page" do
+        login_as provider
+
+        post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
+             params: { partner: { armed_forces: "true" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_partners_use_ccms_employment_index_path(legal_aid_application))
       end
     end
   end

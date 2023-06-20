@@ -56,11 +56,14 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
           forward: lambda do |application|
             if application.partner.self_employed? || application.partner.armed_forces?
-              :use_ccms_employed
+              :partner_use_ccms_employment
             else
               :has_dependants
             end
           end,
+        },
+        partner_use_ccms_employment: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_use_ccms_employment_index_path(application) },
         },
       }.freeze
     end

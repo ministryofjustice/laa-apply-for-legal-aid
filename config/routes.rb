@@ -279,6 +279,7 @@ Rails.application.routes.draw do
         resource :address_selection, only: %i[show update]
         resource :about_financial_means, only: %i[show update]
         resources :employed, only: %i[index create]
+        resources :use_ccms_employment, only: %i[index]
       end
 
       scope module: :application_merits_task do
