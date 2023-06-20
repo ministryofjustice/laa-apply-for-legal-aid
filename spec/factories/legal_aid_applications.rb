@@ -51,6 +51,14 @@ FactoryBot.define do
         with_bank_accounts { 0 }
       end
       applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
+      partner { build(:partner) }
+    end
+
+    trait :with_applicant_and_self_employed_partner do
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
       partner { build(:partner, self_employed: true) }
     end
 
