@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CFECivil::SubmissionBuilder, :vcr do
   describe ".call" do
-    subject(:call) { described_class.call(legal_aid_application, save_result:) }
+    subject(:call) { described_class.call(legal_aid_application) }
 
     let(:legal_aid_application) do
       create(:legal_aid_application,
@@ -22,7 +22,6 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
     let(:staging_host) { "https://cfe-civil-staging.cloud-platform.service.justice.gov.uk/" }
-    let(:save_result) { true } # this is for once we switch to using CFECivil permanently
 
     before do
       allow(Rails.configuration.x).to receive(:cfe_civil_host).and_return(staging_host)
@@ -38,34 +37,16 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
       end
     end
 
-    context "when not saving the result" do
-      let(:save_result) { false } # this is only while running comparison
-
-      it "generates the expected JSON" do
-        expect(call).to be_a CFE::Submission
-      end
-
-      it "does not save a submission object" do
-        expect { call }.not_to change(CFE::Submission, :count)
-      end
-
-      it "does not create a submission_history object" do
-        expect { call }.not_to change(CFE::SubmissionHistory, :count)
-      end
+    it "generates the expected JSON" do
+      expect(call).to be_a CFE::V6::Result
     end
 
-    context "when saving the result" do
-      it "generates the expected JSON" do
-        expect(call).to be_a CFE::V6::Result
-      end
+    it "does not save a submission object" do
+      expect { call }.to change(CFE::Submission, :count).by 1
+    end
 
-      it "does not save a submission object" do
-        expect { call }.to change(CFE::Submission, :count).by 1
-      end
-
-      it "does not create a submission_history object" do
-        expect { call }.to change(CFE::SubmissionHistory, :count).by 2
-      end
+    it "does not create a submission_history object" do
+      expect { call }.to change(CFE::SubmissionHistory, :count).by 2
     end
 
     context "when sending data to CFE fails with a 422 error" do
@@ -92,7 +73,7 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
   describe "#call" do
     subject(:call) { submission_builder.call }
 
-    let(:submission_builder) { described_class.new(legal_aid_application, save_result:) }
+    let(:submission_builder) { described_class.new(legal_aid_application) }
     let(:legal_aid_application) do
       create(:legal_aid_application,
              :with_everything,
@@ -111,7 +92,6 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
     let(:staging_host) { "https://cfe-civil-staging.cloud-platform.service.justice.gov.uk/" }
-    let(:save_result) { true } # this is for once we switch to using CFECivil permanently
 
     context "when sending data to CFE fails with an unexpected error" do
       before do

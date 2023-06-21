@@ -5,13 +5,12 @@ module CFECivil
     delegate :cfe_result, to: :submission
     attr_reader :legal_aid_application
 
-    def initialize(legal_aid_application, save_result: false)
+    def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
-      @save_result = save_result
     end
 
-    def self.call(legal_aid_application, save_result: false)
-      new(legal_aid_application, save_result:).call
+    def self.call(legal_aid_application)
+      new(legal_aid_application).call
     end
 
     def call
@@ -71,10 +70,8 @@ module CFECivil
       raw_response = post_request
       parsed_response = parse_json_response(raw_response.body)
       history = build_submission_history(raw_response)
-      if @save_result
-        history.save!
-        submission.save!
-      end
+      history.save!
+      submission.save!
 
       case raw_response.status
       when 200
@@ -96,17 +93,13 @@ module CFECivil
 
     def process_response
       submission.cfe_result = @response.body
-      if @save_result
-        submission.results_obtained!
-        build_submission_history(@response).save!
-        write_cfe_result
-      else
-        submission
-      end
+      submission.results_obtained!
+      build_submission_history(@response).save!
+      write_cfe_result
     end
 
     def mark_as_failed
-      submission.fail! if @save_result
+      submission.fail!
     end
 
     def cfe_version
