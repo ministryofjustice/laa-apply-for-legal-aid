@@ -12,6 +12,7 @@ RSpec.describe CFE::CompareResults do
       allow(sub_builder).to receive(:request_body).and_return({})
       allow(CFECivil::SubmissionBuilder).to receive(:new).and_return(sub_builder)
       allow(CFE::StoreCompareResult).to receive(:new).and_return(store_compare_result)
+      allow(CFE::ResetGoogleSheetFilter).to receive(:call).and_return(true)
     end
 
     let(:fake_v6_result) { file_fixture("cfe_civil_comparison/v6/compare_result.json").read }

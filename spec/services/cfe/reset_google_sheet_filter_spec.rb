@@ -1,21 +1,20 @@
 require "rails_helper"
 
 module CFE
-  RSpec.describe StoreCompareResult do
-    subject(:call_submit_data) { described_class.call(data_submitted) }
+  RSpec.describe ResetGoogleSheetFilter do
+    subject(:call_reset) { described_class.call }
 
     let(:service_creds) { instance_double(Google::Auth::ServiceAccountCredentials, fetch_access_token!: {}) }
     let(:sheet_service) { instance_double(Google::Apis::SheetsV4::SheetsService) }
     let(:spreadsheet) { instance_spy(Google::Apis::SheetsV4::Spreadsheet) }
-    let(:data_submitted) { ["Fake", "data", true] }
-    let(:append_value_response) { instance_double(Google::Apis::SheetsV4::AppendValuesResponse) }
-    let(:update_value_response) { instance_double(Google::Apis::SheetsV4::UpdateValuesResponse) }
-    let(:output_response) { "Sheet1!A2:A3" }
+    let(:sheet) { instance_spy(Google::Apis::SheetsV4::Spreadsheet) }
+    let(:sheet_properties) { instance_spy(Google::Apis::SheetsV4::SheetProperties) }
+    let(:sheet_id) { "123456789" }
 
     before do
-      allow(sheet_service).to receive(:append_spreadsheet_value).and_return(append_value_response)
-      allow(append_value_response).to receive(:updates).and_return(update_value_response)
-      allow(update_value_response).to receive(:updated_range).and_return(output_response)
+      allow(spreadsheet).to receive(:sheets).and_return([sheet])
+      allow(sheet).to receive(:properties).and_return(sheet_properties)
+      allow(sheet_properties).to receive(:sheet_id).and_return(sheet_id)
     end
 
     it "submits data to the spreadsheet" do
@@ -24,9 +23,9 @@ module CFE
       expect(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service).once
       expect(sheet_service).to receive(:authorization=).once
       expect(sheet_service).to receive(:get_spreadsheet).and_return(spreadsheet).once
-      expect(sheet_service).to receive(:append_spreadsheet_value).once
+      expect(sheet_service).to receive(:batch_update_spreadsheet).once
 
-      call_submit_data
+      call_reset
     end
   end
 end

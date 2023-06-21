@@ -7,6 +7,7 @@ module CFE
     end
 
     def call
+      ResetGoogleSheetFilter.call
       legal_aid_applications.each do |legal_aid_application|
         compare_values_for legal_aid_application
       end
