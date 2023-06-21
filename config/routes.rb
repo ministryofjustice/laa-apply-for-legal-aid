@@ -280,6 +280,7 @@ Rails.application.routes.draw do
         resource :about_financial_means, only: %i[show update]
         resources :employed, only: %i[index create]
         resources :use_ccms_employment, only: %i[index]
+        resource :full_employment_details, only: %i[show update]
       end
 
       scope module: :application_merits_task do

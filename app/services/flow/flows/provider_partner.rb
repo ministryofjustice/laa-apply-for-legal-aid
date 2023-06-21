@@ -56,7 +56,9 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
           forward: lambda do |application|
             if application.partner.self_employed? || application.partner.armed_forces?
-              :partner_use_ccms_employment
+              :partner_use_ccms_employed
+            elsif application.partner.employed? && !application.partner.has_national_insurance_number?
+              :partner_full_employment_details
             else
               :has_dependants
             end
@@ -64,6 +66,11 @@ module Flow
         },
         partner_use_ccms_employment: {
           path: ->(application) { urls.providers_legal_aid_application_partners_use_ccms_employment_index_path(application) },
+        },
+        partner_full_employment_details: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
+          forward: :has_dependants,
+          check_answers: :check_provider_answers,
         },
       }.freeze
     end
