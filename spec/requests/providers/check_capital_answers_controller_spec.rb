@@ -92,7 +92,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
     context "when logged in as an authenticated provider" do
       before do
         login
-        allow(CFE::SubmissionRouter).to receive(:call).with(legal_aid_application).and_return(cfe_result)
+        allow(CFECivil::SubmissionBuilder).to receive(:call).with(legal_aid_application).and_return(cfe_result)
       end
 
       context "with a successful Check Financial Eligibility Service call" do
@@ -116,7 +116,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
 
           it "calls CFE::SubmissionRouter" do
             request
-            expect(CFE::SubmissionRouter).to have_received(:call).with(legal_aid_application)
+            expect(CFECivil::SubmissionBuilder).to have_received(:call).with(legal_aid_application)
           end
         end
 
@@ -132,7 +132,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
 
           it "calls CFE::SubmissionManager" do
             request
-            expect(CFE::SubmissionRouter).to have_received(:call).with(legal_aid_application)
+            expect(CFECivil::SubmissionBuilder).to have_received(:call).with(legal_aid_application)
           end
         end
 
@@ -151,7 +151,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
 
           it "does not calls CFE::SubmissionManager" do
             request
-            expect(CFE::SubmissionRouter).not_to have_received(:call)
+            expect(CFECivil::SubmissionBuilder).not_to have_received(:call)
           end
         end
       end
