@@ -1,28 +1,6 @@
-<%= form_with(model: @form,
-              url: providers_legal_aid_application_means_full_employment_details_path(@legal_aid_application),
-              method: :patch,
-              local: true) do |form| %>
-
-  <% page_heading = @legal_aid_application.has_multiple_employments? ? t(".page_heading_multi_jobs") : t(".page_heading_no_info") %>
-
-  <%= page_template page_title: page_heading, caption: t("generic.client_means_caption"), form: do %>
-      <% if @legal_aid_application.has_multiple_employments? %>
-        <h2 class="govuk-body-l"><%= t(".mutiple_employment_info") %></h2>
-      <% else %>
-        <h2 class="govuk-body-l"><%= t(".no_employment_info") %></h2>
-      <% end %>
-      <p class="govuk-body"><%= t(".enter_details") %></p>
-      <ul class="govuk-list govuk-list--bullet">
-        <% t(".details").each do |bullet| %>
-          <li><%= bullet %></li>
-        <% end %>
-      </ul>
-      <p class="govuk-body"><%= t(".evidence") %></p>
-
-      <%= form.govuk_text_area :full_employment_details,
-                               label: { text: t(".employment_details_header"), tag: "h2", size: "m" },
-                               rows: 10 %>
-
-    <%= next_action_buttons(show_draft: true, form:) %>
-  <% end %>
-<% end %>
+<% suffix = @legal_aid_application.has_multiple_employments? ? :multiple_employments : :no_data %>
+<%= render "shared/full_employment_details",
+           suffix:,
+           client_or_partner: :client,
+           individual: "your client",
+           url: providers_legal_aid_application_means_full_employment_details_path(@legal_aid_application) %>
