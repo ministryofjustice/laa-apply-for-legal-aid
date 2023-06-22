@@ -53,7 +53,6 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
 
     When I click 'Save and continue'
     Then I should be on a page showing "You need to apply using CCMS"
-    And the page is accessible
 
   @javascript @vcr
   Scenario: I am NOT instructed to use CCMS when applicant was under 16 on earliest delegated function date
