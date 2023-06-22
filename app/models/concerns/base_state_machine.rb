@@ -9,13 +9,16 @@ class BaseStateMachine < ApplicationRecord
   end
 
   VALID_CCMS_REASONS = %i[
-    employed
     no_online_banking
     no_applicant_consent
     non_passported
     offline_accounts
     under_16_blocked
     unknown
+    applicant_self_employed
+    applicant_armed_forces
+    partner_self_employed
+    partner_armed_forces
   ].freeze
 
   PRE_DWP_STATES = %i[
@@ -108,6 +111,7 @@ class BaseStateMachine < ApplicationRecord
                     delegated_functions_used
                     provider_confirming_applicant_eligibility
                     applicant_entering_means
+                    provider_assessing_means
                     use_ccms
                   ],
                   to: :use_ccms,

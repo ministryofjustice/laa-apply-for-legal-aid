@@ -27,7 +27,7 @@ RSpec.describe Providers::UseCCMSController do
 
         it "shows text to use CCMS" do
           subject
-          expect(response.body).to include(I18n.t("providers.use_ccms.show.title_html"))
+          expect(response.body).to include(I18n.t("shared.use_ccms.title_html"))
         end
 
         it "sets the state to use_ccms" do
@@ -37,7 +37,7 @@ RSpec.describe Providers::UseCCMSController do
       end
 
       context "when state already is use_ccms" do
-        before { legal_aid_application.use_ccms!(:employed) }
+        before { legal_aid_application.use_ccms!(:applicant_self_employed) }
 
         it "returns http success" do
           subject
@@ -49,10 +49,10 @@ RSpec.describe Providers::UseCCMSController do
           subject
         end
 
-        it "leaves the ccms reason as :employed" do
+        it "leaves the ccms reason as :applicant_self_employed" do
           allow_any_instance_of(ActionDispatch::Request).to receive(:referer).and_return("http://www.example.com/providers")
           subject
-          expect(legal_aid_application.reload.ccms_reason).to eq "employed"
+          expect(legal_aid_application.reload.ccms_reason).to eq "applicant_self_employed"
         end
       end
     end

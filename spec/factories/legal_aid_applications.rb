@@ -18,6 +18,14 @@ FactoryBot.define do
       applicant { build(:applicant, employed: true, with_bank_accounts:) }
     end
 
+    trait :with_self_employed_applicant do
+      applicant { build(:applicant, self_employed: true) }
+    end
+
+    trait :with_applicant_in_armed_forces do
+      applicant { build(:applicant, armed_forces: true) }
+    end
+
     trait :with_single_employment do
       employments { [association(:employment)] }
     end
@@ -48,6 +56,16 @@ FactoryBot.define do
       end
       applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
       partner { build(:partner) }
+    end
+
+    trait :with_applicant_and_self_employed_partner do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, self_employed: true) }
+    end
+
+    trait :with_applicant_and_partner_in_armed_forces do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, armed_forces: true) }
     end
 
     trait :with_partner_and_joint_benefit do
@@ -240,9 +258,9 @@ FactoryBot.define do
       end
     end
 
-    trait :use_ccms_employed do
+    trait :use_ccms_self_employed do
       before(:create) do |application|
-        application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :employed)
+        application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :applicant_self_employed)
       end
     end
 
