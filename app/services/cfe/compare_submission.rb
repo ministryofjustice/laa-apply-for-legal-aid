@@ -106,6 +106,7 @@ module CFE
     def override_message(key)
       overrides = {
         "assessment/capital/capital_items/vehicles" => "override_vehicle",
+        "assessment/remarks/employment/multiple_employments" => "override_employment_remarks",
       }
       override = overrides[key.join("/")]
       return unless override
@@ -118,6 +119,14 @@ module CFE
       v6_value = @v6_result.dig(*key)
       if v6_value.empty? && v5_value.present?
         @results["assessment/capital/capital_items/vehicles"] = "CFE-Civil did not return a vehicle"
+      end
+    end
+
+    def override_employment_remarks(key)
+      v5_value = @v5_result.dig(*key)
+      v6_value = @v6_result.dig(*key)
+      if v6_value.nil? && v5_value.present?
+        @results[key] = "We did not send employments to CFE_Civil so no remarks"
       end
     end
 
