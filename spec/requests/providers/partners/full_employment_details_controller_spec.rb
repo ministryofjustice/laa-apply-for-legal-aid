@@ -55,6 +55,10 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         it "updates employment details for the partner" do
           expect(partner.reload.full_employment_details).to eq full_employment_details
         end
+
+        it "redirects to the has_dependants page" do
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        end
       end
 
       context "when no text is provided and params are invalid" do
