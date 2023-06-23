@@ -172,7 +172,14 @@ RSpec.describe Flow::ProceedingLoop do
       context "and is on the substantive_defaults page" do
         let(:provider_step) { "substantive_defaults" }
 
-        before { proceeding.update!(accepted_substantive_defaults: true) }
+        before do
+          legal_aid_application.proceedings.each do |proceeding|
+            proceeding.update!(used_delegated_functions: true,
+                               client_involvement_type_ccms_code: "A",
+                               accepted_emergency_defaults: true,
+                               accepted_substantive_defaults: true)
+          end
+        end
 
         it { is_expected.to be :limitations }
       end
@@ -199,21 +206,43 @@ RSpec.describe Flow::ProceedingLoop do
       it { is_expected.to eq first_proceeding }
     end
 
-    context "when the user has answered the DF question for the first of three proceedings" do
+    context "when the user has answered only the DF question for the first of three proceedings" do
       let(:provider_step) { "delegated_functions" }
 
       before { first_proceeding.update!(used_delegated_functions: false) }
 
-      it { is_expected.to eq second_proceeding }
+      it { is_expected.to eq first_proceeding }
     end
 
-    context "when the user has answered the DF question for all three proceedings" do
+    context "when the user has answered all default questions for the first of three proceedings" do
       let(:provider_step) { "delegated_functions" }
 
       before do
-        first_proceeding.update!(used_delegated_functions: false)
-        second_proceeding.update!(used_delegated_functions: false)
-        third_proceeding.update!(used_delegated_functions: false)
+        first_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
+      end
+
+      it { is_expected.to eq second_proceeding }
+    end
+
+    context "when the user has answered all questions for all three proceedings" do
+      let(:provider_step) { "delegated_functions" }
+
+      before do
+        first_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
+        second_proceeding.update!(used_delegated_functions: false,
+                                  client_involvement_type_ccms_code: "A",
+                                  accepted_emergency_defaults: true,
+                                  accepted_substantive_defaults: true)
+        third_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
       end
 
       it { is_expected.to eq first_proceeding }
@@ -224,9 +253,18 @@ RSpec.describe Flow::ProceedingLoop do
 
       before do
         allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => second_proceeding.id })
-        first_proceeding.update!(used_delegated_functions: false)
-        second_proceeding.update!(used_delegated_functions: false)
-        third_proceeding.update!(used_delegated_functions: false)
+        first_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
+        second_proceeding.update!(used_delegated_functions: false,
+                                  client_involvement_type_ccms_code: "A",
+                                  accepted_emergency_defaults: true,
+                                  accepted_substantive_defaults: true)
+        third_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
       end
 
       it { is_expected.to eq third_proceeding }
@@ -237,9 +275,18 @@ RSpec.describe Flow::ProceedingLoop do
       let!(:new_proceeding) { create(:proceeding, :se014, legal_aid_application:) }
 
       before do
-        first_proceeding.update!(used_delegated_functions: false)
-        second_proceeding.update!(used_delegated_functions: false)
-        third_proceeding.update!(used_delegated_functions: false)
+        first_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
+        second_proceeding.update!(used_delegated_functions: false,
+                                  client_involvement_type_ccms_code: "A",
+                                  accepted_emergency_defaults: true,
+                                  accepted_substantive_defaults: true)
+        third_proceeding.update!(used_delegated_functions: false,
+                                 client_involvement_type_ccms_code: "A",
+                                 accepted_emergency_defaults: true,
+                                 accepted_substantive_defaults: true)
       end
 
       it { is_expected.to eq new_proceeding }

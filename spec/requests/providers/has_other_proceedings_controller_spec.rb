@@ -14,7 +14,10 @@ RSpec.describe Providers::HasOtherProceedingsController do
   before do
     if mark_as_complete
       legal_aid_application.proceedings.in_order_of_addition.incomplete.each do |proceeding|
-        proceeding.update!(used_delegated_functions: false)
+        proceeding.update!(used_delegated_functions: false,
+                           client_involvement_type_ccms_code: "A",
+                           accepted_emergency_defaults: true,
+                           accepted_substantive_defaults: true)
       end
     end
     login_as provider
