@@ -220,7 +220,7 @@ RSpec.describe Flow::ProceedingLoop do
       before do
         first_proceeding.update!(used_delegated_functions: false,
                                  client_involvement_type_ccms_code: "A",
-                                 accepted_emergency_defaults: true,
+                                 accepted_emergency_defaults: nil,
                                  accepted_substantive_defaults: true)
       end
 
