@@ -13,7 +13,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     subject(:call) { described_class.call(legal_aid_application) }
 
     before do
-      allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_return(dummy_benefits)
+      allow(CFECivil::ObtainStateBenefitTypesService).to receive(:call).and_return(dummy_benefits)
     end
 
     context "there are no state benefit transactions" do
