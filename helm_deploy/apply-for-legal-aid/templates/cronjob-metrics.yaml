@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: {{ .Release.Name }}-metrics
   labels:
-    app: {{ template "apply-for-legal-aid.name" . }}
+    app: {{ template "apply-for-legal-aid.name" . }}-cron-metrics
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}

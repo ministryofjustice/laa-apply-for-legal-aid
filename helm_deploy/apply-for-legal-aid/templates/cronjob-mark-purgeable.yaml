@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: {{ .Release.Name | trunc 26 }}-mark-purgeable
   labels:
-    app: {{ template "apply-for-legal-aid.name" . }}
+    app: {{ template "apply-for-legal-aid.name" . }}-cron-mark-purgeable
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
