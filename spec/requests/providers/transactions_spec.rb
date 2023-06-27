@@ -9,7 +9,7 @@ RSpec.describe Providers::TransactionsController do
   let(:transaction_type) { create(:transaction_type, :maintenance_in) }
   let(:bank_provider) { create(:bank_provider, applicant:) }
   let(:bank_account) { create(:bank_account, bank_provider:) }
-  let(:cfe_state_benefits_url) { "#{Rails.configuration.x.check_financial_eligibility_host}/state_benefit_type" }
+  let(:cfe_state_benefits_url) { "#{Rails.configuration.x.cfe_civil_host}/state_benefit_type" }
   let(:cfe_state_benefit_response) { CFE::MockStateBenefitTypeResult.full_list.to_json }
 
   before do
@@ -87,7 +87,7 @@ RSpec.describe Providers::TransactionsController do
       end
 
       context "is un-successful" do
-        before { allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
+        before { allow(CFECivil::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
 
         it "redirects to the problem path as it cannot show the list of excluded benefits" do
           subject
