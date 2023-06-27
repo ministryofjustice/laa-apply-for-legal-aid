@@ -46,29 +46,3 @@ https://pauladamsmith.com/blog/2011/05/go_time.html
     {{ "* * * * *" }}
   {{- end -}}
 {{- end -}}
-
-{{/*
-Defining cron schedule for the backup db job
-In production the job runs once per hour between 7am and 9pm
-In UAT and Staging, we dont run the job by scheduling it for 31st February.
-*/}}
-{{- define "apply-for-legal-aid.cronjob-schedule-hourly-db-backup" -}}
-  {{- if contains "-production" .Release.Namespace -}}
-    {{ "3 7-21 * * *"}}
-  {{- else -}}
-    {{ "0 0 31 2 *" }}
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Defining cron schedule for the cleanup db backup job
-In production the job runs once per day at 7am
-In UAT and Staging, we dont run the job by scheduling it for 31st February
-*/}}
-{{- define "apply-for-legal-aid.cronjob-schedule-db-backup-cleanup" -}}
-  {{- if contains "-production" .Release.Namespace -}}
-    {{ "0 7 * * *"}}
-  {{- else -}}
-    {{ "0 0 31 2 *" }}
-  {{- end -}}
-{{- end -}}
