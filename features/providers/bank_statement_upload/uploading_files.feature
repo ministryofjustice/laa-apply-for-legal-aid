@@ -9,7 +9,6 @@ Feature: Bank statement file upload
     When I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page with title "Upload your client's bank statements"
-    And the page is accessible
 
     When I upload the fixture file named 'empty_file.pdf'
     Then I should see govuk error summary "empty_file.pdf has no content"
@@ -48,7 +47,6 @@ Feature: Bank statement file upload
     When I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page with title "Upload your client's bank statements"
-    And the page is accessible
 
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'

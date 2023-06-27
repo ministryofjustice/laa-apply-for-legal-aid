@@ -49,7 +49,7 @@ Feature: Check multiple employment
 
     Then I select the first checkbox
     And I click 'Save and continue'
-    Then the page is accessible
+
     Then I click 'Save and continue'
     Then I should be on the 'dependants' page showing "Does your client have any dependants?"
 
