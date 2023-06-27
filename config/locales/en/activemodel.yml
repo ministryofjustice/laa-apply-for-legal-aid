@@ -317,6 +317,8 @@ en:
               blank: Enter a postcode
               invalid: Enter a real postcode
             confirm_dwp_result: Select yes if the DWP records are correct
+            full_employment_details:
+              blank: Enter the partner's employment details
         attachment:
           attributes:
             attachment_type:

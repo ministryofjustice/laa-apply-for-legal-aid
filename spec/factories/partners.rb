@@ -39,5 +39,10 @@ FactoryBot.define do
     trait :with_shared_benefit do
       shared_benefit_with_applicant { true }
     end
+
+    trait :no_nino do
+      national_insurance_number { nil }
+      has_national_insurance_number { false }
+    end
   end
 end

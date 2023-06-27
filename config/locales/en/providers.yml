@@ -830,20 +830,6 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
     means:
-      full_employment_details:
-        show:
-          page_heading_no_info: HMRC has no record of your client's employment in the last 3 months
-          page_heading_multi_jobs: HMRC found a record of your client's employment
-          no_employment_info: You told us your client is employed but HMRC could not confirm this.
-          mutiple_employment_info: HMRC says your client had more than one job in the last 3 months.
-          enter_details: "Enter details of your client's employment in the last 3 months, including:"
-          details:
-            - how much they earned before tax
-            - how much National Insurance they paid
-            - how much tax they paid
-            - any benefits in kind they received
-          evidence: A caseworker will ask for evidence of this.
-          employment_details_header: Enter your client's employment details
       employment_incomes:
         show:
           notification_banner_title: Important

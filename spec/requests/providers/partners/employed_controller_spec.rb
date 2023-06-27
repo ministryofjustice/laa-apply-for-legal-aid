@@ -95,5 +95,19 @@ RSpec.describe Providers::Partners::EmployedController do
         expect(response).to redirect_to(providers_legal_aid_application_partners_use_ccms_employment_index_path(legal_aid_application))
       end
     end
+
+    context "when the partner is employed but no nino was provided" do
+      let(:params) { { partner: { employed: "true" } } }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_partner_no_nino) }
+
+      before do
+        login_as provider
+        post_request
+      end
+
+      it "redirects to the full employment details page" do
+        expect(response).to redirect_to(providers_legal_aid_application_partners_full_employment_details_path(legal_aid_application))
+      end
+    end
   end
 end

@@ -1,0 +1,33 @@
+<% page_heading = t(".page_heading_#{suffix}") %>
+
+<%= form_with(model: @form, url:, method: :patch, local: true) do |form| %>
+
+  <%= page_template(
+        page_title: page_heading,
+        template: :basic,
+        form:,
+        back_link: { text: t("generic.back") },
+      ) do %>
+
+    <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_heading },
+                            caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "xl" }) do %>
+
+      <h2 class="govuk-body-l"><%= t(".info_#{suffix}") %></h2>
+
+      <p class="govuk-body"><%= t(".enter_details_#{client_or_partner}") %></p>
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".details").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
+
+      <p class="govuk-body"><%= t(".evidence") %></p>
+
+      <%= form.govuk_text_area :full_employment_details,
+                               label: { text: t(".employment_details_header", individual:), tag: "h2", size: "m" },
+                               rows: 10 %>
+      <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
