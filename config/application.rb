@@ -96,7 +96,6 @@ module LaaApplyForLegalAid
 
     config.x.geckoboard.api_key = ENV.fetch("GECKOBOARD_API_KEY", nil)
 
-    config.x.local_clamav = ENV.fetch("LOCAL_CLAMAV", nil)
     config.x.bc_use_dev_mock = ENV.fetch("BC_USE_DEV_MOCK", nil)
     config.x.ordnance_survey_api_key = ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil)
 

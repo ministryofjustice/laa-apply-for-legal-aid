@@ -192,7 +192,6 @@ Ensure you have an `.env.test` file. This can be the same as your .env.developme
 
 Set `BC_USE_DEV_MOCK=true` to mock the call to the benefits checker.
 Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth.
-Set `LOCAL_CLAMAV=true`
 Set `LEGAL_FRAMEWORK_API_HOST=<staging api>`
 Set `CHECK_FINANCIAL_ELIGIBILITY_HOST=<staging api>`
 Set `HMRC_API_HOST=<staging api>`
