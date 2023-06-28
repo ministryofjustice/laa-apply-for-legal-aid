@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "apply-for-legal-aid.name" . }}
+        app: {{ template "apply-for-legal-aid.name" . }}-metrics
         release: {{ .Release.Name }}
         service: {{ template "apply-for-legal-aid.fullname" . }}-metrics
     spec:

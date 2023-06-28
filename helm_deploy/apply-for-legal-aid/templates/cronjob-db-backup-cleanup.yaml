@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: {{ .Release.Name | trunc 26 }}-clean-db-backups
   labels:
-    app: {{ template "apply-for-legal-aid.name" . }}
+    app: {{ template "apply-for-legal-aid.name" . }}-cron-db-backup-cleanup
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
