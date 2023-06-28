@@ -1,21 +1,15 @@
 module CFECivil
-  class SubmissionBuilder
-    HEADER_VERSION = 1.0
-
+  class SubmissionBuilder < BaseService
     delegate :cfe_result, to: :submission
     attr_reader :legal_aid_application
 
     def initialize(legal_aid_application)
+      super()
       @legal_aid_application = legal_aid_application
     end
 
     def self.call(legal_aid_application)
       new(legal_aid_application).call
-    end
-
-    def call
-      @response = query_cfe_service
-      process_response
     end
 
     def request_body
@@ -32,22 +26,6 @@ module CFECivil
 
     def components
       @components ||= ComponentList.call(@legal_aid_application)
-    end
-
-    def headers
-      {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json;version=#{cfe_version}",
-        "User-Agent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
-      }
-    end
-
-    def conn
-      @conn ||= Faraday.new(url: cfe_url_host, headers:)
-    end
-
-    def cfe_url_host
-      Rails.configuration.x.cfe_civil_host
     end
 
     def cfe_url_path
@@ -100,10 +78,6 @@ module CFECivil
 
     def mark_as_failed
       submission.fail!
-    end
-
-    def cfe_version
-      "6"
     end
 
     def write_cfe_result

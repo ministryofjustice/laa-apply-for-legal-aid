@@ -3,6 +3,7 @@ require "rails_helper"
 module CFECivil
   RSpec.describe ObtainStateBenefitTypesService do
     let(:service) { described_class.new(nil) }
+    let(:cfe_url) { URI.join(Rails.configuration.x.cfe_civil_host, "state_benefit_type") }
 
     around do |example|
       VCR.turn_off!
@@ -13,7 +14,7 @@ module CFECivil
     describe ".call" do
       context "when there is a successful response" do
         before do
-          stub_request(:get, service.cfe_url)
+          stub_request(:get, cfe_url)
             .to_return(status: 200, body: expected_json_response)
         end
 
@@ -24,7 +25,7 @@ module CFECivil
 
       context "when there is an unsuccessful response" do
         before do
-          stub_request(:get, service.cfe_url)
+          stub_request(:get, cfe_url)
             .to_return(status: 501, body: nil)
         end
 
