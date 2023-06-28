@@ -1,6 +1,7 @@
 module CFECivil
   class BaseService
     HEADER_VERSION = 1.0
+    CFE_VERSION = "6".freeze
 
     def call
       @response = query_cfe_service
@@ -20,13 +21,9 @@ module CFECivil
     def headers
       {
         "Content-Type" => "application/json",
-        "Accept" => "application/json;version=#{cfe_version}",
+        "Accept" => "application/json;version=#{CFE_VERSION}",
         "User-Agent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
       }
-    end
-
-    def cfe_version
-      "6"
     end
   end
 end
