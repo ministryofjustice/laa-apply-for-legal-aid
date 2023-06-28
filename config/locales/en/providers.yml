@@ -621,15 +621,6 @@ en:
     bank_statements:
       show:
         h1-heading: Upload your client's bank statements
-      uploaded_files:
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        action: This column contains delete buttons per upload
-        uploaded: Uploaded
-        title: Files added
-        no_files: Files uploaded will appear here.
     uploaded_evidence_collections:
       upload_evidence:
         single_item: "Use this page to provide evidence of %{evidence_type}."

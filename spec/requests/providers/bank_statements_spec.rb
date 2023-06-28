@@ -39,7 +39,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "renders uploaded files" do
           request
-          expect(response).to render_template("providers/bank_statements/_uploaded_files")
+          expect(response).to render_template("shared/_uploaded_files")
         end
 
         it "displays fallback text" do
@@ -80,7 +80,7 @@ RSpec.describe "Providers::BankStatementsController" do
         expect(response).to have_http_status(:ok)
       end
 
-      it { expect(response).to render_template("providers/bank_statements/_uploaded_files") }
+      it { expect(response).to render_template("shared/_uploaded_files") }
     end
   end
 

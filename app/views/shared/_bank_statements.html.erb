@@ -34,11 +34,13 @@
     <%= render partial: "shared/forms/error_summary_hidden" %>
 
     <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" },
-                            caption: { text: t("generic.client_means_caption"), size: "l" } do %>
+                            caption: { text: caption, size: "l" } do %>
 
       <% t(".info").each do |item| %>
         <p class="govuk-body"><%= item %></p>
       <% end %>
+
+      <%= govuk_warning_text(text: warning) if local_assigns[:warning] %>
 
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden <%= form_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">
@@ -97,7 +99,7 @@
 
   <h2 class="govuk-heading-m"><%= t(".h2-heading") %></h2>
   <div id="uploaded-files-table-container">
-    <%= render partial: "uploaded_files", locals: { attachments: @form.legal_aid_application.attachments.bank_statement_evidence } %>
+    <%= render partial: "shared/uploaded_files", locals: { attachments: @form.legal_aid_application.attachments.bank_statement_evidence } %>
   </div>
 
   <%= form_with(

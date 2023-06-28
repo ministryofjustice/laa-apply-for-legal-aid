@@ -26,7 +26,7 @@ module Providers
     end
 
     def list
-      render partial: "providers/bank_statements/uploaded_files", locals: { attachments: legal_aid_application.attachments.bank_statement_evidence }
+      render partial: "shared/uploaded_files", locals: { attachments: legal_aid_application.attachments.bank_statement_evidence }
     end
 
   private
