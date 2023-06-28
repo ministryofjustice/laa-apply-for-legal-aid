@@ -16,6 +16,7 @@ class Applicant < ApplicationRecord
   has_many :bank_accounts, through: :bank_providers
   has_many :bank_transactions, through: :bank_accounts
   has_many :regular_transactions, as: :owner
+  has_many :hmrc_responses, class_name: "HMRC::Response", as: :owner
 
   encrypts :encrypted_true_layer_token
 
