@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: {{ .Release.Name | trunc 26 }}-extract-digest
   labels:
-    app: {{ template "apply-for-legal-aid.name" . }}-cron-extract-digest
+    app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
