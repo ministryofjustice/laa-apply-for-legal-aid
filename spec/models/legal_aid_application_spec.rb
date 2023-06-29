@@ -1639,9 +1639,10 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#hmrc_response_use_case_one" do
-    let(:laa) { create(:legal_aid_application) }
-    let!(:use_case_one) { create(:hmrc_response, :use_case_one, legal_aid_application: laa) }
-    let!(:use_case_two) { create(:hmrc_response, :use_case_two, legal_aid_application: laa) }
+    let(:laa) { create(:legal_aid_application, :with_applicant) }
+    let(:applicant) { laa.applicant }
+    let!(:use_case_one) { create(:hmrc_response, :use_case_one, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
+    let!(:use_case_two) { create(:hmrc_response, :use_case_two, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
     it "returns the use case one record" do
       expect(laa.hmrc_response_use_case_one).to eq use_case_one

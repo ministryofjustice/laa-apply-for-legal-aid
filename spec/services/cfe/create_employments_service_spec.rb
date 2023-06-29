@@ -67,7 +67,7 @@ RSpec.describe CFE::CreateEmploymentsService do
       let(:expected_payload_hash) { full_payload }
 
       before do
-        create(:hmrc_response, :example1_usecase1, legal_aid_application: laa)
+        create(:hmrc_response, :example1_usecase1, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
       end
 
       it_behaves_like "a failed call to CFE"

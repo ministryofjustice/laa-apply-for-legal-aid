@@ -5,7 +5,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
   let(:applicant) { create(:applicant) }
   let(:application) { create(:legal_aid_application, applicant:) }
-  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid) }
+  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid, owner_id: applicant.id, owner_type: applicant.class) }
   let(:guid) { SecureRandom.uuid }
   let(:hmrc_data) { hmrc_response.response["data"] }
   let(:not_found_response) do

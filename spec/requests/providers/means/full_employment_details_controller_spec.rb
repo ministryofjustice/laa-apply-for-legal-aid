@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::Means::FullEmploymentDetailsController do
   let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine) }
+  let(:applicant) { application.applicant }
   let(:provider) { application.provider }
   let(:before_actions) { {} }
 
@@ -22,7 +23,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
       end
 
       context "when the no job data is returned" do
-        let(:before_actions) { create(:hmrc_response, :nil_response, legal_aid_application_id: application.id) }
+        let(:before_actions) { create(:hmrc_response, :nil_response, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -34,7 +35,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
       end
 
       context "when the HMRC response is pending" do
-        let(:before_actions) { create(:hmrc_response, :processing, legal_aid_application_id: application.id) }
+        let(:before_actions) { create(:hmrc_response, :processing, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -46,7 +47,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
 
         describe "Sending a message to Sentry" do
           let(:before_actions) do
-            create(:hmrc_response, :processing, legal_aid_application_id: application.id)
+            create(:hmrc_response, :processing, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class)
             expect(Sentry).to receive(:capture_message).with(/HMRC response still pending/)
           end
 
@@ -58,7 +59,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
 
       context "when the applicant has multiple jobs" do
         let(:before_actions) do
-          create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application_id: application.id)
+          create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class)
           create_list(:employment, 2, legal_aid_application: application)
         end
 

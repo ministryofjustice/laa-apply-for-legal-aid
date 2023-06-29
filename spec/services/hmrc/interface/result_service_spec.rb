@@ -3,7 +3,9 @@ require "rails_helper"
 RSpec.describe HMRC::Interface::ResultService do
   subject(:submission_result) { described_class.new(hmrc_response) }
 
-  let(:hmrc_response) { create(:hmrc_response, :in_progress) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:applicant) { legal_aid_application.applicant }
+  let(:hmrc_response) { create(:hmrc_response, :in_progress, owner_id: applicant.id, owner_type: applicant.class) }
   let(:expected_body) do
     {
       submission: hmrc_response.submission_id,

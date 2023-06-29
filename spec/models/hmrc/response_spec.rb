@@ -1,7 +1,10 @@
 require "rails_helper"
 
 RSpec.describe HMRC::Response do
-  subject(:response) { build(:hmrc_response) }
+  subject(:response) { build(:hmrc_response, owner_id: applicant.id, owner_type: applicant.class) }
+
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:applicant) { legal_aid_application.applicant }
 
   context "when validating" do
     before { response.validate }
@@ -13,24 +16,37 @@ RSpec.describe HMRC::Response do
     end
 
     context "with invalid use_case" do
-      let(:response) { build(:hmrc_response, use_case: "three") }
+      let(:response) { build(:hmrc_response, use_case: "three", owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(response).to be_invalid }
       it { expect(response.errors.messages_for(:use_case)).to include("Invalid use case") }
     end
 
     context "with nil use_case" do
-      let(:response) { build(:hmrc_response, use_case: nil) }
+      let(:response) { build(:hmrc_response, use_case: nil, owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(response).to be_invalid }
       it { expect(response.errors.messages_for(:use_case)).to include("can't be blank") }
     end
 
     context "with blank use_case" do
-      let(:response) { build(:hmrc_response, use_case: "") }
+      let(:response) { build(:hmrc_response, use_case: "", owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(response).to be_invalid }
       it { expect(response.errors.messages_for(:use_case)).to include("can't be blank") }
+    end
+
+    context "with owner_id and owner_type" do
+      let(:response) { build(:hmrc_response, use_case: "one", owner_id: applicant.id, owner_type: applicant.class) }
+
+      it { expect(response).to be_valid }
+    end
+
+    context "without owner_id and owner_type" do
+      let(:response) { build(:hmrc_response, use_case: "one") }
+
+      it { expect(response).to be_invalid }
+      it { expect(response.errors.messages_for(:owner)).to include("must exist") }
     end
   end
 
@@ -42,9 +58,13 @@ RSpec.describe HMRC::Response do
     end
 
     context "when there is only one use case one record with the specified application id" do
-      let!(:response1) { create(:hmrc_response, :use_case_one) }
-      let!(:response_uc2) { create(:hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id) }
-      let!(:response2) { create(:hmrc_response, :use_case_one) }
+      let!(:response1) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
+      let!(:response_uc2) do
+        create(:hmrc_response, :use_case_two,
+               legal_aid_application_id: response1.legal_aid_application_id,
+               owner_id: applicant.id, owner_type: applicant.class)
+      end
+      let!(:response2) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns the record for the application we specify" do
         expect(described_class.use_case_one_for(response1.legal_aid_application_id)).to eq response1
@@ -52,10 +72,16 @@ RSpec.describe HMRC::Response do
     end
 
     context "when there are multiple use case one records with the specified application id" do
-      let!(:response1) { create(:hmrc_response, :use_case_one, created_at: 5.minutes.ago) }
-      let!(:response_uc2) { create(:hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id) }
-      let!(:response1_last) { create(:hmrc_response, :use_case_one, legal_aid_application_id: response1.legal_aid_application_id) }
-      let!(:response2) { create(:hmrc_response, :use_case_one) }
+      let!(:response1) { create(:hmrc_response, :use_case_one, created_at: 5.minutes.ago, owner_id: applicant.id, owner_type: applicant.class) }
+      let!(:response_uc2) do
+        create(:hmrc_response, :use_case_two,
+               legal_aid_application_id: response1.legal_aid_application_id, owner_id: applicant.id, owner_type: applicant.class)
+      end
+      let!(:response1_last) do
+        create(:hmrc_response, :use_case_one,
+               legal_aid_application_id: response1.legal_aid_application_id, owner_id: applicant.id, owner_type: applicant.class)
+      end
+      let!(:response2) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns the last created use case one record for the specified application id" do
         expect(described_class.use_case_one_for(response1.legal_aid_application_id)).to eq response1_last
@@ -65,7 +91,7 @@ RSpec.describe HMRC::Response do
 
   describe "#employment_income?" do
     context "when there is no hmrc data" do
-      let(:response) { create(:hmrc_response) }
+      let(:response) { create(:hmrc_response, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns false" do
         expect(response.employment_income?).to be false
@@ -73,7 +99,7 @@ RSpec.describe HMRC::Response do
     end
 
     context "when the hmrc data does not contain employment income data" do
-      let(:response) { create(:hmrc_response) }
+      let(:response) { create(:hmrc_response, owner_id: applicant.id, owner_type: applicant.class) }
       let(:response_data_with_no_employment_income) do
         { "submission" => "f3730ebf-4b56-4bc1-b419-417bdf2ce9d2",
           "status" => "completed",
@@ -91,7 +117,7 @@ RSpec.describe HMRC::Response do
     end
 
     context "when the hmrc data contains employment income data" do
-      let(:response) { create(:hmrc_response, :use_case_one) }
+      let(:response) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns true" do
         expect(response.employment_income?).to be true
@@ -101,7 +127,7 @@ RSpec.describe HMRC::Response do
 
   describe ".after_update" do
     let(:persistor_class) { HMRC::ParsedResponse::Persistor }
-    let(:hmrc_response) { create(:hmrc_response, :use_case_one, :with_legal_aid_applicant) }
+    let(:hmrc_response) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
     let(:trigger_update) { hmrc_response.update!(url: "my_url") }
 
     before do
@@ -136,7 +162,7 @@ RSpec.describe HMRC::Response do
 
   describe "#status" do
     context "with a normal payload" do
-      let(:response) { create(:hmrc_response, :use_case_one) }
+      let(:response) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns a 'completed' status" do
         expect(response.status).to eq "completed"
@@ -144,7 +170,7 @@ RSpec.describe HMRC::Response do
     end
 
     context "when processing payload" do
-      let(:response) { create(:hmrc_response, :processing) }
+      let(:response) { create(:hmrc_response, :processing, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns a 'processing' status" do
         expect(response.status).to eq "processing"
@@ -152,7 +178,7 @@ RSpec.describe HMRC::Response do
     end
 
     context "with a nil payload" do
-      let(:response) { create(:hmrc_response, :nil_response) }
+      let(:response) { create(:hmrc_response, :nil_response, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns nil" do
         expect(response.status).to be_nil
