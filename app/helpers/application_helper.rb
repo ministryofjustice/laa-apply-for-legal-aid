@@ -19,7 +19,7 @@ module ApplicationHelper
   def back_link(text: t("generic.back"), path: back_path, method: nil)
     return unless path
 
-    link_to_accessible text, path, class: "govuk-back-link no-print", id: "back", method:
+    govuk_back_link(href: path, text:, classes: "no-print", html_attributes: { id: "back", "data-method": method })
   end
 
   def current_journey
