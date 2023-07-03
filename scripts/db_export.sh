@@ -25,7 +25,7 @@ esac
 echo "Finding pod for $environment"
 echo "Connecting to $POD, anonymizing, compressing and exporting DB"
 kubectl -n laa-apply-for-legalaid-$environment -c web exec "$POD" -- rake db:export
-kubectl -n laa-apply-for-legalaid-$environment cp -c web "laa-apply-for-legalaid-$environment/$POD:tmp/temp.sql.gz" "./tmp/$environment.anon.sql.gz"
+kubectl -n laa-apply-for-legalaid-$environment cp --retries=10 -c web "laa-apply-for-legalaid-$environment/$POD:tmp/temp.sql.gz" "./tmp/$environment.anon.sql.gz"
 gunzip "./tmp/$environment.anon.sql.gz"
 cat << INSTRUCTIONS
 Do you care about the current state of your dev DB? read on, otherwise skip to step 2
