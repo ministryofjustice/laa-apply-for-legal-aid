@@ -51,7 +51,7 @@ module Providers
     end
 
     def state_benefit_types
-      CFE::ObtainStateBenefitTypesService.call
+      CFECivil::ObtainStateBenefitTypesService.call
     rescue StandardError => e
       AlertManager.capture_exception(e)
       false

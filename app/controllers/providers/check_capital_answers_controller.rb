@@ -26,7 +26,7 @@ module Providers
     end
 
     def check_financial_eligibility
-      CFE::SubmissionRouter.call(legal_aid_application)
+      CFECivil::SubmissionBuilder.call(@legal_aid_application)
     end
   end
 end

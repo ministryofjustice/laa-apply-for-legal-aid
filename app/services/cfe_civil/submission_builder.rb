@@ -1,22 +1,15 @@
 module CFECivil
-  class SubmissionBuilder
-    HEADER_VERSION = 1.0
-
+  class SubmissionBuilder < BaseService
     delegate :cfe_result, to: :submission
     attr_reader :legal_aid_application
 
-    def initialize(legal_aid_application, save_result: false)
+    def initialize(legal_aid_application)
+      super()
       @legal_aid_application = legal_aid_application
-      @save_result = save_result
     end
 
-    def self.call(legal_aid_application, save_result: false)
-      new(legal_aid_application, save_result:).call
-    end
-
-    def call
-      @response = query_cfe_service
-      process_response
+    def self.call(legal_aid_application)
+      new(legal_aid_application).call
     end
 
     def request_body
@@ -33,22 +26,6 @@ module CFECivil
 
     def components
       @components ||= ComponentList.call(@legal_aid_application)
-    end
-
-    def headers
-      {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json;version=#{cfe_version}",
-        "User-Agent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
-      }
-    end
-
-    def conn
-      @conn ||= Faraday.new(url: cfe_url_host, headers:)
-    end
-
-    def cfe_url_host
-      Rails.configuration.x.cfe_civil_host
     end
 
     def cfe_url_path
@@ -71,10 +48,8 @@ module CFECivil
       raw_response = post_request
       parsed_response = parse_json_response(raw_response.body)
       history = build_submission_history(raw_response)
-      if @save_result
-        history.save!
-        submission.save!
-      end
+      history.save!
+      submission.save!
 
       case raw_response.status
       when 200
@@ -96,21 +71,13 @@ module CFECivil
 
     def process_response
       submission.cfe_result = @response.body
-      if @save_result
-        submission.results_obtained!
-        build_submission_history(@response).save!
-        write_cfe_result
-      else
-        submission
-      end
+      submission.results_obtained!
+      build_submission_history(@response).save!
+      write_cfe_result
     end
 
     def mark_as_failed
-      submission.fail! if @save_result
-    end
-
-    def cfe_version
-      "6"
+      submission.fail!
     end
 
     def write_cfe_result

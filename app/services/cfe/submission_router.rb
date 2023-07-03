@@ -12,7 +12,7 @@ module CFE
       if HostEnv.production?
         CFE::SubmissionManager.call(@legal_aid_application.id)
       else
-        CFECivil::SubmissionBuilder.call(@legal_aid_application, save_result: true)
+        CFECivil::SubmissionBuilder.call(@legal_aid_application)
       end
     end
   end

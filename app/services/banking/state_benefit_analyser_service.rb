@@ -104,7 +104,7 @@ module Banking
     end
 
     def state_benefit_list
-      CFE::ObtainStateBenefitTypesService.call
+      CFECivil::ObtainStateBenefitTypesService.call
     end
   end
 end
