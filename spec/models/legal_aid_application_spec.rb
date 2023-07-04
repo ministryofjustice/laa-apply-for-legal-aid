@@ -1326,7 +1326,7 @@ RSpec.describe LegalAidApplication do
       end
 
       it "returns parent and stand-alone" do
-        expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
+        expect(legal_aid_application.parent_transaction_types).to contain_exactly(pension, benefits)
       end
     end
 
@@ -1337,7 +1337,7 @@ RSpec.describe LegalAidApplication do
       end
 
       it "returns parent and stand-alone" do
-        expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
+        expect(legal_aid_application.parent_transaction_types).to contain_exactly(pension, benefits)
       end
     end
 
@@ -1348,7 +1348,7 @@ RSpec.describe LegalAidApplication do
       end
 
       it "returns parent and stand-alone" do
-        expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
+        expect(legal_aid_application.parent_transaction_types).to contain_exactly(pension, benefits)
       end
     end
   end
@@ -1382,7 +1382,7 @@ RSpec.describe LegalAidApplication do
       cos_da001 = create(:chances_of_success, proceeding: proceeding_da001)
       cos_se014 = create(:chances_of_success, proceeding: proceeding_se014)
 
-      expect(laa.chances_of_success).to match_array([cos_da001, cos_se014])
+      expect(laa.chances_of_success).to contain_exactly(cos_da001, cos_se014)
     end
   end
 
@@ -1395,7 +1395,7 @@ RSpec.describe LegalAidApplication do
       ats_da001 = create(:attempts_to_settles, proceeding: proceeding_da001)
       ats_se014 = create(:attempts_to_settles, proceeding: proceeding_se014)
 
-      expect(laa.attempts_to_settles).to match_array([ats_da001, ats_se014])
+      expect(laa.attempts_to_settles).to contain_exactly(ats_da001, ats_se014)
     end
   end
 

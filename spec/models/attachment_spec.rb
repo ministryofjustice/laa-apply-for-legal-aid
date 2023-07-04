@@ -10,8 +10,8 @@ RSpec.describe Attachment do
 
   context "with scopes" do
     it "returns the expected collections" do
-      expect(described_class.statement_of_case).to match_array [soc1, soc2]
-      expect(described_class.merits_report).to match_array [merits1, merits2]
+      expect(described_class.statement_of_case).to contain_exactly(soc1, soc2)
+      expect(described_class.merits_report).to contain_exactly(merits1, merits2)
       expect(described_class.means_report).to eq [means1]
       expect(described_class.bank_transaction_report).to eq [bank]
     end

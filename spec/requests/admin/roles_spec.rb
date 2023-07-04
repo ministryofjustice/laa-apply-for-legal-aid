@@ -34,7 +34,7 @@ RSpec.describe Admin::RolesController do
       end
 
       it "returns all relevant firms" do
-        expect(Firm.search("McKenzie")).to match_array([firm2, firm3])
+        expect(Firm.search("McKenzie")).to contain_exactly(firm2, firm3)
       end
     end
   end

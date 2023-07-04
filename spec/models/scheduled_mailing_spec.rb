@@ -95,19 +95,19 @@ RSpec.describe ScheduledMailing do
 
     describe "waiting" do
       it "picks only waiting status" do
-        expect(described_class.waiting).to match_array [waiting_due, waiting_due_later]
+        expect(described_class.waiting).to contain_exactly(waiting_due, waiting_due_later)
       end
     end
 
     describe "past_due" do
       it "picks only records where scheduled at is in the past" do
-        expect(described_class.past_due).to match_array [waiting_due]
+        expect(described_class.past_due).to contain_exactly(waiting_due)
       end
     end
 
     describe "monitored" do
       it "picks only records in processing, created, sending states" do
-        expect(described_class.monitored).to match_array [processing, created, sending]
+        expect(described_class.monitored).to contain_exactly(processing, created, sending)
       end
     end
   end

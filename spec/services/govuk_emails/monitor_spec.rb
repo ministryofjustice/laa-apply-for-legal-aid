@@ -148,22 +148,19 @@ RSpec.describe GovukEmails::Monitor do
           undelivered_mailings = ScheduledMailing.where(mailer_klass: "UndeliverableEmailAlertMailer")
 
           expect(undelivered_mailings)
-            .to match_array([
-              have_attributes(
-                legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
-                mailer_klass: "UndeliverableEmailAlertMailer",
-                mailer_method: "notify_apply_team",
-                addressee: Rails.configuration.x.support_email_address,
-                arguments: [scheduled_mailing.id],
-              ),
-              have_attributes(
-                legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
-                mailer_klass: "UndeliverableEmailAlertMailer",
-                mailer_method: "notify_provider",
-                addressee: legal_aid_application.provider.email,
-                arguments: expected_provider_args,
-              ),
-            ])
+            .to contain_exactly(have_attributes(
+                                  legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
+                                  mailer_klass: "UndeliverableEmailAlertMailer",
+                                  mailer_method: "notify_apply_team",
+                                  addressee: Rails.configuration.x.support_email_address,
+                                  arguments: [scheduled_mailing.id],
+                                ), have_attributes(
+                                     legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
+                                     mailer_klass: "UndeliverableEmailAlertMailer",
+                                     mailer_method: "notify_provider",
+                                     addressee: legal_aid_application.provider.email,
+                                     arguments: expected_provider_args,
+                                   ))
 
           expect(undelivered_mailings.map(&:scheduled_at)).to all(have_been_in_the_past)
         end
