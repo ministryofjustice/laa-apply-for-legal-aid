@@ -101,7 +101,7 @@ module Flow
     def date_confirmation_required
       return false if @application.provider_step != "delegated_functions"
 
-      @date_confirmation_required ||= current_proceeding&.used_delegated_functions_on&.present? && current_proceeding.used_delegated_functions_on < 1.month.ago
+      @date_confirmation_required ||= current_proceeding&.used_delegated_functions_on.present? && current_proceeding.used_delegated_functions_on < 1.month.ago
     end
     alias_method :date_confirmation_required?, :date_confirmation_required
 
