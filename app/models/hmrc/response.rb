@@ -6,6 +6,7 @@ module HMRC
 
     USE_CASES = %w[one two].freeze
     belongs_to :legal_aid_application, inverse_of: :hmrc_responses
+    belongs_to :owner, polymorphic: true
     validates :use_case, presence: true, inclusion: { in: USE_CASES }
 
     def self.use_case_one_for(laa_id)

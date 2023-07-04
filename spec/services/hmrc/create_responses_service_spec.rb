@@ -19,6 +19,13 @@ RSpec.describe HMRC::CreateResponsesService do
         expect { call }.to change { legal_aid_application.hmrc_responses.count }.by(2)
       end
 
+      it "adds te applicant as owner to each response record created" do
+        legal_aid_application.reload.hmrc_responses.each do |response|
+          expect(response.owner_id).to eq(legal_aid_application.applicant.id)
+          expect(response.owner_type).to eq(legal_aid_application.applicant.class)
+        end
+      end
+
       context "when HMRC_USE_DEV_MOCK is set to false" do
         it "creates two jobs to request the data and does not invoke the MockInterfaceResponseService" do
           expect { call }.to change(HMRC::SubmissionWorker.jobs, :size).by(2)
@@ -63,7 +70,8 @@ RSpec.describe HMRC::CreateResponsesService do
     end
 
     context "when requests already exist" do
-      let!(:hmrc_response) { create(:hmrc_response, legal_aid_application:) }
+      let(:applicant) { legal_aid_application.applicant }
+      let!(:hmrc_response) { create(:hmrc_response, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "does not create any more hmrc_response records" do
         expect { call }.not_to change { legal_aid_application.hmrc_responses.count }

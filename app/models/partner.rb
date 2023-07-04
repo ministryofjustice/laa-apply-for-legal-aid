@@ -1,5 +1,6 @@
 class Partner < ApplicationRecord
   belongs_to :legal_aid_application, dependent: :destroy
+  has_many :hmrc_responses, class_name: "HMRC::Response", as: :owner
 
   def pretty_postcode
     pretty_postcode? ? postcode : postcode.insert(-4, " ")
