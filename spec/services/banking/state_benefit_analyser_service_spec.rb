@@ -30,7 +30,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     end
 
     context "DWP payment for a different nino" do
-      let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP YS327299X UC", bank_account: bank_account1)] }
+      let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "DWP YS327299X UC", bank_account: bank_account1) }
       let(:tx) { legal_aid_application.reload.bank_transactions.first }
 
       before { call }
@@ -48,7 +48,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
     context "DWP payment for this applicant with recognised code" do
       context "an included benefit" do
-        let!(:transactions) { [create(:bank_transaction, :credit, description: "010101010101-CHB", bank_account: bank_account1)] }
+        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "010101010101-CHB", bank_account: bank_account1) }
 
         it "marks the transaction as a state benefit" do
           subject
@@ -70,7 +70,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
         end
 
         context "with child benefit under a new code HMRC CHILD BENEFIT" do
-          let!(:transactions) { [create(:bank_transaction, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1)] }
+          let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1) }
 
           it "marks the transaction as a state benefit" do
             subject
@@ -87,7 +87,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
       end
 
       context "an excluded benefit" do
-        let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1)] }
+        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1) }
 
         it "marks the transaction as a state benefit" do
           subject
@@ -112,7 +112,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
     context "DWP payment for this applicant has multiple recognised codes" do
       context "an included benefit" do
-        let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1)] }
+        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1) }
 
         before { call }
 
@@ -129,7 +129,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
       end
 
       context "duplicate benefits" do
-        let!(:transactions) { [create(:bank_transaction, :credit, description: "123456789999-CHB BGC 123456789999-CHB BGC", bank_account: bank_account1)] }
+        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "123456789999-CHB BGC 123456789999-CHB BGC", bank_account: bank_account1) }
 
         before { call }
 
