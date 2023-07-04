@@ -36,7 +36,7 @@ module ChancesOfSuccesses
   private
 
     def details_present?
-      return if success_prospect.blank? || draft?
+      return false if success_prospect.blank? || draft?
 
       details = "success_prospect_details_#{success_prospect}".to_sym
       value = __send__(details)
