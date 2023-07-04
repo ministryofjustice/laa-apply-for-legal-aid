@@ -3,6 +3,10 @@ module Providers
     class BankStatementsController < Providers::BankStatementsController
       prefix_step_with :partner
 
+      def show
+        legal_aid_application.set_transaction_period
+      end
+
     private
 
       def set_form

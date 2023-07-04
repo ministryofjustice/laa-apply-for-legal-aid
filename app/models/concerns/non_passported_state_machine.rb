@@ -6,6 +6,7 @@ class NonPassportedStateMachine < BaseStateMachine
     state :checking_citizen_answers
     state :analysing_bank_transactions
     state :provider_assessing_means
+    state :assessing_partner_means
     state :checking_means_income
     state :checking_non_passported_means
 
@@ -58,9 +59,16 @@ class NonPassportedStateMachine < BaseStateMachine
       transitions from: %i[provider_confirming_applicant_eligibility
                            provider_assessing_means
                            checking_means_income
-                           checking_non_passported_means
-                           applicant_details_checked],
+                           checking_non_passported_means],
                   to: :provider_assessing_means
+    end
+
+    event :assess_partner_means do
+      transitions from: %i[
+                    provider_confirming_applicant_eligibility
+                    provider_assessing_means
+                  ],
+                  to: :assessing_partner_means
     end
 
     event :check_non_passported_means do
