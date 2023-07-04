@@ -30,7 +30,7 @@ RSpec.describe "employed incomes request" do
 
       context "when applicant is not employed but has employment payment records" do
         let(:setup_tasks) do
-          create(:employment, :with_payments_in_transaction_period, legal_aid_application: application)
+          create(:employment, :with_payments_in_transaction_period, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class)
         end
 
         it "displays correct text when applicant is not_employed" do

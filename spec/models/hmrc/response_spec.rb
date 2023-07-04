@@ -127,7 +127,7 @@ RSpec.describe HMRC::Response do
 
   describe ".after_update" do
     let(:persistor_class) { HMRC::ParsedResponse::Persistor }
-    let(:hmrc_response) { create(:hmrc_response, :use_case_one, owner_id: applicant.id, owner_type: applicant.class) }
+    let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
     let(:trigger_update) { hmrc_response.update!(url: "my_url") }
 
     before do

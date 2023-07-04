@@ -79,7 +79,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
 
       context "when employment and employment payment records already exist for this application" do
         let(:hmrc_response) { create(:hmrc_response, :example1_usecase1, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
-        let(:employment) { create(:employment, legal_aid_application: application) }
+        let(:employment) { create(:employment, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
 
         let(:employment_payment1) { create(:employment_payment, employment:) }
         let(:employment_payment2) { create(:employment_payment, employment:) }
