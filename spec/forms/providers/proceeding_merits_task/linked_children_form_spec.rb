@@ -56,7 +56,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
     end
 
     context "when the initial proceeding has no linked_children" do
-      it { expect(proceeding.proceeding_linked_children).to match_array [] }
+      it { expect(proceeding.proceeding_linked_children).to be_empty }
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(1) }
     end
 
