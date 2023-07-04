@@ -212,7 +212,7 @@ RSpec.describe StatusController, clamav: true do
       end
 
       it "returns JSON with app information" do
-        expect(JSON.parse(response.body)).to eq(expected_json)
+        expect(response.parsed_body).to eq(expected_json)
       end
     end
 
@@ -226,7 +226,7 @@ RSpec.describe StatusController, clamav: true do
       end
 
       it 'returns "Not Available"' do
-        expect(JSON.parse(response.body).values).to be_all("Not Available")
+        expect(response.parsed_body.values).to be_all("Not Available")
       end
     end
   end
