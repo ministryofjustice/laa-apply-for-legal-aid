@@ -8,7 +8,7 @@ module HMRC
       use_case { "one" }
 
       trait :with_legal_aid_applicant do
-        legal_aid_application { build(:legal_aid_application, :with_applicant) }
+        legal_aid_application { association(:legal_aid_application, :with_applicant) }
       end
 
       trait :use_case_one do
