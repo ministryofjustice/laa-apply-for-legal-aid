@@ -85,12 +85,12 @@ RSpec.describe AggregatedCashIncome do
     end
 
     context "when cash income transaction records exist" do
-      let!(:pension1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension) }
-      let!(:pension2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension) }
-      let!(:pension3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension) }
-      let!(:maintenance_in1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in) }
-      let!(:maintenance_in2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in) }
-      let!(:maintenance_in3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in) }
+      let!(:pension_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension) }
+      let!(:pension_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension) }
+      let!(:pension_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension) }
+      let!(:maintenance_in_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in) }
+      let!(:maintenance_in_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in) }
+      let!(:maintenance_in_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in) }
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
@@ -104,14 +104,14 @@ RSpec.describe AggregatedCashIncome do
 
       it "populates the model" do
         expect(aci.check_box_pension).to eq "true"
-        expect(aci.pension1).to eq pension1.amount
-        expect(aci.pension2).to eq pension2.amount
-        expect(aci.pension3).to eq pension3.amount
+        expect(aci.pension1).to eq pension_first_month.amount
+        expect(aci.pension2).to eq pension_second_month.amount
+        expect(aci.pension3).to eq pension_third_month.amount
 
         expect(aci.check_box_maintenance_in).to eq "true"
-        expect(aci.maintenance_in1).to eq maintenance_in1.amount
-        expect(aci.maintenance_in2).to eq maintenance_in2.amount
-        expect(aci.maintenance_in3).to eq maintenance_in3.amount
+        expect(aci.maintenance_in1).to eq maintenance_in_first_month.amount
+        expect(aci.maintenance_in2).to eq maintenance_in_second_month.amount
+        expect(aci.maintenance_in3).to eq maintenance_in_third_month.amount
 
         expect(aci.check_box_property_or_lodger).to be_nil
         expect(aci.property_or_lodger1).to be_nil
@@ -450,12 +450,12 @@ RSpec.describe AggregatedCashIncome do
       travel_back
     end
 
-    let!(:pension1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension) }
-    let!(:pension2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension) }
-    let!(:pension3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension) }
-    let!(:maintenance_in1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in) }
-    let!(:maintenance_in2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in) }
-    let!(:maintenance_in3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in) }
+    let!(:pension_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension) }
+    let!(:pension_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension) }
+    let!(:pension_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension) }
+    let!(:maintenance_in_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in) }
+    let!(:maintenance_in_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in) }
+    let!(:maintenance_in_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in) }
     let(:aci) { described_class.find_by(legal_aid_application_id: application.id) }
 
     describe "#period" do

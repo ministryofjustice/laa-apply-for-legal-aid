@@ -58,11 +58,11 @@ RSpec.describe LegalAidApplication do
   end
 
   describe ".search" do
-    let!(:application1) { create(:legal_aid_application, application_ref: "L-123-ABC") }
+    let!(:application_l123abc) { create(:legal_aid_application, application_ref: "L-123-ABC") }
     let(:jacob) { create(:applicant, first_name: "Jacob", last_name: "Rees-Mogg") }
-    let!(:application2) { create(:legal_aid_application, applicant: jacob) }
+    let!(:application_for_jacob) { create(:legal_aid_application, applicant: jacob) }
     let(:ccms_submission) { create(:submission, case_ccms_reference: "300000000009") }
-    let!(:application3) { create(:legal_aid_application, ccms_submission:) }
+    let!(:application_with_ccms) { create(:legal_aid_application, ccms_submission:) }
 
     it "matches application_ref" do
       [
@@ -72,9 +72,9 @@ RSpec.describe LegalAidApplication do
         "L/123/ABC",
         "L123&ABC",
       ].each do |term|
-        expect(described_class.search(term)).to include(application1), term
+        expect(described_class.search(term)).to include(application_l123abc), term
       end
-      expect(described_class.search("something")).not_to include(application1)
+      expect(described_class.search("something")).not_to include(application_l123abc)
     end
 
     it "matches applicant's name" do
@@ -88,9 +88,9 @@ RSpec.describe LegalAidApplication do
         "sMOg",
         "jac&ob",
       ].each do |term|
-        expect(described_class.search(term)).to include(application2), term
+        expect(described_class.search(term)).to include(application_for_jacob), term
       end
-      expect(described_class.search("something")).not_to include(application2)
+      expect(described_class.search("something")).not_to include(application_for_jacob)
     end
 
     it "matches ccms case reference number" do
@@ -101,9 +101,9 @@ RSpec.describe LegalAidApplication do
         "09",
         "0&9",
       ].each do |term|
-        expect(described_class.search(term)).to include(application3), term
+        expect(described_class.search(term)).to include(application_with_ccms), term
       end
-      expect(described_class.search("something")).not_to include(application3)
+      expect(described_class.search("something")).not_to include(application_with_ccms)
     end
   end
 
@@ -792,9 +792,9 @@ RSpec.describe LegalAidApplication do
 
   describe "#earliest_delegated_functions_date" do
     let(:laa) { create(:legal_aid_application) }
-    let!(:proceeding1) { create(:proceeding, :da001, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date1) }
-    let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date2) }
-    let!(:proceeding3) { create(:proceeding, :se014, legal_aid_application: laa) }
+    let!(:proceeding_on_first_date) { create(:proceeding, :da001, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date1) }
+    let!(:proceeding_on_second_date) { create(:proceeding, :se013, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date2) }
+    let!(:se014_proceeding) { create(:proceeding, :se014, legal_aid_application: laa) }
 
     context "when there are application_proceeding_type records with dates" do
       let(:date1) { Time.zone.today }
@@ -838,8 +838,8 @@ RSpec.describe LegalAidApplication do
 
     context "when the lead application has a smaller substantive cost limit" do
       let(:legal_aid_application) { create(:legal_aid_application) }
-      let!(:proceeding1) { create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true) }
-      let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application:) }
+      let!(:proceeding_on_first_date) { create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true) }
+      let!(:proceeding_on_second_date) { create(:proceeding, :se013, legal_aid_application:) }
 
       it "takes the largest cost value" do
         expect(legal_aid_application.default_cost_limitation).to eq 25_000.0
@@ -851,8 +851,8 @@ RSpec.describe LegalAidApplication do
     subject(:substantive_cost_limitation) { legal_aid_application.substantive_cost_limitation }
 
     let(:legal_aid_application) { create(:legal_aid_application) }
-    let!(:proceeding1) { create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true) }
-    let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 10_000) }
+    let!(:proceeding_on_first_date) { create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true) }
+    let!(:proceeding_on_second_date) { create(:proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 10_000) }
 
     context "when the provider accepts the default" do
       it { is_expected.to eq 10_000 }

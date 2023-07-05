@@ -16,9 +16,9 @@ RSpec.describe CFECivil::Components::StateBenefits do
   context "when basic benefit bank transactions exist" do
     let(:bank_provider) { create(:bank_provider, applicant: legal_aid_application.applicant) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
-    let!(:transaction1) { create(:bank_transaction, :benefits, bank_account:, amount: "123.45", happened_at: 10.days.ago) }
-    let!(:transaction2) { create(:bank_transaction, :benefits, bank_account:, amount: "123.45", happened_at: 40.days.ago) }
-    let!(:transaction3) { create(:bank_transaction, :benefits, bank_account:, amount: "123.45", happened_at: 70.days.ago) }
+    let!(:benefits_10_days_old) { create(:bank_transaction, :benefits, bank_account:, amount: "123.45", happened_at: 10.days.ago) }
+    let!(:benefits_40_days_old) { create(:bank_transaction, :benefits, bank_account:, amount: "123.45", happened_at: 40.days.ago) }
+    let!(:benefits_70_days_old) { create(:bank_transaction, :benefits, bank_account:, amount: "123.45", happened_at: 70.days.ago) }
 
     it "returns the expected JSON block" do
       expect(call).to eq({
@@ -29,17 +29,17 @@ RSpec.describe CFECivil::Components::StateBenefits do
               {
                 date: 70.days.ago.strftime("%Y-%m-%d"),
                 amount: 123.45,
-                client_id: transaction3.id,
+                client_id: benefits_70_days_old.id,
               },
               {
                 date: 40.days.ago.strftime("%Y-%m-%d"),
                 amount: 123.45,
-                client_id: transaction2.id,
+                client_id: benefits_40_days_old.id,
               },
               {
                 date: 10.days.ago.strftime("%Y-%m-%d"),
                 amount: 123.45,
-                client_id: transaction1.id,
+                client_id: benefits_10_days_old.id,
               },
             ],
           },
@@ -51,7 +51,7 @@ RSpec.describe CFECivil::Components::StateBenefits do
   context "when flagged benefit bank transactions exist" do
     let(:bank_provider) { create(:bank_provider, applicant: legal_aid_application.applicant) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
-    let!(:transaction1) { create(:bank_transaction, :unknown_benefits, :flagged_multi_benefits, bank_account:, amount: "321.99", happened_at: 10.days.ago) }
+    let!(:benefits_10_days_old) { create(:bank_transaction, :unknown_benefits, :flagged_multi_benefits, bank_account:, amount: "321.99", happened_at: 10.days.ago) }
 
     it "returns the expected JSON block" do
       expect(call).to eq({
@@ -62,7 +62,7 @@ RSpec.describe CFECivil::Components::StateBenefits do
               {
                 date: 10.days.ago.strftime("%Y-%m-%d"),
                 amount: 321.99,
-                client_id: transaction1.id,
+                client_id: benefits_10_days_old.id,
                 flags: { multi_benefit: true },
               },
             ],

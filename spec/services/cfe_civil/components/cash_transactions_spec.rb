@@ -18,13 +18,13 @@ RSpec.describe CFECivil::Components::CashTransactions do
 
   context "when cash transactions exist" do
     let(:benefits) { create(:transaction_type, :benefits) }
-    let!(:benefits1) { create(:cash_transaction, :credit_month1, legal_aid_application:, amount: 123.0, transaction_type: benefits) }
-    let!(:benefits2) { create(:cash_transaction, :credit_month2, legal_aid_application:, amount: 234.0, transaction_type: benefits) }
-    let!(:benefits3) { create(:cash_transaction, :credit_month3, legal_aid_application:, amount: 345.0, transaction_type: benefits) }
+    let!(:first_benefits_month) { create(:cash_transaction, :credit_month1, legal_aid_application:, amount: 123.0, transaction_type: benefits) }
+    let!(:second_benefits_month) { create(:cash_transaction, :credit_month2, legal_aid_application:, amount: 234.0, transaction_type: benefits) }
+    let!(:third_benefits_month) { create(:cash_transaction, :credit_month3, legal_aid_application:, amount: 345.0, transaction_type: benefits) }
     let(:maintenance_out) { create(:transaction_type, :maintenance_out) }
-    let!(:maintenance_out1) { create(:cash_transaction, :credit_month1, legal_aid_application:, amount: 123.0, transaction_type: maintenance_out) }
-    let!(:maintenance_out2) { create(:cash_transaction, :credit_month2, legal_aid_application:, amount: 234.0, transaction_type: maintenance_out) }
-    let!(:maintenance_out3) { create(:cash_transaction, :credit_month3, legal_aid_application:, amount: 345.0, transaction_type: maintenance_out) }
+    let!(:first_maintenance_month) { create(:cash_transaction, :credit_month1, legal_aid_application:, amount: 123.0, transaction_type: maintenance_out) }
+    let!(:second_maintenance_month) { create(:cash_transaction, :credit_month2, legal_aid_application:, amount: 234.0, transaction_type: maintenance_out) }
+    let!(:third_maintenance_month) { create(:cash_transaction, :credit_month3, legal_aid_application:, amount: 345.0, transaction_type: maintenance_out) }
 
     it "returns expected JSON structure" do
       expect(call).to eq({
@@ -33,9 +33,9 @@ RSpec.describe CFECivil::Components::CashTransactions do
             {
               category: "benefits",
               payments: [
-                { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: benefits3.id },
-                { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: benefits2.id },
-                { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: benefits1.id },
+                { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: third_benefits_month.id },
+                { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: second_benefits_month.id },
+                { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: first_benefits_month.id },
               ],
             },
           ],
@@ -43,9 +43,9 @@ RSpec.describe CFECivil::Components::CashTransactions do
             {
               category: "maintenance_out",
               payments: [
-                { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: maintenance_out3.id },
-                { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: maintenance_out2.id },
-                { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: maintenance_out1.id },
+                { date: Date.current.at_beginning_of_month - 3.months, amount: 345.0, client_id: third_maintenance_month.id },
+                { date: Date.current.at_beginning_of_month - 2.months, amount: 234.0, client_id: second_maintenance_month.id },
+                { date: Date.current.at_beginning_of_month - 1.month, amount: 123.0, client_id: first_maintenance_month.id },
               ],
             },
           ],
