@@ -535,6 +535,12 @@ en:
           item-2-bullets:
             - receives certain types of income (for example, benefits)
             - has certain regular outgoings (for example, childcare)
+      bank_statements:
+        show:
+          h1-heading: Upload the partner's bank statements
+          warning: |
+            Do not upload bank statements for any joint accounts if you or your
+            client already has shared them
       client_has_partners:
         show:
           page_title: Does your client have a partner?

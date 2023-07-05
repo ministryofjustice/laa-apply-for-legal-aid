@@ -26,7 +26,7 @@ module Providers
     end
 
     def list
-      render partial: "shared/uploaded_files", locals: { attachments: legal_aid_application.attachments.bank_statement_evidence }
+      render partial: "shared/uploaded_files", locals: { attachments: }
     end
 
   private
@@ -84,6 +84,10 @@ module Providers
       delete_attachment(original_attachment)
     rescue StandardError
       original_attachment
+    end
+
+    def attachments
+      legal_aid_application.attachments.bank_statement_evidence
     end
 
     def delete_attachment(attachment)

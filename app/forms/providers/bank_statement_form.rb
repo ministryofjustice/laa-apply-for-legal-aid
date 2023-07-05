@@ -4,8 +4,11 @@ module Providers
     include ActiveModel::Validations::Callbacks
     include MalwareScanning
 
-    ATTACHMENT_TYPE = "bank_statement_evidence".freeze
-    ATTACHMENT_TYPE_CAPTURE = /^#{ATTACHMENT_TYPE}_(\d+)$/
+    def initialize(bank_statement_form_params)
+      super(bank_statement_form_params)
+      @attachment_type = "bank_statement_evidence"
+      @attachment_type_capture = /^#{@attachment_type}_(\d+)$/
+    end
 
     MAX_FILE_SIZE = 7.megabytes
 
@@ -94,10 +97,10 @@ module Providers
     # can be shared with v1 bank statement controller
     def create_attachment(file)
       attachment = legal_aid_application
-                     .attachments.create!(document: file,
-                                          attachment_type: "bank_statement_evidence",
-                                          original_filename: file.original_filename,
-                                          attachment_name: sequenced_attachment_name)
+                      .attachments.create!(document: file,
+                                           attachment_type: "bank_statement_evidence",
+                                           original_filename: file.original_filename,
+                                           attachment_name: sequenced_attachment_name)
 
       PdfConverterWorker.perform_async(attachment.id)
     end
@@ -142,16 +145,16 @@ module Providers
         most_recent_name = legal_aid_application.attachments.bank_statement_evidence.order(:created_at, :attachment_name).last.attachment_name
         increment_name(most_recent_name)
       else
-        ATTACHMENT_TYPE
+        @attachment_type
       end
     end
 
     def increment_name(most_recent_name)
-      if most_recent_name == ATTACHMENT_TYPE
-        "#{ATTACHMENT_TYPE}_1"
+      if most_recent_name == @attachment_type
+        "#{@attachment_type}_1"
       else
-        most_recent_name =~ ATTACHMENT_TYPE_CAPTURE
-        "#{ATTACHMENT_TYPE}_#{Regexp.last_match(1).to_i + 1}"
+        most_recent_name =~ @attachment_type_capture
+        "#{@attachment_type}_#{Regexp.last_match(1).to_i + 1}"
       end
     end
   end
