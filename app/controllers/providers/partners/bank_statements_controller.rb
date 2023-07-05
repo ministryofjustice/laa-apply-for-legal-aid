@@ -1,6 +1,8 @@
 module Providers
   module Partners
     class BankStatementsController < Providers::BankStatementsController
+      skip_back_history_for :list
+
       prefix_step_with :partner
 
       def show
