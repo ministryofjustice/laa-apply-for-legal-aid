@@ -59,7 +59,7 @@
           <% end %>
 
           <span class="hidden" aria-hidden="true" id="application-id"><%= @form.legal_aid_application_id %></span>
-          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/bank_statements"></span>
+          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="<%= data_url %>"></span>
           <p id="dropzone-file-error" class="govuk-error-message dropzone-error hidden">
             <span class="govuk-visually-hidden">Error:</span>
           </p>
@@ -99,7 +99,7 @@
 
   <h2 class="govuk-heading-m"><%= t(".h2-heading") %></h2>
   <div id="uploaded-files-table-container">
-    <%= render partial: "shared/uploaded_files", locals: { attachments: } %>
+    <%= render partial: "shared/uploaded_files", locals: { attachments:, url: } %>
   </div>
 
   <%= form_with(

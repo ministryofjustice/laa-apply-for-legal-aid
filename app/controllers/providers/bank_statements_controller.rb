@@ -26,7 +26,7 @@ module Providers
     end
 
     def list
-      render partial: "shared/uploaded_files", locals: { attachments: }
+      render partial: "shared/uploaded_files", locals: { attachments:, url: }
     end
 
   private
@@ -101,6 +101,10 @@ module Providers
 
     def attachment_params
       params.permit(:attachment_id)
+    end
+
+    def url
+      providers_legal_aid_application_bank_statements_path
     end
   end
 end

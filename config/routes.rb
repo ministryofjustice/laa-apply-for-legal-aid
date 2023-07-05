@@ -95,6 +95,9 @@ Rails.application.routes.draw do
     resources :bank_statements, only: [:create]
     resources :uploaded_evidence_collections, only: [:create]
     resources :providers, only: [:update]
+    namespace :partners do
+      resources :bank_statements, only: [:create]
+    end
   end
 
   namespace :citizens do

@@ -1,7 +1,8 @@
 Feature: partner_means_assessment means check
-  @javascript @vcr
+  @javascript
   Scenario: I am able to navigate to partners means check when doing manual bank upload
-    Given the feature flag for partner_means_assessment is enabled
+    Given csrf is enabled
+    And the feature flag for partner_means_assessment is enabled
     And I complete the journey as far as regular outgoings
 
     When I select "My client makes none of these payments"
@@ -14,6 +15,11 @@ Feature: partner_means_assessment means check
     When I select "Employed"
     And I click "Save and continue"
     Then I should be on a page with title "Upload the partner's bank statements"
+
+    Given I upload the fixture file named "acceptable.pdf"
+    And I upload an evidence file named "hello_world.pdf"
+    Then I should see "acceptable.pdf UPLOADED"
+    And I should see "hello_world.pdf UPLOADED"
 
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to navigate to partners means check when doing open banking upload

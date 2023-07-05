@@ -375,7 +375,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
 
         it "displays error indicating a file is needed" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("Upload your client's bank statements")
+          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("Upload the partner's bank statements")
         end
       end
     end

@@ -1,8 +1,12 @@
 module V1
   class BankStatementsController < ApiController
     include MalwareScanning
-    ATTACHMENT_TYPE = "bank_statement_evidence".freeze
-    ATTACHMENT_TYPE_CAPTURE = /^#{ATTACHMENT_TYPE}_(\d+)$/
+
+    def initialize
+      super
+      @attachment_type = "bank_statement_evidence"
+      @attachment_type_capture = /^#{@attachment_type}_(\d+)$/
+    end
 
     def create
       return head :not_found unless legal_aid_application
@@ -16,7 +20,7 @@ module V1
       attachment = legal_aid_application
                      .attachments
                      .create!(document: file,
-                              attachment_type: ATTACHMENT_TYPE,
+                              attachment_type: @attachment_type,
                               original_filename: file.original_filename,
                               attachment_name: sequenced_attachment_name)
 
@@ -45,16 +49,16 @@ module V1
         most_recent_name = legal_aid_application.attachments.bank_statement_evidence.order(:attachment_name).last.attachment_name
         increment_name(most_recent_name)
       else
-        ATTACHMENT_TYPE
+        @attachment_type
       end
     end
 
     def increment_name(most_recent_name)
-      if most_recent_name == ATTACHMENT_TYPE
-        "#{ATTACHMENT_TYPE}_1"
+      if most_recent_name == @attachment_type
+        "#{@attachment_type}_1"
       else
-        most_recent_name =~ ATTACHMENT_TYPE_CAPTURE
-        "#{ATTACHMENT_TYPE}_#{Regexp.last_match(1).to_i + 1}"
+        most_recent_name =~ @attachment_type_capture
+        "#{@attachment_type}_#{Regexp.last_match(1).to_i + 1}"
       end
     end
 
