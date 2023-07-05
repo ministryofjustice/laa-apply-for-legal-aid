@@ -765,3 +765,19 @@ en:
         - any benefits in kind they received
       evidence: You'll need to upload supporting evidence later.
       employment_details_header: Enter %{individual}'s employment details
+    bank_statements:
+      choose_files_btn: Choose files
+      dropzone_message: Drag and drop files here or
+      file_not_uploaded_error: Upload the selected file
+      h2-heading: Uploaded files
+      info:
+        - "We need bank statements from the last 3 months for all of your client's
+        bank accounts. If delegated functions have been used, then we need the
+        most recent 3 months before the delegated functions date."
+        - "You must include all current, savings, building society, Post Office,
+        ISA and any other type of bank account."
+      size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF.
+      upload_file: Upload files
+      upload_paragraph: |
+        Statements must be readable, If we cannot read them, it may delay a decision
+        or give an inaccurate assessment of rejection of your client's case.
