@@ -18,39 +18,11 @@ module Flow
             if application.overriding_dwp_result?
               :check_client_details
             else
-              :shared_addresses
+              :check_provider_answers
             end
           end,
           check_answers: :check_provider_answers,
           carry_on_sub_flow: false,
-        },
-        shared_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_shared_address_path(application) },
-          forward: lambda do |_application, options|
-            if options[:shared_address]
-              :check_provider_answers
-            else
-              :partner_address_lookups
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: ->(application) { !application&.partner&.shared_address_with_client? },
-        },
-        partner_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_address_lookup_path(application) },
-          forward: :partner_address_selections,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true,
-        },
-        partner_address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_address_selection_path(application) },
-          forward: :check_provider_answers,
-          check_answers: :check_provider_answers,
-        },
-        partner_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_address_path(application) },
-          forward: :check_provider_answers,
-          check_answers: :check_provider_answers,
         },
         partner_employed: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
