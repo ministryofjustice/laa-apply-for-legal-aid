@@ -16,16 +16,12 @@
 
         <p class="govuk-body"><%= t(".details_content_para_one") %></p>
         <ul class="govuk-list govuk-list--bullet">
-          <% t(".details.list_one").each do |bullet| %>
+          <% t(".details_list").each do |bullet| %>
             <li><%= bullet %></li>
           <% end %>
         </ul>
         <p class="govuk-body"><%= t(".details_content_para_two") %></p>
-        <ul class="govuk-list govuk-list--bullet">
-          <% t(".details.list_two").each do |bullet| %>
-            <li><%= bullet %></li>
-          <% end %>
-        </ul>
+
     <% end %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
