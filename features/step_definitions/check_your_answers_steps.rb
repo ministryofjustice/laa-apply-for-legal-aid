@@ -5,7 +5,6 @@ Given("I have completed the income section of a non-passported application with 
     :legal_aid_application,
     :with_proceedings,
     :with_employed_applicant,
-    :with_single_employment,
     :with_extra_employment_information,
     :with_non_passported_state_machine,
     :with_fixed_offline_savings_accounts,
@@ -25,6 +24,8 @@ Given("I have completed the income section of a non-passported application with 
     set_lead_proceeding: :da002,
   )
 
+  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
+
   login_as @legal_aid_application.provider
 end
 
@@ -33,7 +34,6 @@ Given("I have completed the income and capital sections of a non-passported appl
     :legal_aid_application,
     :with_proceedings,
     :with_employed_applicant,
-    :with_single_employment,
     :with_extra_employment_information,
     :with_non_passported_state_machine,
     :with_fixed_offline_savings_accounts,
@@ -59,6 +59,7 @@ Given("I have completed the income and capital sections of a non-passported appl
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
   )
+  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
 
   login_as @legal_aid_application.provider
 end

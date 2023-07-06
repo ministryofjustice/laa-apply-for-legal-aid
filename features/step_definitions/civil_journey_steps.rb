@@ -366,11 +366,12 @@ Given("I start the means review journey with employment income for a single job 
   @legal_aid_application = create(
     :application,
     :with_employed_applicant,
-    :with_single_employment,
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
   )
+
+  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -401,11 +402,13 @@ Given("I start the means review journey with employment income for multiple jobs
   @legal_aid_application = create(
     :application,
     :with_employed_applicant,
-    :with_multiple_employments,
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
   )
+
+  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
+  create :employment, :example1_usecase1, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
