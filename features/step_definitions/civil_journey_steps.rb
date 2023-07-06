@@ -588,14 +588,7 @@ Given("I complete the journey as far as check client details with a partner") do
     lookup_used: true,
     applicant:,
   )
-  partner = create(:partner,
-                   address_line_one: "Transport For London",
-                   address_line_two: "98 Petty France",
-                   city: "London",
-                   county: nil,
-                   postcode: "SW1H 9EA",
-                   lookup_used: true,
-                   shared_address_with_client: true)
+  partner = create(:partner)
   @legal_aid_application = create(
     :application,
     :with_proceedings,
