@@ -156,3 +156,14 @@ document.addEventListener('DOMContentLoaded', event => {
     }
   }
 })
+
+window.LAA_VARS = {
+  images: {
+    loading_small: document.querySelector('#uploaded-files-table-container').getAttribute('data-loading-img')
+  },
+  locales: {
+    generic: {
+      uploading: document.querySelector('#uploaded-files-table-container').getAttribute('data-uploading')
+    }
+  }
+}

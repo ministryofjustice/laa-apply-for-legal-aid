@@ -90,7 +90,7 @@
   <% end %>
 
   <h2 class="govuk-heading-m"><%= t(".h2-heading") %></h2>
-  <div id="uploaded-files-table-container">
+  <div id="uploaded-files-table-container" data-loading-img="<%= image_path("loading-small.gif") %>" data-uploading="<%= t("generic.uploading") %>">
     <%= render partial: "uploaded_files", locals: { attachments: @form.model.original_attachments } %>
     <% if @form.model.original_attachments.empty? %>
       <p class="govuk-body">
@@ -113,16 +113,3 @@
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
-
-<script nonce="<%= request.content_security_policy_nonce %>">
-  window.LAA_VARS = {
-    images: {
-      loading_small: <%= image_path("loading-small.gif").to_json.html_safe %>
-    },
-    locales: {
-      generic: {
-        uploading: <%= t("generic.uploading").to_json.html_safe %>
-      }
-    }
-  };
-</script>
