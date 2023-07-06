@@ -173,7 +173,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
       context "when the client has a partner" do
         let(:applicant) { create(:applicant, :with_address, :with_partner) }
-        let(:partner) { create(:partner, :with_address) }
+        let(:partner) { create(:partner) }
 
         it "renders the partner block" do
           expect(unescaped_response_body).to include("Partner's details")
