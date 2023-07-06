@@ -98,7 +98,7 @@ module Providers
     def create_attachment(file)
       attachment = legal_aid_application
                       .attachments.create!(document: file,
-                                           attachment_type: "bank_statement_evidence",
+                                           attachment_type: @attachment_type,
                                            original_filename: file.original_filename,
                                            attachment_name: sequenced_attachment_name)
 
