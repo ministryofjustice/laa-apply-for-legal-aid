@@ -5,14 +5,15 @@ module HMRC
 
       Error = Struct.new(:attribute, :message)
 
-      def self.call(hmrc_response, applicant:)
-        new(hmrc_response, applicant:).call
+      # person can be Applicant or Partner
+      def self.call(hmrc_response, person:)
+        new(hmrc_response, person:).call
       end
 
-      def initialize(hmrc_response, applicant:)
+      def initialize(hmrc_response, person:)
         @hmrc_response = hmrc_response
         @response = hmrc_response.response
-        @applicant = applicant
+        @person = person
         @errors = []
       end
 
@@ -30,7 +31,7 @@ module HMRC
 
     private
 
-      attr_reader :hmrc_response, :response, :applicant
+      attr_reader :hmrc_response, :response, :person
 
       def validate_use_case
         errors << error(:use_case, "use_case must be \"one\", but was \"#{hmrc_response.use_case}\"") if hmrc_response.use_case != "one"
@@ -59,10 +60,10 @@ module HMRC
       end
 
       def validate_response_individual
-        errors << error(:individual, "individual must match applicant") unless individual &&
-          applicant &&
-          applicant.national_insurance_number.casecmp?(individual["nino"]) &&
-          applicant.date_of_birth.iso8601 == individual["dateOfBirth"]
+        errors << error(:individual, "individual must match person") unless individual &&
+          person &&
+          person.national_insurance_number.casecmp?(individual["nino"]) &&
+          person.date_of_birth.iso8601 == individual["dateOfBirth"]
       end
 
       def validate_response_employments

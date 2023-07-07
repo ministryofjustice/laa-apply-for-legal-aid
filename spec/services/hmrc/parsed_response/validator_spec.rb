@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe HMRC::ParsedResponse::Validator do
   describe ".call" do
-    subject(:call) { described_class.call(hmrc_response, applicant:) }
+    subject(:call) { described_class.call(hmrc_response, person: applicant) }
 
-    let(:instance) { described_class.new(hmrc_response, applicant:) }
+    let(:instance) { described_class.new(hmrc_response, person: applicant) }
     let(:applicant) { create(:legal_aid_application, :with_applicant).applicant }
 
     let(:valid_individual_response) do
@@ -33,7 +33,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when HRMC response use_case is \"two\"" do
-      let(:instance) { described_class.new(hmrc_response, applicant:) }
+      let(:instance) { described_class.new(hmrc_response, person: applicant) }
       let(:hmrc_response) { create(:hmrc_response, use_case: "two", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(instance.call).to be_falsey }
@@ -44,15 +44,15 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       }
     end
 
-    context "when applicant is nil" do
-      let(:instance) { described_class.new(hmrc_response, applicant: nil) }
+    context "when person is nil" do
+      let(:instance) { described_class.new(hmrc_response, person: nil) }
       let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(instance.call).to be_falsey }
 
       it {
         instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+        expect(instance.errors.collect(&:message)).to include("individual must match person")
       }
     end
 
@@ -237,7 +237,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
       it {
         instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+        expect(instance.errors.collect(&:message)).to include("individual must match person")
       }
     end
 
@@ -257,7 +257,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
       it {
         instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+        expect(instance.errors.collect(&:message)).to include("individual must match person")
       }
     end
 
@@ -283,7 +283,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
       it {
         instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+        expect(instance.errors.collect(&:message)).to include("individual must match person")
       }
     end
 
@@ -311,7 +311,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
       it {
         instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+        expect(instance.errors.collect(&:message)).to include("individual must match person")
       }
     end
 

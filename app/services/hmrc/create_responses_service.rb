@@ -12,16 +12,23 @@ module HMRC
     end
 
     def call
-      return unless @legal_aid_application.hmrc_responses.empty?
+      # return unless @legal_aid_application.hmrc_responses.empty?
 
-      applicant = @legal_aid_application.applicant
+      individuals = []
+      individuals << @legal_aid_application.applicant
+      if @legal_aid_application.applicant.has_partner?
+        # not sure if we do need to check whether they have NI or not but have left it in for now
+        individuals << @legal_aid_application.partner if @legal_aid_application.partner.has_national_insurance_number?
+      end
 
       USE_CASES.each do |use_case|
-        hmrc_response = @legal_aid_application.hmrc_responses.create(use_case:, owner_id: applicant.id, owner_type: applicant.class)
-        if use_mock?
-          MockInterfaceResponseService.call(hmrc_response)
-        else
-          HMRC::SubmissionWorker.perform_async(hmrc_response.id)
+        individuals.each do |person|
+          hmrc_response = @legal_aid_application.hmrc_responses.create(use_case:, owner_id: person.id, owner_type: person.class)
+          if use_mock?
+            MockInterfaceResponseService.call(hmrc_response)
+          else
+            HMRC::SubmissionWorker.perform_async(hmrc_response.id)
+          end
         end
       end
     end

@@ -31,7 +31,7 @@ module HMRC
       end
 
       def applicant_values
-        @applicant_values ||= application.applicant.json_for_hmrc
+        @applicant_values ||= @hmrc_response.owner.json_for_hmrc
       end
 
       def date_values
