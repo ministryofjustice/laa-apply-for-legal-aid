@@ -5,7 +5,8 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
   let(:applicant) { create(:applicant) }
   let(:application) { create(:legal_aid_application, applicant:) }
-  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid, owner_id: applicant.id, owner_type: applicant.class) }
+  let(:owner) { applicant }
+  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid, owner_id: owner.id, owner_type: owner.class) }
   let(:guid) { SecureRandom.uuid }
   let(:hmrc_data) { hmrc_response.response["data"] }
   let(:not_found_response) do
@@ -374,6 +375,17 @@ RSpec.describe HMRC::MockInterfaceResponseService do
         expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Oakley"
         expect(hmrc_data[17]["benefits_and_credits/working_tax_credit/applications"][0]["awards"][0]["totalEntitlement"]).not_to be_nil
       end
+    end
+  end
+
+  context "when the mock response owner is set to a partner that is available to the mock response service" do
+    let(:applicant) { create(:applicant, first_name: "Langley", last_name: "Yorke", national_insurance_number: "MN212451D", date_of_birth: "1992-07-22") }
+    let(:partner) { create(:partner, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24") }
+    let(:application) { create(:legal_aid_application, applicant:, partner:) }
+    let(:owner) { partner }
+
+    it "returns data for the partner, _not_ the applicant" do
+      expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Ida"
     end
   end
 end
