@@ -552,31 +552,6 @@ en:
           page_title: Enter the partner's details
           has_national_insurance_number: Does the partner have a National Insurance number?
           nino_label: Enter National Insurance number
-      shared_addresses:
-        show:
-          page_title: Is the partner's correspondence address the same as your client's?
-      address_lookups:
-        show:
-          page_title: Enter the partner's correspondence address - Postcode
-          heading: Enter the partner's correspondence address
-          label: Postcode
-          address_manual_link: Enter address manually
-          submit_button: Find address
-      address_selections:
-        show:
-          page_title: Enter the partner's correspondence address - Select an address
-          heading: Enter the partner's correspondence address
-          link_text: I cannot find the address
-          select_address_label: Select an address
-          addresses_found_text:
-            { one: "1 address found", other: "%{count} addresses found" }
-      addresses:
-        show:
-          heading: Enter the partner's correspondence address
-          address_manual_link: Enter address manually
-          label_1: postcode
-          postcode: Postcode
-          submit_button: Find address
       use_ccms_employment:
         index:
           warning_list_title: "You cannot use this service if your client's partner is:"
