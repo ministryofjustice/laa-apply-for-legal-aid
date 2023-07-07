@@ -27,17 +27,6 @@ module Providers
       ENDPOINT
     end
 
-    def save_run_continue_or_draft(form, run_method, **args)
-      # This can be used to run a method on the form_for target model
-      # after validating and saving, but before redirecting. it will
-      # raise a NoMethodError if the run_method does not exist
-      draft_selected? ? form.save_as_draft : form.save
-      return false if form.invalid?
-
-      form.model.public_send(run_method) unless run_method.nil?
-      continue_or_draft(**args)
-    end
-
     def save_continue_or_draft(form, **args)
       draft_selected? ? form.save_as_draft : form.save
       return false if form.invalid?

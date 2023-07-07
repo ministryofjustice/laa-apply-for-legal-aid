@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_03_102937) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_06_095142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -721,15 +721,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_102937) do
     t.uuid "legal_aid_application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "shared_address_with_client"
-    t.string "address_line_one"
-    t.string "address_line_two"
-    t.string "city"
-    t.string "county"
-    t.string "postcode"
-    t.string "organisation"
-    t.boolean "lookup_used", default: false, null: false
-    t.string "lookup_id"
     t.boolean "shared_benefit_with_applicant"
     t.boolean "employed"
     t.boolean "self_employed"
