@@ -1574,10 +1574,12 @@ RSpec.describe LegalAidApplication do
     end
 
     context "when there are Employment records" do
-      let(:laa) { create(:legal_aid_application, :with_multiple_employments) }
+      let(:laa) { create(:legal_aid_application, :with_applicant) }
+      let(:applicant) { laa.applicant }
+      let!(:employment) { create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns true" do
-        expect(laa.hmrc_employment_income?).to be true
+        expect(laa.reload.hmrc_employment_income?).to be true
       end
     end
   end
@@ -1650,11 +1652,12 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#eligible_employment_payments" do
-    let(:laa) { create(:legal_aid_application, :with_transaction_period) }
+    let(:laa) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
+    let(:applicant) { laa.applicant }
 
     context "with one employment with employment payments" do
       before do
-        emp = create(:employment, legal_aid_application: laa)
+        emp = create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
         create(:employment_payment, employment: emp, date: 1.month.ago)
         create(:employment_payment, employment: emp, date: 2.months.ago)
       end
@@ -1667,7 +1670,7 @@ RSpec.describe LegalAidApplication do
     end
 
     context "with one employment with no employment payments" do
-      before { create(:employment, legal_aid_application: laa) }
+      before { create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns an empty collections" do
         expect(laa.eligible_employment_payments).to be_empty
@@ -1682,10 +1685,10 @@ RSpec.describe LegalAidApplication do
 
     context "with multiple employments" do
       before do
-        emp1 = create(:employment, legal_aid_application: laa)
+        emp1 = create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
         create(:employment_payment, employment: emp1, date: 1.month.ago)
         create(:employment_payment, employment: emp1, date: 2.months.ago)
-        emp2 = create(:employment, legal_aid_application: laa)
+        emp2 = create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
         create(:employment_payment, employment: emp2, date: 1.month.ago)
       end
 
@@ -1696,10 +1699,10 @@ RSpec.describe LegalAidApplication do
 
     context "with all payments before start of transaction period" do
       before do
-        emp1 = create(:employment, legal_aid_application: laa)
+        emp1 = create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
         create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days)
         create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days)
-        emp2 = create(:employment, legal_aid_application: laa)
+        emp2 = create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
         create(:employment_payment, employment: emp2, date: laa.transaction_period_start_on - 1.month)
       end
 
@@ -1710,7 +1713,7 @@ RSpec.describe LegalAidApplication do
 
     context "with one payment in transaction period, others before" do
       before do
-        emp1 = create(:employment, legal_aid_application: laa)
+        emp1 = create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class)
         create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days)
         create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on + 2.days)
         create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days)

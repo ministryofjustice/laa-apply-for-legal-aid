@@ -25,7 +25,7 @@ RSpec.describe CFE::CreateEmploymentsService do
 
     context "applicant employed" do
       let(:applicant) { create(:applicant, :employed) }
-      let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa) }
+      let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "returns full payload" do
         expect(service.request_body).to eq full_payload.to_json
@@ -40,7 +40,7 @@ RSpec.describe CFE::CreateEmploymentsService do
 
     let(:applicant) { create(:applicant, :employed) }
     let(:expected_payload) { full_payload }
-    let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa) }
+    let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
     it "updates the state on the submission record from irregular_income_created to employments_created" do
       expect(submission.aasm_state).to eq "irregular_income_created"

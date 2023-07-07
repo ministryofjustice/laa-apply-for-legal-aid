@@ -60,7 +60,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
       context "when the applicant has multiple jobs" do
         let(:before_actions) do
           create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class)
-          create_list(:employment, 2, legal_aid_application: application)
+          create_list(:employment, 2, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class)
         end
 
         it "returns http success" do

@@ -43,8 +43,9 @@ module HMRC
       end
 
       def create_employments
+        applicant = @application.applicant
         employments_array.each_with_index do |_emp, i|
-          @application.employments << ::Employment.new(name: "Job #{i + 1}")
+          @application.employments << ::Employment.new(name: "Job #{i + 1}", owner_id: applicant.id, owner_type: applicant.class)
         end
       end
 

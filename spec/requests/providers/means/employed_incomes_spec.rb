@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "employed incomes request" do
-  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, :with_single_employment, applicant:) }
+  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, applicant:) }
   let(:applicant) { create(:applicant, :employed) }
+  let(:employment) { create(:employment, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
   let(:provider) { application.provider }
   let(:setup_tasks) { {} }
 

@@ -27,11 +27,13 @@ FactoryBot.define do
     end
 
     trait :with_single_employment do
-      employments { [association(:employment)] }
+      applicant { build(:applicant, employed: true) }
+      employments { [association(:employment, owner_id: applicant.id, owner_type: applicant.class)] }
     end
 
     trait :with_multiple_employments do
-      employments { build_list(:employment, 3) }
+      applicant { build(:applicant, employed: true) }
+      employments { build_list(:employment, 3, owner_id: applicant.id, owner_type: applicant.class) }
     end
 
     trait :with_full_employment_information do
