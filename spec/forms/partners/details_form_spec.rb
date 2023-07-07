@@ -40,7 +40,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
 
       it "errors to be present" do
         partner_form.save!
-        expect(partner_form.errors[:first_name]).to match_array(["Enter first name"])
+        expect(partner_form.errors[:first_name]).to contain_exactly("Enter first name")
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
 
       it "errors to be present" do
         partner_form.save!
-        expect(partner_form.errors[:national_insurance_number]).to match_array(["Enter a valid National Insurance number"])
+        expect(partner_form.errors[:national_insurance_number]).to contain_exactly("Enter a valid National Insurance number")
       end
     end
 
@@ -114,7 +114,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
 
       it "errors to be present" do
         partner_form.save!
-        expect(partner_form.errors[:date_of_birth]).to match_array(["Date of birth must be in the past"])
+        expect(partner_form.errors[:date_of_birth]).to contain_exactly("Date of birth must be in the past")
       end
     end
 
@@ -137,7 +137,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
 
       it "sets errors" do
         partner_form.save!
-        expect(partner_form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+        expect(partner_form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end
   end

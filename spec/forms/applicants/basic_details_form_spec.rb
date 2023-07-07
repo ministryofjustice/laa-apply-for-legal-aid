@@ -49,7 +49,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "errors to be present" do
         form.save
-        expect(form.errors[:first_name]).to match_array(["Enter first name"])
+        expect(form.errors[:first_name]).to contain_exactly("Enter first name")
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "adds expected error" do
         form.save
-        expect(form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+        expect(form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end
 
@@ -75,7 +75,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "adds expected error" do
         form.save
-        expect(form.errors[:date_of_birth]).to match_array(["Date of birth must be in the past"])
+        expect(form.errors[:date_of_birth]).to contain_exactly("Date of birth must be in the past")
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "adds expected error" do
         form.save
-        expect(form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+        expect(form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "adds expected error" do
         form.save
-        expect(form.errors[:date_of_birth]).to match_array(["Enter a valid date of birth"])
+        expect(form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end
   end

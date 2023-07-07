@@ -26,3 +26,12 @@ Lint/AmbiguousBlockAssociation:
 Style/ZeroLengthPredicate:
   Exclude:
     - app/controllers/status_controller.rb
+
+FactoryBot/FactoryAssociationWithStrategy:
+  Exclude:
+    - spec/factories/legal_aid_applications.rb # Too many traits create objects that loop back
+
+RSpec/IndexedLet:
+  Max: 2
+  Exclude:
+    - spec/services/cfe/* # due to be deleted soon 🤞

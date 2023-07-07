@@ -31,7 +31,7 @@ RSpec.describe Addresses::PartnerAddressForm, type: :form do
 
         it "returns an presence error on line one and line two" do
           expect(form).not_to be_valid
-          expect(form.errors[:address_line_one]).to match_array(["Enter a building and street"])
+          expect(form.errors[:address_line_one]).to contain_exactly("Enter a building and street")
         end
       end
 
@@ -58,7 +58,7 @@ RSpec.describe Addresses::PartnerAddressForm, type: :form do
 
         it "returns an presence error on city field" do
           expect(form).not_to be_valid
-          expect(form.errors[:city]).to match_array(["Enter a town or city"])
+          expect(form.errors[:city]).to contain_exactly("Enter a town or city")
         end
       end
     end
@@ -69,7 +69,7 @@ RSpec.describe Addresses::PartnerAddressForm, type: :form do
 
         it "returns an presence error on postcode field" do
           expect(form).not_to be_valid
-          expect(form.errors[:postcode]).to match_array(["Enter a postcode"])
+          expect(form.errors[:postcode]).to contain_exactly("Enter a postcode")
         end
       end
     end

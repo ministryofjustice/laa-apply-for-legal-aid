@@ -129,9 +129,9 @@ module CCMS
 
             it "creates three documents as ADMIN1, one as STATE and one as BSTMT" do
               subject.call
-              admin1_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/ADMIN1/) }.flatten.count
-              state_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/STATE/) }.flatten.count
-              bstmt_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/BSTMT/) }.flatten.count
+              admin1_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("ADMIN1") }.flatten.count
+              state_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("STATE") }.flatten.count
+              bstmt_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("BSTMT") }.flatten.count
               expect(admin1_documents).to eq 3
               expect(state_documents).to eq 1
               expect(bstmt_documents).to eq 1

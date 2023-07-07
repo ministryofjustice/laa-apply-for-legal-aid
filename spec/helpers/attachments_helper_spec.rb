@@ -27,7 +27,7 @@ RSpec.describe AttachmentsHelper do
       let(:attachments) { [attachment1, attachment2] }
 
       it "returns attachment_type name in its place" do
-        expect(attachments_with_size(attachments)).to match_array ["statement_of_case (15.7 KB)", "fake name (15.7 KB)"]
+        expect(attachments_with_size(attachments)).to contain_exactly("statement_of_case (15.7 KB)", "fake name (15.7 KB)")
       end
     end
   end

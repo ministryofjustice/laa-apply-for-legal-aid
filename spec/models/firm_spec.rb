@@ -23,11 +23,11 @@ RSpec.describe "Firm" do
       end
 
       it "returns the correct permissions" do
-        expect(firm.reload.permissions).to match_array [permission2, permission1]
+        expect(firm.reload.permissions).to contain_exactly(permission2, permission1)
       end
 
       it "returns all permissions" do
-        expect(firm.permissions.all).to match_array [permission2, permission1]
+        expect(firm.permissions.all).to contain_exactly(permission2, permission1)
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe "Firm" do
 
     context "when no specific firm is searched for" do
       it "returns all records" do
-        expect(Firm.search("")).to match_array([firm3, firm2, firm])
+        expect(Firm.search("")).to contain_exactly(firm3, firm2, firm)
       end
     end
   end

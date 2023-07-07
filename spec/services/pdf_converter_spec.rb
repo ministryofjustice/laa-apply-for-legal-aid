@@ -13,7 +13,7 @@ RSpec.describe PdfConverter do
     let(:statement_of_case) { create(:statement_of_case) }
     let(:file) { FileStruct.new("hello_world.pdf", "application/pdf") }
     let(:original_file) { statement_of_case.original_files.first }
-    let(:filepath) { "#{Rails.root}/spec/fixtures/files/documents/#{file.name}" }
+    let(:filepath) { Rails.root.join("spec/fixtures/files/documents/#{file.name}").to_s }
     let(:attachment) { statement_of_case.legal_aid_application.attachments.create!(attachment_type: "statement_of_case", attachment_name: "statement_of_case") }
 
     before do
@@ -75,7 +75,7 @@ RSpec.describe PdfConverter do
     let(:gateway_evidence) { create(:gateway_evidence) }
     let(:file) { FileStruct.new("hello_world.pdf", "application/pdf") }
     let(:original_file) { gateway_evidence.original_files.first }
-    let(:filepath) { "#{Rails.root}/spec/fixtures/files/documents/#{file.name}" }
+    let(:filepath) { Rails.root.join("spec/fixtures/files/documents/#{file.name}").to_s }
     let(:attachment) { gateway_evidence.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence", attachment_name: "gateway_evidence") }
 
     before do

@@ -2,10 +2,10 @@ require "rails_helper"
 
 RSpec.describe Admin::RolesController do
   let(:admin_user) { create(:admin_user) }
-  let!(:firm) { create(:firm, name: "Noodle, Legs & Co.") }
-  let!(:firm2) { create(:firm, name: "McKenzie, Brackman, Chaney and Kuzak") }
-  let!(:firm3) { create(:firm, name: "McKenzie, Crook, and Gervais") }
-  let!(:firm4) { create(:firm, name: "Nelson and Murdock") }
+  let!(:noodle_firm) { create(:firm, name: "Noodle, Legs & Co.") }
+  let!(:mckenzie_firm) { create(:firm, name: "McKenzie, Brackman, Chaney and Kuzak") }
+  let!(:mckenzie_gervais_firm) { create(:firm, name: "McKenzie, Crook, and Gervais") }
+  let!(:nelson_firm) { create(:firm, name: "Nelson and Murdock") }
 
   before { sign_in admin_user }
 
@@ -24,17 +24,17 @@ RSpec.describe Admin::RolesController do
 
     it "displays firms" do
       subject
-      expect(unescaped_response_body).to include(firm.name)
-      expect(response.body).to include(firm2.name)
+      expect(unescaped_response_body).to include(noodle_firm.name)
+      expect(response.body).to include(mckenzie_firm.name)
     end
 
     context "when the search field is used" do
       it "returns the relevant firm" do
-        expect(Firm.search("Nelson")).to eq([firm4])
+        expect(Firm.search("Nelson")).to eq([nelson_firm])
       end
 
       it "returns all relevant firms" do
-        expect(Firm.search("McKenzie")).to match_array([firm2, firm3])
+        expect(Firm.search("McKenzie")).to contain_exactly(mckenzie_firm, mckenzie_gervais_firm)
       end
     end
   end

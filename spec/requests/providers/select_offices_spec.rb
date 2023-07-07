@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.describe "provider selects office" do
   let(:firm) { create(:firm) }
-  let!(:office1) { create(:office, firm:) }
-  let!(:office2) { create(:office, firm:) }
-  let!(:office3) { create(:office, firm:) }
+  let!(:first_office) { create(:office, firm:) }
+  let!(:second_office) { create(:office, firm:) }
+  let!(:third_office) { create(:office, firm:) }
 
-  let(:provider) { create(:provider, firm:, offices: [office1, office2]) }
+  let(:provider) { create(:provider, firm:, offices: [first_office, second_office]) }
 
   describe "GET providers/select_office" do
     subject { get providers_select_office_path }
@@ -28,12 +28,12 @@ RSpec.describe "provider selects office" do
       end
 
       it "displays the offices of the provider" do
-        expect(unescaped_response_body).to include(office1.code)
-        expect(unescaped_response_body).to include(office2.code)
+        expect(unescaped_response_body).to include(first_office.code)
+        expect(unescaped_response_body).to include(second_office.code)
       end
 
       it "does not display offices belonging to the firm but not the provider" do
-        expect(unescaped_response_body).not_to include(office3.code)
+        expect(unescaped_response_body).not_to include(third_office.code)
       end
     end
   end
@@ -43,7 +43,7 @@ RSpec.describe "provider selects office" do
 
     let(:params) do
       {
-        provider: { selected_office_id: office2.id },
+        provider: { selected_office_id: second_office.id },
       }
     end
 
@@ -54,7 +54,7 @@ RSpec.describe "provider selects office" do
       end
 
       it "updates the record" do
-        expect(provider.reload.selected_office.id).to eq office2.id
+        expect(provider.reload.selected_office.id).to eq second_office.id
       end
 
       it "redirects to the legal aid applications page" do
@@ -76,7 +76,7 @@ RSpec.describe "provider selects office" do
       context "invalid params - selects office from different provider" do
         let(:params) do
           {
-            provider: { selected_office_id: office3.id },
+            provider: { selected_office_id: third_office.id },
           }
         end
 

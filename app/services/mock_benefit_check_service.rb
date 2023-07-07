@@ -35,7 +35,7 @@ class MockBenefitCheckService
 
   def known?
     key = last_name.to_s.upcase
-    return unless KNOWN.key?(key)
+    return false unless KNOWN.key?(key)
 
     KNOWN[key] == applicant_data
   end

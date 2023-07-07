@@ -46,9 +46,9 @@ RSpec.describe AggregatedCashOutgoings do
     end
 
     context "when cash income transaction records exist" do
-      let!(:maintenance_out1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out) }
-      let!(:maintenance_out2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out) }
-      let!(:maintenance_out3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out) }
+      let!(:maintenance_out_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out) }
+      let!(:maintenance_out_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out) }
+      let!(:maintenance_out_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out) }
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
@@ -62,9 +62,9 @@ RSpec.describe AggregatedCashOutgoings do
 
       it "populates the model" do
         expect(aco.check_box_maintenance_out).to eq "true"
-        expect(aco.maintenance_out1).to eq maintenance_out1.amount
-        expect(aco.maintenance_out2).to eq maintenance_out2.amount
-        expect(aco.maintenance_out3).to eq maintenance_out3.amount
+        expect(aco.maintenance_out1).to eq maintenance_out_first_month.amount
+        expect(aco.maintenance_out2).to eq maintenance_out_second_month.amount
+        expect(aco.maintenance_out3).to eq maintenance_out_third_month.amount
         expect(aco.check_box_legal_aid).to be_nil
         expect(aco.legal_aid1).to be_nil
         expect(aco.legal_aid2).to be_nil

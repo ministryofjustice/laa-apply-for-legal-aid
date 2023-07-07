@@ -83,7 +83,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
         end
 
         it "does not update the scope limitations" do
-          expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to match_array([])
+          expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to be_empty
         end
 
         it "generates the expected error message" do
@@ -114,7 +114,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
           end
 
           it "does not update the scope limitations" do
-            expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to match_array([])
+            expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to be_empty
           end
 
           it "generates the expected error message" do
@@ -148,7 +148,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
       end
 
       it "does not update the scope limitations" do
-        expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to match_array([])
+        expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to be_empty
       end
 
       it "generates the expected error message" do

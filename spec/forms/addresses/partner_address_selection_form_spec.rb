@@ -24,7 +24,7 @@ RSpec.describe Addresses::PartnerAddressSelectionForm, type: :form do
 
       it "contains a presence error on the lookup_id" do
         expect(form).not_to be_valid
-        expect(form.errors[:lookup_id]).to match_array(["Select an address from the list"])
+        expect(form.errors[:lookup_id]).to contain_exactly("Select an address from the list")
       end
     end
   end

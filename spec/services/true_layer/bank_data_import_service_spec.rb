@@ -34,7 +34,7 @@ RSpec.describe TrueLayer::BankDataImportService do
           .to change(BankAccount, :count).by(mock_data[:accounts].count)
 
         expect(bank_provider.bank_accounts.pluck(:true_layer_id))
-          .to contain_exactly(*mock_data[:accounts].pluck(:account_id))
+          .to match_array(mock_data[:accounts].pluck(:account_id))
       end
 
       it "imports the account balances" do
@@ -45,7 +45,7 @@ RSpec.describe TrueLayer::BankDataImportService do
         end
 
         expect(bank_provider.bank_accounts.pluck(:balance))
-          .to contain_exactly(*mock_account_balances)
+          .to match_array(mock_account_balances)
       end
 
       it "imports the bank account holders" do
@@ -67,7 +67,7 @@ RSpec.describe TrueLayer::BankDataImportService do
           .flat_map(&:bank_transactions)
           .pluck(:true_layer_id)
 
-        expect(transaction_ids).to contain_exactly(*mock_transaction_ids)
+        expect(transaction_ids).to match_array(mock_transaction_ids)
       end
 
       it "is successful" do
@@ -127,7 +127,7 @@ RSpec.describe TrueLayer::BankDataImportService do
         expect(bank_provider.credentials_id)
           .to eq(sample_data::PROVIDERS.first[:credentials_id])
         expect(bank_provider.bank_accounts.pluck(:true_layer_id))
-          .to contain_exactly(*sample_data::ACCOUNTS.pluck(:account_id))
+          .to match_array(sample_data::ACCOUNTS.pluck(:account_id))
       end
     end
   end

@@ -32,8 +32,8 @@ RSpec.describe BankTransaction do
         trx_eb2 = create(:bank_transaction, :credit, transaction_type: excluded_benefits)
 
         grouped_transactions = described_class.by_parent_transaction_type
-        expect(grouped_transactions[pension]).to match_array [trx_p1, trx_p2]
-        expect(grouped_transactions[benefits]).to match_array [trx_b1, trx_b2, trx_eb1, trx_eb2]
+        expect(grouped_transactions[pension]).to contain_exactly(trx_p1, trx_p2)
+        expect(grouped_transactions[benefits]).to contain_exactly(trx_b1, trx_b2, trx_eb1, trx_eb2)
       end
     end
   end

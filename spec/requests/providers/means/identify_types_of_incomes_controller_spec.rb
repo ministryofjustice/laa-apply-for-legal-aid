@@ -197,9 +197,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       end
 
       it "synchronizes credit transaction types" do
-        expect(legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type)).to match_array [benefits_credit, friends_or_family_credit]
+        expect(legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type)).to contain_exactly(benefits_credit, friends_or_family_credit)
         request
-        expect(legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type)).to match_array [friends_or_family_credit]
+        expect(legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type)).to contain_exactly(friends_or_family_credit)
       end
 
       it "does not remove existing debit transaction types" do
@@ -207,9 +207,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       end
 
       it "synchronizes credit transaction types cash transactions" do
-        expect(legal_aid_application.cash_transactions.credits.map(&:transaction_type).uniq).to match_array [benefits_credit, friends_or_family_credit]
+        expect(legal_aid_application.cash_transactions.credits.map(&:transaction_type).uniq).to contain_exactly(benefits_credit, friends_or_family_credit)
         request
-        expect(legal_aid_application.cash_transactions.credits.map(&:transaction_type).uniq).to match_array [friends_or_family_credit]
+        expect(legal_aid_application.cash_transactions.credits.map(&:transaction_type).uniq).to contain_exactly(friends_or_family_credit)
       end
 
       it "does not remove any debit cash transactions" do

@@ -57,7 +57,7 @@ module Providers
       end
 
       def authorize_portal_user?
-        return if current_provider.portal_enabled?
+        return false if current_provider.portal_enabled?
 
         begin
           raise AuthController::AuthorizationError, "Provider not enabled on the portal"

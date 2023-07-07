@@ -89,7 +89,7 @@ module Banking
     end
 
     def regex_pattern
-      @regex_pattern ||= Regexp.new(/\b(#{keys})\b/)
+      @regex_pattern ||= /\b(#{keys})\b/
     end
 
     def keys
