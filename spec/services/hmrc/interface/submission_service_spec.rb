@@ -19,10 +19,10 @@ RSpec.describe HMRC::Interface::SubmissionService do
       )
   end
 
-  let(:application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
-  let(:applicant) { application.applicant }
+  let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_transaction_period) }
+  let(:owner) { application.applicant }
   let(:use_case) { "one" }
-  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
+  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, owner_id: owner.id, owner_type: owner.class) }
 
   describe ".call" do
     subject(:call) { interface.call }
@@ -90,6 +90,46 @@ RSpec.describe HMRC::Interface::SubmissionService do
 
     it "returns the expected json string" do
       expect(call.keys).to match_array %i[id _links]
+    end
+  end
+
+  describe ".request_body" do
+    subject(:request_body) { interface.request_body }
+
+    context "when the owner is an applicant" do
+      let(:expected_data) do
+        {
+          filter: {
+            first_name: owner.first_name,
+            last_name: owner.last_name,
+            dob: owner.date_of_birth,
+            nino: owner.national_insurance_number,
+            start_date: Time.zone.today - 3.months,
+            end_date: Time.zone.today,
+          },
+        }.to_json
+      end
+
+      it { expect(request_body).to eq(expected_data) }
+    end
+
+    context "when the owner is a partner" do
+      let(:owner) { application.partner }
+
+      let(:expected_data) do
+        {
+          filter: {
+            first_name: owner.first_name,
+            last_name: owner.last_name,
+            dob: owner.date_of_birth,
+            nino: owner.national_insurance_number,
+            start_date: Time.zone.today - 3.months,
+            end_date: Time.zone.today,
+          },
+        }.to_json
+      end
+
+      it { expect(request_body).to eq(expected_data) }
     end
   end
 end
