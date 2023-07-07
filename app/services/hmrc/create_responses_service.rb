@@ -12,18 +12,18 @@ module HMRC
     end
 
     def call
-      # return unless @legal_aid_application.hmrc_responses.empty?
+      return unless @legal_aid_application.hmrc_responses.empty?
 
       individuals = []
       individuals << @legal_aid_application.applicant
-      if @legal_aid_application.applicant.has_partner?
+      if @legal_aid_application.applicant.has_partner? && @legal_aid_application.partner.has_national_insurance_number?
         # not sure if we do need to check whether they have NI or not but have left it in for now
-        individuals << @legal_aid_application.partner if @legal_aid_application.partner.has_national_insurance_number?
+        individuals << @legal_aid_application.partner
       end
 
       USE_CASES.each do |use_case|
         individuals.each do |person|
-          hmrc_response = @legal_aid_application.hmrc_responses.create(use_case:, owner_id: person.id, owner_type: person.class)
+          hmrc_response = person.hmrc_responses.create(use_case:, legal_aid_application: @legal_aid_application)
           if use_mock?
             MockInterfaceResponseService.call(hmrc_response)
           else
