@@ -30,7 +30,7 @@
         local: true,
       ) do |form| %>
 
-    <div id="uploaded-files-table-container" data-loading-img="<%= image_path("loading-small.gif") %>" data-uploading="<%= t("generic.uploading") %>">
+    <div id="uploaded-files-table-container" data-uploading="<%= t("generic.uploading") %>">
       <%= render partial: "uploaded_files", locals: { attachments: @legal_aid_application.uploaded_evidence_collection.original_attachments } %>
     </div>
     <div aria-live="assertive" class="govuk-visually-hidden" id="file-upload-status-message"></div>

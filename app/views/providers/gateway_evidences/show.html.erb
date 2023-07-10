@@ -46,7 +46,7 @@
     <% end %>
   <% end %>
 
-  <div id="uploaded-files-table-container" data-loading-img="<%= image_path("loading-small.gif") %>" data-uploading="<%= t("generic.uploading") %>">
+  <div id="uploaded-files-table-container" data-uploading="<%= t("generic.uploading") %>">
     <%= render partial: "uploaded_files", locals: { attachments: @form.model.original_attachments } %>
   </div>
 

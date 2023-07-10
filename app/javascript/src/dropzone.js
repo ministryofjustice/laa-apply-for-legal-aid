@@ -1,4 +1,5 @@
 import Dropzone from 'dropzone'
+import imgLoading from '../../assets/images/loading-small.gif'
 
 const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
 
@@ -154,16 +155,18 @@ document.addEventListener('DOMContentLoaded', event => {
     if (dzInput) {
       dzInput.style.display = 'none'
     }
-  }
-})
 
-window.LAA_VARS = {
-  images: {
-    loading_small: document.querySelector('#uploaded-files-table-container').getAttribute('data-loading-img')
-  },
-  locales: {
-    generic: {
-      uploading: document.querySelector('#uploaded-files-table-container').getAttribute('data-uploading')
+    const uploadingText = document.querySelector('#uploaded-files-table-container').getAttribute('data-uploading')
+
+    window.LAA_VARS = {
+      images: {
+        loading_small: imgLoading
+      },
+      locales: {
+        generic: {
+          uploading: uploadingText
+        }
+      }
     }
   }
-}
+})
