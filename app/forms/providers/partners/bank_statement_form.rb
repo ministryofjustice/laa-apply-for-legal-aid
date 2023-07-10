@@ -19,7 +19,7 @@ module Providers
           most_recent_name = legal_aid_application.attachments.partner_bank_statement_evidence.order(:created_at, :attachment_name).last.attachment_name
           increment_name(most_recent_name)
         else
-          @attachment_type
+          attachment_type
         end
       end
     end

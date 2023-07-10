@@ -1,6 +1,6 @@
 module V1
   module Partners
-    class BankStatementsController < V1::BankStatementsController
+    class BankStatementsController < BaseBankStatementsController
       def initialize
         super
         @attachment_type = "partner_bank_statement_evidence"
@@ -15,7 +15,7 @@ module V1
           most_recent_name = legal_aid_application.attachments.partner_bank_statement_evidence.order(:attachment_name).last.attachment_name
           increment_name(most_recent_name)
         else
-          @attachment_type
+          attachment_type
         end
       end
 
