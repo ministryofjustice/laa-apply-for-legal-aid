@@ -14,12 +14,8 @@ module HMRC
     def call
       return unless @legal_aid_application.hmrc_responses.empty?
 
-      individuals = []
-      individuals << @legal_aid_application.applicant
-      if @legal_aid_application.applicant.has_partner? && @legal_aid_application.partner.has_national_insurance_number?
-        # not sure if we do need to check whether they have NI or not but have left it in for now
-        individuals << @legal_aid_application.partner
-      end
+      individuals = [@legal_aid_application.applicant]
+      individuals << @legal_aid_application.partner if check_partner?
 
       USE_CASES.each do |use_case|
         individuals.each do |person|
@@ -41,6 +37,10 @@ module HMRC
 
     def not_production_environment?
       !HostEnv.production?
+    end
+
+    def check_partner?
+      @legal_aid_application.applicant.has_partner? && @legal_aid_application.partner.has_national_insurance_number?
     end
   end
 end
