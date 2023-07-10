@@ -19,6 +19,7 @@ Given(/^an applicant named (\S+) (\S+) with a partner has completed their true l
                                              :provider_assessing_means,
                                              :with_proceedings,
                                              applicant: @applicant,
+                                             partner: create(:partner),
                                              provider_step: "client_completed_means",
                                              provider: @registered_provider
   bank_account = @applicant.bank_accounts.first
