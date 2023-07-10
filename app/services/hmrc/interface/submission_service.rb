@@ -17,7 +17,7 @@ module HMRC
       end
 
       def request_body
-        @request_body ||= { filter: applicant_values.merge(date_values) }.to_json
+        @request_body ||= { filter: owner_values.merge(date_values) }.to_json
       end
 
     private
@@ -30,8 +30,8 @@ module HMRC
         @use_case ||= @hmrc_response.use_case
       end
 
-      def applicant_values
-        @applicant_values ||= @hmrc_response.owner.json_for_hmrc
+      def owner_values
+        @owner_values ||= @hmrc_response.owner.json_for_hmrc
       end
 
       def date_values
