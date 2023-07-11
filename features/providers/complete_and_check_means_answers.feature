@@ -5,7 +5,7 @@ Feature: Completing and checking means answers backwards and forwards
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
 
     Then I select 'Pension'
     And I click 'Save and continue'
@@ -53,7 +53,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing 'Your client has shared their financial information'
 
     When I click 'Continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
 
     When I select 'Pension'
     And I click 'Save and continue'

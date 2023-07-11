@@ -13,7 +13,7 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   Then I should be on the 'employment_income' page showing "Enter details about your client's employment"
   When I fill "legal aid application extra employment information details error" with "some extra details about employment"
   And I click 'Save and continue'
-  Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+  Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
   Then I select "My client receives none of these payments"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client get student finance?"
@@ -43,7 +43,7 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   Then I fill "legal aid application full employment details error" with "all the details about employment"
   And I click 'Save and continue'
 
-  Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+  Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
   Then I select "My client receives none of these payments"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client get student finance?"
@@ -71,7 +71,7 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   Then I fill "legal aid application full employment details error" with "all the details about employment"
   And I click 'Save and continue'
 
-  Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+  Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
   Then I select "My client receives none of these payments"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client get student finance?"

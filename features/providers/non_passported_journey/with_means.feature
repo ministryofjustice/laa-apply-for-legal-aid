@@ -5,7 +5,7 @@ Feature: non_passported_journey with means
     Then I should be on a page showing 'Your client has shared their financial information'
 
     When I click 'Continue'
-    Then I should be on a page showing "Which payments does your client receive?"
+    Then I should be on a page showing "Which of these payments does your client get?"
 
     When I select 'Pension'
     And I click 'Save and continue'
@@ -64,7 +64,7 @@ Feature: non_passported_journey with means
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
-    Then I should be on a page with title "Which payments does your client receive?"
+    Then I should be on a page with title "Which of these payments does your client get?"
 
     When I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"

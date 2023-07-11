@@ -14,7 +14,7 @@ Feature: Check pending employment
 
     When I fill "legal-aid-application-full-employment-details-field" with "Pending"
     And I click 'Save and continue'
-    Then I should be on a page showing "Which payments does your client receive?"
+    Then I should be on a page showing "Which of these payments does your client get?"
     When I select 'Pension'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"
