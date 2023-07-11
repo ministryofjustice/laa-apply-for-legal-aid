@@ -345,16 +345,6 @@ jobs:
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}"
 
-  clean_up_ecr:
-    executor: cloud-platform-executor
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Delete old images from ecr repo
-          command: |
-            ./bin/clean_up_ecr
-
   delete_dependabot_deployment:
     executor: cloud-platform-executor
     steps:
@@ -498,13 +488,3 @@ workflows:
           requires:
             - hold_production
           <<: *generic-slack-fail-post-step
-
-  nightly:
-    triggers:
-    - schedule:
-        cron: "0 2 * * *"
-        filters:
-          branches:
-            only: main
-    jobs:
-    - clean_up_ecr
