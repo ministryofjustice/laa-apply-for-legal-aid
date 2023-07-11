@@ -67,6 +67,7 @@ class NonPassportedStateMachine < BaseStateMachine
       transitions from: %i[
                     provider_confirming_applicant_eligibility
                     provider_assessing_means
+                    assessing_partner_means
                   ],
                   to: :assessing_partner_means
     end
