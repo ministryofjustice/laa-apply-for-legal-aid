@@ -3,12 +3,12 @@
                     elsif @error_message || @successful_upload
                       "#{@successful_upload} #{@error_message}"
                     else
-                      heading
+                      t(".h1-heading", individual:)
                     end
    form_error_class = @form.errors.any? ? "govuk-form-group--error" : "" %>
 
 <%= page_template(
-      page_title: heading,
+      page_title: t(".h1-heading", individual:),
       head_title: new_head_title,
       template: :basic,
       back_link: {},
@@ -35,7 +35,7 @@
     <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" },
                             caption: { text: caption, size: "l" } do %>
 
-      <% t(".info").each do |item| %>
+      <% t(".info", individual:).each do |item| %>
         <p class="govuk-body"><%= item %></p>
       <% end %>
 

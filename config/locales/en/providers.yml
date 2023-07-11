@@ -537,7 +537,6 @@ en:
             - has certain regular outgoings (for example, childcare)
       bank_statements:
         show:
-          h1-heading: Upload the partner's bank statements
           warning: |
             Do not upload bank statements for any joint accounts if you or your
             client already has shared them
@@ -624,9 +623,6 @@ en:
         feedback_suffix: " to help us improve this service."
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
-    bank_statements:
-      show:
-        h1-heading: Upload your client's bank statements
     uploaded_evidence_collections:
       upload_evidence:
         single_item: "Use this page to provide evidence of %{evidence_type}."
