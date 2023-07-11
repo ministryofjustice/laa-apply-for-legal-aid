@@ -338,7 +338,7 @@ jobs:
                         --install --wait \
                         --namespace=${K8S_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
-                        --set image.repository="${ECR_REGISTRY}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                         --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
@@ -355,7 +355,7 @@ jobs:
                         --install --wait \
                         --namespace=${K8S_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
-                        --set image.repository="${ECR_REGISTRY}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                         --set image.tag="${CIRCLE_SHA1}"
 
   clean_up_ecr:
