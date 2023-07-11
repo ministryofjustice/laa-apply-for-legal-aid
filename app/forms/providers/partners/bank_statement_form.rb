@@ -1,6 +1,6 @@
 module Providers
   module Partners
-    class BankStatementForm < Providers::BankStatementForm
+    class BankStatementForm < BaseBankStatementForm
       def initialize(bank_statement_form_params)
         super(bank_statement_form_params)
         @attachment_type = "partner_bank_statement_evidence"
