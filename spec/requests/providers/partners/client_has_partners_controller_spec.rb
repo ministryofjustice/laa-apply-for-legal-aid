@@ -37,7 +37,7 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
       let(:params) { { applicant: { has_partner: "true" } } }
 
       it "redirects to the partners_details page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_details_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_contrary_interest_path(legal_aid_application))
       end
     end
 

@@ -543,6 +543,17 @@ en:
             - in a civil partnership with
             - normally lives with as a couple, even if they are not living together
               right now - for example, if one person is in hospital, prison or abroad
+      contrary_interests:
+        show:
+          page_title: Does the partner have a contrary interest in the proceedings?
+          details_content_para_one: "For example, if they:"
+          details_content_para_two: |
+            We're asking this because your client may still be entitled to a deduction
+            if their partner has a contrary interest. However, we will not assess
+            the partner's means.
+          details_list:
+            - are the opponent
+            - want a different outcome in the proceedings to your client
       details:
         show:
           page_title: Enter the partner's details

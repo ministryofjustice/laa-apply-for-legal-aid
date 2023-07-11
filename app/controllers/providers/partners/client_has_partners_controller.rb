@@ -2,11 +2,11 @@ module Providers
   module Partners
     class ClientHasPartnersController < ProviderBaseController
       def show
-        @form = Providers::Partners::ClientHasPartnerForm.new(model: applicant)
+        @form = ::Partners::ClientHasPartnerForm.new(model: applicant)
       end
 
       def update
-        @form = Providers::Partners::ClientHasPartnerForm.new(form_params)
+        @form = ::Partners::ClientHasPartnerForm.new(form_params)
         render :show unless save_continue_or_draft(@form, has_partner: @form.has_partner?)
       end
 
