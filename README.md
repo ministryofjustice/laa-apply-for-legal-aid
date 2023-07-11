@@ -397,8 +397,6 @@ This will then allow you to connect to the database, eg:
 
 Backups are taken daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
 
-A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am.
-
 ## Anonymised database export and local restore
 
 In order to create an anonymised dump of an environments database you can:
