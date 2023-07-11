@@ -14,7 +14,7 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   When I fill "legal aid application extra employment information details error" with "some extra details about employment"
   And I click 'Save and continue'
   Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
-  Then I select "My client receives none of these payments"
+  Then I select "My client does not get any of these payments"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client get student finance?"
 
@@ -44,7 +44,7 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   And I click 'Save and continue'
 
   Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
-  Then I select "My client receives none of these payments"
+  Then I select "My client does not get any of these payments"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client get student finance?"
 
@@ -72,7 +72,7 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   And I click 'Save and continue'
 
   Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
-  Then I select "My client receives none of these payments"
+  Then I select "My client does not get any of these payments"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client get student finance?"
 

@@ -5,7 +5,7 @@ Feature: non_passported_journey with dependants
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
-    Then I select "My client receives none of these payments"
+    Then I select "My client does not get any of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client get student finance?"
     When I choose "No"
@@ -75,7 +75,7 @@ Feature: non_passported_journey with dependants
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
-    Then I select "My client receives none of these payments"
+    Then I select "My client does not get any of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client get student finance?"
     When I choose "No"
