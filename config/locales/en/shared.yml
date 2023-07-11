@@ -766,7 +766,6 @@ en:
       evidence: You'll need to upload supporting evidence later.
       employment_details_header: Enter %{individual}'s employment details
     bank_statements:
-      h1-heading: Upload your %{individual}'s bank statements
       choose_files_btn: Choose files
       dropzone_message: Drag and drop files here or
       file_not_uploaded_error: Upload the selected file

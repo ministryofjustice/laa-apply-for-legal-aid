@@ -3,12 +3,12 @@
                     elsif @error_message || @successful_upload
                       "#{@successful_upload} #{@error_message}"
                     else
-                      t(".h1-heading", individual:)
+                      heading
                     end
    form_error_class = @form.errors.any? ? "govuk-form-group--error" : "" %>
 
 <%= page_template(
-      page_title: t(".h1-heading", individual:),
+      page_title: heading,
       head_title: new_head_title,
       template: :basic,
       back_link: {},
