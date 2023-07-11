@@ -829,13 +829,13 @@ en:
           ni: National Insurance
       identify_types_of_incomes:
         show:
-          page_heading: Which payments does your client receive?
-          none_of_these: My client receives none of these payments
+          page_heading: Which of these payments does your client get?
+          none_of_these: My client does not get any of these payments
           hints:
-            friends_or_family: For example, money from a family member for rent or bills.
+            friends_or_family: This includes any regular payments your client gets from their friends or family. Do not include one-off payments..
             benefits: For example, Child Benefit or tax credits.
             maintenance_in: This includes child maintenance.
-            pension: Include State, workplace and personal pensions.
+            pension: This includes State, workplace and personal pensions.
         update:
           none_selected: Select if your client receives any types of income
       cash_incomes:
