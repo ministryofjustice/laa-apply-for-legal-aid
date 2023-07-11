@@ -1,7 +1,7 @@
 #!/bin/sh
 
 deploy() {
-  IMG_REPO="$ECR_ENDPOINT/$GITHUB_TEAM_NAME_SLUG/$REPO_NAME"
+  IMG_REPO="$ECR_REGISTRY/$GITHUB_TEAM_NAME_SLUG/$REPO_NAME"
   RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk"
