@@ -1307,26 +1307,6 @@ en:
         you_need_to: You need to sort your client's transactions into categories so we can understand their financial situation and process your application quickly.
         print_guidance_button: Print this guidance
         can_your_client_share: Can your client share their bank statements using online banking?
-    other_assets:
-      show:
-        h1-heading: Which assets does your client have?
-        none_of_these: My client has none of these assets
-      second_home_conditional_checkbox:
-        check_box_second_home: Second property or holiday home
-        second_home_mortgage: Enter the outstanding mortgage amount
-        second_home_percentage: Enter the share your client owns
-        second_home_value: Enter the estimated value
-    policy_disregards:
-      show:
-        h1-heading: Select if your client has received payments from these schemes or charities
-        england_infected_blood_support: England Infected Blood Support Scheme
-        vaccine_damage_payments: Vaccine Damage Payments Scheme
-        variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
-        criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
-        national_emergencies_trust: National Emergencies Trust (NET)
-        we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
-        london_emergencies_trust: The London Emergencies Trust
-        none_of_these: My client has received none of these payments
     outgoings_summary:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
