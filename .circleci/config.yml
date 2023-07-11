@@ -9,8 +9,6 @@ executors:
   basic-executor:
     docker:
       - image: cimg/base:2020.01
-        environment:
-          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
       - image: cimg/ruby:3.2.2-browsers
@@ -22,7 +20,6 @@ executors:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.3.0
         environment:
-          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
           TZ: Europe/London
   notification-executor:
     docker:
@@ -35,7 +32,6 @@ executors:
       - image: ministryofjustice/apply-ci:latest-3.2.2
         environment:
           RAILS_ENV: test
-          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
           CACHE_VERSION: v1
           NODE_OPTIONS: --openssl-legacy-provider
       - image: cimg/postgres:11.16
