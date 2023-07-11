@@ -96,38 +96,25 @@ RSpec.describe HMRC::Interface::SubmissionService do
   describe ".request_body" do
     subject(:request_body) { interface.request_body }
 
-    context "when the owner is an applicant" do
-      let(:expected_data) do
-        {
-          filter: {
-            first_name: owner.first_name,
-            last_name: owner.last_name,
-            dob: owner.date_of_birth,
-            nino: owner.national_insurance_number,
-            start_date: Time.zone.today - 3.months,
-            end_date: Time.zone.today,
-          },
-        }.to_json
-      end
+    let(:expected_data) do
+      {
+        filter: {
+          first_name: owner.first_name,
+          last_name: owner.last_name,
+          dob: owner.date_of_birth,
+          nino: owner.national_insurance_number,
+          start_date: Time.zone.today - 3.months,
+          end_date: Time.zone.today,
+        },
+      }.to_json
+    end
 
+    context "when the owner is an applicant" do
       it { expect(request_body).to eq(expected_data) }
     end
 
     context "when the owner is a partner" do
       let(:owner) { application.partner }
-
-      let(:expected_data) do
-        {
-          filter: {
-            first_name: owner.first_name,
-            last_name: owner.last_name,
-            dob: owner.date_of_birth,
-            nino: owner.national_insurance_number,
-            start_date: Time.zone.today - 3.months,
-            end_date: Time.zone.today,
-          },
-        }.to_json
-      end
 
       it { expect(request_body).to eq(expected_data) }
     end
