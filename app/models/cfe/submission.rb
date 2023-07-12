@@ -4,7 +4,7 @@ module CFE
 
     belongs_to :legal_aid_application
     has_many :submission_histories, -> { order(created_at: :asc) }, inverse_of: :submission
-    has_one :result, class_name: "BaseResult"
+    has_one :result, class_name: "BaseResult", dependent: :destroy
 
     delegate :passported?, :non_passported?, :uploading_bank_statements?, to: :legal_aid_application
 
