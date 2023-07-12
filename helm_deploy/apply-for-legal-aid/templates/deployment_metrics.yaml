@@ -24,6 +24,7 @@ spec:
         release: {{ .Release.Name }}
         service: {{ template "apply-for-legal-aid.fullname" . }}-metrics
     spec:
+      serviceAccountName: "{{ .Values.service_account.name }}"
       containers:
         - name: metrics
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
