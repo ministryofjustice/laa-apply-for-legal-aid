@@ -102,16 +102,6 @@ references:
       name: Install Yarn packages
       command: yarn --frozen-lockfile
 
-  setup_uat_kubectl: &setup_uat_kubectl
-    run:
-      name: Kubectl deployment setup UAT
-      command: |
-        echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
-        kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
-        kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
-        kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_UAT_NAMESPACE}
-        kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
-
   update_packages: &update_packages
     run:
       name: Update packages
@@ -308,7 +298,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - *setup_uat_kubectl
+    - *authenticate_k8s_live
     - *decrypt_secrets
     - deploy:
         name: Helm deployment to UAT
@@ -367,7 +357,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - *setup_uat_kubectl
+    - *authenticate_k8s_live
     - run:
         name: Delete dependabot deployment
         command: |
