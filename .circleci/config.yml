@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@4.0.0
   browser-tools: circleci/browser-tools@1.2.3
   slack: circleci/slack@4.5.2
 
@@ -8,8 +9,6 @@ executors:
   basic-executor:
     docker:
       - image: cimg/base:2020.01
-        environment:
-          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
       - image: cimg/ruby:3.2.2-browsers
@@ -21,7 +20,6 @@ executors:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.3.0
         environment:
-          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
           TZ: Europe/London
   notification-executor:
     docker:
@@ -34,12 +32,38 @@ executors:
       - image: ministryofjustice/apply-ci:latest-3.2.2
         environment:
           RAILS_ENV: test
-          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
           CACHE_VERSION: v1
           NODE_OPTIONS: --openssl-legacy-provider
       - image: cimg/postgres:11.16
       - image: cimg/redis:6.2
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
+
+commands:
+  build-and-push-to-ecr:
+    description: Build and push image to ECR repository
+    steps:
+      - run:
+          name: Build docker image
+          command: |
+            docker build \
+            --build-arg BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z) \
+            --build-arg BUILD_TAG="app-${CIRCLE_SHA1}" \
+            --build-arg APP_BRANCH=${CIRCLE_BRANCH} \
+            -t app . | while read line ; do echo "$(date +"%T") > $line" ; done ;
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME
+          region: $ECR_REGION
+      - run:
+          name: Push image to ECR repository
+          command: |
+            aws ecr get-login-password --region ${ECR_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+            docker tag app "${ECR_REGISTRY}/${ECR_REPOSITORY}:${CIRCLE_SHA1}"
+            docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:${CIRCLE_SHA1}"
+
+            if [ "${CIRCLE_BRANCH}" == "main" ]; then
+              docker tag app "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
+              docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
+            fi
 
 references:
   decrypt_secrets: &decrypt_secrets
@@ -48,6 +72,7 @@ references:
       command: |
         echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
         git-crypt unlock git-crypt.key
+
   authenticate_k8s_live: &authenticate_k8s_live
     run:
       name: Authenticate with cluster
@@ -57,6 +82,7 @@ references:
         kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
         kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
+
   install_gems: &install_gems
     run:
       name: Install ruby gems
@@ -75,17 +101,6 @@ references:
     run:
       name: Install Yarn packages
       command: yarn --frozen-lockfile
-
-  setup_uat_kubectl: &setup_uat_kubectl
-    run:
-      name: Kubectl deployment setup UAT
-      command: |
-        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${ECR_ENDPOINT}
-        echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
-        kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
-        kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
-        kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_UAT_NAMESPACE}
-        kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
 
   update_packages: &update_packages
     run:
@@ -276,38 +291,20 @@ jobs:
     - setup_remote_docker:
         version: 20.10.7
     - *decrypt_secrets
-    - run:
-        name: Build docker images
-        command: |
-          docker build \
-          --build-arg BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z) \
-          --build-arg BUILD_TAG="app-${CIRCLE_SHA1}" \
-          --build-arg APP_BRANCH=${CIRCLE_BRANCH} \
-          -t app . | while read line ; do echo "$(date +"%T") > $line" ; done ;
-    - run:
-        name: Push docker image to ECR repo
-        command: |
-          aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${ECR_ENDPOINT}
-          docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
-          docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
-
-          case "${CIRCLE_BRANCH}" in
-            main)
-              docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-              docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-          esac
+    - build-and-push-to-ecr
 
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
-    - *setup_uat_kubectl
+    - *authenticate_k8s_live
     - *decrypt_secrets
     - deploy:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
+
   deploy_main_uat:
     <<: *deploy_uat
 
@@ -325,7 +322,7 @@ jobs:
                         --install --wait \
                         --namespace=${K8S_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
-                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                         --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
@@ -342,7 +339,7 @@ jobs:
                         --install --wait \
                         --namespace=${K8S_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
-                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                         --set image.tag="${CIRCLE_SHA1}"
 
   clean_up_ecr:
@@ -360,7 +357,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - *setup_uat_kubectl
+    - *authenticate_k8s_live
     - run:
         name: Delete dependabot deployment
         command: |
