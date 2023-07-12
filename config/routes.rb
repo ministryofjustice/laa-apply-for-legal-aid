@@ -272,6 +272,7 @@ Rails.application.routes.draw do
 
       scope module: :partners do
         resource :client_has_partner, only: %i[show update]
+        resource :contrary_interest, only: %i[show update]
       end
 
       namespace :partners do

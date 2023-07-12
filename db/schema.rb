@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_06_095142) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_081546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_095142) do
     t.jsonb "encrypted_true_layer_token"
     t.boolean "has_partner"
     t.boolean "receives_state_benefits"
+    t.boolean "partner_has_contrary_interest"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true

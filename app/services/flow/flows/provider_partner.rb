@@ -6,9 +6,19 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_client_has_partner_path(application) },
           forward: lambda do |_application, options|
             if options[:has_partner]
-              :partner_details
+              :contrary_interests
             else
               :check_provider_answers
+            end
+          end,
+        },
+        contrary_interests: {
+          path: ->(application) { urls.providers_legal_aid_application_contrary_interest_path(application) },
+          forward: lambda do |_application, options|
+            if options[:partner_has_contrary_interest]
+              :check_provider_answers
+            else
+              :partner_details
             end
           end,
         },
