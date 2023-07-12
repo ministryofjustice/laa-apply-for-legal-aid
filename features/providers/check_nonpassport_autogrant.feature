@@ -6,7 +6,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
 
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
     Then I select 'Pension'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"
@@ -131,7 +131,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
 
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
     Then I select 'Pension'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client receives in cash"

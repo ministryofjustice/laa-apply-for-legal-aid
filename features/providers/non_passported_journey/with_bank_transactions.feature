@@ -5,7 +5,7 @@ Feature: non_passported_journey with bank transactions
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
 
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
     Then I select 'Pension'
     And I select 'Financial help from friends or family'
     And I click 'Save and continue'
