@@ -19,7 +19,7 @@ RSpec.describe HMRC::CreateResponsesService do
         expect { call }.to change { legal_aid_application.hmrc_responses.count }.by(2)
       end
 
-      it "adds te applicant as owner to each response record created" do
+      it "adds the applicant as owner to each response record created" do
         legal_aid_application.reload.hmrc_responses.each do |response|
           expect(response.owner_id).to eq(legal_aid_application.applicant.id)
           expect(response.owner_type).to eq(legal_aid_application.applicant.class)
@@ -65,6 +65,30 @@ RSpec.describe HMRC::CreateResponsesService do
               expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
             end
           end
+        end
+      end
+    end
+
+    context "when successful and applicant has a partner with an NI number" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_transaction_period) }
+
+      it "creates four hmrc_response records, one for each use case for each individual" do
+        expect { call }.to change { legal_aid_application.hmrc_responses.count }.by(4)
+        expect(legal_aid_application.applicant.hmrc_responses.count).to eq 2
+        expect(legal_aid_application.partner.hmrc_responses.count).to eq 2
+      end
+
+      it "adds the applicant as owner to each response record created" do
+        legal_aid_application.applicant.reload.hmrc_responses.each do |response|
+          expect(response.owner_id).to eq(legal_aid_application.applicant.id)
+          expect(response.owner_type).to eq(legal_aid_application.applicant.class)
+        end
+      end
+
+      it "adds the partner as owner to each response record created" do
+        legal_aid_application.partner.reload.hmrc_responses.each do |response|
+          expect(response.owner_id).to eq(legal_aid_application.partner.id)
+          expect(response.owner_type).to eq(legal_aid_application.partner.class)
         end
       end
     end

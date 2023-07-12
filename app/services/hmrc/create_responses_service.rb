@@ -14,14 +14,17 @@ module HMRC
     def call
       return unless @legal_aid_application.hmrc_responses.empty?
 
-      applicant = @legal_aid_application.applicant
+      individuals = [@legal_aid_application.applicant]
+      individuals << @legal_aid_application.partner if check_partner?
 
       USE_CASES.each do |use_case|
-        hmrc_response = @legal_aid_application.hmrc_responses.create(use_case:, owner_id: applicant.id, owner_type: applicant.class)
-        if use_mock?
-          MockInterfaceResponseService.call(hmrc_response)
-        else
-          HMRC::SubmissionWorker.perform_async(hmrc_response.id)
+        individuals.each do |person|
+          hmrc_response = person.hmrc_responses.create(use_case:, legal_aid_application: @legal_aid_application)
+          if use_mock?
+            MockInterfaceResponseService.call(hmrc_response)
+          else
+            HMRC::SubmissionWorker.perform_async(hmrc_response.id)
+          end
         end
       end
     end
@@ -34,6 +37,10 @@ module HMRC
 
     def not_production_environment?
       !HostEnv.production?
+    end
+
+    def check_partner?
+      @legal_aid_application.applicant.has_partner? && @legal_aid_application.partner.has_national_insurance_number?
     end
   end
 end

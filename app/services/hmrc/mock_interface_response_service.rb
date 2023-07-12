@@ -22,14 +22,15 @@ module HMRC
       new(*args).call
     end
 
-    attr_reader :application
+    attr_reader :application, :owner
 
     delegate :applicant, to: :application, allow_nil: true
-    delegate :first_name, :last_name, :national_insurance_number, :date_of_birth, to: :applicant, allow_nil: true
+    delegate :first_name, :last_name, :national_insurance_number, :date_of_birth, to: :owner, allow_nil: true
 
     def initialize(hmrc_response)
       @hmrc_response = hmrc_response
       @application = @hmrc_response.legal_aid_application
+      @owner = @hmrc_response.owner
       @submission_id = SecureRandom.uuid
       @reference_date = @application.calculation_date || Time.zone.today
       @use_case_name = "use_case_#{@hmrc_response.use_case}"
