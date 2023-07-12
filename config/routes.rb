@@ -95,6 +95,9 @@ Rails.application.routes.draw do
     resources :bank_statements, only: [:create]
     resources :uploaded_evidence_collections, only: [:create]
     resources :providers, only: [:update]
+    namespace :partners do
+      resources :bank_statements, only: [:create]
+    end
   end
 
   namespace :citizens do
@@ -277,6 +280,9 @@ Rails.application.routes.draw do
         resources :employed, only: %i[index create]
         resources :use_ccms_employment, only: %i[index]
         resource :full_employment_details, only: %i[show update]
+        resource :bank_statements, only: %i[show update destroy] do
+          get "/list", to: "bank_statements#list"
+        end
       end
 
       scope module: :application_merits_task do

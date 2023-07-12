@@ -535,6 +535,12 @@ en:
           item-2-bullets:
             - receives certain types of income (for example, benefits)
             - has certain regular outgoings (for example, childcare)
+      bank_statements:
+        show:
+          h1-heading: Upload the partner's bank statements
+          warning: |
+            Do not upload bank statements for any joint accounts if you or your
+            client already has shared them
       client_has_partners:
         show:
           page_title: Does your client have a partner?
@@ -620,31 +626,7 @@ en:
         back_to_your_applications: Back to your applications
     bank_statements:
       show:
-        choose_files_btn: Choose files
-        dropzone_message: Drag and drop files here or
-        file_not_uploaded_error: Upload the selected file
         h1-heading: Upload your client's bank statements
-        h2-heading: Uploaded files
-        info:
-          - "We need bank statements from the last 3 months for all of your client's
-          bank accounts. If delegated functions have been used, then we need the
-          most recent 3 months before the delegated functions date."
-          - "You must include all current, savings, building society, Post Office,
-          ISA and any other type of bank account."
-        size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF.
-        upload_file: Upload files
-        upload_paragraph: |
-          Statements must be readable, If we cannot read them, it may delay a decision
-          or give an inaccurate assessment of rejection of your client's case.
-      uploaded_files:
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        action: This column contains delete buttons per upload
-        uploaded: Uploaded
-        title: Files added
-        no_files: Files uploaded will appear here.
     uploaded_evidence_collections:
       upload_evidence:
         single_item: "Use this page to provide evidence of %{evidence_type}."

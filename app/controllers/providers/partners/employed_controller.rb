@@ -5,7 +5,9 @@ module Providers
 
       def index
         @partner = partner
+        @legal_aid_application.reset_from_use_ccms! if @legal_aid_application.use_ccms?
         @form = ::Partners::EmployedForm.new(model: partner)
+        legal_aid_application.assess_partner_means!
       end
 
       def create

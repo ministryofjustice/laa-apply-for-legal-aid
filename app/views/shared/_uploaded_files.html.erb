@@ -5,7 +5,7 @@
 <% else %>
   <%= form_with(
         model: @form,
-        url: providers_legal_aid_application_bank_statements_path,
+        url:,
         method: :delete,
         local: true,
         html: { id: "file-delete-form" },
@@ -29,7 +29,7 @@
           <td class="govuk-table__cell">
             <%= button_to_accessible(
                   t(".delete"),
-                  providers_legal_aid_application_bank_statements_path(@legal_aid_application),
+                  url,
                   method: :delete,
                   class: "button-as-link",
                   params: { attachment_id: attachment.id },

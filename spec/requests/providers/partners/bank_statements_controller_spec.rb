@@ -3,15 +3,15 @@ require "rails_helper"
 # This excerises the non-javascript enabled path.
 # 1. see v1/bank_statements_controller for requests that would come from dropzone/ajax
 # 2. see cucumber features for full JS enabled integration tests.
-#
-RSpec.describe "Providers::BankStatementsController" do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant, :provider_confirming_applicant_eligibility, :with_cfe_v5_result, attachments:) }
+
+RSpec.describe Providers::Partners::BankStatementsController do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :provider_confirming_applicant_eligibility, :with_cfe_v5_result, attachments:) }
   let(:id) { legal_aid_application.id }
   let(:attachments) { [] }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:legal_aid_application_id/bank_statements" do
-    subject(:request) { get providers_legal_aid_application_bank_statements_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/partners/bank_statements" do
+    subject(:request) { get providers_legal_aid_application_partners_bank_statements_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { request }
@@ -35,8 +35,6 @@ RSpec.describe "Providers::BankStatementsController" do
       end
 
       context "when no bank statements exists for the application" do
-        let(:attachments) { [] }
-
         it "renders uploaded files" do
           request
           expect(response).to render_template("shared/_uploaded_files")
@@ -50,7 +48,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
       context "when a bank statement already exists for the application" do
         let(:attachments) { [attachment] }
-        let(:attachment) { create(:attachment, :bank_statement) }
+        let(:attachment) { create(:attachment, :partner_bank_statement) }
 
         # NOTE: factory implicitly attaches the hello_world.pdf
         it "displays the name of the uploaded file on the page" do
@@ -61,8 +59,8 @@ RSpec.describe "Providers::BankStatementsController" do
     end
   end
 
-  describe "GET /providers/applications/:legal_aid_application_id/bank_statements/list" do
-    subject(:request) { get list_providers_legal_aid_application_bank_statements_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/partners/bank_statements/list" do
+    subject(:request) { get list_providers_legal_aid_application_partners_bank_statements_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { request }
@@ -84,11 +82,9 @@ RSpec.describe "Providers::BankStatementsController" do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/bank_statements" do
-    subject(:request) { patch providers_legal_aid_application_bank_statements_path(legal_aid_application), params: }
+  describe "PATCH /providers/applications/:legal_aid_application_id/partners/bank_statements" do
+    subject(:request) { patch providers_legal_aid_application_partners_bank_statements_path(legal_aid_application), params: }
 
-    let(:draft_button) { { draft_button: "" } }
-    let(:continue_button) { { continue_button: "" } }
     let(:upload_button) { { upload_button: "Upload" } }
     let(:button_clicked) { {} }
 
@@ -142,7 +138,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "sets attachment_name to model name" do
           request
-          expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("bank_statement_evidence")
+          expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("partner_bank_statement_evidence")
         end
 
         context "with background job processing" do
@@ -158,34 +154,34 @@ RSpec.describe "Providers::BankStatementsController" do
 
           it "adds original and converted attachments types" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[bank_statement_evidence bank_statement_evidence_pdf])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_pdf])
           end
 
           it "associates pdf converted attachment to original attachment" do
             request
-            original_attachment = legal_aid_application.attachments.find_by(attachment_type: "bank_statement_evidence")
+            original_attachment = legal_aid_application.attachments.find_by(attachment_type: "partner_bank_statement_evidence")
             expect(original_attachment.pdf_attachment_id).not_to be_nil
           end
         end
 
         context "when the application has one bank statement attachment already" do
-          let(:bank_statement_evidence) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence") }
-          let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bank_statement_evidence]) }
+          let(:partner_bank_statement_evidence) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence") }
+          let!(:legal_aid_application) { create(:legal_aid_application, attachments: [partner_bank_statement_evidence]) }
 
           it "increments the attachment name" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[bank_statement_evidence bank_statement_evidence_1])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_1])
           end
         end
 
         context "when the application has multiple attachments for statement of case already" do
-          let(:bs1) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence") }
-          let(:bs2) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence_1") }
+          let(:bs1) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence") }
+          let(:bs2) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence_1") }
           let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bs1, bs2]) }
 
           it "increments the attachment name" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[bank_statement_evidence bank_statement_evidence_1 bank_statement_evidence_2])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_1 partner_bank_statement_evidence_2])
           end
         end
       end
@@ -295,13 +291,13 @@ RSpec.describe "Providers::BankStatementsController" do
 
     context "when save and continue button clicked" do
       subject(:request) do
-        patch(providers_legal_aid_application_bank_statements_path(legal_aid_application),
+        patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
               params: { continue_button: "Save and continue" })
       end
 
       context "with files already attached" do
         before do
-          patch(providers_legal_aid_application_bank_statements_path(legal_aid_application),
+          patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
                 params: { upload_button: "Upload",
                           original_file: uploaded_file("spec/fixtures/files/acceptable.pdf", "application/pdf") })
         end
@@ -310,59 +306,61 @@ RSpec.describe "Providers::BankStatementsController" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        context "when HMRC response status is hmrc_multiple_employments" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_multiple_employments
-          end
+        # Commented out as partner HMRC response has not been built yet, but will be added soon
 
-          it "redirects to full_employment_details" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_means_full_employment_details_path(legal_aid_application)
-          end
-        end
+        # context "when HMRC response status is hmrc_multiple_employments" do
+        #   before do
+        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_multiple_employments
+        #   end
 
-        context "when HMRC response status is hmrc_single_employment" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_single_employment
-          end
+        #   it "redirects to full_employment_details" do
+        #     request
+        #     expect(response).to redirect_to providers_legal_aid_application_means_full_employment_details_path(legal_aid_application)
+        #   end
+        # end
 
-          it "redirects to employment_incomes" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path(legal_aid_application)
-          end
-        end
+        # context "when HMRC response status is hmrc_single_employment" do
+        #   before do
+        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_single_employment
+        #   end
 
-        context "when client is not employed but HMRC response has employment data" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :unexpected_employment_data
-          end
+        #   it "redirects to employment_incomes" do
+        #     request
+        #     expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path(legal_aid_application)
+        #   end
+        # end
 
-          it "redirects to unexpected_employment_incomes" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_means_unexpected_employment_income_path(legal_aid_application)
-          end
-        end
+        # context "when client is not employed but HMRC response has employment data" do
+        #   before do
+        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :unexpected_employment_data
+        #   end
 
-        context "when HMRC response status is applicant_not_employed" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
-          end
+        #   it "redirects to unexpected_employment_incomes" do
+        #     request
+        #     expect(response).to redirect_to providers_legal_aid_application_means_unexpected_employment_income_path(legal_aid_application)
+        #   end
+        # end
 
-          it "redirects to the receives_state_benefits page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
-          end
-        end
+        # context "when HMRC response status is applicant_not_employed" do
+        #   before do
+        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
+        #   end
 
-        context "when HMRC response status is unexpected" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :foobar
-          end
+        #   it "redirects to the receives_state_benefits page" do
+        #     request
+        #     expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
+        #   end
+        # end
 
-          it "raises error" do
-            expect { request }.to raise_error RuntimeError, "Unexpected hmrc status :foobar"
-          end
-        end
+        # context "when HMRC response status is unexpected" do
+        #   before do
+        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :foobar
+        #   end
+
+        #   it "raises error" do
+        #     expect { request }.to raise_error RuntimeError, "Unexpected hmrc status :foobar"
+        #   end
+        # end
       end
 
       context "with no files attached" do
@@ -377,20 +375,20 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "displays error indicating a file is needed" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("Upload your client's bank statements")
+          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("Upload the partner's bank statements")
         end
       end
     end
 
     context "when save and come back later is clicked" do
       subject(:request) do
-        patch(providers_legal_aid_application_bank_statements_path(legal_aid_application),
+        patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
               params: { draft_button: "" })
       end
 
       context "with files already attached" do
         before do
-          patch(providers_legal_aid_application_bank_statements_path(legal_aid_application),
+          patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
                 params: { upload_button: "Upload",
                           original_file: uploaded_file("spec/fixtures/files/acceptable.pdf", "application/pdf") })
         end
@@ -418,16 +416,16 @@ RSpec.describe "Providers::BankStatementsController" do
     end
   end
 
-  describe "DELETE /providers/applications/:legal_aid_application_id/bank_statements" do
-    subject(:request) { delete providers_legal_aid_application_bank_statements_path(legal_aid_application), params: }
+  describe "DELETE /providers/applications/:legal_aid_application_id/partners/bank_statements" do
+    subject(:request) { delete providers_legal_aid_application_partners_bank_statements_path(legal_aid_application), params: }
 
     before { login_as provider }
 
     context "with existing file" do
-      let(:params) { { attachment_id: legal_aid_application.attachments.bank_statement_evidence.first.id } }
+      let(:params) { { attachment_id: legal_aid_application.attachments.partner_bank_statement_evidence.first.id } }
 
       before do
-        patch(providers_legal_aid_application_bank_statements_path(legal_aid_application),
+        patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
               params: { upload_button: "Upload",
                         original_file: uploaded_file("spec/fixtures/files/acceptable.pdf", "application/pdf") })
       end

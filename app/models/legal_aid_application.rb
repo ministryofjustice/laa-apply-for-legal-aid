@@ -90,6 +90,7 @@ class LegalAidApplication < ApplicationRecord
            :enter_applicant_details!,
            :provider_confirm_applicant_eligibility!,
            :provider_assess_means!,
+           :assess_partner_means!,
            :provider_enter_means!,
            :provider_enter_merits!,
            :provider_used_delegated_functions!,

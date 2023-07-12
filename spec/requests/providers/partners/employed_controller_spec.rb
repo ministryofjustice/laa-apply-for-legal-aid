@@ -1,7 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Providers::Partners::EmployedController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) do
+    create(
+      :legal_aid_application,
+      :with_non_passported_state_machine,
+      :with_proceedings,
+      :with_applicant_and_partner,
+      :provider_confirming_applicant_eligibility,
+    )
+  end
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/partners/employed" do
@@ -70,7 +78,7 @@ RSpec.describe Providers::Partners::EmployedController do
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
              params: { partner: { employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application))
       end
     end
 

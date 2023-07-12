@@ -621,6 +621,7 @@ Given("I complete the journey as far as the employment status page for a partner
     :with_proceedings,
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
+    :provider_confirming_applicant_eligibility,
     applicant:,
     partner:,
   )

@@ -26,7 +26,7 @@ module Providers
     end
 
     def list
-      render partial: "providers/bank_statements/uploaded_files", locals: { attachments: legal_aid_application.attachments.bank_statement_evidence }
+      render partial: "shared/uploaded_files", locals: { attachments:, url: }
     end
 
   private
@@ -86,6 +86,10 @@ module Providers
       original_attachment
     end
 
+    def attachments
+      legal_aid_application.attachments.bank_statement_evidence
+    end
+
     def delete_attachment(attachment)
       attachment.document.purge_later
       attachment.destroy!
@@ -97,6 +101,10 @@ module Providers
 
     def attachment_params
       params.permit(:attachment_id)
+    end
+
+    def url
+      providers_legal_aid_application_bank_statements_path
     end
   end
 end

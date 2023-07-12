@@ -1,5 +1,11 @@
 Given("I complete the journey as far as regular outgoings") do
-  @legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner)
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_applicant_and_partner,
+    :with_non_passported_state_machine,
+    :provider_confirming_applicant_eligibility,
+  )
 
   login_as @legal_aid_application.provider
 

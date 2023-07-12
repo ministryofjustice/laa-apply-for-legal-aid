@@ -32,9 +32,13 @@ module Flow
             elsif application.partner.employed? && !application.partner.has_national_insurance_number?
               :partner_full_employment_details
             else
-              :has_dependants
+              :partner_bank_statements
             end
           end,
+        },
+        partner_bank_statements: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_bank_statements_path(application) },
+          forward: :has_dependants,
         },
         partner_use_ccms_employment: {
           path: ->(application) { urls.providers_legal_aid_application_partners_use_ccms_employment_index_path(application) },
