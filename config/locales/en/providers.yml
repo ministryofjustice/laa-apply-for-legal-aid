@@ -350,8 +350,8 @@ en:
     client_completed_means:
       show:
         h1-heading: Continue %{client_name}'s financial assessment
-        what_to_do: "Your client has shared their financial information. You need to do the following:"
-        review_employment_heading: Review their employment details
+        what_to_do: "Your client has shared their financial information. You need to:"
+        review_employment_heading: Review their employment income
         review_employment_text: We'll show you the information HMRC shared with us.
         income_outgoings_heading: Tell us about their income and outgoings
         income_outgoings_text: We need to know if your client
@@ -359,12 +359,12 @@ en:
           list: |
             receives certain types of income (for example, benefits)
             has certain regular outgoings (for example, childcare)
-        sort_transactions_heading: Assign categories to bank transactions
-        sort_transactions_text: View your client's bank statements and assign a category to each transaction (for example, housing).
+        sort_transactions_heading: Sort their bank transactions into categories
+        sort_transactions_text: Check your client's bank statements and sort each transaction into a category (for example, housing).
         dependants_heading: Tell us about their dependants
         dependants_text: Provide details of your client's dependants (if they have any).
         capital_heading: Tell us about their capital
-        capital_text: Provide details of your client's savings, investments and other assets
+        capital_text: Provide details of your client's savings, investments and other assets.
     client_has_partners:
       show:
         error: Select yes if your client has a partner
