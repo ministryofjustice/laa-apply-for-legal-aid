@@ -24,6 +24,7 @@ spec:
         app: {{ template "apply-for-legal-aid.name" . }}-worker
         release: {{ .Release.Name }}
     spec:
+      serviceAccountName: "{{ .Values.service_account.name }}"
       containers:
         - name: worker
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
