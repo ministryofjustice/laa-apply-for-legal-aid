@@ -13,6 +13,7 @@ RSpec.describe Setting do
         expect(rec.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
         expect(rec.alert_via_sentry?).to be true
         expect(rec.partner_means_assessment?).to be false
+        expect(rec.opponent_organisations?).to be false
       end
     end
 
@@ -26,6 +27,7 @@ RSpec.describe Setting do
           bank_transaction_filename: "my_special_file.csv",
           alert_via_sentry: true,
           partner_means_assessment: true,
+          opponent_organisations: true,
         )
       end
 
@@ -38,6 +40,7 @@ RSpec.describe Setting do
         expect(rec.bank_transaction_filename).to eq "my_special_file.csv"
         expect(rec.alert_via_sentry?).to be true
         expect(rec.partner_means_assessment?).to be true
+        expect(rec.opponent_organisations?).to be true
       end
     end
   end
