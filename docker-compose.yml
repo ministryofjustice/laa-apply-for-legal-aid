@@ -2,18 +2,18 @@ version: '3'
 
 services:
   postgres:
-    image: postgres:10.5
+    image: postgres:11.6
     volumes:
     - pgdata:/var/lib/postgresql/data
   clamav:
-    image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
+    image: ghcr.io/ministryofjustice/hmpps-clamav:sha-ae9a953
     ports:
     - "3310:3310"
-  api:
+  web:
     environment:
     - DB_HOST=postgres
     build: .
-    command: bin/run
+    command: docker/run
     ports:
     - "3002:3002"
     depends_on:

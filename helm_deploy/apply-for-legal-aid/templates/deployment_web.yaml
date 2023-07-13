@@ -24,10 +24,11 @@ spec:
         app: {{ template "apply-for-legal-aid.name" . }}
         release: {{ .Release.Name }}
     spec:
+      serviceAccountName: "{{ .Values.service_account.name }}"
       containers:
         # https://github.com/ministryofjustice/hmpps-utility-container-images
         - name: clamav
-          image: ghcr.io/ministryofjustice/hmpps-clamav:sha-0ae98e9
+          image: ghcr.io/ministryofjustice/hmpps-clamav:sha-ae9a953
           imagePullPolicy: IfNotPresent
           ports:
             - name: clamav

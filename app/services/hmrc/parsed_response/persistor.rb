@@ -8,12 +8,13 @@ module HMRC
       def initialize(hmrc_response)
         @hmrc_response = hmrc_response
         @application = hmrc_response.legal_aid_application
+        @person = @hmrc_response.owner
       end
 
       def call
         return unless persistable?
 
-        destroy_existing_employments if @application.employments.any?
+        destroy_existing_employments if @person.employments.any?
         persist_response
       end
 
@@ -22,12 +23,12 @@ module HMRC
       attr_reader :hmrc_response
 
       def persistable?
-        Validator.call(hmrc_response, applicant: @application.applicant)
+        Validator.call(hmrc_response, person: @hmrc_response.owner)
       end
 
       def destroy_existing_employments
-        @application.employments.map(&:destroy!)
-        @application.reload
+        @person.employments.map(&:destroy!)
+        @person.reload
       end
 
       def persist_response
@@ -43,14 +44,13 @@ module HMRC
       end
 
       def create_employments
-        applicant = @application.applicant
         employments_array.each_with_index do |_emp, i|
-          @application.employments << ::Employment.new(name: "Job #{i + 1}", owner_id: applicant.id, owner_type: applicant.class)
+          @application.employments << ::Employment.new(name: "Job #{i + 1}", owner_id: @person.id, owner_type: @person.class)
         end
       end
 
       def create_employment_payments
-        employment = @application.employments.order(:name).first
+        employment = @person.employments.order(:name).first
         income_array.each do |income_hash|
           employment.employment_payments << new_employment_payment(income_hash)
         end

@@ -14,10 +14,9 @@ RSpec.describe CFECivil::Components::Employments do
   end
 
   context "when the applicant is employed but has no PAYE data" do
-    let(:applicant) { create(:applicant, :employed) }
-
     before do
-      create(:employment, legal_aid_application:, owner_id: applicant.id, owner_type: "Applicant")
+      applicant = create(:applicant, :employed)
+      create(:employment, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class)
     end
 
     it "renders the expected, empty hash" do
@@ -29,7 +28,8 @@ RSpec.describe CFECivil::Components::Employments do
     let(:applicant) { create(:applicant, :employed) }
 
     before do
-      create(:employment, :example1_usecase1, legal_aid_application:, owner_id: applicant.id, owner_type: "Applicant")
+      create(:applicant, :employed)
+      create(:employment, :example1_usecase1, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class)
     end
 
     it "renders the expected JSON" do

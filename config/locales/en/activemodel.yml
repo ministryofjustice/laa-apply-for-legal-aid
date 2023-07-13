@@ -120,6 +120,8 @@ en:
               none_selected: Select one or more employment types or None of the above if not employed
             has_partner:
               inclusion: Select yes if the client has a partner
+            partner_has_contrary_interest:
+              inclusion: Select yes if the partner has a contrary interest in the proceedings
             receives_state_benefits:
               blank: Select yes if your client gets any benefits
         aggregated_cash_income:

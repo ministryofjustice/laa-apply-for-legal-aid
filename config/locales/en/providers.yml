@@ -350,8 +350,8 @@ en:
     client_completed_means:
       show:
         h1-heading: Continue %{client_name}'s financial assessment
-        what_to_do: "Your client has shared their financial information. You need to do the following:"
-        review_employment_heading: Review their employment details
+        what_to_do: "Your client has shared their financial information. You need to:"
+        review_employment_heading: Review their employment income
         review_employment_text: We'll show you the information HMRC shared with us.
         income_outgoings_heading: Tell us about their income and outgoings
         income_outgoings_text: We need to know if your client
@@ -359,12 +359,12 @@ en:
           list: |
             receives certain types of income (for example, benefits)
             has certain regular outgoings (for example, childcare)
-        sort_transactions_heading: Assign categories to bank transactions
-        sort_transactions_text: View your client's bank statements and assign a category to each transaction (for example, housing).
+        sort_transactions_heading: Sort their bank transactions into categories
+        sort_transactions_text: Check your client's bank statements and sort each transaction into a category (for example, housing).
         dependants_heading: Tell us about their dependants
         dependants_text: Provide details of your client's dependants (if they have any).
         capital_heading: Tell us about their capital
-        capital_text: Provide details of your client's savings, investments and other assets
+        capital_text: Provide details of your client's savings, investments and other assets.
     client_has_partners:
       show:
         error: Select yes if your client has a partner
@@ -543,6 +543,17 @@ en:
             - in a civil partnership with
             - normally lives with as a couple, even if they are not living together
               right now - for example, if one person is in hospital, prison or abroad
+      contrary_interests:
+        show:
+          page_title: Does the partner have a contrary interest in the proceedings?
+          details_content_para_one: "For example, if they:"
+          details_content_para_two: |
+            We're asking this because your client may still be entitled to a deduction
+            if their partner has a contrary interest. However, we will not assess
+            the partner's means.
+          details_list:
+            - are the opponent
+            - want a different outcome in the proceedings to your client
       details:
         show:
           page_title: Enter the partner's details

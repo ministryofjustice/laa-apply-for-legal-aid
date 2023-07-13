@@ -235,16 +235,6 @@ env:
       secretKeyRef:
         name: apply-for-legal-aid-s3-instance-output
         key: bucket_name
-  - name: S3_ACCESS_KEY_ID
-    valueFrom:
-      secretKeyRef:
-        name: apply-for-legal-aid-s3-instance-output
-        key: access_key_id
-  - name: S3_SECRET_ACCESS_KEY
-    valueFrom:
-      secretKeyRef:
-        name: apply-for-legal-aid-s3-instance-output
-        key: secret_access_key
   - name: ADMIN_ALLOW_RESET
     valueFrom:
       secretKeyRef:

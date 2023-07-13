@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Partners::ClientHasPartnerForm, type: :form do
+RSpec.describe Partners::ClientHasPartnerForm, type: :form do
   subject(:client_partner_form) { described_class.new(params) }
 
   let(:applicant) { create(:applicant, has_partner: applicant_has_partner) }

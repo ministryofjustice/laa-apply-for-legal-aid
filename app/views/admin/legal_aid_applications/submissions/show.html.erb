@@ -21,9 +21,9 @@
       <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
         <details>
           <summary class="govuk-heading-m govuk-details__summary"
-                   title="HMRC use case <%= hmrc_response.use_case %>"
-                   aria-label="HMRC use case <%= hmrc_response.use_case %> result">
-            HMRC use case <%= hmrc_response.use_case %>
+                   title="HMRC use case <%= hmrc_response.use_case %> <%= hmrc_response.owner_type %>"
+                   aria-label="HMRC use case <%= hmrc_response.use_case %> <%= hmrc_response.owner_type %> result">
+            HMRC response - use case <%= hmrc_response.use_case %> for the <%= hmrc_response.owner_type.downcase %>
           </summary>
           <section>
             <% if hmrc_response.response.present? %>
