@@ -1,9 +1,14 @@
 require "rails_helper"
 
 RSpec.describe Providers::ClientCompletedMeansController do
-  let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-  let(:applicant) { create(:applicant, :employed) }
+  let(:legal_aid_application) { create(:legal_aid_application, applicant:, partner:) }
+  let(:applicant) { create(:applicant, :employed, has_partner:) }
+  let(:has_partner) { false }
+  let(:partner) { nil }
   let(:provider) { legal_aid_application.provider }
+  let(:enable_partner_means) { false }
+
+  before { allow(Setting).to receive(:partner_means_assessment?).and_return(enable_partner_means) }
 
   describe "GET /providers/applications/:id/client_completed_means" do
     subject { get providers_legal_aid_application_client_completed_means_path(legal_aid_application) }
@@ -25,21 +30,57 @@ RSpec.describe Providers::ClientCompletedMeansController do
         expect(response.body).to include("Your client has shared their financial information")
       end
 
-      context "when the applicant is not employed" do
-        let(:applicant) { create(:applicant, :not_employed) }
+      context "when the applicant has no partner" do
+        context "and the applicant is not employed" do
+          let(:applicant) { create(:applicant, :not_employed) }
 
-        it "does not include reviewing employment details in action list" do
-          expect(response.body).not_to include("Review their employment details")
+          it "does not include reviewing employment details in action list" do
+            expect(response.body).to include("1. Tell us about their income and outgoings")
+            expect(response.body).to include("2. Sort their bank transactions into categories")
+            expect(response.body).to include("3. Tell us about their dependants")
+            expect(response.body).to include("4. Tell us about their capital")
+            expect(response.body).not_to include("Review their employment income")
+          end
+
+          it "includes income and outgoings as first point" do
+            expect(response.body).to include("1. Tell us about their income and outgoings")
+          end
         end
 
-        it "includes income and outgoings as first point" do
-          expect(response.body).to include("1. Tell us about their income and outgoings")
+        context "and the applicant is employed" do
+          it "includes reviewing employment details in action list" do
+            expect(response.body).to include("1. Review their employment income")
+            expect(response.body).to include("2. Tell us about their income and outgoings")
+            expect(response.body).to include("3. Sort their bank transactions into categories")
+            expect(response.body).to include("4. Tell us about their dependants")
+            expect(response.body).to include("5. Tell us about their capital")
+          end
         end
       end
 
-      context "when the applicant is employed" do
-        it "includes reviewing employment details in action list" do
-          expect(response.body).to include("1. Review their employment details")
+      context "when the applicant has a partner" do
+        let(:has_partner) { true }
+        let(:partner) { create(:partner) }
+
+        context "and the applicant is not employed" do
+          let(:applicant) { create(:applicant, :not_employed, has_partner:) }
+
+          it "the steps list only includes one option" do
+            expect(response.body).to include("1. Tell us about their income and outgoings")
+            expect(response.body).not_to include("Sort their bank transactions into categories")
+            expect(response.body).not_to include("Tell us about their dependants")
+            expect(response.body).not_to include("Tell us about their capital")
+          end
+        end
+
+        context "when the applicant is employed" do
+          it "the steps list only includes two options" do
+            expect(response.body).to include("1. Review their employment income")
+            expect(response.body).to include("2. Tell us about their income and outgoings")
+            expect(response.body).not_to include("Sort their bank transactions into categories")
+            expect(response.body).not_to include("Tell us about their dependants")
+            expect(response.body).not_to include("Tell us about their capital")
+          end
         end
       end
     end

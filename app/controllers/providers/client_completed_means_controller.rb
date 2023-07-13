@@ -11,12 +11,21 @@ module Providers
   private
 
     def define_action_list
-      @action_list = %w[income_outgoings sort_transactions dependants capital]
+      @action_list = %w[income_outgoings]
+      @action_list += %w[sort_transactions dependants capital] unless partner_means_assessment?
       @action_list.prepend("review_employment") if employed_journey?
     end
 
     def employed_journey?
-      @legal_aid_application.applicant.employed? || @legal_aid_application.employment_payments.any?
+      applicant.employed? || @legal_aid_application.employment_payments.any?
+    end
+
+    def partner_means_assessment?
+      applicant.has_partner? && @legal_aid_application.partner.national_insurance_number.present?
+    end
+
+    def applicant
+      @applicant ||= @legal_aid_application.applicant
     end
   end
 end
