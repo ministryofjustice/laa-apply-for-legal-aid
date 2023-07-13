@@ -48,7 +48,21 @@ module Flow
         },
         partner_bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_partners_bank_statements_path(application) },
-          forward: :has_dependants,
+          forward: lambda do |application|
+            status = HMRC::PartnerStatusAnalyzer.call(application)
+            case status
+            when :partner_multiple_employments, :partner_no_hmrc_data
+              :partner_full_employment_details
+            when :partner_single_employment
+              :partner_employment_incomes
+            when :partner_unexpected_employment_data
+              :partner_unexpected_employment_incomes
+            when :partner_not_employed
+              :partner_receives_state_benefits
+            else
+              raise "Unexpected hmrc status #{status.inspect}"
+            end
+          end,
         },
         partner_use_ccms_employment: {
           path: ->(application) { urls.providers_legal_aid_application_partners_use_ccms_employment_index_path(application) },

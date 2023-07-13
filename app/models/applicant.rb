@@ -21,6 +21,8 @@ class Applicant < ApplicationRecord
 
   encrypts :encrypted_true_layer_token
 
+  delegate :transaction_period_start_on, to: :legal_aid_application
+
   def email_address
     email
   end
@@ -106,5 +108,21 @@ class Applicant < ApplicationRecord
 
   def state_benefits
     regular_transactions.where(transaction_type_id: TransactionType.find_by(name: "benefits")).order(:created_at)
+  end
+
+  def hmrc_employment_income?
+    employments.any?
+  end
+
+  def has_multiple_employments?
+    employments.length > 1
+  end
+
+  def eligible_employment_payments
+    employment_payments.select { |p| p.date >= transaction_period_start_on }
+  end
+
+  def employment_payments
+    employments.map(&:employment_payments).flatten
   end
 end

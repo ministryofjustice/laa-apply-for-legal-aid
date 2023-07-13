@@ -306,61 +306,59 @@ RSpec.describe Providers::Partners::BankStatementsController do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        # Commented out as partner HMRC response has not been built yet, but will be added soon
+        context "when HMRC response status is partner_multiple_employments" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_multiple_employments
+          end
 
-        # context "when HMRC response status is hmrc_multiple_employments" do
-        #   before do
-        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_multiple_employments
-        #   end
+          it "redirects to full_employment_details" do
+            request
+            expect(response).to redirect_to providers_legal_aid_application_partners_full_employment_details_path(legal_aid_application)
+          end
+        end
 
-        #   it "redirects to full_employment_details" do
-        #     request
-        #     expect(response).to redirect_to providers_legal_aid_application_means_full_employment_details_path(legal_aid_application)
-        #   end
-        # end
+        context "when HMRC response status is partner_single_employment" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_single_employment
+          end
 
-        # context "when HMRC response status is hmrc_single_employment" do
-        #   before do
-        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_single_employment
-        #   end
+          it "redirects to employment_incomes" do
+            request
+            expect(response).to redirect_to providers_legal_aid_application_partners_employment_income_path(legal_aid_application)
+          end
+        end
 
-        #   it "redirects to employment_incomes" do
-        #     request
-        #     expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path(legal_aid_application)
-        #   end
-        # end
+        context "when partner is not employed but HMRC response has employment data" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_unexpected_employment_data
+          end
 
-        # context "when client is not employed but HMRC response has employment data" do
-        #   before do
-        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :unexpected_employment_data
-        #   end
+          it "redirects to unexpected_employment_incomes" do
+            request
+            expect(response).to redirect_to providers_legal_aid_application_partners_unexpected_employment_income_path(legal_aid_application)
+          end
+        end
 
-        #   it "redirects to unexpected_employment_incomes" do
-        #     request
-        #     expect(response).to redirect_to providers_legal_aid_application_means_unexpected_employment_income_path(legal_aid_application)
-        #   end
-        # end
+        context "when HMRC response status is partner_not_employed" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_not_employed
+          end
 
-        # context "when HMRC response status is applicant_not_employed" do
-        #   before do
-        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
-        #   end
+          it "redirects to the receives_state_benefits page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(legal_aid_application))
+          end
+        end
 
-        #   it "redirects to the receives_state_benefits page" do
-        #     request
-        #     expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
-        #   end
-        # end
+        context "when HMRC response status is unexpected" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :foobar
+          end
 
-        # context "when HMRC response status is unexpected" do
-        #   before do
-        #     allow(HMRC::StatusAnalyzer).to receive(:call).and_return :foobar
-        #   end
-
-        #   it "raises error" do
-        #     expect { request }.to raise_error RuntimeError, "Unexpected hmrc status :foobar"
-        #   end
-        # end
+          it "raises error" do
+            expect { request }.to raise_error RuntimeError, "Unexpected hmrc status :foobar"
+          end
+        end
       end
 
       context "with no files attached" do

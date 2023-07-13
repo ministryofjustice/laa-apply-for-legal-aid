@@ -24,8 +24,8 @@ module HMRC
 
         before { create(:employment, :with_payments_in_transaction_period, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
-        it "returns :unexpected_employment_data" do
-          expect(service_call).to eq :unexpected_employment_data
+        it "returns :applicant_unexpected_employment_data" do
+          expect(service_call).to eq :applicant_unexpected_employment_data
         end
       end
 
@@ -42,8 +42,8 @@ module HMRC
       context "and applicant has multiple employments" do
         before { create_list(:employment, 2, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
-        it "returns hmrc_multiple_employments" do
-          expect(service_call).to eq :hmrc_multiple_employments
+        it "returns applicant_multiple_employments" do
+          expect(service_call).to eq :applicant_multiple_employments
         end
       end
 
@@ -56,8 +56,8 @@ module HMRC
       end
 
       context "but applicant has no hmrc data" do
-        it "returns no_hmrc_data" do
-          expect(service_call).to eq :no_hmrc_data
+        it "returns applicant_no_hmrc_data" do
+          expect(service_call).to eq :applicant_no_hmrc_data
         end
       end
     end
