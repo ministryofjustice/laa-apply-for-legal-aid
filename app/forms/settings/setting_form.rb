@@ -7,7 +7,8 @@ module Settings
                   :allow_welsh_translation,
                   :enable_ccms_submission,
                   :means_test_review_phase_one,
-                  :partner_means_assessment
+                  :partner_means_assessment,
+                  :opponent_organisations
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -15,6 +16,7 @@ module Settings
               :enable_ccms_submission,
               :means_test_review_phase_one,
               :partner_means_assessment,
+              :opponent_organisations,
               presence: true
   end
 end

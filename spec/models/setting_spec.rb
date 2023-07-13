@@ -54,6 +54,7 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.means_test_review_phase_one?).to be false
       expect(described_class.partner_means_assessment?).to be false
+      expect(described_class.opponent_organisations?).to be false
     end
   end
 end

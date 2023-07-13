@@ -66,6 +66,16 @@
           legend: { text: t(".labels.partner_means_assessment") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :opponent_organisations,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.opponent_organisations") },
+          legend: { text: t(".labels.opponent_organisations") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>
