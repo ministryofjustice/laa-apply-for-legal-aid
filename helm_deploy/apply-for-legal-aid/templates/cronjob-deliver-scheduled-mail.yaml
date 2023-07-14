@@ -17,6 +17,7 @@ spec:
       backoffLimit: 1
       template:
         spec:
+          serviceAccountName: "{{ .Values.service_account.name }}"
           containers:
           - name: rake-task
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'

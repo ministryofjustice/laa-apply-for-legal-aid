@@ -20,6 +20,7 @@ spec:
           labels:
             reportuploader: cronjob
         spec:
+          serviceAccountName: "{{ .Values.service_account.name }}"
           containers:
           - name: destroy-purgeable
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
