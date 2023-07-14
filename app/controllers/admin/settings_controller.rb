@@ -23,7 +23,8 @@ module Admin
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
                                       :means_test_review_phase_one,
-                                      :partner_means_assessment)
+                                      :partner_means_assessment,
+                                      :opponent_organisations)
     end
 
     def setting
