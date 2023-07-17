@@ -1,4 +1,4 @@
-<% suffix = @legal_aid_application.has_multiple_employments? ? :multiple_employments : :no_data %>
+<% suffix = @legal_aid_application.applicant.has_multiple_employments? ? :multiple_employments : :no_data %>
 <%= render "shared/full_employment_details",
            suffix:,
            client_or_partner: :client,
