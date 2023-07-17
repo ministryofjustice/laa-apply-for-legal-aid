@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :opponent, class: "ApplicationMeritsTask::Opponent" do
+  factory :individual_opponent, class: "ApplicationMeritsTask::Opponent::Individual" do
     legal_aid_application
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }

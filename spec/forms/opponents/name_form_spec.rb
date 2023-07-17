@@ -9,7 +9,7 @@ RSpec.describe Opponents::NameForm, type: :form do
       "last_name" => "Smith",
     }
   end
-  let(:opponent) { create(:opponent) }
+  let(:opponent) { create(:individual_opponent) }
   let(:form_params) { params.merge(model: opponent) }
 
   describe "validation" do

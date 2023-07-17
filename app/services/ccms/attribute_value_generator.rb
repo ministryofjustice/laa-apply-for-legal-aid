@@ -356,7 +356,7 @@ module CCMS
     end
 
     def other_party_is_opponent?(options)
-      options[:other_party].instance_of?(ApplicationMeritsTask::Opponent)
+      options[:other_party].instance_of?(ApplicationMeritsTask::Opponent::Individual)
     end
 
   private

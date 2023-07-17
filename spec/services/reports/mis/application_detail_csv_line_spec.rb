@@ -141,7 +141,7 @@ module Reports
       end
 
       let(:opponents) do
-        create_list(:opponent, 1)
+        create_list(:individual_opponent, 1)
       end
 
       let(:parties_mental_capacity) do

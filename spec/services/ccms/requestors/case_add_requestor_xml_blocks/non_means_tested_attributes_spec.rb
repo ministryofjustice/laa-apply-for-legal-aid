@@ -1160,8 +1160,8 @@ module CCMS
         end
 
         context "with multiple opponents" do
-          let(:opponent_one) { create(:opponent, first_name: "Joffrey", last_name: "Test-Opponent") }
-          let(:opponent_two) { create(:opponent, first_name: "Sansa", last_name: "Opponent-Test") }
+          let(:opponent_one) { create(:individual_opponent, first_name: "Joffrey", last_name: "Test-Opponent") }
+          let(:opponent_two) { create(:individual_opponent, first_name: "Sansa", last_name: "Opponent-Test") }
 
           before { legal_aid_application.update!(opponents: [opponent_one, opponent_two]) }
 

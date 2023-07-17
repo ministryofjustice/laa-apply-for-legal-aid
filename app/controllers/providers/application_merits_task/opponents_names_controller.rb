@@ -27,7 +27,7 @@ module Providers
       end
 
       def build_new_opponent
-        ::ApplicationMeritsTask::Opponent.new(legal_aid_application:)
+        ::ApplicationMeritsTask::Opponent::Individual.new(legal_aid_application:)
       end
 
       def form_params

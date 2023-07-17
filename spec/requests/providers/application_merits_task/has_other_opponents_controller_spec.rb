@@ -5,7 +5,7 @@ module Providers
     RSpec.describe HasOtherOpponentsController do
       let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { application.provider }
-      let(:opponent) { create(:opponent, legal_aid_application: application) }
+      let(:opponent) { create(:individual_opponent, legal_aid_application: application) }
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
 
       before do
@@ -16,7 +16,7 @@ module Providers
       describe "show: GET /providers/applications/:legal_aid_application_id/has_other_opponents" do
         subject(:get_has_other) { get providers_legal_aid_application_has_other_opponent_path(application) }
 
-        before { create(:opponent, legal_aid_application: application) }
+        before { create(:individual_opponent, legal_aid_application: application) }
 
         it "returns success" do
           get_has_other

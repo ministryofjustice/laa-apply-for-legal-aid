@@ -5,7 +5,7 @@ module Providers
     RSpec.describe RemoveOpponentController do
       let(:application) { create(:legal_aid_application) }
       let(:provider) { application.provider }
-      let!(:opponent2) { create(:opponent, legal_aid_application: application) }
+      let!(:opponent2) { create(:individual_opponent, legal_aid_application: application) }
 
       before { login_as provider }
 
@@ -45,7 +45,7 @@ module Providers
           end
 
           context "and another opponent exists" do
-            before { create(:opponent, legal_aid_application: application) }
+            before { create(:individual_opponent, legal_aid_application: application) }
 
             it "redirects back to the has_other_involved_children page" do
               submit_remove

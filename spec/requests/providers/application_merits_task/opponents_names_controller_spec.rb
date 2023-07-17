@@ -38,7 +38,7 @@ module Providers
       describe "show: GET /providers/applications/:legal_aid_application_id/opponents_names/:opponent_id" do
         subject(:get_existing_opponent) { get providers_legal_aid_application_opponents_name_path(legal_aid_application, opponent) }
 
-        let(:opponent) { create(:opponent, legal_aid_application:) }
+        let(:opponent) { create(:individual_opponent, legal_aid_application:) }
 
         context "when authenticated" do
           before do
@@ -69,7 +69,7 @@ module Providers
             params: params.merge(button_clicked),
           )
         end
-        let!(:opponent) { create(:opponent, legal_aid_application:, first_name: "Should", last_name: "Change") }
+        let!(:opponent) { create(:individual_opponent, legal_aid_application:, first_name: "Should", last_name: "Change") }
         let(:first_name) { opponent.first_name }
         let(:last_name) { "#{opponent.last_name} Junior" }
         let(:params) do
@@ -85,12 +85,12 @@ module Providers
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
-          create(:opponent, legal_aid_application:, first_name: "Does", last_name: "Not-Change")
+          create(:individual_opponent, legal_aid_application:, first_name: "Does", last_name: "Not-Change")
           login_provider
         end
 
         it "amends the opponent with the values entered" do
-          expect { patch_name }.not_to change(::ApplicationMeritsTask::Opponent, :count)
+          expect { patch_name }.not_to change(::ApplicationMeritsTask::Opponent::BaseOpponent, :count)
           expect(opponent.reload.full_name).to eql "Should Change Junior"
         end
 

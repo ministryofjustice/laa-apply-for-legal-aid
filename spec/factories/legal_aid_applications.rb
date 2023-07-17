@@ -528,7 +528,7 @@ FactoryBot.define do
 
     trait :with_opponent do
       after(:create) do |application|
-        create_list(:opponent, 1, legal_aid_application: application)
+        create_list(:individual_opponent, 1, legal_aid_application: application)
       end
     end
 

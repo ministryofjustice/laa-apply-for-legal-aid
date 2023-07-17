@@ -3,7 +3,7 @@ require "rails_helper"
 module ApplicationMeritsTask
   RSpec.describe Opponent do
     describe "standard values" do
-      subject(:opponent) { build(:opponent) }
+      subject(:opponent) { build(:individual_opponent) }
 
       it { expect(opponent.ccms_relationship_to_case).to eq "OPP" }
       it { expect(opponent.ccms_child?).to be false }
@@ -16,7 +16,7 @@ module ApplicationMeritsTask
       context "when ccms_opponent_id is nil" do
         before { expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(expected_id) }
 
-        let(:opponent) { create(:opponent, ccms_opponent_id: nil) }
+        let(:opponent) { create(:individual_opponent, ccms_opponent_id: nil) }
 
         it "returns the next serial id" do
           expect(opponent.generate_ccms_opponent_id).to eq expected_id
@@ -31,7 +31,7 @@ module ApplicationMeritsTask
       context "when ccms_opponent_id is already populated" do
         before { expect(CCMS::OpponentId).not_to receive(:next_serial_id) }
 
-        let(:opponent) { create(:opponent, ccms_opponent_id: 1234) }
+        let(:opponent) { create(:individual_opponent, ccms_opponent_id: 1234) }
 
         it "returns the value" do
           expect(opponent.generate_ccms_opponent_id).to eq 1234
