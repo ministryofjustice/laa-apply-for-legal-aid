@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_083234) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_071401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -675,6 +675,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_083234) do
     t.integer "ccms_opponent_id"
     t.string "first_name"
     t.string "last_name"
+    t.string "type", default: "ApplicationMeritsTask::Opponent::Individual"
+    t.string "organisation_name"
+    t.string "organisation_type"
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
   end
 

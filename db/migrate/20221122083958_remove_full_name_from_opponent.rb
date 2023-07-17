@@ -8,6 +8,6 @@ class RemoveFullNameFromOpponent < ActiveRecord::Migration[7.0]
   end
 
   def full_name_values_present?
-    ApplicationMeritsTask::Opponent.where.not(full_name: nil).count.positive?
+    ApplicationMeritsTask::Opponent::BaseOpponent.where.not(full_name: nil).count.positive?
   end
 end
