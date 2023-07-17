@@ -7,7 +7,7 @@ module Flow
           forward: lambda do |application|
             status = HMRC::StatusAnalyzer.call(application)
             case status
-            when :applicant_multiple_employments, :no_hmrc_data
+            when :applicant_multiple_employments, :applicant_no_hmrc_data
               :full_employment_details
             when :applicant_single_employment
               :employment_incomes

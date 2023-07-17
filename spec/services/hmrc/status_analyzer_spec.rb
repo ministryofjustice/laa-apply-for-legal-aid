@@ -50,8 +50,8 @@ module HMRC
       context "and applicant has single employment" do
         before { create(:employment, legal_aid_application: laa, owner_id: applicant.id, owner_type: applicant.class) }
 
-        it "returns hmrc_single_employment" do
-          expect(service_call).to eq :hmrc_single_employment
+        it "returns applicant_single_employment" do
+          expect(service_call).to eq :applicant_single_employment
         end
       end
 
