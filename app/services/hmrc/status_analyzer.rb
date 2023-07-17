@@ -27,7 +27,7 @@ module HMRC
 
       return :applicant_no_hmrc_data unless hmrc_employment_income?
 
-      :hmrc_single_employment
+      :applicant_single_employment
     end
 
     def applicant_not_employed

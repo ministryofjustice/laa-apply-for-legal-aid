@@ -744,6 +744,17 @@ en:
       self_employed: Self-employed
       armed_forces: Member of the armed forces
       not_employed: None of the above
+    employment_income:
+      notification_banner_title: Important
+      hmrc-information: HMRC have provided the information on this page.
+      page_title: Review %{name}'s employment income
+      supplementary_question: |
+        Do you need to tell us anything else about %{individual_with_determiner}'s employment?
+      employment_hint: |
+        For example, if they get cash in hand pay, have zero-hours contracts,
+        or recently started or ended employment.
+      enter_details: Enter details
+      details_hint: You'll need to upload supporting evidence later.
     use_ccms:
       head_title: You need to apply using CCMS
       title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>

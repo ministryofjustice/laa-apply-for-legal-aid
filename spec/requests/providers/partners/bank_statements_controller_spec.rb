@@ -346,7 +346,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
 
           it "redirects to the receives_state_benefits page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
           end
         end
 

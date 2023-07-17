@@ -14,6 +14,10 @@ class Partner < ApplicationRecord
     }
   end
 
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   def hmrc_employment_income?
     employments.any?
   end

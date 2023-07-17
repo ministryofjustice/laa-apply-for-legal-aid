@@ -8,6 +8,10 @@ FactoryBot.define do
     shared_benefit_with_applicant { false }
     legal_aid_application
 
+    trait :employed do
+      employed { true }
+    end
+
     trait :under_18 do
       date_of_birth { 18.years.ago + 1.day }
     end

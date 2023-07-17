@@ -782,18 +782,6 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
     means:
-      employment_incomes:
-        show:
-          notification_banner_title: Important
-          hmrc-information: HMRC have provided the information on this page.
-          page_title: Review %{name}'s employment income
-          supplementary_question: |
-            Do you need to tell us anything else about your client's employment?
-          employment_hint: |
-            For example, if they get cash in hand pay, have zero-hours contracts,
-            or recently started or ended employment.
-          enter_details: Enter details
-          details_hint: You'll need to upload supporting evidence later.
       unexpected_employment_incomes:
         show:
           notification_banner_title: Important
