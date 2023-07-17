@@ -6,7 +6,7 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
   let(:employment) { create(:employment, legal_aid_application: application, owner_id: partner.id, owner_type: partner.class) }
   let(:provider) { application.provider }
   let(:setup_tasks) { {} }
-  let(:individual_with_determiner) { "your partner" }
+  let(:individual_with_determiner) { "the partner" }
 
   describe "GET /providers/applications/:id/partners/unexpected_employed_income" do
     subject(:get_employment_income) { get providers_legal_aid_application_partners_unexpected_employment_income_path(application) }

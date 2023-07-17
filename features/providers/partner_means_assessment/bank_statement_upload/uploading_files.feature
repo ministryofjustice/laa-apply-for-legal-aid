@@ -37,7 +37,7 @@ Feature: Bank statement file upload
     Then I should see 'acceptable.pdf UPLOADED'
 
     When I click 'Save and continue'
-    Then I should be on a page with title matching "Does your client have any dependants?"
+    Then I should be on a page with title matching "HMRC has no record of your client's employment in the last 3 months"
 
     When I click link "Back"
     Then I should be on a page with title "Upload the partner's bank statements"
