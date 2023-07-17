@@ -88,7 +88,7 @@ RSpec.describe ApplicationDigest do
           end
 
           context "but no hmrc data" do
-            let(:hmrc_status) { :no_hmrc_data }
+            let(:hmrc_status) { :applicant_no_hmrc_data }
 
             it "returns false" do
               expect(digest.hmrc_data_used).to be false
@@ -96,7 +96,7 @@ RSpec.describe ApplicationDigest do
           end
 
           context "and multiple employments" do
-            let(:hmrc_status) { :hmrc_multiple_employments }
+            let(:hmrc_status) { :applicant_multiple_employments }
 
             it "returns false" do
               expect(digest.hmrc_data_used).to be false
@@ -104,7 +104,7 @@ RSpec.describe ApplicationDigest do
           end
 
           context "and unexpected data" do
-            let(:hmrc_status) { :unexpected_employment_data }
+            let(:hmrc_status) { :applicant_unexpected_employment_data }
 
             it "returns true" do
               expect(digest.hmrc_data_used).to be false
@@ -112,7 +112,7 @@ RSpec.describe ApplicationDigest do
           end
 
           context "and single employment" do
-            let(:hmrc_status) { :hmrc_single_employment }
+            let(:hmrc_status) { :applicant_single_employment }
 
             it "returns true" do
               expect(digest.hmrc_data_used).to be true

@@ -74,11 +74,11 @@ class ApplicationDigest < ApplicationRecord
       when :employed_journey_not_enabled,
         :provider_not_enabled_for_employed_journey,
         :applicant_not_employed,
-        :hmrc_multiple_employments,
-        :no_hmrc_data,
-        :unexpected_employment_data
+        :applicant_multiple_employments,
+        :applicant_no_hmrc_data,
+        :applicant_unexpected_employment_data
         false
-      when :hmrc_single_employment
+      when :applicant_single_employment
         true
       else
         raise "Unexpected response from HMRC::StatusAnalyser #{status.inspect}"
