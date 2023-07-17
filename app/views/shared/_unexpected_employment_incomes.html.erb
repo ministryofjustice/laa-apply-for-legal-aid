@@ -1,0 +1,28 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_means_unexpected_employment_income_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+
+  <% unless @form.errors.any? %>
+    <%= govuk_notification_banner(title_text: t(".notification_banner_title")) { |nb| nb.with_heading(text: t(".hmrc-information")) } %>
+  <% end %>
+
+  <%= page_template page_title: t(".page_title", name: individual.full_name, individual_with_determiner:), template: :basic, form: do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information_details,
+                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "l" },
+                                          legend: { size: "xl", tag: "h1", text: page_title }) do %>
+
+      <p class="govuk-body-l"> <%= t(".hmrc_not_employed", individual_with_determiner:) %> </p>
+
+      <%= render "shared/means/employment_income_table" %>
+
+      <%= form.govuk_text_area :extra_employment_information_details,
+                               label: { text: t(".supplementary_question", individual_with_determiner:), tag: "h2", size: "m" },
+                               hint: { text: t(".supplementary_question_hint") },
+                               rows: 10 %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

@@ -76,6 +76,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_partners_employment_income_path(application) },
           forward: :has_dependants,
         },
+        partner_unexpected_employment_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_unexpected_employment_income_path(application) },
+          forward: :has_dependants,
+        },
       }.freeze
     end
   end

@@ -8,6 +8,12 @@ FactoryBot.define do
     shared_benefit_with_applicant { false }
     legal_aid_application
 
+    trait :not_employed do
+      employed { false }
+      self_employed { false }
+      armed_forces { false }
+    end
+
     trait :employed do
       employed { true }
     end

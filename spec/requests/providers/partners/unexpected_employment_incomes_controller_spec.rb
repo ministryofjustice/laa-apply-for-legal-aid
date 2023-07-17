@@ -1,14 +1,15 @@
 require "rails_helper"
 
-RSpec.describe "employed incomes request" do
-  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, applicant:) }
-  let(:applicant) { create(:applicant, :not_employed) }
-  let(:employment) { create(:employment, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
+RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
+  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, partner:) }
+  let(:partner) { create(:partner, :not_employed) }
+  let(:employment) { create(:employment, legal_aid_application: application, owner_id: partner.id, owner_type: partner.class) }
   let(:provider) { application.provider }
   let(:setup_tasks) { {} }
+  let(:individual_with_determiner) { "your partner" }
 
-  describe "GET /providers/applications/:id/means/unexpected_employed_income" do
-    subject(:get_employment_income) { get providers_legal_aid_application_means_unexpected_employment_income_path(application) }
+  describe "GET /providers/applications/:id/partners/unexpected_employed_income" do
+    subject(:get_employment_income) { get providers_legal_aid_application_partners_unexpected_employment_income_path(application) }
 
     context "when the provider is not authenticated" do
       before do
@@ -29,21 +30,21 @@ RSpec.describe "employed incomes request" do
         expect(response).to have_http_status(:ok)
       end
 
-      context "when applicant is not employed but has employment payment records" do
+      context "when partner is not employed but has employment payment records" do
         let(:setup_tasks) do
-          create(:employment, :with_payments_in_transaction_period, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class)
+          create(:employment, :with_payments_in_transaction_period, legal_aid_application: application, owner_id: partner.id, owner_type: partner.class)
         end
 
-        it "displays correct text when applicant is not_employed" do
-          expect(unescaped_response_body).to include(I18n.t("providers.means.unexpected_employment_incomes.show.page_title"))
-          expect(unescaped_response_body).to include(I18n.t("providers.means.unexpected_employment_incomes.show.hmrc_not_employed"))
+        it "displays correct text when partner is not_employed" do
+          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.page_title", individual_with_determiner:))
+          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.hmrc_not_employed", individual_with_determiner:))
         end
       end
     end
   end
 
-  describe "PATCH /providers/applications/:id/means/unexpected_employed_income" do
-    subject(:request) { patch providers_legal_aid_application_means_unexpected_employment_income_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:id/partners/unexpected_employed_income" do
+    subject(:request) { patch providers_legal_aid_application_partners_unexpected_employment_income_path(application), params: params.merge(submit_button) }
 
     let(:params) do
       {
@@ -69,22 +70,6 @@ RSpec.describe "employed incomes request" do
         it "updates legal aid application restriction information" do
           request
           expect(application.reload.extra_employment_information_details).not_to be_empty
-        end
-
-        context "when the application is using the bank upload journey" do
-          let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
-
-          it "redirects to the regular income page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(application))
-          end
-        end
-
-        context "when the application is not using the bank upload journey" do
-          it "redirects to the identify types of income page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
-          end
         end
 
         context "with invalid params" do
