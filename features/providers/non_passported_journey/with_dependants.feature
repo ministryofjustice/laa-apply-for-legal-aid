@@ -108,7 +108,7 @@ Feature: non_passported_journey with dependants
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     And I should see 'Pugsley Addams'
     When I click has other dependants remove link for dependant '2'
-    Then I should be on a page showing 'Are you sure you want to remove Pugsley Addams'
+    Then I should be on a page showing 'Are you sure you want to remove Pugsley Addams from the application'
     When I choose "Yes"
     And I click 'Save and continue'
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"

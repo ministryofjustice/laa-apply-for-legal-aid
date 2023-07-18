@@ -23,7 +23,7 @@ class BinaryChoiceForm
     @journey = journey
     @input_name = radio_buttons_input_name
     @action = action
-    @error = error || "error"
+    @error = error
   end
 
 private
@@ -41,6 +41,6 @@ private
   end
 
   def error_message
-    I18n.t("#{@journey.to_s.pluralize}.#{@input_name.to_s.pluralize}.#{@action}.#{@error}")
+    @error.nil? ? I18n.t("#{@journey.to_s.pluralize}.#{@input_name.to_s.pluralize}.#{@action}.error") : @error
   end
 end

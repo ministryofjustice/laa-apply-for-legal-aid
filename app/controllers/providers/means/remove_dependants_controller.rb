@@ -2,11 +2,13 @@ module Providers
   module Means
     class RemoveDependantsController < ProviderBaseController
       def show
-        form
         dependant
+        form
       end
 
       def update
+        dependant
+
         if form.valid?
           dependant&.destroy! if form.remove_dependant?
           if legal_aid_application.dependants.count.zero?
@@ -16,7 +18,6 @@ module Providers
           return go_forward
         end
 
-        dependant
         render :show
       end
 
@@ -27,6 +28,7 @@ module Providers
           journey: :provider,
           radio_buttons_input_name: :remove_dependant,
           form_params:,
+          error: error_message,
         )
       end
 
@@ -38,6 +40,10 @@ module Providers
         return {} unless params[:binary_choice_form]
 
         params.require(:binary_choice_form).permit(:remove_dependant)
+      end
+
+      def error_message
+        I18n.t("providers.means.remove_dependants.show.error", name: dependant.name)
       end
     end
   end

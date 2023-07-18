@@ -431,7 +431,8 @@ en:
           add_another: Do you need to add another child?
       remove_involved_child:
         show: &remove_show
-          page_title: Do you want to remove %{name} from the application?
+          page_title: Are you sure you want to remove %{name} from the application?
+          error: Select yes if you want to remove %{name} from the application.
       remove_opponent:
         show: *remove_show
       date_client_told_incidents:
@@ -579,9 +580,6 @@ en:
     has_other_opponents:
       show:
         error: Select yes if you need to add another opponent
-    remove_dependants:
-      show:
-        error: Select yes if you wish to delete the dependant
     declarations:
       show:
         h1-heading: Declaration
@@ -968,7 +966,8 @@ en:
             delete: Are you sure you want to delete this dependant?
       remove_dependants:
         show:
-          page_title: "Are you sure you want to remove %{name}?"
+          page_title: "Are you sure you want to remove %{name} from the application?"
+          error: "Select yes if you want to remove %{name} from the application"
       check_income_answers:
         show:
           h1-heading: Check your answers

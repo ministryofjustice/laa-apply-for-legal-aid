@@ -2,17 +2,18 @@ module Providers
   module ApplicationMeritsTask
     class RemoveInvolvedChildController < ProviderBaseController
       def show
-        form
         involved_child
+        form
       end
 
       def update
+        involved_child
+
         if form.valid?
           involved_child&.destroy! if form.remove_involved_child?
           return go_forward
         end
 
-        involved_child
         render :show
       end
 
@@ -23,7 +24,12 @@ module Providers
           journey: :provider,
           radio_buttons_input_name: :remove_involved_child,
           form_params:,
+          error: error_message,
         )
+      end
+
+      def error_message
+        I18n.t("providers.application_merits_task.remove_involved_child.show.error", name: @involved_child.full_name)
       end
 
       def involved_child
