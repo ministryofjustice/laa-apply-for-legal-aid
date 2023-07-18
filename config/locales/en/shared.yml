@@ -779,7 +779,7 @@ en:
       size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF.
       upload_file: Upload files
       upload_paragraph: |
-        Statements must be readable, If we cannot read them, it may delay a decision
+        Statements must be readable. If we cannot read them, it may delay a decision
         or give an inaccurate assessment of rejection of your client's case.
     uploaded_files:
       delete: Delete
