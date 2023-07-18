@@ -2,6 +2,8 @@ module ApplicationMeritsTask
   class Individual < ApplicationRecord
     has_one :opponent, as: :opposable
 
+    delegate :generate_ccms_opponent_id, to: :opponent
+
     def ccms_relationship_to_case
       "OPP"
     end
