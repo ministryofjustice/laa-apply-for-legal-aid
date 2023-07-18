@@ -2,12 +2,13 @@ require "rails_helper"
 
 module ApplicationMeritsTask
   RSpec.describe Opponent do
-    describe "standard values" do
-      subject(:opponent) { build(:opponent) }
+    describe "Individual" do
+      subject(:opponent) { build(:opponent, :for_individual) }
 
-      it { expect(opponent.ccms_relationship_to_case).to eq "OPP" }
-      it { expect(opponent.ccms_child?).to be false }
-      it { expect(opponent.ccms_opponent_relationship_to_case).to eq "Opponent" }
+      it { expect(opponent.opposable.ccms_relationship_to_case).to eq "OPP" }
+      it { expect(opponent.opposable.ccms_child?).to be false }
+      it { expect(opponent.opposable.ccms_opponent_relationship_to_case).to eq "Opponent" }
+      it { expect(opponent.opposable).to respond_to(:first_name, :last_name) }
     end
 
     describe "CCMSOpponentIdGenerator concern" do

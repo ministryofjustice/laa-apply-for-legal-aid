@@ -2,32 +2,32 @@ module Providers
   module ApplicationMeritsTask
     class OpponentsNamesController < ProviderBaseController
       def show
-        @form = Opponents::NameForm.new(model: opponent)
+        @form = Opponents::IndividualForm.new(model: opponent, first_name: opponent.first_name, last_name: opponent.last_name)
       end
 
       def new
-        @form = Opponents::NameForm.new(model: opponent)
+        @form = Opponents::IndividualForm.new(model: opponent)
       end
 
       def update
-        @form = Opponents::NameForm.new(form_params)
+        @form = Opponents::IndividualForm.new(form_params)
         render :show unless update_task_save_continue_or_draft(:application, :opponent_name)
       end
 
     private
 
       def opponent
-        @opponent ||= opponent_exists? || build_new_opponent
+        @opponent ||= existing_opponent || build_new_opponent
       end
 
-      def opponent_exists?
+      def existing_opponent
         legal_aid_application.opponents.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        false
+        nil
       end
 
       def build_new_opponent
-        ::ApplicationMeritsTask::Opponent.new(legal_aid_application:)
+        ::ApplicationMeritsTask::Individual.new.build_opponent(legal_aid_application:)
       end
 
       def form_params

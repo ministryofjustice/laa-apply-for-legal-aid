@@ -38,7 +38,7 @@ module Providers
       describe "show: GET /providers/applications/:legal_aid_application_id/opponents_names/:opponent_id" do
         subject(:get_existing_opponent) { get providers_legal_aid_application_opponents_name_path(legal_aid_application, opponent) }
 
-        let(:opponent) { create(:opponent, legal_aid_application:) }
+        let(:opponent) { create(:opponent, :for_individual, legal_aid_application:) }
 
         context "when authenticated" do
           before do
