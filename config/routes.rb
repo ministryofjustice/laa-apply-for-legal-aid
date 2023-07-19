@@ -292,6 +292,7 @@ Rails.application.routes.draw do
         resources :involved_children, only: %i[new show update]
         resources :remove_involved_child, only: %i[show update]
 
+        resources :opponent_type, only: %i[show]
         resources :opponents_names, only: %i[new show update]
         resources :remove_opponent, only: %i[show update]
 
