@@ -965,9 +965,7 @@ en:
           warning:
             delete: Are you sure you want to delete this dependant?
       remove_dependants:
-        show:
-          page_title: "Are you sure you want to remove %{name} from the application?"
-          error: "Select yes if you want to remove %{name} from the application"
+        show: *remove_show
       check_income_answers:
         show:
           h1-heading: Check your answers

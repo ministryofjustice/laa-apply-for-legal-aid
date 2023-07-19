@@ -2,17 +2,18 @@ module Providers
   module ApplicationMeritsTask
     class RemoveOpponentController < ProviderBaseController
       def show
-        form
         opponent
+        form
       end
 
       def update
+        opponent
+
         if form.valid?
           opponent&.destroy! if form.remove_opponent?
           return go_forward
         end
 
-        opponent
         render :show
       end
 
@@ -23,6 +24,7 @@ module Providers
           journey: :provider,
           radio_buttons_input_name: :remove_opponent,
           form_params:,
+          error: error_message,
         )
       end
 
@@ -34,6 +36,10 @@ module Providers
         return {} unless params[:binary_choice_form]
 
         params.require(:binary_choice_form).permit(:remove_opponent)
+      end
+
+      def error_message
+        I18n.t("providers.application_merits_task.remove_opponent.show.error", name: @opponent.full_name)
       end
     end
   end
