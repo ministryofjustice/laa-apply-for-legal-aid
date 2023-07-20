@@ -1,7 +1,7 @@
-Feature: Applicant under 16 blocked before or after MTR phase one enabled
+Feature: Applicant under 16 blocked before and after MTR phase one enabled
 
   @javascript @vcr
-  Scenario: I am instructed to use CCMS when applicant was under 16 on earliest delegated function date
+  Scenario: I am instructed to use CCMS when applicant was under 16 on earliest delegated function date with MTR phase one disabled
     Given the feature flag for means_test_review_phase_one is disabled
     And I start the journey as far as the applicant page
 
@@ -55,7 +55,7 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
     Then I should be on a page showing "You need to apply using CCMS"
 
   @javascript @vcr
-  Scenario: I am NOT instructed to use CCMS when applicant was under 16 on earliest delegated function date
+  Scenario: I am instructed to use CCMS when applicant was under 16 on earliest delegated function date with MTR phase one enabled
     Given the feature flag for means_test_review_phase_one is enabled
     And I start the journey as far as the applicant page
 
@@ -106,10 +106,10 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
     Then I should be on a page showing 'Check your answers'
 
     When I click 'Save and continue'
-    Then I should be on a page with title "No means test required"
+    Then I should be on a page showing "You need to apply using CCMS"
 
   @javascript
-  Scenario: I am warned not to use the service for under 16 year olds
+  Scenario: I am warned not to use the service for under 16 year olds with MTR phase one disabled
     Given the feature flag for means_test_review_phase_one is disabled
     When I visit the application service
     Then I should be on a page with title "Apply for legal aid"
@@ -117,11 +117,9 @@ Feature: Applicant under 16 blocked before or after MTR phase one enabled
     And I should see "is under 16 years old"
 
   @javascript
-  Scenario: I am NOT warned not to use the service for under 16 year olds
+  Scenario: I am warned not to use the service for under 16 year olds with MTR phase one enabled
     Given the feature flag for means_test_review_phase_one is enabled
     When I visit the application service
     Then I should be on a page with title "Apply for legal aid"
     And I should see "When not to use this service"
-    And I should not see "is under 16 years old"
-
-
+    And I should see "is under 16 years old"
