@@ -1,11 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Providers::Partners::FullEmploymentDetailsController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
-  let(:provider) { legal_aid_application.provider }
+  let(:application) { create(:legal_aid_application, :with_applicant_and_partner) }
+  let(:partner) { application.partner }
+  let(:provider) { application.provider }
+  let(:before_actions) { {} }
 
   describe "GET /providers/applications/:legal_aid_application_id/partners/full_employment_details" do
-    subject(:request) { get providers_legal_aid_application_partners_full_employment_details_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_partners_full_employment_details_path(application) }
 
     context "when the provider is not authenticated" do
       before { request }
@@ -15,24 +17,69 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
 
     context "when the provider is authenticated" do
       before do
+        before_actions
         login_as provider
         request
       end
 
-      it "returns http success" do
-        expect(response).to have_http_status(:ok)
+      context "when the no job data is returned" do
+        let(:before_actions) { create(:hmrc_response, :nil_response, legal_aid_application_id: application.id, owner_id: partner.id, owner_type: partner.class) }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the 'no data' message" do
+          expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
+        end
       end
 
-      it "displays the correct page content" do
-        expect(response.body).to include(html_compare(I18n.t("shared.full_employment_details.page_heading_partner")))
+      context "when the HMRC response is pending" do
+        let(:before_actions) { create(:hmrc_response, :processing, legal_aid_application_id: application.id, owner_id: partner.id, owner_type: partner.class) }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the 'no data' message" do
+          expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
+        end
+      end
+
+      context "when the partner has multiple jobs" do
+        let(:before_actions) do
+          create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application_id: application.id, owner_id: partner.id, owner_type: partner.class)
+          create_list(:employment, 2, legal_aid_application: application, owner_id: partner.id, owner_type: partner.class)
+        end
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the 'multiple job' message" do
+          expect(response.body).to include(html_compare("HMRC found a record of the partner's employment"))
+          expect(response.body).to include(html_compare("HMRC says the partner had more than one job in the last 3 months."))
+        end
+      end
+
+      context "when partner has no national insurance number" do
+        let(:application) { create(:legal_aid_application, :with_partner_no_nino) }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the correct page content" do
+          expect(response.body).to include(html_compare(I18n.t("shared.full_employment_details.page_heading_no_nino")))
+        end
       end
     end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/partners/full_employment_details" do
-    subject(:request) { patch providers_legal_aid_application_partners_full_employment_details_path(legal_aid_application), params: params.merge(submit_button) }
+    subject(:request) { patch providers_legal_aid_application_partners_full_employment_details_path(application), params: params.merge(submit_button) }
 
-    let(:partner) { legal_aid_application.partner }
+    let(:partner) { application.partner }
     let(:params) do
       {
         partner: {
@@ -57,7 +104,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         end
 
         it "redirects to the has_dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(application))
         end
       end
 

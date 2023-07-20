@@ -1,4 +1,4 @@
-<% page_heading = t(".page_heading_#{suffix}") %>
+<% page_heading = t(".page_heading_#{suffix}", individual:) %>
 
 <%= form_with(model: @form, url:, method: :patch, local: true) do |form| %>
 
