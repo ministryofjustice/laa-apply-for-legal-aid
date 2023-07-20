@@ -115,6 +115,10 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   incidents: {
     details: -> { Faker::Lorem.sentence },
   },
+  individuals: {
+    first_name: -> { Faker::Name.first_name },
+    last_name: -> { Faker::Name.last_name },
+  },
   involved_children: {
     full_name: -> { Faker::Name.name },
   },
