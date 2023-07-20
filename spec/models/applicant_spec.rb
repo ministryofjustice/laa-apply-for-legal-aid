@@ -284,7 +284,7 @@ RSpec.describe Applicant do
       context "with age_for_means_test_purposes of 15" do
         before { applicant.age_for_means_test_purposes = 15 }
 
-        it { is_expected.to be false }
+        it { is_expected.to be true }
       end
 
       context "with age_for_means_test_purposes of 16" do

@@ -1163,7 +1163,7 @@ RSpec.describe LegalAidApplication do
       context "with applicant age of 15" do
         let(:applicant) { build(:applicant, age_for_means_test_purposes: 15) }
 
-        it { is_expected.to be false }
+        it { is_expected.to be true }
       end
 
       context "with applicant age of 16" do
