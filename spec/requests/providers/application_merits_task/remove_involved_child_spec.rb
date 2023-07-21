@@ -2,24 +2,24 @@ require "rails_helper"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe HasOtherInvolvedChildrenController do
+    RSpec.describe RemoveInvolvedChildController do
       let(:application) { create(:legal_aid_application) }
       let(:provider) { application.provider }
-      let!(:child2) { create(:involved_child, legal_aid_application: application) }
+      let!(:child) { create(:involved_child, legal_aid_application: application) }
 
       before { login_as provider }
 
       describe "show GET /providers/applications/:legal_aid_application_id/remove_involved_child/:id" do
-        subject { get providers_legal_aid_application_remove_involved_child_path(application, child2) }
+        subject { get providers_legal_aid_application_remove_involved_child_path(application, child) }
 
         it "displays the childs details" do
           subject
-          expect(response.body).to include(html_compare(child2.full_name))
+          expect(response.body).to include(html_compare(child.full_name))
         end
       end
 
       describe "update PATCH /providers/applications/:legal_aid_application_id/remove_involved_child/:id" do
-        subject { patch providers_legal_aid_application_remove_involved_child_path(application, child2), params: }
+        subject { patch providers_legal_aid_application_remove_involved_child_path(application, child), params: }
 
         let(:params) do
           {
@@ -69,6 +69,11 @@ module Providers
 
         context "with neither yes nor no specified" do
           let(:radio_button) { "" }
+
+          it "shows the correct error message" do
+            subject
+            expect(response.body).to include(I18n.t("providers.application_merits_task.remove_involved_child.show.error", name: child.full_name))
+          end
 
           it "does not delete a record" do
             expect { subject }.not_to change { application.involved_children.count }

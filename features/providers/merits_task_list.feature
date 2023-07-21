@@ -114,7 +114,7 @@ Feature: Merits task list
     When I click 'Save and continue'
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
     When I click link 'Remove'
-    Then I should be on a page showing 'Do you want to remove John Doe Jr from the application?'
+    Then I should be on a page showing 'Are you sure you want to remove John Doe Jr from the application?'
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
