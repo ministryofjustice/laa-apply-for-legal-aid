@@ -1363,10 +1363,6 @@ en:
               is under 16 years old
               is self-employed
               has a partner, unless the case is against the partner
-          list_items_post_mtr_phase_one:
-            list: |
-              is self-employed
-              has a partner, unless the case is against the partner
         use_ccms_para_html: |
          You will need to apply using <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and
           Cost Management System'>CCMS</abbr> (Client and Cost Management System)</a> instead.

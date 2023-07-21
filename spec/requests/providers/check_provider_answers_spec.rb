@@ -365,11 +365,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
           let(:applicant) { create(:applicant, :under_16) }
 
-          it_behaves_like "non means tested flow"
-
-          it "switches to non means tested state machine" do
-            expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
-          end
+          it_behaves_like "under 16 blocked flow"
         end
 
         context "with MTR phse one disabled and applicant under 16" do
@@ -415,11 +411,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
           let(:applicant) { create(:applicant, :under_16) }
 
-          it_behaves_like "non means tested flow"
-
-          it "switches to non means tested state machine" do
-            expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
-          end
+          it_behaves_like "under 16 blocked flow"
         end
 
         context "with MTR phase one disabled and applicant under 16" do

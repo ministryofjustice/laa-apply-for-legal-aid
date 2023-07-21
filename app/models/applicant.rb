@@ -49,8 +49,7 @@ class Applicant < ApplicationRecord
   end
 
   def under_16_blocked?
-    !Setting.means_test_review_phase_one? &&
-      age_for_means_test_purposes.present? &&
+    age_for_means_test_purposes.present? &&
       age_for_means_test_purposes < 16
   end
 

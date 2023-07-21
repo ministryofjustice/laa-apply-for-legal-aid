@@ -8,11 +8,7 @@
 
     <div class="maximize-text-width">
       <p class="govuk-body"><%= t ".when_not_to_use_service.list_title" %></p>
-        <% if Setting.means_test_review_phase_one? %>
-          <%= list_from_translation_path ".start.index.when_not_to_use_service.list_items_post_mtr_phase_one" %>
-        <% else %>
-          <%= list_from_translation_path ".start.index.when_not_to_use_service.list_items" %>
-        <% end %>
+        <%= list_from_translation_path ".start.index.when_not_to_use_service.list_items" %>
     </div>
 
     <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
