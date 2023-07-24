@@ -5,10 +5,10 @@ module ApplicationMeritsTask
     context "with an Individual" do
       subject(:opponent) { build(:opponent, :for_individual) }
 
-      it { expect(opponent.opposable.ccms_relationship_to_case).to eq "OPP" }
-      it { expect(opponent.opposable.ccms_child?).to be false }
-      it { expect(opponent.opposable.ccms_opponent_relationship_to_case).to eq "Opponent" }
-      it { expect(opponent.opposable).to respond_to(:first_name, :last_name) }
+      it { expect(opponent.ccms_relationship_to_case).to eq "OPP" }
+      it { expect(opponent.ccms_child?).to be false }
+      it { expect(opponent.ccms_opponent_relationship_to_case).to eq "Opponent" }
+      it { expect(opponent).to respond_to(:first_name, :last_name, :full_name) }
 
       describe "#belongs_to" do
         before { opponent.save! }
