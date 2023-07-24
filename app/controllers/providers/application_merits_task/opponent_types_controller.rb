@@ -6,11 +6,11 @@ module Providers
       end
 
       def update
-
         render :show
       end
 
     private
+
       def form
         @form ||= BinaryChoiceForm.call(
           journey: :provider,
