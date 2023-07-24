@@ -6,6 +6,9 @@ module Providers
       end
 
       def update
+        return continue_or_draft if draft_selected?
+        return go_forward if form.valid?
+
         render :show
       end
 
