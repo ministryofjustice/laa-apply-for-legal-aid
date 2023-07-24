@@ -41,11 +41,7 @@ allowed_sites = [
 
 WebMock.disable_net_connect!(allow: allowed_sites, net_http_connect_on_start: true)
 
-if Rails.env.test?
-  Webdrivers::Chromedriver.required_version = "114.0.5735.90"
-elsif ENV["CIRCLECI"]
-  Webdrivers::Chromedriver.required_version = "112.0.5615.49"
-end
+Webdrivers::Chromedriver.required_version = ENV["CIRCLECI"] ? "112.0.5615.49" : "114.0.5735.90"
 
 Webdrivers::Chromedriver.update
 
