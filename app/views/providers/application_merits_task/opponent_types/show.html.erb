@@ -1,0 +1,13 @@
+<% form_with(url: providers_legal_aid_application_opponent_type_path,
+      model: @form,
+      method: :patch,
+      local: true) do |form| %>
+
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
+    <h1 class="govuk-heading-xl">
+      <%= "test" %>
+    </h1>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

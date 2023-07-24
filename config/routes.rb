@@ -291,8 +291,6 @@ Rails.application.routes.draw do
       scope module: :application_merits_task do
         resources :involved_children, only: %i[new show update]
         resources :remove_involved_child, only: %i[show update]
-
-        resources :opponent_type, only: %i[show]
         resources :opponents_names, only: %i[new show update]
         resources :remove_opponent, only: %i[show update]
 
@@ -302,6 +300,7 @@ Rails.application.routes.draw do
         resource :has_other_involved_children, only: %i[show update]
         resource :in_scope_of_laspo, only: %i[show update]
         resource :has_other_opponent, only: %i[new show update]
+        resource :opponent_type, only: %i[new show update]
         resource :opponents_mental_capacity, only: %i[show update]
         resource :domestic_abuse_summary, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]

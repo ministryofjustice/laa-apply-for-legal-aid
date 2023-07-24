@@ -13,7 +13,7 @@ en:
             online banking or manual upload
           - details about payments they receive
           - details about money they pay out
-          - details about any dependants they may have
+          - details about any dependents they may have
           - details about their assets
     about_the_financial_assessments:
       show:
@@ -444,6 +444,9 @@ en:
       matter_opposed_reasons:
         show:
           page_heading: Why is the Section 8 matter opposed by your client or the other party?
+      opponent_types:
+        show: &new
+          h1-heading: Is the opponent an individual or an organisation?
       opponents_names:
         show: &new
           page_title: Opponent's name
