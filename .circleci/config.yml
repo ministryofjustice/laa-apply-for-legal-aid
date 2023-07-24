@@ -247,9 +247,7 @@ jobs:
     - *install_js_packages
     - *save_js_packages_cache
     - run: bundle exec rails assets:precompile
-    - browser-tools/install-chrome:
-        chrome-version: 114.0.5735.90
-        replace-existing: true
+    - browser-tools/install-chrome
     - browser-tools/install-chromedriver
     - run:
         name: Run integration tests

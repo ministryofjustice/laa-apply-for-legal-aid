@@ -41,7 +41,12 @@ allowed_sites = [
 
 WebMock.disable_net_connect!(allow: allowed_sites, net_http_connect_on_start: true)
 
-Webdrivers::Chromedriver.required_version = "114.0.5735.90"
+if Rails.env.test?
+  Webdrivers::Chromedriver.required_version = "114.0.5735.90"
+elsif ENV["CIRCLECI"]
+  Webdrivers::Chromedriver.required_version = "112.0.5615.49"
+end
+
 Webdrivers::Chromedriver.update
 
 Capybara.register_driver :headless_chrome do |app|
