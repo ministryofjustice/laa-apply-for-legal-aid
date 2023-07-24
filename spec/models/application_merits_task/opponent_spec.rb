@@ -9,6 +9,24 @@ module ApplicationMeritsTask
       it { expect(opponent.opposable.ccms_child?).to be false }
       it { expect(opponent.opposable.ccms_opponent_relationship_to_case).to eq "Opponent" }
       it { expect(opponent.opposable).to respond_to(:first_name, :last_name) }
+
+      describe "#belongs_to" do
+        before { opponent.save! }
+
+        it "belongs to an opposable Individual" do
+          expect(opponent).to respond_to(:opposable)
+          expect(opponent.opposable).to be_an(ApplicationMeritsTask::Individual)
+        end
+      end
+
+      describe "#destroy!" do
+        before { opponent.save! }
+
+        it "removes the opposable Individual" do
+          expect { opponent.destroy }
+            .to change(ApplicationMeritsTask::Individual, :count).by(-1)
+        end
+      end
     end
 
     describe "#generate_ccms_opponent_id" do

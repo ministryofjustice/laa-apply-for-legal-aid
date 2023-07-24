@@ -56,6 +56,28 @@ module ApplicationMeritsTask
           end
         end
       end
+
+      describe "#has_one" do
+        let(:opponent) { create(:opponent, :for_individual) }
+        let(:individual) { opponent.opposable }
+
+        it "has an #opponent" do
+          expect(individual).to respond_to(:opponent)
+          expect(individual.opponent).to eql(opponent)
+        end
+      end
+
+      describe "#destroy!" do
+        before { individual }
+
+        let(:opponent) { create(:opponent, :for_individual) }
+        let(:individual) { opponent.opposable }
+
+        it "removes the opponent" do
+          expect { individual.destroy! }
+            .to change(ApplicationMeritsTask::Opponent, :count).by(-1)
+        end
+      end
     end
   end
 end
