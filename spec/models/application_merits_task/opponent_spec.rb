@@ -73,5 +73,36 @@ module ApplicationMeritsTask
         end
       end
     end
+
+    # TODO: remove this when we remove the first and last name attributes from opponent
+    # NOTE: This is purely to continue to fill data on the opponent in case we need to rollback
+    describe "#before_save" do
+      let(:opponent) { described_class.new(legal_aid_application: create(:legal_aid_application)) }
+
+      context "with opposable object" do
+        let(:individual) { ApplicationMeritsTask::Individual.new(first_name: "Billy", last_name: "Bob") }
+
+        before do
+          opponent.opposable = individual
+        end
+
+        it "saves the first and last name on the opponent to match opposable object" do
+          expect { opponent.save! }
+            .to change(opponent, :attributes)
+              .from(hash_including("first_name" => nil, "last_name" => nil))
+              .to(hash_including("first_name" => "Billy", "last_name" => "Bob"))
+        end
+
+        it "updates the first and last name on the opponent to match opposable object" do
+          opponent.save!
+          opponent.opposable.update!(first_name: "John", last_name: "Boy")
+
+          expect { opponent.save! }
+          .to change(opponent, :attributes)
+            .from(hash_including("first_name" => "Billy", "last_name" => "Bob"))
+            .to(hash_including("first_name" => "John", "last_name" => "Boy"))
+        end
+      end
+    end
   end
 end
