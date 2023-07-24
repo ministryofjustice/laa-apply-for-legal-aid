@@ -774,7 +774,7 @@ en:
       continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
       back_to_applications: Back to my applications
     full_employment_details:
-      page_heading_no_data: HMRC has no record of your client's employment in the last 3 months
+      page_heading_no_data: HMRC has no record of %{individual}'s employment in the last 3 months
       page_heading_multiple_employments: HMRC found a record of %{individual}'s employment
       page_heading_no_nino: We could not check %{individual}'s employment record with HMRC
       info_no_data: You told us your client is employed but HMRC could not confirm this.

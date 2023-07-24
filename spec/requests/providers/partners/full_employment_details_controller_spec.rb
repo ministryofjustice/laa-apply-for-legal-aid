@@ -30,7 +30,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         end
 
         it "displays the 'no data' message" do
-          expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
+          expect(response.body).to include(html_compare("HMRC has no record of the partner's employment in the last 3 months"))
         end
       end
 
@@ -42,7 +42,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         end
 
         it "displays the 'no data' message" do
-          expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
+          expect(response.body).to include(html_compare("HMRC has no record of the partner's employment in the last 3 months"))
         end
       end
 
@@ -70,7 +70,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         end
 
         it "displays the correct page content" do
-          expect(response.body).to include(html_compare(I18n.t("shared.full_employment_details.page_heading_no_nino")))
+          expect(response.body).to include(html_compare(I18n.t("shared.full_employment_details.page_heading_no_nino", individual: "the partner")))
         end
       end
     end
