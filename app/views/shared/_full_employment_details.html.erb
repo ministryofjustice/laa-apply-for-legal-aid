@@ -1,4 +1,4 @@
-<% page_heading = t(".page_heading_#{suffix}") %>
+<% page_heading = t(".page_heading_#{suffix}", individual:) %>
 
 <%= form_with(model: @form, url:, method: :patch, local: true) do |form| %>
 
@@ -12,7 +12,7 @@
     <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_heading },
                             caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "xl" }) do %>
 
-      <h2 class="govuk-body-l"><%= t(".info_#{suffix}") %></h2>
+      <h2 class="govuk-body-l"><%= t(".info_#{suffix}", individual:) %></h2>
 
       <p class="govuk-body"><%= t(".enter_details_#{client_or_partner}") %></p>
       <ul class="govuk-list govuk-list--bullet">

@@ -1,28 +1,28 @@
 module Providers
-  module Means
+  module Partners
     class EmploymentIncomesController < ProviderBaseController
       before_action :employments_and_payments
 
       def show
-        @applicant = applicant
+        @partner = partner
         @form = LegalAidApplications::EmploymentIncomeForm.new(model: legal_aid_application)
       end
 
       def update
-        @applicant = applicant
+        @partner = partner
         @form = LegalAidApplications::EmploymentIncomeForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 
     private
 
-      def applicant
-        @applicant ||= legal_aid_application.applicant
+      def partner
+        @partner ||= legal_aid_application.partner
       end
 
       def employments_and_payments
-        @employments = @legal_aid_application.applicant.employments
-        @eligible_employment_payments = @legal_aid_application.applicant.eligible_employment_payments
+        @employments = @legal_aid_application.partner.employments
+        @eligible_employment_payments = @legal_aid_application.partner.eligible_employment_payments
       end
 
       def form_params

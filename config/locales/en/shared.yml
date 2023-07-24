@@ -744,6 +744,30 @@ en:
       self_employed: Self-employed
       armed_forces: Member of the armed forces
       not_employed: None of the above
+    employment_income:
+      notification_banner_title: Important
+      hmrc-information: HMRC have provided the information on this page.
+      page_title: Review %{name}'s employment income
+      supplementary_question: |
+        Do you need to tell us anything else about %{individual_with_determiner}'s employment?
+      employment_hint: |
+        For example, if they get cash in hand pay, have zero-hours contracts,
+        or recently started or ended employment.
+      enter_details: Enter details
+      details_hint: You'll need to upload supporting evidence later.
+    unexpected_employment_incomes:
+      notification_banner_title: Important
+      hmrc-information: HMRC have provided the information on this page.
+      page_title: HMRC found a record of %{individual_with_determiner}'s employment
+      hmrc_not_employed: |
+        You told us %{individual_with_determiner} is not employed, but HMRC shared this information
+        with us.
+      supplementary_question: Tell us about %{individual_with_determiner}'s employment situation
+      supplementary_question_hint: |
+        For example, if they recently ended employment. You can upload evidence,
+        like a P45, later on.
+      tax: Tax
+      ni: National Insurance
     use_ccms:
       head_title: You need to apply using CCMS
       title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
@@ -751,11 +775,11 @@ en:
       back_to_applications: Back to my applications
     full_employment_details:
       page_heading_no_data: HMRC has no record of your client's employment in the last 3 months
-      page_heading_multiple_employments: HMRC found a record of your client's employment
-      page_heading_partner: We could not check the partner's employment record with HMRC
+      page_heading_multiple_employments: HMRC found a record of %{individual}'s employment
+      page_heading_no_nino: We could not check the partner's employment record with HMRC
       info_no_data: You told us your client is employed but HMRC could not confirm this.
-      info_multiple_employments: HMRC says your client had more than one job in the last 3 months.
-      info_partner: Because you did not give us the partner's National Insurance number, we could not check this with HMRC.
+      info_multiple_employments: HMRC says %{individual} had more than one job in the last 3 months.
+      info_no_nino: Because you did not give us %{individual}'s National Insurance number, we could not check this with HMRC.
       enter_details_client: "Enter details of your client's employment in the last 3 months, including:"
       enter_details_partner: "You must give the partner's employment details for the last 3 months, including:"
       details:

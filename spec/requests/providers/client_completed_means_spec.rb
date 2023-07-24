@@ -101,11 +101,11 @@ RSpec.describe Providers::ClientCompletedMeansController do
 
         context "employment income data was received from HMRC" do
           before do
-            allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
-            allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(false)
+            allow_any_instance_of(Applicant).to receive(:hmrc_employment_income?).and_return(true)
+            allow_any_instance_of(Applicant).to receive(:has_multiple_employments?).and_return(false)
           end
 
-          it "redirects to the employed income page" do
+          it "redirects to the employment income page" do
             subject
             expect(response).to redirect_to(providers_legal_aid_application_means_employment_income_path(legal_aid_application))
           end

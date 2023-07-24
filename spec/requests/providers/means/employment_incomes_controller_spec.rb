@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe "employed incomes request" do
+RSpec.describe Providers::Means::EmploymentIncomesController do
   let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, applicant:) }
   let(:applicant) { create(:applicant, :employed) }
   let(:employment) { create(:employment, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
   let(:provider) { application.provider }
   let(:setup_tasks) { {} }
 
-  describe "GET /providers/applications/:id/means/employed_income" do
+  describe "GET /providers/applications/:id/means/employment_income" do
     subject(:get_employment_income) { get providers_legal_aid_application_means_employment_income_path(application) }
 
     context "when the provider is not authenticated" do
@@ -30,10 +30,8 @@ RSpec.describe "employed incomes request" do
       end
 
       context "when applicant is employed" do
-        let(:applicant) { create(:applicant, :employed) }
-
         it "displays correct text" do
-          expect(unescaped_response_body).to include(I18n.t("providers.means.employment_incomes.show.page_title", name: applicant.full_name))
+          expect(unescaped_response_body).to include(I18n.t("shared.employment_income.page_title", name: applicant.full_name))
           expect(unescaped_response_body).not_to include(I18n.t("providers.means.employment_incomes.show.hmrc_not_employed"))
         end
       end
@@ -73,7 +71,7 @@ RSpec.describe "employed incomes request" do
         end
 
         context "when the application is using the bank upload journey" do
-          let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
+          let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false, applicant:) }
 
           it "redirects to the receives state benefits page" do
             request

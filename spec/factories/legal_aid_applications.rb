@@ -72,7 +72,7 @@ FactoryBot.define do
 
     trait :with_partner_no_nino do
       applicant { build(:applicant, :with_address, :with_partner) }
-      partner { build(:partner, has_national_insurance_number: false) }
+      partner { build(:partner, :no_nino) }
     end
 
     trait :with_partner_and_joint_benefit do

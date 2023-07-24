@@ -1,5 +1,12 @@
+<% suffix = if !@legal_aid_application.partner.national_insurance_number?
+              :no_nino
+            elsif @legal_aid_application.partner.has_multiple_employments?
+              :multiple_employments
+            else
+              :no_data
+            end %>
 <%= render "shared/full_employment_details",
-           suffix: :partner,
+           suffix:,
            client_or_partner: :partner,
            individual: "the partner",
            url: providers_legal_aid_application_partners_full_employment_details_path(@legal_aid_application) %>

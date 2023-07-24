@@ -2,10 +2,11 @@ module HMRC
   class StatusAnalyzer
     delegate :provider,
              :applicant,
-             :has_multiple_employments?,
+             to: :legal_aid_application
+    delegate :has_multiple_employments?,
              :hmrc_employment_income?,
              :eligible_employment_payments,
-             to: :legal_aid_application
+             to: :applicant
 
     attr_reader :legal_aid_application
 
@@ -20,13 +21,13 @@ module HMRC
     def call
       return :applicant_not_employed if applicant_not_employed && no_employment_payments
 
-      return :unexpected_employment_data if applicant_not_employed && eligible_employment_payments.any?
+      return :applicant_unexpected_employment_data if applicant_not_employed && eligible_employment_payments.any?
 
-      return :hmrc_multiple_employments if has_multiple_employments?
+      return :applicant_multiple_employments if has_multiple_employments?
 
-      return :no_hmrc_data unless hmrc_employment_income?
+      return :applicant_no_hmrc_data unless hmrc_employment_income?
 
-      :hmrc_single_employment
+      :applicant_single_employment
     end
 
     def applicant_not_employed

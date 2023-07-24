@@ -280,6 +280,8 @@ Rails.application.routes.draw do
         resource :about_financial_means, only: %i[show update]
         resources :employed, only: %i[index create]
         resources :use_ccms_employment, only: %i[index]
+        resource :employment_income, only: %i[show update]
+        resource :unexpected_employment_income, only: %i[show update]
         resource :full_employment_details, only: %i[show update]
         resource :bank_statements, only: %i[show update destroy] do
           get "/list", to: "bank_statements#list"

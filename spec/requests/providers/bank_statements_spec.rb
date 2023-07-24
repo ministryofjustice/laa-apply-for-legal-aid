@@ -312,7 +312,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         context "when HMRC response status is hmrc_multiple_employments" do
           before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_multiple_employments
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_multiple_employments
           end
 
           it "redirects to full_employment_details" do
@@ -323,7 +323,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         context "when HMRC response status is hmrc_single_employment" do
           before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_single_employment
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_single_employment
           end
 
           it "redirects to employment_incomes" do
@@ -334,7 +334,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         context "when client is not employed but HMRC response has employment data" do
           before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :unexpected_employment_data
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_unexpected_employment_data
           end
 
           it "redirects to unexpected_employment_incomes" do
