@@ -4,12 +4,12 @@ module Providers
       before_action :employments_and_payments
 
       def show
-        @partner = partner
+        partner
         @form = LegalAidApplications::UnexpectedEmploymentIncomeForm.new(model: legal_aid_application)
       end
 
       def update
-        @partner = partner
+        partner
         @form = LegalAidApplications::UnexpectedEmploymentIncomeForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
