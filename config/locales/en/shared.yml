@@ -776,7 +776,7 @@ en:
     full_employment_details:
       page_heading_no_data: HMRC has no record of your client's employment in the last 3 months
       page_heading_multiple_employments: HMRC found a record of %{individual}'s employment
-      page_heading_no_nino: We could not check the partner's employment record with HMRC
+      page_heading_no_nino: We could not check %{individual}'s employment record with HMRC
       info_no_data: You told us your client is employed but HMRC could not confirm this.
       info_multiple_employments: HMRC says %{individual} had more than one job in the last 3 months.
       info_no_nino: Because you did not give us %{individual}'s National Insurance number, we could not check this with HMRC.

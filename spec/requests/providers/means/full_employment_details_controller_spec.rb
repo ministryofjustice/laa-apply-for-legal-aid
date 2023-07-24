@@ -72,6 +72,18 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
           expect(response.body).to include(html_compare("HMRC says your client had more than one job in the last 3 months."))
         end
       end
+
+      context "when partner has no national insurance number" do
+        let(:application) { create(:legal_aid_application, :with_applicant_no_nino) }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the correct page content" do
+          expect(response.body).to include(html_compare("We could not check your client's employment record with HMRC"))
+        end
+      end
     end
   end
 
