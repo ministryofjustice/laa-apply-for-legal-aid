@@ -49,7 +49,7 @@ module Providers
 
           it "redirects to new opponent" do
             patch_has_other
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponents_name_path(application))
+            expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(application))
           end
 
           it "does not set the task to complete" do

@@ -59,8 +59,8 @@ module Flow
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
         },
-        opponents_names: {
-          path: ->(application) { urls.new_providers_legal_aid_application_opponents_name_path(application) },
+        opponent_individuals: {
+          path: ->(application) { urls.new_providers_legal_aid_application_opponent_individual_path(application) },
           forward: :has_other_opponents,
           check_answers: :check_merits_answers,
         },
@@ -71,7 +71,7 @@ module Flow
             if application.opponents.any?
               urls.providers_legal_aid_application_has_other_opponent_path(application)
             else
-              Setting.opponent_organisations? ? urls.providers_legal_aid_application_opponent_type_path(application) : urls.new_providers_legal_aid_application_opponents_name_path(application)
+              Setting.opponent_organisations? ? urls.providers_legal_aid_application_opponent_type_path(application) : urls.new_providers_legal_aid_application_opponent_individual_path(application)
             end
           end,
         },
@@ -83,7 +83,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
           forward: lambda { |application, has_other_opponent|
             if has_other_opponent
-              Setting.opponent_organisations? ? :opponent_types : :opponents_names
+              Setting.opponent_organisations? ? :opponent_types : :opponent_individuals
             else
               Flow::MeritsLoop.forward_flow(application, :application)
             end
@@ -94,7 +94,7 @@ module Flow
             if application.opponents.count.positive?
               :has_other_opponents
             else
-              :opponents_names
+              :opponent_individuals
             end
           },
         },

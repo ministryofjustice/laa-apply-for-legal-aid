@@ -27,7 +27,7 @@
             <td class="govuk-table__cell">
               <%= link_to_accessible(
                     t("generic.change"),
-                    providers_legal_aid_application_opponents_name_path(@legal_aid_application, opponent),
+                    providers_legal_aid_application_opponent_individual_path(@legal_aid_application, opponent),
                     class: "govuk-link change-link",
                     suffix: opponent.full_name,
                   ) %>

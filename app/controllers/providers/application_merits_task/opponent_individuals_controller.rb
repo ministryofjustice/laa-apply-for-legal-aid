@@ -1,6 +1,6 @@
 module Providers
   module ApplicationMeritsTask
-    class OpponentsNamesController < ProviderBaseController
+    class OpponentIndividualsController < ProviderBaseController
       def show
         @form = Opponents::IndividualForm.new(model: opponent, first_name: opponent.first_name, last_name: opponent.last_name)
       end

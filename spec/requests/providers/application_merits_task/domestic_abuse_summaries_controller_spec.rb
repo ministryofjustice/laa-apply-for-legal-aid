@@ -100,7 +100,7 @@ module Providers
 
           it "redirects to the next incomplete question" do
             patch_das
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponents_name_path(legal_aid_application))
+            expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(legal_aid_application))
           end
         end
 
