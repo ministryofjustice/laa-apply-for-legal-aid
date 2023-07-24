@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_083234) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_20_125540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -515,6 +515,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_083234) do
     t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
   end
 
+  create_table "individuals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "involved_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "full_name"
@@ -675,7 +682,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_083234) do
     t.integer "ccms_opponent_id"
     t.string "first_name"
     t.string "last_name"
+    t.string "opposable_type"
+    t.uuid "opposable_id"
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
+    t.index ["opposable_type", "opposable_id"], name: "index_opponents_on_opposable", unique: true
   end
 
   create_table "opponents_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
