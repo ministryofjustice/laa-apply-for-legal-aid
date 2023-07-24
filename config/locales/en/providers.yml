@@ -447,6 +447,10 @@ en:
       opponent_types:
         show: &new
           h1-heading: Is the opponent an individual or an organisation?
+          individual_or_organisation: Is the opponent an individual or an organisation?
+          one_at_time: Tell us about one opponent at a time. You can add more later.
+          individual: An individual
+          organisation: An organisation
       opponents_names:
         show: &new
           page_title: Opponent's name

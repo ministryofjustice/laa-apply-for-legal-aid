@@ -7,10 +7,28 @@
   <%= page_template page_title: t(".h1-heading"),
                     template: :basic,
                     form: do %>
-    <h1 class="govuk-heading-l">
-      <%= "test" %>
-    </h1>
+    <% options = [
+      [true, t(".individual")],
+      [false, t(".organisation")]
+    ]%>
 
-    <%= next_action_buttons(show_draft: true, form:) %>
+    <%= form.govuk_collection_radio_buttons :opponent_types,
+                                            options,
+                                            :first,
+                                            :second,
+                                            legend:
+                                            {
+                                              text: t(".individual_or_organisation"),
+                                              size: "l",
+                                              tag: "h2"
+                                            },
+                                            hint: {
+                                              text: t(".one_at_time"),
+                                              size: "s",
+                                              tag: "h3"
+                                            }
+                                            %>
+
+  <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
