@@ -55,7 +55,7 @@ def create_individual_opponent!(opponent, progress)
   if opponent.opposable
     progress.individuals_already_exists += 1
   else
-    individual = ApplicationMeritsTask::Individual.create!(first_name: opponent.first_name, last_name: opponent.last_name)
+    individual = ApplicationMeritsTask::Individual.create!(first_name: opponent.attributes["first_name"], last_name: opponent.attributes["last_name"])
     opponent.update!(opposable_id: individual.id, opposable_type: individual.class.to_s)
     progress.individuals_added += 1
   end
