@@ -13,7 +13,7 @@ en:
             online banking or manual upload
           - details about payments they receive
           - details about money they pay out
-          - details about any dependents they may have
+          - details about any dependants they may have
           - details about their assets
     about_the_financial_assessments:
       show:
@@ -447,7 +447,6 @@ en:
       opponent_types:
         show: &new
           heading: Is the opponent an individual or an organisation?
-          individual_or_organisation: Is the opponent an individual or an organisation?
           one_at_time: Tell us about one opponent at a time. You can add more later.
           individual: An individual
           organisation: An organisation

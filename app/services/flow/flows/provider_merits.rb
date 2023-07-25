@@ -86,7 +86,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
           forward: lambda { |application, has_other_opponent|
             if has_other_opponent
-              Setting.opponent_organisations? ? urls.providers_legal_aid_application_opponent_type_path(application) : :opponents_names
+              Setting.opponent_organisations? ? :opponent_types : :opponents_names
             else
               Flow::MeritsLoop.forward_flow(application, :application)
             end
