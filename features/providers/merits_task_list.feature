@@ -226,3 +226,23 @@ Feature: Merits task list
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
     And I should not see "PASSPORTED"
+
+  @javascript @vcr
+  Scenario: With an organisation opponent
+    Given the feature flag for opponent_organisations is enabled
+    When I have completed a non-passported application and reached the merits task_list
+    Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
+    And I should see 'Children involved in this proceeding\nCANNOT START YET'
+    When I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'You must complete every section before you can continue'
+    When I click link 'Latest incident details'
+    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
+    When I enter the 'told' date of 2 days ago
+    And I enter the 'occurred' date of 2 days ago
+    When I click 'Save and continue'
+    Then I should be on a page showing "Is the opponent an individual or an organisation?"
+    When I choose a 'An individual' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Opponent's name"
+    # TODO: this feature should be extended when AP-4301 is complete
+    # to include when a user choses to add an organisation opponent
