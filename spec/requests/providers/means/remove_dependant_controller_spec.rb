@@ -74,7 +74,7 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       let(:remove_dependant) { "not sure" }
 
       it "show errors" do
-        expect(response.body).to include(I18n.t("providers.means.remove_dependants.show.error", name: dependant.name))
+        expect(response.body).to include(I18n.t("providers.means.remove_dependants.show.error", name: html_compare(dependant.name)))
       end
     end
 
@@ -82,7 +82,7 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       let(:params) { nil }
 
       it "show errors" do
-        expect(response.body).to include(I18n.t("providers.means.remove_dependants.show.error", name: dependant.name))
+        expect(response.body).to include(I18n.t("providers.means.remove_dependants.show.error", name: html_compare(dependant.name)))
       end
     end
   end
