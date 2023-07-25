@@ -10,7 +10,14 @@ module Opponents
       return false unless valid?
 
       model.legal_aid_application = legal_aid_application if legal_aid_application
-      model.opposable = ApplicationMeritsTask::Individual.new(first_name:, last_name:)
+
+      if model.opposable
+        model.opposable.first_name = first_name
+        model.opposable.last_name = last_name
+        model.opposable.save!
+      else
+        model.opposable = ApplicationMeritsTask::Individual.new(first_name:, last_name:)
+      end
       model.save!(validate: false)
     end
     alias_method :save!, :save

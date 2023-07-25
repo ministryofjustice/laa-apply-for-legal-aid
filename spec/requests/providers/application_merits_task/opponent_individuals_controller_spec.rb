@@ -69,17 +69,18 @@ module Providers
             params: params.merge(button_clicked),
           )
         end
-        let!(:opponent) { create(:opponent, legal_aid_application:, first_name: "Should", last_name: "Change") }
-        let(:first_name) { opponent.first_name }
-        let(:last_name) { "#{opponent.last_name} Junior" }
+
+        let!(:opponent) { create(:opponent, legal_aid_application:, first_name: "Milly", last_name: "Bobs") }
+
         let(:params) do
           {
             application_merits_task_opponent: {
-              first_name:,
-              last_name:,
+              first_name: "Billy",
+              last_name: "Bob",
             },
           }
         end
+
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
 
@@ -91,7 +92,12 @@ module Providers
 
         it "amends the opponent with the values entered" do
           expect { patch_name }.not_to change(::ApplicationMeritsTask::Opponent, :count)
-          expect(opponent.reload.full_name).to eql "Should Change Junior"
+          expect(opponent.reload.full_name).to eql "Billy Bob"
+        end
+
+        it "amends the opponent opposable individual with the values entered" do
+          expect { patch_name }.not_to change(::ApplicationMeritsTask::Individual, :count)
+          expect(opponent.opposable.reload.full_name).to eql "Billy Bob"
         end
 
         it "sets the task to complete" do
@@ -113,7 +119,13 @@ module Providers
         end
 
         context "when incomplete" do
-          let(:last_name) { "" }
+          let(:params) do
+            {
+              application_merits_task_opponent: {
+                last_name: "",
+              },
+            }
+          end
 
           it "renders show" do
             patch_name

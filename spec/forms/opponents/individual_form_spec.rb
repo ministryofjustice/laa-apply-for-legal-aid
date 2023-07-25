@@ -57,18 +57,43 @@ RSpec.describe Opponents::IndividualForm, type: :form do
   describe "#save" do
     subject(:save_form) { name_form.save }
 
-    it "creates a new individual" do
-      expect { save_form }.to change(ApplicationMeritsTask::Individual, :count).by(1)
+    context "with no existing opposable object" do
+      it "creates a new individual" do
+        expect { save_form }.to change(ApplicationMeritsTask::Individual, :count).by(1)
 
-      expect(name_form.model).to have_attributes(
-        first_name: "Bob",
-        last_name: "Smith",
-      )
+        expect(name_form.model).to have_attributes(
+          first_name: "Bob",
+          last_name: "Smith",
+        )
+      end
+
+      it "creates and associates a new opponent with the individual" do
+        expect { save_form }.to change(ApplicationMeritsTask::Opponent, :count).by(1)
+        expect(opponent.opposable).to be_present
+      end
     end
 
-    it "creates and associates a new opponent with the individual" do
-      expect { save_form }.to change(ApplicationMeritsTask::Opponent, :count).by(1)
-      expect(opponent.opposable).to be_present
+    context "with existing opposable object" do
+      let!(:opponent) { create(:opponent, :for_individual, first_name: "Milly", last_name: "Bob") }
+
+      let(:form_params) do
+        {
+          "first_name" => "Billy",
+          "last_name" => "Bobs",
+          "legal_aid_application" => legal_aid_application,
+          "model" => opponent,
+        }
+      end
+
+      it "updates the existing individual" do
+        expect { save_form }
+          .to change(opponent.opposable, :first_name).from("Milly").to("Billy")
+          .and change(opponent.opposable, :last_name).from("Bob").to("Bobs")
+      end
+
+      it "does not add an individual" do
+        expect { save_form }.not_to change(ApplicationMeritsTask::Opponent, :count)
+      end
     end
   end
 end
