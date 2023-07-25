@@ -193,7 +193,7 @@ Ensure you have an `.env.test` file. This can be the same as your .env.developme
 Set `BC_USE_DEV_MOCK=true` to mock the call to the benefits checker.
 Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth.
 Set `LEGAL_FRAMEWORK_API_HOST=<staging api>`
-Set `CHECK_FINANCIAL_ELIGIBILITY_HOST=<staging api>`
+Set `CFE_CIVIL_HOST=<staging api>`
 Set `HMRC_API_HOST=<staging api>`
 
 Runs Rubocop, RSpec specs and Cucumber features
@@ -452,7 +452,7 @@ this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"t
 
 ## Check Financial Eligibility Service
 
-The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_HOST`.
+The URL for this service should be set using the environment variable `CFE_CIVIL_HOST`.
 
 ## Legal Framework API Service
 

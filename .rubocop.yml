@@ -33,5 +33,3 @@ FactoryBot/FactoryAssociationWithStrategy:
 
 RSpec/IndexedLet:
   Max: 2
-  Exclude:
-    - spec/services/cfe/* # due to be deleted soon 🤞
