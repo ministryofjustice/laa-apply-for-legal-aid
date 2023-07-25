@@ -23,6 +23,10 @@ class Applicant < ApplicationRecord
 
   delegate :transaction_period_start_on, to: :legal_aid_application
 
+  def has_partner_with_no_contrary_interest?
+    has_partner && !partner_has_contrary_interest
+  end
+
   def email_address
     email
   end

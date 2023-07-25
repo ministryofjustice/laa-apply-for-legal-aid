@@ -40,7 +40,8 @@ module HMRC
     end
 
     def check_partner?
-      @legal_aid_application.applicant.has_partner? && @legal_aid_application.partner.has_national_insurance_number?
+      @legal_aid_application.applicant.has_partner_with_no_contrary_interest? &&
+        @legal_aid_application.partner.has_national_insurance_number?
     end
   end
 end
