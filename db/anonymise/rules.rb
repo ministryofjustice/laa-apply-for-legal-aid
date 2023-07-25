@@ -1,5 +1,11 @@
 require "faker"
 
+# If you see a "extra data after last expected column" when attempting to restore
+# it means that the final column in the table has been anonymized and it removes
+# the newline.  If this occurs on a new table, change the final column in the
+# table, check the output, and add a new line character after your new, anonymized,
+# data, e.g. ```last_name: -> { "#{Faker::Name.last_name}\n" },```
+
 NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
 
 @rules = {
@@ -35,7 +41,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   },
   application_digests: {},
   attachments: {
-    original_filename: -> { "#{Faker::Bank.name}.pdf" },
+    original_filename: -> { "#{Faker::Bank.name}.pdf\n" },
   },
   attempts_to_settles: {
     attempts_made: -> { Faker::Lorem.sentence },
@@ -143,7 +149,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   offices_providers: {},
   opponents: {
     first_name: -> { Faker::Name.first_name },
-    last_name: -> { Faker::Name.last_name },
+    last_name: -> { "#{Faker::Name.last_name}\n" },
   },
   opponents_applications: {
     reason_for_applying: -> { Faker::Lorem.sentence },
