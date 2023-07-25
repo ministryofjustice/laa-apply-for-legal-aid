@@ -9,7 +9,7 @@ POD=$(kubectl -n laa-apply-for-legalaid-uat get pods | grep -o -m4 "apply-$1-.*2
 echo "$POD"
 
 echo "Copying anonymised db to kubernetes pod"
-kubectl -n laa-apply-for-legalaid-uat cp ./tmp/production.anon.sql -c web laa-apply-for-legalaid-uat/"$POD":./tmp/anonymised_db.sql
+kubectl -n laa-apply-for-legalaid-uat cp --retries=10 ./tmp/production.anon.sql -c web laa-apply-for-legalaid-uat/"$POD":./tmp/anonymised_db.sql
 
 echo "Connect to the pod and run the rake task"
 kubectl -n laa-apply-for-legalaid-uat -c web exec "$POD" -- rake db:import_to_uat
