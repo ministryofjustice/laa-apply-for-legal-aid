@@ -50,7 +50,6 @@ en:
         occurred_month: Month
         occurred_year: Year
       legal_aid_application:
-        outstanding_mortgage_amount: Enter outstanding mortgage amount
         used_delegated_functions_day: Day
         used_delegated_functions_month: Month
         used_delegated_functions_year: Year
@@ -412,11 +411,6 @@ en:
                 blank_html: Select yes if you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>
             in_scope_of_laspo:
               blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
-            outstanding_mortgage_amount:
-              blank: Enter the outstanding mortgage amount
-              greater_than_or_equal_to: Mortgage amount must be 0 or more
-              not_a_number: Mortgage amount must be an amount of money, like 60,000
-              too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
             emergency_cost_override:
               blank: Select yes if you want to request a higher emergency cost limit
             emergency_cost_requested:
@@ -450,32 +444,28 @@ en:
                 blank: Select yes if you own a vehicle
               providers:
                 blank: Select yes if your client owns a vehicle
+            property_value:
+              blank: Enter an estimated value for your client's home
+              greater_than_or_equal_to: Estimated value must be 0 or more
+              not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
+              too_many_decimals: Estimated value must not include more than 2 decimal numbers
+            outstanding_mortgage_amount:
+              blank: Enter the outstanding mortgage amount for your client's home
+              greater_than_or_equal_to: Mortgage amount must be 0 or more
+              not_a_number: Mortgage amount must be an amount of money, like 60,000
+              too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
+            shared_ownership:
+              blank: Select yes if your client owns their home with anyone else
             percentage_home:
               blank: Enter the percentage share
               greater_than_or_equal_to: Share must be a percentage amount under 100, like 60
               less_than_or_equal_to: Share must be a percentage amount under 100, like 60
               not_a_number: Share must be a percentage amount under 100, like 60
-            property_value:
-              citizens:
-                blank: Enter an estimated value for your home
-                not_a_number: The estimated value of your home must be an amount of money, like 60,000
-              greater_than: Estimated value must be 0 or more
-              greater_than_or_equal_to: Estimated value must be 0 or more
-              not_a_number: Estimated value must be an amount of money, like 60,000
-              providers:
-                blank: Enter an estimated value for your client's home
-                not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
-              too_many_decimals: Estimated value must not include more than 2 decimal numbers
             restrictions_details:
               citizens:
                 blank: Enter the assets you cannot sell or borrow against, and why
               providers:
                 blank: Enter the assets your client cannot sell or borrow against, and why
-            shared_ownership:
-              citizens:
-                blank: Select yes if you own your home with someone else
-              providers:
-                blank: Select yes if your client owns their home with anyone else
             substantive_application:
               blank: Select yes if you want to make a substantive application now
             uncategorised_bank_transactions:
@@ -505,7 +495,6 @@ en:
               blank: Enter the estimated value of estate
               greater_than_or_equal_to: Estimated money assets value must be 0 or more
               not_a_number: Estimated estate value must be an amount of money, like 60,000
-
               too_many_decimals: Estimated money assets value must not include more than 2 decimal numbers
             money_owed_value:
               blank: Enter the estimated value of money owed

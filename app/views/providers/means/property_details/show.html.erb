@@ -1,0 +1,45 @@
+<%= form_with(
+      model: @form,
+      scope: :legal_aid_application,
+      url: providers_legal_aid_application_means_property_details_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".h1-heading"), form:, template: :basic do %>
+
+    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".h1-heading") } do %>
+
+      <%= form.govuk_text_field :property_value,
+                                label: { text: t(".values_question"), tag: "h2", size: "m" },
+                                hint: { text: t(".values_hint") },
+                                prefix_text: t("currency.gbp"),
+                                classes: "govuk-!-margin-top-6",
+                                width: 5 %>
+
+      <% if @legal_aid_application.own_home_mortgage? %>
+        <%= form.govuk_text_field :outstanding_mortgage_amount,
+                                  label: { text: t(".mortgage_question"), tag: "h2", size: "m" },
+                                  hint: { text: t(".mortgage_hint") },
+                                  prefix_text: t("currency.gbp"),
+                                  width: 5 %>
+      <% end %>
+
+      <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { text: t(".shared_ownership_question"), size: "m", tag: "h2" }) do %>
+        <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each do |reason| %>
+          <%= form.govuk_radio_button :shared_ownership, reason,
+                                      label: { text: t(".shared_ownership_options.#{reason}") },
+                                      hint: { text: t(".shared_ownership_options.#{reason}_hint", default: "") },
+                                      link_errors: true %>
+        <% end %>
+      <% end %>
+
+      <%= form.govuk_text_field(:percentage_home,
+                                label: { text: t(".percentage_question"), size: "m", tag: "h2" },
+                                hint: { text: t(".percentage_hint") },
+                                width: 5, suffix_text: "%") %>
+
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
