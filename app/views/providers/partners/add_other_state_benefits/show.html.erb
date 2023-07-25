@@ -1,0 +1,36 @@
+<%= form_with(
+      url: providers_legal_aid_application_partners_add_other_state_benefits_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"), form:, template: :basic do %>
+    <span class="govuk-caption-l"><%= t("generic.partner_means_caption") %></span>
+    <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@transactions.count, "benefit").to_s) %></h1>
+      <%= govuk_summary_list(classes: "summary_list_action_width_auto") do |summary_list| %>
+        <% @transactions.order(:created_at).each_with_index do |transaction, index| %>
+          <%= summary_list.with_row(html_attributes: { id: "transaction_#{index}" }) do |row| %>
+            <%= row.with_key { transaction.description } %>
+            <%= row.with_value { "#{gds_number_to_currency(transaction.amount)} #{t("transaction_types.frequencies.#{transaction.frequency}").downcase}" } %>
+            <%= row.with_action(
+                  text: t("generic.change"),
+                  href: providers_legal_aid_application_partners_state_benefit_path(@legal_aid_application, transaction),
+                  visually_hidden_text: transaction.description,
+                ) %>
+            <%= row.with_action(
+                  text: t(".remove"),
+                  href: providers_legal_aid_application_partners_remove_state_benefit_path(@legal_aid_application, transaction),
+                  visually_hidden_text: transaction.description,
+                ) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= form.govuk_collection_radio_buttons :add_another_state_benefit,
+                                              yes_no_options,
+                                              :value,
+                                              :label,
+                                              legend: { text: content_for(:page_title), size: "m", tag: "h2" } %>
+
+      <%= next_action_buttons(form:) %>
+  <% end %>
+<% end %>

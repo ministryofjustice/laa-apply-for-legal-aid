@@ -286,6 +286,10 @@ Rails.application.routes.draw do
         resource :bank_statements, only: %i[show update destroy] do
           get "/list", to: "bank_statements#list"
         end
+        resource :receives_state_benefits, only: %i[show update]
+        resources :state_benefits, only: %i[new show update]
+        resource :add_other_state_benefits, only: %i[show update]
+        resources :remove_state_benefits, only: %i[show update]
       end
 
       scope module: :application_merits_task do

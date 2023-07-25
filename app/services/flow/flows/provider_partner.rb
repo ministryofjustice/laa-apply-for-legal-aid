@@ -61,24 +61,45 @@ module Flow
             when :partner_unexpected_employment_data
               :partner_unexpected_employment_incomes
             when :partner_not_employed
-              :has_dependants
+              :partner_receives_state_benefits
             else
               raise "Unexpected hmrc status #{status.inspect}"
             end
           end,
         },
+        partner_receives_state_benefits: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_receives_state_benefits_path(application) },
+          forward: lambda do |_application, receives_state_benefits|
+            receives_state_benefits ? :partner_state_benefits : :has_dependants
+          end,
+        },
+        partner_state_benefits: {
+          path: ->(application) { urls.new_providers_legal_aid_application_partners_state_benefit_path(application) },
+          forward: :partner_add_other_state_benefits,
+        },
+        partner_add_other_state_benefits: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_add_other_state_benefits_path(application) },
+          forward: lambda do |_application, add_other_state_benefits|
+            add_other_state_benefits ? :partner_state_benefits : :has_dependants
+          end,
+        },
+        partner_remove_state_benefits: {
+          forward: lambda do |_application, partner_has_any_state_benefits|
+            partner_has_any_state_benefits ? :partner_add_other_state_benefits : :partner_receives_state_benefits
+          end,
+        },
         partner_full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
-          forward: :has_dependants,
+          forward: :partner_receives_state_benefits,
           check_answers: :check_provider_answers,
         },
         partner_employment_income: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employment_income_path(application) },
-          forward: :has_dependants,
+          forward: :partner_receives_state_benefits,
         },
         partner_unexpected_employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_unexpected_employment_income_path(application) },
-          forward: :has_dependants,
+          forward: :partner_receives_state_benefits,
         },
       }.freeze
     end
