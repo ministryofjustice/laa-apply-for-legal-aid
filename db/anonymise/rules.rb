@@ -149,7 +149,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   offices_providers: {},
   opponents: {
     first_name: -> { Faker::Name.first_name },
-    last_name: -> { "#{Faker::Name.last_name}\n" },
+    last_name: -> { Faker::Name.last_name },
   },
   opponents_applications: {
     reason_for_applying: -> { Faker::Lorem.sentence },
