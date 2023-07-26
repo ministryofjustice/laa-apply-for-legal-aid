@@ -14,11 +14,6 @@ module Flow
           forward: :vehicles,
           check_answers: :restrictions,
         },
-        outstanding_mortgages: {
-          path: ->(application) { urls.providers_legal_aid_application_means_outstanding_mortgage_path(application) },
-          forward: :shared_ownerships,
-          carry_on_sub_flow: true,
-        },
         shared_ownerships: {
           path: ->(application) { urls.providers_legal_aid_application_means_shared_ownership_path(application) },
           forward: lambda do |application|

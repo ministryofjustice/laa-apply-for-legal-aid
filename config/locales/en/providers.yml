@@ -1022,10 +1022,6 @@ en:
           second_home_mortgage: Enter the outstanding mortgage amount
           second_home_percentage: Enter the share your client owns
           second_home_value: Enter the estimated value
-      outstanding_mortgages:
-        show:
-          h1-heading: What is the outstanding mortgage?
-          field_set_header: What is the outstanding mortgage on your client's home?
       restrictions:
         show:
           h1-heading: Is there anything else you need to tell us about your client’s assets?
