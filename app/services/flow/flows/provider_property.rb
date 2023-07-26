@@ -8,6 +8,7 @@ module Flow
           carry_on_sub_flow: ->(application) { !application.own_home_no? },
           check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
+        # TODO: move to provider_capital and delete this file
         property_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_property_details_path(application) },
           forward: :vehicles,
