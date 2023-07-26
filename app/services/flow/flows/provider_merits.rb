@@ -77,7 +77,7 @@ module Flow
         },
         opponent_types: {
           path: ->(application) { urls.providers_legal_aid_application_opponent_type_path(application) },
-          forward: :opponents_names,
+          forward: :opponent_individuals,
         },
         has_other_opponents: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
