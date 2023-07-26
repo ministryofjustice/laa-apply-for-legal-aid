@@ -450,7 +450,7 @@ en:
           one_at_time: Tell us about one opponent at a time. You can add more later.
           individual: An individual
           organisation: An organisation
-      opponents_names:
+      opponent_individuals:
         show: &new
           page_title: Opponent's name
         new: *new
@@ -1103,7 +1103,7 @@ en:
           complete: Completed
         urls:
           latest_incident_details: date_client_told_incident
-          opponent_name: opponents_name
+          opponent_name: opponent_individual
           has_other_opponent: has_other_opponent
           opponent_mental_capacity: opponents_mental_capacity
           domestic_abuse_summary: domestic_abuse_summary

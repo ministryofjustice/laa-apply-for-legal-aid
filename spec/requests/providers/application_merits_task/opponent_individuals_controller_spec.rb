@@ -2,14 +2,14 @@ require "rails_helper"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe OpponentsNamesController do
+    RSpec.describe OpponentIndividualsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:login_provider) { login_as legal_aid_application.provider }
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
       let(:proceeding) { laa.proceedings.detect { |p| p.ccms_code == "SE014" } }
 
-      describe "new: GET /providers/applications/:legal_aid_application_id/opponents_names/new" do
-        subject(:get_new_opponent) { get new_providers_legal_aid_application_opponents_name_path(legal_aid_application) }
+      describe "new: GET /providers/applications/:legal_aid_application_id/opponent_individuals/new" do
+        subject(:get_new_opponent) { get new_providers_legal_aid_application_opponent_individual_path(legal_aid_application) }
 
         context "when authenticated" do
           before do
@@ -35,10 +35,10 @@ module Providers
         end
       end
 
-      describe "show: GET /providers/applications/:legal_aid_application_id/opponents_names/:opponent_id" do
-        subject(:get_existing_opponent) { get providers_legal_aid_application_opponents_name_path(legal_aid_application, opponent) }
+      describe "show: GET /providers/applications/:legal_aid_application_id/opponent_individuals/:opponent_id" do
+        subject(:get_existing_opponent) { get providers_legal_aid_application_opponent_individual_path(legal_aid_application, opponent) }
 
-        let(:opponent) { create(:opponent, legal_aid_application:) }
+        let(:opponent) { create(:opponent, :for_individual, legal_aid_application:) }
 
         context "when authenticated" do
           before do
@@ -62,24 +62,25 @@ module Providers
         end
       end
 
-      describe "update: PATCH /providers/applications/:legal_aid_application_id/opponents_names/:opponent_id" do
+      describe "update: PATCH /providers/applications/:legal_aid_application_id/opponent_individuals/:opponent_id" do
         subject(:patch_name) do
           patch(
-            providers_legal_aid_application_opponents_name_path(legal_aid_application, opponent),
+            providers_legal_aid_application_opponent_individual_path(legal_aid_application, opponent),
             params: params.merge(button_clicked),
           )
         end
-        let!(:opponent) { create(:opponent, legal_aid_application:, first_name: "Should", last_name: "Change") }
-        let(:first_name) { opponent.first_name }
-        let(:last_name) { "#{opponent.last_name} Junior" }
+
+        let!(:opponent) { create(:opponent, legal_aid_application:, first_name: "Milly", last_name: "Bobs") }
+
         let(:params) do
           {
             application_merits_task_opponent: {
-              first_name:,
-              last_name:,
+              first_name: "Billy",
+              last_name: "Bob",
             },
           }
         end
+
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
 
@@ -91,7 +92,12 @@ module Providers
 
         it "amends the opponent with the values entered" do
           expect { patch_name }.not_to change(::ApplicationMeritsTask::Opponent, :count)
-          expect(opponent.reload.full_name).to eql "Should Change Junior"
+          expect(opponent.reload.full_name).to eql "Billy Bob"
+        end
+
+        it "amends the opponent opposable individual with the values entered" do
+          expect { patch_name }.not_to change(::ApplicationMeritsTask::Individual, :count)
+          expect(opponent.opposable.reload.full_name).to eql "Billy Bob"
         end
 
         it "sets the task to complete" do
@@ -113,7 +119,13 @@ module Providers
         end
 
         context "when incomplete" do
-          let(:last_name) { "" }
+          let(:params) do
+            {
+              application_merits_task_opponent: {
+                last_name: "",
+              },
+            }
+          end
 
           it "renders show" do
             patch_name

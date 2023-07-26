@@ -40,7 +40,7 @@ module Providers
           context "and it is the only opponent on the application" do
             it "redirects to the add new opponent page" do
               submit_remove
-              expect(response).to redirect_to(new_providers_legal_aid_application_opponents_name_path(application))
+              expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(application))
             end
           end
 
