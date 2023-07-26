@@ -78,9 +78,6 @@ module Flow
         opponent_types: {
           path: ->(application) { urls.providers_legal_aid_application_opponent_type_path(application) },
           forward: :opponents_names,
-          # TODO: currently this always forwards to the individual opponent page
-          # as part of AP-4301 it should forward to the organisation opponent page
-          # if the user selects organisation.
         },
         has_other_opponents: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },

@@ -66,7 +66,7 @@ module Providers
               patch_has_other
               expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
             end
-  
+
             it "does not set the task to complete" do
               patch_has_other
               expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :opponent_name)
