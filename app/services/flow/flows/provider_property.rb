@@ -14,11 +14,6 @@ module Flow
           forward: :vehicles,
           check_answers: :restrictions,
         },
-        property_values: {
-          path: ->(application) { urls.providers_legal_aid_application_means_property_value_path(application) },
-          forward: ->(application) { application.own_home_mortgage? ? :outstanding_mortgages : :shared_ownerships },
-          carry_on_sub_flow: true,
-        },
         outstanding_mortgages: {
           path: ->(application) { urls.providers_legal_aid_application_means_outstanding_mortgage_path(application) },
           forward: :shared_ownerships,
