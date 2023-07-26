@@ -436,6 +436,13 @@ FactoryBot.define do
       with_non_passported_state_machine
     end
 
+    trait :with_property_values do
+      property_value { rand(1...1_000_000.0).round(2) }
+      outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
+      shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
+      percentage_home { rand(1...99.0).round(2) }
+    end
+
     trait :with_own_home_mortgaged do
       own_home { "mortgage" }
     end
