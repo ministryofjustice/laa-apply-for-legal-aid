@@ -435,10 +435,7 @@ en:
             full_employment_details:
               blank: Enter your client's employment details
             own_home:
-              citizens:
-                blank: Select yes if you own the home you live in
-              providers:
-                blank: Select yes if your client owns the home that they live in
+              blank: Select yes if your client owns the home that they live in
             own_vehicle:
               citizens:
                 blank: Select yes if you own a vehicle

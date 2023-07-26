@@ -1,38 +1,27 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
-  subject { described_class.new(form_params) }
+  subject { described_class.new(params.merge(model: application)) }
 
-  let!(:application) { create(:legal_aid_application, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_applicant_and_address) }
 
   let(:params) { { own_home: "mortgage" } }
-  let(:form_params) { params.merge(model: application) }
 
-  describe ".model_name" do
-    it 'is "LegalAidApplication"' do
-      expect(described_class.model_name).to eq("LegalAidApplication")
-    end
-  end
+  describe "#validate" do
+    context "when no params are specified" do
+      let(:params) { {} }
 
-  describe "validations" do
-    let(:params) { {} }
-
-    it "errors if own_home not specified" do
-      expect(subject.save).to be false
-      expect(subject.errors[:own_home]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.own_home.blank")]
+      it "raises an error" do
+        expect(subject.save).to be false
+        expect(subject.errors[:own_home]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.own_home.blank")]
+      end
     end
   end
 
   describe "#save" do
     let(:params) { { own_home: "mortgage" } }
-    let(:form_params) { params.merge(model: application) }
 
-    it "does not create a new applicant" do
-      subject
-      expect { subject.save }.not_to change(LegalAidApplication, :count)
-    end
-
-    it "saves updates record with new value of own home attribute" do
+    it "updates own home attribute" do
       expect(application.own_home).to be_nil
       subject.save
       expect(application.own_home).to eq "mortgage"
