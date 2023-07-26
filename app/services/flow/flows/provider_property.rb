@@ -14,11 +14,6 @@ module Flow
           forward: :vehicles,
           check_answers: :restrictions,
         },
-        percentage_homes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_percentage_home_path(application) },
-          forward: ->(application) { application.checking_answers? ? :restrictions : :vehicles },
-          carry_on_sub_flow: true,
-        },
       }.freeze
     end
   end

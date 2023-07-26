@@ -993,10 +993,6 @@ en:
             partner_or_ex_partner_hint: This includes anyone your client was previously married to, in a civil partnership with, or living with as if they were.
           percentage_question: What percentage of the home does your client legally own?
           percentage_hint: Your client's name must be on the property deeds, lease, freehold or mortgage.
-      percentage_homes:
-        show:
-          h1-heading: What % share of their home does your client legally own?
-          percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
       vehicles:
         show:
           heading: Does your client own a vehicle?
