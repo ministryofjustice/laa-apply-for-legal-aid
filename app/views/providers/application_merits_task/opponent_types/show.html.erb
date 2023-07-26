@@ -1,0 +1,23 @@
+<%= form_with(
+      url: providers_legal_aid_application_opponent_type_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".heading"),
+                    template: :basic,
+                    form: do %>
+    <% options = [
+         [true, t(".individual")],
+         [false, t(".organisation")],
+       ] %>
+
+    <%= form.govuk_collection_radio_buttons :is_individual,
+                                            options,
+                                            :first,
+                                            :second,
+                                            legend: { text: t(".heading"), size: "l", tag: "h1" },
+                                            hint: { text: t(".one_at_time"), size: "s", tag: "h3" } %>
+  <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

@@ -444,6 +444,12 @@ en:
       matter_opposed_reasons:
         show:
           page_heading: Why is the Section 8 matter opposed by your client or the other party?
+      opponent_types:
+        show: &new
+          heading: Is the opponent an individual or an organisation?
+          one_at_time: Tell us about one opponent at a time. You can add more later.
+          individual: An individual
+          organisation: An organisation
       opponents_names:
         show: &new
           page_title: Opponent's name
@@ -580,6 +586,9 @@ en:
     has_other_opponents:
       show:
         error: Select yes if you need to add another opponent
+    is_individuals:
+      show:
+        error: Select whether you want to add an individual or an organisation.
     declarations:
       show:
         h1-heading: Declaration
