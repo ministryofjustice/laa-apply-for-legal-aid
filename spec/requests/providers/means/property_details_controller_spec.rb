@@ -169,5 +169,19 @@ RSpec.describe Providers::Means::PropertyDetailsController do
         end
       end
     end
+
+    context "when checking answers" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_non_passported_means) }
+
+      let(:submit_button) do
+        {
+          continue_button: "Continue",
+        }
+      end
+
+      it "redirects to the restrictions page" do
+        expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(legal_aid_application))
+      end
+    end
   end
 end

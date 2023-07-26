@@ -6,6 +6,6 @@ module CheckAnswerUrlHelper
       legal_aid_application: application,
       params: args,
     )
-    [flow_service.current_path, field_name].compact.join("#")
+    flow_service.current_path
   end
 end

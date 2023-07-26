@@ -12,9 +12,7 @@ module Flow
         property_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_property_details_path(application) },
           forward: :vehicles,
-          check_answers: lambda { |application|
-            application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers
-          },
+          check_answers: :restrictions,
         },
         property_values: {
           path: ->(application) { urls.providers_legal_aid_application_means_property_value_path(application) },

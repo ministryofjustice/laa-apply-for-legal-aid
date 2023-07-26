@@ -53,8 +53,8 @@ RSpec.describe "provider own home requests" do
         end
 
         context "when owned outright" do
-          it "redirects to the property value page" do
-            expect(response).to redirect_to providers_legal_aid_application_means_property_value_path(legal_aid_application)
+          it "redirects to the property details page" do
+            expect(response).to redirect_to providers_legal_aid_application_means_property_details_path(legal_aid_application)
           end
 
           it "updates the record to match" do
@@ -65,8 +65,8 @@ RSpec.describe "provider own home requests" do
         context "when mortgaged" do
           let(:own_home) { "mortgage" }
 
-          it "redirects to the property value page" do
-            expect(response).to redirect_to providers_legal_aid_application_means_property_value_path(legal_aid_application)
+          it "redirects to the property details page" do
+            expect(response).to redirect_to providers_legal_aid_application_means_property_details_path(legal_aid_application)
           end
 
           it "updates the record to match" do
@@ -77,7 +77,7 @@ RSpec.describe "provider own home requests" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
             it "redirects to next page in the flow" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_property_value_path(legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_means_property_details_path(legal_aid_application))
             end
           end
         end
@@ -123,7 +123,7 @@ RSpec.describe "provider own home requests" do
         context "when mortgaged" do
           let(:own_home) { "mortgage" }
 
-          it "redirects to 1b. How much is your client’s home worth" do
+          it "redirects to the applications page" do
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
 
@@ -143,7 +143,7 @@ RSpec.describe "provider own home requests" do
         context "without own home" do
           let(:own_home) { "no" }
 
-          it "redirects to savings or investments question" do
+          it "redirects to the applications page" do
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
 
