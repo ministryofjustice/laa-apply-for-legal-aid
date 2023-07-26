@@ -14,17 +14,6 @@ module Flow
           forward: :vehicles,
           check_answers: :restrictions,
         },
-        shared_ownerships: {
-          path: ->(application) { urls.providers_legal_aid_application_means_shared_ownership_path(application) },
-          forward: lambda do |application|
-                     if application.shared_ownership?
-                       :percentage_homes
-                     else
-                       application.checking_answers? ? :restrictions : :vehicles
-                     end
-                   end,
-          carry_on_sub_flow: true,
-        },
         percentage_homes: {
           path: ->(application) { urls.providers_legal_aid_application_means_percentage_home_path(application) },
           forward: ->(application) { application.checking_answers? ? :restrictions : :vehicles },
