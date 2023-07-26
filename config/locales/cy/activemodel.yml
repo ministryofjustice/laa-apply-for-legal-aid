@@ -275,10 +275,7 @@ cy:
                 blank_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni
                   tnuocca knab ruoy erahs ot eerga uoy fi sey tceleS"
             own_home:
-              citizens:
-                blank: ni evil uoy emoh eht nwo uoy fi sey tceleS
-              providers:
-                blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
+              blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
             own_vehicle:
               citizens:
                 blank: elcihev a nwo uoy fi sey tceleS
@@ -286,7 +283,6 @@ cy:
                 blank: elcihev a snwo tneilc ruoy fi sey tceleS
             property_value:
               blank: emoh s'tneilc ruoy rof eulav detamitse na retnE
-              greater_than: erom ro 0 eb tsum eulav detamitsE
               greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
               not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum emoh s'tneilc
                 ruoy fo eulav detamitse ehT

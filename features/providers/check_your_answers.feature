@@ -11,7 +11,7 @@ Feature: Checking answers backwards and forwards
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's home"
-    And I should be on a page showing "What is the outstanding mortgage on your client's home?"
+    And I should be on a page showing "How much is left to pay on the mortgage?"
     Then I fill "Property value" with "200000"
     Then I fill "Outstanding mortgage amount" with "100000"
     Then I choose "Yes, a partner or ex-partner"
@@ -40,12 +40,9 @@ Feature: Checking answers backwards and forwards
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's home"
     Then I fill "Property value" with "200000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own their home with anyone else?"
-    Then I choose "No, they're the sole owner"
+    Then I choose "No"
+    Then I fill "Percentage home" with "100"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
     Then I choose 'Yes'
@@ -55,7 +52,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000'
     And the answer for 'Outstanding mortgage' should be '£100,000'
-    And the answer for 'Shared ownership' should be "No, they're the sole owner"
+    And the answer for 'Shared ownership' should be "No"
     And the answer for 'Restrictions' should be 'Yes'
     And the answer for 'Restrictions' should be 'Restrictions include:'
 
