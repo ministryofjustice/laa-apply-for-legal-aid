@@ -74,7 +74,7 @@ module ApplicationMeritsTask
       end
     end
 
-    # TODO: remove this when we remove the first and last name attributes from opponent
+    # TODO: remove this when we remove the first and last name attributes from opponent - review from 31/07/2023
     # NOTE: This is purely to continue to fill data on the opponent in case we need to rollback
     describe "#before_save" do
       let(:opponent) { described_class.new(legal_aid_application: create(:legal_aid_application)) }
