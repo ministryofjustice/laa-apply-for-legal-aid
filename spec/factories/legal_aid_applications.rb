@@ -70,6 +70,10 @@ FactoryBot.define do
       partner { build(:partner, armed_forces: true) }
     end
 
+    trait :with_applicant_no_nino do
+      applicant { build(:applicant, :with_address, :no_nino) }
+    end
+
     trait :with_partner_no_nino do
       applicant { build(:applicant, :with_address, :with_partner) }
       partner { build(:partner, :no_nino) }
