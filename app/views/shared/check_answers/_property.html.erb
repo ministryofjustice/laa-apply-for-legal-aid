@@ -22,7 +22,7 @@
       <%= row.with_value { gds_number_to_currency(@legal_aid_application.property_value) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :property_details, @legal_aid_application),
             visually_hidden_text: t("shared.check_answers.assets.property.property_value"),
           ) %>
     <% end %>
@@ -34,7 +34,7 @@
       <%= row.with_value { gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :property_details, @legal_aid_application),
             visually_hidden_text: t("shared.check_answers.assets.property.outstanding_mortgage"),
           ) %>
     <% end %>
@@ -46,7 +46,7 @@
       <%= row.with_value { @legal_aid_application.shared_ownership.blank? ? "" : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}") } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :property_details, @legal_aid_application),
             visually_hidden_text: t("shared.check_answers.assets.property.shared_ownership"),
           ) %>
     <% end %>
@@ -58,7 +58,7 @@
       <%= row.with_value { number_to_percentage(@legal_aid_application.percentage_home, precision: 2) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :property_details, @legal_aid_application),
             visually_hidden_text: t("shared.check_answers.assets.property.percentage_home"),
           ) %>
     <% end %>
