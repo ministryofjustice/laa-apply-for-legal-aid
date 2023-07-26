@@ -11,16 +11,10 @@ Feature: passported_journey completes application
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
-    Then I should be on a page showing "How much is your client's home worth?"
+    Then I should be on a page showing "Your client's home"
     Then I fill "Property value" with "200000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own their home with anyone else?"
     Then I choose "Yes, a partner or ex-partner"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"

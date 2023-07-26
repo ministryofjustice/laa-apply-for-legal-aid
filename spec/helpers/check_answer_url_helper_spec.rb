@@ -18,11 +18,6 @@ RSpec.describe CheckAnswerUrlHelper do
           expect(url).to eq "/providers/applications/#{application.id}/incoming_transactions/benefits?locale=en"
         end
       end
-
-      it "returns the path with anchor" do
-        url = check_answer_url_for(:providers, :property_values, application)
-        expect(url).to eq "/providers/applications/#{application.id}/means/property_value?locale=en#property_value"
-      end
     end
 
     context "when a citizen" do

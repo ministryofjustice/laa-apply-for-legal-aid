@@ -137,9 +137,9 @@ RSpec.describe "check passported answers requests" do
 
       it "displays the correct URLs for changing values" do
         expect(response.body).to have_change_link(:own_home, providers_legal_aid_application_means_own_home_path(application))
-        expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_means_property_value_path(application, anchor: "property_value"))
-        expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_means_shared_ownership_path(application))
-        expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_means_percentage_home_path(application, anchor: "percentage_home"))
+        expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_means_property_details_path(application))
+        expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_means_property_details_path(application))
+        expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_means_property_details_path(application))
         expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
