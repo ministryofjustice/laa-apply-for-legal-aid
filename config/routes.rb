@@ -145,7 +145,6 @@ Rails.application.routes.draw do
         resource :has_other_dependants, only: %i[show update]
         resource :own_home, only: %i[show update]
         resource :property_details, only: %i[show update]
-        resource :shared_ownership, only: %i[show update]
         resource :percentage_home, only: %i[show update]
         resource :vehicle, only: %i[show update]
         resource :savings_and_investment, only: %i[show update]
