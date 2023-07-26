@@ -88,6 +88,7 @@ class NonPassportedStateMachine < BaseStateMachine
     event :check_means_income do
       transitions from: %i[
                     provider_assessing_means
+                    assessing_partner_means
                   ],
                   to: :checking_means_income
     end
