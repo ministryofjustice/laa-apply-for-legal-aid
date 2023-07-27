@@ -41,7 +41,7 @@ RSpec.describe "providers offine accounts" do
         context "when applicant owns home" do
           before { get providers_legal_aid_application_means_property_details_path(application) }
 
-          it "points to percentage owned page" do
+          it "redirects to property details page" do
             subject
             expect(response.body).to have_back_link(providers_legal_aid_application_means_property_details_path(application, back: true))
           end
