@@ -1,4 +1,5 @@
-<%= render "form",
+<%= render "shared/state_benefits/new_benefit_form",
            form: @form,
            page_title: t(".page_title"),
+           caption: t("generic.partner_means_caption"),
            form_path: new_providers_legal_aid_application_partners_state_benefit_path(@legal_aid_application, @form.model) %>

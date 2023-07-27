@@ -333,7 +333,6 @@ en:
           heading: Covered under a substantive certificate
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
-
     applicant_bank_accounts:
       show:
         heading: Your client’s bank accounts
@@ -584,12 +583,6 @@ en:
           page_title: Add benefit details
         show:
           page_title: Amend benefit details
-        form:
-          caption: Partner's means assessment
-          details: Do not include Housing Benefit, government Cost of Living Payments, or any other disregarded benefits.
-          benefits_description: Benefit
-          benefits_amount: Enter amount
-          benefits_frequency: Select frequency
       add_other_state_benefits:
         show:
           page_title: Does the partner get any other benefits?
@@ -1076,12 +1069,6 @@ en:
           page_title: Add benefit details
         show:
           page_title: Amend benefit details
-        form:
-          caption: Client's means assessment
-          details: Do not include Housing Benefit, government Cost of Living Payments, or any other disregarded benefits.
-          benefits_description: Benefit
-          benefits_amount: Enter amount
-          benefits_frequency: Select frequency
       add_other_state_benefits:
         show:
           page_title: Does your client receive any other benefits?
