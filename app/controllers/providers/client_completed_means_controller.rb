@@ -21,7 +21,7 @@ module Providers
     end
 
     def partner_means_assessment?
-      applicant.has_partner? && @legal_aid_application.partner.national_insurance_number.present?
+      applicant.has_partner_with_no_contrary_interest? && @legal_aid_application.partner.national_insurance_number.present?
     end
 
     def applicant
