@@ -989,7 +989,7 @@ en:
             partner_or_ex_partner: Yes, a partner or ex-partner
             housing_assocation_or_landlord: Yes, a housing association or landlord
             friend_family_member_or_other_individual: Yes, a friend, family member or other individual
-            no_sole_owner: No
+            no_sole_owner: "No"
             partner_or_ex_partner_hint: This includes anyone your client was previously married to, in a civil partnership with, or living with as if they were.
           percentage_question: What percentage of the home does your client legally own?
           percentage_hint: Your client's name must be on the property deeds, lease, freehold or mortgage.
