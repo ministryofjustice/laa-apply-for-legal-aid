@@ -67,6 +67,14 @@ RSpec.describe Providers::Means::PropertyDetailsController do
         }
       end
 
+      context "when params are invalid" do
+        let(:params) { {} }
+
+        it "shows an error" do
+          expect(response.body).to include("govuk-error-summary__title")
+        end
+      end
+
       context "when property is mortgaged and with valid values" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_mortgaged) }
 

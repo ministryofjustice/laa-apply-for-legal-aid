@@ -298,10 +298,6 @@ class LegalAidApplication < ApplicationRecord
     employment_payments.select { |p| p.date >= transaction_period_start_on }
   end
 
-  def outstanding_mortgage?
-    outstanding_mortgage_amount?
-  end
-
   def shared_ownership?
     SHARED_OWNERSHIP_YES_REASONS.include?(shared_ownership)
   end
