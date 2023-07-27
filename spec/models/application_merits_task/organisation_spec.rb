@@ -18,14 +18,13 @@ module ApplicationMeritsTask
     end
 
     context "with an opponent" do
-      let(:organisation) { opponent.opposable }
-
       # need to handle new organisation ID generation but not for existing?
       describe "#generate_ccms_opponent_id", skip: "TODO or remove" do
         context "when #ccms_opponent_id is nil" do
           before { allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(9999) }
 
           let(:opponent) { create(:opponent, :for_organisation, ccms_opponent_id: nil) }
+          let(:organisation) { opponent.opposable }
 
           it "generates a new opponent Id" do
             organisation.generate_ccms_opponent_id

@@ -1,13 +1,14 @@
 FactoryBot.define do
   factory :opponent, class: "ApplicationMeritsTask::Opponent" do
     legal_aid_application
+    for_individual
 
     transient do
-      first_name { Faker::Name.first_name }
-      last_name { Faker::Name.last_name }
-      organisation_name { Faker::Company.name }
-      organisation_ccms_code { "LA" }
-      organisation_description { "Local Authority" }
+      first_name { nil }
+      last_name { nil }
+      organisation_name { nil }
+      organisation_ccms_code { nil }
+      organisation_description { nil }
     end
 
     trait :for_individual do
