@@ -9,14 +9,6 @@ module ApplicationMeritsTask
     it { expect(organisation.ccms_opponent_relationship_to_case).to eq "Opponent" }
     it { expect(organisation).to respond_to(:name, :ccms_code, :description) }
 
-    describe "#full_name" do
-      subject(:full_name) { organisation.full_name }
-
-      it "alias of attribute #name" do
-        expect(full_name).to eql(organisation.name)
-      end
-    end
-
     context "with an opponent" do
       context "when assuming organisation \"name\" is new one in CCMS" do
         # see https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/4460773385/Organisation+Opponents
