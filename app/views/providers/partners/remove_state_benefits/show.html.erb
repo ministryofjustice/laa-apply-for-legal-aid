@@ -1,18 +1,5 @@
-
-<%= form_with(
-      url: providers_legal_aid_application_partners_remove_state_benefit_path,
-      model: @form,
-      method: :patch,
-      local: true,
-    ) do |form| %>
-  <%= page_template page_title: t(".page_title", name: @regular_transaction.description), form:, template: :basic do %>
-
-    <%= form.govuk_collection_radio_buttons :remove_state_benefit,
-                                            yes_no_options,
-                                            :value,
-                                            :label,
-                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" } %>
-
-    <%= next_action_buttons(form:) %>
-  <% end %>
-<% end %>
+<%= render "shared/state_benefits/remove",
+           form: @form,
+           page_title: t(".page_title", name: @regular_transaction.description),
+           caption: t("generic.partner_means_caption"),
+           form_path: providers_legal_aid_application_partners_remove_state_benefit_path %>
