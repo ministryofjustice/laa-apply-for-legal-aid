@@ -18,51 +18,14 @@ module ApplicationMeritsTask
     end
 
     context "with an opponent" do
-      # need to handle new organisation ID generation but not for existing?
-      describe "#generate_ccms_opponent_id", skip: "TODO or remove" do
-        context "when #ccms_opponent_id is nil" do
-          before { allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(9999) }
+      context "when assuming organisation \"name\" is new one in CCMS" do
+        # see https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/4460773385/Organisation+Opponents
+        # for more information on differences between existing org names and the need to create new
+        # ones.
 
-          let(:opponent) { create(:opponent, :for_organisation, ccms_opponent_id: nil) }
-          let(:organisation) { opponent.opposable }
+        let(:opponent) { create(:opponent, :for_organisation) }
 
-          it "generates a new opponent Id" do
-            organisation.generate_ccms_opponent_id
-            expect(CCMS::OpponentId).to have_received(:next_serial_id)
-          end
-
-          it "returns the next serial opponent id" do
-            expect(organisation.generate_ccms_opponent_id).to be(9999)
-          end
-
-          it "updates the ccms_opponent_id on the record" do
-            expect { organisation.generate_ccms_opponent_id }
-              .to change { organisation.reload.ccms_opponent_id }
-                .from(nil)
-                .to(9999)
-          end
-        end
-
-        context "when #ccms_opponent_id is already populated" do
-          before { allow(CCMS::OpponentId).to receive(:next_serial_id).and_call_original }
-
-          let(:opponent) { create(:opponent, :for_organisation, ccms_opponent_id: 1234) }
-
-          it "does not generate a new opponent Id" do
-            organisation.generate_ccms_opponent_id
-            expect(CCMS::OpponentId).not_to have_received(:next_serial_id)
-          end
-
-          it "returns the existing value" do
-            expect(organisation.generate_ccms_opponent_id).to eq 1234
-          end
-
-          it "does not update the ccms_opponent_id on the record" do
-            expect { organisation.generate_ccms_opponent_id }
-              .not_to change { organisation.reload.ccms_opponent_id }
-                .from(1234)
-          end
-        end
+        it_behaves_like "CCMS opponent id generator"
       end
 
       describe "#has_one" do
