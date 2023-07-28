@@ -17,6 +17,7 @@ FactoryBot.define do
       after(:build) do |opponent, evaluator|
         opponent.opposable.first_name = evaluator.first_name if evaluator.first_name
         opponent.opposable.last_name = evaluator.last_name if evaluator.last_name
+        opponent.opposable.save! if evaluator.first_name || evaluator.last_name
       end
     end
 
@@ -27,6 +28,7 @@ FactoryBot.define do
         opponent.opposable.name = evaluator.organisation_name if evaluator.organisation_name
         opponent.opposable.ccms_code = evaluator.organisation_ccms_code if evaluator.organisation_ccms_code
         opponent.opposable.description = evaluator.organisation_description if evaluator.organisation_description
+        opponent.opposable.save! if evaluator.organisation_name || evaluator.organisation_ccms_code || evaluator.organisation_description
       end
     end
   end
