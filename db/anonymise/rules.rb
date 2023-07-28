@@ -154,6 +154,9 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   opponents_applications: {
     reason_for_applying: -> { Faker::Lorem.sentence },
   },
+  organisations: {
+    name: -> { Faker::Company.name },
+  },
   other_assets_declarations: {},
   parties_mental_capacities: {
     understands_terms_of_court_order_details: -> { Faker::Lorem.sentence },
