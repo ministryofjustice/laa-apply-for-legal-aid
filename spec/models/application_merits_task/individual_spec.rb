@@ -10,13 +10,12 @@ module ApplicationMeritsTask
     it { expect(individual).to respond_to(:first_name, :last_name, :full_name) }
 
     context "with an opponent" do
-      let(:individual) { opponent.opposable }
-
       describe "#generate_ccms_opponent_id" do
         context "when #ccms_opponent_id is nil" do
           before { allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(9999) }
 
           let(:opponent) { create(:opponent, :for_individual, ccms_opponent_id: nil) }
+          let(:individual) { opponent.opposable }
 
           it "generates a new opponent Id" do
             individual.generate_ccms_opponent_id
@@ -39,6 +38,7 @@ module ApplicationMeritsTask
           before { allow(CCMS::OpponentId).to receive(:next_serial_id).and_call_original }
 
           let(:opponent) { create(:opponent, :for_individual, ccms_opponent_id: 1234) }
+          let(:individual) { opponent.opposable }
 
           it "does not generate a new opponent Id" do
             individual.generate_ccms_opponent_id
