@@ -820,3 +820,8 @@ en:
         benefits_description: Benefit
         benefits_amount: Enter amount
         benefits_frequency: Select frequency
+      add_other_state_benefits:
+        existing: "You have added %{count}"
+        remove: Remove
+        warning:
+          delete: Are you sure you want to delete this benefit?

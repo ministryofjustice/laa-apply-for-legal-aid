@@ -586,10 +586,6 @@ en:
       add_other_state_benefits:
         show:
           page_title: Does the partner get any other benefits?
-          existing: "You have added %{count}"
-          remove: Remove
-          warning:
-            delete: Are you sure you want to delete this dependant?
       remove_state_benefits:
         show:
           page_title: "Are you sure you want to remove %{name}?"
@@ -1072,11 +1068,6 @@ en:
       add_other_state_benefits:
         show:
           page_title: Does your client receive any other benefits?
-          caption: Client's means assessment
-          existing: "You have added %{count}"
-          remove: Remove
-          warning:
-            delete: Are you sure you want to delete this dependant?
       remove_state_benefits:
         show:
           page_title: "Are you sure you want to remove %{name}?"
