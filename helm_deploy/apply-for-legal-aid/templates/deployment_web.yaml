@@ -61,6 +61,10 @@ spec:
               port: http
             initialDelaySeconds: 60
             timeoutSeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 30" ] # Workaround for occasional lost requests - see https://github.com/puma/puma/blob/master/docs/kubernetes.md#running-puma-in-kubernetes
           resources:
             limits:
               cpu: 1000m
