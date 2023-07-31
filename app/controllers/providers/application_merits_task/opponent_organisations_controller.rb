@@ -10,10 +10,10 @@ module Providers
         @form = Opponents::OrganisationForm.new(model: opponent)
       end
 
-    #   def update
-    #     @form = Opponents::OrganisationForm.new(form_params)
-    #     render :show unless update_task_save_continue_or_draft(:application, :opponent_name)
-    #   end
+      #   def update
+      #     @form = Opponents::OrganisationForm.new(form_params)
+      #     render :show unless update_task_save_continue_or_draft(:application, :opponent_name)
+      #   end
 
     private
 

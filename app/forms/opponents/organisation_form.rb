@@ -4,23 +4,27 @@ module Opponents
 
     attr_accessor :name, :ccms_code, :description, :legal_aid_application
 
-#     validates :name, :ccms_code, :description, presence: true, unless: :draft?
+    def organisation_types
+      @organisation_types ||= LegalFramework::OrganisationTypes::All.call
+    end
 
-#     def save
-#       return false unless valid?
+    #     validates :name, :ccms_code, :description, presence: true, unless: :draft?
 
-#       model.legal_aid_application = legal_aid_application if legal_aid_application
+    #     def save
+    #       return false unless valid?
 
-#       if model.opposable
-#         model.opposable.name = name
-#         model.opposable.ccms_code = ccms_code
-#         model.opposable.description = description
-#         model.opposable.save!
-#       else
-#         model.opposable = ApplicationMeritsTask::Organisation.new(name:, ccms_code:, description:)
-#       end
-#       model.save!(validate: false)
-#     end
-#     alias_method :save!, :save
-#   end
+    #       model.legal_aid_application = legal_aid_application if legal_aid_application
+
+    #       if model.opposable
+    #         model.opposable.name = name
+    #         model.opposable.ccms_code = ccms_code
+    #         model.opposable.description = description
+    #         model.opposable.save!
+    #       else
+    #         model.opposable = ApplicationMeritsTask::Organisation.new(name:, ccms_code:, description:)
+    #       end
+    #       model.save!(validate: false)
+    #     end
+    #     alias_method :save!, :save
+  end
 end

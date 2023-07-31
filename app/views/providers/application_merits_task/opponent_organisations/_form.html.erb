@@ -6,11 +6,15 @@
     ) do |form| %>
   <%= form.govuk_text_field(
         :name,
-        label: { text: t(".name"), size: "m" },
+        label: { text: t(".name") },
         class: "govuk-input govuk-input--width-20",
       ) %>
 
-  <%= @organisation_types %>
+  <%= form.govuk_collection_select :organisation_type,
+                                   @form.organisation_types,
+                                   :ccms_code,
+                                   :description,
+                                   label: { text: t(".type") } %>
 
   <%= next_action_buttons(show_draft: true, form:) %>
 <% end %>
