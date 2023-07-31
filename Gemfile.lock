@@ -619,7 +619,7 @@ GEM
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
       wasabi (~> 3.4)
-    selenium-webdriver (4.10.0)
+    selenium-webdriver (4.11.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
