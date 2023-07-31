@@ -498,12 +498,10 @@ RSpec/NamedSubject:
     - 'spec/services/submit_provider_reminder_service_spec.rb'
     - 'spec/services/substantive_application_deadline_calculator_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'
-    - 'spec/services/true_layer/api_client_spec.rb'
     - 'spec/services/true_layer/banks_retriever_spec.rb'
     - 'spec/services/true_layer/importers/import_account_balance_service_spec.rb'
     - 'spec/services/true_layer/importers/import_account_holders_service_spec.rb'
     - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
     - 'spec/services/true_layer_error_decoder_spec.rb'
     - 'spec/validators/document_category_validator_spec.rb'
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
@@ -728,11 +726,3 @@ Rails/SaveBang:
 Rake/DuplicateTask:
   Exclude:
     - 'Rakefile'
-
-# Offense count: 4
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowCoercion.
-Style/DateTime:
-  Exclude:
-    - 'app/services/true_layer/api_client.rb'
-    - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
