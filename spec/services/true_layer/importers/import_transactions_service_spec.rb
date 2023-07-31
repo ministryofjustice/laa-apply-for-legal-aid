@@ -6,10 +6,10 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:api_client) { TrueLayer::ApiClient.new(SecureRandom.hex) }
 
   describe "#call" do
-    subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
+    subject(:call) { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
 
-    let(:now) { "6/11/2018".to_datetime.beginning_of_day }
-    let(:now_minus_3_month) { "5/08/2018".to_datetime.beginning_of_day }
+    let(:now) { Time.utc(2018, 11, 6, 0, 0) }
+    let(:now_minus_3_month) { Time.utc(2018, 8, 5, 0, 0) }
     let(:mock_transaction1) { mock_account[:transactions][0] }
     let(:mock_transaction2) { mock_account[:transactions][1] }
     let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }
@@ -22,7 +22,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
       end
 
       it "adds the bank transactions to the bank_account" do
-        subject
+        call
         expect(transaction1.true_layer_response).to eq(mock_transaction1.deep_stringify_keys)
         expect(transaction1.true_layer_id).to eq(mock_transaction1[:transaction_id])
         expect(transaction1.description).to eq(mock_transaction1[:description])
@@ -45,12 +45,12 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
       end
 
       it "removes existing transactions" do
-        subject
+        call
         expect { existing_transaction.reload }.to raise_error ActiveRecord::RecordNotFound
       end
 
       it "requests 3 months of transactions" do
-        subject
+        call
 
         expected_request_url = [
           TrueLayer::ApiClient::TRUE_LAYER_URL,
@@ -71,11 +71,11 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
       end
 
       it "does not change anything" do
-        expect { subject }.not_to change { bank_account.bank_transactions.count }
+        expect { call }.not_to change { bank_account.bank_transactions.count }
       end
 
       it "returns an error" do
-        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_transactions)
+        expect(JSON.parse(call.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_transactions)
       end
     end
   end
