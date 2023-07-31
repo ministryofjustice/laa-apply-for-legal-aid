@@ -89,7 +89,7 @@ RSpec.describe ErrorsController do
     end
   end
 
-  def t(key, **options)
-    I18n.t(key, scope: %i[errors show], **options)
+  def t(key, **)
+    I18n.t(key, scope: %i[errors show], **)
   end
 end

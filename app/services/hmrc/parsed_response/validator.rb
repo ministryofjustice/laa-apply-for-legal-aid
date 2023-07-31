@@ -96,8 +96,8 @@ module HMRC
         false
       end
 
-      def error(*args)
-        Error.new(*args)
+      def error(*)
+        Error.new(*)
       end
 
       def capture_errors

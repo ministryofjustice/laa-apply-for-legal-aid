@@ -11,9 +11,9 @@ module ApplicationHelper
     "#{title} - #{default}".html_safe
   end
 
-  def controller_t(lazy_t, **args)
+  def controller_t(lazy_t, **)
     controller = controller_path.split("/")
-    t ".#{[*controller, lazy_t].join('.')}", **args
+    t(".#{[*controller, lazy_t].join('.')}", **)
   end
 
   def back_link(text: t("generic.back"), path: back_path, method: nil)

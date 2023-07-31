@@ -7,7 +7,7 @@ module Flow
         @steps = steps
       end
 
-      def flow_service_for(journey_type, **args)
+      def flow_service_for(journey_type, **)
         klass = case journey_type
                 when :citizens
                   Flow::CitizenFlowService
@@ -15,7 +15,7 @@ module Flow
                   Flow::ProviderFlowService
                 end
 
-        klass.new(**args)
+        klass.new(**)
       end
     end
 

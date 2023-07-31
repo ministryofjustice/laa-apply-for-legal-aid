@@ -9,8 +9,8 @@ class MockBenefitCheckService
     "WALKER" => { nino: "JA293483A", dob: "10-Jan-80" }, # Used in cucumber tests and specs
   }.freeze
 
-  def self.call(*args)
-    new(*args).call
+  def self.call(*)
+    new(*).call
   end
 
   attr_reader :application

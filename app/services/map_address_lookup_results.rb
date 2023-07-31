@@ -30,12 +30,12 @@ class MapAddressLookupResults
     result["DEPENDENT_LOCALITY"]
   end
 
-  def self.combine(result, *attr)
-    result.slice(*attr).values.compact.join(", ")
+  def self.combine(result, *)
+    result.slice(*).values.compact.join(", ")
   end
 
-  def self.combine_with_road(result, *attr, separator)
-    [combine(result, *attr), combine(result, *ROAD)].compact.join(separator).strip
+  def self.combine_with_road(result, *, separator)
+    [combine(result, *), combine(result, *ROAD)].compact.join(separator).strip
   end
 
   def self.use_dependent_locality?(result)
