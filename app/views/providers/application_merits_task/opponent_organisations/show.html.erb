@@ -1,0 +1,9 @@
+<%= page_template(
+      page_title: t(".page_title"),
+      page_heading_options: { margin_bottom: 3 },
+      show_errors_for: @form,
+    ) do %>
+  <%= render "form",
+             form: @form,
+             form_path: providers_legal_aid_application_opponent_organisation_path %>
+<% end %>

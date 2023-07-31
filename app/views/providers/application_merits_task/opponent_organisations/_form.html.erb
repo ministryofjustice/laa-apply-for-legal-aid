@@ -1,0 +1,16 @@
+<%= form_with(
+      model: @form,
+      url: form_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= form.govuk_text_field(
+        :name,
+        label: { text: t(".name"), size: "m" },
+        class: "govuk-input govuk-input--width-20",
+      ) %>
+
+  <%= @organisation_types %>
+
+  <%= next_action_buttons(show_draft: true, form:) %>
+<% end %>
