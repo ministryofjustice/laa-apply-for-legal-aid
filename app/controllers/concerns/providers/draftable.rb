@@ -27,11 +27,11 @@ module Providers
       ENDPOINT
     end
 
-    def save_continue_or_draft(form, **args)
+    def save_continue_or_draft(form, **)
       draft_selected? ? form.save_as_draft : form.save
       return false if form.invalid?
 
-      continue_or_draft(**args)
+      continue_or_draft(**)
     end
 
     def continue_or_draft(args = nil)

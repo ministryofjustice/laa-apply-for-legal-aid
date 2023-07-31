@@ -18,8 +18,8 @@ module HMRC
       formerly_employed: { first_name: "Mark", last_name: "Slacker", nino: "AA123456A", dob: "2006-06-06" },
     }.freeze
 
-    def self.call(*args)
-      new(*args).call
+    def self.call(*)
+      new(*).call
     end
 
     attr_reader :application, :owner

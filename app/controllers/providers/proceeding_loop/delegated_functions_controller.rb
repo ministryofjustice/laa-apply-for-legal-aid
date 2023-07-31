@@ -14,13 +14,13 @@ module Providers
 
     private
 
-      def save_update_delegated_functions_continue_or_draft(**args)
+      def save_update_delegated_functions_continue_or_draft(**)
         draft_selected? ? @form.save_as_draft : @form.save!
         return false if @form.invalid?
 
         DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
         reset_proceeding_loop if @legal_aid_application.checking_answers?
-        continue_or_draft(**args)
+        continue_or_draft(**)
       end
 
       def proceeding

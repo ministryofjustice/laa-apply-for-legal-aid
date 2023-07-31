@@ -16,8 +16,8 @@ module CCMS
         @submission = submission
       end
 
-      def self.call(*args)
-        new(*args).call
+      def self.call(*)
+        new(*).call
       end
 
     private

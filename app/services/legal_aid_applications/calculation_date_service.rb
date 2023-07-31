@@ -7,8 +7,8 @@ module LegalAidApplications
       to: :legal_aid_application
     )
 
-    def self.call(*args)
-      new(*args).call
+    def self.call(*)
+      new(*).call
     end
 
     def initialize(legal_aid_application)
