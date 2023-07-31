@@ -7,7 +7,7 @@ module Providers
 
       def update
         return continue_or_draft if draft_selected?
-        return go_forward if form.valid?
+        return go_forward(form.is_individual?) if form.valid?
 
         render :show
       end
