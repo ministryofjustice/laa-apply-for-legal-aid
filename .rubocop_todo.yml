@@ -721,8 +721,3 @@ Rails/SaveBang:
     - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
     - 'spec/services/govuk_emails/monitor_spec.rb'
     - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
-
-# Offense count: 1
-Rake/DuplicateTask:
-  Exclude:
-    - 'Rakefile'
