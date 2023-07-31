@@ -253,11 +253,6 @@ RSpec/InstanceVariable:
     - 'spec/models/cash_transaction_spec.rb'
     - 'spec/services/reports/reports_types_creator_spec.rb'
 
-# Offense count: 7
-RSpec/IteratedExpectation:
-  Exclude:
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_dependant_child_attributes_spec.rb'
-
 # Offense count: 201
 RSpec/LetSetup:
   Exclude:
