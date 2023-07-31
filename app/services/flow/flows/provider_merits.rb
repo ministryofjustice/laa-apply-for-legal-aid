@@ -64,6 +64,11 @@ module Flow
           forward: :has_other_opponents,
           check_answers: :check_merits_answers,
         },
+        opponent_organisations: {
+          path: ->(application) { urls.new_providers_legal_aid_application_opponent_organisation_path(application) },
+          forward: :has_other_opponents,
+          check_answers: :check_merits_answers,
+        },
         start_opponent_task: {
           # This allows the task list to check for opponents and route to has_other_opponents
           # if they exist or show the new page if they do not
