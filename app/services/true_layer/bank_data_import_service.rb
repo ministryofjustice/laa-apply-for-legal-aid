@@ -79,7 +79,7 @@ module TrueLayer
       command = Importers::ImportTransactionsService.call(
         api_client,
         account,
-        start_at: transaction_period_start_on,
+        start_at: transaction_period_start_on.beginning_of_day,
         finish_at: Time.current,
       )
       self.error = command.errors.first unless command.success?
