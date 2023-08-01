@@ -8,6 +8,7 @@ module ApplicationMeritsTask
     it { expect(individual.ccms_child?).to be false }
     it { expect(individual.ccms_opponent_relationship_to_case).to eq "Opponent" }
     it { expect(individual).to respond_to(:first_name, :last_name, :full_name) }
+    it { expect(individual.type).to eq "Individual" }
 
     context "with an opponent" do
       let(:opponent) { create(:opponent, :for_individual) }

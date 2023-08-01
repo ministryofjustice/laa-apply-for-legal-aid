@@ -60,7 +60,6 @@ module Providers
         context "when adding an organisation" do
           let(:radio_button) { "false" }
 
-          # TODO: This should redirect to the organisation opponent page when AP-4301  is complete.
           it "redirects to organisation opponent" do
             patch_opponent_type
             expect(response).to redirect_to(new_providers_legal_aid_application_opponent_organisation_path(application))

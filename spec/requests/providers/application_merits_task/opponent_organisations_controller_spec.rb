@@ -34,6 +34,34 @@ module Providers
         end
       end
 
+      describe "show: GET /providers/applications/:legal_aid_application_id/opponent_organisations/:opponent_id" do
+        subject(:get_existing_opponent) { get providers_legal_aid_application_opponent_organisation_path(legal_aid_application, opponent) }
+
+        let(:opponent) { create(:opponent, :for_organisation, legal_aid_application:) }
+
+        context "when authenticated" do
+          before do
+            login_provider
+            get_existing_opponent
+          end
+
+          it "returns success" do
+            expect(response).to have_http_status(:ok)
+          end
+
+          it "displays opponent's details" do
+            expect(response.body).to include(html_compare(opponent.name))
+            expect(response.body).to include(html_compare(opponent.description))
+          end
+        end
+
+        context "when unauthenticated" do
+          before { get_existing_opponent }
+
+          it_behaves_like "a provider not authenticated"
+        end
+      end
+
       describe "update: PATCH /providers/applications/:legal_aid_application_id/opponent_organisations/:opponent_id" do
         subject(:patch_organisation) do
           patch(

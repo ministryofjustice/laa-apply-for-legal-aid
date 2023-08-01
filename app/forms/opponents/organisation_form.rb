@@ -13,16 +13,11 @@ module Opponents
     def save
       return false unless valid?
 
-      model.legal_aid_application = legal_aid_application if legal_aid_application
-
-      if model.opposable
-        model.opposable.name = name
-        model.opposable.ccms_code = organisation_type_ccms_code
-        model.opposable.description = organisation_type_description
-        model.opposable.save!
-      else
-        model.opposable = ApplicationMeritsTask::Organisation.new(name:, ccms_code: organisation_type_ccms_code, description: organisation_type_description)
-      end
+      # model.legal_aid_application = legal_aid_application
+      model.opposable.name = name
+      model.opposable.ccms_code = organisation_type_ccms_code
+      model.opposable.description = organisation_type_description
+      model.opposable.save!
       model.save!(validate: false)
     end
     alias_method :save!, :save
