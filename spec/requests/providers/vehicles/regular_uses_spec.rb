@@ -53,7 +53,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
       expect(response).to redirect_to(next_url)
     end
 
-    context "with false" do
+    context "when submitted with false" do
       let(:used_regularly) { false }
 
       it "updates vehicle" do
@@ -67,7 +67,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
       end
     end
 
-    context "with false on a passported journey" do
+    context "when false on a passported journey" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
       let(:used_regularly) { false }
 
@@ -82,7 +82,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
       end
     end
 
-    context "without value" do
+    context "when submitted without a value" do
       let(:params) { {} }
 
       it "renders successfully" do
@@ -101,7 +101,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
       end
     end
 
-    context "Form submitted using Save as draft button" do
+    context "when the Form is submitted using Save as draft button" do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do
@@ -144,7 +144,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "while checking answers" do
+    context "when checking answers" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
       it "redirects to check capital answers page" do
@@ -153,7 +153,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController do
       end
     end
 
-    context "while checking passported answers" do
+    context "when checking passported answers" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
       it "redirects to passported check answers page" do

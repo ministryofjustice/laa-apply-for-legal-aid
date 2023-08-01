@@ -47,41 +47,11 @@ RSpec/AnyInstance:
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
 
-# Offense count: 867
+# Offense count: 680
 # Configuration parameters: Prefixes, AllowedPatterns.
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/requests/providers/check_merits_answers_spec.rb'
-    - 'spec/requests/providers/check_passported_answers_spec.rb'
-    - 'spec/requests/providers/check_provider_answers_spec.rb'
-    - 'spec/requests/providers/client_completed_means_spec.rb'
-    - 'spec/requests/providers/concerns/draftable_spec.rb'
-    - 'spec/requests/providers/confirm_dwp_non_passported_applications_spec.rb'
-    - 'spec/requests/providers/confirm_offices_spec.rb'
-    - 'spec/requests/providers/email_addresses_spec.rb'
-    - 'spec/requests/providers/end_of_applications_spec.rb'
-    - 'spec/requests/providers/gateway_evidence_spec.rb'
-    - 'spec/requests/providers/has_evidence_of_benefits_spec.rb'
-    - 'spec/requests/providers/has_other_proceedings_controller_spec.rb'
-    - 'spec/requests/providers/income_summary_spec.rb'
-    - 'spec/requests/providers/invalid_logins_spec.rb'
-    - 'spec/requests/providers/legal_aid_applications_spec.rb'
-    - 'spec/requests/providers/means/dependants_controller_spec.rb'
-    - 'spec/requests/providers/means/has_dependants_controller_spec.rb'
-    - 'spec/requests/providers/means/remove_dependant_controller_spec.rb'
-    - 'spec/requests/providers/means/restrictions_spec.rb'
-    - 'spec/requests/providers/means/savings_and_investments_spec.rb'
-    - 'spec/requests/providers/means/shared_ownerships_spec.rb'
-    - 'spec/requests/providers/means/vehicles_spec.rb'
-    - 'spec/requests/providers/merits_task_lists_controller_spec.rb'
-    - 'spec/requests/providers/received_benefit_confirmations_spec.rb'
-    - 'spec/requests/providers/select_offices_spec.rb'
-    - 'spec/requests/providers/transactions_spec.rb'
-    - 'spec/requests/providers/uploaded_evidence_collection_spec.rb'
-    - 'spec/requests/providers/vehicles/ages_spec.rb'
-    - 'spec/requests/providers/vehicles/estimated_values_spec.rb'
-    - 'spec/requests/providers/vehicles/regular_uses_spec.rb'
     - 'spec/requests/saml_idp_spec.rb'
     - 'spec/requests/saml_sessions_spec.rb'
     - 'spec/requests/status_spec.rb'

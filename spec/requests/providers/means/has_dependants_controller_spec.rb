@@ -57,8 +57,8 @@ RSpec.describe Providers::Means::HasDependantsController do
       end
     end
 
-    context "valid params" do
-      context "when provider answers yes" do
+    context "when there are valid params" do
+      context "and the provider answers yes" do
         let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 
         it "sets has_dependants to true" do
@@ -71,7 +71,7 @@ RSpec.describe Providers::Means::HasDependantsController do
         end
       end
 
-      context "when provider answers no" do
+      context "and the provider answers no" do
         let(:params) { { legal_aid_application: { has_dependants: "false" } } }
 
         it "sets has_dependants to false" do
@@ -124,7 +124,7 @@ RSpec.describe Providers::Means::HasDependantsController do
       end
     end
 
-    context "invalid params - nothing specified" do
+    context "when the params are invalid - nothing specified" do
       let(:params) { {} }
 
       it "returns http_success" do

@@ -61,7 +61,7 @@ RSpec.describe "provider selects office" do
         expect(response).to redirect_to providers_legal_aid_applications_path
       end
 
-      context "invalid params - nothing specified" do
+      context "when the params are invalid - nothing specified" do
         let(:params) { {} }
 
         it "returns http_success" do
@@ -73,7 +73,7 @@ RSpec.describe "provider selects office" do
         end
       end
 
-      context "invalid params - selects office from different provider" do
+      context "when the params are invalid - nothing specified - selects office from different provider" do
         let(:params) do
           {
             provider: { selected_office_id: third_office.id },

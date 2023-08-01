@@ -46,7 +46,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
         expect(unescaped_response_body).to include("Check your answers")
       end
 
-      context "delegated functions not used" do
+      context "when delegated functions were not used" do
         let(:application) do
           create(
             :legal_aid_application,
@@ -62,7 +62,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
         end
       end
 
-      context "provider has used delegated functions" do
+      context "when the provider has used delegated functions" do
         let(:application) do
           create(
             :legal_aid_application,
@@ -424,7 +424,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
       end
     end
 
-    context "When Save as draft clicked" do
+    context "when Save as draft clicked" do
       subject(:request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do

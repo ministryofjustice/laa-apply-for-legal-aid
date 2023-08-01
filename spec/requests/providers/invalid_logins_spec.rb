@@ -10,7 +10,7 @@ RSpec.describe "provider confirm office" do
       get providers_invalid_login_path
     end
 
-    context "no CCMS_Apply role" do
+    context "when there is no CCMS_Apply role" do
       let(:detail) { "role" }
 
       it "has the no permissions title" do
@@ -22,7 +22,7 @@ RSpec.describe "provider confirm office" do
       end
     end
 
-    context "no user on CCMS Provider details API" do
+    context "when there is no user on CCMS Provider details API" do
       let(:detail) { "api_details_user_not_found" }
 
       it "has the no permissions title" do
@@ -34,7 +34,7 @@ RSpec.describe "provider confirm office" do
       end
     end
 
-    context "API error" do
+    context "when the provider details API returns an error" do
       let(:detail) { "provider_details_api_error" }
 
       it "has the no error title" do

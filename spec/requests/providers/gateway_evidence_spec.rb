@@ -66,7 +66,7 @@ module Providers
         expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
       end
 
-      context "upload button pressed" do
+      context "when the upload button is pressed" do
         let(:params_gateway_evidence) do
           {
             original_file:,
@@ -84,7 +84,7 @@ module Providers
           expect(response).to have_http_status(:ok)
         end
 
-        context "word document" do
+        context "and a word document is uploaded" do
           let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
 
           it "updates the record" do
@@ -147,7 +147,7 @@ module Providers
           end
         end
 
-        context "no file chosen" do
+        context "and no file is chosen" do
           let(:original_file) { nil }
 
           it "does not update the record" do
@@ -162,7 +162,7 @@ module Providers
           end
         end
 
-        context "virus scanner is down" do
+        context "when the virus scanner is down" do
           before do
             allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false)
           end
@@ -175,9 +175,9 @@ module Providers
         end
       end
 
-      context "Continue button pressed" do
-        context "model has no files attached previously" do
-          context "file is invalid content type" do
+      context "when the Continue button is pressed" do
+        context "and model has no files attached previously" do
+          context "and file is invalid content type" do
             let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
             it "does not save the object and raise an error" do
@@ -188,7 +188,7 @@ module Providers
             end
           end
 
-          context "no files chosen" do
+          context "and no files are chosen" do
             let(:original_file) { nil }
 
             it "does not add a record" do
@@ -202,7 +202,7 @@ module Providers
             end
           end
 
-          context "file is invalid mime type but has valid content_type" do
+          context "and the file has an invalid mime type but has valid content_type" do
             let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
             before do
@@ -217,7 +217,7 @@ module Providers
             end
           end
 
-          context "file is too big" do
+          context "when the file is too big" do
             before { allow(File).to receive(:size).and_return(9_437_184) }
 
             it "does not save the object and raise an error" do
@@ -228,7 +228,7 @@ module Providers
             end
           end
 
-          context "file is empty" do
+          context "when the file is empty" do
             let(:original_file) { uploaded_file("spec/fixtures/files/empty_file.pdf", "application/pdf") }
 
             it "does not save the object and raise an error" do
@@ -239,7 +239,7 @@ module Providers
             end
           end
 
-          context "file contains a malware", clamav: true do
+          context "when the file contains malware", clamav: true do
             let(:original_file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
             it "does not save the object and raise an error" do
@@ -251,19 +251,17 @@ module Providers
           end
         end
 
-        context "model already has files attached" do
+        context "when the model already has files attached" do
           before { create(:gateway_evidence, :with_original_file_attached, legal_aid_application:) }
 
-          context "additional file uploaded" do
-            it "attaches the file" do
-              subject
-              expect(gateway_evidence.original_attachments.count).to eq 2
-            end
+          it "attaches the additional file" do
+            subject
+            expect(gateway_evidence.original_attachments.count).to eq 2
           end
         end
       end
 
-      context "Save as draft" do
+      context "when the Save as draft button is clicked" do
         let(:button_clicked) { draft_button }
 
         it "updates the record" do
@@ -276,7 +274,7 @@ module Providers
           expect(response).to redirect_to provider_draft_endpoint
         end
 
-        context "nothing specified" do
+        context "and no file is specified" do
           let(:original_file) { nil }
 
           it "redirects to provider draft endpoint" do

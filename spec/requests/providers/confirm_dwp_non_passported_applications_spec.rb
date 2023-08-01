@@ -74,7 +74,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
-    context "submitting with Continue button" do
+    context "when submitting with the Continue button" do
       subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
 
       let(:params) do
@@ -88,7 +88,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
-      context "the results are correct" do
+      context "and the results are correct" do
         let(:params) do
           {
             continue_button: "Continue",
@@ -124,7 +124,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
       end
 
-      context "the solicitor wants to override the results with a non joint benefit" do
+      context "and the solicitor wants to override the results with a non joint benefit" do
         before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
 
         let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
@@ -165,7 +165,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
       end
 
-      context "the solicitor wants to override the results with a partner" do
+      context "and the solicitor wants to override the results with a partner" do
         before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
 
         let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
@@ -206,7 +206,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
       end
 
-      context "the solicitor does not select a radio button" do
+      context "and the solicitor does not select a radio button" do
         it "displays an error" do
           subject
           expect(response.body).to include(I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
@@ -214,7 +214,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
     end
 
-    context "submitting with Save As Draft button" do
+    context "when submitting with the Save As Draft button" do
       subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
 
       let(:params) do

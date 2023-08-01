@@ -20,7 +20,7 @@ RSpec.describe Providers::MeritsTaskListsController do
   describe "GET /providers/merits_task_list" do
     subject { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
 
-    context "the record does not exist" do
+    context "when the record does not exist" do
       let(:task_list) { build(:legal_framework_serializable_merits_task_list) }
 
       it "returns http success" do
@@ -36,7 +36,7 @@ RSpec.describe Providers::MeritsTaskListsController do
       end
     end
 
-    context "the record already exists" do
+    context "when the record already exists" do
       before do
         login_provider
         create(:legal_framework_merits_task_list, legal_aid_application:)
@@ -57,7 +57,7 @@ RSpec.describe Providers::MeritsTaskListsController do
       end
     end
 
-    context "the task list was started before the opponent split was implemented" do
+    context "when the task list was started before the opponent split was implemented" do
       let(:task_list) { create(:legal_framework_merits_task_list, :broken_opponent, legal_aid_application:) }
 
       before do
@@ -92,8 +92,8 @@ RSpec.describe Providers::MeritsTaskListsController do
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
       end
 
-      context "evidence upload" do
-        context "when at least one evidence type is required" do
+      describe "evidence upload" do
+        context "and at least one evidence type is required" do
           it "redirects to the new upload evidence page" do
             expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
           end

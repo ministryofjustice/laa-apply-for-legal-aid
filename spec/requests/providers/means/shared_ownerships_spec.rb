@@ -30,7 +30,7 @@ RSpec.describe "providers shared ownership request test" do
       end
 
       describe "back link" do
-        context "applicant owns with mortgage" do
+        context "when the applicant owns with mortgage" do
           before { get providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application) }
 
           it "points to oustanding mortgage page" do
@@ -39,7 +39,7 @@ RSpec.describe "providers shared ownership request test" do
           end
         end
 
-        context "applicant owns home outright" do
+        context "when the applicant owns home outright" do
           before { get providers_legal_aid_application_means_property_value_path(legal_aid_application) }
 
           it "points to the property value page" do
@@ -69,14 +69,14 @@ RSpec.describe "providers shared ownership request test" do
         login_as legal_aid_application.provider
       end
 
-      context "Submitted with Continue button" do
+      context "and has Submitted with Continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
           }
         end
 
-        context "Yes path" do
+        describe "Yes path" do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
 
           it "does NOT create an new application record" do
@@ -94,7 +94,7 @@ RSpec.describe "providers shared ownership request test" do
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
 
-          context "while checking answers" do
+          context "when checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the next step in flow" do
@@ -104,7 +104,7 @@ RSpec.describe "providers shared ownership request test" do
           end
         end
 
-        context "No path" do
+        describe "No path" do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
 
           it "does NOT create an new application record" do
@@ -123,7 +123,7 @@ RSpec.describe "providers shared ownership request test" do
             expect(legal_aid_application.percentage_home).to eq 100.0
           end
 
-          context "while checking answers" do
+          context "when checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
             it "redirects to check answers page" do
@@ -133,7 +133,7 @@ RSpec.describe "providers shared ownership request test" do
           end
         end
 
-        context "with an invalid param" do
+        describe "with an invalid param" do
           let(:params) { { legal_aid_application: { shared_ownership: "" } } }
 
           it "re-renders the form with the validation errors" do
@@ -145,14 +145,14 @@ RSpec.describe "providers shared ownership request test" do
         end
       end
 
-      context "submitted with a Save as Draft button" do
+      context "when submitted with a Save as Draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
           }
         end
 
-        context "Yes path" do
+        describe "Yes path" do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
 
           it "does NOT create an new application record" do
@@ -170,7 +170,7 @@ RSpec.describe "providers shared ownership request test" do
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
 
-          context "while checking answers" do
+          context "when checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the applications list page" do
@@ -180,7 +180,7 @@ RSpec.describe "providers shared ownership request test" do
           end
         end
 
-        context "No path" do
+        describe "No path" do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
 
           it "does NOT create an new application record" do
@@ -198,7 +198,7 @@ RSpec.describe "providers shared ownership request test" do
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
 
-          context "while checking answers" do
+          context "when checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the applications list page" do
