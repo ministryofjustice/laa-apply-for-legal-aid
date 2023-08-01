@@ -23,7 +23,7 @@
         <% @legal_aid_application.opponents.order(:created_at).each do |opponent| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" id="opponent<%= opponent.id %>"><%= opponent.full_name %></td>
-            <td class="govuk-table__cell"><%= opponent.type %></td>
+            <td class="govuk-table__cell"><%= opponent.type == "Individual" ? opponent.type : opponent.description %></td>
             <td class="govuk-table__cell">
               <%= link_to_accessible(
                     t("generic.change"),
