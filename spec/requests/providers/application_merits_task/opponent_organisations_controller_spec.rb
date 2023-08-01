@@ -129,6 +129,13 @@ module Providers
             expect(response).to have_http_status(:ok)
           end
 
+          it "contains error message" do
+            patch_organisation
+            expect(response.body).to include("govuk-error-summary")
+            .and include(html_compare("Enter the organisation's name"))
+            .and include(html_compare("Select the organisation's type"))
+          end
+
           it "does not set the task to complete" do
             patch_organisation
             expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_name\n\s+dependencies: \*\d+\n\s+state: :not_started/)
