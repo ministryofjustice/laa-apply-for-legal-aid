@@ -13,11 +13,11 @@
                                         classes: ["govuk-!-margin-bottom-5"],
                                         hint: { text: t("generic.select_all_that_apply") }) do %>
       <div class="deselect-group govuk-!-padding-bottom-1" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
-        <% TransactionType.credits.not_children.each do |transaction_type| %>
+        <% TransactionType.credits.not_children.each_with_index do |transaction_type, index| %>
           <%= form.govuk_check_box(
                 :transaction_type_ids,
                 transaction_type.id,
-                link_errors: true,
+                link_errors: index.zero?,
                 label: { text: t("transaction_types.names.providers.#{transaction_type.name}") },
                 hint: { text: t(".hints.#{transaction_type.name}", default: "") },
               ) %>
