@@ -38,7 +38,7 @@ RSpec.describe "providers savings and investments" do
           end
         end
 
-        context "applicant owns home" do
+        context "when the applicant owns home" do
           before { get providers_legal_aid_application_means_property_details_path(application) }
 
           it "points to the property details page" do

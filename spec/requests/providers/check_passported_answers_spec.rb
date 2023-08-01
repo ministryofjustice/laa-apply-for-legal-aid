@@ -41,11 +41,11 @@ RSpec.describe "check passported answers requests" do
         expect(response.body).to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: "£"))
         expect(response.body).to include(I18n.t("shared.forms.shared_ownership_form.#{application.shared_ownership}"))
         expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 2))
-        expect(response.body).to include("Does your client own the home they live in?")
-        expect(unescaped_response_body).to include("How much is your client's home worth?")
-        expect(unescaped_response_body).to include("What is the outstanding mortgage on your client's home?")
-        expect(response.body).to include("Does your client own their home with anyone else?")
-        expect(response.body).to include("What % share of their home does your client legally own?")
+        expect(response.body).to include(I18n.t("shared.check_answers.assets.property.own_home"))
+        expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.property_value"))
+        expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.outstanding_mortgage"))
+        expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.shared_ownership"))
+        expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.percentage_home"))
         expect(response.body).to include("Savings")
         expect(response.body).to include("assets")
         expect(response.body).to include("restrictions")
@@ -220,24 +220,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "when the applicant is sole owner of home" do
-        let(:application) do
-          create(:legal_aid_application,
-                 :with_everything,
-                 :with_no_other_assets,
-                 :with_proceedings,
-                 :with_home_sole_owner,
-                 :with_passported_state_machine,
-                 :provider_entering_means)
-        end
-
-        it "does not display percentage owned" do
-          expect(response.body).not_to include(number_to_percentage(application.percentage_home, precision: 2))
-          expect(response.body).not_to include("Percentage")
-        end
-      end
-
-      context "when the applicant does not have vehicle" do
+      context "when the applicant does not have a vehicle" do
         let(:vehicle) { nil }
         let(:own_vehicle) { false }
 

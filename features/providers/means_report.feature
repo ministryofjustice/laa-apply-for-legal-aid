@@ -111,13 +111,16 @@ Feature: Means report
       | Capital upper limit |
       | Capital contribution |
 
-    And the Property questions should exist:
+    And the Property question should exist:
       | question |
       | Does your client own the home they live in? |
-      | How much is your client's home worth? |
-      | What is the outstanding mortgage on your client's home? |
-      | Does your client own their home with anyone else? |
-      | What % share of their home does your client legally own? |
+
+    And the Property details questions should exist:
+      | question |
+      | How much is the home they live in worth? |
+      | How much is left to pay on the mortgage? |
+      | Does your client own the home with anyone else? |
+      | What percentage of the home does your client legally own? |
 
     And the Vehicles questions should exist:
       | question |
@@ -274,13 +277,16 @@ Feature: Means report
       | Capital upper limit |
       | Capital contribution |
 
-    And the Property questions should exist:
+    And the Property question should exist:
       | question |
       | Does your client own the home they live in? |
-      | How much is your client's home worth? |
-      | What is the outstanding mortgage on your client's home? |
-      | Does your client own their home with anyone else? |
-      | What % share of their home does your client legally own? |
+
+    And the Property details questions should exist:
+      | question |
+      | How much is the home they live in worth? |
+      | How much is left to pay on the mortgage? |
+      | Does your client own the home with anyone else? |
+      | What percentage of the home does your client legally own? |
 
     And the Vehicles questions should exist:
       | question |
