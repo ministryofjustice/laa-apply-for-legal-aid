@@ -1,13 +1,13 @@
 module Providers
-  module Means
+  module Partners
     class StudentFinancesController < ProviderBaseController
       def show
         @receives_student_finance = student_finance?
-        @form = ::Applicants::StudentFinanceForm.new(model: applicant)
+        @form = ::Partners::StudentFinanceForm.new(model: partner)
       end
 
       def update
-        @form = ::Applicants::StudentFinanceForm.new(student_finance_params)
+        @form = ::Partners::StudentFinanceForm.new(student_finance_params)
 
         if @form.save
           remove_student_finance_amount unless student_finance?
@@ -19,18 +19,22 @@ module Providers
 
     private
 
+      def partner
+        legal_aid_application.partner
+      end
+
       def student_finance?
-        applicant.student_finance
+        partner.student_finance
       end
 
       def remove_student_finance_amount
-        applicant.student_finance_amount = nil
-        applicant.save!
+        partner.student_finance_amount = nil
+        partner.save!
       end
 
       def student_finance_params
-        merge_with_model(applicant) do
-          params.require(:applicant).permit(:student_finance, :student_finance_amount)
+        merge_with_model(partner) do
+          params.require(:partner).permit(:student_finance, :student_finance_amount)
         end
       end
     end
