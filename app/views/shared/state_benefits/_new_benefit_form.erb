@@ -10,7 +10,6 @@
     <%= form.govuk_fieldset legend: { tag: "h1", size: "xl", text: page_title } do %>
       <%= form.hidden_field :transaction_type_id %>
       <p><%= t(".details") %></p>
-      <hr>
       <%= render "shared/means/cost_of_living_and_disregarded_benefits" %>
       <%= form.govuk_text_field :description,
                                 label: { text: t(".benefits_description") },
