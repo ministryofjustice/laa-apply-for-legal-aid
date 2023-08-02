@@ -7,6 +7,8 @@ FactoryBot.define do
     has_national_insurance_number { true }
     national_insurance_number { "JA123456D" }
     employed { false }
+    student_finance { nil }
+    student_finance_amount { nil }
 
     trait :with_address do
       addresses { build_list(:address, 1) }
