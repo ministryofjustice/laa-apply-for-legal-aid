@@ -2,6 +2,7 @@ class Partner < ApplicationRecord
   belongs_to :legal_aid_application, dependent: :destroy
   has_many :hmrc_responses, class_name: "HMRC::Response", as: :owner
   has_many :employments, as: :owner
+  has_many :regular_transactions, as: :owner
 
   delegate :transaction_period_start_on, to: :legal_aid_application
 
@@ -32,5 +33,9 @@ class Partner < ApplicationRecord
 
   def employment_payments
     employments.map(&:employment_payments).flatten
+  end
+
+  def state_benefits
+    regular_transactions.where(transaction_type_id: TransactionType.find_by(name: "benefits")).order(:created_at)
   end
 end

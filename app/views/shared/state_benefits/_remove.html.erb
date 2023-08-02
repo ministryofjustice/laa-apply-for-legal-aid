@@ -1,0 +1,17 @@
+<%= form_with(
+      url: form_path,
+      model: form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title:, form:, template: :basic do %>
+    <span class="govuk-caption-xl"><%= caption %></span>
+    <%= form.govuk_collection_radio_buttons :remove_state_benefit,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" } %>
+
+    <%= next_action_buttons(form:) %>
+  <% end %>
+<% end %>

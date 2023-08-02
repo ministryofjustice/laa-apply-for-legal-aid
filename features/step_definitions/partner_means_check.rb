@@ -12,6 +12,23 @@ Given("I complete the journey as far as regular outgoings") do
   visit(providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application))
 end
 
+Given("I complete the partner journey as far as {string}") do |step|
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_applicant_and_partner,
+    :with_non_passported_state_machine,
+    :provider_confirming_applicant_eligibility,
+  )
+
+  login_as @legal_aid_application.provider
+
+  page = step.tr(" ", "_")
+  url = "providers_legal_aid_application_partners_#{page}_path"
+  path = Rails.application.routes.url_helpers.send(url, @legal_aid_application)
+  visit(path)
+end
+
 Given(/^an applicant named (\S+) (\S+) with a partner has completed their true layer interactions$/) do |first_name, last_name|
   @applicant = FactoryBot.create :applicant,
                                  :employed,

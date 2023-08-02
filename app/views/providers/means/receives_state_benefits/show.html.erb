@@ -1,22 +1,5 @@
-<%= form_with(
-      model: @form,
-      url: providers_legal_aid_application_means_receives_state_benefits_path,
-      method: :patch,
-      local: true,
-    ) do |form| %>
-
-  <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
-    <span class="govuk-caption-l"><%= t(".caption") %></span>
-    <%= form.govuk_collection_radio_buttons :receives_state_benefits,
-                                            yes_no_options,
-                                            :value,
-                                            :label,
-                                            legend: { text: content_for(:page_title), size: "xl", tag: "h1" } do %>
-      <% t(".details").each_line do |item| %>
-        <p><%= item %></p>
-      <% end %>
-      <%= render "shared/means/cost_of_living_and_disregarded_benefits" %>
-    <% end %>
-    <%= next_action_buttons(show_draft: true, form:) %>
-  <% end %>
-<% end %>
+<%= render "shared/state_benefits/receives_state_benefits",
+           form: @form,
+           page_title: t(".page_title"),
+           caption: t("generic.client_means_caption"),
+           form_path: providers_legal_aid_application_means_receives_state_benefits_path %>

@@ -104,7 +104,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         end
 
         it "redirects to the has_dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(application))
         end
       end
 

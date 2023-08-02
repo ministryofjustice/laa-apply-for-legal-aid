@@ -312,6 +312,8 @@ en:
             confirm_dwp_result: Select yes if the DWP records are correct
             full_employment_details:
               blank: Enter the partner's employment details
+            receives_state_benefits:
+              blank: Select yes if the partner gets any benefits
         attachment:
           attributes:
             attachment_type:
@@ -613,7 +615,7 @@ en:
               not_a_number: Enter the amount of benefit received
               too_many_decimals: Enter a number with no more than 2 decimal places
             frequency:
-              inclusion: Select how often your client gets the benefit
+              inclusion: "Select how often %{party} gets the benefit"
         providers/means/regular_income_form:
           attributes:
             benefits_amount:

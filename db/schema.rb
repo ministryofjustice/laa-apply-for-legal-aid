@@ -745,6 +745,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_104111) do
     t.boolean "self_employed"
     t.boolean "armed_forces"
     t.string "full_employment_details"
+    t.boolean "receives_state_benefits"
     t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
   end
 
