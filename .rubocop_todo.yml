@@ -47,22 +47,11 @@ RSpec/AnyInstance:
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
 
-# Offense count: 680
+# Offense count: 465
 # Configuration parameters: Prefixes, AllowedPatterns.
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/requests/saml_idp_controller_spec.rb'
-    - 'spec/requests/saml_sessions_spec.rb'
-    - 'spec/requests/status_controller_spec.rb'
-    - 'spec/requests/v1/statement_of_cases_spec.rb'
-    - 'spec/requests/v1/uploaded_evidence_collections_spec.rb'
-    - 'spec/services/address_lookup_service_spec.rb'
-    - 'spec/services/admin/provider_details_service_spec.rb'
-    - 'spec/services/bank_holiday_retriever_service_spec.rb'
-    - 'spec/services/banking/bank_transactions_trimmer_spec.rb'
-    - 'spec/services/banking/state_benefit_analyser_service_spec.rb'
-    - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/attribute_configuration_spec.rb'
     - 'spec/services/ccms/attribute_value_generator_spec.rb'
     - 'spec/services/ccms/manual_review_determiner_spec.rb'
@@ -88,37 +77,7 @@ RSpec/ContextWording:
     - 'spec/services/ccms/submitters/obtain_case_reference_service_spec.rb'
     - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
     - 'spec/services/ccms/submitters/upload_documents_service_spec.rb'
-    - 'spec/services/cleanup_capital_attributes_spec.rb'
-    - 'spec/services/currency_cleaner_spec.rb'
-    - 'spec/services/dashboard_event_handler_spec.rb'
-    - 'spec/services/delegated_functions_date_service_spec.rb'
-    - 'spec/services/flow/base_flow_service_spec.rb'
-    - 'spec/services/govuk_emails/delivery_man_spec.rb'
-    - 'spec/services/govuk_emails/email_spec.rb'
-    - 'spec/services/hmrc/create_responses_service_spec.rb'
-    - 'spec/services/hmrc/interface/result_service_spec.rb'
-    - 'spec/services/hmrc/interface/submission_service_spec.rb'
-    - 'spec/services/job_queue_spec.rb'
-    - 'spec/services/legal_framework/add_proceeding_service_spec.rb'
-    - 'spec/services/legal_framework/merits_tasks_retriever_service_spec.rb'
-    - 'spec/services/legal_framework/merits_tasks_service_spec.rb'
-    - 'spec/services/manual_review_detailer_spec.rb'
-    - 'spec/services/map_address_lookup_results_spec.rb'
-    - 'spec/services/oauth_session_saver_spec.rb'
-    - 'spec/services/pdf_converter_spec.rb'
-    - 'spec/services/provider_after_login_service_spec.rb'
-    - 'spec/services/provider_details_retriever_spec.rb'
-    - 'spec/services/reports/bank_transactions/bank_transaction_report_creator_spec.rb'
-    - 'spec/services/reports/merits_report_creator_spec.rb'
-    - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
-    - 'spec/services/reports/mis/application_details_report_spec.rb'
-    - 'spec/services/reports/mis/non_passported_application_csv_line_spec.rb'
-    - 'spec/services/reports/reports_types_creator_spec.rb'
-    - 'spec/services/required_document_category_analyser_spec.rb'
-    - 'spec/services/results_panel_selector_spec.rb'
-    - 'spec/services/submit_application_reminder_service_spec.rb'
-    - 'spec/services/submit_provider_reminder_service_spec.rb'
-    - 'spec/services/substantive_application_deadline_calculator_spec.rb'
+
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
