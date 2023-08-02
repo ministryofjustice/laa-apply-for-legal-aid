@@ -4,9 +4,9 @@ module LegalFramework
       class OrganisationTypeStruct
         attr_reader :ccms_code, :description
 
-        def initialize(ot_hash)
-          @ccms_code = ot_hash["ccms_code"]
-          @description = ot_hash["description"]
+        def initialize(organisation_type_hash)
+          @ccms_code = organisation_type_hash["ccms_code"]
+          @description = organisation_type_hash["description"]
         end
       end
 
