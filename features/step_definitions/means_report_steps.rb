@@ -204,8 +204,12 @@ Then("the Caseworker review section should contain:") do |table|
   expect_questions_and_answers_in(selector: "#caseworker-review-questions", expected: table)
 end
 
-Then("the Property questions should exist:") do |table|
-  expect_questions_in(selector: "#property-questions", expected: table)
+Then("the Property question should exist:") do |table|
+  expect_questions_in(selector: "#property-question", expected: table)
+end
+
+Then("the Property details questions should exist:") do |table|
+  expect_questions_in(selector: "#property-details-questions", expected: table)
 end
 
 Then("the Vehicles questions should exist:") do |table|

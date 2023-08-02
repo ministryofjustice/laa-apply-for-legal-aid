@@ -231,12 +231,13 @@ en:
           current_account: Current account
           bank_accounts: Which bank accounts does your client have?
         property:
-          heading: Property
-          outstanding_mortgage: What is the outstanding mortgage on your client's home?
+          heading_own_home: Property
+          heading_property_details: Your client's property
           own_home: Does your client own the home they live in?
-          percentage_home: What % share of their home does your client legally own?
-          property_value: How much is your client's home worth?
-          shared_ownership: Does your client own their home with anyone else?
+          property_value: How much is the home they live in worth?
+          outstanding_mortgage: How much is left to pay on the mortgage?
+          shared_ownership: Does your client own the home with anyone else?
+          percentage_home: What percentage of the home does your client legally own?
       offline_savings_accounts:
         heading: Does your client have any savings accounts they cannot access online?
         offline_savings_accounts: Has savings accounts they cannot access online

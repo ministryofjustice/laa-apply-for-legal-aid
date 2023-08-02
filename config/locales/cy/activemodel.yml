@@ -47,7 +47,6 @@ cy:
         occurred_month: htnoM
         occurred_year: raeY
       legal_aid_application:
-        outstanding_mortgage_amount: tnuoma egagtrom gnidnatstuo retnE
         used_delegated_functions_day: yaD
         used_delegated_functions_month: htnoM
         used_delegated_functions_year: raeY
@@ -275,22 +274,26 @@ cy:
               citizens:
                 blank_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni
                   tnuocca knab ruoy erahs ot eerga uoy fi sey tceleS"
+            own_home:
+              blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
+            own_vehicle:
+              citizens:
+                blank: elcihev a nwo uoy fi sey tceleS
+              providers:
+                blank: elcihev a snwo tneilc ruoy fi sey tceleS
+            property_value:
+              blank: emoh s'tneilc ruoy rof eulav detamitse na retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum emoh s'tneilc
+                ruoy fo eulav detamitse ehT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                detamitsE
             outstanding_mortgage_amount:
               blank: tnuoma egagtrom gnidnatstuo eht retnE
               greater_than_or_equal_to: erom ro 0 eb tsum tnuoma egagtroM
               not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum tnuoma egagtroM
               too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuoma
                 egagtroM
-            own_home:
-              citizens:
-                blank: ni evil uoy emoh eht nwo uoy fi sey tceleS
-              providers:
-                blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
-            own_vehicle:
-              citizens:
-                blank: elcihev a nwo uoy fi sey tceleS
-              providers:
-                blank: elcihev a snwo tneilc ruoy fi sey tceleS
             percentage_home:
               blank: erahs egatnecrep eht retnE
               greater_than_or_equal_to: 06 ekil ,001 rednu tnuoma egatnecrep a eb
@@ -298,31 +301,14 @@ cy:
               less_than_or_equal_to: 06 ekil ,001 rednu tnuoma egatnecrep a eb tsum
                 erahS
               not_a_number: 06 ekil ,001 rednu tnuoma egatnecrep a eb tsum erahS
-            property_value:
-              citizens:
-                blank: emoh ruoy rof eulav detamitse na retnE
-                not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum emoh ruoy fo
-                  eulav detamitse ehT
-              greater_than: erom ro 0 eb tsum eulav detamitsE
-              greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
-              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav detamitsE
-              providers:
-                blank: emoh s'tneilc ruoy rof eulav detamitse na retnE
-                not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum emoh s'tneilc
-                  ruoy fo eulav detamitse ehT
-              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
-                detamitsE
+            shared_ownership:
+              blank: esle enoyna htiw emoh rieht snwo tneilc ruoy fi sey tceleS
             restrictions_details:
               citizens:
                 blank: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa eht retnE
               providers:
                 blank: yhw dna ,tsniaga worrob ro lles tonnac tneilc ruoy stessa eht
                   retnE
-            shared_ownership:
-              citizens:
-                blank: esle enoemos htiw emoh ruoy nwo uoy fi sey tceleS
-              providers:
-                blank: esle enoyna htiw emoh rieht snwo tneilc ruoy fi sey tceleS
             substantive_application:
               blank: won noitacilppa evitnatsbus a ekam ot tnaw uoy fi sey tceleS
             uncategorised_bank_transactions:

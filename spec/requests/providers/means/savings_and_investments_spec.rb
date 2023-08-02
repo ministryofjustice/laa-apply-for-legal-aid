@@ -38,21 +38,12 @@ RSpec.describe "providers savings and investments" do
           end
         end
 
-        context "when the applicant owns home with shared ownership" do
-          before { get providers_legal_aid_application_means_percentage_home_path(application) }
+        context "when the applicant owns home" do
+          before { get providers_legal_aid_application_means_property_details_path(application) }
 
-          it "points to percentage owned page" do
+          it "points to the property details page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_means_percentage_home_path(application, back: true))
-          end
-        end
-
-        context "when the applicant owns home sole ownership" do
-          before { get providers_legal_aid_application_means_shared_ownership_path(application) }
-
-          it "points to the shared ownership page" do
-            subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_means_shared_ownership_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_property_details_path(application, back: true))
           end
         end
       end
