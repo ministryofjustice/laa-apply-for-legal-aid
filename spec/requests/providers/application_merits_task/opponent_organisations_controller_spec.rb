@@ -98,7 +98,7 @@ module Providers
 
         it "sets the task to complete" do
           patch_organisation
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_name\n\s+dependencies: \*\d+\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:application, :opponent_name)
         end
 
         it "redirects to the has another opponent question" do
@@ -138,7 +138,7 @@ module Providers
 
           it "does not set the task to complete" do
             patch_organisation
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_name\n\s+dependencies: \*\d+\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_task_in_state(:application, :opponent_name, :not_started)
           end
         end
 
