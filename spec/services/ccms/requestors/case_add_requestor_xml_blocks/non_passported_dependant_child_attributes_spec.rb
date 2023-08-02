@@ -71,9 +71,7 @@ module CCMS
                 end
 
                 it "generates false for every block" do
-                  blocks.each do |block|
-                    expect(block).to have_boolean_response false
-                  end
+                  expect(blocks).to all(have_boolean_response(false))
                 end
               end
 
@@ -85,9 +83,7 @@ module CCMS
                 end
 
                 it "generates false for every block" do
-                  blocks.each do |block|
-                    expect(block).to have_boolean_response false
-                  end
+                  expect(blocks).to all(have_boolean_response(false))
                 end
               end
 
@@ -142,9 +138,7 @@ module CCMS
                 end
 
                 it "hard-codes the value to false" do
-                  blocks.each do |block|
-                    expect(block).to have_boolean_response false
-                  end
+                  expect(blocks).to all(have_boolean_response(false))
                 end
               end
 
@@ -157,19 +151,15 @@ module CCMS
                   let(:value) { 8_000.01 }
 
                   it "codes all blocks to true" do
-                    blocks.each do |block|
-                      expect(block).to have_boolean_response true
-                    end
+                    expect(blocks).to all(have_boolean_response(true))
                   end
                 end
 
                 context "all dependants have less than £8,000 in assets" do
                   let(:value) { 7_999.99 }
 
-                  it "codes all blocks to true" do
-                    blocks.each do |block|
-                      expect(block).to have_boolean_response false
-                    end
+                  it "codes all blocks to false" do
+                    expect(blocks).to all(have_boolean_response(false))
                   end
                 end
               end
@@ -225,15 +215,15 @@ module CCMS
                   let(:relationship) { "child_relative" }
 
                   it "returns false for all blocks" do
-                    blocks.each { |block| expect(block).to have_boolean_response false }
+                    expect(blocks).to all(have_boolean_response(false))
                   end
                 end
 
                 context "all dependants are adults" do
                   let(:relationship) { "adult_relative" }
 
-                  it "returns false for all blocks" do
-                    blocks.each { |block| expect(block).to have_boolean_response true }
+                  it "returns true for all blocks" do
+                    expect(blocks).to all(have_boolean_response(true))
                   end
                 end
               end
