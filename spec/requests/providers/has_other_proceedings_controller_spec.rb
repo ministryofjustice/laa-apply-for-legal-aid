@@ -41,7 +41,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
   describe "PATCH /providers/:application_id/has_other_proceedings" do
     subject! { patch providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
-    context "Form submitted with Save as draft button" do
+    context "when the Form is submitted with the Save as draft button" do
       let(:params) { { legal_aid_application: { has_other_proceeding: "" }, draft_button: "Save and come back later" } }
 
       it "redirects to the list of applications" do
@@ -49,7 +49,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
     end
 
-    context "choose yes" do
+    context "when the provider chose yes" do
       let(:params) { { legal_aid_application: { has_other_proceeding: "true" } } }
 
       it "redirects to the page to add another proceeding type" do
@@ -57,7 +57,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
     end
 
-    context "choose no" do
+    context "when the provider chose no" do
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
       it "redirects to the delegated functions page" do
@@ -95,7 +95,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
     end
 
-    context "choose nothing" do
+    context "when the provider chose nothing" do
       let(:params) { { legal_aid_application: { has_other_proceeding: "" }, continue_button: "Save and continue" } }
 
       it "stays on the page if there is a validation error" do
@@ -104,8 +104,8 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
     end
 
-    context "with only Section 8 proceedings selected" do
-      context "choose no" do
+    context "when only Section 8 proceedings selected" do
+      context "and the provider chose no" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, assign_lead_proceeding: false, explicit_proceedings: [:se013]) }
         let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
@@ -115,7 +115,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
         end
       end
 
-      context "choose yes" do
+      context "and the provider chose yes" do
         let(:params) { { legal_aid_application: { has_other_proceeding: "true" } } }
 
         it "redirects to the page to add another proceeding type" do
@@ -124,7 +124,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
     end
 
-    context "with at least one domestic abuse and at least one section 8 proceeding" do
+    context "when at least one domestic abuse and at least one section 8 proceeding" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_proceedings,
@@ -156,7 +156,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       }
     end
 
-    context "remove proceeding" do
+    context "when a proceeding is removed" do
       it "removes one proceeding" do
         expect { subject }.to change { legal_aid_application.proceedings.count }.by(-1)
       end
@@ -171,7 +171,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
         expect(response.body).to include("You have added 1 proceeding")
       end
 
-      context "delete lead proceeding" do
+      context "and it's the lead proceeding" do
         subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
         let(:params) do
@@ -185,7 +185,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
     end
 
-    context "remove all proceedings" do
+    context "when all proceedings are removed" do
       let(:other_params) do
         { ccms_code: legal_aid_application.proceedings.first.ccms_code }
       end

@@ -21,13 +21,13 @@ RSpec.describe "check merits answers requests" do
 
     before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
-    context "unauthenticated" do
+    context "when the provider is unauthenticated" do
       before { subject }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       before do
         login_as application.provider
         subject
@@ -135,12 +135,12 @@ RSpec.describe "check merits answers requests" do
 
     before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       before do
         login_as application.provider
       end
 
-      context "Continue button pressed" do
+      context "when the continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
@@ -150,7 +150,7 @@ RSpec.describe "check merits answers requests" do
       end
     end
 
-    context "unauthenticated" do
+    context "when the provider is unauthenticated" do
       before { subject }
 
       it_behaves_like "a provider not authenticated"
@@ -173,13 +173,13 @@ RSpec.describe "check merits answers requests" do
       create(:chances_of_success, :with_optional_text, proceeding: da001)
     end
 
-    context "unauthenticated" do
+    context "when the provider is unauthenticated" do
       before { subject }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       before do
         allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
         login_as application.provider

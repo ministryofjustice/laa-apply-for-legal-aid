@@ -43,14 +43,14 @@ RSpec.describe Providers::IncomeSummaryController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "not all transaction types selected" do
+    context "when not all transaction types selected" do
       it "displays an Add additional income types section" do
         subject
         expect(response.body).to include(I18n.t("providers.income_summary.add_other_income.add_other_income"))
       end
     end
 
-    context "all transaction types selected" do
+    context "when all transaction types selected" do
       before do
         legal_aid_application.transaction_types << maintenance
         legal_aid_application.transaction_types << pension
@@ -62,7 +62,7 @@ RSpec.describe Providers::IncomeSummaryController do
       end
     end
 
-    context "with assigned (by type) transactions" do
+    context "when assigned (by type) transactions" do
       let(:applicant) { create(:applicant) }
       let(:bank_provider) { create(:bank_provider, applicant:) }
       let(:bank_account) { create(:bank_account, bank_provider:) }
@@ -90,7 +90,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
     before { subject }
 
-    context "with no outgoings categories previously selected" do
+    context "when no outgoings categories previously selected" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_applicant,
@@ -105,7 +105,7 @@ RSpec.describe Providers::IncomeSummaryController do
       end
     end
 
-    context "with outgoings categories" do
+    context "when outgoings categories are shown" do
       let!(:maintenance_out) { create(:transaction_type, :debit, name: "maintenance_out") }
       let(:legal_aid_application) do
         create(:legal_aid_application,
@@ -126,7 +126,7 @@ RSpec.describe Providers::IncomeSummaryController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "Form submitted with Save as draft button" do
+    context "when the Form is submitted with the Save as draft button" do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects to the list of applications" do
@@ -134,7 +134,7 @@ RSpec.describe Providers::IncomeSummaryController do
       end
     end
 
-    context "The transaction type category has no bank transactions" do
+    context "when the transaction type category has no bank transactions" do
       subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
 
       let(:applicant) { create(:applicant) }
@@ -156,7 +156,7 @@ RSpec.describe Providers::IncomeSummaryController do
       end
     end
 
-    context "no disregarded benefits are categorised" do
+    context "when no disregarded benefits are categorised" do
       let(:excluded_benefits) { create(:transaction_type, :credit, name: "excluded_benefits") }
       let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [excluded_benefits]) }
 

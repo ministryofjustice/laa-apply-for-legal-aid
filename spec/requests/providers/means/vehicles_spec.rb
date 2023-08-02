@@ -87,7 +87,7 @@ RSpec.describe Providers::Means::VehiclesController do
         end
       end
 
-      context "while checking answers" do
+      context "when checking answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to next page" do
@@ -97,7 +97,7 @@ RSpec.describe Providers::Means::VehiclesController do
       end
     end
 
-    context 'with option "false"' do
+    context 'when submitted with option "false"' do
       let(:own_vehicle) { "false" }
       let(:target_url) do
         providers_legal_aid_application_applicant_bank_account_path(legal_aid_application)
@@ -129,7 +129,7 @@ RSpec.describe Providers::Means::VehiclesController do
         end
       end
 
-      context "while checking answers" do
+      context "when checking answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
         it "redirects to check capital answers page" do
@@ -138,7 +138,7 @@ RSpec.describe Providers::Means::VehiclesController do
         end
       end
 
-      context "while checking passported answers" do
+      context "when checking passported answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to passported check answers page" do

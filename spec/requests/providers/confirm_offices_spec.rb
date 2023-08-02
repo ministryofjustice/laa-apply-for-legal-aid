@@ -15,7 +15,7 @@ RSpec.describe "provider confirm office" do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "invalid login" do
+    context "when the provider uses an invalid login" do
       let(:provider) { create(:provider, invalid_login_details: "role") }
 
       before do
@@ -46,7 +46,7 @@ RSpec.describe "provider confirm office" do
         expect(session["page_history_id"]).not_to be_nil
       end
 
-      context "firm has only one office" do
+      context "when the firm has only one office" do
         let!(:office) { nil }
 
         it "assigns office 2 to the provider" do
@@ -58,7 +58,7 @@ RSpec.describe "provider confirm office" do
         end
       end
 
-      context "provider has not selected office" do
+      context "when the provider has not selected an office" do
         let(:provider) { create(:provider, firm:, selected_office: nil) }
 
         it "redirects to the select office page" do
@@ -83,7 +83,7 @@ RSpec.describe "provider confirm office" do
         expect(response).to redirect_to providers_legal_aid_applications_path
       end
 
-      context "invalid params - nothing specified" do
+      context "when the params are invalid - nothing specified" do
         let(:params) { {} }
 
         it "returns http_success" do
@@ -95,7 +95,7 @@ RSpec.describe "provider confirm office" do
         end
       end
 
-      context "no is selected" do
+      context "when no is selected" do
         let(:params) { { binary_choice_form: { confirm_office: "false" } } }
 
         it "redirects to the office select page" do

@@ -55,7 +55,7 @@ RSpec.describe "update client email address before application confirmation" do
         login_as provider
       end
 
-      context "Continue button pressed" do
+      context "and the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do

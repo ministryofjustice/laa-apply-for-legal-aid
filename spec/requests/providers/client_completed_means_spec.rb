@@ -96,10 +96,10 @@ RSpec.describe Providers::ClientCompletedMeansController do
         login_as provider
       end
 
-      context "Continue button pressed" do
+      context "when the continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        context "employment income data was received from HMRC" do
+        context "and employment income data was received from HMRC" do
           before do
             allow_any_instance_of(Applicant).to receive(:hmrc_employment_income?).and_return(true)
             allow_any_instance_of(Applicant).to receive(:has_multiple_employments?).and_return(false)
@@ -111,7 +111,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
         end
 
-        context "unknown result obtained from HMRC::StatusAnalyzer" do
+        context "and an unknown result was obtained from HMRC::StatusAnalyzer" do
           before do
             allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(:xxx)
           end
@@ -121,7 +121,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
         end
 
-        context "no employment income data was received from HMRC" do
+        context "and no employment income data was received from HMRC" do
           before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
 
           it "redirects to the no employed income page" do
@@ -130,7 +130,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
         end
 
-        context "employment income data for multiple jobs was received from HMRC" do
+        context "and employment income data for multiple jobs was received from HMRC" do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
             allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(true)
@@ -142,7 +142,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
         end
 
-        context "transactions exist, and applicant is not employed" do
+        context "and transactions exist, and applicant is not employed" do
           let(:submit_button) { { continue_button: "Continue" } }
           let(:transaction_type) { create(:transaction_type, :pension) }
           let(:applicant) { create(:applicant, :not_employed) }
@@ -164,7 +164,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
         end
       end
 
-      context "Save as draft button pressed" do
+      context "when the Save as draft is button pressed" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do

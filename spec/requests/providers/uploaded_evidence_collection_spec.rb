@@ -74,7 +74,7 @@ module Providers
 
       before { login_as provider }
 
-      context "upload button pressed" do
+      context "when the upload button is pressed" do
         let(:params_uploaded_evidence_collection) do
           {
             original_file:,
@@ -100,7 +100,7 @@ module Providers
           expect(response).to have_http_status(:ok)
         end
 
-        context "word document" do
+        context "when a word document is selected" do
           let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
 
           it "updates the record" do
@@ -135,7 +135,7 @@ module Providers
           end
         end
 
-        context "with an invalid file type" do
+        context "when an invalid file type is uploaded" do
           let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
           it "does not update the record" do
@@ -151,7 +151,7 @@ module Providers
           end
         end
 
-        context "with an invalid mime type but valid content_type" do
+        context "when an invalid mime type but valid content_type is uploaded" do
           let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
           before do
@@ -167,7 +167,7 @@ module Providers
           end
         end
 
-        context "with invalid uploaded file header" do
+        context "when a file with an invalid file header is uploaded" do
           let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
 
           before do
@@ -180,7 +180,7 @@ module Providers
           end
         end
 
-        context "with a file that is too big" do
+        context "when a file that is too big is uploaded" do
           before { allow(File).to receive(:size).and_return(9_437_184) }
 
           it "does not save the object and raises an error" do
@@ -192,7 +192,7 @@ module Providers
           end
         end
 
-        context "with a file that contains malware", clamav: true do
+        context "when a file that contains malware is uploaded", clamav: true do
           let(:original_file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
           it "does not save the object and raises an error" do
@@ -204,7 +204,7 @@ module Providers
           end
         end
 
-        context "with a file that is empty" do
+        context "when a file that is empty is uploaded" do
           let(:original_file) { uploaded_file("spec/fixtures/files/empty_file.pdf", "application/pdf") }
 
           it "does not save the object and raises an error" do
@@ -216,7 +216,7 @@ module Providers
           end
         end
 
-        context "no file chosen" do
+        context "when no file chosen" do
           let(:original_file) { nil }
 
           it "does not update the record" do
@@ -232,7 +232,7 @@ module Providers
           end
         end
 
-        context "virus scanner is down" do
+        context "when virus scanner is down" do
           before do
             allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false)
           end
@@ -245,11 +245,11 @@ module Providers
         end
       end
 
-      context "Continue button pressed" do
+      context "when Continue button pressed" do
         let(:button_clicked) { continue_button }
 
-        context "model has no files attached previously" do
-          context "no files uploaded" do
+        context "and model has no files attached previously" do
+          context "and no files uploaded" do
             let(:params_uploaded_evidence_collection) { {} }
 
             it "does not add a record" do
@@ -298,7 +298,7 @@ module Providers
             end
           end
 
-          context "with a file uploaded" do
+          context "when a file is uploaded" do
             let(:attachment_type) { "uncategorised" }
             let(:attachment) { create(:attachment, attachment_name: "test_file.pdf", attachment_type:, legal_aid_application:) }
             let(:params_uploaded_evidence_collection) { { attachment.id.to_s => attachment.attachment_type.to_s } }
@@ -451,7 +451,7 @@ module Providers
         end
       end
 
-      context "Save as draft" do
+      context "when submitted with Save as draft" do
         let(:button_clicked) { draft_button }
 
         context "when no files have been uploaded" do
@@ -466,7 +466,7 @@ module Providers
           expect(response).to redirect_to provider_draft_endpoint
         end
 
-        context "nothing specified" do
+        context "when nothing specified" do
           let(:original_file) { nil }
 
           it "redirects to provider draft endpoint" do
@@ -476,7 +476,7 @@ module Providers
         end
       end
 
-      context "Delete" do
+      context "when submitted with Delete" do
         subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: delete_params }
 
         let(:button_clicked) { delete_button }

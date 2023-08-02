@@ -25,10 +25,10 @@ RSpec.describe Providers::Draftable do
       login_as provider
     end
 
-    context "Form submitted using Continue button" do
+    context "when the Form is submitted using Continue button" do
       let(:submit_button) { { anything: "That is not draft_button" } }
 
-      context "when the application is in draft" do
+      context "and the application is in draft" do
         let(:application) { create(:legal_aid_application, :draft) }
 
         it "redirects provider to next step of the submission" do
@@ -42,7 +42,7 @@ RSpec.describe Providers::Draftable do
       end
     end
 
-    context "Form submitted using Save as draft button" do
+    context "when the Form is submitted using Save as draft button" do
       let(:submit_button) do
         { draft_button: "Save as draft" }
       end
@@ -86,7 +86,7 @@ RSpec.describe Providers::Draftable do
         end
       end
 
-      context "with partial valid input" do
+      context "when the there is partially valid input" do
         let(:params) do
           {
             applicant: {

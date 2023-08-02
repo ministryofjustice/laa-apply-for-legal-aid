@@ -45,7 +45,7 @@ RSpec.describe "provider restrictions request" do
         subject
       end
 
-      context "Form submitted with continue button" do
+      context "and the Form is submitted with continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
@@ -95,7 +95,7 @@ RSpec.describe "provider restrictions request" do
           end
         end
 
-        context "provider checking answers on passported route" do
+        context "when provider is checking answers on passported route" do
           let(:application) { create(:legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :checking_passported_answers) }
 
           it "redirects to check passported answers" do
@@ -103,14 +103,14 @@ RSpec.describe "provider restrictions request" do
           end
         end
 
-        context "invalid params" do
+        context "when submitted with invalid params" do
           let(:restrictions_details) { "" }
 
           it "displays error" do
             expect(response.body).to include(translation_for(:restrictions_details, "blank"))
           end
 
-          context "no params" do
+          context "and there are no params" do
             let(:has_restrictions) { "" }
 
             it "displays error" do
@@ -119,7 +119,7 @@ RSpec.describe "provider restrictions request" do
           end
         end
 
-        context "provider checking answers on nonpassported route" do
+        context "when the provider is checking answers on nonpassported route" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
           it "redirects to the check capital answers page" do
@@ -129,14 +129,14 @@ RSpec.describe "provider restrictions request" do
         end
       end
 
-      context "Form submitted with Save as draft button" do
+      context "when the Form is submitted with Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
           }
         end
 
-        context "after success" do
+        describe "after success" do
           before do
             login_as provider
             subject

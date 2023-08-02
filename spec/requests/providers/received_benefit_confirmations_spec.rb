@@ -53,7 +53,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       login_as application.provider
     end
 
-    context "validation error" do
+    context "when there is a validation error" do
       it "displays error if nothing selected" do
         subject
         expect(response).to have_http_status(:ok)
@@ -61,10 +61,10 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       end
     end
 
-    context "benefit selected" do
+    context "when benefit selected" do
       let(:params) { { dwp_override: { passporting_benefit: :universal_credit } } }
 
-      context "add new record" do
+      context "and provider adds a new record" do
         it "adds a dwp override record" do
           expect { subject }.to change(DWPOverride, :count).by(1)
         end
@@ -75,7 +75,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
         end
       end
 
-      context "remove record when changed to none selected" do
+      context "when changed to none selected" do
         before do
           params = { dwp_override: { passporting_benefit: :universal_credit } }
           patch "/providers/applications/#{application_id}/received_benefit_confirmation", params:
@@ -94,7 +94,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       end
     end
 
-    context "none of these selected" do
+    context "when none of these selected" do
       let(:params) { { dwp_override: { passporting_benefit: :none_selected } } }
 
       it "does not add a dwp override record" do

@@ -28,7 +28,7 @@ RSpec.describe Providers::TransactionsController do
       expect(unescaped_response_body).to include(I18n.t("transaction_types.page_titles.#{transaction_type.name}"))
     end
 
-    context "When there are transactions" do
+    context "when there are transactions" do
       let(:not_matching_operation) { (TransactionType::NAMES.keys.map(&:to_s) - [transaction_type.operation.to_s]).first }
       let(:other_transaction_type) { create(:transaction_type, :pension) }
       let!(:bank_transaction_matching) { create(:bank_transaction, bank_account:, operation: transaction_type.operation) }
@@ -82,11 +82,11 @@ RSpec.describe Providers::TransactionsController do
     context "when the call to Check Financial Eligibility Service for excluded benefits" do
       let(:transaction_type) { create(:transaction_type, :excluded_benefits) }
 
-      context "is successful" do
+      context "and the call is successful" do
         it_behaves_like "GET #providers/transactions"
       end
 
-      context "is un-successful" do
+      context "and the call is un-successful" do
         before { allow(CFECivil::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
 
         it "redirects to the problem path as it cannot show the list of excluded benefits" do

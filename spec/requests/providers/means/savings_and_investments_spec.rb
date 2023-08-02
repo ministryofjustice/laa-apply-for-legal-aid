@@ -29,7 +29,7 @@ RSpec.describe "providers savings and investments" do
       end
 
       describe "back link" do
-        context "applicant does not own home" do
+        context "when the applicant does not own home" do
           before { get providers_legal_aid_application_means_own_home_path(application) }
 
           it "points to the own home page" do
@@ -38,7 +38,7 @@ RSpec.describe "providers savings and investments" do
           end
         end
 
-        context "applicant owns home with shared ownership" do
+        context "when the applicant owns home with shared ownership" do
           before { get providers_legal_aid_application_means_percentage_home_path(application) }
 
           it "points to percentage owned page" do
@@ -47,7 +47,7 @@ RSpec.describe "providers savings and investments" do
           end
         end
 
-        context "applicant owns home sole ownership" do
+        context "when the applicant owns home sole ownership" do
           before { get providers_legal_aid_application_means_shared_ownership_path(application) }
 
           it "points to the shared ownership page" do
@@ -78,14 +78,14 @@ RSpec.describe "providers savings and investments" do
         login_as application.provider
       end
 
-      context "Submitted with Continue button" do
+      context "and Submitted with Continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
           }
         end
 
-        context "not in checking passported answers state" do
+        context "when not in checking passported answers state" do
           it "updates the cash amount" do
             expect { subject }.to change { savings_amount.reload.cash.to_s }.to(cash)
           end
@@ -101,7 +101,7 @@ RSpec.describe "providers savings and investments" do
             expect(response).to redirect_to(providers_legal_aid_application_means_other_assets_path(application))
           end
 
-          context "none of these checkbox is selected" do
+          context "when none of these checkbox is selected" do
             let(:params) { { savings_amount: { none_selected: "true" } } }
 
             it "sets none_selected to true" do
@@ -110,7 +110,7 @@ RSpec.describe "providers savings and investments" do
             end
           end
 
-          context "with invalid input" do
+          context "when submitted with invalid input" do
             let(:cash) { "fifty" }
 
             it "renders successfully" do
@@ -126,7 +126,7 @@ RSpec.describe "providers savings and investments" do
             end
           end
 
-          context "checkbox checked with no value entered" do
+          context "when checkbox checked and no value entered" do
             let(:params) do
               {
                 savings_amount: {
@@ -157,7 +157,7 @@ RSpec.describe "providers savings and investments" do
             expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(application))
           end
 
-          context "no savings" do
+          context "and no savings" do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
@@ -167,7 +167,7 @@ RSpec.describe "providers savings and investments" do
           end
         end
 
-        context "provider checking citizen's answers" do
+        context "when checking citizen's answers" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, :checking_non_passported_means) }
           let(:submit_button) do
             {
@@ -183,7 +183,7 @@ RSpec.describe "providers savings and investments" do
         end
       end
 
-      context "Submitted with Save as draft button" do
+      context "when Submitted with Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
@@ -210,7 +210,7 @@ RSpec.describe "providers savings and investments" do
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context "with invalid input" do
+        context "when submitted with invalid input" do
           let(:cash) { "fifty" }
 
           it "renders successfully" do

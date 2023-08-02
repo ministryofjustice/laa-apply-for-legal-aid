@@ -60,7 +60,7 @@ RSpec.describe Providers::EndOfApplicationsController do
       expect(response).to redirect_to(flow_forward_path)
     end
 
-    context "Submitted using draft button" do
+    context "when Submitted using the draft button" do
       let(:params) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do

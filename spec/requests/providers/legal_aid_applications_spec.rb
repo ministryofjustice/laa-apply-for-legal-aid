@@ -26,7 +26,7 @@ RSpec.describe "providers legal aid application requests" do
         expect(response).to have_http_status(:ok)
       end
 
-      context "provider is not a portal_enabled user" do
+      context "when the provider is not a portal_enabled user" do
         let(:provider) { create(:provider, :without_portal_enabled) }
 
         it "redirects to error page" do

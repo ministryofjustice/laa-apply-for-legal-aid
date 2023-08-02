@@ -18,13 +18,13 @@ RSpec.describe "check passported answers requests" do
              own_vehicle:)
     end
 
-    context "unauthenticated" do
+    context "when the provider is unauthenticated" do
       before { subject }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       before do
         login_as application.provider
         application.reload
@@ -68,7 +68,7 @@ RSpec.describe "check passported answers requests" do
         expect(node.text).not_to include(I18n.t(".generic.yes"))
       end
 
-      context "applicant does not have any savings" do
+      context "when the applicant does not have any savings" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -85,7 +85,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant does not have any other assets" do
+      context "when the applicant does not have any other assets" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -102,7 +102,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant does not have any capital restrictions" do
+      context "when the applicant does not have any capital restrictions" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -119,7 +119,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant does not have any capital" do
+      context "when the applicant does not have any capital" do
         let(:application) do
           create(:legal_aid_application,
                  :with_applicant,
@@ -166,7 +166,7 @@ RSpec.describe "check passported answers requests" do
         expect(application.reload).to be_checking_passported_answers
       end
 
-      context "applicant does not own home" do
+      context "when the applicant does not own home" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -187,7 +187,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant owns home without mortgage" do
+      context "when the applicant owns home without mortgage" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -203,7 +203,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant received england infected blood scheme" do
+      context "when the applicant received england infected blood scheme payments" do
         let!(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -220,7 +220,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant is sole owner of home" do
+      context "when the applicant is sole owner of home" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -237,7 +237,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "applicant does not have vehicle" do
+      context "when the applicant does not have vehicle" do
         let(:vehicle) { nil }
         let(:own_vehicle) { false }
 
@@ -271,12 +271,12 @@ RSpec.describe "check passported answers requests" do
     end
     let(:params) { {} }
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       before do
         login_as application.provider
       end
 
-      context "call to Check Financial Eligibility Service is successful" do
+      context "when the call to Check Financial Eligibility Service is successful" do
         before do
           allow(CFECivil::SubmissionBuilder).to receive(:call).with(application).and_return(true)
           subject
@@ -290,7 +290,7 @@ RSpec.describe "check passported answers requests" do
           expect(application.reload.provider_entering_merits?).to be true
         end
 
-        context "Form submitted using Save as draft button" do
+        context "when the Form is submitted using Save as draft button" do
           let(:params) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
@@ -304,7 +304,7 @@ RSpec.describe "check passported answers requests" do
         end
       end
 
-      context "call to Check Financial Eligibility Service is unsuccessful" do
+      context "when the call to Check Financial Eligibility Service is unsuccessful" do
         before do
           allow(CFECivil::SubmissionBuilder).to receive(:call).with(application).and_return(false)
           subject
@@ -316,7 +316,7 @@ RSpec.describe "check passported answers requests" do
       end
     end
 
-    context "unauthenticated" do
+    context "when the provider is unauthenticated" do
       before { subject }
 
       it_behaves_like "a provider not authenticated"
@@ -334,13 +334,13 @@ RSpec.describe "check passported answers requests" do
              :with_proceedings)
     end
 
-    context "unauthenticated" do
+    context "when the provider is unauthenticated" do
       before { subject }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       let(:application) do
         create(:legal_aid_application,
                :with_everything,

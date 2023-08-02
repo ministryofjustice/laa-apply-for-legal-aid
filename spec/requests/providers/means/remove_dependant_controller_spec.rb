@@ -37,10 +37,10 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       }
     end
 
-    context "choose yes" do
+    context "when the provider chose yes" do
       let(:remove_dependant) { "true" }
 
-      context "when no dependants remain after deletion" do
+      context "and no dependants remain after deletion" do
         it "redirects to the has_dependants page" do
           expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
         end
@@ -53,7 +53,7 @@ RSpec.describe Providers::Means::RemoveDependantsController do
         end
       end
 
-      context "when dependants remain after the deletion" do
+      context "and dependants remain after the deletion" do
         let(:extra_dependant_count) { 1 }
 
         it "redirects to the has_other_dependants page" do
@@ -62,7 +62,7 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       end
     end
 
-    context "choose no" do
+    context "when the provider chose no" do
       let(:remove_dependant) { "false" }
 
       it "redirects to the has other dependants page" do
@@ -70,15 +70,15 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       end
     end
 
-    context "try a hack to submit something else" do
+    context "when someone tries a hack to submit something else" do
       let(:remove_dependant) { "not sure" }
 
-      it "show errors" do
+      it "shows errors" do
         expect(response.body).to include(I18n.t("providers.means.remove_dependants.show.error", name: html_compare(dependant.name)))
       end
     end
 
-    context "choose nothing" do
+    context "when the provider choose nothing" do
       let(:params) { nil }
 
       it "show errors" do

@@ -31,7 +31,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "evidence upload" do
+    context "when evidence has been uploaded" do
       it "does not mention the caseworker in the main hint" do
         expect(response.body).to include I18n.t("providers.has_evidence_of_benefits.show.evidence_hint")
       end
@@ -78,7 +78,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       expect(legal_aid_application.reload.state).to eq "applicant_details_checked"
     end
 
-    context "application state is already applicant_details_checked" do
+    context "when the application state is already applicant_details_checked" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_dwp_override, :applicant_details_checked) }
 
       it "does not update the state" do
@@ -95,7 +95,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
     end
 
-    context "does not use delegated functions" do
+    context "when the provider has not used delegated functions" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_dwp_override, :applicant_details_checked) }
 
       it "redirects to the upload capital introductions page" do
@@ -107,7 +107,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       expect(legal_aid_application.reload.state_machine).to be_a PassportedStateMachine
     end
 
-    context "choose no" do
+    context "when the provider chose no" do
       let(:has_evidence_of_benefit) { "false" }
 
       it "updates the dwp_override model" do
@@ -124,7 +124,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       end
     end
 
-    context "choose nothing" do
+    context "when the provider has chosen nothing" do
       let(:has_evidence_of_benefit) { nil }
 
       it "show errors" do
@@ -139,7 +139,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       end
     end
 
-    context "Form submitted with Save as draft button" do
+    context "when the form is submitted with the Save as draft button" do
       let(:params) { { draft_button: "Save as draft" } }
 
       it "redirects to the list of applications" do
