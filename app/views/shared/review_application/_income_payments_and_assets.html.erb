@@ -19,9 +19,9 @@
     <% end %>
   </section>
 
-  <% if @legal_aid_application.irregular_incomes.any? %>
-    <%= render "shared/irregular_incomes_table",
-               irregular_incomes: @legal_aid_application.irregular_incomes,
+  <% if @legal_aid_application.applicant.student_finance? %>
+    <%= render "shared/student_finances_table",
+               student_finance_amount: @legal_aid_application.applicant.student_finance_amount,
                period: @legal_aid_application.year_to_calculation_date %>
   <% else %>
     <section>

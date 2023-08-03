@@ -813,6 +813,8 @@ en:
         - Do not include any tuition fee loans.
       amount_label: Enter the amount they'll get this academic year
       amount_hint: Check %{individual}'s student entitlement letter
+    student_finances_table:
+      label: Student loan
     uploaded_files:
       delete: Delete
       filename: Filename
