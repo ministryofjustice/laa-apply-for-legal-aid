@@ -23,7 +23,7 @@ RSpec.describe ProviderDetailsRetriever do
       end
     end
 
-    context "error calling api" do
+    context "when there is an error calling the api" do
       it "raises ApiError" do
         allow(Net::HTTP).to receive(:get_response).and_raise(RuntimeError, "Something went wrong")
         expect {
@@ -32,7 +32,7 @@ RSpec.describe ProviderDetailsRetriever do
       end
     end
 
-    context "with real API", vcr: { cassette_name: "provider_details_api" } do
+    context "when using the real API", vcr: { cassette_name: "provider_details_api" } do
       let(:provider) { create(:provider, :with_provider_details_api_username) }
       let(:escaped_username) { CGI.escape(provider.username) }
 
@@ -43,7 +43,7 @@ RSpec.describe ProviderDetailsRetriever do
         subject
       end
 
-      context "username with space", vcr: { cassette_name: "encoded_provider_details_api" } do
+      context "and the username has a space", vcr: { cassette_name: "encoded_provider_details_api" } do
         let(:provider) { create(:provider, username: "ROB R") }
         let(:escaped_username) { URI.encode_www_form_component(provider.username).gsub("+", "%20") }
 
@@ -53,7 +53,7 @@ RSpec.describe ProviderDetailsRetriever do
         end
       end
 
-      context "on failure" do
+      context "and it fails" do
         before do
           allow(Net::HTTP).to receive(:get_response).and_return(DummyResponseStruct.new)
         end

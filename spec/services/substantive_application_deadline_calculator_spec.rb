@@ -5,7 +5,7 @@ RSpec.describe SubstantiveApplicationDeadlineCalculator, :vcr do
   describe ".call" do
     subject { described_class.call(df_date) }
 
-    context "regular 4 weeks" do
+    context "when passed the regular 4 weeks" do
       let(:df_date) { Date.new(2021, 2, 26) }
 
       it "returns a date 20 working days after" do

@@ -6,8 +6,8 @@ RSpec.describe ResultsPanelSelector do
   before { allow(legal_aid_application).to receive(:cfe_result).and_return(cfe_result) }
 
   describe ".call" do
-    context "V3 results" do
-      context "eligible no restrictions no policy disregards" do
+    describe "V3 results" do
+      context "when it is eligible, with no restrictions and no policy disregards" do
         let(:cfe_result) { create(:cfe_v3_result, :eligible) }
 
         it "returns the eligible partial name" do
@@ -15,7 +15,7 @@ RSpec.describe ResultsPanelSelector do
         end
       end
 
-      context "income_contribution_with no restrictions but with disregards" do
+      context "when it has income_contribution_with no restrictions but with disregards" do
         let(:cfe_result) { create(:cfe_v3_result, :with_income_contribution_required) }
 
         before do
@@ -29,8 +29,8 @@ RSpec.describe ResultsPanelSelector do
       end
     end
 
-    context "V4 results" do
-      context "eligible no restrictions no policy disregards" do
+    describe "V4 results" do
+      context "when it is eligible, with no restrictions and no policy disregards" do
         let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
         it "returns the eligible partial name" do
@@ -38,7 +38,7 @@ RSpec.describe ResultsPanelSelector do
         end
       end
 
-      context "partially_eligible with income_contribution no restrictions or disregards" do
+      context "when it is partially_eligible with income_contribution no restrictions or disregards" do
         let(:cfe_result) { create(:cfe_v4_result, :partially_eligible_with_income_contribution_required) }
 
         before do
@@ -51,7 +51,7 @@ RSpec.describe ResultsPanelSelector do
         end
       end
 
-      context "partially_eligible with capital_contribution no restrictions or disregards" do
+      context "when it is partially_eligible with capital_contribution no restrictions or disregards" do
         let(:cfe_result) { create(:cfe_v4_result, :partially_eligible_with_capital_contribution_required) }
 
         before do
@@ -64,7 +64,7 @@ RSpec.describe ResultsPanelSelector do
         end
       end
 
-      context "eligible with no restrictions or disregards, with extra employment information" do
+      context "when it is eligible with no restrictions or disregards, with extra employment information" do
         let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
         before do
@@ -78,7 +78,7 @@ RSpec.describe ResultsPanelSelector do
         end
       end
 
-      context "income_contribution_with no restrictions or disregards, with extra employment information" do
+      context "when it has income_contribution with no restrictions or disregards, with extra employment information" do
         let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
         before do
@@ -92,7 +92,7 @@ RSpec.describe ResultsPanelSelector do
         end
       end
 
-      context "partially_eligible with capital_contribution no restrictions or disregards, with extra employment information" do
+      context "when it is partially_eligible with capital_contribution no restrictions or disregards, with extra employment information" do
         let(:cfe_result) { create(:cfe_v4_result, :partially_eligible_with_capital_contribution_required) }
 
         before do
@@ -107,7 +107,7 @@ RSpec.describe ResultsPanelSelector do
       end
     end
 
-    context "eligible with no restrictions or disregards, with full employment details manually entered by the provider" do
+    context "when it is eligible with no restrictions or disregards, with full employment details manually entered by the provider" do
       let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
       before do
@@ -121,7 +121,7 @@ RSpec.describe ResultsPanelSelector do
       end
     end
 
-    context "income_contribution_with no restrictions or disregards, with full employment details manually entered by the provider" do
+    context "when it has income_contribution with no restrictions or disregards, with full employment details manually entered by the provider" do
       let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
       before do
@@ -135,7 +135,7 @@ RSpec.describe ResultsPanelSelector do
       end
     end
 
-    context "partially_eligible with capital_contribution no restrictions or disregards, with extra full employment details manually entered by the provider" do
+    context "when it is partially_eligible with capital_contribution no restrictions or disregards, with extra full employment details manually entered by the provider" do
       let(:cfe_result) { create(:cfe_v4_result, :partially_eligible_with_capital_contribution_required) }
 
       before do

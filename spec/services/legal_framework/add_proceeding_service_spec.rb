@@ -8,7 +8,7 @@ module LegalFramework
     let(:ccms_code) { "DA004" }
 
     describe "#call" do
-      context "correct params" do
+      context "when there are correct params" do
         let(:params) do
           {
             ccms_code:,
@@ -19,7 +19,7 @@ module LegalFramework
           expect { subject.call(**params) }.to change { legal_aid_application.proceedings.count }.by(1)
         end
 
-        context "proceedings already exist" do
+        context "and the proceedings already exist" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
 
           it "adds another proceeding type" do
@@ -33,7 +33,7 @@ module LegalFramework
           subject.call(**params)
         end
 
-        context "does not create scope_limitations for a proceeding" do
+        context "when a proceeding is created" do
           before do
             subject.call(**params)
           end
@@ -55,7 +55,7 @@ module LegalFramework
         end
       end
 
-      context "on failure" do
+      context "when it fails" do
         let(:params) do
           {
             ccms_code: nil,

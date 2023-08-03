@@ -56,7 +56,7 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context "calling API raises a Savon::SOAPFault error", vcr: { cassette_name: "benefit_check_service/service_error" } do
+    context "when calling the API raises a Savon::SOAPFault error", vcr: { cassette_name: "benefit_check_service/service_error" } do
       let(:last_name) { "SERVICEEXCEPTION" }
 
       it "captures error" do
@@ -69,7 +69,7 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context "calling API raises an unhandled error or StandardError" do
+    context "when calling the API raises an unhandled error or StandardError" do
       before do
         allow_any_instance_of(Savon::Client)
           .to receive(:call)

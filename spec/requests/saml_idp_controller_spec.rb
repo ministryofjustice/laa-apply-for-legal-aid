@@ -9,11 +9,11 @@ RSpec.describe SamlIdpController do
       allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(true)
     end
 
-    context "valid username and password in config/initializers/mock_saml.rb" do
+    context "when the username and password is in config/initializers/mock_saml.rb" do
       let(:email) { "test1@example.com" }
       let(:username) { "test1" }
 
-      context "Record for that provider exists in the database" do
+      context "when no Record for that provider exists in the database" do
         before { create(:provider, email:, username:) }
 
         it "renders the saml auth form with the encoded request" do
@@ -24,7 +24,7 @@ RSpec.describe SamlIdpController do
         end
       end
 
-      context "no record exists for that user in database" do
+      context "when no record exists for that user in database" do
         it "renders the saml auth form with the encoded request" do
           post saml_auth_path, params: login_params
           expect(response).to be_successful
@@ -33,7 +33,7 @@ RSpec.describe SamlIdpController do
       end
     end
 
-    context "user not in config/initializers/mock_saml.rb" do
+    context "when the user is not in config/initializers/mock_saml.rb" do
       let(:email) { "nobody@example.com" }
       let(:username) { "test1" }
 
@@ -44,7 +44,7 @@ RSpec.describe SamlIdpController do
       end
     end
 
-    context "password not as specified in config/initializers/mock_saml.rb" do
+    context "when the password was not as specified in config/initializers/mock_saml.rb" do
       let(:email) { "test1@example.com" }
       let(:username) { "test1" }
       let(:password) { "forgotten" }

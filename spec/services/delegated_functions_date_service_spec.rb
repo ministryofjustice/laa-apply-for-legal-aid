@@ -29,7 +29,7 @@ RSpec.describe DelegatedFunctionsDateService do
     end
 
     describe "sets the substantive_application_deadline_on date" do
-      context "DF are used on at least one proceeding type" do
+      context "when DF are used on at least one proceeding type" do
         let(:df_date) { Date.new(2021, 5, 10) }
         let(:reported_date) { Date.new(2021, 5, 13) }
         let(:expected_deadline) { Date.new(2021, 6, 8) }
@@ -40,7 +40,7 @@ RSpec.describe DelegatedFunctionsDateService do
         end
       end
 
-      context "no DF used on any proceeding type" do
+      context "when no DF used on any proceeding type" do
         let(:df_used?) { nil }
         let(:df_date) { nil }
         let(:reported_date) { nil }
@@ -56,12 +56,12 @@ RSpec.describe DelegatedFunctionsDateService do
       let(:scheduled_time1) { Time.zone.local(2021, 5, 30, 9, 0, 0) }
       let(:scheduled_time2) { Time.zone.local(2021, 5, 25, 9, 0, 0) }
 
-      context "no delegated functions on any proceeding type" do
+      context "when no delegated functions on any proceeding type" do
         let(:df_used?) { false }
         let(:df_date) { nil }
         let(:reported_date) { nil }
 
-        context "scheduled mail already exists" do
+        context "and a scheduled mail already exists" do
           before do
             create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1)
             create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2)
@@ -74,11 +74,11 @@ RSpec.describe DelegatedFunctionsDateService do
         end
       end
 
-      context "delegated functions on at least one proceeding type" do
+      context "when delegated functions on at least one proceeding type" do
         let(:expected_date1) { Time.zone.local(2021, 6, 1, 9, 0, 0) }
         let(:expected_date2) { Time.zone.local(2021, 6, 8, 9, 0, 0) }
 
-        context "scheduled mail already exists" do
+        context "and scheduled mail already exists" do
           before do
             create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1)
             create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2)
@@ -92,7 +92,7 @@ RSpec.describe DelegatedFunctionsDateService do
           end
         end
 
-        context "no scheduled mail already exists" do
+        context "when no scheduled mail already exists" do
           it "creates a new scheduled mail" do
             expect { subject }.to change(ScheduledMailing, :count).by(2)
             new_scheduled_mailings = ScheduledMailing.where(mailer_klass: "SubmitApplicationReminderMailer", legal_aid_application_id: laa.id)

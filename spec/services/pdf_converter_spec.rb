@@ -21,7 +21,7 @@ RSpec.describe PdfConverter do
     end
 
     describe "#call" do
-      context "original file is already a pdf" do
+      context "when original file is already a pdf" do
         it "does not convert the file" do
           expect(Libreconv).not_to receive(:convert)
           subject
@@ -32,7 +32,7 @@ RSpec.describe PdfConverter do
         end
       end
 
-      context "original file is not a pdf" do
+      context "when original file is not a pdf" do
         let(:file) { FileStruct.new("hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
 
         it "converts the file to pdf" do
@@ -49,7 +49,7 @@ RSpec.describe PdfConverter do
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
         end
 
-        context "when there are multiple uploaded files" do
+        context "and there are multiple uploaded files" do
           let(:attachment) { statement_of_case.legal_aid_application.attachments.create!(attachment_type: "statement_of_case", attachment_name: "statement_of_case_2") }
 
           it "converts the file to pdf" do
@@ -83,7 +83,7 @@ RSpec.describe PdfConverter do
     end
 
     describe "#call" do
-      context "original file is already a pdf" do
+      context "and original file is already a pdf" do
         it "does not convert the file" do
           expect(Libreconv).not_to receive(:convert)
           subject
@@ -94,7 +94,7 @@ RSpec.describe PdfConverter do
         end
       end
 
-      context "original file is not a pdf" do
+      context "and original file is not a pdf" do
         let(:file) { FileStruct.new("hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
 
         it "converts the file to pdf" do
@@ -111,7 +111,7 @@ RSpec.describe PdfConverter do
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
         end
 
-        context "when there are multiple uploaded files" do
+        context "and there are multiple uploaded files" do
           let(:attachment) { gateway_evidence.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence", attachment_name: "gateway_evidence_2") }
 
           it "converts the file to pdf" do

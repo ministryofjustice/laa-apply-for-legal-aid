@@ -45,11 +45,11 @@ RSpec.describe "SamlSessionsController" do
       stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_reponse, status:)
     end
 
-    context "staging or production" do
+    context "when on staging or production" do
       before { allow(HostEnv).to receive(:staging_or_production?).and_return(true) }
 
-      context "first time signing in" do
-        context "provider has the CCMS_Apply role" do
+      context "and it's the first time signing in" do
+        context "and the provider has the CCMS_Apply role" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
@@ -73,7 +73,7 @@ RSpec.describe "SamlSessionsController" do
           end
         end
 
-        context "provider does not have the CCMS_Apply role" do
+        context "and the provider does not have the CCMS_Apply role" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create(:provider, :created_by_devise, :without_ccms_apply_role, username:) }
@@ -96,7 +96,7 @@ RSpec.describe "SamlSessionsController" do
           end
         end
 
-        context "provider does not exist on Provider details api" do
+        context "and the provider does not exist on Provider details api" do
           let(:api_response) { raw_404_response }
           let(:status) { 404 }
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
@@ -117,7 +117,7 @@ RSpec.describe "SamlSessionsController" do
           end
         end
 
-        context "Provider details api is down" do
+        context "and the Provider details api is down" do
           let(:status) { 502 }
           let(:api_response) { blank_response }
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
@@ -129,7 +129,7 @@ RSpec.describe "SamlSessionsController" do
         end
       end
 
-      context "not first time signing in" do
+      context "and it's not the first time signing in" do
         let(:api_response) { raw_details_response }
         let(:status) { 200 }
         let(:provider) { create(:provider, :with_ccms_apply_role, username:) }
@@ -149,8 +149,8 @@ RSpec.describe "SamlSessionsController" do
         end
       end
 
-      context "test or development" do
-        context "first time signing in" do
+      context "when on test or development" do
+        context "and it's the first time signing in" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
@@ -174,7 +174,7 @@ RSpec.describe "SamlSessionsController" do
           end
         end
 
-        context "not first time signing in" do
+        context "and it's not the first time signing in" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create(:provider, :with_ccms_apply_role, username:) }

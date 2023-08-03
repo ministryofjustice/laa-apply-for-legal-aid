@@ -36,7 +36,7 @@ module Reports
           expect(subject.size).to eq 8
         end
 
-        context "undiscarded application" do
+        context "when it's an undiscarded application" do
           it "returns an array with the expected values" do
             travel_to(time) do
               fields = subject
@@ -52,7 +52,7 @@ module Reports
           end
         end
 
-        context "discarded application" do
+        context "when it's a discarded application" do
           before { application.discard! }
 
           it "returns an array with the expected values" do
@@ -70,7 +70,7 @@ module Reports
           end
         end
 
-        context "data begins with a vulnerable character" do
+        context "when the data begins with a vulnerable character" do
           before { provider.email = "=malicious_code" }
 
           it "returns the escaped text" do

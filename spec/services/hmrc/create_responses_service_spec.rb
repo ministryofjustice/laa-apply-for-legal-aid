@@ -36,34 +36,32 @@ RSpec.describe HMRC::CreateResponsesService do
       context "when HMRC_USE_DEV_MOCK is set to true" do
         let(:hmrc_use_dev_mock) { "true" }
 
-        context "the host is set to" do
-          before { allow(HostEnv).to receive(:environment).and_return(host) }
+        before { allow(HostEnv).to receive(:environment).and_return(host) }
 
-          context "production" do
-            let(:host) { :production }
+        context "and the host is set to production" do
+          let(:host) { :production }
 
-            it "creates two jobs to request the data and does not invoke the MockInterfaceResponseService" do
-              expect { call }.to change(HMRC::SubmissionWorker.jobs, :size).by(2)
-              expect(HMRC::MockInterfaceResponseService).not_to have_received(:call)
-            end
+          it "creates two jobs to request the data and does not invoke the MockInterfaceResponseService" do
+            expect { call }.to change(HMRC::SubmissionWorker.jobs, :size).by(2)
+            expect(HMRC::MockInterfaceResponseService).not_to have_received(:call)
           end
+        end
 
-          context "staging" do
-            let(:host) { :staging }
+        context "and the host is set to staging" do
+          let(:host) { :staging }
 
-            it "calls the MockInterfaceResponseService and creates no SubmissionWorker jobs" do
-              expect { call }.not_to change(HMRC::SubmissionWorker.jobs, :size)
-              expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
-            end
+          it "calls the MockInterfaceResponseService and creates no SubmissionWorker jobs" do
+            expect { call }.not_to change(HMRC::SubmissionWorker.jobs, :size)
+            expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
           end
+        end
 
-          context "uat" do
-            let(:host) { :uat }
+        context "and the host is set to uat" do
+          let(:host) { :uat }
 
-            it "calls the MockInterfaceResponseService and creates no SubmissionWorker jobs" do
-              expect { call }.not_to change(HMRC::SubmissionWorker.jobs, :size)
-              expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
-            end
+          it "calls the MockInterfaceResponseService and creates no SubmissionWorker jobs" do
+            expect { call }.not_to change(HMRC::SubmissionWorker.jobs, :size)
+            expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
           end
         end
       end

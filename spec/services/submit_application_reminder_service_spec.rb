@@ -22,7 +22,7 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
       expect { subject.send_email }.to change(ScheduledMailing, :count).by(2)
     end
 
-    context "sending the email" do
+    describe "sending the email" do
       let(:mail) { SubmitApplicationReminderMailer.notify_provider(application.id, application.provider.name, provider.email) }
 
       it "sends an email with the right parameters" do
@@ -37,7 +37,7 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
       end
     end
 
-    context "SubmitApplicationReminderMailer already exists" do
+    context "when SubmitApplicationReminderMailer already exists" do
       before { subject.send_email }
 
       it "adds two new mailer jobs" do

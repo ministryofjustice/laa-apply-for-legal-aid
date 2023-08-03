@@ -227,7 +227,7 @@ module Reports
         end
 
         describe "application and provider details" do
-          context "single proceedings" do
+          context "when there is a single proceeding" do
             it "returns the correct values" do
               expect(value_for("Firm name")).to eq "Legal beagles"
               expect(value_for("User name")).to eq "psr001"
@@ -249,7 +249,7 @@ module Reports
               expect(value_for("HMRC data")).to eq "No"
             end
 
-            context "DWP check result negative" do
+            context "and the DWP check result is negative" do
               let(:benefit_check_result_text) { "No" }
 
               it "generates Non-Passported" do
@@ -257,7 +257,7 @@ module Reports
               end
             end
 
-            context "Delegated functions not used" do
+            context "and Delegated functions were not used" do
               let(:legal_aid_application) { application_without_df }
 
               it "generates no" do
@@ -273,10 +273,10 @@ module Reports
               end
             end
 
-            context "in scope of laspo" do
+            context "when in scope of laspo" do
               before { legal_aid_application.update!(in_scope_of_laspo: laspo_answer) }
 
-              context "true" do
+              describe "true" do
                 let(:laspo_answer) { true }
 
                 it "populates with Yes" do
@@ -284,7 +284,7 @@ module Reports
                 end
               end
 
-              context "false" do
+              describe "false" do
                 let(:laspo_answer) { false }
 
                 it "populates with Yes" do
@@ -292,7 +292,7 @@ module Reports
                 end
               end
 
-              context "nil" do
+              describe "nil" do
                 let(:laspo_answer) { nil }
 
                 it "populates with Yes" do
@@ -302,7 +302,7 @@ module Reports
             end
           end
 
-          context "no lead proceeding specified" do
+          context "when no lead proceeding was specified" do
             before { legal_aid_application.lead_proceeding.update(lead_proceeding: false) }
 
             describe "chances of success" do
@@ -312,7 +312,7 @@ module Reports
             end
           end
 
-          context "multiple proceedings" do
+          context "when there are multiple proceedings" do
             before { setup_multiple_proceedings }
 
             let(:expected_proceeding_types) { "Child arrangements order (contact), Inherent jurisdiction high court injunction, Non-molestation order" }
@@ -325,8 +325,8 @@ module Reports
           end
         end
 
-        context "own home" do
-          context "with own home" do
+        describe "own home" do
+          context "when own home is set" do
             it "generates the expected values" do
               expect(value_for("Own home?")).to eq "mortgage"
               expect(value_for("Value")).to eq 876_200
@@ -335,7 +335,7 @@ module Reports
               expect(value_for("%age owned")).to eq 50
             end
 
-            context "own home not shared" do
+            context "when own home is not shared" do
               let(:shared_ownership_status) { "no_sole_owner" }
 
               it "generates values for home not shared" do
@@ -347,7 +347,7 @@ module Reports
               end
             end
 
-            context "home owned outright" do
+            context "when home owned outright" do
               let(:shared_ownership_status) { "no_sole_owner" }
               let(:own_home_status) { "owned_outright" }
 
@@ -362,8 +362,8 @@ module Reports
           end
         end
 
-        context "vehicle" do
-          context "no vehicle" do
+        describe "vehicle" do
+          context "when there is no vehicle" do
             it "generates blank fields" do
               expect(value_for("Vehicle?")).to eq "No"
               expect(value_for("Vehicle value")).to eq ""
@@ -374,7 +374,7 @@ module Reports
             end
           end
 
-          context "vehicle" do
+          context "when there is a vehicle" do
             let!(:vehicle) do
               create(:vehicle,
                      legal_aid_application:,
@@ -386,7 +386,7 @@ module Reports
             let(:purchase_date) { Date.new(2020, 1, 1) }
             let(:used_regularly) { true }
 
-            context "in regular use, no loan outstanding" do
+            context "and it's in regular use, no loan outstanding" do
               let(:payment_remaining) { 0 }
 
               it "generates the values" do
@@ -399,7 +399,7 @@ module Reports
               end
             end
 
-            context "not in regular use" do
+            context "and it's not in regular use" do
               let(:used_regularly) { false }
               let(:payment_remaining) { 0 }
 
@@ -413,7 +413,7 @@ module Reports
               end
             end
 
-            context "loan outstanding" do
+            context "and there is a loan outstanding" do
               let(:payment_remaining) { 4_566 }
 
               it "generates the values" do
@@ -427,8 +427,8 @@ module Reports
             end
           end
 
-          context "savings_amount" do
-            context "savings amount record does not exist" do
+          describe "savings_amount" do
+            context "when the savings amount record does not exist" do
               it "generates nos and blanks" do
                 legal_aid_application.update! savings_amount: nil
                 savings_amount_bool_attrs.each { |attr| expect(value_for(attr)).to eq "No" }
@@ -436,7 +436,7 @@ module Reports
               end
             end
 
-            context "savings amount record is all nils" do
+            context "when the savings amount record is all nils" do
               it "generates nos and blanks" do
                 legal_aid_application.update! savings_amount: create(:savings_amount, :all_nil)
                 savings_amount_bool_attrs.each { |attr| expect(value_for(attr)).to eq "No" }
@@ -444,7 +444,7 @@ module Reports
               end
             end
 
-            context "savings amount record is all zeros" do
+            context "when the savings amount record is all zeros" do
               it "generates Yes and zero for each attr" do
                 legal_aid_application.update! savings_amount: create(:savings_amount, :all_zero)
                 savings_amount_bool_attrs.each { |attr| expect(value_for(attr)).to eq "Yes" }
@@ -452,7 +452,7 @@ module Reports
               end
             end
 
-            context "savings amount record is populated" do
+            context "when the savings amount record is populated" do
               it "generates the correct values" do
                 savings_amount_bool_attrs.each { |attr| expect(value_for(attr)).to eq "Yes" }
                 expect(value_for("Current acct value")).to eq savings_amount.offline_current_accounts
@@ -468,8 +468,8 @@ module Reports
           end
         end
 
-        context "other_assets declaration" do
-          context "does not exist" do
+        describe "other_assets declaration" do
+          context "when it does not exist" do
             it "generates Nos and blanks" do
               legal_aid_application.update! other_assets_declaration: nil
               other_assets_bool_attrs.each { |attr| expect(value_for(attr)).to eq "No" }
@@ -477,7 +477,7 @@ module Reports
             end
           end
 
-          context "other assets declaration is all nils" do
+          context "when the other assets declaration is all nils" do
             it "generates Nos and blanks" do
               legal_aid_application.update! other_assets_declaration: create(:other_assets_declaration, :all_nil)
               other_assets_bool_attrs.each { |attr| expect(value_for(attr)).to eq "No" }
@@ -485,7 +485,7 @@ module Reports
             end
           end
 
-          context "other assets declaration is all zero" do
+          context "when the other assets declaration is all zero" do
             it "generates yes and zero" do
               legal_aid_application.update! other_assets_declaration: create(:other_assets_declaration, :all_zero)
               other_assets_bool_attrs.each { |attr| expect(value_for(attr)).to eq "Yes" }
@@ -493,7 +493,7 @@ module Reports
             end
           end
 
-          context "other assets declaration has values" do
+          context "when the other assets declaration has values" do
             it "generates the correct values" do
               other_assets_bool_attrs.each { |attr| expect(value_for(attr)).to eq "Yes" }
               expect(value_for("Valuable items value")).to eq other_assets_declaration.valuable_items_value
@@ -506,7 +506,7 @@ module Reports
           end
         end
 
-        context "restrictions" do
+        describe "restrictions" do
           context "without restrictions" do
             it "generates blanks" do
               expect(value_for("Restrictions?")).to eq "No"
@@ -523,8 +523,8 @@ module Reports
           end
         end
 
-        context "parties_mental_capacity" do
-          context "does not exist" do
+        describe "parties_mental_capacity" do
+          context "when it does not exist" do
             it "generates blanks" do
               legal_aid_application.update! parties_mental_capacity: nil
               expect(value_for("Parties can understand?")).to eq ""
@@ -532,14 +532,14 @@ module Reports
             end
           end
 
-          context "exists" do
+          context "when it exists" do
             it "generates the values" do
               expect(value_for("Parties can understand?")).to eq "Yes"
               expect(value_for("Ability to understand details")).to eq parties_mental_capacity.understands_terms_of_court_order_details
             end
           end
 
-          context "data begins with a vulnerable character" do
+          context "when the data begins with a vulnerable character" do
             before { firm.update!(name: "=malicious_code") }
 
             it "returns the escaped text" do
@@ -548,8 +548,8 @@ module Reports
           end
         end
 
-        context "domestic_abuse_summary" do
-          context "does not exist" do
+        describe "domestic_abuse_summary" do
+          context "when it does not exist" do
             it "generates blanks" do
               legal_aid_application.update! domestic_abuse_summary: nil
               expect(value_for("Warning letter sent?")).to eq ""
@@ -561,7 +561,7 @@ module Reports
             end
           end
 
-          context "exists" do
+          context "when it exists" do
             it "generates the values" do
               expect(value_for("Warning letter sent?")).to eq "Yes"
               expect(value_for("Warning letter details")).to eq domestic_abuse_summary.warning_letter_sent_details
@@ -572,7 +572,7 @@ module Reports
             end
           end
 
-          context "data begins with a vulnerable character" do
+          context "when the data begins with a vulnerable character" do
             before { firm.update!(name: "=malicious_code") }
 
             it "returns the escaped text" do
@@ -581,7 +581,7 @@ module Reports
           end
         end
 
-        context "HMRC data" do
+        describe "HMRC data" do
           context "when the applicant is unemployed" do
             it "returns the expected data" do
               expect(value_for("HMRC data")).to eq "No"

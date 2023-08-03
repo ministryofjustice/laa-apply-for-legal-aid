@@ -96,7 +96,7 @@ RSpec.describe AddressLookupService do
       service.__send__(:record_error, state, error)
     end
 
-    context "postocde is in a correct format" do
+    context "when the postcode is in a correct format" do
       let(:state) { :unsuccessful }
       let(:error) { StandardError.new "Resource x does not exist" }
       let(:postcode) { "SW109LO" }

@@ -29,7 +29,7 @@ RSpec.describe OauthSessionSaver do
   end
 
   describe ".get" do
-    context "a record with the key exists" do
+    context "when a record with the key exists" do
       before { redis.set(key, session.to_json) }
 
       it "returns the reconstituted session hash" do
@@ -37,7 +37,7 @@ RSpec.describe OauthSessionSaver do
       end
     end
 
-    context "no such record exists" do
+    context "when no such record exists" do
       it "returns empty array" do
         expect(described_class.get(SecureRandom.uuid)).to eq({})
       end

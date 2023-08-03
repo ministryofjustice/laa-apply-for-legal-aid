@@ -6,7 +6,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
   describe "#call" do
     subject { described_class.call(application) }
 
-    context "application has dwp result overriden" do
+    context "when the application has dwp result overriden" do
       let(:dwp_override) { create(:dwp_override, :with_evidence) }
       let(:application) { create(:legal_aid_application, dwp_override:) }
 
@@ -33,7 +33,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
       end
     end
 
-    context "application has section 8 proceedings" do
+    context "when the application has section 8 proceedings" do
       let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
 
       it "updates the required_document_categories with gateway_evidence" do
@@ -42,7 +42,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
       end
     end
 
-    context "application has dwp result overriden and section 8 proceedings" do
+    context "when the application has dwp result overriden and section 8 proceedings" do
       let(:dwp_override) { create(:dwp_override, :with_evidence) }
       let(:application) { create(:legal_aid_application, dwp_override:) }
       let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8, dwp_override:) }
@@ -53,7 +53,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
       end
     end
 
-    context "application has neither dwp result overriden nor section 8 proceedings" do
+    context "when the application has neither dwp result overriden nor section 8 proceedings" do
       let(:application) { create(:legal_aid_application) }
 
       it "updates the required_document_categories with an empty array" do
