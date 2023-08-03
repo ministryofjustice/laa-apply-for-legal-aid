@@ -7,6 +7,8 @@ FactoryBot.define do
     national_insurance_number { "JA123456D" }
     shared_benefit_with_applicant { false }
     legal_aid_application
+    student_finance { nil }
+    student_finance_amount { nil }
 
     trait :not_employed do
       employed { false }
