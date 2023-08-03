@@ -1106,6 +1106,7 @@ en:
         urls:
           latest_incident_details: date_client_told_incident
           opponent_name: opponent_individual
+          opponent_type: opponent_type
           has_other_opponent: has_other_opponent
           opponent_mental_capacity: opponents_mental_capacity
           domestic_abuse_summary: domestic_abuse_summary
