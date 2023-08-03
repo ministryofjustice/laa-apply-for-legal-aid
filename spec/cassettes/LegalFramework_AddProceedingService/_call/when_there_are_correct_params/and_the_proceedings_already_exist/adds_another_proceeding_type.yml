@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
+      - Faraday v2.7.10
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 02 Feb 2023 12:13:06 GMT
+      - Thu, 03 Aug 2023 11:25:43 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -40,16 +40,16 @@ http_interactions:
       - none
       Referrer-Policy:
       - strict-origin-when-cross-origin
-      Vary:
-      - Accept, Origin
       Etag:
       - W/"fbabf0efd65b63f03290a3f99682b0d4"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 7c697fda1b8d35d0a2d563b58daa9694
+      - 28cb9fc59292bd81e30f20fad585f2a4
       X-Runtime:
-      - '0.044535'
+      - '0.011134'
+      Vary:
+      - Accept, Origin
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -67,5 +67,5 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Thu, 02 Feb 2023 12:13:06 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Thu, 03 Aug 2023 11:25:43 GMT
+recorded_with: VCR 6.2.0
