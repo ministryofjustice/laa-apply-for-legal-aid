@@ -71,7 +71,7 @@
     color: govuk-colour("white");
   }
 }
-@media (min-width: 769px) {
+@media (width >= 769px) {
   .interruption-panel {
     padding: 60px;
   }

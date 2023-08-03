@@ -18,7 +18,7 @@ th.table-combine_right_if_narrow .table-hidden_right_title {
   padding: 0;
   font-size: 0;
 }
-@media (max-width: 555px) {
+@media (width <= 555px) {
   td.table-combine_right_if_narrow.narrow_555,
   td.table-combine_right_if_narrow.narrow_555 + td {
     display: block;
@@ -44,7 +44,7 @@ th.table-combine_right_if_narrow .table-hidden_right_title {
     }
   }
 }
-@media (max-width: 470px) {
+@media (width <= 470px) {
   td.table-combine_right_if_narrow.narrow_470,
   td.table-combine_right_if_narrow.narrow_470 + td {
     display: block;
@@ -67,7 +67,7 @@ th.table-combine_right_if_narrow .table-hidden_right_title {
     }
   }
 }
-@media (min-width: 350px) {
+@media (width >= 350px) {
   .govuk-table__cell--numeric {
     text-align: right;
   }
