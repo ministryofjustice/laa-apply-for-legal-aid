@@ -59,8 +59,8 @@
     }
   }
 
-  .govuk-radios__label:before,
-  & :after {
+  .govuk-radios__label::before,
+  & ::after {
     border-color: govuk-colour("black");
     color: govuk-colour("black");
     background-color: govuk-colour("white");
@@ -71,7 +71,7 @@
     color: govuk-colour("white");
   }
 }
-@media (min-width: 769px) {
+@media (width >= 769px) {
   .interruption-panel {
     padding: 60px;
   }
