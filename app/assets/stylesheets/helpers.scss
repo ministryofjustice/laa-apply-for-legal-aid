@@ -52,7 +52,7 @@
   counter-reset: list;
 }
 
-.app-counter:before {
+.app-counter::before {
   counter-increment: list;
   content: counter(list) ". ";
 }

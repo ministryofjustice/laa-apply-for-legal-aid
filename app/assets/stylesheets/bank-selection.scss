@@ -33,12 +33,12 @@
     }
   }
 
-  .govuk-radios__input + .govuk-radios__label:before {
+  .govuk-radios__input + .govuk-radios__label::before {
     top: 15px;
     left: 10px;
   }
 
-  .govuk-radios__input + .govuk-radios__label:after {
+  .govuk-radios__input + .govuk-radios__label::after {
     top: 25px;
     left: 20px;
   }

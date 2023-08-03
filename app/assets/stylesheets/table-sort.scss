@@ -65,8 +65,8 @@ td.sortable-cell {
   position: relative;
   padding-right: 20px;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: "";
     position: absolute;
     left: 4px;
@@ -75,13 +75,13 @@ td.sortable-cell {
     text-decoration: none;
   }
 
-  &:before {
+  &::before {
     top: 12px;
     border-top-width: 5px;
     border-top-color: #0b0c0c;
   }
 
-  &:after {
+  &::after {
     bottom: 12px;
     border-bottom-width: 5px;
     border-bottom-color: #0b0c0c;
@@ -89,27 +89,27 @@ td.sortable-cell {
 }
 
 .header-sort-asc .sort-direction-indicator {
-  &:after {
+  &::after {
     bottom: 6px;
     border-top-width: 0;
     border-bottom-width: 10px;
     border-bottom-color: #0b0c0c;
   }
 
-  &:before {
+  &::before {
     border-top: none;
   }
 }
 
 .header-sort-desc .sort-direction-indicator {
-  &:before {
+  &::before {
     top: 6px;
     border-top-width: 10px;
     border-bottom-width: 0;
     border-top-color: #0b0c0c;
   }
 
-  &:after {
+  &::after {
     border-bottom: none;
   }
 }
@@ -121,32 +121,32 @@ td.sortable-cell {
   }
 
   .js-sortable .sort-direction-indicator {
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       left: 6px;
       border-width: 6px;
     }
 
-    &:before {
+    &::before {
       top: 14px;
       border-top-width: 6px;
     }
 
-    &:after {
+    &::after {
       bottom: 15px;
       border-bottom-width: 6px;
     }
   }
 
   .header-sort-asc .sort-direction-indicator {
-    &:after {
+    &::after {
       bottom: 8px;
       border-bottom-width: 11px;
     }
   }
 
   .header-sort-desc .sort-direction-indicator {
-    &:before {
+    &::before {
       top: 8px;
       border-top-width: 11px;
     }
@@ -166,32 +166,32 @@ td.sortable-cell {
   }
 
   .js-sortable .sort-direction-indicator {
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       left: 6px;
       border-width: 6px;
     }
 
-    &:before {
+    &::before {
       top: 14px;
       border-top-width: 6px;
     }
 
-    &:after {
+    &::after {
       bottom: 15px;
       border-bottom-width: 6px;
     }
   }
 
   .header-sort-asc .sort-direction-indicator {
-    &:after {
+    &::after {
       bottom: 8px;
       border-bottom-width: 11px;
     }
   }
 
   .header-sort-desc .sort-direction-indicator {
-    &:before {
+    &::before {
       top: 8px;
       border-top-width: 11px;
     }

@@ -92,11 +92,11 @@
     background-color: #ffffff;
     font-size: 3.7mm;
 
-    & > dt:before {
+    & > dt::before {
       display: inline;
     }
 
-    & > dd:after {
+    & > dd::after {
       content: "";
       padding-right: 2em;
     }
