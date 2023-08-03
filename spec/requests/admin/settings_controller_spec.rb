@@ -40,7 +40,6 @@ RSpec.describe Admin::SettingsController do
           mock_true_layer_data: "true",
           allow_welsh_translation: "true",
           enable_ccms_submission: "true",
-          means_test_review_phase_one: "true",
           partner_means_assessment: "true",
           opponent_organisations: "true",
         },
@@ -56,7 +55,6 @@ RSpec.describe Admin::SettingsController do
       subject
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
-      expect(setting.means_test_review_phase_one?).to be(true)
       expect(setting.partner_means_assessment?).to be(true)
       expect(setting.opponent_organisations?).to be(true)
     end

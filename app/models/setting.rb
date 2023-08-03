@@ -23,10 +23,6 @@ class Setting < ApplicationRecord
     setting.alert_via_sentry
   end
 
-  def self.means_test_review_phase_one?
-    setting.means_test_review_phase_one
-  end
-
   def self.partner_means_assessment?
     setting.partner_means_assessment
   end
