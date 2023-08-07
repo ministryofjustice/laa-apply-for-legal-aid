@@ -40,7 +40,7 @@ Given("I have completed truelayer application with merits") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
-    :with_employed_applicant,
+    :with_applicant_with_student_loan,
     :with_non_passported_state_machine,
     :with_restrictions,
     :with_vehicle,
@@ -60,7 +60,6 @@ Given("I have completed truelayer application with merits") do
     :with_domestic_abuse_summary,
     :with_incident,
     :with_chances_of_success,
-    :with_irregular_income,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
     shared_ownership: "partner_or_ex_partner",

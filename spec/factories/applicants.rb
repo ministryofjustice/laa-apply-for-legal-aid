@@ -66,6 +66,11 @@ FactoryBot.define do
       end
     end
 
+    trait :with_student_finance do
+      student_finance { true }
+      student_finance_amount { 1234.56 }
+    end
+
     trait :langley_yorke do
       first_name { "Langley" }
       last_name { "Yorke" }
