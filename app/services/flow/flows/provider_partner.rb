@@ -70,7 +70,7 @@ module Flow
         partner_receives_state_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_partners_receives_state_benefits_path(application) },
           forward: lambda do |_application, receives_state_benefits|
-            receives_state_benefits ? :partner_state_benefits : :has_dependants
+            receives_state_benefits ? :partner_state_benefits : :partner_student_finances
           end,
         },
         partner_state_benefits: {
@@ -80,7 +80,7 @@ module Flow
         partner_add_other_state_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_partners_add_other_state_benefits_path(application) },
           forward: lambda do |_application, add_other_state_benefits|
-            add_other_state_benefits ? :partner_state_benefits : :has_dependants
+            add_other_state_benefits ? :partner_state_benefits : :partner_student_finances
           end,
         },
         partner_remove_state_benefits: {

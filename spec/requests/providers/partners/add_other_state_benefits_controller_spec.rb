@@ -90,7 +90,7 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
       let(:add_another_state_benefit) { "false" }
 
       it "redirects to the check_income_answers page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
       end
     end
 
