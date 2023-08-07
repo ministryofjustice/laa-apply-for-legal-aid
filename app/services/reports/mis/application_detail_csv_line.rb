@@ -18,7 +18,6 @@ module Reports
                :emergency_cost_requested,
                :gateway_evidence,
                :involved_children,
-               :irregular_incomes,
                :lead_proceeding,
                :office,
                :other_assets_declaration,
@@ -227,7 +226,7 @@ module Reports
 
       def income_details
         @line << yesno(cash_transactions.credits.any?)
-        @line << yesno(irregular_incomes.student_finance.any?)
+        @line << yesno(applicant.student_finance)
         @line << yesno(cash_transactions.debits.any?)
         @line << yesno(dependants.any?)
         @line << yesno(policy_disregards.present?)
