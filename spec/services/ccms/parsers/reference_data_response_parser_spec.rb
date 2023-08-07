@@ -99,6 +99,17 @@ module CCMS
           end
         end
       end
+
+      context "when the response fails and the case_ccms_reference is ERROR" do
+        let(:response_xml) { ccms_data_from_file "reference_data_response_error.xml" }
+
+        it "returns false" do
+          expect {
+            parser = described_class.new(expected_tx_id, response_xml)
+            parser.reference_id
+          }.to raise_error CCMS::CCMSError, "case_ccms_reference returned as ERROR"
+        end
+      end
     end
   end
 end

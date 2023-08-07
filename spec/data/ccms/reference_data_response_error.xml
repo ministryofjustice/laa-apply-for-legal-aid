@@ -1,0 +1,34 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <wsa:MessageID>urn:9591BC1056B811ECBFEBBD66E45C90AB</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2021-12-06T17:18:52.326Z</instra:tracking.compositeInstanceCreatedTime>
+      </wsa:ReferenceParameters>
+    </wsa:ReplyTo>
+    <wsa:FaultTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2021-12-06T17:18:52.326Z</instra:tracking.compositeInstanceCreatedTime>
+      </wsa:ReferenceParameters>
+    </wsa:FaultTo>
+  </env:Header>
+  <env:Body>
+    <ReferenceDataInqRS xmlns="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM" xmlns:msg="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM">
+      <header:HeaderRS xmlns:header="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <header:TransactionID>20190301030405123456</header:TransactionID>
+        <header:RequestDetails>
+          <header:TransactionRequestID>20190301030405123456</header:TransactionRequestID>
+          <header:Language>ENG</header:Language>
+          <header:UserRole>EXTERNAL</header:UserRole>
+        </header:RequestDetails>
+        <header:Status>
+          <header:Status>Error</header:Status>
+          <header:StatusFreeText>Check Log Id 202112061718522440982985733 for details</header:StatusFreeText>
+        </header:Status>
+      </header:HeaderRS>
+      <msg:Results>ERROR</msg:Results>
+    </ReferenceDataInqRS>
+  </env:Body>
+</env:Envelope>
