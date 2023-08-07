@@ -220,6 +220,10 @@ en:
               blank: Enter the opponent's first name
             last_name:
               blank: Enter the opponent's last name
+            name:
+              blank: Enter the organisation's name
+            organisation_type_ccms_code:
+              blank: Select the organisation's type
         application_merits_task/parties_mental_capacity:
           attributes:
             understands_terms_of_court_order:

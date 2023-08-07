@@ -48,6 +48,7 @@ private
   def new_url_fragment(name, status, application)
     name = "has_other_involved_children" if name.eql?(:children_application) && (status.eql?(:complete) || application.involved_children.any?)
     name = "has_other_opponent" if name.eql?(:opponent_name) && (status.eql?(:complete) || application.opponents.any?)
+    name = "opponent_type" if name.eql?(:opponent_name) && Setting.opponent_organisations?
     I18n.t("providers.merits_task_lists.task_list_item.urls.#{name}")
   end
 
@@ -59,6 +60,7 @@ private
   end
 
   def display_new_page?(legal_aid_application, task_name)
+    return false if Setting.opponent_organisations? && task_name.eql?(:opponent_name)
     return false unless %i[children_application opponent_name].include?(task_name)
 
     [

@@ -15,5 +15,13 @@ module ApplicationMeritsTask
     def ccms_opponent_relationship_to_case
       "Opponent"
     end
+
+    def full_name
+      name
+    end
+
+    def type
+      "Organisation"
+    end
   end
 end

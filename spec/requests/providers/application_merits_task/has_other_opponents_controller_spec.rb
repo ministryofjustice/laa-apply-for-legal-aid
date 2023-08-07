@@ -16,16 +16,25 @@ module Providers
       describe "show: GET /providers/applications/:legal_aid_application_id/has_other_opponents" do
         subject(:get_has_other) { get providers_legal_aid_application_has_other_opponent_path(application) }
 
-        before { create(:opponent, legal_aid_application: application) }
+        before do
+          create(:opponent, legal_aid_application: application)
+          create(:opponent, :for_organisation, organisation_name: "Mid Beds Council", organisation_ccms_code: "LA", organisation_description: "Local Authority", legal_aid_application: application)
+        end
 
         it "returns success" do
           get_has_other
           expect(response).to have_http_status(:ok)
         end
 
+        it "displays the opponent organisation" do
+          get_has_other
+          expect(response.body).to include("Mid Beds Council")
+          expect(response.body).to include("Local Authority")
+        end
+
         it "displays the do you want to add more page" do
           get_has_other
-          expect(response.body).to include("You have added 1 opponent")
+          expect(response.body).to include("You have added 2 opponents")
           expect(response.body).to include("Do you need to add another opponent?")
         end
       end

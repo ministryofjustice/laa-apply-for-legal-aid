@@ -20,6 +20,10 @@ module ApplicationMeritsTask
              :ccms_relationship_to_case,
              :ccms_child?,
              :ccms_opponent_relationship_to_case,
+             :name,
+             :ccms_code,
+             :description,
+             :type,
              to: :opposable
   end
 end

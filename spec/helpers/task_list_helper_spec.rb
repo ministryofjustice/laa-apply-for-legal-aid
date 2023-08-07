@@ -67,5 +67,103 @@ RSpec.describe TaskListHelper do
                                      ccms_code: :DA001)).to eq expected
       end
     end
+
+    context "with opponent" do
+      context "when opponent_organisations flag is set to true" do
+        before do
+          allow(Setting).to receive(:opponent_organisations?).and_return(true)
+        end
+
+        context "with no opponents added" do
+          let(:expected) do
+            <<~RESULT
+              <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a aria_describedby="opponent_name-status" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/opponent_type?locale=en">Opponents</a>
+                </span>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="opponent_name__status">Not started</strong>
+              </li>
+            RESULT
+          end
+          let(:opponent) { create(:opponent, :for_organisation, legal_aid_application:) }
+
+          it "returns a link" do
+            expect(helper.task_list_item(name: :opponent_name,
+                                         status: :not_started,
+                                         legal_aid_application:,
+                                         ccms_code: nil)).to eq expected
+          end
+        end
+
+        context "with an opponent already added" do
+          let(:expected) do
+            <<~RESULT
+              <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a aria_describedby="opponent_name-status" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/has_other_opponent?locale=en">Opponents</a>
+                </span>
+                <strong class="govuk-tag app-task-list__tag" id="opponent_name__status">Completed</strong>
+              </li>
+            RESULT
+          end
+
+          it "returns a link" do
+            create(:opponent, :for_organisation, legal_aid_application:)
+            expect(helper.task_list_item(name: :opponent_name,
+                                         status: :complete,
+                                         legal_aid_application:,
+                                         ccms_code: nil)).to eq expected
+          end
+        end
+      end
+
+      context "when opponent_organisations flag is set to false" do
+        before do
+          allow(Setting).to receive(:opponent_organisations?).and_return(false)
+        end
+
+        context "with no opponents added" do
+          let(:expected) do
+            <<~RESULT
+              <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a aria_describedby="opponent_name-status" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/opponent_individuals/new?locale=en">Opponents</a>
+                </span>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="opponent_name__status">Not started</strong>
+              </li>
+            RESULT
+          end
+          let(:opponent) { create(:opponent, :for_organisation, legal_aid_application:) }
+
+          it "returns a link" do
+            expect(helper.task_list_item(name: :opponent_name,
+                                         status: :not_started,
+                                         legal_aid_application:,
+                                         ccms_code: nil)).to eq expected
+          end
+        end
+
+        context "with an opponent already added" do
+          let(:expected) do
+            <<~RESULT
+              <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a aria_describedby="opponent_name-status" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/has_other_opponent?locale=en">Opponents</a>
+                </span>
+                <strong class="govuk-tag app-task-list__tag" id="opponent_name__status">Completed</strong>
+              </li>
+            RESULT
+          end
+
+          it "returns a link" do
+            create(:opponent, :for_individual, legal_aid_application:)
+            expect(helper.task_list_item(name: :opponent_name,
+                                         status: :complete,
+                                         legal_aid_application:,
+                                         ccms_code: nil)).to eq expected
+          end
+        end
+      end
+    end
   end
 end

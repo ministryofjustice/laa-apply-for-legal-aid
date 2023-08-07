@@ -244,5 +244,17 @@ Feature: Merits task list
     When I choose a 'An individual' radio button
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent's name"
-    # TODO: this feature should be extended when AP-4301 is complete
-    # to include when a user choses to add an organisation opponent
+    When I fill "First Name" with "John"
+    And I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page showing "You have added 1 opponent"
+    When I choose "Yes"
+    When I click 'Save and continue'
+    Then I should be on a page showing "Is the opponent an individual or an organisation?"
+    When I choose a 'An organisation' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Opponent"
+    When I fill "Name" with "Central Beds Council"
+    Then I select an organisation type 'Local Authority'
+    When I click 'Save and continue'
+    Then I should be on a page showing "You have added 2 opponents"

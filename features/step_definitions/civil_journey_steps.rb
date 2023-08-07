@@ -1119,6 +1119,10 @@ Then(/^I select an address '(.*)'$/) do |address|
   select(address, from: "address_selection[lookup_id]")
 end
 
+Then(/^I select an organisation type '(.*)'$/) do |type|
+  select(type, from: "application-merits-task-opponent-organisation-type-ccms-code-field")
+end
+
 Then("I am on the application confirmation page") do
   expect(page).to have_content("We've shared your application with your client")
 end
