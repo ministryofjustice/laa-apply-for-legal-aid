@@ -1,6 +1,8 @@
 module Providers
   module Partners
     class StudentFinancesController < ProviderBaseController
+      prefix_step_with :partner
+
       def show
         @receives_student_finance = student_finance?
         @form = ::Partners::StudentFinanceForm.new(model: partner)
@@ -11,7 +13,7 @@ module Providers
 
         if @form.save
           remove_student_finance_amount unless student_finance?
-          go_forward
+          go_forward unless save_continue_or_draft(@form)
         else
           render :show
         end

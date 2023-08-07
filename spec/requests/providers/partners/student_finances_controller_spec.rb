@@ -98,20 +98,20 @@ RSpec.describe Providers::Partners::StudentFinancesController do
       context "when the application is using the bank upload journey" do
         let(:legal_aid_application) { create(:legal_aid_application, :without_open_banking_consent, :with_applicant_and_partner) }
 
-        it "redirects to the regular outgoings page", pending: "to be added when page is built" do
+        it "redirects to the has dependants page" do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_partners_regular_outgoings_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
         end
       end
 
       context "when the application is not using the bank upload journey" do
-        it "redirects to the identify types of outgoings page", pending: "to be added when page is built" do
+        it "redirects to the has dependants page" do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_partners_identify_types_of_outgoing_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
         end
       end
     end
@@ -138,7 +138,7 @@ RSpec.describe Providers::Partners::StudentFinancesController do
         request
 
         expect(page).to have_error_message(
-          "Select yes if your client receives student finance",
+          "Select yes if your partner receives student finance",
         )
       end
     end

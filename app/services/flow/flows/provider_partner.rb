@@ -88,6 +88,10 @@ module Flow
             partner_has_any_state_benefits ? :partner_add_other_state_benefits : :partner_receives_state_benefits
           end,
         },
+        partner_student_finances: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
+          forward: :has_dependants,
+        },
         partner_full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
           forward: :partner_receives_state_benefits,

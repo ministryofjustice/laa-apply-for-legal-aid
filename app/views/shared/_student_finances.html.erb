@@ -1,5 +1,5 @@
 <%= form_with(model: @form,
-              url: providers_legal_aid_application_means_student_finance_path,
+              url:,
               method: :patch, local: true) do |form| %>
 
   <%= page_template page_title: t(".page_title", individual:), form:, template: :basic do %>
@@ -22,6 +22,6 @@
       <% end %>
       <%= form.govuk_radio_button(:student_finance, false, label: { text: t("generic.no") }, checked: @receives_student_finance == false) %>
     <% end %>
-    <%= next_action_buttons(form:) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
