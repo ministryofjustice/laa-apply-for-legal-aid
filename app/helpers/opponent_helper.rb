@@ -1,4 +1,4 @@
-module OpponentUrlHelper
+module OpponentHelper
   def opponent_url(type, *)
     url = case type
           when "Individual"
@@ -9,5 +9,9 @@ module OpponentUrlHelper
             raise "type #{type} not supported"
           end
     Rails.application.routes.url_helpers.send(url, *)
+  end
+
+  def opponent_type_description(opponent)
+    opponent.type == "Individual" ? opponent.type : opponent.description
   end
 end

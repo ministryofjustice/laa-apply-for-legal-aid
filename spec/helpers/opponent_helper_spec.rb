@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe OpponentUrlHelper do
+RSpec.describe OpponentHelper do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:individual_opponent) { create(:opponent, :for_individual, legal_aid_application:) }
   let(:organisation_opponent) { create(:opponent, :for_organisation, legal_aid_application:) }
