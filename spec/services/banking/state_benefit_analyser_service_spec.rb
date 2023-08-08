@@ -46,7 +46,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
       end
     end
 
-    context "when the DWP payment for this applicant with recognised code" do
+    context "when the DWP payment for this applicant has a recognised code" do
       context "and there is an included benefit" do
         let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "010101010101-CHB", bank_account: bank_account1) }
 
