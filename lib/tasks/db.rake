@@ -20,8 +20,8 @@ namespace :db do
   task import_to_uat: :environment do
     raise(ArgumentError, "Cannot construct DB connection string") if build_postgres_url.length < 25
 
-    drop_existing_schema = "PGOPTIONS='--client-min-messages=warning' psql -q  #{build_postgres_url} -c 'drop schema public cascade'"
-    create_new_schema = "PGOPTIONS='--client-min-messages=warning' psql -q  #{build_postgres_url} -c 'create schema public'"
+    drop_existing_schema = "PGOPTIONS='--client_min_messages=warning' psql -q  #{build_postgres_url} -c 'drop schema public cascade'"
+    create_new_schema = "PGOPTIONS='--client_min_messages=warning' psql -q  #{build_postgres_url} -c 'create schema public'"
     restore_anonymised_database = "psql #{build_postgres_url} -f ./tmp/anonymised_db.sql"
 
     `#{drop_existing_schema}`
