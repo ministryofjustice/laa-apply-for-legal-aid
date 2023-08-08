@@ -3,11 +3,11 @@ require "rails_helper"
 module CCMS
   module Parsers
     RSpec.describe CaseAddStatusResponseParser, :ccms do
-      context "successful response" do
+      context "when the response is successful" do
         describe "#success?" do
           let(:expected_tx_id) { "20190301030405123456" }
 
-          context "normal success response" do
+          describe "normal success response" do
             let(:response_xml) { ccms_data_from_file "case_add_status_response.xml" }
 
             it "extracts the status" do
@@ -39,7 +39,7 @@ module CCMS
             end
           end
 
-          context "case already submitted response" do
+          context "when a case already submitted response is received" do
             let(:response_xml) { ccms_data_from_file "case_add_status_response_already_submitted.xml" }
 
             describe "#success" do
@@ -53,7 +53,7 @@ module CCMS
         end
       end
 
-      context "response where case not yet ready" do
+      context "when the case not yet ready response is received" do
         let(:response_xml) { ccms_data_from_file "case_add_status_response_user_authenticated.xml" }
         let(:expected_tx_id) { "20190301030405123456" }
 

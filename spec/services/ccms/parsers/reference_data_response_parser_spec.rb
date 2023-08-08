@@ -6,7 +6,7 @@ module CCMS
       let(:expected_tx_id) { "20190301030405123456" }
       let(:expected_reference_number) { "300000135140" }
 
-      context "successful response" do
+      context "when the successful is response" do
         let(:response_xml) { ccms_data_from_file "reference_data_response.xml" }
 
         describe "#reference_id" do
@@ -40,7 +40,7 @@ module CCMS
         end
       end
 
-      context "failed response with message" do
+      context "when the response fails with message" do
         let(:response_xml) { ccms_data_from_file "reference_data_response_failure.xml" }
 
         describe "#success" do
@@ -60,7 +60,7 @@ module CCMS
         end
       end
 
-      context "failed response without message" do
+      context "when the response fails without message" do
         let(:response_xml) { ccms_data_from_file "reference_data_response_without_status_free_text.xml" }
 
         describe "#success" do
@@ -80,7 +80,7 @@ module CCMS
         end
       end
 
-      context "failed response - server side exception" do
+      context "when the response fails with a server side exception" do
         let(:response_xml) { ccms_data_from_file "reference_data_response_exception.xml" }
 
         describe "#success" do

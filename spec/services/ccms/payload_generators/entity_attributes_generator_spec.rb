@@ -12,9 +12,9 @@ module CCMS
       let(:xml) { double Nokogiri::XML::Builder }
       let(:options) { {} }
 
-      context "private methods" do
+      describe "private methods" do
         describe "#extract_response_value" do
-          context "response_type is text, number, boolean" do
+          context "when the response_type is text, number, boolean" do
             it "returns config value" do
               config = {
                 value: 10,
@@ -38,7 +38,7 @@ module CCMS
             }.to raise_error CCMS::CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: numeric"
           end
 
-          context "raises exception" do
+          context "when an exception is raised" do
             before do
               allow_any_instance_of(described_class).to receive(:extract_raw_value).and_raise(TypeError, "type error")
             end

@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
-      context "XML request" do
+      describe "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:firm) { create(:firm, name: "Firm1") }
         let(:office) { create(:office, firm:) }

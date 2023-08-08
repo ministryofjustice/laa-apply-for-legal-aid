@@ -47,37 +47,15 @@ RSpec/AnyInstance:
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
 
-# Offense count: 465
+# Offense count: 333
 # Configuration parameters: Prefixes, AllowedPatterns.
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/services/ccms/attribute_configuration_spec.rb'
-    - 'spec/services/ccms/attribute_value_generator_spec.rb'
-    - 'spec/services/ccms/manual_review_determiner_spec.rb'
-    - 'spec/services/ccms/parsers/applicant_add_response_parser_spec.rb'
-    - 'spec/services/ccms/parsers/applicant_search_response_parser_spec.rb'
-    - 'spec/services/ccms/parsers/case_add_response_parser_spec.rb'
-    - 'spec/services/ccms/parsers/case_add_status_response_parser_spec.rb'
-    - 'spec/services/ccms/parsers/document_id_response_parser_spec.rb'
-    - 'spec/services/ccms/parsers/reference_data_response_parser_spec.rb'
-    - 'spec/services/ccms/payload_generators/entity_attributes_generator_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_additional_property_attributes_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_attributes_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_benefits_attrs_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_dependant_child_attributes_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_entities_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_variable_attributes_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-    - 'spec/services/ccms/submitters/add_applicant_service_spec.rb'
-    - 'spec/services/ccms/submitters/add_case_service_spec.rb'
-    - 'spec/services/ccms/submitters/check_applicant_status_service_spec.rb'
-    - 'spec/services/ccms/submitters/check_case_status_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_applicant_reference_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_case_reference_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
-    - 'spec/services/ccms/submitters/upload_documents_service_spec.rb'
-
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).

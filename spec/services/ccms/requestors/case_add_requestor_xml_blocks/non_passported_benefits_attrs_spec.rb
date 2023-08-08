@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
-      context "XML request" do
+      describe "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:proceeding_type) { legal_aid_application.application_proceeding_types.first.proceeding_type }
         let(:firm) { create(:firm, name: "Firm1") }
@@ -40,7 +40,7 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let(:applicant) { legal_aid_application.applicant }
 
-        context "boolean attributes" do
+        describe "boolean attributes" do
           # these are all currently coded as FALSE until such time as we can determine which benefits are received
           it "generates the attribute blocks as false" do
             boolean_benefit_attrs.each do |attr_name|
@@ -51,7 +51,7 @@ module CCMS
           end
         end
 
-        context "value_attributes" do
+        describe "value_attributes" do
           # These are all omitted until such time sa we can determine which benefits are received
 
           it "omits all attributes" do

@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
-      context "XML request" do
+      describe "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:firm) { create(:firm, name: "Firm1") }
         let(:office) { create(:office, firm:) }
@@ -25,7 +25,7 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let(:dependants) { legal_aid_application.dependants.all }
 
-        context "non-passported" do
+        describe "non-passported" do
           let(:legal_aid_application) do
             create(:legal_aid_application,
                    :with_everything,
@@ -46,8 +46,8 @@ module CCMS
             let!(:younger_child) { create(:dependant, :under15, legal_aid_application:, number: 1, has_income: false, assets_value: 1_000) }
             let!(:older_child) { create(:dependant, :child16_to18, legal_aid_application:, number: 2, has_income: true, assets_value: 0) }
 
-            context "variable attributes" do
-              context "attribute CLI_RES_PER_INPUT_T_12WP3_1A - Person residing: name" do
+            context "and variable attributes" do
+              describe "attribute CLI_RES_PER_INPUT_T_12WP3_1A - Person residing: name" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_T_12WP3_1A") }
                 let(:sorted_blocks) { blocks.sort { |a, b| a.css("ResponseValue").text <=> b.css("ResponseValue").text } }
 
@@ -63,7 +63,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_30A - Person residing: Employed?" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_30A - Person residing: Employed?" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_30A") }
 
                 it "only generates a block for the adult_dependants" do
@@ -75,7 +75,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_31A - Dependant: receive their own income?" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_31A - Dependant: receive their own income?" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_31A") }
 
                 it "generates a block only for adult dependants" do
@@ -87,14 +87,14 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_T_12WP3_17A - Person residing: relationship to client" do
+              describe "attribute CLI_RES_PER_INPUT_T_12WP3_17A - Person residing: relationship to client" do
                 before do
                   legal_aid_application.dependants.map(&:destroy!)
                   create(:dependant, legal_aid_application:, date_of_birth: dob, relationship:)
                   legal_aid_application.reload
                 end
 
-                context "adult_relative" do
+                context "when adult_relative" do
                   let(:relationship) { "adult_relative" }
                   let(:dob) { 22.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_T_12WP3_17A") }
@@ -108,7 +108,7 @@ module CCMS
                   end
                 end
 
-                context "child 15 or less" do
+                context "when child 15 or less" do
                   let(:relationship) { "child_relative" }
                   let(:dob) { 14.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_T_12WP3_17A") }
@@ -118,7 +118,7 @@ module CCMS
                   end
                 end
 
-                context "child 16 or more" do
+                context "when child 16 or more" do
                   let(:relationship) { "child_relative" }
                   let(:dob) { 17.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_T_12WP3_17A") }
@@ -129,7 +129,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_35A - Person residing: entitled to claim benefits?" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_35A - Person residing: entitled to claim benefits?" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_35A") }
 
                 it "only produces a block for adult relatives" do
@@ -142,12 +142,12 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_19A - Person residing: Capital over £8000?" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_19A - Person residing: Capital over £8000?" do
                 before { dependants.each { |dep| dep.update!(assets_value: value) } }
 
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_19A") }
 
-                context "all dependants have over £8,000 of assets" do
+                context "when all dependants have over £8,000 of assets" do
                   let(:value) { 8_000.01 }
 
                   it "codes all blocks to true" do
@@ -155,7 +155,7 @@ module CCMS
                   end
                 end
 
-                context "all dependants have less than £8,000 in assets" do
+                context "when all dependants have less than £8,000 in assets" do
                   let(:value) { 7_999.99 }
 
                   it "codes all blocks to false" do
@@ -164,7 +164,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_21A - Dependant: Relationship is child aged 15 and under" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_21A - Dependant: Relationship is child aged 15 and under" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_21A") }
 
                 it "is true for the younger child" do
@@ -178,7 +178,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_23A - Person Residing: The child receives their own income?" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_23A - Person Residing: The child receives their own income?" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_23A") }
 
                 it "is false for the younger child without income" do
@@ -192,7 +192,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_24A - Dependant: Relationship is child aged 16 and over" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_24A - Dependant: Relationship is child aged 16 and over" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_24A") }
 
                 it "is false for the younger child" do
@@ -206,12 +206,12 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult" do
+              describe "attribute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_B_12WP3_28A") }
 
                 before { dependants.each { |dep| dep.update!(relationship:) } }
 
-                context "all dependants are children" do
+                context "when all dependants are children" do
                   let(:relationship) { "child_relative" }
 
                   it "returns false for all blocks" do
@@ -219,7 +219,7 @@ module CCMS
                   end
                 end
 
-                context "all dependants are adults" do
+                context "when all dependants are adults" do
                   let(:relationship) { "adult_relative" }
 
                   it "returns true for all blocks" do
@@ -228,7 +228,7 @@ module CCMS
                 end
               end
 
-              context "attribute CLI_RES_PER_INPUT_D_12WP3_3A - Person residing: DOB" do
+              describe "attribute CLI_RES_PER_INPUT_D_12WP3_3A - Person residing: DOB" do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_D_12WP3_3A") }
 
                 before do
@@ -247,7 +247,7 @@ module CCMS
               end
             end
 
-            context "hard coded attributes" do
+            describe "hard coded attributes" do
               let(:hard_coded_attrs) do
                 [
                   # key for XmlExtractor xpath, attribute name, response type, user_defined?, expected_value

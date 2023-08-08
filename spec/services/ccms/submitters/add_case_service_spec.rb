@@ -44,7 +44,7 @@ module CCMS
         allow_any_instance_of(CCMS::Requestors::CaseAddRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
-      context "operation successful" do
+      context "when the operation is successful" do
         it "sets state to case_submitted" do
           subject.call
           expect(submission.aasm_state).to eq "case_submitted"
@@ -55,7 +55,7 @@ module CCMS
           expect(submission.case_add_transaction_id).to eq "20190301030405123456"
         end
 
-        context "there are documents to upload" do
+        context "and there are documents to upload" do
           let(:submission) { create(:submission, :document_ids_obtained, legal_aid_application:) }
 
           it "writes a history record" do
@@ -84,7 +84,7 @@ module CCMS
           end
         end
 
-        context "there are no documents to upload" do
+        context "and there are no documents to upload" do
           it "writes a history record" do
             expect { subject.call }.to change(SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "applicant_ref_obtained"
@@ -111,8 +111,8 @@ module CCMS
         end
       end
 
-      context "operation in error" do
-        context "error when adding a case" do
+      context "when the operation is unsuccessful" do
+        context "and an error is raised when adding a case" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do
@@ -143,7 +143,7 @@ module CCMS
           end
         end
 
-        context "unsuccessful response from CCMS adding a case" do
+        context "when there is an unsuccessful response from CCMS adding a case" do
           let(:response_body) { ccms_data_from_file "case_add_response_failure.xml" }
 
           before do
