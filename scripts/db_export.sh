@@ -34,7 +34,7 @@ Do you care about the current state of your dev DB? read on, otherwise skip to s
    pg_dump apply_for_legal_aid_dev > ~/Downloads/local_dev_apply_db.sql
 
 2. Delete the current, local database
-   PGOPTIONS='--client-min-messages=warning' psql -q -d apply_for_legal_aid_dev -c "drop schema public cascade" -c "create schema public"
+   PGOPTIONS='--client_min_messages=warning' psql -q -d apply_for_legal_aid_dev -c "drop schema public cascade" -c "create schema public"
 
 3. Restore the database
    psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/$environment.anon.sql && rails db:environment:set RAILS_ENV=development
