@@ -1,29 +1,33 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col"><%= t(".applicant_name") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".application_ref") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".ccms_ref_html") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".provider_firm") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".provider_username") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".submission_date") %></th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <% @applications.each do |application| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell case-full-name"><%= application.applicant_full_name || t("generic.undefined") %></td>
-              <td class="govuk-table__cell case-reference-number"><%= application.application_ref %></td>
-              <td class="govuk-table__cell case-reference-number"><%= application.ccms_submission.case_ccms_reference %></td>
-              <td class="govuk-table__cell case-reference-number"><%= application.provider.firm.name %></td>
-              <td class="govuk-table__cell case-reference-number"><%= application.provider.username %></td>
-              <td class="govuk-table__cell"><%= l(application.ccms_submission.created_at.to_date, format: :long_date) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+
+      <%= govuk_table do |table|
+            table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+
+            table.with_head do |head|
+              head.with_row do |row|
+                row.with_cell(text: t(".applicant_name"))
+                row.with_cell(text: t(".application_ref"))
+                row.with_cell(text: t(".ccms_ref_html"))
+                row.with_cell(text: t(".provider_firm"))
+                row.with_cell(text: t(".provider_username"))
+                row.with_cell(text: t(".submission_date"))
+              end
+            end
+
+            table.with_body do |body|
+              @applications.each do |application|
+                body.with_row do |row|
+                  row.with_cell(text: application.applicant_full_name || t("generic.undefined"))
+                  row.with_cell(text: application.application_ref)
+                  row.with_cell(text: application.ccms_submission.case_ccms_reference)
+                  row.with_cell(text: application.provider.firm.name)
+                  row.with_cell(text: application.provider.username)
+                  row.with_cell(text: l(application.ccms_submission.created_at.to_date, format: :long_date))
+                end
+              end
+            end
+          end %>
 
       <%= render "shared/partials/pagination", pagy: @pagy %>
 

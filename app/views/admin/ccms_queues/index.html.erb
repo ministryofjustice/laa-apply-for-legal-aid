@@ -1,32 +1,42 @@
-<h1 class="govuk-heading-xl"><%= t(".page_title") %></h1>
+<%= page_template(
+      page_title: t(".page_title"),
+      back_link: :none,
+    ) %>
 
 <% if @in_progress.empty? %>
   <h2 class="govuk-heading-m">Queue is empty</h2>
 <% else %>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-visually-hidden"><%= t(".page_title") %></caption>
-        <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col"><%= t(".references") %></th>
-          <th class="govuk-table__header" scope="col"><%= t(".state") %></th>
-          <th class="govuk-table__header" scope="col"><%= t(".created_at") %></th>
-          <th class="govuk-table__header" scope="col"><%= t(".state") %></th>
-        </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-        <% @in_progress.each do |submission| %>
-          <% application = submission.legal_aid_application %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell case-reference-number"><%= link_to_accessible("#{submission.case_ccms_reference}, (#{application.application_ref})", admin_ccms_queue_path(submission.id)) %></td>
-            <td class="govuk-table__cell case-full-name"><%= submission.aasm_state %></td>
-            <td class="govuk-table__cell"><%= l(application.created_at, format: :long_date_time) %></td>
-            <td class="govuk-table__cell"><%= t(".sidekiq.#{submission.sidekiq_running?}") %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+
+      <%= govuk_table do |table|
+            table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".page_title"))
+
+            table.with_head do |head|
+              head.with_row do |row|
+                row.with_cell(text: t(".references"))
+                row.with_cell(text: t(".state"))
+                row.with_cell(text: t(".created_at"))
+                row.with_cell(text: t(".state"))
+              end
+            end
+
+            table.with_body do |body|
+              @in_progress.each do |submission|
+                body.with_row do |row|
+                  row.with_cell do
+                    govuk_link_to("#{submission.case_ccms_reference}, (#{submission.legal_aid_application.application_ref})", admin_ccms_queue_path(submission.id))
+                  end
+                  row.with_cell(text: submission.aasm_state)
+                  row.with_cell(text: l(submission.legal_aid_application.created_at, format: :long_date_time))
+                  row.with_cell(text: t(".sidekiq.#{submission.sidekiq_running?}"))
+                end
+              end
+            end
+          end %>
+
     </div>
   </div>
+
 <% end %>
