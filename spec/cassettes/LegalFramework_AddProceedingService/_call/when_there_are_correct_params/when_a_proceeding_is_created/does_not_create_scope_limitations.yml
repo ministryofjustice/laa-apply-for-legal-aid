@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v2.7.10
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,11 +21,11 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 19 Jul 2022 11:27:56 GMT
+      - Thu, 03 Aug 2023 11:28:42 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '1310'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -40,22 +40,22 @@ http_interactions:
       - none
       Referrer-Policy:
       - strict-origin-when-cross-origin
-      Vary:
-      - Accept, Origin
       Etag:
-      - W/"d3d7d16879b2bfbbfc53e34afe036620"
+      - W/"fbabf0efd65b63f03290a3f99682b0d4"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 20e82f352536b250dcc8f86494d6cc81
+      - b293ccf00ce88c9769cf3ce4c2a5f401
       X-Runtime:
-      - '0.088403'
+      - '0.008724'
+      Vary:
+      - Accept, Origin
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
-        be represented on an application for a non-molestation order.","ccms_category_law":"Family","ccms_matter":"Domestic
+        be represented on an application for a non-molestation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter":"Domestic
         abuse","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
         FLA-to final hearing","description":"As to proceedings under Part IV Family
         Law Act 1996 limited to all steps up to and including obtaining and serving
@@ -67,5 +67,5 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Tue, 19 Jul 2022 11:27:56 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Thu, 03 Aug 2023 11:28:42 GMT
+recorded_with: VCR 6.2.0

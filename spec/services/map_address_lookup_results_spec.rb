@@ -4,7 +4,7 @@ RSpec.describe MapAddressLookupResults do
   subject(:service) { described_class }
 
   describe "#call" do
-    context "building number, street, town, city, postcode" do
+    context "when the submission includes building number, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "1, BIRKS, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -25,7 +25,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "building name, street, town, city, postcode" do
+    context "when the submission includes building name, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "OWLERS CLOUGH, LOWER LAUNDS, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -46,7 +46,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "short building name, street, town, city, postcode" do
+    context "when the submission includes short building name, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "29A, MOOREND ROAD, YARDLEY GOBION, TOWCESTER, NN12 7UF",
@@ -67,7 +67,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "organisation, town, city, postcode" do
+    context "when the submission includes organisation, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "CHAPEL SHRED, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -87,7 +87,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "organisation, building name, town, city, postcode" do
+    context "when the submission includes organisation, building name, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "GREYSTONES FARM, BRADSHAW LANE, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -108,7 +108,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "organisation, building name, street, town, city, postcode" do
+    context "when the submission includes organisation, building name, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "PHILIP SUNLEY TRANSPORT LTD, LOWER LAUND FARM, LOWER LAUNDS, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -130,7 +130,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "building name, town, city, postcode" do
+    context "when the submission includes building name, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "THE LAITHE, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -150,7 +150,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "organisation, building number, street, town, city, postcode" do
+    context "when the submission includes organisation, building number, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "GOAT HILL FARM, 2, GOAT HILL, SLAITHWAITE, HUDDERSFIELD, HD7 5UZ",
@@ -172,7 +172,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "organisation, building number, building name, street, town, city, postcode" do
+    context "when the submission includes organisation, building number, building name, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "HARINGEY COUNCIL, RIVER PARK HOUSE, 225, HIGH ROAD, LONDON, N22 8HQ",
@@ -194,7 +194,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "organisation, building sub-name, building number, street, town, city, postcode" do
+    context "when the submission includes organisation, building sub-name, building number, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "CLYDE OFFICES, 2/3, 48, WEST GEORGE STREET, GLASGOW, G2 1BP",
@@ -216,7 +216,7 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
-    context "building name, building number, street, town, city, postcode" do
+    context "when the submission includes building name, building number, street, town, city, postcode" do
       let(:result) do
         [{ "DPA" =>
          { "ADDRESS" => "FAKE HOUSE, 161, FAKE STREET, LONDON, W1 1ZZ",

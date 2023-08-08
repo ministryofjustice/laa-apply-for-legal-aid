@@ -10,7 +10,7 @@ RSpec.describe BankHolidayRetriever, vcr: { cassette_name: "gov_uk_bank_holiday_
       expect(described_class.dates).to eq(subject.dates(group))
     end
 
-    context "on failure" do
+    context "when the call fails" do
       let(:uri) { URI.parse(described_class::API_URL) }
 
       before do

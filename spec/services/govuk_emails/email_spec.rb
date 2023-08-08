@@ -13,7 +13,7 @@ RSpec.describe GovukEmails::Email do
     allow(Notifications::Client).to receive(:new).with(Rails.configuration.x.govuk_notify_api_key).and_return(govuk_client)
   end
 
-  context "status is 'delivered'", vcr: { cassette_name: "govuk_email_delivered" } do
+  context "when the status is 'delivered'", vcr: { cassette_name: "govuk_email_delivered" } do
     let(:status) { described_class::DELIVERED_STATUS }
 
     it { is_expected.to be_delivered }
@@ -21,8 +21,8 @@ RSpec.describe GovukEmails::Email do
     it { is_expected.not_to be_permanently_failed }
   end
 
-  context "status is not delivered" do
-    context "status is a permanent failure'" do
+  context "when the status is not delivered" do
+    context "and the status is a permanent failure'" do
       let(:status) { described_class::PERMANENTLY_FAILED_STATUS }
 
       it { is_expected.not_to be_delivered }
@@ -30,7 +30,7 @@ RSpec.describe GovukEmails::Email do
       it { is_expected.to be_permanently_failed }
     end
 
-    context "status is temporary or technical failure" do
+    context "and the status is temporary or technical failure" do
       let(:status) { described_class::RESENDABLE_STATUS.sample }
 
       it { is_expected.not_to be_delivered }
@@ -38,7 +38,7 @@ RSpec.describe GovukEmails::Email do
       it { is_expected.not_to be_permanently_failed }
     end
 
-    context "status is something else" do
+    context "and the status is something else" do
       let(:status) { Faker::Lorem.word }
 
       it { is_expected.not_to be_delivered }

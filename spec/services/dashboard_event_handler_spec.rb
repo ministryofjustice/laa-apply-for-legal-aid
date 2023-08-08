@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe DashboardEventHandler do
-  context "unrecognised dashboard event" do
+  context "when an unrecognised dashboard event is sent" do
     it "raises" do
       expect {
         ActiveSupport::Notifications.instrument "dashboard.zzzzz"
@@ -9,7 +9,7 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "unrecognized non-dashboard event" do
+  context "when an unrecognized non-dashboard event is sent" do
     it "does not raise" do
       expect {
         ActiveSupport::Notifications.instrument "other_category.zzzzz"
@@ -17,7 +17,7 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "application created" do
+  context "when an application is created" do
     before do
       allow_any_instance_of(described_class).to receive(:provider_updated)
       allow_any_instance_of(described_class).to receive(:firm_created)
@@ -31,7 +31,7 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "provider_updated" do
+  context "when a provider is updated" do
     before do
       allow_any_instance_of(described_class).to receive(:firm_created)
     end
@@ -44,21 +44,21 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "firm_created" do
+  context "when a firm is created" do
     it "fires a NumberProviderFirms job" do
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with("NumberProviderFirms")
       create(:firm)
     end
   end
 
-  context "ccms_submission_saved" do
+  context "when a ccms_submission is saved" do
     subject { create(:ccms_submission, aasm_state: state) }
 
     before { ActiveJob::Base.queue_adapter = :test }
 
     after { ActiveJob::Base.queue_adapter = :sidekiq }
 
-    context "saved with state initialised" do
+    context "and saved with state initialised" do
       let(:state) { "initialised" }
 
       it "does not fire additional Application jobs" do
@@ -71,7 +71,7 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
-    context "saved with state failed" do
+    context "and saved with state failed" do
       let(:state) { "failed" }
 
       it "fires the Applications job" do
@@ -83,7 +83,7 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
-    context "saved with state completed" do
+    context "and saved with state completed" do
       let(:state) { "completed" }
 
       it "fires the Applications job" do
@@ -95,7 +95,7 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
-    context "saved with state abandoned" do
+    context "and saved with state abandoned" do
       let(:state) { "abandoned" }
 
       it "does not fire additional Application jobs" do
@@ -108,7 +108,7 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
-    context "saved with document_ids_obtained" do
+    context "and saved with document_ids_obtained" do
       let(:state) { "document_ids_obtained" }
 
       it "does not fire additional Application jobs" do
@@ -122,14 +122,14 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "feedback_created" do
+  context "when feedback is created" do
     it "fires the FeedbackItemJob job" do
       expect(Dashboard::FeedbackItemJob).to receive(:perform_later)
       create(:feedback)
     end
   end
 
-  context "application completed" do
+  context "when an application is completed" do
     let(:legal_aid_application) do
       create(:legal_aid_application, :with_proceedings,
              :with_delegated_functions_on_proceedings,
@@ -150,7 +150,7 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "applicant_emailed" do
+  context "when an applicant is emailed" do
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
     it "fires the applicant_email job" do

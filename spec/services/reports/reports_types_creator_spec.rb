@@ -22,7 +22,7 @@ RSpec.describe Reports::ReportsTypesCreator do
   let(:report) { described_class.call(params) }
 
   describe "all application types" do
-    context "matching application" do
+    describe "matching application" do
       let(:params) do
         {
           application_type: "A",
@@ -38,7 +38,7 @@ RSpec.describe Reports::ReportsTypesCreator do
         }
       end
 
-      context "generated csv" do
+      describe "generated csv" do
         let(:today) { Date.current }
         let(:yesterday) { today - 1.day }
         let(:two_days_ago) { today - 2.days }
@@ -61,7 +61,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           expect(@table.first["case_ccms_reference"]).to include(ccms_record.case_ccms_reference)
         end
 
-        context "in date range" do
+        context "when in the date range" do
           let(:params) do
             {
               application_type: "A",
@@ -82,7 +82,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
         end
 
-        context "outside date range" do
+        context "when outside the date range" do
           let(:params) do
             {
               application_type: "A",
@@ -103,7 +103,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
         end
 
-        context "passported only" do
+        context "when passported only" do
           let(:params) do
             {
               application_type: "P",
@@ -125,7 +125,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
         end
 
-        context "non passported only" do
+        context "when non passported only" do
           let(:params) do
             {
               application_type: "NP",
@@ -147,7 +147,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
         end
 
-        context "submitted to ccms" do
+        context "when submitted to ccms" do
           let(:params) do
             {
               application_type: "A",
@@ -176,7 +176,7 @@ RSpec.describe Reports::ReportsTypesCreator do
       end
     end
 
-    context "no matches" do
+    context "when there are no matches" do
       let(:params) do
         {
           application_type: "A",

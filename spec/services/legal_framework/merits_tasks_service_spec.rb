@@ -25,7 +25,7 @@ module LegalFramework
         expect { service }.to change(MeritsTaskList, :count).by(1)
       end
 
-      context "merits task list exist" do
+      context "when a merits task list exists" do
         before do
           described_class.call(application)
         end
@@ -65,7 +65,7 @@ module LegalFramework
         end
       end
 
-      context "error is raised" do
+      context "when an error is raised" do
         before do
           allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_raise(SubmissionError, "failed submission")
         end

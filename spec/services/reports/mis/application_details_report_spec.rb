@@ -37,7 +37,7 @@ module Reports
       let(:report) { described_class.new }
 
       describe "#run" do
-        context "runs successfully" do
+        context "when it runs successfully" do
           it "the name of a file based on current date and time" do
             travel_to Time.zone.local(2022, 4, 27, 13, 22, 3).in_time_zone
             filename = report.run
@@ -52,7 +52,7 @@ module Reports
           end
         end
 
-        context "exception" do
+        context "when there is an exception" do
           before { expect(report).to receive(:generate_temp_file).and_raise(RuntimeError) }
 
           it "notifies sentry" do
@@ -61,7 +61,7 @@ module Reports
           end
         end
 
-        context "ApplicationDetailCsvLine exception" do
+        context "when a ApplicationDetailCsvLine exception is raised" do
           before { allow_any_instance_of(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, "fake error") }
 
           it "logs the error message" do

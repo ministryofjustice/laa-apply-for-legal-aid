@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CurrencyCleaner do
-  context "valid strings" do
+  context "when there are valid strings" do
     it "returns the string stripped of commas and pound signs" do
       valid_strings = [
         %w[£1,123,456.78 1123456.78],
@@ -22,7 +22,7 @@ RSpec.describe CurrencyCleaner do
     end
   end
 
-  context "invalid strings" do
+  context "when there are invalid strings" do
     it "returns the original string" do
       invalid_strings = %w[
         £1,1234,456.78

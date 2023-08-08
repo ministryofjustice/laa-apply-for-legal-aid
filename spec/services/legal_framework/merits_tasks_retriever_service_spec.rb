@@ -62,7 +62,7 @@ module LegalFramework
         VCR.turn_on!
       end
 
-      context "response received from Legal Framework API" do
+      context "when a response is received from Legal Framework API" do
         describe "successful post" do
           before do
             stub_request(:post, service.legal_framework_url)
@@ -81,7 +81,7 @@ module LegalFramework
         end
       end
 
-      context "unsuccessful_response_from_LegalFrameworkAPI" do
+      context "when an unsuccessful response is received from the Legal Framework API" do
         it_behaves_like "a failed call to LegalFrameworkAPI"
       end
     end

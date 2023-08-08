@@ -16,7 +16,7 @@ RSpec.describe Banking::BankTransactionsTrimmer do
       allow(application).to receive(:transaction_period_finish_on).and_return(period_end)
     end
 
-    context "all transactions are within the transaction period" do
+    context "when all transactions are within the transaction period" do
       let(:period_start) { Date.parse("2020-10-05").beginning_of_day }
       let(:period_end) { Date.parse("2021-01-07").beginning_of_day }
 
@@ -25,7 +25,7 @@ RSpec.describe Banking::BankTransactionsTrimmer do
       end
     end
 
-    context "some transactions are after the end of the transaction period" do
+    context "when some transactions are after the end of the transaction period" do
       let(:period_start) { Date.parse("2020-10-06").beginning_of_day }
       let(:period_end) { Date.parse("2021-01-04").beginning_of_day }
 

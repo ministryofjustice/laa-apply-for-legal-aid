@@ -117,7 +117,7 @@ RSpec.describe HMRC::Interface::ResultService do
           .to_raise(StandardError)
       end
 
-      context "http status 422" do
+      context "and the http status is 422" do
         before do
           stub_request(:get, get_url)
             .to_return(body: error_response, status: 422)
@@ -128,7 +128,7 @@ RSpec.describe HMRC::Interface::ResultService do
         end
       end
 
-      context "other failing http status" do
+      context "and the http status is failing" do
         before do
           stub_request(:get, get_url)
             .to_return(body: "", status: 503)

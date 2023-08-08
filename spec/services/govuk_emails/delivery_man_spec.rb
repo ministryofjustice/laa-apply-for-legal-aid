@@ -10,7 +10,7 @@ RSpec.describe GovukEmails::DeliveryMan do
   let(:mailer_method) { scheduled_mailing.mailer_method }
 
   describe ".call" do
-    context "mail is already being processed by another worker" do
+    context "when the mail is already being processed by another worker" do
       before { scheduled_mailing.update!(status: "processing") }
 
       it "does not ask if mail eligible for delivery" do
@@ -23,8 +23,8 @@ RSpec.describe GovukEmails::DeliveryMan do
       end
     end
 
-    context "mail is still waiting" do
-      context "mail is eligible for delivery" do
+    context "when the mail is still waiting" do
+      context "and mail is eligible for delivery" do
         let(:message) { double "MailMessage", govuk_notify_response: govuk_response }
         let(:govuk_response) { double "GovukResponse", id: govuk_message_id }
         let(:govuk_message_id) { SecureRandom.uuid }
@@ -52,7 +52,7 @@ RSpec.describe GovukEmails::DeliveryMan do
         end
       end
 
-      context "mail cannot be sent with current API key" do
+      context "and the mail cannot be sent with current API key" do
         # this simulates trying to send a message in staging that generates the following error
         # BadRequestError: Can’t send to this recipient using a team-only API key
         let(:scheduled_mailing) { create(:scheduled_mailing, :waiting, legal_aid_application: application) }
@@ -82,7 +82,7 @@ RSpec.describe GovukEmails::DeliveryMan do
         end
       end
 
-      context "mail is not eligible for delivery" do
+      context "when the mail is not eligible for delivery" do
         before { allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(false) }
 
         it "cancels the mail" do
@@ -93,7 +93,7 @@ RSpec.describe GovukEmails::DeliveryMan do
         end
       end
 
-      context "mail raises an exception" do
+      context "when the mail raises an exception" do
         let(:message) { double "MailMessage", govuk_notify_response: govuk_response }
         let(:govuk_response) { double "GovukResponse", id: govuk_message_id }
         let(:govuk_message_id) { SecureRandom.uuid }

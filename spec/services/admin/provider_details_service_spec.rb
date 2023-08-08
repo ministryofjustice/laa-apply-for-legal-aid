@@ -15,7 +15,7 @@ module Admin
     let(:service) { described_class.new(provider) }
 
     shared_examples "service handling error conditions" do
-      context "user already exists in providers table" do
+      context "when the user already exists in providers table" do
         before { Provider.create(username:) }
 
         let(:response_body) { nil }
@@ -31,7 +31,7 @@ module Admin
         end
       end
 
-      context "username not on provider details api" do
+      context "when the username not on provider details api" do
         let(:response_body) { user_not_found_response.to_json }
         let(:http_status) { 404 }
 
@@ -45,7 +45,7 @@ module Admin
         end
       end
 
-      context "other non-200 response" do
+      context "when there is a non-200 response" do
         let(:response_body) { "" }
         let(:http_status) { 505 }
 
@@ -59,7 +59,7 @@ module Admin
         end
       end
 
-      context "username not in list of contacts" do
+      context "when the username not in list of contacts" do
         let(:response_body) { missing_contact_response.to_json }
         let(:http_status) { 200 }
 
@@ -75,13 +75,13 @@ module Admin
     end
 
     describe "#check" do
-      context "errors" do
+      context "when there are errors" do
         subject { service.check }
 
         it_behaves_like "service handling error conditions"
       end
 
-      context "user adds non-ascii characters to their name" do
+      context "when the user adds non-ascii characters to their name" do
         # we suspect that this comes from a cut and paste from MS into
         # the login box when parsed it returns BRAND%20NEW\u2011USER
         subject { service.check }
@@ -100,10 +100,10 @@ module Admin
         end
       end
 
-      context "success" do
+      context "when the response is success" do
         let(:http_status) { 200 }
 
-        context "username in list of contacts" do
+        context "and the username is in list of contacts" do
           let(:response_body) { sarah_smith_response.to_json }
 
           it "responds success" do
@@ -119,18 +119,18 @@ module Admin
     end
 
     describe "#create" do
-      context "errors" do
+      context "when there are errors" do
         subject { service.create }
 
         it_behaves_like "service handling error conditions"
       end
 
-      context "success" do
+      context "when the response is success" do
         subject { service.create }
 
         let(:http_status) { 200 }
 
-        context "no firm or offices pre-exist" do
+        context "when no firm or offices pre-exist" do
           let(:response_body) { sarah_smith_response.to_json }
 
           it "creates the provider" do
@@ -157,7 +157,7 @@ module Admin
           end
         end
 
-        context "firm and all offices pre-exist" do
+        context "when the firm and all offices pre-exist" do
           before do
             create_office firm, "146988", "8M609S"
             create_office firm, "81333", "8B869F"
@@ -182,7 +182,7 @@ module Admin
           end
         end
 
-        context "firm and some offices pre-exist" do
+        context "when the firm and some offices pre-exist" do
           before do
             create_office firm, "81333", "8B869F"
           end

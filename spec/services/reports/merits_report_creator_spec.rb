@@ -46,7 +46,7 @@ RSpec.describe Reports::MeritsReportCreator do
         expect(Rails.logger).to have_received(:info).with(expected_log).once
       end
 
-      context "when the attachment has no document" do
+      context "and the attachment has no document" do
         let(:expected_log) { "ReportsCreator: Merits report already exists for #{legal_aid_application.id}" }
 
         before do
@@ -64,7 +64,7 @@ RSpec.describe Reports::MeritsReportCreator do
       end
     end
 
-    context "ccms case ref does not exist" do
+    context "when the ccms case ref does not exist" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_proceedings,
@@ -91,7 +91,7 @@ RSpec.describe Reports::MeritsReportCreator do
         subject
       end
 
-      context "ccms submission does not exist" do
+      context "and the ccms submission does not exist" do
         let!(:legal_aid_application) do
           create(:legal_aid_application,
                  :with_proceedings,

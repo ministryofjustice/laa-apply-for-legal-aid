@@ -10,7 +10,7 @@ RSpec.describe CleanupCapitalAttributes do
       legal_aid_application.reload
     end
 
-    context "on own home set to no" do
+    context "when own home set to no" do
       let(:test_condition) { :without_own_home }
 
       it "resets property values" do
@@ -30,7 +30,7 @@ RSpec.describe CleanupCapitalAttributes do
       end
     end
 
-    context "on shared ownership set to no" do
+    context "when shared ownership set to no" do
       let(:test_condition) { :with_home_sole_owner }
 
       it "does not reset property values" do
@@ -50,7 +50,7 @@ RSpec.describe CleanupCapitalAttributes do
       end
     end
 
-    context "on own home set to own outright" do
+    context "when own home set to own outright" do
       let(:test_condition) { :with_own_home_owned_outright }
 
       it "does not reset property values" do

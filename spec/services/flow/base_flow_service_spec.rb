@@ -27,13 +27,13 @@ RSpec.describe Flow::BaseFlowService do
     let(:current_step) { :accounts }
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
-    context "default locale" do
+    context "when on the default locale" do
       it "returns forward url with en locale" do
         expect(subject.forward_path).to eq("/citizens/additional_accounts?locale=en")
       end
     end
 
-    context "Welsh locale" do
+    context "when using the Welsh locale" do
       around do |example|
         I18n.with_locale(:cy) { example.run }
       end
@@ -43,7 +43,7 @@ RSpec.describe Flow::BaseFlowService do
       end
     end
 
-    context "with logic" do
+    context "and logic exists" do
       let(:current_step) { :consents }
 
       it "returns forward url" do
@@ -51,7 +51,7 @@ RSpec.describe Flow::BaseFlowService do
       end
     end
 
-    context "step is not defined" do
+    context "when a step is not defined" do
       let(:current_step) { :foo_bar }
 
       it "raises an error" do
@@ -59,7 +59,7 @@ RSpec.describe Flow::BaseFlowService do
       end
     end
 
-    context "forward step is not defined" do
+    context "when the forward step is not defined" do
       let(:steps) { { foo: :bar } }
 
       it "raises an error" do
@@ -68,7 +68,7 @@ RSpec.describe Flow::BaseFlowService do
     end
   end
 
-  context "with basic data" do
+  context "when there is basic data" do
     let(:url_helpers) { Rails.application.routes.url_helpers }
     let(:current_step) { :foo }
     let(:path) { :path }
@@ -110,7 +110,7 @@ RSpec.describe Flow::BaseFlowService do
           expect(subject.current_path).to eq(legal_aid_application)
         end
 
-        context "with params" do
+        context "and params exist" do
           let(:params) { { foo: :bar } }
           let(:path) { ->(passed_in, params) { [passed_in, params] } }
 
@@ -120,7 +120,7 @@ RSpec.describe Flow::BaseFlowService do
         end
       end
 
-      context "path for step is not defined" do
+      context "when the path for step is not defined" do
         let(:path) { nil }
 
         it "raises an error" do

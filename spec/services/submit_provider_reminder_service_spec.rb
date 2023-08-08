@@ -13,7 +13,7 @@ RSpec.describe SubmitProviderReminderService, :vcr do
       expect { subject.send_email }.to change(ScheduledMailing, :count).by(1)
     end
 
-    context "sending the email" do
+    describe "sending the email" do
       let(:mail) { SubmitProviderFinancialReminderMailer.notify_provider(application.id, application_url) }
 
       it "sends an email with the right parameters" do

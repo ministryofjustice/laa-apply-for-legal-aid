@@ -52,7 +52,7 @@ RSpec.describe "POST /v1/statement_of_case" do
         end
       end
 
-      context "file contains a malware", clamav: true do
+      context "when the file contains malware", clamav: true do
         let(:file) { uploaded_file("spec/fixtures/files/malware.doc", "application/pdf") }
         let(:i18n_error_message) { I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.file_virus", file_name: "malware.doc") }
 
@@ -64,7 +64,7 @@ RSpec.describe "POST /v1/statement_of_case" do
         end
       end
 
-      context "virus scanner is down" do
+      context "when the virus scanner is down" do
         before { allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false) }
 
         let(:i18n_error_path) { "activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file" }

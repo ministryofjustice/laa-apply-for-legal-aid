@@ -13,7 +13,7 @@ RSpec.describe JobQueue do
 
     before { allow(Sidekiq::ScheduledSet).to receive(:new).and_return(job_queue) }
 
-    context "empty queue" do
+    context "when the queue is empty" do
       let(:job_queue) { [] }
 
       it "returns false" do
@@ -21,7 +21,7 @@ RSpec.describe JobQueue do
       end
     end
 
-    context "job scheduled for later than the default delay time" do
+    context "when the job is scheduled for later than the default delay time" do
       let(:job_queue) { [late_job] }
 
       it "returns false" do
@@ -29,7 +29,7 @@ RSpec.describe JobQueue do
       end
     end
 
-    context "job scheduled for before default delay" do
+    context "when the job is scheduled for before default delay" do
       let(:job_queue) { [early_job] }
 
       it "returns true" do
@@ -37,7 +37,7 @@ RSpec.describe JobQueue do
       end
     end
 
-    context "jobs scheduled for before and after the delay" do
+    context "when there are jobs scheduled for before and after the delay" do
       let(:job_queue) { [early_job, late_job] }
 
       it "returns true" do
@@ -45,7 +45,7 @@ RSpec.describe JobQueue do
       end
     end
 
-    context "other jobs in the queue" do
+    context "when there are other jobs in the queue" do
       let(:job_queue) { [other_job] }
 
       it "returns false" do
