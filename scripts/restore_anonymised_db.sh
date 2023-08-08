@@ -35,7 +35,7 @@ case "$1" in
 *)
   environment='uat'
   echo "Finding pod for branch $1 in $environment"
-#  POD=$(kubectl -n laa-apply-for-legalaid-$environment get pods | grep -o -m4 "apply-$1-.*2/2" | head -n1 | cut -d' ' -f 1)
+  POD=$(kubectl -n "laa-apply-for-legalaid-$environment" get pods | grep -o -m4 "apply-$1-.*2/2" | head -n1 | cut -d' ' -f 1)
 esac
 
 echo "compressing local production backup to speed up upload"
