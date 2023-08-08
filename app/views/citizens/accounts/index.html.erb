@@ -15,28 +15,30 @@
         <% end %>
       <% end %>
 
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".table_caption") %></caption>
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col"><%= t ".type_heading" %></th>
-            <th class="govuk-table__header" scope="col"><%= t ".account_number_heading" %></th>
-            <th class="govuk-table__header" scope="col"><%= t ".sort_code_heading" %></th>
-            <th class="govuk-table__header govuk-table__header--numeric" scope="col"><%= t ".balance_heading" %></th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <% applicant_bank.bank_accounts.each do |bank_account| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell"><%= bank_account.bank_and_account_name %></td>
-              <td class="govuk-table__cell"><%= bank_account.account_number %></td>
-              <td class="govuk-table__cell"><%= bank_account.sort_code %></td>
-              <td class="govuk-table__cell govuk-table__cell--numeric"><%= value_with_currency_unit(bank_account.balance, bank_account.currency) %></td>
-            </tr>
-          <% end %>
-        </tbody>
+      <%= govuk_table do |table|
+            table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
 
-      </table>
+            table.with_head do |head|
+              head.with_row do |row|
+                row.with_cell(text: t(".type_heading"))
+                row.with_cell(text: t(".account_number_heading"))
+                row.with_cell(text: t(".sort_code_heading"))
+                row.with_cell(numeric: true, text: t(".balance_heading"))
+              end
+            end
+
+            table.with_body do |body|
+              applicant_bank.bank_accounts.each do |bank_account|
+                body.with_row do |row|
+                  row.with_cell(text: bank_account.bank_and_account_name)
+                  row.with_cell(text: bank_account.account_number)
+                  row.with_cell(text: bank_account.sort_code)
+                  row.with_cell(numeric: true, text: value_with_currency_unit(bank_account.balance, bank_account.currency))
+                end
+              end
+            end
+          end %>
+
     <% end %>
 
     <p><%= link_to_accessible t(".link_other_account"), citizens_banks_path, class: "govuk-link" %></p>
