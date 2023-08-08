@@ -1,26 +1,4 @@
-<%= form_with(model: @form,
-              url: providers_legal_aid_application_means_student_finance_path,
-              method: :patch, local: true) do |form| %>
-  <%= page_template page_title: t(".page_title"), form:, template: :basic do %>
-    <%= form.govuk_radio_buttons_fieldset :student_finance,
-                                          hint: -> do
-                                            t(".hint").each do |hint_line| %>
-                                              <p class="govuk-hint"><%= hint_line %></p>
-                                            <% end
-                                          end,
-                                          caption: { text: t("generic.client_means_caption"), size: "l" },
-                                          legend: { text: content_for(:page_title), tag: "h1", size: "xl" } do %>
-      <%= form.govuk_radio_button(:student_finance, true, label: { text: t("generic.yes") }, checked: @legal_aid_application.student_finance?) do %>
-        <%= form.govuk_text_field(
-              :amount,
-              label: { text: t(".amount_label") },
-              hint: { text: t(".amount_hint") },
-              prefix_text: t("currency.gbp"),
-              width: "one-quarter",
-            ) %>
-      <% end %>
-      <%= form.govuk_radio_button(:student_finance, false, label: { text: t("generic.no") }, checked: @legal_aid_application.student_finance == false) %>
-    <% end %>
-    <%= next_action_buttons(form:) %>
-  <% end %>
-<% end %>
+<%= render "shared/student_finances",
+           url: providers_legal_aid_application_means_student_finance_path,
+           client_or_partner: :client,
+           individual: "your client" %>

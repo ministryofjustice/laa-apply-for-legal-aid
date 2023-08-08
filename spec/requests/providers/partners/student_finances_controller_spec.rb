@@ -1,15 +1,15 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::StudentFinancesController do
-  let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
+RSpec.describe Providers::Partners::StudentFinancesController do
+  let(:legal_aid_application) { create(:legal_aid_application, partner:) }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:legal_aid_application_id/means/student_finance" do
+  describe "GET /providers/applications/:legal_aid_application_id/partners/student_finance" do
     subject(:request) do
-      get providers_legal_aid_application_means_student_finance_path(legal_aid_application)
+      get providers_legal_aid_application_partners_student_finance_path(legal_aid_application)
     end
 
-    let(:applicant) { create(:applicant, student_finance:, student_finance_amount: 1234.56) }
+    let(:partner) { create(:partner, student_finance:, student_finance_amount: 1234.56) }
     let(:student_finance) { true }
 
     it "returns ok" do
@@ -25,7 +25,7 @@ RSpec.describe Providers::Means::StudentFinancesController do
         request
 
         expect(page).to have_checked_field("Yes")
-        expect(page).to have_field("applicant[student_finance_amount]", with: "1234.56")
+        expect(page).to have_field("partner[student_finance_amount]", with: "1234.56")
       end
     end
 
@@ -56,14 +56,14 @@ RSpec.describe Providers::Means::StudentFinancesController do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/means/student_finance" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/partners/student_finance" do
     subject(:request) do
-      patch providers_legal_aid_application_means_student_finance_path(legal_aid_application),
+      patch providers_legal_aid_application_partners_student_finance_path(legal_aid_application),
             params: params.merge(button_clicked)
     end
 
-    let(:applicant) { create(:applicant, student_finance:, student_finance_amount:) }
-    let(:params) { { applicant: { student_finance:, student_finance_amount: } } }
+    let(:partner) { create(:partner, student_finance:, student_finance_amount:) }
+    let(:params) { { partner: { student_finance:, student_finance_amount: } } }
     let(:student_finance) { "false" }
     let(:student_finance_amount) { nil }
     let(:button_clicked) { {} }
@@ -76,43 +76,42 @@ RSpec.describe Providers::Means::StudentFinancesController do
         let(:student_finance) { "true" }
         let(:student_finance_amount) { "5000" }
 
-        it "updates the applicant" do
+        it "updates the partner" do
           login_as provider
           request
 
-          expect(applicant.reload.student_finance).to be true
-          expect(applicant.reload.student_finance_amount).to eq 5000
+          expect(partner.reload.student_finance).to be true
+          expect(partner.reload.student_finance_amount).to eq 5000
         end
       end
 
       context "when the provider selects `No`" do
-        it "updates the applicant" do
+        it "updates the partner" do
           login_as provider
           request
 
-          expect(applicant.reload.student_finance).to be false
-          expect(applicant.reload.student_finance_amount).to be_nil
+          expect(partner.reload.student_finance).to be false
+          expect(partner.reload.student_finance_amount).to be_nil
         end
       end
 
       context "when the application is using the bank upload journey" do
-        let(:legal_aid_application) { create(:legal_aid_application, :without_open_banking_consent, :with_applicant) }
+        let(:legal_aid_application) { create(:legal_aid_application, :without_open_banking_consent, :with_applicant_and_partner) }
 
-        it "redirects to the regular outgoings page" do
+        it "redirects to the has dependants page" do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_means_regular_outgoings_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
         end
       end
 
       context "when the application is not using the bank upload journey" do
-        it "redirects to the identify types of outgoings page" do
+        it "redirects to the has dependants page" do
           login_as provider
-
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
         end
       end
     end
@@ -122,11 +121,11 @@ RSpec.describe Providers::Means::StudentFinancesController do
       let(:student_finance_amount) { "1234.56" }
 
       it "updates the student finance amount" do
-        applicant
+        partner
         login_as provider
         request
 
-        expect(applicant.reload.student_finance_amount).to eq(1234.56)
+        expect(partner.reload.student_finance_amount).to eq(1234.56)
       end
     end
 
@@ -139,7 +138,7 @@ RSpec.describe Providers::Means::StudentFinancesController do
         request
 
         expect(page).to have_error_message(
-          "Select yes if your client receives student finance",
+          "Select yes if your partner receives student finance",
         )
       end
     end

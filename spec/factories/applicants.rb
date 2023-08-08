@@ -7,6 +7,8 @@ FactoryBot.define do
     has_national_insurance_number { true }
     national_insurance_number { "JA123456D" }
     employed { false }
+    student_finance { nil }
+    student_finance_amount { nil }
 
     trait :with_address do
       addresses { build_list(:address, 1) }
@@ -62,6 +64,11 @@ FactoryBot.define do
       encrypted_true_layer_token do
         { token: SecureRandom.hex, expires_at: 1.hour.from_now }
       end
+    end
+
+    trait :with_student_finance do
+      student_finance { true }
+      student_finance_amount { 1234.56 }
     end
 
     trait :langley_yorke do

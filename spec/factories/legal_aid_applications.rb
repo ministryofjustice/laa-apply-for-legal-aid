@@ -52,6 +52,13 @@ FactoryBot.define do
       applicant { build(:applicant, :with_address, with_bank_accounts:) }
     end
 
+    trait :with_applicant_with_student_loan do
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_student_finance, with_bank_accounts:) }
+    end
+
     trait :with_applicant_and_partner do
       transient do
         with_bank_accounts { 0 }
@@ -289,13 +296,6 @@ FactoryBot.define do
     end
 
     #############################################################################
-
-    trait :with_irregular_income do
-      student_finance { true }
-      after(:create) do |application|
-        create(:irregular_income, legal_aid_application: application)
-      end
-    end
 
     trait :submitted_to_ccms do
       before(:create) do |application|

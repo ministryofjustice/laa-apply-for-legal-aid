@@ -826,14 +826,6 @@ en:
         show:
           page_heading: Select payments your client receives in cash
           info: Cash means physical money like banknotes and coins.
-      student_finances:
-        show:
-          page_title: Does your client get student finance?
-          hint:
-            - This includes student loans, grants or bursaries your client gets.
-            - Do not include any tuition fee loans.
-          amount_label: Enter the amount they'll get this academic year
-          amount_hint: Check your client's student entitlement letter
       identify_types_of_outgoings:
         show:
           page_heading: Which of these payments does your client pay?

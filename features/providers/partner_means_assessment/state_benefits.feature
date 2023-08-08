@@ -92,4 +92,4 @@ Feature: partner_means_assessment state benefits handling
     When I choose "No"
     And I click "Save and continue"
 
-    Then I should be on a page with title "Does your client have any dependants?"
+    Then I should be on a page with title "Does the partner get student finance?"

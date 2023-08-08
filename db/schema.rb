@@ -121,6 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_104111) do
     t.boolean "has_partner"
     t.boolean "receives_state_benefits"
     t.boolean "partner_has_contrary_interest"
+    t.boolean "student_finance"
+    t.decimal "student_finance_amount"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -746,6 +748,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_104111) do
     t.boolean "armed_forces"
     t.string "full_employment_details"
     t.boolean "receives_state_benefits"
+    t.boolean "student_finance"
+    t.decimal "student_finance_amount"
     t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
   end
 

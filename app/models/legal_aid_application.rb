@@ -368,14 +368,6 @@ class LegalAidApplication < ApplicationRecord
       checking_means_income?
   end
 
-  def receives_student_finance?
-    student_finance?
-  end
-
-  def value_of_student_finance
-    receives_student_finance? ? irregular_incomes.student_finance.order("created_at").last.amount : nil
-  end
-
   def default_cost_limitation
     default_substantive_cost_limitation
   end

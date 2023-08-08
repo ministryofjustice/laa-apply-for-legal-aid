@@ -4,14 +4,6 @@ class IrregularIncome < ApplicationRecord
   validates :income_type, inclusion: %w[student_loan]
   validates :frequency, inclusion: %w[annual]
 
-  def as_json(_options = nil)
-    {
-      income_type:,
-      frequency:,
-      amount: amount.to_f,
-    }
-  end
-
   scope :student_finance, -> { where(income_type: "student_loan") }
 
   def label
