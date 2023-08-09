@@ -28,8 +28,8 @@ module CCMS
         allow_any_instance_of(CCMS::Requestors::ApplicantSearchRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
-      context "operation successful" do
-        context "applicant exists on the CCMS system" do
+      context "when the operation is successful" do
+        context "and the applicant exists on the CCMS system" do
           before do
             stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: response_body, status: 200)
           end
@@ -116,15 +116,15 @@ module CCMS
           end
         end
 
-        context "applicant exists on CCMS but applicant details are not returned" do
+        context "and applicant exists on CCMS but applicant details are not returned" do
           before { stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: no_applicant_details_response_body, status: 200) }
 
           it_behaves_like "applicant does not exist on CCMS"
         end
       end
 
-      context "operation in error" do
-        context "error when searching for applicant" do
+      context "when the operation is unsuccessful" do
+        context "and an error is raised when searching for applicant" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do

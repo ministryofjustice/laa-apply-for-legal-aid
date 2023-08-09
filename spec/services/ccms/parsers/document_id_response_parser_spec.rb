@@ -7,7 +7,7 @@ module CCMS
       let(:expected_tx_id) { "20190301030405123456" }
       let(:expected_document_id) { "4420073" }
 
-      context "success" do
+      context "when the response is successful" do
         let(:response_xml) { ccms_data_from_file "document_id_response.xml" }
         let(:parser) { described_class.new(expected_tx_id, response_xml) }
 
@@ -27,7 +27,7 @@ module CCMS
         end
       end
 
-      context "error" do
+      context "when the response is an error" do
         let(:response_xml) { ccms_data_from_file "document_id_response_failure.xml" }
 
         describe "#success" do

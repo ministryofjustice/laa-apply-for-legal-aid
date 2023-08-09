@@ -24,12 +24,12 @@ module CCMS
         allow_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
-      context "applicant_submitted state" do
-        context "operation successful" do
-          context "applicant not yet created" do
+      describe "applicant_submitted state" do
+        context "when the operation is successful" do
+          context "and the applicant is not yet created" do
             let(:response_body) { ccms_data_from_file "applicant_add_status_response_no_such_party.xml" }
 
-            context "poll count remains below limit" do
+            context "and poll count remains below limit" do
               it "increments the poll count" do
                 expect { subject.call }.to change(submission, :applicant_poll_count).by 1
               end
@@ -61,7 +61,7 @@ module CCMS
               end
             end
 
-            context "poll count reaches limit" do
+            context "and poll count reaches limit" do
               before do
                 submission.applicant_poll_count = Submission::POLL_LIMIT - 1
               end
@@ -92,7 +92,7 @@ module CCMS
             end
           end
 
-          context "applicant is created" do
+          context "and the applicant is created" do
             let(:expected_applicant_ccms_reference) { Faker::Number.number.to_s }
 
             before do
@@ -125,7 +125,7 @@ module CCMS
           end
         end
 
-        context "operation unsuccessful" do
+        context "when the operation is unsuccessful" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do

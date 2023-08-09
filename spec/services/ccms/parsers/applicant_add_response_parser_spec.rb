@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe ApplicantAddResponseParser, :ccms do
       let(:expected_tx_id) { "20190301030405123456" }
 
-      context "successful response" do
+      context "when the response is successful" do
         describe "#success?" do
           let(:response_xml) { ccms_data_from_file "applicant_add_response_success.xml" }
 
@@ -39,7 +39,7 @@ module CCMS
         end
       end
 
-      context "unsuccessful response" do
+      context "when the response is unsuccessful" do
         subject { described_class.new(expected_tx_id, response_xml) }
 
         let(:response_xml) { ccms_data_from_file "applicant_add_response_failure.xml" }
@@ -65,7 +65,7 @@ module CCMS
         end
       end
 
-      context "response with no status or exception" do
+      context "when the response has no status or exception" do
         let(:response_xml) { ccms_data_from_file "applicant_add_response_no_status.xml" }
 
         describe "#success?" do
@@ -76,7 +76,7 @@ module CCMS
         end
       end
 
-      context "wrong transaction id" do
+      context "when the transaction id is not matched" do
         let(:expected_tx_id) { "88880301030405123456" }
         let(:response_xml) { ccms_data_from_file "applicant_add_response_success.xml" }
 

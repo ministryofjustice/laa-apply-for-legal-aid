@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe CaseAddResponseParser, :ccms do
       let(:expected_tx_id) { "20190301030405123456" }
 
-      context "successful response" do
+      context "when the response is successful" do
         let(:response_xml) { ccms_data_from_file "case_add_response.xml" }
 
         describe "#success?" do
@@ -39,7 +39,7 @@ module CCMS
         end
       end
 
-      context "unsuccessful response" do
+      context "when the response is unsuccessful" do
         let(:response_xml) { ccms_data_from_file "case_add_response_failure.xml" }
 
         describe "#success?" do

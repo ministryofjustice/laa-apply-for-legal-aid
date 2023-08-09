@@ -13,11 +13,11 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
     allow(subject).to receive(:case_add_status_requestor).and_return(case_add_status_requestor)
   end
 
-  context "applicant_submitted state" do
-    context "operation successful" do
+  describe "applicant_submitted state" do
+    context "when the operation is successful" do
       let(:transaction_request_id_in_example_response) { "20190301030405123456" }
 
-      context "case not yet created" do
+      context "and the case is not yet created" do
         before do
           allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
           expect(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
@@ -25,7 +25,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           allow_any_instance_of(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:success?).and_return(false)
         end
 
-        context "poll count remains below limit" do
+        context "and poll count remains below limit" do
           it "increments the poll count" do
             expect { subject.call }.to change(submission, :case_poll_count).by 1
           end
@@ -56,7 +56,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
         end
 
-        context "poll count reaches limit" do
+        context "and poll count reaches limit" do
           before do
             submission.case_poll_count = CCMS::Submission::POLL_LIMIT - 1
           end
@@ -92,7 +92,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         end
       end
 
-      context "case is created" do
+      context "when the case is created" do
         before do
           allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
           expect(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
@@ -129,7 +129,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
       end
     end
 
-    context "operation unsuccessful" do
+    context "when the operation is unsuccessful" do
       let(:transaction_request_id_in_example_response) { "20190301030405123456" }
       let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 

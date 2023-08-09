@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe ObtainCaseReferenceService, :ccms do
-      subject { described_class.new(submission) }
+      subject(:obtain_case_reference_service) { described_class.new(submission) }
 
       let(:legal_aid_application) { create(:legal_aid_application) }
       let(:submission) { create(:submission, legal_aid_application:) }
@@ -24,19 +24,19 @@ module CCMS
         allow_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
-      context "operation successful" do
+      context "when the operation is successful" do
         it "stores the reference number returned in the response_body" do
-          subject.call
+          obtain_case_reference_service.call
           expect(submission.case_ccms_reference).to eq "300000135140"
         end
 
         it "changes the state to case_ref_obtained" do
-          subject.call
+          obtain_case_reference_service.call
           expect(submission.aasm_state).to eq "case_ref_obtained"
         end
 
         it "writes a history record" do
-          expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
+          expect { obtain_case_reference_service.call }.to change(CCMS::SubmissionHistory, :count).by(1)
 
           expect(history.from_state).to eq "initialised"
           expect(history.to_state).to eq "case_ref_obtained"
@@ -45,7 +45,7 @@ module CCMS
         end
 
         it "writes the request body to the history record" do
-          subject.call
+          obtain_case_reference_service.call
           expect(history.request).to be_soap_envelope_with(
             command: "refdatabim:ReferenceDataInqRQ",
             transaction_id: "20190301030405123456",
@@ -53,25 +53,26 @@ module CCMS
         end
 
         it "writes the response body to the history record" do
-          subject.call
+          obtain_case_reference_service.call
           expect(history.response).to eq response_body
         end
       end
 
-      context "operation in error" do
+      context "when the operation raises an error" do
         let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+        let(:fake_error) { error.sample } # TODO: avoid this pattern
 
         before do
-          fake_error = error.sample
           expect_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:call).and_raise(fake_error, "oops")
-          expect { subject.call }.to raise_error(fake_error, "oops")
         end
 
         it "does not change the state" do
+          expect { obtain_case_reference_service.call }.to raise_error(fake_error, "oops")
           expect(submission.aasm_state).to eq "initialised"
         end
 
         it "records the error in the submission history" do
+          expect { obtain_case_reference_service.call }.to raise_error(fake_error, "oops")
           expect(CCMS::SubmissionHistory.count).to eq 1
           expect(history.from_state).to eq "initialised"
           expect(history.to_state).to eq "failed"

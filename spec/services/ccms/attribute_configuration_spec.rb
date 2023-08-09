@@ -113,7 +113,7 @@ module CCMS
       end
     end
 
-    context "invalid application type" do
+    context "when an invalid application type is provided" do
       subject(:config) { described_class.new(application_type: :unknown_type).config }
 
       it "raises" do

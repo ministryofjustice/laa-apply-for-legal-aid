@@ -6,8 +6,8 @@ module CCMS
     let(:value_generator) { described_class.new(submission) }
 
     describe "#method_missing" do
-      context "standardly_named_method" do
-        context "bank account" do
+      context "with a standardly_named_method" do
+        describe "bank account" do
           let(:my_account) { double BankAccount }
           let(:options) { { bank_acct: my_account } }
           let(:bank_account_name) { "MY ACCOUNT" }
@@ -19,7 +19,7 @@ module CCMS
           end
         end
 
-        context "vehicle" do
+        describe "vehicle" do
           let(:my_vehicle) { double "Vehicle" }
           let(:options) { { vehicle: my_vehicle } }
           let(:my_regno) { "AB12CDE" }
@@ -31,7 +31,7 @@ module CCMS
           end
         end
 
-        context "wage_slip" do
+        describe "wage_slip" do
           let(:my_wage_slip) { double "WageSlip" }
           let(:options) { { wage_slip: my_wage_slip } }
           let(:my_ni_contribution) { 34.78 }
@@ -43,7 +43,7 @@ module CCMS
           end
         end
 
-        context "proceeding" do
+        describe "proceeding" do
           let(:my_proceeding) { double Proceeding }
           let(:options) { { proceeding: my_proceeding } }
           let(:my_name) { "Non-mol" }
@@ -56,7 +56,7 @@ module CCMS
         end
       end
 
-      context "non-standardly-named method" do
+      context "with a non-standardly-named method" do
         it "raises NoMethodError error" do
           expect {
             value_generator.no_such_method
@@ -66,25 +66,25 @@ module CCMS
     end
 
     describe "#respond_to?" do
-      context "standardly_named methods" do
+      context "with standardly_named methods" do
         let(:my_account) { double BankAccount, name: "MY ACCOUNT" }
         let(:options) { { bank_acct: my_account } }
 
-        context "valid method on delegated object" do
+        context "and a valid method on delegated object" do
           it "returns true" do
             expect(value_generator.respond_to?(:bank_account_name)).to be true
           end
         end
       end
 
-      context "non-standardly-named methods" do
-        context "other existing method" do
+      context "with non-standardly-named methods" do
+        describe "other existing method" do
           it "returns true" do
             expect(value_generator.respond_to?(:bank_account_holders)).to be true
           end
         end
 
-        context "non-existing method" do
+        describe "non-existing method" do
           it "returns false" do
             expect(value_generator.respond_to?(:non_existent_method)).to be false
           end

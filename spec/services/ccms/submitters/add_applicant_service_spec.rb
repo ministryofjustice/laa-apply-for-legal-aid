@@ -27,8 +27,8 @@ module CCMS
         allow_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
-      context "operation successful" do
-        context "no applicant exists on the CCMS system" do
+      context "when the operation is successful" do
+        context "and no applicant exists on the CCMS system" do
           it "sets state to applicant_submitted" do
             subject.call
             expect(submission.aasm_state).to eq "applicant_submitted"
@@ -69,8 +69,8 @@ module CCMS
         end
       end
 
-      context "operation in error" do
-        context "error when adding an applicant" do
+      context "when the operation is in error" do
+        context "and it errors when adding an applicant" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do
@@ -106,7 +106,7 @@ module CCMS
           end
         end
 
-        context "unsuccessful response from CCMS adding an applicant" do
+        context "when the response is unsuccessful from CCMS adding an applicant" do
           let(:response_body) { ccms_data_from_file "applicant_add_response_failure.xml" }
 
           before do

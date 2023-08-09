@@ -17,7 +17,7 @@ module CCMS
           }.to raise_error CCMS::CCMSError, "Invalid transaction request id #{expected_tx_id}"
         end
 
-        context "there are no applicants returned" do
+        context "when there are no applicants returned" do
           let(:parser) { described_class.new(expected_tx_id, no_results_response_xml) }
 
           it "extracts the number of records fetched" do
@@ -43,7 +43,7 @@ module CCMS
           end
         end
 
-        context "there is one applicant returned" do
+        context "when there is one applicant returned" do
           let(:parser) { described_class.new(expected_tx_id, one_result_response_xml) }
 
           it "extracts the number of records fetched" do
@@ -69,7 +69,7 @@ module CCMS
           end
         end
 
-        context "there are multiple applicants returned" do
+        context "when there are multiple applicants returned" do
           let(:parser) { described_class.new(expected_tx_id, multiple_results_response_xml) }
 
           it "extracts the number of records fetched" do
@@ -95,7 +95,7 @@ module CCMS
           end
         end
 
-        context "Number not matched" do
+        context "when the transaction id is not matched" do
           let(:expected_tx_id) { "202206241623547511370989944" }
           let(:parser) { described_class.new(expected_tx_id, number_not_matched_response_xml) }
 

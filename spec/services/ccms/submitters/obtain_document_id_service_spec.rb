@@ -28,7 +28,7 @@ module CCMS
         VCR.turn_on!
       end
 
-      context "operation successful" do
+      context "when the operation is successful" do
         before do
           # stub a post request - any body, any headers
           stub_request(:post, endpoint).to_return(body: response_body, status: 200)
@@ -37,14 +37,14 @@ module CCMS
           allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
         end
 
-        context "the application has no documents" do
+        context "and the application has no documents" do
           it "does not create any document objects" do
             subject.call
             expect(submission.submission_documents.count).to eq 0
           end
         end
 
-        context "the application has documents to upload" do
+        context "and the application has documents to upload" do
           before do
             create(:attachment, :merits_report, legal_aid_application:)
             create(:attachment, :means_report, legal_aid_application:)
@@ -145,7 +145,7 @@ module CCMS
         end
       end
 
-      context "operation unsuccessful" do
+      context "when the operation is unsuccessful" do
         let(:history) { SubmissionHistory.where(submission_id: submission.id, request: nil, response: nil).last }
         # There should only be one record in this state, so if it fails it's a legitimate error,
         # previously a race condition would occur where both records where created to

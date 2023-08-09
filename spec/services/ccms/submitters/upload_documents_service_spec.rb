@@ -54,7 +54,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
     allow(document_upload_requestor).to receive(:formatted_xml).and_return(expected_response)
   end
 
-  context "operation successful" do
+  context "when the operation is successful" do
     let(:history) { histories.where(to_state: "completed").last }
 
     before do
@@ -95,10 +95,10 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
     end
   end
 
-  context "operation unsuccessful" do
+  context "when the operation is unsuccessful" do
     let(:history) { histories.where(request: nil, response: nil, to_state: "failed").last }
 
-    context "operation fails due to a CCMS::CCMSError exception" do
+    context "and the operation fails due to a CCMS::CCMSError exception" do
       let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
       before do
@@ -133,7 +133,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
       end
     end
 
-    context "operation fails due to an error response from ccms" do
+    context "and the operation fails due to an error response from ccms" do
       before do
         allow_any_instance_of(CCMS::Parsers::DocumentUploadResponseParser).to receive(:success?).and_return(false)
         allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
