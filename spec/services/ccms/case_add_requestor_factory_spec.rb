@@ -23,8 +23,6 @@ module CCMS
     context "with non-means-tested application" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_under_18_applicant) }
 
-      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
       it "returns an instance of NonMeansTestedCaseAddRequestor" do
         expect(described_class.call(submission, {})).to be_instance_of(Requestors::NonMeansTestedCaseAddRequestor)
       end

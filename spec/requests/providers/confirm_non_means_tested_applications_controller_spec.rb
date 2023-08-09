@@ -4,10 +4,6 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
   let(:application_id) { application.id }
   let(:applicant) { build(:applicant, :under_18_for_means_test_purposes) }
 
-  before do
-    allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
-  end
-
   describe "GET /providers/applications/:legal_aid_application_id/confirm_non_means_tested_applications" do
     subject(:request) { get "/providers/applications/#{application_id}/confirm_non_means_tested_applications" }
 
@@ -100,7 +96,6 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
       before do
         login_as application.provider
-        allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
       end
 
       it "creates a skipped benefit check result" do

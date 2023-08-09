@@ -285,9 +285,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
 
-        context "with MTR phase one enabled and applicant under 18" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
+        context "with non-means-tested application and applicant under 18" do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
@@ -301,9 +299,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           end
         end
 
-        context "with MTR phase one enabled and applicant under 18 on earliest date delegated functions used" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
+        context "with non-means-tested application and applicant under 18 on earliest date delegated functions used" do
           let(:application) do
             create(:legal_aid_application,
                    :with_non_passported_state_machine,
@@ -348,9 +344,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
 
-        context "with MTR phase one enabled and applicant under 18" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
+        context "with non-means-tested application and applicant under 18" do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
@@ -360,17 +354,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           end
         end
 
-        context "with MTR phse one enabled and applicant under 16" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
-          let(:applicant) { create(:applicant, :under_16) }
-
-          it_behaves_like "under 16 blocked flow"
-        end
-
-        context "with MTR phse one disabled and applicant under 16" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
-
+        context "with non-means-tested application and applicant under 16" do
           let(:applicant) { create(:applicant, :under_16) }
 
           it_behaves_like "under 16 blocked flow"
@@ -394,9 +378,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           expect(response).to redirect_to(providers_legal_aid_application_no_national_insurance_number_path(application))
         end
 
-        context "with MTR phase one enabled and applicant under 18" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
+        context "with non-means-tested application and applicant under 18" do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
@@ -406,17 +388,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           end
         end
 
-        context "with MTR phase one enabled and applicant under 16" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
-          let(:applicant) { create(:applicant, :under_16) }
-
-          it_behaves_like "under 16 blocked flow"
-        end
-
-        context "with MTR phase one disabled and applicant under 16" do
-          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
-
+        context "with non-means-tested application and applicant under 16" do
           let(:applicant) { create(:applicant, :under_16) }
 
           it_behaves_like "under 16 blocked flow"

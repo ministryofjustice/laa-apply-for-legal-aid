@@ -1,9 +1,8 @@
 Feature: Non-means-tested applicant journey without use of delegation functions
 
   @javascript @vcr
-  Scenario: Completes an application for applicant that is under 18 with MTR phase 1 enabled
-    Given the feature flag for means_test_review_phase_one is enabled
-    And I am logged in as a provider
+  Scenario: Completes an application for applicant that is under 18
+    Given I am logged in as a provider
 
     When I visit the application service
     And I click link "Start"

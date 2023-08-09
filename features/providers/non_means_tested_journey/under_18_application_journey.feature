@@ -1,7 +1,7 @@
-Feature: Under 18 applicant journey with means test review phase one disabled
+Feature: Under 18 applicant journey
 
   @javascript @vcr
-  Scenario: Completes a minimal application for applicant that is under 18 with MTR phase 1 disabled
+  Scenario: Completes a minimal application for applicant that is under 18
     Given I am logged in as a provider
 
     When I visit the application service
@@ -56,4 +56,5 @@ Feature: Under 18 applicant journey with means test review phase one disabled
     Then I should be on a page with title "Check your answers"
 
     When I click 'Save and continue'
-    And I should be on a page showing "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page with title "No means test required"
+    And I should be on a page showing "You do not need to do a means test as your client is under 18"

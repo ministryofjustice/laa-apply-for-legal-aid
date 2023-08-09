@@ -378,8 +378,7 @@ Feature: Means report
       | h3  | Bank statements |
 
   Scenario: For a non means tested journey
-    Given the feature flag for means_test_review_phase_one is enabled
-    And I have completed a non means tested application
+    Given I have completed a non means tested application
     When I view the means report
 
     Then the following sections should exist:
