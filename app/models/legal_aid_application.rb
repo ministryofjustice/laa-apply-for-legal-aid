@@ -38,7 +38,6 @@ class LegalAidApplication < ApplicationRecord
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :cash_transactions, dependent: :destroy
-  has_many :irregular_incomes, dependent: :destroy
   has_many :dependants, dependent: :destroy
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: "CCMS::Submission", inverse_of: :legal_aid_application, dependent: :destroy
   has_one :vehicle, dependent: :destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_104111) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_07_135356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -532,15 +532,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_104111) do
     t.datetime "updated_at", null: false
     t.integer "ccms_opponent_id"
     t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
-  end
-
-  create_table "irregular_incomes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "legal_aid_application_id"
-    t.string "income_type"
-    t.string "frequency"
-    t.decimal "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

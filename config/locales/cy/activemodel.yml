@@ -247,14 +247,6 @@ cy:
                 derrucco tnedicni eht etaD
             details:
               blank: tnedicni eht fo sliated retnE
-        irregular_income:
-          attributes:
-            amount:
-              blank: raey cimedaca siht teg ll’uoy ecnanif tneduts fo tnuoma latot
-                eht retnE
-              too_many_decimals: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol
-                tnedutS
-              not_a_number: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol tnedutS
         legal_aid_application:
           attributes:
             confirm_delegated_functions_date:
