@@ -39,7 +39,7 @@ module CCMS
         end
       end
 
-      context "when the response is sunsuccessful" do
+      context "when the response is unsuccessful" do
         let(:response_xml) { ccms_data_from_file "case_add_response_failure.xml" }
 
         describe "#success?" do

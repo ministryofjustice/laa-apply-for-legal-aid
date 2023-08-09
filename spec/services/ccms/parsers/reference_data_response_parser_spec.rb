@@ -6,7 +6,7 @@ module CCMS
       let(:expected_tx_id) { "20190301030405123456" }
       let(:expected_reference_number) { "300000135140" }
 
-      context "when the successful is response" do
+      context "when the response is successful" do
         let(:response_xml) { ccms_data_from_file "reference_data_response.xml" }
 
         describe "#reference_id" do

@@ -66,7 +66,7 @@ module CCMS
     end
 
     describe "#respond_to?" do
-      context "with a standardly_named methods" do
+      context "with standardly_named methods" do
         let(:my_account) { double BankAccount, name: "MY ACCOUNT" }
         let(:options) { { bank_acct: my_account } }
 
