@@ -284,6 +284,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: legalFrameworkApiHost
+  - name: LEGAL_FRAMEWORK_API_HOST_JS
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: legalFrameworkApiHostJS
   - name: SLACK_ALERT_EMAIL
     valueFrom:
       secretKeyRef:
