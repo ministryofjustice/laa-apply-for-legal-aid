@@ -47,12 +47,11 @@ RSpec/AnyInstance:
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
 
-# Offense count: 276
+# Offense count: 210
 # Configuration parameters: Prefixes, AllowedPatterns.
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_entities_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_variable_attributes_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
 
