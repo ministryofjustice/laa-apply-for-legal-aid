@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
-      context "XML request" do
+      describe "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:firm) { create(:firm, name: "Firm1") }
         let(:office) { create(:office, firm:) }
@@ -53,7 +53,7 @@ module CCMS
         #   expect(File.exist?(filename)).to be true
         # end
 
-        context "hard coded false attributes" do
+        describe "hard coded false attributes" do
           it "generates the block with boolean value set to false" do
             false_attributes.each do |config_spec|
               entity, attribute, user_defined_ind = config_spec
@@ -68,7 +68,7 @@ module CCMS
           end
         end
 
-        context "hard coded true attributes" do
+        describe "hard coded true attributes" do
           it "generates the block with boolean value set to false" do
             true_attributes.each do |config_spec|
               entity, attribute, user_defined_ind = config_spec
@@ -84,7 +84,7 @@ module CCMS
           end
         end
 
-        context "attributes in ADDPROPERTY entity" do
+        describe "attributes in ADDPROPERTY entity" do
           before { legal_aid_application.other_assets_declaration.update! second_home_value: 244_000 }
 
           it "generates all the attributes as false" do
@@ -101,7 +101,7 @@ module CCMS
           end
         end
 
-        context "attributes in bank_acct entity" do
+        describe "attributes in bank_acct entity" do
           it "generates each of the attributes as false for each bank account" do
             instances = %i[first_bank_acct_instance second_bank_acct_instance]
             instances.each do |instance|
@@ -114,7 +114,7 @@ module CCMS
           end
         end
 
-        context "attributes in vehicles entity" do
+        describe "attributes in vehicles entity" do
           it "generates each attribute as false" do
             vehicle_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
@@ -124,7 +124,7 @@ module CCMS
           end
         end
 
-        context "attributes in CLICAPITAL entity" do
+        describe "attributes in CLICAPITAL entity" do
           it "generates each attribute as false" do
             cli_capital_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :cli_capital, attr_name)
@@ -134,7 +134,7 @@ module CCMS
           end
         end
 
-        context "attributes in CLIPREMIUM entity" do
+        describe "attributes in CLIPREMIUM entity" do
           it "generates each attribute as false" do
             premium_bond_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :cli_premium, attr_name)
@@ -144,7 +144,7 @@ module CCMS
           end
         end
 
-        context "attributes in CLIPREMIUM entity" do
+        describe "attributes in CLIPREMIUM entity" do
           it "generates each attribute as false" do
             stocks_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :cli_stock, attr_name)
@@ -154,8 +154,8 @@ module CCMS
           end
         end
 
-        context "global means main dwelling attribute" do
-          context "applicant does not own main home" do
+        describe "global means main dwelling attribute" do
+          context "when the applicant does not own main home" do
             before { legal_aid_application.update! own_home: "no" }
 
             it "omits all the attributes" do
@@ -166,7 +166,7 @@ module CCMS
             end
           end
 
-          context "applicant owns main home outright" do
+          context "when the applicant owns main home outright" do
             before { legal_aid_application.update! own_home: "owned_outright" }
 
             it "generates all the attributes as false" do
@@ -178,7 +178,7 @@ module CCMS
             end
           end
 
-          context "applicant owns main home with a mortgage" do
+          context "when the applicant owns main home with a mortgage" do
             before { legal_aid_application.update! own_home: "mortgage" }
 
             it "generates all the attributes as false" do
@@ -190,8 +190,8 @@ module CCMS
             end
           end
 
-          context "conditionally present land attributes" do
-            context "applicant has land" do
+          context "when the conditionally present 'land' attribute is set" do
+            context "and applicant has land" do
               it "inserts attrs into the payload with false" do
                 conditional_land_attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :land, attr_name)
@@ -201,7 +201,7 @@ module CCMS
               end
             end
 
-            context "applicant has no land" do
+            context "and applicant has no land" do
               before { legal_aid_application.other_assets_declaration.update! land_value: 0 }
 
               it "does not insert attrs into the payload" do
@@ -212,124 +212,124 @@ module CCMS
               end
             end
           end
+        end
 
-          context "Life assurance attributes" do
+        describe "Life assurance attributes" do
+          it "generates attributes" do
+            life_assurance_attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :life_assurance, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        describe "money due attributes" do
+          context "when the applicant has money due" do
             it "generates attributes" do
-              life_assurance_attrs.each do |attr_name|
-                block = XmlExtractor.call(xml, :life_assurance, attr_name)
+              money_due_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :money_due, attr_name)
                 expect(block).to have_boolean_response false
                 expect(block).to be_user_defined
               end
             end
           end
 
-          context "money due attributes" do
-            context "applicant has money due" do
-              it "generates attributes" do
-                money_due_attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :money_due, attr_name)
-                  expect(block).to have_boolean_response false
-                  expect(block).to be_user_defined
-                end
-              end
-            end
+          context "when the applicant has no money due" do
+            before { legal_aid_application.other_assets_declaration.update! money_owed_value: nil }
 
-            context "applicant has no money due" do
-              before { legal_aid_application.other_assets_declaration.update! money_owed_value: nil }
-
-              it "does not generate the attributes" do
-                money_due_attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :money_due, attr_name)
-                  expect(block).not_to be_present
-                end
-              end
-            end
-          end
-
-          context "third party account attrs" do
-            it "generates attributes" do
-              third_party_acct_attrs.each do |attr_name|
-                block = XmlExtractor.call(xml, :third_party_acct, attr_name)
-                expect(block).to have_boolean_response false
-                expect(block).to be_user_defined
-              end
-            end
-          end
-
-          context "conditional timeshare attrs" do
-            context "applicant owns timeshare" do
-              it "generates the attributes" do
-                conditional_timeshare_attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :timeshare, attr_name)
-                  expect(block).to have_boolean_response false
-                  expect(block).to be_user_defined
-                end
-              end
-            end
-
-            context "applicant does not have timeshare" do
-              before { legal_aid_application.other_assets_declaration.update! timeshare_property_value: 0.0 }
-
-              it "does not generate the attributes" do
-                conditional_timeshare_attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :timeshare, attr_name)
-                  expect(block).not_to be_present
-                end
-              end
-            end
-          end
-
-          context "conditional trust attributes" do
-            context "applicant has a trust" do
-              it "generates the attributes" do
-                conditional_trust_attributes.each do |attr_name|
-                  block = XmlExtractor.call(xml, :trust, attr_name)
-                  expect(block).to have_boolean_response false
-                  expect(block).to be_user_defined
-                end
-              end
-            end
-
-            context "applicant doest not have a trust" do
-              before { legal_aid_application.other_assets_declaration.update! trust_value: nil }
-
-              it "does not generate the attributes" do
-                conditional_trust_attributes.each do |attr_name|
-                  block = XmlExtractor.call(xml, :trust, attr_name)
-                  expect(block).not_to be_present
-                end
-              end
-            end
-          end
-
-          context "conditional valuable possessions attributes" do
-            context "applicant has valuable possessions" do
-              before { other_assets_decl.update! valuable_items_value: 878_787 }
-
-              it "generates the attributes" do
-                conditional_valuable_possessions_attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
-                  expect(block).to have_boolean_response false
-                  expect(block).to be_user_defined
-                end
-              end
-            end
-
-            context "applicant does not have valuable possessions" do
-              before { other_assets_decl.update! valuable_items_value: nil }
-
-              it "goes not generate the attributes" do
-                conditional_valuable_possessions_attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
-                  expect(block).not_to be_present
-                end
+            it "does not generate the attributes" do
+              money_due_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :money_due, attr_name)
+                expect(block).not_to be_present
               end
             end
           end
         end
 
-        context "global means outgoing attributes" do
-          context "maintenance payments" do
+        describe "third party account attrs" do
+          it "generates attributes" do
+            third_party_acct_attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :third_party_acct, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        describe "conditional timeshare attrs" do
+          context "when the applicant owns timeshare" do
+            it "generates the attributes" do
+              conditional_timeshare_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :timeshare, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context "when the applicant does not have timeshare" do
+            before { legal_aid_application.other_assets_declaration.update! timeshare_property_value: 0.0 }
+
+            it "does not generate the attributes" do
+              conditional_timeshare_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :timeshare, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+        end
+
+        describe "conditional trust attributes" do
+          context "when the applicant has a trust" do
+            it "generates the attributes" do
+              conditional_trust_attributes.each do |attr_name|
+                block = XmlExtractor.call(xml, :trust, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context "when the applicant doest not have a trust" do
+            before { legal_aid_application.other_assets_declaration.update! trust_value: nil }
+
+            it "does not generate the attributes" do
+              conditional_trust_attributes.each do |attr_name|
+                block = XmlExtractor.call(xml, :trust, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+        end
+
+        describe "conditional valuable possessions attributes" do
+          context "when the applicant has valuable possessions" do
+            before { other_assets_decl.update! valuable_items_value: 878_787 }
+
+            it "generates the attributes" do
+              conditional_valuable_possessions_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context "when the applicant does not have valuable possessions" do
+            before { other_assets_decl.update! valuable_items_value: nil }
+
+            it "goes not generate the attributes" do
+              conditional_valuable_possessions_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+        end
+
+        describe "global means outgoing attributes" do
+          context "when there are maintenance payments" do
             let(:maintenance_transaction) { create(:transaction_type, :debit, name: "maintenance_out") }
 
             before do
@@ -342,7 +342,7 @@ module CCMS
               expect(block).to be_user_defined
             end
 
-            context "no payments" do
+            context "when there are no payments" do
               before { legal_aid_application.transaction_types.delete_all }
 
               it "does not have attributes" do
@@ -352,7 +352,7 @@ module CCMS
             end
           end
 
-          context "applicant criminal legal aid payments" do
+          context "when the applicant has criminal legal aid payments" do
             let(:criminal_legal_aid_transaction) { create(:transaction_type, :debit, name: "legal_aid") }
 
             before do
@@ -365,7 +365,7 @@ module CCMS
               expect(block).to be_user_defined
             end
 
-            context "no payments" do
+            context "when there are no payments" do
               before { legal_aid_application.transaction_types.delete_all }
 
               it "does not have attributes" do
@@ -375,7 +375,7 @@ module CCMS
             end
           end
 
-          context "childcare payments" do
+          context "when there are childcare payments" do
             let(:childcare_out) { create(:transaction_type, :debit, name: "child_care") }
 
             before do
@@ -388,7 +388,7 @@ module CCMS
               expect(block).to be_user_defined
             end
 
-            context "no childcare payments" do
+            context "when there are no childcare payments" do
               before { legal_aid_application.transaction_types.delete_all }
 
               it "does not have attribute block" do
@@ -399,7 +399,7 @@ module CCMS
           end
         end
 
-        context "attributes for WILL" do
+        describe "attributes for WILL" do
           it "generates the attributes" do
             will_attributes.each do |attr_name|
               block = XmlExtractor.call(xml, :will, attr_name)
@@ -409,7 +409,7 @@ module CCMS
           end
         end
 
-        context "CERTIFICATE_PREDICTED_COSTS - estimated costs" do
+        describe "CERTIFICATE_PREDICTED_COSTS - estimated costs" do
           it "generates the block with the right value" do
             block = XmlExtractor.call(xml, :global_merits, "CERTIFICATE_PREDICTED_COSTS")
             expect(block).to have_currency_response 25_000.0
@@ -417,7 +417,7 @@ module CCMS
           end
         end
 
-        context "URGENT_APPLICATION_TAG" do
+        describe "URGENT_APPLICATION_TAG" do
           it "generates the block with the right value" do
             block = XmlExtractor.call(xml, :global_merits, "URGENT_APPLICATION_TAG")
             expect(block).to have_text_response "Non Urgent"
@@ -425,7 +425,7 @@ module CCMS
           end
         end
 
-        context "COUNSEL_FEE_FAMILY" do
+        describe "COUNSEL_FEE_FAMILY" do
           it "generates the block with the right value" do
             block = XmlExtractor.call(xml, :proceeding_merits, "COUNSEL_FEE_FAMILY")
             expect(block).to have_currency_response 0.0
@@ -433,14 +433,14 @@ module CCMS
           end
         end
 
-        context "CHILD_CLIENT" do
+        describe "CHILD_CLIENT" do
           let(:sixteen_today) { 16.years.ago.to_date }
           let(:sixteen_yesterday) { sixteen_today - 1.day }
           let(:sixteen_tomorrow) { sixteen_today + 1.day }
 
           before { applicant.update! date_of_birth: dob }
 
-          context "applicant is 16 today" do
+          context "when the applicant is 16 today" do
             let(:dob) { sixteen_today }
 
             it "generates the block as an adult" do
@@ -450,7 +450,7 @@ module CCMS
             end
           end
 
-          context "applicant is 16 tomorrow" do
+          context "when the applicant is 16 tomorrow" do
             let(:dob) { sixteen_tomorrow }
 
             it "generates the block as a child" do
@@ -460,7 +460,7 @@ module CCMS
             end
           end
 
-          context "applicant was 16 yesterday" do
+          context "when the applicant was 16 yesterday" do
             let(:dob) { sixteen_yesterday }
 
             it "generates the block as an adult" do
@@ -471,8 +471,8 @@ module CCMS
           end
         end
 
-        context "EMERGENCY_DPS_APP_AMD" do
-          context "delegated functions used" do
+        describe "EMERGENCY_DPS_APP_AMD" do
+          context "when delegated functions are used" do
             before do
               legal_aid_application.proceedings.each do |proceeding|
                 proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Date.yesterday, used_delegated_functions_reported_on: Date.current)
@@ -486,7 +486,7 @@ module CCMS
             end
           end
 
-          context "delegated functions NOT used" do
+          context "when delegated functions are NOT used" do
             it "generates the block with true" do
               block = XmlExtractor.call(xml, :global_merits, "EMERGENCY_DPS_APP_AMD")
               expect(block).to have_boolean_response false
@@ -495,7 +495,7 @@ module CCMS
           end
         end
 
-        context "FAM_CERT_PREDICTED_COSTS" do
+        describe "FAM_CERT_PREDICTED_COSTS" do
           it "generates the block with the standard value" do
             block = XmlExtractor.call(xml, :global_merits, "FAM_CERT_PREDICTED_COSTS")
             expect(block).to have_currency_response default_cost
@@ -503,7 +503,7 @@ module CCMS
           end
         end
 
-        context "MERITS_CERT_PREDICTED_COSTS" do
+        describe "MERITS_CERT_PREDICTED_COSTS" do
           it "generates the block with the standard value" do
             block = XmlExtractor.call(xml, :global_merits, "MERITS_CERT_PREDICTED_COSTS")
             expect(block).to have_currency_response default_cost
@@ -511,14 +511,14 @@ module CCMS
           end
         end
 
-        context "attributes with specific hard coded values" do
+        describe "attributes with specific hard coded values" do
           it "IS_PASSPORTED should be hard coded to NO" do
             block = XmlExtractor.call(xml, :global_means, "IS_PASSPORTED")
             expect(block).to have_text_response "NO"
           end
         end
 
-        context "PROC_PREDICTED_COST_FAMILY" do
+        describe "PROC_PREDICTED_COST_FAMILY" do
           it "generates the block with the standard value" do
             block = XmlExtractor.call(xml, :global_merits, "PROC_PREDICTED_COST_FAMILY")
             expect(block).to have_currency_response default_cost
@@ -526,7 +526,7 @@ module CCMS
           end
         end
 
-        context "PROFIT_COST_FAMILY" do
+        describe "PROFIT_COST_FAMILY" do
           it "generates a block with the value from the default proceeding" do
             block = XmlExtractor.call(xml, :proceeding_merits, "PROFIT_COST_FAMILY")
             expect(block).to have_currency_response default_cost
@@ -534,14 +534,14 @@ module CCMS
           end
         end
 
-        context "GB_INPUT_C_13WP3_4A" do
+        describe "GB_INPUT_C_13WP3_4A" do
           it "is omitted" do
             block = XmlExtractor.call(xml, :global_means, "GB_INPUT_C_13WP3_4A")
             expect(block).not_to be_present
           end
         end
 
-        context "attributes omitted from payload" do
+        describe "attributes omitted from payload" do
           it "does not display the attributes in the payload" do
             omitted_attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -551,14 +551,14 @@ module CCMS
           end
         end
 
-        context "GB_INFER_T_6WP1_66A" do
+        describe "GB_INFER_T_6WP1_66A" do
           it "is omitted" do
             block = XmlExtractor.call(xml, :global_merits, "GB_INFER_T_6WP1_66A")
             expect(block).not_to be_present
           end
         end
 
-        context "Proceeding Matter Type Descriptions" do
+        describe "Proceeding Matter Type Descriptions" do
           let(:attrs) do
             %w[
               PROC_MATTER_TYPE_DESC
