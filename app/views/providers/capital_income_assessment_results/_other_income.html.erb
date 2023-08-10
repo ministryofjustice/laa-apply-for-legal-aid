@@ -1,14 +1,48 @@
 <h2 class="govuk-heading-m">
   <%= @cfe_result.jobs? ? t(".title") : t(".income") %>
 </h2>
-<table class="govuk-table">
-  <tbody>
-  <%= render partial: "shared/results_detail_row", locals: { caption: t(".benefits"), value: gds_number_to_currency(@cfe_result.monthly_state_benefits) } %>
-  <%= render partial: "shared/results_detail_row", locals: { caption: t(".friends_or_family"), value: gds_number_to_currency(@cfe_result.mei_friends_or_family) } %>
-  <%= render partial: "shared/results_detail_row", locals: { caption: t(".maintenance"), value: gds_number_to_currency(@cfe_result.mei_maintenance_in) } %>
-  <%= render partial: "shared/results_detail_row", locals: { caption: t(".property_or_lodger"), value: gds_number_to_currency(@cfe_result.mei_property_or_lodger) } %>
-  <%= render partial: "shared/results_detail_row", locals: { caption: t(".student_loan_or_grant"), value: gds_number_to_currency(@cfe_result.mei_student_loan) } %>
-  <%= render partial: "shared/results_detail_row", locals: { caption: t(".pension"), value: gds_number_to_currency(@cfe_result.mei_pension) } %>
-  <%= render partial: "shared/results_total_row", locals: { caption: t(".total"), value: gds_number_to_currency(@cfe_result.total_gross_income) } %>
-  </tbody>
-</table>
+
+<%= govuk_table do |table|
+      table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+
+      table.with_head do |head|
+        head.with_row do |row|
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".type_of_income"))
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
+        end
+      end
+
+      table.with_body do |body|
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".benefits"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.monthly_state_benefits))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".friends_or_family"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_friends_or_family))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".maintenance"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_maintenance_in))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".property_or_lodger"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_property_or_lodger))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".student_loan_or_grant"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_student_loan))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".pension"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_pension))
+        end
+      end
+
+      table.with_foot do |foot|
+        foot.with_row do |row|
+          row.with_cell(header: true, text: t(".total"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_gross_income))
+        end
+      end
+    end %>

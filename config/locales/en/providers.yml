@@ -115,11 +115,17 @@ en:
         total_outgoings: Total outgoings (includes tax and National Insurance)
         total_deductions: Total deductions (includes employment expenses)
         total_disposable: Total disposable income
+        table_caption: Disposable income
+        type_of_disposable_income: Type of disposable income
+        amount: Amount
       deductions:
         title: Deductions
         dependants_allowance: Dependants allowance
         excluded_benefits: Income from benefits excluded from calculation
         total_deductions: Total deductions
+        table_caption: Deductions
+        type_of_deduction: Type of deductions
+        amount: Amount
       employment_income:
         title: Employment income
         monthly_income_before_tax: Monthly income before tax
@@ -128,6 +134,9 @@ en:
         national_insurance: National Insurance
         fixed_employment_deduction: Fixed employment expenses deduction
         total: Total
+        table_caption: Employment income
+        income_type: Types of income
+        amount: Amount
       other_income:
         title: Other income
         income: Income
@@ -138,6 +147,9 @@ en:
         student_loan_or_grant: Student finance
         pension: Pension
         total: Total
+        table_caption: Income
+        type_of_income: Type of income
+        amount: Amount
       outgoings:
         title: Outgoings
         housing_costs: Housing costs
@@ -145,6 +157,9 @@ en:
         maintenance_out: Maintenance payments to a former partner
         legal_aid: Payments towards legal aid in a criminal case
         total_outgoings: Total outgoings
+        table_caption: Outgoings
+        type_of_outgoing: Type of outgoings
+        amount: Amount
 
     capital_introductions:
       show:
@@ -505,7 +520,7 @@ en:
           filename: Filename
           size: Size
           status: Status
-          action: This column contains delete buttons per upload
+          action: Action
           uploaded: Uploaded
           title: Files added
       client_denial_of_allegations:
@@ -679,6 +694,7 @@ en:
         h2-heading: Uploaded files
         upload_file: Upload files
       uploaded_files:
+        action: Action
         title: Uploaded files
         filename: Filename
         size: Size
@@ -686,7 +702,7 @@ en:
         uploaded: Uploaded
         delete: Delete
         select_a_category: Select a category
-        action: This column contains delete buttons per upload
+        action: Action
         select_a_category_label: "Select a category for %{filename}"
         update: Update
     has_other_dependants:
@@ -752,6 +768,7 @@ en:
         col_and_ref: and Ref
         col_and_state: and Status
         delete: Delete
+        delete_html: Delete <span class="govuk-visually-hidden">application %{reference} for %{applicant_name}</span>
         delete_suffix: " application %{reference} for %{applicant}"
     delete:
       show:

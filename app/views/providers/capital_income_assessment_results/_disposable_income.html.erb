@@ -1,9 +1,34 @@
 <h2 class="govuk-heading-m"><%= t(".title") %></h2>
-<table class="govuk-table">
-  <tbody>
-    <%= render partial: "shared/results_detail_row", locals: { caption: t(".total_income"), value: gds_number_to_currency(@cfe_result.total_monthly_income_including_employment_income) } %>
-    <%= render partial: "shared/results_detail_row", locals: { caption: t(".total_outgoings"), value: gds_number_to_currency(@cfe_result.total_monthly_outgoings_including_tax_and_ni) } %>
-    <%= render partial: "shared/results_detail_row", locals: { caption: t(".total_deductions"), value: gds_number_to_currency(@cfe_result.total_deductions_including_fixed_employment_allowance) } %>
-    <%= render partial: "shared/results_total_bold_row", locals: { caption: t(".total_disposable"), value: gds_number_to_currency(@cfe_result.total_disposable_income_assessed) } %>
-  <tbody>
-</table>
+
+<%= govuk_table do |table|
+      table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+
+      table.with_head do |head|
+        head.with_row do |row|
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".type_of_disposable_income"))
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
+        end
+      end
+
+      table.with_body do |body|
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".total_income"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_monthly_income_including_employment_income))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".total_outgoings"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_monthly_outgoings_including_tax_and_ni))
+        end
+        body.with_row do |row|
+          row.with_cell(header: true, text: t(".total_deductions"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_deductions_including_fixed_employment_allowance))
+        end
+      end
+
+      table.with_foot do |foot|
+        foot.with_row do |row|
+          row.with_cell(header: true, text: t(".total_disposable"))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_disposable_income_assessed))
+        end
+      end
+    end %>
