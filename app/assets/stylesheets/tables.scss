@@ -1,0 +1,23 @@
+// Footers are usually used provide a summary of the table contents.
+// They are not part of the GOV.UK Design System so custom styles are required.
+
+.govuk-table__foot {
+  border-top: 2px solid govuk-colour("black");
+}
+
+.govuk-table__footer {
+  padding: govuk-spacing(2) govuk-spacing(4) govuk-spacing(2) 0;
+  border-bottom: 1px solid $govuk-border-colour;
+  font-weight: 700;
+  text-align: left;
+  vertical-align: top;
+}
+
+.govuk-table__footer--numeric {
+  @include govuk-font($size: false, $weight: "bold", $tabular: true);
+  text-align: right;
+}
+
+.govuk-table__footer:last-child {
+  padding-right: 0;
+}
