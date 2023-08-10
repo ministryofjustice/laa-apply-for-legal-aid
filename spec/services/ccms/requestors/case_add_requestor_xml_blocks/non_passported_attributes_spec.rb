@@ -190,7 +190,7 @@ module CCMS
             end
           end
 
-          context "when conditionally present land attributes" do
+          context "when the conditionally present 'land' attribute is set" do
             context "and applicant has land" do
               it "inserts attrs into the payload with false" do
                 conditional_land_attrs.each do |attr_name|
