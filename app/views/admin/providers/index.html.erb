@@ -1,30 +1,32 @@
-<%= govuk_fieldset_header do %>
-  <h1 class="govuk-fieldset__heading">
-    <% title = @firm.present? ? t(".heading_1", firm_name: @firm.name) : t(".all_firms_heading_1") %>
-    <label for="#{title.downcase}">
-      <%= title %>
-    </label>
-  </h1>
-<% end %>
+<% title = @firm.present? ? t(".heading_1", firm_name: @firm.name) : t(".all_firms_heading_1") %>
+
+<%= page_template(
+      page_title: title,
+      back_link: :none,
+    ) %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col"><%= t(".username") %></th>
-        <th class="govuk-table__header" scope="col"><%= t(".email_address") %></th>
-      </tr>
-      </thead>
 
-      <tbody class="govuk-table__body">
-      <% @providers.each do |provider| %>
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell case-full-name"><%= provider.username %></td>
-          <td class="govuk-table__cell case-reference-number"><%= provider.email %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <%= govuk_table do |table|
+          table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: title)
+
+          table.with_head do |head|
+            head.with_row do |row|
+              row.with_cell(text: t(".username"))
+              row.with_cell(text: t(".email_address"))
+            end
+          end
+
+          table.with_body do |body|
+            @providers.each do |provider|
+              body.with_row do |row|
+                row.with_cell(text: provider.username)
+                row.with_cell(text: provider.email)
+              end
+            end
+          end
+        end %>
+
   </div>
 </div>

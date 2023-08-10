@@ -1,44 +1,47 @@
-<%= govuk_fieldset_header do %>
-  <h1 class="govuk-fieldset__heading">
-    <%= label_tag(t(".heading_1"), page_title) %>
-  </h1>
-<% end %>
+<%= page_template(
+      page_title: t(".heading_1"),
+      back_link: :none,
+    ) %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header govuk-!-width-one-quarter" scope="col"><%= t(".firm") %></th>
-          <th class="govuk-table__header" scope="col"><%= t(".num_users") %></th>
-          <th class="govuk-table__header govuk-!-width-one-half" scope="col"><%= t(".permissions") %></th>
-          <th class="govuk-table__header" scope="col"><%= t(".action") %></th>
-        </tr>
-      </thead>
 
-      <tbody class="govuk-table__body">
-        <% @firms.each do |firm| %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell"><%= firm.name %></td>
-            <td class="govuk-table__cell"><%= firm.providers.count %></td>
-            <td class="govuk-table__cell">
-              <ul>
-                <% firm.permissions.each do |permission| %>
-                  <li><%= permission.description %></li>
-                <% end %>
-              </ul>
-            </td>
-            <td class="govuk-table__cell">
-              <%= link_to_accessible(
-                    t(".view_users"),
+    <%= govuk_table do |table|
+          table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".heading_1"))
+
+          table.with_head do |head|
+            head.with_row do |row|
+              row.with_cell(html_attributes: { class: "govuk-!-width-one-quarter" }, text: t(".firm"))
+              row.with_cell(text: t(".num_users"))
+              row.with_cell(text: t(".permissions"))
+              row.with_cell(text: t(".action"))
+            end
+          end
+
+          table.with_body do |body|
+            @firms.each do |firm|
+              body.with_row do |row|
+                row.with_cell(text: firm.name)
+                row.with_cell(text: firm.providers.count)
+                row.with_cell do
+                  tag.ul(class: "govuk-list govuk-list--bullet") do
+                    firm.permissions.each do |permission|
+                      concat tag.li(permission.description)
+                    end
+                  end
+                end
+                row.with_cell do
+                  link_to_accessible(
+                    t(".view_users_html", provider: firm.name),
                     admin_firm_providers_path(firm),
                     id: "firm-#{firm.id}",
                     method: :get,
-                  ) %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+                  )
+                end
+              end
+            end
+          end
+        end %>
+
   </div>
 </div>
