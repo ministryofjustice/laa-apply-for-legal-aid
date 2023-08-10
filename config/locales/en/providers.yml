@@ -689,19 +689,6 @@ en:
         action: This column contains delete buttons per upload
         select_a_category_label: "Select a category for %{filename}"
         update: Update
-    gateway_evidences:
-      show:
-        h1-heading: Upload supporting evidence
-        hint_text: Use this page if you're applying for Section 8 proceedings and need to upload gateway evidence.
-        size_hint: The maximum file size is 7MB. Upload one file at a time.
-      uploaded_files:
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        action: This column contains delete buttons per upload
-        uploaded: Uploaded
-        title: Uploaded files
     has_other_dependants:
       show:
         error: Select yes if they have other dependants
