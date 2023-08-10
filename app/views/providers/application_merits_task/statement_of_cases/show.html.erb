@@ -91,12 +91,11 @@
 
   <h2 class="govuk-heading-m"><%= t(".h2-heading") %></h2>
   <div id="uploaded-files-table-container" data-uploading="<%= t("generic.uploading") %>">
-    <%= render partial: "uploaded_files", locals: { attachments: @form.model.original_attachments } %>
-    <% if @form.model.original_attachments.empty? %>
-      <p class="govuk-body">
-        <%= t(".no_files") %>
-      </p>
-    <% end %>
+    <%= render partial: "shared/uploaded_files",
+               locals: {
+                 attachments: @form.model.original_attachments,
+                 url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+               } %>
   </div>
 
   <%= form_with(
