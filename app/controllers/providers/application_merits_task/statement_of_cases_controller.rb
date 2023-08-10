@@ -24,8 +24,12 @@ module Providers
       end
 
       def list
-        render partial: "providers/application_merits_task/statement_of_cases/uploaded_files", locals: { attachments: legal_aid_application.attachments.statement_of_case }
-      end
+        render partial: "shared/uploaded_files",
+               locals: {
+                 attachments: legal_aid_application.attachments.statement_of_case,
+                 url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+               }
+        end
 
     private
 
