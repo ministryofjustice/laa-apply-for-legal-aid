@@ -29,7 +29,7 @@ module Providers
                  attachments: legal_aid_application.attachments.statement_of_case,
                  url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
                }
-        end
+      end
 
     private
 
