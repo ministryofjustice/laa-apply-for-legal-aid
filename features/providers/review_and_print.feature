@@ -200,7 +200,6 @@ Feature: Review and print your application
     And I should not see 'Print the application and get the person acting for'
 
   Scenario: For a non-means tested journey
-    Given the feature flag for means_test_review_phase_one is enabled
     Given I have completed a non-means tested journey with merits
     When I view the review and print your application page
 

@@ -55,7 +55,6 @@ RSpec.describe Setting do
       expect(described_class.enable_ccms_submission?).to be true
       expect(described_class.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
       expect(described_class.alert_via_sentry?).to be true
-      expect(described_class.means_test_review_phase_one?).to be false
       expect(described_class.partner_means_assessment?).to be false
       expect(described_class.opponent_organisations?).to be false
     end

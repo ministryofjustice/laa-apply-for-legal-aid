@@ -110,9 +110,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_135356) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at", precision: nil
-    t.boolean "employed"
     t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
+    t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.boolean "has_national_insurance_number"
@@ -585,9 +585,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_135356) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
     t.datetime "client_declaration_confirmed_at", precision: nil
     t.boolean "substantive_cost_override"
@@ -913,7 +913,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_135356) do
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
-    t.boolean "means_test_review_phase_one", default: false, null: false
     t.boolean "partner_means_assessment", default: false, null: false
     t.datetime "cfe_compare_run_at"
     t.boolean "opponent_organisations", default: false, null: false

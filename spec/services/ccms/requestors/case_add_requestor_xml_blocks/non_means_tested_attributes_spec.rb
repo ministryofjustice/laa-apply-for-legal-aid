@@ -53,7 +53,6 @@ module CCMS
 
         before do
           allow(proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
-          allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
         end
 
         # uncomment this example to create a file of the payload for manual inspection

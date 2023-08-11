@@ -1040,9 +1040,7 @@ RSpec.describe LegalAidApplication do
       it { expect(non_passported?).to be true }
     end
 
-    context "when non_means_tested? is true" do
-      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
+    context "when non-means-tested application" do
       let(:legal_aid_application) { build(:legal_aid_application, applicant:) }
       let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
 
@@ -1083,48 +1081,22 @@ RSpec.describe LegalAidApplication do
 
     let(:legal_aid_application) { build(:legal_aid_application, applicant:) }
 
-    context "when means_test_review_phase_one? enabled" do
-      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+    context "with applicant age of 17" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
 
-      context "with applicant age of 17" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
-
-        it { is_expected.to be true }
-      end
-
-      context "with applicant age of 18" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 18) }
-
-        it { is_expected.to be false }
-      end
-
-      context "with applicant age of nil" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
-
-        it { is_expected.to be false }
-      end
+      it { is_expected.to be true }
     end
 
-    context "when means_test_review_phase_one? disabled" do
-      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
+    context "with applicant age of 18" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 18) }
 
-      context "with applicant age of 17" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
+      it { is_expected.to be false }
+    end
 
-        it { is_expected.to be false }
-      end
+    context "with applicant age of nil" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
 
-      context "with applicant age of 18" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 18) }
-
-        it { is_expected.to be false }
-      end
-
-      context "with applicant age of nil" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
-
-        it { is_expected.to be false }
-      end
+      it { is_expected.to be false }
     end
   end
 
@@ -1157,48 +1129,22 @@ RSpec.describe LegalAidApplication do
 
     let(:legal_aid_application) { build(:legal_aid_application, applicant:) }
 
-    context "when means_test_review_phase_one? enabled" do
-      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+    context "with applicant age of 15" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 15) }
 
-      context "with applicant age of 15" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 15) }
-
-        it { is_expected.to be true }
-      end
-
-      context "with applicant age of 16" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 16) }
-
-        it { is_expected.to be false }
-      end
-
-      context "with applicant age of nil" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
-
-        it { is_expected.to be false }
-      end
+      it { is_expected.to be true }
     end
 
-    context "when means_test_review_phase_one? disabled" do
-      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
+    context "with applicant age of 16" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 16) }
 
-      context "with applicant age of 15" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 15) }
+      it { is_expected.to be false }
+    end
 
-        it { is_expected.to be true }
-      end
+    context "with applicant age of nil" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
 
-      context "with applicant age of 16" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: 16) }
-
-        it { is_expected.to be false }
-      end
-
-      context "with applicant age of nil" do
-        let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
-
-        it { is_expected.to be false }
-      end
+      it { is_expected.to be false }
     end
   end
 
