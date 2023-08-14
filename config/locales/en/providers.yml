@@ -1442,25 +1442,6 @@ en:
         correct_date: This date is correct
         different_date: I used delegated functions on a different date
         error: Select yes if this date is correct
-    vehicles:
-      estimated_values:
-        show:
-          heading: What is the estimated value of the vehicle?
-          use_car_valuation_sites: You can use car valuation websites to find this out.
-      ages:
-        show:
-          heading: Was the vehicle bought over 3 years ago?
-      regular_uses:
-        show:
-          heading: Is the vehicle in regular use?
-          include_partner_use: This means the vehicle is used at least once every 2 weeks for things like work, shopping or driving children to school.
-      remaining_payments:
-        show:
-          heading: Are there any payments left on the vehicle?
-          detail_of_payments_to_include: |
-            Include any outstanding payments on loans, hire purchase (HP) or
-            personal contract purchase (PCP) agreements.
-          enter_amount_left_to_pay: Enter the amount left to pay
     email_addresses:
       show:
         page_title: Enter your client's email address
