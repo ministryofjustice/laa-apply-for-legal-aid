@@ -1,0 +1,61 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_means_vehicle_details_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
+
+    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: page_title }  do %>
+      <%= form.govuk_text_field :estimated_value,
+                                label: { text: t(".estimated_value.question"), tag: "h2", size: "m" },
+                                hint: { text: t(".estimated_value.use_car_valuation_sites") },
+                                value: number_to_currency_or_original_string(@form.model.estimated_value),
+                                width: "one-third",
+                                prefix_text: "£" %>
+
+      <%= form.govuk_radio_buttons_fieldset(:payments_remain,
+                                            legend: { text: t(".remaining_payments.question"), tag: "h2", size: "m" },
+                                            hint: { text: t(".remaining_payments.detail_of_payments_to_include") }) do %>
+        <%= form.govuk_radio_button(:payments_remain, true,
+                                    label: { text: t("generic.yes") },
+                                    checked: (@form.payment_remaining.present? && @form.payment_remaining != 0)) do %>
+          <%= form.govuk_text_field(
+                :payment_remaining,
+                label: { text: t(".remaining_payments.enter_amount_left_to_pay") },
+                value: number_to_currency_or_original_string(@form.payment_remaining),
+                prefix_text: t("currency.gbp"),
+                width: "one-third",
+              ) %>
+        <% end %>
+        <%= form.govuk_radio_button(:payments_remain, false,
+                                    label: { text: t("generic.no") },
+                                    checked: @form.payment_remaining&.zero?) %>
+      <% end %>
+
+      <%= form.govuk_collection_radio_buttons(
+            :more_than_three_years_old,
+            yes_no_options,
+            :value,
+            :label,
+            legend: { text: t(".ages.question"), tag: "h2", size: "m" },
+          ) %>
+
+      <%= form.govuk_collection_radio_buttons(
+            :used_regularly,
+            yes_no_options,
+            :value,
+            :label,
+            legend: { text: t(".regular_uses.question"), tag: "h2", size: "m" },
+            hint: { text: t(".regular_uses.include_partner_use") },
+          ) %>
+    <% end %>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form:,
+        ) %>
+  <% end %>
+<% end %>
