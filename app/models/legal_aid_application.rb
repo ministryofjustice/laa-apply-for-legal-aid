@@ -78,6 +78,7 @@ class LegalAidApplication < ApplicationRecord
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
   delegate :applicant_enter_means!,
            :await_applicant!,
+           :case_add_requestor,
            :check_applicant_details!,
            :check_citizen_answers!,
            :check_merits_answers!,

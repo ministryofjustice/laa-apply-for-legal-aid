@@ -29,7 +29,7 @@ module CCMS
       end
 
       def case_add_requestor
-        @case_add_requestor ||= CaseAddRequestorFactory.call(submission, @options)
+        @case_add_requestor ||= submission.case_add_requestor(@options)
       end
 
       def case_add_response_parser

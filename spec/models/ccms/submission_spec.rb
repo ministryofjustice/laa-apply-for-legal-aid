@@ -15,19 +15,47 @@ module CCMS
              case_poll_count:)
     end
 
-    context "with Validations" do
-      it "errors if no legal aid application id is present" do
+    context "when validating" do
+      it "legal aid application id must be present" do
         submission.legal_aid_application = nil
         expect(submission).not_to be_valid
         expect(submission.errors[:legal_aid_application_id]).to eq ["can't be blank"]
       end
     end
 
-    describe "initial state" do
+    describe "#aasm_state" do
       let(:submission) { create(:submission) }
 
-      it "puts new records into the initial state" do
+      it "has initial state of initialised" do
         expect(submission.aasm_state).to eq "initialised"
+      end
+    end
+
+    describe "#case_add_requestor" do
+      subject(:case_add_requestor) { submission.case_add_requestor }
+
+      context "with passported application" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine) }
+
+        it "returns an instance of CaseAddRequestor" do
+          expect(case_add_requestor).to be_instance_of(CCMS::Requestors::CaseAddRequestor)
+        end
+      end
+
+      context "with non-passported application" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine) }
+
+        it "returns an instance of NonPassportedCaseAddRequestor" do
+          expect(case_add_requestor).to be_instance_of(CCMS::Requestors::NonPassportedCaseAddRequestor)
+        end
+      end
+
+      context "with non-means-tested application" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_non_means_tested_state_machine) }
+
+        it "returns an instance of NonMeansTestedCaseAddRequestor" do
+          expect(case_add_requestor).to be_instance_of(CCMS::Requestors::NonMeansTestedCaseAddRequestor)
+        end
       end
     end
 
