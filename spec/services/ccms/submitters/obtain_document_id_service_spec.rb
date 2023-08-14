@@ -50,7 +50,7 @@ module CCMS
             create(:attachment, :means_report, legal_aid_application:)
             create(:attachment, :bank_transaction_report, legal_aid_application:)
             create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:)
-            create(:gateway_evidence, :with_original_and_pdf_files_attached, legal_aid_application:)
+            create(:uploaded_evidence_collection, :with_original_and_pdf_files_attached, legal_aid_application:)
           end
 
           let(:all_attachment_types) do
