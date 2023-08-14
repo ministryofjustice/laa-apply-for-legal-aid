@@ -72,11 +72,11 @@ RSpec.describe PdfConverter do
   end
 
   context "when attachment is gateway evidence" do
-    let(:gateway_evidence) { create(:gateway_evidence) }
+    let(:uploaded_evidence_collection) { create(:uploaded_evidence_collection) }
     let(:file) { FileStruct.new("hello_world.pdf", "application/pdf") }
-    let(:original_file) { gateway_evidence.original_files.first }
+    let(:original_file) { uploaded_evidence_collection.original_files.first }
     let(:filepath) { Rails.root.join("spec/fixtures/files/documents/#{file.name}").to_s }
-    let(:attachment) { gateway_evidence.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence", attachment_name: "gateway_evidence") }
+    let(:attachment) { uploaded_evidence_collection.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence", attachment_name: "gateway_evidence") }
 
     before do
       attachment.document.attach(io: File.open(filepath), filename: file.name, content_type: file.content_type)
@@ -100,32 +100,32 @@ RSpec.describe PdfConverter do
         it "converts the file to pdf" do
           expect(Libreconv).to receive(:convert)
           expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
-          pdf_attachment = gateway_evidence.pdf_attachments.first
+          pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
           expect(pdf_attachment.attachment_name).to eq "gateway_evidence.pdf"
         end
 
         it "relates the pdf record to the original file" do
           subject
-          pdf_attachment = gateway_evidence.pdf_attachments.first
-          attachment = gateway_evidence.original_attachments.first
+          pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
+          attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence").first
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
         end
 
         context "and there are multiple uploaded files" do
-          let(:attachment) { gateway_evidence.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence", attachment_name: "gateway_evidence_2") }
+          let(:attachment) { uploaded_evidence_collection.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence", attachment_name: "gateway_evidence_2") }
 
           it "converts the file to pdf" do
             expect(Libreconv).to receive(:convert)
             expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
-            pdf_attachment = gateway_evidence.pdf_attachments.first
+            pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
             expect(pdf_attachment.attachment_name).to eq "gateway_evidence_2.pdf"
             expect(pdf_attachment.attachment_type).to eq "gateway_evidence_pdf"
           end
 
           it "relates the pdf record to the original file" do
             subject
-            pdf_attachment = gateway_evidence.pdf_attachments.first
-            attachment = gateway_evidence.original_attachments.first
+            pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
+            attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence").first
             expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
           end
         end
