@@ -533,7 +533,7 @@ FactoryBot.define do
 
     trait :with_gateway_evidence do
       after(:create) do |application|
-        create(:gateway_evidence, :with_original_file_attached, legal_aid_application: application)
+        create(:uploaded_evidence_collection, :with_original_file_attached, legal_aid_application: application)
       end
     end
 
