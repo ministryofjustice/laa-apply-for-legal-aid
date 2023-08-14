@@ -2,6 +2,8 @@ module ApplicationMeritsTask
   class Opponent < ApplicationRecord
     include CCMSOpponentIdGenerator
 
+    self.ignored_columns += %w[first_name last_name]
+
     belongs_to :opposable, polymorphic: true, dependent: :destroy
     belongs_to :legal_aid_application
 
