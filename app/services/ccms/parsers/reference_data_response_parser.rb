@@ -6,6 +6,7 @@ module CCMS
 
       def reference_id
         @reference_id ||= parse(:extracted_reference_id)
+        check_case_ccms_reference
       end
 
       def response_type
@@ -20,6 +21,12 @@ module CCMS
 
       def extracted_reference_id
         text_from(RESULTS_PATH)
+      end
+
+      def check_case_ccms_reference
+        return @reference_id if @reference_id != "ERROR"
+
+        raise CCMSError, "case_ccms_reference returned as ERROR"
       end
     end
   end
