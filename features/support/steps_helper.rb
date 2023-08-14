@@ -114,6 +114,11 @@ Then("I choose option {string}") do |field|
   choose(field.parameterize(separator: "-"), allow_label_click: true)
 end
 
+Then("I answer/change {string} with/to {string}") do |question, answer|
+  control = find(:xpath, "//h2[text()='#{question}']/ancestor::fieldset[1]//child::label[contains(text(), '#{answer}')]")
+  control.click
+end
+
 # This can be used to display the state of the application
 # Usage:
 # Then I display the state of the application from 123
