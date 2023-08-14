@@ -72,8 +72,6 @@ module CCMS
       end
 
       context "with non-means-tested application" do
-        before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
-
         let(:legal_aid_application) do
           create(:legal_aid_application,
                  :with_under_18_applicant,
