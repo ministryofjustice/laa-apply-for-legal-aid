@@ -204,7 +204,6 @@ Rails.application.routes.draw do
       resource :nature_of_urgencies, only: %i[show update], controller: "application_merits_task/nature_of_urgencies"
       resource :merits_task_list, only: %i[show update]
 
-      resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
         get "/list", to: "uploaded_evidence_collections#list"
       end
