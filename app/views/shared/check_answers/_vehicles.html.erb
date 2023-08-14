@@ -24,7 +24,7 @@
       <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicle.estimated_value) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
             visually_hidden_text: t(".#{journey_type}.estimated_value"),
           ) %>
     <% end %>
@@ -34,7 +34,7 @@
       <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
             visually_hidden_text: t(".#{journey_type}.payment_remaining"),
           ) %>
     <% end %>
@@ -44,7 +44,7 @@
       <%= row.with_value { yes_no(@legal_aid_application.vehicle.more_than_three_years_old?) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
             visually_hidden_text: t(".#{journey_type}.more_than_three_years_old"),
           ) %>
     <% end %>
@@ -54,7 +54,7 @@
       <%= row.with_value { yes_no(@legal_aid_application.vehicle.used_regularly) } %>
       <%= row.with_action(
             text: t("generic.change"),
-            href: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
+            href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
             visually_hidden_text: t(".#{journey_type}.used_regularly"),
           ) %>
     <% end %>
