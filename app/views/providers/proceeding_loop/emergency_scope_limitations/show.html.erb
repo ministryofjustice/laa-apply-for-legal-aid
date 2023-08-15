@@ -5,7 +5,7 @@
       local: true,
     ) do |form| %>
   <%= page_template template: :basic, form: do %>
-    <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
+    <span class="govuk-caption-xl"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
     <%= form.govuk_check_boxes_fieldset :scope_codes, legend: { size: "m", tag: "h2", text: t(".select_emergency_scope") },
                                                       hint: { text: t("generic.select_all_that_apply") } do %>
