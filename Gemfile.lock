@@ -100,6 +100,11 @@ GEM
       nokogiri
     ast (2.4.2)
     attr_extras (7.1.0)
+    audits1984 (0.1.4)
+      console1984
+      rinku
+      rouge
+      turbo-rails
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.805.0)
@@ -166,6 +171,9 @@ GEM
       ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    console1984 (0.1.28)
+      parser
+      rainbow
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -539,6 +547,8 @@ GEM
       railties (>= 5.2)
     retriable (3.1.2)
     rexml (3.2.6)
+    rinku (2.0.6)
+    rouge (4.1.2)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -676,6 +686,10 @@ GEM
     thread_safe (0.3.6)
     timeout (0.4.0)
     trailblazer-option (0.1.2)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2023.3)
@@ -722,6 +736,7 @@ DEPENDENCIES
   action_dispatch-testing-integration-capybara!
   active_model_serializers (~> 0.10.13)
   addressable
+  audits1984
   awesome_print (~> 1.9.2)
   aws-sdk-s3
   axe-core-cucumber
@@ -730,6 +745,7 @@ DEPENDENCIES
   business
   byebug
   capybara (>= 3.36.0, < 4.0)
+  console1984
   cssbundling-rails
   cucumber
   cucumber-rails (>= 2.4.0)
