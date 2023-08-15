@@ -11,11 +11,13 @@
         <%= f.password_field :password, autocomplete: "current-password", class: "govuk-input govuk-input--width-20" %>
       </div>
 
-      <div class="actions">
-        <%= f.submit t(".button"), class: "govuk-button" %>
+      <div class="actions govuk-button-group">
+        <%= f.govuk_submit t(".button") %>
+        <%= govuk_link_to(t(".google_login"), omniauth_login_start_path(:google_oauth2), method: :post) %>
       </div>
     <% end %>
   <% end %>
+  <% else %>
+    <%= govuk_link_to(t(".google_login"), omniauth_login_start_path(:google_oauth2), method: :post) %>
+  <% end %>
 <% end %>
-
-<%= link_to_accessible(t(".google_login"), omniauth_login_start_path(:google_oauth2), method: :post) %>

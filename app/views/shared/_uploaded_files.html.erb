@@ -27,7 +27,7 @@
           <td class="govuk-table__cell"><%= attachment.document.filename %></td>
           <td class="govuk-table__cell"><%= govuk_tag(text: t(".uploaded")) %></td>
           <td class="govuk-table__cell">
-            <%= button_to_accessible(
+            <%= govuk_button_to(
                   t(".delete"),
                   url,
                   method: :delete,

@@ -16,7 +16,7 @@
       <td class="govuk-table__cell no-wrap"><%= number_to_human_size(attachment.document.blob.byte_size) %></td>
       <td class="govuk-table__cell"><%= govuk_tag(text: t(".uploaded")) %></td>
       <td class="govuk-table__cell">
-        <%= button_to_accessible(
+        <%= govuk_button_to(
               t(".delete"),
               providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
               method: :delete,

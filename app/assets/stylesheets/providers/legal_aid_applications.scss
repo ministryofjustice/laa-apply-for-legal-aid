@@ -23,14 +23,22 @@ div.no-results {
 }
 
 .button-as-link {
+  margin: 0;
   padding: 0 !important;
   border: none;
   outline: none;
   color: $govuk-link-colour;
   background: none;
+  box-shadow: none;
   font: inherit;
   text-decoration: underline;
   cursor: pointer;
+  
+  &:hover:not(:focus) {
+    color: $govuk-link-hover-colour;
+    background: none;
+    text-decoration: underline;
+  }
 
   &:focus {
     outline: 3px solid transparent;
