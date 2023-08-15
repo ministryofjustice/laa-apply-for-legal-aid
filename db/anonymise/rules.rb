@@ -9,6 +9,11 @@ require "faker"
 NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
 
 @rules = {
+  audits1984_audits: {},
+  console1984_commands: {},
+  console1984_sensitive_accesses: {},
+  console1984_sessions: {},
+  console1984_users: {},
   active_storage_attachments: {},
   active_storage_blobs: {},
   active_storage_variant_records: {},

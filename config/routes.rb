@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq-status/web"
   mount Sidekiq::Web => "/sidekiq"
+  mount Audits1984::Engine => "/console"
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
     username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
