@@ -9,6 +9,9 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+  config.audits1984.auditor_class = AdminUser
+  config.audits1984.auditor_name_attribute = :username
+  config.audits1984.base_controller_class = Admin::AdminBaseController
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
