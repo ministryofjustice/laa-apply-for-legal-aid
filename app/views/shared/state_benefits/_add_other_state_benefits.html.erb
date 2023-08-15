@@ -5,7 +5,7 @@
       local: true,
     ) do |form| %>
   <%= page_template page_title:, form:, template: :basic do %>
-    <span class="govuk-caption-l"><%= caption %></span>
+    <span class="govuk-caption-xl"><%= caption %></span>
     <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@transactions.count, "benefit").to_s) %></h1>
     <%= govuk_summary_list(classes: "summary_list_action_width_auto") do |summary_list| %>
       <% @transactions.order(:created_at).each_with_index do |transaction, index| %>
