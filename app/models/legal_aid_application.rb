@@ -239,7 +239,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def parent_transaction_types
-    ids = transaction_types.map(&:parent_or_self).map(&:id)
+    ids = transaction_types.map { |transaction| transaction.parent_or_self.id }
     TransactionType.where(id: ids)
   end
 
