@@ -18,6 +18,8 @@ module LaaApplyForLegalAid
     # See https://guides.rubyonrails.org/action_controller_overview.html#cookies for more information.
     config.action_dispatch.cookies_serializer = :hybrid
     config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
+
+    config.active_record.encryption.support_unencrypted_data = true
     config.console1984.ask_for_username_if_empty = true
 
     # Changes in rails 7.0.3.1 prevented Synbols being used in serialised fields
