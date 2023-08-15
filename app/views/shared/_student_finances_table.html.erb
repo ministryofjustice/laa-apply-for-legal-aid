@@ -1,14 +1,13 @@
 <section>
   <%= govuk_table do |table|
         table.with_caption(
-          size: "s",
           text: t("date.date_period", from: period.first, to: period.last),
-          classes: "govuk-!-padding-bottom-2 govuk-!-padding-top-6",
+          classes: "govuk-!-padding-top-6",
         )
 
         table.with_body do |body|
           body.with_row do |row|
-            row.with_cell(text: t(".label"))
+            row.with_cell(header: true, text: t(".label"))
             row.with_cell(text: gds_number_to_currency(student_finance_amount), numeric: true)
           end
         end
