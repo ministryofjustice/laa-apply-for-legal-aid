@@ -18,12 +18,12 @@ module Banking
     describe ".call" do
       it "updates the balances on acct1" do
         txs = acct1.bank_transactions.most_recent_first
-        expect(txs.map(&:running_balance).map(&:to_f)).to eq [733.44, 634.78, 671.05, 746.27]
+        expect(txs.map { |transaction| transaction.running_balance.to_f }).to eq [733.44, 634.78, 671.05, 746.27]
       end
 
       it "updates the balances on acct2" do
         txs = acct2.bank_transactions.most_recent_first
-        expect(txs.map(&:running_balance).map(&:to_f)).to eq [2.36, -96.3, -60.03, 15.19]
+        expect(txs.map { |transaction| transaction.running_balance.to_f }).to eq [2.36, -96.3, -60.03, 15.19]
       end
     end
 
