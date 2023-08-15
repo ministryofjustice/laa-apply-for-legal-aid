@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :page_not_found
 
   def find_current_auditor
-    "bob" # TODO: work out how to validate from google login!
+    current_admin_user # TODO: work out how to validate from google login!
   end
 
 private
