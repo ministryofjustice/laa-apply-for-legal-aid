@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_072458) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_15_155824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1026,7 +1026,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_072458) do
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
-  add_foreign_key "chances_of_successes", "proceedings"
+  add_foreign_key "chances_of_successes", "proceedings", on_delete: :cascade
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "domestic_abuse_summaries", "legal_aid_applications"
