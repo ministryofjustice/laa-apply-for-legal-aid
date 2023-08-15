@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', event => {
     deleteCaseName.textContent = '' // removes any hangover content
     deleteCaseRef.textContent = '' // removes any hangover content
     confirmDeleteButton.disabled = false // enable button
+    confirmDeleteButton.classList.remove('govuk-button--disabled') // remove disabled property from button
     confirmDeleteButton.setAttribute('data-application-id', applicationID) // set the delete button to reference the specific case (this is for comparison, so another click on the same button will remove the box)
     confirmDeleteButton.closest('form').setAttribute('action', action) // tells confirm button what to delete
     document.querySelector('#delete-message').textContent = deleteTitle // changes title of error box
