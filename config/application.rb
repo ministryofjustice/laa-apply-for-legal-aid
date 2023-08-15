@@ -83,6 +83,7 @@ module LaaApplyForLegalAid
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
 
     config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
+    config.x.legal_framework_api_host_for_js = ENV.fetch("LEGAL_FRAMEWORK_API_HOST_JS", config.x.legal_framework_api_host)
 
     config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 
