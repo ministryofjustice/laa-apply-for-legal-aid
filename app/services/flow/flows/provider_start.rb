@@ -28,12 +28,12 @@ module Flow
         },
         address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
-          forward: :proceedings_types,
+          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
           check_answers: :check_provider_answers,
         },
         addresses: {
           path: ->(application) { urls.providers_legal_aid_application_address_path(application) },
-          forward: :proceedings_types,
+          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
           check_answers: :check_provider_answers,
         },
         about_financial_means: {
@@ -54,8 +54,8 @@ module Flow
         },
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
-          forward: lambda do |application, has_other_proceeding|
-            if has_other_proceeding
+          forward: lambda do |application, add_another_proceeding|
+            if add_another_proceeding
               :proceedings_types
             else
               Flow::ProceedingLoop.next_step(application)
