@@ -18,6 +18,7 @@
                                             legend: { text: t(".remaining_payments.question"), tag: "h2", size: "m" },
                                             hint: { text: t(".remaining_payments.detail_of_payments_to_include") }) do %>
         <%= form.govuk_radio_button(:payments_remain, true,
+                                    link_errors: true,
                                     label: { text: t("generic.yes") },
                                     checked: (@form.payment_remaining.present? && @form.payment_remaining != 0)) do %>
           <%= form.govuk_text_field(
@@ -30,7 +31,7 @@
         <% end %>
         <%= form.govuk_radio_button(:payments_remain, false,
                                     label: { text: t("generic.no") },
-                                    checked: @form.payment_remaining&.zero?) %>
+                                    checked: @form.payment_remaining.present? && @form.payment_remaining.zero?) %>
       <% end %>
 
       <%= form.govuk_collection_radio_buttons(
@@ -50,8 +51,6 @@
             hint: { text: t(".regular_uses.include_partner_use") },
           ) %>
     <% end %>
-
-    <div class="govuk-!-padding-bottom-4"></div>
 
     <%= next_action_buttons(
           show_draft: true,
