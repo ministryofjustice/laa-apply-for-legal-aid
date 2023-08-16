@@ -5,6 +5,10 @@ module Admin
 
   protected
 
+    def find_current_auditor
+      current_admin_user # TODO: work out how to validate from google login!
+    end
+
     def check_vpn_ipaddr
       redirect_to error_path(:access_denied) unless ip_addr_authorised?(current_ip_address)
     end

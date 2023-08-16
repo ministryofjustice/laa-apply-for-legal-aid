@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
   # See also catch all route at end of config/routes.rb
   rescue_from ActiveRecord::RecordNotFound, with: :page_not_found
 
-  def find_current_auditor
-    current_admin_user # TODO: work out how to validate from google login!
-  end
-
 private
 
   def page_not_found
