@@ -88,14 +88,14 @@ RSpec.describe Providers::Means::VehicleDetailsController do
         )
       end
 
-      context "when the application is non-passported" do
+      context "and the application is non-passported" do
         it "redirects to next step" do
           patch_vehicle_details
           expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
         end
       end
 
-      context "when the application is passported" do
+      context "and the application is passported" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
 
         it "redirects to next step" do
@@ -104,7 +104,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
         end
       end
 
-      context "when the Form is submitted using Save as draft button" do
+      context "and the Form is submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
@@ -117,7 +117,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
         end
       end
 
-      context "and checking non passported answers" do
+      context "and the user is checking non passported answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
         it "redirects to check capital answers page" do
@@ -126,7 +126,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
         end
       end
 
-      context "and checking passported answers" do
+      context "and the user is checking passported answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to passported check answers page" do
