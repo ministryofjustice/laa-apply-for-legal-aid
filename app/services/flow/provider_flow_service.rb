@@ -8,7 +8,6 @@ module Flow
               .deep_merge(Flows::ProviderIncome::STEPS)
               .deep_merge(Flows::ProviderCapital::STEPS)
               .deep_merge(Flows::ProviderDependants::STEPS)
-              .deep_merge(Flows::ProviderVehicle::STEPS)
               .deep_merge(Flows::ProviderMerits::STEPS)
 
     use_steps(steps.freeze)

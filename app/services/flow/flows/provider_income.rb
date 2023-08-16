@@ -1,4 +1,4 @@
-module Flows
+module Flow
   module Flows
     class ProviderIncome < FlowSteps
       STEPS = {
