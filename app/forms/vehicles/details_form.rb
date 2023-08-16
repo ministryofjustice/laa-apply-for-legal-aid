@@ -11,14 +11,14 @@ module Vehicles
     validates :estimated_value,
               currency: { greater_than_or_equal_to: 0, allow_blank: true },
               presence: { unless: :draft? }
-    validates :more_than_three_years_old, presence: { unless: :draft? }
-    validates :payments_remain, presence: true, unless: :draft?
+    validates :payments_remain, presence: { unless: :draft? }
     validates(
       :payment_remaining,
       currency: { greater_than_or_equal_to: 0, allow_blank: true },
       presence: { unless: :draft? },
       if: :payments_remain?,
     )
+    validates :more_than_three_years_old, presence: { unless: :draft? }
     validates :used_regularly, presence: { unless: :draft? }
 
     def payments_remain?

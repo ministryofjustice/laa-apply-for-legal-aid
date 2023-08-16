@@ -37,8 +37,8 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
     context "when values are provided" do
       let(:estimated_value) { "5000.00" }
       let(:more_than_three_years_old) { "false" }
-      let(:payment_remaining) { "true" }
-      let(:payments_remain) { "1000" }
+      let(:payments_remain) { "true" }
+      let(:payment_remaining) { "1000" }
       let(:used_regularly) { "true" }
 
       it "does not raise any errors" do
@@ -51,7 +51,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
   describe "#save" do
     subject(:save_form) { vehicle_details_form.save }
 
-    let(:estimated_value) { 5000.00 }
+    let(:estimated_value) { "£5000.00" }
     let(:more_than_three_years_old) { "false" }
     let(:payments_remain) { "true" }
     let(:payment_remaining) { 1000 }
@@ -70,7 +70,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
       end
     end
 
-    context "when the payment_remaining is false and payments_remain is set" do
+    context "when the payments_remain is false and payment_remaining is set" do
       let(:payments_remain) { "false" }
 
       before { save_form }
