@@ -13,7 +13,7 @@ module Providers
     private
 
       def vehicle
-        @vehicle = legal_aid_application.vehicle || legal_aid_application.build_vehicle
+        @vehicle ||= legal_aid_application.vehicle || legal_aid_application.build_vehicle
       end
 
       def form_params
