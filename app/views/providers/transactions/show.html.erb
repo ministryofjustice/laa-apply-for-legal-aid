@@ -30,15 +30,13 @@
     </details>
   <% end %>
 
-  <div class="govuk-!-padding-bottom-4"></div>
-
   <%= form_with(method: :patch, local: true) do |form| %>
 
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
 
     <%= govuk_table(html_attributes: { class: "sortable table-merge_columns" }) do |table|
-          table.with_caption do
+          table.with_caption(size: "s") do
             if @bank_transactions.any?
               tag.h2 do
                 t(".table_description_html", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application))
@@ -83,10 +81,12 @@
                   if builder.object.transaction_type_id.nil?
                     tag.div(class: "govuk-checkboxes__item") do
                       checked = builder.object.transaction_type_id == @transaction_type.id
-                      builder.check_box(class: "govuk-checkboxes__input", checked:)
-                      builder.label(class: "govuk-label govuk-checkboxes__label govuk-visually-hiddenX") do
-                        "#{builder.object.description}, #{value_with_currency_unit(builder.object.amount, builder.object.currency)} on #{l(builder.object.happened_at.to_date, format: :long_date)}"
-                      end
+                      builder.check_box(class: "govuk-checkboxes__input", checked:, "aria-labelledby" => "Date-#{builder.object.id} Description-#{builder.object.id} Amount-#{builder.object.id}") +
+                        builder.label(class: "govuk-label govuk-checkboxes__label") do
+                          tag.span(class: "govuk-visually-hidden") do
+                            "#{builder.object.description}, #{value_with_currency_unit(builder.object.amount, builder.object.currency)} on #{l(builder.object.happened_at.to_date, format: :long_date)}"
+                          end
+                        end
                     end
                   end
                 end

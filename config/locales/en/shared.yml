@@ -654,18 +654,30 @@ en:
       disregards: Disregards and deductions
       assessment_amount: Amount included in calculation
       additional_property: Additional property
+      table_caption: Property calculations
+      property_values: Property values
+      amount: Amount
     vehicle_results:
       vehicles: Vehicles
       value: Value
       oustanding_payments: Outstanding payments
       disregards: Disregards and deductions
       assessment_amount: Amount included in calculation
+      table_caption: Vehicles
+      vehicles_detail: Vehicles detail
+      amount: Amount
     savings_and_investments:
       savings_and_investments: Savings and investments
       assessed_amount: Total savings and investments
+      table_caption: Savings and investments
+      savings_and_investments_type: Type of savings and investments
+      amount: Amount
     other_assets:
       other_assets: Other assets
       assessed_amount: Total assets
+      table_caption: Other assets
+      type_of_asset: Type of asset
+      amount: Amount
     total_capital:
       total_assessed_capital: Disposable capital
       property: Property
@@ -675,6 +687,9 @@ en:
       disposable_capital: Total disposable capital
       pensioner_disregard: Pensioner disregard
       total_capital: Total
+      table_caption: Disposable capital
+      type_of_capital: Type of capital
+      amount: Amount
     restrictions:
       restrictions: Restrictions on your client's assets
       none: None
@@ -820,7 +835,7 @@ en:
       filename: Filename
       size: Size
       status: Status
-      action: This column contains delete buttons per upload
+      action: Action
       uploaded: Uploaded
       title: Files added
       no_files: Files uploaded will appear here.
