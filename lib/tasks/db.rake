@@ -1,6 +1,11 @@
 def build_postgres_url
-  "postgres://#{ENV.fetch('POSTGRES_USER', '')}:#{ENV.fetch('POSTGRES_PASSWORD', '')}" \
-    "@#{ENV.fetch('POSTGRES_HOST', '')}:5432/#{ENV.fetch('POSTGRES_DATABASE', '')}"
+  config = Rails.configuration.database_configuration
+  host     = config[Rails.env]["host"]
+  database = config[Rails.env]["database"]
+  username = config[Rails.env]["username"]
+  password = config[Rails.env]["password"]
+
+  "postgres://#{username}:#{password}@#{host}:5432/#{database}"
 end
 
 namespace :db do
