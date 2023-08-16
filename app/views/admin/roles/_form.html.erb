@@ -4,12 +4,12 @@
   </div>
 
   <div class="govuk-grid-column-one-third control-column">
-    <%= button_to_accessible(
+    <%= govuk_button_to(
           t("generic.select_and_continue"),
           admin_roles_permission_path(provider_firm.id),
           method: :get,
           tabindex: "-1",
-          class: "govuk-button govuk-!-margin-top-4",
+          class: "govuk-!-margin-top-4",
         ) %>
   </div>
 

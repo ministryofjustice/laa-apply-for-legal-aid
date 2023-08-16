@@ -28,11 +28,12 @@
                   t(".discarded", date: application.discarded_at.strftime("%d-%m-%Y")) if application.discarded?
 
                   if destroy_enabled?
-                    button_to_accessible(
+                    govuk_button_to(
                       t(".delete"),
                       admin_legal_aid_application_path(application.id),
+                      warning: true,
                       method: :delete,
-                      class: "govuk-button govuk-button--warning request-delete-button",
+                      class: "request-delete-button",
                       "data-application-id": application.id,
                       "data-original-text": t(".delete"),
                       "data-delete-name": "#{t('.applicant_name')}: #{application.applicant_full_name || t('generic.undefined')}",

@@ -18,11 +18,11 @@
       <%= govuk_inset_text(text: t(".warning.delete_consequence")) %>
 
       <%= if destroy_enabled?
-            button_to_accessible(
+            govuk_button_to(
               t(".confirm_delete"),
               nil,
               method: :delete,
-              class: "govuk-button govuk-button--warning govuk-!-margin-bottom-1 govuk-!-margin-top-4",
+              warning: true,
               id: "confirm-delete-button",
               disabled: "true",
             )
@@ -31,20 +31,20 @@
   </div>
 
   <%= if create_test_applications_enabled?
-        button_to_accessible(
+        govuk_button_to(
           t("generic.create_test_applications"),
           create_test_applications_admin_legal_aid_applications_path,
           method: :post,
-          class: "govuk-button",
         )
       end %>
 
   <%= if @applications.present? && destroy_enabled?
-        button_to_accessible(
+        govuk_button_to(
           t(".delete_all"),
           destroy_all_admin_legal_aid_applications_path,
           method: :delete,
-          class: "govuk-button govuk-button--warning request-delete-button",
+          warning: true,
+          class: "request-delete-button",
           "data-original-text": t(".delete_all"),
           "data-application-id": "destroy_all",
           "data-delete-message": t(".warning.delete_all"),

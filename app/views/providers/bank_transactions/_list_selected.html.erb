@@ -21,7 +21,7 @@
           <%= value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) %>
         </td>
         <td class="govuk-table__cell">
-          <%= button_to_accessible(
+          <%= govuk_button_to(
                 t(".remove_link"),
                 remove_transaction_type_providers_legal_aid_application_bank_transaction_path(@legal_aid_application, bank_transaction),
                 method: :patch,

@@ -15,10 +15,12 @@
 
 <%= govuk_warning_text(text: t(".warning")) %>
 
-<%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
-  <%= form.submit(
-        t(".yes_button"),
-        class: "govuk-button govuk-button--warning",
-      ) %>
-  <%= link_to_accessible t(".no_button"), providers_legal_aid_applications_path, class: "govuk-button" %>
-<% end %>
+<div class='govuk-button-group'>
+  <%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
+    <%= form.govuk_submit(
+          t(".yes_button"),
+          warning: true,
+        ) %>
+    <%= link_to_accessible t(".no_button"), providers_legal_aid_applications_path, class: "govuk-button" %>
+  <% end %>
+</div>
