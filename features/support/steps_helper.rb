@@ -115,8 +115,9 @@ Then("I choose option {string}") do |field|
 end
 
 Then("I answer/change {string} with/to {string}") do |question, answer|
-  control = find(:xpath, "//h2[text()='#{question}']/ancestor::fieldset[1]//child::label[contains(text(), '#{answer}')]")
-  control.click
+  find(".govuk-fieldset__legend", text: question)
+    .sibling(".govuk-radios")
+    .find(".govuk-radios__item label", text: answer).click
 end
 
 # This can be used to display the state of the application
