@@ -4,6 +4,13 @@ def build_postgres_url
 end
 
 namespace :db do
+  # Usage:
+  #  rails db:log db:migrate
+  desc "Output activerecord SQL to stdout"
+  task log: :environment do
+    ActiveRecord::Base.logger = Logger.new($stdout)
+  end
+
   desc "Output anonymised DB as restore file"
   task export: :environment do
     raise(ArgumentError, "Cannot construct DB connection string") if build_postgres_url.length < 25
