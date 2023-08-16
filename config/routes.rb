@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq-status/web"
   mount Sidekiq::Web => "/sidekiq"
-  mount Audits1984::Engine => "/console"
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
     username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
@@ -49,6 +48,7 @@ Rails.application.routes.draw do
   resources :problem, only: :index
 
   namespace :admin do
+    mount Audits1984::Engine, at: "/console"
     root to: "legal_aid_applications#index"
     post "search", to: "legal_aid_applications#search", as: "application_search"
     namespace :legal_aid_applications do
