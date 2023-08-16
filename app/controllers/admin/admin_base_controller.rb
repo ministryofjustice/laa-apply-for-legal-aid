@@ -6,7 +6,7 @@ module Admin
   protected
 
     def find_current_auditor
-      current_admin_user # TODO: work out how to validate from google login!
+      current_admin_user
     end
 
     def check_vpn_ipaddr
