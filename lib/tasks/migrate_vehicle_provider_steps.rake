@@ -1,5 +1,5 @@
 namespace :migrate do
-  desc "AP-4132 migrate provider_step from old property pages to new property_details page"
+  desc "AP-4132 migrate provider_step from old vehicle pages to new vehicle_details page"
 
   task vehicle_pages: :environment do
     vehicle_pages = %w[vehicles_ages vehicles_estimated_values vehicles_remaining_payments vehicles_regular_uses]
