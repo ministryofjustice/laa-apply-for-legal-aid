@@ -35,7 +35,7 @@
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
 
-    <%= govuk_table(html_attributes: { class: "sortable table-merge_columns" }) do |table|
+    <%= govuk_table(html_attributes: { class: "sortable" }) do |table|
           table.with_caption(size: "s") do
             if @bank_transactions.any?
               tag.h2 do

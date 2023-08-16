@@ -21,3 +21,11 @@
 .govuk-table__footer:last-child {
   padding-right: 0;
 }
+
+.table-category.table-category-vacant {
+  visibility: hidden;
+
+  &.table-category-preview {
+    visibility: visible;
+  }
+}
