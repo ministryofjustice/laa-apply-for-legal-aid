@@ -28,7 +28,7 @@
                 row.with_cell(text: attachment.document.filename)
                 row.with_cell(text: govuk_tag(text: t(".uploaded")))
                 row.with_cell do
-                  button_to_accessible(
+                  govuk_button_to(
                     t(".delete"),
                     url,
                     method: :delete,
