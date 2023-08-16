@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   resources :problem, only: :index
 
   namespace :admin do
+    mount Audits1984::Engine, at: "/console"
     root to: "legal_aid_applications#index"
     post "search", to: "legal_aid_applications#search", as: "application_search"
     namespace :legal_aid_applications do

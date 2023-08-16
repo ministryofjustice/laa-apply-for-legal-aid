@@ -5,6 +5,8 @@ ruby "3.2.2"
 
 gem "aasm", "~> 5.5.0"
 gem "active_model_serializers", "~> 0.10.13"
+gem "audits1984"
+gem "console1984"
 gem "discard", "~> 1.2"
 gem "geckoboard-ruby"
 gem "google-apis-sheets_v4"
