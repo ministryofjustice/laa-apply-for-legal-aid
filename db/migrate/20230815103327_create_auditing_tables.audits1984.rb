@@ -5,7 +5,7 @@ class CreateAuditingTables < ActiveRecord::Migration[7.0]
       t.integer :status, default: 0, null: false
       t.text :notes
       t.references :session, null: false
-      t.references :auditor, null: false
+      t.references :auditor, null: false, type: :uuid
 
       t.timestamps
     end

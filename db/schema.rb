@@ -177,7 +177,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_103327) do
     t.integer "status", default: 0, null: false
     t.text "notes"
     t.bigint "session_id", null: false
-    t.bigint "auditor_id", null: false
+    t.uuid "auditor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["auditor_id"], name: "index_audits1984_audits_on_auditor_id"
