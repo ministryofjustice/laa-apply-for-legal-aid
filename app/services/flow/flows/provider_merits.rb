@@ -248,10 +248,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_uploaded_evidence_collection_path(application) },
           forward: :check_merits_answers,
         },
-        gateway_evidences: {
-          path: ->(application) { urls.providers_legal_aid_application_gateway_evidence_path(application) },
-          forward: :check_merits_answers,
-        },
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
           forward: :confirm_client_declarations,
