@@ -5,7 +5,7 @@ FactoryBot.define do
     trait :with_original_file_attached do
       after :create do |ge|
         attachment = ge.legal_aid_application.attachments.create!(attachment_type: "gateway_evidence",
-                                                                  attachment_name: "gateway_evidence", original_filename: "Fake gateway evidence file")
+                                                                  attachment_name: "gateway_evidence", original_filename: "Fake old gateway evidence file")
 
         filepath = Rails.root.join("spec/fixtures/files/documents/hello_world.pdf")
         attachment.document.attach(io: File.open(filepath), filename: "hello_world.pdf", content_type: "application/pdf")

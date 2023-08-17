@@ -5,8 +5,4 @@ class GatewayEvidence < ApplicationRecord
   def original_attachments
     legal_aid_application.attachments.gateway_evidence
   end
-
-  def pdf_attachments
-    legal_aid_application.attachments.gateway_evidence_pdf
-  end
 end
