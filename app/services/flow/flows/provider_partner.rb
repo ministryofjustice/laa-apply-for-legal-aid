@@ -34,6 +34,10 @@ module Flow
           check_answers: :check_provider_answers,
           carry_on_sub_flow: false,
         },
+        partner_about_financial_means: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
+          forward: :partner_employed,
+        },
         partner_employed: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
           forward: lambda do |application|
