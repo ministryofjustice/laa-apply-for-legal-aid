@@ -626,7 +626,7 @@ en:
             frequency:
               inclusion: "Select how often %{party} gets the benefit"
         providers/means/regular_income_form:
-          attributes:
+          attributes: &regular_income_attributes
             benefits_amount:
               greater_than: Enter a number greater than 0
               not_a_number: Enter the amount of benefits received
@@ -687,6 +687,17 @@ en:
               inclusion: Select how often your client makes legal aid payments
             transaction_type_ids:
               blank: Select at least one of the options
+        providers/partners/regular_income_form:
+          attributes:
+            <<: *regular_income_attributes
+            friends_or_family_frequency:
+              inclusion: Select how often the partner receives income from friends or family
+            maintenance_in_frequency:
+              inclusion: Select how often the partner receives maintenance
+            property_or_lodger_frequency:
+              inclusion: Select how often the partner receives income from property or lodgers
+            pension_frequency:
+              inclusion: Select how often the partner receives pension income
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only
