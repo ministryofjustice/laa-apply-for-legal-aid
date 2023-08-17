@@ -20,7 +20,9 @@
             head.with_row do |row|
               row.with_cell(text: "Name")
               row.with_cell(text: "Date of birth")
-              row.with_cell(colspan: 2, scope: "colgroup", text: "Action")
+              row.with_cell(colspan: 2) do
+                tag.span("Change or remove involved child", class: "govuk-visually-hidden")
+              end
             end
           end
 
