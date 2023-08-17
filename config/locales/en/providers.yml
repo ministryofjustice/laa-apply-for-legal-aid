@@ -849,7 +849,7 @@ en:
             friends_or_family: Financial help from friends or family
             maintenance_in: Maintenance payments from a former partner
             property_or_lodger: Income from a property or lodger
-            none: My client receives none of these payments
+            none: My client does not get any of these payments
             pension: Pension
       regular_outgoings:
         show:

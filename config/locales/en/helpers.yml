@@ -75,7 +75,7 @@ en:
         maintenance_in_frequency: Select frequency
         property_or_lodger_frequency: Select frequency
         pension_frequency: Select frequency
-        transaction_type_ids: Which of the following payments does your client receive?
+        transaction_type_ids: Which of these payments does your client get?
       providers_means_regular_outgoings_form:
         rent_or_mortgage_frequency: Select frequency
         child_care_frequency: Select frequency
