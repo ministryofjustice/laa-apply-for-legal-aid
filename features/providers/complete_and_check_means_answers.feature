@@ -220,18 +220,16 @@ Feature: Completing and checking means answers backwards and forwards
     Then I click Check Your Answers Change link for 'Vehicles'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing "What is the estimated value of the vehicle?"
+    Then I should be on a page with title "Vehicle details"
+    And I should see "How much is the vehicle worth?"
+    And I should see "Are there any payments left on the vehicle?"
+    And I should see "Was the vehicle bought over 3 years ago?"
+    And I should see "Is the vehicle in regular use?"
     Then I fill "Estimated value" with "4000"
-    And I click "Save and continue"
-    Then I should be on a page showing "Are there any payments left on the vehicle?"
-    Then I choose "Yes"
+    And I answer "Are there any payments left on the vehicle?" with "Yes"
     Then I fill "Payment remaining" with "2000"
-    And I click "Save and continue"
-    Then I should be on a page showing "Was the vehicle bought over 3 years ago?"
-    Then I choose 'Yes'
-    And I click "Save and continue"
-    Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose "Yes"
+    And I answer "Was the vehicle bought over 3 years ago?" with "Yes"
+    And I answer "Is the vehicle in regular use?" with "Yes"
     And I click "Save and continue"
     Then I should be on a page showing 'Check your answers'
 

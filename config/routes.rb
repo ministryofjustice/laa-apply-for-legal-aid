@@ -146,6 +146,7 @@ Rails.application.routes.draw do
         resource :own_home, only: %i[show update]
         resource :property_details, only: %i[show update]
         resource :vehicle, only: %i[show update]
+        resource :vehicle_details, only: %i[show update]
         resource :savings_and_investment, only: %i[show update]
         resource :other_assets, only: %i[show update]
         resource :restrictions, only: %i[show update]
@@ -183,12 +184,6 @@ Rails.application.routes.draw do
       resource :about_the_financial_assessment, only: %i[show update]
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
-      namespace :vehicles do
-        resource :estimated_value, only: %i[show update]
-        resource :remaining_payment, only: %i[show update]
-        resource :age, only: %i[show update]
-        resource :regular_use, only: %i[show update]
-      end
       resource :applicant_bank_account, only: %i[show update]
       resource :offline_account, only: %i[show update]
       resource :check_passported_answers, only: [:show] do

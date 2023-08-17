@@ -114,6 +114,12 @@ Then("I choose option {string}") do |field|
   choose(field.parameterize(separator: "-"), allow_label_click: true)
 end
 
+Then("I answer/change {string} with/to {string}") do |question, answer|
+  find(".govuk-fieldset__legend", text: question)
+    .sibling(".govuk-radios")
+    .find(".govuk-radios__item label", text: answer).click
+end
+
 # This can be used to display the state of the application
 # Usage:
 # Then I display the state of the application from 123

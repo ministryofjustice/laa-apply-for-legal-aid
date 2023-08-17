@@ -57,7 +57,7 @@ RSpec.describe Providers::Means::VehiclesController do
     context 'with option "true"' do
       let(:own_vehicle) { "true" }
       let(:target_url) do
-        providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application)
+        providers_legal_aid_application_means_vehicle_details_path(legal_aid_application)
       end
 
       it "creates a vehicle" do
@@ -69,7 +69,7 @@ RSpec.describe Providers::Means::VehiclesController do
         expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(true)
       end
 
-      it "redirects to estimated value" do
+      it "redirects to vehicle details" do
         subject
         expect(response).to redirect_to(target_url)
       end
