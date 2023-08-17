@@ -4,7 +4,7 @@
   <div class="govuk-body"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
 
   <% if %w[benefits excluded_benefits].include?(@transaction_type.name) %>
-    <%= render "providers/means/regular_incomes/cost_of_living_and_disregarded_benefits" %>
+    <%= render "shared/means/cost_of_living_and_disregarded_benefits" %>
   <% end %>
 
   <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>

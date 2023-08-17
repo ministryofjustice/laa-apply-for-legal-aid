@@ -851,47 +851,6 @@ en:
             property_or_lodger: Income from a property or lodger
             none: My client receives none of these payments
             pension: Pension
-        cost_of_living_and_disregarded_benefits:
-          title: Government Cost of Living Payments and disregarded benefits
-        disregarded_benefits:
-          details_title: Disregarded benefits
-          details_text: The following benefits are disregarded from the financial eligibility calculation.
-          carer_and_disability:
-            heading: Carer and disability benefits
-            list: |
-              Attendance Allowance
-              Carer's Allowance
-              Community Care Direct Payments
-              Constant Attendance Allowance
-              Disability Living Allowance
-              Exceptionally Severe Disablement Allowance
-              Independent Living Fund
-              Payments on account of benefit
-              Personal Independence Payments (PIP)
-              Severe Disablement Allowance
-              Special Education Needs (SEN) Direct Payment
-              Welsh Independent Living Grant
-          low_income:
-            heading: Low income benefits
-            list: |
-              Benefit Transfer Advance (Universal Credit)
-              Budgeting Advance
-              Council Tax Reduction
-              Earnings Top-up (ETU)
-              Housing Benefit
-              Social Fund Funeral Payment
-              Social Fund payments
-          other:
-            heading: Other benefits
-            list: |
-              Armed Forces Independence Payment
-              Foster Carers Allowance
-              Grenfell Tower Residents' Discretionary Fund
-              Grenfell Tower fire victims payments
-              War Pensions Scheme payments
-              War Widow(er) Pension
-              Widow's Pension lump sum payments
-              Windrush Compensation Scheme Payments
       regular_outgoings:
         show:
           hints:
