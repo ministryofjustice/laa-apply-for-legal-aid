@@ -91,7 +91,11 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   cfe_submissions: {
     cfe_result: nil,
   },
-  chances_of_successes: {},
+  chances_of_successes: {
+    success_prospect_details: lambda do |original_value, row_context|
+      row_context[:field_1_val] = Faker::Lorem.paragraph(sentence_count: 2) unless original_value.eql?('\N')
+    end,
+  },
   citizen_access_tokens: {},
   debugs: {},
   dependants: {
