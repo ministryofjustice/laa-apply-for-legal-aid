@@ -150,6 +150,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: ccmsSoaGetReferenceDataWsdl
+  - name: CCMS_SOA_GET_COMMON_ORG_WSDL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaGetCommonOrgWsdl
   - name: LAA_PORTAL_IDP_SSO_TARGET_URL
     valueFrom:
       secretKeyRef:

@@ -54,6 +54,7 @@ module LaaApplyForLegalAid
     config.x.ccms_soa.clientProxyServiceWsdl      = ENV.fetch("CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL", "ClientProxyServiceWsdl.xml")
     config.x.ccms_soa.documentServicesWsdl        = ENV.fetch("CCMS_SOA_DOCUMENT_SERVICES_WSDL", "DocumentServicesWsdl.xml")
     config.x.ccms_soa.getReferenceDataWsdl        = ENV.fetch("CCMS_SOA_GET_REFERENCE_DATA_WSDL", "GetReferenceDataWsdl.xml")
+    config.x.ccms_soa.getCommonOrgServiceWsdl     = ENV.fetch("CCMS_SOA_GET_COMMON_ORG_WSDL", "GetCommonOrgWsdl.xml")
 
     config.x.google_tag_manager_tracking_id = ENV.fetch("GOOGLE_TAG_MANAGER_TRACKING_ID", nil)
 
