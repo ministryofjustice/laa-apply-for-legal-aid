@@ -28,7 +28,6 @@ RSpec/AnyInstance:
     - 'spec/requests/saml_sessions_spec.rb'
     - 'spec/requests/v1/statement_of_cases_spec.rb'
     - 'spec/requests/v1/uploaded_evidence_collections_spec.rb'
-    - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/attribute_configuration_spec.rb'
     - 'spec/services/ccms/manual_review_determiner_spec.rb'
     - 'spec/services/ccms/payload_generators/entity_attributes_generator_spec.rb'
@@ -292,7 +291,6 @@ RSpec/NamedSubject:
     - 'spec/services/banking/bank_transaction_balance_calculator_spec.rb'
     - 'spec/services/banking/bank_transactions_trimmer_spec.rb'
     - 'spec/services/banking/state_benefit_analyser_service_spec.rb'
-    - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/attribute_configuration_spec.rb'
     - 'spec/services/ccms/manual_review_determiner_spec.rb'
     - 'spec/services/ccms/parsers/applicant_add_response_parser_spec.rb'
@@ -444,7 +442,6 @@ RSpec/SubjectDeclaration:
 # Offense count: 2
 RSpec/SubjectStub:
   Exclude:
-    - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/submitters/check_case_status_service_spec.rb'
 
 # Offense count: 73
@@ -471,7 +468,6 @@ RSpec/VerifiedDoubles:
     - 'spec/requests/providers/confirm_dwp_non_passported_applications_controller_spec.rb'
     - 'spec/requests/providers/proceedings_types_controller_spec.rb'
     - 'spec/requests/status_controller_spec.rb'
-    - 'spec/services/benefit_check_service_spec.rb'
     - 'spec/services/ccms/attribute_value_generator_spec.rb'
     - 'spec/services/ccms/manual_review_determiner_spec.rb'
     - 'spec/services/ccms/payload_generators/entity_attributes_generator_spec.rb'
