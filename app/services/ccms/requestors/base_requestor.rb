@@ -25,16 +25,11 @@ module CCMS
       end
 
       class << self
-        # attr_reader :wsdl, :namespaces
         attr_reader :wsdl
 
         def wsdl_from(filename)
           @wsdl = filename
         end
-
-        # def uses_namespaces(namespaces)
-        #   @namespaces = namespaces.freeze
-        # end
       end
 
       def formatted_xml
@@ -51,6 +46,7 @@ module CCMS
 
     private
 
+      # TODO: remove and test coverage impact
       # temporarily ignore this until connectivity with ccms is working
       # :nocov:
       def soap_client
