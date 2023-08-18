@@ -257,23 +257,23 @@ RSpec.describe AggregatedCashIncome do
   end
 
   describe "#update" do
-    context "with revious values" do
+    context "with previous values" do
       before do
         aci.update(valid_params)
       end
 
       context "with successful validation" do
-        let(:subject) { aci.update(additional_valid_params) }
+        subject(:valid_update) { aci.update(additional_valid_params) }
 
         it "updates with previously selected checkboxes" do
-          subject
+          valid_update
           expect(aci.check_box_benefits).to eq "true"
           expect(aci.check_box_maintenance_in).to eq "true"
           expect(aci.check_box_pension).to eq "true"
         end
 
         it "updates with previous values submitted" do
-          subject
+          valid_update
           expect(aci.benefits1).to eq additional_valid_params[:benefits1]
           expect(aci.benefits2).to eq additional_valid_params[:benefits2]
           expect(aci.benefits3).to eq additional_valid_params[:benefits3]
@@ -288,13 +288,13 @@ RSpec.describe AggregatedCashIncome do
     end
 
     context "when no cash income records exist" do
-      let(:subject) { aci.update(params) }
+      subject(:call_update) { aci.update(params) }
 
       context "with valid params" do
         let(:params) { valid_params }
 
         it "creates the expected cash income records" do
-          expect { subject }.to change(CashTransaction, :count).by(6)
+          expect { call_update }.to change(CashTransaction, :count).by(6)
         end
       end
 
@@ -303,16 +303,16 @@ RSpec.describe AggregatedCashIncome do
           let(:params) { non_numeric_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change(CashTransaction, :count)
+            expect { call_update }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
-            subject
+            call_update
             expect(aci).not_to be_valid
           end
 
           it "populates the errors" do
-            subject
+            call_update
             expect(aci.errors[:benefits2]).to include "Amount must be an amount of money, like 1,000"
           end
         end
@@ -321,16 +321,16 @@ RSpec.describe AggregatedCashIncome do
           let(:params) { too_many_decimal_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change(CashTransaction, :count)
+            expect { call_update }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
-            subject
+            call_update
             expect(aci).not_to be_valid
           end
 
           it "populates the errors" do
-            subject
+            call_update
             expect(aci.errors[:maintenance_in3]).to include "Amount must not include more than 2 decimal numbers"
           end
         end
@@ -339,16 +339,16 @@ RSpec.describe AggregatedCashIncome do
           let(:params) { negative_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change(CashTransaction, :count)
+            expect { call_update }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
-            subject
+            call_update
             expect(aci).not_to be_valid
           end
 
           it "populates the errors" do
-            subject
+            call_update
             expect(aci.errors[:benefits1]).to include "Amount must be more than or equal to zero"
           end
         end
@@ -357,16 +357,16 @@ RSpec.describe AggregatedCashIncome do
           let(:params) { missing_value_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change(CashTransaction, :count)
+            expect { call_update }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
-            subject
+            call_update
             expect(aci).not_to be_valid
           end
 
           it "populates the errors" do
-            subject
+            call_update
             expect(aci.errors[:benefits1]).to include "Enter the cash amount received in benefits in #{month1_name}"
           end
         end
@@ -379,14 +379,14 @@ RSpec.describe AggregatedCashIncome do
       end
 
       context "with preexisting records" do
-        let(:subject) { aci.update(corrected_valid_params) }
+        subject(:call_update) { aci.update(corrected_valid_params) }
 
         it "does not change the record count when records updated" do
-          expect { subject }.not_to change(CashTransaction, :count)
+          expect { call_update }.not_to change(CashTransaction, :count)
         end
 
         it "changes the preexisting amounts of the records" do
-          subject
+          call_update
 
           categories.each do |category|
             transactions = category_transactions(aci, category)
@@ -400,34 +400,34 @@ RSpec.describe AggregatedCashIncome do
       end
 
       context "with preexisting transaction types" do
-        let(:subject) { aci.update(none_selected_params) }
+        subject(:call_update) { aci.update(none_selected_params) }
 
         it "removes all records when none selected" do
-          expect { subject }.to change(CashTransaction, :count).by(-6)
+          expect { call_update }.to change(CashTransaction, :count).by(-6)
         end
       end
 
       context "with additional transaction types" do
-        let(:subject) { aci.update(additional_valid_params) }
+        subject(:call_update) { aci.update(additional_valid_params) }
 
         it "adds to prexisting transaction types" do
-          expect { subject }.to change(CashTransaction, :count).by(3)
+          expect { call_update }.to change(CashTransaction, :count).by(3)
         end
       end
 
       context "with previous months preexisting" do
-        let(:subject) { aci.update(corrected_valid_params) }
+        subject(:call_update) { aci.update(corrected_valid_params) }
 
         before do
           travel_to Time.zone.local(2100, 1, 7, 13, 45)
         end
 
         it "does not add to old records" do
-          expect { subject }.not_to change(CashTransaction, :count)
+          expect { call_update }.not_to change(CashTransaction, :count)
         end
 
         it "updates the three previous months according to application calculation date date" do
-          subject
+          call_update
 
           categories.each do |category|
             transactions = category_transactions(aci, category)
