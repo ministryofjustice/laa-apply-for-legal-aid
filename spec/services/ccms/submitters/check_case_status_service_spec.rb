@@ -1,41 +1,43 @@
 require "rails_helper"
 
 RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
-  subject { described_class.new(submission) }
+  subject(:check_case_status_service) { described_class.new(submission) }
 
   let(:submission) { create(:submission, :case_submitted) }
-  let(:case_add_status_requestor) { double CCMS::Requestors::CaseAddStatusRequestor }
+  let(:case_add_status_requestor) { instance_double CCMS::Requestors::CaseAddStatusRequestor }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:case_add_status_response) { ccms_data_from_file "case_add_status_response.xml" }
   let(:case_add_status_request) { ccms_data_from_file "case_add_status_request.xml" }
 
-  before do
-    allow(subject).to receive(:case_add_status_requestor).and_return(case_add_status_requestor)
-  end
-
   describe "applicant_submitted state" do
+    before do
+      allow(CCMS::Requestors::CaseAddStatusRequestor).to receive(:new).and_return(case_add_status_requestor)
+    end
+
     context "when the operation is successful" do
       let(:transaction_request_id_in_example_response) { "20190301030405123456" }
+      let(:case_add_status_response_double_response) { false }
+      let(:case_add_status_response_double) { instance_double(CCMS::Parsers::CaseAddStatusResponseParser, success?: case_add_status_response_double_response) }
 
       context "and the case is not yet created" do
         before do
           allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
-          expect(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
-          expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-          allow_any_instance_of(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:success?).and_return(false)
+          allow(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
+          allow(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+          allow(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:new).and_return(case_add_status_response_double)
         end
 
         context "and poll count remains below limit" do
           it "increments the poll count" do
-            expect { subject.call }.to change(submission, :case_poll_count).by 1
+            expect { check_case_status_service.call }.to change(submission, :case_poll_count).by 1
           end
 
           it "does not change the state" do
-            expect { subject.call }.not_to change(submission, :aasm_state)
+            expect { check_case_status_service.call }.not_to change(submission, :aasm_state)
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
+            expect { check_case_status_service.call }.to change(CCMS::SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "case_submitted"
             expect(history.to_state).to eq "case_submitted"
             expect(history.success).to be true
@@ -43,7 +45,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "stores the request body in the submission history record" do
-            subject.call
+            check_case_status_service.call
             expect(history.request).to be_soap_envelope_with(
               command: "casebim:CaseAddUpdtStatusRQ",
               transaction_id: "20190101121530123456",
@@ -51,7 +53,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "stores the response body in the submission history record" do
-            subject.call
+            check_case_status_service.call
             expect(history.response).to eq case_add_status_response
           end
         end
@@ -62,15 +64,15 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "increments the poll count" do
-            expect { subject.call }.to change(submission, :case_poll_count).by 1
+            expect { check_case_status_service.call }.to change(submission, :case_poll_count).by 1
           end
 
           it "does not change the state" do
-            expect { subject.call }.not_to change(submission, :aasm_state)
+            expect { check_case_status_service.call }.not_to change(submission, :aasm_state)
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
+            expect { check_case_status_service.call }.to change(CCMS::SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "case_submitted"
             expect(history.to_state).to eq "failed"
             expect(history.success).to be false
@@ -78,7 +80,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "stores the reqeust body in the submission history record" do
-            subject.call
+            check_case_status_service.call
             expect(history.request).to be_soap_envelope_with(
               command: "casebim:CaseAddUpdtStatusRQ",
               transaction_id: "20190101121530123456",
@@ -86,26 +88,28 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "does not store a response body in the submission history record" do
-            subject.call
+            check_case_status_service.call
             expect(history.response).to be_nil
           end
         end
       end
 
       context "when the case is created" do
+        let(:case_add_status_response_double_response) { true }
+
         before do
           allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
-          expect(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
-          expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-          allow_any_instance_of(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:success?).and_return(true)
+          allow(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
+          allow(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+          allow(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:new).and_return(case_add_status_response_double)
         end
 
         it "changes the state to case_created" do
-          expect { subject.call }.to change(submission, :aasm_state).to "case_created"
+          expect { check_case_status_service.call }.to change(submission, :aasm_state).to "case_created"
         end
 
         it "writes a history record" do
-          expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
+          expect { check_case_status_service.call }.to change(CCMS::SubmissionHistory, :count).by(1)
           expect(history.from_state).to eq "case_submitted"
           expect(history.to_state).to eq "case_created"
           expect(history.request).to eq case_add_status_request
@@ -115,7 +119,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         end
 
         it "stores the reqeust body in the submission history record" do
-          subject.call
+          check_case_status_service.call
           expect(history.request).to be_soap_envelope_with(
             command: "casebim:CaseAddUpdtStatusRQ",
             transaction_id: "20190101121530123456",
@@ -123,7 +127,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         end
 
         it "stores the response body in the submission history record" do
-          subject.call
+          check_case_status_service.call
           expect(history.response).to eq case_add_status_response
         end
       end
@@ -132,24 +136,26 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
     context "when the operation is unsuccessful" do
       let(:transaction_request_id_in_example_response) { "20190301030405123456" }
       let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+      let(:fake_error) { error.sample }
 
       before do
-        fake_error = error.sample
         allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
-        expect(case_add_status_requestor).to receive(:call).and_raise(fake_error, "oops")
-        expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-        expect { subject.call }.to raise_error(fake_error, "oops")
+        allow(case_add_status_requestor).to receive(:call).and_raise(fake_error, "oops")
+        allow(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
       end
 
       it "increments the poll count" do
+        expect { check_case_status_service.call }.to raise_error(fake_error, "oops")
         expect(submission.case_poll_count).to eq 1
       end
 
       it "does not change the state" do
+        expect { check_case_status_service.call }.to raise_error(fake_error, "oops")
         expect(submission.aasm_state).to eq "case_submitted"
       end
 
       it "records the error in the submission history" do
+        expect { check_case_status_service.call }.to raise_error(fake_error, "oops")
         expect(CCMS::SubmissionHistory.count).to eq 1
         expect(history.from_state).to eq "case_submitted"
         expect(history.to_state).to eq "failed"
@@ -161,6 +167,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
       end
 
       it "stores the reqeust body in the submission history record" do
+        expect { check_case_status_service.call }.to raise_error(fake_error, "oops")
         expect(history.request).to be_soap_envelope_with(
           command: "casebim:CaseAddUpdtStatusRQ",
           transaction_id: "20190101121530123456",
@@ -168,6 +175,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
       end
 
       it "does not store the response body in the submission history record" do
+        expect { check_case_status_service.call }.to raise_error(fake_error, "oops")
         expect(history.response).to be_nil
       end
     end
