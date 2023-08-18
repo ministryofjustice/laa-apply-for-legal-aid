@@ -78,14 +78,6 @@ RSpec/ExpectInHook:
     - 'spec/services/reports/mis/application_details_report_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'
 
-# Offense count: 22
-# Configuration parameters: AssignmentOnly.
-RSpec/InstanceVariable:
-  Exclude:
-    - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
-    - 'spec/models/cash_transaction_spec.rb'
-    - 'spec/services/reports/reports_types_creator_spec.rb'
-
 # Offense count: 192
 RSpec/LetSetup:
   Exclude:

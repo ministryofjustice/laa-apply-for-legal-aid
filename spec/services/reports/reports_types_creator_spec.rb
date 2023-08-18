@@ -42,23 +42,20 @@ RSpec.describe Reports::ReportsTypesCreator do
         let(:today) { Date.current }
         let(:yesterday) { today - 1.day }
         let(:two_days_ago) { today - 2.days }
-
-        before do
-          @table = CSV.parse(report.generate_csv, headers: true)
-        end
+        let(:table) { CSV.parse(report.generate_csv, headers: true) }
 
         it "has the correct headers" do
-          expect(@table.headers).to eql(%w[application_ref case_ccms_reference COUNTRY APPLY_CASE_MEANS_REVIEW])
+          expect(table.headers).to eql(%w[application_ref case_ccms_reference COUNTRY APPLY_CASE_MEANS_REVIEW])
         end
 
         it "has the correct application reference" do
-          application_refs = @table.map { |t| strip_quotes(t["application_ref"]) }
+          application_refs = table.map { |t| strip_quotes(t["application_ref"]) }
           expect(application_refs).to include(application_non_passported.application_ref)
         end
 
         it "has the correct case ccms reference" do
           ccms_record = CCMS::Submission.find_by(legal_aid_application_id: application_non_passported.id)
-          expect(@table.first["case_ccms_reference"]).to include(ccms_record.case_ccms_reference)
+          expect(table.first["case_ccms_reference"]).to include(ccms_record.case_ccms_reference)
         end
 
         context "when in the date range" do
@@ -78,7 +75,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it "has both records" do
-            expect(@table.count).to be(2)
+            expect(table.count).to be(2)
           end
         end
 
@@ -99,7 +96,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it "has no records" do
-            expect(@table).to be_empty
+            expect(table).to be_empty
           end
         end
 
@@ -120,8 +117,8 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it "has one passported record" do
-            expect(@table.count).to be(1)
-            expect(@table.first["application_ref"]).to include(application_passported.application_ref)
+            expect(table.count).to be(1)
+            expect(table.first["application_ref"]).to include(application_passported.application_ref)
           end
         end
 
@@ -142,8 +139,8 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it "has one passported record" do
-            expect(@table.count).to be(1)
-            expect(@table.first["application_ref"]).to include(application_non_passported.application_ref)
+            expect(table.count).to be(1)
+            expect(table.first["application_ref"]).to include(application_non_passported.application_ref)
           end
         end
 
@@ -164,13 +161,13 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it "collects records successfully sent to ccms only" do
-            expect(@table.count).to be(1)
-            expect(@table.first["application_ref"]).to include(application_non_passported.application_ref)
+            expect(table.count).to be(1)
+            expect(table.first["application_ref"]).to include(application_non_passported.application_ref)
           end
 
           it "extracts XML attributes listed by the user" do
-            expect(@table.first["COUNTRY"]).to include("GBR")
-            expect(@table.first["APPLY_CASE_MEANS_REVIEW"]).to include("false")
+            expect(table.first["COUNTRY"]).to include("GBR")
+            expect(table.first["APPLY_CASE_MEANS_REVIEW"]).to include("false")
           end
         end
       end
