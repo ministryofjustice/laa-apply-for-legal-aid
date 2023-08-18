@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GetCommonOrg" targetNamespace="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/GetCommonOrg"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:client="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/GetCommonOrg"
+  xmlns:ns1="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM"
+  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+  xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:documentation>
+    <abstractWSDL>https://ccmssoagateway.uat.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetCommonOrg!1.0/GetCommonOrg.wsdl</abstractWSDL>
+  </wsdl:documentation>
+  <plnk:partnerLinkType name="GetCommonOrg">
+    <plnk:role name="GetCommonOrgProvider">
+      <plnk:portType name="client:GetCommonOrg"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <wsp:Policy xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+      <wsp:Policy>
+        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+          <wsp:Policy>
+            <sp:WssUsernameToken10/>
+          </wsp:Policy>
+        </sp:UsernameToken>
+      </wsp:Policy>
+    </sp:SupportingTokens>
+  </wsp:Policy>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM" schemaLocation="https://ccmssoagateway.uat.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetCommonOrg/apps/lsc/Schema/BusinessObjects/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM.xsd"/>
+      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccmssoagateway.uat.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetCommonOrg/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="GetCommonOrgRequestMessage">
+    <wsdl:part name="payload" element="ns1:CommonOrgInqRQ"/>
+  </wsdl:message>
+  <wsdl:message name="GetCommonOrgResponseMessage">
+    <wsdl:part name="payload" element="ns1:CommonOrgInqRS"/>
+  </wsdl:message>
+  <wsdl:message name="UsernameToken">
+    <wsdl:part name="Security" element="wsse:Security"/>
+  </wsdl:message>
+  <wsdl:portType name="GetCommonOrg">
+    <wsdl:operation name="process">
+      <wsdl:input message="client:GetCommonOrgRequestMessage"/>
+      <wsdl:output message="client:GetCommonOrgResponseMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetCommonOrgSOAP" type="client:GetCommonOrg">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wss_username_token_service_policy" wsdl:required="false"/>
+    <wsdl:operation name="process">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/GetCommonOrg/process"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+        <soap:header message="client:UsernameToken" part="Security" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="getcommonorg_ep">
+    <wsdl:port name="GetCommonOrg_pt" binding="client:GetCommonOrgSOAP">
+      <soap:address location="https://ccmssoagateway.uat.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetCommonOrg/getcommonorg_ep"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
