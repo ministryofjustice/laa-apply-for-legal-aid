@@ -90,13 +90,6 @@ references:
         gem update --system
         bundle install --path=vendor/bundle --jobs=4 && bundle clean
 
-  install_lib_ffi: &install_lib_ffi
-    run:
-      name: Install libffi6
-      command: |
-        wget http://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
-        sudo apt install ./libffi6_3.2.1-8_amd64.deb
-
   install_js_packages: &install_js_packages
     run:
       name: Install Yarn packages
@@ -138,7 +131,6 @@ jobs:
     - *update_packages
     - run: sudo apt-get install -y git-crypt
     - *decrypt_secrets
-    - *install_lib_ffi
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
