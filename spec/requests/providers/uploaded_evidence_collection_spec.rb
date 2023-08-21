@@ -408,9 +408,10 @@ module Providers
               context "when benefits evidence is required" do
                 let(:missing_categories) { %w[benefit_evidence] }
 
-                before { attachment1.update!(attachment_type: "gateway_evidence") }
-
-                before { attachment2.update!(attachment_type: "employment_evidence") }
+                before do
+                  attachment1.update!(attachment_type: "gateway_evidence")
+                  attachment2.update!(attachment_type: "employment_evidence")
+                end
 
                 it "raises an error" do
                   subject
@@ -422,9 +423,10 @@ module Providers
               context "when employment evidence is required" do
                 let(:missing_categories) { %w[employment_evidence] }
 
-                before { attachment1.update!(attachment_type: "gateway_evidence") }
-
-                before { attachment2.update!(attachment_type: "benefit_evidence") }
+                before do
+                  attachment1.update!(attachment_type: "gateway_evidence")
+                  attachment2.update!(attachment_type: "benefit_evidence")
+                end
 
                 it "raises an error" do
                   subject

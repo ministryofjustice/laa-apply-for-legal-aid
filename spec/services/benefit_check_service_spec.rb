@@ -1,13 +1,14 @@
 require "rails_helper"
 
 RSpec.describe BenefitCheckService do
-  subject { described_class.new(application) }
+  subject(:benefit_check_service) { described_class.new(application) }
 
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
   let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:) }
   let(:application) { create(:application, applicant:) }
+  let(:savon_client) { instance_double(Savon::Client) }
 
   describe "#check_benefits", :vcr do
     let(:expected_params) do
@@ -22,36 +23,30 @@ RSpec.describe BenefitCheckService do
 
     context "when the call is successful", vcr: { cassette_name: "benefit_check_service/successful_call" } do
       it "returns the right parameters" do
-        result = subject.call
+        result = benefit_check_service.call
         expect(result[:benefit_checker_status]).to eq("Yes")
         expect(result[:original_client_ref]).not_to be_empty
         expect(result[:confirmation_ref]).not_to be_empty
       end
 
       it "sends the right parameters" do
-        expect_any_instance_of(Savon::Client)
-          .to receive(:call)
-          .with(:check, expected_params)
-          .and_call_original
-
-        subject.call
+        allow(Savon).to receive(:client).and_return(savon_client)
+        expect(savon_client).to receive(:call).with(:check, expected_params)
+        benefit_check_service.call
       end
 
       context "when the last name is not in upper case" do
         let(:last_name) { " walker " }
 
         it "normalizes the last name" do
-          result = subject.call
+          result = benefit_check_service.call
           expect(result[:benefit_checker_status]).to eq("Yes")
         end
 
         it "sends the right parameters" do
-          expect_any_instance_of(Savon::Client)
-            .to receive(:call)
-            .with(:check, expected_params)
-            .and_call_original
-
-          subject.call
+          allow(Savon).to receive(:client).and_return(savon_client)
+          expect(savon_client).to receive(:call).with(:check, expected_params)
+          benefit_check_service.call
         end
       end
     end
@@ -61,51 +56,50 @@ RSpec.describe BenefitCheckService do
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("Service unavailable"))
-        subject.call
+        benefit_check_service.call
       end
 
       it "returns false" do
-        expect(subject.call).to be false
+        expect(benefit_check_service.call).to be false
       end
     end
 
     context "when calling the API raises an unhandled error or StandardError" do
       before do
-        allow_any_instance_of(Savon::Client)
-          .to receive(:call)
-          .with(:check, expected_params)
-          .and_raise(StandardError.new("fake error"))
+        allow(Savon).to receive(:client).and_return(savon_client)
+        allow(savon_client).to receive(:call)
+                                 .with(:check, expected_params)
+                                 .and_raise(StandardError.new("fake error"))
       end
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("fake error"))
-        subject.call
+        benefit_check_service.call
       end
 
       it "captures StandardError" do
         expect(AlertManager).to receive(:capture_exception).with(instance_of(StandardError))
-        subject.call
+        benefit_check_service.call
       end
 
       it "returns false" do
-        expect(subject.call).to be false
+        expect(benefit_check_service.call).to be false
       end
     end
 
     context "when the API times out" do
       before do
-        savon_client = double(:savon_client)
+        allow(Savon).to receive(:client).and_return(savon_client)
         allow(savon_client).to receive(:call).and_raise(Net::ReadTimeout)
-        allow(subject).to receive(:soap_client).and_return(savon_client)
       end
 
       it "captures error and returns false" do
         expect(AlertManager).to receive(:capture_exception).with(Net::ReadTimeout)
-        subject.call
+        benefit_check_service.call
       end
 
       it "returns false" do
-        expect(subject.call).to be false
+        expect(benefit_check_service.call).to be false
       end
     end
 
@@ -116,11 +110,11 @@ RSpec.describe BenefitCheckService do
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("Invalid request credentials"))
-        subject.call
+        benefit_check_service.call
       end
 
       it "returns false" do
-        expect(subject.call).to be false
+        expect(benefit_check_service.call).to be false
       end
     end
   end
@@ -129,11 +123,10 @@ RSpec.describe BenefitCheckService do
     describe "behaviour without mock" do
       before do
         stub_const("BenefitCheckService::USE_MOCK", false)
-        allow_any_instance_of(described_class).to receive(:call).and_return(:foo)
       end
 
       it "calls an instance call method" do
-        expect(described_class.call(application)).to eq(:foo)
+        expect(described_class.call(application)).to be false
       end
     end
 

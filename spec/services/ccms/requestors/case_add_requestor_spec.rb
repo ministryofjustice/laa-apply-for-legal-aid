@@ -70,9 +70,6 @@ module CCMS
           allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return("password_type")
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           allow(legal_aid_application).to receive(:calculation_date).and_return(Date.new(2020, 3, 25))
-        end
-
-        before do
           allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
         end
 
