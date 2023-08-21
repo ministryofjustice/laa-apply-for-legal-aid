@@ -14,7 +14,7 @@ class BaseAggregatedCashTransaction
   validate :validate_at_least_one_selected
   validate :checkbox_integrity
 
-  attr_accessor :month1, :month2, :month3
+  attr_accessor :month1, :month2, :month3, :owner_id, :owner_type
 
   def initialize(legal_aid_application_id:)
     super
@@ -110,6 +110,8 @@ private
 
       CashTransaction.create!(
         legal_aid_application_id:,
+        owner_type:,
+        owner_id:,
         transaction_type_id: transaction_type_id(category),
         transaction_date: date,
         amount:,
