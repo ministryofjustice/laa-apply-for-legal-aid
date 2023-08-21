@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplicationTransactionType do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:credit_transaction_type) { create(:transaction_type, :credit_with_standard_name) }
   let(:debit_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
 
@@ -65,8 +65,8 @@ RSpec.describe LegalAidApplicationTransactionType do
              legal_aid_application:,
              transaction_type: debit_transaction_type)
 
-      legal_aid_application.cash_transactions.create!(transaction_type_id: credit_transaction_type.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
-      legal_aid_application.cash_transactions.create!(transaction_type_id: debit_transaction_type.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+      legal_aid_application.cash_transactions.create!(owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, transaction_type_id: credit_transaction_type.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+      legal_aid_application.cash_transactions.create!(owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, transaction_type_id: debit_transaction_type.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
     end
 
     context "when destroying object instance" do

@@ -218,7 +218,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
       it "does not update an application's cash transactions" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)
-        cash_transaction = create(:cash_transaction, legal_aid_application:)
+        cash_transaction = create(:cash_transaction, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
         form = described_class.new(legal_aid_application:)
 
         form.save
@@ -357,11 +357,15 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _income_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
           transaction_type: pension,
         )
         outgoing_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
           transaction_type: child_care,
         )
 
@@ -515,16 +519,22 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         _old_income_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
           transaction_type: maintenance_in,
         )
         existing_income_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
           transaction_type: benefits,
         )
         outgoing_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
           transaction_type: child_care,
         )
         params = {

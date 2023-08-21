@@ -138,6 +138,7 @@ RSpec.describe Providers::Means::CashIncomesController do
     context "when checking answers" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
+               :with_applicant,
                :with_non_passported_state_machine,
                :checking_means_income)
       end

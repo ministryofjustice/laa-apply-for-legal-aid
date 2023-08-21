@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe CashTransaction do
-  let(:application1) { create(:legal_aid_application) }
-  let(:application2) { create(:legal_aid_application) }
+  let(:application1) { create(:legal_aid_application, :with_applicant) }
+  let(:application2) { create(:legal_aid_application, :with_applicant) }
   let(:benefits) { create(:transaction_type, :benefits) }
   let(:pension) { create(:transaction_type, :pension) }
   let(:benefit_transaction_array) { [] }
@@ -15,10 +15,22 @@ RSpec.describe CashTransaction do
 
   def cash_transactions_for(application, multiplier)
     (1..3).each do |number|
-      benefits_transaction = create(:cash_transaction, transaction_type: benefits, legal_aid_application: application, transaction_date: number.month.ago,
-                                                       amount: 100 * multiplier, month_number: number)
-      pension_transaction = create(:cash_transaction, transaction_type: pension, legal_aid_application: application, transaction_date: number.month.ago,
-                                                      amount: 200 * multiplier, month_number: number)
+      benefits_transaction = create(:cash_transaction,
+                                    transaction_type: benefits,
+                                    legal_aid_application: application,
+                                    owner_type: "Applicant",
+                                    owner_id: application.applicant.id,
+                                    transaction_date: number.month.ago,
+                                    amount: 100 * multiplier,
+                                    month_number: number)
+      pension_transaction = create(:cash_transaction,
+                                   transaction_type: pension,
+                                   legal_aid_application: application,
+                                   owner_type: "Applicant",
+                                   owner_id: application.applicant.id,
+                                   transaction_date: number.month.ago,
+                                   amount: 200 * multiplier,
+                                   month_number: number)
       benefit_transaction_array << benefits_transaction
       pension_transaction_array << pension_transaction
     end
@@ -40,7 +52,13 @@ RSpec.describe CashTransaction do
   end
 
   context "with date formatting" do
-    let(:ctx) { create(:cash_transaction, transaction_date: Date.new(2021, 2, 2), month_number: 1) }
+    let(:ctx) do
+      create(:cash_transaction,
+             legal_aid_application: application1,
+             owner_type: "Applicant",
+             owner_id: application1.applicant.id,
+             transaction_date: Date.new(2021, 2, 2), month_number: 1)
+    end
 
     describe ".period_start" do
       it "displays 1st day and month of transaction date" do
