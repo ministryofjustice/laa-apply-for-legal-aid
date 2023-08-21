@@ -879,6 +879,8 @@ FactoryBot.define do
                  transaction_type: benefits,
                  transaction_date: count.days.ago.to_date,
                  amount: 111,
+                 owner_type: "Applicant",
+                 owner_id: application.applicant.id,
                  month_number: count / 30)
 
           application.transaction_types << benefits
@@ -931,6 +933,8 @@ FactoryBot.define do
                  transaction_type: rent_or_mortgage,
                  transaction_date: count.days.ago.to_date,
                  amount: 222,
+                 owner_type: "Applicant",
+                 owner_id: application.applicant.id,
                  month_number: count / 30)
 
           application.transaction_types << rent_or_mortgage

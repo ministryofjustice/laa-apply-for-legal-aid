@@ -73,6 +73,16 @@ RSpec.describe Providers::Means::CashIncomesController do
       it "updates the model attribute for no cash income to false" do
         expect { request }.to change { legal_aid_application.reload.no_cash_income }.from(nil).to(false)
       end
+
+      it "sets the applicant as owner" do
+        request
+        expect(legal_aid_application.cash_transactions.first).to have_attributes(
+          {
+            owner_type: "Applicant",
+            owner_id: legal_aid_application.applicant.id,
+          },
+        )
+      end
     end
 
     context "with nothing selected" do
@@ -128,6 +138,7 @@ RSpec.describe Providers::Means::CashIncomesController do
     context "when checking answers" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
+               :with_applicant,
                :with_non_passported_state_machine,
                :checking_means_income)
       end

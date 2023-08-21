@@ -144,12 +144,13 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
         let(:legal_aid_application) do
           laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, rent_or_mortgage_debit])
-          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
-          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
-          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
-          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
-          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
-          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+          applicant_id = laa.applicant.id
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
           laa
         end
 
@@ -309,12 +310,13 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
         let(:legal_aid_application) do
           laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, rent_or_mortgage_debit])
-          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
-          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
-          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
-          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
-          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
-          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+          applicant_id = laa.applicant.id
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(owner_type: "Applicant", owner_id: applicant_id, transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
           laa
         end
 

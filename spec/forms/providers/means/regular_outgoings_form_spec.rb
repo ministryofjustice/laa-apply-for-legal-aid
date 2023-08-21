@@ -220,7 +220,7 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
       it "does not update an application's cash transactions" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)
-        cash_transaction = create(:cash_transaction, legal_aid_application:)
+        cash_transaction = create(:cash_transaction, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
         form = described_class.new(legal_aid_application:)
 
         form.save

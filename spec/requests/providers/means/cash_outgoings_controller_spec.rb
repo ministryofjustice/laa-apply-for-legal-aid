@@ -85,6 +85,16 @@ RSpec.describe Providers::Means::CashOutgoingsController do
             request
             expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
           end
+
+          it "sets the applicant as owner" do
+            request
+            expect(legal_aid_application.cash_transactions.first).to have_attributes(
+              {
+                owner_type: "Applicant",
+                owner_id: legal_aid_application.applicant.id,
+              },
+            )
+          end
         end
 
         context "with outgoings categories but no income categories" do
@@ -205,6 +215,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
     context "when checking answers" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
+               :with_applicant,
                :with_non_passported_state_machine,
                :checking_means_income)
       end

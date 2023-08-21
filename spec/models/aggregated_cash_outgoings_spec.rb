@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe AggregatedCashOutgoings do
   let(:aco) { described_class.new(legal_aid_application_id: application.id) }
-  let(:application) { create(:legal_aid_application) }
+  let(:application) { create(:legal_aid_application, :with_applicant) }
   let(:categories) { %i[rent_or_mortgage maintenance_out] }
   let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
   let!(:maintenance_out) { create(:transaction_type, :maintenance_out) }
@@ -46,9 +46,9 @@ RSpec.describe AggregatedCashOutgoings do
     end
 
     context "when cash income transaction records exist" do
-      let!(:maintenance_out_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out) }
-      let!(:maintenance_out_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out) }
-      let!(:maintenance_out_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out) }
+      let!(:maintenance_out_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_out) }
+      let!(:maintenance_out_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_out) }
+      let!(:maintenance_out_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_out) }
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
@@ -404,6 +404,8 @@ RSpec.describe AggregatedCashOutgoings do
       maintenance_out2: "5",
       maintenance_out3: "6",
       legal_aid_application_id: application.id,
+      owner_type: "Applicant",
+      owner_id: application.applicant.id,
       none_selected: "",
     }
   end
@@ -455,6 +457,8 @@ RSpec.describe AggregatedCashOutgoings do
       maintenance_out2: "",
       maintenance_out3: "",
       legal_aid_application_id: application.id,
+      owner_type: "Applicant",
+      owner_id: application.applicant.id,
       none_selected: "true",
     }
   end

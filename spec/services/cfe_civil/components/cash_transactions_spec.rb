@@ -18,13 +18,13 @@ RSpec.describe CFECivil::Components::CashTransactions do
 
   context "when cash transactions exist" do
     let(:benefits) { create(:transaction_type, :benefits) }
-    let!(:first_benefits_month) { create(:cash_transaction, :credit_month1, legal_aid_application:, amount: 123.0, transaction_type: benefits) }
-    let!(:second_benefits_month) { create(:cash_transaction, :credit_month2, legal_aid_application:, amount: 234.0, transaction_type: benefits) }
-    let!(:third_benefits_month) { create(:cash_transaction, :credit_month3, legal_aid_application:, amount: 345.0, transaction_type: benefits) }
+    let!(:first_benefits_month) { create(:cash_transaction, :credit_month1, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, amount: 123.0, transaction_type: benefits) }
+    let!(:second_benefits_month) { create(:cash_transaction, :credit_month2, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, amount: 234.0, transaction_type: benefits) }
+    let!(:third_benefits_month) { create(:cash_transaction, :credit_month3, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, amount: 345.0, transaction_type: benefits) }
     let(:maintenance_out) { create(:transaction_type, :maintenance_out) }
-    let!(:first_maintenance_month) { create(:cash_transaction, :credit_month1, legal_aid_application:, amount: 123.0, transaction_type: maintenance_out) }
-    let!(:second_maintenance_month) { create(:cash_transaction, :credit_month2, legal_aid_application:, amount: 234.0, transaction_type: maintenance_out) }
-    let!(:third_maintenance_month) { create(:cash_transaction, :credit_month3, legal_aid_application:, amount: 345.0, transaction_type: maintenance_out) }
+    let!(:first_maintenance_month) { create(:cash_transaction, :credit_month1, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, amount: 123.0, transaction_type: maintenance_out) }
+    let!(:second_maintenance_month) { create(:cash_transaction, :credit_month2, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, amount: 234.0, transaction_type: maintenance_out) }
+    let!(:third_maintenance_month) { create(:cash_transaction, :credit_month3, legal_aid_application:, owner_type: "Applicant", owner_id: legal_aid_application.applicant.id, amount: 345.0, transaction_type: maintenance_out) }
 
     it "returns expected JSON structure" do
       expect(call).to eq({

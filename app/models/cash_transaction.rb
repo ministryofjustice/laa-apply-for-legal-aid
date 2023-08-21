@@ -5,6 +5,7 @@ class CashTransaction < ApplicationRecord
 
   belongs_to :legal_aid_application
   belongs_to :transaction_type
+  belongs_to :owner, polymorphic: true
 
   validates :month_number, inclusion: { in: [1, 2, 3] }
 
