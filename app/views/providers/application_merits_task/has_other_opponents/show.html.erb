@@ -19,7 +19,7 @@
               head.with_row do |row|
                 row.with_cell(text: "Name")
                 row.with_cell(text: "Type")
-                row.with_cell(colspan: 2) do
+                row.with_cell(colspan: 2, scope: "colgroup") do
                   tag.span("Change or remove opponent", class: "govuk-visually-hidden")
                 end
               end
