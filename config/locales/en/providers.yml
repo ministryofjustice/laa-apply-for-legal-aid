@@ -702,7 +702,6 @@ en:
         uploaded: Uploaded
         delete: Delete
         select_a_category: Select a category
-        action: Action
         select_a_category_label: "Select a category for %{filename}"
         update: Update
     has_other_dependants:
