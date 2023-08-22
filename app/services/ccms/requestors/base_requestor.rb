@@ -46,9 +46,6 @@ module CCMS
 
     private
 
-      # TODO: remove and test coverage impact
-      # temporarily ignore this until connectivity with ccms is working
-      # :nocov:
       def soap_client
         @soap_client ||= Savon.client(
           headers: { "x-api-key" => config.aws_gateway_api_key },
@@ -64,7 +61,6 @@ module CCMS
           read_timeout: 180,
         )
       end
-      # :nocov:
 
       def soap_envelope(namespaces)
         Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|
