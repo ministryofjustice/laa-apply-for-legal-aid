@@ -94,16 +94,16 @@ module Flow
         },
         partner_regular_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_regular_incomes_path(application) },
-          forward: :partner_student_finances,
-          check_answers: :check_income_answers,
-          # remove above and uncomment below when partner_cash_incomes is ready
-          # forward: lambda do |application|
-          #   :partner_student_finances
-          #   application.income_types? ? :partner_cash_incomes : :partner_student_finances
-          # end,
-          # check_answers: ->(application) { application.income_types? ? :partner_cash_incomes : :check_income_answers },
+          forward: lambda do |application|
+            application.partner_income_types? ? :partner_cash_incomes : :partner_student_finances
+          end,
+          check_answers: ->(application) { application.partner_income_types? ? :partner_cash_incomes : :check_income_answers },
         },
-        # partner_cash_incomes
+        partner_cash_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_cash_income_path(application) },
+          forward: :partner_student_finances,
+          check_answers: ->(application) { application.uploading_bank_statements? ? :check_income_answers : :income_summary },
+        },
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
           forward: :partner_regular_outgoings,

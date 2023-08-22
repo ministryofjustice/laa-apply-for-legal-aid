@@ -81,7 +81,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
     end
 
     context "when regular transactions are selected" do
-      it "updates the application and redirects to the cash income page", pending: "Will only work when the partner cash income page is implemented" do
+      it "updates the application and redirects to the cash income page" do
         legal_aid_application = create(
           :legal_aid_application,
           :with_applicant_and_partner,
@@ -162,7 +162,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
     end
 
     context "when checking answers and regular transactions are selected" do
-      it "updates the application and redirects to the cash income page", pending: "Will only work when the partner cash income page is implemented" do
+      it "updates the application and redirects to the cash income page" do
         legal_aid_application = create(
           :legal_aid_application,
           :with_applicant_and_partner,

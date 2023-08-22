@@ -616,6 +616,11 @@ en:
       cash_outgoings:
         show:
           page_heading: Select payments the partner pays in cash
+      cash_incomes:
+        show:
+          page_heading: Select payments the partner receives in cash
+          info: Cash means physical money like banknotes and coins.
+          none_of_the_above: The partner receives none of these payments in cash
     has_national_insurance_numbers:
       show:
         page_title: Does the client have a National Insurance number?

@@ -23,7 +23,7 @@ en:
         no_button: No, do not delete it
       revealing_checkbox:
         providers:
-          means:
+          means: &revealing_checkbox_labels
             cash_incomes:
               check_box_benefits: Benefits
               check_box_friends_or_family: Financial help from friends or family
@@ -35,19 +35,7 @@ en:
               check_box_child_care: Childcare payments
               check_box_maintenance_out: Maintenance payments to a former partner
               check_box_legal_aid: Payments towards legal aid in a criminal case
-          partners:
-            cash_incomes:
-              check_box_benefits: Benefits
-              check_box_friends_or_family: Financial help from friends or family
-              check_box_maintenance_in: Maintenance payments from a former partner
-              check_box_property_or_lodger: Income from a property or lodger
-              check_box_pension: Pension
-            cash_outgoings:
-              check_box_rent_or_mortgage: Housing payments
-              check_box_child_care: Childcare payments
-              check_box_maintenance_out: Maintenance payments to a former partner
-              check_box_legal_aid: Payments towards legal aid in a criminal case
-
+          partners: *revealing_checkbox_labels
     printable_under_18_declaration:
       confirm_following: Confirm the following
       declaration_list_title: 'By signing this declaration, you agree for %{applicant_name} that:'

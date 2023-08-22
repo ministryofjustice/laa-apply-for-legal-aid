@@ -213,6 +213,11 @@ class LegalAidApplication < ApplicationRecord
     transaction_types.credits.without_housing_benefits.any?
   end
 
+  def partner_income_types?
+    partner_transaction_types = legal_aid_application_transaction_types.where(owner_type: "Partner").map(&:transaction_type).pluck(:id)
+    TransactionType.where(id: partner_transaction_types).credits.without_housing_benefits.any?
+  end
+
   def outgoing_types?
     transaction_types.debits.any?
   end
