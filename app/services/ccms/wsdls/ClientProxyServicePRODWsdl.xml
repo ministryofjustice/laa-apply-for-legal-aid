@@ -7,7 +7,7 @@
   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
   xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
   <wsdl:documentation>
-    <abstractWSDL>http://ccmsebsprod.lab.gov:80/soa-infra/services/default/ClientServices!1.0/ClientProxyService.wsdl</abstractWSDL>
+    <abstractWSDL>https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices!10.0/ClientProxyService.wsdl</abstractWSDL>
   </wsdl:documentation>
   <plnk:partnerLinkType name="CreateClient">
     <plnk:role name="CreateClientProvider">
