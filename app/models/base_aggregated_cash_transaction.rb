@@ -50,18 +50,19 @@ class BaseAggregatedCashTransaction
       model.__send__("month#{trx.month_number}=", trx.transaction_date)
     end
 
-    def find_by(legal_aid_application_id:)
-      transactions = find_transactions(legal_aid_application_id)
+    def find_by(legal_aid_application_id:, owner:)
+      transactions = find_transactions(legal_aid_application_id, owner)
       model = new(legal_aid_application_id:)
       transactions.each { |trx| populate_attribute(model, trx) }
       model
     end
 
-    def find_transactions(id)
+    def find_transactions(id, owner_type)
       transaction_type_ids = TransactionType.__send__(operation).map(&:id)
 
       CashTransaction.where(
         legal_aid_application_id: id,
+        owner_type:,
         transaction_type_id: transaction_type_ids,
       )
     end
@@ -96,6 +97,7 @@ private
     self.class.cash_transaction_categories.each do |category|
       CashTransaction.where(
         legal_aid_application_id:,
+        owner_id:,
         transaction_type_id: transaction_type_id(category),
       ).destroy_all
 
