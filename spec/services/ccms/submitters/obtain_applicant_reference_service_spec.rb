@@ -14,7 +14,7 @@ module CCMS
       let(:response_body) { ccms_data_from_file "applicant_search_response_one_result.xml" }
       let(:empty_response_body) { ccms_data_from_file "applicant_search_response_no_results.xml" }
       let(:no_applicant_details_response_body) { ccms_data_from_file "applicant_search_response_results_no_details.xml" }
-      let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/ClientServices/ClientServices_ep" }
+      let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/ClientServices_ep" }
       let(:success_add_applicant_response_body) { ccms_data_from_file "applicant_add_response_success.xml" }
 
       around do |example|

@@ -10,7 +10,7 @@
         xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
 >
   <wsdl:documentation>
-    <abstractWSDL>https://sitsoa10.laadev.co.uk/soa-infra/services/default/CaseServices!1.0/CaseProxyService.wsdl</abstractWSDL>
+    <abstractWSDL>https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices!1.0/CaseProxyService.wsdl</abstractWSDL>
   </wsdl:documentation>
   <plnk:partnerLinkType name="CreateCaseApplication">
     <plnk:role name="CreateCaseApplicationProvider">
@@ -156,7 +156,7 @@
   </wsdl:binding>
   <wsdl:service name="CaseServices_ep">
     <wsdl:port name="CaseServices_pt" binding="tns:CaseServicesSOAPBinding">
-      <soap:address location="https://sitsoa10.laadev.co.uk/soa-infra/services/default/CaseServices/CaseServices_ep"/>
+      <soap:address location="https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/CaseServices_ep"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
