@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_21_070336) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_22_111710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -266,7 +266,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_070336) do
     t.uuid "transaction_type_id"
     t.string "owner_type"
     t.uuid "owner_id"
-    t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
+    t.index ["legal_aid_application_id", "owner_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
     t.index ["owner_type", "owner_id"], name: "index_cash_transactions_on_owner"
   end
 
