@@ -21,6 +21,7 @@ module CCMS
                  domestic_abuse_summary:,
                  office:)
         end
+
         let(:applicant) do
           create(:applicant,
                  :with_address_for_xml_fixture,
@@ -30,12 +31,16 @@ module CCMS
                  date_of_birth: Date.new(1977, 4, 10),
                  address:)
         end
+
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
+
         let!(:chances_of_success) do
           create(:chances_of_success, :with_optional_text, proceeding:)
         end
+
         let(:vehicle) { create(:vehicle, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
         let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
+
         let(:other_assets_declaration) do
           create(:other_assets_declaration,
                  valuable_items_value: 144_524.74,
@@ -46,6 +51,7 @@ module CCMS
                  second_home_value: 500,
                  trust_value: 600)
         end
+
         let(:address) { create(:address, postcode: "GH08NY") }
         let(:provider) { create(:provider, username: "saturnina", firm:, email: "patrick_rath@example.net") }
         let(:firm) { create(:firm, ccms_id: 169) }
@@ -57,7 +63,7 @@ module CCMS
         let(:savings_amount) { create(:savings_amount, :all_nil) }
         let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
         let(:expected_soap_operation) { :create_case_application }
-        let(:expected_xml) { requestor.__send__(:request_xml) }
+        let(:request_xml) { requestor.__send__(:request_xml) }
         let(:requestor) { described_class.new(submission, {}) }
         let!(:involved_child1) { create(:involved_child, full_name: "First TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application:) }
         let!(:involved_child2) { create(:involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application:) }
@@ -74,7 +80,7 @@ module CCMS
         end
 
         it "calls the savon soap client" do
-          expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
+          expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: request_xml)
           expect(requestor).to receive(:soap_client).and_return(soap_client_double)
           requestor.call
         end
@@ -83,7 +89,7 @@ module CCMS
           expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
           travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
             test_data_xml = ccms_data_from_file "case_add_request.xml"
-            expect(expected_xml).to eq test_data_xml
+            expect(request_xml).to eq test_data_xml
           end
         end
 
@@ -94,7 +100,7 @@ module CCMS
             expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
             travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
               test_data_xml = ccms_data_from_file "non_default_client_involvement_type.xml"
-              expect(expected_xml).to eq test_data_xml
+              expect(request_xml).to eq test_data_xml
             end
           end
         end
@@ -105,7 +111,7 @@ module CCMS
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
                 test_data_xml = ccms_data_from_file "case_add_request.xml"
-                expect(expected_xml).to eq test_data_xml
+                expect(request_xml).to eq test_data_xml
               end
             end
           end
@@ -122,7 +128,7 @@ module CCMS
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
                 test_data_xml = ccms_data_from_file "df_case_add_request.xml"
-                expect(expected_xml).to eq test_data_xml
+                expect(request_xml).to eq test_data_xml
               end
             end
           end
@@ -168,15 +174,15 @@ module CCMS
             it "generates the expected scope limitations" do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
-                expect(expected_xml.squish).to match substantive_scope_limitation_one_xml
-                expect(expected_xml.squish).to match substantive_scope_limitation_two_xml
-                expect(expected_xml.squish).not_to match emergency_scope_limitation_one_xml
-                expect(expected_xml.squish).not_to match emergency_scope_limitation_two_xml
+                expect(request_xml.squish).to match substantive_scope_limitation_one_xml
+                expect(request_xml.squish).to match substantive_scope_limitation_two_xml
+                expect(request_xml.squish).not_to match emergency_scope_limitation_one_xml
+                expect(request_xml.squish).not_to match emergency_scope_limitation_two_xml
               end
             end
 
             it "specifies MULTIPLE for requested scope" do
-              expect(expected_xml.squish).to match requested_scope_xml
+              expect(request_xml.squish).to match requested_scope_xml
             end
           end
 
@@ -191,15 +197,15 @@ module CCMS
             it "generates the expected scope limitations" do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
-                expect(expected_xml.squish).to match substantive_scope_limitation_one_xml
-                expect(expected_xml.squish).to match substantive_scope_limitation_two_xml
-                expect(expected_xml.squish).to match emergency_scope_limitation_one_xml
-                expect(expected_xml.squish).to match emergency_scope_limitation_two_xml
+                expect(request_xml.squish).to match substantive_scope_limitation_one_xml
+                expect(request_xml.squish).to match substantive_scope_limitation_two_xml
+                expect(request_xml.squish).to match emergency_scope_limitation_one_xml
+                expect(request_xml.squish).to match emergency_scope_limitation_two_xml
               end
             end
 
             it "specifies MULTIPLE for requested scope" do
-              expect(expected_xml.squish).to match requested_scope_xml
+              expect(request_xml.squish).to match requested_scope_xml
             end
           end
         end
@@ -209,14 +215,65 @@ module CCMS
           let(:opponent_two) { create(:opponent, first_name: "Sansa", last_name: "Opponent-Test") }
           let(:opponents) { [opponent_one, opponent_two] }
 
-          before do
-            allow(opponent_one).to receive(:generate_ccms_opponent_id).and_return("123456")
-            allow(opponent_two).to receive(:generate_ccms_opponent_id).and_return("654321")
+          it "generates expected xml with multiple opponents" do
+            expect(request_xml).to match(/Joffrey Test-Opponent/)
+            expect(request_xml).to match(/Sansa Opponent-Test/)
+          end
+        end
+
+        context "when existing opponent organisation is added" do
+          let(:local_authority) do
+            create(:opponent,
+                   :for_organisation,
+                   organisation_name: "Bucks Council",
+                   organisation_ccms_code: "LA",
+                   organisation_description: "Local Authority",
+                   ccms_opponent_id: "222222")
           end
 
-          it "generates expected xml with multiple opponents" do
-            expect(expected_xml).to match(/Joffrey Test-Opponent/)
-            expect(expected_xml).to match(/Sansa Opponent-Test/)
+          let(:opponents) { [local_authority] }
+
+          it "generates expected xml for an existing opponent organisation" do
+            other_party_xpath = "//casebio:OtherParties/casebio:OtherParty"
+            organization_xpath = "#{other_party_xpath}/casebio:OtherPartyDetail/casebio:Organization"
+
+            expect(request_xml)
+              .to have_xml("#{other_party_xpath}/casebio:OtherPartyID", "222222")
+              .and have_xml("#{other_party_xpath}/casebio:SharedInd", "true")
+              .and have_xml("#{organization_xpath}/casebio:OrganizationName", "Bucks Council")
+              .and have_xml("#{organization_xpath}/casebio:OrganizationType", "LA")
+              .and have_xml("#{organization_xpath}/casebio:RelationToClient", "NONE")
+              .and have_xml("#{organization_xpath}/casebio:RelationToCase", "OPP")
+          end
+        end
+
+        context "when new opponent organisation is added" do
+          let(:local_authority) do
+            create(:opponent,
+                   :for_organisation,
+                   organisation_name: "Foobar Council",
+                   organisation_ccms_code: "LA",
+                   organisation_description: "Local Authority",
+                   ccms_opponent_id: "")
+          end
+
+          let(:opponents) { [local_authority] }
+
+          before do
+            allow(CCMS::OpponentId).to receive(:next_serial_id).and_return("999888")
+          end
+
+          it "generates expected xml for an existing opponent organisation" do
+            other_party_xpath = "//casebio:OtherParties/casebio:OtherParty"
+            organization_xpath = "#{other_party_xpath}/casebio:OtherPartyDetail/casebio:Organization"
+
+            expect(request_xml)
+              .to have_xml("#{other_party_xpath}/casebio:OtherPartyID", "OPPONENT_999888")
+              .and have_xml("#{other_party_xpath}/casebio:SharedInd", "false")
+              .and have_xml("#{organization_xpath}/casebio:OrganizationName", "Foobar Council")
+              .and have_xml("#{organization_xpath}/casebio:OrganizationType", "LA")
+              .and have_xml("#{organization_xpath}/casebio:RelationToClient", "NONE")
+              .and have_xml("#{organization_xpath}/casebio:RelationToCase", "OPP")
           end
         end
       end
