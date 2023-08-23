@@ -123,8 +123,12 @@ module CCMS
       end
 
       def generate_other_parties(xml)
-        @legal_aid_application.opponents.order(:created_at).each do |opponent|
-          generate_opponent(xml, opponent)
+        @legal_aid_application.opponents.individuals.order(:created_at).each do |opponent|
+          generate_opponent_individual(xml, opponent)
+        end
+
+        @legal_aid_application.opponents.organisations.order(:created_at).each do |opponent|
+          generate_opponent_organisation(xml, opponent)
         end
 
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
@@ -132,7 +136,8 @@ module CCMS
         end
       end
 
-      def generate_opponent(xml, opponent)
+      # TODO: extract to new class - OpponentXml
+      def generate_opponent_individual(xml, opponent)
         xml.__send__(:"casebio:OtherParty") do
           xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{opponent.generate_ccms_opponent_id}")
           xml.__send__(:"casebio:SharedInd", false)
@@ -147,6 +152,52 @@ module CCMS
               xml.__send__(:"casebio:RelationToClient", "NONE")
               xml.__send__(:"casebio:RelationToCase", "OPP")
               xml.__send__(:"casebio:ContactDetails")
+            end
+          end
+        end
+      end
+
+      # see https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/4460773385/Organisation+Opponents
+      # for mappings
+      def generate_opponent_organisation(xml, opponent)
+        if opponent.ccms_opponent_id
+          generate_opponent_organisation_existing(xml, opponent)
+        else
+          generate_opponent_organisation_new(xml, opponent)
+        end
+      end
+
+      # TODO: extract to new class - OpponentXml
+      def generate_opponent_organisation_new(xml, opponent)
+        xml.__send__(:"casebio:OtherParty") do
+          xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{opponent.generate_ccms_opponent_id}")
+          xml.__send__(:"casebio:SharedInd", false)
+          xml.__send__(:"casebio:OtherPartyDetail") do
+            xml.__send__(:"casebio:Organization") do
+              xml.__send__(:"casebio:OrganizationName", opponent.full_name)
+              xml.__send__(:"casebio:OrganizationType", opponent.ccms_type_code)
+              xml.__send__(:"casebio:RelationToClient", "NONE")
+              xml.__send__(:"casebio:RelationToCase", "OPP")
+              xml.__send__(:"casebio:Address") # Do we even need to send it with no values or can it be excluded?
+              xml.__send__(:"casebio:ContactDetails") # Do we even need to send it with no values or can it be excluded?
+            end
+          end
+        end
+      end
+
+      # TODO: extract to new class - OpponentXml
+      def generate_opponent_organisation_existing(xml, opponent)
+        xml.__send__(:"casebio:OtherParty") do
+          xml.__send__(:"casebio:OtherPartyID", opponent.ccms_opponent_id)
+          xml.__send__(:"casebio:SharedInd", true)
+          xml.__send__(:"casebio:OtherPartyDetail") do
+            xml.__send__(:"casebio:Organization") do
+              xml.__send__(:"casebio:OrganizationName", opponent.full_name)
+              xml.__send__(:"casebio:OrganizationType", opponent.ccms_type_code)
+              xml.__send__(:"casebio:Address") # Do we even need to send it with no values or can it be excluded?
+              xml.__send__(:"casebio:RelationToClient", "NONE")
+              xml.__send__(:"casebio:RelationToCase", "OPP")
+              xml.__send__(:"casebio:ContactName", "Not Available") # Do we even need to send it with no values or can it be excluded?
             end
           end
         end
