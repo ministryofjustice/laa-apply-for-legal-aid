@@ -72,7 +72,7 @@ module Providers
 
           it "shows the correct error message" do
             subject
-            expect(response.body).to include(I18n.t("providers.application_merits_task.remove_involved_child.show.error", name: child.full_name))
+            expect(unescaped_response_body).to include(I18n.t("providers.application_merits_task.remove_involved_child.show.error", name: child.full_name))
           end
 
           it "does not delete a record" do
