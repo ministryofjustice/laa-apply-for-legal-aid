@@ -31,7 +31,7 @@ module CCMS
       let(:office) { create(:office) }
       let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
-      let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/CaseServices/CaseServices_ep" }
+      let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/CaseServices_ep" }
       let(:response_body) { ccms_data_from_file "case_add_response.xml" }
 
       around do |example|

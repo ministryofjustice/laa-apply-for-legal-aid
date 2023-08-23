@@ -25,16 +25,11 @@ module CCMS
       end
 
       class << self
-        # attr_reader :wsdl, :namespaces
         attr_reader :wsdl
 
         def wsdl_from(filename)
           @wsdl = filename
         end
-
-        # def uses_namespaces(namespaces)
-        #   @namespaces = namespaces.freeze
-        # end
       end
 
       def formatted_xml
@@ -51,8 +46,6 @@ module CCMS
 
     private
 
-      # temporarily ignore this until connectivity with ccms is working
-      # :nocov:
       def soap_client
         @soap_client ||= Savon.client(
           headers: { "x-api-key" => config.aws_gateway_api_key },
@@ -68,7 +61,6 @@ module CCMS
           read_timeout: 180,
         )
       end
-      # :nocov:
 
       def soap_envelope(namespaces)
         Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|

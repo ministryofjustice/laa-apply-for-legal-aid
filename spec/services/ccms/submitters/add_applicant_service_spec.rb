@@ -10,7 +10,7 @@ module CCMS
       let(:address) { applicant.address }
       let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
-      let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/ClientServices/ClientServices_ep" }
+      let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/ClientServices_ep" }
       let(:response_body) { ccms_data_from_file "applicant_add_response_success.xml" }
 
       around do |example|
