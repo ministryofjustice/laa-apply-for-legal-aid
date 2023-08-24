@@ -1,12 +1,9 @@
 <h2 class="govuk-heading-m"><%= t(".restrictions") %></h2>
-  <tbody>
-    <tr>
-      <td class="govuk-table__cell govuk-table">
-        <% if @legal_aid_application.has_restrictions? %>
-          <%= @legal_aid_application.restrictions_details %>
-        <% else %>
-          <%= t(".none") %>
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
+
+<p class="govuk-body">
+  <% if @legal_aid_application.has_restrictions? %>
+    <%= @legal_aid_application.restrictions_details %>
+  <% else %>
+    <%= t(".none") %>
+  <% end %>
+</p>

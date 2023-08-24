@@ -1,13 +1,32 @@
 <% if @cfe_result.liquid_capital_items.any? %>
   <h2 class="govuk-heading-m"><%= t(".savings_and_investments") %></h2>
-  <table class="govuk-table">
-    <tbody>
-      <% @cfe_result.liquid_capital_items.each do |item| %>
-        <% if capital_items_to_display?(@legal_aid_application, item) %>
-          <%= render partial: "shared/results_detail_row", locals: { caption: item_description(@legal_aid_application, item), value: gds_number_to_currency(item[:value]) } %>
-        <% end %>
-      <% end %>
-    <%= render partial: "shared/results_total_row", locals: { caption: t(".assessed_amount"), value: gds_number_to_currency(@cfe_result.total_savings) } %>
-    </tbody>
-  </table>
+
+  <%= govuk_table do |table|
+        table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+
+        table.with_head do |head|
+          head.with_row do |row|
+            row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".savings_and_investments_type"))
+            row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
+          end
+        end
+
+        table.with_body do |body|
+          @cfe_result.liquid_capital_items.each do |item|
+            next unless capital_items_to_display?(@legal_aid_application, item)
+
+            body.with_row do |row|
+              row.with_cell(header: true, text: item_description(@legal_aid_application, item))
+              row.with_cell(numeric: true, text: gds_number_to_currency(item[:value]))
+            end
+          end
+        end
+
+        table.with_foot do |foot|
+          foot.with_row do |row|
+            row.with_cell(header: true, text: t(".assessed_amount"))
+            row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_savings))
+          end
+        end
+      end %>
 <% end %>

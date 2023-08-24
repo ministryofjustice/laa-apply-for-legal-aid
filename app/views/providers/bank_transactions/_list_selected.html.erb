@@ -1,27 +1,23 @@
-<table class="govuk-table">
-  <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t(".caption", category:) %></caption>
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header" scope="col"><%= t(".col_date") %></th>
-      <th class="govuk-table__header" scope="col"><%= t(".col_description") %></th>
-      <th class="govuk-table__header" scope="col"><%= t(".col_amount") %></th>
-      <th class="govuk-table__header" scope="col"><p class="govuk-visually-hidden"><%= t(".col_remove") %></p></th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-    <% bank_transactions.each do |bank_transaction| %>
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">
-          <%= l(bank_transaction.happened_at.to_date, format: :short_date) %>
-        </td>
-        <td class="govuk-table__cell">
-          <%= bank_transaction.description %>
-        </td>
-        <td class="govuk-table__cell">
-          <%= value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) %>
-        </td>
-        <td class="govuk-table__cell">
-          <%= govuk_button_to(
+<%= govuk_table do |table|
+      table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".caption", category:))
+
+      table.with_head do |head|
+        head.with_row do |row|
+          row.with_cell(text: t(".col_date"))
+          row.with_cell(text: t(".col_description"))
+          row.with_cell(text: t(".col_amount"))
+          row.with_cell(text: t(".col_remove"))
+        end
+      end
+
+      table.with_body do |body|
+        bank_transactions.each do |bank_transaction|
+          body.with_row do |row|
+            row.with_cell(text: l(bank_transaction.happened_at.to_date, format: :short_date))
+            row.with_cell(text: bank_transaction.description)
+            row.with_cell(text: value_with_currency_unit(bank_transaction.amount, bank_transaction.currency))
+            row.with_cell do
+              govuk_button_to(
                 t(".remove_link"),
                 remove_transaction_type_providers_legal_aid_application_bank_transaction_path(@legal_aid_application, bank_transaction),
                 method: :patch,
@@ -29,9 +25,9 @@
                 form_class: "remote-remove-transaction",
                 suffix: "#{bank_transaction.description} #{value_with_currency_unit(bank_transaction.amount, bank_transaction.currency)} #{l(bank_transaction.happened_at.to_date, format: :short_date)}",
                 remote: true,
-              ) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+              )
+            end
+          end
+        end
+      end
+    end %>

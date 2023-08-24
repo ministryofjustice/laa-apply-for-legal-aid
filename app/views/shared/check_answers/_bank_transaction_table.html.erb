@@ -1,17 +1,12 @@
-<table class="govuk-table" style="margin-bottom: 15px;">
-  <caption class="govuk-table__caption" style="padding-bottom:10px;">
-    <%= t("date.date_period", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)) %>
-  </caption>
-  <tbody class="govuk-table__body">
-  <% transaction_types.order(:name).each do |transaction_type| %>
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        <%= t(".total", text: transaction_type.label_name) %>
-      </td>
-      <td class="govuk-table__cell govuk-table__cell--numeric">
-        <%= gds_number_to_currency @legal_aid_application.transactions_total_by_category(transaction_type.id) %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= govuk_table do |table|
+      table.with_caption(text: t("date.date_period", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)))
+
+      table.with_body do |body|
+        transaction_types.order(:name).each do |transaction_type|
+          body.with_row do |row|
+            row.with_cell(header: true, text: t(".total", text: transaction_type.label_name))
+            row.with_cell(numeric: true, text: gds_number_to_currency(@legal_aid_application.transactions_total_by_category(transaction_type.id)))
+          end
+        end
+      end
+    end %>

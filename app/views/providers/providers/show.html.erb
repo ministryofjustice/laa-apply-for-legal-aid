@@ -1,22 +1,29 @@
-<%= page_template(page_title: t(".page_title"), column_width: "full") do %>
-  <table class="govuk-table">
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t(".name") %></th>
-        <td class="govuk-table__cell"><%= @provider.name %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t(".username") %></th>
-        <td class="govuk-table__cell"><%= @provider.username %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t(".email") %></th>
-        <td class="govuk-table__cell"><%= @provider.email %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t(".account_number") %></th>
-        <td class="govuk-table__cell"></td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+<%= page_template(
+      page_title: t(".page_title"),
+      back_link: :none,
+    ) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <%= govuk_table do |table|
+          table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".page_title"))
+
+          table.with_body do |body|
+            body.with_row do |row|
+              row.with_cell(header: true, text: t(".name"))
+              row.with_cell(text: @provider.name)
+            end
+            body.with_row do |row|
+              row.with_cell(header: true, text: t(".username"))
+              row.with_cell(text: @provider.username)
+            end
+            body.with_row do |row|
+              row.with_cell(header: true, text: t(".email"))
+              row.with_cell(text: @provider.email)
+            end
+          end
+        end %>
+
+  </div>
+</div>

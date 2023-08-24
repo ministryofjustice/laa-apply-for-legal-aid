@@ -30,87 +30,92 @@
     </details>
   <% end %>
 
-  <div class="govuk-!-padding-bottom-4"></div>
-
   <%= form_with(method: :patch, local: true) do |form| %>
 
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
-    <table class="govuk-table sortable table-merge_columns">
-      <caption class="govuk-table__caption">
-        <%= content_tag(:span, t(".table_description", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)), class: "govuk-visually-hidden") if @bank_transactions.any? %>
-        <%= content_tag(:h2, t("date.date_period", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)), aria: { hidden: "true" }, class: "govuk-heading-s") if @bank_transactions.any? %>
-      </caption>
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th
-            class="govuk-table__header select-clear-all"
-            scope="col"
-            data-copy-select="<%= t ".col_select_all" %>"
-            data-copy-clear="<%= t ".col_clear_all" %>">
-          </th>
 
-          <%= sort_column_th(
-                type: :date,
-                content: t(".col_date"),
-                combine_right: { at: 555, append: t(".col_and_description") },
-                currently_sorted: :desc,
-              ) %>
+    <%= govuk_table(html_attributes: { class: "sortable" }) do |table|
+          table.with_caption(size: "s") do
+            if @bank_transactions.any?
+              tag.h2 do
+                t(".table_description_html", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application))
+              end
+            end
+          end
 
-          <%= sort_column_th type: :alphabetic, content: t(".col_description") %>
+          table.with_head do |head|
+            head.with_row do |row|
+              row.with_cell(html_attributes: { class: "select-clear-all", "data-copy-clear": t(".col_clear_all"), "data-copy-select": t(".col_select_all") })
+              row.with_cell(html_attributes: { class: "sort header-sort-desc", "data-sort-type": "date" }) do
+                tag.span(class: "aria-sort-description") do
+                  concat t(".col_date")
+                  concat tag.span(class: "sort-direction-indicator")
+                end
+              end
+              row.with_cell(html_attributes: { class: "sort", "data-sort-type": "alphabetic" }) do
+                tag.span(class: "aria-sort-description") do
+                  concat t(".col_description")
+                  concat tag.span(class: "sort-direction-indicator")
+                end
+              end
+              row.with_cell(html_attributes: { class: "sort", "data-sort-type": "numeric" }, numeric: true) do
+                tag.span(class: "aria-sort-description") do
+                  concat t(".col_amount")
+                  concat tag.span(class: "sort-direction-indicator")
+                end
+              end
+              row.with_cell(html_attributes: { class: "sort", "data-sort-type": "alphabetic" }) do
+                tag.span(class: "aria-sort-description") do
+                  concat t(".col_category")
+                  concat tag.span(class: "sort-direction-indicator")
+                end
+              end
+            end
+          end
 
-          <th class="nullcell" aria-hidden="true"></th>
+          table.with_body do |body|
+            form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description, boolean_style: :inline do |builder|
+              body.with_row do |row|
+                row.with_cell(html_attributes: { class: "tick-box-cell" }) do
+                  if builder.object.transaction_type_id.nil?
+                    tag.div(class: "govuk-checkboxes__item") do
+                      checked = builder.object.transaction_type_id == @transaction_type.id
+                      builder.check_box(class: "govuk-checkboxes__input", checked:, "aria-labelledby" => "Date-#{builder.object.id} Description-#{builder.object.id} Amount-#{builder.object.id}") +
+                        builder.label(class: "govuk-label govuk-checkboxes__label") do
+                          tag.span(class: "govuk-visually-hidden") do
+                            "#{builder.object.description}, #{value_with_currency_unit(builder.object.amount, builder.object.currency)} on #{l(builder.object.happened_at.to_date, format: :long_date)}"
+                          end
+                        end
+                    end
+                  end
+                end
 
-          <%= sort_column_th(
-                type: :numeric,
-                content: t(".col_amount"),
-                combine_right: { at: 470, append: t(".col_and_category") },
-              ) %>
+                row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": [builder.object.happened_at.to_i, builder.object.description], id: "Date-#{builder.object.id}" }) do
+                  l(builder.object.happened_at.to_date, format: :short_date)
+                end
 
-          <%= sort_column_th type: :alphabetic, content: t(".col_category") %>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <%= form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description do |builder| %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell tick-box-cell">
-              <% if builder.object.transaction_type_id == nil %>
-                <div class="govuk-checkboxes__item">
-                  <% checked = builder.object.transaction_type_id == @transaction_type.id %>
-                  <%= builder.check_box(class: "govuk-checkboxes__input", checked:, "aria-labelledby" => "Date-#{builder.object.id} Description-#{builder.object.id} Amount-#{builder.object.id}") %>
-                  <label for="transaction_ids_<%= builder.object.id %>" class="govuk-label govuk-checkboxes__label table-checkbox_label"><span class="govuk-visually-hidden"><%= builder.object.description %>, <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %> on <%= l(builder.object.happened_at.to_date, format: :long_date) %></span></label>
-                </div>
-              <% end %>
-            </td>
+                row.with_cell(html_attributes: { class: "sortable-cell", id: "Description-#{builder.object.id}" }) do
+                  builder.object.description
+                end
 
-            <%= sort_column_cell(
-                  id: "Date-#{builder.object.id}",
-                  content: l(builder.object.happened_at.to_date, format: :short_date),
-                  combine_right: 555,
-                  sort_by: [builder.object.happened_at.to_i, builder.object.description],
-                ) %>
+                row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": builder.object.amount, id: "Amount-#{builder.object.id}" }, numeric: true) do
+                  value_with_currency_unit(builder.object.amount, builder.object.currency)
+                end
 
-            <%= sort_column_cell(
-                  id: "Description-#{builder.object.id}",
-                  content: builder.object.description,
-                ) %>
-
-            <td class="nullcell" aria-hidden="true"></td>
-
-            <%= sort_column_cell(
-                  id: "Amount-#{builder.object.id}",
-                  content: value_with_currency_unit(builder.object.amount, builder.object.currency),
-                  combine_right: 470,
-                  sort_by: builder.object.amount,
-                  numeric: true,
-                ) %>
-
-            <%= sort_category_column_cell builder.object, @transaction_type %>
-
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+                if builder.object.transaction_type_id.nil?
+                  row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": "ZZZ", id: "Category-#{builder.object.id}" }) do
+                    concat govuk_tag(html_attributes: { class: "table-category table-category-vacant" }, text: t("activemodel.attributes.transaction_types.name.#{@transaction_type.name}"))
+                  end
+                else
+                  row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": t("activemodel.attributes.transaction_types.name.#{@transaction_type.name}"), id: "Category-#{builder.object.id}" }) do
+                    concat govuk_tag(text: t("activemodel.attributes.transaction_types.name.#{@transaction_type.name}"))
+                  end
+                end
+              end
+            end
+          end
+        end %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>

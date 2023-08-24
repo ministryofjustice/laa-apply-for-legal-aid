@@ -172,7 +172,7 @@ Then("the \"Income, regular payments and assets\" review section should contain:
 
   within(".income_payments_and_assets") do
     expectations.each do |expectated|
-      expect(page).to have_css(".govuk-table__cell", text: expectated[:question])
+      expect(page).to have_css(".govuk-table__header", text: expectated[:question])
     end
   end
 end
