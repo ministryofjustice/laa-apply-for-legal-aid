@@ -4,11 +4,18 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= form.govuk_text_field(
+
+  <%#= form.govuk_text_field(
         :name,
         label: { text: t(".name") },
         class: "govuk-input--width-20",
       ) %>
+
+  <%= form.govuk_collection_select :name,
+                                   @form.organisation_collection,
+                                   :name,
+                                   :name_and_type,
+                                   label: { text: t(".name") } %>
 
   <%= form.govuk_collection_select :organisation_type_ccms_code,
                                    @form.organisation_types,

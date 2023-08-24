@@ -2,7 +2,10 @@ module Providers
   module ApplicationMeritsTask
     class OpponentOrganisationsController < ProviderBaseController
       def show
-        @form = Opponents::OrganisationForm.new(model: opponent, name: opponent.name, organisation_type_ccms_code: opponent.ccms_code)
+        @form = Opponents::OrganisationForm
+                  .new(model: opponent,
+                       name: opponent.name,
+                       organisation_type_ccms_code: opponent.ccms_code)
       end
 
       def new
