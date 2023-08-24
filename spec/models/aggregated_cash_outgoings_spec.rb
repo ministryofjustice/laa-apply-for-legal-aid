@@ -22,7 +22,7 @@ RSpec.describe AggregatedCashOutgoings do
   describe "#find_by" do
     context "with no cash income transaction records" do
       it "returns an empty model" do
-        aco = described_class.find_by(legal_aid_application_id: application.id)
+        aco = described_class.find_by(legal_aid_application_id: application.id, owner: "Applicant")
         expect(aco.check_box_rent_or_mortgage).to be_nil
         expect(aco.rent_or_mortgage1).to be_nil
         expect(aco.rent_or_mortgage2).to be_nil
@@ -52,7 +52,7 @@ RSpec.describe AggregatedCashOutgoings do
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
-      let(:aco) { described_class.find_by(legal_aid_application_id: application.id) }
+      let(:aco) { described_class.find_by(legal_aid_application_id: application.id, owner: "Applicant") }
 
       around do |example|
         travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)

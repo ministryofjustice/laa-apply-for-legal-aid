@@ -30,7 +30,7 @@ RSpec.describe AggregatedCashIncome do
 
     context "with no cash income transaction records" do
       it "returns an empty model" do
-        aci = described_class.find_by(legal_aid_application_id: application.id)
+        aci = described_class.find_by(legal_aid_application_id: application.id, owner: "Applicant")
         expect(aci.check_box_benefits).to be_nil
         expect(aci.benefits1).to be_nil
         expect(aci.benefits2).to be_nil
@@ -94,7 +94,7 @@ RSpec.describe AggregatedCashIncome do
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
-      let(:aci) { described_class.find_by(legal_aid_application_id: application.id) }
+      let(:aci) { described_class.find_by(legal_aid_application_id: application.id, owner: "Applicant") }
 
       around do |example|
         travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
@@ -456,7 +456,7 @@ RSpec.describe AggregatedCashIncome do
     let!(:maintenance_in_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in) }
     let!(:maintenance_in_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in) }
     let!(:maintenance_in_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in) }
-    let(:aci) { described_class.find_by(legal_aid_application_id: application.id) }
+    let(:aci) { described_class.find_by(legal_aid_application_id: application.id, owner: "Applicant") }
 
     describe "#period" do
       context "with locale :en" do
