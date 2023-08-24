@@ -10,7 +10,7 @@ module Providers
     def initialize(params = {})
       @none_selected = none_selected.in?(params["transaction_type_ids"] || [])
       @legal_aid_application = params.delete(:legal_aid_application)
-      @transaction_type_ids = params["transaction_type_ids"] || existing_transaction_type_ids
+      @transaction_type_ids = params["transaction_type_ids"] || existing_transaction_type_ids_by_owner
       owner.present?
       assign_regular_transaction_attributes
 
@@ -95,7 +95,15 @@ module Providers
       legal_aid_application
         .transaction_types
         .where(transaction_type_conditions)
+        .where(owner_type:)
         .pluck(:id)
+    end
+
+    def existing_transaction_type_ids_by_owner
+      legal_aid_application
+        .regular_transactions
+        .where(owner_type:)
+        .pluck(:transaction_type_id)
     end
 
     def assign_regular_transaction_attributes
@@ -112,6 +120,8 @@ module Providers
 
         legal_aid_application.legal_aid_application_transaction_types.build(
           transaction_type_id:,
+          owner_id:,
+          owner_type:,
         )
       end
     end
@@ -122,6 +132,7 @@ module Providers
           .public_send(model)
           .includes(:transaction_type)
           .where(transaction_type: transaction_type_conditions)
+          .where(owner_type:)
           .where.not(transaction_type: transaction_type_exclusions)
           .where.not(transaction_type_id: transaction_type_ids)
           .destroy_all

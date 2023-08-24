@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_22_111710) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_24_132946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -542,7 +542,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_111710) do
     t.uuid "transaction_type_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.string "owner_type"
+    t.uuid "owner_id"
     t.index ["legal_aid_application_id"], name: "laa_trans_type_on_legal_aid_application_id"
+    t.index ["owner_type", "owner_id"], name: "index_legal_aid_application_transaction_types_on_owner"
     t.index ["transaction_type_id"], name: "laa_trans_type_on_transaction_type_id"
   end
 
