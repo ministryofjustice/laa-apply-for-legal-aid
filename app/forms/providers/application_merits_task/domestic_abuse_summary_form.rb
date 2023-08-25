@@ -66,7 +66,7 @@ module Providers
       end
 
       def clear_warning_details
-        warning_letter_sent&.clear if warning_letter_sent_details.to_s == "true"
+        warning_letter_sent_details&.clear if warning_letter_sent.to_s == "true"
       end
 
       def clear_bail_details
