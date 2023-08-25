@@ -132,3 +132,14 @@ Then("I display the state of the application from {int}") do |label|
   end
   puts ">>>>>>>>>>>> #{label} #{@legal_aid_application.reload.state} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
 end
+
+Then("no checkboxes should be selected") do
+  expect(all("input:checked[type='checkbox']", visible: false).count).to eql 0
+end
+
+Then(/the checkbox for (.*) should be (checked|unchecked)/) do |question, status|
+  label = find(:xpath, "//label[text()='#{question}']")
+  checked_status = label.sibling("input", visible: false).checked?
+  expected = (status == "checked")
+  expect(checked_status).to be(expected), "The #{question} checkbox was expected to be #{expected}, but was #{!expected}"
+end
