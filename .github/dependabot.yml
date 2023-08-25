@@ -27,3 +27,9 @@ updates:
   - "ministryofjustice/laa-apply-for-legal-aid"
   ignore:
     - dependency-name: "puppeteer"
+  groups:
+    # Specify a name for the group, which will be used in pull request titles and branch names
+    grouped-dependencies:
+      # Define patterns to include dependencies in the group (based on # dependency name)
+      patterns:
+        - "jest*"  # A wildcard string that matches multiple dependency names syt
