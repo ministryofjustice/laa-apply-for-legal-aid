@@ -8,6 +8,10 @@ updates:
     interval: daily
     time: "21:00"
     timezone: Europe/London
+  groups:
+    grouped-dependencies:
+      patterns:
+        - "aws-*"
   open-pull-requests-limit: 10
   ignore:
   - dependency-name: prometheus_exporter
