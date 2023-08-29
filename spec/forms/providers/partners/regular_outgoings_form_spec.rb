@@ -325,14 +325,14 @@ RSpec.describe Providers::Partners::RegularOutgoingsForm do
           legal_aid_application:,
           transaction_type: benefits,
           owner_type: "Partner",
-          owner_id: legal_aid_application.applicant.id,
+          owner_id: legal_aid_application.partner.id,
         )
         _regular_outgoing_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: child_care,
           owner_type: "Partner",
-          owner_id: legal_aid_application.applicant.id,
+          owner_id: legal_aid_application.partner.id,
         )
         params = {
           "transaction_type_ids" => ["", "none"],
@@ -432,7 +432,7 @@ RSpec.describe Providers::Partners::RegularOutgoingsForm do
           legal_aid_application:,
           transaction_type: maintenance_out,
           owner_type: "Partner",
-          owner_id: legal_aid_application.applicant.id,
+          owner_id: legal_aid_application.partner.id,
         )
         params = {
           "transaction_type_ids" => ["", rent_or_mortgage.id, child_care.id],
