@@ -54,12 +54,14 @@ module Providers
           add_transaction_type(form_tt) if existing_credit_transaction_type_ids.exclude?(form_tt.id)
           arr.append(form_tt.id)
         end
-
         destroy_all_credit_transaction_types(except: keep)
       end
 
       def add_transaction_type(transaction_type)
-        legal_aid_application.transaction_types << transaction_type
+        LegalAidApplicationTransactionType.create(legal_aid_application:,
+                                                  transaction_type:,
+                                                  owner_type: "Applicant",
+                                                  owner_id: legal_aid_application.applicant.id)
       end
 
       def destroy_all_credit_transaction_types(except:)

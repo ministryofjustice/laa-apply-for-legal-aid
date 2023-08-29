@@ -54,7 +54,10 @@ module Providers
       end
 
       def add_transaction_type(transaction_type)
-        legal_aid_application.transaction_types << transaction_type
+        LegalAidApplicationTransactionType.create(legal_aid_application:,
+                                                  transaction_type:,
+                                                  owner_type: "Applicant",
+                                                  owner_id: legal_aid_application.applicant.id)
       end
 
       def destroy_all_debit_transaction_types(except:)

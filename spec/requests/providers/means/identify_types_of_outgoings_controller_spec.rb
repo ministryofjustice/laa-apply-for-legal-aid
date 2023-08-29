@@ -90,6 +90,11 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
       end
 
+      it "creates a legal_aid_application_transaction_types record with ownership" do
+        expect { request }.to change(legal_aid_application.legal_aid_application_transaction_types, :count).by(3)
+        expect(legal_aid_application.legal_aid_application_transaction_types.first.owner_type).to eq "Applicant"
+      end
+
       context "with bank statement upload flow" do
         before do
           legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
@@ -226,7 +231,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_non_passported_state_machine,
-               :checking_means_income)
+               :checking_means_income,
+               :with_applicant)
       end
 
       let(:params) { { legal_aid_application: { none_selected: "true" } } }
