@@ -106,10 +106,10 @@ module Flow
         # partner_cash_incomes
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
-          forward: :has_dependants,
+          forward: :partner_regular_outgoings,
         },
         partner_regular_outgoings: {
-          path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoings_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_partners_regular_outgoings_path(application) },
           forward: lambda do |application|
             if application.partner.outgoing_types?
               :partner_cash_outgoings
