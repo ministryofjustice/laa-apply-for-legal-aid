@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
-  subject { described_class.new(form_params) }
+  subject(:described_form) { described_class.new(form_params) }
 
   let(:application) { create(:legal_aid_application, :with_applicant) }
   let(:journey) { %i[providers citizens].sample }
@@ -18,7 +18,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
 
   describe "#save" do
     before do
-      subject.save
+      described_form.save
       application.reload
     end
 
@@ -48,29 +48,29 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       let(:restrictions_details) { "" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates the expected error message" do
-        expect(subject.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{journey}.blank")
+        expect(described_form.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{journey}.blank")
       end
 
       context "with no restrictions present" do
         let(:has_restrictions) { "" }
 
         it "is invalid" do
-          expect(subject).to be_invalid
+          expect(described_form).to be_invalid
         end
 
         it "generates the expected error message" do
-          expect(subject.errors[:has_restrictions]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_restrictions.#{journey}.blank")
+          expect(described_form.errors[:has_restrictions]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_restrictions.#{journey}.blank")
         end
       end
     end
 
     describe "#save_as_draft" do
       before do
-        subject.save_as_draft
+        described_form.save_as_draft
         application.reload
       end
 

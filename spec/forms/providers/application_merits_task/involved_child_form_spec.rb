@@ -3,7 +3,7 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe InvolvedChildForm do
-      subject { described_class.new(params) }
+      subject(:described_form) { described_class.new(params) }
 
       let(:earliest_date) { Date.new(2000, 1, 1) }
       let(:dob) { Faker::Date.between(from: earliest_date, to: Date.current) }
@@ -20,7 +20,7 @@ module Providers
       describe "#valid?" do
         context "when all fields are valid" do
           it "returns true" do
-            expect(subject).to be_valid
+            expect(described_form).to be_valid
           end
         end
 
@@ -28,8 +28,8 @@ module Providers
           let(:full_name) { "" }
 
           it "returns false" do
-            expect(subject).not_to be_valid
-            expect(subject.errors[:full_name]).to eq ["Enter the child's full name"]
+            expect(described_form).not_to be_valid
+            expect(described_form.errors[:full_name]).to eq ["Enter the child's full name"]
           end
         end
 
@@ -44,8 +44,8 @@ module Providers
           end
 
           it "returns false" do
-            expect(subject).not_to be_valid
-            expect(subject.errors[:date_of_birth]).to eq ["Enter the date of birth"]
+            expect(described_form).not_to be_valid
+            expect(described_form.errors[:date_of_birth]).to eq ["Enter the date of birth"]
           end
         end
 
@@ -60,8 +60,8 @@ module Providers
           end
 
           it "returns false" do
-            expect(subject).not_to be_valid
-            expect(subject.errors[:date_of_birth]).to eq ["Enter a valid date of birth"]
+            expect(described_form).not_to be_valid
+            expect(described_form.errors[:date_of_birth]).to eq ["Enter a valid date of birth"]
           end
         end
       end

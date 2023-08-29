@@ -57,7 +57,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
 
     context "when the initial proceeding has no linked_children" do
       it { expect(proceeding.proceeding_linked_children).to be_empty }
-      it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(1) }
+      it { expect { save_form }.to change { proceeding.proceeding_linked_children.count }.by(1) }
     end
 
     context "when a user has previously linked two children" do
@@ -72,16 +72,16 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
         create(:proceeding_linked_child, proceeding:, involved_child: third_child)
       end
 
-      it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(-1) }
+      it { expect { save_form }.to change { proceeding.proceeding_linked_children.count }.by(-1) }
       it { expect(proceeding.proceeding_linked_children.map(&:involved_child_id)).to match_array initial_array }
 
       context "when an error occurs" do
         let(:linked_children_params) { ["guid-for-non-existent-child", "", ""] }
 
-        it { expect { subject }.not_to change { proceeding.proceeding_linked_children.count } }
+        it { expect { save_form }.not_to change { proceeding.proceeding_linked_children.count } }
 
         it "rolls back all changes" do
-          expect(subject).to be false
+          expect(save_form).to be false
           expect(proceeding.proceeding_linked_children.reload.map(&:involved_child_id)).to match_array initial_array
         end
       end

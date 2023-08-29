@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Incidents::ToldOnForm, type: :form do
-  subject { described_class.new(params.merge(model: incident)) }
+  subject(:described_form) { described_class.new(params.merge(model: incident)) }
 
   let(:incident) { create(:incident) }
   let(:told_on) { 3.days.ago.to_date }
@@ -14,7 +14,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
 
   describe "#save" do
     before do
-      subject.save
+      described_form.save
       incident.reload
     end
 
@@ -34,11 +34,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "occurred_on.date_not_valid" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:occurred_on].join).to match(message)
+        expect(described_form.errors[:occurred_on].join).to match(message)
       end
     end
 
@@ -53,11 +53,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "told_on.date_not_valid" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:told_on].join).to match(message)
+        expect(described_form.errors[:told_on].join).to match(message)
       end
     end
 
@@ -66,11 +66,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "occurred_on.date_is_in_the_future" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:occurred_on].join).to match(message)
+        expect(described_form.errors[:occurred_on].join).to match(message)
       end
     end
 
@@ -79,11 +79,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "told_on.date_is_in_the_future" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:told_on].join).to match(message)
+        expect(described_form.errors[:told_on].join).to match(message)
       end
     end
 
@@ -107,11 +107,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "occurred_on.blank" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:occurred_on].join).to match(message)
+        expect(described_form.errors[:occurred_on].join).to match(message)
       end
     end
 
@@ -121,11 +121,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "told_on.blank" }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:told_on].join).to match(message)
+        expect(described_form.errors[:told_on].join).to match(message)
       end
     end
 
@@ -140,11 +140,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       end
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:occurred_on].join).to match(message)
+        expect(described_form.errors[:occurred_on].join).to match(message)
       end
     end
 
@@ -159,11 +159,11 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       end
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "generates an error" do
-        expect(subject.errors[:told_on].join).to match(message)
+        expect(described_form.errors[:told_on].join).to match(message)
       end
     end
   end

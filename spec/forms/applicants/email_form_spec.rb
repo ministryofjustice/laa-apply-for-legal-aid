@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Applicants::EmailForm, type: :form do
-  subject { described_class.new(params) }
+  subject(:described_form) { described_class.new(params) }
 
   let(:params) do
     {
@@ -21,7 +21,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
 
   describe "#save" do
     before do
-      subject.save
+      described_form.save
       applicant.reload
     end
 
@@ -37,7 +37,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
       end
 
       it "address errors" do
-        expect(subject.errors[:email]).to be_present
+        expect(described_form.errors[:email]).to be_present
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
       let(:email) { "  #{fake_email_address}  " }
 
       it "updates the applicant email with the email address without whitespace" do
-        subject.save
+        described_form.save
         expect(applicant.reload.email).to eq fake_email_address
       end
     end

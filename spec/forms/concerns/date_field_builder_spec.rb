@@ -5,7 +5,7 @@ FormStruct = Struct.new(:happened_day, :happened_month, :happened_year)
 SuffixedFormStruct = Struct.new(:happened_3i, :happened_2i, :happened_1i)
 
 RSpec.describe DateFieldBuilder do
-  subject do
+  subject(:date_field_builder) do
     described_class.new(
       form:,
       model:,
@@ -23,13 +23,13 @@ RSpec.describe DateFieldBuilder do
 
   describe "#fields" do
     it "returns three prefixed names for day, month, and year" do
-      expect(subject.fields).to eq(%i[happened_year happened_month happened_day])
+      expect(date_field_builder.fields).to eq(%i[happened_year happened_month happened_day])
     end
   end
 
   describe "#from_form" do
     it "returns array of data stored in form prefixed part fields" do
-      expect(subject.from_form).to eq([form_date.year, form_date.month, form_date.day])
+      expect(date_field_builder.from_form).to eq([form_date.year, form_date.month, form_date.day])
     end
   end
 
@@ -40,40 +40,40 @@ RSpec.describe DateFieldBuilder do
         happened_month: model_date.month,
         happened_year: model_date.year,
       }
-      expect(subject.model_attributes).to eq(expected)
+      expect(date_field_builder.model_attributes).to eq(expected)
     end
   end
 
   describe "#model_date" do
     it "returns date from model" do
-      expect(subject.model_date).to eq(model_date)
+      expect(date_field_builder.model_date).to eq(model_date)
     end
   end
 
   describe "#form_date" do
     it "returns date built from form part fields" do
-      expect(subject.form_date).to eq(form_date)
+      expect(date_field_builder.form_date).to eq(form_date)
     end
 
     context "with two character year" do
       let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime("%y")) }
 
       it "returns date built from form part fields" do
-        expect(subject.form_date).to eq(form_date)
+        expect(date_field_builder.form_date).to eq(form_date)
       end
     end
   end
 
   describe "#form_date_invalid?" do
     it "returns false with valid date data" do
-      expect(subject.form_date_invalid?).to be false
+      expect(date_field_builder.form_date_invalid?).to be false
     end
 
     context "with invalid data" do
       let(:form) { FormStruct.new(form_date.day, 15, form_date.year) }
 
       it "returns false" do
-        expect(subject.form_date_invalid?).to be true
+        expect(date_field_builder.form_date_invalid?).to be true
       end
     end
 
@@ -81,7 +81,7 @@ RSpec.describe DateFieldBuilder do
       let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime("%y")) }
 
       it "returns false with valid date data" do
-        expect(subject.form_date_invalid?).to be false
+        expect(date_field_builder.form_date_invalid?).to be false
       end
     end
 
@@ -89,35 +89,35 @@ RSpec.describe DateFieldBuilder do
       let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime("%y").last) }
 
       it "returns true" do
-        expect(subject.form_date_invalid?).to be true
+        expect(date_field_builder.form_date_invalid?).to be true
       end
     end
   end
 
   describe "#blank?" do
     it "returns false if fully populated" do
-      expect(subject.blank?).to be false
+      expect(date_field_builder.blank?).to be false
     end
 
     context "when all form part fields are empty" do
       let(:form) { FormStruct.new }
 
       it "returns true" do
-        expect(subject.blank?).to be true
+        expect(date_field_builder.blank?).to be true
       end
     end
   end
 
   describe "#partially_complete?" do
     it "returns false if fully populated" do
-      expect(subject.partially_complete?).to be false
+      expect(date_field_builder.partially_complete?).to be false
     end
 
     context "when one part field is empty" do
       let(:form) { FormStruct.new(form_date.day, nil, form_date.year) }
 
       it "returns true" do
-        expect(subject.partially_complete?).to be true
+        expect(date_field_builder.partially_complete?).to be true
       end
     end
 
@@ -125,7 +125,7 @@ RSpec.describe DateFieldBuilder do
       let(:form) { FormStruct.new }
 
       it "returns false" do
-        expect(subject.partially_complete?).to be false
+        expect(date_field_builder.partially_complete?).to be false
       end
     end
   end
@@ -135,7 +135,7 @@ RSpec.describe DateFieldBuilder do
     let(:form) { SuffixedFormStruct.new(form_date.day, form_date.month, form_date.strftime("%y")) }
 
     it "returns date built from form new style part fields" do
-      expect(subject.form_date).to eq(form_date)
+      expect(date_field_builder.form_date).to eq(form_date)
     end
   end
 end

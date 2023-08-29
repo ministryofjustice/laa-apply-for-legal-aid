@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
-  subject { described_class.new(params) }
+  subject(:described_form) { described_class.new(params) }
 
   let(:used_delegated_functions_on) { 1.day.ago.to_date }
   let(:application) do
@@ -17,14 +17,14 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
 
   describe "#save" do
     it "updates application" do
-      expect { subject.save }
+      expect { described_form.save }
         .to change(application, :substantive_application)
         .from(nil)
         .to(substantive_application)
     end
 
     it "updates application" do
-      expect(subject.save).to be true
+      expect(described_form.save).to be true
       expect(application).not_to be_substantive_application
     end
 
@@ -32,7 +32,7 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
       let(:substantive_application) { true }
 
       it "updates application" do
-        expect(subject.save).to be true
+        expect(described_form.save).to be true
         expect(application).to be_substantive_application
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
       let(:substantive_application) { "" }
 
       it "does not update application" do
-        expect(subject.save).to be false
+        expect(described_form.save).to be false
         expect(application.substantive_application).to be_nil
       end
     end
