@@ -123,9 +123,26 @@ RSpec.describe Providers::Means::CashOutgoingsController do
                    transaction_types: [])
           end
 
-          it "redirects to the has dependants page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          context "and has partner with no contrary interest" do
+            it "redirects to partner means intro page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+            end
+          end
+
+          context "and has no partner" do
+            let(:legal_aid_application) do
+              create(:legal_aid_application,
+                     :with_applicant_and_partner,
+                     :with_non_passported_state_machine,
+                     :applicant_entering_means,
+                     transaction_types: [])
+            end
+
+            it "redirects to the partner about financial means page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_partners_about_financial_means_path(legal_aid_application))
+            end
           end
         end
       end

@@ -53,9 +53,25 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         }
       end
 
-      it "redirects to the has dependants page" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+      context "and applicant has no partner" do
+        it "redirects to the has dependants page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        end
+      end
+
+      context "and applicant has partner with no contrary interest" do
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_applicant_and_partner,
+                 :with_non_passported_state_machine,
+                 no_debit_transaction_types_selected: true)
+        end
+
+        it "redirects to the about financial means page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_partners_about_financial_means_path(legal_aid_application))
+        end
       end
 
       it "updates the no debit transaction types attribute" do
