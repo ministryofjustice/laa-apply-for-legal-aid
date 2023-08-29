@@ -832,6 +832,7 @@ en:
         show:
           page_heading: Select payments your client receives in cash
           info: Cash means physical money like banknotes and coins.
+          none_of_the_above: My client receives none of these payments in cash
       identify_types_of_outgoings:
         show:
           page_heading: Which of these payments does your client pay?

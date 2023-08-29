@@ -64,7 +64,7 @@ Feature: partner_means_assessment full journey
     Then I should be on a page with title "Select payments your client receives in cash"
     And I should see "Pension"
 
-    When I select "None of the above"
+    When I select "My client receives none of these payments in cash"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client get student finance?"
 
