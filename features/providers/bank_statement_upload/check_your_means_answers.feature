@@ -71,7 +71,7 @@ Feature: Bank statement upload check your answers
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
 
-    When I check "None of the above"
+    When I check "My client receives none of these payments in cash"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
