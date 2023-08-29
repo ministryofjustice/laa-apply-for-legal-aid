@@ -9,7 +9,7 @@ updates:
     time: "21:00"
     timezone: Europe/London
   groups:
-    grouped-dependencies:
+    aws-gems:
       patterns:
         - "aws-*"
   open-pull-requests-limit: 10
@@ -33,7 +33,7 @@ updates:
     - dependency-name: "puppeteer"
   groups:
     # Specify a name for the group, which will be used in pull request titles and branch names
-    grouped-dependencies:
+    npm-jest:
       # Define patterns to include dependencies in the group (based on # dependency name)
       patterns:
         - "jest*"  # A wildcard string that matches multiple dependency names syt
