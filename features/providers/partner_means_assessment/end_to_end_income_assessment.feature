@@ -66,7 +66,6 @@ Feature: partner_means_assessment full journey
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
-    And I should see "Pension"
 
     When I select "My client receives none of these payments in cash"
     And I click "Save and continue"
@@ -109,7 +108,14 @@ Feature: partner_means_assessment full journey
     Then I should be on a page with title "Which of these payments does the partner get?"
     And the checkbox for Pension should be unchecked
 
-    When I select "The partner does not get any of these payments"
+    When I select "Financial help from friends or family"
+    And I fill "Friends or family" with "100"
+    And I choose the "Monthly" frequency for "Friends or family"
+    And I click "Save and continue"
+    Then I should be on a page with title "Select payments the partner receives in cash"
+    And I should not see "Pension"
+
+    When I select "The partner receives none of these payments in cash"
     And I click "Save and continue"
     Then I should be on a page with title "Does the partner get student finance?"
 
