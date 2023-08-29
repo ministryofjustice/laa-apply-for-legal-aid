@@ -618,8 +618,7 @@ en:
           page_heading: Select payments the partner pays in cash
       cash_incomes:
         show:
-          page_heading: Select payments the partner receives in cash
-          info: Cash means physical money like banknotes and coins.
+          page_title: Select payments the partner receives in cash
           none_of_the_above: The partner receives none of these payments in cash
     has_national_insurance_numbers:
       show:
@@ -841,8 +840,7 @@ en:
           none_selected: Select if your client receives any types of income
       cash_incomes:
         show:
-          page_heading: Select payments your client receives in cash
-          info: Cash means physical money like banknotes and coins.
+          page_title: Select payments your client receives in cash
           none_of_the_above: My client receives none of these payments in cash
       identify_types_of_outgoings:
         show:

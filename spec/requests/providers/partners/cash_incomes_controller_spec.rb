@@ -53,7 +53,7 @@ RSpec.describe Providers::Partners::CashIncomesController do
 
     it "shows the page" do
       request
-      expect(response.body).to include(I18n.t("providers.partners.cash_incomes.show.page_heading"))
+      expect(response.body).to include(I18n.t("providers.partners.cash_incomes.show.page_title"))
     end
   end
 

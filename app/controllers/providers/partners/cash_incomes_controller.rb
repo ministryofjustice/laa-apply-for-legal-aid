@@ -2,7 +2,7 @@ module Providers
   module Partners
     class CashIncomesController < ProviderBaseController
       prefix_step_with :partner
-      before_action :aggregated_cash_income, only: %i[show update]
+      before_action :setup_variables, only: %i[show update]
 
       def show; end
 
@@ -16,6 +16,15 @@ module Providers
       end
 
     private
+
+      def setup_variables
+        cash_transactions
+        aggregated_cash_income
+      end
+
+      def cash_transactions
+        @cash_transactions ||= legal_aid_application.cash_transaction_types_for?("Partner")
+      end
 
       def aggregated_cash_income
         @aggregated_cash_income ||= AggregatedCashIncome.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Partner")
