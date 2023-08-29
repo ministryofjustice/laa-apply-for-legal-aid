@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::RegularTransactionForm do
+RSpec.describe Providers::RegularTransactionForm do
   describe "#transaction_type_conditions" do
     context "when the method is not implemented" do
       let(:conditions_not_implemented_form) do

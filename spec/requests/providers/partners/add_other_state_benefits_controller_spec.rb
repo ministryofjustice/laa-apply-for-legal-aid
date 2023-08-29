@@ -89,8 +89,8 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
     context "when the provider responds no" do
       let(:add_another_state_benefit) { "false" }
 
-      it "redirects to the check_income_answers page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
+      it "redirects to the partners regular income page" do
+        expect(response).to redirect_to(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application))
       end
     end
 

@@ -324,11 +324,15 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           :regular_transaction,
           legal_aid_application:,
           transaction_type: benefits,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         _regular_outgoing_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: child_care,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         params = {
           "transaction_type_ids" => ["", "none"],
@@ -427,6 +431,8 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           :regular_transaction,
           legal_aid_application:,
           transaction_type: maintenance_out,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         params = {
           "transaction_type_ids" => ["", rent_or_mortgage.id, child_care.id],

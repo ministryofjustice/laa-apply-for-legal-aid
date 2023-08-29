@@ -74,7 +74,7 @@ module Flow
         partner_receives_state_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_partners_receives_state_benefits_path(application) },
           forward: lambda do |_application, receives_state_benefits|
-            receives_state_benefits ? :partner_state_benefits : :partner_student_finances
+            receives_state_benefits ? :partner_state_benefits : :partner_regular_incomes
           end,
         },
         partner_state_benefits: {
@@ -84,7 +84,7 @@ module Flow
         partner_add_other_state_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_partners_add_other_state_benefits_path(application) },
           forward: lambda do |_application, add_other_state_benefits|
-            add_other_state_benefits ? :partner_state_benefits : :partner_student_finances
+            add_other_state_benefits ? :partner_state_benefits : :partner_regular_incomes
           end,
         },
         partner_remove_state_benefits: {
@@ -92,6 +92,18 @@ module Flow
             partner_has_any_state_benefits ? :partner_add_other_state_benefits : :partner_receives_state_benefits
           end,
         },
+        partner_regular_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_regular_incomes_path(application) },
+          forward: :partner_student_finances,
+          check_answers: :check_income_answers,
+          # remove above and uncomment below when partner_cash_incomes is ready
+          # forward: lambda do |application|
+          #   :partner_student_finances
+          #   application.income_types? ? :partner_cash_incomes : :partner_student_finances
+          # end,
+          # check_answers: ->(application) { application.income_types? ? :partner_cash_incomes : :check_income_answers },
+        },
+        # partner_cash_incomes
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
           forward: :has_dependants,

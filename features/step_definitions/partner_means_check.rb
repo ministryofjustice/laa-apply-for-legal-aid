@@ -53,3 +53,9 @@ Given(/^an applicant named (\S+) (\S+) with a partner has completed their true l
   HMRC::CreateResponsesService.call(@legal_aid_application)
   sleep 0.5 # give time for the after_update on HMRC::Response to do its thing
 end
+
+And("I have added a partner") do
+  create(:partner, legal_aid_application: @legal_aid_application)
+  @legal_aid_application.applicant.update!(has_partner: true,
+                                           partner_has_contrary_interest: false)
+end

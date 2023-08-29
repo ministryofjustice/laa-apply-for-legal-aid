@@ -263,11 +263,15 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: pension,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         outgoing_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: child_care,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
 
         form = described_class.new(params)
@@ -282,11 +286,15 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: pension,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         housing_benefit_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: housing_benefit,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
 
         form = described_class.new(params)
@@ -301,11 +309,15 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: pension,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         benefit_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: benefits,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
 
         form = described_class.new(params)
@@ -320,11 +332,15 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :regular_transaction,
           legal_aid_application:,
           transaction_type: pension,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         outgoing_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: child_care,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
 
         form = described_class.new(params)
@@ -339,11 +355,15 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :regular_transaction,
           legal_aid_application:,
           transaction_type: pension,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         housing_benefit_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: housing_benefit,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
 
         form = described_class.new(params)
@@ -424,16 +444,22 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: maintenance_in,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         existing_income_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: benefits,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         outgoing_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: child_care,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         params = {
           "transaction_type_ids" => ["", benefits.id, pension.id],

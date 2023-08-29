@@ -92,4 +92,4 @@ Feature: partner_means_assessment state benefits handling
     When I choose "No"
     And I click "Save and continue"
 
-    Then I should be on a page with title "Does the partner get student finance?"
+    Then I should be on a page with title "Which of these payments does the partner get?"

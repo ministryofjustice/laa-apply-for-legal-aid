@@ -23,7 +23,7 @@ Feature: Bank statement upload journey happy path
     And I choose "No"
 
     When I click "Save and continue"
-    Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
+    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
     And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
 
     When I open the section 'Government Cost of Living Payments and disregarded benefits'
@@ -97,7 +97,7 @@ Feature: Bank statement upload journey happy path
     And I choose "No"
 
     When I click "Save and continue"
-    Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
+    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
     And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
 
     When I open the section 'Government Cost of Living Payments and disregarded benefits'

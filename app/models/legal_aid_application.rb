@@ -501,6 +501,11 @@ class LegalAidApplication < ApplicationRecord
     transaction_types.for_outgoing_type?(:rent_or_mortgage)
   end
 
+  def housing_payments_for?(party)
+    owners_transaction_types = legal_aid_application_transaction_types.where(owner_type: party).map(&:transaction_type).pluck(:id)
+    TransactionType.where(id: owners_transaction_types).for_outgoing_type?(:rent_or_mortgage)
+  end
+
   def housing_benefit_regular_transaction_applicable?
     uploading_bank_statements? && housing_payments?
   end

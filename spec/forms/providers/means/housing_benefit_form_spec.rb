@@ -336,6 +336,8 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         params = {
           "transaction_type_ids" => "none",
@@ -357,6 +359,8 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           :regular_transaction,
           legal_aid_application:,
           transaction_type:,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
         params = {
           "transaction_type_ids" => "none",

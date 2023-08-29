@@ -62,7 +62,7 @@ Feature: Bank statement upload check your answers
     And I should see "hello_world.pdf"
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
-    Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
+    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
 
     When I check "Pension"
     And I fill "Pension amount" with "1000"
@@ -78,9 +78,9 @@ Feature: Bank statement upload check your answers
     And I should see "Every 2 weeks"
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
-    Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
+    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
 
-    When I check "My client receives none of these payments"
+    When I check "My client does not get any of these payments"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 

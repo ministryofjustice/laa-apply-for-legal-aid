@@ -52,7 +52,7 @@ RSpec.describe Providers::Partners::ReceivesStateBenefitsController do
       let(:receives_state_benefits) { "false" }
 
       it "redirects to the regular_income page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application))
       end
     end
 

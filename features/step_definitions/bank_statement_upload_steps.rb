@@ -42,6 +42,11 @@ Given "I have completed a non-passported employed application with bank statemen
     :checking_means_income,
   )
 
+  @legal_aid_application.legal_aid_application_transaction_types.each do |tt|
+    applicant = @legal_aid_application.applicant
+    tt.update!(owner_id: applicant.id, owner_type: applicant.class.name)
+  end
+
   create :attachment, :bank_statement, legal_aid_application: @legal_aid_application
 
   create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
