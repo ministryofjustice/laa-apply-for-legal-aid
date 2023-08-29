@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::DependantForm, type: :form do
-  subject { described_class.new(params) }
+  subject(:described_form) { described_class.new(params) }
 
   let(:dependant) { create(:dependant, date_of_birth: nil) }
   let(:date) { Faker::Date.birthday }
@@ -31,21 +31,21 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
 
   describe "valid?" do
     it "returns true when validations pass" do
-      expect(subject).to be_valid
+      expect(described_form).to be_valid
     end
 
     context "when invalid" do
       let(:year) { 2.years.from_now.year }
 
       it "returns false when validations fail" do
-        expect(subject).not_to be_valid
+        expect(described_form).not_to be_valid
       end
     end
   end
 
   describe "date_of_birth" do
     it "matches the input" do
-      expect(subject.date_of_birth).to eq(date)
+      expect(described_form.date_of_birth).to eq(date)
     end
 
     context "with two character year" do
@@ -55,7 +55,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         let(:date) { Faker::Date.between from: 99.years.ago, to: turn_of_century }
 
         it "constructs correct date" do
-          expect(subject.date_of_birth).to eq(date)
+          expect(described_form.date_of_birth).to eq(date)
         end
       end
 
@@ -63,7 +63,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         let(:date) { Faker::Date.between from: turn_of_century, to: Time.zone.today }
 
         it "constructs correct date" do
-          expect(subject.date_of_birth).to eq(date)
+          expect(described_form.date_of_birth).to eq(date)
         end
       end
     end
@@ -72,12 +72,12 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       let(:invalid_date_message) { I18n.t("activemodel.errors.models.dependant.attributes.date_of_birth.date_not_valid") }
 
       it "invalidates form" do
-        expect(subject).to be_invalid
+        expect(described_form).to be_invalid
       end
 
       it "has invalid date of birth error message" do
-        subject.valid?
-        expect(subject.errors[:date_of_birth]).to include(invalid_date_message)
+        described_form.valid?
+        expect(described_form.errors[:date_of_birth]).to include(invalid_date_message)
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
   end
 
   describe "assets" do
-    before { subject.valid? }
+    before { described_form.valid? }
 
     context "when the dependant has assets" do
       let(:has_assets) { "true" }
@@ -121,7 +121,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         end
 
         it "raises the expected error" do
-          expect(subject.errors[:assets_value]).to eq expected_array
+          expect(described_form.errors[:assets_value]).to eq expected_array
         end
       end
 
@@ -130,7 +130,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         let(:expected_array) { [I18n.t("activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold")] }
 
         it "raises the expected error" do
-          expect(subject.errors[:assets_value]).to eq expected_array
+          expect(described_form.errors[:assets_value]).to eq expected_array
         end
       end
 
@@ -138,7 +138,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         let(:assets_value) { "9,000" }
 
         it "raises the expected error" do
-          expect(subject.valid?).to be true
+          expect(described_form.valid?).to be true
         end
       end
     end
@@ -153,13 +153,13 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       end
 
       it "raises the expected error" do
-        expect(subject.errors[:has_assets_more_than_threshold]).to eq expected_array
+        expect(described_form.errors[:has_assets_more_than_threshold]).to eq expected_array
       end
     end
   end
 
   describe "income" do
-    before { subject.valid? }
+    before { described_form.valid? }
 
     context "when the dependant has income" do
       let(:has_income) { "true" }
@@ -168,14 +168,14 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         let(:expected_array) { [I18n.t("activemodel.errors.models.dependant.attributes.monthly_income.blank")] }
 
         it "raises the expected error" do
-          expect(subject.errors[:monthly_income]).to eq expected_array
+          expect(described_form.errors[:monthly_income]).to eq expected_array
         end
       end
 
       context "with a value specified" do
         let(:monthly_income) { "1,000.00" }
 
-        it { expect(subject.valid?).to be true }
+        it { expect(described_form.valid?).to be true }
       end
     end
 
@@ -184,7 +184,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       let(:expected_array) { [I18n.t("activemodel.errors.models.dependant.attributes.has_income.blank_message")] }
 
       it "raises the expected error" do
-        expect(subject.errors[:has_income]).to eq expected_array
+        expect(described_form.errors[:has_income]).to eq expected_array
       end
     end
   end

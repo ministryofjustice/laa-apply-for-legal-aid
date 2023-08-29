@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
-  subject { described_class.new(form_params) }
+  subject(:described_form) { described_class.new(form_params) }
 
   let(:savings_amount) { create(:savings_amount) }
   let(:attributes) { described_class::ATTRIBUTES }
@@ -19,7 +19,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it "updates all amounts" do
-          subject.save
+          described_form.save
           savings_amount.reload
 
           attributes.each do |attr|
@@ -30,11 +30,11 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to be(true)
+          expect(described_form.save).to be(true)
         end
 
         it "has no errors" do
-          expect(subject.errors).to be_empty
+          expect(described_form.errors).to be_empty
         end
       end
 
@@ -46,20 +46,20 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           }
         end
         it "returns false" do
-          expect(subject.save).to be(false)
+          expect(described_form.save).to be(false)
         end
 
         it "generates errors" do
-          subject.save
+          described_form.save
           attributes.each do |attr|
-            error_message = subject.errors[attr].first
+            error_message = described_form.errors[attr].first
             expect(error_message).to match(expected_error)
             expect(error_message).to match(attribute_map[attr.to_sym])
           end
         end
 
         it "does not update the model" do
-          expect { subject.save }.not_to change { savings_amount.reload.updated_at }
+          expect { described_form.save }.not_to change { savings_amount.reload.updated_at }
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it "strips the values of £ symbols" do
-          subject.save
+          described_form.save
           savings_amount.reload
 
           attributes.each do |attr|
@@ -112,22 +112,22 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "empties amounts if checkbox is unchecked" do
-          subject.save
+          described_form.save
           savings_amount.reload
           expect(savings_amount.offline_savings_accounts).to be_nil
         end
 
         it "does not empty amount if a checkbox is checked" do
-          subject.save
+          described_form.save
           expect(savings_amount.reload.offline_current_accounts).not_to be_nil
         end
 
         it "returns true" do
-          expect(subject.save).to be(true)
+          expect(described_form.save).to be(true)
         end
 
         it "has no errors" do
-          expect(subject.errors).to be_empty
+          expect(described_form.errors).to be_empty
         end
       end
 
@@ -135,15 +135,15 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it "empties amounts" do
-          subject.save
+          described_form.save
           savings_amount.reload
           expect(savings_amount.offline_current_accounts).to be_nil
           expect(savings_amount.offline_savings_accounts).to be_nil
         end
 
         it "returns false" do
-          expect(subject.save).to be(false)
-          expect(subject.errors).not_to be_empty
+          expect(described_form.save).to be(false)
+          expect(described_form.errors).not_to be_empty
         end
       end
 
@@ -157,8 +157,8 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to be(true)
-          expect(subject.errors).to be_empty
+          expect(described_form.save).to be(true)
+          expect(described_form.errors).to be_empty
         end
       end
 
@@ -172,12 +172,12 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns false" do
-          expect(subject.save).to be(false)
+          expect(described_form.save).to be(false)
         end
 
         it "displays an error message" do
-          subject.save
-          expect(subject.errors[:base]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
+          described_form.save
+          expect(described_form.errors[:base]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
         end
       end
     end

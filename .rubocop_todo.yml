@@ -137,26 +137,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 1580
+# Offense count: 1209
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/forms/applicants/email_form_spec.rb'
-    - 'spec/forms/applicants/employed_form_spec.rb'
-    - 'spec/forms/concerns/date_field_builder_spec.rb'
-    - 'spec/forms/incidents/told_on_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/dependant_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/has_evidence_of_benefit_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/outstanding_mortgage_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/own_home_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/percentage_home_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/restrictions_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/substantive_application_form_spec.rb'
-    - 'spec/forms/providers/application_merits_task/involved_child_form_spec.rb'
-    - 'spec/forms/providers/proceeding_merits_task/linked_children_form_spec.rb'
-    - 'spec/forms/savings_amounts/offline_accounts_form_spec.rb'
-    - 'spec/forms/savings_amounts/savings_amounts_form_spec.rb'
     - 'spec/helpers/hash_format_helper_spec.rb'
     - 'spec/helpers/providers_helper_spec.rb'
     - 'spec/helpers/user_transactions_helper_spec.rb'
@@ -358,13 +343,6 @@ RSpec/RepeatedExample:
     - 'spec/requests/providers/offline_accounts_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
     - 'spec/services/provider_after_login_service_spec.rb'
-
-# Offense count: 6
-RSpec/RepeatedExampleGroupBody:
-  Exclude:
-    - 'spec/models/applicant_spec.rb'
-    - 'spec/services/flow/base_flow_service_spec.rb'
-    - 'spec/services/manual_review_detailer_spec.rb'
 
 # Offense count: 20
 RSpec/RepeatedExampleGroupDescription:

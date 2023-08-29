@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Applicants::EmployedForm, type: :form do
-  subject { described_class.new(form_params) }
+  subject(:described_form) { described_class.new(form_params) }
 
   let!(:application) { create(:legal_aid_application, applicant:) }
   let(:applicant) { create(:applicant, employed: nil) }
@@ -13,8 +13,8 @@ RSpec.describe Applicants::EmployedForm, type: :form do
     let(:params) { {} }
 
     it "errors if employed not specified" do
-      expect(subject.save).to be false
-      expect(subject.errors[:employed]).to eq [I18n.t("activemodel.errors.models.applicant.attributes.base.none_selected")]
+      expect(described_form.save).to be false
+      expect(described_form.errors[:employed]).to eq [I18n.t("activemodel.errors.models.applicant.attributes.base.none_selected")]
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Applicants::EmployedForm, type: :form do
 
     it "updates record with new value of employed attribute" do
       expect(applicant.employed).to be_nil
-      subject.save
+      described_form.save
       expect(applicant.employed).to be false
     end
   end
