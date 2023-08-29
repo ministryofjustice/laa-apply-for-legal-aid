@@ -130,7 +130,7 @@ module Flow
           # end,
         },
         partner_cash_outgoings: {
-          path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_partners_cash_outgoing_path(application) },
           forward: :has_dependants,
           # to be added when CYA page is added
           #

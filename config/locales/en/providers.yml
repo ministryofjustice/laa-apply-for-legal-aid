@@ -613,6 +613,9 @@ en:
       regular_outgoings:
         show:
           page_title: Which of these payments does the partner pay?
+      cash_outgoings:
+        show:
+          page_heading: Select payments the partner pays in cash
     has_national_insurance_numbers:
       show:
         page_title: Does the client have a National Insurance number?
@@ -849,7 +852,6 @@ en:
       cash_outgoings:
         show:
           page_heading: Select payments your client pays in cash
-          info: Cash means physical money like banknotes and coins.
       housing_benefits:
         show:
           labels:

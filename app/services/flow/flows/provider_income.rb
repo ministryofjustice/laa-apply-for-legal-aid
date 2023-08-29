@@ -135,7 +135,7 @@ module Flow
           forward: lambda do |application|
             if application.housing_payments_for?("Applicant")
               :housing_benefits
-            elsif application.outgoing_types?
+            elsif application.applicant.outgoing_types?
               :cash_outgoings
             elsif application.applicant.has_partner_with_no_contrary_interest?
               :partner_about_financial_means

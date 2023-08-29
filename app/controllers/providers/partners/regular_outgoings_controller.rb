@@ -1,6 +1,8 @@
 module Providers
   module Partners
     class RegularOutgoingsController < ProviderBaseController
+      prefix_step_with :partner
+
       def show
         @form = RegularOutgoingsForm.new(legal_aid_application:)
       end

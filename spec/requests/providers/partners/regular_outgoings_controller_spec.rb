@@ -94,24 +94,6 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
       end
     end
 
-    context "when housing payments are selected" do
-      let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
-      let(:params) do
-        {
-          providers_partners_regular_outgoings_form: {
-            transaction_type_ids: [rent_or_mortgage.id],
-            rent_or_mortgage_amount: 100,
-            rent_or_mortgage_frequency: "monthly",
-          },
-        }
-      end
-
-      it "redirects to the housing payments page", pending: "to be added when housing benefit page is updated" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_housing_benefits_path(legal_aid_application))
-      end
-    end
-
     context "when the form is invalid" do
       let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
       let(:params) do

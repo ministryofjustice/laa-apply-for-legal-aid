@@ -276,6 +276,7 @@ Rails.application.routes.draw do
         resource :full_employment_details, only: %i[show update]
         resource :student_finance, only: %i[show update]
         resource :regular_outgoings, only: %i[show update]
+        resource :cash_outgoing, only: %i[show update]
         resource :bank_statements, only: %i[show update destroy] do
           get "/list", to: "bank_statements#list"
         end

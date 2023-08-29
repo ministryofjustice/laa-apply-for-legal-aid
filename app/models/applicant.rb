@@ -129,4 +129,8 @@ class Applicant < ApplicationRecord
   def employment_payments
     employments.map(&:employment_payments).flatten
   end
+
+  def outgoing_types?
+    regular_transactions.debits.exists?
+  end
 end
