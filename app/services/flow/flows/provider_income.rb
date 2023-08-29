@@ -133,12 +133,12 @@ module Flow
         regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoings_path(application) },
           forward: lambda do |application|
-            if application.applicant.has_partner_with_no_contrary_interest?
-              :partner_about_financial_means
-            elsif application.housing_payments_for?("Applicant")
+            if application.housing_payments_for?("Applicant")
               :housing_benefits
             elsif application.outgoing_types?
               :cash_outgoings
+            elsif application.applicant.has_partner_with_no_contrary_interest?
+              :partner_about_financial_means
             else
               :has_dependants
             end
@@ -161,12 +161,16 @@ module Flow
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
           forward: lambda do |application|
-            return :has_dependants if application.uploading_bank_statements?
+            unless application.uploading_bank_statements?
+              if application.income_types?
+                return :income_summary
+              elsif application.outgoing_types?
+                return :outgoings_summary
+              end
+            end
 
-            if application.income_types?
-              :income_summary
-            elsif application.outgoing_types?
-              :outgoings_summary
+            if application.applicant.has_partner_with_no_contrary_interest?
+              :partner_about_financial_means
             else
               :has_dependants
             end
