@@ -95,14 +95,6 @@ RSpec.describe Flow::BaseFlowService do
         expect(subject.current_path).to eq(path)
       end
 
-      context "when path not defined" do
-        let(:path) { nil }
-
-        it "raises an error" do
-          expect { subject.current_path }.to raise_error(/not defined/)
-        end
-      end
-
       context "when path is a proc" do
         let(:path) { ->(passed_in) { passed_in } }
 

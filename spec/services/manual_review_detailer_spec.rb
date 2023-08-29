@@ -15,18 +15,6 @@ RSpec.describe ManualReviewDetailer do
         expect(described_class.call(legal_aid_application)).to eq []
       end
 
-      context "when there are no restrictions, no policy disregards, with extra employment information" do
-        before do
-          allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
-          allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-          allow(legal_aid_application).to receive(:full_employment_details).and_return("test details")
-        end
-
-        it "returns an array with one entry" do
-          expect(described_class.call(legal_aid_application)).to eq [I18n.t("shared.assessment_results.manual_check_required.extra_employment_information")]
-        end
-      end
-
       context "when there are no restrictions, no policy disregards, with full employment details manually entered by the provider" do
         before do
           allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)

@@ -359,13 +359,6 @@ RSpec/RepeatedExample:
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
     - 'spec/services/provider_after_login_service_spec.rb'
 
-# Offense count: 6
-RSpec/RepeatedExampleGroupBody:
-  Exclude:
-    - 'spec/models/applicant_spec.rb'
-    - 'spec/services/flow/base_flow_service_spec.rb'
-    - 'spec/services/manual_review_detailer_spec.rb'
-
 # Offense count: 20
 RSpec/RepeatedExampleGroupDescription:
   Exclude:

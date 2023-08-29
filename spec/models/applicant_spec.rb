@@ -434,7 +434,7 @@ RSpec.describe Applicant do
 
       context "when self employed" do
         it "returns false" do
-          applicant = build(:applicant, :armed_forces)
+          applicant = build(:applicant, :self_employed)
           expect(applicant.not_employed?).to be false
         end
       end
