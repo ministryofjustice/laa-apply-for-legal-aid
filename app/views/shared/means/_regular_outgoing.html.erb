@@ -1,0 +1,36 @@
+<%= form_with model: @form,
+              url:,
+              method: :patch do |f| %>
+  <%= page_template page_title:, template: :basic, form: f do %>
+
+    <%= f.govuk_check_boxes_fieldset :transaction_type_ids,
+                                     legend: { tag: "h1", size: "xl" },
+                                     caption: { text: caption, size: "l" } do %>
+
+      <% @form.transaction_type_options.each_with_index do |transaction_type, index| %>
+        <%= f.govuk_check_box :transaction_type_ids,
+                              transaction_type.id,
+                              link_errors: index.zero?,
+                              label: { text: t(".labels.#{transaction_type.name}") },
+                              hint: { text: t(".hints.#{transaction_type.name}") } do %>
+          <%= f.govuk_text_field "#{transaction_type.name}_amount".to_sym,
+                                 width: "one-quarter",
+                                 prefix_text: "£" %>
+          <%= f.govuk_collection_radio_buttons "#{transaction_type.name}_frequency".to_sym,
+                                               RegularTransaction.frequencies_for(transaction_type),
+                                               :itself, ->(option) { t("transaction_types.frequencies.#{option}") },
+                                               legend: { tag: "h2", size: "s" } %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_check_box_divider %>
+
+      <%= f.govuk_check_box :transaction_type_ids,
+                            @form.none_selected,
+                            exclusive: true,
+                            label: { text: t(".labels.none") } %>
+    <% end %>
+
+    <%= f.govuk_submit t("generic.save_and_continue") %>
+  <% end %>
+<% end %>

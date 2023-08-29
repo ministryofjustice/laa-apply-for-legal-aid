@@ -55,6 +55,11 @@ en:
         child_care_amount: Enter amount
         maintenance_out_amount: Enter amount
         legal_aid_amount: Enter amount
+      providers_partners_regular_outgoings_form:
+        rent_or_mortgage_amount: Enter amount
+        child_care_amount: Enter amount
+        maintenance_out_amount: Enter amount
+        legal_aid_amount: Enter amount
       application_merits_task_domestic_abuse_summary:
         warning_letter_sent_details: Tell us why a warning letter has not been sent
         bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
@@ -95,3 +100,9 @@ en:
         maintenance_out_frequency: Select frequency
         legal_aid_frequency: Select frequency
         transaction_type_ids: Which of these payments does your client pay?
+      providers_partners_regular_outgoings_form:
+        rent_or_mortgage_frequency: Select frequency
+        child_care_frequency: Select frequency
+        maintenance_out_frequency: Select frequency
+        legal_aid_frequency: Select frequency
+        transaction_type_ids: Which of these payments does the partner pay?

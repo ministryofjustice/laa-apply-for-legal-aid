@@ -1,7 +1,7 @@
 module Providers
-  module Means
+  module Partners
     class RegularOutgoingsForm < BaseRegularOutgoingsForm
-      include ApplicantOwner
+      include PartnerOwner
     end
   end
 end

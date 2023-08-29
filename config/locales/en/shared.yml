@@ -760,6 +760,18 @@ en:
           property_or_lodger: Income from a property or lodger
           none: "%{individual} does not get any of these payments"
           pension: Pension
+      regular_outgoing:
+        hints:
+          rent_or_mortgage: For example, rent, mortgage or board and lodging.
+          child_care: For example, to a childminder, nanny or nursery.
+          maintenance_out: This includes child maintenance
+          legal_aid: ""
+        labels:
+          rent_or_mortgage: Housing payments
+          child_care: Childcare payments
+          maintenance_out: Maintenance payments to a former partner
+          legal_aid: Payments towards legal aid in a criminal case
+          none: My client makes none of these payments
     employment_income_table:
       benefits_in_kind: Benefits in kind
       employment_details: Employment details
