@@ -157,8 +157,6 @@ RSpec/NamedSubject:
     - 'spec/models/other_assets_declaration_spec.rb'
     - 'spec/models/savings_amount_spec.rb'
     - 'spec/models/scheduled_mailing_spec.rb'
-    - 'spec/policies/legal_aid_application_policy_spec.rb'
-    - 'spec/presenters/applicant_account_presenter_spec.rb'
     - 'spec/requests/admin/feedback_controller_spec.rb'
     - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
     - 'spec/requests/admin/legal_aid_applications_controller_spec.rb'

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplicationPolicy do
-  subject { described_class.new(authorization_context, legal_aid_application) }
+  subject(:laa_policy) { described_class.new(authorization_context, legal_aid_application) }
 
   let(:pre_dwp_check_controller) { Providers::AddressLookupsController.new }
   let(:post_dwp_check_controller) { Providers::BankTransactionsController.new }
@@ -28,7 +28,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
     it "does not allow any action" do
       controller_actions.each do |action|
-        expect(subject).not_to permit(action)
+        expect(laa_policy).not_to permit(action)
       end
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
       it "permits all actions" do
         controller_actions.each do |action|
-          expect(subject).to permit(action)
+          expect(laa_policy).to permit(action)
         end
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
       it "permits all actions" do
         controller_actions.each do |action|
-          expect(subject).to permit(action)
+          expect(laa_policy).to permit(action)
         end
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
       it "permits all actions" do
         controller_actions.each do |action|
-          expect(subject).to permit(action)
+          expect(laa_policy).to permit(action)
         end
       end
     end
