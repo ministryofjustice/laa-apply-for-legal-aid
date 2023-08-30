@@ -137,14 +137,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 1209
+# Offense count: 1159
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/lib/authorized_ip_ranges_spec.rb'
-    - 'spec/lib/omni_auth/strategies/true_layer_spec.rb'
-    - 'spec/lib/prometheus_collectors/sidekiq_queue_collector_spec.rb'
     - 'spec/models/address_spec.rb'
     - 'spec/models/aggregated_cash_income_spec.rb'
     - 'spec/models/aggregated_cash_outgoings_spec.rb'
