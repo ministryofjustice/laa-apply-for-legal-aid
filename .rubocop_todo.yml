@@ -137,7 +137,7 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 1159
+# Offense count: 1113
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
@@ -293,12 +293,6 @@ RSpec/NamedSubject:
     - 'spec/services/true_layer/importers/import_account_holders_service_spec.rb'
     - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
     - 'spec/services/true_layer_error_decoder_spec.rb'
-    - 'spec/validators/document_category_validator_spec.rb'
-    - 'spec/workers/bank_holiday_update_worker_spec.rb'
-    - 'spec/workers/ccms/submission_process_worker_spec.rb'
-    - 'spec/workers/hmrc/result_worker_spec.rb'
-    - 'spec/workers/hmrc/submission_worker_spec.rb'
-    - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
 # Offense count: 6
 RSpec/OverwritingSetup:

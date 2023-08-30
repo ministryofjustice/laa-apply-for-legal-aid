@@ -95,7 +95,7 @@ RSpec.describe HMRC::ResultWorker do
 
           it "raises an error but does not pass it to sentry" do
             expect(Sentry).not_to receive(:capture_message)
-            expect { subject }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
+            expect { perform }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
           end
         end
 
@@ -104,7 +104,7 @@ RSpec.describe HMRC::ResultWorker do
 
           it "raises an error but does not pass it to sentry" do
             expect(Sentry).not_to receive(:capture_message)
-            expect { subject }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
+            expect { perform }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
           end
         end
 
@@ -119,7 +119,7 @@ RSpec.describe HMRC::ResultWorker do
 
           it "raises a sentry warning and an untracked error" do
             expect(Sentry).to receive(:capture_message).with(expected_error)
-            expect { subject }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
+            expect { perform }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
           end
         end
 
@@ -128,7 +128,7 @@ RSpec.describe HMRC::ResultWorker do
 
           it "raises an error but does not pass it to sentry" do
             expect(Sentry).not_to receive(:capture_message)
-            expect { subject }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
+            expect { perform }.to raise_error HMRC::SentryIgnoreThisSidekiqFailError
           end
         end
 
