@@ -1,14 +1,14 @@
 require "rails_helper"
 
 RSpec.describe PostSubmissionProcessingJob do
-  subject { described_class.new.perform(application.id, feedback_url) }
+  subject(:psp_job) { described_class.new.perform(application.id, feedback_url) }
 
   let(:application) { create(:legal_aid_application) }
   let(:feedback_url) { "www.example.com/feedback/new" }
 
   describe "SubmissionConfirmationMailer" do
     it "schedules an email for immediate delivery" do
-      expect { subject }.to change(ScheduledMailing, :count).by(1)
+      expect { psp_job }.to change(ScheduledMailing, :count).by(1)
       rec = ScheduledMailing.first
 
       expect(rec.mailer_klass).to eq "SubmissionConfirmationMailer"

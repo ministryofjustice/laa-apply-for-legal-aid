@@ -142,13 +142,6 @@ RSpec/LetSetup:
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/jobs/bank_transactions_analyser_job_spec.rb'
-    - 'spec/jobs/citizen_complete_means_job_spec.rb'
-    - 'spec/jobs/dashboard/applicant_email_job_spec.rb'
-    - 'spec/jobs/dashboard/feedback_item_job_spec.rb'
-    - 'spec/jobs/dashboard/provider_data_job_spec.rb'
-    - 'spec/jobs/post_submission_processing_job_spec.rb'
-    - 'spec/jobs/scheduled_mailings_delivery_job_spec.rb'
     - 'spec/lib/authorized_ip_ranges_spec.rb'
     - 'spec/lib/omni_auth/strategies/true_layer_spec.rb'
     - 'spec/lib/prometheus_collectors/sidekiq_queue_collector_spec.rb'

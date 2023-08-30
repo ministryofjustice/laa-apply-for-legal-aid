@@ -3,7 +3,7 @@ require "rails_helper"
 module Dashboard
   RSpec.describe FeedbackItemJob do
     describe ".perform" do
-      subject { described_class.perform_now(feedback) }
+      subject(:feedback_item_job) { described_class.perform_now(feedback) }
 
       let(:feedback) { create(:feedback, :from_provider, satisfaction: 2, difficulty: 4) }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
@@ -26,7 +26,7 @@ module Dashboard
           context "and the job is not in the suspended list" do
             it "runs the geckoboard feedback updater" do
               expect_any_instance_of(Dashboard::SingleObject::Feedback).to receive(:run)
-              subject
+              feedback_item_job
             end
           end
         end
@@ -37,7 +37,7 @@ module Dashboard
           context "and the job is not in the suspended list" do
             it "does not run the geckoboard feedback updater" do
               expect_any_instance_of(Dashboard::SingleObject::Feedback).not_to receive(:run)
-              subject
+              feedback_item_job
             end
           end
         end
