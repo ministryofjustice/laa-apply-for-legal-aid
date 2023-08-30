@@ -137,24 +137,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 1209
+# Offense count: 1113
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/helpers/hash_format_helper_spec.rb'
-    - 'spec/helpers/providers_helper_spec.rb'
-    - 'spec/helpers/user_transactions_helper_spec.rb'
-    - 'spec/jobs/bank_transactions_analyser_job_spec.rb'
-    - 'spec/jobs/citizen_complete_means_job_spec.rb'
-    - 'spec/jobs/dashboard/applicant_email_job_spec.rb'
-    - 'spec/jobs/dashboard/feedback_item_job_spec.rb'
-    - 'spec/jobs/dashboard/provider_data_job_spec.rb'
-    - 'spec/jobs/post_submission_processing_job_spec.rb'
-    - 'spec/jobs/scheduled_mailings_delivery_job_spec.rb'
-    - 'spec/lib/authorized_ip_ranges_spec.rb'
-    - 'spec/lib/omni_auth/strategies/true_layer_spec.rb'
-    - 'spec/lib/prometheus_collectors/sidekiq_queue_collector_spec.rb'
     - 'spec/models/address_spec.rb'
     - 'spec/models/aggregated_cash_income_spec.rb'
     - 'spec/models/aggregated_cash_outgoings_spec.rb'
@@ -170,8 +157,6 @@ RSpec/NamedSubject:
     - 'spec/models/other_assets_declaration_spec.rb'
     - 'spec/models/savings_amount_spec.rb'
     - 'spec/models/scheduled_mailing_spec.rb'
-    - 'spec/policies/legal_aid_application_policy_spec.rb'
-    - 'spec/presenters/applicant_account_presenter_spec.rb'
     - 'spec/requests/admin/feedback_controller_spec.rb'
     - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
     - 'spec/requests/admin/legal_aid_applications_controller_spec.rb'
@@ -308,12 +293,6 @@ RSpec/NamedSubject:
     - 'spec/services/true_layer/importers/import_account_holders_service_spec.rb'
     - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
     - 'spec/services/true_layer_error_decoder_spec.rb'
-    - 'spec/validators/document_category_validator_spec.rb'
-    - 'spec/workers/bank_holiday_update_worker_spec.rb'
-    - 'spec/workers/ccms/submission_process_worker_spec.rb'
-    - 'spec/workers/hmrc/result_worker_spec.rb'
-    - 'spec/workers/hmrc/submission_worker_spec.rb'
-    - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
 # Offense count: 6
 RSpec/OverwritingSetup:

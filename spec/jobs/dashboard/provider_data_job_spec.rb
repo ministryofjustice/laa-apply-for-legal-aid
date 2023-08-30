@@ -3,7 +3,7 @@ require "rails_helper"
 module Dashboard
   RSpec.describe ProviderDataJob do
     describe ".perform" do
-      subject { described_class.perform_now(provider) }
+      subject(:provider_data_job) { described_class.perform_now(provider) }
 
       let(:provider) { create(:provider) }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
@@ -25,7 +25,7 @@ module Dashboard
           context "and the job is not in the suspended list" do
             it "runs ProviderData" do
               expect_any_instance_of(Dashboard::SingleObject::ProviderData).to receive(:run)
-              subject
+              provider_data_job
             end
           end
         end
@@ -36,7 +36,7 @@ module Dashboard
           context "and the job is not in the suspended list" do
             it "does not run ProviderData" do
               expect_any_instance_of(Dashboard::SingleObject::ProviderData).not_to receive(:run)
-              subject
+              provider_data_job
             end
           end
         end

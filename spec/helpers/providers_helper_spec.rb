@@ -17,7 +17,7 @@ RSpec.describe ProvidersHelper do
   let(:excluded_controllers) { %w[bank_transactions] + controllers_with_params }
 
   describe "#url_for_application" do
-    subject { url_for_application(legal_aid_application) }
+    subject(:url_helper) { url_for_application(legal_aid_application) }
 
     it "does not crash" do
       (provider_controller_names - excluded_controllers).each do |controller_name|
@@ -42,7 +42,7 @@ RSpec.describe ProvidersHelper do
       it do
         legal_aid_application.provider_step = "involved_children"
         legal_aid_application.provider_step_params = { id: "21983d92-876d-4f95-84df-1af2e3308fd7" }
-        expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/21983d92-876d-4f95-84df-1af2e3308fd7?locale=en")
+        expect(url_helper).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/21983d92-876d-4f95-84df-1af2e3308fd7?locale=en")
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe ProvidersHelper do
       it do
         legal_aid_application.provider_step = "involved_children"
         legal_aid_application.provider_step_params = { application_merits_task_involved_child: { full_name: partial_record.full_name }, id: "new" }
-        expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/#{partial_record.id}?locale=en")
+        expect(url_helper).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/#{partial_record.id}?locale=en")
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe ProvidersHelper do
       it do
         legal_aid_application.provider_step = "involved_children"
         legal_aid_application.provider_step_params = { application_merits_task_involved_child: { full_name: nil }, id: "new" }
-        expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/new?locale=en")
+        expect(url_helper).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/new?locale=en")
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe ProvidersHelper do
         legal_aid_application.provider_step = "linked_children"
         lead_proceeding = legal_aid_application.proceedings.find_by(lead_proceeding: true)
         legal_aid_application.provider_step_params = { merits_task_list_id: lead_proceeding.id }
-        expect(subject).to eq("/providers/merits_task_list/#{lead_proceeding.id}/linked_children?locale=en")
+        expect(url_helper).to eq("/providers/merits_task_list/#{lead_proceeding.id}/linked_children?locale=en")
       end
     end
 
@@ -82,7 +82,7 @@ RSpec.describe ProvidersHelper do
                                                                                            occurred_on_3i: "",
                                                                                            occurred_on_2i: "",
                                                                                            occurred_on_1i: "" } }
-        expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/date_client_told_incident?locale=en")
+        expect(url_helper).to eq("/providers/applications/#{legal_aid_application.id}/date_client_told_incident?locale=en")
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe ProvidersHelper do
         legal_aid_application.provider_step = "chances_of_success"
         lead_proceeding = legal_aid_application.proceedings.find_by(lead_proceeding: true)
         legal_aid_application.provider_step_params = { merits_task_list_id: lead_proceeding.id }
-        expect(subject).to eq("/providers/merits_task_list/#{lead_proceeding.id}/chances_of_success?locale=en")
+        expect(url_helper).to eq("/providers/merits_task_list/#{lead_proceeding.id}/chances_of_success?locale=en")
       end
     end
 

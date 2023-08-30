@@ -17,7 +17,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
     it "calls process! on the submission" do
       expect(submission).to receive(:process!)
       expect(described_class).to receive(:perform_async)
-      subject
+      perform
     end
 
     context "when the state changes to completed" do
@@ -28,7 +28,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
       it "does not raise a new SubmissionProcessWorker job" do
         expect(described_class).not_to receive(:perform_async)
-        subject
+        perform
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
           it "does not raise a sentry error" do
             expect(Sentry).not_to receive(:capture_message)
-            subject
+            perform
           end
 
           context "when a not tracked error is raised" do
@@ -49,7 +49,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             end
 
             it do
-              expect { subject }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
+              expect { perform }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
             end
           end
         end
@@ -59,7 +59,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
           it "does not raise a sentry error" do
             expect(Sentry).not_to receive(:capture_message)
-            subject
+            perform
           end
 
           context "when a not tracked error is raised" do
@@ -69,7 +69,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             end
 
             it do
-              expect { subject }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
+              expect { perform }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
             end
           end
         end
@@ -86,7 +86,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
           it "raises a sentry error" do
             expect(Sentry).to receive(:capture_message).with(expected_error)
-            subject
+            perform
           end
 
           context "when a not tracked error is raised" do
@@ -96,7 +96,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             end
 
             it do
-              expect { subject }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
+              expect { perform }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
             end
           end
         end
@@ -106,7 +106,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
           it "does not raise a sentry error" do
             expect(Sentry).not_to receive(:capture_message)
-            subject
+            perform
           end
 
           context "when a not tracked error is raised" do
@@ -116,7 +116,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             end
 
             it do
-              expect { subject }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
+              expect { perform }.to raise_error CCMS::SentryIgnoreThisSidekiqFailError
             end
           end
         end
@@ -135,7 +135,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             described_class.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_error)
             end
-            subject
+            perform
           end
 
           context "when a tracked error is raised" do
@@ -145,7 +145,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             end
 
             it do
-              expect { subject }.to raise_error CCMS::SubmissionStateUnchanged
+              expect { perform }.to raise_error CCMS::SubmissionStateUnchanged
             end
           end
         end

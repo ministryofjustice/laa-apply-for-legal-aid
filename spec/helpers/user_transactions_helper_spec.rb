@@ -14,20 +14,20 @@ RSpec.describe UserTransactionsHelper do
   end
 
   describe "#incomings_list" do
-    subject { helper.incomings_list(legal_aid_application.transaction_types.credits, locale_namespace:) }
+    subject(:helper_incomings_list) { helper.incomings_list(legal_aid_application.transaction_types.credits, locale_namespace:) }
 
     context "when for a citizen" do
       let(:locale_namespace) { "transaction_types.names.citizens" }
 
       it "returns correct hash" do
-        expect(subject[:items].first.to_h).to match hash_result
+        expect(helper_incomings_list[:items].first.to_h).to match hash_result
       end
 
       context "with excluded state benefit" do
         let(:transaction_type) { create(:transaction_type, :excluded_benefits) }
 
         it "returns correct hash" do
-          expect(subject[:items]).to be_empty
+          expect(helper_incomings_list[:items]).to be_empty
         end
       end
 
@@ -35,14 +35,14 @@ RSpec.describe UserTransactionsHelper do
         let(:legal_aid_application) { create(:legal_aid_application) }
 
         it "returns nil" do
-          expect(subject).to be_nil
+          expect(helper_incomings_list).to be_nil
         end
       end
     end
   end
 
   describe "#payments_list" do
-    subject { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace:) }
+    subject(:helper_payments_list) { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace:) }
 
     let(:transaction_type) { create(:transaction_type, :maintenance_out) }
 
@@ -50,14 +50,14 @@ RSpec.describe UserTransactionsHelper do
       let(:locale_namespace) { "transaction_types.names.citizens" }
 
       it "returns correct hash" do
-        expect(subject[:items].first.to_h).to match hash_result
+        expect(helper_payments_list[:items].first.to_h).to match hash_result
       end
 
       context "with no transactions" do
         let(:legal_aid_application) { create(:legal_aid_application) }
 
         it "returns nil" do
-          expect(subject).to be_nil
+          expect(helper_payments_list).to be_nil
         end
       end
     end

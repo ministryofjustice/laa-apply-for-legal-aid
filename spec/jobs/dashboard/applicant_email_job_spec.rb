@@ -3,7 +3,7 @@ require "rails_helper"
 module Dashboard
   RSpec.describe ApplicantEmailJob do
     describe ".perform" do
-      subject { described_class.perform_now(application) }
+      subject(:applicant_email_job) { described_class.perform_now(application) }
 
       let(:application) { create(:legal_aid_application, :with_applicant) }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
@@ -24,7 +24,7 @@ module Dashboard
 
           it "calls the applicant email job" do
             expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
-            subject
+            applicant_email_job
           end
         end
 
@@ -33,7 +33,7 @@ module Dashboard
 
           it "does not call the applicant email job" do
             expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).not_to receive(:run)
-            subject
+            applicant_email_job
           end
         end
 
@@ -48,7 +48,7 @@ module Dashboard
 
             it "does not call the applicant email job" do
               expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).not_to receive(:run)
-              subject
+              applicant_email_job
             end
           end
 
@@ -57,7 +57,7 @@ module Dashboard
 
             it "calls the applicant email job" do
               expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
-              subject
+              applicant_email_job
             end
           end
         end

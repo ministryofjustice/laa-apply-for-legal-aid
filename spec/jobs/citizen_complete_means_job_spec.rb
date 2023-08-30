@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CitizenCompleteMeansJob, :vcr do
-  subject { described_class.new.perform(legal_aid_application.id) }
+  subject(:citizen_complete_means_job) { described_class.new.perform(legal_aid_application.id) }
 
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
   let!(:scheduled_mail) { create(:scheduled_mailing, :citizen_financial_reminder, legal_aid_application:) }
@@ -9,7 +9,7 @@ RSpec.describe CitizenCompleteMeansJob, :vcr do
 
   describe "cancelling emails" do
     it "calls cancel on the scheduled emails" do
-      subject
+      citizen_complete_means_job
       expect(scheduled_mail.reload.cancelled_at).not_to be_nil
       expect(scheduled_mail2.reload.cancelled_at).not_to be_nil
     end
@@ -20,7 +20,7 @@ RSpec.describe CitizenCompleteMeansJob, :vcr do
       service = double SubmitProviderReminderService
       expect(SubmitProviderReminderService).to receive(:new).and_return(service)
       expect(service).to receive(:send_email)
-      subject
+      citizen_complete_means_job
     end
   end
 end

@@ -2,7 +2,7 @@ require "rails_helper"
 require "prometheus_exporter/server"
 
 RSpec.describe PrometheusCollectors::SidekiqQueueCollector do
-  subject { described_class.new }
+  subject(:collector) { described_class.new }
 
   let(:queue) { "mailers" }
   let(:gauge) { spy(PrometheusExporter::Metric::Gauge) }
@@ -15,16 +15,16 @@ RSpec.describe PrometheusCollectors::SidekiqQueueCollector do
   end
 
   it "has the right type" do
-    expect(subject.type).to eq(PrometheusCollectors::SidekiqQueueCollector::COLLECTOR_TYPE)
+    expect(collector.type).to eq(PrometheusCollectors::SidekiqQueueCollector::COLLECTOR_TYPE)
   end
 
   it "has one gauge" do
-    expect(subject.metrics.size).to eq(1)
-    expect(subject.metrics.first).to be(gauge)
+    expect(collector.metrics.size).to eq(1)
+    expect(collector.metrics.first).to be(gauge)
   end
 
   it "sends the queue size to the prometheus gauge" do
     expect(gauge).to receive(:observe).with(queue_size, queue:)
-    subject.collect("queue" => queue, "size" => queue_size)
+    collector.collect("queue" => queue, "size" => queue_size)
   end
 end

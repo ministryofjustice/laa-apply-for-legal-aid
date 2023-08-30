@@ -2,7 +2,7 @@ require "rails_helper"
 require Rails.root.join("spec/mock_objects/mock_queued_job")
 
 RSpec.describe ScheduledMailingsDeliveryJob do
-  subject { described_class.new.perform }
+  subject(:scheduled_mailings_delivery_job) { described_class.new.perform }
 
   describe "ScheduledMailingsDeliveryJob" do
     let(:application) { create(:application, :with_everything) }
@@ -13,7 +13,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
       context "when calling DeliveryMan" do
         it "calls DeliveryMan for each due item" do
           expect(GovukEmails::DeliveryMan).to receive(:call).with(mailing_one.id)
-          subject
+          scheduled_mailings_delivery_job
         end
       end
 
@@ -31,7 +31,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "does not schedule another job" do
             expect(described_class).not_to receive(:set)
-            subject
+            scheduled_mailings_delivery_job
           end
         end
 
@@ -42,7 +42,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "schedules another delivery job" do
             expect(described_class).to receive(:set).with(wait: delay).and_return(job)
-            subject
+            scheduled_mailings_delivery_job
           end
         end
       end
@@ -61,7 +61,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "does not schedule another job" do
             expect(EmailMonitorJob).not_to receive(:perform_later)
-            subject
+            scheduled_mailings_delivery_job
           end
         end
 
@@ -70,7 +70,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "starts a monitoring job" do
             expect(EmailMonitorJob).to receive(:perform_later)
-            subject
+            scheduled_mailings_delivery_job
           end
         end
       end
