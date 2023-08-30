@@ -30,7 +30,7 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page with title "Which of these payments does the partner pay?"
 
-    When I select "My client makes none of these payments"
+    When I select "The partner makes none of these payments"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client have any dependants?"
 
@@ -39,7 +39,7 @@ Feature: partner_means_assessment full journey
     Then I should be on a page with title "Check your answers"
 
   @javascript
-  Scenario: I am able to complete a minimal (answering no to everything) partner income means assessment to check your answers
+  Scenario: I am able to complete the income means assessment for client and partner to check your answers
     Given csrf is enabled
     And the feature flag for partner_means_assessment is enabled
     And I have completed a non-passported unemployed application with bank statements as far as the open banking consent page
@@ -76,7 +76,18 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
 
-    When I select "My client makes none of these payments"
+    When I check "Housing payments"
+    And I fill "providers-means-regular-outgoings-form-rent-or-mortgage-amount-field" with "100"
+    And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-weekly-field"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client receive Housing Benefit?"
+
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "Select payments your client pays in cash"
+    And I should see "Housing payments"
+
+    When I select "None of the above"
     And I click "Save and continue"
     Then I should be on a page with title "Complete the partner's financial assessment"
 
@@ -106,7 +117,15 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page with title "Which of these payments does the partner pay?"
 
-    When I select "My client makes none of these payments"
+
+    When I check "Childcare payments"
+    And I fill "providers-partners-regular-outgoings-form-child-care-amount-field" with "200"
+    And I choose "providers-partners-regular-outgoings-form-child-care-frequency-weekly-field"
+    And I click "Save and continue"
+    Then I should be on a page with title "Select payments the partner pays in cash"
+    And I should not see "Housing payments"
+    
+    When I select "None of the above"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client have any dependants?"
 

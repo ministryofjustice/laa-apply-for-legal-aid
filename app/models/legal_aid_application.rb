@@ -217,6 +217,18 @@ class LegalAidApplication < ApplicationRecord
     transaction_types.debits.any?
   end
 
+  def individual_transaction_type_ids(owner_type)
+    legal_aid_application_transaction_types.where(owner_type:).map(&:transaction_type).pluck(:id)
+  end
+
+  def outgoing_cash_transaction_types_for?(owner_type)
+    TransactionType.where(id: individual_transaction_type_ids(owner_type)).not_children.debits
+  end
+
+  def partner_outgoing_types?
+    TransactionType.where(id: individual_transaction_type_ids("Partner")).debits.any?
+  end
+
   def generate_citizen_access_token!
     Citizen::AccessToken.generate_for(legal_aid_application: self)
   end

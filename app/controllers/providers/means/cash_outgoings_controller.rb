@@ -1,7 +1,7 @@
 module Providers
   module Means
     class CashOutgoingsController < ProviderBaseController
-      before_action :aggregated_cash_outgoings, only: %i[show update]
+      before_action :setup_cash_outgoings, only: %i[show update]
 
       def show; end
 
@@ -15,6 +15,15 @@ module Providers
       end
 
     private
+
+      def setup_cash_outgoings
+        cash_transactions
+        aggregated_cash_outgoings
+      end
+
+      def cash_transactions
+        @cash_transactions ||= legal_aid_application.outgoing_cash_transaction_types_for?("Applicant")
+      end
 
       def aggregated_cash_outgoings
         @aggregated_cash_outgoings ||= AggregatedCashOutgoings.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Applicant")

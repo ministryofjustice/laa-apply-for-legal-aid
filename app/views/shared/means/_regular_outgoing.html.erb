@@ -28,7 +28,7 @@
       <%= f.govuk_check_box :transaction_type_ids,
                             @form.none_selected,
                             exclusive: true,
-                            label: { text: t(".labels.none") } %>
+                            label: { text: t(".labels.none", individual:) } %>
     <% end %>
 
     <%= f.govuk_submit t("generic.save_and_continue") %>

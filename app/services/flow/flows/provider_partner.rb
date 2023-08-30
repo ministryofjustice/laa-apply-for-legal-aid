@@ -111,7 +111,7 @@ module Flow
         partner_regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_partners_regular_outgoings_path(application) },
           forward: lambda do |application|
-            if application.partner.outgoing_types?
+            if application.partner_outgoing_types?
               :partner_cash_outgoings
             else
               :has_dependants
@@ -122,7 +122,7 @@ module Flow
           # check_answers: lambda do |application|
           #   if application.partner.housing_payments?
           #     :housing_benefits
-          #   elsif application.partner.outgoing_types?
+          #   elsif application.partner_outgoing_types?
           #     :cash_outgoings
           #   else
           #     :check_income_answers

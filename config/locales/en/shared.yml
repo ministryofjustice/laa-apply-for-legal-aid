@@ -783,7 +783,7 @@ en:
           child_care: Childcare payments
           maintenance_out: Maintenance payments to a former partner
           legal_aid: Payments towards legal aid in a criminal case
-          none: My client makes none of these payments
+          none: "%{individual} makes none of these payments"
       cash_outgoing:
         info: Cash means physical money like banknotes and coins.
     employment_income_table:
