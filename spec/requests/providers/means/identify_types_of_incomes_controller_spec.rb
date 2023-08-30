@@ -108,6 +108,11 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         request
         expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path)
       end
+
+      it "creates a legal_aid_application_transaction_types record with ownership" do
+        expect { request }.to change(legal_aid_application.legal_aid_application_transaction_types, :count).by(3)
+        expect(legal_aid_application.legal_aid_application_transaction_types.first.owner_type).to eq "Applicant"
+      end
     end
 
     context "when application has transaction types of other kind" do
@@ -248,7 +253,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_non_passported_state_machine,
-               :checking_means_income)
+               :checking_means_income,
+               :with_applicant)
       end
 
       let(:params) { { legal_aid_application: { none_selected: "true" } } }
