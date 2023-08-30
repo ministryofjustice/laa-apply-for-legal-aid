@@ -12,7 +12,7 @@ RSpec.describe HashFormatHelper do
   end
 
   describe "#format_hash" do
-    subject { format_hash(source) }
+    subject(:helper_format_hash) { format_hash(source) }
 
     context "when passed a hash" do
       it { is_expected.to eql expected_response }
@@ -22,7 +22,7 @@ RSpec.describe HashFormatHelper do
       let(:source) { { result: nil } }
 
       it "returns empty string" do
-        expect(subject).to eq ""
+        expect(helper_format_hash).to eq ""
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe HashFormatHelper do
     context "when passed invalid data" do
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)
-        subject
+        helper_format_hash
       end
 
       let(:source) { { key: :ten } }
