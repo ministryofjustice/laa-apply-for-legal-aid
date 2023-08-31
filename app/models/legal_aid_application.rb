@@ -225,6 +225,10 @@ class LegalAidApplication < ApplicationRecord
     TransactionType.where(id: individual_transaction_type_ids(owner_type)).not_children.debits
   end
 
+  def applicant_outgoing_types?
+    TransactionType.where(id: individual_transaction_type_ids("Applicant")).debits.any?
+  end
+
   def partner_outgoing_types?
     TransactionType.where(id: individual_transaction_type_ids("Partner")).debits.any?
   end

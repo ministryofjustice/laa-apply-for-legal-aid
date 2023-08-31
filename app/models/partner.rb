@@ -38,8 +38,4 @@ class Partner < ApplicationRecord
   def state_benefits
     regular_transactions.where(transaction_type_id: TransactionType.find_by(name: "benefits")).order(:created_at)
   end
-
-  def outgoing_types?
-    regular_transactions.debits.exists?
-  end
 end
