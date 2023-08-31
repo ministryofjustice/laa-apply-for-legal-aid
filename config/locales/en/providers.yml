@@ -870,13 +870,12 @@ en:
           page_title: Which of these payments does your client pay?
       has_dependants:
         show:
-          page_title: "Does your client have any dependants?"
-          existing: "You have added %{count}"
+          page_title: "Does %{individual} have any dependants?"
           info: "A dependant is a child or adult who:"
           list: |
-            lives with your client
-            depends on your client for financial support
-          extra_info: Do not include your client's partner if they have one.
+            lives with %{individual}
+            depends on %{individual} for financial support
+          extra_info: Do not include your client's partner %{details}.
       dependants:
         new:
           page_title: Enter dependant details

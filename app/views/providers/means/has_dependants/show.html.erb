@@ -5,14 +5,22 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template page_title: t(".page_title"), form:, template: :basic do %>
+  <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+       individual = "your client or their partner"
+       details = "as a dependant"
+     else
+       individual = "your client"
+       details = "if they have one"
+     end %>
+
+  <%= page_template page_title: t(".page_title", individual:), form:, template: :basic do %>
 
     <%= form.govuk_collection_radio_buttons :has_dependants,
                                             yes_no_options,
                                             :value,
                                             :label,
                                             legend: {
-                                              text: t(".page_title"),
+                                              text: t(".page_title", individual:),
                                               tag: "h1",
                                               size: "xl",
                                             } do %>
@@ -21,14 +29,14 @@
         </p>
 
         <ul class="govuk-list govuk-list--bullet">
-          <% t(".list").each_line do |item| %>
+          <% t(".list", individual:).each_line do |item| %>
             <li><%= item %></li>
           <% end %>
         </ul>
 
         <%= govuk_inset_text do %>
           <p class="govuk-body">
-            <%= t(".extra_info") %>
+            <%= t(".extra_info", details:) %>
           </p>
         <% end %>
 
