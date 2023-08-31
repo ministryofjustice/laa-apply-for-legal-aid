@@ -240,7 +240,6 @@ jobs:
     - *save_js_packages_cache
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
-    - browser-tools/install-chromedriver
     - run:
         name: Run integration tests
         command: |
