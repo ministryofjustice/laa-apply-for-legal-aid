@@ -106,7 +106,35 @@ module Flow
         # partner_cash_incomes
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
+          forward: :partner_regular_outgoings,
+        },
+        partner_regular_outgoings: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_regular_outgoings_path(application) },
+          forward: lambda do |application|
+            if application.partner_outgoing_types?
+              :partner_cash_outgoings
+            else
+              :has_dependants
+            end
+          end,
+          # to be added when CYA page is added
+          #
+          # check_answers: lambda do |application|
+          #   if application.partner.housing_payments?
+          #     :housing_benefits
+          #   elsif application.partner_outgoing_types?
+          #     :cash_outgoings
+          #   else
+          #     :check_income_answers
+          #   end
+          # end,
+        },
+        partner_cash_outgoings: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_cash_outgoing_path(application) },
           forward: :has_dependants,
+          # to be added when CYA page is added
+          #
+          # check_answers: ->(application) { application.uploading_bank_statements? ? :check_income_answers : :outgoings_summary },
         },
         partner_full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },

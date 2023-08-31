@@ -123,14 +123,14 @@ RSpec.describe Providers::Means::CashOutgoingsController do
                    transaction_types: [])
           end
 
-          context "and has partner with no contrary interest" do
-            it "redirects to partner means intro page" do
+          context "and has no partner" do
+            it "redirects to the dependants page" do
               request
               expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
             end
           end
 
-          context "and has no partner" do
+          context "and has partner with no contrary interest" do
             let(:legal_aid_application) do
               create(:legal_aid_application,
                      :with_applicant_and_partner,

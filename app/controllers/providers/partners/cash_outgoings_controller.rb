@@ -1,7 +1,9 @@
 module Providers
-  module Means
+  module Partners
     class CashOutgoingsController < ProviderBaseController
       before_action :setup_cash_outgoings, only: %i[show update]
+
+      prefix_step_with :partner
 
       def show; end
 
@@ -22,11 +24,11 @@ module Providers
       end
 
       def cash_transactions
-        @cash_transactions ||= legal_aid_application.outgoing_cash_transaction_types_for?("Applicant")
+        @cash_transactions ||= legal_aid_application.outgoing_cash_transaction_types_for?("Partner")
       end
 
       def aggregated_cash_outgoings
-        @aggregated_cash_outgoings ||= AggregatedCashOutgoings.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Applicant")
+        @aggregated_cash_outgoings ||= AggregatedCashOutgoings.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Partner")
       end
 
       def form_params
@@ -34,8 +36,8 @@ module Providers
           .require(:aggregated_cash_outgoings)
           .except(:cash_outgoings)
           .merge({ legal_aid_application_id: legal_aid_application[:id],
-                   owner_type: "Applicant",
-                   owner_id: legal_aid_application.applicant.id,
+                   owner_type: "Partner",
+                   owner_id: legal_aid_application.partner.id,
                    none_selected: params[:aggregated_cash_outgoings][:none_selected] })
       end
 

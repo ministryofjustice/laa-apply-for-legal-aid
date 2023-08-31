@@ -102,7 +102,7 @@ RSpec.describe Providers::Partners::StudentFinancesController do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_partners_regular_outgoings_path(legal_aid_application))
         end
       end
 
@@ -111,7 +111,7 @@ RSpec.describe Providers::Partners::StudentFinancesController do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_partners_regular_outgoings_path(legal_aid_application))
         end
       end
     end

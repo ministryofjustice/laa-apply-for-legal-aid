@@ -698,6 +698,34 @@ en:
               inclusion: Select how often the partner receives income from property or lodgers
             pension_frequency:
               inclusion: Select how often the partner receives pension income
+        providers/partners/regular_outgoings_form:
+          attributes:
+            rent_or_mortgage_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount paid for housing
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            rent_or_mortgage_frequency:
+              inclusion: Select how often your client makes housing payments
+            child_care_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount paid for childcare
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            child_care_frequency:
+              inclusion: Select how often your client makes childcare payments
+            maintenance_out_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount paid for maintenance
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            maintenance_out_frequency:
+              inclusion: Select how often your client makes maintenance payments
+            legal_aid_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount paid for legal aid
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            legal_aid_frequency:
+              inclusion: Select how often your client makes legal aid payments
+            transaction_type_ids:
+              blank: Select at least one of the options
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only
