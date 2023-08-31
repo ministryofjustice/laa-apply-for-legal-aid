@@ -103,6 +103,21 @@ RSpec.describe Providers::IncomeSummaryController do
         request
         expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
       end
+
+      context "and there is a partner with no contrary interest" do
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_applicant_and_partner,
+                 :with_non_passported_state_machine,
+                 :applicant_entering_means,
+                 transaction_types: [])
+        end
+
+        it "redirects to the partner financial means start page page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_partners_about_financial_means_path(legal_aid_application))
+        end
+      end
     end
 
     context "when outgoings categories are shown" do

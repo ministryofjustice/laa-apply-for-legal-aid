@@ -71,7 +71,13 @@ module Flow
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: lambda do |application|
-            application.outgoing_types? ? :outgoings_summary : :has_dependants
+            if application.outgoing_types?
+              :outgoings_summary
+            elsif application.applicant.has_partner_with_no_contrary_interest?
+              :partner_about_financial_means
+            else
+              :has_dependants
+            end
           end,
           check_answers: :check_income_answers,
         },
