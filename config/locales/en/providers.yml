@@ -903,7 +903,7 @@ en:
             enter_assets_value: Enter the total asset value
       has_other_dependants:
         show:
-          page_title: Does your client have any other dependants?
+          page_title: Does %{individual} have any other dependants?
           existing: "You have added %{count}"
           remove: Remove
           warning:

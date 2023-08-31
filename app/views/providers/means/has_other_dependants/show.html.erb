@@ -4,7 +4,16 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title: t(".page_title"), head_title: t(".existing", count: pluralize(@legal_aid_application.dependants.count, "dependant").to_s), form:, template: :basic do %>
+
+  <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+       individual = "your client or their partner"
+       details = "as a dependant"
+     else
+       individual = "your client"
+       details = "if they have one"
+     end %>
+
+  <%= page_template page_title: t(".page_title", individual:), head_title: t(".existing", count: pluralize(@legal_aid_application.dependants.count, "dependant").to_s), form:, template: :basic do %>
     <% if @legal_aid_application.has_dependants? %>
       <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.dependants.count, "dependant").to_s) %></h1>
       <%= govuk_summary_list(classes: "summary_list_action_width_auto") do |summary_list| %>
