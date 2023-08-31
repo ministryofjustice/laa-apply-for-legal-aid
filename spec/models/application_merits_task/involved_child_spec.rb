@@ -11,7 +11,7 @@ module ApplicationMeritsTask
     end
 
     describe "#split_full_name" do
-      subject { involved_child.split_full_name }
+      subject(:split_full_name) { involved_child.split_full_name }
 
       let(:involved_child) { build(:involved_child, full_name:) }
 
@@ -19,7 +19,7 @@ module ApplicationMeritsTask
         let(:full_name) { "John Smith" }
 
         it "separates out first and last name" do
-          expect(subject).to eq %w[John Smith]
+          expect(split_full_name).to eq %w[John Smith]
         end
       end
 
@@ -27,7 +27,7 @@ module ApplicationMeritsTask
         let(:full_name) { "Michael      Winner" }
 
         it "separates out first and last name" do
-          expect(subject).to eq %w[Michael Winner]
+          expect(split_full_name).to eq %w[Michael Winner]
         end
       end
 
@@ -35,7 +35,7 @@ module ApplicationMeritsTask
         let(:full_name) { "Philip   Stephen    Richards" }
 
         it "separates out first and last name" do
-          expect(subject).to eq ["Philip Stephen", "Richards"]
+          expect(split_full_name).to eq ["Philip Stephen", "Richards"]
         end
       end
 
@@ -43,7 +43,7 @@ module ApplicationMeritsTask
         let(:full_name) { "Prince" }
 
         it "returns unspecified as first name" do
-          expect(subject).to eq %w[unspecified Prince]
+          expect(split_full_name).to eq %w[unspecified Prince]
         end
       end
 
@@ -51,7 +51,7 @@ module ApplicationMeritsTask
         let(:full_name) { "Jacob Rees-Mogg" }
 
         it "is not phased by the hyphen" do
-          expect(subject).to eq %w[Jacob Rees-Mogg]
+          expect(split_full_name).to eq %w[Jacob Rees-Mogg]
         end
       end
 
@@ -59,7 +59,7 @@ module ApplicationMeritsTask
         let(:full_name) { "Daira O'Brien" }
 
         it "is not phased by the apostrophe" do
-          expect(subject).to eq ["Daira", "O'Brien"]
+          expect(split_full_name).to eq ["Daira", "O'Brien"]
         end
       end
     end

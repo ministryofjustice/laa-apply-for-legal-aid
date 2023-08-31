@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ApplicationDigest do
   describe ".create_or_update!" do
-    subject { described_class.create_or_update!(laa.id) }
+    subject(:application_digest) { described_class.create_or_update!(laa.id) }
 
     let(:firm_name) { "Regional Legal Services" }
     let(:username) { "regional_user_1" }
@@ -33,11 +33,11 @@ RSpec.describe ApplicationDigest do
       before { create(:application_digest, legal_aid_application_id: laa.id) }
 
       it "does not create a new record" do
-        expect { subject }.not_to change(described_class, :count)
+        expect { application_digest }.not_to change(described_class, :count)
       end
 
       it "updates the values on the existing record" do
-        subject
+        application_digest
         expect(digest.firm_name).to eq firm_name
         expect(digest.provider_username).to eq username
         expect(digest.date_started).to eq creation_date
@@ -50,7 +50,7 @@ RSpec.describe ApplicationDigest do
       describe "applicant employment status" do
         context "when not employed" do
           it "writes false to the digest record" do
-            subject
+            application_digest
             expect(digest.employed).to be false
           end
         end
@@ -59,7 +59,7 @@ RSpec.describe ApplicationDigest do
           before { laa.applicant.update(employed: true) }
 
           it "writes true to the digest record" do
-            subject
+            application_digest
             expect(digest.employed).to be true
           end
         end
@@ -69,7 +69,7 @@ RSpec.describe ApplicationDigest do
         before { allow(HMRC::StatusAnalyzer).to receive(:call).with(laa).and_return(hmrc_status) }
 
         context "when HMRC::StatusAnalyzer runs succesfully" do
-          before { subject }
+          before { application_digest }
 
           context "and provider not enabled for employed journey" do
             let(:hmrc_status) { :provider_not_enabled_for_employed_journey }
@@ -124,7 +124,7 @@ RSpec.describe ApplicationDigest do
           let(:hmrc_status) { :what_is_this? }
 
           it "raises an error" do
-            expect { subject }.to raise_error RuntimeError, "Unexpected response from HMRC::StatusAnalyser :what_is_this?"
+            expect { application_digest }.to raise_error RuntimeError, "Unexpected response from HMRC::StatusAnalyser :what_is_this?"
           end
         end
       end
@@ -138,7 +138,7 @@ RSpec.describe ApplicationDigest do
           let(:review_required) { false }
 
           it "returns false" do
-            subject
+            application_digest
             expect(digest.referred_to_caseworker).to be false
           end
         end
@@ -147,7 +147,7 @@ RSpec.describe ApplicationDigest do
           let(:review_required) { true }
 
           it "returns true" do
-            subject
+            application_digest
             expect(digest.referred_to_caseworker).to be true
           end
         end
@@ -157,13 +157,13 @@ RSpec.describe ApplicationDigest do
     context "when no digest record exists for this application" do
       it "creates a new record" do
         VCR.use_cassette "bank_holidays" do
-          expect { subject }.to change(described_class, :count).by(1)
+          expect { application_digest }.to change(described_class, :count).by(1)
         end
       end
 
       it "creates a record with expected values" do
         VCR.use_cassette "bank_holidays" do
-          subject
+          application_digest
           expect(digest.firm_name).to eq firm_name
           expect(digest.provider_username).to eq username
           expect(digest.date_started).to eq creation_date
@@ -178,7 +178,7 @@ RSpec.describe ApplicationDigest do
     context "with use_ccms" do
       context "when application is not at use_ccms" do
         it "is false" do
-          subject
+          application_digest
           expect(digest.use_ccms).to be false
         end
       end
@@ -196,7 +196,7 @@ RSpec.describe ApplicationDigest do
       context "when application is passported" do
         before do
           allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
-          subject
+          application_digest
         end
 
         it "returns true" do
@@ -207,7 +207,7 @@ RSpec.describe ApplicationDigest do
       context "when application is NOT passported" do
         before do
           allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)
-          subject
+          application_digest
         end
 
         it "returns true" do
@@ -219,7 +219,7 @@ RSpec.describe ApplicationDigest do
     context "with delegated_functions" do
       context "and delegated_functions not used" do
         it "returns false and nils" do
-          subject
+          application_digest
           expect(digest.df_used).to be false
           expect(digest.earliest_df_date).to be_nil
           expect(digest.df_reported_date).to be_nil
@@ -246,7 +246,7 @@ RSpec.describe ApplicationDigest do
         # for some reason, just running the test with VCR_RECORD_MODE=all would not create the cassette, so have to do it manually here
         it "returns true and dates" do
           VCR.use_cassette "ApplicationDigest/create_or_update/delegated_functions/delegated_functions_used/returns_true_and_dates" do
-            subject
+            application_digest
             expect(digest.df_used).to be true
             expect(digest.earliest_df_date).to eq Date.parse("2021-03-29")
             expect(digest.df_reported_date).to eq Date.parse("2021-04-08")

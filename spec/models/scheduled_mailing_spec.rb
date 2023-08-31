@@ -10,7 +10,7 @@ RSpec.describe ScheduledMailing do
   let(:future_time) { 2.hours.from_now }
 
   describe ".send_now" do
-    subject do
+    subject(:send_now) do
       described_class.send_now!(mailer_klass:,
                                 mailer_method:,
                                 legal_aid_application_id: legal_aid_application.id,
@@ -21,7 +21,7 @@ RSpec.describe ScheduledMailing do
     it "creates a record in waiting state" do
       travel_to frozen_time
 
-      expect { subject }.to change(described_class, :count).by(1)
+      expect { send_now }.to change(described_class, :count).by(1)
       rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
       expect(rec.legal_aid_application_id).to eq legal_aid_application.id
@@ -36,7 +36,7 @@ RSpec.describe ScheduledMailing do
   end
 
   describe ".send_later!" do
-    subject do
+    subject(:send_later) do
       described_class.send_later!(mailer_klass:,
                                   mailer_method:,
                                   legal_aid_application_id: legal_aid_application.id,
@@ -46,7 +46,7 @@ RSpec.describe ScheduledMailing do
     end
 
     it "creates a record in waiting state with a scheduled time" do
-      expect { subject }.to change(described_class, :count).by(1)
+      expect { send_later }.to change(described_class, :count).by(1)
       rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
       expect(rec.mailer_method).to eq mailer_method

@@ -137,26 +137,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 1113
+# Offense count: 988
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/models/address_spec.rb'
-    - 'spec/models/aggregated_cash_income_spec.rb'
-    - 'spec/models/aggregated_cash_outgoings_spec.rb'
-    - 'spec/models/applicant_spec.rb'
-    - 'spec/models/application_digest_spec.rb'
-    - 'spec/models/application_merits_task/involved_child_spec.rb'
-    - 'spec/models/cfe/v2/result_spec.rb'
-    - 'spec/models/cfe/v3/result_spec.rb'
-    - 'spec/models/cfe/v4/result_spec.rb'
-    - 'spec/models/dashboard/widget_spec.rb'
-    - 'spec/models/irregular_income_spec.rb'
-    - 'spec/models/legal_aid_application_spec.rb'
-    - 'spec/models/other_assets_declaration_spec.rb'
-    - 'spec/models/savings_amount_spec.rb'
-    - 'spec/models/scheduled_mailing_spec.rb'
     - 'spec/requests/admin/feedback_controller_spec.rb'
     - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
     - 'spec/requests/admin/legal_aid_applications_controller_spec.rb'

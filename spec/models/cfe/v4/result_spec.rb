@@ -26,7 +26,7 @@ module CFE
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
 
       describe "#overview" do
-        subject { cfe_result.overview }
+        subject(:overview) { cfe_result.overview }
 
         let(:application) { cfe_result.legal_aid_application }
 
@@ -37,7 +37,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
             it "returns eligible" do
-              expect(subject).to eq "eligible"
+              expect(overview).to eq "eligible"
             end
           end
 
@@ -45,7 +45,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
             it "returns not_eligible" do
-              expect(subject).to eq "ineligible"
+              expect(overview).to eq "ineligible"
             end
           end
 
@@ -53,7 +53,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
 
             it "returns capital_contribution_required" do
-              expect(subject).to eq "capital_contribution_required"
+              expect(overview).to eq "capital_contribution_required"
             end
           end
 
@@ -61,7 +61,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
             it "returns income_contribution_required" do
-              expect(subject).to eq "income_contribution_required"
+              expect(overview).to eq "income_contribution_required"
             end
           end
 
@@ -69,7 +69,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
 
             it "returns capital_and_income_contribution_required" do
-              expect(subject).to eq "capital_and_income_contribution_required"
+              expect(overview).to eq "capital_and_income_contribution_required"
             end
           end
         end
@@ -81,7 +81,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
             it "returns eligible" do
-              expect(subject).to eq "eligible"
+              expect(overview).to eq "eligible"
             end
           end
 
@@ -89,7 +89,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
             it "returns not_eligible" do
-              expect(subject).to eq "ineligible"
+              expect(overview).to eq "ineligible"
             end
           end
 
@@ -97,7 +97,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
 
             it "returns capital_contribution_required" do
-              expect(subject).to eq "capital_contribution_required"
+              expect(overview).to eq "capital_contribution_required"
             end
           end
 
@@ -105,7 +105,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
             it "returns income_contribution_required" do
-              expect(subject).to eq "income_contribution_required"
+              expect(overview).to eq "income_contribution_required"
             end
           end
 
@@ -113,7 +113,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
 
             it "returns capital_and_income_contribution_required" do
-              expect(subject).to eq "capital_and_income_contribution_required"
+              expect(overview).to eq "capital_and_income_contribution_required"
             end
           end
         end
@@ -128,7 +128,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
             it "returns manual_check_required" do
-              expect(subject).to eq "manual_check_required"
+              expect(overview).to eq "manual_check_required"
             end
           end
 
@@ -136,7 +136,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
             it "returns manual_check_required" do
-              expect(subject).to eq "manual_check_required"
+              expect(overview).to eq "manual_check_required"
             end
           end
 
@@ -144,7 +144,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
             it "returns manual_check_required" do
-              expect(subject).to eq "manual_check_required"
+              expect(overview).to eq "manual_check_required"
             end
           end
 
@@ -152,7 +152,7 @@ module CFE
             let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
 
             it "returns manual_check_required" do
-              expect(subject).to eq "manual_check_required"
+              expect(overview).to eq "manual_check_required"
             end
           end
         end
@@ -715,8 +715,8 @@ module CFE
             it { is_expected.not_to be_empty }
 
             it "has a name" do
-              expect(subject[0][:name]).to eq "Job 1"
-              expect(subject[1][:name]).to eq "Job 2"
+              expect(jobs[0][:name]).to eq "Job 1"
+              expect(jobs[1][:name]).to eq "Job 2"
             end
           end
 
