@@ -6,7 +6,7 @@ RSpec.describe LegalAidApplication do
   # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects
   # that then become redundant.
   describe ".destroy_all" do
-    subject { described_class.destroy_all }
+    subject(:destroy_all) { described_class.destroy_all }
 
     let!(:legal_aid_application) do
       create(:legal_aid_application,
@@ -35,7 +35,7 @@ RSpec.describe LegalAidApplication do
       expect(BankAccountHolder.count).not_to be_zero
       expect(BankError.count).not_to be_zero
       expect(LegalAidApplicationTransactionType.count).not_to be_zero
-      expect { subject }.to change(described_class, :count).to(0)
+      expect { destroy_all }.to change(described_class, :count).to(0)
       expect(BenefitCheckResult.count).to be_zero
       expect(OtherAssetsDeclaration.count).to be_zero
       expect(SavingsAmount.count).to be_zero
@@ -52,7 +52,7 @@ RSpec.describe LegalAidApplication do
 
     it "leaves object it should not affect" do
       expect(TransactionType.count).not_to be_zero
-      subject
+      destroy_all
       expect(TransactionType.count).not_to be_zero
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#capture_policy_disregards?" do
-    subject { legal_aid_application.capture_policy_disregards? }
+    subject(:capture_policy_disregards) { legal_aid_application.capture_policy_disregards? }
 
     context "when calculation date is nil" do
       before { expect(legal_aid_application).to receive(:calculation_date).and_return(nil) }
@@ -116,7 +116,7 @@ RSpec.describe LegalAidApplication do
       context "with today's date before start of policy disregards" do
         it "returns false" do
           travel_to Time.zone.local(2021, 1, 7, 13, 45)
-          expect(subject).to be false
+          expect(capture_policy_disregards).to be false
           travel_back
         end
       end
@@ -124,7 +124,7 @@ RSpec.describe LegalAidApplication do
       context "with today's date after start of policy disregards" do
         it "returns true" do
           travel_to Time.zone.local(2021, 1, 8, 13, 45)
-          expect(subject).to be true
+          expect(capture_policy_disregards).to be true
           travel_back
         end
       end
@@ -138,7 +138,7 @@ RSpec.describe LegalAidApplication do
 
         it "returns false" do
           travel_to Time.zone.local(2021, 1, 7, 13, 45)
-          expect(subject).to be false
+          expect(capture_policy_disregards).to be false
           travel_back
         end
       end
@@ -148,7 +148,7 @@ RSpec.describe LegalAidApplication do
 
         it "returns true" do
           travel_to Time.zone.local(2021, 1, 8, 13, 45)
-          expect(subject).to be true
+          expect(capture_policy_disregards).to be true
           travel_back
         end
       end
@@ -597,15 +597,15 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#set_transaction_period" do
-    subject { legal_aid_application.set_transaction_period }
+    subject(:set_transaction_period) { legal_aid_application.set_transaction_period }
 
     it "sets start" do
-      subject
+      set_transaction_period
       expect(legal_aid_application.transaction_period_start_on).to eq(Date.current - 3.months)
     end
 
     it "sets finish" do
-      subject
+      set_transaction_period
       expect(legal_aid_application.transaction_period_finish_on).to eq(Date.current)
     end
 
@@ -623,7 +623,7 @@ RSpec.describe LegalAidApplication do
       let!(:used_delegated_functions_on) { Faker::Date.backward }
 
       it "sets start and finish relative to used_delegated_functions_on" do
-        subject
+        set_transaction_period
         expect(legal_aid_application.transaction_period_start_on).to eq(proceedings.first.used_delegated_functions_on - 3.months)
         expect(legal_aid_application.transaction_period_finish_on).to eq(proceedings.first.used_delegated_functions_on)
       end
@@ -871,7 +871,7 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#bank_transactions" do
-    subject { legal_aid_application.bank_transactions }
+    subject(:bank_transactions) { legal_aid_application.bank_transactions }
 
     let(:transaction_period_start_on) { "2019-08-10".to_date }
     let(:transaction_period_finish_on) { "2019-08-20".to_date }
@@ -891,7 +891,7 @@ RSpec.describe LegalAidApplication do
     let!(:transaction_after_start) { create(:bank_transaction, bank_account:, happened_at: date_after_start) }
     let!(:transaction_before_end) { create(:bank_transaction, bank_account:, happened_at: date_before_end) }
     let!(:transaction_after_end) { create(:bank_transaction, bank_account:, happened_at: date_after_end) }
-    let(:transaction_ids) { subject.pluck(:id) }
+    let(:transaction_ids) { bank_transactions.pluck(:id) }
 
     it "returns the all transactions" do
       expect(transaction_ids).to include(transaction_after_start.id)
@@ -1242,7 +1242,7 @@ RSpec.describe LegalAidApplication do
       it { expect(application.used_delegated_functions?).to be false }
 
       context "and the used_delegated_functions is changed and saved" do
-        subject { application.save }
+        subject(:after_save_hook) { application.save }
 
         before do
           ActiveJob::Base.queue_adapter = :test
@@ -1251,7 +1251,7 @@ RSpec.describe LegalAidApplication do
         after { ActiveJob::Base.queue_adapter = :sidekiq }
 
         it "fires an ActiveSupport::Notification" do
-          expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
+          expect { after_save_hook }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
         end
       end
     end
@@ -1355,7 +1355,7 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#proceedings_by_name" do
-    subject { laa.proceedings_by_name }
+    subject(:proceedings_by_name) { laa.proceedings_by_name }
 
     let(:laa) { create(:legal_aid_application) }
 
@@ -1366,11 +1366,11 @@ RSpec.describe LegalAidApplication do
     end
 
     it "returns an array of three items" do
-      expect(subject.size).to eq 3
+      expect(proceedings_by_name.size).to eq 3
     end
 
     it "returns se013 as the first item" do
-      item = subject.first
+      item = proceedings_by_name.first
       expect(item).to be_an_instance_of(LegalAidApplication::ProceedingStruct)
       expect(item.name).to eq "child_arrangements_order_contact"
       expect(item.meaning).to eq "Child arrangements order (contact)"
@@ -1378,7 +1378,7 @@ RSpec.describe LegalAidApplication do
     end
 
     it "returns da004 as the last item" do
-      item = subject.last
+      item = proceedings_by_name.last
       expect(item).to be_an_instance_of(LegalAidApplication::ProceedingStruct)
       expect(item.name).to eq "nonmolestation_order"
       expect(item.meaning).to eq "Non-molestation order"

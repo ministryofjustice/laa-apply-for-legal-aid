@@ -33,7 +33,7 @@ module Dashboard
   end
 
   RSpec.describe Widget do
-    subject { described_class.new("DummyWidgetDataProvider") }
+    subject(:widget) { described_class.new("DummyWidgetDataProvider") }
 
     let(:geckoboard_client) { double Geckoboard::Client }
     let(:datasets_client) { double Geckoboard::DatasetsClient }
@@ -55,7 +55,7 @@ module Dashboard
         expect(datasets_client).to receive(:find_or_create)
           .with("apply_for_legal_aid.test.dummy_widget", instance_of(Hash))
           .and_return(dataset)
-        subject.run
+        widget.run
       end
     end
 
@@ -66,7 +66,7 @@ module Dashboard
 
       it "sends expected data" do
         expect(dataset).to receive(:put).with(dummy_data_provider_class.data)
-        subject.run
+        widget.run
       end
     end
   end

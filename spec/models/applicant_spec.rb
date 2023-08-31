@@ -22,17 +22,17 @@ RSpec.describe Applicant do
   end
 
   describe "on validation" do
-    subject { described_class.new }
+    subject(:applicant) { described_class.new }
 
     before do
-      subject.first_name = "John"
-      subject.last_name = "Doe"
-      subject.date_of_birth = Date.new(1988, 0o2, 0o1)
-      subject.national_insurance_number = "AB123456D"
+      applicant.first_name = "John"
+      applicant.last_name = "Doe"
+      applicant.date_of_birth = Date.new(1988, 0o2, 0o1)
+      applicant.national_insurance_number = "AB123456D"
     end
 
     it "is valid with all valid attributes" do
-      expect(subject).to be_valid
+      expect(applicant).to be_valid
     end
 
     context "with an existing applicant" do
@@ -59,7 +59,7 @@ RSpec.describe Applicant do
   # Main purpose: to ensure relationships to other object set so that destroying applicant destroys all objects
   # that then become redundant.
   describe ".destroy_all" do
-    subject { described_class.destroy_all }
+    subject(:destroy_all) { described_class.destroy_all }
 
     let!(:applicant) { create(:applicant, :with_address) }
     let!(:legal_aid_application) { create(:legal_aid_application, applicant:) }
@@ -77,7 +77,7 @@ RSpec.describe Applicant do
       expect(LegalAidApplication.count).not_to be_zero
       expect(BankAccountHolder.count).not_to be_zero
       expect(BankError.count).not_to be_zero
-      subject
+      destroy_all
       expect(described_class.count).to be_zero
       expect(Address.count).to be_zero
       expect(BankProvider.count).to be_zero
