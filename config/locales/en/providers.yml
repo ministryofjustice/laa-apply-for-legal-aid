@@ -885,7 +885,7 @@ en:
           name: Name
           date_of_birth: Date of birth
           dob_hint: For example, 31 3 1980.
-          relationship: What is their relationship to your client?
+          relationship: What is their relationship to %{individual}?
           option:
             child_relative: Child dependant
             adult_relative: Adult dependant

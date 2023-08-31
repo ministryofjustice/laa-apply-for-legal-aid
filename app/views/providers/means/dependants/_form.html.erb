@@ -5,15 +5,18 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template page_title:, page_heading_options: { margin_bottom: 3 }, form: do %>
-
-    <div class="govuk-!-padding-bottom-2"></div>
+  <%= page_template page_title:, page_heading_options: { margin_bottom: 5 }, form: do %>
+    <% individual = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+                      "your client or their partner"
+                    else
+                      "your client"
+                    end %>
 
     <%= form.govuk_text_field :name, width: "three-quarters", label: { size: "m", text: t(".name") } %>
 
     <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint") } %>
 
-    <%= form.govuk_radio_buttons_fieldset :relationship, legend: { text: t(".relationship") } do %>
+    <%= form.govuk_radio_buttons_fieldset :relationship, legend: { text: t(".relationship", individual:) } do %>
       <% Dependant.relationships.keys.each do |relationship_type| %>
         <%= form.govuk_radio_button(
               :relationship,
