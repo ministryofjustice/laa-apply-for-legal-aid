@@ -9,6 +9,7 @@ module V1
         render "", status: :bad_request
       else
         provider.cookies_enabled = action == "accept"
+        provider.cookies_saved_at = Time.zone.now
         provider.save!
 
         render "", status: :ok

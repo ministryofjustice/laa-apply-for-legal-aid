@@ -65,3 +65,12 @@ Feature: Cookies
     Then I temporarily resize browser window to width 1600 height 1000 and click "Apply for legal aid"
 
     Then I am on the legal aid applications page
+
+  Scenario: I am prompted to update my cookie preferences via the cookies banner if they have expired
+    Given I start the journey with expired cookie preferences
+
+    When I click link 'Accept analytics cookies'
+    Then I should see "You've accepted analytics cookies."
+
+    When I click link 'Hide'
+    Then I should not see "You've accepted analytics cookies."
