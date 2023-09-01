@@ -40,6 +40,14 @@ Then("I choose the {string} frequency for {string}") do |frequency, field|
   choose(id, allow_label_click: true)
 end
 
+When("I record monthly payments of {int} for {string}") do |amount, field_to_find|
+  field_id = field_to_find.downcase.gsub(/\s+/, "-")
+  fields = all("input[type='text'][id*=#{field_id}]", visible: false)
+  fields.each do |field|
+    fill_in(field[:name], with: amount.to_s)
+  end
+end
+
 Then("I click link {string}") do |link_name|
   click_link(link_name)
 end
