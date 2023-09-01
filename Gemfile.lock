@@ -696,8 +696,6 @@ GEM
       addressable
       httpi (~> 3.0)
       nokogiri (>= 1.4.2)
-    webdack-uuid_migration (1.4.0)
-      activerecord (>= 4.0)
     webmock (3.19.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -809,7 +807,6 @@ DEPENDENCIES
   tzinfo-data
   vcr
   view_component
-  webdack-uuid_migration (~> 1.4.0)
   webmock
   webrick
 
