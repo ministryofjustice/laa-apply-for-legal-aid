@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::CashIncomesController do
+RSpec.describe Providers::Partners::CashIncomesController do
   before do
     create(:transaction_type, :benefits)
     legal_aid_application.set_transaction_period
   end
 
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :provider_entering_means) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_passported_state_machine, :provider_entering_means) }
   let(:next_flow_step) { flow_forward_path }
   let(:provider) { legal_aid_application.provider }
 
@@ -46,19 +46,19 @@ RSpec.describe Providers::Means::CashIncomesController do
     }
   end
 
-  describe "GET /providers/applications/:legal_aid_application_id/means/cash_income" do
-    subject(:request) { get providers_legal_aid_application_means_cash_income_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/partners/cash_income" do
+    subject(:request) { get providers_legal_aid_application_partners_cash_income_path(legal_aid_application) }
 
     before { login_as provider }
 
     it "shows the page" do
       request
-      expect(response.body).to include(I18n.t("providers.means.cash_incomes.show.page_title"))
+      expect(response.body).to include(I18n.t("providers.partners.cash_incomes.show.page_title"))
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/means/cash_income" do
-    subject(:request) { patch providers_legal_aid_application_means_cash_income_path(legal_aid_application), params: }
+  describe "PATCH /providers/applications/:legal_aid_application_id/partners/cash_income" do
+    subject(:request) { patch providers_legal_aid_application_partners_cash_income_path(legal_aid_application), params: }
 
     before { login_as provider }
 
@@ -67,7 +67,7 @@ RSpec.describe Providers::Means::CashIncomesController do
 
       it "redirects to student_finances" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
       end
 
       it "updates the model attribute for no cash income to false" do
@@ -78,8 +78,8 @@ RSpec.describe Providers::Means::CashIncomesController do
         request
         expect(legal_aid_application.cash_transactions.first).to have_attributes(
           {
-            owner_type: "Applicant",
-            owner_id: legal_aid_application.applicant.id,
+            owner_type: "Partner",
+            owner_id: legal_aid_application.partner.id,
           },
         )
       end
@@ -90,7 +90,7 @@ RSpec.describe Providers::Means::CashIncomesController do
 
       it "redirects to student_finances" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
       end
 
       it "updates the model attribute for no cash income to true" do
@@ -138,7 +138,7 @@ RSpec.describe Providers::Means::CashIncomesController do
     context "when checking answers" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
-               :with_applicant,
+               :with_applicant_and_partner,
                :with_non_passported_state_machine,
                :checking_means_income)
       end

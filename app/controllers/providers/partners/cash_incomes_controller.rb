@@ -1,6 +1,7 @@
 module Providers
-  module Means
+  module Partners
     class CashIncomesController < ProviderBaseController
+      prefix_step_with :partner
       before_action :setup_variables, only: %i[show update]
 
       def show; end
@@ -22,11 +23,11 @@ module Providers
       end
 
       def cash_transactions
-        @cash_transactions ||= legal_aid_application.cash_transaction_types_for?("Applicant")
+        @cash_transactions ||= legal_aid_application.cash_transaction_types_for?("Partner")
       end
 
       def aggregated_cash_income
-        @aggregated_cash_income ||= AggregatedCashIncome.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Applicant")
+        @aggregated_cash_income ||= AggregatedCashIncome.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Partner")
       end
 
       def form_params
@@ -35,8 +36,8 @@ module Providers
           .except(:cash_income)
           .merge({
             legal_aid_application_id: legal_aid_application[:id],
-            owner_type: "Applicant",
-            owner_id: legal_aid_application.applicant.id,
+            owner_type: "Partner",
+            owner_id: legal_aid_application.partner.id,
             none_selected: params[:aggregated_cash_income][:none_selected],
           })
       end

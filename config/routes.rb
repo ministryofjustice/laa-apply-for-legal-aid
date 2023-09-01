@@ -285,6 +285,7 @@ Rails.application.routes.draw do
         resource :add_other_state_benefits, only: %i[show update]
         resources :remove_state_benefits, only: %i[show update]
         resource :regular_incomes, only: %i[show update]
+        resource :cash_income, only: %i[show update]
       end
 
       scope module: :application_merits_task do

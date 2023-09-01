@@ -32,6 +32,14 @@ Then("I choose {string}") do |option|
   choose(option, allow_label_click: true)
 end
 
+Then("I choose the {string} frequency for {string}") do |frequency, field|
+  parts = [field, "frequency", frequency]
+  parts.each(&:downcase!)
+  field_id = parts.join(" ").gsub(/\s+/, "-")
+  id = find("input[id*=#{field_id}", visible: false)[:id]
+  choose(id, allow_label_click: true)
+end
+
 Then("I click link {string}") do |link_name|
   click_link(link_name)
 end

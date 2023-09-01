@@ -1,0 +1,37 @@
+<%= form_with(
+      model: @aggregated_cash_income,
+      url:,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template page_title:, template: :basic, form: do %>
+
+    <%= form.govuk_check_boxes_fieldset :cash_income,
+                                        caption: { text: caption, size: "l" },
+                                        legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <p><%= t(".info") %></p>
+      <div id="select-all-that-apply-hint" class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
+      <div class="deselect-group" data-deselect-ctrl="#aggregated-cash-income-none-selected-true-field">
+        <% @cash_transactions.each do |transaction_type| %>
+          <%= render(
+                "shared/partials/revealing_checkbox",
+                name: transaction_type.name,
+                form:,
+                number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
+                model: @aggregated_cash_income,
+                input_prefix: t("currency.gbp"),
+              ) %>
+        <% end %>
+      </div>
+
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: none_of_the_above }, checked: @legal_aid_application.no_cash_income? %>
+    <% end %>
+
+    <%= next_action_buttons(
+          form:,
+          show_draft: false,
+        ) %>
+  <% end %>
+<% end %>
