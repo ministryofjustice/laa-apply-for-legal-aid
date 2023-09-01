@@ -34,7 +34,7 @@ module CCMS
 
       context "when one key's value is replaced in an existing attribute block" do
         it "replaces the one key's value that has been specified in the merged file and contains all the other originals" do
-          modified_attr_block = subject[:bank_acct][:BALANCE]
+          modified_attr_block = config[:bank_acct][:BALANCE]
           expect(modified_attr_block.keys).to eq %i[value br100_meaning response_type user_defined]
           expect(modified_attr_block[:value]).to eq "#new_bank_balance_method"
           expect(modified_attr_block[:br100_meaning]).to eq "Bank accounts: Current Balance"

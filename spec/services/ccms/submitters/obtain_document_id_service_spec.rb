@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe ObtainDocumentIdService, :ccms do
-      subject { described_class.new(submission) }
+      subject(:instance) { described_class.new(submission) }
 
       let(:legal_aid_application) do
         create(:legal_aid_application,
@@ -39,7 +39,7 @@ module CCMS
 
         context "and the application has no documents" do
           it "does not create any document objects" do
-            subject.call
+            instance.call
             expect(submission.submission_documents.count).to eq 0
           end
         end
@@ -77,41 +77,41 @@ module CCMS
 
           it "only populates the documents array with submittable documents" do
             expect(legal_aid_application.attachments.map(&:attachment_type)).to match_array all_attachment_types
-            subject.call
+            instance.call
             expect(submission.submission_documents.map(&:document_type)).to match_array submittable_document_types
           end
 
           it "populates document array with gateway_evidence" do
-            subject.call
+            instance.call
             gateway_evidence_submission = submission.submission_documents.select { |a| a.document_type == "gateway_evidence_pdf" }
             expect(gateway_evidence_submission.count).to eq 1
           end
 
           context "when requesting document_ids" do
             it "populates the ccms_document_id for each document" do
-              subject.call
+              instance.call
               submission.submission_documents.each do |document|
                 expect(document.ccms_document_id).not_to be_nil
               end
             end
 
             it "updates the status for each document to id_obtained" do
-              subject.call
+              instance.call
               submission.submission_documents.each do |document|
                 expect(document.status).to eq "id_obtained"
               end
             end
 
             it "changes the submission state to document_ids_obtained" do
-              expect { subject.call }.to change(submission, :aasm_state).to "document_ids_obtained"
+              expect { instance.call }.to change(submission, :aasm_state).to "document_ids_obtained"
             end
 
             it "writes a history record for each document" do
-              expect { subject.call }.to change(SubmissionHistory, :count).by(5)
+              expect { instance.call }.to change(SubmissionHistory, :count).by(5)
             end
 
             it "updates the history records" do
-              subject.call
+              instance.call
               expect(history.from_state).to eq "applicant_ref_obtained"
               expect(history.to_state).to eq "document_ids_obtained"
               expect(history.success).to be true
@@ -119,7 +119,7 @@ module CCMS
             end
 
             it "writes the request body to the history record" do
-              subject.call
+              instance.call
               expect(history.request).to be_soap_envelope_with(
                 command: "casebim:DocumentUploadRQ",
                 transaction_id: "20190301030405123456",
@@ -128,7 +128,7 @@ module CCMS
             end
 
             it "creates three documents as ADMIN1, one as STATE and one as BSTMT" do
-              subject.call
+              instance.call
               admin1_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("ADMIN1") }.flatten.count
               state_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("STATE") }.flatten.count
               bstmt_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("BSTMT") }.flatten.count
@@ -138,7 +138,7 @@ module CCMS
             end
 
             it "writes the response body to the history record" do
-              subject.call
+              instance.call
               expect(history.response).to eq response_body
             end
           end
@@ -159,7 +159,7 @@ module CCMS
             fake_error = error.sample
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
             expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(fake_error, "Failed to obtain document ids for")
-            expect { subject.call }.to raise_error(fake_error, "Failed to obtain document ids for")
+            expect { instance.call }.to raise_error(fake_error, "Failed to obtain document ids for")
           end
 
           it "does not change the state" do
@@ -181,7 +181,7 @@ module CCMS
         context "when requesting document_ids" do
           before do
             expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CCMSError, "failure populating document hash")
-            expect { subject.call }.to raise_error(CCMSError, "failure populating document hash")
+            expect { instance.call }.to raise_error(CCMSError, "failure populating document hash")
           end
 
           let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }

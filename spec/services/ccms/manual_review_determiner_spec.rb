@@ -8,11 +8,11 @@ module CCMS
     let(:legal_aid_application) { create(:legal_aid_application) }
 
     describe "#manual_review_required?" do
-      subject { determiner.manual_review_required? }
+      subject(:manual_review_required) { determiner.manual_review_required? }
 
       context "when an assessment is not yet carried out on legal aid application" do
         it "raises an error" do
-          expect { subject }.to raise_error RuntimeError, "Unable to determine whether Manual review is required before means assessment"
+          expect { manual_review_required }.to raise_error RuntimeError, "Unable to determine whether Manual review is required before means assessment"
         end
       end
 
@@ -25,7 +25,7 @@ module CCMS
             let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns false" do
-              expect(subject).to be false
+              expect(manual_review_required).to be false
             end
           end
 
@@ -34,7 +34,7 @@ module CCMS
             let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
-              expect(subject).to be true
+              expect(manual_review_required).to be true
             end
           end
         end
@@ -47,7 +47,7 @@ module CCMS
             let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
-              expect(subject).to be true
+              expect(manual_review_required).to be true
             end
           end
 
@@ -56,7 +56,7 @@ module CCMS
             let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
-              expect(subject).to be true
+              expect(manual_review_required).to be true
             end
           end
         end
@@ -73,7 +73,7 @@ module CCMS
               let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
-                expect(subject).to be true
+                expect(manual_review_required).to be true
               end
             end
 
@@ -82,7 +82,7 @@ module CCMS
 
               context "and there are restrictions" do # TODO: check this - description does not match expectation
                 it "returns false" do
-                  expect(subject).to be true
+                  expect(manual_review_required).to be true
                 end
               end
 
@@ -90,7 +90,7 @@ module CCMS
                 before { legal_aid_application.update! has_restrictions: false }
 
                 it "returns false" do
-                  expect(subject).to be false
+                  expect(manual_review_required).to be false
                 end
               end
             end
@@ -103,7 +103,7 @@ module CCMS
               let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
-                expect(subject).to be true
+                expect(manual_review_required).to be true
               end
             end
 
@@ -112,7 +112,7 @@ module CCMS
 
               context "but with restrictions" do
                 it "returns false" do
-                  expect(subject).to be true
+                  expect(manual_review_required).to be true
                 end
               end
 
@@ -120,7 +120,7 @@ module CCMS
                 before { legal_aid_application.update! has_restrictions: false }
 
                 it "returns false" do
-                  expect(subject).to be false
+                  expect(manual_review_required).to be false
                 end
               end
             end
@@ -137,7 +137,7 @@ module CCMS
               let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
-                expect(subject).to be true
+                expect(manual_review_required).to be true
               end
             end
 
@@ -146,7 +146,7 @@ module CCMS
 
               context "and there are restrictions" do # TODO: check this - description does not match expectation
                 it "returns false" do
-                  expect(subject).to be true
+                  expect(manual_review_required).to be true
                 end
               end
 
@@ -154,7 +154,7 @@ module CCMS
                 before { legal_aid_application.update! has_restrictions: false }
 
                 it "returns true" do
-                  expect(subject).to be true
+                  expect(manual_review_required).to be true
                 end
               end
             end
@@ -167,7 +167,7 @@ module CCMS
               let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
-                expect(subject).to be true
+                expect(manual_review_required).to be true
               end
             end
 
@@ -176,7 +176,7 @@ module CCMS
 
               context "and there are restrictions" do # TODO: check this - description does not match expectation
                 it "returns false" do
-                  expect(subject).to be true
+                  expect(manual_review_required).to be true
                 end
               end
 
@@ -185,7 +185,7 @@ module CCMS
 
                 it "returns true" do
                   legal_aid_application.reload
-                  expect(subject).to be true
+                  expect(manual_review_required).to be true
                 end
               end
             end
@@ -198,7 +198,7 @@ module CCMS
           let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns true" do
-            expect(subject).to be true
+            expect(manual_review_required).to be true
           end
         end
 
@@ -208,7 +208,7 @@ module CCMS
           let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns false" do
-            expect(subject).to be false
+            expect(manual_review_required).to be false
           end
         end
 
@@ -217,7 +217,7 @@ module CCMS
           let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns true" do
-            expect(subject).to be true
+            expect(manual_review_required).to be true
           end
         end
 
@@ -226,7 +226,7 @@ module CCMS
           let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns false" do
-            expect(subject).to be false
+            expect(manual_review_required).to be false
           end
         end
 
@@ -237,14 +237,14 @@ module CCMS
           let!(:cfe_result) { create(:cfe_v5_result, submission: cfe_submission) }
 
           it "returns true" do
-            expect(subject).to be true
+            expect(manual_review_required).to be true
           end
         end
       end
     end
 
     describe "#review_reasons" do
-      subject { determiner.review_reasons }
+      subject(:review_reasons_result) { determiner.review_reasons }
 
       let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: false }
       let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
@@ -257,7 +257,7 @@ module CCMS
 
       context "without DWP Override" do
         it "just takes the review reasons from the CFE result" do
-          expect(subject).to eq review_reasons
+          expect(review_reasons_result).to eq review_reasons
         end
       end
 
@@ -265,7 +265,7 @@ module CCMS
         before { create(:dwp_override, legal_aid_application:) }
 
         it "adds the dwp review to the cfe result reasons" do
-          expect(subject).to eq override_reasons
+          expect(review_reasons_result).to eq override_reasons
         end
       end
 
@@ -273,7 +273,7 @@ module CCMS
         let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: true) }
 
         it "adds further_employment_details to the review reasons" do
-          expect(subject).to eq further_employment_details_reasons
+          expect(review_reasons_result).to eq further_employment_details_reasons
         end
       end
 
@@ -281,7 +281,7 @@ module CCMS
         let(:legal_aid_application) { create(:legal_aid_application, has_restrictions: true) }
 
         it "adds restrictions to the review reasons" do
-          expect(subject).to eq restrictions_reasons
+          expect(review_reasons_result).to eq restrictions_reasons
         end
       end
 
@@ -293,7 +293,7 @@ module CCMS
         end
 
         it "adds uploaded_bank_statements to the review reasons" do
-          expect(subject).to include(:uploaded_bank_statements)
+          expect(review_reasons_result).to include(:uploaded_bank_statements)
         end
       end
 
@@ -301,7 +301,7 @@ module CCMS
         let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: true }
 
         it "adds ineligible to the review reasons" do
-          expect(subject).to include(:ineligible)
+          expect(review_reasons_result).to include(:ineligible)
         end
       end
     end

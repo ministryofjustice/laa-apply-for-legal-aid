@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe ObtainApplicantReferenceService, :ccms do
-      subject { described_class.new(submission) }
+      subject(:instance) { described_class.new(submission) }
 
       let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_everything_and_address, populate_vehicle: true) }
       let(:applicant) { legal_aid_application.applicant }
@@ -37,17 +37,17 @@ module CCMS
           let(:applicant_ccms_reference_in_example_response) { "4390016" }
 
           it "updates the applicant_ccms_reference" do
-            subject.call
+            instance.call
             expect(submission.applicant_ccms_reference).to eq applicant_ccms_reference_in_example_response
           end
 
           it "sets the state to applicant_ref_obtained" do
-            subject.call
+            instance.call
             expect(submission.aasm_state).to eq "applicant_ref_obtained"
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change(SubmissionHistory, :count).by(1)
+            expect { instance.call }.to change(SubmissionHistory, :count).by(1)
             expect(latest_history.from_state).to eq "case_ref_obtained"
             expect(latest_history.to_state).to eq "applicant_ref_obtained"
             expect(latest_history.success).to be true
@@ -55,7 +55,7 @@ module CCMS
           end
 
           it "stores the reqeust body in the submission history record" do
-            subject.call
+            instance.call
             expect(latest_history.request).to be_soap_envelope_with(
               command: "clientbim:ClientInqRQ",
               transaction_id: "20190301030405123456",
@@ -67,7 +67,7 @@ module CCMS
           end
 
           it "stores the response body in the submission history record" do
-            subject.call
+            instance.call
             expect(latest_history.response).to eq response_body
           end
         end
@@ -81,12 +81,12 @@ module CCMS
           end
 
           it "sets the state to applicant_submitted" do
-            subject.call
+            instance.call
             expect(submission.aasm_state).to eq "applicant_submitted"
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change(SubmissionHistory, :count).by(2)
+            expect { instance.call }.to change(SubmissionHistory, :count).by(2)
             expect(latest_history.from_state).to eq "case_ref_obtained"
             expect(latest_history.to_state).to eq "applicant_submitted"
             expect(latest_history.success).to be true
@@ -94,7 +94,7 @@ module CCMS
           end
 
           it "stores the request body in the submission history record" do
-            subject.call
+            instance.call
             expect(latest_history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
               transaction_id: "20190301030405123456",
@@ -106,13 +106,13 @@ module CCMS
           end
 
           it "stores the response body in the submission history record" do
-            subject.call
+            instance.call
             expect(latest_history.response).to eq success_add_applicant_response_body
           end
 
           it "calls the AddApplicant service" do
             expect(CCMS::Submitters::AddApplicantService).to receive(:new).and_call_original
-            subject.call
+            instance.call
           end
         end
 
@@ -130,7 +130,7 @@ module CCMS
           before do
             fake_error = error.sample
             expect_any_instance_of(CCMS::Requestors::ApplicantSearchRequestor).to receive(:call).and_raise(fake_error, "oops")
-            expect { subject.call }.to raise_error(fake_error, "oops")
+            expect { instance.call }.to raise_error(fake_error, "oops")
           end
 
           it "does not change the state" do

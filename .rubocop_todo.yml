@@ -137,7 +137,7 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 988
+# Offense count: 905
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
@@ -236,16 +236,6 @@ RSpec/NamedSubject:
     - 'spec/services/banking/bank_transaction_balance_calculator_spec.rb'
     - 'spec/services/banking/bank_transactions_trimmer_spec.rb'
     - 'spec/services/banking/state_benefit_analyser_service_spec.rb'
-    - 'spec/services/ccms/attribute_configuration_spec.rb'
-    - 'spec/services/ccms/manual_review_determiner_spec.rb'
-    - 'spec/services/ccms/parsers/applicant_add_response_parser_spec.rb'
-    - 'spec/services/ccms/restart_submissions_spec.rb'
-    - 'spec/services/ccms/submitters/add_applicant_service_spec.rb'
-    - 'spec/services/ccms/submitters/add_case_service_spec.rb'
-    - 'spec/services/ccms/submitters/check_applicant_status_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_applicant_reference_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
-    - 'spec/services/ccms/submitters/upload_documents_service_spec.rb'
     - 'spec/services/dashboard_event_handler_spec.rb'
     - 'spec/services/delegated_functions_date_service_spec.rb'
     - 'spec/services/flow/base_flow_service_spec.rb'

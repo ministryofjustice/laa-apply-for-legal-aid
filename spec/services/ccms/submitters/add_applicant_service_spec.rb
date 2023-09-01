@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe AddApplicantService, :ccms do
-      subject { described_class.new(submission) }
+      subject(:instance) { described_class.new(submission) }
 
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address) }
       let(:applicant) { legal_aid_application.applicant }
@@ -30,17 +30,17 @@ module CCMS
       context "when the operation is successful" do
         context "and no applicant exists on the CCMS system" do
           it "sets state to applicant_submitted" do
-            subject.call
+            instance.call
             expect(submission.aasm_state).to eq "applicant_submitted"
           end
 
           it "records the transaction id of the request" do
-            subject.call
+            instance.call
             expect(submission.applicant_add_transaction_id).to eq "20190301030405123456"
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
+            expect { instance.call }.to change(CCMS::SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "case_ref_obtained"
             expect(history.to_state).to eq "applicant_submitted"
             expect(history.success).to be true
@@ -48,7 +48,7 @@ module CCMS
           end
 
           it "stores the reqeust body in the submission history record" do
-            subject.call
+            instance.call
             expect(history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
               transaction_id: "20190301030405123456",
@@ -63,7 +63,7 @@ module CCMS
           end
 
           it "stores the response body in the submission history record" do
-            subject.call
+            instance.call
             expect(history.response).to eq response_body
           end
         end
@@ -76,7 +76,7 @@ module CCMS
           before do
             sample_error = error.sample
             expect_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:call).and_raise(sample_error, "oops")
-            expect { subject.call }.to raise_error(sample_error)
+            expect { instance.call }.to raise_error(sample_error)
           end
 
           it "does not change submission state" do
@@ -110,7 +110,7 @@ module CCMS
           let(:response_body) { ccms_data_from_file "applicant_add_response_failure.xml" }
 
           before do
-            expect { subject.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
+            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
           end
 
           it "does not change state" do

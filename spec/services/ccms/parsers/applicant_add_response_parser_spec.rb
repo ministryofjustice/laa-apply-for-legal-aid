@@ -40,27 +40,27 @@ module CCMS
       end
 
       context "when the response is unsuccessful" do
-        subject { described_class.new(expected_tx_id, response_xml) }
+        subject(:response_parser) { described_class.new(expected_tx_id, response_xml) }
 
         let(:response_xml) { ccms_data_from_file "applicant_add_response_failure.xml" }
 
         describe "#success?" do
           it "is false" do
-            expect(subject.success?).to be false
+            expect(response_parser.success?).to be false
           end
         end
 
         describe "#success" do
           it "is false" do
-            subject.success?
-            expect(subject.success).to be false
+            response_parser.success?
+            expect(response_parser.success).to be false
           end
         end
 
         describe "#message" do
           it "returns status concatenated with any free text" do
-            subject.success?
-            expect(subject.message).to eq "Failed: "
+            response_parser.success?
+            expect(response_parser.message).to eq "Failed: "
           end
         end
       end

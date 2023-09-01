@@ -20,7 +20,7 @@ RSpec.describe CCMS::RestartSubmissions do
     it { is_expected.to eql "2 CCMS submissions restarted" }
 
     it "changes the states to submitting_assessment" do
-      subject
+      restart_submissions
       expect(LegalAidApplication.first.reload.state).to eql "generating_reports"
       expect(LegalAidApplication.last.reload.state).to eql "generating_reports"
     end
