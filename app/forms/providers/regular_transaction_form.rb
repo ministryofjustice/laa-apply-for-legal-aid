@@ -108,7 +108,7 @@ module Providers
 
     def build_legal_aid_application_transaction_types
       transaction_type_ids.each do |transaction_type_id|
-        next if transaction_type_id.in?(legal_aid_application.transaction_type_ids)
+        next if owner_has_transaction_type?(transaction_type_id)
 
         legal_aid_application.legal_aid_application_transaction_types.build(
           transaction_type_id:,
@@ -116,6 +116,10 @@ module Providers
           owner_type:,
         )
       end
+    end
+
+    def owner_has_transaction_type?(transaction_type_id)
+      @legal_aid_application.legal_aid_application_transaction_types.where(transaction_type_id:, owner_type:).any?
     end
 
     def destroy_transactions!
