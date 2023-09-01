@@ -37,7 +37,7 @@ module CCMS
 
         before do
           freeze_time
-          expect(requestor).to receive(:soap_client).and_return(soap_client_double)
+          allow(requestor).to receive(:soap_client).and_return(soap_client_double)
         end
 
         it "calls the savon soap client" do

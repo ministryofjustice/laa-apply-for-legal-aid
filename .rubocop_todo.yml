@@ -51,7 +51,7 @@ RSpec/ExpectActual:
   Exclude:
     - 'spec/services/reports/means_report_creator_spec.rb'
 
-# Offense count: 50
+# Offense count: 12
 RSpec/ExpectInHook:
   Exclude:
     - 'spec/models/application_merits_task/involved_child_spec.rb'
@@ -59,21 +59,6 @@ RSpec/ExpectInHook:
     - 'spec/models/legal_aid_application_spec.rb'
     - 'spec/requests/citizens/gather_transactions_spec.rb'
     - 'spec/services/bank_holiday_retriever_service_spec.rb'
-    - 'spec/services/ccms/requestors/applicant_add_requestor_spec.rb'
-    - 'spec/services/ccms/requestors/applicant_add_status_requestor_spec.rb'
-    - 'spec/services/ccms/requestors/applicant_search_requestor_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_status_requestor_spec.rb'
-    - 'spec/services/ccms/requestors/document_id_requestor_spec.rb'
-    - 'spec/services/ccms/requestors/document_upload_requestor_spec.rb'
-    - 'spec/services/ccms/requestors/reference_data_requestor_spec.rb'
-    - 'spec/services/ccms/submitters/add_applicant_service_spec.rb'
-    - 'spec/services/ccms/submitters/add_case_service_spec.rb'
-    - 'spec/services/ccms/submitters/check_applicant_status_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_applicant_reference_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_case_reference_service_spec.rb'
-    - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
-    - 'spec/services/ccms/submitters/upload_documents_service_spec.rb'
     - 'spec/services/provider_after_login_service_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'

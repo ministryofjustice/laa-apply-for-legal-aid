@@ -63,7 +63,7 @@ module CCMS
         let(:fake_error) { error.sample } # TODO: avoid this pattern
 
         before do
-          expect_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:call).and_raise(fake_error, "oops")
+          allow_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:call).and_raise(fake_error, "oops")
         end
 
         it "does not change the state" do

@@ -72,18 +72,22 @@ module CCMS
       context "when the operation is in error" do
         context "and it errors when adding an applicant" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+          let(:sample_error) { error.sample }
+          # let(:stubbed_applicant_requestor) { instance_double(CCMS::Requestors::ApplicantAddRequestor, call: false) }
 
           before do
-            sample_error = error.sample
-            expect_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:call).and_raise(sample_error, "oops")
-            expect { instance.call }.to raise_error(sample_error)
+            # allow(stubbed_applicant_requestor).to receive(:call).and_raise(sample_error, "oops")
+            # allow(CCMS::Requestors::ApplicantAddRequestor).to receive(:new).and_return(stubbed_applicant_requestor)
+            allow_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:call).and_raise(sample_error, "oops")
           end
 
           it "does not change submission state" do
+            expect { instance.call }.to raise_error(sample_error)
             expect(submission.reload.aasm_state).to eq "case_ref_obtained"
           end
 
           it "records the error in the submission history" do
+            expect { instance.call }.to raise_error(sample_error)
             submission_history = submission.submission_history
             expect(submission_history.count).to eq 1
             expect(history.from_state).to eq "case_ref_obtained"
@@ -109,15 +113,13 @@ module CCMS
         context "when the response is unsuccessful from CCMS adding an applicant" do
           let(:response_body) { ccms_data_from_file "applicant_add_response_failure.xml" }
 
-          before do
-            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
-          end
-
           it "does not change state" do
+            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
             expect(submission.aasm_state).to eq "case_ref_obtained"
           end
 
           it "records the error in the submission history" do
+            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
             submission_history = submission.reload.submission_history
             expect(submission_history.count).to eq 1
             expect(history.from_state).to eq "case_ref_obtained"
@@ -126,6 +128,7 @@ module CCMS
           end
 
           it "stores the reqeust body in the submission history record" do
+            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
             expect(history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
               transaction_id: "20190301030405123456",
@@ -140,6 +143,7 @@ module CCMS
           end
 
           it "stores the response body in the submission history record" do
+            expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
             expect(history.response).to eq response_body
           end
         end

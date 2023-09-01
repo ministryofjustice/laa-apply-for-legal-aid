@@ -127,22 +127,24 @@ module CCMS
 
         context "when the operation is unsuccessful" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+          let(:fake_error) { error.sample }
 
           before do
-            fake_error = error.sample
-            expect_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(fake_error, "oops")
-            expect { instance.call }.to raise_error(fake_error, "oops")
+            allow_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(fake_error, "oops")
           end
 
           it "increments the poll count" do
+            expect { instance.call }.to raise_error(fake_error, "oops")
             expect(submission.applicant_poll_count).to eq 1
           end
 
           it "does not change state" do
+            expect { instance.call }.to raise_error(fake_error, "oops")
             expect(submission.aasm_state).to eq "applicant_submitted"
           end
 
           it "records the error in the submission history" do
+            expect { instance.call }.to raise_error(fake_error, "oops")
             expect(SubmissionHistory.count).to eq 1
             expect(history.from_state).to eq "applicant_submitted"
             expect(history.to_state).to eq "failed"

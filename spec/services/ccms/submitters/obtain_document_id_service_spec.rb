@@ -154,19 +154,20 @@ module CCMS
         context "when populating documents" do
           let!(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+          let(:fake_error) { error.sample }
 
           before do
-            fake_error = error.sample
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
-            expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(fake_error, "Failed to obtain document ids for")
-            expect { instance.call }.to raise_error(fake_error, "Failed to obtain document ids for")
+            allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(fake_error, "Failed to obtain document ids for")
           end
 
           it "does not change the state" do
+            expect { instance.call }.to raise_error(fake_error, "Failed to obtain document ids for")
             expect(submission.aasm_state).to eq "applicant_ref_obtained"
           end
 
           it "writes a history record" do
+            expect { instance.call }.to raise_error(fake_error, "Failed to obtain document ids for")
             expect(SubmissionHistory.count).to eq 2
             expect(history.from_state).to eq "applicant_ref_obtained" # this is failing gets case_submitted
             expect(history.to_state).to eq "failed"
@@ -180,21 +181,23 @@ module CCMS
 
         context "when requesting document_ids" do
           before do
-            expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CCMSError, "failure populating document hash")
-            expect { instance.call }.to raise_error(CCMSError, "failure populating document hash")
+            allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CCMSError, "failure populating document hash")
           end
 
           let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }
 
           it "does not change the state" do
+            expect { instance.call }.to raise_error(CCMSError, "failure populating document hash")
             expect(submission.aasm_state).to eq "applicant_ref_obtained"
           end
 
           it "changes the document state to failed" do
+            expect { instance.call }.to raise_error(CCMSError, "failure populating document hash")
             expect(submission.submission_documents.first.status).to eq "failed"
           end
 
           it "writes a history record" do
+            expect { instance.call }.to raise_error(CCMSError, "failure populating document hash")
             expect(SubmissionHistory.count).to eq 2
             expect(history.from_state).to eq "applicant_ref_obtained"
             expect(history.to_state).to eq "failed"

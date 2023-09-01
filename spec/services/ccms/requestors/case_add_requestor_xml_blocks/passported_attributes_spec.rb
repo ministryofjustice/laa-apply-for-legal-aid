@@ -553,7 +553,7 @@ module CCMS
 
         describe "GB_INPUT_B_3WP2_1A - applicant has financial interest in his main home" do
           context "when the applicant has no financial interest" do
-            before { expect(legal_aid_application).to receive(:own_home?).and_return(false) }
+            before { allow(legal_aid_application).to receive(:own_home?).and_return(false) }
 
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
@@ -562,7 +562,7 @@ module CCMS
           end
 
           context "when there is a shared financial interest" do
-            before { expect(legal_aid_application).to receive(:own_home?).and_return(true) }
+            before { allow(legal_aid_application).to receive(:own_home?).and_return(true) }
 
             it "inserts true into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
@@ -659,7 +659,7 @@ module CCMS
 
         describe "GB_INPUT_B_3WP2_1A - Applicant has a financial interest in main home?" do
           context "when the applicant has no financial interest in the main home" do
-            before { expect(legal_aid_application).to receive(:own_home).and_return(false) }
+            before { allow(legal_aid_application).to receive(:own_home).and_return(false) }
 
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
@@ -668,7 +668,7 @@ module CCMS
           end
 
           context "when the applicant has a financial interest in the main home" do
-            before { expect(legal_aid_application).to receive(:own_home).and_return(true) }
+            before { allow(legal_aid_application).to receive(:own_home).and_return(true) }
 
             it "inserts true into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
@@ -1110,7 +1110,7 @@ module CCMS
           end
 
           context "when the applicant DOES NOT own additional property" do
-            before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
+            before { allow(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
 
             it "returns false when client does NOT own additiaonl property" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_4WP2_1A")
