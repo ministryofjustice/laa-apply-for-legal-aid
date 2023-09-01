@@ -11,7 +11,7 @@ module V1
         provider.cookies_enabled = action == "accept"
         provider.cookies_saved_at = Time.zone.now
         provider.save!
-
+        provider.update!(cookies_enabled: action == "accept", cookies_saved_at: Time.zone.now)
         render "", status: :ok
       end
     end
