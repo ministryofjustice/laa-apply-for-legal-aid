@@ -117,6 +117,33 @@ RSpec.describe "providers legal aid application requests" do
           end
         end
       end
+
+      context "when provider's cookie preferences have expired" do
+        let(:provider) { create(:provider, cookies_enabled: true, cookies_saved_at: 1.year.ago - 1.day) }
+
+        it "displays the cookie banner" do
+          subject
+          expect(response.body).to include("Cookies on Apply for legal aid")
+        end
+      end
+
+      context "when provider's cookie preferences have not expired" do
+        let(:provider) { create(:provider, cookies_enabled: true, cookies_saved_at: 1.year.ago + 1.day) }
+
+        it "does not display the cookie banner" do
+          subject
+          expect(response.body).not_to include("Cookies on Apply for legal aid")
+        end
+      end
+
+      context "when the provider has not chosen their cookie preferences" do
+        let(:provider) { create(:provider, cookies_enabled: nil, cookies_saved_at: nil) }
+
+        it "displays the cookie banner" do
+          subject
+          expect(response.body).to include("Cookies on Apply for legal aid")
+        end
+      end
     end
 
     context "when another provider is authenticated" do

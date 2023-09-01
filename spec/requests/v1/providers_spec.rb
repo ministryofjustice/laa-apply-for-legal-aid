@@ -20,6 +20,10 @@ RSpec.describe "PATCH /v1/providers" do
       it "sets the cookies enabled attribute to true" do
         expect { request }.to change { provider.reload.cookies_enabled }.to(true)
       end
+
+      it "adds the datetime to cookies_saved_at" do
+        expect { request }.to change { provider.reload.cookies_saved_at }
+      end
     end
 
     context "when the provider rejects cookies" do
@@ -32,6 +36,10 @@ RSpec.describe "PATCH /v1/providers" do
 
       it "sets the cookies enabled attribute to false" do
         expect { request }.to change { provider.reload.cookies_enabled }.to(false)
+      end
+
+      it "adds the datetime to cookies_saved_at" do
+        expect { request }.to change { provider.reload.cookies_saved_at }
       end
     end
 
