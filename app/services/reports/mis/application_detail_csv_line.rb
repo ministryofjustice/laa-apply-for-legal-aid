@@ -423,7 +423,7 @@ module Reports
       end
 
       def gateway_evidence_count
-        gateway_evidence.present? ? gateway_evidence.pdf_attachments.count : ""
+        gateway_evidence.present? ? laa.attachments.gateway_evidence_pdf.count : ""
       end
 
       def proceedings_df_used
