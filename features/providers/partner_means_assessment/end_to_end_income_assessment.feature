@@ -62,12 +62,13 @@ Feature: partner_means_assessment full journey
 
     When I check "Pension"
     And I fill "Pension amount" with "100"
-    And I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
+    And I choose the "Monthly" frequency for "Pension"
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "Pension"
+    And I record monthly payments of 100 for "Pension"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client get student finance?"
 
@@ -76,8 +77,8 @@ Feature: partner_means_assessment full journey
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
 
     When I check "Housing payments"
-    And I fill "providers-means-regular-outgoings-form-rent-or-mortgage-amount-field" with "100"
-    And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-weekly-field"
+    And I fill "Rent or mortgage" with "100"
+    And I choose the "Weekly" frequency for "Rent or mortgage"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client receive Housing Benefit?"
 
@@ -86,7 +87,8 @@ Feature: partner_means_assessment full journey
     Then I should be on a page with title "Select payments your client pays in cash"
     And I should see "Housing payments"
 
-    When I select "None of the above"
+    When I select "Housing payments"
+    And I record monthly payments of 110 for "Rent or mortgage"
     And I click "Save and continue"
     Then I should be on a page with title "Complete the partner's financial assessment"
 
@@ -111,9 +113,13 @@ Feature: partner_means_assessment full journey
     When I select "Financial help from friends or family"
     And I fill "Friends or family" with "100"
     And I choose the "Monthly" frequency for "Friends or family"
+    And I select "Pension"
+    And I fill "Pension" with "150"
+    And I choose the "Weekly" frequency for "Pension"
     And I click "Save and continue"
     Then I should be on a page with title "Select payments the partner receives in cash"
-    And I should not see "Pension"
+    And I should see "Financial help from friends or family"
+    And I should see "Pension"
 
     When I select "The partner receives none of these payments in cash"
     And I click "Save and continue"
@@ -125,12 +131,12 @@ Feature: partner_means_assessment full journey
 
 
     When I check "Childcare payments"
-    And I fill "providers-partners-regular-outgoings-form-child-care-amount-field" with "200"
-    And I choose "providers-partners-regular-outgoings-form-child-care-frequency-weekly-field"
+    And I fill "Child care" with "200"
+    And I choose the "Weekly" frequency for "Child care"
     And I click "Save and continue"
     Then I should be on a page with title "Select payments the partner pays in cash"
     And I should not see "Housing payments"
-    
+
     When I select "None of the above"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client have any dependants?"

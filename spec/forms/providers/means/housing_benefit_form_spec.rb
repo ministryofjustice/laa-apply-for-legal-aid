@@ -461,6 +461,8 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           legal_aid_application_transaction_type = create(
             :legal_aid_application_transaction_type,
             legal_aid_application:,
+            owner_type: "Applicant",
+            owner_id: legal_aid_application.applicant.id,
             transaction_type:,
           )
           _housing_benefit = create(
