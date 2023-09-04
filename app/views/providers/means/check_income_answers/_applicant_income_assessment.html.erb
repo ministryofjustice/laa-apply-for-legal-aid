@@ -3,17 +3,17 @@
 <h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
 
 <% if bank_statement_upload %>
-  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false) %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false, partner: false) %>
 <% end %>
 
-<% if @legal_aid_application.hmrc_employment_income? %>
-  <% if @legal_aid_application.has_multiple_employments? %>
-    <%= render "shared/check_answers/full_employment_details", read_only: false %>
+<% if @legal_aid_application.applicant.hmrc_employment_income? %>
+  <% if @legal_aid_application.applicant.has_multiple_employments? %>
+    <%= render "shared/check_answers/full_employment_details", read_only: false, partner: false %>
   <% else %>
     <%= render "shared/check_answers/employed_income", read_only: false %>
   <% end %>
-<% elsif @legal_aid_application.applicant_employed? %>
-  <%= render "shared/check_answers/full_employment_details", read_only: false %>
+<% elsif @legal_aid_application.applicant.employed? %>
+  <%= render "shared/check_answers/full_employment_details", read_only: false, partner: false %>
 <% end %>
 
 <% if bank_statement_upload %>
@@ -43,10 +43,4 @@
       transaction_types: @debit_transaction_types,
     ) %>
 
-<%= render("shared/check_answers/housing_benefit", read_only: false) if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
-
 <%= render("shared/check_answers/outgoings_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>
-
-<h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading") %></h2>
-
-<%= render "shared/check_answers/dependants" %>

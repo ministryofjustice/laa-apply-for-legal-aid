@@ -924,11 +924,16 @@ en:
           what_happens_next:
             heading: What happens next
             text: You'll need to answer questions about your client's capital so we can calculate their financial eligibility for legal aid.
-        income_assessment:
+        applicant_income_assessment:
           income-heading: Your client's income
           outgoings-heading: Your client's outgoings
           credits-section-heading: What payments does your client receive?
           debits-section-heading: What payments does your client make?
+        partner_income_assessment:
+          income-heading: The partner's income
+          outgoings-heading: The partner's outgoings
+          credits-section-heading: What payments does the partner receive?
+          debits-section-heading: What payments does the partner make?
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?

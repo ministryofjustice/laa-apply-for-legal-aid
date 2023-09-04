@@ -1,6 +1,14 @@
 <%= page_template(page_title: t(".h1-heading")) do %>
 
-  <%= render "providers/means/check_income_answers/income_assessment" %>
+  <%= render "providers/means/check_income_answers/applicant_income_assessment" %>
+
+  <%= render "providers/means/check_income_answers/partner_income_assessment" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+
+  <%= render "shared/check_answers/housing_benefit", read_only: false if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
+
+  <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading") %></h2>
+
+  <%= render "shared/check_answers/dependants" %>
 
   <h3 class="govuk-heading-m"><%= t(".what_happens_next.heading") %></h3>
   <p class="govuk-body govuk-!-margin-bottom-8"><%= t(".what_happens_next.text") %></p>
