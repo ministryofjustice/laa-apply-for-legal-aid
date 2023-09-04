@@ -40,11 +40,12 @@ module CCMS
           end
 
           it "writes a history record" do
-            expect { instance.call }.to change(CCMS::SubmissionHistory, :count).by(1)
-            expect(history.from_state).to eq "case_ref_obtained"
-            expect(history.to_state).to eq "applicant_submitted"
-            expect(history.success).to be true
-            expect(history.details).to be_nil
+            instance.call
+            expect(history).to have_attributes(from_state: "case_ref_obtained",
+                                               to_state: "applicant_submitted",
+                                               success: true,
+                                               response: kind_of(String),
+                                               details: nil)
           end
 
           it "stores the reqeust body in the submission history record" do
@@ -85,14 +86,13 @@ module CCMS
 
           it "records the error in the submission history" do
             expect { instance.call }.to raise_error(sample_error)
-            submission_history = submission.submission_history
-            expect(submission_history.count).to eq 1
-            expect(history.from_state).to eq "case_ref_obtained"
-            expect(history.to_state).to eq "failed"
-            expect(history.success).to be false
-            expect(history.details).to match(/#{error}/)
-            expect(history.details).to match(/oops/)
-            expect(history.response).to be_nil
+
+            expect(history).to have_attributes(from_state: "case_ref_obtained",
+                                               to_state: "failed",
+                                               success: false,
+                                               response: nil,
+                                               details: /#{sample_error}.*oops/m)
+
             expect(history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
               transaction_id: "20190301030405123456",
@@ -117,11 +117,11 @@ module CCMS
 
           it "records the error in the submission history" do
             expect { instance.call }.to raise_error(CCMS::CCMSUnsuccessfulResponseError, "AddApplicantService failed with unsuccessful response for submission: #{submission.id}")
-            submission_history = submission.reload.submission_history
-            expect(submission_history.count).to eq 1
-            expect(history.from_state).to eq "case_ref_obtained"
-            expect(history.to_state).to eq "failed"
-            expect(history.success).to be false
+            expect(history).to have_attributes(from_state: "case_ref_obtained",
+                                               to_state: "failed",
+                                               success: false,
+                                               response: kind_of(String),
+                                               details: /CCMS::CCMSUnsuccessfulResponseError.*AddApplicantService failed with unsuccessful response for submission: #{submission.id}/m)
           end
 
           it "stores the reqeust body in the submission history record" do
