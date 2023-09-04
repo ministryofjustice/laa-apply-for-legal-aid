@@ -73,11 +73,8 @@ module CCMS
         context "and it errors when adding an applicant" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
           let(:sample_error) { error.sample }
-          # let(:stubbed_applicant_requestor) { instance_double(CCMS::Requestors::ApplicantAddRequestor, call: false) }
 
           before do
-            # allow(stubbed_applicant_requestor).to receive(:call).and_raise(sample_error, "oops")
-            # allow(CCMS::Requestors::ApplicantAddRequestor).to receive(:new).and_return(stubbed_applicant_requestor)
             allow_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:call).and_raise(sample_error, "oops")
           end
 
