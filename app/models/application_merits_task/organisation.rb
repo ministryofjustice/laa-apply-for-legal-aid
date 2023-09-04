@@ -19,9 +19,5 @@ module ApplicationMeritsTask
     def full_name
       name
     end
-
-    def type
-      "Organisation"
-    end
   end
 end

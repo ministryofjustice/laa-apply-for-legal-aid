@@ -31,6 +31,7 @@ $govuk-assets-path: "/";
 @import "citizens/spinner";
 @import "providers/legal_aid_applications";
 @import "providers/proceeding_types";
+@import "providers/organisations";
 @import "dropzone/src/dropzone";
 @import "dropzone/src/basic";
 @import "providers/summary_list_action_width";

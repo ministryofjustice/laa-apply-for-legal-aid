@@ -31,12 +31,14 @@
                   row.with_cell(text: opponent.full_name)
                   row.with_cell(text: opponent_type_description(opponent))
                   row.with_cell do
-                    link_to_accessible(
-                      t("generic.change"),
-                      opponent_url(opponent.type, @legal_aid_application, opponent),
-                      class: "govuk-link change-link",
-                      suffix: opponent.full_name,
-                    )
+                    if opponent.ccms_opponent_id.blank?
+                      link_to_accessible(
+                        t("generic.change"),
+                        opponent_url(@legal_aid_application, opponent),
+                        class: "govuk-link change-link",
+                        suffix: opponent.full_name,
+                      )
+                    end
                   end
                   row.with_cell do
                     link_to_accessible(

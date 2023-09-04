@@ -11,6 +11,12 @@ div.proceeding-item {
   border-bottom: 1px solid #cccccc;
 }
 
+div.organisation-item {
+  margin: 20px 0 0;
+  padding: 0;
+  border-bottom: 1px solid #cccccc;
+}
+
 div.no-results {
   margin-left: 0;
   padding-bottom: 20px;
@@ -33,7 +39,7 @@ div.no-results {
   font: inherit;
   text-decoration: underline;
   cursor: pointer;
-  
+
   &:hover:not(:focus) {
     color: $govuk-link-hover-colour;
     background: none;

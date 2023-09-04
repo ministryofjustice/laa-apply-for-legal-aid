@@ -6,39 +6,71 @@ RSpec.describe OpponentHelper do
   let(:organisation_opponent) { create(:opponent, :for_organisation, legal_aid_application:, organisation_name: "Mid Beds Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority") }
 
   describe ".opponent_url" do
-    context "when opponent has type Individual" do
+    subject(:url) { opponent_url(legal_aid_application, opponent) }
+
+    context "when opponent is Individual" do
+      let(:opponent) { individual_opponent }
+
       it "returns the path for an individual opponent" do
-        url = opponent_url("Individual", legal_aid_application, individual_opponent)
         expect(url).to eq "/providers/applications/#{legal_aid_application.id}/opponent_individuals/#{individual_opponent.id}?locale=en"
       end
     end
 
-    context "when opponent has type Organisation" do
-      it "returns the path for an organisation opponent" do
-        url = opponent_url("Organisation", legal_aid_application, organisation_opponent)
-        expect(url).to eq "/providers/applications/#{legal_aid_application.id}/opponent_organisations/#{organisation_opponent.id}?locale=en"
+    context "when opponent is Organisation" do
+      let(:opponent) { organisation_opponent }
+
+      context "with no ccms_opponent_id (i.e. new organisation)" do
+        before { opponent.ccms_opponent_id = nil }
+
+        it "returns the path for an existing organisation opponent" do
+          expect(url).to eq "/providers/applications/#{legal_aid_application.id}/opponent_new_organisations/#{organisation_opponent.id}?locale=en"
+        end
+      end
+
+      context "with ccms_opponent_id (i.e. existing organisation)" do
+        before { opponent.ccms_opponent_id = 222_222 }
+
+        it { expect(url).to be_nil }
       end
     end
 
     context "when called with unexpected values" do
-      it "raises an error" do
-        expect { opponent_url("Fake") }.to raise_error "type Fake not supported"
+      let(:opponent) { "NotAnOpponent" }
+
+      it "returns nil" do
+        expect(url).to be_nil
       end
     end
   end
 
   describe ".opponent_type_description" do
-    context "when opponent has type Individual" do
-      it "returns the opponent type" do
-        type_description = opponent_type_description(individual_opponent)
+    subject(:type_description) { opponent_type_description(opponent) }
+
+    context "when opponent is Individual" do
+      let(:opponent) { individual_opponent }
+
+      it "returns \"Individual\"" do
         expect(type_description).to eq "Individual"
       end
     end
 
-    context "when opponent has type Organisation" do
-      it "returns the organisation description" do
-        type_description = opponent_type_description(organisation_opponent)
+    context "when opponent is Organisation" do
+      let(:opponent) { organisation_opponent }
+
+      it "returns the organisation type description" do
         expect(type_description).to eq "Local Authority"
+      end
+    end
+
+    context "when opponent is unexpected" do
+      let(:opponent) { "NotAnOpponent" }
+
+      it "does not raise error" do
+        expect { type_description }.not_to raise_error
+      end
+
+      it "returns fallback text" do
+        expect(type_description).to eq "Unknown opponent type"
       end
     end
   end

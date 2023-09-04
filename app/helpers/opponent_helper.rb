@@ -1,17 +1,21 @@
 module OpponentHelper
-  def opponent_url(type, *)
-    url = case type
-          when "Individual"
-            "providers_legal_aid_application_opponent_individual_path"
-          when "Organisation"
-            "providers_legal_aid_application_opponent_organisation_path"
-          else
-            raise "type #{type} not supported"
-          end
-    Rails.application.routes.url_helpers.send(url, *)
+  def opponent_url(legal_aid_application, opponent)
+    if opponent.individual?
+      providers_legal_aid_application_opponent_individual_path(legal_aid_application.id, opponent.id)
+    elsif opponent.organisation? && opponent.ccms_opponent_id.blank?
+      providers_legal_aid_application_opponent_new_organisation_path(legal_aid_application.id, opponent.id)
+    end
+  rescue StandardError
+    nil
   end
 
   def opponent_type_description(opponent)
-    opponent.type == "Individual" ? opponent.type : opponent.ccms_type_text
+    if opponent.individual?
+      "Individual"
+    elsif opponent.organisation?
+      opponent.ccms_type_text
+    end
+  rescue StandardError
+    "Unknown opponent type"
   end
 end

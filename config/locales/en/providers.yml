@@ -471,9 +471,27 @@ en:
         form:
           first_name: First name
           last_name: Last name
-      opponent_organisations:
+      opponent_existing_organisations:
+        index:
+          clear_search: Clear search
+          enter_manually: enter manually
+          enter_manually_html: If you can not find the organisation %{href}
+          heading_1: Which organisation is an opponent in the case?
+          heading_2: Search for opponent organisations
+          no_results: No results found.
+          search_help_example: Select one organisation at a time. You can choose more later.
+          accessibility_message: Tab out of this box to select returned options
+          accessibility_message_safari_browser: "You are in a search field, tab out to see results"
+          you_have_selected: You have selected %{count}
         show: &new
-          page_title: Opponent
+          page_title: Opponent (existing)
+        new: *new
+        form:
+          name: Search for organisations
+          search_hint: Using common terms, like "council", will return large lists. Be specific.
+      opponent_new_organisations:
+        show: &new
+          page_title: Opponent (new)
         new: *new
         form:
           name: Organisation name

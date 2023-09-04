@@ -293,7 +293,8 @@ Rails.application.routes.draw do
         resources :remove_involved_child, only: %i[show update]
 
         resources :opponent_individuals, only: %i[new show update]
-        resources :opponent_organisations, only: %i[new show update]
+        resources :opponent_new_organisations, only: %i[new show update]
+        resources :opponent_existing_organisations, only: %i[index create]
         resources :remove_opponent, only: %i[show update]
 
         resource :client_denial_of_allegation, only: %i[show update]
