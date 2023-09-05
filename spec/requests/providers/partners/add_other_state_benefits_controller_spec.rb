@@ -109,7 +109,7 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
       context "and no more benefits are to be added" do
         let(:add_another_state_benefit) { "false" }
 
-        it "redirects to the check answers income page", pending: "Check answers not yet implemented" do
+        it "redirects to the check answers income page" do
           expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
         end
       end
