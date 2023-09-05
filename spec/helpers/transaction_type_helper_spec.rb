@@ -80,7 +80,8 @@ RSpec.describe TransactionTypeHelper do
   describe "#regular_transaction_answer_by_type" do
     subject do
       helper.regular_transaction_answer_by_type(legal_aid_application:,
-                                                transaction_type: benefits)
+                                                transaction_type: benefits,
+                                                owner_type: "Applicant")
     end
 
     let(:benefits) { create(:transaction_type, :benefits) }
@@ -90,6 +91,7 @@ RSpec.describe TransactionTypeHelper do
         create(:regular_transaction,
                legal_aid_application:,
                transaction_type: benefits,
+               owner_type: "Applicant",
                amount: 250,
                frequency: "weekly")
       end

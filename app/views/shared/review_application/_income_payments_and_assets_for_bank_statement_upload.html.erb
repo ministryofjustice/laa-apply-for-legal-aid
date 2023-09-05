@@ -2,7 +2,8 @@
   <div class="govuk-!-padding-bottom-6"></div>
   <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
-  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+  <%# 'partner' hard coded as false until this is updated with the partner means assessment changes %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true, partner: false) %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.hmrc_employment_income? %>
