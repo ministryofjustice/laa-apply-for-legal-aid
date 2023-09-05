@@ -7,8 +7,8 @@ FactoryBot.define do
       first_name { nil }
       last_name { nil }
       organisation_name { nil }
-      organisation_ccms_code { nil }
-      organisation_description { nil }
+      organisation_ccms_type_code { nil }
+      organisation_ccms_type_text { nil }
     end
 
     trait :for_individual do
@@ -26,9 +26,9 @@ FactoryBot.define do
 
       after(:build) do |opponent, evaluator|
         opponent.opposable.name = evaluator.organisation_name if evaluator.organisation_name
-        opponent.opposable.ccms_code = evaluator.organisation_ccms_code if evaluator.organisation_ccms_code
-        opponent.opposable.description = evaluator.organisation_description if evaluator.organisation_description
-        opponent.opposable.save! if evaluator.organisation_name || evaluator.organisation_ccms_code || evaluator.organisation_description
+        opponent.opposable.ccms_type_code = evaluator.organisation_ccms_type_code if evaluator.organisation_ccms_type_code
+        opponent.opposable.ccms_type_text = evaluator.organisation_ccms_type_text if evaluator.organisation_ccms_type_text
+        opponent.opposable.save! if evaluator.organisation_name || evaluator.organisation_ccms_type_code || evaluator.organisation_ccms_type_text
       end
     end
   end
@@ -45,7 +45,7 @@ FactoryBot.define do
 
   factory :organisation, class: "ApplicationMeritsTask::Organisation" do
     name { Faker::Company.name }
-    ccms_code { "LA" }
-    description { "Local Authority" }
+    ccms_type_code { "LA" }
+    ccms_type_text { "Local Authority" }
   end
 end

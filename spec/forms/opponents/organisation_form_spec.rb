@@ -66,6 +66,8 @@ RSpec.describe Opponents::OrganisationForm, :vcr, type: :form do
           name: "Central Beds Council",
           ccms_code: "LA",
           description: "Local Authority",
+          ccms_type_code: "LA",
+          ccms_type_text: "Local Authority",
         )
       end
 
@@ -76,7 +78,7 @@ RSpec.describe Opponents::OrganisationForm, :vcr, type: :form do
     end
 
     context "with existing opposable object" do
-      let!(:opponent) { create(:opponent, :for_organisation, organisation_name: "Bucks Council", organisation_ccms_code: "LA", organisation_description: "Local Authority") }
+      let!(:opponent) { create(:opponent, :for_organisation, organisation_name: "Bucks Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority") }
 
       it "updates the existing organisation" do
         expect { save_form }

@@ -19,11 +19,11 @@ module Opponents
 
       if model.opposable
         model.opposable.name = name
-        model.opposable.ccms_code = organisation_type_ccms_code
-        model.opposable.description = organisation_type_description
+        model.opposable.ccms_type_code = organisation_type_ccms_code
+        model.opposable.ccms_type_text = organisation_type_description
         model.opposable.save!
       else
-        model.opposable = ApplicationMeritsTask::Organisation.new(name:, ccms_code: organisation_type_ccms_code, description: organisation_type_description)
+        model.opposable = ApplicationMeritsTask::Organisation.new(name:, ccms_type_code: organisation_type_ccms_code, ccms_type_text: organisation_type_description)
       end
       model.save!(validate: false)
     end
