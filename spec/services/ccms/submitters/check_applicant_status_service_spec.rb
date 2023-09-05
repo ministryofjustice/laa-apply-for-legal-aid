@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe CheckApplicantStatusService, :ccms do
-      subject { described_class.new(submission) }
+      subject(:instance) { described_class.new(submission) }
 
       let(:submission) { create(:submission, :applicant_submitted) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
@@ -31,15 +31,15 @@ module CCMS
 
             context "and poll count remains below limit" do
               it "increments the poll count" do
-                expect { subject.call }.to change(submission, :applicant_poll_count).by 1
+                expect { instance.call }.to change(submission, :applicant_poll_count).by 1
               end
 
               it "does not change the state" do
-                expect { subject.call }.not_to change(submission, :aasm_state)
+                expect { instance.call }.not_to change(submission, :aasm_state)
               end
 
               it "writes a history record" do
-                expect { subject.call }.to change(SubmissionHistory, :count).by(1)
+                expect { instance.call }.to change(SubmissionHistory, :count).by(1)
                 expect(history.from_state).to eq "applicant_submitted"
                 expect(history.to_state).to eq "applicant_submitted"
                 expect(history.success).to be true
@@ -48,7 +48,7 @@ module CCMS
               end
 
               it "stores the reqeust body in the submission history record" do
-                subject.call
+                instance.call
                 expect(history.request).to be_soap_envelope_with(
                   command: "clientbim:ClientAddUpdtStatusRQ",
                   transaction_id: "20190301030405123456",
@@ -56,7 +56,7 @@ module CCMS
               end
 
               it "stores the response body in the submission history record" do
-                subject.call
+                instance.call
                 expect(history.response).to eq response_body
               end
             end
@@ -67,15 +67,15 @@ module CCMS
               end
 
               it "increments the poll count" do
-                expect { subject.call }.to change(submission, :applicant_poll_count).by 1
+                expect { instance.call }.to change(submission, :applicant_poll_count).by 1
               end
 
               it "does not change the state" do
-                expect { subject.call }.not_to change(submission, :aasm_state)
+                expect { instance.call }.not_to change(submission, :aasm_state)
               end
 
               it "writes a history record" do
-                expect { subject.call }.to change(SubmissionHistory, :count).by(1)
+                expect { instance.call }.to change(SubmissionHistory, :count).by(1)
                 expect(history.from_state).to eq "applicant_submitted"
                 expect(history.to_state).to eq "failed"
                 expect(history.success).to be false
@@ -83,7 +83,7 @@ module CCMS
               end
 
               it "stores the reqeust body in the submission history record" do
-                subject.call
+                instance.call
                 expect(history.request).to be_soap_envelope_with(
                   command: "clientbim:ClientAddUpdtStatusRQ",
                   transaction_id: "20190301030405123456",
@@ -100,15 +100,15 @@ module CCMS
             end
 
             it "changes the state to applicant_ref_obtained" do
-              expect { subject.call }.to change(submission, :aasm_state).to "applicant_ref_obtained"
+              expect { instance.call }.to change(submission, :aasm_state).to "applicant_ref_obtained"
             end
 
             it "updates the applicant_ccms_reference" do
-              expect { subject.call }.to change(submission, :applicant_ccms_reference).to expected_applicant_ccms_reference
+              expect { instance.call }.to change(submission, :applicant_ccms_reference).to expected_applicant_ccms_reference
             end
 
             it "writes a history record" do
-              expect { subject.call }.to change(SubmissionHistory, :count).by(1)
+              expect { instance.call }.to change(SubmissionHistory, :count).by(1)
               expect(history.from_state).to eq "applicant_submitted"
               expect(history.to_state).to eq "applicant_ref_obtained"
               expect(history.success).to be true
@@ -116,7 +116,7 @@ module CCMS
             end
 
             it "stores the reqeust body in the submission history record" do
-              subject.call
+              instance.call
               expect(history.request).to be_soap_envelope_with(
                 command: "clientbim:ClientAddUpdtStatusRQ",
                 transaction_id: "20190301030405123456",
@@ -127,22 +127,24 @@ module CCMS
 
         context "when the operation is unsuccessful" do
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+          let(:fake_error) { error.sample }
 
           before do
-            fake_error = error.sample
-            expect_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(fake_error, "oops")
-            expect { subject.call }.to raise_error(fake_error, "oops")
+            allow_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(fake_error, "oops")
           end
 
           it "increments the poll count" do
+            expect { instance.call }.to raise_error(fake_error, "oops")
             expect(submission.applicant_poll_count).to eq 1
           end
 
           it "does not change state" do
+            expect { instance.call }.to raise_error(fake_error, "oops")
             expect(submission.aasm_state).to eq "applicant_submitted"
           end
 
           it "records the error in the submission history" do
+            expect { instance.call }.to raise_error(fake_error, "oops")
             expect(SubmissionHistory.count).to eq 1
             expect(history.from_state).to eq "applicant_submitted"
             expect(history.to_state).to eq "failed"

@@ -75,7 +75,7 @@ module CCMS
 
         it "calls the savon soap client" do
           expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
-          expect(requestor).to receive(:soap_client).and_return(soap_client_double)
+          allow(requestor).to receive(:soap_client).and_return(soap_client_double)
           requestor.call
         end
 

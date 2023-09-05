@@ -60,7 +60,7 @@ module CCMS
         let(:expected_xml) { requestor.__send__(:request_xml) }
 
         before do
-          expect(requestor).to receive(:soap_client).and_return(soap_client_double)
+          allow(requestor).to receive(:soap_client).and_return(soap_client_double)
         end
 
         it "calls the savon soap client" do

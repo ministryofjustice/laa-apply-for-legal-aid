@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
-  subject { described_class.new(submission) }
+  subject(:instance) { described_class.new(submission) }
 
   let(:legal_aid_application) do
     create(:legal_aid_application,
@@ -63,31 +63,31 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
 
     it "creates a DocumentUploadRequestor object for each document to be uploaded" do
       expect(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).exactly(submission.submission_documents.count).times
-      subject.call
+      instance.call
     end
 
     it "encodes each document as base64" do
       expect(Base64).to receive(:strict_encode64).exactly(submission.submission_documents.count).times
-      subject.call
+      instance.call
     end
 
     it "updates the status for each document to uploaded" do
-      subject.call
+      instance.call
       submission.submission_documents.each do |document|
         expect(document.status).to eq "uploaded"
       end
     end
 
     it "changes the submission state to completed" do
-      expect { subject.call }.to change(submission, :aasm_state).to "completed"
+      expect { instance.call }.to change(submission, :aasm_state).to "completed"
     end
 
     it "writes a history record for each document and on completion" do
-      expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(5)
+      expect { instance.call }.to change(CCMS::SubmissionHistory, :count).by(5)
     end
 
     it "writes a history record on completion that updates the state" do
-      subject.call
+      instance.call
       expect(history.from_state).to eq "case_created"
       expect(history.to_state).to eq "completed"
       expect(history.success).to be true
@@ -100,23 +100,25 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
 
     context "and the operation fails due to a CCMS::CCMSError exception" do
       let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+      let(:fake_error) { error.sample }
 
       before do
-        fake_error = error.sample
         allow(document_upload_requestor).to receive(:call).and_raise(fake_error, "this document submission has failed")
-        expect { subject.call }.to raise_error(CCMS::CCMSError, /The following documents failed to upload:/)
       end
 
       it "does not change the submission state" do
+        expect { instance.call }.to raise_error(CCMS::CCMSError, /The following documents failed to upload:/)
         expect(submission.reload.aasm_state).to eq "case_created"
       end
 
       it "writes a history record for each document and on completion" do
+        expect { instance.call }.to raise_error(CCMS::CCMSError, /The following documents failed to upload:/)
         submission_history = submission.submission_history
         expect(submission_history.count).to eq 5
       end
 
       it "writes a history record on completion that updates the state" do
+        expect { instance.call }.to raise_error(CCMS::CCMSError, /The following documents failed to upload:/)
         expect(first_history.from_state).to eq "case_created"
         expect(first_history.to_state).to eq "failed"
         expect(first_history.success).to be false
@@ -125,6 +127,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
       end
 
       it "writes a history record on completion that updates the state" do
+        expect { instance.call }.to raise_error(CCMS::CCMSError, /The following documents failed to upload:/)
         expect(history.from_state).to eq "case_created"
         expect(history.to_state).to eq "failed"
         expect(history.success).to be false
@@ -137,15 +140,16 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
       before do
         allow_any_instance_of(CCMS::Parsers::DocumentUploadResponseParser).to receive(:success?).and_return(false)
         allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
-        expect { subject.call }.to raise_error(CCMS::CCMSError)
       end
 
       it "writes a history record for each document and on completion" do
+        expect { instance.call }.to raise_error(CCMS::CCMSError)
         submission_history = submission.submission_history
         expect(submission_history.count).to eq 5
       end
 
       it "writes a history record on completion that updates the state" do
+        expect { instance.call }.to raise_error(CCMS::CCMSError)
         expect(history.from_state).to eq "case_created"
         expect(history.to_state).to eq "failed"
         expect(history.success).to be false
