@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe OpponentHelper do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:individual_opponent) { create(:opponent, :for_individual, legal_aid_application:) }
-  let(:organisation_opponent) { create(:opponent, :for_organisation, legal_aid_application:, organisation_name: "Mid Beds Council", organisation_ccms_code: "LA", organisation_description: "Local Authority") }
+  let(:organisation_opponent) { create(:opponent, :for_organisation, legal_aid_application:, organisation_name: "Mid Beds Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority") }
 
   describe ".opponent_url" do
     context "when opponent has type Individual" do

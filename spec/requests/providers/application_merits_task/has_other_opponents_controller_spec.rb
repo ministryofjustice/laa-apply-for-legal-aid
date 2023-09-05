@@ -18,7 +18,7 @@ module Providers
 
         before do
           create(:opponent, legal_aid_application: application)
-          create(:opponent, :for_organisation, organisation_name: "Mid Beds Council", organisation_ccms_code: "LA", organisation_description: "Local Authority", legal_aid_application: application)
+          create(:opponent, :for_organisation, organisation_name: "Mid Beds Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority", legal_aid_application: application)
         end
 
         it "returns success" do

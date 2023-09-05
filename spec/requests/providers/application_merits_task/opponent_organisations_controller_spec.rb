@@ -51,7 +51,7 @@ module Providers
 
           it "displays opponent's details" do
             expect(response.body).to include(html_compare(opponent.name))
-            expect(response.body).to include(html_compare(opponent.description))
+            expect(response.body).to include(html_compare(opponent.ccms_type_text))
           end
         end
 
@@ -70,7 +70,7 @@ module Providers
           )
         end
 
-        let!(:opponent) { create(:opponent, :for_organisation, legal_aid_application:, organisation_name: "Mid Bedfordshire Council", organisation_ccms_code: "GOVT", organisation_description: "Government Department") }
+        let!(:opponent) { create(:opponent, :for_organisation, legal_aid_application:, organisation_name: "Mid Bedfordshire Council", organisation_ccms_type_code: "GOVT", organisation_ccms_type_text: "Government Department") }
 
         let(:params) do
           {
@@ -93,7 +93,7 @@ module Providers
           expect { patch_organisation }.not_to change(::ApplicationMeritsTask::Organisation, :count)
           opponent.opposable.reload
           expect(opponent.opposable.name).to eql "Central Bedfordshire Council"
-          expect(opponent.opposable.ccms_code).to eql "LA"
+          expect(opponent.opposable.ccms_type_code).to eql "LA"
         end
 
         it "sets the task to complete" do

@@ -12,6 +12,6 @@ module OpponentHelper
   end
 
   def opponent_type_description(opponent)
-    opponent.type == "Individual" ? opponent.type : opponent.description
+    opponent.type == "Individual" ? opponent.type : opponent.ccms_type_text
   end
 end
