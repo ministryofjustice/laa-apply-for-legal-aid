@@ -12,12 +12,7 @@
   </div>
   <% unless read_only %>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
-      <p>
-        <%= link_to_accessible(
-              t("generic.change"), url,
-              class: "govuk-link change-link", suffix: t(".employment")
-            ) %>
-      </p>
+      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t('.employment')}") %></p>
     </div>
   <% end %>
 </div>
