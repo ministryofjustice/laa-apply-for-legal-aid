@@ -12,9 +12,7 @@ module ApplicationMeritsTask
              :ccms_child?,
              :ccms_opponent_relationship_to_case,
              :name,
-             :ccms_code,
              :ccms_type_code,
-             :description,
              :ccms_type_text,
              :type,
              to: :opposable
