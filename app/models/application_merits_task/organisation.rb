@@ -4,9 +4,6 @@ module ApplicationMeritsTask
 
     delegate :generate_ccms_opponent_id, :ccms_opponent_id, to: :opponent
 
-    alias_attribute :ccms_type_code, :ccms_code
-    alias_attribute :ccms_type_text, :description
-
     def ccms_relationship_to_case
       "OPP"
     end

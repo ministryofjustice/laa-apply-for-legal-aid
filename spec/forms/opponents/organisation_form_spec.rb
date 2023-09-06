@@ -64,8 +64,6 @@ RSpec.describe Opponents::OrganisationForm, :vcr, type: :form do
 
         expect(organisation_form.model).to have_attributes(
           name: "Central Beds Council",
-          ccms_code: "LA",
-          description: "Local Authority",
           ccms_type_code: "LA",
           ccms_type_text: "Local Authority",
         )
