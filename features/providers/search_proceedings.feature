@@ -18,8 +18,8 @@ Feature: Search proceedings
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
     And I should be on a page showing "What does your client want legal aid for?"
-    When the search for "cakes" is not successful
-    Then the result list on page returns a "No results found." message
+    When I search for proceeding type "cakes"
+    Then the proceeding type result list on page returns a "No results found." message
 
   @javascript @vcr
   Scenario: I am able to clear proceeding on the proceeding page

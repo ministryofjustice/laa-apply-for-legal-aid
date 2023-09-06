@@ -26,3 +26,11 @@ Then(/^I should (see|not see) regex (.*?)$/) do |visible, text|
     expect(page).not_to have_content(/#{text}/)
   end
 end
+
+When("I search for organisation {string}") do |search_terms|
+  fill_in("organisation-search-input", with: search_terms)
+end
+
+Then("the organisation result list on page returns a {string} message") do |string|
+  expect(page).to have_selector(".no-organisation-items", text: string, visible: :visible)
+end

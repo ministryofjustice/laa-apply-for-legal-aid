@@ -252,9 +252,13 @@ Feature: Merits task list
     When I click 'Save and continue'
     Then I should be on a page showing "Is the opponent an individual or an organisation?"
     When I choose a 'An organisation' radio button
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
-    When I fill "Name" with "Central Beds Council"
-    Then I select an organisation type 'Local Authority'
-    When I click 'Save and continue'
-    Then I should be on a page showing "You have added 2 opponents"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which organisation is an opponent in the case?"
+    When I search for organisation "cakes"
+    Then the organisation result list on page returns a "No results found." message
+
+
+    # When I fill "Name" with "Central Beds Council"
+    # Then I select an organisation type 'Local Authority'
+    # When I click 'Save and continue'
+    # Then I should be on a page showing "You have added 2 opponents"

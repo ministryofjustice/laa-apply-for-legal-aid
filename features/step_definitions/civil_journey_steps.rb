@@ -831,12 +831,12 @@ Then("I click on the View statements and add transactions link for {string}") do
   end
 end
 
-When("the search for {string} is not successful") do |proceeding_search|
-  fill_in("proceeding-search-input", with: proceeding_search)
+When("I search for proceeding type {string}") do |search_terms|
+  fill_in("proceeding-search-input", with: search_terms)
 end
 
-Then("the result list on page returns a {string} message") do |string|
-  expect(page).to have_content(string)
+Then("the proceeding type result list on page returns a {string} message") do |string|
+  expect(page).to have_selector(".no-proceeding-items", text: string, visible: :visible)
 end
 
 Then("I visit received benefit confirmation page") do
