@@ -861,7 +861,7 @@ en:
             housing_benefit:
               "yes": "Yes"
               "no": "No"
-          page_heading: Does your client receive Housing Benefit?
+          page_heading: "Does %{individual} get Housing Benefit?"
       regular_incomes:
         show:
           page_title: Which of these payments does your client get?
