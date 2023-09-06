@@ -295,7 +295,7 @@ en:
         new_limit_reasons: Reason
       housing_benefit:
         heading: Housing Benefit
-        does_your_client: Does your client receive Housing Benefit?
+        does_your_client: Does your client get Housing Benefit?
       substantive_costs:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested

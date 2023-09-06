@@ -80,12 +80,7 @@ Feature: partner_means_assessment full journey
     And I fill "Rent or mortgage" with "100"
     And I choose the "Weekly" frequency for "Rent or mortgage"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client receive Housing Benefit?"
-
-    When I choose "No"
-    And I click "Save and continue"
     Then I should be on a page with title "Select payments your client pays in cash"
-    And I should see "Housing payments"
 
     When I select "Housing payments"
     And I record monthly payments of 110 for "Rent or mortgage"
@@ -137,6 +132,10 @@ Feature: partner_means_assessment full journey
     And I should not see "Housing payments"
 
     When I select "None of the above"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client get Housing Benefit?"
+
+    When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client or their partner have any dependants?"
 

@@ -68,9 +68,53 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
         expect { request }.to change { legal_aid_application.reload.no_cash_outgoings }.from(nil).to(false)
       end
 
-      it "redirects to has dependants page" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+      context "with no housing payments selected for either applicant or partner" do
+        it "redirects to has dependants page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        end
+      end
+
+      context "when partner has rent or mortgage as an outgoing category" do
+        let(:transaction_type) { create(:transaction_type, :rent_or_mortgage) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+        let(:legal_aid_application_transaction_type) do
+          create(:legal_aid_application_transaction_type,
+                 legal_aid_application_id: legal_aid_application.id,
+                 transaction_type_id: transaction_type.id,
+                 owner_type: "Partner", owner_id: legal_aid_application.partner.id)
+        end
+
+        before do
+          legal_aid_application.legal_aid_application_transaction_types << legal_aid_application_transaction_type
+        end
+
+        it "redirects to the housing benefit page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+        end
+      end
+
+      context "when applicant did manual bank upload and selected housing payments" do
+        let(:transaction_type) { create(:transaction_type, :rent_or_mortgage) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+        let(:legal_aid_application_transaction_type) do
+          create(:legal_aid_application_transaction_type,
+                 legal_aid_application_id: legal_aid_application.id,
+                 transaction_type_id: transaction_type.id,
+                 owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
+        end
+
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
+          legal_aid_application.legal_aid_application_transaction_types << legal_aid_application_transaction_type
+        end
+
+        it "redirects to the housing benefit page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+        end
       end
     end
 

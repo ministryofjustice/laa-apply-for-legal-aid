@@ -76,10 +76,81 @@ RSpec.describe Providers::Means::HousingBenefitsController do
         expect(response).to redirect_to(error_path(:access_denied))
       end
     end
+
+    context "when the applicant has housing outgoing category" do
+      before do
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+      end
+
+      it "renders the correct content" do
+        _housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :rent_or_mortgage)
+        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type])
+        laa_transaction_type = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
+                                                                               transaction_type_id: transaction_type.id,
+                                                                               owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
+
+        legal_aid_application.legal_aid_application_transaction_types << laa_transaction_type
+        login_as legal_aid_application.provider
+
+        get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
+        expect(response.body).to include(I18n.t("providers.means.housing_benefits.show.page_heading", individual: I18n.t("generic.client")))
+      end
+    end
+
+    context "when the partner has housing outgoing category" do
+      before do
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+      end
+
+      it "renders the correct content" do
+        _housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :rent_or_mortgage)
+        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type])
+        laa_transaction_type = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
+                                                                               transaction_type_id: transaction_type.id,
+                                                                               owner_type: "Partner", owner_id: legal_aid_application.partner.id)
+
+        legal_aid_application.legal_aid_application_transaction_types << laa_transaction_type
+        login_as legal_aid_application.provider
+
+        get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
+        expect(response.body).to include(I18n.t("providers.means.housing_benefits.show.page_heading", individual: I18n.t("generic.partner")))
+      end
+    end
+
+    context "when both the applicant and the partner have housing outgoing category" do
+      before do
+        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
+      end
+
+      it "renders the correct content" do
+        _housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :rent_or_mortgage)
+        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type])
+        laa_transaction_type_applicant = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
+                                                                                         transaction_type_id: transaction_type.id,
+                                                                                         owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
+        laa_transaction_type_partner = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
+                                                                                       transaction_type_id: transaction_type.id,
+                                                                                       owner_type: "Partner", owner_id: legal_aid_application.partner.id)
+
+        legal_aid_application.legal_aid_application_transaction_types << laa_transaction_type_applicant
+        legal_aid_application.legal_aid_application_transaction_types << laa_transaction_type_partner
+
+        legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+        legal_aid_application.update!(provider_received_citizen_consent: false)
+
+        login_as legal_aid_application.provider
+
+        get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
+        expect(response.body).to include(I18n.t("providers.means.housing_benefits.show.page_heading", individual: I18n.t("generic.client_or_partner")))
+      end
+    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/housing_benefits" do
-    it "updates the application and redirects to the cash outgoings page" do
+    it "updates the application and redirects to the dependants page" do
       legal_aid_application = create(
         :legal_aid_application,
         applicant_in_receipt_of_housing_benefit: nil,
@@ -98,7 +169,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
       patch(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application), params:)
 
       expect(legal_aid_application.reload.applicant_in_receipt_of_housing_benefit).to be false
-      expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+      expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
     end
 
     context "when the form is invalid" do
