@@ -36,4 +36,6 @@ updates:
     npm-jest:
       # Define patterns to include dependencies in the group (based on # dependency name)
       patterns:
+        - "babel*"
         - "jest*"  # A wildcard string that matches multiple dependency names syt
+        - "stylelint*"
