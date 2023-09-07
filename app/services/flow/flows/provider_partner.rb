@@ -122,6 +122,7 @@ module Flow
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
           forward: :partner_regular_outgoings,
+          check_answers: :check_income_answers,
         },
         partner_regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_partners_regular_outgoings_path(application) },

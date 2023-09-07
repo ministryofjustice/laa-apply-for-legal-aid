@@ -32,7 +32,13 @@
       individual: "Partner",
     ) %>
 
-<%= render("shared/check_answers/student_finance", read_only: false) %>
+<%= render(
+      "shared/check_answers/student_finance",
+      individual_text: "the partner",
+      individual: @legal_aid_application.partner,
+      url: providers_legal_aid_application_partners_student_finance_path(@legal_aid_application),
+      read_only: false,
+    ) %>
 
 <h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
 
