@@ -105,7 +105,7 @@ module Flow
             if application.opponents.count.positive?
               :has_other_opponents
             else
-              :opponent_individuals
+              Setting.opponent_organisations? ? :opponent_types : :opponent_individuals
             end
           },
         },
