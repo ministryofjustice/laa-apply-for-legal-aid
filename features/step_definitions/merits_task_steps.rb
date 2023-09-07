@@ -34,3 +34,26 @@ end
 Then("the organisation result list on page returns a {string} message") do |string|
   expect(page).to have_selector(".no-organisation-items", text: string, visible: :visible)
 end
+
+# NOTE: this step does not work unless put after the step "the organisation suggestions include {string}" :(
+Then(/^organisation suggestions has (\d+) result[s]?$/) do |count|
+  expect(page).to have_selector(".organisation-item", visible: :visible, count:)
+end
+
+Then("organisation search field is empty") do
+  expect(page).to have_field("organisation-search-input", with: "")
+end
+
+Then("organisation search field is not visible") do
+  expect(page).to have_field("organisation-search-input", visible: :hidden)
+end
+
+When("the organisation suggestions include {string}") do |string|
+  within("#organisation-list") do
+    expect(page).to have_content(/#{string}/m)
+  end
+end
+
+Then(/^I can see the highlighted search term "(.*)" (\d+) time[s]?$/) do |string, count|
+  expect(page).to have_selector(".organisation-item .highlight", visible: :visible, text: string, count:)
+end
