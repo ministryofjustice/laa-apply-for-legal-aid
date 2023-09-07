@@ -1,4 +1,5 @@
 <%= render "providers/means/dependants/form",
            form: @form,
            page_title: t(".page_title"),
+           has_partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
            form_path: providers_legal_aid_application_means_dependant_path(@legal_aid_application, @form.model) %>

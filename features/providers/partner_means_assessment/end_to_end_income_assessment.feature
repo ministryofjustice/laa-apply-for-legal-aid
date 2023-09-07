@@ -32,7 +32,7 @@ Feature: partner_means_assessment full journey
 
     When I select "The partner makes none of these payments"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client have any dependants?"
+    Then I should be on a page with title "Does your client or their partner have any dependants?"
 
     When I choose "No"
     And I click "Save and continue"
@@ -129,7 +129,6 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page with title "Which of these payments does the partner pay?"
 
-
     When I check "Childcare payments"
     And I fill "Child care" with "200"
     And I choose the "Weekly" frequency for "Child care"
@@ -139,7 +138,7 @@ Feature: partner_means_assessment full journey
 
     When I select "None of the above"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client have any dependants?"
+    Then I should be on a page with title "Does your client or their partner have any dependants?"
 
     When I choose "No"
     And I click "Save and continue"

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::HasDependantsController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
