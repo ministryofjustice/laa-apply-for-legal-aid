@@ -43,10 +43,20 @@
   </section>
 
   <section class="print-no-break">
-    <%= render("shared/check_answers/income_cash_payments", read_only: true, individual: "Applicant") %>
+    <%= render(
+          "shared/check_answers/income_cash_payments",
+          read_only: true,
+          individual: "Applicant",
+          individual_with_determiner: "your client",
+        ) %>
   </section>
 
-  <%= render "shared/check_answers/student_finance", read_only: true %>
+  <%= render(
+        "shared/check_answers/student_finance",
+        individual_text: "your client",
+        individual: @legal_aid_application.applicant,
+        read_only: true,
+      ) %>
 
   <section class="print-no-break">
     <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>

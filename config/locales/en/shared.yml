@@ -397,7 +397,7 @@ en:
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
       income_cash_payments:
-        heading: Payments your client receives in cash
+        heading: Payments %{individual_with_determiner} receives in cash
       outgoings_cash_payments:
         heading: Payments your client makes in cash
       proceedings_details:
