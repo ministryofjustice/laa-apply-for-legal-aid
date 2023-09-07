@@ -386,7 +386,7 @@ en:
         child: Child
       full_employment_details:
         employment: Employment income
-        full_employment_details: Your client's employment details
+        full_employment_details: "%{individual}'s employment details"
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:

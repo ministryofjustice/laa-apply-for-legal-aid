@@ -8,12 +8,22 @@
 
 <% if @legal_aid_application.applicant.hmrc_employment_income? %>
   <% if @legal_aid_application.applicant.has_multiple_employments? %>
-    <%= render "shared/check_answers/full_employment_details", read_only: false, partner: false %>
+    <%= render(
+          "shared/check_answers/full_employment_details",
+          individual: "Your client",
+          read_only: false,
+          partner: false,
+        ) %>
   <% else %>
     <%= render "shared/check_answers/employed_income", read_only: false %>
   <% end %>
 <% elsif @legal_aid_application.applicant.employed? %>
-  <%= render "shared/check_answers/full_employment_details", read_only: false, partner: false %>
+  <%= render(
+        "shared/check_answers/full_employment_details",
+        individual: "Your client",
+        read_only: false,
+        partner: false,
+      ) %>
 <% end %>
 
 <% if bank_statement_upload %>
