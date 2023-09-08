@@ -31,6 +31,31 @@ RSpec.describe Providers::Partners::EmployedController do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context "when the application is in use_ccms state" do
+      let!(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :with_non_passported_state_machine,
+          :with_proceedings,
+          :with_applicant_and_partner,
+          :use_ccms,
+        )
+      end
+
+      before do
+        login_as legal_aid_application.provider
+        get_request
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "resets the state to assessing_partner_means" do
+        expect(legal_aid_application.reload.state).to match("assessing_partner_means")
+      end
+    end
   end
 
   describe "POST /providers/applications/:legal_aid_application_id/partners/employed" do
