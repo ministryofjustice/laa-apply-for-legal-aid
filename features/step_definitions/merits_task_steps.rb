@@ -57,3 +57,7 @@ end
 Then(/^I can see the highlighted search term "(.*)" (\d+) time[s]?$/) do |string, count|
   expect(page).to have_selector(".organisation-item .highlight", visible: :visible, text: string, count:)
 end
+
+Then("I select an organisation type {string} from the list") do |text|
+  select(text, from: "application-merits-task-opponent-organisation-type-ccms-code-field")
+end
