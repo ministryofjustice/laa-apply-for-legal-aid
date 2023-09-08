@@ -100,6 +100,12 @@ function deselectPreviousOrganisationItem () {
   if (selected !== null) { selected.checked = false }
 }
 
+function removeMatchingHtml (obj, regexpsForReplacment) {
+  regexpsForReplacment.forEach(function (regExp) {
+    obj.innerHTML = obj.innerHTML.replace(regExp, '')
+  })
+}
+
 // Find the existing hidden organisation items
 // If they are one of the search matches returned from the V1 api, remove the hidden class
 // and highlight the search terms in the item text
@@ -116,19 +122,33 @@ function showResults (results, inputText) {
       // matches the user's search criteria
       const label = element.querySelector('label')
       const hint = element.querySelector('.govuk-hint')
+      const highlightTagStart = '<mark class="highlight">'
+      const highlightTagEnd = '</mark>'
+      const highlightStartRegExp = RegExp(highlightTagStart, 'gi')
+      const highlightEndRegExp = RegExp(highlightTagEnd, 'gi')
 
-      // Remove any existing highlighting
-      label.innerHTML = label.innerHTML.replace(/<mark class="highlight">/gi, '')
-      label.innerHTML = label.innerHTML.replace(/<\/mark>/gi, '')
-      hint.innerHTML = hint.innerHTML.replace(/<mark class="highlight">/gi, '')
-      hint.innerHTML = hint.innerHTML.replace(/<\/mark>/gi, '')
+      // Remove existing highlighting
+      removeMatchingHtml(label, [highlightStartRegExp, highlightEndRegExp])
+      removeMatchingHtml(hint, [highlightStartRegExp, highlightEndRegExp])
 
-      // Highlight any text that matches the user's input
+      // Highlight text that matches the user's input
       const terms = inputText.split(' ')
       terms.forEach((term) => {
-        const regExp = RegExp(term.trim(), 'gi')
-        label.innerHTML = label.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
-        hint.innerHTML = hint.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
+        // Negative lookahead conjuction AND negative lookbehind conjuction (non-capturing)
+        // required to exclude any previous search term highlighting which can result in partial HTML
+        // being output to the screen.
+        //
+        // However, this means only the first matched term will be highlighted per object/string/phrase
+        // and this puts it out of sync with the actual fuzzy search matching which works and matches
+        // on a second term even if it is only 1 character.
+        // example: try searching for "ri prison" and only "ri" will be highlighted, despite "prison"
+        // being the type.
+        //
+        // TODO: regex that does not highlight inside a highlight, thereby allowing displaying all matching uniq terms per phrase
+        //
+        const regExp = RegExp('(?!.*' + highlightTagStart + '.*)' + '(?!.*' + highlightTagEnd + '.*)' + '(' + term.trim() + ')' + '(?<!.*' + highlightTagStart + '.*)' + '(?<!.*' + highlightTagEnd + '.*)', 'gi')
+        label.innerHTML = label.innerHTML.replace(regExp, highlightTagStart + '$&' + highlightTagEnd)
+        hint.innerHTML = hint.innerHTML.replace(regExp, highlightTagStart + '$&' + highlightTagEnd)
       })
 
       // move to top of list, but after previously added elements
