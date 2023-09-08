@@ -49,7 +49,7 @@ Feature: passported_journey completes application
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'

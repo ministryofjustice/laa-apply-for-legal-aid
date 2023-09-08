@@ -12,7 +12,7 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
@@ -84,14 +84,14 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
     Then I should be on a page showing "You have added 1 opponent"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     When I fill "First Name" with "Jane"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
@@ -131,7 +131,7 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
@@ -182,7 +182,7 @@ Feature: Merits task list
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'

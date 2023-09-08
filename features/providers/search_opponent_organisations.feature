@@ -8,7 +8,7 @@ Background: User is on existing opponent organisation search page
   Then I should be on a page showing "Is the opponent an individual or an organisation?"
   When I choose a 'An organisation' radio button
   And I click 'Save and continue'
-  Then I should be on a page showing "Which organisation is an opponent in the case?"
+  Then I should be on a page with title "Opponent"
 
 @javascript @vcr
 Scenario: No results returned is seen on screen when non-existant organisation search entered

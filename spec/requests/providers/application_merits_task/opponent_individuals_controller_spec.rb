@@ -22,7 +22,7 @@ module Providers
           end
 
           it "displays the form to add new children" do
-            expect(response.body).to include(html_compare("Opponent's name"))
+            expect(response.body).to include(html_compare("Opponent"))
             expect(response.body).to include("First name")
             expect(response.body).to include("Last name")
           end
@@ -50,7 +50,7 @@ module Providers
             expect(response).to have_http_status(:ok)
           end
 
-          it "displays opponent's name" do
+          it "displays Opponent" do
             expect(response.body).to include(html_compare(opponent.first_name))
           end
         end

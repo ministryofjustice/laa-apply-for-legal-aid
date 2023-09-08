@@ -69,7 +69,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I enter the 'occurred' date of 2 days ago
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page showing "Opponent"
     And I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
 

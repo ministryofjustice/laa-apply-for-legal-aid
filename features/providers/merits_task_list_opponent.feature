@@ -11,7 +11,7 @@ Feature: Merits task list opponent
   Scenario: I add an opponent individual
     When I choose a 'An individual' radio button
     Then I click 'Save and continue'
-    Then I should be on a page showing "Opponent's name"
+    Then I should be on a page with title "Opponent"
     When I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
     When I click 'Save and continue'
@@ -25,7 +25,7 @@ Feature: Merits task list opponent
   Scenario: I add an opponent existing organisation
     When I choose a 'An organisation' radio button
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which organisation is an opponent in the case?"
+    Then I should be on a page with title "Opponent"
     When I search for organisation "bab"
     Then the organisation suggestions include "Babergh District Council\nLocal Authority"
     And I choose a 'Babergh District Council' radio button
@@ -40,7 +40,7 @@ Feature: Merits task list opponent
   Scenario: I add an opponent new organisation
     When I choose a 'An organisation' radio button
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which organisation is an opponent in the case?"
+    Then I should be on a page with title "Opponent"
     And I click link "enter manually"
     Then I should be on a page with title "Opponent"
     When I fill "application-merits-task-opponent-name-field" with "My Organisation"

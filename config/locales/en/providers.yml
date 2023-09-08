@@ -466,7 +466,7 @@ en:
           organisation: An organisation
       opponent_individuals:
         show: &new
-          page_title: Opponent's name
+          page_title: Opponent
         new: *new
         form:
           first_name: First name
@@ -478,10 +478,10 @@ en:
           clear_search: Clear search
           enter_manually: enter manually
           enter_manually_html: If you can not find the organisation %{href}
-          heading_1: Which organisation is an opponent in the case?
-          heading_2: Search for opponent organisations
+          heading_1: Opponent
+          heading_2: Search for an organisation
           no_results: No results found.
-          search_help_example: Use words or partial words of 3 or more characters, in any order.
+          search_help_example: Enter 3 or more letters to start searching. Select one organisation at a time. You can add more later.
           accessibility_message: Tab out of this box to select returned options
           accessibility_message_safari_browser: "You are in a search field, tab out to see results"
           you_have_selected: You have selected %{count}
@@ -493,7 +493,7 @@ en:
           search_hint: Using common terms, like "council", will return large lists. Be specific.
       opponent_new_organisations:
         show: &new
-          page_title: Opponent (new)
+          page_title: Opponent
         new: *new
         form:
           name: Organisation name
