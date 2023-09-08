@@ -112,6 +112,7 @@ class BaseStateMachine < ApplicationRecord
                     provider_confirming_applicant_eligibility
                     applicant_entering_means
                     provider_assessing_means
+                    assessing_partner_means
                     use_ccms
                   ],
                   to: :use_ccms,

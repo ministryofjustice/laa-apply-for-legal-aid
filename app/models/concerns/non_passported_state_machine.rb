@@ -72,6 +72,7 @@ class NonPassportedStateMachine < BaseStateMachine
                     provider_confirming_applicant_eligibility
                     provider_assessing_means
                     assessing_partner_means
+                    use_ccms
                   ],
                   to: :assessing_partner_means
     end
