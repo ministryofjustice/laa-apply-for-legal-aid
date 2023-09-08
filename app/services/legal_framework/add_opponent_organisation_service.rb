@@ -4,7 +4,6 @@ module LegalFramework
       @legal_aid_application = legal_aid_application
     end
 
-    # TODO: shall we rename attributes to match
     def call(lfa_organisation)
       ActiveRecord::Base.transaction do
         organisation = ApplicationMeritsTask::Organisation.create!(
