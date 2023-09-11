@@ -6,6 +6,7 @@ import Rails from '@rails/ujs'
 // require polyfills via core-js
 import 'core-js/stable'
 
+import './src/modules/organisations'
 import './src/modules/proceedings'
 import './src/admin-delete'
 import './src/bank_transactions'
