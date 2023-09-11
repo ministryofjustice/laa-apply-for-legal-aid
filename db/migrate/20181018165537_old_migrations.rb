@@ -11,7 +11,7 @@ class OldMigrations < ActiveRecord::Migration[5.2]
         create, schema:load, and seed.  If you need to run `rails db:migrate`
         then you will need to run `rails db:schema:load` must be run first
       OLDMIGRATIONERROR
-      raise StandardError, error_message
+      raise StandardError, error_message unless Rails.env.production?
     end
   end
 end
