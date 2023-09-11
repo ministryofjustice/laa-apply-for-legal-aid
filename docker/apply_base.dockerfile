@@ -1,8 +1,6 @@
 FROM ruby:3.2.2-alpine3.17
 MAINTAINER apply for legal aid team
 
-ENV KUBECTL_VERSION=1.22.3
-
 # fail early and print all commands
 RUN set -ex
 
@@ -32,9 +30,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-droid \
                   ttf-freefont \
                   ttf-liberation \
-                  bash \
-                  py3-pip
-RUN pip3 install awscli
+                  bash
 
 # Install Chromium and Puppeteer for PDF generation
 # Installs latest Chromium package available on Alpine (Chromium 108)
@@ -54,13 +50,6 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Install latest version of Puppeteer that works with Chromium 108
 RUN yarn add puppeteer@19.2.0
-
-# Install kubectl
-RUN curl -Lo /usr/local/bin/kubectl \
-        --retry 3 \
-        --retry-delay 3 \
-        --retry-connrefused \
-        https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
