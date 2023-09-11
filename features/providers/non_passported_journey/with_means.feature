@@ -77,6 +77,10 @@ Feature: non_passported_journey with means
     And I should see "Benefits None"
 
     When I click 'Save and continue'
+    Then I should be on a page with title "What you need to do"
+    And I should see "Tell us about your client's capital"
+
+    When I click 'Continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
     When I choose "No"
