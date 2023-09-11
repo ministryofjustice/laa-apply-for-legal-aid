@@ -38,6 +38,10 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
 
+    When I click "Save and continue"
+    Then I should be on a page with title "What you need to do"
+    And I should see "Tell us about your client and their partner's capital"
+
   @javascript
   Scenario: I am able to complete the income means assessment for client and partner to check your answers
     Given csrf is enabled
@@ -142,3 +146,7 @@ Feature: partner_means_assessment full journey
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "What you need to do"
+    And I should see "Tell us about your client and their partner's capital"

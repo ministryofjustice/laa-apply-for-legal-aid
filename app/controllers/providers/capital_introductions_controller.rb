@@ -3,8 +3,10 @@ module Providers
     include ApplicantDetailsCheckable
 
     def show
-      details_checked! unless details_checked?
-      legal_aid_application.provider_enter_means!
+      if legal_aid_application.passported?
+        details_checked! unless details_checked?
+        legal_aid_application.provider_enter_means!
+      end
     end
 
     def update
