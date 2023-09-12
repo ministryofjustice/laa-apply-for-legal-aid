@@ -14,6 +14,7 @@ en:
     client: your client
     client_means_caption: Client's means assessment
     client_or_partner: your client or their partner
+    client_and_partner: your client and their partner
     continue: Continue
     confirm: Are you sure?
     create_test_applications: Create test applications

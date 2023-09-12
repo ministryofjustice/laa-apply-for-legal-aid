@@ -1,5 +1,5 @@
 <%= page_template page_title: t(".h1-heading") do %>
-  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "your client and their partner" : "your client" %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? I18n.t("generic.client_and_partner") : I18n.t("generic.client") %>
 
   <div class="app-counter-list">
     <h2 class="govuk-heading-m app-counter"><%= t(".capital_list_heading", individual:) %></h2>
