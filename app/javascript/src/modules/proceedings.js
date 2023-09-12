@@ -154,7 +154,7 @@ function showResults (results, inputText) {
     })
     // the below alerts screen reader users that results appeared on the page
     const pluralizedMatches = pluralize(codes.length, 'match', 'matches')
-    ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move through options`
+    ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move to options`
   } else {
     show(document.querySelector('.no-proceeding-items'))
     ariaText = `No results found matching ${inputText}`
