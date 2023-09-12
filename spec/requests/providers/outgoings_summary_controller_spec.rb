@@ -95,7 +95,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
     end
   end
 
-  describe "POST /providers/income_summary" do
+  describe "POST /providers/outgoings_summary" do
     subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
 
     let(:applicant) { create(:applicant) }
@@ -108,7 +108,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
 
     before { subject }
 
-    it "redirects to the next page" do
+    it "redirects to the has_dependants page" do
       expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
     end
 

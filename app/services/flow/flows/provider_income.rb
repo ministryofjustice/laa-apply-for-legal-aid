@@ -139,9 +139,7 @@ module Flow
         regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoings_path(application) },
           forward: lambda do |application|
-            if application.housing_payments_for?("Applicant")
-              :housing_benefits
-            elsif application.applicant_outgoing_types?
+            if application.applicant_outgoing_types?
               :cash_outgoings
             elsif application.applicant.has_partner_with_no_contrary_interest?
               :partner_about_financial_means
@@ -149,20 +147,7 @@ module Flow
               :has_dependants
             end
           end,
-          check_answers: lambda do |application|
-            if application.housing_payments_for?("Applicant")
-              :housing_benefits
-            elsif application.outgoing_types?
-              :cash_outgoings
-            else
-              :check_income_answers
-            end
-          end,
-        },
-        housing_benefits: {
-          path: ->(application) { urls.providers_legal_aid_application_means_housing_benefits_path(application) },
-          forward: :cash_outgoings,
-          check_answers: :cash_outgoings,
+          check_answers: ->(application) { application.outgoing_types? ? :cash_outgoings : :check_income_answers },
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
@@ -174,14 +159,26 @@ module Flow
                 return :outgoings_summary
               end
             end
-
             if application.applicant.has_partner_with_no_contrary_interest?
               :partner_about_financial_means
+            elsif application.uploading_bank_statements? && application.housing_payments_for?("Applicant")
+              :housing_benefits
             else
               :has_dependants
             end
           end,
-          check_answers: ->(application) { application.uploading_bank_statements? ? :check_income_answers : :outgoings_summary },
+          check_answers: lambda do |application|
+            if application.uploading_bank_statements?
+              application.housing_payments_for?("Applicant") ? :housing_benefits : :check_income_answers
+            else
+              :outgoings_summary
+            end
+          end,
+        },
+        housing_benefits: {
+          path: ->(application) { urls.providers_legal_aid_application_means_housing_benefits_path(application) },
+          forward: :has_dependants,
+          check_answers: :check_income_answers,
         },
         check_income_answers: {
           path: ->(application) { urls.providers_legal_aid_application_means_check_income_answers_path(application) },

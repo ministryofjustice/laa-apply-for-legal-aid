@@ -1,9 +1,9 @@
 <%= form_with model: @form,
               url: providers_legal_aid_application_means_housing_benefits_path(@legal_aid_application),
               method: :patch do |f| %>
-  <%= page_template page_title: t(".page_heading"), template: :basic, form: f do %>
+  <%= page_template page_title: t(".page_heading", individual: @individual), template: :basic, form: f do %>
 
-    <%= f.govuk_radio_buttons_fieldset :transaction_type_ids, legend: { tag: "h1", size: "xl" } do %>
+    <%= f.govuk_radio_buttons_fieldset :transaction_type_ids, legend: { text: t(".page_heading", individual: @individual), tag: "h1", size: "xl" } do %>
 
       <%= f.govuk_radio_button :transaction_type_ids,
                                @form.housing_benefit_transaction_type.id,

@@ -50,7 +50,7 @@ Feature: Bank statement upload check your answers
 
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
-      | Does your client receive Housing Benefit? | Yes |
+      | Does your client get Housing Benefit? | Yes |
       | Amount | £1,200.00\nTotal in the last 3 months |
 
     When I click Check Your Answers Change link for "bank statements"
@@ -100,12 +100,12 @@ Feature: Bank statement upload check your answers
     And I choose "providers-means-regular-outgoings-form-maintenance-out-frequency-monthly-field"
 
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client receive Housing Benefit?"
-
-    And I click "Save and continue"
     Then I should be on a page with title "Select payments your client pays in cash"
 
     When I check "None of the above"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client get Housing Benefit?"
+
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "£500.00"
@@ -118,16 +118,15 @@ Feature: Bank statement upload check your answers
     And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-monthly-field"
 
     When I click "Save and continue"
-    Then I should be on the "housing_benefits" page showing "Does your client receive Housing Benefit?"
+    Then I should be on a page with title "Select payments your client pays in cash"
+
+    When I check "None of the above"
+    And I click "Save and continue"
+    Then I should be on the "housing_benefits" page showing "Does your client get Housing Benefit?"
 
     When I choose "Yes"
     And I enter amount "100"
     And I choose "Every week"
-
-    And I click "Save and continue"
-    Then I should be on a page with title "Select payments your client pays in cash"
-
-    When I check "None of the above"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 

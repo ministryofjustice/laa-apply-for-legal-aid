@@ -76,7 +76,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
 
         context "with income categories" do
           let(:income_types) { create_list(:transaction_type, 3, :credit_with_standard_name) }
-          let!(:legal_aid_application) do
+          let(:legal_aid_application) do
             create(:legal_aid_application, :with_applicant,
                    :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types)
           end
@@ -153,17 +153,67 @@ RSpec.describe Providers::Means::CashOutgoingsController do
           legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
-        context "with income and outgoing categories" do
-          let(:legal_aid_application) do
-            create(:legal_aid_application, :with_applicant,
-                   :with_non_passported_state_machine,
-                   :applicant_entering_means,
-                   transaction_types:)
+        context "when the application has no partner" do
+          it "redirects to the dependants page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          end
+        end
+
+        context "when the application has a partner with no contrary interest" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: []) }
+
+          it "redirects to the partner about financial means page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_partners_about_financial_means_path(legal_aid_application))
+          end
+        end
+
+        context "with rent_or_mortgage as an outgoing category and no partner" do
+          let(:transaction_type) { create(:transaction_type, :rent_or_mortgage) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+          let(:legal_aid_application_transaction_type) do
+            create(:legal_aid_application_transaction_type,
+                   legal_aid_application_id: legal_aid_application.id,
+                   transaction_type_id: transaction_type.id,
+                   owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
           end
 
+          before do
+            legal_aid_application.legal_aid_application_transaction_types << legal_aid_application_transaction_type
+          end
+
+          it "redirects to the housing benefit page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+          end
+        end
+
+        context "with rent_or_mortgage as an outgoing category and with a partner" do
+          let(:transaction_type) { create(:transaction_type, :rent_or_mortgage) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+          let(:legal_aid_application_transaction_type) do
+            create(:legal_aid_application_transaction_type,
+                   legal_aid_application_id: legal_aid_application.id,
+                   transaction_type_id: transaction_type.id,
+                   owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
+          end
+
+          before do
+            legal_aid_application.legal_aid_application_transaction_types << legal_aid_application_transaction_type
+          end
+
+          it "redirects to the partner about financial means page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_partners_about_financial_means_path(legal_aid_application))
+          end
+        end
+
+        context "without rent or mortgage as an outgoing category but with other income and outgoings categories" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means, transaction_types:) }
           let(:transaction_types) { [create(:transaction_type, :credit_with_standard_name), create(:transaction_type, :debit_with_standard_name)] }
 
-          it "redirects to has dependants page" do
+          it "redirects to the has dependants page" do
             request
             expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
           end
@@ -257,7 +307,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
           legal_aid_application.update!(provider_received_citizen_consent: true)
         end
 
-        it "redirects to income_summary" do
+        it "redirects to outgoings_summary" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
         end

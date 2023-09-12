@@ -11,7 +11,9 @@ en:
     back_to_your_applications: Back to your applications
     cancel: Cancel
     change: Change
+    client: your client
     client_means_caption: Client's means assessment
+    client_or_partner: your client or their partner
     continue: Continue
     confirm: Are you sure?
     create_test_applications: Create test applications
@@ -38,6 +40,7 @@ en:
     not_completed: Not completed
     not_provided: Not provided
     or: or
+    partner: the partner
     partner_means_caption: Partner's means assessment
     remove: Remove
     return_to_portal: Return to LAA portal
