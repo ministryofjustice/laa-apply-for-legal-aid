@@ -144,8 +144,6 @@ function showResults (results, inputText) {
         // example: try searching for "ri prison" and only "ri" will be highlighted, despite "prison"
         // being the type.
         //
-        // TODO: regex that does not highlight inside a highlight, thereby allowing displaying all matching uniq terms per phrase
-        //
         const regExp = RegExp('(?!.*' + highlightTagStart + '.*)' + '(?!.*' + highlightTagEnd + '.*)' + '(' + term.trim() + ')' + '(?<!.*' + highlightTagStart + '.*)' + '(?<!.*' + highlightTagEnd + '.*)', 'gi')
         label.innerHTML = label.innerHTML.replace(regExp, highlightTagStart + '$&' + highlightTagEnd)
         hint.innerHTML = hint.innerHTML.replace(regExp, highlightTagStart + '$&' + highlightTagEnd)
