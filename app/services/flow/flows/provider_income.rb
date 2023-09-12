@@ -147,7 +147,7 @@ module Flow
               :has_dependants
             end
           end,
-          check_answers: ->(application) { application.outgoing_types? ? :cash_outgoings : :check_income_answers },
+          check_answers: ->(application) { application.applicant_outgoing_types? ? :cash_outgoings : :check_income_answers },
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },

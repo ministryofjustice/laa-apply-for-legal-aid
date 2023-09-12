@@ -133,17 +133,15 @@ module Flow
               :has_dependants
             end
           end,
-          # to be added when CYA page is added
-          #
-          # check_answers: lambda do |application|
-          #   if application.partner.housing_payments?
-          #     :housing_benefits
-          #   elsif application.partner_outgoing_types?
-          #     :cash_outgoings
-          #   else
-          #     :check_income_answers
-          #   end
-          # end,
+          check_answers: lambda do |application|
+            if application.housing_payments_for?("Partner")
+              :partner_housing_benefits
+            elsif application.partner_outgoing_types?
+              :partner_cash_outgoings
+            else
+              :check_income_answers
+            end
+          end,
         },
         partner_cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_partners_cash_outgoing_path(application) },
