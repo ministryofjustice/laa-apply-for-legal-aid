@@ -48,9 +48,9 @@ RSpec.describe ErrorsController do
   end
 
   describe "GET /error/page_not_found" do
-    subject { get error_path(:page_not_found) }
+    subject(:get_error) { get error_path(:page_not_found) }
 
-    before { subject }
+    before { get_error }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
@@ -62,9 +62,9 @@ RSpec.describe ErrorsController do
   end
 
   describe "GET /error/assessment_already_completed" do
-    subject { get error_path(:assessment_already_completed) }
+    subject(:get_error) { get error_path(:assessment_already_completed) }
 
-    before { subject }
+    before { get_error }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
@@ -76,9 +76,9 @@ RSpec.describe ErrorsController do
   end
 
   describe "GET /error/access_denied" do
-    subject { get error_path(:access_denied) }
+    subject(:get_error) { get error_path(:access_denied) }
 
-    before { subject }
+    before { get_error }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)

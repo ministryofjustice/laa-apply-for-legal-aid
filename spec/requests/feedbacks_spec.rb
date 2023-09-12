@@ -4,7 +4,7 @@ require "sidekiq/testing"
 RSpec.describe "FeedbacksController" do
   describe "POST /feedback" do
     Rack::Attack.enabled = false
-    subject { post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page } }
+    subject(:post_request) { post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page } }
 
     let(:params) { { feedback: attributes_for(:feedback) } }
     let(:feedback) { Feedback.order(created_at: :asc).last }
@@ -33,11 +33,11 @@ RSpec.describe "FeedbacksController" do
     describe "creation of feedback record" do
       context "with any type of user" do
         it "create a feedback" do
-          expect { subject }.to change(Feedback, :count).by(1)
+          expect { post_request }.to change(Feedback, :count).by(1)
         end
 
         it "applies params to new feedback" do
-          subject
+          post_request
           expect(feedback.done_all_needed).to eq(feedback_params[:done_all_needed])
           expect(feedback.satisfaction).to eq(feedback_params[:satisfaction])
           expect(feedback.difficulty).to eq(feedback_params[:difficulty])
@@ -51,7 +51,7 @@ RSpec.describe "FeedbacksController" do
         before { sign_in provider }
 
         it "adds provider-specific data to feedback record" do
-          subject
+          post_request
           expect(feedback.source).to eq "Provider"
           expect(feedback.email).to eq provider.email
           expect(feedback.originating_page).to eq URI(address_lookup_page).path.split("/").last
@@ -63,7 +63,7 @@ RSpec.describe "FeedbacksController" do
           end
 
           it "adds provider-specific data to feedback record" do
-            subject
+            post_request
             expect(feedback.source).to eq "Provider"
             expect(feedback.email).to eq provider.email
             expect(feedback.originating_page).to eq URI(address_lookup_page).path.split("/").last
@@ -76,7 +76,7 @@ RSpec.describe "FeedbacksController" do
           end
 
           it "schedules an email without an application id" do
-            expect { subject }.to change(ScheduledMailing, :count).by(1)
+            expect { post_request }.to change(ScheduledMailing, :count).by(1)
             rec = ScheduledMailing.first
 
             expect(rec.mailer_klass).to eq "FeedbackMailer"
@@ -88,7 +88,7 @@ RSpec.describe "FeedbacksController" do
           end
 
           it "adds provider-specific data to feedback record" do
-            subject
+            post_request
             expect(feedback.source).to eq "Provider"
             expect(feedback.email).to eq provider.email
             expect(feedback.originating_page).to eq URI(address_lookup_page).path.split("/").last
@@ -101,7 +101,7 @@ RSpec.describe "FeedbacksController" do
         let(:params) { { feedback: attributes_for(:feedback), signed_out: true } }
 
         it "adds signed-out provider specific attributes" do
-          subject
+          post_request
           expect(feedback.source).to eq "Provider"
           expect(feedback.email).to eq provider.email
           expect(feedback.originating_page).to eq "/providers/sign_out?locale=en"
@@ -117,7 +117,7 @@ RSpec.describe "FeedbacksController" do
         end
 
         it "adds applicant specific data" do
-          subject
+          post_request
           expect(feedback.source).to eq "Applicant"
           expect(feedback.email).to eq provider.email
           expect(feedback.originating_page).to eq URI(additional_accounts_page).path.split("/").last
@@ -126,7 +126,7 @@ RSpec.describe "FeedbacksController" do
     end
 
     it "gathers browser data" do
-      subject
+      post_request
       expect(feedback.browser).not_to be_empty
       expect(feedback.os).not_to be_empty
       expect(feedback.source).to eq("Unknown")
@@ -136,7 +136,7 @@ RSpec.describe "FeedbacksController" do
       let(:originating_page) { address_lookup_page }
 
       it "contains provider email" do
-        subject
+        post_request
         expect(feedback.source).to eq "Provider"
         expect(feedback.email).to eq provider.email
       end
@@ -148,7 +148,7 @@ RSpec.describe "FeedbacksController" do
 
       context "and no application id in the page history" do
         it "contains provider email" do
-          subject
+          post_request
           expect(feedback.source).to eq "Applicant"
           expect(feedback.email).to eq provider.email
         end
@@ -156,7 +156,7 @@ RSpec.describe "FeedbacksController" do
     end
 
     it "schedules an email" do
-      expect { subject }.to change(ScheduledMailing, :count).by(1)
+      expect { post_request }.to change(ScheduledMailing, :count).by(1)
       rec = ScheduledMailing.first
 
       expect(rec.mailer_klass).to eq "FeedbackMailer"
@@ -168,7 +168,7 @@ RSpec.describe "FeedbacksController" do
     end
 
     it "redirects to show action" do
-      subject
+      post_request
       expect(response.body).to include(I18n.t(".feedback.show.title"))
     end
 
@@ -176,16 +176,16 @@ RSpec.describe "FeedbacksController" do
       let(:params) { { feedback: { satisfaction: "" } } }
 
       it "does not create a feedback to record browser data" do
-        expect { subject }.not_to change(Feedback, :count)
+        expect { post_request }.not_to change(Feedback, :count)
       end
 
       it "does not send an email" do
         expect(FeedbackMailer).not_to receive(:notify)
-        subject
+        post_request
       end
 
       it "shows errors on the page" do
-        subject
+        post_request
         expect(unescaped_response_body).to include(I18n.t(".activerecord.errors.models.feedback.attributes.satisfaction.blank"))
       end
     end
@@ -195,7 +195,7 @@ RSpec.describe "FeedbacksController" do
       let(:params) { { feedback: attributes_for(:feedback), application_id: application.id, submission_feedback: "true" } }
 
       it "adds signed-out submission_feedback specific attributes" do
-        subject
+        post_request
         expect(feedback.legal_aid_application_id).to eq application.id
         expect(feedback.originating_page).to eq "submission_feedback"
       end
@@ -231,7 +231,7 @@ RSpec.describe "FeedbacksController" do
         let(:params) { { feedback: attributes_for(:feedback, improvement_suggestion: "Crawlergo is orsum") } }
 
         it "returns a 403 status" do
-          subject
+          post_request
           expect(response).to have_http_status(:forbidden)
         end
       end

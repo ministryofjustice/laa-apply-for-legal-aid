@@ -30,22 +30,22 @@ RSpec.describe "applicants omniauth call back" do
   end
 
   describe "GET /applicants/auth/true_layer/callback" do
-    subject do
+    subject(:get_request) do
       get applicant_true_layer_omniauth_callback_path
       ImportBankDataWorker.drain
     end
 
     it "redirects to next page" do
-      expect(subject).to redirect_to(citizens_gather_transactions_path)
+      expect(get_request).to redirect_to(citizens_gather_transactions_path)
     end
 
     it "persists the token on the applicant" do
-      subject
+      get_request
       expect(applicant.reload.true_layer_token).to eq(token)
     end
 
     it "does not add its url to page history" do
-      subject
+      get_request
       expect(session.keys).not_to include(:page_history)
     end
 
@@ -53,7 +53,7 @@ RSpec.describe "applicants omniauth call back" do
       let(:true_layer_expires_at) { expires_at.to_json }
 
       it "persists expires_at" do
-        subject
+        get_request
         token = applicant.reload.encrypted_true_layer_token
         token_expires_at = Time.zone.parse(token.fetch("expires_at"))
         expect(token_expires_at).to eq(expires_at)
@@ -64,7 +64,7 @@ RSpec.describe "applicants omniauth call back" do
       let(:true_layer_expires_at) { nil }
 
       it "does not persist expires_at" do
-        subject
+        get_request
         token = applicant.reload.encrypted_true_layer_token
         expect(token.fetch("expires_at")).to be_nil
       end
@@ -74,7 +74,7 @@ RSpec.describe "applicants omniauth call back" do
       let(:applicant) { nil }
 
       it "redirects to root" do
-        expect(subject).to redirect_to(citizens_consent_path)
+        expect(get_request).to redirect_to(citizens_consent_path)
       end
     end
 
@@ -89,13 +89,13 @@ RSpec.describe "applicants omniauth call back" do
       end
 
       it "redirects to error page" do
-        subject
+        get_request
         follow_redirect!
         expect(response).to redirect_to(error_path(:access_denied))
       end
 
       it "has reset the session and has no page history" do
-        subject
+        get_request
         expect(session.keys).not_to include(:page_history)
       end
     end

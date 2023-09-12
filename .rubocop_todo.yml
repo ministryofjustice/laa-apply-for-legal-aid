@@ -127,14 +127,9 @@ RSpec/LetSetup:
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/applicants/omniauth_callbacks_spec.rb'
-    - 'spec/requests/auth_spec.rb'
     - 'spec/requests/citizens/accounts_spec.rb'
     - 'spec/requests/citizens/check_answers_spec.rb'
     - 'spec/requests/citizens/gather_transactions_spec.rb'
-    - 'spec/requests/errors_controller_spec.rb'
-    - 'spec/requests/feedbacks_spec.rb'
-    - 'spec/requests/problem_controller_spec.rb'
     - 'spec/requests/providers/address_lookups_controller_spec.rb'
     - 'spec/requests/providers/address_selections_controller_spec.rb'
     - 'spec/requests/providers/addresses_spec.rb'
