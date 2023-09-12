@@ -22,7 +22,7 @@ RSpec.describe OpponentHelper do
       context "with no ccms_opponent_id (i.e. new organisation)" do
         before { opponent.ccms_opponent_id = nil }
 
-        it "returns the path for an existing organisation opponent" do
+        it "returns the path for a new organisation opponent" do
           expect(url).to eq "/providers/applications/#{legal_aid_application.id}/opponent_new_organisations/#{organisation_opponent.id}?locale=en"
         end
       end
