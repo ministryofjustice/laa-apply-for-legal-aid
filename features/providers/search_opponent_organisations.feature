@@ -1,7 +1,9 @@
+@EjectCassetteAfterScenario
 Feature: Search existing opponent organisations
 
 Background: User is on existing opponent organisation search page
   Given the feature flag for opponent_organisations is enabled
+  And I insert cassette "lfa_organisations_all"
   When I have completed a non-passported application and reached the merits task_list
   Then I should be on the 'merits_task_list' page showing 'Opponents\nNOT STARTED'
   When I click link 'Opponents'
@@ -10,26 +12,26 @@ Background: User is on existing opponent organisation search page
   And I click 'Save and continue'
   Then I should be on a page with title "Opponent"
 
-@javascript @vcr
+@javascript
 Scenario: No results returned is seen on screen when non-existant organisation search entered
   When I search for organisation "cakes"
   Then the organisation result list on page returns a "No results found." message
   And organisation suggestions has 0 results
 
-@javascript @vcr
+@javascript
 Scenario: I am able to find a single organisation using a partial word
   When I search for organisation "bab"
   Then the organisation suggestions include "Babergh District Council\nLocal Authority"
   And organisation suggestions has 1 result
 
-@javascript @vcr
+@javascript
 Scenario: I am able to find multiple organisations using a partial word
   When I search for organisation "ang"
   Then the organisation suggestions include "Isle of Anglesey County Council\nLocal Authority"
   And the organisation suggestions include "Angus Council\nLocal Authority"
   And organisation suggestions has 2 results
 
-@javascript @vcr
+@javascript
 Scenario: I am able to see highlighted search terms in the results
   When I search for organisation "ang local"
   Then the organisation suggestions include "Isle of Anglesey County Council\nLocal Authority"
@@ -38,7 +40,7 @@ Scenario: I am able to see highlighted search terms in the results
   And I can see the highlighted search term "Ang" 2 times
   And I can see the highlighted search term "Local" 2 times
 
-@javascript @vcr
+@javascript
 Scenario: I am prevented from seeing HTML output in search results
   When I search for organisation "prison r"
   Then the organisation suggestions include "Risley\nHM Prison or Young Offender Institute"
@@ -48,7 +50,7 @@ Scenario: I am prevented from seeing HTML output in search results
   And I can see the highlighted search term "R" 3 times
   And I can see the highlighted search term "Prison" 3 times
 
-  @javascript @vcr
+  @javascript
   Scenario: I am able to clear the organisation search terms
     When I search for organisation "bab"
     Then the organisation suggestions include "Babergh District Council\nLocal Authority"
@@ -56,7 +58,7 @@ Scenario: I am prevented from seeing HTML output in search results
     Then organisation search field is empty
     And organisation suggestions has 0 results
 
-  @javascript @vcr
+  @javascript
   Scenario: I am unable to proceed without selecting an organisation
     When I click "Save and continue"
     Then I should be on a page with title "Opponent"
