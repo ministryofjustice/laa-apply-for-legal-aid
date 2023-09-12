@@ -2,20 +2,27 @@
   <div class="govuk-!-padding-bottom-6"></div>
   <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
-  <%# 'partner' hard coded as false until this is updated with the partner means assessment changes %>
   <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true, partner: false) %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.hmrc_employment_income? %>
       <% if @legal_aid_application.has_multiple_employments? %>
-        <%# 'partner' hard coded as false until this is updated with the partner means assessment changes %>
-        <%= render "shared/check_answers/full_employment_details", read_only: true, partner: false %>
+        <%= render(
+              "shared/check_answers/full_employment_details",
+              individual: "Your client",
+              read_only: true,
+              partner: false,
+            ) %>
       <% else %>
         <%= render "shared/check_answers/employed_income", read_only: true %>
       <% end %>
     <% elsif @legal_aid_application.applicant_employed? %>
-      <%# 'partner' hard coded as false until this is updated with the partner means assessment changes %>
-      <%= render "shared/check_answers/full_employment_details", read_only: true, partner: false %>
+      <%= render(
+            "shared/check_answers/full_employment_details",
+            individual: "Your client",
+            read_only: true,
+            partner: false,
+          ) %>
     <% end %>
   </section>
 
