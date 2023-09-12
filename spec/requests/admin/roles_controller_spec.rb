@@ -10,20 +10,20 @@ RSpec.describe Admin::RolesController do
   before { sign_in admin_user }
 
   describe "GET index" do
-    subject { get admin_roles_path }
+    subject(:get_request) { get admin_roles_path }
 
     it "renders successfully" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays correct heading" do
-      subject
+      get_request
       expect(response.body).to include(I18n.t("admin.roles.index.heading_1"))
     end
 
     it "displays firms" do
-      subject
+      get_request
       expect(unescaped_response_body).to include(noodle_firm.name)
       expect(response.body).to include(mckenzie_firm.name)
     end

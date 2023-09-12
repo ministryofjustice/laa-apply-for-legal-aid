@@ -127,16 +127,6 @@ RSpec/LetSetup:
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/admin/feedback_controller_spec.rb'
-    - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
-    - 'spec/requests/admin/legal_aid_applications_controller_spec.rb'
-    - 'spec/requests/admin/reports_controller_spec.rb'
-    - 'spec/requests/admin/roles/permissions_controller_spec.rb'
-    - 'spec/requests/admin/roles_controller_spec.rb'
-    - 'spec/requests/admin/settings_controller_spec.rb'
-    - 'spec/requests/admin/submitted_applications_reports_controller_spec.rb'
-    - 'spec/requests/admin_users/omniauth_callbacks_spec.rb'
-    - 'spec/requests/admin_users/sessions_controller_spec.rb'
     - 'spec/requests/applicants/omniauth_callbacks_spec.rb'
     - 'spec/requests/auth_spec.rb'
     - 'spec/requests/citizens/accounts_spec.rb'

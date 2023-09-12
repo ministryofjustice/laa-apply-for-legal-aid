@@ -9,43 +9,43 @@ RSpec.describe Admin::LegalAidApplicationsController do
   before { sign_in admin_user }
 
   describe "GET /admin/legal_aid_applications" do
-    subject { get admin_legal_aid_applications_path(params) }
+    subject(:get_request) { get admin_legal_aid_applications_path(params) }
 
     context "when not from a whitelisted IP address" do
       it "redirects to error page" do
         # stub the response to request.env['HTTP_X_REAL_IP']
         Rails.application.env_config["HTTP_X_REAL_IP"] = "55.6.7.8"
-        subject
+        get_request
         expect(response).to redirect_to(error_path(:access_denied))
         Rails.application.env_config["HTTP_X_REAL_IP"] = nil
       end
     end
 
     it "renders successfully" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays applications" do
-      subject
+      get_request
       legal_aid_applications.each do |application|
         expect(response.body).to include(application.application_ref)
       end
     end
 
     it "has a link to settings" do
-      subject
+      get_request
       expect(response.body).to include(admin_settings_path)
     end
 
     context "with pagination" do
       it "shows current total information" do
-        subject
+        get_request
         expect(page).to have_css(".app-pagination__info", text: "Showing 3 of 3")
       end
 
       it "does not show navigation links" do
-        subject
+        get_request
         expect(page).not_to have_css(".govuk-pagination")
       end
 
@@ -54,12 +54,12 @@ RSpec.describe Admin::LegalAidApplicationsController do
         let(:count) { 5 }
 
         it "show page information" do
-          subject
+          get_request
           expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
         end
 
         it "shows pagination" do
-          subject
+          get_request
           expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
         end
       end
@@ -69,18 +69,18 @@ RSpec.describe Admin::LegalAidApplicationsController do
       before { sign_out admin_user }
 
       it "redirects to log in" do
-        subject
+        get_request
         expect(response).to redirect_to(new_admin_user_session_path)
       end
     end
   end
 
   describe "POST /admin/search" do
-    subject { post admin_application_search_path(params) }
+    subject(:post_request) { post admin_application_search_path(params) }
 
     let(:params) { nil }
 
-    before { subject }
+    before { post_request }
 
     context "when the params are empty" do
       it { expect(response.body).to include("Please enter a search criteria") }
@@ -97,23 +97,23 @@ RSpec.describe Admin::LegalAidApplicationsController do
   end
 
   describe "POST /admin/legal_aid_applications/create_test_applications" do
-    subject { post create_test_applications_admin_legal_aid_applications_path }
+    subject(:post_request) { post create_test_applications_admin_legal_aid_applications_path }
 
     let(:count) { 1 }
 
     it "creates test legal_aid_applications" do
       number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size + TestApplicationCreationService::NON_PASSPORTED_TEST_TRAITS.size
-      expect { subject }.to change(LegalAidApplication, :count).by(number_new)
+      expect { post_request }.to change(LegalAidApplication, :count).by(number_new)
     end
 
     it "redirects back to admin root" do
-      subject
+      post_request
       expect(response).to redirect_to(admin_root_path)
     end
   end
 
   describe "DELETE /admin/legal_aid_applications/destroy_all" do
-    subject { delete destroy_all_admin_legal_aid_applications_path }
+    subject(:delete_request) { delete destroy_all_admin_legal_aid_applications_path }
 
     let(:scheduled_mail) { create(:scheduled_mailing, :due) }
     let(:scheduled_mail2) { create(:scheduled_mailing, :due) }
@@ -124,21 +124,21 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       it "deletes the legal_aid_applications" do
-        expect { subject }.to change(LegalAidApplication, :count).by(-count)
+        expect { delete_request }.to change(LegalAidApplication, :count).by(-count)
       end
 
       it "deletes the applicants too" do
-        expect { subject }.to change(Applicant, :count).by(-count)
+        expect { delete_request }.to change(Applicant, :count).by(-count)
       end
 
       it "deletes the outstanding scheduled mail" do
         scheduled_mail
         scheduled_mail2
-        expect { subject }.to change(ScheduledMailing, :count).by(-2)
+        expect { delete_request }.to change(ScheduledMailing, :count).by(-2)
       end
 
       it "redirects back to admin root" do
-        subject
+        delete_request
         expect(response).to redirect_to(admin_root_path)
       end
 
@@ -146,7 +146,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
         before { sign_out admin_user }
 
         it "redirects to log in" do
-          subject
+          delete_request
           expect(response).to redirect_to(new_admin_user_session_path)
         end
       end
@@ -155,7 +155,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
         let!(:another) { create(:legal_aid_application, :with_everything) }
 
         it "gets deleted too" do
-          expect { subject }.to change(LegalAidApplication, :count).to(0)
+          expect { delete_request }.to change(LegalAidApplication, :count).to(0)
         end
       end
     end
@@ -166,13 +166,13 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       it "raises an error" do
-        expect { subject }.to raise_error("Legal Aid Application Destroy All action disabled")
+        expect { delete_request }.to raise_error("Legal Aid Application Destroy All action disabled")
       end
     end
   end
 
   describe "DELETE /admin/legal_aid_applications/:legal_aid_application_id/destroy" do
-    subject { delete admin_legal_aid_application_path(application) }
+    subject(:delete_request) { delete admin_legal_aid_application_path(application) }
 
     let(:application) { legal_aid_applications.first }
 
@@ -182,16 +182,16 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       it "deletes the legal_aid_application" do
-        expect { subject }.to change(LegalAidApplication, :count).by(-1)
+        expect { delete_request }.to change(LegalAidApplication, :count).by(-1)
         expect(LegalAidApplication.all).not_to include(application)
       end
 
       it "deletes the applicant too" do
-        expect { subject }.to change(Applicant, :count).by(-1)
+        expect { delete_request }.to change(Applicant, :count).by(-1)
       end
 
       it "redirects back to admin root" do
-        subject
+        delete_request
         expect(response).to redirect_to(admin_root_path)
       end
 
@@ -199,7 +199,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
         before { sign_out admin_user }
 
         it "redirects to log in" do
-          subject
+          delete_request
           expect(response).to redirect_to(new_admin_user_session_path)
         end
       end
@@ -208,7 +208,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
         let!(:application) { create(:legal_aid_application, :at_assessment_submitted) }
 
         it "gets deleted too" do
-          expect { subject }.to change(LegalAidApplication, :count).by(-1)
+          expect { delete_request }.to change(LegalAidApplication, :count).by(-1)
         end
       end
 
@@ -216,8 +216,8 @@ RSpec.describe Admin::LegalAidApplicationsController do
         let!(:application) { create(:legal_aid_application) }
 
         it "gets deleted too" do
-          expect { subject }.to change(LegalAidApplication, :count).by(-1)
-          expect { subject }.not_to change(Applicant, :count)
+          expect { delete_request }.to change(LegalAidApplication, :count).by(-1)
+          expect { delete_request }.not_to change(Applicant, :count)
         end
       end
     end
@@ -228,7 +228,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       it "raises an error" do
-        expect { subject }.to raise_error("Legal Aid Application Destroy action disabled")
+        expect { delete_request }.to raise_error("Legal Aid Application Destroy action disabled")
       end
     end
   end

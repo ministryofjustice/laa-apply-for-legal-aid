@@ -24,24 +24,24 @@ RSpec.describe "admin users omniauth call back" do
   end
 
   describe "GET /auth/google_oauth2/callback" do
-    subject do
+    subject(:get_request) do
       get admin_user_google_oauth2_omniauth_callback_path
     end
 
     it "redirects to admin user root" do
-      expect(subject).to redirect_to(admin_root_path)
+      expect(get_request).to redirect_to(admin_root_path)
     end
 
     context "with unknown email" do
       let(:email) { Faker::Internet.email }
 
       it "redirects to error page" do
-        subject
+        get_request
         expect(response).to redirect_to(error_path(:access_denied))
       end
 
       it "displays failure information" do
-        subject
+        get_request
         follow_redirect!
         expect(response.body).to include("You do not have an Admin account")
       end
