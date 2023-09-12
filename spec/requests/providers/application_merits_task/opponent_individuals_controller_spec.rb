@@ -50,8 +50,10 @@ module Providers
             expect(response).to have_http_status(:ok)
           end
 
-          it "displays Opponent" do
-            expect(response.body).to include(html_compare(opponent.first_name))
+          it "displays opponent's name" do
+            expect(response.body)
+              .to include(html_compare(opponent.first_name))
+              .and include(html_compare(opponent.last_name))
           end
         end
 
