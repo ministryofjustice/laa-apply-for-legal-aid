@@ -476,7 +476,6 @@ module CCMS
           let(:benefits) { create(:transaction_type, :credit, name: "benefits") }
           let(:bank_account) { create(:bank_account, bank_provider:) }
           let(:bank_provider) { create(:bank_provider, applicant:) }
-          let(:bank_account) { create(:bank_account, bank_provider:) }
           let!(:benefits_bank_transaction) { create(:bank_transaction, :credit, transaction_type: benefits, bank_account:) }
           let(:applicant) { create(:applicant, :with_address) }
           let(:legal_aid_application) do

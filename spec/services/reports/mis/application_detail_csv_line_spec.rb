@@ -196,7 +196,6 @@ module Reports
       let(:inherited_assets_value) { 300 }
       let(:money_owed_value) { 25 }
       let(:trust_value) { 99 }
-      let(:none_selected) { nil }
 
       let(:understands_terms_of_court_order) { true }
       let(:understands_terms_of_court_order_details) { "Understood" }

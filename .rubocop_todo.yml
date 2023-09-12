@@ -254,16 +254,6 @@ RSpec/NamedSubject:
     - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
     - 'spec/services/true_layer_error_decoder_spec.rb'
 
-# Offense count: 6
-RSpec/OverwritingSetup:
-  Exclude:
-    - 'spec/models/legal_aid_application_spec.rb'
-    - 'spec/requests/feedbacks_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_variable_attributes_spec.rb'
-    - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
-    - 'spec/services/required_document_category_analyser_spec.rb'
-    - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
-
 # Offense count: 16
 RSpec/RepeatedDescription:
   Exclude:
