@@ -122,14 +122,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 905
+# Offense count: 785
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/citizens/accounts_spec.rb'
-    - 'spec/requests/citizens/check_answers_spec.rb'
-    - 'spec/requests/citizens/gather_transactions_spec.rb'
     - 'spec/requests/providers/address_lookups_controller_spec.rb'
     - 'spec/requests/providers/address_selections_controller_spec.rb'
     - 'spec/requests/providers/addresses_spec.rb'

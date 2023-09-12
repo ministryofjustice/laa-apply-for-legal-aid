@@ -22,11 +22,11 @@ RSpec.describe "citizen accounts request" do
   let(:page_history_service) { PageHistoryService.new(page_history_id: session["page_history_id"]) }
 
   describe "GET /citizens/account" do
-    subject { get citizens_accounts_path }
+    subject(:get_request) { get citizens_accounts_path }
 
     before do
       sign_in_citizen_for_application(legal_aid_application)
-      subject
+      get_request
     end
 
     it "returns http success" do
