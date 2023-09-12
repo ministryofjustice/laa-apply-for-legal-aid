@@ -2,21 +2,25 @@ Feature: Bank statement upload check your answers
   @javascript
   Scenario: I can view and change answers to means income questions for non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
-    And I have completed a non-passported employed application with bank statements as far as the end of the means income section
+    And I have completed a non-passported employed application for "client" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    And the following sections should exist:
+    And the following sections within "applicant" should exist:
       | tag | section |
-      | h1  | Check your answers |
-      | h3  | Bank statements |
       | h2  | Your client's income |
+      | h3  | Bank statements |
       | h3  | Employment income |
+      | h2  | Client benefits |
       | h3  | What payments does your client receive? |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | What payments does your client make? |
-      | h3  | Housing Benefit |
       | h3  | Payments your client makes in cash |
+
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h3  | Housing Benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
@@ -139,12 +143,11 @@ Feature: Bank statement upload check your answers
   @javascript
   Scenario: On the bank upload journey, the provider has employment permissions but the applicant is unemployed
     Given csrf is enabled
-    And I have completed a non-passported non-employed application with bank statements as far as the end of the means income section
+    And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should not see 'Employment income'
-    And the following sections should exist:
+    And the following sections within 'applicant' should exist:
       | tag | section |
-      | h1  | Check your answers |
       | h3  | Bank statements |
       | h2  | Your client's income |
       | h3  | What payments does your client receive? |
@@ -153,6 +156,10 @@ Feature: Bank statement upload check your answers
       | h2  | Your client's outgoings |
       | h3  | What payments does your client make? |
       | h3  | Payments your client makes in cash |
+
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
       | h2  | Dependants |
 
     And the following sections should not exist:

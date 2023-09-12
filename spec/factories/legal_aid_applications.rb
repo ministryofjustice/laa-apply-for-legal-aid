@@ -18,6 +18,11 @@ FactoryBot.define do
       applicant { build(:applicant, employed: true, with_bank_accounts:) }
     end
 
+    trait :with_employed_applicant_and_employed_partner do
+      applicant { build(:applicant, employed: true, has_partner: true, partner_has_contrary_interest: false) }
+      partner { build(:partner, employed: true) }
+    end
+
     trait :with_self_employed_applicant do
       applicant { build(:applicant, self_employed: true) }
     end
@@ -967,6 +972,13 @@ FactoryBot.define do
       after(:create) do |application|
         application.transaction_types << (TransactionType.find_by(name: "rent_or_mortgage") || create(:transaction_type, :rent_or_mortgage))
         create(:regular_transaction, :rent_or_mortgage, legal_aid_application: application, amount: 1_600.00, frequency: "three_monthly", owner_id: application.applicant.id, owner_type: "Applicant")
+      end
+    end
+
+    trait :with_partner_rent_or_mortgage_regular_transaction do
+      after(:create) do |application|
+        application.transaction_types << (TransactionType.find_by(name: "rent_or_mortgage") || create(:transaction_type, :rent_or_mortgage))
+        create(:regular_transaction, :rent_or_mortgage, legal_aid_application: application, amount: 1_600.00, frequency: "three_monthly", owner_id: application.partner.id, owner_type: "Partner")
       end
     end
 

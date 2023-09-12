@@ -1,82 +1,84 @@
 <% bank_statement_upload = @legal_aid_application.uploading_bank_statements? %>
 
-<h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
+<section class="applicant">
+  <h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
 
-<% if bank_statement_upload %>
-  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false, partner: false) %>
-<% end %>
+  <% if bank_statement_upload %>
+    <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false, partner: false) %>
+  <% end %>
 
-<% if @legal_aid_application.applicant.hmrc_employment_income? %>
-  <% if @legal_aid_application.applicant.has_multiple_employments? %>
+  <% if @legal_aid_application.applicant.hmrc_employment_income? %>
+    <% if @legal_aid_application.applicant.has_multiple_employments? %>
+      <%= render(
+            "shared/check_answers/full_employment_details",
+            individual: "Your client",
+            read_only: false,
+            partner: false,
+          ) %>
+    <% else %>
+      <%= render "shared/check_answers/employed_income", read_only: false %>
+    <% end %>
+  <% elsif @legal_aid_application.applicant.employed? %>
     <%= render(
           "shared/check_answers/full_employment_details",
           individual: "Your client",
           read_only: false,
           partner: false,
         ) %>
-  <% else %>
-    <%= render "shared/check_answers/employed_income", read_only: false %>
   <% end %>
-<% elsif @legal_aid_application.applicant.employed? %>
+
+  <% if bank_statement_upload %>
+    <%= render("shared/check_answers/benefits_income",
+               transactions_for: "applicant",
+               individual: @legal_aid_application.applicant,
+               state_benefits: @legal_aid_application.applicant.state_benefits) %>
+  <% end %>
+
   <%= render(
-        "shared/check_answers/full_employment_details",
-        individual: "Your client",
-        read_only: false,
-        partner: false,
-      ) %>
-<% end %>
-
-<% if bank_statement_upload %>
-  <%= render("shared/check_answers/benefits_income",
-             transactions_for: "applicant",
-             individual: @legal_aid_application.applicant,
-             state_benefits: @legal_aid_application.applicant.state_benefits) %>
-<% end %>
-
-<%= render(
-      "shared/check_answers/income_summary",
-      income_type: t(".credits-section-heading"),
-      url: bank_statement_upload ? providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application),
-      transaction_types: @credit_transaction_types,
-      individual: "Applicant",
-    ) %>
-
-<% if bank_statement_upload %>
-  <%= render(
-        "shared/check_answers/cash_payments",
-        read_only: false,
-        url: providers_legal_aid_application_means_cash_income_path,
+        "shared/check_answers/income_summary",
+        income_type: t(".credits-section-heading"),
+        url: bank_statement_upload ? providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application),
+        transaction_types: @credit_transaction_types,
         individual: "Applicant",
-        individual_with_determiner: "your client",
-        type: :income,
       ) %>
-<% end %>
 
-<%= render(
-      "shared/check_answers/student_finance",
-      individual_text: "your client",
-      individual: @legal_aid_application.applicant,
-      url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-      read_only: false,
-    ) %>
+  <% if bank_statement_upload %>
+    <%= render(
+          "shared/check_answers/cash_payments",
+          read_only: false,
+          url: providers_legal_aid_application_means_cash_income_path,
+          individual: "Applicant",
+          individual_with_determiner: "your client",
+          type: :income,
+        ) %>
+  <% end %>
 
-<h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
-
-<%= render(
-      "shared/check_answers/income_summary",
-      income_type: t(".debits-section-heading"),
-      url: bank_statement_upload ? providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
-      transaction_types: @debit_transaction_types,
-      individual: "Applicant",
-    ) %>
-
-<% if bank_statement_upload %>
   <%= render(
-        "shared/check_answers/cash_payments",
+        "shared/check_answers/student_finance",
+        individual_text: "your client",
+        individual: @legal_aid_application.applicant,
+        url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
         read_only: false,
-        url: providers_legal_aid_application_means_cash_outgoing_path,
-        individual: "Applicant",
-        individual_with_determiner: "your client",
-        type: :outgoings,
       ) %>
-<% end %>
+
+  <h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
+
+  <%= render(
+        "shared/check_answers/income_summary",
+        income_type: t(".debits-section-heading"),
+        url: bank_statement_upload ? providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
+        transaction_types: @debit_transaction_types,
+        individual: "Applicant",
+      ) %>
+
+  <% if bank_statement_upload %>
+    <%= render(
+          "shared/check_answers/cash_payments",
+          read_only: false,
+          url: providers_legal_aid_application_means_cash_outgoing_path,
+          individual: "Applicant",
+          individual_with_determiner: "your client",
+          type: :outgoings,
+        ) %>
+  <% end %>
+</section>

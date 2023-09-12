@@ -134,9 +134,7 @@ module Flow
             end
           end,
           check_answers: lambda do |application|
-            if application.housing_payments_for?("Partner")
-              :partner_housing_benefits
-            elsif application.partner_outgoing_types?
+            if application.partner_outgoing_types?
               :partner_cash_outgoings
             else
               :check_income_answers
@@ -153,7 +151,13 @@ module Flow
               :has_dependants
             end
           end,
-          check_answers: :check_income_answers,
+          check_answers: lambda do |application|
+            if (application.housing_payments_for?("Applicant") && application.uploading_bank_statements?) || application.housing_payments_for?("Partner")
+              :housing_benefits
+            else
+              :has_dependants
+            end
+          end,
         },
         partner_full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },

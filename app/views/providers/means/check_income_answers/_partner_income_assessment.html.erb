@@ -1,72 +1,74 @@
-<h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
+<section class="partner">
+  <h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
 
-<%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, read_only: false, partner: true) %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, read_only: false, partner: true) %>
 
-<% if @legal_aid_application.partner.hmrc_employment_income? %>
-  <% if @legal_aid_application.has_multiple_employments? %>
+  <% if @legal_aid_application.partner.hmrc_employment_income? %>
+    <% if @legal_aid_application.has_multiple_employments? %>
+      <%= render(
+            "shared/check_answers/full_employment_details",
+            individual: "The partner",
+            read_only: false,
+            partner: true,
+          ) %>
+    <% else %>
+      <%= render "shared/check_answers/employed_income", read_only: false, partner: true %>
+    <% end %>
+  <% elsif @legal_aid_application.partner.employed? %>
     <%= render(
           "shared/check_answers/full_employment_details",
           individual: "The partner",
           read_only: false,
           partner: true,
         ) %>
-  <% else %>
-    <%= render "shared/check_answers/employed_income", read_only: false, partner: true %>
   <% end %>
-<% elsif @legal_aid_application.partner.employed? %>
+
+  <%= render("shared/check_answers/benefits_income",
+             transactions_for: "partner",
+             individual: @legal_aid_application.partner,
+             state_benefits: @legal_aid_application.partner.state_benefits) %>
+
   <%= render(
-        "shared/check_answers/full_employment_details",
-        individual: "The partner",
-        read_only: false,
-        partner: true,
+        "shared/check_answers/income_summary",
+        income_type: t(".credits-section-heading"),
+        url: providers_legal_aid_application_partners_regular_incomes_path(@legal_aid_application),
+        transaction_types: @credit_transaction_types,
+        individual: "Partner",
       ) %>
-<% end %>
 
-<%= render("shared/check_answers/benefits_income",
-           transactions_for: "partner",
-           individual: @legal_aid_application.partner,
-           state_benefits: @legal_aid_application.partner.state_benefits) %>
+  <%= render(
+        "shared/check_answers/cash_payments",
+        read_only: false,
+        url: providers_legal_aid_application_partners_cash_income_path,
+        individual: "Partner",
+        individual_with_determiner: "the partner",
+        type: :income,
+      ) %>
 
-<%= render(
-      "shared/check_answers/income_summary",
-      income_type: t(".credits-section-heading"),
-      url: providers_legal_aid_application_partners_regular_incomes_path(@legal_aid_application),
-      transaction_types: @credit_transaction_types,
-      individual: "Partner",
-    ) %>
+  <%= render(
+        "shared/check_answers/student_finance",
+        individual_text: "the partner",
+        individual: @legal_aid_application.partner,
+        url: providers_legal_aid_application_partners_student_finance_path(@legal_aid_application),
+        read_only: false,
+      ) %>
 
-<%= render(
-      "shared/check_answers/cash_payments",
-      read_only: false,
-      url: providers_legal_aid_application_partners_cash_income_path,
-      individual: "Partner",
-      individual_with_determiner: "the partner",
-      type: :income,
-    ) %>
+  <h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
 
-<%= render(
-      "shared/check_answers/student_finance",
-      individual_text: "the partner",
-      individual: @legal_aid_application.partner,
-      url: providers_legal_aid_application_partners_student_finance_path(@legal_aid_application),
-      read_only: false,
-    ) %>
+  <%= render(
+        "shared/check_answers/income_summary",
+        income_type: t(".debits-section-heading"),
+        url: providers_legal_aid_application_partners_regular_outgoings_path(@legal_aid_application),
+        transaction_types: @debit_transaction_types,
+        individual: "Partner",
+      ) %>
 
-<h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
-
-<%= render(
-      "shared/check_answers/income_summary",
-      income_type: t(".debits-section-heading"),
-      url: providers_legal_aid_application_partners_regular_outgoings_path(@legal_aid_application),
-      transaction_types: @debit_transaction_types,
-      individual: "Partner",
-    ) %>
-
-<%= render(
-      "shared/check_answers/cash_payments",
-      read_only: false,
-      url: providers_legal_aid_application_partners_cash_outgoing_path,
-      individual: "Partner",
-      individual_with_determiner: "the partner",
-      type: :outgoings,
-    ) %>
+  <%= render(
+        "shared/check_answers/cash_payments",
+        read_only: false,
+        url: providers_legal_aid_application_partners_cash_outgoing_path,
+        individual: "Partner",
+        individual_with_determiner: "the partner",
+        type: :outgoings,
+      ) %>
+</section>
