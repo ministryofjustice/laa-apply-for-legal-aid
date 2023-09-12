@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_133536) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_082919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1047,7 +1047,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_133536) do
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
-  add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications"
+  add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "legal_framework_submissions", "legal_aid_applications"
   add_foreign_key "matter_oppositions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
