@@ -25,6 +25,7 @@ gem "sentry-ruby"
 gem "sentry-sidekiq"
 gem "simple_command"
 gem "tzinfo-data"
+gem "uri", ">= 0.12.2"
 gem "webdack-uuid_migration", "~> 1.4.0"
 
 # Reduces boot times through caching; required in config/boot.rb
