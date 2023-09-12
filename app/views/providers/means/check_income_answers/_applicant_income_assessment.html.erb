@@ -26,8 +26,9 @@
 <%= render(
       "shared/check_answers/income_summary",
       income_type: t(".credits-section-heading"),
-      url: @legal_aid_application.uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
+      url: @legal_aid_application.uploading_bank_statements? ? providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application),
       transaction_types: @credit_transaction_types,
+      individual: "Applicant",
     ) %>
 
 <%= render("shared/check_answers/income_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>
@@ -39,8 +40,9 @@
 <%= render(
       "shared/check_answers/income_summary",
       income_type: t(".debits-section-heading"),
-      url: @legal_aid_application.uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings,
+      url: @legal_aid_application.uploading_bank_statements? ? providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_outgoings_path(@legal_aid_application),
       transaction_types: @debit_transaction_types,
+      individual: "Applicant",
     ) %>
 
 <%= render("shared/check_answers/outgoings_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>

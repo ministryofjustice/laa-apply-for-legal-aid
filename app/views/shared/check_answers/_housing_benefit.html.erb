@@ -33,6 +33,7 @@
       <% regular_transaction_amount, regular_transaction_frequency = regular_transaction_answer_by_type(
            legal_aid_application: @legal_aid_application,
            transaction_type: housing_benefit_type,
+           owner_type: "Applicant",
          ) %>
       <p><%= regular_transaction_amount %></p>
       <p><%= regular_transaction_frequency %></p>

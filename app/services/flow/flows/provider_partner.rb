@@ -154,9 +154,7 @@ module Flow
               :has_dependants
             end
           end,
-          # to be added when CYA page is added
-          #
-          # check_answers: ->(application) { application.uploading_bank_statements? ? :check_income_answers : :outgoings_summary },
+          check_answers: :check_income_answers,
         },
         partner_full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
