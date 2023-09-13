@@ -14,7 +14,7 @@ RSpec.describe BankHolidayRetriever, vcr: { cassette_name: "gov_uk_bank_holiday_
       let(:uri) { URI.parse(described_class::API_URL) }
 
       before do
-        expect(Net::HTTP).to receive(:get_response).with(uri).and_return(DummyErrorReturnObj.new)
+        allow(Net::HTTP).to receive(:get_response).with(uri).and_return(DummyErrorReturnObj.new)
       end
 
       it "raises error" do

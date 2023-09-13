@@ -79,7 +79,7 @@ RSpec.describe TrueLayer::ApiClientMock do
       end
 
       before do
-        expect(Setting).to receive(:bank_transaction_filename).and_return(csv_file)
+        allow(Setting).to receive(:bank_transaction_filename).and_return(csv_file)
       end
 
       it "returns the sample data" do

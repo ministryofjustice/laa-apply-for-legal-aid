@@ -53,7 +53,7 @@ module Reports
         end
 
         context "when there is an exception" do
-          before { expect(report).to receive(:generate_temp_file).and_raise(RuntimeError) }
+          before { allow(report).to receive(:generate_temp_file).and_raise(RuntimeError) }
 
           it "notifies sentry" do
             expect(Sentry).to receive(:capture_message)

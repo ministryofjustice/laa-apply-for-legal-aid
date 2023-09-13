@@ -45,7 +45,7 @@ RSpec.describe "citizen accounts request" do
     let(:worker) { {} }
 
     before do
-      expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)
+      allow(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)
       allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
       sign_in_citizen_for_application(legal_aid_application)
       get_request
