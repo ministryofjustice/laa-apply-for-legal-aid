@@ -10,13 +10,13 @@ RSpec.describe "AuthController" do
   end
 
   describe "GET failure" do
-    subject { get "/auth/failure", params: }
+    subject(:get_request) { get "/auth/failure", params: }
 
     context "with origin from citizens/banks" do
       let(:origin_path) { citizens_banks_path }
 
       it "redirects to citizens_consent_path" do
-        subject
+        get_request
         expect(response).to redirect_to citizens_consent_path(auth_failure: true)
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe "AuthController" do
       let(:origin_path) { root_path }
 
       it "redirects to access denied" do
-        subject
+        get_request
         expect(response).to redirect_to error_path(:access_denied)
       end
     end

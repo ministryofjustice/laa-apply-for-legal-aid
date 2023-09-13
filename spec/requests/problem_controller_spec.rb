@@ -2,9 +2,7 @@ require "rails_helper"
 
 RSpec.describe ProblemController do
   describe "GET /problem" do
-    subject { get problem_index_path }
-
-    before { subject }
+    before { get problem_index_path }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)

@@ -12,38 +12,38 @@ RSpec.describe Admin::SubmittedApplicationsReportsController do
   end
 
   describe "GET /admin/submitted_applications_report" do
-    subject { get admin_submitted_applications_report_path(params) }
+    subject(:get_request) { get admin_submitted_applications_report_path(params) }
 
     it "renders successfully" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays title" do
-      subject
+      get_request
       expect(response.body).to include(I18n.t("admin.submitted_applications_reports.show.heading_1"))
     end
 
     it "displays applications submitted to ccms" do
-      subject
+      get_request
       legal_aid_applications.each do |application|
         expect(response.body).to include(application.application_ref)
       end
     end
 
     it "does not display unsubmitted applications" do
-      subject
+      get_request
       expect(response.body).not_to include(unsubmitted_application.application_ref)
     end
 
     context "with pagination" do
       it "shows current total information" do
-        subject
+        get_request
         expect(page).to have_css(".app-pagination__info", text: "Showing 3 of 3")
       end
 
       it "does not show navigation links" do
-        subject
+        get_request
         expect(page).not_to have_css(".govuk-pagination")
       end
 
@@ -52,12 +52,12 @@ RSpec.describe Admin::SubmittedApplicationsReportsController do
         let(:count) { 5 }
 
         it "show page information" do
-          subject
+          get_request
           expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
         end
 
         it "shows pagination" do
-          subject
+          get_request
           expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
         end
       end
@@ -67,7 +67,7 @@ RSpec.describe Admin::SubmittedApplicationsReportsController do
       before { sign_out admin_user }
 
       it "redirects to log in" do
-        subject
+        get_request
         expect(response).to redirect_to(new_admin_user_session_path)
       end
     end

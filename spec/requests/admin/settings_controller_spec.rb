@@ -9,15 +9,15 @@ RSpec.describe Admin::SettingsController do
   end
 
   describe "GET /admin/settings" do
-    subject { get admin_settings_path }
+    subject(:get_request) { get admin_settings_path }
 
     it "renders successfully" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays title" do
-      subject
+      get_request
       expect(response.body).to include(I18n.t("admin.settings.show.heading_1"))
     end
 
@@ -25,14 +25,14 @@ RSpec.describe Admin::SettingsController do
       before { sign_out admin_user }
 
       it "redirects to log in" do
-        subject
+        get_request
         expect(response).to redirect_to(new_admin_user_session_path)
       end
     end
   end
 
   describe "PATCH /admin/settings" do
-    subject { patch admin_settings_path, params: }
+    subject(:patch_request) { patch admin_settings_path, params: }
 
     let(:params) do
       {
@@ -52,7 +52,7 @@ RSpec.describe Admin::SettingsController do
     end
 
     it "change settings values" do
-      subject
+      patch_request
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.partner_means_assessment?).to be(true)
@@ -60,11 +60,11 @@ RSpec.describe Admin::SettingsController do
     end
 
     it "create settings if they do not exist" do
-      expect { subject }.to change(Setting, :count).from(0).to(1)
+      expect { patch_request }.to change(Setting, :count).from(0).to(1)
     end
 
     it "redirects to the same page" do
-      subject
+      patch_request
       expect(response).to redirect_to(admin_settings_path)
     end
 
@@ -74,7 +74,7 @@ RSpec.describe Admin::SettingsController do
       context "when from false to true" do
         it "calls CCMS::RestartSubmissions" do
           expect(CCMS::RestartSubmissions).to receive(:call)
-          subject
+          patch_request
         end
       end
 
@@ -91,7 +91,7 @@ RSpec.describe Admin::SettingsController do
 
         it "does not send an active_support notification" do
           expect(CCMS::RestartSubmissions).not_to receive(:call)
-          subject
+          patch_request
         end
       end
     end
@@ -114,7 +114,7 @@ RSpec.describe Admin::SettingsController do
       end
 
       it "renders show" do
-        subject
+        patch_request
         expect(response).to have_http_status(:ok)
       end
     end
@@ -123,7 +123,7 @@ RSpec.describe Admin::SettingsController do
       before { sign_out admin_user }
 
       it "redirects to log in" do
-        subject
+        patch_request
         expect(response).to redirect_to(new_admin_user_session_path)
       end
     end

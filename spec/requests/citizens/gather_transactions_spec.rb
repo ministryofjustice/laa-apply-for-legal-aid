@@ -18,11 +18,11 @@ RSpec.describe "citizen accounts request" do
   let(:page_history_service) { PageHistoryService.new(page_history_id: session["page_history_id"]) }
 
   describe "GET /citizens/gather_transactions" do
-    subject { get citizens_gather_transactions_path }
+    subject(:get_request) { get citizens_gather_transactions_path }
 
     before do
       sign_in_citizen_for_application(legal_aid_application)
-      subject
+      get_request
     end
 
     it "returns http success" do
@@ -39,7 +39,7 @@ RSpec.describe "citizen accounts request" do
   end
 
   describe "GET /citizens/gather_transactions" do
-    subject { get citizens_gather_transactions_path }
+    subject(:get_request) { get citizens_gather_transactions_path }
 
     let(:worker_id) { SecureRandom.uuid }
     let(:worker) { {} }
@@ -48,7 +48,7 @@ RSpec.describe "citizen accounts request" do
       expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)
       allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
       sign_in_citizen_for_application(legal_aid_application)
-      subject
+      get_request
     end
 
     it "returns http_success" do

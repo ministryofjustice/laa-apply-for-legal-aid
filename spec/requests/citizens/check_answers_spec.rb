@@ -24,9 +24,9 @@ RSpec.describe "check your answers requests" do
   before { sign_in_citizen_for_application(legal_aid_application) }
 
   describe "GET /citizens/check_answers" do
-    subject { get "/citizens/check_answers" }
+    subject(:get_request) { get "/citizens/check_answers" }
 
-    before { subject }
+    before { get_request }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -41,7 +41,7 @@ RSpec.describe "check your answers requests" do
     end
 
     it "displays the name of the firm" do
-      subject
+      get_request
       expect(response.body).to include(html_compare(firm.name))
     end
 
@@ -49,47 +49,47 @@ RSpec.describe "check your answers requests" do
       let(:firm) { create(:firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!")) }
 
       it "finds the firm even though it has special characters" do
-        subject
+        get_request
         expect(response.body).to include(html_compare(firm.name))
       end
     end
   end
 
   describe "PATCH /citizens/check_answers/continue" do
-    subject { patch "/citizens/check_answers/continue" }
+    subject(:patch_request) { patch "/citizens/check_answers/continue" }
 
     before do
       legal_aid_application.check_citizen_answers!
     end
 
     it "redirects to next step" do
-      subject
+      patch_request
       expect(response).to redirect_to(flow_forward_path)
     end
 
     it "changes the state" do
-      expect { subject }.to change { legal_aid_application.reload.state }
+      expect { patch_request }.to change { legal_aid_application.reload.state }
     end
 
     it "sets the application state to analysing_bank_transactions" do
-      subject
+      patch_request
       expect(legal_aid_application.reload.state).to eq "analysing_bank_transactions"
       expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 
     it "changes the provider step to start_chances_of_success" do
-      subject
+      patch_request
       expect(legal_aid_application.reload.provider_step).to eq("client_completed_means")
     end
 
     it "records when the declaration was accepted" do
-      subject
+      patch_request
       expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.current)
     end
 
     it "syncs the application" do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
-      subject
+      patch_request
     end
   end
 end

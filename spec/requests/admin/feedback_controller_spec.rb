@@ -12,20 +12,20 @@ RSpec.describe Admin::FeedbackController do
   end
 
   describe "GET /admin/feedback" do
-    subject { get admin_feedback_path(params) }
+    subject(:get_request) { get admin_feedback_path(params) }
 
     it "renders successfully" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays title" do
-      subject
+      get_request
       expect(response.body).to include(I18n.t("admin.feedback.show.heading_1"))
     end
 
     it "displays feedback" do
-      subject
+      get_request
       Feedback.all.each do |feedback|
         expect(response.body).to include(feedback.improvement_suggestion)
       end
@@ -33,12 +33,12 @@ RSpec.describe Admin::FeedbackController do
 
     context "with pagination" do
       it "shows current total information" do
-        subject
+        get_request
         expect(page).to have_css(".app-pagination__info", text: "Showing 3 of 3")
       end
 
       it "does not show navigation links" do
-        subject
+        get_request
         expect(page).not_to have_css(".govuk-pagination")
       end
 
@@ -47,12 +47,12 @@ RSpec.describe Admin::FeedbackController do
         let(:count) { 4 }
 
         it "show page information" do
-          subject
+          get_request
           expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
         end
 
         it "shows pagination" do
-          subject
+          get_request
           expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
         end
       end
@@ -62,7 +62,7 @@ RSpec.describe Admin::FeedbackController do
       before { sign_out admin_user }
 
       it "redirects to log in" do
-        subject
+        get_request
         expect(response).to redirect_to(new_admin_user_session_path)
       end
     end
