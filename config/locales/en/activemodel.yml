@@ -350,7 +350,7 @@ en:
             has_income:
               blank_message: Select yes if they receive any income
             monthly_income:
-              blank: Enter the amount
+              blank: Enter the amount they get each month
               not_a_number: Income must be an amount of money, like 1,000
               greater_than: Income amount must be more than zero
               too_many_decimals: Amount must not include more than 2 decimal numbers
@@ -359,7 +359,7 @@ en:
             has_assets_more_than_threshold:
               blank_message: "Select yes if they have assets worth more than £8,000"
             assets_value:
-              blank: Enter the amount
+              blank: Enter the total asset value
               not_a_number: Value must be an amount of money, like 1,000
               too_many_decimals: Value must not include more than 2 decimal numbers
               less_than_threshold: Select no if they have assets worth less than £8,000
