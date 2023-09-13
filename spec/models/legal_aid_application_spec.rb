@@ -226,12 +226,6 @@ RSpec.describe LegalAidApplication do
       end
       let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
       let(:se014) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
-      let!(:chances_of_success) do
-        create(:chances_of_success, :with_optional_text, proceeding: da004)
-      end
-      let!(:chances_of_success) do
-        create(:chances_of_success, :with_optional_text, proceeding: se014)
-      end
 
       it "returns the lead proceeding" do
         expect(legal_aid_application.lead_proceeding).to eq da001

@@ -18,7 +18,6 @@ RSpec.describe "FeedbacksController" do
     let(:address_lookup_page) { "http://localhost:3000/providers/applications/#{application.id}/address_lookup" }
     let(:additional_accounts_page) { "http://localhost:3000/citizens/additional_accounts" }
     let(:originating_page) { "page_outside_apply_service" }
-    let(:provider) { create(:provider) }
     let(:application) { create(:application, provider:) }
     let(:page_history_id) { SecureRandom.uuid }
     let(:page_history) { [address_lookup_page, "/feedback"] }
