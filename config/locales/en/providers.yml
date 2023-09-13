@@ -497,6 +497,7 @@ en:
         form:
           name: Organisation name
           type: Organisation type
+          select_list_prompt: Select type
       has_other_opponents:
         show:
           page_title: You have added %{count}

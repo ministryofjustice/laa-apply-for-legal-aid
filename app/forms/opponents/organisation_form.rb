@@ -6,10 +6,8 @@ module Opponents
 
     validates :name, :organisation_type_ccms_code, presence: true, unless: :draft?
 
-    BlankRowStruct = Struct.new(:ccms_code, :description)
-
     def organisation_types
-      @organisation_types ||= LegalFramework::OrganisationTypes::All.call.prepend(blank_row)
+      @organisation_types ||= LegalFramework::OrganisationTypes::All.call
     end
 
     def save
@@ -39,10 +37,6 @@ module Opponents
 
     def organisation_type_description
       organisation_type.description
-    end
-
-    def blank_row
-      BlankRowStruct.new("", "")
     end
   end
 end

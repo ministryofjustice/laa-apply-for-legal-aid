@@ -14,7 +14,8 @@
                                    @form.organisation_types,
                                    :ccms_code,
                                    :description,
-                                   label: { text: t(".type") } %>
+                                   label: { text: t(".type") },
+                                   options: { include_blank: t(".select_list_prompt") } %>
 
   <%= next_action_buttons(show_draft: true, form:) %>
 <% end %>
