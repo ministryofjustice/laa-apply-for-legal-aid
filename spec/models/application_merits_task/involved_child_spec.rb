@@ -68,7 +68,7 @@ module ApplicationMeritsTask
       let(:expected_id) { Faker::Number.number(digits: 8) }
 
       context "when ccms_opponent_id is nil" do
-        before { expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(expected_id) }
+        before { allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(expected_id) }
 
         let(:involved_child) { create(:involved_child, full_name: "John Doe", ccms_opponent_id: nil) }
 
@@ -83,15 +83,15 @@ module ApplicationMeritsTask
       end
 
       context "when ccms_opponent_id is already populated" do
-        before { expect(CCMS::OpponentId).not_to receive(:next_serial_id) }
-
         let(:involved_child) { create(:involved_child, full_name: "John Doe", ccms_opponent_id: 4553) }
 
         it "returns the value" do
+          expect(CCMS::OpponentId).not_to receive(:next_serial_id)
           expect(involved_child.generate_ccms_opponent_id).to eq 4553
         end
 
         it "does not update the record with a different value" do
+          expect(CCMS::OpponentId).not_to receive(:next_serial_id)
           involved_child.generate_ccms_opponent_id
           expect(involved_child.reload.ccms_opponent_id).to eq 4553
         end

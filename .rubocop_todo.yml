@@ -51,18 +51,6 @@ RSpec/ExpectActual:
   Exclude:
     - 'spec/services/reports/means_report_creator_spec.rb'
 
-# Offense count: 12
-RSpec/ExpectInHook:
-  Exclude:
-    - 'spec/models/application_merits_task/involved_child_spec.rb'
-    - 'spec/models/dashboard/widget_spec.rb'
-    - 'spec/models/legal_aid_application_spec.rb'
-    - 'spec/requests/citizens/gather_transactions_spec.rb'
-    - 'spec/services/bank_holiday_retriever_service_spec.rb'
-    - 'spec/services/provider_after_login_service_spec.rb'
-    - 'spec/services/reports/mis/application_details_report_spec.rb'
-    - 'spec/services/true_layer/api_client_mock_spec.rb'
-
 # Offense count: 192
 RSpec/LetSetup:
   Exclude:

@@ -111,7 +111,7 @@ RSpec.describe LegalAidApplication do
     subject(:capture_policy_disregards) { legal_aid_application.capture_policy_disregards? }
 
     context "when calculation date is nil" do
-      before { expect(legal_aid_application).to receive(:calculation_date).and_return(nil) }
+      before { allow(legal_aid_application).to receive(:calculation_date).and_return(nil) }
 
       context "with today's date before start of policy disregards" do
         it "returns false" do
@@ -131,7 +131,7 @@ RSpec.describe LegalAidApplication do
     end
 
     context "with calculation date set" do
-      before { expect(legal_aid_application).to receive(:calculation_date).and_return(calculation_date) }
+      before { allow(legal_aid_application).to receive(:calculation_date).and_return(calculation_date) }
 
       context "with today's date before start of policy disregards" do
         let(:calculation_date) { Date.new(2021, 1, 7) }

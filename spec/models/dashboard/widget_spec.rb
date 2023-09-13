@@ -61,7 +61,7 @@ module Dashboard
 
     describe "run" do
       before do
-        expect(datasets_client).to receive(:find_or_create).and_return(dataset)
+        allow(datasets_client).to receive(:find_or_create).and_return(dataset)
       end
 
       it "sends expected data" do
