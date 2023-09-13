@@ -41,7 +41,7 @@ Feature: Merits task list opponent
     When I choose a 'An organisation' radio button
     Then I click 'Save and continue'
     Then I should be on a page with title "Opponent"
-    And I click link "enter manually"
+    And I click link "I cannot find the organisation"
     Then I should be on a page with title "Opponent"
     When I fill "application-merits-task-opponent-name-field" with "My Organisation"
     And I select an organisation type "Sole Trader" from the list

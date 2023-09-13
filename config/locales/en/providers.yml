@@ -476,8 +476,7 @@ en:
           search_and_select: Search for and select an organisation
         index:
           clear_search: Clear search
-          enter_manually: enter manually
-          enter_manually_html: If you can not find the organisation %{href}
+          cannot_find_organisation: I cannot find the organisation
           heading_1: Opponent
           heading_2: Search for an organisation
           no_results: No results found.
