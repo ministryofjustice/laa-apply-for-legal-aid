@@ -6,8 +6,10 @@ module Providers
       end
 
       def update
-        @form = LegalAidApplications::HasDependantsForm.new(form_params)
+        @form = LegalAidApplications::HasDependantsForm.new(form_params.merge(draft: params[:draft_button].present?))
         if @form.save
+          return continue_or_draft if draft_selected?
+
           remove_dependants unless legal_aid_application.has_dependants?
           go_forward
         else
