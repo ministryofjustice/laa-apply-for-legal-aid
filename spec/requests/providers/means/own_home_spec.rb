@@ -1,14 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "provider own home requests" do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET providers/means/own_home" do
-    subject { get providers_legal_aid_application_means_own_home_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_means_own_home_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,17 +16,31 @@ RSpec.describe "provider own home requests" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
       end
+
+      context "without a partner" do
+        it "shows the correct content" do
+          expect(response.body).not_to include(I18n.t("providers.means.own_homes.show.h1_heading_with_partner"))
+        end
+      end
+
+      context "with a partner" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
+
+        it "shows the correct content" do
+          expect(response.body).to include(I18n.t("providers.means.own_homes.show.h1_heading_with_partner"))
+        end
+      end
     end
   end
 
   describe "PATCH providers/means/own_home" do
-    subject { patch providers_legal_aid_application_means_own_home_path(legal_aid_application), params: params.merge(submit_button) }
+    subject(:request) { patch providers_legal_aid_application_means_own_home_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:own_home) { "owned_outright" }
     let(:params) do
@@ -38,7 +52,7 @@ RSpec.describe "provider own home requests" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
       context "with Continue button pressed" do
@@ -164,7 +178,7 @@ RSpec.describe "provider own home requests" do
           let(:params) { {} }
 
           it "redirects provider to provider's applications page" do
-            subject
+            request
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
