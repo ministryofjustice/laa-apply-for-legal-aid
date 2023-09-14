@@ -420,6 +420,7 @@ end
 Given("I start the journey as far as the start of the vehicle section") do
   @legal_aid_application = create(
     :application,
+    :with_applicant,
     :passported,
   )
   login_as @legal_aid_application.provider

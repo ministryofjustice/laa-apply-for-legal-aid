@@ -945,7 +945,7 @@ en:
           percentage_hint: Your client's name must be on the property deeds, lease, freehold or mortgage.
       vehicles:
         show:
-          heading: Does your client own a vehicle?
+          heading: "Does %{individual} own a vehicle?"
           hint: This includes cars, vans and motorcyles.
       vehicle_details:
         show:

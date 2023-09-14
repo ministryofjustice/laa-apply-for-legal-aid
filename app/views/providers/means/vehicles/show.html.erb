@@ -2,14 +2,15 @@
               url: providers_legal_aid_application_means_vehicle_path,
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? I18n.t("generic.client_or_partner") : I18n.t("generic.client") %>
+  <%= page_template page_title: t(".heading", individual:), template: :basic, form: do %>
 
     <%= form.govuk_collection_radio_buttons(
           :own_vehicle,
           yes_no_options,
           :value,
           :label,
-          legend: { size: "xl", tag: "h1", text: t(".heading") },
+          legend: { size: "xl", tag: "h1", text: t(".heading", individual:) },
           hint: { text: t(".hint") },
         ) %>
 

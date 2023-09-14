@@ -45,6 +45,10 @@ Feature: partner_means_assessment full journey
     When I click "Continue"
     Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
 
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client or their partner own a vehicle?"
+
   @javascript
   Scenario: I am able to complete the income means assessment for client and partner to check your answers
     Given csrf is enabled
@@ -156,3 +160,7 @@ Feature: partner_means_assessment full journey
 
     When I click "Continue"
     Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
+
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client or their partner own a vehicle?"
