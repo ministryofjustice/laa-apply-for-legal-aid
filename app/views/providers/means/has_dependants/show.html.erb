@@ -42,9 +42,6 @@
 
     <% end %>
 
-    <%= next_action_buttons(
-          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
-          form:,
-        ) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
