@@ -182,7 +182,7 @@ module Flow
         },
         check_income_answers: {
           path: ->(application) { urls.providers_legal_aid_application_means_check_income_answers_path(application) },
-          forward: :own_homes,
+          forward: :capital_introductions,
         },
       }.freeze
     end

@@ -164,26 +164,14 @@ en:
     capital_introductions:
       show:
         h1-heading: What you need to do
-        capital_list_heading: Tell us about your client's capital
+        capital_list_heading: "Tell us about %{individual}'s capital"
         capital_text: "This includes:"
-        merits_list_heading: Provide details of the case
-        merits_text: "As part of the merits test, you'll need to provide:"
         capital_items:
           list: |
             property
             vehicles
             savings and investments
             other assets
-        merits_items:
-          list: |
-            details of the latest domestic abuse incident
-            information about the opponent
-            a statement of case
-            the chances of a successful outcome
-        section_8_items:
-            list: |
-              details of children involved
-              details of any attempts to settle the matter
     check_benefits:
       index:
         details_used: "We used the following details to check your client's benefits status with the DWP:"

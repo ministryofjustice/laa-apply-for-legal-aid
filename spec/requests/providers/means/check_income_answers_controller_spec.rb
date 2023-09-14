@@ -65,8 +65,8 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
       expect(legal_aid_application.reload).to be_provider_assessing_means
     end
 
-    it "redirects to the own homes page" do
-      expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+    it "redirects to the capital introductions page" do
+      expect(response).to redirect_to(providers_legal_aid_application_capital_introduction_path(legal_aid_application))
     end
   end
 end
