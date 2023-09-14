@@ -27,9 +27,7 @@
 
     <% unless read_only %>
       <div class="govuk-grid-column-one-third align-text-right">
-        <p>
-          <%= govuk_link_to t("generic.change"), url %>
-        </p>
+        <p><%= govuk_link_to t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t(".#{transactions_for}.heading")}" %></p>
       </div>
       <% end %>
   </div>

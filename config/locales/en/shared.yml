@@ -280,7 +280,7 @@ en:
         nino: National Insurance number
         has_partner: Does your client have a partner?
       dependants:
-        has_dependants: Does your client have any dependants?
+        has_dependants: Does %{individual} have any dependants?
         add-new: Add dependant
         delete: Delete dependant
         name: Name
@@ -295,7 +295,7 @@ en:
         new_limit_reasons: Reason
       housing_benefit:
         heading: Housing Benefit
-        does_your_client: Does your client get Housing Benefit?
+        does_your_client: Does %{individual} get Housing Benefit?
       substantive_costs:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested

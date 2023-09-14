@@ -6,7 +6,7 @@
   </div>
   <% unless read_only %>
     <div class="govuk-grid-column-one-third align-text-right">
-      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t(".#{type}_heading")}") %></p>
+      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t(".#{type}_heading", individual_with_determiner:)}") %></p>
     </div>
   <% end %>
 </div>
@@ -24,7 +24,7 @@
 <%= govuk_summary_list(
       actions: false,
       classes: "govuk-!-margin-bottom-9",
-      html_attributes: { "data-check-your-answers-section": t(".#{type}_heading").parameterize },
+      html_attributes: { "data-check-your-answers-section": t(".#{type}_heading", individual_with_determiner:).parameterize },
     ) do |summary_list| %>
   <% cash_transaction_types.each do |category| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{category.label_name.parameterize}-cash-#{type}-#{individual.downcase}" }) do |row| %>
