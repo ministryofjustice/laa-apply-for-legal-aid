@@ -46,7 +46,13 @@
   </section>
 
   <section class="print-no-break">
-    <%= render("shared/check_answers/housing_benefit", read_only: true) if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
+    <% if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
+      <%= render(
+            "shared/check_answers/housing_benefit",
+            read_only: true,
+            individual: "Applicant",
+          ) %>
+    <% end %>
   </section>
 
   <section class="print-no-break">
