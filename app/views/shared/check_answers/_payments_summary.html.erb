@@ -1,12 +1,12 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<div class="govuk-grid-row" id="app-check-your-answers__<%= income_type.parameterize(separator: "_") %>">
+<div class="govuk-grid-row" id="app-check-your-answers__<%= payment_type.parameterize(separator: "_") %>">
   <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= income_type %></h3>
+    <h3 class="govuk-heading-m"><%= payment_type %></h3>
   </div>
   <% unless read_only %>
     <div class="govuk-grid-column-one-third align-text-right">
-      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{income_type}") %></p>
+      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}") %></p>
     </div>
   <% end %>
 </div>
@@ -14,7 +14,7 @@
 <%= govuk_summary_list(
       actions: false,
       classes: "govuk-!-margin-bottom-9",
-      html_attributes: { "data-check-your-answers-section": income_type.parameterize },
+      html_attributes: { "data-check-your-answers-section": payment_type.parameterize },
     ) do |summary_list| %>
   <% transaction_types.each do |transaction_type| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transaction_type.label_name.parameterize}" }) do |row| %>

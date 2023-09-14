@@ -29,8 +29,8 @@
              state_benefits: @legal_aid_application.partner.state_benefits) %>
 
   <%= render(
-        "shared/check_answers/income_summary",
-        income_type: t(".credits-section-heading"),
+        "shared/check_answers/payments_summary",
+        payment_type: t(".credits-section-heading"),
         url: providers_legal_aid_application_partners_regular_incomes_path(@legal_aid_application),
         transaction_types: @credit_transaction_types,
         individual: "Partner",
@@ -56,8 +56,8 @@
   <h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
 
   <%= render(
-        "shared/check_answers/income_summary",
-        income_type: t(".debits-section-heading"),
+        "shared/check_answers/payments_summary",
+        payment_type: t(".debits-section-heading"),
         url: providers_legal_aid_application_partners_regular_outgoings_path(@legal_aid_application),
         transaction_types: @debit_transaction_types,
         individual: "Partner",

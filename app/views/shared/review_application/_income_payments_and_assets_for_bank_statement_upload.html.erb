@@ -36,8 +36,8 @@
 
   <section class="print-no-break">
     <%= render(
-          "shared/check_answers/income_summary",
-          income_type: t(".credits-section-heading"),
+          "shared/check_answers/payments_summary",
+          payment_type: t(".credits-section-heading"),
           url: @legal_aid_application.uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
           transaction_types: TransactionType.credits.without_disregarded_benefits.without_benefits,
           read_only: true,
@@ -76,8 +76,8 @@
     <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
 
     <%= render(
-          "shared/check_answers/income_summary",
-          income_type: t(".debits-section-heading"),
+          "shared/check_answers/payments_summary",
+          payment_type: t(".debits-section-heading"),
           url: @legal_aid_application.uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings,
           transaction_types: TransactionType.debits,
           read_only: true,
