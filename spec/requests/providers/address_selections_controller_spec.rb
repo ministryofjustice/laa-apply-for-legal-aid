@@ -6,10 +6,10 @@ RSpec.describe Providers::AddressSelectionsController do
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/address_selections/edit" do
-    subject { get providers_legal_aid_application_address_selection_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_address_selection_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -27,11 +27,11 @@ RSpec.describe Providers::AddressSelectionsController do
           expect(AddressLookupService)
             .to receive(:call).with(address.postcode).and_call_original
 
-          subject
+          get_request
         end
 
         it "renders the address selection page" do
-          subject
+          get_request
 
           expect(response).to be_successful
           expect(unescaped_response_body).to match("Select an address")
@@ -44,7 +44,7 @@ RSpec.describe Providers::AddressSelectionsController do
           let(:error_message) { "We could not find any addresses for that postcode. Enter the address manually." }
 
           it "renders the manual address selection page" do
-            subject
+            get_request
 
             expect(response).to be_successful
             expect(unescaped_response_body).to match(form_heading)
@@ -57,7 +57,7 @@ RSpec.describe Providers::AddressSelectionsController do
         before { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
 
         it "redirects to the postcode entering page" do
-          subject
+          get_request
           expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(back: true))
         end
       end
@@ -65,7 +65,7 @@ RSpec.describe Providers::AddressSelectionsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/address_selections" do
-    subject { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: }
+    subject(:patch_request) { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: }
 
     let(:address_list) do
       [
@@ -89,7 +89,7 @@ RSpec.describe Providers::AddressSelectionsController do
     end
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -103,11 +103,11 @@ RSpec.describe Providers::AddressSelectionsController do
         let(:lookup_id) { "" }
 
         it "does not create a new address record" do
-          expect { subject }.not_to change(Address, :count)
+          expect { patch_request }.not_to change(Address, :count)
         end
 
         it "renders the address selection page" do
-          subject
+          patch_request
 
           expect(response).to be_successful
           expect(unescaped_response_body).to match("Select an address from the list")
@@ -117,19 +117,19 @@ RSpec.describe Providers::AddressSelectionsController do
       end
 
       it "creates a new address record associated with the applicant" do
-        expect { subject }.to change { applicant.reload.addresses.count }.by(1)
+        expect { patch_request }.to change { applicant.reload.addresses.count }.by(1)
         expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
         expect(applicant.address.lookup_id).to eq(lookup_id)
       end
 
       it "redirects to next submission step" do
-        subject
+        patch_request
 
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
       end
 
       it "records that the lookup service was used" do
-        subject
+        patch_request
         expect(applicant.address.lookup_used).to be(true)
       end
 
@@ -137,11 +137,11 @@ RSpec.describe Providers::AddressSelectionsController do
         before { create(:address, applicant:) }
 
         it "does not create a new address record" do
-          expect { subject }.not_to change { applicant.addresses.count }
+          expect { patch_request }.not_to change { applicant.addresses.count }
         end
 
         it "updates the current address" do
-          subject
+          patch_request
           expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
           expect(applicant.address.lookup_id).to eq(lookup_id)
         end
@@ -151,12 +151,12 @@ RSpec.describe Providers::AddressSelectionsController do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+          expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end

@@ -8,13 +8,13 @@ module Providers
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
 
       describe "GET /providers/applications/:legal_aid_application_id/date_client_told_incident" do
-        subject do
+        subject(:get_request) do
           get providers_legal_aid_application_date_client_told_incident_path(legal_aid_application)
         end
 
         before do
           login_provider
-          subject
+          get_request
         end
 
         it "renders successfully" do
@@ -50,7 +50,7 @@ module Providers
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/date_client_told_incident" do
-        subject do
+        subject(:patch_request) do
           patch(
             providers_legal_aid_application_date_client_told_incident_path(legal_aid_application),
             params: params.merge(button_clicked),
@@ -82,25 +82,25 @@ module Providers
         end
 
         it "creates a new incident with the values entered" do
-          expect { subject }.to change(::ApplicationMeritsTask::Incident, :count).by(1)
+          expect { patch_request }.to change(::ApplicationMeritsTask::Incident, :count).by(1)
           expect(incident.told_on).to eq(told_on)
           expect(incident.occurred_on).to eq(occurred_on)
         end
 
         it "sets the task to complete" do
-          subject
+          patch_request
           expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:application, :latest_incident_details)
         end
 
         it "redirects to the next page" do
-          subject
+          patch_request
           expect(response).to redirect_to(flow_forward_path)
         end
 
         context "when not authenticated" do
           let(:login_provider) { nil }
 
-          before { subject }
+          before { patch_request }
 
           it_behaves_like "a provider not authenticated"
         end
@@ -109,12 +109,12 @@ module Providers
           let(:told_on_3i) { "" }
 
           it "renders show" do
-            subject
+            patch_request
             expect(response).to have_http_status(:ok)
           end
 
           it "does not set the task to complete" do
-            subject
+            patch_request
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :latest_incident_details)
           end
         end
@@ -123,12 +123,12 @@ module Providers
           let(:told_on_3i) { "6s2" }
 
           it "renders show" do
-            subject
+            patch_request
             expect(response).to have_http_status(:ok)
           end
 
           it "contains error message" do
-            subject
+            patch_request
             expect(response.body).to include("govuk-error-summary")
             expect(response.body).to include(I18n.t("activemodel.errors.models.application_merits_task/incident.attributes.told_on.date_not_valid"))
           end
@@ -138,7 +138,7 @@ module Providers
           let(:told_on_3i) { "32" }
 
           it "renders show" do
-            subject
+            patch_request
             expect(response).to have_http_status(:ok)
           end
         end
@@ -147,12 +147,12 @@ module Providers
           let(:button_clicked) { draft_button }
 
           it "redirects to provider draft endpoint" do
-            subject
+            patch_request
             expect(response).to redirect_to provider_draft_endpoint
           end
 
           it "does not set the task to complete" do
-            subject
+            patch_request
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :latest_incident_details)
           end
         end

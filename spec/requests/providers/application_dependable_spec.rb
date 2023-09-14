@@ -5,10 +5,10 @@ RSpec.describe "Providers::ApplicationDependable", :vcr do
   let(:provider) { legal_aid_application.provider }
 
   describe "GET an action" do
-    subject { get providers_legal_aid_application_proceedings_types_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_proceedings_types_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe "Providers::ApplicationDependable", :vcr do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do

@@ -10,10 +10,10 @@ RSpec.describe Providers::ApplicantBankAccountsController do
   let!(:provider) { legal_aid_application.provider }
 
   describe "GET providers/:application_id/applicant_bank_account" do
-    subject { get providers_legal_aid_application_applicant_bank_account_path(legal_aid_application.id) }
+    subject(:get_request) { get providers_legal_aid_application_applicant_bank_account_path(legal_aid_application.id) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -21,7 +21,7 @@ RSpec.describe Providers::ApplicantBankAccountsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -34,7 +34,7 @@ RSpec.describe Providers::ApplicantBankAccountsController do
       end
 
       it "shows the client bank account name and balance" do
-        subject
+        get_request
         expect(unescaped_response_body).to include(bank_provider.name)
         expect(response.body).to include(bank_account.balance.to_fs(:delimited))
       end
@@ -42,7 +42,7 @@ RSpec.describe Providers::ApplicantBankAccountsController do
   end
 
   describe "PATCH /providers/applications/:application_id/applicant_bank_account" do
-    subject do
+    subject(:patch_request) do
       patch(
         "/providers/applications/#{application_id}/applicant_bank_account",
         params:,
@@ -63,7 +63,7 @@ RSpec.describe Providers::ApplicantBankAccountsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        patch_request
       end
 
       context "when neither option is chosen" do

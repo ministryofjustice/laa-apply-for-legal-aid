@@ -7,18 +7,18 @@ module Providers
       let(:provider) { application.provider }
 
       describe "new: GET /providers/applications/:legal_aid_application_id/involved_children/new" do
-        subject { get new_providers_legal_aid_application_involved_child_path(application) }
+        subject(:get_request) { get new_providers_legal_aid_application_involved_child_path(application) }
 
         context "when authenticated" do
           before { login_as provider }
 
           it "returns success" do
-            subject
+            get_request
             expect(response).to have_http_status(:ok)
           end
 
           it "displays the form to add new children" do
-            subject
+            get_request
             expect(response.body).to include("Enter details of the children involved in this application")
             expect(response.body).to include("Full name")
             expect(response.body).to include("Date of birth")
@@ -26,14 +26,14 @@ module Providers
         end
 
         context "when unauthenticated" do
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
       end
 
       describe "show: GET /providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
-        subject { get providers_legal_aid_application_involved_child_path(application, child) }
+        subject(:get_request) { get providers_legal_aid_application_involved_child_path(application, child) }
 
         let(:child) { create(:involved_child, legal_aid_application: application) }
 
@@ -41,25 +41,25 @@ module Providers
           before { login_as provider }
 
           it "returns success" do
-            subject
+            get_request
             expect(response).to have_http_status(:ok)
           end
 
           it "displays child details" do
-            subject
+            get_request
             expect(response.body).to include(html_compare(child.full_name))
           end
         end
 
         context "when unauthenticated" do
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
       end
 
       describe "update: PATCH providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
-        subject { patch providers_legal_aid_application_involved_child_path(application, child), params: }
+        subject(:patch_request) { patch providers_legal_aid_application_involved_child_path(application, child), params: }
 
         let(:child) { create(:involved_child, legal_aid_application: application) }
         let(:new_full_name) { "#{child.full_name} Junior" }
@@ -78,13 +78,13 @@ module Providers
 
           context "with valid parameters" do
             it "updates the child record" do
-              subject
+              patch_request
               expect(child.reload.full_name).to eq new_full_name
               expect(child.reload.date_of_birth).to eq Date.new(2020, 6, 4)
             end
 
             it "redirects" do
-              subject
+              patch_request
               expect(response).to redirect_to(providers_legal_aid_application_has_other_involved_children_path(application))
             end
 
@@ -92,7 +92,7 @@ module Providers
               let(:new_full_name) { "  John    Doe  " }
 
               it "removes excess whitespaces" do
-                subject
+                patch_request
                 expect(child.reload.full_name).to eq "John Doe"
               end
             end
@@ -102,11 +102,11 @@ module Providers
             let(:new_full_name) { "" }
 
             it "does not update the child record" do
-              expect { subject }.not_to change(child, :full_name)
+              expect { patch_request }.not_to change(child, :full_name)
             end
 
             it "renders the show page" do
-              subject
+              patch_request
               expect(response.body).to include(html_compare(child.full_name))
             end
           end
