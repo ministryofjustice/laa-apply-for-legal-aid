@@ -16,9 +16,9 @@
 <% end %>
 
 <% cash_transaction_types = if type.eql?(:income)
-                              @legal_aid_application.cash_transaction_types_for?(individual)
+                              @legal_aid_application.income_cash_transaction_types_for(individual)
                             elsif type.eql?(:outgoings)
-                              @legal_aid_application.outgoing_cash_transaction_types_for?(individual)
+                              @legal_aid_application.outgoing_cash_transaction_types_for(individual)
                             end %>
 
 <%= govuk_summary_list(

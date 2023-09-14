@@ -22,7 +22,7 @@ module Providers
       end
 
       def cash_transactions
-        @cash_transactions ||= legal_aid_application.outgoing_cash_transaction_types_for?("Applicant")
+        @cash_transactions ||= legal_aid_application.outgoing_cash_transaction_types_for("Applicant")
       end
 
       def aggregated_cash_outgoings
