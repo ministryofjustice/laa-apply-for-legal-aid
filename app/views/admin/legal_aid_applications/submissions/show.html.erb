@@ -19,12 +19,7 @@
     <% end %>
     <% if @legal_aid_application&.hmrc_responses.any? %>
       <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
-        <details>
-          <summary class="govuk-heading-m govuk-details__summary"
-                   title="HMRC use case <%= hmrc_response.use_case %> <%= hmrc_response.owner_type %>"
-                   aria-label="HMRC use case <%= hmrc_response.use_case %> <%= hmrc_response.owner_type %> result">
-            HMRC response - use case <%= hmrc_response.use_case %> for the <%= hmrc_response.owner_type.downcase %>
-          </summary>
+        <%= govuk_details(summary_text: "HMRC response - use case #{hmrc_response.use_case} for the #{hmrc_response.owner_type.downcase}") do %>
           <section>
             <% if hmrc_response.response.present? %>
                 <% if hmrc_response&.response['data'].present? %>
@@ -38,9 +33,9 @@
             <% else %>
               Submission created, awaiting first check
             <% end %>
-            </section>
-        </details>
+          </section>
         <% end %>
+      <% end %>
     <% end %>
   </dl>
   <% if @legal_aid_application.cfe_submissions.present? %>
