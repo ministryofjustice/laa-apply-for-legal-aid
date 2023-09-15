@@ -7,28 +7,17 @@
     <%= render "shared/means/cost_of_living_and_disregarded_benefits" %>
   <% end %>
 
-  <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
-    <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-      <summary class="govuk-details__summary"
-        title="<%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>"
-        aria-label="<%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>">
-        <%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
-      </summary>
-
-      <div class="govuk-details__text">
-        <%= t("transaction_types.#{@transaction_type.name}.subheading") %>
-        <div class="govuk-!-padding-bottom-4"></div>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <% t("transaction_types.#{@transaction_type.name}.list").each_line do |examples| %>
-            <li><%= examples %></li>
-          <% end %>
-        </ul>
-        <div class="govuk-!-margin-bottom-0"></div>
-        <%= t("transaction_types.#{@transaction_type.name}.closing_text") %>
-      </div>
-    </details>
+<% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
+  <%= govuk_details(summary_text: t("transaction_types.#{@transaction_type.name}.details_summary_heading")) do %>
+    <div><%= t("transaction_types.#{@transaction_type.name}.subheading") %></div>
+      <ul>
+        <% t("transaction_types.#{@transaction_type.name}.list").each_line do |examples| %>
+          <li><%= examples %></li>
+        <% end %>
+      </ul>
+    <div><%= t("transaction_types.#{@transaction_type.name}.closing_text") %></div>
   <% end %>
+<% end %>
 
   <%= form_with(method: :patch, local: true) do |form| %>
 
