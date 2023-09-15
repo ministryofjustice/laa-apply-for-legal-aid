@@ -245,7 +245,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     vehicle: nil,
+                     vehicles: [],
                      office:)
             end
 
@@ -269,65 +269,9 @@ module CCMS
 
         describe "car and vehicle entity" do
           context "when a car or vehicle is present" do
-            it "creates the entity" do
+            it "does not create the entity" do
               entity_block = XmlExtractor.call(xml, :vehicle_entity)
-              expect(entity_block).to be_present
-            end
-
-            describe "CARANDVEH_INPUT_B_14WP2_28A - In regular use" do
-              it "is false" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_B_14WP2_28A")
-                expect(block).to have_boolean_response legal_aid_application.vehicle.used_regularly?
-              end
-            end
-
-            describe "CARANDVEH_INPUT_D_14WP2_27A - Date of purchase" do
-              it "is populated with the purchase date" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_D_14WP2_27A")
-                expect(block).to have_date_response legal_aid_application.vehicle.purchased_on.strftime("%d-%m-%Y")
-              end
-            end
-
-            describe "CARANDVEH_INPUT_T_14WP2_20A - Make of vehicle" do
-              it "is populated with 'Make: unspecified'" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_T_14WP2_20A")
-                expect(block).to have_text_response("Make: unspecified")
-              end
-            end
-
-            describe "CARANDVEH_INPUT_T_14WP2_21A - Model of vehicle" do
-              it "is populated with 'Model: unspecified'" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_T_14WP2_21A")
-                expect(block).to have_text_response("Model: unspecified")
-              end
-            end
-
-            describe "CARANDVEH_INPUT_T_14WP2_22A - Registration number" do
-              it "is populated with 'Registration number: unspecified'" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_T_14WP2_22A")
-                expect(block).to have_text_response("Registration number: unspecified")
-              end
-            end
-
-            describe "CARANDVEH_INPUT_C_14WP2_24A - Purchase price" do
-              it "is populated with zero" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_24A")
-                expect(block).to have_currency_response("0.00")
-              end
-            end
-
-            describe "CARANDVEH_INPUT_C_14WP2_25A - Current market value" do
-              it "is populated with the estimated value" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_25A")
-                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicle.estimated_value))
-              end
-            end
-
-            describe "CARANDVEH_INPUT_C_14WP2_26A - Value of loan outstanding" do
-              it "is populated with the payment remaining" do
-                block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_26A")
-                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicle.payment_remaining))
-              end
+              expect(entity_block).not_to be_present
             end
           end
 
@@ -339,7 +283,7 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      with_bank_accounts: 2,
-                     vehicle: nil,
+                     vehicles: [],
                      office:)
             end
 
@@ -376,15 +320,15 @@ module CCMS
               expect(block).not_to be_present, "Expected block for wage slips entity not to be generated, but was \n #{block}"
             end
 
-            it "assigns the sequence number to the next entity one higher than that for vehicles" do
-              vehicle_entity = XmlExtractor.call(xml, :vehicle_sequence_entity)
-              doc = Nokogiri::XML(vehicle_entity.to_s)
-              vehicle_sequence = doc.xpath("//SequenceNumber").text.to_i
+            it "assigns the sequence number to the next entity one higher than that for valuable_possessions" do
+              possession_entity = XmlExtractor.call(xml, :valuable_possessions_entity)
+              doc = Nokogiri::XML(possession_entity.to_s)
+              possession_sequence = doc.xpath("//SequenceNumber").text.to_i
 
               means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
               doc = Nokogiri::XML(means_proceeding_entity.to_s)
               means_proceeding_sequence = doc.xpath("//SequenceNumber").text.to_i
-              expect(means_proceeding_sequence).to eq vehicle_sequence + 1
+              expect(means_proceeding_sequence).to eq possession_sequence + 1
             end
           end
         end

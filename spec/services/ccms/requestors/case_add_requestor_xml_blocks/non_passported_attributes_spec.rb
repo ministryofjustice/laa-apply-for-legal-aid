@@ -118,8 +118,7 @@ module CCMS
           it "generates each attribute as false" do
             vehicle_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
-              expect(block).to have_boolean_response false
-              expect(block).to be_user_defined
+              expect(block).not_to be_present
             end
           end
         end

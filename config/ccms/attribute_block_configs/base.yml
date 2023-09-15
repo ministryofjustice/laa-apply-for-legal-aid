@@ -5322,47 +5322,6 @@ valuable_possessions:
     br100_meaning: 'Val. possessions: Sale value'
     response_type: currency
     user_defined: true
-vehicles:
-  CARANDVEH_INPUT_B_14WP2_28A:
-    value: "#vehicle_used_regularly?"
-    br100_meaning: 'Cars: It is used for regular use?'
-    response_type: boolean
-    user_defined: true
-  CARANDVEH_INPUT_D_14WP2_27A:
-    value: "#vehicle_purchased_on"
-    br100_meaning: 'Cars: Date of purchase'
-    response_type: date
-    user_defined: true
-  CARANDVEH_INPUT_T_14WP2_20A:
-    value: 'Make: unspecified'
-    br100_meaning: 'Cars: Make'
-    response_type: text
-    user_defined: true
-  CARANDVEH_INPUT_T_14WP2_21A:
-    value: 'Model: unspecified'
-    br100_meaning: 'Cars: Model'
-    response_type: text
-    user_defined: true
-  CARANDVEH_INPUT_T_14WP2_22A:
-    value: 'Registration number: unspecified'
-    br100_meaning: 'Cars: Reg'
-    response_type: text
-    user_defined: true
-  CARANDVEH_INPUT_C_14WP2_24A:
-    value: 0.0
-    br100_meaning: 'Cars: Purchase price'
-    response_type: currency
-    user_defined: true
-  CARANDVEH_INPUT_C_14WP2_25A:
-    value: "#vehicle_estimated_value"
-    br100_meaning: 'Cars: Current market value'
-    response_type: currency
-    user_defined: true
-  CARANDVEH_INPUT_C_14WP2_26A:
-    value: "#vehicle_payment_remaining"
-    br100_meaning: 'Cars: Value of loan outstanding'
-    response_type: currency
-    user_defined: true
 wages:
   CLI_NON_HM_WS_INPUT_C_3WP3_3A:
     value: "#wage_slip_ni_deducted"

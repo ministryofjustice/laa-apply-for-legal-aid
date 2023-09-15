@@ -10,12 +10,6 @@
   entity_name: BANKACC
   yaml_section: :bank_acct
 
-- predicate: :vehicles_present?
-  method: :generate_vehicles_entity
-  entity_name: CARS_AND_MOTOR_VEHICLES
-  instance_label: the cars & motor vehicle1
-  yaml_section: :vehicles
-
 - method: :generate_means_proceeding_entity
   entity_name: PROCEEDING
   yaml_section: :proceeding_means

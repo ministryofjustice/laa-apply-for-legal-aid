@@ -155,63 +155,6 @@
                     </common:Entity>
                     <common:Entity>
                       <common:SequenceNumber>2</common:SequenceNumber>
-                      <common:EntityName>CARS_AND_MOTOR_VEHICLES</common:EntityName>
-                      <common:Instances>
-                        <common:InstanceLabel>the cars &amp; motor vehicle1</common:InstanceLabel>
-                        <common:Attributes>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_B_14WP2_28A</common:Attribute>
-                            <common:ResponseType>boolean</common:ResponseType>
-                            <common:ResponseValue>true</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_D_14WP2_27A</common:Attribute>
-                            <common:ResponseType>date</common:ResponseType>
-                            <common:ResponseValue>22-08-2008</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_T_14WP2_20A</common:Attribute>
-                            <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>Make: unspecified</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_T_14WP2_21A</common:Attribute>
-                            <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>Model: unspecified</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_T_14WP2_22A</common:Attribute>
-                            <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>Registration number: unspecified</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_C_14WP2_24A</common:Attribute>
-                            <common:ResponseType>currency</common:ResponseType>
-                            <common:ResponseValue>0.00</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_C_14WP2_25A</common:Attribute>
-                            <common:ResponseType>currency</common:ResponseType>
-                            <common:ResponseValue>3030.00</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                          <common:Attribute>
-                            <common:Attribute>CARANDVEH_INPUT_C_14WP2_26A</common:Attribute>
-                            <common:ResponseType>currency</common:ResponseType>
-                            <common:ResponseValue>881.00</common:ResponseValue>
-                            <common:UserDefinedInd>true</common:UserDefinedInd>
-                          </common:Attribute>
-                        </common:Attributes>
-                      </common:Instances>
-                    </common:Entity>
-                    <common:Entity>
-                      <common:SequenceNumber>3</common:SequenceNumber>
                       <common:EntityName>PROCEEDING</common:EntityName>
                       <common:Instances>
                         <common:InstanceLabel>P_55000001</common:InstanceLabel>
@@ -268,7 +211,7 @@
                       </common:Instances>
                     </common:Entity>
                     <common:Entity>
-                      <common:SequenceNumber>4</common:SequenceNumber>
+                      <common:SequenceNumber>3</common:SequenceNumber>
                       <common:EntityName>OPPONENT_OTHER_PARTIES</common:EntityName>
                       <common:Instances>
                         <common:InstanceLabel>OPPONENT_88123456</common:InstanceLabel>
@@ -377,7 +320,7 @@
                       </common:Instances>
                     </common:Entity>
                     <common:Entity>
-                      <common:SequenceNumber>5</common:SequenceNumber>
+                      <common:SequenceNumber>4</common:SequenceNumber>
                       <common:EntityName>global</common:EntityName>
                       <common:Instances>
                         <common:InstanceLabel>300000000001</common:InstanceLabel>

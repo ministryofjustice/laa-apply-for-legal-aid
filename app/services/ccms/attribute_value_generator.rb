@@ -268,10 +268,6 @@ module CCMS
       legal_aid_application.outstanding_mortgage_amount
     end
 
-    def applicant_has_vehicle?(_options)
-      vehicle.present? && not_zero?(vehicle.estimated_value)
-    end
-
     def ccms_equivalent_prospects_of_success(_options)
       return unless ccms_equivalent_prospects_of_success_valid?
 
