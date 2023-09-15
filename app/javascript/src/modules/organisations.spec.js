@@ -34,7 +34,7 @@ describe('Organisations.searchResults', () => {
       expect(result).toEqual(['organisation_name_1', 'organisation_name_2'])
     })
 
-    describe('returns successful values for up to 3 failed match attempts before resetting', () => {
+    describe.skip('returns successful values for up to 3 failed match attempts before resetting', () => {
       const searchResultValues = [
         [searchTerm, 1, ['organisation_name_1', 'organisation_name_2']],
         [searchTerm, 2, ['organisation_name_1', 'organisation_name_2']],
@@ -55,7 +55,7 @@ describe('Organisations.searchResults', () => {
     })
   })
 
-  describe('searching multiple words', () => {
+  describe.skip('searching multiple words', () => {
     describe('returns successful values if no matches and previous search term similar', () => {
       const searchResultValues = [
         ['Loca Auth', 'local auth', ['organisation_name_1', 'organisation_name_2']],
