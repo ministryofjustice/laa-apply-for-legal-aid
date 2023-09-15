@@ -466,11 +466,11 @@ en:
           organisation: An organisation
       opponent_individuals:
         show: &new
-          page_title: Opponent
         new: *new
         form:
           first_name: First name
           last_name: Last name
+          h1-heading: Opponent
       opponent_existing_organisations:
         create:
           search_and_select: Search for and select an organisation
@@ -492,12 +492,12 @@ en:
           search_hint: Using common terms, like "council", will return large lists. Be specific.
       opponent_new_organisations:
         show: &new
-          page_title: Opponent
         new: *new
         form:
           name: Organisation name
           type: Organisation type
           select_list_prompt: Select type
+          h1-heading: Opponent
       has_other_opponents:
         show:
           page_title: You have added %{count}

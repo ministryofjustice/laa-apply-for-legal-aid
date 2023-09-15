@@ -4,17 +4,20 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= form.govuk_text_field(
-        :first_name,
-        label: { text: t(".first_name"), size: "m" },
-        class: "govuk-input govuk-input--width-20",
-      ) %>
 
-  <%= form.govuk_text_field(
-        :last_name,
-        label: { text: t(".last_name"), size: "m" },
-        class: "govuk-input govuk-input--width-20",
-      ) %>
+  <%= page_template(page_title: t(".h1-heading"), back_link: {}, form:) do %>
+    <%= form.govuk_text_field(
+          :first_name,
+          label: { text: t(".first_name"), size: "m" },
+          class: "govuk-input govuk-input--width-20",
+        ) %>
 
-  <%= next_action_buttons(show_draft: true, form:) %>
+    <%= form.govuk_text_field(
+          :last_name,
+          label: { text: t(".last_name"), size: "m" },
+          class: "govuk-input govuk-input--width-20",
+        ) %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
 <% end %>
