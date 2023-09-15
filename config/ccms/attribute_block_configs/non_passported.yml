@@ -2576,29 +2576,29 @@ vehicles:
     response_type: text
     generate_block?: true
   CARANDVEH_INPUT_B_14WP2_28A:
-    value: '#vehicle_used_regularly?'
+    value: false
     br100_meaning: 'Cars: It is used for regular use?'
     user_defined: true
     response_type: boolean
-    generate_block?: '#applicant_has_vehicle?'
+    generate_block?: true
   CARANDVEH_INPUT_C_14WP2_25A:
-    value: '#vehicle_estimated_value'
+    value: '0'
     br100_meaning: 'Cars: Current market value'
     user_defined: true
     response_type: currency
-    generate_block?: '#applicant_has_vehicle?'
+    generate_block?: true
   CARANDVEH_INPUT_C_14WP2_26A:
-    value: '#vehicle_payment_remaining'
+    value: '0'
     br100_meaning: 'Cars: Value of loan outstanding'
     user_defined: true
     response_type: currency
-    generate_block?: '#applicant_has_vehicle?'
+    generate_block?: true
   CARANDVEH_INPUT_D_14WP2_27A:
-    value: '#vehicle_purchased_on'
+    value: 01-01-1970
     br100_meaning: 'Cars: Date of purchase'
     user_defined: true
     response_type: date
-    generate_block?: '#applicant_has_vehicle?'
+    generate_block?: true
 
 will:
   WILL_INPUT_B_2WP2_10A:
