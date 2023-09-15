@@ -8,7 +8,6 @@ module ApplicationMeritsTask
     it { expect(organisation.ccms_child?).to be false }
     it { expect(organisation.ccms_opponent_relationship_to_case).to eq "Opponent" }
     it { expect(organisation).to respond_to(:name, :ccms_type_code, :ccms_type_text) }
-    it { expect(organisation.type).to eq "Organisation" }
 
     context "with an opponent" do
       context "when assuming organisation \"name\" is new one in CCMS" do

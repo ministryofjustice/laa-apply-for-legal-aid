@@ -5,6 +5,9 @@ module ApplicationMeritsTask
     belongs_to :opposable, polymorphic: true, dependent: :destroy
     belongs_to :legal_aid_application
 
+    scope :individuals, -> { where(opposable_type: "ApplicationMeritsTask::Individual") }
+    scope :organisations, -> { where(opposable_type: "ApplicationMeritsTask::Organisation") }
+
     delegate :first_name,
              :last_name,
              :full_name,
@@ -14,7 +17,18 @@ module ApplicationMeritsTask
              :name,
              :ccms_type_code,
              :ccms_type_text,
-             :type,
              to: :opposable
+
+    def id_exists_in_ccms?
+      ccms_opponent_id.present?
+    end
+
+    def individual?
+      opposable.is_a?(Individual)
+    end
+
+    def organisation?
+      opposable.is_a?(Organisation)
+    end
   end
 end

@@ -40,6 +40,10 @@ Then("the following sections should not exist:") do |table|
   end
 end
 
+Given("I insert cassette {string}") do |string|
+  VCR.insert_cassette(string, record: :once, allow_playback_repeats: true)
+end
+
 def expect_questions_in(expected:, selector:, negate: false)
   within(selector) do
     expected.hashes.each do |row|

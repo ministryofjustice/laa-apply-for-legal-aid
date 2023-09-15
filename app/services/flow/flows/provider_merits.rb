@@ -64,8 +64,12 @@ module Flow
           forward: :has_other_opponents,
           check_answers: :check_merits_answers,
         },
-        opponent_organisations: {
-          path: ->(application) { urls.new_providers_legal_aid_application_opponent_organisation_path(application) },
+        opponent_existing_organisations: {
+          path: ->(application) { urls.providers_legal_aid_application_opponent_existing_organisations_path(application) },
+          forward: :has_other_opponents,
+          check_answers: :check_merits_answers,
+        },
+        opponent_new_organisations: {
           forward: :has_other_opponents,
           check_answers: :check_merits_answers,
         },
@@ -83,7 +87,7 @@ module Flow
         opponent_types: {
           path: ->(application) { urls.providers_legal_aid_application_opponent_type_path(application) },
           forward: lambda { |_application, is_individual|
-            is_individual ? :opponent_individuals : :opponent_organisations
+            is_individual ? :opponent_individuals : :opponent_existing_organisations
           },
         },
         has_other_opponents: {
@@ -101,7 +105,7 @@ module Flow
             if application.opponents.count.positive?
               :has_other_opponents
             else
-              :opponent_individuals
+              Setting.opponent_organisations? ? :opponent_types : :opponent_individuals
             end
           },
         },

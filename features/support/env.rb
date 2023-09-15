@@ -144,3 +144,9 @@ After do |scenario|
     screenshot_image(name)
   end
 end
+
+# Add @EjectCassetteAfterScenario tags to scenarios/features
+# when using the "I insert cassette "cassette_name"" step
+After("@EjectCassetteAfterScenario") do
+  VCR.eject_cassette
+end

@@ -1,0 +1,53 @@
+// stylelint-disable selector-max-id
+
+#search-field {
+  display: none;
+}
+
+.proceeding-item,
+.organisation-item {
+  display: block;
+
+  .control-column {
+    text-align: right;
+  }
+}
+
+.js-enabled {
+  #search-field {
+    display: block;
+  }
+
+  .proceeding-item,
+  .organisation-item {
+    display: none;
+  }
+}
+
+.hover {
+  padding-top: 2px;
+  background-color: #e7f4fb;
+  cursor: pointer;
+}
+
+.highlight {
+  margin-right: 1px;
+  padding: 2px 0 0;
+  border-bottom: 3px solid #ffdd00;
+  background-color: #fff2d3;
+}
+
+.selected-proceeding-types,
+.selected-organisation-types {
+  .control-column {
+    @include govuk-media-query($from: desktop) {
+      text-align: right;
+    }
+  }
+}
+
+.govuk-link-right {
+  float: right;
+}
+
+// stylelint-enable selector-max-id

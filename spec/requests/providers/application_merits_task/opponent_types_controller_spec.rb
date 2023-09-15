@@ -60,9 +60,9 @@ module Providers
         context "when adding an organisation" do
           let(:radio_button) { "false" }
 
-          it "redirects to organisation opponent" do
+          it "redirects to opponent existing organisation" do
             patch_opponent_type
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponent_organisation_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_opponent_existing_organisations_path(application))
           end
 
           it "does not set the task to complete" do

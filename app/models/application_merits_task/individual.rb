@@ -19,9 +19,5 @@ module ApplicationMeritsTask
     def full_name
       "#{first_name} #{last_name}".strip
     end
-
-    def type
-      "Individual"
-    end
   end
 end
