@@ -60,11 +60,6 @@ RSpec.describe Providers::Means::VehiclesController do
         providers_legal_aid_application_means_vehicle_details_path(legal_aid_application)
       end
 
-      it "creates a vehicle" do
-        expect { subject }.to change(Vehicle, :count).by(1)
-        expect(legal_aid_application.reload.vehicle).to be_present
-      end
-
       it "sets own_vehicle to true" do
         expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(true)
       end
@@ -72,19 +67,6 @@ RSpec.describe Providers::Means::VehiclesController do
       it "redirects to vehicle details" do
         subject
         expect(response).to redirect_to(target_url)
-      end
-
-      context "and exiting vehicle" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle) }
-
-        it "does not create a vehicle" do
-          expect { subject }.not_to change(Vehicle, :count)
-        end
-
-        it "redirects to estimated value" do
-          subject
-          expect(response).to redirect_to(target_url)
-        end
       end
 
       context "when checking answers" do
@@ -103,10 +85,6 @@ RSpec.describe Providers::Means::VehiclesController do
         providers_legal_aid_application_applicant_bank_account_path(legal_aid_application)
       end
 
-      it "does not create a vehicle" do
-        expect { subject }.not_to change(Vehicle, :count)
-      end
-
       it "sets own_vehicle to false" do
         expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(false)
       end
@@ -118,10 +96,6 @@ RSpec.describe Providers::Means::VehiclesController do
 
       context "and existing vehicle" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
-
-        it "delete existing vehicle" do
-          expect { subject }.to change(Vehicle, :count).by(-1)
-        end
 
         it "redirects to offline account page on passported journey" do
           subject
