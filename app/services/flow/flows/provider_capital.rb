@@ -40,8 +40,23 @@ module Flow
               :offline_accounts
             end
           end,
+          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers }, # TODO: Change to add_other_vehicles
+        },
+
+        add_other_vehicles: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_add_other_vehicles_path(application) },
+          forward: lambda do |application, add_other_vehicles|
+            if add_other_vehicles
+              :vehicle_details
+            elsif application.non_passported? && !application.uploading_bank_statements?
+              :applicant_bank_accounts
+            else
+              :offline_accounts
+            end
+          end,
           check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
+
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: :savings_and_investments,
