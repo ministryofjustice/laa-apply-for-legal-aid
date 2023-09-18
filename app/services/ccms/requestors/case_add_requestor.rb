@@ -335,6 +335,40 @@ module CCMS
       end
 
       def generate_opponent_other_parties_means_instance(xml, other_party, config)
+        if other_party.ccms_child? || other_party.individual?
+          generate_opponent_individual_means_instance(xml, other_party, config)
+        else
+          generate_opponent_organisation_means_instance(xml, other_party, config)
+        end
+      end
+
+      def generate_opponent_individual_means_instance(xml, other_party, config)
+        xml.__send__(:"common:Instances") do
+          xml.__send__(:"common:InstanceLabel", "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__(:"common:Attributes") do
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party:)
+          end
+        end
+      end
+
+      def generate_opponent_organisation_means_instance(xml, other_party, config)
+        if other_party.exists_in_ccms?
+          generate_opponent_existing_organisation_means_instance(xml, other_party, config)
+        else
+          generate_opponent_new_organisation_means_instance(xml, other_party, config)
+        end
+      end
+
+      def generate_opponent_existing_organisation_means_instance(xml, other_party, config)
+        xml.__send__(:"common:Instances") do
+          xml.__send__(:"common:InstanceLabel", other_party.ccms_opponent_id)
+          xml.__send__(:"common:Attributes") do
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party:)
+          end
+        end
+      end
+
+      def generate_opponent_new_organisation_means_instance(xml, other_party, config)
         xml.__send__(:"common:Instances") do
           xml.__send__(:"common:InstanceLabel", "OPPONENT_#{other_party.generate_ccms_opponent_id}")
           xml.__send__(:"common:Attributes") do

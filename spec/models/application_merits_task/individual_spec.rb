@@ -4,7 +4,9 @@ module ApplicationMeritsTask
   RSpec.describe Individual do
     subject(:individual) { build(:individual) }
 
+    it { expect(individual.ccms_other_party_type).to eq "PERSON" }
     it { expect(individual.ccms_relationship_to_case).to eq "OPP" }
+    it { expect(individual.ccms_relationship_to_client).to eq "UNKNOWN" }
     it { expect(individual.ccms_child?).to be false }
     it { expect(individual.ccms_opponent_relationship_to_case).to eq "Opponent" }
     it { expect(individual).to respond_to(:first_name, :last_name, :full_name) }

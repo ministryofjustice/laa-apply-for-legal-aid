@@ -331,12 +331,25 @@ module CCMS
       options[:other_party].__send__(:full_name)
     end
 
+    def other_party_type(options)
+      options[:other_party].__send__(:ccms_other_party_type)
+    end
+
+    # TODO: this won't work for opponent "existing" organisations BUT may not matter for means/merits entities?!
     def other_party_ccms_opponent_id(options)
-      "OPPONENT_#{options[:other_party].__send__(:generate_ccms_opponent_id)}"
+      if options[:other_party].__send__(:exists_in_ccms?)
+        options[:other_party].__send__(:ccms_opponent_id)
+      else
+        "OPPONENT_#{options[:other_party].__send__(:generate_ccms_opponent_id)}"
+      end
     end
 
     def other_party_ccms_relationship_to_case(options)
       options[:other_party].__send__(:ccms_relationship_to_case)
+    end
+
+    def other_party_ccms_relationship_to_client(options)
+      options[:other_party].__send__(:ccms_relationship_to_client)
     end
 
     def other_party_ccms_child?(options)

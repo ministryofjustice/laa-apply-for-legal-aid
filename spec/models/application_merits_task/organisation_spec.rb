@@ -4,7 +4,9 @@ module ApplicationMeritsTask
   RSpec.describe Organisation do
     subject(:organisation) { build(:organisation) }
 
+    it { expect(organisation.ccms_other_party_type).to eq "ORGANISATION" }
     it { expect(organisation.ccms_relationship_to_case).to eq "OPP" }
+    it { expect(organisation.ccms_relationship_to_client).to eq "NONE" }
     it { expect(organisation.ccms_child?).to be false }
     it { expect(organisation.ccms_opponent_relationship_to_case).to eq "Opponent" }
     it { expect(organisation).to respond_to(:name, :ccms_type_code, :ccms_type_text) }

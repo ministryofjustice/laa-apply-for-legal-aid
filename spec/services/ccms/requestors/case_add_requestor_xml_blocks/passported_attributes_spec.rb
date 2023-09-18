@@ -1561,29 +1561,114 @@ module CCMS
         describe "with means OPPONENT_OTHER_PARTIES entity" do
           let(:entity) { :opponent_means }
 
-          it "hard-codes OTHER_PARTY_ID" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-            expect(block).to have_text_response "OPPONENT_88000001"
+          context "with opponent individual" do
+            it "populates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response "OPPONENT_88000001"
+            end
+
+            it "populates OTHER_PARTY_NAME" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response opponent.full_name
+            end
+
+            it "populates OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response "PERSON"
+            end
+
+            it "populates RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response "OPP"
+            end
+
+            it "populates RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response "UNKNOWN"
+            end
           end
 
-          it "hard-codes OTHER_PARTY_NAME" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-            expect(block).to have_text_response opponent.full_name
+          context "with opponent existing organisation" do
+            before do
+              legal_aid_application.opponents.destroy_all
+
+              create(:opponent,
+                     :for_organisation,
+                     organisation_name: "Babergh Council",
+                     organisation_ccms_type_code: "LA",
+                     organisation_ccms_type_text: "Local Authority",
+                     legal_aid_application:,
+                     ccms_opponent_id: 222_222,
+                     exists_in_ccms: true)
+
+              legal_aid_application.reload
+            end
+
+            it "populates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response "222222"
+            end
+
+            it "populates OTHER_PARTY_NAME" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response "Babergh Council"
+            end
+
+            it "populates OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response "ORGANISATION"
+            end
+
+            it "populates RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response "OPP"
+            end
+
+            it "populates RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response "NONE"
+            end
           end
 
-          it "hard-codes OTHER_PARTY_TYPE" do
-            block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-            expect(block).to have_text_response "PERSON"
-          end
+          context "with opponent new organisation" do
+            before do
+              legal_aid_application.opponents.destroy_all
 
-          it "hard-codes RELATIONSHIP_TO_CASE" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-            expect(block).to have_text_response "OPP"
-          end
+              create(:opponent,
+                     :for_organisation,
+                     organisation_name: "Foobar Council",
+                     organisation_ccms_type_code: "LA",
+                     organisation_ccms_type_text: "Local Authority",
+                     legal_aid_application:,
+                     exists_in_ccms: false)
 
-          it "hard-codes RELATIONSHIP_TO_CLIENT" do
-            block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-            expect(block).to have_text_response "UNKNOWN"
+              legal_aid_application.reload
+            end
+
+            it "populates OTHER_PARTY_ID" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
+              expect(block).to have_text_response "OPPONENT_88000001"
+            end
+
+            it "populates OTHER_PARTY_NAME" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
+              expect(block).to have_text_response "Foobar Council"
+            end
+
+            it "populates OTHER_PARTY_TYPE" do
+              block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
+              expect(block).to have_text_response "ORGANISATION"
+            end
+
+            it "populates RELATIONSHIP_TO_CASE" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
+              expect(block).to have_text_response "OPP"
+            end
+
+            it "populates RELATIONSHIP_TO_CLIENT" do
+              block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
+              expect(block).to have_text_response "NONE"
+            end
           end
         end
 

@@ -4311,7 +4311,7 @@ opponent_other_parties_means:
     response_type: text
     user_defined: true
   OTHER_PARTY_TYPE:
-    value: PERSON
+    value: '#other_party_type'
     br100_meaning: The other party type
     response_type: text
     user_defined: true
@@ -4326,7 +4326,7 @@ opponent_other_parties_means:
     response_type: text
     user_defined: true
   RELATIONSHIP_TO_CLIENT:
-    value: UNKNOWN
+    value: '#other_party_ccms_relationship_to_client'
     br100_meaning: The relationship of the other party to the applicant
     response_type: text
     user_defined: true
