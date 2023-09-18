@@ -20,7 +20,6 @@
     <% if @legal_aid_application&.hmrc_responses.any? %>
       <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
         <%= govuk_details(summary_text: "HMRC response - use case #{hmrc_response.use_case} for the #{hmrc_response.owner_type.downcase}") do %>
-          <section>
             <% if hmrc_response.response.present? %>
                 <% if hmrc_response&.response['data'].present? %>
                 <% hmrc_response.response["data"].each do |hrr_hash| %>
@@ -33,7 +32,6 @@
             <% else %>
               Submission created, awaiting first check
             <% end %>
-          </section>
         <% end %>
       <% end %>
     <% end %>
@@ -57,11 +55,8 @@
             <p class="govuk-body">No result available</p>
           <% end %>
         </section>
-        <summary class="govuk-heading-m govuk-details__summary"
-          title="CFE result"
-          aria-label="CFE result">
-          CFE result
-        </summary>
+        <%= govuk_details(summary_text: "CFE result") do %>
+        <% end %>
       </details>
     <% end %>
   <% end %>
