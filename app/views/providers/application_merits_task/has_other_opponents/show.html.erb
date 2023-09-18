@@ -31,7 +31,7 @@
                   row.with_cell(text: opponent.full_name)
                   row.with_cell(text: opponent_type_description(opponent))
                   row.with_cell do
-                    unless opponent.id_exists_in_ccms?
+                    unless opponent.exists_in_ccms?
                       link_to_accessible(
                         t("generic.change"),
                         opponent_url(@legal_aid_application, opponent),

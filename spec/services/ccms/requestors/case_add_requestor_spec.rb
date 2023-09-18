@@ -228,7 +228,8 @@ module CCMS
                    organisation_name: "Bucks Council",
                    organisation_ccms_type_code: "LA",
                    organisation_ccms_type_text: "Local Authority",
-                   ccms_opponent_id: "222222")
+                   ccms_opponent_id: "222222",
+                   exists_in_ccms: true)
           end
 
           let(:opponents) { [local_authority] }

@@ -19,10 +19,6 @@ module ApplicationMeritsTask
              :ccms_type_text,
              to: :opposable
 
-    def id_exists_in_ccms?
-      ccms_opponent_id.present?
-    end
-
     def individual?
       opposable.is_a?(Individual)
     end

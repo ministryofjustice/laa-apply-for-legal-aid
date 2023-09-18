@@ -160,15 +160,15 @@ module CCMS
       # see https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/4460773385/Organisation+Opponents
       # for mappings
       def generate_opponent_organisation(xml, opponent)
-        if opponent.ccms_opponent_id
-          generate_opponent_organisation_existing(xml, opponent)
+        if opponent.exists_in_ccms?
+          generate_opponent_existing_organisation(xml, opponent)
         else
-          generate_opponent_organisation_new(xml, opponent)
+          generate_opponent_new_organisation(xml, opponent)
         end
       end
 
       # TODO: extract to new class - OpponentXml
-      def generate_opponent_organisation_new(xml, opponent)
+      def generate_opponent_new_organisation(xml, opponent)
         xml.__send__(:"casebio:OtherParty") do
           xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{opponent.generate_ccms_opponent_id}")
           xml.__send__(:"casebio:SharedInd", false)
@@ -186,7 +186,7 @@ module CCMS
       end
 
       # TODO: extract to new class - OpponentXml
-      def generate_opponent_organisation_existing(xml, opponent)
+      def generate_opponent_existing_organisation(xml, opponent)
         xml.__send__(:"casebio:OtherParty") do
           xml.__send__(:"casebio:OtherPartyID", opponent.ccms_opponent_id)
           xml.__send__(:"casebio:SharedInd", true)
