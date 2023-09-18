@@ -4,25 +4,25 @@ require "prometheus_exporter/client"
 require "prometheus_exporter/instrumentation"
 
 redis_url = "rediss://:#{ENV.fetch('REDIS_PASSWORD', nil)}@#{ENV.fetch('REDIS_HOST', nil)}:6379" if ENV["REDIS_HOST"].present? && ENV["REDIS_PASSWORD"].present?
-namespace = ENV.fetch("HOST", "laa-apply")
+# namespace = ENV.fetch("HOST", "laa-apply")
 
 module Dashboard; end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: } if redis_url
+  config.redis = { url: redis_url } if redis_url
 
   # accepts :expiration (optional)
-  Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
+  Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes.to_i
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: } if redis_url
+  config.redis = { url: redis_url } if redis_url
 
   # accepts :expiration (optional)
-  Sidekiq::Status.configure_server_middleware config, expiration: 30.minutes
+  Sidekiq::Status.configure_server_middleware config, expiration: 30.minutes.to_i
 
   # accepts :expiration (optional)
-  Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
+  Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes.to_i
 
   if Rails.env.production? && Rails.configuration.x.kubernetes_deployment
     config.server_middleware do |chain|
