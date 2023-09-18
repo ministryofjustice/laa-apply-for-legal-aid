@@ -482,7 +482,7 @@ module CCMS
       end
 
       def vehicle
-        @vehicle ||= @legal_aid_application.vehicle
+        @vehicle ||= @legal_aid_application.vehicles.first
       end
 
       def valuables

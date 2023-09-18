@@ -6,7 +6,7 @@ RSpec.describe "check passported answers requests" do
   describe "GET /providers/applications/:id/check_passported_answers" do
     subject { get "/providers/applications/#{application.id}/check_passported_answers" }
 
-    let(:vehicle) { create(:vehicle, :populated) }
+    let(:vehicles) { create_list(:vehicle, 1, :populated) }
     let(:own_vehicle) { true }
     let!(:application) do
       create(:legal_aid_application,
@@ -14,7 +14,7 @@ RSpec.describe "check passported answers requests" do
              :with_proceedings,
              :with_passported_state_machine,
              :provider_entering_means,
-             vehicle:,
+             vehicles:,
              own_vehicle:)
     end
 
@@ -30,6 +30,8 @@ RSpec.describe "check passported answers requests" do
         application.reload
         subject
       end
+
+      let(:vehicle) { application.vehicles.first }
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
@@ -211,7 +213,7 @@ RSpec.describe "check passported answers requests" do
                  :with_passported_state_machine,
                  :provider_entering_means,
                  :with_populated_policy_disregards,
-                 vehicle:,
+                 vehicles:,
                  own_vehicle:)
         end
 
@@ -221,7 +223,7 @@ RSpec.describe "check passported answers requests" do
       end
 
       context "when the applicant does not have a vehicle" do
-        let(:vehicle) { nil }
+        let(:vehicles) { [] }
         let(:own_vehicle) { false }
 
         it "displays first vehicle question" do

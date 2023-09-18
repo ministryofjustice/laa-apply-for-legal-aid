@@ -13,7 +13,7 @@ module CCMS
                  :with_proceedings,
                  set_lead_proceeding: :da001,
                  applicant:,
-                 vehicle:,
+                 vehicles:,
                  other_assets_declaration:,
                  savings_amount:,
                  provider:,
@@ -34,7 +34,7 @@ module CCMS
         let!(:chances_of_success) do
           create(:chances_of_success, :with_optional_text, proceeding:)
         end
-        let(:vehicle) { create(:vehicle, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
+        let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
         let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
         let(:other_assets_declaration) do
           create(:other_assets_declaration,

@@ -169,7 +169,7 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_proceedings,
-                     vehicle: nil,
+                     vehicles: [],
                      office:)
             end
 
@@ -240,7 +240,7 @@ module CCMS
 
           context "when the applicant does not have a car" do
             before do
-              legal_aid_application.vehicle.destroy!
+              legal_aid_application.vehicles.destroy_all
               legal_aid_application.reload
             end
 
@@ -407,7 +407,7 @@ module CCMS
 
           context "when the applicant has no vehicle" do
             before do
-              legal_aid_application.vehicle.destroy!
+              legal_aid_application.vehicles.destroy_all
               legal_aid_application.reload
             end
 

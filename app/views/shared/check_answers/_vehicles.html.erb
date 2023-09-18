@@ -21,7 +21,7 @@
   <% if @legal_aid_application.own_vehicle? %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_estimated_values" }) do |row| %>
       <%= row.with_key(text: t(".#{journey_type}.estimated_value"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicle.estimated_value) } %>
+      <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicles.first.estimated_value) } %>
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
@@ -31,7 +31,7 @@
 
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_remaining_payments" }) do |row| %>
       <%= row.with_key(text: t(".#{journey_type}.payment_remaining"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining) } %>
+      <%= row.with_value { gds_number_to_currency(@legal_aid_application.vehicles.first.payment_remaining) } %>
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
@@ -41,7 +41,7 @@
 
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_ages" }) do |row| %>
       <%= row.with_key(text: t(".#{journey_type}.more_than_three_years_old"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { yes_no(@legal_aid_application.vehicle.more_than_three_years_old?) } %>
+      <%= row.with_value { yes_no(@legal_aid_application.vehicles.first.more_than_three_years_old?) } %>
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),
@@ -51,7 +51,7 @@
 
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_regular_uses" }) do |row| %>
       <%= row.with_key(text: t(".#{journey_type}.used_regularly"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { yes_no(@legal_aid_application.vehicle.used_regularly) } %>
+      <%= row.with_value { yes_no(@legal_aid_application.vehicles.first.used_regularly) } %>
       <%= row.with_action(
             text: t("generic.change"),
             href: check_answer_url_for(journey_type, :vehicle_details, @legal_aid_application),

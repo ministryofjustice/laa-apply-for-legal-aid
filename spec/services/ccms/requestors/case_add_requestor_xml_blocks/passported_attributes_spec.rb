@@ -243,7 +243,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     vehicle: nil,
+                     vehicles: [],
                      office:)
             end
 
@@ -275,14 +275,14 @@ module CCMS
             describe "CARANDVEH_INPUT_B_14WP2_28A - In regular use" do
               it "is false" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_B_14WP2_28A")
-                expect(block).to have_boolean_response legal_aid_application.vehicle.used_regularly?
+                expect(block).to have_boolean_response legal_aid_application.vehicles.first.used_regularly?
               end
             end
 
             describe "CARANDVEH_INPUT_D_14WP2_27A - Date of purchase" do
               it "is populated with the purchase date" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_D_14WP2_27A")
-                expect(block).to have_date_response legal_aid_application.vehicle.purchased_on.strftime("%d-%m-%Y")
+                expect(block).to have_date_response legal_aid_application.vehicles.first.purchased_on.strftime("%d-%m-%Y")
               end
             end
 
@@ -317,14 +317,14 @@ module CCMS
             describe "CARANDVEH_INPUT_C_14WP2_25A - Current market value" do
               it "is populated with the estimated value" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_25A")
-                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicle.estimated_value))
+                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicles.first.estimated_value))
               end
             end
 
             describe "CARANDVEH_INPUT_C_14WP2_26A - Value of loan outstanding" do
               it "is populated with the payment remaining" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_26A")
-                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicle.payment_remaining))
+                expect(block).to have_currency_response(sprintf("%<value>.2f", value: legal_aid_application.vehicles.first.payment_remaining))
               end
             end
           end
@@ -337,7 +337,7 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      with_bank_accounts: 2,
-                     vehicle: nil,
+                     vehicles: [],
                      office:)
             end
 

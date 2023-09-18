@@ -358,7 +358,7 @@ module CCMS
           # to empty values as the caseworker will be reading values from the PDF, not these fields
           # Now we send empty values (".") or default date and falses to allow the submission to complete
 
-          let(:vehicle) { legal_aid_application.vehicle }
+          let(:vehicle) { legal_aid_application.vehicles.first }
 
           context "when the applicant has no vehicle" do
             before { vehicle.update! estimated_value: nil }
