@@ -6,7 +6,7 @@ module AdminHelper
                             [path, nil]
                           end
 
-    link = link_to_accessible name, link_path, class: "govuk-link govuk-link--no-visited-state"
+    link = govuk_link_to name, link_path, class: "govuk-link govuk-link--no-visited-state"
     content_tag :li, link, class: li_class
   end
 end
