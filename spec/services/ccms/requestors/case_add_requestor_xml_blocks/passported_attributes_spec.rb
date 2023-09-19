@@ -1586,29 +1586,17 @@ module CCMS
             context "with opponent individual" do
               let(:opponent) { create(:opponent, :for_individual, legal_aid_application:, first_name: "Billy", last_name: "Bob") }
 
-              it "populates OTHER_PARTY_ID" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-                expect(block).to have_text_response "OPPONENT_88000001"
-              end
+              it "has expected payload attributes" do
+                block = XmlExtractor.call(xml, entity)
 
-              it "populates OTHER_PARTY_NAME" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-                expect(block).to have_text_response "Billy Bob"
-              end
-
-              it "populates OTHER_PARTY_TYPE" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-                expect(block).to have_text_response "PERSON"
-              end
-
-              it "populates RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "OPP"
-              end
-
-              it "populates RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "UNKNOWN"
+                expect(block)
+                  .to have_xml_attributes(
+                    OTHER_PARTY_ID: "OPPONENT_88000001",
+                    OTHER_PARTY_NAME: "Billy Bob",
+                    OTHER_PARTY_TYPE: "PERSON",
+                    RELATIONSHIP_TO_CASE: "OPP",
+                    RELATIONSHIP_TO_CLIENT: "UNKNOWN",
+                  )
               end
             end
 
@@ -1626,29 +1614,17 @@ module CCMS
                 )
               end
 
-              it "populates OTHER_PARTY_ID" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-                expect(block).to have_text_response "222222"
-              end
+              it "has expected payload attributes" do
+                block = XmlExtractor.call(xml, entity)
 
-              it "populates OTHER_PARTY_NAME" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-                expect(block).to have_text_response "Babergh Council"
-              end
-
-              it "populates OTHER_PARTY_TYPE" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-                expect(block).to have_text_response "ORGANISATION"
-              end
-
-              it "populates RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "OPP"
-              end
-
-              it "populates RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "NONE"
+                expect(block)
+                  .to have_xml_attributes(
+                    OTHER_PARTY_ID: "222222",
+                    OTHER_PARTY_NAME: "Babergh Council",
+                    OTHER_PARTY_TYPE: "ORGANISATION",
+                    RELATIONSHIP_TO_CASE: "OPP",
+                    RELATIONSHIP_TO_CLIENT: "NONE",
+                  )
               end
             end
 
@@ -1665,29 +1641,17 @@ module CCMS
                 )
               end
 
-              it "populates OTHER_PARTY_ID" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-                expect(block).to have_text_response "OPPONENT_88000001"
-              end
+              it "has expected payload attributes" do
+                block = XmlExtractor.call(xml, entity)
 
-              it "populates OTHER_PARTY_NAME" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-                expect(block).to have_text_response "Foobar Council"
-              end
-
-              it "populates OTHER_PARTY_TYPE" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-                expect(block).to have_text_response "ORGANISATION"
-              end
-
-              it "populates RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "OPP"
-              end
-
-              it "populates RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "NONE"
+                expect(block)
+                  .to have_xml_attributes(
+                    OTHER_PARTY_ID: "OPPONENT_88000001",
+                    OTHER_PARTY_NAME: "Foobar Council",
+                    OTHER_PARTY_TYPE: "ORGANISATION",
+                    RELATIONSHIP_TO_CASE: "OPP",
+                    RELATIONSHIP_TO_CLIENT: "NONE",
+                  )
               end
             end
           end
@@ -1698,74 +1662,26 @@ module CCMS
             context "with opponent individual" do
               let(:opponent) { create(:opponent, :for_individual, legal_aid_application:, first_name: "Billy", last_name: "Bob") }
 
-              it "populates OTHER_PARTY_ID" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-                expect(block).to have_text_response "OPPONENT_88000001"
-              end
+              it "has expected payload attributes" do
+                block = XmlExtractor.call(xml, entity)
 
-              it "populates OTHER_PARTY_TYPE" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-                expect(block).to have_text_response "PERSON"
-              end
-
-              it "populates OTHER_PARTY_NAME" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-                expect(block).to have_text_response opponent.full_name
-              end
-
-              it "populates OTHER_PARTY_NAME_MERITS" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
-                expect(block).to have_text_response opponent.full_name
-              end
-
-              it "populates OTHER_PARTY_ORG" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ORG")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates OTHER_PARTY_PERSON" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
-                expect(block).to have_boolean_response true
-              end
-
-              it "populates RELATIONSHIP_CASE_OPPONENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
-                expect(block).to have_boolean_response true
-              end
-
-              it "populates RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "OPP"
-              end
-
-              it "populates OPP_RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "Opponent"
-              end
-
-              it "populates RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "UNKNOWN"
-              end
-
-              it "populates OPP_RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "Unknown"
-              end
-
-              it "populates PARTY_IS_A_CHILD" do
-                block = XmlExtractor.call(xml, entity, "PARTY_IS_A_CHILD")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CHILD" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CHILD")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CASE_CHILD" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_CHILD")
-                expect(block).to have_boolean_response false
+                expect(block)
+                  .to have_xml_attributes(
+                    OTHER_PARTY_ID: "OPPONENT_88000001",
+                    OTHER_PARTY_NAME: "Billy Bob",
+                    OTHER_PARTY_NAME_MERITS: "Billy Bob",
+                    OTHER_PARTY_TYPE: "PERSON",
+                    OTHER_PARTY_ORG: "false",
+                    OTHER_PARTY_PERSON: "true",
+                    RELATIONSHIP_TO_CASE: "OPP",
+                    RELATIONSHIP_TO_CLIENT: "UNKNOWN",
+                    RELATIONSHIP_CASE_OPPONENT: "true",
+                    OPP_RELATIONSHIP_TO_CASE: "Opponent",
+                    OPP_RELATIONSHIP_TO_CLIENT: "Unknown",
+                    PARTY_IS_A_CHILD: "false",
+                    RELATIONSHIP_CHILD: "false",
+                    RELATIONSHIP_CASE_CHILD: "false",
+                  )
               end
 
               it "excludes OPPONENT_DOB" do
@@ -1793,74 +1709,26 @@ module CCMS
                 )
               end
 
-              it "populates OTHER_PARTY_ID" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-                expect(block).to have_text_response "222222"
-              end
+              it "has expected payload attributes" do
+                block = XmlExtractor.call(xml, entity)
 
-              it "populates OTHER_PARTY_TYPE" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-                expect(block).to have_text_response "ORGANISATION"
-              end
-
-              it "populates OTHER_PARTY_NAME" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-                expect(block).to have_text_response "Babergh Council"
-              end
-
-              it "populates OTHER_PARTY_NAME_MERITS" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
-                expect(block).to have_text_response "Babergh Council"
-              end
-
-              it "populates OTHER_PARTY_ORG" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ORG")
-                expect(block).to have_boolean_response true
-              end
-
-              it "populates OTHER_PARTY_PERSON" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CASE_OPPONENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
-                expect(block).to have_boolean_response true
-              end
-
-              it "populates RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "OPP"
-              end
-
-              it "populates OPP_RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "Opponent"
-              end
-
-              it "populates RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "NONE"
-              end
-
-              it "populates OPP_RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "None"
-              end
-
-              it "populates PARTY_IS_A_CHILD" do
-                block = XmlExtractor.call(xml, entity, "PARTY_IS_A_CHILD")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CHILD" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CHILD")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CASE_CHILD" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_CHILD")
-                expect(block).to have_boolean_response false
+                expect(block)
+                  .to have_xml_attributes(
+                    OTHER_PARTY_ID: "222222",
+                    OTHER_PARTY_NAME: "Babergh Council",
+                    OTHER_PARTY_NAME_MERITS: "Babergh Council",
+                    OTHER_PARTY_TYPE: "ORGANISATION",
+                    OTHER_PARTY_ORG: "true",
+                    OTHER_PARTY_PERSON: "false",
+                    RELATIONSHIP_TO_CASE: "OPP",
+                    RELATIONSHIP_TO_CLIENT: "NONE",
+                    RELATIONSHIP_CASE_OPPONENT: "true",
+                    OPP_RELATIONSHIP_TO_CASE: "Opponent",
+                    OPP_RELATIONSHIP_TO_CLIENT: "None",
+                    PARTY_IS_A_CHILD: "false",
+                    RELATIONSHIP_CHILD: "false",
+                    RELATIONSHIP_CASE_CHILD: "false",
+                  )
               end
 
               it "excludes OPPONENT_DOB" do
@@ -1887,74 +1755,26 @@ module CCMS
                 )
               end
 
-              it "populates OTHER_PARTY_ID" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ID")
-                expect(block).to have_text_response "OPPONENT_88000001"
-              end
+              it "has expected payload attributes" do
+                block = XmlExtractor.call(xml, entity)
 
-              it "populates OTHER_PARTY_TYPE" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
-                expect(block).to have_text_response "ORGANISATION"
-              end
-
-              it "populates OTHER_PARTY_NAME" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME")
-                expect(block).to have_text_response "Foobar Council"
-              end
-
-              it "populates OTHER_PARTY_NAME_MERITS" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_NAME_MERITS")
-                expect(block).to have_text_response "Foobar Council"
-              end
-
-              it "populates OTHER_PARTY_ORG" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_ORG")
-                expect(block).to have_boolean_response true
-              end
-
-              it "populates OTHER_PARTY_PERSON" do
-                block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CASE_OPPONENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_OPPONENT")
-                expect(block).to have_boolean_response true
-              end
-
-              it "populates RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "OPP"
-              end
-
-              it "populates OPP_RELATIONSHIP_TO_CASE" do
-                block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CASE")
-                expect(block).to have_text_response "Opponent"
-              end
-
-              it "populates RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "NONE"
-              end
-
-              it "populates OPP_RELATIONSHIP_TO_CLIENT" do
-                block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
-                expect(block).to have_text_response "None"
-              end
-
-              it "populates PARTY_IS_A_CHILD" do
-                block = XmlExtractor.call(xml, entity, "PARTY_IS_A_CHILD")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CHILD" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CHILD")
-                expect(block).to have_boolean_response false
-              end
-
-              it "populates RELATIONSHIP_CASE_CHILD" do
-                block = XmlExtractor.call(xml, entity, "RELATIONSHIP_CASE_CHILD")
-                expect(block).to have_boolean_response false
+                expect(block)
+                  .to have_xml_attributes(
+                    OTHER_PARTY_ID: "OPPONENT_88000001",
+                    OTHER_PARTY_NAME: "Foobar Council",
+                    OTHER_PARTY_NAME_MERITS: "Foobar Council",
+                    OTHER_PARTY_TYPE: "ORGANISATION",
+                    OTHER_PARTY_ORG: "true",
+                    OTHER_PARTY_PERSON: "false",
+                    RELATIONSHIP_TO_CASE: "OPP",
+                    RELATIONSHIP_TO_CLIENT: "NONE",
+                    RELATIONSHIP_CASE_OPPONENT: "true",
+                    OPP_RELATIONSHIP_TO_CASE: "Opponent",
+                    OPP_RELATIONSHIP_TO_CLIENT: "None",
+                    PARTY_IS_A_CHILD: "false",
+                    RELATIONSHIP_CHILD: "false",
+                    RELATIONSHIP_CASE_CHILD: "false",
+                  )
               end
 
               it "excludes OPPONENT_DOB" do

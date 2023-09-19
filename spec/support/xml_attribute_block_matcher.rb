@@ -95,6 +95,24 @@ module XMLBlockMatchers
     end
   end
 
+  RSpec::Matchers.define :have_xml_attributes do |expected|
+    actual_hash = {}
+
+    match do |actual|
+      return "A hash must be passed to this matcher, not a \"#{expected.class}\"" unless expected.is_a?(Hash)
+
+      actual_hash = actual.each_with_object({}) do |node, memo|
+        memo[node.search("Attribute").text.to_sym] = node.search("ResponseValue").text
+      end
+
+      actual_hash >= expected
+    end
+
+    failure_message do
+      SuperDiff::Differs::Hash.call(expected, actual_hash, indent_level: 0)
+    end
+  end
+
   def validate_expectation(actual, expected_value, expected_response_type)
     return "Block not found" if actual.blank?
 
