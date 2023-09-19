@@ -1,25 +1,42 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::VehiclesController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
 
   describe "GET /providers/applications/:legal_aid_application_id/means/vehicle" do
-    subject { get providers_legal_aid_application_means_vehicle_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_means_vehicle_path(legal_aid_application) }
+
+    before { request }
 
     it "renders successfully" do
-      subject
       expect(response).to have_http_status(:ok)
     end
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
-
       it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the application has no partner" do
+      before { login }
+
+      it "shows the correct content" do
+        expect(response.body).to include(I18n.t("providers.means.vehicles.show.heading", individual: I18n.t("generic.client")))
+      end
+    end
+
+    context "when the application has a partner with no contrary interest" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
+
+      before { login }
+
+      it "shows the correct content" do
+        expect(response.body).to include(I18n.t("providers.means.vehicles.show.heading", individual: I18n.t("generic.client_or_partner")))
+      end
     end
   end
 
