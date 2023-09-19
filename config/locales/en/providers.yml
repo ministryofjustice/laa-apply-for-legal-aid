@@ -1008,6 +1008,10 @@ en:
           remove: Remove
           warning:
             delete: Are you sure you want to delete this vehicle?
+      remove_vehicles:
+        show:
+          page_title: Are you sure you want to remove the vehicle worth %{estimated_value} from the application?
+          error: Select yes if you want to remove this vehicle from the application.
       savings_and_investments:
         show:
           h1-heading: Which savings or investments does your client have?

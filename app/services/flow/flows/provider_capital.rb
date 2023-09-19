@@ -55,6 +55,15 @@ module Flow
             end
           end,
         },
+        remove_vehicles: {
+          forward: lambda do |_application, applicant_has_any_vehicles|
+            if applicant_has_any_vehicles
+              :add_other_vehicles
+            else
+              :vehicles
+            end
+          end,
+        },
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: :savings_and_investments,
