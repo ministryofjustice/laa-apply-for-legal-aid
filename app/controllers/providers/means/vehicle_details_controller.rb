@@ -9,6 +9,10 @@ module Providers
         end
       end
 
+      def new
+        @form = ::Vehicles::DetailsForm.new(model: vehicle)
+      end
+
       def update
         @form = ::Vehicles::DetailsForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
@@ -17,7 +21,11 @@ module Providers
     private
 
       def vehicle
-        @vehicle ||= legal_aid_application.vehicle || legal_aid_application.build_vehicle
+        @vehicle ||= existing_vehicle || legal_aid_application.vehicles.build
+      end
+
+      def existing_vehicle
+        legal_aid_application.vehicles.find_by(id: params["id"])
       end
 
       def form_params

@@ -32,19 +32,12 @@ module Flow
           carry_on_sub_flow: ->(application) { application.own_vehicle? },
         },
         vehicle_details: {
-          path: ->(application) { urls.providers_legal_aid_application_means_vehicle_details_path(application) },
-          forward: lambda do |application|
-            if application.non_passported? && !application.uploading_bank_statements?
-              :applicant_bank_accounts
-            else
-              :offline_accounts
-            end
-          end,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers }, # TODO: Change to add_other_vehicles
+          path: ->(application) { urls.new_providers_legal_aid_application_means_vehicle_detail_path(application) },
+          forward: :add_other_vehicles,
+          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
         },
-
         add_other_vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_add_other_vehicles_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_add_other_vehicles_path(application) },
           forward: lambda do |application, add_other_vehicles|
             if add_other_vehicles
               :vehicle_details
@@ -54,9 +47,14 @@ module Flow
               :offline_accounts
             end
           end,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
+          check_answers: lambda do |application, add_other_vehicles|
+            if add_other_vehicles
+              :vehicle_details
+            else
+              application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers
+            end
+          end,
         },
-
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: :savings_and_investments,

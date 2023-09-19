@@ -74,7 +74,7 @@ RSpec.describe Providers::Means::VehiclesController do
     context 'with option "true"' do
       let(:own_vehicle) { "true" }
       let(:target_url) do
-        providers_legal_aid_application_means_vehicle_details_path(legal_aid_application)
+        new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application)
       end
 
       it "sets own_vehicle to true" do

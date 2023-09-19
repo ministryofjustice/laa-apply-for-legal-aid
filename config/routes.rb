@@ -146,7 +146,7 @@ Rails.application.routes.draw do
         resource :own_home, only: %i[show update]
         resource :property_details, only: %i[show update]
         resource :vehicle, only: %i[show update]
-        resource :vehicle_details, only: %i[show update]
+        resources :vehicle_details, only: %i[show new update]
         resource :add_other_vehicles, only: %i[show update]
         resource :savings_and_investment, only: %i[show update]
         resource :other_assets, only: %i[show update]

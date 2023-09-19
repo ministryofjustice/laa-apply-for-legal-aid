@@ -977,7 +977,10 @@ en:
           hint: This includes cars, vans and motorcyles.
       vehicle_details:
         show:
+          heading: Amend vehicle details
+        new:
           heading: Vehicle details
+        form:
           owner:
             question: Who owns the vehicle?
             options:

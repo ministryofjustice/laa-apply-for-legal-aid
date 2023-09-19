@@ -6,8 +6,27 @@ RSpec.describe Providers::Means::VehicleDetailsController do
 
   before { login }
 
-  describe "GET /providers/applications/:legal_aid_application_id/means/vehicle_details" do
-    subject(:get_vehicle_details) { get providers_legal_aid_application_means_vehicle_details_path(legal_aid_application) }
+  describe "new GET /providers/applications/:legal_aid_application_id/means/vehicle_details" do
+    subject(:get_vehicle_details) { get new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application) }
+
+    it "renders successfully" do
+      get_vehicle_details
+      expect(response).to have_http_status(:ok)
+    end
+
+    context "when the provider is not authenticated" do
+      let(:login) { nil }
+
+      before { get_vehicle_details }
+
+      it_behaves_like "a provider not authenticated"
+    end
+  end
+
+  describe "show GET /providers/applications/:legal_aid_application_id/means/vehicle_details/:vehicle_id" do
+    subject(:get_vehicle_details) { get providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application, vehicle) }
+
+    let(:vehicle) { create(:vehicle, legal_aid_application:) }
 
     it "renders successfully" do
       get_vehicle_details
@@ -35,11 +54,12 @@ RSpec.describe Providers::Means::VehicleDetailsController do
   describe "PATCH /providers/applications/:legal_aid_application_id/means/vehicle_details" do
     subject(:patch_vehicle_details) do
       patch(
-        providers_legal_aid_application_means_vehicle_details_path(legal_aid_application),
+        providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application, vehicle),
         params: params.merge(submit_button),
       )
     end
 
+    let(:vehicle) { create(:vehicle, legal_aid_application:) }
     let(:submit_button) { {} }
     let(:owner) { nil }
     let(:estimated_value) { nil }
@@ -90,7 +110,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
 
       it "updates vehicle" do
         patch_vehicle_details
-        expect(legal_aid_application.vehicle.reload).to have_attributes(
+        expect(vehicle.reload).to have_attributes(
           {
             owner: "client",
             estimated_value: 3000,
@@ -104,7 +124,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
       context "and the application is non-passported" do
         it "redirects to next step" do
           patch_vehicle_details
-          expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_add_other_vehicles_path(legal_aid_application))
         end
       end
 
@@ -113,7 +133,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
 
         it "redirects to next step" do
           patch_vehicle_details
-          expect(response).to redirect_to(providers_legal_aid_application_offline_account_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_add_other_vehicles_path(legal_aid_application))
         end
       end
 
