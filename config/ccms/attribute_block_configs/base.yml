@@ -4369,7 +4369,7 @@ opponent_other_parties_merits:
     response_type: boolean
     user_defined: false
   OTHER_PARTY_PERSON:
-    value: true
+    value: '#other_party_person?'
     br100_meaning: Meaning not defined in BR100
     response_type: boolean
     user_defined: false
@@ -4379,7 +4379,7 @@ opponent_other_parties_merits:
     response_type: boolean
     user_defined: false
   OTHER_PARTY_ORG:
-    value: false
+    value: '#other_party_organisation?'
     br100_meaning: Meaning not defined in BR100
     response_type: boolean
     user_defined: false
@@ -4527,17 +4527,17 @@ opponent_other_parties_merits:
     response_type: boolean
     user_defined: false
   OTHER_PARTY_TYPE:
-    value: PERSON
+    value: '#other_party_type'
     br100_meaning: Other Party Type
     response_type: text
-    user_defined: true
+    user_defined: false
   OPP_RELATIONSHIP_TO_CLIENT:
-    value: Unknown
+    value: '#other_party_ccms_opp_relationship_to_client'
     br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Client'
     response_type: text
     user_defined: false
   RELATIONSHIP_TO_CLIENT:
-    value: UNKNOWN
+    value: '#other_party_ccms_relationship_to_client'
     br100_meaning: Opponent relationship to client
     response_type: text
     user_defined: true

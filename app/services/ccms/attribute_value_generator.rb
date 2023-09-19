@@ -335,7 +335,14 @@ module CCMS
       options[:other_party].__send__(:ccms_other_party_type)
     end
 
-    # TODO: this won't work for opponent "existing" organisations BUT may not matter for means/merits entities?!
+    def other_party_person?(options)
+      options[:other_party].__send__(:ccms_other_party_type) == "PERSON"
+    end
+
+    def other_party_organisation?(options)
+      options[:other_party].__send__(:ccms_other_party_type) == "ORGANISATION"
+    end
+
     def other_party_ccms_opponent_id(options)
       if options[:other_party].__send__(:exists_in_ccms?)
         options[:other_party].__send__(:ccms_opponent_id)
@@ -350,6 +357,10 @@ module CCMS
 
     def other_party_ccms_relationship_to_client(options)
       options[:other_party].__send__(:ccms_relationship_to_client)
+    end
+
+    def other_party_ccms_opp_relationship_to_client(options)
+      other_party_ccms_relationship_to_client(options).capitalize
     end
 
     def other_party_ccms_child?(options)
