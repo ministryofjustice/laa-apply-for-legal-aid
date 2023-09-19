@@ -5,6 +5,8 @@
       method: :patch,
       local: true,
     ) do |form| %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
+
   <%= page_template page_title: t(".h1-heading"), form:, template: :basic do %>
 
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".h1-heading") } do %>
@@ -24,18 +26,18 @@
                                   width: 5 %>
       <% end %>
 
-      <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { text: t(".shared_ownership_question"), size: "m", tag: "h2" }) do %>
+      <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { text: t(".shared_ownership_question.#{individual}"), size: "m", tag: "h2" }) do %>
         <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each do |reason| %>
           <%= form.govuk_radio_button :shared_ownership, reason,
                                       label: { text: t(".shared_ownership_options.#{reason}") },
-                                      hint: { text: t(".shared_ownership_options.#{reason}_hint", default: "") },
+                                      hint: { text: t(".shared_ownership_options.#{reason}_hint.#{individual}", default: "") },
                                       link_errors: true %>
         <% end %>
       <% end %>
 
       <%= form.govuk_text_field(:percentage_home,
-                                label: { text: t(".percentage_question"), size: "m", tag: "h2" },
-                                hint: { text: t(".percentage_hint") },
+                                label: { text: t(".percentage_question.#{individual}"), size: "m", tag: "h2" },
+                                hint: { text: t(".percentage_hint.#{individual}") },
                                 width: 5, suffix_text: "%") %>
 
     <% end %>
