@@ -344,10 +344,12 @@ module CCMS
     end
 
     def other_party_ccms_opponent_id(options)
-      if options[:other_party].__send__(:exists_in_ccms?)
-        options[:other_party].__send__(:ccms_opponent_id)
+      other_party = options[:other_party]
+
+      if other_party.respond_to?(:exists_in_ccms?) && other_party.exists_in_ccms?
+        other_party.ccms_opponent_id
       else
-        "OPPONENT_#{options[:other_party].__send__(:generate_ccms_opponent_id)}"
+        "OPPONENT_#{other_party.generate_ccms_opponent_id}"
       end
     end
 
