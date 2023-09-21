@@ -19,8 +19,6 @@ module CCMS
           append_opponent_individual
         elsif other_party.organisation?
           append_opponent_organisation
-        else
-          raise ArgumentError, "Other party type, #{other_party.class} has no matching payload generator"
         end
       end
 
@@ -64,8 +62,8 @@ module CCMS
               xml.__send__(:"casebio:OrganizationType", other_party.ccms_type_code)
               xml.__send__(:"casebio:RelationToClient", "NONE")
               xml.__send__(:"casebio:RelationToCase", "OPP")
-              xml.__send__(:"casebio:Address") # Do we even need to send it with no values or can it be excluded?
-              xml.__send__(:"casebio:ContactDetails") # Do we even need to send it with no values or can it be excluded?
+              xml.__send__(:"casebio:Address")
+              xml.__send__(:"casebio:ContactDetails")
             end
           end
         end
@@ -79,10 +77,10 @@ module CCMS
             xml.__send__(:"casebio:Organization") do
               xml.__send__(:"casebio:OrganizationName", other_party.full_name)
               xml.__send__(:"casebio:OrganizationType", other_party.ccms_type_code)
-              xml.__send__(:"casebio:Address") # Do we even need to send it with no values or can it be excluded?
+              xml.__send__(:"casebio:Address")
               xml.__send__(:"casebio:RelationToClient", "NONE")
               xml.__send__(:"casebio:RelationToCase", "OPP")
-              xml.__send__(:"casebio:ContactName", "Not Available") # Do we even need to send it with no values or can it be excluded?
+              xml.__send__(:"casebio:ContactName", "Not Available")
             end
           end
         end
