@@ -1,5 +1,3 @@
-require "redis"
-
 class PageHistoryService
   def initialize(page_history_id:)
     @page_history_id = page_history_id
