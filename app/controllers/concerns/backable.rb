@@ -84,7 +84,7 @@ module Backable
       history = page_history_service.read
       return [] if history.nil?
 
-      JSON.parse(history)
+      history
     end
 
     def page_history_service

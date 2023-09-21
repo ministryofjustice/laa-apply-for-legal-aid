@@ -93,6 +93,12 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.disable_monkey_patching!
+
+  config.after(:each) do
+    redis_config = RedisClient.config(url: Rails.configuration.x.redis.page_history_url)
+    redis = redis_config.new_client
+    redis.call("FLUSHDB")
+  end
 end
 
 # Define negation matchers

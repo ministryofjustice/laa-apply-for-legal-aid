@@ -1,6 +1,7 @@
 class Rack::Attack
   Rack::Attack.cache.store = if Rails.configuration.x.redis.rack_attack_url
-                               Redis.new(url: Rails.configuration.x.redis.rack_attack_url)
+                               redis_config = RedisClient.config(url: Rails.configuration.x.redis.rack_attack_url)
+                               redis_config.new_client
                              else
                                ActiveSupport::Cache::MemoryStore.new
                              end
