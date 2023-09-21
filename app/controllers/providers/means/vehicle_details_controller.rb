@@ -3,6 +3,10 @@ module Providers
     class VehicleDetailsController < ProviderBaseController
       def show
         @form = ::Vehicles::DetailsForm.new(model: vehicle)
+        unless legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+          legal_aid_application.vehicle.owner = "client"
+          legal_aid_application.vehicle.save!
+        end
       end
 
       def update
@@ -20,7 +24,8 @@ module Providers
         return { model: vehicle } if params[:vehicle].nil?
 
         merge_with_model(vehicle) do
-          params.require(:vehicle).permit(:estimated_value,
+          params.require(:vehicle).permit(:owner,
+                                          :estimated_value,
                                           :more_than_three_years_old,
                                           :payment_remaining,
                                           :payments_remain,

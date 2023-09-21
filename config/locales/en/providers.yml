@@ -975,6 +975,12 @@ en:
       vehicle_details:
         show:
           heading: Vehicle details
+          owner:
+            question: Who owns the vehicle?
+            options:
+              client: My client
+              partner: The partner
+              client_and_partner: My client and their partner
           estimated_value:
             question: How much is the vehicle worth?
             use_car_valuation_sites: You can use car valuation websites to find this out.

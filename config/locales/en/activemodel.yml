@@ -800,6 +800,8 @@ en:
               uncategorised_evidence: Select a category for each uploaded file
         vehicle:
           attributes:
+            owner:
+              blank: Select who owns the vehicle
             estimated_value:
               blank: Enter the estimated value of the vehicle
               not_a_number: Estimated value must be an amount of money, like 5,000

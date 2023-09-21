@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::VehicleDetailsController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :with_applicant_and_partner) }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
@@ -21,6 +21,15 @@ RSpec.describe Providers::Means::VehicleDetailsController do
 
       it_behaves_like "a provider not authenticated"
     end
+
+    context "when the applicant does not have a partner" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :with_applicant) }
+
+      it "sets the vehicle owner to be client" do
+        get_vehicle_details
+        expect(legal_aid_application.vehicle.reload.owner).to eq "client"
+      end
+    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/vehicle_details" do
@@ -32,6 +41,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
     end
 
     let(:submit_button) { {} }
+    let(:owner) { nil }
     let(:estimated_value) { nil }
     let(:more_than_three_years_old) { nil }
     let(:payment_remaining) { nil }
@@ -40,6 +50,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
     let(:params) do
       {
         vehicle: {
+          owner:,
           estimated_value:,
           more_than_three_years_old:,
           payment_remaining:,
@@ -70,6 +81,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
     end
 
     context "when submitted with valid parameters" do
+      let(:owner) { "client" }
       let(:estimated_value) { 3000 }
       let(:more_than_three_years_old) { true }
       let(:payments_remain) { false }
@@ -80,6 +92,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
         patch_vehicle_details
         expect(legal_aid_application.vehicle.reload).to have_attributes(
           {
+            owner: "client",
             estimated_value: 3000,
             more_than_three_years_old: true,
             payment_remaining: 0,
@@ -96,7 +109,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
       end
 
       context "and the application is passported" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_vehicle, :passported) }
 
         it "redirects to next step" do
           patch_vehicle_details
@@ -118,7 +131,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
       end
 
       context "and the user is checking non passported answers" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
         it "redirects to check capital answers page" do
           patch_vehicle_details
@@ -127,7 +140,7 @@ RSpec.describe Providers::Means::VehicleDetailsController do
       end
 
       context "and the user is checking passported answers" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to passported check answers page" do
           patch_vehicle_details
