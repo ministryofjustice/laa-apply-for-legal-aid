@@ -32,12 +32,12 @@ When("I search for organisation {string}") do |search_terms|
 end
 
 Then("the organisation result list on page returns a {string} message") do |string|
-  expect(page).to have_selector(".no-organisation-items", text: string, visible: :visible)
+  expect(page).to have_css(".no-organisation-items", text: string, visible: :visible)
 end
 
 # NOTE: this step does not work unless put after the step "the organisation suggestions include {string}" :(
 Then(/^organisation suggestions has (\d+) result[s]?$/) do |count|
-  expect(page).to have_selector(".organisation-item", visible: :visible, count:)
+  expect(page).to have_css(".organisation-item", visible: :visible, count:)
 end
 
 Then("organisation search field is empty") do
@@ -55,7 +55,7 @@ When("the organisation suggestions include {string}") do |string|
 end
 
 Then(/^I can see the highlighted search term "(.*)" (\d+) time[s]?$/) do |string, count|
-  expect(page).to have_selector(".organisation-item .highlight", visible: :visible, text: string, count:)
+  expect(page).to have_css(".organisation-item .highlight", visible: :visible, text: string, count:)
 end
 
 Then("I select an organisation type {string} from the list") do |text|

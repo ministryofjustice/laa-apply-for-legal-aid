@@ -208,7 +208,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "displays error indicating file too large" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("too_large.pdf must be smaller than 7MB")
+          expect(response.body).to have_css("h2", text: "There is a problem").and have_link("too_large.pdf must be smaller than 7MB")
         end
       end
 
@@ -230,7 +230,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "displays error indicating file is empty" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("empty_file.pdf has no content")
+          expect(response.body).to have_css("h2", text: "There is a problem").and have_link("empty_file.pdf has no content")
         end
       end
 
@@ -252,7 +252,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "displays error indicating file is of the wrong content type" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("zip.zip must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF")
+          expect(response.body).to have_css("h2", text: "There is a problem").and have_link("zip.zip must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF")
         end
       end
 
@@ -274,7 +274,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "displays error indicating file contains a virus" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("malware.doc contains a virus")
+          expect(response.body).to have_css("h2", text: "There is a problem").and have_link("malware.doc contains a virus")
         end
       end
 
@@ -377,7 +377,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
         it "displays error indicating a file is needed" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("Upload your client's bank statements")
+          expect(response.body).to have_css("h2", text: "There is a problem").and have_link("Upload your client's bank statements")
         end
       end
     end
@@ -448,7 +448,7 @@ RSpec.describe "Providers::BankStatementsController" do
 
       it "renders govuk notification banner indicating successful deletion" do
         request
-        expect(response.body).to have_selector("div.govuk-notification-banner", text: "acceptable.pdf has been successfully deleted")
+        expect(response.body).to have_css("div.govuk-notification-banner", text: "acceptable.pdf has been successfully deleted")
       end
 
       context "with background job processing" do

@@ -837,7 +837,7 @@ When("I search for proceeding type {string}") do |search_terms|
 end
 
 Then("the proceeding type result list on page returns a {string} message") do |string|
-  expect(page).to have_selector(".no-proceeding-items", text: string, visible: :visible)
+  expect(page).to have_css(".no-proceeding-items", text: string, visible: :visible)
 end
 
 Then("I visit received benefit confirmation page") do
@@ -983,7 +983,7 @@ Then("I select proceeding type {int}") do |index|
 end
 
 Then("I expect to see {int} proceeding types selected") do |number|
-  expect(page).to have_selector(
+  expect(page).to have_css(
     ".selected-proceeding-types .selected-proceeding-type",
     count: number,
   )

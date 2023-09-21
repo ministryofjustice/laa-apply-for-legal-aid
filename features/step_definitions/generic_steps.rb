@@ -17,7 +17,7 @@ Then("I should see govuk error summary {string}") do |error_text|
 end
 
 Then("I should see govuk-details {string}") do |text|
-  expect(page).to have_selector(".govuk-details", text:)
+  expect(page).to have_css(".govuk-details", text:)
 end
 
 And(/^I should (see|not see) a ['|"](.*?)['|"] button$/) do |visibility, text|
@@ -48,9 +48,9 @@ def expect_questions_in(expected:, selector:, negate: false)
   within(selector) do
     expected.hashes.each do |row|
       if negate
-        expect(page).not_to have_selector("dt", text: row[:question]), "expected not to find tag \"dt\" with text: \"#{row[:question]}\""
+        expect(page).not_to have_css("dt", text: row[:question]), "expected not to find tag \"dt\" with text: \"#{row[:question]}\""
       else
-        expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+        expect(page).to have_css("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
       end
     end
   end
@@ -59,8 +59,8 @@ end
 def expect_questions_and_answers_in(expected:, selector:)
   within(selector) do
     expected.hashes.each do |row|
-      expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
-      expect(page).to have_selector("dd", text: row[:answer]), "expected to find tag \"dd\" with text: \"#{row[:answer]}\""
+      expect(page).to have_css("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+      expect(page).to have_css("dd", text: row[:answer]), "expected to find tag \"dd\" with text: \"#{row[:answer]}\""
     end
   end
 end
