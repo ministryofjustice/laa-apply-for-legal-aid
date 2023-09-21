@@ -213,10 +213,10 @@ Feature: Completing and checking means answers backwards and forwards
   Scenario: I change the applicant answer about owning a vehicle
     Given I am checking answers on the check capital answers page
     Then I click Check Your Answers Change link for 'Vehicles'
-    Then I should be on a page showing 'Does your client own a vehicle?'
+    Then I should be on a page with title 'Does your client have any other vehicles?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page with title 'Check your answers'
 
   @javascript
   Scenario: I change the applicant answers about details of their vehicle

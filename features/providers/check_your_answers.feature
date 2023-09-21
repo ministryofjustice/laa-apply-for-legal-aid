@@ -246,14 +246,12 @@ Feature: Checking answers backwards and forwards
     Scenario: I change vehicle answers
       Given I complete the passported journey as far as capital check your answers
       Then I click Check Your Answers Change link for 'Vehicles'
-      Then I should be on a page showing 'Does your client own a vehicle?'
+      Then I should be on a page showing 'Does your client have any other vehicles?'
       Then I choose 'No'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
-      Then I click Check Your Answers Change link for 'Vehicles'
-      Then I choose 'Yes'
-      Then I click 'Save and continue'
-      Then I should be on a page with title "Vehicle details"
+      Then I click Check Your Answers Change link for vehicle "1"
+      Then I should be on a page with title "Amend vehicle details"
       And I should see "How much is the vehicle worth?"
       And I should see "Are there any payments left on the vehicle?"
       And I should see "Was the vehicle bought over 3 years ago?"
@@ -265,15 +263,15 @@ Feature: Checking answers backwards and forwards
       And I answer "Is the vehicle in regular use?" with "Yes"
       And I click "Save and continue"
       Then I should be on a page showing 'Check your answers'
-      And the answer for "vehicles remaining payments" should be "£2,000"
+      And the "remaining payments" answer for vehicle 1 should be "£2,000"
 
-      When I click Check Your Answers Change link for 'vehicles remaining payments'
+      Then I click Check Your Answers Change link for vehicle "1"
       Then I should be on a page showing "Are there any payments left on the vehicle?"
       And I change "Are there any payments left on the vehicle?" to "No"
       And I click "Save and continue"
       Then I should be on a page showing 'Check your answers'
-      And the answer for "vehicles remaining payments" should be "No"
-      When I click Check Your Answers Change link for 'vehicles remaining payments'
+      And the "remaining payments" answer for vehicle 1 should be "£0"
+      When I click Check Your Answers Change link for vehicle "1"
       Then I should be on a page showing "Are there any payments left on the vehicle?"
       And the radio button response for "Vehicle payments remain" should be "No"
 
