@@ -1,13 +1,12 @@
 require "nokogiri"
 
 RSpec::Matchers.define :have_xml do |xpath, text|
-  match do |body|
-    doc = Nokogiri::XML::Document.parse(body)
-    nodes = doc.xpath(xpath)
+  results = []
+
+  match do
+    nodes = xml_doc.xpath(xpath)
 
     return false if nodes.empty?
-
-    results = []
 
     if text
       nodes.each do |node|
@@ -19,7 +18,7 @@ RSpec::Matchers.define :have_xml do |xpath, text|
   end
 
   failure_message do
-    "expected to find one or more xml tags \"#{xpath}\" containing \"#{text}\" \n"
+    "expected to find one or more xml tags \"#{xpath}\" containing \"#{text}\""
   end
 
   failure_message_when_negated do
@@ -28,5 +27,13 @@ RSpec::Matchers.define :have_xml do |xpath, text|
 
   description do
     "have xml tag #{xpath}"
+  end
+
+  def xml_doc
+    if actual.is_a?(Nokogiri::XML::Builder)
+      actual.doc
+    else
+      Nokogiri::XML::Document.parse(actual)
+    end
   end
 end
