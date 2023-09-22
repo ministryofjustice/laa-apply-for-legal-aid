@@ -361,8 +361,8 @@ module Reports
           end
         end
 
-        describe "vehicle" do
-          context "when there is no vehicle" do
+        describe "vehicles" do
+          context "when there are no vehicles" do
             it "generates blank fields" do
               expect(value_for("Vehicle?")).to eq "No"
               expect(value_for("Vehicle value")).to eq ""
@@ -374,13 +374,14 @@ module Reports
           end
 
           context "when there is a vehicle" do
-            let!(:vehicle) do
-              create(:vehicle,
-                     legal_aid_application:,
-                     estimated_value: 12_000,
-                     payment_remaining:,
-                     used_regularly:,
-                     purchased_on: purchase_date)
+            let!(:vehicles) do
+              create_list(:vehicle,
+                          1,
+                          legal_aid_application:,
+                          estimated_value: 12_000,
+                          payment_remaining:,
+                          used_regularly:,
+                          purchased_on: purchase_date)
             end
             let(:purchase_date) { Date.new(2020, 1, 1) }
             let(:used_regularly) { true }

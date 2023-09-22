@@ -584,7 +584,7 @@ FactoryBot.define do
         populate_vehicle { false }
       end
       own_vehicle { true }
-      vehicle { populate_vehicle ? build(:vehicle, :populated) : build(:vehicle) }
+      vehicles { populate_vehicle ? build_list(:vehicle, 1, :populated) : build_list(:vehicle, 1) }
     end
 
     trait :with_incident do

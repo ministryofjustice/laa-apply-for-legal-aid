@@ -7,7 +7,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
   let(:transaction_type) { create(:transaction_type) }
   let(:bank_provider) { create(:bank_provider, applicant:) }
   let(:bank_account) { create(:bank_account, bank_provider:) }
-  let(:vehicle) { create(:vehicle, :populated) }
+  let(:vehicles) { create_list(:vehicle, 1, :populated) }
   let(:own_vehicle) { true }
   let(:legal_aid_application) do
     create(:legal_aid_application,
@@ -18,7 +18,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            df_options: { DA001: Time.zone.today },
-           vehicle:,
+           vehicles:,
            own_vehicle:,
            applicant:,
            provider:,
@@ -35,6 +35,8 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       login
       request
     end
+
+    let(:vehicle) { legal_aid_application.vehicles.reload.first }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
