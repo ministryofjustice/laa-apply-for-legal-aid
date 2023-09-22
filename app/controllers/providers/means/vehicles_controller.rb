@@ -8,12 +8,7 @@ module Providers
       def update
         @form = LegalAidApplications::OwnVehicleForm.new(form_params)
 
-        if @form.save
-          legal_aid_application.own_vehicle ? vehicle.save! : vehicle.destroy!
-          continue_or_draft
-        else
-          render :show
-        end
+        render :show unless save_continue_or_draft(@form)
       end
 
     private
@@ -24,10 +19,6 @@ module Providers
 
           params.require(:legal_aid_application).permit(:own_vehicle)
         end
-      end
-
-      def vehicle
-        @vehicle = legal_aid_application.vehicle || legal_aid_application.build_vehicle
       end
     end
   end
