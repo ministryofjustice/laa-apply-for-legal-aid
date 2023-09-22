@@ -1005,6 +1005,7 @@ en:
           page_title_with_partner: Does your client or their partner have any other vehicles?
           page_title: Does your client have any other vehicles?
           existing: "You have added %{count}"
+          vehicle_worth: Vehicle worth %{amount}
           remove: Remove
           warning:
             delete: Are you sure you want to delete this vehicle?

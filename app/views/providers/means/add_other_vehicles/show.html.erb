@@ -10,16 +10,16 @@
     <%= govuk_summary_list(classes: "summary_list_action_width_auto") do |summary_list| %>
       <% @vehicles.each_with_index do |vehicle, index| %>
         <%= summary_list.with_row(html_attributes: { id: "transaction_#{index}" }) do |row| %>
-          <%= row.with_key { "Vehicle worth #{gds_number_to_currency(vehicle.estimated_value)}" } %>
+          <%= row.with_key { t(".vehicle_worth", amount: gds_number_to_currency(vehicle.estimated_value)) } %>
           <%= row.with_action(
                 text: t("generic.change"),
                 href: providers_legal_aid_application_means_vehicle_detail_path(@legal_aid_application, vehicle),
-                visually_hidden_text: "vehicle worth #{gds_number_to_currency(vehicle.estimated_value)}",
+                visually_hidden_text: t(".vehicle_worth", amount: gds_number_to_currency(vehicle.estimated_value)).downcase,
               ) %>
           <%= row.with_action(
                 text: t(".remove"),
                 href: providers_legal_aid_application_means_remove_vehicle_path(@legal_aid_application, vehicle),
-                visually_hidden_text: "vehicle worth #{gds_number_to_currency(vehicle.estimated_value)}",
+                visually_hidden_text: t(".vehicle_worth", amount: gds_number_to_currency(vehicle.estimated_value)).downcase,
               ) %>
         <% end %>
       <% end %>
