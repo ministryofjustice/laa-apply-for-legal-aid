@@ -110,24 +110,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 785
+# Offense count: 627
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/providers/address_lookups_controller_spec.rb'
-    - 'spec/requests/providers/address_selections_controller_spec.rb'
-    - 'spec/requests/providers/addresses_spec.rb'
-    - 'spec/requests/providers/applicant_bank_accounts_controller_spec.rb'
-    - 'spec/requests/providers/applicant_details_controller_spec.rb'
-    - 'spec/requests/providers/application_confirmations_spec.rb'
-    - 'spec/requests/providers/application_dependable_spec.rb'
-    - 'spec/requests/providers/application_merits_task/date_client_told_incidents_spec.rb'
-    - 'spec/requests/providers/application_merits_task/has_other_involved_children_spec.rb'
-    - 'spec/requests/providers/application_merits_task/involved_children_spec.rb'
-    - 'spec/requests/providers/application_merits_task/remove_involved_child_spec.rb'
-    - 'spec/requests/providers/application_merits_task/statement_of_case_spec.rb'
-    - 'spec/requests/providers/bank_transactions_controller_spec.rb'
     - 'spec/requests/providers/capital_assessment_results_controller_spec.rb'
     - 'spec/requests/providers/capital_income_assessment_results_controller_spec.rb'
     - 'spec/requests/providers/capital_introductions_controller_spec.rb'

@@ -3,7 +3,7 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe HasOtherInvolvedChildrenController do
-      subject { get providers_legal_aid_application_has_other_involved_children_path(application) }
+      subject(:get_request) { get providers_legal_aid_application_has_other_involved_children_path(application) }
 
       let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { application.provider }
@@ -17,20 +17,20 @@ module Providers
 
       describe "show: GET /providers/applications/:legal_aid_application_id/has_other_involved_children" do
         it "returns success" do
-          subject
+          get_request
           expect(response).to have_http_status(:ok)
         end
 
         it "displays the do you want to add more page" do
           child1
-          subject
+          get_request
           expect(response.body).to include("You have added 1 child")
           expect(response.body).to include("Do you need to add another child?")
         end
       end
 
       describe "update: PATCH /providers/applications/:legal_aid_application_id/has_other_involved_children" do
-        subject { patch providers_legal_aid_application_has_other_involved_children_path(application), params: params.merge(button_clicked) }
+        subject(:patch_request) { patch providers_legal_aid_application_has_other_involved_children_path(application), params: params.merge(button_clicked) }
 
         let(:params) do
           {
@@ -47,12 +47,12 @@ module Providers
           let(:radio_button) { "true" }
 
           it "redirects to new involved child" do
-            subject
+            patch_request
             expect(response).to redirect_to(new_providers_legal_aid_application_involved_child_path(application))
           end
 
           it "does not set the task to complete" do
-            subject
+            patch_request
             expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :children_application)
           end
         end
@@ -69,12 +69,12 @@ module Providers
           end
 
           it "redirects to why matter opposed page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_application_matter_opposed_reason_path(application))
           end
 
           it "sets the task to complete" do
-            subject
+            patch_request
             expect(application.reload.legal_framework_merits_task_list).to have_completed_task(:application, :children_application)
           end
         end
@@ -83,18 +83,18 @@ module Providers
           let(:radio_button) { "" }
 
           it "re-renders the show page" do
-            subject
+            patch_request
             expect(response.body).to include("Do you need to add another child?")
           end
 
           it "displays the correct error message" do
-            subject
+            patch_request
             expect(unescaped_response_body).to include("There is a problem")
             expect(unescaped_response_body).to include("Select yes if you need to add another child")
           end
 
           it "does not set the task to complete" do
-            subject
+            patch_request
             expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :children_application)
           end
         end

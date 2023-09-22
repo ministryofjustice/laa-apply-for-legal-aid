@@ -5,7 +5,7 @@ RSpec.describe Providers::BankTransactionsController do
   let(:provider) { legal_aid_application.provider }
 
   describe "PATCH providers/bank_transactions/:id/remove_transaction_type" do
-    subject do
+    subject(:patch_request) do
       patch remove_transaction_type_providers_legal_aid_application_bank_transaction_path(legal_aid_application, bank_transaction)
     end
 
@@ -20,22 +20,22 @@ RSpec.describe Providers::BankTransactionsController do
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
 
     it "returns http success" do
-      subject
+      patch_request
       expect(response).to have_http_status(:ok)
     end
 
     it "does not delete the transaction type" do
-      expect { subject }.not_to change(TransactionType, :count)
+      expect { patch_request }.not_to change(TransactionType, :count)
     end
 
     it "removes the assocation with the transaction type" do
-      expect { subject }.to change { bank_transaction.reload.transaction_type }.to(nil)
+      expect { patch_request }.to change { bank_transaction.reload.transaction_type }.to(nil)
     end
 
     it "removes the meta data on the transaction" do
@@ -44,18 +44,18 @@ RSpec.describe Providers::BankTransactionsController do
                                            name: "Maintenance In",
                                            category: "Maintenance In",
                                            selected_by: "Provider" })
-      expect { subject }.to change { bank_transaction.reload.meta_data }.to(nil)
+      expect { patch_request }.to change { bank_transaction.reload.meta_data }.to(nil)
     end
 
     context "when bank_transaction does not belong to this application" do
       let(:bank_account) { create(:bank_account) }
 
       it "does not remove the assocation with the transaction type" do
-        expect { subject }.not_to change { bank_transaction.reload.transaction_type }
+        expect { patch_request }.not_to change { bank_transaction.reload.transaction_type }
       end
 
       it "redirects to page_not_found" do
-        subject
+        patch_request
         expect(response).to redirect_to "/error/page_not_found?locale=en"
       end
     end

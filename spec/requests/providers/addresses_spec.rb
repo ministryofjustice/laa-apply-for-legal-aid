@@ -19,10 +19,10 @@ RSpec.describe "address requests" do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/address/edit" do
-    subject { get providers_legal_aid_application_address_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_address_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -33,7 +33,7 @@ RSpec.describe "address requests" do
       end
 
       it "returns success" do
-        subject
+        get_request
         expect(response).to be_successful
         expect(unescaped_response_body).to include("Enter your client's correspondence address")
       end
@@ -42,7 +42,7 @@ RSpec.describe "address requests" do
         let!(:address) { create(:address, applicant:) }
 
         it "fills the form with the existing address" do
-          subject
+          get_request
           expect(unescaped_response_body).to include(address.address_line_one)
           expect(unescaped_response_body).to include(address.address_line_two)
           expect(unescaped_response_body).to include(address.city)
@@ -54,7 +54,7 @@ RSpec.describe "address requests" do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/address" do
-    subject do
+    subject(:patch_request) do
       patch(
         providers_legal_aid_application_address_path(legal_aid_application),
         params: address_params.merge(submit_button),
@@ -64,7 +64,7 @@ RSpec.describe "address requests" do
     let(:submit_button) { {} }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -76,12 +76,12 @@ RSpec.describe "address requests" do
 
       context "with a valid address" do
         it "redirects successfully to the next step" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
 
         it "creates an address record" do
-          expect { subject }.to change { applicant.addresses.count }.by(1)
+          expect { patch_request }.to change { applicant.addresses.count }.by(1)
           expect(address.address_line_one).to eq(address_params[:address][:address_line_one])
           expect(address.address_line_two).to eq(address_params[:address][:address_line_two])
           expect(address.city).to eq(address_params[:address][:city])
@@ -94,7 +94,7 @@ RSpec.describe "address requests" do
         before { address_params[:address].delete(:postcode) }
 
         it "renders the form again if validation fails" do
-          subject
+          patch_request
           expect(unescaped_response_body).to include("Enter your client's correspondence address")
           expect(response.body).to include("Enter a postcode")
         end
@@ -104,11 +104,11 @@ RSpec.describe "address requests" do
         before { create(:address, applicant:) }
 
         it "does not create a new address record" do
-          expect { subject }.not_to change { applicant.addresses.count }
+          expect { patch_request }.not_to change { applicant.addresses.count }
         end
 
         it "updates the current address" do
-          subject
+          patch_request
           expect(address.address_line_one).to eq(address_params[:address][:address_line_one])
           expect(address.address_line_two).to eq(address_params[:address][:address_line_two])
           expect(address.city).to eq(address_params[:address][:city])
@@ -133,7 +133,7 @@ RSpec.describe "address requests" do
         end
 
         it "records that address lookup was used" do
-          subject
+          patch_request
           expect(address.lookup_used).to be(true)
         end
       end
@@ -142,12 +142,12 @@ RSpec.describe "address requests" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+          expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end

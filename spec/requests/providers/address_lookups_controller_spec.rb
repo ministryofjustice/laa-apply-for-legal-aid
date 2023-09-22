@@ -6,10 +6,10 @@ RSpec.describe Providers::AddressLookupsController do
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/address_lookup" do
-    subject { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -17,7 +17,7 @@ RSpec.describe Providers::AddressLookupsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "shows the postcode entry page" do
@@ -28,7 +28,7 @@ RSpec.describe Providers::AddressLookupsController do
   end
 
   describe "PATCH/providers/applications/:legal_aid_application_id/address_lookup" do
-    subject { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: }
+    subject(:patch_request) { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: }
 
     let(:postcode) { "SW1H 9EA" }
     let(:normalized_postcode) { "SW1H9AE" }
@@ -42,7 +42,7 @@ RSpec.describe Providers::AddressLookupsController do
     end
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -57,11 +57,11 @@ RSpec.describe Providers::AddressLookupsController do
 
         it "does NOT perform an address lookup with the provided postcode" do
           expect(AddressLookupService).not_to receive(:call)
-          subject
+          patch_request
         end
 
         it "re-renders the form with the validation errors" do
-          subject
+          patch_request
           expect(unescaped_response_body).to include("There is a problem")
           expect(unescaped_response_body).to include("Enter a postcode in the right format")
         end
@@ -71,12 +71,12 @@ RSpec.describe Providers::AddressLookupsController do
         let(:postcode) { "SW1H 9EA" }
 
         it "saves the postcode" do
-          subject
+          patch_request
           expect(applicant.address.postcode).to eq(postcode.delete(" ").upcase)
         end
 
         it "redirects to the address selection page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
         end
       end
@@ -85,12 +85,12 @@ RSpec.describe Providers::AddressLookupsController do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+          expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end

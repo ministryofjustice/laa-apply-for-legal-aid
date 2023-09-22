@@ -4,11 +4,11 @@ RSpec.describe "about financial assessments requests" do
   let(:application) { create(:legal_aid_application, :with_applicant) }
 
   describe "GET /providers/applications/:legal_aid_application_id/about_the_financial_assessment" do
-    subject { get providers_legal_aid_application_application_confirmation_path(application) }
+    subject(:get_request) { get providers_legal_aid_application_application_confirmation_path(application) }
 
     before do
       login_as application.provider
-      subject
+      get_request
     end
 
     it "returns success" do

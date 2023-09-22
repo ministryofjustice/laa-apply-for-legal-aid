@@ -11,10 +11,10 @@ module Providers
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
 
       describe "GET /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
+        subject(:get_request) { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
 
         context "when the provider is not authenticated" do
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
@@ -23,7 +23,7 @@ module Providers
           before do
             legal_aid_application.statement_of_case = soc
             login_as provider
-            subject
+            get_request
           end
 
           it "returns http success" do
@@ -52,10 +52,10 @@ module Providers
       end
 
       describe "GET /providers/applications/:legal_aid_application_id/statement_of_case/list" do
-        subject { get list_providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
+        subject(:get_request) { get list_providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
 
         context "when the provider is not authenticated" do
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
@@ -64,7 +64,7 @@ module Providers
           before do
             legal_aid_application.statement_of_case = soc
             login_as provider
-            subject
+            get_request
           end
 
           it "returns http success" do
@@ -74,7 +74,7 @@ module Providers
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
+        subject(:patch_request) { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
 
         let(:entered_text) { Faker::Lorem.paragraph(sentence_count: 3) }
         let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
@@ -100,7 +100,7 @@ module Providers
         end
 
         it "updates the record" do
-          subject
+          patch_request
           expect(statement_of_case.reload.statement).to eq(entered_text)
           expect(statement_of_case.original_attachments.first).to be_present
         end
@@ -118,7 +118,7 @@ module Providers
             end
 
             it "redirects to the next page" do
-              subject
+              patch_request
               expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
             end
           end
@@ -135,7 +135,7 @@ module Providers
             end
 
             it "redirects to the next page" do
-              subject
+              patch_request
               expect(response).to redirect_to providers_legal_aid_application_client_denial_of_allegation_path(legal_aid_application)
             end
           end
@@ -152,7 +152,7 @@ module Providers
             end
 
             it "redirects to the next page" do
-              subject
+              patch_request
               expect(response).to redirect_to providers_legal_aid_application_nature_of_urgencies_path(legal_aid_application)
             end
           end
@@ -170,19 +170,19 @@ module Providers
               end
 
               it "redirects to the next page" do
-                subject
+                patch_request
                 expect(response).to redirect_to providers_legal_aid_application_has_other_involved_children_path(legal_aid_application)
               end
 
               it "sets the task to complete" do
-                subject
+                patch_request
                 expect(legal_aid_application.reload.legal_framework_merits_task_list).to have_completed_task(:application, :statement_of_case)
               end
             end
 
             context "and no involved children exist" do
               it "redirects to the next page" do
-                subject
+                patch_request
                 expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
               end
             end
@@ -198,12 +198,12 @@ module Providers
           let(:button_clicked) { upload_button }
 
           it "updates the record" do
-            subject
+            patch_request
             expect(statement_of_case.original_attachments.first).to be_present
           end
 
           it "returns http success" do
-            subject
+            patch_request
             expect(response).to have_http_status(:ok)
           end
 
@@ -212,13 +212,13 @@ module Providers
             let(:button_clicked) { upload_button }
 
             it "does not save the object" do
-              subject
+              patch_request
               expect(legal_aid_application.reload.attachments.length).to match(0)
               expect(statement_of_case).to be_nil
             end
 
             it "returns error message" do
-              subject
+              patch_request
               error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
               expect(response.body).to include(error)
             end
@@ -229,24 +229,24 @@ module Providers
             let(:button_clicked) { upload_button }
 
             it "updates the record" do
-              subject
+              patch_request
               expect(statement_of_case.original_attachments.first).to be_present
             end
 
             it "stores the original filename" do
-              subject
+              patch_request
               attachment = statement_of_case.original_attachments.first
               expect(attachment.original_filename).to eq "hello_world.docx"
             end
 
             it "has the relevant content type" do
-              subject
+              patch_request
               document = statement_of_case.original_attachments.first.document
               expect(document.content_type).to eq "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             end
 
             it "returns http success" do
-              subject
+              patch_request
               expect(response).to have_http_status(:ok)
             end
           end
@@ -255,12 +255,12 @@ module Providers
             let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
             it "does not update the record" do
-              subject
+              patch_request
               expect(statement_of_case).to be_nil
             end
 
             it "returns error message" do
-              subject
+              patch_request
               error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
               expect(response.body).to include(error)
             end
@@ -269,12 +269,12 @@ module Providers
               let(:original_file) { nil }
 
               it "does not update the record" do
-                subject
+                patch_request
                 expect(statement_of_case).to be_nil
               end
 
               it "returns error message" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.blank")
                 expect(response.body).to include(error)
               end
@@ -287,7 +287,7 @@ module Providers
             end
 
             it "returns error message" do
-              subject
+              patch_request
               error = I18n.t("#{i18n_error_path}.system_down")
               expect(response.body).to include(error)
             end
@@ -304,7 +304,7 @@ module Providers
               end
 
               it "fails" do
-                subject
+                patch_request
                 expect(response.body).to include("There is a problem")
                 expect(response.body).to include(I18n.t("#{i18n_error_path}.blank"))
               end
@@ -318,7 +318,7 @@ module Providers
               end
 
               it "updates the statement text" do
-                subject
+                patch_request
                 expect(statement_of_case.reload.statement).to eq(entered_text)
                 expect(statement_of_case.original_attachments.first).not_to be_present
               end
@@ -328,7 +328,7 @@ module Providers
               let(:entered_text) { "" }
 
               it "updates the file" do
-                subject
+                patch_request
                 expect(statement_of_case.reload.statement).to eq("")
                 expect(statement_of_case.original_attachments.first).to be_present
               end
@@ -338,7 +338,7 @@ module Providers
               let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
               it "does not save the object and raise an error" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
@@ -353,7 +353,7 @@ module Providers
               end
 
               it "does not save the object and raise an error" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
@@ -364,7 +364,7 @@ module Providers
               before { allow(StatementOfCases::StatementOfCaseForm).to receive(:max_file_size).and_return(0) }
 
               it "does not save the object and raise an error" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.file_too_big", size: 0, file_name: original_file.original_filename)
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
@@ -375,7 +375,7 @@ module Providers
               let(:original_file) { uploaded_file("spec/fixtures/files/empty_file.pdf", "application/pdf") }
 
               it "does not save the object and raise an error" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
@@ -387,12 +387,12 @@ module Providers
               let(:original_file) { nil }
 
               it "returns http success" do
-                subject
+                patch_request
                 expect(response).to have_http_status(:ok)
               end
 
               it "displays error" do
-                subject
+                patch_request
                 expect(response.body).to match 'id="application-merits-task-statement-of-case-original-file-error"'
               end
 
@@ -400,7 +400,7 @@ module Providers
                 let(:original_file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
                 it "does not save the object and raise an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
                   expect(response.body).to include(error)
                   expect(statement_of_case).to be_nil
@@ -423,7 +423,7 @@ module Providers
                 end
 
                 it "does not alter the record" do
-                  subject
+                  patch_request
                   expect(statement_of_case.reload.statement).to eq("")
                   expect(statement_of_case.original_attachments.count).to eq 1
                 end
@@ -431,7 +431,7 @@ module Providers
 
               context "when additional file uploaded" do
                 it "attaches the file" do
-                  subject
+                  patch_request
                   expect(statement_of_case.reload.statement).to eq("")
                   expect(statement_of_case.original_attachments.count).to eq 3
                 end
@@ -442,7 +442,7 @@ module Providers
               let(:entered_text) { "Now we have two attached files" }
 
               it "updates the text and attaches the additional file" do
-                subject
+                patch_request
                 expect(statement_of_case.reload.statement).to eq entered_text
                 expect(statement_of_case.original_attachments.count).to eq 3
               end
@@ -454,18 +454,18 @@ module Providers
           let(:button_clicked) { draft_button }
 
           it "updates the record" do
-            subject
+            patch_request
             expect(statement_of_case.reload.statement).to eq(entered_text)
             expect(statement_of_case.original_attachments.first).to be_present
           end
 
           it "does not set the task to complete" do
-            subject
+            patch_request
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :statement_of_case)
           end
 
           it "redirects to provider draft endpoint" do
-            subject
+            patch_request
             expect(response).to redirect_to provider_draft_endpoint
           end
 
@@ -474,7 +474,7 @@ module Providers
             let(:original_file) { nil }
 
             it "redirects to provider draft endpoint" do
-              subject
+              patch_request
               expect(response).to redirect_to provider_draft_endpoint
             end
           end
@@ -482,7 +482,7 @@ module Providers
       end
 
       describe "DELETE /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
+        subject(:delete_request) { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
 
         let(:statement_of_case) { create(:statement_of_case, :with_original_file_attached) }
         let(:legal_aid_application) { statement_of_case.legal_aid_application }
@@ -497,7 +497,7 @@ module Providers
           context "when only original file exists" do
             it "deletes the file" do
               attachment_id = original_file.id
-              expect { subject }.to change(Attachment, :count).by(-1)
+              expect { delete_request }.to change(Attachment, :count).by(-1)
               expect(Attachment.exists?(attachment_id)).to be(false)
             end
           end
@@ -506,13 +506,13 @@ module Providers
             let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached) }
 
             it "deletes both attachments" do
-              expect { subject }.to change(Attachment, :count).by(-2)
+              expect { delete_request }.to change(Attachment, :count).by(-2)
             end
           end
         end
 
         it "returns http success" do
-          subject
+          delete_request
           expect(response).to have_http_status(:ok)
         end
 
@@ -520,7 +520,7 @@ module Providers
           let(:params) { { attachment_id: :unknown } }
 
           it "returns http success" do
-            subject
+            delete_request
             expect(response).to have_http_status(:ok)
           end
         end
