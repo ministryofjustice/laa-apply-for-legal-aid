@@ -231,7 +231,7 @@ module CCMS
         end
 
         context "with multiple individual opponents" do
-          let(:opponent_one) { create(:opponent, first_name: "Joffrey", last_name: "Boratheon") }
+          let(:opponent_one) { create(:opponent, first_name: "Joffrey", last_name: "Baratheon") }
           let(:opponent_two) { create(:opponent, first_name: "Sansa", last_name: "Stark") }
           let(:opponents) { [opponent_one, opponent_two] }
 
@@ -248,7 +248,7 @@ module CCMS
               .and have_xml("#{other_party_xpath}/casebio:SharedInd", "false")
               .and have_xml("#{person_xpath}/casebio:Name/common:Title", "")
               .and have_xml("#{person_xpath}/casebio:Name/common:FirstName", "Joffrey")
-              .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Boratheon")
+              .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Baratheon")
               .and have_xml("#{person_xpath}/casebio:RelationToClient", "UNKNOWN")
               .and have_xml("#{person_xpath}/casebio:RelationToCase", "OPP")
 

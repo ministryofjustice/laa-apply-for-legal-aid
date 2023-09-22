@@ -18,7 +18,7 @@ module CCMS
         end
 
         context "with an individual opponent" do
-          let(:other_party) { create(:opponent, first_name: "Joffrey", last_name: "Boratheon") }
+          let(:other_party) { create(:opponent, first_name: "Joffrey", last_name: "Baratheon") }
 
           before do
             allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(99_123_456)
@@ -32,7 +32,7 @@ module CCMS
               .and have_xml("#{other_party_xpath}/casebio:SharedInd", "false")
               .and have_xml("#{person_xpath}/casebio:Name/common:Title", "")
               .and have_xml("#{person_xpath}/casebio:Name/common:FirstName", "Joffrey")
-              .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Boratheon")
+              .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Baratheon")
               .and have_xml("#{person_xpath}/casebio:RelationToClient", "NONE")
               .and have_xml("#{person_xpath}/casebio:RelationToCase", "OPP")
           end
