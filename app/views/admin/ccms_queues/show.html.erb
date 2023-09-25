@@ -1,7 +1,7 @@
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <%= link_to_accessible("CCMS Queue", admin_ccms_queues_path, class: "govuk-breadcrumbs__link") %>
+      <%= govuk_link_to("CCMS Queue", admin_ccms_queues_path, class: "govuk-breadcrumbs__link") %>
     </li>
     <li class="govuk-breadcrumbs__list-item">
       <%= @legal_aid_application.application_ref %>
@@ -47,11 +47,11 @@
   <% else %>
     <%= govuk_details(summary_text: t(".restart")) do %>
       <p><%= t(".restart_details") %></p>
-      <p><%= link_to_accessible t(".restart"), restart_current_submission_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
+      <p><%= govuk_link_to t(".restart"), restart_current_submission_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
     <% end %>
     <%= govuk_details(summary_text: t(".reset")) do %>
       <p><%= t(".reset_details") %></p>
-      <p><%= link_to_accessible t(".reset"), reset_and_restart_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
+      <p><%= govuk_link_to t(".reset"), reset_and_restart_admin_ccms_queue_path(@submission.id), class: "govuk-button govuk-!-margin-bottom-0" %></p>
     <% end %>
   <% end %>
 </div>

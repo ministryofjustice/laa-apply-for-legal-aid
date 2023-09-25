@@ -22,7 +22,7 @@
               body.with_row do |row|
                 row.with_cell(text: report[:report_title])
                 row.with_cell do
-                  link_to_accessible(report[:path_text], __send__(report[:path], format: :csv))
+                  govuk_link_to(report[:path_text], __send__(report[:path], format: :csv))
                 end
               end
             end
