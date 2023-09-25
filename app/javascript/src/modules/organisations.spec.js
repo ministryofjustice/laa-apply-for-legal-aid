@@ -7,70 +7,129 @@ beforeEach(() => jest.resetAllMocks())
 
 afterEach(() => jest.restoreAllMocks())
 
+const StubbedResult = {
+  success: true,
+  data: [
+    {
+      name: 'Angus Council',
+      ccms_opponent_id: '280361',
+      ccms_type_code: 'LA',
+      ccms_type_text: 'Local Authority',
+      name_headline: '<mark>Angus</mark> Council',
+      type_headline: '<mark>Local</mark> Authority'
+    }
+  ]
+}
+
 describe('Organisations.searchResults', () => {
   let result
+  const searchTerm = 'irrelevant'
+  const host = 'http://example.com'
 
   beforeEach(async () => {
     axios.mockResolvedValue({ data: { data: [] } })
-      .mockResolvedValueOnce({ data: { data: ['organisation_name_1', 'organisation_name_2'] } })
+      .mockResolvedValueOnce({ data: StubbedResult })
   })
 
-  describe('searching single word', () => {
-    const searchTerm = 'baberg'
-    const host = 'hhtp://example.com'
-    beforeEach(async () => {
-      result = await Organisations.searchResults(host, searchTerm)
-    })
+  beforeEach(async () => {
+    result = await Organisations.searchResults(host, searchTerm)
+  })
 
-    it('calls axios.post once', () => {
-      expect(axios).toHaveBeenCalledTimes(1)
-    })
+  it('calls axios.post once', () => {
+    expect(axios).toHaveBeenCalledTimes(1)
+  })
 
-    it('polls the correct endpoint that ends with searches', () => {
-      expect(axios.post.mock.calls).toMatchObject(/\/organisations_searches/)
-    })
+  it('polls the correct endpoint', () => {
+    expect(axios.post.mock.calls).toMatchObject(/\/organisations_searches/)
+  })
 
-    it('returns correct values', () => {
-      expect(result).toEqual(['organisation_name_1', 'organisation_name_2'])
-    })
+  it('returns response\'s data element', () => {
+    expect(result).toEqual(StubbedResult.data)
+  })
+})
 
-    describe('returns successful values for up to 3 failed match attempts before resetting', () => {
-      const searchResultValues = [
-        [searchTerm, 1, ['organisation_name_1', 'organisation_name_2']],
-        [searchTerm, 2, ['organisation_name_1', 'organisation_name_2']],
-        [searchTerm, 3, ['organisation_name_1', 'organisation_name_2']],
-        [searchTerm, 4, []]
-      ]
+describe('Organisations.showResults', () => {
+  describe('with results', () => {
+    const results = StubbedResult.data
 
-      test.each(searchResultValues)(
-        'Call searchResults %number of times',
-        (term, number, expected) => {
-          Array.from(Array(number)).forEach(() => {
-            result = Organisations.searchResults(term)
-          })
+    it('displays matching results with highlighted terms', () => {
+      document.body.innerHTML =
+        '<div>' +
+          '<div class="govuk-radios">' +
+            '<div id="280361" class="organisation-item" style="display: none;">' +
+              '<div>' +
+                '<input>' +
+                  '<label>Angus Council</label>' +
+                  '<div class="govuk-hint">Local Authority</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="no-organisation-items" style="display: none;">' +
+          '<div>' +
+            '<span>No results found.</span>' +
+          '</div>' +
+        '</div>'
 
-          return expect(result).resolves.toEqual(expected)
-        }
-      )
+      const inputText = 'Ang'
+      const element = document.getElementById('280361')
+      const label = element.querySelector('label')
+      const hint = element.querySelector('.govuk-hint')
+      const noResultsElement = document.querySelector('.no-organisation-items')
+
+      expect(element).not.toBeVisible()
+      expect(noResultsElement).not.toBeVisible()
+      expect(label.innerHTML).toEqual('Angus Council')
+      expect(hint.innerHTML).toEqual('Local Authority')
+
+      Organisations.showResults(results, inputText)
+
+      expect(element).toBeVisible()
+      expect(noResultsElement).not.toBeVisible()
+      expect(label.innerHTML).toEqual('<mark>Angus</mark> Council')
+      expect(hint.innerHTML).toEqual('<mark>Local</mark> Authority')
     })
   })
 
-  describe('searching multiple words', () => {
-    describe('returns successful values if no matches and previous search term similar', () => {
-      const searchResultValues = [
-        ['Loca Auth', 'local auth', ['organisation_name_1', 'organisation_name_2']],
-        ['local auth', 'Local', ['organisation_name_1', 'organisation_name_2']],
-        ['Local', 'lcl', []]
-      ]
+  describe('with no results', () => {
+    const results = []
 
-      test.each(searchResultValues)(
-        'Call searchResults %number of times',
-        async (previousSearchTerm, nextSearchTerm, expected) => {
-          await Organisations.searchResults('https://fakehost.com', previousSearchTerm)
-          result = Organisations.searchResults('https://fakehost.com', nextSearchTerm)
-          return expect(result).resolves.toEqual(expected)
-        }
-      )
+    it('hides all results', () => {
+      document.body.innerHTML =
+        '<div>' +
+          '<div class="govuk-radios">' +
+            '<div id="280361" class="organisation-item" style="display: none;">' +
+              '<div>' +
+                '<input>' +
+                  '<label>Angus Council</label>' +
+                  '<div class="govuk-hint">Local Authority</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="no-organisation-items" style="display: none;">' +
+          '<div>' +
+            '<span>No results found.</span>' +
+          '</div>' +
+        '</div>'
+
+      const inputText = 'Ang'
+      const element = document.getElementById('280361')
+      const label = element.querySelector('label')
+      const hint = element.querySelector('.govuk-hint')
+      const noResultsElement = document.querySelector('.no-organisation-items')
+
+      expect(element).not.toBeVisible()
+      expect(noResultsElement).not.toBeVisible()
+      expect(label.innerHTML).toEqual('Angus Council')
+      expect(hint.innerHTML).toEqual('Local Authority')
+
+      Organisations.showResults(results, inputText)
+
+      expect(element).not.toBeVisible()
+      expect(noResultsElement).toBeVisible()
+      expect(label.innerHTML).toEqual('Angus Council')
+      expect(hint.innerHTML).toEqual('Local Authority')
     })
   })
 })
