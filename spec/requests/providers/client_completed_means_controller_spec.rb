@@ -11,10 +11,10 @@ RSpec.describe Providers::ClientCompletedMeansController do
   before { allow(Setting).to receive(:partner_means_assessment?).and_return(enable_partner_means) }
 
   describe "GET /providers/applications/:id/client_completed_means" do
-    subject { get providers_legal_aid_application_client_completed_means_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_client_completed_means_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -22,7 +22,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -87,7 +87,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
   end
 
   describe "PATCH /providers/applications/:id/client_completed_means" do
-    subject { patch providers_legal_aid_application_client_completed_means_path(legal_aid_application), params: params.merge(submit_button) }
+    subject(:patch_request) { patch providers_legal_aid_application_client_completed_means_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:params) { {} }
 
@@ -106,7 +106,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
 
           it "redirects to the employment income page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_application_means_employment_income_path(legal_aid_application))
           end
         end
@@ -117,7 +117,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
 
           it "raises an error" do
-            expect { subject }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
+            expect { patch_request }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
           end
         end
 
@@ -125,7 +125,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
 
           it "redirects to the no employed income page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
           end
         end
@@ -137,7 +137,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
 
           it "redirects to the no employed income page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
           end
         end
@@ -151,14 +151,14 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
+            expect(patch_request).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
           end
 
           context "when application is using bank upload journey" do
             before { allow_any_instance_of(LegalAidApplication).to receive(:uploading_bank_statements?).and_return(true) }
 
             it "redirects to the receives state benefit page" do
-              expect(subject).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
+              expect(patch_request).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
             end
           end
         end
@@ -168,12 +168,12 @@ RSpec.describe Providers::ClientCompletedMeansController do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          subject
+          patch_request
           expect(legal_aid_application.reload).to be_draft
         end
       end

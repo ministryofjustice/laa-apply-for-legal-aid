@@ -13,15 +13,15 @@ RSpec.describe Providers::IncomeSummaryController do
   end
 
   describe "GET /providers/income_summary" do
-    subject { get providers_legal_aid_application_income_summary_index_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_income_summary_index_path(legal_aid_application) }
 
     it "returns http success" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays a section for all transaction types linked to this application" do
-      subject
+      get_request
       [pension, benefits].pluck(:name).each do |name|
         legend = I18n.t("transaction_types.names.providers.#{name}")
         expect(parsed_response_body.css("ol li##{name} h2").text).to match(/#{legend}/)
@@ -29,7 +29,7 @@ RSpec.describe Providers::IncomeSummaryController do
     end
 
     it "does not display a section for transaction types not linked to this application" do
-      subject
+      get_request
       [maintenance, pension].pluck(:name) do |name|
         expect(parsed_response_body.css("ol li#income-type-#{name} h2").size).to eq 0
       end
@@ -38,14 +38,14 @@ RSpec.describe Providers::IncomeSummaryController do
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
 
     context "when not all transaction types selected" do
       it "displays an Add additional income types section" do
-        subject
+        get_request
         expect(response.body).to include(I18n.t("providers.income_summary.add_other_income.add_other_income"))
       end
     end
@@ -54,7 +54,7 @@ RSpec.describe Providers::IncomeSummaryController do
       before do
         legal_aid_application.transaction_types << maintenance
         legal_aid_application.transaction_types << pension
-        subject
+        get_request
       end
 
       it "does not display an Add additional income types section" do
@@ -70,7 +70,7 @@ RSpec.describe Providers::IncomeSummaryController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [pension]) }
 
       it "displays bank transaction" do
-        subject
+        get_request
         expect(legal_aid_application.bank_transactions).to include(bank_transaction)
         expect(response.body).to include(bank_transaction.description)
       end
@@ -78,7 +78,7 @@ RSpec.describe Providers::IncomeSummaryController do
   end
 
   describe "POST /providers/income_summary" do
-    subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
+    subject(:post_request) { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
 
     let(:applicant) { create(:applicant) }
     let(:bank_provider) { create(:bank_provider, applicant:) }
@@ -88,7 +88,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
     let(:submit_button) { { continue_button: "Continue" } }
 
-    before { subject }
+    before { post_request }
 
     context "when no outgoings categories previously selected" do
       let(:legal_aid_application) do
@@ -150,7 +150,7 @@ RSpec.describe Providers::IncomeSummaryController do
     end
 
     context "when the transaction type category has no bank transactions" do
-      subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
+      subject(:post_request) { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
 
       let(:applicant) { create(:applicant) }
       let(:bank_provider) { create(:bank_provider, applicant:) }
@@ -160,7 +160,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
       let(:submit_button) { { continue_button: "Continue" } }
 
-      before { subject }
+      before { post_request }
 
       it "renders successfully" do
         expect(response).to have_http_status(:ok)

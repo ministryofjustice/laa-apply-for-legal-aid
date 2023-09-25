@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "providers legal aid application requests" do
   describe "GET /providers/applications" do
-    subject { get providers_legal_aid_applications_path(params) }
+    subject(:get_request) { get providers_legal_aid_applications_path(params) }
 
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:provider) { legal_aid_application.provider }
@@ -11,7 +11,7 @@ RSpec.describe "providers legal aid application requests" do
     let(:params) { {} }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -22,7 +22,7 @@ RSpec.describe "providers legal aid application requests" do
       end
 
       it "returns http success" do
-        subject
+        get_request
         expect(response).to have_http_status(:ok)
       end
 
@@ -30,18 +30,18 @@ RSpec.describe "providers legal aid application requests" do
         let(:provider) { create(:provider, :without_portal_enabled) }
 
         it "redirects to error page" do
-          subject
+          get_request
           expect(response).to redirect_to(error_path(:access_denied))
         end
       end
 
       it "includes a link to the legal aid application's default start path" do
-        subject
+        get_request
         expect(response.body).to include(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
 
       it "includes a link to the search page" do
-        subject
+        get_request
         expect(response.body).to include(search_providers_legal_aid_applications_path)
       end
 
@@ -52,17 +52,17 @@ RSpec.describe "providers legal aid application requests" do
         let!(:other_provider_application) { create(:legal_aid_application, :with_applicant, provider: other_provider, provider_step: :applicant_details) }
 
         it "includes a link to the legal aid application's current path" do
-          subject
+          get_request
           expect(response.body).to include(providers_legal_aid_application_applicant_details_path(legal_aid_application))
         end
 
         it "includes a link to the application of the other provider in the same firm" do
-          subject
+          get_request
           expect(response.body).to include(providers_legal_aid_application_applicant_details_path(other_provider_in_same_firm_application))
         end
 
         it "does not include a link to the application of the provider in a different firm" do
-          subject
+          get_request
           expect(response.body).not_to include(providers_legal_aid_application_applicant_details_path(other_provider_application))
         end
       end
@@ -71,7 +71,7 @@ RSpec.describe "providers legal aid application requests" do
         let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, provider_step: :unknown) }
 
         it "links to start of journey" do
-          subject
+          get_request
           start_path = Flow::KeyPoint.path_for(
             journey: :providers,
             key_point: :edit_applicant,
@@ -83,12 +83,12 @@ RSpec.describe "providers legal aid application requests" do
 
       context "with pagination" do
         it "shows current total information" do
-          subject
+          get_request
           expect(page).to have_css(".app-pagination__info", text: "Showing 1 of 1")
         end
 
         it "does not show navigation links" do
-          subject
+          get_request
           expect(page).not_to have_css(".govuk-pagination")
         end
 
@@ -98,12 +98,12 @@ RSpec.describe "providers legal aid application requests" do
           let(:params) { { page_size: 3 } }
 
           it "show page information" do
-            subject
+            get_request
             expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
           end
 
           it "shows pagination" do
-            subject
+            get_request
             expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
           end
         end
@@ -112,7 +112,7 @@ RSpec.describe "providers legal aid application requests" do
           before { create(:legal_aid_application, :discarded, provider:) }
 
           it "is excluded from the list" do
-            subject
+            get_request
             expect(page).to have_css(".app-pagination__info", text: "Showing 1 of 1")
           end
         end
@@ -122,7 +122,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:provider) { create(:provider, cookies_enabled: true, cookies_saved_at: 1.year.ago - 1.day) }
 
         it "displays the cookie banner" do
-          subject
+          get_request
           expect(response.body).to include("Cookies on Apply for legal aid")
         end
       end
@@ -131,7 +131,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:provider) { create(:provider, cookies_enabled: true, cookies_saved_at: 1.year.ago + 1.day) }
 
         it "does not display the cookie banner" do
-          subject
+          get_request
           expect(response.body).not_to include("Cookies on Apply for legal aid")
         end
       end
@@ -140,7 +140,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:provider) { create(:provider, cookies_enabled: nil, cookies_saved_at: nil) }
 
         it "displays the cookie banner" do
-          subject
+          get_request
           expect(response.body).to include("Cookies on Apply for legal aid")
         end
       end
@@ -149,7 +149,7 @@ RSpec.describe "providers legal aid application requests" do
     context "when another provider is authenticated" do
       before do
         login_as other_provider
-        subject
+        get_request
       end
 
       it "displays no results" do
@@ -159,7 +159,7 @@ RSpec.describe "providers legal aid application requests" do
   end
 
   describe "GET /providers/applications/search" do
-    subject { get search_providers_legal_aid_applications_path(params) }
+    subject(:get_request) { get search_providers_legal_aid_applications_path(params) }
 
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:provider) { legal_aid_application.provider }
@@ -168,7 +168,7 @@ RSpec.describe "providers legal aid application requests" do
     let(:params) { {} }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -179,7 +179,7 @@ RSpec.describe "providers legal aid application requests" do
       end
 
       it "does not show any application" do
-        subject
+        get_request
         expect(response.body).not_to include(legal_aid_application.application_ref)
       end
 
@@ -188,7 +188,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:params) { { search_term: } }
 
         it "shows the application" do
-          subject
+          get_request
           expect(unescaped_response_body).to include(legal_aid_application.applicant.last_name)
           expect(unescaped_response_body).to include("Substantive")
         end
@@ -196,7 +196,7 @@ RSpec.describe "providers legal aid application requests" do
         it "logs the search" do
           expected_log = "Applications search: Provider #{provider.id} searched '#{search_term}' : 1 results."
           allow(Rails.logger).to receive(:info).at_least(:once)
-          subject
+          get_request
           expect(Rails.logger).to have_received(:info).with(expected_log).once
         end
       end
@@ -215,7 +215,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:params) { { search_term: } }
 
         it "shows the application" do
-          subject
+          get_request
           expect(unescaped_response_body).to include("Emergency")
           expect(unescaped_response_body).to match(/Substantive due: \d{1,2} [ADFJMNOS]\w* \d{4}/)
           expect(legal_aid_application.summary_state).to eq(:in_progress)
@@ -238,7 +238,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:params) { { search_term: } }
 
         it "shows the application" do
-          subject
+          get_request
           expect(unescaped_response_body).to include("Emergency")
           expect(legal_aid_application.substantive_application_deadline_on).not_to be_nil
           expect(unescaped_response_body).not_to match(/Substantive due: \d{1,2} [ADFJMNOS]\w* \d{4}/)
@@ -250,7 +250,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:params) { { search_term: "something" } }
 
         it "does not show the application" do
-          subject
+          get_request
           expect(unescaped_response_body).not_to include(legal_aid_application.application_ref)
         end
       end
@@ -259,7 +259,7 @@ RSpec.describe "providers legal aid application requests" do
         let(:params) { { search_term: "" } }
 
         it "shows an error" do
-          subject
+          get_request
           expect(response.body).to include(I18n.t("providers.legal_aid_applications.search.error"))
         end
       end
@@ -270,7 +270,7 @@ RSpec.describe "providers legal aid application requests" do
 
       before do
         login_as other_provider
-        subject
+        get_request
       end
 
       it "does not show the application" do
@@ -280,7 +280,7 @@ RSpec.describe "providers legal aid application requests" do
   end
 
   describe "POST /providers/applications" do
-    subject { post providers_legal_aid_applications_path }
+    subject(:post_request) { post providers_legal_aid_applications_path }
 
     let(:legal_aid_application) { LegalAidApplication.last }
 
@@ -290,11 +290,11 @@ RSpec.describe "providers legal aid application requests" do
       end
 
       it "does not create a new application record" do
-        expect { subject }.not_to change(LegalAidApplication, :count)
+        expect { post_request }.not_to change(LegalAidApplication, :count)
       end
 
       it "redirects to new applicant page" do
-        subject
+        post_request
         expect(response).to redirect_to(new_providers_applicant_path)
       end
     end

@@ -7,29 +7,29 @@ RSpec.describe Providers::EndOfApplicationsController do
   before { login }
 
   describe "GET /providers/applications/:legal_aid_application_id/end_of_application" do
-    subject do
+    subject(:get_request) do
       get providers_legal_aid_application_end_of_application_path(legal_aid_application)
     end
 
     it "renders successfully" do
-      subject
+      get_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays reference" do
-      subject
+      get_request
       expect(response.body).to include(legal_aid_application.application_ref)
     end
 
     it "has a link to the feedback page" do
-      subject
+      get_request
       expect(response.body).to include(new_feedback_path)
     end
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -37,7 +37,7 @@ RSpec.describe Providers::EndOfApplicationsController do
     context "with another provider" do
       let(:login) { login_as create(:provider) }
 
-      before { subject }
+      before { get_request }
 
       it "redirects to access denied error" do
         expect(response).to redirect_to(error_path(:access_denied))
@@ -46,7 +46,7 @@ RSpec.describe Providers::EndOfApplicationsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/end_of_application" do
-    subject do
+    subject(:patch_request) do
       patch(
         providers_legal_aid_application_end_of_application_path(legal_aid_application),
         params:,
@@ -56,7 +56,7 @@ RSpec.describe Providers::EndOfApplicationsController do
     let(:params) { {} }
 
     it "redirects to next page" do
-      subject
+      patch_request
       expect(response).to redirect_to(flow_forward_path)
     end
 
@@ -64,19 +64,19 @@ RSpec.describe Providers::EndOfApplicationsController do
       let(:params) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do
-        subject
+        patch_request
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
       it "sets the application as draft" do
-        expect { subject }.not_to change { legal_aid_application.reload.draft? }
+        expect { patch_request }.not_to change { legal_aid_application.reload.draft? }
       end
     end
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -84,7 +84,7 @@ RSpec.describe Providers::EndOfApplicationsController do
     context "with another provider" do
       let(:login) { login_as create(:provider) }
 
-      before { subject }
+      before { patch_request }
 
       it "redirects to access denied error" do
         expect(response).to redirect_to(error_path(:access_denied))

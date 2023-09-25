@@ -4,7 +4,7 @@ RSpec.describe "check passported answers requests" do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_passported_answers" do
-    subject { get "/providers/applications/#{application.id}/check_passported_answers" }
+    subject(:get_request) { get "/providers/applications/#{application.id}/check_passported_answers" }
 
     let(:vehicle) { create(:vehicle, :populated) }
     let(:own_vehicle) { true }
@@ -19,7 +19,7 @@ RSpec.describe "check passported answers requests" do
     end
 
     context "when the provider is unauthenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -28,7 +28,7 @@ RSpec.describe "check passported answers requests" do
       before do
         login_as application.provider
         application.reload
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -239,7 +239,7 @@ RSpec.describe "check passported answers requests" do
   end
 
   describe "PATCH /providers/applications/:id/check_passported_answers/continue" do
-    subject do
+    subject(:patch_request) do
       patch(
         "/providers/applications/#{application.id}/check_passported_answers/continue",
         params:,
@@ -262,7 +262,7 @@ RSpec.describe "check passported answers requests" do
       context "when the call to Check Financial Eligibility Service is successful" do
         before do
           allow(CFECivil::SubmissionBuilder).to receive(:call).with(application).and_return(true)
-          subject
+          patch_request
         end
 
         it "redirects to Has your client received legal help for the matter?" do
@@ -277,7 +277,7 @@ RSpec.describe "check passported answers requests" do
           let(:params) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
@@ -290,7 +290,7 @@ RSpec.describe "check passported answers requests" do
       context "when the call to Check Financial Eligibility Service is unsuccessful" do
         before do
           allow(CFECivil::SubmissionBuilder).to receive(:call).with(application).and_return(false)
-          subject
+          patch_request
         end
 
         it "redirects to the problem page" do
@@ -300,14 +300,14 @@ RSpec.describe "check passported answers requests" do
     end
 
     context "when the provider is unauthenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
   end
 
   describe 'PATCH "/providers/applications/:id/check_passported_answers/reset' do
-    subject { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
+    subject(:patch_request) { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
 
     let(:application) do
       create(:legal_aid_application,
@@ -318,7 +318,7 @@ RSpec.describe "check passported answers requests" do
     end
 
     context "when the provider is unauthenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -336,7 +336,7 @@ RSpec.describe "check passported answers requests" do
         login_as application.provider
         get providers_legal_aid_application_means_other_assets_path(application)
         get providers_legal_aid_application_check_passported_answers_path(application)
-        subject
+        patch_request
       end
 
       it "transitions to provider_assessing_merits state" do

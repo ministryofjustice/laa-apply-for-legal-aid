@@ -9,10 +9,10 @@ RSpec.describe Providers::LimitationsController do
   end
 
   describe "GET /providers/applications/:id/limitations" do
-    subject { get providers_legal_aid_application_limitations_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_limitations_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -20,7 +20,7 @@ RSpec.describe Providers::LimitationsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -51,17 +51,17 @@ RSpec.describe Providers::LimitationsController do
 
     context "when delegated functions have not been used" do
       context "and the maximum substantive cost limit is at the threshold" do
-        subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
+        subject(:patch_request) { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
 
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
         it "redirects to next page" do
-          expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+          expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
         end
       end
 
       context "and the maximum substantive cost limit is below the threshold" do
-        subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
+        subject(:patch_request) { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
 
         let(:legal_aid_application) { create(:legal_aid_application) }
 
@@ -78,7 +78,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+            expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
           end
         end
 
@@ -90,7 +90,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "displays an error" do
-            subject
+            patch_request
             expect(response.body).to match("govuk-error-summary")
             expect(response.body).to include("Substantive cost limit must be an amount of money, like 2,500")
           end
@@ -99,7 +99,7 @@ RSpec.describe Providers::LimitationsController do
     end
 
     context "when delegated functions have been used" do
-      subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
+      subject(:patch_request) { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
 
       let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004) }
       let(:proceeding_type) { legal_aid_application.proceeding_types.first }
@@ -112,7 +112,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+            expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
           end
         end
 
@@ -127,7 +127,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+            expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
           end
         end
       end
@@ -143,7 +143,7 @@ RSpec.describe Providers::LimitationsController do
         end
 
         it "displays an error" do
-          subject
+          patch_request
           expect(response.body).to match("govuk-error-summary")
           expect(response.body).to include("Emergency cost limit must be an amount of money, like 2,500")
         end

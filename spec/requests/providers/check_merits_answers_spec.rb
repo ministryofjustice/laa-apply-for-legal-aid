@@ -5,7 +5,7 @@ RSpec.describe "check merits answers requests" do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_merits_answers" do
-    subject { get "/providers/applications/#{application.id}/check_merits_answers" }
+    subject(:get_request) { get "/providers/applications/#{application.id}/check_merits_answers" }
 
     let(:application) do
       create(:legal_aid_application,
@@ -22,7 +22,7 @@ RSpec.describe "check merits answers requests" do
     before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
     context "when the provider is unauthenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -30,7 +30,7 @@ RSpec.describe "check merits answers requests" do
     context "when logged in as an authenticated provider" do
       before do
         login_as application.provider
-        subject
+        get_request
       end
 
       it "displays the correct page" do
@@ -118,7 +118,7 @@ RSpec.describe "check merits answers requests" do
   end
 
   describe "PATCH /providers/applications/:id/check_merits_answers/continue" do
-    subject do
+    subject(:patch_request) do
       patch "/providers/applications/#{application.id}/check_merits_answers/continue", params:
     end
 
@@ -144,21 +144,21 @@ RSpec.describe "check merits answers requests" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_confirm_client_declaration_path(application))
         end
       end
     end
 
     context "when the provider is unauthenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
   end
 
   describe 'PATCH "/providers/applications/:id/check_merits_answers/reset' do
-    subject { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }
+    subject(:patch_request) { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }
 
     let(:application) do
       create(:legal_aid_application,
@@ -174,7 +174,7 @@ RSpec.describe "check merits answers requests" do
     end
 
     context "when the provider is unauthenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -188,13 +188,13 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "transitions to provider_entering_merits state" do
-        subject
+        patch_request
         expect(application.reload.provider_entering_merits?).to be true
       end
 
       context "when no required document categories" do
         it "redirects to merits task page" do
-          subject
+          patch_request
           expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(application)
         end
       end
@@ -207,7 +207,7 @@ RSpec.describe "check merits answers requests" do
         end
 
         it "redirects to upload evidence page" do
-          subject
+          patch_request
           expect(response).to redirect_to providers_legal_aid_application_uploaded_evidence_collection_path(application)
         end
       end
