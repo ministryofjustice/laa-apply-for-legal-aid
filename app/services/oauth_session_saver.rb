@@ -14,23 +14,32 @@ class OauthSessionSaver
   end
 
   def initialize
-    @redis = Redis.new(url: Rails.configuration.x.redis.oauth_session_url)
+    redis_config ||= RedisClient.config(url: Rails.configuration.x.redis.oauth_session_url)
+    @redis = redis_config.new_client
   end
 
   def store(key, session)
     return unless session.key?("omniauth.state")
 
-    @redis.set(key, session.to_json, ex: TIME_TO_LIVE_IN_SECONDS)
+    # session["ex"] = TIME_TO_LIVE_IN_SECONDS
+    session.each do |hm_key, value|
+      if value.is_a?(Array)
+        @redis.call("HSET", key, hm_key, value.to_s)
+      else
+        @redis.call("HSET", key, hm_key, value)
+      end
+    end
+    @redis.call("EXPIRE", key, TIME_TO_LIVE_IN_SECONDS)
   end
 
   def get(key)
-    json = @redis.get(key)
-    return {} if json.nil?
+    session_hash = @redis.call("HGETALL", key)
+    return {} if session_hash.nil?
 
-    JSON.parse(json)
+    session_hash
   end
 
   def destroy!(key)
-    @redis.del(key)
+    @redis.call("DEL", key)
   end
 end

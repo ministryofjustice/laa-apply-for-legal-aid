@@ -59,7 +59,6 @@ gem "ruby-saml-idp", github: "dev-develop/ruby-saml-idp", branch: "master"
 gem "jwt"
 
 # background processing
-# gem "redis-namespace"
 gem "sidekiq"
 gem "sidekiq-status"
 

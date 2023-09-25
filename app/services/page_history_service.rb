@@ -4,18 +4,20 @@ class PageHistoryService
   end
 
   def write(page_history)
-    # redis.call("SET", redis_key,  page_history.to_s)
-    redis.call("RPUSH", redis_key, [], page_history)
+    return if page_history == []
+
+    redis.call("DEL", redis_key)
+    redis.call("RPUSH", redis_key, page_history)
   end
 
   def read
-    # redis.call("GET", redis_key)
     redis.call("LRANGE", redis_key, 0, -1)
   end
 
 private
 
   def redis
+    # TODO: do we need to consider thread safety/implement a connection pool here?
     @redis ||= redis_config.new_client
   end
 
