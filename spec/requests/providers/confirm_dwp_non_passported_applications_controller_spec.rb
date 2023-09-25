@@ -5,10 +5,10 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
   let(:application_id) { application.id }
 
   describe "GET /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
-    subject { get "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications" }
+    subject(:get_request) { get "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications" }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
     context "when the provider is authenticated" do
       before do
         login_as application.provider
-        subject
+        get_request
       end
 
       it "returns success" do
@@ -32,7 +32,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         login_as application.provider
         get page1
         get page2
-        subject
+        get_request
       end
 
       it "points to check your answers page" do
@@ -44,7 +44,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       before { login_as application.provider }
 
       it "displays the HMRC inset text" do
-        subject
+        get_request
         expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_text"))
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
 
       it "displays the joint passporting benefit option" do
-        subject
+        get_request
         expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       before { allow(Setting).to receive(:partner_means_assessment?).and_return(false) }
 
       it "does not display the joint passporting benefit option" do
-        subject
+        get_request
         expect(unescaped_response_body).not_to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
 
   describe "PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
     context "when submitting with the Continue button" do
-      subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
+      subject(:patch_request) { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
 
       let(:params) do
         {
@@ -99,27 +99,27 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
 
         it "transitions the application state to applicant details checked" do
-          subject
+          patch_request
           expect(application.reload.state).to eq "applicant_details_checked"
         end
 
         it "syncs the application" do
           expect(CleanupCapitalAttributes).to receive(:call).with(application)
-          subject
+          patch_request
         end
 
         it "displays the about financial means page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(application))
         end
 
         it "uses the non-passported state machine" do
-          subject
+          patch_request
           expect(application.reload.state_machine_proxy.type).to eq "NonPassportedStateMachine"
         end
 
         it "calls the HMRC::CreateResponsesService" do
-          subject
+          patch_request
           expect(HMRC::CreateResponsesService).to have_received(:call).once
         end
       end
@@ -140,27 +140,27 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
 
         it "sets the application state to overriding DWP result" do
-          subject
+          patch_request
           expect(application.reload.state).to eq "overriding_dwp_result"
         end
 
         it "displays the check_client_details page" do
-          subject
+          patch_request
           expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
         end
 
         it "does not update the partner shared benefit field" do
-          subject
+          patch_request
           expect(partner.reload.shared_benefit_with_applicant).to be false
         end
 
         it "uses the passported state machine" do
-          subject
+          patch_request
           expect(application.reload.state_machine_proxy.type).to eq "PassportedStateMachine"
         end
 
         it "calls the HMRC::CreateResponsesService" do
-          subject
+          patch_request
           expect(HMRC::CreateResponsesService).to have_received(:call)
         end
       end
@@ -181,41 +181,41 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         end
 
         it "sets the application state to overriding DWP result" do
-          subject
+          patch_request
           expect(application.reload.state).to eq "overriding_dwp_result"
         end
 
         it "sets the partner shared benefit field to true" do
-          subject
+          patch_request
           expect(partner.reload.shared_benefit_with_applicant).to be true
         end
 
         it "displays the check_client_details page" do
-          subject
+          patch_request
           expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
         end
 
         it "uses the passported state machine" do
-          subject
+          patch_request
           expect(application.reload.state_machine_proxy.type).to eq "PassportedStateMachine"
         end
 
         it "calls the HMRC::CreateResponsesService" do
-          subject
+          patch_request
           expect(HMRC::CreateResponsesService).to have_received(:call)
         end
       end
 
       context "and the solicitor does not select a radio button" do
         it "displays an error" do
-          subject
+          patch_request
           expect(response.body).to include(I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
         end
       end
     end
 
     context "when submitting with the Save As Draft button" do
-      subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
+      subject(:patch_request) { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
 
       let(:params) do
         {
@@ -229,17 +229,17 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
 
       it "redirects provider to provider's applications page" do
-        subject
+        patch_request
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
       it "sets the application as draft" do
-        subject
+        patch_request
         expect(application.reload).to be_draft
       end
 
       it "does not call the HMRC::CreateResponsesService" do
-        subject
+        patch_request
         expect(HMRC::CreateResponsesService).not_to have_received(:call)
       end
     end

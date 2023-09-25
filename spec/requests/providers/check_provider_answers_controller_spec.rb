@@ -24,10 +24,10 @@ RSpec.describe Providers::CheckProviderAnswersController do
   before { allow(Setting).to receive(:partner_means_assessment?).and_return(pma_flag) }
 
   describe "GET /providers/applications/:legal_aid_application_id/check_provider_answers" do
-    subject { get "/providers/applications/#{application_id}/check_provider_answers" }
+    subject(:get_request) { get "/providers/applications/#{application_id}/check_provider_answers" }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -35,7 +35,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
     context "when the provider is authenticated" do
       before do
         login_as application.provider
-        subject
+        get_request
       end
 
       it "returns success" do
@@ -195,7 +195,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
   end
 
   describe "POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset", :vcr do
-    subject { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
+    subject(:patch_request) { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
 
     context "when the provider is authenticated" do
       before do
@@ -203,7 +203,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
         application.check_applicant_details!
         get providers_legal_aid_application_proceedings_types_path(application)
         get providers_legal_aid_application_check_provider_answers_path(application)
-        subject
+        patch_request
       end
 
       it "redirects back" do
@@ -211,7 +211,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
       end
 
       it 'changes the stage back to "entering_applicant_details' do
-        subject
+        patch_request
         expect(application.reload).to be_entering_applicant_details
       end
     end

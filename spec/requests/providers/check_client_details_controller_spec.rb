@@ -5,10 +5,10 @@ RSpec.describe Providers::CheckClientDetailsController do
   let(:application_id) { application.id }
 
   describe "GET /providers/applications/:legal_aid_application_id/check_client_details" do
-    subject { get "/providers/applications/#{application_id}/check_client_details" }
+    subject(:get_request) { get "/providers/applications/#{application_id}/check_client_details" }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe Providers::CheckClientDetailsController do
     context "when the provider is authenticated" do
       before do
         login_as application.provider
-        subject
+        get_request
       end
 
       it "returns success" do
@@ -46,7 +46,7 @@ RSpec.describe Providers::CheckClientDetailsController do
       before do
         login_as application.provider
         allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-        subject
+        get_request
       end
 
       it "displays the partner's full name" do
@@ -68,7 +68,7 @@ RSpec.describe Providers::CheckClientDetailsController do
     context "when the client does not have a partner" do
       before do
         login_as application.provider
-        subject
+        get_request
       end
 
       it "does not display partner details section" do
@@ -80,7 +80,7 @@ RSpec.describe Providers::CheckClientDetailsController do
       before do
         login_as application.provider
         allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-        subject
+        get_request
       end
 
       it "does not display partner details section" do
@@ -94,7 +94,7 @@ RSpec.describe Providers::CheckClientDetailsController do
       before do
         login_as application.provider
         allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-        subject
+        get_request
       end
 
       it "does not display partner details section" do
@@ -104,11 +104,11 @@ RSpec.describe Providers::CheckClientDetailsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_client_details" do
-    subject { patch "/providers/applications/#{application_id}/check_client_details" }
+    subject(:patch_request) { patch "/providers/applications/#{application_id}/check_client_details" }
 
     before do
       login_as application.provider
-      subject
+      patch_request
     end
 
     it "continues to the received benefit confirmations page" do

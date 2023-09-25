@@ -13,13 +13,10 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
 
   let(:login) { login_as legal_aid_application.provider }
 
-  before do
-    login
-    subject
-  end
+  before { login }
 
   describe "GET /providers/:application_id/has_evidence_of_benefit" do
-    subject { get providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application) }
+    before { get providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application) }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -63,7 +60,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
   end
 
   describe "PATCH /providers/:application_id/has_evidence_of_benefit" do
-    subject { patch providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application), params: }
+    before { patch providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application), params: }
 
     let(:has_evidence_of_benefit) { "true" }
     let(:params) do

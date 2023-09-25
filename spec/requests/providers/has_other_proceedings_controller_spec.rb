@@ -24,7 +24,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
   end
 
   describe "GET /providers/:application_id/has_other_proceedings" do
-    subject! do
+    before do
       get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
     end
 
@@ -39,7 +39,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
   end
 
   describe "PATCH /providers/:application_id/has_other_proceedings" do
-    subject! { patch providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
+    before { patch providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
     context "when the Form is submitted with the Save as draft button" do
       let(:params) { { legal_aid_application: { has_other_proceeding: "" }, draft_button: "Save and come back later" } }
@@ -148,7 +148,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
   end
 
   describe "DELETE /providers/:application_id/has_other_proceedings" do
-    subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
+    subject(:delete_request) { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
     let(:params) do
       {
@@ -158,28 +158,28 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
     context "when a proceeding is removed" do
       it "removes one proceeding" do
-        expect { subject }.to change { legal_aid_application.proceedings.count }.by(-1)
+        expect { delete_request }.to change { legal_aid_application.proceedings.count }.by(-1)
       end
 
       it "leaves the correct number of remaining proceedings" do
-        subject
+        delete_request
         expect(legal_aid_application.proceedings.count).to eq 1
       end
 
       it "displays the singular number of proceedings remaining" do
-        subject
+        delete_request
         expect(response.body).to include("You have added 1 proceeding")
       end
 
       context "and it's the lead proceeding" do
-        subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
+        subject(:delete_request) { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
         let(:params) do
           { ccms_code: legal_aid_application.proceedings.first.ccms_code }
         end
 
         it "sets a new lead proceeding when the original one is deleted" do
-          subject
+          delete_request
           expect(legal_aid_application.proceedings[0].lead_proceeding).to be true
         end
       end
@@ -191,7 +191,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
       end
 
       it "redirects to the proceedings type page if all proceeding types removed" do
-        subject
+        delete_request
         delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: other_params
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end

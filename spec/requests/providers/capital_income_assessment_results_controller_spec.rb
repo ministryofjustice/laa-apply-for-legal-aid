@@ -5,7 +5,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/capital_income_assessment_result" do
-    subject { get providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application) }
 
     let!(:applicant) { create(:applicant, with_bank_accounts: 2, legal_aid_application:) }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
@@ -18,7 +18,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
-      subject
+      get_request
     end
 
     before { before_tasks }
@@ -170,7 +170,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
         legal_aid_application.update has_restrictions: true, restrictions_details: "Blah blah"
         login_provider
-        subject
+        get_request
       end
 
       context "without policy disregards" do
@@ -300,7 +300,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
         legal_aid_application.update has_restrictions: true, restrictions_details: "Blah blah" if add_restrictions?
         login_provider
-        subject
+        get_request
       end
 
       context "when eligible" do
@@ -399,7 +399,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     end
 
     context "when unauthenticated" do
-      let(:before_tasks) { subject }
+      let(:before_tasks) { get_request }
       let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
       it_behaves_like "a provider not authenticated"
@@ -412,7 +412,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       end
 
       it "raises error" do
-        expect { subject }.to raise_error(/Unknown capital_income_assessment_result/)
+        expect { get_request }.to raise_error(/Unknown capital_income_assessment_result/)
       end
     end
 
@@ -467,7 +467,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
   end
 
   describe "PATCH /providers/applications/:id/capital_income_assessment_result" do
-    subject { patch providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application), params: params.merge(submit_button) }
+    subject(:patch_request) { patch providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:params) { {} }
@@ -475,14 +475,14 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     context "when the provider is authenticated" do
       before do
         login_provider
-        subject
+        patch_request
       end
 
       context "when the continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to the merits task list" do
-          expect(subject).to redirect_to(providers_legal_aid_application_merits_task_list_path)
+          expect(patch_request).to redirect_to(providers_legal_aid_application_merits_task_list_path)
         end
       end
 
@@ -490,7 +490,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 

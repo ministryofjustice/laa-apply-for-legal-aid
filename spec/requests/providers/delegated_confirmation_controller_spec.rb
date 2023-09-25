@@ -5,10 +5,10 @@ RSpec.describe Providers::DelegatedConfirmationController do
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/delegated_confirmation" do
-    subject { get providers_legal_aid_application_delegated_confirmation_index_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_delegated_confirmation_index_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe Providers::DelegatedConfirmationController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do

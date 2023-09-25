@@ -7,10 +7,10 @@ RSpec.describe "provider confirm office" do
   let(:provider) { create(:provider, firm:, selected_office: office) }
 
   describe "GET providers/confirm_office" do
-    subject { get providers_confirm_office_path }
+    subject(:get_request) { get providers_confirm_office_path }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -20,7 +20,7 @@ RSpec.describe "provider confirm office" do
 
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "redirects to the invalid login page" do
@@ -31,7 +31,7 @@ RSpec.describe "provider confirm office" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -69,14 +69,14 @@ RSpec.describe "provider confirm office" do
   end
 
   describe "PATCH providers/confirm_office" do
-    subject { patch providers_confirm_office_path, params: }
+    subject(:patch_request) { patch providers_confirm_office_path, params: }
 
     let(:params) { { binary_choice_form: { confirm_office: "true" } } }
 
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        patch_request
       end
 
       it "redirects to the legal aid applications page" do

@@ -5,7 +5,7 @@ RSpec.describe Providers::Draftable do
   #  ^^ ideally we should be using an anonymous class or similar to test a mixin
   #
   describe "PATCH /providers/applications/:legal_aid_application_id/applicant_details" do
-    subject { patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button) }
+    subject(:patch_request) { patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button) }
 
     let(:application) { create(:legal_aid_application) }
     let(:provider) { application.provider }
@@ -32,12 +32,12 @@ RSpec.describe Providers::Draftable do
         let(:application) { create(:legal_aid_application, :draft) }
 
         it "redirects provider to next step of the submission" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(application))
         end
 
         it "sets the application as no longer draft" do
-          expect { subject }.to change { application.reload.draft? }.from(true).to(false)
+          expect { patch_request }.to change { application.reload.draft? }.from(true).to(false)
         end
       end
     end
@@ -48,19 +48,19 @@ RSpec.describe Providers::Draftable do
       end
 
       it "redirects provider to provider's applications page" do
-        subject
+        patch_request
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
       it "creates a new applicant associated with the application" do
-        expect { subject }.to change(Applicant, :count).by(1)
+        expect { patch_request }.to change(Applicant, :count).by(1)
 
         new_applicant = application.reload.applicant
         expect(new_applicant).to be_instance_of(Applicant)
       end
 
       it "sets the application as draft" do
-        expect { subject }.to change { application.reload.draft? }.from(false).to(true)
+        expect { patch_request }.to change { application.reload.draft? }.from(false).to(true)
       end
 
       context "when the params are not valid" do
@@ -74,7 +74,7 @@ RSpec.describe Providers::Draftable do
         end
 
         it "renders the form page displaying the errors" do
-          subject
+          patch_request
 
           expect(unescaped_response_body).to include("There is a problem")
           expect(unescaped_response_body).to include("applicant-first-name-field-error")
@@ -82,7 +82,7 @@ RSpec.describe Providers::Draftable do
         end
 
         it "does NOT create a new applicant" do
-          expect { subject }.not_to change(Applicant, :count)
+          expect { patch_request }.not_to change(Applicant, :count)
         end
       end
 
@@ -97,19 +97,19 @@ RSpec.describe Providers::Draftable do
         end
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "creates a new applicant associated with the application" do
-          expect { subject }.to change(Applicant, :count).by(1)
+          expect { patch_request }.to change(Applicant, :count).by(1)
 
           new_applicant = application.reload.applicant
           expect(new_applicant).to be_instance_of(Applicant)
         end
 
         it "sets the application as draft" do
-          expect { subject }.to change { application.reload.draft? }.from(false).to(true)
+          expect { patch_request }.to change { application.reload.draft? }.from(false).to(true)
         end
       end
     end

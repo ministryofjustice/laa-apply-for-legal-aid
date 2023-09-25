@@ -110,32 +110,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 627
+# Offense count: 461
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/providers/capital_assessment_results_controller_spec.rb'
-    - 'spec/requests/providers/capital_income_assessment_results_controller_spec.rb'
-    - 'spec/requests/providers/capital_introductions_controller_spec.rb'
-    - 'spec/requests/providers/check_benefits_controller_spec.rb'
-    - 'spec/requests/providers/check_client_details_controller_spec.rb'
-    - 'spec/requests/providers/check_merits_answers_spec.rb'
-    - 'spec/requests/providers/check_passported_answers_spec.rb'
-    - 'spec/requests/providers/check_provider_answers_controller_spec.rb'
-    - 'spec/requests/providers/client_completed_means_controller_spec.rb'
-    - 'spec/requests/providers/concerns/providers/draftable_spec.rb'
-    - 'spec/requests/providers/confirm_dwp_non_passported_applications_controller_spec.rb'
-    - 'spec/requests/providers/confirm_offices_spec.rb'
-    - 'spec/requests/providers/delegated_confirmation_controller_spec.rb'
-    - 'spec/requests/providers/email_addresses_spec.rb'
-    - 'spec/requests/providers/end_of_applications_controller_spec.rb'
-    - 'spec/requests/providers/gateway_evidences_controller_spec.rb'
-    - 'spec/requests/providers/has_evidence_of_benefits_controller_spec.rb'
-    - 'spec/requests/providers/has_other_proceedings_controller_spec.rb'
-    - 'spec/requests/providers/income_summary_controller_spec.rb'
-    - 'spec/requests/providers/legal_aid_applications_spec.rb'
-    - 'spec/requests/providers/limitations_controller_spec.rb'
     - 'spec/requests/providers/means/dependants_controller_spec.rb'
     - 'spec/requests/providers/means/other_assets_controller_spec.rb'
     - 'spec/requests/providers/means/own_home_spec.rb'

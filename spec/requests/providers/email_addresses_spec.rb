@@ -6,10 +6,10 @@ RSpec.describe "update client email address before application confirmation" do
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/email_address" do
-    subject { get "/providers/applications/#{application_id}/email_address" }
+    subject(:get_request) { get "/providers/applications/#{application_id}/email_address" }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -20,19 +20,19 @@ RSpec.describe "update client email address before application confirmation" do
       end
 
       it "returns http success" do
-        subject
+        get_request
         expect(response).to have_http_status(:ok)
       end
 
       it "displays the email label" do
-        subject
+        get_request
         expect(response.body).to include(I18n.t("shared.forms.applicant_form.email_label"))
       end
     end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/email_address" do
-    subject { patch "/providers/applications/#{application_id}/email_address", params: }
+    subject(:patch_request) { patch "/providers/applications/#{application_id}/email_address", params: }
 
     let(:application) { create(:legal_aid_application) }
     let(:provider) { application.provider }
@@ -45,7 +45,7 @@ RSpec.describe "update client email address before application confirmation" do
     end
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -59,7 +59,7 @@ RSpec.describe "update client email address before application confirmation" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
-          subject
+          patch_request
           expect(response.body).to redirect_to(providers_legal_aid_application_about_the_financial_assessment_path(application_id))
         end
       end
