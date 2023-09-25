@@ -35,18 +35,6 @@
     "stylelint-config-gds": "^1.0.0",
     "stylelint-order": "^6.0.3"
   },
-  "jest": {
-    "testEnvironment": "jest-environment-jsdom-global",
-    "transformIgnorePatterns": [
-      "node_modules/(?!axios/.*)"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "modulePathIgnorePatterns": [
-      "vendor"
-    ]
-  },
   "standard": {
     "env": [
       "jest"
