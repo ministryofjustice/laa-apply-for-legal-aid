@@ -23,11 +23,12 @@ const StubbedResult = {
 
 describe('Organisations.searchResults', () => {
   let result
-  const searchTerm = 'irrelevant'
+  const searchTerm = 'irrelevant due to stubbing'
   const host = 'http://example.com'
 
   beforeEach(async () => {
-    axios.mockResolvedValue({ data: { data: [] } })
+    axios
+      .mockResolvedValue({ data: { data: [] } })
       .mockResolvedValueOnce({ data: StubbedResult })
   })
 
@@ -54,26 +55,26 @@ describe('Organisations.showResults', () => {
 
     it('displays matching results with highlighted terms', () => {
       document.body.innerHTML =
-        '<div>' +
-          '<div class="govuk-radios">' +
-            '<div id="280361" class="organisation-item" style="display: none;">' +
-              '<div>' +
-                '<input>' +
-                  '<label>Angus Council</label>' +
-                  '<div class="govuk-hint">Local Authority</div>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="no-organisation-items" style="display: none;">' +
-          '<div>' +
-            '<span>No results found.</span>' +
-          '</div>' +
-        '</div>'
+        `<div>
+          <div class="govuk-radios">
+            <div id="280361" class="organisation-item" style="display: none;">
+              <div>
+                <input>
+                  <label class="govuk-label">Angus Council</label>
+                  <div class="govuk-hint">Local Authority</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="no-organisation-items" style="display: none;">
+          <div>
+            <span>No results found.</span>
+          </div>
+        </div>`
 
-      const inputText = 'Ang'
+      const inputText = 'irrelevant due to stubbing'
       const element = document.getElementById('280361')
-      const label = element.querySelector('label')
+      const label = element.querySelector('.govuk-label')
       const hint = element.querySelector('.govuk-hint')
       const noResultsElement = document.querySelector('.no-organisation-items')
 
@@ -96,24 +97,24 @@ describe('Organisations.showResults', () => {
 
     it('hides all results', () => {
       document.body.innerHTML =
-        '<div>' +
-          '<div class="govuk-radios">' +
-            '<div id="280361" class="organisation-item" style="display: none;">' +
-              '<div>' +
-                '<input>' +
-                  '<label>Angus Council</label>' +
-                  '<div class="govuk-hint">Local Authority</div>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="no-organisation-items" style="display: none;">' +
-          '<div>' +
-            '<span>No results found.</span>' +
-          '</div>' +
-        '</div>'
+        `<div>
+          <div class="govuk-radios">
+            <div id="280361" class="organisation-item" style="display: none;">
+              <div>
+                <input>
+                  <label class="govuk-label">Angus Council</label>
+                  <div class="govuk-hint">Local Authority</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="no-organisation-items" style="display: none;">
+          <div>
+            <span>No results found.</span>
+          </div>
+        </div>`
 
-      const inputText = 'Ang'
+      const inputText = 'irrelevant due to stubbing'
       const element = document.getElementById('280361')
       const label = element.querySelector('label')
       const hint = element.querySelector('.govuk-hint')

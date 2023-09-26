@@ -26,14 +26,14 @@ function showResults (results, inputText) {
 
     results.forEach((result, idx) => {
       const element = document.getElementById(result.ccms_opponent_id)
-      const label = element.querySelector('label')
+      const label = element.querySelector('.govuk-label')
       const hint = element.querySelector('.govuk-hint')
 
       // Replace text values with "headlines" from result/data payload
       label.innerHTML = result.name_headline
       hint.innerHTML = result.type_headline
 
-      // move to top of list, but after previously added elements
+      // move to top of list, but after previously added results
       organisationsContainer.insertBefore(element, organisationsContainer.children[idx])
 
       // show the organisations item
