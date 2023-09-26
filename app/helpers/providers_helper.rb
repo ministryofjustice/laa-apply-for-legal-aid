@@ -1,6 +1,6 @@
 module ProvidersHelper
   def link_to_application(text, legal_aid_application)
-    link_to_accessible text, url_for_application(legal_aid_application)
+    govuk_link_to(text, url_for_application(legal_aid_application))
   end
 
   def url_for_application(legal_aid_application)

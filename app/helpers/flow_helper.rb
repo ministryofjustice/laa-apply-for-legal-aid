@@ -41,6 +41,6 @@ module FlowHelper
 
   def next_action_link(continue_id: :continue, continue_text: t("generic.save_and_continue"), html_class: nil)
     klasses = ["govuk-button", html_class].compact.join(" ")
-    link_to_accessible(continue_text, forward_path, id: continue_id, class: klasses)
+    govuk_link_to(continue_text, forward_path, id: continue_id, class: klasses)
   end
 end

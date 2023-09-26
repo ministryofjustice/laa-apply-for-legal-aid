@@ -3,7 +3,7 @@
     <p><%= t(".close_tab") %></p>
   <% else %>
     <p class="govuk-body">
-      <%= link_to_accessible t(".link"), back_path, class: "govuk-link govuk-link--no-visited-state" %>
+      <%= govuk_link_to t(".link"), back_path, { no_visited_state: true } %>
     </p>
   <% end %>
 <% end %>

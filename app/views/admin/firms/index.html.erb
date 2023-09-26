@@ -31,7 +31,7 @@
                   end
                 end
                 row.with_cell do
-                  link_to_accessible(
+                  govuk_link_to(
                     t(".view_users_html", provider: firm.name),
                     admin_firm_providers_path(firm),
                     id: "firm-#{firm.id}",
