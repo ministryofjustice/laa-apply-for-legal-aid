@@ -73,6 +73,16 @@ RSpec.describe Providers::CheckCapitalAnswersController do
         expect(response.body).not_to include(I18n.t("shared.check_answers_vehicles.providers.used_regularly"))
       end
     end
+
+    context "when applicant has partner who owns vehicle" do
+      let(:own_vehicle) { true }
+      let(:vehicle) { create(:vehicle, :owned_by_partner) }
+      let(:applicant) { create(:applicant, has_partner: true, partner_has_contrary_interest: false) }
+
+      it "shows 'The partner' as the owner" do
+        expect(response.body).to have_css("#app-check-your-answers__vehicles_owner", text: "The partner")
+      end
+    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_capital_answers" do
