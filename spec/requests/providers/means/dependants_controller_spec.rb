@@ -6,11 +6,10 @@ RSpec.describe Providers::Means::DependantsController do
 
   before do
     login
-    subject
   end
 
   describe "GET /providers/:application_id/means/dependants/new" do
-    subject { get new_providers_legal_aid_application_means_dependant_path(legal_aid_application) }
+    before { get new_providers_legal_aid_application_means_dependant_path(legal_aid_application) }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -24,7 +23,7 @@ RSpec.describe Providers::Means::DependantsController do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/means/dependants/:dependant_id" do
-    subject { get(providers_legal_aid_application_means_dependant_path(legal_aid_application, dependant)) }
+    before { get(providers_legal_aid_application_means_dependant_path(legal_aid_application, dependant)) }
 
     let(:dependant) { create(:dependant, legal_aid_application:) }
 
@@ -40,12 +39,14 @@ RSpec.describe Providers::Means::DependantsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/dependants/dependant_id" do
-    subject do
+    subject(:patch_request) do
       patch(
         providers_legal_aid_application_means_dependant_path(legal_aid_application, dependant),
         params:,
       )
     end
+
+    before { patch_request }
 
     let(:dependant) { create(:dependant, legal_aid_application:) }
     let(:params) do
@@ -98,7 +99,7 @@ RSpec.describe Providers::Means::DependantsController do
       end
 
       it "strips and trims whitespaces from dependant name" do
-        subject
+        patch_request
         dependant = legal_aid_application.reload.dependants.first
         expect(dependant.name).to eq "bob john"
       end

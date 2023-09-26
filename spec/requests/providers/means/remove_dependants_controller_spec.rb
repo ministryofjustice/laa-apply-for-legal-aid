@@ -9,11 +9,10 @@ RSpec.describe Providers::Means::RemoveDependantsController do
   before do
     create_list(:dependant, extra_dependant_count, legal_aid_application:)
     login
-    subject
   end
 
   describe "GET /providers/:application_id/means/remove_dependants/:dependant_id" do
-    subject { get providers_legal_aid_application_means_remove_dependant_path(legal_aid_application, dependant) }
+    before { get providers_legal_aid_application_means_remove_dependant_path(legal_aid_application, dependant) }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -27,7 +26,7 @@ RSpec.describe Providers::Means::RemoveDependantsController do
   end
 
   describe "PATCH /providers/:application_id/means/remove_dependants/:dependant_id" do
-    subject { patch providers_legal_aid_application_means_remove_dependant_path(legal_aid_application, dependant), params: }
+    before { patch providers_legal_aid_application_means_remove_dependant_path(legal_aid_application, dependant), params: }
 
     let(:params) do
       {

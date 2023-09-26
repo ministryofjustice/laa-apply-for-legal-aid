@@ -7,10 +7,10 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
   let(:provider) { application.provider }
 
   describe "GET providers/applications/:id/means/policy_disregards" do
-    subject { get providers_legal_aid_application_means_policy_disregards_path(application) }
+    subject(:get_request) { get providers_legal_aid_application_means_policy_disregards_path(application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -18,7 +18,7 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -86,7 +86,6 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
           it "redirects to check capital answers page" do
-            subject
             expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path)
           end
         end

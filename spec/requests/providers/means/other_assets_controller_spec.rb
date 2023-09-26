@@ -7,10 +7,10 @@ RSpec.describe "provider other assets requests" do
   let(:provider) { application.provider }
 
   describe "GET providers/applications/:id/means/other_assets" do
-    subject { get providers_legal_aid_application_means_other_assets_path(application) }
+    subject(:get_request) { get providers_legal_aid_application_means_other_assets_path(application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -18,7 +18,7 @@ RSpec.describe "provider other assets requests" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do

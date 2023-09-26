@@ -17,18 +17,18 @@ module Providers
       end
 
       describe "GET /providers/merits_task_list/:merits_task_list_id/linked_children" do
-        subject { get providers_merits_task_list_linked_children_path(proceeding) }
+        subject(:get_request) { get providers_merits_task_list_linked_children_path(proceeding) }
 
         context "when the provider is not authenticated" do
           let(:login) { nil }
 
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
 
         context "when the provider is authenticated" do
-          before { subject }
+          before { get_request }
 
           it "renders successfully" do
             expect(response).to have_http_status(:ok)
@@ -41,7 +41,7 @@ module Providers
       end
 
       describe "PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children" do
-        subject { patch providers_merits_task_list_linked_children_path(proceeding), params: }
+        subject(:patch_request) { patch providers_merits_task_list_linked_children_path(proceeding), params: }
 
         let(:params) do
           {
@@ -57,11 +57,11 @@ module Providers
             before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :chances_of_success) }
 
             it "adds involved children to the proceeding" do
-              expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
+              expect { patch_request }.to change { proceeding.proceeding_linked_children.count }.by(3)
             end
 
             it "redirects to the next unanswered question" do
-              subject
+              patch_request
               expect(response).to redirect_to(providers_merits_task_list_attempts_to_settle_path(proceeding))
             end
           end
@@ -78,7 +78,7 @@ module Providers
               end
 
               it "redirects to the prohibited steps question" do
-                subject
+                patch_request
                 expect(response).to redirect_to(providers_merits_task_list_prohibited_steps_path(proceeding))
               end
             end
@@ -94,7 +94,7 @@ module Providers
           end
 
           it "does not add involved children to the proceeding" do
-            expect { subject }.not_to change { proceeding.proceeding_linked_children.count }
+            expect { patch_request }.not_to change { proceeding.proceeding_linked_children.count }
           end
         end
 
@@ -108,7 +108,7 @@ module Providers
 
           it "only adds the specified children to the proceeding" do
             proceeding_involved_children = proceeding.proceeding_linked_children
-            expect { subject }.to change { proceeding_involved_children.count }.by(1)
+            expect { patch_request }.to change { proceeding_involved_children.count }.by(1)
           end
         end
 
@@ -124,7 +124,7 @@ module Providers
           let(:linked_children_params) { [first_child.id, "", ""] }
 
           before do
-            subject
+            patch_request
           end
 
           context "when removing a record" do
@@ -142,29 +142,29 @@ module Providers
 
           context "when record already exists" do
             it "makes no changes if already selected records are left selected" do
-              expect { subject }.not_to change { proceeding.proceeding_linked_children.count }
+              expect { patch_request }.not_to change { proceeding.proceeding_linked_children.count }
             end
           end
         end
 
         context "when Form submitted using Save as draft button" do
-          subject do
+          subject(:patch_request) do
             patch providers_merits_task_list_linked_children_path(proceeding), params: params.merge(submit_button)
           end
 
           let(:submit_button) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it "sets the application as draft" do
-            expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+            expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
           end
 
           it "does not set the task to complete" do
-            subject
+            patch_request
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:SE014, :children_proceeding)
           end
         end

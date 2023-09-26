@@ -10,10 +10,10 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
   before { allow(Flow::MeritsLoop).to receive(:forward_flow).and_return(next_page) }
 
   describe "GET /providers/applications/merits_task_list/:merits_task_list_id/attempts_to_settle" do
-    subject { get providers_merits_task_list_attempts_to_settle_path(proceeding) }
+    subject(:get_request) { get providers_merits_task_list_attempts_to_settle_path(proceeding) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -25,12 +25,12 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
       end
 
       it "returns http success" do
-        subject
+        get_request
         expect(response).to have_http_status(:ok)
       end
 
       it "displays the correct proceeding type as a header" do
-        subject
+        get_request
         expect(unescaped_response_body).to include(proceeding.meaning)
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
     end
 
     context "when the provider is authenticated" do
-      subject do
+      subject(:patch_request) do
         patch providers_merits_task_list_attempts_to_settle_path(proceeding), params: params.merge(submit_button)
       end
 
@@ -60,7 +60,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects provider back to the merits task list" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
         end
 
@@ -77,7 +77,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
           end
 
           it "routes to the specific issue task" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_merits_task_list_specific_issue_path(proceeding))
           end
         end
@@ -90,17 +90,17 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
           end
 
           it "redirects provider back to the merits task list" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
           end
 
           it "sets the application as no longer draft" do
-            expect { subject }.to change { legal_aid_application.reload.draft? }.from(true).to(false)
+            expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(true).to(false)
           end
         end
 
         it "updates the task list" do
-          subject
+          patch_request
           expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:SE014, :attempts_to_settle)
         end
 
@@ -108,7 +108,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
           let(:params) { { proceeding_merits_task_attempts_to_settle: { attempts_made: "" } } }
 
           it "renders the form page displaying the errors" do
-            subject
+            patch_request
 
             expect(unescaped_response_body).to include("There is a problem")
             expect(unescaped_response_body).to include("Enter details of any attempts to settle")
@@ -117,23 +117,23 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
       end
 
       context "when Form submitted using Save as draft button" do
-        subject do
+        subject(:patch_request) do
           patch providers_merits_task_list_attempts_to_settle_path(proceeding), params: params.merge(submit_button)
         end
 
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+          expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
 
         it "does not set the task to complete" do
-          subject
+          patch_request
           expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:SE014, :attempts_to_settle)
         end
       end

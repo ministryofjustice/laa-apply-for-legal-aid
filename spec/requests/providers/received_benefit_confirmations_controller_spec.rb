@@ -5,10 +5,10 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
   let(:application_id) { application.id }
 
   describe "GET /providers/applications/:legal_aid_application_id/received_benefit_confirmation" do
-    subject { get "/providers/applications/#{application_id}/received_benefit_confirmation" }
+    subject(:get_request) { get "/providers/applications/#{application_id}/received_benefit_confirmation" }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
     context "when the provider is authenticated" do
       before do
         login_as application.provider
-        subject
+        get_request
       end
 
       it "returns success" do
@@ -35,7 +35,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       before do
         login_as application.provider
         allow(Setting).to receive(:partner_means_assessment?).and_return true
-        subject
+        get_request
       end
 
       it "displays the correct page" do
@@ -45,7 +45,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/received_benefit_confirmation" do
-    subject { patch "/providers/applications/#{application_id}/received_benefit_confirmation", params: }
+    subject(:patch_request) { patch "/providers/applications/#{application_id}/received_benefit_confirmation", params: }
 
     let(:params) { { dwp_override: { passporting_benefit: nil } } }
 
@@ -55,7 +55,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
 
     context "when there is a validation error" do
       it "displays error if nothing selected" do
-        subject
+        patch_request
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Select if your client has received any of these benefits")
       end
@@ -66,12 +66,12 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
 
       context "and provider adds a new record" do
         it "adds a dwp override record" do
-          expect { subject }.to change(DWPOverride, :count).by(1)
+          expect { patch_request }.to change(DWPOverride, :count).by(1)
         end
 
         it "updates the same dwp override record" do
-          subject
-          expect { subject }.not_to change(DWPOverride, :count)
+          patch_request
+          expect { patch_request }.not_to change(DWPOverride, :count)
         end
       end
 
@@ -84,12 +84,12 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
         let(:params) { { dwp_override: { passporting_benefit: :none_selected } } }
 
         it "removes the record" do
-          expect { subject }.to change(DWPOverride, :count).by(-1)
+          expect { patch_request }.to change(DWPOverride, :count).by(-1)
         end
       end
 
       it "continue to the has_evidence_of_benefit page" do
-        subject
+        patch_request
         expect(response).to redirect_to(providers_legal_aid_application_has_evidence_of_benefit_path(application))
       end
     end
@@ -98,16 +98,16 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       let(:params) { { dwp_override: { passporting_benefit: :none_selected } } }
 
       it "does not add a dwp override record" do
-        expect { subject }.not_to change(DWPOverride, :count)
+        expect { patch_request }.not_to change(DWPOverride, :count)
       end
 
       it "continue to the about financial means page" do
-        subject
+        patch_request
         expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(application))
       end
 
       it "transitions the application state to applicant details checked" do
-        subject
+        patch_request
         expect(application.reload.state).to eq "applicant_details_checked"
       end
     end
