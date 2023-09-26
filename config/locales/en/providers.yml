@@ -339,7 +339,7 @@ en:
     applicant_bank_accounts:
       show:
         heading: Your client’s bank accounts
-        previously_told: "Your client shared the following bank account information with us:"
+        previously_told: Your client shared this information using TrueLayer.
         account: Account
         balance: Balance
         offline_savings_accounts: Does your client have any savings accounts they cannot access online?
