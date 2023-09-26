@@ -117,7 +117,7 @@ module Flow
         partner_cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_cash_income_path(application) },
           forward: :partner_student_finances,
-          check_answers: ->(application) { application.uploading_bank_statements? ? :check_income_answers : :income_summary },
+          check_answers: :check_income_answers,
         },
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },

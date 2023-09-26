@@ -25,7 +25,12 @@
       individual: "Partner",
     ) %>
 
-<%= render("shared/check_answers/income_cash_payments", read_only: false) %>
+<%= render(
+      "shared/check_answers/income_cash_payments",
+      read_only: false,
+      url: providers_legal_aid_application_partners_cash_income_path,
+      individual: "Partner",
+    ) %>
 
 <%= render("shared/check_answers/student_finance", read_only: false) %>
 

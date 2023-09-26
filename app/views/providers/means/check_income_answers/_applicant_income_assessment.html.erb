@@ -31,7 +31,14 @@
       individual: "Applicant",
     ) %>
 
-<%= render("shared/check_answers/income_cash_payments", read_only: false) if @legal_aid_application.uploading_bank_statements? %>
+<% if @legal_aid_application.uploading_bank_statements? %>
+  <%= render(
+        "shared/check_answers/income_cash_payments",
+        read_only: false,
+        url: providers_legal_aid_application_means_cash_income_path,
+        individual: "Applicant",
+      ) %>
+<% end %>
 
 <%= render "shared/check_answers/student_finance", read_only: false %>
 
