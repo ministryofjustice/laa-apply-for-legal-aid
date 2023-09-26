@@ -43,11 +43,12 @@
 
 <% if bank_statement_upload %>
   <%= render(
-        "shared/check_answers/income_cash_payments",
+        "shared/check_answers/cash_payments",
         read_only: false,
         url: providers_legal_aid_application_means_cash_income_path,
         individual: "Applicant",
         individual_with_determiner: "your client",
+        type: :income,
       ) %>
 <% end %>
 
@@ -71,10 +72,11 @@
 
 <% if bank_statement_upload %>
   <%= render(
-        "shared/check_answers/outgoings_cash_payments",
+        "shared/check_answers/cash_payments",
         read_only: false,
         url: providers_legal_aid_application_means_cash_outgoing_path,
         individual: "Applicant",
         individual_with_determiner: "your client",
+        type: :outgoings,
       ) %>
 <% end %>

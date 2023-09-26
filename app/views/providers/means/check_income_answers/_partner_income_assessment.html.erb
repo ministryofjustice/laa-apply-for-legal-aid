@@ -36,11 +36,12 @@
     ) %>
 
 <%= render(
-      "shared/check_answers/income_cash_payments",
+      "shared/check_answers/cash_payments",
       read_only: false,
       url: providers_legal_aid_application_partners_cash_income_path,
       individual: "Partner",
       individual_with_determiner: "the partner",
+      type: :income,
     ) %>
 
 <%= render(
@@ -62,9 +63,10 @@
     ) %>
 
 <%= render(
-      "shared/check_answers/outgoings_cash_payments",
+      "shared/check_answers/cash_payments",
       read_only: false,
       url: providers_legal_aid_application_partners_cash_outgoing_path,
       individual: "Partner",
       individual_with_determiner: "the partner",
+      type: :outgoings,
     ) %>

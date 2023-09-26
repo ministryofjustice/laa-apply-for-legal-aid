@@ -51,10 +51,11 @@
 
   <section class="print-no-break">
     <%= render(
-          "shared/check_answers/income_cash_payments",
+          "shared/check_answers/cash_payments",
           read_only: true,
           individual: "Applicant",
           individual_with_determiner: "your client",
+          type: :income,
         ) %>
   </section>
 
@@ -80,11 +81,12 @@
 
   <section class="print-no-break">
     <%= render(
-          "shared/check_answers/outgoings_cash_payments",
+          "shared/check_answers/cash_payments",
           read_only: true,
           url: providers_legal_aid_application_means_cash_outgoing_path,
           individual: "Applicant",
           individual_with_determiner: "your client",
+          type: :outgoings,
         ) %>
   </section>
 
