@@ -27,11 +27,12 @@
       <% end %>
 
       <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { text: t(".shared_ownership_question.#{individual}"), size: "m", tag: "h2" }) do %>
-        <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each do |reason| %>
+        <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each_with_index do |reason, idx| %>
+          <% link_errors = idx.zero? %>
           <%= form.govuk_radio_button :shared_ownership, reason,
                                       label: { text: t(".shared_ownership_options.#{reason}") },
                                       hint: { text: t(".shared_ownership_options.#{reason}_hint.#{individual}", default: "") },
-                                      link_errors: true %>
+                                      link_errors: %>
         <% end %>
       <% end %>
 
