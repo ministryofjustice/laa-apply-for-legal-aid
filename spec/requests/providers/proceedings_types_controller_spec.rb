@@ -5,10 +5,10 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
   let(:provider) { legal_aid_application.provider }
 
   describe "index: GET /providers/applications/:legal_aid_application_id/proceedings_types" do
-    subject { get providers_legal_aid_application_proceedings_types_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_proceedings_types_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -19,17 +19,17 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
       end
 
       it "returns http success" do
-        subject
+        get_request
         expect(response).to have_http_status(:ok)
       end
 
       it "does not displays the proceeding types" do
-        subject
+        get_request
         expect(unescaped_response_body).not_to include('class="selected-proceeding-types"')
       end
 
       it "displays no errors" do
-        subject
+        get_request
         expect(response.body).not_to include("govuk-input--error")
         expect(response.body).not_to include("govuk-form-group--error")
       end
@@ -44,7 +44,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
           end
 
           it "redirects to the address lookup page" do
-            subject
+            get_request
             expect(response.body).to have_back_link(providers_legal_aid_application_address_selection_path(legal_aid_application, back: true))
           end
         end
@@ -55,7 +55,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
           end
 
           it "redirects to the manual address page lookup page" do
-            subject
+            get_request
             expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application, back: true))
           end
         end
@@ -64,7 +64,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
   end
 
   describe "create: POST /providers/applications/:legal_aid_application_id/proceedings_types" do
-    subject do
+    subject(:patch_request) do
       post(
         providers_legal_aid_application_proceedings_types_path(legal_aid_application),
         params:,
@@ -78,12 +78,12 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
     end
 
     it "renders index" do
-      subject
+      patch_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays errors" do
-      subject
+      patch_request
       expect(response.body).to include("govuk-input--error")
       expect(response.body).to include("govuk-form-group--error")
     end
@@ -107,13 +107,13 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
       before { allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service) }
 
       it "redirects to next step" do
-        subject
+        patch_request
         expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
       end
 
       it "calls the add proceeding service" do
         expect(add_proceeding_service).to receive(:call).with(ccms_code: proceeding.ccms_code)
-        subject
+        patch_request
       end
 
       context "when LegalFramework::ProceedingTypesService call returns false" do
@@ -126,12 +126,12 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
         end
 
         it "renders index" do
-          subject
+          patch_request
           expect(response).to have_http_status(:ok)
         end
 
         it "displays errors" do
-          subject
+          patch_request
           expect(response.body).to include("govuk-input--error")
           expect(response.body).to include("govuk-form-group--error")
         end
@@ -142,12 +142,12 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
       let(:params) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do
-        subject
+        patch_request
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
       it "sets the application as draft" do
-        expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+        expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
       end
     end
   end

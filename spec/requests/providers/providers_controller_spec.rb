@@ -1,13 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Providers::ProvidersController do
-  subject { get providers_provider_path }
-
   let(:provider) { create(:provider) }
 
   before do
     login_as provider
-    subject
+    get providers_provider_path
   end
 
   it "renders" do

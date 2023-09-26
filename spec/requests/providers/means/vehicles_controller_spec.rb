@@ -41,7 +41,7 @@ RSpec.describe Providers::Means::VehiclesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/vehicle" do
-    subject do
+    subject(:patch_request) do
       patch(
         providers_legal_aid_application_means_vehicle_path(legal_aid_application),
         params:,
@@ -54,19 +54,19 @@ RSpec.describe Providers::Means::VehiclesController do
     end
 
     it "renders successfully" do
-      subject
+      patch_request
       expect(response).to have_http_status(:ok)
     end
 
     it "displays error" do
-      subject
+      patch_request
       expect(response.body).to include("govuk-error-summary")
     end
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
+      before { patch_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -78,16 +78,16 @@ RSpec.describe Providers::Means::VehiclesController do
       end
 
       it "creates a vehicle" do
-        expect { subject }.to change(Vehicle, :count).by(1)
+        expect { patch_request }.to change(Vehicle, :count).by(1)
         expect(legal_aid_application.reload.vehicle).to be_present
       end
 
       it "sets own_vehicle to true" do
-        expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(true)
+        expect { patch_request }.to change { legal_aid_application.reload.own_vehicle }.to(true)
       end
 
       it "redirects to vehicle details" do
-        subject
+        patch_request
         expect(response).to redirect_to(target_url)
       end
 
@@ -95,11 +95,11 @@ RSpec.describe Providers::Means::VehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle) }
 
         it "does not create a vehicle" do
-          expect { subject }.not_to change(Vehicle, :count)
+          expect { patch_request }.not_to change(Vehicle, :count)
         end
 
         it "redirects to estimated value" do
-          subject
+          patch_request
           expect(response).to redirect_to(target_url)
         end
       end
@@ -108,7 +108,7 @@ RSpec.describe Providers::Means::VehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to next page" do
-          subject
+          patch_request
           expect(response).to redirect_to(target_url)
         end
       end
@@ -121,15 +121,15 @@ RSpec.describe Providers::Means::VehiclesController do
       end
 
       it "does not create a vehicle" do
-        expect { subject }.not_to change(Vehicle, :count)
+        expect { patch_request }.not_to change(Vehicle, :count)
       end
 
       it "sets own_vehicle to false" do
-        expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(false)
+        expect { patch_request }.to change { legal_aid_application.reload.own_vehicle }.to(false)
       end
 
       it "redirects to applicant bank account for non-passported journey" do
-        subject
+        patch_request
         expect(response).to redirect_to(target_url)
       end
 
@@ -137,11 +137,11 @@ RSpec.describe Providers::Means::VehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
 
         it "delete existing vehicle" do
-          expect { subject }.to change(Vehicle, :count).by(-1)
+          expect { patch_request }.to change(Vehicle, :count).by(-1)
         end
 
         it "redirects to offline account page on passported journey" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_offline_account_path(legal_aid_application))
         end
       end
@@ -150,7 +150,7 @@ RSpec.describe Providers::Means::VehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
         it "redirects to check capital answers page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(legal_aid_application))
         end
       end
@@ -159,7 +159,7 @@ RSpec.describe Providers::Means::VehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to passported check answers page" do
-          subject
+          patch_request
           expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
         end
       end

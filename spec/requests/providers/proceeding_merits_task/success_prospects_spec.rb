@@ -12,10 +12,10 @@ module Providers
       before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
 
       describe "GET /providers/merits_task_list/:id/success_prospects" do
-        subject { get providers_merits_task_list_success_prospects_path(proceeding) }
+        subject(:get_request) { get providers_merits_task_list_success_prospects_path(proceeding) }
 
         context "when the provider is not authenticated" do
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
@@ -23,7 +23,7 @@ module Providers
         context "when the provider is authenticated" do
           before do
             login_as provider
-            subject
+            get_request
           end
 
           it "returns http success" do
@@ -33,7 +33,7 @@ module Providers
       end
 
       describe "PATCH providers/merits_task_list/:id/success_prospects" do
-        subject { patch providers_merits_task_list_success_prospects_path(proceeding), params: params.merge(submit_button) }
+        subject(:patch_request) { patch providers_merits_task_list_success_prospects_path(proceeding), params: params.merge(submit_button) }
 
         let(:success_prospect) { "marginal" }
         let(:success_prospect_details) { Faker::Lorem.paragraph }
@@ -49,7 +49,7 @@ module Providers
         context "when the provider is authenticated" do
           before do
             login_as provider
-            subject
+            patch_request
           end
 
           context "with Continue button pressed" do

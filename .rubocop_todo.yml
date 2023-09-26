@@ -110,32 +110,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 461
+# Offense count: 302
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/providers/means/dependants_controller_spec.rb'
-    - 'spec/requests/providers/means/other_assets_controller_spec.rb'
-    - 'spec/requests/providers/means/own_home_spec.rb'
-    - 'spec/requests/providers/means/percentage_home_spec.rb'
-    - 'spec/requests/providers/means/policy_disregards_controller_spec.rb'
-    - 'spec/requests/providers/means/property_values_controller_spec.rb'
-    - 'spec/requests/providers/means/remove_dependants_controller_spec.rb'
-    - 'spec/requests/providers/means/restrictions_spec.rb'
-    - 'spec/requests/providers/means/savings_and_investments_spec.rb'
-    - 'spec/requests/providers/means/shared_ownerships_spec.rb'
-    - 'spec/requests/providers/means/vehicles_controller_spec.rb'
-    - 'spec/requests/providers/merits_task_lists_controller_spec.rb'
-    - 'spec/requests/providers/offline_accounts_spec.rb'
-    - 'spec/requests/providers/outgoings_summary_controller_spec.rb'
-    - 'spec/requests/providers/proceeding_merits_task/attempts_to_settle_controller_spec.rb'
-    - 'spec/requests/providers/proceeding_merits_task/chances_of_success_spec.rb'
-    - 'spec/requests/providers/proceeding_merits_task/linked_children_spec.rb'
-    - 'spec/requests/providers/proceeding_merits_task/success_prospects_spec.rb'
-    - 'spec/requests/providers/proceedings_types_controller_spec.rb'
-    - 'spec/requests/providers/providers_controller_spec.rb'
-    - 'spec/requests/providers/received_benefit_confirmations_controller_spec.rb'
     - 'spec/requests/providers/select_offices_spec.rb'
     - 'spec/requests/providers/start_spec.rb'
     - 'spec/requests/providers/submitted_applications_controller_spec.rb'

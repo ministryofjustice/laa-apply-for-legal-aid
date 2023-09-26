@@ -5,10 +5,10 @@ RSpec.describe "provider restrictions request" do
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:id/means/restrictions" do
-    subject { get providers_legal_aid_application_means_restrictions_path(application) }
+    subject(:get_request) { get providers_legal_aid_application_means_restrictions_path(application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe "provider restrictions request" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -26,7 +26,7 @@ RSpec.describe "provider restrictions request" do
   end
 
   describe "PATCH /providers/applications/:id/means/restrictions" do
-    subject { patch providers_legal_aid_application_means_restrictions_path(application), params: params.merge(submit_button) }
+    subject(:patch_request) { patch providers_legal_aid_application_means_restrictions_path(application), params: params.merge(submit_button) }
 
     let(:params) do
       {
@@ -42,7 +42,7 @@ RSpec.describe "provider restrictions request" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        patch_request
       end
 
       context "and the Form is submitted with continue button" do
@@ -123,7 +123,7 @@ RSpec.describe "provider restrictions request" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
           it "redirects to the check capital answers page" do
-            subject
+            patch_request
             expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path)
           end
         end
@@ -139,7 +139,7 @@ RSpec.describe "provider restrictions request" do
         describe "after success" do
           before do
             login_as provider
-            subject
+            patch_request
             application.reload
           end
 

@@ -15,24 +15,24 @@ module Providers
       end
 
       describe "GET /providers/merits_task_list/:id/chances_of_success" do
-        subject { get providers_merits_task_list_chances_of_success_index_path(proceeding) }
+        subject(:get_request) { get providers_merits_task_list_chances_of_success_index_path(proceeding) }
 
         it "renders successfully" do
-          subject
+          get_request
           expect(response).to have_http_status(:ok)
         end
 
         context "when the provider is not authenticated" do
           let(:login) { nil }
 
-          before { subject }
+          before { get_request }
 
           it_behaves_like "a provider not authenticated"
         end
       end
 
       describe "POST /providers/merits_task_list/:id/chances_of_success" do
-        subject do
+        subject(:post_request) do
           post(
             providers_merits_task_list_chances_of_success_index_path(proceeding),
             params: params.merge(submit_button),
@@ -51,24 +51,24 @@ module Providers
         let(:submit_button) { {} }
 
         it "sets chances_of_success to true" do
-          expect { subject }.to change { chances_of_success.reload.success_likely }.to(true)
+          expect { post_request }.to change { chances_of_success.reload.success_likely }.to(true)
         end
 
         it "sets success_prospect to likely" do
-          expect { subject }.to change { chances_of_success.reload.success_prospect }.to("likely")
+          expect { post_request }.to change { chances_of_success.reload.success_prospect }.to("likely")
         end
 
         it "sets success_prospect_details to nil" do
-          expect { subject }.to change { chances_of_success.reload.success_prospect_details }.to(nil)
+          expect { post_request }.to change { chances_of_success.reload.success_prospect_details }.to(nil)
         end
 
         it "redirects to the next page" do
-          subject
+          post_request
           expect(response).to redirect_to providers_merits_task_list_opponents_application_path(proceeding)
         end
 
         it "updates the task list" do
-          subject
+          post_request
           expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :chances_of_success\n\s+dependencies: \*\d+\n\s+state: :complete/)
         end
 
@@ -76,24 +76,24 @@ module Providers
           let(:success_likely) { "false" }
 
           it "sets chances_of_success to false" do
-            expect { subject }.to change { chances_of_success.reload.success_likely }.to(false)
+            expect { post_request }.to change { chances_of_success.reload.success_likely }.to(false)
           end
 
           it "does not change success_prospect" do
-            expect { subject }.not_to change { chances_of_success.reload.success_prospect }
+            expect { post_request }.not_to change { chances_of_success.reload.success_prospect }
           end
 
           it "does not change success_prospect_details" do
-            expect { subject }.not_to change { chances_of_success.reload.success_prospect_details }
+            expect { post_request }.not_to change { chances_of_success.reload.success_prospect_details }
           end
 
           it "does not set the task to complete" do
-            subject
+            post_request
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:DA001, :chances_of_success)
           end
 
           it "redirects to next page" do
-            subject
+            post_request
             expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(proceeding))
           end
 
@@ -101,7 +101,7 @@ module Providers
             let(:success_prospect) { :likely }
 
             it "sets success_prospect to nil" do
-              expect { subject }.to change { chances_of_success.reload.success_prospect }.to(nil)
+              expect { post_request }.to change { chances_of_success.reload.success_prospect }.to(nil)
             end
           end
         end
@@ -110,7 +110,7 @@ module Providers
           let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :checking_merits_answers, explicit_proceedings: %i[da001 se003]) }
 
           it "redirects back to the answers page" do
-            subject
+            post_request
             expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
           end
 
@@ -118,7 +118,7 @@ module Providers
             let(:success_likely) { "false" }
 
             it "redirects back to the answers page" do
-              subject
+              post_request
               expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(proceeding))
             end
           end
@@ -128,17 +128,17 @@ module Providers
           let(:params) { {} }
 
           it "renders successfully" do
-            subject
+            post_request
             expect(response).to have_http_status(:ok)
           end
 
           it "displays error" do
-            subject
+            post_request
             expect(response.body).to include("govuk-error-summary")
           end
 
           it "the response includes the error message" do
-            subject
+            post_request
             expect(response.body).to include(I18n.t("activemodel.errors.models.proceeding_merits_task/chances_of_success.attributes.success_likely.blank"))
           end
         end
@@ -147,21 +147,21 @@ module Providers
           let(:submit_button) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
-            subject
+            post_request
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it "sets the application as draft" do
-            expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+            expect { post_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
           end
 
           it "does not set the task to complete" do
-            subject
+            post_request
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:DA001, :chances_of_success)
           end
 
           it "updates the model" do
-            subject
+            post_request
             chances_of_success.reload
             expect(chances_of_success.success_likely).to be(true)
             expect(chances_of_success.success_prospect).to eq("likely")
@@ -177,14 +177,14 @@ module Providers
             end
 
             it "redirects provider back to the merits task list" do
-              subject
+              post_request
               expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
             end
           end
 
           context "with opponents application task incomplete" do
             it "redirects provider to the opponents application task page" do
-              subject
+              post_request
               expect(response).to redirect_to(providers_merits_task_list_opponents_application_path(proceeding))
             end
           end
@@ -199,7 +199,7 @@ module Providers
             end
 
             it "routes to the specific issue task" do
-              subject
+              post_request
               expect(response).to redirect_to(providers_merits_task_list_vary_order_path(proceeding))
             end
           end
