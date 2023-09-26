@@ -2,21 +2,25 @@ Feature: Bank statement upload check your answers
   @javascript
   Scenario: I can view and change answers to means income questions for non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
-    And I have completed a non-passported employed application with bank statements as far as the end of the means income section
+    And I have completed a non-passported employed application for "client" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
+
+    And the following sections within "applicant" should exist:
+      | tag | section |
+      | h2  | Your client's income |
+      | h3  | Bank statements |
+      | h3  | Employment income |
+      | h2  | Client benefits |
+      | h3  | Payments your client receives |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
+      | h3  | Payments your client makes in cash |
 
     And the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
-      | h3  | Bank statements |
-      | h2  | Your client's income |
-      | h3  | Employment income |
-      | h3  | What payments does your client receive? |
-      | h3  | Student finance |
-      | h2  | Your client's outgoings |
-      | h3  | What payments does your client make? |
       | h3  | Housing Benefit |
-      | h3  | Payments your client makes in cash |
       | h2  | Dependants |
 
     And the following sections should not exist:
@@ -34,14 +38,14 @@ Feature: Bank statement upload check your answers
     And I should see 'Does your client get student finance?'
     And I should not see 'Does your client have any savings accounts they cannot access online?'
 
-    And the "What payments does your client receive?" section's questions and answers should match:
+    And the "Payments your client receives" section's questions and answers should match:
       | question | answer |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "What payments does your client make?" section's questions and answers should match:
+    And the "Payments your client makes" section's questions and answers should match:
       | question | answer |
       | Housing payments | £1,600.00\nTotal in the last 3 months |
       | Childcare payments | None |
@@ -53,7 +57,7 @@ Feature: Bank statement upload check your answers
       | Does your client get Housing Benefit? | Yes |
       | Amount | £1,200.00\nTotal in the last 3 months |
 
-    When I click Check Your Answers Change link for "bank statements"
+    When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
     Then I should see "hello_world.pdf UPLOADED"
 
@@ -61,7 +65,7 @@ Feature: Bank statement upload check your answers
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "hello_world.pdf"
 
-    When I click Check Your Answers Change link for "What payments does your client receive?"
+    When I click Check Your Answers Change link for "Payments your client receives"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
 
     When I check "Pension"
@@ -77,23 +81,23 @@ Feature: Bank statement upload check your answers
     And I should see "1,000.00"
     And I should see "Every 2 weeks"
 
-    When I click Check Your Answers Change link for "What payments does your client receive?"
+    When I click Check Your Answers Change link for "Payments your client receives"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
 
     When I check "My client does not get any of these payments"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for "student finance"
+    When I click Check Your Answers Change link for "applicant student finance"
     And I choose "Yes"
     And I enter amount "5000"
 
     When I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And the answer for "student finance question" should be "Yes"
+    And the answer for "applicant student finance question" should be "Yes"
     And the answer for "student finance annual amount" should be "£5,000"
 
-    When I click Check Your Answers Change link for "What payments does your client make?"
+    When I click Check Your Answers Change link for "Payments your client makes"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "Maintenance payments to a former partner"
     And I fill "Maintenance out amount" with "500"
@@ -111,7 +115,7 @@ Feature: Bank statement upload check your answers
     And I should see "£500.00"
     And I should see "Monthly"
 
-    When I click Check Your Answers Change link for "What payments does your client make?"
+    When I click Check Your Answers Change link for "Payments your client makes"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
@@ -130,7 +134,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for "What payments does your client make?"
+    When I click Check Your Answers Change link for "Payments your client makes"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "My client makes none of these payments"
     And I click "Save and continue"
@@ -139,20 +143,23 @@ Feature: Bank statement upload check your answers
   @javascript
   Scenario: On the bank upload journey, the provider has employment permissions but the applicant is unemployed
     Given csrf is enabled
-    And I have completed a non-passported non-employed application with bank statements as far as the end of the means income section
+    And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should not see 'Employment income'
-    And the following sections should exist:
+    And the following sections within 'applicant' should exist:
       | tag | section |
-      | h1  | Check your answers |
       | h3  | Bank statements |
       | h2  | Your client's income |
-      | h3  | What payments does your client receive? |
+      | h3  | Payments your client receives |
       | h3  | Payments your client receives in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | What payments does your client make? |
+      | h3  | Payments your client makes |
       | h3  | Payments your client makes in cash |
+
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
       | h2  | Dependants |
 
     And the following sections should not exist:

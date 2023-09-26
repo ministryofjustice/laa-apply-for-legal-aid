@@ -63,7 +63,7 @@ Feature: non_passported_journey with means
     And I click 'Save and continue'
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "What payments does your client receive?"
+    When I click Check Your Answers Change link for "Payments your client receives"
     Then I should be on a page with title "Which of these payments does your client get?"
 
     When I click 'Save and continue'

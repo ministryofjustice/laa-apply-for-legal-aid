@@ -99,7 +99,7 @@ Feature: Completing and checking means answers backwards and forwards
     And I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "What payments does your client make?"
+    When I click Check Your Answers Change link for "Payments your client makes"
     Then I should be on a page with title "Which of these payments does your client pay?"
 
     When I click 'Save and continue'

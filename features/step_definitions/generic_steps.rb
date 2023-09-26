@@ -34,6 +34,14 @@ Then("the following sections should exist:") do |table|
   end
 end
 
+Then("the following sections within {string} should exist:") do |individual, table|
+  table.hashes.each do |row|
+    within("section.#{individual}") do
+      expect(page).to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
+    end
+  end
+end
+
 Then("the following sections should not exist:") do |table|
   table.hashes.each do |row|
     expect(page).not_to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""

@@ -125,13 +125,13 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
       end
     end
 
-    context "when checking answers for an application uploading bank statements and none is selected", pending: "add back in when CYA page is added" do
+    context "when checking answers for an application uploading bank statements and none is selected" do
       let(:legal_aid_application) do
         create(
           :legal_aid_application,
-          :with_applicant,
+          :with_applicant_and_partner,
           :with_non_passported_state_machine,
-          :checking_partners_income,
+          :checking_means_income,
           no_debit_transaction_types_selected: false,
         )
       end
@@ -148,17 +148,17 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
 
       it "redirects to the checking answers income page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_check_income_answers_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
       end
     end
 
-    context "when checking answers and regular transactions are selected", pending: "add back in when CYA page is added" do
+    context "when checking answers and regular transactions are selected" do
       let(:legal_aid_application) do
         create(
           :legal_aid_application,
-          :with_applicant,
+          :with_applicant_and_partner,
           :with_non_passported_state_machine,
-          :checking_partners_income,
+          :checking_means_income,
           no_debit_transaction_types_selected: false,
         )
       end
@@ -183,33 +183,6 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
       it "redirects to the cash outgoing page" do
         request
         expect(response).to redirect_to(providers_legal_aid_application_partners_cash_outgoing_path(legal_aid_application))
-      end
-    end
-
-    context "when checking answers and housing payments are selected", pending: "add back in when CYA page is added" do
-      let(:legal_aid_application) do
-        create(
-          :legal_aid_application,
-          :with_applicant,
-          :with_non_passported_state_machine,
-          :checking_partners_income,
-          no_debit_transaction_types_selected: false,
-        )
-      end
-      let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
-      let(:params) do
-        {
-          providers_partners_regular_outgoings_form: {
-            transaction_type_ids: [rent_or_mortgage.id],
-            rent_or_mortgage_amount: 100,
-            rent_or_mortgage_frequency: "monthly",
-          },
-        }
-      end
-
-      it "redirects to the housing benefit page" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_housing_benefits_path(legal_aid_application))
       end
     end
   end

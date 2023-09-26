@@ -2,8 +2,20 @@
 
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
+<% url = if partner
+           providers_legal_aid_application_partners_bank_statements_path(@legal_aid_application)
+         else
+           providers_legal_aid_application_bank_statements_path(@legal_aid_application)
+         end %>
+
+<% individual = if partner
+                  "Partner"
+                else
+                  "Client"
+                end %>
+
 <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements" }) do |row| %>
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_#{individual.downcase}" }) do |row| %>
     <%= row.with_key(text: t(".bank_statement_question"), classes: "govuk-!-width-one-half") %>
     <%= row.with_value do %>
       <ul class="govuk-list">
@@ -14,8 +26,8 @@
     <% end %>
     <%= row.with_action(
           text: t("generic.change"),
-          href: providers_legal_aid_application_bank_statements_path(@legal_aid_application),
-          visually_hidden_text: t(".bank_statement_question"),
+          href: url,
+          visually_hidden_text: "#{individual} #{t('.bank_statement_question')}",
         ) %>
   <% end %>
 <% end %>

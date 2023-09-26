@@ -64,7 +64,7 @@ RSpec.describe Providers::Partners::ReceivesStateBenefitsController do
       end
     end
 
-    context "when provider checking answers of citizen", pending: "Check answers not ready yet" do
+    context "when provider checking answers of citizen" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :checking_means_income) }
 
       context "and the provider says no benefits received" do
@@ -84,18 +84,18 @@ RSpec.describe Providers::Partners::ReceivesStateBenefitsController do
                    transaction_type: create(:transaction_type, :benefits),
                    legal_aid_application:,
                    description: "Test state benefit",
-                   owner_id: legal_aid_application.applicant.id,
-                   owner_type: "Applicant")
+                   owner_id: legal_aid_application.partner.id,
+                   owner_type: "Partner")
           end
 
           it "redirects to the add_other_state_benefit page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_partners_add_other_state_benefits_path(legal_aid_application))
           end
         end
 
         context "and no other benefits exist" do
           it "redirects to the state_benefits page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_means_state_benefit_path(legal_aid_application))
+            expect(response).to redirect_to(new_providers_legal_aid_application_partners_state_benefit_path(legal_aid_application))
           end
         end
       end

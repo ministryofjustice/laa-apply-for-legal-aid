@@ -296,10 +296,10 @@ Feature: Checking answers backwards and forwards
       | h1  | Check your answers |
       | h2  | Your client's income |
       | h3  | Employment income |
-      | h3  | What payments does your client receive? |
+      | h3  | Payments your client receives |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | What payments does your client make? |
+      | h3  | Payments your client makes |
       | h2  | Dependants |
 
     And I should not see "Payments your client receives in cash"
@@ -316,7 +316,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
 
-    And the "What payments does your client receive?" section's questions and answers should match:
+    And the "Payments your client receives" section's questions and answers should match:
       | question | answer |
       | Benefits | £666.00 |
       | Disregarded benefits | None |
@@ -325,7 +325,7 @@ Feature: Checking answers backwards and forwards
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "What payments does your client make?" section's questions and answers should match:
+    And the "Payments your client makes" section's questions and answers should match:
       | question | answer |
       | Housing payments | £999.00 |
       | Childcare payments | None |
@@ -353,9 +353,9 @@ Feature: Checking answers backwards and forwards
       | tag | section |
       | h2  | Your client's income |
       | h3  | Employment income |
-      | h3  | What payments does your client receive? |
+      | h3  | Payments your client receives |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | What payments does your client make? |
+      | h3  | Payments your client makes |
       | h3  | "Payments your client receives in cash" |
       | h3  | "Payments your client makes in cash"    |

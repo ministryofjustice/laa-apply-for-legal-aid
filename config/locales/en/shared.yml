@@ -280,7 +280,7 @@ en:
         nino: National Insurance number
         has_partner: Does your client have a partner?
       dependants:
-        has_dependants: Does your client have any dependants?
+        has_dependants: Does %{individual} have any dependants?
         add-new: Add dependant
         delete: Delete dependant
         name: Name
@@ -295,7 +295,7 @@ en:
         new_limit_reasons: Reason
       housing_benefit:
         heading: Housing Benefit
-        does_your_client: Does your client get Housing Benefit?
+        does_your_client: Does %{individual} get Housing Benefit?
       substantive_costs:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested
@@ -386,20 +386,19 @@ en:
         child: Child
       full_employment_details:
         employment: Employment income
-        full_employment_details: Your client's employment details
+        full_employment_details: "%{individual}'s employment details"
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:
           no_transactions: "No"
       student_finance:
         heading: Student finance
-        does_your_client: Does your client get student finance?
+        does_your_client: Does %{individual_text} get student finance?
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
-      income_cash_payments:
-        heading: Payments your client receives in cash
-      outgoings_cash_payments:
-        heading: Payments your client makes in cash
+      cash_payments:
+        income_heading: Payments %{individual_with_determiner} receives in cash
+        outgoings_heading: Payments %{individual_with_determiner} makes in cash
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:

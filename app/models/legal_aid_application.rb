@@ -218,11 +218,6 @@ class LegalAidApplication < ApplicationRecord
     TransactionType.where(id: partner_transaction_types).credits.without_housing_benefits.any?
   end
 
-  def cash_transaction_types_for?(owner_type)
-    transaction_type_ids = legal_aid_application_transaction_types.where(owner_type:).map(&:transaction_type).pluck(:id)
-    TransactionType.where(id: transaction_type_ids).not_children.credits
-  end
-
   def outgoing_types?
     transaction_types.debits.any?
   end
@@ -231,7 +226,11 @@ class LegalAidApplication < ApplicationRecord
     legal_aid_application_transaction_types.where(owner_type:).map(&:transaction_type).pluck(:id)
   end
 
-  def outgoing_cash_transaction_types_for?(owner_type)
+  def income_cash_transaction_types_for(owner_type)
+    TransactionType.where(id: individual_transaction_type_ids(owner_type)).not_children.credits
+  end
+
+  def outgoing_cash_transaction_types_for(owner_type)
     TransactionType.where(id: individual_transaction_type_ids(owner_type)).not_children.debits
   end
 
