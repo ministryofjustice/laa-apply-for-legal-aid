@@ -57,7 +57,7 @@ Feature: Bank statement upload check your answers
       | Does your client get Housing Benefit? | Yes |
       | Amount | £1,200.00\nTotal in the last 3 months |
 
-    When I click Check Your Answers Change link for "bank statements"
+    When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
     Then I should see "hello_world.pdf UPLOADED"
 
@@ -88,13 +88,13 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for "student finance"
+    When I click Check Your Answers Change link for "applicant student finance"
     And I choose "Yes"
     And I enter amount "5000"
 
     When I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And the answer for "student finance question" should be "Yes"
+    And the answer for "applicant student finance question" should be "Yes"
     And the answer for "student finance annual amount" should be "£5,000"
 
     When I click Check Your Answers Change link for "Payments your client makes"

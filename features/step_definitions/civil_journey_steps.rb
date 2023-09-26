@@ -897,16 +897,6 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   end
 end
 
-Given("I click Check Your Answers Change link for {string} within {string}") do |question, individual|
-  question_id = question.parameterize(separator: "_")
-
-  within "section.#{individual}" do
-    within "#app-check-your-answers__#{question_id}" do
-      click_link("Change")
-    end
-  end
-end
-
 Given("I click Check Your Answers Change link for proceeding {string}") do |question|
   steps %(Then the page should be axe clean skipping: region, aria-allowed-attr) if run_axe?
   question_id = question.parameterize(separator: "_")
