@@ -6,7 +6,7 @@
 
   <% if @error_decoder.show_link? %>
     <p class="govuk-body">
-      <%= link_to_accessible(
+      <%= govuk_link_to(
             t(".bank_selection_link"),
             citizens_banks_path,
           ) %>

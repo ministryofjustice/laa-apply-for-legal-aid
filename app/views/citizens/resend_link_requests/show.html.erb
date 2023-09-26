@@ -1,6 +1,6 @@
 <%= page_template page_title: t(".page_title"), back_link: :none do %>
   <p class="govuk-body">
-    <%= link_to_accessible(
+    <%= govuk_link_to(
           t(".new_link_request"),
           citizens_resend_link_request_path(params[:id]),
           method: :patch,
