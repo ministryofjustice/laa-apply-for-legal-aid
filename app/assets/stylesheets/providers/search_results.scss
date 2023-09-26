@@ -1,5 +1,12 @@
 // stylelint-disable selector-max-id
 
+%highlight {
+  margin-right: 1px;
+  padding: 2px 0 0;
+  border-bottom: 3px solid govuk-colour("yellow");
+  background-color: mix(govuk-colour("white"), govuk-colour("yellow"), 50%);
+}
+
 #search-field {
   display: none;
 }
@@ -14,10 +21,7 @@
 
 .organisation-item {
   mark {
-    margin-right: 1px;
-    padding: 2px 0 0;
-    border-bottom: 3px solid #ffdd00;
-    background-color: #fff2d3;
+    @extend %highlight;
   }
 }
 
@@ -39,10 +43,7 @@
 }
 
 .highlight {
-  margin-right: 1px;
-  padding: 2px 0 0;
-  border-bottom: 3px solid #ffdd00;
-  background-color: #fff2d3;
+  @extend %highlight
 }
 
 .selected-proceeding-types,
