@@ -399,7 +399,7 @@ en:
       income_cash_payments:
         heading: Payments %{individual_with_determiner} receives in cash
       outgoings_cash_payments:
-        heading: Payments your client makes in cash
+        heading: Payments %{individual_with_determiner} makes in cash
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:

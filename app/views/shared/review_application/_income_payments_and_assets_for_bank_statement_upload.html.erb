@@ -72,7 +72,13 @@
   </section>
 
   <section class="print-no-break">
-    <%= render("shared/check_answers/outgoings_cash_payments", read_only: true) %>
+    <%= render(
+          "shared/check_answers/outgoings_cash_payments",
+          read_only: true,
+          url: providers_legal_aid_application_means_cash_outgoing_path,
+          individual: "Applicant",
+          individual_with_determiner: "your client",
+        ) %>
   </section>
 
   <section class="print-no-break govuk-!-padding-top-8">

@@ -51,4 +51,10 @@
       individual: "Partner",
     ) %>
 
-<%= render("shared/check_answers/outgoings_cash_payments", read_only: false) %>
+<%= render(
+      "shared/check_answers/outgoings_cash_payments",
+      read_only: false,
+      url: providers_legal_aid_application_partners_cash_outgoing_path,
+      individual: "Partner",
+      individual_with_determiner: "the partner",
+    ) %>
