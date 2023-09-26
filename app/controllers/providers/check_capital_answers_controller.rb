@@ -2,6 +2,7 @@ module Providers
   class CheckCapitalAnswersController < ProviderBaseController
     def show
       legal_aid_application.check_non_passported_means! unless legal_aid_application.checking_non_passported_means?
+      @vehicle_owner = vehicle_owner
     end
 
     def update
@@ -27,6 +28,12 @@ module Providers
 
     def check_financial_eligibility
       CFECivil::SubmissionBuilder.call(@legal_aid_application)
+    end
+
+    def vehicle_owner
+      return if legal_aid_application.vehicle.blank?
+
+      t(".options.#{legal_aid_application.vehicle.owner}")
     end
   end
 end

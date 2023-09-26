@@ -1051,6 +1051,10 @@ en:
         what_happens_next:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
+        options:
+          client: My client
+          partner: The partner
+          client_and_partner: My client and their partner
     merits_task_lists:
       show:
         page_heading: Provide details of the case
