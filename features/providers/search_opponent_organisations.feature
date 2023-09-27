@@ -63,6 +63,8 @@ Scenario: I am prevented from seeing HTML output in search results
     When I click link "Clear search"
     Then organisation search field is empty
     And organisation suggestions has 0 results
+    When I click "Save and continue"
+    Then I should see govuk error summary "Search for and select an organisation"
 
   @javascript
   Scenario: I am unable to proceed without selecting an organisation

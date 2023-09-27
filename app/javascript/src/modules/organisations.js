@@ -81,6 +81,7 @@ function addSearchInputListeners (searchInputBox) {
     .addEventListener('click', () => {
       searchInputBox.value = ''
       hideOrganisationItems()
+      deselectPreviousOrganisationItem()
       setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay)
     })
 }
@@ -103,4 +104,4 @@ document.addEventListener('DOMContentLoaded', event => {
   if (searchInputBox) addSearchInputListeners(searchInputBox)
 })
 
-export { searchResults, showResults }
+export { addSearchInputListeners, searchResults, showResults }

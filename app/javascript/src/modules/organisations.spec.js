@@ -60,8 +60,8 @@ describe('Organisations.showResults', () => {
             <div id="280361" class="organisation-item" style="display: none;">
               <div>
                 <input>
-                  <label class="govuk-label">Angus Council</label>
-                  <div class="govuk-hint">Local Authority</div>
+                <label class="govuk-label">Angus Council</label>
+                <div class="govuk-hint">Local Authority</div>
               </div>
             </div>
           </div>
@@ -131,6 +131,56 @@ describe('Organisations.showResults', () => {
       expect(noResultsElement).toBeVisible()
       expect(label.innerHTML).toEqual('Angus Council')
       expect(hint.innerHTML).toEqual('Local Authority')
+    })
+  })
+})
+
+describe('Organisations.addSearchInputListeners', () => {
+  describe('clear search event listener', () => {
+    it('clears all search result elements', () => {
+      document.body.innerHTML =
+        `
+        <input id="organisation-search-input" name="organisation-search-input" type="text" autocomplete="off" value="ang">
+        <a id="clear-organisation-search" href="#">Clear search</a>
+        <div>
+          <div class="govuk-radios">
+            <div id="280361" class="organisation-item" style="display: block;">
+              <div>
+                  <input type="radio" value="280361" name="id" checked>
+                  <label class="govuk-label">Angus Council</label>
+                  <div class="govuk-hint">Local Authority</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="no-organisation-items" style="display: none;">
+          <div>
+            <span>No results found.</span>
+          </div>
+        </div>
+        <div id="screen-reader-messages">1 match found for ang, use tab to move to options</div>
+        `
+
+      const searchInputBox = document.querySelector('#organisation-search-input')
+      const clearSearch = document.getElementById('clear-organisation-search')
+      const organisations = document.querySelectorAll('.organisation-item')
+
+      // add event listener
+      Organisations.addSearchInputListeners(searchInputBox)
+
+      expect(searchInputBox.value).toEqual('ang')
+      organisations.forEach((item) => {
+        expect(item).toBeVisible()
+        expect(item.querySelector('input')).toBeChecked()
+      })
+
+      clearSearch.click()
+
+      expect(searchInputBox.value).toEqual('')
+      organisations.forEach((item) => {
+        expect(item).not.toBeVisible()
+        expect(item.querySelector('input')).not.toBeChecked()
+      })
     })
   })
 })
