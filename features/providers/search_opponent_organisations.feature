@@ -33,13 +33,17 @@ Scenario: I am able to find multiple organisations using a partial word
 
 @javascript
 Scenario: I am able to see highlighted search terms in the results
-  When I search for organisation "ang local"
+  When I search for organisation "ang loc"
   Then the organisation suggestions include "Isle of Anglesey County Council\nLocal Authority"
   And the organisation suggestions include "Angus Council\nLocal Authority"
   And organisation suggestions has 2 results
-  And I can see the highlighted search term "Ang" 2 times
+  And I can see the highlighted search term "Angus" 1 time
+  And I can see the highlighted search term "Anglesey" 1 time
   And I can see the highlighted search term "Local" 2 times
 
+# NOTE: previous javascript highlighting incarnations could result in html output to the screen, this is no longer
+# possible using the full text search "headline" method, so the scenario's original purpose is no longer applicable.
+# It does, howver, excercise a search edge case so may be of value?!
 @javascript
 Scenario: I am prevented from seeing HTML output in search results
   When I search for organisation "prison r"
@@ -47,7 +51,9 @@ Scenario: I am prevented from seeing HTML output in search results
   Then the organisation suggestions include "Ranby\nHM Prison or Young Offender Institute"
   Then the organisation suggestions include "Rye Hill\nHM Prison or Young Offender Institute"
   And organisation suggestions has 3 results
-  And I can see the highlighted search term "R" 3 times
+  And I can see the highlighted search term "Risley" 1 time
+  And I can see the highlighted search term "Ranby" 1 time
+  And I can see the highlighted search term "Rye" 1 time
   And I can see the highlighted search term "Prison" 3 times
 
   @javascript
@@ -57,6 +63,8 @@ Scenario: I am prevented from seeing HTML output in search results
     When I click link "Clear search"
     Then organisation search field is empty
     And organisation suggestions has 0 results
+    When I click "Save and continue"
+    Then I should see govuk error summary "Search for and select an organisation"
 
   @javascript
   Scenario: I am unable to proceed without selecting an organisation

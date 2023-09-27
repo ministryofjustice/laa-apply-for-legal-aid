@@ -23,6 +23,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
+    "@testing-library/jest-dom": "^6.1.3",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
     "jest-environment-jsdom": "^29.7.0",
@@ -33,18 +34,6 @@
     "stylelint": "^15.10.3",
     "stylelint-config-gds": "^1.0.0",
     "stylelint-order": "^6.0.3"
-  },
-  "jest": {
-    "testEnvironment": "jest-environment-jsdom-global",
-    "transformIgnorePatterns": [
-      "node_modules/(?!axios/.*)"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "modulePathIgnorePatterns": [
-      "vendor"
-    ]
   },
   "standard": {
     "env": [

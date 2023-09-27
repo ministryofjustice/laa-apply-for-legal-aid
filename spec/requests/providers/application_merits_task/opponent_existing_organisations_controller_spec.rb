@@ -7,10 +7,10 @@ module Providers
       let(:provider) { legal_aid_application.provider }
 
       describe "index: GET /providers/applications/:legal_aid_application_id/opponent_existing_organisations" do
-        subject(:request_index) { get providers_legal_aid_application_opponent_existing_organisations_path(legal_aid_application) }
+        subject(:index_request) { get providers_legal_aid_application_opponent_existing_organisations_path(legal_aid_application) }
 
         context "when the provider is not authenticated" do
-          before { request_index }
+          before { index_request }
 
           it_behaves_like "a provider not authenticated"
         end
@@ -21,20 +21,20 @@ module Providers
           end
 
           it "returns expected template with http success" do
-            request_index
+            index_request
             expect(response)
               .to have_http_status(:ok)
               .and render_template("providers/application_merits_task/opponent_existing_organisations/index")
           end
 
           it "contains expected number of organisations" do
-            request_index
+            index_request
             doc = Nokogiri::HTML(response.body)
             expect(doc.css(".organisation-item").length).to be >= 1196
           end
 
           it "displays no errors" do
-            request_index
+            index_request
             expect(response.body).not_to include("govuk-input--error")
             expect(response.body).not_to include("govuk-form-group--error")
           end
@@ -42,7 +42,7 @@ module Providers
       end
 
       describe "create: POST /providers/applications/:legal_aid_application_id/legal_aid_application_id/opponent_existing_organisations" do
-        subject(:request_create) do
+        subject(:create_request) do
           post(
             providers_legal_aid_application_opponent_existing_organisations_path(legal_aid_application),
             params:,
@@ -56,12 +56,12 @@ module Providers
         end
 
         it "renders index" do
-          request_create
+          create_request
           expect(response).to have_http_status(:ok)
         end
 
         it "displays errors" do
-          request_create
+          create_request
           expect(response.body).to include("govuk-input--error")
           expect(response.body).to include("govuk-form-group--error")
         end
@@ -85,12 +85,12 @@ module Providers
             end
 
             it "redirects to next step" do
-              request_create
+              create_request
               expect(response.body).to redirect_to(providers_legal_aid_application_has_other_opponent_path(legal_aid_application))
             end
 
             it "calls the add opponent organisation service with expected object duck type" do
-              request_create
+              create_request
               expect(service).to have_received(:call).with(duck_type(:name, :ccms_opponent_id, :ccms_type_code, :ccms_type_text))
             end
           end
@@ -106,12 +106,12 @@ module Providers
             end
 
             it "renders index" do
-              request_create
+              create_request
               expect(response).to have_http_status(:ok)
             end
 
             it "displays errors" do
-              request_create
+              create_request
               expect(response.body).to include("govuk-input--error")
               expect(response.body).to include("govuk-form-group--error")
             end
@@ -122,12 +122,12 @@ module Providers
           let(:params) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
-            request_create
+            create_request
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it "sets the application as draft" do
-            expect { request_create }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+            expect { create_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
           end
         end
       end
