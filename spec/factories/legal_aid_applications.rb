@@ -592,6 +592,7 @@ FactoryBot.define do
     end
 
     trait :with_everything do
+      populate_vehicle { true }
       with_applicant
       with_non_passported_state_machine
       applicant_entering_means

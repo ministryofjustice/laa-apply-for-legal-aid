@@ -3,10 +3,6 @@ module Providers
     class VehicleDetailsController < ProviderBaseController
       def show
         @form = ::Vehicles::DetailsForm.new(model: vehicle)
-        unless legal_aid_application.applicant.has_partner_with_no_contrary_interest?
-          legal_aid_application.vehicle.owner = "client"
-          legal_aid_application.vehicle.save!
-        end
       end
 
       def new

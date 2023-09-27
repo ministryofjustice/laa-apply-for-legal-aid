@@ -900,7 +900,7 @@ end
 Given("I click Check Your Answers Change link for vehicle {string}") do |vehicle|
   steps %(Then the page should be axe clean skipping: region, aria-allowed-attr) if run_axe?
 
-  find_link("vehicle #{vehicle}", visible: false).click
+  find_link("Vehicle #{vehicle}", visible: false).click
 end
 
 Given("I click Check Your Answers Change link for proceeding {string}") do |question|

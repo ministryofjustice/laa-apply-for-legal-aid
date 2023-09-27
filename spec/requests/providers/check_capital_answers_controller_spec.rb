@@ -47,7 +47,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       expect(response.body).to include(gds_number_to_currency(vehicle.payment_remaining, unit: "£"))
       expect(response.body).to include(yes_no(vehicle.more_than_three_years_old?))
       expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.heading"))
-      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own"))
+      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own", individual: "your client"))
       expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.estimated_value"))
       expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.payment_remaining"))
       expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.more_than_three_years_old"))
@@ -65,7 +65,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       let(:own_vehicle) { false }
 
       it "displays first vehicle question" do
-        expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own"))
+        expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own", individual: "your client"))
       end
 
       it "does not display other vehicle questions" do
@@ -78,7 +78,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
 
     context "when applicant has partner who owns vehicle" do
       let(:own_vehicle) { true }
-      let(:vehicle) { create(:vehicle, :owned_by_partner) }
+      let(:vehicles) { create_list(:vehicle, 1, :owned_by_partner) }
       let(:applicant) { create(:applicant, has_partner: true, partner_has_contrary_interest: false) }
 
       it "shows 'The partner' as the owner" do

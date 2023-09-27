@@ -40,15 +40,6 @@ RSpec.describe Providers::Means::VehicleDetailsController do
 
       it_behaves_like "a provider not authenticated"
     end
-
-    context "when the applicant does not have a partner" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :with_applicant) }
-
-      it "sets the vehicle owner to be client" do
-        get_vehicle_details
-        expect(legal_aid_application.vehicle.reload.owner).to eq "client"
-      end
-    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/vehicle_details" do

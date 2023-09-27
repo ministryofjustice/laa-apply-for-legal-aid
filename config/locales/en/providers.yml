@@ -978,16 +978,21 @@ en:
       vehicle_details:
         show:
           heading: Amend vehicle details
+          owner:
+            options:
+              client: My client
+              partner: The partner
+              client_and_partner: My client and their partner
         new:
           heading: Vehicle details
-        form:
           owner:
-            question: Who owns the vehicle?
             options:
               client: My client
               partner: The partner
               client_and_partner: My client and their partner
         form:
+          owner:
+            question: Who owns the vehicle?
           multi_vehicle: Tell us about one vehicle at a time. You can add more later.
           estimated_value:
             question: How much is the vehicle worth?
