@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@rails/ujs": "^7.0.8",
-    "axios": "^1.5.0",
+    "axios": "^1.5.1",
     "core-js": "^3.32.2",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.19.3",
