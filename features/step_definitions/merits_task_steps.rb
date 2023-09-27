@@ -55,7 +55,7 @@ When("the organisation suggestions include {string}") do |string|
 end
 
 Then(/^I can see the highlighted search term "(.*)" (\d+) time[s]?$/) do |string, count|
-  expect(page).to have_css(".organisation-item mark", visible: :visible, text: string, count:)
+  expect(page).to have_css("mark", visible: :visible, text: string, count:)
 end
 
 Then("I select an organisation type {string} from the list") do |text|
