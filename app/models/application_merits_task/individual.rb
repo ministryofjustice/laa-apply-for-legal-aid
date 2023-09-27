@@ -4,8 +4,16 @@ module ApplicationMeritsTask
 
     delegate :generate_ccms_opponent_id, :ccms_opponent_id, to: :opponent
 
+    def ccms_other_party_type
+      "PERSON"
+    end
+
     def ccms_relationship_to_case
       "OPP"
+    end
+
+    def ccms_relationship_to_client
+      "UNKNOWN"
     end
 
     def ccms_child?

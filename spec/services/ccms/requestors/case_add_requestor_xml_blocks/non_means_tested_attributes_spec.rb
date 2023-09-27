@@ -1131,12 +1131,12 @@ module CCMS
               expect(block).to have_text_response opponent.full_name
             end
 
-            it "hard-codes OTHER_PARTY_TYPE" do
+            it "populate OTHER_PARTY_TYPE" do
               block = XmlExtractor.call(xml, entity, "OTHER_PARTY_TYPE")
               expect(block).to have_text_response "PERSON"
             end
 
-            it "hard-codes OTHER_PARTY_PERSON" do
+            it "populates OTHER_PARTY_PERSON" do
               block = XmlExtractor.call(xml, entity, "OTHER_PARTY_PERSON")
               expect(block).to have_boolean_response true
             end

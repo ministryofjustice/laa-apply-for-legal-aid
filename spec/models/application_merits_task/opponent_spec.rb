@@ -124,22 +124,6 @@ module ApplicationMeritsTask
       end
     end
 
-    describe "#id_exists_in_ccms?" do
-      subject(:id_exists_in_ccms?) { opponent.id_exists_in_ccms? }
-
-      context "with a ccms_opponent_id value" do
-        let(:opponent) { create(:opponent, ccms_opponent_id: 222_222) }
-
-        it { is_expected.to be_truthy }
-      end
-
-      context "with a nil ccms_opponent_id" do
-        let(:opponent) { create(:opponent, ccms_opponent_id: nil) }
-
-        it { is_expected.to be_falsey }
-      end
-    end
-
     describe "#individual?" do
       subject(:individual?) { opponent.individual? }
 

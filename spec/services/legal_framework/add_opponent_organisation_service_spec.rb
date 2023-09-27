@@ -35,6 +35,7 @@ module LegalFramework
 
           expect(opponent)
             .to have_attributes(ccms_opponent_id: 222_222,
+                                exists_in_ccms: true,
                                 opposable_type: "ApplicationMeritsTask::Organisation",
                                 opposable_id: opponent.opposable.id)
         end

@@ -124,53 +124,11 @@ module CCMS
 
       def generate_other_parties(xml)
         @legal_aid_application.opponents.order(:created_at).each do |opponent|
-          generate_opponent(xml, opponent)
+          OtherPartyAttributeGenerator.call(xml, opponent)
         end
 
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
-          generate_involved_child(xml, child)
-        end
-      end
-
-      def generate_opponent(xml, opponent)
-        xml.__send__(:"casebio:OtherParty") do
-          xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{opponent.generate_ccms_opponent_id}")
-          xml.__send__(:"casebio:SharedInd", false)
-          xml.__send__(:"casebio:OtherPartyDetail") do
-            xml.__send__(:"casebio:Person") do
-              xml.__send__(:"casebio:Name") do
-                xml.__send__(:"common:Title", "")
-                xml.__send__(:"common:Surname", opponent.last_name)
-                xml.__send__(:"common:FirstName", opponent.first_name)
-              end
-              xml.__send__(:"casebio:Address")
-              xml.__send__(:"casebio:RelationToClient", "NONE")
-              xml.__send__(:"casebio:RelationToCase", "OPP")
-              xml.__send__(:"casebio:ContactDetails")
-            end
-          end
-        end
-      end
-
-      def generate_involved_child(xml, child)
-        first_name, last_name = child.split_full_name
-        xml.__send__(:"casebio:OtherParty") do
-          xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{child.generate_ccms_opponent_id}")
-          xml.__send__(:"casebio:SharedInd", false)
-          xml.__send__(:"casebio:OtherPartyDetail") do
-            xml.__send__(:"casebio:Person") do
-              xml.__send__(:"casebio:Name") do
-                xml.__send__(:"common:Title", "")
-                xml.__send__(:"common:Surname", last_name)
-                xml.__send__(:"common:FirstName", first_name)
-              end
-              xml.__send__(:"casebio:DateOfBirth", child.date_of_birth.strftime("%F"))
-              xml.__send__(:"casebio:Address")
-              xml.__send__(:"casebio:RelationToClient", "UNKNOWN")
-              xml.__send__(:"casebio:RelationToCase", "CHILD")
-              xml.__send__(:"casebio:ContactDetails")
-            end
-          end
+          OtherPartyAttributeGenerator.call(xml, child)
         end
       end
 
@@ -284,6 +242,40 @@ module CCMS
       end
 
       def generate_opponent_other_parties_means_instance(xml, other_party, config)
+        if other_party.ccms_child? || other_party.individual?
+          generate_opponent_individual_means_instance(xml, other_party, config)
+        else
+          generate_opponent_organisation_means_instance(xml, other_party, config)
+        end
+      end
+
+      def generate_opponent_individual_means_instance(xml, other_party, config)
+        xml.__send__(:"common:Instances") do
+          xml.__send__(:"common:InstanceLabel", "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__(:"common:Attributes") do
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party:)
+          end
+        end
+      end
+
+      def generate_opponent_organisation_means_instance(xml, other_party, config)
+        if other_party.exists_in_ccms?
+          generate_opponent_existing_organisation_means_instance(xml, other_party, config)
+        else
+          generate_opponent_new_organisation_means_instance(xml, other_party, config)
+        end
+      end
+
+      def generate_opponent_existing_organisation_means_instance(xml, other_party, config)
+        xml.__send__(:"common:Instances") do
+          xml.__send__(:"common:InstanceLabel", other_party.ccms_opponent_id)
+          xml.__send__(:"common:Attributes") do
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party:)
+          end
+        end
+      end
+
+      def generate_opponent_new_organisation_means_instance(xml, other_party, config)
         xml.__send__(:"common:Instances") do
           xml.__send__(:"common:InstanceLabel", "OPPONENT_#{other_party.generate_ccms_opponent_id}")
           xml.__send__(:"common:Attributes") do

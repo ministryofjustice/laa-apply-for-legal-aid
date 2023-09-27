@@ -5,8 +5,16 @@ module ApplicationMeritsTask
 
     belongs_to :legal_aid_application
 
+    def ccms_other_party_type
+      "PERSON"
+    end
+
     def ccms_relationship_to_case
       "CHILD"
+    end
+
+    def ccms_relationship_to_client
+      "UNKNOWN"
     end
 
     def ccms_child?

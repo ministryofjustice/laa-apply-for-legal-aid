@@ -15,6 +15,7 @@ module LegalFramework
         ApplicationMeritsTask::Opponent.create!(
           legal_aid_application_id: @legal_aid_application.id,
           ccms_opponent_id: lfa_organisation.ccms_opponent_id,
+          exists_in_ccms: true,
           opposable_type: ApplicationMeritsTask::Organisation.to_s,
           opposable_id: organisation.id,
         )

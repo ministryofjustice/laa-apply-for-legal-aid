@@ -331,12 +331,38 @@ module CCMS
       options[:other_party].__send__(:full_name)
     end
 
+    def other_party_type(options)
+      options[:other_party].__send__(:ccms_other_party_type)
+    end
+
+    def other_party_person?(options)
+      options[:other_party].__send__(:ccms_other_party_type) == "PERSON"
+    end
+
+    def other_party_organisation?(options)
+      options[:other_party].__send__(:ccms_other_party_type) == "ORGANISATION"
+    end
+
     def other_party_ccms_opponent_id(options)
-      "OPPONENT_#{options[:other_party].__send__(:generate_ccms_opponent_id)}"
+      other_party = options[:other_party]
+
+      if other_party.respond_to?(:exists_in_ccms?) && other_party.exists_in_ccms?
+        other_party.ccms_opponent_id
+      else
+        "OPPONENT_#{other_party.generate_ccms_opponent_id}"
+      end
     end
 
     def other_party_ccms_relationship_to_case(options)
       options[:other_party].__send__(:ccms_relationship_to_case)
+    end
+
+    def other_party_ccms_relationship_to_client(options)
+      options[:other_party].__send__(:ccms_relationship_to_client)
+    end
+
+    def other_party_ccms_opp_relationship_to_client(options)
+      other_party_ccms_relationship_to_client(options).capitalize
     end
 
     def other_party_ccms_child?(options)

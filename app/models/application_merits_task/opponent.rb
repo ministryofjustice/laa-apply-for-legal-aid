@@ -11,17 +11,15 @@ module ApplicationMeritsTask
     delegate :first_name,
              :last_name,
              :full_name,
-             :ccms_relationship_to_case,
-             :ccms_child?,
-             :ccms_opponent_relationship_to_case,
              :name,
+             :ccms_other_party_type,
+             :ccms_relationship_to_case,
+             :ccms_relationship_to_client,
+             :ccms_opponent_relationship_to_case,
+             :ccms_child?,
              :ccms_type_code,
              :ccms_type_text,
              to: :opposable
-
-    def id_exists_in_ccms?
-      ccms_opponent_id.present?
-    end
 
     def individual?
       opposable.is_a?(Individual)
