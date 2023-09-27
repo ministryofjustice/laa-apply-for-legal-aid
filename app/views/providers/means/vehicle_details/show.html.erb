@@ -9,8 +9,8 @@
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: page_title }  do %>
       <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
         <%= form.govuk_radio_buttons_fieldset(:owner, legend: { size: "m", text: t(".owner.question") }) do %>
-          <% Vehicles::DetailsForm.radio_options.each do |f| %>
-            <%= form.govuk_radio_button :owner, f.value, label: { text: f.label }, link_errors: true %>
+          <% Vehicles::DetailsForm.radio_options.each_with_index do |f, index| %>
+            <%= form.govuk_radio_button :owner, f.value, label: { text: f.label }, link_errors: index.zero? %>
           <% end %>
         <% end %>
       <% end %>
