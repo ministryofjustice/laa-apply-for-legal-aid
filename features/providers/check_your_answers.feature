@@ -14,7 +14,7 @@ Feature: Checking answers backwards and forwards
     And I should be on a page showing "How much is left to pay on the mortgage?"
     Then I fill "Property value" with "200000"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I choose "Yes, a partner or ex-partner"
+    Then I choose "Yes, an ex-partner"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
@@ -24,7 +24,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000'
     And the answer for 'Outstanding mortgage' should be '£100,000'
-    And the answer for 'Shared ownership' should be 'Yes, a partner or ex-partner'
+    And the answer for 'Shared ownership' should be 'Yes, an ex-partner'
     And the answer for 'Percentage home' should be '50.00%'
     And the answer for 'Restrictions' should be 'No'
 
