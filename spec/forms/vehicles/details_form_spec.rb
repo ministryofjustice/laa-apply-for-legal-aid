@@ -3,17 +3,19 @@ require "rails_helper"
 RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
   subject(:vehicle_details_form) { described_class.new(form_params) }
 
-  let(:model) { create(:vehicle) }
+  let(:model) { create(:vehicle, :with_applicant_and_partner) }
   let(:params) do
     {
       estimated_value:,
       more_than_three_years_old:,
+      owner:,
       payment_remaining:,
       payments_remain:,
       used_regularly:,
     }
   end
   let(:estimated_value) { "" }
+  let(:owner) { "" }
   let(:more_than_three_years_old) { "" }
   let(:payment_remaining) { "" }
   let(:payments_remain) { "" }
@@ -26,6 +28,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
       it "raises an error" do
         expect(vehicle_details_form.valid?).to be false
         expect(vehicle_details_form.errors.messages).to match_array(
+          owner: ["Select who owns the vehicle"],
           estimated_value: ["Enter the estimated value of the vehicle"],
           more_than_three_years_old: ["Select yes if the vehicle was bought over 3 years ago"],
           payments_remain: ["Select yes if there are any payments left on the vehicle"],
@@ -37,6 +40,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
     context "when values are provided" do
       let(:estimated_value) { "5000.00" }
       let(:more_than_three_years_old) { "false" }
+      let(:owner) { "client" }
       let(:payments_remain) { "true" }
       let(:payment_remaining) { "1000" }
       let(:used_regularly) { "true" }
@@ -53,6 +57,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
 
     let(:estimated_value) { "£5000.00" }
     let(:more_than_three_years_old) { "false" }
+    let(:owner) { "client" }
     let(:payments_remain) { "true" }
     let(:payment_remaining) { 1000 }
     let(:used_regularly) { "true" }
@@ -64,6 +69,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
         expect(model.reload).to have_attributes(
           estimated_value: 5000,
           more_than_three_years_old: false,
+          owner: "client",
           payment_remaining: 1000,
           used_regularly: true,
         )
@@ -79,6 +85,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
         expect(model.reload).to have_attributes(
           estimated_value: 5000,
           more_than_three_years_old: false,
+          owner: "client",
           payment_remaining: 0,
           used_regularly: true,
         )

@@ -29,6 +29,17 @@ Given("I complete the partner journey as far as {string}") do |step|
   visit(path)
 end
 
+Given("I complete the partner journey as far as capital introductions") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_applicant_and_partner,
+  )
+
+  login_as @legal_aid_application.provider
+
+  visit(providers_legal_aid_application_capital_introduction_path(@legal_aid_application))
+end
+
 Given(/^an applicant named (\S+) (\S+) with a partner has completed their true layer interactions$/) do |first_name, last_name|
   @applicant = FactoryBot.create :applicant,
                                  :employed,

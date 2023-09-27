@@ -1,13 +1,18 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
+<% individual = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+                  "your client or their partner"
+                else
+                  "your client"
+                end %>
 
 <section class="print-no-break">
   <%= render "shared/check_answers/property", read_only: %>
 </section>
 
 <section class="print-no-break">
-  <%= render "shared/check_answers/vehicles", read_only: %>
+  <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
     <!-- non-passported truelayer only -->

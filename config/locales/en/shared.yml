@@ -457,7 +457,8 @@ en:
       vehicles:
         providers:
           heading: Vehicles
-          own: Does your client own a vehicle?
+          own: Does %{individual} own a vehicle?
+          owner: Who owns the vehicle?
           estimated_value: What is the estimated value of the vehicle?
           payment_remaining: Are there any payments left on the vehicle?
           more_than_three_years_old: The vehicle was bought more than three years ago?
