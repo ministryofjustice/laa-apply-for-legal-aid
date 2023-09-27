@@ -20,7 +20,7 @@
 #    Then I fill "Outstanding mortgage amount" with "100000"
 #    Then I click 'Save and continue'
 #    Then I should be on a page showing "Does your client own their home with anyone else?"
-#    Then I choose "Yes, a partner or ex-partner"
+#    Then I choose "Yes, an ex-partner"
 #    Then I click 'Save and continue'
 #    Then I should be on a page showing "What % share of their home does your client legally own?"
 #    Then I fill "Percentage home" with "50"

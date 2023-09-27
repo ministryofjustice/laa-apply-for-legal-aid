@@ -960,10 +960,10 @@ en:
           mortgage_question: How much is left to pay on the mortgage?
           mortgage_hint: Check the statement from your client's mortgage provider or lender.
           shared_ownership_question:
-            client: Does anyone else own part of the house, apart from your client?
-            partner: Does anyone else own part of the house, apart from your client or their partner?
+            client: Does your client own the home with anyone else?
+            partner: Does your client or their partner own the home with anyone else?
           shared_ownership_options:
-            partner_or_ex_partner: Yes, a partner or ex-partner
+            partner_or_ex_partner: Yes, an ex-partner
             housing_assocation_or_landlord: Yes, a housing association or landlord
             friend_family_member_or_other_individual: Yes, a friend, family member or other individual
             no_sole_owner: "No"
@@ -972,7 +972,7 @@ en:
               partner: This includes anyone your client or their partner was previously married to, in a civil partnership with, or living with as if they were.
           percentage_question:
             client: What percentage of the home does your client legally own?
-            partner: What percentage of the home do your client and their partner client legally own?
+            partner: What percentage of the home do your client and their partner legally own?
           percentage_hint:
             client: Your client's name must be on the property deeds, lease, freehold or mortgage.
             partner: Your client's or their partner's name must be on the property deeds, lease, freehold or mortgage.
