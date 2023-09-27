@@ -987,6 +987,8 @@ en:
               client: My client
               partner: The partner
               client_and_partner: My client and their partner
+        form:
+          multi_vehicle: Tell us about one vehicle at a time. You can add more later.
           estimated_value:
             question: How much is the vehicle worth?
             use_car_valuation_sites: You can use car valuation websites to find this out.
