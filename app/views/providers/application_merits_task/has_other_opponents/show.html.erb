@@ -32,7 +32,7 @@
                   row.with_cell(text: opponent_type_description(opponent))
                   row.with_cell do
                     unless opponent.exists_in_ccms?
-                      link_to_accessible(
+                      govuk_link_to(
                         t("generic.change"),
                         opponent_url(@legal_aid_application, opponent),
                         class: "govuk-link change-link",
@@ -41,7 +41,7 @@
                     end
                   end
                   row.with_cell do
-                    link_to_accessible(
+                    govuk_link_to(
                       t(".remove"),
                       providers_legal_aid_application_remove_opponent_path(@legal_aid_application, opponent),
                       class: "govuk-link change-link",

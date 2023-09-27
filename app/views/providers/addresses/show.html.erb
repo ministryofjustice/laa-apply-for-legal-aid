@@ -19,7 +19,7 @@
           <%= t(".postcode") %>
           <p class='govuk-body govuk-!-font-weight-bold'>
             <%= form.object.lookup_postcode %>
-            <%= link_to_accessible(
+            <%= govuk_link_to(
                   t("generic.change"),
                   providers_legal_aid_application_address_lookup_path(@legal_aid_application),
                   class: "govuk-body change-link change-postcode-link",
