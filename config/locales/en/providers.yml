@@ -1103,7 +1103,9 @@ en:
               their assets are held under a restraint order
       policy_disregards:
         show:
-          h1-heading: Select if your client has received payments from these schemes or charities
+          h1-heading:
+            client: Which schemes or trusts have paid your client?
+            partner: Which schemes or trusts have paid either your client or their partner?
           england_infected_blood_support: England Infected Blood Support Scheme
           vaccine_damage_payments: Vaccine Damage Payments Scheme
           variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
@@ -1111,7 +1113,7 @@ en:
           national_emergencies_trust: National Emergencies Trust (NET)
           we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
           london_emergencies_trust: The London Emergencies Trust
-          none_of_these: My client has received none of these payments
+          none_of_these: None of these payments
       receives_state_benefits:
         show:
           page_title: Does your client get any benefits?

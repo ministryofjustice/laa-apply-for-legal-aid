@@ -2,7 +2,8 @@
               url: providers_legal_aid_application_means_policy_disregards_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
+  <%= page_template page_title: t(".h1-heading.#{individual}"), template: :basic, form: do %>
 
     <%= form.govuk_check_boxes_fieldset :policy_disregards,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
