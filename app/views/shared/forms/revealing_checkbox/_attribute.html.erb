@@ -1,6 +1,6 @@
 <% check_box_attribute = "check_box_#{attribute}" %>
-<% hint = controller_t "hint.#{check_box_attribute}", default: "" %>
-<% revealing_hint = controller_t "hint.revealing_#{check_box_attribute}", default: "" %>
+<% hint = controller_t "#{individual}.hint.#{check_box_attribute}", default: "" %>
+<% revealing_hint = controller_t "#{individual}.hint.revealing_#{check_box_attribute}", default: "" %>
 <% value = model.send(attribute) %>
 <% @form.__send__("#{check_box_attribute}=", model.send(check_box_attribute).present? || value.present?) %>
 

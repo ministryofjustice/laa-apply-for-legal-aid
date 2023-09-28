@@ -1033,7 +1033,21 @@ en:
       savings_and_investments:
         show:
           h1-heading: Which savings or investments does your client have?
-          none_selected: My client has none of these savings or investments
+          none_selected: None of these savings or investments
+          client:
+            label: Enter the value
+          partner:
+            label: Enter the value for both your client and their partner
+          check_box_cash: Money not in a bank account
+          check_box_other_person_account: Access to another person's bank account
+          check_box_national_savings: ISAs, National Savings Certificates and Premium Bonds
+          check_box_plc_shares: Shares in a public limited company (PLC)
+          check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+          check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+          hint:
+            check_box_cash: For example, cash kept at home.
+            check_box_other_person_account: For example, your client is the signatory on a child's account.
+            check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death.
       other_assets:
         show:
           h1-heading: Which assets does your client have?
