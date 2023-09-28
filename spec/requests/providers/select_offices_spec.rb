@@ -9,10 +9,10 @@ RSpec.describe "provider selects office" do
   let(:provider) { create(:provider, firm:, offices: [first_office, second_office]) }
 
   describe "GET providers/select_office" do
-    subject { get providers_select_office_path }
+    subject(:get_request) { get providers_select_office_path }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -20,7 +20,7 @@ RSpec.describe "provider selects office" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        get_request
       end
 
       it "returns http success" do
@@ -39,7 +39,7 @@ RSpec.describe "provider selects office" do
   end
 
   describe "PATCH providers/select_office" do
-    subject { patch providers_select_office_path, params: }
+    subject(:patch_request) { patch providers_select_office_path, params: }
 
     let(:params) do
       {
@@ -50,7 +50,7 @@ RSpec.describe "provider selects office" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        patch_request
       end
 
       it "updates the record" do

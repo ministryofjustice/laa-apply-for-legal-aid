@@ -14,18 +14,14 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
 
   let(:applicant) { create(:applicant, :not_employed) }
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:ignore_subject) { false }
 
   before do
     login_provider
     allow(legal_aid_application).to receive(:applicant_employed?).and_return(false)
-    subject unless ignore_subject
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/substantive_application" do
-    subject do
-      get providers_legal_aid_application_substantive_application_path(legal_aid_application)
-    end
+    before { get providers_legal_aid_application_substantive_application_path(legal_aid_application) }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
@@ -44,7 +40,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/substantive_application" do
-    subject do
+    subject(:patch_request) do
       patch(
         providers_legal_aid_application_substantive_application_path(legal_aid_application),
         params: params.merge(button_clicked),
@@ -63,6 +59,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
     let(:button_clicked) { {} }
 
     it "updates the application" do
+      patch_request
       legal_aid_application.reload
       expect(legal_aid_application.substantive_application).to eq(substantive_application)
       expect(legal_aid_application.state).to eq("delegated_functions_used")
@@ -82,6 +79,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
         end
 
         it "redirects to capital introductions" do
+          patch_request
           expect(response).to redirect_to(
             providers_legal_aid_application_capital_introduction_path(legal_aid_application),
           )
@@ -89,7 +87,6 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
       end
 
       context "with a negative benefit check" do
-        let(:ignore_subject) { true }
         let(:legal_aid_application) do
           create(
             :legal_aid_application,
@@ -103,7 +100,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
           let!(:dwp_override) { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
           it "redirects to capital introductions" do
-            subject
+            patch_request
             expect(response).to redirect_to(
               providers_legal_aid_application_capital_introduction_path(legal_aid_application),
             )
@@ -114,7 +111,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
           let!(:dwp_override) { create(:dwp_override, :with_no_evidence, legal_aid_application:) }
 
           it "redirects to the open banking consents page" do
-            subject
+            patch_request
             expect(response).to redirect_to(
               providers_legal_aid_application_open_banking_consents_path(legal_aid_application),
             )
@@ -124,6 +121,8 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
     end
 
     context "when no is selected" do
+      before { patch_request }
+
       let(:substantive_application) { false }
 
       it "updates the application" do
@@ -138,12 +137,16 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
     end
 
     context "when not authenticated" do
+      before { patch_request }
+
       let(:login_provider) { nil }
 
       it_behaves_like "a provider not authenticated"
     end
 
     context "with nothing selected" do
+      before { patch_request }
+
       let(:substantive_application) { "" }
 
       it "renders show" do

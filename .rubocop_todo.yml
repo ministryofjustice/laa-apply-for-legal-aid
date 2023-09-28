@@ -110,27 +110,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 302
+# Offense count: 189
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/requests/providers/select_offices_spec.rb'
-    - 'spec/requests/providers/start_spec.rb'
-    - 'spec/requests/providers/submitted_applications_controller_spec.rb'
-    - 'spec/requests/providers/substantive_applications_controller_spec.rb'
-    - 'spec/requests/providers/transactions_controller_spec.rb'
-    - 'spec/requests/providers/uploaded_evidence_collection_spec.rb'
-    - 'spec/requests/providers/use_ccms_controller_spec.rb'
-    - 'spec/requests/providers/vehicles/ages_controller_spec.rb'
-    - 'spec/requests/providers/vehicles/estimated_values_controller_spec.rb'
-    - 'spec/requests/providers/vehicles/regular_uses_controller_spec.rb'
-    - 'spec/requests/providers/vehicles/remaining_payments_controller_spec.rb'
-    - 'spec/requests/saml_sessions_spec.rb'
-    - 'spec/requests/v1/legal_aid_applications_spec.rb'
-    - 'spec/requests/v1/statement_of_cases_spec.rb'
-    - 'spec/requests/v1/uploaded_evidence_collections_spec.rb'
-    - 'spec/requests/v1/workers_spec.rb'
     - 'spec/services/admin/provider_details_service_spec.rb'
     - 'spec/services/bank_holiday_retriever_service_spec.rb'
     - 'spec/services/banking/bank_transaction_balance_calculator_spec.rb'

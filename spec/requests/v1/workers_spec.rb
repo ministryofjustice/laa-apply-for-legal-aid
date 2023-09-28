@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "GET /v1/workers" do
   describe "GET /v1/workers/:worker_id" do
-    subject { get v1_worker_path(id: worker_id) }
+    subject(:get_request) { get v1_worker_path(id: worker_id) }
 
     let(:worker_id) { SecureRandom.hex }
     let(:worker_status) do
@@ -19,7 +19,7 @@ RSpec.describe "GET /v1/workers" do
     end
 
     it "returns a successful response with the status and errors of the worker" do
-      subject
+      get_request
       expected_json = worker_status.slice("status", "errors")
 
       expect(response).to have_http_status(:ok)
