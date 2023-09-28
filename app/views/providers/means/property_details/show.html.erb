@@ -21,7 +21,7 @@
       <% if @legal_aid_application.own_home_mortgage? %>
         <%= form.govuk_text_field :outstanding_mortgage_amount,
                                   label: { text: t(".mortgage_question"), tag: "h2", size: "m" },
-                                  hint: { text: t(".mortgage_hint") },
+                                  hint: { text: t(".mortgage_hint.#{individual}") },
                                   prefix_text: t("currency.gbp"),
                                   width: 5 %>
       <% end %>

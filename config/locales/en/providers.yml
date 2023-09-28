@@ -961,7 +961,9 @@ en:
           values_question: How much is the home they live in worth?
           values_hint: You can use property websites to find the estimated value.
           mortgage_question: How much is left to pay on the mortgage?
-          mortgage_hint: Check the statement from your client's mortgage provider or lender.
+          mortgage_hint:
+            client: Check the statement from your client's mortgage provider or lender.
+            partner: Check the statement from your client's or their partner's mortgage provider or lender.
           shared_ownership_question:
             client: Does your client own the home with anyone else?
             partner: Does your client or their partner own the home with anyone else?
