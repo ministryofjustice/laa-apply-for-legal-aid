@@ -212,8 +212,14 @@ Then("the Property details questions should exist:") do |table|
   expect_questions_in(selector: "#property-details-questions", expected: table)
 end
 
-Then("the Vehicles questions should exist:") do |table|
+Then("the Vehicle ownership question should exist:") do |table|
   expect_questions_in(selector: "#vehicles-questions", expected: table)
+end
+
+Then("the Vehicles questions should exist:") do |table|
+  @legal_aid_application.vehicles.each_with_index do |_vehicle, index|
+    expect_questions_in(selector: "#vehicle-questions__#{index}", expected: table)
+  end
 end
 
 Then("the \"Which bank accounts does your client have?\", for static bank account totals, questions should exist:") do |table|

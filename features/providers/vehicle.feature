@@ -16,6 +16,9 @@ Feature: vehicle
     And I answer "Was the vehicle bought over 3 years ago?" with "Yes"
     And I answer "Is the vehicle in regular use?" with "Yes"
     And I click "Save and continue"
+    Then I should be on a page with title "Does your client have any other vehicles?"
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select 'None of these'
     Then I click 'Save and continue'

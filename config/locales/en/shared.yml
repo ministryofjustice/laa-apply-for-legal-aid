@@ -463,6 +463,11 @@ en:
           payment_remaining: Are there any payments left on the vehicle?
           more_than_three_years_old: The vehicle was bought more than three years ago?
           used_regularly: Is the vehicle in regular use?
+          vehicle_index: Vehicle %{sequence}
+          options:
+            client: My client
+            partner: The partner
+            client_and_partner: My client and their partner
       benefits_breakdown:
         heading: Benefits breakdown
 

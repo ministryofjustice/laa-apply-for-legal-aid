@@ -122,9 +122,11 @@ Feature: Means report
       | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
 
-    And the Vehicles questions should exist:
+    And the Vehicle ownership question should exist:
       | question |
       | Does your client own a vehicle? |
+
+    And the Vehicles questions should exist:
       | What is the estimated value of the vehicle? |
       | Are there any payments left on the vehicle? |
       | The vehicle was bought more than three years ago? |
@@ -288,9 +290,11 @@ Feature: Means report
       | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
 
-    And the Vehicles questions should exist:
+    And the Vehicle ownership question should exist:
       | question |
       | Does your client own a vehicle? |
+
+    And the Vehicles questions should exist:
       | What is the estimated value of the vehicle? |
       | Are there any payments left on the vehicle? |
       | The vehicle was bought more than three years ago? |

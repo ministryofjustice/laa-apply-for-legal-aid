@@ -897,6 +897,12 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   end
 end
 
+Given("I click Check Your Answers Change link for vehicle {string}") do |vehicle|
+  steps %(Then the page should be axe clean skipping: region, aria-allowed-attr) if run_axe?
+
+  find_link("Vehicle #{vehicle}", visible: false).click
+end
+
 Given("I click Check Your Answers Change link for proceeding {string}") do |question|
   steps %(Then the page should be axe clean skipping: region, aria-allowed-attr) if run_axe?
   question_id = question.parameterize(separator: "_")
@@ -942,10 +948,21 @@ Then("I click on the add payments link for outgoing type {string}") do |outgoing
 end
 
 Then("the answer for {string} should be {string}") do |field_name, answer|
+  # TODO: Deprecate or refactor this so it actually works as expected AP-4468 raised to address
   field_name.downcase!
   field_name.gsub!(/\s+/, "_")
   expect(page).to have_css("#app-check-your-answers__#{field_name}")
   expect(page).to have_content(answer)
+end
+
+Then("the {string} answer for vehicle {int} should be {string}") do |field_name, vehicle, answer|
+  field_name.downcase!
+  field_name.gsub!(/\s+/, "_")
+  section = "#app-check-your-answers__vehicle__#{vehicle - 1}_#{field_name}"
+  expect(page).to have_css(section)
+  within section do
+    expect(page).to have_content(answer)
+  end
 end
 
 Then("the answer for all {string} categories should be {string}") do |field_name, expected_answer|

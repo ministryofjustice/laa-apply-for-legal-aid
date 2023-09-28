@@ -6,7 +6,7 @@ RSpec.describe "check passported answers requests" do
   describe "GET /providers/applications/:id/check_passported_answers" do
     subject(:get_request) { get "/providers/applications/#{application.id}/check_passported_answers" }
 
-    let(:vehicle) { create(:vehicle, :populated) }
+    let(:vehicles) { create_list(:vehicle, 1, :populated) }
     let(:own_vehicle) { true }
     let!(:application) do
       create(:legal_aid_application,
@@ -14,7 +14,7 @@ RSpec.describe "check passported answers requests" do
              :with_proceedings,
              :with_passported_state_machine,
              :provider_entering_means,
-             vehicle:,
+             vehicles:,
              own_vehicle:)
     end
 
@@ -30,6 +30,8 @@ RSpec.describe "check passported answers requests" do
         application.reload
         get_request
       end
+
+      let(:vehicle) { application.vehicles.first }
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
@@ -55,7 +57,7 @@ RSpec.describe "check passported answers requests" do
         expect(response.body).to include(gds_number_to_currency(vehicle.estimated_value, unit: "£"))
         expect(response.body).to include(gds_number_to_currency(vehicle.payment_remaining, unit: "£"))
         expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.heading"))
-        expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own"))
+        expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own", individual: "your client"))
         expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.estimated_value"))
         expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.payment_remaining"))
         expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.more_than_three_years_old"))
@@ -211,7 +213,7 @@ RSpec.describe "check passported answers requests" do
                  :with_passported_state_machine,
                  :provider_entering_means,
                  :with_populated_policy_disregards,
-                 vehicle:,
+                 vehicles:,
                  own_vehicle:)
         end
 
@@ -221,11 +223,11 @@ RSpec.describe "check passported answers requests" do
       end
 
       context "when the applicant does not have a vehicle" do
-        let(:vehicle) { nil }
+        let(:vehicles) { [] }
         let(:own_vehicle) { false }
 
         it "displays first vehicle question" do
-          expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own"))
+          expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own", individual: "your client"))
         end
 
         it "does not display other vehicle questions" do

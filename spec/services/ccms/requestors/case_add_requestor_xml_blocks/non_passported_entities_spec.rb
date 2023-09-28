@@ -169,7 +169,7 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_proceedings,
-                     vehicle: nil,
+                     vehicles: [],
                      office:)
             end
 
@@ -227,20 +227,14 @@ module CCMS
 
         describe "entity CARS_AND_MOTOR_VEHICLES" do
           context "when the applicant has a car" do
-            it "generates the entity" do
-              expect(xml).to have_means_entity "CARS_AND_MOTOR_VEHICLES"
-            end
-
-            it "includes the correct ccms instance label" do
-              doc = Nokogiri::XML(xml).remove_namespaces!
-              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "CARS_AND_MOTOR_VEHICLES"]/Instances/InstanceLabel').text
-              expect(instance_label).to eq "the cars & motor vehicle1"
+            it "does not generate the entity" do
+              expect(xml).not_to have_means_entity "CARS_AND_MOTOR_VEHICLES"
             end
           end
 
           context "when the applicant does not have a car" do
             before do
-              legal_aid_application.vehicle.destroy!
+              legal_aid_application.vehicles.destroy_all
               legal_aid_application.reload
             end
 
@@ -394,20 +388,14 @@ module CCMS
 
         describe "entity CAR_USED" do
           context "when the applicant has vehicle" do
-            it "generates the entity block" do
-              expect(xml).to have_means_entity "CAR_USED"
-            end
-
-            it "includes the correct ccms instance label" do
-              doc = Nokogiri::XML(xml).remove_namespaces!
-              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "CAR_USED"]/Instances/InstanceLabel').text
-              expect(instance_label).to eq "the car used1"
+            it "does not generate the entity block" do
+              expect(xml).not_to have_means_entity "CAR_USED"
             end
           end
 
           context "when the applicant has no vehicle" do
             before do
-              legal_aid_application.vehicle.destroy!
+              legal_aid_application.vehicles.destroy_all
               legal_aid_application.reload
             end
 

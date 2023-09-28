@@ -1,7 +1,7 @@
 module CFECivil
   module Components
     class Vehicles < BaseDataBlock
-      delegate :vehicle, to: :legal_aid_application
+      delegate :vehicles, to: :legal_aid_application
 
       def call
         vehicle_request_body.to_json
@@ -10,7 +10,7 @@ module CFECivil
     private
 
       def vehicle_request_body
-        vehicle.nil? ? vehicle_absent_request : vehicle_present_request
+        vehicles.any? ? vehicle_present_request : vehicle_absent_request
       end
 
       def vehicle_absent_request
@@ -21,14 +21,14 @@ module CFECivil
 
       def vehicle_present_request
         {
-          vehicles: [
+          vehicles: vehicles.map do |vehicle|
             {
               value: vehicle.estimated_value.to_f,
               loan_amount_outstanding: vehicle.payment_remaining.to_f,
               date_of_purchase: vehicle.purchased_on&.strftime("%Y-%m-%d"),
               in_regular_use: vehicle.used_regularly,
-            },
-          ],
+            }
+          end,
         }
       end
     end

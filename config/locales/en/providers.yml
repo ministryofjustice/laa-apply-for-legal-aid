@@ -731,6 +731,9 @@ en:
     remove_state_benefits:
       show:
         error: Select yes if you wish to remove this benefit
+    add_another_vehicles:
+      show:
+        error: Select yes if they have other vehicles
     add_another_state_benefits:
       show:
         error: Select yes if they have received other benefits
@@ -974,13 +977,23 @@ en:
           hint: This includes cars, vans and motorcyles.
       vehicle_details:
         show:
-          heading: Vehicle details
+          heading: Amend vehicle details
           owner:
-            question: Who owns the vehicle?
             options:
               client: My client
               partner: The partner
               client_and_partner: My client and their partner
+        new:
+          heading: Vehicle details
+          owner:
+            options:
+              client: My client
+              partner: The partner
+              client_and_partner: My client and their partner
+        form:
+          owner:
+            question: Who owns the vehicle?
+          multi_vehicle: Tell us about one vehicle at a time. You can add more later.
           estimated_value:
             question: How much is the vehicle worth?
             use_car_valuation_sites: You can use car valuation websites to find this out.
@@ -994,6 +1007,19 @@ en:
           regular_uses:
             question: Is the vehicle in regular use?
             include_partner_use: This means the vehicle is used at least once every 2 weeks for things like work, shopping or driving children to school.
+      add_other_vehicles:
+        show:
+          page_title_with_partner: Does your client or their partner have any other vehicles?
+          page_title: Does your client have any other vehicles?
+          existing: "You have added %{count}"
+          vehicle_worth: Vehicle worth %{amount}
+          remove: Remove
+          warning:
+            delete: Are you sure you want to delete this vehicle?
+      remove_vehicles:
+        show:
+          page_title: Are you sure you want to remove the vehicle worth %{estimated_value} from the application?
+          error: Select yes if you want to remove this vehicle from the application.
       savings_and_investments:
         show:
           h1-heading: Which savings or investments does your client have?

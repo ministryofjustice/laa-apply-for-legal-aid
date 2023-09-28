@@ -39,12 +39,6 @@
   instance_label: the change in circumstance1
   yaml_section: :change_in_circumstance
 
-- predicate: :vehicles_present?
-  method: :generate_vehicles_entity
-  entity_name: CARS_AND_MOTOR_VEHICLES
-  instance_label: the cars & motor vehicle1
-  yaml_section: :vehicles
-
 - predicate: :applicant_has_access_to_other_person_account?
   method: :generate_entity
   entity_name: THIRDPARTACC
@@ -96,12 +90,6 @@
   entity_name: OTHERSAVING
   instance_label: the other saving1
   yaml_section: :other_savings
-
-- predicate: :vehicles_present?
-  method: :generate_entity
-  entity_name: CAR_USED
-  instance_label: the car used1
-  yaml_section: :car_used
 
 - predicate: applicant_has_second_home?
   method: :generate_entity

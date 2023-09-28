@@ -44,6 +44,9 @@ Feature: non_passported_journey with capital
     And I answer "Was the vehicle bought over 3 years ago?" with "Yes"
     And I answer "Is the vehicle in regular use?" with "Yes"
     And I click "Save and continue"
+    Then I should be on a page with title "Does your client have any other vehicles?"
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Your client’s bank accounts"
     Then I should be on a page showing "Does your client have any savings accounts they cannot access online?"
     Then I choose 'Yes'

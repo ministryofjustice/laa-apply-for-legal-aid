@@ -52,10 +52,6 @@ module CCMS
         bank_accounts.present?
       end
 
-      def vehicles_present?
-        vehicle.present?
-      end
-
       def submission_case_ccms_reference
         @submission.case_ccms_reference
       end
@@ -333,19 +329,6 @@ module CCMS
         end
       end
 
-      def generate_vehicles_entity(xml, sequence_no, config)
-        xml.__send__(:"common:SequenceNumber", sequence_no)
-        xml.__send__(:"common:EntityName", config[:entity_name])
-        generate_vehicle_instance(xml, vehicle, config) if vehicle
-      end
-
-      def generate_vehicle_instance(xml, vehicle, config)
-        xml.__send__(:"common:Instances") do
-          xml.__send__(:"common:InstanceLabel", config[:instance_label])
-          xml.__send__(:"common:Attributes") { EntityAttributesGenerator.call(self, xml, config[:yaml_section], vehicle:) }
-        end
-      end
-
       def generate_means_proceeding_entity(xml, sequence_no, config)
         xml.__send__(:"common:SequenceNumber", sequence_no)
         xml.__send__(:"common:EntityName", config[:entity_name])
@@ -471,10 +454,6 @@ module CCMS
 
       def bank_accounts
         @bank_accounts ||= applicant.bank_accounts
-      end
-
-      def vehicle
-        @vehicle ||= @legal_aid_application.vehicle
       end
 
       def valuables

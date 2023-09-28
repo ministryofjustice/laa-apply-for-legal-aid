@@ -80,8 +80,6 @@ module CCMS
             ["first_bank_acct_instance", "BANKACC_INPUT_N_7WP2_5A", "text", true, "0"],
             ["first_bank_acct_instance", "BANKACC_INPUT_T_7WP2_4A", "text", true, "."],
             ["first_bank_acct_instance", "BANKACC_INPUT_T_7WP2_6A", "text", true, "Client Sole"],
-            ["car_used", "CARUSED_INPUT_B_14WP2_16A", "text", true, "."],
-            ["car_used", "CARUSED_INPUT_B_14WP2_18A", "text", true, "Other"],
             ["change_in_circumstance", "CHANGE_CIRC_INPUT_T_33WP3_6A", "text", true, "."],
             ["cli_capital", "CLICAPITAL_INPUT_T_9WP2_12A", "text", true, "."],
             ["global_means", "GB_INPUT_B_13WP3_49A", "text", true, "None of the above"],
@@ -169,10 +167,6 @@ module CCMS
             ["timeshare", "TIMESHARE_INPUT_T_6WP2_9A", "text", true, "United Kingdom"],
             ["trust", "TRUST_INPUT_T_16WP2_12A", "text", true, "Interest realised upon a specific event occuring"],
             ["valuable_possessions", "VALPOSSESS_INPUT_T_12WP2_7A", "text", true, "."],
-            ["vehicle_entity", "CARANDVEH_INPUT_C_14WP2_24A", "currency", true, "0"],
-            ["vehicle_entity", "CARANDVEH_INPUT_T_14WP2_20A", "text", true, "."],
-            ["vehicle_entity", "CARANDVEH_INPUT_T_14WP2_21A", "text", true, "."],
-            ["vehicle_entity", "CARANDVEH_INPUT_T_14WP2_22A", "text", true, "."],
             ["will", "WILL_INPUT_T_2WP2_52A", "text", true, "."],
           ]
         end

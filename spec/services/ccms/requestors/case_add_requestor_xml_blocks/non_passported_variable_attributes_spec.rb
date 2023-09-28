@@ -351,14 +351,20 @@ module CCMS
         end
 
         describe "vehicle attributes" do
-          let(:vehicle) { legal_aid_application.vehicle }
+          # NOTE: Updated Sep 2023
+          # These were originally populated because we were unsure if we needed to send _all_ available data so
+          # so sent what we could.  We then realised that when we submit the means report, these fields were only
+          # populating the CCMS means report.  These are now superfluous to the injection because we generate our
+          # own means report and send it as PDF
+
+          let(:vehicle) { legal_aid_application.vehicles.first }
 
           context "when the applicant has no vehicle" do
             before { vehicle.update! estimated_value: nil }
 
-            let(:attrs) { %w[CARANDVEH_INPUT_B_14WP2_28A CARANDVEH_INPUT_C_14WP2_25A CARANDVEH_INPUT_C_14WP2_26A CARANDVEH_INPUT_D_14WP2_27] }
+            let(:attrs) { %w[CARANDVEH_INPUT_B_14WP2_28A CARANDVEH_INPUT_C_14WP2_25A CARANDVEH_INPUT_C_14WP2_26A CARANDVEH_INPUT_D_14WP2_27A] }
 
-            it "does not generate the attributes" do
+            it "no longer generates the block" do
               attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
                 expect(block).not_to be_present
@@ -375,45 +381,50 @@ module CCMS
               context "when in regular use" do
                 let(:regular_use) { true }
 
-                it "generates the block with a value of true" do
+                it "no longer generates the block" do
                   block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_B_14WP2_28A")
-                  expect(block).to have_boolean_response true
-                  expect(block).to be_user_defined
+                  expect(block).not_to be_present
+                  # expect(block).to have_boolean_response false
+                  # expect(block).to be_user_defined
                 end
               end
 
               context "when not in regular use" do
                 let(:regular_use) { false }
 
-                it "generates the block with a value of true" do
+                it "no longer generates the block" do
                   block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_B_14WP2_28A")
-                  expect(block).to have_boolean_response false
-                  expect(block).to be_user_defined
+                  expect(block).not_to be_present
+                  # expect(block).to have_boolean_response false
+                  # expect(block).to be_user_defined
                 end
               end
             end
 
             describe "CARANDVEH_INPUT_C_14WP2_25A current market value" do
-              it "generates the block with the correct value" do
+              it "no longer generates the block" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_25A")
-                expect(block).to have_currency_response 6500.0
-                expect(block).to be_user_defined
+                expect(block).not_to be_present
+                # expect(block).to have_currency_response 0.0
+                # expect(block).to be_user_defined
               end
             end
 
             describe "CARANDVEH_INPUT_C_14WP2_26A - outstanding loan" do
-              it "generates the block with the correct value" do
+              it "no longer generates the block" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_C_14WP2_26A")
-                expect(block).to have_currency_response 3215.66
-                expect(block).to be_user_defined
+                expect(block).not_to be_present
+                # expect(block).to have_currency_response 0.00
+                # expect(block).to be_user_defined
               end
             end
 
             describe "CARANDVEH_INPUT_D_14WP2_27A - date_of_purchase" do
-              it "generates the block with the correct value" do
+              it "no longer generates the block" do
                 block = XmlExtractor.call(xml, :vehicle_entity, "CARANDVEH_INPUT_D_14WP2_27A")
-                expect(block).to have_date_response 5.years.ago.strftime("%d-%m-%Y")
-                expect(block).to be_user_defined
+                expect(block).not_to be_present
+                # expect(block).to have_date_response Date.new(1970, 1, 1).strftime("%d-%m-%Y")
+                # expect(block).to be_user_defined
               end
             end
           end

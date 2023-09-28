@@ -22,11 +22,12 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
              outstanding_mortgage_amount: 963_023.55,
              shared_ownership: true,
              percentage_home: 38.47,
-             vehicle: build(:vehicle,
-                            estimated_value: 5_000,
-                            payment_remaining: 250,
-                            purchased_on: Date.new(2023, 1, 10),
-                            used_regularly: true),
+             vehicles: build_list(:vehicle,
+                                  1,
+                                  estimated_value: 5_000,
+                                  payment_remaining: 250,
+                                  purchased_on: Date.new(2023, 1, 10),
+                                  used_regularly: true),
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
 
@@ -90,11 +91,12 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
              outstanding_mortgage_amount: 963_023.55,
              shared_ownership: true,
              percentage_home: 38.47,
-             vehicle: build(:vehicle,
-                            estimated_value: 5_000,
-                            payment_remaining: 250,
-                            purchased_on: Date.new(2023, 1, 10),
-                            used_regularly: true),
+             vehicles: build_list(:vehicle,
+                                  1,
+                                  estimated_value: 5_000,
+                                  payment_remaining: 250,
+                                  purchased_on: Date.new(2023, 1, 10),
+                                  used_regularly: true),
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
 

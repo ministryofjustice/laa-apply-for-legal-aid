@@ -40,7 +40,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :cash_transactions, dependent: :destroy
   has_many :dependants, dependent: :destroy
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: "CCMS::Submission", inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :vehicle, dependent: :destroy
+  has_many :vehicles, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
   has_one :dwp_override, dependent: :destroy
   has_one :bank_transaction_report, -> { where(attachment_type: "bank_transaction_report") }, class_name: "Attachment", inverse_of: :legal_aid_application, dependent: :destroy

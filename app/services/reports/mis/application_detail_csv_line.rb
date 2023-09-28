@@ -40,7 +40,7 @@ module Reports
                :used_delegated_functions_reported_on,
                :lowest_prospect_of_success,
                :hmrc_responses,
-               :vehicle, to: :laa
+               :vehicles, to: :laa
 
       delegate :case_ccms_reference, to: :ccms_submission
 
@@ -262,16 +262,16 @@ module Reports
       end
 
       def vehicle_details
-        @line << yesno(vehicle.present?)
-        vehicle.present? ? vehicle_attrs : @line += ["", "", "", "", ""]
+        @line << yesno(vehicles.any?)
+        vehicles.any? ? vehicle_attrs : @line += ["", "", "", "", ""]
       end
 
       def vehicle_attrs
-        @line << vehicle.estimated_value
-        @line << (nil_or_zero?(vehicle.payment_remaining) ? "No" : "Yes")
-        @line << (nil_or_zero?(vehicle.payment_remaining) ? "" : vehicle.payment_remaining)
-        @line << vehicle.purchased_on&.strftime("%Y-%m-%d")
-        @line << yesno(vehicle.used_regularly?)
+        @line << vehicles.first.estimated_value
+        @line << (nil_or_zero?(vehicles.first.payment_remaining) ? "No" : "Yes")
+        @line << (nil_or_zero?(vehicles.first.payment_remaining) ? "" : vehicles.first.payment_remaining)
+        @line << vehicles.first.purchased_on&.strftime("%Y-%m-%d")
+        @line << yesno(vehicles.first.used_regularly?)
       end
 
       def savings_and_investment_details
