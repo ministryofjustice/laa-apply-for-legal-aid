@@ -10,27 +10,27 @@ RSpec.describe "SamlSessionsController" do
   let(:provider_details_api_reponse) { api_response.to_json }
 
   describe "DELETE /providers/sign_out" do
-    subject { delete destroy_provider_session_path }
+    subject(:delete_request) { delete destroy_provider_session_path }
 
     before { sign_in provider }
 
     it "logs user out" do
-      subject
+      delete_request
       expect(controller.current_provider).to be_nil
     end
 
     it "records id of logged out provider in session" do
-      subject
+      delete_request
       expect(session["signed_out"]).to be true
     end
 
     it "records the signout page as the feedback return path" do
-      subject
+      delete_request
       expect(session["feedback_return_path"]).to eq destroy_provider_session_path
     end
 
     it "redirects to the feedback page" do
-      subject
+      delete_request
       expect(response).to redirect_to(new_feedback_path)
       follow_redirect!
       expect(page).to have_content(I18n.t("saml_sessions.destroy.notice"))
@@ -38,7 +38,7 @@ RSpec.describe "SamlSessionsController" do
   end
 
   describe "POST /providers/saml/auth" do
-    subject { post provider_session_path }
+    subject(:post_request) { post provider_session_path }
 
     before do
       allow_any_instance_of(Warden::Proxy).to receive(:authenticate!).and_return(provider)
@@ -56,11 +56,11 @@ RSpec.describe "SamlSessionsController" do
 
           it "calls the Provider details api" do
             expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-            subject
+            post_request
           end
 
           it "updates the record with firm and offices" do
-            subject
+            post_request
             firm = Firm.find_by(ccms_id: raw_details_response[:providerFirmId])
             expect(provider.firm_id).to eq firm.id
             expect(firm.offices.size).to eq 1
@@ -68,7 +68,7 @@ RSpec.describe "SamlSessionsController" do
           end
 
           it "displays the select office page" do
-            subject
+            post_request
             expect(response).to redirect_to providers_confirm_office_path
           end
         end
@@ -82,16 +82,16 @@ RSpec.describe "SamlSessionsController" do
 
           it "does not call the ProviderDetailsCreator" do
             expect(ProviderDetailsCreator).not_to receive(:call)
-            subject
+            post_request
           end
 
           it "updates the provider record with invalid login details" do
-            subject
+            post_request
             expect(provider.invalid_login_details).to eq "role"
           end
 
           it "redirects to the confirm office path" do
-            subject
+            post_request
             expect(response).to redirect_to providers_confirm_office_path
           end
         end
@@ -103,16 +103,16 @@ RSpec.describe "SamlSessionsController" do
 
           it "calls the Provider details creator" do
             expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-            subject
+            post_request
           end
 
           it "updates the invalid login details on the provider record" do
-            subject
+            post_request
             expect(provider.invalid_login_details).to eq "api_details_user_not_found"
           end
 
           it "redirects to confirm offices page" do
-            subject
+            post_request
             expect(response).to redirect_to providers_confirm_office_path
           end
         end
@@ -123,7 +123,7 @@ RSpec.describe "SamlSessionsController" do
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
 
           it "updates the invalid login details on the provider record" do
-            subject
+            post_request
             expect(provider.invalid_login_details).to eq "provider_details_api_error"
           end
         end
@@ -139,12 +139,12 @@ RSpec.describe "SamlSessionsController" do
           ProviderDetailsCreatorWorker.clear
           expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id).and_call_original
           expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-          subject
+          post_request
           ProviderDetailsCreatorWorker.drain
         end
 
         it "redirects to confirm offices page" do
-          subject
+          post_request
           expect(response).to redirect_to providers_confirm_office_path
         end
       end
@@ -157,11 +157,11 @@ RSpec.describe "SamlSessionsController" do
 
           it "calls the Provider details api" do
             expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-            subject
+            post_request
           end
 
           it "updates the record with firm and offices" do
-            subject
+            post_request
             firm = Firm.find_by(ccms_id: raw_details_response[:providerFirmId])
             expect(provider.firm_id).to eq firm.id
             expect(firm.offices.size).to eq 1
@@ -169,7 +169,7 @@ RSpec.describe "SamlSessionsController" do
           end
 
           it "displays the select office page" do
-            subject
+            post_request
             expect(response).to redirect_to providers_confirm_office_path
           end
         end
@@ -184,7 +184,7 @@ RSpec.describe "SamlSessionsController" do
             expect(provider).to receive(:update_details).and_call_original
             expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
             expect(ProviderDetailsCreator).not_to receive(:call).with(provider)
-            subject
+            post_request
           end
         end
       end
@@ -192,12 +192,12 @@ RSpec.describe "SamlSessionsController" do
   end
 
   describe "Login failed at LAA Portal" do
-    subject { post provider_session_path }
+    subject(:post_request) { post provider_session_path }
 
     before { allow_any_instance_of(Devise::SessionsController).to receive(:create).and_raise(StandardError) }
 
     it "redirects to access denied" do
-      subject
+      post_request
       expect(response).to redirect_to(error_path(:access_denied))
     end
   end

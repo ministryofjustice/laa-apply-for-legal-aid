@@ -8,10 +8,10 @@ module Providers
     let(:i18n_error_path) { "activemodel.errors.models.uploaded_evidence_collection.attributes.original_file" }
 
     describe "GET /providers/applications/:legal_aid_application_id/uploaded_evidence_collection" do
-      subject { get providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application) }
+      subject(:get_request) { get providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application) }
 
       context "when the provider is not authenticated" do
-        before { subject }
+        before { get_request }
 
         it_behaves_like "a provider not authenticated"
       end
@@ -20,7 +20,7 @@ module Providers
         before do
           legal_aid_application.uploaded_evidence_collection = nil
           login_as provider
-          subject
+          get_request
         end
 
         it "returns http success" do
@@ -34,10 +34,10 @@ module Providers
     end
 
     describe "GET /providers/applications/:legal_aid_application_id/uploaded_evidence_collection/list" do
-      subject { get list_providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application) }
+      subject(:get_request) { get list_providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application) }
 
       context "when the provider is not authenticated" do
-        before { subject }
+        before { get_request }
 
         it_behaves_like "a provider not authenticated"
       end
@@ -46,7 +46,7 @@ module Providers
         before do
           legal_aid_application.uploaded_evidence_collection = nil
           login_as provider
-          subject
+          get_request
         end
 
         it "returns http success" do
@@ -56,7 +56,7 @@ module Providers
     end
 
     describe "PATCH /providers/applications/:legal_aid_application_id/uploaded_evidence_collection" do
-      subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: }
+      subject(:patch_request) { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: }
 
       let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
       let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
@@ -83,20 +83,20 @@ module Providers
         let(:button_clicked) { upload_button }
 
         it "updates the record" do
-          subject
+          patch_request
           legal_aid_application.reload
           expect(uploaded_evidence_collection.original_attachments.count).to eq(1)
         end
 
         it "stores the original filename" do
-          subject
+          patch_request
           legal_aid_application.reload
           attachment = uploaded_evidence_collection.original_attachments.first
           expect(attachment.original_filename).to eq "hello_world.pdf"
         end
 
         it "returns http success" do
-          subject
+          patch_request
           expect(response).to have_http_status(:ok)
         end
 
@@ -104,7 +104,7 @@ module Providers
           let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
 
           it "updates the record" do
-            subject
+            patch_request
             expect(uploaded_evidence_collection.original_attachments.first).to be_present
           end
 
@@ -112,25 +112,25 @@ module Providers
             let!(:uploaded_evidence_collection) { create(:uploaded_evidence_collection, :with_multiple_files_attached, legal_aid_application:) }
 
             it "updates the record" do
-              subject
+              patch_request
               expect(uploaded_evidence_collection.original_attachments.count).to eq 4
             end
 
             it "increments the attachment filename" do
-              subject
+              patch_request
               attachment_names = uploaded_evidence_collection.original_attachments.map(&:attachment_name)
               expect(attachment_names).to include("uploaded_evidence_collection_4")
             end
           end
 
           it "has the relevant content type" do
-            subject
+            patch_request
             document = uploaded_evidence_collection.original_attachments.first.document
             expect(document.content_type).to eq "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           end
 
           it "returns http success" do
-            subject
+            patch_request
             expect(response).to have_http_status(:ok)
           end
         end
@@ -140,12 +140,12 @@ module Providers
 
           it "does not update the record" do
             uploaded_evidence_collection
-            subject
+            patch_request
             expect(uploaded_evidence_collection).to be_nil
           end
 
           it "returns error message" do
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.content_type_invalid")
             expect(unescaped_response_body).to include(error)
           end
@@ -160,7 +160,7 @@ module Providers
 
           it "does not save the object and raises an error" do
             uploaded_evidence_collection
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
             expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
@@ -175,7 +175,7 @@ module Providers
           end
 
           it "updates the record" do
-            subject
+            patch_request
             expect(uploaded_evidence_collection.original_attachments.first).to be_present
           end
         end
@@ -185,7 +185,7 @@ module Providers
 
           it "does not save the object and raises an error" do
             uploaded_evidence_collection
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
             expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
@@ -197,7 +197,7 @@ module Providers
 
           it "does not save the object and raises an error" do
             uploaded_evidence_collection
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
             expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
@@ -209,7 +209,7 @@ module Providers
 
           it "does not save the object and raises an error" do
             uploaded_evidence_collection
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
             expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
@@ -221,12 +221,12 @@ module Providers
 
           it "does not update the record" do
             uploaded_evidence_collection
-            subject
+            patch_request
             expect(uploaded_evidence_collection).to be_nil
           end
 
           it "return error message" do
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.no_file_chosen")
             expect(unescaped_response_body).to include(error)
           end
@@ -238,7 +238,7 @@ module Providers
           end
 
           it "returns error message" do
-            subject
+            patch_request
             error = I18n.t("#{i18n_error_path}.system_down")
             expect(unescaped_response_body).to include(error)
           end
@@ -253,13 +253,13 @@ module Providers
             let(:params_uploaded_evidence_collection) { {} }
 
             it "does not add a record" do
-              subject
+              patch_request
               expect(legal_aid_application.uploaded_evidence_collection).to be_nil
             end
 
             context "when no mandatory evidence is required" do
               it "redirects to the next page" do
-                subject
+                patch_request
                 expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
               end
             end
@@ -280,7 +280,7 @@ module Providers
                 let(:missing_categories) { %w[benefit_evidence] }
 
                 it "raises an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: "Universal Credit")
                   expect(unescaped_response_body).to include(error)
                 end
@@ -290,7 +290,7 @@ module Providers
                 let(:missing_categories) { %w[employment_evidence] }
 
                 it "raises an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
                   expect(unescaped_response_body).to include(error)
                 end
@@ -309,14 +309,14 @@ module Providers
               before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence]) }
 
               it "redirects to the next page" do
-                subject
+                patch_request
                 expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
               end
             end
 
             context "when the file is uncategorised" do
               it "raises an error" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
                 expect(unescaped_response_body).to include(error)
               end
@@ -338,7 +338,7 @@ module Providers
                 let(:missing_categories) { %w[benefit_evidence] }
 
                 it "raises an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: "Universal Credit")
                   expect(unescaped_response_body).to include(error)
                 end
@@ -348,7 +348,7 @@ module Providers
                 let(:missing_categories) { %w[employment_evidence] }
 
                 it "raises an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
                   expect(unescaped_response_body).to include(error)
                 end
@@ -359,7 +359,7 @@ module Providers
                 let(:missing_categories) { %w[benefit_evidence] }
 
                 it "raises two errors" do
-                  subject
+                  patch_request
                   benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: "Universal Credit")
                   uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
                   expect(unescaped_response_body).to include(benefit_error)
@@ -381,14 +381,14 @@ module Providers
               before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence]) }
 
               it "redirects to the next page" do
-                subject
+                patch_request
                 expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
               end
             end
 
             context "when a file is uncategorised" do
               it "raises an error" do
-                subject
+                patch_request
                 error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
                 expect(unescaped_response_body).to include(error)
               end
@@ -414,7 +414,7 @@ module Providers
                 end
 
                 it "raises an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: "Universal Credit")
                   expect(unescaped_response_body).to include(error)
                 end
@@ -429,7 +429,7 @@ module Providers
                 end
 
                 it "raises an error" do
-                  subject
+                  patch_request
                   error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
                   expect(unescaped_response_body).to include(error)
                 end
@@ -439,7 +439,7 @@ module Providers
                 let(:missing_categories) { %w[benefit_evidence employment_evidence] }
 
                 it "raises two errors" do
-                  subject
+                  patch_request
                   benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: "Universal Credit")
                   employment_error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
                   uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
@@ -458,13 +458,13 @@ module Providers
 
         context "when no files have been uploaded" do
           it "updates the record" do
-            subject
+            patch_request
             expect(uploaded_evidence_collection).to be_present
           end
         end
 
         it "redirects to provider draft endpoint" do
-          subject
+          patch_request
           expect(response).to redirect_to provider_draft_endpoint
         end
 
@@ -472,14 +472,14 @@ module Providers
           let(:original_file) { nil }
 
           it "redirects to provider draft endpoint" do
-            subject
+            patch_request
             expect(response).to redirect_to provider_draft_endpoint
           end
         end
       end
 
       context "when submitted with Delete" do
-        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: delete_params }
+        subject(:patch_request) { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: delete_params }
 
         let(:button_clicked) { delete_button }
         let(:uploaded_evidence_collection) { create(:uploaded_evidence_collection, :with_original_file_attached) }
@@ -502,14 +502,14 @@ module Providers
         end
 
         it "returns http success" do
-          subject
+          patch_request
           expect(response).to have_http_status(:ok)
         end
 
         context "when only original file exists" do
           it "deletes the file" do
             attachment_id = original_file.id
-            expect { subject }.to change(Attachment, :count).by(-1)
+            expect { patch_request }.to change(Attachment, :count).by(-1)
             expect(Attachment.exists?(attachment_id)).to be(false)
           end
         end
@@ -518,7 +518,7 @@ module Providers
           let(:uploaded_evidence_collection) { create(:uploaded_evidence_collection, :with_original_and_pdf_files_attached) }
 
           it "deletes both attachments" do
-            expect { subject }.to change(Attachment, :count).by(-2)
+            expect { patch_request }.to change(Attachment, :count).by(-2)
           end
         end
 
@@ -535,7 +535,7 @@ module Providers
           end
 
           it "returns http success" do
-            subject
+            patch_request
             expect(response).to have_http_status(:ok)
           end
         end

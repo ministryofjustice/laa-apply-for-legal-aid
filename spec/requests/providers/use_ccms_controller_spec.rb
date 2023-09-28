@@ -5,10 +5,10 @@ RSpec.describe Providers::UseCCMSController do
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/use_ccms" do
-    subject { get providers_legal_aid_application_use_ccms_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_use_ccms_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { get_request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -19,19 +19,19 @@ RSpec.describe Providers::UseCCMSController do
       end
 
       context "when state is not already use_ccms" do
-        before { subject }
+        before { get_request }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
         end
 
         it "shows text to use CCMS" do
-          subject
+          get_request
           expect(response.body).to include(I18n.t("shared.use_ccms.title_html"))
         end
 
         it "sets the state to use_ccms" do
-          subject
+          get_request
           expect(legal_aid_application.reload.state).to eq "use_ccms"
         end
       end
@@ -40,18 +40,18 @@ RSpec.describe Providers::UseCCMSController do
         before { legal_aid_application.use_ccms!(:applicant_self_employed) }
 
         it "returns http success" do
-          subject
+          get_request
           expect(response).to have_http_status(:ok)
         end
 
         it "does not call :use_ccms!" do
           expect(legal_aid_application).not_to receive(:use_ccms!)
-          subject
+          get_request
         end
 
         it "leaves the ccms reason as :applicant_self_employed" do
           allow_any_instance_of(ActionDispatch::Request).to receive(:referer).and_return("http://www.example.com/providers")
-          subject
+          get_request
           expect(legal_aid_application.reload.ccms_reason).to eq "applicant_self_employed"
         end
       end

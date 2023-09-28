@@ -28,14 +28,14 @@ RSpec.describe Providers::SubmittedApplicationsController do
   before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
 
   describe "GET /providers/applications/:legal_aid_application_id/submitted_application" do
-    subject do
+    subject(:get_request) do
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
 
     before do
       legal_aid_application.reload
       login
-      subject
+      get_request
     end
 
     it "renders successfully" do
@@ -57,7 +57,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     end
 
     it "includes the name of the firm" do
-      subject
+      get_request
       expect(unescaped_response_body).to include(firm.name)
     end
 
@@ -91,7 +91,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
   end
 
   describe "employment income table" do
-    subject do
+    subject(:get_request) do
       login
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
@@ -112,7 +112,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     let(:translation_path) { "shared.employment_income_table" }
 
     shared_examples "employment data is not present" do
-      before { subject }
+      before { get_request }
 
       it "does not display the employment income table" do
         expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.benefits_in_kind")
@@ -128,7 +128,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
 
     context "when employment data is present" do
       it "displays the employment income table" do
-        subject
+        get_request
         expect(unescaped_response_body).to include I18n.t("#{translation_path}.heading")
         expect(unescaped_response_body).to include I18n.t("#{translation_path}.benefits_in_kind")
         expect(unescaped_response_body).to include I18n.t("#{translation_path}.monthly_income_before_tax")
@@ -137,7 +137,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
       end
 
       it "populates the employment income table with the correct data" do
-        subject
+        get_request
         expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_benefits_in_kind)
         expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_gross_income)
         expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_national_insurance)
@@ -145,19 +145,19 @@ RSpec.describe Providers::SubmittedApplicationsController do
       end
 
       it "displays the Other income header" do
-        subject
+        get_request
         expect(unescaped_response_body).to include I18n.t("shared.review_application.income_payments_and_assets.other_income")
       end
 
       it "does not display the extra employment information details" do
-        subject
+        get_request
         expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.employment_details")
       end
 
       context "when employment details have been entered by the solicitor" do
         before do
           legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: "test details")
-          subject
+          get_request
         end
 
         it "displays the extra employment information details" do
