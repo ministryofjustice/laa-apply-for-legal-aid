@@ -2,16 +2,16 @@
               url: providers_legal_aid_application_means_restrictions_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
+  <%= page_template page_title: t(".#{individual}.h1-heading"), template: :basic, form: do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_restrictions,
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
       <p class="govuk-body"><%= t(".for_example") %></p>
       <%= list_from_translation_path(".means.restrictions.show.examples") %>
-      <%= render "shared/means/cost_of_living_details" %>
       <%= form.govuk_radio_button :has_restrictions, true, link_errors: true, label: { text: t("generic.yes") } do %>
         <%= form.govuk_text_area :restrictions_details,
-                                 label: { text: t(".restrictions_details") }, rows: 5 %>
+                                 label: { text: t(".#{individual}.restrictions_details") }, rows: 5 %>
       <% end %>
       <%= form.govuk_radio_button :has_restrictions, false, label: { text: t("generic.no") } %>
     <% end %>
