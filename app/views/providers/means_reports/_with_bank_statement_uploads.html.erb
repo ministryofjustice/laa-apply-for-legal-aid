@@ -41,7 +41,7 @@
 
   <section class="print-no-break">
     <% if @legal_aid_application.full_employment_details? %>
-      <%= render "shared/check_answers/full_employment_details", read_only: true, partner: false %>
+      <%= render "shared/check_answers/full_employment_details", individual: "Your client", read_only: true, partner: false %>
     <% end %>
   </section>
 
