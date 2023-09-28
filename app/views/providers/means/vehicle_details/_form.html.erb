@@ -43,7 +43,7 @@
         <% end %>
         <%= form.govuk_radio_button(:payments_remain, false,
                                     label: { text: t("generic.no") },
-                                    checked: @form.payment_remaining.present? && @form.payment_remaining.zero?) %>
+                                    checked: @form.payment_remaining.present? && @form.payment_remaining.eql?(0)) %>
       <% end %>
 
       <%= form.govuk_collection_radio_buttons(
