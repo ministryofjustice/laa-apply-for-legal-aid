@@ -35,7 +35,7 @@
                   govuk_link_to(
                     t("generic.change"),
                     providers_legal_aid_application_involved_child_path(@legal_aid_application, involved_child),
-                    class: "govuk-link change-link",
+                    class: "change-link",
                     suffix: involved_child.full_name,
                   )
                 end
@@ -43,7 +43,7 @@
                   govuk_link_to(
                     t(".remove"),
                     providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
-                    class: "govuk-link change-link",
+                    class: "change-link",
                     suffix: involved_child.full_name,
                   )
                 end

@@ -2,7 +2,7 @@
   <span class="app-task-list__task-name">
     <% formatted_name = t(".#{name}") %>
     <% if status != :waiting_for_dependency %>
-      <%= link_to_accessible formatted_name, url, aria_describedby: "#{name}-status" %>
+      <%= govuk_link_to formatted_name, url, aria_describedby: "#{name}-status" %>
     <% else %>
       <p><%= formatted_name %></p>
     <% end %>

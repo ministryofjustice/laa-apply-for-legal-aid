@@ -35,7 +35,7 @@
                       govuk_link_to(
                         t("generic.change"),
                         opponent_url(@legal_aid_application, opponent),
-                        class: "govuk-link change-link",
+                        class: "change-link",
                         suffix: opponent.full_name,
                       )
                     end
@@ -44,7 +44,7 @@
                     govuk_link_to(
                       t(".remove"),
                       providers_legal_aid_application_remove_opponent_path(@legal_aid_application, opponent),
-                      class: "govuk-link change-link",
+                      class: "change-link",
                       suffix: opponent.full_name,
                     )
                   end

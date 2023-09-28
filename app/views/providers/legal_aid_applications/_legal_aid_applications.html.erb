@@ -73,7 +73,7 @@
                   concat render partial: "shared/partials/modal_dialogue", locals: { application:, index: }
 
                   unless application.summary_state == :submitted
-                    concat link_to_accessible(
+                    concat govuk_link_to(
                       t(".delete"),
                       providers_legal_aid_application_delete_path(application),
                       class: "govuk-button govuk-button--secondary govuk-!-margin-1 no-script",

@@ -3,6 +3,6 @@
     <span class="app-task-list__section-number">
       <%= image_tag("plus_icon.svg", alt: "") %>
     </span>
-    <%= link_to_accessible t(".add_other_outgoings"), providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application), class: "govuk-body" %>
+    <%= govuk_link_to t(".add_other_outgoings"), providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application), class: "govuk-body" %>
   </div>
 </li>

@@ -9,7 +9,7 @@
   <p class="govuk-body">
     <%= t(".warning.application_deadline_date") %><%= @legal_aid_application.substantive_application_deadline_on %>.
   </p>
-  <%= link_to_accessible(
+  <%= govuk_link_to(
         t(".back_home"),
         providers_legal_aid_applications_path,
         class: "govuk-button govuk-button",

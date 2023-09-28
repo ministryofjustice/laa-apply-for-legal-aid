@@ -22,7 +22,7 @@
         <h2 class="govuk-heading-m"><%= t ".section_proceeding.heading" %></h2>
       </div>
       <div class="govuk-grid-column-one-third">
-        <p><%= link_to_accessible t(".change"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application), class: "govuk-link govuk-link-right" %></p>
+        <p><%= govuk_link_to t(".change"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application), class: "govuk-link-right" %></p>
       </div>
     </div>
     <%= render(
@@ -44,7 +44,7 @@
         <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
       </div>
       <div class="govuk-grid-column-one-third">
-        <p><%= link_to_accessible t(".change"), providers_legal_aid_application_limitations_path(@legal_aid_application), class: "govuk-link govuk-link-right" %></p>
+        <p><%= govuk_link_to t(".change"), providers_legal_aid_application_limitations_path(@legal_aid_application), class: "govuk-link-right" %></p>
       </div>
     </div>
     <%= render(
@@ -60,7 +60,7 @@
         <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
       </div>
       <div class="govuk-grid-column-one-third">
-        <p><%= link_to_accessible t(".change"), providers_legal_aid_application_limitations_path(@legal_aid_application), class: "govuk-link govuk-link-right" %></p>
+        <p><%= govuk_link_to t(".change"), providers_legal_aid_application_limitations_path(@legal_aid_application), class: "govuk-link-right" %></p>
       </div>
     </div>
     <%= render(
