@@ -2,21 +2,47 @@
               url: providers_legal_aid_application_means_other_assets_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
   <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
 
     <%= form.govuk_check_boxes_fieldset :other_assets,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
-                                        hint: { text: t(".hint") } do %>
-      <%= render "shared/means/cost_of_living_details" %>
+                                        hint: { text: t(".fieldset_hint") } do %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#other-assets-declaration-none-selected-true-field">
-          <%= render partial: "/shared/forms/revealing_checkbox/attribute",
-                     collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
-                     locals: { model: @form, form: } %>
-          <%= render partial: "/providers/means/other_assets/second_home_conditional_checkbox", locals: { model: @form, form: } %>
-          <%= render partial: "/shared/forms/revealing_checkbox/attribute",
-                     collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
-                     locals: { model: @form, form: } %>
+          <%= form.govuk_check_box :check_box_valuable_items_value,
+                                   true,
+                                   multiple: false,
+                                   link_errors: true,
+                                   label: { text: t(".check_box_valuable_items_value") },
+                                   hint: { text: t(".hint.check_box_valuable_items_value", default: "") } do %>
+            <% value = @form.send(:valuable_items_value) %>
+            <% @form.__send__(`:"check_box_valuable_items_value="`, @form.send(:check_box_valuable_items_value).present? || value.present?) %>
+            <%= form.govuk_text_field :valuable_items_value,
+                                      value: number_to_currency_or_original_string(value),
+                                      label: { text: t(".#{individual}.valuable_items_value") },
+                                      prefix_text: t("currency.gbp"),
+                                      width: "one-third" %>
+          <% end %>
+
+          <%= render partial: "/providers/means/other_assets/second_home_conditional_checkbox", locals: { model: @form, form:, individual: } %>
+
+          <% Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES.each do |attribute| %>
+            <% check_box_attribute = "check_box_#{attribute}" %>
+            <% value = @form.send(attribute) %>
+            <% @form.__send__("#{check_box_attribute}=", @form.send(check_box_attribute).present? || value.present?) %>
+            <%= form.govuk_check_box check_box_attribute,
+                                     true,
+                                     multiple: false,
+                                     label: { text: t(".#{check_box_attribute}") },
+                                     hint: { text: t(".hint.#{check_box_attribute}", default: "") } do %>
+              <%= form.govuk_text_field attribute,
+                                        value: number_to_currency_or_original_string(value),
+                                        label: { text: t(".#{individual}.#{attribute}") },
+                                        prefix_text: t("currency.gbp"),
+                                        width: "one-third" %>
+            <% end %>
+          <% end %>
         </div>
       </div>
 

@@ -1051,13 +1051,41 @@ en:
       other_assets:
         show:
           h1-heading: Which assets does your client have?
-          hint: Select all that apply. Do not include any government Cost of Living Payments owed to your client.
-          none_of_these: My client has none of these assets
+          fieldset_hint: Select all that apply.
+          none_of_these: None of these assets
+          check_box_valuable_items_value: Any valuable items worth £500 or more
+          check_box_timeshare_property_value: Timeshare property
+          check_box_land_value: Land
+          check_box_inherited_assets_value: Money or assets from the estate of a person who has died
+          check_box_money_owed_value: Money owed to them, including from a private mortgage
+          check_box_trust_value: Interest in a trust
+          hint:
+            check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
+          client:
+            valuable_items_value: Enter the value
+            timeshare_property_value: Enter the value, minus any loan and sale costs
+            land_value: Enter the value
+            inherited_assets_value: Enter the value
+            money_owed_value: Enter the amount owed
+            trust_value: Enter the value
+          partner:
+            valuable_items_value: Enter the value for both your client and their partner
+            timeshare_property_value: Enter the value, minus any loan and sale costs for both your client and their partner
+            land_value: Enter the value for both your client and their partner
+            inherited_assets_value: Enter the value for both your client and their partner
+            money_owed_value: Enter the amount owed for both your client and their partner
+            trust_value: Enter the value for both your client and their partner
         second_home_conditional_checkbox:
-          check_box_second_home: Second property or holiday home
-          second_home_mortgage: Enter the outstanding mortgage amount
-          second_home_percentage: Enter the share your client owns
-          second_home_value: Enter the estimated value
+          client:
+            check_box_second_home: Second property or holiday home
+            second_home_value: Enter the value
+            second_home_mortgage: Enter the outstanding mortgage amount
+            second_home_percentage: Enter the share your client owns
+          partner:
+            check_box_second_home: Second property or holiday home
+            second_home_value: Enter the value for both your client and their partner
+            second_home_mortgage: Enter the outstanding mortgage amount for both your client and their partner
+            second_home_percentage: Enter the share your client and their partner owns
       restrictions:
         show:
           h1-heading: Is there anything else you need to tell us about your client’s assets?

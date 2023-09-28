@@ -1,22 +1,22 @@
 <% check_box_attribute = "check_box_second_home" %>
-<% hint = I18n.t("helpers.hint.#{check_box_attribute}", default: nil) %>
 <% @form.__send__("#{check_box_attribute}=", model.send(check_box_attribute).present? || model.any_second_home_value_present?) %>
 
-<%= form.govuk_check_box check_box_attribute, true, multiple: false, link_errors: true,
-                                                    label: { text: t("providers.means.other_assets.second_home_conditional_checkbox.check_box_second_home") },
-                                                    hint: { text: hint } do %>
+<%= form.govuk_check_box check_box_attribute,
+                         true,
+                         multiple: false,
+                         label: { text: t(".#{individual}.check_box_second_home") } do %>
   <%= form.govuk_text_field :second_home_value,
                             prefix_text: t("currency.gbp"),
-                            label: { text: t("providers.means.other_assets.second_home_conditional_checkbox.second_home_value") },
+                            label: { text: t(".#{individual}.second_home_value") },
                             value: number_to_currency_or_original_string(model.second_home_value),
                             width: "one-third" %>
   <%= form.govuk_text_field :second_home_mortgage,
-                            label: { text: t("providers.means.other_assets.second_home_conditional_checkbox.second_home_mortgage") },
+                            label: { text: t(".#{individual}.second_home_mortgage") },
                             prefix_text: t("currency.gbp"),
                             value: number_to_currency_or_original_string(model.second_home_mortgage),
                             width: "one-third" %>
   <%= form.govuk_text_field :second_home_percentage,
-                            label: { text: t("providers.means.other_assets.second_home_conditional_checkbox.second_home_percentage") },
+                            label: { text: t(".#{individual}.second_home_percentage") },
                             value: model.second_home_percentage,
                             width: 4,
                             suffix_text: "%" %>
