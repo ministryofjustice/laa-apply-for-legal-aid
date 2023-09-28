@@ -29,7 +29,7 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
         expect(vehicle_details_form.valid?).to be false
         expect(vehicle_details_form.errors.messages).to match_array(
           owner: ["Select who owns the vehicle"],
-          estimated_value: ["Enter the estimated value of the vehicle"],
+          estimated_value: ["Enter how much the vehicle is worth"],
           more_than_three_years_old: ["Select yes if the vehicle was bought over 3 years ago"],
           payments_remain: ["Select yes if there are any payments left on the vehicle"],
           used_regularly: ["Select yes if the vehicle is in regular use"],

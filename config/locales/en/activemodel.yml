@@ -803,15 +803,15 @@ en:
             owner:
               blank: Select who owns the vehicle
             estimated_value:
-              blank: Enter the estimated value of the vehicle
-              not_a_number: Estimated value must be an amount of money, like 5,000
-              greater_than_or_equal_to: Estimated value must be 0 or more
-              too_many_decimals: Estimated value must not include more than 2 decimal numbers
+              blank: Enter how much the vehicle is worth
+              not_a_number: How much the vehicle is worth must be an amount of money, like 5,000
+              greater_than_or_equal_to: How much the vehicle is worth must be 0 or more
+              too_many_decimals: How much the vehicle is worth cannot include more than 2 decimal numbers
             payment_remaining:
               blank: Enter the amount left to pay
               not_a_number: The amount left to pay must be an amount of money, like 5,000
-              greater_than_or_equal_to: The amount left to page must be 0 or more
-              too_many_decimals: Amount must not include more than 2 decimal numbers
+              greater_than_or_equal_to: The amount left to pay must be 0 or more
+              too_many_decimals: The amount left to pay must not include more than 2 decimal numbers
             payments_remain:
               blank: Select yes if there are any payments left on the vehicle
             more_than_three_years_old:
