@@ -453,22 +453,22 @@ en:
               providers:
                 blank: Select yes if your client owns a vehicle
             property_value:
-              blank: Enter an estimated value for your client's home
-              greater_than_or_equal_to: Estimated value must be 0 or more
-              not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
-              too_many_decimals: Estimated value must not include more than 2 decimal numbers
+              blank: Enter how much the home your client lives in is worth
+              greater_than_or_equal_to: How much the home your client lives in in must be 0 or more
+              not_a_number: How much the home your client lives in must be an amount of money, like 60,000
+              too_many_decimals: How much the home your client lives in cannot include more than 2 decimal numbers
             outstanding_mortgage_amount:
-              blank: Enter the outstanding mortgage amount for your client's home
-              greater_than_or_equal_to: Mortgage amount must be 0 or more
-              not_a_number: Mortgage amount must be an amount of money, like 60,000
-              too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
+              blank: Enter how much is left to pay on the mortgage
+              greater_than_or_equal_to: How much is left to pay on the mortgage must be 0 or more
+              not_a_number: How much is left to pay on the mortgage must be an amount of money, like 60,000
+              too_many_decimals: How much is left to pay on the mortgage cannot include more than 2 decimal numbers
             shared_ownership:
-              blank: Select yes if your client owns their home with anyone else
+              blank: Select yes if your client owns the home with anyone else
             percentage_home:
-              blank: Enter the percentage share
-              greater_than_or_equal_to: Share must be a percentage amount under 100, like 60
-              less_than_or_equal_to: Share must be a percentage amount under 100, like 60
-              not_a_number: Share must be a percentage amount under 100, like 60
+              blank: Enter what percentage of the house your client legally owns
+              greater_than_or_equal_to: The percentage of the house your client legally owns must be 100 or less, like 60
+              less_than_or_equal_to: The percentage of the house your client legally owns must be 100 or less, like 60
+              not_a_number: The percentage of the house your client legally owns must be 100 or less, like 60
             restrictions_details:
               citizens:
                 blank: Enter the assets you cannot sell or borrow against, and why

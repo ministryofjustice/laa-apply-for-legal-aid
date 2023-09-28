@@ -233,7 +233,7 @@ en:
         property:
           heading_own_home: Property
           heading_property_details: Your client's property
-          own_home: Does your client own the home they live in?
+          own_home: Does your client own the home that they live in?
           property_value: How much is the home they live in worth?
           outstanding_mortgage: How much is left to pay on the mortgage?
           shared_ownership: Does your client own the home with anyone else?
@@ -633,7 +633,7 @@ en:
         friend_family_member_or_other_individual: Yes, a friend, family member or other individual
         housing_assocation_or_landlord: Yes, a housing association or landlord
         no_sole_owner: No, they're the sole owner
-        partner_or_ex_partner: Yes, a partner or ex-partner
+        partner_or_ex_partner: Yes, an ex-partner
       success_prospect:
           likely: 50% or better
           marginal: 45% to 49%

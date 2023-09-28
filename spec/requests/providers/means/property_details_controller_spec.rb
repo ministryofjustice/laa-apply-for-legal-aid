@@ -37,6 +37,22 @@ RSpec.describe Providers::Means::PropertyDetailsController do
           expect(response.body).not_to include(I18n.t("providers.means.property_details.show.mortgage_question"))
         end
       end
+
+      context "when the application has no partner" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_mortgaged) }
+
+        it "shows the correct content" do
+          expect(response.body).not_to include(I18n.t("providers.means.property_details.show.percentage_question.partner"))
+        end
+      end
+
+      context "when the application has a partner with no contrary interest" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_own_home_mortgaged) }
+
+        it "shows the correct content" do
+          expect(response.body).to include(I18n.t("providers.means.property_details.show.percentage_question.partner"))
+        end
+      end
     end
   end
 

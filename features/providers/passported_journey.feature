@@ -14,7 +14,7 @@ Feature: passported_journey completes application
     Then I should be on a page showing "Your client's home"
     Then I fill "Property value" with "200000"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I choose "Yes, a partner or ex-partner"
+    Then I choose "Yes, an ex-partner"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
