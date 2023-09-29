@@ -878,6 +878,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_080150) do
     t.boolean "none_selected"
     t.decimal "offline_savings_accounts"
     t.boolean "no_account_selected"
+    t.decimal "partner_offline_current_accounts"
+    t.decimal "partner_offline_savings_accounts"
+    t.boolean "no_partner_account_selected"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
   end
 
