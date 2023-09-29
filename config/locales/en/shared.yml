@@ -230,6 +230,8 @@ en:
           savings_account: Savings account
           current_account: Current account
           bank_accounts: Which bank accounts does your client have?
+          partner_bank_accounts: Which bank accounts does the partner have?
+
         property:
           heading_own_home: Property
           heading_property_details: Your client's property

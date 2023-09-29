@@ -48,6 +48,35 @@
         ) %>
   <% end %>
 
+  <% if @legal_aid_application&.partner&.has_offline_savings? %>
+    <div class="govuk-grid-row" id="app-check-your-answers__partner_offline_savings_accounts">
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m"><%= t(".assets.partner_bank_accounts") %></h3>
+      </div>
+      <% if read_only == false %>
+        <div class="govuk-grid-column-one-third align-text-right">
+          <p>
+            <%= govuk_link_to(
+                  t("generic.change"),
+                  check_answer_url_for(journey_type, :partner_bank_accounts, @legal_aid_application),
+                  "aria-label": "#{t('generic.change')} #{t('.assets.partner_bank_accounts')}",
+                ) %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+    <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { "data-test": "partner-bank-accounts" }) do |summary_list| %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_online_current_accounts" }) do |row| %>
+        <%= row.with_key(text: t(".assets.current_account"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_current_accounts) : t("generic.none_declared") } %>
+      <% end %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_online_savings_accounts" }) do |row| %>
+        <%= row.with_key(text: t(".assets.savings_account"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_savings_accounts) : t("generic.none_declared") } %>
+      <% end %>
+    <% end %>
+  <% end %>
+
   <%= render(
         "shared/check_answers/one_link_section",
         name: :savings_and_investments,
