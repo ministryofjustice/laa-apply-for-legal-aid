@@ -66,6 +66,11 @@ module Flow
         },
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
+          forward: :savings_and_investments, # TODO: move to partner_bank_accounts if partner and client used truelayer!
+          check_answers: :check_capital_answers,
+        },
+        partner_bank_accounts: {
+          path: ->(application) { urls.providers_legal_aid_application_partners_bank_accounts_path(application) },
           forward: :savings_and_investments,
           check_answers: :check_capital_answers,
         },
