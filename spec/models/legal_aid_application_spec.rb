@@ -1745,6 +1745,41 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#associated_applications" do
+    let(:lead_application) { create(:legal_aid_application) }
+    let(:associated_application_one) { create(:legal_aid_application) }
+    let(:associated_application_two) { create(:legal_aid_application) }
+
+    it "returns an array of associated_applications" do
+      linked_application_one = LinkedApplication.create!(lead_application:, associated_application: associated_application_one, link_description: "link", link_type_code: "LNK")
+      linked_application_two = LinkedApplication.create!(lead_application:, associated_application: associated_application_two, link_description: "link", link_type_code: "LNK")
+
+      expect(lead_application.associated_applications).to contain_exactly(associated_application_one, associated_application_two)
+      expect(lead_application.associated_linked_applications).to contain_exactly(linked_application_one, linked_application_two)
+    end
+
+    it "does not allow an a application to be linked to the same application twice" do
+      LinkedApplication.create!(lead_application:, associated_application: associated_application_one, link_description: "link", link_type_code: "LNK")
+      expect { LinkedApplication.create!(lead_application:, associated_application: associated_application_one, link_description: "link", link_type_code: "LNK") }.to raise_error ActiveRecord::RecordNotUnique
+    end
+
+    it "does not allow an application to be linked to itself" do
+      expect { LinkedApplication.create!(lead_application:, associated_application: lead_application, link_description: "link", link_type_code: "LNK") }.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
+
+  describe "#lead_application" do
+    let(:lead_application) { create(:legal_aid_application) }
+    let(:associated_application) { create(:legal_aid_application) }
+
+    it "returns the lead_application" do
+      linked_application = LinkedApplication.create!(lead_application:, associated_application:, link_description: "link", link_type_code: "LNK")
+
+      expect(associated_application.lead_application).to eq lead_application
+      expect(associated_application.lead_linked_application).to eq linked_application
+    end
+  end
+
 private
 
   def uploaded_evidence_output
