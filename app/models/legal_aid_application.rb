@@ -58,6 +58,10 @@ class LegalAidApplication < ApplicationRecord
   has_many :regular_transactions, dependent: :destroy
   has_one :matter_opposition, -> { order(created_at: :desc) }, class_name: "ApplicationMeritsTask::MatterOpposition", inverse_of: :legal_aid_application, dependent: :destroy
   has_one :partner, dependent: :destroy
+  has_one :lead_linked_application, class_name: "LinkedApplication", foreign_key: "associated_application_id", dependent: :destroy
+  has_one :lead_application, class_name: "LegalAidApplication", through: :lead_linked_application
+  has_many :associated_linked_applications, class_name: "LinkedApplication", foreign_key: "lead_application_id", dependent: :destroy
+  has_many :associated_applications, class_name: "LegalAidApplication", through: :associated_linked_applications
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref

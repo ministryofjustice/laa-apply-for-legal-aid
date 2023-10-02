@@ -137,6 +137,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   legal_framework_merits_task_lists: {},
   legal_framework_submission_histories: {},
   legal_framework_submissions: {},
+  linked_applications: {},
   malware_scan_results: {
     file_details: {},
     # this is a JSON block that contains the original filename

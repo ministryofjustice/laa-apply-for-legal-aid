@@ -1745,6 +1745,65 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#associated_applications" do
+    let(:lead_application) { create(:legal_aid_application) }
+    let(:associated_application) { create(:legal_aid_application) }
+    let(:associated_application_two) { create(:legal_aid_application) }
+
+    it "returns an array of associated_applications" do
+      linked_application_one = LinkedApplication.create!(lead_application:, associated_application:, link_type_description: "link", link_type_code: "LNK")
+      linked_application_two = LinkedApplication.create!(lead_application:, associated_application: associated_application_two, link_type_description: "link", link_type_code: "LNK")
+
+      expect(lead_application.associated_applications).to contain_exactly(associated_application, associated_application_two)
+      expect(lead_application.associated_linked_applications).to contain_exactly(linked_application_one, linked_application_two)
+    end
+
+    it "does not allow an a application to be linked to the same application twice" do
+      LinkedApplication.create!(lead_application:, associated_application:, link_type_description: "link", link_type_code: "LNK")
+      expect { LinkedApplication.create!(lead_application:, associated_application:, link_type_description: "link", link_type_code: "LNK") }.to raise_error ActiveRecord::RecordNotUnique
+    end
+
+    it "does not allow an application to be linked to itself" do
+      expect { LinkedApplication.create!(lead_application:, associated_application: lead_application, link_type_description: "link", link_type_code: "LNK") }.to raise_error ActiveRecord::RecordInvalid, "Validation failed: Linked application ref You cannot link an application to itself."
+    end
+
+    it "does not allow an a application to be linked to a nonexistent application" do
+      expect { LinkedApplication.create!(lead_application_id: "11111111-2222-3333-4444-555555555555", associated_application:, link_type_description: "link", link_type_code: "LNK") }.to raise_error ActiveRecord::RecordInvalid, "Validation failed: Lead application must exist"
+    end
+
+    it "calling destroy! deletes the linked_application record but not the linked appication itself" do
+      linked_application = LinkedApplication.create!(lead_application:, associated_application:, link_type_description: "link", link_type_code: "LNK")
+      associated_application.destroy!
+      expect { described_class.find(associated_application.id) }.to raise_error ActiveRecord::RecordNotFound
+      expect { LinkedApplication.find(linked_application.id) }.to raise_error ActiveRecord::RecordNotFound
+      expect(described_class.find(lead_application.id)).to eq lead_application
+    end
+  end
+
+  describe "#lead_application" do
+    let(:lead_application) { create(:legal_aid_application) }
+    let(:associated_application) { create(:legal_aid_application) }
+
+    it "returns the lead_application" do
+      linked_application = LinkedApplication.create!(lead_application:, associated_application:, link_type_description: "link", link_type_code: "LNK")
+
+      expect(associated_application.lead_application).to eq lead_application
+      expect(associated_application.lead_linked_application).to eq linked_application
+    end
+
+    it "does not allow an a application to be linked to a nonexistent application" do
+      expect { LinkedApplication.create!(lead_application:, associated_application_id: "11111111-2222-3333-4444-555555555555", link_type_description: "link", link_type_code: "LNK") }.to raise_error ActiveRecord::RecordInvalid, "Validation failed: Associated application must exist"
+    end
+
+    it "calling destroy! deletes the linked_application record but not the linked appication itself" do
+      linked_application = LinkedApplication.create!(lead_application:, associated_application:, link_type_description: "link", link_type_code: "LNK")
+      lead_application.destroy!
+      expect { described_class.find(lead_application.id) }.to raise_error ActiveRecord::RecordNotFound
+      expect { LinkedApplication.find(linked_application.id) }.to raise_error ActiveRecord::RecordNotFound
+      expect(described_class.find(associated_application.id)).to eq associated_application
+    end
+  end
+
 private
 
   def uploaded_evidence_output
