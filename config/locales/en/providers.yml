@@ -1400,7 +1400,7 @@ en:
     savings_and_investments:
       show:
         h1-heading: Which savings or investments does your client have?
-        none_selected: My client has none of these savings or investments
+        none_selected: None of these savings or investments
     select_offices:
       show:
         h1-heading: Select the account number of the office handling this application

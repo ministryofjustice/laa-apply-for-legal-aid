@@ -75,18 +75,18 @@ Feature: Check single employment
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
 
-    When I check "My client has none of these savings or investments"
+    When I check "None of these savings or investments"
     And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
+    Then I should be on a page showing "Is your client banned from selling or borrowing against their assets?"
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
+    Then I should be on a page showing "Which schemes or trusts have paid your client?"
 
-    When I check "My client has received none of these payments"
+    When I check "None of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
 

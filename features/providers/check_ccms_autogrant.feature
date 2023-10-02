@@ -11,13 +11,13 @@ Feature: Checking ccms means does NOT auto grant
     Then I fill "savings-amount-cash-field" with "4000"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I check "My client has none of these assets"
+    Then I check "None of these assets"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
+    Then I should be on a page showing "Is your client banned from selling or borrowing against their assets?"
     Then I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
-    Then I check "My client has received none of these payments"
+    Then I should be on a page showing "Which schemes or trusts have paid your client?"
+    Then I check "None of these payments"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And I should be on a page showing 'Money not in a bank account'
@@ -82,13 +82,13 @@ Feature: Checking ccms means does NOT auto grant
     Then I view the previously created application
     Then I click 'Save and continue'
     Then I am on the "Which savings or investments does your client have?" page
-    Then I check "My client has none of these savings or investments"
+    Then I check "None of these savings or investments"
     Then I click 'Save and continue'
     Then I am on the "Which assets does your client have?" page
-    Then I check "My client has none of these assets"
+    Then I check "None of these assets"
     Then I click 'Save and continue'
-    Then I am on the "Select if your client has received payments from these schemes or charities" page
-    Then I check "My client has received none of these payments"
+    Then I am on the "Which schemes or trusts have paid your client?" page
+    Then I check "None of these payments"
     Then I click 'Save and continue'
     Then I am on the "Check your answers" page
     Then I click 'Save and continue'

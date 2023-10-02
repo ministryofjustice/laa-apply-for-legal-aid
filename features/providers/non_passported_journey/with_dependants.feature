@@ -62,10 +62,10 @@ Feature: non_passported_journey with dependants
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
+    Then I select "None of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "My client has none of these assets"
+    Then I select "None of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'
@@ -141,10 +141,10 @@ Feature: non_passported_journey with dependants
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
+    Then I select "None of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "My client has none of these assets"
+    Then I select "None of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or\ charities'
     When I select 'England Infected Blood Support Scheme'

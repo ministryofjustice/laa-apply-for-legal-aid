@@ -61,7 +61,7 @@ Feature: non_passported_journey with capital
     And I check 'Any valuable items worth £500 or more'
     Then I fill "other-assets-declaration-valuable-items-value-field" with "546.33"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
+    Then I should be on a page showing "Is your client banned from selling or borrowing against their assets?"
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
@@ -75,42 +75,42 @@ Feature: non_passported_journey with capital
     Given I am checking answers on the check capital answers page
     When I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
-    When I select "My client has none of these savings or investments"
+    When I select "None of these savings or investments"
     And I click "Save and continue"
     And I click "Save and continue"
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     When I click link "Back"
     When I click link "Back"
     Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
-    When I deselect "My client has none of these savings or investments"
+    When I deselect "None of these savings or investments"
     And I click "Save and continue"
     Then I should be on the "savings_and_investment" page showing "Select if your client has any of these savings or investments"
-    When I select "My client has none of these savings or investments"
+    When I select "None of these savings or investments"
     And I click "Save and continue"
     And I click "Save and continue"
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
     When I click Check Your Answers Change link for 'Other assets'
     Then I should be on the "other_assets" page showing "Which assets does your client have?"
-    When I select "My client has none of these assets"
+    When I select "None of these assets"
     And I click "Save and continue"
     Then I should be on a page showing "Check your answers"
     When I click link "Back"
     Then I should be on the "other_assets" page showing "Which assets does your client have?"
-    When I deselect "My client has none of these assets"
+    When I deselect "None of these assets"
     And I click "Save and continue"
     Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
-    Then I select "My client has none of these assets"
+    Then I select "None of these assets"
     Then I click "Save and continue"
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'policy disregards'
     Then I should be on a page showing 'schemes or charities'
-    Then I select 'My client has received none of these payments'
+    Then I select 'None of these payments'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for all 'policy disregards' categories should be 'No'
     Then I click Check Your Answers Change link for 'policy disregards'
-    And I deselect 'My client has received none of these payments'
+    And I deselect 'None of these payments'
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'Select if your client has received any of these payments'
-    Then I select "My client has received none of these payments"
+    Then I select "None of these payments"
     Then I click "Save and continue"
