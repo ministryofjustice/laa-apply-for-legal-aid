@@ -22,7 +22,7 @@ Feature: passported_journey completes application
     Then I click 'Save and continue'
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select "Current account"
-    Then I fill "offline_current_accounts" with "-10"
+    Then I fill "offline_current_accounts" with "10"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
     Then I select "Money not in a bank account"
