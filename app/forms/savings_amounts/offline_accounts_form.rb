@@ -16,7 +16,9 @@ module SavingsAmounts
 
     attr_accessor(*ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
-    validates(:offline_current_accounts, :offline_savings_accounts, allow_blank: true, currency: true)
+    validates(:offline_current_accounts, :offline_savings_accounts,
+              allow_blank: true,
+              currency: { greater_than_or_equal_to: 0 })
 
     before_validation :empty_unchecked_values
 
@@ -47,7 +49,7 @@ module SavingsAmounts
     end
 
     def any_checkbox_checked_or_draft
-      errors.add :base, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
+      errors.add :savings_amount, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
     end
 
     def error_message_for_no_account_selected

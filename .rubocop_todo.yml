@@ -263,7 +263,6 @@ Rails/SaveBang:
     - 'spec/forms/legal_aid_applications/percentage_home_form_spec.rb'
     - 'spec/forms/legal_aid_applications/restrictions_form_spec.rb'
     - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
-    - 'spec/forms/savings_amounts/offline_accounts_form_spec.rb'
     - 'spec/forms/savings_amounts/savings_amounts_form_spec.rb'
     - 'spec/requests/providers/bank_transactions_controller_spec.rb'
     - 'spec/requests/providers/capital_assessment_results_controller_spec.rb'

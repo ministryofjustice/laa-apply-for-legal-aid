@@ -19,7 +19,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it "updates all amounts" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
 
           attributes.each do |attr|
@@ -50,7 +50,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "generates errors" do
-          described_form.save
+          described_form.save!
           attributes.each do |attr|
             error_message = described_form.errors[attr].first
             expect(error_message).to match(expected_error)
@@ -81,7 +81,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it "strips the values of £ symbols" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
 
           attributes.each do |attr|
@@ -112,13 +112,13 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "empties amounts if checkbox is unchecked" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
           expect(savings_amount.offline_savings_accounts).to be_nil
         end
 
         it "does not empty amount if a checkbox is checked" do
-          described_form.save
+          described_form.save!
           expect(savings_amount.reload.offline_current_accounts).not_to be_nil
         end
 
@@ -135,7 +135,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it "empties amounts" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
           expect(savings_amount.offline_current_accounts).to be_nil
           expect(savings_amount.offline_savings_accounts).to be_nil
@@ -176,8 +176,8 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "displays an error message" do
-          described_form.save
-          expect(described_form.errors[:base]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
+          described_form.save!
+          expect(described_form.errors[:savings_amount]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
         end
       end
     end
