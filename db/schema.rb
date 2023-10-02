@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_145448) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -636,6 +636,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_legal_framework_submissions_on_legal_aid_application_id"
+  end
+
+  create_table "linked_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "lead_application_id"
+    t.uuid "associated_application_id"
+    t.string "link_description", null: false
+    t.string "link_type_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["associated_application_id"], name: "index_linked_applications_on_associated_application_id"
+    t.index ["lead_application_id", "associated_application_id"], name: "index_linked_applications", unique: true
+    t.index ["lead_application_id"], name: "index_linked_applications_on_lead_application_id"
   end
 
   create_table "malware_scan_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
