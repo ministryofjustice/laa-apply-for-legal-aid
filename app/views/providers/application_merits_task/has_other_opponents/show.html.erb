@@ -36,7 +36,7 @@
                         t("generic.change"),
                         opponent_url(@legal_aid_application, opponent),
                         class: "change-link",
-                        suffix: opponent.full_name,
+                        "aria-label": opponent.full_name,
                       )
                     end
                   end
@@ -45,7 +45,7 @@
                       t(".remove"),
                       providers_legal_aid_application_remove_opponent_path(@legal_aid_application, opponent),
                       class: "change-link",
-                      suffix: opponent.full_name,
+                      "aria-label": opponent.full_name,
                     )
                   end
                 end

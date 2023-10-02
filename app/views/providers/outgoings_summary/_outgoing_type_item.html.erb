@@ -2,7 +2,7 @@
      link_text,
      providers_legal_aid_application_outgoing_transactions_path(transaction_type: name),
      class: "govuk-body transaction-type-link",
-     suffix: "for #{t "transaction_types.names.providers.#{name}"}",
+     "arial-label": "for #{t "transaction_types.names.providers.#{name}"}",
    ) %>
 <% form_group_error_class = error.present? ? "govuk-form-group--error" : "" %>
 <% error_message = error.present? ? error.first : "" %>

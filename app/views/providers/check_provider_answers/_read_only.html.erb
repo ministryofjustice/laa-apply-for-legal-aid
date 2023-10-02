@@ -4,10 +4,10 @@
 
   <p class="govuk-body"><%= t ".sent_email_text", email: @legal_aid_application.applicant.email %></p>
 
-  <%= govuk_link_to t(".change_email_button"),
+  <%= govuk_button_link_to t(".change_email_button"),
                     providers_legal_aid_application_email_address_path,
                     role: "button",
-                    class: "govuk-button govuk-button--secondary",
+                    { secondary: true },
                     id: "change-email" %>
 
   <%= page_template(

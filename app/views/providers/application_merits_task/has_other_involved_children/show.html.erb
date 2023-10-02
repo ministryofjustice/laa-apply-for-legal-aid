@@ -36,7 +36,7 @@
                     t("generic.change"),
                     providers_legal_aid_application_involved_child_path(@legal_aid_application, involved_child),
                     class: "change-link",
-                    suffix: involved_child.full_name,
+                    "aria-label": involved_child.full_name,
                   )
                 end
                 row.with_cell do
@@ -44,7 +44,7 @@
                     t(".remove"),
                     providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
                     class: "change-link",
-                    suffix: involved_child.full_name,
+                    "aria-label": involved_child.full_name,
                   )
                 end
               end

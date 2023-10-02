@@ -73,10 +73,11 @@
                   concat render partial: "shared/partials/modal_dialogue", locals: { application:, index: }
 
                   unless application.summary_state == :submitted
-                    concat govuk_link_to(
+                    concat govuk_button_link_to(
                       t(".delete"),
                       providers_legal_aid_application_delete_path(application),
-                      class: "govuk-button govuk-button--secondary govuk-!-margin-1 no-script",
+                      class: "govuk-!-margin-1 no-script",
+                      { secondary: true },
                       suffix: t(".delete_suffix", reference: application.application_ref, applicant: application.applicant_full_name),
                     )
 

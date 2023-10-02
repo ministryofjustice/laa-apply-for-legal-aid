@@ -23,7 +23,7 @@
               t("generic.change"),
               providers_legal_aid_application_address_lookup_path(@legal_aid_application),
               class: "govuk-body change-link change-postcode-link",
-              suffix: "postcode",
+              "aria-label": "postcode",
             ) %>
       </p>
       <%= form.hidden_field :postcode %>
