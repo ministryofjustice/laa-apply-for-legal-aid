@@ -83,31 +83,24 @@ Git-crypt is used for encryption. It uses either your personal public key or a s
 git-crypt unlock path-to-symmetric-key
 ```
 
-2. To add your personal public gpg key to git-crypt liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md). Once the pull request has been merged, re-pull main branch and then run:
-
-```sh
-git-crypt unlock
-```
-
-Copy the `.env.sample` file and name the new file `.env.development`
+2. Copy the `.env.sample` file and name the new file `.env.development`
 
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
 ```bash
 ADMIN_PASSWORD=
 ```
 
-
-To install OS dependencies (MacOSX only):
+3. To install OS dependencies (MacOSX only):
 ```
 brew bundle
 ```
 
-From the root of the project execute the following command:
+4. From the root of the project execute the following command:
 ```
 bin/setup
 ```
 
-Once setup, you can run the dev binstub to run the server, sidekiq, and watch
+5. Once setup, you can run the dev binstub to run the server, sidekiq, and watch
 for JS and CSS changes.
 
 ```
