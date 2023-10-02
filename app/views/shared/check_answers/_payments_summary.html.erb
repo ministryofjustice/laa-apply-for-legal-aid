@@ -27,7 +27,9 @@
            ) %>
         <% if @legal_aid_application.uploading_bank_statements? || individual.eql?("Partner") %>
           <p><%= regular_transaction_amount %></p>
-          <p><%= regular_transaction_frequency %></p>
+          <% unless regular_transaction_amount.eql?("None") %>
+            <p><%= regular_transaction_frequency %></p>
+          <% end %>
         <% else %>
           <%= answer_for_transaction_type(legal_aid_application: @legal_aid_application, transaction_type:) %>
         <% end %>
