@@ -17,7 +17,7 @@
                                    label: { text: t(".check_box_valuable_items_value") },
                                    hint: { text: t(".hint.check_box_valuable_items_value", default: "") } do %>
             <% value = @form.send(:valuable_items_value) %>
-            <% @form.__send__(`:"check_box_valuable_items_value="`, @form.send(:check_box_valuable_items_value).present? || value.present?) %>
+            <% @form.__send__(:check_box_valuable_items_value=, @form.send(:check_box_valuable_items_value).present? || value.present?) %>
             <%= form.govuk_text_field :valuable_items_value,
                                       value: number_to_currency_or_original_string(value),
                                       label: { text: t(".#{individual}.valuable_items_value") },
@@ -27,7 +27,7 @@
 
           <%= render partial: "/providers/means/other_assets/second_home_conditional_checkbox", locals: { model: @form, form:, individual: } %>
 
-          <% Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES.each do |attribute| %>
+          <% Providers::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES.each do |attribute| %>
             <% check_box_attribute = "check_box_#{attribute}" %>
             <% value = @form.send(attribute) %>
             <% @form.__send__("#{check_box_attribute}=", @form.send(check_box_attribute).present? || value.present?) %>

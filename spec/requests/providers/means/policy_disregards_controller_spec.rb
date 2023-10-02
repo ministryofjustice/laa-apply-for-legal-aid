@@ -26,7 +26,7 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
       end
 
       it "displays the show page" do
-        expect(response.body).to include I18n.t("providers.means.policy_disregards.show.h1-heading")
+        expect(response.body).to include I18n.t("providers.means.policy_disregards.show.h1-heading.client")
       end
     end
   end
@@ -92,7 +92,7 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
       end
 
       context "with nothing" do
-        let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+        let(:application) { create(:legal_aid_application, :with_applicant, :with_positive_benefit_check_result) }
         let(:policy) { create(:policy_disregards, legal_aid_application: application) }
         let(:none_selected) { "true" }
         let(:empty_params) do

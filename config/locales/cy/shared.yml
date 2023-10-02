@@ -259,36 +259,6 @@ cy:
               check_box_offline_savings_accounts: tnuocca sgnivaS
               offline_current_accounts: stnuocca tnerruc lla ni latot eht retnE
               offline_savings_accounts: stnuocca sgnivas lla ni latot eht retnE
-            savings_and_investments:
-              cash: tnuoma latot eht retnE
-              check_box_cash: tnuocca knab a ni ton yenoM
-              check_box_offline_current_accounts: tnuocca tnerruC
-              check_box_offline_savings_accounts: tnuocca sgnivaS
-              check_box_life_assurance_endowment_policy: egagtrom a ot deknil ton
-                seicilop tnemwodne dna ecnarussa efiL
-              check_box_national_savings: sdnoB muimerP dna setacifitreC sgnivaS lanoitaN
-                ,sASI
-              check_box_other_person_account: tnuocca knab s'nosrep rehtona ot sseccA
-              check_box_peps_unit_trusts_capital_bonds_gov_stocks: skcots tnemnrevog
-                dna sdnob latipac ,stsurt tinu ,sPEP
-              check_box_plc_shares: ")ynapmoc detimil cilbup( CLP a ni serahS"
-              hint:
-                revealing_check_box_offline_current_accounts: latot eht retne neht
-                  ,meht dda ,htnom tsal tnuocca hcae morf ecnalab tsewol eht ekat
-                  ,stnuocca elpitlum sah tneilc ruoy fI
-                check_box_cash: .emoh ta tpek hsac ,elpmaxe roF
-                check_box_life_assurance_endowment_policy: .htaed no tuo yap ylno taht
-                  seicilop edulcni ton oD
-                check_box_other_person_account: .tnuocca s'dlihc a no yrotangis a si
-                  tneilc ruoy ,elpmaxe roF
-              offline_current_accounts: htnom tsal ecnalab tsewol eht retnE
-              offline_savings_accounts: stnuocca lla ni latot eht retnE
-              life_assurance_endowment_policy: denwo lla fo eulav latot eht retnE
-              national_savings: denwo lla fo eulav latot eht retnE
-              other_person_account: stnuocca lla ni latot detamitse eht retnE
-              peps_unit_trusts_capital_bonds_gov_stocks: denwo lla fo eulav latot
-                eht retnE
-              plc_shares: denwo lla fo eulav latot eht retnE
       success_prospect:
         likely: retteb ro %05
         marginal: "%94 ot %54"

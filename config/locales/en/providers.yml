@@ -1032,7 +1032,9 @@ en:
           error: Select yes if you want to remove this vehicle from the application.
       savings_and_investments:
         show:
-          h1-heading: Which savings or investments does your client have?
+          h1-heading:
+            client: Which savings or investments does your client have?
+            partner: Which savings or investments does either your client or their partner have?
           none_selected: None of these savings or investments
           client:
             label: Enter the value

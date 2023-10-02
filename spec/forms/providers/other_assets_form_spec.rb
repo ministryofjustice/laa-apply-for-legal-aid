@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Citizens::OtherAssetsForm do
+RSpec.describe Providers::OtherAssetsForm do
   let(:empty_oad) { create(:other_assets_declaration, none_selected: true) }
   let(:oad_with_second_home) { create(:other_assets_declaration, :with_second_home) }
   let(:oad_with_all_values) { create(:other_assets_declaration, :with_all_values) }
