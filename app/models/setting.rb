@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.opponent_organisations
   end
 
+  def self.linked_applications?
+    setting.linked_applications
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
