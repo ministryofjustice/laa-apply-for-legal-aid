@@ -37,7 +37,7 @@ Feature: passported_journey completes application
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
-    When I select 'None of these payments'
+    When I select 'None of these schemes or trusts'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'

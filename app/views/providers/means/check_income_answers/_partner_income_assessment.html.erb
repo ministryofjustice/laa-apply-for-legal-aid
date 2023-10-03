@@ -12,7 +12,7 @@
             partner: true,
           ) %>
     <% else %>
-      <%= render "shared/check_answers/employed_income", read_only: false, partner: true %>
+      <%= render "shared/check_answers/employed_income", partner: true, read_only: false %>
     <% end %>
   <% elsif @legal_aid_application.partner.employed? %>
     <%= render(

@@ -144,7 +144,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "None of these assets"
     And I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
 
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'

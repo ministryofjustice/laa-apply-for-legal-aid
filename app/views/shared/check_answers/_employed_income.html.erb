@@ -1,4 +1,5 @@
-<div class="govuk-grid-row" id="app-check-your-answers__employment">
+<% individual = partner ? "partner" : "client" %>
+<div class="govuk-grid-row" id="app-check-your-answers__#{individual}_employment">
   <div class="govuk-grid-column-two-thirds">
     <h3 class="govuk-heading-m"><%= t(".employment") %></h3>
   </div>

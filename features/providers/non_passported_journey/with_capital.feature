@@ -65,7 +65,7 @@ Feature: non_passported_journey with capital
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
     Then I select 'England Infected Blood Support Scheme'
     Then I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
@@ -103,14 +103,14 @@ Feature: non_passported_journey with capital
     Then I click "Save and continue"
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'policy disregards'
-    Then I should be on a page showing 'schemes or charities'
-    Then I select 'None of these payments'
+    Then I should be on a page showing 'schemes or trusts'
+    Then I select 'None of these schemes or trusts'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for all 'policy disregards' categories should be 'No'
     Then I click Check Your Answers Change link for 'policy disregards'
-    And I deselect 'None of these payments'
+    And I deselect 'None of these schemes or trusts'
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'Select if your client has received any of these payments'
-    Then I select "None of these payments"
+    Then I select "None of these schemes or trusts"
     Then I click "Save and continue"

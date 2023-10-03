@@ -107,7 +107,7 @@ Feature: non_passported_journey with means
     When I choose 'Yes'
     And I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     And I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
 
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'

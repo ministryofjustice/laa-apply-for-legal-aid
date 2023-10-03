@@ -17,7 +17,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Which schemes or trusts have paid your client?"
-    Then I check "None of these payments"
+    Then I check "None of these schemes or trusts"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And I should be on a page showing 'Money not in a bank account'
@@ -88,7 +88,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I check "None of these assets"
     Then I click 'Save and continue'
     Then I am on the "Which schemes or trusts have paid your client?" page
-    Then I check "None of these payments"
+    Then I check "None of these schemes or trusts"
     Then I click 'Save and continue'
     Then I am on the "Check your answers" page
     Then I click 'Save and continue'

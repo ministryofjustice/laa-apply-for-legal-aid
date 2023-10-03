@@ -164,7 +164,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for policy disregards
     And I click Check Your Answers Change link for 'policy disregards'
-    Then I should be on a page showing 'schemes or charities'
+    Then I should be on a page showing 'schemes or trusts'
     Then I select 'England Infected Blood Support Scheme'
     And I select 'Vaccine Damage Payments Scheme'
     Then I click 'Save and continue'

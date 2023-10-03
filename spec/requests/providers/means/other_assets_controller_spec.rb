@@ -26,7 +26,7 @@ RSpec.describe "provider other assets requests" do
       end
 
       it "displays the show page" do
-        expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading")
+        expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading.client")
       end
     end
   end
@@ -269,7 +269,7 @@ RSpec.describe "provider other assets requests" do
           end
 
           it "renders the show page" do
-            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading")
+            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading.client")
           end
         end
       end
@@ -382,7 +382,7 @@ RSpec.describe "provider other assets requests" do
           end
 
           it "renders the show page" do
-            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading")
+            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading.client")
           end
         end
       end

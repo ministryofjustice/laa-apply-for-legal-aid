@@ -1052,7 +1052,9 @@ en:
             check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death.
       other_assets:
         show:
-          h1-heading: Which assets does your client have?
+          h1-heading:
+            client: Which assets does your client have?
+            partner: Which assets does either your client or their partner have?
           fieldset_hint: Select all that apply.
           none_of_these: None of these assets
           check_box_valuable_items_value: Any valuable items worth £500 or more
@@ -1115,7 +1117,7 @@ en:
           national_emergencies_trust: National Emergencies Trust (NET)
           we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
           london_emergencies_trust: The London Emergencies Trust
-          none_of_these: None of these payments
+          none_of_these: None of these schemes or trusts
       receives_state_benefits:
         show:
           page_title: Does your client get any benefits?

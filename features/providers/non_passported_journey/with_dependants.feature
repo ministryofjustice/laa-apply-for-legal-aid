@@ -67,7 +67,7 @@ Feature: non_passported_journey with dependants
     Then I should be on a page showing "Which assets does your client have?"
     Then I select "None of these assets"
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
@@ -146,7 +146,7 @@ Feature: non_passported_journey with dependants
     Then I should be on a page showing "Which assets does your client have?"
     Then I select "None of these assets"
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or\ charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'

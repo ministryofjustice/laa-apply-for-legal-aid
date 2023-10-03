@@ -89,7 +89,7 @@ Feature: Check multiple employment
     And I click 'Save and continue'
     Then I should be on a page showing "Which schemes or trusts have paid your client?"
 
-    When I check "None of these payments"
+    When I check "None of these schemes or trusts"
     And I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
