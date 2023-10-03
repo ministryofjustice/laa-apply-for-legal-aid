@@ -28,11 +28,28 @@ module Flow
         },
         address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
-          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
+          forward: lambda { |application|
+                     if Setting.linked_applications?
+                       :linked_applications
+                     else
+                       (application.proceedings.any? ? :has_other_proceedings : :proceedings_types)
+                     end
+                   },
           check_answers: :check_provider_answers,
         },
         addresses: {
           path: ->(application) { urls.providers_legal_aid_application_address_path(application) },
+          forward: lambda { |application|
+                     if Setting.linked_applications?
+                       :linked_applications
+                     else
+                       (application.proceedings.any? ? :has_other_proceedings : :proceedings_types)
+                     end
+                   },
+          check_answers: :check_provider_answers,
+        },
+        linked_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_linked_applications_path(application) },
           forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
           check_answers: :check_provider_answers,
         },
