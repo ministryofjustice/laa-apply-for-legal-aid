@@ -1,5 +1,5 @@
 module AccessibleNavigationHelper
-  def link_to_accessible(name = nil, options = nil, html_options = {}, &)
+  def govuk_link_to(name = nil, options = nil, html_options = {}, &)
     props = set_accessible_properties(name, html_options)
     link_to(name, options, props, &)
   end

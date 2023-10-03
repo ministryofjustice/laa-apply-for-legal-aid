@@ -6,9 +6,9 @@
   <div class="govuk-grid-column-one-third">
     <% if !read_only %>
       <% if @legal_aid_application.vehicles.any? %>
-        <p><%= link_to_accessible t("generic.change"), providers_legal_aid_application_means_add_other_vehicles_path(@legal_aid_application), class: "govuk-link govuk-link-right" %></p>
+        <p><%= govuk_link_to t("generic.change"), providers_legal_aid_application_means_add_other_vehicles_path(@legal_aid_application), class: "govuk-link-right" %></p>
       <% else %>
-        <p><%= link_to_accessible t("generic.change"), check_answer_url_for(journey_type, :vehicles, @legal_aid_application), class: "govuk-link govuk-link-right" %></p>
+        <p><%= govuk_link_to t("generic.change"), check_answer_url_for(journey_type, :vehicles, @legal_aid_application), class: "govuk-link-right" %></p>
       <% end %>
     <% end %>
   </div>

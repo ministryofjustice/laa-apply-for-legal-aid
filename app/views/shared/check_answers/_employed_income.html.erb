@@ -5,9 +5,9 @@
   <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
     <% unless read_only %>
       <p>
-        <%= link_to_accessible(
+        <%= govuk_link_to(
               t("generic.change"), providers_legal_aid_application_means_employment_income_path(@legal_aid_application),
-              class: "govuk-link change-link"
+              class: "change-link"
             ) %>
       </p>
     <% end %>

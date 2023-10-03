@@ -26,7 +26,7 @@
   <% unless read_only %>
     <dd class="govuk-summary-list__actions">
       <% unless url == :show_blank_action %>
-        <%= link_to_accessible(t("generic.change"), url, class: "govuk-link change-link", suffix: question) %>
+        <%= govuk_link_to(t("generic.change"), url, class: "change-link", "aria-label": question) %>
       <% end %>
     </dd>
   <% end %>

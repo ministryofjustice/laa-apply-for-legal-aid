@@ -7,11 +7,11 @@
       <ul class="govuk-list govuk-error-summary__list">
         <% if @error.is_a? String %>
           <li>
-            <%= link_to_accessible @error, "#correct" %>
+            <%= govuk_link_to @error, "#correct" %>
           </li>
         <% else %>
           <li>
-            <%= link_to_accessible @error.values.first, "##{@error.keys.first}" %>
+            <%= govuk_link_to @error.values.first, "##{@error.keys.first}" %>
           </li>
         <% end %>
       </ul>
