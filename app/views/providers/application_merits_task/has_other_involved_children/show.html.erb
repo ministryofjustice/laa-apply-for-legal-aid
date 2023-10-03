@@ -32,19 +32,19 @@
                 row.with_cell(text: involved_child.full_name)
                 row.with_cell(text: involved_child.date_of_birth)
                 row.with_cell do
-                  link_to_accessible(
+                  govuk_link_to(
                     t("generic.change"),
                     providers_legal_aid_application_involved_child_path(@legal_aid_application, involved_child),
-                    class: "govuk-link change-link",
-                    suffix: involved_child.full_name,
+                    class: "change-link",
+                    "aria-label": involved_child.full_name,
                   )
                 end
                 row.with_cell do
-                  link_to_accessible(
+                  govuk_link_to(
                     t(".remove"),
                     providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
-                    class: "govuk-link change-link",
-                    suffix: involved_child.full_name,
+                    class: "change-link",
+                    "aria-label": involved_child.full_name,
                   )
                 end
               end

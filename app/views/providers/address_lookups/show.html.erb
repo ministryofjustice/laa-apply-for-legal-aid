@@ -23,6 +23,6 @@
           continue_button_text: t(".submit_button"),
         ) %>
 
-    <p><%= link_to_accessible t(".address_manual_link"), providers_legal_aid_application_address_path, class: "govuk-link" %></p>
+    <p><%= govuk_link_to t(".address_manual_link"), providers_legal_aid_application_address_path %></p>
   <% end %>
 <% end %>

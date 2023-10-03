@@ -19,11 +19,11 @@
       </p>
       <p class='govuk-body govuk-!-font-weight-bold' role='alert'>
         <%= @form.postcode.insert(-4, " ") %>
-        <%= link_to_accessible(
+        <%= govuk_link_to(
               t("generic.change"),
               providers_legal_aid_application_address_lookup_path(@legal_aid_application),
               class: "govuk-body change-link change-postcode-link",
-              suffix: "postcode",
+              "aria-label": "postcode",
             ) %>
       </p>
       <%= form.hidden_field :postcode %>
@@ -38,7 +38,7 @@
                                        :address,
                                        label: { text: t(".select_address_label") } %>
 
-      <p><%= link_to_accessible t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application), class: "govuk-link" %></p>
+      <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
 
     <% end %>
     <%= next_action_buttons continue_id: "select-address-button", show_draft: true, form: %>

@@ -8,9 +8,10 @@
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m">
       <%= t(".current_applications") %>
-      <%= link_to_accessible t(".search_applications"),
-                             search_providers_legal_aid_applications_path,
-                             class: "govuk-button govuk-button--secondary govuk-!-margin-bottom-1" %>
+      <%= govuk_button_link_to t(".search_applications"),
+                               search_providers_legal_aid_applications_path,
+                               class: "govuk-!-margin-bottom-1",
+                               secondary: true %>
     </h2>
   </div>
 </div>
