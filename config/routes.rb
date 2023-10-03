@@ -245,6 +245,7 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
+      resource :linked_applications, only: %i[show update]
 
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
