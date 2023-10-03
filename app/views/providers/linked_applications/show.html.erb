@@ -1,0 +1,20 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_linked_applications_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template(page_title: "Linked Application", template: :basic, form:) do %>
+    <%= form.govuk_radio_buttons_fieldset :has_linked_application, legend: { size: "xl", tag: "h1", text: "Is this application linked to another application?" } do %>
+      <%= form.govuk_radio_button :has_linked_application, true, link_errors: true, label: { text: t("generic.yes") } do %>
+        <%= form.govuk_text_field(:linked_application_ref, label: { text: "Linked application ref:" }) %>
+        <%= form.govuk_collection_select :link_type_code,
+                                         @form.link_types,
+                                         :link_type_code,
+                                         :description,
+                                         label: { text: "What is the type of link?" },
+                                         options: { include_blank: "Select type" } %>
+      <% end %>
+      <%= form.govuk_radio_button :has_linked_application, false, label: { text: t("generic.no") } %>
+      <% end %>
+    <%= next_action_buttons continue_id: "select-address-button", show_draft: true, form: %>
+  <% end %>
+<% end %>
