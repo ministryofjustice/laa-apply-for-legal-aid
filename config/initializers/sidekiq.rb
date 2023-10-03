@@ -9,14 +9,20 @@ namespace = ENV.fetch("HOST", "laa-apply")
 module Dashboard; end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: } if redis_url
+  config.redis = { url: redis_url } if redis_url
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: } if redis_url
+  if redis_url
+    config.redis = if ENV.fetch("NAMEPSPACED_SIDEKIQ_DRAINER", nil)
+                     { url: redis_url, namespace: } # continue to poll for old scheduled jobs and retries
+                   else
+                     { url: redis_url }
+                   end
+  end
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_server_middleware config, expiration: 30.minutes
