@@ -2,7 +2,7 @@ require "rails_helper"
 
 module LegalFramework
   RSpec.describe AddProceedingService, :vcr do
-    subject { described_class.new(legal_aid_application) }
+    subject(:add_proceeding_service) { described_class.new(legal_aid_application) }
 
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:ccms_code) { "DA004" }
@@ -16,26 +16,26 @@ module LegalFramework
         end
 
         it "adds a proceeding" do
-          expect { subject.call(**params) }.to change { legal_aid_application.proceedings.count }.by(1)
+          expect { add_proceeding_service.call(**params) }.to change { legal_aid_application.proceedings.count }.by(1)
         end
 
         context "and the proceedings already exist" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
 
           it "adds another proceeding type" do
-            subject.call(**params)
+            add_proceeding_service.call(**params)
             expect(legal_aid_application.proceedings.count).to eq 2
           end
         end
 
         it "calls LeadProceedingAssignmentService" do
           expect(LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
-          subject.call(**params)
+          add_proceeding_service.call(**params)
         end
 
         context "when a proceeding is created" do
           before do
-            subject.call(**params)
+            add_proceeding_service.call(**params)
           end
 
           let(:proceeding) { legal_aid_application.proceedings.first }
@@ -63,12 +63,12 @@ module LegalFramework
         end
 
         it "returns false" do
-          expect(subject.call(**params)).to be false
+          expect(add_proceeding_service.call(**params)).to be false
         end
 
         it "does not call LeadProceedingAssignmentService" do
           expect(LeadProceedingAssignmentService).not_to receive(:call).with(legal_aid_application)
-          subject.call(**params)
+          add_proceeding_service.call(**params)
         end
       end
     end

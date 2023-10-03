@@ -52,7 +52,7 @@ RSpec.describe DashboardEventHandler do
   end
 
   context "when a ccms_submission is saved" do
-    subject { create(:ccms_submission, aasm_state: state) }
+    subject(:create_ccms_submission) { create(:ccms_submission, aasm_state: state) }
 
     before { ActiveJob::Base.queue_adapter = :test }
 
@@ -63,11 +63,11 @@ RSpec.describe DashboardEventHandler do
 
       it "does not fire additional Application jobs" do
         # one is fired from creating the LegalAidApplication required by the ccms_submission factory
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
       end
 
       it "fires PendingCCMSSubmissions job" do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
       end
     end
 
@@ -75,11 +75,11 @@ RSpec.describe DashboardEventHandler do
       let(:state) { "failed" }
 
       it "fires the Applications job" do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
       end
 
       it "fires PendingCCMSSubmissions job" do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
       end
     end
 
@@ -87,11 +87,11 @@ RSpec.describe DashboardEventHandler do
       let(:state) { "completed" }
 
       it "fires the Applications job" do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
       end
 
       it "fires the PendingCCMSSubmissions job" do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
       end
     end
 
@@ -100,11 +100,11 @@ RSpec.describe DashboardEventHandler do
 
       it "does not fire additional Application jobs" do
         # one is fired from creating the LegalAidApplication required by the ccms_submission factory
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
       end
 
       it "fires the PendingCCMSSubmissions job" do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
       end
     end
 
@@ -113,11 +113,11 @@ RSpec.describe DashboardEventHandler do
 
       it "does not fire additional Application jobs" do
         # one is fired from creating the LegalAidApplication required by the ccms_submission factory
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
+        expect { create_ccms_submission }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
       end
 
       it "does not fire a PendingCCMSSubmissions job" do
-        expect { subject }.not_to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions")
+        expect { create_ccms_submission }.not_to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions")
       end
     end
   end

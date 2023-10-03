@@ -2,7 +2,7 @@ require "rails_helper"
 
 module LegalFramework
   RSpec.describe LeadProceedingAssignmentService do
-    subject { described_class.call(laa) }
+    subject(:lead_proceeding_assignment) { described_class.call(laa) }
 
     let(:p_da1) { laa.proceedings.where(ccms_code: "DA001").first }
     let(:p_da2) { laa.proceedings.where(ccms_code: "DA004").first }
@@ -16,7 +16,7 @@ module LegalFramework
       before { make_lead!(p_da2) }
 
       it "changes nothing" do
-        subject
+        lead_proceeding_assignment
         expect(p_s81.lead_proceeding?).to be false
         expect(p_s82.lead_proceeding?).to be false
         expect(p_da1.lead_proceeding?).to be false
@@ -29,7 +29,7 @@ module LegalFramework
       let(:first_proceeding) { laa.proceedings.in_order_of_addition.first }
 
       it "sets the proceeding added first as the lead proceeding" do
-        subject
+        lead_proceeding_assignment
         expect(first_proceeding.lead_proceeding?).to be true
         laa.proceedings.in_order_of_addition[1..].each do |proceeding|
           expect(proceeding.lead_proceeding?).to be false
@@ -41,7 +41,7 @@ module LegalFramework
       let(:explicit_proceedings) { %i[se013 se014] }
 
       it "sets the proceeding added first as the lead proceeding" do
-        subject
+        lead_proceeding_assignment
         expect(p_s81.lead_proceeding?).to be true
         expect(p_s82.lead_proceeding?).to be false
       end

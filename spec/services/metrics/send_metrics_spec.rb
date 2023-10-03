@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Metrics::SendMetrics do
   describe "#call" do
-    subject { described_class.call }
+    subject(:call_send_metrics) { described_class.call }
 
     let(:metrics_service_host) { Faker::Internet.domain_word }
     let(:prometheus_client) { spy(PrometheusExporter::Client) }
@@ -19,12 +19,12 @@ RSpec.describe Metrics::SendMetrics do
         .to receive(:new)
         .with(host: metrics_service_host, thread_sleep: prometheus_thread_sleep)
         .and_return(prometheus_client)
-      subject
+      call_send_metrics
     end
 
     it "sleeps for twice the time of a prometheus loop" do
       expect_any_instance_of(Object).to receive(:sleep).with(prometheus_thread_sleep * 2)
-      subject
+      call_send_metrics
     end
 
     it "sends to prometheus the size of sidekiq queues" do
@@ -35,7 +35,7 @@ RSpec.describe Metrics::SendMetrics do
           queue: "mailers",
         ),
       )
-      subject
+      call_send_metrics
     end
   end
 end

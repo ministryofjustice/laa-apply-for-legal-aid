@@ -110,28 +110,11 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 189
+# Offense count: 90
 # Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/services/admin/provider_details_service_spec.rb'
-    - 'spec/services/bank_holiday_retriever_service_spec.rb'
-    - 'spec/services/banking/bank_transaction_balance_calculator_spec.rb'
-    - 'spec/services/banking/bank_transactions_trimmer_spec.rb'
-    - 'spec/services/banking/state_benefit_analyser_service_spec.rb'
-    - 'spec/services/dashboard_event_handler_spec.rb'
-    - 'spec/services/delegated_functions_date_service_spec.rb'
-    - 'spec/services/flow/base_flow_service_spec.rb'
-    - 'spec/services/flow/key_point_spec.rb'
-    - 'spec/services/govuk_emails/delivery_man_spec.rb'
-    - 'spec/services/job_queue_spec.rb'
-    - 'spec/services/legal_framework/add_proceeding_service_spec.rb'
-    - 'spec/services/legal_framework/lead_proceeding_assignment_service_spec.rb'
-    - 'spec/services/malware_scanner_spec.rb'
-    - 'spec/services/metrics/send_metrics_spec.rb'
-    - 'spec/services/metrics/sidekiq_queue_sizes_spec.rb'
-    - 'spec/services/mock_benefit_check_service_spec.rb'
     - 'spec/services/page_history_service_spec.rb'
     - 'spec/services/pdf_converter_spec.rb'
     - 'spec/services/populators/transaction_type_populator_spec.rb'

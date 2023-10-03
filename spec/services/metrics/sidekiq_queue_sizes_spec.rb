@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Metrics::SidekiqQueueSizes do
   describe "#call" do
-    subject { described_class.call(prometheus_client) }
+    subject(:call_queue_sizes) { described_class.call(prometheus_client) }
 
     let(:queues) { %w[default mailers active_storage_analysis active_storage_purge] }
     let(:prometheus_client) { spy(PrometheusExporter::Client) }
@@ -14,7 +14,7 @@ RSpec.describe Metrics::SidekiqQueueSizes do
           type: collector_type, queue:, size: Sidekiq::Queue.new(queue).size,
         )
       end
-      subject
+      call_queue_sizes
     end
 
     context "with known sizes" do
@@ -35,7 +35,7 @@ RSpec.describe Metrics::SidekiqQueueSizes do
             type: collector_type, queue:, size: expected_sizes[queue],
           )
         end
-        subject
+        call_queue_sizes
       end
     end
   end
