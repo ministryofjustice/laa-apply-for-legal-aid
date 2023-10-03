@@ -7,10 +7,10 @@
   <p class="govuk-body"><%= t ".sent_email_text", email: @legal_aid_application.applicant.email %></p>
 
   <%= govuk_button_link_to t(".change_email_button"),
-                    providers_legal_aid_application_email_address_path,
-                    role: "button",
-                    secondary: true,
-                    id: "change-email" %>
+                           providers_legal_aid_application_email_address_path,
+                           role: "button",
+                           secondary: true,
+                           id: "change-email" %>
 
   <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t ".happen_next_heading" %></h2>
   <p class="govuk-body">
