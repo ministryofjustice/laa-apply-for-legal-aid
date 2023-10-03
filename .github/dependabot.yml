@@ -12,6 +12,9 @@ updates:
     aws-gems:
       patterns:
         - "aws-*"
+    axe-gems:
+      patterns:
+        - "axe-core-*"
   open-pull-requests-limit: 10
   ignore:
   - dependency-name: prometheus_exporter
