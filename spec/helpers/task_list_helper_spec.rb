@@ -11,7 +11,7 @@ RSpec.describe TaskListHelper do
         <<~RESULT
           <li class="app-task-list__item">
             <span class="app-task-list__task-name">
-                <a aria_describedby="children_application-status" aria-label="Children involved in this application" class="govuk-link" href="/providers/applications/#{legal_aid_application.id}/has_other_involved_children?locale=en">Children involved in this application</a>
+                <a aria_describedby="children_application-status" class="govuk-link" aria-label="Children involved in this application" href="/providers/applications/#{legal_aid_application.id}/has_other_involved_children?locale=en">Children involved in this application</a>
             </span>
             <strong class="govuk-tag app-task-list__tag" id="children_application__status">Completed</strong>
           </li>
@@ -31,7 +31,7 @@ RSpec.describe TaskListHelper do
         <<~RESULT
           <li class="app-task-list__item">
             <span class="app-task-list__task-name">
-                <a aria_describedby="children_application-status" aria-label="Children involved in this application" class="govuk-link" href="/providers/applications/#{legal_aid_application.id}/involved_children/new?locale=en">Children involved in this application</a>
+                <a aria_describedby="children_application-status" class="govuk-link" aria-label="Children involved in this application" href="/providers/applications/#{legal_aid_application.id}/involved_children/new?locale=en">Children involved in this application</a>
             </span>
             <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="children_application__status">Not started</strong>
           </li>
@@ -53,7 +53,7 @@ RSpec.describe TaskListHelper do
         <<~RESULT
           <li class="app-task-list__item">
             <span class="app-task-list__task-name">
-                <a aria_describedby="chances_of_success-status" aria-label="Chances of success" class="govuk-link" href="/providers/merits_task_list/#{proceeding.id}/chances_of_success?locale=en">Chances of success</a>
+                <a aria_describedby="chances_of_success-status" class="govuk-link" aria-label="Chances of success" href="/providers/merits_task_list/#{proceeding.id}/chances_of_success?locale=en">Chances of success</a>
             </span>
             <strong class="govuk-tag app-task-list__tag" id="chances_of_success_DA001_status">Completed</strong>
           </li>
@@ -79,7 +79,7 @@ RSpec.describe TaskListHelper do
             <<~RESULT
               <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a aria_describedby="opponent_name-status" aria-label="Opponents" class="govuk-link" href="/providers/applications/#{legal_aid_application.id}/opponent_type?locale=en">Opponents</a>
+                    <a aria_describedby="opponent_name-status" class="govuk-link" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/opponent_type?locale=en">Opponents</a>
                 </span>
                 <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="opponent_name__status">Not started</strong>
               </li>
@@ -100,7 +100,7 @@ RSpec.describe TaskListHelper do
             <<~RESULT
               <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a aria_describedby="opponent_name-status" aria-label="Opponents" class="govuk-link" href="/providers/applications/#{legal_aid_application.id}/has_other_opponent?locale=en">Opponents</a>
+                    <a aria_describedby="opponent_name-status" class="govuk-link" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/has_other_opponent?locale=en">Opponents</a>
                 </span>
                 <strong class="govuk-tag app-task-list__tag" id="opponent_name__status">Completed</strong>
               </li>
@@ -127,7 +127,7 @@ RSpec.describe TaskListHelper do
             <<~RESULT
               <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a aria_describedby="opponent_name-status" aria-label="Opponents" class="govuk-link" href="/providers/applications/#{legal_aid_application.id}/opponent_individuals/new?locale=en">Opponents</a>
+                    <a aria_describedby="opponent_name-status" class="govuk-link" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/opponent_individuals/new?locale=en">Opponents</a>
                 </span>
                 <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="opponent_name__status">Not started</strong>
               </li>
@@ -148,7 +148,7 @@ RSpec.describe TaskListHelper do
             <<~RESULT
               <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a aria_describedby="opponent_name-status" aria-label="Opponents" class="govuk-link" href="/providers/applications/#{legal_aid_application.id}/has_other_opponent?locale=en">Opponents</a>
+                    <a aria_describedby="opponent_name-status" class="govuk-link" aria-label="Opponents" href="/providers/applications/#{legal_aid_application.id}/has_other_opponent?locale=en">Opponents</a>
                 </span>
                 <strong class="govuk-tag app-task-list__tag" id="opponent_name__status">Completed</strong>
               </li>
