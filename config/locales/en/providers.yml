@@ -703,6 +703,7 @@ en:
         print_application:
           under_18: Print the completed application and get the person acting for %{applicant_name} to sign it. For example, a litigation friend, a professional children’s guardian or a parental order report.
           over_18: Print the completed application and get your client to sign it.
+          with_partner: Print the completed application and get your client and their partner to sign it.
         financial_evidence: any evidence you used to determine your client’s financial situation
         client_sign: a signed copy of the declaration
         keep_file: "Keep on file:"
