@@ -234,7 +234,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Restrictions' should be 'Yes'
-      And the answer for 'Restrictions' should be 'Restraint or freezing order'
+      And the answer for 'Restrictions details' should be 'Restraint or freezing order'
       And I click Check Your Answers Change link for 'Restrictions'
       Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
       Then I choose 'No'
