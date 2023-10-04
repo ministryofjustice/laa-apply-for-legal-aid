@@ -1478,6 +1478,7 @@ en:
         print_your_application: Print your application
         print_the_application:
           means_tested: Print the application and get your client to sign the declaration.
+          means_tested_with_partner: Print the application and get your client and their partner to sign the declaration.
           non_means_tested: |
             Print the application and get the person acting for %{applicant_name} to sign it. For example,
             a litigation friend, a professional children’s guardian or a parental order report.
