@@ -12,11 +12,15 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
-    When I fill "First Name" with "John"
-    And I fill "Last Name" with "Doe"
+    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    And I choose a 'An individual' radio button
     When I click 'Save and continue'
-    Then I should be on a page showing "You have added 1 opponent"
+    Then I should be on a page with title "Opponent"
+    When I fill "First Name" with "John"
+    Then I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page with title "You have added 1 opponent"
+    And I should be on a page showing "Do you need to add another opponent?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
@@ -84,16 +88,26 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
-    When I fill "First Name" with "John"
-    And I fill "Last Name" with "Doe"
+    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    And I choose a 'An individual' radio button
     When I click 'Save and continue'
-    Then I should be on a page showing "You have added 1 opponent"
+    Then I should be on a page with title "Opponent"
+    When I fill "First Name" with "John"
+    Then I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page with title "You have added 1 opponent"
+    And I should be on a page showing "Do you need to add another opponent?"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
+    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    And I choose a 'An individual' radio button
+    When I click 'Save and continue'
+    Then I should be on a page with title "Opponent"
     When I fill "First Name" with "Jane"
-    And I fill "Last Name" with "Doe"
+    Then I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page with title "You have added 2 opponents"
+    And I should be on a page showing "Do you need to add another opponent?"
     When I click 'Save and continue'
     Then I should be on a page showing "You have added 2 opponents"
     When I choose "No"
@@ -131,11 +145,15 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
-    When I fill "First Name" with "John"
-    And I fill "Last Name" with "Doe"
+    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    And I choose a 'An individual' radio button
     When I click 'Save and continue'
-    Then I should be on a page showing "You have added 1 opponent"
+    Then I should be on a page with title "Opponent"
+    When I fill "First Name" with "John"
+    Then I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page with title "You have added 1 opponent"
+    And I should be on a page showing "Do you need to add another opponent?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
@@ -182,11 +200,15 @@ Feature: Merits task list
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
-    When I fill "First Name" with "John"
-    And I fill "Last Name" with "Doe"
+    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    And I choose a 'An individual' radio button
     When I click 'Save and continue'
-    Then I should be on a page showing "You have added 1 opponent"
+    Then I should be on a page with title "Opponent"
+    When I fill "First Name" with "John"
+    Then I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page with title "You have added 1 opponent"
+    And I should be on a page showing "Do you need to add another opponent?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"

@@ -69,15 +69,20 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I enter the 'occurred' date of 2 days ago
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent"
+    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    And I choose a 'An individual' radio button
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Opponent"
     And I fill "First Name" with "John"
     And I fill "Last Name" with "Doe"
 
     When I click 'Save and continue'
-    Then I should be on a page showing "You have added 1 opponent"
-    When I choose "No"
-    And I click 'Save and continue'
+    Then I should be on a page with title "You have added 1 opponent"
+    And I should be on a page showing "Do you need to add another opponent?"
+    And I choose "No"
 
+    When I click 'Save and continue'
     Then I should be on a page showing "Do all parties have the mental capacity to understand the terms of a court order?"
     And I choose "Yes"
 
