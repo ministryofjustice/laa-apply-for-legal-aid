@@ -54,7 +54,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be "No"
     And the answer for 'Restrictions' should be 'Yes'
-    And the answer for 'Restrictions' should be 'Restrictions include:'
+    And the answer for 'Restrictions Details' should be 'Restrictions include:'
 
   @javascript
   Scenario: I am able to go back and not change property owned and come straight back to check passported answers

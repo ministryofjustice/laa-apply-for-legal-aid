@@ -948,11 +948,14 @@ Then("I click on the add payments link for outgoing type {string}") do |outgoing
 end
 
 Then("the answer for {string} should be {string}") do |field_name, answer|
-  # TODO: Deprecate or refactor this so it actually works as expected AP-4468 raised to address
   field_name.downcase!
   field_name.gsub!(/\s+/, "_")
-  expect(page).to have_css("#app-check-your-answers__#{field_name}")
-  expect(page).to have_content(answer)
+  selector = "#app-check-your-answers__#{field_name}"
+
+  expect(page).to have_css(selector)
+  within(selector) do
+    expect(page).to have_content(answer)
+  end
 end
 
 Then("the {string} answer for vehicle {int} should be {string}") do |field_name, vehicle, answer|
