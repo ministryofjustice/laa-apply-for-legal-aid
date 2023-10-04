@@ -19,6 +19,7 @@ module Providers
         before do
           create(:opponent, legal_aid_application: application)
           create(:opponent, :for_organisation, organisation_name: "Mid Beds Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority", legal_aid_application: application)
+          create(:opponent, :for_individual, first_name: "John", last_name: "Doe", legal_aid_application: application)
         end
 
         it "returns success" do
@@ -26,15 +27,17 @@ module Providers
           expect(response).to have_http_status(:ok)
         end
 
-        it "displays the opponent organisation" do
+        it "displays the opponent organisation and opponent individual" do
           get_has_other
-          expect(response.body).to include("Mid Beds Council")
-          expect(response.body).to include("Local Authority")
+          expect(response.body)
+            .to include("Mid Beds Council")
+            .and include("Local Authority")
+            .and include("John Doe")
         end
 
         it "displays the do you want to add more page" do
           get_has_other
-          expect(response.body).to include("You have added 2 opponents")
+          expect(response.body).to include("You have added 3 opponents")
           expect(response.body).to include("Do you need to add another opponent?")
         end
       end
@@ -56,30 +59,14 @@ module Providers
         context "when adding another opponent" do
           let(:radio_button) { "true" }
 
-          it "redirects to new opponent" do
+          it "redirects to opponent type" do
             patch_has_other
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
           end
 
           it "does not set the task to complete" do
             patch_has_other
             expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :opponent_name)
-          end
-
-          context "when opponent_organisations flag is set to true" do
-            before do
-              allow(Setting).to receive(:opponent_organisations?).and_return(true)
-            end
-
-            it "redirects to opponent type" do
-              patch_has_other
-              expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
-            end
-
-            it "does not set the task to complete" do
-              patch_has_other
-              expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :opponent_name)
-            end
           end
         end
 
