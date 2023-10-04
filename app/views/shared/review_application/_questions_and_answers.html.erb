@@ -111,4 +111,6 @@
       <%= t(".client_declaration.date") %>
     </p>
   </section>
+
+  <%= render "shared/partner_declaration" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 </div>

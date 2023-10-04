@@ -76,6 +76,19 @@ en:
         be prosecuted
         need to pay a financial penalty
         have my legal aid stopped and have to pay back the costs
+    partner_declaration:
+      heading: Partner declaration
+      signature: "Partner signature:"
+      date: "Date:"
+      confirm_following: Confirm the following
+      declaration_list_title: 'By signing this declaration, I agree that:'
+      declaration_list:
+        a_html: I've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
+        b_html: |
+          LAA can share my information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
+          and <abbr title="HM Revenue and Customs">HMRC</abbr>
+        c: LAA can check my details with my bank and credit reference agencies
+        d: the information I have given is complete and correct
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"
