@@ -59,23 +59,23 @@ en:
         have your legal aid stopped and have to pay back the costs
     printable_over_18_declaration:
       confirm_following: Confirm the following
-      declaration_list_title: 'By signing this declaration, you agree that:'
+      declaration_list_title: 'By signing this declaration, I agree that:'
       declaration_list:
-        a: you've instructed %{firm} to represent you
-        b_html: you've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
+        a: I've instructed %{firm} to represent you
+        b_html: I've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
         c_html: |
-          we can share your information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
+          LAA can share my information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
           and <abbr title="HM Revenue and Customs">HMRC</abbr>
-        d: we can check your details with your bank and credit reference agencies
-        e: you may have to pay towards your legal aid
-        f: you may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
-        g: the information you've given is complete and correct
-        h: you'll report any changes to your financial situation immediately
-      warning_list_summary: If you have given wrong or incomplete information, do not report changes, or are found to have committed benefit fraud, you may
+        d: LAA can check my details with my bank and credit reference agencies
+        e: I may have to pay towards my legal aid
+        f: I may have to repay the legal costs if I keep or gain property or money at the end of the case (the 'statutory charge')
+        g: the information I've given is complete and correct
+        h: I'll report any changes to my financial situation immediately
+      warning_list_summary: If I’ve given wrong or incomplete information, do not report changes, or I’m found to have committed benefit fraud, I may
       warning_list: |
         be prosecuted
         need to pay a financial penalty
-        have your legal aid stopped and have to pay back the costs
+        have my legal aid stopped and have to pay back the costs
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"
