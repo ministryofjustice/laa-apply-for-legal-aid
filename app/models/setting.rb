@@ -27,10 +27,6 @@ class Setting < ApplicationRecord
     setting.partner_means_assessment
   end
 
-  def self.opponent_organisations?
-    setting.opponent_organisations
-  end
-
   def self.linked_applications?
     setting.linked_applications
   end

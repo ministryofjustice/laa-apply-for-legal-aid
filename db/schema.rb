@@ -926,7 +926,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
     t.boolean "partner_means_assessment", default: false, null: false
     t.datetime "cfe_compare_run_at"
-    t.boolean "opponent_organisations", default: false, null: false
     t.boolean "linked_applications", default: false, null: false
   end
 
