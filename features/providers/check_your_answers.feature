@@ -169,8 +169,15 @@ Feature: Checking answers backwards and forwards
     And I select 'Vaccine Damage Payments Scheme'
     Then I click 'Save and continue'
     Then I am on the check your answers page for policy disregards
-    And the answer for 'policy disregards' should be 'England Infected Blood Support Scheme'
-    And the answer for 'policy disregards' should be 'Vaccine Damage Payments Scheme'
+    And the "policy disregards items" list's questions and answers should match:
+      | question | answer |
+      | England Infected Blood Support Scheme | Yes |
+      | Vaccine Damage Payments Scheme | Yes |
+      | Variant Creutzfeldt-Jakob disease (vCJD) Trust | No |
+      | Criminal Injuries Compensation Scheme | No |
+      | National Emergencies Trust (NET) | No |
+      | We Love Manchester Emergency Fund | No |
+      | The London Emergencies Trust | No |
 
     @javascript
     Scenario: I want to change property value via the capital check your answers page

@@ -82,6 +82,13 @@ Then("the {string} section's questions and answers should match:") do |section, 
   expect_matching_questions_and_answers(actual_selector: "[data-check-your-answers-section=\"#{section}\"]", expected_table: table)
 end
 
+Then("the {string} list's questions and answers should match:") do |section, table|
+  section.downcase!
+  section.gsub!(/\s+/, "_")
+  section = "#app-check-your-answers__#{section}"
+  expect_matching_questions_and_answers(actual_selector: section, expected_table: table)
+end
+
 Then("the radio button response for {string} should be {string}") do |question, answer|
   question.downcase!
   question.gsub!(/\s+/, "-")
