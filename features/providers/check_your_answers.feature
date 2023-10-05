@@ -54,7 +54,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be "No"
     And the answer for 'Restrictions' should be 'Yes'
-    And the answer for 'Restrictions' should be 'Restrictions include:'
+    And the answer for 'Restrictions Details' should be 'Restrictions include:'
 
   @javascript
   Scenario: I am able to go back and not change property owned and come straight back to check passported answers
@@ -169,8 +169,15 @@ Feature: Checking answers backwards and forwards
     And I select 'Vaccine Damage Payments Scheme'
     Then I click 'Save and continue'
     Then I am on the check your answers page for policy disregards
-    And the answer for 'policy disregards' should be 'England Infected Blood Support Scheme'
-    And the answer for 'policy disregards' should be 'Vaccine Damage Payments Scheme'
+    And the "policy disregards items" list's questions and answers should match:
+      | question | answer |
+      | England Infected Blood Support Scheme | Yes |
+      | Vaccine Damage Payments Scheme | Yes |
+      | Variant Creutzfeldt-Jakob disease (vCJD) Trust | No |
+      | Criminal Injuries Compensation Scheme | No |
+      | National Emergencies Trust (NET) | No |
+      | We Love Manchester Emergency Fund | No |
+      | The London Emergencies Trust | No |
 
     @javascript
     Scenario: I want to change property value via the capital check your answers page
@@ -234,7 +241,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Restrictions' should be 'Yes'
-      And the answer for 'Restrictions' should be 'Restraint or freezing order'
+      And the answer for 'Restrictions details' should be 'Restraint or freezing order'
       And I click Check Your Answers Change link for 'Restrictions'
       Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
       Then I choose 'No'
