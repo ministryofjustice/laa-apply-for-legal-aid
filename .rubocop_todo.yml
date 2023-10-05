@@ -110,32 +110,6 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 90
-# Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
-# SupportedStyles: always, named_only
-RSpec/NamedSubject:
-  Exclude:
-    - 'spec/services/page_history_service_spec.rb'
-    - 'spec/services/pdf_converter_spec.rb'
-    - 'spec/services/populators/transaction_type_populator_spec.rb'
-    - 'spec/services/provider_after_login_service_spec.rb'
-    - 'spec/services/provider_details_retriever_spec.rb'
-    - 'spec/services/provider_email_service_spec.rb'
-    - 'spec/services/reports/bank_transactions/bank_transaction_report_creator_spec.rb'
-    - 'spec/services/reports/merits_report_creator_spec.rb'
-    - 'spec/services/reports/mis/non_passported_application_csv_line_spec.rb'
-    - 'spec/services/reports/reports_creator_spec.rb'
-    - 'spec/services/required_document_category_analyser_spec.rb'
-    - 'spec/services/submit_application_reminder_service_spec.rb'
-    - 'spec/services/submit_provider_reminder_service_spec.rb'
-    - 'spec/services/substantive_application_deadline_calculator_spec.rb'
-    - 'spec/services/true_layer/api_client_mock_spec.rb'
-    - 'spec/services/true_layer/banks_retriever_spec.rb'
-    - 'spec/services/true_layer/importers/import_account_balance_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_account_holders_service_spec.rb'
-    - 'spec/services/true_layer/importers/import_accounts_service_spec.rb'
-    - 'spec/services/true_layer_error_decoder_spec.rb'
-
 # Offense count: 16
 RSpec/RepeatedDescription:
   Exclude:
@@ -153,7 +127,6 @@ RSpec/RepeatedExample:
     - 'spec/requests/providers/means/savings_and_investments_spec.rb'
     - 'spec/requests/providers/offline_accounts_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-    - 'spec/services/provider_after_login_service_spec.rb'
 
 # Offense count: 20
 RSpec/RepeatedExampleGroupDescription:
@@ -198,7 +171,6 @@ RSpec/StubbedMock:
     - 'spec/services/digest_exporter_spec.rb'
     - 'spec/services/govuk_emails/delivery_man_spec.rb'
     - 'spec/services/metrics/send_metrics_spec.rb'
-    - 'spec/services/provider_after_login_service_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
     - 'spec/services/true_layer/api_client_mock_spec.rb'
 

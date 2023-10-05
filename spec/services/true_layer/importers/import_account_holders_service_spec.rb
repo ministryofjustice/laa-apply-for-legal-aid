@@ -5,7 +5,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
   let(:api_client) { TrueLayer::ApiClient.new(SecureRandom.hex) }
 
   describe "#call" do
-    subject { described_class.call(api_client, bank_provider) }
+    subject(:call) { described_class.call(api_client, bank_provider) }
 
     let(:mock_account_holder1) { TrueLayerHelpers::MOCK_DATA[:account_holders][0] }
     let(:mock_account_holder2) { TrueLayerHelpers::MOCK_DATA[:account_holders][1] }
@@ -19,7 +19,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
       end
 
       it "adds the bank account holders to the bank_provider" do
-        subject
+        call
         expect(bank_account_holder1.full_name).to eq(mock_account_holder1[:full_name])
         expect(bank_account_holder1.true_layer_response).to eq(mock_account_holder1.deep_stringify_keys)
         expect(bank_account_holder1.addresses).to eq(mock_account_holder1[:addresses].map(&:deep_stringify_keys))
@@ -28,12 +28,12 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
       end
 
       it "removes existing bank account holders" do
-        subject
+        call
         expect { existing_bank_account_holder.reload }.to raise_error ActiveRecord::RecordNotFound
       end
 
       it "is successful" do
-        expect(subject.success?).to be(true)
+        expect(call.success?).to be(true)
       end
     end
 
@@ -43,11 +43,11 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
       end
 
       it "does not change anything" do
-        expect { subject }.not_to change { bank_provider.bank_account_holders.count }
+        expect { call }.not_to change { bank_provider.bank_account_holders.count }
       end
 
       it "returns an error" do
-        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_account_holders)
+        expect(JSON.parse(call.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_account_holders)
       end
     end
   end

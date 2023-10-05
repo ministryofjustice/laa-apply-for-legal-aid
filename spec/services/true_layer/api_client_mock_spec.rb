@@ -1,28 +1,28 @@
 require "rails_helper"
 
 RSpec.describe TrueLayer::ApiClientMock do
-  subject { described_class.new(SecureRandom.hex) }
+  subject(:api_client_mock) { described_class.new(SecureRandom.hex) }
 
   describe "#provider" do
     it "returns sample data" do
-      expect(subject.provider.value).to eq(TrueLayer::SampleData::PROVIDERS)
+      expect(api_client_mock.provider.value).to eq(TrueLayer::SampleData::PROVIDERS)
     end
   end
 
   describe "#account_holders" do
     it "returns sample data" do
-      expect(subject.account_holders.value).to eq(TrueLayer::SampleData::ACCOUNT_HOLDERS)
+      expect(api_client_mock.account_holders.value).to eq(TrueLayer::SampleData::ACCOUNT_HOLDERS)
     end
   end
 
   describe "#accounts" do
     it "returns sample data" do
-      expect(subject.accounts.value).to eq(TrueLayer::SampleData::ACCOUNTS)
+      expect(api_client_mock.accounts.value).to eq(TrueLayer::SampleData::ACCOUNTS)
     end
   end
 
   describe "#transactions" do
-    let(:result) { subject.transactions.value }
+    let(:result) { api_client_mock.transactions.value }
 
     it "returns sample data" do
       expect(result).not_to be_empty
@@ -35,7 +35,7 @@ RSpec.describe TrueLayer::ApiClientMock do
     end
 
     it "always returns the same data" do
-      second_result = subject.transactions.value
+      second_result = api_client_mock.transactions.value
       expect(result).to eq(second_result)
     end
 
@@ -90,7 +90,7 @@ RSpec.describe TrueLayer::ApiClientMock do
 
   describe "#account_balance" do
     it "returns sample data" do
-      expect(subject.account_balance.value).to eq(TrueLayer::SampleData::BALANCES)
+      expect(api_client_mock.account_balance.value).to eq(TrueLayer::SampleData::BALANCES)
     end
   end
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Reports::ReportsCreator do
-  subject { described_class.call(legal_aid_application) }
+  subject(:call) { described_class.call(legal_aid_application) }
 
   let(:legal_aid_application) do
     create(:legal_aid_application,
@@ -17,7 +17,7 @@ RSpec.describe Reports::ReportsCreator do
       expect(Reports::MeritsReportCreator).to receive(:call).with(legal_aid_application)
       expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)
       expect(Reports::BankTransactions::BankTransactionReportCreator).not_to receive(:call).with(legal_aid_application)
-      subject
+      call
       legal_aid_application.reload
       expect(legal_aid_application.state).to eq("submitting_assessment")
     end
@@ -37,7 +37,7 @@ RSpec.describe Reports::ReportsCreator do
         expect(Reports::MeritsReportCreator).to receive(:call).with(legal_aid_application)
         expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)
         expect(Reports::BankTransactions::BankTransactionReportCreator).to receive(:call).with(legal_aid_application)
-        subject
+        call
         legal_aid_application.reload
         expect(legal_aid_application.state).to eq("submitting_assessment")
       end

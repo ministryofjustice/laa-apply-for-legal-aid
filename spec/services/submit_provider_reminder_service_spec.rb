@@ -2,15 +2,13 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe SubmitProviderReminderService, :vcr do
-  subject { described_class.new(application) }
-
   let(:provider) { create(:provider, email: "test@example.com") }
   let(:application) { create(:application, :with_applicant, provider:) }
   let(:application_url) { "http://test.com" }
 
   describe "#send_email" do
     it "creates two scheduled mailing records" do
-      expect { subject.send_email }.to change(ScheduledMailing, :count).by(1)
+      expect { described_class.new(application).send_email }.to change(ScheduledMailing, :count).by(1)
     end
 
     describe "sending the email" do

@@ -3,7 +3,7 @@ require "rails_helper"
 module Populators
   RSpec.describe TransactionTypePopulator do
     describe ".call" do
-      subject { described_class.call }
+      subject(:call) { described_class.call }
 
       let(:names) { TransactionType::NAMES }
       let(:credit_names) { names[:credit] }
@@ -12,11 +12,11 @@ module Populators
       let(:archived_credit_names) { %i[student_loan] }
 
       it "creates instances from names" do
-        expect { subject }.to change(TransactionType, :count).by(total)
+        expect { call }.to change(TransactionType, :count).by(total)
       end
 
       it "assigns the names to the correct operation" do
-        subject
+        call
         expect(TransactionType.debits.count).to eq(debit_names.length)
         expect(TransactionType.credits.count).to eq(credit_names.length - archived_credit_names.length)
         expect(debit_names.map(&:to_s)).to include(TransactionType.debits.first.name)
@@ -28,15 +28,15 @@ module Populators
         let!(:debit_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
 
         it "creates one less transaction type" do
-          expect { subject }.to change(TransactionType, :count).by(total - 2)
+          expect { call }.to change(TransactionType, :count).by(total - 2)
         end
       end
 
       context "when run twice" do
         it "creates the same total number of instancees" do
           expect {
-            subject
-            subject
+            call
+            call
           }.to change(TransactionType, :count).by(total)
         end
       end
@@ -45,12 +45,12 @@ module Populators
         let!(:old_transaction_type) { create(:transaction_type, name: :council_tax) }
 
         it "sets the archived_at date in the database" do
-          subject
+          call
           expect(TransactionType.find_by(name: "council_tax").archived_at).not_to be_nil
         end
 
         it "does not set the archived_at date in the database for active transaction types" do
-          subject
+          call
           active_names = names.values.flatten - archived_credit_names
           active_names.each do |transaction_name|
             expect(TransactionType.find_by(name: transaction_name).archived_at).to be_nil
@@ -61,10 +61,10 @@ module Populators
 
     describe ".call(:without_income)" do
       # this is called from an old migration
-      subject { described_class.call(:without_income) }
+      subject(:call) { described_class.call(:without_income) }
 
       it "does not attempt to update other_income fields" do
-        subject
+        call
         expect(TransactionType.where(other_income: true).count).to eq 0
       end
     end

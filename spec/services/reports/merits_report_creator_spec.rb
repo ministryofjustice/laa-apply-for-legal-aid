@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Reports::MeritsReportCreator do
-  subject do
-    # dont' match on path - webpacker keeps changing the second part of the path
+  subject(:call) do
+    # don't match on path - webpacker keeps changing the second part of the path
     VCR.use_cassette("stylesheets2", match_requests_on: %i[method host headers]) do
       described_class.call(legal_aid_application)
     end
@@ -29,7 +29,7 @@ RSpec.describe Reports::MeritsReportCreator do
   describe ".call" do
     it "attaches merits_report.pdf to the application" do
       expect(Providers::MeritsReportsController.renderer).to receive(:render).and_call_original
-      subject
+      call
       legal_aid_application.reload
       expect(legal_aid_application.merits_report.document.content_type).to eq("application/pdf")
       expect(legal_aid_application.merits_report.document.filename).to eq("merits_report.pdf")
@@ -42,7 +42,7 @@ RSpec.describe Reports::MeritsReportCreator do
       before { allow(Rails.logger).to receive(:info) }
 
       it "does not attach a report if one already exists" do
-        expect { subject }.not_to change(Attachment, :count)
+        expect { call }.not_to change(Attachment, :count)
         expect(Rails.logger).to have_received(:info).with(expected_log).once
       end
 
@@ -56,7 +56,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
         it "creates a new report if the existing one is not downloadable" do
           # the count won';'t change as we delete one and create one
-          expect { subject }.not_to change(Attachment, :count)
+          expect { call }.not_to change(Attachment, :count)
           # check the original one has been deleted
           expect { attachment.reload }.to raise_error(ActiveRecord::RecordNotFound)
           expect(Rails.logger).to have_received(:info).with(expected_log)
@@ -88,7 +88,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
       it "processes the existing ccms submission" do
         expect(legal_aid_application.reload.ccms_submission).to receive(:process!)
-        subject
+        call
       end
 
       context "and the ccms submission does not exist" do
@@ -115,7 +115,7 @@ RSpec.describe Reports::MeritsReportCreator do
         it "creates a ccms submission" do
           expect(legal_aid_application.reload).to receive(:create_ccms_submission)
           expect_any_instance_of(described_class).to receive(:process_ccms_submission)
-          subject
+          call
         end
       end
     end

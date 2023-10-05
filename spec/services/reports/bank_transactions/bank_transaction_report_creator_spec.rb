@@ -26,10 +26,10 @@ module Reports
 
       describe ".call" do
         context "when there is no local_csv param" do
-          subject { described_class.call(legal_aid_application) }
+          subject(:call) { described_class.call(legal_aid_application) }
 
           it "attaches bank_transaction_report.csv to the application" do
-            subject
+            call
             legal_aid_application.reload
             expect(legal_aid_application.bank_transaction_report.document.content_type).to eq("text/csv")
             expect(legal_aid_application.bank_transaction_report.document.filename).to eq("bank_transaction_report.csv")
@@ -38,20 +38,20 @@ module Reports
           context "and the report already exists" do
             it "does not attach a report" do
               create(:attachment, :bank_transaction_report, legal_aid_application:)
-              expect { subject }.not_to change(Attachment, :count)
+              expect { call }.not_to change(Attachment, :count)
             end
           end
         end
 
         context "when there is a local_csv param" do
-          subject { creator.call(local_csv: true) }
+          subject(:call) { creator.call(local_csv: true) }
 
           let(:creator) { described_class.new(legal_aid_application) }
           let(:tempfile) { Rails.root.join("tmp/bank_transactions.csv") }
 
           it "creates a local file" do
             FileUtils.rm_rf(tempfile)
-            subject
+            call
             expect(File.exist?(tempfile)).to be true
           end
         end

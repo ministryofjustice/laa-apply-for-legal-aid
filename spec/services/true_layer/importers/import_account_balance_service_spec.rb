@@ -7,7 +7,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
   let(:api_client) { TrueLayer::ApiClient.new(SecureRandom.hex) }
 
   describe "#call" do
-    subject { described_class.call(api_client, bank_account) }
+    subject(:call) { described_class.call(api_client, bank_account) }
 
     context "when a request is successful" do
       before do
@@ -15,11 +15,11 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
       end
 
       it "updates the balance of the account" do
-        expect { subject }.to change { bank_account.balance.to_s }.to(mock_result[:current].to_s)
+        expect { call }.to change { bank_account.balance.to_s }.to(mock_result[:current].to_s)
       end
 
       it "is successful" do
-        expect(subject.success?).to be(true)
+        expect(call.success?).to be(true)
       end
     end
 
@@ -29,11 +29,11 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
       end
 
       it "does not change the balance of the account" do
-        expect { subject }.not_to change(bank_account, :balance)
+        expect { call }.not_to change(bank_account, :balance)
       end
 
       it "returns an error" do
-        expect(JSON.parse(subject.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_account_balance)
+        expect(JSON.parse(call.errors.to_json).deep_symbolize_keys.keys.first).to eq(:import_account_balance)
       end
     end
   end
