@@ -3,7 +3,7 @@ require "rails_helper"
 ErrorResponseStruct = Struct.new(:code, :body)
 
 RSpec.describe GovukEmails::DeliveryMan do
-  subject { described_class.call(scheduled_mailing.id) }
+  subject(:delivery_man) { described_class.call(scheduled_mailing.id) }
 
   let(:scheduled_mailing) { create(:scheduled_mailing, :waiting) }
   let(:mailer_klass) { scheduled_mailing.mailer_klass }
@@ -15,7 +15,7 @@ RSpec.describe GovukEmails::DeliveryMan do
 
       it "does not ask if mail eligible for delivery" do
         expect(mailer_klass.constantize).not_to receive(:eligible_for_delivery?)
-        subject
+        delivery_man
       end
 
       it "does not try to delivery the message" do
@@ -35,14 +35,14 @@ RSpec.describe GovukEmails::DeliveryMan do
         it "delivers the mail" do
           expect(mailer_klass.constantize).to receive(mailer_method).and_return(message)
           expect(message).to receive(:deliver_now!).and_return(message)
-          subject
+          delivery_man
         end
 
         it "updates the scheduled mail record" do
           travel_to time_now
           allow(mailer_klass.constantize).to receive(mailer_method).and_return(message)
           allow(message).to receive(:deliver_now!).and_return(message)
-          subject
+          delivery_man
 
           scheduled_mailing.reload
           expect(scheduled_mailing.status).to eq "processing"
@@ -72,13 +72,13 @@ RSpec.describe GovukEmails::DeliveryMan do
         end
 
         it "cancels the scheduled mail" do
-          subject
+          delivery_man
           expect(scheduled_mailing.reload.status).to eq "cancelled"
         end
 
         it "is does not get sent to Sentry" do
           expect(Sentry).not_to receive(:capture_exception)
-          subject
+          delivery_man
         end
       end
 
@@ -86,7 +86,7 @@ RSpec.describe GovukEmails::DeliveryMan do
         before { allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(false) }
 
         it "cancels the mail" do
-          subject
+          delivery_man
           scheduled_mailing.reload
           expect(scheduled_mailing.status).to eq "cancelled"
           expect(scheduled_mailing.cancelled_at).to have_been_in_the_past
@@ -106,7 +106,7 @@ RSpec.describe GovukEmails::DeliveryMan do
 
         it "is captured by AlertManager" do
           expect(AlertManager).to receive(:capture_exception).with(message_contains("Mailing job failed"))
-          subject
+          delivery_man
         end
       end
     end

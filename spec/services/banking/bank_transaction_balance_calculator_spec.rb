@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Banking
   RSpec.describe BankTransactionBalanceCalculator do
-    subject { described_class.call(application) }
+    subject(:bank_transaction_balance_calculator) { described_class.call(application) }
 
     let(:application) { create(:legal_aid_application, :with_applicant) }
     let(:applicant) { application.applicant }
@@ -12,7 +12,7 @@ module Banking
 
     before do
       populate_all_transactions
-      subject
+      bank_transaction_balance_calculator
     end
 
     describe ".call" do

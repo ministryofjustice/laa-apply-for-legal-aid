@@ -3,7 +3,7 @@ require "rails_helper"
 class TestFlowService < Flow::BaseFlowService; end
 
 RSpec.describe Flow::BaseFlowService do
-  subject do
+  subject(:base_flow_service) do
     flow_service_class.new(
       legal_aid_application:,
       current_step:,
@@ -29,7 +29,7 @@ RSpec.describe Flow::BaseFlowService do
 
     context "when on the default locale" do
       it "returns forward url with en locale" do
-        expect(subject.forward_path).to eq("/citizens/additional_accounts?locale=en")
+        expect(base_flow_service.forward_path).to eq("/citizens/additional_accounts?locale=en")
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe Flow::BaseFlowService do
       end
 
       it "returns forward url with cy locale" do
-        expect(subject.forward_path).to eq("/citizens/additional_accounts?locale=cy")
+        expect(base_flow_service.forward_path).to eq("/citizens/additional_accounts?locale=cy")
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe Flow::BaseFlowService do
       let(:current_step) { :consents }
 
       it "returns forward url" do
-        expect(subject.forward_path).to eq("/citizens/contact_provider?locale=en")
+        expect(base_flow_service.forward_path).to eq("/citizens/contact_provider?locale=en")
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.describe Flow::BaseFlowService do
       let(:current_step) { :foo_bar }
 
       it "raises an error" do
-        expect { subject.forward_path }.to raise_error(/not defined/)
+        expect { base_flow_service.forward_path }.to raise_error(/not defined/)
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe Flow::BaseFlowService do
       let(:steps) { { foo: :bar } }
 
       it "raises an error" do
-        expect { subject.forward_path }.to raise_error(/not defined/)
+        expect { base_flow_service.forward_path }.to raise_error(/not defined/)
       end
     end
   end
@@ -92,14 +92,14 @@ RSpec.describe Flow::BaseFlowService do
 
     describe "#current_path" do
       it "returns path" do
-        expect(subject.current_path).to eq(path)
+        expect(base_flow_service.current_path).to eq(path)
       end
 
       context "when path is a proc" do
         let(:path) { ->(passed_in) { passed_in } }
 
         it "passes in the legal aid application" do
-          expect(subject.current_path).to eq(legal_aid_application)
+          expect(base_flow_service.current_path).to eq(legal_aid_application)
         end
 
         context "and params exist" do
@@ -107,7 +107,7 @@ RSpec.describe Flow::BaseFlowService do
           let(:path) { ->(passed_in, params) { [passed_in, params] } }
 
           it "passes in the legal aid application and the params" do
-            expect(subject.current_path).to eq([legal_aid_application, params])
+            expect(base_flow_service.current_path).to eq([legal_aid_application, params])
           end
         end
       end
@@ -116,14 +116,14 @@ RSpec.describe Flow::BaseFlowService do
         let(:path) { nil }
 
         it "raises an error" do
-          expect { subject.current_path }.to raise_error(/not defined/)
+          expect { base_flow_service.current_path }.to raise_error(/not defined/)
         end
       end
     end
 
     describe "#forward_path" do
       it "returns forward url" do
-        expect(subject.forward_path).to eq(forward_url)
+        expect(base_flow_service.forward_path).to eq(forward_url)
       end
     end
   end

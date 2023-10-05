@@ -3,7 +3,7 @@ require "rails_helper"
 
 RSpec.describe DelegatedFunctionsDateService do
   describe "sets date on proceeding records", :vcr do
-    subject { described_class.call(laa) }
+    subject(:call) { described_class.call(laa) }
 
     let(:laa) { create(:legal_aid_application) }
     let!(:proceeding1) do
@@ -25,7 +25,7 @@ RSpec.describe DelegatedFunctionsDateService do
     end
 
     it "returns true" do
-      expect(subject).to be true
+      expect(call).to be true
     end
 
     describe "sets the substantive_application_deadline_on date" do
@@ -35,7 +35,7 @@ RSpec.describe DelegatedFunctionsDateService do
         let(:expected_deadline) { Date.new(2021, 6, 8) }
 
         it "sets the substantive_application_deadline_on date" do
-          subject
+          call
           expect(laa.reload.substantive_application_deadline_on).to eq expected_deadline
         end
       end
@@ -46,7 +46,7 @@ RSpec.describe DelegatedFunctionsDateService do
         let(:reported_date) { nil }
 
         it "sets the substantive application_deadline_on to nil" do
-          subject
+          call
           expect(laa.reload.substantive_application_deadline_on).to be_nil
         end
       end
@@ -68,7 +68,7 @@ RSpec.describe DelegatedFunctionsDateService do
           end
 
           it "deletes the scheduled mails" do
-            subject
+            call
             expect(ScheduledMailing.where(mailer_klass: "SubmitApplicationReminderMailer", legal_aid_application_id: laa.id)).to be_empty
           end
         end
@@ -85,7 +85,7 @@ RSpec.describe DelegatedFunctionsDateService do
           end
 
           it "replaces existing email with one with new date" do
-            subject
+            call
             new_scheduled_mailings = ScheduledMailing.where(mailer_klass: "SubmitApplicationReminderMailer", legal_aid_application_id: laa.id)
             expect(new_scheduled_mailings.size).to eq 2
             expect(new_scheduled_mailings.map(&:scheduled_at)).to contain_exactly(expected_date1, expected_date2)
@@ -94,7 +94,7 @@ RSpec.describe DelegatedFunctionsDateService do
 
         context "when no scheduled mail already exists" do
           it "creates a new scheduled mail" do
-            expect { subject }.to change(ScheduledMailing, :count).by(2)
+            expect { call }.to change(ScheduledMailing, :count).by(2)
             new_scheduled_mailings = ScheduledMailing.where(mailer_klass: "SubmitApplicationReminderMailer", legal_aid_application_id: laa.id)
             expect(new_scheduled_mailings.size).to eq 2
             expect(new_scheduled_mailings.map(&:scheduled_at)).to contain_exactly(expected_date1, expected_date2)

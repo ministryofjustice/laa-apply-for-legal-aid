@@ -9,7 +9,7 @@ RSpec.describe JobQueue do
   let(:other_job) { MockQueuedJob.new(ScheduledMailingsDeliveryJob, short_delay.from_now) }
 
   describe ".enqueued?" do
-    subject { described_class.enqueued?(EmailMonitorJob) }
+    subject(:enqueued?) { described_class.enqueued?(EmailMonitorJob) }
 
     before { allow(Sidekiq::ScheduledSet).to receive(:new).and_return(job_queue) }
 
@@ -17,7 +17,7 @@ RSpec.describe JobQueue do
       let(:job_queue) { [] }
 
       it "returns false" do
-        expect(subject).to be false
+        expect(enqueued?).to be false
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe JobQueue do
       let(:job_queue) { [late_job] }
 
       it "returns false" do
-        expect(subject).to be false
+        expect(enqueued?).to be false
       end
     end
 
@@ -33,7 +33,7 @@ RSpec.describe JobQueue do
       let(:job_queue) { [early_job] }
 
       it "returns true" do
-        expect(subject).to be true
+        expect(enqueued?).to be true
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe JobQueue do
       let(:job_queue) { [early_job, late_job] }
 
       it "returns true" do
-        expect(subject).to be true
+        expect(enqueued?).to be true
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe JobQueue do
       let(:job_queue) { [other_job] }
 
       it "returns false" do
-        expect(subject).to be false
+        expect(enqueued?).to be false
       end
     end
   end
