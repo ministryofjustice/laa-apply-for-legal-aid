@@ -2,7 +2,7 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe SubmitApplicationReminderService, :vcr do
-  subject { described_class.new(application) }
+  subject(:submit_application_reminder_service) { described_class.new(application) }
 
   let(:provider) { create(:provider, email: "test@example.com") }
   let(:application) do
@@ -19,7 +19,7 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
 
   describe "#send_email" do
     it "creates two scheduled mailing records" do
-      expect { subject.send_email }.to change(ScheduledMailing, :count).by(2)
+      expect { submit_application_reminder_service.send_email }.to change(ScheduledMailing, :count).by(2)
     end
 
     describe "sending the email" do
@@ -38,16 +38,16 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
     end
 
     context "when SubmitApplicationReminderMailer already exists" do
-      before { subject.send_email }
+      before { submit_application_reminder_service.send_email }
 
       it "adds two new mailer jobs" do
-        expect { subject.send_email }.to change(ScheduledMailing, :count).by(2)
+        expect { submit_application_reminder_service.send_email }.to change(ScheduledMailing, :count).by(2)
       end
 
       it "cancels pre-existing jobs" do
         expect(ScheduledMailing.where(cancelled_at: nil).count).to eq(2)
         expect(ScheduledMailing.count).to eq(2)
-        subject.send_email
+        submit_application_reminder_service.send_email
         expect(ScheduledMailing.where.not(cancelled_at: nil).count).to eq(2)
         expect(ScheduledMailing.count).to eq(4)
       end

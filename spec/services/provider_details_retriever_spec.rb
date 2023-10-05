@@ -2,7 +2,7 @@ require "rails_helper"
 DummyResponseStruct = Struct.new(:message, :code, :body)
 
 RSpec.describe ProviderDetailsRetriever do
-  subject { described_class.call(username) }
+  subject(:call) { described_class.call(username) }
 
   let(:api_url) { "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails" }
   let(:provider) { create(:provider) }
@@ -16,10 +16,10 @@ RSpec.describe ProviderDetailsRetriever do
     shared_examples_for "get response from API" do
       it "returns the expected data structure" do
         expected_keys = %i[providerFirmId contactUserId contacts providerOffices feeEarners]
-        expect(subject.keys).to match_array(expected_keys)
+        expect(call.keys).to match_array(expected_keys)
 
         expected_office_keys = %i[id name]
-        expect(subject[:providerOffices][0].keys).to match_array(expected_office_keys)
+        expect(call[:providerOffices][0].keys).to match_array(expected_office_keys)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe ProviderDetailsRetriever do
       it "raises ApiError" do
         allow(Net::HTTP).to receive(:get_response).and_raise(RuntimeError, "Something went wrong")
         expect {
-          subject
+          call
         }.to raise_error(ProviderDetailsRetriever::ApiError, "Provider details error: RuntimeError :: Something went wrong")
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe ProviderDetailsRetriever do
 
       it "encode properly the username" do
         expect(URI).to receive(:parse).at_least(:once).with(/#{escaped_username}/).and_call_original
-        subject
+        call
       end
 
       context "and the username has a space", vcr: { cassette_name: "encoded_provider_details_api" } do
@@ -49,7 +49,7 @@ RSpec.describe ProviderDetailsRetriever do
 
         it "encodes with a %20 in place of a space" do
           expect(URI).to receive(:parse).at_least(:once).with(/#{escaped_username}/).and_call_original
-          subject
+          call
         end
       end
 
@@ -59,7 +59,7 @@ RSpec.describe ProviderDetailsRetriever do
         end
 
         it "raises error" do
-          expect { subject }.to raise_error(described_class::ApiError)
+          expect { call }.to raise_error(described_class::ApiError)
         end
       end
     end

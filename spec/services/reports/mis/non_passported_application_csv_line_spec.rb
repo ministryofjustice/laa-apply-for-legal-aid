@@ -25,7 +25,7 @@ module Reports
       end
 
       describe ".call" do
-        subject { described_class.call(application) }
+        subject(:call) { described_class.call(application) }
 
         let(:application) { create(:legal_aid_application, :with_applicant, :at_assessment_submitted) }
         let(:provider) { application.provider }
@@ -33,13 +33,13 @@ module Reports
         let(:time) { Time.zone.local(2020, 9, 20, 2, 3, 44) }
 
         it "returns an array of nine fields" do
-          expect(subject.size).to eq 8
+          expect(call.size).to eq 8
         end
 
         context "when it's an undiscarded application" do
           it "returns an array with the expected values" do
             travel_to(time) do
-              fields = subject
+              fields = call
               expect(fields[0]).to eq application.state
               expect(fields[1]).to eq application.ccms_reason
               expect(fields[2]).to eq provider.username
@@ -57,7 +57,7 @@ module Reports
 
           it "returns an array with the expected values" do
             travel_to(time) do
-              fields = subject
+              fields = call
               expect(fields[0]).to eq application.state
               expect(fields[1]).to eq application.ccms_reason
               expect(fields[2]).to eq provider.username
@@ -74,7 +74,7 @@ module Reports
           before { provider.email = "=malicious_code" }
 
           it "returns the escaped text" do
-            expect(subject[3]).to eq "'=malicious_code"
+            expect(call[3]).to eq "'=malicious_code"
           end
         end
       end

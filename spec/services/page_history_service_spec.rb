@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe PageHistoryService do
-  subject { described_class.new(page_history_id:) }
+  subject(:page_history_service) { described_class.new(page_history_id:) }
 
   let!(:redis) { Redis.new(url: Rails.configuration.x.redis.page_history_url) }
   let(:page_history_id) { SecureRandom.uuid }
@@ -13,7 +13,7 @@ RSpec.describe PageHistoryService do
   after { redis.quit }
 
   describe "#write" do
-    before { subject.write(page_history) }
+    before { page_history_service.write(page_history) }
 
     it "creates a history record with the correct key" do
       expect(redis.keys).to eq [key]
@@ -28,7 +28,7 @@ RSpec.describe PageHistoryService do
     before { redis.set(key, page_history) }
 
     it "returns the correct history record" do
-      expect(JSON.parse(subject.read)).to eq page_history
+      expect(JSON.parse(page_history_service.read)).to eq page_history
     end
   end
 end

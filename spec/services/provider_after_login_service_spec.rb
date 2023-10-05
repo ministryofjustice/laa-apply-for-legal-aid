@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProviderAfterLoginService do
-  subject { service.call }
+  subject(:call) { service.call }
 
   let(:service) { described_class.new(provider) }
 
@@ -12,7 +12,7 @@ RSpec.describe ProviderAfterLoginService do
       before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
       it "updates the provider invalid login details" do
-        subject
+        call
         expect(provider.invalid_login_details).to eq "role"
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe ProviderAfterLoginService do
         before { allow(ProviderDetailsCreator).to receive(:call).and_raise(ProviderDetailsRetriever::ApiRecordNotFoundError) }
 
         it "updates the provider invalid login details" do
-          subject
+          call
           expect(provider.invalid_login_details).to eq "api_details_user_not_found"
         end
       end
@@ -33,12 +33,7 @@ RSpec.describe ProviderAfterLoginService do
         before { allow(ProviderDetailsCreator).to receive(:call).with(provider) }
 
         it "does not update invalid login details" do
-          subject
-          expect(provider.invalid_login_details).to be_nil
-        end
-
-        it "clears the invalid_login_details_field" do
-          subject
+          call
           expect(provider.invalid_login_details).to be_nil
         end
       end
@@ -47,7 +42,7 @@ RSpec.describe ProviderAfterLoginService do
         before { allow(ProviderDetailsCreator).to receive(:call).and_raise(ProviderDetailsRetriever::ApiError) }
 
         it "updates the provider invalid login details" do
-          subject
+          call
           expect(provider.invalid_login_details).to eq "provider_details_api_error"
         end
       end

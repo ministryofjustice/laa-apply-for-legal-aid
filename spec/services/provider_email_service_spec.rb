@@ -2,7 +2,7 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe ProviderEmailService do
-  subject { described_class.new(application) }
+  subject(:provider_email_service) { described_class.new(application) }
 
   let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe") }
   let(:provider) { create(:provider, email: "test@example.com") }
@@ -20,7 +20,7 @@ RSpec.describe ProviderEmailService do
     end
 
     it "schedules a mail for immediate delivery" do
-      expect { subject.send_email }.to change(ScheduledMailing, :count).by(1)
+      expect { provider_email_service.send_email }.to change(ScheduledMailing, :count).by(1)
 
       rec = ScheduledMailing.first
       expect(rec.legal_aid_application_id).to eq application.id

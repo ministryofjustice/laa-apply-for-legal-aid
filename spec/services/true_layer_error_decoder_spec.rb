@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TrueLayerErrorDecoder do
-  subject { described_class.new(error_details) }
+  subject(:true_layer_error_decoder) { described_class.new(error_details) }
 
   let(:error_details) { true_layer_error_details_array }
   let(:error_description) { "TrueLayer's detailed explanation of the error" }
@@ -11,7 +11,7 @@ RSpec.describe TrueLayerErrorDecoder do
       let(:error_code) { "account_temporarily_locked" }
 
       it "returns the correct translation" do
-        expect(subject.error_heading).to eq I18n.t("true_layer_errors.headings.account_temporarily_locked")
+        expect(true_layer_error_decoder.error_heading).to eq I18n.t("true_layer_errors.headings.account_temporarily_locked")
       end
     end
 
@@ -20,12 +20,12 @@ RSpec.describe TrueLayerErrorDecoder do
       let(:error_description) { "The flux capacitor is not working" }
 
       it "returns the generic unknown error message" do
-        expect(subject.error_heading).to eq I18n.t("true_layer_errors.headings.unknown")
+        expect(true_layer_error_decoder.error_heading).to eq I18n.t("true_layer_errors.headings.unknown")
       end
 
       it "sends the details to sentry" do
         expect(AlertManager).to receive(:capture_message).with("Unknown error code received from TrueLayer: flux_capacitor_outage :: The flux capacitor is not working")
-        subject.error_heading
+        true_layer_error_decoder.error_heading
       end
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe TrueLayerErrorDecoder do
       let(:error_code) { "internal_server_error" }
 
       it "returns the correct translation" do
-        expect(subject.error_detail).to eq I18n.t("true_layer_errors.detail.internal_server_error")
+        expect(true_layer_error_decoder.error_detail).to eq I18n.t("true_layer_errors.detail.internal_server_error")
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe TrueLayerErrorDecoder do
       let(:error_description) { "The flux capacitor is not working" }
 
       it "returns the generic unknown error message" do
-        expect(subject.error_detail).to eq I18n.t("true_layer_errors.detail.unknown")
+        expect(true_layer_error_decoder.error_detail).to eq I18n.t("true_layer_errors.detail.unknown")
       end
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe TrueLayerErrorDecoder do
       let(:error_code) { "wrong_credentials" }
 
       it "returns true" do
-        expect(subject.show_link?).to be true
+        expect(true_layer_error_decoder.show_link?).to be true
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe TrueLayerErrorDecoder do
       let(:error_code) { "account_permanently_locked" }
 
       it "returns true" do
-        expect(subject.show_link?).to be false
+        expect(true_layer_error_decoder.show_link?).to be false
       end
     end
   end

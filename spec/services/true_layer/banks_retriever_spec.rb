@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: "true_layer_banks_api", allow_playback_repeats: true } do
-  subject { described_class.new }
+  subject(:banks_retriever) { described_class.new }
 
   describe ".banks" do
     it "returns same as instance banks" do
-      expect(described_class.banks).to eq(subject.banks)
+      expect(described_class.banks).to eq(banks_retriever.banks)
     end
 
     context "when there is a failure" do
@@ -22,7 +22,7 @@ RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: "true_layer_bank
   end
 
   describe "#banks" do
-    let(:banks) { subject.banks }
+    let(:banks) { banks_retriever.banks }
 
     it "is an array" do
       expect(banks).to be_a(Array)

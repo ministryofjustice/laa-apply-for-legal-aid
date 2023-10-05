@@ -3,7 +3,7 @@ require "rails_helper"
 FileStruct = Struct.new(:name, :content_type)
 
 RSpec.describe PdfConverter do
-  subject do
+  subject(:call) do
     described_class.call(attachment.id)
   end
 
@@ -24,11 +24,11 @@ RSpec.describe PdfConverter do
       context "when original file is already a pdf" do
         it "does not convert the file" do
           expect(Libreconv).not_to receive(:convert)
-          subject
+          call
         end
 
         it "creates an attachment record for the pdf" do
-          expect { subject }.to change(Attachment, :count).by 1
+          expect { call }.to change(Attachment, :count).by 1
         end
       end
 
@@ -37,13 +37,13 @@ RSpec.describe PdfConverter do
 
         it "converts the file to pdf" do
           expect(Libreconv).to receive(:convert)
-          expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
+          expect { call }.to change(ActiveStorage::Attachment, :count).by(1)
           pdf_attachment = statement_of_case.pdf_attachments.first
           expect(pdf_attachment.attachment_name).to eq "statement_of_case.pdf"
         end
 
         it "relates the pdf record to the original file" do
-          subject
+          call
           pdf_attachment = statement_of_case.pdf_attachments.first
           attachment = statement_of_case.original_attachments.first
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
@@ -54,14 +54,14 @@ RSpec.describe PdfConverter do
 
           it "converts the file to pdf" do
             expect(Libreconv).to receive(:convert)
-            expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
+            expect { call }.to change(ActiveStorage::Attachment, :count).by(1)
             pdf_attachment = statement_of_case.pdf_attachments.first
             expect(pdf_attachment.attachment_name).to eq "statement_of_case_2.pdf"
             expect(pdf_attachment.attachment_type).to eq "statement_of_case_pdf"
           end
 
           it "relates the pdf record to the original file" do
-            subject
+            call
             pdf_attachment = statement_of_case.pdf_attachments.first
             attachment = statement_of_case.original_attachments.first
             expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
@@ -86,11 +86,11 @@ RSpec.describe PdfConverter do
       context "and original file is already a pdf" do
         it "does not convert the file" do
           expect(Libreconv).not_to receive(:convert)
-          subject
+          call
         end
 
         it "creates an attachment record for the pdf" do
-          expect { subject }.to change(Attachment, :count).by 1
+          expect { call }.to change(Attachment, :count).by 1
         end
       end
 
@@ -99,13 +99,13 @@ RSpec.describe PdfConverter do
 
         it "converts the file to pdf" do
           expect(Libreconv).to receive(:convert)
-          expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
+          expect { call }.to change(ActiveStorage::Attachment, :count).by(1)
           pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
           expect(pdf_attachment.attachment_name).to eq "gateway_evidence.pdf"
         end
 
         it "relates the pdf record to the original file" do
-          subject
+          call
           pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
           attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence").first
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
@@ -116,14 +116,14 @@ RSpec.describe PdfConverter do
 
           it "converts the file to pdf" do
             expect(Libreconv).to receive(:convert)
-            expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
+            expect { call }.to change(ActiveStorage::Attachment, :count).by(1)
             pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
             expect(pdf_attachment.attachment_name).to eq "gateway_evidence_2.pdf"
             expect(pdf_attachment.attachment_type).to eq "gateway_evidence_pdf"
           end
 
           it "relates the pdf record to the original file" do
-            subject
+            call
             pdf_attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence_pdf").first
             attachment = uploaded_evidence_collection.legal_aid_application.attachments.where(attachment_type: "gateway_evidence").first
             expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
