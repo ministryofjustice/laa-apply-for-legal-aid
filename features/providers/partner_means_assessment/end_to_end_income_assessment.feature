@@ -38,23 +38,6 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
 
-    When I click "Save and continue"
-    Then I should be on a page with title "What you need to do"
-    And I should see "Tell us about your client and their partner's capital"
-
-    When I click "Continue"
-    Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
-
-    When I choose "Yes, owned outright"
-    And I click "Save and continue"
-    Then I should be on a page with title "Your client's home"
-    And I should see 'Does your client or their partner own the home with anyone else?"
-
-    When I fill "Property value" with "200000"
-    And I choose "No"
-    And I fill "Percentage home" with "100"
-    And I click 'Save and continue'
-    Then I should be on a page with title "Does your client or their partner own a vehicle?"
 
   @javascript
   Scenario: I am able to complete the income means assessment for client and partner to check your answers
@@ -160,23 +143,4 @@ Feature: partner_means_assessment full journey
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
-
-    When I click "Save and continue"
-    Then I should be on a page with title "What you need to do"
-    And I should see "Tell us about your client and their partner's capital"
-
-    When I click "Continue"
-    Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
-
-    When I choose "Yes, with a mortgage or loan"
-    And I click "Save and continue"
-    Then I should be on a page with title "Your client's home"
-    And I should see 'Does your client or their partner own the home with anyone else?"
-
-    When I fill "Property value" with "200000"
-    And I fill "Outstanding mortgage amount" with "100000"
-    And I choose "Yes, an ex-partner"
-    And I fill "Percentage home" with "50"
-    And I click 'Save and continue'
-    Then I should be on a page with title "Does your client or their partner own a vehicle?"
 

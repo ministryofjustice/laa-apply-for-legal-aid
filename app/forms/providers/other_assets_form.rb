@@ -1,4 +1,4 @@
-module Citizens
+module Providers
   class OtherAssetsForm < BaseForm
     form_for OtherAssetsDeclaration
 

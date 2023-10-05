@@ -160,7 +160,7 @@ Feature: Means report
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is there anything else you need to tell us about your client’s assets? |
+      | Is your client banned from selling or borrowing against their assets? |
       | Details of restrictions |
 
     And the "Payments from scheme or charities" questions should exist:
@@ -333,7 +333,7 @@ Feature: Means report
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is there anything else you need to tell us about your client’s assets? |
+      | Is your client banned from selling or borrowing against their assets? |
       | Details of restrictions |
 
     And the "Payments from scheme or charities" questions should exist:

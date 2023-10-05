@@ -453,7 +453,7 @@ en:
           question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
         providers:
           heading: Restrictions on your client's assets
-          question: Is there anything else you need to tell us about your client’s assets?
+          question: Is your client banned from selling or borrowing against their assets?
       vehicles:
         providers:
           heading: Vehicles
@@ -564,28 +564,20 @@ en:
                 revealing_check_box_offline_savings_accounts: Include accounts with a negative balance or no money in them.
               offline_current_accounts: Enter the total in all current accounts
               offline_savings_accounts: Enter the total in all savings accounts
-            savings_and_investments:
-              cash: Enter the total amount
-              check_box_cash: Money not in a bank account
+            bank_accounts:
               check_box_offline_current_accounts: Current account
               check_box_offline_savings_accounts: Savings account
+              hint:
+                revealing_check_box_offline_current_accounts: If your client has multiple accounts, take the lowest balance from each account last month, add them, then enter the total
+              offline_current_accounts: Enter the lowest balance last month
+              offline_savings_accounts: Enter the total in all accounts
+            savings_and_investments:
+              check_box_cash: Money not in a bank account
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
               check_box_national_savings: ISAs, National Savings Certificates and Premium Bonds
               check_box_other_person_account: Access to another person's bank account
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_plc_shares: Shares in a PLC
-              hint:
-                revealing_check_box_offline_current_accounts: If your client has multiple accounts, take the lowest balance from each account last month, add them, then enter the total
-                check_box_cash: For example, cash kept at home.
-                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death.
-                check_box_other_person_account: For example, your client is a signatory on a child's account.
-              offline_current_accounts: Enter the lowest balance last month
-              offline_savings_accounts: Enter the total in all accounts
-              life_assurance_endowment_policy: Enter the total value of all owned
-              national_savings: Enter the total value of all owned
-              other_person_account: Enter the estimated total in all accounts
-              peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all owned
-              plc_shares: Enter the total value of all owned
             means:
               savings_and_investments:
                 cash: Enter the total amount

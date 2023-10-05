@@ -66,10 +66,10 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Which assets does your client have?" page
     Then I check "other-assets-declaration-none-selected-true-field"
     Then I click 'Save and continue'
-    Then I am on the "Is there anything else you need to tell us about your client’s assets?" page
+    Then I am on the "Is your client banned from selling or borrowing against their assets?" page
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I am on the "Select if your client has received payments from these schemes or charities" page
+    Then I am on the "Which schemes or trusts have paid your client?" page
     Then I check "policy-disregards-none-selected-true-field"
     Then I click 'Save and continue'
     Then I am on the "Check your answers" page
@@ -194,10 +194,10 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Which assets does your client have?" page
     Then I check "other-assets-declaration-none-selected-true-field"
     Then I click 'Save and continue'
-    Then I am on the "Is there anything else you need to tell us about your client’s assets?" page
+    Then I am on the "Is your client banned from selling or borrowing against their assets?" page
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I am on the "Select if your client has received payments from these schemes or charities" page
+    Then I am on the "Which schemes or trusts have paid your client?" page
     Then I check "policy-disregards-none-selected-true-field"
     Then I click 'Save and continue'
     Then I am on the "Check your answers" page

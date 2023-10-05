@@ -138,13 +138,13 @@ Feature: Completing and checking means answers backwards and forwards
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
 
-    When I select "My client has none of these savings or investments"
+    When I select "None of these savings or investments"
     And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
 
-    When I select "My client has none of these assets"
+    When I select "None of these assets"
     And I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
 
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'

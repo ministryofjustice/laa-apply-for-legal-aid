@@ -17,7 +17,7 @@ Feature: Checking answers backwards and forwards
     Then I choose "Yes, an ex-partner"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+    Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -44,7 +44,7 @@ Feature: Checking answers backwards and forwards
     Then I choose "No"
     Then I fill "Percentage home" with "100"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+    Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
     Then I choose 'Yes'
     And I fill 'Restrictions details' with "Restrictions include:"
     Then I click 'Save and continue'
@@ -107,7 +107,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+    Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -122,7 +122,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
     Then I should be on a page showing 'Which savings or investments does your client have?'
-    Then I select 'My client has none of these savings or investments'
+    Then I select 'None of these savings or investments'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for all 'Savings and investments' categories should be 'No'
@@ -138,7 +138,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+    Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -152,7 +152,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
     Then I should be on a page showing 'Which assets does your client have?'
-    Then I select 'My client has none of these assets'
+    Then I select 'None of these assets'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for all 'Other assets' categories should be 'No'
@@ -164,7 +164,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for policy disregards
     And I click Check Your Answers Change link for 'policy disregards'
-    Then I should be on a page showing 'schemes or charities'
+    Then I should be on a page showing 'schemes or trusts'
     Then I select 'England Infected Blood Support Scheme'
     And I select 'Vaccine Damage Payments Scheme'
     Then I click 'Save and continue'
@@ -188,7 +188,7 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing "Your client's home"
       Then I fill 'Property value' with '500000'
       Then I click 'Save and continue'
-      Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+      Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
@@ -235,7 +235,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to add and remove restrictions via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+      Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
       Then I choose 'Yes'
       Then I fill "Restrictions details" with 'Restraint or freezing order'
       Then I click 'Save and continue'
@@ -243,7 +243,7 @@ Feature: Checking answers backwards and forwards
       And the answer for 'Restrictions' should be 'Yes'
       And the answer for 'Restrictions details' should be 'Restraint or freezing order'
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing 'Is there anything else you need to tell us about your client’s assets?'
+      Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
       Then I choose 'No'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'

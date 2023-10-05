@@ -1032,23 +1032,76 @@ en:
           error: Select yes if you want to remove this vehicle from the application.
       savings_and_investments:
         show:
-          h1-heading: Which savings or investments does your client have?
-          none_selected: My client has none of these savings or investments
+          h1-heading:
+            client: Which savings or investments does your client have?
+            partner: Which savings or investments does either your client or their partner have?
+          none_selected: None of these savings or investments
+          label:
+            client: Enter the value
+            partner: Enter the value for both your client and their partner
+          hint:
+            client: &hints
+              check_box_cash: For example, cash kept at home.
+              check_box_other_person_account: For example, your client is the signatory on a child's account.
+              check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death.
+            partner:
+              << : *hints
+              check_box_other_person_account: For example, your client or their partner is the signatory on a child's account.
+          check_box_cash: Money not in a bank account
+          check_box_other_person_account: Access to another person's bank account
+          check_box_national_savings: ISAs, National Savings Certificates and Premium Bonds
+          check_box_plc_shares: Shares in a public limited company (PLC)
+          check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+          check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
       other_assets:
         show:
-          h1-heading: Which assets does your client have?
-          hint: Select all that apply. Do not include any government Cost of Living Payments owed to your client.
-          none_of_these: My client has none of these assets
+          h1-heading:
+            client: Which assets does your client have?
+            partner: Which assets does either your client or their partner have?
+          fieldset_hint: Select all that apply.
+          none_of_these: None of these assets
+          check_box_valuable_items_value: Any valuable items worth £500 or more
+          check_box_timeshare_property_value: Timeshare property
+          check_box_land_value: Land
+          check_box_inherited_assets_value: Money or assets from the estate of a person who has died
+          check_box_money_owed_value: Money owed to them, including from a private mortgage
+          check_box_trust_value: Interest in a trust
+          hint:
+            check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
+          client:
+            valuable_items_value: Enter the value
+            timeshare_property_value: Enter the value, minus any loan and sale costs
+            land_value: Enter the value
+            inherited_assets_value: Enter the value
+            money_owed_value: Enter the amount owed
+            trust_value: Enter the value
+          partner:
+            valuable_items_value: Enter the value for both your client and their partner
+            timeshare_property_value: Enter the value, minus any loan and sale costs for both your client and their partner
+            land_value: Enter the value for both your client and their partner
+            inherited_assets_value: Enter the value for both your client and their partner
+            money_owed_value: Enter the amount owed for both your client and their partner
+            trust_value: Enter the value for both your client and their partner
         second_home_conditional_checkbox:
-          check_box_second_home: Second property or holiday home
-          second_home_mortgage: Enter the outstanding mortgage amount
-          second_home_percentage: Enter the share your client owns
-          second_home_value: Enter the estimated value
+          client:
+            check_box_second_home: Second property or holiday home
+            second_home_value: Enter the value
+            second_home_mortgage: Enter the outstanding mortgage amount
+            second_home_percentage: Enter the share your client owns
+          partner:
+            check_box_second_home: Second property or holiday home
+            second_home_value: Enter the value for both your client and their partner
+            second_home_mortgage: Enter the outstanding mortgage amount for both your client and their partner
+            second_home_percentage: Enter the share your client and their partner owns
       restrictions:
         show:
-          h1-heading: Is there anything else you need to tell us about your client’s assets?
-          restrictions_details: Tell us which government Cost of Living Payments should be disregarded, or which assets they cannot sell or borrow against, and why.
-          for_example: "For example, if their assets include government Cost of Living Payments that should be disregarded, or they are prohibited from selling or borrowing against their assets because:"
+          client:
+            h1-heading: Is your client banned from selling or borrowing against their assets?
+            restrictions_details: Tell us which assets your client cannot sell or borrow against, and why.
+          partner:
+            h1-heading: Is your client or their partner banned from selling or borrowing against their assets?
+            restrictions_details: Tell us which assets your client or their partner cannot sell or borrow against, and why.
+          for_example: "For example, because:"
           examples:
             list: |
               they're bankrupt
@@ -1057,7 +1110,9 @@ en:
               their assets are held under a restraint order
       policy_disregards:
         show:
-          h1-heading: Select if your client has received payments from these schemes or charities
+          h1-heading:
+            client: Which schemes or trusts have paid your client?
+            partner: Which schemes or trusts have paid either your client or their partner?
           england_infected_blood_support: England Infected Blood Support Scheme
           vaccine_damage_payments: Vaccine Damage Payments Scheme
           variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
@@ -1065,7 +1120,7 @@ en:
           national_emergencies_trust: National Emergencies Trust (NET)
           we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
           london_emergencies_trust: The London Emergencies Trust
-          none_of_these: My client has received none of these payments
+          none_of_these: None of these schemes or trusts
       receives_state_benefits:
         show:
           page_title: Does your client get any benefits?
@@ -1350,7 +1405,7 @@ en:
     savings_and_investments:
       show:
         h1-heading: Which savings or investments does your client have?
-        none_selected: My client has none of these savings or investments
+        none_selected: None of these savings or investments
     select_offices:
       show:
         h1-heading: Select the account number of the office handling this application

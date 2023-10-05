@@ -1,13 +1,103 @@
 Feature: partner_means_assessment full journey
   @javascript
-  Scenario: I am able to complete a minimal (answering no to everything) partner capital assessment to check your answers
+  Scenario: I am able to complete a minimal (answering no to everything) capital means assessment with a partner
     Given csrf is enabled
     And the feature flag for partner_means_assessment is enabled
-    And I complete the partner journey as far as capital introductions
-    
-    When I click 'Continue'
+    And I have completed a non-passported employed application for "client and partner" with bank statements as far as the end of the means income section
+    Then I should be on a page showing "Check your answers"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "What you need to do"
+    And I should see "Tell us about your client and their partner's capital"
+
+    When I click "Continue"
     Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
 
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client or their partner own a vehicle?"
+
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which bank accounts does your client have?"
+
+    When I select "None of these"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which savings or investments does either your client or their partner have?"
+
+    When I select "None of these savings or investments"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which assets does either your client or their partner have?"
+
+    When I select "None of these assets"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which schemes or trusts have paid either your client or their partner?"
+
+    When I select "None of these schemes or trusts"
+    And I click "Save and continue"
+    Then I should be on a page with title "Check your answers"
+
+  @javascript
+  Scenario: I am able to complete the capital means assessment for a client with a partner
+    Given csrf is enabled
+    And the feature flag for partner_means_assessment is enabled
+    And I have completed a non-passported employed application for "client and partner" with bank statements as far as the end of the means income section
+    Then I should be on a page showing "Check your answers"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "What you need to do"
+    And I should see "Tell us about your client and their partner's capital"
+
+    When I click "Continue"
+    Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
+
+    Then I choose "Yes, with a mortgage or loan"
+    Then I click "Save and continue"
+    Then I should be on a page showing "Your client's home"
+
+    Then I fill "Property value" with "200000"
+    Then I fill "Outstanding mortgage amount" with "100000"
+    Then I choose "Yes, an ex-partner"
+    Then I fill "Percentage home" with "50"
+    Then I click "Save and continue"
+    Then I should be on a page with title "Does your client or their partner own a vehicle?"
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page with title "Vehicle details"
+
+    When I answer "Who owns the vehicle?" with "My client and their partner"
+    And I fill "Estimated value" with "4000"
+    And I answer "Are there any payments left on the vehicle?" with "Yes"
+    And I fill "Payment remaining" with "2000"
+    And I answer "Was the vehicle bought over 3 years ago?" with "Yes"
+    And I answer "Is the vehicle in regular use?" with "Yes"
+    And I click "Save and continue"
+    Then I should be on a page with title 'Does your client or their partner have any other vehicles?'
+
+    When I choose 'No'
+    And I click "Save and continue"
+    Then I should be on a page with title "Which bank accounts does your client have?"
+
+    When I select "None of these"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which savings or investments does either your client or their partner have?"
+
+    When I check "Money not in a bank account"
+    And I fill "savings-amount-cash-field" with "4000"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which assets does either your client or their partner have?"
+
+    When I select "Land"
+    And I fill "land_value" with "20,000"
+    And I click "Save and continue"
+    Then I should be on a page with title "Is your client or their partner banned from selling or borrowing against their assets?"
+
+    When I choose "Yes"
+    And I fill "restrictions_details" with "Some details of restrictions"
+    And I click "Save and continue"
+    Then I should be on a page with title "Which schemes or trusts have paid either your client or their partner?"
+
+    When I select "Criminal Injuries Compensation Scheme"
+    And I click "Save and continue"
+    Then I should be on a page with title "Check your answers"

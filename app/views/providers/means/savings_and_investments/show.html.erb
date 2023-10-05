@@ -2,16 +2,32 @@
               url: providers_legal_aid_application_means_savings_and_investment_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
+  <%= page_template page_title: t(".h1-heading.#{individual}"), template: :basic, form: do %>
 
-  <%= form.govuk_check_boxes_fieldset :bank_accounts,
+  <%= form.govuk_check_boxes_fieldset :savings_amount,
                                       legend: { text: page_title, size: "xl", tag: "h1" },
                                       hint: { text: t("generic.select_all_that_apply") } do %>
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
       <div class="deselect-group" data-deselect-ctrl="#savings-amount-none-selected-true-field">
-        <%= render partial: "shared/forms/revealing_checkbox/attribute",
-                   collection: attributes,
-                   locals: { model: @form, form: } %>
+        <% attributes.each_with_index do |attribute, idx| %>
+          <% link_errors = idx.zero? %>
+          <% check_box_attribute = "check_box_#{attribute}" %>
+          <% value = @form.send(attribute) %>
+          <% @form.__send__("#{check_box_attribute}=", @form.send(check_box_attribute).present? || value.present?) %>
+          <%= form.govuk_check_box check_box_attribute,
+                                   true,
+                                   multiple: false,
+                                   link_errors:,
+                                   label: { text: t(".#{check_box_attribute}") },
+                                   hint: { text: t(".hint.#{individual}.#{check_box_attribute}", default: "") } do %>
+            <%= form.govuk_text_field attribute,
+                                      value: number_to_currency_or_original_string(value),
+                                      label: { text: t(".label.#{individual}") },
+                                      prefix_text: t("currency.gbp"),
+                                      width: "one-third" %>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <%= form.govuk_radio_divider %>

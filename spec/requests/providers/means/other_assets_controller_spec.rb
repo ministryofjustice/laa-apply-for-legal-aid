@@ -26,7 +26,7 @@ RSpec.describe "provider other assets requests" do
       end
 
       it "displays the show page" do
-        expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading")
+        expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading.client")
       end
     end
   end
@@ -189,7 +189,7 @@ RSpec.describe "provider other assets requests" do
           end
 
           context "with nothing" do
-            let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+            let(:application) { create(:legal_aid_application, :with_applicant, :with_positive_benefit_check_result) }
             let(:oad) { create(:other_assets_declaration, legal_aid_application: application) }
             let(:none_selected) { "true" }
             let(:policy_disregards) { true }
@@ -269,7 +269,7 @@ RSpec.describe "provider other assets requests" do
           end
 
           it "renders the show page" do
-            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading")
+            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading.client")
           end
         end
       end
@@ -382,7 +382,7 @@ RSpec.describe "provider other assets requests" do
           end
 
           it "renders the show page" do
-            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading")
+            expect(response.body).to include I18n.t("providers.means.other_assets.show.h1-heading.client")
           end
         end
       end

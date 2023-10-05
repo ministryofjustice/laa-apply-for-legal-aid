@@ -95,19 +95,19 @@ Feature: non_passported_journey with means
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
 
-    When I select "My client has none of these savings or investments"
+    When I select "None of these savings or investments"
     And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
 
     When I select "Land"
     And I fill "Land value" with "50000"
     And I click 'Save and continue'
-    Then I should be on a page showing "Is there anything else you need to tell us about your client’s assets?"
+    Then I should be on a page showing "Is your client banned from selling or borrowing against their assets?"
 
     When I choose 'Yes'
     And I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     And I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
 
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
