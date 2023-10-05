@@ -20,10 +20,10 @@
                                    multiple: false,
                                    link_errors:,
                                    label: { text: t(".#{check_box_attribute}") },
-                                   hint: { text: t(".hint.#{check_box_attribute}", default: "") } do %>
+                                   hint: { text: t(".hint.#{individual}.#{check_box_attribute}", default: "") } do %>
             <%= form.govuk_text_field attribute,
                                       value: number_to_currency_or_original_string(value),
-                                      label: { text: t(".#{individual}.label") },
+                                      label: { text: t(".label.#{individual}") },
                                       prefix_text: t("currency.gbp"),
                                       width: "one-third" %>
           <% end %>
