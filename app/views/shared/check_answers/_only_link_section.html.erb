@@ -5,7 +5,7 @@
   <% unless read_only %>
       <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
         <p>
-          <%= link_to_accessible(t("generic.change"), url, class: "govuk-link change-link", suffix: question) %>
+          <%= govuk_link_to(t("generic.change"), url, class: "change-link", "aria-label": question) %>
         </p>
       </div>
   <% end %>

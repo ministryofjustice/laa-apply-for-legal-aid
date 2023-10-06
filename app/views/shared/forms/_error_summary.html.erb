@@ -9,7 +9,7 @@
         <ul class="govuk-list govuk-error-summary__list">
           <% model.errors.attribute_names.each do |attribute| %>
             <li>
-              <%= link_to_accessible model.errors[attribute].first, "##{attribute_prefix}#{attribute}" %>
+              <%= govuk_link_to model.errors[attribute].first, "##{attribute_prefix}#{attribute}" %>
             </li>
           <% end %>
         </ul>

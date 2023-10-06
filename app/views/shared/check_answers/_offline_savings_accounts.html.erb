@@ -7,11 +7,11 @@
     <% if read_only == false %>
       <div class="govuk-grid-column-one-third align-text-right">
         <p>
-          <%= link_to_accessible(
+          <%= govuk_link_to(
                 t("generic.change"),
                 check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-                class: "govuk-link change-link",
-                suffix: :offline_savings_accounts,
+                class: "change-link",
+                "aria-label": :offline_savings_accounts,
               ) %>
         </p>
       </div>

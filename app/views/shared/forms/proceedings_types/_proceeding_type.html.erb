@@ -7,11 +7,11 @@
   </div>
   <div class="govuk-grid-column-one-third control-column">
     <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4">
-      <%= link_to_accessible(
+      <%= govuk_link_to(
             t("generic.change"),
             providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application),
-            class: "govuk-link change-link",
-            suffix: "proceeding",
+            class: "change-link",
+            "aria-label": "proceeding",
           ) %>
     </p>
   </div>

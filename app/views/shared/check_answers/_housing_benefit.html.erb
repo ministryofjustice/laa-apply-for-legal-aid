@@ -6,11 +6,11 @@
   <% unless read_only %>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
       <p>
-        <%= link_to_accessible(
+        <%= govuk_link_to(
               t("generic.change"),
               providers_legal_aid_application_means_housing_benefits_path(@legal_aid_application),
-              class: "govuk-link change-link",
-              suffix: t(".heading"),
+              class: "change-link",
+              "aria-label": t(".heading"),
             ) %>
       </p>
     </div>
