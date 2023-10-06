@@ -43,7 +43,7 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
 
     let(:params) do
       {
-        legal_aid_application: {
+        applicant: {
           extra_employment_information:,
           extra_employment_information_details:,
         },
@@ -55,6 +55,7 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
     context "when the provider is authenticated" do
       before do
         login_as provider
+        request
       end
 
       context "when Form submitted with continue button" do
@@ -64,24 +65,24 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
           }
         end
 
-        it "updates legal aid application restriction information" do
-          request
-          expect(application.reload.extra_employment_information).to be true
-          expect(application.reload.extra_employment_information_details).not_to be_empty
+        it "sets the applicant extra employment information attribute to true" do
+          expect(applicant.reload.extra_employment_information).to be true
+        end
+
+        it "updates the applicant extra employment information details" do
+          expect(applicant.reload.extra_employment_information_details).not_to be_empty
         end
 
         context "when the application is using the bank upload journey" do
           let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false, applicant:) }
 
           it "redirects to the receives state benefits page" do
-            request
             expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(application))
           end
         end
 
         context "when the application is not using the bank upload journey" do
           it "redirects to the identify types of income page" do
-            request
             expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
           end
         end
@@ -90,7 +91,6 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
           let(:extra_employment_information_details) { "" }
 
           it "displays error" do
-            request
             expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
           end
 
@@ -98,7 +98,6 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
             let(:extra_employment_information) { "" }
 
             it "displays error" do
-              request
               expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank"))
             end
           end
@@ -114,14 +113,15 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
 
         context "and after success" do
           before do
-            login_as provider
-            request
             application.reload
           end
 
-          it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.extra_employment_information).to be true
-            expect(application.extra_employment_information_details).not_to be_empty
+          it "sets the applicant extra employment information attribute to true" do
+            expect(applicant.reload.extra_employment_information).to be true
+          end
+
+          it "updates the applicant extra employment information details" do
+            expect(applicant.reload.extra_employment_information_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do

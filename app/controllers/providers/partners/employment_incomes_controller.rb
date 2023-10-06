@@ -5,12 +5,12 @@ module Providers
 
       def show
         @partner = partner
-        @form = LegalAidApplications::EmploymentIncomeForm.new(model: legal_aid_application)
+        @form = Applicants::EmploymentIncomeForm.new(model: legal_aid_application)
       end
 
       def update
         @partner = partner
-        @form = LegalAidApplications::EmploymentIncomeForm.new(form_params)
+        @form = Applicants::EmploymentIncomeForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 

@@ -5,12 +5,12 @@ module Providers
 
       def show
         @applicant = applicant
-        @form = LegalAidApplications::EmploymentIncomeForm.new(model: legal_aid_application)
+        @form = Applicants::EmploymentIncomeForm.new(model: applicant)
       end
 
       def update
         @applicant = applicant
-        @form = LegalAidApplications::EmploymentIncomeForm.new(form_params)
+        @form = Applicants::EmploymentIncomeForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -26,10 +26,10 @@ module Providers
       end
 
       def form_params
-        merge_with_model(legal_aid_application) do
-          return {} unless params[:legal_aid_application]
+        merge_with_model(applicant) do
+          return {} unless params[:applicant]
 
-          params.require(:legal_aid_application).permit(:extra_employment_information, :extra_employment_information_details)
+          params.require(:applicant).permit(:extra_employment_information, :extra_employment_information_details)
         end
       end
     end

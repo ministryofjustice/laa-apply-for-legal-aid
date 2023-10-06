@@ -1,6 +1,6 @@
-module LegalAidApplications
+module Applicants
   class EmploymentIncomeForm < BaseForm
-    form_for LegalAidApplication
+    form_for Applicant
 
     attr_accessor :extra_employment_information, :extra_employment_information_details
 
