@@ -1,6 +1,6 @@
-module Applicants
+module Partners
   class EmploymentIncomeForm < BaseForm
-    form_for Applicant
+    form_for Partner
 
     attr_accessor :extra_employment_information, :extra_employment_information_details
 
@@ -24,7 +24,7 @@ module Applicants
     end
 
     def add_blank_error_for(attribute)
-      errors.add(attribute, I18n.t("activemodel.errors.models.applicant.attributes.#{attribute}.blank"))
+      errors.add(attribute, I18n.t("activemodel.errors.models.partner.attributes.#{attribute}.blank"))
     end
 
     def clear_employment_info_details

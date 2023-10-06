@@ -91,14 +91,14 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
           let(:extra_employment_information_details) { "" }
 
           it "displays error" do
-            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.applicant.attributes.extra_employment_information_details.blank"))
           end
 
           context "with no params" do
             let(:extra_employment_information) { "" }
 
             it "displays error" do
-              expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank"))
+              expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.applicant.attributes.extra_employment_information.blank"))
             end
           end
         end
