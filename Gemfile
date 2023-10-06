@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.2"
 
 gem "aasm", "~> 5.5.0"
-gem "active_model_serializers", "~> 0.10.13"
+gem "active_model_serializers", "~> 0.10.14"
 gem "discard", "~> 1.3"
 gem "geckoboard-ruby"
 gem "google-apis-sheets_v4"
