@@ -328,7 +328,9 @@ en:
         new_limit_reasons: Reason
       employed_income:
         employment: Employment income
-        employment_question: Do you need to tell us anything else about your client's employment?
+        employment_question:
+          client: Do you need to tell us anything else about your client's employment?
+          partner: Do you need to tell us anything else about the partner's employment?
         employment_details: Details
       benefits_income:
         applicant:
