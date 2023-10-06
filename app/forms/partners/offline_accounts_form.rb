@@ -49,11 +49,7 @@ module Partners
     end
 
     def any_checkbox_checked_or_draft
-      errors.add :savings_amount, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
-    end
-
-    def error_message_for_no_account_selected
-      I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_partner_account_selected")
+      errors.add :check_box_partner_offline_current_accounts, :blank unless any_checkbox_checked? || draft?
     end
   end
 end

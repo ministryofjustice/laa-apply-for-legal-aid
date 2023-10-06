@@ -740,6 +740,8 @@ en:
                 none_selected: Select if your client has any of these savings or investments
                 no_account_selected: Select if your client has current or savings accounts
                 no_partner_account_selected: Select if the partner has current or savings accounts
+            check_box_partner_offline_current_accounts:
+              blank: Select if the partner has current or savings accounts
             cash:
               blank: Enter the total amount of cash savings
               greater_than_or_equal_to: Total cash savings must be 0 or more
