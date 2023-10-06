@@ -146,7 +146,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
         context "when after success" do
           before { login_as provider }
 
-          it "updates the legal_aid_application.extra_employment_information" do
+          it "updates the legal_aid_application.full_employment_details" do
             request
             expect(application.reload.full_employment_details).to eq full_employment_details
           end

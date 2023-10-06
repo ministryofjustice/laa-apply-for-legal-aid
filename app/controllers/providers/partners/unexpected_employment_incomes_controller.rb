@@ -5,12 +5,12 @@ module Providers
 
       def show
         partner
-        @form = LegalAidApplications::UnexpectedEmploymentIncomeForm.new(model: legal_aid_application)
+        @form = ::Partners::UnexpectedEmploymentIncomeForm.new(model: legal_aid_application)
       end
 
       def update
         partner
-        @form = LegalAidApplications::UnexpectedEmploymentIncomeForm.new(form_params)
+        @form = ::Partners::UnexpectedEmploymentIncomeForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -26,10 +26,10 @@ module Providers
       end
 
       def form_params
-        merge_with_model(legal_aid_application) do
-          return {} unless params[:legal_aid_application]
+        merge_with_model(partner) do
+          return {} unless params[:partner]
 
-          params.require(:legal_aid_application).permit(:extra_employment_information_details)
+          params.require(:partner).permit(:extra_employment_information_details)
         end
       end
     end

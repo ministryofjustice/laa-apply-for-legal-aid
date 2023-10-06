@@ -381,7 +381,7 @@ module Reports
         @line << (laa.applicant.not_employed? ? "None" : employment_concatenation) # "Employment Status"
         @line << yesno(laa.hmrc_employment_income? && !laa.has_multiple_employments?) # "HMRC call successful",
         @line << yesno(laa.full_employment_details.present?) # "Free text required",
-        @line << yesno(laa.extra_employment_information_details.present?) # "Free text optional",
+        @line << yesno(laa.applicant.extra_employment_information_details.present?) # "Free text optional",
         @line << yesno(laa.has_multiple_employments?) # "Multi Employment",
       end
 
