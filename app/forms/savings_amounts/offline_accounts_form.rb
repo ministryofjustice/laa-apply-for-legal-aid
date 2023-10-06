@@ -5,6 +5,10 @@ module SavingsAmounts
     ATTRIBUTES = %i[
       offline_current_accounts
       offline_savings_accounts
+      partner_offline_current_accounts
+      partner_offline_savings_accounts
+      joint_offline_current_accounts
+      joint_offline_savings_accounts
     ].freeze
 
     CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[no_account_selected]).freeze
@@ -17,6 +21,8 @@ module SavingsAmounts
     attr_accessor(*ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
     validates(:offline_current_accounts, :offline_savings_accounts,
+              :partner_offline_current_accounts, :partner_offline_savings_accounts,
+              :joint_offline_current_accounts, :joint_offline_savings_accounts,
               allow_blank: true,
               currency: { greater_than_or_equal_to: 0 })
 

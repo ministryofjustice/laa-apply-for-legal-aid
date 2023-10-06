@@ -43,6 +43,10 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           {
             offline_current_accounts: /total.*current accounts/i,
             offline_savings_accounts: /total.*savings accounts/i,
+            partner_offline_current_accounts: /total.*current accounts/i,
+            partner_offline_savings_accounts: /total.*savings accounts/i,
+            joint_offline_current_accounts: /total.*current accounts/i,
+            joint_offline_savings_accounts: /total.*savings accounts/i,
           }
         end
         it "returns false" do

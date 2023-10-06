@@ -4,7 +4,7 @@ module Capital
   end
 
   def amount_attributes
-    shared_attributes.except("partner_offline_current_accounts", "partner_offline_savings_accounts")
+    shared_attributes.except("partner_offline_current_accounts", "partner_offline_savings_accounts", "joint_offline_current_accounts", "joint_offline_savings_accounts")
   end
 
   def shared_attributes

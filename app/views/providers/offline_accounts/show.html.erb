@@ -1,9 +1,134 @@
 <%= page_template page_title: t(".h1-heading"), template: :basic, show_errors_for: @form do %>
-    <%= render  "shared/forms/offline_accounts_form",
+    <%#= render  "shared/forms/offline_accounts_form",
                 model: @form,
                 show_draft: true,
                 bank_accounts: [],
                 or_break: t("generic.or"),
                 no_account_selected: t(".no_account_selected"),
                 form_path: providers_legal_aid_application_offline_account_path(@legal_aid_application) %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_offline_account_path(@legal_aid_application),
+        method: :patch,
+        local: true,
+      ) do |form| %>
+
+    <%= form.govuk_check_boxes_fieldset :savings_amount,
+                                        legend: { text: page_title, size: "xl", tag: "h1" },
+                                        hint: { text: t("generic.select_all_that_apply") } do %>
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+        <div class="deselect-group" data-deselect-ctrl="#savings-amount-no-account-selected-true-field">
+          <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+            <h2 class="govuk-heading-m"><%= t(".client.h2-heading") %></h2>
+          <% end %>
+          <%= form.govuk_check_box :check_box_offline_current_accounts,
+                                   true,
+                                   multiple: false,
+                                   link_errors: true,
+                                   label: { text: t(".client.offline_current_accounts") },
+                                   checked: @form.offline_current_accounts.present? || @form.check_box_offline_current_accounts == "true" do %>
+            <%= form.govuk_text_field :offline_current_accounts,
+                                      multiple: false,
+                                      value: number_to_currency_or_original_string(@form.offline_current_accounts),
+                                      label: { text: t(".client.revealing.label.offline_current_accounts") },
+                                      hint: { text: t(".client.revealing.hint.offline_current_accounts") },
+                                      prefix_text: t("currency.gbp"),
+                                      width: "one-third" %>
+
+          <% end %>
+          <%= form.govuk_check_box :check_box_offline_savings_accounts,
+                                   true,
+                                   multiple: false,
+                                   link_errors: false,
+                                   label: { text: t(".client.offline_savings_accounts") },
+                                   checked: @form.offline_savings_accounts.present? || @form.check_box_offline_savings_accounts == "true" do %>
+            <%= form.govuk_text_field :offline_savings_accounts,
+                                      multiple: false,
+                                      value: number_to_currency_or_original_string(@form.offline_savings_accounts),
+                                      label: { text: t(".client.revealing.label.offline_savings_accounts") },
+                                      hint: { text: t(".client.revealing.hint.offline_savings_accounts") },
+                                      prefix_text: t("currency.gbp"),
+                                      width: "one-third" %>
+          <% end %>
+
+          <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+            <h2 class="govuk-heading-m"><%= t(".partner.h2-heading") %></h2>
+            <%= form.govuk_check_box :check_box_partner_offline_current_accounts,
+                                     true,
+                                     multiple: false,
+                                     link_errors: true,
+                                     label: { text: t(".partner.offline_current_accounts") },
+                                     checked: @form.partner_offline_current_accounts.present? || @form.check_box_partner_offline_current_accounts == "true" do %>
+              <%= form.govuk_text_field :partner_offline_current_accounts,
+                                        multiple: false,
+                                        value: number_to_currency_or_original_string(@form.partner_offline_current_accounts),
+                                        label: { text: t(".partner.revealing.label.offline_current_accounts") },
+                                        hint: { text: t(".partner.revealing.hint.offline_current_accounts") },
+                                        prefix_text: t("currency.gbp"),
+                                        width: "one-third" %>
+
+            <% end %>
+            <%= form.govuk_check_box :check_box_partner_offline_savings_accounts,
+                                     true,
+                                     multiple: false,
+                                     link_errors: false,
+                                     label: { text: t(".partner.offline_savings_accounts") },
+                                     checked: @form.partner_offline_savings_accounts.present? || @form.check_box_partner_offline_savings_accounts == "true" do %>
+              <%= form.govuk_text_field :partner_offline_savings_accounts,
+                                        multiple: false,
+                                        value: number_to_currency_or_original_string(@form.partner_offline_savings_accounts),
+                                        label: { text: t(".partner.revealing.label.offline_savings_accounts") },
+                                        hint: { text: t(".partner.revealing.hint.offline_savings_accounts") },
+                                        prefix_text: t("currency.gbp"),
+                                        width: "one-third" %>
+            <% end %>
+
+            <h2 class="govuk-heading-m"><%= t(".joint.h2-heading") %></h2>
+            <p class="govuk-body"><%= t(".joint.hint") %></p>
+            <%= form.govuk_check_box :check_box_joint_offline_current_accounts,
+                                     true,
+                                     multiple: false,
+                                     link_errors: true,
+                                     label: { text: t(".joint.offline_current_accounts") },
+                                     checked: @form.joint_offline_current_accounts.present? || @form.check_box_joint_offline_current_accounts == "true" do %>
+              <%= form.govuk_text_field :joint_offline_current_accounts,
+                                        multiple: false,
+                                        value: number_to_currency_or_original_string(@form.joint_offline_current_accounts),
+                                        label: { text: t(".joint.revealing.label.offline_current_accounts") },
+                                        hint: { text: t(".joint.revealing.hint.offline_current_accounts") },
+                                        prefix_text: t("currency.gbp"),
+                                        width: "one-third" %>
+
+            <% end %>
+            <%= form.govuk_check_box :check_box_joint_offline_savings_accounts,
+                                     true,
+                                     multiple: false,
+                                     link_errors: false,
+                                     label: { text: t(".joint.offline_savings_accounts") },
+                                     checked: @form.joint_offline_savings_accounts.present? || @form.check_box_joint_offline_savings_accounts == "true" do %>
+              <%= form.govuk_text_field :joint_offline_savings_accounts,
+                                        multiple: false,
+                                        value: number_to_currency_or_original_string(@form.joint_offline_savings_accounts),
+                                        label: { text: t(".joint.revealing.label.offline_savings_accounts") },
+                                        hint: { text: t(".joint.revealing.hint.offline_savings_accounts") },
+                                        prefix_text: t("currency.gbp"),
+                                        width: "one-third" %>
+            <% end %>
+
+        <% end %>
+        </div>
+      </div>
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :no_account_selected, true, "", multiple: false, label: { text: t(".no_account_selected") } %>
+
+    <% end %>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form:,
+        ) %>
+  <% end %>
+
 <% end %>

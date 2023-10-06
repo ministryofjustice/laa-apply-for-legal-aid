@@ -765,6 +765,16 @@ en:
               greater_than_or_equal_to: Total in savings accounts must be 0 or more
               not_a_number: Total in savings accounts must be an amount of money, like 60,000
               too_many_decimals: Estimated total in savings accounts must not include more than 2 decimal numbers
+            joint_offline_current_accounts:
+              blank: Enter the estimated total in all current accounts
+              greater_than_or_equal_to: Total in current accounts must be 0 or more
+              not_a_number: Total in current accounts must be an amount of money, like 60,000
+              too_many_decimals: Estimated total in current accounts must not include more than 2 decimal numbers
+            joint_offline_savings_accounts:
+              blank: Enter the estimated total in all savings accounts
+              greater_than_or_equal_to: Total in savings accounts must be 0 or more
+              not_a_number: Total in savings accounts must be an amount of money, like 60,000
+              too_many_decimals: Estimated total in savings accounts must not include more than 2 decimal numbers
             life_assurance_endowment_policy:
               blank: Enter the total value of life assurance policies
               greater_than_or_equal_to: Total of life assurance policies must be 0 or more
