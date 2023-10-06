@@ -13,7 +13,7 @@ Feature: Check single employment
     Then I should be on a page showing "Review Langley Yorke's employment income"
 
     When I choose "Yes"
-    And I fill "legal-aid-application-extra-employment-information-details-field" with "Yorke also earns 50 gbp"
+    And I fill "applicant-extra-employment-information-details-field" with "Yorke also earns 50 gbp"
     And I click 'Save and continue'
 
     Then I should be on a page showing "Which of these payments does your client get?"
