@@ -43,6 +43,10 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           {
             offline_current_accounts: /total.*current accounts/i,
             offline_savings_accounts: /total.*savings accounts/i,
+            partner_offline_current_accounts: /total.*current accounts/i,
+            partner_offline_savings_accounts: /total.*savings accounts/i,
+            joint_offline_current_accounts: /total.*current accounts/i,
+            joint_offline_savings_accounts: /total.*savings accounts/i,
           }
         end
         it "returns false" do
@@ -99,6 +103,10 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         {
           check_box_offline_current_accounts: "true",
           check_box_offline_savings_accounts: "",
+          check_box_partner_offline_current_accounts: "",
+          check_box_partner_offline_savings_accounts: "",
+          check_box_joint_offline_current_accounts: "",
+          check_box_joint_offline_savings_accounts: "",
           no_account_selected: "",
         }
       end
@@ -108,6 +116,10 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           {
             offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
             offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
+            partner_offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
+            partner_offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
+            joint_offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
+            joint_offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
           }
         end
 
@@ -178,6 +190,41 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         it "displays an error message" do
           described_form.save!
           expect(described_form.errors[:savings_amount]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
+        end
+      end
+
+      context "when a partner is present and data is submitted" do
+        let(:check_box_params) do
+          {
+            check_box_offline_current_accounts: "",
+            check_box_offline_savings_accounts: "",
+            check_box_partner_offline_current_accounts: "true",
+            check_box_partner_offline_savings_accounts: "true",
+            check_box_joint_offline_current_accounts: "true",
+            check_box_joint_offline_savings_accounts: "true",
+            no_account_selected: "",
+          }
+        end
+
+        let(:amount_params) do
+          {
+            offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
+            offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
+            partner_offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
+            partner_offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
+            joint_offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
+            joint_offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
+          }
+        end
+
+        it "stores values for partner and joint accounts" do
+          described_form.save!
+          expect(savings_amount.reload.offline_current_accounts).to be_nil
+          expect(savings_amount.reload.offline_savings_accounts).to be_nil
+          expect(savings_amount.reload.partner_offline_current_accounts).not_to be_nil
+          expect(savings_amount.reload.partner_offline_savings_accounts).not_to be_nil
+          expect(savings_amount.reload.joint_offline_current_accounts).not_to be_nil
+          expect(savings_amount.reload.joint_offline_savings_accounts).not_to be_nil
         end
       end
     end

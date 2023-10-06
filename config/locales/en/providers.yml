@@ -1319,9 +1319,42 @@ en:
 
     offline_accounts:
       show:
-        h1-heading: Which bank accounts does your client have?
-        offline_current_accounts: Current account
-        offline_savings_accounts: Savings account
+        client:
+          h1-heading: Which bank accounts does your client have?
+          h2-heading: Your client's accounts
+          offline_current_accounts: Current account
+          offline_savings_accounts: Savings account
+          revealing:
+            label:
+              offline_current_accounts: Enter the total amount in your client's current accounts
+              offline_savings_accounts: Enter the total amount in your client's savings accounts
+            hint:
+              offline_current_accounts: Include accounts with a negative balance or no money in them.
+              offline_savings_accounts: Include accounts with a negative balance or no money in them.
+        partner:
+          h1-heading: Which bank accounts do your client and their partner have?
+          h2-heading: The partner's accounts
+          offline_current_accounts: Current account
+          offline_savings_accounts: Savings account
+          revealing:
+            label:
+              offline_current_accounts: Enter the total amount in the partner's current accounts
+              offline_savings_accounts: Enter the total amount in the partner's savings accounts
+            hint:
+              offline_current_accounts: Include accounts with a negative balance or no money in them.
+              offline_savings_accounts: Include accounts with a negative balance or no money in them.
+        joint:
+          h2-heading: Joint accounts
+          hint: Only include joint accounts that both your client and their partner share.
+          offline_current_accounts: Current account
+          offline_savings_accounts: Savings account
+          revealing:
+            label:
+              offline_current_accounts: Enter the total amount in their joint current accounts
+              offline_savings_accounts: Enter the total amount in their joint savings accounts
+            hint:
+              offline_current_accounts: Include accounts with a negative balance or no money in them.
+              offline_savings_accounts: Include accounts with a negative balance or no money in them.
         no_account_selected: None of these
     open_banking_consents:
       show:
