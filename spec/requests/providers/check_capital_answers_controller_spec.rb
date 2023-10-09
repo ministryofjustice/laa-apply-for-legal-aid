@@ -4,6 +4,8 @@ RSpec.describe Providers::CheckCapitalAnswersController do
   include ActionView::Helpers::NumberHelper
   let(:provider) { create(:provider) }
   let(:applicant) { create(:applicant) }
+  let(:partner) { nil }
+  let(:savings_amount) { create(:savings_amount, :with_partner_values) }
   let(:transaction_type) { create(:transaction_type) }
   let(:bank_provider) { create(:bank_provider, applicant:) }
   let(:bank_account) { create(:bank_account, bank_provider:) }
@@ -21,7 +23,9 @@ RSpec.describe Providers::CheckCapitalAnswersController do
            vehicles:,
            own_vehicle:,
            applicant:,
+           partner:,
            provider:,
+           savings_amount:,
            transaction_types: [transaction_type])
   end
   let(:login) { login_as provider }
@@ -76,13 +80,24 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       end
     end
 
-    context "when applicant has partner who owns vehicle" do
-      let(:own_vehicle) { true }
-      let(:vehicles) { create_list(:vehicle, 1, :owned_by_partner) }
+    context "when applicant has partner" do
       let(:applicant) { create(:applicant, has_partner: true, partner_has_contrary_interest: false) }
+      let(:partner) { create(:partner) }
 
-      it "shows 'The partner' as the owner" do
-        expect(response.body).to have_css("#app-check-your-answers__vehicles_owner", text: "The partner")
+      context "and they own a vehicle" do
+        let(:own_vehicle) { true }
+        let(:vehicles) { create_list(:vehicle, 1, :owned_by_partner) }
+
+        it "shows 'The partner' as the owner" do
+          expect(response.body).to have_css("#app-check-your-answers__vehicles_owner", text: "The partner")
+        end
+      end
+
+      context "and they have offline bank_accounts" do
+        it "shows the partner bank values" do
+          expect(page).to have_css("#app-check-your-answers__partner_offline_savings_accounts",
+                                   text: "Which bank accounts does the partner have?")
+        end
       end
     end
   end

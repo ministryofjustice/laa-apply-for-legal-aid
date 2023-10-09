@@ -49,5 +49,10 @@ FactoryBot.define do
       peps_unit_trusts_capital_bonds_gov_stocks { rand(1...1_000_000.0).round(2) }
       life_assurance_endowment_policy { 0.0 }
     end
+
+    trait :with_partner_values do
+      partner_offline_current_accounts { rand(1...1_000_000.0).round(2) }
+      partner_offline_savings_accounts { rand(1...1_000_000.0).round(2) }
+    end
   end
 end

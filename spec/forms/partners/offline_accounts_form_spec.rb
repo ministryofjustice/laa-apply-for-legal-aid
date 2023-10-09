@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
+RSpec.describe Partners::OfflineAccountsForm, type: :form do
   subject(:described_form) { described_class.new(form_params) }
 
   let(:savings_amount) { create(:savings_amount) }
@@ -41,8 +41,8 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       shared_examples_for "it has an error" do
         let(:attribute_map) do
           {
-            offline_current_accounts: /total.*current accounts/i,
-            offline_savings_accounts: /total.*savings accounts/i,
+            partner_offline_current_accounts: /total.*current accounts/i,
+            partner_offline_savings_accounts: /total.*savings accounts/i,
           }
         end
         it "returns false" do
@@ -97,29 +97,29 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
     context "when some check boxes are unchecked" do
       let(:check_box_params) do
         {
-          check_box_offline_current_accounts: "true",
-          check_box_offline_savings_accounts: "",
-          no_account_selected: "",
+          check_box_partner_offline_current_accounts: "true",
+          check_box_partner_offline_savings_accounts: "",
+          no_partner_account_selected: "",
         }
       end
 
       context "when amounts are invalid" do
         let(:amount_params) do
           {
-            offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
-            offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
+            partner_offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
+            partner_offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
           }
         end
 
         it "empties amounts if checkbox is unchecked" do
           described_form.save!
           savings_amount.reload
-          expect(savings_amount.offline_savings_accounts).to be_nil
+          expect(savings_amount.partner_offline_savings_accounts).to be_nil
         end
 
         it "does not empty amount if a checkbox is checked" do
           described_form.save!
-          expect(savings_amount.reload.offline_current_accounts).not_to be_nil
+          expect(savings_amount.reload.partner_offline_current_accounts).not_to be_nil
         end
 
         it "returns true" do
@@ -137,8 +137,8 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         it "empties amounts" do
           described_form.save!
           savings_amount.reload
-          expect(savings_amount.offline_current_accounts).to be_nil
-          expect(savings_amount.offline_savings_accounts).to be_nil
+          expect(savings_amount.partner_offline_current_accounts).to be_nil
+          expect(savings_amount.partner_offline_savings_accounts).to be_nil
         end
 
         it "returns false" do
@@ -150,9 +150,9 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       context "when the 'none of these' check box is checked" do
         let(:check_box_params) do
           {
-            check_box_offline_current_accounts: "",
-            check_box_offline_savings_accounts: "",
-            no_account_selected: "true",
+            check_box_partner_offline_current_accounts: "",
+            check_box_partner_offline_savings_accounts: "",
+            no_partner_account_selected: "true",
           }
         end
 
@@ -165,9 +165,9 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       context "when no check box at all is checked" do
         let(:check_box_params) do
           {
-            check_box_offline_current_accounts: "",
-            check_box_offline_savings_accounts: "",
-            no_account_selected: "",
+            check_box_partner_offline_current_accounts: "",
+            check_box_partner_offline_savings_accounts: "",
+            no_partner_account_selected: "",
           }
         end
 
@@ -177,7 +177,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
 
         it "displays an error message" do
           described_form.save!
-          expect(described_form.errors[:savings_amount]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
+          expect(described_form.errors[:check_box_partner_offline_current_accounts]).to include("Select if the partner has current or savings accounts")
         end
       end
     end

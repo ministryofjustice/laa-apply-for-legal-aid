@@ -1,13 +1,13 @@
-module SavingsAmounts
+module Partners
   class OfflineAccountsForm < BaseForm
     form_for SavingsAmount
 
     ATTRIBUTES = %i[
-      offline_current_accounts
-      offline_savings_accounts
+      partner_offline_current_accounts
+      partner_offline_savings_accounts
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[no_account_selected]).freeze
+    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[no_partner_account_selected]).freeze
 
     ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
@@ -16,7 +16,7 @@ module SavingsAmounts
 
     attr_accessor(*ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
-    validates(:offline_current_accounts, :offline_savings_accounts,
+    validates(:partner_offline_current_accounts, :partner_offline_savings_accounts,
               allow_blank: true,
               currency: { greater_than_or_equal_to: 0 })
 
@@ -25,7 +25,7 @@ module SavingsAmounts
     validate :any_checkbox_checked_or_draft
 
     def exclude_from_model
-      CHECK_BOXES_ATTRIBUTES + [:journey] - [:no_account_selected]
+      CHECK_BOXES_ATTRIBUTES + [:journey] - [:no_partner_account_selected]
     end
 
     def attributes_to_clean
@@ -49,11 +49,7 @@ module SavingsAmounts
     end
 
     def any_checkbox_checked_or_draft
-      errors.add :savings_amount, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
-    end
-
-    def error_message_for_no_account_selected
-      I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected")
+      errors.add :check_box_partner_offline_current_accounts, :blank unless any_checkbox_checked? || draft?
     end
   end
 end

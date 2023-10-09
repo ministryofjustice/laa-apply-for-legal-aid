@@ -567,6 +567,20 @@ en:
           warning: |
             Do not upload bank statements for any joint accounts if you or your
             client already has shared them
+      bank_accounts:
+        show:
+          h1-heading: Which bank accounts does the partner have?
+          select_all_that_apply: Select all that apply. Do not include any joint accounts if you've already included them for your client.
+          partner_offline_current_accounts: Current account
+          partner_offline_savings_accounts: Savings account
+          revealing:
+            label:
+              partner_offline_current_accounts: Enter the total in all current accounts
+              partner_offline_savings_accounts: Enter the total in all savings accounts
+            hint:
+              partner_offline_current_accounts: Include accounts with a negative balance or no money in them.
+              partner_offline_savings_accounts: Include accounts with a negative balance or no money in them.
+          no_account_selected: None of these
       client_has_partners:
         show:
           page_title: Does your client have a partner?

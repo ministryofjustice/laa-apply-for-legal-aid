@@ -116,8 +116,18 @@ RSpec.describe Providers::ApplicantBankAccountsController do
             expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(BigDecimal(offline_savings_accounts.to_fs))
           end
 
-          it "redirects to the savings and investments page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+          context "and the applicant has a partner" do
+            let(:applicant) { create(:applicant, :with_partner, partner_has_contrary_interest: false) }
+
+            it "redirects to the partner bank accounts page" do
+              expect(response).to redirect_to(providers_legal_aid_application_partners_bank_accounts_path(legal_aid_application))
+            end
+          end
+
+          context "and there is no partner" do
+            it "redirects to the savings and investments page" do
+              expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+            end
           end
         end
       end
