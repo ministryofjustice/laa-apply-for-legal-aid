@@ -9,11 +9,15 @@
 
   <h2 class="govuk-heading-m"><%= t(".need_to_do") %></h2>
 
-  <% if @legal_aid_application.non_means_tested? %>
-    <p class="govuk-body"><%= t(".print_application.under_18", applicant_name: @legal_aid_application.applicant_full_name) %></p>
-  <% else %>
-    <p class="govuk-body"><%= t(".print_application.over_18") %></p>
-  <% end %>
+  <p class="govuk-body">
+    <% if @legal_aid_application.non_means_tested? %>
+      <%= t(".print_application.under_18", applicant_name: @legal_aid_application.applicant_full_name) %>
+    <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
+      <%= t(".print_application.with_partner") %>
+    <% else %>
+      <%= t(".print_application.over_18") %>
+    <% end %>
+  </p>
 
   <p class="govuk-body"><%= t(".keep_file") %></p>
   <ul class="govuk-list govuk-list--bullet">

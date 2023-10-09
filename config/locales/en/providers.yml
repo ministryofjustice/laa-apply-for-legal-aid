@@ -263,9 +263,9 @@ en:
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
-        means_tested:
+        means_tested: &means_tested
           text: "%{applicant_name} agrees that:"
-          list:
+          list: &list
             a: they've instructed %{provider_firm_name} to represent them
             b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
             c_html: we can share their information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr> and <abbr title="HM Revenue and Customs">HMRC</abbr>
@@ -276,6 +276,19 @@ en:
             h: they’ll report any changes to their financial situation immediately
           sign_app_text: "If they give wrong or incomplete information, do not report changes, or are found to have committed benefit fraud, they may:"
           confirmation_checkbox: I confirm the above is correct and that I'll get a signed declaration from my client
+        means_tested_with_partner:
+          <<: *means_tested
+          text: "Your client, %{applicant_name}, agrees that:"
+          list:
+            <<: *list
+            g: the information they and their partner have given is complete and correct
+          partner_text: "Your client’s partner, %{partner_name}, agrees that:"
+          partner_list:
+            a_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
+            b: we can share their information with other government departments like DWP and HMRC
+            c: we can check their details with bank and credit reference agencies
+            d: the information they have given is complete and correct
+          confirmation_checkbox: I confirm the above is correct and that I'll get a signed declaration from my client and their partner.
         non_means_tested:
           text: "You agree for %{applicant_name} that:"
           list:
@@ -690,6 +703,7 @@ en:
         print_application:
           under_18: Print the completed application and get the person acting for %{applicant_name} to sign it. For example, a litigation friend, a professional children’s guardian or a parental order report.
           over_18: Print the completed application and get your client to sign it.
+          with_partner: Print the completed application and get your client and their partner to sign it.
         financial_evidence: any evidence you used to determine your client’s financial situation
         client_sign: a signed copy of the declaration
         keep_file: "Keep on file:"
@@ -1465,6 +1479,7 @@ en:
         print_your_application: Print your application
         print_the_application:
           means_tested: Print the application and get your client to sign the declaration.
+          means_tested_with_partner: Print the application and get your client and their partner to sign the declaration.
           non_means_tested: |
             Print the application and get the person acting for %{applicant_name} to sign it. For example,
             a litigation friend, a professional children’s guardian or a parental order report.

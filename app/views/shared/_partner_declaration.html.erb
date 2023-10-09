@@ -1,0 +1,19 @@
+<section id="partner-declaration" class="app-print-only govuk-!-padding-top-6">
+  <h2 class="govuk-heading-l"><%= t(".heading") %></h2>
+
+  <h2 class="govuk-heading-l"><%= t(".confirm_following") %></h2>
+
+  <p class="govuk-body"><%= t(".declaration_list_title") %></p>
+
+  <%= bullet_list_from_translation_array(
+        "shared.partner_declaration.declaration_list",
+        params: { firm: @legal_aid_application.provider.firm_name, privacy_policy_url: privacy_policy_index_url },
+      ) %>
+
+  <p class="govuk-body govuk-!-font-weight-bold">
+    <%= t(".signature") %>
+  </p>
+  <p class="govuk-body govuk-!-font-weight-bold">
+    <%= t(".date") %>
+  </p>
+</section>
