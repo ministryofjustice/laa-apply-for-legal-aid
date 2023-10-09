@@ -77,6 +77,13 @@ Then("I select {string}") do |option|
   check(option, allow_label_click: true)
 end
 
+When("I select {string} in {string}") do |option, section|
+  selector = "##{section.gsub!(/\s+/, '_')}"
+  within(selector) do
+    check(option, allow_label_click: true)
+  end
+end
+
 Then("I deselect {string}") do |option|
   uncheck(option, allow_label_click: true)
 end

@@ -19,9 +19,19 @@ Feature: partner_means_assessment full journey
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page with title "Which bank accounts does your client have?"
+    Then I should be on a page with title "Which bank accounts do your client and their partner have?"
+    And the following sections should exist:
+      | tag | section |
+      | h2  | Your client's accounts |
+      | h2  | The partner's accounts |
+      | h2  | Joint accounts |
 
-    When I select "None of these"
+    When I select "Current account" in "client accounts"
+    And I fill 'offline_current_accounts' with '111.99'
+    When I select "Savings account" in "partner accounts"
+    And I fill 'offline_savings_accounts' with '222.99'
+    When I select "Current account" in "joint accounts"
+    And I fill 'joint_offline_current_accounts' with '333.99'
     And I click "Save and continue"
     Then I should be on a page with title "Which savings or investments does either your client or their partner have?"
 
@@ -30,6 +40,10 @@ Feature: partner_means_assessment full journey
     Then I should be on a page with title "Which assets does either your client or their partner have?"
 
     When I select "None of these assets"
+    And I click "Save and continue"
+    Then I should be on a page with title "Is your client or their partner banned from selling or borrowing against their assets?"
+
+    When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Which schemes or trusts have paid either your client or their partner?"
 
@@ -77,7 +91,7 @@ Feature: partner_means_assessment full journey
 
     When I choose 'No'
     And I click "Save and continue"
-    Then I should be on a page with title "Which bank accounts does your client have?"
+    Then I should be on a page with title "Which bank accounts do your client and their partner have?"
 
     When I select "None of these"
     And I click "Save and continue"
