@@ -36,7 +36,9 @@
           ) %>
     <% end %>
     <%= govuk_warning_text do %>
-      <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
+      <div class="govuk-!-margin-bottom-4">
+        <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
+      </div>
       <%= list_from_translation_path ".confirm_client_declarations.show.warning" %>
     <% end %>
 

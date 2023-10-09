@@ -284,7 +284,7 @@ en:
             g: the information they and their partner have given is complete and correct
           partner_text: "Your client’s partner, %{partner_name}, agrees that:"
           partner_list:
-            a: they've read the LAA privacy policy
+            a_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
             b: we can share their information with other government departments like DWP and HMRC
             c: we can check their details with bank and credit reference agencies
             d: the information they have given is complete and correct
