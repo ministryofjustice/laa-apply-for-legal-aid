@@ -23,9 +23,11 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
         .to(substantive_application)
     end
 
-    it "updates application" do
-      expect(described_form.save).to be true
-      expect(application).not_to be_substantive_application
+    context "when setting the value to false" do
+      it "does not set the substantive_application state of the application" do
+        expect(described_form.save).to be true
+        expect(application).not_to be_substantive_application
+      end
     end
 
     context "when completing substantive application now selected" do

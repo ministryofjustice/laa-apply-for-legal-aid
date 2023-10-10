@@ -69,26 +69,26 @@ RSpec.describe Dependant do
   end
 
   describe "#over_fifteen?" do
-    context "when less than 15 years old" do
+    context "when 10 years old" do
       let(:date_of_birth) { 10.years.ago }
 
-      it "returns false" do
+      it "over_fifteen? returns false" do
         expect(dependant.over_fifteen?).to be(false)
       end
 
-      it "returns false" do
+      it "sixteen_or_over? returns false" do
         expect(dependant.sixteen_or_over?).to be(false)
       end
     end
 
-    context "when more than 15 years old" do
+    context "when more than 20 years old" do
       let(:date_of_birth) { 20.years.ago }
 
-      it "returns true" do
+      it "over_fifteen? returns true" do
         expect(dependant.over_fifteen?).to be(true)
       end
 
-      it "returns true" do
+      it "sixteen_or_over? returns true" do
         expect(dependant.sixteen_or_over?).to be(true)
       end
     end
@@ -96,11 +96,11 @@ RSpec.describe Dependant do
     context "when 15 and a half years old" do
       let(:date_of_birth) { 15.years.ago + 6.months }
 
-      it "returns false" do
+      it "over_fifteen? returns false" do
         expect(dependant.over_fifteen?).to be(false)
       end
 
-      it "returns false" do
+      it "sixteen_or_over? returns false" do
         expect(dependant.sixteen_or_over?).to be(false)
       end
     end

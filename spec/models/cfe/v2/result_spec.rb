@@ -317,12 +317,12 @@ module CFE
 
       describe "vehicles?" do
         context "when vehicle(s) exist" do
-          it "returns a boolean response" do
+          it "returns true" do
             expect(eligible_result.vehicles?).to be true
           end
 
           context "when vehicles do not exist"
-          it "returns a boolean response" do
+          it "returns false" do
             expect(no_vehicles.vehicles?).to be false
           end
         end
