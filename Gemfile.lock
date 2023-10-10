@@ -388,7 +388,7 @@ GEM
     multi_xml (0.6.0)
     nenv (0.3.0)
     nesty (1.0.2)
-    net-imap (0.4.0)
+    net-imap (0.4.1)
       date
       net-protocol
     net-pop (0.1.2)
