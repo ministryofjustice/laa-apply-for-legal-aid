@@ -41,7 +41,7 @@
           url: check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
           question: t(".assets.bank_accounts"),
           answer_hash: capital_accounts_list(
-            @legal_aid_application.savings_amount,
+            @legal_aid_application,
             locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.bank_accounts.check_box_",
           ),
           read_only:,
@@ -117,7 +117,7 @@
         url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
         question: t(".assets.savings_and_investments"),
         answer_hash: capital_assets_list(
-          @legal_aid_application.savings_amount,
+          @legal_aid_application,
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
         ),
         read_only:,
@@ -129,7 +129,7 @@
         url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
         question: t(".assets.other_assets"),
         answer_hash: capital_amounts_list(
-          @legal_aid_application.other_assets_declaration,
+          @legal_aid_application,
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.other_assets.check_box_",
           percentage_values: [:second_home_percentage],
         ),

@@ -1,19 +1,19 @@
 module CapitalHelper
   CapitalAmountItem = Struct.new(:label, :name, :amount, :type, :amount_text)
 
-  def capital_amounts_list(capital, locale_namespace:, percentage_values: [])
-    attributes = capital_amount_attributes(capital)
+  def capital_amounts_list(legal_aid_application, locale_namespace:, percentage_values: [])
+    attributes = capital_amount_attributes(legal_aid_application.other_assets_declaration, legal_aid_application)
     attributes = combine_second_home_attributes(attributes)
     build_asset_list(attributes, locale_namespace, percentage_values)
   end
 
-  def capital_accounts_list(capital, locale_namespace:, percentage_values: [])
-    attributes = capital_amount_attributes(capital)&.reject! { |a| !a.end_with?("accounts") }
+  def capital_accounts_list(legal_aid_application, locale_namespace:, percentage_values: [])
+    attributes = capital_amount_attributes(legal_aid_application.savings_amount, legal_aid_application)&.reject! { |a| !a.end_with?("accounts") }
     build_asset_list(attributes, locale_namespace, percentage_values)
   end
 
-  def capital_assets_list(capital, locale_namespace:, percentage_values: [])
-    attributes = capital_amount_attributes(capital)&.reject! { |a| a.end_with?("accounts") }
+  def capital_assets_list(legal_aid_application, locale_namespace:, percentage_values: [])
+    attributes = capital_amount_attributes(legal_aid_application.savings_amount, legal_aid_application)&.reject! { |a| a.end_with?("accounts") }
     build_asset_list(attributes, locale_namespace, percentage_values)
   end
 
@@ -61,8 +61,8 @@ module CapitalHelper
     end
   end
 
-  def capital_amount_attributes(capital)
-    return capital&.amount_attributes if @legal_aid_application.passported? || @legal_aid_application.uploading_bank_statements?
+  def capital_amount_attributes(capital, legal_aid_application)
+    return capital&.amount_attributes if legal_aid_application.passported? || legal_aid_application.uploading_bank_statements?
 
     capital&.amount_attributes&.reject { |c| c == "offline_savings_accounts" }
   end
