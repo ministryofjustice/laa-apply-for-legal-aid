@@ -56,7 +56,7 @@ RSpec.describe ProvidersHelper do
       end
     end
 
-    context "when saved as draft and returning to a started involved child" do
+    context "when saved as draft and adding a new involved child" do
       it do
         legal_aid_application.provider_step = "involved_children"
         legal_aid_application.provider_step_params = { application_merits_task_involved_child: { full_name: nil }, id: "new" }

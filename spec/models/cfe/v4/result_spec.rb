@@ -678,7 +678,7 @@ module CFE
             it { is_expected.to eq 1041.00 }
           end
 
-          describe "gross_income" do
+          describe "benefits_in_kind" do
             subject(:benefits_in_kind) { with_employments.employment_income_benefits_in_kind }
 
             it { is_expected.to eq 16.60 }
@@ -760,7 +760,7 @@ module CFE
             it { is_expected.to eq 0.0 }
           end
 
-          describe "gross_income" do
+          describe "benefits_in_kind" do
             subject(:benefits_in_kind) { with_no_employments.employment_income_benefits_in_kind }
 
             it { is_expected.to eq 0.0 }

@@ -22,7 +22,7 @@ RSpec.describe "citizen additional accounts request test" do
     end
   end
 
-  describe "GET /citizens/additional_accounts/new" do
+  describe "GET /citizens/additional_accounts/new when they are on the CCMS path" do
     before { application.use_ccms!(:no_online_banking) }
 
     it "has reset the state and ccms_reason" do

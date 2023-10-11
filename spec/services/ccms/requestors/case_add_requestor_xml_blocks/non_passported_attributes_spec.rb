@@ -133,7 +133,7 @@ module CCMS
           end
         end
 
-        describe "attributes in CLIPREMIUM entity" do
+        describe "premium bond attributes in CLIPREMIUM entity" do
           it "generates each attribute as false" do
             premium_bond_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :cli_premium, attr_name)
@@ -143,7 +143,7 @@ module CCMS
           end
         end
 
-        describe "attributes in CLIPREMIUM entity" do
+        describe "stocks attributes in CLIPREMIUM entity" do
           it "generates each attribute as false" do
             stocks_false_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :cli_stock, attr_name)

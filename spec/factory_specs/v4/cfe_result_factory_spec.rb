@@ -323,16 +323,6 @@ RSpec.describe "cfe_result version 4 factory" do
     end
   end
 
-  describe "trait :with_mortgage_costs" do
-    let(:cfe_result) { create(:cfe_v4_result, :with_mortgage_costs) }
-
-    include_examples "has the correct structure for v4"
-
-    it "has mortgage costs" do
-      expect(cfe_result.mortgage_per_month).not_to be_zero
-    end
-  end
-
   describe "trait :with_monthly_income_equivalents" do
     let(:cfe_result) { create(:cfe_v4_result, :with_monthly_income_equivalents) }
 

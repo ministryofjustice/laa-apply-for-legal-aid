@@ -19,20 +19,18 @@ module CCMS
           parser = described_class.new(expected_tx_id, response_xml)
           expect(parser.success?).to be true
         end
+
+        it "returns true" do
+          parser = described_class.new(expected_tx_id, response_xml)
+          parser.success?
+          expect(parser.success).to be true
+        end
       end
 
       describe "#applicant_ccms_reference" do
         it "returns the applicant_ccms_reference" do
           parser = described_class.new(expected_tx_id, response_xml)
           expect(parser.applicant_ccms_reference).to eq expected_applicant_ccms_reference
-        end
-      end
-
-      describe "#success?" do
-        it "returns true" do
-          parser = described_class.new(expected_tx_id, response_xml)
-          parser.success?
-          expect(parser.success).to be true
         end
       end
 

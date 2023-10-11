@@ -94,11 +94,6 @@ RSpec.describe "check merits answers requests" do
         expect(response.body).to include(application.statement_of_case.statement)
       end
 
-      it "displays the warning text When did the incident occur?" do
-        expect(response.body).to include(I18n.t("shared.forms.date_input_fields.occurred_on_label"))
-        expect(response.body).to include(application.latest_incident.occurred_on.to_s)
-      end
-
       it "displays linked children" do
         expect(response.body).to include(I18n.t("shared.check_answers.merits_proceeding_section.linked_children"))
       end
