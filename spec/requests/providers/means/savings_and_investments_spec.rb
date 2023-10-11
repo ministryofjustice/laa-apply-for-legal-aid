@@ -191,14 +191,9 @@ RSpec.describe "providers savings and investments" do
           expect(response.body).not_to match("govuk-form-group--error")
         end
 
-        it "redirects to the next step in Citizen jouney" do
+        it "redirects to the next step" do
           patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-
-        it "displays holding page" do
-          patch_request
-          expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
         context "when submitted with invalid input" do
