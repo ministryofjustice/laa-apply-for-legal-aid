@@ -108,7 +108,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
 
         Setting.setting.update!(manually_review_all_cases: false)
         create(:applicant, legal_aid_application:, first_name: "Stepriponikas", last_name: "Bonstart")
-        legal_aid_application.update has_restrictions: true, restrictions_details: "Blah blah"
+        legal_aid_application.update! has_restrictions: true, restrictions_details: "Blah blah"
         login_provider
         get_request
       end
@@ -176,9 +176,9 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
 
     context "with extra employment information" do
       let(:before_tasks) do
-        legal_aid_application.update extra_employment_information: true, extra_employment_information_details: "Blah blah"
+        legal_aid_application.update! extra_employment_information: true, extra_employment_information_details: "Blah blah"
         create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
-        legal_aid_application.update has_restrictions: true, restrictions_details: "Blah blah" if add_restrictions?
+        legal_aid_application.update! has_restrictions: true, restrictions_details: "Blah blah" if add_restrictions?
         login_provider
         get_request
       end

@@ -24,7 +24,7 @@ RSpec.describe Applicants::EmployedForm, type: :form do
 
     it "updates record with new value of employed attribute" do
       expect(applicant.employed).to be_nil
-      described_form.save
+      described_form.save!
       expect(applicant.employed).to be false
     end
   end

@@ -12,7 +12,7 @@ module Providers
       @form = Providers::ReceivedBenefitConfirmationForm.new(form_params)
 
       if @form.valid?
-        benefit? ? @form.save : dwp_override.destroy!
+        benefit? ? @form.save! : dwp_override.destroy!
         details_checked! unless details_checked? || benefit?
         go_forward(benefit?)
       else

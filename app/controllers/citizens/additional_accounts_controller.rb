@@ -69,7 +69,7 @@ module Citizens
     end
 
     def offline_accounts_update
-      legal_aid_application.update(has_offline_accounts: true)
+      legal_aid_application.update!(has_offline_accounts: true)
       legal_aid_application.use_ccms!(:offline_accounts) unless legal_aid_application.use_ccms?
     end
 

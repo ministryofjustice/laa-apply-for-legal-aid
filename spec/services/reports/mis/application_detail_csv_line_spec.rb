@@ -516,7 +516,7 @@ module Reports
 
           context "with restrictions" do
             it "generates yes and the details" do
-              legal_aid_application.update(has_restrictions: true, restrictions_details: "Bankrupt")
+              legal_aid_application.update!(has_restrictions: true, restrictions_details: "Bankrupt")
               expect(value_for("Restrictions?")).to eq "Yes"
               expect(value_for("Restriction details")).to eq "Bankrupt"
             end

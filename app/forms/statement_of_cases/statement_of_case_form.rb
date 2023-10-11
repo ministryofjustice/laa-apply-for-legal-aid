@@ -17,7 +17,7 @@ module StatementOfCases
       return unless original_file
 
       # create and save statement_of_case model only if attachments were made
-      model.save(validate: false) if attachments_made?
+      model.save!(validate: false) if attachments_made?
       # return result which returns 300 for redirect to fix tests
       result
     end

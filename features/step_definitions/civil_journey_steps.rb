@@ -507,13 +507,13 @@ Given("I have started an application where the client is a defendant on the dome
   visit(providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
   proceeding = @legal_aid_application.proceedings.find_by(ccms_code: "DA001")
-  proceeding.update(
+  proceeding.update!(
     client_involvement_type_ccms_code: "D",
     client_involvement_type_description: "Defendant/respondent",
     used_delegated_functions: false,
   )
   proceeding = @legal_aid_application.proceedings.find_by(ccms_code: "SE013")
-  proceeding.update(
+  proceeding.update!(
     used_delegated_functions: false,
   )
 end
@@ -1090,10 +1090,12 @@ Then(/^I enter the (.*) date of (\d+) month(?:s)? in the future$/) do |name, num
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
+# rubocop:disable Rails/SaveBang
 Given("a {string} exists in the database") do |model|
   model.gsub!(/\s+/, "_")
   create model.to_sym
 end
+# rubocop:enable Rails/SaveBang
 
 Then(/^I see a notice confirming an e-mail was sent to the citizen$/) do
   expect(page).to have_content("Application completed. An e-mail will be sent to the citizen.")

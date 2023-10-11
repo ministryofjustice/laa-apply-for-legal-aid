@@ -29,14 +29,14 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
 
     it "saves attributes to the new applicant" do
-      form.save
+      form.save!
       attr_list.each do |attribute|
         expect(applicant.send(attribute)).to eq(attributes[attribute]), "Should match #{attribute}"
       end
     end
 
     it "saved application belongs to legal_aid_application" do
-      form.save
+      form.save!
       expect(applicant).to eq(legal_aid_application.reload.applicant)
     end
 
@@ -48,7 +48,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "errors to be present" do
-        form.save
+        form.save!
         expect(form.errors[:first_name]).to contain_exactly("Enter first name")
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "adds expected error" do
-        form.save
+        form.save!
         expect(form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end
@@ -74,7 +74,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "adds expected error" do
-        form.save
+        form.save!
         expect(form.errors[:date_of_birth]).to contain_exactly("Date of birth must be in the past")
       end
     end
@@ -87,7 +87,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "adds expected error" do
-        form.save
+        form.save!
         expect(form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end
@@ -109,7 +109,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "saves the date" do
-        form.save
+        form.save!
         expect(Applicant.last.date_of_birth).to eq(attributes[:date_of_birth])
       end
     end
@@ -131,7 +131,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "adds expected error" do
-        form.save
+        form.save!
         expect(form.errors[:date_of_birth]).to contain_exactly("Enter a valid date of birth")
       end
     end

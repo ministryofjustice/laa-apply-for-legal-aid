@@ -122,9 +122,9 @@ module Admin
       ccms_firm_id = parsed_response[:providerFirmId]
       firm = Firm.find_by(ccms_id: ccms_firm_id)
       if firm.present?
-        firm.update(name: firm_name) unless firm.name == firm_name
+        firm.update!(name: firm_name) unless firm.name == firm_name
       else
-        firm = Firm.create(name: firm_name, ccms_id: ccms_firm_id)
+        firm = Firm.create!(name: firm_name, ccms_id: ccms_firm_id)
       end
       @firm = firm
     end

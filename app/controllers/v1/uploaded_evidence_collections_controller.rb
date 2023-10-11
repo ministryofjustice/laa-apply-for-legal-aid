@@ -10,10 +10,10 @@ module V1
       return render json: { error: original_file_error_for(:file_virus, file_name: file.original_filename) }, status: :bad_request if malware_scan.virus_found?
       return render json: { error: original_file_error_for(:system_down) }, status: :bad_request unless malware_scan.scanner_working
 
-      legal_aid_application.attachments.create document: file,
-                                               attachment_type: "uncategorised",
-                                               original_filename: file.original_filename,
-                                               attachment_name: sequenced_attachment_name
+      legal_aid_application.attachments.create! document: file,
+                                                attachment_type: "uncategorised",
+                                                original_filename: file.original_filename,
+                                                attachment_name: sequenced_attachment_name
       head :ok
     end
 

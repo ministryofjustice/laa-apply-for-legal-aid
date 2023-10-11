@@ -18,7 +18,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
 
   describe "#save" do
     before do
-      described_form.save
+      described_form.save!
       application.reload
     end
 
