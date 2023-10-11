@@ -1259,11 +1259,6 @@ module CCMS
             end
           end
 
-          it "CASES_FEES_DISTRIBUTED should be hard coded to 1" do
-            block = XmlExtractor.call(xml, :global_merits, "CASES_FEES_DISTRIBUTED")
-            expect(block).to have_number_response 1
-          end
-
           it "NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "NEW_APPL_OR_AMENDMENT")

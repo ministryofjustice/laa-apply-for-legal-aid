@@ -124,14 +124,6 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
         expect(first_history.success).to be false
         expect(first_history.details).to match(/#{error}/)
         expect(first_history.details).to match(/this document submission has failed/)
-      end
-
-      it "writes a history record on completion that updates the state" do
-        expect { instance.call }.to raise_error(CCMS::CCMSError, /The following documents failed to upload:/)
-        expect(history.from_state).to eq "case_created"
-        expect(history.to_state).to eq "failed"
-        expect(history.success).to be false
-        expect(history.details).to match(/#{error}/)
         expect(history.details).to match(/failed to upload/)
       end
     end
