@@ -183,7 +183,6 @@ RSpec/VerifiedDoubles:
 Rails/HelperInstanceVariable:
   Exclude:
     - 'app/helpers/capital_helper.rb'
-    - 'app/helpers/check_benefits_helper.rb'
     - 'app/helpers/layouts_helper.rb'
 
 # Offense count: 3

@@ -1,3 +1,5 @@
+<% result_namespace = @legal_aid_application.applicant_receives_benefit? ? ".positive_result" : ".negative_result" %>
+
 <div class="interruption-panel">
   <%= page_template(page_title: t("#{result_namespace}.tab_title"), column_width: :full, template: :basic) do %>
     <h1 class="govuk-heading-l">
