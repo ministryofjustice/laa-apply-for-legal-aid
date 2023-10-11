@@ -19,7 +19,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it "updates all amounts" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
 
           attributes.each do |attr|
@@ -54,7 +54,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
 
         it "generates errors" do
-          described_form.save
+          described_form.save!
           attributes.each do |attr|
             error_message = described_form.errors[attr].first
             expect(error_message).to match(expected_error)
@@ -101,7 +101,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           end
 
           it "generates errors" do
-            described_form.save
+            described_form.save!
             attributes.each do |attr|
               error_message = described_form.errors[attr].first
               expect(error_message).to match(expected_error)
@@ -119,7 +119,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it "strips the values of £ symbols" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
 
           attributes.each do |attr|
@@ -144,7 +144,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
         it "empties amounts if checkbox is unchecked" do
           attributes_except_cash = attributes - [:cash]
-          described_form.save
+          described_form.save!
           savings_amount.reload
           attributes_except_cash.each do |attr|
             val = savings_amount.__send__(attr)
@@ -153,7 +153,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
 
         it "does not empty amount if a checkbox is checked" do
-          described_form.save
+          described_form.save!
           expect(savings_amount.reload.cash).not_to be_nil
         end
 
@@ -170,7 +170,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it "empties amounts" do
-          described_form.save
+          described_form.save!
           savings_amount.reload
           attributes.each do |attr|
             val = savings_amount.__send__(attr)

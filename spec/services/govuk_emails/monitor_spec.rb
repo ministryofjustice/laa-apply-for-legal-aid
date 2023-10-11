@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe GovukEmails::Monitor do
   before do
     allow(GovukEmails::Email).to receive(:new).with(scheduled_mailing.govuk_message_id).and_return(response)
-    Setting.setting.update(alert_via_sentry: true)
+    Setting.setting.update!(alert_via_sentry: true)
   end
 
   let(:response) { instance_double(GovukEmails::Email, status:) }
