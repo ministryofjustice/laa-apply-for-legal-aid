@@ -1,15 +1,20 @@
 <% prefix = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? ".partner" : ".client" %>
-<%= page_template page_title: t("#{prefix}.h1-heading"), template: :basic, show_errors_for: @form do %>
+<%= page_template page_title: t("#{prefix}.h1-heading"), template: :basic do %>
   <%= form_with(
         model: @form,
         url: providers_legal_aid_application_offline_account_path(@legal_aid_application),
         method: :patch,
         local: true,
       ) do |form| %>
-
+    <%= form.govuk_error_summary %>
     <%= form.govuk_check_boxes_fieldset :savings_amount,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
                                         hint: { text: t("generic.select_all_that_apply") } do %>
+      <% if @form.errors[:check_box_offline_current_accounts].any? %>
+        <p class="govuk-error-message" id="savings-amount-savings-amount-error">
+          <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:check_box_offline_current_accounts].first %>
+        </p>
+      <% end %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#savings-amount-no-account-selected-true-field">
           <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>

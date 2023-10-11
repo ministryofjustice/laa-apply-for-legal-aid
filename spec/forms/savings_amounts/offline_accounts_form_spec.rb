@@ -189,7 +189,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
 
         it "displays an error message" do
           described_form.save!
-          expect(described_form.errors[:savings_amount]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
+          expect(described_form.errors[:check_box_offline_current_accounts]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected"))
         end
       end
 

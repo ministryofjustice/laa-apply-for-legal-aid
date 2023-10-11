@@ -63,7 +63,7 @@ module SavingsAmounts
     end
 
     def any_checkbox_checked_or_draft
-      errors.add :savings_amount, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
+      errors.add :check_box_offline_current_accounts, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
     end
 
     def error_message_for_no_account_selected
