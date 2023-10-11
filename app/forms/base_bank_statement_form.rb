@@ -35,12 +35,10 @@ class BaseBankStatementForm
     MAX_FILE_SIZE
   end
 
-  # rubocop:disable Rails/SaveBang
   def save_as_draft
     @draft = true
-    save
+    save!
   end
-  # rubocop:enable Rails/SaveBang
 
   # Files already uploaded and created with bank statement associations
   # so we do not need to save anything at this point, only to validate that
@@ -48,6 +46,7 @@ class BaseBankStatementForm
   def save
     valid?
   end
+  alias_method :save!, :save
 
   def upload
     return if original_file.nil?
