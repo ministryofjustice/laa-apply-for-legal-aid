@@ -472,13 +472,6 @@ module CCMS
           end
         end
 
-        describe "APPLICATION_CASE_REF" do
-          it "inserts the ccms case reference from the submission into the attribute block" do
-            block = XmlExtractor.call(xml, :global_means, "APPLICATION_CASE_REF")
-            expect(block).to have_text_response ccms_reference
-          end
-        end
-
         describe "GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?" do
           context "when the applicant is not the beneficiary of a will" do
             before { legal_aid_application.other_assets_declaration = create :other_assets_declaration, :all_nil }
@@ -581,24 +574,6 @@ module CCMS
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
               expect(block).to have_boolean_response false
-            end
-          end
-        end
-
-        describe "GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?" do
-          context "when the applicant is not the beneficiary of a will" do
-            before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
-
-            it "inserts false into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
-              expect(block).to have_boolean_response false
-            end
-          end
-
-          context "when the applicant is the beneficiary of a will" do
-            it "inserts true into the attribute block" do
-              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
-              expect(block).to have_boolean_response true
             end
           end
         end

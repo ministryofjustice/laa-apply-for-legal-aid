@@ -110,18 +110,6 @@ RSpec/LetSetup:
     - 'spec/workers/bank_holiday_update_worker_spec.rb'
     - 'spec/workers/true_layer_banks_update_worker_spec.rb'
 
-# Offense count: 20
-RSpec/RepeatedExampleGroupDescription:
-  Exclude:
-    - 'spec/factory_specs/v4/cfe_result_factory_spec.rb'
-    - 'spec/helpers/providers_helper_spec.rb'
-    - 'spec/models/cfe/v4/result_spec.rb'
-    - 'spec/requests/citizens/additional_accounts_spec.rb'
-    - 'spec/requests/citizens/gather_transactions_spec.rb'
-    - 'spec/services/ccms/parsers/applicant_add_status_response_parser_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_attributes_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-
 # Offense count: 53
 RSpec/StubbedMock:
   Exclude:

@@ -38,7 +38,7 @@ RSpec.describe "citizen accounts request" do
     end
   end
 
-  describe "GET /citizens/gather_transactions" do
+  describe "GET /citizens/gather_transactions when there is a worker_id" do
     subject(:get_request) { get citizens_gather_transactions_path }
 
     let(:worker_id) { SecureRandom.uuid }
