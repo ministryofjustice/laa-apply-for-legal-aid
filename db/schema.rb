@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_04_080150) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -881,6 +881,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_080150) do
     t.decimal "partner_offline_current_accounts"
     t.decimal "partner_offline_savings_accounts"
     t.boolean "no_partner_account_selected"
+    t.decimal "joint_offline_current_accounts"
+    t.decimal "joint_offline_savings_accounts"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
   end
 

@@ -18,7 +18,7 @@ module Partners
 
     validates(:partner_offline_current_accounts, :partner_offline_savings_accounts,
               allow_blank: true,
-              currency: { greater_than_or_equal_to: 0 })
+              currency: true)
 
     before_validation :empty_unchecked_values
 
