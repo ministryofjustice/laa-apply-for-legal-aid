@@ -1,8 +1,7 @@
 Feature: Merits task list opponent
 
   Background:
-    Given the feature flag for opponent_organisations is enabled
-    When I have completed a non-passported application and reached the merits task_list
+    Given I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Opponents\nNOT STARTED'
     When I click link 'Opponents'
     Then I should be on a page showing "Is the opponent an individual or an organisation?"

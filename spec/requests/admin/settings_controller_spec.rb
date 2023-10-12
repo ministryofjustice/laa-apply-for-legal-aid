@@ -41,7 +41,6 @@ RSpec.describe Admin::SettingsController do
           allow_welsh_translation: "true",
           enable_ccms_submission: "true",
           partner_means_assessment: "true",
-          opponent_organisations: "true",
           linked_applications: "true",
         },
       }
@@ -57,7 +56,6 @@ RSpec.describe Admin::SettingsController do
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.partner_means_assessment?).to be(true)
-      expect(setting.opponent_organisations?).to be(true)
       expect(setting.linked_applications?).to be(true)
     end
 

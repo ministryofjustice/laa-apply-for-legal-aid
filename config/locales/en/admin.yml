@@ -73,7 +73,6 @@ en:
           enable_ccms_submission: Allow CCMS submissions
           enable_evidence_upload: Enable the new evidence upload feature
           partner_means_assessment: Enable Partner Means Assessment
-          opponent_organisations: Enable Opponent Organisations
           linked_applications: Enable linked applications
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
@@ -84,7 +83,6 @@ en:
           enable_ccms_submission: Yes by default, only set to No if CCMS is being taken offline
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           partner_means_assessment: Select Yes to allow Providers to complete the Partner Means Assessment
-          opponent_organisations: Select Yes to enable the opponent organisations feature for solicitors
           linked_applications: Select Yes to enable the linked applications feature for solicitors
       update:
         notice: Settings have been updated

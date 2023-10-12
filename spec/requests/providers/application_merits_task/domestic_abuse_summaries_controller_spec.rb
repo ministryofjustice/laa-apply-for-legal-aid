@@ -98,9 +98,9 @@ module Providers
         context "when the first task is complete" do
           before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
 
-          it "redirects to the next incomplete question" do
+          it "redirects to the next incomplete question, opponent types" do
             patch_das
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(legal_aid_application))
           end
         end
 

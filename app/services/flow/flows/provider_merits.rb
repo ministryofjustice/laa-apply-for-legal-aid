@@ -80,7 +80,7 @@ module Flow
             if application.opponents.any?
               urls.providers_legal_aid_application_has_other_opponent_path(application)
             else
-              Setting.opponent_organisations? ? urls.providers_legal_aid_application_opponent_type_path(application) : urls.new_providers_legal_aid_application_opponent_individual_path(application)
+              urls.providers_legal_aid_application_opponent_type_path(application)
             end
           end,
         },
@@ -93,20 +93,12 @@ module Flow
         has_other_opponents: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
           forward: lambda { |application, has_other_opponent|
-            if has_other_opponent
-              Setting.opponent_organisations? ? :opponent_types : :opponent_individuals
-            else
-              Flow::MeritsLoop.forward_flow(application, :application)
-            end
+            has_other_opponent ? :opponent_types : Flow::MeritsLoop.forward_flow(application, :application)
           },
         },
         remove_opponent: {
           forward: lambda { |application|
-            if application.opponents.count.positive?
-              :has_other_opponents
-            else
-              Setting.opponent_organisations? ? :opponent_types : :opponent_individuals
-            end
+            application.opponents.count.positive? ? :has_other_opponents : :opponent_types
           },
         },
         opponents_mental_capacities: {

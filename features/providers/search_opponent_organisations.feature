@@ -2,8 +2,7 @@
 Feature: Search existing opponent organisations
 
 Background: User is on existing opponent organisation search page
-  Given the feature flag for opponent_organisations is enabled
-  And I insert cassette "lfa_organisations_all"
+  Given I insert cassette "lfa_organisations_all"
   When I have completed a non-passported application and reached the merits task_list
   Then I should be on the 'merits_task_list' page showing 'Opponents\nNOT STARTED'
   When I click link 'Opponents'

@@ -7,7 +7,6 @@ module Settings
                   :allow_welsh_translation,
                   :enable_ccms_submission,
                   :partner_means_assessment,
-                  :opponent_organisations,
                   :linked_applications
 
     validates :mock_true_layer_data,
@@ -15,7 +14,6 @@ module Settings
               :allow_welsh_translation,
               :enable_ccms_submission,
               :partner_means_assessment,
-              :opponent_organisations,
               :linked_applications,
               presence: true
   end

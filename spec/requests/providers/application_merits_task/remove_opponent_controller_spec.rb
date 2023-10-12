@@ -38,29 +38,16 @@ module Providers
           end
 
           context "and it is the only opponent on the application" do
-            context "with opponent organisations flag enabled" do
-              before { allow(Setting).to receive(:opponent_organisations?).and_return(true) }
-
-              it "redirects to the choose opponent type page" do
-                submit_remove
-                expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
-              end
-            end
-
-            context "with opponent organisations flag disabled" do
-              before { allow(Setting).to receive(:opponent_organisations?).and_return(false) }
-
-              it "redirects to the add new opponent individual page" do
-                submit_remove
-                expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(application))
-              end
+            it "redirects to the choose opponent type page" do
+              submit_remove
+              expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
             end
           end
 
           context "and another opponent exists" do
             before { create(:opponent, legal_aid_application: application) }
 
-            it "redirects back to the has_other_involved_children page" do
+            it "redirects to the has_other_opponent page" do
               submit_remove
               expect(response).to redirect_to(providers_legal_aid_application_has_other_opponent_path(application))
             end
