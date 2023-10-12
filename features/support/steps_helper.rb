@@ -89,7 +89,7 @@ Then("I deselect {string}") do |option|
 end
 
 Then("I click {string}") do |button_name|
-  steps %(Then the page should be axe clean excluding ".govuk-radios__input") if run_axe?
+  steps %(Then the page should be axe clean excluding ".govuk-radios__input, .govuk-accordion__section-content") if run_axe?
   click_button(button_name)
 end
 

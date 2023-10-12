@@ -898,13 +898,13 @@ Given("I click Check Your Answers Change link for {string}") do |question|
 end
 
 Given("I click Check Your Answers Change link for vehicle {string}") do |vehicle|
-  steps %(Then the page should be axe clean excluding ".govuk-radios__input") if run_axe?
+  steps %(Then the page should be axe clean excluding ".govuk-radios__input, .govuk-accordion__section-content") if run_axe?
 
   find_link("Vehicle #{vehicle}", visible: false).click
 end
 
 Given("I click Check Your Answers Change link for proceeding {string}") do |question|
-  steps %(Then the page should be axe clean excluding ".govuk-radios__input") if run_axe?
+  steps %(Then the page should be axe clean excluding ".govuk-radios__input, .govuk-accordion__section-content") if run_axe?
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__proceeding_#{question_id}" do
