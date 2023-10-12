@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m"><%= t(".#{journey_type}.heading") %></h2>
+<h2 class="govuk-heading-m"><%= t(".#{journey_type}.heading#{individual}") %></h2>
 <dl id="restrictions-on-clients-assets-questions" class="govuk-summary-list govuk-!-margin-bottom-0">
   <%= check_answer_link(
         name: :restrictions,
@@ -13,7 +13,7 @@
       <%= check_answer_link(
             name: :restrictions_details,
             url: check_answer_url_for(journey_type, :restrictions, @legal_aid_application),
-            question: "Details of restrictions",
+            question: t(".details"),
             answer: @legal_aid_application.restrictions_details,
             no_border: @legal_aid_application.has_restrictions?,
             read_only:,

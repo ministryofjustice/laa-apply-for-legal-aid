@@ -1,14 +1,9 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
-<% individual = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
-                  "your client or their partner"
-                else
-                  "your client"
-                end %>
 
 <section class="print-no-break">
-  <%= render "shared/check_answers/property", read_only: %>
+  <%= render "shared/check_answers/property", read_only:, individual: %>
 </section>
 
 <section class="print-no-break">
@@ -115,7 +110,7 @@
         "shared/check_answers/one_link_section",
         name: :savings_and_investments,
         url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-        question: t(".assets.savings_and_investments"),
+        question: t(".assets.savings_and_investments#{individual}"),
         answer_hash: capital_assets_list(
           @legal_aid_application,
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
@@ -127,7 +122,7 @@
         "shared/check_answers/one_link_section",
         name: :other_assets,
         url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
-        question: t(".assets.other_assets"),
+        question: t(".assets.other_assets#{individual}"),
         answer_hash: capital_amounts_list(
           @legal_aid_application,
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.other_assets.check_box_",
@@ -136,7 +131,7 @@
         read_only:,
       ) %>
 
-  <%= render("shared/check_answers/restrictions", read_only:) if @legal_aid_application.own_capital? %>
+  <%= render("shared/check_answers/restrictions", read_only:, individual:) if @legal_aid_application.own_capital? %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.policy_disregards.present? %>

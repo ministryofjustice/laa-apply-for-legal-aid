@@ -54,7 +54,7 @@
   <%= t(".assets_heading") %>
 </h2>
 
-<%= render "shared/check_answers/assets", read_only: true %>
+<%= render "shared/check_answers/assets", read_only: true, individual: "" %>
 
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
     <%= render "caseworker_review" %>
