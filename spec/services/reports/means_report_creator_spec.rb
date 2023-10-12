@@ -117,7 +117,7 @@ RSpec.describe Reports::MeansReportCreator do
 
         it "creates a ccms submission" do
           expect(legal_aid_application.reload).to receive(:create_ccms_submission)
-          expect(nil).to receive(:process!)
+          expect(legal_aid_application.reload.ccms_submission).to receive(:process!)
           call
         end
       end
