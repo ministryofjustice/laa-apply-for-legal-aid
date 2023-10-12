@@ -45,12 +45,6 @@ RSpec/AnyInstance:
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-RSpec/ExpectActual:
-  Exclude:
-    - 'spec/services/reports/means_report_creator_spec.rb'
-
 # Offense count: 192
 RSpec/LetSetup:
   Exclude:
