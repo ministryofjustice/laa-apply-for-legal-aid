@@ -426,7 +426,7 @@ FactoryBot.define do
 
       after(:create) do |application, evaluator|
         application.dependants = evaluator.dependants.presence || create_list(:dependant, evaluator.dependant_count)
-        application.save
+        application.save!
       end
     end
 
@@ -1022,7 +1022,7 @@ FactoryBot.define do
       after :create do |application|
         cfe_submission = create(:cfe_submission, legal_aid_application: application)
         create(:cfe_v5_result, submission: cfe_submission)
-        cfe_submission.update(cfe_result: cfe_submission.result.result, aasm_state: "results_obtained")
+        cfe_submission.update!(cfe_result: cfe_submission.result.result, aasm_state: "results_obtained")
       end
     end
 

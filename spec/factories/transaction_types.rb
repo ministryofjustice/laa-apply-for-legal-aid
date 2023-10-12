@@ -33,7 +33,7 @@ FactoryBot.define do
 
       after(:create) do |record|
         if record.disregarded_benefit?
-          parent = TransactionType.find_or_create_by(name: "benefits", operation: "credit")
+          parent = TransactionType.find_or_create_by!(name: "benefits", operation: "credit")
           record.update!(parent_id: parent.id)
         end
       end

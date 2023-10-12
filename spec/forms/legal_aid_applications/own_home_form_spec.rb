@@ -23,13 +23,13 @@ RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
 
     it "updates own home attribute" do
       expect(application.own_home).to be_nil
-      described_form.save
+      described_form.save!
       expect(application.own_home).to eq "mortgage"
     end
 
     it "leaves other attributes on the record unchanged" do
       expected_attributes = application.attributes.symbolize_keys.except(:state, :own_home, :updated_at, :created_at)
-      described_form.save
+      described_form.save!
       application.reload
       expected_attributes.each do |attr, val|
         expect(application.send(attr)).to eq(val), "Attr #{attr}: expected #{val}, got #{application.send(attr)}"

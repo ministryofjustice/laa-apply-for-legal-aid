@@ -10,7 +10,7 @@ module Providers
     def save
       return unless original_file
 
-      model.save(validate: false) if attachments_made?
+      model.save!(validate: false) if attachments_made?
     end
 
   private

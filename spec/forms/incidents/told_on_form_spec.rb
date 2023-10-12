@@ -14,7 +14,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
 
   describe "#save" do
     before do
-      described_form.save
+      described_form.save!
       incident.reload
     end
 

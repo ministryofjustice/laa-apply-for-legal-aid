@@ -11,6 +11,6 @@ class DigestExtractor
 
   def call
     @application_ids.each { |laa_id| ApplicationDigest.create_or_update!(laa_id) }
-    Setting.setting.update(digest_extracted_at: @start_time)
+    Setting.setting.update!(digest_extracted_at: @start_time)
   end
 end

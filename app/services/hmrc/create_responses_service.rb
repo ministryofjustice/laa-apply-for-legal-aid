@@ -19,7 +19,7 @@ module HMRC
 
       USE_CASES.each do |use_case|
         individuals.each do |person|
-          hmrc_response = person.hmrc_responses.create(use_case:, legal_aid_application: @legal_aid_application)
+          hmrc_response = person.hmrc_responses.create!(use_case:, legal_aid_application: @legal_aid_application)
           if use_mock?
             MockInterfaceResponseService.call(hmrc_response)
           else

@@ -21,7 +21,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
 
   describe "#save" do
     before do
-      described_form.save
+      described_form.save!
       applicant.reload
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
       let(:email) { "  #{fake_email_address}  " }
 
       it "updates the applicant email with the email address without whitespace" do
-        described_form.save
+        described_form.save!
         expect(applicant.reload.email).to eq fake_email_address
       end
     end

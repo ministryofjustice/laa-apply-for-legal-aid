@@ -102,7 +102,7 @@ module Providers
 
       def delete_attachment(attachment)
         attachment.document.purge_later
-        attachment.destroy
+        attachment.destroy!
       end
 
       def attachment_id

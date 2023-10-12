@@ -7,7 +7,7 @@ class ReportsUploaderJob < ApplicationJob
       log "blob key: #{blob.key}, blob_id: #{blob.id}"
     end
     tempfile_name = attach_application_details_report
-    admin_report.save
+    admin_report.save!
     File.unlink(tempfile_name)
     log "Application Details report attached as blob with key #{blob.key}, blob_id: #{blob.id}"
     log "AdminReport record updated at #{admin_report.updated_at}"
