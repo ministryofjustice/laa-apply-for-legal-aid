@@ -45,7 +45,7 @@
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
                     <casebio:Name>
-                      <common:Title/>
+                      <common:Title>MR.</common:Title>
                       <common:Surname>Test-Opponent</common:Surname>
                       <common:FirstName>Joffrey</common:FirstName>
                     </casebio:Name>

@@ -30,7 +30,7 @@ module CCMS
             expect(call)
               .to have_xml("#{other_party_xpath}/casebio:OtherPartyID", "OPPONENT_99123456")
               .and have_xml("#{other_party_xpath}/casebio:SharedInd", "false")
-              .and have_xml("#{person_xpath}/casebio:Name/common:Title", "")
+              .and have_xml("#{person_xpath}/casebio:Name/common:Title", "MR.")
               .and have_xml("#{person_xpath}/casebio:Name/common:FirstName", "Joffrey")
               .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Baratheon")
               .and have_xml("#{person_xpath}/casebio:RelationToClient", "NONE")
