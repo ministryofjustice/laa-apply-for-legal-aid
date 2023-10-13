@@ -13,7 +13,7 @@ module ApplicationMeritsTask
     end
 
     def ccms_relationship_to_client
-      "UNKNOWN"
+      "NONE"
     end
 
     def ccms_child?

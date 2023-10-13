@@ -248,7 +248,7 @@ module CCMS
               .and have_xml("#{person_xpath}/casebio:Name/common:Title", "")
               .and have_xml("#{person_xpath}/casebio:Name/common:FirstName", "Joffrey")
               .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Baratheon")
-              .and have_xml("#{person_xpath}/casebio:RelationToClient", "UNKNOWN")
+              .and have_xml("#{person_xpath}/casebio:RelationToClient", "NONE")
               .and have_xml("#{person_xpath}/casebio:RelationToCase", "OPP")
 
             expect(request_xml)
@@ -257,7 +257,7 @@ module CCMS
               .and have_xml("#{person_xpath}/casebio:Name/common:Title", "")
               .and have_xml("#{person_xpath}/casebio:Name/common:FirstName", "Sansa")
               .and have_xml("#{person_xpath}/casebio:Name/common:Surname", "Stark")
-              .and have_xml("#{person_xpath}/casebio:RelationToClient", "UNKNOWN")
+              .and have_xml("#{person_xpath}/casebio:RelationToClient", "NONE")
               .and have_xml("#{person_xpath}/casebio:RelationToCase", "OPP")
           end
         end

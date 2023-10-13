@@ -1509,7 +1509,7 @@ module CCMS
                     OTHER_PARTY_NAME: "Billy Bob",
                     OTHER_PARTY_TYPE: "PERSON",
                     RELATIONSHIP_TO_CASE: "OPP",
-                    RELATIONSHIP_TO_CLIENT: "UNKNOWN",
+                    RELATIONSHIP_TO_CLIENT: "NONE",
                   )
               end
             end
@@ -1588,10 +1588,10 @@ module CCMS
                     OTHER_PARTY_ORG: "false",
                     OTHER_PARTY_PERSON: "true",
                     RELATIONSHIP_TO_CASE: "OPP",
-                    RELATIONSHIP_TO_CLIENT: "UNKNOWN",
+                    RELATIONSHIP_TO_CLIENT: "NONE",
                     RELATIONSHIP_CASE_OPPONENT: "true",
                     OPP_RELATIONSHIP_TO_CASE: "Opponent",
-                    OPP_RELATIONSHIP_TO_CLIENT: "Unknown",
+                    OPP_RELATIONSHIP_TO_CLIENT: "None",
                     PARTY_IS_A_CHILD: "false",
                     RELATIONSHIP_CHILD: "false",
                     RELATIONSHIP_CASE_CHILD: "false",

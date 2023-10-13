@@ -237,7 +237,7 @@
                           <common:Attribute>
                             <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
+                            <common:ResponseValue>NONE</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                         </common:Attributes>
@@ -2656,13 +2656,13 @@
                           <common:Attribute>
                             <common:Attribute>OPP_RELATIONSHIP_TO_CLIENT</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>Unknown</common:ResponseValue>
+                            <common:ResponseValue>None</common:ResponseValue>
                             <common:UserDefinedInd>false</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
                             <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
+                            <common:ResponseValue>NONE</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>

@@ -1099,7 +1099,7 @@ module CCMS
 
             it "hard-codes RELATIONSHIP_TO_CLIENT" do
               block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-              expect(block).to have_text_response "UNKNOWN"
+              expect(block).to have_text_response "NONE"
             end
           end
 
@@ -1113,7 +1113,7 @@ module CCMS
 
             it "hard-codes OPP_RELATIONSHIP_TO_CLIENT" do
               block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
-              expect(block).to have_text_response "Unknown"
+              expect(block).to have_text_response "None"
             end
 
             it "generates OTHER_PARTY_ID" do
@@ -1153,7 +1153,7 @@ module CCMS
 
             it "hard-codes RELATIONSHIP_TO_CLIENT" do
               block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-              expect(block).to have_text_response "UNKNOWN"
+              expect(block).to have_text_response "NONE"
             end
           end
         end
@@ -1189,7 +1189,7 @@ module CCMS
 
             it "hard-codes RELATIONSHIP_TO_CLIENT" do
               block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-              expect(block).to have_text_response %w[UNKNOWN UNKNOWN]
+              expect(block).to have_text_response %w[NONE NONE]
             end
           end
 
@@ -1203,7 +1203,7 @@ module CCMS
 
             it "hard-codes OPP_RELATIONSHIP_TO_CLIENT" do
               block = XmlExtractor.call(xml, entity, "OPP_RELATIONSHIP_TO_CLIENT")
-              expect(block).to have_text_response %w[Unknown Unknown]
+              expect(block).to have_text_response %w[None None]
             end
 
             it "generates OTHER_PARTY_ID" do
@@ -1243,7 +1243,7 @@ module CCMS
 
             it "hard-codes RELATIONSHIP_TO_CLIENT" do
               block = XmlExtractor.call(xml, entity, "RELATIONSHIP_TO_CLIENT")
-              expect(block).to have_text_response %w[UNKNOWN UNKNOWN]
+              expect(block).to have_text_response %w[NONE NONE]
             end
           end
         end
