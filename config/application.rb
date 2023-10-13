@@ -142,7 +142,16 @@ module LaaApplyForLegalAid
       production: [],
     }
 
-    config.x.redis.base_url = ENV["REDIS_HOST"].present? && ENV["REDIS_PASSWORD"].present? ? "rediss://:#{ENV.fetch('REDIS_PASSWORD', nil)}@#{ENV.fetch('REDIS_HOST', nil)}:6379" : "redis://localhost:6379"
+    redis_protocol = ENV.fetch("REDIS_PROTOCOL", "rediss")
+    redis_password = ENV.fetch("REDIS_PASSWORD", nil)
+    redis_host = ENV.fetch("REDIS_HOST", nil)
+
+    redis_url = if redis_host.present? && redis_password.present?
+                  "#{redis_protocol}://:#{redis_password}@#{redis_host}:6379"
+                else
+                  "redis://localhost:6379"
+                end
+    config.x.redis.base_url = redis_url
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"

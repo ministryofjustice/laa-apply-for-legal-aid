@@ -3,7 +3,7 @@ require "sidekiq-status"
 require "prometheus_exporter/client"
 require "prometheus_exporter/instrumentation"
 
-redis_url = "rediss://:#{ENV.fetch('REDIS_PASSWORD', nil)}@#{ENV.fetch('REDIS_HOST', nil)}:6379" if ENV["REDIS_HOST"].present? && ENV["REDIS_PASSWORD"].present?
+redis_url = Rails.configuration.x.redis.base_url
 namespace = ENV.fetch("HOST", "laa-apply")
 
 module Dashboard; end

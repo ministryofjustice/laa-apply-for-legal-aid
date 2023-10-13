@@ -220,6 +220,17 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: sidekiqWebUiPassword
+  {{ if .Values.redis.enabled }}
+  - name: REDIS_PROTOCOL
+    value: "redis"
+  - name: REDIS_HOST
+    value: {{ printf "%s-%s.%s.%s" .Release.Name "master" .Release.Namespace "svc.cluster.local" }}
+  - name: REDIS_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: redisPassword
+  {{ else }}
   - name: REDIS_HOST
     valueFrom:
       secretKeyRef:
@@ -230,6 +241,7 @@ env:
       secretKeyRef:
         name: apply-for-legal-aid-elasticache-instance-output
         key: auth_token
+  {{ end }}
   - name: S3_BUCKET
     valueFrom:
       secretKeyRef:
