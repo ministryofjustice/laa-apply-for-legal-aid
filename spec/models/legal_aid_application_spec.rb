@@ -1552,7 +1552,7 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "manually_entered_employment_information?" do
-    let(:laa) { create(:legal_aid_application) }
+    let(:laa) { create(:legal_aid_application, :with_applicant) }
 
     context "when no employment information has been entered by the provider" do
       it "returns false" do
@@ -1561,10 +1561,7 @@ RSpec.describe LegalAidApplication do
     end
 
     context "when extra employment information has been entered by the provider" do
-      before do
-        laa.update!(extra_employment_information: true)
-        laa.update!(extra_employment_information_details: "test details")
-      end
+      let(:laa) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
 
       it "returns true" do
         expect(laa.manually_entered_employment_information?).to be true

@@ -5,7 +5,7 @@ module CCMS
     let(:setting) { Setting.setting }
     let!(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
     let(:determiner) { described_class.new(legal_aid_application) }
-    let(:legal_aid_application) { create(:legal_aid_application) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
     describe "#manual_review_required?" do
       subject(:manual_review_required) { determiner.manual_review_required? }
@@ -21,7 +21,7 @@ module CCMS
 
         context "and there is no DWP override" do
           context "when passported, no contrib, no_restrictions" do
-            let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_positive_benefit_check_result) }
             let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns false" do
@@ -67,7 +67,7 @@ module CCMS
 
         context "without DWP override" do
           context "and the application is passported" do
-            let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true) }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_positive_benefit_check_result, has_restrictions: true) }
 
             context "and a contribution is required" do
               let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
@@ -97,7 +97,7 @@ module CCMS
           end
 
           context "and the application is non-passported" do
-            let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true) }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_negative_benefit_check_result, has_restrictions: true) }
 
             context "when there is a contribution" do
               let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
@@ -213,7 +213,7 @@ module CCMS
         end
 
         context "with further employment information" do
-          let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: true) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
           let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns true" do
@@ -222,7 +222,7 @@ module CCMS
         end
 
         context "without further employment information" do
-          let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: false) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant) }
           let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns false" do
@@ -232,7 +232,7 @@ module CCMS
 
         context "with uploaded bank_statements" do
           let(:provider) { create(:provider) }
-          let(:legal_aid_application) { create(:legal_aid_application, attachments: [bank_statement], provider:) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, attachments: [bank_statement], provider:) }
           let(:bank_statement) { create(:attachment, :bank_statement) }
           let!(:cfe_result) { create(:cfe_v5_result, submission: cfe_submission) }
 
@@ -270,7 +270,7 @@ module CCMS
       end
 
       context "with further employment information" do
-        let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: true) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
 
         it "adds further_employment_details to the review reasons" do
           expect(review_reasons_result).to eq further_employment_details_reasons
@@ -278,7 +278,7 @@ module CCMS
       end
 
       context "with restrictions" do
-        let(:legal_aid_application) { create(:legal_aid_application, has_restrictions: true) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, has_restrictions: true) }
 
         it "adds restrictions to the review reasons" do
           expect(review_reasons_result).to eq restrictions_reasons
@@ -286,7 +286,7 @@ module CCMS
       end
 
       context "with uploaded bank statements" do
-        let(:legal_aid_application) { create(:legal_aid_application) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
         before do
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return true

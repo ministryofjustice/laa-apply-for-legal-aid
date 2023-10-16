@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::MeritsTaskListsController do
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_multiple_proceedings_inc_section8) }
   let(:evidence_upload) { false }
 
   let(:proceeding_names) do
@@ -95,7 +95,7 @@ RSpec.describe Providers::MeritsTaskListsController do
     end
 
     context "when no documents required" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: [:da001]) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings, explicit_proceedings: [:da001]) }
       let(:task_list) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
 
       before do

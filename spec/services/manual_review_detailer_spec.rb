@@ -1,14 +1,15 @@
 require "rails_helper"
 
 RSpec.describe ManualReviewDetailer do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:applicant) { legal_aid_application.applicant }
 
   describe ".call" do
     context "when there are no restrictions, no policy disregards. no extra employment information" do
       before do
         allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
         allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-        allow(legal_aid_application).to receive(:extra_employment_information?).and_return(false)
+        allow(applicant).to receive(:extra_employment_information?).and_return(false)
       end
 
       it "returns an empty array" do
@@ -32,7 +33,7 @@ RSpec.describe ManualReviewDetailer do
       before do
         allow(legal_aid_application).to receive(:has_restrictions?).and_return(true)
         allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-        allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+        allow(applicant).to receive(:extra_employment_information?).and_return(true)
       end
 
       it "returns an array with two entries" do
@@ -45,7 +46,7 @@ RSpec.describe ManualReviewDetailer do
       before do
         allow(legal_aid_application).to receive(:has_restrictions?).and_return(true)
         allow(legal_aid_application).to receive(:policy_disregards?).and_return(true)
-        allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+        allow(applicant).to receive(:extra_employment_information?).and_return(true)
       end
 
       it "returns an array with three entries" do
