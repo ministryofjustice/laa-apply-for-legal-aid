@@ -17,6 +17,7 @@ module CFECivil
             Components::Vehicles,
             Components::Properties,
             Components::ExplicitRemarks,
+            Components::Partner,
           ])
         end
       end
@@ -40,6 +41,7 @@ module CFECivil
             Components::IrregularIncomes,
             Components::Employments,
             Components::CashTransactions,
+            Components::Partner,
           ])
         end
       end
@@ -61,6 +63,7 @@ module CFECivil
             Components::Employments,
             Components::RegularTransactions,
             Components::CashTransactions,
+            Components::Partner,
           ])
         end
       end
