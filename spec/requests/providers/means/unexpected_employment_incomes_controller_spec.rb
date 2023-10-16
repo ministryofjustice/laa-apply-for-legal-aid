@@ -69,7 +69,7 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
 
         it "updates applicant extra employment details" do
           request
-          expect(application.reload.extra_employment_information_details).not_to be_empty
+          expect(applicant.reload.extra_employment_information_details).not_to be_empty
         end
 
         context "when the application is using the bank upload journey" do
@@ -113,7 +113,7 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
           end
 
           it "updates the applicant extra_employment_information" do
-            expect(applicant.extra_employment_information_details).not_to be_empty
+            expect(applicant.reload.extra_employment_information_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do

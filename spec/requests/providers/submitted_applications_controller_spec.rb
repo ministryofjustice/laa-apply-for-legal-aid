@@ -156,7 +156,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
 
       context "when employment details have been entered by the solicitor" do
         before do
-          legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: "test details")
+          legal_aid_application.applicant.update!(extra_employment_information: true, extra_employment_information_details: "test details")
           get_request
         end
 

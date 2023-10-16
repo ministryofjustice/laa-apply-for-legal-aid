@@ -598,13 +598,13 @@ module Reports
               create(:application,
                      :with_proceedings,
                      :with_single_employment,
-                     :with_extra_employment_information,
                      applicant:)
             end
 
             let(:applicant) do
               create(:applicant,
                      :employed,
+                     :with_extra_employment_information,
                      first_name: "Johnny",
                      last_name: "WALKER",
                      date_of_birth:,
@@ -622,6 +622,7 @@ module Reports
 
             context "when the applicant has multiple jobs" do
               let(:legal_aid_application) { application_with_multiple_employments }
+              let(:applicant) { create(:applicant, :employed) }
 
               it "returns the expected data" do
                 expect(value_for("HMRC data")).to eq "No"
