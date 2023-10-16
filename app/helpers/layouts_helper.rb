@@ -4,6 +4,7 @@
 #   to current layout.
 module LayoutsHelper
   def parent_layout(layout)
+    # rubocop:disable Rails/HelperInstanceVariable
     raise "Possible loop detected - Parent layout '#{layout}' already used" if @parent_layouts_used&.include?(layout.to_sym)
 
     @parent_layouts_used ||= []
@@ -12,5 +13,6 @@ module LayoutsHelper
     @view_flow.set(:layout, output_buffer)
     output = render(template: "layouts/#{layout}")
     self.output_buffer = ActionView::OutputBuffer.new(output)
+    # rubocop:enable Rails/HelperInstanceVariable
   end
 end
