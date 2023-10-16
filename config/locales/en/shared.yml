@@ -244,9 +244,10 @@ en:
           savings_and_investments_with_partner: Which savings or investments does either your client or their partner have?
           savings_account: Savings account
           current_account: Current account
-          bank_accounts: Which bank accounts does your client have?
-          partner_bank_accounts: Which bank accounts does the partner have?
-          joint_bank_accounts: Joint bank accounts
+          bank_accounts: Bank accounts
+          client_bank_accounts: Your client's accounts
+          partner_bank_accounts: The partner's accounts
+          joint_bank_accounts: Joint accounts
         property:
           heading_own_home: Property
           heading_property_details: Your client's property

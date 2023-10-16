@@ -53,7 +53,7 @@ module CapitalHelper
 
   def capital_amount_text(amount, type)
     if amount.nil?
-      "No"
+      t("generic.no")
     elsif type == :percentage
       number_to_percentage(amount, precision: 2)
     else

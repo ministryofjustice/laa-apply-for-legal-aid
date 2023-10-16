@@ -20,7 +20,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -132,7 +132,7 @@ Feature: Means report
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
 
-    And the "Which bank accounts does your client have?", for static bank account totals, questions should exist:
+    And the "Bank accounts", for static bank account totals, questions should exist:
       | question |
       | Current account |
       | Savings account |
@@ -192,7 +192,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h3  | Does your client have any savings accounts they cannot access online? |
       | h2  | Property, savings and other assets |
       | h2  | Which savings or investments does your client have? |
@@ -300,7 +300,7 @@ Feature: Means report
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
 
-    And the "Which bank accounts does your client have?", for open banking accounts, questions should exist:
+    And the "Bank accounts", for open banking accounts, questions should exist:
       | question |
       | Current account |
       | Savings account |
@@ -359,7 +359,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -403,7 +403,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
