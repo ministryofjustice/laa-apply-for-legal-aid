@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-alpine3.17
+FROM ruby:3.2.2-alpine3.18
 MAINTAINER apply for legal aid team
 
 # fail early and print all commands
@@ -39,17 +39,14 @@ RUN apk add --no-cache \
         nss \
         freetype \
         harfbuzz \
-        ca-certificates \
-        ttf-freefont \
-        nodejs \
-        yarn
+        ca-certificates
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Install latest version of Puppeteer that works with Chromium 108
-RUN yarn add puppeteer@19.2.0
+# Install latest version of Puppeteer
+RUN yarn add puppeteer
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
