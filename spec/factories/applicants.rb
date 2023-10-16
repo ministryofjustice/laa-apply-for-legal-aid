@@ -113,6 +113,11 @@ FactoryBot.define do
       has_national_insurance_number { false }
     end
 
+    trait :with_extra_employment_information do
+      extra_employment_information { true }
+      extra_employment_information_details { Faker::Lorem.paragraph(sentence_count: 2) }
+    end
+
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
     transient do
       with_bank_accounts { 0 }
