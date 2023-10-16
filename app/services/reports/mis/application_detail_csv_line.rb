@@ -262,7 +262,7 @@ module Reports
       end
 
       def vehicle_details
-        @line << yesno(vehicles.any?)
+        @line << (vehicles.any? ? vehicles.count.to_s : "No")
         vehicles.any? ? vehicle_attrs : @line += ["", "", "", "", ""]
       end
 
