@@ -15,7 +15,8 @@ module CFECivil
     private
 
       def cash_transactions_for(operation)
-        cash_transactions.joins(:transaction_type).where(transaction_type: { operation: })
+        cash_transactions.joins(:transaction_type)
+                         .where(transaction_type: { operation: }).where(owner_type:)
                          .order("transaction_type.name", :transaction_date)
                          .group_by(&:transaction_type_id)
       end
