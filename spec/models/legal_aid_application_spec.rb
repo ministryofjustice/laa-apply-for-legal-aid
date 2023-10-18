@@ -1575,6 +1575,25 @@ RSpec.describe LegalAidApplication do
         expect(laa.manually_entered_employment_information?).to be true
       end
     end
+
+    context "when extra employment information has been entered for the partner" do
+      let(:laa) { create(:legal_aid_application, :with_applicant) }
+
+      before { create(:partner, :with_extra_employment_information, legal_aid_application: laa) }
+
+      it "returns true" do
+        expect(laa.manually_entered_employment_information?).to be true
+      end
+    end
+
+    context "when full employment information has been entered for the partner" do
+      # before { laa.update!(full_employment_details: "test details") }
+      before { create(:partner, :with_full_employment_information, legal_aid_application: laa) }
+
+      it "returns true" do
+        expect(laa.manually_entered_employment_information?).to be true
+      end
+    end
   end
 
   describe "#hmrc_response_use_case_one" do

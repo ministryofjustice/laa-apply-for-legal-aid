@@ -48,5 +48,14 @@ FactoryBot.define do
       national_insurance_number { nil }
       has_national_insurance_number { false }
     end
+
+    trait :with_full_employment_information do
+      full_employment_details { Faker::Lorem.paragraph(sentence_count: 2) }
+    end
+
+    trait :with_extra_employment_information do
+      extra_employment_information { true }
+      extra_employment_information_details { Faker::Lorem.paragraph(sentence_count: 2) }
+    end
   end
 end
