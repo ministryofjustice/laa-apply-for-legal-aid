@@ -53,11 +53,6 @@ FactoryBot.define do
       full_employment_details { Faker::Lorem.paragraph(sentence_count: 2) }
     end
 
-    trait :with_extra_employment_information do
-      extra_employment_information { true }
-      extra_employment_information_details { Faker::Lorem.paragraph(sentence_count: 2) }
-    end
-
     trait :with_applicant_and_address do
       transient do
         with_bank_accounts { 0 }

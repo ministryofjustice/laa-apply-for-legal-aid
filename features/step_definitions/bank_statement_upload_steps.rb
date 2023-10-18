@@ -3,7 +3,6 @@ Given "I have completed a non-passported employed application with bank statemen
     :legal_aid_application,
     :with_proceedings,
     :with_employed_applicant,
-    :with_extra_employment_information,
     :with_non_passported_state_machine,
     :provider_confirming_applicant_eligibility,
   )
@@ -35,7 +34,6 @@ Given "I have completed a non-passported employed application for {string} with 
       :legal_aid_application,
       :with_proceedings,
       :with_employed_applicant,
-      :with_extra_employment_information,
       :with_rent_or_mortgage_regular_transaction,
       :with_housing_benefit_regular_transaction,
       :with_savings_amount,
@@ -47,7 +45,6 @@ Given "I have completed a non-passported employed application for {string} with 
       :legal_aid_application,
       :with_proceedings,
       :with_employed_applicant_and_employed_partner,
-      :with_extra_employment_information,
       :with_rent_or_mortgage_regular_transaction,
       :with_partner_rent_or_mortgage_regular_transaction,
       :with_housing_benefit_regular_transaction,
