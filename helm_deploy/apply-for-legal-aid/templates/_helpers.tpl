@@ -46,3 +46,19 @@ https://pauladamsmith.com/blog/2011/05/go_time.html
     {{ "* * * * *" }}
   {{- end -}}
 {{- end -}}
+
+{{/*
+Function to return the name for a UAT redis chart master node host
+If redis chart release name contains chart name it will be used as a full name.
+*/}}
+{{- define "apply-for-legal-aid.redis-uat-host" -}}
+  {{- $redis_chart_name := "redis" -}}
+
+  {{- if contains $redis_chart_name .Release.Name -}}
+    {{- $redis_release_name := (.Release.Name | trunc 63 | trimSuffix "-") -}}
+    {{- printf "%s-master.%s.svc.cluster.local" $redis_release_name .Release.Namespace -}}
+  {{- else -}}
+    {{- $redis_release_name := (printf "%s-%s" .Release.Name $redis_chart_name | trunc 63 | trimSuffix "-") -}}
+    {{- printf "%s-master.%s.svc.cluster.local" $redis_release_name .Release.Namespace -}}
+  {{- end -}}
+{{- end -}}
