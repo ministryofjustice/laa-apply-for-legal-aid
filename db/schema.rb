@@ -641,7 +641,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_09_145448) do
   create_table "linked_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "lead_application_id", null: false
     t.uuid "associated_application_id", null: false
-    t.string "link_type_description", null: false
     t.string "link_type_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

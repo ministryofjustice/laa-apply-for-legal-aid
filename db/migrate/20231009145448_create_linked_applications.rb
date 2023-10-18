@@ -2,8 +2,7 @@ class CreateLinkedApplications < ActiveRecord::Migration[7.0]
   def change
     create_table :linked_applications, id: :uuid do |t|
       t.references :lead_application, type: :uuid, null: false
-      t.references :associated_application, type: :uuid, null: false  
-      t.string :link_type_description, null: false
+      t.references :associated_application, type: :uuid, null: false
       t.string :link_type_code, null: false
 
       t.timestamps
