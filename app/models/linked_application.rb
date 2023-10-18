@@ -7,6 +7,6 @@ class LinkedApplication < ApplicationRecord
 private
 
   def cannot_link_self
-    errors.add(:linked_application_ref, I18n.t("activemodel.errors.models.linked_application.attributes.application_cannot_be_linked_to_itself.message")) if lead_application == associated_application
+    errors.add(:lead_application_id, :cannot_link_self) if lead_application == associated_application
   end
 end

@@ -1777,7 +1777,8 @@ RSpec.describe LegalAidApplication do
 
     context "when associated application is the same as lead application" do
       it "does not allow an application to be linked to itself" do
-        expect { create(:linked_application, :family, lead_application: application_one, associated_application: application_one) }.to raise_error ActiveRecord::RecordInvalid, "Validation failed: Linked application ref Application cannot be linked to itself."
+        expect { create(:linked_application, :family, lead_application: application_one, associated_application: application_one) }
+          .to raise_error(/Application cannot be linked to itself/)
       end
     end
 
