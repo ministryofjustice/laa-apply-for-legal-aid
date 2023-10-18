@@ -365,18 +365,18 @@ module Reports
           context "when there are no vehicles" do
             it "generates blank fields" do
               expect(value_for("Vehicle?")).to eq "No"
-              expect(value_for("Vehicle value")).to eq ""
-              expect(value_for("Outstanding loan?")).to eq ""
-              expect(value_for("Loan remaining")).to eq ""
-              expect(value_for("Date purchased")).to eq ""
-              expect(value_for("In Regular use?")).to eq ""
+              expect(value_for("Vehicle 1 value")).to eq ""
+              expect(value_for("Vehicle 1 Outstanding loan?")).to eq ""
+              expect(value_for("Vehicle 1 Loan remaining")).to eq ""
+              expect(value_for("Vehicle 1 Date purchased")).to eq ""
+              expect(value_for("Vehicle 1 In Regular use?")).to eq ""
             end
           end
 
           context "when there is a vehicle" do
             let!(:vehicles) do
               create_list(:vehicle,
-                          1,
+                          3,
                           legal_aid_application:,
                           estimated_value: 12_000,
                           payment_remaining:,
@@ -390,12 +390,12 @@ module Reports
               let(:payment_remaining) { 0 }
 
               it "generates the values" do
-                expect(value_for("Vehicle?")).to eq "Yes"
-                expect(value_for("Vehicle value")).to eq 12_000
-                expect(value_for("Outstanding loan?")).to eq "No"
-                expect(value_for("Loan remaining")).to eq ""
-                expect(value_for("Date purchased")).to eq "2020-01-01"
-                expect(value_for("In Regular use?")).to eq "Yes"
+                expect(value_for("Vehicle?")).to eq 3
+                expect(value_for("Vehicle 1 value")).to eq 12_000
+                expect(value_for("Vehicle 1 Outstanding loan?")).to eq "No"
+                expect(value_for("Vehicle 1 Loan remaining")).to eq ""
+                expect(value_for("Vehicle 1 Date purchased")).to eq "2020-01-01"
+                expect(value_for("Vehicle 1 In Regular use?")).to eq "Yes"
               end
             end
 
@@ -404,12 +404,12 @@ module Reports
               let(:payment_remaining) { 0 }
 
               it "generates the values" do
-                expect(value_for("Vehicle?")).to eq "Yes"
-                expect(value_for("Vehicle value")).to eq 12_000
-                expect(value_for("Outstanding loan?")).to eq "No"
-                expect(value_for("Loan remaining")).to eq ""
-                expect(value_for("Date purchased")).to eq "2020-01-01"
-                expect(value_for("In Regular use?")).to eq "No"
+                expect(value_for("Vehicle?")).to eq 3
+                expect(value_for("Vehicle 1 value")).to eq 12_000
+                expect(value_for("Vehicle 1 Outstanding loan?")).to eq "No"
+                expect(value_for("Vehicle 1 Loan remaining")).to eq ""
+                expect(value_for("Vehicle 1 Date purchased")).to eq "2020-01-01"
+                expect(value_for("Vehicle 1 In Regular use?")).to eq "No"
               end
             end
 
@@ -417,12 +417,12 @@ module Reports
               let(:payment_remaining) { 4_566 }
 
               it "generates the values" do
-                expect(value_for("Vehicle?")).to eq "Yes"
-                expect(value_for("Vehicle value")).to eq 12_000
-                expect(value_for("Outstanding loan?")).to eq "Yes"
-                expect(value_for("Loan remaining")).to eq 4_566
-                expect(value_for("Date purchased")).to eq "2020-01-01"
-                expect(value_for("In Regular use?")).to eq "Yes"
+                expect(value_for("Vehicle?")).to eq 3
+                expect(value_for("Vehicle 1 value")).to eq 12_000
+                expect(value_for("Vehicle 1 Outstanding loan?")).to eq "Yes"
+                expect(value_for("Vehicle 1 Loan remaining")).to eq 4_566
+                expect(value_for("Vehicle 1 Date purchased")).to eq "2020-01-01"
+                expect(value_for("Vehicle 1 In Regular use?")).to eq "Yes"
               end
             end
           end

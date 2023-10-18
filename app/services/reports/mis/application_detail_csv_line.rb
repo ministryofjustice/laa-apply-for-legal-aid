@@ -97,11 +97,11 @@ module Reports
           "Shared?",
           "%age owned",
           "Vehicle?",
-          "Vehicle value",
-          "Outstanding loan?",
-          "Loan remaining",
-          "Date purchased",
-          "In Regular use?",
+          "Vehicle 1 value",
+          "Vehicle 1 Outstanding loan?",
+          "Vehicle 1 Loan remaining",
+          "Vehicle 1 Date purchased",
+          "Vehicle 1 In Regular use?",
           "Current acct?",
           "Savings acct?",
           "Cash?",
@@ -262,7 +262,7 @@ module Reports
       end
 
       def vehicle_details
-        @line << yesno(vehicles.any?)
+        @line << (vehicles.any? ? vehicles.count : "No")
         vehicles.any? ? vehicle_attrs : @line += ["", "", "", "", ""]
       end
 
