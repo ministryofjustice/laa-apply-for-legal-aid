@@ -9,5 +9,4 @@ RSpec.describe LinkedApplication do
   it { expect(linked_application.lead_application).to eq lead_application }
   it { expect(linked_application.associated_application).to eq associated_application }
   it { expect(linked_application.link_type_code).to eq "FAMILY" }
-  it { expect(linked_application.link_type_description).to eq "Family" }
 end

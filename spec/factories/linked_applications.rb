@@ -3,6 +3,9 @@ FactoryBot.define do
     lead_application { lead_application }
     associated_application { associated_application }
     link_type_code { "FAMILY" }
-    link_type_description { "Family" }
+
+    trait :family do
+      link_type_code { "FAMILY" }
+    end
   end
 end
