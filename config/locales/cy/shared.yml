@@ -117,8 +117,8 @@ cy:
           policy_disregards: seitirahc ro emehcs morf stnemyaP
           savings_and_investments: "?evah tneilc ruoy seod stnemtsevni ro sgnivas
             fo sepyt hcihW"
-          savings_account: tnuocca sgnivaS
-          current_account: tnuocca tnerruC
+          client_savings_account: tnuocca sgnivaS
+          client_current_account: tnuocca tnerruC
           bank_accounts: "?evah tneilc ruoy seod stnuocca knab hcihW"
         property:
           outstanding_mortgage: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si

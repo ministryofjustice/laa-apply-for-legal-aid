@@ -98,7 +98,7 @@ Feature: Review and print your application
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Bank accounts |
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h3  | Your client's accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |

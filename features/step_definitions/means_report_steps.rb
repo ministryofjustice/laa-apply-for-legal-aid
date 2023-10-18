@@ -230,7 +230,7 @@ Then("the \"Bank accounts\", for open banking accounts, questions should exist:"
   expect_questions_in(selector: "[data-test=\"applicant-bank-accounts\"]", expected: table)
 end
 
-Then("the \"Does your client have any savings accounts they cannot access online?\" questions should exist:") do |table|
+Then("the \"Your client's accounts\" questions should exist:") do |table|
   expect_questions_in(selector: "[data-test=\"offline-savings-accounts\"]", expected: table)
 end
 

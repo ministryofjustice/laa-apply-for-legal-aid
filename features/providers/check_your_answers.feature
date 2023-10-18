@@ -74,7 +74,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'bank accounts'
+    And I click Check Your Answers Change link for 'offline accounts link'
     Then I should be on a page showing 'Which bank accounts does your client have?'
     Then I select 'Savings account'
     Then I fill 'offline_savings_accounts' with '678.99'
@@ -89,7 +89,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'bank accounts'
+    And I click Check Your Answers Change link for 'offline accounts link'
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select 'None of these'
     Then I click 'Save and continue'
@@ -207,7 +207,7 @@ Feature: Checking answers backwards and forwards
     @javascript
     Scenario: I want to view bank accounts via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'bank accounts'
+      And I click Check Your Answers Change link for 'offline accounts link'
       Then I should be on a page showing "Which bank accounts does your client have?"
       Then I select 'None of these'
       Then I click 'Save and continue'
@@ -315,7 +315,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h3  | Your client's accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -348,7 +348,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h3  | Your client's accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
