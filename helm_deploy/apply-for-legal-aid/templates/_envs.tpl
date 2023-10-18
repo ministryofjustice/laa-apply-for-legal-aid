@@ -224,11 +224,7 @@ env:
   - name: REDIS_PROTOCOL
     value: "redis"
   - name: REDIS_HOST
-  {{ if contains "redis" .Release.Name }}
-    value: {{ printf "%s-master.%s.svc.cluster.local" .Release.Name .Release.Namespace }}
-  {{ else }}
-    value: {{ printf "%s-redis-master.%s.svc.cluster.local" .Release.Name .Release.Namespace }}
-  {{ end }}
+    value: {{ template "apply-for-legal-aid.redis-uat-host" . }}
   - name: REDIS_PASSWORD
     valueFrom:
       secretKeyRef:
