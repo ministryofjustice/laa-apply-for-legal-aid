@@ -454,7 +454,9 @@ en:
                 blank: Select yes if your client owns a vehicle
             property_value:
               blank: Enter how much the home your client lives in is worth
+              blank_with_partner: Enter how much the home your client and their partner lives in is worth
               greater_than_or_equal_to: How much the home your client lives in in must be 0 or more
+              greater_than_or_equal_to_with_partner: How much the home your client and their partner lives in must be 0 or more
               not_a_number: How much the home your client lives in must be an amount of money, like 60,000
               too_many_decimals: How much the home your client lives in cannot include more than 2 decimal numbers
             outstanding_mortgage_amount:
