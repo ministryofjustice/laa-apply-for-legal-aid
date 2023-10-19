@@ -1745,6 +1745,99 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#associated_applications" do
+    subject(:associated_applications) { application_one.associated_applications }
+
+    let(:application_one) { create(:legal_aid_application) }
+    let(:application_two) { create(:legal_aid_application) }
+    let(:application_three) { create(:legal_aid_application) }
+
+    context "when application has no linked applications" do
+      it { is_expected.to eq [] }
+    end
+
+    context "when application is the associated application" do
+      before do
+        create(:linked_application, :family, lead_application: application_two, associated_application: application_one)
+      end
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when application is a lead applicaton" do
+      before do
+        create(:linked_application, :family, lead_application: application_one, associated_application: application_two)
+        create(:linked_application, :family, lead_application: application_one, associated_application: application_three)
+      end
+
+      it "returns an array of associated applications" do
+        expect(associated_applications).to contain_exactly(application_two, application_three)
+      end
+    end
+
+    context "when associated application is the same as lead application" do
+      it "does not allow an application to be linked to itself" do
+        expect { create(:linked_application, :family, lead_application: application_one, associated_application: application_one) }
+          .to raise_error(/Application cannot be linked to itself/)
+      end
+    end
+
+    context "when destroying an associated application" do
+      before do
+        create(:linked_application, :family, lead_application: application_one, associated_application: application_two)
+      end
+
+      it "destroys the link but not the associated application" do
+        expect { application_two.destroy! }
+          .to change { application_one.reload.associated_applications }
+              .from([application_two])
+              .to([])
+      end
+    end
+  end
+
+  describe "#lead_application" do
+    subject(:lead_application) { application_one.lead_application }
+
+    let(:application_one) { create(:legal_aid_application) }
+    let(:application_two) { create(:legal_aid_application) }
+
+    context "when application has no linked applications" do
+      it { is_expected.to be_nil }
+    end
+
+    context "when application is the lead application" do
+      before do
+        create(:linked_application, :family, lead_application: application_one, associated_application: application_two)
+      end
+
+      it { is_expected.to be_nil }
+    end
+
+    context "when application is an associated applicaton" do
+      before do
+        create(:linked_application, :family, lead_application: application_two, associated_application: application_one)
+      end
+
+      it "returns the single lead application" do
+        expect(lead_application).to eq application_two
+      end
+    end
+
+    context "when destroying a lead application" do
+      before do
+        create(:linked_application, :family, lead_application: application_one, associated_application: application_two)
+      end
+
+      it "destroys the link but not the associated application" do
+        expect { application_one.destroy! }
+          .to change { application_two.reload.lead_application }
+              .from(application_one)
+              .to(nil)
+      end
+    end
+  end
+
 private
 
   def uploaded_evidence_output

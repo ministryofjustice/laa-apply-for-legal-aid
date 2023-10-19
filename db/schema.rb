@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_145448) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -638,6 +638,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
     t.index ["legal_aid_application_id"], name: "index_legal_framework_submissions_on_legal_aid_application_id"
   end
 
+  create_table "linked_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "lead_application_id", null: false
+    t.uuid "associated_application_id", null: false
+    t.string "link_type_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["associated_application_id"], name: "index_linked_applications_on_associated_application_id"
+    t.index ["lead_application_id", "associated_application_id"], name: "index_linked_applications", unique: true
+    t.index ["lead_application_id"], name: "index_linked_applications_on_lead_application_id"
+  end
+
   create_table "malware_scan_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "uploader_type"
     t.uuid "uploader_id"
@@ -1056,6 +1067,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_091714) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "legal_framework_submissions", "legal_aid_applications"
+  add_foreign_key "linked_applications", "legal_aid_applications", column: "associated_application_id"
+  add_foreign_key "linked_applications", "legal_aid_applications", column: "lead_application_id"
   add_foreign_key "matter_oppositions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
