@@ -1,4 +1,6 @@
 class SamlIdpController < SamlIdp::IdpController
+  layout "application"
+
   def create
     if params[:email].present?
       provider = idp_authenticate(params[:email], params[:password])
