@@ -160,6 +160,7 @@ Rails.application.routes.draw do
         resources :remove_state_benefits, only: %i[show update]
       end
       get :search, on: :collection
+      resource :copy_case_invitation, only: %i[show update]
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]

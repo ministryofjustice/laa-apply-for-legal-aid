@@ -411,6 +411,8 @@ en:
               blank: Enter details of the incident
         legal_aid_application:
           attributes:
+            copy_case:
+              blank: Select yes if you want to copy an application
             confirm_delegated_functions_date:
               blank: Confirm the date you used delegated functions
             has_dependants:

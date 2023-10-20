@@ -317,6 +317,11 @@ en:
             be prosecuted
             need to pay a financial penalty
             have their legal aid stopped and have to pay back the costs
+
+    copy_case_invitations:
+      show:
+        heading: Copy an application to your application?
+
     check_passported_answers:
       show:
         h1-heading: Check your answers
