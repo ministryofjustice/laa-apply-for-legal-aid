@@ -50,7 +50,25 @@ module Flow
         },
         copy_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },
-          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
+          forward: lambda do |application|
+            if application.copy_case?
+              :copy_case_searches
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
+          end,
+          check_answers: :check_provider_answers,
+        },
+        copy_case_searches: {
+          path: ->(application) { urls.providers_legal_aid_application_copy_case_search_path(application) },
+          forward: :copy_case_confirmations,
+          check_answers: :check_provider_answers,
+        },
+        copy_case_confirmations: {
+          path: ->(application) { urls.providers_legal_aid_application_copy_case_confirmation_path(application) },
+          forward: lambda do |application|
+            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+          end,
           check_answers: :check_provider_answers,
         },
         about_financial_means: {

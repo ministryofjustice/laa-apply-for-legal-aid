@@ -1,0 +1,44 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_copy_case_confirmation_path,
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
+
+    <%= govuk_table do |table|
+          table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+
+          table.with_head do |head|
+            head.with_row do |row|
+              row.with_cell(text: "LAA Ref.")
+              row.with_cell(text: "Client")
+              row.with_cell(text: "Category")
+              row.with_cell(text: "Firm")
+            end
+          end
+
+          table.with_body do |body|
+            body.with_row do |row|
+              row.with_cell(text: @copiable_case.application_ref)
+              row.with_cell(text: @copiable_case.applicant.full_name)
+              row.with_cell(text: @copiable_case.proceedings.map(&:category_of_law).join(","))
+              row.with_cell(text: @copiable_case.provider.firm.name)
+            end
+          end
+        end %>
+
+    <%= form.hidden_field :copy_case_id, value: @copiable_case.id %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :copy_case_confirmation,
+          yes_no_options,
+          :value,
+          :label,
+          legend: { size: "xl", tag: "h1", text: t(".heading") },
+        ) %>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form:,
+        ) %>
+  <% end %>
+<% end %>
