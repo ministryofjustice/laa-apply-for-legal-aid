@@ -1,0 +1,17 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_copy_case_search_path,
+              method: :patch,
+              local: true) do |form| %>
+    <%= page_template page_title: t(".heading"), template: :basic, form: do %>
+      <%= form.govuk_text_field :search_ref,
+                                label: { text: t(".search_ref.label"), size: "xl", tag: "h1" },
+                                hint: { text: t(".search_ref.hint") },
+                                width: "three-quarters",
+                                value: params["search_ref"] || "" %>
+
+      <%= next_action_buttons(
+            show_draft: true,
+            form:,
+          ) %>
+  <% end %>
+<% end %>

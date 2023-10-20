@@ -318,9 +318,19 @@ en:
             need to pay a financial penalty
             have their legal aid stopped and have to pay back the costs
 
+    copy_case_confirmations:
+      show:
+        heading: Copy this application to your application?
+        table_caption: Application to copy to your application
     copy_case_invitations:
       show:
         heading: Copy an application to your application?
+    copy_case_searches:
+      show:
+        heading: Find the application to copy
+        search_ref:
+          label: Find the application to copy
+          hint: Enter the LAA reference of the case you are searching for
 
     check_passported_answers:
       show:
