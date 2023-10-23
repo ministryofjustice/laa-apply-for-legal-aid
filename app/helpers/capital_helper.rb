@@ -7,11 +7,6 @@ module CapitalHelper
     build_asset_list(attributes, locale_namespace, percentage_values)
   end
 
-  def capital_accounts_list(legal_aid_application, locale_namespace:, percentage_values: [])
-    attributes = capital_amount_attributes(legal_aid_application.savings_amount, legal_aid_application)&.reject! { |a| !a.end_with?("accounts") }
-    build_asset_list(attributes, locale_namespace, percentage_values)
-  end
-
   def capital_assets_list(legal_aid_application, locale_namespace:, percentage_values: [])
     attributes = capital_amount_attributes(legal_aid_application.savings_amount, legal_aid_application)&.reject! { |a| a.end_with?("accounts") }
     build_asset_list(attributes, locale_namespace, percentage_values)
@@ -53,7 +48,7 @@ module CapitalHelper
 
   def capital_amount_text(amount, type)
     if amount.nil?
-      "No"
+      t("generic.no")
     elsif type == :percentage
       number_to_percentage(amount, precision: 2)
     else

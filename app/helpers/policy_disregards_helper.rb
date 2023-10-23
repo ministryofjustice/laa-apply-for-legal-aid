@@ -16,7 +16,7 @@ module PolicyDisregardsHelper
     items&.compact!
 
     items.map do |item|
-      item.amount_text ||= "No"
+      item.amount_text ||= t("generic.no")
     end
 
     {

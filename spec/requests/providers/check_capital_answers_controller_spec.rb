@@ -96,7 +96,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       context "and they have offline bank_accounts" do
         it "shows the partner bank values" do
           expect(page).to have_css("#app-check-your-answers__partner_offline_savings_accounts",
-                                   text: "Which bank accounts does the partner have?")
+                                   text: "Partner's savings accounts")
         end
       end
     end

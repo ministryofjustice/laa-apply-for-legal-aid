@@ -20,6 +20,7 @@ FactoryBot.define do
     trait :all_nil do
       offline_current_accounts { nil }
       offline_savings_accounts { nil }
+      none_selected { true }
       cash { nil }
       other_person_account { nil }
       national_savings { nil }

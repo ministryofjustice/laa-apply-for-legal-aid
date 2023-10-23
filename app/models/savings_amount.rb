@@ -7,13 +7,6 @@ class SavingsAmount < ApplicationRecord
     all_attributes.map { |attr| send(attr).present? }.any?
   end
 
-  def has_joint_values?
-    %i[
-      joint_offline_current_accounts
-      joint_offline_savings_accounts
-    ].any?
-  end
-
 private
 
   def all_attributes

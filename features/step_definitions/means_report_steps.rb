@@ -222,15 +222,15 @@ Then("the Vehicles questions should exist:") do |table|
   end
 end
 
-Then("the \"Which bank accounts does your client have?\", for static bank account totals, questions should exist:") do |table|
+Then("the \"Bank accounts\", for static bank account totals, questions should exist:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__bank_accounts_items", expected: table)
 end
 
-Then("the \"Which bank accounts does your client have?\", for open banking accounts, questions should exist:") do |table|
+Then("the \"Bank accounts\", for open banking accounts, questions should exist:") do |table|
   expect_questions_in(selector: "[data-test=\"applicant-bank-accounts\"]", expected: table)
 end
 
-Then("the \"Does your client have any savings accounts they cannot access online?\" questions should exist:") do |table|
+Then("the \"Your client's accounts\" questions should exist:") do |table|
   expect_questions_in(selector: "[data-test=\"offline-savings-accounts\"]", expected: table)
 end
 

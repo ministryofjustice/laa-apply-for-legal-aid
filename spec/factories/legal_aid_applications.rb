@@ -496,6 +496,10 @@ FactoryBot.define do
       savings_amount { build(:savings_amount, :with_values) }
     end
 
+    trait :with_nil_savings_amount do
+      savings_amount { build(:savings_amount, :all_nil) }
+    end
+
     trait :with_fixed_offline_savings_accounts do
       savings_amount { build(:savings_amount, :all_zero, offline_savings_accounts: 1001) }
     end

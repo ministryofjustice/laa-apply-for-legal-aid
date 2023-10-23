@@ -81,6 +81,7 @@ class NonPassportedStateMachine < BaseStateMachine
       transitions from: %i[
                     provider_assessing_means
                     provider_entering_merits
+                    checking_means_income
                   ],
                   to: :checking_non_passported_means
     end

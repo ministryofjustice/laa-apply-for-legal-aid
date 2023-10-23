@@ -20,7 +20,7 @@
       html_attributes: { id: "vehicles-questions" },
     ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own-vehicle" }) do |row| %>
-    <%= row.with_key(text: t(".providers.own", individual:), classes: "govuk-!-width-one-half") %>
+    <%= row.with_key(text: t(".providers.own#{individual}"), classes: "govuk-!-width-one-half") %>
     <%= row.with_value { yes_no(@legal_aid_application.own_vehicle?) } %>
   <% end %>
 <% end %>

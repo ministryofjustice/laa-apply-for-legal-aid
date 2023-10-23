@@ -25,7 +25,7 @@ Feature: Review and print your application
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -64,7 +64,7 @@ Feature: Review and print your application
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -97,8 +97,8 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h2  | Bank accounts |
+      | h3  | Your client's accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -160,7 +160,7 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |

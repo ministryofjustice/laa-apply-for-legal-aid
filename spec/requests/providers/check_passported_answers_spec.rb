@@ -125,6 +125,7 @@ RSpec.describe "check passported answers requests" do
         let(:application) do
           create(:legal_aid_application,
                  :with_applicant,
+                 :with_nil_savings_amount,
                  :with_proceedings,
                  :with_policy_disregards,
                  :without_own_home,

@@ -20,7 +20,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -28,7 +28,7 @@ Feature: Means report
       | h3  | Bank statements |
 
     Then the following sections should not exist:
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h3  | Your client's accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -132,10 +132,10 @@ Feature: Means report
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
 
-    And the "Which bank accounts does your client have?", for static bank account totals, questions should exist:
+    And the "Bank accounts", for static bank account totals, questions should exist:
       | question |
-      | Current account |
-      | Savings account |
+      | Client's current accounts |
+      | Client's savings accounts |
 
     And the "Which savings or investments does your client have?" questions should exist:
       | question |
@@ -192,8 +192,8 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h2  | Bank accounts |
+      | h3  | Your client's accounts |
       | h2  | Property, savings and other assets |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
@@ -300,12 +300,12 @@ Feature: Means report
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
 
-    And the "Which bank accounts does your client have?", for open banking accounts, questions should exist:
+    And the "Bank accounts", for open banking accounts, questions should exist:
       | question |
-      | Current account |
-      | Savings account |
+      | Client's current accounts |
+      | Client's savings accounts |
 
-    And the "Does your client have any savings accounts they cannot access online?" questions should exist:
+    And the "Your client's accounts" questions should exist:
       | question |
       | Has savings accounts they cannot access online |
       | Amount in offline savings accounts |
@@ -359,7 +359,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -403,13 +403,13 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Which bank accounts does your client have? |
+      | h2  | Bank accounts |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h3  | Bank statements |
-      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h3  | Your client's accounts|
 
    And the "Client details" check your answers section should contain:
     | question | answer |

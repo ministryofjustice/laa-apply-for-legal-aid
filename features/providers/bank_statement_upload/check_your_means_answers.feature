@@ -36,7 +36,7 @@ Feature: Bank statement upload check your answers
 
     And I should see "Uploaded bank statements"
     And I should see 'Does your client get student finance?'
-    And I should not see 'Does your client have any savings accounts they cannot access online?'
+    And I should not see "Your client's accounts"
 
     And the "Payments your client receives" section's questions and answers should match:
       | question | answer |
