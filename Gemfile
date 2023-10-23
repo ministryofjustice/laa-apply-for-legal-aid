@@ -60,7 +60,7 @@ gem "jwt"
 
 # background processing
 gem "redis"
-gem "sidekiq", "~> 6.5.9"
+gem "sidekiq", "~> 7.1.6"
 gem "sidekiq-status", "~> 3.0.3"
 
 # URL and path parsing
