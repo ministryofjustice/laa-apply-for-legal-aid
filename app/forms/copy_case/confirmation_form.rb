@@ -10,10 +10,18 @@ module CopyCase
     def save
       return false unless valid?
 
-      cloner = CopyCase::ClonerService.new(legal_aid_application, copy_case_id)
+      cloner = CopyCase::ClonerService.new(legal_aid_application, legal_aid_application_to_copy)
       cloner.call
     end
     alias_method :save!, :save
+
+    def legal_aid_application_to_copy
+      @legal_aid_application_to_copy ||= LegalAidApplication.find(copy_case_id)
+    end
+
+    def legal_aid_application
+      @legal_aid_application ||= model
+    end
 
     def exclude_from_model
       %i[copy_case_id copy_case_confirmation]
