@@ -61,7 +61,7 @@ module Flow
             when :partner_multiple_employments, :partner_no_hmrc_data
               :partner_full_employment_details
             when :partner_single_employment
-              :partner_employment_income
+              :partner_employment_incomes
             when :partner_unexpected_employment_data
               :partner_unexpected_employment_incomes
             when :partner_not_employed
@@ -164,7 +164,7 @@ module Flow
           forward: :partner_receives_state_benefits,
           check_answers: :check_income_answers,
         },
-        partner_employment_income: {
+        partner_employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employment_income_path(application) },
           forward: :partner_receives_state_benefits,
         },

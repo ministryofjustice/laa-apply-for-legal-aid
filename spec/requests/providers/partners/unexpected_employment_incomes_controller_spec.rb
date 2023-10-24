@@ -48,7 +48,7 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
 
     let(:params) do
       {
-        legal_aid_application: {
+        partner: {
           extra_employment_information_details:,
         },
       }
@@ -67,9 +67,9 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
           }
         end
 
-        it "updates legal aid application restriction information" do
+        it "updates partner extra employment details" do
           request
-          expect(application.reload.extra_employment_information_details).not_to be_empty
+          expect(partner.reload.extra_employment_information_details).not_to be_empty
         end
 
         context "with invalid params" do
@@ -77,7 +77,7 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
 
           it "displays error" do
             request
-            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.partner.attributes.extra_employment_information_details.blank"))
           end
         end
       end
@@ -97,7 +97,7 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
           end
 
           it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.extra_employment_information_details).not_to be_empty
+            expect(partner.reload.extra_employment_information_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do

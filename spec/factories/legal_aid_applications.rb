@@ -18,6 +18,14 @@ FactoryBot.define do
       applicant { build(:applicant, employed: true, with_bank_accounts:) }
     end
 
+    trait :with_employed_applicant_and_extra_info do
+      # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_extra_employment_information, employed: true, with_bank_accounts:) }
+    end
+
     trait :with_employed_applicant_and_employed_partner do
       applicant { build(:applicant, employed: true, has_partner: true, partner_has_contrary_interest: false) }
       partner { build(:partner, employed: true) }
@@ -43,11 +51,6 @@ FactoryBot.define do
 
     trait :with_full_employment_information do
       full_employment_details { Faker::Lorem.paragraph(sentence_count: 2) }
-    end
-
-    trait :with_extra_employment_information do
-      extra_employment_information { true }
-      extra_employment_information_details { Faker::Lorem.paragraph(sentence_count: 2) }
     end
 
     trait :with_applicant_and_address do

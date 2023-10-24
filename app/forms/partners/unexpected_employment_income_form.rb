@@ -1,6 +1,6 @@
-module LegalAidApplications
+module Partners
   class UnexpectedEmploymentIncomeForm < BaseForm
-    form_for LegalAidApplication
+    form_for Partner
 
     attr_accessor :extra_employment_information_details
 
@@ -15,7 +15,7 @@ module LegalAidApplications
     end
 
     def add_blank_error_for(attribute)
-      errors.add(attribute, I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attribute}.blank"))
+      errors.add(attribute, I18n.t("activemodel.errors.models.partner.attributes.#{attribute}.blank"))
     end
   end
 end

@@ -296,7 +296,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
     context "with extra employment information" do
       let(:before_tasks) do
-        legal_aid_application.update! extra_employment_information: true, extra_employment_information_details: "Blah blah"
+        create(:applicant, :with_extra_employment_information, legal_aid_application:)
         create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
         legal_aid_application.update! has_restrictions: true, restrictions_details: "Blah blah" if add_restrictions?
         login_provider

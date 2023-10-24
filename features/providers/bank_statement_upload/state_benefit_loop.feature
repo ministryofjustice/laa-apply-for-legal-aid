@@ -18,7 +18,8 @@ Feature: Bank statement upload journey state_benefit loop feature
     Then I should be on a page with title matching "Review .*'s employment income"
     And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
 
-    When I click "Save and continue"
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on a page with title matching "Does your client get any benefits?"
     And I choose "Yes"
 

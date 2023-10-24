@@ -4,7 +4,7 @@
   <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, read_only: false, partner: true) %>
 
   <% if @legal_aid_application.partner.hmrc_employment_income? %>
-    <% if @legal_aid_application.has_multiple_employments? %>
+    <% if @legal_aid_application.partner.has_multiple_employments? %>
       <%= render(
             "shared/check_answers/full_employment_details",
             individual: "The partner",

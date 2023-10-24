@@ -26,7 +26,7 @@
   </section>
 
   <section class="print-no-break">
-    <% if @legal_aid_application.extra_employment_information? %>
+    <% if @legal_aid_application.applicant.extra_employment_information? %>
       <%= render "shared/check_answers/employed_income", partner: false, read_only: true %>
     <% end %>
   </section>

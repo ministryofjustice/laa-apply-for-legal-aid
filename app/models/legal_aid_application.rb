@@ -316,7 +316,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def employment_evidence_required?
-    extra_employment_information_details.present? || full_employment_details.present?
+    applicant.extra_employment_information_details.present? || full_employment_details.present?
   end
 
   def employment_payments
@@ -511,7 +511,15 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def manually_entered_employment_information?
-    extra_employment_information? || full_employment_details.present?
+    manual_client_employment_information? || manual_partner_employment_information?
+  end
+
+  def manual_client_employment_information?
+    applicant.extra_employment_information? || full_employment_details.present?
+  end
+
+  def manual_partner_employment_information?
+    partner&.extra_employment_information? || partner&.full_employment_details.present?
   end
 
   def hmrc_response_use_case_one

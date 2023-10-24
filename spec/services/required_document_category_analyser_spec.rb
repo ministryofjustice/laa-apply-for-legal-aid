@@ -8,7 +8,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
 
     context "when the application has dwp result overriden" do
       let(:dwp_override) { create(:dwp_override, :with_evidence) }
-      let(:application) { create(:legal_aid_application, dwp_override:) }
+      let(:application) { create(:legal_aid_application, :with_applicant, dwp_override:) }
 
       context "when the provider has evidence of benefits" do
         it "updates the required_document_categories with benefit_evidence" do
@@ -34,7 +34,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context "when the application has section 8 proceedings" do
-      let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_multiple_proceedings_inc_section8) }
 
       it "updates the required_document_categories with gateway_evidence" do
         call
@@ -44,7 +44,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
 
     context "when the application has dwp result overriden and section 8 proceedings" do
       let(:dwp_override) { create(:dwp_override, :with_evidence) }
-      let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8, dwp_override:) }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_multiple_proceedings_inc_section8, dwp_override:) }
 
       it "updates the required_document_categories with gateway_evidence" do
         call
@@ -53,7 +53,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context "when the application has neither dwp result overriden nor section 8 proceedings" do
-      let(:application) { create(:legal_aid_application) }
+      let(:application) { create(:legal_aid_application, :with_applicant) }
 
       it "updates the required_document_categories with an empty array" do
         call
@@ -62,7 +62,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context "when the provider has entered employment details" do
-      let(:application) { create(:legal_aid_application, extra_employment_information_details: "test details") }
+      let(:application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
 
       it "updates the required_document_categories with employment_evidence" do
         call
@@ -71,7 +71,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context "when the application has a proceeding with opponent_application has_opponent_application true" do
-      let(:application) { create(:legal_aid_application, :with_opponents_application_proceeding) }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_opponents_application_proceeding) }
 
       it "updates the required_document_categories with court_application_or_order" do
         call
@@ -80,7 +80,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context "when the application has a proceeding with final_hearing listed true" do
-      let(:application) { create(:legal_aid_application, :with_final_hearing_proceeding) }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_final_hearing_proceeding) }
 
       it "updates the required_document_categories with court_order and expert_report" do
         call
@@ -89,7 +89,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context "when the application has a proceeding with opponent_application has_opponent_application true and final_hearing listed true" do
-      let(:application) { create(:legal_aid_application, :with_opponents_application_proceeding, :with_final_hearing_proceeding) }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_opponents_application_proceeding, :with_final_hearing_proceeding) }
 
       it "updates the required_document_categories with court_order and expert_report" do
         call

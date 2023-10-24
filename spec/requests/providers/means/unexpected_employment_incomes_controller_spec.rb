@@ -48,7 +48,7 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
 
     let(:params) do
       {
-        legal_aid_application: {
+        applicant: {
           extra_employment_information_details:,
         },
       }
@@ -67,9 +67,9 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
           }
         end
 
-        it "updates legal aid application restriction information" do
+        it "updates applicant extra employment details" do
           request
-          expect(application.reload.extra_employment_information_details).not_to be_empty
+          expect(applicant.reload.extra_employment_information_details).not_to be_empty
         end
 
         context "when the application is using the bank upload journey" do
@@ -93,7 +93,7 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
 
           it "displays error" do
             request
-            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.applicant.attributes.extra_employment_information_details.blank"))
           end
         end
       end
@@ -112,8 +112,8 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
             application.reload
           end
 
-          it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.extra_employment_information_details).not_to be_empty
+          it "updates the applicant extra_employment_information" do
+            expect(applicant.reload.extra_employment_information_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do

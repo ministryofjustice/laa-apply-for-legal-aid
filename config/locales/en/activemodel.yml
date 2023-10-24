@@ -104,6 +104,10 @@ en:
             email:
               blank: Enter an email address
               invalid: Enter an email address in the correct format, such as name@example.com
+            extra_employment_information:
+              blank: Select yes if you need to tell us anything else about your client's employment
+            extra_employment_information_details:
+              blank: Enter details about your client's employment
             first_name:
               blank: Enter first name
             has_national_insurance_number:
@@ -309,6 +313,10 @@ en:
             email:
               blank: Enter an email address
               invalid: Enter an email address in the correct format, such as name@example.com
+            extra_employment_information:
+              blank: Select yes if you need to tell us anything else about the partner's employment
+            extra_employment_information_details:
+              blank: Enter details about the partner's employment
             first_name:
               blank: Enter first name
             has_national_insurance_number:
@@ -439,10 +447,6 @@ en:
               less_than_or_equal_to: The new substantive cost limit cannot be more than £25,000
             substantive_cost_reasons:
               blank: Tell us why you need a higher substantive cost limit
-            extra_employment_information:
-              blank: Select yes if you need to tell us anything else about your client's employment
-            extra_employment_information_details:
-              blank: Enter details about your client's employment
             full_employment_details:
               blank: Enter your client's employment details
             own_home:

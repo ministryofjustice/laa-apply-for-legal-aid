@@ -43,7 +43,7 @@ RSpec.describe Providers::Partners::EmploymentIncomesController do
 
     let(:params) do
       {
-        legal_aid_application: {
+        partner: {
           extra_employment_information:,
           extra_employment_information_details:,
         },
@@ -55,6 +55,7 @@ RSpec.describe Providers::Partners::EmploymentIncomesController do
     context "when the provider is authenticated" do
       before do
         login_as provider
+        request
       end
 
       context "when Form submitted with continue button" do
@@ -64,26 +65,30 @@ RSpec.describe Providers::Partners::EmploymentIncomesController do
           }
         end
 
-        it "updates legal aid application restriction information" do
-          request
-          expect(application.reload.extra_employment_information).to be true
-          expect(application.reload.extra_employment_information_details).not_to be_empty
+        it "sets the partner extra employment information attribute to true" do
+          expect(partner.reload.extra_employment_information).to be true
+        end
+
+        it "updates the partner extra employment information details" do
+          expect(partner.reload.extra_employment_information_details).not_to be_empty
+        end
+
+        it "redirects to the partner receives benefits page" do
+          expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(application))
         end
 
         context "with invalid params" do
           let(:extra_employment_information_details) { "" }
 
           it "displays error" do
-            request
-            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.partner.attributes.extra_employment_information_details.blank"))
           end
 
           context "with no params" do
             let(:extra_employment_information) { "" }
 
             it "displays error" do
-              request
-              expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank"))
+              expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.partner.attributes.extra_employment_information.blank"))
             end
           end
         end
@@ -98,14 +103,15 @@ RSpec.describe Providers::Partners::EmploymentIncomesController do
 
         context "and after success" do
           before do
-            login_as provider
-            request
             application.reload
           end
 
-          it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.extra_employment_information).to be true
-            expect(application.extra_employment_information_details).not_to be_empty
+          it "sets the partner extra employment information attribute to true" do
+            expect(partner.reload.extra_employment_information).to be true
+          end
+
+          it "updates the partner extra employment information details" do
+            expect(partner.reload.extra_employment_information_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do

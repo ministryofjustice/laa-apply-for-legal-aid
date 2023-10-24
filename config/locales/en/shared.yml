@@ -328,7 +328,9 @@ en:
         new_limit_reasons: Reason
       employed_income:
         employment: Employment income
-        employment_question: Do you need to tell us anything else about your client's employment?
+        employment_question:
+          client: Do you need to tell us anything else about your client's employment?
+          partner: Do you need to tell us anything else about the partner's employment?
         employment_details: Details
       benefits_income:
         applicant:
@@ -852,7 +854,7 @@ en:
       page_heading_no_data: HMRC has no record of %{individual}'s employment in the last 3 months
       page_heading_multiple_employments: HMRC found a record of %{individual}'s employment
       page_heading_no_nino: We could not check %{individual}'s employment record with HMRC
-      info_no_data: You told us your client is employed but HMRC could not confirm this.
+      info_no_data: You told us %{individual} is employed but HMRC could not confirm this.
       info_multiple_employments: HMRC says %{individual} had more than one job in the last 3 months.
       info_no_nino: Because you did not give us %{individual}'s National Insurance number, we could not check this with HMRC.
       enter_details_client: "Enter details of your client's employment in the last 3 months, including:"

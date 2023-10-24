@@ -1,4 +1,12 @@
-<% individual = partner ? "partner" : "client" %>
+<% if partner
+     individual = "partner"
+     model = @legal_aid_application.partner
+     change_url = providers_legal_aid_application_partners_employment_income_path(@legal_aid_application)
+   else
+     individual = "client"
+     model = @legal_aid_application.applicant
+     change_url = providers_legal_aid_application_means_employment_income_path(@legal_aid_application)
+   end %>
 <div class="govuk-grid-row" id="app-check-your-answers__#{individual}_employment">
   <div class="govuk-grid-column-two-thirds">
     <h3 class="govuk-heading-m"><%= t(".employment") %></h3>
@@ -7,7 +15,7 @@
     <% unless read_only %>
       <p>
         <%= govuk_link_to(
-              t("generic.change"), providers_legal_aid_application_means_employment_income_path(@legal_aid_application),
+              t("generic.change"), change_url,
               class: "change-link"
             ) %>
       </p>
@@ -18,16 +26,16 @@
 
   <%= check_answer_no_link(
         name: :extra_employment_information,
-        question: t(".employment_question"),
-        answer: safe_yes_or_no(@legal_aid_application.extra_employment_information?),
+        question: t(".employment_question.#{individual}"),
+        answer: safe_yes_or_no(model.extra_employment_information?),
         read_only:,
       ) %>
 
-  <% if @legal_aid_application.extra_employment_information? %>
+  <% if model.extra_employment_information? %>
     <%= check_long_question_no_link(
           name: :extra_employment_information_details,
           question: t(".employment_details"),
-          answer: @legal_aid_application.extra_employment_information_details,
+          answer: model.extra_employment_information_details,
         ) %>
   <% end %>
 </dl>

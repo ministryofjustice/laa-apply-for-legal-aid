@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe ResultsPanelSelector do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:applicant) { legal_aid_application.applicant }
 
   before { allow(legal_aid_application).to receive(:cfe_result).and_return(cfe_result) }
 
@@ -70,7 +71,7 @@ RSpec.describe ResultsPanelSelector do
         before do
           allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
           allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-          allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+          allow(applicant).to receive(:extra_employment_information?).and_return(true)
         end
 
         it "returns the correct capital specific partial" do
@@ -84,7 +85,7 @@ RSpec.describe ResultsPanelSelector do
         before do
           allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
           allow(legal_aid_application).to receive(:policy_disregards?).and_return(true)
-          allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+          allow(applicant).to receive(:extra_employment_information?).and_return(true)
         end
 
         it "returns the income_contribution name" do
@@ -98,7 +99,7 @@ RSpec.describe ResultsPanelSelector do
         before do
           allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
           allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-          allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+          allow(applicant).to receive(:extra_employment_information?).and_return(true)
         end
 
         it "returns the correct capital specific partial" do
