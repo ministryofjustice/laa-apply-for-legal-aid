@@ -19,7 +19,10 @@ module CopyCase
 
     def clone_proceedings
       new_proceedings = original.proceedings.each_with_object([]) do |proceeding, memo|
-        memo << proceeding.deep_clone(except: %i[legal_aid_application_id proceeding_case_id])
+        memo << proceeding.deep_clone(
+          except: %i[legal_aid_application_id proceeding_case_id],
+          include: [:scope_limitations],
+        )
       end
 
       copy.proceedings = new_proceedings
