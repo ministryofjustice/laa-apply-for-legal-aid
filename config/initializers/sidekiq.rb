@@ -9,6 +9,7 @@ redis_url = Rails.configuration.x.redis.base_url
 
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url }
+  config.logger.level = Logger::WARN if Rails.env.test?
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes.to_i
