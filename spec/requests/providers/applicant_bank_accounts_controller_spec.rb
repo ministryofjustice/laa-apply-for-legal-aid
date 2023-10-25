@@ -5,7 +5,6 @@ RSpec.describe Providers::ApplicantBankAccountsController do
   let!(:bank_provider) { create(:bank_provider, applicant:) }
   let!(:bank_account) { create(:bank_account, bank_provider:) }
   let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_savings_amount, applicant:) }
-  let!(:savings_amount) { create(:savings_amount) }
   let(:application_id) { legal_aid_application.id }
   let!(:provider) { legal_aid_application.provider }
 

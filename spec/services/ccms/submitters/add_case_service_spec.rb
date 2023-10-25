@@ -20,13 +20,6 @@ module CCMS
                office_id: office.id,
                populate_vehicle: true)
       end
-
-      let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-
-      let!(:chances_of_success) do
-        create(:chances_of_success, :with_optional_text, proceeding:)
-      end
-
       let(:applicant) { legal_aid_application.applicant }
       let(:office) { create(:office) }
       let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:) }
@@ -34,15 +27,18 @@ module CCMS
       let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/CaseServices_ep" }
       let(:response_body) { ccms_data_from_file "case_add_response.xml" }
 
+      let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
+
+      before do
+        create(:chances_of_success, :with_optional_text, proceeding:)
+        stub_request(:post, endpoint).to_return(body: response_body, status: 200)
+        allow_any_instance_of(CCMS::Requestors::CaseAddRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
+      end
+
       around do |example|
         VCR.turn_off!
         example.run
         VCR.turn_on!
-      end
-
-      before do
-        stub_request(:post, endpoint).to_return(body: response_body, status: 200)
-        allow_any_instance_of(CCMS::Requestors::CaseAddRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
       end
 
       context "with passported application" do

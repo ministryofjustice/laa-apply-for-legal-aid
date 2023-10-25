@@ -164,9 +164,8 @@ RSpec.describe "check merits answers requests" do
     end
     let(:da001) { application.proceedings.find_by(ccms_code: "DA001") }
     let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application: application) }
-    let!(:chances_of_success) do
-      create(:chances_of_success, :with_optional_text, proceeding: da001)
-    end
+
+    before { create(:chances_of_success, :with_optional_text, proceeding: da001) }
 
     context "when the provider is unauthenticated" do
       before { patch_request }

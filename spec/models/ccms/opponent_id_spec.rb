@@ -36,7 +36,7 @@ module CCMS
     end
 
     describe "prevent_multiple_records" do
-      let!(:original_record) { described_class.create!(serial_id: 88_123_567) }
+      before { described_class.create!(serial_id: 88_123_567) }
 
       it "raises rather when attempting to save a second record" do
         expect {

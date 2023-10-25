@@ -2,11 +2,6 @@ require "rails_helper"
 
 RSpec.describe AggregatedCashOutgoings do
   let(:aco) { described_class.new(legal_aid_application_id: application.id) }
-  let(:application) { create(:legal_aid_application, :with_applicant) }
-  let(:categories) { %i[rent_or_mortgage maintenance_out] }
-  let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
-  let!(:maintenance_out) { create(:transaction_type, :maintenance_out) }
-  let!(:legal_aid) { create(:transaction_type, :legal_aid) }
   let(:month1_tx_date) { Time.zone.today.beginning_of_month - 1.month }
   let(:month2_tx_date) { Time.zone.today.beginning_of_month - 2.months }
   let(:month3_tx_date) { Time.zone.today.beginning_of_month - 3.months }
@@ -16,8 +11,15 @@ RSpec.describe AggregatedCashOutgoings do
   let(:month1_name) { month1_tx_date.strftime("%B") }
   let(:month2_name) { month2_tx_date.strftime("%B") }
   let(:month3_name) { month3_tx_date.strftime("%B") }
+  let(:application) { create(:legal_aid_application, :with_applicant) }
+  let(:categories) { %i[rent_or_mortgage maintenance_out] }
+  let!(:maintenance_out) { create(:transaction_type, :maintenance_out) }
 
-  before { application.set_transaction_period }
+  before do
+    create(:transaction_type, :legal_aid)
+    create(:transaction_type, :rent_or_mortgage)
+    application.set_transaction_period
+  end
 
   describe "#find_by" do
     context "with no cash income transaction records" do

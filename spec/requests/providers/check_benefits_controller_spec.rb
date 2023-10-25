@@ -7,14 +7,11 @@ RSpec.describe Providers::CheckBenefitsController do
   let(:national_insurance_number) { "JA293483A" }
   let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:, has_national_insurance_number:) }
   let(:application) { create(:application, :checking_applicant_details, applicant:) }
-  let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
   let(:provider) { create(:provider) }
 
   describe "GET /providers/applications/:application_id/check_benefits", :vcr do
     subject(:get_request) { get "/providers/applications/#{application.id}/check_benefits" }
-
-    let!(:address) { create(:address, applicant:, lookup_used: address_lookup_used) }
 
     before { login }
 
@@ -42,19 +39,16 @@ RSpec.describe Providers::CheckBenefitsController do
     end
 
     context "when the check_benefit_result already exists" do
-      let!(:benefit_check_result) { create(:benefit_check_result, legal_aid_application: application) }
-
       it "does not generate a new one" do
+        create(:benefit_check_result, legal_aid_application: application)
         expect(BenefitCheckService).not_to receive(:call)
         expect { get_request }.not_to change(BenefitCheckResult, :count)
       end
 
       context "and the applicant has since been modified" do
-        before { applicant.update(first_name: Faker::Name.first_name) }
-
-        let!(:benefit_check_result) { travel(-10.minutes) { create(:benefit_check_result, legal_aid_application: application) } }
-
         it "updates check_benefit_result" do
+          applicant.update!(first_name: Faker::Name.first_name)
+          travel(-10.minutes) { create(:benefit_check_result, legal_aid_application: application) }
           expect(BenefitCheckService).to receive(:call).and_call_original
           get_request
         end

@@ -152,7 +152,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       context "with a lot of associations" do
-        let!(:another) { create(:legal_aid_application, :with_everything) }
+        before { create(:legal_aid_application, :with_everything) }
 
         it "gets deleted too" do
           expect { delete_request }.to change(LegalAidApplication, :count).to(0)
@@ -205,17 +205,15 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       context "with a lot of associations" do
-        let!(:application) { create(:legal_aid_application, :at_assessment_submitted) }
-
         it "gets deleted too" do
+          create(:legal_aid_application, :at_assessment_submitted)
           expect { delete_request }.to change(LegalAidApplication, :count).by(-1)
         end
       end
 
       context "when application has no applicant" do
-        let!(:application) { create(:legal_aid_application) }
-
         it "gets deleted too" do
+          create(:legal_aid_application)
           expect { delete_request }.to change(LegalAidApplication, :count).by(-1)
           expect { delete_request }.not_to change(Applicant, :count)
         end

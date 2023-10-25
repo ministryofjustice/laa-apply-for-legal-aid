@@ -94,7 +94,8 @@ RSpec.describe "providers legal aid application requests" do
 
         context "and more applications than page size" do
           # Creating 4 additional means there are now 5 applications
-          let!(:additional_applications) { create_list(:legal_aid_application, 4, :with_applicant, provider:) }
+          before { create_list(:legal_aid_application, 4, :with_applicant, provider:) }
+
           let(:params) { { page_size: 3 } }
 
           it "show page information" do

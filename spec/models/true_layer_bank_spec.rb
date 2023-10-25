@@ -20,8 +20,6 @@ RSpec.describe TrueLayerBank, vcr: { cassette_name: "true_layer_banks_api", allo
     end
 
     context "without an existing instances" do
-      let!(:true_layer_bank) { nil }
-
       before { described_class.delete_all }
 
       it "creates a new instance" do

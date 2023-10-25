@@ -2,12 +2,6 @@ require "rails_helper"
 
 RSpec.describe AggregatedCashIncome do
   let(:aci) { described_class.new(legal_aid_application_id: application.id) }
-  let(:application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
-  let(:categories) { %i[benefits maintenance_in] }
-  let!(:benefits) { create(:transaction_type, :benefits) }
-  let!(:maintenance_in) { create(:transaction_type, :maintenance_in) }
-  let!(:friends_or_family) { create(:transaction_type, :friends_or_family) }
-  let!(:property_or_lodger) { create(:transaction_type, :property_or_lodger) }
   let!(:pension) { create(:transaction_type, :pension) }
   let(:month1_tx_date) { Time.zone.today.beginning_of_month - 1.month }
   let(:month2_tx_date) { Time.zone.today.beginning_of_month - 2.months }
@@ -18,8 +12,16 @@ RSpec.describe AggregatedCashIncome do
   let(:month1_name) { month1_tx_date.strftime("%B") }
   let(:month2_name) { month2_tx_date.strftime("%B") }
   let(:month3_name) { month3_tx_date.strftime("%B") }
+  let(:application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
+  let(:categories) { %i[benefits maintenance_in] }
+  let!(:maintenance_in) { create(:transaction_type, :maintenance_in) }
 
-  before { application.set_transaction_period }
+  before do
+    create(:transaction_type, :property_or_lodger)
+    create(:transaction_type, :friends_or_family)
+    create(:transaction_type, :benefits)
+    application.set_transaction_period
+  end
 
   describe "#find_by" do
     around do |example|
@@ -450,12 +452,15 @@ RSpec.describe AggregatedCashIncome do
       travel_back
     end
 
-    let!(:pension_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: pension) }
-    let!(:pension_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: pension) }
-    let!(:pension_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: pension) }
-    let!(:maintenance_in_first_month) { create(:cash_transaction, :credit_month1, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in) }
-    let!(:maintenance_in_second_month) { create(:cash_transaction, :credit_month2, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in) }
-    let!(:maintenance_in_third_month) { create(:cash_transaction, :credit_month3, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in) }
+    before do
+      create(:cash_transaction, :credit_month1, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: pension)
+      create(:cash_transaction, :credit_month2, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: pension)
+      create(:cash_transaction, :credit_month3, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: pension)
+      create(:cash_transaction, :credit_month1, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in)
+      create(:cash_transaction, :credit_month2, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in)
+      create(:cash_transaction, :credit_month3, legal_aid_application: application, owner_type: "Applicant", owner_id: application.applicant.id, transaction_type: maintenance_in)
+    end
+
     let(:aci) { described_class.find_by(legal_aid_application_id: application.id, owner: "Applicant") }
 
     describe "#period" do

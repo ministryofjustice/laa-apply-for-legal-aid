@@ -15,11 +15,12 @@ module CCMS
       end
       let(:chances_of_success) { create(:chances_of_success, application_proceeding_type: legal_aid_application.lead_application_proceeding_type) }
       let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:, case_ccms_reference: Faker::Number.number) }
-      let!(:statement_of_case) { create(:statement_of_case, legal_aid_application:) }
       let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/DocumentServices/DocumentServices_ep" }
       let(:history) { SubmissionHistory.where(submission_id: submission.id).last }
       let(:document_id_request) { ccms_data_from_file "document_id_request.xml" }
       let(:response_body) { ccms_data_from_file "document_id_response.xml" }
+
+      before { create(:statement_of_case, legal_aid_application:) }
 
       around do |example|
         VCR.turn_off!
@@ -152,13 +153,13 @@ module CCMS
         # the microsecond :(
 
         context "when populating documents" do
-          let!(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
           let(:fake_error) { error.sample }
 
           before do
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:transaction_request_id).and_return("20190301030405123456")
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(fake_error, "Failed to obtain document ids for")
+            create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:)
           end
 
           it "does not change the state" do
@@ -182,9 +183,8 @@ module CCMS
         context "when requesting document_ids" do
           before do
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CCMSError, "failure populating document hash")
+            create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:)
           end
-
-          let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }
 
           it "does not change the state" do
             expect { instance.call }.to raise_error(CCMSError, "failure populating document hash")

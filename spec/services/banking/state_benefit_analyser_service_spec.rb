@@ -30,10 +30,12 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     end
 
     context "when the DWP payment is for a different nino" do
-      let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "DWP YS327299X UC", bank_account: bank_account1) }
-      let(:tx) { legal_aid_application.reload.bank_transactions.first }
+      before do
+        create_list(:bank_transaction, 1, :credit, description: "DWP YS327299X UC", bank_account: bank_account1)
+        call
+      end
 
-      before { call }
+      let(:tx) { legal_aid_application.reload.bank_transactions.first }
 
       it "marks the transaction as a state benefit" do
         expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
@@ -48,7 +50,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
     context "when the DWP payment for this applicant has a recognised code" do
       context "and there is an included benefit" do
-        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "010101010101-CHB", bank_account: bank_account1) }
+        before { create_list(:bank_transaction, 1, :credit, description: "010101010101-CHB", bank_account: bank_account1) }
 
         it "marks the transaction as a state benefit" do
           call
@@ -70,16 +72,17 @@ RSpec.describe Banking::StateBenefitAnalyserService do
         end
 
         context "and it's with child benefit under a new code HMRC CHILD BENEFIT" do
-          let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1) }
+          before do
+            create_list(:bank_transaction, 1, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1)
+            call
+          end
 
           it "marks the transaction as a state benefit" do
-            call
             tx = legal_aid_application.reload.bank_transactions.first
             expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
           end
 
           it "updates the meta data with the label of the state benefit" do
-            call
             tx = legal_aid_application.reload.bank_transactions.first
             expect(tx.meta_data).to eq({ code: "HMRC CHILD BENEFIT", label: "hmrc_child_benefit", name: "Child Benefit", selected_by: "System" })
           end
@@ -87,7 +90,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
       end
 
       context "when there is an excluded benefit" do
-        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1) }
+        before { create_list(:bank_transaction, 1, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1) }
 
         it "marks the transaction as a state benefit" do
           call
@@ -112,9 +115,10 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
     context "when the DWP payment for this applicant has multiple recognised codes" do
       context "and there is an included benefit" do
-        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1) }
-
-        before { call }
+        before do
+          create_list(:bank_transaction, 1, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1)
+          call
+        end
 
         # OCT-2020: A choice has been made that, for now, we should not try to handle multiple codes in a single row.These
         # should be flagged by CFE and marked for case worker review. They can still be marked as benefits by the provider
@@ -129,9 +133,10 @@ RSpec.describe Banking::StateBenefitAnalyserService do
       end
 
       context "and there are duplicate benefits" do
-        let!(:transactions) { create_list(:bank_transaction, 1, :credit, description: "123456789999-CHB BGC 123456789999-CHB BGC", bank_account: bank_account1) }
-
-        before { call }
+        before do
+          create_list(:bank_transaction, 1, :credit, description: "123456789999-CHB BGC 123456789999-CHB BGC", bank_account: bank_account1)
+          call
+        end
 
         it "updates the meta data" do
           tx = legal_aid_application.reload.bank_transactions.first

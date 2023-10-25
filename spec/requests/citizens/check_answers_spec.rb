@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe "check your answers requests" do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create(:firm) }
+  let(:has_restrictions) { true }
+  let(:restrictions_details) { Faker::Lorem.paragraph }
   let(:provider) { create(:provider, firm:) }
   let(:credit) { create(:transaction_type, :credit_with_standard_name) }
   let(:debit) { create(:transaction_type, :debit_with_standard_name) }
@@ -13,15 +15,12 @@ RSpec.describe "check your answers requests" do
            :with_everything,
            provider:)
   end
-  let!(:application_transaction_types) do
+
+  before do
     create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: credit)
     create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: debit)
+    sign_in_citizen_for_application(legal_aid_application)
   end
-
-  let(:has_restrictions) { true }
-  let(:restrictions_details) { Faker::Lorem.paragraph }
-
-  before { sign_in_citizen_for_application(legal_aid_application) }
 
   describe "GET /citizens/check_answers" do
     subject(:get_request) { get "/citizens/check_answers" }

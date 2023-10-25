@@ -184,7 +184,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
       end
 
       context "when eligible" do
-        let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+        let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)

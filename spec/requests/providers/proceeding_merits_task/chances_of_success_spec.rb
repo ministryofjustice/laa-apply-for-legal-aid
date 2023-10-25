@@ -6,7 +6,6 @@ module Providers
       let(:smtl) { create(:legal_framework_merits_task_list, :da001_as_defendant_se003, legal_aid_application:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se003]) }
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
-      let!(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
       let(:login) { login_as legal_aid_application.provider }
 
       before do

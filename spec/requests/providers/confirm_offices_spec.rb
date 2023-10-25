@@ -47,7 +47,7 @@ RSpec.describe "provider confirm office" do
       end
 
       context "when the firm has only one office" do
-        let!(:office) { nil }
+        let(:office) { nil }
 
         it "assigns office 2 to the provider" do
           expect(provider.reload.selected_office).to eq office2

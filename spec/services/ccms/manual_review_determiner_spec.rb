@@ -22,7 +22,8 @@ module CCMS
         context "and there is no DWP override" do
           context "when passported, no contrib, no_restrictions" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_positive_benefit_check_result) }
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+
+            before { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns false" do
               expect(manual_review_required).to be false
@@ -31,7 +32,8 @@ module CCMS
 
           context "when non-passported, no contrib" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+
+            before { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
               expect(manual_review_required).to be true
@@ -44,7 +46,8 @@ module CCMS
 
           context "when passported, no contrib, no_restrictions" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+
+            before { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
               expect(manual_review_required).to be true
@@ -53,7 +56,8 @@ module CCMS
 
           context "when non-passported, no contrib" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+
+            before { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
               expect(manual_review_required).to be true
@@ -70,7 +74,7 @@ module CCMS
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_positive_benefit_check_result, has_restrictions: true) }
 
             context "and a contribution is required" do
-              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
+              before { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(manual_review_required).to be true
@@ -78,7 +82,7 @@ module CCMS
             end
 
             context "and there is no contribution" do
-              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+              before { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "and there are restrictions" do # TODO: check this - description does not match expectation
                 it "returns false" do
@@ -100,7 +104,7 @@ module CCMS
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_negative_benefit_check_result, has_restrictions: true) }
 
             context "when there is a contribution" do
-              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
+              before { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(manual_review_required).to be true
@@ -108,7 +112,7 @@ module CCMS
             end
 
             context "when there is no contribution" do
-              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+              before { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "but with restrictions" do
                 it "returns false" do
@@ -134,7 +138,7 @@ module CCMS
             let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true) }
 
             context "when there is a contribution" do
-              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
+              before { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(manual_review_required).to be true
@@ -142,7 +146,7 @@ module CCMS
             end
 
             context "when there is no contribution" do
-              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+              before { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "and there are restrictions" do # TODO: check this - description does not match expectation
                 it "returns false" do
@@ -164,7 +168,7 @@ module CCMS
             let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true) }
 
             context "and a contribution is required" do
-              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
+              before { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(manual_review_required).to be true
@@ -172,7 +176,7 @@ module CCMS
             end
 
             context "and there is no contribution" do
-              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+              before { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "and there are restrictions" do # TODO: check this - description does not match expectation
                 it "returns false" do
@@ -193,9 +197,10 @@ module CCMS
         end
 
         context "with policy_disregards" do
-          before { allow(legal_aid_application).to receive(:policy_disregards?).and_return(true) }
-
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+          before do
+            allow(legal_aid_application).to receive(:policy_disregards?).and_return(true)
+            create(:cfe_v4_result, submission: cfe_submission)
+          end
 
           it "returns true" do
             expect(manual_review_required).to be true
@@ -203,9 +208,10 @@ module CCMS
         end
 
         context "without policy_disregards" do
-          before { allow(legal_aid_application).to receive(:policy_disregards?).and_return(false) }
-
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+          before do
+            allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
+            create(:cfe_v4_result, submission: cfe_submission)
+          end
 
           it "returns false" do
             expect(manual_review_required).to be false
@@ -214,7 +220,8 @@ module CCMS
 
         context "with further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+
+          before { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns true" do
             expect(manual_review_required).to be true
@@ -223,7 +230,8 @@ module CCMS
 
         context "without further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant) }
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+
+          before { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns false" do
             expect(manual_review_required).to be false
@@ -234,7 +242,8 @@ module CCMS
           let(:provider) { create(:provider) }
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, attachments: [bank_statement], provider:) }
           let(:bank_statement) { create(:attachment, :bank_statement) }
-          let!(:cfe_result) { create(:cfe_v5_result, submission: cfe_submission) }
+
+          before { create(:cfe_v5_result, submission: cfe_submission) }
 
           it "returns true" do
             expect(manual_review_required).to be true

@@ -83,12 +83,6 @@ module Reports
       end
 
       let(:proceeding) { legal_aid_application.proceedings.first }
-      let!(:chances_of_success) do
-        create(:chances_of_success,
-               success_prospect: prospect,
-               application_purpose: purpose,
-               proceeding:)
-      end
 
       let(:applicant) do
         create(:applicant,
@@ -302,7 +296,13 @@ module Reports
           end
 
           context "when no lead proceeding was specified" do
-            before { legal_aid_application.lead_proceeding.update(lead_proceeding: false) }
+            before do
+              legal_aid_application.lead_proceeding.update!(lead_proceeding: false)
+              create(:chances_of_success,
+                     success_prospect: prospect,
+                     application_purpose: purpose,
+                     proceeding:)
+            end
 
             describe "chances of success" do
               it "returns the chances of success of the first proceeding, lead or not" do
@@ -374,7 +374,10 @@ module Reports
           end
 
           context "when there is a vehicle" do
-            let!(:vehicles) do
+            let(:purchase_date) { Date.new(2020, 1, 1) }
+            let(:used_regularly) { true }
+
+            before do
               create_list(:vehicle,
                           3,
                           legal_aid_application:,
@@ -383,8 +386,6 @@ module Reports
                           used_regularly:,
                           purchased_on: purchase_date)
             end
-            let(:purchase_date) { Date.new(2020, 1, 1) }
-            let(:used_regularly) { true }
 
             context "and it's in regular use, no loan outstanding" do
               let(:payment_remaining) { 0 }

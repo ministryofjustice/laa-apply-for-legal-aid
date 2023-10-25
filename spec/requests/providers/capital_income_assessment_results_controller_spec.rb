@@ -7,7 +7,6 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
   describe "GET /providers/applications/:legal_aid_application_id/capital_income_assessment_result" do
     subject(:get_request) { get providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application) }
 
-    let!(:applicant) { create(:applicant, with_bank_accounts: 2, legal_aid_application:) }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
     let(:locale_scope) { "shared.assessment_results" }
@@ -15,6 +14,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     let(:add_restrictions?) { false }
 
     let(:before_tasks) do
+      create(:applicant, with_bank_accounts: 2, legal_aid_application:)
       create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
@@ -26,7 +26,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     context "with no restrictions" do
       context "without policy disregards" do
         context "when eligible" do
-          let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -38,7 +38,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when not eligible" do
-          let!(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
+          let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -96,7 +96,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -108,7 +108,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when not eligible" do
-          let!(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
+          let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -175,7 +175,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
       context "without policy disregards" do
         context "when eligible" do
-          let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -233,7 +233,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -304,7 +304,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       end
 
       context "when eligible" do
-        let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+        let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -400,7 +400,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
     context "when unauthenticated" do
       let(:before_tasks) { get_request }
-      let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
+      let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
       it_behaves_like "a provider not authenticated"
     end
