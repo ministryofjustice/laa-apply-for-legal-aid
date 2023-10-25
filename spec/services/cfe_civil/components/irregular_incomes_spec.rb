@@ -21,10 +21,6 @@ RSpec.describe CFECivil::Components::IrregularIncomes do
   context "when both applicant and partner record student finance" do
     let(:applicant) { create(:applicant, student_finance: true, student_finance_amount: 3628.07) }
     let(:partner) { create(:partner, student_finance: true, student_finance_amount: 1234.56) }
-    # before do
-    #   create(:applicant, student_finance: true, student_finance_amount: 3628.07)
-    #   create(:partner, student_finance: true, student_finance_amount: 1234.56)
-    # end
 
     context "when no owner type is specified" do
       it "returns the expected JSON block with only the applicant data" do

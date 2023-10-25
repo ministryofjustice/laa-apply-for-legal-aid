@@ -61,7 +61,7 @@ RSpec.describe CFECivil::Components::Capitals do
       subject(:call) { described_class.call(legal_aid_application, "Partner") }
 
       it "returns json in the expected format with the partner and joint bank values merged" do
-        expect(call).to match_json_expression({
+        expect(call).to eq({
           capitals: {
             bank_accounts: [
               { description: "Partner current accounts", value: offline_partner_current_balance.to_s },
@@ -71,7 +71,7 @@ RSpec.describe CFECivil::Components::Capitals do
             ],
             non_liquid_capital: [],
           },
-        })
+        }.to_json)
       end
     end
   end

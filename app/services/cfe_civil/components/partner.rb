@@ -7,14 +7,15 @@ module CFECivil
         return {}.to_json if partner.blank?
 
         result = base_partner
-        result.merge! JSON.parse(Components::CashTransactions.new(@legal_aid_application, "Partner").call) # so far... all other models are stored as Applicant/Partner
-        result.merge! JSON.parse(Components::IrregularIncomes.new(@legal_aid_application, "Partner").call) # so far... all other models are stored as Applicant/Partner
-        result.merge! JSON.parse(Components::Vehicles.new(@legal_aid_application, "partner").call) # this is stored as client/partner
-        result.merge! JSON.parse(Components::Employments.new(@legal_aid_application, "Partner").call) # this is stored as Applicant/Partner
-        result.merge! JSON.parse(Components::RegularTransactions.new(@legal_aid_application, "Partner").call) # this is stored as Applicant/Partner
-        result.merge! JSON.parse(Components::Capitals.new(@legal_aid_application, "Partner").call) # this is stored as Applicant/Partner
-        # employment_details # skipping this is a ccq datatype, we don't use it
-        # self_employment_details # skipping this is a ccq datatype, we don't use it
+        # Most records are stored with an Owner field that is tied to Applicant or Partner models, using their IDs
+        # Vehicles are stored with the, optional, output of a radio button as client or partner (lower cased)
+        # For this reason the call to Components::Vehicles.new is slightly different from the rest of the generators
+        result.merge! JSON.parse(Components::CashTransactions.new(@legal_aid_application, "Partner").call)
+        result.merge! JSON.parse(Components::IrregularIncomes.new(@legal_aid_application, "Partner").call)
+        result.merge! JSON.parse(Components::Vehicles.new(@legal_aid_application, "partner").call)
+        result.merge! JSON.parse(Components::Employments.new(@legal_aid_application, "Partner").call)
+        result.merge! JSON.parse(Components::RegularTransactions.new(@legal_aid_application, "Partner").call)
+        result.merge! JSON.parse(Components::Capitals.new(@legal_aid_application, "Partner").call)
         # Outgoings # skipped, these are generated from Truelayer and that is not currently supported by the partner flow
         # state_benefits # skipped, these are generated from Truelayer and that is not currently supported by the partner flow
         # other_incomes # skipped, these are generated from Truelayer and that is not currently supported by the partner flow
