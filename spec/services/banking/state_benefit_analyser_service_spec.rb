@@ -70,22 +70,22 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
           expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
         end
+      end
 
-        context "and it's with child benefit under a new code HMRC CHILD BENEFIT" do
-          before do
-            create_list(:bank_transaction, 1, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1)
-            call
-          end
+      context "and it's with child benefit under a new code HMRC CHILD BENEFIT" do
+        before do
+          create_list(:bank_transaction, 1, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1)
+          call
+        end
 
-          it "marks the transaction as a state benefit" do
-            tx = legal_aid_application.reload.bank_transactions.first
-            expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
-          end
+        it "marks the transaction as a state benefit" do
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
+        end
 
-          it "updates the meta data with the label of the state benefit" do
-            tx = legal_aid_application.reload.bank_transactions.first
-            expect(tx.meta_data).to eq({ code: "HMRC CHILD BENEFIT", label: "hmrc_child_benefit", name: "Child Benefit", selected_by: "System" })
-          end
+        it "updates the meta data with the label of the state benefit" do
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.meta_data).to eq({ code: "HMRC CHILD BENEFIT", label: "hmrc_child_benefit", name: "Child Benefit", selected_by: "System" })
         end
       end
 
