@@ -6,17 +6,18 @@ RSpec.describe DelegatedFunctionsDateService do
     subject(:call) { described_class.call(laa) }
 
     let(:laa) { create(:legal_aid_application) }
-    let!(:proceeding1) do
+    let(:df_used?) { true }
+    let(:df_date) { Date.new(2021, 5, 10) }
+    let(:reported_date) { Date.new(2021, 5, 13) }
+
+    before do
       create(:proceeding, :da001,
              legal_aid_application: laa,
              used_delegated_functions: df_used?,
              used_delegated_functions_on: df_date,
              used_delegated_functions_reported_on: reported_date)
+      create(:proceeding, :se013, legal_aid_application: laa)
     end
-    let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application: laa) }
-    let(:df_used?) { true }
-    let(:df_date) { Date.new(2021, 5, 10) }
-    let(:reported_date) { Date.new(2021, 5, 13) }
 
     around do |example|
       travel_to Time.zone.local(2021, 5, 13, 12, 0, 0)

@@ -62,12 +62,15 @@ RSpec.describe Applicant do
     subject(:destroy_all) { described_class.destroy_all }
 
     let!(:applicant) { create(:applicant, :with_address) }
-    let!(:legal_aid_application) { create(:legal_aid_application, applicant:) }
     # Creating a bank transaction creates an applicant and the objects between it and the transaction
     let!(:bank_transaction) { create(:bank_transaction) }
     let(:bank_provider) { bank_transaction.bank_account.bank_provider }
-    let!(:bank_account_holder) { create(:bank_account_holder, bank_provider:) }
-    let!(:bank_error) { create(:bank_error, applicant:) }
+
+    before do
+      create(:bank_error, applicant:)
+      create(:bank_account_holder, bank_provider:)
+      create(:legal_aid_application, applicant:)
+    end
 
     it "removes everything it needs to" do
       expect(described_class.count).not_to be_zero
@@ -252,12 +255,13 @@ RSpec.describe Applicant do
     subject { legal_aid_application.applicant.receives_financial_support? }
 
     let(:applicant) { create(:applicant) }
+    let(:legal_aid_application) { create(:legal_aid_application, applicant:, transaction_types: [benefits]) }
     let(:bank_provider) { create(:bank_provider, applicant:) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
     let!(:friends_or_family) { create(:transaction_type, :credit, :friends_or_family) }
     let(:benefits) { create(:transaction_type, :credit, name: "benefits") }
-    let!(:benefits_bank_transaction) { create(:bank_transaction, :credit, transaction_type: benefits, bank_account:) }
-    let(:legal_aid_application) { create(:legal_aid_application, applicant:, transaction_types: [benefits]) }
+
+    before { create(:bank_transaction, :credit, transaction_type: benefits, bank_account:) }
 
     context "when they receive friends and family income" do
       before { create(:bank_transaction, :credit, transaction_type: friends_or_family, bank_account:) }
@@ -282,13 +286,13 @@ RSpec.describe Applicant do
 
       context "when they receive maintenance" do
         context "with cfe version 3" do
-          let!(:cfe_result) { create(:cfe_v3_result, :with_maintenance_received, submission: cfe_submission) }
+          before { create(:cfe_v3_result, :with_maintenance_received, submission: cfe_submission) }
 
           it { is_expected.to be true }
         end
 
         context "with cfe version 4 result" do
-          let!(:cfe_result) { create(:cfe_v4_result, :with_maintenance_received, submission: cfe_submission) }
+          before { create(:cfe_v4_result, :with_maintenance_received, submission: cfe_submission) }
 
           it { is_expected.to be true }
         end
@@ -296,13 +300,13 @@ RSpec.describe Applicant do
 
       context "when they do not receive maintenance" do
         context "with cfe version 3" do
-          let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+          before { create(:cfe_v3_result, submission: cfe_submission) }
 
           it { is_expected.to be false }
         end
 
         context "with cfe version 4 result" do
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+          before { create(:cfe_v4_result, submission: cfe_submission) }
 
           it { is_expected.to be false }
         end
@@ -314,13 +318,13 @@ RSpec.describe Applicant do
 
       context "when they receive maintenance" do
         context "with cfe version 3" do
-          let!(:cfe_result) { create(:cfe_v3_result, :with_maintenance_received, submission: cfe_submission) }
+          before { create(:cfe_v3_result, :with_maintenance_received, submission: cfe_submission) }
 
           it { is_expected.to eq "150.00" }
         end
 
         context "with cfe version 4 result" do
-          let!(:cfe_result) { create(:cfe_v4_result, :with_maintenance_received, submission: cfe_submission) }
+          before { create(:cfe_v4_result, :with_maintenance_received, submission: cfe_submission) }
 
           it { is_expected.to eq "150.00" }
         end
@@ -328,13 +332,13 @@ RSpec.describe Applicant do
 
       context "when they do not receive maintenance" do
         context "with cfe version 3" do
-          let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+          before { create(:cfe_v3_result, submission: cfe_submission) }
 
           it { is_expected.to eq "0.00" }
         end
 
         context "with cfe version 4 result" do
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+          before { create(:cfe_v4_result, submission: cfe_submission) }
 
           it { is_expected.to eq "0.00" }
         end
@@ -348,29 +352,31 @@ RSpec.describe Applicant do
     let(:legal_aid_application) { create(:legal_aid_application, :with_everything) }
     let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
 
-    context "when they pay a mortgage" do
-      context "with cfe version 3 result" do
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+    context "with cfe version 3 result" do
+      context "when they pay a mortgage" do
+        before { create(:cfe_v3_result, submission: cfe_submission) }
 
         it { is_expected.to eq "125.00" }
-
-        context "when they do not pay a mortgage" do
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
-
-          it { is_expected.to eq "0.00" }
-        end
       end
 
-      context "with cfe version 4 result" do
-        let!(:cfe_result) { create(:cfe_v4_result, :with_mortgage_costs, submission: cfe_submission) }
+      context "when they do not pay a mortgage" do
+        before { create(:cfe_v3_result, :with_no_mortgage_costs, submission: cfe_submission) }
+
+        it { is_expected.to eq "0.00" }
+      end
+    end
+
+    context "with cfe version 4 result" do
+      context "when they pay a mortgage" do
+        before { create(:cfe_v4_result, :with_mortgage_costs, submission: cfe_submission) }
 
         it { is_expected.to eq "120.00" }
+      end
 
-        context "when they do not pay a mortgage" do
-          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
+      context "when they do not pay a mortgage" do
+        before { create(:cfe_v4_result, submission: cfe_submission) }
 
-          it { is_expected.to eq "0.00" }
-        end
+        it { is_expected.to eq "0.00" }
       end
     end
   end
@@ -379,38 +385,32 @@ RSpec.describe Applicant do
     let(:applicant) { create(:applicant) }
 
     context "with CFE version 3 result" do
-      let!(:legal_aid_application) { create(:legal_aid_application, :with_cfe_v3_result, applicant:) }
-
       it "returns true" do
+        create(:legal_aid_application, :with_cfe_v3_result, applicant:)
         expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
     context "with CFE version 4 result" do
-      let!(:legal_aid_application) { create(:legal_aid_application, :with_cfe_v4_result, applicant:) }
-
       it "returns true" do
+        create(:legal_aid_application, :with_cfe_v4_result, applicant:)
         expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
     context "with CFE version 5 result" do
-      let!(:legal_aid_application) { create(:legal_aid_application, :with_cfe_v5_result, applicant:) }
-
       it "returns true" do
+        create(:legal_aid_application, :with_cfe_v5_result, applicant:)
         expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
     context "with CFE version out of scope result" do
-      let!(:legal_aid_application) { create(:legal_aid_application, applicant:) }
       let(:cfe_version_5_result) { double "CFE::V5::Result" }
 
-      before do
-        allow_any_instance_of(described_class).to receive(:cfe_result_type).and_return(cfe_version_5_result)
-      end
-
       it "returns false" do
+        create(:legal_aid_application, applicant:)
+        allow_any_instance_of(described_class).to receive(:cfe_result_type).and_return(cfe_version_5_result)
         expect(applicant.valid_cfe_result_version?).to be false
       end
     end

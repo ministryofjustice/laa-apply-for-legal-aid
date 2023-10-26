@@ -93,7 +93,8 @@ RSpec.describe HMRC::CreateResponsesService do
 
     context "when requests already exist" do
       let(:applicant) { legal_aid_application.applicant }
-      let!(:hmrc_response) { create(:hmrc_response, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
+
+      before { create(:hmrc_response, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "does not create any more hmrc_response records" do
         expect { call }.not_to change { legal_aid_application.hmrc_responses.count }

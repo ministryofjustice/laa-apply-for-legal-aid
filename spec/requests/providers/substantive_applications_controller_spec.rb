@@ -97,9 +97,8 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
         end
 
         context "and a dwp_override with evidence" do
-          let!(:dwp_override) { create(:dwp_override, :with_evidence, legal_aid_application:) }
-
           it "redirects to capital introductions" do
+            create(:dwp_override, :with_evidence, legal_aid_application:)
             patch_request
             expect(response).to redirect_to(
               providers_legal_aid_application_capital_introduction_path(legal_aid_application),
@@ -108,9 +107,8 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
         end
 
         context "and a dwp_override without evidence" do
-          let!(:dwp_override) { create(:dwp_override, :with_no_evidence, legal_aid_application:) }
-
           it "redirects to the open banking consents page" do
+            create(:dwp_override, :with_no_evidence, legal_aid_application:)
             patch_request
             expect(response).to redirect_to(
               providers_legal_aid_application_open_banking_consents_path(legal_aid_application),

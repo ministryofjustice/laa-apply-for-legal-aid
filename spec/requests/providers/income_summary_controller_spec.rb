@@ -83,7 +83,7 @@ RSpec.describe Providers::IncomeSummaryController do
     let(:applicant) { create(:applicant) }
     let(:bank_provider) { create(:bank_provider, applicant:) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
-    let!(:bank_transaction) { create(:bank_transaction, :credit, transaction_type: pension, bank_account:) }
+    let(:bank_transaction) { create(:bank_transaction, :credit, transaction_type: pension, bank_account:) }
     let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [pension]) }
 
     let(:submit_button) { { continue_button: "Continue" } }
@@ -155,7 +155,7 @@ RSpec.describe Providers::IncomeSummaryController do
       let(:applicant) { create(:applicant) }
       let(:bank_provider) { create(:bank_provider, applicant:) }
       let(:bank_account) { create(:bank_account, bank_provider:) }
-      let!(:bank_transaction) { create(:bank_transaction, :credit, transaction_type: nil, bank_account:) }
+      let(:bank_transaction) { create(:bank_transaction, :credit, transaction_type: nil, bank_account:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [pension]) }
 
       let(:submit_button) { { continue_button: "Continue" } }

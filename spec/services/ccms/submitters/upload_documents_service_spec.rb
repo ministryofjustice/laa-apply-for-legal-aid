@@ -3,6 +3,17 @@ require "rails_helper"
 RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   subject(:instance) { described_class.new(submission) }
 
+  before do
+    create(:submission_document, :id_obtained, submission:, attachment_id: statement_of_case_attachment.id)
+    create(:submission_document, :id_obtained, submission:, document_type: :means_report, attachment_id: means_report_attachment.id)
+    create(:submission_document, :id_obtained, submission:, document_type: :merits_report, attachment_id: merits_report_attachment.id)
+    create(:submission_document, :id_obtained, submission:, document_type: :bank_transaction_report, attachment_id: bank_transaction_report_attachment.id)
+    create(:chances_of_success, proceeding:)
+    allow(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
+    allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+    allow(document_upload_requestor).to receive(:formatted_xml).and_return(expected_response)
+  end
+
   let(:legal_aid_application) do
     create(:legal_aid_application,
            :with_applicant,
@@ -15,18 +26,11 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
            :submitting_assessment)
   end
   let!(:proceeding) { create(:proceeding, :da001, legal_aid_application:) }
-  let!(:chances_of_success) { create(:chances_of_success, proceeding:) }
   let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }
   let(:statement_of_case_attachment) { statement_of_case.original_attachments.first }
   let(:means_report_attachment) { legal_aid_application.means_report }
   let(:merits_report_attachment) { legal_aid_application.merits_report }
   let(:bank_transaction_report_attachment) { legal_aid_application.bank_transaction_report }
-  let!(:statement_of_case_submission_document) { create(:submission_document, :id_obtained, submission:, attachment_id: statement_of_case_attachment.id) }
-  let!(:means_report_document) { create(:submission_document, :id_obtained, submission:, document_type: :means_report, attachment_id: means_report_attachment.id) }
-  let!(:merits_report_document) { create(:submission_document, :id_obtained, submission:, document_type: :merits_report, attachment_id: merits_report_attachment.id) }
-  let!(:bank_transaction_report_document) do
-    create(:submission_document, :id_obtained, submission:, document_type: :bank_transaction_report, attachment_id: bank_transaction_report_attachment.id)
-  end
   let(:expected_response) { ccms_data_from_file "case_add_status_response.xml" }
 
   let(:submission) do
@@ -47,12 +51,6 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   end
   let(:document_upload_response) { ccms_data_from_file "document_upload_response.xml" }
   let(:transaction_request_id_in_example_response) { "20190301030405123456" }
-
-  before do
-    allow(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
-    allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-    allow(document_upload_requestor).to receive(:formatted_xml).and_return(expected_response)
-  end
 
   context "when the operation is successful" do
     let(:history) { histories.where(to_state: "completed").last }

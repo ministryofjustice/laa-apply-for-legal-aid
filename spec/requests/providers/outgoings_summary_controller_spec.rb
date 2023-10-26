@@ -3,7 +3,6 @@ require "rails_helper"
 RSpec.describe Providers::OutgoingsSummaryController do
   let(:transaction_type) { create(:transaction_type, :debit_with_standard_name) }
   let(:other_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
-  let!(:legal_aid) { create(:transaction_type, :debit, name: "legal_aid") }
   let(:legal_aid_application) do
     create(
       :legal_aid_application,
@@ -17,6 +16,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
   let(:login) { login_as provider }
 
   before do
+    create(:transaction_type, :debit, name: "legal_aid")
     TransactionType.delete_all
     other_transaction_type
     login
@@ -96,17 +96,18 @@ RSpec.describe Providers::OutgoingsSummaryController do
   end
 
   describe "POST /providers/outgoings_summary" do
-    subject(:patch_request) { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
-
     let(:applicant) { create(:applicant) }
     let(:bank_provider) { create(:bank_provider, applicant:) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
-    let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
+    let(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
     let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
 
     let(:submit_button) { { continue_button: "Continue" } }
 
-    before { patch_request }
+    before do
+      bank_transaction
+      post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button
+    end
 
     it "redirects to the has_dependants page" do
       expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
@@ -127,16 +128,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
     end
 
     context "when the transaction type category has no bank transactions" do
-      before { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
-
-      let(:applicant) { create(:applicant) }
-      let(:bank_provider) { create(:bank_provider, applicant:) }
-      let(:bank_account) { create(:bank_account, bank_provider:) }
-      let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type: nil, bank_account:) }
-      let(:transaction_type) { create(:transaction_type, :debit) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
-
-      let(:submit_button) { { continue_button: "Continue" } }
+      let(:bank_transaction) { create(:bank_transaction, :debit, transaction_type: nil, bank_account:) }
 
       it "renders successfully" do
         expect(response).to have_http_status(:ok)

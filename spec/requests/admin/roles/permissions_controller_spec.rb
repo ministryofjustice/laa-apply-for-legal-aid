@@ -32,8 +32,8 @@ RSpec.describe Admin::Roles::PermissionsController do
     end
 
     context "when Save and Continue button pressed with new permission changes" do
-      let!(:permission) { create(:permission) }
-      let!(:params) do
+      let(:permission) { create(:permission) }
+      let(:params) do
         {
           firm: {
             permission_ids: [permission.id],

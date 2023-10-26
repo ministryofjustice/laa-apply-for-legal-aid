@@ -15,7 +15,7 @@ RSpec.describe DocumentCategoryPopulator do
     end
 
     context "when a document_category exists" do
-      let!(:document_category) { create(:document_category, :with_real_data) }
+      before { create(:document_category, :with_real_data) }
 
       it "creates one less service_level" do
         expect { described_class.call }.to change(DocumentCategory, :count).by(seed_file.readlines.size - 2)

@@ -207,7 +207,7 @@ RSpec.describe "check passported answers requests" do
       end
 
       context "when the applicant received england infected blood scheme payments" do
-        let!(:application) do
+        before do
           create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,

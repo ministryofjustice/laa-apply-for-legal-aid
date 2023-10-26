@@ -15,8 +15,6 @@ RSpec.describe BankHoliday, vcr: { cassette_name: "gov_uk_bank_holiday_api", all
     end
 
     context "without an existing instances" do
-      let!(:bank_holiday) { nil }
-
       before { described_class.delete_all }
 
       it "creates a new instance" do

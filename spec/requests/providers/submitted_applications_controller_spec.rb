@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.describe Providers::SubmittedApplicationsController do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create(:firm) }
+  let(:login) { login_as legal_aid_application.provider }
+  let(:html) { Nokogiri::HTML(response.body) }
+  let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
+  let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
   let!(:provider) { create(:provider, firm:) }
   let!(:legal_aid_application) do
     create(:legal_aid_application,
@@ -15,17 +19,11 @@ RSpec.describe Providers::SubmittedApplicationsController do
            provider:)
   end
   let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-  let!(:chances_of_success) do
-    create(:chances_of_success,
-           proceeding:)
+
+  before do
+    create(:chances_of_success, proceeding:)
+    allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
   end
-
-  let(:login) { login_as legal_aid_application.provider }
-  let(:html) { Nokogiri::HTML(response.body) }
-  let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
-  let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
-
-  before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
 
   describe "GET /providers/applications/:legal_aid_application_id/submitted_application" do
     subject(:get_request) do

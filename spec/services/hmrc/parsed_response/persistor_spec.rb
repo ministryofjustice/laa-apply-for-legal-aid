@@ -10,7 +10,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
     context "with invalid HMRC response" do
       before { allow(HMRC::ParsedResponse::Validator).to receive(:call).and_return(false) }
 
-      let!(:hmrc_response) { create(:hmrc_response, :example1_usecase1, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { create(:hmrc_response, :example1_usecase1, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
 
       it "does not create employment records" do
         expect { persistor }.not_to change { application.employments.count }
@@ -21,7 +21,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
       before { allow(HMRC::ParsedResponse::Validator).to receive(:call).and_return(true) }
 
       context "when no employment records exist and HMRC response contains one employment" do
-        let!(:hmrc_response) { create(:hmrc_response, :example1_usecase1, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
+        let(:hmrc_response) { create(:hmrc_response, :example1_usecase1, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class) }
 
         it "creates one employment record" do
           expect { persistor }.to change { application.employments.count }.from(0).to(1)

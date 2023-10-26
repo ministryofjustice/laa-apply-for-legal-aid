@@ -89,7 +89,6 @@ RSpec.describe ScheduledMailing do
     let!(:waiting_due) { create(:scheduled_mailing, :due) }
     let!(:waiting_due_later) { create(:scheduled_mailing, :due_later) }
     let!(:processing) { create(:scheduled_mailing, :processing) }
-    let!(:failed) { create(:scheduled_mailing, :failed) }
     let!(:created) { create(:scheduled_mailing, :created) }
     let!(:sending) { create(:scheduled_mailing, :sending) }
 

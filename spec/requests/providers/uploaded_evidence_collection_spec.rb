@@ -266,10 +266,10 @@ module Providers
 
             context "when mandatory evidence is missing" do
               let(:attachment_type) { "gateway_evidence" }
-              let!(:dwp_override) { create(:dwp_override, legal_aid_application:) }
               let(:missing_categories) { [] }
 
               before do
+                create(:dwp_override, legal_aid_application:)
                 allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
                 allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
                 allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
@@ -324,10 +324,10 @@ module Providers
 
             context "when mandatory evidence is missing" do
               let(:attachment_type) { "gateway_evidence" }
-              let!(:dwp_override) { create(:dwp_override, legal_aid_application:) }
               let(:missing_categories) { [] }
 
               before do
+                create(:dwp_override, legal_aid_application:)
                 allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
                 allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
                 allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
@@ -395,15 +395,15 @@ module Providers
             end
 
             context "when mandatory evidence is missing" do
-              let!(:dwp_override) { create(:dwp_override, legal_aid_application:) }
-              let(:missing_categories) { [] }
-
               before do
+                create(:dwp_override, legal_aid_application:)
                 allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
                 allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
                 allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
                 legal_aid_application.reload
               end
+
+              let(:missing_categories) { [] }
 
               context "when benefits evidence is required" do
                 let(:missing_categories) { %w[benefit_evidence] }

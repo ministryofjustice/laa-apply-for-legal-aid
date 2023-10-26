@@ -45,9 +45,8 @@ module Providers
           end
 
           context "and another child exists" do
-            let!(:child1) { create(:involved_child, legal_aid_application: application) }
-
             it "redirects back to the has_other_involved_children page" do
+              create(:involved_child, legal_aid_application: application)
               patch_request
               expect(response).to redirect_to(providers_legal_aid_application_has_other_involved_children_path(application))
             end
