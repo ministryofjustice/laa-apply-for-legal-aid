@@ -32,12 +32,6 @@ spec:
           command: ['sh', '-c', 'bundle exec prometheus_exporter --verbose -a app/lib/prometheus_collectors/collectors.rb']
           ports:
           - containerPort: 9394
-          readinessProbe:
-            httpGet:
-              path: /metrics
-              port: 9394
-            initialDelaySeconds: 10
-            periodSeconds: 60
           resources:
             limits:
               cpu: 50m
