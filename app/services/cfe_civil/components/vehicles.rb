@@ -1,35 +1,33 @@
 module CFECivil
   module Components
     class Vehicles < BaseDataBlock
-      delegate :vehicles, to: :legal_aid_application
+      def self.call(legal_aid_application, owner_type = :client)
+        new(legal_aid_application, owner_type).call
+      end
 
       def call
-        vehicle_request_body.to_json
+        {
+          vehicles: vehicles_request_body,
+        }.to_json
       end
 
     private
 
-      def vehicle_request_body
-        vehicles.any? ? vehicle_present_request : vehicle_absent_request
+      def vehicles
+        legal_aid_application.vehicles.where(owner: owner_type)
       end
 
-      def vehicle_absent_request
-        {
-          vehicles: [],
-        }
-      end
+      def vehicles_request_body
+        return [] unless vehicles.any?
 
-      def vehicle_present_request
-        {
-          vehicles: vehicles.map do |vehicle|
-            {
-              value: vehicle.estimated_value.to_f,
-              loan_amount_outstanding: vehicle.payment_remaining.to_f,
-              date_of_purchase: vehicle.purchased_on&.strftime("%Y-%m-%d"),
-              in_regular_use: vehicle.used_regularly,
-            }
-          end,
-        }
+        vehicles.map do |vehicle|
+          {
+            value: vehicle.estimated_value.to_f,
+            loan_amount_outstanding: vehicle.payment_remaining.to_f,
+            date_of_purchase: vehicle.purchased_on&.strftime("%Y-%m-%d"),
+            in_regular_use: vehicle.used_regularly,
+          }
+        end
       end
     end
   end

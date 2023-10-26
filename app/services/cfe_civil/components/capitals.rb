@@ -21,6 +21,13 @@ module CFECivil
         life_assurance_endowment_policy: "Life assurance and endowment policies not linked to a mortgage",
       }.freeze
 
+      PARTNER_SAVINGS_AMOUNT_FIELDS = {
+        partner_offline_current_accounts: "Partner current accounts",
+        partner_offline_savings_accounts: "Partner savings accounts",
+        joint_offline_current_accounts: "Joint current accounts",
+        joint_offline_savings_accounts: "Joint savings accounts",
+      }.freeze
+
       def call
         {
           capitals: {
@@ -37,6 +44,8 @@ module CFECivil
       end
 
       def itemised_other_assets
+        return [] if owner_type == "Partner"
+
         array_of_hashes_for(other_assets_declaration, OTHER_ASSET_FIELDS)
       end
 
@@ -45,6 +54,8 @@ module CFECivil
       end
 
       def bank_accounts
+        return [] if owner_type == "Partner"
+
         [current_account_balance, savings_account_balance].compact
       end
 
@@ -67,7 +78,8 @@ module CFECivil
       end
 
       def savings_amounts
-        array_of_hashes_for(savings_amount, SAVINGS_AMOUNT_FIELDS)
+        fields = owner_type == "Partner" ? PARTNER_SAVINGS_AMOUNT_FIELDS : SAVINGS_AMOUNT_FIELDS
+        array_of_hashes_for(savings_amount, fields)
       end
 
       def array_of_hashes_for(model, field_names_and_descriptions)

@@ -24,5 +24,9 @@ FactoryBot.define do
     trait :rent_or_mortgage do
       transaction_type { TransactionType.find_by(name: "rent_or_mortgage") || create(:transaction_type, :rent_or_mortgage) }
     end
+
+    trait :friends_or_family do
+      transaction_type { TransactionType.find_by(name: "friends_or_family") || create(:transaction_type, :friends_or_family) }
+    end
   end
 end

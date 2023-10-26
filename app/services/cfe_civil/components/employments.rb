@@ -1,11 +1,13 @@
 module CFECivil
   module Components
     class Employments < BaseDataBlock
-      delegate :employments, to: :legal_aid_application
-
       def call
         if employment_and_payments?
-          { employment_income: employment_income_payload }.to_json
+          if owner_type.eql?("Partner")
+            { employments: employment_income_payload }.to_json
+          else
+            { employment_income: employment_income_payload }.to_json
+          end
         else
           {}.to_json
         end
@@ -13,8 +15,16 @@ module CFECivil
 
     private
 
+      def party
+        @party ||= legal_aid_application.send(owner_type.downcase)
+      end
+
       def employment_and_payments?
-        legal_aid_application.hmrc_employment_income? && legal_aid_application.employment_payments.present?
+        party.hmrc_employment_income? && party.employment_payments.present?
+      end
+
+      def employments
+        party.employments
       end
 
       def employment_income_payload
