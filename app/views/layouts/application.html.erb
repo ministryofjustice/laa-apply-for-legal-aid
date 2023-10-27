@@ -80,5 +80,9 @@
     </div>
 
     <%= render partial: "layouts/footer" %>
+
+    <% unless Rails.configuration.x.sentry_public_key.nil? %>
+      <script src="https://js.sentry-cdn.com/<%= Rails.configuration.x.sentry_public_key %>.min.js" crossorigin="anonymous"></script>
+    <% end %>
   </body>
 </html>
