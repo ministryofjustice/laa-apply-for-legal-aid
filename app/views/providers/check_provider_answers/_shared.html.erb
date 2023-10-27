@@ -8,10 +8,10 @@
         read_only: @read_only,
       ) %>
 
-  <% if @legal_aid_application.applicant_has_partner? && !@legal_aid_application.applicant.partner_has_contrary_interest %>
+  <% if @legal_aid_application.applicant_has_partner? %>
     <%= render(
           "shared/check_answers/partner_details",
-          attributes: %i[first_name last_name date_of_birth national_insurance_number],
+          attributes: %i[contrary_interest first_name last_name date_of_birth national_insurance_number],
           partner: @partner,
           read_only: @read_only,
         ) %>

@@ -1,5 +1,5 @@
 class Partner < ApplicationRecord
-  belongs_to :legal_aid_application, dependent: :destroy
+  belongs_to :legal_aid_application
   has_many :hmrc_responses, class_name: "HMRC::Response", as: :owner
   has_many :employments, as: :owner
   has_many :regular_transactions, as: :owner

@@ -7,6 +7,7 @@ module Providers
 
       def update
         @form = ::Partners::ContraryInterestsForm.new(form_params)
+        remove_partner if @form.partner_has_contrary_interest?
         render :show unless save_continue_or_draft(@form, partner_has_contrary_interest: @form.partner_has_contrary_interest?)
       end
 
@@ -20,6 +21,11 @@ module Providers
         merge_with_model(applicant) do
           params.require(:applicant).permit(:partner_has_contrary_interest)
         end
+      end
+
+      def remove_partner
+        partner = legal_aid_application.partner
+        partner&.destroy!
       end
     end
   end

@@ -57,6 +57,34 @@ RSpec.describe Providers::Partners::ContraryInterestsController do
       end
     end
 
+    context "when checking answers and a partner already exists" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_base_state_machine, :checking_applicant_details) }
+
+      context "when yes chosen" do
+        let(:params) { { applicant: { partner_has_contrary_interest: "true" } } }
+
+        it "deletes the partner" do
+          expect(legal_aid_application.reload.partner).to be_nil
+        end
+
+        it "redirects to the check your answers page for the applicant" do
+          expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        end
+      end
+
+      context "when no chosen" do
+        let(:params) { { applicant: { partner_has_contrary_interest: "false" } } }
+
+        it "does not delete the partner" do
+          expect(legal_aid_application.reload.partner).not_to be_nil
+        end
+
+        it "redirects to the partners_details page" do
+          expect(response).to redirect_to(providers_legal_aid_application_partners_details_path(legal_aid_application))
+        end
+      end
+    end
+
     def have_error_message(text)
       have_css(".govuk-error-summary__list > li", text:)
     end
