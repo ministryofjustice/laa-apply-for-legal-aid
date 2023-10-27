@@ -452,7 +452,8 @@ GEM
       optimist (~> 3.0)
     pg (1.5.4)
     pg_dump_anonymize (0.1.2)
-    prometheus_exporter (0.4.17)
+    prometheus_exporter (2.0.8)
+      webrick
     propshaft (0.8.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -776,7 +777,7 @@ DEPENDENCIES
   pagy
   pg
   pg_dump_anonymize
-  prometheus_exporter (= 0.4.17)
+  prometheus_exporter
   propshaft
   pry-byebug
   pry-rescue

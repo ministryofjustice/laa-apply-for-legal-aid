@@ -76,7 +76,7 @@ gem "libreconv"
 gem "business"
 
 # Monitoring
-gem "prometheus_exporter", "=0.4.17"
+gem "prometheus_exporter"
 gem "webrick"
 
 # Generating Fake applications for tests and admin user
