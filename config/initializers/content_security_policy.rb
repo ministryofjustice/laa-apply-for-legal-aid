@@ -13,10 +13,12 @@ Rails.application.config.content_security_policy do |policy|
   policy.style_src :self, :unsafe_inline
   policy.script_src :self,
                     GOOGLE_ANALYTICS_DOMAIN,
-                    "https://www.googletagmanager.com"
+                    "https://www.googletagmanager.com",
+                    "https://*.sentry-cdn.com"
   policy.connect_src :self,
                      GOOGLE_ANALYTICS_DOMAIN,
-                     "https://*.justice.gov.uk"
+                     "https://*.justice.gov.uk",
+                     "https://*.sentry.io"
 end
 Rails.application.config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
 Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
