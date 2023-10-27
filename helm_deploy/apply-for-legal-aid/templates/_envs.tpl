@@ -71,6 +71,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: sentryDsn
+  - name: SENTRY_PUBLIC_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: sentryPublicKey
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
