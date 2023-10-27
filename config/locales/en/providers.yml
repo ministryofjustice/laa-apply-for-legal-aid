@@ -597,13 +597,13 @@ en:
       client_has_partners:
         show:
           page_title: Does your client have a partner?
-          details_content_para_one: "A partner is someone your client is:"
+          details_content_para_one: "A partner is someone your client:"
           details_content_para_two: |
             Do not include anyone who is separated from your client in a way that
             is likely to be permanent.
           details_list:
-            - married to
-            - in a civil partnership with
+            - is married to
+            - is in a civil partnership with
             - normally lives with as a couple, even if they are not living together
               right now - for example, if one person is in hospital, prison or abroad
       contrary_interests:
