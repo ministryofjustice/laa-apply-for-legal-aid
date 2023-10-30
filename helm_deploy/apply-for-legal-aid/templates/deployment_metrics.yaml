@@ -29,7 +29,7 @@ spec:
         - name: metrics
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
-          command: ['sh', '-c', 'bundle exec prometheus_exporter -a app/lib/prometheus_collectors/collectors.rb']
+          command: ['sh', '-c', 'bundle exec prometheus_exporter -b 0.0.0.0 -a app/lib/prometheus_collectors/collectors.rb']
           ports:
           - containerPort: 9394
           livenessProbe:
