@@ -1,7 +1,7 @@
 class ScheduledMailing < ApplicationRecord
   # records an email for immediate or later delivery. Use .send_now! or .send_later! methods to schedule mails.
 
-  serialize :arguments, Array
+  serialize :arguments, type: Array, coder: YAML
 
   VALID_STATUSES = [
     "waiting", # record has been written, but mail not yet sent by ScheduledMailingsDeliveryJob

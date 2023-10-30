@@ -1,7 +1,7 @@
 class Provider < ApplicationRecord
   devise :saml_authenticatable, :trackable
-  serialize :roles
-  serialize :offices
+  serialize :roles, coder: YAML
+  serialize :offices, coder: YAML
 
   belongs_to :firm, optional: true
   belongs_to :selected_office, class_name: :Office, optional: true
