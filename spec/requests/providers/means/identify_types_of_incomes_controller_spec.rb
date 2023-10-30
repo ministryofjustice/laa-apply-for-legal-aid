@@ -43,7 +43,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
     it "does not display expanded details list" do
       request
-      expect(unescaped_response_body).not_to match(I18n.t("shared.forms.types_of_income_form.expanded_explanation.heading"))
+      expect(unescaped_response_body).not_to match("Why am I being asked this?")
     end
 
     context "when the provider is not authenticated" do

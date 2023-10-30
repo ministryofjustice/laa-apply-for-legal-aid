@@ -232,10 +232,10 @@ RSpec.describe "check passported answers requests" do
         end
 
         it "does not display other vehicle questions" do
-          expect(response.body).not_to include(I18n.t("shared.check_answers_vehicles.providers.estimated_value"))
-          expect(response.body).not_to include(I18n.t("shared.check_answers_vehicles.providers.payment_remaining"))
-          expect(response.body).not_to include(I18n.t("shared.check_answers_vehicles.providers.purchased_on"))
-          expect(response.body).not_to include(I18n.t("shared.check_answers_vehicles.providers.used_regularly"))
+          expect(response.body).not_to include("What is the estimated value of the vehicle?")
+          expect(response.body).not_to include("Are there any payments left on the vehicle?")
+          expect(response.body).not_to include("The vehicle was bought more than three years ago?")
+          expect(response.body).not_to include("Is the vehicle in regular use?")
         end
       end
     end
