@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 module LaaApplyForLegalAid
   class Application < Rails::Application
     config.middleware.use Rack::Attack
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     # If you're upgrading and haven't set `cookies_serializer` previously, your cookie serializer
     # was `:marshal`. Convert all cookies to JSON, using the `:hybrid` formatter.
     #
