@@ -53,13 +53,7 @@ This duplicates bitnami/redis chart's internal logic whereby
 If branch name contains "redis" then the redis-release-name appends "-master", otherwise it appends "-redis-master"
 */}}
 {{- define "apply-for-legal-aid.redis-uat-host" -}}
-  {{- $redis_chart_name := "redis" -}}
-
-  {{- if contains $redis_chart_name .Release.Name -}}
-    {{- $redis_release_name := (.Release.Name | trunc 63 | trimSuffix "-") -}}
-    {{- printf "%s-master.%s.svc.cluster.local" $redis_release_name .Release.Namespace -}}
-  {{- else -}}
-    {{- $redis_release_name := (printf "%s-%s" .Release.Name $redis_chart_name | trunc 63 | trimSuffix "-") -}}
-    {{- printf "%s-master.%s.svc.cluster.local" $redis_release_name .Release.Namespace -}}
-  {{- end -}}
+  {{- $redis_fullName := (include "common.names.fullname" .Subcharts.redis) -}}
+  {{- printf "%s-master.%s.svc.cluster.local" $redis_fullName .Release.Namespace -}}
 {{- end -}}
+
