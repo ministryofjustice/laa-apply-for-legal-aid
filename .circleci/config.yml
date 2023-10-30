@@ -18,7 +18,7 @@ executors:
           CACHE_VERSION: v1
   cloud-platform-executor:
     docker:
-      - image: ministryofjustice/cloud-platform-tools:2.3.0
+      - image: ministryofjustice/cloud-platform-tools:2.7.0
         environment:
           TZ: Europe/London
   notification-executor:
