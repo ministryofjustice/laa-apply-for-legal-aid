@@ -10,6 +10,8 @@ class DocumentCategoryValidator < ActiveModel::Validator
     benefit_evidence_pdf
     employment_evidence
     employment_evidence_pdf
+    partner_employment_evidence
+    partner_employment_evidence_pdf
     gateway_evidence
     gateway_evidence_pdf
     means_report

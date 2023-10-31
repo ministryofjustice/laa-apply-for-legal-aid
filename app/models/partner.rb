@@ -23,6 +23,10 @@ class Partner < ApplicationRecord
     employments.any?
   end
 
+  def employment_evidence_required?
+    extra_employment_information_details.present? || full_employment_details.present?
+  end
+
   def has_multiple_employments?
     employments.length > 1
   end

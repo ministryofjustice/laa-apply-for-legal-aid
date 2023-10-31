@@ -26,6 +26,10 @@ FactoryBot.define do
       applicant { build(:applicant, :with_extra_employment_information, employed: true, with_bank_accounts:) }
     end
 
+    trait :with_employed_partner_and_extra_info do
+      partner { build(:partner, :with_extra_employment_information, employed: true) }
+    end
+
     trait :with_employed_applicant_and_employed_partner do
       applicant { build(:applicant, employed: true, has_partner: true, partner_has_contrary_interest: false) }
       partner { build(:partner, employed: true) }
