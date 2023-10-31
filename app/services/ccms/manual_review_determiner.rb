@@ -60,6 +60,7 @@ module CCMS
       application_review_reasons << :dwp_override if dwp_override
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
+      application_review_reasons << :non_passported if non_passported?
       application_review_reasons << :further_employment_details if manually_entered_employment_information?
       application_review_reasons << :uploaded_bank_statements if uploading_bank_statements?
       application_review_reasons << :ineligible if cfe_result.ineligible?

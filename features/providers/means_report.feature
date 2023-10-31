@@ -103,6 +103,7 @@ Feature: Means report
       | question | answer |
       | Caseworker review required? | Yes |
       | Review reasons | Bank statements uploaded |
+      | Review reasons | Non-Passported application |
 
     And the Capital result questions should exist:
       | question |
@@ -271,6 +272,11 @@ Feature: Means report
       | question |
       | Caseworker review required? |
       | Review reasons |
+
+    And the Caseworker review section should contain:
+      | question | answer |
+      | Caseworker review required? | Yes |
+      | Review reasons | Non-Passported application |
 
     And the Capital result questions should exist:
       | question |

@@ -257,10 +257,10 @@ module CCMS
 
       let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: false }
       let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
-      let(:review_reasons) { %i[unknown_frequency multi_benefit] }
-      let(:override_reasons) { %i[unknown_frequency multi_benefit dwp_override] }
-      let(:further_employment_details_reasons) { %i[unknown_frequency multi_benefit further_employment_details] }
-      let(:restrictions_reasons) { %i[unknown_frequency multi_benefit restrictions] }
+      let(:review_reasons) { %i[unknown_frequency multi_benefit non_passported] }
+      let(:override_reasons) { %i[unknown_frequency multi_benefit non_passported dwp_override] }
+      let(:further_employment_details_reasons) { %i[unknown_frequency multi_benefit non_passported further_employment_details] }
+      let(:restrictions_reasons) { %i[unknown_frequency multi_benefit non_passported restrictions] }
 
       before { allow_any_instance_of(cfe_submission.class).to receive(:result).and_return(cfe_result) }
 
