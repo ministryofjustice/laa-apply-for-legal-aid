@@ -11,7 +11,8 @@ let previousSearchTerm = null
 let containSimilarWords = false
 
 async function searchResults (host, searchTerm, excludeCodes) {
-  const url = `${host}/proceeding_types/searches`
+  // TODO: undo after testing session replay
+  const url = `${host}/proceeding_types/searches/does_not_exist`
   const response = await axios({
     accept: 'application/json',
     responseType: 'json',
