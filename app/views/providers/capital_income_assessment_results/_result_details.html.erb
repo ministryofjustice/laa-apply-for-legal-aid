@@ -8,15 +8,16 @@
       <p class="govuk-hint"><%= t(".hint_text") %></p>
 
       <% if @legal_aid_application.uploading_bank_statements? %>
-        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, individual: "Client", read_only: true) %>
       <% end %>
 
       <% if @cfe_result.jobs? %>
-        <%= render "employment_income" %>
+        <%= render("employment_income", individual: "Client") %>
       <% end %>
 
-      <%= render "other_income" %>
-      <%= render "outgoings" %>
+      <%= render("other_income", individual: "Client") %>
+      <%= render("outgoings", individual: "Client") %>
+
       <%= render "deductions" %>
       <%= render "disposable_income" %>
     <% end %>

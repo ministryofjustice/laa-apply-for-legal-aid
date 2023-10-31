@@ -1,7 +1,8 @@
-<h3 class="govuk-heading-m"><%= t(".title") %></h3>
+<h3 class="govuk-heading-m"><%= t(".title", individual:) %></h3>
 <%= govuk_table do |table| %>
   <%= table.with_body do |body| %>
     <%= body.with_row do |row| %>
+      <p><%= individual %></p>
       <%= row.with_cell(header: true, text: t(".uploaded")) %>
       <%= row.with_cell(numeric: true) do %>
         <ul class="govuk-list">
