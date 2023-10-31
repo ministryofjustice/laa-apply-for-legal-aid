@@ -11,6 +11,10 @@ Feature: Check partner employment evidence upload
     And I should see "evidence of your client's employment status"
     And I should see "evidence of the partner's employment status"
 
+    When I click "Save and continue"
+    Then I should see "Upload your client's employment evidence"
+    Then I should see "Upload the partner's employment evidence"
+
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to upload evidence where only the partner has additional employment information
     Given the feature flag for partner_means_assessment is enabled
