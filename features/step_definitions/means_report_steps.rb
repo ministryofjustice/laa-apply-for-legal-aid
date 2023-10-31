@@ -32,6 +32,23 @@ Given("I have completed a non-passported employed application with bank statemen
 end
 
 Given("I have completed a non-passported application with truelayer") do
+  bank_provider = create(:bank_provider)
+  create(
+    :bank_account,
+    bank_provider:,
+    name: "Account Name",
+    account_number: "12345678",
+    sort_code: "000000",
+    balance: "75.57",
+  )
+  create(
+    :bank_account,
+    bank_provider:,
+    name: "Second Account",
+    account_number: "87654321",
+    sort_code: "999999",
+    balance: "57.57",
+  )
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -60,7 +77,7 @@ Given("I have completed a non-passported application with truelayer") do
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
   )
-
+  @legal_aid_application.applicant.update!(bank_providers: [bank_provider])
   login_as @legal_aid_application.provider
 end
 
@@ -226,6 +243,10 @@ end
 
 Then("the \"Bank accounts\", for open banking accounts, questions should exist:") do |table|
   expect_questions_in(selector: "[data-test=\"applicant-bank-accounts\"]", expected: table)
+end
+
+Then("the \"Bank accounts\", for open banking accounts, questions and answers table should exist:") do |table|
+  expect_questions_and_answers_in_table(selector: "#applicant-bank-accounts-details", expected: table)
 end
 
 Then("the \"Your client's accounts\" questions should exist:") do |table|

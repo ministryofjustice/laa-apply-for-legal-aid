@@ -72,3 +72,12 @@ def expect_questions_and_answers_in(expected:, selector:)
     end
   end
 end
+
+def expect_questions_and_answers_in_table(expected:, selector:)
+  within(selector) do
+    expected.hashes.each do |row|
+      expect(page).to have_css("th", text: row[:question]), "expected to find tag \"th\" with text: \"#{row[:question]}\""
+      expect(page).to have_css("td", text: row[:answer]), "expected to find tag \"td\" with text: \"#{row[:answer]}\""
+    end
+  end
+end

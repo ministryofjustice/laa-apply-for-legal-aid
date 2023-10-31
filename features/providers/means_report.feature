@@ -28,7 +28,9 @@ Feature: Means report
       | h3  | Bank statements |
 
     Then the following sections should not exist:
+      | tag | section |
       | h3  | Your client's accounts |
+      | h3  | Client's bank accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -135,8 +137,8 @@ Feature: Means report
 
     And the "Bank accounts", for static bank account totals, questions should exist:
       | question |
-      | Client's current accounts |
-      | Client's savings accounts |
+      | Current accounts |
+      | Savings accounts |
 
     And the "Which savings or investments does your client have?" questions should exist:
       | question |
@@ -200,6 +202,7 @@ Feature: Means report
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
+      | h3  | Client's bank accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -308,8 +311,13 @@ Feature: Means report
 
     And the "Bank accounts", for open banking accounts, questions should exist:
       | question |
-      | Client's current accounts |
-      | Client's savings accounts |
+      | Current accounts |
+      | Savings accounts |
+
+    And the "Bank accounts", for open banking accounts, questions and answers table should exist:
+      | question | answer |
+      | Account Name,12345678,000000 | 75.57 |
+      | Second Account,87654321,999999 | 57.57 |
 
     And the "Your client's accounts" questions should exist:
       | question |
