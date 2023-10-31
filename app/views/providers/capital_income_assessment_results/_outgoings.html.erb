@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m"><%= t(".title") %></h2>
+<h2 class="govuk-heading-m"><%= t(".title", individual:) %></h2>
 
 <%= govuk_table do |table|
       table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
