@@ -122,6 +122,12 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           patch_request
           expect(HMRC::CreateResponsesService).to have_received(:call).once
         end
+
+        it "successfully deletes any existing dwp override" do
+          create(:dwp_override, legal_aid_application: application)
+          patch_request
+          expect(application.reload.dwp_override).to be_nil
+        end
       end
 
       context "and the solicitor wants to override the results with a non joint benefit" do

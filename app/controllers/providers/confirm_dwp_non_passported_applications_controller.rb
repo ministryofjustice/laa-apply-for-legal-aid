@@ -14,6 +14,7 @@ module Providers
       @form = Providers::ConfirmDWPNonPassportedApplicationsForm.new(form_params)
 
       if @form.valid?
+        remove_dwp_override if correct_dwp_result?
         update_joint_benefit_response
         update_application_state
         HMRC::CreateResponsesService.call(legal_aid_application) if make_hmrc_call?
@@ -24,6 +25,10 @@ module Providers
     end
 
   private
+
+    def remove_dwp_override
+      legal_aid_application.dwp_override&.destroy!
+    end
 
     def partner
       @partner = legal_aid_application.partner
