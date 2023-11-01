@@ -10,6 +10,8 @@ module CopyCase
     def save
       return false unless valid?
 
+      # TODO: if they say no then delete procoeedings and redirect back to copy case invitation?
+      # TODO: if they hit backpage we may need to delete cloned records??
       cloner = CopyCase::ClonerService.new(legal_aid_application, legal_aid_application_to_copy)
       cloner.call
     end

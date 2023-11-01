@@ -66,9 +66,7 @@ module Flow
         },
         copy_case_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_confirmation_path(application) },
-          forward: lambda do |application|
-            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-          end,
+          forward: :has_national_insurance_numbers,
           check_answers: :check_provider_answers,
         },
         about_financial_means: {

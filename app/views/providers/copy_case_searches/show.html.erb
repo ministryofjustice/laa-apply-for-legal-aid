@@ -10,8 +10,9 @@
                                 value: params["search_ref"] || "" %>
 
       <%= next_action_buttons(
-            show_draft: true,
             form:,
+            show_draft: false,
+            continue_button_text: "Search",
           ) %>
   <% end %>
 <% end %>

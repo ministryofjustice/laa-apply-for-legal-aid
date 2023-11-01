@@ -4,6 +4,8 @@
               local: true) do |form| %>
   <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
+    <%= govuk_fieldset_header page_title %>
+
     <%= govuk_table do |table|
           table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
 
@@ -20,7 +22,7 @@
             body.with_row do |row|
               row.with_cell(text: @copiable_case.application_ref)
               row.with_cell(text: @copiable_case.applicant.full_name)
-              row.with_cell(text: @copiable_case.proceedings.map(&:category_of_law).join(","))
+              row.with_cell(text: @copiable_case.proceedings.map(&:category_of_law).uniq.join(", "))
               row.with_cell(text: @copiable_case.provider.firm.name)
             end
           end
@@ -33,7 +35,7 @@
           yes_no_options,
           :value,
           :label,
-          legend: { size: "xl", tag: "h1", text: t(".heading") },
+          legend: { size: "xl", tag: "h1", text: t(".legend", application_ref: @copiable_case.application_ref) },
         ) %>
 
     <%= next_action_buttons(
