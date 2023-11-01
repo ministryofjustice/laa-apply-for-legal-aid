@@ -69,7 +69,7 @@ Feature: Check single employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
+    Then I should be on a page showing "Your client's bank accounts"
 
     When I choose "No"
     And I click 'Save and continue'
@@ -142,7 +142,7 @@ Feature: Check single employment
 
     When I upload an evidence file named 'hello_world.pdf'
     And I sleep for 2 seconds
-    And I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
+    And I should be able to categorise 'hello_world.pdf' as 'Client's employment evidence'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
 

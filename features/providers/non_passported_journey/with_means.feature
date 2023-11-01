@@ -89,7 +89,7 @@ Feature: non_passported_journey with means
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
+    Then I should be on a page showing "Your client's bank accounts"
 
     When I choose 'No'
     And I click 'Save and continue'

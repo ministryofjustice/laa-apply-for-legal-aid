@@ -28,7 +28,7 @@ RSpec.describe "ClientInvolvementTypeController", :vcr do
       it "displays the heading" do
         expect(response.body).to include("Proceeding 1")
         expect(response.body).to include("Inherent jurisdiction high court injunction")
-        expect(response.body).to include("What is your client’s role in this proceeding?")
+        expect(unescaped_response_body).to include("What is your client's role in this proceeding?")
       end
     end
   end

@@ -15,6 +15,14 @@ Feature: Check partner employment evidence upload
     Then I should see "Upload your client's employment evidence"
     Then I should see "Upload the partner's employment evidence"
 
+    When I upload an evidence file named 'hello_world.pdf'
+    And I sleep for 2 seconds
+    And I should be able to categorise 'hello_world.pdf' as 'Client's employment evidence'
+    When I upload an evidence file named 'hello_world1.pdf'
+    And I sleep for 2 seconds
+    And I should be able to categorise 'hello_world1.pdf' as 'Partner's employment evidence'
+    And I click 'Save and continue'
+
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to upload evidence where only the partner has additional employment information
     Given the feature flag for partner_means_assessment is enabled

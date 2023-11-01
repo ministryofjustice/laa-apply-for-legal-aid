@@ -37,7 +37,7 @@ Then(/^I upload the fixture file named ['|"](.*?)['|"]/) do |filename|
 end
 
 Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|
-  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//select/option[text()='#{category}']").select_option
+  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//select/option[text()=\"#{category}\"]").select_option
 end
 
 Then(/^I click delete for the file ['|"](.*?)['|"]/) do |filename|

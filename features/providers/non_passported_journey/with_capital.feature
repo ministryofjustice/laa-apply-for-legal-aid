@@ -47,7 +47,7 @@ Feature: non_passported_journey with capital
     Then I should be on a page with title "Does your client have any other vehicles?"
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page showing "Your client’s bank accounts"
+    Then I should be on a page showing "Your client's bank accounts"
     Then I should be on a page showing "Does your client have any savings accounts they cannot access online?"
     Then I choose 'Yes'
     Then I should be on a page showing "Enter the total amount in all accounts."

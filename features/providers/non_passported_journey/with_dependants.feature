@@ -58,7 +58,7 @@ Feature: non_passported_journey with dependants
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
+    Then I should be on a page showing "Your client's bank accounts"
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
@@ -137,7 +137,7 @@ Feature: non_passported_journey with dependants
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
+    Then I should be on a page showing "Your client's bank accounts"
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"

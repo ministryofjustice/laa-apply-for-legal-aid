@@ -404,7 +404,8 @@ en:
       supporting_evidence:
         evidence_types:
           benefit_evidence: Benefit evidence
-          employment_evidence: Employment evidence
+          client_employment_evidence: Client's employment evidence
+          partner_employment_evidence: Partner's employment evidence
           gateway_evidence: Gateway evidence
           court_application_or_order: Court application or order
           court_order: Court order

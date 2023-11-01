@@ -66,7 +66,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
 
       it "updates the required_document_categories with employment_evidence" do
         call
-        expect(application.required_document_categories).to eq %w[employment_evidence]
+        expect(application.required_document_categories).to eq %w[client_employment_evidence]
       end
     end
 
