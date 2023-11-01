@@ -9,13 +9,11 @@ require "redis"
 # scanner.results
 #
 # Example usage:
-# redis = Sidekiq.redis { |r| r }
 #
 # require_relative 'lib/utilities/redis_scanner'
 #
+# redis  = Redis.new(url: Rails.configuration.x.redis.base_url)
 # scanner = Utilities::RedisScanner.new(redis)
-# OR
-# scanner = Utilities::RedisScanner.new(redis.redis) # if redis is instance of Redis::Namespace
 #
 # search for all keys that do not start with "stat"
 # scanner.call(/^((?!stat:).)*$/)
