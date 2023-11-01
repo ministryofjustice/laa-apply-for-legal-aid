@@ -411,6 +411,10 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
+    linking_case_invitations:
+      show:
+        heading: Do you want to link an application to your application?
+        hint: Guidance about linking cases
     proceeding_merits_task:
       linked_children:
         show:

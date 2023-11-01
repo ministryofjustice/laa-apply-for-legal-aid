@@ -20,6 +20,10 @@ module Flow
           end,
           check_answers: :check_provider_answers,
         },
+        linking_case_invitations: {
+          path: ->(application) { urls.providers_legal_aid_application_linking_case_invitation_path(application) },
+          forward: :address_lookups,
+        },
         address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_address_lookup_path(application) },
           forward: :address_selections,
