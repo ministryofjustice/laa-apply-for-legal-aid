@@ -612,6 +612,319 @@ module CFEResults
           pensioner_capital_disregard: 0.0,
           combined_assessed_capital: 500_000.0,
         }
+      end
+
+      def self.not_eligible
+        not_eligible_result = eligible
+        not_eligible_result[:result_summary][:overall_result][:result] = "ineligible"
+        not_eligible_result[:result_summary][:overall_result][:proceeding_types].each do |pt|
+          pt[:result] = "not_eligible"
+        end
+        not_eligible_result
+      end
+
+      def self.with_capital_contribution_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = "contribution_required"
+        result[:result_summary][:capital][:capital_contribution] = 465.66
+        result[:result_summary][:overall_result][:capital_contribution] = 465.66
+        result
+      end
+
+      def self.partially_eligible_with_income_contribution_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = "partially_eligible"
+        result[:result_summary][:disposable_income][:income_contribution] = 238.56
+        result[:result_summary][:overall_result][:income_contribution] = 238.56
+        result
+      end
+
+      def self.partially_eligible_with_capital_contribution_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = "partially_eligible"
+        result[:result_summary][:capital][:capital_contribution] = 468.56
+        result[:result_summary][:overall_result][:capital_contribution] = 468.56
+        result
+      end
+
+      def self.with_income_contribution_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = "contribution_required"
+        result[:result_summary][:overall_result][:income_contribution] = 366.82
+        result[:result_summary][:disposable_income][:income_contribution] = 366.82
+        result
+      end
+
+      def self.with_capital_and_income_contributions_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = "contribution_required"
+
+        result[:result_summary][:overall_result][:income_contribution] = 366.82
+        eligible[:result_summary][:disposable_income][:income_contribution] = 366.82
+
+        result[:result_summary][:overall_result][:result] = "contribution_required"
+        new_capital_section = result[:result_summary][:capital]
+        new_capital_section[:capital_contribution] = 465.66
+        result[:result_summary][:capital] = new_capital_section
+        result[:result_summary][:overall_result][:capital_contribution] = 465.66
+
+        result
+      end
+
+      def self.no_additional_properties
+        result = eligible
+        result[:assessment][:capital][:capital_items][:properties][:additional_properties] = []
+        result
+      end
+
+      def self.with_no_vehicles
+        result = eligible
+        result[:assessment][:capital][:capital_items][:vehicles] = []
+        result
+      end
+
+      def self.with_mortgage_costs
+        result = eligible
+        result[:result_summary][:disposable_income][:gross_housing_costs] = 120.0
+        result
+      end
+
+      def self.with_monthly_income_equivalents
+        result = eligible
+        other_income = result[:assessment][:gross_income][:other_income]
+        monthly_equivalents = other_income[:monthly_equivalents][:all_sources]
+        monthly_equivalents = monthly_equivalents.transform_values { |x| x + 10 }
+        other_income[:monthly_equivalents][:all_sources] = monthly_equivalents
+        result[:assessment][:gross_income][:other_income] = other_income
+
+        result
+      end
+
+      def self.with_monthly_outgoing_equivalents
+        result = eligible
+        other_income = result[:assessment][:disposable_income]
+        monthly_equivalents = other_income[:monthly_equivalents][:all_sources]
+        monthly_equivalents = monthly_equivalents.transform_values { |x| x + 10 }
+        other_income[:monthly_equivalents][:all_sources] = monthly_equivalents
+        result[:assessment][:disposable_income] = other_income
+        result[:result_summary][:disposable_income][:net_housing_costs] += 10.0
+
+        result
+      end
+
+      def self.no_capital
+        result = eligible
+        new_capital_section = result[:assessment][:capital]
+        new_capital_section[:capital_items][:liquid] = []
+        new_capital_section[:capital_items][:non_liquid] = []
+        new_capital_section[:capital_items][:vehicles] = []
+        new_capital_section[:capital_items][:properties][:main_home] = {}
+        new_capital_section[:capital_items][:properties][:additional_properties] = {}
+
+        new_capital_summary = result[:result_summary][:capital]
+        new_capital_summary[:total_liquid] = 0.0
+        new_capital_summary[:total_non_liquid] = 0.0
+        new_capital_summary[:total_vehicle] = 0.0
+        new_capital_summary[:total_property] = 0.0
+        new_capital_summary[:total_capital] = 0.0
+
+        result[:result_summary][:capital] = new_capital_summary
+        result[:assessment][:capital] = new_capital_section
+        result
+      end
+
+      def self.with_additional_properties
+        result = eligible
+        property = {
+          value: 5781.91,
+          outstanding_mortgage: 10_202.39,
+          percentage_owned: 8.33,
+          main_home: false,
+          shared_with_housing_assoc: true,
+          transaction_allowance: 113.46,
+          allowable_outstanding_mortgage: 8202.00,
+          net_value: -4533.94,
+          net_equity: -8000.82,
+          main_home_equity_disregard: "0.0",
+          assessed_equity: 125.33,
+        }
+        result[:assessment][:capital][:capital_items][:properties][:additional_properties] = [property]
+        result
+      end
+
+      def self.with_total_property; end
+
+      def self.with_maintenance_received
+        result = eligible
+        result[:result_summary][:disposable_income][:maintenance_allowance] = 150.0
+        result
+      end
+
+      def self.with_student_finance_received
+        result = eligible
+        result[:assessment][:gross_income][:irregular_income][:monthly_equivalents][:student_loan] = 125.0
+        result
+      end
+
+      def self.with_total_deductions
+        result = eligible
+        deductions = result[:assessment][:disposable_income][:deductions]
+        deductions[:dependants_allowance] = 1200.0
+        deductions[:disregarded_state_benefits] = 100.0
+        result[:assessment][:disposable_income][:deductions] = deductions
+        result
+      end
+
+      def self.with_total_gross_income
+        result = eligible
+        result[:result_summary][:gross_income][:total_gross_income] = 150.0
+
+        result
+      end
+
+      def self.unknown
+        result = eligible
+        result[:assessment][:assessment_result] = "unknown"
+        result[:assessment][:capital][:assessment_result] = "unknown"
+        result[:assessment][:disposable_income][:assessment_result] = "unknown"
+        result
+      end
+
+      def self.mixed_proceeding_type_results
+        result = eligible
+        result[:result_summary][:overall_result][:proceeding_types] = [
+          {
+            ccms_code: "DA006",
+            result: "eligible",
+          },
+          {
+            ccms_code: "SE013",
+            result: "ineligible",
+          },
+          {
+            ccms_code: "SE014",
+            result: "partially_eligible",
+          },
+        ]
+        result
+      end
+
+      def self.partially_eligible
+        result = eligible
+        result[:result_summary][:overall_result][:matter_types] << { matter_type: "section8", result: "ineligible" }
+        result[:result_summary][:overall_result][:proceeding_types] << { ccms_code: "SE003", result: "ineligible" }
+        result[:result_summary][:gross_income][:proceeding_types] << { ccms_code: "SE003", upper_threshold: 2657.0, result: "eligible" }
+        result[:result_summary][:disposable_income][:proceeding_types] << { ccms_code: "SE003", upper_threshold: 733.0, lower_threshold: 315.0, result: "ineligible" }
+        result
+      end
+
+      def self.with_employments
+        result = eligible
+        employment_income = {
+          gross_income: 1041.00,
+          benefits_in_kind: 16.60,
+          tax: -104.10,
+          national_insurance: -18.66,
+          fixed_employment_deduction: -45.00,
+          net_employment_income: 8898.84,
+        }
+        jobs = [
+          {
+            name: "Job 1",
+            payments: [
+              {
+                date: "2021-10-30",
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84,
+              },
+              {
+                date: "2021-10-30",
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84,
+              },
+              {
+                date: "2021-10-30",
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84,
+              },
+            ],
+          },
+          {
+            name: "Job 2",
+            payments: [
+              {
+                date: "2021-10-30",
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84,
+              },
+              {
+                date: "2021-10-30",
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84,
+              },
+              {
+                date: "2021-10-30",
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84,
+              },
+            ],
+          },
+        ]
+        result[:result_summary][:disposable_income][:employment_income] = employment_income
+        result[:assessment][:gross_income][:employment_income] = jobs
+        result
+      end
+
+      def self.with_employment_remarks(record)
+        laa = record.legal_aid_application
+        employments = laa.employments.order(:name)
+        payments = employments.first.employment_payments
+        refunded_nic_ids = payments.select { |p| p.national_insurance > 0 }.map(&:id)
+        refunded_tax_ids = payments.select { |p| p.tax > 0 }.map(&:id)
+        result = with_employments
+        remarks = {
+          employment: {
+            multiple_employments: [employments.map(&:id)],
+          },
+          employment_gross_income: {
+            amount_variation: [payments.map(&:id)],
+            unknown_frequency: [payments.map(&:id)],
+          },
+          employment_nic: {
+            amount_variation: [payments.map(&:id)],
+            refunds: refunded_nic_ids,
+          },
+          employment_tax: {
+            amount_variation: [payments.map(&:id)],
+            refunds: refunded_tax_ids,
+          },
+        }
+        result[:assessment][:remarks] = remarks
+        result
+      end
+
+      def self.with_no_employments
+        result = eligible
+        result[:result_summary][:disposable_income][:employment_income] = {}
+        result[:assessment][:gross_income][:employment_income] = []
         result
       end
     end
