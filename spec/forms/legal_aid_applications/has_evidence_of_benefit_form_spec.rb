@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe LegalAidApplications::HasEvidenceOfBenefitForm do
   subject(:described_form) { described_class.new(params.merge(model: dwp_override)) }
 
-  let(:dwp_override) { create(:dwp_override, passporting_benefit: "Valid state benefit") }
+  let(:dwp_override) { create(:dwp_override, passporting_benefit: "Universal Credit") }
   let(:has_evidence_of_benefit) { true }
   let(:params) do
     {

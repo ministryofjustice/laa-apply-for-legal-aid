@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "id_p_settings_adapter"
+require Rails.root.join("app/lib/id_p_settings_adapter")
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -259,7 +259,6 @@ Devise.setup do |config|
   # You can set a handler object that takes the response for a failed SAML request and the strategy,
   # and implements a #handle method. This method can then redirect the user, return error messages, etc.
   # config.saml_failed_callback = nil
-
   laa_portal_config = Rails.configuration.x.laa_portal
   # Configure with your SAML settings (see ruby-saml's README for more information: https://github.com/onelogin/ruby-saml).
   config.saml_configure do |settings|

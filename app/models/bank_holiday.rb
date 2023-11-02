@@ -1,5 +1,5 @@
 class BankHoliday < ApplicationRecord
-  serialize :dates, Array
+  serialize :dates, type: Array, coder: YAML
 
   scope :by_updated_at, -> { order(updated_at: :asc) }
   before_validation :populate_dates

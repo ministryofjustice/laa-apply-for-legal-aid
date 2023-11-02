@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 module LaaApplyForLegalAid
   class Application < Rails::Application
     config.middleware.use Rack::Attack
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     # If you're upgrading and haven't set `cookies_serializer` previously, your cookie serializer
     # was `:marshal`. Convert all cookies to JSON, using the `:hybrid` formatter.
     #
@@ -22,7 +22,6 @@ module LaaApplyForLegalAid
     # Changes in rails 7.0.3.1 prevented Synbols being used in serialised fields
     # this overrides the setting and allows the code(and tests) to run as normal
     config.active_record.yaml_column_permitted_classes = [Symbol]
-    config.active_record.legacy_connection_handling = false
     config.time_zone = "London"
 
     config.generators do |g|

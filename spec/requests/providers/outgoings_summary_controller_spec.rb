@@ -69,7 +69,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
 
       it "does not display an Add additional outgoing types section" do
         get providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application)
-        expect(response.body).not_to include(I18n.t("citizens.outgoings_summary.add_other_outgoings.add_other_outgoings"))
+        expect(response.body).not_to include("Add another type of regular payment")
       end
     end
 

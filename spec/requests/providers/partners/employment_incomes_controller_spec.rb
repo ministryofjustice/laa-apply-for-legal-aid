@@ -32,7 +32,7 @@ RSpec.describe Providers::Partners::EmploymentIncomesController do
 
         it "displays correct text" do
           expect(unescaped_response_body).to include(I18n.t("shared.employment_income.page_title", name: partner.full_name))
-          expect(unescaped_response_body).not_to include(I18n.t("providers.means.employment_incomes.show.hmrc_not_employed"))
+          expect(unescaped_response_body).not_to match(/You told us .* is not employed/)
         end
       end
     end

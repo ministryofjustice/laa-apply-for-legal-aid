@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TrueLayerBank < ApplicationRecord
-  serialize :banks, Array
+  serialize :banks, type: Array, coder: YAML
 
   scope :by_updated_at, -> { order(updated_at: :asc) }
   before_validation :populate_banks

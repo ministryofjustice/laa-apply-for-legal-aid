@@ -3,7 +3,7 @@ class BankTransaction < ApplicationRecord
   belongs_to :transaction_type, optional: true
   has_one :legal_aid_application, through: :bank_account
 
-  serialize :meta_data
+  serialize :meta_data, coder: YAML
 
   attr_accessor :previous_txn_id, :next_txn_id
 

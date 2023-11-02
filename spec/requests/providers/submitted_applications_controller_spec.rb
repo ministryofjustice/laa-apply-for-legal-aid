@@ -120,7 +120,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
       end
 
       it "does not display the Other income header" do
-        expect(unescaped_response_body).not_to include I18n.t("providers.submitted_applications.show.other_income")
+        expect(unescaped_response_body).not_to include "Other income"
       end
     end
 
