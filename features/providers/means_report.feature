@@ -316,8 +316,8 @@ Feature: Means report
 
     And the "Bank accounts", for open banking accounts, questions and answers table should exist:
       | question | answer |
-      | Account Name,12345678,000000 | 75.57 |
-      | Second Account,87654321,999999 | 57.57 |
+      | Account Name, 12345678, 000000 | 75.57 |
+      | Second Account, 87654321, 999999 | 57.57 |
 
     And the "Your client's accounts" questions should exist:
       | question |

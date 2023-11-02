@@ -20,7 +20,7 @@
             table.with_body do |body|
               @legal_aid_application&.applicant&.bank_accounts&.each do |account|
                 body.with_row do |row|
-                  row.with_cell(header: true, text: "#{account.name},#{account.account_number},#{account.sort_code}")
+                  row.with_cell(header: true, text: "#{account.name}, #{account.account_number}, #{account.sort_code}")
                   row.with_cell(numeric: true, text: gds_number_to_currency(account.balance).to_s)
                 end
               end
