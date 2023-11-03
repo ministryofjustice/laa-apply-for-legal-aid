@@ -8,70 +8,70 @@ on:
 jobs:
   delete_uat_job:
     runs-on: ubuntu-latest
-    steps:
-      - name: Extract branch name
-        id: extract_branch
-        shell: bash
-        run: |
-          if [ $GITHUB_EVENT_NAME == "pull_request" ]
-          then
-            branch=$GITHUB_HEAD_REF
-          else
-            branch=${GITHUB_REF#refs/heads/}
-          fi
-
-          echo "branch_name=$branch" >> $GITHUB_OUTPUT
-
-      - name: Extract release name
-        id: extract_release
-        shell: bash
-        run: |
-          branch_name=${{ steps.extract_branch.outputs.branch_name }}
-          truncated_branch=$(echo $branch_name | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
-          prefix=${{ inputs.release_name_prefix }}
-
-          echo "release_name=${prefix}${truncated_branch}" >> $GITHUB_OUTPUT
-
-      - name: Authenticate to the cluster
-        id: authenticate_to_cluster
-        shell: bash
-        env:
-          K8S_CLUSTER: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
-          K8S_CLUSTER_CERT: ${{ secrets.K8S_GHA_UAT_CLUSTER_CERT }}
-          K8S_NAMESPACE: ${{ secrets.K8S_GHA_UAT_NAMESPACE }}
-          K8S_TOKEN: ${{ secrets.K8S_GHA_UAT_TOKEN }}
-        run: |
-          echo "${K8S_CLUSTER_CERT}" > ./ca.crt
-          kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
-          kubectl config set-credentials github-action --token=${K8S_TOKEN}
-          kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=github-action --namespace=${K8S_NAMESPACE}
-          kubectl config use-context ${K8S_CLUSTER}
-
-      - name: Delete UAT release
-        id: delete_release
-        shell: bash
-        run: |
-          release_name=${{ steps.extract_release.outputs.release_name }}
-          found=$(helm list --all | grep $release_name || [[ $? == 1 ]])
-
-          if [[ ! -z "$found" ]]
-          then
-            helm delete $release_name --debug
-            echo "message=$(echo "Deleted UAT release ${release_name}!")" >> $GITHUB_OUTPUT
-          else
-            echo "message=$(echo "UAT release, ${release_name}, not found!")" >> $GITHUB_OUTPUT
-          fi
 #    steps:
-#      - uses: actions/checkout@v3
-#      - name: Delete UAT release action
-#        id: delete_uat
-#        uses: ministryofjustice/laa-civil-apply-delete-uat-release@v1.0.2
-#        with:
-#          release_name_prefix: "apply-"
-#          k8s_cluster: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
-#          k8s_cluster_cert: ${{ secrets.K8S_GHA_UAT_CLUSTER_CERT }}
-#          k8s_namespace: ${{ secrets.K8S_GHA_UAT_NAMESPACE }}
-#          k8s_token: ${{ secrets.K8S_GHA_UAT_TOKEN }}
-#      - name: Result
+#      - name: Extract branch name
+#        id: extract_branch
 #        shell: bash
-#        run: echo ${{ steps.delete_uat.outputs.delete-message }}
+#        run: |
+#          if [ $GITHUB_EVENT_NAME == "pull_request" ]
+#          then
+#            branch=$GITHUB_HEAD_REF
+#          else
+#            branch=${GITHUB_REF#refs/heads/}
+#          fi
+#
+#          echo "branch_name=$branch" >> $GITHUB_OUTPUT
+#
+#      - name: Extract release name
+#        id: extract_release
+#        shell: bash
+#        run: |
+#          branch_name=${{ steps.extract_branch.outputs.branch_name }}
+#          truncated_branch=$(echo $branch_name | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+#          prefix=${{ inputs.release_name_prefix }}
+#
+#          echo "release_name=${prefix}${truncated_branch}" >> $GITHUB_OUTPUT
+#
+#      - name: Authenticate to the cluster
+#        id: authenticate_to_cluster
+#        shell: bash
+#        env:
+#          K8S_CLUSTER: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
+#          K8S_CLUSTER_CERT: ${{ secrets.K8S_GHA_UAT_CLUSTER_CERT }}
+#          K8S_NAMESPACE: ${{ secrets.K8S_GHA_UAT_NAMESPACE }}
+#          K8S_TOKEN: ${{ secrets.K8S_GHA_UAT_TOKEN }}
+#        run: |
+#          echo "${K8S_CLUSTER_CERT}" > ./ca.crt
+#          kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
+#          kubectl config set-credentials github-action --token=${K8S_TOKEN}
+#          kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=github-action --namespace=${K8S_NAMESPACE}
+#          kubectl config use-context ${K8S_CLUSTER}
+#
+#      - name: Delete UAT release
+#        id: delete_release
+#        shell: bash
+#        run: |
+#          release_name=${{ steps.extract_release.outputs.release_name }}
+#          found=$(helm list --all | grep $release_name || [[ $? == 1 ]])
+#
+#          if [[ ! -z "$found" ]]
+#          then
+#            helm delete $release_name --debug
+#            echo "message=$(echo "Deleted UAT release ${release_name}!")" >> $GITHUB_OUTPUT
+#          else
+#            echo "message=$(echo "UAT release, ${release_name}, not found!")" >> $GITHUB_OUTPUT
+#          fi
+    steps:
+      - uses: actions/checkout@v3
+      - name: Delete UAT release action
+        id: delete_uat
+        uses: ministryofjustice/laa-civil-apply-delete-uat-release@debug-delete
+        with:
+          release_name_prefix: "apply-"
+          k8s_cluster: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
+          k8s_cluster_cert: ${{ secrets.K8S_GHA_UAT_CLUSTER_CERT }}
+          k8s_namespace: ${{ secrets.K8S_GHA_UAT_NAMESPACE }}
+          k8s_token: ${{ secrets.K8S_GHA_UAT_TOKEN }}
+      - name: Result
+        shell: bash
+        run: echo ${{ steps.delete_uat.outputs.delete-message }}
