@@ -15,7 +15,7 @@ module CopyCase
     validate :case_exists, unless: :draft?
 
     def case_exists
-      errors.add(:search_ref, "does not exist") unless case_found?
+      errors.add(:search_ref, :not_found) unless case_found?
     end
 
     def save
