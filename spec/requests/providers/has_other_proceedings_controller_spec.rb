@@ -100,7 +100,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
       it "stays on the page if there is a validation error" do
         expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("has_other_proceeding.blank")
+        expect(page).to have_error_message("Select yes if you want to add another proceeding")
       end
     end
 
@@ -137,13 +137,6 @@ RSpec.describe Providers::HasOtherProceedingsController do
         proceeding_id = Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first.id
         expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
       end
-    end
-
-    def have_error_message(key)
-      have_css(
-        ".govuk-error-summary__list > li",
-        text: I18n.t(key, scope: "activemodel.errors.models.legal_aid_application.attributes"),
-      )
     end
   end
 

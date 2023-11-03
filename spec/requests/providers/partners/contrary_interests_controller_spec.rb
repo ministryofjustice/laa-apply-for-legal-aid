@@ -84,9 +84,5 @@ RSpec.describe Providers::Partners::ContraryInterestsController do
         end
       end
     end
-
-    def have_error_message(text)
-      have_css(".govuk-error-summary__list > li", text:)
-    end
   end
 end

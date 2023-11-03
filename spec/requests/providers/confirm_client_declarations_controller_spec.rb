@@ -81,8 +81,4 @@ RSpec.describe Providers::ConfirmClientDeclarationsController do
       it_behaves_like "a provider not authenticated"
     end
   end
-
-  def have_error_message(text)
-    have_css(".govuk-error-summary__list > li", text:)
-  end
 end

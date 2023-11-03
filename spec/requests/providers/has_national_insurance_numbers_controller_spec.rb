@@ -88,9 +88,5 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
         expect(page).to have_error_message("Select yes if the client has a National Insurance number")
       end
     end
-
-    def have_error_message(text)
-      have_css(".govuk-error-summary__list > li", text:)
-    end
   end
 end
