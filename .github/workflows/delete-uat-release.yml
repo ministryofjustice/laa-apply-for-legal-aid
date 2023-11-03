@@ -37,7 +37,7 @@ jobs:
         shell: bash
         env:
           K8S_CLUSTER: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
-          K8S_CLUSTER_CERT: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME_CERT }}
+          K8S_CLUSTER_CERT: ${{ secrets.K8S_GHA_UAT_CLUSTER_CERT }}
           K8S_NAMESPACE: ${{ secrets.K8S_GHA_UAT_NAMESPACE }}
           K8S_TOKEN: ${{ secrets.K8S_GHA_UAT_TOKEN }}
         run: |
