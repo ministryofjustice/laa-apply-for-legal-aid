@@ -80,6 +80,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Capybara::RSpecMatchers, type: :request
+  config.include Capybara::RequestHelpers, type: :request
 end
 
 Shoulda::Matchers.configure do |config|

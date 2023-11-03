@@ -158,8 +158,4 @@ RSpec.describe Providers::Partners::StudentFinancesController do
       it_behaves_like "an authenticated provider from a different firm"
     end
   end
-
-  def have_error_message(message)
-    have_css(".govuk-error-summary__list > li", text: message)
-  end
 end

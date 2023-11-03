@@ -168,8 +168,4 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedReasonsController 
     application_tasks = merits_task_list.reload.task_list.tasks[:application]
     application_tasks.detect { |task| task.name == :why_matter_opposed }
   end
-
-  def have_error_message(text)
-    have_css(".govuk-error-summary__list > li", text:)
-  end
 end
