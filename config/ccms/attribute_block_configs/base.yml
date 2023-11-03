@@ -1332,9 +1332,27 @@ global_means:
     response_type: boolean
     user_defined: false
   GB_INPUT_B_5WP1_3A:
-    value: false
+    value: '#applicant_has_partner?'
     br100_meaning: 'Client: The client has a partner?'
     response_type: boolean
+    user_defined: true
+  GB_INPUT_T_5WP1_5A:
+    generate_block?: '#applicant_has_partner?'
+    value: '#partner_first_name'
+    br100_meaning: 'Client: The client has a partner?'
+    response_type: text
+    user_defined: true
+  GB_INPUT_T_5WP1_6A:
+    generate_block?: '#applicant_has_partner?'
+    value: '#partner_last_name'
+    br100_meaning: 'Client: The client has a partner?'
+    response_type: text
+    user_defined: true
+  GB_INPUT_D_5WP1_8A:
+    generate_block?: '#applicant_has_partner?'
+    value: '#partner_date_of_birth'
+    br100_meaning: 'Client: The client has a partner?'
+    response_type: date
     user_defined: true
   CLIENT_VULNERABLE:
     generate_block?: false
