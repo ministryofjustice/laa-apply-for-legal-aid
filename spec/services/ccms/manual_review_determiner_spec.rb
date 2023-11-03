@@ -2,13 +2,14 @@ require "rails_helper"
 
 module CCMS
   RSpec.describe ManualReviewDeterminer, :ccms do
-    let(:setting) { Setting.setting }
-    let!(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
     let(:determiner) { described_class.new(legal_aid_application) }
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
     describe "#manual_review_required?" do
       subject(:manual_review_required) { determiner.manual_review_required? }
+
+      let(:setting) { Setting.setting }
+      let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
 
       context "when an assessment is not yet carried out on legal aid application" do
         it "raises an error" do
@@ -16,7 +17,7 @@ module CCMS
         end
       end
 
-      context "when the manual review setting is true" do
+      context "when manual review setting is true" do
         before { setting.update! manually_review_all_cases: true }
 
         context "and there is no DWP override" do
@@ -66,7 +67,7 @@ module CCMS
         end
       end
 
-      context "and manual review is set to false" do
+      context "when manual review setting is false" do
         before { setting.update! manually_review_all_cases: false }
 
         context "without DWP override" do
@@ -255,16 +256,16 @@ module CCMS
     describe "#review_reasons" do
       subject(:review_reasons_result) { determiner.review_reasons }
 
-      let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: false }
-      let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
-
-      before { allow_any_instance_of(cfe_submission.class).to receive(:result).and_return(cfe_result) }
-
       context "with non-passported application" do
+        let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: false }
+        let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
+        let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
         let(:review_reasons) { %i[unknown_frequency multi_benefit non_passported] }
         let(:override_reasons) { %i[unknown_frequency multi_benefit non_passported dwp_override] }
         let(:further_employment_details_reasons) { %i[unknown_frequency multi_benefit non_passported further_employment_details] }
         let(:restrictions_reasons) { %i[unknown_frequency multi_benefit non_passported restrictions] }
+
+        before { allow_any_instance_of(cfe_submission.class).to receive(:result).and_return(cfe_result) }
 
         context "without DWP Override" do
           it "just takes the review reasons from the CFE result and non-passported" do
@@ -318,8 +319,7 @@ module CCMS
       end
 
       context "with passported application" do
-        let(:legal_aid_application) { create(:legal_aid_application, :passported) }
-        let(:review_reasons) { [] }
+        let(:legal_aid_application) { create(:legal_aid_application, :passported, :with_cfe_empty_result) }
 
         it "returns no review reasons" do
           expect(review_reasons_result).to be_empty
