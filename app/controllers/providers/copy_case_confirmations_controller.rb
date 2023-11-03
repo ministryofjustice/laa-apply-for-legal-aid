@@ -7,11 +7,9 @@ module Providers
 
     def update
       @form = CopyCase::ConfirmationForm.new(form_params)
-      @copiable_case = LegalAidApplication.find(session[:copy_case_id])
+      @copiable_case = LegalAidApplication.find(form_params[:copy_case_id])
 
-      # TODO: if they hit backpage we may need to delete proceedings
-
-      render :show unless save_continue_or_draft(@form)
+      render :show unless save_continue_or_draft(@form, copy_case_confirmed: @form.copy_case_confirmed?)
     end
 
   private

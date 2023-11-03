@@ -413,6 +413,12 @@ en:
           attributes:
             copy_case:
               blank: Select yes if you want to copy an application
+            copy_case_confirmation:
+              blank: Select yes if you want to copy the application
+            search_ref:
+              blank: Enter an application reference to search for
+              invalid: Enter a valid application reference to search for
+              not_found: The application reference entered cannot be found
             confirm_delegated_functions_date:
               blank: Confirm the date you used delegated functions
             has_dependants:
