@@ -21,7 +21,11 @@ module Providers
     end
 
     def form_params
-      params.require(:legal_aid_application).permit(:search_ref)
+      merge_with_model(legal_aid_application) do
+        next {} unless params[:legal_aid_application]
+
+        params.require(:legal_aid_application).permit(:search_ref)
+      end
     end
   end
 end
