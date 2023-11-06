@@ -41,9 +41,9 @@ RSpec.describe Providers::CopyCaseSearchesController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "when a valid application reference is provided" do
+    context "when a valid application reference is specified" do
       let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
-      let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T") }
+      let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: legal_aid_application.provider) }
 
       it "redirects to the copy case confirmation page" do
         patch_request
@@ -56,7 +56,23 @@ RSpec.describe Providers::CopyCaseSearchesController do
       end
     end
 
-    context "when an invalid application reference is provided" do
+    context "when a valid application reference from a differnt provider is specified" do
+      let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
+      let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: create(:provider)) }
+
+      it "stays on the page and displays validation error" do
+        patch_request
+        expect(response).to have_http_status(:ok)
+        expect(page).to have_error_message("The application reference entered cannot be found")
+      end
+
+      it "does not store the source application's id in the session" do
+        patch_request
+        expect(request.session[:copy_case_id]).to be_nil
+      end
+    end
+
+    context "when an invalid application reference is specified" do
       let(:params) { { legal_aid_application: { search_ref: "INVALID-APP-REF" } } }
 
       it "stays on the page and displays validation error" do
@@ -71,7 +87,7 @@ RSpec.describe Providers::CopyCaseSearchesController do
       end
     end
 
-    context "when a valid format but non-existant application reference is provided" do
+    context "when a valid format but non-existant application reference is specified" do
       let(:params) { { legal_aid_application: { search_ref: "L-FFF-FFF" } } }
 
       it "stays on the page and displays validation error" do
