@@ -22,6 +22,7 @@ module CopyCase
 
       true
     end
+    alias_method :save!, :save
 
     def case_found?
       @copiable_case = LegalAidApplication
