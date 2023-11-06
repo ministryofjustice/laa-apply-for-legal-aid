@@ -29,9 +29,5 @@ module CopyCase
                         .where(provider: model.provider)
                         .find_by(application_ref: search_ref)
     end
-
-    def exclude_from_model
-      %i[search_ref copiable_case]
-    end
   end
 end

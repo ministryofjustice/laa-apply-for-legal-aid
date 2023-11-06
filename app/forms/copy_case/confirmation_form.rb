@@ -30,9 +30,5 @@ module CopyCase
     def copy_case_confirmed?
       copy_case_confirmation == "true"
     end
-
-    def exclude_from_model
-      %i[copy_case_id copy_case_confirmation]
-    end
   end
 end
