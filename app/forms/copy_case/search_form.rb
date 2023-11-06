@@ -6,7 +6,6 @@ module CopyCase
 
     attr_accessor :search_ref, :copiable_case
 
-    # TODO: error message locales
     validates :search_ref,
               presence: true,
               format: { with: APPLICATION_REF_REGEXP },
@@ -25,11 +24,13 @@ module CopyCase
     end
 
     def case_found?
-      @copiable_case = LegalAidApplication.find_by(application_ref: search_ref)
+      @copiable_case = LegalAidApplication
+                        .where(provider: model.provider)
+                        .find_by(application_ref: search_ref)
     end
 
     def exclude_from_model
-      [:search_ref]
+      %i[search_ref copiable_case]
     end
   end
 end

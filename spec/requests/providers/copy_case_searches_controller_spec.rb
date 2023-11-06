@@ -32,12 +32,6 @@ RSpec.describe Providers::CopyCaseSearchesController do
   describe "PATCH /providers/:application_id/copy_case_search" do
     subject(:patch_request) { patch providers_legal_aid_application_copy_case_search_path(legal_aid_application), params: }
 
-    before do
-      allow(Setting).to receive(:linked_applications?).and_return(enable_linked_applications)
-    end
-
-    let(:enable_linked_applications) { true }
-
     context "when the provider is not authenticated" do
       let(:login) { nil }
       let(:params) { {} }
