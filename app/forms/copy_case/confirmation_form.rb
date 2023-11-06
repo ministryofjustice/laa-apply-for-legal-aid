@@ -10,6 +10,7 @@ module CopyCase
     def save
       return false unless valid?
       return unless copy_case_confirmed?
+      return if draft?
 
       # TODO: if they say no then delete procoeedings and redirect back to copy case invitation?
       # TODO: if they hit backpage we may need to delete previously cloned records??
