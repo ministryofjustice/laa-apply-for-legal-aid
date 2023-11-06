@@ -16,7 +16,7 @@ module Providers
       draft_selected? ? form.save_as_draft : form.save!
       return false if form.invalid?
 
-      session[:copy_case_id] = form.copiable_case.id
+      session[:copy_case_id] = form.copiable_case.id unless draft_selected?
       continue_or_draft(**)
     end
 

@@ -41,77 +41,97 @@ RSpec.describe Providers::CopyCaseSearchesController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "when a valid application reference is specified" do
-      let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
-      let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: legal_aid_application.provider) }
+    context "when Search" do
+      context "with a valid application reference" do
+        let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
+        let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: legal_aid_application.provider) }
 
-      it "redirects to the copy case confirmation page" do
-        patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_copy_case_confirmation_path(legal_aid_application))
+        it "redirects to the copy case confirmation page" do
+          patch_request
+          expect(response).to redirect_to(providers_legal_aid_application_copy_case_confirmation_path(legal_aid_application))
+        end
+
+        it "stores the source application's id in the session" do
+          patch_request
+          expect(request.session[:copy_case_id]).to eq source_application.id
+        end
       end
 
-      it "stores the source application's id in the session" do
-        patch_request
-        expect(request.session[:copy_case_id]).to eq source_application.id
+      context "with a valid application reference from a different provider" do
+        let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
+        let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: create(:provider)) }
+
+        it "stays on the page and displays validation error" do
+          patch_request
+          expect(response).to have_http_status(:ok)
+          expect(page).to have_error_message("The application reference entered cannot be found")
+        end
+
+        it "does not store the source application's id in the session" do
+          patch_request
+          expect(request.session[:copy_case_id]).to be_nil
+        end
+      end
+
+      context "with an invalid application reference" do
+        let(:params) { { legal_aid_application: { search_ref: "INVALID-APP-REF" } } }
+
+        it "stays on the page and displays validation error" do
+          patch_request
+          expect(response).to have_http_status(:ok)
+          expect(page).to have_error_message("Enter a valid application reference to search for")
+        end
+
+        it "does not store the source application's id in the session" do
+          patch_request
+          expect(request.session[:copy_case_id]).to be_nil
+        end
+      end
+
+      context "with a valid format but non-existant application reference" do
+        let(:params) { { legal_aid_application: { search_ref: "L-FFF-FFF" } } }
+
+        it "stays on the page and displays validation error" do
+          patch_request
+          expect(response).to have_http_status(:ok)
+          expect(page).to have_error_message("The application reference entered cannot be found")
+        end
+
+        it "does not store the source application's id in the session" do
+          patch_request
+          expect(request.session[:copy_case_id]).to be_nil
+        end
+      end
+
+      context "with no application reference" do
+        let(:params) { { legal_aid_application: { search_ref: "" } } }
+
+        it "stays on the page and displays validation error" do
+          patch_request
+          expect(response).to have_http_status(:ok)
+          expect(page).to have_error_message("Enter an application reference to search for")
+        end
+
+        it "does not store the source application's id in the session" do
+          patch_request
+          expect(request.session[:copy_case_id]).to be_nil
+        end
       end
     end
 
-    context "when a valid application reference from a differnt provider is specified" do
-      let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
-      let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: create(:provider)) }
+    context "when form submitted using Save as draft button" do
+      let(:params) { { legal_aid_application: { search_ref: "L-FFF-FFF" }, draft_button: "irrelevant" } }
 
-      it "stays on the page and displays validation error" do
+      it "redirects provider to provider's applications page" do
         patch_request
-        expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("The application reference entered cannot be found")
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it "does not store the source application's id in the session" do
-        patch_request
-        expect(request.session[:copy_case_id]).to be_nil
-      end
-    end
-
-    context "when an invalid application reference is specified" do
-      let(:params) { { legal_aid_application: { search_ref: "INVALID-APP-REF" } } }
-
-      it "stays on the page and displays validation error" do
-        patch_request
-        expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("Enter a valid application reference to search for")
+      it "sets the application as draft" do
+        expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
       end
 
-      it "does not store the source application's id in the session" do
-        patch_request
-        expect(request.session[:copy_case_id]).to be_nil
-      end
-    end
-
-    context "when a valid format but non-existant application reference is specified" do
-      let(:params) { { legal_aid_application: { search_ref: "L-FFF-FFF" } } }
-
-      it "stays on the page and displays validation error" do
-        patch_request
-        expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("The application reference entered cannot be found")
-      end
-
-      it "does not store the source application's id in the session" do
-        patch_request
-        expect(request.session[:copy_case_id]).to be_nil
-      end
-    end
-
-    context "when no application reference is provided" do
-      let(:params) { { legal_aid_application: { search_ref: "" } } }
-
-      it "stays on the page and displays validation error" do
-        patch_request
-        expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("Enter an application reference to search for")
-      end
-
-      it "does not store the source application's id in the session" do
+      it "does not stores the source application's id in the session" do
         patch_request
         expect(request.session[:copy_case_id]).to be_nil
       end
