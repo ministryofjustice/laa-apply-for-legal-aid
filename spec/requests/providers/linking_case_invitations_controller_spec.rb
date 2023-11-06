@@ -33,6 +33,14 @@ RSpec.describe Providers::LinkingCaseInvitationsController do
       end
     end
 
+    context "when yes chosen" do
+      let(:params) { { legal_aid_application: { link_case: "true" } } }
+
+      it "redirects to linking_case_search page" do
+        expect(response).to redirect_to(providers_legal_aid_application_linking_case_search_path(legal_aid_application))
+      end
+    end
+
     context "when no answer chosen" do
       let(:params) { { legal_aid_application: { link_case: "" }, continue_button: "Save and continue" } }
 

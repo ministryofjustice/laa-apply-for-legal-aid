@@ -22,6 +22,23 @@ module Flow
         },
         linking_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_linking_case_invitation_path(application) },
+          forward: lambda do |application|
+            if application.link_case?
+              :linking_case_searches
+            else
+              :address_lookups
+            end
+          end,
+        },
+        linking_case_searches: {
+          path: ->(application) { urls.providers_legal_aid_application_linking_case_search_path(application) },
+          # forward: lambda do |application|
+          #   if application.link_case?
+          #     :linking_case_searches
+          #   else
+          #     :address_lookups
+          #   end
+          # end,
           forward: :address_lookups,
         },
         address_lookups: {

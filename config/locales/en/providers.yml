@@ -415,6 +415,11 @@ en:
       show:
         heading: Do you want to link an application to your application?
         hint: Guidance about linking cases
+    linking_case_searches:
+      show:
+        heading: What is the LAA reference of the application you want to link to?
+        hint: For example, 'A-BCD-E1F'
+        search: Search
     proceeding_merits_task:
       linked_children:
         show:
