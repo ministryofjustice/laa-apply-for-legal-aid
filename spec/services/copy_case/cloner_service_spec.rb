@@ -3,11 +3,28 @@ require "rails_helper"
 RSpec.describe CopyCase::ClonerService do
   subject(:instance) { described_class.new(target, source) }
 
+  let(:target) { create(:legal_aid_application, :with_applicant) }
+  let(:source) { create(:legal_aid_application, :with_proceedings) }
+
+  describe ".call" do
+    subject(:call) { described_class.call(target, source) }
+
+    let(:cloner) { instance_double(described_class) }
+
+    before do
+      allow(described_class).to receive(:new).and_return(cloner)
+      allow(cloner).to receive(:call)
+    end
+
+    it "calls self#call" do
+      call
+      expect(described_class).to have_received(:new).with(target, source)
+      expect(cloner).to have_received(:call)
+    end
+  end
+
   describe "#call" do
     subject(:call) { instance.call }
-
-    let(:target) { create(:legal_aid_application, :with_applicant) }
-    let(:source) { create(:legal_aid_application, :with_proceedings) }
 
     it "copies proceedings" do
       expect { call }
@@ -45,6 +62,27 @@ RSpec.describe CopyCase::ClonerService do
         end
 
         expect(target_scope_limitations).to match_array(source_scope_limitations)
+      end
+    end
+
+    context "when target already has proceedings" do
+      let(:target) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 da004]) }
+      let(:source) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[se014 se013]) }
+
+      before do
+        target
+        source
+      end
+
+      it "copies new proceedings over old" do
+        expect { call }
+          .to change { target.reload.proceedings.map(&:ccms_code).sort }
+          .from(%w[DA001 DA004].sort)
+          .to(%w[SE014 SE013].sort)
+      end
+
+      it "does not leave any orphan proceedings" do
+        expect { call }.not_to change(Proceeding, :count)
       end
     end
   end
