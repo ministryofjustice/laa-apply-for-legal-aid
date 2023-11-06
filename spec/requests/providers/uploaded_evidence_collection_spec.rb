@@ -287,11 +287,11 @@ module Providers
               end
 
               context "when employment evidence is required" do
-                let(:missing_categories) { %w[employment_evidence] }
+                let(:missing_categories) { %w[client_employment_evidence] }
 
                 it "raises an error" do
                   patch_request
-                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  error = I18n.t("#{i18n_error_path}.client_employment_evidence_missing")
                   expect(unescaped_response_body).to include(error)
                 end
               end
@@ -345,11 +345,11 @@ module Providers
               end
 
               context "when employment evidence is required" do
-                let(:missing_categories) { %w[employment_evidence] }
+                let(:missing_categories) { %w[client_employment_evidence] }
 
                 it "raises an error" do
                   patch_request
-                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  error = I18n.t("#{i18n_error_path}.client_employment_evidence_missing")
                   expect(unescaped_response_body).to include(error)
                 end
               end
@@ -410,7 +410,7 @@ module Providers
 
                 before do
                   attachment1.update!(attachment_type: "gateway_evidence")
-                  attachment2.update!(attachment_type: "employment_evidence")
+                  attachment2.update!(attachment_type: "client_employment_evidence")
                 end
 
                 it "raises an error" do
@@ -420,8 +420,8 @@ module Providers
                 end
               end
 
-              context "when employment evidence is required" do
-                let(:missing_categories) { %w[employment_evidence] }
+              context "when client's employment evidence is required" do
+                let(:missing_categories) { %w[client_employment_evidence] }
 
                 before do
                   attachment1.update!(attachment_type: "gateway_evidence")
@@ -430,18 +430,18 @@ module Providers
 
                 it "raises an error" do
                   patch_request
-                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  error = I18n.t("#{i18n_error_path}.client_employment_evidence_missing")
                   expect(unescaped_response_body).to include(error)
                 end
               end
 
               context "when files are uncategorised and mandatory evidence is missing" do
-                let(:missing_categories) { %w[benefit_evidence employment_evidence] }
+                let(:missing_categories) { %w[benefit_evidence client_employment_evidence] }
 
                 it "raises two errors" do
                   patch_request
                   benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: "Universal Credit")
-                  employment_error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  employment_error = I18n.t("#{i18n_error_path}.client_employment_evidence_missing")
                   uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
                   expect(unescaped_response_body).to include(benefit_error)
                   expect(unescaped_response_body).to include(employment_error)

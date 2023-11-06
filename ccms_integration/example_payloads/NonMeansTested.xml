@@ -2760,7 +2760,7 @@
                       <ns3:Attribute>
                         <ns3:Attribute>DECLARATION_CLIENT_TEXT</ns3:Attribute>
                         <ns3:ResponseType>text</ns3:ResponseType>
-                        <ns3:ResponseValue>1.   a) Client’s Merits Declaration</ns3:ResponseValue>
+                        <ns3:ResponseValue>1.   a) Client's Merits Declaration</ns3:ResponseValue>
                         <ns3:UserDefinedInd>false</ns3:UserDefinedInd>
                       </ns3:Attribute>
                       <ns3:Attribute>

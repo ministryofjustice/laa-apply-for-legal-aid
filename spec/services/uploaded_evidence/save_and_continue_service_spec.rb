@@ -23,7 +23,7 @@ module UploadedEvidence
       let(:service) { described_class.new(controller) }
       let(:submission_form) { instance_double Providers::UploadedEvidenceSubmissionForm, model: }
       let(:att1) { create(:attachment, :uploaded_evidence_collection, attachment_type: "uncategorised") }
-      let(:att2) { create(:attachment, :uploaded_evidence_collection, attachment_type: "employment_evidence") }
+      let(:att2) { create(:attachment, :uploaded_evidence_collection, attachment_type: "client_employment_evidence") }
 
       before { allow(service).to receive(:submission_form).and_return(submission_form) }
 
@@ -48,7 +48,7 @@ module UploadedEvidence
           let(:params) do
             {
               uploaded_evidence_collection: {
-                att1.id => "employment_evidence",
+                att1.id => "client_employment_evidence",
                 att2.id => "gateway_evidence",
               },
               attachment_id: "61c95550-d361-4575-8f7d-a22eabc91831",
@@ -73,7 +73,7 @@ module UploadedEvidence
 
           it "changes the attachment type according to the parameters" do
             service.call
-            expect(att1.reload.attachment_type).to eq "employment_evidence"
+            expect(att1.reload.attachment_type).to eq "client_employment_evidence"
             expect(att2.reload.attachment_type).to eq "gateway_evidence"
           end
         end

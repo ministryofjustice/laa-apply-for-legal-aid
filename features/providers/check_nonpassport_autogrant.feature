@@ -56,7 +56,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Does your client own a vehicle?" page
     Then I choose "legal-aid-application-own-vehicle-field"
     Then I click 'Save and continue'
-    Then I am on the "Your client’s bank accounts" page
+    Then I am on the "Your client's bank accounts" page
     Then I choose "No"
     Then I click 'Save and continue'
     Then I am on the "Which savings or investments does your client have?" page
@@ -188,7 +188,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Does your client own a vehicle?" page
     Then I choose "legal-aid-application-own-vehicle-field"
     Then I click 'Save and continue'
-    Then I am on the "Your client’s bank accounts" page
+    Then I am on the "Your client's bank accounts" page
     Then I choose "No"
     Then I click 'Save and continue'
     Then I am on the "Which savings or investments does your client have?" page

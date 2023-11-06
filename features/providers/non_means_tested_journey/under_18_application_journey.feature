@@ -32,7 +32,7 @@ Feature: Under 18 applicant journey
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client’s role in this proceeding?'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
 
     When I choose 'Applicant/claimant/petitioner'
     And I click 'Save and continue'

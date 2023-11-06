@@ -28,9 +28,15 @@ module UploadedEvidence
     end
 
     def attachment_type_options
-      @attachment_type_options = required_documents.map { |rd| [rd, rd.humanize] }
+      @attachment_type_options = required_documents.map { |rd| [rd, attachment_type_name(rd)] }
       @attachment_type_options << %w[uncategorised Uncategorised]
       @attachment_type_options
+    end
+
+    def attachment_type_name(type)
+      I18n.t!("shared.check_answers.supporting_evidence.evidence_types.#{type}")
+    rescue I18n::MissingTranslationData
+      type.humanize
     end
 
     def evidence_type_translation

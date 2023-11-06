@@ -132,7 +132,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page with title "Your client’s bank accounts"
+    Then I should be on a page with title "Your client's bank accounts"
 
     When I choose "No"
     And I click 'Save and continue'

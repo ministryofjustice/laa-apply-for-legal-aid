@@ -55,7 +55,7 @@ Feature: Scope limitations not being set
     When I choose 'No'
     And I click 'Save and continue'
 
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nWhat is your client’s role in this proceeding?'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nWhat is your client's role in this proceeding?'
     When I choose 'Applicant/claimant/petitioner'
     And I click 'Save and continue'
 
@@ -87,6 +87,6 @@ Feature: Scope limitations not being set
     When I choose 'No'
     And I click 'Save and continue'
     # at this point proceeding one is incomplete and should be resumed
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nWhat is your client’s role in this proceeding?'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nWhat is your client's role in this proceeding?'
     When I choose 'Applicant/claimant/petitioner'
     And I click 'Save and continue'
