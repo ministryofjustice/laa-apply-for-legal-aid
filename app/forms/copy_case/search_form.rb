@@ -13,16 +13,18 @@ module CopyCase
 
     validate :case_exists, unless: :draft?
 
-    def case_exists
-      errors.add(:search_ref, :not_found) unless case_found?
-    end
-
     def save
       return false unless valid?
+
+      model.update!(copy_case_id: copiable_case.id) unless draft?
 
       true
     end
     alias_method :save!, :save
+
+    def case_exists
+      errors.add(:search_ref, :not_found) unless case_found?
+    end
 
     def case_found?
       @copiable_case = LegalAidApplication

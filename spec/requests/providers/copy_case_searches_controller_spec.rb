@@ -46,14 +46,15 @@ RSpec.describe Providers::CopyCaseSearchesController do
         let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
         let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: legal_aid_application.provider) }
 
+        it "stores the copy_case_id" do
+          expect { patch_request }.to change { legal_aid_application.reload.copy_case_id }
+            .from(nil)
+            .to(source_application.id)
+        end
+
         it "redirects to the copy case confirmation page" do
           patch_request
           expect(response).to redirect_to(providers_legal_aid_application_copy_case_confirmation_path(legal_aid_application))
-        end
-
-        it "stores the source application's id in the session" do
-          patch_request
-          expect(request.session[:copy_case_id]).to eq source_application.id
         end
       end
 
@@ -67,9 +68,8 @@ RSpec.describe Providers::CopyCaseSearchesController do
           expect(page).to have_error_message("The application reference entered cannot be found")
         end
 
-        it "does not store the source application's id in the session" do
-          patch_request
-          expect(request.session[:copy_case_id]).to be_nil
+        it "does not store the source application's id" do
+          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
         end
       end
 
@@ -82,9 +82,8 @@ RSpec.describe Providers::CopyCaseSearchesController do
           expect(page).to have_error_message("Enter a valid application reference to search for")
         end
 
-        it "does not store the source application's id in the session" do
-          patch_request
-          expect(request.session[:copy_case_id]).to be_nil
+        it "does not store the source application's id" do
+          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
         end
       end
 
@@ -97,9 +96,8 @@ RSpec.describe Providers::CopyCaseSearchesController do
           expect(page).to have_error_message("The application reference entered cannot be found")
         end
 
-        it "does not store the source application's id in the session" do
-          patch_request
-          expect(request.session[:copy_case_id]).to be_nil
+        it "does not store the source application's id" do
+          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
         end
       end
 
@@ -112,9 +110,8 @@ RSpec.describe Providers::CopyCaseSearchesController do
           expect(page).to have_error_message("Enter an application reference to search for")
         end
 
-        it "does not store the source application's id in the session" do
-          patch_request
-          expect(request.session[:copy_case_id]).to be_nil
+        it "does not store the source application's id" do
+          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
         end
       end
     end
@@ -131,9 +128,8 @@ RSpec.describe Providers::CopyCaseSearchesController do
         expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
       end
 
-      it "does not stores the source application's id in the session" do
-        patch_request
-        expect(request.session[:copy_case_id]).to be_nil
+      it "does not store the source application's id" do
+        expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
       end
     end
   end
