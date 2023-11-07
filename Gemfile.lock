@@ -238,7 +238,7 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    drb (2.1.1)
+    drb (2.2.0)
       ruby2_keywords
     dumb_delegator (1.0.0)
     em-websocket (0.5.3)
