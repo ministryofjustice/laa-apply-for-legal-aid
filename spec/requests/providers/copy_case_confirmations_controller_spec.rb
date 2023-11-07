@@ -22,10 +22,8 @@ RSpec.describe Providers::CopyCaseConfirmationsController do
     end
 
     context "when the provider is authenticated" do
-      include_context "with session double"
-
       before do
-        session[:copy_case_id] = source_application.id
+        legal_aid_application.update!(copy_case_id: source_application.id)
       end
 
       it "renders page with expected headings" do

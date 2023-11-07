@@ -2,7 +2,7 @@ module Providers
   class CopyCaseConfirmationsController < ProviderBaseController
     def show
       @form = CopyCase::ConfirmationForm.new(model: legal_aid_application)
-      @copiable_case = LegalAidApplication.find(session[:copy_case_id])
+      @copiable_case = LegalAidApplication.find(legal_aid_application.copy_case_id)
     end
 
     def update
