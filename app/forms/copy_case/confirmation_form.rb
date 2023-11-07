@@ -4,16 +4,12 @@ module CopyCase
 
     attr_accessor :copy_case_id, :copy_case_confirmation
 
-    validates :copy_case_id, presence: true, unless: proc { draft? }
+    validates :copy_case_id, presence: true, unless: :draft?
     validates :copy_case_confirmation, presence: true, unless: proc { draft? || copy_case_confirmation.present? }
 
     def save
-      return false unless valid?
-      return unless copy_case_confirmed?
-      return if draft?
+      return if invalid? || draft? || !copy_case_confirmed?
 
-      # TODO: if they say no then delete procoeedings and redirect back to copy case invitation?
-      # TODO: if they hit backpage we may need to delete previously cloned records??
       cloner = CopyCase::ClonerService.new(legal_aid_application, legal_aid_application_to_copy)
       cloner.call
     end
