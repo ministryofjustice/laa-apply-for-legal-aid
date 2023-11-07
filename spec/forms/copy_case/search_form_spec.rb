@@ -79,4 +79,41 @@ RSpec.describe CopyCase::SearchForm, type: :form do
       end
     end
   end
+
+  describe "#save_as_draft" do
+    subject(:save_as_draft) { instance.save_as_draft }
+
+    context "with a valid application reference" do
+      let(:search_ref) { "L-TVH-U0T" }
+
+      it { is_expected.to be_truthy }
+
+      it "considered valid" do
+        save_as_draft
+        expect(instance).to be_valid
+      end
+    end
+
+    context "with invalid application reference" do
+      let(:search_ref) { "INVALID-REF" }
+
+      it { is_expected.to be_truthy }
+
+      it "considered valid" do
+        save_as_draft
+        expect(instance).to be_valid
+      end
+    end
+
+    context "with no application reference entered" do
+      let(:search_ref) { "" }
+
+      it { is_expected.to be_nil }
+
+      it "considered valid" do
+        save_as_draft
+        expect(instance).to be_valid
+      end
+    end
+  end
 end
