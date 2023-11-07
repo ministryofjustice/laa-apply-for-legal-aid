@@ -515,7 +515,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def manual_client_employment_information?
-    applicant.extra_employment_information? || full_employment_details.present?
+    applicant&.extra_employment_information? || full_employment_details.present?
   end
 
   def manual_partner_employment_information?

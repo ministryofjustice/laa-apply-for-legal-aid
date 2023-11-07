@@ -1298,6 +1298,7 @@ en:
           refunds: Tax or NI refunds
           uploaded_bank_statements: Bank statements uploaded
           ineligible: Applicant is ineligible
+          non_passported: Non-Passported application
       show:
         client_details_heading: Client details
         evidence_upload_heading: Supporting evidence
