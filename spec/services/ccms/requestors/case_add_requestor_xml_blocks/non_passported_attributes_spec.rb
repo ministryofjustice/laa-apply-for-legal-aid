@@ -31,20 +31,21 @@ module CCMS
         end
 
         let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-        let!(:chances_of_success) do
-          create(:chances_of_success, :with_optional_text, proceeding:)
-        end
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
         let(:timestamp) { Time.current.strftime("%Y-%m-%d_%H.%M") }
         let(:applicant) { legal_aid_application.applicant }
         let(:default_cost) { legal_aid_application.lead_proceeding.substantive_cost_limitation }
+
+        before do
+          create(:chances_of_success, :with_optional_text, proceeding:)
+          create(:cfe_v3_result, submission: cfe_submission)
+        end
 
         # uncomment this example to create a file of the payload for manual inspection
         # it 'create example payload file' do

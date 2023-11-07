@@ -3,20 +3,19 @@ require "rails_helper"
 RSpec.describe ApplicantAccountPresenter do
   subject(:applicant_account_presenter) { described_class.new(applicant.bank_providers.first) }
 
-  let!(:applicant) { create(:applicant) }
+  let(:applicant) { create(:applicant) }
   let(:addresses) do
     [{ address: Faker::Address.building_number,
        city: Faker::Address.city,
        zip: Faker::Address.zip }]
   end
-  let!(:applicant_bank_provider) { create(:bank_provider, applicant_id: applicant.id) }
+  let(:applicant_bank_provider) { create(:bank_provider, applicant_id: applicant.id) }
 
   let!(:applicant_bank_account_holder) do
-    create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,
-                                 addresses:)
+    create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id, addresses:)
   end
 
-  let!(:applicant_bank_account) do
+  let(:applicant_bank_account) do
     create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: "GBP")
   end
 

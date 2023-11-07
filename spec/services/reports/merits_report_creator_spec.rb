@@ -18,13 +18,13 @@ RSpec.describe Reports::MeritsReportCreator do
            ccms_submission:)
   end
   let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
-  let!(:chances_of_success) do
-    create(:chances_of_success, :with_optional_text, proceeding: da001)
-  end
   let(:ccms_submission) { create(:ccms_submission, :case_ref_obtained) }
   let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
 
-  before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
+  before do
+    create(:chances_of_success, :with_optional_text, proceeding: da001)
+    allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+  end
 
   describe ".call" do
     it "attaches merits_report.pdf to the application" do
@@ -76,13 +76,10 @@ RSpec.describe Reports::MeritsReportCreator do
       end
 
       let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
-      let!(:chances_of_success) do
-        create(:chances_of_success, :with_optional_text, proceeding: da001)
-      end
-
       let(:ccms_submission) { create(:ccms_submission) }
 
       before do
+        create(:chances_of_success, :with_optional_text, proceeding: da001)
         allow_any_instance_of(CCMS::Submission).to receive(:process!).with(any_args).and_return(true)
       end
 
@@ -103,11 +100,9 @@ RSpec.describe Reports::MeritsReportCreator do
         let(:ccms_submission) { create(:ccms_submission) }
 
         let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
-        let!(:chances_of_success) do
-          create(:chances_of_success, :with_optional_text, proceeding: da001)
-        end
 
         before do
+          create(:chances_of_success, :with_optional_text, proceeding: da001)
           allow(legal_aid_application).to receive(:case_ccms_reference).and_return(nil)
           allow(legal_aid_application).to receive(:create_ccms_submission).and_return(ccms_submission)
         end

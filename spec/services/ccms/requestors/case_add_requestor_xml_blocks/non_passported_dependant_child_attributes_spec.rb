@@ -20,10 +20,14 @@ module CCMS
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:dependants) { legal_aid_application.dependants.all }
+
+        before do
+          create(:chances_of_success, :with_optional_text, proceeding:)
+          create(:cfe_v3_result, submission: cfe_submission)
+        end
 
         describe "non-passported" do
           let(:legal_aid_application) do
@@ -37,10 +41,7 @@ module CCMS
                    provider:,
                    office:)
           end
-          let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-          let!(:chances_of_success) do
-            create(:chances_of_success, :with_optional_text, proceeding:)
-          end
+          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
 
           context "with dependant children" do
             let!(:younger_child) { create(:dependant, :under15, legal_aid_application:, number: 1, has_income: false, assets_value: 1_000) }

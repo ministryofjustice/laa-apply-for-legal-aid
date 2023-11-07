@@ -3,9 +3,7 @@ require "rails_helper"
 RSpec.describe Applicants::EmployedForm, type: :form do
   subject(:described_form) { described_class.new(form_params) }
 
-  let!(:application) { create(:legal_aid_application, applicant:) }
   let(:applicant) { create(:applicant, employed: nil) }
-
   let(:params) { { employed: true } }
   let(:form_params) { params.merge(model: applicant) }
 
