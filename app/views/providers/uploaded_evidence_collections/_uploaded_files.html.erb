@@ -47,7 +47,7 @@
                     name: "delete_button",
                     class: "button-as-link",
                     params: { attachment_id: attachment.id },
-                    suffix: attachment.document.filename,
+                    "aria-label": attachment.document.filename,
                   )
                 end
               end
