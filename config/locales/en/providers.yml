@@ -323,6 +323,9 @@ en:
         heading: Search result
         table_caption: Application to copy to your application
         legend: Do you want to copy %{application_ref} to your application?
+        summary_list_item:
+          laa_reference: LAA Reference
+          client: Client
     copy_case_invitations:
       show:
         heading: Do you want to copy an application to this application?
