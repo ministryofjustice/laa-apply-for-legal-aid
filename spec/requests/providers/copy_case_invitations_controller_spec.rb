@@ -117,10 +117,5 @@ RSpec.describe Providers::CopyCaseInvitationsController do
         expect { patch_request }.not_to change { legal_aid_application.reload.copy_case }.from(nil)
       end
     end
-
-    # OPTIMISE: defined in a fair few places now, share?!
-    def have_error_message(text)
-      have_css(".govuk-error-summary__list > li", text:)
-    end
   end
 end
