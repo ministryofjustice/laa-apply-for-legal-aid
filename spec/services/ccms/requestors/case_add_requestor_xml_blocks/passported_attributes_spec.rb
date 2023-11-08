@@ -34,16 +34,13 @@ module CCMS
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let!(:success_prospect) { :likely }
 
-        let!(:chances_of_success) do
-          create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:)
-        end
-
         before do
+          create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:)
+          create(:cfe_v3_result, submission: cfe_submission)
           allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
         end
 
@@ -116,7 +113,7 @@ module CCMS
 
         describe "CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY" do
           context "when the cfe result is eligible" do
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+            let(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns In Scope" do
               block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
@@ -127,7 +124,10 @@ module CCMS
           end
 
           context "when the cfe result is not_eligible" do
-            let!(:cfe_result) { create(:cfe_v3_result, :not_eligible, submission: cfe_submission) }
+            before do
+              cfe_submission.result.destroy!
+              create(:cfe_v3_result, :not_eligible, submission: cfe_submission)
+            end
 
             it "returns Out Of Scope" do
               block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
@@ -138,7 +138,7 @@ module CCMS
           end
 
           context "when the cfe result is contribution_required" do
-            let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
+            let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
             it "returns In Scope" do
               block = XmlExtractor.call(xml, :global_means, "CLIENT_ELIGIBILITY")
@@ -149,7 +149,8 @@ module CCMS
           end
 
           context "when the cfe result has an invalid response" do
-            let!(:cfe_result) do
+            before do
+              cfe_submission.result.destroy!
               create(:cfe_v3_result,
                      :with_unknown_result,
                      submission: cfe_submission)
@@ -172,7 +173,7 @@ module CCMS
           let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT] }
 
           context "when the cfe result is eligble" do
-            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
+            let(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns zero" do
               attributes.each do |attribute|
@@ -183,7 +184,7 @@ module CCMS
           end
 
           context "when the cfe result is not eligible" do
-            let!(:cfe_result) { create(:cfe_v3_result, :not_eligible, submission: cfe_submission) }
+            let(:cfe_result) { create(:cfe_v3_result, :not_eligible, submission: cfe_submission) }
 
             it "returns zero" do
               attributes.each do |attribute|
@@ -196,7 +197,10 @@ module CCMS
           end
 
           context "when the cfe result is contribution_required" do
-            let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
+            before do
+              cfe_submission.result.destroy!
+              create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission)
+            end
 
             it "returns the capital contribution" do
               attributes.each do |attribute|
@@ -816,7 +820,7 @@ module CCMS
                      provider:,
                      office:)
             end
-            let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
+            let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
 
             it "returns SUBDP" do
               %i[global_means global_merits].each do |entity|
@@ -853,9 +857,9 @@ module CCMS
                      provider:,
                      office:)
             end
-            let!(:da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, :with_optional_text, proceeding: da004)
+            let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
+            let(:chances_of_success) do
+              create(:chances_of_success, :with_optional_text, proceeding:)
             end
 
             it "returns hard coded statement" do
@@ -1429,9 +1433,9 @@ module CCMS
                      provider:,
                      office:)
             end
-            let(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004)
+            let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
+            let(:chances_of_success) do
+              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:)
             end
 
             it "returns false" do
@@ -1463,9 +1467,9 @@ module CCMS
                      provider:,
                      office:)
             end
-            let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-            let!(:chances_of_success) do
-              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004)
+            let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
+            let(:chances_of_success) do
+              create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:)
             end
 
             it "returns Both" do

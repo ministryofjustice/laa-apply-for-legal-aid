@@ -29,16 +29,17 @@ module CCMS
                  office:)
         end
         let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-        let!(:chances_of_success) do
-          create(:chances_of_success, :with_optional_text, proceeding:)
-        end
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:applicant) { legal_aid_application.applicant }
+
+        before do
+          create(:chances_of_success, :with_optional_text, proceeding:)
+          create(:cfe_v3_result, submission: cfe_submission)
+        end
 
         describe "boolean attributes" do
           # these are all currently coded as FALSE until such time as we can determine which benefits are received

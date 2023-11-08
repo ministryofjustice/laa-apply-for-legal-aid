@@ -30,18 +30,16 @@ module CCMS
         end
 
         let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-        let!(:chances_of_success) do
-          create(:chances_of_success, :with_optional_text, proceeding:)
-        end
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
 
         before do
+          create(:chances_of_success, :with_optional_text, proceeding:)
+          create(:cfe_v3_result, submission: cfe_submission)
           legal_aid_application.reload
         end
 
@@ -193,7 +191,8 @@ module CCMS
             let(:applicant) { legal_aid_application.applicant }
             let(:bank_provider) { create(:bank_provider, applicant:) }
             let(:bank_account) { create(:bank_account, bank_provider:) }
-            let!(:bank_transactions) { create_list(:bank_transaction, 2, :friends_or_family, bank_account:) }
+
+            before { create_list(:bank_transaction, 2, :friends_or_family, bank_account:) }
 
             it "generate the entity" do
               expect(xml).to have_means_entity "CLIENT_FINANCIAL_SUPPORT"
