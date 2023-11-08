@@ -215,7 +215,7 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    date (3.3.3)
+    date (3.3.4)
     debug_inspector (1.1.0)
     declarative (0.0.20)
     descendants_tracker (0.0.4)
