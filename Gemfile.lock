@@ -686,7 +686,7 @@ GEM
       hashie
       version_gem (~> 1.1, >= 1.1.1)
     spring (4.1.1)
-    stringio (3.0.8)
+    stringio (3.0.9)
     strong_migrations (1.6.4)
       activerecord (>= 5.2)
     super_diff (0.10.0)
