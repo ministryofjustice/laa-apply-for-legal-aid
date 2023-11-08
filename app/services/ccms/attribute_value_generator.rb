@@ -30,6 +30,7 @@ module CCMS
                                 |dependant
                                 |opponent
                                 |domestic_abuse_summary
+                                |partner
                                 |parties_mental_capacity
                                 |other_assets_declaration
                                 |other_party
@@ -41,6 +42,7 @@ module CCMS
                                 |wage_slip
                                 )_(\S+)$}x
     APPLICANT_REGEX = /^applicant_(\S+)$/
+    PARTNER_REGEX = /^partner_(\S+)$/
     APPLICATION_REGEX = /^application_(\S+)$/
     BANK_REGEX = /^bank_account_(\S+)$/
     LEAD_PROCEEDING = /^lead_proceeding_(\S+)$/
@@ -387,6 +389,10 @@ module CCMS
       @applicant ||= legal_aid_application.applicant
     end
 
+    def partner
+      @partner ||= legal_aid_application.partner
+    end
+
     def standardly_named_method?(method)
       STANDARD_METHOD_NAMES.match?(method)
     end
@@ -427,6 +433,8 @@ module CCMS
         legal_aid_application.__send__(Regexp.last_match(1))
       when APPLICANT_REGEX
         applicant.__send__(Regexp.last_match(1))
+      when PARTNER_REGEX
+        partner.__send__(Regexp.last_match(1))
       when BANK_REGEX
         options[:bank_acct].__send__(Regexp.last_match(1))
       when CHANCES_OF_SUCCESS

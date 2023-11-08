@@ -1733,6 +1733,73 @@ module CCMS
             end
           end
         end
+
+        describe "Partner values" do
+          context "when the applicant has a partner" do
+            before do
+              create(:partner, first_name: "Rupert", last_name: "Giles", date_of_birth: Date.new(1955, 4, 11), legal_aid_application:)
+              legal_aid_application.applicant.update!(has_partner: true)
+            end
+
+            describe "GB_INPUT_B_5WP1_3A - Client: The client has a partner?" do
+              it "returns true" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_3A")
+                expect(block).to have_boolean_response true
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_5A - Partner: First name" do
+              it "is populated with the partners details" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_5A")
+                expect(block).to have_text_response "Rupert"
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_6A - Partner: Last name" do
+              it "is populated with the partners details" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_6A")
+                expect(block).to have_text_response "Giles"
+              end
+            end
+
+            describe "GB_INPUT_D_5WP1_8A - Partner: DOB" do
+              it "is populated with the partners details" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_D_5WP1_8A")
+                expect(block).to have_date_response "11-04-1955"
+              end
+            end
+          end
+
+          context "when the applicant does not have a partner" do
+            describe "GB_INPUT_B_5WP1_3A - Client: The client has a partner?" do
+              it "returns false" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_3A")
+                expect(block).to have_boolean_response false
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_5A - Partner: First name" do
+              it "is not returned" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_5A")
+                expect(block).not_to be_present, "Expected block for attribute GB_INPUT_T_5WP1_5A not to be generated, but was \n #{block}"
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_6A - Partner: Surname" do
+              it "is not returned" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_6A")
+                expect(block).not_to be_present, "Expected block for attribute GB_INPUT_T_5WP1_6A not to be generated, but was \n #{block}"
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_8A - Partner: DOB" do
+              it "is not returned" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_8A")
+                expect(block).not_to be_present, "Expected block for attribute GB_INPUT_T_5WP1_8A not to be generated, but was \n #{block}"
+              end
+            end
+          end
+        end
       end
 
       def omitted_attributes
