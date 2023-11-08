@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CopyCaseInvitationsController do
+RSpec.describe Providers::CopyCase::InvitationsController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }

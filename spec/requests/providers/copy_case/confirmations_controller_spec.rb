@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CopyCaseConfirmationsController do
+RSpec.describe Providers::CopyCase::ConfirmationsController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:source_application) { create(:legal_aid_application, :with_applicant, :with_proceedings, application_ref: "L-TVH-U0T") }
   let(:provider) { legal_aid_application.provider }
