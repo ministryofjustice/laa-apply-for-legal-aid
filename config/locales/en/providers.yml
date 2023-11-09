@@ -329,13 +329,16 @@ en:
             client: Client
       invitations:
         show:
-          heading: Do you want to copy an application to this application?
+          heading: Do you want to copy an application to your current application?
+          hint_html: |
+            <p>You can do this in family cases where the children involved are related, so you do not have to repeat infomrmation.</p>
+            <p>You cannot copy applications created in CCMS.</p>
       searches:
         show:
           heading: What is the LAA reference of the application you want to copy?
           search_ref:
             label: What is the LAA reference of the application you want to copy?
-            hint: You can find this... For example, 'A-BCD-E1F'.
+            hint: For example, 'A-BCD-E1F'.
 
     check_passported_answers:
       show:

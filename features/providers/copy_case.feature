@@ -12,14 +12,14 @@ Background:
   And I click find address
   Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
   When I click 'Save and continue'
-  Then I should be on a page with title "Do you want to copy an application to this application?"
+  Then I should be on a page with title "Do you want to copy an application to your current application?"
 
 @javascript @vcr
 Scenario: I choose to copy another case's details
   When I choose a 'Yes' radio button
   And I click 'Save and continue'
   Then I should be on a page with title "What is the LAA reference of the application you want to copy?"
-  Then I should be on a page showing "You can find this... For example, 'A-BCD-E1F'."
+  Then I should be on a page showing "For example, 'A-BCD-E1F'."
   When I fill "legal-aid-application-search-ref-field" with "L-TVH-U0T"
   And I click 'Search'
   Then I should be on a page with title "Search result"

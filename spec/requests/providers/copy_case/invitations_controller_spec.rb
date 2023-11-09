@@ -25,7 +25,7 @@ RSpec.describe Providers::CopyCase::InvitationsController do
       expect(response).to have_http_status(:ok)
       expect(page).to have_css(
         "h1",
-        text: "Do you want to copy an application to this application?",
+        text: "Do you want to copy an application to your current application?",
       )
     end
   end
