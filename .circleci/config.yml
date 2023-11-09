@@ -87,8 +87,8 @@ references:
     run:
       name: Install ruby gems
       command: |
-        gem update --system
-        bundle install --path=vendor/bundle --jobs=4 && bundle clean
+        bundle config set --local path 'vendor/bundle'
+        bundle install --jobs=4 && bundle clean
 
   install_js_packages: &install_js_packages
     run:
