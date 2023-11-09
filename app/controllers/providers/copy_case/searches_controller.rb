@@ -15,13 +15,6 @@ module Providers
 
     private
 
-      def save_continue_or_draft(form, **)
-        draft_selected? ? form.save_as_draft : form.save!
-        return false if form.invalid?
-
-        continue_or_draft(**)
-      end
-
       def form_params
         merge_with_model(legal_aid_application) do
           next {} unless params[:legal_aid_application]
