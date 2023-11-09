@@ -9,6 +9,8 @@ gem "discard", "~> 1.3"
 gem "geckoboard-ruby"
 gem "google-apis-sheets_v4"
 gem "govuk_notify_rails", "~> 2.2.0"
+# temp - just to remove noisy httpi warnings during test runs
+gem "rack", "< 3"
 gem "net-imap"
 gem "net-pop"
 gem "net-smtp"

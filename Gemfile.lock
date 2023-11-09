@@ -299,7 +299,7 @@ GEM
     govuk_notify_rails (2.2.0)
       notifications-ruby-client (~> 5.1)
       rails (>= 4.1.0)
-    grover (1.1.4)
+    grover (1.1.5)
       combine_pdf (~> 1.0)
       nokogiri (~> 1.0)
     guard (2.18.1)
@@ -488,21 +488,21 @@ GEM
     pundit (2.3.1)
       activesupport (>= 3.0.0)
     racc (1.7.3)
-    rack (3.0.8)
+    rack (2.2.8)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
-    rack-protection (3.0.6)
-      rack
-    rack-session (2.0.0)
-      rack (>= 3.0.0)
+    rack-protection (3.1.0)
+      rack (~> 2.2, >= 2.2.4)
+    rack-session (1.0.1)
+      rack (< 3)
     rack-test (2.1.0)
       rack (>= 1.3)
-    rackup (2.1.0)
-      rack (>= 3)
-      webrick (~> 1.8)
+    rackup (1.0.0)
+      rack (< 3)
+      webrick
     rails (7.1.1)
       actioncable (= 7.1.1)
       actionmailbox (= 7.1.1)
@@ -807,6 +807,7 @@ DEPENDENCIES
   pry-stack_explorer
   puma
   pundit
+  rack (< 3)
   rack-attack
   rack-pjax
   rails
