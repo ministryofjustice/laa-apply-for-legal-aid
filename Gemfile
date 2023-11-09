@@ -17,6 +17,8 @@ gem "oauth"
 gem "pg"
 gem "pg_dump_anonymize"
 gem "puma"
+# temp - just to remove noisy httpi warnings during test runs
+gem "rack", "< 3"
 gem "rack-attack"
 gem "rails"
 gem "rexml"
