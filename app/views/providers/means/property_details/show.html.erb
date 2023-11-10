@@ -12,7 +12,7 @@
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".h1-heading") } do %>
 
       <%= form.govuk_text_field :property_value,
-                                label: { text: t(".values_question"), tag: "h2", size: "m" },
+                                label: { text: t(".values_question.#{individual}"), tag: "h2", size: "m" },
                                 hint: { text: t(".values_hint") },
                                 prefix_text: t("currency.gbp"),
                                 classes: "govuk-!-margin-top-6",

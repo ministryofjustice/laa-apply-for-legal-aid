@@ -987,7 +987,9 @@ en:
       property_details:
         show:
           h1-heading: Your client's home
-          values_question: How much is the home they live in worth?
+          values_question:
+            client: How much is the home your client lives in worth?
+            partner: How much is the home your client and their partner live in worth?
           values_hint: You can use property websites to find the estimated value.
           mortgage_question: How much is left to pay on the mortgage?
           mortgage_hint:
@@ -995,7 +997,7 @@ en:
             partner: Check the statement from your client's or their partner's mortgage provider or lender.
           shared_ownership_question:
             client: Does your client own the home with anyone else?
-            partner: Does your client or their partner own the home with anyone else?
+            partner: Does anyone else own part of the house, apart from your client or their partner?
           shared_ownership_options:
             partner_or_ex_partner: Yes, an ex-partner
             housing_assocation_or_landlord: Yes, a housing association or landlord
