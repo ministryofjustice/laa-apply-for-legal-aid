@@ -76,4 +76,8 @@ Rails.application.configure do
 
   # Switch to determine whether or not o collect HMRC data
   config.x.collect_hmrc_data = true
+
+  # This needs adding due to a rails 7.1.1 bug(?!) related to Unsafe threading and AR connection pool issues
+  # see https://github.com/rails/rails/issues/46797 for a good description
+  config.active_job.queue_adapter = :test
 end
