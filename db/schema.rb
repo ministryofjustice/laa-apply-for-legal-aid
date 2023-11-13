@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_09_145448) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_20_085303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -602,6 +602,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_09_145448) do
     t.decimal "substantive_cost_requested"
     t.string "substantive_cost_reasons"
     t.boolean "applicant_in_receipt_of_housing_benefit"
+    t.boolean "copy_case"
+    t.uuid "copy_case_id"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"

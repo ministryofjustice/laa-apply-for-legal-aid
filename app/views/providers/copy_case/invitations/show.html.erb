@@ -1,0 +1,21 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_copy_case_invitation_path,
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :copy_case,
+          yes_no_options,
+          :value,
+          :label,
+          legend: { size: "xl", tag: "h1", text: t(".heading") },
+          hint: { text: t(".hint_html") },
+        ) %>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form:,
+        ) %>
+  <% end %>
+<% end %>

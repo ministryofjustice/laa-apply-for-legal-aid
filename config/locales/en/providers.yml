@@ -317,6 +317,29 @@ en:
             be prosecuted
             need to pay a financial penalty
             have their legal aid stopped and have to pay back the costs
+
+    copy_case:
+      confirmations:
+        show:
+          heading: Search result
+          table_caption: Application to copy to your application
+          legend: Do you want to copy %{application_ref} to your application?
+          summary_list_item:
+            laa_reference: LAA Reference
+            client: Client
+      invitations:
+        show:
+          heading: Do you want to copy an application to your current application?
+          hint_html: |
+            <p>You can do this in family cases where the children involved are related, so you do not have to repeat infomrmation.</p>
+            <p>You cannot copy applications created in CCMS.</p>
+      searches:
+        show:
+          heading: What is the LAA reference of the application you want to copy?
+          search_ref:
+            label: What is the LAA reference of the application you want to copy?
+            hint: For example, 'A-BCD-E1F'.
+
     check_passported_answers:
       show:
         h1-heading: Check your answers
