@@ -1,24 +1,24 @@
-<div class="modal modal-dialog" id="<%= application.application_ref %>-modal" tabindex="0">
-  <div class="modal-content" aria-modal="true" aria-hidden="true" role="dialog" aria-label="Confirm delete application">
-    <span class="close close-modal" aria-label="Close modal">&times;</span>
-    <h1 class="govuk-heading-l modal-dialog" id="modal-title-<%= index %>"><%= t(".page_title") %></h1>
-    <div class="govuk-panel__body">
-      <ul class="govuk-list govuk-!-margin-bottom-4">
-        <li>
-          <strong><%= t(".applicant") %>: </strong>
-          <%= application.applicant_full_name %>
-        </li>
-        <li>
-          <strong><%= t(".reference") %>: </strong>
-          <%= application.application_ref %>
-        </li>
-      </ul>
-    </div>
+<dialog class="app-modal" id="modal-<%= application.id %>">
+  <div class="modal-content">
+    <h1 class="govuk-heading-l"><%= t(".page_title") %></h1>
+
+    <%= govuk_summary_list(actions: false, classes: "govuk-!-display-inline govuk-summary-list--no-border") do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key { t(".applicant") }
+            row.with_value { application.applicant_full_name }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".reference") }
+            row.with_value { application.application_ref }
+          end
+        end %>
 
     <%= govuk_warning_text(text: t(".warning")) %>
-
-    <span class="hidden" aria-hidden="true" id="<%= application.application_ref %>-id"><%= application.id %></span>
-    <button class="govuk-button govuk-button--warning confirm-delete-btn modal-dialog"><%= t(".yes_button") %></button>
-    <button class="govuk-button govuk-!-margin-left-3 close-modal modal-dialog"><%= t(".no_button") %></button>
   </div>
-</div>
+
+  <div class='govuk-button-group'>
+    <button class="govuk-button govuk-button--warning" data-modal-delete-close-target="modal-<%= application.id %>"><%= t(".yes_button") %></button>
+    <button class="govuk-button app-modal-close" data-modal-close-target="modal-<%= application.id %>"><%= t(".no_button") %></button>
+  </div>
+
+</dialog>
