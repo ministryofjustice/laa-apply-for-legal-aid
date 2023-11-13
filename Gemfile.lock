@@ -358,7 +358,7 @@ GEM
     iniparse (1.5.0)
     interception (0.5)
     io-console (0.6.0)
-    irb (1.8.3)
+    irb (1.9.0)
       rdoc
       reline (>= 0.3.8)
     jmespath (1.6.2)
