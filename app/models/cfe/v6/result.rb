@@ -206,6 +206,55 @@ module CFE
         total_deductions - employment_income_fixed_employment_deduction
       end
 
+      ################################################################
+      #                                                              #
+      #  CAPITAL                                                     #
+      #                                                              #
+      ################################################################
+
+      def capital_summary(partner: false)
+        partner ? result_summary[:partner_capital] : result_summary[:capital]
+      end
+
+      def partner_capital
+        assessment[:partner_capital]
+      end
+
+      def partner_capital?
+        assessment.has_key?(:partner_capital)
+      end
+
+      def current_accounts
+        accounts = liquid_capital_items.select{ |item| item[:description].downcase!.include?('current accounts') }
+        accounts.sum { |account| account[:value] }
+      end
+
+      def savings_accounts
+        accounts = liquid_capital_items.select{ |item| item[:description].downcase!.include?('savings accounts') }
+        accounts.sum { |account| account[:value] }
+      end
+
+      def non_liquid_capital_items
+        client_items = capital[:capital_items][:non_liquid].sort_by { |item| item[:description] }
+        partner_items = partner_capital? ? partner_capital[:capital_items][:non_liquid] : []
+        client_items.concat(partner_items).sort_by { |item| item[:description] }
+      end
+
+      def liquid_capital_items
+        client_items = capital[:capital_items][:liquid].sort_by { |item| item[:description] }
+        partner_items = partner_capital? ? partner_capital[:capital_items][:liquid] : []
+        client_items.concat(partner_items).sort_by { |item| item[:description] }
+      end
+
+      def total_savings(partner: false)
+        client_savings = capital_summary[:total_liquid]
+        partner_savings = partner ? capital_summary(partner:true)[:total_liquid] : 0.0
+        client_savings + partner_savings
+      end
+
+      def total_capital
+        capital = result_summary[:capital][:total_capital]
+        partner_capital? ? capital += result_summary[:partner_capital][:total_capital] : capital
       end
     end
   end

@@ -704,6 +704,8 @@ en:
       amount: Amount
     savings_and_investments:
       savings_and_investments: Savings and investments
+      current_accounts: Current accounts
+      savings_accounts: Savings accounts
       assessed_amount: Total savings and investments
       table_caption: Savings and investments
       savings_and_investments_type: Type of savings and investments
