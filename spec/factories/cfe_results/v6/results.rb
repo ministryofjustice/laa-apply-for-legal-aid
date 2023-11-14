@@ -18,6 +18,10 @@ module CFEResults
         trait :ineligible_capital do
           result { CFEResults::V6::MockResults.ineligible_capital.to_json }
         end
+
+        trait :fake_ineligible_disposable_income_and_capital do
+          result { CFEResults::V6::MockResults.fake_ineligible_disposable_income_and_capital.to_json }
+        end
       end
     end
   end

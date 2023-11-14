@@ -521,6 +521,99 @@ module CFEResults
         }
         result
       end
+
+      # This result has has been faked, to cover an example where CFE returns 'ineligible'
+      # for more than one proceeding category, which it appears is currently not possible.
+      # Currently if an applicant is ineligible for disposable income and capital,
+      # CFE returns the disposable income result for proceedings as 'ineligible',
+      # but the capital result for proceedings as 'pending'.
+      # Have added this mock result as there is code to cover the scenario where CFE returns
+      # an ineligible result for more than one category e.g. disposable income and capital
+      # even though it appears this is not currently not happening.
+      # Is this required?
+      def self.fake_ineligible_disposable_income_and_capital
+        result = eligible
+        result[:result_summary][:overall_result][:result] = "ineligible"
+        result[:result_summary][:gross_income] = {
+          total_gross_income: 1000.0,
+          proceeding_types: [{ ccms_code: "SE100E",
+                               upper_threshold: 2657.0,
+                               lower_threshold: 0.0,
+                               result: "eligible",
+                               client_involvement_type: "A" },
+                             { ccms_code: "SE101E",
+                               upper_threshold: 2657.0,
+                               lower_threshold: 0.0,
+                               result: "eligible",
+                               client_involvement_type: "A" }],
+          combined_total_gross_income: 1000.0,
+        }
+        result[:result_summary][:disposable_income] = {
+          dependant_allowance_under_16: 0,
+          dependant_allowance_over_16: 0,
+          dependant_allowance: 0,
+          gross_housing_costs: 0.0,
+          housing_benefit: 0.0,
+          net_housing_costs: 0.0,
+          maintenance_allowance: 0.0,
+          total_outgoings_and_allowances: 0.0,
+          total_disposable_income: 1000.0,
+          employment_income: { gross_income: 0.0,
+                               benefits_in_kind: 0.0,
+                               tax: 0.0,
+                               national_insurance: 0.0,
+                               prisoner_levy: 0.0,
+                               student_debt_repayment: 0.0,
+                               fixed_employment_deduction: 0.0,
+                               net_employment_income: 0.0 },
+          proceeding_types: [{ ccms_code: "SE100E",
+                               upper_threshold: 733.0,
+                               lower_threshold: 315.0,
+                               result: "ineligible",
+                               client_involvement_type: "A" },
+                             { ccms_code: "SE101E",
+                               upper_threshold: 733.0,
+                               lower_threshold: 315.0,
+                               result: "ineligible",
+                               client_involvement_type: "A" }],
+          combined_total_disposable_income: 1000.0,
+          combined_total_outgoings_and_allowances: 0.0,
+          partner_allowance: 0,
+          lone_parent_allowance: 0,
+          income_contribution: 0.0,
+        }
+        result[:result_summary][:capital] = {
+          pensioner_disregard_applied: 0.0,
+          total_liquid: 500_000.0,
+          total_non_liquid: 0.0,
+          total_vehicle: 0.0,
+          total_property: 0.0,
+          total_mortgage_allowance: 999_999_999_999.0,
+          total_capital: 500_000.0,
+          subject_matter_of_dispute_disregard: 0.0,
+          assessed_capital: 500_000.0,
+          total_capital_with_smod: 500_000.0,
+          disputed_non_property_disregard: 0,
+          proceeding_types: [
+            { ccms_code: "SE097A",
+              upper_threshold: 8000.0,
+              lower_threshold: 3000.0,
+              result: "ineligible",
+              client_involvement_type: "A" },
+            { ccms_code: "SE101E",
+              upper_threshold: 8000.0,
+              lower_threshold: 3000.0,
+              result: "ineligible",
+              client_involvement_type: "A" },
+          ],
+          combined_disputed_capital: 0,
+          combined_non_disputed_capital: 500_000.0,
+          capital_contribution: 497_000.0,
+          pensioner_capital_disregard: 0.0,
+          combined_assessed_capital: 500_000.0,
+        }
+        result
+      end
     end
   end
 end

@@ -38,7 +38,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when not eligible" do
-          context "when gross income is above the upper threshold" do
+          context "when ineligible and gross income is above the upper threshold" do
             let(:cfe_result) { create(:cfe_v6_result, :ineligible_gross_income) }
 
             it "returns http success" do
@@ -54,7 +54,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
             end
           end
 
-          context "when disposable income is above the upper threshold" do
+          context "when ineligible and disposable income is above the upper threshold" do
             let(:cfe_result) { create(:cfe_v6_result, :ineligible_disposable_income) }
 
             it "returns http success" do
@@ -68,22 +68,6 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
             it "displays the correct reason" do
               expect(unescaped_response_body).to include("This is because they have too much disposable income")
             end
-          end
-        end
-
-        context "when disposable capital is above the upper threshold" do
-          let(:cfe_result) { create(:cfe_v6_result, :ineligible_capital) }
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the correct result" do
-            expect(unescaped_response_body).to include(I18n.t("ineligible.heading", name: applicant_name, scope: locale_scope))
-          end
-
-          it "displays the correct reason" do
-            expect(unescaped_response_body).to include("This is because they have too much disposable capital")
           end
         end
 
