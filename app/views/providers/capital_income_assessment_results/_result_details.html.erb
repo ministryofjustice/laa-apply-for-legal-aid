@@ -30,7 +30,7 @@
       <% end %>
 
       <%= render "deductions" %>
-      <%= render "disposable_income" %>
+      <%= render("disposable_income", individual: "Partner") %>
     <% end %>
 
     <%= accordion.with_section(heading_text: t(".capital_calculation")) do %>

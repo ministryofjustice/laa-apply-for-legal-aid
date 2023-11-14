@@ -5,6 +5,24 @@ module CFE
         partner ? assessment[:partner_gross_income] : assessment[:gross_income]
       end
 
+      def gross_income_summary(partner: false)
+        partner ? result_summary[:partner_gross_income] : result_summary[:gross_income]
+      end
+
+      def total_gross_income_assessed(partner: false)
+        gross_income_summary(partner:)[:total_gross_income]
+      end
+
+      def total_gross_income(partner: false)
+        total_gross_income_assessed(partner:)
+      end
+
+      ################################################################
+      #                                                              #
+      #  DISPOSABLE INCOME                                           #
+      #                                                              #
+      ################################################################
+
       def disposable_income_summary(partner: false)
         partner ? result_summary[:partner_disposable_income] : result_summary[:disposable_income]
       end
@@ -89,15 +107,18 @@ module CFE
         monthly_income_equivalents(partner:)[:pension]
       end
 
-      # def total_monthly_income(partner: false)
-      #   mei_pension(partner:) + mei_student_loan(partner:)
-      #   + mei_property_or_lodger(partner:) + mei_maintenance_in(partner:)
-      #   + mei_friends_or_family(partner:) + monthly_state_benefits(partner:)
-      # end
-      #
-      # def total_monthly_income_including_employment_income(partner: false)
-      #   total_monthly_income(partner:) + employment_income_gross_income(partner:)
-      # end
+      def total_monthly_income(partner: false)
+        mei_pension(partner:) + mei_student_loan(partner:)
+        + mei_property_or_lodger(partner:) + mei_maintenance_in(partner:)
+        + mei_friends_or_family(partner:) + monthly_state_benefits(partner:)
+      end
+
+      def total_monthly_income_including_employment_income(partner: false)
+        client_total = total_monthly_income + employment_income_gross_income
+        partner_total = partner ? total_monthly_income(partner:) + employment_income_gross_income(partner:) : 0.0
+        client_total + partner_total
+      end
+
 
       ################################################################
       #                                                              #
@@ -130,7 +151,10 @@ module CFE
       end
 
       def total_monthly_outgoings_including_tax_and_ni(partner: false)
-        total_monthly_outgoings(partner:) - employment_income_tax(partner:) - employment_income_national_insurance(partner:)
+        client_total = total_monthly_outgoings - employment_income_tax - employment_income_national_insurance
+        partner_total = partner ? (total_monthly_outgoings(partner:) - employment_income_tax(partner:) - employment_income_national_insurance(partner:)) : 0.0
+        client_total + partner_total
+      end
       end
     end
   end
