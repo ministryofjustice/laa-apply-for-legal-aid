@@ -120,7 +120,7 @@ Feature: Means report
 
     And the Property details questions should exist:
       | question |
-      | How much is the home they live in worth? |
+      | How much is the home your client lives in worth? |
       | How much is left to pay on the mortgage? |
       | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
@@ -294,7 +294,7 @@ Feature: Means report
 
     And the Property details questions should exist:
       | question |
-      | How much is the home they live in worth? |
+      | How much is the home your client lives in worth? |
       | How much is left to pay on the mortgage? |
       |Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
