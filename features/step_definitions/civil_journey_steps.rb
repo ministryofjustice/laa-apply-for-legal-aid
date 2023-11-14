@@ -979,15 +979,15 @@ Then("the answer for all {string} categories should be {string}") do |field_name
 end
 
 Then("the delete modal should open") do
-  expect(page).to have_css(".modal-dialog")
+  expect(page).to have_css(".app-modal")
 end
 
 Then("I click the close button for the modal") do
-  find(".close").click
+  find(".app-modal-close").click
 end
 
 Then("the delete modal should not be visible") do
-  expect(page).not_to have_css("modal-dialog")
+  expect(page).not_to have_css(".app-modal")
 end
 
 Then("I select a proceeding type and continue") do
