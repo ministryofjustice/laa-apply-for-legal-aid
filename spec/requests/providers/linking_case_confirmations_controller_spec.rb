@@ -39,6 +39,16 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
       linked_application
     end
 
+    context "when form submitted with no params" do
+      let(:params) { { linked_application: { link_type_code: "" }, continue_button: "Save and continue" } }
+
+      it "stays on the page and shows a validation error" do
+        patch_request
+        expect(response).to have_http_status(:ok)
+        expect(page).to have_error_message("can't be blank")
+      end
+    end
+
     context "when form submitted with Save as draft button" do
       let(:params) { { linked_application: { link_type_code: "" }, draft_button: "Save and come back later" } }
 
@@ -57,7 +67,7 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
 
       it "redirects to address page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
       end
     end
 
@@ -68,9 +78,9 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
         expect { patch_request }.to change { linked_application.reload.link_type_code }.from(nil).to("LEGAL")
       end
 
-      it "redirects to address page" do
+      it "redirects to NINO page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
       end
     end
 
@@ -81,9 +91,9 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
         expect { patch_request }.to change(LinkedApplication, :count).from(1).to(0)
       end
 
-      it "redirects to address page" do
+      it "redirects to NINO page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
       end
     end
   end

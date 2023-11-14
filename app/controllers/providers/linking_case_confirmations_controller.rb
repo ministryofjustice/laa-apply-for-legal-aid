@@ -1,7 +1,12 @@
 module Providers
   class LinkingCaseConfirmationsController < ProviderBaseController
     def show
-      @form = LinkingCase::ConfirmationForm.new(model: linked_application)
+      if legal_aid_application.copy_case?
+        destroy_linked_application
+        @form = LinkingCase::ConfirmationForm.new(model: copied_application)
+      else
+        @form = LinkingCase::ConfirmationForm.new(model: linked_application)
+      end
     end
 
     def update
@@ -28,6 +33,10 @@ module Providers
       merge_with_model(linked_application) do
         params.require(:linked_application).permit(:link_type_code)
       end
+    end
+
+    def copied_application
+      @linked_application = LinkedApplication.create!(lead_application_id: legal_aid_application.copy_case_id, associated_application_id: legal_aid_application.id)
     end
 
     def linked_application

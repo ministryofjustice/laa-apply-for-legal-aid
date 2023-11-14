@@ -15,22 +15,29 @@ Background:
   Then I should be on a page with title "Do you want to copy an application to your current application?"
 
 @javascript @vcr
-Scenario: I choose to copy another case's details
-  When I choose a 'Yes' radio button
-  And I click 'Save and continue'
-  Then I should be on a page with title "What is the LAA reference of the application you want to copy?"
-  Then I should be on a page showing "For example, 'A-BCD-E1F'."
-  When I fill "legal-aid-application-search-ref-field" with "L-TVH-U0T"
-  And I click 'Search'
-  Then I should be on a page with title "Search result"
-  And I should be on a page showing "Search result"
-  And I should be on a page showing "Do you want to copy L-TVH-U0T to your application?"
-  When I choose a 'Yes' radio button
-  And I click 'Save and continue'
-  Then I should be on a page with title "Link cases"
-
-@javascript @vcr
-Scenario: I choose not to copy another case's details
+Scenario: I choose to link another case's details when a copy has not been made
   When I choose a 'No' radio button
   And I click 'Save and continue'
   And I should be on a page with title "Do you want to link an application to your application?"
+
+  When I choose a 'Yes' radio button
+  And I click 'Save and continue'
+  Then I should be on a page with title "What is the LAA reference of the application you want to link to?"
+
+  When I fill "legal-aid-application-search-ref-field" with "L-TVH-U0T"
+  And I click 'Search'
+  Then I should be on a page with title "Link cases"
+
+  When I choose a "Yes, there's a family link" radio button
+  And I click "Save and continue"
+  Then I should be on a page with title "Does the client have a National Insurance number?"
+
+@javascript @vcr
+Scenario: I choose not to link another case's details
+  When I choose a 'No' radio button
+  And I click 'Save and continue'
+  Then I should be on a page with title "Do you want to link an application to your application?"
+
+  When I choose a "No" radio button
+  And I click "Save and continue"
+  Then I should be on a page with title "What does your client want legal aid for?"
