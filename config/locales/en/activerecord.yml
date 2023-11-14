@@ -38,7 +38,7 @@ en:
         linked_application:
           attributes:
             lead_application_id:
-              cannot_link_self: Application cannot be linked to itself.
+              cannot_link_self: Application cannot be linked to itself
         hmrc/response:
           attributes:
             use_case:
