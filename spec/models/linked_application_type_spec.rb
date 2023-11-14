@@ -2,16 +2,15 @@ require "rails_helper"
 
 RSpec.describe LinkedApplicationType do
   describe ".all" do
-    it "returns a collection of Link types" do
-      described_class.all.each do |link_type|
-        expect(link_type.respond_to?(:code)).to be true
-        expect(link_type.respond_to?(:description)).to be true
-      end
+    subject(:all_method) { described_class.all }
+
+    it "returns a collection of Link type objects" do
+      expect(all_method).to all(respond_to(:code, :description))
     end
 
     it "returns expected collection attribute values" do
-      expect(described_class.all.map(&:description)).to match_array %w[Family Legal]
-      expect(described_class.all.map(&:code)).to match_array %w[FAMILY LEGAL]
+      expect(all_method.map(&:description)).to match_array %w[Family Legal]
+      expect(all_method.map(&:code)).to match_array %w[FC_LEAD LEGAL]
     end
   end
 end

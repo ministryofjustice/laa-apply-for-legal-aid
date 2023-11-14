@@ -2,7 +2,7 @@ class LinkedApplicationType
   LinkTypeStruct = Struct.new(:code, :description)
 
   LINK_TYPES = [
-    LinkTypeStruct.new(code: "FAMILY", description: "Family"),
+    LinkTypeStruct.new(code: "FC_LEAD", description: "Family"),
     LinkTypeStruct.new(code: "LEGAL", description: "Legal"),
   ].freeze
 
