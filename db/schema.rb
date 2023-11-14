@@ -604,6 +604,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_20_085303) do
     t.boolean "applicant_in_receipt_of_housing_benefit"
     t.boolean "copy_case"
     t.uuid "copy_case_id"
+    t.boolean "link_case"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
