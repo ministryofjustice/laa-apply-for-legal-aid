@@ -187,6 +187,25 @@ module CFE
         partner_total = partner ? (total_monthly_outgoings(partner:) - employment_income_tax(partner:) - employment_income_national_insurance(partner:)) : 0.0
         client_total + partner_total
       end
+
+      ################################################################
+      #                                                              #
+      #  DEDUCTIONS                                                  #
+      #                                                              #
+      ################################################################
+
+      def partner_allowance
+        disposable_income_summary[:partner_allowance]
+      end
+
+      def total_deductions
+        dependants_allowance + disregarded_state_benefits + partner_allowance
+      end
+
+      def total_deductions_including_fixed_employment_allowance
+        total_deductions - employment_income_fixed_employment_deduction
+      end
+
       end
     end
   end
