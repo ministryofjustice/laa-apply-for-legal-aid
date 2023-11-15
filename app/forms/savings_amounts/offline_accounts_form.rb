@@ -66,8 +66,12 @@ module SavingsAmounts
       errors.add :check_box_offline_current_accounts, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
     end
 
+    def has_partner_with_no_contrary_interest?
+      model.legal_aid_application&.applicant&.has_partner_with_no_contrary_interest?
+    end
+
     def error_message_for_no_account_selected
-      I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected")
+      I18n.t("activemodel.errors.models.savings_amount.attributes.base.providers.#{error_key('no_account_selected')}")
     end
   end
 end
