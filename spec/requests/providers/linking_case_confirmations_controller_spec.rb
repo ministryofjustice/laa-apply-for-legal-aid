@@ -45,7 +45,7 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
       it "stays on the page and shows a validation error" do
         patch_request
         expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("can't be blank")
+        expect(page).to have_error_message("Select an option")
       end
     end
 

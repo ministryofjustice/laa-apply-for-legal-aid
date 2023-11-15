@@ -61,7 +61,7 @@ RSpec.describe Providers::LinkingCaseInvitationsController do
       it "stays on the page if there is a validation error" do
         patch_request
         expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("Select yes if you would like to link an application to your application")
+        expect(page).to have_error_message("Select yes if you want to link an application to your application")
       end
     end
   end

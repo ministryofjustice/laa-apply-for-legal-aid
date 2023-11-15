@@ -1,4 +1,4 @@
-Feature: Copy a case's applicable details
+Feature: Linking one application to another application
 
 Background:
   Given the feature flag for linked_applications is enabled
@@ -24,8 +24,26 @@ Scenario: I choose to link another case's details when a copy has not been made
   And I click 'Save and continue'
   Then I should be on a page with title "What is the LAA reference of the application you want to link to?"
 
-  When I fill "legal-aid-application-search-ref-field" with "L-TVH-U0T"
+  When I fill "linked-application-search-ref-field" with "L-TVH-U0T"
   And I click 'Search'
+  Then I should be on a page with title "Link cases"
+
+  When I choose a "Yes, there's a family link" radio button
+  And I click "Save and continue"
+  Then I should be on a page with title "Does the client have a National Insurance number?"
+
+@javascript @vcr
+Scenario: I choose to link another case's details when a copy has been made
+  When I choose a 'Yes' radio button
+  And I click 'Save and continue'
+  Then I should be on a page with title "What is the LAA reference of the application you want to copy?"
+  
+  When I fill "legal-aid-application-search-ref-field" with "L-TVH-U0T"
+  When I click 'Search'
+  Then I should be on a page with title "Search result"
+
+  When I choose a 'Yes' radio button
+  And I click 'Save and continue'
   Then I should be on a page with title "Link cases"
 
   When I choose a "Yes, there's a family link" radio button
