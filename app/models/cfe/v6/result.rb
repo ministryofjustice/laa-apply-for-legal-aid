@@ -18,15 +18,15 @@ module CFE
       end
 
       def ineligible_gross_income?
-        gross_income_results.all? { |result| result == 'ineligible' }
+        gross_income_results.all?("ineligible")
       end
-    
+
       def ineligible_disposable_income?
-        disposable_income_results.all? { |result| result == 'ineligible' }
+        disposable_income_results.all?("ineligible")
       end
-    
+
       def ineligible_disposable_capital?
-        capital_results.all? { |result| result == 'ineligible' }
+        capital_results.all?("ineligible")
       end
     end
   end

@@ -64,7 +64,7 @@ module CFE
         end
       end
 
-      describe "#ineligible_gross_income?" do
+      describe "#ineligible_disposable_income?" do
         context "when overall result is eligible" do
           it "returns false" do
             expect(cfe_result.ineligible_disposable_income?).to be false
