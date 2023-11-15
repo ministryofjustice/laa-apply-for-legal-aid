@@ -460,10 +460,8 @@ en:
             own_home:
               blank: Select yes if they own the home that they live in
             own_vehicle:
-              citizens:
-                blank: Select yes if you own a vehicle
-              providers:
-                blank: Select yes if your client owns a vehicle
+              blank: Select yes if your client owns a vehicle
+              blank_with_partner: Select whether your client or their partner own a vehicle
             property_value:
               blank: Enter how much the home your client lives in is worth
               greater_than_or_equal_to: How much the home your client lives in in must be 0 or more

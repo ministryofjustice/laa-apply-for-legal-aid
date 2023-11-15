@@ -269,10 +269,7 @@ cy:
             own_home:
               blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
             own_vehicle:
-              citizens:
-                blank: elcihev a nwo uoy fi sey tceleS
-              providers:
-                blank: elcihev a snwo tneilc ruoy fi sey tceleS
+              blank: elcihev a snwo tneilc ruoy fi sey tceleS
             property_value:
               blank: emoh s'tneilc ruoy rof eulav detamitse na retnE
               greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
