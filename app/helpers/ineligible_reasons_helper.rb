@@ -14,27 +14,9 @@ private
 
   def ineligible_reasons_array(cfe_result)
     ineligible_reasons_array = []
-    ineligible_reasons_array << "gross income" if ineligible_gross_income?(cfe_result)
-    ineligible_reasons_array << "disposable income" if ineligible_disposable_income?(cfe_result)
-    ineligible_reasons_array << "disposable capital" if ineligible_disposable_capital?(cfe_result)
+    ineligible_reasons_array << "gross income" if cfe_result.ineligible_gross_income?
+    ineligible_reasons_array << "disposable income" if cfe_result.ineligible_disposable_income?(cfe_result)
+    ineligible_reasons_array << "disposable capital" if cfe_result.ineligible_disposable_capital?(cfe_result)
     ineligible_reasons_array
-  end
-
-  def ineligible_gross_income?(cfe_result)
-    return false unless (cfe_result.gross_income_results - %w[ineligible]).empty?
-
-    true
-  end
-
-  def ineligible_disposable_income?(cfe_result)
-    return false unless (cfe_result.disposable_income_results - %w[ineligible]).empty?
-
-    true
-  end
-
-  def ineligible_disposable_capital?(cfe_result)
-    return false unless (cfe_result.capital_results - %w[ineligible]).empty?
-
-    true
   end
 end

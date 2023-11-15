@@ -49,6 +49,48 @@ module CFE
           end
         end
       end
+
+      describe "#ineligible_gross_income?" do
+        context "when overall result is eligible" do
+          it "returns false" do
+            expect(cfe_result.ineligible_gross_income?).to be false
+          end
+        end
+
+        context "when overall result is ineligible because gross income is above upper threshold" do
+          it "returns true" do
+            expect(ineligible_gross_income_result.ineligible_gross_income?).to be true
+          end
+        end
+      end
+
+      describe "#ineligible_gross_income?" do
+        context "when overall result is eligible" do
+          it "returns false" do
+            expect(cfe_result.ineligible_disposable_income?).to be false
+          end
+        end
+
+        context "when overall result is ineligible because disposable income is above upper threshold" do
+          it "returns true" do
+            expect(ineligible_disposable_income_result.ineligible_disposable_income?).to be true
+          end
+        end
+      end
+
+      describe "#ineligible_disposable_capital?" do
+        context "when overall result is eligible" do
+          it "returns false" do
+            expect(cfe_result.ineligible_disposable_capital?).to be false
+          end
+        end
+
+        context "when overall result is ineligible because disposable income is above upper threshold" do
+          it "returns true" do
+            expect(ineligible_capital_result.ineligible_disposable_capital?).to be true
+          end
+        end
+      end
     end
   end
 end
