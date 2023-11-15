@@ -254,12 +254,8 @@ cy:
             has_dependants:
               blank: stnadneped yna sah tneilc ruoy fi sey tceleS
             has_restrictions:
-              citizens:
-                blank: stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
+              blank: stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
                   snoitcirtser era ereht fi sey tceleS
-              providers:
-                blank: stessa rieht tsniaga gniworrob ro gnilles morf tneilc ruoy
-                  tneverp taht snoitcirtser era ereht fi sey tceleS
             open_banking_consents:
               providers:
                 blank: eerga uoy fi sey tceleS
@@ -293,10 +289,7 @@ cy:
             shared_ownership:
               blank: esle enoyna htiw emoh rieht snwo tneilc ruoy fi sey tceleS
             restrictions_details:
-              citizens:
-                blank: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa eht retnE
-              providers:
-                blank: yhw dna ,tsniaga worrob ro lles tonnac tneilc ruoy stessa eht
+              blank: yhw dna ,tsniaga worrob ro lles tonnac tneilc ruoy stessa eht
                   retnE
             substantive_application:
               blank: won noitacilppa evitnatsbus a ekam ot tnaw uoy fi sey tceleS

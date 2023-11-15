@@ -427,10 +427,8 @@ en:
               blank: Select yes if you want to add another proceeding
               must_add_domestic_abuse: You must add at least one domestic abuse proceeding
             has_restrictions:
-              citizens:
-                blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
-              providers:
-                blank: Select yes if your client is prohibited from selling or borrowing against their assets
+              blank: Select yes if your client is prohibited from selling or borrowing against their assets
+              blank_with_partner: Select if your client or their partner is banned from selling or borrowing against their assets
             open_banking_consents:
               providers:
                 blank: Select yes if your client uses online banking
@@ -490,10 +488,8 @@ en:
               not_a_number: *value-1-100
               not_a_number_with_partner: *value-1-100-partner
             restrictions_details:
-              citizens:
-                blank: Enter the assets you cannot sell or borrow against, and why
-              providers:
-                blank: Enter the assets your client cannot sell or borrow against, and why
+              blank: Enter the assets your client cannot sell or borrow against, and why
+              blank_with_partner: Enter which assets your client or their partner cannot sell or borrow against, and why
             substantive_application:
               blank: Select yes if you want to make a substantive application now
             uncategorised_bank_transactions:
