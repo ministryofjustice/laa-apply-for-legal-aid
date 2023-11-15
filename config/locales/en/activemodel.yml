@@ -458,7 +458,8 @@ en:
             full_employment_details:
               blank: Enter your client's employment details
             own_home:
-              blank: Select yes if they own the home that they live in
+              blank: Select whether your client owns the home they live in
+              blank_with_partner: Select whether your client or their partner own the home your client lives in
             own_vehicle:
               blank: Select yes if your client owns a vehicle
               blank_with_partner: Select whether your client or their partner own a vehicle
