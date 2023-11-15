@@ -24,6 +24,7 @@ module Providers
           journey: :provider,
           radio_buttons_input_name: :add_another_vehicle,
           form_params:,
+          error: error_message,
         )
       end
 
@@ -31,6 +32,11 @@ module Providers
         return {} unless params[:binary_choice_form]
 
         params.require(:binary_choice_form).permit(:add_another_vehicle)
+      end
+
+      def error_message
+        key_name = legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? ? "error_with_partner" : "error"
+        I18n.t("providers.add_another_vehicles.show.#{key_name}")
       end
     end
   end
