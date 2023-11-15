@@ -13,14 +13,14 @@ module SavingsAmounts
 
     CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[none_selected]).freeze
 
-    ATTRIBUTES.each do |attribute|
-      check_box_attribute = "check_box_#{attribute}".to_sym
-      validates attribute, presence: true, if: proc { |form| form.send(check_box_attribute).present? }
-    end
-
     attr_accessor(*ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
-    validates(*ATTRIBUTES, allow_blank: true, currency: { greater_than_or_equal_to: 0 })
+    ATTRIBUTES.each do |attribute|
+      check_box_attribute = "check_box_#{attribute}".to_sym
+      validates attribute, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.send(check_box_attribute).present? }
+    end
+
+    validates(*ATTRIBUTES, allow_blank: true, currency: { greater_than_or_equal_to: 0, partner_labels: :has_partner_with_no_contrary_interest? })
 
     before_validation :empty_unchecked_values
 
@@ -36,6 +36,10 @@ module SavingsAmounts
 
     def any_checkbox_checked?
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
+    end
+
+    def has_partner_with_no_contrary_interest?
+      model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
     end
 
   private
@@ -59,7 +63,7 @@ module SavingsAmounts
     end
 
     def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected")
+      I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.#{error_key('none_selected')}")
     end
   end
 end

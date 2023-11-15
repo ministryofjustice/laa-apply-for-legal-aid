@@ -748,25 +748,31 @@ en:
                 none_selected: Select if you have any of these savings or investments
               providers:
                 none_selected: Select if your client has any of these savings or investments
-                no_account_selected: Select if your client has current or savings accounts
+                none_selected_with_partner: Select the savings or investments your client and their partner have, or select 'None of these savings or investments'
+                no_account_selected: Select the bank accounts your client has, or select 'None of these'
+                no_account_selected_with_partner: Select the bank accounts your client and their partner have, or select 'None of these'
                 no_partner_account_selected: Select if the partner has current or savings accounts
             check_box_partner_offline_current_accounts:
               blank: Select if the partner has current or savings accounts
             cash:
-              blank: Enter the total amount of cash savings
-              greater_than_or_equal_to: Total cash savings must be 0 or more
-              not_a_number: Total cash savings must be an amount of money, like 60,000
-              too_many_decimals: Estimated cash value must not include more than 2 decimal numbers
+              blank: Enter the value of money that's not in a bank account for your client
+              greater_than_or_equal_to: The value of money that's not in a bank account must be 0 or more
+              not_a_number: The value of money that's not in a bank account must be an amount of money, like 60,000
+              too_many_decimals: The value of money that's not in a bank account must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of money that's not in a bank account for both your client and their partner
+              greater_than_or_equal_to_with_partner: The value of money that's not in a bank account must be 0 or more
+              not_a_number_with_partner: The value of money that's not in a bank account must be an amount of money, like 60,000
+              too_many_decimals_with_partner: The value of money that's not in a bank account must not include more than 2 decimal numbers
             offline_current_accounts:
-              blank: Enter the estimated total in all current accounts
-              greater_than_or_equal_to: Total in current accounts must be 0 or more
-              not_a_number: Total in current accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in current accounts must not include more than 2 decimal numbers
+              blank: Enter the total amount in your client's current accounts
+              greater_than_or_equal_to: Total in client's current accounts must be 0 or more
+              not_a_number: "Total in client's current accounts must be an amount of money, like 60,000"
+              too_many_decimals: Estimated total in client's current accounts must not include more than 2 decimal numbers
             offline_savings_accounts:
-              blank: Enter the estimated total in all savings accounts
-              greater_than_or_equal_to: Total in savings accounts must be 0 or more
-              not_a_number: Total in savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in savings accounts must not include more than 2 decimal numbers
+              blank: Enter the total amount in your client's savings accounts
+              greater_than_or_equal_to: Total in client's savings accounts must be 0 or more
+              not_a_number: Total in client's savings accounts must be an amount of money, like 60,000
+              too_many_decimals: Estimated total in client's savings accounts must not include more than 2 decimal numbers
             partner_offline_current_accounts:
               blank: Enter the estimated total in the partners' current accounts
               greater_than_or_equal_to: Total in partners' current accounts must be 0 or more
@@ -792,26 +798,46 @@ en:
               greater_than_or_equal_to: Total of life assurance policies must be 0 or more
               not_a_number: Total of life assurance policies must be an amount of money, like 60,000
               too_many_decimals: Estimated life assurance policies value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of life assurance or endowment policies not linked to a mortgage for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of life assurance policies must be 0 or more
+              not_a_number_with_partner: Total of life assurance policies must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated life assurance policies value must not include more than 2 decimal numbers
             national_savings:
               blank: Enter the total value of certificates and bonds
               greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
               not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
+              blank_with_partner: P+++ Enter the value of ISAs, National Savings Certificates and Premium Bonds for both your client and their partner
+              greater_than_or_equal_to_with_partner: P+++ Total of certificates and bonds must be 0 or more
+              not_a_number_with_partner: P+++ Total of certificates and bonds must be an amount of money, like 60,000
+              too_many_decimals_with_partner: P+++ Estimated trust value must not include more than 2 decimal numbers
             other_person_account:
-              blank: Enter the estimated total in other people’s accounts
-              greater_than_or_equal_to: Total in other people’s accounts must be 0 or more
-              not_a_number: Total in other people’s accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated other people’s accounts value must not include more than 2 decimal numbers
+              blank: Enter the estimated total in other people's accounts
+              greater_than_or_equal_to: Total in other people's accounts must be 0 or more
+              not_a_number: Total in other people's accounts must be an amount of money, like 60,000
+              too_many_decimals: Estimated other people's accounts value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value that can be accessed from other people's bank account for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total in other people's accounts must be 0 or more
+              not_a_number_with_partner: Total in other people's accounts must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated other people's accounts value must not include more than 2 decimal numbers
             peps_unit_trusts_capital_bonds_gov_stocks:
               blank: Enter the total value of other investments
               greater_than_or_equal_to: Total of other investments must be 0 or more
               not_a_number: Total of other investments must be an amount of money, like 60,000
               too_many_decimals: Estimated other investments value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the total value of other investments for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of other investments must be 0 or more
+              not_a_number_with_partner: Total of other investments must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated other investments value must not include more than 2 decimal numbers
             plc_shares:
               blank: Enter the total value of shares
               greater_than_or_equal_to: Total of shares must be 0 or more
               not_a_number: Total of shares must be an amount of money, like 60,000
               too_many_decimals: Estimated shares value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of shares in a PLC for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of shares must be 0 or more
+              not_a_number_with_partner: Total of shares must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated shares value must not include more than 2 decimal numbers
         setting:
           attributes:
             mock_true_layer_data:
