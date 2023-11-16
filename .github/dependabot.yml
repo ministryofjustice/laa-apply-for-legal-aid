@@ -37,6 +37,6 @@ updates:
     npm-dependencies:
       # Define patterns to include dependencies in the group (based on # dependency name)
       patterns:
-        - "babel*"
+        - "*babel*"
         - "jest*"  # A wildcard string that matches multiple dependency names syt
         - "stylelint*"
