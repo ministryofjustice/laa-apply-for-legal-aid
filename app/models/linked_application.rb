@@ -4,6 +4,8 @@ class LinkedApplication < ApplicationRecord
 
   validate :cannot_link_self
 
+  validates :link_type_code, inclusion: LinkedApplicationType.all.map(&:code)
+
 private
 
   def cannot_link_self
