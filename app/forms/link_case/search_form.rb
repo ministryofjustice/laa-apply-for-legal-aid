@@ -1,4 +1,4 @@
-module LinkingCase
+module LinkCase
   class SearchForm < BaseForm
     form_for LinkedApplication
 

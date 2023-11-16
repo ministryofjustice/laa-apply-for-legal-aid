@@ -1,4 +1,4 @@
-module LinkingCase
+module LinkCase
   class InvitationForm < BaseForm
     form_for LegalAidApplication
 

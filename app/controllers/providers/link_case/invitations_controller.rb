@@ -4,11 +4,11 @@ module Providers
       prefix_step_with :link_case
 
       def show
-        @form = LinkingCase::InvitationForm.new(model: legal_aid_application)
+        @form = ::LinkCase::InvitationForm.new(model: legal_aid_application)
       end
 
       def update
-        @form = LinkingCase::InvitationForm.new(form_params)
+        @form = ::LinkCase::InvitationForm.new(form_params)
 
         render :show unless save_continue_or_draft(@form)
       end

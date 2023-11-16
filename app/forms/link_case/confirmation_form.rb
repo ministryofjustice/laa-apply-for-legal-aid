@@ -1,4 +1,4 @@
-module LinkingCase
+module LinkCase
   class ConfirmationForm < BaseForm
     form_for LinkedApplication
 

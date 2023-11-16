@@ -8,14 +8,15 @@ module Providers
 
         if legal_aid_application.copy_case?
           destroy_linked_application
-          @form = LinkingCase::ConfirmationForm.new(model: copied_application)
+          @form = ::LinkCase::ConfirmationForm.new(model: copied_application)
         else
-          @form = LinkingCase::ConfirmationForm.new(model: linked_application)
+          @form = ::LinkCase::ConfirmationForm.new(model: linked_application)
         end
       end
 
       def update
         @linked_application_types = LinkedApplicationType.all
+        @form = ::LinkCase::ConfirmationForm.new(form_params)
 
         if @form.link_type_code.eql?("false")
           destroy_linked_application

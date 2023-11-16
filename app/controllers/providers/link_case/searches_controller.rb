@@ -5,11 +5,11 @@ module Providers
 
       def show
         destroy_linked_application
-        @form = LinkingCase::SearchForm.new(model: linked_application)
+        @form = ::LinkCase::SearchForm.new(model: linked_application)
       end
 
       def update
-        @form = LinkingCase::SearchForm.new(form_params.merge(model: linked_application, legal_aid_application:))
+        @form = ::LinkCase::SearchForm.new(form_params.merge(model: linked_application, legal_aid_application:))
 
         render :show unless save_continue_or_draft(@form)
       end
