@@ -7,6 +7,11 @@ module CopyCase
     validates :copied_case_id, presence: true, unless: :draft?
     validates :copy_case_confirmation, presence: true, unless: proc { draft? || copy_case_confirmation.present? }
 
+    after_validation do
+      model.copied_case = false unless copy_case_confirmed?
+      model.copied_case_id = nil unless copy_case_confirmed?
+    end
+
     def save
       return if invalid? || draft? || !copy_case_confirmed?
 
