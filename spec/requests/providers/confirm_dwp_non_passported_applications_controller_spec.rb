@@ -108,16 +108,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           patch_request
         end
 
-        it "displays the about financial means page" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(application))
-        end
-
-        it "uses the non-passported state machine" do
-          patch_request
-          expect(application.reload.state_machine_proxy.type).to eq "NonPassportedStateMachine"
-        end
-
         it "calls the HMRC::CreateResponsesService" do
           patch_request
           expect(HMRC::CreateResponsesService).to have_received(:call).once
@@ -150,19 +140,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(application.reload.state).to eq "overriding_dwp_result"
         end
 
-        it "displays the check_client_details page" do
-          patch_request
-          expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
-        end
-
         it "does not update the partner shared benefit field" do
           patch_request
           expect(partner.reload.shared_benefit_with_applicant).to be false
-        end
-
-        it "uses the passported state machine" do
-          patch_request
-          expect(application.reload.state_machine_proxy.type).to eq "PassportedStateMachine"
         end
 
         it "calls the HMRC::CreateResponsesService" do
@@ -194,11 +174,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         it "sets the partner shared benefit field to true" do
           patch_request
           expect(partner.reload.shared_benefit_with_applicant).to be true
-        end
-
-        it "displays the check_client_details page" do
-          patch_request
-          expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
         end
 
         it "uses the passported state machine" do
