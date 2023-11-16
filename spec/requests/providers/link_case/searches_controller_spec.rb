@@ -55,7 +55,7 @@ RSpec.describe Providers::LinkCase::SearchesController do
     end
 
     context "when search term is blank" do
-      let(:params) { { linked_application: { search_ref: "" }, continue_button: "Save and continue" } }
+      let(:params) { { linked_application: { search_ref: "" }, continue_button: "irrelevant" } }
 
       it "stays on the page and shows a validation error" do
         patch_request
@@ -69,7 +69,7 @@ RSpec.describe Providers::LinkCase::SearchesController do
     end
 
     context "when invalid search term is entered" do
-      let(:params) { { linked_application: { search_ref: "testing" }, continue_button: "Save and continue" } }
+      let(:params) { { linked_application: { search_ref: "testing" }, continue_button: "irrelevant" } }
 
       it "stays on the page and shows a validation error" do
         patch_request
@@ -83,7 +83,7 @@ RSpec.describe Providers::LinkCase::SearchesController do
     end
 
     context "when application reference was not found" do
-      let(:params) { { linked_application: { search_ref: "L-17B-RT1" }, continue_button: "Save and continue" } }
+      let(:params) { { linked_application: { search_ref: "L-17B-RT1" }, continue_button: "irrelevant" } }
 
       it "stays on the page and shows a validation error" do
         patch_request
@@ -97,7 +97,7 @@ RSpec.describe Providers::LinkCase::SearchesController do
     end
 
     context "when form submitted using Save as draft button" do
-      let(:params) { { linked_application: { search_ref: "L-TVH-U0T" }, draft_button: "Save and come back later" } }
+      let(:params) { { linked_application: { search_ref: "L-TVH-U0T" }, draft_button: "irrelevant" } }
 
       it "redirects provider to provider's applications page" do
         patch_request

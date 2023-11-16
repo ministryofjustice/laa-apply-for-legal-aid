@@ -26,7 +26,7 @@ module LinkingCase
       errors.add(:search_ref, :not_found) unless case_found?
     end
 
-    # TODO: restrict to firm / provider applications
+    # TODO: restrict to firm / provider applications - will be done in AP-4510
     def case_found?
       @linkable_case = LegalAidApplication.find_by(application_ref: search_ref)
     end

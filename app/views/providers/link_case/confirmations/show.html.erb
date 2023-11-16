@@ -21,7 +21,7 @@
         end %>
 
     <%= form.govuk_radio_buttons_fieldset(:link_type_code, legend: { size: "l", tag: "h2", text: t(".question", application_ref: @linked_application.lead_application.application_ref) }) do %>
-      <% LinkedApplicationType.all.each do |f| %>
+      <% @linked_application_types.each do |f| %>
         <%= form.govuk_radio_button :link_type_code, f.code, label: { text: t(".options.#{f.description.downcase}_link.label") }, hint: { text: t(".options.#{f.description.downcase}_link.hint") }, link_errors: true %>
       <% end %>
       <%= form.govuk_radio_button(:link_type_code, false, label: { text: t("generic.no") }) %>

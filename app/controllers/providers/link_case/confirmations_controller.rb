@@ -4,6 +4,8 @@ module Providers
       prefix_step_with :link_case
 
       def show
+        @linked_application_types = LinkedApplicationType.all
+
         if legal_aid_application.copy_case?
           destroy_linked_application
           @form = LinkingCase::ConfirmationForm.new(model: copied_application)
