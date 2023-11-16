@@ -35,8 +35,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
             .to(source_application)
         end
 
-        it "stores the copy_case_id" do
-          expect { call_save }.to change { legal_aid_application.reload.copy_case_id }
+        it "stores the copied_case_id" do
+          expect { call_save }.to change { legal_aid_application.reload.copied_case_id }
             .from(nil)
             .to(source_application.id)
         end
@@ -56,8 +56,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
             .from(nil)
         end
 
-        it "does not store the copy_case_id" do
-          expect { call_save }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+        it "does not store the copied_case_id" do
+          expect { call_save }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
         end
 
         it "adds the appropriate error message" do
@@ -77,8 +77,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
         expect(instance.errors.messages.values.flatten).to include("The application reference entered cannot be found")
       end
 
-      it "does not store the copy_case_id" do
-        expect { call_save }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+      it "does not store the copied_case_id" do
+        expect { call_save }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
       end
     end
 
@@ -92,8 +92,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
         expect(instance.errors.messages.values.flatten).to include("Enter an application reference to search for")
       end
 
-      it "does not store the copy_case_id" do
-        expect { call_save }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+      it "does not store the copied_case_id" do
+        expect { call_save }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
       end
     end
   end
@@ -111,8 +111,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
         expect(instance).to be_valid
       end
 
-      it "does not store the copy_case_id" do
-        expect { save_as_draft }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+      it "does not store the copied_case_id" do
+        expect { save_as_draft }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
       end
     end
 
@@ -126,8 +126,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
         expect(instance).to be_valid
       end
 
-      it "does not store the copy_case_id" do
-        expect { save_as_draft }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+      it "does not store the copied_case_id" do
+        expect { save_as_draft }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
       end
     end
 
@@ -141,8 +141,8 @@ RSpec.describe CopyCase::SearchForm, type: :form do
         expect(instance).to be_valid
       end
 
-      it "does not store the copy_case_id" do
-        expect { save_as_draft }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+      it "does not store the copied_case_id" do
+        expect { save_as_draft }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
       end
     end
   end

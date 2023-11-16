@@ -411,7 +411,7 @@ en:
               blank: Enter details of the incident
         legal_aid_application:
           attributes:
-            copy_case:
+            copied_case:
               blank: Select yes if you want to copy an application
             copy_case_confirmation:
               blank: Select yes if you want to copy the application

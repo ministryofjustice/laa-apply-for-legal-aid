@@ -2,9 +2,9 @@ module CopyCase
   class ConfirmationForm < BaseForm
     form_for LegalAidApplication
 
-    attr_accessor :copy_case_id, :copy_case_confirmation
+    attr_accessor :copied_case_id, :copy_case_confirmation
 
-    validates :copy_case_id, presence: true, unless: :draft?
+    validates :copied_case_id, presence: true, unless: :draft?
     validates :copy_case_confirmation, presence: true, unless: proc { draft? || copy_case_confirmation.present? }
 
     def save
@@ -16,7 +16,7 @@ module CopyCase
     alias_method :save!, :save
 
     def legal_aid_application_to_copy
-      @legal_aid_application_to_copy ||= LegalAidApplication.find(copy_case_id)
+      @legal_aid_application_to_copy ||= LegalAidApplication.find(copied_case_id)
     end
 
     def legal_aid_application

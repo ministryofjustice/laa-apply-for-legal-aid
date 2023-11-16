@@ -2,8 +2,8 @@ module CopyCase
   class InvitationForm < BaseForm
     form_for LegalAidApplication
 
-    attr_accessor :copy_case
+    attr_accessor :copied_case
 
-    validates :copy_case, presence: true, unless: proc { draft? || copy_case.present? }
+    validates :copied_case, presence: true, unless: proc { draft? || copied_case.present? }
   end
 end

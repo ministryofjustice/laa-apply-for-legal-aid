@@ -16,7 +16,7 @@ module CopyCase
     def save
       return false unless valid?
 
-      model.update!(copy_case_id: copiable_case.id) unless draft?
+      model.update!(copied_case_id: copiable_case.id) unless draft?
 
       true
     end

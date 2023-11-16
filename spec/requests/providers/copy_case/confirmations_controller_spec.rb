@@ -23,7 +23,7 @@ RSpec.describe Providers::CopyCase::ConfirmationsController do
 
     context "when the provider is authenticated" do
       before do
-        legal_aid_application.update!(copy_case_id: source_application.id)
+        legal_aid_application.update!(copied_case_id: source_application.id)
       end
 
       it "renders page with expected headings" do
@@ -49,7 +49,7 @@ RSpec.describe Providers::CopyCase::ConfirmationsController do
     end
 
     context "when yes chosen" do
-      let(:params) { { legal_aid_application: { copy_case_id: source_application.id, copy_case_confirmation: "true" } } }
+      let(:params) { { legal_aid_application: { copied_case_id: source_application.id, copy_case_confirmation: "true" } } }
 
       it "redirects to the has national insurance number page" do
         patch_request
@@ -62,7 +62,7 @@ RSpec.describe Providers::CopyCase::ConfirmationsController do
     end
 
     context "when no chosen" do
-      let(:params) { { legal_aid_application: { copy_case_id: source_application.id, copy_case_confirmation: "false" } } }
+      let(:params) { { legal_aid_application: { copied_case_id: source_application.id, copy_case_confirmation: "false" } } }
 
       it "redirects to the copy case invitation page" do
         patch_request
@@ -75,7 +75,7 @@ RSpec.describe Providers::CopyCase::ConfirmationsController do
     end
 
     context "when no answer chosen" do
-      let(:params) { { legal_aid_application: { copy_case_id: source_application.id } } }
+      let(:params) { { legal_aid_application: { copied_case_id: source_application.id } } }
 
       it "stays on the page and displays validation error" do
         patch_request
@@ -85,7 +85,7 @@ RSpec.describe Providers::CopyCase::ConfirmationsController do
     end
 
     context "when form submitted using Save as draft button" do
-      let(:params) { { legal_aid_application: { copy_case_id: source_application.id }, draft_button: "irrelevant" } }
+      let(:params) { { legal_aid_application: { copied_case_id: source_application.id }, draft_button: "irrelevant" } }
 
       it "redirects provider to provider's applications page" do
         patch_request

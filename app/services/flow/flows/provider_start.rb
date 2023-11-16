@@ -51,7 +51,7 @@ module Flow
         copy_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },
           forward: lambda do |application|
-            if application.copy_case?
+            if application.copied_case?
               :copy_case_searches
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types

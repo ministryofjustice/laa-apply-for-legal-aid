@@ -8,7 +8,7 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
   let(:params) do
     {
       model: legal_aid_application,
-      copy_case:,
+      copied_case:,
     }
   end
 
@@ -16,43 +16,43 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
     subject(:call_save) { instance.save }
 
     context "with yes chosen" do
-      let(:copy_case) { "true" }
+      let(:copied_case) { "true" }
 
-      it "updates copy_case" do
-        expect { call_save }.to change { legal_aid_application.reload.copy_case }
+      it "updates copied_case" do
+        expect { call_save }.to change { legal_aid_application.reload.copied_case }
           .from(nil)
           .to(true)
       end
 
       context "when no previously chosen" do
-        before { legal_aid_application.update!(copy_case: false) }
+        before { legal_aid_application.update!(copied_case: false) }
 
-        it "updates copy_case to true" do
-          expect { call_save }.to change(legal_aid_application, :copy_case).from(false).to(true)
+        it "updates copied_case to true" do
+          expect { call_save }.to change(legal_aid_application, :copied_case).from(false).to(true)
         end
       end
     end
 
     context "with no chosen" do
-      let(:copy_case) { "false" }
+      let(:copied_case) { "false" }
 
-      it "updates copy_case" do
-        expect { call_save }.to change { legal_aid_application.reload.copy_case }
+      it "updates copied_case" do
+        expect { call_save }.to change { legal_aid_application.reload.copied_case }
           .from(nil)
           .to(false)
       end
 
       context "when yes previously chosen" do
-        before { legal_aid_application.update!(copy_case: true) }
+        before { legal_aid_application.update!(copied_case: true) }
 
-        it "updates copy_case to false" do
-          expect { call_save }.to change(legal_aid_application, :copy_case).from(true).to(false)
+        it "updates copied_case to false" do
+          expect { call_save }.to change(legal_aid_application, :copied_case).from(true).to(false)
         end
       end
     end
 
     context "with no answer chosen" do
-      let(:copy_case) { "" }
+      let(:copied_case) { "" }
 
       it "is invalid" do
         call_save
@@ -71,35 +71,35 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
     subject(:save_as_draft) { instance.save_as_draft }
 
     context "with yes chosen" do
-      let(:copy_case) { "true" }
+      let(:copied_case) { "true" }
 
-      it "updates copy_case" do
-        expect { save_as_draft }.to change(legal_aid_application, :copy_case)
+      it "updates copied_case" do
+        expect { save_as_draft }.to change(legal_aid_application, :copied_case)
           .from(nil)
           .to(true)
       end
     end
 
     context "with no chosen" do
-      let(:copy_case) { "false" }
+      let(:copied_case) { "false" }
 
-      it "updates copy_case" do
-        expect { save_as_draft }.to change(legal_aid_application, :copy_case)
+      it "updates copied_case" do
+        expect { save_as_draft }.to change(legal_aid_application, :copied_case)
           .from(nil)
           .to(false)
       end
     end
 
     context "with no answer chosen" do
-      let(:copy_case) { "" }
+      let(:copied_case) { "" }
 
       it "is valid" do
         save_as_draft
         expect(instance).to be_valid
       end
 
-      it "does not update copy_case" do
-        expect { save_as_draft }.not_to change(legal_aid_application, :copy_case).from(nil)
+      it "does not update copied_case" do
+        expect { save_as_draft }.not_to change(legal_aid_application, :copied_case).from(nil)
       end
     end
   end

@@ -46,8 +46,8 @@ RSpec.describe Providers::CopyCase::SearchesController do
         let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
         let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: legal_aid_application.provider) }
 
-        it "stores the copy_case_id" do
-          expect { patch_request }.to change { legal_aid_application.reload.copy_case_id }
+        it "stores the copied_case_id" do
+          expect { patch_request }.to change { legal_aid_application.reload.copied_case_id }
             .from(nil)
             .to(source_application.id)
         end
@@ -69,7 +69,7 @@ RSpec.describe Providers::CopyCase::SearchesController do
         end
 
         it "does not store the source application's id" do
-          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+          expect { patch_request }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe Providers::CopyCase::SearchesController do
         end
 
         it "does not store the source application's id" do
-          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+          expect { patch_request }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
         end
       end
 
@@ -97,7 +97,7 @@ RSpec.describe Providers::CopyCase::SearchesController do
         end
 
         it "does not store the source application's id" do
-          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+          expect { patch_request }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
         end
       end
 
@@ -111,7 +111,7 @@ RSpec.describe Providers::CopyCase::SearchesController do
         end
 
         it "does not store the source application's id" do
-          expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+          expect { patch_request }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
         end
       end
     end
@@ -129,7 +129,7 @@ RSpec.describe Providers::CopyCase::SearchesController do
       end
 
       it "does not store the source application's id" do
-        expect { patch_request }.not_to change { legal_aid_application.reload.copy_case_id }.from(nil)
+        expect { patch_request }.not_to change { legal_aid_application.reload.copied_case_id }.from(nil)
       end
     end
   end

@@ -6,13 +6,13 @@ RSpec.describe CopyCase::ConfirmationForm, type: :form do
   let(:params) do
     {
       model: legal_aid_application,
-      copy_case_id:,
+      copied_case_id:,
       copy_case_confirmation:,
     }
   end
 
   let(:legal_aid_application) { create(:legal_aid_application) }
-  let(:copy_case_id) { source_application.id }
+  let(:copied_case_id) { source_application.id }
 
   let(:source_application) do
     create(:legal_aid_application,

@@ -18,7 +18,7 @@
           end
         end %>
 
-    <%= form.hidden_field :copy_case_id, value: @copiable_case.id %>
+    <%= form.hidden_field :copied_case_id, value: @copiable_case.id %>
 
     <%= form.govuk_collection_radio_buttons(
           :copy_case_confirmation,

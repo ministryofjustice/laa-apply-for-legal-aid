@@ -49,7 +49,7 @@ RSpec.describe Providers::CopyCase::InvitationsController do
     end
 
     context "when yes chosen" do
-      let(:params) { { legal_aid_application: { copy_case: "true" } } }
+      let(:params) { { legal_aid_application: { copied_case: "true" } } }
 
       it "redirects to the copy case searches page" do
         patch_request
@@ -57,12 +57,12 @@ RSpec.describe Providers::CopyCase::InvitationsController do
       end
 
       it "records the answer" do
-        expect { patch_request }.to change { legal_aid_application.reload.copy_case }.from(nil).to(true)
+        expect { patch_request }.to change { legal_aid_application.reload.copied_case }.from(nil).to(true)
       end
     end
 
     context "when no chosen" do
-      let(:params) { { legal_aid_application: { copy_case: "false" } } }
+      let(:params) { { legal_aid_application: { copied_case: "false" } } }
 
       context "without proceedings" do
         before { legal_aid_application.proceedings.destroy_all }
@@ -73,7 +73,7 @@ RSpec.describe Providers::CopyCase::InvitationsController do
         end
 
         it "records the answer" do
-          expect { patch_request }.to change { legal_aid_application.reload.copy_case }.from(nil).to(false)
+          expect { patch_request }.to change { legal_aid_application.reload.copied_case }.from(nil).to(false)
         end
       end
 
@@ -86,13 +86,13 @@ RSpec.describe Providers::CopyCase::InvitationsController do
         end
 
         it "records the answer" do
-          expect { patch_request }.to change { legal_aid_application.reload.copy_case }.from(nil).to(false)
+          expect { patch_request }.to change { legal_aid_application.reload.copied_case }.from(nil).to(false)
         end
       end
     end
 
     context "when no answer chosen" do
-      let(:params) { { legal_aid_application: { copy_case: "" }, continue_button: "Save and continue" } }
+      let(:params) { { legal_aid_application: { copied_case: "" }, continue_button: "irrelevant" } }
 
       it "stays on the page and displays validation error" do
         patch_request
@@ -102,7 +102,7 @@ RSpec.describe Providers::CopyCase::InvitationsController do
     end
 
     context "when form submitted using Save as draft button" do
-      let(:params) { { legal_aid_application: { copy_case: "" }, draft_button: "irrelevant" } }
+      let(:params) { { legal_aid_application: { copied_case: "" }, draft_button: "irrelevant" } }
 
       it "redirects provider to provider's applications page" do
         patch_request
@@ -114,7 +114,7 @@ RSpec.describe Providers::CopyCase::InvitationsController do
       end
 
       it "does not record the answer" do
-        expect { patch_request }.not_to change { legal_aid_application.reload.copy_case }.from(nil)
+        expect { patch_request }.not_to change { legal_aid_application.reload.copied_case }.from(nil)
       end
     end
   end
