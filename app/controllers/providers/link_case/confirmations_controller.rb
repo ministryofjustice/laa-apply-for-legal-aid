@@ -15,7 +15,7 @@ module Providers
       end
 
       def update
-        @form = LinkingCase::ConfirmationForm.new(form_params)
+        @linked_application_types = LinkedApplicationType.all
 
         if @form.link_type_code.eql?("false")
           destroy_linked_application
