@@ -523,14 +523,14 @@ module CFEResults
       end
 
       # This result has has been faked, to cover an example where CFE returns 'ineligible'
-      # for more than one proceeding category, which it appears is currently not possible.
-      # Currently if an applicant is ineligible for disposable income and capital,
+      # for more than one proceeding category, which is currently not possible.
+      # Currently, for example, if an applicant is ineligible for disposable income and capital,
       # CFE returns the disposable income result for proceedings as 'ineligible',
       # but the capital result for proceedings as 'pending'.
       # Have added this mock result as there is code to cover the scenario where CFE returns
       # an ineligible result for more than one category e.g. disposable income and capital
-      # even though it appears this is not currently not happening.
-      # Is this required?
+      # even though it his is not currently not happening as there is a CFE ticket to introduce
+      # this functionality. See https://dsdmoj.atlassian.net/browse/LEP-349
       def self.fake_ineligible_disposable_income_and_capital
         result = eligible
         result[:result_summary][:overall_result][:result] = "ineligible"

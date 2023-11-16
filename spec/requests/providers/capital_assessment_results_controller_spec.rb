@@ -44,7 +44,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
           end
 
           it "displays the correct result" do
-            expect(unescaped_response_body).to include(I18n.t("ineligible.heading", name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include("#{applicant_name} is unlikely to get legal aid")
           end
 
           it "displays the correct reason" do
