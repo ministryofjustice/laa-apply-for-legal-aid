@@ -850,16 +850,16 @@ en:
               greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
               not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
-              blank_with_partner: P+++ Enter the value of ISAs, National Savings Certificates and Premium Bonds for both your client and their partner
-              greater_than_or_equal_to_with_partner: P+++ Total of certificates and bonds must be 0 or more
-              not_a_number_with_partner: P+++ Total of certificates and bonds must be an amount of money, like 60,000
-              too_many_decimals_with_partner: P+++ Estimated trust value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of ISAs, National Savings Certificates and Premium Bonds for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of certificates and bonds must be 0 or more
+              not_a_number_with_partner: Total of certificates and bonds must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated trust value must not include more than 2 decimal numbers
             other_person_account:
               blank: Enter the estimated total in other people's accounts
               greater_than_or_equal_to: Total in other people's accounts must be 0 or more
               not_a_number: Total in other people's accounts must be an amount of money, like 60,000
               too_many_decimals: Estimated other people's accounts value must not include more than 2 decimal numbers
-              blank_with_partner: Enter the value that can be accessed from other people's bank account for both your client and their partner
+              blank_with_partner: Enter the value that can be accessed from another person's bank account for both your client and their partner
               greater_than_or_equal_to_with_partner: Total in other people's accounts must be 0 or more
               not_a_number_with_partner: Total in other people's accounts must be an amount of money, like 60,000
               too_many_decimals_with_partner: Estimated other people's accounts value must not include more than 2 decimal numbers
