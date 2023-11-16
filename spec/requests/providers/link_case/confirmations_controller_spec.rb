@@ -91,9 +91,9 @@ RSpec.describe Providers::LinkCase::ConfirmationsController do
         expect { patch_request }.to change(LinkedApplication, :count).from(1).to(0)
       end
 
-      it "redirects to NINO page" do
+      it "redirects to linking case invitations page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_link_case_invitation_path(legal_aid_application))
       end
     end
   end

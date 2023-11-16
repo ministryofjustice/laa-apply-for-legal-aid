@@ -87,7 +87,9 @@ module Flow
         },
         link_case_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_link_case_confirmation_path(application) },
-          forward: :has_national_insurance_numbers,
+          forward: lambda do |_application, options|
+            options[:link_case_confirmed] ? :has_national_insurance_numbers : :link_case_invitations
+          end,
         },
         about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },

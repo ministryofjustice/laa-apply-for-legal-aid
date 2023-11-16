@@ -19,7 +19,7 @@ module Providers
           destroy_linked_application
         end
 
-        render :show unless save_continue_or_draft(@form)
+        render :show unless save_continue_or_draft(@form, link_case_confirmed: !@form.link_type_code.eql?("false"))
       end
 
     private
@@ -34,6 +34,8 @@ module Providers
 
       def form_params
         merge_with_model(linked_application) do
+          next {} unless params[:linked_application]
+
           params.require(:linked_application).permit(:link_type_code)
         end
       end
