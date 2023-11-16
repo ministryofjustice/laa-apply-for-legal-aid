@@ -165,7 +165,6 @@ Rails.application.routes.draw do
         resource :search, only: %i[show update]
         resource :confirmation, only: %i[show update]
       end
-      resource :copy_case_confirmation, only: %i[show update]
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
