@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::LinkingCaseConfirmationsController do
+RSpec.describe Providers::LinkCase::ConfirmationsController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:linkable_application) { create(:legal_aid_application, :with_applicant) }
   let(:linked_application) { create(:linked_application, lead_application_id: linkable_application.id, associated_application_id: legal_aid_application.id) }
@@ -8,8 +8,8 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
 
   before { login }
 
-  describe "GET /providers/applications/:legal_aid_application_id/linking_case_confirmation" do
-    subject(:get_request) { get providers_legal_aid_application_linking_case_confirmation_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/link_case/confirmation" do
+    subject(:get_request) { get providers_legal_aid_application_link_case_confirmation_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -32,8 +32,8 @@ RSpec.describe Providers::LinkingCaseConfirmationsController do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/linking_case_confirmation" do
-    subject(:patch_request) { patch providers_legal_aid_application_linking_case_confirmation_path(legal_aid_application), params: }
+  describe "PATCH /providers/applications/:legal_aid_application_id/link_case/confirmation" do
+    subject(:patch_request) { patch providers_legal_aid_application_link_case_confirmation_path(legal_aid_application), params: }
 
     before do
       linked_application

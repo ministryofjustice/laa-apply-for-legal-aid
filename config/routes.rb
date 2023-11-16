@@ -165,6 +165,11 @@ Rails.application.routes.draw do
         resource :search, only: %i[show update]
         resource :confirmation, only: %i[show update]
       end
+      namespace :link_case do
+        resource :invitation, only: %i[show update]
+        resource :search, only: %i[show update]
+        resource :confirmation, only: %i[show update]
+      end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
@@ -205,9 +210,6 @@ Rails.application.routes.draw do
       resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
       resource :nature_of_urgencies, only: %i[show update], controller: "application_merits_task/nature_of_urgencies"
       resource :merits_task_list, only: %i[show update]
-      resource :linking_case_invitation, only: %i[show update]
-      resource :linking_case_search, only: %i[show new update]
-      resource :linking_case_confirmation, only: %i[show update]
 
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
         get "/list", to: "uploaded_evidence_collections#list"

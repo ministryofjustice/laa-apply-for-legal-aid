@@ -54,7 +54,7 @@ module Flow
             if application.copy_case?
               :copy_case_searches
             else
-              :linking_case_invitations
+              :link_case_invitations
             end
           end,
           check_answers: :check_provider_answers,
@@ -67,26 +67,26 @@ module Flow
         copy_case_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_confirmation_path(application) },
           forward: lambda do |_application, options|
-            options[:copy_case_confirmed] ? :linking_case_confirmations : :copy_case_invitations
+            options[:copy_case_confirmed] ? :link_case_confirmations : :copy_case_invitations
           end,
           check_answers: :check_provider_answers,
         },
-        linking_case_invitations: {
-          path: ->(application) { urls.providers_legal_aid_application_linking_case_invitation_path(application) },
+        link_case_invitations: {
+          path: ->(application) { urls.providers_legal_aid_application_link_case_invitation_path(application) },
           forward: lambda do |application|
             if application.link_case?
-              :linking_case_searches
+              :link_case_searches
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
           end,
         },
-        linking_case_searches: {
-          path: ->(application) { urls.providers_legal_aid_application_linking_case_search_path(application) },
-          forward: :linking_case_confirmations,
+        link_case_searches: {
+          path: ->(application) { urls.providers_legal_aid_application_link_case_search_path(application) },
+          forward: :link_case_confirmations,
         },
-        linking_case_confirmations: {
-          path: ->(application) { urls.providers_legal_aid_application_linking_case_confirmation_path(application) },
+        link_case_confirmations: {
+          path: ->(application) { urls.providers_legal_aid_application_link_case_confirmation_path(application) },
           forward: :has_national_insurance_numbers,
         },
         about_financial_means: {

@@ -411,30 +411,31 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
-    linking_case_invitations:
-      show:
-        heading: Do you want to link an application to your application?
-        hint: Guidance about linking cases
-    linking_case_searches:
-      show:
-        heading: What is the LAA reference of the application you want to link to?
-        hint: For example, 'A-BCD-E1F'
-        search: Search
-    linking_case_confirmations:
-      show:
-        heading: Link cases
-        question: Do you want to link your application to %{application_ref}?
-        table:
-          laa_reference: LAA reference
-          client: Client
-          category: Category of law
-        options:
-          family_link:
-            text: Yes, there's a family link
-            hint: When LAA need multiple certificates with a shared cost limitation.
-          legal_link:
-            text: Yes, there's a legal link
-            hint: When LAA need multiple certificates, each with their own cost limitation.
+    link_case:
+      invitations:
+        show:
+          heading: Do you want to link an application to your application?
+          hint: Guidance about linking cases
+      searches:
+        show:
+          heading: What is the LAA reference of the application you want to link to?
+          hint: For example, 'A-BCD-E1F'
+          search: Search
+      confirmations:
+        show:
+          heading: Link cases
+          question: Do you want to link your application to %{application_ref}?
+          table:
+            laa_reference: LAA reference
+            client: Client
+            category: Category of law
+          options:
+            family_link:
+              text: Yes, there's a family link
+              hint: When LAA need multiple certificates with a shared cost limitation.
+            legal_link:
+              text: Yes, there's a legal link
+              hint: When LAA need multiple certificates, each with their own cost limitation.
     proceeding_merits_task:
       linked_children:
         show:

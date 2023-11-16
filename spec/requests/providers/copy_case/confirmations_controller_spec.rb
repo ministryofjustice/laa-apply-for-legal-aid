@@ -53,7 +53,7 @@ RSpec.describe Providers::CopyCase::ConfirmationsController do
 
       it "redirects to the has national insurance number page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_linking_case_confirmation_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_link_case_confirmation_path(legal_aid_application))
       end
 
       it "copies proceedings from source application" do

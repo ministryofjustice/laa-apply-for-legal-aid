@@ -66,7 +66,7 @@ RSpec.describe Providers::CopyCase::InvitationsController do
 
       it "redirects to the proceeding types selection page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_linking_case_invitation_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_link_case_invitation_path(legal_aid_application))
       end
 
       it "records the answer" do

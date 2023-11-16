@@ -1,14 +1,14 @@
 require "rails_helper"
 
-RSpec.describe Providers::LinkingCaseSearchesController do
+RSpec.describe Providers::LinkCase::SearchesController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:login) { login_as legal_aid_application.provider }
   let(:linkable_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T") }
 
   before { login }
 
-  describe "GET /providers/applications/:legal_aid_application_id/linking_case_search" do
-    subject(:get_request) { get providers_legal_aid_application_linking_case_search_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/link_case/search" do
+    subject(:get_request) { get providers_legal_aid_application_link_case_search_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -36,8 +36,8 @@ RSpec.describe Providers::LinkingCaseSearchesController do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/linking_case_search" do
-    subject(:patch_request) { patch providers_legal_aid_application_linking_case_search_path(legal_aid_application), params: }
+  describe "PATCH /providers/applications/:legal_aid_application_id/link_case/search" do
+    subject(:patch_request) { patch providers_legal_aid_application_link_case_search_path(legal_aid_application), params: }
 
     context "when valid search term is entered" do
       let(:params) { { linked_application: { search_ref: "L-TVH-U0T" } } }
@@ -46,7 +46,7 @@ RSpec.describe Providers::LinkingCaseSearchesController do
 
       it "redirects to the linking case confirmation page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_linking_case_confirmation_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_link_case_confirmation_path(legal_aid_application))
       end
 
       it "creates a linked application" do
