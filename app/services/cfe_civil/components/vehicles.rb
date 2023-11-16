@@ -5,6 +5,10 @@ module CFECivil
         new(legal_aid_application, owner_type).call
       end
 
+      def initialize(legal_aid_application, owner_type = :client)
+        super
+      end
+
       def call
         {
           vehicles: vehicles_request_body,
