@@ -9,9 +9,8 @@
     <%= form.govuk_text_field :search_ref,
                               label: { text: t(".heading"), size: "xl", tag: "h1" },
                               hint: { text: t(".hint") },
-                              width: 10,
-                              value: params["search_ref"] || "" %>
+                              width: "three-quarters" %>
 
-    <%= next_action_buttons(form:, continue_button_text: t(".search")) %>
+    <%= next_action_buttons(form:, continue_button_text: t(".search"), show_draft: true) %>
   <% end %>
 <% end %>

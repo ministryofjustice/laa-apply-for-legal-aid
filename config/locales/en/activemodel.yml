@@ -505,6 +505,12 @@ en:
               accepted: Confirm this information is correct and that you'll get a signed declaration
             link_case:
               blank: Select yes if you would like to link an application to your application
+        linked_application:
+          attributes:
+            search_ref:
+              blank: Enter an application reference to search for
+              invalid: Enter a valid application reference to search for
+              not_found: The application reference entered cannot be found
         other_assets_declaration:
           attributes:
             valuable_items_value:

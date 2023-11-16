@@ -64,30 +64,13 @@ RSpec.describe Providers::CopyCase::InvitationsController do
     context "when no chosen" do
       let(:params) { { legal_aid_application: { copy_case: "false" } } }
 
-      context "without proceedings" do
-        before { legal_aid_application.proceedings.destroy_all }
-
-        it "redirects to the proceeding types selection page" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-        end
-
-        it "records the answer" do
-          expect { patch_request }.to change { legal_aid_application.reload.copy_case }.from(nil).to(false)
-        end
+      it "redirects to the proceeding types selection page" do
+        patch_request
+        expect(response).to redirect_to(providers_legal_aid_application_linking_case_invitation_path(legal_aid_application))
       end
 
-      context "with proceedings" do
-        before { create(:proceeding, :da001, legal_aid_application:) }
-
-        it "redirects to the has other proceedings page" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
-        end
-
-        it "records the answer" do
-          expect { patch_request }.to change { legal_aid_application.reload.copy_case }.from(nil).to(false)
-        end
+      it "records the answer" do
+        expect { patch_request }.to change { legal_aid_application.reload.copy_case }.from(nil).to(false)
       end
     end
 

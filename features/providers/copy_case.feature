@@ -33,4 +33,4 @@ Scenario: I choose to copy another case's details
 Scenario: I choose not to copy another case's details
   When I choose a 'No' radio button
   And I click 'Save and continue'
-  And I should be on a page with title "What does your client want legal aid for?"
+  And I should be on a page with title "Do you want to link an application to your application?"

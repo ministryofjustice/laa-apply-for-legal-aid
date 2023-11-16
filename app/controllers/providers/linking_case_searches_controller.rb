@@ -1,29 +1,32 @@
 module Providers
   class LinkingCaseSearchesController < ProviderBaseController
     def show
-      @form = LinkingCase::SearchForm.new(model: legal_aid_application)
+      destroy_linked_application
+      @form = LinkingCase::SearchForm.new(model: linked_application)
     end
 
     def update
-      @form = LinkingCase::SearchForm.new(form_params)
+      @form = LinkingCase::SearchForm.new(form_params.merge(model: linked_application, legal_aid_application:))
 
       render :show unless save_continue_or_draft(@form)
     end
 
   private
 
-    def save_continue_or_draft(form, **)
-      draft_selected? ? form.save_as_draft : form.save!
-      return false if form.invalid?
+    def destroy_linked_application
+      existing_linked_application.destroy! if existing_linked_application
+    end
 
-      session[:link_case_id] = form.linkable_case.id
-      continue_or_draft(**)
+    def existing_linked_application
+      LinkedApplication.find_by(associated_application_id: legal_aid_application.id)
     end
 
     def form_params
-      merge_with_model(legal_aid_application) do
-        params.require(:legal_aid_application).permit(:search_ref)
-      end
+      params.require(:linked_application).permit(:search_ref)
+    end
+
+    def linked_application
+      @linked_application ||= LinkedApplication.new
     end
   end
 end
