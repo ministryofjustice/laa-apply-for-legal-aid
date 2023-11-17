@@ -786,6 +786,7 @@ en:
     add_another_vehicles:
       show:
         error: Select yes if they have other vehicles
+        error_with_partner: Select whether your client or their partner has any other vehicles
     add_another_state_benefits:
       show:
         error: Select yes if they have received other benefits

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "providers savings and investments" do
+RSpec.describe Providers::Means::SavingsAndInvestmentsController do
   let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount) }
   let(:savings_amount) { application.savings_amount }
 
@@ -111,7 +111,7 @@ RSpec.describe "providers savings and investments" do
 
             it "displays an error" do
               patch_request
-              expect(response.body).to match(I18n.t("activemodel.errors.models.savings_amount.attributes.cash.not_a_number"))
+              expect(response.body).to match(html_compare("The value of money that's not in a bank account must be an amount of money, like 60,000"))
               expect(response.body).to match("govuk-error-message")
               expect(response.body).to match("govuk-form-group--error")
             end
@@ -129,7 +129,7 @@ RSpec.describe "providers savings and investments" do
 
             it "displays error for field" do
               patch_request
-              expect(response.body).to match(I18n.t("activemodel.errors.models.savings_amount.attributes.cash.blank"))
+              expect(response.body).to match(html_compare(I18n.t("activemodel.errors.models.savings_amount.attributes.cash.blank")))
             end
           end
         end
@@ -206,7 +206,7 @@ RSpec.describe "providers savings and investments" do
 
           it "displays an error" do
             patch_request
-            expect(response.body).to match(I18n.t("activemodel.errors.models.savings_amount.attributes.cash.not_a_number"))
+            expect(response.body).to match(html_compare(I18n.t("activemodel.errors.models.savings_amount.attributes.cash.not_a_number")))
             expect(response.body).to match("govuk-error-message")
             expect(response.body).to match("govuk-form-group--error")
           end

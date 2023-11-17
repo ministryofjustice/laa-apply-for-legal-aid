@@ -90,6 +90,10 @@ class BaseForm
     @draft
   end
 
+  def has_partner_with_no_contrary_interest?
+    model.applicant&.has_partner_with_no_contrary_interest?
+  end
+
 private
 
   def clean_attributes(hash)
@@ -127,5 +131,11 @@ private
       model_value = model_attributes[method]
       instance_variable_set(:"@#{method}", model_value) if !model_value.nil? && attributes[method].nil?
     end
+  end
+
+  def error_key(key_name)
+    return "#{key_name}_with_partner" if has_partner_with_no_contrary_interest?
+
+    key_name
   end
 end

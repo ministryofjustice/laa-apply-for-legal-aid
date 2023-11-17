@@ -157,6 +157,6 @@ RSpec.describe "provider restrictions request" do
   end
 
   def translation_for(attr, error)
-    I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attr}.providers.#{error}")
+    I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attr}.#{error}")
   end
 end

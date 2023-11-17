@@ -22,6 +22,10 @@ module Providers
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
     end
 
+    def has_partner_with_no_contrary_interest?
+      model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
+    end
+
   private
 
     def any_checkbox_checked_or_draft
@@ -29,7 +33,7 @@ module Providers
     end
 
     def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.policy_disregards.attributes.base.none_selected")
+      I18n.t("activemodel.errors.models.policy_disregards.attributes.base.#{error_key('none_selected')}")
     end
   end
 end

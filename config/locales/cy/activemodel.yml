@@ -254,12 +254,8 @@ cy:
             has_dependants:
               blank: stnadneped yna sah tneilc ruoy fi sey tceleS
             has_restrictions:
-              citizens:
-                blank: stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
+              blank: stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
                   snoitcirtser era ereht fi sey tceleS
-              providers:
-                blank: stessa rieht tsniaga gniworrob ro gnilles morf tneilc ruoy
-                  tneverp taht snoitcirtser era ereht fi sey tceleS
             open_banking_consents:
               providers:
                 blank: eerga uoy fi sey tceleS
@@ -269,10 +265,7 @@ cy:
             own_home:
               blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
             own_vehicle:
-              citizens:
-                blank: elcihev a nwo uoy fi sey tceleS
-              providers:
-                blank: elcihev a snwo tneilc ruoy fi sey tceleS
+              blank: elcihev a snwo tneilc ruoy fi sey tceleS
             property_value:
               blank: emoh s'tneilc ruoy rof eulav detamitse na retnE
               greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
@@ -296,10 +289,7 @@ cy:
             shared_ownership:
               blank: esle enoyna htiw emoh rieht snwo tneilc ruoy fi sey tceleS
             restrictions_details:
-              citizens:
-                blank: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa eht retnE
-              providers:
-                blank: yhw dna ,tsniaga worrob ro lles tonnac tneilc ruoy stessa eht
+              blank: yhw dna ,tsniaga worrob ro lles tonnac tneilc ruoy stessa eht
                   retnE
             substantive_application:
               blank: won noitacilppa evitnatsbus a ekam ot tnaw uoy fi sey tceleS

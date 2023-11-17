@@ -41,12 +41,12 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       shared_examples_for "it has an error" do
         let(:attribute_map) do
           {
-            cash: /total.*cash savings/i,
-            other_person_account: /other people’s accounts/,
-            national_savings: /certificates and bonds/,
+            cash: /value of money that's/i,
+            other_person_account: /other people's.*account/,
+            national_savings: /certificates and.*bonds/i,
             plc_shares: /shares/,
-            peps_unit_trusts_capital_bonds_gov_stocks: /total.*of other investments/i,
-            life_assurance_endowment_policy: /total.*of life assurance policies/i,
+            peps_unit_trusts_capital_bonds_gov_stocks: /total.* of other investments/i,
+            life_assurance_endowment_policy: /(total|value).*of life assurance.*policies/i,
           }
         end
         it "returns false" do
@@ -69,7 +69,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context "when the amounts are empty" do
         let(:amount_params) { attributes.index_with { |_attr| "" } }
-        let(:expected_error) { /enter the( estimated)? total/i }
+        let(:expected_error) { /^Enter the/i }
 
         it_behaves_like "it has an error"
       end
@@ -85,12 +85,12 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         context "and are not bank account attributes" do
           let(:attribute_map) do
             {
-              cash: /total.*cash savings/i,
-              other_person_account: /other people’s accounts/,
-              national_savings: /certificates and bonds/,
+              cash: /value of money that's/i,
+              other_person_account: /other people's accounts/,
+              national_savings: /certificates and.*bonds/i,
               plc_shares: /shares/,
-              peps_unit_trusts_capital_bonds_gov_stocks: /total.*of other investments/i,
-              life_assurance_endowment_policy: /total.*of life assurance policies/i,
+              peps_unit_trusts_capital_bonds_gov_stocks: /total.* of other investments/i,
+              life_assurance_endowment_policy: /(total|value).*of life assurance.*policies/i,
             }
           end
           let(:amount_params) { attributes.index_with { |_attr| Faker::Number.negative.to_s } }

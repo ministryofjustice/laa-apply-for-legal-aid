@@ -4,14 +4,12 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
   subject(:described_form) { described_class.new(form_params) }
 
   let(:application) { create(:legal_aid_application, :with_applicant) }
-  let(:journey) { %i[providers citizens].sample }
   let(:restrictions_details) { Faker::Lorem.paragraph }
   let(:has_restrictions) { "true" }
   let(:params) do
     {
       has_restrictions:,
       restrictions_details:,
-      journey:,
     }
   end
   let(:form_params) { params.merge(model: application) }
@@ -52,7 +50,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       end
 
       it "generates the expected error message" do
-        expect(described_form.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{journey}.blank")
+        expect(described_form.errors[:restrictions_details]).to include "Enter the assets your client cannot sell or borrow against, and why"
       end
 
       context "with no restrictions present" do
@@ -63,7 +61,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
         end
 
         it "generates the expected error message" do
-          expect(described_form.errors[:has_restrictions]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_restrictions.#{journey}.blank")
+          expect(described_form.errors[:has_restrictions]).to include "Select yes if your client is prohibited from selling or borrowing against their assets"
         end
       end
     end

@@ -427,10 +427,8 @@ en:
               blank: Select yes if you want to add another proceeding
               must_add_domestic_abuse: You must add at least one domestic abuse proceeding
             has_restrictions:
-              citizens:
-                blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
-              providers:
-                blank: Select yes if your client is prohibited from selling or borrowing against their assets
+              blank: Select yes if your client is prohibited from selling or borrowing against their assets
+              blank_with_partner: Select if your client or their partner is banned from selling or borrowing against their assets
             open_banking_consents:
               providers:
                 blank: Select yes if your client uses online banking
@@ -458,34 +456,40 @@ en:
             full_employment_details:
               blank: Enter your client's employment details
             own_home:
-              blank: Select yes if they own the home that they live in
+              blank: Select whether your client owns the home they live in
+              blank_with_partner: Select whether your client or their partner own the home your client lives in
             own_vehicle:
-              citizens:
-                blank: Select yes if you own a vehicle
-              providers:
-                blank: Select yes if your client owns a vehicle
+              blank: Select yes if your client owns a vehicle
+              blank_with_partner: Select whether your client or their partner own a vehicle
             property_value:
               blank: Enter how much the home your client lives in is worth
+              blank_with_partner: Enter how much the home your client and their partner lives in is worth
               greater_than_or_equal_to: How much the home your client lives in in must be 0 or more
+              greater_than_or_equal_to_with_partner: How much the home your client and their partner lives in must be 0 or more
               not_a_number: How much the home your client lives in must be an amount of money, like 60,000
-              too_many_decimals: How much the home your client lives in cannot include more than 2 decimal numbers
+              not_a_number_with_partner: The value of the home your client and their partner live in must be a number, like 60,000
+              too_many_decimals: The value of the home your client lives in cannot include more than 2 decimal places
+              too_many_decimals_with_partner: The value of the home your client and their partner live in cannot include more than 2 decimal places
             outstanding_mortgage_amount:
               blank: Enter how much is left to pay on the mortgage
-              greater_than_or_equal_to: How much is left to pay on the mortgage must be 0 or more
-              not_a_number: How much is left to pay on the mortgage must be an amount of money, like 60,000
-              too_many_decimals: How much is left to pay on the mortgage cannot include more than 2 decimal numbers
+              greater_than_or_equal_to: The amount left to pay on the mortgage must be 0 or more
+              not_a_number: The amount left to pay on the mortgage must be a number, like 60,000
+              too_many_decimals: The amount left to pay on the mortgage cannot include more than 2 decimal places
             shared_ownership:
               blank: Select yes if your client owns the home with anyone else
+              blank_with_partner: Select whether your client or their partner own the home with anyone else
             percentage_home:
               blank: Enter what percentage of the house your client legally owns
-              greater_than_or_equal_to: The percentage of the house your client legally owns must be 100 or less, like 60
-              less_than_or_equal_to: The percentage of the house your client legally owns must be 100 or less, like 60
-              not_a_number: The percentage of the house your client legally owns must be 100 or less, like 60
+              blank_with_partner: Enter what percentage of the house your client and their partner legally own
+              greater_than_or_equal_to: &value-1-100 The percentage of the house your client legally owns must be between 0 and 100, like 60
+              greater_than_or_equal_to_with_partner: &value-1-100-partner The percentage of the house your client and their partner legally own must be between 0 and 100, like 60
+              less_than_or_equal_to: *value-1-100
+              less_than_or_equal_to_with_partner: *value-1-100-partner
+              not_a_number: *value-1-100
+              not_a_number_with_partner: *value-1-100-partner
             restrictions_details:
-              citizens:
-                blank: Enter the assets you cannot sell or borrow against, and why
-              providers:
-                blank: Enter the assets your client cannot sell or borrow against, and why
+              blank: Enter the assets your client cannot sell or borrow against, and why
+              blank_with_partner: Enter which assets your client or their partner cannot sell or borrow against, and why
             substantive_application:
               blank: Select yes if you want to make a substantive application now
             uncategorised_bank_transactions:
@@ -506,55 +510,93 @@ en:
               greater_than_or_equal_to: Estimated value must be £500 or more
               not_a_number: Estimated valuable items value must be an amount of money, like 60,000
               too_many_decimals: Estimated valuable items value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of any valuable items worth £500 or more for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated value must be £500 or more
+              not_a_number_with_partner: Estimated valuable items value must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated valuable items value must not include more than 2 decimal numbers
             land_value:
               blank: Enter the estimated land value
               greater_than_or_equal_to: Estimated land value must be 0 or more
               not_a_number: Estimated land value must be an amount of money, like 60,000
               too_many_decimals: Estimated land value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of land for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated land value must be 0 or more
+              not_a_number_with_partner: Estimated land value must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated land value must not include more than 2 decimal numbers
             inherited_assets_value:
               blank: Enter the estimated value of estate
               greater_than_or_equal_to: Estimated money assets value must be 0 or more
               not_a_number: Estimated estate value must be an amount of money, like 60,000
               too_many_decimals: Estimated money assets value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of money or assets from the estate of a person who has died for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated money assets value must be 0 or more
+              not_a_number_with_partner: Estimated estate value must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated money assets value must not include more than 2 decimal numbers
             money_owed_value:
               blank: Enter the estimated value of money owed
               greater_than_or_equal_to: Estimated money owed value must be 0 or more
               not_a_number: Estimated money owed must be an amount of money, like 60,000
               too_many_decimals: Estimated money owed value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the amount owed for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated money owed value must be 0 or more
+              not_a_number_with_partner: Estimated money owed must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated money owed value must not include more than 2 decimal numbers
             second_home_mortgage:
               blank: Enter outstanding mortgage amount
               greater_than_or_equal_to: Estimated second home mortgage must be 0 or more
               not_a_number: Outstanding mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Estimated second home mortgage must not include more than 2 decimal numbers
+              blank_with_partner: Enter the outstanding mortgage amount for the second property or holiday home for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated second home mortgage must be 0 or more
+              not_a_number_with_partner: Outstanding mortgage amount must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated second home mortgage must not include more than 2 decimal numbers
             second_home_percentage:
               blank: Enter property percentage share
               greater_than_or_equal_to: Estimated second home percentage value must be 0 or more
               not_a_number: Ownership share must be percentage, like 33.33
               too_many_decimals: Estimated second home percentage must not include more than 2 decimal numbers
+              blank_with_partner: Enter the share that your client and their partner owns in the second property or holiday home
+              greater_than_or_equal_to_with_partner: Estimated second home percentage value must be 0 or more
+              not_a_number_with_partner: Ownership share must be percentage, like 33.33
+              too_many_decimals_with_partner: Estimated second home percentage must not include more than 2 decimal numbers
             second_home_value:
               blank: Enter the estimated property value
               greater_than_or_equal_to: Estimated second home value must be 0 or more
               not_a_number: Estimated value must be an amount of money, like 60,000
               too_many_decimals: Estimated second home value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of the second property or holiday home for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated second home value must be 0 or more
+              not_a_number_with_partner: Estimated value must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated second home value must not include more than 2 decimal numbers
             timeshare_property_value:
               blank: Enter the estimated timeshare property value
               greater_than_or_equal_to: Estimated timeshare value must be 0 or more
               not_a_number: Estimated timeshare property value must be an amount of money, like 60,000
               too_many_decimals: Estimated timeshare value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of the timeshare property, minus any loan and sale costs for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated timeshare value must be 0 or more
+              not_a_number_with_partner: Estimated timeshare property value must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated timeshare value must not include more than 2 decimal numbers
             trust_value:
               blank: Enter the estimated value of trust
               greater_than_or_equal_to: Estimated trust value must be 0 or more
               not_a_number: Estimated trust value must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of interest in a trust for both your client and their partner
+              greater_than_or_equal_to_with_partner: Estimated trust value must be 0 or more
+              not_a_number_with_partner: Estimated trust value must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated trust value must not include more than 2 decimal numbers
             base:
               citizens:
                 none_selected: Select if you have any of these types of assets
               providers:
                 none_selected: Select if your client has any of these types of assets
+                none_selected_with_partner: Select the assets your client and their partner have, or select 'None of these assets'
         policy_disregards:
           attributes:
             base:
               none_selected: Select if your client has received any of these payments
+              none_selected_with_partner: Select which schemes or trusts have paid either your client or their partner, or select 'None of these payments'
         proceeding:
           attributes:
             client_involvement_type_ccms_code:
@@ -750,70 +792,96 @@ en:
                 none_selected: Select if you have any of these savings or investments
               providers:
                 none_selected: Select if your client has any of these savings or investments
-                no_account_selected: Select if your client has current or savings accounts
+                none_selected_with_partner: Select the savings or investments your client and their partner have, or select 'None of these savings or investments'
+                no_account_selected: Select the bank accounts your client has, or select 'None of these'
+                no_account_selected_with_partner: Select the bank accounts your client and their partner have, or select 'None of these'
                 no_partner_account_selected: Select if the partner has current or savings accounts
             check_box_partner_offline_current_accounts:
               blank: Select if the partner has current or savings accounts
             cash:
-              blank: Enter the total amount of cash savings
-              greater_than_or_equal_to: Total cash savings must be 0 or more
-              not_a_number: Total cash savings must be an amount of money, like 60,000
-              too_many_decimals: Estimated cash value must not include more than 2 decimal numbers
+              blank: Enter the value of money that's not in a bank account for your client
+              greater_than_or_equal_to: The value of money that's not in a bank account must be 0 or more
+              not_a_number: The value of money that's not in a bank account must be an amount of money, like 60,000
+              too_many_decimals: The value of money that's not in a bank account must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of money that's not in a bank account for both your client and their partner
+              greater_than_or_equal_to_with_partner: The value of money that's not in a bank account must be 0 or more
+              not_a_number_with_partner: The value of money that's not in a bank account must be an amount of money, like 60,000
+              too_many_decimals_with_partner: The value of money that's not in a bank account must not include more than 2 decimal numbers
             offline_current_accounts:
-              blank: Enter the estimated total in all current accounts
-              greater_than_or_equal_to: Total in current accounts must be 0 or more
-              not_a_number: Total in current accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in current accounts must not include more than 2 decimal numbers
+              blank: Enter the total amount in your client's current accounts
+              greater_than_or_equal_to: Total in client's current accounts must be 0 or more
+              not_a_number: "Total in client's current accounts must be an amount of money, like 60,000"
+              too_many_decimals: Total in client's current accounts must not include more than 2 decimal numbers
             offline_savings_accounts:
-              blank: Enter the estimated total in all savings accounts
-              greater_than_or_equal_to: Total in savings accounts must be 0 or more
-              not_a_number: Total in savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in savings accounts must not include more than 2 decimal numbers
+              blank: Enter the total amount in your client's savings accounts
+              greater_than_or_equal_to: Total in client's savings accounts must be 0 or more
+              not_a_number: Total in client's savings accounts must be an amount of money, like 60,000
+              too_many_decimals: Total in client's savings accounts must not include more than 2 decimal numbers
             partner_offline_current_accounts:
-              blank: Enter the estimated total in the partners' current accounts
+              blank: Enter the total amount in the partner's current accounts
               greater_than_or_equal_to: Total in partners' current accounts must be 0 or more
               not_a_number: Total in partners' current accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in partners' current accounts must not include more than 2 decimal numbers
+              too_many_decimals: Total in partners' current accounts must not include more than 2 decimal numbers
             partner_offline_savings_accounts:
-              blank: Enter the estimated total in the partners' savings accounts
+              blank: Enter the total amount in the partner's savings accounts
               greater_than_or_equal_to: Total in partners' savings accounts must be 0 or more
               not_a_number: Total in partners' savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in partners' savings accounts must not include more than 2 decimal numbers
+              too_many_decimals: Total in partners' savings accounts must not include more than 2 decimal numbers
             joint_offline_current_accounts:
-              blank: Enter the estimated total in all joint current accounts
+              blank: Enter the total amount in your client and their partner's joint current accounts
               greater_than_or_equal_to: Total in joint current accounts must be 0 or more
               not_a_number: Total in joint current accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in joint current accounts must not include more than 2 decimal numbers
+              too_many_decimals: Total in joint current accounts must not include more than 2 decimal numbers
             joint_offline_savings_accounts:
-              blank: Enter the estimated total in all joint savings accounts
+              blank: Enter the total amount in your client and their partner's joint savings accounts
               greater_than_or_equal_to: Total in joint savings accounts must be 0 or more
               not_a_number: Total in joint savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated total in joint savings accounts must not include more than 2 decimal numbers
+              too_many_decimals: Total in joint savings accounts must not include more than 2 decimal numbers
             life_assurance_endowment_policy:
               blank: Enter the total value of life assurance policies
               greater_than_or_equal_to: Total of life assurance policies must be 0 or more
               not_a_number: Total of life assurance policies must be an amount of money, like 60,000
               too_many_decimals: Estimated life assurance policies value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of life assurance or endowment policies not linked to a mortgage for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of life assurance policies must be 0 or more
+              not_a_number_with_partner: Total of life assurance policies must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated life assurance policies value must not include more than 2 decimal numbers
             national_savings:
               blank: Enter the total value of certificates and bonds
               greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
               not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of ISAs, National Savings Certificates and Premium Bonds for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of certificates and bonds must be 0 or more
+              not_a_number_with_partner: Total of certificates and bonds must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated trust value must not include more than 2 decimal numbers
             other_person_account:
-              blank: Enter the estimated total in other people’s accounts
-              greater_than_or_equal_to: Total in other people’s accounts must be 0 or more
-              not_a_number: Total in other people’s accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated other people’s accounts value must not include more than 2 decimal numbers
+              blank: Enter the estimated total in other people's accounts
+              greater_than_or_equal_to: Total in other people's accounts must be 0 or more
+              not_a_number: Total in other people's accounts must be an amount of money, like 60,000
+              too_many_decimals: Estimated other people's accounts value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value that can be accessed from another person's bank account for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total in other people's accounts must be 0 or more
+              not_a_number_with_partner: Total in other people's accounts must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated other people's accounts value must not include more than 2 decimal numbers
             peps_unit_trusts_capital_bonds_gov_stocks:
               blank: Enter the total value of other investments
               greater_than_or_equal_to: Total of other investments must be 0 or more
               not_a_number: Total of other investments must be an amount of money, like 60,000
               too_many_decimals: Estimated other investments value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the total value of other investments for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of other investments must be 0 or more
+              not_a_number_with_partner: Total of other investments must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated other investments value must not include more than 2 decimal numbers
             plc_shares:
               blank: Enter the total value of shares
               greater_than_or_equal_to: Total of shares must be 0 or more
               not_a_number: Total of shares must be an amount of money, like 60,000
               too_many_decimals: Estimated shares value must not include more than 2 decimal numbers
+              blank_with_partner: Enter the value of shares in a PLC for both your client and their partner
+              greater_than_or_equal_to_with_partner: Total of shares must be 0 or more
+              not_a_number_with_partner: Total of shares must be an amount of money, like 60,000
+              too_many_decimals_with_partner: Estimated shares value must not include more than 2 decimal numbers
         setting:
           attributes:
             mock_true_layer_data:

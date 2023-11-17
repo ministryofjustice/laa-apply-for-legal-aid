@@ -28,13 +28,13 @@ module Providers
 
     validates(:second_home_percentage, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validates(:valuable_items_value, currency: { greater_than_or_equal_to: 500 }, allow_blank: true)
-    validates(*SECOND_HOME_ATTRIBUTES, presence: true, if: proc { |form| form.check_box_second_home.present? })
+    validates(*SECOND_HOME_ATTRIBUTES, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.check_box_second_home.present? })
     validates(*ALL_ATTRIBUTES - INDIVIDUALLY_VALIDATED, allow_blank: true, currency: { greater_than_or_equal_to: 0 })
-    validates(*VALUABLE_ITEMS_VALUE_ATTRIBUTE, presence: true, if: proc { |form| form.__send__(:check_box_valuable_items_value).present? })
+    validates(*VALUABLE_ITEMS_VALUE_ATTRIBUTE, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.__send__(:check_box_valuable_items_value).present? })
 
     SINGLE_VALUE_ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
-      validates attribute, presence: true, if: proc { |form| form.__send__(check_box_attribute).present? }
+      validates attribute, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.__send__(check_box_attribute).present? }
     end
 
     attr_accessor(*ALL_ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
@@ -64,6 +64,10 @@ module Providers
 
     def any_checkbox_checked?
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
+    end
+
+    def has_partner_with_no_contrary_interest?
+      model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
     end
 
   private
@@ -98,7 +102,7 @@ module Providers
     end
 
     def base_checkbox
-      CHECK_BOXES_ATTRIBUTES.first
+      :check_box_valuable_items_value
     end
 
     def any_checkbox_checked_or_draft
@@ -106,7 +110,7 @@ module Providers
     end
 
     def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.#{journey}.none_selected")
+      I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.#{journey}.#{error_key('none_selected')}")
     end
 
     def present_and_not_zero?(attr)

@@ -1,14 +1,9 @@
-class CurrencyValidator < ActiveModel::Validations::NumericalityValidator
-  ONLY_2_DECIMALS_PATTERN = /(\A-?[0-9]+\z)|(\A-?[0-9]*\.[0-9]{,2}\z)/
-
+class NumericalityPartnerOptionalValidator < ActiveModel::Validations::NumericalityValidator
   def validate_each(record, attr_name, value)
     clean_value = clean_numeric_value(value)
     super(record, attr_name, clean_value) # this requires the actual attribute symbol, e.g. :cash
 
     replace_error_with_partner(record, attr_name) if any_errors_for?(record, attr_name) && use_partner_labels?(record)
-    return if any_errors_for?(record, attr_name)
-
-    record.errors.add(attr_name, decimal_error(record)) unless ONLY_2_DECIMALS_PATTERN.match?(clean_value)
   end
 
   def clean_numeric_value(value)
@@ -33,9 +28,5 @@ private
 
     record.errors.delete(attr_name) # delete original
     record.errors.add(attr_name, partner_error_type) # replace with partner version
-  end
-
-  def decimal_error(record)
-    use_partner_labels?(record) ? :too_many_decimals_with_partner : :too_many_decimals
   end
 end

@@ -7,7 +7,12 @@
 
     <%= form.govuk_check_boxes_fieldset :other_assets,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
-                                        hint: { text: t(".fieldset_hint") } do %>
+                                        hint: { text: t(".fieldset_hint") },
+                                        form_group: { class: @form.errors[:check_box_valuable_items_value].any? ? "govuk-form-group--error" : "" } do %>
+      <% if @form.errors[:check_box_valuable_items_value].any? %>
+        <p class="govuk-error-message" id="savings-amount-cash-error">
+          <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:check_box_valuable_items_value].first %></p>
+      <% end %>
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#other-assets-declaration-none-selected-true-field">
           <%= form.govuk_check_box :check_box_valuable_items_value,
