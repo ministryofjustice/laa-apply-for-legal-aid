@@ -3,9 +3,10 @@ module Providers
     class ConfirmationsController < ProviderBaseController
       prefix_step_with :link_case
 
-      def show
-        @linked_application_types = LinkedApplicationType.all
+      before_action :set_linked_application_types
+      before_action :set_link_type_code, only: :show
 
+      def show
         if legal_aid_application.copy_case?
           destroy_linked_application
           @form = ::LinkCase::ConfirmationForm.new(model: copied_application)
@@ -15,7 +16,6 @@ module Providers
       end
 
       def update
-        @linked_application_types = LinkedApplicationType.all
         @form = ::LinkCase::ConfirmationForm.new(form_params)
 
         if @form.link_type_code.eql?("false")
@@ -27,12 +27,20 @@ module Providers
 
     private
 
+      def set_link_type_code
+        @link_type_code = existing_linked_application&.link_type_code
+      end
+
+      def set_linked_application_types
+        @linked_application_types = LinkedApplicationType.all
+      end
+
       def destroy_linked_application
         existing_linked_application.destroy! if existing_linked_application
       end
 
       def existing_linked_application
-        LinkedApplication.find_by(associated_application_id: legal_aid_application.id)
+        @existing_linked_application ||= LinkedApplication.find_by(associated_application_id: legal_aid_application.id)
       end
 
       def form_params

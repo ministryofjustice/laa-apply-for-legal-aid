@@ -3,6 +3,8 @@ module Providers
     class SearchesController < ProviderBaseController
       prefix_step_with :link_case
 
+      before_action :set_search_ref, only: :show
+
       def show
         destroy_linked_application
         @form = ::LinkCase::SearchForm.new(model: linked_application)
@@ -16,12 +18,16 @@ module Providers
 
     private
 
+      def set_search_ref
+        @search_ref = existing_linked_application&.lead_application&.application_ref
+      end
+
       def destroy_linked_application
         existing_linked_application.destroy! if existing_linked_application
       end
 
       def existing_linked_application
-        LinkedApplication.find_by(associated_application_id: legal_aid_application.id)
+        @existing_linked_application ||= LinkedApplication.find_by(associated_application_id: legal_aid_application.id)
       end
 
       def form_params
