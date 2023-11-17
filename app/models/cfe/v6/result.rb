@@ -9,12 +9,18 @@ module CFE
         partner ? result_summary[:partner_gross_income] : result_summary[:gross_income]
       end
 
+      def total_gross_income(partner: false)
+        total_gross_income_assessed(partner:)
+      end
+
       def total_gross_income_assessed(partner: false)
         gross_income_summary(partner:)[:total_gross_income]
       end
 
-      def total_gross_income(partner: false)
-        total_gross_income_assessed(partner:)
+      def total_disposable_income_assessed(partner: false)
+        client_total = disposable_income_summary[:total_disposable_income]
+        partner_total = partner ? disposable_income_summary(partner:)[:total_disposable_income] : 0.0
+        client_total + partner_total
       end
 
       ################################################################
@@ -108,9 +114,7 @@ module CFE
       end
 
       def total_monthly_income(partner: false)
-        mei_pension(partner:) + mei_student_loan(partner:)
-        + mei_property_or_lodger(partner:) + mei_maintenance_in(partner:)
-        + mei_friends_or_family(partner:) + monthly_state_benefits(partner:)
+        mei_pension(partner:) + mei_student_loan(partner:) + mei_property_or_lodger(partner:) + mei_maintenance_in(partner:) + mei_friends_or_family(partner:) + monthly_state_benefits(partner:)
       end
 
       def total_monthly_income_including_employment_income(partner: false)
@@ -118,7 +122,6 @@ module CFE
         partner_total = partner ? total_monthly_income(partner:) + employment_income_gross_income(partner:) : 0.0
         client_total + partner_total
       end
-
 
       ################################################################
       #                                                              #
@@ -189,16 +192,16 @@ module CFE
       end
 
       def partner_capital?
-        assessment.has_key?(:partner_capital)
+        assessment.key?(:partner_capital)
       end
 
       def current_accounts
-        accounts = liquid_capital_items.select{ |item| item[:description].downcase!.include?('current accounts') }
+        accounts = liquid_capital_items.select { |item| item[:description].downcase!.include?("current accounts") }
         accounts.sum { |account| account[:value] }
       end
 
       def savings_accounts
-        accounts = liquid_capital_items.select{ |item| item[:description].downcase!.include?('savings accounts') }
+        accounts = liquid_capital_items.select { |item| item[:description].downcase!.include?("savings accounts") }
         accounts.sum { |account| account[:value] }
       end
 
@@ -216,13 +219,28 @@ module CFE
 
       def total_savings(partner: false)
         client_savings = capital_summary[:total_liquid]
-        partner_savings = partner ? capital_summary(partner:true)[:total_liquid] : 0.0
+        partner_savings = partner ? capital_summary(partner: true)[:total_liquid] : 0.0
         client_savings + partner_savings
       end
 
       def total_capital
-        capital = result_summary[:capital][:total_capital]
-        partner_capital? ? capital += result_summary[:partner_capital][:total_capital] : capital
+        client_total = result_summary[:capital][:total_capital]
+        partner_total = partner_capital? ? result_summary[:partner_capital][:total_capital] : 0.0
+        client_total + partner_total
+      end
+
+      ################################################################
+      #                                                              #
+      #  TOTALS                                                      #
+      #                                                              #
+      ################################################################
+
+      def total_capital_before_pensioner_disregard(partner: false)
+        total_property + total_savings(partner:) + total_vehicles + total_other_assets
+      end
+
+      def total_disposable_capital(partner: false)
+        [0, (total_capital_before_pensioner_disregard(partner:) + pensioner_capital_disregard)].max
       end
     end
   end
