@@ -240,6 +240,7 @@ en:
           other_assets: Which assets does your client have?
           other_assets_with_partner: Which assets does either your client or their partner have?
           policy_disregards: Payments from scheme or charities
+          policy_disregards_with_partner: Your client’s and the partner’s payments from schemes or charities
           savings_and_investments: Which savings or investments does your client have?
           savings_and_investments_with_partner: Which savings or investments does either your client or their partner have?
           bank_accounts: Bank accounts

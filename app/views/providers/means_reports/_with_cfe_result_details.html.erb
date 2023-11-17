@@ -66,8 +66,8 @@
 <h2 class="govuk-heading-m">
   <%= t(".assets_heading") %>
 </h2>
-
-<%= render "shared/check_answers/assets", read_only: true, individual: "" %>
+<% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+<%= render "shared/check_answers/assets", read_only: true, individual: %>
 
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
     <%= render "caseworker_review" %>
