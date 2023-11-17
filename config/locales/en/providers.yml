@@ -1300,6 +1300,7 @@ en:
       deductions-section-heading: &deductions-section-heading Deductions
       debits-section-heading: &debits-section-heading Outgoings
       dependants_heading: Dependants
+      employment_heading: &employment_heading Employment income
       income_cash_payments_heading: Declared cash income
       income_categories_heading: Declared income categories
       income_details_heading: &income_details_heading Income
@@ -1390,6 +1391,16 @@ en:
         capital_result_heading: *capital_result_heading
         debits-section-heading: *debits-section-heading
         deductions-section-heading: *deductions-section-heading
+        employment_heading: *employment_heading
+        employment_details:
+          client: &client_employment_details Client's details
+          partner: &partner_employment_details Partner's details
+        employment_question:
+          client: Do you need to tell us anything else about your client's employment?
+          partner: Do you need to tell us anything else about the partner's employment?
+        full_employment_details:
+          client: *client_employment_details
+          partner: *partner_employment_details
         income_details_heading: *income_details_heading
         income_result_heading: *income_result_heading
 

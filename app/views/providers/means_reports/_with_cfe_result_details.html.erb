@@ -24,19 +24,44 @@
     <%= render "shared/check_answers/income_details" %>
   </section>
 
-  <section class="print-no-break">
-    <% if @legal_aid_application.applicant.extra_employment_information? %>
-      <%= render "shared/check_answers/employed_income", partner: false, read_only: true %>
-    <% end %>
-  </section>
+  <% if @legal_aid_application.applicant.extra_employment_information? ||
+    @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && @legal_aid_application.partner.extra_employment_information? %>
+    <section class="print-no-break govuk-!-padding-bottom-8">
+      <div class="govuk-grid-row" id="app-check-your-answers__employment">
+        <div class="govuk-grid-column-two-thirds">
+          <h3 class="govuk-heading-m"><%= t(".employment_heading") %></h3>
+        </div>
+      </div>
+      <%= govuk_summary_list(actions: false, html_attributes: { id: "client_employment-income-questions" }) do |summary_list| %>
 
-  <section class="print-no-break">
-    <% if @legal_aid_application.full_employment_details? %>
-      <%= render "shared/check_answers/full_employment_details", individual: "Your client", read_only: true, partner: false %>
-    <% end %>
-  </section>
+      <% if @legal_aid_application.applicant.extra_employment_information? %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__client_extra_employment_details" }) do |row| %>
+          <%= row.with_key(text: t(".employment_details.client"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { @legal_aid_application.applicant.extra_employment_information_details } %>
+        <% end %>
+      <% else %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__client_full_employment_details" }) do |row| %>
+          <%= row.with_key(text: t(".full_employment_details.client"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { @legal_aid_application.full_employment_details.presence || "-" } %>
+        <% end %>
+      <% end %>
 
-  <div class="govuk-!-padding-bottom-8"></div>
+      <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+        <% if @legal_aid_application.partner.extra_employment_information? %>
+            <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_extra_employment_details" }) do |row| %>
+              <%= row.with_key(text: t(".employment_details.partner"), classes: "govuk-!-width-one-half") %>
+              <%= row.with_value { @legal_aid_application.partner.extra_employment_information_details } %>
+            <% end %>
+        <% else %>
+            <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_full_employment_details" }) do |row| %>
+              <%= row.with_key(text: t(".full_employment_details.partner"), classes: "govuk-!-width-one-half") %>
+              <%= row.with_value { @legal_aid_application.partner.full_employment_details.presence || "-" } %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </section>
+  <% end %>
 
   <section class="print-no-break">
     <h2 class="govuk-heading-l"><%= t(".debits-section-heading") %></h2>
