@@ -19,6 +19,7 @@ RSpec.describe LinkCase::SearchForm, type: :form do
 
     context "with a valid application reference" do
       let(:search_ref) { "L-TVH-U0T" }
+
       let(:source_application) do
         create(:legal_aid_application, application_ref: "L-TVH-U0T")
       end

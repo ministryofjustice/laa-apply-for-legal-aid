@@ -4,7 +4,7 @@ module LinkCase
 
     attr_accessor :link_type_code
 
-    validates :link_type_code, presence: true, unless: proc { draft? }
+    validates :link_type_code, presence: true, unless: :draft?
 
     def save
       return if invalid? || draft?
