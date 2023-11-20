@@ -138,7 +138,7 @@ Feature: Check single employment
 
     When I click 'Save and continue'
     Then I should be on a page showing "Upload supporting evidence"
-    And I should see "Use this page to provide evidence of your client's employment status."
+    And I should see "Use this page to provide evidence of your client's employment."
 
     When I upload an evidence file named 'hello_world.pdf'
     And I sleep for 2 seconds
