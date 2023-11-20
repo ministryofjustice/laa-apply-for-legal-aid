@@ -71,15 +71,15 @@
     <% end %>
   <% end %>
 
-  <% if @legal_aid_application&.partner&.has_offline_savings? %>
+  <% if @legal_aid_application&.partner %>
     <% change_url = if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements?
                       :partner_bank_accounts
                     else
                       :offline_accounts
                     end %>
-    <div class="govuk-grid-row" id="app-check-your-answers__partner_offline_accounts_link">
+    <div class="govuk-grid-row govuk-!-padding-top-9" id="app-check-your-answers__partner_offline_accounts_link">
       <% if read_only == false %>
-        <div class="govuk-grid-column-two-thirds govuk-!-padding-top-9">
+        <div class="govuk-grid-column-two-thirds">
           <h3 class="govuk-heading-m"><%= t(".assets.partner_bank_accounts") %></h3>
         </div>
         <div class="govuk-grid-column-one-third align-text-right">
@@ -105,9 +105,9 @@
     <% end %>
 
     <% if @legal_aid_application.uploading_bank_statements? || !@legal_aid_application.non_passported? %>
-      <div class="govuk-grid-row" id="app-check-your-answers__joint_offline_accounts_link">
+      <div class="govuk-grid-row govuk-!-padding-top-9" id="app-check-your-answers__joint_offline_accounts_link">
         <% if read_only == false %>
-          <div class="govuk-grid-column-two-thirds govuk-!-padding-top-9">
+          <div class="govuk-grid-column-two-thirds">
             <h3 class="govuk-heading-m"><%= t(".assets.joint_bank_accounts") %></h3>
           </div>
           <div class="govuk-grid-column-one-third align-text-right">
