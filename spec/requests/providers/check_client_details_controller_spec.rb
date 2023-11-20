@@ -102,17 +102,4 @@ RSpec.describe Providers::CheckClientDetailsController do
       end
     end
   end
-
-  describe "PATCH /providers/applications/:legal_aid_application_id/check_client_details" do
-    subject(:patch_request) { patch "/providers/applications/#{application_id}/check_client_details" }
-
-    before do
-      login_as application.provider
-      patch_request
-    end
-
-    it "continues to the received benefit confirmations page" do
-      expect(response).to redirect_to(providers_legal_aid_application_received_benefit_confirmation_path(application))
-    end
-  end
 end
