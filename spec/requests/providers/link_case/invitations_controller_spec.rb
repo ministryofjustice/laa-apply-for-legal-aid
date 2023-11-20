@@ -44,6 +44,10 @@ RSpec.describe Providers::LinkCase::InvitationsController do
           expect(response).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
         end
       end
+
+      it "updates link_case to false" do
+        expect { patch_request }.to change { legal_aid_application.reload.link_case }.from(nil).to(false)
+      end
     end
 
     context "when yes chosen" do
@@ -52,6 +56,10 @@ RSpec.describe Providers::LinkCase::InvitationsController do
       it "redirects to link_case/search page" do
         patch_request
         expect(response).to redirect_to(providers_legal_aid_application_link_case_search_path(legal_aid_application))
+      end
+
+      it "updates link_case to true" do
+        expect { patch_request }.to change { legal_aid_application.reload.link_case }.from(nil).to(true)
       end
     end
 

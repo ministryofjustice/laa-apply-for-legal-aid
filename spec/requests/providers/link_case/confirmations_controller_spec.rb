@@ -1,10 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Providers::LinkCase::ConfirmationsController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, link_case:) }
   let(:linkable_application) { create(:legal_aid_application, :with_applicant) }
   let(:linked_application) { create(:linked_application, lead_application_id: linkable_application.id, associated_application_id: legal_aid_application.id) }
   let(:login) { login_as legal_aid_application.provider }
+  let(:link_case) { true }
 
   before { login }
 
@@ -69,6 +70,14 @@ RSpec.describe Providers::LinkCase::ConfirmationsController do
         patch_request
         expect(response).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
       end
+
+      context "when case has been copied" do
+        let(:link_case) { nil }
+
+        it "updates link_case to true" do
+          expect { patch_request }.to change { legal_aid_application.reload.link_case }.from(nil).to(true)
+        end
+      end
     end
 
     context "when legal link selected" do
@@ -89,6 +98,10 @@ RSpec.describe Providers::LinkCase::ConfirmationsController do
 
       it "destroys linked application" do
         expect { patch_request }.to change(LinkedApplication, :count).from(1).to(0)
+      end
+
+      it "updates link_case to nil" do
+        expect { patch_request }.to change { legal_aid_application.reload.link_case }.from(true).to(nil)
       end
 
       it "redirects to linking case invitations page" do

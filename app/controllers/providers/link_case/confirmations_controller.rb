@@ -18,10 +18,6 @@ module Providers
       def update
         @form = ::LinkCase::ConfirmationForm.new(form_params)
 
-        if @form.link_type_code.eql?("false")
-          destroy_linked_application
-        end
-
         render :show unless save_continue_or_draft(@form, link_case_confirmed: !@form.link_type_code.eql?("false"))
       end
 
