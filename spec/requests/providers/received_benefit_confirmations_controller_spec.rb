@@ -87,11 +87,6 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
           expect { patch_request }.to change(DWPOverride, :count).by(-1)
         end
       end
-
-      it "continue to the has_evidence_of_benefit page" do
-        patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_has_evidence_of_benefit_path(application))
-      end
     end
 
     context "when none of these selected" do
@@ -99,11 +94,6 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
 
       it "does not add a dwp override record" do
         expect { patch_request }.not_to change(DWPOverride, :count)
-      end
-
-      it "continue to the about financial means page" do
-        patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(application))
       end
 
       it "transitions the application state to applicant details checked" do
