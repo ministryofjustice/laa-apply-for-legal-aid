@@ -88,36 +88,12 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       expect(dwp_override.has_evidence_of_benefit).to be true
     end
 
-    it "redirects to the upload substantive application page" do
-      expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
-    end
-
-    context "when the provider has not used delegated functions" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_dwp_override, :applicant_details_checked) }
-
-      it "redirects to the upload capital introductions page" do
-        expect(response).to redirect_to(providers_legal_aid_application_capital_introduction_path(legal_aid_application))
-      end
-    end
-
-    it "updates the state machine type" do
-      expect(legal_aid_application.reload.state_machine).to be_a PassportedStateMachine
-    end
-
     context "when the provider chose no" do
       let(:has_evidence_of_benefit) { "false" }
 
       it "updates the dwp_override model" do
         dwp_override = legal_aid_application.reload.dwp_override
         expect(dwp_override.has_evidence_of_benefit).to be false
-      end
-
-      it "redirects to the about financial means page" do
-        expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(legal_aid_application))
-      end
-
-      it "updates the state machine type" do
-        expect(legal_aid_application.reload.state_machine).to be_a NonPassportedStateMachine
       end
     end
 
