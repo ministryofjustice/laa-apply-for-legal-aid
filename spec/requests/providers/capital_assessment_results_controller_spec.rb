@@ -36,15 +36,19 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
           end
         end
 
-        context "when not eligible" do
-          let(:cfe_result) { create(:cfe_v3_result, :not_eligible) }
+        context "when ineligible and disposable capital is above the upper threshold" do
+          let(:cfe_result) { create(:cfe_v6_result, :ineligible_capital) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
           end
 
           it "displays the correct result" do
-            expect(unescaped_response_body).to include(I18n.t("ineligible.heading", name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include("#{applicant_name} is unlikely to get legal aid")
+          end
+
+          it "displays the correct reason" do
+            expect(unescaped_response_body).to include("This is because they have too much disposable capital")
           end
         end
 
@@ -71,18 +75,6 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
 
           it "displays the correct result" do
             expect(unescaped_response_body).to include(I18n.t("eligible.heading", name: applicant_name, scope: locale_scope))
-          end
-        end
-
-        context "when not eligible" do
-          let(:cfe_result) { create(:cfe_v3_result, :not_eligible) }
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the correct result" do
-            expect(unescaped_response_body).to include(I18n.t("ineligible.heading", name: applicant_name, scope: locale_scope))
           end
         end
 

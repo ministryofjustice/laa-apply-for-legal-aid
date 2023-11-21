@@ -38,14 +38,36 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when not eligible" do
-          let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
+          context "when ineligible and gross income is above the upper threshold" do
+            let(:cfe_result) { create(:cfe_v6_result, :ineligible_gross_income) }
 
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
+            it "returns http success" do
+              expect(response).to have_http_status(:ok)
+            end
+
+            it "displays the correct result" do
+              expect(unescaped_response_body).to include("#{applicant_name} is unlikely to get legal aid")
+            end
+
+            it "displays the correct reason" do
+              expect(unescaped_response_body).to include("This is because they have too much gross income")
+            end
           end
 
-          it "displays the correct result" do
-            expect(unescaped_response_body).to include(I18n.t("ineligible.heading", name: applicant_name, scope: locale_scope))
+          context "when ineligible and disposable income is above the upper threshold" do
+            let(:cfe_result) { create(:cfe_v6_result, :ineligible_disposable_income) }
+
+            it "returns http success" do
+              expect(response).to have_http_status(:ok)
+            end
+
+            it "displays the correct result" do
+              expect(unescaped_response_body).to include("#{applicant_name} is unlikely to get legal aid")
+            end
+
+            it "displays the correct reason" do
+              expect(unescaped_response_body).to include("This is because they have too much disposable income")
+            end
           end
         end
 
@@ -108,14 +130,14 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when not eligible" do
-          let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :ineligible_gross_income) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
           end
 
           it "displays the correct result" do
-            expect(unescaped_response_body).to include(I18n.t("ineligible.heading", name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include("#{applicant_name} is unlikely to get legal aid")
           end
         end
 

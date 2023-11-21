@@ -105,7 +105,7 @@ en:
           - You still need to provide details of the case before we can decide if they’re eligible.
       ineligible:
         heading: "%{name} is unlikely to get legal aid"
-        detail: This is because they have too much disposable capital.
+        detail: "This is because they have too much %{ineligible_reasons}"
       capital_contribution_required:
         heading: "%{name} may need to pay towards legal aid"
         details:
@@ -922,3 +922,7 @@ en:
         details: |
           For example, Child Benefit or tax credits.
           Do not include Housing Benefit, government Cost of Living Payments, or any other disregarded benefits.
+    ineligible_reasons:
+      gross_income: gross income
+      disposable_income: disposable income
+      disposable_capital: disposable capital
