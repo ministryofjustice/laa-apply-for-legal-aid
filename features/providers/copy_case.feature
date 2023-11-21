@@ -27,10 +27,10 @@ Scenario: I choose to copy another case's details
   And I should be on a page showing "Do you want to copy L-TVH-U0T to your application?"
   When I choose a 'Yes' radio button
   And I click 'Save and continue'
-  Then I should be on a page with title "Does the client have a National Insurance number?"
+  Then I should be on a page with title "Link cases"
 
 @javascript @vcr
 Scenario: I choose not to copy another case's details
   When I choose a 'No' radio button
   And I click 'Save and continue'
-  And I should be on a page with title "What does your client want legal aid for?"
+  And I should be on a page with title "Do you want to link an application to your application?"

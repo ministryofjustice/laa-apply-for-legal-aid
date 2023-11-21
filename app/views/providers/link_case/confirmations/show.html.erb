@@ -1,0 +1,38 @@
+<%= form_with(
+      url: providers_legal_aid_application_link_case_confirmation_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template page_title: t(".heading"), template: :basic, form: do %>
+    <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
+
+    <%= govuk_summary_list(html_attributes: { class: "govuk-summary-list--no-border" }) do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key { t(".table.laa_reference") }
+            row.with_value { @linked_application.lead_application.application_ref }
+          end
+
+          summary_list.with_row do |row|
+            row.with_key { t(".table.client") }
+            row.with_value { @linked_application.lead_application.applicant.full_name }
+          end
+        end %>
+
+    <%= form.govuk_radio_buttons_fieldset(:link_type_code, legend: { size: "l", tag: "h2", text: t(".question", application_ref: @linked_application.lead_application.application_ref) }) do %>
+      <% @linked_application_types.each do |lat| %>
+        <%= form.govuk_radio_button :link_type_code,
+                                    lat.code,
+                                    label: { text: t(".options.#{lat.description.downcase}_link.label") },
+                                    hint: { text: t(".options.#{lat.description.downcase}_link.hint") },
+                                    link_errors: true,
+                                    checked: @link_type_code == lat.code %>
+      <% end %>
+
+      <%= form.govuk_radio_button(:link_type_code, false, label: { text: t("generic.no") }) %>
+    <% end %>
+
+    <%= next_action_buttons(form:, show_draft: true) %>
+  <% end %>
+<% end %>
