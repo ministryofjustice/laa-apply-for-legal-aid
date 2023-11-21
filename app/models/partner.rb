@@ -42,8 +42,4 @@ class Partner < ApplicationRecord
   def state_benefits
     regular_transactions.where(transaction_type_id: TransactionType.find_by(name: "benefits")).order(:created_at)
   end
-
-  def has_offline_savings?
-    legal_aid_application.savings_amount.attributes.values_at("partner_offline_current_accounts", "partner_offline_savings_accounts").any?
-  end
 end
