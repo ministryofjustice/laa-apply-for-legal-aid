@@ -361,7 +361,7 @@ GEM
     iniparse (1.5.0)
     interception (0.5)
     io-console (0.6.0)
-    irb (1.9.0)
+    irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
     jmespath (1.6.2)
@@ -577,7 +577,7 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (6.0.3)
+    rspec-rails (6.1.0)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -817,7 +817,7 @@ DEPENDENCIES
   rails-controller-testing
   redis
   rexml
-  rspec-rails (~> 6.0)
+  rspec-rails (~> 6.1)
   rspec-sidekiq
   rspec_junit_formatter
   rubocop-govuk
