@@ -5,7 +5,7 @@ module Providers
 
       attr_accessor :linked_children
 
-      validate :one_selected_child?
+      validate :one_selected_child?, unless: :draft?
 
       def value_list
         @value_list ||= legal_aid_application.involved_children.map do |child|

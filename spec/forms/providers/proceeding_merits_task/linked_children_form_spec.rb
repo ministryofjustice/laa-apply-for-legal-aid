@@ -86,5 +86,39 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
         end
       end
     end
+
+    context "when no linked_children selected" do
+      let(:linked_children_params) { ["", ""] }
+
+      it "adds expected error messages" do
+        expect(form.errors).to be_empty
+        save_form
+        expect(form.errors.messages.values.flatten).to include("At least one child must be covered under this proceeding")
+      end
+    end
+  end
+
+  describe ".save_as_draft" do
+    subject(:save_as_draft) { form.save_as_draft }
+
+    context "when no linked_children selected" do
+      let(:linked_children_params) { [""] }
+
+      it "does not validate the form, adding error messages" do
+        expect(form.errors.messages).to be_empty
+        save_as_draft
+        expect(form.errors.messages).to be_empty
+      end
+    end
+
+    context "when linked_children selected" do
+      let(:linked_children_params) do
+        [legal_aid_application.involved_children.first.id, ""]
+      end
+
+      it "saves the record" do
+        expect { save_as_draft }.to change(proceeding.proceeding_linked_children, :count).by(1)
+      end
+    end
   end
 end
