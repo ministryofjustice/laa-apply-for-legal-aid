@@ -8,8 +8,8 @@ Feature: Check partner employment evidence upload
     And I visit "uploaded evidence collection"
 
     Then I should see "Use this page to upload:"
-    And I should see "evidence of your client's employment status"
-    And I should see "evidence of the partner's employment status"
+    And I should see "evidence of your client's employment"
+    And I should see "evidence of the partner's employment"
 
     When I click "Save and continue"
     Then I should see "Upload your client's employment evidence"
@@ -31,4 +31,4 @@ Feature: Check partner employment evidence upload
     And I have completed an application where client and partner are both employed and "partner" has additional information
     And I visit "uploaded evidence collection"
 
-    Then I should see "Use this page to provide evidence of the partner's employment status"
+    Then I should see "Use this page to provide evidence of the partner's employment"
