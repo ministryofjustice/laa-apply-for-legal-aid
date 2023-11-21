@@ -3,6 +3,8 @@ module Providers
     class SearchesController < ProviderBaseController
       prefix_step_with :copy_case
 
+      before_action :set_search_ref, only: :show
+
       def show
         @form = ::CopyCase::SearchForm.new(model: legal_aid_application)
       end
@@ -14,6 +16,14 @@ module Providers
       end
 
     private
+
+      def set_search_ref
+        @search_ref = searched_for_case&.application_ref
+      end
+
+      def searched_for_case
+        @searched_for_case ||= LegalAidApplication.find_by(id: legal_aid_application&.copy_case_id)
+      end
 
       def form_params
         merge_with_model(legal_aid_application) do

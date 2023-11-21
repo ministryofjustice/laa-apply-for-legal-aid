@@ -22,10 +22,18 @@ RSpec.describe Providers::CopyCase::SearchesController do
 
     it "renders page with expected heading" do
       expect(response).to have_http_status(:ok)
-      expect(page).to have_css(
-        "h1",
-        text: "What is the LAA reference of the application you want to copy?",
-      )
+      expect(page)
+        .to have_css("h1", text: "What is the LAA reference of the application you want to copy?")
+        .and have_field("What is the LAA reference of the application you want to copy?")
+    end
+
+    context "when copy_case_id already set on the application" do
+      let(:legal_aid_application) { create(:legal_aid_application, copy_case_id: source_application.id) }
+      let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T") }
+
+      it "renders page with prefilled search value" do
+        expect(page).to have_field("What is the LAA reference of the application you want to copy?", with: "L-TVH-U0T")
+      end
     end
   end
 
@@ -41,7 +49,7 @@ RSpec.describe Providers::CopyCase::SearchesController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "when Search" do
+    context "when searching" do
       context "with a valid application reference" do
         let(:params) { { legal_aid_application: { search_ref: source_application.application_ref } } }
         let(:source_application) { create(:legal_aid_application, application_ref: "L-TVH-U0T", provider: legal_aid_application.provider) }
@@ -65,7 +73,9 @@ RSpec.describe Providers::CopyCase::SearchesController do
         it "stays on the page and displays validation error" do
           patch_request
           expect(response).to have_http_status(:ok)
-          expect(page).to have_error_message("The application reference entered cannot be found")
+          expect(page)
+            .to have_error_message("The application reference entered cannot be found")
+            .and have_field("What is the LAA reference of the application you want to copy?", with: "L-TVH-U0T")
         end
 
         it "does not store the source application's id" do
@@ -79,7 +89,9 @@ RSpec.describe Providers::CopyCase::SearchesController do
         it "stays on the page and displays validation error" do
           patch_request
           expect(response).to have_http_status(:ok)
-          expect(page).to have_error_message("Enter a valid application reference to search for")
+          expect(page)
+            .to have_error_message("Enter a valid application reference to search for")
+            .and have_field("What is the LAA reference of the application you want to copy?", with: "INVALID-APP-REF")
         end
 
         it "does not store the source application's id" do
@@ -93,7 +105,9 @@ RSpec.describe Providers::CopyCase::SearchesController do
         it "stays on the page and displays validation error" do
           patch_request
           expect(response).to have_http_status(:ok)
-          expect(page).to have_error_message("The application reference entered cannot be found")
+          expect(page)
+            .to have_error_message("The application reference entered cannot be found")
+            .and have_field("What is the LAA reference of the application you want to copy?", with: "L-FFF-FFF")
         end
 
         it "does not store the source application's id" do
@@ -107,7 +121,9 @@ RSpec.describe Providers::CopyCase::SearchesController do
         it "stays on the page and displays validation error" do
           patch_request
           expect(response).to have_http_status(:ok)
-          expect(page).to have_error_message("Enter an application reference to search for")
+          expect(page)
+            .to have_error_message("Enter an application reference to search for")
+            .and have_field("What is the LAA reference of the application you want to copy?", with: "")
         end
 
         it "does not store the source application's id" do

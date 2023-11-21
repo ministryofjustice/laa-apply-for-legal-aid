@@ -41,16 +41,6 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
           expect { call_save }.to change(legal_aid_application, :copy_case).from(false).to(true)
         end
       end
-
-      context "when copy_case_id already set" do
-        before do
-          legal_aid_application.update!(copy_case_id: source_application.id)
-        end
-
-        it "nullifies copy_case_id" do
-          expect { call_save }.to change { legal_aid_application.reload.copy_case_id }.from(source_application.id).to(nil)
-        end
-      end
     end
 
     context "with no chosen" do
@@ -67,16 +57,6 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
 
         it "updates copy_case to false" do
           expect { call_save }.to change(legal_aid_application, :copy_case).from(true).to(false)
-        end
-      end
-
-      context "when copy_case_id already set" do
-        before do
-          legal_aid_application.update!(copy_case_id: source_application.id)
-        end
-
-        it "nullifies copy_case_id" do
-          expect { call_save }.to change { legal_aid_application.reload.copy_case_id }.from(source_application.id).to(nil)
         end
       end
     end
@@ -118,16 +98,6 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
           .from(nil)
           .to(true)
       end
-
-      context "when copy_case_id already set" do
-        before do
-          legal_aid_application.update!(copy_case_id: source_application.id)
-        end
-
-        it "nullifies copy_case_id" do
-          expect { save_as_draft }.to change { legal_aid_application.reload.copy_case_id }.from(source_application.id).to(nil)
-        end
-      end
     end
 
     context "with no chosen" do
@@ -137,16 +107,6 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
         expect { save_as_draft }.to change(legal_aid_application, :copy_case)
           .from(nil)
           .to(false)
-      end
-
-      context "when copy_case_id already set" do
-        before do
-          legal_aid_application.update!(copy_case_id: source_application.id)
-        end
-
-        it "nullifies copy_case_id" do
-          expect { save_as_draft }.to change { legal_aid_application.reload.copy_case_id }.from(source_application.id).to(nil)
-        end
       end
     end
 
