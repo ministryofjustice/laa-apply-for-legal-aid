@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::ReceivedBenefitConfirmationsStep do
+RSpec.describe Flow::Steps::ProviderDWPOverride::ReceivedBenefitConfirmationsStep do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe "#path" do

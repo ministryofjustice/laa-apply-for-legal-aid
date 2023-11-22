@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::CheckClientDetailsStep do
+RSpec.describe Flow::Steps::ProviderDWPOverride::CheckClientDetailsStep do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe "#path" do

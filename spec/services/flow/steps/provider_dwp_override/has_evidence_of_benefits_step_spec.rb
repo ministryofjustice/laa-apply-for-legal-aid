@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::HasEvidenceOfBenefitsStep do
+RSpec.describe Flow::Steps::ProviderDWPOverride::HasEvidenceOfBenefitsStep do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe "#path" do
