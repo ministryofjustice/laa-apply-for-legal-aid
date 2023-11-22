@@ -82,10 +82,9 @@
                     )
 
                     concat tag.button(
-                      class: "govuk-button govuk-button--secondary govuk-!-margin-1 script hidden",
+                      class: "govuk-button govuk-button--secondary govuk-!-margin-0 script hidden",
                       id: "#{application.application_ref}-modal-btn",
-                      "data-toggle": "modal",
-                      "data-target": "#{application.application_ref}_modal",
+                      "data-modal-open-target": "modal-#{application.id}",
                     ) {
                              t(".delete_html", reference: application.application_ref, applicant_name: application.applicant.full_name)
                            }
