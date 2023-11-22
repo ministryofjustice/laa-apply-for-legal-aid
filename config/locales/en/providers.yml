@@ -804,7 +804,8 @@ en:
         update: Update
     has_other_dependants:
       show:
-        error: Select yes if they have other dependants
+        error: Select yes if your client has any other dependants
+        error_with_partner: Select yes if your client or their partner have any other dependants
     remove_state_benefits:
       show:
         error: Select yes if you wish to remove this benefit

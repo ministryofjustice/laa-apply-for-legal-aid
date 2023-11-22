@@ -423,6 +423,7 @@ en:
               blank: Confirm the date you used delegated functions
             has_dependants:
               blank: Select yes if your client has any dependants
+              blank_with_partner: Select yes if your client or their partner has any dependants
             has_other_proceeding:
               blank: Select yes if you want to add another proceeding
               must_add_domestic_abuse: You must add at least one domestic abuse proceeding
