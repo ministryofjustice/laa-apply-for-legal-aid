@@ -2,9 +2,8 @@ module Flow
   module Steps
     module ProviderDWPOverride
       CheckClientDetailsStep = Step.new(
-        ->(application) { Flow::Steps.urls.providers_legal_aid_application_check_client_details_path(application) },
-        :received_benefit_confirmations,
-        nil,
+        path: ->(application) { Flow::Steps.urls.providers_legal_aid_application_check_client_details_path(application) },
+        forward: :received_benefit_confirmations,
       )
     end
   end
