@@ -2,50 +2,34 @@ require "rails_helper"
 
 RSpec.describe Flow::Steps::ProviderDWPOverride::ConfirmDWPNonPassportedApplicationsStep do
   let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:has_benefit) { true }
+  let(:args) { has_benefit }
 
-  describe "#path" do
-    subject(:path) { described_class.path.call(legal_aid_application) }
+  context "when the provider confirms the application is non passported" do
+    it "has expected flow step" do
+      expect(described_class).to have_flow_step_args(path: "/providers/applications/#{legal_aid_application.id}/confirm_dwp_non_passported_applications?locale=en",
+                                                     forward: :about_financial_means,
+                                                     check_answers: nil)
+    end
 
-    it "returns the confirm_dwp_non_passported_path when called" do
-      expect(path).to eq "/providers/applications/#{legal_aid_application.id}/confirm_dwp_non_passported_applications?locale=en"
+    it "sets the application's state machine to be the passported state machine when forward is called" do
+      described_class.forward.call(legal_aid_application, args)
+      expect(legal_aid_application.state_machine_proxy.type).to eq "NonPassportedStateMachine"
     end
   end
 
-  describe "#forward" do
-    subject(:forward) { described_class.forward.call(legal_aid_application, confirm_dwp_non_passported) }
+  context "when the provider confirms the application is passported" do
+    let(:has_benefit) { false }
 
-    let(:confirm_dwp_non_passported) { true }
-
-    context "when the provider confirms the application is non passported" do
-      it "returns the about_financial_means step when called" do
-        expect(forward).to eq(:about_financial_means)
-      end
-
-      it "sets the application's state machine to be the non passported state machine" do
-        forward
-        expect(legal_aid_application.state_machine_proxy.type).to eq "NonPassportedStateMachine"
-      end
+    it "has expected flow step" do
+      expect(described_class).to have_flow_step_args(path: "/providers/applications/#{legal_aid_application.id}/confirm_dwp_non_passported_applications?locale=en",
+                                                     forward: :check_client_details,
+                                                     check_answers: nil)
     end
 
-    context "when the provider confirms the application is passported" do
-      let(:confirm_dwp_non_passported) { false }
-
-      it "returns the check_client_details step when called" do
-        expect(forward).to eq(:check_client_details)
-      end
-
-      it "sets the application's state machine to be the passported state machine" do
-        forward
-        expect(legal_aid_application.state_machine_proxy.type).to eq "PassportedStateMachine"
-      end
-    end
-  end
-
-  describe "#check_answers" do
-    subject(:check_answers) { described_class.check_answers }
-
-    it "returns nil" do
-      expect(check_answers).to be_nil
+    it "sets the application's state machine to be the non passported state machine when forward is called" do
+      described_class.forward.call(legal_aid_application, args)
+      expect(legal_aid_application.state_machine_proxy.type).to eq "PassportedStateMachine"
     end
   end
 end
