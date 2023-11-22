@@ -32,6 +32,12 @@ class BaseForm
     def locally_assigned
       @locally_assigned ||= []
     end
+
+    def normalizes(name, with:)
+      send(:before_validation, proc {
+        send("#{name}=", with.call(send(name)))
+      })
+    end
   end
 
   def initialize(*args)
