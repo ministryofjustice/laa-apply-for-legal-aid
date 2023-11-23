@@ -81,7 +81,7 @@ gem "prometheus_exporter"
 gem "webrick"
 
 # Generating Fake applications for tests and admin user
-gem "factory_bot_rails", ">= 6.2.0"
+gem "factory_bot_rails", ">= 6.2.0", require: false
 gem "faker", ">=1.9.1"
 
 # Rails 7 asset management
