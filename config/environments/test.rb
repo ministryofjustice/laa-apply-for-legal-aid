@@ -1,3 +1,5 @@
+require "factory_bot_rails"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -80,4 +82,6 @@ Rails.application.configure do
   # This needs adding due to a rails 7.1.1 bug(?!) related to Unsafe threading and AR connection pool issues
   # see https://github.com/rails/rails/issues/46797 for a good description
   config.active_job.queue_adapter = :test
+
+  config.factory_bot.reject_primary_key_attributes = false
 end
