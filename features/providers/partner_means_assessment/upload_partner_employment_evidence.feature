@@ -31,4 +31,4 @@ Feature: Check partner employment evidence upload
     And I have completed an application where client and partner are both employed and "partner" has additional information
     And I visit "uploaded evidence collection"
 
-    Then I should see "Use this page to provide evidence of the partner's employment"
+    Then I should see "Use this page to upload evidence of the partner's employment"

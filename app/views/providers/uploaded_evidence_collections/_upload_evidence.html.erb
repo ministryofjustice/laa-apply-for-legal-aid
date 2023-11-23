@@ -7,7 +7,7 @@
       local: true,
     ) do |form| %>
 
-  <%#= form.govuk_error_summary %>
+  <% if @uploaded_evidence_collection.errors.any? %>
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -15,16 +15,16 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
-            <% if @mandatory_evidence_errors %>
-                <% @mandatory_evidence_errors.each do |error| %>
-                    <span class="govuk-visually-hidden">Error:</span>
-                    <%= error.message %><br>
-                <% end %>
+            <% @uploaded_evidence_collection.errors.each do |error| %>
+              <li>
+                <%= govuk_link_to error.type, "##{error.attribute}" %>
+              </li>
             <% end %>
           </ul>
         </div>
       </div>
     </div>
+  <% end %>
 
   <%= render partial: "shared/forms/error_summary_hidden", locals: { field_id: "uploaded-evidence-collection-original-file-field" } %>
 
@@ -60,8 +60,8 @@
         <% if @mandatory_evidence_errors %>
             <p id="dropzone-mandatory-error" class='govuk-error-message dropzone-error govuk-!-margin-bottom-1'>
               <% @mandatory_evidence_errors.each do |error| %>
-                  <span class="govuk-visually-hidden">Error:</span>
-                  <%= error.message %><br>
+                <span class="govuk-visually-hidden">Error:</span>
+                <%= error.message %><br>
               <% end %>
             </p>
         <% end %>
