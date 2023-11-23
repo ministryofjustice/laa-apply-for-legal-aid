@@ -7,8 +7,12 @@
 
     <%= form.govuk_check_boxes_fieldset :policy_disregards,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
-                                        hint: { text: t("generic.select_all_that_apply") } do %>
-
+                                        hint: { text: t("generic.select_all_that_apply") },
+                                        form_group: { class: @form.errors[:england_infected_blood_support].any? ? "govuk-form-group--error" : "" } do %>
+      <% if @form.errors[:england_infected_blood_support].any? %>
+        <p class="govuk-error-message" id="savings-amount-cash-error">
+          <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:england_infected_blood_support].first %></p>
+      <% end %>
     <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
       <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
         <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
