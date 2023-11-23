@@ -19,7 +19,13 @@ module Providers
           journey: :provider,
           radio_buttons_input_name: :has_other_dependant,
           form_params:,
+          error: error_message,
         )
+      end
+
+      def error_message
+        key_name = legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? ? "error_with_partner" : "error"
+        I18n.t("providers.has_other_dependants.show.#{key_name}")
       end
 
       def form_params
