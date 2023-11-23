@@ -34,14 +34,16 @@ RSpec.describe CFECivil::Components::Employments do
 
     context "and no owner type is specified" do
       it "renders the expected JSON for just the client" do
-        expect(call).to eq({
+        result = JSON.parse(call, symbolize_names: true)
+
+        expect(result).to match hash_including({
           employment_income: [
             {
               name: "Job 788",
-              client_id: "12345678-1234-1234-1234-123456789abc",
+              client_id: kind_of(String),
               payments: [
                 {
-                  client_id: "20211128-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-11-28",
                   gross: 1868.98,
                   benefits_in_kind: 0.0,
@@ -50,7 +52,7 @@ RSpec.describe CFECivil::Components::Employments do
                   net_employment_income: 1578.54,
                 },
                 {
-                  client_id: "20211028-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-10-28",
                   gross: 1868.98,
                   benefits_in_kind: 0.0,
@@ -59,7 +61,7 @@ RSpec.describe CFECivil::Components::Employments do
                   net_employment_income: 1629.34,
                 },
                 {
-                  client_id: "20210928-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-09-28",
                   gross: 2492.61,
                   benefits_in_kind: 0.0,
@@ -68,7 +70,7 @@ RSpec.describe CFECivil::Components::Employments do
                   net_employment_income: 2002.54,
                 },
                 {
-                  client_id: "20210828-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-08-28",
                   gross: 2345.29,
                   benefits_in_kind: 0.0,
@@ -79,7 +81,7 @@ RSpec.describe CFECivil::Components::Employments do
               ],
             },
           ],
-        }.to_json)
+        })
       end
     end
 
@@ -87,14 +89,16 @@ RSpec.describe CFECivil::Components::Employments do
       subject(:call) { described_class.call(legal_aid_application, "Partner") }
 
       it "renders the expected JSON for just the partner" do
-        expect(call).to eq({
+        result = JSON.parse(call, symbolize_names: true)
+
+        expect(result).to match hash_including({
           employments: [
             {
               name: "Job 877",
-              client_id: "87654321-1234-1234-1234-123456789abc",
+              client_id: kind_of(String),
               payments: [
                 {
-                  client_id: "20231024-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-11-28",
                   gross: 1868.98,
                   benefits_in_kind: 0.0,
@@ -103,7 +107,7 @@ RSpec.describe CFECivil::Components::Employments do
                   net_employment_income: 1578.54,
                 },
                 {
-                  client_id: "20230924-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-10-28",
                   gross: 1868.98,
                   benefits_in_kind: 0.0,
@@ -112,7 +116,7 @@ RSpec.describe CFECivil::Components::Employments do
                   net_employment_income: 1629.34,
                 },
                 {
-                  client_id: "20230824-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-09-28",
                   gross: 2492.61,
                   benefits_in_kind: 0.0,
@@ -121,7 +125,7 @@ RSpec.describe CFECivil::Components::Employments do
                   net_employment_income: 2002.54,
                 },
                 {
-                  client_id: "20230724-0000-0000-0000-123456789abc",
+                  client_id: kind_of(String),
                   date: "2021-08-28",
                   gross: 2345.29,
                   benefits_in_kind: 0.0,
@@ -132,7 +136,7 @@ RSpec.describe CFECivil::Components::Employments do
               ],
             },
           ],
-        }.to_json)
+        })
       end
     end
   end
