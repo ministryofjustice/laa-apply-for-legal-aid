@@ -6,7 +6,7 @@ Capybara.server_port = 8234
 
 VCR.configure do |vcr_config|
   vcr_config.cassette_library_dir = "features/cassettes"
-  vcr_config.hook_into :webmock
+  vcr_config.hook_into :faraday, :webmock
   vcr_config.default_cassette_options = {
     record: record_mode,
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)],
