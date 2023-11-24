@@ -927,6 +927,134 @@ module CFEResults
         result[:assessment][:gross_income][:employment_income] = []
         result
       end
+
+      def self.with_partner
+        result = eligible
+        partner_gross_income = {
+          employment_income: [],
+          irregular_income: {
+            monthly_equivalents: {
+              student_loan: 0.0,
+              unspecified_source: 0.0,
+            },
+          },
+          state_benefits: {
+            monthly_equivalents: {
+              all_sources: 86.67,
+              cash_transactions: 0.0,
+              bank_transactions: [],
+            },
+          },
+          other_income: {
+            monthly_equivalents: {
+              all_sources: {
+                friends_or_family: 166.67,
+                maintenance_in: 0.0,
+                property_or_lodger: 0.0,
+                pension: 0.0,
+              },
+              bank_transactions: {
+                friends_or_family: 0,
+                maintenance_in: 0,
+                property_or_lodger: 0,
+                pension: 0,
+              },
+              cash_transactions: {
+                friends_or_family: 0.0,
+                maintenance_in: 0.0,
+                property_or_lodger: 0.0,
+                pension: 0.0,
+              },
+            },
+          },
+        }
+        partner_disposable_income = {
+          monthly_equivalents: {
+            all_sources: {
+              child_care: 0.0,
+              rent_or_mortgage: 0.0,
+              maintenance_out: 0.0,
+              legal_aid: 0.0,
+              pension_contribution: 0.0,
+            },
+            bank_transactions: {
+              child_care: 0.0,
+              rent_or_mortgage: 0.0,
+              maintenance_out: 0.0,
+              legal_aid: 0.0,
+              pension_contribution: 0.0,
+            },
+            cash_transactions: {
+              child_care: 0.0,
+              rent_or_mortgage: 0.0,
+              maintenance_out: 0.0,
+              legal_aid: 0.0,
+              pension_contribution: 0.0,
+            },
+          },
+          childcare_allowance: 0.0,
+          deductions: {
+            dependants_allowance: 0.0,
+            disregarded_state_benefits: 0.0,
+          },
+        }
+        partner_capital = {
+          capital_items: {
+            liquid: [
+              { description: "Partner current accounts", value: 400.0 },
+              { description: "Partner savings accounts", value: 300.0 },
+              { description: "Joint current accounts", value: 200.0 },
+            ],
+            non_liquid: [],
+            vehicles: [],
+            properties: {
+              main_home: {
+                value: 0.0,
+                outstanding_mortgage: 0.0,
+                percentage_owned: 0.0,
+                main_home: true,
+                shared_with_housing_assoc: false,
+                transaction_allowance: 0,
+                allowable_outstanding_mortgage: 0.0,
+                net_value: 0,
+                net_equity: 0,
+                smod_allowance: 0,
+                main_home_equity_disregard: 0,
+                assessed_equity: 0,
+                subject_matter_of_dispute: false,
+              },
+              additional_properties: [],
+            },
+          },
+        }
+        partner_disposable_income_summary = {
+          dependant_allowance_under_16: 0,
+          dependant_allowance_over_16: 0,
+          dependant_allowance: 0,
+          gross_housing_costs: 0.0,
+          housing_benefit: 0.0,
+          net_housing_costs: 0.0,
+          maintenance_allowance: 0.0,
+          total_outgoings_and_allowances: 1052.06,
+          total_disposable_income: 2577.11,
+          employment_income: {
+            gross_income: 2229.17,
+            benefits_in_kind: 0.0,
+            tax: -235.2,
+            national_insurance: -171.86,
+            prisoner_levy: 0.0,
+            student_debt_repayment: 0.0,
+            fixed_employment_deduction: -45.0,
+            net_employment_income: 1777.11,
+          },
+        }
+        result[:assessment][:partner_gross_income] = partner_gross_income
+        result[:assessment][:partner_disposable_income] = partner_disposable_income
+        result[:assessment][:partner_capital] = partner_capital
+        result[:result_summary][:partner_gross_income] = { total_gross_income: 150.0 }
+        result[:result_summary][:partner_disposable_income] = partner_disposable_income_summary
+        result
+      end
     end
   end
 end
