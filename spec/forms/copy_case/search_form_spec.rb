@@ -67,6 +67,22 @@ RSpec.describe CopyCase::SearchForm, type: :form do
       end
     end
 
+    context "with a mixed case and whitespace including but otherwise valid application reference" do
+      let(:search_ref) { " \t l-TVH-u0t  \t" }
+
+      let(:source_application) do
+        create(:legal_aid_application,
+               application_ref: "L-TVH-U0T",
+               provider: legal_aid_application.provider)
+      end
+
+      before { source_application }
+
+      it "finds the application id" do
+        expect { call_save }.to change(instance, :copiable_case).from(nil).to(source_application)
+      end
+    end
+
     context "with a valid format but non-existant application reference" do
       let(:search_ref) { "L-FFF-FFF" }
 

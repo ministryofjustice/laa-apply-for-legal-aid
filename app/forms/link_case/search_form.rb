@@ -6,6 +6,8 @@ module LinkCase
 
     APPLICATION_REF_REGEXP = /\AL-[0-9ABCDEFHIJKLMNPRTUVWXY]{3}-[0-9ABCDEFHIJKLMNPRTUVWXY]{3}\z/
 
+    normalizes :search_ref, with: ->(search_ref) { search_ref.strip.upcase }
+
     validates :search_ref,
               presence: true,
               format: { with: APPLICATION_REF_REGEXP },

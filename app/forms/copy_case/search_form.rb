@@ -6,6 +6,8 @@ module CopyCase
 
     attr_accessor :search_ref, :copiable_case
 
+    normalizes :search_ref, with: ->(search_ref) { search_ref.strip.upcase }
+
     validates :search_ref,
               presence: true,
               format: { with: APPLICATION_REF_REGEXP },
