@@ -14,7 +14,11 @@ VCR.configure do |vcr_config|
   vcr_config.debug_logger = $stdout if vcr_debug
   vcr_config.ignore_request do |request|
     uri = URI(request.uri)
-    uri.to_s.include?("__identify__") || uri.to_s =~ /127.0.0.1.*(session|shutdown)/
+    uri.to_s.include?("__identify__") ||
+      uri.to_s =~ /127.0.0.1.*(session|shutdown)/ ||
+      uri.to_s =~ /content-autofill.googleapis.com/ ||
+      uri.to_s =~ /accounts.google.com/ ||
+      uri.to_s =~ /\/organisation_searches$/
   end
   vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
   vcr_config.filter_sensitive_data("<ORDNANCE_SURVEY_API_KEY>") { ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil) }

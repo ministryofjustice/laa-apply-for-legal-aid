@@ -147,6 +147,7 @@ group :test do
   gem "cucumber-rails", ">= 2.4.0", require: false
   gem "database_cleaner"
   gem "launchy"
+  gem "puffing-billy", ">= 4.0.0", require: false
   gem "rack-pjax"
   gem "rails-controller-testing"
   gem "rspec-sidekiq"
@@ -155,6 +156,7 @@ group :test do
   gem "simplecov", require: false
   gem "simplecov-rcov"
   gem "super_diff"
+  gem "table_print", require: false
   gem "vcr"
   gem "webmock"
 end
