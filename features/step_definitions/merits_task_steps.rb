@@ -27,6 +27,22 @@ Then(/^I should (see|not see) regex (.*?)$/) do |visible, text|
   end
 end
 
+When("I search for non-existent organisation") do
+  proxy
+    .stub("https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk:443/organisation_searches", method: "post")
+    .and_return(
+      headers: {
+        "Access-Control-Allow-Origin" => "*",
+      },
+      code: 200,
+      body: { success: false, data: [] }.to_json,
+    )
+
+  fill_in("organisation-search-input", with: "cakes")
+
+  expect(page).to have_css(".no-organisation-items", visible: :visible)
+end
+
 When("I search for organisation {string}") do |search_terms|
   fill_in("organisation-search-input", with: search_terms)
 end

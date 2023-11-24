@@ -11,9 +11,9 @@ Background: User is on existing opponent organisation search page
   And I click 'Save and continue'
   Then I should be on a page with title "Opponent"
 
-@javascript
+@javascript @billy
 Scenario: No results returned is seen on screen when non-existant organisation search entered
-  When I search for organisation "cakes"
+  When I search for non-existent organisation
   Then the organisation result list on page returns a "No results found." message
   And organisation suggestions has 0 results
 
