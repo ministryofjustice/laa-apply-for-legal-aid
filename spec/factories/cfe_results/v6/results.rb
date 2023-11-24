@@ -107,6 +107,10 @@ module CFEResults
             record.update!(result: CFEResults::V6::MockResults.with_employment_remarks(record).to_json)
           end
         end
+
+        trait :with_partner do
+          result { CFEResults::V6::MockResults.with_partner.to_json }
+        end
       end
     end
   end
