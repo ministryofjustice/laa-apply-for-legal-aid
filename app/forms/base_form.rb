@@ -34,9 +34,9 @@ class BaseForm
     end
 
     def normalizes(name, with:)
-      send(:before_validation, proc {
+      before_validation do
         send("#{name}=", with.call(send(name)))
-      })
+      end
     end
   end
 
