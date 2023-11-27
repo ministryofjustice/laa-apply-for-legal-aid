@@ -18,6 +18,7 @@ module Providers
         attributes[:additional_information] = requires_yes_additional_information? ? additional_information_true : additional_information_false
         super
       end
+      alias_method :save!, :save
 
     private
 

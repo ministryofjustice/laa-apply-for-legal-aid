@@ -18,6 +18,7 @@ module Providers
 
         update_involved_children_on_proceeding
       end
+      alias_method :save!, :save
 
       def save_as_draft
         @draft = true

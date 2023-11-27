@@ -88,6 +88,7 @@ module LegalAidApplications
       attributes[:assets_value] = nil if valid? && !assets_more_than_threshold?
       super
     end
+    alias_method :save!, :save
 
     def blank_option_error_message
       I18n.t(".has_assets_more_than_threshold.blank_message", scope: SCOPE, name: model.name)

@@ -39,6 +39,7 @@ module Vehicles
       attributes[:payment_remaining] = 0 if valid? && !payments_remain?
       super
     end
+    alias_method :save!, :save
 
     def self.radio_options
       translation_root = "providers.means.vehicle_details.show.owner.options"

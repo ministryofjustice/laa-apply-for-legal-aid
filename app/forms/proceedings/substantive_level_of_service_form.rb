@@ -19,5 +19,6 @@ module Proceedings
       attributes[:substantive_level_of_service_name] = level["name"]
       super
     end
+    alias_method :save!, :save
   end
 end

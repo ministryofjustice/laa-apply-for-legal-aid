@@ -32,6 +32,7 @@ module Providers
 
       true
     end
+    alias_method :save!, :save
 
     def transaction_type_ids=(ids)
       @transaction_type_ids = if none_selected?

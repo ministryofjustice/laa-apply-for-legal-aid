@@ -51,6 +51,7 @@ module Proceedings
         attributes[:emergency_level_of_service_stage] = nil
       end
     end
+    alias_method :save!, :save
 
     def hearing_date
       return @hearing_date if @hearing_date.present?

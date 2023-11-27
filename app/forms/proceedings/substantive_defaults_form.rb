@@ -46,6 +46,7 @@ module Proceedings
       end
       super
     end
+    alias_method :save!, :save
 
     def exclude_from_model
       %i[additional_params

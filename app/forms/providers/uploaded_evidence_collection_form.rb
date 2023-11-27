@@ -12,6 +12,7 @@ module Providers
 
       model.save!(validate: false) if attachments_made?
     end
+    alias_method :save!, :save
 
   private
 
