@@ -28,7 +28,7 @@ module Providers
     end
 
     def save_continue_or_draft(form, **)
-      draft_selected? ? form.save_as_draft : form.save
+      draft_selected? ? form.save_as_draft : form.save!
       return false if form.invalid?
 
       continue_or_draft(**)
