@@ -16,7 +16,11 @@ module CCMS
              :has_restrictions?,
              :policy_disregards?,
              :manually_entered_employment_information?,
-             :uploading_bank_statements?, to: :legal_aid_application
+             :manual_client_employment_information?,
+             :manual_partner_employment_information?,
+             :uploading_bank_statements?,
+             :client_uploading_bank_statements?,
+             :partner_uploading_bank_statements?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
 
@@ -61,8 +65,10 @@ module CCMS
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
       application_review_reasons << :non_passported if non_passported?
-      application_review_reasons << :further_employment_details if manually_entered_employment_information?
-      application_review_reasons << :uploaded_bank_statements if uploading_bank_statements?
+      application_review_reasons << :client_further_employment_details if manual_client_employment_information?
+      application_review_reasons << :partner_further_employment_details if manual_partner_employment_information?
+      application_review_reasons << :client_uploaded_bank_statements if client_uploading_bank_statements?
+      application_review_reasons << :partner_uploaded_bank_statements if partner_uploading_bank_statements?
       application_review_reasons << :ineligible if cfe_result.ineligible?
       application_review_reasons
     end
