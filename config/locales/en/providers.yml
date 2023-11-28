@@ -1345,10 +1345,12 @@ en:
           multi_benefit: Multiple benefits in single bank transaction
           dwp_override: Provider disagrees with DWP result
           restrictions: Restrictions on client's assets
-          further_employment_details: Further employment details
+          client_further_employment_details: Client's further employment details
+          partner_further_employment_details: Partner's further employment details
           multiple_employments: Multiple employments
           refunds: Tax or NI refunds
-          uploaded_bank_statements: Bank statements uploaded
+          client_uploaded_bank_statements: Client's bank statements uploaded
+          partner_uploaded_bank_statements: Partner's bank statements uploaded
           ineligible: Applicant is ineligible
           non_passported: Non-Passported application
       show:
