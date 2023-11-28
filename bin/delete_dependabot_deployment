@@ -13,12 +13,12 @@ echo "$UAT_RELEASES"
 if [[ $UAT_RELEASES == *"$RELEASE_NAME"* ]]
 then
   helm delete $RELEASE_NAME --namespace=${K8S_NAMESPACE}
-  kubectl --namespace=${K8S_NAMESPACE} delete pvc data-$RELEASE_NAME-postgresql-0
-  if [[ $RELEASE_NAME == *"redis"* ]]; then
-    kubectl --namespace=${K8S_NAMESPACE} delete pvc redis-data-$RELEASE_NAME-master-0
-  else
-    kubectl --namespace=${K8S_NAMESPACE} delete pvc redis-data-$RELEASE_NAME-redis-master-0
-  fi
+
+  for pvc in $(kubectl --namespace=${K8S_NAMESPACE} get pvc -o custom-columns=":metadata.name" | grep $RELEASE_NAME)
+  do
+    kubectl --namespace=${K8S_NAMESPACE} delete pvc $pvc
+  done
+
   echo "Deleted UAT dependabot release $RELEASE_NAME"
 else
   echo "UAT dependabot release $RELEASE_NAME was not found"
