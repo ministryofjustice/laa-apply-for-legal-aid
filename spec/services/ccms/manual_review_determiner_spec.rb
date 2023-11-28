@@ -219,8 +219,18 @@ module CCMS
           end
         end
 
-        context "with further employment information" do
+        context "with client further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
+
+          before { create(:cfe_v4_result, submission: cfe_submission) }
+
+          it "returns true" do
+            expect(manual_review_required).to be true
+          end
+        end
+
+        context "with partner further employment information" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_employed_partner_and_extra_info) }
 
           before { create(:cfe_v4_result, submission: cfe_submission) }
 
@@ -239,10 +249,22 @@ module CCMS
           end
         end
 
-        context "with uploaded bank_statements" do
+        context "with client uploaded bank_statements" do
           let(:provider) { create(:provider) }
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, attachments: [bank_statement], provider:) }
           let(:bank_statement) { create(:attachment, :bank_statement) }
+
+          before { create(:cfe_v5_result, submission: cfe_submission) }
+
+          it "returns true" do
+            expect(manual_review_required).to be true
+          end
+        end
+
+        context "with partner uploaded bank_statements" do
+          let(:provider) { create(:provider) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, attachments: [bank_statement], provider:) }
+          let(:bank_statement) { create(:attachment, :partner_bank_statement) }
 
           before { create(:cfe_v5_result, submission: cfe_submission) }
 
@@ -281,8 +303,16 @@ module CCMS
           end
         end
 
-        context "with further employment information" do
+        context "with client further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
+
+          it "adds further_employment_details to the review reasons" do
+            expect(review_reasons_result).to eq further_employment_details_reasons
+          end
+        end
+
+        context "with partner further employment information" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_employed_partner_and_extra_info) }
 
           it "adds further_employment_details to the review reasons" do
             expect(review_reasons_result).to eq further_employment_details_reasons
@@ -297,12 +327,22 @@ module CCMS
           end
         end
 
-        context "with uploaded bank statements" do
+        context "with client uploaded bank statements" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
           before do
             allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return true
           end
+
+          it "adds uploaded_bank_statements to the review reasons" do
+            expect(review_reasons_result).to include(:uploaded_bank_statements)
+          end
+        end
+
+        context "with partner uploaded bank statements" do
+          let(:provider) { create(:provider) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, attachments: [bank_statement], provider:) }
+          let(:bank_statement) { create(:attachment, :partner_bank_statement) }
 
           it "adds uploaded_bank_statements to the review reasons" do
             expect(review_reasons_result).to include(:uploaded_bank_statements)
