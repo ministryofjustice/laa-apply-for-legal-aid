@@ -52,7 +52,7 @@ module CFEResults
               income_contribution: 0.0,
               employment_income: {
                 gross_income: 2143.97,
-                benefits_in_kind: 0.0,
+                benefits_in_kind: 16.60,
                 tax: -204.15,
                 national_insurance: -161.64,
                 fixed_employment_deduction: -45.0,
@@ -152,7 +152,7 @@ module CFEResults
                   child_care: 0.0,
                   rent_or_mortgage: 125.0,
                   maintenance_out: 0.0,
-                  legal_aid: 0.0,
+                  legal_aid: 100.0,
                 },
                 bank_transactions: {
                   child_care: 0.0,
@@ -931,10 +931,36 @@ module CFEResults
       def self.with_partner
         result = eligible
         partner_gross_income = {
-          employment_income: [],
+          employment_income: [
+            {
+              name: "Job 1",
+              payments: [
+                {
+                  date: "2023-11-15",
+                  gross: 2083.33,
+                  benefits_in_kind: 0.0,
+                  tax: -206.0,
+                  national_insurance: -154.36,
+                  prisoner_levy: 0.0,
+                  student_debt_repayment: 0.0,
+                  net_employment_income: 1722.97,
+                },
+                {
+                  date: "2023-10-14",
+                  gross: 3083.33,
+                  benefits_in_kind: 0.0,
+                  tax: -406.0,
+                  national_insurance: -274.36,
+                  prisoner_levy: 0.0,
+                  student_debt_repayment: 0.0,
+                  net_employment_income: 2402.97,
+                },
+              ],
+            },
+          ],
           irregular_income: {
             monthly_equivalents: {
-              student_loan: 0.0,
+              student_loan: 100.0,
               unspecified_source: 0.0,
             },
           },
@@ -949,9 +975,9 @@ module CFEResults
             monthly_equivalents: {
               all_sources: {
                 friends_or_family: 166.67,
-                maintenance_in: 0.0,
-                property_or_lodger: 0.0,
-                pension: 0.0,
+                maintenance_in: 21.0,
+                property_or_lodger: 200.0,
+                pension: 30.0,
               },
               bank_transactions: {
                 friends_or_family: 0,
@@ -971,9 +997,9 @@ module CFEResults
         partner_disposable_income = {
           monthly_equivalents: {
             all_sources: {
-              child_care: 0.0,
-              rent_or_mortgage: 0.0,
-              maintenance_out: 0.0,
+              child_care: 30.0,
+              rent_or_mortgage: 400.0,
+              maintenance_out: 50.0,
               legal_aid: 0.0,
               pension_contribution: 0.0,
             },
@@ -1033,7 +1059,7 @@ module CFEResults
           dependant_allowance: 0,
           gross_housing_costs: 0.0,
           housing_benefit: 0.0,
-          net_housing_costs: 0.0,
+          net_housing_costs: 400.0,
           maintenance_allowance: 0.0,
           total_outgoings_and_allowances: 1052.06,
           total_disposable_income: 2577.11,
