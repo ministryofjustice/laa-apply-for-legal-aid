@@ -104,7 +104,7 @@ Feature: Means report
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
-      | Review reasons | Bank statements uploaded |
+      | Review reasons | Client's bank statements uploaded |
       | Review reasons | Non-Passported application |
 
     And the Capital result questions should exist:
