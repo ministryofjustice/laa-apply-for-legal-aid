@@ -18,8 +18,8 @@ then
 
   for pvc in $(kubectl --namespace=${K8S_NAMESPACE} get pvc -o custom-columns=":metadata.name" | grep $RELEASE_NAME)
   do
-    echo "Would delete PVC $pvc"
-    # kubectl --namespace=${K8S_NAMESPACE} delete pvc $pvc
+    echo "Deleting PVC $pvc"
+    kubectl --namespace=${K8S_NAMESPACE} delete pvc $pvc
   done
 
   echo "Deleted UAT dependabot release $RELEASE_NAME"
