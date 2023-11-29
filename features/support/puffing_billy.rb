@@ -41,6 +41,16 @@ Before("@billy") do
     },
     code: 200,
   )
+
+  proxy
+  .stub(%r{legal-framework-api-staging.cloud-platform.service.justice.gov.uk.*/proceeding_types/searches}, method: "options")
+  .and_return(
+    headers: {
+      "Access-Control-Allow-Origin" => "*",
+      "Access-Control-Allow-Headers" => "Content-Type",
+    },
+    code: 200,
+  )
 end
 
 After("@billy") do

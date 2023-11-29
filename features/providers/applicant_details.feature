@@ -1,5 +1,5 @@
 Feature: Applicant details
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: Completes the application using address lookup with multiple proceedings
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -128,7 +128,7 @@ Feature: Applicant details
     Then I should be on a page showing 'Delegated functions' with a date of 2 days ago using '%-d %B %Y' format
     Then I should be on a page showing 'Delegated functions' with a date of 35 days ago using '%-d %B %Y' format
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -263,7 +263,7 @@ Feature: Applicant details
     Then I click 'Send link'
     Then I am on the application confirmation page
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: I can see that the applicant receives benefits
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
@@ -316,7 +316,7 @@ Feature: Applicant details
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: I can see that the applicant does not receive benefits
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
@@ -376,7 +376,7 @@ Feature: Applicant details
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client receives a passporting benefit"
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: Allows return to, and proceed from, Delegated Function date view
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'

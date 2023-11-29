@@ -845,6 +845,108 @@ Then("I visit received benefit confirmation page") do
 end
 
 And("I search for proceeding {string}") do |proceeding_search|
+  response_body = case proceeding_search
+                  when "Non-molestation order"
+                    {
+                      success: true,
+                      data: [
+                        {
+                          meaning: "Non-molestation order",
+                          ccms_code: "DA004",
+                          description: "to be represented on an application for a non-molestation order.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                      ],
+                    }
+                  when "injunction"
+                    {
+                      success: true,
+                      data: [
+                        {
+                          meaning: "Inherent jurisdiction high court injunction",
+                          ccms_code: "DA001",
+                          description: "to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                        {
+                          meaning: "Harassment - injunction",
+                          ccms_code: "DA003",
+                          description: "to be represented in an action for an injunction under section 3 Protection from Harassment Act 1997.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                      ],
+                    }
+                  when "Occupation order"
+                    {
+                      success: true,
+                      data: [
+                        {
+                          meaning: "Occupation order",
+                          ccms_code: "DA005",
+                          description: "to be represented on an application for an occupation order.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                      ],
+                    }
+                  when "FGM Protection Order"
+                    {
+                      success: true,
+                      data: [
+                        {
+                          meaning: "FGM Protection Order",
+                          ccms_code: "DA020",
+                          description: "To be represented on an application for a Female Genital Mutilation Protection Order under the Female Genital Mutilation Act.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                      ],
+                    }
+                  when "Harassment - injunction"
+                    {
+                      success: true,
+                      data: [
+                        {
+                          meaning: "Harassment - injunction",
+                          ccms_code: "DA003",
+                          description: "to be represented in an action for an injunction under section 3 Protection from Harassment Act 1997.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                        {
+                          meaning: "Non-molestation order",
+                          ccms_code: "DA004",
+                          description: "to be represented on an application for a non-molestation order.",
+                          full_s8_only: false,
+                          ccms_category_law: "Family",
+                          ccms_matter: "Domestic abuse",
+                        },
+                      ],
+                    }
+                  else
+                    {
+                      success: false,
+                      data: [],
+                    }
+                  end
+  proxy
+    .stub("https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk:443/proceeding_types/searches", method: "post")
+    .and_return(
+      headers: {
+        "Access-Control-Allow-Origin" => "*",
+      },
+      code: 200,
+      body: response_body.to_json,
+    )
   fill_in("proceeding-search-input", with: proceeding_search)
   wait_for_ajax
 end
