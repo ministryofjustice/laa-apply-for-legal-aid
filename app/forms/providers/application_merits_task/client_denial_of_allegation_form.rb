@@ -12,6 +12,7 @@ module Providers
         additional_information&.clear if denies_all?
         super
       end
+      alias_method :save!, :save
 
     private
 

@@ -44,6 +44,7 @@ module Providers
         end
         super
       end
+      alias_method :save!, :save
 
     private
 

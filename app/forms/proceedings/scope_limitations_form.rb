@@ -63,6 +63,7 @@ module Proceedings
                                         limitation_note: limitation_note_for(code))
       end
     end
+    alias_method :save!, :save
 
   private
 

@@ -58,7 +58,7 @@ class BaseForm
     return true if assignable_attributes.empty?
 
     model.attributes = clean_attributes(assignable_attributes)
-    model.save(validate: false)
+    model.save!(validate: false)
   end
   alias_method :save!, :save
 
@@ -89,7 +89,7 @@ class BaseForm
   def save_as_draft
     @draft = true
     set_blanks_to_nil
-    save unless all_entries_blank?
+    save! unless all_entries_blank?
   end
 
   def draft?

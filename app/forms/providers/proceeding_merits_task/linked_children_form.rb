@@ -16,21 +16,26 @@ module Providers
       def save
         return false unless valid?
 
-        ActiveRecord::Base.transaction do
-          update_involved_children_on_proceeding
-        end
-        true
-      rescue StandardError
-        false
+        update_involved_children_on_proceeding
+      end
+      alias_method :save!, :save
+
+      def save_as_draft
+        @draft = true
+        save! unless update_involved_children_on_proceeding || all_entries_blank?
       end
 
     private
 
       def update_involved_children_on_proceeding
-        proceeding.involved_children.delete_all
-        linked_children.filter_map(&:presence).each do |child_id|
-          proceeding.proceeding_linked_children.create!(involved_child_id: child_id)
+        ActiveRecord::Base.transaction do
+          proceeding.involved_children.delete_all
+          linked_children.filter_map(&:presence).each do |child_id|
+            proceeding.proceeding_linked_children.create!(involved_child_id: child_id)
+          end
         end
+      rescue StandardError
+        false
       end
 
       def one_selected_child?

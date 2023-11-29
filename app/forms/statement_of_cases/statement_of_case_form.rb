@@ -21,6 +21,7 @@ module StatementOfCases
       # return result which returns 300 for redirect to fix tests
       result
     end
+    alias_method :save!, :save
 
   private
 
