@@ -14,6 +14,8 @@ if [[ $UAT_RELEASES == *"$RELEASE_NAME"* ]]
 then
   helm delete $RELEASE_NAME --namespace=${K8S_NAMESPACE}
 
+  echo "Searching for PVCs matching $RELEASE_NAME..."
+
   for pvc in $(kubectl --namespace=${K8S_NAMESPACE} get pvc -o custom-columns=":metadata.name" | grep $RELEASE_NAME)
   do
     kubectl --namespace=${K8S_NAMESPACE} delete pvc $pvc
