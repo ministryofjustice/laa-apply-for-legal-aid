@@ -17,20 +17,20 @@ Scenario: No results returned is seen on screen when non-existant organisation s
   Then the organisation result list on page returns a "No results found." message
   And organisation suggestions has 0 results
 
-@javascript
+@javascript @billy
 Scenario: I am able to find a single organisation using a partial word
   When I search for organisation "bab"
   Then the organisation suggestions include "Babergh District Council\nLocal Authority"
   And organisation suggestions has 1 result
 
-@javascript
+@javascript @billy
 Scenario: I am able to find multiple organisations using a partial word
   When I search for organisation "ang"
   Then the organisation suggestions include "Isle of Anglesey County Council\nLocal Authority"
   And the organisation suggestions include "Angus Council\nLocal Authority"
   And organisation suggestions has 2 results
 
-@javascript
+@javascript @billy
 Scenario: I am able to see highlighted search terms in the results
   When I search for organisation "ang loc"
   Then the organisation suggestions include "Isle of Anglesey County Council\nLocal Authority"
@@ -43,7 +43,7 @@ Scenario: I am able to see highlighted search terms in the results
 # NOTE: previous javascript highlighting incarnations could result in html output to the screen, this is no longer
 # possible using the full text search "headline" method, so the scenario's original purpose is no longer applicable.
 # It does, howver, excercise a search edge case so may be of value?!
-@javascript
+@javascript @billy
 Scenario: I am prevented from seeing HTML output in search results
   When I search for organisation "prison r"
   Then the organisation suggestions include "Risley\nHM Prison or Young Offender Institute"
@@ -55,7 +55,7 @@ Scenario: I am prevented from seeing HTML output in search results
   And I can see the highlighted search term "Rye" 1 time
   And I can see the highlighted search term "Prison" 3 times
 
-  @javascript
+  @javascript @billy
   Scenario: I am able to clear the organisation search terms
     When I search for organisation "bab"
     Then the organisation suggestions include "Babergh District Council\nLocal Authority"
