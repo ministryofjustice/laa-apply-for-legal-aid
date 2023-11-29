@@ -7,10 +7,10 @@ RSpec.describe DigestExporter do
   # expected methods are called
 
   describe ".call" do
-    let(:service_creds) { double Google::Auth::ServiceAccountCredentials, fetch_access_token!: {} }
-    let(:sheet_service) { double Google::Apis::SheetsV4::SheetsService }
-    let(:spreadsheet) { double "Spreadsheet" }
-    let(:worksheet) { double "Worksheet" }
+    let(:service_creds) { instance_double Google::Auth::ServiceAccountCredentials, fetch_access_token!: {} }
+    let(:sheet_service) { instance_double Google::Apis::SheetsV4::SheetsService }
+    let(:spreadsheet) { instance_double Google::Apis::SheetsV4::Spreadsheet }
+    let(:worksheet) { instance_double Google::Apis::SheetsV4::Spreadsheet }
     let(:sheet_id) { "123456789" }
     let(:properties) { DummyPropertiesStruct.new(sheet_id, DummyGridPropertiesStruct.new(10, 10)) }
     let(:fixed_time) { Time.zone.now }

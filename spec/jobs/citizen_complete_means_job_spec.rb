@@ -17,7 +17,7 @@ RSpec.describe CitizenCompleteMeansJob, :vcr do
 
   describe "SubmitProviderReminderService" do
     it "sends a reminder mail" do
-      service = double SubmitProviderReminderService
+      service = instance_double SubmitProviderReminderService
       expect(SubmitProviderReminderService).to receive(:new).and_return(service)
       expect(service).to receive(:send_email)
       citizen_complete_means_job

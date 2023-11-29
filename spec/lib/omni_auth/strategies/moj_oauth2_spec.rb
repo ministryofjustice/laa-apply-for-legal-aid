@@ -6,7 +6,7 @@ AccessTokenStruct = Struct.new(:expired?, :token, :expires?)
 module OmniAuth
   module Strategies
     RSpec.describe MojOauth2 do
-      let(:mock_rack_app) { double Rack::Pjax, call: nil }
+      let(:mock_rack_app) { instance_double Rack::Pjax, call: nil }
       let(:applicant_id) { "50b98c1b-cf5d-428e-b32c-d20e9d1184dd" }
       let(:omniauth_state) { "6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76" }
       let(:strategy) { described_class.new(mock_rack_app, {}) }
@@ -39,7 +39,7 @@ module OmniAuth
       end
 
       context "when in callback phase" do
-        let(:mock_request) { double "request", params: example_request_params, scheme: "http", url: "my_url" }
+        let(:mock_request) { instance_double Rack::Request, params: example_request_params, scheme: "http", url: "my_url" }
 
         let(:my_access_token) { AccessTokenStruct.new(false) }
 

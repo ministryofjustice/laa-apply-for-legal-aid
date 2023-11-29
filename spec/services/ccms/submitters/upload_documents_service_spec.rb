@@ -43,11 +43,11 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   let(:histories) { CCMS::SubmissionHistory.order(:created_at).where(submission_id: submission.id) }
   let(:first_history) { histories.first }
   let(:document_upload_requestor) do
-    double CCMS::Requestors::DocumentUploadRequestor.new(submission.case_ccms_reference,
-                                                         statement_of_case_attachment.id,
-                                                         "base64encodedpdf",
-                                                         "my_login",
-                                                         nil)
+    CCMS::Requestors::DocumentUploadRequestor.new(submission.case_ccms_reference,
+                                                  statement_of_case_attachment.id,
+                                                  "base64encodedpdf",
+                                                  "my_login",
+                                                  nil)
   end
   let(:document_upload_response) { ccms_data_from_file "document_upload_response.xml" }
   let(:transaction_request_id_in_example_response) { "20190301030405123456" }

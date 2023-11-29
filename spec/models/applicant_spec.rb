@@ -406,7 +406,7 @@ RSpec.describe Applicant do
     end
 
     context "with CFE version out of scope result" do
-      let(:cfe_version_5_result) { double "CFE::V5::Result" }
+      let(:cfe_version_5_result) { instance_double CFE::V5::Result }
 
       it "returns false" do
         create(:legal_aid_application, applicant:)

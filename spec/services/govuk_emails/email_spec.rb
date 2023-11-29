@@ -5,7 +5,7 @@ StatusStruct = Struct.new(:status)
 RSpec.describe GovukEmails::Email do
   subject { described_class.new(message_id) }
 
-  let(:govuk_client) { double(Notifications::Client) }
+  let(:govuk_client) { instance_double(Notifications::Client) }
   let(:message_id) { "ad9559be-f32d-4674-91dd-87c50d4a16b2" }
 
   before do

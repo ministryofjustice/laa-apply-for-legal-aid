@@ -102,7 +102,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
           continue_button: "Continue",
         }
       end
-      let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: true) }
+      let(:add_proceeding_service) { instance_double(LegalFramework::AddProceedingService, call: true) }
 
       before { allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service) }
 
@@ -117,8 +117,8 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
       end
 
       context "when LegalFramework::ProceedingTypesService call returns false" do
-        let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: false) }
-        let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: false) }
+        let(:proceeding_type_service) { instance_double(LegalFramework::ProceedingTypesService, add: false) }
+        let(:add_proceeding_service) { instance_double(LegalFramework::AddProceedingService, call: false) }
 
         before do
           allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service)
