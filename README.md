@@ -281,8 +281,8 @@ different firms.  The password for all users is `password`.
 
 ### Post-authentication provider details retrieval
 Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
-an after_action method `#update_provider_details` on the `SamlSsessionsController` is executed. This will call
-the `update_details` method on the current_provider (a Provider object supplied by Devise) whch generates
+an after_action method `#update_provider_details` on the `SamlSessionsController` is executed. This will call
+the `update_details` method on the current_provider (a Provider object supplied by Devise) which generates
 a background job to query the provider details API and updates any details that have changed on the provider record.
 
 
