@@ -799,6 +799,7 @@ en:
         status: Status
         uploaded: Uploaded
         delete: Delete
+        delete_html: Delete <span class="govuk-visually-hidden">%{filename}</span>
         select_a_category: Select a category
         select_a_category_label: "Select a category for %{filename}"
         update: Update

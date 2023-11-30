@@ -41,13 +41,12 @@
                 end
                 row.with_cell do
                   govuk_button_to(
-                    t(".delete"),
+                    t(".delete_html", filename: attachment.document.filename),
                     providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
                     method: :patch,
                     name: "delete_button",
                     class: "button-as-link",
                     params: { attachment_id: attachment.id },
-                    "aria-label": attachment.document.filename,
                   )
                 end
               end
