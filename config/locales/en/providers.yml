@@ -769,9 +769,9 @@ en:
         h1-heading: Upload your client's bank statements
     uploaded_evidence_collections:
       upload_evidence:
-        single_item: "Use this page to provide evidence of %{evidence_type}."
-        section_8_evidence: Use this page to provide optional gateway evidence.
-        single_non_specific_item: "Use this page to provide %{item}."
+        single_item: "Use this page to upload %{evidence_type}."
+        section_8_evidence: Use this page to upload gateway evidence. This is optional.
+        single_non_specific_item: "Use this page to upload %{item}."
         list_text: 'Use this page to upload:'
         benefit_evidence: evidence that your client receives %{benefit}
         client_employment_evidence: evidence of your client's employment
@@ -780,7 +780,7 @@ en:
         court_application: the application to court for Section 8 proceedings (optional)
         court_order: the court order for Section 8 proceedings
         court_application_or_order: the application to court or court order for Section 8 proceedings
-        expert_report: expert reports, for example a CAFCASS report (optional)
+        expert_report: expert reports - for example, a CAFCASS report (optional)
         size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
         dropzone_message: Drag and drop files here or
         choose_files_btn: Choose files
@@ -799,6 +799,7 @@ en:
         status: Status
         uploaded: Uploaded
         delete: Delete
+        delete_html: Delete <span class="govuk-visually-hidden">%{filename}</span>
         select_a_category: Select a category
         select_a_category_label: "Select a category for %{filename}"
         update: Update
