@@ -14,7 +14,7 @@ Billy.configure do |c|
   c.non_whitelisted_requests_disabled = true # turn off all unrecorded/uncached requests
   # c.cache_whitelist = ["https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk"]
   c.cache_path = "features/puffing-billy/request_cache"
-  # c.certs_path = 'features/puffing-billy/request_certs'
+  # c.certs_path = 'features/puffing-billy/request_certs' # defaults to local user tmp dir, which is safe!?
   # c.proxy_host = 'example.com' # defaults to localhost
   # c.proxy_port = 12345 # defaults to random
   # c.proxied_request_host = nil
@@ -33,7 +33,7 @@ Before("@billy") do
   proxy.stub(/content-autofill\.googleapis\.com/).and_return(code: 200, body: "")
 
   proxy
-  .stub(%r{legal-framework-api-staging.cloud-platform.service.justice.gov.uk.*/organisation_searches}, method: "options")
+  .stub(%r{https://legal-framework-api-staging\.cloud-platform.service\.justice\.gov\.uk.*/organisation_searches}, method: "options")
   .and_return(
     headers: {
       "Access-Control-Allow-Origin" => "*",
@@ -43,7 +43,7 @@ Before("@billy") do
   )
 
   proxy
-  .stub(%r{legal-framework-api-staging.cloud-platform.service.justice.gov.uk.*/proceeding_types/searches}, method: "options")
+  .stub(%r{https://legal-framework-api-staging\.cloud-platform.service\.justice.gov\.uk.*/proceeding_types/searches}, method: "options")
   .and_return(
     headers: {
       "Access-Control-Allow-Origin" => "*",
