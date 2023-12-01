@@ -1,5 +1,4 @@
 require "billy/capybara/cucumber"
-require "table_print"
 
 Billy.configure do |c|
   c.cache = true
@@ -30,40 +29,23 @@ Before("@billy") do
                               :selenium_chrome_headless_billy
                             end
 
-  proxy.stub(/content-autofill\.googleapis\.com/).and_return(code: 200, body: "")
-
-  proxy
-  .stub(%r{https://legal-framework-api-staging\.cloud-platform.service\.justice\.gov\.uk.*/organisation_searches}, method: "options")
-  .and_return(
-    headers: {
-      "Access-Control-Allow-Origin" => "*",
-      "Access-Control-Allow-Headers" => "Content-Type",
-    },
-    code: 200,
-  )
-
-  proxy
-  .stub(%r{https://legal-framework-api-staging\.cloud-platform.service\.justice.gov\.uk.*/proceeding_types/searches}, method: "options")
-  .and_return(
-    headers: {
-      "Access-Control-Allow-Origin" => "*",
-      "Access-Control-Allow-Headers" => "Content-Type",
-    },
-    code: 200,
-  )
+  before_puffing_billy_stubs
 end
 
 After("@billy") do
   Capybara.use_default_driver
 
-  puts "Requests received via Puffing Billy Proxy:"
+  if ENV["DEBUG"] || ENV["DEBUG_BILLY"]
+    puts "Requests received via Puffing Billy Proxy:"
 
-  puts TablePrint::Printer.table_print(Billy.proxy.requests, [
-    :status,
-    :handler,
-    :method,
-    { url: { width: 100 } },
-    :headers,
-    :body,
-  ])
+    require "table_print"
+    puts TablePrint::Printer.table_print(Billy.proxy.requests, [
+      :status,
+      :handler,
+      :method,
+      { url: { width: 100 } },
+      :headers,
+      :body,
+    ])
+  end
 end
