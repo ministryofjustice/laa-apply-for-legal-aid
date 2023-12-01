@@ -110,11 +110,15 @@ module PuffingBillyHelper
 
   def before_puffing_billy_stubs
     proxy
+      .stub(/https:\/\/accounts\.google\.com/, method: "all")
+      .and_return(code: 200, body: "")
+
+    proxy
       .stub(/content-autofill\.googleapis\.com/)
       .and_return(code: 200, body: "")
 
     proxy
-    .stub(%r{https://legal-framework-api-staging\.cloud-platform.service\.justice\.gov\.uk.*/organisation_searches}, method: "options")
+    .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/organisation_searches}, method: "options")
     .and_return(
       headers: {
         "Access-Control-Allow-Origin" => "*",
@@ -124,7 +128,7 @@ module PuffingBillyHelper
     )
 
     proxy
-      .stub(%r{https://legal-framework-api-staging\.cloud-platform.service\.justice.gov\.uk.*/proceeding_types/searches}, method: "options")
+      .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/proceeding_types/searches}, method: "options")
       .and_return(
         headers: {
           "Access-Control-Allow-Origin" => "*",
