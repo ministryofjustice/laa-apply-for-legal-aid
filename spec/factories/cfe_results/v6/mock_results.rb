@@ -1074,11 +1074,43 @@ module CFEResults
             net_employment_income: 1777.11,
           },
         }
+        partner_capital_summary = {
+          pensioner_disregard_applied: 0.0,
+          total_liquid: 500.0,
+          total_non_liquid: 0.0,
+          total_vehicle: 0.0,
+          total_property: 0.0,
+          total_mortgage_allowance: 999_999_999_999.0,
+          total_capital: 500.0,
+          subject_matter_of_dispute_disregard: 0.0,
+          assessed_capital: 500_000.0,
+          total_capital_with_smod: 500_000.0,
+          disputed_non_property_disregard: 0,
+          proceeding_types: [
+            { ccms_code: "SE097A",
+              upper_threshold: 8000.0,
+              lower_threshold: 3000.0,
+              result: "ineligible",
+              client_involvement_type: "A" },
+            { ccms_code: "SE101E",
+              upper_threshold: 8000.0,
+              lower_threshold: 3000.0,
+              result: "ineligible",
+              client_involvement_type: "A" },
+          ],
+          combined_disputed_capital: 0,
+          combined_non_disputed_capital: 500_000.0,
+          capital_contribution: 497_000.0,
+          pensioner_capital_disregard: 0.0,
+          combined_assessed_capital: 500_000.0,
+        }
         result[:assessment][:partner_gross_income] = partner_gross_income
         result[:assessment][:partner_disposable_income] = partner_disposable_income
         result[:assessment][:partner_capital] = partner_capital
         result[:result_summary][:partner_gross_income] = { total_gross_income: 150.0 }
+        result[:result_summary][:partner_capital] = partner_capital_summary
         result[:result_summary][:partner_disposable_income] = partner_disposable_income_summary
+        result[:result_summary][:disposable_income][:partner_allowance] = 211.32
         result
       end
     end

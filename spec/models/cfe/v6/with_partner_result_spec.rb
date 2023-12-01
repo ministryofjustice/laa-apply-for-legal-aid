@@ -420,13 +420,100 @@ module CFE
       end
 
       describe "total_deductions_including_fixed_employment_allowance" do
-        it "returns total deductions including fixed employment allowance" do
-          expected_amount = cfe_result.total_deductions + cfe_result.employment_income_fixed_employment_deduction
-          expect(cfe_result.total_deductions_including_fixed_employment_allowance).to eq expected_amount
+        context "with partner set to false" do
+          let(:partner) { false }
+
+          it "returns the total monthly outgoings including employment outgoings for the client only" do
+            expect(cfe_result.total_deductions_including_fixed_employment_allowance(partner:)).to eq 301.32
+          end
+        end
+
+        context "with partner set to true" do
+          let(:partner) { true }
+
+          it "returns total deductions including fixed employment allowance" do
+            expect(cfe_result.total_deductions_including_fixed_employment_allowance(partner:)).to eq 301.32
+          end
         end
       end
 
       # CAPITAL
+
+      describe "capital_summary" do
+        context "with partner set to false" do
+          let(:partner) { false }
+
+          it "returns the total monthly outgoings including employment outgoings for the client only" do
+            expect(cfe_result.capital_summary(partner:)[:total_liquid]).to eq 12.0
+          end
+        end
+
+        context "with partner set to true" do
+          let(:partner) { true }
+
+          it "returns total deductions including fixed employment allowance" do
+            expect(cfe_result.capital_summary(partner:)[:total_liquid]).to eq 500.0
+          end
+        end
+      end
+
+      describe "partner_capital" do
+        it "returns the partner capital" do
+          expect(cfe_result.partner_capital).not_to be_nil
+        end
+      end
+
+      describe "partner_capital?" do
+        it "returns true" do
+          expect(cfe_result.partner_capital?).to be true
+        end
+      end
+
+      describe "current_accounts" do
+        it "returns the sum of all current accounts" do
+          expect(cfe_result.current_accounts).to eq 601.0
+        end
+      end
+
+      describe "savings_accounts" do
+        it "returns the sum of all savings accounts" do
+          expect(cfe_result.savings_accounts).to eq 301.0
+        end
+      end
+
+      describe "liquid_capital_items" do
+        client_current_account = { description: "Current accounts", value: 1.0 }
+        partner_current_account = { description: "Partner current accounts", value: 400.0 }
+
+        it "returns the liquid capital items for client and partner" do
+          expect(client_current_account.in?(cfe_result.liquid_capital_items)).to be true
+          expect(partner_current_account.in?(cfe_result.liquid_capital_items)).to be true
+        end
+      end
+
+      describe "total_savings" do
+        it "returns the total savings for the client and partner" do
+          expect(cfe_result.total_savings).to eq 512.0
+        end
+      end
+
+      describe "total_capital" do
+        it "returns the total capital amount for client and partner" do
+          expect(cfe_result.total_capital).to eq 644.0
+        end
+      end
+
+      describe "total_capital_before_pensioner_disregard" do
+        it "returns the total capital amount before pensioner disregard" do
+          expect(cfe_result.total_capital_before_pensioner_disregard).to eq 644.0
+        end
+      end
+
+      describe "total_disposable_capital" do
+        it "returns the total disposable capital amount" do
+          expect(cfe_result.total_disposable_capital).to eq 644.0
+        end
+      end
     end
   end
 end

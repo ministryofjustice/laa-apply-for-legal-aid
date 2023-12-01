@@ -205,8 +205,8 @@ module CFE
         dependants_allowance + disregarded_state_benefits + partner_allowance
       end
 
-      def total_deductions_including_fixed_employment_allowance
-        total_deductions - employment_income_fixed_employment_deduction
+      def total_deductions_including_fixed_employment_allowance(partner: false)
+        total_deductions - employment_income_fixed_employment_deduction - employment_income_fixed_employment_deduction(partner:)
       end
 
       ################################################################
@@ -237,21 +237,15 @@ module CFE
         accounts.sum { |account| account[:value] }
       end
 
-      def non_liquid_capital_items
-        client_items = capital[:capital_items][:non_liquid].sort_by { |item| item[:description] }
-        partner_items = partner_capital? ? partner_capital[:capital_items][:non_liquid] : []
-        client_items.concat(partner_items).sort_by { |item| item[:description] }
-      end
-
       def liquid_capital_items
         client_items = capital[:capital_items][:liquid].sort_by { |item| item[:description] }
         partner_items = partner_capital? ? partner_capital[:capital_items][:liquid] : []
         client_items.concat(partner_items).sort_by { |item| item[:description] }
       end
 
-      def total_savings(partner: false)
+      def total_savings
         client_savings = capital_summary[:total_liquid]
-        partner_savings = partner ? capital_summary(partner: true)[:total_liquid] : 0.0
+        partner_savings = partner_capital? ? capital_summary(partner: true)[:total_liquid] : 0.0
         client_savings + partner_savings
       end
 
@@ -267,12 +261,12 @@ module CFE
       #                                                              #
       ################################################################
 
-      def total_capital_before_pensioner_disregard(partner: false)
-        total_property + total_savings(partner:) + total_vehicles + total_other_assets
+      def total_capital_before_pensioner_disregard
+        total_property + total_savings + total_vehicles + total_other_assets
       end
 
-      def total_disposable_capital(partner: false)
-        [0, (total_capital_before_pensioner_disregard(partner:) + pensioner_capital_disregard)].max
+      def total_disposable_capital
+        [0, (total_capital_before_pensioner_disregard + pensioner_capital_disregard)].max
       end
     end
   end
