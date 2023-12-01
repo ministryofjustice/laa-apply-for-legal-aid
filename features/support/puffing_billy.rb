@@ -1,5 +1,10 @@
 require "billy/capybara/cucumber"
 
+# if you want to record a request and response in order to generate a stub you can
+# 1. comment out/remove an proxy.stubs in use
+# 2. set non_whitelisted_requests_disabled = false here
+# 3. ensre cache = true and persist_cache = true
+#
 Billy.configure do |c|
   c.cache = true
   # c.cache_request_headers = false

@@ -13,6 +13,52 @@ module PuffingBillyHelper
       )
   end
 
+  def stub_proceeding_search_for(term)
+    body = proceeding_search_term_stubs[term]
+
+    proxy
+      .stub("https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk:443/proceeding_types/searches", method: "post")
+      .and_return(
+        headers: {
+          "Access-Control-Allow-Origin" => "*",
+        },
+        code: 200,
+        body: body.to_json,
+      )
+  end
+
+  def before_puffing_billy_stubs
+    proxy
+      .stub(/https:\/\/accounts\.google\.com/, method: "all")
+      .and_return(code: 200, body: "")
+
+    proxy
+      .stub(/content-autofill\.googleapis\.com/)
+      .and_return(code: 200, body: "")
+
+    proxy
+    .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/organisation_searches}, method: "options")
+    .and_return(
+      headers: {
+        "Access-Control-Allow-Origin" => "*",
+        "Access-Control-Allow-Headers" => "Content-Type",
+      },
+      code: 200,
+    )
+
+    proxy
+      .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/proceeding_types/searches}, method: "options")
+      .and_return(
+        headers: {
+          "Access-Control-Allow-Origin" => "*",
+          "Access-Control-Allow-Headers" => "Content-Type",
+        },
+        code: 200,
+      )
+  end
+
+private
+
   def organisation_search_term_stubs
     Hash.new({ success: false, data: [] }).merge(
       {
@@ -108,34 +154,97 @@ module PuffingBillyHelper
     )
   end
 
-  def before_puffing_billy_stubs
-    proxy
-      .stub(/https:\/\/accounts\.google\.com/, method: "all")
-      .and_return(code: 200, body: "")
-
-    proxy
-      .stub(/content-autofill\.googleapis\.com/)
-      .and_return(code: 200, body: "")
-
-    proxy
-    .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/organisation_searches}, method: "options")
-    .and_return(
-      headers: {
-        "Access-Control-Allow-Origin" => "*",
-        "Access-Control-Allow-Headers" => "Content-Type",
-      },
-      code: 200,
-    )
-
-    proxy
-      .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/proceeding_types/searches}, method: "options")
-      .and_return(
-        headers: {
-          "Access-Control-Allow-Origin" => "*",
-          "Access-Control-Allow-Headers" => "Content-Type",
+  def proceeding_search_term_stubs
+    Hash.new({ success: false, data: [] }).merge(
+      {
+        "Non-molestation order" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Non-molestation order",
+              ccms_code: "DA004",
+              description: "to be represented on an application for a non-molestation order.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+          ],
         },
-        code: 200,
-      )
+        "injunction" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Inherent jurisdiction high court injunction",
+              ccms_code: "DA001",
+              description: "to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+            {
+              meaning: "Harassment - injunction",
+              ccms_code: "DA003",
+              description: "to be represented in an action for an injunction under section 3 Protection from Harassment Act 1997.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+          ],
+        },
+        "Occupation order" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Occupation order",
+              ccms_code: "DA005",
+              description: "to be represented on an application for an occupation order.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+          ],
+        },
+        "FGM Protection Order" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "FGM Protection Order",
+              ccms_code: "DA020",
+              description: "To be represented on an application for a Female Genital Mutilation Protection Order under the Female Genital Mutilation Act.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+          ],
+        },
+        "Harassment - injunction" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Harassment - injunction",
+              ccms_code: "DA003",
+              description: "to be represented in an action for an injunction under section 3 Protection from Harassment Act 1997.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+            {
+              meaning: "Non-molestation order",
+              ccms_code: "DA004",
+              description: "to be represented on an application for a non-molestation order.",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Domestic abuse",
+            },
+          ],
+        },
+      },
+    )
   end
 end
 
