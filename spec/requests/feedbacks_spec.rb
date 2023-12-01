@@ -23,7 +23,7 @@ RSpec.describe "FeedbacksController" do
     let(:page_history) { [address_lookup_page, "/feedback"] }
 
     before do
-      page_history_stub = double(PageHistoryService, read: page_history.to_json)
+      page_history_stub = instance_double(PageHistoryService, read: page_history.to_json)
       allow(PageHistoryService).to receive(:new).with(page_history_id:).and_return(page_history_stub)
 
       set_session(session_vars)

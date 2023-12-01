@@ -85,7 +85,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
 
       before do
         login_as application.provider
-        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
+        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(instance_double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       context "and the results are correct" do
@@ -231,7 +231,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
 
       before do
         login_as application.provider
-        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
+        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(instance_double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       it "redirects provider to provider's applications page" do

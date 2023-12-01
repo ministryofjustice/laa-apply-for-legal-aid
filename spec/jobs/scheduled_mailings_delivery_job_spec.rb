@@ -37,7 +37,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
         context "when nothing is in the queue" do
           let(:job_queue) { [] }
-          let(:job) { double "Sidekiq Job", perform_later: nil }
+          let(:job) { class_double EmailMonitorJob, perform_later: nil }
           let(:delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY }
 
           it "schedules another delivery job" do

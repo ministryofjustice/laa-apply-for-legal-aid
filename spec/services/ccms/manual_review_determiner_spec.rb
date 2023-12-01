@@ -279,8 +279,8 @@ module CCMS
       subject(:review_reasons_result) { determiner.review_reasons }
 
       context "with non-passported application" do
-        let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: false }
-        let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
+        let(:cfe_result) { instance_double CFE::V6::Result, remarks: cfe_remarks, ineligible?: false }
+        let(:cfe_remarks) { instance_double CFE::Remarks, review_reasons: }
         let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
         let(:review_reasons) { %i[unknown_frequency multi_benefit non_passported] }
         let(:override_reasons) { %i[unknown_frequency multi_benefit non_passported dwp_override] }
@@ -351,7 +351,7 @@ module CCMS
         end
 
         context "with cfe result ineligible" do
-          let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: true }
+          let(:cfe_result) { instance_double CFE::V6::Result, remarks: cfe_remarks, ineligible?: true }
 
           it "adds ineligible to the review reasons" do
             expect(review_reasons_result).to include(:ineligible)

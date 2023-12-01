@@ -34,7 +34,7 @@ RSpec.describe CitizenCompletedMeansMailer do
     end
 
     it "is always eligible for delivery" do
-      expect(described_class.eligible_for_delivery?(double(ScheduledMailing))).to be true
+      expect(described_class.eligible_for_delivery?(instance_double(ScheduledMailing))).to be true
     end
   end
 end

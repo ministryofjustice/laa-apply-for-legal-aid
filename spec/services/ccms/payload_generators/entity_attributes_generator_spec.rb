@@ -4,12 +4,12 @@ module CCMS
   module PayloadGenerators
     RSpec.describe EntityAttributesGenerator, :ccms do
       let(:generator) { described_class.new(requestor, xml, entity_name, options) }
-      let(:requestor) { double CCMS::Requestors::CaseAddRequestor, submission:, ccms_attribute_keys: yaml_keys }
-      let(:submission) { double CCMS::Submission, id: "34343434", legal_aid_application: }
-      let(:legal_aid_application) { double LegalAidApplication }
+      let(:requestor) { instance_double CCMS::Requestors::CaseAddRequestor, submission:, ccms_attribute_keys: yaml_keys }
+      let(:submission) { instance_double CCMS::Submission, id: "34343434", legal_aid_application: }
+      let(:legal_aid_application) { instance_double LegalAidApplication }
       let(:entity_name) { :bank_acct }
       let(:yaml_keys) { YAML.load_file(Rails.root.join("spec/fixtures/files/ccms_keys/standard_keys.yml")) }
-      let(:xml) { double Nokogiri::XML::Builder }
+      let(:xml) { instance_double Nokogiri::XML::Builder }
       let(:options) { {} }
 
       describe "private methods" do
@@ -76,13 +76,13 @@ module CCMS
           end
 
           context "when a method name" do
-            let(:dummy_opponent) { double "Dummy opponent" }
-            let(:config)  { { generate_block?: "opponent_my_special_method" } }
+            let(:dummy_opponent) { instance_double ApplicationMeritsTask::Opponent }
+            let(:config)  { { generate_block?: "opponent_full_name" } }
             let(:options) { { opponent: dummy_opponent } }
-            let(:expected_result) { "result from calling my_special_method on dummy_oppponent" }
+            let(:expected_result) { "Applicant full-name" }
 
             it "returns the return value of the method called on the opponent" do
-              allow(dummy_opponent).to receive(:my_special_method).and_return(expected_result)
+              allow(dummy_opponent).to receive(:full_name).and_return(expected_result)
               expect(generator.__send__(:evaluate_generate_block_method, config)).to eq expected_result
             end
           end

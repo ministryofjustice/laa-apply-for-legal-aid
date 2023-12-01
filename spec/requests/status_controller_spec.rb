@@ -6,7 +6,7 @@ RSpec.describe StatusController, clamav: true do
       allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
       allow(Sidekiq::RetrySet).to receive(:new).and_return(instance_double(Sidekiq::RetrySet, size: 0))
       allow(Sidekiq::DeadSet).to receive(:new).and_return(instance_double(Sidekiq::DeadSet, size: 0))
-      connection = double("connection")
+      connection = instance_double(HTTPClient::Connection)
       allow(connection).to receive(:info).and_return(redis_version: "5.0.0")
       allow(Sidekiq).to receive(:redis).and_yield(connection)
     end
@@ -63,7 +63,7 @@ RSpec.describe StatusController, clamav: true do
         allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad, "error")
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
-        connection = double("connection")
+        connection = instance_double(HTTPClient::Connection)
         allow(connection).to receive(:info).and_raise(Redis::CannotConnectError)
         allow(Sidekiq).to receive(:redis).and_yield(connection)
 
@@ -161,7 +161,7 @@ RSpec.describe StatusController, clamav: true do
       before do
         allow(ActiveRecord::Base.connection).to receive(:active?).and_return(true)
 
-        connection = double("connection", info: {})
+        connection = instance_double(HTTPClient::Connection, info: {})
         allow(Sidekiq).to receive(:redis).and_yield(connection)
 
         get "/healthcheck"

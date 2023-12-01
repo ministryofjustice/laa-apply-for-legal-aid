@@ -7,7 +7,7 @@ module LegalFramework
     let(:submission) { create(:legal_framework_submission) }
 
     before do
-      double(MeritsTasksRetrieverService, submission:)
+      instance_double(MeritsTasksRetrieverService, submission:)
       allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_return(dummy_response_hash)
     end
 

@@ -1709,7 +1709,7 @@ module CCMS
         end
 
         describe "APPLY_CASE_MEANS_REVIEW in global means and global merits" do
-          let(:determiner) { double ManualReviewDeterminer }
+          let(:determiner) { instance_double ManualReviewDeterminer }
 
           before { allow(ManualReviewDeterminer).to receive(:new).and_return(determiner) }
 

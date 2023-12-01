@@ -5,10 +5,10 @@ module Dashboard
     RSpec.describe ApplicantEmail do
       subject(:dashboard_applicant_email) { described_class.new(application) }
 
-      let(:geckoboard_client) { double Geckoboard::Client }
+      let(:geckoboard_client) { instance_double Geckoboard::Client }
       let(:application) { create(:legal_aid_application, :with_applicant) }
-      let(:datasets_client) { double Geckoboard::DatasetsClient }
-      let(:dataset) { double Geckoboard::Dataset }
+      let(:datasets_client) { instance_double Geckoboard::DatasetsClient }
+      let(:dataset) { instance_double Geckoboard::Dataset }
 
       before do
         allow(Geckoboard).to receive(:client).and_return(geckoboard_client)

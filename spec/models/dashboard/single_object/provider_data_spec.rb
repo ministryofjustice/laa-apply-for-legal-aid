@@ -5,11 +5,11 @@ module Dashboard
     RSpec.describe ProviderData do
       subject(:dashboard_provider) { described_class.new(provider) }
 
-      let(:geckoboard_client) { double Geckoboard::Client }
+      let(:geckoboard_client) { instance_double Geckoboard::Client }
       let(:application) { create(:legal_aid_application, :with_applicant) }
       let(:provider) { application.provider }
-      let(:datasets_client) { double Geckoboard::DatasetsClient }
-      let(:dataset) { double Geckoboard::Dataset }
+      let(:datasets_client) { instance_double Geckoboard::DatasetsClient }
+      let(:dataset) { instance_double Geckoboard::Dataset }
 
       before do
         allow(Geckoboard).to receive(:client).and_return(geckoboard_client)

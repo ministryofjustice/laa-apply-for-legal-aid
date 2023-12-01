@@ -8,9 +8,9 @@ module Dashboard
       let(:application) { create(:legal_aid_application, :with_applicant) }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
 
-      let(:geckoboard_client) { double Geckoboard::Client }
-      let(:datasets_client) { double Geckoboard::DatasetsClient }
-      let(:dataset) { double Geckoboard::Dataset }
+      let(:geckoboard_client) { instance_double Geckoboard::Client }
+      let(:datasets_client) { instance_double Geckoboard::DatasetsClient }
+      let(:dataset) { instance_double Geckoboard::Dataset }
 
       before do
         allow(Geckoboard).to receive(:client).and_return(geckoboard_client)
