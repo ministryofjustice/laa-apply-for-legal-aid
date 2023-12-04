@@ -1,10 +1,12 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<% url = if transactions_for.eql?("applicant")
-           providers_legal_aid_application_means_receives_state_benefits_path(@legal_aid_application)
-         else
-           providers_legal_aid_application_partners_receives_state_benefits_path(@legal_aid_application)
-         end %>
+<% unless read_only %>
+  <% url = if individual.receives_state_benefits?
+             state_benefit_partial_url(:add_benefits, version, @legal_aid_application)
+           else
+             state_benefit_partial_url(:receive_benefits, version, @legal_aid_application)
+           end %>
+<% end %>
 
 <h2 class="govuk-heading-m"><%= t(".#{transactions_for}.heading") %></h2>
 <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-9", html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |summary_list| %>
@@ -27,9 +29,15 @@
 
     <% unless read_only %>
       <div class="govuk-grid-column-one-third align-text-right">
-        <p><%= govuk_link_to t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t(".#{transactions_for}.heading")}" %></p>
+        <p>
+          <%= govuk_link_to(
+                t("generic.change"),
+                state_benefit_partial_url(:change_benefits, version, @legal_aid_application, state_benefit),
+                "aria-label": "#{t('generic.change')} #{t('.benefit_heading', index: index + 1)}",
+              ) %>
+        </p>
       </div>
-      <% end %>
+    <% end %>
   </div>
 
   <%= govuk_summary_list(

@@ -26,7 +26,8 @@
   <%= render("shared/check_answers/benefits_income",
              transactions_for: "partner",
              individual: @legal_aid_application.partner,
-             state_benefits: @legal_aid_application.partner.state_benefits) %>
+             state_benefits: @legal_aid_application.partner.state_benefits,
+             version: "partners") %>
 
   <%= render(
         "shared/check_answers/payments_summary",
