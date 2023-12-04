@@ -8,7 +8,7 @@ module CCMS
     describe "#method_missing" do
       context "with a standardly_named_method" do
         describe "bank account" do
-          let(:my_account) { double BankAccount }
+          let(:my_account) { instance_double BankAccount }
           let(:options) { { bank_acct: my_account } }
           let(:bank_account_name) { "MY ACCOUNT" }
 
@@ -20,19 +20,19 @@ module CCMS
         end
 
         describe "vehicle" do
-          let(:my_vehicle) { double "Vehicle" }
+          let(:my_vehicle) { instance_double Vehicle }
           let(:options) { { vehicle: my_vehicle } }
-          let(:my_regno) { "AB12CDE" }
+          let(:my_estimated_value) { 1000.00 }
 
           it "calls the #regno method on options[:vehicle]" do
-            expect(my_vehicle).to receive(:regno).and_return(my_regno)
-            regno = value_generator.vehicle_regno(options)
-            expect(regno).to eq my_regno
+            expect(my_vehicle).to receive(:estimated_value).and_return(my_estimated_value)
+            estimated_value = value_generator.vehicle_estimated_value(options)
+            expect(estimated_value).to eq my_estimated_value
           end
         end
 
         describe "proceeding" do
-          let(:my_proceeding) { double Proceeding }
+          let(:my_proceeding) { instance_double Proceeding }
           let(:options) { { proceeding: my_proceeding } }
           let(:my_name) { "Non-mol" }
 
@@ -55,7 +55,7 @@ module CCMS
 
     describe "#respond_to?" do
       context "with standardly_named methods" do
-        let(:my_account) { double BankAccount, name: "MY ACCOUNT" }
+        let(:my_account) { instance_double BankAccount, name: "MY ACCOUNT" }
         let(:options) { { bank_acct: my_account } }
 
         context "and a valid method on delegated object" do
