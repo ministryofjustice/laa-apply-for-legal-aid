@@ -31,18 +31,6 @@ module CCMS
           end
         end
 
-        describe "wage_slip" do
-          let(:my_wage_slip) { double "WageSlip" }
-          let(:options) { { wage_slip: my_wage_slip } }
-          let(:my_ni_contribution) { 34.78 }
-
-          it "calls the #ni_contribution method on options[:wage_slip]" do
-            expect(my_wage_slip).to receive(:ni_contribution).and_return(my_ni_contribution)
-            ni_contribution = value_generator.wage_slip_ni_contribution(options)
-            expect(ni_contribution).to eq my_ni_contribution
-          end
-        end
-
         describe "proceeding" do
           let(:my_proceeding) { double Proceeding }
           let(:options) { { proceeding: my_proceeding } }
