@@ -25,8 +25,9 @@ RSpec.describe GovukEmails::DeliveryMan do
 
     context "when the mail is still waiting" do
       context "and mail is eligible for delivery" do
-        let(:message) { double "MailMessage", govuk_notify_response: govuk_response }
-        let(:govuk_response) { double "GovukResponse", id: govuk_message_id }
+        let(:message) { instance_double ActionMailer::MessageDelivery }
+        let(:response) { instance_double Mail::Message, govuk_notify_response: govuk_response }
+        let(:govuk_response) { instance_double Notifications::Client::ResponseNotification, id: govuk_message_id }
         let(:govuk_message_id) { SecureRandom.uuid }
         let(:time_now) { Time.current }
 
@@ -34,14 +35,14 @@ RSpec.describe GovukEmails::DeliveryMan do
 
         it "delivers the mail" do
           expect(mailer_klass.constantize).to receive(mailer_method).and_return(message)
-          expect(message).to receive(:deliver_now!).and_return(message)
+          expect(message).to receive(:deliver_now!).and_return(response)
           delivery_man
         end
 
         it "updates the scheduled mail record" do
           travel_to time_now
           allow(mailer_klass.constantize).to receive(mailer_method).and_return(message)
-          allow(message).to receive(:deliver_now!).and_return(message)
+          allow(message).to receive(:deliver_now!).and_return(response)
           delivery_man
 
           scheduled_mailing.reload
@@ -94,8 +95,8 @@ RSpec.describe GovukEmails::DeliveryMan do
       end
 
       context "when the mail raises an exception" do
-        let(:message) { double "MailMessage", govuk_notify_response: govuk_response }
-        let(:govuk_response) { double "GovukResponse", id: govuk_message_id }
+        let(:message) { instance_double ActionMailer::MessageDelivery, govuk_notify_response: govuk_response }
+        let(:govuk_response) { instance_double Notifications::Client::ResponseNotification, id: govuk_message_id }
         let(:govuk_message_id) { SecureRandom.uuid }
         let(:time_now) { Time.current }
 
