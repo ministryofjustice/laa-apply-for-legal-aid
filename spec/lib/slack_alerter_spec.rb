@@ -9,7 +9,7 @@ RSpec.describe SlackAlerter do
 
   before { allow(HostEnv).to receive(:environment).and_return(:uat) }
 
-  let(:dummy_mail) { double ExceptionAlertMailer }
+  let(:dummy_mail) { instance_double ActionMailer::MessageDelivery }
   let(:dummy_email_address) { "john@example.com" }
 
   describe ".capture_message" do
