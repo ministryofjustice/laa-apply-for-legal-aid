@@ -10,15 +10,14 @@ end
 
 RSpec.shared_context "with ccms soa configuration", shared_context: :metadata do
   before do
-    allow(Rails.configuration.x).to receive(:ccms_soa).and_return(
-      double(
-        "CCMS SOA Config",
-        client_username: "my_soap_client_username",
-        client_password_type: "password_type",
-        client_password: "xxxxx",
-        user_login: "my_login",
-        user_role: "my_role",
-      ),
+    ccms_struct = Struct.new(:client_username, :client_password_type, :client_password, :user_login, :user_role)
+    test_config = ccms_struct.new(
+      client_username: "my_soap_client_username",
+      client_password_type: "password_type",
+      client_password: "xxxxx",
+      user_login: "my_login",
+      user_role: "my_role",
     )
+    allow(Rails.configuration.x).to receive(:ccms_soa).and_return(test_config)
   end
 end

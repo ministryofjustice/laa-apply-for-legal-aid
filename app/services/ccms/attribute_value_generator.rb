@@ -39,7 +39,6 @@ module CCMS
                                 |savings_amount
                                 |income_type
                                 |vehicle
-                                |wage_slip
                                 )_(\S+)$}x
     APPLICANT_REGEX = /^applicant_(\S+)$/
     PARTNER_REGEX = /^partner_(\S+)$/
@@ -57,7 +56,6 @@ module CCMS
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/
     INCOME_TYPE_REGEX = /^income_type_(\S+)$/
     VEHICLE_REGEX = /^vehicle_(\S+)$/
-    WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/
     OUTGOING = /^outgoing_(\S+)$/
 
     PROSPECTS_OF_SUCCESS = {
@@ -443,8 +441,6 @@ module CCMS
         options[:dependant].__send__(Regexp.last_match(1))
       when VEHICLE_REGEX
         options[:vehicle].__send__(Regexp.last_match(1))
-      when WAGE_SLIP_REGEX
-        options[:wage_slip].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
       when INCOME_TYPE_REGEX
