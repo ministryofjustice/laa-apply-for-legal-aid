@@ -110,7 +110,7 @@ module CFE
           expect(collection.transactions.keys).to match_array expected_transaction_ids
         end
 
-        it "returns a collection with the expected values for a transactIon" do
+        it "returns a collection with the expected values for a transaction" do
           tx = collection.transactions["d55743b5-c1c4-4c9a-98a3-bad709aac422"]
           expect(tx).to be_instance_of(RemarkedTransaction)
           expect(tx.category).to eq :state_benefit_payment
@@ -143,7 +143,7 @@ module CFE
           expect(collection.transactions.keys).to match_array expected_transaction_ids
         end
 
-        it "returns a collection with the expected values for a transactIon" do
+        it "returns a collection with the expected values for a transaction" do
           tx = collection.transactions["d55743b5-c1c4-4c9a-98a3-bad709aac422"]
           expect(tx).to be_instance_of(RemarkedTransaction)
           expect(tx.category).to eq :partner_state_benefit_payment
