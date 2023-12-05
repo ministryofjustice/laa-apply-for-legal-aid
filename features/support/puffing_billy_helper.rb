@@ -243,6 +243,20 @@ private
             },
           ],
         },
+        "Child arrangements" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Child arrangements order (residence)",
+              ccms_code: "SE014",
+              description: "to be represented on an application for a child arrangements order - where the child(ren) will live",
+              full_s8_only: false,
+              ccms_category_law: "Family",
+              ccms_matter: "Children - section 8",
+            },
+          ],
+        },
       },
     )
   end

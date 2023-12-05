@@ -187,7 +187,7 @@ Feature: Applicant details
     Then I click 'Send link'
     Then I am on the application confirmation page
 
-  @localhost_request @javascript @vcr
+  @javascript @vcr @billy
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -208,7 +208,7 @@ Feature: Applicant details
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I search for proceeding 'Child'
+    Then I search for proceeding 'Child arrangements'
     Then I choose a 'Child arrangements order (residence)' radio button
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do you want to add another proceeding?'
