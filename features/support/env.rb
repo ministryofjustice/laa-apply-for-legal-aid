@@ -143,6 +143,9 @@ After do |scenario|
     name = scenario.location.file.gsub("features/", "").gsub(%r{/\.|/}, "-")
     screenshot_image(name)
   end
+
+  # Reset to default in case scenario used a non-default driver, such a :selenium_chrome_headless_billy
+  Capybara.use_default_driver
 end
 
 # Add @EjectCassetteAfterScenario tags to scenarios/features

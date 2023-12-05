@@ -38,8 +38,6 @@ Before("@billy") do
 end
 
 After("@billy") do
-  Capybara.use_default_driver
-
   if ENV["DEBUG"] || ENV["DEBUG_BILLY"]
     puts "Requests received via Puffing Billy Proxy:"
 
