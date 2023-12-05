@@ -44,7 +44,7 @@ module Providers
 
       def update_no_cash_income(params)
         val = params.permit(:none_selected)[:none_selected] == "true"
-        legal_aid_application.update!(no_cash_income: val)
+        legal_aid_application.partner.update!(no_cash_income: val)
       end
     end
   end
