@@ -27,7 +27,7 @@
       </div>
 
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t("generic.none_of_the_above") }, checked: @legal_aid_application.no_cash_outgoings? %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t("generic.none_of_the_above") }, checked: type.present? ? type.no_cash_outgoings? : @legal_aid_application.no_cash_outgoings? %>
     <% end %>
 
     <%= next_action_buttons(
