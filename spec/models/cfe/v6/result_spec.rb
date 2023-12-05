@@ -29,14 +29,14 @@ module CFE
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
 
       describe "#version" do
-        subject(:version) { eligible_result.version }
+        subject(:version) { cfe_result.version }
 
         it { expect(version).to be 6 }
       end
 
       describe "#version_6?" do
         it "returns boolean response for cfe version check" do
-          expect(eligible_result.version_6?).to be true
+          expect(cfe_result.version_6?).to be true
         end
       end
 
@@ -135,7 +135,7 @@ module CFE
       describe "capital_contribution_required?" do
         context "when contribution not required" do
           it "returns false for capital_contribution_required" do
-            expect(eligible_result.capital_contribution_required?).to be false
+            expect(cfe_result.capital_contribution_required?).to be false
           end
         end
 
@@ -154,7 +154,7 @@ module CFE
         describe "#gross_income_upper_threshold" do
           context "with only domestic abuse" do
             it "returns N/a" do
-              expect(eligible_result.gross_income_upper_threshold).to eq "N/a"
+              expect(cfe_result.gross_income_upper_threshold).to eq "N/a"
             end
           end
 
@@ -168,7 +168,7 @@ module CFE
         describe "#disposable_income_upper_threshold" do
           context "with only domestic abuse" do
             it "returns N/a" do
-              expect(eligible_result.disposable_income_upper_threshold).to eq "N/a"
+              expect(cfe_result.disposable_income_upper_threshold).to eq "N/a"
             end
           end
 
@@ -186,39 +186,39 @@ module CFE
 
       describe "non_liquid_capital_items" do
         it "returns the description and value for first item in non liquid items array" do
-          expect(eligible_result.non_liquid_capital_items.first[:description]).to be_a String
-          expect(eligible_result.non_liquid_capital_items.first[:value].to_d).to eq 12.00
+          expect(cfe_result.non_liquid_capital_items.first[:description]).to be_a String
+          expect(cfe_result.non_liquid_capital_items.first[:value].to_d).to eq 12.00
         end
       end
 
       describe "liquid_capital_items" do
         it "returns the description and value for first item in liquid items array" do
-          expect(eligible_result.liquid_capital_items.first[:description]).to be_a String
-          expect(eligible_result.liquid_capital_items.first[:value].to_d).to eq 1.00
+          expect(cfe_result.liquid_capital_items.first[:description]).to be_a String
+          expect(cfe_result.liquid_capital_items.first[:value].to_d).to eq 1.00
         end
       end
 
       describe "total_property" do
         it "returns the assessed value for total property" do
-          expect(eligible_result.total_property).to eq 0.0
+          expect(cfe_result.total_property).to eq 0.0
         end
       end
 
       describe "total_capital" do
         it "returns the assessed value for total capital" do
-          expect(eligible_result.total_capital).to eq 144.0
+          expect(cfe_result.total_capital).to eq 144.0
         end
       end
 
       describe "total_savings" do
         it "returns the assessed value for liquid assets" do
-          expect(eligible_result.total_savings).to eq 12.00
+          expect(cfe_result.total_savings).to eq 12.00
         end
       end
 
       describe "total_other_assets" do
         it "returns the assessed value for non liquid assets" do
-          expect(eligible_result.total_other_assets).to eq 12.0
+          expect(cfe_result.total_other_assets).to eq 12.0
         end
       end
 
@@ -266,15 +266,15 @@ module CFE
 
       describe "vehicle" do
         it "returns a vehicle" do
-          expect(eligible_result.vehicle).to be_a(Hash)
-          expect(eligible_result.vehicle[:value].to_d).to eq 120.0
+          expect(cfe_result.vehicle).to be_a(Hash)
+          expect(cfe_result.vehicle[:value].to_d).to eq 120.0
         end
       end
 
       describe "vehicles?" do
         context "when vehicle(s) exist" do
           it "returns a boolean response if vehicles exist" do
-            expect(eligible_result.vehicles?).to be true
+            expect(cfe_result.vehicles?).to be true
           end
         end
 
@@ -287,31 +287,31 @@ module CFE
 
       describe "vehicle_value" do
         it "returns the assessed value for applicants vehicle" do
-          expect(eligible_result.vehicle_value).to eq 120.0
+          expect(cfe_result.vehicle_value).to eq 120.0
         end
       end
 
       describe "vehicle_loan_amount_outstanding" do
         it "returns the loan value outstanding on applicants vehicle" do
-          expect(eligible_result.vehicle_loan_amount_outstanding).to eq 12.0
+          expect(cfe_result.vehicle_loan_amount_outstanding).to eq 12.0
         end
       end
 
       describe "vehicle_disregard" do
         it "returns the vehicle disregard for applicants vehicle" do
-          expect(eligible_result.vehicle_disregard).to eq 0.0
+          expect(cfe_result.vehicle_disregard).to eq 0.0
         end
       end
 
       describe "vehicle_assessed_amount" do
         it "returns the assessed value for the applicants vehicle" do
-          expect(eligible_result.vehicle_assessed_amount).to eq 120.0
+          expect(cfe_result.vehicle_assessed_amount).to eq 120.0
         end
       end
 
       describe "total_vehicles" do
         it "returns the assessed value for all applicants vehicle(s)" do
-          expect(eligible_result.total_vehicles).to eq 120.0
+          expect(cfe_result.total_vehicles).to eq 120.0
         end
       end
 
@@ -334,7 +334,7 @@ module CFE
 
         context "when present but zero" do
           it "returns false" do
-            expect(eligible_result.additional_property?).to be false
+            expect(cfe_result.additional_property?).to be false
           end
         end
       end
@@ -369,31 +369,31 @@ module CFE
 
       describe "main_home_value" do
         it "returns the assessed value for the main home" do
-          expect(eligible_result.main_home_value).to eq 10.0
+          expect(cfe_result.main_home_value).to eq 10.0
         end
       end
 
       describe "main_home_outstanding_mortgage" do
         it "returns the assessed value for the main home" do
-          expect(eligible_result.main_home_outstanding_mortgage).to eq(-20.0)
+          expect(cfe_result.main_home_outstanding_mortgage).to eq(-20.0)
         end
       end
 
       describe "main_home_transaction_allowance" do
         it "returns the assessed value for the main home" do
-          expect(eligible_result.main_home_transaction_allowance).to eq(-0.3)
+          expect(cfe_result.main_home_transaction_allowance).to eq(-0.3)
         end
       end
 
       describe "main_home_equity_disregard" do
         it "returns the assessed value for the main home" do
-          expect(eligible_result.main_home_equity_disregard).to eq(-100_000.0)
+          expect(cfe_result.main_home_equity_disregard).to eq(-100_000.0)
         end
       end
 
       describe "main_home_assessed_equity" do
         it "returns the assessed value for the main home" do
-          expect(eligible_result.main_home_assessed_equity).to eq 0.0
+          expect(cfe_result.main_home_assessed_equity).to eq 0.0
         end
       end
 
@@ -409,7 +409,7 @@ module CFE
         end
 
         context "when maintenance is not received" do
-          subject(:maintenance_per_month) { eligible_result.maintenance_per_month }
+          subject(:maintenance_per_month) { cfe_result.maintenance_per_month }
 
           it { is_expected.to eq 0.00 }
         end
@@ -423,7 +423,7 @@ module CFE
         end
 
         context "when student_loan is not received" do
-          subject(:mei_student_loan) { eligible_result.mei_student_loan }
+          subject(:mei_student_loan) { cfe_result.mei_student_loan }
 
           it { is_expected.to eq 0.00 }
         end
@@ -452,7 +452,7 @@ module CFE
 
           describe "#gross_income_per_proceeding_types" do
             it "returns the gross income per proceeding type" do
-              expect(eligible_result.gross_income_proceeding_types).to match gross_income_proceeding_types
+              expect(cfe_result.gross_income_proceeding_types).to match gross_income_proceeding_types
             end
           end
         end
@@ -477,7 +477,7 @@ module CFE
 
           describe "#disposable_income_proceeding_types" do
             it "returns the disposable income upper threshold" do
-              expect(eligible_result.disposable_income_proceeding_types).to match disposable_income_proceeding_types
+              expect(cfe_result.disposable_income_proceeding_types).to match disposable_income_proceeding_types
             end
           end
         end
@@ -496,26 +496,26 @@ module CFE
 
         context "when no mortgage is paid" do
           it "returns the value of mortgage per month" do
-            expect(eligible_result.mortgage_per_month).to eq 0.0
+            expect(cfe_result.mortgage_per_month).to eq 0.0
           end
         end
       end
 
       describe "pensioner_capital_disregard" do
         it "returns the total pension disregard" do
-          expect(eligible_result.pensioner_capital_disregard).to eq 0.0
+          expect(cfe_result.pensioner_capital_disregard).to eq 0.0
         end
       end
 
       describe "total_capital_before_pensioner_disregard" do
         it "returns total capital before pension disregard" do
-          expect(eligible_result.total_capital_before_pensioner_disregard).to eq 144.0
+          expect(cfe_result.total_capital_before_pensioner_disregard).to eq 144.0
         end
       end
 
       describe "total_disposable_capital" do
         it "returns total disposable capital" do
-          expect(eligible_result.total_disposable_capital).to eq 144.0
+          expect(cfe_result.total_disposable_capital).to eq 144.0
         end
       end
 
@@ -551,7 +551,7 @@ module CFE
 
       describe "total_disposable_income_assessed" do
         it "returns total disposable income assessed" do
-          expect(eligible_result.total_disposable_income_assessed).to eq 0.0
+          expect(cfe_result.total_disposable_income_assessed).to eq 0.0
         end
       end
 
@@ -579,12 +579,12 @@ module CFE
 
       describe "remarks" do
         it "returns a CFE::Remarks object" do
-          expect(eligible_result.remarks).to be_instance_of(CFE::Remarks)
+          expect(cfe_result.remarks).to be_instance_of(CFE::Remarks)
         end
 
         it "instantiates the Remarks class with the remarks part of the hash" do
           expect(CFE::Remarks).to receive(:new).with({})
-          eligible_result.remarks
+          cfe_result.remarks
         end
       end
 

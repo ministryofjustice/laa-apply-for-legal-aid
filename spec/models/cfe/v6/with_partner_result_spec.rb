@@ -4,15 +4,6 @@ module CFE
   module V6
     RSpec.describe Result do
       let(:cfe_result) { create(:cfe_v6_result, :with_employments, :with_partner) }
-      # let(:with_maintenance) { create(:cfe_v6_result, :with_partner, :with_maintenance_received) }
-      # let(:with_student_finance) { create(:cfe_v6_result, :with_partner, :with_student_finance_received) }
-      # let(:with_total_deductions) { create(:cfe_v6_result, :with_partner, :with_total_deductions) }
-      # let(:with_monthly_income_equivalents) { create(:cfe_v6_result, :with_partner, :with_monthly_income_equivalents) }
-      # let(:with_monthly_outgoing_equivalents) { create(:cfe_v6_result, :with_partner, :with_monthly_outgoing_equivalents) }
-      # let(:with_total_gross_income) { create(:cfe_v6_result, :with_partner, :with_total_gross_income) }
-      # let(:with_no_employments) { create(:cfe_v6_result, :with_partner, :with_no_employments) }
-      # let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_restrictions, :with_cfe_v6_result) }
-      # let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
 
       # INCOME SUMMARIES
 
@@ -420,20 +411,8 @@ module CFE
       end
 
       describe "total_deductions_including_fixed_employment_allowance" do
-        context "with partner set to false" do
-          let(:partner) { false }
-
-          it "returns the total monthly outgoings including employment outgoings for the client only" do
-            expect(cfe_result.total_deductions_including_fixed_employment_allowance(partner:)).to eq 301.32
-          end
-        end
-
-        context "with partner set to true" do
-          let(:partner) { true }
-
-          it "returns total deductions including fixed employment allowance" do
-            expect(cfe_result.total_deductions_including_fixed_employment_allowance(partner:)).to eq 301.32
-          end
+        it "returns the deductions including the fixed employment allowance" do
+          expect(cfe_result.total_deductions_including_fixed_employment_allowance).to eq 301.32
         end
       end
 

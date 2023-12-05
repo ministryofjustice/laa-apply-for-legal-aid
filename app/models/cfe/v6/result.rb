@@ -104,6 +104,10 @@ module CFE
       end
 
       def partner_jobs
+        unless assessment.key?(:partner_gross_income)
+          return []
+        end
+
         gross_income_breakdown(partner: true)[:employment_income]
       end
 
@@ -198,15 +202,19 @@ module CFE
       ################################################################
 
       def partner_allowance
-        disposable_income_summary[:partner_allowance]
+        disposable_income_summary.key?(:partner_allowance) ? disposable_income_summary[:partner_allowance] : 0.0
       end
 
       def total_deductions
         dependants_allowance + disregarded_state_benefits + partner_allowance
       end
 
-      def total_deductions_including_fixed_employment_allowance(partner: false)
-        total_deductions - employment_income_fixed_employment_deduction - employment_income_fixed_employment_deduction(partner:)
+      def total_deductions_including_fixed_employment_allowance
+        employment_deduction = employment_income_fixed_employment_deduction
+        if partner_jobs?
+          employment_deduction * 2
+        end
+        total_deductions - employment_deduction
       end
 
       ################################################################
