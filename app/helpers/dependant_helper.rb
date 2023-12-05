@@ -36,7 +36,7 @@ module DependantHelper
   def date_of_birth(dependant)
     build_ostruct(
       t("date_of_birth", scope: "providers.means.check_income_answers.dependants"),
-      dependant.date_of_birth,
+      dependant.date_of_birth&.strftime("%-d %B %Y"),
     )
   end
 
