@@ -10,7 +10,6 @@ module OmniAuth
       let(:applicant_id) { "50b98c1b-cf5d-428e-b32c-d20e9d1184dd" }
       let(:omniauth_state) { "6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76" }
       let(:strategy) { described_class.new(mock_rack_app, {}) }
-      let(:session) { example_session }
       let(:client_id) { "my_client_id" }
       let(:client_secret) { "my_client_secret" }
       let(:client) { ::OAuth2::Client.new(client_id, client_secret, {}) }
@@ -24,8 +23,8 @@ module OmniAuth
         end
 
         it "saves the session with the applicant_id and omniauth state" do
-          expect(OauthSessionSaver).to receive(:store).with(applicant_id, session)
-          expect(OauthSessionSaver).to receive(:store).with(omniauth_state, session)
+          expect(OauthSessionSaver).to receive(:store).with(applicant_id, example_session)
+          expect(OauthSessionSaver).to receive(:store).with(omniauth_state, example_session)
           strategy.request_phase
         end
 
@@ -51,8 +50,9 @@ module OmniAuth
         end
 
         it "restores session from redis" do
-          expect(OauthSessionSaver).to receive(:get).with(omniauth_state).and_return(example_session)
+          allow(OauthSessionSaver).to receive(:get).with(omniauth_state).and_return(example_session)
           strategy.callback_phase
+          expect(OauthSessionSaver).to have_received(:get).with(omniauth_state)
         end
 
         it "destroys the stored session in redis" do

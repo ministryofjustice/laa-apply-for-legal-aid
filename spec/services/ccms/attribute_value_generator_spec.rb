@@ -13,7 +13,7 @@ module CCMS
           let(:bank_account_name) { "MY ACCOUNT" }
 
           it "calls #name on the options[:bank_acct]" do
-            expect(my_account).to receive(:name).and_return(bank_account_name)
+            allow(my_account).to receive(:name).and_return(bank_account_name)
             account_name = value_generator.bank_account_name(options)
             expect(account_name).to eq bank_account_name
           end
@@ -25,7 +25,7 @@ module CCMS
           let(:my_estimated_value) { 1000.00 }
 
           it "calls the #regno method on options[:vehicle]" do
-            expect(my_vehicle).to receive(:estimated_value).and_return(my_estimated_value)
+            allow(my_vehicle).to receive(:estimated_value).and_return(my_estimated_value)
             estimated_value = value_generator.vehicle_estimated_value(options)
             expect(estimated_value).to eq my_estimated_value
           end
@@ -37,7 +37,7 @@ module CCMS
           let(:my_name) { "Non-mol" }
 
           it "calls the #name method on options[:proceeding]" do
-            expect(my_proceeding).to receive(:name).and_return(my_name)
+            allow(my_proceeding).to receive(:name).and_return(my_name)
             name = value_generator.proceeding_name(options)
             expect(name).to eq my_name
           end

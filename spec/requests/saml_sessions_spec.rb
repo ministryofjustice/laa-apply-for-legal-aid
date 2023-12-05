@@ -134,8 +134,9 @@ RSpec.describe "SamlSessionsController" do
         let(:status) { 200 }
         let(:provider) { create(:provider, :with_ccms_apply_role, username:) }
 
+        before { allow(HostEnv).to receive(:staging_or_production?).and_return(true) }
+
         it "uses a worker to update details" do
-          expect(HostEnv).to receive(:staging_or_production?).and_return(true)
           ProviderDetailsCreatorWorker.clear
           expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id).and_call_original
           expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
@@ -179,8 +180,9 @@ RSpec.describe "SamlSessionsController" do
           let(:status) { 200 }
           let(:provider) { create(:provider, :with_ccms_apply_role, username:) }
 
+          before { allow(HostEnv).to receive(:staging_or_production?).and_return(false) }
+
           it "does not schedule a job to update the provider details" do
-            expect(HostEnv).to receive(:staging_or_production?).and_return(false)
             expect(provider).to receive(:update_details).and_call_original
             expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
             expect(ProviderDetailsCreator).not_to receive(:call).with(provider)

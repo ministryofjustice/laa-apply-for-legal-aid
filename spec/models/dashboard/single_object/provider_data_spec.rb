@@ -41,8 +41,9 @@ module Dashboard
       describe ".run" do
         subject(:run) { dashboard_provider.run }
 
+        before { allow(datasets_client).to receive(:find_or_create).and_return(dataset) }
+
         it "submits data to geckoboard" do
-          expect(datasets_client).to receive(:find_or_create).and_return(dataset)
           expect(dataset).to receive(:post)
           run
         end

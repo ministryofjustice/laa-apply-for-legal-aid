@@ -24,9 +24,9 @@ RSpec.describe DigestExporter do
 
     it "loads all the digest records" do
       travel_to fixed_time do
-        expect(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(service_creds)
+        allow(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(service_creds)
         expect(service_creds).to receive(:fetch_access_token!).once
-        expect(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service)
+        allow(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service)
         expect(sheet_service).to receive(:authorization=).once
         expect(sheet_service).to receive(:get_spreadsheet).and_return(spreadsheet).twice
         expect(spreadsheet).to receive(:sheets).and_return([worksheet]).twice
@@ -42,9 +42,9 @@ RSpec.describe DigestExporter do
 
       it "calls raises an error and calls AlertManager" do
         travel_to fixed_time do
-          expect(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(service_creds)
+          allow(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(service_creds)
           expect(service_creds).to receive(:fetch_access_token!).once
-          expect(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service)
+          allow(Google::Apis::SheetsV4::SheetsService).to receive(:new).and_return(sheet_service)
           expect(sheet_service).to receive(:authorization=).once
           expect(sheet_service).to receive(:get_spreadsheet).and_return(spreadsheet).twice
           expect(spreadsheet).to receive(:sheets).and_return([worksheet]).twice

@@ -31,11 +31,13 @@ RSpec.describe GovukEmails::DeliveryMan do
         let(:govuk_message_id) { SecureRandom.uuid }
         let(:time_now) { Time.current }
 
-        before { allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(true) }
+        before do
+          allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(true)
+          allow(mailer_klass.constantize).to receive(mailer_method).and_return(message)
+        end
 
         it "delivers the mail" do
-          expect(mailer_klass.constantize).to receive(mailer_method).and_return(message)
-          expect(message).to receive(:deliver_now!).and_return(response)
+          expect(message).to receive(:deliver_now!)
           delivery_man
         end
 

@@ -22,8 +22,9 @@ RSpec.describe SlackAlerter do
       }
     end
 
+    before { allow(ExceptionAlertMailer).to receive(:notify).with(params).and_return(dummy_mail) }
+
     it "delivers the email" do
-      expect(ExceptionAlertMailer).to receive(:notify).with(params).and_return(dummy_mail)
       expect(dummy_mail).to receive(:deliver_now!)
       described_class.capture_message(message)
     end
@@ -31,6 +32,7 @@ RSpec.describe SlackAlerter do
 
   describe ".capture_exception" do
     before do
+      allow(ExceptionAlertMailer).to receive(:notify).with(params).and_return(dummy_mail)
       allow(exception).to receive(:backtrace).and_return("backtrace-line-1\n      backtrace-line-2")
     end
 
@@ -55,7 +57,6 @@ RSpec.describe SlackAlerter do
     end
 
     it "delivers the mail" do
-      expect(ExceptionAlertMailer).to receive(:notify).with(params).and_return(dummy_mail)
       expect(dummy_mail).to receive(:deliver_now!)
       described_class.capture_exception(exception)
     end

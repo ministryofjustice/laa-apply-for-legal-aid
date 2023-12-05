@@ -18,7 +18,6 @@ RSpec.describe Metrics::SendMetrics do
       expect(PrometheusExporter::Client)
         .to receive(:new)
         .with(host: metrics_service_host, thread_sleep: prometheus_thread_sleep)
-        .and_return(prometheus_client)
       call_send_metrics
     end
 
