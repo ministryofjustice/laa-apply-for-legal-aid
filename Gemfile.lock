@@ -177,6 +177,7 @@ GEM
       ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    cookiejar (0.3.3)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -244,6 +245,16 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     dumb_delegator (1.0.0)
+    em-http-request (1.1.7)
+      addressable (>= 2.3.4)
+      cookiejar (!= 0.3.1)
+      em-socksify (>= 0.3)
+      eventmachine (>= 1.0.3)
+      http_parser.rb (>= 0.6.0)
+    em-socksify (0.3.2)
+      eventmachine (>= 1.0.0.beta.4)
+    em-synchrony (1.0.6)
+      eventmachine (>= 1.0.0.beta.1)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -256,6 +267,7 @@ GEM
       smart_properties
     erubi (1.12.0)
     eventmachine (1.2.7)
+    eventmachine_httpserver (0.2.1)
     factory_bot (6.4.2)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.2)
@@ -340,7 +352,7 @@ GEM
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
     htmlentities (4.3.4)
-    http_parser.rb (0.8.0)
+    http_parser.rb (0.6.0)
     httpclient (2.8.3)
     httpi (3.0.1)
       rack
@@ -486,6 +498,14 @@ GEM
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.4)
+    puffing-billy (4.0.0)
+      addressable (~> 2.5)
+      em-http-request (~> 1.1, >= 1.1.0)
+      em-synchrony
+      eventmachine (~> 1.2)
+      eventmachine_httpserver
+      http_parser.rb (~> 0.6.0)
+      multi_json
     puma (6.4.0)
       nio4r (~> 2.0)
     pundit (2.3.1)
@@ -698,6 +718,7 @@ GEM
       patience_diff
     sys-uname (1.2.3)
       ffi (~> 1.1)
+    table_print (1.5.7)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.3.0)
@@ -809,6 +830,7 @@ DEPENDENCIES
   pry-byebug
   pry-rescue
   pry-stack_explorer
+  puffing-billy (>= 4.0.0)
   puma
   pundit
   rack-attack
@@ -837,6 +859,7 @@ DEPENDENCIES
   spring
   strong_migrations
   super_diff
+  table_print
   tzinfo-data
   vcr
   view_component

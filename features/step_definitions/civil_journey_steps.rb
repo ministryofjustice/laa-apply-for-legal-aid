@@ -844,8 +844,10 @@ Then("I visit received benefit confirmation page") do
   visit providers_legal_aid_application_received_benefit_confirmation_path(@legal_aid_application)
 end
 
-And("I search for proceeding {string}") do |proceeding_search|
-  fill_in("proceeding-search-input", with: proceeding_search)
+And("I search for proceeding {string}") do |search_terms|
+  stub_proceeding_search_for(search_terms)
+
+  fill_in("proceeding-search-input", with: search_terms)
   wait_for_ajax
 end
 

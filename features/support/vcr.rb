@@ -12,10 +12,12 @@ VCR.configure do |vcr_config|
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)],
   }
   vcr_config.debug_logger = $stdout if vcr_debug
+
   vcr_config.ignore_request do |request|
-    uri = URI(request.uri)
-    uri.to_s.include?("__identify__") || uri.to_s =~ /127.0.0.1.*(session|shutdown)/
+    uri = URI(request.uri).to_s
+    uri.include?("__identify__") || uri =~ /127\.0\.0\.1.*(session|shutdown)/
   end
+
   vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
   vcr_config.filter_sensitive_data("<ORDNANCE_SURVEY_API_KEY>") { ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil) }
   vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV.fetch("BC_LSC_SERVICE_NAME", nil) }
@@ -27,7 +29,6 @@ VCR.configure do |vcr_config|
 end
 
 VCR.cucumber_tags do |t|
-  t.tag  "@localhost_request" # uses default record mode since no options are given
   t.tags "@disallowed_1", "@disallowed_2", record: :none
   t.tag  "@vcr", use_scenario_name: true
 end

@@ -28,6 +28,8 @@ Then(/^I should (see|not see) regex (.*?)$/) do |visible, text|
 end
 
 When("I search for organisation {string}") do |search_terms|
+  stub_organisation_search_for(search_terms)
+
   fill_in("organisation-search-input", with: search_terms)
 end
 

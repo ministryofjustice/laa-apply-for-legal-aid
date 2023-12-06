@@ -201,6 +201,12 @@ VCR is used to record interactions with external services and play back these st
 
 see [VCR Recording](docs/vcr_recording.md) for setup and recommended approaches to rerecording of cassettes.
 
+#### Puffing-billy stubs (and request cache)
+
+[Puffing-billy](https://github.com/oesmith/puffing-billy) is used to stub (or record) external service calls made from javascript.
+
+see [Puffing-billy recording](docs/puffing_billy_recording.md) for setup and recommended approaches to creating new stubs or recording requests in a persisted cache.
+
 #### Guard
 
 The repo also includes a Guardfile, this can be run in a terminal window
