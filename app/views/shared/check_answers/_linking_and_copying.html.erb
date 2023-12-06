@@ -5,7 +5,8 @@
       <h2 class="govuk-heading-m"><%= t ".section_linking.heading" %></h2>
     </div>
   </div>
-  <%= govuk_summary_list(actions: !read_only,
+  <%= govuk_summary_list(card: { title: t(".section_linking.heading") },
+                         actions: !read_only,
                          classes: "govuk-!-margin-bottom-9",
                          html_attributes: { id: "app-check-your-answers__linking_items" }) do |summary_list|
         summary_list.with_row(classes: "app-check-your-answers__linking_question") do |row|
