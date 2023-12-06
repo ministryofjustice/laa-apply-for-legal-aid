@@ -1076,8 +1076,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_180352) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "legal_framework_submissions", "legal_aid_applications"
-  add_foreign_key "linked_applications", "legal_aid_applications", column: "associated_application_id", validate: false
-  add_foreign_key "linked_applications", "legal_aid_applications", column: "lead_application_id", validate: false
+  add_foreign_key "linked_applications", "legal_aid_applications", column: "associated_application_id"
+  add_foreign_key "linked_applications", "legal_aid_applications", column: "lead_application_id"
   add_foreign_key "matter_oppositions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
