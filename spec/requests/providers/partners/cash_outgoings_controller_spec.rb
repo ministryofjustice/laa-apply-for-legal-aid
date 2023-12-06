@@ -79,7 +79,7 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
       let(:params) { valid_params }
 
       it "updates the model attribute for no cash outgoings to false" do
-        expect { request }.to change { legal_aid_application.reload.no_cash_outgoings }.from(nil).to(false)
+        expect { request }.to change { legal_aid_application.partner.reload.no_cash_outgoings }.from(nil).to(false)
       end
 
       context "with no housing payments selected for either applicant or partner" do
@@ -122,7 +122,7 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
       let(:params) { nothing_selected_params }
 
       it "updates the model attribute for no cash outgoings to true" do
-        expect { request }.to change { legal_aid_application.reload.no_cash_outgoings }.from(nil).to(true)
+        expect { request }.to change { legal_aid_application.partner.reload.no_cash_outgoings }.from(nil).to(true)
       end
     end
 
