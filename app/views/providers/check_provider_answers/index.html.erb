@@ -4,8 +4,22 @@
      address: @address,
      read_only: @read_only,
    } %>
-<% if @read_only %>
-  <%= render "providers/check_provider_answers/read_only", pass_through %>
+
+<% if Setting.cya_summary_cards? %>
+  <h2 class="govuk-heading-m"><%= t(".client.heading") %></h2>
+
+  <%= render(
+        "shared/check_your_answers/client_details",
+        attributes: %i[first_name last_name date_of_birth national_insurance_number employment_status address],
+        applicant: @applicant,
+        partner: @partner,
+        address: @address,
+        read_only: @read_only,
+      ) %>
 <% else %>
-  <%= render "providers/check_provider_answers/standard", pass_through %>
+  <% if @read_only %>
+    <%= render "providers/check_provider_answers/read_only", pass_through %>
+  <% else %>
+    <%= render "providers/check_provider_answers/standard", pass_through %>
+  <% end %>
 <% end %>

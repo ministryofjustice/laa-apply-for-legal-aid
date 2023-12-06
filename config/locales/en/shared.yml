@@ -510,6 +510,23 @@ en:
       benefits_breakdown:
         heading: Benefits breakdown
 
+    check_your_answers:
+      client_details:
+        title: Client details
+        address: Correspondence address
+        aria_prefix: client's
+        employment_status: Employment status
+        age: "%{years} years old"
+        age_question: Age at computation date
+        means_tested: Was the client means-tested?
+        dob: Date of birth
+        email: Email address
+        first_name: First name
+        last_name: Last name
+        nino: National Insurance number
+        has_partner: Does your client have a partner?
+        has_partner_aria_label: Change whether your client has a partner
+
     forms:
       applicant_form:
         page_title: Enter your client's details

@@ -372,6 +372,9 @@ en:
           heading: Covered under a substantive certificate
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
+      index:
+        client:
+          heading: Client details
     applicant_bank_accounts:
       show:
         heading: Your client's bank accounts
