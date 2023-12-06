@@ -66,6 +66,16 @@
           legend: { text: t(".labels.linked_applications") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :cya_summary_cards,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.cya_summary_cards") },
+          legend: { text: t(".labels.cya_summary_cards") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>

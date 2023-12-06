@@ -74,6 +74,7 @@ en:
           enable_evidence_upload: Enable the new evidence upload feature
           partner_means_assessment: Enable Partner Means Assessment
           linked_applications: Enable linked applications
+          cya_summary_cards: Enable summary cards on 'check your answers' pages
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -84,6 +85,7 @@ en:
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           partner_means_assessment: Select Yes to allow Providers to complete the Partner Means Assessment
           linked_applications: Select Yes to enable the linked applications feature for solicitors
+          cya_summary_cards: Select Yes to enable summary cards on 'check your answers' pages
       update:
         notice: Settings have been updated
     submitted_applications_reports:

@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.linked_applications
   end
 
+  def self.cya_summary_cards?
+    setting.cya_summary_cards
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

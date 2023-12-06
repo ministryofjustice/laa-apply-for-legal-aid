@@ -23,7 +23,8 @@ module Admin
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
                                       :partner_means_assessment,
-                                      :linked_applications)
+                                      :linked_applications,
+                                      :cya_summary_cards)
     end
 
     def setting
