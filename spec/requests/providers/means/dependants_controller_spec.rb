@@ -137,5 +137,29 @@ RSpec.describe Providers::Means::DependantsController do
 
       it_behaves_like "a provider not authenticated"
     end
+
+    context "when form submitted with Save as draft button" do
+      let(:params) do
+        {
+          dependant: {
+            name: "",
+            dob_day: nil,
+            dob_month: nil,
+            dob_year: nil,
+            relationship: "",
+            monthly_income: "",
+            has_income: "",
+            in_full_time_education: "",
+            has_assets_more_than_threshold: "",
+            assets_value: "",
+          },
+          draft_button: "Save and come back later",
+        }
+      end
+
+      it "redirects to the list of applications" do
+        expect(response).to redirect_to providers_legal_aid_applications_path
+      end
+    end
   end
 end

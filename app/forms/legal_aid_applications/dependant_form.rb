@@ -25,8 +25,8 @@ module LegalAidApplications
       squish_whitespaces(:name)
     end
 
-    validates :name, presence: true
-    validates :date_of_birth, presence: true
+    validates :name, presence: true, unless: :draft?
+    validates :date_of_birth, presence: true, unless: :draft?
     validates(
       :date_of_birth,
       date: {
@@ -35,9 +35,9 @@ module LegalAidApplications
       },
       allow_nil: true,
     )
-    validate :relationship_presence
-    validate :full_time_education_presence
-    validate :validate_has_income_presence
+    validate :relationship_presence, unless: :draft?
+    validate :full_time_education_presence, unless: :draft?
+    validate :validate_has_income_presence, unless: :draft?
     validates :monthly_income, presence: true, if: proc { |form| form.has_income.to_s == "true" }
     validates :monthly_income, allow_blank: true, currency: { greater_than: 0.0 }
     validates(
