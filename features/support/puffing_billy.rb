@@ -1,9 +1,9 @@
 require "billy/capybara/cucumber"
 
 # if you want to record a request and response in order to generate a stub you can
-# 1. comment out/remove an proxy.stubs in use
-# 2. set non_whitelisted_requests_disabled = false here
-# 3. ensre cache = true and persist_cache = true
+# 1. comment out/remove any proxy.stubs in use
+# 2. set non_whitelisted_requests_disabled = false (see below)
+# 3. ensure cache = true and persist_cache = true
 #
 Billy.configure do |c|
   c.cache = true
@@ -23,7 +23,7 @@ Billy.configure do |c|
   # c.proxy_port = 12345 # defaults to random
   # c.proxied_request_host = nil
   # c.proxied_request_port = 80
-  c.record_requests = true # defaults to false
+  # c.record_requests = true # defaults to false
   c.cache_request_body_methods = %w[post patch put] # defaults to ['post']
 end
 
@@ -33,6 +33,8 @@ Before("@billy") do
                             else
                               :selenium_chrome_headless_billy
                             end
+
+  Billy.configure.record_requests = true if ENV["DEBUG"] || ENV["DEBUG_BILLY"]
 
   before_puffing_billy_stubs
 end
@@ -50,5 +52,7 @@ After("@billy") do
       :headers,
       :body,
     ])
+
+    Billy.configure.record_requests = false
   end
 end
