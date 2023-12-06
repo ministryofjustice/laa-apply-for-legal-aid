@@ -13,7 +13,7 @@ module Dashboard
             widget = instance_double(Dashboard::SingleObject::Feedback, run: nil)
             allow(Dashboard::Widget).to receive(:new).with("MyWidget").and_return(widget)
             described_class.perform_now("MyWidget")
-            expect(widget).not_to receive(:run)
+            expect(widget).to have_received(:run)
           end
         end
       end
