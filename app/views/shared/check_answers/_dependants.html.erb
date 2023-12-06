@@ -1,10 +1,16 @@
+<% url = if @legal_aid_application.has_dependants?
+           providers_legal_aid_application_means_has_other_dependants_path
+         else
+           providers_legal_aid_application_means_has_dependants_path
+         end %>
+
 <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9") do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__dependants" }) do |row| %>
     <%= row.with_key(text: t("shared.check_answers.dependants.has_dependants", individual:), classes: "govuk-!-width-one-half") %>
     <%= row.with_value { yes_no(@legal_aid_application.has_dependants) } %>
     <%= row.with_action(
           text: t("generic.change"),
-          href: providers_legal_aid_application_means_has_dependants_path,
+          href: url,
           html_attributes: { "aria-label": "#{t('generic.change')} #{t('shared.check_answers.dependants.has_dependants', individual:)}" },
         ) %>
   <% end %>

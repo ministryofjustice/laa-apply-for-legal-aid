@@ -202,9 +202,14 @@ Feature: Completing and checking means answers backwards and forwards
     And I should see 'Dependant 1'
     And the answer for 'dependants' should be 'Yes'
     When I click Check Your Answers Change link for 'dependants'
-    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
+    When I click link "Remove"
+    Then I should be on a page showing "Are you sure you want to remove Wednesday Adams from the application?"
+    When I choose "Yes"
     And I click 'Save and continue'
+    Then I should be on the "has_dependants" page showing "Does your client have any dependants?"
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should not see 'Dependant 1'
     And the answer for 'dependants' should be 'No'

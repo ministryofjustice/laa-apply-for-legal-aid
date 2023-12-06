@@ -14,7 +14,7 @@
           <%= row.with_value { "#{gds_number_to_currency(transaction.amount)} #{t("transaction_types.frequencies.#{transaction.frequency}").downcase}" } %>
           <%= row.with_action(
                 text: t("generic.change"),
-                href: state_benefit_partial_url(:change, version, @legal_aid_application, transaction),
+                href: state_benefit_partial_url(:change_benefits, version, @legal_aid_application, transaction),
                 visually_hidden_text: transaction.description,
               ) %>
           <%= row.with_action(
