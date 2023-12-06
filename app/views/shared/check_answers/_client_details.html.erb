@@ -1,4 +1,5 @@
-<%= govuk_summary_list(classes: "govuk-!-margin-bottom-9",
+<%= govuk_summary_list(card: { title: "Client details" },
+                       classes: "govuk-!-margin-bottom-9",
                        html_attributes: { id: "client-details-questions" },
                        actions: !read_only) do |summary_list| %>
   <% if :first_name.in?(attributes) %>
