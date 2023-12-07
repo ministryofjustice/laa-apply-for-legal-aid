@@ -10,8 +10,10 @@ module Dashboard
 
         context "and job is not in the suspended list" do
           it "instantiates widget with the specified parameter" do
-            expect(Dashboard::Widget).to receive(:new).with("MyWidget").and_return(instance_double(Dashboard::SingleObject::Feedback, run: nil))
+            widget = instance_double(Dashboard::SingleObject::Feedback, run: nil)
+            allow(Dashboard::Widget).to receive(:new).with("MyWidget").and_return(widget)
             described_class.perform_now("MyWidget")
+            expect(widget).to have_received(:run)
           end
         end
       end

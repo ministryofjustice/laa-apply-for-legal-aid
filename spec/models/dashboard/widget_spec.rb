@@ -49,13 +49,15 @@ module Dashboard
     describe "#find_or_create_dataset" do
       before do
         allow(dataset).to receive(:put)
+        allow(datasets_client).to receive(:find_or_create)
+          .with("apply_for_legal_aid.test.dummy_widget", instance_of(Hash))
+          .and_return(dataset)
       end
 
       it "calls find_or_create on Geckoboard::Datasets" do
-        expect(datasets_client).to receive(:find_or_create)
-          .with("apply_for_legal_aid.test.dummy_widget", instance_of(Hash))
-          .and_return(dataset)
         widget.run
+        expect(datasets_client).to have_received(:find_or_create)
+          .with("apply_for_legal_aid.test.dummy_widget", instance_of(Hash))
       end
     end
 

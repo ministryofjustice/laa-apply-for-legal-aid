@@ -12,16 +12,18 @@ RSpec.describe Provider do
       end
 
       context "when staging or production" do
+        before { allow(HostEnv).to receive(:staging_or_production?).and_return(true) }
+
         it "schedules a background job" do
-          expect(HostEnv).to receive(:staging_or_production?).and_return(true)
           expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id)
           provider.update_details
         end
       end
 
       context "when not staging or production" do
+        before { allow(HostEnv).to receive(:staging_or_production?).and_return(false) }
+
         it "does not schedule a background job" do
-          expect(HostEnv).to receive(:staging_or_production?).and_return(false)
           expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
           provider.update_details
         end

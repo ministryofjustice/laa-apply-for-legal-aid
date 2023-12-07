@@ -40,9 +40,11 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           let(:job) { class_double EmailMonitorJob, perform_later: nil }
           let(:delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY }
 
+          before { allow(described_class).to receive(:set).with(wait: delay).and_return(job) }
+
           it "schedules another delivery job" do
-            expect(described_class).to receive(:set).with(wait: delay).and_return(job)
             scheduled_mailings_delivery_job
+            expect(job).to have_received(:perform_later)
           end
         end
       end
