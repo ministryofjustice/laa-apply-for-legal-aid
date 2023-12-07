@@ -35,6 +35,10 @@ module Vehicles
       payments_remain.to_s == "true"
     end
 
+    def no_payments_remain?
+      payments_remain.to_s == "false"
+    end
+
     def save
       attributes[:payment_remaining] = 0 if valid? && !payments_remain?
       super
