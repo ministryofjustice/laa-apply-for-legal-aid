@@ -23,7 +23,7 @@ class SamlSessionsController < Devise::SamlSessionsController
 
   def after_sign_in_path_for(_provider)
     session[:journey_type] = :providers
-    providers_confirm_office_path
+    ActiveRecord::Type::Boolean.new.cast(Rails.configuration.x.laa_portal.mock_saml || false) ? providers_confirm_office_path : root_path
   end
 
 private
