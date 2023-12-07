@@ -1320,17 +1320,39 @@ en:
         category-multiple_employments: Review categories - Multiple employments
         category-refunds: Review categories - Tax or NI refunds
         category:
-          employment: Employment
-          employment_gross_income: Employment gross income
-          employment_tax: Employment income tax
-          employment_nic: Employment National Insurance contributions
-          employment_payment: Employment payment
-          state_benefit_payment: State benefits
-          other_income_payment: Other income
-          outgoings_housing_cost: Housing payments
-          outgoings_maintenance: Maintenance payments
-          outgoings_legal_aid: Legal aid payments
-          outgoings_childcare: Childcare payments
+          employment: Client's employment
+          client_employment: Client's employment
+          partner_employment: Partner's employment
+          employment_gross_income: Client's employment gross income
+          client_employment_gross_income: Client's employment gross income
+          partner_employment_gross_income: Partner's employment gross income
+          employment_tax: Client's employment income tax
+          client_employment_tax: Client's employment income tax
+          partner_employment_tax: Partner's employment income tax
+          employment_nic: Client's employment National Insurance contributions
+          client_employment_nic: Client's employment National Insurance contributions
+          partner_employment_nic: Partner's employment National Insurance contributions
+          employment_payment: Client's employment payment
+          client_employment_payment: Client's employment payment
+          partner_employment_payment: Partner's employment payment
+          state_benefit_payment: Client's state benefits
+          client_state_benefit_payment: Client's state benefits
+          partner_state_benefit_payment: Partner's state benefits
+          other_income_payment: Client's other income
+          client_other_income_payment: Client's other income
+          partner_other_income_payment: Partner's other income
+          outgoings_housing_cost: Client's housing payments
+          client_outgoings_housing_cost: Client's housing payments
+          partner_outgoings_housing_cost: Partner's housing payments
+          outgoings_maintenance: Client's maintenance payments
+          client_outgoings_maintenance: Client's maintenance payments
+          partner_outgoings_maintenance: Partner's maintenance payments
+          outgoings_legal_aid: Client's legal aid payments
+          client_outgoings_legal_aid: Client's legal aid payments
+          partner_outgoings_legal_aid: Partner's legal aid payments
+          outgoings_childcare: Client's childcare payments
+          client_outgoings_childcare: Client's childcare payments
+          partner_outgoings_childcare: Partner's childcare payments
           england_infected_blood_support: England Infected Blood Support Scheme
           vaccine_damage_payments: Vaccine Damage Payments Scheme
           variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
