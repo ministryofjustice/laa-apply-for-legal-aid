@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get "ping", to: "status#ping", format: :json
+  get "healthcheck", to: "status#status", format: :json
+  get "status", to: "status#ping", format: :json
+  get "data", to: "status#data"
+
+  match "(*any)", to: "pages#servicedown", via: :all if Setting.maintenance_mode?
+
   root to: "providers/start#index"
 
   require "sidekiq/web"
@@ -35,10 +42,6 @@ Rails.application.routes.draw do
   end
 
   get "auth/failure", to: "auth#failure"
-  get "ping", to: "status#ping", format: :json
-  get "healthcheck", to: "status#status", format: :json
-  get "status", to: "status#ping", format: :json
-  get "data", to: "status#data"
 
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
