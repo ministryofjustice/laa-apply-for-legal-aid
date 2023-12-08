@@ -67,6 +67,7 @@ en:
       show:
         heading_1: Settings
         labels:
+          maintenance_mode: Enable maintenance mode
           mock_true_layer_data: Mock TrueLayer Data
           manually_review_all_cases: Manually review all non-passported applications
           allow_welsh_translation: Allow Welsh translation
@@ -75,6 +76,8 @@ en:
           partner_means_assessment: Enable Partner Means Assessment
           linked_applications: Enable linked applications
         hints:
+          maintenance_mode: |
+            WARNING: Select yes to redirect all traffic to our servide down page.
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
             All applications with capital contributions AND restrictions on assets will be routed to caseworker for review.

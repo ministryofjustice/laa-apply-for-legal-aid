@@ -7,7 +7,8 @@ module Settings
                   :allow_welsh_translation,
                   :enable_ccms_submission,
                   :partner_means_assessment,
-                  :linked_applications
+                  :linked_applications,
+                  :maintenance_mode
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -15,6 +16,7 @@ module Settings
               :enable_ccms_submission,
               :partner_means_assessment,
               :linked_applications,
+              :maintenance_mode,
               presence: true
   end
 end

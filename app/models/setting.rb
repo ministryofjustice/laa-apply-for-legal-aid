@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.linked_applications
   end
 
+  def self.maintenance_mode?
+    setting.maintenance_mode
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

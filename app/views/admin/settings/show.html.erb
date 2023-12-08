@@ -7,6 +7,16 @@
       ) do |form| %>
 
     <%= form.govuk_collection_radio_buttons(
+          :maintenance_mode,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.maintenance_mode") },
+          legend: { text: t(".labels.maintenance_mode") },
+        ) %>
+
+    <%= form.govuk_collection_radio_buttons(
           :mock_true_layer_data,
           yes_no_options,
           :value,
