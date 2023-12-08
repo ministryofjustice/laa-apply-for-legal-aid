@@ -31,10 +31,6 @@ class Setting < ApplicationRecord
     setting.linked_applications
   end
 
-  def self.maintenance_mode?
-    ENV.fetch("MAINTENANCE_MODE", "false") == "true"
-  end
-
   def self.setting
     Setting.first || Setting.create!
   end
