@@ -381,5 +381,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: encryptionKeyDerivationSalt
-
+  - name: MAINTENANCE_MODE
+    value: "true"
 {{- end }}
