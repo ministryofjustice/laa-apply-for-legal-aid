@@ -41,6 +41,7 @@ The laa-apply-for-legal-aid system is a web service for solicitors that provide 
     - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
     - [3. Add the widget to the Geckoboard dashboard](#3-add-the-widget-to-the-geckoboard-dashboard)
 - [**Troubleshooting**](#troubleshooting)
+- [**Maintenance mode**](#docs/maintenance_mode.md)
 
 
 ## Architecture Diagram
