@@ -8,8 +8,9 @@ module CCMS
 
       let(:address) do
         create(:address,
-               address_line_one: "102",
-               address_line_two: "Petty France",
+               address_line_one: "102 Petty France",
+               address_line_two: "St James Park",
+               county: "Westminster",
                city: "London",
                postcode: "SW1H9AJ")
       end
@@ -33,8 +34,13 @@ module CCMS
             command: "clientbim:ClientAddRQ",
             transaction_id: expected_tx_id,
             matching: [
-              "<common:AddressLine1>#{applicant.address.address_line_one} #{applicant.address.address_line_two}</common:AddressLine1>",
+              "<clientbio:NINumber>#{applicant.national_insurance_number}</clientbio:NINumber>",
+              "<common:AddressLine1>#{applicant.address.address_line_one}</common:AddressLine1>",
+              "<common:AddressLine2>#{applicant.address.address_line_two}</common:AddressLine2>",
               "<common:City>#{applicant.address.city}</common:City>",
+              "<common:County>#{applicant.address.county}</common:County>",
+              "<common:Country>GBR</common:Country>",
+              "<common:PostalCode>SW1H 9AJ</common:PostalCode>",
             ],
           )
         end

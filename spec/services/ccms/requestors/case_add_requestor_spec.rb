@@ -24,7 +24,6 @@ module CCMS
 
         let(:applicant) do
           create(:applicant,
-                 :with_address_for_xml_fixture,
                  first_name: "Shery",
                  last_name: "Ledner",
                  national_insurance_number: "EG587804M",
@@ -48,7 +47,7 @@ module CCMS
                  trust_value: 600)
         end
 
-        let(:address) { create(:address, postcode: "GH08NY") }
+        let(:address) { create(:address, address_line_one: "10 Foobar Lane", address_line_two: "Bluewater", city: "Ipswich", county: "Essex", postcode: "GH08NY") }
         let(:provider) { create(:provider, username: "saturnina", firm:, email: "patrick_rath@example.net") }
         let(:firm) { create(:firm, ccms_id: 169) }
         let(:opponents) { create_list(:opponent, 1, first_name: "Joffrey", last_name: "Test-Opponent") }

@@ -56,7 +56,8 @@ module CCMS
               matching: [
                 "<common:Surname>#{applicant.last_name}</common:Surname>",
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>",
-                "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
+                "<common:AddressLine1>#{address.address_line_one}</common:AddressLine1>",
+                "<common:AddressLine2>#{address.address_line_two}</common:AddressLine2>",
                 "<common:City>#{address.city}</common:City>",
                 "<common:PostalCode>#{address.postcode}</common:PostalCode>",
               ],
@@ -99,7 +100,8 @@ module CCMS
               matching: [
                 "<common:Surname>#{applicant.last_name}</common:Surname>",
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>",
-                "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
+                "<common:AddressLine1>#{address.address_line_one}</common:AddressLine1>",
+                "<common:AddressLine2>#{address.address_line_two}</common:AddressLine2>",
                 "<common:City>#{address.city}</common:City>",
                 "<common:PostalCode>#{address.postcode}</common:PostalCode>",
               ],
@@ -132,7 +134,8 @@ module CCMS
               matching: [
                 "<common:Surname>#{applicant.last_name}</common:Surname>",
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>",
-                "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
+                "<common:AddressLine1>#{address.address_line_one}</common:AddressLine1>",
+                "<common:AddressLine2>#{address.address_line_two}</common:AddressLine2>",
                 "<common:City>#{address.city}</common:City>",
                 "<common:PostalCode>#{address.postcode}</common:PostalCode>",
               ],

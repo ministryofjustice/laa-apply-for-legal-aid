@@ -115,7 +115,7 @@ module CCMS
               command: "casebim:CaseAddRQ",
               transaction_id: "20190301030405123456",
               matching: [
-                "<casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>",
+                "<casebio:PreferredAddress>CASE</casebio:PreferredAddress>",
                 "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>",
               ],
             )
@@ -180,7 +180,7 @@ module CCMS
               command: "casebim:CaseAddRQ",
               transaction_id: "20190301030405123456",
               matching: [
-                "<casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>",
+                "<casebio:PreferredAddress>CASE</casebio:PreferredAddress>",
                 "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>",
               ],
             )

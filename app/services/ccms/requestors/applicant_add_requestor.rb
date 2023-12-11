@@ -47,6 +47,7 @@ module CCMS
       # this is all mandatory: we don't hold any of this data except date of birth
       def personal_information(xml)
         xml.__send__(:"clientbio:DateOfBirth", applicant.date_of_birth.to_fs(:ccms_date))
+        xml.__send__(:"clientbio:NINumber", applicant.national_insurance_number)
         xml.__send__(:"clientbio:Gender", "UNSPECIFIED")
         xml.__send__(:"clientbio:MaritalStatus", "U")
         xml.__send__(:"clientbio:VulnerableClient", false)
@@ -62,8 +63,10 @@ module CCMS
       end
 
       def applicant_address(xml)
-        xml.__send__(:"common:AddressLine1", address.first_lines)
+        xml.__send__(:"common:AddressLine1", address.address_line_one)
+        xml.__send__(:"common:AddressLine2", address.address_line_two)
         xml.__send__(:"common:City", address.city)
+        xml.__send__(:"common:County", address.county)
         xml.__send__(:"common:Country", "GBR")
         xml.__send__(:"common:PostalCode", address.pretty_postcode)
       end
