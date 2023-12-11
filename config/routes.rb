@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "status", to: "status#ping", format: :json
   get "data", to: "status#data"
 
-  match "(*any)", to: "pages#servicedown", via: :all if Setting.maintenance_mode?
+  match "(*any)", to: "pages#servicedown", via: :all if Rails.application.config.x.maintenance_mode
 
   root to: "providers/start#index"
 

@@ -155,6 +155,8 @@ module LaaApplyForLegalAid
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"
 
+    config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
+
     # automatically include locale in the query string when generating urls with url_helpers
     Rails.application.routes.default_url_options[:locale] = I18n.locale
     config.i18n.default_locale = :en
