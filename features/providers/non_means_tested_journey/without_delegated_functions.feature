@@ -61,7 +61,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Continue'
     Then I should be on a page with title "Provide details of the case"
-    And I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
+    And I should be on the 'merits_task_list' page showing 'Latest incident details\nNot started'
 
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
@@ -101,7 +101,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I fill "Application merits task statement of case statement field" with "Statement of case"
 
     When I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNOT STARTED'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNot started'
 
     When I click the last link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
@@ -113,7 +113,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I fill "Success prospect details" with "Prospects of success"
 
     When I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCompleted'
 
     When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
@@ -124,11 +124,11 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
-    And I should see 'NON MEANS TESTED'
+    And I should see 'Non means tested'
 
     When I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
 
     When I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
-    And I should not see "PASSPORTED"
+    And I should not see "Passported"

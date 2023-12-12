@@ -13,7 +13,7 @@ Feature: partner_means_assessment state benefits handling
     Then I should be on a page with title "Upload the partner's bank statements"
 
     When I upload the fixture file named "acceptable.pdf"
-    Then I should see "acceptable.pdf UPLOADED"
+    Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
     Then I should be on a page with title "Does the partner get any benefits"
@@ -84,7 +84,7 @@ Feature: partner_means_assessment state benefits handling
     Then I should be on a page with title "Upload the partner's bank statements"
 
     When I upload the fixture file named "acceptable.pdf"
-    Then I should see "acceptable.pdf UPLOADED"
+    Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
     Then I should be on a page with title "Does the partner get any benefits"

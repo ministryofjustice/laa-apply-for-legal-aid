@@ -4,13 +4,13 @@ Feature: Statement of case upload
   Background:
     Given csrf is enabled
     And I have completed the non-passported means assessment and start the merits assessment
-    Then I should be on the 'merits_task_list' page showing 'Statement of case\nNOT STARTED'
+    Then I should be on the 'merits_task_list' page showing 'Statement of case\nNot started'
     When I click link "Statement of case"
     Then I should be on a page with title "Provide a statement of case"
 
   Scenario: Uploading an acceptable statement of case
     When I upload the fixture file named 'acceptable.pdf'
-    Then I should see 'acceptable.pdf UPLOADED'
+    Then I should see 'acceptable.pdf Uploaded'
 
   Scenario: Uploading a statement of case containing no content
     When I upload the fixture file named 'empty_file.pdf'

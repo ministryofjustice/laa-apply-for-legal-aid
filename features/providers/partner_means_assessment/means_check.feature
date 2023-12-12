@@ -18,8 +18,8 @@ Feature: partner_means_assessment means check
 
     Given I upload the fixture file named "acceptable.pdf"
     And I upload an evidence file named "hello_world.pdf"
-    Then I should see "acceptable.pdf UPLOADED"
-    And I should see "hello_world.pdf UPLOADED"
+    Then I should see "acceptable.pdf Uploaded"
+    And I should see "hello_world.pdf Uploaded"
 
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to navigate to partners means check when doing open banking upload
