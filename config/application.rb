@@ -160,7 +160,7 @@ module LaaApplyForLegalAid
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en cy] # overriden in test to allow en-GB for Faker
 
-    config.assets.paths << Rails.root.join("node_modules/govuk-frontend/govuk/assets")
+    config.assets.paths << Rails.root.join("node_modules/govuk-frontend/dist/govuk/assets")
     config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")
   end
 end
