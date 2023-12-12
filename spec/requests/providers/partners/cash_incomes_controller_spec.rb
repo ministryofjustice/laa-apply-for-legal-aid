@@ -71,7 +71,7 @@ RSpec.describe Providers::Partners::CashIncomesController do
       end
 
       it "updates the model attribute for no cash income to false" do
-        expect { request }.to change { legal_aid_application.reload.no_cash_income }.from(nil).to(false)
+        expect { request }.to change { legal_aid_application.partner.reload.no_cash_income }.from(nil).to(false)
       end
 
       it "sets the applicant as owner" do
@@ -94,7 +94,7 @@ RSpec.describe Providers::Partners::CashIncomesController do
       end
 
       it "updates the model attribute for no cash income to true" do
-        expect { request }.to change { legal_aid_application.reload.no_cash_income }.from(nil).to(true)
+        expect { request }.to change { legal_aid_application.partner.reload.no_cash_income }.from(nil).to(true)
       end
     end
 

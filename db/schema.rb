@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_08_110820) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_180352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -764,6 +764,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_110820) do
     t.decimal "student_finance_amount"
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
+    t.boolean "no_cash_income"
+    t.boolean "no_cash_outgoings"
     t.index ["legal_aid_application_id"], name: "index_partners_on_legal_aid_application_id"
   end
 
@@ -1074,8 +1076,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_110820) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "legal_framework_submissions", "legal_aid_applications"
-  add_foreign_key "linked_applications", "legal_aid_applications", column: "associated_application_id", validate: false
-  add_foreign_key "linked_applications", "legal_aid_applications", column: "lead_application_id", validate: false
+  add_foreign_key "linked_applications", "legal_aid_applications", column: "associated_application_id"
+  add_foreign_key "linked_applications", "legal_aid_applications", column: "lead_application_id"
   add_foreign_key "matter_oppositions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
