@@ -97,7 +97,8 @@ module CCMS
 
       def generate_application_details(xml)
         xml.__send__(:"casebio:Client") { generate_client(xml) }
-        xml.__send__(:"casebio:PreferredAddress", "CLIENT")
+        xml.__send__(:"casebio:PreferredAddress", "CASE")
+        xml.__send__(:"casebio:CorrespondenceAddress") { generate_correspondence_address(xml) }
         xml.__send__(:"casebio:ProviderDetails") { generate_provider_details(xml) }
         xml.__send__(:"casebio:CategoryOfLaw") { generate_category_of_law(xml) }
         xml.__send__(:"casebio:OtherParties") { generate_other_parties(xml) }
@@ -154,6 +155,15 @@ module CCMS
         xml.__send__(:"casebio:ContactUserID") do
           xml.__send__(:"common:UserLoginID", provider.contact_id)
         end
+      end
+
+      def generate_correspondence_address(xml)
+        xml.__send__(:"common:AddressLine1", applicant.address.address_line_one)
+        xml.__send__(:"common:AddressLine2", applicant.address.address_line_two)
+        xml.__send__(:"common:City", applicant.address.city)
+        xml.__send__(:"common:County", applicant.address.county)
+        xml.__send__(:"common:Country", "GBR")
+        xml.__send__(:"common:PostalCode", applicant.address.pretty_postcode)
       end
 
       def generate_category_of_law(xml)

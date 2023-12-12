@@ -46,20 +46,4 @@ RSpec.describe Address do
     model.postcode = "SW1H9AJ"
     expect(model.pretty_postcode).to eq("SW1H 9AJ")
   end
-
-  context "when the address has lines one and two populated" do
-    it "first_lines displays the first two lines of the address concatenated" do
-      model.address_line_one = "102"
-      model.address_line_two = "Petty France"
-      expect(model.first_lines).to eq("102 Petty France")
-    end
-  end
-
-  context "when the address has only line one populated" do
-    it "first_lines displays only the first line of the address" do
-      model.address_line_one = "102"
-      model.address_line_two = nil
-      expect(model.first_lines).to eq("102")
-    end
-  end
 end

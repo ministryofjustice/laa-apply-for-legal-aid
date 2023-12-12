@@ -25,7 +25,15 @@
               <casebio:FirstName>Shery</casebio:FirstName>
               <casebio:Surname>Ledner</casebio:Surname>
             </casebio:Client>
-            <casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>
+            <casebio:PreferredAddress>CASE</casebio:PreferredAddress>
+            <casebio:CorrespondenceAddress>
+              <common:AddressLine1>10 Foobar Lane</common:AddressLine1>
+              <common:AddressLine2>Bluewater</common:AddressLine2>
+              <common:City>Ipswich</common:City>
+              <common:County>Essex</common:County>
+              <common:Country>GBR</common:Country>
+              <common:PostalCode>GH0 8NY</common:PostalCode>
+            </casebio:CorrespondenceAddress>
             <casebio:ProviderDetails>
               <casebio:ProviderFirmID>169</casebio:ProviderFirmID>
               <casebio:ProviderOfficeID>4727432767</casebio:ProviderOfficeID>
@@ -670,7 +678,7 @@
                           <common:Attribute>
                             <common:Attribute>POST_CODE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>GH08NY</common:ResponseValue>
+                            <common:ResponseValue>GH0 8NY</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -1936,7 +1944,7 @@
                           <common:Attribute>
                             <common:Attribute>POST_CODE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>GH08NY</common:ResponseValue>
+                            <common:ResponseValue>GH0 8NY</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
