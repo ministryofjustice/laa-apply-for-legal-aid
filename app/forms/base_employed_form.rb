@@ -4,20 +4,33 @@ class BaseEmployedForm < BaseForm
 
   attr_accessor(*CHECK_BOXES_ATTRIBUTES)
 
-  validate :any_checkbox_checked_or_draft
-
-  def any_checkbox_checked?
-    CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
-  end
+  validate :validate_any_checkbox_checked, unless: :draft?
+  validate :validate_none_and_another_checkbox_not_both_checked, unless: :draft?
 
 private
+
+  def any_checkbox_checked?
+    checkbox_hash.values.any?(&:present?)
+  end
+
+  def none_and_another_checkbox_checked?
+    checkbox_hash[:none_selected].present? && checkbox_hash.except(:none_selected).values.any?(&:present?)
+  end
+
+  def checkbox_hash
+    CHECK_BOXES_ATTRIBUTES.index_with { |attribute| __send__(attribute) }
+  end
 
   def exclude_from_model
     [:none_selected]
   end
 
-  def any_checkbox_checked_or_draft
-    errors.add EMPLOYMENT_TYPES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?
+  def validate_none_and_another_checkbox_not_both_checked
+    errors.add EMPLOYMENT_TYPES.first.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
+  end
+
+  def validate_any_checkbox_checked
+    errors.add EMPLOYMENT_TYPES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked?
   end
 
   def clean_attributes(hash)
