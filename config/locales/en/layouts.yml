@@ -26,7 +26,7 @@ en:
       header:
         gov_uk_link_title: Go to the GOV.UK homepage
         feedback: feedback
-        phase: beta
+        phase: Beta
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
         title: Apply for legal aid
         notice: Notice
