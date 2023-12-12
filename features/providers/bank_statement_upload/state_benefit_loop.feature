@@ -11,8 +11,8 @@ Feature: Bank statement upload journey state_benefit loop feature
 
     Given I upload the fixture file named "acceptable.pdf"
     And I upload an evidence file named "hello_world.pdf"
-    Then I should see "acceptable.pdf UPLOADED"
-    And I should see "hello_world.pdf UPLOADED"
+    Then I should see "acceptable.pdf Uploaded"
+    And I should see "hello_world.pdf Uploaded"
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Review .*'s employment income"

@@ -182,7 +182,7 @@ Feature: Review and print your application
       | h3  | Payments your client makes in cash|
       | h2  | Your client's capital |
 
-    And I should see "PASSPORTED"
+    And I should see "Passported"
     And I should not see "Benefits total"
     And I should not see "Housing benefit total"
     And I should not see "Disregarded benefits total"
@@ -211,7 +211,7 @@ Feature: Review and print your application
       | h2  | Income, regular payments and assets |
       | h1  | Print your application |
 
-    And I should see 'NON MEANS TESTED'
+    And I should see 'Non means tested'
     And I should see 'Print the application and get the person acting for'
     And I should see 'For example, a litigation friend, a professional children’s guardian or a parental order report.'
 
