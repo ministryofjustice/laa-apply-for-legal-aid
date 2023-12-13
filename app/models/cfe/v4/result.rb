@@ -35,7 +35,7 @@ module CFE
         overall_result[:income_contribution]
       end
 
-      def capital_summary
+      def capital_summary(**)
         result_summary[:capital]
       end
 
@@ -51,11 +51,11 @@ module CFE
         assessment[:capital]
       end
 
-      def gross_income_breakdown
+      def gross_income_breakdown(**)
         assessment[:gross_income]
       end
 
-      def gross_income_summary
+      def gross_income_summary(**)
         result_summary[:gross_income]
       end
 
@@ -63,11 +63,11 @@ module CFE
         min_threshold(gross_income_summary[:proceeding_types], :upper_threshold)
       end
 
-      def total_disposable_income_assessed
+      def total_disposable_income_assessed(**)
         disposable_income_summary[:total_disposable_income]
       end
 
-      def total_gross_income_assessed
+      def total_gross_income_assessed(**)
         gross_income_summary[:total_gross_income]
       end
 
@@ -75,11 +75,11 @@ module CFE
         gross_income_summary[:proceeding_types]
       end
 
-      def disposable_income_summary
+      def disposable_income_summary(**)
         result_summary[:disposable_income]
       end
 
-      def disposable_income_breakdown
+      def disposable_income_breakdown(**)
         assessment[:disposable_income]
       end
 
@@ -211,35 +211,35 @@ module CFE
       #                                                              #
       ################################################################
 
-      def monthly_state_benefits
+      def monthly_state_benefits(**)
         gross_income_breakdown[:state_benefits][:monthly_equivalents][:all_sources]
       end
 
-      def mei_friends_or_family
+      def mei_friends_or_family(**)
         monthly_income_equivalents[:friends_or_family]
       end
 
-      def mei_maintenance_in
+      def mei_maintenance_in(**)
         monthly_income_equivalents[:maintenance_in]
       end
 
-      def mei_property_or_lodger
+      def mei_property_or_lodger(**)
         monthly_income_equivalents[:property_or_lodger]
       end
 
-      def mei_student_loan
+      def mei_student_loan(**)
         gross_income_breakdown[:irregular_income][:monthly_equivalents][:student_loan]
       end
 
-      def mei_pension
+      def mei_pension(**)
         monthly_income_equivalents[:pension]
       end
 
-      def total_monthly_income
+      def total_monthly_income(**)
         mei_pension + mei_student_loan + mei_property_or_lodger + mei_maintenance_in + mei_friends_or_family + monthly_state_benefits
       end
 
-      def total_monthly_income_including_employment_income
+      def total_monthly_income_including_employment_income(**)
         total_monthly_income + employment_income_gross_income
       end
 
@@ -249,27 +249,27 @@ module CFE
       #                                                              #
       ################################################################
 
-      def moe_housing
+      def moe_housing(**)
         disposable_income_summary[:net_housing_costs].abs
       end
 
-      def moe_childcare
+      def moe_childcare(**)
         monthly_outgoing_equivalents[:child_care].abs
       end
 
-      def moe_maintenance_out
+      def moe_maintenance_out(**)
         monthly_outgoing_equivalents[:maintenance_out].abs
       end
 
-      def moe_legal_aid
+      def moe_legal_aid(**)
         monthly_outgoing_equivalents[:legal_aid].abs
       end
 
-      def total_monthly_outgoings
+      def total_monthly_outgoings(**)
         moe_housing + moe_childcare + moe_maintenance_out + moe_legal_aid
       end
 
-      def total_monthly_outgoings_including_tax_and_ni
+      def total_monthly_outgoings_including_tax_and_ni(**)
         total_monthly_outgoings - employment_income_tax - employment_income_national_insurance
       end
 
@@ -301,31 +301,31 @@ module CFE
       #                                                              #
       ################################################################
 
-      def employment_income
+      def employment_income(**)
         disposable_income_summary[:employment_income]
       end
 
-      def employment_income_gross_income
+      def employment_income_gross_income(**)
         employment_income[:gross_income] || 0.0
       end
 
-      def employment_income_benefits_in_kind
+      def employment_income_benefits_in_kind(**)
         employment_income[:benefits_in_kind] || 0.0
       end
 
-      def employment_income_tax
+      def employment_income_tax(**)
         employment_income[:tax] || 0.0
       end
 
-      def employment_income_national_insurance
+      def employment_income_national_insurance(**)
         employment_income[:national_insurance] || 0.0
       end
 
-      def employment_income_fixed_employment_deduction
+      def employment_income_fixed_employment_deduction(**)
         employment_income[:fixed_employment_deduction] || 0.0
       end
 
-      def employment_income_net_employment_income
+      def employment_income_net_employment_income(**)
         employment_income[:net_employment_income] || 0.0
       end
 
@@ -344,11 +344,11 @@ module CFE
         threshold == MAX_VALUE ? "N/a" : threshold
       end
 
-      def monthly_income_equivalents
+      def monthly_income_equivalents(**)
         gross_income_breakdown[:other_income][:monthly_equivalents][:all_sources]
       end
 
-      def monthly_outgoing_equivalents
+      def monthly_outgoing_equivalents(**)
         disposable_income_breakdown[:monthly_equivalents][:all_sources]
       end
 
