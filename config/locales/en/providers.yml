@@ -1235,17 +1235,16 @@ en:
         application_heading: Enter general case details
         application_section_heading: Case details
         proceeding_heading: Enter details for each proceeding
-      task_list_item:
         latest_incident_details: Latest incident details
-        opponent_name: "Opponents"
+        opponent_name: Opponents
         opponent_mental_capacity: Mental capacity of all parties
         domestic_abuse_summary: Domestic abuse summary
-        statement_of_case: Statement of case
-        chances_of_success: Chances of success
         children_application: Children involved in this application
+        statement_of_case: Statement of case
+        attempts_to_settle: Attempts to settle
+        chances_of_success: Chances of success
         why_matter_opposed: Why the matter is opposed
         children_proceeding: Children involved in this proceeding
-        attempts_to_settle: Attempts to settle
         client_denial_of_allegation: Client denial of allegation
         client_offer_of_undertakings: Client offer of undertaking
         specific_issue: Specific Issue

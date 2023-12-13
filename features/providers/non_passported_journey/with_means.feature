@@ -118,7 +118,7 @@ Feature: non_passported_journey with means
     And I should be on a page showing 'they received disregarded scheme or charity payments'
 
     When I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
 
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'

@@ -4,7 +4,7 @@ Feature: Statement of case upload
   Background:
     Given csrf is enabled
     And I have completed the non-passported means assessment and start the merits assessment
-    Then I should be on the 'merits_task_list' page showing 'Statement of case\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Statement of case Not started'
     When I click link "Statement of case"
     Then I should be on a page with title "Provide a statement of case"
 

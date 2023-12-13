@@ -4,7 +4,7 @@ Feature: Search existing opponent organisations
 Background: User is on existing opponent organisation search page
   Given I insert cassette "lfa_organisations_all"
   When I have completed a non-passported application and reached the merits task_list
-  Then I should be on the 'merits_task_list' page showing 'Opponents\nNot started'
+  Then I should be on the 'merits_task_list' page showing 'Opponents Not started'
   When I click link 'Opponents'
   Then I should be on a page showing "Is the opponent an individual or an organisation?"
   When I choose a 'An organisation' radio button
