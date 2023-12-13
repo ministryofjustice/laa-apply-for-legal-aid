@@ -59,7 +59,7 @@ Feature: Bank statement upload check your answers
 
     When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
-    Then I should see "hello_world.pdf UPLOADED"
+    Then I should see "hello_world.pdf Uploaded"
 
     When I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"

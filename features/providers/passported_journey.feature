@@ -43,7 +43,7 @@ Feature: passported_journey completes application
     Then I click 'Save and continue'
     Then I should be on a page showing 'We need to check if Test Walker can get legal aid'
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNot started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
@@ -76,9 +76,9 @@ Feature: passported_journey completes application
     When I upload an evidence file named 'hello_world.pdf'
     Then I should not see "There was a problem uploading your file"
     Then I should be on a page showing "hello_world.pdf"
-    Then I should be on a page showing "UPLOADED"
+    Then I should be on a page showing "Uploaded"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNOT STARTED'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNot started'
     When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
@@ -87,7 +87,7 @@ Feature: passported_journey completes application
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCompleted'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
@@ -105,7 +105,7 @@ Feature: passported_journey completes application
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
-    Then I should be on a page showing "PASSPORTED"
+    Then I should be on a page showing "Passported"
 
   @javascript @vcr
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change

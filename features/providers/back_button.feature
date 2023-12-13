@@ -107,7 +107,7 @@
 #    Then I should not see "There was a problem uploading your file"
 #    Then I reload the page
 #    Then I should be on a page showing "hello_world.pdf"
-#    Then I should be on a page showing "UPLOADED"
+#    Then I should be on a page showing "Uploaded"
 #    Then I click 'Save and continue'
 #    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
 #    Then I choose "No"
