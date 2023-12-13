@@ -218,7 +218,7 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     date (3.3.4)
-    debug_inspector (1.1.0)
+    debug_inspector (1.2.0)
     declarative (0.0.20)
     deep_cloneable (3.2.0)
       activerecord (>= 3.1.0, < 8)
