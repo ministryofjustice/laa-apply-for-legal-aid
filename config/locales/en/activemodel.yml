@@ -808,6 +808,7 @@ en:
                 none_selected_with_partner: Select the savings or investments your client and their partner have, or select 'None of these savings or investments'
                 no_account_selected: Select the bank accounts your client has, or select 'None of these'
                 no_account_selected_with_partner: Select the bank accounts your client and their partner have, or select 'None of these'
+                no_account_and_another_option_selected: If you select 'None of these', you cannot select any of the other options
                 no_partner_account_selected: Select if the partner has current or savings accounts
             check_box_partner_offline_current_accounts:
               blank: Select if the partner has current or savings accounts
