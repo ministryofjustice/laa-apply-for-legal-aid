@@ -120,7 +120,11 @@ Cucumber::Rails::Database.javascript_strategy = :transaction
 load Rails.root.join("db/seeds.rb")
 
 Before do |_scenario|
+  # prevent bank holiday API calls
+  allow(BankHoliday).to receive(:dates).and_return(%w[2018-01-01])
+
   Populators::TransactionTypePopulator.call
+
   # Delete previous screenshots from filesystem that were generated during previous feature runs
   FileUtils.rm_rf(Rails.root.join("tmp/capybara/**.*"))
 end

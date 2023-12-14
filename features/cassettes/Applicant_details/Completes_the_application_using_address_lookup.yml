@@ -8,43 +8,39 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:33 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:08 GMT
+      content-type:
       - application/json;charset=UTF-8
-      Transfer-Encoding:
+      transfer-encoding:
       - chunked
-      Connection:
+      connection:
       - keep-alive
-      Request-Context:
+      request-context:
       - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
-      Vary:
+      vary:
       - Origin,Accept-Encoding,key
-      Omse-Category:
+      omse-category:
       - premium
-      Omse-Transaction-Count:
+      omse-transaction-count:
       - '60'
-      Omse-Premium-Count:
+      omse-premium-count:
       - '0'
-      Strict-Transport-Security:
+      strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
-      encoding: ASCII-8BIT
+      encoding: UTF-8
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"98\",\r\n    \"lastupdate\"
-        : \"2023-02-02\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"106\",\r\n    \"lastupdate\"
+        : \"2023-12-12\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"SUPER FIRM LTD, 84, PETTY FRANCE,
         LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"SUPER FIRM LTD\",\r\n
@@ -136,7 +132,7 @@ http_interactions:
         \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
         \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
         : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 03 Feb 2023 10:00:32 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:08 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -147,47 +143,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:33 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:08 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '12573'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"dd6907b8448bc8458adb599124824756"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 53127a023f199d9a3392a5354570b4a4
-      X-Runtime:
-      - '0.023929'
-      Strict-Transport-Security:
+      x-request-id:
+      - 54723914d485ae607da1690772b1fdf8
+      x-runtime:
+      - '0.014031'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -312,7 +302,7 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Fri, 03 Feb 2023 10:00:33 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:08 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -323,47 +313,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:34 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:09 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '12573'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"dd6907b8448bc8458adb599124824756"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 73acee054c616a559136fc8a6046ab18
-      X-Runtime:
-      - '0.081052'
-      Strict-Transport-Security:
+      x-request-id:
+      - e0451abf6f38853f900253cfd819fb08
+      x-runtime:
+      - '0.013635'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -488,7 +472,7 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Fri, 03 Feb 2023 10:00:34 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:09 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
@@ -499,47 +483,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:34 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:10 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '1310'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"fbabf0efd65b63f03290a3f99682b0d4"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 015a12be2a7357ba3b076f14ba9f297f
-      X-Runtime:
-      - '0.015022'
-      Strict-Transport-Security:
+      x-request-id:
+      - e2cbea80d859085ba736c449ef317488
+      x-runtime:
+      - '0.009883'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -556,7 +534,7 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 03 Feb 2023 10:00:34 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:10 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -567,54 +545,48 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:35 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:10 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '277'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"8bf337339345d42d16a9e6062fb65ccf"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 2437533a6047b29f9ab760be087c388d
-      X-Runtime:
-      - '0.004690'
-      Strict-Transport-Security:
+      x-request-id:
+      - 97c64e85da0d504eef4740f8bf6d642a
+      x-runtime:
+      - '0.003968'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Fri, 03 Feb 2023 10:00:35 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:10 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -625,54 +597,48 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:35 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:10 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '277'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"8bf337339345d42d16a9e6062fb65ccf"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 0ccf61223d59f0571ec010007127e29e
-      X-Runtime:
-      - '0.004135'
-      Strict-Transport-Security:
+      x-request-id:
+      - b31008517523b1a7333c39bc17768f90
+      x-runtime:
+      - '0.003856'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Fri, 03 Feb 2023 10:00:35 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:10 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -683,47 +649,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:36 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:11 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '708'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"05375658d64485716c2575dd3e911e59"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 2d05f18e0daa17edcd55283194d3c3aa
-      X-Runtime:
-      - '0.011001'
-      Strict-Transport-Security:
+      x-request-id:
+      - 861f483d8a7a7176b57c888ea3c782ab
+      x-runtime:
+      - '0.006321'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -735,7 +695,7 @@ http_interactions:
         of arrest to representation on the consideration of the breach by the court
         (but excluding applying for a warrant of arrest, if not attached, and representation
         in contempt proceedings).","additional_params":[]}}'
-  recorded_at: Fri, 03 Feb 2023 10:00:36 GMT
+  recorded_at: Wed, 13 Dec 2023 16:27:11 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -746,47 +706,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.7.12
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 03 Feb 2023 10:00:37 GMT
-      Content-Type:
+      date:
+      - Wed, 13 Dec 2023 16:27:11 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '708'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Vary:
+      vary:
       - Accept, Origin
-      Etag:
+      etag:
       - W/"05375658d64485716c2575dd3e911e59"
-      Cache-Control:
+      cache-control:
       - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 4f7ac2bcc508abaa34390ba0f1bb7646
-      X-Runtime:
-      - '0.011097'
-      Strict-Transport-Security:
+      x-request-id:
+      - 198cd38a61e2fb59701062a4708a164a
+      x-runtime:
+      - '0.009678'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -798,5 +752,5 @@ http_interactions:
         of arrest to representation on the consideration of the breach by the court
         (but excluding applying for a warrant of arrest, if not attached, and representation
         in contempt proceedings).","additional_params":[]}}'
-  recorded_at: Fri, 03 Feb 2023 10:00:37 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Wed, 13 Dec 2023 16:27:11 GMT
+recorded_with: VCR 6.2.0
