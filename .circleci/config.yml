@@ -15,7 +15,6 @@ executors:
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
-          CACHE_VERSION: v1
   cloud-platform-executor:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.7.0
@@ -32,7 +31,6 @@ executors:
       - image: ministryofjustice/apply-ci:latest-3.2.2
         environment:
           RAILS_ENV: test
-          CACHE_VERSION: v1
           NODE_OPTIONS: --openssl-legacy-provider
       - image: cimg/postgres:11.16
       - image: cimg/redis:6.2
