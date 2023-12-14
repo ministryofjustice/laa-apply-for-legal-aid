@@ -11,11 +11,7 @@ module Providers
 
       def update
         @form = LegalAidApplications::DependantForm.new(form_params)
-        if @form.save
-          go_forward(dependant)
-        else
-          render @form.model.id.nil? ? :new : :show
-        end
+        render new_or_show unless save_continue_or_draft(@form)
       end
 
     private
@@ -42,6 +38,10 @@ module Providers
           params.require(:dependant).permit(*LegalAidApplications::DependantForm::MODEL_ATTRIBUTES)
         end
         convert_date_params(merged_params)
+      end
+
+      def new_or_show
+        @form.model.id.nil? ? :new : :show
       end
     end
   end
