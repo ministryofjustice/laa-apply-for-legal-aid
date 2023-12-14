@@ -21,7 +21,7 @@
             task_list.with_item(
               title: t(".#{task.name}"),
               href: _task_url(task.name, @legal_aid_application, task.state),
-              status: govuk_tag(text: t(".states.#{task.state}"), colour: task.state == :complete ? nil : "grey"),
+              status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
             )
           end
         end %>
@@ -41,7 +41,7 @@
                 task_list.with_item(
                   title: t(".#{task.name}"),
                   href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code) : _task_url(task.name, @legal_aid_application, task.status),
-                  status: govuk_tag(text: t(".states.#{task.state}"), colour: task.state == :complete ? nil : "grey"),
+                  status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
                 )
               end
             end
