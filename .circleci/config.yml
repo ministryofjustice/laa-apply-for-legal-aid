@@ -15,7 +15,6 @@ executors:
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
-          CACHE_VERSION: v1
   cloud-platform-executor:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.7.0
@@ -32,7 +31,6 @@ executors:
       - image: ministryofjustice/apply-ci:latest-3.2.2
         environment:
           RAILS_ENV: test
-          CACHE_VERSION: v1
           NODE_OPTIONS: --openssl-legacy-provider
       - image: cimg/postgres:11.16
       - image: cimg/redis:6.2
@@ -292,7 +290,7 @@ jobs:
     - setup_remote_docker
     - *authenticate_k8s_live
     - *decrypt_secrets
-    - deploy:
+    - run:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
@@ -307,7 +305,7 @@ jobs:
     - setup_remote_docker
     - *decrypt_secrets
     - *authenticate_k8s_live
-    - deploy:
+    - run:
         name: Helm deployment to staging
         command: |
           helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
@@ -324,7 +322,7 @@ jobs:
     - setup_remote_docker
     - *authenticate_k8s_live
     - *decrypt_secrets
-    - deploy:
+    - run:
         name: Helm deployment to production
         command: |
           helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
