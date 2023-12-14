@@ -34,9 +34,14 @@ updates:
   - "ministryofjustice/laa-apply-for-legal-aid"
   groups:
     # Specify a name for the group, which will be used in pull request titles and branch names
-    npm-dependencies:
+    npm-babel:
       # Define patterns to include dependencies in the group (based on # dependency name)
       patterns:
         - "*babel*"
-        - "jest*"  # A wildcard string that matches multiple dependency names syt
+    npm-stylelint:
+      patterns:
         - "stylelint*"
+    npm-jest:
+      # Define patterns to include dependencies in the group (based on # dependency name)
+      patterns:
+        - "jest*"
