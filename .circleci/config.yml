@@ -290,7 +290,7 @@ jobs:
     - setup_remote_docker
     - *authenticate_k8s_live
     - *decrypt_secrets
-    - deploy:
+    - run:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
@@ -305,7 +305,7 @@ jobs:
     - setup_remote_docker
     - *decrypt_secrets
     - *authenticate_k8s_live
-    - deploy:
+    - run:
         name: Helm deployment to staging
         command: |
           helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
@@ -322,7 +322,7 @@ jobs:
     - setup_remote_docker
     - *authenticate_k8s_live
     - *decrypt_secrets
-    - deploy:
+    - run:
         name: Helm deployment to production
         command: |
           helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
