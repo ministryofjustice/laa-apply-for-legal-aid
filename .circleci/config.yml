@@ -15,7 +15,7 @@ executors:
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
-          CACHE_VERSION: v1
+          CACHE_VERSION: v2
   cloud-platform-executor:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.7.0
@@ -118,7 +118,7 @@ references:
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v3.2.2-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      key: v3.2.2-yarn-packages-cache-v2-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
