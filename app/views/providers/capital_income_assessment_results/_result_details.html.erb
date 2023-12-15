@@ -22,15 +22,19 @@
         <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, individual: "Partner", read_only: true) %>
 
         <% if @cfe_result.partner_jobs? %>
-        <%= render("employment_income", individual: "Partner") %>
+          <%= render("employment_income", individual: "Partner") %>
         <% end %>
 
         <%= render("other_income", individual: "Partner") %>
         <%= render("outgoings", individual: "Partner") %>
-      <% end %>
 
-      <%= render "deductions" %>
-      <%= render("disposable_income", individual: "Partner") %>
+        <%= render "deductions" %>
+        <%= render("disposable_income", individual: "Partner") %>
+      <% else %>
+
+        <%= render "deductions" %>
+        <%= render("disposable_income", individual: "Client") %>
+      <% end %>
     <% end %>
 
     <%= accordion.with_section(heading_text: t(".capital_calculation")) do %>

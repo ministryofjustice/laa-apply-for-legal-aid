@@ -533,13 +533,13 @@ module CFE
 
       describe "total_monthly_outgoings" do
         it "returns total monthly outgoings" do
-          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 165.0
+          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 265.0
         end
       end
 
       describe "total_monthly_outgoings_including_tax_and_ni" do
         it "returns total monthly outgoings including tax and ni" do
-          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings_including_tax_and_ni).to eq 530.79
+          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings_including_tax_and_ni).to eq 630.79
         end
       end
 

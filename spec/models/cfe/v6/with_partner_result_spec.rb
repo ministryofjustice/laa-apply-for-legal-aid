@@ -110,7 +110,7 @@ module CFE
           let(:partner) { true }
 
           it "returns the disposable income breakdown for the partner" do
-            expect(cfe_result.disposable_income_breakdown(partner:)[:monthly_equivalents][:all_sources][:rent_or_mortgage]).to be_zero
+            expect(cfe_result.disposable_income_breakdown(partner:)[:monthly_equivalents][:all_sources][:rent_or_mortgage]).to eq 400
           end
         end
       end

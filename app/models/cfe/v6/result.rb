@@ -210,10 +210,7 @@ module CFE
       end
 
       def total_deductions_including_fixed_employment_allowance
-        employment_deduction = employment_income_fixed_employment_deduction
-        if partner_jobs?
-          employment_deduction * 2
-        end
+        employment_deduction = partner_jobs? ? employment_income_fixed_employment_deduction * 2 : employment_income_fixed_employment_deduction
         total_deductions - employment_deduction
       end
 
