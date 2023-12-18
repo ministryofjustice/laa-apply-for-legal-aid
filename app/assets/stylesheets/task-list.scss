@@ -46,31 +46,4 @@
   border-top: 1px solid $govuk-border-colour;
 }
 
-.app-task-list__task-name {
-  @include govuk-font($size: 19);
-  display: block;
-  @include govuk-media-query($from: 450px) {
-    float: left;
-  }
-}
-
-.app-task-list__task-name p {
-  margin-bottom: 0;
-}
-
-// The `app-task-list__task-completed` class was previously used on the task
-// list for the completed tag (changed in 86c90ec) – it's still included here to
-// avoid breaking task lists in existing prototypes.
-.app-task-list__tag,
-.app-task-list__task-completed {
-  margin-top: govuk-spacing(2);
-  margin-bottom: govuk-spacing(1);
-
-  @include govuk-media-query($from: 450px) {
-    margin-top: 0;
-    margin-bottom: 0;
-    float: right;
-  }
-}
-
 // stylelint-enable declaration-no-important
