@@ -1113,6 +1113,12 @@ module CFEResults
         result[:result_summary][:disposable_income][:partner_allowance] = 211.32
         result
       end
+
+      def self.without_partner_jobs
+        result = eligible
+        result[:assessment][:partner_gross_income][:employment_income] = []
+        result
+      end
     end
   end
 end

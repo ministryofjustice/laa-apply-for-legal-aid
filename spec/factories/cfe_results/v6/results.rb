@@ -127,6 +127,10 @@ module CFEResults
         trait :with_partner do
           result { CFEResults::V6::MockResults.with_partner.to_json }
         end
+
+        trait :without_partner_jobs do
+          result { CFEResults::V6::MockResults.without_partner_jobs.to_json }
+        end
       end
     end
   end
