@@ -42,7 +42,8 @@ module Providers
     before_validation :empty_unchecked_values
 
     validate :all_second_home_values_present_if_any_are_present
-    validate :any_checkbox_checked_or_draft
+    validate :validate_any_checkbox_checked, unless: :draft?
+    validate :validate_no_account_and_another_checkbox_not_both_checked, unless: :draft?
 
     def second_home_checkbox_status
       any_second_home_value_present? ? "checked" : nil
@@ -62,15 +63,23 @@ module Providers
       ALL_ATTRIBUTES - [:second_home_percentage]
     end
 
-    def any_checkbox_checked?
-      CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
-    end
-
     def has_partner_with_no_contrary_interest?
       model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
     end
 
   private
+
+    def any_checkbox_checked?
+      checkbox_hash.values.any?(&:present?)
+    end
+
+    def checkbox_hash
+      CHECK_BOXES_ATTRIBUTES.index_with { |attribute| __send__(attribute) }
+    end
+
+    def none_and_another_checkbox_checked?
+      checkbox_hash[:none_selected].present? && checkbox_hash.except(:none_selected).values.any?(&:present?)
+    end
 
     def empty_unchecked_values
       (SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).each do |attribute|
@@ -105,12 +114,20 @@ module Providers
       :check_box_valuable_items_value
     end
 
-    def any_checkbox_checked_or_draft
-      errors.add base_checkbox.to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?
+    def validate_no_account_and_another_checkbox_not_both_checked
+      errors.add base_checkbox.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
+    end
+
+    def validate_any_checkbox_checked
+      errors.add base_checkbox.to_sym, error_message_for_none_selected unless any_checkbox_checked?
     end
 
     def error_message_for_none_selected
       I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.#{journey}.#{error_key('none_selected')}")
+    end
+
+    def error_message_for_none_and_another_option_selected
+      I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.none_and_another_option_selected")
     end
 
     def present_and_not_zero?(attr)

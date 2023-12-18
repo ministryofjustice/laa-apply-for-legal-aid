@@ -600,6 +600,7 @@ en:
               not_a_number_with_partner: Estimated trust value must be an amount of money, like 60,000
               too_many_decimals_with_partner: Estimated trust value must not include more than 2 decimal numbers
             base:
+              none_and_another_option_selected: If you select 'None of these assets', you cannot select any of the other options
               citizens:
                 none_selected: Select if you have any of these types of assets
               providers:
