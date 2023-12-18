@@ -801,6 +801,7 @@ en:
             base:
               none_selected: Select if you have any of these savings or investments
               no_account_selected: Select if you have current or savings accounts
+              none_and_another_option_selected: If you select 'None of these savings or investments', you cannot select any of the other options
               citizens:
                 none_selected: Select if you have any of these savings or investments
               providers:
