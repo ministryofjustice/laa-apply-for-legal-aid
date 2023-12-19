@@ -7,7 +7,7 @@ module Proceedings
     before_validation :assign_client_involvement_type_description,
                       if: -> { client_involvement_type_ccms_code.present? }
 
-    validates :client_involvement_type_ccms_code, presence: true
+    validates :client_involvement_type_ccms_code, presence: true, unless: :draft?
 
     def client_involvement_types
       @client_involvement_types ||= LegalFramework::ClientInvolvementTypes::All.call

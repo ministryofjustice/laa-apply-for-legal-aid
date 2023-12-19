@@ -63,6 +63,19 @@ RSpec.describe "ClientInvolvementTypeController", :vcr do
           expect(response.body).to redirect_to(providers_legal_aid_application_delegated_function_path(application_id))
         end
       end
+
+      context "when form submitted with Save as draft button" do
+        let(:params) do
+          {
+            draft_button: "Save and come back later",
+          }
+        end
+
+        it "redirects to the list of applications" do
+          post_cit
+          expect(response.body).to redirect_to providers_legal_aid_applications_path
+        end
+      end
     end
   end
 end
