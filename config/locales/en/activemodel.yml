@@ -815,6 +815,7 @@ en:
                 no_partner_account_selected: Select if the partner has current or savings accounts
             check_box_partner_offline_current_accounts:
               blank: Select if the partner has current or savings accounts
+              none_and_another_option_selected: If you select 'None of these', you cannot select any of the other options
             cash:
               blank: Enter the value of money that's not in a bank account for your client
               greater_than_or_equal_to: The value of money that's not in a bank account must be 0 or more
