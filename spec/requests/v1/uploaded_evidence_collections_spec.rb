@@ -66,9 +66,15 @@ RSpec.describe "POST /v1/uploaded_evidence_collections" do
       end
 
       context "when the virus scanner is down" do
-        before { allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false) }
+        before do
+          allow(MalwareScanResult).to receive(:new).and_return(malware_scan_result)
+          allow(malware_scan_result).to receive(:scanner_working).with(any_args).and_return(false)
+          allow(malware_scan_result).to receive(:save!)
+          allow(malware_scan_result).to receive(:virus_found?)
+        end
 
         let(:i18n_error_path) { "activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file" }
+        let(:malware_scan_result) { instance_double(MalwareScanResult) }
 
         it "does not save the object and raises a 500 error with text" do
           post_request

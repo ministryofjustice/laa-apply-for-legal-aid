@@ -283,8 +283,13 @@ module Providers
 
           context "when virus scanner is down" do
             before do
-              allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false)
+              allow(MalwareScanResult).to receive(:new).and_return(malware_scan_result)
+              allow(malware_scan_result).to receive(:scanner_working).with(any_args).and_return(false)
+              allow(malware_scan_result).to receive(:save!)
+              allow(malware_scan_result).to receive(:virus_found?)
             end
+
+            let(:malware_scan_result) { instance_double(MalwareScanResult) }
 
             it "returns error message" do
               patch_request

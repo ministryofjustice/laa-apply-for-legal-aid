@@ -85,8 +85,11 @@ RSpec.describe "applicants omniauth call back" do
         # Faraday defined within OAuth2::Client outputs to console on error
         # which then outputs into the standard rspec progress sequence rather
         # than to logs. Mocking `logger.add` silences that output for this spec
-        allow_any_instance_of(Logger).to receive(:add)
+        allow(Logger).to receive(:new).and_return(logger)
+        allow(logger).to receive(:add)
       end
+
+      let(:logger) { instance_double(Logger) }
 
       it "redirects to error page" do
         get_request

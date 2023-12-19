@@ -39,7 +39,7 @@ module Banking
       context "with transactions analysis" do
         context "when pending" do
           before do
-            allow_any_instance_of(NonPassportedStateMachine).to receive(:aasm_state).and_return("analysing_bank_transactions")
+            allow(legal_aid_application.state_machine).to receive(:aasm_state).and_return("analysing_bank_transactions")
           end
 
           it "does not call ProviderEmailService" do
