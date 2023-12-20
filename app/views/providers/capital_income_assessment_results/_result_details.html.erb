@@ -5,7 +5,7 @@
 
   <%= govuk_accordion do |accordion| %>
     <% accordion.with_section(heading_text: t(".income_calculation")) do %>
-      <p class="govuk-hint"><%= t(".hint_text") %></p>
+      <p class="govuk-hint"><%= t(".income_hint_text") %></p>
 
       <% if @legal_aid_application.uploading_bank_statements? %>
         <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, individual: "Client", read_only: true) %>
@@ -38,12 +38,14 @@
     <% end %>
 
     <%= accordion.with_section(heading_text: t(".capital_calculation")) do %>
+      <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+        <p class="govuk-hint"><%= t(".capital_hint_text") %></p>
+      <% end %>
       <%= render "shared/property_results" %>
       <%= render "shared/vehicle_results" %>
       <%= render "shared/savings_and_investments" %>
       <%= render "shared/other_assets" %>
       <%= render "shared/total_capital" %>
-      <%= render "shared/restrictions" %>
     <% end %>
   <% end %>
 </div>

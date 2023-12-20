@@ -102,10 +102,11 @@ en:
           contribution_required: Contribution required
           partially_eligible: Partially eligible
       result_details:
-        capital_calculation: Capital calculation
         income_calculation: Income calculation
+        income_hint_text: We calculated these calendar monthly figures using the information you and your client provided.
+        capital_calculation: Capital calculation
+        capital_hint_text: We calculated these figures based on the information you provided about your client and their partner.
         client_eligibility_calculation: How we calculated your client's financial eligibility
-        hint_text: We calculated these calendar monthly figures using the information you and your client provided.
       bank_statements:
         title: "%{individual} bank statements"
         uploaded: Uploaded bank statements
@@ -140,7 +141,7 @@ en:
         amount: Amount
       other_income:
         title: "%{individual} other income"
-        income: Income
+        income: "%{individual} income"
         benefits: Benefits
         friends_or_family: Financial help from friends or family
         maintenance: Maintenance payments from a former partner

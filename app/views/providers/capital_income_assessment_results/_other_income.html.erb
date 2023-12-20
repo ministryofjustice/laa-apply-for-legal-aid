@@ -1,6 +1,6 @@
 <% partner = individual == "Partner" %>
 <h2 class="govuk-heading-m">
-  <%= @cfe_result.jobs? ? t(".title", individual:) : t(".income") %>
+  <%= @cfe_result.jobs? ? t(".title", individual:) : t(".income", individual:) %>
 </h2>
 
 <%= govuk_table do |table|
