@@ -16,11 +16,6 @@
     <% end %>
 
     <%= t("transaction_types.names.providers.#{name}") %>
-    <% if I18n.exists? "transaction_types.hints.#{name}" %>
-      <div class="govuk-hint" style="margin-bottom: 0px">
-        <%= t("transaction_types.hints.#{name}") %>
-      </div>
-    <% end %>
     <% if error_message %>
       <p id='<%= "error-#{name}" %>' class="govuk-error-message govuk-!-padding-top-2"><%= error_message %></p>
     <% end %>
