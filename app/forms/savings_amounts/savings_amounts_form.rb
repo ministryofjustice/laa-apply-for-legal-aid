@@ -24,7 +24,8 @@ module SavingsAmounts
 
     before_validation :empty_unchecked_values
 
-    validate :any_checkbox_checked_or_draft
+    validate :validate_any_checkbox_checked, unless: :draft?
+    validate :validate_none_and_another_checkbox_not_both_checked, unless: :draft?
 
     def exclude_from_model
       CHECK_BOXES_ATTRIBUTES + [:journey] - [:none_selected]
@@ -34,15 +35,23 @@ module SavingsAmounts
       ATTRIBUTES
     end
 
-    def any_checkbox_checked?
-      CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
-    end
-
     def has_partner_with_no_contrary_interest?
       model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
     end
 
   private
+
+    def none_and_another_checkbox_checked?
+      checkbox_hash[:none_selected].present? && checkbox_hash.except(:none_selected).values.any?(&:present?)
+    end
+
+    def checkbox_hash
+      CHECK_BOXES_ATTRIBUTES.index_with { |attribute| __send__(attribute) }
+    end
+
+    def any_checkbox_checked?
+      checkbox_hash.values.any?(&:present?)
+    end
 
     def empty_unchecked_values
       ATTRIBUTES.each do |attribute|
@@ -58,12 +67,20 @@ module SavingsAmounts
       CHECK_BOXES_ATTRIBUTES.first
     end
 
-    def any_checkbox_checked_or_draft
-      errors.add base_checkbox.to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?
+    def validate_any_checkbox_checked
+      errors.add base_checkbox.to_sym, error_message_for_none_selected unless any_checkbox_checked?
+    end
+
+    def validate_none_and_another_checkbox_not_both_checked
+      errors.add base_checkbox.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
     end
 
     def error_message_for_none_selected
       I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.#{error_key('none_selected')}")
+    end
+
+    def error_message_for_none_and_another_option_selected
+      I18n.t("activemodel.errors.models.savings_amount.attributes.base.none_and_another_option_selected")
     end
   end
 end

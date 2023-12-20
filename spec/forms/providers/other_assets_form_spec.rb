@@ -10,7 +10,8 @@ RSpec.describe Providers::OtherAssetsForm do
       { check_box_second_home: "yes",
         second_home_value: "859374.00",
         second_home_mortgage: "123000.00",
-        second_home_percentage: "66.66" }
+        second_home_percentage: "66.66",
+        none_selected: "" }
     end
 
     let(:empty_second_home_params) do
@@ -146,6 +147,21 @@ RSpec.describe Providers::OtherAssetsForm do
               it "is invalid" do
                 expect(form).to be_invalid
                 expect(form.errors[:valuable_items_value]).to eq [translation_for(:valuable_items_value, "greater_than_or_equal_to")]
+              end
+            end
+
+            describe "when both 'none of these' and another checkbox is selected" do
+              let(:params) do
+                {
+                  check_box_trust_value: "true",
+                  trust_value: "1000",
+                  none_selected: "true",
+                }
+              end
+
+              it "is invalid" do
+                expect(form).to be_invalid
+                expect(form.errors[:check_box_valuable_items_value]).to eq [translation_for(:base, "none_and_another_option_selected")]
               end
             end
           end

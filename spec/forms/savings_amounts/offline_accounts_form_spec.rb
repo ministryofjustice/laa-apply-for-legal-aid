@@ -13,7 +13,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
 
   describe "#save" do
     context "when check boxes are checked" do
-      let(:check_box_params) { check_box_attributes.index_with { |_attr| "true" } }
+      let(:check_box_params) { check_box_attributes.index_with { |attr| "true" unless attr == :no_account_selected } }
 
       context "when amounts are valid" do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
@@ -35,6 +35,14 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
 
         it "has no errors" do
           expect(described_form.errors).to be_empty
+        end
+      end
+
+      context "when 'none of the above' and another checkbox are selected" do
+        let(:check_box_params) { { check_box_joint_offline_savings_accounts: "true", no_account_selected: "true" } }
+
+        it "errors" do
+          expect(described_form.save).to be false
         end
       end
 

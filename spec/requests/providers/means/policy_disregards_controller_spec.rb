@@ -132,6 +132,25 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
           end
         end
       end
+
+      context "with 'none of these' checkbox and another checkbox selected" do
+        let(:params) do
+          {
+            policy_disregards: {
+              london_emergencies_trust: "true",
+              none_selected: "true",
+            },
+          }
+        end
+
+        before do
+          patch providers_legal_aid_application_means_policy_disregards_path(policy.legal_aid_application), params:
+        end
+
+        it "the response includes the error message" do
+          expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.policy_disregards.attributes.base.none_and_another_option_selected"))
+        end
+      end
     end
   end
 end
