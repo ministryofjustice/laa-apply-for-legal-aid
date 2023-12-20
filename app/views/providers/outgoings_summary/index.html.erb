@@ -14,7 +14,7 @@
     <%= list_from_translation_path ".outgoings_summary.index" %>
   </p>
 
-  <ol class="app-task-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
+  <ol class="govuk-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
     <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
       <%= render(
             "outgoing_type_item",
@@ -27,7 +27,15 @@
     <% end %>
 
     <% if @legal_aid_application.transaction_types.debits.count < TransactionType.debits.count %>
-      <%= render partial: "add_other_outgoings" %>
+      <li class="display-table">
+        <span class="sort-transactions__section-number">
+          <%= image_tag("plus_icon.svg", alt: "") %>
+        </span>
+        <p class='govuk-body'>
+          <%= govuk_link_to t(".add_other_outgoings"), providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application) %>
+        </p>
+      </li>
+
     <% end %>
   </ol>
 

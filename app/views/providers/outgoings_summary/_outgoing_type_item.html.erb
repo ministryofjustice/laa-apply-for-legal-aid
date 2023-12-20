@@ -8,24 +8,19 @@
 <% error_message = error.present? ? error.first : "" %>
 
 <li id="<%= name.to_s %>" class="<%= form_group_error_class %>">
-  <h2 class="app-task-list__section">
-    <span class="app-task-list__section-number"><%= number %>. </span>
+  <h2 class="display-table govuk-heading-m">
+    <span class="sort-transactions__section-number"><%= number %>. </span>
     <%= t("transaction_types.names.providers.#{name}") %>
-    <% if I18n.exists? "transaction_types.hints.#{name}" %>
-      <div class="govuk-hint" style="margin-bottom: 0px">
-        <%= t("transaction_types.hints.#{name}") %>
-      </div>
-    <% end %>
     <% if error_message %>
       <p id='<%= "error-#{name}" %>' class="govuk-error-message govuk-!-padding-top-2"><%= error_message %></p>
     <% end %>
   </h2>
-  <%= content_tag(:div, class: "app-task-list__items", id: "list-item-#{name}") do %>
+  <%= content_tag(:div, class: "sort-transactions__items", id: "list-item-#{name}") do %>
     <% if bank_transactions.present? %>
       <%= render "providers/bank_transactions/list_selected", category: name, bank_transactions: %>
       <%= transaction_link %>
     <% else %>
-      <p class="app-task-list__item">
+      <p class="sort-transactions__item">
         <%= transaction_link %>
       </p>
     <% end %>

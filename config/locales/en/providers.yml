@@ -820,8 +820,6 @@ en:
       show:
         error: Select yes if they have received other benefits
     income_summary:
-      add_other_income:
-        add_other_income: Add another type of income
       income_type_item:
         col_amount: Amount
         col_date: Date
@@ -831,6 +829,7 @@ en:
         page_heading: "Sort your client's income into categories"
         select: View statements and add transactions
         subheading: You told us your client receives the types of payments listed below.
+        add_other_income: Add another type of income
         you_need_to:
           text: "You need to:"
           list: |
@@ -1504,14 +1503,13 @@ en:
         print_guidance_button: Print this guidance
         can_your_client_share: Can your client share their bank statements using online banking?
     outgoings_summary:
-      add_other_outgoings:
-        add_other_outgoings: Add another type of regular payment
       index:
         list: |
           view your client's bank statements
           add transactions to each category
         page_heading: Sort your client's regular payments into categories
         payment_types: You told us your client makes the types of payments listed below.
+        add_other_outgoings: Add another type of regular payment
         select:
           rent_or_mortgage: View statements and add transactions
           child_care: View statements and add transactions
