@@ -62,7 +62,12 @@ module Reports
         end
 
         context "when a ApplicationDetailCsvLine exception is raised" do
-          before { allow_any_instance_of(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, "fake error") }
+          before do
+            allow(ApplicationDetailCsvLine).to receive(:new).and_return(application_detail_csv_line)
+            allow(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, "fake error")
+          end
+
+          let(:application_detail_csv_line) { instance_double(ApplicationDetailCsvLine) }
 
           it "logs the error message" do
             expect(Rails.logger).to receive(:info).with("ApplicationDetailsReport - StandardError :: fake error")

@@ -69,7 +69,12 @@ RSpec.describe Admin::SettingsController do
     end
 
     context "when the enable_ccms_submission is changed" do
-      before { allow_any_instance_of(CCMS::RestartSubmissions).to receive(:call).and_return(true) }
+      before do
+        allow(CCMS::RestartSubmissions).to receive(:new).and_return(ccms_restart_submissions)
+        allow(ccms_restart_submissions).to receive(:call).and_return(true)
+      end
+
+      let(:ccms_restart_submissions) { instance_double(CCMS::RestartSubmissions) }
 
       context "when from false to true" do
         it "calls CCMS::RestartSubmissions" do

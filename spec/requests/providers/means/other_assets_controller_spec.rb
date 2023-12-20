@@ -195,7 +195,7 @@ RSpec.describe "provider other assets requests" do
             let(:policy_disregards) { true }
 
             before do
-              allow_any_instance_of(LegalAidApplication).to receive(:capture_policy_disregards?).and_return(policy_disregards)
+              allow(application).to receive(:capture_policy_disregards?).and_return(policy_disregards)
               patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
