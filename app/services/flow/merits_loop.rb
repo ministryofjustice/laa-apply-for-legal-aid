@@ -55,7 +55,7 @@ module Flow
         {
           name: convert_task_to_flow_name(task.name),
           task_name: task.name,
-          url: I18n.t(task.name, scope: "providers.merits_task_lists.task_list_item.urls"),
+          url: I18n.t(task.name, scope: "providers.merits_task_lists.show.urls"),
           state: task.state,
         }
       }&.compact

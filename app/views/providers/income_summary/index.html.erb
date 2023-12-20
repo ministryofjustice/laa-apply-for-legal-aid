@@ -2,9 +2,9 @@
 
   <% errors = @legal_aid_application.errors.messages %>
 
-  <p class="gov-body"><%= t(".subheading") %></p>
+  <p class="govuk-body"><%= t(".subheading") %></p>
 
-  <p class="gov-body"><%= t(".you_need_to.text") %></p>
+  <p class="govuk-body"><%= t(".you_need_to.text") %></p>
   <%= list_from_translation_path(".income_summary.index.you_need_to") %>
 
   <ol class="app-task-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
@@ -21,9 +21,9 @@
             error: errors[transaction_type.name.to_sym],
           ) %>
     <% end %>
-      <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
-        <%= render partial: "add_other_income" %>
-      <% end %>
+    <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
+      <%= render partial: "add_other_income" %>
+    <% end %>
   </ol>
 
   <%= next_action_buttons_with_form(

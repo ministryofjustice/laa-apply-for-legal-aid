@@ -13,17 +13,41 @@
         <%= @merits_task_list.errors[:task_list].first %>
       </p>
     <% end %>
-    <ol class="app-task-list">
-      <%= render "task_list_section", name: t(".application_section_heading"), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
-      <li>
-        <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t(".proceeding_heading") %></h2>
-      </li>
-      <% @merits_tasks[:proceedings].each_with_index do |(_, proceeding), index| %>
-        <%= render "task_list_section", name: proceeding[:name], tasks: proceeding[:tasks], ccms_code: @merits_tasks[:proceedings].keys[index], section_number: index + 2 %>
-      <% end %>
-    </ol>
+
+    <h3 class="govuk-heading-m">1. <%= t(".application_section_heading") %></h3>
+
+    <%= govuk_task_list(id_prefix: "task-list_case-details") do |task_list|
+          @merits_tasks[:application].each do |task|
+            task_list.with_item(
+              title: t(".#{task.name}"),
+              href: _task_url(task.name, @legal_aid_application, task.state),
+              status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
+            )
+          end
+        end %>
+
+    <h2 class="govuk-heading-l"><%= t(".proceeding_heading") %></h2>
+    <% @merits_tasks[:proceedings].each_with_index do |(ccms_code, proceeding), index| %>
+      <h3 class="govuk-heading-m"><%= index + 2 %>. <%= proceeding[:name] %></h3>
+      <%= govuk_task_list(id_prefix: "task-list_#{(index + 1).ordinalize}-proceeding") do |task_list|
+            proceeding[:tasks].each do |task|
+              next if task.state.eql?(:ignored)
+
+              if task.state == :waiting_for_dependency
+                task_list.with_item(title: t(".#{task.name}")) do |item|
+                  item.with_status(text: t(".states.waiting_for_dependency"), classes: "govuk-task-list__status--cannot-start-yet")
+                end
+              else
+                task_list.with_item(
+                  title: t(".#{task.name}"),
+                  href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code) : _task_url(task.name, @legal_aid_application, task.status),
+                  status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
+                )
+              end
+            end
+          end %>
+    <% end %>
   </div>
-  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_merits_task_list_path,

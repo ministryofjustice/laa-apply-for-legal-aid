@@ -3,8 +3,8 @@ Feature: Merits task list
   @javascript @vcr
   Scenario: Completing the merits task list
     When I have completed a non-passported application and reached the merits task_list
-    Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNot started'
-    And I should see 'Children involved in this proceeding\nCannot start yet'
+    Then I should be on the 'merits_task_list' page showing 'Children involved in this application Not started'
+    And I should see 'Children involved in this proceeding Cannot start yet'
     When I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'You must complete every section before you can continue'
     When I click link 'Latest incident details'
@@ -49,13 +49,13 @@ Feature: Merits task list
     Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nCompleted'
-    And I should see 'Children involved in this proceeding\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Children involved in this application Completed'
+    And I should see 'Children involved in this proceeding Not started'
     When I click the first link 'Chances of success'
     Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCompleted'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'
     When I click the last link 'Chances of success'
     Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
     When I choose 'Yes'
@@ -66,7 +66,7 @@ Feature: Merits task list
     Then I should be on the 'attempts_to_settle' page showing 'What attempts have been made to settle the matter?'
     When I fill "Attempts made" with "A settlement attempt"
     And I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Attempts to settle\nCompleted'
+    Then I should be on the 'merits_task_list' page showing 'Attempts to settle Completed'
     When I click 'Save and continue'
     Then I should be on a page showing 'Upload supporting evidence'
     And I click 'Save and continue'
@@ -79,8 +79,8 @@ Feature: Merits task list
   @javascript @vcr
   Scenario: Removing children
     When I have completed a non-passported application and reached the merits task_list
-    Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNot started'
-    And I should see 'Children involved in this proceeding\nCannot start yet'
+    Then I should be on the 'merits_task_list' page showing 'Children involved in this application Not started'
+    And I should see 'Children involved in this proceeding Cannot start yet'
     When I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'You must complete every section before you can continue'
     When I click link 'Latest incident details'
@@ -139,7 +139,7 @@ Feature: Merits task list
   Scenario: Uploading a file for statement of case
     Given csrf is enabled
     Given I have completed a non-passported application and reached the merits task_list
-    Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Children involved in this application Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     When I enter the 'told' date of 2 days ago
@@ -190,12 +190,12 @@ Feature: Merits task list
     Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Statement of case\nCompleted'
+    Then I should be on the 'merits_task_list' page showing 'Statement of case Completed'
 
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
     Given I have completed the non-passported means assessment and start the merits assessment
-    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
@@ -227,7 +227,7 @@ Feature: Merits task list
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click the last link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
@@ -236,7 +236,7 @@ Feature: Merits task list
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCompleted'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'

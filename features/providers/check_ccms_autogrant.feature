@@ -26,7 +26,7 @@ Feature: Checking ccms means does NOT auto grant
     And I should be on a page showing "may need to pay towards legal aid"
     And I should be on a page showing "We’ve calculated that your client should pay £1,000 from their disposable capital."
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
     Then I fill "application_merits_task_incident_told_on_3i" with "5"
@@ -60,12 +60,12 @@ Feature: Checking ccms means does NOT auto grant
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCompleted'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
@@ -99,7 +99,7 @@ Feature: Checking ccms means does NOT auto grant
     And I should be on a page showing "could be eligible for legal aid"
     And I should be on a page showing "Based on their financial situation, your client may not have to pay towards legal aid."
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
     Then I fill "application_merits_task_incident_told_on_3i" with "5"
@@ -132,12 +132,12 @@ Feature: Checking ccms means does NOT auto grant
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNot started'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCompleted'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'

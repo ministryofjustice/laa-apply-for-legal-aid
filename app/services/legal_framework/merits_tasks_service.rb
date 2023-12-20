@@ -70,7 +70,7 @@ module LegalFramework
     end
 
     def ignore_task?(task_name)
-      I18n.t(task_name, scope: "providers.merits_task_lists.task_list_item").match(/^translation missing/i).present?
+      I18n.t(task_name, scope: "providers.merits_task_lists.show").match(/^translation missing/i).present?
     rescue I18n::MissingTranslationData
       true
     end
