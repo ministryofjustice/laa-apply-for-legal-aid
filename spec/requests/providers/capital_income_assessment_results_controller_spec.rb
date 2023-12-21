@@ -482,8 +482,8 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       let(:cfe_result) { create(:cfe_v6_result, :with_no_employments) }
 
       it "does not display employment income" do
-        expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
-        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income"))
+        expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title", individual: "Client"))
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income", individual: "Client"))
       end
     end
   end
