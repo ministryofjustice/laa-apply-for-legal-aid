@@ -612,6 +612,7 @@ module CFEResults
           pensioner_capital_disregard: 0.0,
           combined_assessed_capital: 500_000.0,
         }
+        result
       end
 
       def self.not_eligible
@@ -1115,7 +1116,7 @@ module CFEResults
       end
 
       def self.without_partner_jobs
-        result = eligible
+        result = with_partner
         result[:assessment][:partner_gross_income][:employment_income] = []
         result
       end

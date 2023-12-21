@@ -27,7 +27,7 @@ module CFE
 
       describe "partner_gross_income_breakdown" do
         it "returns the gross income breakdown for the partner" do
-          expect(cfe_result.gross_income_breakdown(partner:)[:state_benefits][:monthly_equivalents][:all_sources]).to eq 86.67
+          expect(cfe_result.partner_gross_income_breakdown[:state_benefits][:monthly_equivalents][:all_sources]).to eq 86.67
         end
       end
 
@@ -264,7 +264,7 @@ module CFE
         end
 
         context "when the partner does not have jobs" do
-          let(:cfe_result) { create(:cfe_v6_result, :with_partner, :without_partner_jobs) }
+          let(:cfe_result) { create(:cfe_v6_result, :without_partner_jobs) }
 
           it "returns false" do
             expect(cfe_result.partner_jobs?).to be false
