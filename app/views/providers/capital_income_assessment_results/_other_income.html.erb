@@ -1,5 +1,6 @@
+<% partner = individual == "Partner" %>
 <h2 class="govuk-heading-m">
-  <%= @cfe_result.jobs? ? t(".title") : t(".income") %>
+  <%= @cfe_result.jobs? ? t(".title", individual:) : t(".income", individual:) %>
 </h2>
 
 <%= govuk_table do |table|
@@ -15,34 +16,34 @@
       table.with_body do |body|
         body.with_row do |row|
           row.with_cell(header: true, text: t(".benefits"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.monthly_state_benefits))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.monthly_state_benefits(partner:)))
         end
         body.with_row do |row|
           row.with_cell(header: true, text: t(".friends_or_family"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_friends_or_family))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_friends_or_family(partner:)))
         end
         body.with_row do |row|
           row.with_cell(header: true, text: t(".maintenance"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_maintenance_in))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_maintenance_in(partner:)))
         end
         body.with_row do |row|
           row.with_cell(header: true, text: t(".property_or_lodger"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_property_or_lodger))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_property_or_lodger(partner:)))
         end
         body.with_row do |row|
           row.with_cell(header: true, text: t(".student_loan_or_grant"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_student_loan))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_student_loan(partner:)))
         end
         body.with_row do |row|
           row.with_cell(header: true, text: t(".pension"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_pension))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.mei_pension(partner:)))
         end
       end
 
       table.with_foot do |foot|
         foot.with_row do |row|
           row.with_cell(header: true, text: t(".total"))
-          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_gross_income))
+          row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_monthly_income(partner:)))
         end
       end
     end %>

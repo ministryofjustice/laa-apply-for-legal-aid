@@ -102,12 +102,13 @@ en:
           contribution_required: Contribution required
           partially_eligible: Partially eligible
       result_details:
-        capital_calculation: Capital calculation
         income_calculation: Income calculation
+        income_hint_text: We calculated these calendar monthly figures using the information you and your client provided.
+        capital_calculation: Capital calculation
+        capital_hint_text: We calculated these figures based on the information you provided about your client and their partner.
         client_eligibility_calculation: How we calculated your client's financial eligibility
-        hint_text: We calculated these calendar monthly figures using the information you and your client provided.
       bank_statements:
-        title: Bank statements
+        title: "%{individual} bank statements"
         uploaded: Uploaded bank statements
       disposable_income:
         title: Disposable income
@@ -121,13 +122,14 @@ en:
       deductions:
         title: Deductions
         dependants_allowance: Dependants allowance
+        partner_allowance: Partner allowance
         excluded_benefits: Income from benefits excluded from calculation
         total_deductions: Total deductions
         table_caption: Deductions
         type_of_deduction: Type of deductions
         amount: Amount
       employment_income:
-        title: Employment income
+        title: "%{individual} employment income"
         monthly_income_before_tax: Monthly income before tax
         benefits_in_kind: Benefits in kind
         tax: Tax
@@ -138,8 +140,8 @@ en:
         income_type: Types of income
         amount: Amount
       other_income:
-        title: Other income
-        income: Income
+        title: "%{individual} other income"
+        income: "%{individual} income"
         benefits: Benefits
         friends_or_family: Financial help from friends or family
         maintenance: Maintenance payments from a former partner
@@ -151,7 +153,7 @@ en:
         type_of_income: Type of income
         amount: Amount
       outgoings:
-        title: Outgoings
+        title: "%{individual} outgoings"
         housing_costs: Housing costs
         childcare_costs: Childcare payments
         maintenance_out: Maintenance payments to a former partner

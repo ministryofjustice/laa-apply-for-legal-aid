@@ -26,7 +26,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     context "with no restrictions" do
       context "without policy disregards" do
         context "when eligible" do
-          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -72,7 +72,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -84,7 +84,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_income_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -96,7 +96,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_and_income_contributions_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -118,7 +118,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -142,7 +142,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -156,7 +156,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_income_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -170,7 +170,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_and_income_contributions_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -197,7 +197,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
       context "without policy disregards" do
         context "when eligible" do
-          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -209,7 +209,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -223,7 +223,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_income_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -237,7 +237,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_and_income_contributions_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -255,7 +255,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -267,7 +267,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -283,7 +283,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_income_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -299,7 +299,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_and_income_contributions_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -326,7 +326,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       end
 
       context "when eligible" do
-        let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+        let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -341,7 +341,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       end
 
       context "when capital contribution required" do
-        let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
+        let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -356,7 +356,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       end
 
       context "when income contribution required" do
-        let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
+        let(:cfe_result) { create(:cfe_v6_result, :with_income_contribution_required) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -371,7 +371,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       end
 
       context "when both income and capital contribution required" do
-        let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
+        let(:cfe_result) { create(:cfe_v6_result, :with_capital_and_income_contributions_required) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -422,13 +422,13 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
     context "when unauthenticated" do
       let(:before_tasks) { get_request }
-      let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+      let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
       it_behaves_like "a provider not authenticated"
     end
 
     context "with unknown result" do
-      let(:cfe_result) { create(:cfe_v4_result, result: {}.to_json) }
+      let(:cfe_result) { create(:cfe_v6_result, result: {}.to_json) }
       let(:before_tasks) do
         login_provider
       end
@@ -439,7 +439,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     end
 
     context "when applicant has employment(s)" do
-      let(:cfe_result) { create(:cfe_v4_result, :with_employments) }
+      let(:cfe_result) { create(:cfe_v6_result, :with_employments) }
       let(:td) { "</th><td class=\"govuk-table__cell govuk-table__cell--numeric\">" }
       let(:footer_td) { "</th><td class=\"govuk-table__footer govuk-table__footer--numeric\">" }
       let(:monthly_income_before_tax) { I18n.t("providers.capital_income_assessment_results.employment_income.monthly_income_before_tax") }
@@ -457,8 +457,8 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       let(:total_disposable) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_disposable") }
 
       it "displays the employment income" do
-        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.title"))
-        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.title", individual: "Client"))
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.employment_income.title", individual: "Client"))
         expect(unescaped_response_body).to include(monthly_income_before_tax + td + gds_number_to_currency(cfe_result.employment_income_gross_income))
         expect(unescaped_response_body).to include(benefits_in_kind + td + gds_number_to_currency(cfe_result.employment_income_benefits_in_kind))
         expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
@@ -469,7 +469,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
 
       it "displays the correct totals" do
         expect(unescaped_response_body).to include(total_outgoings + footer_td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
-        expect(unescaped_response_body).to include(total_other_income + footer_td + gds_number_to_currency(cfe_result.total_gross_income))
+        expect(unescaped_response_body).to include(total_other_income + footer_td + gds_number_to_currency(cfe_result.total_monthly_income))
         expect(unescaped_response_body).to include(total_deductions + footer_td + gds_number_to_currency(cfe_result.total_deductions))
         expect(unescaped_response_body).to include(total_disposable_income + td + gds_number_to_currency(cfe_result.total_monthly_income_including_employment_income))
         expect(unescaped_response_body).to include(total_disposable_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings_including_tax_and_ni))
@@ -479,11 +479,11 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     end
 
     context "when applicant has no employment(s)" do
-      let(:cfe_result) { create(:cfe_v4_result, :with_no_employments) }
+      let(:cfe_result) { create(:cfe_v6_result, :with_no_employments) }
 
       it "does not display employment income" do
-        expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
-        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income"))
+        expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title", individual: "Client"))
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income", individual: "Client"))
       end
     end
   end

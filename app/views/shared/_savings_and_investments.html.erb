@@ -11,21 +11,34 @@
           end
         end
 
-        table.with_body do |body|
-          @cfe_result.liquid_capital_items.each do |item|
-            next unless capital_items_to_display?(@legal_aid_application, item)
-
+        if @cfe_result.version_6?
+          table.with_body do |body|
             body.with_row do |row|
-              row.with_cell(header: true, text: item_description(@legal_aid_application, item))
-              row.with_cell(numeric: true, text: gds_number_to_currency(item[:value]))
+              row.with_cell(header: true, text: t(".current_accounts"))
+              row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.current_accounts))
+            end
+            body.with_row do |row|
+              row.with_cell(header: true, text: t(".savings_accounts"))
+              row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.savings_accounts))
             end
           end
-        end
+        else
+          table.with_body do |body|
+            @cfe_result.liquid_capital_items.each do |item|
+              next unless capital_items_to_display?(@legal_aid_application, item)
 
-        table.with_foot do |foot|
-          foot.with_row do |row|
-            row.with_cell(header: true, text: t(".assessed_amount"))
-            row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_savings))
+              body.with_row do |row|
+                row.with_cell(header: true, text: item_description(@legal_aid_application, item))
+                row.with_cell(numeric: true, text: gds_number_to_currency(item[:value]))
+              end
+            end
+          end
+
+          table.with_foot do |foot|
+            foot.with_row do |row|
+              row.with_cell(header: true, text: t(".assessed_amount"))
+              row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_savings))
+            end
           end
         end
       end %>

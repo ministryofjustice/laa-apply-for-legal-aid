@@ -5,29 +5,47 @@
 
   <%= govuk_accordion do |accordion| %>
     <% accordion.with_section(heading_text: t(".income_calculation")) do %>
-      <p class="govuk-hint"><%= t(".hint_text") %></p>
+      <p class="govuk-hint"><%= t(".income_hint_text") %></p>
 
-      <% if @legal_aid_application.uploading_bank_statements? %>
-        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+      <% if @legal_aid_application.client_uploading_bank_statements? %>
+        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, individual: "Client", read_only: true) %>
       <% end %>
 
       <% if @cfe_result.jobs? %>
-        <%= render "employment_income" %>
+        <%= render("employment_income", individual: "Client") %>
       <% end %>
 
-      <%= render "other_income" %>
-      <%= render "outgoings" %>
-      <%= render "deductions" %>
-      <%= render "disposable_income" %>
+      <%= render("other_income", individual: "Client") %>
+      <%= render("outgoings", individual: "Client") %>
+
+      <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, individual: "Partner", read_only: true) %>
+
+        <% if @cfe_result.partner_jobs? %>
+          <%= render("employment_income", individual: "Partner") %>
+        <% end %>
+
+        <%= render("other_income", individual: "Partner") %>
+        <%= render("outgoings", individual: "Partner") %>
+
+        <%= render "deductions" %>
+        <%= render("disposable_income", individual: "Partner") %>
+      <% else %>
+
+        <%= render "deductions" %>
+        <%= render("disposable_income", individual: "Client") %>
+      <% end %>
     <% end %>
 
     <%= accordion.with_section(heading_text: t(".capital_calculation")) do %>
+      <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+        <p class="govuk-hint"><%= t(".capital_hint_text") %></p>
+      <% end %>
       <%= render "shared/property_results" %>
       <%= render "shared/vehicle_results" %>
       <%= render "shared/savings_and_investments" %>
       <%= render "shared/other_assets" %>
       <%= render "shared/total_capital" %>
-      <%= render "shared/restrictions" %>
     <% end %>
   <% end %>
 </div>

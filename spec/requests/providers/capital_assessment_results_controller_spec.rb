@@ -6,7 +6,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
   describe "GET /providers/applications/:legal_aid_application_id/capital_assessment_result" do
     subject(:get_request) { get providers_legal_aid_application_capital_assessment_result_path(legal_aid_application) }
 
-    let(:cfe_result) { create(:cfe_v3_result) }
+    let(:cfe_result) { create(:cfe_v6_result) }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let!(:applicant) { create(:applicant, with_bank_accounts: 2, legal_aid_application:) }
     let(:applicant_name) { legal_aid_application.applicant_full_name }

@@ -1,3 +1,4 @@
+<% partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 <h2 class="govuk-heading-m"><%= t(".title") %></h2>
 
 <%= govuk_table do |table|
@@ -14,6 +15,12 @@
         body.with_row do |row|
           row.with_cell(header: true, text: t(".dependants_allowance"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.dependants_allowance))
+        end
+        if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+          body.with_row do |row|
+            row.with_cell(header: true, text: t(".partner_allowance"))
+            row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.partner_allowance))
+          end
         end
         unless @legal_aid_application.uploading_bank_statements?
           body.with_row do |row|

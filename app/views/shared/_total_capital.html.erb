@@ -1,3 +1,4 @@
+<% partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 <h2 class="govuk-heading-m"><%= t(".total_assessed_capital") %></h2>
 
 <%= govuk_table do |table|
