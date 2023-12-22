@@ -67,9 +67,18 @@ RSpec.describe "SamlSessionsController" do
             expect(firm.offices.first.ccms_id).to eq raw_details_response[:providerOffices].first[:id].to_s
           end
 
-          it "displays the select office page" do
+          context "when mock_saml is activated" do
+            before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(true) }
+
+            it "displays the select office page" do
+              post_request
+              expect(response).to redirect_to providers_confirm_office_path
+            end
+          end
+
+          it "displays the root page" do
             post_request
-            expect(response).to redirect_to providers_confirm_office_path
+            expect(response).to redirect_to root_path
           end
         end
 
@@ -90,9 +99,9 @@ RSpec.describe "SamlSessionsController" do
             expect(provider.invalid_login_details).to eq "role"
           end
 
-          it "redirects to the confirm office path" do
+          it "redirects to the root path" do
             post_request
-            expect(response).to redirect_to providers_confirm_office_path
+            expect(response).to redirect_to root_path
           end
         end
 
@@ -111,9 +120,9 @@ RSpec.describe "SamlSessionsController" do
             expect(provider.invalid_login_details).to eq "api_details_user_not_found"
           end
 
-          it "redirects to confirm offices page" do
+          it "redirects to the start page" do
             post_request
-            expect(response).to redirect_to providers_confirm_office_path
+            expect(response).to redirect_to root_path
           end
         end
 
@@ -144,9 +153,9 @@ RSpec.describe "SamlSessionsController" do
           ProviderDetailsCreatorWorker.drain
         end
 
-        it "redirects to confirm offices page" do
+        it "redirects to start page" do
           post_request
-          expect(response).to redirect_to providers_confirm_office_path
+          expect(response).to redirect_to root_path
         end
       end
 
@@ -169,9 +178,9 @@ RSpec.describe "SamlSessionsController" do
             expect(firm.offices.first.ccms_id).to eq raw_details_response[:providerOffices].first[:id].to_s
           end
 
-          it "displays the select office page" do
+          it "displays the start page" do
             post_request
-            expect(response).to redirect_to providers_confirm_office_path
+            expect(response).to redirect_to root_path
           end
         end
 
