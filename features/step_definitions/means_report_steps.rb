@@ -1,4 +1,4 @@
-Given("I have completed a non-passported employed application with bank statement uploads") do
+Given(/^I have completed a non-passported (employed|employed with partner) application with bank statement uploads$/) do |optional_partner|
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -11,7 +11,6 @@ Given("I have completed a non-passported employed application with bank statemen
     :with_restrictions,
     :with_fixed_offline_accounts,
     :with_dependant,
-    :with_cfe_v5_result,
     :with_own_home_mortgaged,
     :with_merits_statement_of_case,
     :with_opponent,
@@ -27,6 +26,14 @@ Given("I have completed a non-passported employed application with bank statemen
     provider_received_citizen_consent: false,
     attachments: [build(:attachment, :bank_statement)],
   )
+  cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
+  if optional_partner == "employed with partner"
+    create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
+    create(:partner, :with_extra_employment_information, legal_aid_application: @legal_aid_application)
+    @legal_aid_application.applicant.update!(has_partner: true, partner_has_contrary_interest: false)
+  else
+    create(:cfe_v6_result, submission: cfe_submission, legal_aid_application: @legal_aid_application)
+  end
 
   login_as @legal_aid_application.provider
 end
@@ -63,7 +70,7 @@ Given("I have completed a non-passported application with truelayer") do
     :with_open_banking_consent,
     :with_consent,
     :with_dependant,
-    :with_cfe_v5_result,
+    :with_cfe_v6_result,
     :with_own_home_mortgaged,
     :with_merits_statement_of_case,
     :with_incident,
@@ -203,8 +210,8 @@ Then("the Employment income result questions should not exist:") do |table|
   expect_questions_in(selector: "#income-result-questions", expected: table, negate: true)
 end
 
-Then("the Employment notes questions should exist:") do |table|
-  expect_questions_in(selector: "#employment-notes-questions", expected: table)
+Then("the {string} employment notes questions should exist:") do |individual, table|
+  expect_questions_in(selector: "#employment-#{individual.downcase}-notes-questions", expected: table)
 end
 
 Then("the Employment income questions should exist:") do |table|
@@ -239,6 +246,10 @@ end
 
 Then("the \"Bank accounts\", for static bank account totals, questions should exist:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__bank_accounts_items", expected: table)
+end
+
+Then("the {string} \"Bank accounts\", for static bank account totals, questions should exist:") do |individual, table|
+  expect_questions_in(selector: "[data-test=\"#{individual.downcase}-bank-accounts\"]", expected: table)
 end
 
 Then("the \"Bank accounts\", for open banking accounts, questions should exist:") do |table|

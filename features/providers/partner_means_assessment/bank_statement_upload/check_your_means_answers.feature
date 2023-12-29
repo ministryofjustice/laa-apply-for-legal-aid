@@ -9,14 +9,14 @@ Feature: Bank statement upload check your answers
       | tag | section |
       | h2  | The partner's income |
       | h3  | Bank statements |
-      | h3  | Employment income |
+      | h3  | Partner employment income |
       | h2  | Partner benefits |
       | h3  | Payments the partner receives |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
       | h3  | Payments the partner makes |
       | h3  | Payments the partner makes in cash |
-      
+
     And the following sections should exist:
       | tag | section |
       | h3  | Housing Benefit |
@@ -105,7 +105,7 @@ Feature: Bank statement upload check your answers
 
     And I click "Save and continue"
     Then I should be on a page with title "Select payments the partner pays in cash"
-    
+
     When I check "None of the above"
     And I click "Save and continue"
     Then I should be on a page with title "Does the partner get Housing Benefit?"
