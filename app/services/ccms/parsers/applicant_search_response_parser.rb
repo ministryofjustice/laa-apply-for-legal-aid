@@ -17,9 +17,10 @@ module CCMS
     private
 
       def process_ccms_reference
-        return nil if text_from(MATCH_LEVEL_IND_PATH) == "Number Not Matched"
+        first_match = ni_number_match?(MATCH_LEVEL_IND_PATH)
+        return nil if first_match.nil?
 
-        parse(:extracted_applicant_ccms_reference)
+        parse(:extracted_applicant_ccms_reference, first_match)
       end
 
       def response_type
@@ -34,8 +35,8 @@ module CCMS
         text_from(RECORD_COUNT_PATH)
       end
 
-      def extracted_applicant_ccms_reference
-        doc.xpath(APPLICANT_CCMS_REFERENCE_PATH).first&.text
+      def extracted_applicant_ccms_reference(index = 0)
+        doc.xpath(APPLICANT_CCMS_REFERENCE_PATH)[index]&.text
       end
     end
   end
