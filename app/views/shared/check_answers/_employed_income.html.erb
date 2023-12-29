@@ -9,7 +9,7 @@
    end %>
 <div class="govuk-grid-row" id="app-check-your-answers__#{individual}_employment">
   <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= t(".employment") %></h3>
+    <h3 class="govuk-heading-m"><%= t(".#{individual}.heading") %></h3>
   </div>
   <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
     <% unless read_only %>
@@ -22,11 +22,11 @@
     <% end %>
   </div>
 </div>
-<dl id="employment-notes-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl id="employment-<%= individual %>-notes-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
 
   <%= check_answer_no_link(
         name: :extra_employment_information,
-        question: t(".employment_question.#{individual}"),
+        question: t(".#{individual}.employment_question"),
         answer: safe_yes_or_no(model.extra_employment_information?),
         read_only:,
       ) %>
@@ -34,7 +34,7 @@
   <% if model.extra_employment_information? %>
     <%= check_long_question_no_link(
           name: :extra_employment_information_details,
-          question: t(".employment_details"),
+          question: t(".#{individual}.employment_details"),
           answer: model.extra_employment_information_details,
         ) %>
   <% end %>
