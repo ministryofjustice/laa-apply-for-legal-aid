@@ -13,7 +13,13 @@
 
   <% if @legal_aid_application.applicant.state_benefits.any? %>
     <section class="print-no-break">
-      <%= render "shared/check_answers/benefits_breakdown" %>
+      <%= render "shared/check_answers/benefits_breakdown", partner: false %>
+    </section>
+  <% end %>
+
+  <% if @legal_aid_application.partner&.state_benefits&.any? %>
+    <section class="print-no-break">
+      <%= render "shared/check_answers/benefits_breakdown", partner: true %>
     </section>
   <% end %>
 

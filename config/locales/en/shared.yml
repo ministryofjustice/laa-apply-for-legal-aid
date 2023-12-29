@@ -516,7 +516,10 @@ en:
             client_and_partner: My client and their partner
       benefits_breakdown:
         heading: Benefits breakdown
-
+        client:
+          heading: Client benefits breakdown
+        partner:
+          heading: Partner benefits breakdown
     forms:
       applicant_form:
         page_title: Enter your client's details
