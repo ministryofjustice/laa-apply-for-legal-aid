@@ -49,6 +49,10 @@ module CFE
         gross_income_summary(partner:)[:total_gross_income]
       end
 
+      def combined_total_gross_income_assessed
+        gross_income_summary[:combined_total_gross_income]
+      end
+
       def total_disposable_income_assessed(partner: false)
         client_total = disposable_income_summary[:total_disposable_income]
         partner_total = partner ? disposable_income_summary(partner:)[:total_disposable_income] : 0.0
