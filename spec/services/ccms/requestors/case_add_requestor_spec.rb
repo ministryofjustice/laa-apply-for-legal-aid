@@ -71,9 +71,7 @@ module CCMS
           create(:involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application:)
           legal_aid_application.reload
           legal_aid_application.update!(opponents:)
-          allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return("FakeUser")
-          allow(Rails.configuration.x.ccms_soa).to receive(:client_password).and_return("FakePassword")
-          allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return("password_type")
+          allow(Rails.configuration.x.ccms_soa).to receive_messages(client_username: "FakeUser", client_password: "FakePassword", client_password_type: "password_type")
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           allow(legal_aid_application).to receive(:calculation_date).and_return(Date.new(2020, 3, 25))
           allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)

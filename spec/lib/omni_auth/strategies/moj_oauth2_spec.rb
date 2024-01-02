@@ -16,10 +16,7 @@ module OmniAuth
 
       context "when in request_phase" do
         before do
-          allow(strategy).to receive(:session).and_return(example_session)
-          allow(strategy).to receive(:authorize_params).and_return(example_auth_params)
-          allow(strategy).to receive(:callback_url).and_return("http://dummy_callback")
-          allow(strategy).to receive(:browser_details).and_return("Dummy browser details")
+          allow(strategy).to receive_messages(session: example_session, authorize_params: example_auth_params, callback_url: "http://dummy_callback", browser_details: "Dummy browser details")
         end
 
         it "saves the session with the applicant_id and omniauth state" do
@@ -43,10 +40,7 @@ module OmniAuth
         let(:my_access_token) { AccessTokenStruct.new(false) }
 
         before do
-          allow(strategy).to receive(:request).and_return(mock_request)
-          allow(strategy).to receive(:session).and_return(example_session)
-          allow(strategy).to receive(:build_access_token).and_return(my_access_token)
-          allow(strategy).to receive(:env).and_return(example_environment)
+          allow(strategy).to receive_messages(request: mock_request, session: example_session, build_access_token: my_access_token, env: example_environment)
         end
 
         it "restores session from redis" do

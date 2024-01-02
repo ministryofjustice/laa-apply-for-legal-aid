@@ -1067,8 +1067,7 @@ module CCMS
         describe "GB_INPUT_B_7WP2_1A client bank accounts" do
           it "returns true when client has bank accounts" do
             random_value = rand(1...1_000_000.0).round(2)
-            allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(random_value)
-            allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(random_value)
+            allow(legal_aid_application.savings_amount).to receive_messages(offline_current_accounts: random_value, offline_savings_accounts: random_value)
             block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
             expect(block).to have_boolean_response true
           end
@@ -1076,8 +1075,7 @@ module CCMS
           context "when there are negative values in bank accounts" do
             it "returns false when applicant has negative values in bank accounts" do
               random_negative_value = -rand(1...1_000_000.0).round(2)
-              allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(random_negative_value)
-              allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(random_negative_value)
+              allow(legal_aid_application.savings_amount).to receive_messages(offline_current_accounts: random_negative_value, offline_savings_accounts: random_negative_value)
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
               expect(block).to have_boolean_response false
             end
@@ -1085,8 +1083,7 @@ module CCMS
 
           context "when there are no bank accounts" do
             it "returns false when applicant does NOT have bank accounts" do
-              allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
-              allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
+              allow(legal_aid_application.savings_amount).to receive_messages(offline_current_accounts: nil, offline_savings_accounts: nil)
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_7WP2_1A")
               expect(block).to have_boolean_response false
             end

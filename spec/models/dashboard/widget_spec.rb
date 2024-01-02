@@ -42,8 +42,7 @@ module Dashboard
 
     before do
       allow(Geckoboard).to receive(:client).and_return(geckoboard_client)
-      allow(geckoboard_client).to receive(:ping).and_return(true)
-      allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
+      allow(geckoboard_client).to receive_messages(ping: true, datasets: datasets_client)
     end
 
     describe "#find_or_create_dataset" do

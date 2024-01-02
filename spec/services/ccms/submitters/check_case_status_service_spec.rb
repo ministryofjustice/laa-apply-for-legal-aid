@@ -21,9 +21,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
 
       context "and the case is not yet created" do
         before do
-          allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
-          allow(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
-          allow(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+          allow(case_add_status_requestor).to receive_messages(formatted_xml: case_add_status_request, call: case_add_status_response, transaction_request_id: transaction_request_id_in_example_response)
           allow(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:new).and_return(case_add_status_response_double)
         end
 
@@ -98,9 +96,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         let(:case_add_status_response_double_response) { true }
 
         before do
-          allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
-          allow(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
-          allow(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+          allow(case_add_status_requestor).to receive_messages(formatted_xml: case_add_status_request, call: case_add_status_response, transaction_request_id: transaction_request_id_in_example_response)
           allow(CCMS::Parsers::CaseAddStatusResponseParser).to receive(:new).and_return(case_add_status_response_double)
         end
 
@@ -139,9 +135,8 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
       let(:fake_error) { error.sample }
 
       before do
-        allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
         allow(case_add_status_requestor).to receive(:call).and_raise(fake_error, "oops")
-        allow(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+        allow(case_add_status_requestor).to receive_messages(formatted_xml: case_add_status_request, transaction_request_id: transaction_request_id_in_example_response)
       end
 
       it "increments the poll count" do

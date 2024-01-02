@@ -32,8 +32,7 @@ RSpec.describe Reports::MeansReportCreator do
 
       context "with a passported application" do
         before do
-          allow(legal_aid_application).to receive(:passported?).and_return(true)
-          allow(legal_aid_application).to receive(:non_passported?).and_return(false)
+          allow(legal_aid_application).to receive_messages(passported?: true, non_passported?: false)
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
         end
