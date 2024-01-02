@@ -256,7 +256,7 @@ RSpec.describe "Providers::BankStatementsController" do
         end
       end
 
-      context "when file contains a virus", clamav: true do
+      context "when file contains a virus", :clamav do
         let(:file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
         it "does not add attachment object" do

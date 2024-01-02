@@ -105,7 +105,7 @@ RSpec.describe "POST /v1/partners/bank_statements" do
         end
       end
 
-      context "when the file contains malware", clamav: true do
+      context "when the file contains malware", :clamav do
         let(:file) { uploaded_file("spec/fixtures/files/malware.doc", "application/pdf") }
 
         it "does not save the object and raises a 400 error with text" do

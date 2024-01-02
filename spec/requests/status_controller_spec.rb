@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusController, clamav: true do
+RSpec.describe StatusController, :clamav do
   describe "#healthcheck" do
     before do
       allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))

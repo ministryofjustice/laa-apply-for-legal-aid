@@ -401,7 +401,7 @@ module Providers
                 expect(response.body).to match 'id="application-merits-task-statement-of-case-original-file-error"'
               end
 
-              context "when file contains a malware", clamav: true do
+              context "when file contains a malware", :clamav do
                 let(:original_file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
                 it "does not save the object and raise an error" do
