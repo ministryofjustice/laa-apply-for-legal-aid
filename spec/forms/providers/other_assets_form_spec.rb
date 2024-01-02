@@ -167,7 +167,7 @@ RSpec.describe Providers::OtherAssetsForm do
           end
 
           context "with invalid params - each value suffixed with an x" do
-            let(:submitted_params) { params.each { |_key, val| val.sub!(/$/, "x") } }
+            let(:submitted_params) { params.each_value { |val| val.sub!(/$/, "x") } }
 
             it "is not valid" do
               expect(form).not_to be_valid
