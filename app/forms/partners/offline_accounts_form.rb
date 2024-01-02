@@ -7,10 +7,10 @@ module Partners
       partner_offline_savings_accounts
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[no_partner_account_selected]).freeze
+    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| :"check_box_#{attribute}" } + %i[no_partner_account_selected]).freeze
 
     ATTRIBUTES.each do |attribute|
-      check_box_attribute = "check_box_#{attribute}".to_sym
+      check_box_attribute = :"check_box_#{attribute}"
       validates attribute, presence: true, if: proc { |form| form.send(check_box_attribute).present? }
     end
 
@@ -49,7 +49,7 @@ module Partners
 
     def empty_unchecked_values
       ATTRIBUTES.each do |attribute|
-        check_box_attribute = "check_box_#{attribute}".to_sym
+        check_box_attribute = :"check_box_#{attribute}"
         if send(check_box_attribute).blank?
           attributes[attribute] = nil
           send("#{attribute}=", nil)

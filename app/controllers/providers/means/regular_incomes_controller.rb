@@ -26,7 +26,7 @@ module Providers
 
       def regular_transaction_params
         RegularIncomeForm::INCOME_TYPES.map { |income_type|
-          ["#{income_type}_amount".to_sym, "#{income_type}_frequency".to_sym]
+          [:"#{income_type}_amount", :"#{income_type}_frequency"]
         }.flatten
       end
     end

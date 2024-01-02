@@ -95,19 +95,19 @@ module Proceedings
     end
 
     def meaning_for(code)
-      __send__("meaning_#{code}".to_sym)
+      __send__(:"meaning_#{code}")
     end
 
     def description_for(code)
-      __send__("description_#{code}".to_sym)
+      __send__(:"description_#{code}")
     end
 
     def hearing_date_for(code)
-      __send__("hearing_date_#{code}".to_sym) if additional_hearing_date_param?(code)
+      __send__(:"hearing_date_#{code}") if additional_hearing_date_param?(code)
     end
 
     def limitation_note_for(code)
-      __send__("limitation_note_#{code}".to_sym) if additional_limitation_note_param?(code)
+      __send__(:"limitation_note_#{code}") if additional_limitation_note_param?(code)
     end
 
     def additional_params_for(code)
@@ -159,7 +159,7 @@ module Proceedings
 
       limitation_notes.each do |code|
         if mandatory?("limitation_note", code) && limitation_note_for(code).blank? && scope_codes.include?(code)
-          errors.add "limitation_note_#{code}".to_sym, I18n.t("providers.proceeding_loop.enter_limitation_note_error", scope_limitation: meaning_for(code))
+          errors.add :"limitation_note_#{code}", I18n.t("providers.proceeding_loop.enter_limitation_note_error", scope_limitation: meaning_for(code))
         end
       end
     end

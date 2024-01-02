@@ -8,8 +8,8 @@ module Providers
     ].freeze
 
     OUTGOING_TYPES.each do |outgoing_type|
-      attr_accessor "#{outgoing_type}_amount".to_sym,
-                    "#{outgoing_type}_frequency".to_sym
+      attr_accessor :"#{outgoing_type}_amount",
+                    :"#{outgoing_type}_frequency"
     end
 
   private

@@ -10,8 +10,8 @@ module Providers
     ].freeze
 
     INCOME_TYPES.each do |income_type|
-      attr_accessor "#{income_type}_amount".to_sym,
-                    "#{income_type}_frequency".to_sym
+      attr_accessor :"#{income_type}_amount",
+                    :"#{income_type}_frequency"
     end
 
   private

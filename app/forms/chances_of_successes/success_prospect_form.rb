@@ -38,7 +38,7 @@ module ChancesOfSuccesses
     def details_present?
       return false if success_prospect.blank? || draft?
 
-      details = "success_prospect_details_#{success_prospect}".to_sym
+      details = :"success_prospect_details_#{success_prospect}"
       value = __send__(details)
       errors.add(details, I18n.t("activemodel.errors.models.chances_of_success.attributes.success_prospect_details.blank")) if value.blank?
     end
@@ -46,7 +46,7 @@ module ChancesOfSuccesses
     def interpolate_details
       return unless %w[poor marginal borderline not_known].include?(success_prospect)
 
-      value = __send__("success_prospect_details_#{success_prospect}".to_sym)
+      value = __send__(:"success_prospect_details_#{success_prospect}")
       @success_prospect_details = value&.empty? ? nil : value
       attributes["success_prospect_details"] = @success_prospect_details
     end

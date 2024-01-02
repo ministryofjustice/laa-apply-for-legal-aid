@@ -22,7 +22,7 @@ module SavingsAmounts
     ].freeze
 
     ATTRIBUTES.each do |attribute|
-      check_box_attribute = "check_box_#{attribute}".to_sym
+      check_box_attribute = :"check_box_#{attribute}"
       validates attribute, presence: true, if: proc { |form| form.send(check_box_attribute).present? }
     end
 
@@ -63,7 +63,7 @@ module SavingsAmounts
 
     def empty_unchecked_values
       ATTRIBUTES.each do |attribute|
-        check_box_attribute = "check_box_#{attribute}".to_sym
+        check_box_attribute = :"check_box_#{attribute}"
         if send(check_box_attribute).blank?
           attributes[attribute] = nil
           send("#{attribute}=", nil)

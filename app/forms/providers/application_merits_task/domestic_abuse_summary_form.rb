@@ -45,7 +45,7 @@ module Providers
         return if value.present? || draft?
 
         translation_path = "activemodel.errors.models.opponent.attributes.police_notified_details_#{police_notified}.blank"
-        errors.add("police_notified_details_#{police_notified}".to_sym, I18n.t(translation_path))
+        errors.add(:"police_notified_details_#{police_notified}", I18n.t(translation_path))
       end
 
       def interpolate_police_notified_details

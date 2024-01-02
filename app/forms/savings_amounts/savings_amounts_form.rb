@@ -11,12 +11,12 @@ module SavingsAmounts
       life_assurance_endowment_policy
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[none_selected]).freeze
+    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| :"check_box_#{attribute}" } + %i[none_selected]).freeze
 
     attr_accessor(*ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
     ATTRIBUTES.each do |attribute|
-      check_box_attribute = "check_box_#{attribute}".to_sym
+      check_box_attribute = :"check_box_#{attribute}"
       validates attribute, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.send(check_box_attribute).present? }
     end
 
@@ -55,7 +55,7 @@ module SavingsAmounts
 
     def empty_unchecked_values
       ATTRIBUTES.each do |attribute|
-        check_box_attribute = "check_box_#{attribute}".to_sym
+        check_box_attribute = :"check_box_#{attribute}"
         if send(check_box_attribute).blank?
           attributes[attribute] = nil
           send("#{attribute}=", nil)
