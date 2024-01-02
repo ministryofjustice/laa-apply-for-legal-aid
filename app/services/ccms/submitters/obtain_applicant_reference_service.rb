@@ -23,12 +23,14 @@ module CCMS
       def process_records(parser)
         applicant_ccms_reference = parser.applicant_ccms_reference
         if applicant_ccms_reference.nil?
-          create_history(:case_ref_obtained, submission.aasm_state, xml_request, response)
+          history = create_history(:case_ref_obtained, submission.aasm_state, xml_request, response)
+          log_message("SubmissionHistory: #{history.id}: Creating new applicant in CCMS")
           CCMS::Submitters::AddApplicantService.new(submission).call
         else
           submission.applicant_ccms_reference = applicant_ccms_reference
           submission.save!
-          create_history(:case_ref_obtained, submission.aasm_state, xml_request, response) if submission.obtain_applicant_ref!
+          history = create_history(:case_ref_obtained, submission.aasm_state, xml_request, response) if submission.obtain_applicant_ref!
+          log_message("SubmissionHistory: #{history.id}: using existing applicant reference #{applicant_ccms_reference}")
         end
       end
 
