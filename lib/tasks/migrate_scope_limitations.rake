@@ -12,7 +12,7 @@ namespace :migrate do
     Benchmark.benchmark do |bm|
       bm.report("Migrate:") do
         ActiveRecord::Base.transaction do
-          Proceeding.all.find_each do |proceeding|
+          Proceeding.find_each do |proceeding|
             percent = ((complete.to_f / total) * 100).round(2)
             Rails.logger.info "#{percent.to_i}% processed" if percent.positive? && percent.to_s[-2..] == "99" && (percent.to_i % 5).zero?
             if proceeding.substantive_scope_limitation_code.present?

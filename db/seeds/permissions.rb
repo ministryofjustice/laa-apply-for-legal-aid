@@ -10,7 +10,7 @@ class PermissionsPopulator
   end
 
   def self.tidy
-    Permission.all.find_each do |permission|
+    Permission.find_each do |permission|
       next if ROLES.key?(permission.role)
 
       Rails.logger.info "Removing #{permission.role} permission from database"
