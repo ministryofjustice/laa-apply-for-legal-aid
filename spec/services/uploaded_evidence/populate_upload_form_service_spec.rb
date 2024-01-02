@@ -48,7 +48,7 @@ module UploadedEvidence
       end
 
       it "translates the name of the passporting benefit in the evidence type translation instance variable" do
-        allow(laa).to receive_messages(dwp_override: dwp_override, required_document_categories: %w[benefit_evidence])
+        allow(laa).to receive_messages(dwp_override:, required_document_categories: %w[benefit_evidence])
         service.call
 
         expect(service.evidence_type_translation).to eq "Income-related Employment and Support Allowance (ESA)"

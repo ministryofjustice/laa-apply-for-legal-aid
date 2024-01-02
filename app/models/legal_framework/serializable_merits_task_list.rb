@@ -13,8 +13,8 @@ module LegalFramework
     end
 
     def tasks_for(task_group)
-      tasks = @tasks.fetch(task_group, false)  # returns tasks at application level
-      tasks ||= @tasks[:proceedings].fetch(task_group, {})[:tasks]  # returns tasks from within nested :proceedings hash
+      tasks = @tasks.fetch(task_group, false) # returns tasks at application level
+      tasks ||= @tasks[:proceedings].fetch(task_group, {})[:tasks] # returns tasks from within nested :proceedings hash
       return tasks if tasks
 
       raise KeyError, "key not found: #{task_group.inspect}"

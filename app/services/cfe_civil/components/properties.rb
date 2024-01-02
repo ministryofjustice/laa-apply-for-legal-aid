@@ -33,7 +33,7 @@ module CFECivil
       end
 
       def or_zero(number)
-        number&.to_f || 0.0
+        number.to_f
       end
 
       def main_home_shared_with_housing_association_or_landlord?

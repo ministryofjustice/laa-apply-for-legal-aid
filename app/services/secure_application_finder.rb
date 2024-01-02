@@ -4,7 +4,7 @@ class SecureApplicationFinder
   end
 
   def error
-    return :expired if expired?
+    :expired if expired?
   end
 
   delegate :legal_aid_application, to: :citizen_access_token
