@@ -23,19 +23,21 @@ class SamlSessionsController < Devise::SamlSessionsController
 
   def after_sign_in_path_for(_provider)
     session[:journey_type] = :providers
-    # if login started from root_path
-    #  providers_confirm_office_path
-    # else if direct from portal
-    #  root_path
-    # end
-    (%w[/ /?locale=en] && page_history).any? ? providers_confirm_office_path : root_path
-    # ActiveRecord::Type::Boolean.new.cast(Rails.configuration.x.laa_portal.mock_saml || false) ? providers_confirm_office_path : root_path
+    show_office_select? ? providers_confirm_office_path : root_path
   end
 
 private
 
   def update_provider_details
     ProviderAfterLoginService.call(current_provider)
+  end
+
+  def show_office_select?
+    [
+      page_history.include?("/"),
+      page_history.include?(/\/\?locale=.{2}/),
+      Rails.configuration.x.laa_portal.mock_saml,
+    ].any?(true)
   end
 
   # :nocov:

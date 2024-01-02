@@ -8,6 +8,9 @@ RSpec.describe "SamlSessionsController" do
   let(:username) { "bob the builder" }
   let(:provider_details_api_url) { "#{Rails.configuration.x.provider_details.url}#{username.gsub(' ', '%20')}" }
   let(:provider_details_api_reponse) { api_response.to_json }
+  let(:enable_mock_saml) { false }
+
+  before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(enable_mock_saml) }
 
   describe "DELETE /providers/sign_out" do
     subject(:delete_request) { delete destroy_provider_session_path }
@@ -68,7 +71,7 @@ RSpec.describe "SamlSessionsController" do
           end
 
           context "when mock_saml is activated" do
-            before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(true) }
+            let(:enable_mock_saml) { true }
 
             it "displays the select office page" do
               post_request
