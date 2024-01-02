@@ -26,7 +26,7 @@ RSpec.describe Admin::FeedbackController do
 
     it "displays feedback" do
       get_request
-      Feedback.all.each do |feedback|
+      Feedback.all.find_each do |feedback|
         expect(response.body).to include(feedback.improvement_suggestion)
       end
     end

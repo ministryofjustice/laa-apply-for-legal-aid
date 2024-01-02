@@ -12,7 +12,7 @@ namespace :migrate do
     Benchmark.benchmark do |bm|
       bm.report("Migrate:") do
         ActiveRecord::Base.transaction do
-          records.where(owner: nil).each do |record|
+          records.where(owner: nil).find_each do |record|
             record.update!(owner: "client")
           end
           raise StandardError, "Not all vehicles updated" if records.where(owner: nil).count.positive?

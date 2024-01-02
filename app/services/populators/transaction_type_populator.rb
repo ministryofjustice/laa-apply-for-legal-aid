@@ -36,7 +36,7 @@ module Populators
     end
 
     def update_other_income_types
-      TransactionType.where(name: TransactionType::OTHER_INCOME_TYPES).each do |tt|
+      TransactionType.where(name: TransactionType::OTHER_INCOME_TYPES).find_each do |tt|
         tt.update!(other_income: true)
       end
     end
