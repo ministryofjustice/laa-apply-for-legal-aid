@@ -27,7 +27,7 @@ module Providers
         context "when uk_removal is missing" do
           let(:uk_removal) { "" }
 
-          it { expect(prohibited_steps_form).to be_invalid }
+          it { expect(prohibited_steps_form).not_to be_valid }
         end
 
         context "when uk_removal is false" do
@@ -35,7 +35,7 @@ module Providers
 
           context "and fields are missing", :aggregate_failures do
             it "is invalid" do
-              expect(prohibited_steps_form).to be_invalid
+              expect(prohibited_steps_form).not_to be_valid
               expect(prohibited_steps_form.errors).to be_added(:details, :blank)
               expect(prohibited_steps_form.errors).to be_added(
                 :confirmed_not_change_of_name,

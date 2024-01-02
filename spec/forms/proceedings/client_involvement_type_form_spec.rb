@@ -28,7 +28,7 @@ RSpec.describe Proceedings::ClientInvolvementTypeForm, :vcr, type: :form do
       let(:cit) { "" }
 
       it "is invalid" do
-        expect(cit_form).to be_invalid
+        expect(cit_form).not_to be_valid
       end
 
       it "generates the expected error message" do

@@ -37,13 +37,13 @@ RSpec.describe Citizen::AccessToken do
     context "when expires_on is in the past" do
       let(:expires_on) { 1.day.ago }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     context "when expires_on is today" do
       let(:expires_on) { Date.current }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     context "when expires_on is in the future" do

@@ -27,7 +27,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsForm, type: :form d
     end
 
     context "when the parameters are missing" do
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
 
       it "records the error message" do
         expect(form.errors[:confirm_dwp_result]).to eq [I18n.t("providers.confirm_dwp_non_passported_applications.show.error")]

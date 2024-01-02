@@ -34,7 +34,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "occurred_on.date_not_valid" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -53,7 +53,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "told_on.date_not_valid" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -66,7 +66,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "occurred_on.date_is_in_the_future" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -79,7 +79,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "told_on.date_is_in_the_future" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -107,7 +107,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "occurred_on.blank" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -121,7 +121,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { "told_on.blank" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -140,7 +140,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       end
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do
@@ -159,7 +159,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       end
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates an error" do

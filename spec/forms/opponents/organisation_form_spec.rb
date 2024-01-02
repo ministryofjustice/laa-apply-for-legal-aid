@@ -33,7 +33,7 @@ RSpec.describe Opponents::OrganisationForm, :vcr, type: :form do
       end
 
       it "has name error" do
-        expect(organisation_form).to be_invalid
+        expect(organisation_form).not_to be_valid
         expect(organisation_form.errors.messages).to include(:name)
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe Opponents::OrganisationForm, :vcr, type: :form do
       end
 
       it "has type error" do
-        expect(organisation_form).to be_invalid
+        expect(organisation_form).not_to be_valid
         expect(organisation_form.errors.messages).to include(:organisation_type_ccms_code)
       end
     end

@@ -22,12 +22,12 @@ module Providers
         context "when offered is missing" do
           let(:offered) { nil }
 
-          it { expect(undertaking_form).to be_invalid }
+          it { expect(undertaking_form).not_to be_valid }
         end
 
         context "when offered is true" do
           context "and the additional information is missing" do
-            it { expect(undertaking_form).to be_invalid }
+            it { expect(undertaking_form).not_to be_valid }
           end
 
           context "and the additional information is provided" do
@@ -41,7 +41,7 @@ module Providers
           let(:offered) { "false" }
 
           context "and the additional information is missing" do
-            it { expect(undertaking_form).to be_invalid }
+            it { expect(undertaking_form).not_to be_valid }
           end
 
           context "and the additional information is provided" do

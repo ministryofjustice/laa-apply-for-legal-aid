@@ -28,7 +28,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
     context "when all values are false" do
       let(:linked_children_params) { ["", "", ""] }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     context "when all values are true" do

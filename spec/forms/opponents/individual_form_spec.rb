@@ -33,7 +33,7 @@ RSpec.describe Opponents::IndividualForm, type: :form do
       end
 
       it "has first name error" do
-        expect(name_form).to be_invalid
+        expect(name_form).not_to be_valid
         expect(name_form.errors.messages).to include(:first_name)
       end
     end
@@ -48,7 +48,7 @@ RSpec.describe Opponents::IndividualForm, type: :form do
       end
 
       it "has last name error" do
-        expect(name_form).to be_invalid
+        expect(name_form).not_to be_valid
         expect(name_form.errors.messages).to include(:last_name)
       end
     end

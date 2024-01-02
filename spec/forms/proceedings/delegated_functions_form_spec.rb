@@ -50,7 +50,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       let(:df_date) { nil }
 
       it "is invalid" do
-        expect(df_form).to be_invalid
+        expect(df_form).not_to be_valid
       end
 
       it "generates the expected error message" do
@@ -65,7 +65,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
         let(:df_date) { Time.zone.tomorrow }
 
         it "is invalid" do
-          expect(df_form).to be_invalid
+          expect(df_form).not_to be_valid
         end
 
         it "generates the expected error message" do
@@ -86,7 +86,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
         end
 
         it "is invalid" do
-          expect(df_form).to be_invalid
+          expect(df_form).not_to be_valid
         end
 
         it "generates the expected error message" do
@@ -100,7 +100,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
         let(:df_date) { Time.zone.yesterday - 1.year }
 
         it "is invalid" do
-          expect(df_form).to be_invalid
+          expect(df_form).not_to be_valid
         end
 
         it "generates the expected error message" do
@@ -138,7 +138,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       let(:df_date) { Time.zone.yesterday - 15.months }
 
       it "is invalid" do
-        expect(df_form).to be_invalid
+        expect(df_form).not_to be_valid
       end
 
       it "generates the expected error message" do
@@ -153,7 +153,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       let(:df_date) { Time.zone.tomorrow }
 
       it "is invalid" do
-        expect(df_form).to be_invalid
+        expect(df_form).not_to be_valid
       end
 
       it "generates the expected error message for the invalid proceeding date only" do

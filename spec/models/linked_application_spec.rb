@@ -37,14 +37,14 @@ RSpec.describe LinkedApplication do
     context "with invalid link_type_code" do
       let(:link_type_text) { "FOOBAR" }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     context "with identical lead and associated applications" do
       let(:laa_lead) { laa_associated }
       let(:laa_associated) { build(:legal_aid_application) }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
       it { expect(linked_application.errors.messages.values.flatten).to include("Application cannot be linked to itself") }
     end
   end

@@ -24,14 +24,14 @@ module Providers
         context "when has_opponents_application is missing" do
           let(:has_opponents_application) { nil }
 
-          it { expect(opponents_application_form).to be_invalid }
+          it { expect(opponents_application_form).not_to be_valid }
         end
 
         context "when has_opponents_application is false" do
           let(:has_opponents_application) { "false" }
 
           context "and the additional information is missing" do
-            it { expect(opponents_application_form).to be_invalid }
+            it { expect(opponents_application_form).not_to be_valid }
           end
 
           context "and the additional information is provided" do

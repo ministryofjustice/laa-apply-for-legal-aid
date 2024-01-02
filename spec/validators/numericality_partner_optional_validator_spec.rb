@@ -33,7 +33,7 @@ RSpec.describe NumericalityPartnerOptionalValidator do
       dummy.val1 = "abc"
       dummy.val2 = ""
       dummy.val3 = nil
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.errors[:val1]).to eq ["is not a number"]
       expect(dummy.errors[:val2]).to be_empty
       expect(dummy.errors[:val3]).to eq ["is not a number"]
@@ -44,7 +44,7 @@ RSpec.describe NumericalityPartnerOptionalValidator do
     it "errors if given negative number" do
       dummy.val1 = Faker::Number.between(from: -9999, to: -1).to_s
       dummy.val2 = Faker::Number.number.to_s
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.errors[:val1]).to eq ["must be greater than or equal to 0"]
       expect(dummy.errors[:val2]).to be_empty
     end
@@ -52,7 +52,7 @@ RSpec.describe NumericalityPartnerOptionalValidator do
     it "does not clean the number if invalid" do
       dummy.val1 = "-1,234"
       dummy.val2 = "-£1,234.88"
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.val1).to eq "-1,234"
       expect(dummy.val2).to eq "-£1,234.88"
     end
@@ -60,7 +60,7 @@ RSpec.describe NumericalityPartnerOptionalValidator do
     it "fails if comma is followed by less than 3 digits" do
       dummy.val1 = "1,23.00"
       dummy.val2 = "-£1,23"
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.errors.details[:val1].first[:error]).to eq :not_a_number
       expect(dummy.errors.details[:val2].first[:error]).to eq :not_a_number
       expect(dummy.val1).to eq "1,23.00"
@@ -72,7 +72,7 @@ RSpec.describe NumericalityPartnerOptionalValidator do
       # as they use non standard key names
       dummy.val4 = "bob"
       dummy.val5 = "jim"
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.errors.details[:val4].first[:error]).to eq :not_a_number_with_partner
       expect(dummy.errors.details[:val5].first[:error]).to eq :not_a_number
       expect(dummy.val4).to eq "bob"

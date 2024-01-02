@@ -24,14 +24,14 @@ module Providers
         context "when denies_all is missing" do
           let(:denies_all) { nil }
 
-          it { expect(denial_form).to be_invalid }
+          it { expect(denial_form).not_to be_valid }
         end
 
         context "when denies_all is false" do
           let(:denies_all) { false }
 
           context "and the additional information is missing" do
-            it { expect(denial_form).to be_invalid }
+            it { expect(denial_form).not_to be_valid }
           end
 
           context "and the additional information is provided" do
