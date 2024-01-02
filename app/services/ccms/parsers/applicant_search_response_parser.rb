@@ -18,6 +18,7 @@ module CCMS
 
       def process_ccms_reference
         first_match = ni_number_match?(MATCH_LEVEL_IND_PATH)
+        log_message("Records Matched: #{extracted_record_count}, MatchLevelInds: #{text_from(MATCH_LEVEL_IND_PATH)}, ChosenMatch: #{first_match}")
         return nil if first_match.nil?
 
         parse(:extracted_applicant_ccms_reference, first_match)
