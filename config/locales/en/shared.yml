@@ -979,3 +979,9 @@ en:
       gross_income: gross income
       disposable_income: disposable income
       disposable_capital: disposable capital
+    transactions_summary:
+      page_heading: Sort your client's %{type} into categories
+      subheading: You told us your client receives the types of payments listed below.
+      you_need_to: "You need to:"
+      select: View statements and add transactions
+      add_another_type: Add another type of %{type}
