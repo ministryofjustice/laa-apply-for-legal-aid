@@ -12,8 +12,9 @@
     <% @legal_aid_application.transaction_types.credits.each do |transaction_type| %>
       <% index += 1 unless transaction_type.child? %>
       <%= render(
-            "income_type_item",
+            "shared/transaction_type_item",
             name: transaction_type.name,
+            url: providers_legal_aid_application_incoming_transactions_path(transaction_type: transaction_type.name),
             number: index,
             display_number: !transaction_type.child?,
             link_text: t(".select"),

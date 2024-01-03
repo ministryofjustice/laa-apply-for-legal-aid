@@ -17,9 +17,11 @@
   <ol class="govuk-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
     <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
       <%= render(
-            "outgoing_type_item",
+            "shared/transaction_type_item",
             name: transaction_type.name,
+            url: providers_legal_aid_application_outgoing_transactions_path(transaction_type: transaction_type.name),
             number: index + 1,
+            display_number: true,
             link_text: t(".select.#{transaction_type.name}"),
             bank_transactions: @bank_transactions[transaction_type],
             error: errors[transaction_type.name.to_sym],

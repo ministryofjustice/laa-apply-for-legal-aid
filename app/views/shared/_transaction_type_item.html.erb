@@ -1,6 +1,6 @@
 <% transaction_link = govuk_link_to(
      link_text,
-     providers_legal_aid_application_outgoing_transactions_path(transaction_type: name),
+     url,
      class: "govuk-body transaction-type-link",
      "aria-label": "for #{t "transaction_types.names.providers.#{name}"}",
    ) %>
@@ -10,7 +10,7 @@
 <li id="<%= name.to_s %>" class="<%= form_group_error_class %>">
   <h2 class="display-table govuk-heading-m">
     <span class="sort-transactions__section-number">
-      <%= number %>.
+      <%= display_number ? "#{number}." : "" %>
     </span>
 
     <%= t("transaction_types.names.providers.#{name}") %>
