@@ -9,18 +9,16 @@
 
 <li id="<%= name.to_s %>" class="<%= form_group_error_class %>">
   <h2 class="display-table govuk-heading-m">
-    <% if display_number %>
-      <span class="sort-transactions__section-number"><%= number %>. </span>
-    <% else %>
-      <span class="sort-transactions__section-number"><%= "" %> </span>
-    <% end %>
+    <span class="sort-transactions__section-number">
+      <%= display_number ? "#{number}." : "" %>
+    </span>
 
     <%= t("transaction_types.names.providers.#{name}") %>
     <% if error_message %>
       <p id='<%= "error-#{name}" %>' class="govuk-error-message govuk-!-padding-top-2"><%= error_message %></p>
     <% end %>
   </h2>
-  <%= content_tag(:div, class: "govuk-!-padding-bottom-9 govuk-!-padding-left-0", id: "list-item-#{name}") do %>
+  <div class="sort-transactions__items" id="list-item-<%= name %>">
     <% if bank_transactions.present? %>
       <%= render "providers/bank_transactions/list_selected", category: name, bank_transactions: %>
       <%= transaction_link %>
@@ -29,5 +27,5 @@
         <%= transaction_link %>
       </p>
     <% end %>
-  <% end %>
+  </div>
 </li>
