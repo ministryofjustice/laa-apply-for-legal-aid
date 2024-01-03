@@ -11,10 +11,13 @@ module Dashboard
       let(:geckoboard_client) { instance_double Geckoboard::Client }
       let(:datasets_client) { instance_double Geckoboard::DatasetsClient }
       let(:dataset) { instance_double Geckoboard::Dataset }
+      let(:dashboard_provider_data) { instance_double(Dashboard::SingleObject::ProviderData) }
 
       before do
         allow(Geckoboard).to receive(:client).and_return(geckoboard_client)
         allow(geckoboard_client).to receive_messages(ping: true, datasets: datasets_client)
+        allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
+        allow(Dashboard::SingleObject::ProviderData).to receive(:new).and_return(dashboard_provider_data)
       end
 
       describe "#perform" do
@@ -23,7 +26,7 @@ module Dashboard
 
           context "and the job is not in the suspended list" do
             it "runs ProviderData" do
-              expect_any_instance_of(Dashboard::SingleObject::ProviderData).to receive(:run)
+              expect(dashboard_provider_data).to receive(:run)
               provider_data_job
             end
           end
@@ -34,7 +37,7 @@ module Dashboard
 
           context "and the job is not in the suspended list" do
             it "does not run ProviderData" do
-              expect_any_instance_of(Dashboard::SingleObject::ProviderData).not_to receive(:run)
+              expect(dashboard_provider_data).not_to receive(:run)
               provider_data_job
             end
           end

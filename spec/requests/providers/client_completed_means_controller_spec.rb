@@ -100,10 +100,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
         let(:submit_button) { { continue_button: "Continue" } }
 
         context "and employment income data was received from HMRC" do
-          before do
-            allow_any_instance_of(Applicant).to receive(:hmrc_employment_income?).and_return(true)
-            allow_any_instance_of(Applicant).to receive(:has_multiple_employments?).and_return(false)
-          end
+          let(:legal_aid_application) { create(:legal_aid_application, :with_single_employment, applicant:, partner:) }
 
           it "redirects to the employment income page" do
             patch_request
@@ -122,8 +119,6 @@ RSpec.describe Providers::ClientCompletedMeansController do
         end
 
         context "and no employment income data was received from HMRC" do
-          before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
-
           it "redirects to the no employed income page" do
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
@@ -131,10 +126,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
         end
 
         context "and employment income data for multiple jobs was received from HMRC" do
-          before do
-            allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
-            allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(true)
-          end
+          let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_employments, applicant:, partner:) }
 
           it "redirects to the no employed income page" do
             patch_request
@@ -155,7 +147,7 @@ RSpec.describe Providers::ClientCompletedMeansController do
           end
 
           context "when application is using bank upload journey" do
-            before { allow_any_instance_of(LegalAidApplication).to receive(:uploading_bank_statements?).and_return(true) }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_client_uploading_bank_statements, applicant:, partner:) }
 
             it "redirects to the receives state benefit page" do
               expect(patch_request).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))

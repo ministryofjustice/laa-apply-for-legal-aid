@@ -9,14 +9,7 @@
 # Offense count: 85
 RSpec/AnyInstance:
   Exclude:
-    - 'spec/jobs/dashboard/applicant_email_job_spec.rb'
-    - 'spec/jobs/dashboard/feedback_item_job_spec.rb'
-    - 'spec/jobs/dashboard/provider_data_job_spec.rb'
-    - 'spec/mailers/feedback_mailer_spec.rb'
-    - 'spec/models/applicant_spec.rb'
-    - 'spec/models/application_digest_spec.rb'
     - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
-    - 'spec/requests/providers/client_completed_means_controller_spec.rb'
     - 'spec/requests/providers/uploaded_evidence_collection_spec.rb'
     - 'spec/requests/providers/use_ccms_controller_spec.rb'
     - 'spec/requests/saml_sessions_spec.rb'
