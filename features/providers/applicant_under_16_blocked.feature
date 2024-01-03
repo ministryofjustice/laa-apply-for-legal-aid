@@ -44,7 +44,7 @@ Feature: Applicant under 16 blocked
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page with title "Does the client have a National Insurance number?"
+    Then I should be on a page with title "Does your client have a National Insurance number?"
     When I choose "Yes"
     And I enter national insurance number 'JA293483B'
     And I click 'Save and continue'

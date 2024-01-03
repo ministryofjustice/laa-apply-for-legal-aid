@@ -16,7 +16,7 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
       expect(response).to have_http_status(:ok)
       expect(page).to have_css(
         "h1",
-        text: "Does the client have a National Insurance number?",
+        text: "Does your client have a National Insurance number?",
       )
     end
   end
