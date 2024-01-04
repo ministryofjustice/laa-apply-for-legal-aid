@@ -95,9 +95,31 @@ module CCMS
           end
         end
 
-        context "when the transaction id is not matched" do
+        context "when the Client NI number is returned as Number Not Matched" do
           let(:expected_tx_id) { "202206241623547511370989944" }
           let(:parser) { described_class.new(expected_tx_id, number_not_matched_response_xml) }
+
+          describe "#applicant_ccms_reference" do
+            it "returns nil" do
+              expect(parser.applicant_ccms_reference).to be_nil
+            end
+          end
+        end
+
+        context "when the Client NI number is returned as Number Not Held" do
+          let(:expected_tx_id) { "202206241623547511370989944" }
+          let(:parser) { described_class.new(expected_tx_id, ccms_data_from_file("applicant_search_response_number_not_held.xml")) }
+
+          describe "#applicant_ccms_reference" do
+            it "returns nil" do
+              expect(parser.applicant_ccms_reference).to be_nil
+            end
+          end
+        end
+
+        context "when there are multiple Client NI numbers returned as Number Not Matched" do
+          let(:expected_tx_id) { "202209261614043422799016219" }
+          let(:parser) { described_class.new(expected_tx_id, ccms_data_from_file("applicant_search_response_multiple_number_not_matched.xml")) }
 
           describe "#applicant_ccms_reference" do
             it "returns nil" do

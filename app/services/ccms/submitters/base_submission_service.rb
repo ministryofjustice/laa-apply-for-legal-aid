@@ -10,6 +10,7 @@ module CCMS
 
   module Submitters
     class BaseSubmissionService
+      include MessageLogger
       attr_accessor :submission
 
       def initialize(submission)

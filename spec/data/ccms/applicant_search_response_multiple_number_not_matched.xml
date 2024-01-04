@@ -1,0 +1,91 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <instra:tracking.ecid wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">be91808f-e069-40a9-8858-8f2fe35ded25-001db0f4</instra:tracking.ecid>
+    <instra:tracking.parentComponentInstanceId wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">mediator:233108951</instra:tracking.parentComponentInstanceId>
+    <instra:tracking.parentReferenceId wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">mediator:233108951:dbc7479a-3dad-11ed-9fed-0a58a9feac03:req</instra:tracking.parentReferenceId>
+    <instra:tracking.FlowEventId wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">597852472</instra:tracking.FlowEventId>
+    <instra:tracking.FlowId wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">24180278</instra:tracking.FlowId>
+    <instra:tracking.CorrelationFlowId wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">0000ODuNCW9EoId5PfS4yd1Z6CJA001^Aa</instra:tracking.CorrelationFlowId>
+    <instra:tracking.quiescing.SCAEntityId wsa:IsReferenceParameter="1" xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" xmlns:wsa="http://www.w3.org/2005/08/addressing">10064</instra:tracking.quiescing.SCAEntityId>
+    <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">be91808f-e069-40a9-8858-8f2fe35ded25-001db0f4</instra:tracking.ecid>
+    <instra:tracking.FlowEventId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">597852532</instra:tracking.FlowEventId>
+    <instra:tracking.FlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">24180278</instra:tracking.FlowId>
+    <instra:tracking.CorrelationFlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0000ODuNCW9EoId5PfS4yd1Z6CJA001^Aa</instra:tracking.CorrelationFlowId>
+    <instra:tracking.quiescing.SCAEntityId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">10064</instra:tracking.quiescing.SCAEntityId>
+    <wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:Action>process</wsa:Action>
+    <wsa:MessageID>urn:e7cafda1-3dad-11ed-9fed-0a58a9feac03</wsa:MessageID>
+    <wsa:RelatesTo>urn:dbc76eae-3dad-11ed-9fed-0a58a9feac03</wsa:RelatesTo>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">be91808f-e069-40a9-8858-8f2fe35ded25-001db0f4</instra:tracking.ecid>
+        <instra:tracking.conversationId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">urn:dbc76eae-3dad-11ed-9fed-0a58a9feac03</instra:tracking.conversationId>
+        <instra:tracking.FlowEventId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">597852536</instra:tracking.FlowEventId>
+        <instra:tracking.FlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">24180278</instra:tracking.FlowId>
+        <instra:tracking.CorrelationFlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0000ODuNCW9EoId5PfS4yd1Z6CJA001^Aa</instra:tracking.CorrelationFlowId>
+        <instra:tracking.quiescing.SCAEntityId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">10064</instra:tracking.quiescing.SCAEntityId>
+      </wsa:ReferenceParameters>
+    </wsa:ReplyTo>
+    <wsa:FaultTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+    </wsa:FaultTo>
+  </env:Header>
+  <env:Body>
+    <ClientInqRS xmlns="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" xmlns:msg="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <header:HeaderRS xmlns:header="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <header:TransactionID>202209261614043422799016219</header:TransactionID>
+        <header:RequestDetails>
+          <header:TransactionRequestID>202209261614043422799016219</header:TransactionRequestID>
+          <header:Language>ENG</header:Language>
+          <header:UserLoginID>my_login</header:UserLoginID>
+          <header:UserRole>my_role</header:UserRole>
+        </header:RequestDetails>
+        <header:Status>
+          <header:Status>Success</header:Status>
+          <header:StatusFreeText>End of Get Party details process.</header:StatusFreeText>
+        </header:Status>
+      </header:HeaderRS>
+      <msg:RecordCount>
+        <common:MaxRecordsToFetch xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">200</common:MaxRecordsToFetch>
+        <common:RecordsFetched xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">2</common:RecordsFetched>
+        <common:RetriveDataOnMaxCount xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">false</common:RetriveDataOnMaxCount>
+      </msg:RecordCount>
+      <msg:ClientList>
+        <msg:Client>
+          <client:Name xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+            <common:Title xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">MS.</common:Title>
+            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">SHORT</common:Surname>
+            <common:FirstName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">carla</common:FirstName>
+            <common:MiddleName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">JENNA</common:MiddleName>
+            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">short</common:SurnameAtBirth>
+            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">carla SHORT</common:FullName>
+          </client:Name>
+          <client:DateOfBirth xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">1987-07-26</client:DateOfBirth>
+          <client:Gender xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">Female</client:Gender>
+          <client:PostalCode xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">CV34 8YA</client:PostalCode>
+          <client:ClientReferenceNumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">5590639</client:ClientReferenceNumber>
+          <client:HomeOfficeReference xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">NA</client:HomeOfficeReference>
+          <client:NINumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">BR123456C</client:NINumber>
+          <client:MatchLevelInd xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">Number Not Matched</client:MatchLevelInd>
+        </msg:Client>
+        <msg:Client>
+          <client:Name xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+            <common:Title xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">MS.</common:Title>
+            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Short</common:Surname>
+            <common:FirstName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">CARLA</common:FirstName>
+            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">SHORT</common:SurnameAtBirth>
+            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">CARLA Short</common:FullName>
+          </client:Name>
+          <client:DateOfBirth xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">1987-07-26</client:DateOfBirth>
+          <client:Gender xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">Female</client:Gender>
+          <client:PostalCode xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">DE56 9DS</client:PostalCode>
+          <client:ClientReferenceNumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">2499559</client:ClientReferenceNumber>
+          <client:HomeOfficeReference xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">07597530156</client:HomeOfficeReference>
+          <client:NINumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">BR123456C</client:NINumber>
+          <client:MatchLevelInd xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">Number Not Matched</client:MatchLevelInd>
+        </msg:Client>
+      </msg:ClientList>
+    </ClientInqRS>
+  </env:Body>
+</env:Envelope>

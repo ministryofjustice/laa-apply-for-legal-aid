@@ -1,6 +1,7 @@
 module CCMS
   module Parsers
     class BaseResponseParser
+      include MessageLogger
       attr_reader :transaction_request_id, :response, :success, :message
 
       def initialize(tx_request_id, response)
@@ -14,11 +15,11 @@ module CCMS
         @doc ||= Nokogiri::XML(response.to_s).remove_namespaces!
       end
 
-      def parse(data_method)
+      def parse(data_method, *)
         check_matching_transaction_request_ids if expect_transaction_request_id_in_response?
 
         extract_result_status
-        __send__(data_method)
+        __send__(data_method, *)
       end
 
       def extracted_id_matches_request_id?
@@ -27,6 +28,15 @@ module CCMS
 
       def text_from(xpath)
         doc.xpath(xpath).text
+      end
+
+      def ni_number_match?(xpath)
+        matches = doc.xpath(xpath).map(&:text)
+        if matches.all?("Number Not Matched")
+          nil
+        else
+          matches.each_index.find { |i| matches[i].include? "Number Matched" }
+        end
       end
 
     private
