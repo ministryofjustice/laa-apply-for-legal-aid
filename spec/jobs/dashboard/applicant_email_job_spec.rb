@@ -11,10 +11,13 @@ module Dashboard
       let(:geckoboard_client) { instance_double Geckoboard::Client }
       let(:datasets_client) { instance_double Geckoboard::DatasetsClient }
       let(:dataset) { instance_double Geckoboard::Dataset }
+      let(:applicant_email) { instance_double(Dashboard::SingleObject::ApplicantEmail) }
 
       before do
         allow(Geckoboard).to receive(:client).and_return(geckoboard_client)
         allow(geckoboard_client).to receive_messages(ping: true, datasets: datasets_client)
+        allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
+        allow(Dashboard::SingleObject::ApplicantEmail).to receive(:new).and_return(applicant_email)
       end
 
       describe "#perform" do
@@ -22,7 +25,7 @@ module Dashboard
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
 
           it "calls the applicant email job" do
-            expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
+            expect(applicant_email).to receive(:run)
             applicant_email_job
           end
         end
@@ -31,7 +34,7 @@ module Dashboard
           before { allow(HostEnv).to receive(:environment).and_return(:development) }
 
           it "does not call the applicant email job" do
-            expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).not_to receive(:run)
+            expect(applicant_email).not_to receive(:run)
             applicant_email_job
           end
         end
@@ -46,7 +49,7 @@ module Dashboard
             before { allow(Rails.env).to receive(:production?).and_return(true) }
 
             it "does not call the applicant email job" do
-              expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).not_to receive(:run)
+              expect(applicant_email).not_to receive(:run)
               applicant_email_job
             end
           end
@@ -55,7 +58,7 @@ module Dashboard
             before { allow(Rails.env).to receive(:production?).and_return(false) }
 
             it "calls the applicant email job" do
-              expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
+              expect(applicant_email).to receive(:run)
               applicant_email_job
             end
           end

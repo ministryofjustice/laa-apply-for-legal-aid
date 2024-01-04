@@ -193,10 +193,23 @@ RSpec.describe ApplicationDigest do
     end
 
     context "when passported" do
+      before do
+        application_digest
+      end
+
       context "when application is passported" do
-        before do
-          allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
-          application_digest
+        let(:laa) do
+          travel_to creation_time do
+            create(:legal_aid_application,
+                   :assessment_submitted,
+                   :with_everything,
+                   :with_proceedings,
+                   :with_cfe_v5_result,
+                   :with_passported_state_machine,
+                   explicit_proceedings: %i[da001 se013 se014],
+                   provider:,
+                   merits_submitted_at: submission_time)
+          end
         end
 
         it "returns true" do
@@ -205,12 +218,21 @@ RSpec.describe ApplicationDigest do
       end
 
       context "when application is NOT passported" do
-        before do
-          allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)
-          application_digest
+        let(:laa) do
+          travel_to creation_time do
+            create(:legal_aid_application,
+                   :assessment_submitted,
+                   :with_everything,
+                   :with_proceedings,
+                   :with_cfe_v5_result,
+                   :with_non_passported_state_machine,
+                   explicit_proceedings: %i[da001 se013 se014],
+                   provider:,
+                   merits_submitted_at: submission_time)
+          end
         end
 
-        it "returns true" do
+        it "returns false" do
           expect(digest.passported).to be false
         end
       end

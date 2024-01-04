@@ -18,7 +18,7 @@ RSpec.describe FeedbackMailer do
     context "with personalisation" do
       describe "application_status" do
         context "with pre_dwp_check" do
-          before { allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(true) }
+          before { allow(application).to receive(:pre_dwp_check?).and_return(true) }
 
           it "has a status of pre dwp check" do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq "pre-dwp-check"
@@ -34,10 +34,7 @@ RSpec.describe FeedbackMailer do
         end
 
         context "when passported" do
-          before do
-            allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
-            allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
-          end
+          let(:application) { create(:application, :with_passported_state_machine, :provider_entering_merits) }
 
           it "has a status of passported" do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq "passported"
@@ -45,12 +42,9 @@ RSpec.describe FeedbackMailer do
         end
 
         context "when non-passported" do
-          before do
-            allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
-            allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)
-          end
+          let(:application) { create(:application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-          it "has a status of passported" do
+          it "has a status of non-passported" do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq "non-passported"
           end
         end

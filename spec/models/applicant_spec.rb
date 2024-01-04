@@ -410,7 +410,7 @@ RSpec.describe Applicant do
 
       it "returns false" do
         create(:legal_aid_application, applicant:)
-        allow_any_instance_of(described_class).to receive(:cfe_result_type).and_return(cfe_version_5_result)
+        allow(applicant).to receive(:cfe_result_type).and_return(cfe_version_5_result)
         expect(applicant.valid_cfe_result_version?).to be false
       end
     end

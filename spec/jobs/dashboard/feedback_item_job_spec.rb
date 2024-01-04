@@ -11,11 +11,13 @@ module Dashboard
       let(:geckoboard_client) { instance_double Geckoboard::Client }
       let(:datasets_client) { instance_double Geckoboard::DatasetsClient }
       let(:dataset) { instance_double Geckoboard::Dataset }
+      let(:dashboard_feedback) { instance_double(Dashboard::SingleObject::Feedback) }
 
       before do
         allow(Geckoboard).to receive(:client).and_return(geckoboard_client)
         allow(geckoboard_client).to receive_messages(ping: true, datasets: datasets_client)
         allow(Rails.configuration.x.suspended_dashboard_updater_jobs).to receive(:include?).with("Dashboard::FeedbackItemJob").and_return(false)
+        allow(Dashboard::SingleObject::Feedback).to receive(:new).and_return(dashboard_feedback)
       end
 
       describe "#perform" do
@@ -24,7 +26,7 @@ module Dashboard
 
           context "and the job is not in the suspended list" do
             it "runs the geckoboard feedback updater" do
-              expect_any_instance_of(Dashboard::SingleObject::Feedback).to receive(:run)
+              expect(dashboard_feedback).to receive(:run)
               feedback_item_job
             end
           end
@@ -35,7 +37,7 @@ module Dashboard
 
           context "and the job is not in the suspended list" do
             it "does not run the geckoboard feedback updater" do
-              expect_any_instance_of(Dashboard::SingleObject::Feedback).not_to receive(:run)
+              expect(dashboard_feedback).not_to receive(:run)
               feedback_item_job
             end
           end

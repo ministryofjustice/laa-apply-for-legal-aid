@@ -1079,5 +1079,9 @@ FactoryBot.define do
     trait :discarded do
       discarded_at { 5.minutes.ago }
     end
+
+    trait :with_client_uploading_bank_statements do
+      provider_received_citizen_consent { false }
+    end
   end
 end
