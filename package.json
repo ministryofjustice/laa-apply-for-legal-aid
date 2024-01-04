@@ -11,7 +11,7 @@
   "dependencies": {
     "@rails/ujs": "^7.1.2",
     "axios": "^1.6.3",
-    "core-js": "^3.34.0",
+    "core-js": "^3.35.0",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.19.11",
     "govuk-frontend": "^5.0.0",
