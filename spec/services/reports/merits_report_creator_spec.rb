@@ -103,8 +103,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
         before do
           create(:chances_of_success, :with_optional_text, proceeding: da001)
-          allow(legal_aid_application).to receive(:case_ccms_reference).and_return(nil)
-          allow(legal_aid_application).to receive(:create_ccms_submission).and_return(ccms_submission)
+          allow(legal_aid_application).to receive_messages(case_ccms_reference: nil, create_ccms_submission: ccms_submission)
         end
 
         it "creates a ccms submission" do

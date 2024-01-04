@@ -34,20 +34,20 @@ module Proceedings
       context "when work_type is set to an invalid value" do
         let(:work_type) { :wobble }
 
-        it { expect(final_hearing_form).to be_invalid }
+        it { expect(final_hearing_form).not_to be_valid }
       end
 
       context "when listed is missing" do
         let(:listed) { nil }
 
-        it { expect(final_hearing_form).to be_invalid }
+        it { expect(final_hearing_form).not_to be_valid }
       end
 
       context "when listed is true" do
         let(:listed) { "true" }
 
         context "and the date is missing" do
-          it { expect(final_hearing_form).to be_invalid }
+          it { expect(final_hearing_form).not_to be_valid }
         end
 
         context "and the date information is provided" do

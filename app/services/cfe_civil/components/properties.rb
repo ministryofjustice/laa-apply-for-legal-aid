@@ -25,15 +25,11 @@ module CFECivil
 
       def second_home
         {
-          value: or_zero(other_assets_declaration&.second_home_value),
-          outstanding_mortgage: or_zero(other_assets_declaration&.second_home_mortgage),
-          percentage_owned: or_zero(other_assets_declaration&.second_home_percentage),
+          value: other_assets_declaration&.second_home_value.to_f || 0.0,
+          outstanding_mortgage: other_assets_declaration&.second_home_mortgage.to_f || 0.0,
+          percentage_owned: other_assets_declaration&.second_home_percentage.to_f || 0.0,
           shared_with_housing_assoc: false, # Data not gathered for second home
         }
-      end
-
-      def or_zero(number)
-        number&.to_f || 0.0
       end
 
       def main_home_shared_with_housing_association_or_landlord?

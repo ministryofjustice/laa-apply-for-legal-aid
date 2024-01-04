@@ -395,7 +395,7 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         raise "Must specify an array including ccms_code and an array of two dates" if evaluator.df_options.nil?
 
-        evaluator.df_options.each do |ccms_code, _dates|
+        evaluator.df_options.each_key do |ccms_code|
           proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code.to_s }
           next if proceeding.nil? # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 

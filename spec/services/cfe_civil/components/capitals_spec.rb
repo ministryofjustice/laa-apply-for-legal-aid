@@ -23,8 +23,7 @@ RSpec.describe CFECivil::Components::Capitals do
            legal_aid_application:,
            inherited_assets_value: nil,
            money_owed_value: 0.0)
-    allow(legal_aid_application).to receive(:online_savings_accounts_balance).and_return(online_savings_balance)
-    allow(legal_aid_application).to receive(:online_current_accounts_balance).and_return(online_current_balance)
+    allow(legal_aid_application).to receive_messages(online_savings_accounts_balance: online_savings_balance, online_current_accounts_balance: online_current_balance)
     create(:savings_amount,
            legal_aid_application:,
            offline_current_accounts: offline_current_balance,

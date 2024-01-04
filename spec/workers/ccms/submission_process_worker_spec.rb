@@ -22,8 +22,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
     context "when the state changes to completed" do
       before do
-        allow(submission).to receive(:aasm_state).and_return(:complete)
-        allow(submission).to receive(:completed?).and_return(true)
+        allow(submission).to receive_messages(aasm_state: :complete, completed?: true)
       end
 
       it "does not raise a new SubmissionProcessWorker job" do

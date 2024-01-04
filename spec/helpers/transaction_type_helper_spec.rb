@@ -17,8 +17,7 @@ RSpec.describe TransactionTypeHelper do
 
       context "with transaction types with positive amounts" do
         before do
-          allow(legal_aid_application).to receive(:has_transaction_type?).and_return(true)
-          allow(legal_aid_application).to receive(:transactions_total_by_category).and_return(1)
+          allow(legal_aid_application).to receive_messages(has_transaction_type?: true, transactions_total_by_category: 1)
         end
 
         it { is_expected.to eql("Yes") }
@@ -26,8 +25,7 @@ RSpec.describe TransactionTypeHelper do
 
       context "with transaction types with zero amounts" do
         before do
-          allow(legal_aid_application).to receive(:has_transaction_type?).and_return(true)
-          allow(legal_aid_application).to receive(:transactions_total_by_category).and_return(0)
+          allow(legal_aid_application).to receive_messages(has_transaction_type?: true, transactions_total_by_category: 0)
         end
 
         it { is_expected.to eql("Yes") }
@@ -35,8 +33,7 @@ RSpec.describe TransactionTypeHelper do
 
       context "without transaction types" do
         before do
-          allow(legal_aid_application).to receive(:has_transaction_type?).and_return(false)
-          allow(legal_aid_application).to receive(:transactions_total_by_category).and_return("irrelevant-but-stub-needed")
+          allow(legal_aid_application).to receive_messages(has_transaction_type?: false, transactions_total_by_category: "irrelevant-but-stub-needed")
         end
 
         it { is_expected.to eql("None") }
@@ -50,8 +47,7 @@ RSpec.describe TransactionTypeHelper do
 
       context "with transaction types with positive amounts" do
         before do
-          allow(legal_aid_application).to receive(:has_transaction_type?).and_return(true)
-          allow(legal_aid_application).to receive(:transactions_total_by_category).and_return(123.45)
+          allow(legal_aid_application).to receive_messages(has_transaction_type?: true, transactions_total_by_category: 123.45)
         end
 
         it { is_expected.to eql("£123.45") }
@@ -59,8 +55,7 @@ RSpec.describe TransactionTypeHelper do
 
       context "with transaction types with zero amounts" do
         before do
-          allow(legal_aid_application).to receive(:has_transaction_type?).and_return(true)
-          allow(legal_aid_application).to receive(:transactions_total_by_category).and_return(0)
+          allow(legal_aid_application).to receive_messages(has_transaction_type?: true, transactions_total_by_category: 0)
         end
 
         it { is_expected.to eql("Yes, but none specified") }
@@ -68,8 +63,7 @@ RSpec.describe TransactionTypeHelper do
 
       context "without transaction types" do
         before do
-          allow(legal_aid_application).to receive(:has_transaction_type?).and_return(false)
-          allow(legal_aid_application).to receive(:transactions_total_by_category).and_return("irrelevant-but-stub-needed")
+          allow(legal_aid_application).to receive_messages(has_transaction_type?: false, transactions_total_by_category: "irrelevant-but-stub-needed")
         end
 
         it { is_expected.to eql("None") }

@@ -66,7 +66,7 @@ RSpec.describe CopyCase::InvitationForm, type: :form do
 
       it "is invalid" do
         call_save
-        expect(instance).to be_invalid
+        expect(instance).not_to be_valid
       end
 
       it "adds custom blank error message" do

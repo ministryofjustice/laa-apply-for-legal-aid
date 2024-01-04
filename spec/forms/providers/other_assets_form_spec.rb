@@ -145,7 +145,7 @@ RSpec.describe Providers::OtherAssetsForm do
               let(:valuable_items_value) { "499.0" }
 
               it "is invalid" do
-                expect(form).to be_invalid
+                expect(form).not_to be_valid
                 expect(form.errors[:valuable_items_value]).to eq [translation_for(:valuable_items_value, "greater_than_or_equal_to")]
               end
             end
@@ -160,14 +160,14 @@ RSpec.describe Providers::OtherAssetsForm do
               end
 
               it "is invalid" do
-                expect(form).to be_invalid
+                expect(form).not_to be_valid
                 expect(form.errors[:check_box_valuable_items_value]).to eq [translation_for(:base, "none_and_another_option_selected")]
               end
             end
           end
 
           context "with invalid params - each value suffixed with an x" do
-            let(:submitted_params) { params.each { |_key, val| val.sub!(/$/, "x") } }
+            let(:submitted_params) { params.each_value { |val| val.sub!(/$/, "x") } }
 
             it "is not valid" do
               expect(form).not_to be_valid

@@ -33,7 +33,7 @@ RSpec.describe PresencePartnerOptionalValidator do
       dummy.val1 = ""
       dummy.val2 = ""
       dummy.val3 = ""
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.errors.details[:val1].first[:error]).to eq :blank
       expect(dummy.errors.details[:val2].first[:error]).to eq :blank_with_partner
       expect(dummy.errors.details[:val3].first[:error]).to eq :blank
@@ -43,7 +43,7 @@ RSpec.describe PresencePartnerOptionalValidator do
       # this requires keys to be present in the activemodel errors locale
       # as they use non standard key names
       dummy.val2 = ""
-      expect(dummy).to be_invalid
+      expect(dummy).not_to be_valid
       expect(dummy.errors[:val2]).to eq ["fake partner error"]
     end
   end

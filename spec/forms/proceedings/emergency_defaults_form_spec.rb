@@ -255,7 +255,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
       let(:accepted) { "" }
 
       it "is invalid" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
       end
 
       it "generates the expected error message" do

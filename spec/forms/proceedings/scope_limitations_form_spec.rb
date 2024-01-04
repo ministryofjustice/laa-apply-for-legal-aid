@@ -79,7 +79,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
         let(:hearing_date_cv027_1i) { [""] }
 
         it "is invalid" do
-          expect(form).to be_invalid
+          expect(form).not_to be_valid
         end
 
         it "does not update the scope limitations" do
@@ -110,7 +110,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
 
         context "when the limitation note is blank" do
           it "is invalid" do
-            expect(form).to be_invalid
+            expect(form).not_to be_valid
           end
 
           it "does not update the scope limitations" do
@@ -144,7 +144,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
       let(:scope_codes) { [""] }
 
       it "is invalid" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
       end
 
       it "does not update the scope limitations" do

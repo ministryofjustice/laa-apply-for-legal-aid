@@ -12,7 +12,7 @@ module Dashboard
       end
 
       def self.data
-        provider_count = Provider.all.group(:firm_id).count.size
+        provider_count = Provider.group(:firm_id).count.size
         [
           {
             "number" => provider_count,

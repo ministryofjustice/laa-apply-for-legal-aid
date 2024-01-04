@@ -5,7 +5,7 @@
 <%= form.govuk_check_box field_name, true, "", link_errors: true, multiple: false, label: { text: controller_t("check_box_#{name}") } do %>
   <div class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint", default: "") %></div>
   <% (1..number_of_fields).each do |number| %>
-    <% error = model.errors.messages["#{name}#{number}".to_sym][0] %>
+    <% error = model.errors.messages[:"#{name}#{number}"][0] %>
     <% if error %>
       <% error_class = "govuk-form-group--error"
          error_id = "#{model.model_name.to_s.underscore.dasherize}-#{name.dasherize}#{number}" %>

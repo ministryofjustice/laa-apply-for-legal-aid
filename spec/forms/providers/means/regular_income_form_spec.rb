@@ -13,7 +13,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         }
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:transaction_type_ids, :blank)
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:maintenance_in_amount, :not_a_number, value: "")
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:maintenance_in_amount, :greater_than, value: -1000, count: 0)
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:maintenance_in_frequency, :inclusion, value: "")
       end
     end
@@ -89,7 +89,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:maintenance_in_frequency, :inclusion, value: "invalid")
       end
     end

@@ -47,7 +47,7 @@ module Providers
 
         x_params ||= params
 
-        x_params.each do |_k, v|
+        x_params.each_value do |v|
           case v
           when ActionController::Parameters
             encode_upload_header(v)

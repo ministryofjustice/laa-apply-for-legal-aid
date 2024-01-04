@@ -10,8 +10,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
     create(:submission_document, :id_obtained, submission:, document_type: :bank_transaction_report, attachment_id: bank_transaction_report_attachment.id)
     create(:chances_of_success, proceeding:)
     allow(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
-    allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-    allow(document_upload_requestor).to receive(:formatted_xml).and_return(expected_response)
+    allow(document_upload_requestor).to receive_messages(transaction_request_id: transaction_request_id_in_example_response, formatted_xml: expected_response)
   end
 
   let(:legal_aid_application) do

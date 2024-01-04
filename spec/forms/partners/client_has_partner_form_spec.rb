@@ -38,7 +38,7 @@ RSpec.describe Partners::ClientHasPartnerForm, type: :form do
       let(:params) { { has_partner: "", model: applicant } }
 
       it "is invalid" do
-        expect(client_partner_form).to be_invalid
+        expect(client_partner_form).not_to be_valid
       end
 
       it "adds custom blank error message" do

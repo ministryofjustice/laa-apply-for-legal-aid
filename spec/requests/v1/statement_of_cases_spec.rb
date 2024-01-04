@@ -52,7 +52,7 @@ RSpec.describe "POST /v1/statement_of_case" do
         end
       end
 
-      context "when the file contains malware", clamav: true do
+      context "when the file contains malware", :clamav do
         let(:file) { uploaded_file("spec/fixtures/files/malware.doc", "application/pdf") }
         let(:i18n_error_message) { I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.file_virus", file_name: "malware.doc") }
 

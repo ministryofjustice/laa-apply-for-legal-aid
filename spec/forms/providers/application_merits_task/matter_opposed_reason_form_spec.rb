@@ -11,7 +11,7 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedReasonForm do
       let(:reason) { nil }
 
       it "is invalid" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:reason, :blank)
       end
     end

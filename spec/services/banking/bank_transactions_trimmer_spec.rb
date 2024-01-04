@@ -12,8 +12,7 @@ RSpec.describe Banking::BankTransactionsTrimmer do
 
     before do
       populate_all_transactions
-      allow(application).to receive(:transaction_period_start_on).and_return(period_start)
-      allow(application).to receive(:transaction_period_finish_on).and_return(period_end)
+      allow(application).to receive_messages(transaction_period_start_on: period_start, transaction_period_finish_on: period_end)
     end
 
     context "when all transactions are within the transaction period" do

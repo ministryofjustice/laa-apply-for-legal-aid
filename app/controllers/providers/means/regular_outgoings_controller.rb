@@ -26,7 +26,7 @@ module Providers
 
       def regular_transaction_params
         RegularOutgoingsForm::OUTGOING_TYPES.map { |outgoing_type|
-          ["#{outgoing_type}_amount".to_sym, "#{outgoing_type}_frequency".to_sym]
+          [:"#{outgoing_type}_amount", :"#{outgoing_type}_frequency"]
         }.flatten
       end
     end

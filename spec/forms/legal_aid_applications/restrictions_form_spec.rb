@@ -46,7 +46,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       let(:restrictions_details) { "" }
 
       it "is invalid" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "generates the expected error message" do
@@ -57,7 +57,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
         let(:has_restrictions) { "" }
 
         it "is invalid" do
-          expect(described_form).to be_invalid
+          expect(described_form).not_to be_valid
         end
 
         it "generates the expected error message" do

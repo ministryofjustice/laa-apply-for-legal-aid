@@ -6,7 +6,7 @@ RSpec.describe RegularTransaction do
       it "is invalid" do
         regular_transaction = build_stubbed(:regular_transaction, amount: nil)
 
-        expect(regular_transaction).to be_invalid
+        expect(regular_transaction).not_to be_valid
         expect(regular_transaction.errors).to be_added(
           :amount,
           :not_a_number,
@@ -19,7 +19,7 @@ RSpec.describe RegularTransaction do
       it "is invalid" do
         regular_transaction = build_stubbed(:regular_transaction, amount: "-1000")
 
-        expect(regular_transaction).to be_invalid
+        expect(regular_transaction).not_to be_valid
         expect(regular_transaction.errors).to be_added(
           :amount,
           :greater_than,
@@ -33,7 +33,7 @@ RSpec.describe RegularTransaction do
       it "is invalid" do
         regular_transaction = build_stubbed(:regular_transaction, frequency: nil)
 
-        expect(regular_transaction).to be_invalid
+        expect(regular_transaction).not_to be_valid
         expect(regular_transaction.errors).to be_added(
           :frequency,
           :inclusion,
@@ -46,7 +46,7 @@ RSpec.describe RegularTransaction do
       it "is invalid" do
         regular_transaction = build_stubbed(:regular_transaction, frequency: "invalid")
 
-        expect(regular_transaction).to be_invalid
+        expect(regular_transaction).not_to be_valid
         expect(regular_transaction.errors).to be_added(
           :frequency,
           :inclusion,

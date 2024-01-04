@@ -168,7 +168,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "will be invalid" do
         form.save_as_draft
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
       end
 
       it "will preserve the input" do
@@ -194,7 +194,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "will be invalid" do
         form.save_as_draft
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
       end
 
       it "will preserve the valid input" do
@@ -261,7 +261,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       before { form.save_as_draft }
 
       it "generates an error" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
       end
     end
   end

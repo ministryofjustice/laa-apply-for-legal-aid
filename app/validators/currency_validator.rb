@@ -29,7 +29,7 @@ private
 
   def replace_error_with_partner(record, attr_name)
     original_error_type = record.errors.where(attr_name).first.type
-    partner_error_type = "#{original_error_type}_with_partner".to_sym
+    partner_error_type = :"#{original_error_type}_with_partner"
 
     record.errors.delete(attr_name) # delete original
     record.errors.add(attr_name, partner_error_type) # replace with partner version

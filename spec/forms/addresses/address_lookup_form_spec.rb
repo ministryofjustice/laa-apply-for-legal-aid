@@ -16,7 +16,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
       let(:postcode) { "invalid" }
 
       it "has an error on postcode" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors[:postcode]).to contain_exactly("Enter a postcode in the right format")
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
       let(:postcode) { "" }
 
       it "has an error on postcode" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors[:postcode]).to contain_exactly("Enter a postcode")
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
       let(:postcode) { "invalid" }
 
       it "has an error on postcode" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors[:postcode]).to contain_exactly("Enter a postcode in the right format")
       end
     end

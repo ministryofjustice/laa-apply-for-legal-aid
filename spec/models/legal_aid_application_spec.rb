@@ -874,10 +874,10 @@ RSpec.describe LegalAidApplication do
 
     let(:transaction_period_start_on) { "2019-08-10".to_date }
     let(:transaction_period_finish_on) { "2019-08-20".to_date }
-    let(:date_before_start) { "2019-08-09 23:40 +0100".to_time }
-    let(:date_after_start)  { "2019-08-10 00:20 +0100".to_time }
-    let(:date_before_end)   { "2019-08-20 23:40 +0100".to_time }
-    let(:date_after_end)    { "2019-08-21 00:20 +0100".to_time }
+    let(:date_before_start) { Time.zone.parse("2019-08-09 23:40 +0100") }
+    let(:date_after_start)  { Time.zone.parse("2019-08-10 00:20 +0100") }
+    let(:date_before_end)   { Time.zone.parse("2019-08-20 23:40 +0100") }
+    let(:date_after_end)    { Time.zone.parse("2019-08-21 00:20 +0100") }
     let(:legal_aid_application) do
       create(:legal_aid_application,
              :with_applicant,

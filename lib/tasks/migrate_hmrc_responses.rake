@@ -12,7 +12,7 @@ namespace :migrate do
     Benchmark.benchmark do |bm|
       bm.report("Migrate:") do
         ActiveRecord::Base.transaction do
-          responses.where(owner_id: nil).each do |response|
+          responses.where(owner_id: nil).find_each do |response|
             applicant = response.legal_aid_application.applicant
             response.update!(
               owner_id: applicant.id,

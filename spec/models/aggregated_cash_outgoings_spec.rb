@@ -344,7 +344,7 @@ RSpec.describe AggregatedCashOutgoings do
             transactions = category_transactions(aco, category)
 
             transactions.each_with_index do |transaction, i|
-              new_amount = corrected_valid_params["#{category}#{i + 1}".to_sym]
+              new_amount = corrected_valid_params[:"#{category}#{i + 1}"]
               expect(transaction.amount).to eq BigDecimal(new_amount)
             end
           end

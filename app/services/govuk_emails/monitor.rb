@@ -61,7 +61,7 @@ module GovukEmails
         .scheduled_mailings
         .where(mailer_klass: "SubmitCitizenFinancialReminderMailer")
         .where(mailer_method: "notify_citizen")
-        .each(&:cancel!)
+        .find_each(&:cancel!)
     end
 
     def mailer_args

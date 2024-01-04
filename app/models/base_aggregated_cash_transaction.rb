@@ -33,10 +33,10 @@ class BaseAggregatedCashTransaction
     #
     def attributes_for_transaction_types(categories)
       categories.each do |category|
-        attr_accessor "check_box_#{category}".to_sym
+        attr_accessor :"check_box_#{category}"
 
         MONTH_RANGE.each do |i|
-          attr_accessor "#{category}#{i}".to_sym
+          attr_accessor :"#{category}#{i}"
         end
       end
     end
@@ -107,7 +107,7 @@ private
 
   def save_category(category)
     MONTH_RANGE.each do |i|
-      amount = __send__("#{category}#{i}".to_sym)
+      amount = __send__(:"#{category}#{i}")
       date = calculated_date(i)
 
       CashTransaction.create!(
@@ -124,7 +124,7 @@ private
 
   def checkbox_integrity
     self.class.cash_transaction_categories.each do |category|
-      checkbox_attr = "check_box_#{category}".to_sym
+      checkbox_attr = :"check_box_#{category}"
 
       if __send__(checkbox_attr) == "true"
         check_all_values_set_for category
@@ -138,7 +138,7 @@ private
     return if none_selected.present?
 
     self.class.cash_transaction_categories.each do |category|
-      checkbox_attr = "check_box_#{category}".to_sym
+      checkbox_attr = :"check_box_#{category}"
       return false if __send__(checkbox_attr) == "true"
     end
 
@@ -149,7 +149,7 @@ private
     return if none_selected.blank?
 
     self.class.cash_transaction_categories.each do |category|
-      checkbox_attr = "check_box_#{category}".to_sym
+      checkbox_attr = :"check_box_#{category}"
       next unless __send__(checkbox_attr) == "true"
 
       errors.add(category_type.to_sym, model_error(:others_present))
@@ -159,7 +159,7 @@ private
 
   def check_all_values_set_for(category)
     MONTH_RANGE.each do |i|
-      value_attr = "#{category}#{i}".to_sym
+      value_attr = :"#{category}#{i}"
       value = __send__(value_attr)
       errors.add(value_attr, blank_error(category, i)) if value.blank?
 
@@ -173,7 +173,7 @@ private
 
   def erase_values_for(category)
     MONTH_RANGE.each do |i|
-      method = "#{category}#{i}=".to_sym
+      method = :"#{category}#{i}="
       __send__(method, nil)
     end
   end
@@ -183,11 +183,11 @@ private
   end
 
   def calculated_date(month_number)
-    __send__("month#{month_number}".to_sym)
+    __send__(:"month#{month_number}")
   end
 
   def checkbox_for(category)
-    __send__("check_box_#{category}".to_sym)
+    __send__(:"check_box_#{category}")
   end
 
   def category_type

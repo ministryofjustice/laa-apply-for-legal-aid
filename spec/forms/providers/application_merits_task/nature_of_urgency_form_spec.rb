@@ -30,19 +30,19 @@ module Providers
         context "when hearing_date_set is missing" do
           let(:hearing_date_set) { nil }
 
-          it { expect(nature_of_urgency_form).to be_invalid }
+          it { expect(nature_of_urgency_form).not_to be_valid }
         end
 
         context "when nature_of_urgency is blank" do
           let(:nature_of_urgency) { "" }
 
-          it { expect(nature_of_urgency_form).to be_invalid }
+          it { expect(nature_of_urgency_form).not_to be_valid }
         end
 
         context "when hearing_date is invalid" do
           let(:hearing_date_3i) { "xx" }
 
-          it { expect(nature_of_urgency_form).to be_invalid }
+          it { expect(nature_of_urgency_form).not_to be_valid }
         end
 
         context "when hearing_date_set is false" do

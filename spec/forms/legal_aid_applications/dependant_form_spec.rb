@@ -72,7 +72,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       let(:invalid_date_message) { I18n.t("activemodel.errors.models.dependant.attributes.date_of_birth.date_not_valid") }
 
       it "invalidates form" do
-        expect(described_form).to be_invalid
+        expect(described_form).not_to be_valid
       end
 
       it "has invalid date of birth error message" do

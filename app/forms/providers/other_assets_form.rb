@@ -24,7 +24,7 @@ module Providers
 
     ALL_ATTRIBUTES = (SECOND_HOME_ATTRIBUTES + SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).freeze
 
-    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + OTHER_CHECKBOXES).freeze
+    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| :"check_box_#{attribute}" } + OTHER_CHECKBOXES).freeze
 
     validates(:second_home_percentage, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validates(:valuable_items_value, currency: { greater_than_or_equal_to: 500 }, allow_blank: true)
@@ -33,7 +33,7 @@ module Providers
     validates(*VALUABLE_ITEMS_VALUE_ATTRIBUTE, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.__send__(:check_box_valuable_items_value).present? })
 
     SINGLE_VALUE_ATTRIBUTES.each do |attribute|
-      check_box_attribute = "check_box_#{attribute}".to_sym
+      check_box_attribute = :"check_box_#{attribute}"
       validates attribute, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, if: proc { |form| form.__send__(check_box_attribute).present? }
     end
 
@@ -83,7 +83,7 @@ module Providers
 
     def empty_unchecked_values
       (SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).each do |attribute|
-        check_box_attribute = "check_box_#{attribute}".to_sym
+        check_box_attribute = :"check_box_#{attribute}"
         if __send__(check_box_attribute).blank?
           attributes[attribute] = nil
           instance_variable_set(:"@#{attribute}", nil)

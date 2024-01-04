@@ -40,7 +40,7 @@ RSpec.describe Proceedings::EmergencyLevelOfServiceForm, :vcr, type: :form do
       let(:emergency_level_of_service) { "" }
 
       it "is invalid" do
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
       end
 
       it "generates the expected error message" do

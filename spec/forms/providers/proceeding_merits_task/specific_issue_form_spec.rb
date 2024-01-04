@@ -25,7 +25,7 @@ RSpec.describe Providers::ProceedingMeritsTask::SpecificIssueForm, type: :form d
         let(:details) { "some detail" }
         let(:confirmed) { false }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         it "records the error message" do
           expect(form.errors[:confirmed]).to eq ["You must confirm this specific issue proceeding is not for a change of name application"]
@@ -36,7 +36,7 @@ RSpec.describe Providers::ProceedingMeritsTask::SpecificIssueForm, type: :form d
         let(:details) { "" }
         let(:confirmed) { true }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         it "records the error message" do
           expect(form.errors[:details]).to eq ["Enter details of the specific issue"]

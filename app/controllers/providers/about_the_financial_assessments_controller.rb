@@ -37,7 +37,7 @@ module Providers
     end
 
     def delete_previously_scheduled_mails
-      ScheduledMailing.where(legal_aid_application_id: legal_aid_application.id, status: "waiting").each do |scheduled|
+      ScheduledMailing.where(legal_aid_application_id: legal_aid_application.id, status: "waiting").find_each do |scheduled|
         scheduled.destroy! if scheduled.arguments[1] != legal_aid_application.applicant.email
       end
     end

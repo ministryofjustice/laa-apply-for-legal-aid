@@ -38,7 +38,7 @@ RSpec.describe Partners::ContraryInterestsForm, type: :form do
       let(:params) { { partner_has_contrary_interest: "", model: applicant } }
 
       it "is invalid" do
-        expect(contrary_interest_form).to be_invalid
+        expect(contrary_interest_form).not_to be_valid
       end
 
       it "adds custom blank error message" do

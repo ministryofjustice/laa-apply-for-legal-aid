@@ -71,7 +71,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
 
         it "test nino is invalid" do
           partner_form.national_insurance_number = test_nino
-          expect(partner_form).to be_invalid
+          expect(partner_form).not_to be_valid
         end
 
         it "invalid NINO is still invalid" do
@@ -217,7 +217,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
 
       it "will be invalid" do
         partner_as_draft
-        expect(partner_form).to be_invalid
+        expect(partner_form).not_to be_valid
       end
 
       it "will preserve the input" do
@@ -244,7 +244,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
       before { partner_as_draft }
 
       it "generates an error" do
-        expect(partner_form).to be_invalid
+        expect(partner_form).not_to be_valid
       end
     end
   end

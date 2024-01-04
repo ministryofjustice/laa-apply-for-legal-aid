@@ -89,7 +89,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(:transaction_type_ids, :blank)
       end
     end
@@ -124,7 +124,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(
           :housing_benefit_amount,
           :not_a_number,
@@ -147,7 +147,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(
           :housing_benefit_amount,
           :greater_than,
@@ -171,7 +171,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(
           :housing_benefit_frequency,
           :inclusion,
@@ -194,7 +194,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
 
         form = described_class.new(params)
 
-        expect(form).to be_invalid
+        expect(form).not_to be_valid
         expect(form.errors).to be_added(
           :housing_benefit_frequency,
           :inclusion,

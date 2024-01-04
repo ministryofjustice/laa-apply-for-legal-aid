@@ -178,7 +178,7 @@ module Providers
 
     def add_regular_transaction_error_to_form(transaction_type, error)
       attribute = if error.attribute.in?(%i[amount frequency])
-                    "#{transaction_type}_#{error.attribute}".to_sym
+                    :"#{transaction_type}_#{error.attribute}"
                   else
                     :base
                   end

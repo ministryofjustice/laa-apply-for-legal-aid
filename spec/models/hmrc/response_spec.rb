@@ -18,21 +18,21 @@ RSpec.describe HMRC::Response do
     context "with invalid use_case" do
       let(:response) { build(:hmrc_response, use_case: "three", owner_id: applicant.id, owner_type: applicant.class) }
 
-      it { expect(response).to be_invalid }
+      it { expect(response).not_to be_valid }
       it { expect(response.errors.messages_for(:use_case)).to include("Invalid use case") }
     end
 
     context "with nil use_case" do
       let(:response) { build(:hmrc_response, use_case: nil, owner_id: applicant.id, owner_type: applicant.class) }
 
-      it { expect(response).to be_invalid }
+      it { expect(response).not_to be_valid }
       it { expect(response.errors.messages_for(:use_case)).to include("can't be blank") }
     end
 
     context "with blank use_case" do
       let(:response) { build(:hmrc_response, use_case: "", owner_id: applicant.id, owner_type: applicant.class) }
 
-      it { expect(response).to be_invalid }
+      it { expect(response).not_to be_valid }
       it { expect(response.errors.messages_for(:use_case)).to include("can't be blank") }
     end
 
@@ -45,7 +45,7 @@ RSpec.describe HMRC::Response do
     context "without owner_id and owner_type" do
       let(:response) { build(:hmrc_response, use_case: "one") }
 
-      it { expect(response).to be_invalid }
+      it { expect(response).not_to be_valid }
       it { expect(response.errors.messages_for(:owner)).to include("must exist") }
     end
   end

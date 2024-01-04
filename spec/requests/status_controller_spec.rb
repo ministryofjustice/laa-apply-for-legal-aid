@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusController, clamav: true do
+RSpec.describe StatusController, :clamav do
   describe "#healthcheck" do
     before do
       allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
@@ -205,9 +205,7 @@ RSpec.describe StatusController, clamav: true do
       end
 
       before do
-        allow(Rails.configuration.x.status).to receive(:build_date).and_return("20150721")
-        allow(Rails.configuration.x.status).to receive(:build_tag).and_return("test")
-        allow(Rails.configuration.x.status).to receive(:app_branch).and_return("test_branch")
+        allow(Rails.configuration.x.status).to receive_messages(build_date: "20150721", build_tag: "test", app_branch: "test_branch")
         get("/ping")
       end
 
@@ -218,9 +216,7 @@ RSpec.describe StatusController, clamav: true do
 
     context "when environment variables not set" do
       before do
-        allow(Rails.configuration.x.status).to receive(:build_date).and_return("Not Available")
-        allow(Rails.configuration.x.status).to receive(:build_tag).and_return("Not Available")
-        allow(Rails.configuration.x.status).to receive(:app_branch).and_return("Not Available")
+        allow(Rails.configuration.x.status).to receive_messages(build_date: "Not Available", build_tag: "Not Available", app_branch: "Not Available")
 
         get "/ping"
       end

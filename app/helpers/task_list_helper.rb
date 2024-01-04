@@ -5,15 +5,15 @@ module TaskListHelper
 
   def _task_url(name, legal_aid_application, status)
     url = if display_new_page?(legal_aid_application, name)
-            "new_providers_legal_aid_application_#{url_fragment(name)}_path".to_sym
+            :"new_providers_legal_aid_application_#{url_fragment(name)}_path"
           else
-            "providers_legal_aid_application_#{new_url_fragment(name, status, legal_aid_application)}_path".to_sym
+            :"providers_legal_aid_application_#{new_url_fragment(name, status, legal_aid_application)}_path"
           end
     __send__(url, legal_aid_application)
   end
 
   def proceeding_task_url(name, application, ccms_code)
-    url = "providers_merits_task_list_#{url_fragment(name)}_path".to_sym
+    url = :"providers_merits_task_list_#{url_fragment(name)}_path"
 
     __send__(url, proceeding_id(application, ccms_code))
   end

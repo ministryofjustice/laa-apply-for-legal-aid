@@ -18,7 +18,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderForm do
     context "when details absent" do
       let(:details) { nil }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
   end
 end

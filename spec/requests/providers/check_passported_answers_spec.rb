@@ -149,7 +149,7 @@ RSpec.describe "check passported answers requests" do
       end
 
       it "displays the correct savings details" do
-        application.savings_amount.amount_attributes.each do |_attr, amount|
+        application.savings_amount.amount_attributes.each_value do |amount|
           expect(response.body).to include(gds_number_to_currency(amount, unit: "£")), "saving amount should be in the page"
         end
       end
