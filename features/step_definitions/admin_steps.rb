@@ -39,7 +39,7 @@ Then(/^I should (see|not see) the (\S*) application$/) do |visibility, number|
   if visibility == "see"
     expect(page).to have_content(first_ref)
   else
-    expect(page).not_to have_content(first_ref)
+    expect(page).to have_no_content(first_ref)
   end
 end
 

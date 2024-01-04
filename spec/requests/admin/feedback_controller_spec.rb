@@ -39,7 +39,7 @@ RSpec.describe Admin::FeedbackController do
 
       it "does not show navigation links" do
         get_request
-        expect(page).not_to have_css(".govuk-pagination")
+        expect(page).to have_no_css(".govuk-pagination")
       end
 
       context "and more applications than page size" do
