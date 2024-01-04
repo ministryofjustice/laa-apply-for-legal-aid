@@ -828,7 +828,7 @@ end
 
 Then("I click on the View statements and add transactions link for {string}") do |transaction_type_name|
   within(:css, "div#list-item-#{transaction_type_name.underscore.tr(' ', '_')}") do
-    click_link "View statements and add transactions"
+    click_on "View statements and add transactions"
   end
 end
 
@@ -895,7 +895,7 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__#{question_id}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
@@ -910,13 +910,13 @@ Given("I click Check Your Answers Change link for proceeding {string}") do |ques
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__proceeding_#{question_id}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
 Given("I click Check Your Answers Change link for dependant {string}") do |dependant|
   within "#app-check-your-answers__dependants_#{dependant}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
@@ -925,27 +925,27 @@ Given("I click Check Your Merits Answers Change link for {string} for {string}")
   field_name.downcase!
   field_name.gsub!(/\s+/, "_")
   within "#app-check-your-answers__#{proceeding.id}_#{field_name}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
 Given("I click has other dependants remove link for dependant {string}") do |dependant|
   within "#dependant_#{dependant}" do
-    click_link("Remove")
+    click_on("Remove")
   end
 end
 
 Then("I click on the add payments link for income type {string}") do |income_type|
   income_type.downcase!
   within "#income-type-#{income_type}" do
-    click_link(I18n.t(".citizens.income_summary.index.select.#{income_type}"))
+    click_on(I18n.t(".citizens.income_summary.index.select.#{income_type}"))
   end
 end
 
 Then("I click on the add payments link for outgoing type {string}") do |outgoing_type|
   outgoing_type.downcase!
   within "#list-item-#{outgoing_type}" do
-    click_link(I18n.t(".citizens.outgoings_summary.index.select.#{outgoing_type}"))
+    click_on(I18n.t(".citizens.outgoings_summary.index.select.#{outgoing_type}"))
   end
 end
 
@@ -1136,7 +1136,7 @@ Then("I am on the postcode entry page") do
 end
 
 Then(/^I click find address$/) do
-  click_button("Find address")
+  click_on("Find address")
 end
 
 Then(/^I select an address '(.*)'$/) do |address|

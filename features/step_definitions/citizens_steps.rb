@@ -23,11 +23,11 @@ end
 Then("I visit the start of the financial assessment in Welsh") do
   Setting.setting.update!(allow_welsh_translation: true)
   sign_in_citizen_for_application(@legal_aid_application)
-  click_link("Cymraeg")
+  click_on("Cymraeg")
 end
 
 Then("I return to English") do
-  click_link("English")
+  click_on("English")
 end
 
 Then("I visit the first question about dependants") do
