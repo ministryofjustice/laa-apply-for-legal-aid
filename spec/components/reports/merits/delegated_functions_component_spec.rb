@@ -36,7 +36,7 @@ RSpec.describe Reports::Merits::DelegatedFunctionsComponent, type: :component do
     end
 
     it "does not render the no delegated functions used message" do
-      expect(page).not_to have_css("p", text: "Not used")
+      expect(page).to have_no_css("p", text: "Not used")
     end
   end
 
@@ -58,7 +58,7 @@ RSpec.describe Reports::Merits::DelegatedFunctionsComponent, type: :component do
     end
 
     it "does not render the delegated functions summary list" do
-      expect(page).not_to have_css("dl.govuk-summary-list")
+      expect(page).to have_no_css("dl.govuk-summary-list")
     end
   end
 

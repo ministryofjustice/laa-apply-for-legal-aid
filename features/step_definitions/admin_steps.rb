@@ -9,7 +9,7 @@ Given(/^I am logged in as an admin$/) do
   get admin_user_google_oauth2_omniauth_callback_path
   follow_redirect!
   visit admin_legal_aid_applications_path
-  click_link "Log in via google"
+  click_on "Log in via google"
 end
 
 Given("an application has been submitted") do
@@ -39,7 +39,7 @@ Then(/^I should (see|not see) the (\S*) application$/) do |visibility, number|
   if visibility == "see"
     expect(page).to have_content(first_ref)
   else
-    expect(page).not_to have_content(first_ref)
+    expect(page).to have_no_content(first_ref)
   end
 end
 

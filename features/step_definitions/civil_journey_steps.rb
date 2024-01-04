@@ -152,7 +152,7 @@ Given(/^I view the previously created application$/) do
 end
 
 Then(/^I should not see the previously created application$/) do
-  expect(page).not_to have_content(@legal_aid_application.applicant.full_name)
+  expect(page).to have_no_content(@legal_aid_application.applicant.full_name)
 end
 
 Given(/^I click delete for the previously created application$/) do
@@ -828,7 +828,7 @@ end
 
 Then("I click on the View statements and add transactions link for {string}") do |transaction_type_name|
   within(:css, "div#list-item-#{transaction_type_name.underscore.tr(' ', '_')}") do
-    click_link "View statements and add transactions"
+    click_on "View statements and add transactions"
   end
 end
 
@@ -855,7 +855,7 @@ And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
   if visibility == "see"
     expect(page).to have_content(/#{text}/)
   else
-    expect(page).not_to have_content(text)
+    expect(page).to have_no_content(text)
   end
 end
 
@@ -865,7 +865,7 @@ And(/^I should (see|not see) a govuk formatted date from ['|"](.*?)['|"] days ag
   if visibility == "see"
     expect(page).to have_content(/#{text}/)
   else
-    expect(page).not_to have_content(text)
+    expect(page).to have_no_content(text)
   end
 end
 
@@ -878,7 +878,7 @@ Then(/^proceeding search field is empty$/) do
 end
 
 Then(/^the results section is empty$/) do
-  expect(page).not_to have_css("#proceeding-list .proceeding-item")
+  expect(page).to have_no_css("#proceeding-list .proceeding-item")
 end
 
 Then(/^proceeding suggestions has (results|no results)$/) do |results|
@@ -887,7 +887,7 @@ Then(/^proceeding suggestions has (results|no results)$/) do |results|
   when "results"
     expect(page).to have_css("#proceeding-list .proceeding-item")
   when "no results"
-    expect(page).not_to have_css("#proceeding-list .proceeding-item")
+    expect(page).to have_no_css("#proceeding-list .proceeding-item")
   end
 end
 
@@ -895,7 +895,7 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__#{question_id}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
@@ -910,13 +910,13 @@ Given("I click Check Your Answers Change link for proceeding {string}") do |ques
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__proceeding_#{question_id}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
 Given("I click Check Your Answers Change link for dependant {string}") do |dependant|
   within "#app-check-your-answers__dependants_#{dependant}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
@@ -925,27 +925,27 @@ Given("I click Check Your Merits Answers Change link for {string} for {string}")
   field_name.downcase!
   field_name.gsub!(/\s+/, "_")
   within "#app-check-your-answers__#{proceeding.id}_#{field_name}" do
-    click_link("Change")
+    click_on("Change")
   end
 end
 
 Given("I click has other dependants remove link for dependant {string}") do |dependant|
   within "#dependant_#{dependant}" do
-    click_link("Remove")
+    click_on("Remove")
   end
 end
 
 Then("I click on the add payments link for income type {string}") do |income_type|
   income_type.downcase!
   within "#income-type-#{income_type}" do
-    click_link(I18n.t(".citizens.income_summary.index.select.#{income_type}"))
+    click_on(I18n.t(".citizens.income_summary.index.select.#{income_type}"))
   end
 end
 
 Then("I click on the add payments link for outgoing type {string}") do |outgoing_type|
   outgoing_type.downcase!
   within "#list-item-#{outgoing_type}" do
-    click_link(I18n.t(".citizens.outgoings_summary.index.select.#{outgoing_type}"))
+    click_on(I18n.t(".citizens.outgoings_summary.index.select.#{outgoing_type}"))
   end
 end
 
@@ -976,7 +976,7 @@ Then("the answer for all {string} categories should be {string}") do |field_name
   wrong_answer = expected_answer == "No" ? "Yes" : "No"
   within "#app-check-your-answers__#{field_name}_items" do # search within the section to check that all answers are yes/no
     expect(page).to have_text(expected_answer)
-    expect(page).not_to have_text(wrong_answer)
+    expect(page).to have_no_text(wrong_answer)
   end
 end
 
@@ -989,7 +989,7 @@ Then("I click the close button for the modal") do
 end
 
 Then("the delete modal should not be visible") do
-  expect(page).not_to have_css(".app-modal")
+  expect(page).to have_no_css(".app-modal")
 end
 
 Then("I select a proceeding type and continue") do
@@ -1136,7 +1136,7 @@ Then("I am on the postcode entry page") do
 end
 
 Then(/^I click find address$/) do
-  click_button("Find address")
+  click_on("Find address")
 end
 
 Then(/^I select an address '(.*)'$/) do |address|
@@ -1171,7 +1171,7 @@ end
 
 Then("I am on the read only version of the check your answers page") do
   expect(page).to have_content("Home")
-  expect(page).not_to have_css(".change-link")
+  expect(page).to have_no_css(".change-link")
 end
 
 Then(/^I click How we checked your client's benefits status$/) do

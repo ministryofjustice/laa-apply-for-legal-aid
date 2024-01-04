@@ -114,7 +114,7 @@ RSpec.describe Citizens::LegalAidApplicationsController do
 
       it "logs out the provider" do
         request
-        expect(page).not_to have_content("different-provider")
+        expect(page).to have_no_content("different-provider")
       end
     end
 
