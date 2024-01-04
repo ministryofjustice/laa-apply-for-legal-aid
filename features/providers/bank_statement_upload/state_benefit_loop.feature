@@ -73,8 +73,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     When I choose "No"
     And I click "Save and continue"
 
-    # TODO: Title not working on regular_income page
-    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
+    Then I should be on a page with title matching "Which of these payments does your client get?"
     When I select "My client does not get any of these payments"
     And I click "Save and continue"
 
@@ -82,8 +81,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     When I choose "No"
     And I click "Save and continue"
 
-    # TODO: Title not working on regular_income page
-    Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
+    Then I should be on a page with title matching "Which of these payments does your client pay?"
     When I select "My client makes none of these payments"
     And I click "Save and continue"
 
