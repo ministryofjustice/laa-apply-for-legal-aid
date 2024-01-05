@@ -47,7 +47,7 @@ class BaseAggregatedCashTransaction
       checkbox_method = "check_box_#{trx.transaction_type.name}="
       model.__send__(value_method, trx.amount)
       model.__send__(checkbox_method, "true")
-      model.__send__("month#{trx.month_number}=", trx.transaction_date)
+      model.__send__(:"month#{trx.month_number}=", trx.transaction_date)
     end
 
     def find_by(legal_aid_application_id:, owner:)
@@ -84,12 +84,12 @@ class BaseAggregatedCashTransaction
 private
 
   def transaction_date(month_number)
-    __send__("month#{month_number}")
+    __send__(:"month#{month_number}")
   end
 
   def update_cash_attributes(params)
     params.each do |key, value|
-      __send__("#{key}=", value)
+      __send__(:"#{key}=", value)
     end
   end
 

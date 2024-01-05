@@ -276,7 +276,7 @@ class LegalAidApplication < ApplicationRecord
   def uncategorised_transactions?(type)
     bank_trx = bank_transactions_by_type(type)
     cash_trx = cash_transactions_by_type(type)
-    parent_transaction_types.__send__("#{type}s").each do |transaction_type|
+    parent_transaction_types.__send__(:"#{type}s").each do |transaction_type|
       uncategorised_transactions_errors(transaction_type) unless any_transactions_selected?(transaction_type, bank_trx, cash_trx)
     end
     errors.present?
@@ -492,7 +492,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def transactions_total_by_type(transaction_type, category_id)
-    __send__("#{transaction_type}_transactions").amounts.fetch(category_id, 0)
+    __send__(:"#{transaction_type}_transactions").amounts.fetch(category_id, 0)
   end
 
   def hmrc_employment_income?
@@ -574,7 +574,7 @@ private
   end
 
   def cash_transactions_by_type(type)
-    cash_transactions.__send__("#{type}s").order(transaction_date: :desc).by_parent_transaction_type
+    cash_transactions.__send__(:"#{type}s").order(transaction_date: :desc).by_parent_transaction_type
   end
 
   def any_transactions_selected?(transaction_type, bank_trx, cash_trx)

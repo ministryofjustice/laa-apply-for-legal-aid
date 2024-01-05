@@ -55,7 +55,7 @@ module Admin
 
       # :nocov:
       def download_report(attribute)
-        report = legal_aid_application.send("#{attribute}_report")
+        report = legal_aid_application.send(:"#{attribute}_report")
         send_data report.document.download,
                   status: 200,
                   type: "application/pdf",

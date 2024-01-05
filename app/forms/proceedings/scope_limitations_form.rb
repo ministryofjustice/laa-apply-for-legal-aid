@@ -69,7 +69,7 @@ module Proceedings
 
     def update_scope_attributes(params)
       params.each do |key, value|
-        __send__("#{key}=", value)
+        __send__(:"#{key}=", value)
       end
     end
 
@@ -80,7 +80,7 @@ module Proceedings
     end
 
     def populate_inputted_date(code)
-      __send__("hearing_date_#{code}=", date_fields(code).form_date) if scope_codes.include? code
+      __send__(:"hearing_date_#{code}=", date_fields(code).form_date) if scope_codes.include? code
     end
 
     def date_fields(code, value = nil)
