@@ -275,7 +275,9 @@ jobs:
           destination: coverage
 
   build_and_push:
-    executor: cloud-platform-executor
+    executor:
+      name: cloud-platform-executor
+      docker_layer_caching: true
     steps:
     - checkout
     - setup_remote_docker:
