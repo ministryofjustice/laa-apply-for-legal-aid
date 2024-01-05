@@ -34,8 +34,8 @@ private
 
   def show_office_select?
     [
-      page_history.last(3).include?("/"), # recently seen the root path
-      page_history.last(3).include?(/\/\?locale=.{2}/), # recently seen the root path with a locale
+      page_history.last(10).include?("/"), # recently seen the root path
+      page_history.last(10).grep(/\/\?locale=.*$/).any?, # recently seen the root path with a locale
       ActiveRecord::Type::Boolean.new.cast(Rails.configuration.x.laa_portal.mock_saml) || false, # mock_saml is true
     ].any?(true)
   end
