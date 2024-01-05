@@ -32,7 +32,6 @@ class TestProviderPopulator
     "BENREID" => ["Test firm for portal login", "benreid@example.co.uk", 107],
     "HFITZSIMONS@EDWARDHAYES.CO.UK" => ["EDWARD HAYES LLP", "hfitzsimons@example.com", 2_453_773],
     "LHARRISON@TBILAW.CO.UK" => ["LAWRENCE & CO SOLICITORS CDS LLP", "LHARRISON@example.com", 954_474],
-    "jsugarman" => ["Sugarman & daughters", "joel.sugarman@digital.justice.gov.uk", 111],
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
     "rose" => ["Rose & Co.", "rose.azadkhan@digital.justice.gov.uk", 114],
     "mkeen" => ["Keen & Co.", "mike.keen@digital.justice.gov.uk", 115],
