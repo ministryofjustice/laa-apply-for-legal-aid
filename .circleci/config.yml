@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   aws-cli: circleci/aws-cli@4.0.0
+  aws-ecr: circleci/aws-ecr@9.0.1
   browser-tools: circleci/browser-tools@1.4.3
   slack: circleci/slack@4.5.2
 
@@ -276,7 +277,7 @@ jobs:
 
   build_and_push:
     executor:
-      name: cloud-platform-executor
+      name: aws-ecr/default
       docker_layer_caching: true
     steps:
     - checkout
