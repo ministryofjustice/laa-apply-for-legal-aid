@@ -35,7 +35,7 @@
           <% Providers::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES.each do |attribute| %>
             <% check_box_attribute = "check_box_#{attribute}" %>
             <% value = @form.send(attribute) %>
-            <% @form.__send__("#{check_box_attribute}=", @form.send(check_box_attribute).present? || value.present?) %>
+            <% @form.__send__(:"#{check_box_attribute}=", @form.send(check_box_attribute).present? || value.present?) %>
             <%= form.govuk_check_box check_box_attribute,
                                      true,
                                      multiple: false,
