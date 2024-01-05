@@ -213,6 +213,11 @@ en:
         deductions:
           dependants_allowance: Dependants allowance
           disregarded_state_benefits: Income from benefits excluded from calculation
+          partner_allowance: Partner allowance
+          client:
+            dependants_allowance: Dependants allowance
+            disregarded_state_benefits: Client income from benefits excluded from calculation
+            partner_allowance: Partner allowance
         income:
           benefits: Benefits
           employment: Gross employment income
@@ -224,12 +229,46 @@ en:
           property_or_lodger: Income from property or lodger
           student_loan: Student loan or grant
           pension: Pension
+          client:
+            benefits: Client benefits
+            employment: Client gross employment income
+            fixed_employment_deduction: Client fixed employment deduction
+            family_help: Client financial help from friends or family
+            income_tax: Client income tax
+            maintenance_in: Client maintenance payments
+            national_insurance: Client national insurance
+            property_or_lodger: Client income from property or lodger
+            student_loan: Client student loan or grant
+            pension: Client pension
+          partner:
+            benefits: Partner benefits
+            employment: Partner gross employment income
+            fixed_employment_deduction: Partner fixed employment deduction
+            family_help: Partner financial help from friends or family
+            income_tax: Partner income tax
+            maintenance_in: Partner maintenance payments
+            national_insurance: Partner national insurance
+            property_or_lodger: Partner income from property or lodger
+            student_loan: Partner student loan or grant
+            pension: Partner pension
         outgoing:
           housing: "Housing payments%{addendum}"
           housing_addendum: " (any declared housing benefits have been deducted from this total)"
           childcare: Childcare payments
           maintenance_out: Maintenance payments to a former partner
           legal_aid: Payments towards legal aid in a criminal case
+          client:
+            housing: "Client housing payments%{addendum}"
+            housing_addendum: " (any declared housing benefits have been deducted from this total)"
+            childcare: Client childcare payments
+            maintenance_out: Client maintenance payments to a former partner
+            legal_aid: Client payments towards legal aid in a criminal case
+          partner:
+            housing: "Partner housing payments%{addendum}"
+            housing_addendum: " (any declared housing benefits have been deducted from this total)"
+            childcare: Partner childcare payments
+            maintenance_out: Partner maintenance payments to a former partner
+            legal_aid: Partner payments towards legal aid in a criminal case
       total:
         total_income: Total income
         total_outgoings: Total outgoings
@@ -240,6 +279,7 @@ en:
           other_assets: Which assets does your client have?
           other_assets_with_partner: Which assets does either your client or their partner have?
           policy_disregards: Payments from scheme or charities
+          policy_disregards_with_partner: Your client’s and the partner’s payments from schemes or charities
           savings_and_investments: Which savings or investments does your client have?
           savings_and_investments_with_partner: Which savings or investments does either your client or their partner have?
           bank_accounts: Bank accounts
@@ -263,6 +303,7 @@ en:
           own_home: Does your client own the home that they live in?
           own_home_with_partner: Does your client or their partner own the home that they live in?
           property_value: How much is the home your client lives in worth?
+          property_value_with_partner: How much is the home your client and their partner live in worth?
           outstanding_mortgage: How much is left to pay on the mortgage?
           shared_ownership: Does your client own the home with anyone else?
           shared_ownership_with_partner: Does your client or their partner own the home with anyone else?
@@ -334,10 +375,15 @@ en:
         new_limit_reasons: Reason
       employed_income:
         employment: Employment income
-        employment_question:
-          client: Do you need to tell us anything else about your client's employment?
-          partner: Do you need to tell us anything else about the partner's employment?
         employment_details: Details
+        partner:
+          heading: Partner employment income
+          employment_details: Details for partner
+          employment_question: Do you need to tell us anything else about the partner's employment?
+        client:
+          heading: Client employment income
+          employment_details: Details for client
+          employment_question: Do you need to tell us anything else about your client's employment?
       benefits_income:
         applicant:
           heading: Client benefits
@@ -509,7 +555,10 @@ en:
             client_and_partner: My client and their partner
       benefits_breakdown:
         heading: Benefits breakdown
-
+        client:
+          heading: Client benefits breakdown
+        partner:
+          heading: Partner benefits breakdown
     forms:
       applicant_form:
         page_title: Enter your client's details

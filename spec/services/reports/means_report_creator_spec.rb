@@ -17,12 +17,12 @@ RSpec.describe Reports::MeansReportCreator do
       end
     end
 
-    context "with V5 CFE result" do
+    context "with V6 CFE result" do
       let(:legal_aid_application) do
         create(:legal_aid_application,
                :with_proceedings,
                :with_everything,
-               :with_cfe_v5_result,
+               :with_cfe_v6_result,
                :generating_reports,
                ccms_submission:,
                explicit_proceedings: %i[da002 da006])

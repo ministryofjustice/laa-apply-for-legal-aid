@@ -300,7 +300,7 @@ Feature: Checking answers backwards and forwards
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client's income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h3  | Payments your client receives |
       | h3  | Student finance |
       | h2  | Your client's outgoings |

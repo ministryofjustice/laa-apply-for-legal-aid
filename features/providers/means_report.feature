@@ -12,7 +12,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |
@@ -66,29 +66,28 @@ Feature: Means report
 
     And the Income questions and answers should match:
       | question | answer |
-      | Gross employment income | £2,143.97 |
-      | Income tax | -£204.15 |
-      | National insurance | -£161.64 |
-      | Fixed employment deduction | -£45 |
-      | Benefits | £75 |
-      | Financial help from friends or family | £0 |
-      | Maintenance payments | £0 |
-      | Income from property or lodger | £0 |
-      | Student loan or grant | £0 |
-      | Pension | £0 |
+      | Client gross employment income | £2,143.97 |
+      | Client income tax | -£204.15 |
+      | Client national insurance | -£161.64 |
+      | Client fixed employment deduction | -£45 |
+      | Client benefits | £75 |
+      | Client financial help from friends or family | £0 |
+      | Client maintenance payments | £0 |
+      | Client income from property or lodger | £0 |
+      | Client student loan or grant | £0 |
+      | Client pension | £0 |
 
     And I should see "Total income"
-
-    And the Employment notes questions should exist:
+    And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
-      | Details |
+      | Details for client |
 
     And the Outgoings questions and answers should match:
       | question | answer |
-      | Housing payments (any declared housing benefits have been deducted from this total) | £125 |
-      | Childcare payments | £0 |
-      | Maintenance payments to a former partner | £0 |
-      | Payments towards legal aid in a criminal case | £0 |
+      | Client housing payments (any declared housing benefits have been deducted from this total) | £125 |
+      | Client childcare payments | £0 |
+      | Client maintenance payments to a former partner | £0 |
+      | Client payments towards legal aid in a criminal case | £100 |
 
     And I should see "Total outgoings"
 
@@ -187,7 +186,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |
@@ -239,36 +238,35 @@ Feature: Means report
 
     And the Income questions and answers should match:
       | question | answer |
-      | Gross employment income | £2,143.97 |
-      | Income tax | -£204.15 |
-      | National insurance | -£161.64 |
-      | Fixed employment deduction | -£45 |
-      | Benefits | £75 |
-      | Financial help from friends or family | £0 |
-      | Maintenance payments | £0 |
-      | Income from property or lodger | £0 |
-      | Student loan or grant | £0 |
-      | Pension | £0 |
+      | Client gross employment income | £2,143.97 |
+      | Client income tax | -£204.15 |
+      | Client national insurance | -£161.64 |
+      | Client fixed employment deduction | -£45 |
+      | Client benefits | £75 |
+      | Client financial help from friends or family | £0 |
+      | Client maintenance payments | £0 |
+      | Client income from property or lodger | £0 |
+      | Client student loan or grant | £0 |
+      | Client pension | £0 |
 
     And I should see "Total income"
-
-    And the Employment notes questions should exist:
+    And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
-      | Details |
+      | Details for client |
 
     And the Outgoings questions and answers should match:
       | question | answer |
-      | Housing payments | £125 |
-      | Childcare payments | £0 |
-      | Maintenance payments to a former partner | £0 |
-      | Payments towards legal aid in a criminal case | £0 |
+      | Client housing payments | £125 |
+      | Client childcare payments | £0 |
+      | Client maintenance payments to a former partner | £0 |
+      | Client payments towards legal aid in a criminal case | £100 |
 
     And I should see "Total outgoings"
 
     And the Deductions questions should exist:
       | question |
       | Dependants allowance |
-      | Income from benefits excluded from calculation |
+      | Client income from benefits excluded from calculation |
       | Total deductions |
 
     And the Caseworker review questions should exist:

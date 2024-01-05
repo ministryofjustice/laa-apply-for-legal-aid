@@ -1,8 +1,15 @@
+<% if partner
+     individual = "partner"
+     data_source = @legal_aid_application.partner
+   else
+     individual = "client"
+     data_source = @legal_aid_application.applicant
+   end %>
 <h2 class="govuk-heading-m">
-  <%= t(".heading") %>
+  <%= t(".#{individual}.heading") %>
 </h2>
 <%= govuk_summary_list(actions: false) do |summary_list| %>
-  <% @legal_aid_application.applicant.state_benefits.each do |benefit| %>
+  <% data_source.state_benefits.each do |benefit| %>
     <% summary_list.with_row do |row|
          row.with_key { benefit.description || "" }
          row.with_value { "#{gds_number_to_currency(benefit.amount)} #{t("transaction_types.frequencies.#{benefit.frequency}").downcase}" }

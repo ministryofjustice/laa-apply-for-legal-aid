@@ -6,7 +6,7 @@ RSpec.describe Providers::MeansReportsController do
       :legal_aid_application,
       :with_everything,
       :with_proceedings,
-      :with_cfe_v5_result,
+      :with_cfe_v6_result,
       :assessment_submitted,
       explicit_proceedings: %i[da002 da006],
       application_ref: "L-123-456",

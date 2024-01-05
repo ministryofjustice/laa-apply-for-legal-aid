@@ -5,14 +5,14 @@
     <%= check_answer_link(
           name: :total_gross_income_assessed,
           question: t(".total_gross_income"),
-          answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_gross_income_assessed),
+          answer: gds_number_to_currency(@legal_aid_application.cfe_result.combined_total_gross_income_assessed),
           read_only:,
         ) %>
 
     <%= check_answer_link(
           name: :total_disposable_income_assessed,
           question: t(".total_disposable_income"),
-          answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_disposable_income_assessed),
+          answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_disposable_income_assessed(partner: @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest?)),
           read_only:,
         ) %>
 

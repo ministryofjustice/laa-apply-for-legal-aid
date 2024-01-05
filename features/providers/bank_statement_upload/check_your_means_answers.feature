@@ -9,7 +9,7 @@ Feature: Bank statement upload check your answers
       | tag | section |
       | h2  | Your client's income |
       | h3  | Bank statements |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Client benefits |
       | h3  | Payments your client receives |
       | h3  | Student finance |
