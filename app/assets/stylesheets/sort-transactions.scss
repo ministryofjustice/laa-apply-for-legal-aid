@@ -1,22 +1,10 @@
 // stylelint-disable declaration-no-important
-// Task list pattern
 
-.app-task-list {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style-type: none;
-  @include govuk-media-query($from: tablet) {
-    min-width: 550px;
-  }
+.display-table {
+  display: table
 }
 
-.app-task-list__section {
-  display: table;
-  @include govuk-font($size:24, $weight: bold);
-}
-
-.app-task-list__section-number {
+.sort-transactions__section-number {
   display: table-cell;
 
   @include govuk-media-query($from: tablet) {
@@ -25,7 +13,7 @@
   }
 }
 
-.app-task-list__items {
+.sort-transactions__items {
   @include govuk-responsive-margin(9, "bottom");
   padding-left: 0;
   @include govuk-media-query($from: tablet) {
@@ -33,7 +21,7 @@
   }
 }
 
-.app-task-list__item {
+.sort-transactions__item {
   margin-bottom: 0 !important;
   padding-top: govuk-spacing(2);
   padding-bottom: govuk-spacing(2);
@@ -42,7 +30,7 @@
   @include govuk-clearfix;
 }
 
-.app-task-list__item:first-child {
+.sort-transactions__item:first-child {
   border-top: 1px solid $govuk-border-colour;
 }
 

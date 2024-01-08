@@ -1,0 +1,44 @@
+<%= page_template page_title: t(".page_heading", type:), caption: t("generic.client_means_caption"), show_errors_for: @legal_aid_application do %>
+
+  <% errors = @legal_aid_application.errors.messages %>
+
+  <p class="govuk-body"><%= t(".subheading") %></p>
+
+  <p class="govuk-body"><%= t(".you_need_to") %></p>
+
+  <%= list_from_translation_path(".#{list_path}.index") %>
+
+  <ol class="govuk-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
+    <% index = 0 %>
+    <% transaction_types.each do |transaction_type| %>
+      <% url = if type.eql?("income")
+                 providers_legal_aid_application_incoming_transactions_path(transaction_type: transaction_type.name)
+               else
+                 providers_legal_aid_application_outgoing_transactions_path(transaction_type: transaction_type.name)
+               end %>
+      <% index += 1 unless transaction_type.child? %>
+      <%= render(
+            "shared/transaction_type_item",
+            name: transaction_type.name,
+            url:,
+            number: index,
+            display_number: !transaction_type.child?,
+            link_text: t(".select"),
+            bank_transactions: @bank_transactions[transaction_type],
+            error: errors[transaction_type.name.to_sym],
+          ) %>
+    <% end %>
+    <% if transaction_types.count < total_transaction_types.count %>
+      <li class="display-table">
+        <span class="sort-transactions__section-number">
+          <%= image_tag("plus_icon.svg", alt: "") %>
+        </span>
+        <p class="govuk-body">
+          <%= govuk_link_to(t(".add_another_type", type:), add_another_url) %>
+        </p>
+      </li>
+    <% end %>
+  </ol>
+
+  <%= next_action_buttons_with_form(url: next_page_url, show_draft: true) %>
+<% end %>

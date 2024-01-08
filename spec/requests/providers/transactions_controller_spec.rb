@@ -244,7 +244,7 @@ RSpec.describe Providers::TransactionsController do
         patch_request
         expect(response).to redirect_to providers_legal_aid_application_outgoings_summary_index_path
         follow_redirect!
-        expect(unescaped_response_body).to include(I18n.t("providers.outgoings_summary.index.page_heading"))
+        expect(unescaped_response_body).to include("Sort your client's regular payments into categories")
       end
     end
   end

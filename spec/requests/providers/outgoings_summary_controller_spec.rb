@@ -53,7 +53,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
     context "without all transaction types selected" do
       it "displays an Add additional outgoings types section" do
         get_request
-        expect(response.body).to include(I18n.t("providers.outgoings_summary.add_other_outgoings.add_other_outgoings"))
+        expect(response.body).to include("Add another type of regular payment")
       end
     end
 

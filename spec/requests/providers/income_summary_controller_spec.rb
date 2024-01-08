@@ -46,7 +46,7 @@ RSpec.describe Providers::IncomeSummaryController do
     context "when not all transaction types selected" do
       it "displays an Add additional income types section" do
         get_request
-        expect(response.body).to include(I18n.t("providers.income_summary.add_other_income.add_other_income"))
+        expect(response.body).to include("Add another type of income")
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe Providers::IncomeSummaryController do
       end
 
       it "does not display an Add additional income types section" do
-        expect(response.body).not_to include(I18n.t("providers.income_summary.add_other_income.add_other_income"))
+        expect(response.body).not_to include("Add another type of income")
       end
     end
 

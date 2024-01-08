@@ -820,22 +820,15 @@ en:
       show:
         error: Select yes if they have received other benefits
     income_summary:
-      add_other_income:
-        add_other_income: Add another type of income
-      income_type_item:
-        col_amount: Amount
-        col_date: Date
-        col_description: Description
-        remove_link: Remove
       index:
-        page_heading: "Sort your client's income into categories"
-        select: View statements and add transactions
-        subheading: You told us your client receives the types of payments listed below.
-        you_need_to:
-          text: "You need to:"
-          list: |
-            view your client's bank statements
-            add transactions to each income category
+        list: |
+          view your client's bank statements
+          add transactions to each income category
+    outgoings_summary:
+      index:
+        list: |
+          view your client's bank statements
+          add transactions to each category
     invalid_logins:
       show:
         permission_title: You do not have permission to view this page
@@ -1503,21 +1496,6 @@ en:
         you_need_to: You need to sort your client's transactions into categories so we can understand their financial situation and process your application quickly.
         print_guidance_button: Print this guidance
         can_your_client_share: Can your client share their bank statements using online banking?
-    outgoings_summary:
-      add_other_outgoings:
-        add_other_outgoings: Add another type of regular payment
-      index:
-        list: |
-          view your client's bank statements
-          add transactions to each category
-        page_heading: Sort your client's regular payments into categories
-        payment_types: You told us your client makes the types of payments listed below.
-        select:
-          rent_or_mortgage: View statements and add transactions
-          child_care: View statements and add transactions
-          maintenance_out: View statements and add transactions
-          legal_aid: View statements and add transactions
-        you_need_to: "You need to:"
     proceedings_types:
       create:
         search_and_select: Search for and select a proceeding

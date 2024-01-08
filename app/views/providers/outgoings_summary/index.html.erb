@@ -1,38 +1,9 @@
-<%= page_template page_title: t(".page_heading"), caption: t("generic.client_means_caption"), show_errors_for: @legal_aid_application do %>
-
-  <% errors = @legal_aid_application.errors.messages %>
-
-  <p class="govuk-body">
-    <%= t(".payment_types") %>
-  </p>
-
-  <p class="govuk-body">
-    <%= t(".you_need_to") %>
-  </p>
-
-  <p class="govuk-body">
-    <%= list_from_translation_path ".outgoings_summary.index" %>
-  </p>
-
-  <ol class="app-task-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
-    <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
-      <%= render(
-            "outgoing_type_item",
-            name: transaction_type.name,
-            number: index + 1,
-            link_text: t(".select.#{transaction_type.name}"),
-            bank_transactions: @bank_transactions[transaction_type],
-            error: errors[transaction_type.name.to_sym],
-          ) %>
-    <% end %>
-
-    <% if @legal_aid_application.transaction_types.debits.count < TransactionType.debits.count %>
-      <%= render partial: "add_other_outgoings" %>
-    <% end %>
-  </ol>
-
-  <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_outgoings_summary_index_path,
-        show_draft: true,
-      ) %>
-<% end %>
+<%= render(
+      "shared/transactions_summary",
+      transaction_types: @legal_aid_application.transaction_types.debits,
+      total_transaction_types: TransactionType.debits,
+      type: "regular payments",
+      list_path: "outgoings_summary",
+      add_another_url: providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
+      next_page_url: providers_legal_aid_application_outgoings_summary_index_path,
+    ) %>
