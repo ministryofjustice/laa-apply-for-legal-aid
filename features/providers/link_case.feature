@@ -30,7 +30,7 @@ Scenario: I choose to link another case's details when a copy has not been made
 
   When I choose a "Yes, there's a family link" radio button
   And I click "Save and continue"
-  Then I should be on a page with title "Does the client have a National Insurance number?"
+  Then I should be on a page with title "Does your client have a National Insurance number?"
 
 @javascript @vcr
 Scenario: I choose to link another case's details when a copy has been made
@@ -48,7 +48,7 @@ Scenario: I choose to link another case's details when a copy has been made
 
   When I choose a "Yes, there's a family link" radio button
   And I click "Save and continue"
-  Then I should be on a page with title "Does the client have a National Insurance number?"
+  Then I should be on a page with title "Does your client have a National Insurance number?"
 
 @javascript @vcr
 Scenario: I choose not to link another case's details
