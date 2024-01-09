@@ -378,9 +378,9 @@ GEM
     iniparse (1.5.0)
     interception (0.5)
     io-console (0.7.1)
-    irb (1.11.0)
+    irb (1.11.1)
       rdoc
-      reline (>= 0.3.8)
+      reline (>= 0.4.2)
     jmespath (1.6.2)
     jsbundling-rails (1.2.2)
       railties (>= 6.0.0)
