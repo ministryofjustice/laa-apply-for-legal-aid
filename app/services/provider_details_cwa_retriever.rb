@@ -1,4 +1,17 @@
 class ProviderDetailsCWARetriever
+  class Response
+    attr_reader :firm_id,
+                :contact_id,
+                :firm_name
+
+    def initialize(json_response)
+      response = JSON.parse(json_response)
+      @firm_id = response["ccmsFirmId"]
+      @contact_id = response["ccmsContactId"]
+      @firm_name = response["firmName"]
+    end
+  end
+
   def initialize(username)
     @username = username
   end
@@ -8,7 +21,10 @@ class ProviderDetailsCWARetriever
   end
 
   def call
-    request.body
+    body = request.body
+    return body if body.empty?
+
+    Response.new(body)
   end
 
 private

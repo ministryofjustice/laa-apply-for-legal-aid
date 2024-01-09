@@ -46,24 +46,15 @@ private
   end
 
   def firm_id
-    provider_details[:providerFirmId]
+    provider_details.firm_id
   end
 
   def firm_name
-    # Remove the code at the end.
-    # "Pearson & Pearson -0A1234" becomes "Pearson & Pearson"
-    # Remove " Office No. n" at the end if it's there because created by MockProviderDetailsRetriever
-    #
-    name = provider_details[:providerOffices].first[:name]
-    name.sub(/Office No. \d+/, "").sub(/-\S{6}$/, "").strip
+    provider_details.firm_name
   end
 
   def contact_id
-    contact[:id] if contact
-  end
-
-  def contact
-    provider_details[:contacts]&.find { |contact| contact[:name].casecmp(username).zero? }
+    provider_details.contact_id
   end
 
   def username
@@ -71,6 +62,6 @@ private
   end
 
   def provider_details
-    @provider_details ||= ProviderDetailsRetriever.call(provider.username)
+    @provider_details ||= ProviderDetailsCWARetriever.call(provider.username)
   end
 end
