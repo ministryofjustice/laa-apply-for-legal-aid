@@ -478,8 +478,8 @@ en:
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
       cash_payments:
-        income_heading: Payments %{individual_with_determiner} receives in cash
-        outgoings_heading: Payments %{individual_with_determiner} makes in cash
+        income_heading: Payments %{individual_with_determiner} gets in cash
+        outgoings_heading: Payments %{individual_with_determiner} pays in cash
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:
@@ -790,11 +790,14 @@ en:
         passported: Passported
         payments: Regular payments
       income_payments_and_assets_for_bank_statement_upload:
-        capital-heading: Your client's capital
-        credits-section-heading: Payments your client receives
-        debits-section-heading: Payments your client makes
+        capital-heading: "Your client's capital"
+        capital-heading_with_partner: "Your client and their partner's capital"
+        credits-section-heading: Payments %{individual} gets
+        debits-section-heading: Payments %{individual} pays
         income-heading: Your client's income
+        income-heading-partner: Partner's income
         outgoings-heading: Your client's outgoings
+        outgoings-heading-partner: The partner's outgoings
       questions_and_answers:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
