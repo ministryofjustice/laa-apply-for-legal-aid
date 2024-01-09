@@ -56,12 +56,12 @@ module ChancesOfSuccesses
       return unless success_prospect_details_expandable?
 
       field = "success_prospect_details_#{success_prospect}"
-      __send__("#{field}=", success_prospect_details)
+      __send__(:"#{field}=", success_prospect_details)
       attributes[field] = success_prospect_details
     end
 
     def success_prospect_details_expandable?
-      success_prospect_details.present? && __send__("success_prospect_details_#{success_prospect}").nil?
+      success_prospect_details.present? && __send__(:"success_prospect_details_#{success_prospect}").nil?
     end
   end
 end

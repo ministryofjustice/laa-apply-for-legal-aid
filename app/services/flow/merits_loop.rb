@@ -49,7 +49,7 @@ module Flow
     end
 
     def not_started_tasks
-      @not_started_tasks ||= grouped_tasks.map { |task|
+      @not_started_tasks ||= grouped_tasks.filter_map do |task|
         next unless task.state == :not_started
 
         {
@@ -58,7 +58,7 @@ module Flow
           url: I18n.t(task.name, scope: "providers.merits_task_lists.show.urls"),
           state: task.state,
         }
-      }&.compact
+      end
     end
 
     def grouped_tasks

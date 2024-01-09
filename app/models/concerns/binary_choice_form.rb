@@ -12,7 +12,7 @@ class BinaryChoiceForm
     end
 
     def define_input_conditional(input_name, form_params)
-      define_method "#{input_name}?" do
+      define_method :"#{input_name}?" do
         form_params[input_name] == "true"
       end
     end

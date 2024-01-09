@@ -41,7 +41,7 @@ module Providers
       def police_notified_presence
         return if police_notified.blank?
 
-        value = __send__("police_notified_details_#{police_notified}")
+        value = __send__(:"police_notified_details_#{police_notified}")
         return if value.present? || draft?
 
         translation_path = "activemodel.errors.models.opponent.attributes.police_notified_details_#{police_notified}.blank"
@@ -51,7 +51,7 @@ module Providers
       def interpolate_police_notified_details
         return unless [true, false, "true", "false"].include?(police_notified)
 
-        value = __send__("police_notified_details_#{police_notified}")
+        value = __send__(:"police_notified_details_#{police_notified}")
         @police_notified_details = value&.empty? ? nil : value
         attributes["police_notified_details"] = @police_notified_details
       end
@@ -61,7 +61,7 @@ module Providers
         return unless police_notified_details_expandable?
 
         field = "police_notified_details_#{police_notified}"
-        __send__("#{field}=", police_notified_details)
+        __send__(:"#{field}=", police_notified_details)
         attributes[field] = police_notified_details
       end
 
@@ -74,7 +74,7 @@ module Providers
       end
 
       def police_notified_details_expandable?
-        police_notified_details.present? && __send__("police_notified_details_#{police_notified}").nil?
+        police_notified_details.present? && __send__(:"police_notified_details_#{police_notified}").nil?
       end
     end
   end

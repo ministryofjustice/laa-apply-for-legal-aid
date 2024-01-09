@@ -35,12 +35,12 @@ module Providers
         return unless additional_information_expandable?
 
         field = "additional_information_#{offered}"
-        __send__("#{field}=", additional_information)
+        __send__(:"#{field}=", additional_information)
         attributes[field] = additional_information
       end
 
       def additional_information_expandable?
-        additional_information.present? && __send__("additional_information_#{offered}").nil?
+        additional_information.present? && __send__(:"additional_information_#{offered}").nil?
       end
 
       def exclude_from_model

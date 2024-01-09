@@ -1,5 +1,5 @@
 <% check_box_attribute = "check_box_second_home" %>
-<% @form.__send__("#{check_box_attribute}=", model.send(check_box_attribute).present? || model.any_second_home_value_present?) %>
+<% @form.__send__(:"#{check_box_attribute}=", model.send(check_box_attribute).present? || model.any_second_home_value_present?) %>
 
 <%= form.govuk_check_box check_box_attribute,
                          true,

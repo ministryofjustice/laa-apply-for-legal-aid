@@ -102,8 +102,8 @@ module Providers
     def assign_regular_transaction_attributes
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
-        public_send("#{transaction_type.name}_amount=", transaction.amount)
-        public_send("#{transaction_type.name}_frequency=", transaction.frequency)
+        public_send(:"#{transaction_type.name}_amount=", transaction.amount)
+        public_send(:"#{transaction_type.name}_frequency=", transaction.frequency)
       end
     end
 
@@ -162,8 +162,8 @@ module Providers
     def all_regular_transactions_valid
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
-        transaction.amount = public_send("#{transaction_type.name}_amount")
-        transaction.frequency = public_send("#{transaction_type.name}_frequency")
+        transaction.amount = public_send(:"#{transaction_type.name}_amount")
+        transaction.frequency = public_send(:"#{transaction_type.name}_frequency")
 
         next if transaction.valid?
 

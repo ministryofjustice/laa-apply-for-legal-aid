@@ -419,7 +419,7 @@ module Reports
       end
 
       def convert_employment_type_to_string(value)
-        value.humanize if laa.applicant.send("#{value}?")
+        value.humanize if laa.applicant.send(:"#{value}?")
       end
 
       def gateway_evidence_count

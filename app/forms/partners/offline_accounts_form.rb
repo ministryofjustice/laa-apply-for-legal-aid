@@ -52,7 +52,7 @@ module Partners
         check_box_attribute = :"check_box_#{attribute}"
         if send(check_box_attribute).blank?
           attributes[attribute] = nil
-          send("#{attribute}=", nil)
+          send(:"#{attribute}=", nil)
         end
       end
     end

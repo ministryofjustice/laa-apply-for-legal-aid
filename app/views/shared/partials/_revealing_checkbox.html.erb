@@ -1,5 +1,5 @@
 <% field_name = "check_box_#{name}"
-   model.__send__("#{field_name}=", model.send(field_name).present?)
+   model.__send__(:"#{field_name}=", model.send(field_name).present?)
    error_class = nil %>
 
 <%= form.govuk_check_box field_name, true, "", link_errors: true, multiple: false, label: { text: controller_t("check_box_#{name}") } do %>
@@ -13,7 +13,7 @@
     <% end %>
     <%= form.govuk_text_field "#{name}#{number}",
                               label: { text: model.period(number) },
-                              value: gds_number_to_currency(model.__send__("#{name}#{number}"), unit: ""),
+                              value: gds_number_to_currency(model.__send__(:"#{name}#{number}"), unit: ""),
                               prefix_text: defined?(input_prefix) ? input_prefix : nil,
                               form_group: { classes: error_class },
                               width: "one-third" %>

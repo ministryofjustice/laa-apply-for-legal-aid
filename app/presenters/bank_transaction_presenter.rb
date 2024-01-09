@@ -33,7 +33,7 @@ class BankTransactionPresenter
 
   def build_transaction_hash
     values = {}
-    CELLS.map { |k| values[k.to_sym] = send("transaction_#{k}") }
+    CELLS.map { |k| values[k.to_sym] = send(:"transaction_#{k}") }
     values
   end
 
