@@ -1,14 +1,28 @@
 class ProviderDetailsCWARetriever
   class Response
+    OfficeStruct = Struct.new(:id, :code)
+
     attr_reader :firm_id,
                 :contact_id,
-                :firm_name
+                :firm_name,
+                :offices
 
     def initialize(json_response)
       response = JSON.parse(json_response)
       @firm_id = response["ccmsFirmId"]
       @contact_id = response["ccmsContactId"]
       @firm_name = response["firmName"]
+      @offices = firm_office_contracts(response["firmOfficeContracts"])
+    end
+
+  private
+
+    def firm_office_contracts(offices_response)
+      offices = []
+      offices_response.each do |office|
+        offices << OfficeStruct.new(id: office["firmOfficeId"], code: office["firmOfficeCode"])
+      end
+      offices
     end
   end
 

@@ -37,10 +37,9 @@ private
   end
 
   def offices
-    provider_details[:providerOffices].map do |ccms_office|
-      Office.find_or_initialize_by(ccms_id: ccms_office[:id]) do |office|
-        ccms_office[:name] =~ /-(\S{6})$/
-        office.code = Regexp.last_match(1)
+    provider_details.offices.map do |ccms_office|
+      Office.find_or_initialize_by(ccms_id: ccms_office.id) do |office|
+        office.code = ccms_office.code
       end
     end
   end
