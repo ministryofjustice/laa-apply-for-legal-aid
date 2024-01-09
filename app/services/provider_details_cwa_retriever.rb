@@ -3,6 +3,10 @@ class ProviderDetailsCWARetriever
     @username = username
   end
 
+  def self.call(username)
+    new(username).call
+  end
+
   def call
     request.body
   end
