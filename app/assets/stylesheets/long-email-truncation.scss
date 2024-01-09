@@ -14,7 +14,7 @@
 
 // Approx 770px+
 
-@media (width >= 48.0625em) {
+@media (min-width: 48.0625em) {
   #navigation > li {
     max-width: calc(50vw - 101px - 30px - 76px - 30px);
     vertical-align: top;
@@ -24,7 +24,7 @@
 // 1020px+
 // (as per the govuk-width-container style)
 
-@media (width >= 1020px) {
+@media (min-width: 1020px) {
   #navigation > li {
     max-width: 312px;
   }

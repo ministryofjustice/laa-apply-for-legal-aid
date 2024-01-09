@@ -1,6 +1,6 @@
 .admin-page {
   .app-navigation {
-    @media (width >= 40.0625em) {
+    @media (min-width: 40.0625em) {
       margin-top: -1em;
     }
   }

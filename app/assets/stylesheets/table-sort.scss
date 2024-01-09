@@ -30,26 +30,26 @@ th.clear-all {
     box-shadow: none;
   }
 }
-@media (width >= 400px) {
+@media (min-width: 400px) {
   th.select-clear-all {
     white-space: nowrap;
   }
 }
 
-@media (width >= 555px) {
+@media (min-width: 555px) {
   br.hidden {
     display: block;
   }
 }
 
-@media (width >= 700px) {
+@media (min-width: 700px) {
   th.select-clear-all {
     box-sizing: border-box;
     min-width: 98px;
   }
 }
 
-@media (width >= 850px) {
+@media (min-width: 850px) {
   br.hidden {
     display: none;
   }
@@ -113,7 +113,7 @@ td.sortable-cell {
     border-bottom: none;
   }
 }
-@media (width >= 40.0625em) {
+@media (min-width: 40.0625em) {
   .sort.js-sortable,
   th.select-all,
   th.clear-all {
@@ -158,7 +158,7 @@ td.sortable-cell {
     padding-left: 8px;
   }
 }
-@media (width >= 40.0625em) {
+@media (min-width: 40.0625em) {
   .sort.js-sortable,
   th.select-all,
   th.clear-all {
