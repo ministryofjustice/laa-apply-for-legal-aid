@@ -28,7 +28,7 @@
     "babel-plugin-macros": "^3.1.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-jsdom-global": "^4.0.0",
-    "postcss": "^8.4.32",
+    "postcss": "^8.4.33",
     "puppeteer": "^21.6.1",
     "standard": "^17.1.0",
     "stylelint": "^15.11.0",
