@@ -2,6 +2,7 @@ require "rails_helper"
 
 FirmStruct = Struct.new(:id, :name)
 OfficeStruct = Struct.new(:id, :code)
+ProviderDetailsStruct = Struct.new(:firm_id, :contact_id, :firm_name, :offices)
 
 RSpec.describe ProviderDetailsCreator do
   describe ".call" do
@@ -261,21 +262,13 @@ RSpec.describe ProviderDetailsCreator do
   end
 
   def stub_provider_details_retriever(provider:, firm:, offices:, contact_id: 104)
-    allow(ProviderDetailsRetriever)
+    allow(ProviderDetailsCWARetriever)
       .to receive(:call)
       .with(provider.username)
-      .and_return(api_response(provider:, firm:, offices:, contact_id:))
+      .and_return(api_response(firm:, offices:, contact_id:))
   end
 
-  def api_response(provider:, firm:, offices:, contact_id:)
-    {
-      providerFirmId: firm.id,
-      contactUserId: 146,
-      contacts: [{ id: contact_id, name: provider.username }],
-      feeEarners: [],
-      providerOffices: offices.map do |office|
-        { id: office.id, name: "#{firm.name}-#{office.code}" }
-      end,
-    }
+  def api_response(firm:, offices:, contact_id:)
+    ProviderDetailsStruct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
   end
 end
