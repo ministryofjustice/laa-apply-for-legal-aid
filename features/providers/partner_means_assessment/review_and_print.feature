@@ -1,8 +1,8 @@
 @javascript
 Feature: Review and print your application
 
-  Scenario: For a non-passported bank statement upload journey
-    Given I have completed a bank statement upload application with merits
+  Scenario: For a non-passported bank statement upload journey with a partner
+    Given I have completed a non-passported employed with partner application with bank statement uploads
     When I view the review and print your application page
 
     Then the following sections should exist:
@@ -22,7 +22,53 @@ Feature: Review and print your application
       | h2  | Your client's outgoings |
       | h3  | Payments your client makes |
       | h3  | Payments your client makes in cash|
+      | h2  | The partner's income |
+      | h3  | Employment income |
+      | h3  | Payments the partner receives |
+      | h3  | Payments the partner receives in cash |
+      | h3  | Student finance |
+      | h2  | The partner's outgoings |
+      | h3  | Payments the partner makes |
+      | h3  | Payments the partner makes in cash|
+      | h2  | Your client and their partner's capital |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h2  | Bank accounts |
+      | h2  | Which savings or investments does your client and their partner have? |
+      | h2  | Which assets does your client and their partner have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+      | h2  | Case details |
+      | h2  | Latest incident details |
+      | h2  | Opponent details |
+      | h1  | Print your application |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Income, regular payments and assets |
+      | h3  | Income |
+      | h3  | Regular payments |
+
+  Scenario: For a non-passported bank statement upload journey
+    Given I have completed a bank statement upload application with merits
+    When I view the review and print your application page
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | What you're applying for |
+      | h2  | What you're applying for |
+      | h2  | Extend, variation or discharge - Part IV |
+      | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
+      | h2  | Emergency cost limit |
+      | h3  | Bank statements |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | Payments your client receives |
       | h3  | Housing Benefit |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -99,12 +145,6 @@ Feature: Review and print your application
     And I should see "Maintenance payments to a former partner"
     And I should see "Payments towards legal aid in a criminal case"
 
-  Scenario: For a non-passported truelayer bank transactions journey without student finance
-    Given I have completed truelayer application with merits and no student finance
-    When I view the review and print your application page
-    Then I should not see "Student loan"
-    And the answer to the "Does your client get student finance?" question should be "No"
-
   Scenario: For a passported journey
     Given I have completed a passported application with merits
     When I view the review and print your application page
@@ -161,26 +201,5 @@ Feature: Review and print your application
     And I should see 'Print the application and get your client to sign the declaration.'
     And I should not see 'Print the application and get the person acting for'
 
-  Scenario: For a non-means tested journey
-    Given I have completed a non-means tested journey with merits
-    When I view the review and print your application page
-
-    Then the following sections should exist:
-      | tag | section |
-      | h2  | Client details |
-      | h2  | What you're applying for |
-      | h2  | Inherent jurisdiction high court injunction |
-      | h2  | Income, regular payments and assets |
-      | h1  | Print your application |
-
-    And I should see 'Non means tested'
-    And I should see 'Print the application and get the person acting for'
-    And I should see 'For example, a litigation friend, a professional children’s guardian or a parental order report.'
-
-    Then the following sections should not exist:
-      | tag | section |
-      | h3  | Income |
-      | h3  | Regular payments |
-      | h2  | Your client's capital |
 
 

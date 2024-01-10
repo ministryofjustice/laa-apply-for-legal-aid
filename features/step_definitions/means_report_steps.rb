@@ -15,6 +15,8 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     :with_merits_statement_of_case,
     :with_opponent,
     :with_incident,
+    :with_parties_mental_capacity,
+    :with_domestic_abuse_summary,
     :with_chances_of_success,
     :assessment_submitted,
     property_value: 599_999.99,
@@ -26,6 +28,9 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     provider_received_citizen_consent: false,
     attachments: [build(:attachment, :bank_statement)],
   )
+
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
+
   cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
   if optional_partner == "employed with partner"
     create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
