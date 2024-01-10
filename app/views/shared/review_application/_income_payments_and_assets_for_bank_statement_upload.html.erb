@@ -2,9 +2,13 @@
   <div class="govuk-!-padding-bottom-6"></div>
   <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
+  <!-- UPLOADED BANK STATEMENTS -->
+
   <% if @legal_aid_application.client_uploading_bank_statements? %>
     <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true, partner: false) %>
   <% end %>
+
+  <!-- CLIENT EMPLOYMENT INCOME-->
 
   <section class="print-no-break">
     <% if @legal_aid_application.applicant.hmrc_employment_income? %>
@@ -28,6 +32,8 @@
     <% end %>
   </section>
 
+  <!-- BENEFITS -->
+
   <% if @legal_aid_application.client_uploading_bank_statements? %>
     <%= render("shared/check_answers/benefits_income",
                transactions_for: "applicant",
@@ -35,6 +41,8 @@
                state_benefits: @legal_aid_application.applicant.state_benefits,
                read_only: true) %>
   <% end %>
+
+  <!-- INCOME -->
 
   <section class="print-no-break">
     <%= render(
@@ -47,6 +55,8 @@
         ) %>
   </section>
 
+  <!-- CASH INCOME -->
+
   <section class="print-no-break">
     <%= render(
           "shared/check_answers/cash_payments",
@@ -57,12 +67,16 @@
         ) %>
   </section>
 
+  <!--STUDENT FINANCE -->
+
   <%= render(
         "shared/check_answers/student_finance",
         individual_text: "your client",
         individual: @legal_aid_application.applicant,
         read_only: true,
       ) %>
+
+  <!--OUTGOINGS -->
 
   <section class="print-no-break">
     <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
@@ -77,6 +91,8 @@
         ) %>
   </section>
 
+  <!--CASH OUTGOINGS -->
+
   <section class="print-no-break">
     <%= render(
           "shared/check_answers/cash_payments",
@@ -90,94 +106,14 @@
 
   <!-- PARTNER INCOME  -->
 
-  <h2 class="govuk-heading-l"><%= t(".income-heading-partner") %></h2>
-
-  <% if @legal_aid_application.partner_uploading_bank_statements? %>
-    <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, read_only: true, partner: true) %>
+  <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+    <%= render(
+          "shared/review_application/partner_income",
+          read_only: true,
+        ) %>
   <% end %>
 
-  <section class="print-no-break">
-    <% if @legal_aid_application.partner.hmrc_employment_income? %>
-      <% if @legal_aid_application.partner.has_multiple_employments? %>
-        <%= render(
-              "shared/check_answers/full_employment_details",
-              individual: "the partner",
-              read_only: true,
-              partner: true,
-            ) %>
-      <% else %>
-        <%= render "shared/check_answers/employed_income", partner: true, read_only: true %>
-      <% end %>
-    <% elsif @legal_aid_application.partner.employed? %>
-      <%= render(
-            "shared/check_answers/full_employment_details",
-            individual: "the partner",
-            read_only: true,
-            partner: false,
-          ) %>
-    <% end %>
-  </section>
-
-  <% if @legal_aid_application.uploading_bank_statements? %>
-    <%= render("shared/check_answers/benefits_income",
-               transactions_for: "partner",
-               individual: @legal_aid_application.partner,
-               state_benefits: @legal_aid_application.partner.state_benefits,
-               read_only: true) %>
-  <% end %>
-
-  <section class="print-no-break">
-    <%= render(
-          "shared/check_answers/payments_summary",
-          payment_type: t(".credits-section-heading", individual: "the partner"),
-          url: @legal_aid_application.partner_uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
-          transaction_types: TransactionType.credits.without_disregarded_benefits.without_benefits,
-          read_only: true,
-          individual: "Partner",
-        ) %>
-  </section>
-
-  <section class="print-no-break">
-    <%= render(
-          "shared/check_answers/cash_payments",
-          read_only: true,
-          individual: "Partner",
-          individual_with_determiner: "the partner",
-          type: :income,
-        ) %>
-  </section>
-
-  <%= render(
-        "shared/check_answers/student_finance",
-        individual_text: "the partner",
-        individual: @legal_aid_application.partner,
-        read_only: true,
-      ) %>
-
-  <section class="print-no-break">
-    <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "Your client's and their partner" : "Your client" %>
-    <h2 class="govuk-heading-l"><%= t(".outgoings-heading-partner") %></h2>
-
-    <%= render(
-          "shared/check_answers/payments_summary",
-          payment_type: t(".debits-section-heading", individual: "the partner"),
-          url: @legal_aid_application.partner_uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings,
-          transaction_types: TransactionType.debits,
-          read_only: true,
-          individual: "Partner",
-        ) %>
-  </section>
-
-  <section class="print-no-break">
-    <%= render(
-          "shared/check_answers/cash_payments",
-          read_only: true,
-          url: providers_legal_aid_application_means_cash_outgoing_path,
-          individual: "Partner",
-          individual_with_determiner: "the partner",
-          type: :outgoings,
-        ) %>
-  </section>
+<!-- HOUSING BENEFIT -->
 
   <section class="print-no-break">
     <% if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
@@ -190,8 +126,10 @@
     <% end %>
   </section>
 
+<!-- CAPITAL -->
+
   <section class="print-no-break govuk-!-padding-top-8">
-    <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+    <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
     <h2 class="govuk-heading-l"><%= t(".capital-heading#{individual}") %></h2>
 
     <%= render "shared/check_answers/assets", read_only: true, individual: %>
