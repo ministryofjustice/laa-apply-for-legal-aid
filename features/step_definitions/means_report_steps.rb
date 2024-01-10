@@ -6,6 +6,8 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     :with_non_passported_state_machine,
     :with_vehicle,
     :with_transaction_period,
+    :with_rent_or_mortgage_regular_transaction,
+    :with_housing_benefit_regular_transaction,
     :with_other_assets_declaration,
     :with_policy_disregards,
     :with_restrictions,

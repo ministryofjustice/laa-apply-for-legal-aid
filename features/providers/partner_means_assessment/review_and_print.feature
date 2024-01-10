@@ -8,14 +8,16 @@ Feature: Review and print your application
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
+      | h2  | Partner's details |
       | h2  | What you're applying for |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h2  | Emergency cost limit |
-      | h3  | Bank statements |
       | h2  | Your client's income |
+      | h3  | Bank statements |
       | h3  | Employment income |
+      | h2  | Client benefits |
       | h3  | Payments your client receives |
       | h3  | Payments your client receives in cash |
       | h3  | Student finance |
@@ -23,21 +25,22 @@ Feature: Review and print your application
       | h3  | Payments your client makes |
       | h3  | Payments your client makes in cash|
       | h2  | The partner's income |
-      | h3  | Employment income |
+      | h2  | Partner benefits |
       | h3  | Payments the partner receives |
       | h3  | Payments the partner receives in cash |
-      | h3  | Student finance |
       | h2  | The partner's outgoings |
       | h3  | Payments the partner makes |
       | h3  | Payments the partner makes in cash|
+      | h3  | Housing Benefit |
       | h2  | Your client and their partner's capital |
       | h3  | Property |
+      | h3  | Your client's and their partner's property |
       | h3  | Vehicles |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client and their partner have? |
-      | h2  | Which assets does your client and their partner have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | Which savings or investments does either your client or their partner have? |
+      | h2  | Which assets does either your client or their partner have? |
+      | h2  | Restrictions on your client's or their partner's assets |
+      | h2  | Your client’s and the partner’s payments from schemes or charities |
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
