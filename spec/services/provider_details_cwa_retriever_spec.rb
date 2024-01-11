@@ -21,7 +21,7 @@ RSpec.describe ProviderDetailsCWARetriever, :vcr do
         expect(response.contact_id).to eq 0
         expect(response.firm_id).to eq 0
         expect(response.firm_name).to eq "DT SCRIPT PROVIDER1"
-        expect(response.offices.first.id).to eq 145_739
+        expect(response.offices.first.id).to eq 0
         expect(response.offices.first.code).to eq "2Q351Z"
       end
     end

@@ -97,36 +97,35 @@ RSpec.describe "SamlSessionsController" do
           end
         end
 
-        # context "and the provider does not exist on Provider details api" do
-        #   let(:api_response) { raw_404_response }
-        #   let(:status) { 404 }
-        #   let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
-
-        #   it "calls the Provider details creator" do
-        #     expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-        #     post_request
-        #   end
-
-        #   it "updates the invalid login details on the provider record" do
-        #     post_request
-        #     expect(provider.invalid_login_details).to eq "api_details_user_not_found"
-        #   end
-
-        #   it "redirects to confirm offices page" do
-        #     post_request
-        #     expect(response).to redirect_to providers_confirm_office_path
-        #   end
-        # end
-
         context "and the provider does not exist on Provider details api" do
-          let(:status) { 200 }
           let(:api_response) { blank_response }
           let(:provider_details_api_reponse) { api_response }
-          let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
+          let(:provider) { create(:provider, :created_by_devise, :without_ccms_apply_role, username:) }
+
+          it "calls the Provider details creator" do
+            expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
+            post_request
+          end
 
           it "updates the invalid login details on the provider record" do
             post_request
             expect(provider.invalid_login_details).to eq "api_details_user_not_found"
+          end
+
+          it "redirects to confirm offices page" do
+            post_request
+            expect(response).to redirect_to providers_confirm_office_path
+          end
+        end
+
+        context "and the API is down" do
+          let(:api_response) { blank_response }
+          let(:status) { 502 }
+          let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
+
+          it "updates the invalid login details on the provider record" do
+            post_request
+            expect(provider.invalid_login_details).to eq "provider_details_api_error"
           end
         end
       end
