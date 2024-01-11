@@ -22,7 +22,7 @@ class ProviderDetailsCWARetriever
     def firm_office_contracts(offices_response)
       offices = []
       offices_response.each do |office|
-        offices << OfficeStruct.new(id: office["firmOfficeId"], code: office["firmOfficeCode"])
+        offices << OfficeStruct.new(id: office["ccmsFirmOfficeId"], code: office["firmOfficeCode"])
       end
       offices
     end

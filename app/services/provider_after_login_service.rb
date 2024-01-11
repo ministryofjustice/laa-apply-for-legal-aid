@@ -29,9 +29,9 @@ private
   def call_provider_details_api
     ProviderDetailsCreator.call(@provider)
     @provider.clear_invalid_login!
-  rescue ProviderDetailsRetriever::ApiRecordNotFoundError
+  rescue ProviderDetailsCWARetriever::ApiRecordNotFoundError
     @provider.update!(invalid_login_details: "api_details_user_not_found")
-  rescue ProviderDetailsRetriever::ApiError
+  rescue ProviderDetailsCWARetriever::ApiError
     @provider.update!(invalid_login_details: "provider_details_api_error")
   end
 end

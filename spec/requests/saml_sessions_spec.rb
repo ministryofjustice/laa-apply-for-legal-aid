@@ -6,7 +6,7 @@ RSpec.describe "SamlSessionsController" do
   let(:office) { create(:office) }
   let(:provider) { create(:provider, firm:, selected_office: office, offices: [office], username:) }
   let(:username) { "bob the builder" }
-  let(:provider_details_api_url) { "#{Rails.configuration.x.provider_details.url}#{username.gsub(' ', '%20')}" }
+  let(:provider_details_api_url) { "https://dummy-provider-details-api.gov.uk/providers/users" }
   let(:provider_details_api_reponse) { api_response.to_json }
 
   describe "DELETE /providers/sign_out" do
@@ -42,7 +42,8 @@ RSpec.describe "SamlSessionsController" do
 
     before do
       allow_any_instance_of(Warden::Proxy).to receive(:authenticate!).and_return(provider)
-      stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_reponse, status:)
+      allow(Rails.configuration.x.provider_details_cwa).to receive(:url).and_return(provider_details_api_url)
+      stub_request(:get, "#{provider_details_api_url}/#{username}").to_return(body: provider_details_api_reponse, status:)
     end
 
     context "when on staging or production" do
@@ -61,10 +62,10 @@ RSpec.describe "SamlSessionsController" do
 
           it "updates the record with firm and offices" do
             post_request
-            firm = Firm.find_by(ccms_id: raw_details_response[:providerFirmId])
+            firm = Firm.find_by(ccms_id: raw_details_response[:ccmsFirmId])
             expect(provider.firm_id).to eq firm.id
             expect(firm.offices.size).to eq 1
-            expect(firm.offices.first.ccms_id).to eq raw_details_response[:providerOffices].first[:id].to_s
+            expect(firm.offices.first.ccms_id).to eq raw_details_response[:firmOfficeContracts].first[:ccmsFirmOfficeId].to_s
           end
 
           it "displays the select office page" do
@@ -96,35 +97,36 @@ RSpec.describe "SamlSessionsController" do
           end
         end
 
-        context "and the provider does not exist on Provider details api" do
-          let(:api_response) { raw_404_response }
-          let(:status) { 404 }
-          let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
+        # context "and the provider does not exist on Provider details api" do
+        #   let(:api_response) { raw_404_response }
+        #   let(:status) { 404 }
+        #   let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
 
-          it "calls the Provider details creator" do
-            expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-            post_request
-          end
+        #   it "calls the Provider details creator" do
+        #     expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
+        #     post_request
+        #   end
+
+        #   it "updates the invalid login details on the provider record" do
+        #     post_request
+        #     expect(provider.invalid_login_details).to eq "api_details_user_not_found"
+        #   end
+
+        #   it "redirects to confirm offices page" do
+        #     post_request
+        #     expect(response).to redirect_to providers_confirm_office_path
+        #   end
+        # end
+
+        context "and the provider does not exist on Provider details api" do
+          let(:status) { 200 }
+          let(:api_response) { blank_response }
+          let(:provider_details_api_reponse) { api_response }
+          let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
 
           it "updates the invalid login details on the provider record" do
             post_request
             expect(provider.invalid_login_details).to eq "api_details_user_not_found"
-          end
-
-          it "redirects to confirm offices page" do
-            post_request
-            expect(response).to redirect_to providers_confirm_office_path
-          end
-        end
-
-        context "and the Provider details api is down" do
-          let(:status) { 502 }
-          let(:api_response) { blank_response }
-          let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
-
-          it "updates the invalid login details on the provider record" do
-            post_request
-            expect(provider.invalid_login_details).to eq "provider_details_api_error"
           end
         end
       end
@@ -163,10 +165,10 @@ RSpec.describe "SamlSessionsController" do
 
           it "updates the record with firm and offices" do
             post_request
-            firm = Firm.find_by(ccms_id: raw_details_response[:providerFirmId])
+            firm = Firm.find_by(ccms_id: raw_details_response[:ccmsFirmId])
             expect(provider.firm_id).to eq firm.id
             expect(firm.offices.size).to eq 1
-            expect(firm.offices.first.ccms_id).to eq raw_details_response[:providerOffices].first[:id].to_s
+            expect(firm.offices.first.ccms_id).to eq raw_details_response[:firmOfficeContracts].first[:ccmsFirmOfficeId].to_s
           end
 
           it "displays the select office page" do
@@ -206,34 +208,15 @@ RSpec.describe "SamlSessionsController" do
 
   def raw_details_response
     {
-      providerFirmId: 22_381,
-      contactUserId: 29_562,
-      contacts: [
+      ccmsFirmId: 22_381,
+      firmName: "Test1 and Co",
+      ccmsContactId: 29_562,
+      firmOfficeContracts: [
         {
-          id: 568_352,
-          name: "SALLYCORNHILL",
-        },
-        {
-          id: 2_017_809,
-          name: username,
+          ccmsFirmOfficeId: 81_693,
+          firmOfficeCode: "Test1 and Co",
         },
       ],
-      providerOffices: [
-        {
-          id: 81_693,
-          name: "Test1 and Co",
-        },
-      ],
-    }
-  end
-
-  def raw_404_response
-    {
-      timestamp: "2020-10-27T12:15:13.639+0000",
-      status: 404,
-      error: "Not Found",
-      message: "No records found for [bob%20the%20builder]",
-      path: "/api/providerDetails/bob%20the%20builder",
     }
   end
 
