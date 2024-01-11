@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: "<PROVIDER_DETAILS_CWA_URL>/DT_SCRIPT_USER1"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      X-Authorization:
+      - "<PROVIDER_DETAILS_CWA_API_KEY>"
+      User-Agent:
+      - Faraday v2.8.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Thu, 11 Jan 2024 09:33:28 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Access-Control-Request-Headers
+      - Access-Control-Request-Method
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - DENY
+    body:
+      encoding: UTF-8
+      string: '{"firmId":3966184,"ccmsFirmId":0,"firmName":"DT SCRIPT PROVIDER1","ccmsContactId":0,"userLogin":"DT_SCRIPT_USER1","name":"User1_scr
+        User1_scr_lastname","emailAddress":"user1_scr@email.com","startDate":"2023-07-21","supplierNotificationMethod":"EMAIL","supplierEmail":"me@email.uk","attributeCode":"ICX_SUPPLIER_ORG_ID","firmOfficeContracts":[{"firmOfficeId":145739,"ccmsFirmOfficeId":0,"firmOfficeCode":"2Q351Z","contractDetailsList":[]}],"feeEarners":[]}'
+  recorded_at: Thu, 11 Jan 2024 09:33:28 GMT
+recorded_with: VCR 6.2.0

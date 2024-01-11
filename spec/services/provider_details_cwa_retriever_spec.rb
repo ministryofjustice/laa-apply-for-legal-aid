@@ -11,5 +11,19 @@ RSpec.describe ProviderDetailsCWARetriever, :vcr do
         expect { call }.to raise_error(ProviderDetailsCWARetriever::ApiRecordNotFoundError)
       end
     end
+
+    context "with an existing user" do
+      let(:username) { "DT_SCRIPT_USER1" }
+
+      it "returns provider details" do
+        response = call
+        expect(response.class).to eq ProviderDetailsCWARetriever::Response
+        expect(response.contact_id).to eq 0
+        expect(response.firm_id).to eq 0
+        expect(response.firm_name).to eq "DT SCRIPT PROVIDER1"
+        expect(response.offices.first.id).to eq 145_739
+        expect(response.offices.first.code).to eq "2Q351Z"
+      end
+    end
   end
 end

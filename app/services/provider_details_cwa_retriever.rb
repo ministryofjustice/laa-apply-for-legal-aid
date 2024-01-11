@@ -49,7 +49,11 @@ class ProviderDetailsCWARetriever
 private
 
   def url
-    @url ||= "#{Rails.configuration.x.provider_details_cwa.url}/#{@username}"
+    @url ||= "#{Rails.configuration.x.provider_details_cwa.url}/#{encoded_uri}"
+  end
+
+  def encoded_uri
+    URI.encode_www_form_component(@username).gsub("+", "%20")
   end
 
   def headers
