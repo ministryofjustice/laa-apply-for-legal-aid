@@ -17,7 +17,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
 
   before do
     login_provider
-    allow(legal_aid_application).to receive(:applicant_employed?).and_return(false)
+    # allow(legal_aid_application.applicant).to receive(:employed?).and_return(false)
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/substantive_application" do

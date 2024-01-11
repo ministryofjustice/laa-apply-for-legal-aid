@@ -201,10 +201,6 @@ class LegalAidApplication < ApplicationRecord
     cash_trx_total + bank_trx_total
   end
 
-  def applicant_employed?
-    applicant&.employed?
-  end
-
   def employment_journey_ineligible?
     applicant&.armed_forces? || applicant&.self_employed?
   end
