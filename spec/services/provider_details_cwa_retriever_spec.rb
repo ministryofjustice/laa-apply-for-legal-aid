@@ -7,8 +7,8 @@ RSpec.describe ProviderDetailsCWARetriever, :vcr do
     let(:username) { "dummy_user" }
 
     context "with a non existent user" do
-      it "returns an empty string" do
-        expect(call).to eq ""
+      it "returns an error" do
+        expect { call }.to raise_error(ProviderDetailsCWARetriever::ApiRecordNotFoundError)
       end
     end
   end
