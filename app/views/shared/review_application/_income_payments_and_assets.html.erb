@@ -57,7 +57,7 @@
 
 <!--  PARTNER INCOME -->
 
-  <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+  <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && !@legal_aid_application.applicant_receives_benefit? %>
     <%= render(
           "shared/review_application/partner_income",
           read_only: true,

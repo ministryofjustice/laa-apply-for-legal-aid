@@ -24,7 +24,7 @@ Feature: Checking ccms means does NOT auto grant
     And I should be on a page showing '£4,000'
     Then I click 'Save and continue'
     And I should be on a page showing "may need to pay towards legal aid"
-    And I should be on a page showing "We’ve calculated that your client should pay £1,000 from their disposable capital."
+    And I should be on a page showing "We've calculated that your client should pay £1,000 from their disposable capital."
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'

@@ -11,7 +11,7 @@ Feature: Means report when partner is present
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Client employment income |
+      | h3  | Employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |
@@ -23,7 +23,7 @@ Feature: Means report when partner is present
       | h2  | Which savings or investments does either your client or their partner have? |
       | h2  | Which assets does either your client or their partner have? |
       | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | Your client’s and the partner’s payments from schemes or charities |
+      | h2  | Your client's and the partner's payments from schemes or charities |
       | h3  | Bank statements |
 
     Then the following sections should not exist:

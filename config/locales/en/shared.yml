@@ -71,7 +71,7 @@ en:
         f: I may have to repay the legal costs if I keep or gain property or money at the end of the case (the 'statutory charge')
         g: the information I've given is complete and correct
         h: I'll report any changes to my financial situation immediately
-      warning_list_summary: If I’ve given wrong or incomplete information, do not report changes, or I’m found to have committed benefit fraud, I may
+      warning_list_summary: If I've given wrong or incomplete information, do not report changes, or I'm found to have committed benefit fraud, I may
       warning_list: |
         be prosecuted
         need to pay a financial penalty
@@ -102,15 +102,15 @@ en:
         heading: "%{name} could be eligible for legal aid"
         details:
           - Based on their financial situation, your client may not have to pay towards legal aid.
-          - You still need to provide details of the case before we can decide if they’re eligible.
+          - You still need to provide details of the case before we can decide if they're eligible.
       ineligible:
         heading: "%{name} is unlikely to get legal aid"
         detail: "This is because they have too much %{ineligible_reasons}"
       capital_contribution_required:
         heading: "%{name} may need to pay towards legal aid"
         details:
-          - "We’ve calculated that your client should pay %{amount} from their disposable capital."
-          - "You still need to provide details of the case before we can decide if they’re eligible."
+          - "We've calculated that your client should pay %{amount} from their disposable capital."
+          - "You still need to provide details of the case before we can decide if they're eligible."
       manual_check_required:
         heading: We need to check if %{name} can get legal aid
         line1_multi: "We calculated that your client should pay towards legal aid, but the amount may change because:"
@@ -125,15 +125,15 @@ en:
       capital_and_income_contribution_required:
         heading: "%{name} may need to pay towards legal aid"
         line_1: "We've calculated that your client should pay:"
-        line_2: You still need to provide details of the case before we can decide if they’re eligible.
+        line_2: You still need to provide details of the case before we can decide if they're eligible.
         details:
           - "%{income_contribution} per month from their disposable income until the end of the case or there is a change in their financial situation"
           - "a %{capital_contribution} one-off payment from their disposable capital"
       income_contribution_required:
         heading: "%{name} may need to pay towards legal aid"
         details:
-          - "We’ve calculated that your client should pay %{amount} from their disposable income."
-          - "You still need to provide details of the case before we can decide if they’re eligible."
+          - "We've calculated that your client should pay %{amount} from their disposable income."
+          - "You still need to provide details of the case before we can decide if they're eligible."
 
       partially_eligible_capital:
         heading: "%{name} is partially eligible for legal aid"
@@ -279,7 +279,7 @@ en:
           other_assets: Which assets does your client have?
           other_assets_with_partner: Which assets does either your client or their partner have?
           policy_disregards: Payments from scheme or charities
-          policy_disregards_with_partner: Your client’s and the partner’s payments from schemes or charities
+          policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
           savings_and_investments: Which savings or investments does your client have?
           savings_and_investments_with_partner: Which savings or investments does either your client or their partner have?
           bank_accounts: Bank accounts
@@ -377,11 +377,9 @@ en:
         employment: Employment income
         employment_details: Details
         partner:
-          heading: Employment income
           employment_details: Details for partner
           employment_question: Do you need to tell us anything else about the partner's employment?
         client:
-          heading: Employment income
           employment_details: Details for client
           employment_question: Do you need to tell us anything else about your client's employment?
       benefits_income:
@@ -619,7 +617,7 @@ en:
             received_benefit_confirmations:
               universal_credit: Universal Credit
               guarantee_credit_element_of_pension_credit: Guarantee Credit element of Pension Credit
-              income_based_job_seekers_allowance: Income-based Jobseeker’s Allowance (JSA)
+              income_based_job_seekers_allowance: Income-based Jobseeker's Allowance (JSA)
               income_related_employment_and_support_allowance: Income-related Employment and Support Allowance (ESA)
               income_support: Income Support
       revealing_checkbox:

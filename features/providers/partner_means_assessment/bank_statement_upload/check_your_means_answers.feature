@@ -9,7 +9,7 @@ Feature: Bank statement upload check your answers
       | tag | section |
       | h2  | The partner's income |
       | h3  | Bank statements |
-      | h3  | Partner employment income |
+      | h3  | Employment income |
       | h2  | Partner benefits |
       | h3  | Payments the partner receives |
       | h3  | Student finance |
