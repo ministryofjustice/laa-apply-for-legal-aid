@@ -495,7 +495,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    pry-rescue (1.5.2)
+    pry-rescue (1.6.0)
       interception (>= 0.5)
       pry (>= 0.12.0)
     pry-stack_explorer (0.6.1)
