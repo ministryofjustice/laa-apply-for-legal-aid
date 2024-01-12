@@ -9,7 +9,7 @@ Feature: Bank statement upload check your answers
       | tag | section |
       | h2  | Your client's income |
       | h3  | Bank statements |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Client benefits |
       | h3  | Payments your client receives |
       | h3  | Student finance |
@@ -145,7 +145,7 @@ Feature: Bank statement upload check your answers
     Given csrf is enabled
     And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And I should not see 'Employment income'
+    And I should not see 'Client employment income'
     And the following sections within 'applicant' should exist:
       | tag | section |
       | h3  | Bank statements |

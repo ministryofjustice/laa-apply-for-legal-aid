@@ -12,7 +12,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |
@@ -186,7 +186,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |
@@ -407,7 +407,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |

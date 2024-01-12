@@ -377,9 +377,11 @@ en:
         employment: Employment income
         employment_details: Details
         partner:
+          heading: Partner employment income
           employment_details: Details for partner
           employment_question: Do you need to tell us anything else about the partner's employment?
         client:
+          heading: Client employment income
           employment_details: Details for client
           employment_question: Do you need to tell us anything else about your client's employment?
       benefits_income:

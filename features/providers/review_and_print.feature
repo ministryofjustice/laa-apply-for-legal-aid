@@ -15,7 +15,7 @@ Feature: Review and print your application
       | h2  | Emergency cost limit |
       | h3  | Bank statements |
       | h2  | Your client's income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h3  | Payments your client receives |
       | h3  | Payments your client receives in cash |
       | h3  | Student finance |
@@ -73,7 +73,7 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h3  | Payments your client receives |
       | h3  | Payments your client receives in cash |
       | h3  | Student finance |
@@ -135,7 +135,7 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Employment income |
+      | h3  | Client employment income |
       | h3  | Payments your client receives |
       | h3  | Payments your client receives in cash |
       | h3  | Student finance |
