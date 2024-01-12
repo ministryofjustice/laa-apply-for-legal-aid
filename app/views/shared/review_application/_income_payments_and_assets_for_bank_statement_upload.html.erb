@@ -15,7 +15,7 @@
       <% if @legal_aid_application.applicant.has_multiple_employments? %>
         <%= render(
               "shared/check_answers/full_employment_details",
-              individual: "Your client",
+              individual: t("generic.client"),
               read_only: true,
               partner: false,
             ) %>
@@ -47,7 +47,7 @@
   <section class="print-no-break">
     <%= render(
           "shared/check_answers/payments_summary",
-          payment_type: t(".credits-section-heading", individual: "your client"),
+          payment_type: t(".credits-section-heading", individual: t("generic.client")),
           url: @legal_aid_application.uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
           transaction_types: TransactionType.credits.without_disregarded_benefits.without_benefits,
           read_only: true,
@@ -62,7 +62,7 @@
           "shared/check_answers/cash_payments",
           read_only: true,
           individual: "Applicant",
-          individual_with_determiner: "your client",
+          individual_with_determiner: t("generic.client"),
           type: :income,
         ) %>
   </section>
@@ -71,7 +71,7 @@
 
   <%= render(
         "shared/check_answers/student_finance",
-        individual_text: "your client",
+        individual_text: t("generic.client"),
         individual: @legal_aid_application.applicant,
         read_only: true,
       ) %>
@@ -83,7 +83,7 @@
 
     <%= render(
           "shared/check_answers/payments_summary",
-          payment_type: t(".debits-section-heading", individual: "your client"),
+          payment_type: t(".debits-section-heading", individual: t("generic.client")),
           url: @legal_aid_application.client_uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings,
           transaction_types: TransactionType.debits,
           read_only: true,
@@ -99,7 +99,7 @@
           read_only: true,
           url: providers_legal_aid_application_means_cash_outgoing_path,
           individual: "Applicant",
-          individual_with_determiner: "your client",
+          individual_with_determiner: t("generic.client"),
           type: :outgoings,
         ) %>
   </section>
@@ -117,7 +117,7 @@
 
   <section class="print-no-break">
     <% if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
-      <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "your client or their partner" : "your client" %>
+      <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? t("generic.client_or_partner") : t("generic.client") %>
       <%= render(
             "shared/check_answers/housing_benefit",
             read_only: true,

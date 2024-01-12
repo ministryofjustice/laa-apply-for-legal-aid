@@ -1,8 +1,4 @@
 <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
-<%
-  individual = "Partner"
-  individual_with_determiner = 'the partner'
-%>
 
 <!-- UPLOADED BANK STATEMENTS -->
 
@@ -17,7 +13,7 @@
     <% if @legal_aid_application.partner.has_multiple_employments? %>
       <%= render(
             "shared/check_answers/full_employment_details",
-            individual: "the partner",
+            individual: t("generic.partner"),
             read_only: true,
             partner: true,
           ) %>
@@ -27,7 +23,7 @@
   <% elsif @legal_aid_application.partner.employed? %>
     <%= render(
           "shared/check_answers/full_employment_details",
-          individual: "the partner",
+          individual: t("generic.partner"),
           read_only: true,
           partner: false,
         ) %>
@@ -53,7 +49,7 @@
         url: @legal_aid_application.partner_uploading_bank_statements? ? :regular_incomes : :identify_types_of_incomes,
         transaction_types: TransactionType.credits.without_disregarded_benefits.without_benefits,
         read_only: true,
-        individual:,
+        individual: "Partner",
       ) %>
 </section>
 
@@ -63,8 +59,8 @@
   <%= render(
         "shared/check_answers/cash_payments",
         read_only: true,
-        individual:,
-        individual_with_determiner:,
+        individual: "Partner",
+        individual_with_determiner: t("generic.partner"),
         type: :income,
       ) %>
 </section>
@@ -73,7 +69,7 @@
 
 <%= render(
       "shared/check_answers/student_finance",
-      individual_text: "the partner",
+      individual_text: t("generic.partner"),
       individual: @legal_aid_application.partner,
       read_only: true,
     ) %>
@@ -89,7 +85,7 @@
         url: @legal_aid_application.partner_uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings,
         transaction_types: TransactionType.debits,
         read_only: true,
-        individual:,
+        individual: "Partner",
         ) %>
 </section>
 
@@ -100,8 +96,8 @@
         "shared/check_answers/cash_payments",
         read_only: true,
         url: providers_legal_aid_application_means_cash_outgoing_path,
-        individual:,
-        individual_with_determiner:,
+        individual: "Partner",
+        individual_with_determiner: t("generic.partner"),
         type: :outgoings,
         ) %>
 </section>
