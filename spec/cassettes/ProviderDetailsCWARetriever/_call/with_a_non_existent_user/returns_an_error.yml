@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: "<PROVIDER_DETAILS_CWA_URL>/dummy_user"
+    uri: https://laa-provider-details-api-dev.apps.live.cloud-platform.service.justice.gov.uk/provider-firms/provider-users/dummy_user
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Thu, 11 Jan 2024 09:18:36 GMT
+      - Mon, 15 Jan 2024 11:17:28 GMT
       Content-Length:
       - '0'
       Connection:
@@ -47,5 +47,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Thu, 11 Jan 2024 09:18:36 GMT
+  recorded_at: Mon, 15 Jan 2024 11:17:28 GMT
 recorded_with: VCR 6.2.0

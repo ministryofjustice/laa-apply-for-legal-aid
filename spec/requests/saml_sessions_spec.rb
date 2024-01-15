@@ -6,7 +6,7 @@ RSpec.describe "SamlSessionsController" do
   let(:office) { create(:office) }
   let(:provider) { create(:provider, firm:, selected_office: office, offices: [office], username:) }
   let(:username) { "bob the builder" }
-  let(:provider_details_api_url) { "https://dummy-provider-details-api.gov.uk/providers/users" }
+  let(:provider_details_api_url) { "https://dummy-provider-details-api.gov.uk/provider-firms/provider-users" }
   let(:provider_details_api_reponse) { api_response.to_json }
 
   describe "DELETE /providers/sign_out" do

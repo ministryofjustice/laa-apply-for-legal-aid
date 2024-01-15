@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: "<PROVIDER_DETAILS_CWA_URL>/DT_SCRIPT_USER1"
+    uri: https://laa-provider-details-api-dev.apps.live.cloud-platform.service.justice.gov.uk/provider-firms/provider-users/DT_SCRIPT_USER1
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Thu, 11 Jan 2024 09:33:28 GMT
+      - Mon, 15 Jan 2024 11:17:29 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -50,5 +50,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"firmId":3966184,"ccmsFirmId":0,"firmName":"DT SCRIPT PROVIDER1","ccmsContactId":0,"userLogin":"DT_SCRIPT_USER1","name":"User1_scr
         User1_scr_lastname","emailAddress":"user1_scr@email.com","startDate":"2023-07-21","supplierNotificationMethod":"EMAIL","supplierEmail":"me@email.uk","attributeCode":"ICX_SUPPLIER_ORG_ID","firmOfficeContracts":[{"firmOfficeId":145739,"ccmsFirmOfficeId":0,"firmOfficeCode":"2Q351Z","contractDetailsList":[]}],"feeEarners":[]}'
-  recorded_at: Thu, 11 Jan 2024 09:33:28 GMT
+  recorded_at: Mon, 15 Jan 2024 11:17:29 GMT
 recorded_with: VCR 6.2.0

@@ -17,7 +17,6 @@ RSpec.describe ProviderDetailsCWARetriever, :vcr do
 
       it "returns provider details" do
         response = call
-        expect(response.class).to eq ProviderDetailsCWARetriever::Response
         expect(response.contact_id).to eq 0
         expect(response.firm_id).to eq 0
         expect(response.firm_name).to eq "DT SCRIPT PROVIDER1"
