@@ -6,6 +6,8 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     :with_non_passported_state_machine,
     :with_vehicle,
     :with_transaction_period,
+    :with_rent_or_mortgage_regular_transaction,
+    :with_housing_benefit_regular_transaction,
     :with_other_assets_declaration,
     :with_policy_disregards,
     :with_restrictions,
@@ -15,6 +17,8 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     :with_merits_statement_of_case,
     :with_opponent,
     :with_incident,
+    :with_parties_mental_capacity,
+    :with_domestic_abuse_summary,
     :with_chances_of_success,
     :assessment_submitted,
     property_value: 599_999.99,
@@ -26,6 +30,9 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     provider_received_citizen_consent: false,
     attachments: [build(:attachment, :bank_statement)],
   )
+
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
+
   cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
   if optional_partner == "employed with partner"
     create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
@@ -38,7 +45,7 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed a non-passported application with truelayer") do
+Given(/^I have completed a (non-passported|non-passported with partner) application with truelayer$/) do |optional_partner|
   bank_provider = create(:bank_provider)
   create(
     :bank_account,
@@ -75,6 +82,8 @@ Given("I have completed a non-passported application with truelayer") do
     :with_merits_statement_of_case,
     :with_incident,
     :with_opponent,
+    :with_parties_mental_capacity,
+    :with_domestic_abuse_summary,
     :with_chances_of_success,
     :assessment_submitted,
     property_value: 599_999.99,
@@ -84,7 +93,20 @@ Given("I have completed a non-passported application with truelayer") do
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
   )
+
   @legal_aid_application.applicant.update!(bank_providers: [bank_provider])
+
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
+
+  cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
+  if optional_partner == "non-passported with partner"
+    create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
+    create(:partner, :with_extra_employment_information, legal_aid_application: @legal_aid_application)
+    @legal_aid_application.applicant.update!(has_partner: true, partner_has_contrary_interest: false)
+  else
+    create(:cfe_v6_result, submission: cfe_submission, legal_aid_application: @legal_aid_application)
+  end
+
   login_as @legal_aid_application.provider
 end
 

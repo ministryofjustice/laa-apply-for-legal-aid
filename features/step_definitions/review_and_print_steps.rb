@@ -107,7 +107,7 @@ Given("I have completed truelayer application with merits and no student finance
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed a passported application with merits") do
+Given(/^I have completed a passported application with merits$/) do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -137,6 +137,45 @@ Given("I have completed a passported application with merits") do
   )
 
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
+
+  login_as @legal_aid_application.provider
+end
+
+Given(/^I have completed a passported application with a partner with merits$/) do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_applicant_and_partner,
+    :with_passported_state_machine,
+    :with_restrictions,
+    :with_vehicle,
+    :with_transaction_period,
+    :with_other_assets_declaration,
+    :with_policy_disregards,
+    :with_fixed_offline_accounts,
+    :with_own_home_mortgaged,
+    :with_cfe_v5_result,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_parties_mental_capacity,
+    :with_domestic_abuse_summary,
+    :with_incident,
+    :with_chances_of_success,
+    provider_received_citizen_consent: true,
+    property_value: 599_999.99,
+    outstanding_mortgage_amount: 399_999.99,
+    shared_ownership: "partner_or_ex_partner",
+    percentage_home: 33.33,
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+  )
+
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
+
+  cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
+  create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
+  create(:partner, legal_aid_application: @legal_aid_application)
+  @legal_aid_application.applicant.update!(has_partner: true, partner_has_contrary_interest: false)
 
   login_as @legal_aid_application.provider
 end

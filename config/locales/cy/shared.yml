@@ -59,7 +59,7 @@ cy:
       capital_contribution_required:
         heading: dia lagel sdrawot yap ot deen yam %{name}
         details:
-        - We’ve calculated that your client should pay %{amount} from their disposable
+        - We've calculated that your client should pay %{amount} from their disposable
           capital.
         - You still need to provide details of the case before we can decide if they’re
           eligible.
@@ -85,7 +85,7 @@ cy:
       income_contribution_required:
         heading: dia lagel sdrawot yap ot deen yam %{name}
         details:
-        - We’ve calculated that your client should pay %{amount} from their disposable
+        - We've calculated that your client should pay %{amount} from their disposable
           income.
         - You still need to provide details of the case before we can decide if they’re
           eligible.
