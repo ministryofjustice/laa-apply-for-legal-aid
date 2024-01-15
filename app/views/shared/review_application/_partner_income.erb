@@ -11,22 +11,12 @@
 <section class="print-no-break">
   <% if @legal_aid_application.partner.hmrc_employment_income? %>
     <% if @legal_aid_application.partner.has_multiple_employments? %>
-      <%= render(
-            "shared/check_answers/full_employment_details",
-            individual: t("generic.partner"),
-            read_only: true,
-            partner: true,
-          ) %>
+      <%= render("shared/check_answers/full_employment_details", read_only: true, partner: true,) %>
     <% else %>
-      <%= render "shared/check_answers/employed_income", partner: true, read_only: true %>
+      <%= render "shared/check_answers/employed_income", read_only: true, partner: true %>
     <% end %>
   <% elsif @legal_aid_application.partner.employed? %>
-    <%= render(
-          "shared/check_answers/full_employment_details",
-          individual: t("generic.partner"),
-          read_only: true,
-          partner: false,
-        ) %>
+    <%= render("shared/check_answers/full_employment_details", read_only: true, partner: false,) %>
   <% end %>
 </section>
 

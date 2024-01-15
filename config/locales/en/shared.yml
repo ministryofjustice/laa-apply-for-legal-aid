@@ -466,8 +466,8 @@ en:
         involved-children-heading: Children involved in this application
         child: Child
       full_employment_details:
-        employment: Employment income
-        full_employment_details: "%{individual}'s employment details"
+        employment: "%{individual} employment income"
+        details: "%{individual_with_determiner}'s employment details"
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:
