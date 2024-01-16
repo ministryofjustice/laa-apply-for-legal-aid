@@ -386,4 +386,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: maintenanceMode
+  - name: SLACK_ALERT_WEBHOOK
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: slackAlertWebhook
 {{- end }}
