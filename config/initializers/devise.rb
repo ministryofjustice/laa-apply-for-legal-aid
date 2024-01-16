@@ -9,8 +9,11 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
-  # by default. You can change it below and use your own secret key.
-  # config.secret_key = '0f8bffbdad1a8d4a8add95fea3197e1e6d9e7566dcdc60af17892e9a258430a8ca29cd82071fd5bfb9ce67a5685de4e608f052ff8c782217b8641024d0409d52'
+  # by default.
+  # This is set explicitly to remove a deprecation warning during the Rails 7.1
+  # to 7.2 transition, if Devise is set above 4.9.3, try removing it to see if
+  # the deprecation warning has been removed
+  config.secret_key = Rails.application.secret_key_base
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
