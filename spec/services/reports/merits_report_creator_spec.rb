@@ -4,7 +4,7 @@ RSpec.describe Reports::MeritsReportCreator do
   subject(:call) do
     # don't match on path - webpacker keeps changing the second part of the path
     VCR.use_cassette("stylesheets2", match_requests_on: %i[method host headers]) do
-      described_class.call(legal_aid_application)
+      instance.call
     end
   end
 
@@ -20,6 +20,7 @@ RSpec.describe Reports::MeritsReportCreator do
   let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
   let(:ccms_submission) { create(:ccms_submission, :case_ref_obtained) }
   let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
+  let(:instance) { described_class.new(legal_aid_application) }
 
   before do
     create(:chances_of_success, :with_optional_text, proceeding: da001)
@@ -80,7 +81,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
       before do
         create(:chances_of_success, :with_optional_text, proceeding: da001)
-        allow_any_instance_of(CCMS::Submission).to receive(:process!).with(any_args).and_return(true)
+        allow(ccms_submission).to receive(:process!).with(any_args).and_return(true)
       end
 
       it "processes the existing ccms submission" do
@@ -108,7 +109,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
         it "creates a ccms submission" do
           expect(legal_aid_application.reload).to receive(:create_ccms_submission)
-          expect_any_instance_of(described_class).to receive(:process_ccms_submission)
+          expect(instance).to receive(:process_ccms_submission)
           call
         end
       end

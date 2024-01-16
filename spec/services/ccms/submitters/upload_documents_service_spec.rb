@@ -31,6 +31,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   let(:merits_report_attachment) { legal_aid_application.merits_report }
   let(:bank_transaction_report_attachment) { legal_aid_application.bank_transaction_report }
   let(:expected_response) { ccms_data_from_file "case_add_status_response.xml" }
+  let(:parser) { instance_double(CCMS::Parsers::DocumentUploadResponseParser) }
 
   let(:submission) do
     create(:submission,
@@ -127,7 +128,8 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
 
     context "and the operation fails due to an error response from ccms" do
       before do
-        allow_any_instance_of(CCMS::Parsers::DocumentUploadResponseParser).to receive(:success?).and_return(false)
+        allow(CCMS::Parsers::DocumentUploadResponseParser).to receive(:new).with(any_args).and_return(parser)
+        allow(parser).to receive(:success?).and_return(false)
         allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
       end
 
