@@ -6,7 +6,7 @@
                                               legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
                                               hint: { text: t(".hint") }) do %>
           <%= render partial: "shared/error" if @error %>
-          <% TrueLayerBank.available_banks.each do |bank| %>
+          <% @ordered_banks.each do |bank| %>
             <%= form.govuk_radio_button :provider_id, bank[:provider_id], label: -> do %>
                 <div class="bank-logo">
                   <%= image_tag(bank[:logo_url], alt: "") if bank[:logo_url] %>
