@@ -209,6 +209,10 @@ module CFE
         disposable_income_summary.key?(:partner_allowance) ? disposable_income_summary[:partner_allowance] : 0.0
       end
 
+      def disregarded_state_benefits(partner: false)
+        deductions(partner:)[:disregarded_state_benefits]
+      end
+
       def total_deductions
         dependants_allowance + disregarded_state_benefits + partner_allowance
       end
@@ -216,6 +220,12 @@ module CFE
       def total_deductions_including_fixed_employment_allowance
         employment_deduction = partner_jobs? ? employment_income_fixed_employment_deduction * 2 : employment_income_fixed_employment_deduction
         total_deductions - employment_deduction
+      end
+
+      def deductions(partner: false)
+        # stub out zero values if not found until CFE is updated
+        values = disposable_income_breakdown(partner:)[:deductions]
+        values || { dependants_allowance: 0.0, disregarded_state_benefits: 0.0 }
       end
 
       ################################################################
