@@ -196,6 +196,20 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
           request
           expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
         end
+
+        context "and there is a partner" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_applicant_and_partner,
+                   :with_non_passported_state_machine,
+                   no_debit_transaction_types_selected: true)
+          end
+
+          it "redirects to the about partner financial means page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_partners_about_financial_means_path(legal_aid_application))
+          end
+        end
       end
 
       context "with bank statement upload flow" do
