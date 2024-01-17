@@ -111,6 +111,8 @@ module Flow
               :cash_outgoings
             elsif application.income_types? && !application.uploading_bank_statements?
               :income_summary
+            elsif application.applicant.has_partner_with_no_contrary_interest?
+              :partner_about_financial_means
             else
               :has_dependants
             end
