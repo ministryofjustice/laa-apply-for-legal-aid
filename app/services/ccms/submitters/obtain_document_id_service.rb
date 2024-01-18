@@ -53,8 +53,8 @@ module CCMS
         raise
       end
 
-      def ccms_document_id(dir)
-        Parsers::DocumentIdResponseParser.new(dir.transaction_request_id, dir.call).document_id
+      def ccms_document_id(transaction_request_id, response)
+        Parsers::DocumentIdResponseParser.new(transaction_request_id, response).document_id
       end
 
       def document_id_requestor(document_type)
@@ -62,9 +62,10 @@ module CCMS
       end
 
       def update_document_and_return_response(document, document_id_requestor)
-        document.ccms_document_id = ccms_document_id(document_id_requestor)
+        response = document_id_requestor.call
+        document.ccms_document_id = ccms_document_id(document_id_requestor.transaction_request_id, response)
         document.status = :id_obtained
-        document_id_requestor.call
+        response
       end
 
       def failed_requesting_ids
