@@ -10,7 +10,7 @@
   <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
   <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
-  <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
+  <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
 
     <% if read_only %>
