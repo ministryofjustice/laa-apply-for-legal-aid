@@ -64,7 +64,7 @@ module CFECivil
     def service_set
       if object.passported?
         PASSPORTED_SERVICES
-      elsif object.non_passported? && object.uploading_bank_statements?
+      elsif object.non_passported? && object.client_uploading_bank_statements?
         NON_PASSPORTED_WITH_REGULAR_TRANSACTIONS_SERVICES
       elsif object.non_passported?
         NON_PASSPORTED_WITH_BANK_TRANSACTIONS_SERVICES
