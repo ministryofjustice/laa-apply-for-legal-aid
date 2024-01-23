@@ -23,7 +23,6 @@ GEM
     aasm-diagram (0.1.3)
       aasm (~> 5.0, >= 4.12)
       ruby-graphviz (~> 1.2)
-    abbrev (0.1.2)
     actioncable (7.1.3)
       actionpack (= 7.1.3)
       activesupport (= 7.1.3)
@@ -349,8 +348,7 @@ GEM
       rexml (~> 3.0)
     hashdiff (1.1.0)
     hashie (5.0.0)
-    highline (3.0.0)
-      abbrev
+    highline (3.0.1)
     hirb (0.7.3)
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
