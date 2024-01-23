@@ -13,6 +13,7 @@
       ) do %>
 
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".heading") }  do %>
+      <p class="govuk-body"><%= t(".helper_text") %></p>
       <%= form.govuk_text_field :postcode, label: { text: t(".label"), tag: "h2", size: "m" }, width: 10 %>
     <% end %>
 
