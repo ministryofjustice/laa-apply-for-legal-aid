@@ -15,6 +15,9 @@ updates:
     axe-gems:
       patterns:
         - "axe-core-*"
+    bundling-gems:
+      patterns:
+        - "*bundling-rails"
   open-pull-requests-limit: 10
   ignore:
   - dependency-name: prometheus_exporter
