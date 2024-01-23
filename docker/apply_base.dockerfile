@@ -1,4 +1,4 @@
-FROM ruby:3.3.0-alpine3.18
+FROM ruby:3.3.0-alpine3.19
 MAINTAINER apply for legal aid team
 
 # fail early and print all commands
