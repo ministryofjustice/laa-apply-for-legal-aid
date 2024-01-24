@@ -15,7 +15,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:upload_document, xml: request_xml)
+        make_faraday_request
       end
 
     private

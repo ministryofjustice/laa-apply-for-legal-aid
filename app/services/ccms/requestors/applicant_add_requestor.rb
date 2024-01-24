@@ -14,7 +14,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:create_client, xml: request_xml)
+        make_faraday_request
       end
 
     private

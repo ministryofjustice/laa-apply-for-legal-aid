@@ -46,20 +46,47 @@ module CCMS
 
     private
 
-      def soap_client
-        @soap_client ||= Savon.client(
-          headers: { "x-api-key" => config.aws_gateway_api_key },
-          env_namespace: :soap,
-          wsdl: wsdl_location,
-          namespaces:,
-          pretty_print_xml: true,
-          convert_request_keys_to: :none,
-          namespace_identifier: "ns2",
-          log: false,
-          log_level: :debug,
-          open_timeout: 180,
-          read_timeout: 180,
-        )
+      def make_faraday_request
+        conn.post do |request|
+          request.url url
+          request.body = request_xml
+        end
+      end
+
+      # def soap_client
+      #   @soap_client ||= Savon.client(
+      #     headers: { "x-api-key" => config.aws_gateway_api_key },
+      #     env_namespace: :soap,
+      #     wsdl: wsdl_location,
+      #     namespaces:,
+      #     pretty_print_xml: true,
+      #     convert_request_keys_to: :none,
+      #     namespace_identifier: "ns2",
+      #     log: false,
+      #     log_level: :debug,
+      #     open_timeout: 180,
+      #     read_timeout: 180,
+      #   )
+      # end
+
+      def conn
+        @conn ||= Faraday.new(url:, headers:)
+      end
+
+      def url
+        @url ||= wsdl_as_xml.xpath("//wsdl:definitions//wsdl:service//wsdl:port//soap:address").attribute("location").value
+      end
+
+      def wsdl_as_xml
+        @wsdl_as_xml ||= File.open(wsdl_location) { |f| Nokogiri::XML(f) }
+      end
+
+      def headers
+        @headers ||= {
+          "x-api-key": config.aws_gateway_api_key,
+          SOAPAction: "#POST",
+          "Content-Type": "text/xml",
+        }
       end
 
       def soap_envelope(namespaces)

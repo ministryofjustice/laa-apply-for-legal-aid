@@ -12,7 +12,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:get_client_txn_status, xml: request_xml)
+        make_faraday_request
       end
 
     private

@@ -9,7 +9,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:process, xml: request_xml)
+        make_faraday_request
       end
 
       def request_xml
