@@ -1,6 +1,10 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
+<% showing_bank_accounts = @legal_aid_application.partner_uploading_bank_statements? ||
+     (@legal_aid_application.applicant.bank_accounts.empty? && read_only) ||
+     @legal_aid_application&.savings_amount&.offline_savings_accounts.present? ||
+     @legal_aid_application&.savings_amount&.offline_current_accounts.present? %>
 
 <section class="print-no-break">
   <%= render "shared/check_answers/property", read_only:, individual: %>
@@ -9,7 +13,9 @@
 <section class="print-no-break">
   <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
+<% if showing_bank_accounts %>
   <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
+<% end %>
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
 
