@@ -51,7 +51,7 @@ If you want to record a request and response, either to use in a feature test or
 3. run the feature (with debug to view request being made of billy's proxy)
 
   ```shell
-  DEBUG_BILLY=true cuke features/providers/applicant_details.feature:3
+  DEBUG_BILLY=true cucumber features/providers/applicant_details.feature:3
   ```
 
 4. The requests should appear in the configured folder
@@ -76,5 +76,5 @@ To rerecord a request cache simply delete the file and rerun the feature.
 You can display all calls that puffing-billy proxied using an env var as below.
 
 ```shell
-DEBUG_BILLY=true cuke features/providers/applicant_details.feature:3
+DEBUG_BILLY=true cucumber features/providers/applicant_details.feature:3
 ```
