@@ -35,6 +35,7 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
 @javascript
 Scenario: Completing the means journey for an employed applicant with no HMRC data
   Given I start the means review journey with no employment income from HMRC
+  And the feature flag for collect_hmrc_data is enabled
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
   Then I should be on the 'full_employment_details' page showing "HMRC has no record of your client's employment in the last 3 months"
@@ -63,6 +64,7 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
 @javascript
 Scenario: Completing the means journey for an employed applicant with multiple jobs
   Given I start the means review journey with employment income for multiple jobs from HMRC
+  And the feature flag for collect_hmrc_data is enabled
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
   Then I should be on the 'full_employment_details' page showing "HMRC says your client had more than one job in the last 3 months."

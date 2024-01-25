@@ -24,6 +24,7 @@ Feature: partner_means_assessment means check
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to navigate to partners means check when doing open banking upload
     Given the feature flag for partner_means_assessment is enabled
+    And the feature flag for collect_hmrc_data is enabled
     And I am logged in as a provider
     And csrf is enabled
     And an applicant named Ida Paisley with a partner has completed their true layer interactions
