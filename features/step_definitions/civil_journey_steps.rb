@@ -887,7 +887,7 @@ Then(/^proceeding suggestions has (results|no results)$/) do |results|
   wait_for_ajax
   case results
   when "results"
-    expect(page).to have_css("#proceeding-list .proceeding-item", wait: 10)
+    expect(page).to have_css("#proceeding-list .proceeding-item")
   when "no results"
     expect(page).to have_no_css("#proceeding-list .proceeding-item")
   end
