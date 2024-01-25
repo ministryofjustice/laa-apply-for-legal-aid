@@ -45,7 +45,7 @@ module Flowable
     end
 
     def first_module_of_parent_name_space
-      parent_name_space_module.to_s.snakecase.split("/").first
+      parent_name_space_module.to_s.underscore.split("/").first
     end
 
     def parent_name_space_module
