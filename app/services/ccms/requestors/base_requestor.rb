@@ -47,10 +47,11 @@ module CCMS
     private
 
       def make_faraday_request
-        conn.post do |request|
+        response = conn.post do |request|
           request.url url
           request.body = request_xml
         end
+        response.body
       end
 
       # def soap_client
