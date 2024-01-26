@@ -74,7 +74,7 @@ module CCMS
       end
 
       def url
-        @url ||= wsdl_as_xml.xpath("//wsdl:definitions//wsdl:service//wsdl:port//soap:address").attribute("location").value
+        @url ||= wsdl_as_xml.xpath("//soap:address").attribute("location").value
       end
 
       def wsdl_as_xml
