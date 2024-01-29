@@ -42,6 +42,7 @@ RSpec.describe Admin::SettingsController do
           enable_ccms_submission: "true",
           partner_means_assessment: "true",
           linked_applications: "true",
+          collect_hmrc_data: "true",
         },
       }
     end
@@ -57,6 +58,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.partner_means_assessment?).to be(true)
       expect(setting.linked_applications?).to be(true)
+      expect(setting.collect_hmrc_data?).to be(true)
     end
 
     it "create settings if they do not exist" do

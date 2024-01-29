@@ -70,7 +70,7 @@ module Providers
     end
 
     def hmrc_call_enabled?
-      Rails.configuration.x.collect_hmrc_data
+      Setting.collect_hmrc_data?
     end
 
     def make_hmrc_call?

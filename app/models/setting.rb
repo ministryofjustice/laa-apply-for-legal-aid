@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.linked_applications
   end
 
+  def self.collect_hmrc_data?
+    setting.collect_hmrc_data
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

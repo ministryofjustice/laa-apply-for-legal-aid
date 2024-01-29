@@ -14,6 +14,7 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.partner_means_assessment?).to be false
         expect(rec.linked_applications?).to be false
+        expect(rec.collect_hmrc_data?).to be false
       end
     end
 
@@ -28,6 +29,7 @@ RSpec.describe Setting do
           alert_via_sentry: true,
           partner_means_assessment: true,
           linked_applications: true,
+          collect_hmrc_data: true,
         )
       end
 
@@ -41,6 +43,7 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.partner_means_assessment?).to be true
         expect(rec.linked_applications?).to be true
+        expect(rec.collect_hmrc_data?).to be true
       end
     end
   end
@@ -57,6 +60,7 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.partner_means_assessment?).to be false
       expect(described_class.linked_applications?).to be false
+      expect(described_class.collect_hmrc_data?).to be false
     end
   end
 end
