@@ -162,16 +162,16 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it "will not save to the database" do
+      it "does not save to the database" do
         expect { form.save_as_draft }.not_to change(Applicant, :count)
       end
 
-      it "will be invalid" do
+      it "is invalid" do
         form.save_as_draft
         expect(form).not_to be_valid
       end
 
-      it "will preserve the input" do
+      it "preserves the input" do
         form.save_as_draft
         expect(form.first_name).to eq("Fred")
       end
@@ -188,16 +188,16 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it "will not save to the database" do
+      it "does not save to the database" do
         expect { form.save_as_draft }.not_to change(Applicant, :count)
       end
 
-      it "will be invalid" do
+      it "is invalid" do
         form.save_as_draft
         expect(form).not_to be_valid
       end
 
-      it "will preserve the valid input" do
+      it "preserves the valid input" do
         form.save_as_draft
         expect(form.date_of_birth).to eq(Date.new(1999, 12, 31))
       end
@@ -214,11 +214,11 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it "will save to the database" do
+      it "saves to the database" do
         expect { form.save_as_draft }.to change(Applicant, :count)
       end
 
-      it "will be invalid" do
+      it "is invalid" do
         form.save_as_draft
         expect(form).to be_valid
       end
@@ -235,11 +235,11 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it "will save to the database" do
+      it "saves to the database" do
         expect { form.save_as_draft }.to change(Applicant, :count)
       end
 
-      it "will be valid" do
+      it "is valid" do
         form.save_as_draft
         expect(form).to be_valid
       end
