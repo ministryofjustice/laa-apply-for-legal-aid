@@ -165,12 +165,12 @@ RSpec.describe Partners::DetailsForm, type: :form do
         }.merge(model: legal_aid_application.build_partner)
       end
 
-      it "will be valid" do
+      it "is valid" do
         partner_as_draft
         expect(partner_form).to be_valid
       end
 
-      it "will save to the database" do
+      it "saves to the database" do
         expect { partner_as_draft }.to change(Partner, :count)
       end
     end
@@ -187,12 +187,12 @@ RSpec.describe Partners::DetailsForm, type: :form do
         }.merge(model: legal_aid_application.build_partner)
       end
 
-      it "will save the entered attribute" do
+      it "saves the entered attribute" do
         partner_as_draft
         expect(legal_aid_application.reload.partner.first_name).to eq(first_name)
       end
 
-      it "will not save anything to null attributes" do
+      it "does not save anything to null attributes" do
         partner_as_draft
         expect(legal_aid_application.reload.partner.last_name).to be_nil
       end
@@ -211,16 +211,16 @@ RSpec.describe Partners::DetailsForm, type: :form do
         }.merge(model: legal_aid_application.build_partner)
       end
 
-      it "will not save to the database" do
+      it "does not save to the database" do
         expect { partner_as_draft }.not_to change(Partner, :count)
       end
 
-      it "will be invalid" do
+      it "is invalid" do
         partner_as_draft
         expect(partner_form).not_to be_valid
       end
 
-      it "will preserve the input" do
+      it "preserves the input" do
         partner_as_draft
         expect(partner_form.first_name).to eq(first_name)
         expect(partner_form.national_insurance_number).to eq(invalid_nino)
