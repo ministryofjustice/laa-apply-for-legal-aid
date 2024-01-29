@@ -1,4 +1,6 @@
-<% suffix = if !@legal_aid_application.applicant.national_insurance_number?
+<% suffix = if !Setting.collect_hmrc_data?
+              :hmrc_data_collection_off
+            elsif !@legal_aid_application.applicant.national_insurance_number?
               :no_nino
             elsif @legal_aid_application.applicant.has_multiple_employments?
               :multiple_employments

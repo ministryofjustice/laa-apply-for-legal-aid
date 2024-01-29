@@ -3,6 +3,9 @@ require "rails_helper"
 RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
   let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
   let(:application_id) { application.id }
+  let(:enable_hmrc_collection) { true }
+
+  before { allow(Setting).to receive(:collect_hmrc_data?).and_return(enable_hmrc_collection) }
 
   describe "GET /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
     subject(:get_request) { get "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications" }
@@ -118,9 +121,20 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(application.reload.state_machine_proxy.type).to eq "NonPassportedStateMachine"
         end
 
-        it "calls the HMRC::CreateResponsesService" do
-          patch_request
-          expect(HMRC::CreateResponsesService).to have_received(:call).once
+        context "and the hmrc toggle is true" do
+          it "calls the HMRC::CreateResponsesService" do
+            patch_request
+            expect(HMRC::CreateResponsesService).to have_received(:call).once
+          end
+        end
+
+        context "and the hmrc toggle is false" do
+          let(:enable_hmrc_collection) { false }
+
+          it "doesn't call the HMRC::CreateResponsesService" do
+            patch_request
+            expect(HMRC::CreateResponsesService).not_to have_received(:call)
+          end
         end
 
         it "successfully deletes any existing dwp override" do

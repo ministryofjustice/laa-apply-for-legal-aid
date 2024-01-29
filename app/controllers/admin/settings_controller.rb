@@ -23,7 +23,8 @@ module Admin
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
                                       :partner_means_assessment,
-                                      :linked_applications)
+                                      :linked_applications,
+                                      :collect_hmrc_data)
     end
 
     def setting

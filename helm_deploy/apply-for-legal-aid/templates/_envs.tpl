@@ -391,4 +391,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: slackAlertWebhook
+  - name: COLLECT_HMRC_DATA
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: collectHmrcData
 {{- end }}
