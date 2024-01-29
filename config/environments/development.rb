@@ -67,6 +67,6 @@ Rails.application.configure do
   config.active_storage.service = :local
   config.x.application.host_url = "http://#{config.x.application.host}"
 
-  # Switch to determine whether or not o collect HMRC data
-  config.x.collect_hmrc_data = true
+  # Switch to determine whether or not to collect HMRC data
+  # config.x.collect_hmrc_data = true
 end
