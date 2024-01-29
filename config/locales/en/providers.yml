@@ -1551,19 +1551,27 @@ en:
         h1-heading: Select the account number of the office handling this application
     start:
       index:
-        apply_for_legal_aid_heading: Apply for legal aid
-        must_be_provider: Civil and family legal aid providers can use this service to apply for civil legal aid.
-        when_not_to_use_service:
-          heading: When not to use this service
-          list_title: "Do not use this service if your client:"
-          list_items:
-            list: |
-              is under 16 years old
-              is self-employed
-              has a partner, unless the case is against the partner
+        heading: Apply for civil legal aid
+        intro: Providers can use this service to apply for civil legal aid for their clients.
+        use_service:
+          list_title: "You can use it for one, or a combination of these applications:"
+          list:
+            - domestic abuse
+            - section 8
+        dont_use_service:
+          list_title: "But do not use this service if:"
+          partner_list_item: the client has a partner, unless the partner is the opponent
+          list: 
+            - the client is under 16 years old
+            - the client is self-employed or is a member of the armed forces
+            - you want to make an emergency application and delegated functions have not been used
+            - you want to amend a submitted application
         use_ccms_para_html: |
-         You will need to apply using <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and
-          Cost Management System'>CCMS</abbr> (Client and Cost Management System)</a> instead.
+          If any of these apply, or you want to apply for different proceedings, use
+          <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and
+          Cost Management System'>CCMS</abbr> (Client and Cost Management System)</a>
+          instead.
+        progress_saved: Your progress is saved so that you can come back to it later.
     start_chances_of_successes:
       show:
         h1-heading: Provide details of the case
