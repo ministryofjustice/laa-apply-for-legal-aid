@@ -5,30 +5,7 @@
       local: true,
     ) do |form| %>
 
-    <%= page_template page_title: t(".title_html"), head_title: t(".head_title"), form: do %>
-
-      <%= govuk_inset_text do %>
-        <p class="govuk-body govuk-!-padding-bottom-2"><%= t(".inset_text") %></p>
-      <% end %>
-
-      <%= govuk_details(summary_text: t(".summary_heading")) do %>
-        <p><%= t(".able_to_see.heading") %></p>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <% t(".able_to_see.list").each_line do |item| %>
-            <li><%= item %></li>
-          <% end %>
-        </ul>
-
-        <p><%= t(".unable_to_see.heading") %></p>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <% t(".unable_to_see.list").each_line do |item| %>
-            <li><%= item %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
+    <%= page_template page_title: t(".title_html"), form:, template: :basic do %>
       <%= form.govuk_collection_radio_buttons(
             :open_banking_consent,
             yes_no_options,
@@ -36,10 +13,33 @@
             :label,
             legend: {
               text: t(".title_html"),
-              hidden: true,
+              tag: "h1",
+              size: "xl",
             },
-          ) %>
+          ) do %>
 
+        <%= govuk_inset_text do %>
+          <p class="govuk-body govuk-!-padding-bottom-2"><%= t(".inset_text") %></p>
+        <% end %>
+
+        <%= govuk_details(summary_text: t(".summary_heading")) do %>
+          <p><%= t(".able_to_see.heading") %></p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <% t(".able_to_see.list").each_line do |item| %>
+              <li><%= item %></li>
+            <% end %>
+          </ul>
+
+          <p><%= t(".unable_to_see.heading") %></p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <% t(".unable_to_see.list").each_line do |item| %>
+              <li><%= item %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
     <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>
