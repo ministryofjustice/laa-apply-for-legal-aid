@@ -202,11 +202,11 @@ en:
         heading_2: Cookies that measure website use
         we_use_ga: We use Google Analytics to measure how you use the service so we can improve it based on user needs.
         we_do_not_allow: We do not allow Google to use or share the data about how you use this site.
-        google_analytics: Google Analytics sets cookies that store anonymised information about
-        list: |
-          how you got to the site
-          the pages you visit on Apply for legal aid, and how long you spend on each page
-          what you click on while you're visiting the site
+        google_analytics: "Google Analytics sets cookies that store anonymised information about:"
+        list:
+          - how you got to the site
+          - the pages you visit on Apply for legal aid, and how long you spend on each page
+          - what you click on while you're visiting the site
         use_this_cookie: Use this cookie to measure my website use
         do_not_use: Do not use this cookie to measure my website use
         heading_3: Strictly necessary cookies
