@@ -23,7 +23,7 @@ module CFECivil
       end
 
       context "when object is non_passported? but not uploading_bank_statements?" do
-        let(:object) { instance_double(CFE::Submission, passported?: false, non_passported?: true, uploading_bank_statements?: false) }
+        let(:object) { instance_double(CFE::Submission, passported?: false, non_passported?: true, client_uploading_bank_statements?: false) }
 
         it "returns set of non passported CFE::Service classes" do
           expect(call).to match([
@@ -47,7 +47,7 @@ module CFECivil
       end
 
       context "when object is non_passported? and uploading_bank_statements?" do
-        let(:object) { instance_double(LegalAidApplication, passported?: false, non_passported?: true, uploading_bank_statements?: true) }
+        let(:object) { instance_double(LegalAidApplication, passported?: false, non_passported?: true, client_uploading_bank_statements?: true) }
 
         it "returns set of non passported CFE::Service classes" do
           expect(call).to match([

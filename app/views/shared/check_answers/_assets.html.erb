@@ -1,6 +1,10 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
+<% showing_bank_accounts = @legal_aid_application.partner_uploading_bank_statements? ||
+     (@legal_aid_application.applicant.bank_accounts.empty? && read_only) ||
+     @legal_aid_application&.savings_amount&.offline_savings_accounts.present? ||
+     @legal_aid_application&.savings_amount&.offline_current_accounts.present? %>
 
 <section class="print-no-break">
   <%= render "shared/check_answers/property", read_only:, individual: %>
@@ -9,8 +13,10 @@
 <section class="print-no-break">
   <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
+<% if showing_bank_accounts %>
   <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
-  <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
+<% end %>
+  <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
 
     <% if read_only %>
@@ -29,7 +35,7 @@
 
       <h3 class="govuk-heading-m"><%= t(".assets.money_in_bank_accounts") %></h3>
 
-      <%= govuk_summary_list(classes: "govuk-!-margin-bottom-0", html_attributes: { "data-test": "applicant-bank-accounts" }) do |summary_list| %>
+      <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { "data-test": "applicant-bank-accounts" }) do |summary_list| %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__online_current_accounts" }) do |row| %>
           <%= row.with_key(text: @legal_aid_application&.applicant&.has_partner? ? t(".assets.client_current_account") : t(".assets.current_accounts"), classes: "govuk-!-width-one-half") %>
           <%= row.with_value { online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t("generic.none") } %>
@@ -59,7 +65,7 @@
         </div>
       <% end %>
     </div>
-    <%= govuk_summary_list(classes: "govuk-!-margin-bottom-0", html_attributes: { id: "app-check-your-answers__bank_accounts_items", "data-test": "applicant-bank-accounts" }) do |summary_list| %>
+    <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { id: "app-check-your-answers__bank_accounts_items", "data-test": "applicant-bank-accounts" }) do |summary_list| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__offline_current_accounts" }) do |row| %>
         <%= row.with_key(text: @legal_aid_application&.applicant&.has_partner? ? t(".assets.client_current_account") : t(".assets.current_accounts"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value { @legal_aid_application&.savings_amount&.offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.offline_current_accounts) : t("generic.none") } %>
@@ -77,7 +83,7 @@
                     else
                       :offline_accounts
                     end %>
-    <div class="govuk-grid-row govuk-!-padding-top-9" id="app-check-your-answers__partner_offline_accounts_link">
+    <div class="govuk-grid-row" id="app-check-your-answers__partner_offline_accounts_link">
       <% if read_only == false %>
         <div class="govuk-grid-column-two-thirds">
           <h3 class="govuk-heading-m"><%= t(".assets.partner_bank_accounts") %></h3>
@@ -93,7 +99,7 @@
         </div>
       <% end %>
     </div>
-    <%= govuk_summary_list(classes: "govuk-!-margin-bottom-0", html_attributes: { "data-test": "partner-bank-accounts" }) do |summary_list| %>
+    <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { "data-test": "partner-bank-accounts" }) do |summary_list| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_offline_current_accounts" }) do |row| %>
         <%= row.with_key(text: t(".assets.partner_current_account"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_current_accounts) : t("generic.none") } %>
@@ -105,7 +111,7 @@
     <% end %>
 
     <% if @legal_aid_application.uploading_bank_statements? || !@legal_aid_application.non_passported? %>
-      <div class="govuk-grid-row govuk-!-padding-top-9" id="app-check-your-answers__joint_offline_accounts_link">
+      <div class="govuk-grid-row" id="app-check-your-answers__joint_offline_accounts_link">
         <% if read_only == false %>
           <div class="govuk-grid-column-two-thirds">
             <h3 class="govuk-heading-m"><%= t(".assets.joint_bank_accounts") %></h3>
@@ -121,7 +127,7 @@
           </div>
         <% end %>
       </div>
-      <%= govuk_summary_list(classes: "govuk-!-margin-bottom-0", html_attributes: { "data-test": "joint-bank-accounts" }) do |summary_list| %>
+      <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { "data-test": "joint-bank-accounts" }) do |summary_list| %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_current_accounts" }) do |row| %>
           <%= row.with_key(text: t(".assets.joint_current_account"), classes: "govuk-!-width-one-half") %>
           <%= row.with_value { @legal_aid_application.savings_amount.joint_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_current_accounts) : t("generic.none") } %>
@@ -135,12 +141,12 @@
   <% end %>
 
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
-    <div class="govuk-!-padding-top-9">
+    <div class="govuk-!-padding-bottom-9">
       <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
     </div>
   <% end %>
 
-  <div class="govuk-!-padding-top-9">
+  <div class="govuk-!-padding-bottom-9">
     <%= render(
           "shared/check_answers/one_link_section",
           name: :savings_and_investments,
