@@ -22,7 +22,7 @@
         <h2 class="govuk-heading-m"><%= t ".section_proceeding.heading" %></h2>
       </div>
       <div class="govuk-grid-column-one-third">
-        <p><%= govuk_link_to t(".change"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application), class: "govuk-link-right" %></p>
+        <%= govuk_link_to t("generic.change_html", context: t(".section_proceeding.heading").to_s), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application), class: "govuk-link-right" %>
       </div>
     </div>
     <%= render(
