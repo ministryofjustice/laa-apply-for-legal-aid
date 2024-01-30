@@ -167,7 +167,7 @@ Given("I start the journey as far as the applicant page") do
   steps %(
     Given I am logged in as a provider
     Given I visit the application service
-    And I click link "Start"
+    And I click link "Sign in"
     Then I choose 'London'
     Then I click 'Save and continue'
     And I click link "Make a new application"
