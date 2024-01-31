@@ -14,8 +14,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter govuk-!-text-align-right">
       <%= govuk_link_to(
-            t("generic.change_html", context: @applicant.email),
+            t("generic.change"),
             providers_legal_aid_application_email_address_path(anchor: :email),
+            visually_hidden_suffix: t(".section_2.heading"),
             class: "govuk-!-font-size-19",
           ) %>
     </div>

@@ -4,9 +4,12 @@
     <h2 class="govuk-heading-m"><%= proceeding.meaning %> proceeding details</h2>
   </div>
   <div class="govuk-grid-column-one-quarter">
-    <p><%= govuk_link_to t("generic.change_html", context: "#{proceeding.meaning} proceeding details"),
-                         providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
-                         class: "govuk-link-right" %></p>
+    <%= govuk_link_to(
+          t("generic.change"),
+          providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
+          visually_hidden_suffix: "#{proceeding.meaning} proceeding details",
+          class: "govuk-link-right",
+        ) %>
   </div>
 </div>
 
