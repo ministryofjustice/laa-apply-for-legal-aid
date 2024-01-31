@@ -2,6 +2,12 @@ class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check".freeze
   USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
   REQUEST_TIMEOUT = 30.seconds
+  NAMESPACES = {
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:wsdl": BENEFIT_CHECKER_NAMESPACE,
+    "xmlns:env": "http://schemas.xmlsoap.org/soap/envelope/",
+  }.freeze
 
   class ApiError < StandardError
     include Nesty::NestedError
@@ -16,6 +22,13 @@ class BenefitCheckService
   def initialize(application)
     @application = application
     @config = Rails.configuration.x.benefit_check
+  end
+
+  def faraday_call
+    soap = Faraday::SoapCall.new(Rails.configuration.x.benefit_check.wsdl_url)
+    response = soap.call(request_xml)
+    result = Hash.from_xml(response).deep_symbolize_keys
+    result.dig(:Envelope, :Body, :benefitCheckerResponse)
   end
 
   def call
@@ -61,5 +74,23 @@ private
       read_timeout: REQUEST_TIMEOUT,
       namespace: BENEFIT_CHECKER_NAMESPACE,
     )
+  end
+
+  def soap_envelope
+    Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|
+      xml.__send__(:"env:Envelope", NAMESPACES) do
+        xml.__send__(:"env:Body") do
+          xml.__send__(:"wsdl:check") do
+            benefit_checker_params.each do |key, value|
+              xml.__send__(key.to_sym, value)
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def request_xml
+    @request_xml ||= soap_envelope.to_xml.squish.chomp
   end
 end
