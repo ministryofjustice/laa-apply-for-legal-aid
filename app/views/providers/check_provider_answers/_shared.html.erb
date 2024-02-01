@@ -48,7 +48,13 @@
         <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
       </div>
       <div class="govuk-grid-column-one-third">
-        <p><%= govuk_link_to t(".change"), providers_legal_aid_application_limitations_path(@legal_aid_application), class: "govuk-link-right" %></p>
+        <p><%= govuk_link_to(
+                 t(".change"),
+                 providers_legal_aid_application_limitations_path(@legal_aid_application),
+                 visually_hidden_suffix: t(".emergency_cost_limit"),
+                 class: "govuk-link-right",
+               ) %>
+        </p>
       </div>
     </div>
     <%= render(
