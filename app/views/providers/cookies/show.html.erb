@@ -22,30 +22,28 @@
     <p class="govuk-body"><%= t(".cookies_are_files") %></p>
     <p class="govuk-body"><%= t(".we_use_cookies") %></p>
 
-    <h2 class="govuk-heading-m"><%= t(".heading_2") %></h2>
-    <p class="govuk-body"><%= t(".we_use_ga") %></p>
-    <p class="govuk-body"><%= t(".we_do_not_allow") %></p>
-    <p class="govuk-body"><%= t(".google_analytics") %></p>
-
-    <%= list_from_translation_path(".cookies.show") %>
-
-    <div class="govuk-!-padding-2"></div>
-
     <%= form.govuk_radio_buttons_fieldset :cookies_enabled,
-                                          legend: { size: "m", tag: "h2", text: t(".heading_2"), hidden: true } do %>
+                                          legend: { size: "m", tag: "h2", text: t(".heading_2") } do %>
+
+      <p class="govuk-body"><%= t(".we_use_ga") %></p>
+      <p class="govuk-body"><%= t(".we_do_not_allow") %></p>
+      <p class="govuk-body"><%= t(".google_analytics") %></p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".list").each do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+
       <%= form.govuk_radio_button :cookies_enabled, true, link_errors: true, label: { text: t(".use_this_cookie") } %>
       <%= form.govuk_radio_button :cookies_enabled, false, label: { text: t(".do_not_use") } %>
     <% end %>
-
-    <div class="govuk-!-padding-2"></div>
 
     <h2 class="govuk-heading-m"><%= t(".heading_3") %></h2>
     <p class="govuk-body"><%= t(".these_essential_cookies") %></p>
     <p class="govuk-body"><%= t(".they_always_need") %></p>
 
     <p class='govuk-body'><%= govuk_link_to(t(".find_out_more_link"), "https://www.gov.uk/help/cookie-details") %></p>
-
-    <div class="govuk-!-padding-2"></div>
 
     <%= form.govuk_submit(t(".save_changes_btn")) %>
   <% end %>

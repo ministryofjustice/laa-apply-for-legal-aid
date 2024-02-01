@@ -4,16 +4,13 @@
 
     <%= render partial: "shared/error" if @error %>
 
-    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
-      <div class="govuk-!-padding-bottom-4"></div>
-      <%= form.govuk_text_field(
-            :search_term,
-            label: { text: :search_term, hidden: true },
-            caption: { text: t(".hint") },
-            width: "two-thirds",
-            value: @search_term,
-          ) %>
-    <% end %>
+    <%= form.govuk_text_field(
+          :search_term,
+          label: { text: "Search applications", size: "xl", tag: "h1" },
+          hint: { text: t(".hint") },
+          width: "two-thirds",
+          value: @search_term,
+        ) %>
 
     <%= form.govuk_submit t(".search_button") %>
   <% end %>
