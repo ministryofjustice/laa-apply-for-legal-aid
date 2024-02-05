@@ -24,21 +24,11 @@ class BenefitCheckService
     @config = Rails.configuration.x.benefit_check
   end
 
-  def faraday_call
-    soap = Faraday::SoapCall.new(Rails.configuration.x.benefit_check.wsdl_url)
-    response = soap.call(request_xml)
-    result = Hash.from_xml(response).deep_symbolize_keys
-    result.dig(:Envelope, :Body, :benefitCheckerResponse)
-  end
-
   def call
-    soap_client.call(:check, message: benefit_checker_params).body[:benefit_checker_response]
-  rescue Savon::SOAPFault => e
-    AlertManager.capture_exception(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
-    false
-  rescue StandardError => e
-    AlertManager.capture_exception(e)
-    false
+    soap = Faraday::SoapCall.new(Rails.configuration.x.benefit_check.wsdl_url, :benefit_checker)
+    response = soap.call(request_xml)
+    result = Hash.from_xml(response).deep_transform_keys { |key| key.underscore.to_sym }
+    result.dig(:envelope, :body, :benefit_checker_response)
   end
 
 private
