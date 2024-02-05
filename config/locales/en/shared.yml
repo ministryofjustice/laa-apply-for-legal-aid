@@ -489,6 +489,7 @@ en:
           client_involvement_type_applicant: Applicant
           proceeding: What does your client want legal aid for?
       proceeding_details:
+        description: proceeding details
         client_involvement_type_details:
           question: Client role
         delegated_function_details:
