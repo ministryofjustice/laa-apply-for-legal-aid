@@ -1,9 +1,10 @@
 module Faraday
   class SoapCall
-    attr_reader :url
+    attr_reader :url, :type
 
-    def initialize(wsdl_url)
-      raise StandardError, "Unable to parse url" unless parse_url(wsdl_url)
+    def initialize(wsdl_or_url, type)
+      @type = type
+      raise StandardError, "Unable to parse url" unless parse_url(wsdl_or_url)
     end
 
     def call(xml_body)
@@ -12,6 +13,15 @@ module Faraday
         request.body = xml_body
       end
       response.body
+    end
+
+    def headers
+      default_headers = {
+        SOAPAction: "#POST",
+        "Content-Type": "text/xml",
+      }
+      default_headers[:"x-api-key"] = Rails.configuration.x.ccms_soa.aws_gateway_api_key if type.eql?(:ccms)
+      default_headers
     end
 
   private
@@ -33,14 +43,6 @@ module Faraday
 
     def conn
       @conn ||= Faraday.new(url:, headers:)
-    end
-
-    def headers
-      @headers ||= {
-        "x-api-key": Rails.configuration.x.ccms_soa.aws_gateway_api_key,
-        SOAPAction: "#POST",
-        "Content-Type": "text/xml",
-      }
     end
   end
 end

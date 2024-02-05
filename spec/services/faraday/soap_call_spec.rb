@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Faraday::SoapCall do
-  subject(:faraday_soap_call) { described_class.new(initial_object) }
+  subject(:faraday_soap_call) { described_class.new(initial_object, type) }
+
+  let(:type) { :ccms }
 
   describe "initializing" do
     describe "with a bad attribute" do
@@ -14,6 +16,7 @@ RSpec.describe Faraday::SoapCall do
 
     describe "with a url" do
       let(:initial_object) { "https://fake/wsdl/url" }
+      let(:type) { :benefit_checker }
 
       it { expect(faraday_soap_call.url).to eql("https://fake/wsdl/url") }
     end
@@ -26,9 +29,41 @@ RSpec.describe Faraday::SoapCall do
     end
   end
 
+  describe ".headers" do
+    subject(:headers) { faraday_soap_call.headers }
+
+    let(:initial_object) { "https://fake/wsdl/url" }
+
+    context "when setting type as ccms" do
+      let(:type) { :ccms }
+      let(:expected) do
+        {
+          SOAPAction: "#POST",
+          "Content-Type": "text/xml",
+          "x-api-key": Rails.configuration.x.ccms_soa.aws_gateway_api_key,
+        }
+      end
+
+      it { expect(headers).to eql(expected) }
+    end
+
+    context "when setting type as benefit_checker" do
+      let(:type) { :benefit_checker }
+      let(:expected) do
+        {
+          SOAPAction: "#POST",
+          "Content-Type": "text/xml",
+        }
+      end
+
+      it { expect(headers).to eql(expected) }
+    end
+  end
+
   describe ".call", vcr: { cassette_name: "benefit_check_service/savon_successful_call" } do
     let(:calling) { faraday_soap_call.call(payload) }
-    let(:initial_object) { "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check" }
+    let(:type) { :benefit_checker }
+    let(:initial_object) { "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl" }
     let(:payload) do
       <<~PAYLOAD.squish
         <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -40,7 +75,10 @@ RSpec.describe Faraday::SoapCall do
         <surname>WALKER</surname>
         <dateOfBirth>19800110</dateOfBirth>
         <dateOfAward>20220719</dateOfAward>
-        <lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+        <lscServiceName>#{Rails.configuration.x.benefit_check.service_name}</lscServiceName>
+        <clientOrgId>#{Rails.configuration.x.benefit_check.client_org_id}</clientOrgId>
+        <clientUserId>#{Rails.configuration.x.benefit_check.client_user_id}</clientUserId>
+        </wsdl:check></env:Body></env:Envelope>
       PAYLOAD
     end
     let(:expected) do
@@ -50,7 +88,7 @@ RSpec.describe Faraday::SoapCall do
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
         xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">df56670b-aecf-49cc-8f1b-1c410cace3c5</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1658229558145</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1707145428938</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
       XML
     end
 
