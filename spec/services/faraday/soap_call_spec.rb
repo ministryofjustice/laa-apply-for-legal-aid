@@ -95,5 +95,16 @@ RSpec.describe Faraday::SoapCall do
     it "returns expected xml body" do
       expect(calling).to eql(expected)
     end
+
+    context "when there is a connection error" do
+      let(:expected_message) { "my faraday connection failed" }
+
+      it "creates a CFE::Submission error and writes a history record with a backtrace" do
+        stub_request(:post, initial_object).to_raise(Faraday::ConnectionFailed.new(expected_message))
+        expect(AlertManager).to receive(:capture_exception).with(message_contains(expected_message))
+        expect(Rails.logger).to receive(:error).with(expected_message)
+        expect { calling }.to raise_error Faraday::SoapError, expected_message
+      end
+    end
   end
 end

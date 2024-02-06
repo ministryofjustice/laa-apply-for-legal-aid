@@ -1,4 +1,6 @@
 module Faraday
+  class SoapError < StandardError; end
+
   class SoapCall
     attr_reader :url, :type
 
@@ -13,6 +15,10 @@ module Faraday
         request.body = xml_body
       end
       response.body
+    rescue StandardError => e
+      AlertManager.capture_exception(e)
+      Rails.logger.error(e.message)
+      raise SoapError, e.message
     end
 
     def headers
