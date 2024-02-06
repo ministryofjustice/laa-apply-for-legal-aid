@@ -29,6 +29,8 @@ class BenefitCheckService
     response = soap.call(request_xml)
     result = Hash.from_xml(response).deep_transform_keys { |key| key.underscore.to_sym }
     result.dig(:envelope, :body, :benefit_checker_response)
+  rescue Faraday::SoapError
+    false
   end
 
 private

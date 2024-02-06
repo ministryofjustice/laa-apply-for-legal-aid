@@ -51,8 +51,8 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context "when calling the API raises a Savon::SOAPFault error", vcr: { cassette_name: "benefit_check_service/service_error" } do
-      let(:last_name) { "SERVICEEXCEPTION" }
+    context "when calling the API raises a Faraday::ConnectionFailed error" do
+      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(Faraday::ConnectionFailed.new("Service unavailable")) }
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("Service unavailable"))
@@ -64,21 +64,11 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context "when calling the API raises an unhandled error or StandardError" do
-      before do
-        allow(Savon).to receive(:client).and_return(savon_client)
-        allow(savon_client).to receive(:call)
-                                 .with(:check, expected_params)
-                                 .and_raise(StandardError.new("fake error"))
-      end
+    context "when calling the API raises a StandardError" do
+      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(StandardError.new("Fake error")) }
 
       it "captures error" do
-        expect(AlertManager).to receive(:capture_exception).with(message_contains("fake error"))
-        benefit_check_service.call
-      end
-
-      it "captures StandardError" do
-        expect(AlertManager).to receive(:capture_exception).with(instance_of(StandardError))
+        expect(AlertManager).to receive(:capture_exception).with(message_contains("Fake error"))
         benefit_check_service.call
       end
 
@@ -88,13 +78,10 @@ RSpec.describe BenefitCheckService do
     end
 
     context "when the API times out" do
-      before do
-        allow(Savon).to receive(:client).and_return(savon_client)
-        allow(savon_client).to receive(:call).and_raise(Net::ReadTimeout)
-      end
+      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(Net::ReadTimeout) }
 
       it "captures error and returns false" do
-        expect(AlertManager).to receive(:capture_exception).with(Net::ReadTimeout)
+        expect(AlertManager).to receive(:capture_exception).with(Faraday::TimeoutError)
         benefit_check_service.call
       end
 
