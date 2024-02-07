@@ -22,8 +22,8 @@ module CCMS
             command: "clientbim:ClientInqRQ",
             transaction_id: expected_tx_id,
             matching: %w[
-              <clientbio:Surname>lenovo</clientbio:Surname>
-              <clientbio:FirstName>hurlock</clientbio:FirstName>
+              <clientbio:Surname>hurlock</clientbio:Surname>
+              <clientbio:FirstName>lenovo</clientbio:FirstName>
             ],
           )
         end
