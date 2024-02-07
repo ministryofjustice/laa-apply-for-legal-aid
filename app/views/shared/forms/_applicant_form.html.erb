@@ -18,7 +18,14 @@
       <%= form.govuk_text_field :first_name, label: { text: "First name" }, width: "three-quarters" %>
       <%= form.govuk_text_field :last_name, label: { text: "Last name" }, width: "three-quarters" %>
     <% end %>
-
+    <%= form.govuk_radio_buttons_fieldset :changed_last_name,
+                                          legend: { size: "m", tag: "h2", text: t(".changed_last_name") },
+                                          hint: { text: t(".changed_last_name_hint") } do %>
+      <%= form.govuk_radio_button :changed_last_name, true, link_errors: true, label: { text: t("generic.yes") } do %>
+        <%= form.govuk_text_field :last_name_at_birth, label: { text: t(".last_name_at_birth") }, width: "three-quarters" %>
+      <% end %>
+      <%= form.govuk_radio_button :changed_last_name, false, label: { text: t("generic.no") } %>
+    <% end %>
     <div class="govuk-!-padding-bottom-4"></div>
     <%= form.govuk_date_field :date_of_birth, legend: { text: t("shared.forms.date_input_fields.date_of_birth_label") },
                                               hint: { text: t("shared.forms.date_input_fields.date_of_birth_hint") } %>

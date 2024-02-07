@@ -567,6 +567,9 @@ en:
         page_title: Enter your client's details
         name: Name
         email_label: Email address
+        changed_last_name: Has your client ever changed their last name?
+        changed_last_name_hint: For example, through marriage or deed poll
+        last_name_at_birth: What was your client's last name at birth?
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980.
         date_of_birth_label: Date of birth
