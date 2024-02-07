@@ -10,7 +10,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:get_client_details, xml: request_xml)
+        Faraday::SoapCall.new(wsdl_location, :ccms).call(request_xml)
       end
 
     private
@@ -35,7 +35,7 @@ module CCMS
       def search_criteria(xml)
         xml.__send__(:"clientbim:ClientInfo") do
           xml.__send__(:"clientbio:FirstName", @applicant.first_name)
-          xml.__send__(:"clientbio:Surname", @applicant.last_name)
+          xml.__send__(:"clientbio:Surname", @applicant.surname_at_birth)
           xml.__send__(:"clientbio:DateOfBirth", @applicant.date_of_birth.to_fs(:ccms_date))
           xml.__send__(:"clientbio:NINumber", @applicant.national_insurance_number)
         end

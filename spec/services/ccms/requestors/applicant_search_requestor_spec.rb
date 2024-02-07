@@ -3,7 +3,6 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe ApplicantSearchRequestor, :ccms do
-      let(:expected_xml) { ccms_data_from_file "applicant_search_request.xml" }
       let(:expected_tx_id) { "20190101121530000000" }
       let(:applicant) do
         create(:applicant,
@@ -22,11 +21,34 @@ module CCMS
           expect(requestor.formatted_xml).to be_soap_envelope_with(
             command: "clientbim:ClientInqRQ",
             transaction_id: expected_tx_id,
-            matching: [
-              "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
-              "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>",
+            matching: %w[
+              <clientbio:Surname>lenovo</clientbio:Surname>
+              <clientbio:FirstName>hurlock</clientbio:FirstName>
             ],
           )
+        end
+
+        context "when the applicant has a surname_at_birth" do
+          let(:applicant) do
+            create(:applicant,
+                   first_name: "lenovo",
+                   last_name: "hurlock",
+                   last_name_at_birth: "different",
+                   date_of_birth: Date.new(1969, 1, 1),
+                   national_insurance_number: "YS327299B")
+          end
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "clientbim:ClientInqRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <clientbio:Surname>different</clientbio:Surname>
+                <clientbio:FirstName>lenovo</clientbio:FirstName>
+              ],
+            )
+          end
         end
       end
 
@@ -39,16 +61,17 @@ module CCMS
       end
 
       describe "#call" do
-        let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
-        let(:expected_soap_operation) { :get_client_details }
-        let(:expected_xml) { requestor.__send__(:request_xml) }
-
         before do
-          allow(requestor).to receive(:soap_client).and_return(soap_client_double)
+          allow(Faraday::SoapCall).to receive(:new).and_return(soap_call)
+          stub_request(:post, expected_url)
         end
 
-        it "calls the savon soap client" do
-          expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
+        let(:soap_call) { instance_double(Faraday::SoapCall) }
+        let(:expected_xml) { requestor.__send__(:request_xml) }
+        let(:expected_url) { extract_url_from(requestor.__send__(:wsdl_location)) }
+
+        it "invokes the fadaday soap_call" do
+          expect(soap_call).to receive(:call).with(expected_xml).once
           requestor.call
         end
       end
