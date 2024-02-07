@@ -10,7 +10,10 @@ RSpec.describe "SamlSessionsController" do
   let(:provider_details_api_reponse) { api_response.to_json }
   let(:enable_mock_saml) { false }
 
-  before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(enable_mock_saml) }
+  before do
+    allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(enable_mock_saml)
+    Redis.new(url: Rails.configuration.x.redis.page_history_url).flushdb
+  end
 
   describe "DELETE /providers/sign_out" do
     subject(:delete_request) { delete destroy_provider_session_path }
