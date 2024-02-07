@@ -17,6 +17,7 @@ RSpec.describe Providers::Draftable do
           "date_of_birth(1i)": "1981",
           "date_of_birth(2i)": "07",
           "date_of_birth(3i)": "11",
+          changed_last_name: false,
         },
       }
     end

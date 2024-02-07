@@ -9,6 +9,7 @@ FactoryBot.define do
     employed { false }
     student_finance { nil }
     student_finance_amount { nil }
+    changed_last_name { false }
 
     trait :with_address do
       addresses { build_list(:address, 1) }
@@ -116,6 +117,11 @@ FactoryBot.define do
     trait :with_extra_employment_information do
       extra_employment_information { true }
       extra_employment_information_details { Faker::Lorem.paragraph(sentence_count: 2) }
+    end
+
+    trait :with_changed_last_name do
+      changed_last_name { true }
+      last_name_at_birth { Faker::Name.last_name }
     end
 
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant

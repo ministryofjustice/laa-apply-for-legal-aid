@@ -114,6 +114,10 @@ en:
               inclusion: Select yes if the client has a National Insurance number
             last_name:
               blank: Enter last name
+            last_name_at_birth:
+              blank: Enter your client's last name at birth
+            changed_last_name:
+              inclusion: Select yes if your client has ever changed their last name
             national_insurance_number:
               blank: Enter a National Insurance number
               not_valid: Enter a valid National Insurance number
