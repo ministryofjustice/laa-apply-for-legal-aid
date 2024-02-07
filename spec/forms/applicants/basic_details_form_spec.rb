@@ -9,6 +9,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       first_name
       last_name
       date_of_birth
+      last_name_at_birth
+      changed_last_name
     ]
   end
   let(:legal_aid_application_id) { legal_aid_application.id }
@@ -100,6 +102,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: attributes[:date_of_birth].year.to_s,
           date_of_birth_2i: attributes[:date_of_birth].month.to_s,
           date_of_birth_3i: attributes[:date_of_birth].day.to_s,
+          changed_last_name: false,
           model: applicant,
         }
       end
@@ -122,6 +125,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: "10",
           date_of_birth_2i: "21",
           date_of_birth_3i: "44",
+          changed_last_name: false,
           model: applicant,
         }
       end
@@ -138,6 +142,17 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
   end
 
   describe "save_as_draft" do
+    let(:attr_list) do
+      %i[
+        first_name
+        last_name
+        date_of_birth
+        last_name_at_birth
+      ]
+    end
+
+    # TODO: test save as draft for applicant with changed last name
+
     let(:applicant) { Applicant.last }
 
     it "creates a new applicant" do
@@ -159,6 +174,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: "0001",
           date_of_birth_2i: "13",
           date_of_birth_3i: "32",
+          changed_last_name: false,
         }
       end
 
@@ -185,6 +201,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: "1999",
           date_of_birth_2i: "12",
           date_of_birth_3i: "31",
+          changed_last_name: false,
         }
       end
 
@@ -211,6 +228,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: "1999",
           date_of_birth_2i: "12",
           date_of_birth_3i: "31",
+          changed_last_name: false,
         }
       end
 
@@ -232,6 +250,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: "1999",
           date_of_birth_2i: "12",
           date_of_birth_3i: "31",
+          changed_last_name: false,
         }
       end
 
@@ -254,6 +273,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           last_name: attributes[:last_name],
           date_of_birth_2i: "10",
           date_of_birth_3i: "4",
+          changed_last_name: false,
           model: applicant,
         }
       end
@@ -263,6 +283,47 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       it "generates an error" do
         expect(form).not_to be_valid
       end
+    end
+  end
+
+  context "with changed last name" do
+    let(:params) do
+      {
+        first_name: "Fred",
+        last_name: "Bloggs",
+        date_of_birth_1i: "1999",
+        date_of_birth_2i: "12",
+        date_of_birth_3i: "31",
+        changed_last_name: true,
+        last_name_at_birth: "Smith",
+      }
+    end
+
+    it "saves to the database" do
+      expect { form.save_as_draft }.to change(Applicant, :count)
+    end
+
+    it "is valid" do
+      form.save_as_draft
+      expect(form).to be_valid
+    end
+  end
+
+  context "with changed_last_name but no last_name_at_birth" do
+    let(:params) do
+      {
+        first_name: "Fred",
+        last_name: "Bloggs",
+        date_of_birth_1i: "1999",
+        date_of_birth_2i: "12",
+        date_of_birth_3i: "31",
+        changed_last_name: true,
+        last_name_at_birth: "",
+      }
+    end
+
+    it "generates an error" do
+      expect(form).not_to be_valid
     end
   end
 
