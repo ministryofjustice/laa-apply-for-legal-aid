@@ -26,11 +26,12 @@ module CCMS
           create(:applicant,
                  first_name: "Shery",
                  last_name: "Ledner",
+                 last_name_at_birth:,
                  national_insurance_number: "EG587804M",
                  date_of_birth: Date.new(1977, 4, 10),
                  address:)
         end
-
+        let(:last_name_at_birth) { nil }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:chances_of_success) { proceeding.chances_of_success }
         let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
@@ -78,16 +79,20 @@ module CCMS
           allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
         end
 
-        it "calls the savon soap client with expected arguments" do
-          soap_client = instance_double(Savon::Client)
-          allow(soap_client).to receive(:call)
-          allow(requestor).to receive(:soap_client).and_return(soap_client)
+        describe "#call" do
+          before do
+            allow(Faraday::SoapCall).to receive(:new).and_return(soap_call)
+            stub_request(:post, expected_url)
+          end
 
-          requestor.call
+          let(:soap_call) { instance_double(Faraday::SoapCall) }
+          let(:expected_xml) { requestor.__send__(:request_xml) }
+          let(:expected_url) { extract_url_from(requestor.__send__(:wsdl_location)) }
 
-          expect(soap_client)
-            .to have_received(:call)
-            .with(:create_case_application, xml: request_xml)
+          it "invokes the fadaday soap_call" do
+            expect(soap_call).to receive(:call).with(expected_xml).once
+            requestor.call
+          end
         end
 
         it "generates the expected xml" do
@@ -96,6 +101,20 @@ module CCMS
             expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
 
             expect(request_hash).to match(expected_request_hash)
+          end
+        end
+
+        context "when the client has a different surname at birth" do
+          let(:expected_request_xml) { ccms_data_from_file("case_add_request_with_surname_at_birth.xml") }
+          let(:last_name_at_birth) { "different" }
+
+          it "generates the expected xml" do
+            travel_to(request_created_at) do
+              request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
+              expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
+
+              expect(request_hash).to match(expected_request_hash)
+            end
           end
         end
 

@@ -376,7 +376,7 @@ global_means:
     response_type: currency
     user_defined: false
   SURNAME_AT_BIRTH:
-    value: '#applicant_last_name'
+    value: '#applicant_surname_at_birth'
     br100_meaning: 'Client: Surname at birth'
     response_type: text
     user_defined: true
@@ -2819,7 +2819,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   SURNAME_AT_BIRTH:
-    value: '#applicant_last_name'
+    value: '#applicant_surname_at_birth'
     br100_meaning: 'Client: Surname at birth'
     response_type: text
     user_defined: true
