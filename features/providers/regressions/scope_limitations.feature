@@ -3,6 +3,7 @@ Feature: Scope limitations not being set
   Scenario: When a provider creates an application with multiple proceedings and uses the back button, scope limitations should not be removed
     Given I start the journey as far as the applicant page
     When I enter name 'Test', 'User'
+    Then I choose 'No'
     And I enter the date of birth '03-04-1999'
     When I click 'Save and continue'
     Then I am on the postcode entry page

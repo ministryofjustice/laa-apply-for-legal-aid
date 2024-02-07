@@ -15,6 +15,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     Then I should be on the Applicant page
 
     When I enter name 'Test', 'User'
+    Then I choose 'No'
     And I enter a date of birth that will make me 18 tomorrow
     And I click 'Save and continue'
     Then I am on the postcode entry page
