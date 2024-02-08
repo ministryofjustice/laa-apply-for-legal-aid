@@ -32,7 +32,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :changed_last_name),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.changed_last_name')}",
+            visually_hidden_text: t(".changed_last_name"),
           ) %>
     <% end %>
   <% end %>
@@ -44,7 +44,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name_at_birth),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.last_name_at_birth')}",
+            visually_hidden_text: t(".last_name_at_birth"),
           ) %>
     <% end %>
   <% end %>

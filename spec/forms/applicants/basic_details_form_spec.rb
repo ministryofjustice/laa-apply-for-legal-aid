@@ -332,7 +332,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         date_of_birth_1i: "1999",
         date_of_birth_2i: "12",
         date_of_birth_3i: "31",
-        changed_last_name: true,
+        changed_last_name: "true",
         last_name_at_birth: "",
       }
     end
