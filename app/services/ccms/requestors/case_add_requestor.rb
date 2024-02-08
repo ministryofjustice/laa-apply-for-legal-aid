@@ -27,7 +27,7 @@ module CCMS
 
       def call
         save_request(@options[:case_type]) unless Rails.env.production?
-        soap_client.call(:create_case_application, xml: request_xml) unless @options[:no_call]
+        Faraday::SoapCall.new(wsdl_location, :ccms).call(request_xml)
       end
 
     private

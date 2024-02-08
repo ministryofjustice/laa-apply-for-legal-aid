@@ -10,3 +10,9 @@ end
 def remove_xml_header(xml)
   xml.gsub("<?xml version='1.0' encoding='UTF-8'?>\n", "")
 end
+
+def extract_url_from(wsdl)
+  File.open(wsdl) do |f|
+    Nokogiri::XML(f).xpath("//soap:address").attribute("location").value
+  end
+end

@@ -35,6 +35,11 @@ class Applicant < ApplicationRecord
     "#{first_name} #{last_name}".strip
   end
 
+  def surname_at_birth
+    # used by CCMS generators
+    last_name_at_birth.presence || last_name
+  end
+
   def true_layer_token
     encrypted_true_layer_token&.fetch("token", nil)
   end
