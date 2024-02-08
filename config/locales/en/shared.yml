@@ -572,6 +572,7 @@ en:
         changed_last_name: Has your client ever changed their last name?
         changed_last_name_hint: For example, through marriage or deed poll
         last_name_at_birth: What was your client's last name at birth?
+        last_name_at_birth_hint: This lets us check for any records we have for your client under a previous name
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980.
         date_of_birth_label: Date of birth
