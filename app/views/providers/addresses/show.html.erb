@@ -34,16 +34,11 @@
       <%= govuk_inset_text(text: t("errors.address.#{form.object.lookup_error}")) %>
     <% end %>
 
-    <% group_error_class = @form.errors[:address_line_one].any? ? "govuk-form-group--error" : "" %>
-    <div class="govuk-form-group <%= group_error_class %>">
-      <%= form.govuk_text_field :address_line_one, label: { text: "Building and street" }, "aria-label": "Building and street line 1 of 2" %>
-      <%= form.govuk_text_field :address_line_two, label: { text: "Building and street", hidden: true },
-                                                   "aria-label": "Building and street line 2 of 2", field_with_error: :address_line_one %>
-    </div>
-
-    <%= form.govuk_text_field :city, width: "two-thirds" %>
-    <%= form.govuk_text_field :county, width: "two-thirds" %>
-    <%= form.govuk_text_field :postcode, hint: nil, width: 10 %>
+    <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
+    <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
+    <%= form.govuk_text_field :city, label: { text: t(".city") }, width: "two-thirds" %>
+    <%= form.govuk_text_field :county, label: { text: t(".county") }, width: "two-thirds" %>
+    <%= form.govuk_text_field :postcode, label: { text: t(".postcode") }, hint: nil, width: 10 %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>

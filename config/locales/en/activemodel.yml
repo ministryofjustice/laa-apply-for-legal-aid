@@ -86,9 +86,12 @@ en:
         address:
           attributes:
             address_line_one:
-              blank: Enter a building and street
+              blank: Enter the first line of the address
             city:
               blank: Enter a town or city
+              invalid: Enter a real town or city
+            county:
+              invalid: Enter a real county
             lookup_id:
               blank: Select an address from the list
             postcode:
@@ -155,7 +158,7 @@ en:
         applicants/address_form:
           attributes:
             address_line_one:
-              blank: Enter a building and street
+              blank: Enter the first line of the address
             city:
               blank: Enter a town or city
             lookup_id:
