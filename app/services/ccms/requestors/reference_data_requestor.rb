@@ -9,7 +9,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:process, xml: request_xml)
+        Faraday::SoapCall.new(wsdl_location, :ccms).call(request_xml)
       end
 
       def request_xml
