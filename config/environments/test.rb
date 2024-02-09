@@ -11,6 +11,7 @@ Rails.application.configure do
   # this probably isn't necessary. It's a good idea to do in a continuous integration
   # system, or in some way before deploying your code.
   config.eager_load = ENV["CI"].present?
+  require Rails.root.join("app/services/faraday/soap_call.rb")
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
