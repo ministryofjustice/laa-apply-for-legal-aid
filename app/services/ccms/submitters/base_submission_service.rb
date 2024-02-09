@@ -2,9 +2,8 @@ module CCMS
   CCMS_SUBMISSION_ERRORS = [
     CCMSError,
     CCMSUnsuccessfulResponseError,
-    Savon::HTTPError,
-    Savon::SOAPFault,
-    Savon::Error,
+    Faraday::Error,
+    Faraday::SoapError,
     StandardError,
   ].freeze
 

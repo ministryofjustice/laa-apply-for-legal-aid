@@ -131,7 +131,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
 
     context "when the operation is unsuccessful" do
       let(:transaction_request_id_in_example_response) { "20190301030405123456" }
-      let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+      let(:error) { [CCMS::CCMSError, Faraday::Error, Faraday::SoapError, StandardError] }
       let(:fake_error) { error.sample }
 
       before do

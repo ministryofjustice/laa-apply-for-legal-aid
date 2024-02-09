@@ -59,7 +59,7 @@ module CCMS
       end
 
       context "when the operation raises an error" do
-        let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+        let(:error) { [CCMS::CCMSError, Faraday::Error, Faraday::SoapError, StandardError] }
         let(:fake_error) { error.sample } # TODO: avoid this pattern
 
         before do
