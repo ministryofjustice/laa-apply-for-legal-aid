@@ -12,6 +12,7 @@ Feature: Search proceedings
     When I click 'Agree and continue'
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
+    Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
@@ -35,6 +36,7 @@ Feature: Search proceedings
     When I click 'Agree and continue'
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
+    Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
     Then I am on the postcode entry page

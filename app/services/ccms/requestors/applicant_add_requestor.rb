@@ -14,7 +14,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:create_client, xml: request_xml)
+        Faraday::SoapCall.new(wsdl_location, :ccms).call(request_xml)
       end
 
     private
@@ -42,6 +42,7 @@ module CCMS
       def name(xml)
         xml.__send__(:"common:Surname", applicant.last_name)
         xml.__send__(:"common:FirstName", applicant.first_name)
+        xml.__send__(:"common:SurnameAtBirth", applicant.surname_at_birth.presence)
       end
 
       # this is all mandatory: we don't hold any of this data except date of birth

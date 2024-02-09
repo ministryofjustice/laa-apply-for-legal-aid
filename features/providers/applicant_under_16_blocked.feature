@@ -5,6 +5,7 @@ Feature: Applicant under 16 blocked
     Given I start the journey as far as the applicant page
 
     When I enter name 'Test', 'Paul'
+    Then I choose 'No'
     And I enter a date of birth that will make me 16 today
     And I click 'Save and continue'
     Then I am on the postcode entry page

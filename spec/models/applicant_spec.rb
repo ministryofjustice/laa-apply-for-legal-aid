@@ -137,6 +137,26 @@ RSpec.describe Applicant do
     end
   end
 
+  describe "#surname_at_birth" do
+    subject(:surname_at_birth) { legal_aid_application.applicant.surname_at_birth }
+
+    let(:legal_aid_application) do
+      build(:legal_aid_application, :with_transaction_period, applicant:)
+    end
+
+    context "when a last_name_at_birth is set" do
+      let(:applicant) { build(:applicant, last_name: "current", last_name_at_birth: "different") }
+
+      it { is_expected.to eql "different" }
+    end
+
+    context "when a last_name_at_birth is not set" do
+      let(:applicant) { build(:applicant, last_name: "current", last_name_at_birth: nil) }
+
+      it { is_expected.to eql "current" }
+    end
+  end
+
   describe "#age" do
     subject(:age) { legal_aid_application.applicant.age }
 

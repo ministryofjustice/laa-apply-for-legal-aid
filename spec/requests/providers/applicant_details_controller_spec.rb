@@ -47,6 +47,7 @@ RSpec.describe Providers::ApplicantDetailsController do
           "date_of_birth(2i)": "07",
           "date_of_birth(3i)": "11",
           email: Faker::Internet.email,
+          changed_last_name: "false",
         },
       }
     end
@@ -90,6 +91,7 @@ RSpec.describe Providers::ApplicantDetailsController do
                 "date_of_birth(2i)": "07",
                 "date_of_birth(3i)": "11",
                 email: Faker::Internet.email,
+                changed_last_name: "false",
               },
             }
           end

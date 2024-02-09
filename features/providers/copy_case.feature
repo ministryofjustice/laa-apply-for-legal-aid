@@ -5,6 +5,7 @@ Background:
   And I start the journey as far as the applicant page
   And I have previously created an application with reference "L-TVH-U0T"
   When I enter name 'Test', 'User'
+  Then I choose 'No'
   And I enter the date of birth '03-04-1999'
   When I click 'Save and continue'
   Then I am on the postcode entry page

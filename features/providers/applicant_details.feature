@@ -3,6 +3,8 @@ Feature: Applicant details
   Scenario: Completes the application using address lookup with multiple proceedings
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
+    Then I choose 'Yes'
+    Then I enter last name at birth 'Smith'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
@@ -132,6 +134,7 @@ Feature: Applicant details
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
+    Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
@@ -191,6 +194,7 @@ Feature: Applicant details
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
+    Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
@@ -268,6 +272,7 @@ Feature: Applicant details
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
     Then I enter name 'Test', 'Walker'
+    Then I choose 'No'
     Then I enter the date of birth '10-1-1980'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
@@ -320,6 +325,7 @@ Feature: Applicant details
   Scenario: I can see that the applicant does not receive benefits
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
+    Then I choose 'No'
     Then I enter the date of birth '10-12-1961'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
@@ -366,6 +372,7 @@ Feature: Applicant details
     Then I click the first link 'Client name'
     Then I should be on a page showing "Enter your client's details"
     Then I enter name 'Kyle', 'Walker'
+    Then I choose 'No'
     Then I enter the date of birth '10-1-1980'
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a National Insurance number?"
@@ -380,6 +387,7 @@ Feature: Applicant details
   Scenario: Allows return to, and proceed from, Delegated Function date view
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
+    Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
     Then I am on the postcode entry page

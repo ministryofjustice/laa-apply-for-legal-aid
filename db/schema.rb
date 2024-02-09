@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_24_161717) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_06_145546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -110,9 +110,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_24_161717) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at", precision: nil
+    t.boolean "employed"
     t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
-    t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.boolean "has_national_insurance_number"
@@ -125,6 +125,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_24_161717) do
     t.decimal "student_finance_amount"
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
+    t.string "last_name_at_birth"
+    t.boolean "changed_last_name"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -593,9 +595,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_24_161717) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
     t.datetime "client_declaration_confirmed_at", precision: nil
     t.boolean "substantive_cost_override"

@@ -15,6 +15,7 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Test |
       | Last name | Walker |
+      | Has your client ever changed their last name? | No |
       | Date of birth | 10 January 1980 |
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | National Insurance number | JA293483A |
@@ -26,6 +27,9 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Test |
       | Last name | Walker |
+      | Has your client ever changed their last name? | No |
+
+    And I should not see "What was your client's last name at birth?"
 
     When I click Check Your Answers Change link for "First name"
     Then I should be on a page with title "Enter your client's details"
@@ -38,6 +42,34 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Fred |
       | Last name | Bloggs |
+      | Has your client ever changed their last name? | No |
+
+  @javascript
+  Scenario: I am able to return and amend the client's last name at birth
+    Given I complete the passported journey as far as check your answers for client details
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | First name | Test |
+      | Last name | Walker |
+      | Has your client ever changed their last name? | No |
+
+    And I should not see "What was your client's last name at birth?"
+
+    When I click Check Your Answers Change link for "Changed last name"
+    Then I should be on a page with title "Enter your client's details"
+
+    And I choose 'Yes'
+    Then I enter last name at birth 'Bloggs'
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Check your answers"
+
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | First name | Test |
+      | Last name | Walker |
+      | Has your client ever changed their last name? | Yes |
+      | What was your client's last name at birth? | Bloggs |
 
   @javascript @vcr
   Scenario: I am able to return and amend the client's address
