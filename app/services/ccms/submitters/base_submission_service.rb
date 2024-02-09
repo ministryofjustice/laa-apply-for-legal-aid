@@ -1,4 +1,5 @@
 module CCMS
+  require Rails.root.join("app/services/faraday/soap_call.rb")
   CCMS_SUBMISSION_ERRORS = [
     CCMSError,
     CCMSUnsuccessfulResponseError,
