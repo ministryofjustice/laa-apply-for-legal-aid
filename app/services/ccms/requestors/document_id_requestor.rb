@@ -13,7 +13,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:upload_document, xml: request_xml)
+        Faraday::SoapCall.new(wsdl_location, :ccms).call(request_xml)
       end
 
     private

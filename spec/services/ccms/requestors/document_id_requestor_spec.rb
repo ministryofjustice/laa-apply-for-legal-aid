@@ -92,16 +92,17 @@ module CCMS
       end
 
       describe "#call" do
-        let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
-        let(:expected_soap_operation) { :upload_document }
-        let(:expected_xml) { requestor.__send__(:request_xml) }
-
         before do
-          allow(requestor).to receive(:soap_client).and_return(soap_client_double)
+          allow(Faraday::SoapCall).to receive(:new).and_return(soap_call)
+          stub_request(:post, expected_url)
         end
 
-        it "calls the savon soap client" do
-          expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
+        let(:soap_call) { instance_double(Faraday::SoapCall) }
+        let(:expected_xml) { requestor.__send__(:request_xml) }
+        let(:expected_url) { extract_url_from(requestor.__send__(:wsdl_location)) }
+
+        it "invokes the faraday soap_call" do
+          expect(soap_call).to receive(:call).with(expected_xml).once
           requestor.call
         end
       end
