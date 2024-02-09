@@ -46,22 +46,6 @@ module CCMS
 
     private
 
-      def soap_client
-        @soap_client ||= Savon.client(
-          headers: { "x-api-key" => config.aws_gateway_api_key },
-          env_namespace: :soap,
-          wsdl: wsdl_location,
-          namespaces:,
-          pretty_print_xml: true,
-          convert_request_keys_to: :none,
-          namespace_identifier: "ns2",
-          log: false,
-          log_level: :debug,
-          open_timeout: 180,
-          read_timeout: 180,
-        )
-      end
-
       def soap_envelope(namespaces)
         Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|
           xml.__send__(:"soap:Envelope", namespaces) do
