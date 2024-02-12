@@ -31,7 +31,7 @@ class BenefitCheckService
     response = soap.call(request_xml)
     result = Hash.from_xml(response).deep_transform_keys { |key| key.underscore.to_sym }
     if result.dig(:envelope, :body, :fault)
-      error_message = result.dig(:envelope, :body, :fault, :detail, :benefit_checker_fault_exception, :message_text)
+      error_message = "BenefitCheckError: #{result.dig(:envelope, :body, :fault, :detail, :benefit_checker_fault_exception, :message_text)}"
       raise BenefitCheckError, error_message
     end
 

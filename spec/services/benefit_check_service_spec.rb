@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.describe BenefitCheckService do
   subject(:benefit_check_service) { described_class.new(application) }
 
+  before do
+    allow(Rails.configuration.x.benefit_check).to receive_messages(service_name: "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl", client_org_id: "dummy_client_org_id", client_user_id: "dummy_client_user_id")
+  end
+
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
@@ -115,7 +119,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "captures error" do
-        expect(AlertManager).to receive(:capture_exception).with("Invalid request credentials.")
+        expect(AlertManager).to receive(:capture_exception).with("BenefitCheckError: Invalid request credentials.")
         benefit_check_service.call
       end
 
