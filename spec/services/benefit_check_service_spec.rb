@@ -8,17 +8,21 @@ RSpec.describe BenefitCheckService do
   let(:national_insurance_number) { "JA293483A" }
   let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:) }
   let(:application) { create(:application, applicant:) }
-  let(:savon_client) { instance_double(Savon::Client) }
+  let(:faraday) { instance_double(Faraday::SoapCall) }
 
   describe "#check_benefits", :vcr do
-    let(:expected_params) do
-      hash_including(
-        message: hash_including(
-          clientReference: application.id,
-          surname: applicant.last_name.strip.upcase,
-          dateOfBirth: applicant.date_of_birth.strftime("%Y%m%d"),
-        ),
-      )
+    let(:payload) do
+      <<~PAYLOAD.squish
+        <?xml version="1.0" encoding="UTF-8"?>#{' '}
+        <env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+        <env:Body> <wsdl:check>
+        <wsdl:clientReference>#{application.id}</wsdl:clientReference>
+        <wsdl:nino>JA293483A</wsdl:nino>
+        <wsdl:surname>WALKER</wsdl:surname>
+        <wsdl:dateOfBirth>19800110</wsdl:dateOfBirth>
+        <wsdl:dateOfAward>#{application.created_at.strftime('%Y%m%d')}</wsdl:dateOfAward>
+        <wsdl:lscServiceName>https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl</wsdl:lscServiceName>
+      PAYLOAD
     end
 
     context "when the call is successful", vcr: { cassette_name: "benefit_check_service/successful_call" } do
@@ -29,11 +33,11 @@ RSpec.describe BenefitCheckService do
         expect(result[:confirmation_ref]).not_to be_empty
       end
 
-      xit "sends the right parameters" do
-        allow(Savon).to receive(:client).and_return(savon_client)
-        expect(savon_client).to receive(:call).with(:check, expected_params)
-        benefit_check_service.call
-      end
+      #   xit "sends the right parameters" do
+      #     allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
+      #     expect(faraday).to receive(:call).with(payload)
+      #     benefit_check_service.call
+      #   end
 
       context "when the last name is not in upper case" do
         let(:last_name) { " walker " }
@@ -43,11 +47,11 @@ RSpec.describe BenefitCheckService do
           expect(result[:benefit_checker_status]).to eq("Yes")
         end
 
-        xit "sends the right parameters" do
-          allow(Savon).to receive(:client).and_return(savon_client)
-          expect(savon_client).to receive(:call).with(:check, expected_params)
-          benefit_check_service.call
-        end
+        # xit "sends the right parameters" do
+        #   allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
+        #   expect(faraday).to receive(:call).with(payload)
+        #   benefit_check_service.call
+        # end
       end
     end
 
