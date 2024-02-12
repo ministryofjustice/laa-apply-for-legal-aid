@@ -1,4 +1,6 @@
 class BenefitCheckService
+  class BenefitCheckError < StandardError; end
+
   BENEFIT_CHECKER_NAMESPACE = "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check".freeze
   USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
   REQUEST_TIMEOUT = 30.seconds
@@ -28,8 +30,17 @@ class BenefitCheckService
     soap = Faraday::SoapCall.new(Rails.configuration.x.benefit_check.wsdl_url, :benefit_checker)
     response = soap.call(request_xml)
     result = Hash.from_xml(response).deep_transform_keys { |key| key.underscore.to_sym }
+    if result.dig(:envelope, :body, :fault)
+      error_message = result.dig(:envelope, :body, :fault, :detail, :benefit_checker_fault_exception, :message_text)
+      raise BenefitCheckError, error_message
+    end
+
     result.dig(:envelope, :body, :benefit_checker_response)
   rescue Faraday::SoapError
+    false
+  rescue BenefitCheckError => e
+    AlertManager.capture_exception(e.message)
+    Rails.logger.error(e.message)
     false
   end
 
