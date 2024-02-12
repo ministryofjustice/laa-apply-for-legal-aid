@@ -70,15 +70,6 @@ private
     application.applicant
   end
 
-  def soap_client
-    @soap_client ||= Savon.client(
-      endpoint: config.wsdl_url,
-      open_timeout: REQUEST_TIMEOUT,
-      read_timeout: REQUEST_TIMEOUT,
-      namespace: BENEFIT_CHECKER_NAMESPACE,
-    )
-  end
-
   def soap_envelope
     Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|
       xml.__send__(:"env:Envelope", NAMESPACES) do
