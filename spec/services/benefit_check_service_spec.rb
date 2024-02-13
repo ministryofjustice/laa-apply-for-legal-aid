@@ -53,8 +53,8 @@ RSpec.describe BenefitCheckService do
       it "sends the right parameters" do
         allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
         allow(faraday).to receive(:call).with(payload).and_return(response)
-        expect(faraday).to receive(:call).with(payload)
         benefit_check_service.call
+        expect(faraday).to have_received(:call).with(payload)
       end
 
       context "when the last name is not in upper case" do
@@ -68,8 +68,8 @@ RSpec.describe BenefitCheckService do
         it "sends the right parameters" do
           allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
           allow(faraday).to receive(:call).with(payload).and_return(response)
-          expect(faraday).to receive(:call).with(payload)
           benefit_check_service.call
+          expect(faraday).to have_received(:call).with(payload)
         end
       end
     end
