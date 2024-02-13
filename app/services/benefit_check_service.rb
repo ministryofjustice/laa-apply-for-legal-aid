@@ -1,19 +1,13 @@
 class BenefitCheckService
   class BenefitCheckError < StandardError; end
 
-  BENEFIT_CHECKER_NAMESPACE = "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check".freeze
   USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
-  REQUEST_TIMEOUT = 30.seconds
   NAMESPACES = {
     "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
     "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-    "xmlns:wsdl": BENEFIT_CHECKER_NAMESPACE,
+    "xmlns:wsdl": "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check",
     "xmlns:env": "http://schemas.xmlsoap.org/soap/envelope/",
   }.freeze
-
-  class ApiError < StandardError
-    include Nesty::NestedError
-  end
 
   def self.call(application)
     return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production?
