@@ -2,10 +2,11 @@ module Faraday
   class SoapError < StandardError; end
 
   class SoapCall
-    attr_reader :url, :type
+    attr_reader :url, :type, :timeout
 
-    def initialize(wsdl_or_url, type)
+    def initialize(wsdl_or_url, type, timeout = 30)
       @type = type
+      @timeout = timeout
       raise StandardError, "Unable to parse url" unless parse_url(wsdl_or_url)
     end
 
@@ -48,7 +49,7 @@ module Faraday
     end
 
     def conn
-      @conn ||= Faraday.new(url:, headers:)
+      @conn ||= Faraday.new(url:, headers:, request: { timeout: })
     end
   end
 end
