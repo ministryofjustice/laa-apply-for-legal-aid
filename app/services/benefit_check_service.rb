@@ -1,11 +1,13 @@
 class BenefitCheckService
-  BENEFIT_CHECKER_NAMESPACE = "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check".freeze
-  USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
-  REQUEST_TIMEOUT = 30.seconds
+  class BenefitCheckError < StandardError; end
 
-  class ApiError < StandardError
-    include Nesty::NestedError
-  end
+  USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
+  NAMESPACES = {
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:wsdl": "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check",
+    "xmlns:env": "http://schemas.xmlsoap.org/soap/envelope/",
+  }.freeze
 
   def self.call(application)
     return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production?
@@ -19,12 +21,20 @@ class BenefitCheckService
   end
 
   def call
-    soap_client.call(:check, message: benefit_checker_params).body[:benefit_checker_response]
-  rescue Savon::SOAPFault => e
-    AlertManager.capture_exception(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
+    soap = Faraday::SoapCall.new(Rails.configuration.x.benefit_check.wsdl_url, :benefit_checker)
+    response = soap.call(request_xml)
+    result = Hash.from_xml(response).deep_transform_keys { |key| key.underscore.to_sym }
+    if result.dig(:envelope, :body, :fault)
+      error_message = "BenefitCheckError: #{result.dig(:envelope, :body, :fault, :detail, :benefit_checker_fault_exception, :message_text)}"
+      raise BenefitCheckError, error_message
+    end
+
+    result.dig(:envelope, :body, :benefit_checker_response)
+  rescue Faraday::SoapError
     false
-  rescue StandardError => e
-    AlertManager.capture_exception(e)
+  rescue BenefitCheckError => e
+    AlertManager.capture_exception(e.message)
+    Rails.logger.error(e.message)
     false
   end
 
@@ -54,12 +64,21 @@ private
     application.applicant
   end
 
-  def soap_client
-    @soap_client ||= Savon.client(
-      endpoint: config.wsdl_url,
-      open_timeout: REQUEST_TIMEOUT,
-      read_timeout: REQUEST_TIMEOUT,
-      namespace: BENEFIT_CHECKER_NAMESPACE,
-    )
+  def soap_envelope
+    Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|
+      xml.__send__(:"env:Envelope", NAMESPACES) do
+        xml.__send__(:"env:Body") do
+          xml.__send__(:"wsdl:check") do
+            benefit_checker_params.each do |key, value|
+              xml.__send__(key.to_sym, value)
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def request_xml
+    @request_xml ||= soap_envelope.to_xml.squish.chomp
   end
 end

@@ -3,22 +3,43 @@ require "rails_helper"
 RSpec.describe BenefitCheckService do
   subject(:benefit_check_service) { described_class.new(application) }
 
+  before do
+    allow(Rails.configuration.x.benefit_check).to receive_messages(service_name: "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl", client_org_id: "dummy_client_org_id", client_user_id: "dummy_client_user_id")
+  end
+
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
   let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:) }
   let(:application) { create(:application, applicant:) }
-  let(:savon_client) { instance_double(Savon::Client) }
+  let(:faraday) { instance_double(Faraday::SoapCall) }
 
   describe "#check_benefits", :vcr do
-    let(:expected_params) do
-      hash_including(
-        message: hash_including(
-          clientReference: application.id,
-          surname: applicant.last_name.strip.upcase,
-          dateOfBirth: applicant.date_of_birth.strftime("%Y%m%d"),
-        ),
-      )
+    let(:payload) do
+      <<~PAYLOAD.squish
+        <?xml version="1.0" encoding="UTF-8"?>#{' '}
+        <env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+        <env:Body> <wsdl:check>
+        <wsdl:clientReference>#{application.id}</wsdl:clientReference>
+        <wsdl:nino>JA293483A</wsdl:nino>
+        <wsdl:surname>WALKER</wsdl:surname>
+        <wsdl:dateOfBirth>19800110</wsdl:dateOfBirth>
+        <wsdl:dateOfAward>#{application.created_at.strftime('%Y%m%d')}</wsdl:dateOfAward>
+        <wsdl:lscServiceName>#{Rails.configuration.x.benefit_check.service_name}</wsdl:lscServiceName>
+        <wsdl:clientOrgId>#{Rails.configuration.x.benefit_check.client_org_id}</wsdl:clientOrgId>
+        <wsdl:clientUserId>#{Rails.configuration.x.benefit_check.client_user_id}</wsdl:clientUserId>
+        </wsdl:check> </env:Body> </env:Envelope>
+      PAYLOAD
+    end
+    let(:response) do
+      <<~XML.squish
+        <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
+        xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">#{application.id}</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1658229558145</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+      XML
     end
 
     context "when the call is successful", vcr: { cassette_name: "benefit_check_service/successful_call" } do
@@ -30,9 +51,10 @@ RSpec.describe BenefitCheckService do
       end
 
       it "sends the right parameters" do
-        allow(Savon).to receive(:client).and_return(savon_client)
-        expect(savon_client).to receive(:call).with(:check, expected_params)
+        allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
+        allow(faraday).to receive(:call).with(payload).and_return(response)
         benefit_check_service.call
+        expect(faraday).to have_received(:call).with(payload)
       end
 
       context "when the last name is not in upper case" do
@@ -44,15 +66,16 @@ RSpec.describe BenefitCheckService do
         end
 
         it "sends the right parameters" do
-          allow(Savon).to receive(:client).and_return(savon_client)
-          expect(savon_client).to receive(:call).with(:check, expected_params)
+          allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
+          allow(faraday).to receive(:call).with(payload).and_return(response)
           benefit_check_service.call
+          expect(faraday).to have_received(:call).with(payload)
         end
       end
     end
 
-    context "when calling the API raises a Savon::SOAPFault error", vcr: { cassette_name: "benefit_check_service/service_error" } do
-      let(:last_name) { "SERVICEEXCEPTION" }
+    context "when calling the API raises a Faraday::ConnectionFailed error" do
+      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(Faraday::ConnectionFailed.new("Service unavailable")) }
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("Service unavailable"))
@@ -64,21 +87,11 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context "when calling the API raises an unhandled error or StandardError" do
-      before do
-        allow(Savon).to receive(:client).and_return(savon_client)
-        allow(savon_client).to receive(:call)
-                                 .with(:check, expected_params)
-                                 .and_raise(StandardError.new("fake error"))
-      end
+    context "when calling the API raises a StandardError" do
+      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(StandardError.new("Fake error")) }
 
       it "captures error" do
-        expect(AlertManager).to receive(:capture_exception).with(message_contains("fake error"))
-        benefit_check_service.call
-      end
-
-      it "captures StandardError" do
-        expect(AlertManager).to receive(:capture_exception).with(instance_of(StandardError))
+        expect(AlertManager).to receive(:capture_exception).with(message_contains("Fake error"))
         benefit_check_service.call
       end
 
@@ -88,13 +101,10 @@ RSpec.describe BenefitCheckService do
     end
 
     context "when the API times out" do
-      before do
-        allow(Savon).to receive(:client).and_return(savon_client)
-        allow(savon_client).to receive(:call).and_raise(Net::ReadTimeout)
-      end
+      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(Net::ReadTimeout) }
 
       it "captures error and returns false" do
-        expect(AlertManager).to receive(:capture_exception).with(Net::ReadTimeout)
+        expect(AlertManager).to receive(:capture_exception).with(Faraday::TimeoutError)
         benefit_check_service.call
       end
 
@@ -109,7 +119,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "captures error" do
-        expect(AlertManager).to receive(:capture_exception).with(message_contains("Invalid request credentials"))
+        expect(AlertManager).to receive(:capture_exception).with("BenefitCheckError: Invalid request credentials.")
         benefit_check_service.call
       end
 
