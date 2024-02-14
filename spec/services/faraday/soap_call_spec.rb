@@ -60,7 +60,7 @@ RSpec.describe Faraday::SoapCall do
     end
   end
 
-  describe ".call", vcr: { cassette_name: "benefit_check_service/savon_successful_call" } do
+  describe ".call", vcr: { cassette_name: "benefit_check_service/successful_call" } do
     let(:calling) { faraday_soap_call.call(payload) }
     let(:type) { :benefit_checker }
     let(:initial_object) { "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl" }
