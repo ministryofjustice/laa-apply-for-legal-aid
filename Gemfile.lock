@@ -353,8 +353,11 @@ GEM
     htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     httpclient (2.8.3)
-    httpi (3.0.1)
-      rack
+    httpi (4.0.0)
+      base64
+      mutex_m
+      nkf
+      rack (>= 2.0, < 3.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     i18n-tasks (1.0.13)
@@ -423,10 +426,12 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
+    nkf (0.2.0)
     nokogiri (1.16.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nori (2.6.0)
+    nori (2.7.0)
+      bigdecimal
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -661,15 +666,15 @@ GEM
       rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    savon (2.13.1)
+    savon (2.15.0)
       akami (~> 1.2)
       builder (>= 2.1.2)
       gyoku (~> 1.2)
-      httpi (>= 2.4.5)
+      httpi (>= 2.4.5, < 5)
       mail (~> 2.5)
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
-      wasabi (~> 3.4)
+      wasabi (>= 3.7, < 6)
     selenium-webdriver (4.17.0)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -748,10 +753,10 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    wasabi (3.8.0)
+    wasabi (5.0.1)
       addressable
-      httpi (~> 3.0)
-      nokogiri (>= 1.4.2)
+      faraday (~> 2.8)
+      nokogiri (>= 1.13.9)
     webdack-uuid_migration (1.4.0)
       activerecord (>= 4.0)
     webmock (3.20.0)
@@ -850,7 +855,7 @@ DEPENDENCIES
   rubocop-govuk
   rubocop-performance
   ruby-saml-idp!
-  savon (~> 2.13.1)
+  savon (~> 2.15.0)
   selenium-webdriver
   sentry-rails (>= 4.8.0)
   sentry-ruby
