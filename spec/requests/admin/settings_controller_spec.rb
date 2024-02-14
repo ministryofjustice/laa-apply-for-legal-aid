@@ -43,6 +43,7 @@ RSpec.describe Admin::SettingsController do
           partner_means_assessment: "true",
           linked_applications: "true",
           collect_hmrc_data: "true",
+          home_address: "true",
         },
       }
     end
@@ -59,6 +60,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.partner_means_assessment?).to be(true)
       expect(setting.linked_applications?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
+      expect(setting.home_address?).to be(true)
     end
 
     it "create settings if they do not exist" do

@@ -15,6 +15,7 @@ RSpec.describe Setting do
         expect(rec.partner_means_assessment?).to be false
         expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
+        expect(rec.home_address?).to be false
       end
     end
 
@@ -30,6 +31,7 @@ RSpec.describe Setting do
           partner_means_assessment: true,
           linked_applications: true,
           collect_hmrc_data: true,
+          home_address: false,
         )
       end
 
@@ -44,6 +46,7 @@ RSpec.describe Setting do
         expect(rec.partner_means_assessment?).to be true
         expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
+        expect(rec.home_address?).to be false
       end
     end
   end
@@ -61,6 +64,7 @@ RSpec.describe Setting do
       expect(described_class.partner_means_assessment?).to be false
       expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
+      expect(described_class.home_address?).to be false
     end
   end
 end
