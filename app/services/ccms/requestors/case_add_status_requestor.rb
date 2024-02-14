@@ -12,7 +12,7 @@ module CCMS
       end
 
       def call
-        soap_client.call(:get_case_txn_status, xml: request_xml)
+        Faraday::SoapCall.new(wsdl_location, :ccms).call(request_xml)
       end
 
     private

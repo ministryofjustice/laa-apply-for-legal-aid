@@ -73,7 +73,7 @@ module CCMS
 
       context "when the operation is in error" do
         context "and it errors when adding an applicant" do
-          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+          let(:error) { [CCMS::CCMSError, Faraday::Error, Faraday::SoapError, StandardError] }
           let(:sample_error) { error.sample }
 
           before do

@@ -153,7 +153,7 @@ module CCMS
         # the microsecond :(
 
         context "when populating documents" do
-          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+          let(:error) { [CCMS::CCMSError, Faraday::Error, Faraday::SoapError, StandardError] }
           let(:fake_error) { error.sample }
 
           before do

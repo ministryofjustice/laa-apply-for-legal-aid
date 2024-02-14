@@ -1,10 +1,10 @@
 module CCMS
+  require Rails.root.join("app/services/faraday/soap_call.rb")
   CCMS_SUBMISSION_ERRORS = [
     CCMSError,
     CCMSUnsuccessfulResponseError,
-    Savon::HTTPError,
-    Savon::SOAPFault,
-    Savon::Error,
+    Faraday::Error,
+    Faraday::SoapError,
     StandardError,
   ].freeze
 

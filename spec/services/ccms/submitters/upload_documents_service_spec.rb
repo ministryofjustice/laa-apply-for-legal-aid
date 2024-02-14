@@ -97,7 +97,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
     let(:history) { histories.where(request: nil, response: nil, to_state: "failed").last }
 
     context "and the operation fails due to a CCMS::CCMSError exception" do
-      let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+      let(:error) { [CCMS::CCMSError, Faraday::Error, Faraday::SoapError, StandardError] }
       let(:fake_error) { error.sample }
 
       before do
