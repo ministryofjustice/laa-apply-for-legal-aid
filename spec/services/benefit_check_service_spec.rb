@@ -42,7 +42,12 @@ RSpec.describe BenefitCheckService do
       XML
     end
 
-    context "when the call is successful", vcr: { cassette_name: "benefit_check_service/successful_call" } do
+    context "when the call is successful" do
+      before do
+        allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
+        allow(faraday).to receive(:call).with(payload).and_return(response)
+      end
+
       it "returns the right parameters" do
         result = benefit_check_service.call
         expect(result[:benefit_checker_status]).to eq("Yes")
@@ -51,8 +56,6 @@ RSpec.describe BenefitCheckService do
       end
 
       it "sends the right parameters" do
-        allow(Faraday::SoapCall).to receive(:new).and_return(faraday)
-        allow(faraday).to receive(:call).with(payload).and_return(response)
         benefit_check_service.call
         expect(faraday).to have_received(:call).with(payload)
       end
