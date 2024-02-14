@@ -178,7 +178,7 @@ Rails.application.routes.draw do
       resource :has_other_proceedings, only: %i[show update destroy]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
-      resource :address, only: %i[show update]
+      resource :address, only: %i[show update], path: "enter_correspondence_address"
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :check_benefit, only: %i[index update]

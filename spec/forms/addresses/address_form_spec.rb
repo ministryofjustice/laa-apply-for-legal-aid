@@ -26,30 +26,13 @@ RSpec.describe Addresses::AddressForm, type: :form do
       expect(form).to be_valid
     end
 
-    describe "Building and street" do
-      context "when both fields are blank" do
+    describe "Address line 1" do
+      context "when Address line 1 is blank" do
         let(:address_line_one) { "" }
-        let(:address_line_two) { "" }
 
-        it "returns an presence error on line one and line two" do
+        it "returns an presence error on line one" do
           expect(form).not_to be_valid
-          expect(form.errors[:address_line_one]).to contain_exactly("Enter a building and street")
-        end
-      end
-
-      context "when line one is blank" do
-        let(:address_line_one) { "" }
-
-        it "form is valid" do
-          expect(form).to be_valid
-        end
-      end
-
-      context "when line two is blank" do
-        let(:address_line_two) { "" }
-
-        it "form is valid" do
-          expect(form).to be_valid
+          expect(form.errors[:address_line_one]).to contain_exactly("Enter the first line of the address")
         end
       end
     end
@@ -61,6 +44,26 @@ RSpec.describe Addresses::AddressForm, type: :form do
         it "returns an presence error on city field" do
           expect(form).not_to be_valid
           expect(form.errors[:city]).to contain_exactly("Enter a town or city")
+        end
+      end
+
+      context "when an invalid input has been entered" do
+        let(:city) { "12city" }
+
+        it "returns an error on city field" do
+          expect(form).not_to be_valid
+          expect(form.errors[:city]).to contain_exactly("Enter a real town or city")
+        end
+      end
+    end
+
+    describe "County" do
+      context "when an invalid input has been entered" do
+        let(:county) { "12county" }
+
+        it "returns an error on city field" do
+          expect(form).not_to be_valid
+          expect(form.errors[:county]).to contain_exactly("Enter a real county")
         end
       end
     end
