@@ -34,4 +34,11 @@ spec:
               requests:
                 cpu: 400m
                 memory: 4096Mi
+            securityContext:
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                drop: [ "ALL" ]
           restartPolicy: Never
