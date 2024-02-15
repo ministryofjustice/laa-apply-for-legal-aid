@@ -31,6 +31,8 @@ spec:
           imagePullPolicy: IfNotPresent
           command: ['bundle', 'exec', 'sidekiq']
 {{ include "apply-for-legal-aid.envs" . | nindent 10 }}
+          securityContext:
+            runAsNonRoot: true
           resources:
             limits:
               cpu: 500m
