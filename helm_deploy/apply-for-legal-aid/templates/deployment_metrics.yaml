@@ -51,3 +51,10 @@ spec:
             requests:
               cpu: 10m
               memory: 64Mi
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
