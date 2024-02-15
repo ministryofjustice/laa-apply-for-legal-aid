@@ -19,6 +19,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     city: -> { Faker::Address.city },
     county: -> { Faker::Address.city },
     postcode: -> { Faker::Address.zip },
+    building_number_name: -> { Faker::Address.building_number },
     organisation: nil,
   },
   admin_users: {
