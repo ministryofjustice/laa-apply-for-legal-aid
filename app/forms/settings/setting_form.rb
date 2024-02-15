@@ -8,7 +8,8 @@ module Settings
                   :enable_ccms_submission,
                   :partner_means_assessment,
                   :linked_applications,
-                  :collect_hmrc_data
+                  :collect_hmrc_data,
+                  :home_address
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -17,6 +18,7 @@ module Settings
               :partner_means_assessment,
               :linked_applications,
               :collect_hmrc_data,
+              :home_address,
               presence: true
   end
 end

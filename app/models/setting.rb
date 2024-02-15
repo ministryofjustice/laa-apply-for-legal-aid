@@ -35,6 +35,10 @@ class Setting < ApplicationRecord
     setting.collect_hmrc_data
   end
 
+  def self.home_address?
+    setting.home_address
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

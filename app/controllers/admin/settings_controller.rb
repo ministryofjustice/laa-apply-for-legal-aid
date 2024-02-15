@@ -24,7 +24,8 @@ module Admin
                                       :enable_ccms_submission,
                                       :partner_means_assessment,
                                       :linked_applications,
-                                      :collect_hmrc_data)
+                                      :collect_hmrc_data,
+                                      :home_address)
     end
 
     def setting
