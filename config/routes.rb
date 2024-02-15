@@ -179,7 +179,7 @@ Rails.application.routes.draw do
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update], path: "enter_correspondence_address"
-      resource :address_lookup, only: %i[show update]
+      resource :address_lookup, only: %i[show update], path: "find_correspondence_address"
       resource :address_selection, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :has_national_insurance_number, only: %i[show update]

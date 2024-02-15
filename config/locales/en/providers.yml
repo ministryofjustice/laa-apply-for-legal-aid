@@ -29,7 +29,9 @@ en:
       show:
         address_manual_link: Enter address manually
         heading: Enter your client's correspondence address
-        label: Postcode
+        label:
+          postcode: Postcode
+          building_number_name: Building number or name (optional)
         submit_button: Find address
         helper_text:
           The address you provide is only for this application. If your client has
@@ -1565,7 +1567,7 @@ en:
         dont_use_service:
           list_title: "But do not use this service if:"
           partner_list_item: the client has a partner, unless the partner is the opponent
-          list: 
+          list:
             - the client is under 16 years old
             - the client is self-employed or is a member of the armed forces
             - you want to make an emergency application and delegated functions have not been used

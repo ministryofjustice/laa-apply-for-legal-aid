@@ -13,7 +13,7 @@ module Providers
 
     def form_params
       merge_with_model(address) do
-        params.require(:address_lookup).permit(:postcode)
+        params.require(:address_lookup).permit(:postcode, :building_number_name)
       end
     end
 

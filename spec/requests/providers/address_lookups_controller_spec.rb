@@ -79,6 +79,15 @@ RSpec.describe Providers::AddressLookupsController do
           patch_request
           expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
         end
+
+        context "and a building number" do
+          before { params[:address_lookup][:building_number_name] = "Prospect Cottage" }
+
+          it "saves the building name/number value" do
+            patch_request
+            expect(applicant.address.building_number_name).to eq("Prospect Cottage")
+          end
+        end
       end
 
       context "with form submitted using Save as draft button" do
