@@ -9,6 +9,7 @@ en:
     hint:
       address_lookup:
         postcode: This must be a UK postcode, for example SW1A 2AA.
+        building_number_name: For example, 15 or Prospect Cottage.
       applicant:
         national_insurance_number: For example, QQ 12 34 56 C
       legal_aid_application:
