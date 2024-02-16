@@ -70,9 +70,10 @@ RSpec.describe Providers::AddressLookupsController do
       context "with a valid postcode" do
         let(:postcode) { "SW1H 9EA" }
 
-        it "saves the postcode" do
+        it "saves the postcode and the location" do
           patch_request
           expect(applicant.address.postcode).to eq(postcode.delete(" ").upcase)
+          expect(applicant.address.location).to eq("correspondence")
         end
 
         it "redirects to the address selection page" do
