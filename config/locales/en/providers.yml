@@ -28,7 +28,7 @@ en:
     address_lookups:
       show:
         address_manual_link: Enter address manually
-        heading: Enter your client's correspondence address
+        heading: Find your client's correspondence address
         label:
           postcode: Postcode
           building_number_name: Building number or name (optional)

@@ -9,7 +9,7 @@ Feature: No national insurance number for applicant
     Then I choose 'No'
     And I enter the date of birth '10-1-1980'
     And I click 'Save and continue'
-    Then I should be on a page with title "Enter your client's correspondence address"
+    Then I should be on a page with title "Find your client's correspondence address"
 
     When I enter a postcode 'SW1H 9EA'
     And I click "Find address"

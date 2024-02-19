@@ -77,7 +77,7 @@ Feature: Checking client details answers backwards and forwards
     And I should see "Transport For London"
 
     When I click Check Your Answers Change link for "address"
-    Then I should be on a page with title "Enter your client's correspondence address"
+    Then I should be on a page with title "Find your client's correspondence address"
 
     When I click 'Find address'
     And I select an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
