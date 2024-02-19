@@ -104,8 +104,8 @@ module CCMS
                     expect(blocks.size).to eq 1
                   end
 
-                  it "generated Dependant adult as relationship" do
-                    expect(blocks.first).to have_text_response "Dependant adult"
+                  it "generated Dependent adult as relationship" do
+                    expect(blocks.first).to have_text_response "Dependent adult"
                   end
                 end
 
@@ -114,7 +114,7 @@ module CCMS
                   let(:dob) { 14.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_T_12WP3_17A") }
 
-                  it "generated Dependant adult as relationship" do
+                  it "generated under 15 child as relationship" do
                     expect(blocks.first).to have_text_response "Child aged 15 and under"
                   end
                 end
@@ -124,7 +124,7 @@ module CCMS
                   let(:dob) { 17.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, "CLI_RES_PER_INPUT_T_12WP3_17A") }
 
-                  it "generated Dependant adult as relationship" do
+                  it "generated over 16 child as relationship" do
                     expect(blocks.first).to have_text_response "Child aged 16 and over"
                   end
                 end
