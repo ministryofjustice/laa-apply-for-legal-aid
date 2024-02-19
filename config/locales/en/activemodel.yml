@@ -93,7 +93,7 @@ en:
             county:
               invalid: Enter a real county
             lookup_id:
-              blank: Select an address from the list
+              blank: Select your client's correspondence address
             postcode:
               blank: Enter a postcode
               invalid: Enter a postcode in the right format

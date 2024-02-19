@@ -3,9 +3,16 @@ module AddressHandling
 
 private
 
+  def filter_addresses
+    @addresses.select! do |addr|
+      [addr.address_line_one, addr.address_line_two].any? do |str|
+        str.downcase.include?(applicant.address.building_number_name.downcase)
+      end
+    end
+  end
+
   def collect_addresses
-    count = AddressCollectionItem.new(nil, t("providers.address_selections.show.addresses_found_text", count: @addresses.size))
-    [count] + @addresses.map { |addr| AddressCollectionItem.new(addr.lookup_id, addr.full_address) }
+    @addresses.map { |addr| AddressCollectionItem.new(addr.lookup_id, addr.full_address) }
   end
 
   def address_list_params

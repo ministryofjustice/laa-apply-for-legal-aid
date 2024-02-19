@@ -89,6 +89,21 @@ en:
           and <abbr title="HM Revenue and Customs">HMRC</abbr>
         c: LAA can check my details with my bank and credit reference agencies
         d: the information I have given is complete and correct
+    address_selection:
+      select_address:
+        heading: Select your client's correspondence address
+        addresses_found_text:
+          { one: "1 address found", other: "%{count} addresses found" }
+        search_again: Search again
+        link_text: Enter an address manually
+        continue_button_text: Use this address
+      confirm_address:
+        heading: Confirm your client's correspondence address
+        search_again: Search again
+        link_text: Enter an address manually
+        continue_button_text: Use this address
+      no_address:
+        heading: No address found
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"

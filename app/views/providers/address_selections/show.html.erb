@@ -6,41 +6,9 @@
       local: true,
     ) do |form| %>
 
-    <%= page_template(
-          page_title: t(".heading"),
-          template: :basic,
-          form:,
-        ) do %>
-
-    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
-
-      <p class="govuk-label">
-        <%= t("generic.address.postcode") %>
-      </p>
-      <p class='govuk-body govuk-!-font-weight-bold' role='alert'>
-        <%= @form.postcode.insert(-4, " ") %>
-        <%= govuk_link_to(
-              t("generic.change"),
-              providers_legal_aid_application_address_lookup_path(@legal_aid_application),
-              class: "govuk-body change-link change-postcode-link",
-              "aria-label": "postcode",
-            ) %>
-      </p>
-      <%= form.hidden_field :postcode %>
-
-      <% @addresses.each_with_index do |address, index| %>
-        <%= hidden_field_tag "address_selection[list][]", address.to_json, id: "address_selection_list_#{index}" %>
-      <% end %>
-
-      <%= form.govuk_collection_select :lookup_id,
-                                       @address_collection,
-                                       :id,
-                                       :address,
-                                       label: { text: t(".select_address_label") } %>
-
-      <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
-
+    <% if @address_collection.count > 1 %>
+      <%= render "shared/address_selection/select_address", form:, addresses: @addresses %>
+    <% elsif @address_collection.count == 1 %>
+      <%= render "shared/address_selection/confirm_address", form: %>
     <% end %>
-    <%= next_action_buttons continue_id: "select-address-button", show_draft: true, form: %>
-  <% end %>
 <% end %>

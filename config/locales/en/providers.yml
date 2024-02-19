@@ -39,8 +39,16 @@ en:
           you should review and update those records in CCMS.
     address_selections:
       show:
-        heading: Enter your client's correspondence address
-        link_text: I cannot find the address
+        select_address:
+          addresses_found_text:
+            { one: "1 address found", other: "%{count} addresses found" }
+        confirm_address:
+          heading: Confirm your client's correspondence address
+        no_address:
+          heading: No address found
+        link_text: Enter an address manually
+        search_again: Search again
+
         select_address_label: Select an address
         addresses_found_text:
           { one: "1 address found", other: "%{count} addresses found" }

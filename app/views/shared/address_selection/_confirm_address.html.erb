@@ -1,0 +1,42 @@
+<%= page_template(
+      page_title: t(".heading"),
+      template: :basic,
+      form:,
+    ) do %>
+
+      <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
+
+      <p class='govuk-body'>1 address found for
+        <span class="govuk-!-font-weight-bold"><%= @form.postcode.insert(-4, " ") %></span>
+        <% unless @form.model.building_number_name.empty? %>
+          and
+          <span class="govuk-!-font-weight-bold"><%= @form.model.building_number_name %></span>
+        <% end %>
+        .
+
+        <%= govuk_link_to(
+              t(".search_again"),
+              providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+              class: "govuk-body change-link change-postcode-link",
+              "aria-label": "postcode",
+            ) %>
+      </p>
+
+      <div class="govuk-inset-text">
+        <%= sanitize @address_collection.first.address.gsub(",", "<br>") %>
+      </div>
+
+      <%= form.hidden_field :address_line_one, value: @addresses.first.address_line_one %>
+      <%= form.hidden_field :address_line_two, value: @addresses.first.address_line_two %>
+      <%= form.hidden_field :city, value: @addresses.first.city %>
+      <%= form.hidden_field :county, value: @addresses.first.county %>
+      <%= form.hidden_field :postcode, value: @addresses.first.postcode %>
+
+      <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
+      <%= next_action_buttons(
+            continue_id: "select-address-button",
+            show_draft: false,
+            form:,
+            continue_button_text: t(".continue_button_text"),
+          ) %>
+<% end %>

@@ -21,7 +21,8 @@ RSpec.describe Providers::AddressSelectionsController do
 
       context "when a postcode has been entered before", :vcr do
         let(:postcode) { "SW1H 9EA" }
-        let!(:address) { create(:address, postcode:, applicant:) }
+        let(:building_number_name) { "" }
+        let!(:address) { create(:address, postcode:, applicant:, building_number_name:) }
 
         it "performs an address lookup with the provided postcode" do
           expect(AddressLookupService)
@@ -34,13 +35,12 @@ RSpec.describe Providers::AddressSelectionsController do
           get_request
 
           expect(response).to be_successful
-          expect(unescaped_response_body).to match("Select an address")
-          expect(unescaped_response_body).to match("[1-9]{1}[0-9]? addresses found")
+          expect(unescaped_response_body).to match("Select your client's correspondence address")
         end
 
         context "but the lookup does not return any valid results" do
           let(:postcode) { "XX1 1XX" }
-          let(:form_heading) { "Enter your client's correspondence address" }
+          let(:form_heading) { "Select your client's correspondence address" }
           let(:error_message) { "We could not find any addresses for that postcode. Enter the address manually." }
 
           it "renders the manual address selection page" do
@@ -49,6 +49,17 @@ RSpec.describe Providers::AddressSelectionsController do
             expect(response).to be_successful
             expect(unescaped_response_body).to match(form_heading)
             expect(unescaped_response_body).to match(error_message)
+          end
+        end
+
+        context "and a building number has been added" do
+          let(:building_number_name) { "100" }
+
+          it "renders address confirmation page" do
+            get_request
+
+            expect(response).to be_successful
+            expect(unescaped_response_body).to match("Confirm your client's correspondence address")
           end
         end
       end
@@ -110,9 +121,8 @@ RSpec.describe Providers::AddressSelectionsController do
           patch_request
 
           expect(response).to be_successful
-          expect(unescaped_response_body).to match("Select an address from the list")
-          expect(unescaped_response_body).to match("Select an address")
-          expect(unescaped_response_body).to match("[1-9]{1}[0-9]? addresses found")
+          expect(unescaped_response_body).to match("Select your client's correspondence address")
+          expect(unescaped_response_body).to match("There is a problem")
         end
       end
 

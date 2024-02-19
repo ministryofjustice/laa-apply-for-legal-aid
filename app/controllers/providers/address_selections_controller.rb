@@ -10,6 +10,7 @@ module Providers
       if address_lookup.success?
         @addresses = address_lookup.result
         titleize_addresses
+        filter_addresses if applicant.address.building_number_name.present?
         @address_collection = collect_addresses
         @form = Addresses::AddressSelectionForm.new(model: address)
       else
@@ -19,9 +20,13 @@ module Providers
     end
 
     def update
-      @addresses = build_addresses_from_form_data
-      @address_collection = collect_addresses
-      @form = Addresses::AddressSelectionForm.new(permitted_params)
+      if params[:address_selection][:list]
+        @addresses = build_addresses_from_form_data
+        @address_collection = collect_addresses
+        @form = Addresses::AddressSelectionForm.new(permitted_params)
+      else
+        @form = Addresses::AddressForm.new(form_params)
+      end
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -43,6 +48,12 @@ module Providers
     def permitted_params
       merge_with_model(address, addresses: @addresses) do
         params.require(:address_selection).permit(:lookup_id, :postcode)
+      end
+    end
+
+    def form_params
+      merge_with_model(address) do
+        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode)
       end
     end
   end
