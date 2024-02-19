@@ -1134,7 +1134,7 @@ Then("I pause") do
 end
 
 Then("I am on the postcode entry page") do
-  expect(page).to have_content("Enter your client's correspondence address")
+  expect(page).to have_content("Find your client's correspondence address")
 end
 
 Then(/^I click find address$/) do
