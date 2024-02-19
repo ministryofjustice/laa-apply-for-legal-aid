@@ -50,7 +50,7 @@ class Dependant < ApplicationRecord
   end
 
   def ccms_relationship_to_client
-    return "Dependant adult" if adult_relative?
+    return "Dependent adult" if adult_relative?
 
     return "Child aged 15 and under" if fifteen_or_less?
 

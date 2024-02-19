@@ -156,7 +156,7 @@ RSpec.describe Dependant do
       let(:dob) { 20.years.ago }
 
       it "returns adult relative" do
-        expect(dependant.ccms_relationship_to_client).to eq "Dependant adult"
+        expect(dependant.ccms_relationship_to_client).to eq "Dependent adult"
       end
     end
 
