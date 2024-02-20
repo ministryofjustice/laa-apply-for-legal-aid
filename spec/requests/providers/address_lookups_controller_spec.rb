@@ -70,14 +70,24 @@ RSpec.describe Providers::AddressLookupsController do
       context "with a valid postcode" do
         let(:postcode) { "SW1H 9EA" }
 
-        it "saves the postcode" do
+        it "saves the postcode and the location" do
           patch_request
           expect(applicant.address.postcode).to eq(postcode.delete(" ").upcase)
+          expect(applicant.address.location).to eq("correspondence")
         end
 
         it "redirects to the address selection page" do
           patch_request
           expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
+        end
+
+        context "and a building number" do
+          before { params[:address_lookup][:building_number_name] = "Prospect Cottage" }
+
+          it "saves the building name/number value" do
+            patch_request
+            expect(applicant.address.building_number_name).to eq("Prospect Cottage")
+          end
         end
       end
 
