@@ -8,14 +8,14 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 24 Nov 2023 11:27:15 GMT
+      - Tue, 20 Feb 2024 11:58:52 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -39,8 +39,8 @@ http_interactions:
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"106\",\r\n    \"lastupdate\"
-        : \"2023-11-23\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"107\",\r\n    \"lastupdate\"
+        : \"2024-02-19\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"SUPER FIRM LTD, 84, PETTY FRANCE,
         LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"SUPER FIRM LTD\",\r\n
@@ -132,7 +132,7 @@ http_interactions:
         \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
         \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
         : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 24 Nov 2023 11:27:15 GMT
+  recorded_at: Tue, 20 Feb 2024 11:58:52 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -143,14 +143,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 24 Nov 2023 11:27:15 GMT
+      - Tue, 20 Feb 2024 11:58:53 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -174,9 +174,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5cdfbe42bee19ce46a18174c0c843a84
+      - 9bdc25796fa2a48af011dcdc1777371b
       x-runtime:
-      - '0.015072'
+      - '0.063360'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -302,7 +302,7 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Fri, 24 Nov 2023 11:27:15 GMT
+  recorded_at: Tue, 20 Feb 2024 11:58:53 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -313,14 +313,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 24 Nov 2023 11:27:16 GMT
+      - Tue, 20 Feb 2024 11:58:54 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -344,9 +344,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d4b3408a7ec22222de4217c30094a52a
+      - b30e7bb816e6ae0f02c38cf139e13c00
       x-runtime:
-      - '0.015828'
+      - '0.018216'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -472,7 +472,7 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Fri, 24 Nov 2023 11:27:16 GMT
+  recorded_at: Tue, 20 Feb 2024 11:58:54 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
@@ -483,14 +483,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 24 Nov 2023 11:27:16 GMT
+      - Tue, 20 Feb 2024 11:58:54 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -514,9 +514,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f71eaae7721703afc0a84b12113f9848
+      - c35e1ec2cc717b1fd2243e6991fec52d
       x-runtime:
-      - '0.008917'
+      - '0.024501'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -534,7 +534,7 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 24 Nov 2023 11:27:16 GMT
+  recorded_at: Tue, 20 Feb 2024 11:58:54 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -545,14 +545,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 24 Nov 2023 11:27:17 GMT
+      - Tue, 20 Feb 2024 11:58:54 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -576,9 +576,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 418920c674c86c4dc5cb75f21586fc66
+      - 6bd2ba60c7bb3f19d5e5c64cf8f6783c
       x-runtime:
-      - '0.015210'
+      - '0.019207'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -704,23 +704,23 @@ http_interactions:
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
         be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
         abuse"}]'
-  recorded_at: Fri, 24 Nov 2023 11:27:17 GMT
+  recorded_at: Tue, 20 Feb 2024 11:58:54 GMT
 - request:
     method: get
-    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANCE_SURVEY_API_KEY>&lr=EN&postcode=SW1H+9EA
+    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANCE_SURVEY_API_KEY>&lr=EN&postcode=SW1H9EA
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 24 Nov 2023 11:27:17 GMT
+      - Tue, 20 Feb 2024 11:58:55 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -741,11 +741,11 @@ http_interactions:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H%209EA\",\r\n
-        \   \"query\" : \"postcode=SW1H 9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
+      string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
+        \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"106\",\r\n    \"lastupdate\"
-        : \"2023-11-23\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"107\",\r\n    \"lastupdate\"
+        : \"2024-02-19\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"SUPER FIRM LTD, 84, PETTY FRANCE,
         LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"SUPER FIRM LTD\",\r\n
@@ -837,5 +837,5 @@ http_interactions:
         \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
         \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
         : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 24 Nov 2023 11:27:17 GMT
+  recorded_at: Tue, 20 Feb 2024 11:58:55 GMT
 recorded_with: VCR 6.2.0

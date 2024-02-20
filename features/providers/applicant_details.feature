@@ -10,8 +10,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -140,8 +140,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -278,8 +278,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -331,8 +331,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -393,8 +393,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results

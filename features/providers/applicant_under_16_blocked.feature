@@ -12,8 +12,8 @@ Feature: Applicant under 16 blocked
 
     When I enter a postcode 'SW1H 9EA'
     And I click find address
-    And I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    And I click 'Save and continue'
+    And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    And I click 'Use this address'
     Then I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
     And proceeding suggestions has results

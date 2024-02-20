@@ -80,8 +80,8 @@ Feature: Checking client details answers backwards and forwards
     Then I should be on a page with title "Find your client's correspondence address"
 
     When I click 'Find address'
-    And I select an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
-    And I click 'Save and continue'
+    And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
+    And I click 'Use this address'
     Then I should be on a page with title "Check your answers"
     And I should see "British Transport Police"
 
@@ -144,8 +144,8 @@ Feature: Checking client details answers backwards and forwards
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
