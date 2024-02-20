@@ -1118,15 +1118,15 @@ Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field
 end
 
 Then(/^I select the first checkbox$/) do
-  page.first("input[type='checkbox']", visible: false).click
+  page.first("input[type='checkbox']", visible: false).check(allow_label_click: true)
 end
 
 Then(/^I select the second checkbox$/) do
-  page.find("input[type='checkbox']", visible: false)[1].click
+  page.find("input[type='checkbox']", visible: false)[1].check(allow_label_click: true)
 end
 
 Then("I check {string}") do |string|
-  check string, visible: false
+  check string, visible: false, allow_label_click: true
 end
 
 Then("I pause") do
