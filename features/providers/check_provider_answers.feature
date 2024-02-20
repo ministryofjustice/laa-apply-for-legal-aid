@@ -155,6 +155,7 @@ Feature: Checking client details answers backwards and forwards
     Then I am on the postcode entry page
     Then I enter a postcode 'XX1 1XX'
     Then I click find address
+    Then I click link "Enter an address manually"
     Then I enter address line one 'Fake Road'
     Then I enter city 'Fake City'
     Then I enter postcode 'XX1 1XX'

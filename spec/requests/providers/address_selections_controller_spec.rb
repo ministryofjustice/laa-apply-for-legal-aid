@@ -40,15 +40,12 @@ RSpec.describe Providers::AddressSelectionsController do
 
         context "but the lookup does not return any valid results" do
           let(:postcode) { "XX1 1XX" }
-          let(:form_heading) { "Select your client's correspondence address" }
-          let(:error_message) { "We could not find any addresses for that postcode. Enter the address manually." }
 
-          it "renders the manual address selection page" do
+          it "renders the address selection page" do
             get_request
 
             expect(response).to be_successful
-            expect(unescaped_response_body).to match(form_heading)
-            expect(unescaped_response_body).to match(error_message)
+            expect(unescaped_response_body).to match("No address found")
           end
         end
 

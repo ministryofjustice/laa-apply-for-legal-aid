@@ -7,16 +7,11 @@ module Providers
 
       legal_aid_application.enter_applicant_details! unless no_state_change_required?
 
-      if address_lookup.success?
-        @addresses = address_lookup.result
-        titleize_addresses
-        filter_addresses if applicant.address.building_number_name.present?
-        @address_collection = collect_addresses
-        @form = Addresses::AddressSelectionForm.new(model: address)
-      else
-        @form = Addresses::AddressForm.new(model: address, lookup_error: address_lookup.errors[:lookup].first)
-        render template: "providers/addresses/show".freeze
-      end
+      @addresses = address_lookup.result
+      titleize_addresses
+      filter_addresses if applicant.address.building_number_name.present?
+      @address_collection = collect_addresses
+      @form = Addresses::AddressSelectionForm.new(model: address)
     end
 
     def update
