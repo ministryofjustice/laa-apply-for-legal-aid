@@ -1,0 +1,22 @@
+<%= form_with(
+      model: @form,
+      scope: :non_uk_correspondence_address,
+      url: providers_legal_aid_application_non_uk_correspondence_address_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        form:,
+      ) do %>
+
+      <%= form.govuk_text_field :country, label: { text: t(".country") } %>
+      <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
+      <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
+      <%= form.govuk_text_field :city, label: { text: t(".address_line_three") }, width: "two-thirds" %>
+      <%= form.govuk_text_field :county, label: { text: t(".address_line_four") }, width: "two-thirds" %>
+
+    <%= next_action_buttons(form:, show_draft: true) %>
+  <% end %>
+<% end %>
