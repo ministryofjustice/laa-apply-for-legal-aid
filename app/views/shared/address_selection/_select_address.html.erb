@@ -16,14 +16,17 @@
                                           :address,
                                           legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
-      <p class='govuk-body'><%= @address_collection.count %>
-        addresses found for
-        <span class="govuk-!-font-weight-bold"><%= @form.postcode.insert(-4, " ") %></span>
+      <p class='govuk-body'>
         <% if @form.model.building_number_name.present? %>
-          and
-          <span class="govuk-!-font-weight-bold"><%= @form.model.building_number_name %></span>
+          <%= t(".addresses_found_long_html",
+                number: @address_collection.count,
+                postcode: @form.postcode.insert(-4, " "),
+                building_name_number: @form.model.building_number_name) %>
+        <% else %>
+          <%= t(".addresses_found_html",
+                number: @address_collection.count,
+                postcode: @form.postcode.insert(-4, " ")) %>
         <% end %>
-        .
 
         <%= govuk_link_to(
               t(".search_again"),

@@ -6,13 +6,18 @@
 
       <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
 
-      <p class='govuk-body'>1 address found for
-        <span class="govuk-!-font-weight-bold"><%= @form.postcode.insert(-4, " ") %></span>
-        <% unless @form.model.building_number_name.empty? %>
-          and
-          <span class="govuk-!-font-weight-bold"><%= @form.model.building_number_name %></span>
+      <p class='govuk-body'>
+        <p class='govuk-body'>
+        <% if @form.model.building_number_name.present? %>
+          <%= t(".addresses_found_long_html",
+                number: @address_collection.count,
+                postcode: @form.postcode.insert(-4, " "),
+                building_name_number: @form.model.building_number_name) %>
+        <% else %>
+          <%= t(".addresses_found_html",
+                number: @address_collection.count,
+                postcode: @form.postcode.insert(-4, " ")) %>
         <% end %>
-        .
 
         <%= govuk_link_to(
               t(".search_again"),
