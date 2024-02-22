@@ -191,6 +191,20 @@ Feature: Applicant details
     Then I am on the application confirmation page
 
   @javascript @vcr @billy
+  Scenario: Completes the application using address lookup with building number name
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'User'
+    Then I choose 'No'
+    Then I enter the date of birth '03-04-1999'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1H 9EA'
+    And I enter a building number name '100'
+    Then I click find address
+    Then I click 'Use this address'
+    And I should be on a page showing "What does your client want legal aid for?"
+
+  @javascript @vcr @billy
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
