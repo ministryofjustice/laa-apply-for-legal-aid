@@ -5,7 +5,7 @@ RSpec.describe Providers::AddressSelectionsController do
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:legal_aid_application_id/address_selections/edit" do
+  describe "GET /providers/applications/:legal_aid_application_id/address_selection" do
     subject(:get_request) { get providers_legal_aid_application_address_selection_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
