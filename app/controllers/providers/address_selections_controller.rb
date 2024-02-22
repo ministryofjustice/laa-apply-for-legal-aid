@@ -18,9 +18,9 @@ module Providers
       if params[:address_selection][:list]
         @addresses = build_addresses_from_form_data
         @address_collection = collect_addresses
-        @form = Addresses::AddressSelectionForm.new(permitted_params)
+        @form = Addresses::AddressSelectionForm.new(address_selection_form_params)
       else
-        @form = Addresses::AddressForm.new(form_params)
+        @form = Addresses::AddressForm.new(address_form_params)
       end
 
       render :show unless save_continue_or_draft(@form)
@@ -40,15 +40,15 @@ module Providers
       @address_lookup ||= AddressLookupService.call(address.postcode)
     end
 
-    def permitted_params
+    def address_selection_form_params
       merge_with_model(address, addresses: @addresses) do
         params.require(:address_selection).permit(:lookup_id, :postcode)
       end
     end
 
-    def form_params
+    def address_form_params
       merge_with_model(address) do
-        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode)
+        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
       end
     end
   end

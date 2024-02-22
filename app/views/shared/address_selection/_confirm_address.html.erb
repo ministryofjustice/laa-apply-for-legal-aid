@@ -36,6 +36,7 @@
       <%= form.hidden_field :city, value: @addresses.first.city %>
       <%= form.hidden_field :county, value: @addresses.first.county %>
       <%= form.hidden_field :postcode, value: @addresses.first.postcode %>
+      <%= form.hidden_field :lookup_postcode, value: @addresses.first.postcode %>
 
       <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
       <%= next_action_buttons(
