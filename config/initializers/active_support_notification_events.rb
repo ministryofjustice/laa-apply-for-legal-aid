@@ -24,7 +24,6 @@ ActiveSupport::Notifications.subscribe(/rack_attack/) do |_name, _start, _finish
         ],
       },
     }
-    Slack::SendMessage.call(message)
   when "prevent feedback spamming"
     message = {
       text: {
@@ -39,9 +38,29 @@ ActiveSupport::Notifications.subscribe(/rack_attack/) do |_name, _start, _finish
         ],
       },
     }
+  when "fail2ban/scripted-pen-testers"
+    message = nil
+    counting = Rack::Attack.cache.store.keys.find_all{ |k| k.include?(':count:') }.find_all { |ip| ip.include?(ip_address) }
+    ban_key = Rack::Attack.cache.store.keys.find_all{ |k| k.include?(':ban:') }.find_all { |ip| ip.include?(ip_address) }
+    infractions = counting.present? ? Rack::Attack.cache.store.read(counting) : 0
+    banned = ban_key.present? ? Rack::Attack.cache.store.read(ban_key).eql?("1") : false
+    time_left = ban_key.present? ? Rack::Attack.cache.store.ttl(ban_key) : 0
+    ban_ends = time_left.positive? ? (Time.now() + time_left).strftime("%H:%M") : 0
+    show_ban = banned && time_left.to_i > 3590 && infractions.eql?("3")
+    Rails.logger.info "counting: #{counting}"
+    Rails.logger.info "ban_key: #{ban_key}"
+    Rails.logger.info "banned: #{banned}"
+    Rails.logger.info "infractions: #{infractions}"
+    Rails.logger.info "time_left: #{time_left}"
+    Rails.logger.info "ban_ends: #{ban_ends}"
+    Rails.logger.info "show_ban: #{show_ban}"
+    message = { text: "Suspicious behaviour seen from #{ip_address}... monitoring in progress" } if infractions.eql?("1")
+    message = { text: "Banned #{ip_address} until #{ban_ends} " } if show_ban
+    Rails.logger.info "message.present?: #{message.present?}"
+    Rails.logger.info "message: #{message}"
   else
     message = { text: "RackAttack event #{match_type} '#{event_type}' was triggered from: #{ip_address}" }
   end
-  Slack::SendMessage.call(message)
   Rails.logger.info message
+  Slack::SendMessage.call(message) if message.present?
 end
