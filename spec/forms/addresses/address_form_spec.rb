@@ -61,7 +61,7 @@ RSpec.describe Addresses::AddressForm, type: :form do
       context "when an invalid input has been entered" do
         let(:county) { "12county" }
 
-        it "returns an error on city field" do
+        it "returns an error on county field" do
           expect(form).not_to be_valid
           expect(form.errors[:county]).to contain_exactly("Enter a real county")
         end
@@ -113,7 +113,7 @@ RSpec.describe Addresses::AddressForm, type: :form do
       expect(address.postcode).to eq(postcode)
     end
 
-    context "when an city is empty" do
+    context "when a city is empty" do
       let(:city) { "" }
 
       it "creates a new address for the applicant" do
