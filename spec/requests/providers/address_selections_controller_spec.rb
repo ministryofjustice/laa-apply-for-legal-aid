@@ -130,6 +130,8 @@ RSpec.describe Providers::AddressSelectionsController do
       context "when no address was selected from the list" do
         let(:lookup_id) { "" }
 
+        before { create(:address, postcode: "XX11XX", applicant:) }
+
         it "does not create a new address record" do
           expect { patch_request }.not_to change(Address, :count)
         end

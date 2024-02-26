@@ -7,16 +7,15 @@
       <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
 
       <p class='govuk-body'>
-        <p class='govuk-body'>
         <% if @form.model.building_number_name.present? %>
           <%= t(".addresses_found_long_html",
                 number: @address_collection.count,
-                postcode: @form.postcode.insert(-4, " "),
+                postcode: @form.model.pretty_postcode,
                 building_name_number: @form.model.building_number_name) %>
         <% else %>
           <%= t(".addresses_found_html",
                 number: @address_collection.count,
-                postcode: @form.postcode.insert(-4, " ")) %>
+                postcode: @form.model.pretty_postcode) %>
         <% end %>
 
         <%= govuk_link_to(
