@@ -1182,11 +1182,10 @@ en:
             restrictions_details: Tell us which assets your client or their partner cannot sell or borrow against, and why.
           for_example: "For example, because:"
           examples:
-            list: |
-              they're bankrupt
-              their home has been repossessed
-              their assets are the subject matter of dispute (SMOD)
-              their assets are held under a restraint order
+            - they're bankrupt
+            - their home has been repossessed
+            - their assets are the subject matter of dispute (SMOD)
+            - their assets are held under a restraint order
       policy_disregards:
         show:
           h1-heading:

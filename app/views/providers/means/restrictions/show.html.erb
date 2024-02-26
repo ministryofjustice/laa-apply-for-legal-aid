@@ -8,7 +8,11 @@
     <%= form.govuk_radio_buttons_fieldset(:has_restrictions,
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
       <p class="govuk-body"><%= t(".for_example") %></p>
-      <%= list_from_translation_path(".means.restrictions.show.examples") %>
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".examples").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
       <%= form.govuk_radio_button :has_restrictions, true, link_errors: true, label: { text: t("generic.yes") } do %>
         <%= form.govuk_text_area :restrictions_details,
                                  label: { text: t(".#{individual}.restrictions_details") }, rows: 5 %>
