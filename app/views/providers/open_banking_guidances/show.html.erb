@@ -14,8 +14,12 @@
     <p class="govuk-body"><%= t(".its_a_fast") %></p>
 
     <%= govuk_details(summary_text: t(".details_summary"), classes: "govuk-!-display-none-print") do %>
-      <%= t(".details_content_html") %>
-      <%= list_from_translation_path(".open_banking_guidances.show.details") %>
+      <p><%= t(".details_content_html") %></p>
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".details_list").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4 only-print">
@@ -24,7 +28,7 @@
       <p class="govuk-body"><%= t(".details_content_para_two") %></p>
       <p class="govuk-body"><%= t(".details_content_para_three") %></p>
       <ul class="govuk-list govuk-list--bullet">
-        <% t(".details.list").split("\n").each do |bullet| %>
+        <% t(".details_list").each do |bullet| %>
           <li><%= bullet %></li>
         <% end %>
       </ul>

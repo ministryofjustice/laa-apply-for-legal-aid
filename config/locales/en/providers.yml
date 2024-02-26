@@ -1476,12 +1476,11 @@ en:
           It needs one-time, read-only access to your client's bank account information. If your client agrees, TrueLayer will securely collect
           3 months of statements and share them with the LAA.
         details_content_para_three: "They’re regulated by the Financial Conduct Authority (FCA) and will:"
-        details:
-          list: |
-            not store your client's bank account details
-            not see your client's online banking sign-in details
-            not share your client's data with anyone other than the LAA
-            not have ongoing access to your client's bank accounts
+        details_list:
+          - not store your client's bank account details
+          - not see your client's online banking sign-in details
+          - not share your client's data with anyone other than the LAA
+          - not have ongoing access to your client's bank accounts
         heading_h2: How it works
         list_heading_one: 1. Get started
         your_client_will: Your client will receive an email clearly labelled from the Legal Aid Agency (LAA) asking them to share 3 months of bank statements.
