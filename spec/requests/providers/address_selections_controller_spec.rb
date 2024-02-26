@@ -50,13 +50,33 @@ RSpec.describe Providers::AddressSelectionsController do
         end
 
         context "and a building number has been added" do
-          let(:building_number_name) { "100" }
+          describe "so only one address is remaining after filtering" do
+            let(:building_number_name) { "100" }
 
-          it "renders address confirmation page" do
-            get_request
+            it "renders address confirmation page" do
+              get_request
 
-            expect(response).to be_successful
-            expect(unescaped_response_body).to match("Confirm your client's correspondence address")
+              expect(response).to be_successful
+              expect(unescaped_response_body).to match("Confirm your client's correspondence address")
+            end
+          end
+
+          describe "so several addresses are remaining after filtering" do
+            let(:building_number_name) { "1" }
+
+            it "renders address selection page" do
+              get_request
+
+              expect(response).to be_successful
+              expect(unescaped_response_body).to match("Select your client's correspondence address")
+            end
+
+            it "correctly filters the addresses" do
+              get_request
+
+              expect(response.body).to include("102 Petty France", "100 Petty France")
+              expect(response.body).not_to include("84 Petty France", "98 Petty France")
+            end
           end
         end
       end
