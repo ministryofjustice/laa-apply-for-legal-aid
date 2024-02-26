@@ -5,7 +5,11 @@
     <h2 class="govuk-heading-m app-counter"><%= t(".capital_list_heading", individual:) %></h2>
     <div class="govuk-!-padding-left-4">
       <p class="govuk-body"><%= t(".capital_text") %></p>
-      <%= list_from_translation_path ".capital_introductions.show.capital_items" %>
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".capital_items").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 

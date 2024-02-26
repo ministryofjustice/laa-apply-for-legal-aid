@@ -172,11 +172,10 @@ en:
         capital_list_heading: "Tell us about %{individual}'s capital"
         capital_text: "This includes:"
         capital_items:
-          list: |
-            property
-            vehicles
-            savings and investments
-            other assets
+          - property
+          - vehicles
+          - savings and investments
+          - other assets
     check_benefits:
       index:
         details_used: "We used the following details to check your client's benefits status with the DWP:"
