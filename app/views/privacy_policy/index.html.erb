@@ -1,13 +1,21 @@
 <%= page_template page_title: t(".h1-heading") do %>
   <h2 class="govuk-heading-l"><%= t(".purpose.header") %></h2>
   <p class="govuk-body"><%= t(".purpose.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.purpose" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".purpose.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".purpose.info_2") %></p>
   <p class="govuk-body"><%= t(".purpose.info_3") %></p>
 
   <h2 class="govuk-heading-l"><%= t(".about_personal_information.header") %></h2>
   <p class="govuk-body"><%= t(".about_personal_information.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.about_personal_information" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".about_personal_information.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".about_personal_information.info_2") %></p>
 
   <h2 class="govuk-heading-l"><%= t(".types_of_personal_data_we_process.header") %></h2>
@@ -16,7 +24,11 @@
 
   <h2 class="govuk-heading-l"><%= t(".purpose_of_processing.header") %></h2>
   <p class="govuk-body"><%= t(".purpose_of_processing.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.purpose_of_processing" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".purpose_of_processing.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".purpose_of_processing.info_2") %></p>
   <p class="govuk-body"><%= t(".purpose_of_processing.info_3") %></p>
   <p class="govuk-body"><%= t(".purpose_of_processing.info_4") %></p>
@@ -25,7 +37,11 @@
   <h2 class="govuk-heading-l"><%= t(".who_the_information_may_be_shared_with.header") %></h2>
   <p class="govuk-body"><%= t(".who_the_information_may_be_shared_with.info_1") %></p>
   <p class="govuk-body"><%= t(".who_the_information_may_be_shared_with.info_2") %></p>
-  <%= list_from_translation_path "privacy_policy.index.who_the_information_may_be_shared_with" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".who_the_information_may_be_shared_with.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".who_the_information_may_be_shared_with.info_3") %></p>
 
   <h2 class="govuk-heading-l"><%= t(".data_processors.header") %></h2>
@@ -56,15 +72,31 @@
   <p class="govuk-body"><%= t(".when_we_ask_you_for_personal_data.info_1") %></p>
   <p class="govuk-body"><%= t(".when_we_ask_you_for_personal_data.info_2") %></p>
   <p class="govuk-body"><%= t(".when_we_ask_you_for_personal_data.we_will.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.when_we_ask_you_for_personal_data.we_will" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".when_we_ask_you_for_personal_data.we_will.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".when_we_ask_you_for_personal_data.we_will_not.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.when_we_ask_you_for_personal_data.we_will_not" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".when_we_ask_you_for_personal_data.we_will_not.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".when_we_ask_you_for_personal_data.you_can.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.when_we_ask_you_for_personal_data.you_can" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".when_we_ask_you_for_personal_data.you_can.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
 
   <h2 class="govuk-heading-l"><%= t(".more_details.header") %></h2>
   <p class="govuk-body"><%= t(".more_details.info_1") %></p>
-  <%= list_from_translation_path "privacy_policy.index.more_details" %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".more_details.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
   <p class="govuk-body"><%= t(".more_details.info_2") %></p>
   <p class="govuk-body">
     <% t(".more_details.address").each do |address_lines| %>
