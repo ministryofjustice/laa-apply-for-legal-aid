@@ -1141,8 +1141,8 @@ Then(/^I click find address$/) do
   click_on("Find address")
 end
 
-Then(/^I select an address '(.*)'$/) do |address|
-  select(address, from: "address_selection[lookup_id]")
+Then(/^I choose an address '(.*)'$/) do |address|
+  choose(address, allow_label_click: true)
 end
 
 Then(/^I select an organisation type '(.*)'$/) do |type|

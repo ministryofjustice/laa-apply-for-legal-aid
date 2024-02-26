@@ -5,7 +5,7 @@ RSpec.describe Providers::AddressSelectionsController do
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:legal_aid_application_id/address_selections/edit" do
+  describe "GET /providers/applications/:legal_aid_application_id/address_selection" do
     subject(:get_request) { get providers_legal_aid_application_address_selection_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
@@ -21,7 +21,8 @@ RSpec.describe Providers::AddressSelectionsController do
 
       context "when a postcode has been entered before", :vcr do
         let(:postcode) { "SW1H 9EA" }
-        let!(:address) { create(:address, postcode:, applicant:) }
+        let(:building_number_name) { "" }
+        let!(:address) { create(:address, postcode:, applicant:, building_number_name:) }
 
         it "performs an address lookup with the provided postcode" do
           expect(AddressLookupService)
@@ -34,21 +35,48 @@ RSpec.describe Providers::AddressSelectionsController do
           get_request
 
           expect(response).to be_successful
-          expect(unescaped_response_body).to match("Select an address")
-          expect(unescaped_response_body).to match("[1-9]{1}[0-9]? addresses found")
+          expect(unescaped_response_body).to match("Select your client's correspondence address")
         end
 
         context "but the lookup does not return any valid results" do
           let(:postcode) { "XX1 1XX" }
-          let(:form_heading) { "Enter your client's correspondence address" }
-          let(:error_message) { "We could not find any addresses for that postcode. Enter the address manually." }
 
-          it "renders the manual address selection page" do
+          it "renders the address selection page" do
             get_request
 
             expect(response).to be_successful
-            expect(unescaped_response_body).to match(form_heading)
-            expect(unescaped_response_body).to match(error_message)
+            expect(unescaped_response_body).to match("No address found")
+          end
+        end
+
+        context "and a building number has been added" do
+          describe "so only one address is remaining after filtering" do
+            let(:building_number_name) { "100" }
+
+            it "renders address confirmation page" do
+              get_request
+
+              expect(response).to be_successful
+              expect(unescaped_response_body).to match("Confirm your client's correspondence address")
+            end
+          end
+
+          describe "so several addresses are remaining after filtering" do
+            let(:building_number_name) { "1" }
+
+            it "renders address selection page" do
+              get_request
+
+              expect(response).to be_successful
+              expect(unescaped_response_body).to match("Select your client's correspondence address")
+            end
+
+            it "correctly filters the addresses" do
+              get_request
+
+              expect(response.body).to include("102 Petty France", "100 Petty France")
+              expect(response.body).not_to include("84 Petty France", "98 Petty France")
+            end
           end
         end
       end
@@ -102,6 +130,8 @@ RSpec.describe Providers::AddressSelectionsController do
       context "when no address was selected from the list" do
         let(:lookup_id) { "" }
 
+        before { create(:address, postcode: "XX11XX", applicant:) }
+
         it "does not create a new address record" do
           expect { patch_request }.not_to change(Address, :count)
         end
@@ -110,9 +140,8 @@ RSpec.describe Providers::AddressSelectionsController do
           patch_request
 
           expect(response).to be_successful
-          expect(unescaped_response_body).to match("Select an address from the list")
-          expect(unescaped_response_body).to match("Select an address")
-          expect(unescaped_response_body).to match("[1-9]{1}[0-9]? addresses found")
+          expect(unescaped_response_body).to match("Select your client's correspondence address")
+          expect(unescaped_response_body).to match("There is a problem")
         end
       end
 

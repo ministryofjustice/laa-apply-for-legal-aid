@@ -1,0 +1,47 @@
+<%= page_template(
+      page_title: t(".heading"),
+      template: :basic,
+      form:,
+    ) do %>
+
+  <%= form.hidden_field :postcode %>
+
+  <% addresses.each_with_index do |address, index| %>
+    <%= hidden_field_tag "address_selection[list][]", address.to_json, id: "address_selection_list_#{index}" %>
+  <% end %>
+
+  <%= form.govuk_collection_radio_buttons :lookup_id,
+                                          @address_collection,
+                                          :id,
+                                          :address,
+                                          legend: { text: page_title, tag: "h1", size: "xl" } do %>
+
+      <p class='govuk-body'>
+        <% if @form.model.building_number_name.present? %>
+          <%= t(".addresses_found_long_html",
+                number: @address_collection.count,
+                postcode: @form.model.pretty_postcode,
+                building_name_number: @form.model.building_number_name) %>
+        <% else %>
+          <%= t(".addresses_found_html",
+                number: @address_collection.count,
+                postcode: @form.model.pretty_postcode) %>
+        <% end %>
+
+        <%= govuk_link_to(
+              t(".search_again"),
+              providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+              class: "govuk-body change-link change-postcode-link",
+              "aria-label": "postcode",
+            ) %>
+      </p>
+  <% end %>
+
+  <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
+  <%= next_action_buttons(
+        continue_id: "select-address-button",
+        show_draft: false,
+        form:,
+        continue_button_text: t(".continue_button_text"),
+      ) %>
+<% end %>

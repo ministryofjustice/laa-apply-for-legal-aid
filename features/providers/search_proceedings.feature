@@ -18,8 +18,8 @@ Feature: Search proceedings
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding type "cakes"
     Then the proceeding type result list on page returns a "No results found." message
@@ -42,8 +42,8 @@ Feature: Search proceedings
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     And I search for proceeding 'dom'
     Then proceeding suggestions has results

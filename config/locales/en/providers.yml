@@ -37,13 +37,6 @@ en:
           The address you provide is only for this application. If your client has
           other certificated legal aid cases where a different address has been used,
           you should review and update those records in CCMS.
-    address_selections:
-      show:
-        heading: Enter your client's correspondence address
-        link_text: I cannot find the address
-        select_address_label: Select an address
-        addresses_found_text:
-          { one: "1 address found", other: "%{count} addresses found" }
     addresses:
       show:
         heading: Enter your client's correspondence address

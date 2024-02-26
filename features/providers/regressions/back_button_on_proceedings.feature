@@ -10,8 +10,8 @@ Feature: Using the back button on proceedings should not lock a user out
 
     When I enter a postcode 'SW1H 9EA'
     And I click find address
-    And I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    When I click 'Save and continue'
+    And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    When I click 'Use this address'
 
     Then I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
@@ -22,7 +22,7 @@ Feature: Using the back button on proceedings should not lock a user out
 
     When I click link "Back"
     And I click link "Back"
-    Then I should be on a page showing "Enter your client's correspondence address"
+    Then I should be on a page showing "Select your client's correspondence address"
 
-    When I click "Save and continue"
+    When I click "Use this address"
     Then I should be on a page showing 'Do you want to add another proceeding?'

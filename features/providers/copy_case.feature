@@ -11,8 +11,8 @@ Background:
   Then I am on the postcode entry page
   When I enter a postcode 'SW1H 9EA'
   And I click find address
-  Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-  When I click 'Save and continue'
+  Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+  When I click 'Use this address'
   Then I should be on a page with title "Do you want to copy an application to your current application?"
 
 @javascript @vcr

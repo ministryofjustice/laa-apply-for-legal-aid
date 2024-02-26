@@ -10,8 +10,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -140,8 +140,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -191,6 +191,20 @@ Feature: Applicant details
     Then I am on the application confirmation page
 
   @javascript @vcr @billy
+  Scenario: Completes the application using address lookup with building number name
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'User'
+    Then I choose 'No'
+    Then I enter the date of birth '03-04-1999'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1H 9EA'
+    And I enter a building number name '100'
+    Then I click find address
+    Then I click 'Use this address'
+    And I should be on a page showing "What does your client want legal aid for?"
+
+  @javascript @vcr @billy
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -200,6 +214,7 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'XX1 1XX'
     Then I click find address
+    Then I click link "Enter an address manually"
     Then I enter address line one 'Fake Road'
     Then I enter city 'Fake City'
     Then I enter postcode 'XX1 1XX'
@@ -278,8 +293,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -331,8 +346,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -393,8 +408,8 @@ Feature: Applicant details
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
+    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results

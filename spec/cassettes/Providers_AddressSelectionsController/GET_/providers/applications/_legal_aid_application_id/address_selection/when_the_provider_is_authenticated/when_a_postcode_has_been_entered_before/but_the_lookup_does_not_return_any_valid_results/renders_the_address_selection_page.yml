@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v2.9.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 19 Jul 2022 11:23:21 GMT
+      - Thu, 22 Feb 2024 09:42:02 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -43,7 +43,7 @@ http_interactions:
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX\",\r\n
         \   \"query\" : \"postcode=XX11XX\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 0,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"93\",\r\n    \"output_srs\"
-        : \"EPSG:27700\"\r\n  }\r\n}"
-  recorded_at: Tue, 19 Jul 2022 11:23:21 GMT
-recorded_with: VCR 6.1.0
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"108\",\r\n    \"lastupdate\"
+        : \"2024-02-21\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  }\r\n}"
+  recorded_at: Thu, 22 Feb 2024 09:42:02 GMT
+recorded_with: VCR 6.2.0

@@ -7,21 +7,21 @@ module Providers
 
       legal_aid_application.enter_applicant_details! unless no_state_change_required?
 
-      if address_lookup.success?
-        @addresses = address_lookup.result
-        titleize_addresses
-        @address_collection = collect_addresses
-        @form = Addresses::AddressSelectionForm.new(model: address)
-      else
-        @form = Addresses::AddressForm.new(model: address, lookup_error: address_lookup.errors[:lookup].first)
-        render template: "providers/addresses/show".freeze
-      end
+      @addresses = address_lookup.result
+      titleize_addresses
+      filter_addresses if applicant.address.building_number_name.present?
+      @address_collection = collect_addresses
+      @form = Addresses::AddressSelectionForm.new(model: address)
     end
 
     def update
-      @addresses = build_addresses_from_form_data
-      @address_collection = collect_addresses
-      @form = Addresses::AddressSelectionForm.new(permitted_params)
+      if params[:address_selection][:list]
+        @addresses = build_addresses_from_form_data
+        @address_collection = collect_addresses
+        @form = Addresses::AddressSelectionForm.new(address_selection_form_params)
+      else
+        @form = Addresses::AddressForm.new(address_form_params)
+      end
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -40,9 +40,15 @@ module Providers
       @address_lookup ||= AddressLookupService.call(address.postcode)
     end
 
-    def permitted_params
+    def address_selection_form_params
       merge_with_model(address, addresses: @addresses) do
         params.require(:address_selection).permit(:lookup_id, :postcode)
+      end
+    end
+
+    def address_form_params
+      merge_with_model(address) do
+        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
       end
     end
   end
