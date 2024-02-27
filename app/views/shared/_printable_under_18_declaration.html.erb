@@ -2,10 +2,11 @@
 
 <p class="govuk-body"><%= t(".declaration_list_title", applicant_name: @legal_aid_application.applicant_full_name) %></p>
 
-<%= bullet_list_from_translation_array(
-      "shared.printable_under_18_declaration.declaration_list",
-      params: { firm: @legal_aid_application.provider.firm_name, privacy_policy_url: privacy_policy_index_url },
-    ) %>
+<ul class="govuk-list govuk-list--bullet">
+  <% t(".declaration_list", firm: @legal_aid_application.provider.firm_name, privacy_policy_url: privacy_policy_index_url).each do |bullet| %>
+    <li><%= sanitize(bullet) %></li>
+  <% end %>
+</ul>
 
 <%= govuk_warning_text do %>
   <p class="govuk-body">

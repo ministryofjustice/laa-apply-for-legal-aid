@@ -5,18 +5,17 @@ cy:
       confirm_following: gniwollof eht mrifnoC
       declaration_list_title: 'By signing this declaration, you agree for %{applicant_name} that:'
       declaration_list:
-        a: their date of birth on the application is correct based on the information you have
-        b: they've instructed %{firm} to represent them
-        c_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
-        d_html: |
-          we can share their information with other government departments like Department for Work and Pensions
+        - their date of birth on the application is correct based on the information you have
+        - they've instructed %{firm} to represent them
+        - they've read the <a href="/privacy_policy">LAA privacy policy</a>
+        - we can share their information with other government departments like Department for Work and Pensions
           and HM Revenue and Customs
-        e: we can check their details with bank and credit reference agencies
-        f: they may have to pay towards legal aid
-        g: they may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
-        h: if the case continues after their 18th birthday, we may reassess their income and capital to check if they should contribute towards legal costs
-        h: the information they've given is complete and correct
-        i: they'll report any changes to their financial situation immediately
+        - we can check their details with bank and credit reference agencies
+        - they may have to pay towards legal aid
+        - they may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
+        - if the case continues after their 18th birthday, we may reassess their income and capital to check if they should contribute towards legal costs
+        - the information they've given is complete and correct
+        - they'll report any changes to their financial situation immediately
       warning_list_summary: If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may
       warning_list: |
         be prosecuted
@@ -26,21 +25,32 @@ cy:
       confirm_following: gniwollof eht mrifnoC
       declaration_list_title: 'By signing this declaration, you agree that:'
       declaration_list:
-        a: you've instructed %{firm} to represent you
-        b_html: you've read the <a href="/privacy_policy">LAA privacy policy</a>
-        c_html: |
-          we can share your information with other government departments like Department for Work and Pensions
+        - you've instructed %{firm} to represent you
+        - you've read the <a href="/privacy_policy">LAA privacy policy</a>
+        - we can share your information with other government departments like Department for Work and Pensions
           and HM Revenue and Customs
-        d: we can check your details with your bank and credit reference agencies
-        e: you may have to pay towards your legal aid
-        f: you may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
-        g: the information you've given is complete and correct
-        h: you'll report any changes to your financial situation immediately
+        - we can check your details with your bank and credit reference agencies
+        - you may have to pay towards your legal aid
+        - you may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
+        - the information you've given is complete and correct
+        - you'll report any changes to your financial situation immediately
       warning_list_summary: If you have given wrong or incomplete information, do not report changes, or are found to have committed benefit fraud, you may
       warning_list: |
         be prosecuted
         need to pay a financial penalty
         have your legal aid stopped and have to pay back the costs
+    partner_declaration:
+      heading: Partner declaration
+      signature: "Partner signature:"
+      date: "Date:"
+      confirm_following: Confirm the following
+      declaration_list_title: 'By signing this declaration, I agree that:'
+      declaration_list:
+        - I've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
+        - LAA can share my information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
+          and <abbr title="HM Revenue and Customs">HMRC</abbr>
+        - LAA can check my details with my bank and credit reference agencies
+        - the information I have given is complete and correct
     application_ref:
       apply_ref: ":ecnerefer esac ecivres ylppA"
       ccms_ref_html: ":ecnerefer esac >rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
