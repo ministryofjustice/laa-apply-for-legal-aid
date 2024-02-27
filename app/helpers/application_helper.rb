@@ -54,12 +54,6 @@ module ApplicationHelper
     header.with_navigation_item(text: t("layouts.logout.admin"), href: destroy_admin_user_session_path, active: false, options: { method: :delete })
   end
 
-  def list_from_translation_path(translation_path, params: {})
-    prefix = current_journey && current_journey != :unknown ? current_journey.to_s : ""
-    bullet_list = params[:no_bullet] ? "" : "govuk-list--bullet"
-    render "shared/forms/list_items", translation_path: prefix + translation_path, bullet_list:, params:
-  end
-
   def bullet_list_from_translation_array(locale_path, params: {})
     keys = [I18n.locale, locale_path.split(".").map(&:to_sym)].flatten
     render "shared/forms/list_with_items", locale_path:, items: I18n.backend.send(:translations).dig(*keys), params:
