@@ -7,7 +7,11 @@
     <h2 class="govuk-heading-m"><%= "#{index + 1}. #{t(".#{action}_heading")}" %> </h2>
     <p class="govuk-body"><%= t(".#{action}_text") %></p>
     <% if action == 'income_outgoings' %>
-      <%= list_from_translation_path(".client_completed_means.show.#{action}") %>
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".income_outgoings_list").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
     <% end %>
   <% end %>
 

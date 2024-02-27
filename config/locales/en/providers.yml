@@ -396,10 +396,9 @@ en:
         review_employment_text: We'll show you the information HMRC shared with us.
         income_outgoings_heading: Tell us about their income and outgoings
         income_outgoings_text: We need to know if your client
-        income_outgoings:
-          list: |
-            receives certain types of income (for example, benefits)
-            has certain regular outgoings (for example, childcare)
+        income_outgoings_list:
+          - receives certain types of income (for example, benefits)
+          - has certain regular outgoings (for example, childcare)
         sort_transactions_heading: Sort their bank transactions into categories
         sort_transactions_text: Check your client's bank statements and sort each transaction into a category (for example, housing).
         dependants_heading: Tell us about their dependants
