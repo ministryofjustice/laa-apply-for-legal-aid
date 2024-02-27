@@ -237,7 +237,7 @@ GEM
     discard (1.3.0)
       activerecord (>= 4.2, < 8)
     docile (1.4.0)
-    dotenv (3.0.3)
+    dotenv (3.1.0)
     drb (2.2.0)
       ruby2_keywords
     dumb_delegator (1.0.0)
