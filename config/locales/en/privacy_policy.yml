@@ -5,18 +5,18 @@ en:
       purpose:
         header: Purpose
         info_1: 'This privacy notice sets out:'
-        list: |
-          the standards that you can expect from the Legal Aid Agency (LAA) when we request or hold personal data about you
-          how you can get access to a copy of your personal data
-          what you can do if you think the standards are not being met
+        list:
+          - the standards that you can expect from the Legal Aid Agency (LAA) when we request or hold personal data about you
+          - how you can get access to a copy of your personal data
+          - what you can do if you think the standards are not being met
         info_2: The LAA is an Executive Agency of the Ministry of Justice (MoJ). The MoJ is the data controller for the personal information we hold.
         info_3: The LAA collects and processes personal data for the exercise of its own and associated public functions. Our public function is to provide legal aid.
       about_personal_information:
         header: About personal information
         info_1: "Personal data is information about you as an individual. It can be your name, address or telephone number. It can also include the information that you've provided in this service such as:"
-        list: |
-          your financial circumstances
-          information relating to any current or previous legal proceedings concerning you
+        list:
+          - your financial circumstances
+          - information relating to any current or previous legal proceedings concerning you
         info_2: We know how important it is to protect customers’ privacy and to comply with data protection laws. We will safeguard your personal data and will only disclose it where it is lawful to do so, or with your consent.
       types_of_personal_data_we_process:
         header: Types of personal data we process
@@ -25,11 +25,11 @@ en:
       purpose_of_processing:
         header: Purpose of processing and the lawful basis for the process
         info_1: "The LAA collects and processes personal data for the purpose of providing legal aid. Specifically, we use personal data to:"
-        list: |
-          decide whether you need to make a contribution towards the costs of legal aid and to assist the LAA in collecting those contributions
-          assess claims from your legal representative(s) for payment from the legal aid fund for the work that they've conducted on your behalf
-          conduct periodic assurance audits on legal aid files to ensure that decisions have been made correctly and accurately
-          produce statistics and information on our systems and processes to help us improve them and to assist us in carrying out our functions
+        list:
+          - decide whether you need to make a contribution towards the costs of legal aid and to assist the LAA in collecting those contributions
+          - assess claims from your legal representative(s) for payment from the legal aid fund for the work that they've conducted on your behalf
+          - conduct periodic assurance audits on legal aid files to ensure that decisions have been made correctly and accurately
+          - produce statistics and information on our systems and processes to help us improve them and to assist us in carrying out our functions
         info_2: Were the LAA unable to collect this personal information, we would not be able to conduct the activities above, which would prevent us from providing legal aid.
         info_3: The lawful basis for the LAA collecting and processing your personal data is in the administration of justice and the result of the powers contained in the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO).
         info_4: We also collect ‘special categories of personal data’ for the purposes of monitoring equality. This is a legal requirement for public authorities under the Equality Act 2010.
@@ -38,10 +38,10 @@ en:
         header: Who we may share your information with
         info_1: "We sometimes need to share the personal information we process with other organisations. When this is necessary, we'll comply with all aspects of the relevant data protection laws."
         info_2: "The organisations we may share your personal information with include:"
-        list: |
-          public authorities such as HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC), Department of Work and Pensions (DWP) and HM Land Registry
-          non-public authorities such as the credit reference agencies Equifax and TransUnion
-          fraud prevention agencies if false or inaccurate information is provided or fraud has been identified
+        list:
+          - public authorities such as HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC), Department of Work and Pensions (DWP) and HM Land Registry
+          - non-public authorities such as the credit reference agencies Equifax and TransUnion
+          - fraud prevention agencies if false or inaccurate information is provided or fraud has been identified
         info_3: You can contact our Data Protection Officer for further information on the organisations we may share your personal information with.
       data_processors:
         header: Data Processors
@@ -74,29 +74,29 @@ en:
         info_2: When we collect your personal data, we have responsibilities, and you have rights.
         we_will:
           info_1: "We will:"
-          list: |
-            protect and ensure that no unauthorised person has access to your personal data
-            share your personal data with other organisations only for legitimate purposes
-            consider your request to correct, stop processing or erase your personal data
+          list:
+            - protect and ensure that no unauthorised person has access to your personal data
+            - share your personal data with other organisations only for legitimate purposes
+            - consider your request to correct, stop processing or erase your personal data
         we_will_not:
           info_1: "We will not:"
-          list: |
-            keep your personal data longer than needed
-            make your personal data available for commercial use without your consent
+          list:
+            - keep your personal data longer than needed
+            - make your personal data available for commercial use without your consent
         you_can:
           info_1: "You can:"
-          list: |
-            withdraw consent at any time where relevant
-            lodge a complaint with the supervisory authority
+          list:
+            - withdraw consent at any time where relevant
+            - lodge a complaint with the supervisory authority
       more_details:
         header: "The Data Protection Officer"
         info_1: "The Data Protection Officer can provide details on:"
-        list: |
-          agreements we have with other organisations for sharing information
-          circumstances where we can pass on personal information without telling you, for example to help with the prevention or detection of crime or to produce anonymised statistics
-          how we instruct staff to collect, use or delete your personal information
-          how we check that the information we hold is accurate and up-to-date
-          how to make a complaint
+        list:
+          - agreements we have with other organisations for sharing information
+          - circumstances where we can pass on personal information without telling you, for example to help with the prevention or detection of crime or to produce anonymised statistics
+          - how we instruct staff to collect, use or delete your personal information
+          - how we check that the information we hold is accurate and up-to-date
+          - how to make a complaint
         info_2: "Contact the Data Protection Officer at:"
         address:
           title: The Data Protection Officer

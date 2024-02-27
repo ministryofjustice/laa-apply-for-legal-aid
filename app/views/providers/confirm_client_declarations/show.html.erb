@@ -36,10 +36,12 @@
           ) %>
     <% end %>
     <%= govuk_warning_text do %>
-      <div class="govuk-!-margin-bottom-4">
-        <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
-      </div>
-      <%= list_from_translation_path ".confirm_client_declarations.show.warning" %>
+      <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
+      <ul class="govuk-list--bullet">
+        <% t(".warning").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
     <% end %>
 
     <%= form.govuk_check_boxes_fieldset :client_declaration_confirmed, legend: nil do %>

@@ -6,10 +6,10 @@ cy:
       purpose:
         header: esopruP
         info_1: ":tuo stes eciton ycavirp sihT"
-        list: |
-          tem gnieb ton era sdradnats eht kniht uoy fi od nac uoy tahw
-          atad lanosrep ruoy fo ypoc a ot ssecca teg nac uoy woh
-          uoy tuoba atad lanosrep dloh ro tseuqer ew nehw )AAL( ycnegA diA lageL eht morf tcepxe nac uoy taht sdradnats eht
+        list:
+          - tem gnieb ton era sdradnats eht kniht uoy fi od nac uoy tahw
+          - atad lanosrep ruoy fo ypoc a ot ssecca teg nac uoy woh
+          - uoy tuoba atad lanosrep dloh ro tseuqer ew nehw )AAL( ycnegA diA lageL eht morf tcepxe nac uoy taht sdradnats eht
         info_2: ".dloh ew noitamrofni lanosrep eht rof rellortnoc atad eht si JoM
           ehT .)JoM( ecitsuJ fo yrtsiniM eht fo ycnegA evitucexE na si AAL ehT"
         info_3: ".dia lagel edivorp ot si noitcnuf cilbup ruO .snoitcnuf cilbup detaicossa
@@ -20,9 +20,9 @@ cy:
         info_1: ":sa hcus ecivres siht ni dedivorp ev'uoy taht noitamrofni eht edulcni
           osla nac tI .rebmun enohpelet ro sserdda ,eman ruoy eb nac tI .laudividni
           na sa uoy tuoba noitamrofni si atad lanosreP"
-        list: |
-          uoy gninrecnoc sgnideecorp lagel suoiverp ro tnerruc yna ot gnitaler noitamrofni
-          secnatsmucric laicnanif ruoy
+        list:
+          - uoy gninrecnoc sgnideecorp lagel suoiverp ro tnerruc yna ot gnitaler noitamrofni
+          - secnatsmucric laicnanif ruoy
         info_2: ".tnesnoc ruoy htiw ro ,os od ot lufwal si ti erehw ti esolcsid ylno
           lliw dna atad lanosrep ruoy draugefas lliw eW .swal noitcetorp atad htiw
           ylpmoc ot dna ycavirp ’sremotsuc tcetorp ot si ti tnatropmi woh wonk eW"
@@ -36,11 +36,11 @@ cy:
         header: ssecorp eht rof sisab lufwal eht dna gnissecorp fo esopruP
         info_1: ":ot atad lanosrep esu ew ,yllacificepS .dia lagel gnidivorp fo esoprup
           eht rof atad lanosrep sessecorp dna stcelloc AAL ehT"
-        list: |
-          snoitcnuf ruo tuo gniyrrac ni su tsissa ot dna meht evorpmi su pleh ot sessecorp dna smetsys ruo no noitamrofni dna scitsitats ecudorp
-          yletarucca dna yltcerroc edam neeb evah snoisiced taht erusne ot selif dia lagel no stidua ecnarussa cidoirep tcudnoc
-          flaheb ruoy no detcudnoc ev'yeht taht krow eht rof dnuf dia lagel eht morf tnemyap rof )s(evitatneserper lagel ruoy morf smialc ssessa
-          snoitubirtnoc esoht gnitcelloc ni AAL eht tsissa ot dna dia lagel fo stsoc eht sdrawot noitubirtnoc a ekam ot deen uoy rehtehw ediced
+        list:
+          - snoitcnuf ruo tuo gniyrrac ni su tsissa ot dna meht evorpmi su pleh ot sessecorp dna smetsys ruo no noitamrofni dna scitsitats ecudorp
+          - yletarucca dna yltcerroc edam neeb evah snoisiced taht erusne ot selif dia lagel no stidua ecnarussa cidoirep tcudnoc
+          - flaheb ruoy no detcudnoc ev'yeht taht krow eht rof dnuf dia lagel eht morf tnemyap rof )s(evitatneserper lagel ruoy morf smialc ssessa
+          - snoitubirtnoc esoht gnitcelloc ni AAL eht tsissa ot dna dia lagel fo stsoc eht sdrawot noitubirtnoc a ekam ot deen uoy rehtehw ediced
         info_2: ".dia lagel gnidivorp morf su tneverp dluow hcihw ,evoba seitivitca
           eht tcudnoc ot elba eb ton dluow ew ,noitamrofni lanosrep siht tcelloc ot
           elbanu AAL eht ereW"
@@ -61,10 +61,10 @@ cy:
           lanosrep eht erahs ot deen semitemos eW"
         info_2: ":edulcni htiw noitamrofni lanosrep ruoy erahs yam ew snoitasinagro
           ehT"
-        list: |
-          deifitnedi neeb sah duarf ro dedivorp si noitamrofni etaruccani ro eslaf fi seicnega noitneverp duarf
-          noinUsnarT dna xafiuqE seicnega ecnerefer tiderc eht sa hcus seitirohtua cilbup-non
-          yrtsigeR dnaL MH dna )PWD( snoisneP dna kroW fo tnemtrapeD ,)CRMH( smotsuC dna euneveR MH ,)STCMH( ecivreS slanubirT dna struoC MH sa hcus seitirohtua cilbup
+        list:
+          - deifitnedi neeb sah duarf ro dedivorp si noitamrofni etaruccani ro eslaf fi seicnega noitneverp duarf
+          - noinUsnarT dna xafiuqE seicnega ecnerefer tiderc eht sa hcus seitirohtua cilbup-non
+          - yrtsigeR dnaL MH dna )PWD( snoisneP dna kroW fo tnemtrapeD ,)CRMH( smotsuC dna euneveR MH ,)STCMH( ecivreS slanubirT dna struoC MH sa hcus seitirohtua cilbup
         info_3: ".htiw noitamrofni lanosrep ruoy erahs yam ew snoitasinagro eht no
           noitamrofni rehtruf rof reciffO noitcetorP ataD ruo tcatnoc nac uoY"
       data_processors:
@@ -120,29 +120,29 @@ cy:
           tcelloc ew nehW"
         we_will:
           info_1: ":lliw eW"
-          list: |
-            atad lanosrep ruoy esare ro gnissecorp pots ,tcerroc ot tseuqer ruoy redisnoc
-            sesoprup etamitigel rof ylno snoitasinagro rehto htiw atad lanosrep ruoy erahs
-            atad lanosrep ruoy ot ssecca sah nosrep desirohtuanu on taht erusne dna tcetorp
+          list:
+            - atad lanosrep ruoy esare ro gnissecorp pots ,tcerroc ot tseuqer ruoy redisnoc
+            - sesoprup etamitigel rof ylno snoitasinagro rehto htiw atad lanosrep ruoy erahs
+            - atad lanosrep ruoy ot ssecca sah nosrep desirohtuanu on taht erusne dna tcetorp
         we_will_not:
           info_1: ":ton lliw eW"
-          list: |
-            tnesnoc ruoy tuohtiw esu laicremmoc rof elbaliava atad lanosrep ruoy ekam
-            dedeen naht regnol atad lanosrep ruoy peek
+          list:
+            - tnesnoc ruoy tuohtiw esu laicremmoc rof elbaliava atad lanosrep ruoy ekam
+            - dedeen naht regnol atad lanosrep ruoy peek
         you_can:
           info_1: ":nac uoY"
-          list: |
-            ytirohtua yrosivrepus eht htiw tnialpmoc a egdol
-            tnaveler erehw emit yna ta tnesnoc wardhtiw
+          list:
+            - ytirohtua yrosivrepus eht htiw tnialpmoc a egdol
+            - tnaveler erehw emit yna ta tnesnoc wardhtiw
       more_details:
         header: ":reciffO noitcetorP ataD ehT"
         info_1: ":no sliated edivorp nac reciffO noitcetorP ataD ehT"
-        list: |
-          tnialpmoc a ekam ot woh
-          etad-ot-pu dna etarucca si dloh ew noitamrofni eht taht kcehc ew woh
-          noitamrofni lanosrep ruoy eteled ro esu ,tcelloc ot ffats tcurtsni ew woh
-          scitsitats desimynona ecudorp ot ro emirc fo noitceted ro noitneverp eht htiw pleh ot elpmaxe rof ,uoy gnillet tuohtiw noitamrofni lanosrep no ssap nac ew erehw secnatsmucric
-          noitamrofni gnirahs rof snoitasinagro rehto htiw evah ew stnemeerga
+        list:
+          - tnialpmoc a ekam ot woh
+          - etad-ot-pu dna etarucca si dloh ew noitamrofni eht taht kcehc ew woh
+          - noitamrofni lanosrep ruoy eteled ro esu ,tcelloc ot ffats tcurtsni ew woh
+          - scitsitats desimynona ecudorp ot ro emirc fo noitceted ro noitneverp eht htiw pleh ot elpmaxe rof ,uoy gnillet tuohtiw noitamrofni lanosrep no ssap nac ew erehw secnatsmucric
+          - noitamrofni gnirahs rof snoitasinagro rehto htiw evah ew stnemeerga
         info_2: ":ta reciffO noitcetorP ataD eht tcatnoC"
         address:
           title: reciffO noitcetorP ataD ehT

@@ -172,11 +172,10 @@ en:
         capital_list_heading: "Tell us about %{individual}'s capital"
         capital_text: "This includes:"
         capital_items:
-          list: |
-            property
-            vehicles
-            savings and investments
-            other assets
+          - property
+          - vehicles
+          - savings and investments
+          - other assets
     check_benefits:
       index:
         details_used: "We used the following details to check your client's benefits status with the DWP:"
@@ -318,10 +317,9 @@ en:
             or a parental order report.
           sign_app_text: "If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may:"
         warning:
-          list: |
-            be prosecuted
-            need to pay a financial penalty
-            have their legal aid stopped and have to pay back the costs
+          - be prosecuted
+          - need to pay a financial penalty
+          - have their legal aid stopped and have to pay back the costs
 
     copy_case:
       confirmations:
@@ -398,10 +396,9 @@ en:
         review_employment_text: We'll show you the information HMRC shared with us.
         income_outgoings_heading: Tell us about their income and outgoings
         income_outgoings_text: We need to know if your client
-        income_outgoings:
-          list: |
-            receives certain types of income (for example, benefits)
-            has certain regular outgoings (for example, childcare)
+        income_outgoings_list:
+          - receives certain types of income (for example, benefits)
+          - has certain regular outgoings (for example, childcare)
         sort_transactions_heading: Sort their bank transactions into categories
         sort_transactions_text: Check your client's bank statements and sort each transaction into a category (for example, housing).
         dependants_heading: Tell us about their dependants
@@ -822,16 +819,6 @@ en:
     add_another_state_benefits:
       show:
         error: Select yes if they have received other benefits
-    income_summary:
-      index:
-        list: |
-          view your client's bank statements
-          add transactions to each income category
-    outgoings_summary:
-      index:
-        list: |
-          view your client's bank statements
-          add transactions to each category
     invalid_logins:
       show:
         permission_title: You do not have permission to view this page
@@ -1183,11 +1170,10 @@ en:
             restrictions_details: Tell us which assets your client or their partner cannot sell or borrow against, and why.
           for_example: "For example, because:"
           examples:
-            list: |
-              they're bankrupt
-              their home has been repossessed
-              their assets are the subject matter of dispute (SMOD)
-              their assets are held under a restraint order
+            - they're bankrupt
+            - their home has been repossessed
+            - their assets are the subject matter of dispute (SMOD)
+            - their assets are held under a restraint order
       policy_disregards:
         show:
           h1-heading:
@@ -1476,12 +1462,11 @@ en:
           It needs one-time, read-only access to your client's bank account information. If your client agrees, TrueLayer will securely collect
           3 months of statements and share them with the LAA.
         details_content_para_three: "They’re regulated by the Financial Conduct Authority (FCA) and will:"
-        details:
-          list: |
-            not store your client's bank account details
-            not see your client's online banking sign-in details
-            not share your client's data with anyone other than the LAA
-            not have ongoing access to your client's bank accounts
+        details_list:
+          - not store your client's bank account details
+          - not see your client's online banking sign-in details
+          - not share your client's data with anyone other than the LAA
+          - not have ongoing access to your client's bank accounts
         heading_h2: How it works
         list_heading_one: 1. Get started
         your_client_will: Your client will receive an email clearly labelled from the Legal Aid Agency (LAA) asking them to share 3 months of bank statements.
