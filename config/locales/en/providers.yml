@@ -317,10 +317,9 @@ en:
             or a parental order report.
           sign_app_text: "If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may:"
         warning:
-          list: |
-            be prosecuted
-            need to pay a financial penalty
-            have their legal aid stopped and have to pay back the costs
+          - be prosecuted
+          - need to pay a financial penalty
+          - have their legal aid stopped and have to pay back the costs
 
     copy_case:
       confirmations:
