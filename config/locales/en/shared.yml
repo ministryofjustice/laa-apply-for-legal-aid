@@ -1038,5 +1038,11 @@ en:
       page_heading: Sort your client's %{type} into categories
       subheading: You told us your client receives the types of payments listed below.
       you_need_to: "You need to:"
+      income_summary:
+        - view your client's bank statements
+        - add transactions to each income category
+      outgoings_summary:
+        - view your client's bank statements
+        - add transactions to each category
       select: View statements and add transactions
       add_another_type: Add another type of %{type}

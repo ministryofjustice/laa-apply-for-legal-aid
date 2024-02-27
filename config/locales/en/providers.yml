@@ -819,16 +819,6 @@ en:
     add_another_state_benefits:
       show:
         error: Select yes if they have received other benefits
-    income_summary:
-      index:
-        list: |
-          view your client's bank statements
-          add transactions to each income category
-    outgoings_summary:
-      index:
-        list: |
-          view your client's bank statements
-          add transactions to each category
     invalid_logins:
       show:
         permission_title: You do not have permission to view this page

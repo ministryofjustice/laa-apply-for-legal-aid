@@ -6,7 +6,11 @@
 
   <p class="govuk-body"><%= t(".you_need_to") %></p>
 
-  <%= list_from_translation_path(".#{list_path}.index") %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".#{list_path}").each do |bullet| %>
+      <li><%= bullet %></li>
+    <% end %>
+  </ul>
 
   <ol class="govuk-list govuk-!-margin-top-8 govuk-!-margin-bottom-8">
     <% index = 0 %>
