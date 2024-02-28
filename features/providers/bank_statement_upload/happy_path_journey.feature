@@ -31,9 +31,10 @@ Feature: Bank statement upload journey happy path
     Then the following sections should exist:
       | tag | section |
       | h2  | Government Cost of Living Payments |
-      | h2  | Carer and disability benefits |
-      | h2  | Low income benefits |
-      | h2  | Other benefits |
+      | h2  | Disregarded benefits |
+      | h3  | Carer and disability benefits |
+      | h3  | Low income benefits |
+      | h3  | Other benefits |
 
     Then I check "Pension"
     Then I should see "Monthly"
@@ -105,9 +106,10 @@ Feature: Bank statement upload journey happy path
     Then the following sections should exist:
       | tag | section |
       | h2  | Government Cost of Living Payments |
-      | h2  | Carer and disability benefits |
-      | h2  | Low income benefits |
-      | h2  | Other benefits |
+      | h2  | Disregarded benefits |
+      | h3  | Carer and disability benefits |
+      | h3  | Low income benefits |
+      | h3  | Other benefits |
 
     Then I check "Pension"
     Then I should see "Monthly"
