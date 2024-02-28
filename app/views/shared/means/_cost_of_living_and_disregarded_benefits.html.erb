@@ -1,5 +1,22 @@
 <%= govuk_details(summary_text: t("shared.cost_of_living_and_disregarded_benefits.title")) do %>
   <h2 class="govuk-heading-m"><%= t("shared.cost_of_living.header") %></h2>
-  <%= render "shared/means/cost_of_living_section" %>
-  <%= render "shared/means/disregarded_benefits_section" %>
+  <p><%= t("shared.cost_of_living.text") %></p>
+
+  <ul class="govuk-list">
+    <% t("shared.cost_of_living.list").each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
+
+  <h2 class="govuk-heading-m"><%= t("shared.disregarded_benefits.header") %></h2>
+  <p class="govuk-body"><%= t("shared.disregarded_benefits.text") %></p>
+
+  <% %w[carer_disability low_income other].each do |category| %>
+    <h3 class="govuk-heading-s"><%= t("shared.disregarded_benefits.#{category}.heading") %></h3>
+    <ul class="govuk-list">
+      <% t("shared.disregarded_benefits.#{category}.list").each do |item| %>
+        <li><%= item %></li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
