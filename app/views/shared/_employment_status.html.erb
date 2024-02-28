@@ -9,7 +9,12 @@
     <%= form.govuk_check_boxes_fieldset individual,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
                                         caption: { text: t("generic.#{caption_individual}_means_caption"), size: "l" },
-                                        hint: { text: t("generic.select_all_that_apply") } do %>
+                                        hint: { text: t("generic.select_all_that_apply") },
+                                        form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
+      <% if @form.errors[:employed].any? %>
+        <p class="govuk-error-message" id="employment-type-error">
+          <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:employed].first %></p>
+      <% end %>
       <div class="deselect-group govuk-!-margin-bottom-2" data-deselect-ctrl="#<%= individual %>-none-selected-true-field">
         <% BaseEmployedForm::EMPLOYMENT_TYPES.each do |employment_type| %>
           <%= form.govuk_check_box employment_type, true, "", multiple: false, link_errors: true, label: { text: t(".#{employment_type}") } %>
