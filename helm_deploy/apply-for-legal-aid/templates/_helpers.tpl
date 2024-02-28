@@ -48,6 +48,23 @@ https://pauladamsmith.com/blog/2011/05/go_time.html
 {{- end -}}
 
 {{/*
+Define cron hour for staging
+On staging we turn off the database at 10PM and restart it at 6AM UTC (11PM and 7AM BST) to save money
+This means that overnight cronjobs on staging all fail as the DB is not present
+*/}}
+{{- define "apply-for-legal-aid.cronjob-hour-to-start-offset" -}}
+  {{- if contains "-staging" .Release.Namespace -}}
+    {{- 7 -}}
+  {{- else if contains "-uat" .Release.Namespace -}}
+    {{- 1 -}}
+  {{- else -}}
+    {{ 0 }}
+  {{- end -}}
+{{- end -}}
+
+
+
+{{/*
 Function to return the name for a UAT redis chart master node host
 This duplicates bitnami/redis chart's internal logic whereby
 If branch name contains "redis" then the redis-release-name appends "-master", otherwise it appends "-redis-master"

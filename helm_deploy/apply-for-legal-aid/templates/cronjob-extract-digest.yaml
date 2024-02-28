@@ -1,3 +1,6 @@
+{{- $defaultStartHour := 2 }}
+{{- $startHourOffset := include "apply-for-legal-aid.cronjob-hour-to-start-offset" . -}}
+{{- $startHour := add $defaultStartHour $startHourOffset }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -8,7 +11,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  schedule: '0 2 * * *'
+  schedule: '0 {{ $startHour }} * * *'
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
