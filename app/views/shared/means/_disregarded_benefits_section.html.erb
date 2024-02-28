@@ -1,7 +1,7 @@
-<h2 class="govuk-heading-s"><%= t("shared.disregarded_benefits.header") %></h2>
+<h2 class="govuk-heading-m"><%= t("shared.disregarded_benefits.header") %></h2>
 <p class="govuk-body"><%= t("shared.disregarded_benefits.text") %></p>
 <% %w[carer_disability low_income other].each do |category| %>
-  <h2 class="govuk-heading-s"><%= t("shared.disregarded_benefits.#{category}.heading") %></h2>
+  <h3 class="govuk-heading-s"><%= t("shared.disregarded_benefits.#{category}.heading") %></h3>
   <div class="govuk-list">
     <ul class="govuk-list">
       <% t("shared.disregarded_benefits.#{category}.list").each do |item| %>
