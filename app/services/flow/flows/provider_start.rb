@@ -30,7 +30,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
           forward: lambda do |application|
             if Setting.home_address?
-              :different_home_addresses
+              :different_addresses
             elsif Setting.linked_applications?
               :copy_case_invitations
             else
