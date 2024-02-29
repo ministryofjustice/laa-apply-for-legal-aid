@@ -21,7 +21,7 @@ module Providers
 
       def form_params
         merge_with_model(applicant) do
-          params.require(:applicant).permit(:different_home_address)
+          params.require(:applicant).permit(:same_correspondence_and_home_address)
         end
       end
     end

@@ -43,7 +43,7 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
     end
 
     context "when yes chosen" do
-      let(:params) { { applicant: { different_home_address: "true" } } }
+      let(:params) { { applicant: { same_correspondence_and_home_address: "true" } } }
 
       it "redirects to the proceedings_types" do
         patch_request
@@ -51,12 +51,12 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
       end
 
       it "records the answer" do
-        expect { patch_request }.to change { applicant.reload.different_home_address }.from(nil).to(true)
+        expect { patch_request }.to change { applicant.reload.same_correspondence_and_home_address }.from(nil).to(true)
       end
     end
 
     context "when no chosen" do
-      let(:params) { { applicant: { different_home_address: "false" } } }
+      let(:params) { { applicant: { same_correspondence_and_home_address: "false" } } }
 
       it "redirects to the proceeding types selection page" do
         patch_request
@@ -64,12 +64,12 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
       end
 
       it "records the answer" do
-        expect { patch_request }.to change { applicant.reload.different_home_address }.from(nil).to(false)
+        expect { patch_request }.to change { applicant.reload.same_correspondence_and_home_address }.from(nil).to(false)
       end
     end
 
     context "when no answer chosen" do
-      let(:params) { { applicant: { different_home_address: "" }, continue_button: "Save and continue" } }
+      let(:params) { { applicant: { same_correspondence_and_home_address: "" }, continue_button: "Save and continue" } }
 
       it "stays on the page and displays validation error" do
         patch_request
@@ -79,7 +79,7 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
     end
 
     context "when form submitted using Save as draft button" do
-      let(:params) { { applicant: { different_home_address: "false" }, draft_button: "irrelevant" } }
+      let(:params) { { applicant: { same_correspondence_and_home_address: "false" }, draft_button: "irrelevant" } }
 
       it "redirects provider to provider's applications page" do
         patch_request
@@ -91,7 +91,7 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
       end
 
       it "records the answer" do
-        expect { patch_request }.to change { applicant.reload.different_home_address }.from(nil).to(false)
+        expect { patch_request }.to change { applicant.reload.same_correspondence_and_home_address }.from(nil).to(false)
       end
     end
   end
