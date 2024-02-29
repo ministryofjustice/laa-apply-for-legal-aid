@@ -26,6 +26,12 @@ module Flow
           check_answers: :check_provider_answers,
           carry_on_sub_flow: true,
         },
+        home_address_lookups: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
+          forward: :address_lookups,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: true,
+        },
         address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
           forward: lambda do |application|
