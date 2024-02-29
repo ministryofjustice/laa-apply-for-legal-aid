@@ -1,0 +1,30 @@
+<%= form_with(
+      model: @form,
+      scope: :address_lookup,
+      url: providers_legal_aid_application_home_address_lookup_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        template: :basic,
+        form:,
+      ) do %>
+
+    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".heading") }  do %>
+      <%= form.govuk_text_field :postcode, label: { text: t(".label.postcode"), tag: "h2", size: "m" }, width: 10 %>
+      <%= form.govuk_text_field :building_number_name, label: { text: t(".label.building_number_name"), tag: "h2", size: "m" }, width: 10 %>
+      <%= govuk_warning_text(text: t(".helper_text")) %>
+    <% end %>
+
+    <p><%# govuk_link_to t(".address_manual_link"), providers_legal_aid_application_address_path %></p>
+
+    <%= next_action_buttons(
+          form:,
+          show_draft: true,
+          continue_id: "find-address",
+          continue_button_text: t(".submit_button"),
+        ) %>
+  <% end %>
+<% end %>

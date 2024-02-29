@@ -37,6 +37,18 @@ en:
           The address you provide is only for this application. If your client has
           other certificated legal aid cases where a different address has been used,
           you should review and update those records in CCMS.
+    home_address_lookups:
+      show:
+        address_manual_link: Enter address manually
+        heading: Find your client's home address
+        label:
+          postcode: Postcode
+          building_number_name: Building number or name (optional)
+        submit_button: Find address
+        helper_text:
+          The address you provide is only for this application. If your client has
+          other certificated legal aid cases where a different address has been used,
+          you should review and update those records in CCMS.
     addresses:
       show:
         heading: Enter your client's correspondence address
