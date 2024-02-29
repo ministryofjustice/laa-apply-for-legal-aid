@@ -104,6 +104,8 @@ en:
               date_is_in_the_future: Date of birth must be in the past
               date_not_valid: Enter a valid date of birth
               earliest_allowed_date: Enter a valid date of birth
+            different_home_address:
+              blank: Select yes if this is your client's home address
             email:
               blank: Enter an email address
               invalid: Enter an email address in the correct format, such as name@example.com
