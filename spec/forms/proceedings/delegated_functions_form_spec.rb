@@ -97,7 +97,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
 
       context "when the date is more than a year old" do
         let(:used_df?) { true }
-        let(:df_date) { Time.zone.yesterday - 1.year }
+        let(:df_date) { Time.zone.yesterday - 13.months }
 
         it "is invalid" do
           expect(df_form).not_to be_valid
