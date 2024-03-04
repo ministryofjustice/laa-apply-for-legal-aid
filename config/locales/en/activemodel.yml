@@ -104,8 +104,6 @@ en:
               date_is_in_the_future: Date of birth must be in the past
               date_not_valid: Enter a valid date of birth
               earliest_allowed_date: Enter a valid date of birth
-            same_correspondence_and_home_address:
-              blank: Select yes if this is your client's home address
             email:
               blank: Enter an email address
               invalid: Enter an email address in the correct format, such as name@example.com
@@ -133,10 +131,14 @@ en:
               none_and_another_option_selected: If you select 'None of the above', you cannot select any of the other options
             has_partner:
               inclusion: Select yes if the client has a partner
+            no_fixed_residence:
+              blank: Select why the client's home address is different to their correspondence address
             partner_has_contrary_interest:
               inclusion: Select yes if the partner has a contrary interest in the proceedings
             receives_state_benefits:
               blank: Select yes if your client gets any benefits
+            same_correspondence_and_home_address:
+              blank: Select yes if this is your client's home address
             student_finance:
               inclusion: Select yes if your client receives student finance
             student_finance_amount:

@@ -175,6 +175,7 @@ Rails.application.routes.draw do
       end
       namespace :home_address do
         resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
+        resource :different_address_reason, only: %i[show update], path: "why_addresses_differ"
       end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
