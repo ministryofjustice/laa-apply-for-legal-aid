@@ -99,7 +99,6 @@ en:
           %{number} addresses found for 
           <span class="govuk-!-font-weight-bold">%{postcode}</span> and
           <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
-        search_again: Search again
         link_text: Enter an address manually
         continue_button_text: Use this address
       confirm_address:
@@ -111,7 +110,6 @@ en:
           1 address found for 
           <span class="govuk-!-font-weight-bold">%{postcode}</span> and
           <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
-        search_again: Search again
         link_text: Enter an address manually
         continue_button_text: Use this address
       no_address:
