@@ -11,7 +11,13 @@
         form:,
       ) do %>
 
-      <%= form.govuk_text_field :country, label: { text: t(".country") } %>
+      <%= form.govuk_collection_select :country,
+                                       @countries,
+                                       :code,
+                                       :description,
+                                       label: { text: t(".country") },
+                                       data: { module: "accessible-autocomplete" },
+                                       options: { include_blank: true } %>
       <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
       <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
       <%= form.govuk_text_field :city, label: { text: t(".address_line_three") }, width: "two-thirds" %>

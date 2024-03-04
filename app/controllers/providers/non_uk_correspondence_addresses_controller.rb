@@ -2,6 +2,7 @@ module Providers
   class NonUkCorrespondenceAddressesController < ProviderBaseController
     def show
       @form = Addresses::NonUkCorrespondenceAddressForm.new(model: non_uk_correspondence_address)
+      countries
     end
 
     def update
@@ -21,6 +22,10 @@ module Providers
           :country, :address_line_one, :address_line_two, :city, :county
         )
       end
+    end
+
+    def countries
+      @countries ||= ::LegalFramework::NonUkCorrespondenceAddresses::All.call
     end
   end
 end
