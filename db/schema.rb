@@ -130,6 +130,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_150804) do
     t.string "last_name_at_birth"
     t.boolean "changed_last_name"
     t.boolean "same_correspondence_and_home_address"
+    t.boolean "no_fixed_residence"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true

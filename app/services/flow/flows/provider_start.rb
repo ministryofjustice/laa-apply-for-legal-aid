@@ -52,8 +52,22 @@ module Flow
         },
         different_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_path(application) },
-          forward: lambda do |_application|
-            :proceedings_types
+          forward: lambda do |application|
+            if application.applicant.same_correspondence_and_home_address?
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            else
+              :different_address_reasons
+            end
+          end,
+        },
+        different_address_reasons: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
+          forward: lambda do |application|
+            if Setting.linked_applications?
+              :copy_case_invitations
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           end,
         },
         copy_case_invitations: {
