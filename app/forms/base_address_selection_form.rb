@@ -1,7 +1,7 @@
 class BaseAddressSelectionForm < BaseForm
   before_validation :deserialize_address
 
-  validates :lookup_id, presence: true
+  validate :lookup_id_present
 
   def initialize(*args)
     super
@@ -26,5 +26,11 @@ private
 
   def selected_address
     @selected_address ||= addresses.find { |address| address.lookup_id == lookup_id }
+  end
+
+  def lookup_id_present
+    return if lookup_id.present?
+
+    errors.add(:lookup_id, I18n.t("activemodel.errors.models.address.attributes.lookup_id.blank", location:))
   end
 end

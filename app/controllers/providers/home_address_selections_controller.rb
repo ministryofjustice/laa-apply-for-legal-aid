@@ -1,5 +1,5 @@
 module Providers
-  class AddressSelectionsController < ProviderBaseController
+  class HomeAddressSelectionsController < ProviderBaseController
     include AddressHandling
 
     def show
@@ -9,7 +9,7 @@ module Providers
 
       @addresses = address_lookup.result
       titleize_addresses
-      filter_addresses if applicant.address.building_number_name.present?
+      filter_home_addresses if applicant.home_address.building_number_name.present?
       @address_collection = collect_addresses
       @form = Addresses::AddressSelectionForm.new(model: address)
     end
@@ -33,7 +33,7 @@ module Providers
     end
 
     def address
-      applicant.address || applicant.build_address
+      applicant.home_address || applicant.build_address
     end
 
     def address_lookup
@@ -42,13 +42,21 @@ module Providers
 
     def address_selection_form_params
       merge_with_model(address, addresses: @addresses) do
-        params.require(:address_selection).permit(:lookup_id, :postcode).merge(location: "correspondence")
+        params.require(:address_selection).permit(:lookup_id, :postcode).merge(location: "home")
       end
     end
 
     def address_form_params
       merge_with_model(address) do
         params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
+      end
+    end
+
+    def filter_home_addresses
+      @addresses.select! do |addr|
+        [addr.address_line_one, addr.address_line_two].any? do |str|
+          str.downcase.include?(applicant.home_address.building_number_name.downcase)
+        end
       end
     end
   end

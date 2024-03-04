@@ -186,6 +186,7 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update], path: "find_correspondence_address"
       resource :home_address_lookup, only: %i[show update], path: "find_home_address"
       resource :address_selection, only: %i[show update], path: "correspondence_address_results"
+      resource :home_address_selection, only: %i[show update], path: "home_address_results"
       resource :check_benefit, only: %i[index update]
       resource :has_national_insurance_number, only: %i[show update]
       resources :check_benefits, only: [:index]
