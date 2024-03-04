@@ -278,8 +278,7 @@ jobs:
     executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker:
-        version: 20.10.7
+    - setup_remote_docker
     - *decrypt_secrets
     - build-and-push-to-ecr
 
