@@ -72,21 +72,21 @@ RSpec.describe Providers::HomeAddressLookupsController do
 
         it "saves the postcode and the location" do
           patch_request
-          expect(applicant.address.postcode).to eq(postcode.delete(" ").upcase)
-          expect(applicant.address.location).to eq("home")
+          expect(applicant.home_address.postcode).to eq(postcode.delete(" ").upcase)
+          expect(applicant.home_address.location).to eq("home")
         end
 
-        # it "redirects to the home address selection page" do
-        #   patch_request
-        #   expect(response).to redirect_to(providers_legal_aid_application_home_address_selection_path)
-        # end
+        it "redirects to the home address selection page" do
+          patch_request
+          expect(response).to redirect_to(providers_legal_aid_application_home_address_selection_path)
+        end
 
         context "and a building number" do
           before { params[:address_lookup][:building_number_name] = "Prospect Cottage" }
 
           it "saves the building name/number value" do
             patch_request
-            expect(applicant.address.building_number_name).to eq("Prospect Cottage")
+            expect(applicant.home_address.building_number_name).to eq("Prospect Cottage")
           end
         end
       end

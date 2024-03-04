@@ -26,14 +26,25 @@ module Flow
           check_answers: :check_provider_answers,
           carry_on_sub_flow: true,
         },
+        address_selections: {
+          path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
+          forward: lambda do |application|
+            if Setting.linked_applications?
+              :copy_case_invitations
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
+          end,
+          check_answers: :check_provider_answers,
+        },
         home_address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
-          forward: :address_lookups,
+          forward: :home_address_selections,
           check_answers: :check_provider_answers,
           carry_on_sub_flow: true,
         },
-        address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
+        home_address_selections: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
           forward: lambda do |application|
             if Setting.linked_applications?
               :copy_case_invitations
