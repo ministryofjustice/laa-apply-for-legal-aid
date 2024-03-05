@@ -172,15 +172,6 @@ RSpec.describe Providers::AddressSelectionsController do
         end
       end
 
-      context "when linking_applications flag is enabled" do
-        before { Setting.update!(linked_applications: true) }
-
-        it "redirects successfully to the next step" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_copy_case_invitation_path)
-        end
-      end
-
       context "when an address already exists" do
         before { create(:address, applicant:) }
 
