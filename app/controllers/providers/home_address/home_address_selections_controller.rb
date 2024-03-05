@@ -14,13 +14,9 @@ module Providers
       end
 
       def update
-        if params[:address_selection][:list]
-          @addresses = build_addresses_from_form_data
-          @address_collection = collect_addresses
-          @form = Addresses::AddressSelectionForm.new(address_selection_form_params)
-        else
-          @form = Addresses::AddressForm.new(address_form_params)
-        end
+        @addresses = build_addresses_from_form_data
+        @address_collection = collect_addresses
+        @form = Addresses::AddressSelectionForm.new(address_selection_form_params)
 
         render :show unless save_continue_or_draft(@form)
       end
@@ -38,12 +34,6 @@ module Providers
       def address_selection_form_params
         merge_with_model(address, addresses: @addresses) do
           params.require(:address_selection).permit(:lookup_id, :postcode).merge(location: "home")
-        end
-      end
-
-      def address_form_params
-        merge_with_model(address) do
-          params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
         end
       end
 

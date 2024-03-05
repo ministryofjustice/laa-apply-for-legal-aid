@@ -145,7 +145,7 @@ RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
         end
       end
 
-      it "creates a new address record associated with the applicant" do
+      it "creates a new home address record associated with the applicant" do
         expect { patch_request }.to change { applicant.reload.addresses.count }.by(1)
         expect(applicant.home_address.address_line_one).to eq(selected_address[:address_line_one])
         expect(applicant.home_address.lookup_id).to eq(lookup_id)
