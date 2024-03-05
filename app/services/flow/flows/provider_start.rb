@@ -29,7 +29,9 @@ module Flow
         address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
           forward: lambda do |application|
-            if Setting.linked_applications?
+            if Setting.home_address?
+              :different_addresses
+            elsif Setting.linked_applications?
               :copy_case_invitations
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
@@ -47,6 +49,26 @@ module Flow
             end
           end,
           check_answers: :check_provider_answers,
+        },
+        different_addresses: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_path(application) },
+          forward: lambda do |application|
+            if application.applicant.same_correspondence_and_home_address?
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            else
+              :different_address_reasons
+            end
+          end,
+        },
+        different_address_reasons: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
+          forward: lambda do |application|
+            if Setting.linked_applications?
+              :copy_case_invitations
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
+          end,
         },
         copy_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },

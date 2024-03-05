@@ -413,6 +413,17 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
+    home_address:
+      different_addresses:
+        show:
+          heading: Is this also your client's home address?
+          paragraph: The home address is the place that they normally live in, and sometimes called the main dwelling.
+      different_address_reasons:
+        show:
+          heading: Why is your client's home address different to their correspondence address?
+          options:
+            different_home_address: They have a different home address
+            no_fixed_residence: My client is homeless or has no fixed residence
     link_case:
       invitations:
         show:

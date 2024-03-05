@@ -173,6 +173,10 @@ Rails.application.routes.draw do
         resource :search, only: %i[show update]
         resource :confirmation, only: %i[show update]
       end
+      namespace :home_address do
+        resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
+        resource :different_address_reason, only: %i[show update], path: "why_addresses_differ"
+      end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
