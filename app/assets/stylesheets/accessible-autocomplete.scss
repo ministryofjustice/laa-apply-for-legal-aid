@@ -1,0 +1,167 @@
+.autocomplete__wrapper {
+  position: relative;
+}
+
+.autocomplete__hint,
+.autocomplete__input {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 0; /* BUG: Safari 10 on macOS seems to add an implicit margin. */
+  border: 2px solid #0b0c0c;
+  border-radius: 0; /* Safari 10 on iOS adds implicit border rounding. */
+  -webkit-appearance: none;
+}
+
+.autocomplete__input {
+  position: relative;
+  background-color: transparent;
+}
+
+.autocomplete__hint {
+  position: absolute;
+  color: #b1b4b6;
+}
+
+.autocomplete__input--default {
+  padding: 5px;
+}
+
+.autocomplete__input--focused {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px;
+}
+
+.autocomplete__input--show-all-values {
+  padding: 5px 34px 5px 5px; /* Space for arrow. Other padding should match .autocomplete__input--default. */
+  cursor: pointer;
+}
+
+.autocomplete__dropdown-arrow-down{
+  display: inline-block;
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+}
+
+.autocomplete__menu {
+  width: 100%;
+  width: calc(100% - 4px);
+  max-height: 342px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  border: 2px solid #0B0C0C;
+  border-top: 0;
+  color: #0B0C0C;
+  background-color: #ffffff;
+}
+
+.autocomplete__menu--visible {
+  display: block;
+}
+
+.autocomplete__menu--hidden {
+  display: none;
+}
+
+.autocomplete__menu--overlay {
+  position: absolute;
+  z-index: 100;
+  top: 100%;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.2569) 0 2px 6px;
+}
+
+.autocomplete__menu--inline {
+  position: relative;
+}
+
+.autocomplete__option {
+  display: block;
+  position: relative;
+  border-bottom: solid #b1b4b6;
+  border-width: 1px 0;
+  cursor: pointer;
+}
+
+.autocomplete__option > * {
+  pointer-events: none;
+}
+
+.autocomplete__option:first-of-type {
+  border-top-width: 0;
+}
+
+.autocomplete__option:last-of-type {
+  border-bottom-width: 0;
+}
+
+.autocomplete__option--odd {
+  background-color: #FAFAFA;
+}
+
+.autocomplete__option--focused,
+.autocomplete__option:hover {
+  border-color: #1d70b8;
+  outline: none;
+  color: #ffffff;
+  background-color: #1d70b8;
+}
+
+@media (-ms-high-contrast: active), (forced-colors: active) {
+  .autocomplete__menu {
+    border-color: FieldText;
+  }
+
+  .autocomplete__option {
+    color: FieldText;
+    background-color: Field;
+  }
+
+  .autocomplete__option--focused,
+  .autocomplete__option:hover {
+    border-color: Highlight;
+    border-color: SelectedItem;
+    outline-color: SelectedItemText;
+    color: HighlightText;
+    color: SelectedItemText;
+    background-color: Highlight;
+
+    // Prefer SelectedItem / SelectedItemText in browsers that support it 
+    background-color: SelectedItem;
+    forced-color-adjust: none; // prevent backplate from obscuring text //
+  }
+}
+
+.autocomplete__option--no-results {
+  color: #646b6f;
+  background-color: #FAFAFA;
+  cursor: not-allowed;
+}
+
+.autocomplete__hint,
+.autocomplete__input,
+.autocomplete__option {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.autocomplete__hint,
+.autocomplete__option {
+  padding: 5px;
+}
+
+@media (min-width: 641px) {
+  .autocomplete__hint,
+  .autocomplete__input,
+  .autocomplete__option {
+    font-size: 19px;
+    line-height: 1.3158;
+  }
+}

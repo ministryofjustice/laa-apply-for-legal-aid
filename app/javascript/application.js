@@ -22,6 +22,7 @@ import './src/start_button'
 import './src/table-select-all'
 import './src/table-sort'
 import './src/worker_waiter'
+import './src/accessible_autocomplete'
 
 initAll()
 Rails.start()
