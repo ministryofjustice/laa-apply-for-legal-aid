@@ -22,7 +22,7 @@ RSpec.describe Providers::AddressLookupsController do
 
       it "shows the postcode entry page" do
         expect(response).to be_successful
-        expect(unescaped_response_body).to include(I18n.t("providers.address_lookups.show.heading"))
+        expect(unescaped_response_body).to include("Find your client's correspondence address")
       end
     end
   end
