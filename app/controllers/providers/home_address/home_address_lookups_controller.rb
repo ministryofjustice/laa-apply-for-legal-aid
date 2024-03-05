@@ -19,7 +19,7 @@ module Providers
       end
 
       def address
-        applicant.address || applicant.build_address(location: "home")
+        applicant.home_address || applicant.build_address(location: "home")
       end
     end
   end

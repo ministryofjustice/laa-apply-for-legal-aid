@@ -6,8 +6,6 @@ module Providers
       def show
         return redirect_to back_path unless address.postcode
 
-        legal_aid_application.enter_applicant_details! unless no_state_change_required?
-
         @addresses = address_lookup.result
         titleize_addresses
         filter_home_addresses if applicant.home_address.building_number_name.present?
@@ -28,10 +26,6 @@ module Providers
       end
 
     private
-
-      def no_state_change_required?
-        legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?
-      end
 
       def address
         applicant.home_address || applicant.build_address

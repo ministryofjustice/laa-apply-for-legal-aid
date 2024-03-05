@@ -31,6 +31,8 @@ module Flow
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
+            elsif Setting.linked_applications?
+              :copy_case_invitations
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
