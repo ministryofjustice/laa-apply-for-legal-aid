@@ -89,6 +89,17 @@ en:
           and <abbr title="HM Revenue and Customs">HMRC</abbr>
         c: LAA can check my details with my bank and credit reference agencies
         d: the information I have given is complete and correct
+    address_lookup:
+      address_manual_link: Enter address manually
+      heading: Find your client's %{location} address
+      label:
+        postcode: Postcode
+        building_number_name: Building number or name (optional)
+      submit_button: Find address
+      helper_text:
+        The address you provide is only for this application. If your client has
+        other certificated legal aid cases where a different address has been used,
+        you should review and update those records in CCMS.
     address_selection:
       select_address:
         heading: Select your client's correspondence address
