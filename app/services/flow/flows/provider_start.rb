@@ -77,7 +77,13 @@ module Flow
         },
         different_address_reasons: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
-          forward: :home_address_lookups,
+          forward: lambda do |application|
+            if application.applicant.no_fixed_residence?
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            else
+              :home_address_lookups
+            end
+          end,
         },
         copy_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },
