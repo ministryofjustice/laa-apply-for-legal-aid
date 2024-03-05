@@ -1,10 +1,10 @@
 <%= page_template(
-      page_title: t(".heading"),
+      page_title: t(".heading", location:),
       template: :basic,
       form:,
     ) do %>
 
-      <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
+      <h1 class="govuk-heading-xl"><%= t(".heading", location:) %></h1>
 
       <p class='govuk-body'>
         <% if @form.model.building_number_name.present? %>

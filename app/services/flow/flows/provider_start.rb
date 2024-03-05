@@ -29,8 +29,8 @@ module Flow
         address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
           forward: lambda do |application|
-            if Setting.linked_applications?
-              :copy_case_invitations
+            if Setting.home_address?
+              :different_addresses
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
@@ -38,17 +38,15 @@ module Flow
           check_answers: :check_provider_answers,
         },
         home_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_home_address_home_address_lookup_path(application) },
           forward: :home_address_selections,
           check_answers: :check_provider_answers,
           carry_on_sub_flow: true,
         },
         home_address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_home_address_home_address_selection_path(application) },
           forward: lambda do |application|
-            if Setting.home_address?
-              :different_addresses
-            elsif Setting.linked_applications?
+            if Setting.linked_applications?
               :copy_case_invitations
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
@@ -79,13 +77,7 @@ module Flow
         },
         different_address_reasons: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
-          forward: lambda do |application|
-            if Setting.linked_applications?
-              :copy_case_invitations
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
+          forward: :home_address_lookups,
         },
         copy_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },
