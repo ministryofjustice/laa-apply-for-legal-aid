@@ -102,7 +102,7 @@ en:
         you should review and update those records in CCMS.
     address_selection:
       select_address:
-        heading: Select your client's correspondence address
+        heading: Select your client's %{location} address
         addresses_found_html: |
           %{number} addresses found for 
           <span class="govuk-!-font-weight-bold">%{postcode}</span>.
@@ -114,45 +114,7 @@ en:
         link_text: Enter an address manually
         continue_button_text: Use this address
       confirm_address:
-        heading: Confirm your client's correspondence address
-        addresses_found_html: |
-          1 address found for 
-          <span class="govuk-!-font-weight-bold">%{postcode}</span>.
-        addresses_found_long_html: |
-          1 address found for 
-          <span class="govuk-!-font-weight-bold">%{postcode}</span> and
-          <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
-        search_again: Search again
-        link_text: Enter an address manually
-        continue_button_text: Use this address
-      no_address:
-        heading: No address found
-        addresses_found_html: |
-          We could not find an address that matches 
-          <span class="govuk-!-font-weight-bold">%{postcode}</span>.
-        addresses_found_long_html: |
-          We could not find an address that matches 
-          <span class="govuk-!-font-weight-bold">%{postcode}</span>
-          with a building number or name of 
-          <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
-        paragraph_2: You can change the postcode or enter the address manually.
-        change_postcode: Change the postcode
-        manual_address: Enter an address manually
-    home_address_selection:
-      select_address:
-        heading: Select your client's home address
-        addresses_found_html: |
-          %{number} addresses found for 
-          <span class="govuk-!-font-weight-bold">%{postcode}</span>.
-        addresses_found_long_html: |
-          %{number} addresses found for 
-          <span class="govuk-!-font-weight-bold">%{postcode}</span> and
-          <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
-        search_again: Search again
-        link_text: Enter an address manually
-        continue_button_text: Use this address
-      confirm_address:
-        heading: Confirm your client's home address
+        heading: Confirm your client's %{location} address
         addresses_found_html: |
           1 address found for 
           <span class="govuk-!-font-weight-bold">%{postcode}</span>.
