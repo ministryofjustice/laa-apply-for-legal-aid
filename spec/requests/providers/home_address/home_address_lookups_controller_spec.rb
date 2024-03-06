@@ -63,7 +63,7 @@ RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
         it "re-renders the form with the validation errors" do
           patch_request
           expect(unescaped_response_body).to include("There is a problem")
-          expect(unescaped_response_body).to include("Enter a postcode in the right format")
+          expect(unescaped_response_body).to include("Enter a postcode in the correct format")
         end
       end
 
