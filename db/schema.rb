@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_150804) do
     t.string "lookup_id"
     t.string "building_number_name"
     t.string "location"
+    t.string "country"
     t.index ["applicant_id"], name: "index_addresses_on_applicant_id"
   end
 
