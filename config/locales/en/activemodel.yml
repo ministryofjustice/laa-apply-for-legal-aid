@@ -171,12 +171,12 @@ en:
               blank: Please select an address from the list
             postcode:
               blank: Enter a postcode
-              invalid: Enter a postcode in the right format
+              invalid: Enter a postcode in the correct format
         applicants/address_lookup_form:
           attributes:
             postcode:
               blank: Enter a postcode
-              invalid: Enter a postcode in the right format
+              invalid: Enter a postcode in the correct format
         applicants/address_selection_form:
           attributes:
             address:

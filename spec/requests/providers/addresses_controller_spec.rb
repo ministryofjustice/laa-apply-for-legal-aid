@@ -75,12 +75,12 @@ RSpec.describe Providers::AddressesController do
       end
 
       context "with a valid address" do
-        context "when linked_applications flag is disabled" do
-          before { Setting.update!(linked_applications: false) }
+        context "when home_address flag is enabled" do
+          before { Setting.update!(home_address: true) }
 
-          it "redirects successfully to the next step" do
+          it "redirects to different addresses page" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
+            expect(response).to redirect_to(providers_legal_aid_application_home_address_different_address_path)
           end
         end
 
@@ -90,6 +90,13 @@ RSpec.describe Providers::AddressesController do
           it "redirects successfully to the next step" do
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_copy_case_invitation_path)
+          end
+        end
+
+        context "when neither linking_applications nor home_address feature flags are enabled" do
+          it "redirects successfully to the next step" do
+            patch_request
+            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
           end
         end
 
