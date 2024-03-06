@@ -87,11 +87,11 @@ RSpec.describe Providers::NonUkCorrespondenceAddressesController do
 
         it "creates an address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
-          expect(address.address_line_one).to eq(address_params[:address][:address_line_one])
-          expect(address.address_line_two).to eq(address_params[:address][:address_line_two])
-          expect(address.city).to eq(address_params[:address][:city])
-          expect(address.county).to eq(address_params[:address][:county])
-          expect(address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
+          expect(address.address_line_one).to eq(address_params[:non_uk_correspondence_address][:address_line_one])
+          expect(address.address_line_two).to eq(address_params[:non_uk_correspondence_address][:address_line_two])
+          expect(address.city).to eq(address_params[:non_uk_correspondence_address][:city])
+          expect(address.county).to eq(address_params[:non_uk_correspondence_address][:county])
+          expect(address.postcode).to be_nil
         end
       end
 
