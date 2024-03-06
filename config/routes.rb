@@ -174,6 +174,7 @@ Rails.application.routes.draw do
         resource :confirmation, only: %i[show update]
       end
       namespace :home_address do
+        resource :address, only: %i[show update], path: "enter_home_address"
         resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
         resource :different_address_reason, only: %i[show update], path: "why_addresses_differ"
         resource :home_address_lookup, only: %i[show update], path: "find_home_address"
