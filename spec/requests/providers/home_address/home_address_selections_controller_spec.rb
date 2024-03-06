@@ -188,6 +188,28 @@ RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
         end
       end
 
+      context "when a single home address was displayed" do
+        let(:params) do
+          {
+            address_selection: {
+              address_line_one: "1",
+              address_line_two: "FAKE ROAD",
+              city: "TEST CITY",
+              postcode: "AA1 1AA",
+              lookup_post_code: "AA1 1AA",
+            },
+          }.merge(submit_button)
+        end
+
+        it "creates a new home address record associated with the applicant" do
+          expect { patch_request }.to change { applicant.reload.addresses.count }.by(1)
+          expect(applicant.home_address.address_line_one).to eq("1")
+          expect(applicant.home_address.address_line_two).to eq("FAKE ROAD")
+          expect(applicant.home_address.city).to eq("TEST CITY")
+          expect(applicant.home_address.postcode).to eq("AA11AA")
+        end
+      end
+
       context "with form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 

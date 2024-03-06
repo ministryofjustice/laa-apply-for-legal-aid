@@ -12,6 +12,13 @@ module Providers
 
     private
 
+      def build_address
+        Address.new(
+          applicant:,
+          location: "home",
+        )
+      end
+
       def form_params
         merge_with_model(address) do
           params.require(:address_lookup).permit(:postcode, :building_number_name)
@@ -19,7 +26,7 @@ module Providers
       end
 
       def address
-        applicant.home_address || applicant.build_address(location: "home")
+        @address ||= applicant.home_address || build_address
       end
     end
   end

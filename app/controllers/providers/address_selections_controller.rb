@@ -48,7 +48,7 @@ module Providers
 
     def address_form_params
       merge_with_model(address) do
-        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
+        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode).merge(location: "correspondence")
       end
     end
   end

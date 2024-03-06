@@ -37,7 +37,7 @@ module Providers
       @applicant = legal_aid_application.applicant
       @partner = legal_aid_application.partner
       @read_only = legal_aid_application.read_only?
-      @address = @applicant.addresses.first
+      @address = @applicant.address
     end
 
     # This handles the situation where a provider is viewing providers/applications and a citizens completes their
