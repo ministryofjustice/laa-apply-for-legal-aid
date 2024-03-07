@@ -48,7 +48,7 @@ en:
         city: Town or city
         county: County (optional)
         postcode: Postcode
-        submit_button: Find address    
+        submit_button: Find address
     applicant_employed:
       index:
         heading_1: What is your client's employment status?
