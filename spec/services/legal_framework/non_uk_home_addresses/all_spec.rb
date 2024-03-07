@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LegalFramework::NonUkCorrespondenceAddresses::All, vcr: { cassette_name: "country_names_all", allow_playback_repeats: true } do
+RSpec.describe LegalFramework::NonUkHomeAddresses::All, vcr: { cassette_name: "country_names_all", allow_playback_repeats: true } do
   subject(:instance) { described_class }
 
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/countries/all" }

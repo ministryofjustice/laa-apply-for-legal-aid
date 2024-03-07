@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Addresses::NonUkCorrespondenceAddressForm, type: :form do
+RSpec.describe Addresses::NonUkHomeAddressForm, type: :form do
   subject(:form) { described_class.new(address_params.merge(model: address)) }
 
   let(:country) { "China" }
@@ -33,15 +33,6 @@ RSpec.describe Addresses::NonUkCorrespondenceAddressForm, type: :form do
         it "returns a presence error on country field" do
           expect(form).not_to be_valid
           expect(form.errors[:country]).to contain_exactly("Enter a country")
-        end
-      end
-
-      context "when an invalid input has been entered", pending: "implementation of country API" do
-        let(:country) { "12country" }
-
-        it "return an error on the country field" do
-          expect(form).not_to be_valid
-          expect(form.errors[:country]).to contain_exactly("Enter a real country")
         end
       end
     end
