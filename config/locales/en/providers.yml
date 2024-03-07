@@ -48,16 +48,7 @@ en:
         city: Town or city
         county: County (optional)
         postcode: Postcode
-        submit_button: Find address
-    non_uk_correspondence_addresses:
-      show:
-        heading: Enter your client's overseas correspondence address
-        country: Country
-        address_line_one: Address line 1
-        address_line_two: Address line 2 (optional)
-        address_line_three: Address line 3 (optional)
-        address_line_four: Address line 4 (optional)
-        submit_button: Save and continue    
+        submit_button: Find address    
     applicant_employed:
       index:
         heading_1: What is your client's employment status?
@@ -434,6 +425,15 @@ en:
           options:
             different_home_address: They have a different home address
             no_fixed_residence: My client is homeless or has no fixed residence
+      non_uk_home_addresses:
+        show:
+          heading: Enter your client's overseas home address
+          country: Country
+          address_line_one: Address line 1
+          address_line_two: Address line 2 (optional)
+          address_line_three: Address line 3 (optional)
+          address_line_four: Address line 4 (optional)
+          submit_button: Save and continue
     link_case:
       invitations:
         show:

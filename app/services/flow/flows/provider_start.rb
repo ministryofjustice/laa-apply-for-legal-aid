@@ -87,8 +87,8 @@ module Flow
             end
           end,
         },
-        non_uk_correspondence_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_non_uk_correspondence_address_path(application) },
+        non_uk_home_addresses: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
           forward: lambda do |application|
             if Setting.linked_applications?
               :copy_case_invitations

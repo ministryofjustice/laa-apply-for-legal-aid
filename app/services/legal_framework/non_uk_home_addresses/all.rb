@@ -1,5 +1,5 @@
 module LegalFramework
-  module NonUkCorrespondenceAddresses
+  module NonUkHomeAddresses
     class All < LegalFramework::BaseApiCall
       class CountryNames
         attr_reader :code, :description

@@ -1,7 +1,7 @@
 <%= form_with(
       model: @form,
-      scope: :non_uk_correspondence_address,
-      url: providers_legal_aid_application_non_uk_correspondence_address_path(@legal_aid_application),
+      scope: :non_uk_home_address,
+      url: providers_legal_aid_application_home_address_non_uk_home_address_path(@legal_aid_application),
       method: :patch,
       local: true,
     ) do |form| %>
@@ -12,7 +12,7 @@
       ) do %>
 
         <%= form.govuk_radio_buttons_fieldset :id, legend: { text: nil, hidden: true } do %>
-          <% @countries.each do |country| %>
+          <% @form.countries.each do |country| %>
             <div id="<%= country.code %>" class="govuk-grid-row country-item">
               <%= form.govuk_radio_button(
                     :country,

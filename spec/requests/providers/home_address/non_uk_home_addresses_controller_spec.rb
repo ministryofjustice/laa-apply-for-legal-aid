@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::NonUkCorrespondenceAddressesController do
+RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
@@ -12,7 +12,7 @@ RSpec.describe Providers::NonUkCorrespondenceAddressesController do
   let(:county) { "Shenzhen City, Guangdong Province" }
   let(:address_params) do
     {
-      non_uk_correspondence_address:
+      non_uk_home_address:
         {
           address_line_one:,
           address_line_two:,
@@ -23,8 +23,8 @@ RSpec.describe Providers::NonUkCorrespondenceAddressesController do
     }
   end
 
-  describe "GET /providers/applications/:legal_aid_application_id/non_uk_correspondence_address/edit" do
-    subject(:get_request) { get providers_legal_aid_application_non_uk_correspondence_address_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/home_address/non_uk_home_address/edit" do
+    subject(:get_request) { get providers_legal_aid_application_home_address_non_uk_home_address_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -40,15 +40,15 @@ RSpec.describe Providers::NonUkCorrespondenceAddressesController do
       it "returns success" do
         get_request
         expect(response).to be_successful
-        expect(unescaped_response_body).to include("Enter your client's overseas correspondence address")
+        expect(unescaped_response_body).to include("Enter your client's overseas home address")
       end
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/non_uk_correspondence_address" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/home_address/non_uk_home_address" do
     subject(:patch_request) do
       patch(
-        providers_legal_aid_application_non_uk_correspondence_address_path(legal_aid_application),
+        providers_legal_aid_application_home_address_non_uk_home_address_path(legal_aid_application),
         params: address_params.merge(submit_button),
       )
     end
@@ -87,16 +87,16 @@ RSpec.describe Providers::NonUkCorrespondenceAddressesController do
 
         it "creates an address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
-          expect(address.address_line_one).to eq(address_params[:non_uk_correspondence_address][:address_line_one])
-          expect(address.address_line_two).to eq(address_params[:non_uk_correspondence_address][:address_line_two])
-          expect(address.city).to eq(address_params[:non_uk_correspondence_address][:city])
-          expect(address.county).to eq(address_params[:non_uk_correspondence_address][:county])
+          expect(address.address_line_one).to eq(address_params[:non_uk_home_address][:address_line_one])
+          expect(address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
+          expect(address.city).to eq(address_params[:non_uk_home_address][:city])
+          expect(address.county).to eq(address_params[:non_uk_home_address][:county])
           expect(address.postcode).to be_nil
         end
       end
 
       context "with an invalid address" do
-        before { address_params[:non_uk_correspondence_address].delete(:country) }
+        before { address_params[:non_uk_home_address].delete(:country) }
 
         it "renders the form again if validation fails" do
           patch_request
