@@ -8,7 +8,7 @@ module Providers
 
         @addresses = address_lookup.result
         titleize_addresses
-        filter_home_addresses if applicant.home_address.building_number_name.present?
+        filter_addresses(building_number_name) if building_number_name
         @address_collection = collect_addresses
         @form = Addresses::AddressSelectionForm.new(model: address)
       end
@@ -47,12 +47,8 @@ module Providers
         end
       end
 
-      def filter_home_addresses
-        @addresses.select! do |addr|
-          [addr.address_line_one, addr.address_line_two].any? do |str|
-            str.downcase.include?(applicant.home_address.building_number_name.downcase)
-          end
-        end
+      def building_number_name
+        @building_number_name ||= applicant&.home_address&.building_number_name
       end
     end
   end
