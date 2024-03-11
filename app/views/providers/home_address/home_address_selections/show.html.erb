@@ -6,9 +6,9 @@
       local: true,
     ) do |form| %>
 
-    <% if @address_collection.count > 1 %>
+    <% if @address_collection.many? %>
       <%= render "shared/address_selection/select_address", location: "home", form:, addresses: @addresses %>
-    <% elsif @address_collection.count == 1 %>
+    <% elsif @address_collection.one? %>
       <%= render "shared/address_selection/confirm_address", location: "home", form: %>
     <% else %>
       <%= render "shared/address_selection/no_address", location: "home", form: %>
