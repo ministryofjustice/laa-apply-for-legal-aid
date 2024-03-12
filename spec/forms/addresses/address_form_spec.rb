@@ -74,7 +74,7 @@ RSpec.describe Addresses::AddressForm, type: :form do
 
         it "returns an presence error on postcode field" do
           expect(form).not_to be_valid
-          expect(form.errors[:postcode]).to contain_exactly("Enter a postcode")
+          expect(form.errors[:postcode]).to contain_exactly("Enter a postcode in the correct format")
         end
       end
     end

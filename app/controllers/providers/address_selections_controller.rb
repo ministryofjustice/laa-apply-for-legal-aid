@@ -9,7 +9,7 @@ module Providers
 
       @addresses = address_lookup.result
       titleize_addresses
-      filter_addresses if applicant.address.building_number_name.present?
+      filter_addresses(building_number_name) if building_number_name
       @address_collection = collect_addresses
       @form = Addresses::AddressSelectionForm.new(model: address)
     end
@@ -42,14 +42,18 @@ module Providers
 
     def address_selection_form_params
       merge_with_model(address, addresses: @addresses) do
-        params.require(:address_selection).permit(:lookup_id, :postcode)
+        params.require(:address_selection).permit(:lookup_id, :postcode).merge(location: "correspondence")
       end
     end
 
     def address_form_params
       merge_with_model(address) do
-        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
+        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode).merge(location: "correspondence")
       end
+    end
+
+    def building_number_name
+      @building_number_name ||= applicant&.address&.building_number_name
     end
   end
 end

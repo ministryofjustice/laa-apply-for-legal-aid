@@ -45,20 +45,9 @@ RSpec.describe Providers::HomeAddress::DifferentAddressReasonsController do
     context "when different home address is chosen" do
       let(:params) { { applicant: { no_fixed_residence: "false" } } }
 
-      context "when linking_applications flag is enabled" do
-        before { Setting.update!(linked_applications: true) }
-
-        it "redirects to copy_case_invitations page" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_copy_case_invitation_path(legal_aid_application))
-        end
-      end
-
-      context "when linking_applications flag is disabled" do
-        it "redirects to the proceeding types selection page" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-        end
+      it "redirects to the home_address_lookups page" do
+        patch_request
+        expect(response).to redirect_to(providers_legal_aid_application_home_address_home_address_lookup_path(legal_aid_application))
       end
 
       it "records the answer" do

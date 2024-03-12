@@ -1,5 +1,5 @@
 <%= page_template(
-      page_title: t(".heading"),
+      page_title: t(".heading", location:),
       template: :basic,
       form:,
     ) do %>
@@ -30,14 +30,16 @@
 
         <%= govuk_link_to(
               t("generic.search_again"),
-              providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+              location == "correspondence" ? providers_legal_aid_application_address_lookup_path(@legal_aid_application) : providers_legal_aid_application_home_address_home_address_lookup_path(@legal_aid_application),
               class: "govuk-body change-link",
               "aria-label": "postcode",
             ) %>
       </p>
   <% end %>
 
-  <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
+  <% if location == "correspondence" %>
+    <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
+  <% end %>
   <%= next_action_buttons(
         continue_id: "select-address-button",
         show_draft: false,

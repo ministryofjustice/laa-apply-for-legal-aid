@@ -93,10 +93,10 @@ en:
             county:
               invalid: Enter a real county
             lookup_id:
-              blank: Select your client's correspondence address
+              blank: Select your client's %{location} address
             postcode:
-              blank: Enter a postcode
-              invalid: Enter a postcode in the right format
+              blank: Enter a postcode in the correct format
+              invalid: Enter a postcode in the correct format
         applicant:
           attributes:
             date_of_birth:

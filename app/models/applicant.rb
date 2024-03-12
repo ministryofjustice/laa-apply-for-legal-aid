@@ -10,7 +10,8 @@ class Applicant < ApplicationRecord
 
   has_one :legal_aid_application, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  has_one :address, -> { order(created_at: :desc) }, inverse_of: :applicant, dependent: :destroy
+  has_one :address, -> { where(location: "correspondence").order(created_at: :desc) }, inverse_of: :applicant, dependent: :destroy
+  has_one :home_address, -> { where(location: "home").order(created_at: :desc) }, class_name: "Address", inverse_of: :applicant, dependent: :destroy
   has_many :bank_providers, dependent: :destroy
   has_many :bank_errors, dependent: :destroy
   has_many :bank_accounts, through: :bank_providers

@@ -3,10 +3,10 @@ module AddressHandling
 
 private
 
-  def filter_addresses
+  def filter_addresses(building_number_name)
     @addresses.select! do |addr|
       [addr.address_line_one, addr.address_line_two].any? do |str|
-        str.downcase.include?(applicant.address.building_number_name.downcase)
+        str.downcase.include?(building_number_name.downcase)
       end
     end
   end

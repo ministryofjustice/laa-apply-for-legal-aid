@@ -9,33 +9,37 @@ http_interactions:
     headers:
       User-Agent:
       - Faraday v2.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
   response:
     status:
       code: 200
       message: OK
     headers:
-      date:
-      - Tue, 05 Mar 2024 17:31:44 GMT
-      content-type:
+      Date:
+      - Tue, 05 Mar 2024 14:49:05 GMT
+      Content-Type:
       - application/json;charset=UTF-8
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      connection:
+      Connection:
       - keep-alive
-      request-context:
+      Request-Context:
       - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
-      vary:
+      Vary:
       - Origin,Accept-Encoding,key
-      omse-category:
+      Omse-Category:
       - premium
-      omse-transaction-count:
+      Omse-Transaction-Count:
       - '60'
-      omse-premium-count:
+      Omse-Premium-Count:
       - '0'
-      strict-transport-security:
+      Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
@@ -132,5 +136,5 @@ http_interactions:
         \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
         \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
         : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Tue, 05 Mar 2024 17:31:44 GMT
+  recorded_at: Tue, 05 Mar 2024 14:49:05 GMT
 recorded_with: VCR 6.2.0

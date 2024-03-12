@@ -6,11 +6,11 @@
       local: true,
     ) do |form| %>
 
-    <% if @address_collection.count > 1 %>
-      <%= render "shared/address_selection/select_address", form:, addresses: @addresses %>
-    <% elsif @address_collection.count == 1 %>
-      <%= render "shared/address_selection/confirm_address", form: %>
+    <% if @address_collection.many? %>
+      <%= render "shared/address_selection/select_address", location: "correspondence", form:, addresses: @addresses %>
+    <% elsif @address_collection.one? %>
+      <%= render "shared/address_selection/confirm_address", location: "correspondence", form: %>
     <% else %>
-      <%= render "shared/address_selection/no_address", form: %>
+      <%= render "shared/address_selection/no_address", location: "correspondence", form: %>
     <% end %>
 <% end %>

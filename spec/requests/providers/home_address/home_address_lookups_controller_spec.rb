@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Providers::AddressLookupsController do
+RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:legal_aid_application_id/address_lookup" do
-    subject(:get_request) { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/home_address/home_address_lookup" do
+    subject(:get_request) { get providers_legal_aid_application_home_address_home_address_lookup_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -22,13 +22,13 @@ RSpec.describe Providers::AddressLookupsController do
 
       it "shows the postcode entry page" do
         expect(response).to be_successful
-        expect(unescaped_response_body).to include("Find your client's correspondence address")
+        expect(unescaped_response_body).to include("Find your client's home address")
       end
     end
   end
 
-  describe "PATCH/providers/applications/:legal_aid_application_id/address_lookup" do
-    subject(:patch_request) { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: }
+  describe "PATCH/providers/applications/:legal_aid_application_id/home_address/home_address_lookup" do
+    subject(:patch_request) { patch providers_legal_aid_application_home_address_home_address_lookup_path(legal_aid_application), params: }
 
     let(:postcode) { "SW1H 9EA" }
     let(:normalized_postcode) { "SW1H9AE" }
@@ -72,13 +72,13 @@ RSpec.describe Providers::AddressLookupsController do
 
         it "saves the postcode and the location" do
           patch_request
-          expect(applicant.address.postcode).to eq(postcode.delete(" ").upcase)
-          expect(applicant.address.location).to eq("correspondence")
+          expect(applicant.home_address.postcode).to eq(postcode.delete(" ").upcase)
+          expect(applicant.home_address.location).to eq("home")
         end
 
-        it "redirects to the address selection page" do
+        it "redirects to the home address selection page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
+          expect(response).to redirect_to(providers_legal_aid_application_home_address_home_address_selection_path)
         end
 
         context "and a building number" do
@@ -86,7 +86,7 @@ RSpec.describe Providers::AddressLookupsController do
 
           it "saves the building name/number value" do
             patch_request
-            expect(applicant.address.building_number_name).to eq("Prospect Cottage")
+            expect(applicant.home_address.building_number_name).to eq("Prospect Cottage")
           end
         end
       end

@@ -1,10 +1,10 @@
 <%= page_template(
-      page_title: t(".heading"),
+      page_title: t(".heading", location:),
       template: :basic,
       form:,
     ) do %>
 
-      <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
+      <h1 class="govuk-heading-xl"><%= t(".heading", location:) %></h1>
 
       <p class='govuk-body'>
         <% if @form.model.building_number_name.present? %>
@@ -20,7 +20,7 @@
 
         <%= govuk_link_to(
               t("generic.search_again"),
-              providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+              location == "correspondence" ? providers_legal_aid_application_address_lookup_path(@legal_aid_application) : providers_legal_aid_application_home_address_home_address_lookup_path(@legal_aid_application),
               class: "govuk-body change-link",
               "aria-label": "postcode",
             ) %>
@@ -37,7 +37,9 @@
       <%= form.hidden_field :postcode, value: @addresses.first.postcode %>
       <%= form.hidden_field :lookup_postcode, value: @addresses.first.postcode %>
 
-      <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
+      <% if location == "correspondence" %>
+        <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
+      <% end %>
       <%= next_action_buttons(
             continue_id: "select-address-button",
             show_draft: false,

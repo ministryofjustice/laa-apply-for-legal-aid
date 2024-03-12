@@ -11,6 +11,7 @@ RSpec.describe Addresses::AddressSelectionForm, type: :form do
       lookup_id:,
       postcode:,
       addresses: [Address.new(lookup_id:)],
+      location: "correspondence",
     }
   end
 
