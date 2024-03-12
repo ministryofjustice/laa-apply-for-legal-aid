@@ -15,12 +15,19 @@ RSpec.describe ProvidersHelper do
   end
   let(:controllers_with_params) { %w[incoming_transactions outgoing_transactions remove_dependants] }
   let(:excluded_controllers) { %w[bank_transactions] + controllers_with_params }
+  let(:home_address_controllers) do
+    %w[home_addresses
+       home_address_lookups
+       home_address_selections
+       home_address_different_address_reaons
+       home_address_different_addresses]
+  end
 
   describe "#url_for_application" do
     subject(:url_helper) { url_for_application(legal_aid_application) }
 
     it "does not crash" do
-      (provider_controller_names - excluded_controllers).each do |controller_name|
+      (provider_controller_names - excluded_controllers + home_address_controllers).each do |controller_name|
         legal_aid_application.provider_step = controller_name
         expect { url_for_application(legal_aid_application) }.not_to raise_error
       end
