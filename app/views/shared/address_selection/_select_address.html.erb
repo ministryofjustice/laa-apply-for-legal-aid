@@ -37,9 +37,12 @@
       </p>
   <% end %>
 
-  <% if location == "correspondence" %>
-    <p><%= govuk_link_to t(".link_text"), providers_legal_aid_application_address_path(@legal_aid_application) %></p>
-  <% end %>
+  <p>
+    <%= govuk_link_to(
+          t(".link_text"),
+          location == "correspondence" ? providers_legal_aid_application_address_path(@legal_aid_application) : providers_legal_aid_application_home_address_address_path(@legal_aid_application),
+        ) %>
+  </p>
   <%= next_action_buttons(
         continue_id: "select-address-button",
         show_draft: false,
