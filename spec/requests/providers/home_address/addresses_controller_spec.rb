@@ -39,7 +39,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "when the applicant already entered an address" do
-        let!(:home_address) { create(:address, applicant:) }
+        let!(:home_address) { create(:address, applicant:, location: "home") }
 
         it "fills the form with the existing address" do
           get_request
@@ -112,7 +112,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "with an already existing address" do
-        before { create(:address, applicant:) }
+        before { create(:address, applicant:, location: "home") }
 
         it "does not create a new address record" do
           expect { patch_request }.not_to change { applicant.addresses.count }
