@@ -13,6 +13,13 @@ module Providers
 
     private
 
+      def build_address
+        Address.new(
+          applicant:,
+          location: "home",
+        )
+      end
+
       def address_attributes
         %i[address_line_one address_line_two city county postcode lookup_postcode lookup_error]
       end
@@ -24,7 +31,7 @@ module Providers
       end
 
       def address
-        applicant.home_address || applicant.build_address(location: "home")
+        @address ||= applicant.home_address || build_address
       end
     end
   end
