@@ -6,17 +6,5 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template(
-        page_title: t(".heading"),
-        form:,
-      ) do %>
-
-        <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
-        <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
-        <%= form.govuk_text_field :city, label: { text: t(".city") }, width: "two-thirds" %>
-        <%= form.govuk_text_field :county, label: { text: t(".county") }, width: "two-thirds" %>
-        <%= form.govuk_text_field :postcode, label: { text: t(".postcode") }, hint: nil, width: 10 %>
-
-        <%= next_action_buttons(show_draft: true, form:) %>
-  <% end %>
+  <%= render "shared/addresses", location: "home", form: %>
 <% end %>

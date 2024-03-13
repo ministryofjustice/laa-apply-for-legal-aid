@@ -7,39 +7,5 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template(
-        page_title: t(".heading"),
-        form:,
-      ) do %>
-
-    <% if form.object.lookup_postcode.present? %>
-      <%= form.hidden_field :lookup_postcode %>
-      <div class='govuk-form-group'>
-        <%= label_tag t(".label_1"), class: "govuk-label" do %>
-          <%= t(".postcode") %>
-          <p class='govuk-body govuk-!-font-weight-bold'>
-            <%= form.object.lookup_postcode %>
-            <%= govuk_link_to(
-                  t("generic.change"),
-                  providers_legal_aid_application_address_lookup_path(@legal_aid_application),
-                  class: "govuk-body change-link change-postcode-link",
-                ) %>
-          </p>
-        <% end %>
-      </div>
-    <% end %>
-
-    <% if form.object.lookup_error.present? %>
-      <%= form.hidden_field :lookup_error %>
-      <%= govuk_inset_text(text: t("errors.address.#{form.object.lookup_error}")) %>
-    <% end %>
-
-    <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
-    <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
-    <%= form.govuk_text_field :city, label: { text: t(".city") }, width: "two-thirds" %>
-    <%= form.govuk_text_field :county, label: { text: t(".county") }, width: "two-thirds" %>
-    <%= form.govuk_text_field :postcode, label: { text: t(".postcode") }, hint: nil, width: 10 %>
-
-    <%= next_action_buttons(show_draft: true, form:) %>
-  <% end %>
+  <%= render "shared/addresses", location: "correspondence", form: %>
 <% end %>
