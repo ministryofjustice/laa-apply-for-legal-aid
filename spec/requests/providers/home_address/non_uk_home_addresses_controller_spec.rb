@@ -4,7 +4,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
-  let(:address) { applicant.address }
+  let(:address) { applicant.home_address }
   let(:country) { "China" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
@@ -87,6 +87,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
 
         it "creates an address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
+          expect(address.location).to eq("home")
           expect(address.address_line_one).to eq(address_params[:non_uk_home_address][:address_line_one])
           expect(address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
           expect(address.city).to eq(address_params[:non_uk_home_address][:city])
