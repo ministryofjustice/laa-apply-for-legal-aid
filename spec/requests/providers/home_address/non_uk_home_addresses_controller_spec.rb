@@ -114,11 +114,13 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
 
         it "updates the current address" do
           patch_request
+          expect(address.location).to eq("home")
           expect(address.address_line_one).to eq(address_line_one)
           expect(address.address_line_two).to eq(address_line_two)
           expect(address.city).to eq(city)
           expect(address.county).to eq(county)
           expect(address.country).to eq(country)
+          expect(address.postcode).to be_nil
         end
       end
 
