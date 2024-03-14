@@ -386,6 +386,7 @@ en:
         total: Total capital assessed
       client_details:
         address: Correspondence address
+        home_address: Home address
         aria_prefix: client's
         employment_status: Employment status
         age: "%{years} years old"

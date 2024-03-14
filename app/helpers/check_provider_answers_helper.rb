@@ -1,7 +1,22 @@
 module CheckProviderAnswersHelper
-  def change_address_link(applicant)
-    return providers_legal_aid_application_address_lookup_path(anchor: :postcode) if applicant.address&.lookup_used?
+  def change_address_link(legal_aid_application, location)
+    if location == "correspondence"
+      return providers_legal_aid_application_address_lookup_path(legal_aid_application.id, anchor: :postcode) if legal_aid_application.applicant&.address&.lookup_used?
 
-    providers_legal_aid_application_address_path(anchor: :postcode)
+      providers_legal_aid_application_address_path(legal_aid_application.id, anchor: :postcode)
+
+    elsif location == "home"
+      providers_legal_aid_application_home_address_different_address_path(legal_aid_application.id)
+    end
+  end
+
+  def home_address_text(applicant)
+    if applicant.same_correspondence_and_home_address?
+      "Same as correspondence address"
+    elsif applicant.no_fixed_residence?
+      "No fixed residence"
+    else
+      address_with_line_breaks(applicant.home_address)
+    end
   end
 end
