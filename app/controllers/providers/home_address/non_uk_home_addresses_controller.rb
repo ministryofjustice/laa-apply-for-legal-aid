@@ -13,7 +13,7 @@ module Providers
     private
 
       def non_uk_home_address
-        applicant.address || applicant.build_address(location: "home")
+        applicant.home_address || applicant.build_address(location: "home")
       end
 
       def form_params

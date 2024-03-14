@@ -95,6 +95,7 @@ en:
       label:
         postcode: Postcode
         building_number_name: Building number or name (optional)
+      non_uk_address_link: Enter a non-UK address
       submit_button: Find address
       helper_text:
         The address you provide is only for this application. If your client has

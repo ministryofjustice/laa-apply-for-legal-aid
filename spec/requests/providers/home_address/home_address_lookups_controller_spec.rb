@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-  let(:applicant) { legal_aid_application.applicant }
+  let(:applicant) { legal_aid_application.applicant.home_address }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/home_address/home_address_lookup" do
