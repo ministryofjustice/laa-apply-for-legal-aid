@@ -23,7 +23,7 @@ module ScreenshotHelper
   end
 
   def open_file(file)
-    system("open #{file}") if RUBY_PLATFORM.include?("darwin")
+    `open #{file}` if RUBY_PLATFORM.include?("darwin")
     system("xdg-open #{file}") if RUBY_PLATFORM.include?("linux")
     system("start #{file}") if RUBY_PLATFORM.match?(/mswin|mingw|cygwin/)
     puts "Unsupported platform: #{RUBY_PLATFORM}" unless RUBY_PLATFORM.match?(/darwin|linux|mswin|mingw|cygwin/)
