@@ -1,0 +1,38 @@
+<%= form_with(
+      model: @form,
+      scope: :non_uk_home_address,
+      url: providers_legal_aid_application_home_address_non_uk_home_address_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        form:,
+      ) do %>
+
+      <h2 class="govuk-heading-m">
+        <%= t ".country" %>
+      </h2>
+        <%= form.govuk_radio_buttons_fieldset :id, legend: { text: nil, hidden: true } do %>
+          <% @form.countries.each do |country| %>
+            <div id="<%= country.code %>" class="govuk-grid-row country-item">
+              <%= form.govuk_radio_button(
+                    :country,
+                    country.code,
+                    label: { text: country.description },
+                  ) %>
+            </div>
+          <% end %>
+        <% end %>
+      <h2 class="govuk-heading-m">
+        <%= t ".address" %>
+      </h2>
+      <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
+      <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
+      <%= form.govuk_text_field :city, label: { text: t(".address_line_three") } %>
+      <%= form.govuk_text_field :county, label: { text: t(".address_line_four") } %>
+
+    <%= next_action_buttons(form:, show_draft: true) %>
+  <% end %>
+<% end %>

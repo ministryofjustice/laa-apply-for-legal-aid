@@ -87,6 +87,19 @@ module Flow
             end
           end,
         },
+        non_uk_home_addresses: {
+          # :nocov:
+          path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
+          # :nocov:
+          forward: lambda do |application|
+            if Setting.linked_applications?
+              :copy_case_invitations
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
+          end,
+          check_answers: :check_provider_answers,
+        },
         copy_case_invitations: {
           path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },
           forward: lambda do |application|
