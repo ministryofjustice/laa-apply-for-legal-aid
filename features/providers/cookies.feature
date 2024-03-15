@@ -3,7 +3,8 @@ Feature: Cookies
   Scenario: I am able to update my cookie preferences via the cookies page
     Given I complete the journey as far as check your answers
     And I click link 'Cookies'
-    Then I should be on a page with title 'Cookies on Apply for legal aid'
+    # Then I should be on a page with title 'Cookies on Apply for legal aid'
+    Then I should be on a page with title 'No a real page'
 
     When I click 'Save changes'
     Then I should be on a page showing 'Select if you would like to enable cookies'
