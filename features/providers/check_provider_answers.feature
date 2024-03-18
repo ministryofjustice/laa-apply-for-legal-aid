@@ -112,6 +112,33 @@ Feature: Checking client details answers backwards and forwards
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | Home address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
 
+
+  @javascript @vcr
+  Scenario: I am able to return and amend the client's overseas home address
+    Given the feature flag for home_address is enabled
+    And I complete the passported journey as far as check your answers with an overseas address
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address | Alemannenstrasse 1\nStuttgart D-12345 |
+    When I click Check Your Answers Change link for "home address"
+    Then I should be on a page with title "Is this also your client's home address?"
+    And I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page with title "Why is your client's home address different to their correspondence address?"
+    And I choose 'They have a different home address'
+    Then I click 'Save and continue'
+    Then I should be on a page with title "Find your client's home address"
+    And I click link "Enter a non-UK address"
+    And I choose "Germany"
+    Then I complete overseas home address 'address line one' with 'Alemannenstrasse 2'
+    Then I complete overseas home address 'address line two' with 'Stuttgart D-54321'
+    Then I click 'Save and continue'
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address | Alemannenstrasse 2\nStuttgart D-54321 |
+
   @javascript
   Scenario: I am able to return and remove the client's national insurance number
     Given I complete the passported journey as far as check your answers for client details
