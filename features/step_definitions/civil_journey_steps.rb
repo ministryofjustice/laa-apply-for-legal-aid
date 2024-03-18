@@ -641,6 +641,7 @@ Given("I complete the passported journey as far as check your answers for client
     national_insurance_number: "JA293483A",
     date_of_birth: "10-01-1980",
     email: "test@test.com",
+    same_correspondence_and_home_address: true,
   )
   create(
     :address,
