@@ -17,6 +17,7 @@ module Providers
         Address.new(
           applicant:,
           location: "home",
+          country: "GBR",
         )
       end
 

@@ -149,6 +149,7 @@ RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
         expect { patch_request }.to change { applicant.reload.addresses.count }.by(1)
         expect(applicant.home_address.address_line_one).to eq(selected_address[:address_line_one])
         expect(applicant.home_address.lookup_id).to eq(lookup_id)
+        expect(applicant.home_address.country).to eq("GBR")
       end
 
       it "records that the lookup service was used" do
@@ -207,6 +208,7 @@ RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
           expect(applicant.home_address.address_line_two).to eq("FAKE ROAD")
           expect(applicant.home_address.city).to eq("TEST CITY")
           expect(applicant.home_address.postcode).to eq("AA11AA")
+          expect(applicant.home_address.country).to eq("GBR")
         end
       end
 

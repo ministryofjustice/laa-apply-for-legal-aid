@@ -149,6 +149,7 @@ RSpec.describe Providers::AddressSelectionsController do
         expect { patch_request }.to change { applicant.reload.addresses.count }.by(1)
         expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
         expect(applicant.address.lookup_id).to eq(lookup_id)
+        expect(applicant.address.country).to eq("GBR")
       end
 
       it "records that the lookup service was used" do
