@@ -22,7 +22,8 @@ module CCMS
                last_name: "Hurlock",
                last_name_at_birth:,
                national_insurance_number: "QQ123456Q",
-               date_of_birth: Date.new(1969, 1, 1))
+               date_of_birth: Date.new(1969, 1, 1),
+               same_correspondence_and_home_address: true)
       end
 
       let(:requestor) { described_class.new(applicant, "my_login") }
@@ -67,6 +68,65 @@ module CCMS
                 "<common:County>Westminster</common:County>",
                 "<common:Country>GBR</common:Country>",
                 "<common:PostalCode>SW1H 9AJ</common:PostalCode>",
+              ],
+            )
+          end
+        end
+
+        context "when the applicant has a different home address" do
+          before do
+            applicant.update!(same_correspondence_and_home_address: false,
+                              addresses: [address, home_address])
+          end
+
+          let(:home_address) do
+            create(:address,
+                   :as_home_address,
+                   address_line_one: "27 A Street",
+                   address_line_two: nil,
+                   county: "A county",
+                   city: "The City",
+                   postcode: "AB1 2CD")
+          end
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "clientbim:ClientAddRQ",
+              transaction_id: expected_tx_id,
+              matching: [
+                "<common:Surname>Hurlock</common:Surname>",
+                "<common:SurnameAtBirth>Hurlock</common:SurnameAtBirth>",
+                "<clientbio:NINumber>QQ123456Q</clientbio:NINumber>",
+                "<common:AddressLine1>27 A Street</common:AddressLine1>",
+                "<common:AddressLine2/>",
+                "<common:City>The City</common:City>",
+                "<common:County>A county</common:County>",
+                "<common:Country>GBR</common:Country>",
+                "<common:PostalCode>AB1 2CD</common:PostalCode>",
+              ],
+            )
+          end
+        end
+
+        context "when the applicant has no fixed residence" do
+          before do
+            applicant.update!(same_correspondence_and_home_address: false,
+                              no_fixed_residence: true,
+                              addresses: [])
+          end
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "clientbim:ClientAddRQ",
+              transaction_id: expected_tx_id,
+              matching: [
+                "<common:Surname>Hurlock</common:Surname>",
+                "<common:SurnameAtBirth>Hurlock</common:SurnameAtBirth>",
+                "<clientbio:NINumber>QQ123456Q</clientbio:NINumber>",
+                "<clientbio:NoFixedAbode>true</clientbio:NoFixedAbode>",
+                "<clientbio:Address/>",
               ],
             )
           end
