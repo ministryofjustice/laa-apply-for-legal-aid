@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Providers::AddressesController do
+RSpec.describe Providers::HomeAddress::AddressesController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
-  let(:address) { applicant.address }
+  let(:home_address) { applicant.home_address }
   let(:address_params) do
     {
       address:
@@ -18,8 +18,8 @@ RSpec.describe Providers::AddressesController do
     }
   end
 
-  describe "GET /providers/applications/:legal_aid_application_id/address/edit" do
-    subject(:get_request) { get providers_legal_aid_application_address_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/home_address/enter_home_address" do
+    subject(:get_request) { get providers_legal_aid_application_home_address_address_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -35,28 +35,28 @@ RSpec.describe Providers::AddressesController do
       it "returns success" do
         get_request
         expect(response).to be_successful
-        expect(unescaped_response_body).to include("Enter your client's correspondence address")
+        expect(unescaped_response_body).to include("Enter your client's home address")
       end
 
       context "when the applicant already entered an address" do
-        let!(:address) { create(:address, applicant:) }
+        let!(:home_address) { create(:address, applicant:, location: "home") }
 
         it "fills the form with the existing address" do
           get_request
-          expect(unescaped_response_body).to include(address.address_line_one)
-          expect(unescaped_response_body).to include(address.address_line_two)
-          expect(unescaped_response_body).to include(address.city)
-          expect(unescaped_response_body).to include(address.county)
-          expect(unescaped_response_body).to include(address.postcode)
+          expect(unescaped_response_body).to include(home_address.address_line_one)
+          expect(unescaped_response_body).to include(home_address.address_line_two)
+          expect(unescaped_response_body).to include(home_address.city)
+          expect(unescaped_response_body).to include(home_address.county)
+          expect(unescaped_response_body).to include(home_address.postcode)
         end
       end
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/address" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/home_address/enter_home_address" do
     subject(:patch_request) do
       patch(
-        providers_legal_aid_application_address_path(legal_aid_application),
+        providers_legal_aid_application_home_address_address_path(legal_aid_application),
         params: address_params.merge(submit_button),
       )
     end
@@ -75,15 +75,6 @@ RSpec.describe Providers::AddressesController do
       end
 
       context "with a valid address" do
-        context "when home_address flag is enabled" do
-          before { Setting.update!(home_address: true) }
-
-          it "redirects to different addresses page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_home_address_different_address_path)
-          end
-        end
-
         context "when linking_applications flag is enabled" do
           before { Setting.update!(linked_applications: true) }
 
@@ -93,7 +84,7 @@ RSpec.describe Providers::AddressesController do
           end
         end
 
-        context "when neither linking_applications nor home_address feature flags are enabled" do
+        context "when linked_applications flag is disabled" do
           it "redirects successfully to the next step" do
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
@@ -102,11 +93,11 @@ RSpec.describe Providers::AddressesController do
 
         it "creates an address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
-          expect(address.address_line_one).to eq(address_params[:address][:address_line_one])
-          expect(address.address_line_two).to eq(address_params[:address][:address_line_two])
-          expect(address.city).to eq(address_params[:address][:city])
-          expect(address.county).to eq(address_params[:address][:county])
-          expect(address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
+          expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
+          expect(home_address.address_line_two).to eq(address_params[:address][:address_line_two])
+          expect(home_address.city).to eq(address_params[:address][:city])
+          expect(home_address.county).to eq(address_params[:address][:county])
+          expect(home_address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
         end
       end
 
@@ -115,13 +106,13 @@ RSpec.describe Providers::AddressesController do
 
         it "renders the form again if validation fails" do
           patch_request
-          expect(unescaped_response_body).to include("Enter your client's correspondence address")
+          expect(unescaped_response_body).to include("Enter your client's home address")
           expect(response.body).to include("Enter a postcode")
         end
       end
 
       context "with an already existing address" do
-        before { create(:address, applicant:) }
+        before { create(:address, applicant:, location: "home") }
 
         it "does not create a new address record" do
           expect { patch_request }.not_to change { applicant.addresses.count }
@@ -129,11 +120,11 @@ RSpec.describe Providers::AddressesController do
 
         it "updates the current address" do
           patch_request
-          expect(address.address_line_one).to eq(address_params[:address][:address_line_one])
-          expect(address.address_line_two).to eq(address_params[:address][:address_line_two])
-          expect(address.city).to eq(address_params[:address][:city])
-          expect(address.county).to eq(address_params[:address][:county])
-          expect(address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
+          expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
+          expect(home_address.address_line_two).to eq(address_params[:address][:address_line_two])
+          expect(home_address.city).to eq(address_params[:address][:city])
+          expect(home_address.county).to eq(address_params[:address][:county])
+          expect(home_address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
         end
       end
 
@@ -154,7 +145,7 @@ RSpec.describe Providers::AddressesController do
 
         it "records that address lookup was used" do
           patch_request
-          expect(address.lookup_used).to be(true)
+          expect(home_address.lookup_used).to be(true)
         end
       end
 

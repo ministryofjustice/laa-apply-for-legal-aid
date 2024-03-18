@@ -138,6 +138,16 @@ en:
         paragraph_2: You can change the postcode or enter the address manually.
         change_postcode: Change the postcode
         manual_address: Enter an address manually
+    addresses:
+      heading: Enter your client's %{location} address
+      address_manual_link: Enter address manually
+      label_1: postcode
+      address_line_one: Address line 1
+      address_line_two: Address line 2 (optional)
+      city: Town or city
+      county: County (optional)
+      postcode: Postcode
+      submit_button: Find address
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"

@@ -25,17 +25,6 @@ en:
         secure_link_para: Send an email to your client with a secure link to the online assessment.
         send_client_link: Send link
         title: Send your client a link to access the service
-    addresses:
-      show:
-        heading: Enter your client's correspondence address
-        address_manual_link: Enter address manually
-        label_1: postcode
-        address_line_one: Address line 1
-        address_line_two: Address line 2 (optional)
-        city: Town or city
-        county: County (optional)
-        postcode: Postcode
-        submit_button: Find address
     applicant_employed:
       index:
         heading_1: What is your client's employment status?
