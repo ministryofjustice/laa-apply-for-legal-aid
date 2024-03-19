@@ -78,6 +78,8 @@ module Flow
               :different_address_reasons
             end
           end,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: ->(application) { !application.applicant.same_correspondence_and_home_address? },
         },
         different_address_reasons: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
@@ -88,6 +90,8 @@ module Flow
               :home_address_lookups
             end
           end,
+          check_answers: :check_provider_answers,
+          carry_on_sub_flow: ->(application) { !application.applicant.no_fixed_residence? },
         },
         non_uk_home_addresses: {
           # :nocov:
