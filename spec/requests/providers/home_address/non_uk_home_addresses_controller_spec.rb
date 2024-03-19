@@ -4,7 +4,8 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
-  let(:address) { applicant.home_address }
+  let(:address) { applicant.address }
+  let(:home_address) { applicant.home_address }
   let(:country) { "China" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
@@ -85,14 +86,14 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           end
         end
 
-        it "creates an address record" do
+        it "creates a home address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
-          expect(address.location).to eq("home")
-          expect(address.address_line_one).to eq(address_params[:non_uk_home_address][:address_line_one])
-          expect(address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
-          expect(address.city).to eq(address_params[:non_uk_home_address][:city])
-          expect(address.county).to eq(address_params[:non_uk_home_address][:county])
-          expect(address.postcode).to be_nil
+          expect(home_address.location).to eq("home")
+          expect(home_address.address_line_one).to eq(address_params[:non_uk_home_address][:address_line_one])
+          expect(home_address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
+          expect(home_address.city).to eq(address_params[:non_uk_home_address][:city])
+          expect(home_address.county).to eq(address_params[:non_uk_home_address][:county])
+          expect(home_address.postcode).to be_nil
         end
       end
 
@@ -105,22 +106,54 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
         end
       end
 
-      context "with an already existing address" do
-        before { create(:address, applicant:) }
+      context "with an already existing correspondence address but no home address" do
+        before do
+          create(:address, applicant:, location: "correspondence")
+        end
+
+        it "creates a new address record" do
+          expect { patch_request }.to change { applicant.addresses.count }.by(1)
+        end
+
+        it "does not update the correspondence address" do
+          expect { patch_request }.not_to change(applicant, :address)
+        end
+
+        it "updates the current home address" do
+          patch_request
+          expect(home_address.location).to eq("home")
+          expect(home_address.address_line_one).to eq(address_line_one)
+          expect(home_address.address_line_two).to eq(address_line_two)
+          expect(home_address.city).to eq(city)
+          expect(home_address.county).to eq(county)
+          expect(home_address.country).to eq(country)
+          expect(home_address.postcode).to be_nil
+        end
+      end
+
+      context "with an already existing correspondence address and home address" do
+        before do
+          create(:address, applicant:, location: "correspondence")
+          create(:address, applicant:, location: "home")
+        end
 
         it "does not create a new address record" do
           expect { patch_request }.not_to change { applicant.addresses.count }
         end
 
-        it "updates the current address" do
+        it "does not update the correspondence address" do
+          expect { patch_request }.not_to change(applicant, :address)
+        end
+
+        it "updates the current home address" do
           patch_request
-          expect(address.location).to eq("home")
-          expect(address.address_line_one).to eq(address_line_one)
-          expect(address.address_line_two).to eq(address_line_two)
-          expect(address.city).to eq(city)
-          expect(address.county).to eq(county)
-          expect(address.country).to eq(country)
-          expect(address.postcode).to be_nil
+          expect(home_address.location).to eq("home")
+          expect(home_address.address_line_one).to eq(address_line_one)
+          expect(home_address.address_line_two).to eq(address_line_two)
+          expect(home_address.city).to eq(city)
+          expect(home_address.county).to eq(county)
+          expect(home_address.country).to eq(country)
+          expect(home_address.postcode).to be_nil
         end
       end
 
