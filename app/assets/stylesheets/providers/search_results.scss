@@ -19,7 +19,8 @@
   }
 }
 
-.organisation-item {
+.organisation-item,
+.country-item {
   mark {
     @extend %highlight;
   }
@@ -31,7 +32,8 @@
   }
 
   .proceeding-item,
-  .organisation-item {
+  .organisation-item,
+  .country-item {
     display: none;
   }
 }
