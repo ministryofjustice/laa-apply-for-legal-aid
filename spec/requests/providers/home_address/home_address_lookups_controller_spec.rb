@@ -74,6 +74,7 @@ RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
           patch_request
           expect(applicant.home_address.postcode).to eq(postcode.delete(" ").upcase)
           expect(applicant.home_address.location).to eq("home")
+          expect(applicant.home_address.country).to eq("GBR")
         end
 
         it "redirects to the home address selection page" do
