@@ -1,12 +1,7 @@
 class Address < ApplicationRecord
   belongs_to :applicant
 
-  validates :city, :postcode, presence: true
-
-  before_validation :normalize_postcode
-
-  validates :postcode, format: { with: POSTCODE_REGEXP }
-  validate :validate_address_lines
+  before_save :normalize_postcode
 
   def self.from_json(json)
     attrs = JSON.parse(json)
@@ -18,6 +13,8 @@ class Address < ApplicationRecord
   end
 
   def pretty_postcode
+    return unless postcode
+
     pretty_postcode? ? postcode : postcode.insert(-4, " ")
   end
 
@@ -37,12 +34,6 @@ class Address < ApplicationRecord
   end
 
 private
-
-  def validate_address_lines
-    return if address_line_one.present? || address_line_two.present?
-
-    errors.add(:address_line_one, :blank)
-  end
 
   def normalize_postcode
     return if postcode.blank?

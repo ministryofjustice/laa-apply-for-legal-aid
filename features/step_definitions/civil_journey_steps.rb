@@ -641,6 +641,7 @@ Given("I complete the passported journey as far as check your answers for client
     national_insurance_number: "JA293483A",
     date_of_birth: "10-01-1980",
     email: "test@test.com",
+    same_correspondence_and_home_address: true,
   )
   create(
     :address,
@@ -650,6 +651,56 @@ Given("I complete the passported journey as far as check your answers for client
     county: nil,
     postcode: "SW1H 9EA",
     lookup_used: true,
+    applicant:,
+  )
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_passported_state_machine,
+    :at_entering_applicant_details,
+    :with_proceedings,
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001,
+    applicant:,
+  )
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
+  login_as @legal_aid_application.provider
+
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
+Given("I complete the passported journey as far as check your answers with an overseas address") do
+  applicant = create(
+    :applicant,
+    first_name: "Test",
+    last_name: "Walker",
+    national_insurance_number: "JA293483A",
+    date_of_birth: "10-01-1980",
+    email: "test@test.com",
+    same_correspondence_and_home_address: false,
+  )
+  create(
+    :address,
+    address_line_one: "Transport For London",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    location: "correspondence",
+    lookup_used: true,
+    applicant:,
+  )
+  create(
+    :address,
+    country: "DEU",
+    address_line_one: "Alemannenstrasse 1",
+    address_line_two: "Stuttgart D-12345",
+    city: nil,
+    county: nil,
+    postcode: nil,
+    location: "home",
+    lookup_used: false,
     applicant:,
   )
   @legal_aid_application = create(
@@ -1115,6 +1166,12 @@ Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field
   field_name.gsub!(/\s+/, "_")
   name = find("input[name*=#{field_name}], ##{field_id}")[:name]
   fill_in(name, with: entry)
+end
+
+Then("I complete overseas home address {string} with {string}") do |line, value|
+  line.gsub!(/\s+/, "_")
+  name = "non_uk_home_address[#{line}]"
+  fill_in(name, with: value)
 end
 
 Then(/^I select the first checkbox$/) do
