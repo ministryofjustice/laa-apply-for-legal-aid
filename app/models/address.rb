@@ -9,7 +9,7 @@ class Address < ApplicationRecord
   end
 
   def full_address
-    [address_line_one, address_line_two, city, county, postcode].compact.compact_blank.join(", ")
+    [address_line_one, address_line_two, city, county, postcode, country?].compact.compact_blank.join(", ")
   end
 
   def pretty_postcode
@@ -20,6 +20,14 @@ class Address < ApplicationRecord
 
   def pretty_postcode?
     postcode[-4] == " "
+  end
+
+  def country?
+    country if include_country?
+  end
+
+  def include_country?
+    country != "GBR"
   end
 
   def to_json(*_args)
