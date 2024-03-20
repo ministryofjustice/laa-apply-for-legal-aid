@@ -7,6 +7,7 @@ import Rails from '@rails/ujs'
 import 'core-js/stable'
 
 import './src/modules/organisations'
+import './src/modules/countries'
 import './src/modules/proceedings'
 import './src/admin-delete'
 import './src/bank_transactions'

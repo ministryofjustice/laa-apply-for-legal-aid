@@ -6,32 +6,70 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template(
-        page_title: t(".heading"),
-        form:,
-      ) do %>
+<%= page_template(
+      page_title: t(".heading"),
+      form:,
+    ) do %>
 
-      <h2 class="govuk-heading-m">
-        <%= t ".country" %>
-      </h2>
-        <%= form.govuk_radio_buttons_fieldset :id, legend: { text: nil, hidden: true } do %>
-          <% @form.countries.each do |country| %>
-            <div id="<%= country.code %>" class="govuk-grid-row country-item">
-              <%= form.govuk_radio_button(
-                    :country,
-                    country.code,
-                    label: { text: country.description },
-                  ) %>
-            </div>
-          <% end %>
+<div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic="true" role="alert"></div>
+
+<h2 class="govuk-heading-m">
+  <%= t(".country") %>
+</h2>
+
+<% error_message = @legal_aid_application.errors[:"country-search-input"]&.to_sentence %>
+<% form_group_error_class = error_message.present? ? "govuk-form-group--error" : "" %>
+<% input_error_class = error_message.present? ? "govuk-input--error" : "" %>
+
+<div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0 <%= form_group_error_class %>">
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+    <label class="govuk-heading-m govuk-!-margin-bottom-0" for="country-search-input">
+      <div class="govuk-hint govuk-!-width-two-thirds govuk-!-margin-top-0">
+        <span class="govuk-visually-hidden">Enter search term, results will automatically return</span>
+      </div>
+    </label>
+  </h2>
+
+  <div class="govuk-grid-row search-field govuk-!-margin-top-0">
+    <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
+      <%= govuk_error_message(error_message) %>
+      <input class="govuk-input <%= input_error_class %>" id="country-search-input" name="country-search-input" type="text" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<input id="legal-framework-api-host"
+       class="hidden"
+       data-uri="<%= Rails.configuration.x.legal_framework_api_host_for_js %>"
+       value="">
+  <div class="govuk-grid-row govuk-!-margin-top-0">
+    <div id="country-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
+      <%= form.govuk_radio_buttons_fieldset :country, legend: { text: t(".country"), hidden: true } do %>
+        <% @form.countries.each do |country| %>
+          <div id="<%= country.code %>" class="govuk-grid-row country-item">
+            <%= form.govuk_radio_button(
+                  :country,
+                  country.code,
+                  label: { text: country.description },
+                ) %>
+          </div>
         <% end %>
-      <h2 class="govuk-heading-m">
-        <%= t ".address" %>
-      </h2>
-      <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
-      <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
-      <%= form.govuk_text_field :city, label: { text: t(".address_line_three") } %>
-      <%= form.govuk_text_field :county, label: { text: t(".address_line_four") } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="govuk-grid-row no-country-items" style="display: none;">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-body"><%= t(".no_results") %></span>
+    </div>
+  </div>
+
+<h2 class="govuk-heading-m">
+  <%= t(".address") %>
+</h2>
+  <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
+    <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
+    <%= form.govuk_text_field :city, label: { text: t(".address_line_three") } %>
+    <%= form.govuk_text_field :county, label: { text: t(".address_line_four") } %>
 
     <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
