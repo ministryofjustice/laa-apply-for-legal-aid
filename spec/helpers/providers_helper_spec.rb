@@ -19,8 +19,9 @@ RSpec.describe ProvidersHelper do
     %w[home_addresses
        home_address_lookups
        home_address_selections
-       home_address_different_address_reaons
-       home_address_different_addresses]
+       different_address_reasons
+       different_addresses
+       non_uk_home_addresses]
   end
 
   describe "#url_for_application" do
