@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe Admin::LegalAidApplicationsController do
   let(:count) { 3 }
   let!(:legal_aid_applications) { create_list(:legal_aid_application, count, :with_applicant, :with_non_passported_state_machine, :with_ccms_submission) }
+  let!(:no_applicant_application) { create(:legal_aid_application) }
   let(:admin_user) { create(:admin_user) }
   let(:params) { {} }
 
@@ -41,7 +42,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
     context "with pagination" do
       it "shows current total information" do
         get_request
-        expect(page).to have_css(".app-pagination__info", text: "Showing 3 of 3")
+        expect(page).to have_css(".app-pagination__info", text: "Showing 4 of 4")
       end
 
       it "does not show navigation links" do
@@ -55,7 +56,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
 
         it "show page information" do
           get_request
-          expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
+          expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 6 results")
         end
 
         it "shows pagination" do
@@ -102,7 +103,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
     let(:count) { 1 }
 
     it "creates test legal_aid_applications" do
-      number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size + TestApplicationCreationService::NON_PASSPORTED_TEST_TRAITS.size
+      number_new = (TestApplicationCreationService::APPLICATION_TEST_TRAITS.size + TestApplicationCreationService::NON_PASSPORTED_TEST_TRAITS.size) * 2
       expect { post_request }.to change(LegalAidApplication, :count).by(number_new)
     end
 
@@ -124,7 +125,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       it "deletes the legal_aid_applications" do
-        expect { delete_request }.to change(LegalAidApplication, :count).by(-count)
+        expect { delete_request }.to change(LegalAidApplication, :count).by(-4)
       end
 
       it "deletes the applicants too" do
@@ -212,9 +213,13 @@ RSpec.describe Admin::LegalAidApplicationsController do
       end
 
       context "when application has no applicant" do
+        let(:application) { no_applicant_application }
+
         it "gets deleted too" do
-          create(:legal_aid_application)
           expect { delete_request }.to change(LegalAidApplication, :count).by(-1)
+        end
+
+        it "does not delete any applicant records" do
           expect { delete_request }.not_to change(Applicant, :count)
         end
       end

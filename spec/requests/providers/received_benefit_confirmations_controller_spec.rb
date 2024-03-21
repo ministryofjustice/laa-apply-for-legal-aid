@@ -68,9 +68,12 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
         it "adds a dwp override record" do
           expect { patch_request }.to change(DWPOverride, :count).by(1)
         end
+      end
+
+      context "when the same request is sent twice" do
+        before { patch_request }
 
         it "updates the same dwp override record" do
-          patch_request
           expect { patch_request }.not_to change(DWPOverride, :count)
         end
       end
