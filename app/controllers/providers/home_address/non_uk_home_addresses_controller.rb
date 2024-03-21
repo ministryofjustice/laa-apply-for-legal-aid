@@ -12,15 +12,22 @@ module Providers
 
     private
 
+      def build_address
+        Address.new(
+          applicant:,
+          location: "home",
+        )
+      end
+
       def non_uk_home_address
-        applicant.home_address || applicant.build_address(location: "home")
+        @non_uk_home_address ||= applicant.home_address || build_address
       end
 
       def form_params
         merge_with_model(non_uk_home_address) do
           params.require(:non_uk_home_address).permit(
             :country, :address_line_one, :address_line_two, :city, :county
-          )
+          ).merge(postcode: nil)
         end
       end
     end

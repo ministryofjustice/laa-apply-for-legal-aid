@@ -94,9 +94,7 @@ module Flow
           carry_on_sub_flow: ->(application) { !application.applicant.no_fixed_residence? },
         },
         non_uk_home_addresses: {
-          # :nocov:
           path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
-          # :nocov:
           forward: lambda do |application|
             if Setting.linked_applications?
               :copy_case_invitations
