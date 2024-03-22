@@ -5,13 +5,13 @@ module CCMS
     RSpec.describe ObtainApplicantReferenceService, :ccms do
       subject(:instance) { described_class.new(submission) }
 
-      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_everything_and_address, populate_vehicle: true) }
-      let(:applicant) { legal_aid_application.applicant }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_everything_and_address, applicant:, populate_vehicle: true) }
+      let(:applicant) { create(:applicant, :with_address, first_name: "Amy", last_name: "Williams", date_of_birth: Date.new(1972, 1, 1), national_insurance_number: "QQ123456A") }
       let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:) }
       let(:histories) { CCMS::SubmissionHistory.where(submission_id: submission.id).order(:created_at) }
       let(:latest_history) { histories.reload.last }
       let(:request_body) { ccms_data_from_file "applicant_search_request.xml" }
-      let(:response_body) { ccms_data_from_file "applicant_search_response_one_result.xml" }
+      let(:response_body) { ccms_data_from_file "applicant_search_responses/one_result_match.xml" }
       let(:empty_response_body) { ccms_data_from_file "applicant_search_response_no_results.xml" }
       let(:no_applicant_details_response_body) { ccms_data_from_file "applicant_search_response_results_no_details.xml" }
       let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/ClientServices_ep" }

@@ -3,7 +3,7 @@ module CCMS
     class ObtainApplicantReferenceService < BaseSubmissionService
       def call
         tx_id = applicant_search_requestor.transaction_request_id
-        parser = CCMS::Parsers::ApplicantSearchResponseParser.new(tx_id, response)
+        parser = CCMS::Parsers::ApplicantSearchResponseParser.new(tx_id, response, legal_aid_application.applicant)
         process_records(parser)
       rescue *CCMS_SUBMISSION_ERRORS => e
         handle_exception(e, xml_request)
