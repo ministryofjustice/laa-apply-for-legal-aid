@@ -30,15 +30,6 @@ module CCMS
         doc.xpath(xpath).text
       end
 
-      def ni_number_match?(xpath)
-        matches = doc.xpath(xpath).map(&:text)
-        if matches.all?("Number Not Matched")
-          nil
-        else
-          matches.each_index.find { |i| matches[i].include? "Number Matched" }
-        end
-      end
-
     private
 
       def expect_transaction_request_id_in_response?
