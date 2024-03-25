@@ -15,7 +15,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
 
   describe ".model_name" do
     it 'is "Applicant"' do
-      expect(described_class.model_name).to eq("Applicant")
+      expect(described_class.model_name).to eq("Client")
     end
   end
 
