@@ -490,4 +490,35 @@ RSpec.describe Applicant do
       end
     end
   end
+
+  describe "#home_address_for_ccms" do
+    subject(:home_address) { applicant.home_address_for_ccms }
+
+    let(:applicant) { create(:applicant, same_correspondence_and_home_address:, addresses:) }
+    let(:correspondence_address) { create(:address, address_line_one: "109 Correspondence Avenue") }
+
+    context "when the provider has set a different home address" do
+      let(:same_correspondence_and_home_address) { false }
+      let(:home_address) { create(:address, :as_home_address, address_line_one: "27 Home Street") }
+      let(:addresses) { [home_address, correspondence_address] }
+
+      it "is set to the expected, separate, home address" do
+        expect(applicant.home_address_for_ccms.address_line_one).to eql "27 Home Street"
+        expect(applicant.home_address.address_line_one).to eql "27 Home Street"
+        expect(applicant.address.address_line_one).to eql "109 Correspondence Avenue"
+      end
+    end
+
+    context "when the provider has set the home address to the same as correspondence" do
+      let(:same_correspondence_and_home_address) { true }
+      let(:home_address) { nil }
+      let(:addresses) { [correspondence_address] }
+
+      it "is set to the correspondence address" do
+        expect(applicant.home_address_for_ccms.address_line_one).to eql "109 Correspondence Avenue"
+        expect(applicant.home_address).to be_nil
+        expect(applicant.address.address_line_one).to eql "109 Correspondence Avenue"
+      end
+    end
+  end
 end

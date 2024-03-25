@@ -5,7 +5,7 @@ module CCMS
 
       attr_reader :applicant
 
-      delegate :address, to: :applicant
+      delegate :home_address_for_ccms, to: :applicant
 
       def initialize(applicant, provider_username)
         super()
@@ -34,8 +34,8 @@ module CCMS
         xml.__send__(:"clientbio:Name") { name(xml) }
         xml.__send__(:"clientbio:PersonalInformation") { personal_information(xml) }
         xml.__send__(:"clientbio:Contacts") { contacts(xml) }
-        xml.__send__(:"clientbio:NoFixedAbode", false)
-        xml.__send__(:"clientbio:Address") { applicant_address(xml) }
+        xml.__send__(:"clientbio:NoFixedAbode", applicant.no_fixed_residence || false)
+        xml.__send__(:"clientbio:Address") { applicant_address(xml) unless applicant.no_fixed_residence }
         xml.__send__(:"clientbio:EthnicMonitoring", 0)
       end
 
@@ -64,12 +64,12 @@ module CCMS
       end
 
       def applicant_address(xml)
-        xml.__send__(:"common:AddressLine1", address.address_line_one)
-        xml.__send__(:"common:AddressLine2", address.address_line_two)
-        xml.__send__(:"common:City", address.city)
-        xml.__send__(:"common:County", address.county)
-        xml.__send__(:"common:Country", "GBR")
-        xml.__send__(:"common:PostalCode", address.pretty_postcode)
+        xml.__send__(:"common:AddressLine1", home_address_for_ccms.address_line_one)
+        xml.__send__(:"common:AddressLine2", home_address_for_ccms.address_line_two)
+        xml.__send__(:"common:City", home_address_for_ccms.city)
+        xml.__send__(:"common:County", home_address_for_ccms.county)
+        xml.__send__(:"common:Country", home_address_for_ccms.country)
+        xml.__send__(:"common:PostalCode", home_address_for_ccms.pretty_postcode) if home_address_for_ccms.postcode.present?
       end
     end
   end

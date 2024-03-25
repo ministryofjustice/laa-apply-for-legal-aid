@@ -135,4 +135,10 @@ class Applicant < ApplicationRecord
   def employment_payments
     employments.map(&:employment_payments).flatten
   end
+
+  def home_address_for_ccms
+    return if no_fixed_residence?
+
+    same_correspondence_and_home_address? ? address : home_address
+  end
 end
