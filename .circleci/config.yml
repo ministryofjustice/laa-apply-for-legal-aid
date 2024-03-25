@@ -200,13 +200,11 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
           chmod +x ./tmp/cc-test-reporter
     - run: bundle exec rails assets:precompile
+    - run: mkdir -p /tmp/test-results/rspec
     - run:
         name: Run ruby tests
         command: |
-          mkdir -p /tmp/test-results/rspec
-          TEST_FILES=$(circleci tests glob "spec/**/*_spec.rb")
-          echo "${TEST_FILES}"
-          echo "${TEST_FILES}" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml" --verbose --split-by=timings --timings-type=filename
+          circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
 
     - store_test_results:
         path: /tmp/test-results/rspec
@@ -237,12 +235,11 @@ jobs:
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
     # - browser-tools/install-chromedriver # removed 31 Aug 2023 because version of chrome 116.0.5845.140 was not downloadable
+    - run: mkdir -p /tmp/test-results/cucumber
     - run:
         name: Run integration tests
         command: |
-          TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
-          echo "${TESTFILES}"
-          echo "${TESTFILES}" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty"
+          circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber" --verbose --split-by=timings
     - store_artifacts:
         path: tmp/capybara
     - store_test_results:
