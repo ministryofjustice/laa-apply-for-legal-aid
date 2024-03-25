@@ -241,7 +241,7 @@ jobs:
         command: |
           TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
           echo "${TESTFILES}"
-          echo "${TESTFILES}" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}"
+          echo "${TESTFILES}" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty"
     - store_artifacts:
         path: tmp/capybara
     - store_test_results:
