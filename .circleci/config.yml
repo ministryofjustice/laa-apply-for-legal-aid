@@ -205,10 +205,7 @@ jobs:
         command: |
           TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
           echo "${TESTFILES}"
-          bundle exec rspec --format progress \
-          --format RspecJunitFormatter \
-          -o /tmp/test-results/rspec/rspec.xml \
-          -- ${TESTFILES}
+          echo "${TESTFILES}" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml"
 
     - store_test_results:
         path: /tmp/test-results/rspec
