@@ -35,6 +35,10 @@
       <%= govuk_error_message(error_message) %>
       <input class="govuk-input <%= input_error_class %>" id="country-search-input" name="country-search-input" type="text" autocomplete="off">
     </div>
+
+    <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
+      <p><%= govuk_link_to t(".clear_search"), "#", class: "govuk-!-font-size-19", id: "clear-country-search" %></p>
+    </div>
   </div>
 </div>
 
@@ -63,13 +67,12 @@
     </div>
   </div>
 
-<h2 class="govuk-heading-m">
-  <%= t(".address") %>
-</h2>
-  <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
+  <%= form.govuk_fieldset legend: { text: t(".address") } do %>
+    <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
     <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
     <%= form.govuk_text_field :city, label: { text: t(".address_line_three") } %>
     <%= form.govuk_text_field :county, label: { text: t(".address_line_four") } %>
+  <% end %>
 
     <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>

@@ -405,6 +405,7 @@ en:
         show:
           heading: Enter your client's overseas home address
           country: Country
+          clear_search: Clear search
           address: Address
           address_line_one: Address line 1
           address_line_two: Address line 2 (optional)
