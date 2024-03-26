@@ -98,17 +98,20 @@ en:
       non_uk_address_link: Enter a non-UK address
       submit_button: Find address
       helper_text:
-        The address you provide is only for this application. If your client has
-        other certificated legal aid cases where a different address has been used,
-        you should review and update those records in CCMS.
+        home:
+          If your client has applied for legal aid in the past with a different home address, you will also need to update their record in CCMS.
+        correspondence:
+          The address you provide is only for this application. If your client has
+          other certificated legal aid cases where a different address has been used,
+          you should review and update those records in CCMS.
     address_selection:
       select_address:
         heading: Select your client's %{location} address
         addresses_found_html: |
-          %{number} addresses found for 
+          %{number} addresses found for
           <span class="govuk-!-font-weight-bold">%{postcode}</span>.
         addresses_found_long_html: |
-          %{number} addresses found for 
+          %{number} addresses found for
           <span class="govuk-!-font-weight-bold">%{postcode}</span> and
           <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
         link_text: Enter an address manually
@@ -116,10 +119,10 @@ en:
       confirm_address:
         heading: Confirm your client's %{location} address
         addresses_found_html: |
-          1 address found for 
+          1 address found for
           <span class="govuk-!-font-weight-bold">%{postcode}</span>.
         addresses_found_long_html: |
-          1 address found for 
+          1 address found for
           <span class="govuk-!-font-weight-bold">%{postcode}</span> and
           <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
         search_again: Search again
@@ -128,12 +131,12 @@ en:
       no_address:
         heading: No address found
         addresses_found_html: |
-          We could not find an address that matches 
+          We could not find an address that matches
           <span class="govuk-!-font-weight-bold">%{postcode}</span>.
         addresses_found_long_html: |
-          We could not find an address that matches 
+          We could not find an address that matches
           <span class="govuk-!-font-weight-bold">%{postcode}</span>
-          with a building number or name of 
+          with a building number or name of
           <span class="govuk-!-font-weight-bold">%{building_name_number}</span>.
         paragraph_2: You can change the postcode or enter the address manually.
         change_postcode: Change the postcode

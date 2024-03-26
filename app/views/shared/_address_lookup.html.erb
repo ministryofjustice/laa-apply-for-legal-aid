@@ -7,7 +7,7 @@
   <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".heading", location:) }  do %>
     <%= form.govuk_text_field :postcode, label: { text: t(".label.postcode"), tag: "h2", size: "m" }, width: 10 %>
     <%= form.govuk_text_field :building_number_name, label: { text: t(".label.building_number_name"), tag: "h2", size: "m" }, width: 10 %>
-    <%= govuk_warning_text(text: t(".helper_text")) %>
+    <%= govuk_warning_text(text: t(".helper_text.#{location}")) %>
   <% end %>
 
   <% if location == "home" %>
