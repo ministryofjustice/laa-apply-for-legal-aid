@@ -71,7 +71,7 @@ module CCMS
           @applicant.last_name.casecmp?(client_struct.last_name),
           @applicant.surname_at_birth.casecmp?(client_struct.last_name_at_birth),
           @applicant.date_of_birth.strftime("%Y-%m-%d").eql?(client_struct.date_of_birth),
-          (@applicant.national_insurance_number.nil? ? "" : @applicant.national_insurance_number).casecmp?(client_struct.national_insurance_number),
+          (@applicant.national_insurance_number || "").casecmp?(client_struct.national_insurance_number),
         ].all?
       end
 
