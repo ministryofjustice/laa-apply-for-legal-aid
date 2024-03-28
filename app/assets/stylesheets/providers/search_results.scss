@@ -33,7 +33,9 @@
 
   .proceeding-item,
   .organisation-item,
-  .country-item {
+  .country-item,
+  // WIP: hiding the error message from the radio group
+  #country-list .govuk-error-message {
     display: none;
   }
 }

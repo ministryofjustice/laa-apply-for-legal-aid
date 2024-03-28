@@ -50,7 +50,10 @@ function showResults (results, inputText) {
 // Calls search only when the typing timer expires
 async function doneTyping () {
   const host = document.querySelector('#legal-framework-api-host').getAttribute('data-uri').trim()
-  const inputText = document.querySelector('#country-search-input').value.trim()
+  // WIP: search using govuk_text_field
+  // cannot use the input's id as this will change when there is an error
+  // using the input name instead
+  const inputText = document.querySelector('input[name="non_uk_home_address[country]"]').value.trim()
 
   hideCountryItems()
   deselectPreviousCountryItem()
@@ -94,10 +97,15 @@ function hideCountryItems () {
 function deselectPreviousCountryItem () {
   const selected = document.querySelector('input:checked')
   if (selected !== null) { selected.checked = false }
+  // WIP: ignore, testing an alt. way
+  // if (selected !== null) { selected.removeAttribute('checked') }
 }
 
 document.addEventListener('DOMContentLoaded', event => {
-  const searchInputBox = document.querySelector('#country-search-input')
+  // WIP: search using govuk_text_field
+  // cannot use the input's id as this will change when there is an error
+  // using the input name instead
+  const searchInputBox = document.querySelector('input[name="non_uk_home_address[country]"]')
   if (searchInputBox) addSearchInputListeners(searchInputBox)
 })
 
