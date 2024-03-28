@@ -19,7 +19,8 @@
   }
 }
 
-.organisation-item {
+.organisation-item,
+.country-item {
   mark {
     @extend %highlight;
   }
@@ -31,7 +32,10 @@
   }
 
   .proceeding-item,
-  .organisation-item {
+  .organisation-item,
+  .country-item,
+  // WIP: hiding the error message from the radio group
+  #country-list .govuk-error-message {
     display: none;
   }
 }
