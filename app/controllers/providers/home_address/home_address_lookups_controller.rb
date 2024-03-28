@@ -27,7 +27,13 @@ module Providers
       end
 
       def address
-        @address ||= applicant.home_address || build_address
+        @address ||= current_uk_home_address || build_address
+      end
+
+      def current_uk_home_address
+        return nil unless applicant.home_address && applicant.home_address.country == "GBR"
+
+        applicant.home_address
       end
     end
   end
