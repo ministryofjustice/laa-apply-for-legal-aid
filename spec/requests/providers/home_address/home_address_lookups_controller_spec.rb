@@ -90,6 +90,22 @@ RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
             expect(applicant.home_address.building_number_name).to eq("Prospect Cottage")
           end
         end
+
+        context "when the applicant has an existing overseas home address" do
+          it "creates a new home address record with country GBR" do
+            create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country: "DEU")
+            expect { patch_request }.to change { applicant.addresses.count }.by(1)
+            expect(applicant.home_address.country).to eq("GBR")
+          end
+        end
+
+        context "when the applicant has an existing uk home address" do
+          it "updates the current home address" do
+            create(:address, applicant:, location: "home", address_line_one: "1 Kings Street", address_line_two: "London", country: "GBR")
+            expect { patch_request }.not_to change { applicant.addresses.count }
+            expect(applicant.home_address.country).to eq("GBR")
+          end
+        end
       end
 
       context "with form submitted using Save as draft button" do

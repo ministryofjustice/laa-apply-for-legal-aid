@@ -20,7 +20,13 @@ module Providers
       end
 
       def non_uk_home_address
-        @non_uk_home_address ||= applicant.home_address || build_address
+        @non_uk_home_address ||= current_non_uk_home_address || build_address
+      end
+
+      def current_non_uk_home_address
+        return nil unless applicant.home_address && applicant.home_address.country != "GBR"
+
+        applicant.home_address
       end
 
       def form_params

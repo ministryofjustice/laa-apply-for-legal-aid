@@ -38,8 +38,8 @@ RSpec.describe Providers::HomeAddress::AddressesController do
         expect(unescaped_response_body).to include("Enter your client's home address")
       end
 
-      context "when the applicant already entered an address" do
-        let!(:home_address) { create(:address, applicant:, location: "home") }
+      context "when the applicant already entered a UK home address" do
+        let!(:home_address) { create(:address, applicant:, location: "home", country: "GBR") }
 
         it "fills the form with the existing address" do
           get_request
@@ -48,6 +48,19 @@ RSpec.describe Providers::HomeAddress::AddressesController do
           expect(unescaped_response_body).to include(home_address.city)
           expect(unescaped_response_body).to include(home_address.county)
           expect(unescaped_response_body).to include(home_address.postcode)
+        end
+      end
+
+      context "when the applicant already entered a non-UK home address" do
+        let!(:home_address) { create(:address, applicant:, location: "home", country: "DEU") }
+
+        it "does not fill the form with the existing address" do
+          get_request
+          expect(unescaped_response_body).not_to include(home_address.address_line_one)
+          expect(unescaped_response_body).not_to include(home_address.address_line_two)
+          expect(unescaped_response_body).not_to include(home_address.city)
+          expect(unescaped_response_body).not_to include(home_address.county)
+          expect(unescaped_response_body).not_to include(home_address.postcode)
         end
       end
     end
@@ -91,7 +104,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
           end
         end
 
-        it "creates an address record" do
+        it "creates a home address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
           expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
           expect(home_address.address_line_two).to eq(address_params[:address][:address_line_two])
@@ -112,15 +125,28 @@ RSpec.describe Providers::HomeAddress::AddressesController do
         end
       end
 
-      context "with an already existing address" do
-        before { create(:address, applicant:, location: "home") }
+      context "with an already existing UK based home address" do
+        before { create(:address, applicant:, location: "home", country: "GBR") }
 
         it "does not create a new address record" do
           expect { patch_request }.not_to change { applicant.addresses.count }
         end
 
-        it "updates the current address" do
+        it "updates the current home address" do
           patch_request
+          expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
+          expect(home_address.address_line_two).to eq(address_params[:address][:address_line_two])
+          expect(home_address.city).to eq(address_params[:address][:city])
+          expect(home_address.county).to eq(address_params[:address][:county])
+          expect(home_address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
+        end
+      end
+
+      context "with an already existing non-UK home address" do
+        before { create(:address, applicant:, location: "home", country: "DEU") }
+
+        it "creates a new home address record" do
+          expect { patch_request }.to change { applicant.addresses.count }.by(1)
           expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
           expect(home_address.address_line_two).to eq(address_params[:address][:address_line_two])
           expect(home_address.city).to eq(address_params[:address][:city])
