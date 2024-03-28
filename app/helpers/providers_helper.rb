@@ -25,4 +25,15 @@ module ProvidersHelper
       legal_aid_application:,
     )
   end
+
+  def tag_colour(legal_aid_application)
+    case legal_aid_application.summary_state
+    when :expired
+      "red"
+    when :submitted
+      "green"
+    else
+      "blue"
+    end
+  end
 end
