@@ -1696,3 +1696,13 @@ en:
       select_a_scope_limitation_error: Select a scope limitation
       enter_valid_hearing_date_error: Enter a valid hearing date for %{scope_limitation}
       enter_limitation_note_error: Enter a limitation note for %{scope_limitation}
+    interrupt:
+      blocks:
+        show:
+          title_html: You cannot submit this application
+          body_text: This is because it’s out of date. The application will be missing information because of service updates.
+          options: "You can (choose one of the following):"
+          option_bullets:
+            - make a new application for your client if you still need to submit one
+            - go back to your applications
+          applications: Make a new application
