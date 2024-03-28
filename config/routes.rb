@@ -266,7 +266,9 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
-
+      scope module: :interrupt do
+        resource :block, only: %i[show], path: "out-of-date-application"
+      end
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
         resources :confirm_delegated_functions_date, only: %i[show update]
