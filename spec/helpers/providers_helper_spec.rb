@@ -24,6 +24,30 @@ RSpec.describe ProvidersHelper do
        non_uk_home_addresses]
   end
 
+  describe "#tag_colour" do
+    subject(:url_helper) { tag_colour(legal_aid_application) }
+
+    context "when the application has `expired`" do
+      let(:legal_aid_application) do
+        travel_to Date.parse("2023-12-25") do
+          create(:legal_aid_application, :with_multiple_proceedings_inc_section8, provider_step: "chances_of_success")
+        end
+      end
+
+      it { is_expected.to eql("red") }
+    end
+
+    context "when the application is submitted" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_merits_submitted_at) }
+
+      it { is_expected.to eql("green") }
+    end
+
+    context "when the application is not submitted" do
+      it { is_expected.to eql("blue") }
+    end
+  end
+
   describe "#url_for_application" do
     subject(:url_helper) { url_for_application(legal_aid_application) }
 

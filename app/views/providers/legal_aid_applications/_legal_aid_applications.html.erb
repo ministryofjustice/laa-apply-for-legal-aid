@@ -67,7 +67,7 @@
                   end
                 end
                 row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": t(application.summary_state, scope: %i[enums legal_aid_application summary_state]) }) do
-                  govuk_tag(text: t(application.summary_state, scope: %i[enums legal_aid_application summary_state]), colour: application.summary_state == :submitted ? "green" : "blue")
+                  govuk_tag(text: t(application.summary_state, scope: %i[enums legal_aid_application summary_state]), colour: tag_colour(application))
                 end
                 row.with_cell do
                   concat render partial: "shared/partials/modal_dialogue", locals: { application:, index: }
