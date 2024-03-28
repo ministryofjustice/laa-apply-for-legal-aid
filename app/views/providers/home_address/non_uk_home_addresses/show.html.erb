@@ -6,52 +6,52 @@
       local: true,
     ) do |form| %>
 
-<%= page_template(
-      page_title: t(".heading"),
-      form:,
-    ) do %>
+  <%= page_template(
+        page_title: t(".heading"),
+        form:,
+      ) do %>
 
-<div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic="true" role="alert"></div>
+    <div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic="true" role="alert"></div>
 
-  <%= hidden_field :hidden, :lfa, { id: "legal-framework-api-host", "data-uri": Rails.configuration.x.legal_framework_api_host_for_js } %>
-  <div id="search-field" class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
-      <%= form.govuk_text_field :country, label: { text: t(".country"), size: "m" }, form_group: { class: "govuk-!-margin-bottom-0" } %>
+    <%= hidden_field :hidden, :lfa, { id: "legal-framework-api-host", "data-uri": Rails.configuration.x.legal_framework_api_host_for_js } %>
+    <div id="search-field" class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+        <%= form.govuk_text_field :country, label: { text: t(".country"), size: "m" }, form_group: { class: "govuk-!-margin-bottom-0" } %>
+      </div>
+      <div class="govuk-grid-column-one-quarter govuk-!-margin-top-8 clear-search">
+        <p><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
+      </div>
     </div>
-    <div class="govuk-grid-column-one-quarter govuk-!-margin-top-8 clear-search">
-      <p><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
-    </div>
-  </div>
 
-  <div class="govuk-grid-row">
-    <div id="country-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
-      <%= form.govuk_radio_buttons_fieldset :country, legend: { text: t(".country"), hidden: true } do %>
-        <% @form.countries.each_with_index do |country, index| %>
-          <div id="<%= country.code %>" class="country-item">
-            <%= form.govuk_radio_button(
-                  :country,
-                  country.code,
-                  label: { text: country.description },
-                  link_errors: index.zero?,
-                ) %>
-          </div>
+    <div class="govuk-grid-row">
+      <div id="country-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
+        <%= form.govuk_radio_buttons_fieldset :country, legend: { text: t(".country"), hidden: true } do %>
+          <% @form.countries.each_with_index do |country, index| %>
+            <div id="<%= country.code %>" class="country-item">
+              <%= form.govuk_radio_button(
+                    :country,
+                    country.code,
+                    label: { text: country.description },
+                    link_errors: index.zero?,
+                  ) %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="govuk-grid-row no-country-items" style="display: none;">
-    <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-body"><%= t(".no_results") %></span>
+    <div class="govuk-grid-row no-country-items" style="display: none;">
+      <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-body"><%= t(".no_results") %></span>
+      </div>
     </div>
-  </div>
 
-  <%= form.govuk_fieldset legend: { text: t(".address") } do %>
-    <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
-    <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
-    <%= form.govuk_text_field :city, label: { text: t(".address_line_three") } %>
-    <%= form.govuk_text_field :county, label: { text: t(".address_line_four") } %>
-  <% end %>
+    <%= form.govuk_fieldset legend: { text: t(".address") } do %>
+      <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
+      <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
+      <%= form.govuk_text_field :city, label: { text: t(".address_line_three") } %>
+      <%= form.govuk_text_field :county, label: { text: t(".address_line_four") } %>
+    <% end %>
 
     <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
