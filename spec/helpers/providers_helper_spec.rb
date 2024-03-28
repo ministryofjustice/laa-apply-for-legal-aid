@@ -136,5 +136,31 @@ RSpec.describe ProvidersHelper do
         expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/means/remove_dependants/#{dependant.id}?locale=en")
       end
     end
+
+    context "when the application predates the 2023 surname at birth issue" do
+      let(:legal_aid_application) do
+        travel_to Date.parse("2023-12-25") do
+          create(:legal_aid_application, :with_multiple_proceedings_inc_section8, provider_step:)
+        end
+      end
+
+      context "and the provider step is not in the expired_by_2023_surname_at_birth_issue expiry exclusion list" do
+        let(:provider_step) { "chances_of_success" }
+
+        it "routes to the block page" do
+          application_id = legal_aid_application.id
+          expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{application_id}/out-of-date-application?locale=en")
+        end
+      end
+
+      context "and the provider step is in the expired_by_2023_surname_at_birth_issue expiry exclusion list" do
+        let(:provider_step) { "submitted_applications" }
+
+        it "routes to the submitted application page" do
+          application_id = legal_aid_application.id
+          expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{application_id}/submitted_application?locale=en")
+        end
+      end
+    end
   end
 end

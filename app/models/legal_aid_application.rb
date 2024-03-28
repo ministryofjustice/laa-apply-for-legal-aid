@@ -478,9 +478,16 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def summary_state
+    return :expired if expired?
     return :submitted if merits_submitted_at
 
     :in_progress
+  end
+
+  def expired?
+    [
+      expired_by_2023_surname_at_birth_issue?,
+    ].any?
   end
 
   def policy_disregards?
@@ -560,6 +567,16 @@ class LegalAidApplication < ApplicationRecord
   end
 
 private
+
+  def expired_by_2023_surname_at_birth_issue?
+    created_at.year < 2024 &&
+      (provider_step.nil? || %i[end_of_applications
+                                submitted_applications
+                                use_ccms
+                                use_ccms_employed
+                                use_ccms_employment
+                                use_ccms_under16s].exclude?(provider_step.to_sym))
+  end
 
   def client_not_given_consent_to_open_banking?
     provider_received_citizen_consent == false

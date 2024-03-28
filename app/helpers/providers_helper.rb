@@ -4,7 +4,11 @@ module ProvidersHelper
   end
 
   def url_for_application(legal_aid_application)
-    name = legal_aid_application.provider_step.presence || :proceedings_types
+    name = if legal_aid_application.expired?
+             :providers_blocked
+           else
+             legal_aid_application.provider_step.presence || :proceedings_types
+           end
 
     Flow::ProviderFlowService.new(
       legal_aid_application:,
