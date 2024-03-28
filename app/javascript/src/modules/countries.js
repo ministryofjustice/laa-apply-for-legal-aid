@@ -50,7 +50,7 @@ function showResults (results, inputText) {
 // Calls search only when the typing timer expires
 async function doneTyping () {
   const host = document.querySelector('#legal-framework-api-host').getAttribute('data-uri').trim()
-  const inputText = document.querySelector('#country-search-input').value.trim()
+  const inputText = document.querySelector('input[name="non_uk_home_address[country]"]').value.trim()
 
   hideCountryItems()
   deselectPreviousCountryItem()
@@ -97,7 +97,7 @@ function deselectPreviousCountryItem () {
 }
 
 document.addEventListener('DOMContentLoaded', event => {
-  const searchInputBox = document.querySelector('#country-search-input')
+  const searchInputBox = document.querySelector('input[name="non_uk_home_address[country]"]')
   if (searchInputBox) addSearchInputListeners(searchInputBox)
 })
 

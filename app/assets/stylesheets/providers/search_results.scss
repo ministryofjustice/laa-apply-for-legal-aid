@@ -33,7 +33,8 @@
 
   .proceeding-item,
   .organisation-item,
-  .country-item {
+  .country-item,
+  #country-list .govuk-error-message {
     display: none;
   }
 }

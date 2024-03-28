@@ -86,7 +86,7 @@ en:
         address:
           attributes:
             country: 
-              blank: Enter a country
+              invalid: Search for and select a country
             address_line_one:
               blank: Enter the first line of the address
             city:

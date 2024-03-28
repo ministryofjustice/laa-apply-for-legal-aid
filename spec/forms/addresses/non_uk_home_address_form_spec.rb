@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe Addresses::NonUkHomeAddressForm, type: :form do
+RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
   subject(:form) { described_class.new(address_params.merge(model: address)) }
 
-  let(:country) { "China" }
+  let(:country) { "CHN" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
   let(:city) { "Longgang District" }
@@ -32,7 +32,16 @@ RSpec.describe Addresses::NonUkHomeAddressForm, type: :form do
 
         it "returns a presence error on country field" do
           expect(form).not_to be_valid
-          expect(form.errors[:country]).to contain_exactly("Enter a country")
+          expect(form.errors[:country]).to contain_exactly("Search for and select a country")
+        end
+      end
+
+      context "when country field is populated with an invalid country" do
+        let(:country) { "invalid" }
+
+        it "returns a presence error on country field" do
+          expect(form).not_to be_valid
+          expect(form.errors[:country]).to contain_exactly("Search for and select a country")
         end
       end
     end

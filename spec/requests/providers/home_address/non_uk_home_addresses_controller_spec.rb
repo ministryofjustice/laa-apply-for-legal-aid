@@ -6,7 +6,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
   let(:provider) { legal_aid_application.provider }
   let(:address) { applicant.address }
   let(:home_address) { applicant.home_address }
-  let(:country) { "China" }
+  let(:country) { "CHN" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
   let(:city) { "Longgang District" }
@@ -120,7 +120,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
 
         it "renders the form again if validation fails" do
           patch_request
-          expect(unescaped_response_body).to include("Enter a country")
+          expect(unescaped_response_body).to include("Search for and select a country")
         end
       end
 
