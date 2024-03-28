@@ -9,6 +9,7 @@ module Flow
               .deep_merge(Flows::ProviderCapital::STEPS)
               .deep_merge(Flows::ProviderDependants::STEPS)
               .deep_merge(Flows::ProviderMerits::STEPS)
+              .deep_merge(Flows::ProviderBlocked::STEPS)
 
     use_steps(steps.freeze)
   end
