@@ -18,6 +18,7 @@ module Providers
           applicant:,
           location: "home",
           country: "GBR",
+          country_name: "United Kingdom",
         )
       end
 

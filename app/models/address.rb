@@ -23,11 +23,11 @@ class Address < ApplicationRecord
   end
 
   def country?
-    country if include_country?
+    country_name if include_country?
   end
 
   def include_country?
-    country != "GBR"
+    country_name != "United Kingdom"
   end
 
   def to_json(*_args)

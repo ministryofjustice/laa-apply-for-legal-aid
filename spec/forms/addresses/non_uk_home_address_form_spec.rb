@@ -4,6 +4,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
   subject(:form) { described_class.new(address_params.merge(model: address)) }
 
   let(:country) { "CHN" }
+  let(:country_name) { "China" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
   let(:city) { "Longgang District" }
@@ -76,6 +77,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
       expect(address.address_line_two).to eq(address_line_two)
       expect(address.city).to eq(city)
       expect(address.county).to eq(county)
+      expect(address.country_name).to eq(country_name)
     end
 
     context "when the form is not valid" do

@@ -28,7 +28,7 @@ module Providers
     private
 
       def address
-        applicant.home_address || applicant.build_address(country: "GBR")
+        applicant.home_address || applicant.build_address(country: "GBR", country_name: "United Kingdom")
       end
 
       def address_lookup

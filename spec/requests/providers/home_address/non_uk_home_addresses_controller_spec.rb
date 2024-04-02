@@ -7,6 +7,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
   let(:address) { applicant.address }
   let(:home_address) { applicant.home_address }
   let(:country) { "CHN" }
+  let(:country_name) { "China" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
   let(:city) { "Longgang District" }
@@ -111,6 +112,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
           expect(home_address.city).to eq(address_params[:non_uk_home_address][:city])
           expect(home_address.county).to eq(address_params[:non_uk_home_address][:county])
+          expect(home_address.country_name).to eq(country_name)
           expect(home_address.postcode).to be_nil
         end
       end
@@ -145,6 +147,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.city).to eq(city)
           expect(home_address.county).to eq(county)
           expect(home_address.country).to eq(country)
+          expect(home_address.country_name).to eq(country_name)
           expect(home_address.postcode).to be_nil
         end
       end
@@ -180,6 +183,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.city).to eq(city)
           expect(home_address.county).to eq(county)
           expect(home_address.country).to eq(country)
+          expect(home_address.country_name).to eq(country_name)
           expect(home_address.postcode).to be_nil
         end
       end
