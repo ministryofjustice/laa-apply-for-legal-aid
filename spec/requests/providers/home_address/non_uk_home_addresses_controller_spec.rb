@@ -43,6 +43,24 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
         expect(response).to be_successful
         expect(unescaped_response_body).to include("Enter your client's overseas home address")
       end
+
+      context "when the applicant has an existing overseas home address" do
+        it "displays the home address" do
+          create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country: "DEU")
+          get_request
+          expect(response.body).to include("Konigstrasse 1", "Stuttgart")
+          expect(response.body).to include("value=\"DEU\" checked=\"checked\"")
+        end
+      end
+
+      context "when the applicant has an existing uk home address" do
+        it "does not display the home address" do
+          create(:address, applicant:, location: "home", address_line_one: "1 Kings Street", address_line_two: "London", country: "GBR")
+          get_request
+          expect(response.body).not_to include("1 Kings Street", "London")
+          expect(response.body).not_to include("value=\"GBR\" checked=\"checked\"")
+        end
+      end
     end
   end
 
@@ -134,11 +152,20 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
       context "with an already existing correspondence address and home address" do
         before do
           create(:address, applicant:, location: "correspondence")
-          create(:address, applicant:, location: "home")
         end
 
-        it "does not create a new address record" do
-          expect { patch_request }.not_to change { applicant.addresses.count }
+        context "with an overseas home address" do
+          it "does not create a new address record" do
+            create(:address, applicant:, location: "home", country: "DEU")
+            expect { patch_request }.not_to change { applicant.addresses.count }
+          end
+        end
+
+        context "with a UK home address" do
+          it "does not create a new address record" do
+            create(:address, applicant:, location: "home", country: "GBR")
+            expect { patch_request }.to change { applicant.addresses.count }.by(1)
+          end
         end
 
         it "does not update the correspondence address" do
