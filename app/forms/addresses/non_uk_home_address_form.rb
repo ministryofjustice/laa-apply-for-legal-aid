@@ -12,19 +12,19 @@ module Addresses
     end
 
     def save
-      model.update!(country_name: get_country_name) if valid?
+      model.update!(country: get_country_code) if valid?
       super
     end
     alias_method :save!, :save
 
     def validate_country
-      errors.add(:country, I18n.t("activemodel.errors.models.address.attributes.country.invalid")) unless countries.map(&:code).include?(country&.upcase)
+      errors.add(:country_name, I18n.t("activemodel.errors.models.address.attributes.country.invalid")) unless countries.map(&:description).include?(country_name)
     end
 
-    def get_country_name
-      return if country.blank?
+    def get_country_code
+      return if country_name.blank?
 
-      countries.find { |c| c.code == country }.description
+      countries.find { |c| c.description == country_name }.code
     end
   end
 end

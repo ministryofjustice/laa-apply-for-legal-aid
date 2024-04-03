@@ -20,7 +20,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           address_line_two:,
           city:,
           county:,
-          country:,
+          country_name:,
         },
     }
   end
@@ -112,13 +112,13 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
           expect(home_address.city).to eq(address_params[:non_uk_home_address][:city])
           expect(home_address.county).to eq(address_params[:non_uk_home_address][:county])
-          expect(home_address.country_name).to eq(country_name)
+          expect(home_address.country).to eq(country)
           expect(home_address.postcode).to be_nil
         end
       end
 
       context "with an invalid address" do
-        before { address_params[:non_uk_home_address].delete(:country) }
+        before { address_params[:non_uk_home_address].delete(:country_name) }
 
         it "renders the form again if validation fails" do
           patch_request
