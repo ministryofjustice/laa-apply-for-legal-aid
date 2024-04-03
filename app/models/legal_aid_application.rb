@@ -574,7 +574,6 @@ private
                                 submitted_applications
                                 use_ccms
                                 use_ccms_employed
-                                use_ccms_employment
                                 use_ccms_under16s].exclude?(provider_step.to_sym))
   end
 
