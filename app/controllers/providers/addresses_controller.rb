@@ -22,7 +22,7 @@ module Providers
     end
 
     def address
-      applicant.address || applicant.build_address(country: "GBR", country_name: "United Kingdom")
+      applicant.address || applicant.build_address(country_code: "GBR", country_name: "United Kingdom")
     end
   end
 end

@@ -39,7 +39,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "when the applicant already entered a UK home address" do
-        let!(:home_address) { create(:address, applicant:, location: "home", country: "GBR") }
+        let!(:home_address) { create(:address, applicant:, location: "home", country_code: "GBR", country_name: "United Kingdom") }
 
         it "fills the form with the existing address" do
           get_request
@@ -52,7 +52,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "when the applicant already entered a non-UK home address" do
-        let!(:home_address) { create(:address, applicant:, location: "home", country: "DEU") }
+        let!(:home_address) { create(:address, applicant:, location: "home", country_code: "DEU", country_name: "Germany") }
 
         it "does not fill the form with the existing address" do
           get_request
@@ -111,7 +111,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
           expect(home_address.city).to eq(address_params[:address][:city])
           expect(home_address.county).to eq(address_params[:address][:county])
           expect(home_address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
-          expect(home_address.country).to eq("GBR")
+          expect(home_address.country_code).to eq("GBR")
         end
       end
 
@@ -126,7 +126,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "with an already existing UK based home address" do
-        before { create(:address, applicant:, location: "home", country: "GBR") }
+        before { create(:address, applicant:, location: "home", country_code: "GBR", country_name: "United Kingdom") }
 
         it "does not create a new address record" do
           expect { patch_request }.not_to change { applicant.addresses.count }
@@ -143,7 +143,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "with an already existing non-UK home address" do
-        before { create(:address, applicant:, location: "home", country: "DEU") }
+        before { create(:address, applicant:, location: "home", country_code: "DEU") }
 
         it "creates a new home address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)

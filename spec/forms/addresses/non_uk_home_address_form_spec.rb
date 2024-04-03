@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
   subject(:form) { described_class.new(address_params.merge(model: address)) }
 
-  let(:country) { "CHN" }
+  let(:country_code) { "CHN" }
   let(:country_name) { "China" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
@@ -72,7 +72,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
       expect { form.save }.to change { applicant.reload.addresses.count }.by(1)
 
       address = applicant.addresses.last
-      expect(address.country).to eq(country)
+      expect(address.country_code).to eq(country_code)
       expect(address.address_line_one).to eq(address_line_one)
       expect(address.address_line_two).to eq(address_line_two)
       expect(address.city).to eq(city)
@@ -102,7 +102,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
     end
 
     context "when a country is empty" do
-      let(:country) { "" }
+      let(:country_code) { "" }
 
       it "creates a new address for the applicant" do
         expect { form.save_as_draft }.to change { applicant.reload.addresses.count }.by(1)
@@ -110,7 +110,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
     end
 
     context "when country and address one are blank" do
-      let(:country) { "" }
+      let(:country_code) { "" }
       let(:address_line_one) { "" }
 
       it "creates a new address for the applicant" do

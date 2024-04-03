@@ -18,7 +18,7 @@ module Providers
     end
 
     def address
-      applicant.address || applicant.build_address(location: "correspondence", country: "GBR", country_name: "United Kingdom")
+      applicant.address || applicant.build_address(location: "correspondence", country_code: "GBR", country_name: "United Kingdom")
     end
   end
 end

@@ -7,7 +7,7 @@ module AddressHelper
               address.city,
               address.county,
               address.pretty_postcode,
-              address.country?].compact.compact_blank.join("<br>"), tags: %w[br]
+              address.country_name?].compact.compact_blank.join("<br>"), tags: %w[br]
   end
 
   def address_one_line(address)
@@ -18,6 +18,6 @@ module AddressHelper
               address.city,
               address.county,
               address.pretty_postcode,
-              address.country?].compact.compact_blank.join(", ")
+              address.country_name?].compact.compact_blank.join(", ")
   end
 end

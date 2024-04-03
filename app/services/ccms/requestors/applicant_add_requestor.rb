@@ -68,7 +68,7 @@ module CCMS
         xml.__send__(:"common:AddressLine2", home_address_for_ccms.address_line_two)
         xml.__send__(:"common:City", home_address_for_ccms.city)
         xml.__send__(:"common:County", home_address_for_ccms.county)
-        xml.__send__(:"common:Country", home_address_for_ccms.country)
+        xml.__send__(:"common:Country", home_address_for_ccms.country_code)
         xml.__send__(:"common:PostalCode", home_address_for_ccms.pretty_postcode) if home_address_for_ccms.postcode.present?
       end
     end
