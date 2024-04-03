@@ -27,23 +27,24 @@ function showResults (results, inputText) {
     results.forEach((result, idx) => {
       const element = document.getElementById(result.code)
       const label = element.querySelector('.govuk-label')
-      // const hint = element.querySelector('.govuk-hint')
 
       // Replace text values with "headlines" from result/data payload
       label.innerHTML = result.description_headline
-      // hint.innerHTML = result.description_headline
 
       // move to top of list, but after previously added results
       countriesContainer.insertBefore(element, countriesContainer.children[idx])
 
       // show the countries item
       show(element)
-      // hide(document.querySelector('.no-country-items'))
+      hide(document.querySelector('.no-country-items'))
     })
 
     // the below alerts screen reader users that results appeared on the page
     const pluralizedMatches = pluralize(results.length, 'match', 'matches')
     ariaText = `${results.length} ${pluralizedMatches} found for ${inputText}, use tab to move to options`
+  } else {
+    show(document.querySelector('.no-country-items'))
+    ariaText = `No results found matching ${inputText}`
   }
 }
 
