@@ -4,7 +4,11 @@ module ProvidersHelper
   end
 
   def url_for_application(legal_aid_application)
-    name = legal_aid_application.provider_step.presence || :proceedings_types
+    name = if legal_aid_application.expired?
+             :providers_blocked
+           else
+             legal_aid_application.provider_step.presence || :proceedings_types
+           end
 
     Flow::ProviderFlowService.new(
       legal_aid_application:,
@@ -24,5 +28,16 @@ module ProvidersHelper
       key_point: :edit_applicant,
       legal_aid_application:,
     )
+  end
+
+  def tag_colour(legal_aid_application)
+    case legal_aid_application.summary_state
+    when :expired
+      "red"
+    when :submitted
+      "green"
+    else
+      "blue"
+    end
   end
 end
