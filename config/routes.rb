@@ -163,16 +163,6 @@ Rails.application.routes.draw do
         resources :remove_state_benefits, only: %i[show update]
       end
       get :search, on: :collection
-      namespace :copy_case do
-        resource :invitation, only: %i[show update]
-        resource :search, only: %i[show update]
-        resource :confirmation, only: %i[show update]
-      end
-      namespace :link_case do
-        resource :invitation, only: %i[show update]
-        resource :search, only: %i[show update]
-        resource :confirmation, only: %i[show update]
-      end
       namespace :home_address do
         resource :address, only: %i[show update], path: "enter_home_address"
         resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
