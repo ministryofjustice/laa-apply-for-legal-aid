@@ -2,7 +2,7 @@ module Addresses
   class NonUkHomeAddressForm < BaseForm
     form_for Address
 
-    attr_accessor :country_code, :country_name, :address_line_one, :address_line_two, :city, :county, :postcode
+    attr_accessor :country_name, :address_line_one, :address_line_two, :city, :county, :postcode
 
     validates :address_line_one, presence: true, unless: :draft?
     validate :validate_country_name, unless: :draft?

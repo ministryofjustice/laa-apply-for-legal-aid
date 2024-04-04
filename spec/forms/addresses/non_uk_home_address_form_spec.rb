@@ -95,6 +95,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
 
       address = applicant.addresses.last
       expect(address.country_name).to eq(country_name)
+      expect(address.country_code).to eq(country_code)
       expect(address.address_line_one).to eq(address_line_one)
       expect(address.address_line_two).to eq(address_line_two)
       expect(address.city).to eq(city)
