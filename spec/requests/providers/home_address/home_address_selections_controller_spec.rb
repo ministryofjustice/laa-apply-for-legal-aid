@@ -157,22 +157,9 @@ RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
         expect(applicant.home_address.lookup_used).to be(true)
       end
 
-      context "when linked_applications flag is disabled" do
-        before { Setting.update!(linked_applications: false) }
-
-        it "redirects successfully to the next step" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-        end
-      end
-
-      context "when linking_applications flag is enabled" do
-        before { Setting.update!(linked_applications: true) }
-
-        it "redirects successfully to the next step" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_copy_case_invitation_path)
-        end
+      it "redirects successfully to the next step" do
+        patch_request
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
       end
 
       context "when an address already exists" do
