@@ -692,6 +692,30 @@ FactoryBot.define do
       end
     end
 
+    trait :with_prohibited_steps do
+      after(:create) do |application|
+        proceeding = create(:proceeding, :se003)
+        create(:prohibited_steps, :with_data, proceeding:)
+        application.proceedings << proceeding
+      end
+    end
+
+    trait :with_specific_issue do
+      after(:create) do |application|
+        proceeding = create(:proceeding, :se004)
+        create(:specific_issue, proceeding:)
+        application.proceedings << proceeding
+      end
+    end
+
+    trait :with_vary_order do
+      after(:create) do |application|
+        proceeding = create(:proceeding, :da002)
+        create(:vary_order, proceeding:)
+        application.proceedings << proceeding
+      end
+    end
+
     trait :draft do
       draft { true }
     end

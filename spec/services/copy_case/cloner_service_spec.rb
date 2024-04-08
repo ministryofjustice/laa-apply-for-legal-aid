@@ -4,7 +4,7 @@ RSpec.describe CopyCase::ClonerService do
   subject(:instance) { described_class.new(target, source) }
 
   let(:target) { create(:legal_aid_application, :with_applicant) }
-  let(:source) { create(:legal_aid_application, :with_proceedings) }
+  let(:source) { create(:legal_aid_application, :with_proceedings, :with_everything, :with_involved_children, :with_attempts_to_settle) }
 
   describe ".call" do
     subject(:call) { described_class.call(target, source) }
@@ -83,6 +83,72 @@ RSpec.describe CopyCase::ClonerService do
 
       it "does not leave any orphan proceedings" do
         expect { call }.not_to change(Proceeding, :count)
+      end
+    end
+
+    it "copies application merits" do
+      create(:allegation, :with_data, legal_aid_application: source)
+      create(:undertaking, :with_data, legal_aid_application: source)
+      create(:urgency, legal_aid_application: source)
+
+      expect { call }
+        .to change { target.reload.allegation }.from(nil)
+        .and change { target.reload.domestic_abuse_summary }.from(nil)
+        .and change { target.reload.involved_children.size }.from(0).to(3)
+        .and change { target.reload.latest_incident }.from(nil)
+        .and change { target.reload.opponents.size }.from(0).to(1)
+        .and change { target.reload.parties_mental_capacity }.from(nil)
+        .and change { target.reload.statement_of_case }.from(nil)
+        .and change { target.reload.undertaking }.from(nil)
+        .and change { target.reload.urgency }.from(nil)
+    end
+
+    context "when an application with merits is added" do
+      let(:source) do
+        create(
+          :legal_aid_application,
+          :with_proceedings,
+          :with_everything,
+          :with_involved_children,
+          :with_attempts_to_settle,
+          :with_chances_of_success,
+          :with_opponents_application_proceeding,
+          :with_prohibited_steps,
+          :with_specific_issue,
+          :with_vary_order,
+        )
+      end
+
+      it "copies proceeding merits attributes successfully" do
+        expect { call }
+        .to change { target.reload.proceedings.any?(&:attempts_to_settle) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:chances_of_success) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:opponents_application) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:prohibited_steps) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:specific_issue) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:vary_order) }.from(false).to(true)
+      end
+
+      context "and there are nested linked children merits" do
+        let(:source) do
+          create(
+            :legal_aid_application,
+            :with_everything,
+            :with_involved_children,
+          )
+        end
+        let(:proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
+        let(:second_child) { source.involved_children.second }
+        let(:third_child) { source.involved_children.third }
+
+        it "successfully copies nested linked children merits" do
+          create(:proceeding_linked_child, proceeding:, involved_child: second_child)
+          create(:proceeding_linked_child, proceeding:, involved_child: third_child)
+
+          expect { call }
+            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(nil).to(2)
+            .and change { target.reload.proceedings.first&.involved_children&.size }.from(nil).to(2)
+        end
       end
     end
   end

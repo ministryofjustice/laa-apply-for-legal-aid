@@ -13,24 +13,37 @@ module CopyCase
 
     def call
       clone_proceedings
-
-      # TODO: clone opponents, clone other merits tasks(??)
-      # and copy values from other fields on legal_aid_application source object
-      # see ticket AP-4577
+      clone_application_merits
     end
 
   private
 
     def clone_proceedings
-      new_proceedings = source.proceedings.each_with_object([]) do |proceeding, memo|
-        memo << proceeding.deep_clone(
-          except: %i[legal_aid_application_id proceeding_case_id],
-          include: [:scope_limitations],
-        )
-      end
-
-      target.proceedings = new_proceedings
+      target.proceedings = source.proceedings.deep_dup
       target.save!
+    end
+
+    def clone_application_merits
+      merits = %i[
+        allegation
+        domestic_abuse_summary
+        latest_incident
+        involved_children
+        opponents
+        parties_mental_capacity
+        statement_of_case
+        undertaking
+        urgency
+      ]
+
+      merits.each do |merit|
+        attribute = source.public_send(merit)
+
+        next if attribute.nil?
+
+        copy = attribute.deep_dup
+        target.update!("#{merit}": copy)
+      end
     end
   end
 end
