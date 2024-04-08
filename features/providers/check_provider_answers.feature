@@ -130,14 +130,15 @@ Feature: Checking client details answers backwards and forwards
     Then I click 'Save and continue'
     Then I should be on a page with title "Find your client's home address"
     And I click link "Enter a non-UK address"
-    And I choose "Germany"
-    Then I complete overseas home address 'address line one' with 'Alemannenstrasse 2'
-    Then I complete overseas home address 'address line two' with 'Stuttgart D-54321'
+    And I enter a country "France"
+    And I choose "France"
+    Then I complete overseas home address 'address line one' with 'Grande Rue 2'
+    Then I complete overseas home address 'address line two' with 'Marseille F-54321'
     Then I click 'Save and continue'
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | Home address | Alemannenstrasse 2\nStuttgart D-54321 |
+      | Home address | Grande Rue 2\nMarseille F-54321\nFrance |
 
   @javascript
   Scenario: I am able to return and remove the client's national insurance number

@@ -74,7 +74,7 @@ RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
           patch_request
           expect(applicant.home_address.postcode).to eq(postcode.delete(" ").upcase)
           expect(applicant.home_address.location).to eq("home")
-          expect(applicant.home_address.country).to eq("GBR")
+          expect(applicant.home_address.country_code).to eq("GBR")
         end
 
         it "redirects to the home address selection page" do
@@ -93,17 +93,17 @@ RSpec.describe Providers::HomeAddress::HomeAddressLookupsController do
 
         context "when the applicant has an existing overseas home address" do
           it "creates a new home address record with country GBR" do
-            create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country: "DEU")
+            create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country_code: "DEU", country_name: "Germany")
             expect { patch_request }.to change { applicant.addresses.count }.by(1)
-            expect(applicant.home_address.country).to eq("GBR")
+            expect(applicant.home_address.country_code).to eq("GBR")
           end
         end
 
         context "when the applicant has an existing uk home address" do
           it "updates the current home address" do
-            create(:address, applicant:, location: "home", address_line_one: "1 Kings Street", address_line_two: "London", country: "GBR")
+            create(:address, applicant:, location: "home", address_line_one: "1 Kings Street", address_line_two: "London", country_code: "GBR", country_name: "United Kingdom")
             expect { patch_request }.not_to change { applicant.addresses.count }
-            expect(applicant.home_address.country).to eq("GBR")
+            expect(applicant.home_address.country_code).to eq("GBR")
           end
         end
       end

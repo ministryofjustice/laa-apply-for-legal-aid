@@ -5,7 +5,8 @@ FactoryBot.define do
     address_line_two { Faker::Address.street_address }
     city { Faker::Address.city }
     county { Faker::Address.city }
-    country { "GBR" }
+    country_code { "GBR" }
+    country_name { "United Kingdom" }
     postcode { ["SW10 9LB", "W6 0LQ", "SW1A 1AA", "RG2 7PU", "BH22 7HR"].sample }
     building_number_name { "" }
     location { "correspondence" }

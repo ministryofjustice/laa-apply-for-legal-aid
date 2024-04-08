@@ -85,8 +85,8 @@ en:
       models:
         address:
           attributes:
-            country: 
-              blank: Enter a country
+            country_name: 
+              invalid: Search for and select a country
             address_line_one:
               blank: Enter the first line of the address
             city:

@@ -6,7 +6,8 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
   let(:provider) { legal_aid_application.provider }
   let(:address) { applicant.address }
   let(:home_address) { applicant.home_address }
-  let(:country) { "China" }
+  let(:country_code) { "CHN" }
+  let(:country_name) { "China" }
   let(:address_line_one) { "Maple Leaf Education Building" }
   let(:address_line_two) { "No. 13 Baolong 1st Road" }
   let(:city) { "Longgang District" }
@@ -19,7 +20,7 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           address_line_two:,
           city:,
           county:,
-          country:,
+          country_name:,
         },
     }
   end
@@ -46,19 +47,19 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
 
       context "when the applicant has an existing overseas home address" do
         it "displays the home address" do
-          create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country: "DEU")
+          create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country_name: "Germany", country_code: "DEU")
           get_request
           expect(response.body).to include("Konigstrasse 1", "Stuttgart")
-          expect(response.body).to include("value=\"DEU\" checked=\"checked\"")
+          expect(response.body).to include("value=\"Germany\" checked=\"checked\"")
         end
       end
 
       context "when the applicant has an existing uk home address" do
         it "does not display the home address" do
-          create(:address, applicant:, location: "home", address_line_one: "1 Kings Street", address_line_two: "London", country: "GBR")
+          create(:address, applicant:, location: "home", address_line_one: "1 Kings Street", address_line_two: "London", country_name: "United Kingdom", country_code: "GBR")
           get_request
           expect(response.body).not_to include("1 Kings Street", "London")
-          expect(response.body).not_to include("value=\"GBR\" checked=\"checked\"")
+          expect(response.body).not_to include("value=\"United Kingdom\" checked=\"checked\"")
         end
       end
     end
@@ -111,16 +112,17 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.address_line_two).to eq(address_params[:non_uk_home_address][:address_line_two])
           expect(home_address.city).to eq(address_params[:non_uk_home_address][:city])
           expect(home_address.county).to eq(address_params[:non_uk_home_address][:county])
+          expect(home_address.country_code).to eq(country_code)
           expect(home_address.postcode).to be_nil
         end
       end
 
       context "with an invalid address" do
-        before { address_params[:non_uk_home_address].delete(:country) }
+        before { address_params[:non_uk_home_address].delete(:country_name) }
 
         it "renders the form again if validation fails" do
           patch_request
-          expect(unescaped_response_body).to include("Enter a country")
+          expect(unescaped_response_body).to include("Search for and select a country")
         end
       end
 
@@ -144,7 +146,8 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.address_line_two).to eq(address_line_two)
           expect(home_address.city).to eq(city)
           expect(home_address.county).to eq(county)
-          expect(home_address.country).to eq(country)
+          expect(home_address.country_code).to eq(country_code)
+          expect(home_address.country_name).to eq(country_name)
           expect(home_address.postcode).to be_nil
         end
       end
@@ -156,14 +159,14 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
 
         context "with an overseas home address" do
           it "does not create a new address record" do
-            create(:address, applicant:, location: "home", country: "DEU")
+            create(:address, applicant:, location: "home", country_code: "DEU")
             expect { patch_request }.not_to change { applicant.addresses.count }
           end
         end
 
         context "with a UK home address" do
           it "does not create a new address record" do
-            create(:address, applicant:, location: "home", country: "GBR")
+            create(:address, applicant:, location: "home", country_code: "GBR")
             expect { patch_request }.to change { applicant.addresses.count }.by(1)
           end
         end
@@ -179,7 +182,8 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.address_line_two).to eq(address_line_two)
           expect(home_address.city).to eq(city)
           expect(home_address.county).to eq(county)
-          expect(home_address.country).to eq(country)
+          expect(home_address.country_code).to eq(country_code)
+          expect(home_address.country_name).to eq(country_name)
           expect(home_address.postcode).to be_nil
         end
       end

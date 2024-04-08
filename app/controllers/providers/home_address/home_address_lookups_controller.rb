@@ -16,7 +16,8 @@ module Providers
         Address.new(
           applicant:,
           location: "home",
-          country: "GBR",
+          country_code: "GBR",
+          country_name: "United Kingdom",
         )
       end
 
@@ -31,7 +32,7 @@ module Providers
       end
 
       def current_uk_home_address
-        return nil unless applicant.home_address && applicant.home_address.country == "GBR"
+        return nil unless applicant.home_address && applicant.home_address.country_code == "GBR"
 
         applicant.home_address
       end

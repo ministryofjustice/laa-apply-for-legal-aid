@@ -33,7 +33,7 @@ module Providers
     end
 
     def address
-      applicant.address || applicant.build_address(country: "GBR")
+      applicant.address || applicant.build_address(country_code: "GBR", country_name: "United Kingdom")
     end
 
     def address_lookup

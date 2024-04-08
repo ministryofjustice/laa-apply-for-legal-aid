@@ -107,7 +107,7 @@ RSpec.describe Providers::AddressesController do
           expect(address.city).to eq(address_params[:address][:city])
           expect(address.county).to eq(address_params[:address][:county])
           expect(address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
-          expect(address.country).to eq("GBR")
+          expect(address.country_code).to eq("GBR")
         end
       end
 

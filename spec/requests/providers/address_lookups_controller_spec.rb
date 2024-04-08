@@ -74,7 +74,7 @@ RSpec.describe Providers::AddressLookupsController do
           patch_request
           expect(applicant.address.postcode).to eq(postcode.delete(" ").upcase)
           expect(applicant.address.location).to eq("correspondence")
-          expect(applicant.address.country).to eq("GBR")
+          expect(applicant.address.country_code).to eq("GBR")
         end
 
         it "redirects to the address selection page" do
