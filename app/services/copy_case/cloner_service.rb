@@ -13,7 +13,7 @@ module CopyCase
 
     def call
       clone_proceedings
-      clone_merits
+      clone_application_merits
     end
 
   private
@@ -22,7 +22,16 @@ module CopyCase
       new_proceedings = source.proceedings.each_with_object([]) do |proceeding, memo|
         memo << proceeding.deep_clone(
           except: %i[legal_aid_application_id proceeding_case_id],
-          include: [:scope_limitations],
+          include: %i[
+            scope_limitations
+            attempts_to_settle
+            chances_of_success
+            opponents_application
+            proceeding_linked_children
+            prohibited_steps
+            specific_issue
+            vary_order
+          ],
         )
       end
 
@@ -30,8 +39,8 @@ module CopyCase
       target.save!
     end
 
-    def clone_merits
-      application_merits = %i[
+    def clone_application_merits
+      merits = %i[
         allegation
         domestic_abuse_summary
         latest_incident
@@ -43,7 +52,7 @@ module CopyCase
         urgency
       ]
 
-      application_merits.each do |merit|
+      merits.each do |merit|
         attribute = source.public_send(merit)
 
         next if attribute.nil?

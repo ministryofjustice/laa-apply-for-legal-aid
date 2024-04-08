@@ -4,7 +4,7 @@ RSpec.describe CopyCase::ClonerService do
   subject(:instance) { described_class.new(target, source) }
 
   let(:target) { create(:legal_aid_application, :with_applicant) }
-  let(:source) { create(:legal_aid_application, :with_proceedings, :with_everything, :with_involved_children) }
+  let(:source) { create(:legal_aid_application, :with_proceedings, :with_everything, :with_involved_children, :with_attempts_to_settle) }
 
   describe ".call" do
     subject(:call) { described_class.call(target, source) }
@@ -83,6 +83,51 @@ RSpec.describe CopyCase::ClonerService do
 
       it "does not leave any orphan proceedings" do
         expect { call }.not_to change(Proceeding, :count)
+      end
+    end
+
+    it "copies application merits" do
+      create(:allegation, :with_data, legal_aid_application: source)
+      create(:undertaking, :with_data, legal_aid_application: source)
+      create(:urgency, legal_aid_application: source)
+
+      expect { call }
+        .to change { target.reload.allegation }.from(nil)
+        .and change { target.reload.domestic_abuse_summary }.from(nil)
+        .and change { target.reload.involved_children.size }.from(0).to(3)
+        .and change { target.reload.latest_incident }.from(nil)
+        .and change { target.reload.opponents.size }.from(0).to(1)
+        .and change { target.reload.parties_mental_capacity }.from(nil)
+        .and change { target.reload.statement_of_case }.from(nil)
+        .and change { target.reload.undertaking }.from(nil)
+        .and change { target.reload.urgency }.from(nil)
+    end
+
+    context "when an application with every possible merit is added" do
+      let(:source) do
+        create(
+          :legal_aid_application,
+          :with_proceedings,
+          :with_everything,
+          :with_involved_children,
+          :with_attempts_to_settle,
+          :with_chances_of_success,
+          :with_opponents_application_proceeding,
+          :with_prohibited_steps,
+          :with_specific_issue,
+          :with_vary_order,
+        )
+      end
+
+      it "copies proceeding merits successfully" do
+        expect { call }
+        .to change { target.reload.proceedings.any?(&:attempts_to_settle) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:chances_of_success) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:opponents_application) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:prohibited_steps) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:specific_issue) }.from(false).to(true)
+        .and change { target.reload.proceedings.any?(&:vary_order) }.from(false).to(true)
+        # .and change { target.reload.proceedings.any?(&.proceeding_linked_children:)&.size }.from(0).to(1)
       end
     end
   end
