@@ -4,7 +4,7 @@ RSpec.describe CopyCase::ClonerService do
   subject(:instance) { described_class.new(target, source) }
 
   let(:target) { create(:legal_aid_application, :with_applicant) }
-  let(:source) { create(:legal_aid_application, :with_proceedings) }
+  let(:source) { create(:legal_aid_application, :with_proceedings, :with_everything, :with_involved_children) }
 
   describe ".call" do
     subject(:call) { described_class.call(target, source) }
