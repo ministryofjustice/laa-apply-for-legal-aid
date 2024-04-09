@@ -33,11 +33,15 @@ class BaseForm
       @locally_assigned ||= []
     end
 
+    # :nocov:
+    # TODO: Check after linked and copy cases re-implementation
+    #  if this method is still needed
     def normalizes(name, with:)
       before_validation do
         send(:"#{name}=", with.call(send(name)))
       end
     end
+    # :nocov:
   end
 
   def initialize(*args)

@@ -31,8 +31,6 @@ module Flow
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
-            elsif Setting.linked_applications?
-              :copy_case_invitations
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
@@ -48,11 +46,7 @@ module Flow
         home_address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_home_address_selection_path(application) },
           forward: lambda do |application|
-            if Setting.linked_applications?
-              :copy_case_invitations
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
+            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,
           check_answers: :check_provider_answers,
         },
@@ -61,8 +55,6 @@ module Flow
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
-            elsif Setting.linked_applications?
-              :copy_case_invitations
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
@@ -96,67 +88,16 @@ module Flow
         non_uk_home_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
           forward: lambda do |application|
-            if Setting.linked_applications?
-              :copy_case_invitations
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
+            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,
           check_answers: :check_provider_answers,
         },
         home_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_address_path(application) },
           forward: lambda do |application|
-            if Setting.linked_applications?
-              :copy_case_invitations
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
+            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,
           check_answers: :check_provider_answers,
-        },
-        copy_case_invitations: {
-          path: ->(application) { urls.providers_legal_aid_application_copy_case_invitation_path(application) },
-          forward: lambda do |application|
-            if application.copy_case?
-              :copy_case_searches
-            else
-              :link_case_invitations
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        copy_case_searches: {
-          path: ->(application) { urls.providers_legal_aid_application_copy_case_search_path(application) },
-          forward: :copy_case_confirmations,
-          check_answers: :check_provider_answers,
-        },
-        copy_case_confirmations: {
-          path: ->(application) { urls.providers_legal_aid_application_copy_case_confirmation_path(application) },
-          forward: lambda do |_application, options|
-            options[:copy_case_confirmed] ? :link_case_confirmations : :copy_case_invitations
-          end,
-          check_answers: :check_provider_answers,
-        },
-        link_case_invitations: {
-          path: ->(application) { urls.providers_legal_aid_application_link_case_invitation_path(application) },
-          forward: lambda do |application|
-            if application.link_case?
-              :link_case_searches
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-        },
-        link_case_searches: {
-          path: ->(application) { urls.providers_legal_aid_application_link_case_search_path(application) },
-          forward: :link_case_confirmations,
-        },
-        link_case_confirmations: {
-          path: ->(application) { urls.providers_legal_aid_application_link_case_confirmation_path(application) },
-          forward: lambda do |_application, options|
-            options[:link_case_confirmed] ? :has_national_insurance_numbers : :link_case_invitations
-          end,
         },
         about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },
