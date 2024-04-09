@@ -1655,7 +1655,7 @@ en:
       blocks:
         show:
           title_html: You cannot submit this application
-          body_text: This is because it’s out of date. The application will be missing information because of service updates.
+          body_text: This is because the application will be missing information after recent updates to the service.
           options: "You can (choose one of the following):"
           option_bullets:
             - make a new application for your client if you still need to submit one
