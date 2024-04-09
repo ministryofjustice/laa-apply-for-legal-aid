@@ -149,7 +149,7 @@ RSpec.describe ProvidersHelper do
 
         it "routes to the block page" do
           application_id = legal_aid_application.id
-          expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{application_id}/out-of-date-application?locale=en")
+          expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{application_id}/voided-application?locale=en")
         end
       end
 
