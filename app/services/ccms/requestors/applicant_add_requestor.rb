@@ -51,7 +51,7 @@ module CCMS
         xml.__send__(:"clientbio:NINumber", applicant.national_insurance_number)
         xml.__send__(:"clientbio:Gender", "UNSPECIFIED")
         xml.__send__(:"clientbio:MaritalStatus", "U")
-        xml.__send__(:"clientbio:VulnerableClient", false)
+        xml.__send__(:"clientbio:VulnerableClient", true)
         xml.__send__(:"clientbio:HighProfileClient", false)
         xml.__send__(:"clientbio:VexatiousLitigant", false)
         xml.__send__(:"clientbio:CountryOfOrigin", "GBR")
