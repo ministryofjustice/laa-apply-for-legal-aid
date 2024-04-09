@@ -52,7 +52,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
       end
 
       context "when the applicant already entered a non-UK home address" do
-        let!(:home_address) { create(:address, applicant:, location: "home", country_code: "DEU", country_name: "Germany") }
+        let!(:home_address) { create(:address, applicant:, address_line_one: Faker::Address.street_name, location: "home", country_code: "DEU", country_name: "Germany") }
 
         it "does not fill the form with the existing address" do
           get_request
