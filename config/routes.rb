@@ -176,6 +176,9 @@ Rails.application.routes.draw do
         resource :non_uk_home_address, only: %i[show update]
         resource :selection, only: %i[show update], path: "home_address_results"
       end
+      namespace :link_application do
+        resource :make_link, only: %i[show update]
+      end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
