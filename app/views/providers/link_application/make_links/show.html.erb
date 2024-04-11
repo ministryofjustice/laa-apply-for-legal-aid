@@ -1,0 +1,24 @@
+<%= page_template(
+      page_title: "Do you want to link this application with another one?",
+      template: :basic,
+    ) do %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_link_application_make_link_path,
+        method: :patch,
+        local: true,
+      ) do |form| %>
+
+    <%= form.govuk_radio_buttons_fieldset(:link_type,
+                                          legend: { size: "xl", tag: "h1", text: page_title },
+                                          hint: { text: "You can link to another application you've already submitted using this service" }) do %>
+
+      <%= form.govuk_radio_button :link_type, "family", label: { text: "Yes, I want to make a family link" }, hint: { text: "When LAA needs multiple certificates with a shared cost limitation" } %>
+      <%= form.govuk_radio_button :link_type, "legal", label: { text: "Yes, I want to make a legal link" }, hint: { text: "When LAA needs multiple certificates, each with a separate cost limitation" } %>
+      <%= form.govuk_radio_button :link_type, "legal", label: { text: t("generic.no") } %>
+
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
