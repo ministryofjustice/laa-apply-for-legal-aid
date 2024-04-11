@@ -443,6 +443,11 @@ FactoryBot.define do
       end
     end
 
+    trait :with_proceeding_linked_children do
+      # create { :proceeding_linked_child, proceeding:, involved_child: second_child }
+      # create { :proceeding_linked_child, proceeding:, involved_child: third_child }
+    end
+
     trait :with_dwp_override do
       dwp_override { build(:dwp_override) }
       with_non_passported_state_machine

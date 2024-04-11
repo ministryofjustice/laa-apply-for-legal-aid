@@ -103,7 +103,7 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.urgency }.from(nil)
     end
 
-    context "when an application with every possible merit is added" do
+    context "when an application with merits is added" do
       let(:source) do
         create(
           :legal_aid_application,
@@ -119,7 +119,7 @@ RSpec.describe CopyCase::ClonerService do
         )
       end
 
-      it "copies proceeding merits successfully" do
+      it "copies proceeding merits attributes successfully" do
         expect { call }
         .to change { target.reload.proceedings.any?(&:attempts_to_settle) }.from(false).to(true)
         .and change { target.reload.proceedings.any?(&:chances_of_success) }.from(false).to(true)
@@ -127,7 +127,27 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.proceedings.any?(&:prohibited_steps) }.from(false).to(true)
         .and change { target.reload.proceedings.any?(&:specific_issue) }.from(false).to(true)
         .and change { target.reload.proceedings.any?(&:vary_order) }.from(false).to(true)
-        # .and change { target.reload.proceedings.any?(&.proceeding_linked_children:)&.size }.from(0).to(1)
+      end
+
+      context "and there are nested linked children merits" do
+        let(:source) do
+          create(
+            :legal_aid_application,
+            :with_everything,
+            :with_involved_children,
+          )
+        end
+        let(:proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
+        let(:second_child) { source.involved_children.second }
+        let(:third_child) { source.involved_children.third }
+
+        it "successfully copies nested linked children merits" do
+          create(:proceeding_linked_child, proceeding:, involved_child: second_child)
+          create(:proceeding_linked_child, proceeding:, involved_child: third_child)
+
+          expect { call }
+            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(0).to(1)
+        end
       end
     end
   end
