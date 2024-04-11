@@ -19,42 +19,7 @@ module CopyCase
   private
 
     def clone_proceedings
-      new_proceedings = source.proceedings.each_with_object([]) do |proceeding, memo|
-        memo << proceeding.deep_clone(
-          except: %i[legal_aid_application_id proceeding_case_id],
-          include: %i[
-            scope_limitations
-            attempts_to_settle
-            chances_of_success
-            opponents_application
-            involved_children
-            proceeding_linked_children
-            prohibited_steps
-            specific_issue
-            vary_order
-          ],
-        )
-
-        # TODO: Fix this so that involved_children and proceeding_linked_children are correctly saved
-        # Previous attempts left in below
-
-        # memo << proceeding.deep_clone(
-        #   except: %i[legal_aid_application_id proceeding_case_id],
-        #   include: [
-        #     { involved_children: :proceeding_linked_children },
-        #   ],
-        # )
-
-        # next unless proceeding.proceeding_linked_children.any?
-
-        # linked_children = proceeding.proceeding_linked_children.each_with_object([]) do |child, child_memo|
-        #   child_memo << child.deep_clone
-        # end
-
-        # memo.last.proceeding_linked_children = linked_children
-      end
-
-      target.proceedings = new_proceedings
+      target.proceedings = source.proceedings.deep_dup
       target.save!
     end
 
@@ -76,19 +41,7 @@ module CopyCase
 
         next if attribute.nil?
 
-        copy = case merit
-               when :opponents
-                 attribute.each_with_object([]) do |item, memo|
-                   memo << item.deep_clone(include: [:opposable])
-                 end
-               when :involved_children
-                 attribute.each_with_object([]) do |item, memo|
-                   memo << item.deep_clone
-                 end
-               else
-                 attribute.deep_clone
-               end
-
+        copy = attribute.deep_dup
         target.update!("#{merit}": copy)
       end
     end

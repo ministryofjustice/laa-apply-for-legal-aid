@@ -146,7 +146,8 @@ RSpec.describe CopyCase::ClonerService do
           create(:proceeding_linked_child, proceeding:, involved_child: third_child)
 
           expect { call }
-            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(0).to(1)
+            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(nil).to(2)
+            .and change { target.reload.proceedings.first&.involved_children&.size }.from(nil).to(2)
         end
       end
     end
