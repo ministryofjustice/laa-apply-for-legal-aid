@@ -40,23 +40,23 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
 
           before do
             legal_aid_application.applicant.address.update!(postcode: "YO4B0LJ")
-            get providers_legal_aid_application_address_selection_path(legal_aid_application)
+            get providers_legal_aid_application_correspondence_address_selection_path(legal_aid_application)
           end
 
           it "redirects to the address lookup page" do
             get_request
-            expect(response.body).to have_back_link(providers_legal_aid_application_address_selection_path(legal_aid_application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_correspondence_address_selection_path(legal_aid_application, back: true))
           end
         end
 
         context "when the applicant's address used manual entry" do
           before do
-            get providers_legal_aid_application_address_path(legal_aid_application)
+            get providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application)
           end
 
           it "redirects to the manual address page lookup page" do
             get_request
-            expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application, back: true))
           end
         end
       end

@@ -163,6 +163,11 @@ Rails.application.routes.draw do
         resources :remove_state_benefits, only: %i[show update]
       end
       get :search, on: :collection
+      namespace :correspondence_address do
+        resource :manual, only: %i[show update], path: "enter_correspondence_address"
+        resource :lookup, only: %i[show update], path: "find_correspondence_address"
+        resource :selection, only: %i[show update], path: "correspondence_address_results"
+      end
       namespace :home_address do
         resource :address, only: %i[show update], path: "enter_home_address"
         resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
@@ -176,9 +181,6 @@ Rails.application.routes.draw do
       resource :has_other_proceedings, only: %i[show update destroy]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
-      resource :address, only: %i[show update], path: "enter_correspondence_address"
-      resource :address_lookup, only: %i[show update], path: "find_correspondence_address"
-      resource :address_selection, only: %i[show update], path: "correspondence_address_results"
       resource :check_benefit, only: %i[index update]
       resource :has_national_insurance_number, only: %i[show update]
       resources :check_benefits, only: [:index]

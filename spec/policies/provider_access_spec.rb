@@ -8,21 +8,21 @@ RSpec.describe "Provider access", type: :request do
     login_as legal_aid_application.provider
 
     # Access page initially
-    get providers_legal_aid_application_address_lookup_path(legal_aid_application)
+    get providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application)
     expect(response).to have_http_status(:ok)
 
     # Application is submitted
     legal_aid_application.state_machine.update!(aasm_state: :assessment_submitted)
 
     # On access to page after submission user is redirected to submitted application
-    get providers_legal_aid_application_address_lookup_path(legal_aid_application)
+    get providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application)
     expect(response).to redirect_to(providers_legal_aid_application_submitted_application_path(legal_aid_application))
   end
 
   it "prevents another provider accessing the page" do
     login_as other_provider
 
-    get providers_legal_aid_application_address_lookup_path(legal_aid_application)
+    get providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application)
 
     expect(response).to redirect_to(error_path(:access_denied))
   end
@@ -30,7 +30,7 @@ RSpec.describe "Provider access", type: :request do
   it "allows missing application to be caught by not found" do
     login_as other_provider
 
-    get providers_legal_aid_application_address_lookup_path(SecureRandom.uuid)
+    get providers_legal_aid_application_correspondence_address_lookup_path(SecureRandom.uuid)
 
     expect(response).to redirect_to(error_path(:page_not_found))
   end

@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Providers::AddressLookupsController do
+RSpec.describe Providers::CorrespondenceAddress::LookupsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/address_lookup" do
-    subject(:get_request) { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -28,7 +28,7 @@ RSpec.describe Providers::AddressLookupsController do
   end
 
   describe "PATCH/providers/applications/:legal_aid_application_id/address_lookup" do
-    subject(:patch_request) { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: }
+    subject(:patch_request) { patch providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application), params: }
 
     let(:postcode) { "SW1H 9EA" }
     let(:normalized_postcode) { "SW1H9AE" }
@@ -79,7 +79,7 @@ RSpec.describe Providers::AddressLookupsController do
 
         it "redirects to the address selection page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
+          expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_selection_path)
         end
 
         context "and a building number" do

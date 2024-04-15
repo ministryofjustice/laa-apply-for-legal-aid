@@ -7,7 +7,7 @@ module Flow
         },
         applicants: {
           path: ->(_) { urls.new_providers_applicant_path },
-          forward: :address_lookups,
+          forward: :correspondence_address_lookups,
         },
         applicant_details: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
@@ -15,19 +15,19 @@ module Flow
             if application.overriding_dwp_result?
               :has_national_insurance_numbers
             else
-              :address_lookups
+              :correspondence_address_lookups
             end
           end,
           check_answers: :check_provider_answers,
         },
-        address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_address_lookup_path(application) },
-          forward: :address_selections,
+        correspondence_address_lookups: {
+          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_lookup_path(application) },
+          forward: :correspondence_address_selections,
           check_answers: :check_provider_answers,
           carry_on_sub_flow: true,
         },
-        address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
+        correspondence_address_selections: {
+          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_selection_path(application) },
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
@@ -50,8 +50,8 @@ module Flow
           end,
           check_answers: :check_provider_answers,
         },
-        addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_address_path(application) },
+        correspondence_address_manuals: {
+          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_manual_path(application) },
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses

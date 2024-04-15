@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe "Backable", :vcr do
   let(:application) { create(:legal_aid_application, :with_applicant) }
-  let(:address_lookup_path) { providers_legal_aid_application_address_lookup_path(application) }
-  let(:address_path) { providers_legal_aid_application_address_path(application) }
+  let(:address_lookup_path) { providers_legal_aid_application_correspondence_address_lookup_path(application) }
+  let(:address_path) { providers_legal_aid_application_correspondence_address_manual_path(application) }
   let(:proceeding_type_path) { providers_legal_aid_application_proceedings_types_path(application) }
   let(:address_params) do
     {

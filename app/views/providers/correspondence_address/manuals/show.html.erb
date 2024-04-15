@@ -2,7 +2,7 @@
 <%= form_with(
       model: @form,
       scope: :address,
-      url: providers_legal_aid_application_address_path(@legal_aid_application),
+      url: providers_legal_aid_application_correspondence_address_manual_path(@legal_aid_application),
       method: :patch,
       local: true,
     ) do |form| %>
