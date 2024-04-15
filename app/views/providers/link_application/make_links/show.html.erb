@@ -1,5 +1,5 @@
 <%= page_template(
-      page_title: "Do you want to link this application with another one?",
+      page_title: t(".heading"),
       template: :basic,
     ) do %>
   <%= form_with(
@@ -9,13 +9,13 @@
         local: true,
       ) do |form| %>
 
-    <%= form.govuk_radio_buttons_fieldset(:link_type,
+    <%= form.govuk_radio_buttons_fieldset(:link_type_code,
                                           legend: { size: "xl", tag: "h1", text: page_title },
-                                          hint: { text: "You can link to another application you've already submitted using this service" }) do %>
+                                          hint: { text: t(".hint") }) do %>
 
-      <%= form.govuk_radio_button :link_type, "family", label: { text: "Yes, I want to make a family link" }, hint: { text: "When LAA needs multiple certificates with a shared cost limitation" } %>
-      <%= form.govuk_radio_button :link_type, "legal", label: { text: "Yes, I want to make a legal link" }, hint: { text: "When LAA needs multiple certificates, each with a separate cost limitation" } %>
-      <%= form.govuk_radio_button :link_type, "legal", label: { text: t("generic.no") } %>
+      <%= form.govuk_radio_button :link_type_code, "family", label: { text: t(".options.family_link") }, hint: { text: t(".options.family_hint") } %>
+      <%= form.govuk_radio_button :link_type_code, "legal", label: { text: t(".options.legal_link") }, hint: { text: t(".options.legal_hint") } %>
+      <%= form.govuk_radio_button :link_type_code, false, label: { text: t("generic.no") } %>
 
     <% end %>
 
