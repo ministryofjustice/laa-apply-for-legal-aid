@@ -31,6 +31,8 @@ module Flow
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
+            elsif Setting.linked_applications?
+              :link_application_make_links
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
@@ -46,7 +48,11 @@ module Flow
         home_address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_home_address_selection_path(application) },
           forward: lambda do |application|
-            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            if Setting.linked_applications?
+              :link_application_make_links
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           end,
           check_answers: :check_provider_answers,
         },
@@ -55,6 +61,8 @@ module Flow
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
+            elsif Setting.linked_applications?
+              :link_application_make_links
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
             end
@@ -65,7 +73,11 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_path(application) },
           forward: lambda do |application|
             if application.applicant.same_correspondence_and_home_address?
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+              if Setting.linked_applications?
+                :link_application_make_links
+              else
+                application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+              end
             else
               :different_address_reasons
             end
@@ -77,7 +89,11 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
           forward: lambda do |application|
             if application.applicant.no_fixed_residence?
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+              if Setting.linked_applications?
+                :link_application_make_links
+              else
+                application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+              end
             else
               :home_address_lookups
             end
@@ -88,12 +104,23 @@ module Flow
         non_uk_home_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
           forward: lambda do |application|
-            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            if Setting.linked_applications?
+              :link_application_make_links
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           end,
           check_answers: :check_provider_answers,
         },
         home_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_address_path(application) },
+          forward: lambda do |application|
+            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+          end,
+          check_answers: :check_provider_answers,
+        },
+        link_application_make_links: {
+          path: ->(application) { urls.providers_legal_aid_application_link_application_make_link_path(application) },
           forward: lambda do |application|
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,
