@@ -1,12 +1,14 @@
 module Providers
   module HomeAddress
-    class HomeAddressLookupsController < ProviderBaseController
+    class ManualsController < ProviderBaseController
+      prefix_step_with :home_address
+
       def show
-        @form = Addresses::AddressLookupForm.new(model: address)
+        @form = Addresses::AddressForm.new(model: address)
       end
 
       def update
-        @form = Addresses::AddressLookupForm.new(form_params)
+        @form = Addresses::AddressForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -21,9 +23,13 @@ module Providers
         )
       end
 
+      def address_attributes
+        %i[address_line_one address_line_two city county postcode lookup_postcode lookup_error]
+      end
+
       def form_params
         merge_with_model(address) do
-          params.require(:address_lookup).permit(:postcode, :building_number_name)
+          params.require(:address).permit(*address_attributes).merge(location: "home")
         end
       end
 

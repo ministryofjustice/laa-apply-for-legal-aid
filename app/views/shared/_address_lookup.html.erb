@@ -13,7 +13,7 @@
   <% if location == "home" %>
     <p class="govuk-body"><%= govuk_link_to t(".non_uk_address_link"), providers_legal_aid_application_home_address_non_uk_home_address_path %></p>
   <% end %>
-  <p class="govuk-body"><%= govuk_link_to t(".address_manual_link"), location == "correspondence" ? providers_legal_aid_application_correspondence_address_manual_path : providers_legal_aid_application_home_address_address_path %></p>
+  <p class="govuk-body"><%= govuk_link_to t(".address_manual_link"), location == "correspondence" ? providers_legal_aid_application_correspondence_address_manual_path : providers_legal_aid_application_home_address_manual_path %></p>
 
   <%= next_action_buttons(
         form:,

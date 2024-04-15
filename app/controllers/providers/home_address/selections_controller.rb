@@ -1,6 +1,8 @@
 module Providers
   module HomeAddress
-    class HomeAddressSelectionsController < ProviderBaseController
+    class SelectionsController < ProviderBaseController
+      prefix_step_with :home_address
+
       include AddressHandling
 
       def show

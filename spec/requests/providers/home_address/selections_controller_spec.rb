@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
+RSpec.describe Providers::HomeAddress::SelectionsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/home_address/home_address_selection" do
-    subject(:get_request) { get providers_legal_aid_application_home_address_home_address_selection_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_home_address_selection_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -82,18 +82,18 @@ RSpec.describe Providers::HomeAddress::HomeAddressSelectionsController do
       end
 
       context "when no postcode have been entered yet" do
-        before { get providers_legal_aid_application_home_address_home_address_lookup_path(legal_aid_application) }
+        before { get providers_legal_aid_application_home_address_lookup_path(legal_aid_application) }
 
         it "redirects to the postcode entering page" do
           get_request
-          expect(response).to redirect_to(providers_legal_aid_application_home_address_home_address_lookup_path(back: true))
+          expect(response).to redirect_to(providers_legal_aid_application_home_address_lookup_path(back: true))
         end
       end
     end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/home_address/home_address_selections" do
-    subject(:patch_request) { patch providers_legal_aid_application_home_address_home_address_selection_path(legal_aid_application), params: }
+    subject(:patch_request) { patch providers_legal_aid_application_home_address_selection_path(legal_aid_application), params: }
 
     let(:address_list) do
       [

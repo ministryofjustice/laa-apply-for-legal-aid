@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::HomeAddress::AddressesController do
+RSpec.describe Providers::HomeAddress::ManualsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
@@ -19,7 +19,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/home_address/enter_home_address" do
-    subject(:get_request) { get providers_legal_aid_application_home_address_address_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_home_address_manual_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -69,7 +69,7 @@ RSpec.describe Providers::HomeAddress::AddressesController do
   describe "PATCH /providers/applications/:legal_aid_application_id/home_address/enter_home_address" do
     subject(:patch_request) do
       patch(
-        providers_legal_aid_application_home_address_address_path(legal_aid_application),
+        providers_legal_aid_application_home_address_manual_path(legal_aid_application),
         params: address_params.merge(submit_button),
       )
     end

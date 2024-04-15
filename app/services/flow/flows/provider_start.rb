@@ -38,13 +38,13 @@ module Flow
           check_answers: :check_provider_answers,
         },
         home_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_home_address_lookup_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
           forward: :home_address_selections,
           check_answers: :check_provider_answers,
           carry_on_sub_flow: true,
         },
         home_address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_home_address_selection_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
           forward: lambda do |application|
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,
@@ -92,8 +92,8 @@ module Flow
           end,
           check_answers: :check_provider_answers,
         },
-        home_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_address_path(application) },
+        home_address_manuals: {
+          path: ->(application) { urls.providers_legal_aid_application_home_address_manual_path(application) },
           forward: lambda do |application|
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,

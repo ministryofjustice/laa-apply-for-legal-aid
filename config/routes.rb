@@ -164,17 +164,17 @@ Rails.application.routes.draw do
       end
       get :search, on: :collection
       namespace :correspondence_address do
-        resource :manual, only: %i[show update], path: "enter_correspondence_address"
         resource :lookup, only: %i[show update], path: "find_correspondence_address"
+        resource :manual, only: %i[show update], path: "enter_correspondence_address"
         resource :selection, only: %i[show update], path: "correspondence_address_results"
       end
       namespace :home_address do
-        resource :address, only: %i[show update], path: "enter_home_address"
         resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
         resource :different_address_reason, only: %i[show update], path: "why_addresses_differ"
-        resource :home_address_lookup, only: %i[show update], path: "find_home_address"
-        resource :home_address_selection, only: %i[show update], path: "address_results"
+        resource :lookup, only: %i[show update], path: "find_home_address"
+        resource :manual, only: %i[show update], path: "enter_home_address"
         resource :non_uk_home_address, only: %i[show update]
+        resource :selection, only: %i[show update], path: "address_results"
       end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
