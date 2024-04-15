@@ -1,16 +1,7 @@
 module Providers
   module HomeAddress
-    class LookupsController < ProviderBaseController
+    class LookupsController < AddressLookupsBaseController
       prefix_step_with :home_address
-
-      def show
-        @form = Addresses::AddressLookupForm.new(model: address)
-      end
-
-      def update
-        @form = Addresses::AddressLookupForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
-      end
 
     private
 
@@ -21,12 +12,6 @@ module Providers
           country_code: "GBR",
           country_name: "United Kingdom",
         )
-      end
-
-      def form_params
-        merge_with_model(address) do
-          params.require(:address_lookup).permit(:postcode, :building_number_name)
-        end
       end
 
       def address
