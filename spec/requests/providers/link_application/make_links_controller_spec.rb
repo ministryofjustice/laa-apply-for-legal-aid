@@ -80,12 +80,12 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
           end
         end
 
-        context "with no invalid postcode" do
+        context "with a nil link_type_code" do
           let(:link_type_code) { nil }
 
           it "re-renders the form with the validation errors" do
             patch_request
-            expect(unescaped_response_body).to include("There is a problem")
+            expect(unescaped_response_body).to include("Select if you want to link this application with another one")
           end
         end
 
