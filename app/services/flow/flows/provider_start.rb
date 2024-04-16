@@ -51,7 +51,6 @@ module Flow
           check_answers: :check_provider_answers,
         },
         correspondence_address_manuals: {
-          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_manual_path(application) },
           forward: lambda do |application|
             if Setting.home_address?
               :different_addresses
@@ -93,7 +92,6 @@ module Flow
           check_answers: :check_provider_answers,
         },
         home_address_manuals: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_manual_path(application) },
           forward: lambda do |application|
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end,
