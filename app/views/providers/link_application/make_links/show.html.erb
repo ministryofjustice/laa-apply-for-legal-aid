@@ -16,8 +16,8 @@
                                           hint: { text: t(".hint") }) do %>
 
       <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.family_link_type_code, label: { text: t(".options.family_link") }, hint: { text: t(".options.family_hint") }, link_errors: true %>
-      <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.legal_link_type_code, label: { text: t(".options.legal_link") }, hint: { text: t(".options.legal_hint") }, link_errors: false %>
-      <%= form.govuk_radio_button :link_type_code, false, label: { text: t("generic.no") }, link_errors: false %>
+      <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.legal_link_type_code, label: { text: t(".options.legal_link") }, hint: { text: t(".options.legal_hint") } %>
+      <%= form.govuk_radio_button :link_type_code, false, label: { text: t("generic.no") } %>
 
     <% end %>
 
