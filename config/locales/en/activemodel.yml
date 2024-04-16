@@ -85,7 +85,7 @@ en:
       models:
         address:
           attributes:
-            country_name: 
+            country_name:
               invalid: Search for and select a country
             address_line_one:
               blank: Enter the first line of the address
@@ -528,7 +528,7 @@ en:
               invalid: Enter a valid application reference to search for
               not_found: The application reference entered cannot be found
             link_type_code:
-              blank: Select an option
+              blank: Select if you want to link this application with another one
         other_assets_declaration:
           attributes:
             valuable_items_value:

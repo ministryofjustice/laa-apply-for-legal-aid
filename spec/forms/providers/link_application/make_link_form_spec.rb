@@ -47,6 +47,11 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
       it "is invalid" do
         expect(instance).not_to be_valid
       end
+
+      it "adds custom blank error message" do
+        error_messages = instance.errors.messages.values.flatten
+        expect(error_messages).to include("Select if you want to link this application with another one")
+      end
     end
   end
 
