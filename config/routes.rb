@@ -174,7 +174,7 @@ Rails.application.routes.draw do
         resource :lookup, only: %i[show update], path: "find_home_address"
         resource :manual, only: %i[show update], path: "enter_home_address"
         resource :non_uk_home_address, only: %i[show update]
-        resource :selection, only: %i[show update], path: "address_results"
+        resource :selection, only: %i[show update], path: "home_address_results"
       end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
