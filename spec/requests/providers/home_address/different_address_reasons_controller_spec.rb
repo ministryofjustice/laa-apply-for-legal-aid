@@ -63,6 +63,14 @@ RSpec.describe Providers::HomeAddress::DifferentAddressReasonsController do
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
 
+      context "when the linked application feature flag is enabled" do
+        it "redirects to link applications" do
+          allow(Setting).to receive(:linked_applications?).and_return(true)
+          patch_request
+          expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
+        end
+      end
+
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(true)
       end

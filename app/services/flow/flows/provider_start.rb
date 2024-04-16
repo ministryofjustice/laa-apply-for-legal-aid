@@ -113,7 +113,11 @@ module Flow
         },
         home_address_manuals: {
           forward: lambda do |application|
-            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            if Setting.linked_applications?
+              :link_application_make_links
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           end,
           check_answers: :check_provider_answers,
         },

@@ -93,6 +93,14 @@ RSpec.describe Providers::HomeAddress::ManualsController do
           expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
 
+        context "when the linked application feature flag is enabled" do
+          it "redirects to link applications" do
+            allow(Setting).to receive(:linked_applications?).and_return(true)
+            patch_request
+            expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
+          end
+        end
+
         it "creates a home address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
           expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
