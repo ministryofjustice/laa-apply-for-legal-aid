@@ -37,9 +37,9 @@
     <% end %>
 
     <%= form.govuk_radio_buttons_fieldset(:confirm_link, legend: { tag: "h2", size: "l", text: "Is this the application you want to link to?" }) do %>
-      <%= form.govuk_radio_button :confirm_link, "Yes", label: { text: t("generic.yes") }, link_errors: true %>
-      <%= form.govuk_radio_button :confirm_link, "No", label: { text: "No, I want to link to a different case" } %>
-      <%= form.govuk_radio_button :confirm_link, false, label: { text: "No, carry on without linking" } %>
+      <%= form.govuk_radio_button :link_case, true, label: { text: t("generic.yes") }, link_errors: true %>
+      <%= form.govuk_radio_button :link_case, "No", label: { text: "No, I want to link to a different case" } %>
+      <%= form.govuk_radio_button :link_case, false, label: { text: "No, carry on without linking" } %>
 
     <% end %>
 

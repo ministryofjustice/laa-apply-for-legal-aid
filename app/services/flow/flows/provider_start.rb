@@ -132,9 +132,17 @@ module Flow
           end,
           check_answers: :check_provider_answers,
         },
-        link_application_find_link_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_link_application_find_link_application_path(application) },
-          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
+        link_application_confirm_links: {
+          path: ->(application) { urls.providers_legal_aid_application_link_application_confirm_link_path(application) },
+          forward: lambda do |application|
+            # TODO: This will change when ap-4827 is complete
+            if application.link_case.nil?
+              :link_application_make_links
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
+          end,
+          check_answers: :check_provider_answers,
         },
         about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },

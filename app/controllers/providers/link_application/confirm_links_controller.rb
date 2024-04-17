@@ -5,13 +5,24 @@ module Providers
 
       def show
         all_linked_applications
-        @form = Providers::LinkApplication::ConfirmLinkForm.new(model: linked_application)
+        @form = Providers::LinkApplication::ConfirmLinkForm.new(model: legal_aid_application)
+      end
+
+      def update
+        all_linked_applications
+        @form = Providers::LinkApplication::ConfirmLinkForm.new(form_params)
+
+        render :show unless save_continue_or_draft(@form)
       end
 
     private
 
-      def linked_application
-        legal_aid_application.lead_linked_application || legal_aid_application.build_lead_linked_application
+      def form_params
+        merge_with_model(legal_aid_application) do
+          next {} unless params[:legal_aid_application]
+
+          params.require(:legal_aid_application).permit(:link_case)
+        end
       end
 
       def all_linked_applications
