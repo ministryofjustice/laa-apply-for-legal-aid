@@ -25,4 +25,20 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
       end
     end
   end
+
+  describe "PATCH /providers/applications/:legal_aid_application_id/link_application/make_link" do
+    subject(:request) do
+      patch(
+        providers_legal_aid_application_link_application_make_link_path,
+          params:,
+        )
+      end
+    end  
+      context "and I select the button to make a family link" do
+        it "navigates to the find link application" do
+          expect(response).to redirect_to(providers_legal_aid_application_link_application_find_link_application_path)
+        end
+      end
+    
+  end
 end

@@ -122,7 +122,13 @@ module Flow
         link_application_make_links: {
           path: ->(application) { urls.providers_legal_aid_application_link_application_make_link_path(application) },
           forward: lambda do |application|
-            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+          # If clent wants to link the application go to find_link_application page.
+            if Setting.link_application_make_links?
+              :link_application_find_link_application
+            else
+          # If client does not want to link the application, go to:
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           end,
           check_answers: :check_provider_answers,
         },
