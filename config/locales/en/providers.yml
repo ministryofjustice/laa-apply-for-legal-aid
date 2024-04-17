@@ -394,7 +394,8 @@ en:
       make_links:
         show:
           heading: Do you want to link this application with another one?
-          hint: You can link to another application you've already submitted using this service
+          hint: You can link to another application you've already submitted using this service.
+                Linking to an application that’s already linked to another one will group them together.
           options:
             family_link: Yes, I want to make a family link
             family_hint: When LAA needs multiple certificates with a shared cost limitation.
