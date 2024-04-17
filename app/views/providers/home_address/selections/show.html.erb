@@ -1,0 +1,16 @@
+<%= form_with(
+      model: @form,
+      scope: :address_selection,
+      url: providers_legal_aid_application_home_address_selection_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+    <% if @address_collection.many? %>
+      <%= render "shared/address_selection/select_address", location: "home", form:, addresses: @addresses %>
+    <% elsif @address_collection.one? %>
+      <%= render "shared/address_selection/confirm_address", location: "home", form: %>
+    <% else %>
+      <%= render "shared/address_selection/no_address", location: "home", form: %>
+    <% end %>
+<% end %>

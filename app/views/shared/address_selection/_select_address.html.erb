@@ -30,7 +30,7 @@
 
         <%= govuk_link_to(
               t("generic.search_again"),
-              location == "correspondence" ? providers_legal_aid_application_address_lookup_path(@legal_aid_application) : providers_legal_aid_application_home_address_home_address_lookup_path(@legal_aid_application),
+              location == "correspondence" ? providers_legal_aid_application_correspondence_address_lookup_path(@legal_aid_application) : providers_legal_aid_application_home_address_lookup_path(@legal_aid_application),
               class: "govuk-body change-link",
               "aria-label": "postcode",
             ) %>
@@ -40,7 +40,7 @@
   <p>
     <%= govuk_link_to(
           t(".link_text"),
-          location == "correspondence" ? providers_legal_aid_application_address_path(@legal_aid_application) : providers_legal_aid_application_home_address_address_path(@legal_aid_application),
+          location == "correspondence" ? providers_legal_aid_application_correspondence_address_manual_path(@legal_aid_application) : providers_legal_aid_application_home_address_manual_path(@legal_aid_application),
         ) %>
   </p>
   <%= next_action_buttons(

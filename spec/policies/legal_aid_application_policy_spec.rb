@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe LegalAidApplicationPolicy do
   subject(:laa_policy) { described_class.new(authorization_context, legal_aid_application) }
 
-  let(:pre_dwp_check_controller) { Providers::AddressLookupsController.new }
+  let(:pre_dwp_check_controller) { Providers::CorrespondenceAddress::LookupsController.new }
   let(:post_dwp_check_controller) { Providers::BankTransactionsController.new }
 
   let(:controller_actions) do

@@ -12,7 +12,7 @@ module Providers
       describe "GET /providers/applications/:legal_aid_application_id/address/edit" do
         before do
           login_as logged_in_provider
-          get providers_legal_aid_application_address_path(legal_aid_application)
+          get providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application)
         end
 
         context "when provider who created legal aid application" do
@@ -44,7 +44,7 @@ module Providers
     describe "PATCH /providers/applications/:legal_aid_application_id/address" do
       before do
         login_as logged_in_provider
-        patch providers_legal_aid_application_address_path(legal_aid_application), params: address_params
+        patch providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application), params: address_params
       end
 
       context "when provider who created legal aid application" do

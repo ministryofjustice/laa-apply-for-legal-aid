@@ -25,7 +25,7 @@ RSpec.describe CheckProviderAnswersHelper do
 
       context "when lookup_used is false" do
         it "returns the manual address entry path" do
-          expect(link).to eq "/providers/applications/#{legal_aid_application.id}/enter_correspondence_address?locale=en#postcode"
+          expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/enter_correspondence_address?locale=en#postcode"
         end
       end
 
@@ -33,7 +33,7 @@ RSpec.describe CheckProviderAnswersHelper do
         let(:lookup_used) { true }
 
         it "returns the address lookup path" do
-          expect(link).to eq "/providers/applications/#{legal_aid_application.id}/find_correspondence_address?locale=en#postcode"
+          expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/find_correspondence_address?locale=en#postcode"
         end
       end
     end
