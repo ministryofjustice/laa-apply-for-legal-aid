@@ -11,6 +11,8 @@ module Providers
         if link_case == "No"
           model.update!(link_case: nil)
           return
+        elsif link_case == "false"
+          model.lead_linked_application&.destroy!
         end
         super
       end

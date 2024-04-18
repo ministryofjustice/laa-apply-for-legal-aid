@@ -7,7 +7,7 @@
     ) do |form| %>
 
   <%= page_template(
-        page_title: "Search result",
+        page_title: t(".heading"),
         form:,
         template: :basic,
       ) do %>
@@ -19,27 +19,27 @@
           actions: false,
         ) do |summary_list| %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: "LAA reference", classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".laa_reference"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value(text: @legal_aid_application.lead_application&.application_ref) %>
       <% end %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: "Client", classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".client"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value(text: @legal_aid_application.lead_application&.applicant&.full_name) %>
       <% end %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: "Proceedings", classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".proceedings"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value(text: @legal_aid_application.lead_application&.proceedings&.map(&:meaning)&.join(", ")) %>
       <% end %>
     <% end %>
 
-    <%= govuk_details(summary_text: "All applications with a family link to this one") do %>
+    <%= govuk_details(summary_text: t(".all_linked_applications")) do %>
       <%= sanitize(@all_linked_applications&.map { |application| "#{application.application_ref}, #{application.applicant.full_name}" }&.join("<br>")) %>
     <% end %>
 
-    <%= form.govuk_radio_buttons_fieldset(:confirm_link, legend: { tag: "h2", size: "l", text: "Is this the application you want to link to?" }) do %>
+    <%= form.govuk_radio_buttons_fieldset(:confirm_link, legend: { tag: "h2", size: "l", text: t(".link_case") }) do %>
       <%= form.govuk_radio_button :link_case, true, label: { text: t("generic.yes") }, link_errors: true %>
-      <%= form.govuk_radio_button :link_case, "No", label: { text: "No, I want to link to a different case" } %>
-      <%= form.govuk_radio_button :link_case, false, label: { text: "No, carry on without linking" } %>
+      <%= form.govuk_radio_button :link_case, "No", label: { text: t(".options.no_link_to_different_case") } %>
+      <%= form.govuk_radio_button :link_case, false, label: { text: t(".options.no_carry_on_without_linking") } %>
 
     <% end %>
 

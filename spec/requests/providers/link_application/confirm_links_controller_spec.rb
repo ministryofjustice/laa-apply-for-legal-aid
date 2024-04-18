@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::ConfirmLinksController do
   let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:lead_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/confirm_link" do
@@ -51,6 +52,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
     context "when the provider is authenticated" do
       before do
+        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
         login_as provider
       end
 
@@ -60,6 +62,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
             patch_request
             # TODO: This will change when ap-4828 is complete
             expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
+          end
+
+          it "does not not destroy the linked application" do
+            patch_request
+            expect(legal_aid_application.reload.lead_application).to eq lead_application
           end
 
           it "sets link_case to true" do
@@ -76,6 +83,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
             expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
           end
 
+          it "destroys the linked application" do
+            patch_request
+            expect(legal_aid_application.reload.lead_application).to be_nil
+          end
+
           it "sets link_case to false" do
             patch_request
             expect(legal_aid_application.reload.link_case).to be false
@@ -88,6 +100,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
           it "redirects to next page" do
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path)
+          end
+
+          it "does not not destroy the linked application" do
+            patch_request
+            expect(legal_aid_application.reload.lead_application).to eq lead_application
           end
 
           it "sets link_case to false" do
