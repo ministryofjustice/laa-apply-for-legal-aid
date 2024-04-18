@@ -32,7 +32,7 @@
       <% end %>
     <% end %>
 
-    <%= govuk_details(summary_text: t(".all_linked_applications")) do %>
+    <%= govuk_details(summary_text: t(".all_linked_applications", link_type: @link_type&.description&.downcase)) do %>
       <%= sanitize(@all_linked_applications&.map { |application| "#{application.application_ref}, #{application.applicant.full_name}" }&.join("<br>")) %>
     <% end %>
 

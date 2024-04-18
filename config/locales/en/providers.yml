@@ -417,7 +417,7 @@ en:
           laa_reference: LAA reference
           client: Client
           proceedings: Proceedings
-          all_linked_applications: All applications with a link to this one
+          all_linked_applications: All applications with a %{link_type} link to this one
           link_case: Is this the application you want to link to?
           options:
             no_link_to_different_case: No, I want to link to a different case
