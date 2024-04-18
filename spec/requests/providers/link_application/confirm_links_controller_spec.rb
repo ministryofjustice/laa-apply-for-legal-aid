@@ -5,6 +5,8 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
   let(:lead_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
+  before { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD") }
+
   describe "GET /providers/applications/:legal_aid_application_id/link_application/confirm_link" do
     subject(:get_request) do
       get providers_legal_aid_application_link_application_confirm_link_path(legal_aid_application)
@@ -51,10 +53,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
     end
 
     context "when the provider is authenticated" do
-      before do
-        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
-        login_as provider
-      end
+      before { login_as provider }
 
       context "when the Continue button is pressed" do
         context "when Yes is chosen" do

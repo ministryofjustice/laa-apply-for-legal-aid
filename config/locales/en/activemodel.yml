@@ -520,7 +520,7 @@ en:
             client_declaration_confirmed:
               accepted: Confirm this information is correct and that you'll get a signed declaration
             link_case:
-              blank: Select yes if you want to link an application to your application
+              blank: Select if you want to link to the application
         linked_application:
           attributes:
             search_ref:
