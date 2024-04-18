@@ -173,6 +173,14 @@ RSpec.describe Providers::CorrespondenceAddress::SelectionsController do
         end
       end
 
+      context "when the linked application feature flag is enabled" do
+        it "redirects to the link applications" do
+          allow(Setting).to receive(:linked_applications?).and_return(true)
+          patch_request
+          expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
+        end
+      end
+
       context "when an address already exists" do
         before { create(:address, applicant:) }
 

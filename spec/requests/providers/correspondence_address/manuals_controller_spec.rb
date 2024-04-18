@@ -150,6 +150,14 @@ RSpec.describe Providers::CorrespondenceAddress::ManualsController do
         end
       end
 
+      context "when the linked application feature flag is enabled" do
+        it "redirects to the link applications" do
+          allow(Setting).to receive(:linked_applications?).and_return(true)
+          patch_request
+          expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
+        end
+      end
+
       context "with form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 

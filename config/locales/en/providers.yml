@@ -390,6 +390,18 @@ en:
           address_line_three: Address line 3 (optional)
           address_line_four: Address line 4 (optional)
           no_results: No results found.
+    link_application:
+      make_links:
+        show:
+          heading: Do you want to link this application with another one?
+          hint: You can link to another application you've already submitted using this service.
+                Linking to an application that’s already linked to another one will group them together.
+          options:
+            family_link: Yes, I want to make a family link
+            family_hint: When LAA needs multiple certificates with a shared cost limitation.
+                         The cost limit will be on the certificate of the application you submit first.
+            legal_link: Yes, I want to make a legal link
+            legal_hint: When LAA needs multiple certificates, each with a separate cost limitation.
     proceeding_merits_task:
       linked_children:
         show:

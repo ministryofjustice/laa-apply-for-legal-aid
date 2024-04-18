@@ -1,0 +1,26 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_link_application_make_link_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        form:,
+        template: :basic,
+      ) do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:link_type_code,
+                                          legend: { size: "xl", tag: "h1", text: page_title },
+                                          hint: { text: t(".hint") }) do %>
+
+      <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.family_link_type_code, label: { text: t(".options.family_link") }, hint: { text: t(".options.family_hint") }, link_errors: true %>
+      <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.legal_link_type_code, label: { text: t(".options.legal_link") }, hint: { text: t(".options.legal_hint") } %>
+      <%= form.govuk_radio_button :link_type_code, false, label: { text: t("generic.no") } %>
+
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
