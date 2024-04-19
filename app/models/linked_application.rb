@@ -6,6 +6,10 @@ class LinkedApplication < ApplicationRecord
 
   validates :link_type_code, inclusion: LinkedApplicationType.all.map(&:code).append("false"), allow_nil: true
 
+  def link_type_description
+    LinkedApplicationType.all.find { |linked_application_type| linked_application_type.code == link_type_code }.description
+  end
+
 private
 
   def cannot_link_self

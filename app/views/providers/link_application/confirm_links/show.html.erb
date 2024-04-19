@@ -32,8 +32,10 @@
       <% end %>
     <% end %>
 
-    <%= govuk_details(summary_text: t(".all_linked_applications", link_type: @link_type&.description&.downcase)) do %>
-      <%= sanitize(@all_linked_applications&.map { |application| "#{application.application_ref}, #{application.applicant.full_name}" }&.join("<br>")) %>
+    <% if all_linked_applications_details(@legal_aid_application) %>
+      <%= govuk_details(summary_text: t(".all_linked_applications", link_type: @legal_aid_application.lead_linked_application&.link_type_description&.downcase)) do %>
+        <%= all_linked_applications_details(@legal_aid_application) %>
+      <% end %>
     <% end %>
 
     <%= form.govuk_radio_buttons_fieldset(:confirm_link, legend: { tag: "h2", size: "l", text: t(".link_case") }) do %>
