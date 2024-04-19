@@ -11,7 +11,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default.
   # This is set explicitly to remove a deprecation warning during the Rails 7.1
-  # to 7.2 transition, if Devise is set above 4.9.3, try removing it to see if
+  # to 7.2 transition, if Devise is set above 4.9.4, try removing it to see if
   # the deprecation warning has been removed
   config.secret_key = Rails.application.secret_key_base
 
