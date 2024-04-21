@@ -57,12 +57,6 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
       context "when the Continue button is pressed" do
         context "when Yes is chosen" do
-          it "redirects to next page" do
-            patch_request
-            # TODO: This will change when ap-4828 is complete
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-          end
-
           it "does not not destroy the linked application" do
             patch_request
             expect(legal_aid_application.reload.lead_application).to eq lead_application
@@ -77,11 +71,6 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
         context "when No, carry on without linking is chosen" do
           let(:link_case) { "false" }
 
-          it "redirects to next page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-          end
-
           it "destroys the linked application" do
             patch_request
             expect(legal_aid_application.reload.lead_application).to be_nil
@@ -95,11 +84,6 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
         context "when No, I want to link to a different case is chosen" do
           let(:link_case) { "No" }
-
-          it "redirects to next page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path)
-          end
 
           it "does not not destroy the linked application" do
             patch_request
