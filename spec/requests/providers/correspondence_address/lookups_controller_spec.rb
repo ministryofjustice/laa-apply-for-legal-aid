@@ -77,11 +77,6 @@ RSpec.describe Providers::CorrespondenceAddress::LookupsController do
           expect(applicant.address.country_code).to eq("GBR")
         end
 
-        it "redirects to the address selection page" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_selection_path)
-        end
-
         context "and a building number" do
           before { params[:address_lookup][:building_number_name] = "Prospect Cottage" }
 

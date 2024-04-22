@@ -6,12 +6,7 @@ module Flow
         delete: Flow::Steps::DeleteStep,
         applicants: Steps::ProviderStart::ApplicantsStep,
         applicant_details: Steps::ProviderStart::ApplicantDetailsStep,
-        correspondence_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_lookup_path(application) },
-          forward: :correspondence_address_selections,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true,
-        },
+        correspondence_address_lookups: Steps::Addresses::CorrespondenceAddressLookupsStep,
         correspondence_address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_correspondence_address_selection_path(application) },
           forward: lambda do |application|
