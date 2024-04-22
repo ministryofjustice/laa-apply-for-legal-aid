@@ -2,9 +2,7 @@ module Flow
   module Flows
     class ProviderStart < FlowSteps
       STEPS = {
-        providers_home: {
-          path: ->(_application) { urls.providers_legal_aid_applications_path },
-        },
+        providers_home: Steps::ProvidersHomeStep,
         applicants: {
           path: ->(_) { urls.new_providers_applicant_path },
           forward: :correspondence_address_lookups,
