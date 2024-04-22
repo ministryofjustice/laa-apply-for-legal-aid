@@ -3,6 +3,7 @@ module Flow
     class ProviderStart < FlowSteps
       STEPS = {
         providers_home: Steps::ProvidersHomeStep,
+        delete: Flow::Steps::DeleteStep,
         applicants: Steps::ProviderStart::ApplicantsStep,
         applicant_details: Steps::ProviderStart::ApplicantDetailsStep,
         correspondence_address_lookups: {
@@ -263,9 +264,6 @@ module Flow
         },
         use_ccms: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) },
-        },
-        delete: {
-          path: ->(application) { urls.providers_legal_aid_application_delete_path(application) },
         },
         use_ccms_employment: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_employment_index_path(application) },
