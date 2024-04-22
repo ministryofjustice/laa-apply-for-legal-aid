@@ -4,17 +4,7 @@ module Flow
       STEPS = {
         providers_home: Steps::ProvidersHomeStep,
         applicants: Steps::ProviderStart::ApplicantsStep,
-        applicant_details: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
-          forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :has_national_insurance_numbers
-            else
-              :correspondence_address_lookups
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
+        applicant_details: Steps::ProviderStart::ApplicantDetailsStep,
         correspondence_address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_correspondence_address_lookup_path(application) },
           forward: :correspondence_address_selections,
