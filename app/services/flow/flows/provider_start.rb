@@ -3,10 +3,7 @@ module Flow
     class ProviderStart < FlowSteps
       STEPS = {
         providers_home: Steps::ProvidersHomeStep,
-        applicants: {
-          path: ->(_) { urls.new_providers_applicant_path },
-          forward: :correspondence_address_lookups,
-        },
+        applicants: Steps::ProviderStart::ApplicantsStep,
         applicant_details: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
           forward: lambda do |application|
