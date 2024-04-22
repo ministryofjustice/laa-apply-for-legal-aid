@@ -124,8 +124,11 @@ module Flow
         link_application_make_links: {
           path: ->(application) { urls.providers_legal_aid_application_link_application_make_link_path(application) },
           forward: lambda do |application|
-            # TODO: This will change when ap-4826 is complete
-            application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            if application.lead_linked_application.persisted?
+              :link_application_find_link_applications
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           end,
           check_answers: :check_provider_answers,
         },
