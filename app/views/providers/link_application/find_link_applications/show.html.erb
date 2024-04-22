@@ -1,0 +1,20 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_link_application_find_link_application_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        form:,
+        template: :basic,
+      ) do %>
+
+    <%= form.govuk_fieldset legend: { text: t(".heading"), tag: "h1", size: "xl" } do %>
+      <%= form.govuk_text_field :search_laa_reference, label: { text: t(".hint") } %>
+    <% end %>
+
+    <%= next_action_buttons(continue_button_text: t("generic.search"), show_draft: true, form:) %>
+  <% end %>
+<% end %>

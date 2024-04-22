@@ -129,6 +129,10 @@ module Flow
           end,
           check_answers: :check_provider_answers,
         },
+        link_application_find_link_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_link_application_find_link_application_path(application) },
+          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
+        },
         about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },
           forward: :applicant_employed,

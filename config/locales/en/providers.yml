@@ -402,6 +402,10 @@ en:
                          The cost limit will be on the certificate of the application you submit first.
             legal_link: Yes, I want to make a legal link
             legal_hint: When LAA needs multiple certificates, each with a separate cost limitation.
+      find_link_applications:
+        show:
+          heading: What is the LAA reference of the application you want to link to?
+          hint: For example, 'A-BCD-E1F'.
     proceeding_merits_task:
       linked_children:
         show:
