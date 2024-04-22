@@ -66,6 +66,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
             patch_request
             expect(legal_aid_application.reload.link_case).to be true
           end
+
+          it "sets a success flash message" do
+            patch_request
+            expect(flash[:hash][:heading_text]).to match(/You've made a family link/)
+          end
         end
 
         context "when No, carry on without linking is chosen" do
@@ -80,6 +85,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
             patch_request
             expect(legal_aid_application.reload.link_case).to be false
           end
+
+          it "does not set a success flash message" do
+            patch_request
+            expect(flash).to be_empty
+          end
         end
 
         context "when No, I want to link to a different case is chosen" do
@@ -93,6 +103,20 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
           it "sets link_case to false" do
             patch_request
             expect(legal_aid_application.reload.link_case).to be_nil
+          end
+
+          it "does not set a success flash message" do
+            patch_request
+            expect(flash).to be_empty
+          end
+
+          context "when no radio button is chosen" do
+            let(:link_case) { nil }
+
+            it "re-renders the form with the validation errors" do
+              patch_request
+              expect(unescaped_response_body).to include("Select if you want to link to the application")
+            end
           end
         end
 

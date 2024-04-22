@@ -10,10 +10,30 @@ module Providers
       def update
         @form = Providers::LinkApplication::ConfirmLinkForm.new(form_params)
 
-        render :show unless save_continue_or_draft(@form)
+        if draft_selected?
+          @form.save_as_draft
+          legal_aid_application.update!(draft: draft_selected?)
+          return redirect_to draft_target_endpoint
+        end
+
+        if @form.valid?
+          @form.save!
+          flash[:hash] = success_hash if @form.link_case == "true"
+          return go_forward
+        end
+
+        render :show
       end
 
     private
+
+      def success_hash
+        {
+          title_text: t("generic.success"),
+          success: true,
+          heading_text: t("providers.link_application.confirm_links.show.success"),
+        }
+      end
 
       def form_params
         merge_with_model(legal_aid_application) do
