@@ -134,7 +134,7 @@ module Flow
         },
         link_application_find_link_applications: {
           path: ->(application) { urls.providers_legal_aid_application_link_application_find_link_application_path(application) },
-          forward: ->(application) { application.proceedings.any? ? :has_other_proceedings : :proceedings_types },
+          forward: :link_application_confirm_links,
         },
         link_application_confirm_links: Steps::LinkedApplications::ConfirmLinkStep,
         about_financial_means: {
