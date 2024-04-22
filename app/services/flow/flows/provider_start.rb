@@ -8,6 +8,7 @@ module Flow
         applicant_details: Steps::ProviderStart::ApplicantDetailsStep,
         correspondence_address_lookups: Steps::Addresses::CorrespondenceAddressLookupsStep,
         correspondence_address_selections: Steps::Addresses::CorrespondenceAddressSelectionsStep,
+        correspondence_address_manuals: Steps::Addresses::CorrespondenceAddressManualsStep,
         home_address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
           forward: :home_address_selections,
@@ -18,18 +19,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
           forward: lambda do |application|
             if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        correspondence_address_manuals: {
-          forward: lambda do |application|
-            if Setting.home_address?
-              :different_addresses
-            elsif Setting.linked_applications?
               :link_application_make_links
             else
               application.proceedings.any? ? :has_other_proceedings : :proceedings_types
