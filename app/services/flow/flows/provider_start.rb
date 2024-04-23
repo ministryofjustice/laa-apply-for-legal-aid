@@ -14,17 +14,7 @@ module Flow
         home_address_lookups: Steps::Addresses::HomeAddressLookupsStep,
         home_address_selections: Steps::Addresses::HomeAddressSelectionsStep,
         home_address_manuals: Steps::Addresses::HomeAddressManualsStep,
-        non_uk_home_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
-          forward: lambda do |application|
-            if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
+        non_uk_home_addresses: Steps::Addresses::NonUkHomeAddressesStep,
         link_application_make_links: {
           path: ->(application) { urls.providers_legal_aid_application_link_application_make_link_path(application) },
           forward: lambda do |application|
