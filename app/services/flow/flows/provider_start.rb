@@ -11,12 +11,7 @@ module Flow
         correspondence_address_manuals: Steps::Addresses::CorrespondenceAddressManualsStep,
         different_addresses: Steps::Addresses::DifferentAddressesStep,
         different_address_reasons: Steps::Addresses::DifferentAddressReasonsStep,
-        home_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
-          forward: :home_address_selections,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true,
-        },
+        home_address_lookups: Steps::Addresses::HomeAddressLookupsStep,
         home_address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
           forward: lambda do |application|
