@@ -53,8 +53,7 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
         context "when a link type is chosen" do
           it "redirects to next page" do
             patch_request
-            # TODO: This will change when ap-4826 is complete
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
+            expect(response).to redirect_to(providers_legal_aid_application_link_application_find_link_application_path)
           end
 
           it "creates a new lead linked application" do

@@ -527,6 +527,10 @@ en:
               blank: Enter an application reference to search for
               invalid: Enter a valid application reference to search for
               not_found: The application reference entered cannot be found
+            search_laa_reference:
+              blank: Enter the LAA reference of the application you want to link to. 
+              invalid: We could not find an application with the LAA reference of %{value}
+              not_submitted: We found the case but it's NOT Been SUBMITTED - OH NO!
             link_type_code:
               blank: Select if you want to link this application with another one
         other_assets_declaration:
