@@ -10,9 +10,9 @@ module Providers
       def update
         @form = Providers::LinkApplication::FindLinkApplicationForm.new(form_params)
 
-        if @form.valid?
+        if @form.valid? || draft_selected?
           search_result = @form.application_can_be_linked?
-          return save_continue_or_draft(@form) if search_result == true
+          return save_continue_or_draft(@form) if search_result == true || draft_selected?
 
           flash[:hash] = send(search_result)
         end

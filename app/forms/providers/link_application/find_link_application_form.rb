@@ -5,9 +5,14 @@ module Providers
 
       APPLICATION_REF_REGEXP = /\AL-[0-9ABCDEFHJKLMNPRTUVWXY]{3}-[0-9ABCDEFHJKLMNPRTUVWXY]{3}\z/i
 
-      attr_accessor :search_laa_reference
+      attr_accessor :search_laa_reference, :legal_aid_application
 
       validates :search_laa_reference, presence: true, unless: :draft?
+
+      def initialize(*args)
+        super
+        @legal_aid_application = model.associated_application
+      end
 
       def application_can_be_linked?
         return :missing_message unless search_laa_reference.match(APPLICATION_REF_REGEXP)
@@ -24,13 +29,14 @@ module Providers
       end
 
       def exclude_from_model
-        [:search_laa_reference]
+        %i[search_laa_reference legal_aid_application]
       end
 
       def save
-        attributes[:lead_application_id] = @found_application.id
+        attributes[:lead_application_id] = @found_application&.id
         super
       end
+      alias_method :save!, :save
     end
   end
 end

@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:linked_application) { create(:linked_application, associated_application: legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/find_link_case" do
@@ -58,6 +59,12 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
 
           expect(flash).to be_empty
         end
+
+        it "updates the linked_application" do
+          expect(linked_application.lead_application_id).to be_nil
+          patch_request
+          expect(linked_application.reload.lead_application_id).not_to be_nil
+        end
       end
 
       context "when the searched application belongs to the same firm but is not submitted" do
@@ -87,6 +94,26 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
           patch_request
           expect(response).to have_http_status(:ok)
           expect(unescaped_response_body).to include("Enter the LAA reference of the application you want to link to.")
+        end
+      end
+
+      context "when form submitted with Save as draft button" do
+        let(:params) do
+          {
+            linked_application: {
+              search_laa_reference:,
+            },
+            draft_button: "Save and come back later",
+          }
+        end
+
+        it "redirects to the list of applications" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
+        end
+
+        it "sets the application as draft" do
+          expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end
