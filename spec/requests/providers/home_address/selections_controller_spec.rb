@@ -157,11 +157,6 @@ RSpec.describe Providers::HomeAddress::SelectionsController do
         expect(applicant.home_address.lookup_used).to be(true)
       end
 
-      it "redirects successfully to the next step" do
-        patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-      end
-
       context "when an address already exists" do
         before { create(:address, applicant:) }
 
@@ -196,14 +191,6 @@ RSpec.describe Providers::HomeAddress::SelectionsController do
           expect(applicant.home_address.city).to eq("TEST CITY")
           expect(applicant.home_address.postcode).to eq("AA11AA")
           expect(applicant.home_address.country_code).to eq("GBR")
-        end
-
-        context "when the linked application feature flag is enabled" do
-          it "redirects to link applications" do
-            allow(Setting).to receive(:linked_applications?).and_return(true)
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
-          end
         end
       end
 

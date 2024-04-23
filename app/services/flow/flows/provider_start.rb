@@ -12,17 +12,7 @@ module Flow
         different_addresses: Steps::Addresses::DifferentAddressesStep,
         different_address_reasons: Steps::Addresses::DifferentAddressReasonsStep,
         home_address_lookups: Steps::Addresses::HomeAddressLookupsStep,
-        home_address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
-          forward: lambda do |application|
-            if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
+        home_address_selections: Steps::Addresses::HomeAddressSelectionsStep,
         non_uk_home_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
           forward: lambda do |application|
