@@ -406,6 +406,11 @@ en:
         show:
           heading: What is the LAA reference of the application you want to link to?
           hint: For example, 'A-BCD-E1F'.
+          missing: "We could not find an application with the LAA reference of %{application_ref}."
+          not_submitted:
+            heading: "Submit %{application_ref} if you want to link to it."
+            link: "Find this application"
+            text: "Your progress here will be saved, and you can come back to this page later."
     proceeding_merits_task:
       linked_children:
         show:

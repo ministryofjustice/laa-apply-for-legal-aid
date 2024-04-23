@@ -26,7 +26,7 @@ module Providers
         {
           title_text: t("generic.information"),
           success: false,
-          heading_text: "We could not find an application with the LAA reference of #{form_params[:search_laa_reference]}.",
+          heading_text: t("providers.link_application.find_link_applications.show.missing", application_ref: form_params[:search_laa_reference]),
         }
       end
 
@@ -34,10 +34,10 @@ module Providers
         {
           title_text: t("generic.information"),
           success: false,
-          heading_text: "Submit #{form_params[:search_laa_reference]} if you want to link to it.",
-          link_text: "Find this application",
+          heading_text: t("providers.link_application.find_link_applications.show.not_submitted.heading", application_ref: form_params[:search_laa_reference]),
+          link_text: t("providers.link_application.find_link_applications.show.not_submitted.link"),
           link_href: search_providers_legal_aid_applications_path(search_term: form_params[:search_laa_reference]),
-          text: "Your progress here will be saved, and you can come back to this page later.",
+          text: t("providers.link_application.find_link_applications.show.not_submitted.text"),
         }
       end
 
