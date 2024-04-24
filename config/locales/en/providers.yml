@@ -411,6 +411,18 @@ en:
             heading: "Submit %{application_ref} if you want to link to it."
             link: "Find this application"
             text: "Your progress here will be saved, and you can come back to this page later."
+      confirm_links:
+        show:
+          heading: Search result
+          laa_reference: LAA reference
+          client: Client
+          proceedings: Proceedings
+          all_linked_applications: All applications with a %{link_type} link to this one
+          link_case: Is this the application you want to link to?
+          options:
+            no_link_to_different_case: No, I want to link to a different case
+            no_carry_on_without_linking: No, carry on without linking
+          success: You've made a family link
     proceeding_merits_task:
       linked_children:
         show:

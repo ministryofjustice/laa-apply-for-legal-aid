@@ -27,6 +27,12 @@ RSpec.describe LinkedApplication do
     it { expect(link_type_code).to eq "FC_LEAD" }
   end
 
+  describe "#link_type_description" do
+    subject(:link_type_code) { linked_application.link_type_description }
+
+    it { expect(link_type_code).to eq "Family" }
+  end
+
   context "when validating" do
     before { linked_application.validate }
 

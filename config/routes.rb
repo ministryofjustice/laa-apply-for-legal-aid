@@ -179,6 +179,7 @@ Rails.application.routes.draw do
       namespace :link_application do
         resource :make_link, only: %i[show update]
         resource :find_link_application, only: %i[show update], path: "find_link_case"
+        resource :confirm_link, only: %i[show update]
       end
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
