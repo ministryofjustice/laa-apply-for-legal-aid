@@ -55,15 +55,7 @@ module Flow
             end
           end,
         },
-        remove_vehicles: {
-          forward: lambda do |_application, applicant_has_any_vehicles|
-            if applicant_has_any_vehicles
-              :add_other_vehicles
-            else
-              :vehicles
-            end
-          end,
-        },
+        remove_vehicles: Steps::ProviderCapital::RemoveVehiclesStep,
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
           forward: ->(application) { application.applicant.has_partner_with_no_contrary_interest? ? :partner_bank_accounts : :savings_and_investments },
