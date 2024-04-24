@@ -77,6 +77,11 @@ RSpec.describe Providers::HomeAddress::LookupsController do
           expect(applicant.home_address.country_code).to eq("GBR")
         end
 
+        it "redirects to the next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
+        end
+
         context "and a building number" do
           before { params[:address_lookup][:building_number_name] = "Prospect Cottage" }
 

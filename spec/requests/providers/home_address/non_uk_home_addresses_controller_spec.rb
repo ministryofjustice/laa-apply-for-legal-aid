@@ -97,6 +97,11 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.country_code).to eq(country_code)
           expect(home_address.postcode).to be_nil
         end
+
+        it "redirects to the next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
+        end
       end
 
       context "with an invalid address" do

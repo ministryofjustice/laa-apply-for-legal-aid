@@ -68,6 +68,11 @@ RSpec.describe Providers::ApplicantDetailsController do
           }
         end
 
+        it "redirects to the next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
+        end
+
         it "creates a new applicant associated with the application" do
           expect { patch_request }.to change(Applicant, :count).by(1)
 

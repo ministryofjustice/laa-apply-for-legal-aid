@@ -84,6 +84,11 @@ RSpec.describe Providers::CorrespondenceAddress::ManualsController do
           expect(address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
           expect(address.country_code).to eq("GBR")
         end
+
+        it "redirects to the next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
+        end
       end
 
       context "with an invalid address" do

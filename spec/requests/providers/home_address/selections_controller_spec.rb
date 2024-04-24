@@ -157,6 +157,11 @@ RSpec.describe Providers::HomeAddress::SelectionsController do
         expect(applicant.home_address.lookup_used).to be(true)
       end
 
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
+      end
+
       context "when an address already exists" do
         before { create(:address, applicant:) }
 

@@ -59,6 +59,11 @@ RSpec.describe Providers::ApplicantsController do
       )
     end
 
+    it "redirects to the next page" do
+      request
+      expect(response).to have_http_status(:redirect)
+    end
+
     it "back link on the next page is to applicant's details page" do
       get new_providers_applicant_path
       request

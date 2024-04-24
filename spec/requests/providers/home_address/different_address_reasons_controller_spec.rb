@@ -48,6 +48,11 @@ RSpec.describe Providers::HomeAddress::DifferentAddressReasonsController do
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(false)
       end
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
+      end
     end
 
     context "when client is homeless is chosen" do
@@ -55,6 +60,11 @@ RSpec.describe Providers::HomeAddress::DifferentAddressReasonsController do
 
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(true)
+      end
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
       end
     end
 

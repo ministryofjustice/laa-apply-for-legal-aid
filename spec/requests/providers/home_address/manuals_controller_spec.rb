@@ -97,6 +97,11 @@ RSpec.describe Providers::HomeAddress::ManualsController do
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
           end
+
+          it "redirects to the next page" do
+            patch_request
+            expect(response).to have_http_status(:redirect)
+          end
         end
 
         it "creates a home address record" do

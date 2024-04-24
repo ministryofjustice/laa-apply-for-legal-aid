@@ -48,6 +48,11 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.same_correspondence_and_home_address }.from(nil).to(true)
       end
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
+      end
     end
 
     context "when no chosen" do
@@ -55,6 +60,11 @@ RSpec.describe Providers::HomeAddress::DifferentAddressesController do
 
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.same_correspondence_and_home_address }.from(nil).to(false)
+      end
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
       end
     end
 
