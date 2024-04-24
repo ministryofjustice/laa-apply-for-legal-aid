@@ -75,22 +75,6 @@ RSpec.describe Providers::CorrespondenceAddress::ManualsController do
       end
 
       context "with a valid address" do
-        context "when home_address flag is enabled" do
-          before { Setting.update!(home_address: true) }
-
-          it "redirects to different addresses page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_home_address_different_address_path)
-          end
-        end
-
-        context "when home_address feature flags are disabled" do
-          it "redirects successfully to the next step" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-          end
-        end
-
         it "creates an address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
           expect(address.address_line_one).to eq(address_params[:address][:address_line_one])
@@ -99,6 +83,11 @@ RSpec.describe Providers::CorrespondenceAddress::ManualsController do
           expect(address.county).to eq(address_params[:address][:county])
           expect(address.postcode).to eq(address_params[:address][:postcode].delete(" ").upcase)
           expect(address.country_code).to eq("GBR")
+        end
+
+        it "redirects to the next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -147,14 +136,6 @@ RSpec.describe Providers::CorrespondenceAddress::ManualsController do
         it "records that address lookup was used" do
           patch_request
           expect(address.lookup_used).to be(true)
-        end
-      end
-
-      context "when the linked application feature flag is enabled" do
-        it "redirects to the link applications" do
-          allow(Setting).to receive(:linked_applications?).and_return(true)
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
         end
       end
 

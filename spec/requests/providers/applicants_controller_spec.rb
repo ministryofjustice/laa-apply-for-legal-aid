@@ -59,9 +59,9 @@ RSpec.describe Providers::ApplicantsController do
       )
     end
 
-    it "redirects to next page" do
+    it "redirects to the next page" do
       request
-      expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application))
+      expect(response).to have_http_status(:redirect)
     end
 
     it "back link on the next page is to applicant's details page" do

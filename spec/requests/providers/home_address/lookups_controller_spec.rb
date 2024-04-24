@@ -77,9 +77,9 @@ RSpec.describe Providers::HomeAddress::LookupsController do
           expect(applicant.home_address.country_code).to eq("GBR")
         end
 
-        it "redirects to the home address selection page" do
+        it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_home_address_selection_path)
+          expect(response).to have_http_status(:redirect)
         end
 
         context "and a building number" do

@@ -45,34 +45,26 @@ RSpec.describe Providers::HomeAddress::DifferentAddressReasonsController do
     context "when different home address is chosen" do
       let(:params) { { applicant: { no_fixed_residence: "false" } } }
 
-      it "redirects to the home_address_lookups page" do
-        patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_home_address_lookup_path(legal_aid_application))
-      end
-
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(false)
+      end
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when client is homeless is chosen" do
       let(:params) { { applicant: { no_fixed_residence: "true" } } }
 
-      it "redirects to the proceedings_types" do
-        patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-      end
-
-      context "when the linked application feature flag is enabled" do
-        it "redirects to link applications" do
-          allow(Setting).to receive(:linked_applications?).and_return(true)
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
-        end
-      end
-
       it "records the answer" do
         expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(true)
+      end
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
       end
     end
 

@@ -87,19 +87,6 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
       end
 
       context "with a valid address" do
-        it "redirects successfully to the next step" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-        end
-
-        context "when the linked application feature flag is enabled" do
-          it "redirects to link applications" do
-            allow(Setting).to receive(:linked_applications?).and_return(true)
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
-          end
-        end
-
         it "creates a home address record" do
           expect { patch_request }.to change { applicant.addresses.count }.by(1)
           expect(home_address.location).to eq("home")
@@ -109,6 +96,11 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
           expect(home_address.county).to eq(address_params[:non_uk_home_address][:county])
           expect(home_address.country_code).to eq(country_code)
           expect(home_address.postcode).to be_nil
+        end
+
+        it "redirects to the next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
         end
       end
 

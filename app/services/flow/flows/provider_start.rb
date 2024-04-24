@@ -2,125 +2,19 @@ module Flow
   module Flows
     class ProviderStart < FlowSteps
       STEPS = {
-        providers_home: {
-          path: ->(_application) { urls.providers_legal_aid_applications_path },
-        },
-        applicants: {
-          path: ->(_) { urls.new_providers_applicant_path },
-          forward: :correspondence_address_lookups,
-        },
-        applicant_details: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
-          forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :has_national_insurance_numbers
-            else
-              :correspondence_address_lookups
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        correspondence_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_lookup_path(application) },
-          forward: :correspondence_address_selections,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true,
-        },
-        correspondence_address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_correspondence_address_selection_path(application) },
-          forward: lambda do |application|
-            if Setting.home_address?
-              :different_addresses
-            elsif Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        home_address_lookups: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_lookup_path(application) },
-          forward: :home_address_selections,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true,
-        },
-        home_address_selections: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_selection_path(application) },
-          forward: lambda do |application|
-            if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        correspondence_address_manuals: {
-          forward: lambda do |application|
-            if Setting.home_address?
-              :different_addresses
-            elsif Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        different_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_path(application) },
-          forward: lambda do |application|
-            if application.applicant.same_correspondence_and_home_address?
-              if Setting.linked_applications?
-                :link_application_make_links
-              else
-                application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-              end
-            else
-              :different_address_reasons
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: ->(application) { !application.applicant.same_correspondence_and_home_address? },
-        },
-        different_address_reasons: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_different_address_reason_path(application) },
-          forward: lambda do |application|
-            if application.applicant.no_fixed_residence?
-              if Setting.linked_applications?
-                :link_application_make_links
-              else
-                application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-              end
-            else
-              :home_address_lookups
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: ->(application) { !application.applicant.no_fixed_residence? },
-        },
-        non_uk_home_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_home_address_non_uk_home_address_path(application) },
-          forward: lambda do |application|
-            if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
-        home_address_manuals: {
-          forward: lambda do |application|
-            if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
-          end,
-          check_answers: :check_provider_answers,
-        },
+        providers_home: Steps::ProvidersHomeStep,
+        delete: Steps::DeleteStep,
+        applicants: Steps::ProviderStart::ApplicantsStep,
+        applicant_details: Steps::ProviderStart::ApplicantDetailsStep,
+        correspondence_address_lookups: Steps::Addresses::CorrespondenceAddressLookupsStep,
+        correspondence_address_selections: Steps::Addresses::CorrespondenceAddressSelectionsStep,
+        correspondence_address_manuals: Steps::Addresses::CorrespondenceAddressManualsStep,
+        different_addresses: Steps::Addresses::DifferentAddressesStep,
+        different_address_reasons: Steps::Addresses::DifferentAddressReasonsStep,
+        home_address_lookups: Steps::Addresses::HomeAddressLookupsStep,
+        home_address_selections: Steps::Addresses::HomeAddressSelectionsStep,
+        home_address_manuals: Steps::Addresses::HomeAddressManualsStep,
+        non_uk_home_addresses: Steps::Addresses::NonUkHomeAddressesStep,
         link_application_make_links: {
           path: ->(application) { urls.providers_legal_aid_application_link_application_make_link_path(application) },
           forward: lambda do |application|
@@ -278,9 +172,6 @@ module Flow
         },
         use_ccms: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) },
-        },
-        delete: {
-          path: ->(application) { urls.providers_legal_aid_application_delete_path(application) },
         },
         use_ccms_employment: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_employment_index_path(application) },

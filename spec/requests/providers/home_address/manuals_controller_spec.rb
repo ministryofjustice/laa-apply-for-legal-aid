@@ -88,16 +88,19 @@ RSpec.describe Providers::HomeAddress::ManualsController do
       end
 
       context "with a valid address" do
-        it "redirects successfully to the next step" do
-          patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
-        end
-
         context "when the linked application feature flag is enabled" do
+          # TODO: @Adam Goldstone - due 01/07/24
+          # Is left in to keep coverage passing but can be removed when the
+          # link_application_make_links step is added
           it "redirects to link applications" do
             allow(Setting).to receive(:linked_applications?).and_return(true)
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_link_application_make_link_path(legal_aid_application))
+          end
+
+          it "redirects to the next page" do
+            patch_request
+            expect(response).to have_http_status(:redirect)
           end
         end
 
