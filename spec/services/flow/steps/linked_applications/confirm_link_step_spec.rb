@@ -1,20 +1,20 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::LinkedApplications::ConfirmLinkStep do
+RSpec.describe Flow::Steps::LinkedApplications::ConfirmLinkStep, type: :request do
   let(:legal_aid_application) { create(:legal_aid_application, link_case:) }
   let(:link_case) { true }
 
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eql "/providers/applications/#{legal_aid_application.id}/link_application/confirm_link?locale=en" }
+    it { is_expected.to eql providers_legal_aid_application_link_application_confirm_link_path(legal_aid_application) }
   end
 
   describe "#forward" do
     subject { described_class.forward.call(legal_aid_application) }
 
     context "when the provider confirms they wish to link the application" do
-      it { is_expected.to be :proceedings_types }
+      it { is_expected.to be :link_application_copies }
     end
 
     context "when the provider confirms they do not want to link to an application" do

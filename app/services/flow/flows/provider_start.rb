@@ -31,6 +31,7 @@ module Flow
           forward: :link_application_confirm_links,
         },
         link_application_confirm_links: Steps::LinkedApplications::ConfirmLinkStep,
+        link_application_copies: Steps::LinkedApplications::CopyStep,
         about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },
           forward: :applicant_employed,

@@ -4,11 +4,13 @@ module Flow
       ConfirmLinkStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_link_application_confirm_link_path(application) },
         forward: lambda do |application|
-          if application.link_case.nil?
-            :link_application_make_links
-          else
-            # TODO: This will change when ap-4827 is complete
+          case application.link_case
+          when true
+            :link_application_copies
+          when false
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+          else
+            :link_application_make_links
           end
         end,
         check_answers: :check_provider_answers,

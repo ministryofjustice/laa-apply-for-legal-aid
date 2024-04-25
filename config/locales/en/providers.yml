@@ -423,6 +423,17 @@ en:
             no_link_to_different_case: No, I want to link to a different case
             no_carry_on_without_linking: No, carry on without linking
           success: You've made a family link
+      copies:
+        show:
+          heading: Linked application
+          reference: LAA reference
+          client: Client
+          proceedings: Proceedings
+          question: Do you want to copy the proceedings and merits from %{lead_application_reference} to this one?
+          hint: Do not copy if you want to add to, or change, the proceedings.
+          "yes": Yes, the information will be the same
+          "no": No, I need to make changes
+          success: You have copied the proceedings and merits information from %{lead_application_reference} to this one.
     proceeding_merits_task:
       linked_children:
         show:

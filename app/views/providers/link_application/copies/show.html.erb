@@ -1,0 +1,38 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_link_application_copy_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".question", lead_application_reference: @lead_application_reference),
+        form:,
+        template: :basic,
+      ) do %>
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-1"><%= t(".heading") %></h1>
+    <%= govuk_summary_list(actions: false, classes: "govuk-summary-list--no-border") do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key { t(".reference") }
+            row.with_value { @lead_application.application_ref }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".client") }
+            row.with_value { @lead_application.applicant_full_name }
+          end
+          summary_list.with_row do |row|
+            row.with_key { t(".proceedings") }
+            row.with_value { @lead_application.proceedings.map(&:meaning).join(",") }
+          end
+        end %>
+
+    <%= form.govuk_radio_buttons_fieldset(:copy_case,
+                                          legend: { size: "l", tag: "h2", text: page_title },
+                                          hint: { text: t(".hint") }) do %>
+      <%= form.govuk_radio_button :copy_case, true, label: { text: t(".yes") }, link_errors: true %>
+      <%= form.govuk_radio_button :copy_case, false, label: { text: t(".no") }, link_errors: false %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
