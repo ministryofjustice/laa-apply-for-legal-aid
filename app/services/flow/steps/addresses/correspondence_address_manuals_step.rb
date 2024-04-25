@@ -2,6 +2,7 @@ module Flow
   module Steps
     module Addresses
       CorrespondenceAddressManualsStep = Step.new(
+        path: ->(application) { Steps.urls.providers_legal_aid_application_correspondence_address_manual_path(application) },
         forward: lambda do |application|
           if Setting.home_address?
             :different_addresses
