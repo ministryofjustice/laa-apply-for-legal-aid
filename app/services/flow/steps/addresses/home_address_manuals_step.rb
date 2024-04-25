@@ -2,6 +2,7 @@ module Flow
   module Steps
     module Addresses
       HomeAddressManualsStep = Step.new(
+        path: ->(application) { Steps.urls.providers_legal_aid_application_home_address_manual_path(application) },
         forward: lambda do |application|
           if Setting.linked_applications?
             :link_application_make_links
