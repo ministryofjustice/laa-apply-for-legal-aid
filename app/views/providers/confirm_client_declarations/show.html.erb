@@ -22,21 +22,14 @@
       <%= t(".#{i18n_prefix}.text", applicant_name: @legal_aid_application.applicant_full_name) %>
     </p>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <% t(".#{i18n_prefix}.list_html", provider_firm_name:, individual:).each do |bullet| %>
-        <li><%= bullet %></li>
-      <% end %>
-    </ul>
+    <%= govuk_list t(".#{i18n_prefix}.list_html", provider_firm_name:, individual:), type: :bullet %>
 
     <% if @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
       <p class="govuk-body govuk-!-padding-top-4">
         <%= t(".means_tested_with_partner.partner_text", partner_name: @legal_aid_application.partner.full_name) %>
       </p>
-      <ul class="govuk-list govuk-list--bullet">
-        <% t(".means_tested_with_partner.partner_list_html", provider_firm_name:).each do |bullet| %>
-          <li><%= bullet %></li>
-        <% end %>
-      </ul>
+
+      <%= govuk_list t(".means_tested_with_partner.partner_list_html", provider_firm_name:), type: :bullet %>
     <% end %>
 
     <%= govuk_warning_text do %>
