@@ -45,15 +45,7 @@ module Flow
             end
           },
         },
-        remove_involved_child: {
-          forward: lambda { |application|
-            if application.involved_children.count.positive?
-              :has_other_involved_children
-            else
-              :involved_children
-            end
-          },
-        },
+        remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },

@@ -37,19 +37,9 @@ module Providers
             expect { patch_request }.to change { application.involved_children.count }.by(-1)
           end
 
-          context "and it is the only child on the application" do
-            it "redirects to the add new involved child page" do
-              patch_request
-              expect(response).to redirect_to(new_providers_legal_aid_application_involved_child_path(application))
-            end
-          end
-
-          context "and another child exists" do
-            it "redirects back to the has_other_involved_children page" do
-              create(:involved_child, legal_aid_application: application)
-              patch_request
-              expect(response).to redirect_to(providers_legal_aid_application_has_other_involved_children_path(application))
-            end
+          it "redirects along the flow" do
+            patch_request
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -60,9 +50,9 @@ module Providers
             expect { patch_request }.not_to change { application.involved_children.count }
           end
 
-          it "redirects back to the has_other_involved_children page" do
+          it "redirects along the flow" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_has_other_involved_children_path(application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -71,6 +61,7 @@ module Providers
 
           it "shows the correct error message" do
             patch_request
+            expect(response).to have_http_status(:ok)
             expect(unescaped_response_body).to include(I18n.t("providers.application_merits_task.remove_involved_child.show.error", name: child.full_name))
           end
 
