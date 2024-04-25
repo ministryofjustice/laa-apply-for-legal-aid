@@ -85,7 +85,8 @@ module Proceedings
          hearing_date
          hearing_date_1i
          hearing_date_2i
-         hearing_date_3i]
+         hearing_date_3i
+         limitation_note]
     end
   end
 end

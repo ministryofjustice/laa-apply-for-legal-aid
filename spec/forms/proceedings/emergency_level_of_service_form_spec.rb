@@ -48,4 +48,38 @@ RSpec.describe Proceedings::EmergencyLevelOfServiceForm, :vcr, type: :form do
       end
     end
   end
+
+  describe "#save_as_draft" do
+    subject(:save_form_draft) { form.save_as_draft }
+
+    before { save_form_draft }
+
+    context "when the submission is valid" do
+      context "and the user selects Family Help (Higher)" do
+        let(:emergency_level_of_service) { 1 }
+
+        it "updates the emergency_level_of_service value" do
+          expect(proceeding.reload.emergency_level_of_service).to eq 1
+          expect(proceeding.reload.emergency_level_of_service_name).to eq "Family Help (Higher)"
+        end
+      end
+
+      context "and the user selects Full Representation" do
+        let(:emergency_level_of_service) { 3 }
+
+        it "updates the accepted_emergency_defaults value" do
+          expect(proceeding.reload.emergency_level_of_service).to eq 3
+          expect(proceeding.reload.emergency_level_of_service_name).to eq "Full Representation"
+        end
+      end
+    end
+
+    context "when the user doesn't answer the question" do
+      let(:emergency_level_of_service) { "" }
+
+      it "is valid" do
+        expect(form).to be_valid
+      end
+    end
+  end
 end
