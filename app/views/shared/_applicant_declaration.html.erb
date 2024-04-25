@@ -1,5 +1,29 @@
 <% if @legal_aid_application.non_means_tested? %>
-  <%= render "shared/printable_under_18_declaration" %>
+  <% age = "under_18" %>
+  <% applicant_name = nil %>
 <% else %>
-  <%= render "shared/printable_over_18_declaration" %>
+  <% age = "over_18" %>
+  <% applicant_name = @legal_aid_application.applicant_full_name %>
+<% end %>
+
+<h2 class="govuk-heading-l"><%= t(".confirm_following") %></h2>
+
+<p class="govuk-body"><%= t(".#{age}.declaration_list_title", applicant_name:) %></p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <% t(".#{age}.declaration_list", firm: @legal_aid_application.provider.firm_name, privacy_policy_url: privacy_policy_index_url).each do |bullet| %>
+    <li><%= sanitize(bullet) %></li>
+  <% end %>
+</ul>
+
+<%= govuk_warning_text do %>
+  <p class="govuk-body">
+    <strong><%= t(".#{age}.warning_list_summary", applicant_name:) %>:</strong>
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <% t(".warning_list").each_line do |warning| %>
+      <li><strong><%= warning %></strong></li>
+    <% end %>
+  </ul>
 <% end %>

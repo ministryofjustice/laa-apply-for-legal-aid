@@ -36,44 +36,40 @@ en:
               check_box_maintenance_out: Maintenance payments to a former partner
               check_box_legal_aid: Payments towards legal aid in a criminal case
           partners: *revealing_checkbox_labels
-    printable_under_18_declaration:
+    applicant_declaration:
       confirm_following: Confirm the following
-      declaration_list_title: 'By signing this declaration, you agree for %{applicant_name} that:'
-      declaration_list:
-        - their date of birth on the application is correct based on the information you have
-        - they've instructed %{firm} to represent them
-        - they've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
-        - we can share their information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
-          and <abbr title="HM Revenue and Customs">HMRC</abbr>
-        - we can check their details with bank and credit reference agencies
-        - they may have to pay towards legal aid
-        - they may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
-        - if the case continues after their 18th birthday, we may reassess their income and capital to check if they should contribute towards legal costs
-        - the information they've given is complete and correct
-        - they'll report any changes to their financial situation immediately
-      warning_list_summary: If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may
+      under_18:
+        declaration_list_title: 'By signing this declaration, you agree for %{applicant_name} that:'
+        declaration_list:
+          - their date of birth on the application is correct based on the information you have
+          - they've instructed %{firm} to represent them
+          - they've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
+          - we can share their information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
+            and <abbr title="HM Revenue and Customs">HMRC</abbr>
+          - we can check their details with bank and credit reference agencies
+          - they may have to pay towards legal aid
+          - they may have to repay the legal costs if you keep or gain property or money at the end of the case (the 'statutory charge')
+          - if the case continues after their 18th birthday, we may reassess their income and capital to check if they should contribute towards legal costs
+          - the information they've given is complete and correct
+          - they'll report any changes to their financial situation immediately
+        warning_list_summary: If you have given wrong or incomplete information, or do not report changes for %{applicant_name}, they may
+      over_18:
+        declaration_list_title: 'By signing this declaration, I agree that:'
+        declaration_list:
+          - I've instructed %{firm} to represent you
+          - I've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
+          - LAA can share my information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
+            and <abbr title="HM Revenue and Customs">HMRC</abbr>
+          - LAA can check my details with my bank and credit reference agencies
+          - I may have to pay towards my legal aid
+          - I may have to repay the legal costs if I keep or gain property or money at the end of the case (the 'statutory charge')
+          - the information I've given is complete and correct
+          - I'll report any changes to my financial situation immediately
+        warning_list_summary: If I've given wrong or incomplete information, do not report changes, or I'm found to have committed benefit fraud, I may
       warning_list: |
         be prosecuted
         need to pay a financial penalty
         have your legal aid stopped and have to pay back the costs
-    printable_over_18_declaration:
-      confirm_following: Confirm the following
-      declaration_list_title: 'By signing this declaration, I agree that:'
-      declaration_list:
-        - I've instructed %{firm} to represent you
-        - I've read the <a href="%{privacy_policy_url}">LAA privacy policy</a>
-        - LAA can share my information with other government departments like <abbr title="Department for Work and Pensions">DWP</abbr>
-          and <abbr title="HM Revenue and Customs">HMRC</abbr>
-        - LAA can check my details with my bank and credit reference agencies
-        - I may have to pay towards my legal aid
-        - I may have to repay the legal costs if I keep or gain property or money at the end of the case (the 'statutory charge')
-        - the information I've given is complete and correct
-        - I'll report any changes to my financial situation immediately
-      warning_list_summary: If I've given wrong or incomplete information, do not report changes, or I'm found to have committed benefit fraud, I may
-      warning_list: |
-        be prosecuted
-        need to pay a financial penalty
-        have my legal aid stopped and have to pay back the costs
     partner_declaration:
       heading: Partner declaration
       signature: "Partner signature:"
