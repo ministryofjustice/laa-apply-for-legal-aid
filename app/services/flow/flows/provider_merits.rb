@@ -96,11 +96,7 @@ module Flow
             has_other_opponent ? :opponent_types : Flow::MeritsLoop.forward_flow(application, :application)
           },
         },
-        remove_opponent: {
-          forward: lambda { |application|
-            application.opponents.count.positive? ? :has_other_opponents : :opponent_types
-          },
-        },
+        remove_opponent: Steps::ProviderMerits::RemoveOpponentStep,
         opponents_mental_capacities: {
           path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },

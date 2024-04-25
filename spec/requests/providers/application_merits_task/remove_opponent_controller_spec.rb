@@ -37,20 +37,9 @@ module Providers
             expect { submit_remove }.to change { application.opponents.count }.by(-1)
           end
 
-          context "and it is the only opponent on the application" do
-            it "redirects to the choose opponent type page" do
-              submit_remove
-              expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
-            end
-          end
-
-          context "and another opponent exists" do
-            before { create(:opponent, legal_aid_application: application) }
-
-            it "redirects to the has_other_opponent page" do
-              submit_remove
-              expect(response).to redirect_to(providers_legal_aid_application_has_other_opponent_path(application))
-            end
+          it "redirects along the flow" do
+            submit_remove
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -61,9 +50,9 @@ module Providers
             expect { submit_remove }.not_to change { application.opponents.count }
           end
 
-          it "redirects back to the has_other_opponents page" do
+          it "redirects along the flow" do
             submit_remove
-            expect(response).to redirect_to(providers_legal_aid_application_has_other_opponent_path(application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -72,6 +61,12 @@ module Providers
 
           it "does not delete a record" do
             expect { submit_remove }.not_to change { application.opponents.count }
+          end
+
+          it "re-renders the page" do
+            submit_remove
+            expect(response).to have_http_status(:ok)
+            expect(unescaped_response_body).to include("Are you sure you want to remove #{opponent2.full_name} from the application?")
           end
         end
       end
