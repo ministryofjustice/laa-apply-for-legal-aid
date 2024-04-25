@@ -10,6 +10,7 @@ module Providers
       end
 
       def update
+        binding.pry
         @form = Providers::LinkApplication::CopyForm.new(form_params)
 
         if draft_selected?
@@ -39,6 +40,8 @@ module Providers
 
       def form_params
         merge_with_model(legal_aid_application) do
+          next {} unless params[:legal_aid_application]
+
           params.require(:legal_aid_application).permit(:copy_case)
         end
       end
