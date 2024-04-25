@@ -10,7 +10,6 @@ module Providers
       end
 
       def update
-        binding.pry
         @form = Providers::LinkApplication::CopyForm.new(form_params)
 
         if draft_selected?
