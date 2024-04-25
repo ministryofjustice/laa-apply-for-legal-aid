@@ -32,11 +32,7 @@ module Flow
             add_other_state_benefits ? :state_benefits : :check_income_answers
           end,
         },
-        remove_state_benefits: {
-          forward: lambda do |_application, applicant_has_any_state_benefits|
-            applicant_has_any_state_benefits ? :add_other_state_benefits : :receives_state_benefits
-          end,
-        },
+        remove_state_benefits: Steps::ProviderMeans::RemoveStateBenefitsStep,
       }.freeze
     end
   end
