@@ -61,10 +61,7 @@ module Flow
           forward: :has_other_opponents,
           check_answers: :check_merits_answers,
         },
-        opponent_new_organisations: {
-          forward: :has_other_opponents,
-          check_answers: :check_merits_answers,
-        },
+        opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
         start_opponent_task: {
           # This allows the task list to check for opponents and route to has_other_opponents
           # if they exist or show the new page if they do not

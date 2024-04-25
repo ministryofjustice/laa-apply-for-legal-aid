@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
+      - Faraday v2.9.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 06 Sep 2023 21:22:32 GMT
+      - Thu, 25 Apr 2024 10:58:02 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -31,25 +31,23 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
-      - 1; mode=block
+      - '0'
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Permitted-Cross-Domain-Policies:
       - none
       Referrer-Policy:
       - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
       Etag:
       - W/"6f0aecf3c20f8f5e70a8bda15e4b2f63"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ac156f977cce6800b42691ad8055a5e6
+      - 0ef27ebd464c6770d49dc1715834f24b
       X-Runtime:
-      - '0.004349'
-      Vary:
-      - Accept, Origin
+      - '0.053024'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -62,5 +60,5 @@ http_interactions:
         Health Service"},{"ccms_code":"PART","description":"Partnership"},{"ccms_code":"POLICE","description":"Police
         Authority"},{"ccms_code":"PLC","description":"Public Limited Company"},{"ccms_code":"SOLE","description":"Sole
         Trader"}]'
-  recorded_at: Wed, 06 Sep 2023 21:22:32 GMT
+  recorded_at: Thu, 25 Apr 2024 10:58:02 GMT
 recorded_with: VCR 6.2.0
