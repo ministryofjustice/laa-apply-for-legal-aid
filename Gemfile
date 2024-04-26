@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.0"
+ruby file: ".ruby-version"
 
 gem "aasm", "~> 5.5.0"
 gem "active_model_serializers", "~> 0.10.14"

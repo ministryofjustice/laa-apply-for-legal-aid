@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-3.3.0
+FROM ministryofjustice/apply-base:latest-3.3.1
 MAINTAINER apply for legal aid team
 
 # add non-root user and group with alpine first available uid, 1000
@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 ######################
 # Env vars needed for dependency install and asset precompilation
 
-COPY Gemfile Gemfile.lock ./
+COPY .ruby-version Gemfile Gemfile.lock ./
 
 # only install production dependencies,
 # build nokogiri using libxml2-dev, libxslt-dev
