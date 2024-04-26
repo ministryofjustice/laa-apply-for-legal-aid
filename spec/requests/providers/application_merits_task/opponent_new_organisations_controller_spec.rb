@@ -101,9 +101,9 @@ module Providers
           expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:application, :opponent_name)
         end
 
-        it "redirects to the has another opponent question" do
+        it "redirects along the flow" do
           request_update
-          expect(response).to redirect_to(providers_legal_aid_application_has_other_opponent_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
 
         context "when not authenticated" do

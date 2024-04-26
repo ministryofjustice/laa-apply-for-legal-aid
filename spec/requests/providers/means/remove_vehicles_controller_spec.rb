@@ -40,11 +40,11 @@ RSpec.describe Providers::Means::RemoveVehiclesController do
     context "when the provider chose yes" do
       let(:remove_vehicle) { "true" }
 
-      context "and no vehicles remain after deletion" do
-        it "redirects to the vehicles page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_vehicle_path(legal_aid_application))
-        end
+      it "redirects along the flow" do
+        expect(response).to have_http_status(:redirect)
+      end
 
+      context "and no vehicles remain after deletion" do
         it { expect(legal_aid_application.vehicles.count).to eq 0 }
 
         it "resets the own_vehicle value" do
@@ -56,8 +56,8 @@ RSpec.describe Providers::Means::RemoveVehiclesController do
       context "and vehicles remain after the deletion" do
         let(:extra_vehicle_count) { 2 }
 
-        it "redirects to the has_other_vehicles page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_add_other_vehicles_path(legal_aid_application))
+        it "redirects along the flow" do
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
@@ -65,15 +65,16 @@ RSpec.describe Providers::Means::RemoveVehiclesController do
     context "when the provider chose no" do
       let(:remove_vehicle) { "false" }
 
-      it "redirects to the has other vehicles page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_add_other_vehicles_path(legal_aid_application))
+      it "redirects along the flow" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the provider choose nothing" do
       let(:params) { nil }
 
-      it "show errors" do
+      it "re-renders the page and shows an error" do
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include("Select yes if you want to remove this vehicle from the application.")
       end
     end

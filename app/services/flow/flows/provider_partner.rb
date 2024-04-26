@@ -101,11 +101,7 @@ module Flow
             add_other_state_benefits ? :partner_state_benefits : :check_income_answers
           end,
         },
-        partner_remove_state_benefits: {
-          forward: lambda do |_application, partner_has_any_state_benefits|
-            partner_has_any_state_benefits ? :partner_add_other_state_benefits : :partner_receives_state_benefits
-          end,
-        },
+        partner_remove_state_benefits: Steps::Partner::RemoveStateBenefitsStep,
         partner_regular_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_regular_incomes_path(application) },
           forward: lambda do |application|

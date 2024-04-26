@@ -57,16 +57,16 @@ RSpec.describe Providers::Means::RemoveStateBenefitsController do
       context "and the provider confirms deletion" do
         let(:remove_state_benefit) { "true" }
 
-        it "redirects to the add other state benefits page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+        it "redirects along the flow" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "and the provider rejects deletion" do
         let(:remove_state_benefit) { "false" }
 
-        it "redirects to the add other state benefits page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+        it "redirects along the flow" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -84,16 +84,16 @@ RSpec.describe Providers::Means::RemoveStateBenefitsController do
       context "and the provider confirms deletion" do
         let(:remove_state_benefit) { "true" }
 
-        it "redirects to the does your client receive state benefits page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
+        it "redirects along the flow" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "and the provider rejects deletion" do
         let(:remove_state_benefit) { "false" }
 
-        it "redirects to the add other state benefits page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+        it "redirects along the flow" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 

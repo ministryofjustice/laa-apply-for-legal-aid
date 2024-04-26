@@ -45,15 +45,7 @@ module Flow
             end
           },
         },
-        remove_involved_child: {
-          forward: lambda { |application|
-            if application.involved_children.count.positive?
-              :has_other_involved_children
-            else
-              :involved_children
-            end
-          },
-        },
+        remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
@@ -69,10 +61,7 @@ module Flow
           forward: :has_other_opponents,
           check_answers: :check_merits_answers,
         },
-        opponent_new_organisations: {
-          forward: :has_other_opponents,
-          check_answers: :check_merits_answers,
-        },
+        opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
         start_opponent_task: {
           # This allows the task list to check for opponents and route to has_other_opponents
           # if they exist or show the new page if they do not
@@ -96,11 +85,7 @@ module Flow
             has_other_opponent ? :opponent_types : Flow::MeritsLoop.forward_flow(application, :application)
           },
         },
-        remove_opponent: {
-          forward: lambda { |application|
-            application.opponents.count.positive? ? :has_other_opponents : :opponent_types
-          },
-        },
+        remove_opponent: Steps::ProviderMerits::RemoveOpponentStep,
         opponents_mental_capacities: {
           path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
