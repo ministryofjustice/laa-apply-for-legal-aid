@@ -2,15 +2,7 @@ module Flow
   module Flows
     class ProviderProceedingLoop < FlowSteps
       STEPS = {
-        client_involvement_type: {
-          path: lambda do |application|
-            proceeding = Flow::ProceedingLoop.next_proceeding(application)
-            urls.providers_legal_aid_application_client_involvement_type_path(application, proceeding)
-          end,
-          forward: :delegated_functions,
-          carry_on_sub_flow: true,
-          check_answers: :check_provider_answers,
-        },
+        client_involvement_type: Steps::ProviderProceedingLoop::ClientInvolvementTypeStep,
         delegated_functions: {
           path: lambda do |application|
             proceeding = application.provider_step_params["id"]

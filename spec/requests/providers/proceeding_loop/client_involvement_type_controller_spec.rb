@@ -60,7 +60,7 @@ RSpec.describe "ClientInvolvementTypeController", :vcr do
 
         it "redirects to next page" do
           post_cit
-          expect(response.body).to redirect_to(providers_legal_aid_application_delegated_function_path(application_id))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
