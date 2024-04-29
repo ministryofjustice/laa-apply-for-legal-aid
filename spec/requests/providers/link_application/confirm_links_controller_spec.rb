@@ -80,7 +80,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
             it "sets the correct flash message" do
               patch_request
-              expect(flash[:hash][:heading_text]).to eql("You have linked this application to #{lead_application.application_ref}")
+              expect(flash[:hash][:heading_text]).to eql("You've linked this application to #{lead_application.application_ref}")
             end
           end
         end
