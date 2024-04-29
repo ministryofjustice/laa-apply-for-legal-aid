@@ -422,7 +422,8 @@ en:
           options:
             no_link_to_different_case: No, I want to link to a different case
             no_carry_on_without_linking: No, carry on without linking
-          success: You've made a family link
+          success_family: You've made a family link
+          success_legal: You have linked this application to %{application_ref}
       copies:
         show:
           heading: Linked application

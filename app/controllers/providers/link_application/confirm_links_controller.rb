@@ -31,8 +31,12 @@ module Providers
         {
           title_text: t("generic.success"),
           success: true,
-          heading_text: t("providers.link_application.confirm_links.show.success"),
+          heading_text:,
         }
+      end
+
+      def heading_text
+        @heading_text ||= legal_aid_application.lead_linked_application&.link_type_code == "FC_LEAD" ? t("providers.link_application.confirm_links.show.success_family") : t("providers.link_application.confirm_links.show.success_legal", application_ref: legal_aid_application.lead_application&.application_ref)
       end
 
       def form_params
