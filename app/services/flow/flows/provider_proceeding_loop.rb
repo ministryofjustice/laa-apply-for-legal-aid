@@ -4,18 +4,7 @@ module Flow
       STEPS = {
         client_involvement_type: Steps::ProviderProceedingLoop::ClientInvolvementTypeStep,
         delegated_functions: Steps::ProviderProceedingLoop::DelegatedFunctionsStep,
-        confirm_delegated_functions_date: {
-          path: lambda do |application|
-            # get the proceeding that has just been submitted, not the next `incomplete` one
-            proceeding = Proceeding.find(application.provider_step_params["id"])
-            urls.providers_legal_aid_application_confirm_delegated_functions_date_path(application, proceeding)
-          end,
-          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
-          carry_on_sub_flow: true,
-          check_answers: lambda do |application|
-            Flow::ProceedingLoop.next_step(application) == :delegated_functions ? :delegated_functions : :check_provider_answers
-          end,
-        },
+        confirm_delegated_functions_date: Steps::ProviderProceedingLoop::ConfirmDelegatedFunctionsDateStep,
         emergency_defaults: {
           path: lambda do |application|
             proceeding = Proceeding.find(application.provider_step_params["id"])
