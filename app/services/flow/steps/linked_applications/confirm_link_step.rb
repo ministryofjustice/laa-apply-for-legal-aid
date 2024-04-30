@@ -6,7 +6,11 @@ module Flow
         forward: lambda do |application|
           case application.link_case
           when true
-            :link_application_copies
+            if application.lead_linked_application&.link_type_code == "FC_LEAD"
+              :link_application_copies
+            else
+              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
+            end
           when false
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           else

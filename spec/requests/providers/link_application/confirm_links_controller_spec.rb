@@ -4,8 +4,9 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:lead_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
+  let(:link_type_code) { "FC_LEAD" }
 
-  before { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD") }
+  before { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code:) }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/confirm_link" do
     subject(:get_request) do
@@ -67,9 +68,20 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
             expect(legal_aid_application.reload.link_case).to be true
           end
 
-          it "sets a success flash message" do
-            patch_request
-            expect(flash[:hash][:heading_text]).to match(/You've made a family link/)
+          context "when link type is family" do
+            it "sets the correct flash message" do
+              patch_request
+              expect(flash[:hash][:heading_text]).to match(/You've made a family link/)
+            end
+          end
+
+          context "when link type is legal" do
+            let(:link_type_code) { "LEGAL" }
+
+            it "sets the correct flash message" do
+              patch_request
+              expect(flash[:hash][:heading_text]).to eql("You've linked this application to #{lead_application.application_ref}")
+            end
           end
         end
 
