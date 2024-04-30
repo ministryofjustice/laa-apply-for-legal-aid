@@ -8,21 +8,7 @@ module Flow
         emergency_defaults: Steps::ProviderProceedingLoop::EmergencyDefaultsStep,
         substantive_defaults: Steps::ProviderProceedingLoop::SubstantiveDefaultsStep,
         emergency_level_of_service: Steps::ProviderProceedingLoop::EmergencyLevelOfServiceStep,
-        substantive_level_of_service: {
-          path: lambda do |application|
-            proceeding = Proceeding.find(application.provider_step_params["id"])
-            urls.providers_legal_aid_application_substantive_level_of_service_path(application, proceeding)
-          end,
-          forward: lambda do |_application, options|
-            if options[:changed_to_full_rep]
-              :final_hearings
-            else
-              :substantive_scope_limitations
-            end
-          end,
-          carry_on_sub_flow: true,
-          check_answers: :check_provider_answers,
-        },
+        substantive_level_of_service: teps::ProviderProceedingLoop::SubstantiveLevelOfServiceStep,
         final_hearings: {
           path: lambda do |application, options|
             proceeding = Proceeding.find(application.provider_step_params["id"])
