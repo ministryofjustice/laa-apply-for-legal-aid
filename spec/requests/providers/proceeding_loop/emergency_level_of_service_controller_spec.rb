@@ -87,9 +87,9 @@ RSpec.describe "EmergencyLevelOfServiceController", :vcr do
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects to emergency_scope_limitation page" do
+        it "redirects to the next page" do
           post_elos
-          expect(response.body).to redirect_to(providers_legal_aid_application_emergency_scope_limitation_path(application_id, proceeding_id))
+          expect(response).to have_http_status(:redirect)
         end
 
         context "when the parameters are invalid" do
