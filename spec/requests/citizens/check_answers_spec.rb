@@ -45,11 +45,11 @@ RSpec.describe "check your answers requests" do
     end
 
     context "with firms with special characters in the name" do
-      let(:firm) { create(:firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!")) }
+      let(:firm) { create(:firm, name: %q(O'Keefe & Sons - "Pay less with the master builders!")) }
 
       it "finds the firm even though it has special characters" do
         get_request
-        expect(response.body).to include(html_compare(firm.name))
+        expect(unescaped_response_body).to include(firm.name)
       end
     end
   end

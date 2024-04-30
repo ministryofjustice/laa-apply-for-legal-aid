@@ -7,34 +7,31 @@
 
   <%= page_template page_title: t(".h1-heading"), form: do %>
 
-    <% params = { provider_firm_name: @legal_aid_application.provider.firm.name } %>
+    <% provider_firm_name = @legal_aid_application.provider.firm.name %>
     <% if @legal_aid_application.non_means_tested? %>
       <% i18n_prefix = "non_means_tested" %>
     <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
-      <% i18n_prefix = "means_tested_with_partner" %>
+      <% i18n_prefix = "means_tested" %>
+      <% individual = "they and their partner have" %>
     <% else %>
       <% i18n_prefix = "means_tested" %>
+      <% individual = "they've" %>
     <% end %>
 
     <p class="govuk-body">
       <%= t(".#{i18n_prefix}.text", applicant_name: @legal_aid_application.applicant_full_name) %>
     </p>
 
-    <%= bullet_list_from_translation_array(
-          "providers.confirm_client_declarations.show.#{i18n_prefix}.list",
-          params:,
-        ) %>
+    <%= govuk_list t(".#{i18n_prefix}.list_html", provider_firm_name:, individual:), type: :bullet %>
 
     <% if @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
       <p class="govuk-body govuk-!-padding-top-4">
         <%= t(".means_tested_with_partner.partner_text", partner_name: @legal_aid_application.partner.full_name) %>
       </p>
 
-      <%= bullet_list_from_translation_array(
-            "providers.confirm_client_declarations.show.means_tested_with_partner.partner_list",
-            params:,
-          ) %>
+      <%= govuk_list t(".means_tested_with_partner.partner_list_html", provider_firm_name:), type: :bullet %>
     <% end %>
+
     <%= govuk_warning_text do %>
       <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
       <ul class="govuk-list--bullet">

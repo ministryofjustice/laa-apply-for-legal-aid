@@ -54,11 +54,6 @@ module ApplicationHelper
     header.with_navigation_item(text: t("layouts.logout.admin"), href: destroy_admin_user_session_path, active: false, options: { method: :delete })
   end
 
-  def bullet_list_from_translation_array(locale_path, params: {})
-    keys = [I18n.locale, locale_path.split(".").map(&:to_sym)].flatten
-    render "shared/forms/list_with_items", locale_path:, items: I18n.backend.send(:translations).dig(*keys), params:
-  end
-
   def yes_no(boolean)
     boolean ? t("generic.yes") : t("generic.no")
   end
