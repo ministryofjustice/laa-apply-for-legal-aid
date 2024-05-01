@@ -11,15 +11,7 @@ module Flow
         substantive_level_of_service: Steps::ProviderProceedingLoop::SubstantiveLevelOfServiceStep,
         final_hearings: Steps::ProviderProceedingLoop::FinalHearingsStep,
         emergency_scope_limitations: Steps::ProviderProceedingLoop::EmergencyScopeLimitationsStep,
-        substantive_scope_limitations: {
-          path: lambda do |application|
-            proceeding = Proceeding.find(application.provider_step_params["id"])
-            urls.providers_legal_aid_application_substantive_scope_limitation_path(application, proceeding)
-          end,
-          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
-          carry_on_sub_flow: true,
-          check_answers: :check_provider_answers,
-        },
+        substantive_scope_limitations: Steps::ProviderProceedingLoop::SubstantiveScopeLimitationsStep,
       }.freeze
     end
   end

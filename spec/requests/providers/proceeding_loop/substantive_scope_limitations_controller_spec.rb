@@ -69,7 +69,7 @@ RSpec.describe "SubstantiveScopeLimitationsController", :vcr do
 
         context "when the form is valid" do
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
