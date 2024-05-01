@@ -566,6 +566,14 @@ class LegalAidApplication < ApplicationRecord
     client_not_given_consent_to_open_banking?
   end
 
+  def link_description
+    [
+      applicant&.full_name,
+      application_ref,
+      proceedings&.map(&:meaning)&.join(", "),
+    ].compact_blank.join(", ")
+  end
+
 private
 
   def expired_by_2023_surname_at_birth_issue?

@@ -1,15 +1,16 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
 <div class="govuk-grid-row" id="app-check-your-answers__proceeding_<%= proceeding.meaning.parameterize(separator: "_") %>">
   <div class="govuk-grid-column-three-quarters">
     <h2 class="govuk-heading-m"><%= proceeding.meaning %> <%= t(".description") %></h2>
   </div>
   <div class="govuk-grid-column-one-quarter">
-    <%= govuk_link_to(
-          t("generic.change"),
-          providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
-          visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}",
-          class: "govuk-link-right",
-        ) %>
+    <% unless @read_only || @show_linked_proceedings %>
+      <%= govuk_link_to(
+            t("generic.change"),
+            providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
+            visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}",
+            class: "govuk-link-right",
+          ) %>
+    <% end %>
   </div>
 </div>
 
