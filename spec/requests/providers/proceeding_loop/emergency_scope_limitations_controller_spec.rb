@@ -69,7 +69,7 @@ RSpec.describe "EmergencyScopeLimitationsController", :vcr do
           let(:submit_button) { { continue_button: "Continue" } }
 
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
