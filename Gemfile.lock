@@ -148,7 +148,7 @@ GEM
       debug_inspector (>= 1.2.0)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
-    browser (5.3.1)
+    browser (6.0.0)
     builder (3.2.4)
     business (2.3.0)
     byebug (11.1.3)
