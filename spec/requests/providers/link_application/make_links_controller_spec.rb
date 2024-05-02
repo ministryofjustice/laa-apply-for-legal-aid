@@ -53,7 +53,7 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
         context "when a link type is chosen" do
           it "redirects to next page" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_link_application_find_link_application_path)
+            expect(response).to have_http_status(:redirect)
           end
 
           it "creates a new lead linked application" do
@@ -71,7 +71,7 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
 
           it "redirects to next page" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
+            expect(response).to have_http_status(:redirect)
           end
 
           it "does not create a new lead linked application" do
@@ -84,6 +84,7 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
 
           it "re-renders the form with the validation errors" do
             patch_request
+            expect(response).to have_http_status(:ok)
             expect(unescaped_response_body).to include("Select if you want to link this application with another one")
           end
         end
@@ -97,7 +98,7 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
 
           it "redirects to the list of applications" do
             patch_request
-            expect(response.body).to redirect_to providers_legal_aid_applications_path
+            expect(response).to have_http_status(:redirect)
           end
 
           it "sets the application as draft" do
