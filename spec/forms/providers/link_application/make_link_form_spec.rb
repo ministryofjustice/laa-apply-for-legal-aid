@@ -34,10 +34,14 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
     end
 
     context "with link type no chosen" do
-      let(:link_type_code) { false }
+      let(:link_type_code) { "false" }
 
       it "does not create a linked application" do
         expect(legal_aid_application.lead_linked_application).to be_nil
+      end
+
+      it "ensures the link_case boolean is false" do
+        expect(legal_aid_application.reload.link_case).to be false
       end
     end
 

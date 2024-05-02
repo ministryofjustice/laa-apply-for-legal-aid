@@ -9,6 +9,7 @@ module Providers
 
       def save
         if link_type_code == "false"
+          model.associated_application.update!(link_case: false)
           model.destroy!
           return
         end
