@@ -90,6 +90,7 @@ module CCMS
         xml.__send__(:"casebio:CaseReferenceNumber", @submission.case_ccms_reference)
         xml.__send__(:"casebio:CaseDetails") do
           xml.__send__(:"casebio:ApplicationDetails") { generate_application_details(xml) }
+          xml.__send__(:"casebio:LinkedCases") { generate_linked_cases(xml) }
           xml.__send__(:"casebio:RecordHistory") { generate_record_history(xml) }
           xml.__send__(:"casebio:CaseDocs") { generate_case_docs(xml) }
         end
@@ -108,6 +109,15 @@ module CCMS
         xml.__send__(:"casebio:DevolvedPowersDate", @legal_aid_application.used_delegated_functions_on.to_fs(:ccms_date)) if @legal_aid_application.used_delegated_functions?
         xml.__send__(:"casebio:ApplicationAmendmentType", @legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB")
         xml.__send__(:"casebio:LARDetails") { generate_lar_details(xml) }
+      end
+
+      def generate_linked_cases(xml)
+        LinkedApplication.where(associated_application_id: @legal_aid_application.id).find_each do |linked_application|
+          xml.__send__(:"casebio:LinkedCase") do
+            xml.__send__(:"casebio:CaseReferenceNumber", linked_application.lead_application.case_ccms_reference)
+            xml.__send__(:"casebio:LinkType", linked_application.link_type_code)
+          end
+        end
       end
 
       def generate_case_docs(xml)
