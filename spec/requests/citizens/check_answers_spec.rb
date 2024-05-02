@@ -41,7 +41,7 @@ RSpec.describe "check your answers requests" do
 
     it "displays the name of the firm" do
       get_request
-      expect(response.body).to include(html_compare(firm.name))
+      expect(unescaped_response_body).to include(firm.name)
     end
 
     context "with firms with special characters in the name" do
