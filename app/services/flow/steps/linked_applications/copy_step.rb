@@ -11,6 +11,7 @@ module Flow
           end
         end,
         check_answers: :check_provider_answers,
+        carry_on_sub_flow: ->(application) { !application.copy_case? || false },
       )
     end
   end
