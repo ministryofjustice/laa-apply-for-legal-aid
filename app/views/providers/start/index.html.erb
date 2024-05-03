@@ -17,8 +17,13 @@
         <% if !Setting.partner_means_assessment? %>
           <li><%= t(".dont_use_service.partner_list_item") %></li>
         <% end %>
-        <% t(".dont_use_service.list").each do |item| %>
-          <li><%= item %></li>
+        <% if Setting.linked_applications? %>
+          <% t(".dont_use_service.linked_applications_list").each do |item| %>
+            <li><%= item %></li>
+          <% end %>
+        <% else t(".dont_use_service.list").each do |item| %>
+            <li><%= item %></li>
+        <% end %>
         <% end %>
       </ul>
     </div>

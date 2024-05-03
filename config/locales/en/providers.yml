@@ -1543,6 +1543,12 @@ en:
             - the client is self-employed or is a member of the armed forces
             - you want to make an emergency application and delegated functions have not been used
             - you want to amend a submitted application
+          linked_applications_list:
+            - the client is under 16 years old
+            - the client is self-employed or is a member of the armed forces
+            - you want to make an emergency application and delegated functions have not been used
+            - you want to make both a family link and legal link to your application
+            - you want to amend a submitted application
         use_ccms_para_html: |
           If any of these apply, or you want to apply for different proceedings, use
           <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and
