@@ -26,6 +26,10 @@ RSpec.describe CopyCase::ClonerService do
   describe "#call" do
     subject(:call) { instance.call }
 
+    it "does not change source proceedings" do
+      expect { call }.not_to change { source.reload.proceedings.count }
+    end
+
     it "copies proceedings" do
       expect { call }
         .to change { target.reload.proceedings.count }
@@ -129,6 +133,10 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.proceedings.any?(&:vary_order) }.from(false).to(true)
       end
 
+      it "does not change source merits" do
+        expect { call }.not_to change { source.reload.proceedings.count }
+      end
+
       context "and there are nested linked children merits" do
         let(:source) do
           create(
@@ -137,17 +145,23 @@ RSpec.describe CopyCase::ClonerService do
             :with_involved_children,
           )
         end
-        let(:proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
+        let(:first_proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
+        let(:second_proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
+        let(:third_proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
+        let(:first_child) { source.involved_children.first }
         let(:second_child) { source.involved_children.second }
         let(:third_child) { source.involved_children.third }
 
         it "successfully copies nested linked children merits" do
-          create(:proceeding_linked_child, proceeding:, involved_child: second_child)
-          create(:proceeding_linked_child, proceeding:, involved_child: third_child)
+          create(:proceeding_linked_child, proceeding: first_proceeding, involved_child: first_child)
+          create(:proceeding_linked_child, proceeding: second_proceeding, involved_child: second_child)
+          create(:proceeding_linked_child, proceeding: third_proceeding, involved_child: third_child)
 
           expect { call }
-            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(nil).to(2)
-            .and change { target.reload.proceedings.first&.involved_children&.size }.from(nil).to(2)
+            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(nil).to(1)
+            .and change { target.reload.proceedings.second&.proceeding_linked_children&.size }.from(nil).to(1)
+            .and change { target.reload.proceedings.third&.proceeding_linked_children&.size }.from(nil).to(1)
+            .and change { target.reload.involved_children&.size }.from(0).to(3)
         end
       end
     end
