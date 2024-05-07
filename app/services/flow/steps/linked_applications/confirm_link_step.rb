@@ -18,6 +18,7 @@ module Flow
           end
         end,
         check_answers: :check_provider_answers,
+        carry_on_sub_flow: ->(application) { application.lead_linked_application&.link_type_code == "FC_LEAD" },
       )
     end
   end
