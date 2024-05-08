@@ -74,6 +74,12 @@ RSpec.describe CopyCase::ClonerService do
 
         expect(target_scope_limitations).to match_array(source_scope_limitations)
       end
+
+      it "does not change source scope limitations" do
+        expect { call }
+          .not_to change { source.reload.proceedings.first&.scope_limitations&.count }
+          .from(2)
+      end
     end
 
     context "when target already has proceedings" do

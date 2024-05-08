@@ -69,7 +69,11 @@ module CopyCase
         dup_proceeding.specific_issue = source_proceeding.specific_issue.deep_dup
         dup_proceeding.vary_order = source_proceeding.vary_order.deep_dup
 
-        dup_proceeding.scope_limitations << source_proceeding.scope_limitations.deep_dup
+        source_proceeding.scope_limitations.each do |limitation|
+          dup_limitation = limitation.deep_dup
+          dup_limitation.proceeding_id = nil
+          dup_proceeding.scope_limitations << dup_limitation
+        end
 
         source_proceeding.involved_children.each do |child|
           dup_child = child.deep_dup
