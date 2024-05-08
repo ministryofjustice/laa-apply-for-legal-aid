@@ -15,7 +15,7 @@ RSpec.describe LinkedApplicationsHelper do
     let(:applicant_three) { create(:applicant, last_name: "applicant-three", first_name: "linked") }
     let(:applicant_four) { create(:applicant, last_name: "applicant-four", first_name: "linked") }
 
-    context "with a lead application" do
+    context "with a lead application linked to other applications" do
       before do
         LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
         LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: linked_application_one.id, link_type_code: "FC_LEAD")
@@ -26,6 +26,16 @@ RSpec.describe LinkedApplicationsHelper do
 
       it "returns details of all other applications linked to the lead application with the same link type that have not been discarded" do
         expect(details).to eq "L-INK-001, linked applicant-one<br>L-INK-003, linked applicant-three"
+      end
+    end
+
+    context "with a lead application that is not linked to any other applications" do
+      before do
+        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
+      end
+
+      it "returns an empty string" do
+        expect(details).to eq ""
       end
     end
 
