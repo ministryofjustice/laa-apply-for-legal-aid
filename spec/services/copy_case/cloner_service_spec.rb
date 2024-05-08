@@ -4,7 +4,14 @@ RSpec.describe CopyCase::ClonerService do
   subject(:instance) { described_class.new(target, source) }
 
   let(:target) { create(:legal_aid_application, :with_applicant) }
-  let(:source) { create(:legal_aid_application, :with_proceedings, :with_everything, :with_involved_children, :with_attempts_to_settle) }
+  let(:source) do
+    create(:legal_aid_application,
+           :with_proceedings,
+           :with_everything,
+           :with_involved_children,
+           :with_attempts_to_settle,
+           in_scope_of_laspo: true)
+  end
 
   describe ".call" do
     subject(:call) { described_class.call(target, source) }
@@ -92,14 +99,17 @@ RSpec.describe CopyCase::ClonerService do
 
     it "copies application merits" do
       create(:allegation, :with_data, legal_aid_application: source)
+      create(:matter_opposition, legal_aid_application: source)
       create(:undertaking, :with_data, legal_aid_application: source)
       create(:urgency, legal_aid_application: source)
 
       expect { call }
         .to change { target.reload.allegation }.from(nil)
         .and change { target.reload.domestic_abuse_summary }.from(nil)
+        .and change { target.reload.in_scope_of_laspo }.from(nil).to(true)
         .and change { target.reload.involved_children.size }.from(0).to(3)
         .and change { target.reload.latest_incident }.from(nil)
+        .and change { target.reload.matter_opposition.present? }.from(false).to(true)
         .and change { target.reload.opponents.size }.from(0).to(1)
         .and change { target.reload.parties_mental_capacity }.from(nil)
         .and change { target.reload.statement_of_case }.from(nil)

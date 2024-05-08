@@ -98,8 +98,10 @@ module CopyCase
         allegation
         domestic_abuse_summary
         latest_incident
+        in_scope_of_laspo
         involved_children
         opponents
+        matter_opposition
         parties_mental_capacity
         statement_of_case
         undertaking
