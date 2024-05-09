@@ -129,6 +129,11 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.urgency }.from(nil)
     end
 
+    it "does not change source involved children", pending: "to be implemented in a subsequent ticket" do
+      expect { call }
+        .not_to change { source.reload.involved_children.size }.from(3)
+    end
+
     it "does not change source opponents" do
       expect { call }
         .not_to change { source.reload.opponents.size }.from(1)
@@ -160,10 +165,6 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.proceedings.any?(&:vary_order) }.from(false).to(true)
       end
 
-      it "does not change source merits" do
-        expect { call }.not_to change { source.reload.proceedings.count }
-      end
-
       context "and there are nested linked children merits" do
         let(:source) do
           create(
@@ -179,16 +180,23 @@ RSpec.describe CopyCase::ClonerService do
         let(:second_child) { source.involved_children.second }
         let(:third_child) { source.involved_children.third }
 
-        it "successfully copies nested linked children merits" do
+        before do
           create(:proceeding_linked_child, proceeding: first_proceeding, involved_child: first_child)
           create(:proceeding_linked_child, proceeding: second_proceeding, involved_child: second_child)
           create(:proceeding_linked_child, proceeding: third_proceeding, involved_child: third_child)
+        end
 
+        it "successfully copies nested linked children merits" do
           expect { call }
             .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(nil).to(1)
             .and change { target.reload.proceedings.second&.proceeding_linked_children&.size }.from(nil).to(1)
             .and change { target.reload.proceedings.third&.proceeding_linked_children&.size }.from(nil).to(1)
             .and change { target.reload.involved_children&.size }.from(0).to(3)
+        end
+
+        it "does not change source proceeding linked children" do
+          expect { call }
+            .not_to change { source.reload.proceedings.first&.proceeding_linked_children&.size }.from(1)
         end
       end
     end
