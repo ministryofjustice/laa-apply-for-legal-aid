@@ -10,7 +10,10 @@ RSpec.describe CopyCase::ClonerService do
            :with_everything,
            :with_involved_children,
            :with_attempts_to_settle,
-           in_scope_of_laspo: true)
+           in_scope_of_laspo: true,
+           emergency_cost_override: true,
+           emergency_cost_requested: 10_000,
+           emergency_cost_reasons: "reason")
   end
 
   describe ".call" do
@@ -112,6 +115,9 @@ RSpec.describe CopyCase::ClonerService do
       expect { call }
         .to change { target.reload.allegation }.from(nil)
         .and change { target.reload.domestic_abuse_summary }.from(nil)
+        .and change { target.reload.emergency_cost_override.present? }.from(false).to(true)
+        .and change { target.reload.emergency_cost_reasons.present? }.from(false).to(true)
+        .and change { target.reload.emergency_cost_requested.present? }.from(false).to(true)
         .and change { target.reload.in_scope_of_laspo }.from(nil).to(true)
         .and change { target.reload.involved_children.size }.from(0).to(3)
         .and change { target.reload.latest_incident }.from(nil)
