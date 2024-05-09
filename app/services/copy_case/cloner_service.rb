@@ -20,76 +20,30 @@ module CopyCase
   private
 
     def clone_proceedings
-      # ------------------------------------------------------------------------------------------------
-      # attempt 1 - using deep cloneable, not maintained, unhelpful error
-      # failed rspec ./spec/services/copy_case/cloner_service_spec.rb:152
-      # Error: Failed to replace proceedings because one or more of the new records could not be saved.
-      # new_proceedings = source.proceedings.each_with_object([]) do |proceeding, memo|
-      #   memo << proceeding.deep_clone(
-      #     except: %i[legal_aid_application_id proceeding_case_id],
-      #     include: %i[
-      #       scope_limitations
-      #       attempts_to_settle
-      #       chances_of_success
-      #       opponents_application
-      #       proceeding_linked_children
-      #       prohibited_steps
-      #       specific_issue
-      #       vary_order
-      #     ],
-      #   )
-      # end
-      # target.proceedings = new_proceedings
-      # target.save!
-
-      # ------------------------------------------------------------------------------------------------
-      # attempt 2 - deep dup
-      # copies rather than duplicates
-      # target.proceedings = source.proceedings.deep_dup
-      # target.save!
-
-      # ------------------------------------------------------------------------------------------------
-      # attempt 3 - marshall
-      # new_proceedings = Marshal.load(Marshal.dump(source.proceedings))
-      # target.proceedings = new_proceedings
-      # target.save!
-
-      # ------------------------------------------------------------------------------------------------
-      # attempt 4 - very manual
-
       new_proceedings = []
       source.proceedings.each do |source_proceeding|
-        dup_proceeding = source_proceeding.deep_dup
+        dup_proceeding = source_proceeding.dup
         dup_proceeding.legal_aid_application_id = nil
         dup_proceeding.proceeding_case_id = nil
 
-        dup_proceeding.attempts_to_settle = source_proceeding.attempts_to_settle.deep_dup
-        dup_proceeding.chances_of_success = source_proceeding.chances_of_success.deep_dup
-        dup_proceeding.opponents_application = source_proceeding.opponents_application.deep_dup
-        dup_proceeding.prohibited_steps = source_proceeding.prohibited_steps.deep_dup
-        dup_proceeding.specific_issue = source_proceeding.specific_issue.deep_dup
-        dup_proceeding.vary_order = source_proceeding.vary_order.deep_dup
+        dup_proceeding.attempts_to_settle = source_proceeding.attempts_to_settle.dup
+        dup_proceeding.chances_of_success = source_proceeding.chances_of_success.dup
+        dup_proceeding.opponents_application = source_proceeding.opponents_application.dup
+        dup_proceeding.prohibited_steps = source_proceeding.prohibited_steps.dup
+        dup_proceeding.specific_issue = source_proceeding.specific_issue.dup
+        dup_proceeding.vary_order = source_proceeding.vary_order.dup
 
         source_proceeding.scope_limitations.each do |limitation|
-          dup_limitation = limitation.deep_dup
+          dup_limitation = limitation.dup
           dup_limitation.proceeding_id = nil
           dup_proceeding.scope_limitations << dup_limitation
         end
 
         source_proceeding.involved_children.each do |child|
-          dup_child = child.deep_dup
+          dup_child = child.dup
           dup_child.legal_aid_application_id = target.id
           dup_proceeding.involved_children << dup_child
         end
-
-        # new_ic = []
-        # source_proceeding.involved_children.each do |ic|
-        #   binding.pry
-        #   dup_ic = ic.deep_dup
-        #   dup_ic.proceeding_id = nil
-        #   new_ic << dup_ic
-        # end
-        # dup_proceeding.involved_children << new_ic
 
         new_proceedings << dup_proceeding
       end
@@ -120,16 +74,16 @@ module CopyCase
 
         next if attribute.nil?
 
-        copy = attribute.deep_dup
+        copy = attribute.dup
         target.update!("#{merit}": copy)
       end
     end
 
     def clone_opponents
       source.opponents.each do |opponent|
-        dup_opposable = opponent.opposable.deep_dup
+        dup_opposable = opponent.opposable.dup
         dup_opposable.save!
-        dup_opponent = opponent.deep_dup
+        dup_opponent = opponent.dup
         dup_opponent.opposable_id = dup_opposable.id
         dup_opponent.legal_aid_application_id = target.id
         target.opponents << dup_opponent
