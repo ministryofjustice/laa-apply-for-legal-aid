@@ -278,6 +278,29 @@ module CCMS
               .and have_xml("#{person_xpath}/casebio:RelationToCase", "OPP")
           end
         end
+
+        context "with a linked application" do
+          before do
+            create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD")
+          end
+
+          let(:lead_application) do
+            create(:legal_aid_application, :with_ccms_submission).tap do |lead_application|
+              create(:ccms_submission,
+                     :case_completed,
+                     legal_aid_application: lead_application,
+                     case_ccms_reference: "300000000001")
+            end
+          end
+
+          it "generates expected xml" do
+            linked_cases_xpath = "//casebio:LinkedCases/casebio:LinkedCase"
+
+            expect(request_xml)
+              .to have_xml("#{linked_cases_xpath}/casebio:CaseReferenceNumber", "300000000001")
+              .and have_xml("#{linked_cases_xpath}/casebio:LinkType", "FC_LEAD")
+          end
+        end
       end
     end
   end

@@ -3193,6 +3193,7 @@
               <casebio:LARScopeFlag>true</casebio:LARScopeFlag>
             </casebio:LARDetails>
           </casebio:ApplicationDetails>
+          <casebio:LinkedCases/>
           <casebio:RecordHistory>
             <common:DateCreated>2020-11-24T11:54:29.000</common:DateCreated>
             <common:LastUpdatedBy>
