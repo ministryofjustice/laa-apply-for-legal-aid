@@ -4,12 +4,14 @@
     <h2 class="govuk-heading-m"><%= proceeding.meaning %> <%= t(".description") %></h2>
   </div>
   <div class="govuk-grid-column-one-quarter">
-    <%= govuk_link_to(
-          t("generic.change"),
-          providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
-          visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}",
-          class: "govuk-link-right",
-        ) %>
+    <%= unless @read_only
+          govuk_link_to(
+            t("generic.change"),
+            providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
+            visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}",
+            class: "govuk-link-right",
+          )
+        end %>
   </div>
 </div>
 

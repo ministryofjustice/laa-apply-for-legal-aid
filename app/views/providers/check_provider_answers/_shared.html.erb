@@ -22,11 +22,13 @@
         <h2 class="govuk-heading-m"><%= t ".section_proceeding.heading" %></h2>
       </div>
       <div class="govuk-grid-column-one-third">
-        <%= govuk_link_to(
-              t("generic.change"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application),
-              visually_hidden_suffix: t(".section_proceeding.heading"),
-              class: "govuk-link-right"
-            ) %>
+        <%= unless @read_only
+              govuk_link_to(
+                t("generic.change"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application),
+                visually_hidden_suffix: t(".section_proceeding.heading"),
+                class: "govuk-link-right"
+              )
+            end %>
       </div>
     </div>
     <%= render(
