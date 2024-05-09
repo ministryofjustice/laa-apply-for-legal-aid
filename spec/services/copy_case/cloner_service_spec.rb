@@ -123,6 +123,11 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.urgency }.from(nil)
     end
 
+    it "does not change source opponents" do
+      expect { call }
+        .not_to change { source.reload.opponents.size }.from(1)
+    end
+
     context "when an application with merits is added" do
       let(:source) do
         create(

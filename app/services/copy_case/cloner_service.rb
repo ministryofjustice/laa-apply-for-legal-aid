@@ -14,6 +14,7 @@ module CopyCase
     def call
       clone_proceedings
       clone_application_merits
+      clone_opponents
     end
 
   private
@@ -104,7 +105,6 @@ module CopyCase
         latest_incident
         in_scope_of_laspo
         involved_children
-        opponents
         matter_opposition
         parties_mental_capacity
         statement_of_case
@@ -120,6 +120,19 @@ module CopyCase
         copy = attribute.deep_dup
         target.update!("#{merit}": copy)
       end
+    end
+
+    def clone_opponents
+      source.opponents.each do |opponent|
+        dup_opposable = opponent.opposable.deep_dup
+        dup_opposable.save!
+        dup_opponent = opponent.deep_dup
+        dup_opponent.opposable_id = dup_opposable.id
+        dup_opponent.legal_aid_application_id = target.id
+        target.opponents << dup_opponent
+      end
+
+      target.save!
     end
   end
 end
