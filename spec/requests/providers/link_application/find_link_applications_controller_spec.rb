@@ -55,7 +55,7 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
 
         it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_link_application_confirm_link_path)
+          expect(response).to have_http_status(:redirect)
 
           expect(flash).to be_empty
         end

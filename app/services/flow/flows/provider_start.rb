@@ -16,10 +16,7 @@ module Flow
         home_address_manuals: Steps::Addresses::HomeAddressManualsStep,
         non_uk_home_addresses: Steps::Addresses::NonUkHomeAddressesStep,
         link_application_make_links: Steps::LinkedApplications::MakeLinkStep,
-        link_application_find_link_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_link_application_find_link_application_path(application) },
-          forward: :link_application_confirm_links,
-        },
+        link_application_find_link_applications: Steps::LinkedApplications::FindLinkStep,
         link_application_confirm_links: Steps::LinkedApplications::ConfirmLinkStep,
         link_application_copies: Steps::LinkedApplications::CopyStep,
         about_financial_means: {
