@@ -38,10 +38,10 @@
       <% end %>
     <% end %>
 
-    <%= form.govuk_radio_buttons_fieldset(:link_case, legend: { tag: "h2", size: "l", text: t(".link_case") }) do %>
-      <%= form.govuk_radio_button :link_case, true, label: { text: t("generic.yes") }, link_errors: true %>
-      <%= form.govuk_radio_button :link_case, "No", label: { text: t(".options.no_link_to_different_case") } %>
-      <%= form.govuk_radio_button :link_case, false, label: { text: t(".options.no_carry_on_without_linking") } %>
+    <%= form.govuk_radio_buttons_fieldset(:confirm_link, legend: { tag: "h2", size: "l", text: t(".link_case") }) do %>
+      <%= form.govuk_radio_button :confirm_link, true, label: { text: t("generic.yes") }, link_errors: true %>
+      <%= form.govuk_radio_button :confirm_link, "No", label: { text: t(".options.no_link_to_different_case") } %>
+      <%= form.govuk_radio_button :confirm_link, false, label: { text: t(".options.no_carry_on_without_linking") } %>
 
     <% end %>
 
