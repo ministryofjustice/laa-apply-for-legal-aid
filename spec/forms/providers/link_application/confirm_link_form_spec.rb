@@ -3,12 +3,12 @@ require "rails_helper"
 RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
   subject(:instance) { described_class.new(params) }
 
-  before { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD") }
+  let(:linked_application) { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD") }
 
   let(:params) do
     {
-      link_case:,
-      model: legal_aid_application,
+      confirm_link:,
+      model: linked_application,
     }
   end
   let(:legal_aid_application) { create(:legal_aid_application) }
@@ -19,11 +19,27 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
 
     before { call_save }
 
-    context "with link_case true" do
-      let(:link_case) { "true" }
+    context "with confirm_link true" do
+      let(:confirm_link) { "true" }
 
       it "sets link_case to true" do
-        expect(legal_aid_application.reload.link_case).to be true
+        expect(linked_application.confirm_link).to be true
+      end
+    end
+
+    context "with confirm_link false" do
+      let(:confirm_link) { "false" }
+
+      it "sets confirm_link to false" do
+        expect(linked_application.confirm_link).to be false
+      end
+    end
+
+    context "with confirm_link No" do
+      let(:confirm_link) { "No" }
+
+      it "sets confirm_link to nil" do
+        expect(linked_application.confirm_link).to be_nil
       end
 
       it "does not not destroy the linked application" do
@@ -31,32 +47,8 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
       end
     end
 
-    context "with link_case false" do
-      let(:link_case) { "false" }
-
-      it "sets link_case to true" do
-        expect(legal_aid_application.reload.link_case).to be false
-      end
-
-      it "destroys the linked application" do
-        expect(legal_aid_application.reload.lead_application).to be_nil
-      end
-    end
-
-    context "with link_case No" do
-      let(:link_case) { "No" }
-
-      it "sets link_case to nil" do
-        expect(legal_aid_application.reload.link_case).to be_nil
-      end
-
-      it "does not not destroy the linked application" do
-        expect(legal_aid_application.reload.lead_application).to eq lead_application
-      end
-    end
-
-    context "with link type nil" do
-      let(:link_case) { "" }
+    context "with confirm_link nil" do
+      let(:confirm_link) { "" }
 
       it "is invalid" do
         expect(instance).not_to be_valid
@@ -74,55 +66,39 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
 
     before { save_as_draft }
 
-    context "with link_case true" do
-      let(:link_case) { "true" }
+    context "with confirm_link true" do
+      let(:confirm_link) { "true" }
 
-      it "sets link_case to true" do
-        expect(legal_aid_application.reload.link_case).to be true
-      end
-
-      it "does not not destroy the linked application" do
-        expect(legal_aid_application.reload.lead_application).to eq lead_application
+      it "sets confirm_link to true" do
+        expect(linked_application.confirm_link).to be true
       end
     end
 
-    context "with link_case false" do
-      let(:link_case) { "false" }
+    context "with confirm_link false" do
+      let(:confirm_link) { "false" }
 
-      it "sets link_case to true" do
-        expect(legal_aid_application.reload.link_case).to be false
-      end
-
-      it "destroys the linked application" do
-        expect(legal_aid_application.reload.lead_application).to be_nil
+      it "sets confirm_link to true" do
+        expect(linked_application.confirm_link).to be false
       end
     end
 
-    context "with link_case No" do
-      let(:link_case) { "No" }
+    context "with confirm_link No" do
+      let(:confirm_link) { "No" }
 
-      it "sets link_case to nil" do
-        expect(legal_aid_application.reload.link_case).to be_nil
-      end
-
-      it "does not not destroy the linked application" do
-        expect(legal_aid_application.reload.lead_application).to eq lead_application
+      it "sets confirm_link to nil" do
+        expect(linked_application.confirm_link).to be_nil
       end
     end
 
-    context "with link type nil" do
-      let(:link_case) { "" }
+    context "with confirm_link nil" do
+      let(:confirm_link) { "" }
 
       it "is valid" do
         expect(instance).to be_valid
       end
 
-      it "does not update link_case" do
-        expect(legal_aid_application.reload.link_case).to be_nil
-      end
-
-      it "does not not destroy the linked application" do
-        expect(legal_aid_application.reload.lead_application).to eq lead_application
+      it "does not confirm_link" do
+        expect(linked_application.confirm_link).to be_nil
       end
     end
   end

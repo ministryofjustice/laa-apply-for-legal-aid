@@ -519,8 +519,6 @@ en:
               date_not_in_range: "The date you used delegated functions cannot be before %{months}"
             client_declaration_confirmed:
               accepted: Confirm this information is correct and that you'll get a signed declaration
-            link_case:
-              blank: Select if you want to link to the application
         linked_application:
           attributes:
             search_ref:
@@ -533,6 +531,8 @@ en:
               not_submitted: We found the case but it's NOT Been SUBMITTED - OH NO!
             link_type_code:
               blank: Select if you want to link this application with another one
+            confirm_link:
+              blank: Select if you want to link to the application
         other_assets_declaration:
           attributes:
             valuable_items_value:

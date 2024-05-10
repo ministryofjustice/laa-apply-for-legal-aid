@@ -1,20 +1,15 @@
 module Providers
   module LinkApplication
     class ConfirmLinkForm < BaseForm
-      form_for LegalAidApplication
+      form_for LinkedApplication
 
-      attr_accessor :link_case
+      attr_accessor :confirm_link
 
-      validates :link_case, presence: true, unless: :draft?
+      validates :confirm_link, presence: true, unless: :draft?
 
       def save
-        if link_case == "No"
-          model.update!(link_case: nil)
-          return
-        elsif link_case == "false"
-          model.lead_linked_application&.destroy!
-        end
         super
+        model.update!(confirm_link: nil) if confirm_link == "No"
       end
       alias_method :save!, :save
     end
