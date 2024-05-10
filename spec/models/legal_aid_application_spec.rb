@@ -1860,6 +1860,34 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#link_description" do
+    subject(:link_description) { legal_aid_application.link_description }
+
+    context "when fully populated" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings, proceeding_count: 2) }
+
+      it "returns the expected data" do
+        expect(link_description).to eql("#{legal_aid_application.applicant.full_name}, #{legal_aid_application.application_ref}, Inherent jurisdiction high court injunction, Non-molestation order")
+      end
+    end
+
+    context "when the proceedings are not created" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+
+      it "returns the expected data" do
+        expect(link_description).to eql("#{legal_aid_application.applicant.full_name}, #{legal_aid_application.application_ref}")
+      end
+    end
+
+    context "when the applicant is not created" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
+
+      it "returns the expected data" do
+        expect(link_description).to eql("#{legal_aid_application.application_ref}, Inherent jurisdiction high court injunction")
+      end
+    end
+  end
+
 private
 
   def uploaded_evidence_output

@@ -27,6 +27,16 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
         expect(application.copy_case).to be true
         expect(application.copy_case_id).to eq lead_application.id
       end
+
+      context "and proceedings exist for the application" do
+        before { create(:proceeding, :se013, legal_aid_application: application) }
+
+        it "deletes any existing proceedings" do
+          expect(application.proceedings.count).to be 1
+          expect { described_form.save! }.to change(application.proceedings, :count)
+          expect(application.proceedings.count).to be 0
+        end
+      end
     end
 
     context "when copy_case is false" do

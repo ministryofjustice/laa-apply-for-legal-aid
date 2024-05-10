@@ -47,4 +47,26 @@ RSpec.describe Flow::Steps::LinkedApplications::ConfirmLinkStep, type: :request 
 
     it { is_expected.to be :check_provider_answers }
   end
+
+  describe "#carry_on_sub_flow" do
+    subject { described_class.carry_on_sub_flow.call(legal_aid_application) }
+
+    context "when the lead_linked_application exists" do
+      before { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code:) }
+
+      context "when link_type_code is FC_LEAD" do
+        it { is_expected.to be true }
+      end
+
+      context "when link_type_code is LEGAL" do
+        let(:link_type_code) { "LEGAL" }
+
+        it { is_expected.to be false }
+      end
+    end
+
+    context "when lead_linked_application is missing" do
+      it { is_expected.to be false }
+    end
+  end
 end

@@ -35,4 +35,26 @@ RSpec.describe Flow::Steps::LinkedApplications::CopyStep, type: :request do
 
     it { is_expected.to be :check_provider_answers }
   end
+
+  describe "#carry_on_sub_flow" do
+    subject { described_class.carry_on_sub_flow.call(legal_aid_application) }
+
+    context "when copy_case is true" do
+      let(:copy_case) { true }
+
+      it { is_expected.to be false }
+    end
+
+    context "when copy_case is false" do
+      let(:copy_case) { false }
+
+      it { is_expected.to be true }
+    end
+
+    context "when copy_case is not set" do
+      let(:copy_case) { nil }
+
+      it { is_expected.to be true }
+    end
+  end
 end

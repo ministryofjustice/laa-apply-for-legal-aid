@@ -249,8 +249,8 @@ en:
           list_html:
             - they've instructed %{provider_firm_name} to represent them
             - they've read the <a href="/privacy_policy">LAA privacy policy</a>
-            - we can share their information with other government departments like 
-              <abbr title="Department for Work and Pensions">DWP</abbr> and 
+            - we can share their information with other government departments like
+              <abbr title="Department for Work and Pensions">DWP</abbr> and
               <abbr title="HM Revenue and Customs">HMRC</abbr>
             - we can check their details with bank and credit reference agencies
             - they may have to pay towards legal aid
@@ -303,6 +303,9 @@ en:
     check_provider_answers:
       standard:
         title: Check your answers
+        copy_case:
+          heading: The proceedings and merits information was copied from %{application_ref}.
+          family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
         section_next:
           heading: What happens next
           content: We'll use your client's name, date of birth and National Insurance number to check their benefit status with the Department for Work and Pensions (DWP).
@@ -314,10 +317,24 @@ en:
         change_email_button: Change email and resend link
       shared:
         change: Change
+        proceeding: Proceeding
         section_client:
           heading: Client details
         section_proceeding:
           heading: Proceedings
+        section_linking:
+          heading: Cases linked to this one
+          linked: Link to another application?
+          FC_LEAD: Family link made to
+          LEGAL: Legal link made to
+          aria_prefix: which case
+        other_links_section:
+          FC_LEAD: All applications with a family link to this one
+          LEGAL: All applications with a legal link to this one
+        section_copying:
+          heading: Copying
+          question: Copy from another application?
+          copied: Application copied
         section_delegated:
           heading: Delegated functions
         section_emergency:
