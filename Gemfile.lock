@@ -349,10 +349,9 @@ GEM
     httpclient (2.8.3)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (1.0.13)
+    i18n-tasks (1.0.14)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
-      better_html (>= 1.0, < 3.0)
       erubi
       highline (>= 2.0.0)
       i18n
@@ -506,7 +505,7 @@ GEM
     pundit (2.3.2)
       activesupport (>= 3.0.0)
     racc (1.7.3)
-    rack (3.0.10)
+    rack (3.0.11)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-pjax (1.1.0)
