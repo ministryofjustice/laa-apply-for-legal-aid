@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_15_074736) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_10_114941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -657,6 +657,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_15_074736) do
     t.string "link_type_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "confirm_link"
     t.index ["associated_application_id"], name: "index_linked_applications_on_associated_application_id"
     t.index ["lead_application_id", "associated_application_id"], name: "index_linked_applications", unique: true
     t.index ["lead_application_id"], name: "index_linked_applications_on_lead_application_id"
