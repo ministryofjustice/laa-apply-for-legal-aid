@@ -8,11 +8,7 @@ module Providers
       validates :link_type_code, presence: true, unless: :draft?
 
       def save
-        if link_type_code == "false"
-          model.associated_application.update!(link_case: false)
-          model.destroy!
-          return
-        end
+        model.update!(confirm_link: false) if link_type_code != "true"
         super
       end
       alias_method :save!, :save

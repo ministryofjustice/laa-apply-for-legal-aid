@@ -20,7 +20,7 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
     context "with family link type chosen" do
       let(:link_type_code) { "FC_LEAD" }
 
-      it "sets the lead_linked_appliction" do
+      it "sets the link_type_code" do
         expect(legal_aid_application.lead_linked_application.link_type_code).to eq "FC_LEAD"
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
     context "with legal link type chosen" do
       let(:link_type_code) { "LEGAL" }
 
-      it "sets the lead_linked_appliction" do
+      it "sets the link_type_code" do
         expect(legal_aid_application.lead_linked_application.link_type_code).to eq "LEGAL"
       end
     end
@@ -36,12 +36,8 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
     context "with link type no chosen" do
       let(:link_type_code) { "false" }
 
-      it "does not create a linked application" do
-        expect(legal_aid_application.lead_linked_application).to be_nil
-      end
-
-      it "ensures the link_case boolean is false" do
-        expect(legal_aid_application.reload.link_case).to be false
+      it "sets the link_type_code" do
+        expect(legal_aid_application.lead_linked_application.link_type_code).to eq "false"
       end
     end
 
@@ -55,6 +51,15 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
       it "adds custom blank error message" do
         error_messages = instance.errors.messages.values.flatten
         expect(error_messages).to include("Select if you want to link this application with another one")
+      end
+    end
+
+    context "when the answer is changed from yes to no" do
+      let(:linked_application) { build(:linked_application, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD") }
+      let(:link_type_code) { "false" }
+
+      it "resets the linked_application model" do
+        expect(linked_application.confirm_link).to be false
       end
     end
   end
