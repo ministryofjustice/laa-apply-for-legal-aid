@@ -2,13 +2,11 @@ module Flow
   module Flows
     class CitizenStart < FlowSteps
       STEPS = {
-        legal_aid_applications: Steps::CitizenStart::LegalAidAppicationsStep,
+        legal_aid_applications: Steps::CitizenStart::LegalAidApplicationsStep,
         consents: Steps::CitizenStart::ConsentsStep,
         contact_providers: Steps::CitizenStart::ContactProviderStep,
         banks: Steps::CitizenStart::BanksStep,
-        true_layer: {
-          path: ->(_) { omniauth_login_start_path(:true_layer) },
-        },
+        true_layer: Steps::CitizenStart::TrueLayerStep,
         gather_transactions: {
           forward: :accounts,
         },
