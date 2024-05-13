@@ -1,0 +1,70 @@
+Feature: Linking cases back button use
+@javascript @vcr
+Scenario: Complete flow reversion with back button
+  Given I have created and submitted an application with the application reference 'L-123-456'
+  And the feature flag for linked_applications is enabled
+  And the feature flag for home_address is enabled
+
+  When I visit the application service
+  And I click link "Sign in"
+  And I choose 'London'
+  And I click 'Save and continue'
+  And I click link "Make a new application"
+  Then I should be on the 'providers/declaration' page showing 'Declaration'
+
+  When I click 'Agree and continue'
+  Then I should be on the Applicant page
+
+  And I enter name 'Test', 'User'
+  And I choose 'No'
+  And I enter the date of birth '01-01-1999'
+  And I click 'Save and continue'
+  Then I am on the postcode entry page
+
+  When I enter a postcode 'SW1H 9EA'
+  And I click find address
+  And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+  And I click 'Use this address'
+  Then I should be on a page with title "Is this also your client's home address?"
+
+  When I choose "Yes"
+  And I click "Save and continue"
+  Then I should be on a page with title "Do you want to link this application with another one?"
+
+  When I choose "Yes, I want to make a family link"
+  And I click "Save and continue"
+  Then I should be on a page with title "What is the LAA reference of the application you want to link to?"
+
+  When I search for laa reference 'L-123-456'
+  And I click "Search"
+  Then I should be on a page with title "Search result"
+  And I should see "Is this the application you want to link to?"
+
+  When I choose "Yes"
+  And I click "Save and continue"
+  Then I should be on a page with title "Do you want to copy the proceedings and merits from L-123-456 to this one?"
+  And I should see "You've made a family link"
+
+  When I choose "Yes, the information will be the same"
+  And I click "Save and continue"
+  Then I should be on a page with title "Does your client have a National Insurance number?"
+
+  When I click link "Back"
+  Then I should be on a page with title "Do you want to copy the proceedings and merits from L-123-456 to this one?"
+  And I should not see "You've made a family link"
+
+  When I click link "Back"
+  Then I should be on a page with title "Search result"
+  And I should see "Is this the application you want to link to?"
+  And I should see "L-123-456"
+
+  When I click link "Back"
+  Then I should be on a page with title "What is the LAA reference of the application you want to link to?"
+  And I should not see "L-123-456"
+
+  When I click link "Back"
+  Then I should be on a page with title "Do you want to link this application with another one?"
+
+  When I choose "No"
+  And I click "Save and continue"
+  Then I should be on a page showing "What does your client want legal aid for?"
