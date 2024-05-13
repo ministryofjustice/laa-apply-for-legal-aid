@@ -2,13 +2,8 @@ module Flow
   module Flows
     class CitizenStart < FlowSteps
       STEPS = {
-        legal_aid_applications: Steps::CitizenStart::LegalAidAppications,
-        consents: {
-          path: ->(_) { urls.citizens_consent_path(locale: I18n.locale) },
-          forward: lambda do |application|
-            application.open_banking_consent ? :banks : :contact_providers
-          end,
-        },
+        legal_aid_applications: Steps::CitizenStart::LegalAidAppicationsStep,
+        consents: Steps::CitizenStart::ConsentsStep,
         contact_providers: {
           path: ->(_) { urls.citizens_contact_provider_path(locale: I18n.locale) },
         },
