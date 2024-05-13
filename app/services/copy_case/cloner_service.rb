@@ -1,5 +1,7 @@
 module CopyCase
   class ClonerService
+    class ClonerServiceError < StandardError; end
+
     attr_accessor :target, :source
 
     def self.call(target, source)
@@ -15,6 +17,10 @@ module CopyCase
       clone_proceedings
       clone_application_merits
       clone_opponents
+    rescue ClonerServiceError => e
+      AlertManager.capture_exception(e)
+      Rails.logger.error(e.message)
+      false
     end
 
   private
@@ -50,6 +56,8 @@ module CopyCase
 
       target.proceedings = new_proceedings
       target.save!
+    rescue StandardError => e
+      raise ClonerServiceError, "clone_proceedings error: #{e.message}"
     end
 
     def clone_application_merits
@@ -77,6 +85,8 @@ module CopyCase
         copy = attribute.dup
         target.update!("#{merit}": copy)
       end
+    rescue StandardError => e
+      raise ClonerServiceError, "clone_application_merits error: #{e.message}"
     end
 
     def clone_opponents
@@ -90,6 +100,8 @@ module CopyCase
       end
 
       target.save!
+    rescue StandardError => e
+      raise ClonerServiceError, "clone_opponents error: #{e.message}"
     end
   end
 end

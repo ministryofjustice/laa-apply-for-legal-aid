@@ -200,5 +200,45 @@ RSpec.describe CopyCase::ClonerService do
         end
       end
     end
+
+    context "when cloning proceedings raises an error" do
+      before do
+        allow(source).to receive(:proceedings).and_raise(StandardError, "new fake error")
+      end
+
+      it "sends the error to the rails logs" do
+        expect(Rails.logger).to receive(:error).with("clone_proceedings error: new fake error")
+        call
+      end
+
+      it "sends the error to alert manager" do
+        expect(AlertManager).to receive(:capture_exception).with(message_contains("clone_proceedings error: new fake error"))
+        call
+      end
+
+      it "returns false" do
+        expect(call).to be false
+      end
+    end
+
+    context "when cloning application merits" do
+      before do
+        allow(source).to receive(:allegation).and_raise(StandardError, "fake error")
+      end
+
+      it "returns false" do
+        expect(call).to be false
+      end
+    end
+
+    context "when cloning opponents" do
+      before do
+        allow(source).to receive(:opponents).and_raise(StandardError, "fake error")
+      end
+
+      it "returns false" do
+        expect(call).to be false
+      end
+    end
   end
 end
