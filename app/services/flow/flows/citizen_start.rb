@@ -5,10 +5,7 @@ module Flow
         legal_aid_applications: Steps::CitizenStart::LegalAidAppicationsStep,
         consents: Steps::CitizenStart::ConsentsStep,
         contact_providers: Steps::CitizenStart::ContactProviderStep,
-        banks: {
-          path: ->(_) { urls.citizens_banks_path(locale: I18n.locale) },
-          forward: :true_layer,
-        },
+        banks: Steps::CitizenStart::BanksStep,
         true_layer: {
           path: ->(_) { omniauth_login_start_path(:true_layer) },
         },
