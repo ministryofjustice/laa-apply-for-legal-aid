@@ -506,7 +506,7 @@ GEM
     pundit (2.3.2)
       activesupport (>= 3.0.0)
     racc (1.7.3)
-    rack (3.0.10)
+    rack (3.0.11)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-pjax (1.1.0)
