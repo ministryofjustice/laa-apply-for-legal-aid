@@ -4,9 +4,7 @@ module Flow
       STEPS = {
         legal_aid_applications: Steps::CitizenStart::LegalAidAppicationsStep,
         consents: Steps::CitizenStart::ConsentsStep,
-        contact_providers: {
-          path: ->(_) { urls.citizens_contact_provider_path(locale: I18n.locale) },
-        },
+        contact_providers: Steps::CitizenStart::ContactProviderStep,
         banks: {
           path: ->(_) { urls.citizens_banks_path(locale: I18n.locale) },
           forward: :true_layer,
