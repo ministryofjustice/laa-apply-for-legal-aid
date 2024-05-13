@@ -9,12 +9,7 @@ module Flow
         true_layer: Steps::CitizenStart::TrueLayerStep,
         gather_transactions: Steps::CitizenStart::GatherTransactionsStep,
         accounts: Steps::CitizenStart::AccountsStep,
-        additional_accounts: {
-          path: ->(_) { urls.citizens_additional_accounts_path(locale: I18n.locale) },
-          forward: lambda do |application|
-            application.has_offline_accounts? ? :contact_providers : :check_answers
-          end,
-        },
+        additional_accounts: Steps::CitizenStart::AdditionalAccountsStep,
       }.freeze
     end
   end
