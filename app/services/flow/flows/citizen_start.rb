@@ -8,11 +8,7 @@ module Flow
         banks: Steps::CitizenStart::BanksStep,
         true_layer: Steps::CitizenStart::TrueLayerStep,
         gather_transactions: Steps::CitizenStart::GatherTransactionsStep,
-        accounts: {
-          path: ->(_) { urls.citizens_accounts_path(locale: I18n.locale) },
-          forward: :additional_accounts,
-          check_answers: :check_answers,
-        },
+        accounts: Steps::CitizenStart::AccountsStep,
         additional_accounts: {
           path: ->(_) { urls.citizens_additional_accounts_path(locale: I18n.locale) },
           forward: lambda do |application|
