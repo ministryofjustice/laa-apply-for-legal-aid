@@ -7,9 +7,7 @@ module Flow
         contact_providers: Steps::CitizenStart::ContactProviderStep,
         banks: Steps::CitizenStart::BanksStep,
         true_layer: Steps::CitizenStart::TrueLayerStep,
-        gather_transactions: {
-          forward: :accounts,
-        },
+        gather_transactions: Steps::CitizenStart::GatherTransactionsStep,
         accounts: {
           path: ->(_) { urls.citizens_accounts_path(locale: I18n.locale) },
           forward: :additional_accounts,
