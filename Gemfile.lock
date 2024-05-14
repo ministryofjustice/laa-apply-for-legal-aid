@@ -181,6 +181,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
+    csv (3.3.0)
     cucumber (9.2.0)
       builder (~> 3.2)
       cucumber-ci-environment (> 9, < 11)
@@ -768,6 +769,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.36.0, < 4.0)
   cssbundling-rails
+  csv
   cucumber
   cucumber-rails (>= 2.4.0)
   database_cleaner
