@@ -220,8 +220,6 @@ GEM
     date (3.3.4)
     debug_inspector (1.2.0)
     declarative (0.0.20)
-    deep_cloneable (3.2.0)
-      activerecord (>= 3.1.0, < 8)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.9.4)
@@ -773,7 +771,6 @@ DEPENDENCIES
   cucumber
   cucumber-rails (>= 2.4.0)
   database_cleaner
-  deep_cloneable (~> 3.2.0)
   devise
   devise_saml_authenticatable (>= 1.7.0)
   dibber
