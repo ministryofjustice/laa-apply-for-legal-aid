@@ -2,39 +2,14 @@ module Flow
   module Flows
     class CitizenStart < FlowSteps
       STEPS = {
-        legal_aid_applications: {
-          forward: :consents,
-        },
-        consents: {
-          path: ->(_) { urls.citizens_consent_path(locale: I18n.locale) },
-          forward: lambda do |application|
-            application.open_banking_consent ? :banks : :contact_providers
-          end,
-        },
-        contact_providers: {
-          path: ->(_) { urls.citizens_contact_provider_path(locale: I18n.locale) },
-        },
-        banks: {
-          path: ->(_) { urls.citizens_banks_path(locale: I18n.locale) },
-          forward: :true_layer,
-        },
-        true_layer: {
-          path: ->(_) { omniauth_login_start_path(:true_layer) },
-        },
-        gather_transactions: {
-          forward: :accounts,
-        },
-        accounts: {
-          path: ->(_) { urls.citizens_accounts_path(locale: I18n.locale) },
-          forward: :additional_accounts,
-          check_answers: :check_answers,
-        },
-        additional_accounts: {
-          path: ->(_) { urls.citizens_additional_accounts_path(locale: I18n.locale) },
-          forward: lambda do |application|
-            application.has_offline_accounts? ? :contact_providers : :check_answers
-          end,
-        },
+        legal_aid_applications: Steps::CitizenStart::LegalAidApplicationsStep,
+        consents: Steps::CitizenStart::ConsentsStep,
+        contact_providers: Steps::CitizenStart::ContactProviderStep,
+        banks: Steps::CitizenStart::BanksStep,
+        true_layer: Steps::CitizenStart::TrueLayerStep,
+        gather_transactions: Steps::CitizenStart::GatherTransactionsStep,
+        accounts: Steps::CitizenStart::AccountsStep,
+        additional_accounts: Steps::CitizenStart::AdditionalAccountsStep,
       }.freeze
     end
   end

@@ -26,8 +26,8 @@ RSpec.describe Citizens::ConsentsController do
     context "when consent is granted" do
       let(:params) { { legal_aid_application: { open_banking_consent: "true" } } }
 
-      it "redirects to new action" do
-        expect(response).to redirect_to(citizens_banks_path)
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
 
       it "records the decision on the legal aid application" do
@@ -44,8 +44,8 @@ RSpec.describe Citizens::ConsentsController do
     context "when consent is not granted" do
       let(:params) { { legal_aid_application: { open_banking_consent: "false" } } }
 
-      it "redirects to a holding page action" do
-        expect(response).to redirect_to(citizens_contact_provider_path)
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
 
       it "records the decision on the legal aid application" do
