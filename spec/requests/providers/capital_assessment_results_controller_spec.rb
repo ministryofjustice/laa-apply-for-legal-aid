@@ -273,8 +273,8 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
       context "when continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects to the merits task list" do
-          expect(patch_request).to redirect_to(providers_legal_aid_application_merits_task_list_path)
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 

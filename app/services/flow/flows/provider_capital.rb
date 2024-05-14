@@ -121,14 +121,8 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_check_capital_answers_path(application) },
           forward: :capital_income_assessment_results,
         },
-        capital_assessment_results: {
-          path: ->(application) { urls.providers_legal_aid_application_capital_assessment_result_path(application) },
-          forward: :merits_task_lists,
-        },
-        capital_income_assessment_results: {
-          path: ->(application) { urls.providers_legal_aid_application_capital_income_assessment_result_path(application) },
-          forward: :merits_task_lists,
-        },
+        capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,
+        capital_income_assessment_results: Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep,
         means_reports: {
           path: ->(application) { urls.providers_legal_aid_application_means_report_path(application) },
         },
