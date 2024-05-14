@@ -45,12 +45,6 @@ module CopyCase
           dup_proceeding.scope_limitations << dup_limitation
         end
 
-        source_proceeding.involved_children.each do |child|
-          dup_child = child.dup
-          dup_child.legal_aid_application_id = target.id
-          dup_proceeding.involved_children << dup_child
-        end
-
         new_proceedings << dup_proceeding
       end
 
@@ -69,7 +63,6 @@ module CopyCase
         emergency_cost_requested
         latest_incident
         in_scope_of_laspo
-        involved_children
         matter_opposition
         parties_mental_capacity
         statement_of_case

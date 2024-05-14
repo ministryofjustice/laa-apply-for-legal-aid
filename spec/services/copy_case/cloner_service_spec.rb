@@ -8,7 +8,6 @@ RSpec.describe CopyCase::ClonerService do
     create(:legal_aid_application,
            :with_proceedings,
            :with_everything,
-           :with_involved_children,
            :with_attempts_to_settle,
            in_scope_of_laspo: true,
            emergency_cost_override: true,
@@ -119,7 +118,6 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.emergency_cost_reasons.present? }.from(false).to(true)
         .and change { target.reload.emergency_cost_requested.present? }.from(false).to(true)
         .and change { target.reload.in_scope_of_laspo }.from(nil).to(true)
-        .and change { target.reload.involved_children.size }.from(0).to(3)
         .and change { target.reload.latest_incident }.from(nil)
         .and change { target.reload.matter_opposition.present? }.from(false).to(true)
         .and change { target.reload.opponents.size }.from(0).to(1)
@@ -127,11 +125,6 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.statement_of_case }.from(nil)
         .and change { target.reload.undertaking }.from(nil)
         .and change { target.reload.urgency }.from(nil)
-    end
-
-    it "does not change source involved children", pending: "to be implemented in a subsequent ticket" do
-      expect { call }
-        .not_to change { source.reload.involved_children.size }.from(3)
     end
 
     it "does not change source opponents" do
@@ -145,7 +138,6 @@ RSpec.describe CopyCase::ClonerService do
           :legal_aid_application,
           :with_proceedings,
           :with_everything,
-          :with_involved_children,
           :with_attempts_to_settle,
           :with_chances_of_success,
           :with_opponents_application_proceeding,
@@ -163,41 +155,6 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.proceedings.any?(&:prohibited_steps) }.from(false).to(true)
         .and change { target.reload.proceedings.any?(&:specific_issue) }.from(false).to(true)
         .and change { target.reload.proceedings.any?(&:vary_order) }.from(false).to(true)
-      end
-
-      context "and there are nested linked children merits" do
-        let(:source) do
-          create(
-            :legal_aid_application,
-            :with_everything,
-            :with_involved_children,
-          )
-        end
-        let(:first_proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
-        let(:second_proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
-        let(:third_proceeding) { create(:proceeding, :se003, legal_aid_application: source) }
-        let(:first_child) { source.involved_children.first }
-        let(:second_child) { source.involved_children.second }
-        let(:third_child) { source.involved_children.third }
-
-        before do
-          create(:proceeding_linked_child, proceeding: first_proceeding, involved_child: first_child)
-          create(:proceeding_linked_child, proceeding: second_proceeding, involved_child: second_child)
-          create(:proceeding_linked_child, proceeding: third_proceeding, involved_child: third_child)
-        end
-
-        it "successfully copies nested linked children merits" do
-          expect { call }
-            .to change { target.reload.proceedings.first&.proceeding_linked_children&.size }.from(nil).to(1)
-            .and change { target.reload.proceedings.second&.proceeding_linked_children&.size }.from(nil).to(1)
-            .and change { target.reload.proceedings.third&.proceeding_linked_children&.size }.from(nil).to(1)
-            .and change { target.reload.involved_children&.size }.from(0).to(3)
-        end
-
-        it "does not change source proceeding linked children" do
-          expect { call }
-            .not_to change { source.reload.proceedings.first&.proceeding_linked_children&.size }.from(1)
-        end
       end
     end
 
