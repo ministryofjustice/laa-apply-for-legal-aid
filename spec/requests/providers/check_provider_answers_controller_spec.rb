@@ -10,6 +10,9 @@ RSpec.describe Providers::CheckProviderAnswersController do
       applicant:,
       partner:,
       set_lead_proceeding: :da001,
+      case_cloned:,
+      copy_case:,
+      copy_case_id:,
     )
   end
 
@@ -20,6 +23,9 @@ RSpec.describe Providers::CheckProviderAnswersController do
   let(:used_delegated_functions_answer) { parsed_html.at_css("#app-check-your-answers__#{proceeding_name}_used_delegated_functions_on .govuk-summary-list__value") }
   let(:partner) { nil }
   let(:pma_flag) { true }
+  let(:case_cloned) { nil }
+  let(:copy_case) { nil }
+  let(:copy_case_id) { nil }
 
   before { allow(Setting).to receive(:partner_means_assessment?).and_return(pma_flag) }
 
@@ -259,6 +265,108 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
         it "marks application as under 16s blocked" do
           expect { request }.to change { application.reload.under_16_blocked? }.from(false).to(true)
+        end
+      end
+
+      describe "the cloner service" do
+        let(:cloner_double) { instance_double(CopyCase::ClonerService, call: cloner_response) }
+        let(:lead_application) { create(:legal_aid_application, :with_proceedings) }
+        let(:confirm_link) { nil }
+        let(:link_type_code) { nil }
+        let(:cloner_response) { nil }
+
+        before do
+          allow(CopyCase::ClonerService).to receive(:new).and_return(cloner_double)
+          create(:linked_application,
+                 associated_application: application,
+                 lead_application:,
+                 confirm_link:,
+                 link_type_code:)
+        end
+
+        context "when it has already been run" do
+          context "and it succeeded" do
+            let(:case_cloned) { true }
+
+            it "is not called again" do
+              request
+              expect(cloner_double).not_to have_received(:call)
+            end
+          end
+
+          context "and it failed" do
+            let(:case_cloned) { false }
+
+            it "is not called again" do
+              request
+              expect(cloner_double).not_to have_received(:call)
+            end
+          end
+        end
+
+        context "when it has not previously been run" do
+          context "and the provider has confirmed the link" do
+            let(:confirm_link) { true }
+
+            context "and confirmed copying and provided a copy_case id" do
+              let(:copy_case) { true }
+              let(:copy_case_id) { lead_application.id }
+
+              it "is called" do
+                request
+                expect(cloner_double).to have_received(:call).once
+              end
+
+              context "and the cloner passes" do
+                let(:cloner_response) { true }
+
+                it "updates the case_cloned value" do
+                  request
+                  expect(application.reload.case_cloned).to be true
+                end
+              end
+
+              context "and the cloner fails" do
+                let(:cloner_response) { false }
+
+                it "updates the case_cloned value" do
+                  request
+                  expect(application.reload.case_cloned).to be false
+                end
+              end
+            end
+
+            context "and only partially completed copying by providing a copy_case id" do
+              let(:copy_case_id) { lead_application.id }
+
+              it "is not called" do
+                request
+                expect(cloner_double).not_to have_received(:call)
+              end
+            end
+
+            context "when the provider does not want to link or copy" do
+              let(:link_type_code) { "false" }
+              let(:copy_case) { false }
+
+              it "deletes the lead_linked_application amd copy data" do
+                expect(application.reload.lead_linked_application).not_to be_nil
+                request
+                expect(application.reload.lead_linked_application).to be_nil
+                expect(application).to have_attributes(copy_case: nil,
+                                                       copy_case_id: nil)
+              end
+            end
+
+            context "and only partially completed copying by providing a copy_case response" do
+              let(:copy_case) { true }
+
+              it "is not called" do
+                request
+                expect(cloner_double).not_to have_received(:call)
+              end
+            end
+          end
         end
       end
 
