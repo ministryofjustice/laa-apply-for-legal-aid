@@ -5,6 +5,7 @@ ruby file: ".ruby-version"
 
 gem "aasm", "~> 5.5.0"
 gem "active_model_serializers", "~> 0.10.14"
+gem "csv"
 gem "deep_cloneable", "~> 3.2.0"
 gem "discard", "~> 1.3"
 gem "geckoboard-ruby"
