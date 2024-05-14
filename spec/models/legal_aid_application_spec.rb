@@ -1867,7 +1867,8 @@ RSpec.describe LegalAidApplication do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings, proceeding_count: 2) }
 
       it "returns the expected data" do
-        expect(link_description).to eql("#{legal_aid_application.applicant.full_name}, #{legal_aid_application.application_ref}, Inherent jurisdiction high court injunction, Non-molestation order")
+        expected = "#{legal_aid_application.applicant.full_name}, #{legal_aid_application.application_ref}, #{legal_aid_application.proceedings.map(&:meaning).join(', ')}"
+        expect(link_description).to eql(expected)
       end
     end
 
