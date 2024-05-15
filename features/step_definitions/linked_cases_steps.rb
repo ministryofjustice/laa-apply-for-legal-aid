@@ -10,6 +10,9 @@ Given("I have created and submitted an application with the application referenc
     application_ref:,
   )
   @provider = @legal_aid_application.provider
+  firm = @provider.firm
+  @provider.offices << create(:office, firm:, code: "London")
+  @provider.offices << create(:office, firm:, code: "Manchester")
   login_as @provider
 end
 
@@ -55,13 +58,14 @@ Given(/I have linked (and|not) copied the ['|"](.*?)['|"] application with a ['|
   end
   @legal_aid_application.update!(link_case: true)
   LinkedApplication.find_or_create_by!(lead_application:,
+                                       confirm_link: true,
                                        associated_application: @legal_aid_application,
                                        link_type_code: type == "Family" ? "FC_LEAD" : "Legal")
 end
 
 When("I have neither linked or copied an application") do
-  @legal_aid_application.update!(link_case: false,
-                                 copy_case: false)
+  LinkedApplication.find_or_create_by!(associated_application: @legal_aid_application,
+                                       link_type_code: "false")
   @legal_aid_application.proceedings.destroy_all
   create(:proceeding, :da004, legal_aid_application: @legal_aid_application)
 end

@@ -1,12 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::ConfirmLinksController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
-  let(:lead_application) { create(:legal_aid_application) }
+  let(:linked_application) { create(:linked_application, lead_application: create(:legal_aid_application), associated_application: create(:legal_aid_application), link_type_code:) }
+  let(:legal_aid_application) { linked_application.associated_application }
+  let(:lead_application) { linked_application.lead_application }
   let(:provider) { legal_aid_application.provider }
   let(:link_type_code) { "FC_LEAD" }
-
-  before { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code:) }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/confirm_link" do
     subject(:get_request) do
@@ -40,12 +39,12 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
     let(:params) do
       {
-        legal_aid_application: {
-          link_case:,
+        linked_application: {
+          confirm_link:,
         },
       }
     end
-    let(:link_case) { "true" }
+    let(:confirm_link) { "true" }
 
     context "when the provider is not authenticated" do
       before { patch_request }
@@ -58,16 +57,6 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
       context "when the Continue button is pressed" do
         context "when Yes is chosen" do
-          it "does not not destroy the linked application" do
-            patch_request
-            expect(legal_aid_application.reload.lead_application).to eq lead_application
-          end
-
-          it "sets link_case to true" do
-            patch_request
-            expect(legal_aid_application.reload.link_case).to be true
-          end
-
           context "when link type is family" do
             it "sets the correct flash message" do
               patch_request
@@ -86,16 +75,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
         end
 
         context "when No, carry on without linking is chosen" do
-          let(:link_case) { "false" }
+          let(:confirm_link) { "false" }
 
-          it "destroys the linked application" do
+          it "sets confirm_link to false" do
             patch_request
-            expect(legal_aid_application.reload.lead_application).to be_nil
-          end
-
-          it "sets link_case to false" do
-            patch_request
-            expect(legal_aid_application.reload.link_case).to be false
+            expect(linked_application.reload.confirm_link).to be false
           end
 
           it "does not set a success flash message" do
@@ -105,16 +89,11 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
         end
 
         context "when No, I want to link to a different case is chosen" do
-          let(:link_case) { "No" }
+          let(:confirm_link) { "No" }
 
-          it "does not not destroy the linked application" do
+          it "sets confirm_link to stay nil" do
             patch_request
-            expect(legal_aid_application.reload.lead_application).to eq lead_application
-          end
-
-          it "sets link_case to false" do
-            patch_request
-            expect(legal_aid_application.reload.link_case).to be_nil
+            expect(linked_application.confirm_link).to be_nil
           end
 
           it "does not set a success flash message" do
@@ -123,7 +102,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
           end
 
           context "when no radio button is chosen" do
-            let(:link_case) { nil }
+            let(:confirm_link) { nil }
 
             it "re-renders the form with the validation errors" do
               patch_request
@@ -136,6 +115,9 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
           let(:params) do
             {
               draft_button: "Save and come back later",
+              linked_application: {
+                confirm_link:,
+              },
             }
           end
 

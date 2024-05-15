@@ -4,7 +4,7 @@ module Flow
       MakeLinkStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_link_application_make_link_path(application) },
         forward: lambda do |application|
-          if application.lead_linked_application&.persisted?
+          if application.lead_linked_application&.link_type_code.in?(%w[FC_LEAD LEGAL])
             :link_application_find_link_applications
           else
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types

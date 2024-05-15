@@ -74,8 +74,8 @@ RSpec.describe Providers::LinkApplication::MakeLinksController do
             expect(response).to have_http_status(:redirect)
           end
 
-          it "does not create a new lead linked application" do
-            expect { patch_request }.not_to change(LinkedApplication, :count)
+          it "creates a new lead linked application" do
+            expect { patch_request }.to change(LinkedApplication, :count).by(1)
           end
         end
 

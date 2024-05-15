@@ -13,9 +13,33 @@ RSpec.describe Flow::Steps::LinkedApplications::MakeLinkStep, type: :request do
     subject { described_class.forward.call(legal_aid_application) }
 
     context "when the application has a linked_application" do
-      before { create(:linked_application, associated_application: legal_aid_application) }
+      before { create(:linked_application, associated_application: legal_aid_application, link_type_code:) }
 
-      it { is_expected.to eq :link_application_find_link_applications }
+      context "when it's a family link" do
+        let(:link_type_code) { "FC_LEAD" }
+
+        it { is_expected.to eq :link_application_find_link_applications }
+      end
+
+      context "when it's a Legal link" do
+        let(:link_type_code) { "LEGAL" }
+
+        it { is_expected.to eq :link_application_find_link_applications }
+      end
+
+      context "when it is not linked" do
+        let(:link_type_code) { "false" }
+
+        context "when the application has proceedings" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
+
+          it { is_expected.to eq :has_other_proceedings }
+        end
+
+        context "when the application has no proceedings" do
+          it { is_expected.to eq :proceedings_types }
+        end
+      end
     end
 
     context "when the application does not have a linked_application" do

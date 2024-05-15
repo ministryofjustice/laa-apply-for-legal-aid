@@ -4,7 +4,7 @@ module Providers
       prefix_step_with :link_application
 
       def show
-        @form = Providers::LinkApplication::ConfirmLinkForm.new(model: legal_aid_application)
+        @form = Providers::LinkApplication::ConfirmLinkForm.new(model: linked_application)
       end
 
       def update
@@ -18,7 +18,7 @@ module Providers
 
         if @form.valid?
           @form.save!
-          flash[:hash] = success_hash if @form.link_case == "true"
+          flash[:hash] = success_hash if @form.confirm_link == "true"
           return go_forward
         end
 
@@ -39,11 +39,13 @@ module Providers
         @heading_text ||= legal_aid_application.lead_linked_application&.link_type_code == "FC_LEAD" ? t("providers.link_application.confirm_links.show.success_family") : t("providers.link_application.confirm_links.show.success_legal", application_ref: legal_aid_application.lead_application&.application_ref)
       end
 
-      def form_params
-        merge_with_model(legal_aid_application) do
-          next {} unless params[:legal_aid_application]
+      def linked_application
+        legal_aid_application.lead_linked_application
+      end
 
-          params.require(:legal_aid_application).permit(:link_case)
+      def form_params
+        merge_with_model(linked_application) do
+          params.require(:linked_application).permit(:confirm_link)
         end
       end
     end
