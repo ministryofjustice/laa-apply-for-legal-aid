@@ -76,10 +76,7 @@ module Flow
             end
           end,
         },
-        confirm_non_means_tested_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_confirm_non_means_tested_applications_path(application) },
-          forward: :merits_task_lists,
-        },
+        confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
         no_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_no_national_insurance_number_path(application) },
           forward: lambda do |application|

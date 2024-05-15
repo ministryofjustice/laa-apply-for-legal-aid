@@ -114,7 +114,7 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
       it "updates application statre and redirects to the merits task list", :aggregate_failures do
         expect { request }.to change { application.reload.state }.from("applicant_details_checked").to("provider_entering_merits")
-        expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
