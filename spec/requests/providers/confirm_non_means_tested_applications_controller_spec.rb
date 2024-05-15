@@ -112,7 +112,7 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
           .to("no_assessment")
       end
 
-      it "updates application statre and redirects to the merits task list", :aggregate_failures do
+      it "updates application statre and redirects to the next page", :aggregate_failures do
         expect { request }.to change { application.reload.state }.from("applicant_details_checked").to("provider_entering_merits")
         expect(response).to have_http_status(:redirect)
       end

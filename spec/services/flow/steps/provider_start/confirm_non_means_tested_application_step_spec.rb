@@ -17,7 +17,7 @@ RSpec.describe Flow::Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
       it { is_expected.to eq :check_merits_answers }
     end
 
-    context "when no vehicles remain on the application" do
+    context "when the application has not been copied from another application" do
       let(:copy_case) { false }
 
       it { is_expected.to eq :merits_task_lists }
