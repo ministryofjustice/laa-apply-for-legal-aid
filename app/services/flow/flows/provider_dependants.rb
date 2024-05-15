@@ -3,10 +3,7 @@ module Flow
     class ProviderDependants < FlowSteps
       STEPS = {
         has_dependants: Steps::ProviderDependants::HasDependantsStep,
-        dependants: {
-          path: ->(application) { urls.new_providers_legal_aid_application_means_dependant_path(application) },
-          forward: :has_other_dependants,
-        },
+        dependants: Steps::ProviderDependants::DependantsStep,
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_means_has_other_dependants_path(application) },
           forward: lambda { |_application, has_other_dependant|

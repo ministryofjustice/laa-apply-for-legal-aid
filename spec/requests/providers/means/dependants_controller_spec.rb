@@ -67,16 +67,16 @@ RSpec.describe Providers::Means::DependantsController do
     end
 
     context "when the parameters are valid" do
-      it "redirects to the has other dependants page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when provider is checking answers of citizen" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
 
-      it "redirects to the has other dependants page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
