@@ -6,17 +6,13 @@
     ) do |form| %>
   <%= page_template template: :basic, form: do %>
     <span class="govuk-caption-xl"><%= position_in_array(@proceeding) %></span>
-    <h1 class="govuk-heading-xl govuk-!-margin-bottom-4"><%= @proceeding.meaning %></h1>
+    <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
 
     <h2 class="govuk-heading-m"><%= t(".h2_header") %></h2>
-
-    <div class="govuk-!-padding-1"></div>
 
     <p><strong><%= t(".los_header") %></strong> <%= form.object.substantive_level_of_service_name %></p>
     <p><strong><%= t(".scope_header") %></strong> <%= form.object.substantive_scope_limitation_meaning %></p>
     <p><strong><%= t(".scope_description_header") %></strong> <%= form.object.substantive_scope_limitation_description %></p>
-
-    <div class="govuk-!-padding-2"></div>
 
     <%= form.govuk_radio_buttons_fieldset :accepted_substantive_defaults,
                                           inline: false,
