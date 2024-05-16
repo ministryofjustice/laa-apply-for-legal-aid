@@ -18,6 +18,7 @@ module CopyCase
       clone_proceedings
       clone_application_merits
       clone_opponents
+      clone_merits_task_list
     rescue ClonerServiceError => e
       AlertManager.capture_exception(e)
       Rails.logger.error(e.message)
@@ -116,6 +117,14 @@ module CopyCase
       end
     rescue StandardError => e
       raise ClonerServiceError, "clone_involved_children error: #{e.message}"
+    end
+
+    def clone_merits_task_list
+      dup_merits_task_list = source.legal_framework_merits_task_list.dup
+      target.legal_framework_merits_task_list = dup_merits_task_list
+      target.save!
+    rescue StandardError => e
+      raise ClonerServiceError, "clone_merits_task_list error: #{e.message}"
     end
   end
 end

@@ -201,6 +201,16 @@ RSpec.describe CopyCase::ClonerService do
       end
     end
 
+    it "copies legal_framework_merits_task_list" do
+      create(:legal_framework_merits_task_list, :da001, legal_aid_application: source)
+
+      expect { call }
+        .to change(target, :legal_framework_merits_task_list)
+        .from(nil)
+        .to(instance_of(LegalFramework::MeritsTaskList))
+      expect(target.reload.legal_framework_merits_task_list.serialized_data).to eq(source.reload.legal_framework_merits_task_list.serialized_data)
+    end
+
     context "when cloning proceedings raises an error" do
       before do
         allow(source).to receive(:proceedings).and_raise(StandardError, "new fake error")
@@ -244,6 +254,16 @@ RSpec.describe CopyCase::ClonerService do
     context "when cloning involved_children raises an error" do
       before do
         allow(source).to receive(:involved_children).and_raise(StandardError, "fake error")
+      end
+
+      it "returns false" do
+        expect(call).to be false
+      end
+    end
+
+    context "when cloning legal_framework_merits_task_list raises an error" do
+      before do
+        allow(source).to receive(:legal_framework_merits_task_list).and_raise(StandardError, "fake error")
       end
 
       it "returns false" do
