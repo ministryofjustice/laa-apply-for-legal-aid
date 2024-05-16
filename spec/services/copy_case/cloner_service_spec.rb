@@ -221,7 +221,7 @@ RSpec.describe CopyCase::ClonerService do
       end
     end
 
-    context "when cloning application merits" do
+    context "when cloning application merits raises an error" do
       before do
         allow(source).to receive(:allegation).and_raise(StandardError, "fake error")
       end
@@ -231,7 +231,7 @@ RSpec.describe CopyCase::ClonerService do
       end
     end
 
-    context "when cloning opponents" do
+    context "when cloning opponents raises an error" do
       before do
         allow(source).to receive(:opponents).and_raise(StandardError, "fake error")
       end
@@ -241,7 +241,7 @@ RSpec.describe CopyCase::ClonerService do
       end
     end
 
-    context "when cloning involved_children" do
+    context "when cloning involved_children raises an error" do
       before do
         allow(source).to receive(:involved_children).and_raise(StandardError, "fake error")
       end
