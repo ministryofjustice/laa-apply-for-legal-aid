@@ -14,6 +14,7 @@ module CopyCase
     end
 
     def call
+      clone_involved_children
       clone_proceedings
       clone_application_merits
       clone_opponents
@@ -43,6 +44,13 @@ module CopyCase
           dup_limitation = limitation.dup
           dup_limitation.proceeding_id = nil
           dup_proceeding.scope_limitations << dup_limitation
+        end
+
+        source_proceeding.proceeding_linked_children.each do |child|
+          dup_child = child.dup
+          dup_child.proceeding_id = nil
+          dup_child.involved_child_id = @involved_children_lookup[child.involved_child_id]
+          dup_proceeding.proceeding_linked_children << dup_child
         end
 
         new_proceedings << dup_proceeding
@@ -95,6 +103,19 @@ module CopyCase
       target.save!
     rescue StandardError => e
       raise ClonerServiceError, "clone_opponents error: #{e.message}"
+    end
+
+    def clone_involved_children
+      @involved_children_lookup = {}
+      source.involved_children.each do |child|
+        dup_child = child.dup
+        dup_child.legal_aid_application_id = target.id
+        target.involved_children << dup_child
+        target.save!
+        @involved_children_lookup[child.id.to_s] = dup_child.id
+      end
+    rescue StandardError => e
+      raise ClonerServiceError, "clone_involved_children error: #{e.message}"
     end
   end
 end
