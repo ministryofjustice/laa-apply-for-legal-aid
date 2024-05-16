@@ -13,11 +13,11 @@ RSpec.describe Flow::Steps::ProviderDependants::HasDependantsStep, type: :reques
   describe "#forward" do
     subject { described_class.forward.call(application) }
 
-    context "when applicantion has dependants" do
+    context "when application has dependants" do
       it { is_expected.to eq :dependants }
     end
 
-    context "when applicantion does not have dependants" do
+    context "when application does not have dependants" do
       let(:has_dependants) { false }
 
       it { is_expected.to eq :check_income_answers }
@@ -27,7 +27,7 @@ RSpec.describe Flow::Steps::ProviderDependants::HasDependantsStep, type: :reques
   describe "#check_answers" do
     subject { described_class.check_answers.call(application) }
 
-    context "when applicantion has at least one dependant" do
+    context "when application has at least one dependant" do
       let(:application) { create(:legal_aid_application, :with_dependant, has_dependants: true) }
 
       it { is_expected.to eq :has_other_dependants }
@@ -39,7 +39,7 @@ RSpec.describe Flow::Steps::ProviderDependants::HasDependantsStep, type: :reques
       it { is_expected.to eq :dependants }
     end
 
-    context "when applicantion does not have dependants" do
+    context "when application does not have dependants" do
       let(:application) { create(:legal_aid_application, has_dependants: false) }
 
       it { is_expected.to eq :check_income_answers }

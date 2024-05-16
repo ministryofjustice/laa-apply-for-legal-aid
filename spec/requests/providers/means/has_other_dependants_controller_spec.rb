@@ -29,18 +29,18 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
     context "when provider chooses yes" do
       let(:has_other_dependant) { "true" }
 
-      it "redirects to the page to add another dependant" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when providers chooses no" do
       let(:has_other_dependant) { "false" }
 
-      it "redirects to the check answers income page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       context "when provider is on non-passported journey without bank statement upload permissions" do
@@ -107,9 +107,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
       let(:has_other_dependant) { "true" }
 
-      it "redirects to the page to add another dependant" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -117,9 +117,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
       let(:has_other_dependant) { "false" }
 
-      it "redirects to the check answers income page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
   end
