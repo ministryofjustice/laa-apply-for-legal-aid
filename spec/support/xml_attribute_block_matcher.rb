@@ -134,13 +134,12 @@ module XMLBlockMatchers
   def validate_multiple_expectations(actual, expected_values, expected_response_type)
     return "Block not found" if actual.blank?
 
-    formatted_expected_values = []
-    expected_values.each do |expected_value|
-      formatted_expected_values << if formatted_decimal?(expected_value, expected_response_type)
-                                     sprintf("%<val>12.2f", val: expected_value).squish
-                                   else
-                                     expected_value
-                                   end
+    formatted_expected_values = expected_values.map do |expected_value|
+      if formatted_decimal?(expected_value, expected_response_type)
+        sprintf("%<val>12.2f", val: expected_value).squish
+      else
+        expected_value
+      end
     end
 
     actual_response_types = actual.search("ResponseType").map(&:text)

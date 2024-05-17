@@ -19,11 +19,9 @@ module Dashboard
 
       def self.data
         dates = (20.days.ago.to_date..Time.zone.today).to_a
-        result_set = []
-        dates.each do |date|
-          result_set << metrics(date)
+        dates.map do |date|
+          metrics(date)
         end
-        result_set
       end
 
       def self.handle
