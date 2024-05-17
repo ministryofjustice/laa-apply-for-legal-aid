@@ -15,10 +15,34 @@ module Providers
     def continue
       update_applicant_age_for_means_test_purposes!
 
+      unless draft_selected?
+        if cloner_should_run?
+          source_application = LegalAidApplication.find(legal_aid_application.copy_case_id)
+          case_cloned_response = CopyCase::ClonerService.call(legal_aid_application, source_application)
+          legal_aid_application.update!(case_cloned: case_cloned_response)
+        elsif destroy_lead_linked_application?
+          legal_aid_application.lead_linked_application.destroy!
+          legal_aid_application.update!(copy_case: nil, copy_case_id: nil)
+        end
+      end
       continue_or_draft
     end
 
   private
+
+    def cloner_should_run?
+      return false unless legal_aid_application.case_cloned.nil?
+      return false unless legal_aid_application.copy_case? && legal_aid_application.copy_case_id.present?
+
+      true
+    end
+
+    def destroy_lead_linked_application?
+      application_link = legal_aid_application.lead_linked_application
+      return false unless application_link
+
+      application_link.link_type_code == "false" || application_link == false
+    end
 
     def update_applicant_age_for_means_test_purposes!
       legal_aid_application
