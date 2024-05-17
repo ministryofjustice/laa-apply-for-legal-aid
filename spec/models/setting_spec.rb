@@ -16,6 +16,7 @@ RSpec.describe Setting do
         expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.home_address?).to be false
+        expect(rec.special_childrens_act?).to be false
       end
     end
 
@@ -32,6 +33,7 @@ RSpec.describe Setting do
           linked_applications: true,
           collect_hmrc_data: true,
           home_address: false,
+          special_childrens_act: true,
         )
       end
 
@@ -47,6 +49,7 @@ RSpec.describe Setting do
         expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.home_address?).to be false
+        expect(rec.special_childrens_act?).to be true
       end
     end
   end
@@ -65,6 +68,7 @@ RSpec.describe Setting do
       expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.home_address?).to be false
+      expect(described_class.special_childrens_act?).to be false
     end
   end
 end

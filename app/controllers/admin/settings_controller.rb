@@ -25,7 +25,8 @@ module Admin
                                       :partner_means_assessment,
                                       :linked_applications,
                                       :collect_hmrc_data,
-                                      :home_address)
+                                      :home_address,
+                                      :special_childrens_act)
     end
 
     def setting

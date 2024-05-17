@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_091845) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_17_110634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -958,6 +958,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_091845) do
     t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false
     t.boolean "home_address", default: false, null: false
+    t.boolean "special_childrens_act", default: false, null: false
   end
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
