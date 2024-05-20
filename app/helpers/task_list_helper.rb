@@ -1,8 +1,5 @@
 module TaskListHelper
   def task_list_includes?(legal_aid_application, task_name)
-    # TODO: AP-5023 Add legal_framework_merits_task_list to cloner service
-    return LegalAidApplication.find(legal_aid_application.copy_case_id).legal_framework_merits_task_list&.serialized_data&.match?(/name: :#{task_name}\n\s+dependencies: \*\d+/) if legal_aid_application.copy_case?
-
     legal_aid_application.legal_framework_merits_task_list.serialized_data.match?(/name: :#{task_name}\n\s+dependencies: \*\d+/)
   end
 
