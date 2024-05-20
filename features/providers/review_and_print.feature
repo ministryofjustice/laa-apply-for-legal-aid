@@ -3,11 +3,14 @@ Feature: Review and print your application
 
   Scenario: For a non-passported bank statement upload journey
     Given I have completed a bank statement upload application with merits
+    And the feature flag for linked_applications is enabled
     When I view the review and print your application page
-
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
+      | h2  | Cases linked to this one |
+      | h2  | All applications with a family link to this one |
+      | h2  | Copying |
       | h2  | What you're applying for |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
