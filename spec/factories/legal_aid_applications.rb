@@ -603,7 +603,6 @@ FactoryBot.define do
     end
 
     trait :with_linked_and_copied_application do
-      # copy_case { true }
       after(:create) do |application|
         lead_application = create(:legal_aid_application, :with_applicant, :with_proceedings, application_ref: "L-123-456")
         create(:linked_application,

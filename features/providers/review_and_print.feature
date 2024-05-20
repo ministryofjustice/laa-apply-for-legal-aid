@@ -12,7 +12,6 @@ Feature: Review and print your application
       | h2  | All applications with a family link to this one |
       | h2  | Copying |
       | h2  | What you're applying for |
-      | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h2  | Emergency cost limit |
@@ -52,7 +51,6 @@ Feature: Review and print your application
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
-      | h2  | What you're applying for |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
@@ -115,7 +113,6 @@ Feature: Review and print your application
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
-      | h2  | What you're applying for |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
