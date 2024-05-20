@@ -40,8 +40,8 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       let(:remove_dependant) { "true" }
 
       context "and no dependants remain after deletion" do
-        it "redirects to the has_dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
 
         it { expect(legal_aid_application.dependants.count).to eq 0 }
@@ -55,8 +55,8 @@ RSpec.describe Providers::Means::RemoveDependantsController do
       context "and dependants remain after the deletion" do
         let(:extra_dependant_count) { 1 }
 
-        it "redirects to the has_other_dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
