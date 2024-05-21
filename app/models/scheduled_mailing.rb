@@ -25,7 +25,7 @@ class ScheduledMailing < ApplicationRecord
   belongs_to :legal_aid_application, optional: true
 
   scope :waiting, -> { where(status: "waiting") }
-  scope :past_due, -> { where("scheduled_at < ?", Time.current) }
+  scope :past_due, -> { where(scheduled_at: ...Time.current) }
   scope :monitored, -> { where(status: MONITORED_STATUSES) }
 
   def self.send_now!(mailer_klass:, mailer_method:, legal_aid_application_id:, addressee:, arguments:)
