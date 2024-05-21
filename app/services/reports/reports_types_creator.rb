@@ -74,8 +74,8 @@ module Reports
     def find_application_ids
       # get application ids with a benefit check result within time range
       laa_ids = BenefitCheckResult
-                .where("created_at >= ?", "#{records_from.strftime('%Y-%m-%d')} 00:00:00.000000")
-                .where("created_at <= ?", "#{records_to.strftime('%Y-%m-%d')} 23:59:59.999999")
+                .where(created_at: "#{records_from.strftime('%Y-%m-%d')} 00:00:00.000000"..)
+                .where(created_at: .."#{records_to.strftime('%Y-%m-%d')} 23:59:59.999999")
 
       # distinguish whether a passported or non-passported application
       if default_opts[:passported]
