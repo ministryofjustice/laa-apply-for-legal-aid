@@ -28,6 +28,7 @@ RSpec.describe TaskListHelper do
     context "when the application has been copied" do
       before do
         create(:legal_framework_merits_task_list, :da001, legal_aid_application: source_application)
+        CopyCase::ClonerService.call(legal_aid_application, source_application)
       end
 
       let(:source_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
