@@ -112,12 +112,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
         },
         open_banking_consents: Steps::ProviderStart::OpenBankingConsentsStep,
-        open_banking_guidances: {
-          path: ->(application) { urls.providers_legal_aid_application_open_banking_guidance_path(application) },
-          forward: lambda do |_application, client_can_use_truelayer|
-            client_can_use_truelayer ? :email_addresses : :bank_statements
-          end,
-        },
+        open_banking_guidances: Steps::ProviderStart::OpenBankingGuidancesStep,
         bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
           forward: lambda do |application|
