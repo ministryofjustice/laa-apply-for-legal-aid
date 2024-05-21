@@ -39,6 +39,10 @@ class Setting < ApplicationRecord
     setting.home_address
   end
 
+  def self.special_childrens_act?
+    setting.special_childrens_act
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

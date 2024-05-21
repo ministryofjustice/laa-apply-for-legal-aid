@@ -9,7 +9,8 @@ module Settings
                   :partner_means_assessment,
                   :linked_applications,
                   :collect_hmrc_data,
-                  :home_address
+                  :home_address,
+                  :special_childrens_act
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -19,6 +20,7 @@ module Settings
               :linked_applications,
               :collect_hmrc_data,
               :home_address,
+              :special_childrens_act,
               presence: true
   end
 end
