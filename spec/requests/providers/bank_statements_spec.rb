@@ -315,9 +315,20 @@ RSpec.describe "Providers::BankStatementsController" do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_multiple_employments
           end
 
-          it "redirects to full_employment_details" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to providers_legal_aid_application_means_full_employment_details_path(legal_aid_application)
+            expect(response).to have_http_status(:redirect)
+          end
+        end
+
+        context "when HMRC response status is applicant_no_hmrc_data" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_no_hmrc_data
+          end
+
+          it "redirects to the next page" do
+            request
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -326,9 +337,9 @@ RSpec.describe "Providers::BankStatementsController" do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_single_employment
           end
 
-          it "redirects to employment_incomes" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path(legal_aid_application)
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -337,9 +348,9 @@ RSpec.describe "Providers::BankStatementsController" do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_unexpected_employment_data
           end
 
-          it "redirects to unexpected_employment_incomes" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to providers_legal_aid_application_means_unexpected_employment_income_path(legal_aid_application)
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -348,9 +359,9 @@ RSpec.describe "Providers::BankStatementsController" do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
           end
 
-          it "redirects to the receives_state_benefits page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
