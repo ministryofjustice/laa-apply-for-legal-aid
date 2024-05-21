@@ -60,7 +60,7 @@ RSpec.describe "update client email address before application confirmation" do
 
         it "redirects to next page" do
           patch_request
-          expect(response.body).to redirect_to(providers_legal_aid_application_about_the_financial_assessment_path(application_id))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end

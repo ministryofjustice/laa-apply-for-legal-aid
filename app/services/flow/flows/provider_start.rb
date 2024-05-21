@@ -115,10 +115,7 @@ module Flow
         open_banking_guidances: Steps::ProviderStart::OpenBankingGuidancesStep,
         bank_statements: Steps::ProviderStart::BankStatementsStep,
         # provider_means_state_benefits is called here
-        email_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
-          forward: :about_the_financial_assessments,
-        },
+        email_addresses: Steps::ProviderStart::EmailAddressesStep,
         about_the_financial_assessments: {
           path: ->(application) { urls.providers_legal_aid_application_about_the_financial_assessment_path(application) },
           forward: :application_confirmations,
