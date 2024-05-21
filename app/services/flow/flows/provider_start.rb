@@ -111,13 +111,7 @@ module Flow
         delegated_confirmation: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
         },
-        open_banking_consents: {
-          path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
-          forward: lambda do |application|
-            application.provider_received_citizen_consent? ? :open_banking_guidances : :bank_statements
-          end,
-        },
-
+        open_banking_consents: Steps::ProviderStart::OpenBankingConsentsStep,
         open_banking_guidances: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_guidance_path(application) },
           forward: lambda do |_application, client_can_use_truelayer|
