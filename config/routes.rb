@@ -89,6 +89,7 @@ Rails.application.routes.draw do
 
     post "provider/check", to: "providers#check", as: "provider_check"
     get "admin_report_application_details", to: "reports#download_application_details_report", as: "application_details_csv"
+    get "admin_report_provider_emails", to: "reports#download_provider_emails_report", as: "provider_emails_csv"
   end
 
   namespace "v1" do

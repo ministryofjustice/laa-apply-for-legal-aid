@@ -41,4 +41,21 @@ RSpec.describe Admin::ReportsController do
       expect(response.body).to match(/^col1,col2,col3/)
     end
   end
+
+  describe "GET provider emails" do
+    subject(:get_request) { get admin_provider_emails_csv_path(format: :csv) }
+
+    before { create(:provider, email: "test1@example.com") }
+
+    it "renders successfully" do
+      get_request
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "sends the data" do
+      get_request
+      expect(response.body).to match(/^email,last_active/)
+      expect(response.body).to match(/^test1@example.com/)
+    end
+  end
 end
