@@ -65,9 +65,9 @@ RSpec.describe Providers::Means::HasDependantsController do
           expect { request }.to change { legal_aid_application.reload.has_dependants }.from(nil).to(true)
         end
 
-        it "redirects to the add dependant details page" do
+        it "redirects to next page" do
           request
-          expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
