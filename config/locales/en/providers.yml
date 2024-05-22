@@ -322,19 +322,6 @@ en:
           heading: Client details
         section_proceeding:
           heading: Proceedings
-        section_linking:
-          heading: Cases linked to this one
-          linked: Link to another application?
-          FC_LEAD: Family link made to
-          LEGAL: Legal link made to
-          aria_prefix: which case
-        other_links_section:
-          FC_LEAD: All applications with a family link to this one
-          LEGAL: All applications with a legal link to this one
-        section_copying:
-          heading: Copying
-          question: Copy from another application?
-          copied: Application copied
         section_delegated:
           heading: Delegated functions
         section_emergency:

@@ -12,6 +12,7 @@ Given("I have completed a bank statement upload application with merits") do
     :with_restrictions,
     :with_incident,
     :with_vehicle,
+    :with_linked_and_copied_application,
     :with_transaction_period,
     :with_other_assets_declaration,
     :with_policy_disregards,

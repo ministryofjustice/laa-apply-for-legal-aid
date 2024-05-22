@@ -602,6 +602,22 @@ FactoryBot.define do
       latest_incident { build(:incident) }
     end
 
+    trait :with_linked_and_copied_application do
+      after(:create) do |application|
+        lead_application = create(:legal_aid_application, :with_applicant, :with_proceedings, application_ref: "L-123-456")
+        create(:linked_application,
+               confirm_link: true,
+               lead_application:,
+               associated_application: application,
+               link_type_code: "FC_LEAD")
+        create(:linked_application,
+               lead_application:,
+               associated_application: create(:legal_aid_application, :with_applicant, :with_proceedings, application_ref: "L-456-789"),
+               link_type_code: "FC_LEAD")
+        application.update!(copy_case_id: lead_application.id)
+      end
+    end
+
     trait :with_everything do
       populate_vehicle { true }
       with_applicant
