@@ -471,7 +471,7 @@ GEM
     pg_dump_anonymize (0.1.2)
     prometheus_exporter (2.0.8)
       webrick
-    propshaft (0.8.0)
+    propshaft (0.9.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
