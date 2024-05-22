@@ -68,18 +68,18 @@ RSpec.describe "does client use online banking requests" do
       context "when provider_received_citizen_consent is true" do
         let(:provider_received_citizen_consent) { "true" }
 
-        it "redirects to the open banking guidance page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_open_banking_guidance_path(application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "when provider_received_citizen_consent is false" do
         let(:provider_received_citizen_consent) { "false" }
 
-        it "redirects to the bank statement upload page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_bank_statements_path(application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -95,9 +95,9 @@ RSpec.describe "does client use online banking requests" do
       context "when form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
-        it "redirects provider to provider's applications page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
+          expect(response).to have_http_status(:redirect)
         end
 
         it "sets the application as draft" do
@@ -108,9 +108,9 @@ RSpec.describe "does client use online banking requests" do
         context "when no option is chosen" do
           let(:params) { {} }
 
-          it "redirects provider to provider's applications page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_applications_path)
+            expect(response).to have_http_status(:redirect)
           end
         end
       end

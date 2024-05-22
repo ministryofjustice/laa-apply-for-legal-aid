@@ -111,43 +111,11 @@ module Flow
         delegated_confirmation: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
         },
-        open_banking_consents: {
-          path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
-          forward: lambda do |application|
-            application.provider_received_citizen_consent? ? :open_banking_guidances : :bank_statements
-          end,
-        },
-
-        open_banking_guidances: {
-          path: ->(application) { urls.providers_legal_aid_application_open_banking_guidance_path(application) },
-          forward: lambda do |_application, client_can_use_truelayer|
-            client_can_use_truelayer ? :email_addresses : :bank_statements
-          end,
-        },
-        bank_statements: {
-          path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
-          forward: lambda do |application|
-            status = HMRC::StatusAnalyzer.call(application)
-            case status
-            when :applicant_multiple_employments, :applicant_no_hmrc_data
-              :full_employment_details
-            when :applicant_single_employment
-              :employment_incomes
-            when :applicant_unexpected_employment_data
-              :unexpected_employment_incomes
-            when :applicant_not_employed
-              :receives_state_benefits
-            else
-              raise "Unexpected hmrc status #{status.inspect}"
-            end
-          end,
-          check_answers: :check_income_answers,
-        },
+        open_banking_consents: Steps::ProviderStart::OpenBankingConsentsStep,
+        open_banking_guidances: Steps::ProviderStart::OpenBankingGuidancesStep,
+        bank_statements: Steps::ProviderStart::BankStatementsStep,
         # provider_means_state_benefits is called here
-        email_addresses: {
-          path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
-          forward: :about_the_financial_assessments,
-        },
+        email_addresses: Steps::ProviderStart::EmailAddressesStep,
         about_the_financial_assessments: {
           path: ->(application) { urls.providers_legal_aid_application_about_the_financial_assessment_path(application) },
           forward: :application_confirmations,

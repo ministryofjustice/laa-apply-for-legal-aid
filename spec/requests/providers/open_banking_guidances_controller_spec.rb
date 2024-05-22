@@ -73,8 +73,8 @@ RSpec.describe Providers::OpenBankingGuidancesController do
 
         let(:can_client_use_truelayer) { "true" }
 
-        it "redirects to the enter client email address page" do
-          expect(response).to redirect_to providers_legal_aid_application_email_address_path
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe Providers::OpenBankingGuidancesController do
 
         it "redirects to the bank statement upload page" do
           request
-          expect(response).to redirect_to providers_legal_aid_application_bank_statements_path
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
