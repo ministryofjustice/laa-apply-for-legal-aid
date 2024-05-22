@@ -1213,9 +1213,9 @@ en:
     merits_task_lists:
       show:
         page_heading: Provide details of the case
-        application_heading: Enter general case details
-        application_section_heading: Case details
-        proceeding_heading: Enter details for each proceeding
+        application_section_heading: About the application
+        proceeding_section_heading: About the %{proceeding}
+        no_more_information_needed: No more information is needed
         latest_incident_details: Latest incident details
         opponent_name: Opponents
         opponent_mental_capacity: Mental capacity of all parties
