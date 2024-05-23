@@ -1,6 +1,13 @@
+<% if @legal_aid_application.copy_case? %>
+  <% notification_banner_title = t("generic.important") %>
+  <% notification_banner_text = t(".banner_text", application_ref: @legal_aid_application.lead_linked_application.lead_application.application_ref) %>
+<% end %>
+
 <%= page_template(
       page_title: t(".h1-heading"),
       back_link: { path: reset_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application), method: :patch },
+      notification_banner_title:,
+      notification_banner_text:,
     ) do %>
 
   <%= render(

@@ -240,6 +240,7 @@ en:
         partner_national_insurance_number: Partner national Insurance number
     check_merits_answers:
       show:
+        banner_text: The merits information was copied from %{application_ref}.
         h1-heading: Check your answers
     confirm_client_declarations:
       show:
