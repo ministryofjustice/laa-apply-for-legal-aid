@@ -3,7 +3,7 @@ $govuk-new-link-styles: true;
 $govuk-new-typography-scale: true;
 $govuk-assets-path: "/";
 
-@import "govuk-frontend/dist/govuk/all";
+@import "govuk-frontend/dist/govuk/index";
 
 // Project specific
 
