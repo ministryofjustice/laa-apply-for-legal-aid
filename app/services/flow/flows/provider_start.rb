@@ -33,11 +33,7 @@ module Flow
         },
         proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
-        limitations: {
-          path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
-          forward: :has_national_insurance_numbers,
-          check_answers: :check_provider_answers,
-        },
+        limitations: Steps::ProviderStart::LimitationsStep,
         has_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
           forward: lambda do |application|

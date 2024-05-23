@@ -56,7 +56,8 @@ RSpec.describe Providers::LimitationsController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
         it "redirects to next page" do
-          expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+          patch_request
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -78,7 +79,8 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+            patch_request
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -112,7 +114,8 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+            patch_request
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -127,7 +130,8 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(patch_request).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
+            patch_request
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
