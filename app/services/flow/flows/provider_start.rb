@@ -31,10 +31,7 @@ module Flow
             application.employment_journey_ineligible? ? :use_ccms_employment : next_step
           end,
         },
-        proceedings_types: {
-          path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
-          forward: :has_other_proceedings,
-        },
+        proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
           forward: lambda do |application, add_another_proceeding|
