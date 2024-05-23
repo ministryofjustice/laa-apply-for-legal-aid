@@ -32,16 +32,7 @@ module Flow
           end,
         },
         proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
-        has_other_proceedings: {
-          path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
-          forward: lambda do |application, add_another_proceeding|
-            if add_another_proceeding
-              :proceedings_types
-            else
-              Flow::ProceedingLoop.next_step(application)
-            end
-          end,
-        },
+        has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: {
           path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
           forward: :has_national_insurance_numbers,
