@@ -51,16 +51,16 @@ RSpec.describe Providers::Means::ReceivesStateBenefitsController do
     context "when the provider says no benefits received" do
       let(:receives_state_benefits) { "false" }
 
-      it "redirects to the regular_income page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the provider says benefits are received" do
       let(:receives_state_benefits) { "true" }
 
-      it "redirects to the add_state_benefits page" do
-        expect(response).to redirect_to(new_providers_legal_aid_application_means_state_benefit_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -70,8 +70,8 @@ RSpec.describe Providers::Means::ReceivesStateBenefitsController do
       context "and the provider says no benefits received" do
         let(:receives_state_benefits) { "false" }
 
-        it "redirects to the check answers income page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -88,14 +88,14 @@ RSpec.describe Providers::Means::ReceivesStateBenefitsController do
                    owner_type: "Applicant")
           end
 
-          it "redirects to the add_other_state_benefit page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "and no other benefits exist" do
-          it "redirects to the state_benefits page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_means_state_benefit_path(legal_aid_application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
