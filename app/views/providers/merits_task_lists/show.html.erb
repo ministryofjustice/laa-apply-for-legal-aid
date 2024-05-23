@@ -13,42 +13,48 @@
       </p>
     <% end %>
 
-    <h2 class="govuk-heading-m">1. <%= t(".application_section_heading") %></h2>
+    <ol class="govuk-list govuk-list--number govuk-heading-m">
+      <li>
+        <h2 class="govuk-heading-m"><%= t(".application_section_heading") %></h2>
 
-    <%= govuk_task_list(id_prefix: "task-list_case-details") do |task_list|
-          @merits_tasks[:application].each do |task|
-            task_list.with_item(
-              title: t(".#{task.name}"),
-              href: _task_url(task.name, @legal_aid_application, task.state),
-              status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
-            )
-          end
-        end %>
-
-    <% @merits_tasks[:proceedings].each_with_index do |(ccms_code, proceeding), index| %>
-      <h2 class="govuk-heading-m"><%= index + 2 %>. <%= t(".proceeding_section_heading", proceeding: proceeding[:name]) %></h2>
-      <% if proceeding[:tasks].present? %>
-        <%= govuk_task_list(id_prefix: "task-list_#{(index + 1).ordinalize}-proceeding") do |task_list|
-              proceeding[:tasks].each do |task|
-                next if task.state.eql?(:ignored)
-
-                if task.state == :waiting_for_dependency
-                  task_list.with_item(title: t(".#{task.name}")) do |item|
-                    item.with_status(text: t(".states.waiting_for_dependency"), classes: "govuk-task-list__status--cannot-start-yet")
-                  end
-                else
-                  task_list.with_item(
-                    title: t(".#{task.name}"),
-                    href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code) : _task_url(task.name, @legal_aid_application, task.status),
-                    status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
-                  )
-                end
+        <%= govuk_task_list(id_prefix: "task-list_case-details") do |task_list|
+              @merits_tasks[:application].each do |task|
+                task_list.with_item(
+                  title: t(".#{task.name}"),
+                  href: _task_url(task.name, @legal_aid_application, task.state),
+                  status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
+                )
               end
             end %>
-      <% else %>
-        <p><%= t(".no_more_information_needed") %></p>
+      </li>
+
+      <% @merits_tasks[:proceedings].each_with_index do |(ccms_code, proceeding), index| %>
+        <li>
+          <h2 class="govuk-heading-m"><%= t(".proceeding_section_heading", proceeding: proceeding[:name]) %></h2>
+          <% if proceeding[:tasks].present? %>
+            <%= govuk_task_list(id_prefix: "task-list_#{(index + 1).ordinalize}-proceeding") do |task_list|
+                  proceeding[:tasks].each do |task|
+                    next if task.state.eql?(:ignored)
+
+                    if task.state == :waiting_for_dependency
+                      task_list.with_item(title: t(".#{task.name}")) do |item|
+                        item.with_status(text: t(".states.waiting_for_dependency"), classes: "govuk-task-list__status--cannot-start-yet")
+                      end
+                    else
+                      task_list.with_item(
+                        title: t(".#{task.name}"),
+                        href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code) : _task_url(task.name, @legal_aid_application, task.status),
+                        status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
+                      )
+                    end
+                  end
+                end %>
+          <% else %>
+            <p><%= t(".no_more_information_needed") %></p>
+          <% end %>
+        </li>
       <% end %>
-    <% end %>
+    </ol>
   </div>
 
   <%= next_action_buttons_with_form(
