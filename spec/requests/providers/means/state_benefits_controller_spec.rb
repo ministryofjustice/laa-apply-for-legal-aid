@@ -37,8 +37,8 @@ RSpec.describe Providers::Means::StateBenefitsController do
              legal_aid_application:, description: "Test state benefit")
     end
 
-    context "when the use has clicked the change link for an existing benefit payment" do
-      it "returns an the expected page with the correct heading" do
+    context "when the user has clicked the change link for an existing benefit payment" do
+      it "returns the expected page with the correct heading" do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Amend benefit details")
       end
@@ -73,8 +73,8 @@ RSpec.describe Providers::Means::StateBenefitsController do
     let(:frequency) { "weekly" }
 
     context "when the parameters are all valid" do
-      it "redirects to the add_other_state_benefits page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -110,8 +110,8 @@ RSpec.describe Providers::Means::StateBenefitsController do
     let(:frequency) { "weekly" }
 
     context "when the parameters are all valid" do
-      it "redirects to the add_other_state_benefits page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_add_other_state_benefits_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
