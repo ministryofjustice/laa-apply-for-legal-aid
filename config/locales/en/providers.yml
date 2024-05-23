@@ -481,7 +481,7 @@ en:
         form:
           name: Full name
           date_of_birth: Date of birth
-          dob_hint: For example, 31 3 2017.
+          dob_hint: For example, 31 3 %{year}.
           hint: Add one child at a time. You can add more later.
         show:
           page_title: Edit the details for %{name}
