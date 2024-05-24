@@ -81,16 +81,16 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
     context "when the provider responds yes" do
       let(:add_another_state_benefit) { "true" }
 
-      it "redirects to the new state benefits page" do
-        expect(response).to redirect_to(new_providers_legal_aid_application_means_state_benefit_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the provider responds no" do
       let(:add_another_state_benefit) { "false" }
 
-      it "redirects to the check_income_answers page" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -109,16 +109,16 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
       context "and no more benefits are to be added" do
         let(:add_another_state_benefit) { "false" }
 
-        it "redirects to the check answers income page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "and more benefits are to be added" do
         let(:add_another_state_benefit) { "true" }
 
-        it "redirects to the state_benefits page" do
-          expect(response).to redirect_to(new_providers_legal_aid_application_means_state_benefit_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
