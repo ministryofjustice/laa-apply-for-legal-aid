@@ -127,17 +127,7 @@ module Flow
           check_answers: :check_merits_answers,
         },
         chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
-        success_prospects: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_success_prospects_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
+        success_prospects: Steps::ProviderMerits::SuccessProspectsStep,
         opponents_application: {
           path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
