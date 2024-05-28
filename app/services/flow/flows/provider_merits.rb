@@ -143,17 +143,7 @@ module Flow
         prohibited_steps: Steps::ProviderMerits::ProhibitedStepsStep,
         linked_children: Steps::ProviderMerits::LinkedChildrenStep,
         specific_issue: Steps::ProviderMerits::SpecificIssueStep,
-        vary_order: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_vary_order_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
+        vary_order: Steps::ProviderMerits::VaryOrderStep,
         merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: ->(application) { application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers },
