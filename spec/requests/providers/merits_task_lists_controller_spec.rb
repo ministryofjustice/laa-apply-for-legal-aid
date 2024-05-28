@@ -27,11 +27,11 @@ RSpec.describe Providers::MeritsTaskListsController do
       end
 
       it "displays a section for the whole application" do
-        expect(response.body).to include("Case details")
+        expect(response.body).to include("About the application")
       end
 
       it "displays a section for all proceeding types linked to this application" do
-        proceeding_names.each { |name| expect(response.body).to include(name) }
+        proceeding_names.each { |name| expect(response.body).to include("About the #{name}") }
       end
     end
 
@@ -46,11 +46,11 @@ RSpec.describe Providers::MeritsTaskListsController do
       end
 
       it "displays a section for the whole application" do
-        expect(response.body).to include("Case details")
+        expect(response.body).to include("About the application")
       end
 
       it "displays a section for all proceeding types linked to this application" do
-        proceeding_names.each { |name| expect(response.body).to include(name) }
+        proceeding_names.each { |name| expect(response.body).to include("About the #{name}") }
       end
     end
 
