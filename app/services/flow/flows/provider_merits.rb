@@ -141,17 +141,7 @@ module Flow
         },
         attempts_to_settle: Steps::ProviderMerits::AttemptsToSettleStep,
         prohibited_steps: Steps::ProviderMerits::ProhibitedStepsStep,
-        linked_children: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_linked_children_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
+        linked_children: Steps::ProviderMerits::LinkedChildrenStep,
         specific_issue: {
           path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
