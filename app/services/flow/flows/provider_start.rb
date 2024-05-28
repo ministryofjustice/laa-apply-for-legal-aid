@@ -31,25 +31,9 @@ module Flow
             application.employment_journey_ineligible? ? :use_ccms_employment : next_step
           end,
         },
-        proceedings_types: {
-          path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
-          forward: :has_other_proceedings,
-        },
-        has_other_proceedings: {
-          path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
-          forward: lambda do |application, add_another_proceeding|
-            if add_another_proceeding
-              :proceedings_types
-            else
-              Flow::ProceedingLoop.next_step(application)
-            end
-          end,
-        },
-        limitations: {
-          path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
-          forward: :has_national_insurance_numbers,
-          check_answers: :check_provider_answers,
-        },
+        proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
+        has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
+        limitations: Steps::ProviderStart::LimitationsStep,
         has_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
           forward: lambda do |application|

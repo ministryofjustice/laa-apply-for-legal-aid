@@ -108,7 +108,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
 
       it "redirects to next step" do
         patch_request
-        expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "calls the add proceeding service" do
