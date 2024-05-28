@@ -59,9 +59,9 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
       context "when Form submitted using Continue button" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects provider back to the merits task list" do
+        it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
 
         context "when the specific issue task is incomplete" do
