@@ -77,11 +77,7 @@ module Flow
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
         },
-        matter_opposed_reasons: {
-          path: ->(application) { urls.providers_legal_aid_application_matter_opposed_reason_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
+        matter_opposed_reasons: Steps::ProviderMerits::MatterOpposedReasonsStep,
         chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
         success_prospects: Steps::ProviderMerits::SuccessProspectsStep,
         opponents_application: {
