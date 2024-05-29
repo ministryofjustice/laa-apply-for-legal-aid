@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LegalFramework::ClientInvolvementTypes::All, :vcr do
+RSpec.describe LegalFramework::ClientInvolvementTypes::All, vcr: { cassette_name: "lfa_client_involvement_types_all" } do
   subject(:all) { described_class }
 
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types" }
@@ -16,6 +16,20 @@ RSpec.describe LegalFramework::ClientInvolvementTypes::All, :vcr do
 
     it "returns the expected number of results" do
       expect(call.count).to eq 5
+    end
+
+    it "returns the expected values" do
+      expect(call.map(&:description)).to eq full_list
+    end
+
+    def full_list
+      [
+        "Applicant, claimant or petitioner",
+        "Defendant or respondent",
+        "A child subject of the proceeding",
+        "Intervenor",
+        "Joined party",
+      ]
     end
   end
 end
