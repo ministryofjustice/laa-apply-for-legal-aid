@@ -4,13 +4,11 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <div class="govuk-hint"><%= t(".hint") %></div>
-  <div class="govuk-!-padding-bottom-2"></div>
+  <div class="govuk-hint govuk-!-padding-bottom-2"><%= t(".hint") %></div>
 
   <%= form.govuk_text_field :full_name, width: "three-quarters", label: { size: "m", text: t(".name") } %>
 
-  <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint") } %>
+  <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint", year: Time.zone.now.year - 7) } %>
 
-  <div class="govuk-!-padding-bottom-2"></div>
   <%= next_action_buttons(show_draft: true, form:) %>
 <% end %>
