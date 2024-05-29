@@ -4,16 +4,7 @@ module Flow
       STEPS = {
         start_involved_children_task: Steps::ProviderMerits::StartInvolvedChildrenTaskStep,
         involved_children: Steps::ProviderMerits::InvolvedChildrenStep,
-        has_other_involved_children: {
-          path: ->(application) { urls.providers_legal_aid_application_has_other_involved_children_path(application) },
-          forward: lambda { |application, has_other_involved_child|
-            if has_other_involved_child
-              :involved_children
-            else
-              Flow::MeritsLoop.forward_flow(application, :application)
-            end
-          },
-        },
+        has_other_involved_children: Steps::ProviderMerits::HasOtherInvolvedChildrenStep,
         remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
