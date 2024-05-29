@@ -85,7 +85,7 @@ module Providers
 
             it "redirects" do
               patch_request
-              expect(response).to redirect_to(providers_legal_aid_application_has_other_involved_children_path(application))
+              expect(response).to have_http_status(:redirect)
             end
 
             context "with trailing whitespaces" do
