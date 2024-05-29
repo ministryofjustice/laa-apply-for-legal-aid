@@ -6,7 +6,15 @@ module LegalFramework
 
         def initialize(cit_hash)
           @ccms_code = cit_hash["ccms_code"]
-          @description = cit_hash["description"]
+          @description = update_description(@ccms_code) || cit_hash["description"]
+        end
+
+        def update_description(code)
+          {
+            A: "Applicant, claimant or petitioner",
+            D: "Defendant or respondent",
+            W: "A child subject of the proceeding",
+          }[code.to_sym]
         end
       end
 

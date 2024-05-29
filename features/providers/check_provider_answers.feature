@@ -178,7 +178,7 @@ Feature: Checking client details answers backwards and forwards
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
-    When I choose 'Applicant/claimant/petitioner'
+    When I choose 'Applicant, claimant or petitioner'
     And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'No'

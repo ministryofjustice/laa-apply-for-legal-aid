@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v2.9.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,21 +21,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 19 Jul 2022 11:17:02 GMT
+      - Wed, 29 May 2024 10:27:14 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '277'
       Connection:
       - keep-alive
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
-      - 1; mode=block
+      - '0'
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Permitted-Cross-Domain-Policies:
       - none
       Referrer-Policy:
@@ -43,18 +41,19 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"a1eebdf4623a3d4698b36df0c0ee4328"
+      - W/"8bf337339345d42d16a9e6062fb65ccf"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 222738b10fa37f2eaa4d3674ff041575
+      - 1623778c95d45ce7be2791a577652e52
       X-Runtime:
-      - '0.006265'
+      - '0.030174'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
-        of proceedings (child)"},{"ccms_code":"Z","description":"Joined party"},{"ccms_code":"I","description":"Intervenor"}]'
-  recorded_at: Tue, 19 Jul 2022 11:17:02 GMT
-recorded_with: VCR 6.1.0
+        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+        party"}]'
+  recorded_at: Wed, 29 May 2024 10:27:14 GMT
+recorded_with: VCR 6.2.0
