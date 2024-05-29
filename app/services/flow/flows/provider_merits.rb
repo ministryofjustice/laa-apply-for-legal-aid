@@ -2,17 +2,7 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps
       STEPS = {
-        start_involved_children_task: {
-          # This allows the statement of case flow to check for involved children while allowing a standard path
-          #  to :involved_children from :has_other_involved_children that always goes to the new children page
-          path: lambda do |application|
-            if application.involved_children.any?
-              urls.providers_legal_aid_application_has_other_involved_children_path(application)
-            else
-              urls.new_providers_legal_aid_application_involved_child_path(application)
-            end
-          end,
-        },
+        start_involved_children_task: Steps::ProviderMerits::StartInvolvedChildrenTaskStep,
         involved_children: {
           path: lambda do |application, params|
             involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:id]
