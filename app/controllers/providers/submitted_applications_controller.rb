@@ -2,6 +2,7 @@ module Providers
   class SubmittedApplicationsController < ProviderBaseController
     authorize_with_policy_method :show_submitted_application?
     helper_method :display_employment_income?
+    helper_method :link_banner_display
 
     def show
       @source_application = LegalAidApplication.find(legal_aid_application.copy_case_id) if @legal_aid_application.copy_case?
