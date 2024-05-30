@@ -126,35 +126,8 @@ module Flow
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
         },
-        chances_of_success: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_chances_of_success_index_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            if proceeding.chances_of_success.success_likely?
-              Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-            else
-              :success_prospects
-            end
-          end,
-          check_answers: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            proceeding.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
-          end,
-        },
-        success_prospects: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_success_prospects_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
+        chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
+        success_prospects: Steps::ProviderMerits::SuccessProspectsStep,
         opponents_application: {
           path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
@@ -166,61 +139,11 @@ module Flow
           end,
           check_answers: :check_merits_answers,
         },
-        attempts_to_settle: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_attempts_to_settle_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
-        prohibited_steps: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_prohibited_steps_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
-        linked_children: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_linked_children_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
-        specific_issue: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_specific_issue_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
-        vary_order: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_vary_order_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
+        attempts_to_settle: Steps::ProviderMerits::AttemptsToSettleStep,
+        prohibited_steps: Steps::ProviderMerits::ProhibitedStepsStep,
+        linked_children: Steps::ProviderMerits::LinkedChildrenStep,
+        specific_issue: Steps::ProviderMerits::SpecificIssueStep,
+        vary_order: Steps::ProviderMerits::VaryOrderStep,
         merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: ->(application) { application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers },

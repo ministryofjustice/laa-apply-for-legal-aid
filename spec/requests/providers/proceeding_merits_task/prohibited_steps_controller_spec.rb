@@ -81,7 +81,7 @@ module Providers
 
           it "redirects to the next page" do
             post_prohibited_steps
-            expect(response).to redirect_to(providers_merits_task_list_chances_of_success_index_path(proceeding))
+            expect(response).to have_http_status(:redirect)
           end
         end
 

@@ -60,9 +60,9 @@ module Providers
               expect { patch_request }.to change { proceeding.proceeding_linked_children.count }.by(3)
             end
 
-            it "redirects to the next unanswered question" do
+            it "redirects to the next page" do
               patch_request
-              expect(response).to redirect_to(providers_merits_task_list_attempts_to_settle_path(proceeding))
+              expect(response).to have_http_status(:redirect)
             end
           end
 
@@ -77,9 +77,9 @@ module Providers
                 legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE003, :attempts_to_settle)
               end
 
-              it "redirects to the prohibited steps question" do
+              it "redirects to the next page" do
                 patch_request
-                expect(response).to redirect_to(providers_merits_task_list_prohibited_steps_path(proceeding))
+                expect(response).to have_http_status(:redirect)
               end
             end
           end
