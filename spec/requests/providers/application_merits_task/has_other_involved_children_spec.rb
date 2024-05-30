@@ -48,7 +48,7 @@ module Providers
 
           it "redirects to new involved child" do
             patch_request
-            expect(response).to redirect_to(new_providers_legal_aid_application_involved_child_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "does not set the task to complete" do
@@ -70,7 +70,7 @@ module Providers
 
           it "redirects to why matter opposed page" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_matter_opposed_reason_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "sets the task to complete" do

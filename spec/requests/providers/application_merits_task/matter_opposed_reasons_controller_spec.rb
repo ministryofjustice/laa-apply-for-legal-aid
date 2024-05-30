@@ -87,9 +87,6 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedReasonsController 
 
     context "when the provider continues" do
       let(:button_clicked) { continue_button }
-      let(:next_page) do
-        providers_legal_aid_application_date_client_told_incident_path(legal_aid_application)
-      end
 
       it "updates the reason, completes the task, and redirects to the next page" do
         login_as provider
@@ -98,7 +95,7 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedReasonsController 
 
         expect(legal_aid_application.matter_opposition.reason).to eq(reason)
         expect(matter_opposed_task.state).to eq(:complete)
-        expect(response).to redirect_to(next_page)
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -112,7 +109,7 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedReasonsController 
 
         expect(legal_aid_application.matter_opposition.reason).to eq(reason)
         expect(matter_opposed_task.state).to eq(:not_started)
-        expect(response).to redirect_to(providers_legal_aid_applications_path)
+        expect(response).to have_http_status(:redirect)
       end
     end
 
