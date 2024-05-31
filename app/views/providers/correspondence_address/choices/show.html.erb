@@ -1,0 +1,27 @@
+<%= form_with(
+      model: @form,
+      scope: :applicant,
+      url: providers_legal_aid_application_correspondence_address_choice_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".heading"),
+        template: :basic,
+        form:,
+      ) do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:correspondence_address_choice, legend: { size: "xl", text: t(".heading"), tag: "h1" }) do %>
+      <div class="govuk-body"><%= t(".text") %></div>
+      <%= form.govuk_radio_button :correspondence_address_choice, :home, label: { text: t(".options.home") }, link_errors: true %>
+      <%= form.govuk_radio_button :correspondence_address_choice, :residence, label: { text: t(".options.residential") }, link_errors: false %>
+      <%= form.govuk_radio_button :correspondence_address_choice, :office, label: { text: t(".options.office") }, hint: { text: t(".options.office_hint") }, link_errors: false %>
+    <% end %>
+
+    <%= next_action_buttons(
+          form:,
+          show_draft: true,
+        ) %>
+  <% end %>
+<% end %>

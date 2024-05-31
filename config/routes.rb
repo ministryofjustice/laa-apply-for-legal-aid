@@ -165,6 +165,7 @@ Rails.application.routes.draw do
       end
       get :search, on: :collection
       namespace :correspondence_address do
+        resource :choice, only: %i[show update], path: "where_to_send_correspondence"
         resource :lookup, only: %i[show update], path: "find_correspondence_address"
         resource :manual, only: %i[show update], path: "enter_correspondence_address"
         resource :selection, only: %i[show update], path: "correspondence_address_results"

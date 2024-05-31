@@ -189,7 +189,16 @@ en:
         they_always_need: They always need to be on.
         find_out_more_link: Find out more about cookies on GOV.UK
         save_changes_btn: Save changes
-
+    correspondence_address:
+      choices:
+        show:
+          heading: Where should we send your client’s correspondence?
+          text: We do not send correspondence to non-UK addresses.
+          options:
+            home: My client’s UK home address
+            residential: Another UK residential address
+            office: A UK office address
+            office_hint: For example, a provider’s office
     confirm_dwp_non_passported_applications:
       show:
         tab_title: DWP records show that your client does not get a passporting benefit – Apply for Legal Aid - GOV.UK
