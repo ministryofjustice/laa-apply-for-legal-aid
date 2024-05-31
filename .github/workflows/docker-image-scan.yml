@@ -1,8 +1,9 @@
 name: Scan docker image
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron:  '45 5 * * *'
+    - cron:  '15 6 * * *'
 
 jobs:
   scan-docker-image:
