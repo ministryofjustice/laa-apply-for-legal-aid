@@ -8,6 +8,12 @@ class Applicant < ApplicationRecord
 
   NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
 
+  enum correspondence_address_choice: {
+    home: "home".freeze,
+    residence: "residence".freeze,
+    office: "office".freeze,
+  }
+
   has_one :legal_aid_application, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_one :address, -> { where(location: "correspondence").order(created_at: :desc) }, inverse_of: :applicant, dependent: :destroy
