@@ -652,6 +652,7 @@ Given("I complete the passported journey as far as check your answers for client
     postcode: "SW1H 9EA",
     lookup_used: true,
     applicant:,
+    location: Setting.home_address? ? "home" : "correspondence",
   )
   @legal_aid_application = create(
     :legal_aid_application,

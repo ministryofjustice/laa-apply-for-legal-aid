@@ -85,7 +85,7 @@ Feature: Checking client details answers backwards and forwards
     And I click 'Use this address'
     Then I should be on a page with title "Check your answers"
     And I should see "British Transport Police"
-  
+
   @javascript @vcr
   Scenario: I am able to return and amend the client's home address
     Given the feature flag for home_address is enabled
@@ -93,13 +93,10 @@ Feature: Checking client details answers backwards and forwards
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | Home address | Same as correspondence address |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
     When I click Check Your Answers Change link for "home address"
-    Then I should be on a page with title "Is this also your client's home address?"
-    And I choose 'No'
-    Then I click 'Save and continue'
-    Then I should be on a page with title "Why is your client's home address different to their correspondence address?"
-    And I choose 'They have a different home address'
+    Then I should be on a page with title "Does your client have a home address?"
+    And I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page with title "Find your client's home address"
     Then I enter a postcode 'SW1H 9EA'
@@ -109,8 +106,31 @@ Feature: Checking client details answers backwards and forwards
     Then I should be on a page with title "Check your answers"
     And the "Client details" check your answers section should contain:
       | question | answer |
-      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
       | Home address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+
+  @javascript @vcr
+  Scenario: I am able to return and amend the client's correspondence address
+    Given the feature flag for home_address is enabled
+    And I complete the passported journey as far as check your answers for client details
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+    When I click Check Your Answers Change link for "address"
+    Then I should be on a page with title "Where should we send your client's correspondence?"
+    And I choose 'Another UK residential address'
+    Then I click 'Save and continue'
+    Then I should be on a page with title "Find your client's correspondence address"
+    Then I enter a postcode 'SW1H 9EA'
+    When I click 'Find address'
+    And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
+    And I click 'Use this address'
+    Then I should be on a page with title "Check your answers"
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
 
 
   @javascript @vcr
@@ -122,11 +142,8 @@ Feature: Checking client details answers backwards and forwards
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | Home address | Alemannenstrasse 1\nStuttgart D-12345 |
     When I click Check Your Answers Change link for "home address"
-    Then I should be on a page with title "Is this also your client's home address?"
-    And I choose 'No'
-    Then I click 'Save and continue'
-    Then I should be on a page with title "Why is your client's home address different to their correspondence address?"
-    And I choose 'They have a different home address'
+    Then I should be on a page with title "Does your client have a home address?"
+    And I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page with title "Find your client's home address"
     And I click link "Enter a non-UK address"

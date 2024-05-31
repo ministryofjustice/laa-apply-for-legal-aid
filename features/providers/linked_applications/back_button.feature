@@ -19,7 +19,7 @@ Scenario: Complete flow reversion with back button
   And I choose 'No'
   And I enter the date of birth '01-01-1999'
   And I click 'Save and continue'
-  Then I should be on a page with title "Where should we send your client’s correspondence?"
+  Then I should be on a page with title "Where should we send your client's correspondence?"
 
   When I choose 'Another UK residential address'
   And I click 'Save and continue'
@@ -29,9 +29,9 @@ Scenario: Complete flow reversion with back button
   And I click find address
   And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
   And I click 'Use this address'
-  Then I should be on a page with title "Is this also your client's home address?"
+  Then I should be on a page with title "Does your client have a home address?"
 
-  When I choose "Yes"
+  When I choose "No, they have no fixed address"
   And I click "Save and continue"
   Then I should be on a page with title "Do you want to link this application with another one?"
 
