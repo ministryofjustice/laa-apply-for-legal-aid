@@ -34,4 +34,22 @@ RSpec.describe Addresses::ChoiceForm, type: :form do
       end
     end
   end
+
+  describe "#save" do
+    context "when the correspondence_address_choice is home" do
+      it { expect { form.save }.to change(applicant, :same_correspondence_and_home_address).from(nil).to(true) }
+    end
+
+    context "when the correspondence_address_choice is residence" do
+      let(:correspondence_address_choice) { "residence" }
+
+      it { expect { form.save }.to change(applicant, :same_correspondence_and_home_address).from(nil).to(false) }
+    end
+
+    context "when the correspondence_address_choice is office" do
+      let(:correspondence_address_choice) { "office" }
+
+      it { expect { form.save }.to change(applicant, :same_correspondence_and_home_address).from(nil).to(false) }
+    end
+  end
 end
