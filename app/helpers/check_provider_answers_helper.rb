@@ -6,7 +6,7 @@ module CheckProviderAnswersHelper
       providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application.id, anchor: :postcode)
 
     elsif location == "home"
-      providers_legal_aid_application_home_address_different_address_path(legal_aid_application.id)
+      providers_legal_aid_application_home_address_status_path(legal_aid_application.id)
     end
   end
 

@@ -41,7 +41,7 @@ RSpec.describe HomeAddress::StatusForm, type: :form do
 
       it "adds custom blank error message" do
         error_messages = instance.errors.messages.values.flatten
-        expect(error_messages).to include("Select why the client's home address is different to their correspondence address")
+        expect(error_messages).to include("Select yes if your client has a home address")
       end
     end
   end

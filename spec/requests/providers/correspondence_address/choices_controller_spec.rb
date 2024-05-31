@@ -22,7 +22,7 @@ RSpec.describe Providers::CorrespondenceAddress::ChoicesController do
 
       it "shows the correspondence address choice page" do
         expect(response).to be_successful
-        expect(unescaped_response_body).to include("Where should we send your client’s correspondence?")
+        expect(unescaped_response_body).to include("Where should we send your client's correspondence?")
       end
     end
   end

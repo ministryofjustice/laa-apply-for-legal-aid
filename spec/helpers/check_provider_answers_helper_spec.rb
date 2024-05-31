@@ -16,7 +16,7 @@ RSpec.describe CheckProviderAnswersHelper do
       let(:location) { "home" }
 
       it "returns the home_address_different_address path" do
-        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/home_address/correspondence_is_home_address?locale=en"
+        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/home_address/status?locale=en"
       end
     end
 

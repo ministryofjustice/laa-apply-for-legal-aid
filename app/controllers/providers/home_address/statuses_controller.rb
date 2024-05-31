@@ -1,13 +1,15 @@
 module Providers
   module HomeAddress
-    class DifferentAddressesController < ProviderBaseController
+    class StatusesController < ProviderBaseController
+      prefix_step_with :home_address
+
       def show
-        @form = ::HomeAddress::DifferentAddressForm.new(model: applicant)
+        @form = ::HomeAddress::StatusForm.new(model: applicant)
         @correspondence_address = applicant.address
       end
 
       def update
-        @form = ::HomeAddress::DifferentAddressForm.new(form_params)
+        @form = ::HomeAddress::StatusForm.new(form_params)
         @correspondence_address = applicant.address
 
         render :show unless save_continue_or_draft(@form)
@@ -21,7 +23,7 @@ module Providers
 
       def form_params
         merge_with_model(applicant) do
-          params.require(:applicant).permit(:same_correspondence_and_home_address)
+          params.require(:applicant).permit(:no_fixed_residence)
         end
       end
     end

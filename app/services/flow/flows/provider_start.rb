@@ -10,7 +10,7 @@ module Flow
         correspondence_address_lookups: Steps::Addresses::CorrespondenceAddressLookupsStep,
         correspondence_address_selections: Steps::Addresses::CorrespondenceAddressSelectionsStep,
         correspondence_address_manuals: Steps::Addresses::CorrespondenceAddressManualsStep,
-        different_addresses: Steps::Addresses::DifferentAddressesStep,
+        home_address_statuses: Steps::Addresses::HomeAddressStatusesStep,
         different_address_reasons: Steps::Addresses::DifferentAddressReasonsStep,
         home_address_lookups: Steps::Addresses::HomeAddressLookupsStep,
         home_address_selections: Steps::Addresses::HomeAddressSelectionsStep,
