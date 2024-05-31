@@ -6,6 +6,7 @@ module Flow
         delete: Steps::DeleteStep,
         applicants: Steps::ProviderStart::ApplicantsStep,
         applicant_details: Steps::ProviderStart::ApplicantDetailsStep,
+        correspondence_address_choices: Steps::Addresses::CorrespondenceAddressChoicesStep,
         correspondence_address_lookups: Steps::Addresses::CorrespondenceAddressLookupsStep,
         correspondence_address_selections: Steps::Addresses::CorrespondenceAddressSelectionsStep,
         correspondence_address_manuals: Steps::Addresses::CorrespondenceAddressManualsStep,
