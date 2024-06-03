@@ -99,17 +99,28 @@
     <% end %>
   <% end %>
 
-  <% if Setting.home_address? && :home_address.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__home_address" }) do |row| %>
-      <%= row.with_key(text: t(".home_address"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: home_address_text(applicant)) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: change_address_link(@legal_aid_application, "home"),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.home_address')}",
-          ) %>
-    <% end %>
-  <% end %>
+  <% if Setting.home_address? && :home_address.in?(attributes)
+       summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_home_address" }) do |row|
+         row.with_key(text: t(".has_home_address"), classes: "govuk-!-width-one-half")
+         row.with_value(text: t(".home_address_display.#{client_has_home_address?(applicant)}"))
+         row.with_action(
+           text: t("generic.change"),
+           href: providers_legal_aid_application_home_address_status_path(@legal_aid_application),
+           visually_hidden_text: "#{t('.aria_prefix')} #{t('.home_address')}",
+         )
+       end
+       if client_has_home_address?(applicant)
+         summary_list.with_row(html_attributes: { id: "app-check-your-answers__home_address" }) do |row|
+           row.with_key(text: t(".home_address"), classes: "govuk-!-width-one-half")
+           row.with_value(text: address_with_line_breaks(applicant.home_address))
+           row.with_action(
+             text: t("generic.change"),
+             href: change_address_link(@legal_aid_application, "home"),
+             visually_hidden_text: "#{t('.aria_prefix')} #{t('.home_address')}",
+           )
+         end
+       end
+     end %>
 
   <% if :employment_status.in?(attributes) && !applicant.employed.nil? %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__employment_status" }) do |row| %>

@@ -11,22 +11,14 @@ module CheckProviderAnswersHelper
     end
   end
 
-  def home_address_text(applicant)
-    if Setting.home_address? && applicant.same_correspondence_and_home_address?
-      # TODO: Delete this if block when home_address? flag is removed
-      # and leave `if applicant.no_fixed_residence?` as the first option
-      "Same as correspondence address"
-    elsif applicant.no_fixed_residence?
-      "No fixed residence"
-    else
-      address_with_line_breaks(applicant.home_address)
-    end
+  def client_has_home_address?(applicant)
+    !applicant.no_fixed_residence?
   end
 
   def correspondence_address_text(applicant)
     if Setting.home_address? && applicant.same_correspondence_and_home_address?
-      # TODO: Just delete the `Setting.home_address? &&` from this if block
-      # when the home_address? flag is removed
+      # TODO: Just delete the `Setting.home_address? &&` from this
+      # block when the home_address? flag is removed
       address_with_line_breaks(applicant.home_address)
     else
       address_with_line_breaks(applicant.address)

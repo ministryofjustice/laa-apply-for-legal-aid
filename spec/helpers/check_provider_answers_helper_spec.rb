@@ -38,22 +38,6 @@ RSpec.describe CheckProviderAnswersHelper do
     end
   end
 
-  describe ".home_address_text" do
-    subject(:text) { helper.home_address_text(applicant) }
-
-    let(:address) { create(:address, location: "home") }
-
-    context "when applicant has no fixed residence" do
-      let(:no_fixed_residence) { true }
-
-      it { expect(text).to eq "No fixed residence" }
-    end
-
-    context "when applicant has a home address" do
-      it { expect(text).to eq "#{address.address_line_one}<br>#{address.address_line_two}<br>#{address.city}<br>#{address.county}<br>#{address.pretty_postcode}" }
-    end
-  end
-
   describe ".correspondence_address_text" do
     subject(:text) { helper.correspondence_address_text(applicant) }
 
