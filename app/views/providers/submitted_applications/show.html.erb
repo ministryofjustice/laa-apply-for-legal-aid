@@ -1,7 +1,7 @@
-<%= if @legal_aid_application.associated_linked_applications.any?
-      notification_banner_title = t("generic.important")
-      notification_banner_text = link_banner_display
-    end %>
+<% if @legal_aid_application.associated_linked_applications.any?
+     notification_banner_title = t("generic.important")
+     notification_banner_text = link_banner_display
+   end %>
 
 <%= page_template page_title: t(".heading"),
                   back_link: :none,
