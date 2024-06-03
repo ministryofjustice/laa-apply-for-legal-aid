@@ -27,7 +27,7 @@ RSpec.describe HomeAddress::StatusForm, type: :form do
     context "with no chosen" do
       let(:no_fixed_residence) { "false" }
 
-      it "sets no_fixed_residence to true" do
+      it "sets no_fixed_residence to false" do
         expect(applicant.no_fixed_residence?).to be false
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe HomeAddress::StatusForm, type: :form do
     context "with no chosen" do
       let(:no_fixed_residence) { "false" }
 
-      it "sets no_fixed_residence to true" do
+      it "sets no_fixed_residence to false" do
         expect(applicant.no_fixed_residence?).to be false
       end
     end
