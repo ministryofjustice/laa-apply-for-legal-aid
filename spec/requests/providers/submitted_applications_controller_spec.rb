@@ -19,10 +19,12 @@ RSpec.describe Providers::SubmittedApplicationsController do
            provider:)
   end
   let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
+  let(:linked_application_count) { 0 }
 
   before do
     create(:chances_of_success, proceeding:)
     allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+    linked_application_count.times { create(:linked_application, :family, lead_application: legal_aid_application, associated_application: create(:legal_aid_application)) }
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/submitted_application" do
@@ -84,6 +86,24 @@ RSpec.describe Providers::SubmittedApplicationsController do
 
       it "can be viewed on the submitted_application page" do
         expect(response.body).to include("Fake old gateway evidence file (15.7 KB)")
+      end
+    end
+
+    describe "linked application header" do
+      context "when this is the lead application for no cases" do
+        it { expect(response.body).to have_no_css("govuk-notification-banner") }
+      end
+
+      context "when this is the lead application for one case" do
+        let(:linked_application_count) { 1 }
+
+        it { expect(response.body).to include("This application has been linked with another one since you submitted it.") }
+      end
+
+      context "when this is the lead application for many cases" do
+        let(:linked_application_count) { 3 }
+
+        it { expect(response.body).to include("This application has been linked with 3 other ones since you submitted it.") }
       end
     end
   end
