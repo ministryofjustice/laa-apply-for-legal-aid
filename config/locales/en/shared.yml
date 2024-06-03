@@ -381,6 +381,11 @@ en:
         upper_limit_label: Capital upper limit
         total: Total capital assessed
       client_details:
+        correspondence_address_choice: Where to send client's mail
+        correspondence_choice:
+          home: My client’s UK home address
+          residential: Another UK residential address
+          office: A UK office address
         address: Correspondence address
         home_address: Home address
         aria_prefix: client's
