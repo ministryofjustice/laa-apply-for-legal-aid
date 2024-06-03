@@ -1,0 +1,32 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_correspondence_address_care_of_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template(
+        page_title: t(".heading"),
+        template: :basic,
+      ) do %>
+    <%= form.govuk_radio_buttons_fieldset(:care_of, legend: { size: "l", tag: "h1", text: page_title }) do %>
+      <%= form.govuk_radio_button(:care_of, "individual", link_errors: true, label: { text: "Yes, a person" }) do %>
+        <%= form.govuk_text_field(
+              :care_of_first_name,
+              label: { text: "First name" },
+            ) %>
+        <%= form.govuk_text_field(
+              :care_of_last_name,
+              label: { text: "Last name" },
+            ) %>
+      <% end %>
+      <%= form.govuk_radio_button(:care_of, "organisation", link_errors: true, label: { text: "Yes, an organisation" }) do %>
+        <%= form.govuk_text_field(
+              :care_of_organisation_name,
+              label: { text: "Organisation name" },
+            ) %>
+      <% end %>
+      <%= form.govuk_radio_button :care_of, false, label: { text: t("generic.no") }, hint: { text: "Correspondence will be addressed to the client" } %>
+    <% end %>
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
