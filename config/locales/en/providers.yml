@@ -192,7 +192,7 @@ en:
     correspondence_address:
       choices:
         show:
-          heading: Where should we send your client’s correspondence?
+          heading: Where should we send your client's correspondence?
           text: We do not send correspondence to non-UK addresses.
           options:
             home: My client’s UK home address
@@ -379,10 +379,11 @@ en:
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
     home_address:
-      different_addresses:
+      statuses:
         show:
-          heading: Is this also your client's home address?
+          heading: Does your client have a home address?
           paragraph: The home address is the place that they normally live in, and sometimes called the main dwelling.
+          no_fixed_residence: No, they have no fixed address
       different_address_reasons:
         show:
           heading: Why is your client's home address different to their correspondence address?

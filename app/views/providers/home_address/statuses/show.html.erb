@@ -1,22 +1,18 @@
 <%= form_with(model: @form,
-              url: providers_legal_aid_application_home_address_different_address_path,
+              url: providers_legal_aid_application_home_address_status_path,
               method: :patch,
               local: true) do |form| %>
   <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
     <%= form.govuk_collection_radio_buttons(
-          :same_correspondence_and_home_address,
-          yes_no_options,
-          :value,
-          :label,
+          :no_fixed_residence,
+          [[false, t("generic.yes")], [true, t(".no_fixed_residence")]],
+          :first,
+          :second,
           legend: { size: "xl", tag: "h1", text: t(".heading") },
         ) do %>
           <p class="govuk-body"><%= t(".paragraph") %></p>
-          <p class="govuk-body">
-            <%= address_one_line(@correspondence_address) %>.
-            <%= govuk_link_to(t("generic.search_again"), providers_legal_aid_application_correspondence_address_lookup_path) %>
-          </p>
-        <% end %>
+    <% end %>
 
     <%= next_action_buttons(
           show_draft: true,

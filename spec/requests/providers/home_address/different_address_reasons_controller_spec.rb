@@ -74,7 +74,7 @@ RSpec.describe Providers::HomeAddress::DifferentAddressReasonsController do
       it "stays on the page and displays validation error" do
         patch_request
         expect(response).to have_http_status(:ok)
-        expect(page).to have_error_message("Select why the client's home address is different to their correspondence address")
+        expect(page).to have_error_message("Select yes if your client has a home address")
       end
     end
 

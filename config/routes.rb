@@ -171,7 +171,7 @@ Rails.application.routes.draw do
         resource :selection, only: %i[show update], path: "correspondence_address_results"
       end
       namespace :home_address do
-        resource :different_address, only: %i[show update], path: "correspondence_is_home_address"
+        resource :status, only: %i[show update]
         resource :different_address_reason, only: %i[show update], path: "why_addresses_differ"
         resource :lookup, only: %i[show update], path: "find_home_address"
         resource :manual, only: %i[show update], path: "enter_home_address"

@@ -29,7 +29,7 @@ RSpec.describe Flow::Steps::Addresses::CorrespondenceAddressSelectionsStep, type
         allow(Setting).to receive(:home_address?).and_return(true)
       end
 
-      it { is_expected.to eq :different_addresses }
+      it { is_expected.to eq :home_address_statuses }
     end
 
     context "when the linked_applications feature flag is enabled" do

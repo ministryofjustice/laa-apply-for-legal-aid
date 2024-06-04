@@ -384,9 +384,13 @@ en:
         correspondence_address_choice: Where to send client's mail
         correspondence_choice:
           home: My client’s UK home address
-          residential: Another UK residential address
+          residence: Another UK residential address
           office: A UK office address
         address: Correspondence address
+        has_home_address: Client has a home address?
+        home_address_display:
+          :true: "Yes"
+          :false: No, they have no fixed address
         home_address: Home address
         aria_prefix: client's
         employment_status: Employment status

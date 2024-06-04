@@ -1,11 +1,9 @@
 require "rails_helper"
 
-RSpec.describe HomeAddress::DifferentAddressReasonForm, type: :form do
+RSpec.describe HomeAddress::StatusForm, type: :form do
   subject(:instance) { described_class.new(params) }
 
-  let(:applicant) { create(:applicant, home_address:) }
-  let(:home_address) { create(:address, location: "home") }
-
+  let(:applicant) { create(:applicant) }
   let(:params) do
     {
       model: applicant,
@@ -24,21 +22,13 @@ RSpec.describe HomeAddress::DifferentAddressReasonForm, type: :form do
       it "sets no_fixed_residence to true" do
         expect(applicant.no_fixed_residence?).to be true
       end
-
-      it "destroys any existing home address" do
-        expect(applicant.reload.home_address).to be_nil
-      end
     end
 
     context "with no chosen" do
       let(:no_fixed_residence) { "false" }
 
-      it "sets no_fixed_residence to true" do
+      it "sets no_fixed_residence to false" do
         expect(applicant.no_fixed_residence?).to be false
-      end
-
-      it "does not destroy any existing home address" do
-        expect(applicant.home_address).to eq home_address
       end
     end
 
@@ -67,21 +57,13 @@ RSpec.describe HomeAddress::DifferentAddressReasonForm, type: :form do
       it "sets no_fixed_residence to true" do
         expect(applicant.no_fixed_residence?).to be true
       end
-
-      it "destroys any existing home address" do
-        expect(applicant.reload.home_address).to be_nil
-      end
     end
 
     context "with no chosen" do
       let(:no_fixed_residence) { "false" }
 
-      it "sets no_fixed_residence to true" do
+      it "sets no_fixed_residence to false" do
         expect(applicant.no_fixed_residence?).to be false
-      end
-
-      it "does not destroy any existing home address" do
-        expect(applicant.reload.home_address).to eq home_address
       end
     end
 
