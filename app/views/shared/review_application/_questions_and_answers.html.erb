@@ -24,7 +24,7 @@
     <h2 class="govuk-heading-l"><%= t(".client_details_heading") %></h2>
     <%= render(
           "shared/check_answers/client_details",
-          attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth national_insurance_number email address],
+          attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth national_insurance_number email correspondence_choice address home_address],
           applicant: @legal_aid_application.applicant,
           address: @legal_aid_application.applicant.address,
           read_only: true,
