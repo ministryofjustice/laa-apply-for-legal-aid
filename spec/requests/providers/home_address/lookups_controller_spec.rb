@@ -17,12 +17,29 @@ RSpec.describe Providers::HomeAddress::LookupsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
+        applicant
         get_request
       end
 
       it "shows the postcode entry page" do
         expect(response).to be_successful
         expect(unescaped_response_body).to include("Find your client's home address")
+      end
+
+      context "when the provider correspondence_address_choice is home" do
+        let(:applicant) { create(:applicant, legal_aid_application:, correspondence_address_choice: "home") }
+
+        it "does not show non-UK address link" do
+          expect(response.body).not_to include("Enter a non-UK address")
+        end
+      end
+
+      context "when the provider correspondence_address_choice is not home" do
+        let(:applicant) { create(:applicant, legal_aid_application:, correspondence_address_choice: "residence") }
+
+        it "does not show non-UK address link" do
+          expect(response.body).to include("Enter a non-UK address")
+        end
       end
     end
   end
