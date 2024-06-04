@@ -25,7 +25,7 @@
               label: { text: t(".care_of_organisation_name") },
             ) %>
       <% end %>
-      <%= form.govuk_radio_button :care_of, "No", label: { text: t("generic.no") }, hint: { text: t(".no_hint") } %>
+      <%= form.govuk_radio_button :care_of, "no", label: { text: t("generic.no") }, hint: { text: t(".no_hint") } %>
     <% end %>
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
