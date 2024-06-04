@@ -10,7 +10,17 @@ RSpec.describe Flow::Steps::ProviderStart::ApplicantsStep, type: :request do
   end
 
   describe "#forward" do
-    subject { described_class.forward }
+    subject { described_class.forward.call(nil) }
+
+    before { allow(Setting).to receive(:home_address?).and_return(home_address_setting) }
+
+    let(:home_address_setting) { false }
+
+    context "when the home_address feature flag is enabled" do
+      let(:home_address_setting) { true }
+
+      it { is_expected.to eq :correspondence_address_choices }
+    end
 
     it { is_expected.to eq :correspondence_address_lookups }
   end

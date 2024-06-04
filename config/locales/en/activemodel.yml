@@ -141,6 +141,9 @@ en:
               blank: Select yes if your client gets any benefits
             same_correspondence_and_home_address:
               blank: Select yes if this is your client's home address
+            correspondence_address_choice:
+              blank: Select where we should send your client's correspondence
+              inclusion: Select where we should send your client's correspondence
             student_finance:
               inclusion: Select yes if your client receives student finance
             student_finance_amount:
@@ -526,7 +529,7 @@ en:
               invalid: Enter a valid application reference to search for
               not_found: The application reference entered cannot be found
             search_laa_reference:
-              blank: Enter the LAA reference of the application you want to link to. 
+              blank: Enter the LAA reference of the application you want to link to.
               invalid: We could not find an application with the LAA reference of %{value}
               not_submitted: We found the case but it's NOT Been SUBMITTED - OH NO!
             link_type_code:

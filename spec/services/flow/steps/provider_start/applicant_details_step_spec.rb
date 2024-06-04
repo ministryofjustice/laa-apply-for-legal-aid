@@ -21,6 +21,12 @@ RSpec.describe Flow::Steps::ProviderStart::ApplicantDetailsStep, type: :request 
 
       it { is_expected.to eq :has_national_insurance_numbers }
     end
+
+    context "when the home_address feature flag is enabled" do
+      before { allow(Setting).to receive(:home_address?).and_return(true) }
+
+      it { is_expected.to eq :correspondence_address_choices }
+    end
   end
 
   describe "#check_answers" do

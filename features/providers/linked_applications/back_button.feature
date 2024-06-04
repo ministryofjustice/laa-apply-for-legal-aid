@@ -19,6 +19,10 @@ Scenario: Complete flow reversion with back button
   And I choose 'No'
   And I enter the date of birth '01-01-1999'
   And I click 'Save and continue'
+  Then I should be on a page with title "Where should we send your client’s correspondence?"
+
+  When I choose 'Another UK residential address'
+  And I click 'Save and continue'
   Then I am on the postcode entry page
 
   When I enter a postcode 'SW1H 9EA'
