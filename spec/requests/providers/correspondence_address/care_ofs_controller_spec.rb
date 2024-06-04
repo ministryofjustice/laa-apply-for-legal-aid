@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Providers::CorrespondenceAddress::CareOfsController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
+  let(:applicant) { create(:applicant, :with_address) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/care_of" do
