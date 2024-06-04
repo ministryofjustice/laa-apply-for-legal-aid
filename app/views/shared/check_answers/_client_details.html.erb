@@ -82,7 +82,7 @@
       <%= row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_correspondence_address_choice_path,
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.address')}",
+            visually_hidden_text: t(".correspondence_address_choice"),
           ) %>
     <% end %>
   <% end %>
@@ -106,7 +106,7 @@
          row.with_action(
            text: t("generic.change"),
            href: providers_legal_aid_application_home_address_status_path(@legal_aid_application),
-           visually_hidden_text: "#{t('.aria_prefix')} #{t('.home_address')}",
+           visually_hidden_text: t(".has_home_address"),
          )
        end
        if client_has_home_address?(applicant)
