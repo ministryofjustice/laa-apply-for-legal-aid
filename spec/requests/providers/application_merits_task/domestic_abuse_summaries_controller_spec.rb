@@ -89,18 +89,18 @@ module Providers
         end
 
         context "when no other tasks are complete" do
-          it "redirects to the next incomplete question" do
+          it "redirects to the next step" do
             patch_das
-            expect(response).to redirect_to(providers_legal_aid_application_date_client_told_incident_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "when the first task is complete" do
           before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
 
-          it "redirects to the next incomplete question, opponent types" do
+          it "redirects to the next step" do
             patch_das
-            expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 

@@ -6,61 +6,17 @@ module Flow
         involved_children: Steps::ProviderMerits::InvolvedChildrenStep,
         has_other_involved_children: Steps::ProviderMerits::HasOtherInvolvedChildrenStep,
         remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
-        date_client_told_incidents: {
-          path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
-        opponent_individuals: {
-          path: ->(application) { urls.new_providers_legal_aid_application_opponent_individual_path(application) },
-          forward: :has_other_opponents,
-          check_answers: :check_merits_answers,
-        },
-        opponent_existing_organisations: {
-          path: ->(application) { urls.providers_legal_aid_application_opponent_existing_organisations_path(application) },
-          forward: :has_other_opponents,
-          check_answers: :check_merits_answers,
-        },
+        date_client_told_incidents: Steps::ProviderMerits::DateClientToldIncidentsStep,
+        opponent_individuals: Steps::ProviderMerits::OpponentIndividualsStep,
+        opponent_existing_organisations: Steps::ProviderMerits::OpponentExistingOrganisationsStep,
         opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
-        start_opponent_task: {
-          # This allows the task list to check for opponents and route to has_other_opponents
-          # if they exist or show the new page if they do not
-          path: lambda do |application|
-            if application.opponents.any?
-              urls.providers_legal_aid_application_has_other_opponent_path(application)
-            else
-              urls.providers_legal_aid_application_opponent_type_path(application)
-            end
-          end,
-        },
-        opponent_types: {
-          path: ->(application) { urls.providers_legal_aid_application_opponent_type_path(application) },
-          forward: lambda { |_application, is_individual|
-            is_individual ? :opponent_individuals : :opponent_existing_organisations
-          },
-        },
-        has_other_opponents: {
-          path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
-          forward: lambda { |application, has_other_opponent|
-            has_other_opponent ? :opponent_types : Flow::MeritsLoop.forward_flow(application, :application)
-          },
-        },
+        start_opponent_task: Steps::ProviderMerits::StartOpponentTaskStep,
+        opponent_types: Steps::ProviderMerits::OpponentTypesStep,
+        has_other_opponents: Steps::ProviderMerits::HasOtherOpponentsStep,
         remove_opponent: Steps::ProviderMerits::RemoveOpponentStep,
-        opponents_mental_capacities: {
-          path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
-        domestic_abuse_summaries: {
-          path: ->(application) { urls.providers_legal_aid_application_domestic_abuse_summary_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
-        statement_of_cases: {
-          path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
+        opponents_mental_capacities: Steps::ProviderMerits::OpponentsMentalCapacitiesStep,
+        domestic_abuse_summaries: Steps::ProviderMerits::DomesticAbuseSummariesStep,
+        statement_of_cases: Steps::ProviderMerits::StatementOfCasesStep,
         client_denial_of_allegations: {
           path: ->(application) { urls.providers_legal_aid_application_client_denial_of_allegation_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },

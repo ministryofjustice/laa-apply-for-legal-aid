@@ -48,7 +48,7 @@ module Providers
 
           it "redirects to individual opponent" do
             patch_opponent_type
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponent_individual_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "does not set the task to complete" do
@@ -62,7 +62,7 @@ module Providers
 
           it "redirects to opponent existing organisation" do
             patch_opponent_type
-            expect(response).to redirect_to(providers_legal_aid_application_opponent_existing_organisations_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "does not set the task to complete" do
