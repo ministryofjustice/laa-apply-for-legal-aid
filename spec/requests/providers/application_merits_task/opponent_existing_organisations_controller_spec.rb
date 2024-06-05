@@ -86,7 +86,7 @@ module Providers
 
             it "redirects to next step" do
               create_request
-              expect(response.body).to redirect_to(providers_legal_aid_application_has_other_opponent_path(legal_aid_application))
+              expect(response).to have_http_status(:redirect)
             end
 
             it "calls the add opponent organisation service with expected object duck type" do

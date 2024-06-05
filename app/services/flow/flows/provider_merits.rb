@@ -8,11 +8,7 @@ module Flow
         remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: Steps::ProviderMerits::DateClientToldIncidentsStep,
         opponent_individuals: Steps::ProviderMerits::OpponentIndividualsStep,
-        opponent_existing_organisations: {
-          path: ->(application) { urls.providers_legal_aid_application_opponent_existing_organisations_path(application) },
-          forward: :has_other_opponents,
-          check_answers: :check_merits_answers,
-        },
+        opponent_existing_organisations: Steps::ProviderMerits::OpponentExistingOrganisationsStep,
         opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
         start_opponent_task: {
           # This allows the task list to check for opponents and route to has_other_opponents
