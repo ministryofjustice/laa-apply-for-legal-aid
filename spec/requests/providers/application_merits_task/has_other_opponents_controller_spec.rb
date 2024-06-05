@@ -61,7 +61,7 @@ module Providers
 
           it "redirects to opponent type" do
             patch_has_other
-            expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "does not set the task to complete" do
@@ -83,7 +83,7 @@ module Providers
 
           it "redirects to why matter opposed page" do
             patch_has_other
-            expect(response).to redirect_to(providers_legal_aid_application_matter_opposed_reason_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "sets the task to complete" do

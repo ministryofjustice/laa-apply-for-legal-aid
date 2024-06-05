@@ -12,12 +12,7 @@ module Flow
         opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
         start_opponent_task: Steps::ProviderMerits::StartOpponentTaskStep,
         opponent_types: Steps::ProviderMerits::OpponentTypesStep,
-        has_other_opponents: {
-          path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
-          forward: lambda { |application, has_other_opponent|
-            has_other_opponent ? :opponent_types : Flow::MeritsLoop.forward_flow(application, :application)
-          },
-        },
+        has_other_opponents: Steps::ProviderMerits::HasOtherOpponentsStep,
         remove_opponent: Steps::ProviderMerits::RemoveOpponentStep,
         opponents_mental_capacities: {
           path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },
