@@ -10,17 +10,7 @@ module Flow
         opponent_individuals: Steps::ProviderMerits::OpponentIndividualsStep,
         opponent_existing_organisations: Steps::ProviderMerits::OpponentExistingOrganisationsStep,
         opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
-        start_opponent_task: {
-          # This allows the task list to check for opponents and route to has_other_opponents
-          # if they exist or show the new page if they do not
-          path: lambda do |application|
-            if application.opponents.any?
-              urls.providers_legal_aid_application_has_other_opponent_path(application)
-            else
-              urls.providers_legal_aid_application_opponent_type_path(application)
-            end
-          end,
-        },
+        start_opponent_task: Steps::ProviderMerits::StartOpponentTaskStep,
         opponent_types: {
           path: ->(application) { urls.providers_legal_aid_application_opponent_type_path(application) },
           forward: lambda { |_application, is_individual|
