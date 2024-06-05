@@ -6,11 +6,7 @@ module Flow
         involved_children: Steps::ProviderMerits::InvolvedChildrenStep,
         has_other_involved_children: Steps::ProviderMerits::HasOtherInvolvedChildrenStep,
         remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
-        date_client_told_incidents: {
-          path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
+        date_client_told_incidents: Steps::ProviderMerits::DateClientToldIncidentsStep,
         opponent_individuals: {
           path: ->(application) { urls.new_providers_legal_aid_application_opponent_individual_path(application) },
           forward: :has_other_opponents,
