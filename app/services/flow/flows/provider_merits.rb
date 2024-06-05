@@ -14,11 +14,7 @@ module Flow
         opponent_types: Steps::ProviderMerits::OpponentTypesStep,
         has_other_opponents: Steps::ProviderMerits::HasOtherOpponentsStep,
         remove_opponent: Steps::ProviderMerits::RemoveOpponentStep,
-        opponents_mental_capacities: {
-          path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
+        opponents_mental_capacities: Steps::ProviderMerits::OpponentsMentalCapacitiesStep,
         domestic_abuse_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_domestic_abuse_summary_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
