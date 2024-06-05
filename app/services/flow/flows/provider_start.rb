@@ -11,7 +11,6 @@ module Flow
         correspondence_address_selections: Steps::Addresses::CorrespondenceAddressSelectionsStep,
         correspondence_address_manuals: Steps::Addresses::CorrespondenceAddressManualsStep,
         home_address_statuses: Steps::Addresses::HomeAddressStatusesStep,
-        different_address_reasons: Steps::Addresses::DifferentAddressReasonsStep,
         home_address_lookups: Steps::Addresses::HomeAddressLookupsStep,
         home_address_selections: Steps::Addresses::HomeAddressSelectionsStep,
         home_address_manuals: Steps::Addresses::HomeAddressManualsStep,
