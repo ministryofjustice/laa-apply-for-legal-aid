@@ -5,6 +5,7 @@ RSpec.describe Addresses::AddressForm, type: :form do
 
   let(:address_line_one) { "Ministry Of Justice" }
   let(:address_line_two) { "102 Petty France" }
+  let(:address_line_three) { "" }
   let(:city) { "London" }
   let(:county) { "" }
   let(:postcode) { "SW1H 9AJ" }
@@ -15,6 +16,7 @@ RSpec.describe Addresses::AddressForm, type: :form do
     {
       address_line_one:,
       address_line_two:,
+      address_line_three:,
       city:,
       county:,
       postcode:,
