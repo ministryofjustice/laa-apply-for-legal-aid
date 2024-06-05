@@ -7,11 +7,7 @@ module Flow
         has_other_involved_children: Steps::ProviderMerits::HasOtherInvolvedChildrenStep,
         remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: Steps::ProviderMerits::DateClientToldIncidentsStep,
-        opponent_individuals: {
-          path: ->(application) { urls.new_providers_legal_aid_application_opponent_individual_path(application) },
-          forward: :has_other_opponents,
-          check_answers: :check_merits_answers,
-        },
+        opponent_individuals: Steps::ProviderMerits::OpponentIndividualsStep,
         opponent_existing_organisations: {
           path: ->(application) { urls.providers_legal_aid_application_opponent_existing_organisations_path(application) },
           forward: :has_other_opponents,
