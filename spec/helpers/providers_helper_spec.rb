@@ -19,7 +19,6 @@ RSpec.describe ProvidersHelper do
     %w[home_addresses
        home_address_lookups
        home_address_selections
-       different_address_reasons
        different_addresses
        non_uk_home_addresses]
   end

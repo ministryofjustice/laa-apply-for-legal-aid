@@ -172,7 +172,6 @@ Rails.application.routes.draw do
       end
       namespace :home_address do
         resource :status, only: %i[show update]
-        resource :different_address_reason, only: %i[show update], path: "why_addresses_differ"
         resource :lookup, only: %i[show update], path: "find_home_address"
         resource :manual, only: %i[show update], path: "enter_home_address"
         resource :non_uk_home_address, only: %i[show update]

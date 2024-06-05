@@ -384,12 +384,6 @@ en:
           heading: Does your client have a home address?
           paragraph: The home address is the place that they normally live in, and sometimes called the main dwelling.
           no_fixed_residence: No, they have no fixed address
-      different_address_reasons:
-        show:
-          heading: Why is your client's home address different to their correspondence address?
-          options:
-            different_home_address: They have a different home address
-            no_fixed_residence: My client is homeless or has no fixed residence
       non_uk_home_addresses:
         show:
           heading: Enter your client's overseas home address
