@@ -11,12 +11,7 @@ module Flow
         opponent_existing_organisations: Steps::ProviderMerits::OpponentExistingOrganisationsStep,
         opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,
         start_opponent_task: Steps::ProviderMerits::StartOpponentTaskStep,
-        opponent_types: {
-          path: ->(application) { urls.providers_legal_aid_application_opponent_type_path(application) },
-          forward: lambda { |_application, is_individual|
-            is_individual ? :opponent_individuals : :opponent_existing_organisations
-          },
-        },
+        opponent_types: Steps::ProviderMerits::OpponentTypesStep,
         has_other_opponents: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_opponent_path(application) },
           forward: lambda { |application, has_other_opponent|
