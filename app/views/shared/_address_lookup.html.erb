@@ -10,7 +10,7 @@
     <%= govuk_warning_text(text: t(".helper_text.#{location}")) %>
   <% end %>
 
-  <% if location == "home" %>
+  <% if location.eql?("home") && !@correspondence_address_choice.eql?("home") %>
     <p class="govuk-body"><%= govuk_link_to t(".non_uk_address_link"), providers_legal_aid_application_home_address_non_uk_home_address_path %></p>
   <% end %>
   <p class="govuk-body"><%= govuk_link_to t(".address_manual_link"), location == "correspondence" ? providers_legal_aid_application_correspondence_address_manual_path : providers_legal_aid_application_home_address_manual_path %></p>

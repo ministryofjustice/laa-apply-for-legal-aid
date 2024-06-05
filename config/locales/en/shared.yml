@@ -383,7 +383,7 @@ en:
       client_details:
         correspondence_address_choice: Where to send client's mail
         correspondence_choice:
-          home: My client’s UK home address
+          home: My client's UK home address
           residence: Another UK residential address
           office: A UK office address
         address: Correspondence address

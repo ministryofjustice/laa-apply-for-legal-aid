@@ -2,6 +2,7 @@ module Providers
   class AddressLookupsBaseController < ProviderBaseController
     def show
       @form = Addresses::AddressLookupForm.new(model: address)
+      @correspondence_address_choice = legal_aid_application.applicant.correspondence_address_choice
     end
 
     def update
