@@ -1,7 +1,7 @@
 module Providers
   class BankStatementForm < BaseBankStatementForm
     def initialize(bank_statement_form_params)
-      super(bank_statement_form_params)
+      super
       @attachment_type = "bank_statement_evidence"
       @attachment_type_capture = /^#{@attachment_type}_(\d+)$/
     end

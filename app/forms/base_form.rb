@@ -26,7 +26,7 @@ class BaseForm
     def attr_accessor(*symbols)
       locally_assigned << symbols
       locally_assigned.flatten!
-      super(*symbols)
+      super
     end
 
     def locally_assigned
