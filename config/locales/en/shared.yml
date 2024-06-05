@@ -387,6 +387,7 @@ en:
           residence: Another UK residential address
           office: A UK office address
         address: Correspondence address
+        care_of_recipient: Care of recipient
         has_home_address: Client has a home address?
         home_address_display:
           :true: "Yes"
