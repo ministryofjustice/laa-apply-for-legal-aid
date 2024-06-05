@@ -1767,6 +1767,40 @@ module CCMS
             end
           end
 
+          context "when the applicant has a partner with a contrary interest" do
+            before do
+              legal_aid_application.applicant.update(has_partner: true, partner_has_contrary_interest: true)
+            end
+
+            describe "GB_INPUT_B_5WP1_3A - Client: The client has a partner?" do
+              it "returns false" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_3A")
+                expect(block).to have_boolean_response false
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_5A - Partner: First name" do
+              it "is not returned" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_5A")
+                expect(block).not_to be_present, "Expected block for attribute GB_INPUT_T_5WP1_5A not to be generated, but was \n #{block}"
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_6A - Partner: Surname" do
+              it "is not returned" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_6A")
+                expect(block).not_to be_present, "Expected block for attribute GB_INPUT_T_5WP1_6A not to be generated, but was \n #{block}"
+              end
+            end
+
+            describe "GB_INPUT_T_5WP1_8A - Partner: DOB" do
+              it "is not returned" do
+                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_T_5WP1_8A")
+                expect(block).not_to be_present, "Expected block for attribute GB_INPUT_T_5WP1_8A not to be generated, but was \n #{block}"
+              end
+            end
+          end
+
           context "when the applicant does not have a partner" do
             describe "GB_INPUT_B_5WP1_3A - Client: The client has a partner?" do
               it "returns false" do
