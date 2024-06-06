@@ -118,6 +118,9 @@ Feature: Applicant details
     And I choose "Yes"
     And I enter national insurance number 'CB987654A'
     When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Proceeding 1 FGM Protection Order'
     Then I should be on a page showing 'Proceeding 2 Occupation order'
@@ -165,6 +168,9 @@ Feature: Applicant details
     Then I should be on a page with title "Does your client have a National Insurance number?"
     And I choose "Yes"
     And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -259,6 +265,9 @@ Feature: Applicant details
     And I choose "Yes"
     And I enter national insurance number 'CB987654A'
     When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
@@ -332,6 +341,9 @@ Feature: Applicant details
     And I choose "Yes"
     And I enter national insurance number 'JA293483A'
     When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
@@ -372,6 +384,9 @@ Feature: Applicant details
     Then I should be on a page with title "Does your client have a National Insurance number?"
     And I choose "Yes"
     And I enter national insurance number 'JA293483B'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'

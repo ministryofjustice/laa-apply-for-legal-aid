@@ -64,6 +64,10 @@ Feature: Non-means-tested applicant journey with use of delegation functions
     When I choose "Yes"
     And I enter national insurance number 'CB987654A'
     And I click 'Save and continue'
+
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
+    When I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
 
     When I click 'Save and continue'
