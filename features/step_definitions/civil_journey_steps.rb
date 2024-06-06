@@ -642,6 +642,7 @@ Given("I complete the passported journey as far as check your answers for client
     date_of_birth: "10-01-1980",
     email: "test@test.com",
     same_correspondence_and_home_address: true,
+    has_partner: false,
   )
   create(
     :address,
@@ -755,6 +756,7 @@ Given("I complete the non-passported journey as far as check your answers") do
     national_insurance_number: "JA123456A",
     date_of_birth: "01-01-1970",
     email: "test@test.com",
+    has_partner: false,
   )
   create(
     :address,

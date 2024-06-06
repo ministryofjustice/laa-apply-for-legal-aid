@@ -137,7 +137,7 @@ Feature: passported_journey completes application
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
-    Then I choose 'No'
+    Then I choose 'No, my client gets a passporting benefit'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your client's details"
     Then I click the first link "Client name"
