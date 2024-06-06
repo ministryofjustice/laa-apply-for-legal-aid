@@ -15,13 +15,8 @@ module Providers
 
     private
 
-      def legal_aid_application
-        @legal_aid_application ||= LegalAidApplication.find_by(id: params[:legal_aid_application_id])
-      end
-      delegate :applicant, to: :legal_aid_application
-
       def address
-        applicant.address
+        @address ||= legal_aid_application.applicant.address
       end
 
       def form_params

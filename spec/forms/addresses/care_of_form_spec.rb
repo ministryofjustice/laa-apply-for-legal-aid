@@ -198,7 +198,7 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_first_name) { nil }
       let(:care_of_organisation_name) { nil }
 
-      it "is invalid" do
+      it "is valid" do
         expect(instance).to be_valid
       end
 
