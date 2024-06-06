@@ -64,6 +64,13 @@ FactoryBot.define do
       applicant { build(:applicant, :with_address, with_bank_accounts:, same_correspondence_and_home_address: true) }
     end
 
+    trait :with_applicant_and_no_partner do
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_address, with_bank_accounts:, same_correspondence_and_home_address: true, has_partner: false) }
+    end
+
     trait :with_applicant_with_student_loan do
       transient do
         with_bank_accounts { 0 }
@@ -109,6 +116,10 @@ FactoryBot.define do
 
     trait :with_under_18_applicant do
       applicant { build(:applicant, :with_address, date_of_birth: 18.years.ago + 1.day, age_for_means_test_purposes: 17) }
+    end
+
+    trait :with_under_18_applicant_and_no_partner do
+      applicant { build(:applicant, :with_address, date_of_birth: 18.years.ago + 1.day, age_for_means_test_purposes: 17, has_partner: false) }
     end
 
     #######################################################

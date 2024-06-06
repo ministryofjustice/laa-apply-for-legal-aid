@@ -18,7 +18,7 @@ module CCMS
           create(:legal_aid_application,
                  :with_proceedings,
                  :with_everything,
-                 :with_applicant_and_address,
+                 :with_applicant_and_no_partner,
                  :with_positive_benefit_check_result,
                  set_lead_proceeding: :da001,
                  populate_vehicle: true,
