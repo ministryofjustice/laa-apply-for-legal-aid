@@ -3,7 +3,6 @@ Feature: Bank statement file upload
 
   Scenario: Uploading a file
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I complete the journey as far as regular outgoings
 
     When I select "My client makes none of these payments"
@@ -48,7 +47,6 @@ Feature: Bank statement file upload
 
   Scenario: Deleting a file
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I complete the journey as far as regular outgoings
 
     When I select "My client makes none of these payments"
