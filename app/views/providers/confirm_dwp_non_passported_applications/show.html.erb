@@ -26,9 +26,7 @@
 
       <%= form.govuk_radio_button :confirm_dwp_result, "dwp_correct", link_errors: true, label: { text: t("generic.yes") } %>
       <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_false", label: { text: t(".option_no") } %>
-      <% if Setting.partner_means_assessment? && @legal_aid_application.applicant.has_partner? %>
-        <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_true", label: { text: t(".option_partner") } %>
-      <% end %>
+      <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_true", label: { text: t(".option_partner") } %>
 
       <% end %>
 

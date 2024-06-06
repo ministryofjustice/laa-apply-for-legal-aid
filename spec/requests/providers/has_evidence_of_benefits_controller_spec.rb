@@ -51,8 +51,6 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       let(:benefit_text) { I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{legal_aid_application.dwp_override.passporting_benefit}") }
       let(:application_id) { legal_aid_application.id }
 
-      before { allow(Setting).to receive(:partner_means_assessment?).and_return true }
-
       it "displays the correct page" do
         expect(unescaped_response_body).to include(I18n.t("providers.has_evidence_of_benefits.show.h1_partner", passporting_benefit: benefit_text))
       end

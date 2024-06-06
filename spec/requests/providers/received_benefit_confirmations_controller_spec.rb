@@ -34,7 +34,6 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
 
       before do
         login_as application.provider
-        allow(Setting).to receive(:partner_means_assessment?).and_return true
         get_request
       end
 
