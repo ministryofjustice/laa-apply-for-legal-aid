@@ -1664,6 +1664,22 @@ en:
         page_title: Enter your client's email address
         label: Email address
         hint: We'll use this to send your client a link to the service.
+    proceedings_sca:
+      interrupts:
+        show:
+          options: "You can (choose one of the following):"
+          applications: Select a different proceeding or matter type
+          default:
+            title_html: You cannot choose a special children act proceeding if it has not been issued
+            option_bullets:
+              - select a different proceeding or matter type
+              - go back and change your answer
+              - use legal help
+          supervision:
+            title_html: For special children act, a supervision order cannot be varied, discharged or extended
+            option_bullets:
+              - select a different proceeding or matter type
+              - go back and change your answer
     proceeding_loop:
       single_proceeding: Proceeding 1
       multi_proceeding: Proceeding %{position} of %{total}

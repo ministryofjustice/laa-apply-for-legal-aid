@@ -269,6 +269,12 @@ Rails.application.routes.draw do
       scope module: :interrupt do
         resource :block, only: %i[show], path: "voided-application"
       end
+
+      scope module: :proceedings_sca do
+        # resource :interrupts, only: %i[show]
+        get "/interrupt/:type", to: "interrupts#show", as: "sca_interrupt"
+      end
+
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
         resources :confirm_delegated_functions_date, only: %i[show update]
