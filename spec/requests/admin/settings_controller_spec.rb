@@ -40,7 +40,6 @@ RSpec.describe Admin::SettingsController do
           mock_true_layer_data: "true",
           allow_welsh_translation: "true",
           enable_ccms_submission: "true",
-          partner_means_assessment: "true",
           linked_applications: "true",
           collect_hmrc_data: "true",
           home_address: "true",
@@ -58,7 +57,6 @@ RSpec.describe Admin::SettingsController do
       patch_request
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
-      expect(setting.partner_means_assessment?).to be(true)
       expect(setting.linked_applications?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
       expect(setting.home_address?).to be(true)

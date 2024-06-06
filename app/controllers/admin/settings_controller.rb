@@ -22,7 +22,6 @@ module Admin
                                       :manually_review_all_cases,
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
-                                      :partner_means_assessment,
                                       :linked_applications,
                                       :collect_hmrc_data,
                                       :home_address,

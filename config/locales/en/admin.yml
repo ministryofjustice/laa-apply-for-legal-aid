@@ -72,7 +72,6 @@ en:
           allow_welsh_translation: Allow Welsh translation
           enable_ccms_submission: Allow CCMS submissions
           enable_evidence_upload: Enable the new evidence upload feature
-          partner_means_assessment: Enable Partner Means Assessment
           linked_applications: Enable linking and copying cases
           collect_hmrc_data: Collect HMRC data
           home_address: Enable home and 'care of' address
