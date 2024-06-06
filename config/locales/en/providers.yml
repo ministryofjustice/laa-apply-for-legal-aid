@@ -199,6 +199,15 @@ en:
             residential: Another UK residential address
             office: A UK office address
             office_hint: For example, a provider's office
+      care_ofs:
+        show:
+          heading: Do you want to add a 'care of' recipient for your client's mail?
+          yes_person: Yes, a person
+          care_of_first_name: First name
+          care_of_last_name: Last name
+          care_of_organisation_name: Organisation name
+          yes_organisation: Yes, an organisation
+          no_hint: Correspondence will be addressed to the client
     confirm_dwp_non_passported_applications:
       show:
         tab_title: DWP records show that your client does not get a passporting benefit – Apply for Legal Aid - GOV.UK

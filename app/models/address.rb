@@ -41,6 +41,14 @@ class Address < ApplicationRecord
     }.to_json
   end
 
+  def care_of_recipient
+    if care_of == "person"
+      "#{care_of_first_name} #{care_of_last_name}"
+    elsif care_of == "organisation"
+      care_of_organisation_name
+    end
+  end
+
 private
 
   def normalize_postcode

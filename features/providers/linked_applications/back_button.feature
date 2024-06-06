@@ -29,6 +29,10 @@ Scenario: Complete flow reversion with back button
   And I click find address
   And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
   And I click 'Use this address'
+  Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+
+  When I choose "No"
+  And I click "Save and continue"
   Then I should be on a page with title "Does your client have a home address?"
 
   When I choose "No, they have no fixed address"

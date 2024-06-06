@@ -99,6 +99,14 @@ en:
             postcode:
               blank: Enter a postcode in the correct format
               invalid: Enter a postcode in the correct format
+            care_of:
+              blank: Select if you want to add a 'care of' recipient for your client's email
+            care_of_first_name:
+              blank: Enter the recipient's first name
+            care_of_last_name:
+              blank: Enter the recipient's last name
+            care_of_organisation_name:
+              blank: Enter the organisation name
         applicant:
           attributes:
             date_of_birth:
