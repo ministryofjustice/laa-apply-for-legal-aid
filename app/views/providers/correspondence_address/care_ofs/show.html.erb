@@ -9,7 +9,7 @@
         template: :basic,
         form:,
       ) do %>
-    <%= form.govuk_radio_buttons_fieldset(:care_of, legend: { size: "l", tag: "h1", text: page_title }) do %>
+    <%= form.govuk_radio_buttons_fieldset(:care_of, legend: { size: "xl", tag: "h1", text: page_title }) do %>
       <%= form.govuk_radio_button(:care_of, "person", link_errors: true, label: { text: t(".yes_person") }) do %>
         <%= form.govuk_text_field(
               :care_of_first_name,
