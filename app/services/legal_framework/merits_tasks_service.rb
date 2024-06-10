@@ -63,7 +63,7 @@ module LegalFramework
       end
       smtl.tasks[:proceedings].each_value do |values|
         values[:tasks].each do |task|
-          task.mark_as_ignored! if ignore_task?(task.name)
+          task.mark_as_ignored! if ignore_task?("#{task.name}_html")
         end
       end
       smtl
