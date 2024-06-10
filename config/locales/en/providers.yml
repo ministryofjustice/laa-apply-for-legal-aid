@@ -1685,6 +1685,15 @@ en:
             option_bullets:
               - select a different proceeding or matter type
               - go back and change your answer
+          child_subjects:
+            title_html: For special children act, your client must be the child subject of the proceeding
+            option_bullets:
+              - select a different proceeding or matter type
+              - go back and change your answer
+      child_subjects:
+        error: Select yes if your client is the child subject of this proceeding
+        show:
+          page_title: Is your client the child subject of this proceeding?
     proceeding_loop:
       single_proceeding: Proceeding 1
       multi_proceeding: Proceeding %{position} of %{total}

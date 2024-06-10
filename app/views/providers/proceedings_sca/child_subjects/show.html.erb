@@ -1,0 +1,21 @@
+<%= form_with(
+      url: providers_legal_aid_application_child_subject_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"),
+                    template: :basic,
+                    form: do %>
+    <%= form.govuk_collection_radio_buttons :child_subject,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: t(".page_title"), size: "xl", tag: "h1" },
+                                            caption: { text: @proceeding.meaning, size: "xl" } do %>
+
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
