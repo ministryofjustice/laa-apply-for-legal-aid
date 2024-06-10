@@ -9,13 +9,16 @@ module Providers
       end
 
       def update
+        return continue_or_draft if draft_selected?
+
+        @proceeding = legal_aid_application.proceedings.last
         form
         if form.valid?
-          return redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "child_subjects") unless form.child_subject?
+          return redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "child_subject") unless form.child_subject?
 
           return go_forward
         end
-        render :show, status: :unprocessable_entity
+        render :show
       end
 
     private

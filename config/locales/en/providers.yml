@@ -1685,7 +1685,7 @@ en:
             option_bullets:
               - select a different proceeding or matter type
               - go back and change your answer
-          child_subjects:
+          child_subject:
             title_html: For special children act, your client must be the child subject of the proceeding
             option_bullets:
               - select a different proceeding or matter type

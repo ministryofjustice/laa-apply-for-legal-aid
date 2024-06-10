@@ -34,6 +34,7 @@ module Flow
         },
         proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
         proceedings_sca_supervision_orders: Steps::ProceedingsSCA::SupervisionOrderStep,
+        proceedings_sca_child_subjects: Steps::ProceedingsSCA::ChildSubjectsStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: Steps::ProviderStart::LimitationsStep,
         has_national_insurance_numbers: {
