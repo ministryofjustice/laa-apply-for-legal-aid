@@ -18,6 +18,9 @@ updates:
     bundling-gems:
       patterns:
         - "*bundling-rails"
+    rubocop-gems:
+      patterns:
+        - "rubocop-*"
   open-pull-requests-limit: 10
   ignore:
   - dependency-name: prometheus_exporter
