@@ -1555,7 +1555,6 @@ en:
             - section 8
         dont_use_service:
           list_title: "But do not use this service if:"
-          partner_list_item: the client has a partner, unless the partner is the opponent
           list:
             - the client is under 16 years old
             - the client is self-employed or is a member of the armed forces
