@@ -1230,24 +1230,26 @@ en:
         application_section_heading: About the application
         proceeding_section_heading: About the %{proceeding}
         no_more_information_needed: No more information is needed
+        # Application level tasks
         latest_incident_details: Latest incident details
         opponent_name: Opponents
         opponent_mental_capacity: Mental capacity of all parties
         domestic_abuse_summary: Domestic abuse summary
         children_application: Children involved in this application
         statement_of_case: Statement of case
-        attempts_to_settle: Attempts to settle
-        chances_of_success: Chances of success
-        why_matter_opposed: Why the matter is opposed
-        children_proceeding: Children involved in this proceeding
         client_denial_of_allegation: Client denial of allegation
         client_offer_of_undertakings: Client offer of undertaking
-        specific_issue: Specific Issue
-        prohibited_steps: Prohibited steps
-        laspo: Section 8 and LASPO
         nature_of_urgency: Nature of urgency and hearing date
-        vary_order: Reason for new application
-        opponents_application: Opponent application
+        why_matter_opposed: Why the matter is opposed
+        laspo: Section 8 and LASPO
+        # Proceeding level tasks
+        chances_of_success_html: <span class="govuk-visually-hidden">%{proceeding} </span>Chances of success
+        children_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Children involved in this proceeding
+        attempts_to_settle_html: <span class="govuk-visually-hidden">%{proceeding} </span>Attempts to settle
+        specific_issue_html: <span class="govuk-visually-hidden">%{proceeding} </span>Specific Issue
+        prohibited_steps_html: <span class="govuk-visually-hidden">%{proceeding} </span>Prohibited steps
+        opponents_application_html: <span class="govuk-visually-hidden">%{proceeding} </span>Opponent application
+        vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Reason for new application
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
