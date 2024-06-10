@@ -1678,7 +1678,7 @@ en:
         show:
           options: "You can (choose one of the following):"
           applications: Select a different proceeding or matter type
-          default:
+          proceeding_issue_status:
             title_html: You cannot choose a special children act proceeding if it has not been issued
             option_bullets:
               - select a different proceeding or matter type
