@@ -1,0 +1,14 @@
+<div class="interruption-panel">
+  <%= page_template(page_title: t(".#{@type}.title_html"), column_width: "full", template: :basic) do %>
+    <%= page_heading(size: "l") %>
+
+    <div class="maximize-text-width">
+      <p class="govuk-body"><%= t(".options") %></p>
+      <%= govuk_list t(".#{@type}.option_bullets"), type: :bullet %>
+    </div>
+
+    <div class='govuk-button-group'>
+      <%= govuk_button_link_to t(".applications"), providers_legal_aid_applications_path, class: "white-button", role: "button" %>
+    </div>
+  <% end %>
+</div>
