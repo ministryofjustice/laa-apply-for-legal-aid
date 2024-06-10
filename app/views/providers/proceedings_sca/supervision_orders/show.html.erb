@@ -1,0 +1,17 @@
+<%= form_with(
+      url: providers_legal_aid_application_supervision_orders_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".heading"), form:, template: :basic do %>
+    <%= form.govuk_collection_radio_buttons :change_supervision_order,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            caption: { text: t(".caption"), size: "l" },
+                                            legend: { text: content_for(:page_title), size: "xl", tag: "h1" } %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
