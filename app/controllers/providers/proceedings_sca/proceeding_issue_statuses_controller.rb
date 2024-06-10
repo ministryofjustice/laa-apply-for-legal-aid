@@ -7,8 +7,15 @@ module Providers
       end
 
       def update
+        @proceeding = legal_aid_application.proceedings.last
         form
-        go_forward(@form.proceeding_issue_status?) if form.valid?
+
+        if form.valid?
+          return redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status") unless form.proceeding_issue_status?
+
+          return go_forward
+        end
+        render :show, status: :unprocessable_entity
       end
 
     private
@@ -18,6 +25,7 @@ module Providers
           journey: :provider,
           radio_buttons_input_name: :proceeding_issue_status,
           form_params:,
+          error: error_message,
         )
       end
 
@@ -25,6 +33,10 @@ module Providers
         return {} unless params[:binary_choice_form]
 
         params.require(:binary_choice_form).permit(:proceeding_issue_status)
+      end
+
+      def error_message
+        I18n.t("providers.proceedings_sca.proceeding_issue_statuses.show.error")
       end
     end
   end

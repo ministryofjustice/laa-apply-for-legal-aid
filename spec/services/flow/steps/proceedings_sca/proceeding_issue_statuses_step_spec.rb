@@ -10,9 +10,7 @@ RSpec.describe Flow::Steps::ProceedingsSCA::ProceedingIssueStatusesStep, type: :
   end
 
   describe "#forward" do
-    subject(:path) { described_class.forward.call(legal_aid_application, proceeding_is_issued) }
-
-    let(:proceeding_is_issued) { true }
+    subject(:path) { described_class.forward }
 
     it { is_expected.to be :has_other_proceedings }
   end

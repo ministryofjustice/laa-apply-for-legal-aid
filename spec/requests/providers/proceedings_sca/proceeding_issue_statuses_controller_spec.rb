@@ -26,16 +26,45 @@ RSpec.describe Providers::ProceedingsSCA::ProceedingIssueStatusesController do
     end
   end
 
-  describe "PATCH /providers/applications/:id/about_financial_means" do
-    subject(:get_request) { patch providers_legal_aid_application_about_financial_means_path(legal_aid_application) }
+  describe "PATCH /providers/applications/:id/proceeding_issue_status" do
+    subject(:get_request) { patch providers_legal_aid_application_proceeding_issue_statuses_path(legal_aid_application, params:) }
+
+    let(:params) do
+      {
+        binary_choice_form: {
+          proceeding_issue_status:,
+        },
+      }
+    end
 
     before do
       login_as provider
       get_request
     end
 
-    it "redirects to next page" do
-      expect(response).to have_http_status(:redirect)
+    context "when yes is chosen" do
+      let(:proceeding_issue_status) { true }
+
+      it "redirects to next page" do
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "when no is chosen" do
+      let(:proceeding_issue_status) { false }
+
+      it "redirects to the interrupt page" do
+        expect(response).to redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status")
+      end
+    end
+
+    context "when the provider does not provide a response" do
+      let(:proceeding_issue_status) { "" }
+
+      it "renders the same page with an error message" do
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to include("Select yes if this proceeding has been issued").twice
+      end
     end
   end
 end
