@@ -37,6 +37,7 @@ module Flow
         proceedings_sca_supervision_orders: Steps::ProceedingsSCA::SupervisionOrderStep,
         proceedings_sca_child_subjects: Steps::ProceedingsSCA::ChildSubjectsStep,
         proceedings_sca_heard_as_alternatives: Steps::ProceedingsSCA::HeardAsAlternativesStep,
+        proceedings_sca_change_of_names: Steps::ProceedingsSCA::ChangeOfNamesStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: Steps::ProviderStart::LimitationsStep,
         has_national_insurance_numbers: {

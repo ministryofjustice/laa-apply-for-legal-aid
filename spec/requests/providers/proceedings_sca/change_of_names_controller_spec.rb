@@ -5,7 +5,7 @@ RSpec.describe Providers::ProceedingsSCA::ChangeOfNamesController do
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/change_of_names" do
-    subject(:get_request) { get providers_legal_aid_application_change_of_name_path(legal_aid_application) }
+    subject(:get_request) { get providers_legal_aid_application_change_of_names_path(legal_aid_application) }
 
     before do
       login_provider
@@ -26,6 +26,64 @@ RSpec.describe Providers::ProceedingsSCA::ChangeOfNamesController do
       let(:login_provider) { login_as create(:provider) }
 
       it_behaves_like "an authenticated provider from a different firm"
+    end
+  end
+
+  describe "PATCH /providers/applications/:id/change_of_names" do
+    subject(:patch_request) do
+      patch(providers_legal_aid_application_change_of_names_path(legal_aid_application, params:))
+    end
+
+    let(:params) do
+      {
+        binary_choice_form: {
+          change_of_name:,
+        },
+      }
+    end
+
+    before { login_provider }
+
+    context "when the provider responds yes" do
+      let(:change_of_name) { "true" }
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "change_of_name"))
+      end
+    end
+
+    context "when the provider responds no" do
+      let(:change_of_name) { "false" }
+
+      it "redirects to the next page" do
+        patch_request
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "when the provider does not provide a response" do
+      let(:change_of_name) { "" }
+
+      it "renders the same page with an error message" do
+        patch_request
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Select yes if this proceeding is for a change of name application").twice
+      end
+    end
+
+    context "with form submitted using Save as draft button" do
+      let(:params) { { draft_button: "Save and come back later" } }
+
+      it "redirects provider to provider's applications page" do
+        patch_request
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it "sets the application as draft" do
+        expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+      end
     end
   end
 end
