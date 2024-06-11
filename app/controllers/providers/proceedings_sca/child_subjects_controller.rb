@@ -12,7 +12,6 @@ module Providers
         return continue_or_draft if draft_selected?
 
         @proceeding = legal_aid_application.proceedings.last
-        form
         if form.valid?
           return redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "child_subject") unless form.child_subject?
 
