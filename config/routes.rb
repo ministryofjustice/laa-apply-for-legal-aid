@@ -276,6 +276,7 @@ Rails.application.routes.draw do
         resource :supervision_orders, only: %i[show update], path: "supervision_order_changes"
         resource :child_subject, only: %i[show update], path: "client_is_child_subject"
         resource :heard_as_alternatives, only: %i[show update], path: "will_proceeding_be_heard_as_an_alternative"
+        resource :change_of_names, only: %i[show update]
       end
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
