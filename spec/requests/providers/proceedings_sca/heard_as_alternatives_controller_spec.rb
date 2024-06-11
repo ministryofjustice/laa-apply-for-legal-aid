@@ -69,7 +69,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
         let(:heard_as_alternative) { false }
 
         it "redirects to the interrupt page" do
-          expect(response).to redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status")
+          expect(response).to redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "heard_as_alternatives")
         end
       end
 

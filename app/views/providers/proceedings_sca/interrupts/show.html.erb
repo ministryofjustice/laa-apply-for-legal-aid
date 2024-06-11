@@ -3,8 +3,11 @@
     <%= page_heading(size: "l") %>
 
     <div class="maximize-text-width">
+      <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
+        <p class="govuk-body"><%= t(".#{@type}.paragraph") %></p>
+      <% end %>
       <p class="govuk-body"><%= t(".options") %></p>
-      <%= govuk_list t(".#{@type}.option_bullets"), type: :bullet %>
+      <%= govuk_list t(".#{@type}.option_bullets_html"), type: :bullet %>
     </div>
 
     <div class='govuk-button-group'>
