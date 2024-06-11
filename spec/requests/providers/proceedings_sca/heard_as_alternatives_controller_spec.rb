@@ -1,0 +1,99 @@
+require "rails_helper"
+
+RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count: 2) }
+  let(:provider) { legal_aid_application.provider }
+
+  describe "GET /providers/applications/:id/will_proceeding_be_heard_as_an_alternative" do
+    subject(:get_request) { get providers_legal_aid_application_heard_as_alternatives_path(legal_aid_application) }
+
+    context "when the provider is not authenticated" do
+      before { get_request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the provider is authenticated" do
+      before do
+        login_as provider
+        get_request
+      end
+
+      context "when there is one core proceeding" do
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(I18n.t("providers.proceedings_sca.heard_as_alternatives.show.page_title.single"))
+        end
+      end
+
+      context "when there is more than one core proceeding" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count: 3) }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(I18n.t("providers.proceedings_sca.heard_as_alternatives.show.page_title.multiple"))
+        end
+      end
+    end
+  end
+
+  describe "PATCH /providers/applications/:id/will_proceeding_be_heard_as_an_alternative" do
+    subject(:patch_request) { patch providers_legal_aid_application_heard_as_alternatives_path(legal_aid_application, params:) }
+
+    before do
+      login_as provider
+    end
+
+    context "with form submitted using Save and continue button" do
+      let(:params) do
+        {
+          binary_choice_form: {
+            heard_as_alternative:,
+          },
+        }
+      end
+
+      before do
+        patch_request
+      end
+
+      context "when yes is chosen" do
+        let(:heard_as_alternative) { true }
+
+        it "redirects to next page" do
+          expect(response).to have_http_status(:redirect)
+        end
+      end
+
+      context "when no is chosen" do
+        let(:heard_as_alternative) { false }
+
+        it "redirects to the interrupt page" do
+          expect(response).to redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status")
+        end
+      end
+
+      context "when the provider does not provide a response" do
+        let(:heard_as_alternative) { "" }
+
+        it "renders the same page with an error message" do
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.body).to include("Select yes if this proceeding will be heard as an alternative to any of the special children act core proceedings").twice
+        end
+      end
+    end
+
+    context "with form submitted using Save as draft button" do
+      let(:params) { { draft_button: "Save and come back later" } }
+
+      it "redirects provider to provider's applications page" do
+        patch_request
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it "sets the application as draft" do
+        expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+      end
+    end
+  end
+end

@@ -1675,6 +1675,17 @@ en:
         show:
           error: Select yes if this proceeding has been issued
           page_title: Has this proceeding been issued?
+      heard_as_alternatives:
+        show:
+          error: 
+            Select yes if this proceeding will be heard as an alternative to any of
+            the special children act core proceedings
+          page_title:
+            single:
+              Will this proceeding be heard as an alternative to the %{proceeding} proceeding?
+            multiple:
+              Will this proceeding be heard as an alternative to any of the special
+              children act core proceedings?
       interrupts:
         show:
           options: "You can (choose one of the following):"
