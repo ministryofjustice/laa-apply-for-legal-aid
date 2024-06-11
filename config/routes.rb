@@ -271,8 +271,8 @@ Rails.application.routes.draw do
       end
 
       scope module: :proceedings_sca do
-        # resource :interrupts, only: %i[show]
         get "/interrupt/:type", to: "interrupts#show", as: "sca_interrupt"
+        resource :supervision_orders, only: %i[show update], path: "supervision_order_changes"
       end
 
       scope module: :proceeding_loop do
