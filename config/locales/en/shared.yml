@@ -136,10 +136,14 @@ en:
         manual_address: Enter an address manually
     addresses:
       heading: Enter your client's %{location} address
+      guidance:
+        first: This must be in the UK.
+        second: For office addresses, include the department and floor number if it applies.
       address_manual_link: Enter address manually
       label_1: postcode
       address_line_one: Address line 1
       address_line_two: Address line 2 (optional)
+      address_line_three: Address line 3 (optional)
       city: Town or city
       county: County (optional)
       postcode: Postcode
