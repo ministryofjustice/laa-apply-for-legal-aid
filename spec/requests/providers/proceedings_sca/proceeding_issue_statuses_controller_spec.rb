@@ -29,41 +29,59 @@ RSpec.describe Providers::ProceedingsSCA::ProceedingIssueStatusesController do
   describe "PATCH /providers/applications/:id/proceeding_issue_status" do
     subject(:get_request) { patch providers_legal_aid_application_proceeding_issue_statuses_path(legal_aid_application, params:) }
 
-    let(:params) do
-      {
-        binary_choice_form: {
-          proceeding_issue_status:,
-        },
-      }
-    end
-
     before do
       login_as provider
-      get_request
     end
 
-    context "when yes is chosen" do
-      let(:proceeding_issue_status) { true }
+    context "with form submitted using Save and continue button" do
+      let(:params) do
+        {
+          binary_choice_form: {
+            proceeding_issue_status:,
+          },
+        }
+      end
 
-      it "redirects to next page" do
-        expect(response).to have_http_status(:redirect)
+      before do
+        get_request
+      end
+
+      context "when yes is chosen" do
+        let(:proceeding_issue_status) { true }
+
+        it "redirects to next page" do
+          expect(response).to have_http_status(:redirect)
+        end
+      end
+
+      context "when no is chosen" do
+        let(:proceeding_issue_status) { false }
+
+        it "redirects to the interrupt page" do
+          expect(response).to redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status")
+        end
+      end
+
+      context "when the provider does not provide a response" do
+        let(:proceeding_issue_status) { "" }
+
+        it "renders the same page with an error message" do
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.body).to include("Select yes if this proceeding has been issued").twice
+        end
       end
     end
 
-    context "when no is chosen" do
-      let(:proceeding_issue_status) { false }
+    context "with form submitted using Save as draft button" do
+      let(:params) { { draft_button: "Save and come back later" } }
 
-      it "redirects to the interrupt page" do
-        expect(response).to redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status")
+      it "redirects provider to provider's applications page" do
+        get_request
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
-    end
 
-    context "when the provider does not provide a response" do
-      let(:proceeding_issue_status) { "" }
-
-      it "renders the same page with an error message" do
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.body).to include("Select yes if this proceeding has been issued").twice
+      it "sets the application as draft" do
+        expect { get_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
       end
     end
   end
