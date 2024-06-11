@@ -1670,11 +1670,15 @@ en:
         show:
           heading: Is the application to vary, discharge or extend a supervision order?
           caption: Supervision order
+      proceeding_issue_statuses:
+        show:
+          error: Select yes if this proceeding has been issued
+          page_title: Has this proceeding been issued?
       interrupts:
         show:
           options: "You can (choose one of the following):"
           applications: Select a different proceeding or matter type
-          default:
+          proceeding_issue_status:
             title_html: You cannot choose a special children act proceeding if it has not been issued
             option_bullets:
               - select a different proceeding or matter type

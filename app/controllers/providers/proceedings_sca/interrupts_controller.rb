@@ -16,7 +16,7 @@ module Providers
         params.require(:type)
       rescue ActionController::ParameterMissing, I18n::MissingTranslationData
         # TODO: Placeholder to allow fallback while developing
-        "default"
+        "proceeding_issue_status"
       end
     end
   end
