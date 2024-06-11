@@ -6,12 +6,12 @@
       <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
         <p class="govuk-body"><%= t(".#{@type}.paragraph") %></p>
       <% end %>
-      <p class="govuk-body"><%= t(".options") %></p>
+      <p class="govuk-body"><%= t(".#{@type}.options") %></p>
       <%= govuk_list t(".#{@type}.option_bullets_html"), type: :bullet %>
     </div>
 
     <div class='govuk-button-group'>
-      <%= govuk_button_link_to t(".applications"), providers_legal_aid_applications_path, class: "white-button", role: "button" %>
+      <%= govuk_button_link_to t(".#{@type}.applications"), providers_legal_aid_applications_path, class: "white-button", role: "button" %>
     </div>
   <% end %>
 </div>
