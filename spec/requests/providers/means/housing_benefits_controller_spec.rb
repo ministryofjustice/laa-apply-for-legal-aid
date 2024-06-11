@@ -78,10 +78,6 @@ RSpec.describe Providers::Means::HousingBenefitsController do
     end
 
     context "when the applicant has housing outgoing category" do
-      before do
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-      end
-
       it "renders the correct content" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         transaction_type = create(:transaction_type, :rent_or_mortgage)
@@ -99,10 +95,6 @@ RSpec.describe Providers::Means::HousingBenefitsController do
     end
 
     context "when the partner has housing outgoing category" do
-      before do
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-      end
-
       it "renders the correct content" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         transaction_type = create(:transaction_type, :rent_or_mortgage)
@@ -120,10 +112,6 @@ RSpec.describe Providers::Means::HousingBenefitsController do
     end
 
     context "when both the applicant and the partner have housing outgoing category" do
-      before do
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-      end
-
       it "renders the correct content" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         transaction_type = create(:transaction_type, :rent_or_mortgage)

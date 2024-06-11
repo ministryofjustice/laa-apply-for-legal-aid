@@ -12,7 +12,6 @@ RSpec.describe Setting do
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
         expect(rec.alert_via_sentry?).to be true
-        expect(rec.partner_means_assessment?).to be false
         expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.home_address?).to be false
@@ -29,7 +28,6 @@ RSpec.describe Setting do
           enable_ccms_submission: false,
           bank_transaction_filename: "my_special_file.csv",
           alert_via_sentry: true,
-          partner_means_assessment: true,
           linked_applications: true,
           collect_hmrc_data: true,
           home_address: false,
@@ -45,7 +43,6 @@ RSpec.describe Setting do
         expect(rec.enable_ccms_submission?).to be false
         expect(rec.bank_transaction_filename).to eq "my_special_file.csv"
         expect(rec.alert_via_sentry?).to be true
-        expect(rec.partner_means_assessment?).to be true
         expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.home_address?).to be false
@@ -64,7 +61,6 @@ RSpec.describe Setting do
       expect(described_class.enable_ccms_submission?).to be true
       expect(described_class.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
       expect(described_class.alert_via_sentry?).to be true
-      expect(described_class.partner_means_assessment?).to be false
       expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.home_address?).to be false

@@ -39,13 +39,12 @@ RSpec.describe Providers::CheckClientDetailsController do
       end
     end
 
-    context "when the client has a partner, flag is on and the provider previously selected joint benefit with partner" do
+    context "when the client has a partner, and the provider previously selected joint benefit with partner" do
       let(:application) { create(:legal_aid_application, :with_partner_and_joint_benefit, :with_proceedings, :at_checking_applicant_details) }
       let(:partner) { application.partner }
 
       before do
         login_as application.provider
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
         get_request
       end
 
@@ -76,24 +75,11 @@ RSpec.describe Providers::CheckClientDetailsController do
       end
     end
 
-    context "when the partner means journey flag is turned off" do
-      before do
-        login_as application.provider
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
-        get_request
-      end
-
-      it "does not display partner details section" do
-        expect(unescaped_response_body).not_to include(I18n.t("providers.check_client_details.show.h2_partner"))
-      end
-    end
-
-    context "when the partner means flag is on and the client has a partner but the benefit is not joint" do
+    context "when the client has a partner but the benefit is not joint" do
       let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
 
       before do
         login_as application.provider
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
         get_request
       end
 

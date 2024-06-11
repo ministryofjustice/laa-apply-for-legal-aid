@@ -2,7 +2,6 @@ Feature: partner_means_assessment full journey
   @javascript
   Scenario: I am able to complete a minimal (answering no to everything) partner income means assessment to check your answers
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I complete the partner journey as far as 'about financial means'
 
     When I click 'Save and continue'
@@ -42,7 +41,6 @@ Feature: partner_means_assessment full journey
   @javascript
   Scenario: I am able to complete the income means assessment for client and partner to check your answers
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I have completed a non-passported unemployed application with bank statements as far as the open banking consent page
     And I have added a partner
     Then I should be on a page showing "Does your client use online banking?"

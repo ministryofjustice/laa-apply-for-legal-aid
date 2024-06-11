@@ -29,7 +29,8 @@ module CCMS
                  last_name_at_birth:,
                  national_insurance_number: "EG587804M",
                  date_of_birth: Date.new(1977, 4, 10),
-                 address:)
+                 address:,
+                 has_partner: false)
         end
         let(:last_name_at_birth) { nil }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }

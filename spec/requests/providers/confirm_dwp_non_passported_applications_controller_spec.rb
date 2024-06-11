@@ -52,12 +52,11 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
     end
 
-    context "when the application has a partner and the flag is turned on" do
+    context "when the application has a partner" do
       let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
 
       before do
         login_as application.provider
-        allow(Setting).to receive(:partner_means_assessment?).and_return(true)
       end
 
       it "displays the joint passporting benefit option" do
@@ -67,8 +66,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
     end
 
     context "when the application does not have a partner" do
-      before { allow(Setting).to receive(:partner_means_assessment?).and_return(false) }
-
       it "does not display the joint passporting benefit option" do
         get_request
         expect(unescaped_response_body).not_to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
@@ -145,8 +142,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
 
       context "and the solicitor wants to override the results with a non joint benefit" do
-        before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
-
         let(:application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, :at_checking_applicant_details) }
         let(:partner) { application.partner }
 
@@ -186,8 +181,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
 
       context "and the solicitor wants to override the results with a partner" do
-        before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
-
         let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
         let(:partner) { application.partner }
 

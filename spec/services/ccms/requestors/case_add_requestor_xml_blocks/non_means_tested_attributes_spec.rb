@@ -14,7 +14,7 @@ module CCMS
           create(
             :legal_aid_application,
             :with_proceedings,
-            :with_under_18_applicant,
+            :with_under_18_applicant_and_no_partner,
             :with_skipped_benefit_check_result,
             :with_non_means_tested_state_machine,
             :with_cfe_empty_result,

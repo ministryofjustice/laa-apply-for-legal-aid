@@ -2,7 +2,6 @@ Feature: partner_means_assessment state benefits handling
   @javascript
   Scenario: I am able to record state benefits received by the partner
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I complete the partner journey as far as 'about financial means'
 
     When I click 'Save and continue'
@@ -73,7 +72,6 @@ Feature: partner_means_assessment state benefits handling
   @javascript
   Scenario: I am able to skip state benefits questions when the the partner does not receive them
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I complete the partner journey as far as 'about financial means'
 
     When I click 'Save and continue'

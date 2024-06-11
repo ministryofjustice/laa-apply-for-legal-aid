@@ -49,6 +49,9 @@ Feature: Applicant under 16 blocked
     When I choose "Yes"
     And I enter national insurance number 'JA293483B'
     And I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
     When I click 'Save and continue'

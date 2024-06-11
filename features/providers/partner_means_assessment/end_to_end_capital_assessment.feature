@@ -2,7 +2,6 @@ Feature: partner_means_assessment full journey
   @javascript
   Scenario: I am able to complete a minimal (answering no to everything) capital means assessment with a partner
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I have completed a non-passported employed application for "client and partner" with bank statements as far as the end of the means income section
     Then I should be on a page showing "Check your answers"
 
@@ -54,7 +53,6 @@ Feature: partner_means_assessment full journey
   @javascript
   Scenario: I am able to complete the capital means assessment for a client with a partner
     Given csrf is enabled
-    And the feature flag for partner_means_assessment is enabled
     And I have completed a non-passported employed application for "client and partner" with bank statements as far as the end of the means income section
     Then I should be on a page showing "Check your answers"
 

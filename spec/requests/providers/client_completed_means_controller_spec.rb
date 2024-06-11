@@ -6,9 +6,6 @@ RSpec.describe Providers::ClientCompletedMeansController do
   let(:has_partner) { false }
   let(:partner) { nil }
   let(:provider) { legal_aid_application.provider }
-  let(:enable_partner_means) { false }
-
-  before { allow(Setting).to receive(:partner_means_assessment?).and_return(enable_partner_means) }
 
   describe "GET /providers/applications/:id/client_completed_means" do
     subject(:get_request) { get providers_legal_aid_application_client_completed_means_path(legal_aid_application) }

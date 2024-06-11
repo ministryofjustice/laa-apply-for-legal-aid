@@ -23,10 +23,6 @@ class Setting < ApplicationRecord
     setting.alert_via_sentry
   end
 
-  def self.partner_means_assessment?
-    setting.partner_means_assessment
-  end
-
   def self.linked_applications?
     setting.linked_applications
   end

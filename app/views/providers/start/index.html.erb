@@ -14,9 +14,6 @@
 
       <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
       <ul class="govuk-list govuk-list--bullet">
-        <% if !Setting.partner_means_assessment? %>
-          <li><%= t(".dont_use_service.partner_list_item") %></li>
-        <% end %>
         <% if Setting.linked_applications? %>
           <% t(".dont_use_service.linked_applications_list").each do |item| %>
             <li><%= item %></li>

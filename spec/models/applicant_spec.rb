@@ -4,20 +4,8 @@ RSpec.describe Applicant do
   describe "when creating an applicant record" do
     subject(:created_applicant) { described_class.create }
 
-    context "and the partner means test feature flag is on" do
-      before { allow(Setting).to receive(:partner_means_assessment?).and_return(true) }
-
-      it "leaves the has_partner field as nil" do
-        expect(created_applicant.has_partner).to be_nil
-      end
-    end
-
-    context "and the partner means test feature flag is off" do
-      before { allow(Setting).to receive(:partner_means_assessment?).and_return(false) }
-
-      it "pre-populates the has_partner field with false" do
-        expect(created_applicant.has_partner).to be false
-      end
+    it "leaves the has_partner field as nil" do
+      expect(created_applicant.has_partner).to be_nil
     end
   end
 

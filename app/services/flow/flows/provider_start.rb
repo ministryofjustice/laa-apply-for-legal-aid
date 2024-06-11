@@ -40,10 +40,10 @@ module Flow
         has_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
           forward: lambda do |application|
-            if Setting.partner_means_assessment? && !application.overriding_dwp_result?
-              :client_has_partners
-            else
+            if application.overriding_dwp_result?
               :check_provider_answers
+            else
+              :client_has_partners
             end
           end,
           check_answers: :check_provider_answers,

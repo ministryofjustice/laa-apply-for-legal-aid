@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_05_105731) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_135347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -959,7 +959,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_105731) do
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
-    t.boolean "partner_means_assessment", default: false, null: false
     t.datetime "cfe_compare_run_at"
     t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false

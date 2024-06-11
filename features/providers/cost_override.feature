@@ -42,7 +42,12 @@ Feature: Emergency cost override
     And I choose "Yes"
     And I enter national insurance number 'CB987654A'
     When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
+    And I choose "No"
+    When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
+    When I click link "Back"
+    Then I should be on a page with title "Does your client have a partner?"
     When I click link "Back"
     Then I should be on a page with title "Does your client have a National Insurance number?"
     When I click link "Back"
@@ -53,6 +58,8 @@ Feature: Emergency cost override
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a National Insurance number?"
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a partner?"
     When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should see "Emergency cost limit"
