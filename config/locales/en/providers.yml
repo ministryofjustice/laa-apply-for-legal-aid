@@ -1670,6 +1670,10 @@ en:
         show:
           heading: Is the application to vary, discharge or extend a supervision order?
           caption: Supervision order
+      proceeding_issue_statuses:
+        show:
+          error: Error message
+          page_title: Has this proceeding been issued?
       interrupts:
         show:
           options: "You can (choose one of the following):"
@@ -1685,6 +1689,9 @@ en:
             option_bullets:
               - select a different proceeding or matter type
               - go back and change your answer
+    proceeding_issue_statuses:
+        show:
+          error: Error message
     proceeding_loop:
       single_proceeding: Proceeding 1
       multi_proceeding: Proceeding %{position} of %{total}

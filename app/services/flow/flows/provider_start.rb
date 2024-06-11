@@ -33,6 +33,7 @@ module Flow
           end,
         },
         proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
+        proceeding_issue_statuses: Steps::ProceedingsSCA::ProceedingIssueStatusesStep,
         proceedings_sca_supervision_orders: Steps::ProceedingsSCA::SupervisionOrderStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: Steps::ProviderStart::LimitationsStep,

@@ -272,9 +272,9 @@ Rails.application.routes.draw do
 
       scope module: :proceedings_sca do
         get "/interrupt/:type", to: "interrupts#show", as: "sca_interrupt"
+        resource :proceeding_issue_statuses, only: %i[show update], path: "proceeding_issue_status"
         resource :supervision_orders, only: %i[show update], path: "supervision_order_changes"
       end
-
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
         resources :confirm_delegated_functions_date, only: %i[show update]
