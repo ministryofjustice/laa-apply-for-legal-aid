@@ -123,9 +123,7 @@ module Flow
         },
         capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,
         capital_income_assessment_results: Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep,
-        means_reports: {
-          path: ->(application) { urls.providers_legal_aid_application_means_report_path(application) },
-        },
+        means_reports: Steps::ProviderCapital::MeansReportsStep,
       }.freeze
     end
   end
