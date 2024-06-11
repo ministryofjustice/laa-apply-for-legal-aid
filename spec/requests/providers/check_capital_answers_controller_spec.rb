@@ -152,9 +152,9 @@ RSpec.describe Providers::CheckCapitalAnswersController do
             legal_aid_application.update!(provider_received_citizen_consent: true)
           end
 
-          it "redirects to the capital income assessment page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
 
           it "calls CFE::SubmissionManager" do

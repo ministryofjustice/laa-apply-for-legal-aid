@@ -117,10 +117,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
           forward: :capital_assessment_results,
         },
-        check_capital_answers: {
-          path: ->(application) { urls.providers_legal_aid_application_check_capital_answers_path(application) },
-          forward: :capital_income_assessment_results,
-        },
+        check_capital_answers: Steps::ProviderCapital::CheckCapitalAnswersStep,
         capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,
         capital_income_assessment_results: Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep,
         means_reports: Steps::ProviderCapital::MeansReportsStep,
