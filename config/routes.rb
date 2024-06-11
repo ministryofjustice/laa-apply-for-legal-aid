@@ -274,6 +274,7 @@ Rails.application.routes.draw do
         get "/interrupt/:type", to: "interrupts#show", as: "sca_interrupt"
         resource :proceeding_issue_statuses, only: %i[show update], path: "proceeding_issue_status"
         resource :supervision_orders, only: %i[show update], path: "supervision_order_changes"
+        resource :child_subject, only: %i[show update], path: "client_is_child_subject"
       end
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
