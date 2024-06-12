@@ -87,6 +87,18 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
         end
       end
 
+      context "when the search application has been discarded" do
+        before { create(:legal_aid_application, provider:, application_ref: "L-123-456", discarded_at: Date.yesterday) }
+
+        let(:search_laa_reference) { "L-123-456" }
+
+        it "renders the same page with a notification banner" do
+          patch_request
+          expect(response).to have_http_status(:ok)
+          expect(unescaped_response_body).to include("You cannot link to a voided or deleted application.")
+        end
+      end
+
       context "when the search value is empty" do
         let(:search_laa_reference) { "" }
 

@@ -421,6 +421,7 @@ en:
           heading: What is the LAA reference of the application you want to link to?
           hint: For example, 'L-AB1-CD2'.
           missing: "We could not find an application with the LAA reference of %{application_ref}."
+          voided_or_deleted: "You cannot link to a voided or deleted application."
           not_submitted:
             heading: "Submit %{application_ref} if you want to link to it."
             link: "Find this application"
