@@ -6,18 +6,21 @@
                     else
                       t(".h1-heading")
                     end %>
+
+<% if @successfully_deleted %>
+  <% notification_banner_title = t("generic.success") %>
+  <% notification_banner_text = @successfully_deleted %>
+<% end %>
+
 <%= page_template(
       page_title: t(".h1-heading"),
       head_title: new_head_title,
       template: :basic,
       back_link: {},
+      notification_banner_title:,
+      notification_banner_success: true,
+      notification_banner_text:,
     ) do %>
-
-  <% if @successfully_deleted %>
-    <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
-      <% notification_banner.with_heading(text: @successfully_deleted) %>
-    <% end %>
-  <% end %>
 
   <%= form_with(
         model: @form,
