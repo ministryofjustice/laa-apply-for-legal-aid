@@ -1,5 +1,5 @@
 <%= if @legal_aid_application.copy_case? && flash[:hash].nil?
-      govuk_notification_banner(title_text: t("generic.important"), text: t(".copy_case.heading", application_ref: @source_application.application_ref))
+      govuk_notification_banner(title_text: t("generic.important"), text: t(".copy_case.heading", application_ref: application_ref_non_breaking(@source_application.application_ref)))
     end %>
 <%= page_template(
       page_title: t(".title"),
