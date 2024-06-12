@@ -1,0 +1,23 @@
+<%= form_with(
+      url: providers_legal_aid_application_heard_as_alternatives_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title.#{@amount}"),
+                    template: :basic,
+                    form: do %>
+    <%= form.govuk_collection_radio_buttons :heard_as_alternative,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: t(".page_title.#{@amount}", proceeding: @core_proceedings.first.meaning), size: "xl", tag: "h1" },
+                                            caption: { text: @current_proceeding.meaning, size: "xl" } do %>
+                                              <% if @amount.eql?("multiple") %>
+                                                <p class="govuk-body">These are:</p>
+                                                <%= govuk_list @core_proceedings.pluck(:meaning), type: :bullet %>
+                                              <% end %>
+    <% end %>
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
