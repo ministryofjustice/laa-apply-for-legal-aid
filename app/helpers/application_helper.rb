@@ -78,4 +78,8 @@ module ApplicationHelper
       t("layouts.application.footer.digital_services_html") => "https://mojdigital.blog.gov.uk",
     }.freeze
   end
+
+  def application_ref_non_breaking(application_ref)
+    application_ref.tr("-", "\u2011")
+  end
 end
