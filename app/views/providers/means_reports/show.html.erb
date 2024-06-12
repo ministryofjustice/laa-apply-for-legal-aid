@@ -9,7 +9,7 @@
 
   <%= render(
         "shared/check_answers/client_details",
-        attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth age means_test national_insurance_number],
+        attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth age means_test national_insurance_number home_address],
         applicant: @legal_aid_application.applicant,
         read_only: true,
       ) %>
