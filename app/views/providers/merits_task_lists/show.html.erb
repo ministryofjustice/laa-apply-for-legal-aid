@@ -37,12 +37,12 @@
                     next if task.state.eql?(:ignored)
 
                     if task.state == :waiting_for_dependency
-                      task_list.with_item(title: t(".#{task.name}")) do |item|
+                      task_list.with_item(title: t(".#{task.name}_html", proceeding: proceeding[:name])) do |item|
                         item.with_status(text: t(".states.waiting_for_dependency"), classes: "govuk-task-list__status--cannot-start-yet")
                       end
                     else
                       task_list.with_item(
-                        title: t(".#{task.name}"),
+                        title: t(".#{task.name}_html", proceeding: proceeding[:name]),
                         href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code) : _task_url(task.name, @legal_aid_application, task.status),
                         status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
                       )
