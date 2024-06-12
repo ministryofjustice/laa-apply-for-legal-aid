@@ -1,8 +1,4 @@
-<%= govuk_notification_banner(title_text: t("generic.important")) do |notification_banner| %>
-  <% notification_banner.with_heading(text: t(".banner.your_client_needs_to")) %>
-<% end %>
-
-  <p class="govuk-body"><%= t ".sent_email_text", email: @legal_aid_application.applicant.email %></p>
+<p class="govuk-body"><%= t ".sent_email_text", email: @legal_aid_application.applicant.email %></p>
 
   <%= govuk_button_link_to t(".change_email_button"),
                            providers_legal_aid_application_email_address_path,
@@ -12,6 +8,8 @@
 
   <%= page_template(
         page_title: t(".title"),
+        notification_banner_title: t("generic.important"),
+        notification_banner_text: t(".banner.your_client_needs_to"),
         back_link: {
           path: providers_legal_aid_applications_path,
           text: t("generic.home"),
