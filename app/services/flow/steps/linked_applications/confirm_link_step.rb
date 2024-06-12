@@ -6,7 +6,7 @@ module Flow
         forward: lambda do |application|
           link = application&.lead_linked_application
           return :link_application_copies if link.confirm_link && link.link_type_code == "FC_LEAD"
-          return :link_application_make_links if link.confirm_link.nil?
+          return :link_application_find_link_applications if link.confirm_link.nil?
 
           application.proceedings.any? ? :has_other_proceedings : :proceedings_types
         end,

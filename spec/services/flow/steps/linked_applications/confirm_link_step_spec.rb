@@ -45,7 +45,7 @@ RSpec.describe Flow::Steps::LinkedApplications::ConfirmLinkStep, type: :request 
     context "when the provider confirms they want to link to a different application" do
       let(:confirm_link) { nil }
 
-      it { is_expected.to be :link_application_make_links }
+      it { is_expected.to be :link_application_find_link_applications }
     end
   end
 

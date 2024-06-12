@@ -21,7 +21,8 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
       let(:link_type_code) { "FC_LEAD" }
 
       it "sets the link_type_code" do
-        expect(legal_aid_application.lead_linked_application.link_type_code).to eq "FC_LEAD"
+        expect(legal_aid_application.lead_linked_application).to have_attributes(link_type_code: "FC_LEAD",
+                                                                                 confirm_link: nil)
       end
     end
 
@@ -29,7 +30,8 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
       let(:link_type_code) { "LEGAL" }
 
       it "sets the link_type_code" do
-        expect(legal_aid_application.lead_linked_application.link_type_code).to eq "LEGAL"
+        expect(legal_aid_application.lead_linked_application).to have_attributes(link_type_code: "LEGAL",
+                                                                                 confirm_link: nil)
       end
     end
 
@@ -37,7 +39,8 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
       let(:link_type_code) { "false" }
 
       it "sets the link_type_code" do
-        expect(legal_aid_application.lead_linked_application.link_type_code).to eq "false"
+        expect(legal_aid_application.lead_linked_application).to have_attributes(link_type_code: "false",
+                                                                                 confirm_link: false)
       end
     end
 
