@@ -9,6 +9,9 @@ module Providers
 
       def save
         model.update!(confirm_link: link_type_code == "false" ? false : nil)
+        if link_type_code.eql?("LEGAL")
+          model.associated_application.update!(copy_case: nil, copy_case_id: nil)
+        end
         super
       end
       alias_method :save!, :save

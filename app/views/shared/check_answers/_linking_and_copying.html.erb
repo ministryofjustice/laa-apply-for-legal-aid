@@ -49,7 +49,7 @@
         end %>
   <% end %>
 
-  <% if @legal_aid_application&.lead_linked_application&.confirm_link? %>
+  <% if @legal_aid_application&.lead_linked_application&.confirm_link? && @legal_aid_application&.lead_linked_application&.link_type_code.eql?("FC_LEAD") %>
     <div class="govuk-grid-row" id="app-check-your-answers__copying">
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m"><%= t ".section_copying.heading" %></h2>
