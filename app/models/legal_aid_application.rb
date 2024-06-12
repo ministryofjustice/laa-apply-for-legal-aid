@@ -569,7 +569,7 @@ class LegalAidApplication < ApplicationRecord
   def link_description
     [
       applicant&.full_name,
-      application_ref,
+      "<span class='no-wrap'>#{application_ref}</span>",
       proceedings&.map(&:meaning)&.join(", "),
     ].compact_blank.join(", ")
   end

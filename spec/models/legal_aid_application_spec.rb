@@ -1867,7 +1867,7 @@ RSpec.describe LegalAidApplication do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings, proceeding_count: 2) }
 
       it "returns the expected data" do
-        expected = "#{legal_aid_application.applicant.full_name}, #{legal_aid_application.application_ref}, #{legal_aid_application.proceedings.map(&:meaning).join(', ')}"
+        expected = "#{legal_aid_application.applicant.full_name}, <span class='no-wrap'>#{legal_aid_application.application_ref}</span>, #{legal_aid_application.proceedings.map(&:meaning).join(', ')}"
         expect(link_description).to eql(expected)
       end
     end
@@ -1876,7 +1876,7 @@ RSpec.describe LegalAidApplication do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       it "returns the expected data" do
-        expect(link_description).to eql("#{legal_aid_application.applicant.full_name}, #{legal_aid_application.application_ref}")
+        expect(link_description).to eql("#{legal_aid_application.applicant.full_name}, <span class='no-wrap'>#{legal_aid_application.application_ref}</span>")
       end
     end
 
@@ -1884,7 +1884,7 @@ RSpec.describe LegalAidApplication do
       let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
       it "returns the expected data" do
-        expect(link_description).to eql("#{legal_aid_application.application_ref}, Inherent jurisdiction high court injunction")
+        expect(link_description).to eql("<span class='no-wrap'>#{legal_aid_application.application_ref}</span>, Inherent jurisdiction high court injunction")
       end
     end
   end
