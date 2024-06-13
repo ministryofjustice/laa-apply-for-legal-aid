@@ -20,7 +20,7 @@ module Providers
         amount
 
         if form.valid?
-          return go_forward
+          return go_forward(form.heard_together?)
         end
 
         render :show, status: :unprocessable_entity

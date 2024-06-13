@@ -1722,7 +1722,7 @@ en:
             title_html: For special children act, a supervision order cannot be varied, discharged or extended
             option_bullets_html:
               - select a different proceeding or matter type
-              - go back and change your answer      
+              - go back and change your answer
           child_subject:
             <<: *default
             title_html: For special children act, your client must be the child subject of the proceeding
