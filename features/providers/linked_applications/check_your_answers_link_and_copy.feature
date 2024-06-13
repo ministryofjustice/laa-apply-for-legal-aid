@@ -35,6 +35,7 @@ Scenario: If I change the linked from Family to No
   When I choose "No"
   And I click "Save and continue"
   Then I should be on a page showing "What does your client want legal aid for?"
+  And I should see 'Back'
 
   When I search for proceeding 'Non-molestation order'
   And proceeding suggestions has results

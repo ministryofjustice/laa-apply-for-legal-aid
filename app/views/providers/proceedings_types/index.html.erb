@@ -1,7 +1,13 @@
 <%= page_template(
       page_title: t(".heading_1"),
       show_errors_for: @legal_aid_application,
-      back_link: @legal_aid_application.proceedings.empty? && @legal_aid_application.checking_answers? ? :none : {},
+      back_link: if @legal_aid_application.proceedings.empty? &&
+                    @legal_aid_application.checking_answers? &&
+                    URI(url_for(:back)).path.eql?(URI(providers_legal_aid_application_has_other_proceedings_url).path)
+                   :none
+                 else
+                   {}
+                 end,
     ) %>
 
 <% error_message = @legal_aid_application.errors[:"proceeding-search-input"]&.to_sentence %>
