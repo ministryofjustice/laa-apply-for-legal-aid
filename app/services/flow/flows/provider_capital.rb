@@ -113,19 +113,11 @@ module Flow
           forward: ->(application) { application.passported? ? :check_passported_answers : :check_capital_answers },
           check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
         },
-        check_passported_answers: {
-          path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
-          forward: :capital_assessment_results,
-        },
-        check_capital_answers: {
-          path: ->(application) { urls.providers_legal_aid_application_check_capital_answers_path(application) },
-          forward: :capital_income_assessment_results,
-        },
+        check_passported_answers: Steps::ProviderCapital::CheckPassportedAnswersStep,
+        check_capital_answers: Steps::ProviderCapital::CheckCapitalAnswersStep,
         capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,
         capital_income_assessment_results: Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep,
-        means_reports: {
-          path: ->(application) { urls.providers_legal_aid_application_means_report_path(application) },
-        },
+        means_reports: Steps::ProviderCapital::MeansReportsStep,
       }.freeze
     end
   end

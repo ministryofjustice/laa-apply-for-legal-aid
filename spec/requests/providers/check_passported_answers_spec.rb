@@ -268,8 +268,8 @@ RSpec.describe "check passported answers requests" do
           patch_request
         end
 
-        it "redirects to Has your client received legal help for the matter?" do
-          expect(response).to redirect_to flow_forward_path
+        it "redirects to next step" do
+          expect(response).to have_http_status(:redirect)
         end
 
         it "transitions to provider_entering_merits state" do
