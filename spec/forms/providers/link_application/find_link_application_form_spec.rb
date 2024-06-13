@@ -98,8 +98,8 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationForm, type: :form 
       end
     end
 
-    context "when the application ref searched for contains special characters" do
-      let(:search_laa_reference) { "!@L-£$%123-^&*456()" }
+    context "when the application ref searched for contains special characters or spaces" do
+      let(:search_laa_reference) { "!@L-£$%123-^&*456() " }
 
       it "returns true" do
         expect(application_can_be_linked).to be true
