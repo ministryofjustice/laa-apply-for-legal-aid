@@ -61,6 +61,26 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationForm, type: :form 
         expect(application_can_be_linked).to be :missing_message
       end
     end
+
+    context "when the application searched for has been discarded" do
+      before { LegalAidApplication.find_by(application_ref: "L-123-456").discard! }
+
+      let(:search_laa_reference) { "L-123-456" }
+
+      it "returns :voided_or_deleted_message" do
+        expect(application_can_be_linked).to be :voided_or_deleted_message
+      end
+    end
+
+    context "when the application searched for has expired" do
+      before { create(:legal_aid_application, provider: legal_aid_application.provider, application_ref: "L-123-458", created_at: Date.new(2023, 1, 10)) }
+
+      let(:search_laa_reference) { "L-123-458" }
+
+      it "returns :voided_or_deleted_message" do
+        expect(application_can_be_linked).to be :voided_or_deleted_message
+      end
+    end
   end
 
   describe "validation" do

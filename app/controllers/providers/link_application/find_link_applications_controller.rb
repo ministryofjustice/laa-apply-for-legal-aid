@@ -41,6 +41,14 @@ module Providers
         }
       end
 
+      def voided_or_deleted_message
+        {
+          title_text: t("generic.information"),
+          success: false,
+          heading_text: t("providers.link_application.find_link_applications.show.voided_or_deleted"),
+        }
+      end
+
       def linked_application
         legal_aid_application.lead_linked_application || legal_aid_application.build_lead_linked_application
       end

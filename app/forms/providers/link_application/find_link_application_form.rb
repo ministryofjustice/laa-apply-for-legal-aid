@@ -20,6 +20,7 @@ module Providers
         current_firm = @model.associated_application.provider.firm
         @found_application = current_firm.legal_aid_applications.find_by(application_ref: search_laa_reference)
         return :missing_message if @found_application.blank?
+        return :voided_or_deleted_message if @found_application.discarded? || @found_application.expired?
 
         if @found_application.merits_submitted_at.present?
           true
