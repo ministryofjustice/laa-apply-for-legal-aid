@@ -124,7 +124,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
 
       it "returns http status unprocessable entity" do
         request
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "renders errors" do

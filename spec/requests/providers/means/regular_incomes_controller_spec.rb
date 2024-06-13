@@ -132,7 +132,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
         patch(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params:)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(page).to have_css("p", class: "govuk-error-message", text: "Enter the amount of pension received")
         expect(page).to have_css("p", class: "govuk-error-message", text: "Select how often your client receives pension")
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be_nil

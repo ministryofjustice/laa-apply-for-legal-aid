@@ -92,7 +92,7 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
       let(:add_another_vehicle) { "" }
 
       it "renders the same page with an error message" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Select yes if they have other vehicles").twice
       end
     end

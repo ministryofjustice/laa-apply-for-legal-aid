@@ -180,7 +180,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
 
         patch(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application), params:)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(page).to have_css("p", class: "govuk-error-message", text: "Select yes if your client receives Housing Benefit")
         expect(legal_aid_application.reload.applicant_in_receipt_of_housing_benefit).to be_nil
       end

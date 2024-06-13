@@ -12,7 +12,7 @@ module Providers
         return go_forward(form.add_another_state_benefit?) if form.valid?
 
         transactions
-        render :show, status: :unprocessable_entity
+        render :show, status: :unprocessable_content
       end
 
     private
