@@ -22,7 +22,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
       context "when there is one core proceeding" do
         it "returns http success" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include(I18n.t("providers.proceedings_sca.heard_as_alternatives.show.page_title.single"))
+          expect(unescaped_response_body).to include(I18n.t("providers.proceedings_sca.heard_as_alternatives.show.page_title.single"))
         end
       end
 

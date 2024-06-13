@@ -1683,7 +1683,7 @@ en:
             the special children act core proceedings
           page_title:
             single:
-              Will this proceeding be heard as an alternative to the %{proceeding} proceeding?
+              Will this proceeding be heard as an alternative to the '%{proceeding}' proceeding?
             multiple:
               Will this proceeding be heard as an alternative to any of the special
               children act core proceedings?
