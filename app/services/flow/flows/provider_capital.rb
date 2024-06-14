@@ -6,11 +6,7 @@ module Flow
         own_homes: Steps::ProviderCapital::OwnHomesStep,
         property_details: Steps::ProviderCapital::PropertyDetailsStep,
         vehicles: Steps::ProviderCapital::VehiclesStep,
-        vehicle_details: {
-          path: ->(application) { urls.new_providers_legal_aid_application_means_vehicle_detail_path(application) },
-          forward: :add_other_vehicles,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
+        vehicle_details: Steps::ProviderCapital::VehicleDetailsStep,
         add_other_vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_means_add_other_vehicles_path(application) },
           forward: lambda do |application, add_other_vehicles|
