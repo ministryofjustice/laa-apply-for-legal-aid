@@ -5,10 +5,6 @@ module Providers
 
     private
 
-      def no_state_change_required?
-        true
-      end
-
       def address
         applicant.home_address || applicant.build_address(country_code: "GBR", country_name: "United Kingdom")
       end

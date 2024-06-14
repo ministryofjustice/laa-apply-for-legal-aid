@@ -16,7 +16,7 @@ module CheckProviderAnswersHelper
   end
 
   def correspondence_address_text(applicant)
-    if Setting.home_address? && applicant.same_correspondence_and_home_address?
+    if Setting.home_address? && applicant.same_correspondence_and_home_address? && applicant.home_address.present?
       # TODO: Just delete the `Setting.home_address? &&` from this
       # block when the home_address? flag is removed
       address_with_line_breaks(applicant.home_address)

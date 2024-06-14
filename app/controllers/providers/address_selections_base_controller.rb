@@ -28,6 +28,10 @@ module Providers
 
   private
 
+    def no_state_change_required?
+      legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?
+    end
+
     def address_lookup
       @address_lookup ||= AddressLookupService.call(address.postcode)
     end
