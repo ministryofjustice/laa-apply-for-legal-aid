@@ -4,11 +4,7 @@ module Flow
       STEPS = {
         capital_introductions: Steps::ProviderCapital::IntroductionsStep,
         own_homes: Steps::ProviderCapital::OwnHomesStep,
-        property_details: {
-          path: ->(application) { urls.providers_legal_aid_application_means_property_details_path(application) },
-          forward: :vehicles,
-          check_answers: :restrictions,
-        },
+        property_details: Steps::ProviderCapital::PropertyDetailsStep,
         vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_means_vehicle_path(application) },
           forward: lambda do |application|
