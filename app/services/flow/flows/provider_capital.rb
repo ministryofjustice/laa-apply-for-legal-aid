@@ -3,12 +3,7 @@ module Flow
     class ProviderCapital < FlowSteps
       STEPS = {
         capital_introductions: Steps::ProviderCapital::IntroductionsStep,
-        own_homes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_own_home_path(application) },
-          forward: ->(application) { application.own_home_no? ? :vehicles : :property_details },
-          carry_on_sub_flow: ->(application) { !application.own_home_no? },
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
+        own_homes: Steps::ProviderCapital::OwnHomesStep,
         property_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_property_details_path(application) },
           forward: :vehicles,
