@@ -5,20 +5,7 @@ module Flow
         capital_introductions: Steps::ProviderCapital::IntroductionsStep,
         own_homes: Steps::ProviderCapital::OwnHomesStep,
         property_details: Steps::ProviderCapital::PropertyDetailsStep,
-        vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_means_vehicle_path(application) },
-          forward: lambda do |application|
-            if application.own_vehicle?
-              :vehicle_details
-            elsif application.non_passported? && !application.uploading_bank_statements?
-              :applicant_bank_accounts
-            else
-              :offline_accounts
-            end
-          end,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-          carry_on_sub_flow: ->(application) { application.own_vehicle? },
-        },
+        vehicles: Steps::ProviderCapital::VehiclesStep,
         vehicle_details: {
           path: ->(application) { urls.new_providers_legal_aid_application_means_vehicle_detail_path(application) },
           forward: :add_other_vehicles,

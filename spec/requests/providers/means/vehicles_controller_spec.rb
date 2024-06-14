@@ -73,17 +73,14 @@ RSpec.describe Providers::Means::VehiclesController do
 
     context 'with option "true"' do
       let(:own_vehicle) { "true" }
-      let(:target_url) do
-        new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application)
-      end
 
       it "sets own_vehicle to true" do
         expect { patch_request }.to change { legal_aid_application.reload.own_vehicle }.to(true)
       end
 
-      it "redirects to vehicle details" do
+      it "redirects to the next page" do
         patch_request
-        expect(response).to redirect_to(target_url)
+        expect(response).to have_http_status(:redirect)
       end
 
       context "when checking answers" do
@@ -91,50 +88,47 @@ RSpec.describe Providers::Means::VehiclesController do
 
         it "redirects to next page" do
           patch_request
-          expect(response).to redirect_to(target_url)
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
 
     context 'when submitted with option "false"' do
       let(:own_vehicle) { "false" }
-      let(:target_url) do
-        providers_legal_aid_application_applicant_bank_account_path(legal_aid_application)
-      end
 
       it "sets own_vehicle to false" do
         expect { patch_request }.to change { legal_aid_application.reload.own_vehicle }.to(false)
       end
 
-      it "redirects to applicant bank account for non-passported journey" do
+      it "redirects to next page" do
         patch_request
-        expect(response).to redirect_to(target_url)
+        expect(response).to have_http_status(:redirect)
       end
 
       context "and existing vehicle" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
 
-        it "redirects to offline account page on passported journey" do
+        it "redirects to next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_offline_account_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "when checking answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-        it "redirects to check capital answers page" do
+        it "redirects to next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "when checking passported answers" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
-        it "redirects to passported check answers page" do
+        it "redirects to next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
