@@ -7,25 +7,7 @@ module Flow
         property_details: Steps::ProviderCapital::PropertyDetailsStep,
         vehicles: Steps::ProviderCapital::VehiclesStep,
         vehicle_details: Steps::ProviderCapital::VehicleDetailsStep,
-        add_other_vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_means_add_other_vehicles_path(application) },
-          forward: lambda do |application, add_other_vehicles|
-            if add_other_vehicles
-              :vehicle_details
-            elsif application.non_passported? && !application.uploading_bank_statements?
-              :applicant_bank_accounts
-            else
-              :offline_accounts
-            end
-          end,
-          check_answers: lambda do |application, add_other_vehicles|
-            if add_other_vehicles
-              :vehicle_details
-            else
-              application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers
-            end
-          end,
-        },
+        add_other_vehicles: Steps::ProviderCapital::AddOtherVehiclesStep,
         remove_vehicles: Steps::ProviderCapital::RemoveVehiclesStep,
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },

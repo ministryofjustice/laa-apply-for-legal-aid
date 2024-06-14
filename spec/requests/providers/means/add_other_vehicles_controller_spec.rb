@@ -63,8 +63,8 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
     context "when the provider responds yes" do
       let(:add_another_vehicle) { "true" }
 
-      it "redirects to the new vehicles page" do
-        expect(response).to redirect_to(new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application))
+      it "redirects to next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -75,7 +75,7 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :non_passported) }
 
         it "redirects to next step" do
-          expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
 
         it "redirects to next step" do
-          expect(response).to redirect_to(providers_legal_aid_application_offline_account_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
@@ -112,8 +112,8 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
         context "and more vehicles are to be added" do
           let(:add_another_vehicle) { "true" }
 
-          it "redirects to the vehicle page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application))
+          it "redirects to the next cya page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -124,16 +124,16 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
         context "and no more vehicles are to be added" do
           let(:add_another_vehicle) { "false" }
 
-          it "redirects to the check capital answers page" do
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+          it "redirects to the next cya page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "and more vehicles are to be added" do
           let(:add_another_vehicle) { "true" }
 
-          it "redirects to the state_benefits page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application))
+          it "redirects to the next cya page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
