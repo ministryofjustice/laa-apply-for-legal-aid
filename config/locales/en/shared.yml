@@ -981,7 +981,6 @@ en:
       armed_forces: Member of the armed forces
       not_employed: None of the above
     employment_income:
-      notification_banner_title: Important
       hmrc-information: HMRC have provided the information on this page.
       page_title: Review %{name}'s employment income
       supplementary_question: |
@@ -992,7 +991,6 @@ en:
       enter_details: Enter details
       details_hint: You'll need to upload supporting evidence later.
     unexpected_employment_incomes:
-      notification_banner_title: Important
       hmrc-information: HMRC have provided the information on this page.
       page_title: HMRC found a record of %{individual_with_determiner}'s employment
       hmrc_not_employed: |

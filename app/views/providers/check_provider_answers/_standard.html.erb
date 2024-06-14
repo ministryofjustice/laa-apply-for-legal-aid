@@ -1,8 +1,11 @@
-<%= if @legal_aid_application.copy_case? && flash[:hash].nil?
-      govuk_notification_banner(title_text: t("generic.important"), text: t(".copy_case.heading", application_ref: application_ref_non_breaking(@source_application.application_ref)))
-    end %>
+<% if @legal_aid_application.copy_case? && flash[:hash].nil?
+     notification_banner_title = t("generic.important")
+     notification_banner_text = t(".copy_case.heading", application_ref: application_ref_non_breaking(@source_application.application_ref))
+   end %>
 <%= page_template(
       page_title: t(".title"),
+      notification_banner_title:,
+      notification_banner_text:,
       back_link: {
         path: reset_providers_legal_aid_application_check_provider_answers_path,
         text: t("generic.back"),
