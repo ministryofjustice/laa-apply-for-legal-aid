@@ -8,7 +8,7 @@ module Providers
       @form = LegalAidApplications::ConfirmClientDeclarationForm.new(form_params)
 
       unless save_continue_or_draft(@form)
-        render :show, status: :unprocessable_entity
+        render :show, status: :unprocessable_content
       end
     end
 

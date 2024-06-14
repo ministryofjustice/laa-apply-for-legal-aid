@@ -10,7 +10,7 @@ module Providers
         return go_forward(form.add_another_vehicle?) if form.valid?
 
         vehicles
-        render :show, status: :unprocessable_entity
+        render :show, status: :unprocessable_content
       end
 
     private

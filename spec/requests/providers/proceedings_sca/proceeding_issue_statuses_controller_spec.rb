@@ -66,7 +66,7 @@ RSpec.describe Providers::ProceedingsSCA::ProceedingIssueStatusesController do
         let(:proceeding_issue_status) { "" }
 
         it "renders the same page with an error message" do
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
           expect(response.body).to include("Select yes if this proceeding has been issued").twice
         end
       end

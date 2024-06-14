@@ -69,7 +69,7 @@ RSpec.describe Providers::ProceedingsSCA::SupervisionOrdersController do
       let(:change_supervision_order) { "" }
 
       it "renders the same page with an error message" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Select yes if the application is to vary, discharge or extend a supervision order").twice
       end
     end

@@ -84,7 +84,7 @@ RSpec.describe Providers::Partners::StateBenefitsController do
       let(:frequency) { "" }
 
       it "returns an the same page with the expected errors showing" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Enter the name of the benefit")
         expect(response.body).to include("Enter the amount of benefit received")
         expect(response.body).to include("Select how often the partner gets the benefit")
@@ -121,7 +121,7 @@ RSpec.describe Providers::Partners::StateBenefitsController do
       let(:frequency) { "" }
 
       it "returns an the same page with the expected errors showing" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Enter the name of the benefit")
         expect(response.body).to include("Enter the amount of benefit received")
         expect(response.body).to include("Select how often the partner gets the benefit")

@@ -77,7 +77,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
         let(:heard_as_alternative) { "" }
 
         it "renders the same page with an error message" do
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
           expect(response.body).to include("Select yes if this proceeding will be heard as an alternative to any of the special children act core proceedings").twice
         end
       end
