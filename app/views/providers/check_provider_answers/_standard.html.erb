@@ -1,7 +1,7 @@
-<%= if @legal_aid_application.copy_case? && flash[:hash].nil?
-      notification_banner_title = t("generic.important")
-      notification_banner_text = t(".copy_case.heading", application_ref: application_ref_non_breaking(@source_application.application_ref))
-    end %>
+<% if @legal_aid_application.copy_case? && flash[:hash].nil?
+     notification_banner_title = t("generic.important")
+     notification_banner_text = t(".copy_case.heading", application_ref: application_ref_non_breaking(@source_application.application_ref))
+   end %>
 <%= page_template(
       page_title: t(".title"),
       notification_banner_title:,
