@@ -20,10 +20,7 @@ module Flow
           end,
           check_answers: :check_income_answers,
         },
-        incoming_transactions: {
-          path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
-          forward: :income_summary,
-        },
+        incoming_transactions: Steps::ProviderIncome::IncomingTransactionsStep,
         regular_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_regular_incomes_path(application) },
           forward: lambda do |application|
