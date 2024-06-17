@@ -3,15 +3,7 @@ module Flow
     class ProviderPartner < FlowSteps
       STEPS = {
         client_has_partners: Steps::ProviderPartner::ClientHasPartnersStep,
-        contrary_interests: {
-          path: ->(application) { urls.providers_legal_aid_application_contrary_interest_path(application) },
-          forward: lambda do |_application, options|
-            options[:partner_has_contrary_interest] ? :check_provider_answers : :partner_details
-          end,
-          check_answers: lambda do |_application, options|
-            options[:partner_has_contrary_interest] ? :check_provider_answers : :partner_details
-          end,
-        },
+        contrary_interests: Steps::ProviderPartner::ContraryInterestsStep,
         partner_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_details_path(application) },
           forward: lambda do |application|
