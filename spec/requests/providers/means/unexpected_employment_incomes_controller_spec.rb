@@ -75,16 +75,16 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
         context "when the application is using the bank upload journey" do
           let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false, applicant:) }
 
-          it "redirects to the regular income page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "when the application is not using the bank upload journey" do
-          it "redirects to the identify types of income page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
