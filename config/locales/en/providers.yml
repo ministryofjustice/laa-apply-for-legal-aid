@@ -1667,6 +1667,14 @@ en:
         label: Email address
         hint: We'll use this to send your client a link to the service.
     proceedings_sca:
+      heard_togethers:
+        error: Select yes if this proceeding will be heard together with any special children act core proceedings
+        show:         
+          page_title:
+            single: Will this proceeding be heard together with the '%{core_sca}' proceeding?
+            multiple: Will this proceeding be heard together with any of the core proceedings?
+          heading: Will this proceeding be heard together with the '%{core_sca}' proceeding?
+    
       supervision_orders:
         error: Select yes if the application is to vary, discharge or extend a supervision order
         show:

@@ -36,6 +36,7 @@ module Flow
         proceedings_sca_proceeding_issue_statuses: Steps::ProceedingsSCA::ProceedingIssueStatusesStep,
         proceedings_sca_supervision_orders: Steps::ProceedingsSCA::SupervisionOrderStep,
         proceedings_sca_child_subjects: Steps::ProceedingsSCA::ChildSubjectsStep,
+        proceedings_sca_heard_togethers: Steps::ProceedingsSCA::HeardTogethersStep,
         proceedings_sca_heard_as_alternatives: Steps::ProceedingsSCA::HeardAsAlternativesStep,
         proceedings_sca_change_of_names: Steps::ProceedingsSCA::ChangeOfNamesStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
