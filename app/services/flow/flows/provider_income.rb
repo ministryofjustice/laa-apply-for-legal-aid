@@ -7,19 +7,7 @@ module Flow
         unexpected_employment_incomes: Steps::ProviderIncome::UnexpectedEmploymentIncomesStep,
         full_employment_details: Steps::ProviderIncome::FullEmploymentDetailsStep,
         identify_types_of_incomes: Steps::ProviderIncome::IdentifyTypesOfIncomeStep,
-        income_summary: {
-          path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
-          forward: lambda do |application|
-            if application.outgoing_types?
-              :outgoings_summary
-            elsif application.applicant.has_partner_with_no_contrary_interest?
-              :partner_about_financial_means
-            else
-              :has_dependants
-            end
-          end,
-          check_answers: :check_income_answers,
-        },
+        income_summary: Steps::ProviderIncome::IncomeSummaryStep,
         incoming_transactions: Steps::ProviderIncome::IncomingTransactionsStep,
         regular_incomes: Steps::ProviderIncome::RegularIncomesStep,
         cash_incomes: Steps::ProviderIncome::CashIncomesStep,
