@@ -5,17 +5,7 @@ module Flow
         client_completed_means: Steps::ProviderIncome::ClientCompletedMeansStep,
         employment_incomes: Steps::ProviderIncome::EmploymentIncomesStep,
         unexpected_employment_incomes: Steps::ProviderIncome::UnexpectedEmploymentIncomesStep,
-        full_employment_details: {
-          path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
-          forward: lambda do |application|
-            if application.uploading_bank_statements?
-              :receives_state_benefits
-            else
-              :identify_types_of_incomes
-            end
-          end,
-          check_answers: :check_income_answers,
-        },
+        full_employment_details: Steps::ProviderIncome::FullEmploymentDetailsStep,
         identify_types_of_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
           forward: lambda do |application|
