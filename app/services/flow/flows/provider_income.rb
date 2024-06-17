@@ -3,17 +3,7 @@ module Flow
     class ProviderIncome < FlowSteps
       STEPS = {
         client_completed_means: Steps::ProviderIncome::ClientCompletedMeansStep,
-        employment_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
-          forward: lambda do |application|
-            if application.uploading_bank_statements?
-              :receives_state_benefits
-            else
-              :identify_types_of_incomes
-            end
-          end,
-          check_answers: :check_income_answers,
-        },
+        employment_incomes: Steps::ProviderIncome::EmploymentIncomesStep,
         unexpected_employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_unexpected_employment_income_path(application) },
           forward: lambda do |application|
