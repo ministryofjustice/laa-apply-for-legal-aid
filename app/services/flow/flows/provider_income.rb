@@ -23,13 +23,7 @@ module Flow
         incoming_transactions: Steps::ProviderIncome::IncomingTransactionsStep,
         regular_incomes: Steps::ProviderIncome::RegularIncomesStep,
         cash_incomes: Steps::ProviderIncome::CashIncomesStep,
-        student_finances: {
-          path: ->(application) { urls.providers_legal_aid_application_means_student_finance_path(application) },
-          forward: lambda do |application|
-            application.uploading_bank_statements? ? :regular_outgoings : :identify_types_of_outgoings
-          end,
-          check_answers: :check_income_answers,
-        },
+        student_finances: Steps::ProviderIncome::StudentFinancesStep,
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
