@@ -4,18 +4,7 @@ module Flow
       STEPS = {
         client_has_partners: Steps::ProviderPartner::ClientHasPartnersStep,
         contrary_interests: Steps::ProviderPartner::ContraryInterestsStep,
-        partner_details: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_details_path(application) },
-          forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :check_client_details
-            else
-              :check_provider_answers
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: false,
-        },
+        partner_details: Steps::ProviderPartner::PartnerDetailsStep,
         partner_about_financial_means: {
           path: ->(application) { urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
           forward: :partner_employed,

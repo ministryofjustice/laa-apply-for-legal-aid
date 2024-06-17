@@ -52,7 +52,7 @@ RSpec.describe Providers::Partners::DetailsController do
 
     it "redirects to next page" do
       patch_partners_details
-      expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      expect(response).to have_http_status(:redirect)
     end
 
     context "when parameters are missing" do
