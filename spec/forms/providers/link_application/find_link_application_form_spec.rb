@@ -81,6 +81,30 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationForm, type: :form 
         expect(application_can_be_linked).to be :voided_or_deleted_message
       end
     end
+
+    context "when the application ref searched for has no hyphens" do
+      let(:search_laa_reference) { "L123456" }
+
+      it "returns true" do
+        expect(application_can_be_linked).to be true
+      end
+    end
+
+    context "when the application ref searched for is lower case" do
+      let(:search_laa_reference) { "l-123-456" }
+
+      it "returns true" do
+        expect(application_can_be_linked).to be true
+      end
+    end
+
+    context "when the application ref searched for contains special characters or spaces" do
+      let(:search_laa_reference) { "!@L-£$%123-^&*456() " }
+
+      it "returns true" do
+        expect(application_can_be_linked).to be true
+      end
+    end
   end
 
   describe "validation" do

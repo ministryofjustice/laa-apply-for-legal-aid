@@ -15,10 +15,10 @@ module Providers
       end
 
       def application_can_be_linked?
-        return :missing_message unless search_laa_reference.match(APPLICATION_REF_REGEXP)
+        return :missing_message unless normalised_laa_reference.match(APPLICATION_REF_REGEXP)
 
         current_firm = @model.associated_application.provider.firm
-        @found_application = current_firm.legal_aid_applications.find_by(application_ref: search_laa_reference)
+        @found_application = current_firm.legal_aid_applications.find_by(application_ref: normalised_laa_reference)
         return :missing_message if @found_application.blank?
         return :voided_or_deleted_message if @found_application.discarded? || @found_application.expired?
 
@@ -38,6 +38,12 @@ module Providers
         super
       end
       alias_method :save!, :save
+
+    private
+
+      def normalised_laa_reference
+        @normalised_laa_reference ||= search_laa_reference.upcase.gsub(/[^0-9a-z\\s]/i, "").insert(1, "-").insert(5, "-")
+      end
     end
   end
 end
