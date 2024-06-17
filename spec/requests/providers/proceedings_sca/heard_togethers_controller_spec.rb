@@ -80,7 +80,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
         let(:heard_together) { "" }
 
         it "renders the same page with an error message" do
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
           expect(response.body).to include("Select yes if this proceeding will be heard together with any special children act core proceedings").twice
         end
       end

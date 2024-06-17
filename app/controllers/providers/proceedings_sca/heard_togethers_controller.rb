@@ -23,7 +23,7 @@ module Providers
           return go_forward(form.heard_together?)
         end
 
-        render :show, status: :unprocessable_entity
+        render :show, status: :unprocessable_content
       end
 
     private
