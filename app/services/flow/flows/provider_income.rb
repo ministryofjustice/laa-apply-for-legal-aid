@@ -6,17 +6,7 @@ module Flow
         employment_incomes: Steps::ProviderIncome::EmploymentIncomesStep,
         unexpected_employment_incomes: Steps::ProviderIncome::UnexpectedEmploymentIncomesStep,
         full_employment_details: Steps::ProviderIncome::FullEmploymentDetailsStep,
-        identify_types_of_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
-          forward: lambda do |application|
-            application.income_types? ? :cash_incomes : :student_finances
-          end,
-          check_answers: lambda do |application|
-            return :cash_incomes if application.income_types?
-
-            application.uploading_bank_statements? ? :check_income_answers : :income_summary
-          end,
-        },
+        identify_types_of_incomes: Steps::ProviderIncome::IdentifyTypesOfIncomeStep,
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: lambda do |application|
