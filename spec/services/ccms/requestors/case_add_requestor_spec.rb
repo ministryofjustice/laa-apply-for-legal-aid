@@ -119,6 +119,20 @@ module CCMS
           end
         end
 
+        context "when the case data contains special characters" do
+          let(:expected_request_xml) { ccms_data_from_file("case_add_request_contains_special_characters.xml") }
+          let(:first_name) { "O’Hare" }
+
+          it "generates the expected xml" do
+            travel_to(request_created_at) do
+              request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
+              expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
+
+              expect(request_hash).to match(expected_request_hash)
+            end
+          end
+        end
+
         context "when the proceeding type has a chosen client involvement type" do
           let(:expected_request_xml) { ccms_data_from_file("non_default_client_involvement_type.xml") }
 
