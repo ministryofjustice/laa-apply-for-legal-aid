@@ -80,6 +80,16 @@ module CCMS
       def config
         Rails.configuration.x.ccms_soa
       end
+
+      # :nocov:
+      def ccms_character_replacement(payload)
+        characters = {
+          "’" => "'",
+        }.freeze
+
+        payload.gsub(/[’]/, characters)
+      end
+      # :nocov:
     end
   end
 end
