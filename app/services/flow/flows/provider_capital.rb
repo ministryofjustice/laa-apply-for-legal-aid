@@ -11,11 +11,7 @@ module Flow
         remove_vehicles: Steps::ProviderCapital::RemoveVehiclesStep,
         applicant_bank_accounts: Steps::ProviderCapital::ApplicantBankAccountsStep,
         partner_bank_accounts: Steps::ProviderCapital::PartnerBankAccountsStep,
-        offline_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
-          forward: :savings_and_investments,
-          check_answers: ->(application) { application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
+        offline_accounts: Steps::ProviderCapital::OfflineAccountsStep,
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_means_savings_and_investment_path(application) },
           forward: lambda do |application|
