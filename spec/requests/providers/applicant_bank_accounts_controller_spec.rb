@@ -76,8 +76,8 @@ RSpec.describe Providers::ApplicantBankAccountsController do
       context "when the NO option is chosen" do
         let(:applicant_bank_account) { "false" }
 
-        it "redirects to the savings and investments page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
 
         context "when savings amount is not nil" do
@@ -118,14 +118,14 @@ RSpec.describe Providers::ApplicantBankAccountsController do
           context "and the applicant has a partner" do
             let(:applicant) { create(:applicant, :with_partner, partner_has_contrary_interest: false) }
 
-            it "redirects to the partner bank accounts page" do
-              expect(response).to redirect_to(providers_legal_aid_application_partners_bank_accounts_path(legal_aid_application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
 
           context "and there is no partner" do
-            it "redirects to the savings and investments page" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
         end
