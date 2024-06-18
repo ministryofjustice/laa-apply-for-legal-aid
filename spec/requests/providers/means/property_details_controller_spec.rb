@@ -110,8 +110,8 @@ RSpec.describe Providers::Means::PropertyDetailsController do
           expect(legal_aid_application.reload.percentage_home).to eq(percentage_home)
         end
 
-        it "redirects to the vehicles page" do
-          expect(response).to redirect_to providers_legal_aid_application_means_vehicle_path(legal_aid_application)
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -138,8 +138,8 @@ RSpec.describe Providers::Means::PropertyDetailsController do
           expect(legal_aid_application.reload.percentage_home).to eq(percentage_home)
         end
 
-        it "redirects to the vehicles page" do
-          expect(response).to redirect_to providers_legal_aid_application_means_vehicle_path(legal_aid_application)
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 

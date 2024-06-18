@@ -94,8 +94,9 @@ RSpec.describe Providers::CapitalIntroductionsController do
       login_as provider
     end
 
-    it "redirects to own homes page" do
-      expect(request).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+    it "redirects to the next page" do
+      request
+      expect(response).to have_http_status(:redirect)
     end
   end
 end

@@ -2,59 +2,12 @@ module Flow
   module Flows
     class ProviderCapital < FlowSteps
       STEPS = {
-        capital_introductions: {
-          path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
-          forward: :own_homes,
-        },
-        own_homes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_own_home_path(application) },
-          forward: ->(application) { application.own_home_no? ? :vehicles : :property_details },
-          carry_on_sub_flow: ->(application) { !application.own_home_no? },
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
-        property_details: {
-          path: ->(application) { urls.providers_legal_aid_application_means_property_details_path(application) },
-          forward: :vehicles,
-          check_answers: :restrictions,
-        },
-        vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_means_vehicle_path(application) },
-          forward: lambda do |application|
-            if application.own_vehicle?
-              :vehicle_details
-            elsif application.non_passported? && !application.uploading_bank_statements?
-              :applicant_bank_accounts
-            else
-              :offline_accounts
-            end
-          end,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-          carry_on_sub_flow: ->(application) { application.own_vehicle? },
-        },
-        vehicle_details: {
-          path: ->(application) { urls.new_providers_legal_aid_application_means_vehicle_detail_path(application) },
-          forward: :add_other_vehicles,
-          check_answers: ->(app) { app.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
-        add_other_vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_means_add_other_vehicles_path(application) },
-          forward: lambda do |application, add_other_vehicles|
-            if add_other_vehicles
-              :vehicle_details
-            elsif application.non_passported? && !application.uploading_bank_statements?
-              :applicant_bank_accounts
-            else
-              :offline_accounts
-            end
-          end,
-          check_answers: lambda do |application, add_other_vehicles|
-            if add_other_vehicles
-              :vehicle_details
-            else
-              application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers
-            end
-          end,
-        },
+        capital_introductions: Steps::ProviderCapital::IntroductionsStep,
+        own_homes: Steps::ProviderCapital::OwnHomesStep,
+        property_details: Steps::ProviderCapital::PropertyDetailsStep,
+        vehicles: Steps::ProviderCapital::VehiclesStep,
+        vehicle_details: Steps::ProviderCapital::VehicleDetailsStep,
+        add_other_vehicles: Steps::ProviderCapital::AddOtherVehiclesStep,
         remove_vehicles: Steps::ProviderCapital::RemoveVehiclesStep,
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },

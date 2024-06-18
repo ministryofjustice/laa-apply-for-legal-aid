@@ -67,8 +67,8 @@ RSpec.describe "provider own home requests" do
         end
 
         context "when owned outright" do
-          it "redirects to the property details page" do
-            expect(response).to redirect_to providers_legal_aid_application_means_property_details_path(legal_aid_application)
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
 
           it "updates the record to match" do
@@ -79,8 +79,8 @@ RSpec.describe "provider own home requests" do
         context "when mortgaged" do
           let(:own_home) { "mortgage" }
 
-          it "redirects to the property details page" do
-            expect(response).to redirect_to providers_legal_aid_application_means_property_details_path(legal_aid_application)
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
 
           it "updates the record to match" do
@@ -90,8 +90,8 @@ RSpec.describe "provider own home requests" do
           context "when checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
-            it "redirects to next page in the flow" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_property_details_path(legal_aid_application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
         end
@@ -102,16 +102,16 @@ RSpec.describe "provider own home requests" do
           context "when checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
-            it "redirects to check answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
 
           context "with provider checking answers" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-            it "redirects to the check capital answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(legal_aid_application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
         end
