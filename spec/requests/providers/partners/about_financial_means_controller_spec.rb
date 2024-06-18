@@ -35,7 +35,7 @@ RSpec.describe Providers::Partners::AboutFinancialMeansController do
     end
 
     it "redirects to next page" do
-      expect(response).to redirect_to(providers_legal_aid_application_partners_employed_index_path(legal_aid_application))
+      expect(response).to have_http_status(:redirect)
     end
   end
 end

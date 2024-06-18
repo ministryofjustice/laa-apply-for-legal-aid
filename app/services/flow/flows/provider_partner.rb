@@ -5,10 +5,7 @@ module Flow
         client_has_partners: Steps::ProviderPartner::ClientHasPartnersStep,
         contrary_interests: Steps::ProviderPartner::ContraryInterestsStep,
         partner_details: Steps::ProviderPartner::PartnerDetailsStep,
-        partner_about_financial_means: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
-          forward: :partner_employed,
-        },
+        partner_about_financial_means: Steps::ProviderPartner::PartnerAboutFinancialMeansStep,
         partner_employed: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
           forward: lambda do |application|
