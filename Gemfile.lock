@@ -490,7 +490,7 @@ GEM
       pry (~> 0.13)
     psych (5.1.2)
       stringio
-    public_suffix (5.0.5)
+    public_suffix (5.1.1)
     puffing-billy (4.0.0)
       addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
