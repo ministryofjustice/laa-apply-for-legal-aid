@@ -10,11 +10,7 @@ module Flow
         add_other_vehicles: Steps::ProviderCapital::AddOtherVehiclesStep,
         remove_vehicles: Steps::ProviderCapital::RemoveVehiclesStep,
         applicant_bank_accounts: Steps::ProviderCapital::ApplicantBankAccountsStep,
-        partner_bank_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_bank_accounts_path(application) },
-          forward: :savings_and_investments,
-          check_answers: :check_capital_answers,
-        },
+        partner_bank_accounts: Steps::ProviderCapital::PartnerBankAccountsStep,
         offline_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
           forward: :savings_and_investments,
