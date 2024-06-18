@@ -25,7 +25,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
-          expect(unescaped_response_body).to include(I18n.t("providers.proceedings_sca.heard_togethers.show.page_title.single", core_sca:))
+          expect(unescaped_response_body).to include(I18n.t("providers.proceedings_sca.heard_togethers.show.page_heading.single", core_sca:))
         end
       end
 
@@ -34,7 +34,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include(I18n.t("providers.proceedings_sca.heard_togethers.show.page_title.multiple"))
+          expect(response.body).to include(I18n.t("providers.proceedings_sca.heard_togethers.show.page_heading.multiple"))
         end
       end
     end
