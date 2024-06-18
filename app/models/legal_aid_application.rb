@@ -174,6 +174,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KSEC8") }
   end
 
+  def special_children_act_proceedings?
+    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
+  end
+
   def evidence_is_required?
     RequiredDocumentCategoryAnalyser.call(self)
     required_document_categories.any?
@@ -302,7 +306,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def non_means_tested?
-    applicant&.no_means_test_required?
+    applicant&.no_means_test_required? || special_children_act_proceedings?
   end
 
   def benefit_check_result_needs_updating?
