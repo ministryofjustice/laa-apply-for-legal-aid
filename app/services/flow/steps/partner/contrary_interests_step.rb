@@ -1,6 +1,6 @@
 module Flow
   module Steps
-    module ProviderPartner
+    module Partner
       ContraryInterestsStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_contrary_interest_path(application) },
         forward: lambda do |_application, options|

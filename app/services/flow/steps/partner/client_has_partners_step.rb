@@ -1,6 +1,6 @@
 module Flow
   module Steps
-    module ProviderPartner
+    module Partner
       ClientHasPartnersStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_client_has_partner_path(application) },
         forward: lambda do |_application, options|

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::ProviderPartner::ClientHasPartnersStep, type: :request do
+RSpec.describe Flow::Steps::Partner::ClientHasPartnersStep, type: :request do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe "#path" do

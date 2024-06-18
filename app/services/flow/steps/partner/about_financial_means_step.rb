@@ -1,7 +1,7 @@
 module Flow
   module Steps
-    module ProviderPartner
-      PartnerAboutFinancialMeansStep = Step.new(
+    module Partner
+      AboutFinancialMeansStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
         forward: :partner_employed,
       )

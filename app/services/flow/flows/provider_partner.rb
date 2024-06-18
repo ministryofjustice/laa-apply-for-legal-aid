@@ -2,10 +2,10 @@ module Flow
   module Flows
     class ProviderPartner < FlowSteps
       STEPS = {
-        client_has_partners: Steps::ProviderPartner::ClientHasPartnersStep,
-        contrary_interests: Steps::ProviderPartner::ContraryInterestsStep,
-        partner_details: Steps::ProviderPartner::PartnerDetailsStep,
-        partner_about_financial_means: Steps::ProviderPartner::PartnerAboutFinancialMeansStep,
+        client_has_partners: Steps::Partner::ClientHasPartnersStep,
+        contrary_interests: Steps::Partner::ContraryInterestsStep,
+        partner_details: Steps::Partner::DetailsStep,
+        partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,
         partner_employed: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
           forward: lambda do |application|

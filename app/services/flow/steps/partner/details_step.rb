@@ -1,7 +1,7 @@
 module Flow
   module Steps
-    module ProviderPartner
-      PartnerDetailsStep = Step.new(
+    module Partner
+      DetailsStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_partners_details_path(application) },
         forward: lambda do |application|
           if application.overriding_dwp_result?
