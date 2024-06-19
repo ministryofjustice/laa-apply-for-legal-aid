@@ -88,23 +88,7 @@ module Flow
           forward: :partner_regular_outgoings,
           check_answers: :check_income_answers,
         },
-        partner_regular_outgoings: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_regular_outgoings_path(application) },
-          forward: lambda do |application|
-            if application.partner_outgoing_types?
-              :partner_cash_outgoings
-            else
-              :has_dependants
-            end
-          end,
-          check_answers: lambda do |application|
-            if application.partner_outgoing_types?
-              :partner_cash_outgoings
-            else
-              :check_income_answers
-            end
-          end,
-        },
+        partner_regular_outgoings: Steps::Partner::RegularOutgoingsStep,
         partner_cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_partners_cash_outgoing_path(application) },
           forward: lambda do |application|
