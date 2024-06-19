@@ -62,6 +62,22 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationForm, type: :form 
       end
     end
 
+    context "when the application searched text is too short" do
+      let(:search_laa_reference) { "L-12" }
+
+      it "returns :missing_message" do
+        expect(application_can_be_linked).to be :missing_message
+      end
+    end
+
+    context "when the application searched text is too short once special characters are removed" do
+      let(:search_laa_reference) { "L-12!-@L-" }
+
+      it "returns :missing_message" do
+        expect(application_can_be_linked).to be :missing_message
+      end
+    end
+
     context "when the application searched for has been discarded" do
       before { LegalAidApplication.find_by(application_ref: "L-123-456").discard! }
 

@@ -42,7 +42,13 @@ module Providers
     private
 
       def normalised_laa_reference
-        @normalised_laa_reference ||= search_laa_reference.upcase.gsub(/[^0-9a-z\\s]/i, "").insert(1, "-").insert(5, "-")
+        return "" unless clean_laa_reference.length == 7
+
+        @normalised_laa_reference ||= clean_laa_reference.upcase.insert(1, "-").insert(5, "-")
+      end
+
+      def clean_laa_reference
+        @clean_laa_reference ||= search_laa_reference.gsub(/[^0-9a-z\\s]/i, "")
       end
     end
   end
