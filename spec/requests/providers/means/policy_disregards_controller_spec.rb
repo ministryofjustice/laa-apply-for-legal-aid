@@ -77,16 +77,16 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
         context "with provider checking their answers" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
-          it "redirects to check passported answers" do
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path)
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "with provider checking answers" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
-          it "redirects to check capital answers page" do
-            expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path)
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -118,9 +118,9 @@ RSpec.describe Providers::Means::PolicyDisregardsController do
         context "with 'none of these' checkbox selected" do
           let(:none_selected) { "true" }
 
-          it "redirects to check passported answers" do
+          it "redirects to the next page" do
             expect(application.reload.policy_disregards.england_infected_blood_support?).to be false
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 

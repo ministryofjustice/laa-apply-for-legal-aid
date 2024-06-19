@@ -15,11 +15,7 @@ module Flow
         savings_and_investments: Steps::ProviderCapital::SavingsAndInvestmentsStep,
         other_assets: Steps::ProviderCapital::OtherAssetsStep,
         restrictions: Steps::ProviderCapital::RestrictionsStep,
-        policy_disregards: {
-          path: ->(application) { urls.providers_legal_aid_application_means_policy_disregards_path(application) },
-          forward: ->(application) { application.passported? ? :check_passported_answers : :check_capital_answers },
-          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
-        },
+        policy_disregards: Steps::ProviderCapital::PolicyDisregardsStep,
         check_passported_answers: Steps::ProviderCapital::CheckPassportedAnswersStep,
         check_capital_answers: Steps::ProviderCapital::CheckCapitalAnswersStep,
         capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,
