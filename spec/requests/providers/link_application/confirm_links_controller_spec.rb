@@ -112,22 +112,41 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
         end
 
         context "when form submitted with Save as draft button" do
-          let(:params) do
-            {
-              draft_button: "Save and come back later",
-              linked_application: {
-                confirm_link:,
-              },
-            }
+          context "when Yes is chosen" do
+            let(:params) do
+              {
+                draft_button: "Save and come back later",
+                linked_application: {
+                  confirm_link:,
+                },
+              }
+            end
+
+            it "redirects to the list of applications" do
+              patch_request
+              expect(response.body).to redirect_to providers_legal_aid_applications_path
+            end
+
+            it "sets the application as draft" do
+              expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+            end
           end
 
-          it "redirects to the list of applications" do
-            patch_request
-            expect(response.body).to redirect_to providers_legal_aid_applications_path
-          end
+          context "when the application has not yet been linked" do
+            let(:params) do
+              {
+                draft_button: "Save and come back later",
+              }
+            end
 
-          it "sets the application as draft" do
-            expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+            it "redirects to the list of applications" do
+              patch_request
+              expect(response.body).to redirect_to providers_legal_aid_applications_path
+            end
+
+            it "sets the application as draft" do
+              expect { patch_request }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+            end
           end
         end
       end
