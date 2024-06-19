@@ -12,7 +12,7 @@ Feature: Cookies
     And I click 'Save changes'
     Then I should be on a page showing 'Your cookie settings were saved'
 
-    When I click link 'Go back to the page you were looking at'
+    When I click link 'Go back'
     Then I should be on a page showing 'Check your answers'
 
   Scenario: I am able to update my cookie preferences via the cookies banner and Hide the notice

@@ -3,9 +3,10 @@
   <div class="govuk-grid-column-<%= column_width %>">
     <%= form.govuk_error_summary if form %>
     <%= if notification_banner_title
-          govuk_notification_banner(title_text: notification_banner_title, success: notification_banner_success) do |notification_banner|
-            notification_banner.with_heading(text: notification_banner_text)
-          end
+          govuk_notification_banner(title_text: notification_banner_title, success: notification_banner_success) do |notification_banner| %>
+            <% notification_banner.with_heading(text: notification_banner_text) %>
+            <p class="govuk-body"><%= notification_banner_body %></p>
+          <% end
         end %>
     <%= content %>
   </div>
