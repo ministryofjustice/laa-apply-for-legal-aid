@@ -1443,7 +1443,7 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#special_children_act_proceedings??" do
+  describe "#special_children_act_proceedings?" do
     context "with special children act proceedings" do
       let(:laa) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
 
