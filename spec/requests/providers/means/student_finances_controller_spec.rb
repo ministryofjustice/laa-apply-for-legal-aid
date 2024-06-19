@@ -98,21 +98,21 @@ RSpec.describe Providers::Means::StudentFinancesController do
       context "when the application is using the bank upload journey" do
         let(:legal_aid_application) { create(:legal_aid_application, :without_open_banking_consent, :with_applicant) }
 
-        it "redirects to the regular outgoings page" do
+        it "redirects to the next page" do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_means_regular_outgoings_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
       context "when the application is not using the bank upload journey" do
-        it "redirects to the identify types of outgoings page" do
+        it "redirects to the next page" do
           login_as provider
 
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end

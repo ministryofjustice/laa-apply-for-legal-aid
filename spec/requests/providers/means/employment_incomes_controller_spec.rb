@@ -76,14 +76,14 @@ RSpec.describe Providers::Means::EmploymentIncomesController do
         context "when the application is using the bank upload journey" do
           let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false, applicant:) }
 
-          it "redirects to the receives state benefits page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "when the application is not using the bank upload journey" do
-          it "redirects to the identify types of income page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 

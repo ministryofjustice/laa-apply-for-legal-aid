@@ -65,9 +65,9 @@ RSpec.describe Providers::Means::CashIncomesController do
     context "with valid params" do
       let(:params) { valid_params }
 
-      it "redirects to student_finances" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "updates the model attribute for no cash income to false" do

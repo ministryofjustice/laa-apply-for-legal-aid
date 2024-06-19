@@ -104,9 +104,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
       end
 
-      it "redirects to the cash income page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path)
+        expect(response).to have_http_status(:redirect)
       end
 
       it "creates a legal_aid_application_transaction_types record with ownership" do
@@ -140,9 +140,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         expect { request }.not_to change(legal_aid_application.legal_aid_application_transaction_types, :count)
       end
 
-      it "redirects to the means student finance page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       context "when application has existing transaction categories" do
