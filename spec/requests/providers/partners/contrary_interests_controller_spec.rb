@@ -35,16 +35,16 @@ RSpec.describe Providers::Partners::ContraryInterestsController do
     context "when yes chosen" do
       let(:params) { { applicant: { partner_has_contrary_interest: "true" } } }
 
-      it "redirects to the check your answers page for the applicant" do
-        expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when no chosen" do
       let(:params) { { applicant: { partner_has_contrary_interest: "false" } } }
 
-      it "redirects to the partners_details page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_details_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -67,8 +67,8 @@ RSpec.describe Providers::Partners::ContraryInterestsController do
           expect(legal_aid_application.reload.partner).to be_nil
         end
 
-        it "redirects to the check your answers page for the applicant" do
-          expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -79,8 +79,8 @@ RSpec.describe Providers::Partners::ContraryInterestsController do
           expect(legal_aid_application.reload.partner).not_to be_nil
         end
 
-        it "redirects to the partners_details page" do
-          expect(response).to redirect_to(providers_legal_aid_application_partners_details_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
     end

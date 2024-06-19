@@ -2,41 +2,10 @@ module Flow
   module Flows
     class ProviderPartner < FlowSteps
       STEPS = {
-        client_has_partners: {
-          path: ->(application) { urls.providers_legal_aid_application_client_has_partner_path(application) },
-          forward: lambda do |_application, options|
-            if options[:has_partner]
-              :contrary_interests
-            else
-              :check_provider_answers
-            end
-          end,
-        },
-        contrary_interests: {
-          path: ->(application) { urls.providers_legal_aid_application_contrary_interest_path(application) },
-          forward: lambda do |_application, options|
-            options[:partner_has_contrary_interest] ? :check_provider_answers : :partner_details
-          end,
-          check_answers: lambda do |_application, options|
-            options[:partner_has_contrary_interest] ? :check_provider_answers : :partner_details
-          end,
-        },
-        partner_details: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_details_path(application) },
-          forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :check_client_details
-            else
-              :check_provider_answers
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: false,
-        },
-        partner_about_financial_means: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_about_financial_means_path(application) },
-          forward: :partner_employed,
-        },
+        client_has_partners: Steps::Partner::ClientHasPartnersStep,
+        contrary_interests: Steps::Partner::ContraryInterestsStep,
+        partner_details: Steps::Partner::DetailsStep,
+        partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,
         partner_employed: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
           forward: lambda do |application|

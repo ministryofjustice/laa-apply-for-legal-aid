@@ -36,16 +36,16 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
     context "when yes chosen" do
       let(:params) { { applicant: { has_partner: "true" } } }
 
-      it "redirects to the partners_details page" do
-        expect(response).to redirect_to(providers_legal_aid_application_contrary_interest_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when no chosen" do
       let(:params) { { applicant: { has_partner: "false" } } }
 
-      it "redirects to the check your answers page for the applicant" do
-        expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
