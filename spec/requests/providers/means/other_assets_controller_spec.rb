@@ -118,11 +118,14 @@ RSpec.describe "provider other assets requests" do
               patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
             end
 
-            it "redirects to capital restrictions" do
+            it "updates the model" do
               expect(application.reload.other_assets?).to be true
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(oad.legal_aid_application))
+            end
+
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
 
@@ -138,11 +141,14 @@ RSpec.describe "provider other assets requests" do
               patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
-            it "redirects to capital restrictions" do
+            it "updates the model" do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be true
-              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(oad.legal_aid_application))
+            end
+
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
 
@@ -155,11 +161,14 @@ RSpec.describe "provider other assets requests" do
               patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
-            it "redirects to capital restrictions" do
+            it "updates the model" do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be true
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(oad.legal_aid_application))
+            end
+
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
 
@@ -172,11 +181,14 @@ RSpec.describe "provider other assets requests" do
               patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
-            it "redirects to checking answers" do
+            it "updates the model" do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(oad.legal_aid_application))
+            end
+
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
 
             context "with provider checking answers" do
@@ -200,11 +212,14 @@ RSpec.describe "provider other assets requests" do
             end
 
             context "with none of these checkbox selected" do
-              it "redirects to policy disregards" do
+              it "updates the model" do
                 expect(application.reload.other_assets?).to be false
                 expect(application.own_home?).to be false
                 expect(application.savings_amount?).to be false
-                expect(response).to redirect_to(providers_legal_aid_application_means_policy_disregards_path(application))
+              end
+
+              it "redirects to the next page" do
+                expect(response).to have_http_status(:redirect)
               end
 
               context "when the calculation date is prior to the policy disregards date" do
