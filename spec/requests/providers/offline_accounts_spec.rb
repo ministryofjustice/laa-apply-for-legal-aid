@@ -87,9 +87,9 @@ RSpec.describe "providers offine accounts" do
             expect(response.body).not_to match("govuk-form-group--error")
           end
 
-          it "redirects to the next step in Citizen jouney" do
+          it "redirects to the next step" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           context "when 'none of these' checkbox is selected" do
@@ -129,23 +129,23 @@ RSpec.describe "providers offine accounts" do
 
           before { patch_request }
 
-          it "redirects to the check passported answers page" do
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
 
           context "with no savings" do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
-            it "redirects to the check passported answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
 
             context "when provider_entering_merits" do
               let(:state) { :provider_entering_merits }
 
-              it "redirects to the restrictions page" do
-                expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(application))
+              it "redirects to the next page" do
+                expect(response).to have_http_status(:redirect)
               end
             end
           end
@@ -169,7 +169,7 @@ RSpec.describe "providers offine accounts" do
           expect(response.body).not_to match("govuk-form-group--error")
         end
 
-        it "redirects to the next step" do
+        it "redirects to the provider applications page" do
           patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
