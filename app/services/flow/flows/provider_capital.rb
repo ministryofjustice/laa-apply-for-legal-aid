@@ -14,17 +14,7 @@ module Flow
         offline_accounts: Steps::ProviderCapital::OfflineAccountsStep,
         savings_and_investments: Steps::ProviderCapital::SavingsAndInvestmentsStep,
         other_assets: Steps::ProviderCapital::OtherAssetsStep,
-        restrictions: {
-          path: ->(application) { urls.providers_legal_aid_application_means_restrictions_path(application) },
-          forward: lambda do |application|
-            if application.capture_policy_disregards?
-              :policy_disregards
-            else
-              application.passported? ? :check_passported_answers : :check_capital_answers
-            end
-          end,
-          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
-        },
+        restrictions: Steps::ProviderCapital::RestrictionsStep,
         policy_disregards: {
           path: ->(application) { urls.providers_legal_aid_application_means_policy_disregards_path(application) },
           forward: ->(application) { application.passported? ? :check_passported_answers : :check_capital_answers },

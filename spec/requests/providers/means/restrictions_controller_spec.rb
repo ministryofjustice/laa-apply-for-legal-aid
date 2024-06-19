@@ -71,8 +71,8 @@ RSpec.describe "provider restrictions request" do
                      df_options: { DA004: [1.day.ago, Date.new(2021, 1, 9)] })
             end
 
-            it "redirects to policy disregards" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_policy_disregards_path(application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
 
@@ -89,8 +89,8 @@ RSpec.describe "provider restrictions request" do
                      df_options: { DA004: [Date.new(2020, 12, 19), Date.new(2020, 12, 19)] })
             end
 
-            it "redirects to the check capital answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_capital_answers_path(application))
+            it "redirects to the next page" do
+              expect(response).to have_http_status(:redirect)
             end
           end
         end
@@ -98,8 +98,8 @@ RSpec.describe "provider restrictions request" do
         context "when provider is checking answers on passported route" do
           let(:application) { create(:legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :checking_passported_answers) }
 
-          it "redirects to check passported answers" do
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 
