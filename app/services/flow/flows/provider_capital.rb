@@ -9,63 +9,13 @@ module Flow
         vehicle_details: Steps::ProviderCapital::VehicleDetailsStep,
         add_other_vehicles: Steps::ProviderCapital::AddOtherVehiclesStep,
         remove_vehicles: Steps::ProviderCapital::RemoveVehiclesStep,
-        applicant_bank_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
-          forward: ->(application) { application.applicant.has_partner_with_no_contrary_interest? ? :partner_bank_accounts : :savings_and_investments },
-          check_answers: :check_capital_answers,
-        },
-        partner_bank_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_bank_accounts_path(application) },
-          forward: :savings_and_investments,
-          check_answers: :check_capital_answers,
-        },
-        offline_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
-          forward: :savings_and_investments,
-          check_answers: ->(application) { application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
-        savings_and_investments: {
-          path: ->(application) { urls.providers_legal_aid_application_means_savings_and_investment_path(application) },
-          forward: lambda do |application|
-            if application.own_capital? && application.checking_answers?
-              :restrictions
-            else
-              :other_assets
-            end
-          end,
-          carry_on_sub_flow: ->(application) { application.own_capital? },
-          check_answers: ->(application) { application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
-        other_assets: {
-          path: ->(application) { urls.providers_legal_aid_application_means_other_assets_path(application) },
-          forward: lambda do |application|
-            if application.own_capital?
-              :restrictions
-            elsif application.capture_policy_disregards?
-              :policy_disregards
-            else
-              application.passported? ? :check_passported_answers : :check_capital_answers
-            end
-          end,
-          carry_on_sub_flow: ->(application) { application.other_assets? },
-          check_answers: ->(application) { application.checking_non_passported_means? ? :check_capital_answers : :check_passported_answers },
-        },
-        restrictions: {
-          path: ->(application) { urls.providers_legal_aid_application_means_restrictions_path(application) },
-          forward: lambda do |application|
-            if application.capture_policy_disregards?
-              :policy_disregards
-            else
-              application.passported? ? :check_passported_answers : :check_capital_answers
-            end
-          end,
-          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
-        },
-        policy_disregards: {
-          path: ->(application) { urls.providers_legal_aid_application_means_policy_disregards_path(application) },
-          forward: ->(application) { application.passported? ? :check_passported_answers : :check_capital_answers },
-          check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :check_capital_answers : :check_passported_answers },
-        },
+        applicant_bank_accounts: Steps::ProviderCapital::ApplicantBankAccountsStep,
+        partner_bank_accounts: Steps::ProviderCapital::PartnerBankAccountsStep,
+        offline_accounts: Steps::ProviderCapital::OfflineAccountsStep,
+        savings_and_investments: Steps::ProviderCapital::SavingsAndInvestmentsStep,
+        other_assets: Steps::ProviderCapital::OtherAssetsStep,
+        restrictions: Steps::ProviderCapital::RestrictionsStep,
+        policy_disregards: Steps::ProviderCapital::PolicyDisregardsStep,
         check_passported_answers: Steps::ProviderCapital::CheckPassportedAnswersStep,
         check_capital_answers: Steps::ProviderCapital::CheckCapitalAnswersStep,
         capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,

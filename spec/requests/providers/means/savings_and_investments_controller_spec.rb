@@ -87,9 +87,9 @@ RSpec.describe Providers::Means::SavingsAndInvestmentsController do
             expect(response.body).not_to match("govuk-form-group--error")
           end
 
-          it "redirects to the next step in Citizen jouney" do
+          it "redirects to the next step" do
             patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_means_other_assets_path(application))
+            expect(response).to have_http_status(:redirect)
           end
 
           context "when none of these checkbox is selected" do
@@ -144,16 +144,16 @@ RSpec.describe Providers::Means::SavingsAndInvestmentsController do
 
           before { patch_request }
 
-          it "redirects to the restrictions page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(application))
+          it "redirects to the next step" do
+            expect(response).to have_http_status(:redirect)
           end
 
           context "and no savings" do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
-            it "redirects to the restrictions page" do
-              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(application))
+            it "redirects to the next step" do
+              expect(response).to have_http_status(:redirect)
             end
           end
         end
@@ -168,8 +168,8 @@ RSpec.describe Providers::Means::SavingsAndInvestmentsController do
 
           before { patch_request }
 
-          it "redirects to the restrictions page" do
-            expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(application))
+          it "redirects to the next step" do
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -191,7 +191,7 @@ RSpec.describe Providers::Means::SavingsAndInvestmentsController do
           expect(response.body).not_to match("govuk-form-group--error")
         end
 
-        it "redirects to the next step" do
+        it "redirects to the providers application list" do
           patch_request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end

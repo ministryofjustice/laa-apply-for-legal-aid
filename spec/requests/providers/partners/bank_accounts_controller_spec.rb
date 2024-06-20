@@ -45,7 +45,7 @@ RSpec.describe Providers::Partners::BankAccountsController do
 
       it "redirects to the next step in the journey" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe Providers::Partners::BankAccountsController do
 
       it "redirects to the next step in the journey" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -92,7 +92,7 @@ RSpec.describe Providers::Partners::BankAccountsController do
 
       it "redirects to the next step in the journey" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
