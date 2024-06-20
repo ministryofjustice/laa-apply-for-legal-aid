@@ -89,24 +89,7 @@ module Flow
           check_answers: :check_income_answers,
         },
         partner_regular_outgoings: Steps::Partner::RegularOutgoingsStep,
-        partner_cash_outgoings: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_cash_outgoing_path(application) },
-          forward: lambda do |application|
-            # if the applicant did not use Truelayer and makes housing payments, or if the partner makes housing payments, then ask about housing benefit
-            if (application.housing_payments_for?("Applicant") && application.uploading_bank_statements?) || application.housing_payments_for?("Partner")
-              :housing_benefits
-            else
-              :has_dependants
-            end
-          end,
-          check_answers: lambda do |application|
-            if (application.housing_payments_for?("Applicant") && application.uploading_bank_statements?) || application.housing_payments_for?("Partner")
-              :housing_benefits
-            else
-              :has_dependants
-            end
-          end,
-        },
+        partner_cash_outgoings: Steps::Partner::CashOutgoingsStep,
         partner_full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
           forward: :partner_receives_state_benefits,
