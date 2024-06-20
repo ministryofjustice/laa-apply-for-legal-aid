@@ -479,53 +479,73 @@ RSpec.describe Applicant do
     end
   end
 
-  describe "#home_address_for_ccms" do
-    subject(:home_address) { applicant.home_address_for_ccms }
+  describe "home_address_for_ccms" do
+    subject(:home_address_for_ccms) { applicant.home_address_for_ccms }
 
-    let(:applicant) { create(:applicant, same_correspondence_and_home_address:, addresses:) }
+    let(:applicant) { create(:applicant, no_fixed_residence:, addresses:) }
     let(:correspondence_address) { create(:address, address_line_one: "109 Correspondence Avenue") }
+    let(:home_address) { create(:address, :as_home_address, address_line_one: "27 Home Street") }
+    let(:addresses) { [correspondence_address, home_address] }
 
-    context "and the home address flag is false" do
-      before { allow(Setting).to receive(:home_address?).and_return false }
+    context "when applicant.no_fixed_residence is true" do
+      let(:no_fixed_residence) { true }
 
-      context "when the provider is not able to set a different home address" do
-        let(:same_correspondence_and_home_address) { nil }
+      it { is_expected.to be_nil }
+    end
+
+    context "when applicant.no_fixed_residence is false" do
+      let(:no_fixed_residence) { false }
+
+      context "and a home record has been created" do
+        it { expect(home_address_for_ccms.address_line_one).to eq "27 Home Street" }
+      end
+
+      context "and a home record has not been created" do
         let(:addresses) { [correspondence_address] }
 
-        it "is set to the correspondence address" do
-          expect(applicant.home_address_for_ccms.address_line_one).to eql "109 Correspondence Avenue"
-          expect(applicant.home_address).to be_nil
-          expect(applicant.address.address_line_one).to eql "109 Correspondence Avenue"
-        end
+        it { expect(home_address_for_ccms.address_line_one).to eq "109 Correspondence Avenue" }
       end
     end
 
-    context "and the home address flag is true" do
-      before { allow(Setting).to receive(:home_address?).and_return true }
+    context "when the application was created before the home address feature flag was added" do
+      let(:no_fixed_residence) { nil }
 
-      context "when the provider has set a different home address" do
-        let(:same_correspondence_and_home_address) { false }
-        let(:home_address) { create(:address, :as_home_address, address_line_one: "27 Home Street") }
-        let(:addresses) { [home_address, correspondence_address] }
-
-        it "is set to the expected, separate, home address" do
-          expect(applicant.home_address_for_ccms.address_line_one).to eql "27 Home Street"
-          expect(applicant.home_address.address_line_one).to eql "27 Home Street"
-          expect(applicant.address.address_line_one).to eql "109 Correspondence Avenue"
-        end
+      context "and a home record has been created" do # this should not be possible, but we should return it if it exists
+        it { expect(home_address_for_ccms.address_line_one).to eq "27 Home Street" }
       end
 
-      context "when the provider has set the home address to the same as correspondence" do
-        let(:same_correspondence_and_home_address) { true }
-        let(:home_address) { nil }
+      context "and a home record has not been created" do
         let(:addresses) { [correspondence_address] }
 
-        it "is set to the correspondence address" do
-          expect(applicant.home_address_for_ccms.address_line_one).to eql "109 Correspondence Avenue"
-          expect(applicant.home_address).to be_nil
-          expect(applicant.address.address_line_one).to eql "109 Correspondence Avenue"
-        end
+        it { expect(home_address_for_ccms.address_line_one).to eq "109 Correspondence Avenue" }
       end
+    end
+  end
+
+  describe "correspondence_address_for_ccms" do
+    subject(:correspondence_address_for_ccms) { applicant.correspondence_address_for_ccms }
+
+    let(:applicant) { create(:applicant, same_correspondence_and_home_address:, addresses:) }
+    let(:correspondence_address) { create(:address, address_line_one: "109 Correspondence Avenue") }
+    let(:home_address) { create(:address, :as_home_address, address_line_one: "27 Home Street") }
+    let(:addresses) { [correspondence_address, home_address] }
+
+    context "when the provider has recorded same_correspondence_and_home_address as true" do
+      let(:same_correspondence_and_home_address) { true }
+
+      it { expect(correspondence_address_for_ccms.address_line_one).to eq "27 Home Street" }
+    end
+
+    context "when the provider has recorded same_correspondence_and_home_address as false" do
+      let(:same_correspondence_and_home_address) { false }
+
+      it { expect(correspondence_address_for_ccms.address_line_one).to eq "109 Correspondence Avenue" }
+    end
+
+    context "when the application was created before the home address feature flag was added" do
+      let(:same_correspondence_and_home_address) { nil }
+
+      it { expect(correspondence_address_for_ccms.address_line_one).to eq "109 Correspondence Avenue" }
     end
   end
 end

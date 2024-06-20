@@ -143,10 +143,10 @@ class Applicant < ApplicationRecord
   def home_address_for_ccms
     return if no_fixed_residence?
 
-    if Setting.home_address?
-      same_correspondence_and_home_address ? address : home_address
-    else
-      address
-    end
+    home_address.presence || address
+  end
+
+  def correspondence_address_for_ccms
+    same_correspondence_and_home_address? ? home_address : address
   end
 end
