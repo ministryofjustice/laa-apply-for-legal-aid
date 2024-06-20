@@ -168,12 +168,12 @@ module CCMS
       end
 
       def generate_correspondence_address(xml)
-        xml.__send__(:"common:AddressLine1", applicant.address.address_line_one)
-        xml.__send__(:"common:AddressLine2", applicant.address.address_line_two)
-        xml.__send__(:"common:City", applicant.address.city)
-        xml.__send__(:"common:County", applicant.address.county)
+        xml.__send__(:"common:AddressLine1", applicant.correspondence_address_for_ccms.address_line_one)
+        xml.__send__(:"common:AddressLine2", applicant.correspondence_address_for_ccms.address_line_two)
+        xml.__send__(:"common:City", applicant.correspondence_address_for_ccms.city)
+        xml.__send__(:"common:County", applicant.correspondence_address_for_ccms.county)
         xml.__send__(:"common:Country", "GBR")
-        xml.__send__(:"common:PostalCode", applicant.address.pretty_postcode)
+        xml.__send__(:"common:PostalCode", applicant.correspondence_address_for_ccms.pretty_postcode) if applicant.correspondence_address_for_ccms.postcode.present?
       end
 
       def generate_category_of_law(xml)
