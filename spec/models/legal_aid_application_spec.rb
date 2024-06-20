@@ -1908,6 +1908,30 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#substantive_cost_overridable?" do
+    subject { legal_aid_application.substantive_cost_overridable? }
+
+    let(:legal_aid_application) { create(:legal_aid_application) }
+
+    context "when the substantive_cost_limitation for the proceeding(s) is 25000 or more" do
+      before { create(:proceeding, :da001, legal_aid_application:, substantive_cost_limitation: 25_000) }
+
+      it { is_expected.to be false }
+    end
+
+    context "when the substantive_cost_limitation for the proceeding(s) is less than 25000" do
+      before { create(:proceeding, :da001, legal_aid_application:, substantive_cost_limitation: 24_999) }
+
+      it { is_expected.to be true }
+    end
+
+    context "when there are special childrens act proceedings" do
+      before { create(:proceeding, :pb003, legal_aid_application:, substantive_cost_limitation: 24_999) }
+
+      it { is_expected.to be false }
+    end
+  end
+
 private
 
   def uploaded_evidence_output
