@@ -1,7 +1,9 @@
 <div class="interruption-panel">
   <%= page_template(page_title: t(".tab_title"), column_width: :full, template: :basic) do %>
     <h1 class="govuk-heading-m govuk-!-padding-bottom-4">
-      <% if @legal_aid_application.used_delegated_functions? %>
+      <% if @legal_aid_application.special_children_act_proceedings? %>
+        <%= t(".title.sca_proceeding") %>
+      <% elsif @legal_aid_application.used_delegated_functions? %>
         <%= t(".title.under_18_when_delegated_functions_used") %>
       <% else %>
         <%= t(".title.under_18_now") %>

@@ -425,6 +425,13 @@ FactoryBot.define do
       end
     end
 
+    trait :with_multiple_sca_proceedings do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :pb003)
+        application.proceedings << create(:proceeding, :pb059)
+      end
+    end
+
     trait :with_opponents_application_proceeding do
       after(:create) do |application|
         application.proceedings << create(:proceeding, :da001, :opponents_application)

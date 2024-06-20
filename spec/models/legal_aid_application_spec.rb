@@ -1443,6 +1443,25 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#special_children_act_proceedings?" do
+    context "with special children act proceedings" do
+      let(:laa) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+      it "returns true" do
+        expect(laa.special_children_act_proceedings?).to be true
+      end
+    end
+
+    context "without special children act proceedings" do
+      let(:laa) { create(:legal_aid_application) }
+
+      it "returns false" do
+        create(:proceeding, :da001, legal_aid_application: laa)
+        expect(laa.special_children_act_proceedings?).to be false
+      end
+    end
+  end
+
   describe "#online_current_accounts_balance" do
     let(:laa) { create(:legal_aid_application, :with_applicant) }
 
