@@ -45,6 +45,8 @@ module Providers
 
       def form_params
         merge_with_model(linked_application) do
+          next {} unless params[:linked_application]
+
           params.require(:linked_application).permit(:confirm_link)
         end
       end
