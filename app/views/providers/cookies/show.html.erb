@@ -1,21 +1,26 @@
-<% new_head_title = if @successfully_saved
-                      t(".success_message")
-                    else
-                      t(".page_title")
-                    end %>
+<% if @successfully_saved
+     new_head_title = t(".success_message")
+     notification_banner_title = t("generic.success")
+     notification_banner_success = true
+     notification_banner_text = t(".success_message")
+     notification_banner_body = t(".go_back_html", link: back_path)
+   else
+     new_head_title = t(".page_title")
+   end %>
+
 <%= form_with(model: @form,
               url: providers_cooky_path,
               method: :patch,
               local: true) do |form| %>
 
-  <%= page_template page_title: t(".page_title"), head_title: new_head_title, template: :basic, form: do %>
-
-    <% if @successfully_saved %>
-      <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
-        <% notification_banner.with_heading(text: t(".success_message")) %>
-        <%= link_to t(".go_back_link"), back_path %>
-      <% end %>
-    <% end %>
+  <%= page_template page_title: t(".page_title"),
+                    head_title: new_head_title,
+                    notification_banner_title:,
+                    notification_banner_success:,
+                    notification_banner_text:,
+                    notification_banner_body:,
+                    template: :basic,
+                    form: do %>
 
     <h1 class="govuk-heading-l"><%= t(".page_title") %></h1>
 

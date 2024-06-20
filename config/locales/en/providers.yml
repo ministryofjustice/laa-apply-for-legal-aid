@@ -171,7 +171,7 @@ en:
       show:
         page_title: Cookies on Apply for legal aid
         success_message: Your cookie settings were saved
-        go_back_link: Go back to the page you were looking at
+        go_back_html: <a class="govuk-link" href="%{link}">Go back</a> to the page you were looking at.
         cookies_are_files: Cookies are files saved on your phone, tablet or computer when you visit a website.
         we_use_cookies: We use cookies to store information about how you use Apply for legal aid, such as the pages you visit.
         heading_2: Cookies that measure website use
