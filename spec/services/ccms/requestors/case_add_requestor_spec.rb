@@ -302,6 +302,45 @@ module CCMS
               .and have_xml("#{linked_cases_xpath}/casebio:LinkType", "FC_LEAD")
           end
         end
+
+        describe "correspondence address handling" do
+          let(:applicant) { create(:applicant, same_correspondence_and_home_address:, addresses:) }
+          let(:correspondence_address) { create(:address, address_line_one: "109 Correspondence Avenue") }
+          let(:home_address) { create(:address, :as_home_address, address_line_one: "27 Home Street") }
+          let(:address_xpath) { "//casebio:CaseDetails/casebio:ApplicationDetails/casebio:CorrespondenceAddress" }
+
+          context "when the home address flag is false" do
+            before { allow(Setting).to receive(:home_address?).and_return false }
+
+          end
+
+          context "when the home address flag is true" do
+            before { allow(Setting).to receive(:home_address?).and_return true }
+
+            context "when the provider has set a different home address" do
+              let(:same_correspondence_and_home_address) { false }
+              let(:addresses) { [home_address, correspondence_address] }
+
+              it "is set to the expected, separate, home address" do
+                expect(request_xml)
+                  .to have_xml("#{address_xpath}/common:AddressLine1", "109 Correspondence Avenue")
+                  .and have_xml("#{address_xpath}/common:AddressLine2", correspondence_address.address_line_two)
+              end
+            end
+
+            context "when the provider has set the home address to the same as correspondence" do
+              let(:same_correspondence_and_home_address) { true }
+              let(:correspondence_address) { nil }
+              let(:addresses) { [home_address] }
+
+              it "is set to the correspondence address" do
+                expect(request_xml)
+                  .to have_xml("#{address_xpath}/common:AddressLine1", "27 Home Street")
+                  .and have_xml("#{address_xpath}/common:AddressLine2", home_address.address_line_two)
+              end
+            end
+          end
+        end
       end
     end
   end
