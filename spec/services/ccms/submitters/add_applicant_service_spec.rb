@@ -7,7 +7,7 @@ module CCMS
 
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address) }
       let(:applicant) { legal_aid_application.applicant }
-      let(:address) { applicant.address }
+      let(:address) { applicant.home_address_for_ccms }
       let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
       let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/ClientServices_ep" }
