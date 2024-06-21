@@ -328,7 +328,7 @@ module CCMS
             it "is set to the expected, separate, home address" do
               expect(request_xml)
                 .to have_xml("#{address_xpath}/common:AddressLine1", "109 Correspondence Avenue")
-                      .and have_xml("#{address_xpath}/common:AddressLine2", correspondence_address.address_line_two)
+                .and have_xml("#{address_xpath}/common:AddressLine2", correspondence_address.address_line_two)
             end
           end
 
@@ -341,6 +341,49 @@ module CCMS
               expect(request_xml)
                 .to have_xml("#{address_xpath}/common:AddressLine1", "109 Correspondence Avenue")
                 .and have_xml("#{address_xpath}/common:AddressLine2", correspondence_address.address_line_two)
+            end
+          end
+        end
+
+        describe "care of address handling" do
+          let(:applicant) { create(:applicant, address:) }
+          let(:address) do
+            create(:address,
+                   care_of:,
+                   care_of_first_name:,
+                   care_of_last_name:,
+                   care_of_organisation_name:)
+          end
+          let(:care_of) { nil }
+          let(:care_of_first_name) { nil }
+          let(:care_of_last_name) { nil }
+          let(:care_of_organisation_name) { nil }
+          let(:address_xpath) { "//casebio:CaseDetails/casebio:ApplicationDetails/casebio:CorrespondenceAddress" }
+
+          context "when care of is not set" do
+            it "does not add the xml key" do
+              expect(request_xml).not_to match "common:CoFFName"
+            end
+          end
+
+          context "when care of is set to an individual" do
+            let(:care_of) { "person" }
+            let(:care_of_first_name) { "James" }
+            let(:care_of_last_name) { "Bond" }
+
+            it "records the care of name" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:CoffName", "James Bond")
+            end
+          end
+
+          context "when care of is set to an organisation" do
+            let(:care_of) { "organisation" }
+            let(:care_of_organisation_name) { "International Exports" }
+
+            it "records the care of organisation name" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:CoffName", "International Exports")
             end
           end
         end
