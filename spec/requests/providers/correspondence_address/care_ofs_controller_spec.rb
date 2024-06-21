@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::CorrespondenceAddress::CareOfsController do
   let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-  let(:applicant) { create(:applicant, :with_address) }
+  let(:applicant) { create(:applicant, :with_only_correspondence_address) } # TODO: revert to :with_address when Setting.home_address? is deleted
   let(:provider) { legal_aid_application.provider }
   let(:care_of) { "" }
   let(:care_of_first_name) { "" }
