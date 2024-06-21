@@ -387,6 +387,22 @@ module CCMS
             end
           end
         end
+
+        context "when optional address line three field is populated" do
+          let(:address) do
+            create(:address,
+                   address_line_one: "Corporation name",
+                   address_line_two: "109 Correspondence Avenue",
+                   address_line_three: "Placeholder City")
+          end
+          let(:address_xpath) { "//casebio:CaseDetails/casebio:ApplicationDetails/casebio:CorrespondenceAddress" }
+
+          it "is included in the payload" do
+            expect(request_xml).to have_xml("#{address_xpath}/common:AddressLine1", "Corporation name")
+                                     .and have_xml("#{address_xpath}/common:AddressLine2", "109 Correspondence Avenue")
+                                     .and have_xml("#{address_xpath}/common:AddressLine3", "Placeholder City")
+          end
+        end
       end
     end
   end

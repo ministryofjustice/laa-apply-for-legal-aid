@@ -171,6 +171,7 @@ module CCMS
         xml.__send__(:"common:CoffName", applicant.correspondence_address_for_ccms.care_of_recipient) unless applicant.correspondence_address_for_ccms.care_of_recipient.nil?
         xml.__send__(:"common:AddressLine1", applicant.correspondence_address_for_ccms.address_line_one)
         xml.__send__(:"common:AddressLine2", applicant.correspondence_address_for_ccms.address_line_two)
+        xml.__send__(:"common:AddressLine3", applicant.correspondence_address_for_ccms.address_line_three) unless applicant.correspondence_address_for_ccms.address_line_three.nil?
         xml.__send__(:"common:City", applicant.correspondence_address_for_ccms.city)
         xml.__send__(:"common:County", applicant.correspondence_address_for_ccms.county)
         xml.__send__(:"common:Country", "GBR")
