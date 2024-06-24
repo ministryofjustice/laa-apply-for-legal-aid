@@ -71,7 +71,7 @@ RSpec.describe Admin::ReportsController do
 
     it "sends the data" do
       get_request
-      expect(response.body).to match(/^updated_at,created_at,source,satisfaction,difficulty,improvement_suggestion/)
+      expect(response.body).to match(/^date,time,source,satisfaction,difficulty,improvement_suggestion/)
       expect(response.body).to match(/My suggested improvement/)
     end
   end
