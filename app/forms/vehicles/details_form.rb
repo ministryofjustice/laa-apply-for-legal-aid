@@ -45,6 +45,13 @@ module Vehicles
     end
     alias_method :save!, :save
 
+    def save_as_draft
+      @draft = true
+      save!
+      legal_aid_application.provider_step_params["id"] = model.id
+      legal_aid_application.save!
+    end
+
     def self.radio_options
       translation_root = "providers.means.vehicle_details.show.owner.options"
       SINGLE_VALUE_ATTRIBUTES.map { |option| RadioOption.new(option, I18n.t("#{translation_root}.#{option}")) }
@@ -62,6 +69,10 @@ module Vehicles
 
     def has_partner?
       model.legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+    end
+
+    def legal_aid_application
+      @legal_aid_application ||= model.legal_aid_application
     end
   end
 end
