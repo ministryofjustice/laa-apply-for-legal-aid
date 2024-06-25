@@ -7,6 +7,7 @@ FactoryBot.define do
     emergency_level_of_service { "3" }
     emergency_level_of_service_name { "Full Representation" }
     emergency_level_of_service_stage { "8" }
+    sca_type { nil }
 
     sequence(:proceeding_case_id) { |n| n + 55_000_000 }
 
@@ -307,6 +308,27 @@ FactoryBot.define do
     ccms_matter_code { "KPBLW" }
     client_involvement_type_ccms_code { "A" }
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    sca_type { "core" }
+  end
+
+  trait :pb007 do
+    lead_proceeding { false }
+    ccms_code { "PB007" }
+    meaning { "Contact with a child in care" }
+    description { "to be represented on an application for contact with a child in care." }
+    substantive_cost_limitation { 25_000 }
+    delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "app_contact_child_in_care_sca" }
+    matter_type { "Special Children Act" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLW" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    sca_type { "related" }
   end
 
   trait :pb059 do
@@ -326,5 +348,6 @@ FactoryBot.define do
     ccms_matter_code { "KPBLW" }
     client_involvement_type_ccms_code { "A" }
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    sca_type { "core" }
   end
 end
