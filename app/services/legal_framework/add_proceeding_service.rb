@@ -7,13 +7,14 @@ module LegalFramework
     def call(params)
       return false unless params[:ccms_code]
 
+      new_proceeding = nil
       @ccms_code = params[:ccms_code]
 
       ActiveRecord::Base.transaction do
-        Proceeding.create!(proceeding_attrs)
+        new_proceeding = Proceeding.create!(proceeding_attrs)
         LeadProceedingAssignmentService.call(@legal_aid_application)
       end
-      true
+      new_proceeding
     end
 
   private
@@ -40,6 +41,7 @@ module LegalFramework
         category_of_law: proceeding_type.ccms_category_law,
         category_law_code: proceeding_type.ccms_category_law_code,
         ccms_matter_code: proceeding_type.ccms_matter_code,
+        sca_type: proceeding_type.sca_type,
       }
     end
   end
