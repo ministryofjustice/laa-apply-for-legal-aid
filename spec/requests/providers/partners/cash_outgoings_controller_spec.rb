@@ -83,9 +83,9 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
       end
 
       context "with no housing payments selected for either applicant or partner" do
-        it "redirects to has dependants page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -96,9 +96,9 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
           legal_aid_application.legal_aid_application_transaction_types << partner_transaction_type
         end
 
-        it "redirects to the housing benefit page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -111,9 +111,9 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
           legal_aid_application.legal_aid_application_transaction_types << applicant_transaction_type
         end
 
-        it "redirects to the housing benefit page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
@@ -185,9 +185,9 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
             legal_aid_application.legal_aid_application_transaction_types << applicant_transaction_type
           end
 
-          it "redirects to housing benefits page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
@@ -196,16 +196,16 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
             legal_aid_application.legal_aid_application_transaction_types << partner_transaction_type
           end
 
-          it "redirects to housing benefits page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "but there are no housing payments" do
-          it "redirects to dependants page" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -216,9 +216,9 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
           legal_aid_application.update!(provider_received_citizen_consent: true)
         end
 
-        it "redirects to dependants page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end

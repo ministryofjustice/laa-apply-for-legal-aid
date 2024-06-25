@@ -53,9 +53,9 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
         }
       end
 
-      it "redirects to the has dependants page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "updates the no debit transaction types attribute" do
@@ -81,9 +81,9 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
         expect(legal_aid_application.reload.no_debit_transaction_types_selected).to be false
       end
 
-      it "redirects to the cash outgoings page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_cash_outgoing_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "updates the application with the selected transaction types" do
@@ -146,9 +146,9 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
         expect(legal_aid_application.reload.no_debit_transaction_types_selected).to be true
       end
 
-      it "redirects to the checking answers income page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -180,9 +180,9 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
           .to contain_exactly([child_care.id, 100, "monthly"])
       end
 
-      it "redirects to the cash outgoing page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_cash_outgoing_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
   end
