@@ -37,6 +37,27 @@ RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
       expect(response.default_scope_limitations).to eq expected_default_scope_limitations
       expect(response.description).to eq "to be represented on an application for a non-molestation order."
       expect(response.meaning).to eq "Non-molestation order"
+      expect(response.sca_type).to be_nil
+    end
+
+    context "when the proceeding is core sca" do
+      let(:ccms_code) { "PB003" }
+
+      it "has the expected values in all attributes" do
+        response = call
+        expect(response.meaning).to eq "Child assessment order"
+        expect(response.sca_type).to eq "core"
+      end
+    end
+
+    context "when the proceeding is related sca" do
+      let(:ccms_code) { "PB007" }
+
+      it "has the expected values in all attributes" do
+        response = call
+        expect(response.meaning).to eq "Contact with a child in care"
+        expect(response.sca_type).to eq "related"
+      end
     end
 
     def expected_cost_limitations
