@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings:, proceeding_count:) }
   let(:proceeding_count) { 2 }
+  let(:explicit_proceedings) { %i[pb003 pb007] }
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/heard_togethers" do
@@ -21,7 +22,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
       end
 
       context "when there is a core proceeding" do
-        let(:core_sca) { legal_aid_application.proceedings.first.meaning }
+        let(:core_sca) { legal_aid_application.proceedings.where(sca_type: "core").first.meaning }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -31,6 +32,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
 
       context "when there is more than one core proceeding" do
         let(:proceeding_count) { 3 }
+        let(:explicit_proceedings) { %i[pb003 pb007 pb059] }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)

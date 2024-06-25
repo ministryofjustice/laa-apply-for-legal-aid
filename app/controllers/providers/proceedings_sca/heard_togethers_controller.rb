@@ -5,8 +5,8 @@ module Providers
 
       def show
         # TODO: Will be updated in ticket AP-5062 which will implement proper flow logic
-        @current_proceeding = legal_aid_application.proceedings.last
-        @core_proceedings = legal_aid_application.proceedings - [@current_proceeding]
+        @current_proceeding = legal_aid_application.proceedings.order(:created_at).last
+        @core_proceedings = legal_aid_application.proceedings.where(sca_type: "core")
         amount
         form
       end
@@ -15,12 +15,12 @@ module Providers
         return continue_or_draft if draft_selected?
 
         # TODO: Will be updated in ticket AP-5062 which will implement proper flow logic
-        @current_proceeding = legal_aid_application.proceedings.last
-        @core_proceedings = legal_aid_application.proceedings - [@current_proceeding]
+        @current_proceeding = legal_aid_application.proceedings.order(:created_at).last
+        @core_proceedings = legal_aid_application.proceedings.where(sca_type: "core")
         amount
 
         if form.valid?
-          return go_forward(form.heard_together?)
+          return go_forward({ heard_together: form.heard_together?, proceeding: @current_proceeding })
         end
 
         render :show, status: :unprocessable_content
