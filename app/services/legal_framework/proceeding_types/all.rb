@@ -11,13 +11,8 @@ module LegalFramework
           @ccms_category_law = pt_hash["ccms_category_law"]
           @ccms_matter_code = pt_hash["ccms_matter_code"]
           @ccms_matter = pt_hash["ccms_matter"]
-          # TODO: Added 24 May 2024 by Colin Bruce for AP-5047/AP-4662
-          # The `|| false` additions are because we have to add the SCA values
-          # to LFA and Apply asynchronously and this fails if a trie/false value
-          # is not sent. Once LFA has been updated to always send the values,
-          # these can be removed
-          @sca_core = pt_hash["sca_core"] || false
-          @sca_related = pt_hash["sca_related"] || false
+          @sca_core = pt_hash["sca_core"]
+          @sca_related = pt_hash["sca_related"]
         end
 
         def not_sca?
