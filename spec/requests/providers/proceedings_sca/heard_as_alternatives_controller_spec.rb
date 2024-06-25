@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count: 2) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pb003 pb007], proceeding_count: 2) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/will_proceeding_be_heard_as_an_alternative" do
@@ -27,7 +27,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
       end
 
       context "when there is more than one core proceeding" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count: 3) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pb003 pb007 pb059], proceeding_count: 3) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
