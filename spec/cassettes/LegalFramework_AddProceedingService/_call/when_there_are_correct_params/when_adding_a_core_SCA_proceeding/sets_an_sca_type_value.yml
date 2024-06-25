@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/PB004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 25 Jun 2024 11:07:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1078'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"c8b035a7aad4ee2206dfb4d02051ec5e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ad77dba7e19e63047a96b531e0bd3e62
+      X-Runtime:
+      - '0.010983'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"PB004","meaning":"Emergency protection
+        order - extend","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","name":"extend_emergency_protection_sca","description":"to
+        be represented on an application for or to extend an emergency protection
+        order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"Special
+        Children Act","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"FM062","meaning":"Final
+        hearing","description":"Limited to all steps up to and including final hearing
+        and any action necessary to implement (but not enforce) the order."},"delegated_functions":{"code":"FM062","meaning":"Final
+        hearing","description":"Limited to all steps up to and including final hearing
+        and any action necessary to implement (but not enforce) the order."}},"service_levels":[{"level":3,"name":"Full
+        Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Tue, 25 Jun 2024 11:07:07 GMT
+recorded_with: VCR 6.2.0
