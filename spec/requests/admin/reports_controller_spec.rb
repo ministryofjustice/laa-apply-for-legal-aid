@@ -58,4 +58,21 @@ RSpec.describe Admin::ReportsController do
       expect(response.body).to match(/^test1@example.com/)
     end
   end
+
+  describe "GET user feedback" do
+    subject(:get_request) { get admin_user_feedbacks_csv_path(format: :csv) }
+
+    before { create(:feedback, :from_provider, improvement_suggestion: "My suggested improvement") }
+
+    it "renders successfully" do
+      get_request
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "sends the data" do
+      get_request
+      expect(response.body).to match(/^date,time,source,satisfaction,difficulty,improvement_suggestion/)
+      expect(response.body).to match(/My suggested improvement/)
+    end
+  end
 end

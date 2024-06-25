@@ -29,6 +29,23 @@ module Admin
       end
     end
 
+    def download_user_feedbacks_report
+      expires_now
+      respond_to do |format|
+        format.csv do
+          tempfile = Tempfile.new("user_feedbacks_report")
+          CSV.open(tempfile, "w", write_headers: true, headers: %w[date time source satisfaction difficulty improvement_suggestion]) do |csv|
+            Feedback.order(created_at: :desc).each do |feedback|
+              feedback_date = feedback.created_at.strftime("%Y-%m-%d")
+              feedback_time = feedback.created_at.strftime("%H:%M")
+              csv << [feedback_date, feedback_time, feedback.source, feedback.satisfaction, feedback.difficulty, feedback.improvement_suggestion]
+            end
+          end
+          send_data tempfile.read, filename: "user_feedback_report_#{timestamp}.csv", content_type: "text/csv"
+        end
+      end
+    end
+
     def timestamp
       Time.current.strftime("%FT%T")
     end
@@ -54,8 +71,13 @@ module Admin
           path_text: "Download CSV",
         },
         provider_download: {
-          report_title: "Provider email",
+          report_title: "Provider email report",
           path: :admin_provider_emails_csv_path,
+          path_text: "Download CSV",
+        },
+        user_feedback_download: {
+          report_title: "User feedback report",
+          path: :admin_user_feedbacks_csv_path,
           path_text: "Download CSV",
         },
       }
