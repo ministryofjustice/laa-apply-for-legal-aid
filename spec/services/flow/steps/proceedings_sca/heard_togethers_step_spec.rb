@@ -4,9 +4,11 @@ RSpec.describe Flow::Steps::ProceedingsSCA::HeardTogethersStep, type: :request d
   let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
 
   describe "#path" do
-    subject { described_class.path.call(legal_aid_application) }
+    subject { described_class.path.call(legal_aid_application, proceeding) }
 
-    it { is_expected.to eql providers_legal_aid_application_heard_togethers_path(legal_aid_application) }
+    let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PB020") }
+
+    it { is_expected.to eql providers_legal_aid_application_heard_together_path(legal_aid_application, proceeding) }
   end
 
   describe "#forward" do

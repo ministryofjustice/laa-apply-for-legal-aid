@@ -2,7 +2,7 @@ module Flow
   module Steps
     module ProceedingsSCA
       HeardTogethersStep = Step.new(
-        path: ->(application) { Steps.urls.providers_legal_aid_application_heard_togethers_path(application) },
+        path: ->(application, proceeding) { Steps.urls.providers_legal_aid_application_heard_together_path(application, proceeding) },
         forward: lambda do |_application, options|
           return :proceedings_sca_heard_as_alternatives if options[:heard_together] == false
 
