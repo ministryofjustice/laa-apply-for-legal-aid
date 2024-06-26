@@ -57,18 +57,7 @@ module Flow
         check_provider_answers: Steps::ProviderStart::CheckProviderAnswersStep,
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
         no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
-        check_benefits: {
-          path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: lambda do |application, dwp_override_non_passported|
-            if application.applicant_receives_benefit?
-              application.change_state_machine_type("PassportedStateMachine")
-              application.used_delegated_functions? ? :substantive_applications : :capital_introductions
-            else
-              application.change_state_machine_type("NonPassportedStateMachine")
-              dwp_override_non_passported ? :confirm_dwp_non_passported_applications : :applicant_employed
-            end
-          end,
-        },
+        check_benefits: Steps::ProviderStart::CheckBenefitsStep,
         substantive_applications: {
           path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
           forward: lambda do |application|
