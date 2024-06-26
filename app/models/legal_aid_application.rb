@@ -401,8 +401,12 @@ class LegalAidApplication < ApplicationRecord
     default_substantive_cost_limitation
   end
 
+  def display_emergency_certificate?
+    used_delegated_functions? && !special_children_act_proceedings?
+  end
+
   def substantive_cost_overridable?
-    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT
+    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT && !special_children_act_proceedings?
   end
 
   def substantive_cost_limitation

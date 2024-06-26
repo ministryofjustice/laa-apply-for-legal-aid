@@ -12,7 +12,7 @@
                collection: @legal_aid_application.proceedings.in_order_of_addition, as: :proceeding,
                locals: { translation_path: "providers.limitations.show" } %>
 
-    <% if @legal_aid_application.used_delegated_functions? %>
+    <% if @legal_aid_application.display_emergency_certificate? %>
       <h2 class="govuk-heading-l"><%= t(".cost_heading") %></h2>
       <h3 class="govuk-heading-m"><%= t(".emergency_certificate") %></h3>
 
