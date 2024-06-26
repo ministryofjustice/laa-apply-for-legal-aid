@@ -56,13 +56,7 @@ module Flow
         # partner_flow called here
         check_provider_answers: Steps::ProviderStart::CheckProviderAnswersStep,
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
-        no_national_insurance_numbers: {
-          path: ->(application) { urls.providers_legal_aid_application_no_national_insurance_number_path(application) },
-          forward: lambda do |application|
-            application.change_state_machine_type("NonPassportedStateMachine")
-            :applicant_employed
-          end,
-        },
+        no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
           forward: lambda do |application, dwp_override_non_passported|
