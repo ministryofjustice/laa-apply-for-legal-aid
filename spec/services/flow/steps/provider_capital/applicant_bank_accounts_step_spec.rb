@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Flow::Steps::ProviderCapital::ApplicantBankAccountsStep, type: :request do
-  let(:application) { create(:legal_aid_application) }
+  let(:application) { create(:legal_aid_application, :with_applicant) }
 
   describe "#path" do
     subject { described_class.path.call(application) }
