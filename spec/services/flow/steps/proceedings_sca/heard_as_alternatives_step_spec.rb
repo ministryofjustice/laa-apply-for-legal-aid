@@ -4,9 +4,21 @@ RSpec.describe Flow::Steps::ProceedingsSCA::HeardAsAlternativesStep, type: :requ
   let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
 
   describe "#path" do
-    subject(:path) { described_class.path.call(legal_aid_application) }
+    subject(:path) { described_class.path.call(legal_aid_application, parameters) }
 
-    it { is_expected.to eql providers_legal_aid_application_heard_as_alternatives_path(legal_aid_application) }
+    context "when the proceeding is passed direct" do
+      let(:parameters) { { proceeding: } }
+      let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PB020") }
+
+      it { is_expected.to eql providers_legal_aid_application_heard_as_alternative_path(legal_aid_application, proceeding) }
+    end
+
+    context "when the proceeding is passed as part of an options hash" do
+      let(:parameters) { { heard_together: false, proceeding: } }
+      let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PB020") }
+
+      it { is_expected.to eql providers_legal_aid_application_heard_as_alternative_path(legal_aid_application, proceeding) }
+    end
   end
 
   describe "#forward" do

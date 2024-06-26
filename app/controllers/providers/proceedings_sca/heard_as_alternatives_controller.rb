@@ -2,10 +2,9 @@ module Providers
   module ProceedingsSCA
     class HeardAsAlternativesController < ProviderBaseController
       prefix_step_with :proceedings_sca
+      before_action :current_proceeding
 
       def show
-        # TODO: Will be updated in ticket AP-5062 which will implement proper flow logic
-        @current_proceeding = legal_aid_application.proceedings.order(:created_at).last
         @core_proceedings = legal_aid_application.proceedings.where(sca_type: "core")
         amount
         form
@@ -14,8 +13,6 @@ module Providers
       def update
         return continue_or_draft if draft_selected?
 
-        # TODO: Will be updated in ticket AP-5062 which will implement proper flow logic
-        @current_proceeding = legal_aid_application.proceedings.order(:created_at).last
         @core_proceedings = legal_aid_application.proceedings.where(sca_type: "core")
         amount
 
@@ -28,6 +25,14 @@ module Providers
       end
 
     private
+
+      def current_proceeding
+        @current_proceeding ||= Proceeding.find(proceeding_id_param)
+      end
+
+      def proceeding_id_param
+        params.require(:id)
+      end
 
       def amount
         @amount = if @core_proceedings.count == 1
