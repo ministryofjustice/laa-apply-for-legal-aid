@@ -8,22 +8,20 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:47 GMT
+      - Thu, 27 Jun 2024 12:53:33 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
       - chunked
       connection:
       - keep-alive
-      request-context:
-      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
       vary:
       - Origin,Accept-Encoding,key
       omse-category:
@@ -39,8 +37,8 @@ http_interactions:
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"106\",\r\n    \"lastupdate\"
-        : \"2023-12-12\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"111\",\r\n    \"lastupdate\"
+        : \"2024-06-26\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"SUPER FIRM LTD, 84, PETTY FRANCE,
         LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"SUPER FIRM LTD\",\r\n
@@ -56,28 +54,29 @@ http_interactions:
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216527\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1B\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n
-        \     \"UDPRN\" : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT
-        POLICE, 98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\"
-        : \"BRITISH TRANSPORT POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n
-        \     \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n
-        \     \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\"
-        : 529558.47,\r\n      \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" :
-        \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\"
-        : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work
-        Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n
+        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1B\"\r\n    }\r\n  },
+        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n      \"UDPRN\"
+        : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT POLICE, 98, PETTY
+        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"BRITISH TRANSPORT
+        POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n      \"THOROUGHFARE_NAME\"
+        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
+        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529558.47,\r\n
+        \     \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" : \"APPROVED\",\r\n
+        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
+        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
+        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
         : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
         : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"PARENT_UPRN\" : \"100023337884\",\r\n      \"LAST_UPDATE_DATE\" :
-        \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n      \"BLPU_STATE_DATE\"
-        : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n
-        \     \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"PARENT_UPRN\" : \"100023337884\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1Q\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337884\",\r\n
         \     \"UDPRN\" : \"23749702\",\r\n      \"ADDRESS\" : \"TRANSPORT FOR LONDON,
         98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"TRANSPORT
@@ -93,14 +92,15 @@ http_interactions:
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1F\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n
-        \     \"UDPRN\" : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE,
-        LONDON, SW1H 9EA\",\r\n      \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n
+        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1F\"\r\n    }\r\n  },
+        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n      \"UDPRN\"
+        : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n
+        \     \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
+        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
+        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
         \     \"Y_COORDINATE\" : 179499.2,\r\n      \"STATUS\" : \"APPROVED\",\r\n
         \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
         \"CT08\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Station / Interchange
@@ -110,29 +110,31 @@ http_interactions:
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216526\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1A\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n
-        \     \"UDPRN\" : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY
-        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n
-        \     \"BUILDING_NUMBER\" : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
-        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
-        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529576.0,\r\n
-        \     \"Y_COORDINATE\" : 179549.0,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n
+        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1A\"\r\n    }\r\n  },
+        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n      \"UDPRN\"
+        : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY FRANCE, LONDON,
+        SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n      \"BUILDING_NUMBER\"
+        : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\"
+        : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n
+        \     \"X_COORDINATE\" : 529576.0,\r\n      \"Y_COORDINATE\" : 179549.0,\r\n
+        \     \"STATUS\" : \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n
+        \     \"CLASSIFICATION_CODE\" : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\"
+        : \"Office / Work Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n
+        \     \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\" : \"CITY OF WESTMINSTER\",\r\n
+        \     \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\" : \"This
+        record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000001796535716\",\r\n
-        \     \"PARENT_UPRN\" : \"10033604583\",\r\n      \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n
-        \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
-        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
-        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Wed, 13 Dec 2023 16:27:47 GMT
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"PARENT_UPRN\" : \"10033604583\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n      \"ENTRY_DATE\" : \"15/06/2020\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        : \"1N\"\r\n    }\r\n  } ]\r\n}"
+  recorded_at: Thu, 27 Jun 2024 12:53:33 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -143,18 +145,18 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:47 GMT
+      - Thu, 27 Jun 2024 12:53:34 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '12573'
+      - '20445'
       connection:
       - keep-alive
       x-frame-options:
@@ -170,139 +172,188 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"dd6907b8448bc8458adb599124824756"
+      - W/"55bd8ba63ed0f42f809b7767f8f32862"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d569054645f60624672bbd7145fde2f5
+      - 5c7abaee422f84534826a72e3308e79a
       x-runtime:
-      - '0.013253'
+      - '0.023892'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"DA001","meaning":"Inherent jurisdiction high court injunction","description":"to
-        be represented on an application for an injunction, order or declaration under
-        the inherent jurisdiction of the court.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE095","meaning":"Enforcement order 11J-S8","description":"to
-        be represented on an application for an enforcement order under section 11J
-        Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE015A","meaning":"Vary CAO contact-Appeal","description":"to
-        be represented on an application to vary/discharge a child arrangements order-who
-        the child(ren) spend time with. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
-        be represented on an application for a non-molestation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE014E","meaning":"CAO residence-Enforcement","description":"to
-        be represented on an application for a child arrangements order –where the
-        child(ren) will live. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE004A","meaning":"Specific Issue Order-Appeal-S8","description":"to
-        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
-        be represented on an application for an occupation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE014A","meaning":"CAO residence-Appeal","description":"to
-        be represented on an application for a child arrangements order –where the
-        child(ren) will live. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE013E","meaning":"CAO contact-Enforcement","description":"to
-        be represented on an application for a child arrangements order-who the child(ren)
-        spend time with. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE095A","meaning":"Enforcement order-Appeal-S8","description":"to
-        be represented on an application for an enforcement order under section 11J
-        Children Act 1989.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE097A","meaning":"Revocation enforcement-Appeal-S8","description":"to
-        be represented on an application for the revocation of an enforcement order
-        under section 11J and Schedule A1 Children Act 1989.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE099E","meaning":"Amd enforcement-breach-S8","description":"to
-        be represented on an application, following breach, for an amendment to an
-        enforcement order or for a further enforcement order under section 11J and
-        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE004E","meaning":"Specific Issue Order-Enforcement-S8","description":"to
-        be represented on an application for a specific issue order.  Enforcement
-        only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA020","meaning":"FGM Protection Order","description":"To
-        be represented on an application for a Female Genital Mutilation Protection
-        Order under the Female Genital Mutilation Act.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE101E","meaning":"Compensation-Enforcement-S8","description":"to
+      string: '[{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
+        be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB003","meaning":"Child assessment order","description":"to
+        be represented on an application for a child assessment order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101A","meaning":"Compensation-Appeal-S8","description":"to
         be represented on an application for compensation for financial loss under
-        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE016","meaning":"Vary CAO residence","description":"to
-        be represented on an application to vary or discharge a child arrangements
-        order –where the child(ren) will live.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE016E","meaning":"Vary CAO residence-Enforcement","description":"to
-        be represented on an application to vary or discharge a child arrangements
-        order –where the child(ren) will live. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE004","meaning":"Specific Issue Order","description":"to
-        be represented on an application for a specific issue order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE097","meaning":"Revocation enforcement-S8","description":"to
-        be represented on an application for the revocation of an enforcement order
-        under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
-        be represented on an application for a prohibited steps order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE013A","meaning":"CAO contact-Appeal","description":"to
+        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014A","meaning":"CAO residence-Appeal","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013","meaning":"Child arrangements order (contact)","description":"to
         be represented on an application for a child arrangements order-who the child(ren)
-        spend time with. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        spend time with.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE096E","meaning":"Enforcement order+c’tal-S8","description":"to
+        be represented on an application for committal and for an enforcement order
+        under section 11J Children Act 1989. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
         - section 8"},{"ccms_code":"SE007A","meaning":"Vary/Discharge Prohib Steps
         Order-Appeal-S8","description":"to be represented on an application to vary
-        or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB005","meaning":"Emergency protection order -
+        discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB029","meaning":"Child arrangements order -
+        contact","description":"to be represented on an application for a child arrangements
+        order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014","meaning":"Child arrangements order (residence)","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB012","meaning":"Recovery of children order","description":"to
+        be represented on an application for the recovery of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003A","meaning":"Prohibited Steps Order-Appeal-S8","description":"to
+        be represented on an application for a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE014E","meaning":"CAO residence-Enforcement","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB014","meaning":"End contact with a child in
+        care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE013E","meaning":"CAO contact-Enforcement","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB026","meaning":"Emergency protection order","description":"to
+        be represented on an application for an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004","meaning":"Specific Issue Order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE007","meaning":"Vary/Discharge Prohib Steps
+        Order-S8","description":"to be represented on an application to vary or discharge
+        a prohibited steps order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE097A","meaning":"Revocation enforcement-Appeal-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095A","meaning":"Enforcement order-Appeal-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE008","meaning":"Vary/Discharge Specific Issues
+        Ord-S8","description":"to be represented on an application to vary or discharge
+        a specific issue order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA006","meaning":"Extend, variation or discharge
+        - Part IV","description":"to be represented on an application to extend, vary
+        or discharge an order under Part IV Family Law Act 1996","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA020","meaning":"FGM Protection Order","description":"To
+        be represented on an application for a Female Genital Mutilation Protection
+        Order under the Female Genital Mutilation Act.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE016E","meaning":"Vary CAO residence-Enforcement","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
         - section 8"},{"ccms_code":"SE100E","meaning":"Breach enforcement-S8","description":"to
         be represented on an application, following breach, for an amendment to an
         enforcement order or for a further enforcement order under section 11J and
-        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE015","meaning":"Vary CAO contact","description":"to
-        be represented on an application to vary/discharge a child arrangements order-who
-        the child(ren) spend time with.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE008","meaning":"Vary/Discharge Specific Issues
-        Ord-S8","description":"to be represented on an application to vary or discharge
-        a specific issue order.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
-        be represented in an action for an injunction under section 3 Protection from
-        Harassment Act 1997.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE003E","meaning":"Prohibited Steps Order-Enforcement-S8","description":"to
-        be represented on an application for a prohibited steps order.  Enforcement
-        only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE015E","meaning":"Vary CAO contact-Enforcement","description":"to
-        be represented on an application to vary/discharge a child arrangements order-who
-        the child(ren) spend time with. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE007","meaning":"Vary/Discharge Prohib Steps
-        Order-S8","description":"to be represented on an application to vary or discharge
-        a prohibited steps order.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE007E","meaning":"Vary/Discharge Prohib Steps
-        Order-Enforcement-S8","description":"to be represented on an application to
-        vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE013","meaning":"Child arrangements order (contact)","description":"to
-        be represented on an application for a child arrangements order-who the child(ren)
-        spend time with.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE008A","meaning":"Vary/Discharge Specific Issues
-        Ord-Appeal-S8","description":"to be represented on an application to vary
-        or discharge a specific issue order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE101A","meaning":"Compensation-Appeal-S8","description":"to
-        be represented on an application for compensation for financial loss under
-        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA006","meaning":"Extend, variation or discharge
-        - Part IV","description":"to be represented on an application to extend, vary
-        or discharge an order under Part IV Family Law Act 1996","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE003A","meaning":"Prohibited Steps Order-Appeal-S8","description":"to
-        be represented on an application for a prohibited steps order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE014","meaning":"Child arrangements order (residence)","description":"to
-        be represented on an application for a child arrangements order –where the
-        child(ren) will live","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE008E","meaning":"Vary/Discharge Specific Issues
-        Ord-Enforcement-S8","description":"to be represented on an application to
-        vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA002","meaning":"Variation or discharge under
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB052","meaning":"Special guardianship order","description":"to
+        be represented on an application for a Special Guardianship Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA002","meaning":"Variation or discharge under
         section 5 protection from harassment act 1997","description":"to be represented
         on an application to vary or discharge an order under section 5 Protection
         from Harassment Act 1997 where the parties are associated persons (as defined
-        by Part IV Family Law Act 1996).","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE096E","meaning":"Enforcement order+c’tal-S8","description":"to
-        be represented on an application for committal and for an enforcement order
-        under section 11J Children Act 1989. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE016A","meaning":"Vary CAO residence-Appeal","description":"to
+        by Part IV Family Law Act 1996).","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE097","meaning":"Revocation enforcement-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE016","meaning":"Vary CAO residence","description":"to
         be represented on an application to vary or discharge a child arrangements
-        order –where the child(ren) will live. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        order –where the child(ren) will live.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004E","meaning":"Specific Issue Order-Enforcement-S8","description":"to
+        be represented on an application for a specific issue order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE099E","meaning":"Amd enforcement-breach-S8","description":"to
+        be represented on an application, following breach, for an amendment to an
+        enforcement order or for a further enforcement order under section 11J and
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013A","meaning":"CAO contact-Appeal","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008A","meaning":"Vary/Discharge Specific Issues
+        Ord-Appeal-S8","description":"to be represented on an application to vary
+        or discharge a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095","meaning":"Enforcement order 11J-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB030","meaning":"Child arrangements order - residence","description":"to
+        be represented on an application for a child arrangements order-where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015","meaning":"Vary CAO contact","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA001","meaning":"Inherent jurisdiction high court
+        injunction","description":"to be represented on an application for an injunction,
+        order or declaration under the inherent jurisdiction of the court.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
+        be represented in an action for an injunction under section 3 Protection from
+        Harassment Act 1997.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB006","meaning":"Secure accommodation order","description":"to
+        be represented on an application for a secure accommodation order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE007E","meaning":"Vary/Discharge Prohib Steps
+        Order-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB021","meaning":"Contact order - vary or discharge","description":"to
+        be represented on an application to vary or discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015A","meaning":"Vary CAO contact-Appeal","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008E","meaning":"Vary/Discharge Specific Issues
+        Ord-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB004","meaning":"Emergency protection order -
+        extend","description":"to be represented on an application for or to extend
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB007","meaning":"Contact with a child in care","description":"to
+        be represented on an application for contact with a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE016A","meaning":"Vary CAO residence-Appeal","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004A","meaning":"Specific Issue Order-Appeal-S8","description":"to
+        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB023","meaning":"Prohibited steps order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003E","meaning":"Prohibited Steps Order-Enforcement-S8","description":"to
+        be represented on an application for a prohibited steps order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
-        be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"}]'
-  recorded_at: Wed, 13 Dec 2023 16:27:47 GMT
+        be represented on an application for a forced marriage protection order","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015E","meaning":"Vary CAO contact-Enforcement","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB024","meaning":"Specific issue order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101E","meaning":"Compensation-Enforcement-S8","description":"to
+        be represented on an application for compensation for financial loss under
+        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"}]'
+  recorded_at: Thu, 27 Jun 2024 12:53:34 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -313,18 +364,18 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:49 GMT
+      - Thu, 27 Jun 2024 12:53:36 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '12573'
+      - '20445'
       connection:
       - keep-alive
       x-frame-options:
@@ -340,139 +391,188 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"dd6907b8448bc8458adb599124824756"
+      - W/"55bd8ba63ed0f42f809b7767f8f32862"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c57ae0b5c95e0f181a4a48636f657861
+      - 0a222aa04b978a150eb7e7e35295a8cc
       x-runtime:
-      - '0.014388'
+      - '0.025412'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"DA001","meaning":"Inherent jurisdiction high court injunction","description":"to
-        be represented on an application for an injunction, order or declaration under
-        the inherent jurisdiction of the court.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE095","meaning":"Enforcement order 11J-S8","description":"to
-        be represented on an application for an enforcement order under section 11J
-        Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE015A","meaning":"Vary CAO contact-Appeal","description":"to
-        be represented on an application to vary/discharge a child arrangements order-who
-        the child(ren) spend time with. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
-        be represented on an application for a non-molestation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE014E","meaning":"CAO residence-Enforcement","description":"to
-        be represented on an application for a child arrangements order –where the
-        child(ren) will live. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE004A","meaning":"Specific Issue Order-Appeal-S8","description":"to
-        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
-        be represented on an application for an occupation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE014A","meaning":"CAO residence-Appeal","description":"to
-        be represented on an application for a child arrangements order –where the
-        child(ren) will live. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE013E","meaning":"CAO contact-Enforcement","description":"to
-        be represented on an application for a child arrangements order-who the child(ren)
-        spend time with. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE095A","meaning":"Enforcement order-Appeal-S8","description":"to
-        be represented on an application for an enforcement order under section 11J
-        Children Act 1989.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE097A","meaning":"Revocation enforcement-Appeal-S8","description":"to
-        be represented on an application for the revocation of an enforcement order
-        under section 11J and Schedule A1 Children Act 1989.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE099E","meaning":"Amd enforcement-breach-S8","description":"to
-        be represented on an application, following breach, for an amendment to an
-        enforcement order or for a further enforcement order under section 11J and
-        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE004E","meaning":"Specific Issue Order-Enforcement-S8","description":"to
-        be represented on an application for a specific issue order.  Enforcement
-        only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA020","meaning":"FGM Protection Order","description":"To
-        be represented on an application for a Female Genital Mutilation Protection
-        Order under the Female Genital Mutilation Act.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE101E","meaning":"Compensation-Enforcement-S8","description":"to
+      string: '[{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
+        be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB003","meaning":"Child assessment order","description":"to
+        be represented on an application for a child assessment order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101A","meaning":"Compensation-Appeal-S8","description":"to
         be represented on an application for compensation for financial loss under
-        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE016","meaning":"Vary CAO residence","description":"to
-        be represented on an application to vary or discharge a child arrangements
-        order –where the child(ren) will live.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE016E","meaning":"Vary CAO residence-Enforcement","description":"to
-        be represented on an application to vary or discharge a child arrangements
-        order –where the child(ren) will live. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE004","meaning":"Specific Issue Order","description":"to
-        be represented on an application for a specific issue order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE097","meaning":"Revocation enforcement-S8","description":"to
-        be represented on an application for the revocation of an enforcement order
-        under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
-        be represented on an application for a prohibited steps order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE013A","meaning":"CAO contact-Appeal","description":"to
+        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014A","meaning":"CAO residence-Appeal","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013","meaning":"Child arrangements order (contact)","description":"to
         be represented on an application for a child arrangements order-who the child(ren)
-        spend time with. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        spend time with.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE096E","meaning":"Enforcement order+c’tal-S8","description":"to
+        be represented on an application for committal and for an enforcement order
+        under section 11J Children Act 1989. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
         - section 8"},{"ccms_code":"SE007A","meaning":"Vary/Discharge Prohib Steps
         Order-Appeal-S8","description":"to be represented on an application to vary
-        or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB005","meaning":"Emergency protection order -
+        discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB029","meaning":"Child arrangements order -
+        contact","description":"to be represented on an application for a child arrangements
+        order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014","meaning":"Child arrangements order (residence)","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB012","meaning":"Recovery of children order","description":"to
+        be represented on an application for the recovery of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003A","meaning":"Prohibited Steps Order-Appeal-S8","description":"to
+        be represented on an application for a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE014E","meaning":"CAO residence-Enforcement","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB014","meaning":"End contact with a child in
+        care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE013E","meaning":"CAO contact-Enforcement","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB026","meaning":"Emergency protection order","description":"to
+        be represented on an application for an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004","meaning":"Specific Issue Order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE007","meaning":"Vary/Discharge Prohib Steps
+        Order-S8","description":"to be represented on an application to vary or discharge
+        a prohibited steps order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE097A","meaning":"Revocation enforcement-Appeal-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095A","meaning":"Enforcement order-Appeal-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE008","meaning":"Vary/Discharge Specific Issues
+        Ord-S8","description":"to be represented on an application to vary or discharge
+        a specific issue order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA006","meaning":"Extend, variation or discharge
+        - Part IV","description":"to be represented on an application to extend, vary
+        or discharge an order under Part IV Family Law Act 1996","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA020","meaning":"FGM Protection Order","description":"To
+        be represented on an application for a Female Genital Mutilation Protection
+        Order under the Female Genital Mutilation Act.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE016E","meaning":"Vary CAO residence-Enforcement","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
         - section 8"},{"ccms_code":"SE100E","meaning":"Breach enforcement-S8","description":"to
         be represented on an application, following breach, for an amendment to an
         enforcement order or for a further enforcement order under section 11J and
-        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE015","meaning":"Vary CAO contact","description":"to
-        be represented on an application to vary/discharge a child arrangements order-who
-        the child(ren) spend time with.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE008","meaning":"Vary/Discharge Specific Issues
-        Ord-S8","description":"to be represented on an application to vary or discharge
-        a specific issue order.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
-        be represented in an action for an injunction under section 3 Protection from
-        Harassment Act 1997.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE003E","meaning":"Prohibited Steps Order-Enforcement-S8","description":"to
-        be represented on an application for a prohibited steps order.  Enforcement
-        only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE015E","meaning":"Vary CAO contact-Enforcement","description":"to
-        be represented on an application to vary/discharge a child arrangements order-who
-        the child(ren) spend time with. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE007","meaning":"Vary/Discharge Prohib Steps
-        Order-S8","description":"to be represented on an application to vary or discharge
-        a prohibited steps order.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE007E","meaning":"Vary/Discharge Prohib Steps
-        Order-Enforcement-S8","description":"to be represented on an application to
-        vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE013","meaning":"Child arrangements order (contact)","description":"to
-        be represented on an application for a child arrangements order-who the child(ren)
-        spend time with.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE008A","meaning":"Vary/Discharge Specific Issues
-        Ord-Appeal-S8","description":"to be represented on an application to vary
-        or discharge a specific issue order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE101A","meaning":"Compensation-Appeal-S8","description":"to
-        be represented on an application for compensation for financial loss under
-        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA006","meaning":"Extend, variation or discharge
-        - Part IV","description":"to be represented on an application to extend, vary
-        or discharge an order under Part IV Family Law Act 1996","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE003A","meaning":"Prohibited Steps Order-Appeal-S8","description":"to
-        be represented on an application for a prohibited steps order.  Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE014","meaning":"Child arrangements order (residence)","description":"to
-        be represented on an application for a child arrangements order –where the
-        child(ren) will live","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE008E","meaning":"Vary/Discharge Specific Issues
-        Ord-Enforcement-S8","description":"to be represented on an application to
-        vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"DA002","meaning":"Variation or discharge under
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB052","meaning":"Special guardianship order","description":"to
+        be represented on an application for a Special Guardianship Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA002","meaning":"Variation or discharge under
         section 5 protection from harassment act 1997","description":"to be represented
         on an application to vary or discharge an order under section 5 Protection
         from Harassment Act 1997 where the parties are associated persons (as defined
-        by Part IV Family Law Act 1996).","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"},{"ccms_code":"SE096E","meaning":"Enforcement order+c’tal-S8","description":"to
-        be represented on an application for committal and for an enforcement order
-        under section 11J Children Act 1989. Enforcement only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
-        - section 8"},{"ccms_code":"SE016A","meaning":"Vary CAO residence-Appeal","description":"to
+        by Part IV Family Law Act 1996).","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE097","meaning":"Revocation enforcement-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE016","meaning":"Vary CAO residence","description":"to
         be represented on an application to vary or discharge a child arrangements
-        order –where the child(ren) will live. Appeals only.","full_s8_only":true,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        order –where the child(ren) will live.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004E","meaning":"Specific Issue Order-Enforcement-S8","description":"to
+        be represented on an application for a specific issue order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE099E","meaning":"Amd enforcement-breach-S8","description":"to
+        be represented on an application, following breach, for an amendment to an
+        enforcement order or for a further enforcement order under section 11J and
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013A","meaning":"CAO contact-Appeal","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008A","meaning":"Vary/Discharge Specific Issues
+        Ord-Appeal-S8","description":"to be represented on an application to vary
+        or discharge a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095","meaning":"Enforcement order 11J-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB030","meaning":"Child arrangements order - residence","description":"to
+        be represented on an application for a child arrangements order-where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015","meaning":"Vary CAO contact","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA001","meaning":"Inherent jurisdiction high court
+        injunction","description":"to be represented on an application for an injunction,
+        order or declaration under the inherent jurisdiction of the court.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
+        be represented in an action for an injunction under section 3 Protection from
+        Harassment Act 1997.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB006","meaning":"Secure accommodation order","description":"to
+        be represented on an application for a secure accommodation order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE007E","meaning":"Vary/Discharge Prohib Steps
+        Order-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB021","meaning":"Contact order - vary or discharge","description":"to
+        be represented on an application to vary or discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015A","meaning":"Vary CAO contact-Appeal","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008E","meaning":"Vary/Discharge Specific Issues
+        Ord-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB004","meaning":"Emergency protection order -
+        extend","description":"to be represented on an application for or to extend
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB007","meaning":"Contact with a child in care","description":"to
+        be represented on an application for contact with a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE016A","meaning":"Vary CAO residence-Appeal","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004A","meaning":"Specific Issue Order-Appeal-S8","description":"to
+        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB023","meaning":"Prohibited steps order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003E","meaning":"Prohibited Steps Order-Enforcement-S8","description":"to
+        be represented on an application for a prohibited steps order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
         - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
-        be represented on an application for a forced marriage protection order","full_s8_only":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
-        abuse"}]'
-  recorded_at: Wed, 13 Dec 2023 16:27:48 GMT
+        be represented on an application for a forced marriage protection order","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015E","meaning":"Vary CAO contact-Enforcement","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB024","meaning":"Specific issue order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101E","meaning":"Compensation-Enforcement-S8","description":"to
+        be represented on an application for compensation for financial loss under
+        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"}]'
+  recorded_at: Thu, 27 Jun 2024 12:53:36 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
@@ -483,18 +583,18 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:49 GMT
+      - Thu, 27 Jun 2024 12:53:36 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '1310'
+      - '1347'
       connection:
       - keep-alive
       x-frame-options:
@@ -510,19 +610,19 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"fbabf0efd65b63f03290a3f99682b0d4"
+      - W/"181c9e15f2ebab4b2da814618a13aca4"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 85c986877cb82839d78f3357234de549
+      - b3d94e014ede03664edb4c151eeabca7
       x-runtime:
-      - '0.011976'
+      - '0.010084'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
-        be represented on an application for a non-molestation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter":"Domestic
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"Domestic
         abuse","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
         FLA-to final hearing","description":"As to proceedings under Part IV Family
         Law Act 1996 limited to all steps up to and including obtaining and serving
@@ -534,10 +634,10 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Wed, 13 Dec 2023 16:27:49 GMT
+  recorded_at: Thu, 27 Jun 2024 12:53:36 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA004
     body:
       encoding: US-ASCII
       string: ''
@@ -545,18 +645,18 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:49 GMT
+      - Thu, 27 Jun 2024 12:53:37 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '277'
+      - '320'
       connection:
       - keep-alive
       x-frame-options:
@@ -572,24 +672,24 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"8bf337339345d42d16a9e6062fb65ccf"
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2d6bbbb235aac74add2aefcb9f0d1734
+      - e9251b54ad226edde9a6d6286732a07d
       x-runtime:
-      - '0.003278'
+      - '0.007150'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]'
-  recorded_at: Wed, 13 Dec 2023 16:27:49 GMT
+        party"}]}'
+  recorded_at: Thu, 27 Jun 2024 12:53:37 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA004
     body:
       encoding: US-ASCII
       string: ''
@@ -597,18 +697,18 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:50 GMT
+      - Thu, 27 Jun 2024 12:53:39 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '277'
+      - '320'
       connection:
       - keep-alive
       x-frame-options:
@@ -624,21 +724,21 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"8bf337339345d42d16a9e6062fb65ccf"
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - '001789d919cbea6d3709f0a906432aa0'
+      - cca694d76e8b9c0b95692625542fa285
       x-runtime:
-      - '0.004113'
+      - '0.005301'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]'
-  recorded_at: Wed, 13 Dec 2023 16:27:49 GMT
+        party"}]}'
+  recorded_at: Thu, 27 Jun 2024 12:53:39 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -649,14 +749,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:50 GMT
+      - Thu, 27 Jun 2024 12:53:40 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -680,9 +780,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - afbca9049eb20f73660fe69dbeff7b6b
+      - fc791d95f5c8e2dbc46b226ff4e5a13f
       x-runtime:
-      - '0.006222'
+      - '0.007787'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -692,7 +792,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Wed, 13 Dec 2023 16:27:50 GMT
+  recorded_at: Thu, 27 Jun 2024 12:53:40 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -703,14 +803,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:51 GMT
+      - Thu, 27 Jun 2024 12:53:40 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -734,9 +834,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 6a58ab87a592775e39bd228fbc51d954
+      - c2e83d8b63a9490288391b8f7ceeec0c
       x-runtime:
-      - '0.006148'
+      - '0.010769'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -746,7 +846,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Wed, 13 Dec 2023 16:27:50 GMT
+  recorded_at: Thu, 27 Jun 2024 12:53:40 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -757,14 +857,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:51 GMT
+      - Thu, 27 Jun 2024 12:53:41 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -788,9 +888,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e3ca11384e5547cda377d76349eabbe7
+      - 7cabc40a433ae6cab3797317838d3696
       x-runtime:
-      - '0.009583'
+      - '0.009881'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -803,7 +903,7 @@ http_interactions:
         of arrest to representation on the consideration of the breach by the court
         (but excluding applying for a warrant of arrest, if not attached, and representation
         in contempt proceedings).","additional_params":[]}}'
-  recorded_at: Wed, 13 Dec 2023 16:27:51 GMT
+  recorded_at: Thu, 27 Jun 2024 12:53:41 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -814,14 +914,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.12
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Wed, 13 Dec 2023 16:27:51 GMT
+      - Thu, 27 Jun 2024 12:53:41 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -845,9 +945,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e588c5c667d8286991e5c32a8caaf70a
+      - d74d10304fdbbeb8a6211cb8665ec4a2
       x-runtime:
-      - '0.009016'
+      - '0.009231'
       strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
@@ -860,5 +960,5 @@ http_interactions:
         of arrest to representation on the consideration of the breach by the court
         (but excluding applying for a warrant of arrest, if not attached, and representation
         in contempt proceedings).","additional_params":[]}}'
-  recorded_at: Wed, 13 Dec 2023 16:27:51 GMT
+  recorded_at: Thu, 27 Jun 2024 12:53:41 GMT
 recorded_with: VCR 6.2.0
