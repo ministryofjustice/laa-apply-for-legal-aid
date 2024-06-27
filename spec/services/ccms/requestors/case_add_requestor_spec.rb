@@ -25,7 +25,7 @@ module CCMS
         let(:applicant) do
           create(:applicant,
                  first_name: "Shery",
-                 last_name: "Ledner",
+                 last_name:,
                  last_name_at_birth:,
                  national_insurance_number: "EG587804M",
                  date_of_birth: Date.new(1977, 4, 10),
@@ -33,6 +33,7 @@ module CCMS
                  has_partner: false)
         end
         let(:last_name_at_birth) { nil }
+        let(:last_name) { "Ledner" }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:chances_of_success) { proceeding.chances_of_success }
         let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
@@ -121,7 +122,7 @@ module CCMS
 
         context "when the case data contains special characters" do
           let(:expected_request_xml) { ccms_data_from_file("case_add_request_contains_special_characters.xml") }
-          let(:first_name) { "O’Hare" }
+          let(:last_name) { "O’Hare" }
 
           it "generates the expected xml" do
             travel_to(request_created_at) do
