@@ -50,10 +50,7 @@ module Flow
         vary_order: Steps::ProviderMerits::VaryOrderStep,
         merits_task_lists: Steps::ProviderMerits::MeritsTaskListsStep,
         uploaded_evidence_collections: Steps::ProviderMerits::UploadedEvidenceCollectionsStep,
-        check_merits_answers: {
-          path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
-          forward: :confirm_client_declarations,
-        },
+        check_merits_answers: Steps::ProviderMerits::CheckMeritsAnswersStep,
         confirm_client_declarations: {
           path: ->(application) { urls.providers_legal_aid_application_confirm_client_declaration_path(application) },
           forward: :review_and_print_applications,

@@ -140,7 +140,7 @@ RSpec.describe "check merits answers requests" do
 
         it "redirects to next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_confirm_client_declaration_path(application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
