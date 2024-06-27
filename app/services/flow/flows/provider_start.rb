@@ -58,18 +58,7 @@ module Flow
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
         no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
         check_benefits: Steps::ProviderStart::CheckBenefitsStep,
-        substantive_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
-          forward: lambda do |application|
-            return :delegated_confirmation unless application.substantive_application?
-
-            if application.applicant_receives_benefit?
-              :capital_introductions
-            else
-              :open_banking_consents
-            end
-          end,
-        },
+        substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
         delegated_confirmation: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
         },

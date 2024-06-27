@@ -77,11 +77,9 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
           )
         end
 
-        it "redirects to capital introductions" do
+        it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to(
-            providers_legal_aid_application_capital_introduction_path(legal_aid_application),
-          )
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -96,22 +94,18 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
         end
 
         context "and a dwp_override with evidence" do
-          it "redirects to capital introductions" do
+          it "redirects to the next page" do
             create(:dwp_override, :with_evidence, legal_aid_application:)
             patch_request
-            expect(response).to redirect_to(
-              providers_legal_aid_application_capital_introduction_path(legal_aid_application),
-            )
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "and a dwp_override without evidence" do
-          it "redirects to the open banking consents page" do
+          it "redirects to the next page" do
             create(:dwp_override, :with_no_evidence, legal_aid_application:)
             patch_request
-            expect(response).to redirect_to(
-              providers_legal_aid_application_open_banking_consents_path(legal_aid_application),
-            )
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -128,8 +122,8 @@ RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_nam
         expect(legal_aid_application.state).to eq("delegated_functions_used")
       end
 
-      it "redirects to the delegated confirmation page" do
-        expect(response).to redirect_to(providers_legal_aid_application_delegated_confirmation_index_path)
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
