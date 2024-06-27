@@ -1,12 +1,22 @@
 require "rails_helper"
 
 RSpec.describe Flow::Steps::ProviderCapital::VehicleDetailsStep, type: :request do
-  let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, provider_step_params:) }
+  let(:provider_step_params) { {} }
 
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
 
     it { is_expected.to eq new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application) }
+
+    context "when the user has previously clicked save as draft on the vehicle details page" do
+      before { legal_aid_application.vehicles << vehicle }
+
+      let(:vehicle) { create(:vehicle) }
+      let(:provider_step_params) { { id: vehicle.id } }
+
+      it { is_expected.to eq providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application, vehicle) }
+    end
   end
 
   describe "#forward" do

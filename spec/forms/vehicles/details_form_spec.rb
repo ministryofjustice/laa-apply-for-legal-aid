@@ -92,4 +92,59 @@ RSpec.describe Vehicles::DetailsForm, :vcr, type: :form do
       end
     end
   end
+
+  describe "#save_as_draft" do
+    subject(:save_form_as_draft) { vehicle_details_form.save_as_draft }
+
+    let(:estimated_value) { "£5000.00" }
+    let(:more_than_three_years_old) { "false" }
+    let(:owner) { "client" }
+    let(:payments_remain) { "true" }
+    let(:payment_remaining) { 1000 }
+    let(:used_regularly) { "true" }
+
+    context "when the parameters are all valid" do
+      before do
+        model.legal_aid_application.provider_step_params = {}
+        save_form_as_draft
+      end
+
+      it "updates the vehicle" do
+        expect(model.reload).to have_attributes(
+          estimated_value: 5000,
+          more_than_three_years_old: false,
+          owner: "client",
+          payment_remaining: 1000,
+          used_regularly: true,
+        )
+      end
+
+      it "updates the legal_aid_application provider_step_params with the id of the vehicle" do
+        expect(model.legal_aid_application.provider_step_params["id"]).to eq model.id
+      end
+    end
+
+    context "when the payments_remain is false and payment_remaining is set" do
+      let(:payments_remain) { "false" }
+
+      before do
+        model.legal_aid_application.provider_step_params = {}
+        save_form_as_draft
+      end
+
+      it "updates the vehicle and blanks the remaining payments" do
+        expect(model.reload).to have_attributes(
+          estimated_value: 5000,
+          more_than_three_years_old: false,
+          owner: "client",
+          payment_remaining: 0,
+          used_regularly: true,
+        )
+      end
+
+      it "updates the legal_aid_application provider_step_params with the id of the vehicle" do
+        expect(model.legal_aid_application.provider_step_params["id"]).to eq model.id
+      end
+    end
+  end
 end
