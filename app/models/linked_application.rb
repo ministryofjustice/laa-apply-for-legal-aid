@@ -1,6 +1,7 @@
 class LinkedApplication < ApplicationRecord
   belongs_to :lead_application, class_name: "LegalAidApplication", optional: true
   belongs_to :associated_application, class_name: "LegalAidApplication"
+  belongs_to :target_application, class_name: "LegalAidApplication", optional: true
 
   validate :cannot_link_self
 
