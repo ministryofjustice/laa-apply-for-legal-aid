@@ -72,9 +72,7 @@ module Flow
           forward: :application_confirmations,
         },
         application_confirmations: Steps::ProviderStart::ApplicationConfirmationsStep,
-        use_ccms: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) },
-        },
+        use_ccms: Steps::ProviderStart::UseCCMSStep,
         use_ccms_employment: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_employment_index_path(application) },
         },
