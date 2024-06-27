@@ -74,9 +74,7 @@ module Flow
         application_confirmations: Steps::ProviderStart::ApplicationConfirmationsStep,
         use_ccms: Steps::ProviderStart::UseCCMSStep,
         use_ccms_employment: Steps::ProviderStart::UseCCMSEmploymentStep,
-        use_ccms_under16s: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_under16s_path(application) },
-        },
+        use_ccms_under16s: Steps::ProviderStart::UseCCMSUnder16sStep,
       }.freeze
     end
   end
