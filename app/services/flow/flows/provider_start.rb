@@ -71,9 +71,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_about_the_financial_assessment_path(application) },
           forward: :application_confirmations,
         },
-        application_confirmations: {
-          path: ->(application) { urls.providers_legal_aid_application_application_confirmation_path(application) },
-        },
+        application_confirmations: Steps::ProviderStart::ApplicationConfirmationsStep,
         use_ccms: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) },
         },
