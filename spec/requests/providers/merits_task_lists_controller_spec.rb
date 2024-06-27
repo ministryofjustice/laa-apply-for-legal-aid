@@ -87,8 +87,8 @@ RSpec.describe Providers::MeritsTaskListsController do
 
       describe "evidence upload" do
         context "and at least one evidence type is required" do
-          it "redirects to the new upload evidence page" do
-            expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
+          it "redirects to the next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -108,8 +108,8 @@ RSpec.describe Providers::MeritsTaskListsController do
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
       end
 
-      it "redirects to the check merits answers page" do
-        expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 

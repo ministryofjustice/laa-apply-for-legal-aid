@@ -48,10 +48,7 @@ module Flow
         linked_children: Steps::ProviderMerits::LinkedChildrenStep,
         specific_issue: Steps::ProviderMerits::SpecificIssueStep,
         vary_order: Steps::ProviderMerits::VaryOrderStep,
-        merits_task_lists: {
-          path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
-          forward: ->(application) { application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers },
-        },
+        merits_task_lists: Steps::ProviderMerits::MeritsTaskListsStep,
         uploaded_evidence_collections: {
           path: ->(application) { urls.providers_legal_aid_application_uploaded_evidence_collection_path(application) },
           forward: :check_merits_answers,
