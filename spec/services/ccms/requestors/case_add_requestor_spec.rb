@@ -122,7 +122,7 @@ module CCMS
 
         context "when the case data contains special characters" do
           let(:expected_request_xml) { ccms_data_from_file("case_add_request_contains_special_characters.xml") }
-          let(:last_name) { "O’Hare" }
+          let(:last_name) { "O’‘Hare" }
 
           it "generates the expected xml" do
             travel_to(request_created_at) do
