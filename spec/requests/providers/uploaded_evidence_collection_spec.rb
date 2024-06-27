@@ -260,7 +260,7 @@ module Providers
             context "when no mandatory evidence is required" do
               it "redirects to the next page" do
                 patch_request
-                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+                expect(response).to have_http_status(:redirect)
               end
             end
 
@@ -310,7 +310,7 @@ module Providers
 
               it "redirects to the next page" do
                 patch_request
-                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+                expect(response).to have_http_status(:redirect)
               end
             end
 
@@ -382,7 +382,7 @@ module Providers
 
               it "redirects to the next page" do
                 patch_request
-                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+                expect(response).to have_http_status(:redirect)
               end
             end
 

@@ -49,10 +49,7 @@ module Flow
         specific_issue: Steps::ProviderMerits::SpecificIssueStep,
         vary_order: Steps::ProviderMerits::VaryOrderStep,
         merits_task_lists: Steps::ProviderMerits::MeritsTaskListsStep,
-        uploaded_evidence_collections: {
-          path: ->(application) { urls.providers_legal_aid_application_uploaded_evidence_collection_path(application) },
-          forward: :check_merits_answers,
-        },
+        uploaded_evidence_collections: Steps::ProviderMerits::UploadedEvidenceCollectionsStep,
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
           forward: :confirm_client_declarations,
