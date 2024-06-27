@@ -73,9 +73,7 @@ module Flow
         },
         application_confirmations: Steps::ProviderStart::ApplicationConfirmationsStep,
         use_ccms: Steps::ProviderStart::UseCCMSStep,
-        use_ccms_employment: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_employment_index_path(application) },
-        },
+        use_ccms_employment: Steps::ProviderStart::UseCCMSEmploymentStep,
         use_ccms_under16s: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_under16s_path(application) },
         },
