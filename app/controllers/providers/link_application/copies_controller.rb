@@ -46,8 +46,8 @@ module Providers
       end
 
       def lead_application_reference
-        @lead_application ||= @legal_aid_application.lead_application
-        @lead_application_reference ||= @lead_application.application_ref
+        @target_application ||= @legal_aid_application.target_application
+        @lead_application_reference ||= @target_application.application_ref
       end
 
       def copy_case?
