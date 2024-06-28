@@ -17,11 +17,11 @@ RSpec.describe LinkedApplicationsHelper do
 
     context "with a lead application linked to other applications" do
       before do
-        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
-        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: linked_application_one.id, link_type_code: "FC_LEAD")
-        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: linked_application_two.id, link_type_code: "LEGAL")
-        LinkedApplication.create!(lead_application_id: linked_application_three.id, associated_application_id: lead_application.id, link_type_code: "FC_LEAD")
-        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: linked_application_four.id, link_type_code: "FC_LEAD")
+        LinkedApplication.create!(lead_application_id: lead_application.id, target_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
+        LinkedApplication.create!(lead_application_id: lead_application.id, target_application_id: lead_application.id, associated_application_id: linked_application_one.id, link_type_code: "FC_LEAD")
+        LinkedApplication.create!(lead_application_id: lead_application.id, target_application_id: lead_application.id, associated_application_id: linked_application_two.id, link_type_code: "LEGAL")
+        LinkedApplication.create!(lead_application_id: lead_application.id, target_application_id: linked_application_one.id, associated_application_id: linked_application_three.id, link_type_code: "FC_LEAD")
+        LinkedApplication.create!(lead_application_id: lead_application.id, target_application_id: lead_application.id, associated_application_id: linked_application_four.id, link_type_code: "FC_LEAD")
       end
 
       it "returns details of all other applications linked to the lead application with the same link type that have not been discarded" do
@@ -31,7 +31,7 @@ RSpec.describe LinkedApplicationsHelper do
 
     context "with a lead application that is not linked to any other applications" do
       before do
-        LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
+        LinkedApplication.create!(lead_application_id: lead_application.id, target_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD")
       end
 
       it "returns an empty string" do
