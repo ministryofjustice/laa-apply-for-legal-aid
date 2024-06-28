@@ -8,7 +8,7 @@ module Providers
       validates :copy_case, presence: true, unless: :draft?
 
       def save
-        model.update!(copy_case_id: ActiveRecord::Type::Boolean.new.cast(copy_case) ? model.lead_application.id : nil)
+        model.update!(copy_case_id: ActiveRecord::Type::Boolean.new.cast(copy_case) ? model.target_application.id : nil)
         model.proceedings.destroy_all if copy_case
         super
       end
