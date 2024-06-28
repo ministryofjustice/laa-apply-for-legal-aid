@@ -14,15 +14,15 @@
     <%= govuk_summary_list(actions: false, classes: "govuk-summary-list--no-border") do |summary_list|
           summary_list.with_row do |row|
             row.with_key { t(".reference") }
-            row.with_value { @lead_application.application_ref }
+            row.with_value { @target_application.application_ref }
           end
           summary_list.with_row do |row|
             row.with_key { t(".client") }
-            row.with_value { @lead_application.applicant_full_name }
+            row.with_value { @target_application.applicant_full_name }
           end
           summary_list.with_row do |row|
             row.with_key { t(".proceedings") }
-            row.with_value { @lead_application.proceedings.map(&:meaning).join(",") }
+            row.with_value { @target_application.proceedings.map(&:meaning).join(",") }
           end
         end %>
 
