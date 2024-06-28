@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::ConfirmLinksController do
-  let(:linked_application) { create(:linked_application, lead_application: create(:legal_aid_application), associated_application: create(:legal_aid_application), link_type_code:) }
+  let(:linked_application) { create(:linked_application, lead_application: create(:legal_aid_application, :with_applicant), associated_application: create(:legal_aid_application), link_type_code:) }
   let(:legal_aid_application) { linked_application.associated_application }
   let(:lead_application) { linked_application.lead_application }
   let(:provider) { legal_aid_application.provider }
@@ -30,6 +30,50 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
           "h1",
           text: "Search result",
         )
+      end
+    end
+
+    context "when the target application is associated to a different lead application" do
+      let(:lead_application) do
+        create(:legal_aid_application,
+               :with_applicant,
+               :with_proceedings,
+               provider: legal_aid_application.provider,
+               application_ref: "L-111-222",
+               id: "f1b3c2ef-1e93-4d4e-a983-643598f1eaf4",
+               merits_submitted_at: Date.yesterday)
+      end
+      let(:target_application) do
+        create(:legal_aid_application,
+               :with_applicant,
+               :with_proceedings,
+               provider: legal_aid_application.provider,
+               application_ref: "L-333-444",
+               id: "42edab70-1584-4fc6-9a42-7e3eae3ca726",
+               merits_submitted_at: Date.yesterday)
+      end
+      let(:legal_aid_application) do
+        create(:legal_aid_application, id: "02d46b69-60e9-4b0a-8df2-84e92bdb45c4")
+      end
+
+      before do
+        create(:linked_application,
+               lead_application:,
+               associated_application: target_application,
+               link_type_code: "FC_LEAD")
+        create(:linked_application,
+               lead_application:,
+               target_application:,
+               associated_application: legal_aid_application,
+               link_type_code: "FC_LEAD")
+        login_as provider
+        get_request
+      end
+
+      it "renders page with target data in summary block and lead application in hidden drop down section" do
+        expect(response).to have_http_status(:ok)
+        expect(page).to have_css("dd", text: "L-333-444")
+        expect(page).to have_css("div.govuk-details__text", visible: :hidden, text: "#{lead_application.application_ref}, #{lead_application.applicant.full_name}") # works but not very precise
       end
     end
   end
