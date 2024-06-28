@@ -22,7 +22,7 @@
         if @legal_aid_application&.lead_linked_application&.confirm_link?
           summary_list.with_row(classes: "app-check-your-answers__linking_case") do |row|
             row.with_key(text: t(".section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}"))
-            row.with_value(text: sanitize(@legal_aid_application.lead_linked_application.lead_application.link_description))
+            row.with_value(text: sanitize(@legal_aid_application.lead_linked_application.target_application.link_description))
             unless read_only
               row.with_action(
                 text: t("generic.change"),
