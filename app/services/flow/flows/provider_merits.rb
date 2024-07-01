@@ -55,9 +55,7 @@ module Flow
         review_and_print_applications: Steps::ProviderMerits::ReviewAndPrintApplicationsStep,
         end_of_applications: Steps::ProviderMerits::EndOfApplicationsStep,
         submitted_applications: Steps::ProviderMerits::SubmittedApplicationsStep,
-        merits_reports: {
-          path: ->(application) { urls.providers_legal_aid_application_merits_report_path(application) },
-        },
+        merits_reports: Steps::ProviderMerits::MeritsReportsStep,
       }.freeze
     end
   end
