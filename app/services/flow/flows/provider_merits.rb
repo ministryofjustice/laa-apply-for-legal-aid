@@ -52,10 +52,7 @@ module Flow
         uploaded_evidence_collections: Steps::ProviderMerits::UploadedEvidenceCollectionsStep,
         check_merits_answers: Steps::ProviderMerits::CheckMeritsAnswersStep,
         confirm_client_declarations: Steps::ProviderMerits::ConfirmClientDeclarationsStep,
-        review_and_print_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_review_and_print_application_path(application) },
-          forward: :end_of_applications,
-        },
+        review_and_print_applications: Steps::ProviderMerits::ReviewAndPrintApplicationsStep,
         end_of_applications: {
           path: ->(application) { urls.providers_legal_aid_application_end_of_application_path(application) },
           forward: :submitted_applications,
