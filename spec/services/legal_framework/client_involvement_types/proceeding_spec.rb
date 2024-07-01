@@ -1,12 +1,11 @@
 require "rails_helper"
 
-RSpec.describe LegalFramework::ClientInvolvementTypes::All, vcr: { cassette_name: "lfa_client_involvement_types_all" } do
-  subject(:all) { described_class }
-
-  let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types" }
+RSpec.describe LegalFramework::ClientInvolvementTypes::Proceeding, vcr: { cassette_name: "lfa_client_involvement_types_proceeding" } do
+  let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types/#{proceeding}" }
+  let(:proceeding) { "DA001" }
 
   describe ".call" do
-    subject(:call) { all.call }
+    subject(:call) { described_class.call(proceeding) }
 
     before { call }
 

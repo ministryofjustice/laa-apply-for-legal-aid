@@ -8,43 +8,37 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:03 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:31 GMT
+      content-type:
       - application/json;charset=UTF-8
-      Transfer-Encoding:
+      transfer-encoding:
       - chunked
-      Connection:
+      connection:
       - keep-alive
-      Request-Context:
-      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
-      Vary:
+      vary:
       - Origin,Accept-Encoding,key
-      Omse-Category:
+      omse-category:
       - premium
-      Omse-Transaction-Count:
+      omse-transaction-count:
       - '60'
-      Omse-Premium-Count:
+      omse-premium-count:
       - '0'
-      Strict-Transport-Security:
+      strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
-      encoding: ASCII-8BIT
+      encoding: UTF-8
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"103\",\r\n    \"lastupdate\"
-        : \"2023-08-03\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"111\",\r\n    \"lastupdate\"
+        : \"2024-06-26\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"SUPER FIRM LTD, 84, PETTY FRANCE,
         LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"SUPER FIRM LTD\",\r\n
@@ -60,28 +54,29 @@ http_interactions:
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216527\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1B\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n
-        \     \"UDPRN\" : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT
-        POLICE, 98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\"
-        : \"BRITISH TRANSPORT POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n
-        \     \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n
-        \     \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\"
-        : 529558.47,\r\n      \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" :
-        \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\"
-        : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work
-        Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n
+        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1B\"\r\n    }\r\n  },
+        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n      \"UDPRN\"
+        : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT POLICE, 98, PETTY
+        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"BRITISH TRANSPORT
+        POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n      \"THOROUGHFARE_NAME\"
+        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
+        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529558.47,\r\n
+        \     \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" : \"APPROVED\",\r\n
+        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
+        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
+        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
         : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
         : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"PARENT_UPRN\" : \"100023337884\",\r\n      \"LAST_UPDATE_DATE\" :
-        \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n      \"BLPU_STATE_DATE\"
-        : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n
-        \     \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"PARENT_UPRN\" : \"100023337884\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1Q\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337884\",\r\n
         \     \"UDPRN\" : \"23749702\",\r\n      \"ADDRESS\" : \"TRANSPORT FOR LONDON,
         98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"TRANSPORT
@@ -97,14 +92,15 @@ http_interactions:
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1F\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n
-        \     \"UDPRN\" : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE,
-        LONDON, SW1H 9EA\",\r\n      \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n
+        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1F\"\r\n    }\r\n  },
+        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n      \"UDPRN\"
+        : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n
+        \     \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
+        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
+        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
         \     \"Y_COORDINATE\" : 179499.2,\r\n      \"STATUS\" : \"APPROVED\",\r\n
         \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
         \"CT08\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Station / Interchange
@@ -114,29 +110,31 @@ http_interactions:
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216526\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1A\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n
-        \     \"UDPRN\" : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY
-        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n
-        \     \"BUILDING_NUMBER\" : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
-        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
-        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529576.0,\r\n
-        \     \"Y_COORDINATE\" : 179549.0,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n
+        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1A\"\r\n    }\r\n  },
+        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n      \"UDPRN\"
+        : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY FRANCE, LONDON,
+        SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n      \"BUILDING_NUMBER\"
+        : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\"
+        : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n
+        \     \"X_COORDINATE\" : 529576.0,\r\n      \"Y_COORDINATE\" : 179549.0,\r\n
+        \     \"STATUS\" : \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n
+        \     \"CLASSIFICATION_CODE\" : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\"
+        : \"Office / Work Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n
+        \     \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\" : \"CITY OF WESTMINSTER\",\r\n
+        \     \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\" : \"This
+        record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
         \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
         PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
         : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000001796535716\",\r\n
-        \     \"PARENT_UPRN\" : \"10033604583\",\r\n      \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n
-        \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
-        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
-        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 04 Aug 2023 10:58:03 GMT
+        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"PARENT_UPRN\" : \"10033604583\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n      \"ENTRY_DATE\" : \"15/06/2020\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        : \"1N\"\r\n    }\r\n  } ]\r\n}"
+  recorded_at: Thu, 27 Jun 2024 14:13:31 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -147,53 +145,215 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:04 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:43 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '12573'
-      Connection:
+      content-length:
+      - '20445'
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"dd6907b8448bc8458adb599124824756"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - d6158862a00cd395813722342a286600
-      X-Runtime:
-      - '0.016508'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"55bd8ba63ed0f42f809b7767f8f32862"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 0fd5ec3a3297e709a2c30c46b9161d40
+      x-runtime:
+      - '0.024609'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        W3siY2Ntc19jb2RlIjoiREEwMDEiLCJtZWFuaW5nIjoiSW5oZXJlbnQganVyaXNkaWN0aW9uIGhpZ2ggY291cnQgaW5qdW5jdGlvbiIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGFuIGluanVuY3Rpb24sIG9yZGVyIG9yIGRlY2xhcmF0aW9uIHVuZGVyIHRoZSBpbmhlcmVudCBqdXJpc2RpY3Rpb24gb2YgdGhlIGNvdXJ0LiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiU0UwOTUiLCJtZWFuaW5nIjoiRW5mb3JjZW1lbnQgb3JkZXIgMTFKLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gZW5mb3JjZW1lbnQgb3JkZXIgdW5kZXIgc2VjdGlvbiAxMUogQ2hpbGRyZW4gQWN0IDE5ODkuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxNUEiLCJtZWFuaW5nIjoiVmFyeSBDQU8gY29udGFjdC1BcHBlYWwiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkvZGlzY2hhcmdlIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyLXdobyB0aGUgY2hpbGQocmVuKSBzcGVuZCB0aW1lIHdpdGguIEFwcGVhbHMgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiREEwMDQiLCJtZWFuaW5nIjoiTm9uLW1vbGVzdGF0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBub24tbW9sZXN0YXRpb24gb3JkZXIuIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJTRTAxNEUiLCJtZWFuaW5nIjoiQ0FPIHJlc2lkZW5jZS1FbmZvcmNlbWVudCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZS4gRW5mb3JjZW1lbnQgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDRBIiwibWVhbmluZyI6IlNwZWNpZmljIElzc3VlIE9yZGVyLUFwcGVhbC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuICBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiU0UwMTRBIiwibWVhbmluZyI6IkNBTyByZXNpZGVuY2UtQXBwZWFsIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIg4oCTd2hlcmUgdGhlIGNoaWxkKHJlbikgd2lsbCBsaXZlLiBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDEzRSIsIm1lYW5pbmciOiJDQU8gY29udGFjdC1FbmZvcmNlbWVudCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyLXdobyB0aGUgY2hpbGQocmVuKSBzcGVuZCB0aW1lIHdpdGguIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDk1QSIsIm1lYW5pbmciOiJFbmZvcmNlbWVudCBvcmRlci1BcHBlYWwtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBlbmZvcmNlbWVudCBvcmRlciB1bmRlciBzZWN0aW9uIDExSiBDaGlsZHJlbiBBY3QgMTk4OS4gIEFwcGVhbHMgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwOTdBIiwibWVhbmluZyI6IlJldm9jYXRpb24gZW5mb3JjZW1lbnQtQXBwZWFsLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgdGhlIHJldm9jYXRpb24gb2YgYW4gZW5mb3JjZW1lbnQgb3JkZXIgdW5kZXIgc2VjdGlvbiAxMUogYW5kIFNjaGVkdWxlIEExIENoaWxkcmVuIEFjdCAxOTg5LiAgQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTA5OUUiLCJtZWFuaW5nIjoiQW1kIGVuZm9yY2VtZW50LWJyZWFjaC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24sIGZvbGxvd2luZyBicmVhY2gsIGZvciBhbiBhbWVuZG1lbnQgdG8gYW4gZW5mb3JjZW1lbnQgb3JkZXIgb3IgZm9yIGEgZnVydGhlciBlbmZvcmNlbWVudCBvcmRlciB1bmRlciBzZWN0aW9uIDExSiBhbmQgU2NoZWR1bGUgQTEgQ2hpbGRyZW4gQWN0IDE5ODkuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNEUiLCJtZWFuaW5nIjoiU3BlY2lmaWMgSXNzdWUgT3JkZXItRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHNwZWNpZmljIGlzc3VlIG9yZGVyLiAgRW5mb3JjZW1lbnQgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiREEwMjAiLCJtZWFuaW5nIjoiRkdNIFByb3RlY3Rpb24gT3JkZXIiLCJkZXNjcmlwdGlvbiI6IlRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIEZlbWFsZSBHZW5pdGFsIE11dGlsYXRpb24gUHJvdGVjdGlvbiBPcmRlciB1bmRlciB0aGUgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBBY3QuIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJTRTEwMUUiLCJtZWFuaW5nIjoiQ29tcGVuc2F0aW9uLUVuZm9yY2VtZW50LVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgY29tcGVuc2F0aW9uIGZvciBmaW5hbmNpYWwgbG9zcyB1bmRlciBzZWN0aW9uIDExTyBDaGlsZHJlbiBBY3QgMTk4OS4gIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE2IiwibWVhbmluZyI6IlZhcnkgQ0FPIHJlc2lkZW5jZSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeSBvciBkaXNjaGFyZ2UgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIg4oCTd2hlcmUgdGhlIGNoaWxkKHJlbikgd2lsbCBsaXZlLiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxNkUiLCJtZWFuaW5nIjoiVmFyeSBDQU8gcmVzaWRlbmNlLUVuZm9yY2VtZW50IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUuIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDA0IiwibWVhbmluZyI6IlNwZWNpZmljIElzc3VlIE9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBzcGVjaWZpYyBpc3N1ZSBvcmRlci4iLCJmdWxsX3M4X29ubHkiOmZhbHNlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDk3IiwibWVhbmluZyI6IlJldm9jYXRpb24gZW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciB0aGUgcmV2b2NhdGlvbiBvZiBhbiBlbmZvcmNlbWVudCBvcmRlciB1bmRlciBzZWN0aW9uIDExSiBhbmQgU2NoZWR1bGUgQTEgQ2hpbGRyZW4gQWN0IDE5ODkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxM0EiLCJtZWFuaW5nIjoiQ0FPIGNvbnRhY3QtQXBwZWFsIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4gQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwN0EiLCJtZWFuaW5nIjoiVmFyeS9EaXNjaGFyZ2UgUHJvaGliIFN0ZXBzIE9yZGVyLUFwcGVhbC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeSBvciBkaXNjaGFyZ2UgYSBwcm9oaWJpdGVkIHN0ZXBzIG9yZGVyLiAgQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTEwMEUiLCJtZWFuaW5nIjoiQnJlYWNoIGVuZm9yY2VtZW50LVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiwgZm9sbG93aW5nIGJyZWFjaCwgZm9yIGFuIGFtZW5kbWVudCB0byBhbiBlbmZvcmNlbWVudCBvcmRlciBvciBmb3IgYSBmdXJ0aGVyIGVuZm9yY2VtZW50IG9yZGVyIHVuZGVyIHNlY3Rpb24gMTFKIGFuZCBTY2hlZHVsZSBBMSBDaGlsZHJlbiBBY3QgMTk4OS4gIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE1IiwibWVhbmluZyI6IlZhcnkgQ0FPIGNvbnRhY3QiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkvZGlzY2hhcmdlIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyLXdobyB0aGUgY2hpbGQocmVuKSBzcGVuZCB0aW1lIHdpdGguIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDA4IiwibWVhbmluZyI6IlZhcnkvRGlzY2hhcmdlIFNwZWNpZmljIElzc3VlcyBPcmQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IkRBMDAzIiwibWVhbmluZyI6IkhhcmFzc21lbnQgLSBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBpbiBhbiBhY3Rpb24gZm9yIGFuIGluanVuY3Rpb24gdW5kZXIgc2VjdGlvbiAzIFByb3RlY3Rpb24gZnJvbSBIYXJhc3NtZW50IEFjdCAxOTk3LiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiU0UwMDNFIiwibWVhbmluZyI6IlByb2hpYml0ZWQgU3RlcHMgT3JkZXItRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxNUUiLCJtZWFuaW5nIjoiVmFyeSBDQU8gY29udGFjdC1FbmZvcmNlbWVudCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeS9kaXNjaGFyZ2UgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4gRW5mb3JjZW1lbnQgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDciLCJtZWFuaW5nIjoiVmFyeS9EaXNjaGFyZ2UgUHJvaGliIFN0ZXBzIE9yZGVyLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDA3RSIsIm1lYW5pbmciOiJWYXJ5L0Rpc2NoYXJnZSBQcm9oaWIgU3RlcHMgT3JkZXItRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGEgcHJvaGliaXRlZCBzdGVwcyBvcmRlci4gIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDEzIiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAoY29udGFjdCkiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlci13aG8gdGhlIGNoaWxkKHJlbikgc3BlbmQgdGltZSB3aXRoLiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDhBIiwibWVhbmluZyI6IlZhcnkvRGlzY2hhcmdlIFNwZWNpZmljIElzc3VlcyBPcmQtQXBwZWFsLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIHNwZWNpZmljIGlzc3VlIG9yZGVyLiAgQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTEwMUEiLCJtZWFuaW5nIjoiQ29tcGVuc2F0aW9uLUFwcGVhbC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGNvbXBlbnNhdGlvbiBmb3IgZmluYW5jaWFsIGxvc3MgdW5kZXIgc2VjdGlvbiAxMU8gQ2hpbGRyZW4gQWN0IDE5ODkuICBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IkRBMDA2IiwibWVhbmluZyI6IkV4dGVuZCwgdmFyaWF0aW9uIG9yIGRpc2NoYXJnZSAtIFBhcnQgSVYiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIGV4dGVuZCwgdmFyeSBvciBkaXNjaGFyZ2UgYW4gb3JkZXIgdW5kZXIgUGFydCBJViBGYW1pbHkgTGF3IEFjdCAxOTk2IiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJTRTAwM0EiLCJtZWFuaW5nIjoiUHJvaGliaXRlZCBTdGVwcyBPcmRlci1BcHBlYWwtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuICBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDhFIiwibWVhbmluZyI6IlZhcnkvRGlzY2hhcmdlIFNwZWNpZmljIElzc3VlcyBPcmQtRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJEQTAwMiIsIm1lYW5pbmciOiJWYXJpYXRpb24gb3IgZGlzY2hhcmdlIHVuZGVyIHNlY3Rpb24gNSBwcm90ZWN0aW9uIGZyb20gaGFyYXNzbWVudCBhY3QgMTk5NyIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeSBvciBkaXNjaGFyZ2UgYW4gb3JkZXIgdW5kZXIgc2VjdGlvbiA1IFByb3RlY3Rpb24gZnJvbSBIYXJhc3NtZW50IEFjdCAxOTk3IHdoZXJlIHRoZSBwYXJ0aWVzIGFyZSBhc3NvY2lhdGVkIHBlcnNvbnMgKGFzIGRlZmluZWQgYnkgUGFydCBJViBGYW1pbHkgTGF3IEFjdCAxOTk2KS4iLCJmdWxsX3M4X29ubHkiOmZhbHNlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDk2RSIsIm1lYW5pbmciOiJFbmZvcmNlbWVudCBvcmRlcitj4oCZdGFsLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgY29tbWl0dGFsIGFuZCBmb3IgYW4gZW5mb3JjZW1lbnQgb3JkZXIgdW5kZXIgc2VjdGlvbiAxMUogQ2hpbGRyZW4gQWN0IDE5ODkuIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE2QSIsIm1lYW5pbmciOiJWYXJ5IENBTyByZXNpZGVuY2UtQXBwZWFsIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUuIEFwcGVhbHMgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiREEwMDciLCJtZWFuaW5nIjoiRm9yY2VkIG1hcnJpYWdlIHByb3RlY3Rpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn1d
-  recorded_at: Fri, 04 Aug 2023 10:58:04 GMT
+      encoding: UTF-8
+      string: '[{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
+        be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB003","meaning":"Child assessment order","description":"to
+        be represented on an application for a child assessment order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101A","meaning":"Compensation-Appeal-S8","description":"to
+        be represented on an application for compensation for financial loss under
+        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014A","meaning":"CAO residence-Appeal","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013","meaning":"Child arrangements order (contact)","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE096E","meaning":"Enforcement order+c’tal-S8","description":"to
+        be represented on an application for committal and for an enforcement order
+        under section 11J Children Act 1989. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE007A","meaning":"Vary/Discharge Prohib Steps
+        Order-Appeal-S8","description":"to be represented on an application to vary
+        or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB005","meaning":"Emergency protection order -
+        discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB029","meaning":"Child arrangements order -
+        contact","description":"to be represented on an application for a child arrangements
+        order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014","meaning":"Child arrangements order (residence)","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB012","meaning":"Recovery of children order","description":"to
+        be represented on an application for the recovery of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003A","meaning":"Prohibited Steps Order-Appeal-S8","description":"to
+        be represented on an application for a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE014E","meaning":"CAO residence-Enforcement","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB014","meaning":"End contact with a child in
+        care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE013E","meaning":"CAO contact-Enforcement","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB026","meaning":"Emergency protection order","description":"to
+        be represented on an application for an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004","meaning":"Specific Issue Order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE007","meaning":"Vary/Discharge Prohib Steps
+        Order-S8","description":"to be represented on an application to vary or discharge
+        a prohibited steps order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE097A","meaning":"Revocation enforcement-Appeal-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095A","meaning":"Enforcement order-Appeal-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE008","meaning":"Vary/Discharge Specific Issues
+        Ord-S8","description":"to be represented on an application to vary or discharge
+        a specific issue order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA006","meaning":"Extend, variation or discharge
+        - Part IV","description":"to be represented on an application to extend, vary
+        or discharge an order under Part IV Family Law Act 1996","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA020","meaning":"FGM Protection Order","description":"To
+        be represented on an application for a Female Genital Mutilation Protection
+        Order under the Female Genital Mutilation Act.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE016E","meaning":"Vary CAO residence-Enforcement","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE100E","meaning":"Breach enforcement-S8","description":"to
+        be represented on an application, following breach, for an amendment to an
+        enforcement order or for a further enforcement order under section 11J and
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB052","meaning":"Special guardianship order","description":"to
+        be represented on an application for a Special Guardianship Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA002","meaning":"Variation or discharge under
+        section 5 protection from harassment act 1997","description":"to be represented
+        on an application to vary or discharge an order under section 5 Protection
+        from Harassment Act 1997 where the parties are associated persons (as defined
+        by Part IV Family Law Act 1996).","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE097","meaning":"Revocation enforcement-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE016","meaning":"Vary CAO residence","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004E","meaning":"Specific Issue Order-Enforcement-S8","description":"to
+        be represented on an application for a specific issue order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE099E","meaning":"Amd enforcement-breach-S8","description":"to
+        be represented on an application, following breach, for an amendment to an
+        enforcement order or for a further enforcement order under section 11J and
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013A","meaning":"CAO contact-Appeal","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008A","meaning":"Vary/Discharge Specific Issues
+        Ord-Appeal-S8","description":"to be represented on an application to vary
+        or discharge a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095","meaning":"Enforcement order 11J-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB030","meaning":"Child arrangements order - residence","description":"to
+        be represented on an application for a child arrangements order-where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015","meaning":"Vary CAO contact","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA001","meaning":"Inherent jurisdiction high court
+        injunction","description":"to be represented on an application for an injunction,
+        order or declaration under the inherent jurisdiction of the court.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
+        be represented in an action for an injunction under section 3 Protection from
+        Harassment Act 1997.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB006","meaning":"Secure accommodation order","description":"to
+        be represented on an application for a secure accommodation order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE007E","meaning":"Vary/Discharge Prohib Steps
+        Order-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB021","meaning":"Contact order - vary or discharge","description":"to
+        be represented on an application to vary or discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015A","meaning":"Vary CAO contact-Appeal","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008E","meaning":"Vary/Discharge Specific Issues
+        Ord-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB004","meaning":"Emergency protection order -
+        extend","description":"to be represented on an application for or to extend
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB007","meaning":"Contact with a child in care","description":"to
+        be represented on an application for contact with a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE016A","meaning":"Vary CAO residence-Appeal","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004A","meaning":"Specific Issue Order-Appeal-S8","description":"to
+        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB023","meaning":"Prohibited steps order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003E","meaning":"Prohibited Steps Order-Enforcement-S8","description":"to
+        be represented on an application for a prohibited steps order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
+        be represented on an application for a forced marriage protection order","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015E","meaning":"Vary CAO contact-Enforcement","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB024","meaning":"Specific issue order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101E","meaning":"Compensation-Enforcement-S8","description":"to
+        be represented on an application for compensation for financial loss under
+        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"}]'
+  recorded_at: Thu, 27 Jun 2024 14:13:43 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -204,53 +364,215 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:06 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:45 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '12573'
-      Connection:
+      content-length:
+      - '20445'
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"dd6907b8448bc8458adb599124824756"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 3c03992d8b82f418bede5e9b1ecd3308
-      X-Runtime:
-      - '0.015484'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"55bd8ba63ed0f42f809b7767f8f32862"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - d6bf0a9ad693ca9d623ce3313ea618ea
+      x-runtime:
+      - '0.032306'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        W3siY2Ntc19jb2RlIjoiREEwMDEiLCJtZWFuaW5nIjoiSW5oZXJlbnQganVyaXNkaWN0aW9uIGhpZ2ggY291cnQgaW5qdW5jdGlvbiIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGFuIGluanVuY3Rpb24sIG9yZGVyIG9yIGRlY2xhcmF0aW9uIHVuZGVyIHRoZSBpbmhlcmVudCBqdXJpc2RpY3Rpb24gb2YgdGhlIGNvdXJ0LiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiU0UwOTUiLCJtZWFuaW5nIjoiRW5mb3JjZW1lbnQgb3JkZXIgMTFKLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gZW5mb3JjZW1lbnQgb3JkZXIgdW5kZXIgc2VjdGlvbiAxMUogQ2hpbGRyZW4gQWN0IDE5ODkuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxNUEiLCJtZWFuaW5nIjoiVmFyeSBDQU8gY29udGFjdC1BcHBlYWwiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkvZGlzY2hhcmdlIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyLXdobyB0aGUgY2hpbGQocmVuKSBzcGVuZCB0aW1lIHdpdGguIEFwcGVhbHMgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiREEwMDQiLCJtZWFuaW5nIjoiTm9uLW1vbGVzdGF0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBub24tbW9sZXN0YXRpb24gb3JkZXIuIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJTRTAxNEUiLCJtZWFuaW5nIjoiQ0FPIHJlc2lkZW5jZS1FbmZvcmNlbWVudCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZS4gRW5mb3JjZW1lbnQgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDRBIiwibWVhbmluZyI6IlNwZWNpZmljIElzc3VlIE9yZGVyLUFwcGVhbC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuICBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiU0UwMTRBIiwibWVhbmluZyI6IkNBTyByZXNpZGVuY2UtQXBwZWFsIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIg4oCTd2hlcmUgdGhlIGNoaWxkKHJlbikgd2lsbCBsaXZlLiBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDEzRSIsIm1lYW5pbmciOiJDQU8gY29udGFjdC1FbmZvcmNlbWVudCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyLXdobyB0aGUgY2hpbGQocmVuKSBzcGVuZCB0aW1lIHdpdGguIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDk1QSIsIm1lYW5pbmciOiJFbmZvcmNlbWVudCBvcmRlci1BcHBlYWwtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBlbmZvcmNlbWVudCBvcmRlciB1bmRlciBzZWN0aW9uIDExSiBDaGlsZHJlbiBBY3QgMTk4OS4gIEFwcGVhbHMgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwOTdBIiwibWVhbmluZyI6IlJldm9jYXRpb24gZW5mb3JjZW1lbnQtQXBwZWFsLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgdGhlIHJldm9jYXRpb24gb2YgYW4gZW5mb3JjZW1lbnQgb3JkZXIgdW5kZXIgc2VjdGlvbiAxMUogYW5kIFNjaGVkdWxlIEExIENoaWxkcmVuIEFjdCAxOTg5LiAgQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTA5OUUiLCJtZWFuaW5nIjoiQW1kIGVuZm9yY2VtZW50LWJyZWFjaC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24sIGZvbGxvd2luZyBicmVhY2gsIGZvciBhbiBhbWVuZG1lbnQgdG8gYW4gZW5mb3JjZW1lbnQgb3JkZXIgb3IgZm9yIGEgZnVydGhlciBlbmZvcmNlbWVudCBvcmRlciB1bmRlciBzZWN0aW9uIDExSiBhbmQgU2NoZWR1bGUgQTEgQ2hpbGRyZW4gQWN0IDE5ODkuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNEUiLCJtZWFuaW5nIjoiU3BlY2lmaWMgSXNzdWUgT3JkZXItRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHNwZWNpZmljIGlzc3VlIG9yZGVyLiAgRW5mb3JjZW1lbnQgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiREEwMjAiLCJtZWFuaW5nIjoiRkdNIFByb3RlY3Rpb24gT3JkZXIiLCJkZXNjcmlwdGlvbiI6IlRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIEZlbWFsZSBHZW5pdGFsIE11dGlsYXRpb24gUHJvdGVjdGlvbiBPcmRlciB1bmRlciB0aGUgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBBY3QuIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJTRTEwMUUiLCJtZWFuaW5nIjoiQ29tcGVuc2F0aW9uLUVuZm9yY2VtZW50LVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgY29tcGVuc2F0aW9uIGZvciBmaW5hbmNpYWwgbG9zcyB1bmRlciBzZWN0aW9uIDExTyBDaGlsZHJlbiBBY3QgMTk4OS4gIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE2IiwibWVhbmluZyI6IlZhcnkgQ0FPIHJlc2lkZW5jZSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeSBvciBkaXNjaGFyZ2UgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIg4oCTd2hlcmUgdGhlIGNoaWxkKHJlbikgd2lsbCBsaXZlLiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxNkUiLCJtZWFuaW5nIjoiVmFyeSBDQU8gcmVzaWRlbmNlLUVuZm9yY2VtZW50IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUuIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDA0IiwibWVhbmluZyI6IlNwZWNpZmljIElzc3VlIE9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBzcGVjaWZpYyBpc3N1ZSBvcmRlci4iLCJmdWxsX3M4X29ubHkiOmZhbHNlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDk3IiwibWVhbmluZyI6IlJldm9jYXRpb24gZW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciB0aGUgcmV2b2NhdGlvbiBvZiBhbiBlbmZvcmNlbWVudCBvcmRlciB1bmRlciBzZWN0aW9uIDExSiBhbmQgU2NoZWR1bGUgQTEgQ2hpbGRyZW4gQWN0IDE5ODkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxM0EiLCJtZWFuaW5nIjoiQ0FPIGNvbnRhY3QtQXBwZWFsIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4gQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwN0EiLCJtZWFuaW5nIjoiVmFyeS9EaXNjaGFyZ2UgUHJvaGliIFN0ZXBzIE9yZGVyLUFwcGVhbC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeSBvciBkaXNjaGFyZ2UgYSBwcm9oaWJpdGVkIHN0ZXBzIG9yZGVyLiAgQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTEwMEUiLCJtZWFuaW5nIjoiQnJlYWNoIGVuZm9yY2VtZW50LVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiwgZm9sbG93aW5nIGJyZWFjaCwgZm9yIGFuIGFtZW5kbWVudCB0byBhbiBlbmZvcmNlbWVudCBvcmRlciBvciBmb3IgYSBmdXJ0aGVyIGVuZm9yY2VtZW50IG9yZGVyIHVuZGVyIHNlY3Rpb24gMTFKIGFuZCBTY2hlZHVsZSBBMSBDaGlsZHJlbiBBY3QgMTk4OS4gIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE1IiwibWVhbmluZyI6IlZhcnkgQ0FPIGNvbnRhY3QiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkvZGlzY2hhcmdlIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyLXdobyB0aGUgY2hpbGQocmVuKSBzcGVuZCB0aW1lIHdpdGguIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDA4IiwibWVhbmluZyI6IlZhcnkvRGlzY2hhcmdlIFNwZWNpZmljIElzc3VlcyBPcmQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IkRBMDAzIiwibWVhbmluZyI6IkhhcmFzc21lbnQgLSBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBpbiBhbiBhY3Rpb24gZm9yIGFuIGluanVuY3Rpb24gdW5kZXIgc2VjdGlvbiAzIFByb3RlY3Rpb24gZnJvbSBIYXJhc3NtZW50IEFjdCAxOTk3LiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiU0UwMDNFIiwibWVhbmluZyI6IlByb2hpYml0ZWQgU3RlcHMgT3JkZXItRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxNUUiLCJtZWFuaW5nIjoiVmFyeSBDQU8gY29udGFjdC1FbmZvcmNlbWVudCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeS9kaXNjaGFyZ2UgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4gRW5mb3JjZW1lbnQgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDciLCJtZWFuaW5nIjoiVmFyeS9EaXNjaGFyZ2UgUHJvaGliIFN0ZXBzIE9yZGVyLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDA3RSIsIm1lYW5pbmciOiJWYXJ5L0Rpc2NoYXJnZSBQcm9oaWIgU3RlcHMgT3JkZXItRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGEgcHJvaGliaXRlZCBzdGVwcyBvcmRlci4gIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDEzIiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAoY29udGFjdCkiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlci13aG8gdGhlIGNoaWxkKHJlbikgc3BlbmQgdGltZSB3aXRoLiIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDhBIiwibWVhbmluZyI6IlZhcnkvRGlzY2hhcmdlIFNwZWNpZmljIElzc3VlcyBPcmQtQXBwZWFsLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIHNwZWNpZmljIGlzc3VlIG9yZGVyLiAgQXBwZWFscyBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTEwMUEiLCJtZWFuaW5nIjoiQ29tcGVuc2F0aW9uLUFwcGVhbC1TOCIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGNvbXBlbnNhdGlvbiBmb3IgZmluYW5jaWFsIGxvc3MgdW5kZXIgc2VjdGlvbiAxMU8gQ2hpbGRyZW4gQWN0IDE5ODkuICBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IkRBMDA2IiwibWVhbmluZyI6IkV4dGVuZCwgdmFyaWF0aW9uIG9yIGRpc2NoYXJnZSAtIFBhcnQgSVYiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIGV4dGVuZCwgdmFyeSBvciBkaXNjaGFyZ2UgYW4gb3JkZXIgdW5kZXIgUGFydCBJViBGYW1pbHkgTGF3IEFjdCAxOTk2IiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJTRTAwM0EiLCJtZWFuaW5nIjoiUHJvaGliaXRlZCBTdGVwcyBPcmRlci1BcHBlYWwtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuICBBcHBlYWxzIG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImZ1bGxfczhfb25seSI6ZmFsc2UsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiU0UwMDhFIiwibWVhbmluZyI6IlZhcnkvRGlzY2hhcmdlIFNwZWNpZmljIElzc3VlcyBPcmQtRW5mb3JjZW1lbnQtUzgiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuICBFbmZvcmNlbWVudCBvbmx5LiIsImZ1bGxfczhfb25seSI6dHJ1ZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJEQTAwMiIsIm1lYW5pbmciOiJWYXJpYXRpb24gb3IgZGlzY2hhcmdlIHVuZGVyIHNlY3Rpb24gNSBwcm90ZWN0aW9uIGZyb20gaGFyYXNzbWVudCBhY3QgMTk5NyIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gdmFyeSBvciBkaXNjaGFyZ2UgYW4gb3JkZXIgdW5kZXIgc2VjdGlvbiA1IFByb3RlY3Rpb24gZnJvbSBIYXJhc3NtZW50IEFjdCAxOTk3IHdoZXJlIHRoZSBwYXJ0aWVzIGFyZSBhc3NvY2lhdGVkIHBlcnNvbnMgKGFzIGRlZmluZWQgYnkgUGFydCBJViBGYW1pbHkgTGF3IEFjdCAxOTk2KS4iLCJmdWxsX3M4X29ubHkiOmZhbHNlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDk2RSIsIm1lYW5pbmciOiJFbmZvcmNlbWVudCBvcmRlcitj4oCZdGFsLVM4IiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgY29tbWl0dGFsIGFuZCBmb3IgYW4gZW5mb3JjZW1lbnQgb3JkZXIgdW5kZXIgc2VjdGlvbiAxMUogQ2hpbGRyZW4gQWN0IDE5ODkuIEVuZm9yY2VtZW50IG9ubHkuIiwiZnVsbF9zOF9vbmx5Ijp0cnVlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE2QSIsIm1lYW5pbmciOiJWYXJ5IENBTyByZXNpZGVuY2UtQXBwZWFsIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiB0byB2YXJ5IG9yIGRpc2NoYXJnZSBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUuIEFwcGVhbHMgb25seS4iLCJmdWxsX3M4X29ubHkiOnRydWUsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9LHsiY2Ntc19jb2RlIjoiREEwMDciLCJtZWFuaW5nIjoiRm9yY2VkIG1hcnJpYWdlIHByb3RlY3Rpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZnVsbF9zOF9vbmx5IjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn1d
-  recorded_at: Fri, 04 Aug 2023 10:58:06 GMT
+      encoding: UTF-8
+      string: '[{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
+        be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB003","meaning":"Child assessment order","description":"to
+        be represented on an application for a child assessment order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101A","meaning":"Compensation-Appeal-S8","description":"to
+        be represented on an application for compensation for financial loss under
+        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014A","meaning":"CAO residence-Appeal","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013","meaning":"Child arrangements order (contact)","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE096E","meaning":"Enforcement order+c’tal-S8","description":"to
+        be represented on an application for committal and for an enforcement order
+        under section 11J Children Act 1989. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE007A","meaning":"Vary/Discharge Prohib Steps
+        Order-Appeal-S8","description":"to be represented on an application to vary
+        or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB005","meaning":"Emergency protection order -
+        discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB029","meaning":"Child arrangements order -
+        contact","description":"to be represented on an application for a child arrangements
+        order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE014","meaning":"Child arrangements order (residence)","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB012","meaning":"Recovery of children order","description":"to
+        be represented on an application for the recovery of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003A","meaning":"Prohibited Steps Order-Appeal-S8","description":"to
+        be represented on an application for a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE014E","meaning":"CAO residence-Enforcement","description":"to
+        be represented on an application for a child arrangements order –where the
+        child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB014","meaning":"End contact with a child in
+        care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE013E","meaning":"CAO contact-Enforcement","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB026","meaning":"Emergency protection order","description":"to
+        be represented on an application for an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004","meaning":"Specific Issue Order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE007","meaning":"Vary/Discharge Prohib Steps
+        Order-S8","description":"to be represented on an application to vary or discharge
+        a prohibited steps order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE097A","meaning":"Revocation enforcement-Appeal-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095A","meaning":"Enforcement order-Appeal-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE008","meaning":"Vary/Discharge Specific Issues
+        Ord-S8","description":"to be represented on an application to vary or discharge
+        a specific issue order.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA006","meaning":"Extend, variation or discharge
+        - Part IV","description":"to be represented on an application to extend, vary
+        or discharge an order under Part IV Family Law Act 1996","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA020","meaning":"FGM Protection Order","description":"To
+        be represented on an application for a Female Genital Mutilation Protection
+        Order under the Female Genital Mutilation Act.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE016E","meaning":"Vary CAO residence-Enforcement","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE100E","meaning":"Breach enforcement-S8","description":"to
+        be represented on an application, following breach, for an amendment to an
+        enforcement order or for a further enforcement order under section 11J and
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB052","meaning":"Special guardianship order","description":"to
+        be represented on an application for a Special Guardianship Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"DA002","meaning":"Variation or discharge under
+        section 5 protection from harassment act 1997","description":"to be represented
+        on an application to vary or discharge an order under section 5 Protection
+        from Harassment Act 1997 where the parties are associated persons (as defined
+        by Part IV Family Law Act 1996).","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"SE097","meaning":"Revocation enforcement-S8","description":"to
+        be represented on an application for the revocation of an enforcement order
+        under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE016","meaning":"Vary CAO residence","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004E","meaning":"Specific Issue Order-Enforcement-S8","description":"to
+        be represented on an application for a specific issue order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE099E","meaning":"Amd enforcement-breach-S8","description":"to
+        be represented on an application, following breach, for an amendment to an
+        enforcement order or for a further enforcement order under section 11J and
+        Schedule A1 Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE013A","meaning":"CAO contact-Appeal","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008A","meaning":"Vary/Discharge Specific Issues
+        Ord-Appeal-S8","description":"to be represented on an application to vary
+        or discharge a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE095","meaning":"Enforcement order 11J-S8","description":"to
+        be represented on an application for an enforcement order under section 11J
+        Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB030","meaning":"Child arrangements order - residence","description":"to
+        be represented on an application for a child arrangements order-where the
+        child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015","meaning":"Vary CAO contact","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA001","meaning":"Inherent jurisdiction high court
+        injunction","description":"to be represented on an application for an injunction,
+        order or declaration under the inherent jurisdiction of the court.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
+        be represented in an action for an injunction under section 3 Protection from
+        Harassment Act 1997.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB006","meaning":"Secure accommodation order","description":"to
+        be represented on an application for a secure accommodation order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE007E","meaning":"Vary/Discharge Prohib Steps
+        Order-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB021","meaning":"Contact order - vary or discharge","description":"to
+        be represented on an application to vary or discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015A","meaning":"Vary CAO contact-Appeal","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE008E","meaning":"Vary/Discharge Specific Issues
+        Ord-Enforcement-S8","description":"to be represented on an application to
+        vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB004","meaning":"Emergency protection order -
+        extend","description":"to be represented on an application for or to extend
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"PB007","meaning":"Contact with a child in care","description":"to
+        be represented on an application for contact with a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE016A","meaning":"Vary CAO residence-Appeal","description":"to
+        be represented on an application to vary or discharge a child arrangements
+        order –where the child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"SE004A","meaning":"Specific Issue Order-Appeal-S8","description":"to
+        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB023","meaning":"Prohibited steps order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE003E","meaning":"Prohibited Steps Order-Enforcement-S8","description":"to
+        be represented on an application for a prohibited steps order.  Enforcement
+        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
+        be represented on an application for a forced marriage protection order","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"MINJN","ccms_matter":"Domestic
+        abuse"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE015E","meaning":"Vary CAO contact-Enforcement","description":"to
+        be represented on an application to vary/discharge a child arrangements order-who
+        the child(ren) spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"},{"ccms_code":"PB024","meaning":"Specific issue order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"ccms_category_law":"Family","ccms_matter_code":"KPBLW","ccms_matter":"Special
+        Children Act"},{"ccms_code":"SE101E","meaning":"Compensation-Enforcement-S8","description":"to
+        be represented on an application for compensation for financial loss under
+        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter_code":"KSEC8","ccms_matter":"Children
+        - section 8"}]'
+  recorded_at: Thu, 27 Jun 2024 14:13:45 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
@@ -261,52 +583,46 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:06 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:46 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '1310'
-      Connection:
+      content-length:
+      - '1347'
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"fbabf0efd65b63f03290a3f99682b0d4"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 629eae49a726e37406a6a289fc5646e3
-      X-Runtime:
-      - '0.009980'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"181c9e15f2ebab4b2da814618a13aca4"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - ba33133cd2b17c604d680fcbdc13a4ab
+      x-runtime:
+      - '0.012938'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
-        be represented on an application for a non-molestation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter":"Domestic
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"Domestic
         abuse","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
         FLA-to final hearing","description":"As to proceedings under Part IV Family
         Law Act 1996 limited to all steps up to and including obtaining and serving
@@ -318,10 +634,10 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 04 Aug 2023 10:58:06 GMT
+  recorded_at: Thu, 27 Jun 2024 14:13:46 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA004
     body:
       encoding: US-ASCII
       string: ''
@@ -329,57 +645,51 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:07 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:47 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '277'
-      Connection:
+      content-length:
+      - '320'
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"8bf337339345d42d16a9e6062fb65ccf"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 477b00fd48a66ddf2270380521b56a21
-      X-Runtime:
-      - '0.004254'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - c4b4aca7ebdb56419eab9b6e598476bf
+      x-runtime:
+      - '0.005751'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]'
-  recorded_at: Fri, 04 Aug 2023 10:58:07 GMT
+        party"}]}'
+  recorded_at: Thu, 27 Jun 2024 14:13:47 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA004
     body:
       encoding: US-ASCII
       string: ''
@@ -387,54 +697,48 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:08 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:48 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '277'
-      Connection:
+      content-length:
+      - '320'
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"8bf337339345d42d16a9e6062fb65ccf"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 6238f219c82f82986748c042e7cf9dce
-      X-Runtime:
-      - '0.003265'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - a7ae380be5eb9d6c1e881ce3c7c5f99d
+      x-runtime:
+      - '0.006396'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]'
-  recorded_at: Fri, 04 Aug 2023 10:58:08 GMT
+        party"}]}'
+  recorded_at: Thu, 27 Jun 2024 14:13:48 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -445,47 +749,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:09 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:49 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '708'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"05375658d64485716c2575dd3e911e59"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 2e36048b41f6a87d15680af61708d2ba
-      X-Runtime:
-      - '0.012003'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 8577e284b66ab84845ac283f07982c16
+      x-runtime:
+      - '0.007129'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -497,7 +795,7 @@ http_interactions:
         of arrest to representation on the consideration of the breach by the court
         (but excluding applying for a warrant of arrest, if not attached, and representation
         in contempt proceedings).","additional_params":[]}}'
-  recorded_at: Fri, 04 Aug 2023 10:58:09 GMT
+  recorded_at: Thu, 27 Jun 2024 14:13:49 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -508,47 +806,41 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:10 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:49 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '708'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"05375658d64485716c2575dd3e911e59"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - d0aa32b9be27f735167133ca1e4a5ad8
-      X-Runtime:
-      - '0.008140'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - b9466309c9660584ceb8250bc6713436
+      x-runtime:
+      - '0.011643'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
@@ -560,61 +852,55 @@ http_interactions:
         of arrest to representation on the consideration of the breach by the court
         (but excluding applying for a warrant of arrest, if not attached, and representation
         in contempt proceedings).","additional_params":[]}}'
-  recorded_at: Fri, 04 Aug 2023 10:58:10 GMT
+  recorded_at: Thu, 27 Jun 2024 14:13:49 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/civil_merits_questions
     body:
       encoding: UTF-8
-      string: '{"request_id":"c04ca02b-6e1e-47b8-812c-576f00b7f8a8","proceedings":[{"ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}]}'
+      string: '{"request_id":"d95855c3-2f19-46ac-b639-2eca1869540a","proceedings":[{"ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}]}'
     headers:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Fri, 04 Aug 2023 10:58:13 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 14:13:52 GMT
+      content-type:
       - application/json; charset=utf-8
-      Content-Length:
+      content-length:
       - '295'
-      Connection:
+      connection:
       - keep-alive
-      X-Frame-Options:
+      x-frame-options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
+      x-permitted-cross-domain-policies:
       - none
-      Referrer-Policy:
+      referrer-policy:
       - strict-origin-when-cross-origin
-      Etag:
-      - W/"f8d73ca6a67c15acd9010f5add6afe66"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - f7b674e159816afe9b606c65f90fcbf4
-      X-Runtime:
-      - '0.049953'
-      Vary:
+      vary:
       - Accept, Origin
-      Strict-Transport-Security:
+      etag:
+      - W/"a18f42735efc62167ffc44004f2c6a06"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 6fd0662de3b22b6a8cafbe635d74a8a2
+      x-runtime:
+      - '0.098881'
+      strict-transport-security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"c04ca02b-6e1e-47b8-812c-576f00b7f8a8","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_name":[],"opponent_mental_capacity":[],"domestic_abuse_summary":[],"statement_of_case":[]}},"proceedings":[{"ccms_code":"DA004","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Fri, 04 Aug 2023 10:58:13 GMT
+      string: '{"request_id":"d95855c3-2f19-46ac-b639-2eca1869540a","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_name":[],"opponent_mental_capacity":[],"domestic_abuse_summary":[],"statement_of_case":[]}},"proceedings":[{"ccms_code":"DA004","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Thu, 27 Jun 2024 14:13:52 GMT
 recorded_with: VCR 6.2.0

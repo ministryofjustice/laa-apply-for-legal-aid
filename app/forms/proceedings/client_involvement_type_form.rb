@@ -10,7 +10,7 @@ module Proceedings
     validates :client_involvement_type_ccms_code, presence: true, unless: :draft?
 
     def client_involvement_types
-      @client_involvement_types ||= LegalFramework::ClientInvolvementTypes::All.call
+      @client_involvement_types ||= LegalFramework::ClientInvolvementTypes::Proceeding.call(model.ccms_code)
     end
 
   private

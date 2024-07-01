@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA001
     body:
       encoding: US-ASCII
       string: ''
@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v2.9.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,21 +21,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 10:18:46 GMT
+      - Thu, 27 Jun 2024 13:36:36 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '320'
       Connection:
       - keep-alive
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
-      - 1; mode=block
+      - '0'
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Permitted-Cross-Domain-Policies:
       - none
       Referrer-Policy:
@@ -43,19 +41,19 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"8bf337339345d42d16a9e6062fb65ccf"
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - aaffa3d15f7f2f3d508006223a5cf14e
+      - f7b37f2ab543c2e122666308ed769ee3
       X-Runtime:
-      - '0.050659'
+      - '0.005990'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]'
-  recorded_at: Thu, 04 Aug 2022 10:18:46 GMT
-recorded_with: VCR 6.1.0
+        party"}]}'
+  recorded_at: Thu, 27 Jun 2024 13:36:36 GMT
+recorded_with: VCR 6.2.0

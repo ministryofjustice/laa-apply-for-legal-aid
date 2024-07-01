@@ -8,42 +8,36 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.10.2
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
+      - Faraday v2.9.2
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Tue, 17 Jan 2023 09:22:18 GMT
-      Content-Type:
+      date:
+      - Thu, 27 Jun 2024 13:45:10 GMT
+      content-type:
       - application/json;charset=UTF-8
-      Transfer-Encoding:
+      transfer-encoding:
       - chunked
-      Connection:
+      connection:
       - keep-alive
-      Request-Context:
-      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
-      Vary:
+      vary:
       - Origin,Accept-Encoding,key
-      Omse-Category:
+      omse-category:
       - premium
-      Omse-Transaction-Count:
+      omse-transaction-count:
       - '60'
-      Omse-Premium-Count:
+      omse-premium-count:
       - '0'
-      Strict-Transport-Security:
+      strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
-      encoding: ASCII-8BIT
+      encoding: UTF-8
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX\",\r\n
         \   \"query\" : \"postcode=XX11XX\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 0,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"98\",\r\n    \"lastupdate\"
-        : \"2023-01-16\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  }\r\n}"
-  recorded_at: Tue, 17 Jan 2023 09:22:18 GMT
-recorded_with: VCR 6.1.0
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"111\",\r\n    \"lastupdate\"
+        : \"2024-06-26\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  }\r\n}"
+  recorded_at: Thu, 27 Jun 2024 13:45:10 GMT
+recorded_with: VCR 6.2.0
