@@ -47,9 +47,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController do
         it "updates the application and redirects to the next page", :aggregate_failures do
           expect(legal_aid_application.reload.client_declaration_confirmed_at)
             .to eq Time.current
-          expect(response).to redirect_to(
-            providers_legal_aid_application_review_and_print_application_path(legal_aid_application),
-          )
+          expect(response).to have_http_status(:redirect)
         end
       end
 

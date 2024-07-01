@@ -51,10 +51,7 @@ module Flow
         merits_task_lists: Steps::ProviderMerits::MeritsTaskListsStep,
         uploaded_evidence_collections: Steps::ProviderMerits::UploadedEvidenceCollectionsStep,
         check_merits_answers: Steps::ProviderMerits::CheckMeritsAnswersStep,
-        confirm_client_declarations: {
-          path: ->(application) { urls.providers_legal_aid_application_confirm_client_declaration_path(application) },
-          forward: :review_and_print_applications,
-        },
+        confirm_client_declarations: Steps::ProviderMerits::ConfirmClientDeclarationsStep,
         review_and_print_applications: {
           path: ->(application) { urls.providers_legal_aid_application_review_and_print_application_path(application) },
           forward: :end_of_applications,
