@@ -54,10 +54,7 @@ module Flow
         confirm_client_declarations: Steps::ProviderMerits::ConfirmClientDeclarationsStep,
         review_and_print_applications: Steps::ProviderMerits::ReviewAndPrintApplicationsStep,
         end_of_applications: Steps::ProviderMerits::EndOfApplicationsStep,
-        submitted_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_submitted_application_path(application) },
-          forward: :providers_home,
-        },
+        submitted_applications: Steps::ProviderMerits::SubmittedApplicationsStep,
         merits_reports: {
           path: ->(application) { urls.providers_legal_aid_application_merits_report_path(application) },
         },
