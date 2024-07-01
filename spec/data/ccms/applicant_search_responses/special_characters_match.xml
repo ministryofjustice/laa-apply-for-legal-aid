@@ -1,0 +1,48 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <wsa:MessageID>urn:663B18706B5211E99F6F058281F6012C</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+    </wsa:ReplyTo>
+  </env:Header>
+  <env:Body>
+    <ClientInqRS xmlns:msg="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" xmlns="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <header:HeaderRS xmlns:header="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <header:TransactionID>202210201539485477193605161</header:TransactionID>
+        <header:RequestDetails>
+          <header:TransactionRequestID>202210201539485477193605161</header:TransactionRequestID>
+          <header:Language>ENG</header:Language>
+          <header:UserLoginID>my_login</header:UserLoginID>
+          <header:UserRole>my_role</header:UserRole>
+        </header:RequestDetails>
+        <header:Status>
+          <header:Status>Success</header:Status>
+          <header:StatusFreeText>End of Get Party details process.</header:StatusFreeText>
+        </header:Status>
+      </header:HeaderRS>
+      <msg:RecordCount>
+        <common:MaxRecordsToFetch xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">200</common:MaxRecordsToFetch>
+        <common:RecordsFetched xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">1</common:RecordsFetched>
+        <common:RetriveDataOnMaxCount xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">false</common:RetriveDataOnMaxCount>
+      </msg:RecordCount>
+      <msg:ClientList>
+        <msg:Client>
+          <client:Name  xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+            <common:Title xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">MRS.</common:Title>
+            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">O''Hare</common:Surname>
+            <common:FirstName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">lenovo</common:FirstName>
+            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">O''Hare</common:SurnameAtBirth>
+            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">lenovo O''Hare</common:FullName>
+          </client:Name>
+          <client:DateOfBirth xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">1972-01-01</client:DateOfBirth>
+          <client:Gender xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">FEMALE</client:Gender>
+          <common:PostalCode xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">AB1 2CD</common:PostalCode>
+          <client:ClientReferenceNumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">4390016</client:ClientReferenceNumber>
+          <client:HomeOfficeReference xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">XXXX</client:HomeOfficeReference>
+          <client:NINumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">QQ123456A</client:NINumber>
+          <client:MatchLevelInd xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">Number Matched</client:MatchLevelInd>
+        </msg:Client>
+      </msg:ClientList>
+    </ClientInqRS>
+  </env:Body>
+</env:Envelope>
