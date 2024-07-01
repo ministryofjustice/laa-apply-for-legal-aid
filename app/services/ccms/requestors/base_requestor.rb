@@ -18,6 +18,11 @@ module CCMS
         "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
       }.freeze
 
+      CHARACTERS = {
+        "’" => "'",
+        "‘" => "'",
+      }.freeze
+
       attr_reader :namespaces
 
       def initialize
@@ -36,7 +41,7 @@ module CCMS
         result = ""
         formatter = REXML::Formatters::Pretty.new
         formatter.compact = true
-        formatter.write(REXML::Document.new(replace_special_characters(request_xml)), result)
+        formatter.write(REXML::Document.new(request_xml.gsub(/[’‘]/, CHARACTERS)), result)
         result
       end
 
@@ -79,15 +84,6 @@ module CCMS
 
       def config
         Rails.configuration.x.ccms_soa
-      end
-
-      def replace_special_characters(xml)
-        characters = {
-          "’" => "'",
-          "‘" => "'",
-        }.freeze
-
-        xml.gsub(/[’‘]/, characters)
       end
     end
   end
