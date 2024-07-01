@@ -69,8 +69,7 @@ module CCMS
       # :nocov:
 
       def request_xml
-        xml_payload = soap_envelope(namespaces).to_xml
-        @request_xml ||= ccms_character_replacement(xml_payload)
+        @request_xml ||= soap_envelope(namespaces).to_xml
       end
 
       def soap_body(xml)
