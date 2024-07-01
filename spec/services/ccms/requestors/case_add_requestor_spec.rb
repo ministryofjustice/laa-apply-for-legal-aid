@@ -121,6 +121,7 @@ module CCMS
         end
 
         context "when the case data contains special characters" do
+          let(:request_xml) { requestor.__send__(:formatted_xml) }
           let(:expected_request_xml) { ccms_data_from_file("case_add_request_contains_special_characters.xml") }
           let(:last_name) { "O’‘Hare" }
 

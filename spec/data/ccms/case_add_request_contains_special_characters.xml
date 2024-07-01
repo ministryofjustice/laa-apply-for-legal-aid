@@ -108,7 +108,10 @@
                 <casebio:LeadProceedingIndicator>true</casebio:LeadProceedingIndicator>
                 <casebio:ProceedingDetails>
                   <casebio:ProceedingType>DA001</casebio:ProceedingType>
-                  <casebio:ProceedingDescription>to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.</casebio:ProceedingDescription>
+                  <casebio:ProceedingDescription>
+                    to be represented on an application for an injunction, order
+                    or declaration under the inherent jurisdiction of the court.
+                  </casebio:ProceedingDescription>
                   <casebio:MatterType>MINJN</casebio:MatterType>
                   <casebio:LevelOfService>3</casebio:LevelOfService>
                   <casebio:Stage>8</casebio:Stage>
@@ -116,7 +119,11 @@
                   <casebio:ScopeLimitations>
                     <casebio:ScopeLimitation>
                       <casebio:ScopeLimitation>FM062</casebio:ScopeLimitation>
-                      <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.</casebio:ScopeLimitationWording>
+                      <casebio:ScopeLimitationWording>
+                        Limited to all steps up to and including final hearing
+                        and any action necessary to implement (but not enforce)
+                        the order.
+                      </casebio:ScopeLimitationWording>
                       <casebio:DelegatedFunctionsApply>false</casebio:DelegatedFunctionsApply>
                     </casebio:ScopeLimitation>
                   </casebio:ScopeLimitations>

@@ -36,7 +36,7 @@ module CCMS
         result = ""
         formatter = REXML::Formatters::Pretty.new
         formatter.compact = true
-        formatter.write(REXML::Document.new(request_xml), result)
+        formatter.write(REXML::Document.new(replace_special_characters(request_xml)), result)
         result
       end
 
@@ -81,16 +81,14 @@ module CCMS
         Rails.configuration.x.ccms_soa
       end
 
-      # :nocov:
-      def ccms_character_replacement(payload)
+      def replace_special_characters(xml)
         characters = {
           "’" => "'",
           "‘" => "'",
         }.freeze
 
-        payload.gsub(/[’‘]/, characters)
+        xml.gsub(/[’‘]/, characters)
       end
-      # :nocov:
     end
   end
 end
