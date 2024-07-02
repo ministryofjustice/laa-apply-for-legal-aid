@@ -18,9 +18,9 @@ module CCMS
         "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
       }.freeze
 
-      CHARACTERS = {
-        "’" => "'",
-        "‘" => "'",
+      SPECIAL_CHARACTER_REPLACEMENTS = {
+        "‘" => "'", # opening curly quote
+        "’" => "'", # closing curly quote
       }.freeze
 
       attr_reader :namespaces
@@ -41,7 +41,7 @@ module CCMS
         result = ""
         formatter = REXML::Formatters::Pretty.new
         formatter.compact = true
-        formatter.write(REXML::Document.new(request_xml.gsub(/[’‘]/, CHARACTERS)), result)
+        formatter.write(REXML::Document.new(request_xml.gsub(/[’‘]/, SPECIAL_CHARACTER_REPLACEMENTS)), result)
         result
       end
 

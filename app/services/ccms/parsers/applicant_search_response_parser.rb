@@ -67,9 +67,9 @@ module CCMS
 
       def parse_client(client_struct)
         client_struct.match = [
-          @applicant.first_name.gsub(/[’‘]/, CCMS::Requestors::BaseRequestor::CHARACTERS).first.casecmp?(client_struct.first_initial),
-          @applicant.last_name.gsub(/[’‘]/, CCMS::Requestors::BaseRequestor::CHARACTERS).casecmp?(client_struct.last_name),
-          @applicant.surname_at_birth.gsub(/[’‘]/, CCMS::Requestors::BaseRequestor::CHARACTERS).casecmp?(client_struct.last_name_at_birth),
+          @applicant.first_name.gsub(/[’‘]/, CCMS::Requestors::BaseRequestor::SPECIAL_CHARACTER_REPLACEMENTS).first.casecmp?(client_struct.first_initial),
+          @applicant.last_name.gsub(/[’‘]/, CCMS::Requestors::BaseRequestor::SPECIAL_CHARACTER_REPLACEMENTS).casecmp?(client_struct.last_name),
+          @applicant.surname_at_birth.gsub(/[’‘]/, CCMS::Requestors::BaseRequestor::SPECIAL_CHARACTER_REPLACEMENTS).casecmp?(client_struct.last_name_at_birth),
           @applicant.date_of_birth.strftime("%Y-%m-%d").eql?(client_struct.date_of_birth),
           (@applicant.national_insurance_number || "").casecmp?(client_struct.national_insurance_number),
         ].all?
