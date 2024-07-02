@@ -18,6 +18,11 @@ module CCMS
         "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
       }.freeze
 
+      CHARACTERS = {
+        "’" => "'",
+        "‘" => "'",
+      }.freeze
+
       attr_reader :namespaces
 
       def initialize
@@ -36,7 +41,7 @@ module CCMS
         result = ""
         formatter = REXML::Formatters::Pretty.new
         formatter.compact = true
-        formatter.write(REXML::Document.new(request_xml), result)
+        formatter.write(REXML::Document.new(request_xml.gsub(/[’‘]/, CHARACTERS)), result)
         result
       end
 
