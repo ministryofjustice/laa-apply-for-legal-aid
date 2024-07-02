@@ -45,6 +45,8 @@ RSpec.describe ApplicationDigest do
         expect(digest.days_to_submission).to eq 4
         expect(digest.matter_types).to eq "Domestic Abuse;Section 8 orders"
         expect(digest.proceedings).to eq "DA001;SE013;SE014"
+        expect(digest.applicant_age).to eq laa.applicant.age
+        expect(digest.non_means_tested).to be false
       end
 
       describe "applicant employment status" do
@@ -151,6 +153,26 @@ RSpec.describe ApplicationDigest do
             expect(digest.referred_to_caseworker).to be true
           end
         end
+      end
+
+      describe "partner fields" do
+        let(:laa) { create(:legal_aid_application, applicant:) }
+
+        context "when the applicant has a partner with contrary interest" do
+          let(:applicant) do
+            create(:applicant,
+                   :with_partner,
+                   partner_has_contrary_interest: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+            expect(digest.has_partner).to be true
+            expect(digest.contrary_interest).to be true
+          end
+        end
+
+        context "when the applicant has a partner with no contrary interest"
       end
     end
 

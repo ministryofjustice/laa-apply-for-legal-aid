@@ -225,6 +225,9 @@ module Reports
               expect(value_for("Firm name")).to eq "Legal beagles"
               expect(value_for("User name")).to eq "psr001"
               expect(value_for("Office ID")).to eq "1T823E"
+              expect(value_for("Applicant name")).to eq applicant.full_name
+              expect(value_for("Applicant age")).to eq applicant.age
+              expect(value_for("Non means tested?")).to eq "No"
               expect(value_for("State")).to eq "initiated"
               expect(value_for("CCMS reason")).to be_nil
               expect(value_for("CCMS reference number")).to eq "42226668880"
@@ -599,6 +602,7 @@ module Reports
               create(:application,
                      :with_proceedings,
                      :with_single_employment,
+                     transaction_period_finish_on: Date.yesterday,
                      applicant:)
             end
 
@@ -655,6 +659,41 @@ module Reports
               expect(value_for("Free text optional")).to eq "No"
               expect(value_for("Multi Employment")).to eq "No"
             end
+          end
+        end
+
+        context "when the applicant has a partner" do
+          let(:applicant) do
+            create(:applicant,
+                   :with_partner,
+                   :not_employed,
+                   first_name: "Johnny",
+                   last_name: "WALKER",
+                   date_of_birth:,
+                   national_insurance_number: "JA293483A")
+          end
+
+          it "returns the expected data" do
+            expect(value_for("Has partner?")).to eq "Yes"
+            expect(value_for("Contrary interest?")).to eq "No"
+          end
+        end
+
+        context "when the applicant has a partner with a contrary interest" do
+          let(:applicant) do
+            create(:applicant,
+                   :with_partner,
+                   :not_employed,
+                   partner_has_contrary_interest: true,
+                   first_name: "Johnny",
+                   last_name: "WALKER",
+                   date_of_birth:,
+                   national_insurance_number: "JA293483A")
+          end
+
+          it "returns the expected data" do
+            expect(value_for("Has partner?")).to eq "Yes"
+            expect(value_for("Contrary interest?")).to eq "Yes"
           end
         end
       end
