@@ -54,51 +54,11 @@ module Flow
           carry_on_sub_flow: false,
         },
         # partner_flow called here
-        check_provider_answers: {
-          path: ->(application) { urls.providers_legal_aid_application_check_provider_answers_path(application) },
-          forward: lambda do |application|
-            if application.under_16_blocked?
-              :use_ccms_under16s
-            elsif application.non_means_tested?
-              application.change_state_machine_type("NonMeansTestedStateMachine")
-              :confirm_non_means_tested_applications
-            else
-              application.applicant.national_insurance_number? ? :check_benefits : :no_national_insurance_numbers
-            end
-          end,
-        },
+        check_provider_answers: Steps::ProviderStart::CheckProviderAnswersStep,
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
-        no_national_insurance_numbers: {
-          path: ->(application) { urls.providers_legal_aid_application_no_national_insurance_number_path(application) },
-          forward: lambda do |application|
-            application.change_state_machine_type("NonPassportedStateMachine")
-            :applicant_employed
-          end,
-        },
-        check_benefits: {
-          path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: lambda do |application, dwp_override_non_passported|
-            if application.applicant_receives_benefit?
-              application.change_state_machine_type("PassportedStateMachine")
-              application.used_delegated_functions? ? :substantive_applications : :capital_introductions
-            else
-              application.change_state_machine_type("NonPassportedStateMachine")
-              dwp_override_non_passported ? :confirm_dwp_non_passported_applications : :applicant_employed
-            end
-          end,
-        },
-        substantive_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
-          forward: lambda do |application|
-            return :delegated_confirmation unless application.substantive_application?
-
-            if application.applicant_receives_benefit?
-              :capital_introductions
-            else
-              :open_banking_consents
-            end
-          end,
-        },
+        no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
+        check_benefits: Steps::ProviderStart::CheckBenefitsStep,
+        substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
         delegated_confirmation: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
         },
@@ -107,22 +67,11 @@ module Flow
         bank_statements: Steps::ProviderStart::BankStatementsStep,
         # provider_means_state_benefits is called here
         email_addresses: Steps::ProviderStart::EmailAddressesStep,
-        about_the_financial_assessments: {
-          path: ->(application) { urls.providers_legal_aid_application_about_the_financial_assessment_path(application) },
-          forward: :application_confirmations,
-        },
-        application_confirmations: {
-          path: ->(application) { urls.providers_legal_aid_application_application_confirmation_path(application) },
-        },
-        use_ccms: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) },
-        },
-        use_ccms_employment: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_employment_index_path(application) },
-        },
-        use_ccms_under16s: {
-          path: ->(application) { urls.providers_legal_aid_application_use_ccms_under16s_path(application) },
-        },
+        about_the_financial_assessments: Steps::ProviderStart::AboutTheFinancialAssessmentsStep,
+        application_confirmations: Steps::ProviderStart::ApplicationConfirmationsStep,
+        use_ccms: Steps::ProviderStart::UseCCMSStep,
+        use_ccms_employment: Steps::ProviderStart::UseCCMSEmploymentStep,
+        use_ccms_under16s: Steps::ProviderStart::UseCCMSUnder16sStep,
       }.freeze
     end
   end

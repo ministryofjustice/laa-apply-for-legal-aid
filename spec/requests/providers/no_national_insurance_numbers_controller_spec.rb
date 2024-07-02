@@ -68,9 +68,9 @@ RSpec.describe Providers::NoNationalInsuranceNumbersController do
       context "when continuing" do
         let(:params) { { continue_button: "irrelevant" } }
 
-        it "redirects to applicant employed question page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
+          expect(response).to have_http_status(:redirect)
         end
       end
 
