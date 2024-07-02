@@ -69,6 +69,8 @@ module Reports
           "User name",
           "Office ID",
           "Applicant name",
+          "Applicant age",
+          "Non means tested?",
           "State",
           "CCMS reason",
           "CCMS reference number",
@@ -160,6 +162,9 @@ module Reports
           "Bank statements path",
           "Truelayer path",
           "Truelayer data",
+          "Has partner?",
+          "Contrary interest?",
+          "Partner DWP challenge?",
         ]
       end
 
@@ -192,6 +197,7 @@ module Reports
         merits
         hmrc_data
         banking_data
+        partner
         sanitise
       end
 
@@ -211,6 +217,8 @@ module Reports
 
       def application_details
         @line << applicant.full_name
+        @line << applicant.age
+        @line << yesno(laa.state_machine_proxy.is_a?(NonMeansTestedStateMachine))
         @line << state
         @line << ccms_reason
         @line << (ccms_submission.nil? ? "" : case_ccms_reference)
@@ -389,6 +397,11 @@ module Reports
         @line << yesno(laa.bank_statement_upload_path?) # "Bank statements path",
         @line << yesno(laa.truelayer_path?) # "Truelayer path",
         @line << yesno(laa.bank_transactions.any?) # Truelayer data""
+      end
+
+      def partner
+        @line << yesno(laa.applicant_has_partner?)
+        @line << yesno(!laa.applicant_has_partner_with_no_contrary_interest?)
       end
 
       def yesno(value)
