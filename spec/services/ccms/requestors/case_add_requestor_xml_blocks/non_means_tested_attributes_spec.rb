@@ -395,7 +395,7 @@ module CCMS
           it "adds applicant's POST_CODE attribute with value into means and merits assessment sections" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "POST_CODE")
-              expect(block).to have_text_response legal_aid_application.applicant.address.postcode
+              expect(block).to have_text_response legal_aid_application.applicant.correspondence_address_for_ccms.postcode
             end
           end
 

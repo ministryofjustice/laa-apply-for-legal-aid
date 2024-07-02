@@ -302,6 +302,107 @@ module CCMS
               .and have_xml("#{linked_cases_xpath}/casebio:LinkType", "FC_LEAD")
           end
         end
+
+        describe "correspondence address handling" do
+          let(:applicant) { create(:applicant, same_correspondence_and_home_address:, addresses:) }
+          let(:correspondence_address) { create(:address, address_line_one: "109 Correspondence Avenue") }
+          let(:home_address) { create(:address, :as_home_address, address_line_one: "27 Home Street") }
+          let(:address_xpath) { "//casebio:CaseDetails/casebio:ApplicationDetails/casebio:CorrespondenceAddress" }
+
+          context "when the provider has set the home address to the same as correspondence" do
+            let(:same_correspondence_and_home_address) { true }
+            let(:correspondence_address) { nil }
+            let(:addresses) { [home_address] }
+
+            it "is set to the correspondence address" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:AddressLine1", "27 Home Street")
+                .and have_xml("#{address_xpath}/common:AddressLine2", home_address.address_line_two)
+            end
+          end
+
+          context "when the provider has set a different home address" do
+            let(:same_correspondence_and_home_address) { false }
+            let(:addresses) { [home_address, correspondence_address] }
+
+            it "is set to the expected, separate, home address" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:AddressLine1", "109 Correspondence Avenue")
+                .and have_xml("#{address_xpath}/common:AddressLine2", correspondence_address.address_line_two)
+            end
+          end
+
+          context "when the record was created before the home_address flag was enabled" do
+            let(:same_correspondence_and_home_address) { nil }
+            let(:home_address) { nil }
+            let(:addresses) { [correspondence_address] }
+
+            it "is set to the correspondence address" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:AddressLine1", "109 Correspondence Avenue")
+                .and have_xml("#{address_xpath}/common:AddressLine2", correspondence_address.address_line_two)
+            end
+          end
+        end
+
+        describe "care of address handling" do
+          let(:applicant) { create(:applicant, address:) }
+          let(:address) do
+            create(:address,
+                   care_of:,
+                   care_of_first_name:,
+                   care_of_last_name:,
+                   care_of_organisation_name:)
+          end
+          let(:care_of) { nil }
+          let(:care_of_first_name) { nil }
+          let(:care_of_last_name) { nil }
+          let(:care_of_organisation_name) { nil }
+          let(:address_xpath) { "//casebio:CaseDetails/casebio:ApplicationDetails/casebio:CorrespondenceAddress" }
+
+          context "when care of is not set" do
+            it "does not add the xml key" do
+              expect(request_xml).not_to match "common:CoFFName"
+            end
+          end
+
+          context "when care of is set to an individual" do
+            let(:care_of) { "person" }
+            let(:care_of_first_name) { "James" }
+            let(:care_of_last_name) { "Bond" }
+
+            it "records the care of name" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:CoffName", "James Bond")
+            end
+          end
+
+          context "when care of is set to an organisation" do
+            let(:care_of) { "organisation" }
+            let(:care_of_organisation_name) { "International Exports" }
+
+            it "records the care of organisation name" do
+              expect(request_xml)
+                .to have_xml("#{address_xpath}/common:CoffName", "International Exports")
+            end
+          end
+        end
+
+        context "when optional address line three field is populated" do
+          let(:address) do
+            create(:address,
+                   address_line_one: "Corporation name",
+                   address_line_two: "109 Correspondence Avenue",
+                   address_line_three: "Placeholder City")
+          end
+          let(:address_xpath) { "//casebio:CaseDetails/casebio:ApplicationDetails/casebio:CorrespondenceAddress" }
+
+          it "is included in the payload" do
+            expect(request_xml).to have_xml("#{address_xpath}/common:AddressLine1", "Corporation name")
+                                     .and have_xml("#{address_xpath}/common:AddressLine2", "109 Correspondence Avenue")
+                                     .and have_xml("#{address_xpath}/common:AddressLine3", "Placeholder City")
+          end
+        end
       end
     end
   end

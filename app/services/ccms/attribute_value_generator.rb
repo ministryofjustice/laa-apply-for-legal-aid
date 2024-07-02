@@ -197,7 +197,7 @@ module CCMS
     end
 
     def applicant_postcode(_options)
-      applicant.address.postcode
+      applicant.correspondence_address_for_ccms.postcode
     end
 
     def lead_proceeding_substantive_cost_limitation(_options)
