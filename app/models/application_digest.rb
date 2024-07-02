@@ -7,6 +7,9 @@ class ApplicationDigest < ApplicationRecord
     employed
     hmrc_data_used
     referred_to_caseworker
+    has_partner
+    contrary_interest
+    non_means_tested
   ].freeze
 
   class << self
@@ -45,6 +48,11 @@ class ApplicationDigest < ApplicationRecord
         true_layer_path: laa.truelayer_path?,
         bank_statements_path: laa.bank_statement_upload_path?,
         true_layer_data: laa.bank_transactions.any?,
+        has_partner: laa.applicant_has_partner?,
+        contrary_interest: laa.applicant_has_partner? ? !laa.applicant_has_partner_with_no_contrary_interest? : nil,
+        partner_dwp_challenge: laa&.partner&.shared_benefit_with_applicant? || nil,
+        applicant_age: applicant_age(laa),
+        non_means_tested: laa.non_means_tested?,
       }
     end
 
@@ -90,6 +98,12 @@ class ApplicationDigest < ApplicationRecord
       return false if laa.cfe_result.nil? || laa.cfe_result.result.nil?
 
       CCMS::ManualReviewDeterminer.new(laa).manual_review_required?
+    end
+
+    def applicant_age(laa)
+      laa.applicant.age
+    rescue NoMethodError
+      nil
     end
   end
 

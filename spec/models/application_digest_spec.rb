@@ -45,6 +45,8 @@ RSpec.describe ApplicationDigest do
         expect(digest.days_to_submission).to eq 4
         expect(digest.matter_types).to eq "Domestic Abuse;Section 8 orders"
         expect(digest.proceedings).to eq "DA001;SE013;SE014"
+        expect(digest.applicant_age).to eq laa.applicant.age
+        expect(digest.non_means_tested).to be false
       end
 
       describe "applicant employment status" do
@@ -149,6 +151,55 @@ RSpec.describe ApplicationDigest do
           it "returns true" do
             application_digest
             expect(digest.referred_to_caseworker).to be true
+          end
+        end
+      end
+
+      describe "partner fields" do
+        let(:laa) { create(:legal_aid_application, applicant:) }
+
+        context "when the applicant does not have a partner" do
+          let(:applicant) { create(:applicant) }
+
+          it "returns the expected data" do
+            application_digest
+            expect(digest.has_partner).to be false
+            expect(digest.contrary_interest).to be_nil
+            expect(digest.partner_dwp_challenge).to be_nil
+          end
+        end
+
+        context "when the applicant has a partner with contrary interest" do
+          let(:applicant) do
+            create(:applicant,
+                   :with_partner,
+                   partner_has_contrary_interest: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+            expect(digest.has_partner).to be true
+            expect(digest.contrary_interest).to be true
+            # TODO: The partner_dwp_challenge should be false but a bug is preventing it being recorded
+            # Replace `be_nil` with `be false` and update the test harnesses once ticket 5136 is resolved
+            expect(digest.partner_dwp_challenge).to be_nil
+          end
+        end
+
+        context "when the applicant has a partner with no contrary interest and disputed benefits" do
+          before { create(:partner, shared_benefit_with_applicant: true, legal_aid_application: laa) }
+
+          let(:applicant) do
+            create(:applicant,
+                   :with_partner,
+                   partner_has_contrary_interest: false)
+          end
+
+          it "returns the expected data" do
+            application_digest
+            expect(digest.has_partner).to be true
+            expect(digest.contrary_interest).to be false
+            expect(digest.partner_dwp_challenge).to be true
           end
         end
       end
