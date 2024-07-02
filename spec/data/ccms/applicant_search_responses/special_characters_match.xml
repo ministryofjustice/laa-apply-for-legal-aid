@@ -29,10 +29,10 @@
         <msg:Client>
           <client:Name  xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
             <common:Title xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">MRS.</common:Title>
-            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">O''Hare</common:Surname>
+            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">O'Hare</common:Surname>
             <common:FirstName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">lenovo</common:FirstName>
-            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">O''Hare</common:SurnameAtBirth>
-            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">lenovo O''Hare</common:FullName>
+            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">O'Hare</common:SurnameAtBirth>
+            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">lenovo O'Hare</common:FullName>
           </client:Name>
           <client:DateOfBirth xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">1972-01-01</client:DateOfBirth>
           <client:Gender xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">FEMALE</client:Gender>

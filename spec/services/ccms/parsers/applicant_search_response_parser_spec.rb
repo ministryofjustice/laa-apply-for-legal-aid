@@ -97,21 +97,41 @@ module CCMS
             end
           end
 
-          context "and the applicant's surname contains a special character" do
-            let(:parser) { described_class.new(expected_tx_id, ccms_data_from_file("applicant_search_responses/special_characters_match.xml"), applicant) }
-            let(:applicant) { create(:applicant, first_name: "lenovo", last_name: "O’‘Hare", date_of_birth: Date.new(1972, 1, 1), national_insurance_number: "QQ123456A") }
+          context "and the applicant's name contains a special character" do
+            context "and the applicant's last name contains an opening curly quote" do
+              let(:parser) { described_class.new(expected_tx_id, ccms_data_from_file("applicant_search_responses/special_characters_match.xml"), applicant) }
+              let(:applicant) { create(:applicant, first_name: "lenovo", last_name: "O‘Hare", date_of_birth: Date.new(1972, 1, 1), national_insurance_number: "QQ123456A") }
 
-            it "extracts the number of records fetched" do
-              expect(parser.record_count).to eq "1"
+              it "extracts the number of records fetched" do
+                expect(parser.record_count).to eq "1"
+              end
+
+              it "returns the applicant_ccms_reference" do
+                expect(parser.applicant_ccms_reference).to eq "4390016"
+              end
+
+              it "expects logger to receive" do
+                expect(Rails.logger).to receive(:info).with("CCMS::Parsers::ApplicantSearchResponseParser:: CCMS records returned: 1, Full matches: 1, ChosenMatch: 4390016")
+                parser.applicant_ccms_reference
+              end
             end
 
-            it "returns the applicant_ccms_reference" do
-              expect(parser.applicant_ccms_reference).to eq "4390016"
-            end
+            context "and the applicant's last name contains an closing curly quote" do
+              let(:parser) { described_class.new(expected_tx_id, ccms_data_from_file("applicant_search_responses/special_characters_match.xml"), applicant) }
+              let(:applicant) { create(:applicant, first_name: "lenovo", last_name: "O’Hare", date_of_birth: Date.new(1972, 1, 1), national_insurance_number: "QQ123456A") }
 
-            it "expects logger to receive" do
-              expect(Rails.logger).to receive(:info).with("CCMS::Parsers::ApplicantSearchResponseParser:: CCMS records returned: 1, Full matches: 1, ChosenMatch: 4390016")
-              parser.applicant_ccms_reference
+              it "extracts the number of records fetched" do
+                expect(parser.record_count).to eq "1"
+              end
+
+              it "returns the applicant_ccms_reference" do
+                expect(parser.applicant_ccms_reference).to eq "4390016"
+              end
+
+              it "expects logger to receive" do
+                expect(Rails.logger).to receive(:info).with("CCMS::Parsers::ApplicantSearchResponseParser:: CCMS records returned: 1, Full matches: 1, ChosenMatch: 4390016")
+                parser.applicant_ccms_reference
+              end
             end
           end
         end
