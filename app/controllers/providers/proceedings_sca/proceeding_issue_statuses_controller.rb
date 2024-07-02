@@ -4,19 +4,19 @@ module Providers
       prefix_step_with :proceedings_sca
 
       def show
-        @proceeding = legal_aid_application.proceedings.last
+        @proceeding = legal_aid_application.proceedings.order(:created_at).last
         form
       end
 
       def update
         return continue_or_draft if draft_selected?
 
-        @proceeding = legal_aid_application.proceedings.last
+        @proceeding = legal_aid_application.proceedings.order(:created_at).last
 
         if form.valid?
           return redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "proceeding_issue_status") unless form.proceeding_issue_status?
 
-          return go_forward
+          return go_forward(@proceeding)
         end
         render :show, status: :unprocessable_content
       end

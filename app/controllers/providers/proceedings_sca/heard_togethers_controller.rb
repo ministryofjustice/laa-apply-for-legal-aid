@@ -2,11 +2,10 @@ module Providers
   module ProceedingsSCA
     class HeardTogethersController < ProviderBaseController
       prefix_step_with :proceedings_sca
+      before_action :current_proceeding
 
       def show
-        # TODO: Will be updated in ticket AP-5062 which will implement proper flow logic
-        @current_proceeding = legal_aid_application.proceedings.last
-        @core_proceedings = legal_aid_application.proceedings - [@current_proceeding]
+        @core_proceedings = legal_aid_application.proceedings.where(sca_type: "core")
         amount
         form
       end
@@ -14,19 +13,25 @@ module Providers
       def update
         return continue_or_draft if draft_selected?
 
-        # TODO: Will be updated in ticket AP-5062 which will implement proper flow logic
-        @current_proceeding = legal_aid_application.proceedings.last
-        @core_proceedings = legal_aid_application.proceedings - [@current_proceeding]
+        @core_proceedings = legal_aid_application.proceedings.where(sca_type: "core")
         amount
 
         if form.valid?
-          return go_forward(form.heard_together?)
+          return go_forward({ heard_together: form.heard_together?, proceeding: @current_proceeding })
         end
 
         render :show, status: :unprocessable_content
       end
 
     private
+
+      def current_proceeding
+        @current_proceeding ||= Proceeding.find(proceeding_id_param)
+      end
+
+      def proceeding_id_param
+        params.require(:id)
+      end
 
       def amount
         @amount = if @core_proceedings.count == 1

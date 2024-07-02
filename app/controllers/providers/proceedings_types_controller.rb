@@ -10,8 +10,9 @@ module Providers
     def create
       return continue_or_draft if draft_selected?
 
-      if run_transaction
-        go_forward
+      added_proceeding = run_transaction
+      if added_proceeding
+        go_forward(added_proceeding)
       else
         legal_aid_application.errors.add(:"proceeding-search-input", t(".search_and_select"))
         proceeding_types

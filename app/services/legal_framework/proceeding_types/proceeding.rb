@@ -13,7 +13,8 @@ module LegalFramework
                     :ccms_matter,
                     :cost_limitations,
                     :default_scope_limitations,
-                    :service_levels
+                    :service_levels,
+                    :sca_type
 
         def initialize(json_response)
           response = JSON.parse(json_response)
@@ -29,6 +30,14 @@ module LegalFramework
           @cost_limitations = response["cost_limitations"]
           @default_scope_limitations = response["default_scope_limitations"]
           @service_levels = response["service_levels"]
+          @sca_type = generate_sca_type(response)
+        end
+
+        def generate_sca_type(response)
+          return "core" if response["sca_core"]
+          return "related" if response["sca_related"]
+
+          nil
         end
       end
 

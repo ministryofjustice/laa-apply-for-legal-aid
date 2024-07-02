@@ -1,12 +1,14 @@
 require "rails_helper"
 
 RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings:, proceeding_count:) }
   let(:proceeding_count) { 2 }
+  let(:explicit_proceedings) { %i[pb003 pb007] }
   let(:login_provider) { login_as legal_aid_application.provider }
+  let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "PB003") }
 
-  describe "GET /providers/applications/:id/heard_togethers" do
-    subject(:get_request) { get providers_legal_aid_application_heard_togethers_path(legal_aid_application) }
+  describe "GET /providers/applications/:id/heard_together/:proceeding_id" do
+    subject(:get_request) { get providers_legal_aid_application_heard_together_path(legal_aid_application, proceeding) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -21,7 +23,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
       end
 
       context "when there is a core proceeding" do
-        let(:core_sca) { legal_aid_application.proceedings.first.meaning }
+        let(:core_sca) { legal_aid_application.proceedings.where(sca_type: "core").first.meaning }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -31,6 +33,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
 
       context "when there is more than one core proceeding" do
         let(:proceeding_count) { 3 }
+        let(:explicit_proceedings) { %i[pb003 pb007 pb059] }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -40,8 +43,8 @@ RSpec.describe Providers::ProceedingsSCA::HeardTogethersController do
     end
   end
 
-  describe "PATCH providers/applications/:id/will_proceeding_be_heard_togethers" do
-    subject(:patch_request) { patch providers_legal_aid_application_heard_togethers_path(legal_aid_application, params:) }
+  describe "PATCH providers/applications/:id/will_proceeding_be_heard_together/:proceeding_id" do
+    subject(:patch_request) { patch providers_legal_aid_application_heard_together_path(legal_aid_application, proceeding, params:) }
 
     before do
       login_provider

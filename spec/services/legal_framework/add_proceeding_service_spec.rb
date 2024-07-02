@@ -19,6 +19,10 @@ module LegalFramework
           expect { add_proceeding_service.call(**params) }.to change { legal_aid_application.proceedings.count }.by(1)
         end
 
+        it "returns the added proceeding" do
+          expect(add_proceeding_service.call(**params)).to be_a Proceeding
+        end
+
         context "and the proceedings already exist" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
 
@@ -51,6 +55,15 @@ module LegalFramework
             expect(proceeding.emergency_level_of_service).to be_nil
             expect(proceeding.emergency_level_of_service_name).to be_nil
             expect(proceeding.emergency_level_of_service_stage).to be_nil
+          end
+        end
+
+        context "when adding a core SCA proceeding" do
+          let(:ccms_code) { "PB004" }
+
+          it "sets an sca_type value" do
+            add_proceeding_service.call(**params)
+            expect(legal_aid_application.proceedings.first.sca_type).to eq "core"
           end
         end
       end
