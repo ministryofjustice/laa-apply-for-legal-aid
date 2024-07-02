@@ -1,10 +1,17 @@
 require "rails_helper"
 
 RSpec.describe LinkedApplication do
-  subject(:linked_application) { build(:linked_application, lead_application: laa_lead, associated_application: laa_associated, link_type_code: link_type_text) }
+  subject(:linked_application) do
+    build(:linked_application,
+          lead_application: laa_lead,
+          associated_application: laa_associated,
+          target_application: laa_target,
+          link_type_code: link_type_text)
+  end
 
   let(:laa_lead) { build(:legal_aid_application) }
   let(:laa_associated) { build(:legal_aid_application) }
+  let(:laa_target) { build(:legal_aid_application) }
   let(:link_type_text) { "FC_LEAD" }
 
   describe "#lead_application" do
@@ -19,6 +26,13 @@ RSpec.describe LinkedApplication do
 
     it { expect(associated_application).to be_instance_of(LegalAidApplication) }
     it { expect(associated_application).to eq laa_associated }
+  end
+
+  describe "#target_application" do
+    subject(:target_application) { linked_application.target_application }
+
+    it { expect(target_application).to be_instance_of(LegalAidApplication) }
+    it { expect(target_application).to eq laa_target }
   end
 
   describe "#link_type_code" do

@@ -56,8 +56,8 @@ Given(/I have linked (and|not) copied the ['|"](.*?)['|"] application with a ['|
   else
     create(:proceeding, :da004, legal_aid_application: @legal_aid_application)
   end
-  # @legal_aid_application.update!(link_case: true)
   LinkedApplication.find_or_create_by!(lead_application:,
+                                       target_application: lead_application,
                                        confirm_link: true,
                                        associated_application: @legal_aid_application,
                                        link_type_code: type == "Family" ? "FC_LEAD" : "Legal")

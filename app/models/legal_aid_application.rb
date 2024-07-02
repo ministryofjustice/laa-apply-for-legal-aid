@@ -60,6 +60,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :partner, dependent: :destroy
   has_one :lead_linked_application, class_name: "LinkedApplication", foreign_key: "associated_application_id", dependent: :destroy
   has_one :lead_application, class_name: "LegalAidApplication", through: :lead_linked_application
+  has_one :target_application, class_name: "LegalAidApplication", through: :lead_linked_application
   has_many :associated_linked_applications, class_name: "LinkedApplication", foreign_key: "lead_application_id", dependent: :destroy
   has_many :associated_applications, class_name: "LegalAidApplication", through: :associated_linked_applications
 
