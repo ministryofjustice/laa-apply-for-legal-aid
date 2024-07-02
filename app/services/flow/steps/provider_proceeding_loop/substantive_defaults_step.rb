@@ -8,7 +8,11 @@ module Flow
         end,
         forward: lambda do |application|
           proceeding = Proceeding.find(application.provider_step_params["id"])
-          proceeding.accepted_substantive_defaults ? Flow::ProceedingLoop.next_step(application) : :substantive_level_of_service
+          if proceeding.accepted_substantive_defaults || application.special_children_act_proceedings?
+            Flow::ProceedingLoop.next_step(application)
+          else
+            :substantive_level_of_service
+          end
         end,
         carry_on_sub_flow: true,
         check_answers: :check_provider_answers,

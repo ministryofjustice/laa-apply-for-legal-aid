@@ -8,6 +8,8 @@ module Providers
       end
 
       def update
+        return go_forward if legal_aid_application.special_children_act_proceedings?
+
         @form = Proceedings::SubstantiveDefaultsForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
