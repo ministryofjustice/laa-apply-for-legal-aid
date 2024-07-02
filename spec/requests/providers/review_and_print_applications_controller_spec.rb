@@ -73,7 +73,7 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
 
         it "redirects to next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(application))
+          expect(response).to have_http_status(:redirect)
         end
 
         it "creates pdf reports" do

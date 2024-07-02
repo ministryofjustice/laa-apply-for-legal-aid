@@ -48,37 +48,14 @@ module Flow
         linked_children: Steps::ProviderMerits::LinkedChildrenStep,
         specific_issue: Steps::ProviderMerits::SpecificIssueStep,
         vary_order: Steps::ProviderMerits::VaryOrderStep,
-        merits_task_lists: {
-          path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
-          forward: ->(application) { application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers },
-        },
-        uploaded_evidence_collections: {
-          path: ->(application) { urls.providers_legal_aid_application_uploaded_evidence_collection_path(application) },
-          forward: :check_merits_answers,
-        },
-        check_merits_answers: {
-          path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
-          forward: :confirm_client_declarations,
-        },
-        confirm_client_declarations: {
-          path: ->(application) { urls.providers_legal_aid_application_confirm_client_declaration_path(application) },
-          forward: :review_and_print_applications,
-        },
-        review_and_print_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_review_and_print_application_path(application) },
-          forward: :end_of_applications,
-        },
-        end_of_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_end_of_application_path(application) },
-          forward: :submitted_applications,
-        },
-        submitted_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_submitted_application_path(application) },
-          forward: :providers_home,
-        },
-        merits_reports: {
-          path: ->(application) { urls.providers_legal_aid_application_merits_report_path(application) },
-        },
+        merits_task_lists: Steps::ProviderMerits::MeritsTaskListsStep,
+        uploaded_evidence_collections: Steps::ProviderMerits::UploadedEvidenceCollectionsStep,
+        check_merits_answers: Steps::ProviderMerits::CheckMeritsAnswersStep,
+        confirm_client_declarations: Steps::ProviderMerits::ConfirmClientDeclarationsStep,
+        review_and_print_applications: Steps::ProviderMerits::ReviewAndPrintApplicationsStep,
+        end_of_applications: Steps::ProviderMerits::EndOfApplicationsStep,
+        submitted_applications: Steps::ProviderMerits::SubmittedApplicationsStep,
+        merits_reports: Steps::ProviderMerits::MeritsReportsStep,
       }.freeze
     end
   end

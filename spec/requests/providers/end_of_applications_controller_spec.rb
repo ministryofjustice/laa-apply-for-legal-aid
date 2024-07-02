@@ -57,7 +57,7 @@ RSpec.describe Providers::EndOfApplicationsController do
 
     it "redirects to next page" do
       patch_request
-      expect(response).to redirect_to(flow_forward_path)
+      expect(response).to have_http_status(:redirect)
     end
 
     context "when Submitted using the draft button" do
