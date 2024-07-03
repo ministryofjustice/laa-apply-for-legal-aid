@@ -34,7 +34,8 @@ module Providers
       end
 
       def save
-        attributes[:lead_application_id] = @found_application&.id
+        attributes[:target_application_id] = @found_application&.id
+        attributes[:lead_application_id] = @found_application&.lead_application&.id.presence || @found_application&.id
         super
       end
       alias_method :save!, :save

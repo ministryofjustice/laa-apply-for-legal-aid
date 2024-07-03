@@ -626,6 +626,7 @@ FactoryBot.define do
         create(:linked_application,
                confirm_link: true,
                lead_application:,
+               target_application: lead_application,
                associated_application: application,
                link_type_code: "FC_LEAD")
         create(:linked_application,

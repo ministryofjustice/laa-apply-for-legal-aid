@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::CopiesController do
   let(:lead_application) { create(:legal_aid_application) }
-  let(:link) { create(:linked_application, lead_application:, associated_application: application) }
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, lead_application:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
+
+  before { create(:linked_application, lead_application:, target_application: lead_application, associated_application: legal_aid_application) }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/copy" do
     subject(:get_request) { get providers_legal_aid_application_link_application_copy_path(legal_aid_application) }

@@ -4,8 +4,9 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
   subject(:described_form) { described_class.new(params.merge(model: application)) }
 
   let(:lead_application) { create(:legal_aid_application) }
-  let(:link) { create(:linked_application, lead_application:, associated_application: application) }
-  let(:application) { create(:legal_aid_application, :with_applicant_and_address, lead_application:) }
+  let(:application) { create(:legal_aid_application, :with_applicant_and_address) }
+
+  before { create(:linked_application, lead_application:, target_application: lead_application, associated_application: application) }
 
   describe "#save" do
     context "when copy_case is not completed" do
@@ -54,7 +55,6 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
         let(:application) do
           create(:legal_aid_application,
                  :with_applicant_and_address,
-                 lead_application:,
                  copy_case: true,
                  copy_case_id: SecureRandom.uuid)
         end

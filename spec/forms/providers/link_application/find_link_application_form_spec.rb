@@ -146,16 +146,36 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationForm, type: :form 
   describe "#save" do
     subject(:call_save) { instance.save }
 
-    before do
-      instance.application_can_be_linked?
-      call_save
-    end
-
-    let(:search_laa_reference) { "L-123-456" }
-
     context "when a search reference that exists and is submitted is entered" do
-      it "updates the correct models" do
-        expect(linked_application.lead_application_id).to eql "4806a4a9-ce0f-4db1-8fbc-de746f3ff628"
+      context "when the search target is not an associated action" do
+        before do
+          instance.application_can_be_linked?
+          call_save
+        end
+
+        let(:search_laa_reference) { "L-123-456" }
+
+        it "updates the correct models" do
+          expect(linked_application.target_application_id).to eql "4806a4a9-ce0f-4db1-8fbc-de746f3ff628"
+          expect(linked_application.lead_application_id).to eql "4806a4a9-ce0f-4db1-8fbc-de746f3ff628"
+        end
+      end
+
+      context "when the search target is already an associated action" do
+        let(:lead_application) { create(:legal_aid_application, provider: legal_aid_application.provider, application_ref: "L-111-222", id: "f1b3c2ef-1e93-4d4e-a983-643598f1eaf4", merits_submitted_at:) }
+        let(:search_target) { create(:legal_aid_application, provider: legal_aid_application.provider, application_ref: "L-333-444", id: "42edab70-1584-4fc6-9a42-7e3eae3ca726", merits_submitted_at:) }
+        let(:search_laa_reference) { "L-333-444" }
+
+        before do
+          create(:linked_application, lead_application:, associated_application: search_target, link_type_code: "FC_LEAD")
+          instance.application_can_be_linked?
+          call_save
+        end
+
+        it "sets the target_application as the search result and the lead_application as it's lead application" do
+          expect(linked_application.target_application_id).to eql "42edab70-1584-4fc6-9a42-7e3eae3ca726"
+          expect(linked_application.lead_application_id).to eql "f1b3c2ef-1e93-4d4e-a983-643598f1eaf4"
+        end
       end
     end
   end
