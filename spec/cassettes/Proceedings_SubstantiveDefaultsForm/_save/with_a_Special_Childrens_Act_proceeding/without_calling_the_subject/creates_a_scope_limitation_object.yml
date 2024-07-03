@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"PB003","delegated_functions_used":false,"client_involvement_type":"Z"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 03 Jul 2024 08:49:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '434'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"67ea4b14e9caf68b80233b8b5943d573"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a9e3043c50cd0503929bccdcaba4a35f
+      X-Runtime:
+      - '0.007047'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"PB003","delegated_functions_used":false,"client_involvement_type":"Z"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"FM062","meaning":"Final
+        hearing","description":"Limited to all steps up to and including final hearing
+        and any action necessary to implement (but not enforce) the order.","additional_params":[]}}'
+  recorded_at: Wed, 03 Jul 2024 08:49:22 GMT
+recorded_with: VCR 6.2.0

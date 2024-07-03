@@ -17,7 +17,7 @@ module Proceedings
                   :substantive_scope_limitation_code,
                   :additional_params
 
-    validates :accepted_substantive_defaults, presence: { unless: :draft? }
+    validates :accepted_substantive_defaults, presence: true, unless: proc { draft? || model.special_childrens_act? }
 
     def initialize(*args)
       super
@@ -32,13 +32,14 @@ module Proceedings
     end
 
     def save
+      return false unless valid?
+
       model.scope_limitations.where(scope_type: :substantive).destroy_all
-      case accepted_substantive_defaults&.to_s
-      when "false"
+      if accepted_substantive_defaults&.to_s == "false"
         attributes[:substantive_level_of_service] = nil
         attributes[:substantive_level_of_service_name] = nil
         attributes[:substantive_level_of_service_stage] = nil
-      when "true"
+      else
         model.scope_limitations.create!(scope_type: :substantive,
                                         code: substantive_scope_limitation_code,
                                         meaning: substantive_scope_limitation_meaning,
