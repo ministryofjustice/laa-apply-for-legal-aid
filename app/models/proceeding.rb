@@ -60,4 +60,8 @@ class Proceeding < ApplicationRecord
   def proceeding_case_p_num
     "P_#{proceeding_case_id}"
   end
+
+  def special_childrens_act?
+    ccms_matter_code == "KPBLW"
+  end
 end

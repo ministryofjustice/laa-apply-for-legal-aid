@@ -14,7 +14,7 @@
     <p><strong><%= t(".scope_header") %></strong> <%= form.object.substantive_scope_limitation_meaning %></p>
     <p><strong><%= t(".scope_description_header") %></strong> <%= form.object.substantive_scope_limitation_description %></p>
 
-    <% if !@legal_aid_application.special_children_act_proceedings? %>
+    <% if !@proceeding.special_childrens_act? %>
       <%= form.govuk_radio_buttons_fieldset :accepted_substantive_defaults,
                                             inline: false,
                                             legend: { size: "m", tag: "h2", text: t(".question") } do %>

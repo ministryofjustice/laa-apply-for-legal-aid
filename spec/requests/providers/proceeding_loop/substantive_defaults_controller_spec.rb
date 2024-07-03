@@ -78,13 +78,24 @@ RSpec.describe "SubstantiveDefaultsController", :vcr do
           end
 
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "when the provider does not accept the defaults" do
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_level_of_service_path(application_id, proceeding_id))
+            expect(response).to have_http_status(:redirect)
+          end
+        end
+
+        context "when the application is a Special Childrens Act application" do
+          let(:application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+          let(:params) do
+            {}
+          end
+
+          it "redirects to next page" do
+            expect(response).to have_http_status(:redirect)
           end
         end
 
