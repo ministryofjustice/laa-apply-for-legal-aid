@@ -135,14 +135,16 @@ module CCMS
               )
             end
 
-            it "creates three documents as ADMIN1, one as STATE and one as BSTMT" do
+            it "creates two documents as ADMIN1, one as STATE, one as BSTMT, and one as EX_RPT" do
               instance.call
               admin1_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("ADMIN1") }.flatten.count
               state_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("STATE") }.flatten.count
               bstmt_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("BSTMT") }.flatten.count
-              expect(admin1_documents).to eq 3
+              expert_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan("EX_RPT") }.flatten.count
+              expect(admin1_documents).to eq 2
               expect(state_documents).to eq 1
               expect(bstmt_documents).to eq 1
+              expect(expert_documents).to eq 1
             end
 
             it "writes the response body to the history record" do

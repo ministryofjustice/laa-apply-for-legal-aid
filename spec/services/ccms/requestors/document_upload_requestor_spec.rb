@@ -38,7 +38,7 @@ module CCMS
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
               matching: %w[
-                <casebio:DocumentType>STATE</casebio:DocumentType>
+                <casebio:DocumentType>EX_RPT</casebio:DocumentType>
                 <casebio:FileExtension>pdf</casebio:FileExtension>
               ],
             )
@@ -75,6 +75,96 @@ module CCMS
               transaction_id: expected_tx_id,
               matching: %w[
                 <casebio:DocumentType>BSTMT</casebio:DocumentType>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
+              ],
+            )
+          end
+        end
+
+        context "when sent a part_bank_state_evidence_pdf document" do
+          let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "part_bank_state_evidence_pdf") }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>BSTMT</casebio:DocumentType>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
+              ],
+            )
+          end
+        end
+
+        context "when sent a client_employment_evidence_pdf document" do
+          let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "client_employment_evidence_pdf") }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>PAYSLIP</casebio:DocumentType>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
+              ],
+            )
+          end
+        end
+
+        context "when sent a court_application_or_order_pdf document" do
+          let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "court_application_or_order_pdf") }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>COURT_ORD</casebio:DocumentType>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
+              ],
+            )
+          end
+        end
+
+        context "when sent a benefit_evidence_pdf document" do
+          let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "benefit_evidence_pdf") }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>BEN_LTR</casebio:DocumentType>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
+              ],
+            )
+          end
+        end
+
+        context "when sent a statement of case document" do
+          let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "statement_of_case_pdf") }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>STATE</casebio:DocumentType>
                 <casebio:FileExtension>pdf</casebio:FileExtension>
               ],
             )

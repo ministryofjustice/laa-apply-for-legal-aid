@@ -75,7 +75,61 @@ module CCMS
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
               matching: %w[
-                <casebio:DocumentType>STATE</casebio:DocumentType>
+                <casebio:DocumentType>EX_RPT</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
+              ],
+            )
+          end
+        end
+
+        context "when sent a client employment evidence document" do
+          let(:type) { "client_employment_evidence_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>PAYSLIP</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
+              ],
+            )
+          end
+        end
+
+        context "when sent a court_application_or_order_pdf document" do
+          let(:type) { "court_application_or_order_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>COURT_ORD</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
+              ],
+            )
+          end
+        end
+
+        context "when sent a benefit_evidence_pdf document" do
+          let(:type) { "benefit_evidence_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>BEN_LTR</casebio:DocumentType>
                 <casebio:Channel>E</casebio:Channel>
               ],
             )
