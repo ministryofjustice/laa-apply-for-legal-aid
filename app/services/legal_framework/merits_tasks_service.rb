@@ -2,15 +2,6 @@ module LegalFramework
   class MeritsTasksService
     attr_reader :legal_aid_application
 
-    FULL_SECTION_8_TASKS = %i[
-      specific_issue
-      prohibited_steps
-      nature_of_urgency
-      opponents_application
-      vary_order
-      why_matter_opposed
-    ].freeze
-
     def self.call(legal_aid_application)
       new(legal_aid_application).call
     end
