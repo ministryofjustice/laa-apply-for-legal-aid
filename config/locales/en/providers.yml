@@ -475,6 +475,9 @@ en:
           h1-heading: Is the prohibited step to prevent removal from the UK?
           no-hint: What are you asking to be prohibited?
           confirmed_not_change_of_name: I confirm this prohibited steps proceeding is not for a change of name application
+      relationship_to_child:
+        biological_parent:
+          error: Select yes if your client is the biological parent of any children involved
       success_prospects:
         show:
           h1-heading: What is the chance of a successful outcome?
