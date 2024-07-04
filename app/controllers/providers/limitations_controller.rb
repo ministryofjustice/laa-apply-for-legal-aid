@@ -22,7 +22,7 @@ module Providers
     end
 
     def form_needs_checking?
-      legal_aid_application.used_delegated_functions? || @legal_aid_application.substantive_cost_overridable?
+      (legal_aid_application.used_delegated_functions? && !legal_aid_application.special_children_act_proceedings?) || @legal_aid_application.substantive_cost_overridable?
     end
 
     def clear_limit_and_reason

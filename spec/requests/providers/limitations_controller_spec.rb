@@ -152,6 +152,20 @@ RSpec.describe Providers::LimitationsController do
           expect(response.body).to include("Emergency cost limit must be an amount of money, like 2,500")
         end
       end
+
+      context "with a Special Childrens Act application that has used delegated functions" do
+        subject(:patch_request) { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
+
+        let(:legal_aid_application) { create(:legal_aid_application) }
+        let(:proceeding) { create(:proceeding, :pb003, used_delegated_functions: true, used_delegated_functions_on: Date.yesterday) }
+
+        before { legal_aid_application.proceedings << proceeding }
+
+        it "redirects to next page" do
+          patch_request
+          expect(response).to have_http_status(:redirect)
+        end
+      end
     end
   end
 end
