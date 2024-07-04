@@ -362,6 +362,7 @@ Rails.application.routes.draw do
         resource :specific_issue, only: %i[show update], controller: "specific_issue"
         resource :success_prospects, only: %i[show update]
         resource :vary_order, only: %i[show update], controller: "vary_order"
+        resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
       end
     end
   end

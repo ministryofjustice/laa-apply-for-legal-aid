@@ -489,6 +489,9 @@ en:
         show:
           h1-heading: Why are you making a new application?
           hint-text: Tell us what has changed since the original order was made.
+      is_client_biological_parent:
+        show:
+          page_title: Is your client the biological parent of any children involved?
     application_merits_task:
       involved_children:
         new:
