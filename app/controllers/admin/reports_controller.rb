@@ -66,17 +66,20 @@ module Admin
     def reports
       @reports ||= {
         csv_download: {
-          report_title: "Application Details report",
+          report_title: "Application Details report ",
+          report_link: { href: "https://dsdmoj.atlassian.net/wiki/x/JwBOKQE", text: "About this report (opens in new tab)", class: "govuk-link govuk-link--no-visited-state", rel: "noreferrer noopener", target: "_blank" },
           path: :admin_application_details_csv_path,
           path_text: "Download CSV",
         },
         provider_download: {
           report_title: "Provider email report",
+          report_link: nil,
           path: :admin_provider_emails_csv_path,
           path_text: "Download CSV",
         },
         user_feedback_download: {
           report_title: "User feedback report",
+          report_link: nil,
           path: :admin_user_feedbacks_csv_path,
           path_text: "Download CSV",
         },

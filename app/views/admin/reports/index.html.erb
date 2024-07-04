@@ -13,6 +13,7 @@
           table.with_head do |head|
             head.with_row do |row|
               row.with_cell(text: "Report name")
+              row.with_cell(text: "Help link")
               row.with_cell(text: "Action")
             end
           end
@@ -21,6 +22,9 @@
             @reports.each_value do |report|
               body.with_row do |row|
                 row.with_cell(text: report[:report_title])
+                row.with_cell do
+                  report[:report_link].present? ? govuk_link_to(report[:report_link][:text], report[:report_link][:href], class: report[:report_link][:class], rel: report[:report_link][:rel], target: report[:report_link][:target]) : ""
+                end
                 row.with_cell do
                   govuk_link_to(report[:path_text], __send__(report[:path], format: :csv))
                 end
