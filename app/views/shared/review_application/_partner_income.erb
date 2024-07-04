@@ -3,7 +3,7 @@
 <!-- UPLOADED BANK STATEMENTS -->
 
 <% if @legal_aid_application.partner_uploading_bank_statements? %>
-  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, read_only: true, partner: true) %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.part_bank_state_evidence, read_only: true, partner: true) %>
 <% end %>
 
 <!-- EMPLOYMENT INCOME -->

@@ -22,8 +22,8 @@ FactoryBot.define do
     end
 
     trait :partner_bank_statement do
-      attachment_type { "partner_bank_statement_evidence" }
-      sequence(:attachment_name) { |n| "partner_bank_statement_evidence_#{n}" }
+      attachment_type { "part_bank_state_evidence" }
+      sequence(:attachment_name) { |n| "part_bank_state_evidence_#{n}" }
       sequence(:original_filename) { "original_filename.pdf" }
     end
 

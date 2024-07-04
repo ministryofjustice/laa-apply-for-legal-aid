@@ -539,7 +539,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def uploading_bank_statements?
-    client_not_given_consent_to_open_banking? || attachments.bank_statement_evidence.exists? || attachments.partner_bank_statement_evidence.exists?
+    client_not_given_consent_to_open_banking? || attachments.bank_statement_evidence.exists? || attachments.part_bank_state_evidence.exists?
   end
 
   def client_uploading_bank_statements?
@@ -547,7 +547,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def partner_uploading_bank_statements?
-    attachments&.partner_bank_statement_evidence&.exists?
+    attachments&.part_bank_state_evidence&.exists?
   end
 
   def has_transaction_type?(transaction_type)

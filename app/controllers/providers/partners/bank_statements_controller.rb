@@ -30,7 +30,7 @@ module Providers
       end
 
       def attachments
-        legal_aid_application.attachments.partner_bank_statement_evidence
+        legal_aid_application.attachments.part_bank_state_evidence
       end
 
       def url

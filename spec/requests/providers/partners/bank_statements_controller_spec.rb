@@ -138,7 +138,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
 
         it "sets attachment_name to model name" do
           request
-          expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("partner_bank_statement_evidence")
+          expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("part_bank_state_evidence")
         end
 
         context "with background job processing" do
@@ -154,34 +154,34 @@ RSpec.describe Providers::Partners::BankStatementsController do
 
           it "adds original and converted attachments types" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_pdf])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[part_bank_state_evidence part_bank_state_evidence_pdf])
           end
 
           it "associates pdf converted attachment to original attachment" do
             request
-            original_attachment = legal_aid_application.attachments.find_by(attachment_type: "partner_bank_statement_evidence")
+            original_attachment = legal_aid_application.attachments.find_by(attachment_type: "part_bank_state_evidence")
             expect(original_attachment.pdf_attachment_id).not_to be_nil
           end
         end
 
         context "when the application has one bank statement attachment already" do
-          let(:partner_bank_statement_evidence) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence") }
-          let!(:legal_aid_application) { create(:legal_aid_application, attachments: [partner_bank_statement_evidence]) }
+          let(:part_bank_state_evidence) { create(:attachment, :partner_bank_statement, attachment_name: "part_bank_state_evidence") }
+          let!(:legal_aid_application) { create(:legal_aid_application, attachments: [part_bank_state_evidence]) }
 
           it "increments the attachment name" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_1])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[part_bank_state_evidence part_bank_state_evidence_1])
           end
         end
 
         context "when the application has multiple attachments for statement of case already" do
-          let(:bs1) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence") }
-          let(:bs2) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence_1") }
+          let(:bs1) { create(:attachment, :partner_bank_statement, attachment_name: "part_bank_state_evidence") }
+          let(:bs2) { create(:attachment, :partner_bank_statement, attachment_name: "part_bank_state_evidence_1") }
           let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bs1, bs2]) }
 
           it "increments the attachment name" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_1 partner_bank_statement_evidence_2])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[part_bank_state_evidence part_bank_state_evidence_1 part_bank_state_evidence_2])
           end
         end
       end
@@ -420,7 +420,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
     before { login_as provider }
 
     context "with existing file" do
-      let(:params) { { attachment_id: legal_aid_application.attachments.partner_bank_statement_evidence.first.id } }
+      let(:params) { { attachment_id: legal_aid_application.attachments.part_bank_state_evidence.first.id } }
 
       before do
         patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
