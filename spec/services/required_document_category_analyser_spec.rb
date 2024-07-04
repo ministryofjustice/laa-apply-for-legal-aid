@@ -73,9 +73,9 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     context "when the provider has entered employment details for the partner" do
       let(:application) { create(:legal_aid_application, :with_applicant, :with_employed_partner_and_extra_info) }
 
-      it "updates the required_document_categories with partner_employment_evidence" do
+      it "updates the required_document_categories with part_employ_evidence" do
         call
-        expect(application.required_document_categories).to eq %w[partner_employment_evidence]
+        expect(application.required_document_categories).to eq %w[part_employ_evidence]
       end
     end
 

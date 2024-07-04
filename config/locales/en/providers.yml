@@ -790,7 +790,7 @@ en:
         list_text: 'Use this page to upload:'
         benefit_evidence: evidence that your client receives %{benefit}
         client_employment_evidence: evidence of your client's employment
-        partner_employment_evidence: evidence of the partner's employment
+        part_employ_evidence: evidence of the partner's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
         court_application: the application to court for Section 8 proceedings (optional)
         court_order: the court order for Section 8 proceedings

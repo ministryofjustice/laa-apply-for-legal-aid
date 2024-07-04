@@ -12,7 +12,7 @@ class RequiredDocumentCategoryAnalyser
     required_document_categories << "benefit_evidence" if @application.dwp_override&.has_evidence_of_benefit?
     required_document_categories << "gateway_evidence" if @application.section_8_proceedings?
     required_document_categories << "client_employment_evidence" if @application.employment_evidence_required?
-    required_document_categories << "partner_employment_evidence" if @application&.partner&.employment_evidence_required?
+    required_document_categories << "part_employ_evidence" if @application&.partner&.employment_evidence_required?
     required_document_categories << "court_application_or_order" if has_opponents_application? && !has_listed_final_hearing?
     if has_listed_final_hearing? && !has_opponents_application?
       required_document_categories << "court_order"

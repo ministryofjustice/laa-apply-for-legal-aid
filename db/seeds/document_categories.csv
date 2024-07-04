@@ -4,8 +4,8 @@ benefit_evidence,FALSE,,TRUE,TRUE
 benefit_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
 client_employment_evidence,FALSE,,TRUE,TRUE
 client_employment_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
-partner_employment_evidence,FALSE,,TRUE,TRUE
-partner_employment_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
+part_employ_evidence,FALSE,,TRUE,TRUE
+part_employ_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
 gateway_evidence,FALSE,,TRUE,FALSE
 gateway_evidence_pdf,TRUE,STATE,FALSE,FALSE
 means_report,TRUE,ADMIN1,FALSE,FALSE

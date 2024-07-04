@@ -15,7 +15,7 @@ RSpec.describe DocumentCategory do
       %w[
         benefit_evidence
         client_employment_evidence
-        partner_employment_evidence
+        part_employ_evidence
         gateway_evidence
         uncategorised
         court_application_or_order
@@ -39,7 +39,7 @@ RSpec.describe DocumentCategory do
         bank_statement_evidence_pdf
         benefit_evidence_pdf
         client_employment_evidence_pdf
-        partner_employment_evidence_pdf
+        part_employ_evidence_pdf
         gateway_evidence_pdf
         means_report
         merits_report
