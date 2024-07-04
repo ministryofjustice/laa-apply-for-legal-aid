@@ -1255,6 +1255,7 @@ en:
         prohibited_steps_html: <span class="govuk-visually-hidden">%{proceeding} </span>Prohibited steps
         opponents_application_html: <span class="govuk-visually-hidden">%{proceeding} </span>Opponent application
         vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Reason for new application
+        client_relationship_to_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Who your client is in the proceeding
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -1281,6 +1282,7 @@ en:
           nature_of_urgency: nature_of_urgencies
           vary_order: vary_order
           opponents_application: opponents_application
+          client_relationship_to_proceeding: is_client_biological_parent
     merits_reports:
       show:
         heading: Merits report
