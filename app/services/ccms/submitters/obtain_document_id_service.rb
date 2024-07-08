@@ -2,9 +2,10 @@ module CCMS
   module Submitters
     class ObtainDocumentIdService < BaseSubmissionService
       def call
+        submission.submission_documents.destroy_all
         return unless populate_documents
 
-        submission.submission_documents.each do |document|
+        submission.reload.submission_documents.each do |document|
           request_document_id(document)
         end
         raise CCMSError, "Failed to obtain document ids for: #{failed_requesting_ids}" if failed_requesting_ids.present?
