@@ -363,6 +363,7 @@ Rails.application.routes.draw do
         resource :success_prospects, only: %i[show update]
         resource :vary_order, only: %i[show update], controller: "vary_order"
         resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
+        resource :does_client_have_parental_responsibility, only: %i[show update]
       end
     end
   end
