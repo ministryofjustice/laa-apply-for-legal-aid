@@ -2,18 +2,7 @@ module Flow
   module Flows
     class ProviderDWPOverride < FlowSteps
       STEPS = {
-        confirm_dwp_non_passported_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application) },
-          forward: lambda do |application, confirm_dwp_non_passported|
-            if confirm_dwp_non_passported
-              application.change_state_machine_type("NonPassportedStateMachine")
-              :about_financial_means
-            else
-              application.change_state_machine_type("PassportedStateMachine")
-              :check_client_details
-            end
-          end,
-        },
+        confirm_dwp_non_passported_applications: Steps::ProviderDWPOverride::ConfirmDWPNonPassportedApplicationsStep,
         check_client_details: {
           path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
           forward: :received_benefit_confirmations,
