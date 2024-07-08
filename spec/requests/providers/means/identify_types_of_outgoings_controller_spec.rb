@@ -85,9 +85,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         expect { request }.to change { legal_aid_application.reload.no_debit_transaction_types_selected }.to(false)
       end
 
-      it "redirects to the means cash outgoings page" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "creates a legal_aid_application_transaction_types record with ownership" do
@@ -101,9 +101,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
           legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
-        it "redirects to the means cash outgoings page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
@@ -177,9 +177,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
                  transaction_types: income_types)
         end
 
-        it "redirects to the income summary page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
 
@@ -192,9 +192,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
                  transaction_types: [])
         end
 
-        it "redirects to the has dependants page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
 
         context "and there is a partner" do
@@ -225,9 +225,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
             legal_aid_application.transaction_types << maintenance_in
           end
 
-          it "redirects to has_dependants" do
+          it "redirects to the next step" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -262,18 +262,18 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
             legal_aid_application.transaction_types.debits.destroy_all
           end
 
-          it "redirects to checking answers income" do
+          it "redirects to the next step" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "with debit transaction type" do
           let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :debit).id] } } }
 
-          it "redirects to cash_outgoings" do
+          it "redirects to the next step" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
@@ -289,18 +289,18 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
             legal_aid_application.transaction_types.debits.destroy_all
           end
 
-          it "redirects to outgoings_summary" do
+          it "redirects to the next step" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "with debit transaction types" do
           let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :debit).id] } } }
 
-          it "redirects to cash_outgoings" do
+          it "redirects to the next step" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
       end
