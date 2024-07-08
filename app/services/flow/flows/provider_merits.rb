@@ -31,6 +31,7 @@ module Flow
         specific_issue: Steps::ProviderMerits::SpecificIssueStep,
         vary_order: Steps::ProviderMerits::VaryOrderStep,
         is_client_biological_parent: Steps::ProviderMerits::BiologicalParentStep,
+        does_client_have_parental_responsibilities: Steps::ProviderMerits::ParentalResponsibilitiesStep,
         merits_task_lists: Steps::ProviderMerits::MeritsTaskListsStep,
         uploaded_evidence_collections: Steps::ProviderMerits::UploadedEvidenceCollectionsStep,
         check_merits_answers: Steps::ProviderMerits::CheckMeritsAnswersStep,
