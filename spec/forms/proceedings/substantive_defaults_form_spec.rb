@@ -107,5 +107,25 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
         end
       end
     end
+
+    context "with a Special Childrens Act proceeding" do
+      let(:params) { {} }
+      let(:proceeding) { create(:proceeding, :pb003, :without_df_date, client_involvement_type_ccms_code: "A", no_scope_limitations: true) }
+
+      it "sets the default values" do
+        expect(proceeding.substantive_level_of_service).to eq 3
+        expect(proceeding.substantive_level_of_service_name).to eq "Full Representation"
+        expect(proceeding.substantive_level_of_service_stage).to eq 8
+      end
+
+      context "without calling the subject" do
+        let(:skip_subject) { true }
+
+        it "creates a scope_limitation object" do
+          expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
+          expect(proceeding.scope_limitations.find_by(scope_type: :substantive)).to have_attributes(code: "FM062", description: "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.")
+        end
+      end
+    end
   end
 end

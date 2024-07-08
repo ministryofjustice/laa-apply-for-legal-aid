@@ -22,6 +22,12 @@ RSpec.describe Flow::Steps::ProviderProceedingLoop::SubstantiveDefaultsStep, typ
       it { is_expected.to eq :limitations }
     end
 
+    context "when the application is a Special Childrens Act proceeding" do
+      let(:proceeding) { create(:proceeding, :pb003, legal_aid_application:, accepted_substantive_defaults: nil) }
+
+      it { is_expected.to eq :limitations }
+    end
+
     context "when accepted_substantive_defaults is false" do
       let(:accepted_substantive_defaults) { false }
 
