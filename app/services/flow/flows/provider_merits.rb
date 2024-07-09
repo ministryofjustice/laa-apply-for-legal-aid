@@ -18,11 +18,7 @@ module Flow
         domestic_abuse_summaries: Steps::ProviderMerits::DomesticAbuseSummariesStep,
         statement_of_cases: Steps::ProviderMerits::StatementOfCasesStep,
         client_denial_of_allegations: Steps::ProviderMerits::ClientDenialOfAllegationsStep,
-        client_offered_undertakings: {
-          path: ->(application) { urls.providers_legal_aid_application_client_offered_undertakings_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
+        client_offered_undertakings: Steps::ProviderMerits::ClientOfferedUndertakingsStep,
         in_scope_of_laspos: Steps::ProviderMerits::InScopeOfLasposStep,
         nature_of_urgencies: Steps::ProviderMerits::NatureOfUrgenciesStep,
         matter_opposed_reasons: Steps::ProviderMerits::MatterOpposedReasonsStep,
