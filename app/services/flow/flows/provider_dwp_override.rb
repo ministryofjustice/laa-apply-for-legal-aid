@@ -3,10 +3,7 @@ module Flow
     class ProviderDWPOverride < FlowSteps
       STEPS = {
         confirm_dwp_non_passported_applications: Steps::ProviderDWPOverride::ConfirmDWPNonPassportedApplicationsStep,
-        check_client_details: {
-          path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
-          forward: :received_benefit_confirmations,
-        },
+        check_client_details: Steps::ProviderDWPOverride::CheckClientDetailsStep,
         received_benefit_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
           forward: lambda do |application, has_benefit|

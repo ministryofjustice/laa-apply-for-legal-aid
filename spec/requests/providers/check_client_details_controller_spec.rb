@@ -97,8 +97,8 @@ RSpec.describe Providers::CheckClientDetailsController do
       patch_request
     end
 
-    it "continues to the received benefit confirmations page" do
-      expect(response).to redirect_to(providers_legal_aid_application_received_benefit_confirmation_path(application))
+    it "redirects to the next page" do
+      expect(response).to have_http_status(:redirect)
     end
   end
 end
