@@ -14,10 +14,7 @@ module Flow
         student_finances: Steps::ProviderIncome::StudentFinancesStep,
         identify_types_of_outgoings: Steps::ProviderIncome::IdentifyTypesOfOutgoingsStep,
         outgoings_summary: Steps::ProviderIncome::OutgoingsSummaryStep,
-        outgoing_transactions: {
-          path: ->(application, params) { urls.providers_legal_aid_application_outgoing_transactions_path(application, params.slice(:transaction_type)) },
-          forward: :outgoings_summary,
-        },
+        outgoing_transactions: Steps::ProviderIncome::OutgoingTransactionsStep,
         regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoings_path(application) },
           forward: lambda do |application|
