@@ -4,18 +4,7 @@ module Flow
       STEPS = {
         confirm_dwp_non_passported_applications: Steps::ProviderDWPOverride::ConfirmDWPNonPassportedApplicationsStep,
         check_client_details: Steps::ProviderDWPOverride::CheckClientDetailsStep,
-        received_benefit_confirmations: {
-          path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
-          forward: lambda do |application, has_benefit|
-            if has_benefit
-              application.change_state_machine_type("PassportedStateMachine")
-              :has_evidence_of_benefits
-            else
-              application.change_state_machine_type("NonPassportedStateMachine")
-              :about_financial_means
-            end
-          end,
-        },
+        received_benefit_confirmations: Steps::ProviderDWPOverride::ReceivedBenefitConfirmationsStep,
         has_evidence_of_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_has_evidence_of_benefit_path(application) },
           forward: lambda do |application, has_evidence_of_benefit|
