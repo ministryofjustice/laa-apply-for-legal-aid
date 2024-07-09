@@ -13,17 +13,7 @@ module Flow
         cash_incomes: Steps::ProviderIncome::CashIncomesStep,
         student_finances: Steps::ProviderIncome::StudentFinancesStep,
         identify_types_of_outgoings: Steps::ProviderIncome::IdentifyTypesOfOutgoingsStep,
-        outgoings_summary: {
-          path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: lambda do |application|
-            if application.applicant.has_partner_with_no_contrary_interest?
-              :partner_about_financial_means
-            else
-              :has_dependants
-            end
-          end,
-          check_answers: :check_income_answers,
-        },
+        outgoings_summary: Steps::ProviderIncome::OutgoingsSummaryStep,
         outgoing_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_outgoing_transactions_path(application, params.slice(:transaction_type)) },
           forward: :outgoings_summary,
