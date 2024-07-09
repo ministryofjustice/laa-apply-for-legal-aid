@@ -31,18 +31,7 @@ module Flow
         proceedings_sca_change_of_names: Steps::ProceedingsSCA::ChangeOfNamesStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: Steps::ProviderStart::LimitationsStep,
-        has_national_insurance_numbers: {
-          path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
-          forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :check_provider_answers
-            else
-              :client_has_partners
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: false,
-        },
+        has_national_insurance_numbers: Steps::ProviderStart::HasNationalInsuranceNumbersStep,
         # partner_flow called here
         check_provider_answers: Steps::ProviderStart::CheckProviderAnswersStep,
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
