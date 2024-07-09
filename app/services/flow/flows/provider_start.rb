@@ -21,14 +21,7 @@ module Flow
         link_application_confirm_links: Steps::LinkedApplications::ConfirmLinkStep,
         link_application_copies: Steps::LinkedApplications::CopyStep,
         about_financial_means: Steps::ProviderStart::AboutFinancialMeansStep,
-        applicant_employed: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
-          forward: lambda do |application|
-            next_step = application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
-
-            application.employment_journey_ineligible? ? :use_ccms_employment : next_step
-          end,
-        },
+        applicant_employed: Steps::ProviderStart::ApplicantEmployedStep,
         proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
         proceedings_sca_proceeding_issue_statuses: Steps::ProceedingsSCA::ProceedingIssueStatusesStep,
         proceedings_sca_supervision_orders: Steps::ProceedingsSCA::SupervisionOrderStep,
