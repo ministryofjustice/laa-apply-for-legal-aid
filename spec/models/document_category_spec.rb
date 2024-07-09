@@ -48,6 +48,7 @@ RSpec.describe DocumentCategory do
         court_application_pdf
         court_order_pdf
         expert_report_pdf
+        part_bank_state_evidence_pdf
       ]
     end
 
