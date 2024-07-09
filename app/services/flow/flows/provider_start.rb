@@ -20,10 +20,7 @@ module Flow
         link_application_find_link_applications: Steps::LinkedApplications::FindLinkStep,
         link_application_confirm_links: Steps::LinkedApplications::ConfirmLinkStep,
         link_application_copies: Steps::LinkedApplications::CopyStep,
-        about_financial_means: {
-          path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },
-          forward: :applicant_employed,
-        },
+        about_financial_means: Steps::ProviderStart::AboutFinancialMeansStep,
         applicant_employed: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
           forward: lambda do |application|
