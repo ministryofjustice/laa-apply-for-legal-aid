@@ -7,6 +7,15 @@ class DummyDocumentCategory
 end
 
 RSpec.describe DocumentCategoryValidator do
+  describe "VALID_DOCUMENT_TYPE length" do
+    it "has 30 characters or fewer to be valid" do
+      doc_types = DocumentCategoryValidator::VALID_DOCUMENT_TYPES
+                    .index_with(&:length)
+                    .reject { |_k, v| v <= 30 }
+      expect(doc_types).to be_empty
+    end
+  end
+
   context "with Attachment" do
     subject(:document_category_validator) { Attachment.create! legal_aid_application: laa, attachment_type: }
 
