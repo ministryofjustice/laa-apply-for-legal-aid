@@ -49,9 +49,7 @@ module Flow
         no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
         check_benefits: Steps::ProviderStart::CheckBenefitsStep,
         substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
-        delegated_confirmation: {
-          path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
-        },
+        delegated_confirmation: Steps::ProviderStart::DelegatedConfirmationStep,
         open_banking_consents: Steps::ProviderStart::OpenBankingConsentsStep,
         open_banking_guidances: Steps::ProviderStart::OpenBankingGuidancesStep,
         bank_statements: Steps::ProviderStart::BankStatementsStep,
