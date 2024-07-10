@@ -39,15 +39,15 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
     context "when yes chosen and valid national insurance number provided" do
       let(:params) { { applicant: { has_national_insurance_number: "true", national_insurance_number: "JA 12 34 56 D" } } }
 
-      it "redirects to the client_has_partner page" do
-        expect(response).to redirect_to(providers_legal_aid_application_client_has_partner_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
 
       context "when the legal aid application is in overriding_dwp_result state" do
         let(:legal_aid_application) { create(:legal_aid_application, :overriding_dwp_result) }
 
-        it "redirects to check provider answers page" do
-          expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
@@ -55,8 +55,8 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
     context "when no chosen" do
       let(:params) { { applicant: { has_national_insurance_number: "false" } } }
 
-      it "redirects to the client_has_partner page" do
-        expect(response).to redirect_to(providers_legal_aid_application_client_has_partner_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 

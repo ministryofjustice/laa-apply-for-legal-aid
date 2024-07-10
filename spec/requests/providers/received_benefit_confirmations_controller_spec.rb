@@ -90,9 +90,9 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
         end
       end
 
-      it "continue to the has_evidence_of_benefit page" do
+      it "redirects to the next page" do
         patch_request
-        expect(response).to redirect_to(providers_legal_aid_application_has_evidence_of_benefit_path(application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 

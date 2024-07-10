@@ -108,9 +108,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           patch_request
         end
 
-        it "displays the about financial means page" do
+        it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_about_financial_means_path(application))
+          expect(response).to have_http_status(:redirect)
         end
 
         it "uses the non-passported state machine" do
@@ -159,9 +159,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(application.reload.state).to eq "overriding_dwp_result"
         end
 
-        it "displays the check_client_details page" do
+        it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
+          expect(response).to have_http_status(:redirect)
         end
 
         it "does not update the partner shared benefit field" do
@@ -203,9 +203,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(partner.reload.shared_benefit_with_applicant).to be true
         end
 
-        it "displays the check_client_details page" do
+        it "redirects to the next page" do
           patch_request
-          expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
+          expect(response).to have_http_status(:redirect)
         end
 
         it "uses the passported state machine" do

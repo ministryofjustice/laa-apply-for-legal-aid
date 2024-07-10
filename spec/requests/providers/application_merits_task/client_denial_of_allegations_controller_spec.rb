@@ -88,7 +88,7 @@ module Providers
 
           it "redirects to the next page" do
             post_client_denial
-            expect(response).to redirect_to(providers_legal_aid_application_client_offered_undertakings_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 

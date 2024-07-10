@@ -20,18 +20,8 @@ module Flow
         link_application_find_link_applications: Steps::LinkedApplications::FindLinkStep,
         link_application_confirm_links: Steps::LinkedApplications::ConfirmLinkStep,
         link_application_copies: Steps::LinkedApplications::CopyStep,
-        about_financial_means: {
-          path: ->(application) { urls.providers_legal_aid_application_about_financial_means_path(application) },
-          forward: :applicant_employed,
-        },
-        applicant_employed: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
-          forward: lambda do |application|
-            next_step = application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
-
-            application.employment_journey_ineligible? ? :use_ccms_employment : next_step
-          end,
-        },
+        about_financial_means: Steps::ProviderStart::AboutFinancialMeansStep,
+        applicant_employed: Steps::ProviderStart::ApplicantEmployedStep,
         proceedings_types: Steps::ProviderStart::ProceedingsTypesStep,
         proceedings_sca_proceeding_issue_statuses: Steps::ProceedingsSCA::ProceedingIssueStatusesStep,
         proceedings_sca_supervision_orders: Steps::ProceedingsSCA::SupervisionOrderStep,
@@ -41,27 +31,14 @@ module Flow
         proceedings_sca_change_of_names: Steps::ProceedingsSCA::ChangeOfNamesStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: Steps::ProviderStart::LimitationsStep,
-        has_national_insurance_numbers: {
-          path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
-          forward: lambda do |application|
-            if application.overriding_dwp_result?
-              :check_provider_answers
-            else
-              :client_has_partners
-            end
-          end,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: false,
-        },
+        has_national_insurance_numbers: Steps::ProviderStart::HasNationalInsuranceNumbersStep,
         # partner_flow called here
         check_provider_answers: Steps::ProviderStart::CheckProviderAnswersStep,
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
         no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
         check_benefits: Steps::ProviderStart::CheckBenefitsStep,
         substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
-        delegated_confirmation: {
-          path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) },
-        },
+        delegated_confirmation: Steps::ProviderStart::DelegatedConfirmationStep,
         open_banking_consents: Steps::ProviderStart::OpenBankingConsentsStep,
         open_banking_guidances: Steps::ProviderStart::OpenBankingGuidancesStep,
         bank_statements: Steps::ProviderStart::BankStatementsStep,

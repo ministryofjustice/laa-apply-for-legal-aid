@@ -17,32 +17,14 @@ module Flow
         opponents_mental_capacities: Steps::ProviderMerits::OpponentsMentalCapacitiesStep,
         domestic_abuse_summaries: Steps::ProviderMerits::DomesticAbuseSummariesStep,
         statement_of_cases: Steps::ProviderMerits::StatementOfCasesStep,
-        client_denial_of_allegations: {
-          path: ->(application) { urls.providers_legal_aid_application_client_denial_of_allegation_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
-        client_offered_undertakings: {
-          path: ->(application) { urls.providers_legal_aid_application_client_offered_undertakings_path(application) },
-          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
-          check_answers: :check_merits_answers,
-        },
+        client_denial_of_allegations: Steps::ProviderMerits::ClientDenialOfAllegationsStep,
+        client_offered_undertakings: Steps::ProviderMerits::ClientOfferedUndertakingsStep,
         in_scope_of_laspos: Steps::ProviderMerits::InScopeOfLasposStep,
         nature_of_urgencies: Steps::ProviderMerits::NatureOfUrgenciesStep,
         matter_opposed_reasons: Steps::ProviderMerits::MatterOpposedReasonsStep,
         chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
         success_prospects: Steps::ProviderMerits::SuccessProspectsStep,
-        opponents_application: {
-          path: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            urls.providers_merits_task_list_opponents_application_path(proceeding)
-          end,
-          forward: lambda do |application|
-            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
-            Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
-          end,
-          check_answers: :check_merits_answers,
-        },
+        opponents_application: Steps::ProviderMerits::OpponentsApplicationStep,
         attempts_to_settle: Steps::ProviderMerits::AttemptsToSettleStep,
         prohibited_steps: Steps::ProviderMerits::ProhibitedStepsStep,
         linked_children: Steps::ProviderMerits::LinkedChildrenStep,

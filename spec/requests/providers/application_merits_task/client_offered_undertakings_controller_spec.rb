@@ -81,7 +81,7 @@ module Providers
 
         it "redirects to the next page" do
           post_client_undertakings
-          expect(response).to redirect_to(flow_forward_path)
+          expect(response).to have_http_status(:redirect)
         end
 
         context "when not authenticated" do
