@@ -35,9 +35,9 @@ RSpec.describe "POST /v1/partners/bank_statements" do
         request
         expect(legal_aid_application.reload.attachments.last)
           .to have_attributes(document: be_a(ActiveStorage::Attached::One),
-                              attachment_type: "partner_bank_statement_evidence",
+                              attachment_type: "part_bank_state_evidence",
                               original_filename: "hello_world.pdf",
-                              attachment_name: "partner_bank_statement_evidence")
+                              attachment_name: "part_bank_state_evidence")
       end
 
       context "with background job processing" do
@@ -53,12 +53,12 @@ RSpec.describe "POST /v1/partners/bank_statements" do
 
         it "adds original and converted attachments types" do
           request
-          expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[partner_bank_statement_evidence partner_bank_statement_evidence_pdf])
+          expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[part_bank_state_evidence part_bank_state_evidence_pdf])
         end
 
         it "associates pdf converted attachment to original attachment" do
           request
-          original_attachment = legal_aid_application.attachments.find_by(attachment_type: "partner_bank_statement_evidence")
+          original_attachment = legal_aid_application.attachments.find_by(attachment_type: "part_bank_state_evidence")
           expect(original_attachment.pdf_attachment_id).not_to be_nil
         end
       end
@@ -69,30 +69,30 @@ RSpec.describe "POST /v1/partners/bank_statements" do
         it "does not increment the attachment name" do
           request
           expect(legal_aid_application.attachments.count).to be 1
-          expect(legal_aid_application.reload.attachments.last.attachment_name).to match("partner_bank_statement_evidence")
+          expect(legal_aid_application.reload.attachments.last.attachment_name).to match("part_bank_state_evidence")
         end
       end
 
       context "when the application has one bank statement attachment already" do
-        let(:partner_bank_statement_evidence) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence") }
-        let!(:legal_aid_application) { create(:legal_aid_application, attachments: [partner_bank_statement_evidence]) }
+        let(:part_bank_state_evidence) { create(:attachment, :partner_bank_statement, attachment_name: "part_bank_state_evidence") }
+        let!(:legal_aid_application) { create(:legal_aid_application, attachments: [part_bank_state_evidence]) }
 
         it "increments the attachment name" do
           request
           expect(legal_aid_application.attachments.count).to be 2
-          expect(legal_aid_application.attachments.order(:attachment_name).last.attachment_name).to eql("partner_bank_statement_evidence_1")
+          expect(legal_aid_application.attachments.order(:attachment_name).last.attachment_name).to eql("part_bank_state_evidence_1")
         end
       end
 
       context "when the application has multiple attachments for bank statement already" do
-        let(:bs1) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence") }
-        let(:bs2) { create(:attachment, :partner_bank_statement, attachment_name: "partner_bank_statement_evidence_1") }
+        let(:bs1) { create(:attachment, :partner_bank_statement, attachment_name: "part_bank_state_evidence") }
+        let(:bs2) { create(:attachment, :partner_bank_statement, attachment_name: "part_bank_state_evidence_1") }
         let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bs1, bs2]) }
 
         it "increments the attachment name" do
           request
           expect(legal_aid_application.attachments.count).to be 3
-          expect(legal_aid_application.attachments.order(:attachment_name).last.attachment_name).to eql("partner_bank_statement_evidence_2")
+          expect(legal_aid_application.attachments.order(:attachment_name).last.attachment_name).to eql("part_bank_state_evidence_2")
         end
       end
 

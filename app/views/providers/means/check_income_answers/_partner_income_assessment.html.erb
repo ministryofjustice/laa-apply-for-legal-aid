@@ -1,7 +1,7 @@
 <section class="partner">
   <h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
 
-  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, read_only: false, partner: true) %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.part_bank_state_evidence, read_only: false, partner: true) %>
 
   <% if @legal_aid_application.partner.hmrc_employment_income? %>
     <% if @legal_aid_application.partner.has_multiple_employments? %>

@@ -19,7 +19,7 @@
       <%= render("outgoings", individual: "Client") %>
 
       <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.partner_bank_statement_evidence, individual: "Partner", read_only: true) %>
+        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.part_bank_state_evidence, individual: "Partner", read_only: true) %>
 
         <% if @cfe_result.partner_jobs? %>
           <%= render("employment_income", individual: "Partner") %>

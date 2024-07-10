@@ -4,14 +4,15 @@
 # - to validate the name field on the DocumentCategory model
 #
 class DocumentCategoryValidator < ActiveModel::Validator
+  # these names should not exceed 30 characters
   VALID_DOCUMENT_TYPES = %w[
     bank_transaction_report
     benefit_evidence
     benefit_evidence_pdf
     client_employment_evidence
     client_employment_evidence_pdf
-    partner_employment_evidence
-    partner_employment_evidence_pdf
+    part_employ_evidence
+    part_employ_evidence_pdf
     gateway_evidence
     gateway_evidence_pdf
     means_report
@@ -28,8 +29,8 @@ class DocumentCategoryValidator < ActiveModel::Validator
     expert_report_pdf
     court_application_or_order
     court_application_or_order_pdf
-    partner_bank_statement_evidence
-    partner_bank_statement_evidence_pdf
+    part_bank_state_evidence
+    part_bank_state_evidence_pdf
   ].freeze
 
   def validate(record)
