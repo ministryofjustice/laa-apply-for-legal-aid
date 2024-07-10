@@ -811,6 +811,7 @@ en:
         court_order: the court order for Section 8 proceedings
         court_application_or_order: the application to court or court order for Section 8 proceedings
         expert_report: expert reports - for example, a CAFCASS report (optional)
+        parental_responsibility: evidence of your client's parental responsibility
         size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
         dropzone_message: Drag and drop files here or
         choose_files_btn: Choose files
