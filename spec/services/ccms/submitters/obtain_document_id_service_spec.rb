@@ -52,6 +52,7 @@ module CCMS
             create(:attachment, :bank_transaction_report, legal_aid_application:)
             create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:)
             create(:uploaded_evidence_collection, :with_original_and_pdf_files_attached, legal_aid_application:)
+            submission.submission_documents << failed_submission_document
           end
 
           let(:all_attachment_types) do
@@ -76,6 +77,8 @@ module CCMS
             ]
           end
 
+          let(:failed_submission_document) { create(:submission_document, :failed, attachment_id: legal_aid_application.attachments.find_by(attachment_name: "statement_of_case").id) }
+
           it "only populates the documents array with submittable documents" do
             expect(legal_aid_application.attachments.map(&:attachment_type)).to match_array all_attachment_types
             instance.call
@@ -86,6 +89,10 @@ module CCMS
             instance.call
             gateway_evidence_submission = submission.submission_documents.select { |a| a.document_type == "gateway_evidence_pdf" }
             expect(gateway_evidence_submission.count).to eq 1
+          end
+
+          it "deletes any existing submission documents" do
+            expect { instance.call }.to change { SubmissionDocument.exists?(failed_submission_document.id) }.to false
           end
 
           context "when requesting document_ids" do
@@ -177,6 +184,13 @@ module CCMS
             expect(history.details).to match(/Failed to obtain document ids for/)
             expect(history.request).to be_nil
             expect(history.response).to be_nil
+          end
+
+          it "does not create duplicate submission documents when called multiple times" do
+            expect { instance.call }.to raise_error(fake_error, "Failed to obtain document ids for")
+            expect(submission.reload.submission_documents.count).to eq 1
+            expect { instance.call }.to raise_error(fake_error, "Failed to obtain document ids for")
+            expect(submission.reload.submission_documents.count).to eq 1
           end
         end
 

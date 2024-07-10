@@ -20,5 +20,11 @@ FactoryBot.define do
       document_type { :statement_of_case }
       ccms_document_id { Faker::Number.number(digits: 10) }
     end
+
+    trait :failed do
+      status { :failed }
+      document_type { :statement_of_case }
+      ccms_document_id { nil }
+    end
   end
 end
