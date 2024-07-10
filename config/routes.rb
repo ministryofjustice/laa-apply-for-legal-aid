@@ -364,6 +364,7 @@ Rails.application.routes.draw do
         resource :vary_order, only: %i[show update], controller: "vary_order"
         resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
         resource :does_client_have_parental_responsibility, only: %i[show update]
+        resource :is_client_child_subject, only: %i[show update], controller: :is_client_child_subject
       end
     end
   end

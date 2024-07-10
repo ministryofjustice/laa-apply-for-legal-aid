@@ -1,0 +1,19 @@
+<%= form_with(model: @form,
+              url: providers_merits_task_list_is_client_child_subject_path(@proceeding),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: "Is your client a chlld subject of this proceeding", template: :basic, form: do %>
+    <% options = [
+         [:child_subject, t("generic.yes")],
+         ["", t("generic.no")],
+       ] %>
+
+    <%= form.govuk_collection_radio_buttons :child_subject,
+                                            options,
+                                            :first,
+                                            :second,
+                                            hint: { text: "" },
+                                            legend: { text: page_title, tag: "h1", size: "xl" },
+                                            caption: { text: @proceeding.meaning, size: "xl" } %>
+  <% end %>
+<% end %>
