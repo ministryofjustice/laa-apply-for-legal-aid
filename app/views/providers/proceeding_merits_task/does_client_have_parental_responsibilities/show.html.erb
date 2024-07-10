@@ -6,7 +6,7 @@
     <% options = [
          [:court_order, t(".choice_one")],
          [:parental_responsibility_agreement, t(".choice_two")],
-         ["", t(".choice_three")],
+         [false, t(".choice_three")],
        ] %>
     <%= form.govuk_collection_radio_buttons :relationship_to_child,
                                             options,

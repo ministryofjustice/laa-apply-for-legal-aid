@@ -85,7 +85,7 @@ module Providers
             end
 
             context "when provider chooses no" do
-              let(:relationship_to_child) { "" }
+              let(:relationship_to_child) { "false" }
 
               it "does not change relationship_to_child" do
                 expect { patch_request }.not_to change { proceeding.reload.relationship_to_child }
