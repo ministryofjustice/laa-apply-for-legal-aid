@@ -77,11 +77,7 @@ module Flow
         },
         partner_regular_outgoings: Steps::Partner::RegularOutgoingsStep,
         partner_cash_outgoings: Steps::Partner::CashOutgoingsStep,
-        partner_full_employment_details: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
-          forward: :partner_receives_state_benefits,
-          check_answers: :check_income_answers,
-        },
+        partner_full_employment_details: Steps::Partner::FullEmploymentDetailsStep,
         partner_employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_employment_income_path(application) },
           forward: :partner_receives_state_benefits,
