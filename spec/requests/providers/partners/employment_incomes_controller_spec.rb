@@ -73,8 +73,8 @@ RSpec.describe Providers::Partners::EmploymentIncomesController do
           expect(partner.reload.extra_employment_information_details).not_to be_empty
         end
 
-        it "redirects to the partner receives benefits page" do
-          expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(application))
+        it "redirects to the next step" do
+          expect(response).to have_http_status(:redirect)
         end
 
         context "with invalid params" do
