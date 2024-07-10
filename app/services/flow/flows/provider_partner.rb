@@ -79,10 +79,7 @@ module Flow
         partner_cash_outgoings: Steps::Partner::CashOutgoingsStep,
         partner_full_employment_details: Steps::Partner::FullEmploymentDetailsStep,
         partner_employment_incomes: Steps::Partner::EmploymentIncomesStep,
-        partner_unexpected_employment_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_unexpected_employment_income_path(application) },
-          forward: :partner_receives_state_benefits,
-        },
+        partner_unexpected_employment_incomes: Steps::Partner::UnexpectedEmploymentIncomeStep,
       }.freeze
     end
   end
