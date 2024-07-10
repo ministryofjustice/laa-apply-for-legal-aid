@@ -72,6 +72,11 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
           expect(partner.reload.extra_employment_information_details).not_to be_empty
         end
 
+        it "redirects to the next step" do
+          request
+          expect(response).to have_http_status(:redirect)
+        end
+
         context "with invalid params" do
           let(:extra_employment_information_details) { "" }
 
