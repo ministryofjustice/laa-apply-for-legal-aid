@@ -7,10 +7,16 @@ module Providers
 
       validates :relationship_to_child,
                 inclusion: {
-                  in: ["biological", ""],
+                  in: %w[biological false],
                   message: I18n.t("providers.proceeding_merits_task.relationship_to_child.biological_parent.error"),
                 },
                 unless: :draft?
+
+      def save
+        self.relationship_to_child = nil if relationship_to_child.eql?("false")
+        super
+      end
+      alias_method :save!, :save
     end
   end
 end
