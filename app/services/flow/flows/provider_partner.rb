@@ -7,9 +7,7 @@ module Flow
         partner_details: Steps::Partner::DetailsStep,
         partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,
         partner_employed: Steps::Partner::EmployedStep,
-        partner_use_ccms_employment: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_use_ccms_employment_index_path(application) },
-        },
+        partner_use_ccms_employment: Steps::Partner::UseCCMSEmploymentStep,
         partner_bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_partners_bank_statements_path(application) },
           forward: lambda do |application|
