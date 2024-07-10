@@ -122,6 +122,16 @@ FactoryBot.define do
       applicant { build(:applicant, :with_address, date_of_birth: 18.years.ago + 1.day, age_for_means_test_purposes: 17, has_partner: false) }
     end
 
+    trait :with_applicant_and_employed_partner_no_nino do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, :no_nino, employed: true) }
+    end
+
+    trait :with_applicant_and_partner_not_employed do
+      applicant { build(:applicant, :with_address, :with_partner) }
+      partner { build(:partner, employed: false) }
+    end
+
     #######################################################
     #        TRAITS TO SET STATE                          #
     #######################################################

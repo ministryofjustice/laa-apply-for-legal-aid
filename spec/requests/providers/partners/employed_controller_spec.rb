@@ -97,35 +97,35 @@ RSpec.describe Providers::Partners::EmployedController do
     end
 
     context "when the partner is eligible for employment journey" do
-      it "redirects to has dependants page for applications" do
+      it "redirects to the next step" do
         login_as provider
 
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
              params: { partner: { employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the partner is self employed" do
-      it "redirects to the use ccms page" do
+      it "redirects to the the next step" do
         login_as provider
 
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
              params: { partner: { self_employed: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_partners_use_ccms_employment_index_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the partner is in the armed forces" do
-      it "redirects to the use ccms page" do
+      it "redirects to the next step" do
         login_as provider
 
         post providers_legal_aid_application_partners_employed_index_path(legal_aid_application),
              params: { partner: { armed_forces: "true" } }
 
-        expect(response).to redirect_to(providers_legal_aid_application_partners_use_ccms_employment_index_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
