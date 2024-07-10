@@ -509,6 +509,13 @@ en:
           choice_one: Yes, under a court order
           choice_two: Yes, they have a parental responsibility agreement
           choice_three: No, they do not have parental responsibility
+      check_who_client_is:
+        show:
+          page_title: Check who your client is
+          paragraph: You must answer 'yes' to one of these questions. Check your answers and change the one that is wrong.
+          biological_parent: Client is the biological parent of any child involved?
+          parental_responsibilities: Client has parental responsibility for any child involved?
+          child_subject: Client is a child subject of this proceeding?
     application_merits_task:
       involved_children:
         new:
