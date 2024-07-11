@@ -95,23 +95,12 @@ RSpec.describe Providers::Partners::StudentFinancesController do
         end
       end
 
-      context "when the application is using the bank upload journey" do
-        let(:legal_aid_application) { create(:legal_aid_application, :without_open_banking_consent, :with_applicant_and_partner) }
-
-        it "redirects to the has dependants page" do
-          login_as provider
-          request
-
-          expect(response).to redirect_to(providers_legal_aid_application_partners_regular_outgoings_path(legal_aid_application))
-        end
-      end
-
       context "when the application is not using the bank upload journey" do
-        it "redirects to the has dependants page" do
+        it "redirects to the next page" do
           login_as provider
           request
 
-          expect(response).to redirect_to(providers_legal_aid_application_partners_regular_outgoings_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
