@@ -13,13 +13,7 @@ module Flow
         partner_state_benefits: Steps::Partner::StateBenefitsStep,
         partner_add_other_state_benefits: Steps::Partner::AddOtherStateBenefitsStep,
         partner_remove_state_benefits: Steps::Partner::RemoveStateBenefitsStep,
-        partner_regular_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_regular_incomes_path(application) },
-          forward: lambda do |application|
-            application.partner_income_types? ? :partner_cash_incomes : :partner_student_finances
-          end,
-          check_answers: ->(application) { application.partner_income_types? ? :partner_cash_incomes : :check_income_answers },
-        },
+        partner_regular_incomes: Steps::Partner::RegularIncomesStep,
         partner_cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_cash_income_path(application) },
           forward: :partner_student_finances,
