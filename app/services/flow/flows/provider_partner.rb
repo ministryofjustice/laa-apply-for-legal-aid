@@ -8,25 +8,7 @@ module Flow
         partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,
         partner_employed: Steps::Partner::EmployedStep,
         partner_use_ccms_employment: Steps::Partner::UseCCMSEmploymentStep,
-        partner_bank_statements: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_bank_statements_path(application) },
-          forward: lambda do |application|
-            status = HMRC::PartnerStatusAnalyzer.call(application)
-            case status
-            when :partner_multiple_employments, :partner_no_hmrc_data
-              :partner_full_employment_details
-            when :partner_single_employment
-              :partner_employment_incomes
-            when :partner_unexpected_employment_data
-              :partner_unexpected_employment_incomes
-            when :partner_not_employed
-              :partner_receives_state_benefits
-            else
-              raise "Unexpected hmrc status #{status.inspect}"
-            end
-          end,
-          check_answers: :check_income_answers,
-        },
+        partner_bank_statements: Steps::Partner::BankStatementsStep,
         partner_receives_state_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_partners_receives_state_benefits_path(application) },
           forward: lambda do |_application, receives_state_benefits|
