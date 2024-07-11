@@ -10,10 +10,7 @@ module Flow
         partner_use_ccms_employment: Steps::Partner::UseCCMSEmploymentStep,
         partner_bank_statements: Steps::Partner::BankStatementsStep,
         partner_receives_state_benefits: Steps::Partner::ReceivesStateBenefitsStep,
-        partner_state_benefits: {
-          path: ->(application) { urls.new_providers_legal_aid_application_partners_state_benefit_path(application) },
-          forward: :partner_add_other_state_benefits,
-        },
+        partner_state_benefits: Steps::Partner::StateBenefitsStep,
         partner_add_other_state_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_partners_add_other_state_benefits_path(application) },
           forward: lambda do |_application, add_other_state_benefits|
