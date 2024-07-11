@@ -14,11 +14,7 @@ module Flow
         partner_add_other_state_benefits: Steps::Partner::AddOtherStateBenefitsStep,
         partner_remove_state_benefits: Steps::Partner::RemoveStateBenefitsStep,
         partner_regular_incomes: Steps::Partner::RegularIncomesStep,
-        partner_cash_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_cash_income_path(application) },
-          forward: :partner_student_finances,
-          check_answers: :check_income_answers,
-        },
+        partner_cash_incomes: Steps::Partner::CashIncomesStep,
         partner_student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_partners_student_finance_path(application) },
           forward: :partner_regular_outgoings,
