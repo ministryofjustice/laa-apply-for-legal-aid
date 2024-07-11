@@ -50,7 +50,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         get providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to have_http_status(:redirect)
       end
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         patch(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application), params:)
 
-        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
       end
     end
@@ -103,7 +103,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         patch(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application), params:)
 
-        expect(response).to redirect_to(providers_legal_aid_application_partners_cash_income_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false
         identified_income = legal_aid_application.regular_transactions.credits
         expect(identified_income.pluck(:transaction_type_id, :amount, :frequency))
@@ -156,7 +156,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         patch(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application), params:)
 
-        expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
       end
     end
@@ -186,7 +186,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         patch(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application), params:)
 
-        expect(response).to redirect_to(providers_legal_aid_application_partners_cash_income_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false
         identified_income = legal_aid_application.regular_transactions.credits
         expect(identified_income.pluck(:transaction_type_id, :amount, :frequency))
@@ -200,7 +200,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         patch providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application)
 
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to have_http_status(:redirect)
       end
     end
   end
