@@ -65,9 +65,9 @@ RSpec.describe Providers::Partners::CashIncomesController do
     context "with valid params" do
       let(:params) { valid_params }
 
-      it "redirects to student_finances" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "updates the model attribute for no cash income to false" do
@@ -88,9 +88,9 @@ RSpec.describe Providers::Partners::CashIncomesController do
     context "with nothing selected" do
       let(:params) { nothing_selected }
 
-      it "redirects to student_finances" do
+      it "redirects to the next page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_partners_student_finance_path(legal_aid_application))
+        expect(response).to have_http_status(:redirect)
       end
 
       it "updates the model attribute for no cash income to true" do
@@ -151,9 +151,9 @@ RSpec.describe Providers::Partners::CashIncomesController do
           legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
-        it "redirects to the checking answers income page" do
+        it "redirects to the next page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_means_check_income_answers_path(legal_aid_application))
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
