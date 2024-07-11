@@ -27,6 +27,12 @@ RSpec.describe Providers::ProceedingMeritsTask::BiologicalParentForm, type: :for
         it { is_expected.not_to be_valid }
       end
 
+      context "when sent empty text" do
+        let(:relationship_to_child) { "" }
+
+        it { is_expected.not_to be_valid }
+      end
+
       context "when the parameters are missing" do
         let(:relationship_to_child) { nil }
 
