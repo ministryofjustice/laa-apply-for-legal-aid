@@ -73,9 +73,9 @@ module Providers
             expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:PB003, :client_relationship_to_proceeding)
           end
 
-          it "redirects to next page" do
+          it "redirects to parental responsibility question page" do
             patch_request
-            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to providers_merits_task_list_does_client_have_parental_responsibility_path(proceeding)
           end
         end
 

@@ -478,6 +478,8 @@ en:
       relationship_to_child:
         biological_parent:
           error: Select yes if your client is the biological parent of any children involved
+        parental_responsibilities:
+          error: Select if your client has parental responsibility for any children involved
       success_prospects:
         show:
           h1-heading: What is the chance of a successful outcome?
@@ -495,6 +497,13 @@ en:
       is_client_biological_parent:
         show:
           page_title: Is your client the biological parent of any children involved?
+      does_client_have_parental_responsibilities:
+        show:
+          page_title: Does your client have parental responsibility for any children involved?
+          paragraph: You'll need to upload supporting evidence later if they do.
+          choice_one: Yes, under a court order
+          choice_two: Yes, they have a parental responsibility agreement
+          choice_three: No, they do not have parental responsibility
     application_merits_task:
       involved_children:
         new:

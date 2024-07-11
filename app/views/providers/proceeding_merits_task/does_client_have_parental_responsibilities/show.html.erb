@@ -1,21 +1,21 @@
 <%= form_with(model: @form,
-              url: providers_merits_task_list_is_client_biological_parent_path(@proceeding),
+              url: providers_merits_task_list_does_client_have_parental_responsibility_path(@proceeding),
               method: :patch,
               local: true) do |form| %>
   <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
     <% options = [
-         [:biological, t("generic.yes")],
-         [false, t("generic.no")],
+         [:court_order, t(".choice_one")],
+         [:parental_responsibility_agreement, t(".choice_two")],
+         [false, t(".choice_three")],
        ] %>
-
     <%= form.govuk_collection_radio_buttons :relationship_to_child,
                                             options,
                                             :first,
                                             :second,
-                                            hint: { text: "" },
                                             legend: { text: page_title, tag: "h1", size: "xl" },
-                                            caption: { text: @proceeding.meaning, size: "xl" } %>
-
+                                            caption: { text: @proceeding.meaning, size: "xl" } do %>
+                                              <p class="govuk-body"><%= t(".paragraph") %></p>
+                                            <% end %>
     <%= next_action_buttons show_draft: true, form: %>
   <% end %>
 <% end %>
