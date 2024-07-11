@@ -9,23 +9,7 @@ module Flow
         partner_employed: Steps::Partner::EmployedStep,
         partner_use_ccms_employment: Steps::Partner::UseCCMSEmploymentStep,
         partner_bank_statements: Steps::Partner::BankStatementsStep,
-        partner_receives_state_benefits: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_receives_state_benefits_path(application) },
-          forward: lambda do |_application, receives_state_benefits|
-            receives_state_benefits ? :partner_state_benefits : :partner_regular_incomes
-          end,
-          check_answers: lambda do |application|
-            if application.partner.receives_state_benefits?
-              if application.partner.state_benefits.count.positive?
-                :partner_add_other_state_benefits
-              else
-                :partner_state_benefits
-              end
-            else
-              :check_income_answers
-            end
-          end,
-        },
+        partner_receives_state_benefits: Steps::Partner::ReceivesStateBenefitsStep,
         partner_state_benefits: {
           path: ->(application) { urls.new_providers_legal_aid_application_partners_state_benefit_path(application) },
           forward: :partner_add_other_state_benefits,
