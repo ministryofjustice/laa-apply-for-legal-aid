@@ -2,7 +2,7 @@
               url: providers_merits_task_list_is_client_child_subject_path(@proceeding),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: "Is your client a chlld subject of this proceeding", template: :basic, form: do %>
+  <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
     <% options = [
          [:child_subject, t("generic.yes")],
          ["", t("generic.no")],

@@ -499,6 +499,9 @@ en:
       is_client_biological_parent:
         show:
           page_title: Is your client the biological parent of any children involved?
+      is_client_child_subject:
+        show:
+          page_title: Is your client a child subject of this proceeding?
       does_client_have_parental_responsibilities:
         show:
           page_title: Does your client have parental responsibility for any children involved?
