@@ -11,15 +11,7 @@ module Flow
         partner_bank_statements: Steps::Partner::BankStatementsStep,
         partner_receives_state_benefits: Steps::Partner::ReceivesStateBenefitsStep,
         partner_state_benefits: Steps::Partner::StateBenefitsStep,
-        partner_add_other_state_benefits: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_add_other_state_benefits_path(application) },
-          forward: lambda do |_application, add_other_state_benefits|
-            add_other_state_benefits ? :partner_state_benefits : :partner_regular_incomes
-          end,
-          check_answers: lambda do |_application, add_other_state_benefits|
-            add_other_state_benefits ? :partner_state_benefits : :check_income_answers
-          end,
-        },
+        partner_add_other_state_benefits: Steps::Partner::AddOtherStateBenefitsStep,
         partner_remove_state_benefits: Steps::Partner::RemoveStateBenefitsStep,
         partner_regular_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_partners_regular_incomes_path(application) },
