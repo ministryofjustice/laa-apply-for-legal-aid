@@ -475,6 +475,9 @@ en:
           h1-heading: Is the prohibited step to prevent removal from the UK?
           no-hint: What are you asking to be prohibited?
           confirmed_not_change_of_name: I confirm this prohibited steps proceeding is not for a change of name application
+      relationship_to_child:
+        biological_parent:
+          error: Select yes if your client is the biological parent of any children involved
       success_prospects:
         show:
           h1-heading: What is the chance of a successful outcome?
@@ -489,6 +492,9 @@ en:
         show:
           h1-heading: Why are you making a new application?
           hint-text: Tell us what has changed since the original order was made.
+      is_client_biological_parent:
+        show:
+          page_title: Is your client the biological parent of any children involved?
     application_merits_task:
       involved_children:
         new:
@@ -1252,6 +1258,7 @@ en:
         prohibited_steps_html: <span class="govuk-visually-hidden">%{proceeding} </span>Prohibited steps
         opponents_application_html: <span class="govuk-visually-hidden">%{proceeding} </span>Opponent application
         vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Reason for new application
+        client_relationship_to_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Who your client is in the proceeding
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -1278,6 +1285,7 @@ en:
           nature_of_urgency: nature_of_urgencies
           vary_order: vary_order
           opponents_application: opponents_application
+          client_relationship_to_proceeding: is_client_biological_parent
     merits_reports:
       show:
         heading: Merits report
