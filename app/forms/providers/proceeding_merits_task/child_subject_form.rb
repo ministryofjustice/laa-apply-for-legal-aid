@@ -7,7 +7,11 @@ module Providers
 
       validates :relationship_to_child,
                 inclusion: {
-                  in: ["child_subject", ""],
+                  in: %w[child_subject false],
+                  message: I18n.t("providers.proceeding_merits_task.relationship_to_child.child_subject.error"),
+                  allow_blank: true,
+                },
+                presence: {
                   message: I18n.t("providers.proceeding_merits_task.relationship_to_child.child_subject.error"),
                 },
                 unless: :draft?

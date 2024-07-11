@@ -5,15 +5,17 @@
   <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
     <% options = [
          [:child_subject, t("generic.yes")],
-         ["", t("generic.no")],
+         [false, t("generic.no")],
        ] %>
 
-    <%= form.govuk_collection_radio_buttons :child_subject,
+    <%= form.govuk_collection_radio_buttons :relationship_to_child,
                                             options,
                                             :first,
                                             :second,
                                             hint: { text: "" },
                                             legend: { text: page_title, tag: "h1", size: "xl" },
                                             caption: { text: @proceeding.meaning, size: "xl" } %>
+
+    <%= next_action_buttons show_draft: true, form: %>
   <% end %>
 <% end %>

@@ -96,10 +96,9 @@ module Providers
                 expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:PB003, :client_relationship_to_proceeding)
               end
 
-              # TODO: change the following to redirect to question 3 when it is added
-              it "redirects to merits task list page" do
+              it "redirects to the is_client_child_subject page" do
                 patch_request
-                expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+                expect(response).to redirect_to providers_merits_task_list_is_client_child_subject_path(proceeding)
               end
             end
 

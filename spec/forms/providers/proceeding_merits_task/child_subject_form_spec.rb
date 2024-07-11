@@ -15,10 +15,16 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildSubjectForm, type: :form do
         it { is_expected.to be_valid }
       end
 
+      context "when sent false" do
+        let(:relationship_to_child) { "false" }
+
+        it { is_expected.to be_valid }
+      end
+
       context "when sent an empty string" do
         let(:relationship_to_child) { "" }
 
-        it { is_expected.to be_valid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when sent unknown text" do
