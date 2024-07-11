@@ -1,6 +1,7 @@
 module Providers
   class CheckMeritsAnswersController < ProviderBaseController
     def show
+      @form = LegalAidApplications::ConfirmSeparateRepresentationForm.new(model: legal_aid_application)
       legal_aid_application.check_merits_answers! unless legal_aid_application.checking_merits_answers?
     end
 
