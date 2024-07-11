@@ -79,6 +79,25 @@ module Providers
           end
         end
 
+        context "when provider makes no choice" do
+          let(:relationship_to_child) { "" }
+
+          it "does not change relationship_to_child" do
+            expect { patch_request }.not_to change { proceeding.reload.relationship_to_child }
+          end
+
+          it "does not set the task to complete" do
+            patch_request
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:PB003, :client_relationship_to_proceeding)
+          end
+
+          it "re-renders the page with an error" do
+            patch_request
+            expect(response).to have_http_status(:ok)
+            expect(response.body).to have_text("Select yes if your client is the biological parent of any children involved")
+          end
+        end
+
         context "when Form submitted using Save as draft button" do
           let(:submit_button) { { draft_button: "Save as draft" } }
           let(:relationship_to_child) { "biological" }
