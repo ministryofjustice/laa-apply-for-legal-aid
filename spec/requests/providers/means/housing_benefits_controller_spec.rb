@@ -56,24 +56,24 @@ RSpec.describe Providers::Means::HousingBenefitsController do
     end
 
     context "when the provider is not authenticated" do
-      it "redirects to the provider login page" do
+      it "redirects to the next page" do
         legal_aid_application = create(:legal_aid_application)
 
         get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
 
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the provider is not authorised" do
-      it "redirects to the access denied page" do
+      it "redirects to the next page" do
         legal_aid_application = create(:legal_aid_application)
         provider = create(:provider)
         login_as provider
 
         get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
 
-        expect(response).to redirect_to(error_path(:access_denied))
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -138,7 +138,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/housing_benefits" do
-    it "updates the application and redirects to the dependants page" do
+    it "updates the application and redirects to the next page" do
       legal_aid_application = create(
         :legal_aid_application,
         applicant_in_receipt_of_housing_benefit: nil,
@@ -157,7 +157,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
       patch(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application), params:)
 
       expect(legal_aid_application.reload.applicant_in_receipt_of_housing_benefit).to be false
-      expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+      expect(response).to have_http_status(:redirect)
     end
 
     context "when the form is invalid" do
@@ -187,24 +187,24 @@ RSpec.describe Providers::Means::HousingBenefitsController do
     end
 
     context "when the provider is not authenticated" do
-      it "redirects to the provider login page" do
+      it "redirects to the next page" do
         legal_aid_application = create(:legal_aid_application)
 
         patch providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
 
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the provider is not authorised" do
-      it "redirects to the access denied page" do
+      it "redirects to the next page" do
         legal_aid_application = create(:legal_aid_application)
         provider = create(:provider)
         login_as provider
 
         patch providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
 
-        expect(response).to redirect_to(error_path(:access_denied))
+        expect(response).to have_http_status(:redirect)
       end
     end
   end

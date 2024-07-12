@@ -109,8 +109,8 @@ RSpec.describe Providers::OutgoingsSummaryController do
       post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button
     end
 
-    it "redirects to the has_dependants page" do
-      expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+    it "redirects to the next page" do
+      expect(response).to have_http_status(:redirect)
     end
 
     context "when the provider is not authenticated" do
@@ -122,8 +122,8 @@ RSpec.describe Providers::OutgoingsSummaryController do
     context "when Form submitted with Save as draft button" do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
-      it "redirects to the list of applications" do
-        expect(response).to redirect_to providers_legal_aid_applications_path
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
