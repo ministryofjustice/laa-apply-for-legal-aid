@@ -854,7 +854,7 @@ DEPENDENCIES
   webrick
 
 RUBY VERSION
-   ruby 3.3.3p89
+   ruby 3.3.4p94
 
 BUNDLED WITH
    2.5.11
