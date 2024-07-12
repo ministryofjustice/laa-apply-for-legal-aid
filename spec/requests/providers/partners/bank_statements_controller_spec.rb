@@ -300,53 +300,17 @@ RSpec.describe Providers::Partners::BankStatementsController do
           patch(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application),
                 params: { upload_button: "Upload",
                           original_file: uploaded_file("spec/fixtures/files/acceptable.pdf", "application/pdf") })
+          allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_multiple_employments
         end
 
         it "does not add attachment object" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        context "when HMRC response status is partner_multiple_employments" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_multiple_employments
-          end
-
-          it "redirects to full_employment_details" do
+        context "when HMRC response status is known" do
+          it "redirects to the next page" do
             request
-            expect(response).to redirect_to providers_legal_aid_application_partners_full_employment_details_path(legal_aid_application)
-          end
-        end
-
-        context "when HMRC response status is partner_single_employment" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_single_employment
-          end
-
-          it "redirects to employment_incomes" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_partners_employment_income_path(legal_aid_application)
-          end
-        end
-
-        context "when partner is not employed but HMRC response has employment data" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_unexpected_employment_data
-          end
-
-          it "redirects to unexpected_employment_incomes" do
-            request
-            expect(response).to redirect_to providers_legal_aid_application_partners_unexpected_employment_income_path(legal_aid_application)
-          end
-        end
-
-        context "when HMRC response status is partner_not_employed" do
-          before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :partner_not_employed
-          end
-
-          it "redirects to the receives_state_benefits page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 

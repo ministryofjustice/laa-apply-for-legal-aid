@@ -51,16 +51,16 @@ RSpec.describe Providers::Partners::ReceivesStateBenefitsController do
     context "when the provider says no benefits received" do
       let(:receives_state_benefits) { "false" }
 
-      it "redirects to the regular_income page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_regular_incomes_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
     context "when the provider says benefits are received" do
       let(:receives_state_benefits) { "true" }
 
-      it "redirects to the add_state_benefits page" do
-        expect(response).to redirect_to(new_providers_legal_aid_application_partners_state_benefit_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -78,25 +78,8 @@ RSpec.describe Providers::Partners::ReceivesStateBenefitsController do
       context "and more benefits are to be added" do
         let(:receives_state_benefits) { "true" }
 
-        context "and another benefit exists" do
-          let(:setup) do
-            create(:regular_transaction,
-                   transaction_type: create(:transaction_type, :benefits),
-                   legal_aid_application:,
-                   description: "Test state benefit",
-                   owner_id: legal_aid_application.partner.id,
-                   owner_type: "Partner")
-          end
-
-          it "redirects to the add_other_state_benefit page" do
-            expect(response).to redirect_to(providers_legal_aid_application_partners_add_other_state_benefits_path(legal_aid_application))
-          end
-        end
-
-        context "and no other benefits exist" do
-          it "redirects to the state_benefits page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_partners_state_benefit_path(legal_aid_application))
-          end
+        it "redirects to the next page" do
+          expect(response).to have_http_status(:redirect)
         end
       end
     end

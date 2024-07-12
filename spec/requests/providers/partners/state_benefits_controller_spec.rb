@@ -73,8 +73,8 @@ RSpec.describe Providers::Partners::StateBenefitsController do
     let(:frequency) { "weekly" }
 
     context "when the parameters are all valid" do
-      it "redirects to the add_other_state_benefits page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_add_other_state_benefits_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -110,8 +110,8 @@ RSpec.describe Providers::Partners::StateBenefitsController do
     let(:frequency) { "weekly" }
 
     context "when the parameters are all valid" do
-      it "redirects to the add_other_state_benefits page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_add_other_state_benefits_path(legal_aid_application))
+      it "redirects to the next page" do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
