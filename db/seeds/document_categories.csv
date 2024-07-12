@@ -24,3 +24,5 @@ court_application_or_order,FALSE,,TRUE,TRUE
 court_application_or_order_pdf,TRUE,ADMIN1,FALSE,FALSE
 part_bank_state_evidence,FALSE,,FALSE,FALSE
 part_bank_state_evidence_pdf,TRUE,BSTMT,FALSE,FALSE
+parental_responsibility,FALSE,,TRUE,TRUE
+parental_responsibility_pdf,TRUE,EX_RPT,FALSE,FALSE

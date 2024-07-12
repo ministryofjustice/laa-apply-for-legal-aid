@@ -31,6 +31,8 @@ class DocumentCategoryValidator < ActiveModel::Validator
     court_application_or_order_pdf
     part_bank_state_evidence
     part_bank_state_evidence_pdf
+    parental_responsibility
+    parental_responsibility_pdf
   ].freeze
 
   def validate(record)

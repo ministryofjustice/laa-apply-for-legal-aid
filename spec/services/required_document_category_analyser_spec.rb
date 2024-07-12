@@ -105,5 +105,47 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
         expect(application.required_document_categories).to match_array %w[court_application court_order expert_report]
       end
     end
+
+    context "when the application is SCA" do
+      let(:application) { create(:legal_aid_application, :with_applicant) }
+
+      before { create(:proceeding, :pb003, relationship_to_child:, legal_aid_application: application) }
+
+      context "and the client has parental responsibility" do
+        let(:relationship_to_child) { "parental_responsibility_agreement" }
+
+        it "updates the required_document_categories with parental_responsibility" do
+          call
+          expect(application.required_document_categories).to eq %w[parental_responsibility]
+        end
+      end
+
+      context "and the client has court_ordered responsibility" do
+        let(:relationship_to_child) { "court_order" }
+
+        it "updates the required_document_categories with parental_responsibility" do
+          call
+          expect(application.required_document_categories).to eq %w[parental_responsibility]
+        end
+      end
+
+      context "and the client is a biological parent" do
+        let(:relationship_to_child) { "biological" }
+
+        it "leaves the required_document_categories empty" do
+          call
+          expect(application.required_document_categories).to be_empty
+        end
+      end
+
+      context "and the client has no parental responsibility" do
+        let(:relationship_to_child) { nil }
+
+        it "leaves the required_document_categories empty" do
+          call
+          expect(application.required_document_categories).to be_empty
+        end
+      end
+    end
   end
 end

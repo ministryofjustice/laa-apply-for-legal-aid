@@ -22,6 +22,7 @@ RSpec.describe DocumentCategory do
         court_application
         court_order
         expert_report
+        parental_responsibility
       ]
     end
 
@@ -49,6 +50,7 @@ RSpec.describe DocumentCategory do
         court_order_pdf
         expert_report_pdf
         part_bank_state_evidence_pdf
+        parental_responsibility_pdf
       ]
     end
 

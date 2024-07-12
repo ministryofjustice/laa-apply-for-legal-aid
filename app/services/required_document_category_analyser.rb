@@ -23,6 +23,7 @@ class RequiredDocumentCategoryAnalyser
       required_document_categories << "court_application"
       required_document_categories << "expert_report"
     end
+    required_document_categories << "parental_responsibility" if has_parental_responsibility?
     @application.update!(required_document_categories:)
   end
 
@@ -38,5 +39,9 @@ private
 
   def has_opponents_application?
     @application.proceedings.any? { |proceeding| proceeding.opponents_application&.has_opponents_application }
+  end
+
+  def has_parental_responsibility?
+    @application.proceedings.any? { |proceeding| proceeding.relationship_to_child.in?(%w[court_order parental_responsibility_agreement]) }
   end
 end
