@@ -17,11 +17,7 @@ module Flow
         outgoing_transactions: Steps::ProviderIncome::OutgoingTransactionsStep,
         regular_outgoings: Steps::ProviderIncome::RegularOutgoingsStep,
         cash_outgoings: Steps::ProviderIncome::CashOutgoingsStep,
-        housing_benefits: {
-          path: ->(application) { urls.providers_legal_aid_application_means_housing_benefits_path(application) },
-          forward: :has_dependants,
-          check_answers: :check_income_answers,
-        },
+        housing_benefits: Steps::ProviderIncome::HousingBenefitsStep,
         check_income_answers: {
           path: ->(application) { urls.providers_legal_aid_application_means_check_income_answers_path(application) },
           forward: :capital_introductions,
