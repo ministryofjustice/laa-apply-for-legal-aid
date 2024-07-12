@@ -6,21 +6,8 @@ module Flow
         contrary_interests: Steps::Partner::ContraryInterestsStep,
         partner_details: Steps::Partner::DetailsStep,
         partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,
-        partner_employed: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_employed_index_path(application) },
-          forward: lambda do |application|
-            if application.partner.self_employed? || application.partner.armed_forces?
-              :partner_use_ccms_employment
-            elsif application.partner.employed? && !application.partner.has_national_insurance_number?
-              :partner_full_employment_details
-            else
-              :partner_bank_statements
-            end
-          end,
-        },
-        partner_use_ccms_employment: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_use_ccms_employment_index_path(application) },
-        },
+        partner_employed: Steps::Partner::EmployedStep,
+        partner_use_ccms_employment: Steps::Partner::UseCCMSEmploymentStep,
         partner_bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_partners_bank_statements_path(application) },
           forward: lambda do |application|
@@ -90,19 +77,9 @@ module Flow
         },
         partner_regular_outgoings: Steps::Partner::RegularOutgoingsStep,
         partner_cash_outgoings: Steps::Partner::CashOutgoingsStep,
-        partner_full_employment_details: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_full_employment_details_path(application) },
-          forward: :partner_receives_state_benefits,
-          check_answers: :check_income_answers,
-        },
-        partner_employment_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_employment_income_path(application) },
-          forward: :partner_receives_state_benefits,
-        },
-        partner_unexpected_employment_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_partners_unexpected_employment_income_path(application) },
-          forward: :partner_receives_state_benefits,
-        },
+        partner_full_employment_details: Steps::Partner::FullEmploymentDetailsStep,
+        partner_employment_incomes: Steps::Partner::EmploymentIncomesStep,
+        partner_unexpected_employment_incomes: Steps::Partner::UnexpectedEmploymentIncomeStep,
       }.freeze
     end
   end

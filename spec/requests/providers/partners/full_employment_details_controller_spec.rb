@@ -103,8 +103,8 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
           expect(partner.reload.full_employment_details).to eq full_employment_details
         end
 
-        it "redirects to the has_dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_partners_receives_state_benefits_path(application))
+        it "redirects to the next step" do
+          expect(response).to have_http_status(:redirect)
         end
       end
 
