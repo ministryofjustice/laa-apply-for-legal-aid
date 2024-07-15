@@ -43,7 +43,7 @@
                     else
                       task_list.with_item(
                         title: t(".#{task.name}_html", proceeding: proceeding[:name]),
-                        href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code) : _task_url(task.name, @legal_aid_application, task.status),
+                        href: ccms_code ? proceeding_task_url(task.name, @legal_aid_application, ccms_code, task.state) : _task_url(task.name, @legal_aid_application, task.status),
                         status: task.state == :complete ? t(".states.#{task.state}") : govuk_tag(text: t(".states.#{task.state}")),
                       )
                     end

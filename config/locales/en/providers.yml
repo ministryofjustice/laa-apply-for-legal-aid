@@ -1310,6 +1310,7 @@ en:
           vary_order: vary_order
           opponents_application: opponents_application
           client_relationship_to_proceeding: is_client_biological_parent
+          check_who_client_is: check_who_client_is
     merits_reports:
       show:
         heading: Merits report
