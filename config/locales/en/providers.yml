@@ -516,6 +516,8 @@ en:
           biological_parent: Client is the biological parent of any child involved?
           parental_responsibilities: Client has parental responsibility for any child involved?
           child_subject: Client is a child subject of this proceeding?
+          court_order: Yes, under a court order
+          parental_responsibility_agreement: Yes, they have a parental responsibility agreement
     application_merits_task:
       involved_children:
         new:

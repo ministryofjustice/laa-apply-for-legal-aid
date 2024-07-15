@@ -5,7 +5,9 @@ module Providers
         @relationship_to_child = @proceeding.relationship_to_child
       end
 
-      def update; end
+      def update
+        continue_or_draft
+      end
 
     private
 

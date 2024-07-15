@@ -31,4 +31,11 @@
         end
       end %>
 
+  <%= next_action_buttons_with_form(
+        url: providers_merits_task_list_check_who_client_is_path(@proceeding),
+        method: :patch,
+        show_continue: !@relationship_to_child.nil?,
+        show_draft: true,
+      ) %>
+
 <% end %>

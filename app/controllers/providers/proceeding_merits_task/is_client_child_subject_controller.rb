@@ -7,8 +7,10 @@ module Providers
 
       def update
         @form = Providers::ProceedingMeritsTask::ChildSubjectForm.new(form_params)
-        # TODO: change the following to redirect to question 4 when it is added
-        return redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application) if @form.relationship_to_child.eql?("false") && !draft_selected?
+        if @form.relationship_to_child.eql?("false") && !draft_selected?
+          @form.save!
+          return redirect_to providers_merits_task_list_check_who_client_is_path(merits_task_list_id)
+        end
 
         render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :client_relationship_to_proceeding)
       end
