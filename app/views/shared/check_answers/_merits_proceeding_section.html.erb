@@ -2,38 +2,40 @@
   <section class="print-no-break govuk-!-padding-top-6">
     <h2 class="govuk-heading-l"><%= proceeding.meaning %></h2>
 
-    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-0") do |summary_list| %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_likely" }) do |row| %>
-        <%= row.with_key(text: t(".prospects_of_success"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: yes_no(proceeding.chances_of_success.success_likely)) %>
-        <%= row.with_action(
-              text: t("generic.change"),
-              href: providers_merits_task_list_chances_of_success_index_path(proceeding),
-              visually_hidden_text: t(".prospects_of_success"),
-            ) %>
-      <% end %>
-      <% unless proceeding.chances_of_success.success_likely? %>
-        <%= summary_list.with_row(
-              classes: "govuk-summary-list__row--no-border",
-              html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_prospect" },
-            ) do |row| %>
-          <%= row.with_key(text: t(".success_prospect"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value(text: t("shared.forms.success_prospect.#{proceeding.chances_of_success.success_prospect}")) %>
+    <% if proceeding.chances_of_success %>
+      <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-0") do |summary_list| %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_likely" }) do |row| %>
+          <%= row.with_key(text: t(".prospects_of_success"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: yes_no(proceeding.chances_of_success.success_likely)) %>
           <%= row.with_action(
                 text: t("generic.change"),
-                href: providers_merits_task_list_success_prospects_path(proceeding),
-                visually_hidden_text: t(".success_prospect"),
+                href: providers_merits_task_list_chances_of_success_index_path(proceeding),
+                visually_hidden_text: t(".prospects_of_success"),
               ) %>
         <% end %>
+        <% unless proceeding.chances_of_success.success_likely? %>
+          <%= summary_list.with_row(
+                classes: "govuk-summary-list__row--no-border",
+                html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_prospect" },
+              ) do |row| %>
+            <%= row.with_key(text: t(".success_prospect"), classes: "govuk-!-width-one-half") %>
+            <%= row.with_value(text: t("shared.forms.success_prospect.#{proceeding.chances_of_success.success_prospect}")) %>
+            <%= row.with_action(
+                  text: t("generic.change"),
+                  href: providers_merits_task_list_success_prospects_path(proceeding),
+                  visually_hidden_text: t(".success_prospect"),
+                ) %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if proceeding.chances_of_success.success_prospect_details %>
+        <p class='govuk-body'><%= proceeding.chances_of_success.success_prospect_details %></p>
+        <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
       <% end %>
     <% end %>
 
-    <% if proceeding.chances_of_success.success_prospect_details %>
-      <p class='govuk-body'><%= proceeding.chances_of_success.success_prospect_details %></p>
-      <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
-    <% end %>
-
-    <% if proceeding.attempts_to_settle || proceeding.section8? || proceeding.specific_issue || proceeding.prohibited_steps %>
+    <% if proceeding.attempts_to_settle || proceeding.section8? || proceeding.specific_issue || proceeding.prohibited_steps || proceeding.special_childrens_act? %>
       <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-0") do |summary_list| %>
         <% if proceeding.attempts_to_settle %>
           <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle" }) do |row| %>
@@ -46,7 +48,7 @@
                 ) %>
           <% end %>
         <% end %>
-        <% if proceeding.section8? %>
+        <% if proceeding.section8? || (proceeding.special_childrens_act? && proceeding.client_involvement_type_ccms_code == "D") %>
           <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children" }) do |row| %>
             <%= row.with_key(text: t(".linked_children"), classes: "govuk-!-width-one-half") %>
             <%= row.with_value(text: linked_children_names(proceeding)) %>

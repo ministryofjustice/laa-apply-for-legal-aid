@@ -13,22 +13,27 @@
       <% end %>
     <% end %>
 
-    <%= summary_list.with_row(
-          classes: "govuk-summary-list__row--no-border",
-          html_attributes: { id: "app-check-your-answers__opponent_understands_terms_of_court_order" },
-        ) do |row| %>
-      <%= row.with_key(text: t(".understands_terms_of_court_order"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: yes_no(parties_mental_capacity.understands_terms_of_court_order)) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
-            visually_hidden_text: t(".understands_terms_of_court_order"),
-          ) %>
+    <% if parties_mental_capacity %>
+      <%= summary_list.with_row(
+            classes: "govuk-summary-list__row--no-border",
+            html_attributes: { id: "app-check-your-answers__opponent_understands_terms_of_court_order" },
+          ) do |row| %>
+        <%= row.with_key(text: t(".understands_terms_of_court_order"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: yes_no(parties_mental_capacity.understands_terms_of_court_order)) %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
+              visually_hidden_text: t(".understands_terms_of_court_order"),
+            ) %>
+      <% end %>
     <% end %>
   <% end %>
-  <div class='govuk-body'><%= parties_mental_capacity.understands_terms_of_court_order_details %></div>
 
-  <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
+  <% if parties_mental_capacity %>
+    <div class='govuk-body'><%= parties_mental_capacity.understands_terms_of_court_order_details %></div>
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
+  <% end %>
 
   <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
     <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
@@ -82,30 +87,33 @@
     <div class='govuk-body'><%= domestic_abuse_summary.bail_conditions_set_details %></div>
     <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
   <% end %>
-  <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
-    <%= summary_list.with_row(
-          classes: "govuk-summary-list__row--no-border",
-          html_attributes: { id: "app-check-your-answers__statement_of_case" },
-        ) do |row| %>
-      <%= row.with_key(text: t("shared.check_answers.merits.statement-of-case-heading"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value do %>
-        <% if attachments_with_size(statement_of_case&.original_attachments).present? %>
-          <ul class="govuk-list">
-            <% attachments_with_size(statement_of_case&.original_attachments).each do |item| %>
-              <li><%= item %></li>
-            <% end %>
-          </ul>
+
+  <% unless @legal_aid_application.special_children_act_proceedings? %>
+    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+      <%= summary_list.with_row(
+            classes: "govuk-summary-list__row--no-border",
+            html_attributes: { id: "app-check-your-answers__statement_of_case" },
+          ) do |row| %>
+        <%= row.with_key(text: t("shared.check_answers.merits.statement-of-case-heading"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value do %>
+          <% if attachments_with_size(statement_of_case&.original_attachments).present? %>
+            <ul class="govuk-list">
+              <% attachments_with_size(statement_of_case&.original_attachments).each do |item| %>
+                <li><%= item %></li>
+              <% end %>
+            </ul>
+          <% end %>
         <% end %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+              visually_hidden_text: t("shared.check_answers.merits.statement-of-case-heading"),
+            ) %>
       <% end %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
-            visually_hidden_text: t("shared.check_answers.merits.statement-of-case-heading"),
-          ) %>
     <% end %>
+    <div class='govuk-body'><%= statement_of_case&.statement %></div>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
   <% end %>
-  <div class='govuk-body'><%= statement_of_case&.statement %></div>
-  <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
 
   <% if @legal_aid_application.allegation %>
     <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
