@@ -480,6 +480,8 @@ en:
           error: Select yes if your client is the biological parent of any children involved
         parental_responsibilities:
           error: Select if your client has parental responsibility for any children involved
+        child_subject:
+          error: Select yes if your client is a child subject of the proceeding
       success_prospects:
         show:
           h1-heading: What is the chance of a successful outcome?
@@ -497,6 +499,9 @@ en:
       is_client_biological_parent:
         show:
           page_title: Is your client the biological parent of any children involved?
+      is_client_child_subject:
+        show:
+          page_title: Is your client a child subject of this proceeding?
       does_client_have_parental_responsibilities:
         show:
           page_title: Does your client have parental responsibility for any children involved?
