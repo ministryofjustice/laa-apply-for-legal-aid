@@ -95,6 +95,10 @@
       <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
     <% end %>
 
+    <% if proceeding.relationship_to_child %>
+      <%= render("shared/check_answers/relationship_to_child", proceeding:, relationship_to_child: proceeding.relationship_to_child) %>
+    <% end %>
+
     <%= govuk_summary_list(actions: !read_only) do |summary_list| %>
       <% if proceeding.vary_order %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }) do |row| %>
