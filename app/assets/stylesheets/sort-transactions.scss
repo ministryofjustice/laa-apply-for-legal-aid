@@ -14,8 +14,8 @@
 }
 
 .sort-transactions__items {
-  @include govuk-responsive-margin(9, "bottom");
   padding-left: 0;
+  @include govuk-responsive-margin(9, "bottom");
   @include govuk-media-query($from: tablet) {
     padding-left: govuk-spacing(6);
   }

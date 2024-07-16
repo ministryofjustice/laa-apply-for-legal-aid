@@ -1,9 +1,9 @@
 // Recommended - Use these styles for the check your answers pattern
 
 .app-check-your-answers {
+  border-top: 1px solid $govuk-border-colour;
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
-  border-top: 1px solid $govuk-border-colour;
   @include govuk-responsive-padding(3, "top");
 
   .govuk-grid-row div:first-child {
@@ -12,9 +12,9 @@
 }
 
 .app-check-your-answers--long {
+  border-top: 1px solid $govuk-border-colour;
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
-  border-top: 1px solid $govuk-border-colour;
   @include govuk-responsive-padding(3, "top");
 
   .govuk-grid-row div:first-child {
@@ -42,12 +42,12 @@
 }
 
 .govuk-summary-list__total-row {
-  @include govuk-media-query($from: tablet) {
-    display: table-row;
-  }
   border-top: 3px solid #000000;
   border-bottom: 1px solid #000000;
   font-weight: bold;
+  @include govuk-media-query($from: tablet) {
+    display: table-row;
+  }
 }
 
 .govuk-summary-list__key {

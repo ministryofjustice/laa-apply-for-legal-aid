@@ -14,8 +14,8 @@
 }
 
 .govuk-table__footer--numeric {
-  @include govuk-font($size: false, $weight: "bold", $tabular: true);
   text-align: right;
+  @include govuk-font($size: false, $weight: "bold", $tabular: true);
 }
 
 .govuk-table__footer:last-child {

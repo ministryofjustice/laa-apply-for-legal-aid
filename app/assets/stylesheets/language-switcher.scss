@@ -1,6 +1,6 @@
 .language-switcher {
-  @include govuk-font-size($size: 16);
   margin-top: govuk-spacing(3);
   margin-bottom: govuk-spacing(3);
   text-align: right;
+  @include govuk-font-size($size: 16);
 }
