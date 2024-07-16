@@ -121,7 +121,7 @@ module Flow
     end
 
     def next_incomplete_proceeding
-      @next_incomplete_proceeding ||= Query::IncompleteProceedings.call(@application).in_order_of_addition.first
+      @next_incomplete_proceeding ||= Query::IncompleteProceedings.call(@application)&.in_order_of_addition&.first
     end
 
     def current_proceeding_id
