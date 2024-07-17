@@ -49,22 +49,27 @@ module Query
       it { expect(query).to include(proceeding) }
     end
 
-    context "when a proceeding has not had the accepted_emergency_defaults question answered" do
-      let(:proceeding) do
-        create(:proceeding, :da001, :with_df_date,
-               accepted_emergency_defaults: nil)
-      end
-
-      it { expect(query).to include(proceeding) }
-    end
-
     context "when a proceeding has not had the accepted_substantive_defaults question answered" do
-      let(:proceeding) do
-        create(:proceeding, :da001, :with_df_date,
-               accepted_substantive_defaults: nil)
+      context "and is not a special children act matter type" do
+        let(:proceeding) do
+          create(:proceeding, :da001, :with_df_date,
+                 accepted_substantive_defaults: nil)
+        end
+
+        it { expect(query).to include(proceeding) }
       end
 
-      it { expect(query).to include(proceeding) }
+      context "and is a special children act matter type" do
+        let(:proceeding) do
+          create(:proceeding, :pb003, :without_df_date,
+                 accepted_substantive_defaults: nil,
+                 client_involvement_type_ccms_code: "D",
+                 used_delegated_functions: false,
+                 accepted_emergency_defaults: nil)
+        end
+
+        it { expect(query).not_to include(proceeding) }
+      end
     end
 
     context "when a proceeding has not accepted_substantive_defaults and not set a new default" do
