@@ -1,6 +1,6 @@
 <%= form_with(
       model: @form,
-      url: providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
+      url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
       method: :patch,
       local: true,
     ) do |form| %>
@@ -33,15 +33,17 @@
         ) %>
     <div class="govuk-!-padding-bottom-6"></div>
 
-    <%= form.govuk_check_boxes_fieldset :separate_representation_required, legend: nil do %>
-      <%= form.govuk_check_box(
-            :separate_representation_required,
-            true,
-            "",
-            link_errors: true,
-            multiple: false,
-            label: { text: "I confirm my client wants separate representation" },
-          ) %>
+    <% if @legal_aid_application.special_children_act_proceedings? %>
+      <%= form.govuk_check_boxes_fieldset :separate_representation_required, legend: nil do %>
+        <%= form.govuk_check_box(
+              :separate_representation_required,
+              true,
+              "",
+              link_errors: true,
+              multiple: false,
+              label: { text: "I confirm my client wants separate representation" },
+            ) %>
+      <% end %>
     <% end %>
 
     <%= next_action_buttons_with_form(
