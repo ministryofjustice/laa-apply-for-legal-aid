@@ -33,7 +33,7 @@ class BenefitCheckService
   rescue Faraday::SoapError
     false
   rescue BenefitCheckError => e
-    AlertManager.capture_exception(e.message)
+    AlertManager.capture_exception(e)
     Rails.logger.error(e.message)
     false
   end

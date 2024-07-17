@@ -122,7 +122,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "captures error" do
-        expect(AlertManager).to receive(:capture_exception).with("BenefitCheckError: Invalid request credentials.")
+        expect(AlertManager).to receive(:capture_exception).with(message_contains("BenefitCheckError: Invalid request credentials."))
         benefit_check_service.call
       end
 
