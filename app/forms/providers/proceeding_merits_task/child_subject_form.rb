@@ -15,6 +15,12 @@ module Providers
                   message: I18n.t("providers.proceeding_merits_task.relationship_to_child.child_subject.error"),
                 },
                 unless: :draft?
+      def save
+        return model.update!(relationship_to_child: nil) if relationship_to_child.eql?("false")
+
+        super
+      end
+      alias_method :save!, :save
     end
   end
 end

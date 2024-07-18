@@ -47,4 +47,27 @@ RSpec.describe TaskListHelper do
       end
     end
   end
+
+  describe "#proceeding_task_url" do
+    context "when client relationship to proceeding" do
+      subject(:proceeding_task_url) { helper.proceeding_task_url(task_name, application, ccms_code, status) }
+
+      let(:application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pb003 pb059]) }
+      let(:proceeding) { application.proceedings.find_by(ccms_code:) }
+      let(:task_name) { :client_relationship_to_proceeding }
+      let(:ccms_code) { "PB003" }
+
+      context "and status is complete" do
+        let(:status) { :complete }
+
+        it { is_expected.to eq providers_merits_task_list_check_who_client_is_path(proceeding) }
+      end
+
+      context "and status is not started" do
+        let(:status) { :not_started }
+
+        it { is_expected.to eq providers_merits_task_list_is_client_biological_parent_path(proceeding) }
+      end
+    end
+  end
 end

@@ -365,6 +365,7 @@ Rails.application.routes.draw do
         resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
         resource :does_client_have_parental_responsibility, only: %i[show update]
         resource :is_client_child_subject, only: %i[show update], controller: :is_client_child_subject, path: "is_client_a_child_subject_of_proceeding"
+        resource :check_who_client_is, only: %i[show update]
       end
     end
   end

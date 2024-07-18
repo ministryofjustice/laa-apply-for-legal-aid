@@ -7,7 +7,10 @@ module Providers
 
       def update
         @form = Providers::ProceedingMeritsTask::ParentalResponsibilitiesForm.new(form_params)
-        return redirect_to providers_merits_task_list_is_client_child_subject_path(merits_task_list_id) if @form.relationship_to_child.eql?("false")
+        if @form.relationship_to_child.eql?("false") && !draft_selected?
+          @form.save!
+          return redirect_to providers_merits_task_list_is_client_child_subject_path(merits_task_list_id)
+        end
 
         render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :client_relationship_to_proceeding)
       end

@@ -17,7 +17,8 @@ module Providers
                 unless: :draft?
 
       def save
-        self.relationship_to_child = nil if relationship_to_child.eql?("false")
+        return model.update!(relationship_to_child: nil) if relationship_to_child.eql?("false")
+
         super
       end
       alias_method :save!, :save
