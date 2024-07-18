@@ -16,10 +16,12 @@
 
 <%= render("shared/check_answers/urgency", read_only:, urgency:) if @legal_aid_application.urgency %>
 
-<% if @legal_aid_application.section_8_proceedings? %>
+<% if @legal_aid_application.involved_children.any? %>
   <%= render("shared/check_answers/children_involved", read_only:) %>
 
-  <%= render("shared/check_answers/laspo", read_only:) %>
+  <% if @legal_aid_application.section_8_proceedings? %>
+    <%= render("shared/check_answers/laspo", read_only:) %>
+  <% end %>
 <% end %>
 
 <%= render("shared/check_answers/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
