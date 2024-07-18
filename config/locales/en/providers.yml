@@ -261,6 +261,7 @@ en:
       show:
         banner_text: The merits information was copied from %{application_ref}.
         h1-heading: Check your answers
+        confirm_separate_representation_required: I confirm my client wants separate representation
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
