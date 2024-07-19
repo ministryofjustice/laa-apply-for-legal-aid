@@ -21,6 +21,9 @@ updates:
     rubocop-gems:
       patterns:
         - "rubocop-*"
+    govuk-gems:
+      patterns:
+        - "govuk*"
   open-pull-requests-limit: 10
   ignore:
   - dependency-name: prometheus_exporter
