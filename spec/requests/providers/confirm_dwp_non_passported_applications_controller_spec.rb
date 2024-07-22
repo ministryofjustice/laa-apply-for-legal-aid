@@ -203,6 +203,11 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(partner.reload.shared_benefit_with_applicant).to be true
         end
 
+        it "sets the applicant shared benefit field to true" do
+          patch_request
+          expect(application.reload.applicant.shared_benefit_with_partner).to be true
+        end
+
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)

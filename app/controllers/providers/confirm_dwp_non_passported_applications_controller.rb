@@ -35,6 +35,7 @@ module Providers
     end
 
     def update_joint_benefit_response
+      applicant.update!(shared_benefit_with_partner: @form.receives_joint_benefit?)
       return if partner.nil?
 
       partner.shared_benefit_with_applicant = @form.receives_joint_benefit?
