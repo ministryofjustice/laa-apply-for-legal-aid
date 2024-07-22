@@ -349,7 +349,6 @@ generic-slack-fail-post-step: &generic-slack-fail-post-step
         template: basic_fail_1
 
 workflows:
-  version: 2
   open_pr:
     jobs:
       - lint_checks:
