@@ -26,23 +26,25 @@
                 ) %>
           </strong>
         </p>
-        <%= form.govuk_radio_buttons_fieldset(:emergency_cost_override,
-                                              legend: { size: "s", tag: "h2", text: t(".cost_override_question") }) do %>
-          <%= form.govuk_radio_button(:emergency_cost_override, true, link_errors: true, label: { text: t("generic.yes") }) do %>
-            <%= form.govuk_text_field(
-                  :emergency_cost_requested,
-                  label: { text: t(".enter_cost_limit") },
-                  value: number_to_currency_or_original_string(@form.emergency_cost_requested),
-                  prefix_text: t("currency.gbp"),
-                  width: "one-third",
-                ) %>
+        <% if @legal_aid_application.emergency_cost_overridable? %>
+          <%= form.govuk_radio_buttons_fieldset(:emergency_cost_override,
+                                                legend: { size: "s", tag: "h2", text: t(".cost_override_question") }) do %>
+            <%= form.govuk_radio_button(:emergency_cost_override, true, link_errors: true, label: { text: t("generic.yes") }) do %>
+              <%= form.govuk_text_field(
+                    :emergency_cost_requested,
+                    label: { text: t(".enter_cost_limit") },
+                    value: number_to_currency_or_original_string(@form.emergency_cost_requested),
+                    prefix_text: t("currency.gbp"),
+                    width: "one-third",
+                  ) %>
 
-          <%= form.govuk_text_area(
-                :emergency_cost_reasons,
-                label: { text: t(".enter_cost_reasons") },
-              ) %>
+            <%= form.govuk_text_area(
+                  :emergency_cost_reasons,
+                  label: { text: t(".enter_cost_reasons") },
+                ) %>
+          <% end %>
+          <%= form.govuk_radio_button(:emergency_cost_override, false, label: { text: t("generic.no") }) %>
         <% end %>
-        <%= form.govuk_radio_button(:emergency_cost_override, false, label: { text: t("generic.no") }) %>
       <% end %>
     <% end %>
 

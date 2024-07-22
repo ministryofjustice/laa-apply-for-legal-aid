@@ -106,9 +106,7 @@ Scenario: If I change the copied from Yes to No
 
   Then I should be on a page showing "What you're applying for"
   And I should be on a page showing "default substantive cost limit"
-  And I should be on a page showing "Do you want to request a higher emergency cost limit?"
 
-  When I choose 'No'
   And I click 'Save and continue'
   Then I should be on a page showing 'Check your answers'
   And I should see "Non-molestation order"

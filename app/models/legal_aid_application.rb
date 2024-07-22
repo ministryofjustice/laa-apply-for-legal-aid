@@ -411,7 +411,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def substantive_cost_overridable?
-    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT && !special_children_act_proceedings?
+    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT && !special_children_act_proceedings? && !family_linked_associated_application?
+  end
+
+  def emergency_cost_overridable?
+    display_emergency_certificate? && !family_linked_associated_application?
   end
 
   def substantive_cost_limitation
@@ -423,10 +427,14 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def default_substantive_cost_limitation
+    return 0.0 if family_linked_associated_application?
+
     proceedings.map(&:substantive_cost_limitation).max
   end
 
   def default_delegated_functions_cost_limitation
+    return 0.0 if family_linked_associated_application?
+
     lead_proceeding.delegated_functions_cost_limitation
   end
 
@@ -641,5 +649,9 @@ private
     required_document_categories.each do |category|
       errors.add(:required_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
     end
+  end
+
+  def family_linked_associated_application?
+    lead_linked_application&.link_type_code == "FC_LEAD"
   end
 end
