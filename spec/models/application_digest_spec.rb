@@ -173,6 +173,7 @@ RSpec.describe ApplicationDigest do
           let(:applicant) do
             create(:applicant,
                    :with_partner,
+                   shared_benefit_with_partner: false,
                    partner_has_contrary_interest: true)
           end
 
@@ -180,9 +181,23 @@ RSpec.describe ApplicationDigest do
             application_digest
             expect(digest.has_partner).to be true
             expect(digest.contrary_interest).to be true
-            # TODO: The partner_dwp_challenge should be false but a bug is preventing it being recorded
-            # Replace `be_nil` with `be false` and update the test harnesses once ticket 5136 is resolved
-            expect(digest.partner_dwp_challenge).to be_nil
+            expect(digest.partner_dwp_challenge).to be false
+          end
+        end
+
+        context "when the applicant has a partner with contrary interest and disputed benefits" do
+          let(:applicant) do
+            create(:applicant,
+                   :with_partner,
+                   shared_benefit_with_partner: true,
+                   partner_has_contrary_interest: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+            expect(digest.has_partner).to be true
+            expect(digest.contrary_interest).to be true
+            expect(digest.partner_dwp_challenge).to be true
           end
         end
 

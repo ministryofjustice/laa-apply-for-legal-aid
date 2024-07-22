@@ -9,6 +9,7 @@ class ApplicationDigest < ApplicationRecord
     referred_to_caseworker
     has_partner
     contrary_interest
+    partner_dwp_challenge
     non_means_tested
   ].freeze
 
@@ -50,7 +51,7 @@ class ApplicationDigest < ApplicationRecord
         true_layer_data: laa.bank_transactions.any?,
         has_partner: laa.applicant_has_partner?,
         contrary_interest: laa.applicant_has_partner? ? !laa.applicant_has_partner_with_no_contrary_interest? : nil,
-        partner_dwp_challenge: laa&.partner&.shared_benefit_with_applicant? || nil,
+        partner_dwp_challenge: laa&.partner&.shared_benefit_with_applicant? || laa.applicant.shared_benefit_with_partner,
         applicant_age: applicant_age(laa),
         non_means_tested: laa.non_means_tested?,
       }
