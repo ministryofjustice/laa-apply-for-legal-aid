@@ -438,6 +438,14 @@ class LegalAidApplication < ApplicationRecord
     lead_proceeding.delegated_functions_cost_limitation
   end
 
+  def additional_family_lead_delegated_functions_cost_limitation
+    default_delegated_functions_cost_limitation / 2
+  end
+
+  def family_linked_associated_application?
+    lead_linked_application&.link_type_code == "FC_LEAD"
+  end
+
   def find_or_create_ccms_submission
     create_ccms_submission! unless ccms_submission
     ccms_submission
@@ -649,9 +657,5 @@ private
     required_document_categories.each do |category|
       errors.add(:required_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
     end
-  end
-
-  def family_linked_associated_application?
-    lead_linked_application&.link_type_code == "FC_LEAD"
   end
 end
