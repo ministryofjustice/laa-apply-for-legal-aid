@@ -142,6 +142,36 @@ RSpec.describe "check merits answers requests" do
           patch_request
           expect(response).to have_http_status(:redirect)
         end
+
+        context "with a SCA application" do
+          let(:application) { create(:legal_aid_application, :with_everything, :with_proceedings, explicit_proceedings: %i[pb003 pb059]) }
+          let(:smtl) { create(:legal_framework_merits_task_list, :pb003_pb059, legal_aid_application: application) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pb003 pb059]) }
+
+          context "when the provider confirms the applicant requires separate representation" do
+            let(:params) { { legal_aid_application: { separate_representation_required: "true" } } }
+
+            it "redirects to next page" do
+              patch_request
+              expect(response).to have_http_status(:redirect)
+            end
+
+            it "updates separate_representation required" do
+              patch_request
+              expect(application.reload.separate_representation_required).to be true
+            end
+          end
+
+          context "when the provider does not confirm that the applicant requires separate representation" do
+            let(:params) { { legal_aid_application: { separate_representation_required: "" } } }
+
+            it "doesn't update the application and displays an error" do
+              patch_request
+              expect(application.reload.separate_representation_required).to be_nil
+              expect(page).to have_error_message("Confirm your client wants separate representation")
+            end
+          end
+        end
       end
     end
 
