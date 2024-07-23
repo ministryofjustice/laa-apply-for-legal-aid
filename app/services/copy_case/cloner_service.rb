@@ -67,9 +67,6 @@ module CopyCase
       merits = %i[
         allegation
         domestic_abuse_summary
-        emergency_cost_override
-        emergency_cost_reasons
-        emergency_cost_requested
         latest_incident
         in_scope_of_laspo
         matter_opposition
