@@ -1,0 +1,5 @@
+<%= form_with(url: new_providers_show_existing_application_path, method: :get) do |form| %>
+  <h1 class="govuk-heading-xl">Enter a code</h1>
+  <%= form.govuk_text_field :search, label: { text: "Search" }, width: "one-quarter" %>
+  <%= form.govuk_submit "Search" %>
+<% end %>

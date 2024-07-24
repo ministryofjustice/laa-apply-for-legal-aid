@@ -124,6 +124,8 @@ Rails.application.routes.draw do
   namespace :providers do
     root to: "start#index"
     resource :provider, only: [:show], path: "your_profile"
+    resources :search_existing_applications, only: :new
+    resources :show_existing_applications, only: :new
     resources :applicants, only: %i[new create]
     resource :confirm_office, only: %i[show update]
     resource :select_office, only: %i[show update]
