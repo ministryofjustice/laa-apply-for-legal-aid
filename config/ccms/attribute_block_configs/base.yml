@@ -4074,8 +4074,8 @@ global_merits:
     response_type: boolean
     user_defined: false
   SCA_AUTO_GRANT:
-    generate_block?: false
-    value: false
+    generate_block?: '#application_special_children_act_proceedings?'
+    value: '#application_auto_grant_special_children_act?'
     br100_meaning: the special children act application can be auto granted
     response_type: boolean
     user_defined: false

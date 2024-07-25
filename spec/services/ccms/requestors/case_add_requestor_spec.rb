@@ -467,7 +467,6 @@ module CCMS
           let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB059" } }
 
           it "sets DelegatedFunctionsApply to false" do
-            binding.pry
             expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
           end
 
