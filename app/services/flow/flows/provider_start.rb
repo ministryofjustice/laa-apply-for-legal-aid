@@ -2,6 +2,8 @@ module Flow
   module Flows
     class ProviderStart < FlowSteps
       STEPS = {
+        search_existing_applications: Steps::ProviderStart::SearchExistingApplicationsStep,
+        show_existing_applications: Steps::ProviderStart::ShowExistingApplicationsStep,
         providers_home: Steps::ProvidersHomeStep,
         delete: Steps::DeleteStep,
         applicants: Steps::ProviderStart::ApplicantsStep,

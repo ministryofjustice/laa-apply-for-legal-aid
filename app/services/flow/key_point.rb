@@ -6,7 +6,7 @@ module Flow
       citizens: {},
       providers: {
         home: :providers_home,
-        journey_start: :applicants,
+        journey_start: :search_existing_applications,
         edit_applicant: :applicant_details,
         start_after_applicant_completes_means: :client_completed_means,
         start_income_update: :capital_introductions,

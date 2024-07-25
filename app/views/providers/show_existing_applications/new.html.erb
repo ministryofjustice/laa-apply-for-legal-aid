@@ -24,6 +24,9 @@
           row.with_value { "£10.01" }
         end
       end %>
+
+  <%= govuk_button_link_to "Populate fields and continue", new_providers_applicant_path %>
+
 <% end %>
 
 <p class="govuk-body"><%= @search_text %></p>
