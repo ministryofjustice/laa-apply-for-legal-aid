@@ -4,7 +4,7 @@ module Providers
 
     def new
       @search_text = params[:search]
-      @body = parsed_json_response["name"]
+      @body = parsed_json_response
     end
 
   private
@@ -22,7 +22,7 @@ module Providers
     end
 
     def url
-      "https://swapi.dev/api/people/#{@search_text}"
+      "https://laa-civil-applications-datastore-uat.apps.live.cloud-platform.service.justice.gov.uk/civil_applications/#{@search_text}"
     end
 
     def headers

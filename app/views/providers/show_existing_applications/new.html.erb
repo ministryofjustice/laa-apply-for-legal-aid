@@ -1,6 +1,31 @@
-<h1 class="govuk-heading-xl">Existing application</h1>
+<%= page_template page_title: nil do %>
+  <h1 class="govuk-heading-xl">Review your client's previous eligibility check</h1>
 
-<h2 class="govuk-heading-m">Search text</h2>
+  <h2 class="govuk-heading-m">Your savings</h2>
+  <%= govuk_summary_list do |summary_list|
+        summary_list.with_row do |row|
+          row.with_key { "Savings" }
+          row.with_value { "£10.01" }
+        end
+      end %>
+
+  <h2 class="govuk-heading-m">Your money coming in</h2>
+  <%= govuk_summary_list do |summary_list|
+        summary_list.with_row do |row|
+          row.with_key { "Any other income" }
+          row.with_value { "£10.01" }
+        end
+      end %>
+
+  <h2 class="govuk-heading-m">Your outgoings</h2>
+  <%= govuk_summary_list do |summary_list|
+        summary_list.with_row do |row|
+          row.with_key { "Rent" }
+          row.with_value { "£10.01" }
+        end
+      end %>
+<% end %>
+
 <p class="govuk-body"><%= @search_text %></p>
 
 <h2 class="govuk-heading-m">Retrieved info</h2>

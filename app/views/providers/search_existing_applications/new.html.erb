@@ -1,5 +1,8 @@
-<%= form_with(url: new_providers_show_existing_application_path, method: :get) do |form| %>
-  <h1 class="govuk-heading-xl">Enter a code</h1>
-  <%= form.govuk_text_field :search, label: { text: "Search" }, width: "one-quarter" %>
-  <%= form.govuk_submit "Search" %>
+<%= page_template page_title: nil do %>
+  <%= form_with(url: new_providers_show_existing_application_path, method: :get) do |form| %>
+    <h1 class="govuk-heading-xl">Does your client have a reference number from a previous eligibility check?</h1>
+    <p>For example, from a check they completed on 'Check if you can get legal aid'.</p>
+    <%= form.govuk_text_field :search, label: { text: "Reference number" }, width: "one-quarter" %>
+    <%= form.govuk_submit "Save and continue" %>
+  <% end %>
 <% end %>
