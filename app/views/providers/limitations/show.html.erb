@@ -27,7 +27,7 @@
           </strong>
         </p>
 
-        <% unless @legal_aid_application.family_linked_associated_application? %>
+        <% if Setting.linked_applications? && !@legal_aid_application.family_linked_associated_application? %>
           <%= govuk_details(summary_text: t(".emergency_certificate_details_heading")) do %>
             <p><%= sanitize(t(".emergency_certificate_details", limit: "<strong>#{gds_number_to_currency(
                      @legal_aid_application.additional_family_lead_delegated_functions_cost_limitation,
