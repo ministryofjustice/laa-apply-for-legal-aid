@@ -409,7 +409,7 @@ module Reports
         @line << yesno(laa.applicant_has_partner?)
         if laa.applicant_has_partner?
           @line << yesno(!laa.applicant_has_partner_with_no_contrary_interest? || nil)
-          @line << yesno(laa&.partner&.shared_benefit_with_applicant? || nil)
+          @line << yesno(laa&.partner&.shared_benefit_with_applicant? || laa&.applicant&.shared_benefit_with_partner? || nil)
         else
           @line << nil
           @line << nil

@@ -704,6 +704,14 @@ module Reports
               expect(value_for("Contrary interest?")).to eq "Yes"
               expect(value_for("Partner DWP challenge?")).to eq "No"
             end
+
+            context "and the DWP result was overridden with a shared benefit" do
+              before { applicant.update!(shared_benefit_with_partner: true) }
+
+              it "returns the expected data" do
+                expect(value_for("Partner DWP challenge?")).to eq "Yes"
+              end
+            end
           end
         end
 
