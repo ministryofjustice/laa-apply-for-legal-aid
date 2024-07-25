@@ -402,6 +402,84 @@ module CCMS
                                      .and have_xml("#{address_xpath}/common:AddressLine2", "109 Correspondence Avenue")
                                      .and have_xml("#{address_xpath}/common:AddressLine3", "Placeholder City")
           end
+
+          it "sets the SCA_AUTO_GRANT to not be present" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).not_to be_present
+          end
+        end
+
+        context "when auto-granting an SCA application" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_positive_benefit_check_result,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: %i[pb003],
+                   set_lead_proceeding: :pb003,
+                   df_options: { PB003: [35.days.ago.to_date, 30.days.ago.to_date] },
+                   applicant:,
+                   vehicles:,
+                   other_assets_declaration:,
+                   savings_amount:,
+                   provider:,
+                   opponents:,
+                   domestic_abuse_summary:,
+                   office:)
+          end
+          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
+
+          it "sets DelegatedFunctionsApply to false" do
+            expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
+          end
+
+          it "sets the SCA_AUTO_GRANT to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets the PROC_DELEGATED_FUNCTIONS_DATE to true" do
+            block = XmlExtractor.call(request_xml, :merits_assessment_proceeding, "PROC_DELEGATED_FUNCTIONS_DATE")
+            expect(block).to have_date_response(35.days.ago.strftime("%d-%m-%Y"))
+          end
+        end
+
+        context "when not auto-granting an SCA application" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_positive_benefit_check_result,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: %i[pb059],
+                   set_lead_proceeding: :pb059,
+                   df_options: { PB059: [35.days.ago.to_date, 30.days.ago.to_date] },
+                   applicant:,
+                   vehicles:,
+                   other_assets_declaration:,
+                   savings_amount:,
+                   provider:,
+                   opponents:,
+                   domestic_abuse_summary:,
+                   office:)
+          end
+          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB059" } }
+
+          it "sets DelegatedFunctionsApply to false" do
+            binding.pry
+            expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
+          end
+
+          it "sets the SCA_AUTO_GRANT to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).to have_boolean_response false
+          end
+
+          it "sets the PROC_DELEGATED_FUNCTIONS_DATE to true" do
+            block = XmlExtractor.call(request_xml, :merits_assessment_proceeding, "PROC_DELEGATED_FUNCTIONS_DATE")
+            expect(block).to have_date_response(35.days.ago.strftime("%d-%m-%Y"))
+          end
         end
       end
     end
