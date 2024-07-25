@@ -183,6 +183,11 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
   end
 
+  def auto_grant_special_children_act?
+    # Auto grant pb003 - all other proceedings in SCA or without should not auto-grant
+    proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB003") }
+  end
+
   def evidence_is_required?
     RequiredDocumentCategoryAnalyser.call(self)
     required_document_categories.any?
