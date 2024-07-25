@@ -4,32 +4,35 @@
   <h2 class="govuk-heading-m">Your savings</h2>
   <%= govuk_summary_list do |summary_list|
         summary_list.with_row do |row|
-          row.with_key { "Savings" }
-          row.with_value { "£10.01" }
+          row.with_key { "Savings amount" }
+          row.with_value { number_to_currency_or_na(sprintf("%.2f", @body["savings_amount"].to_f / 100)) }
         end
       end %>
 
   <h2 class="govuk-heading-m">Your money coming in</h2>
   <%= govuk_summary_list do |summary_list|
         summary_list.with_row do |row|
-          row.with_key { "Any other income" }
-          row.with_value { "£10.01" }
+          row.with_key { "Employment income amount" }
+          row.with_value { number_to_currency_or_na(sprintf("%.2f", @body["employment_income_amount"].to_f / 100)) }
+        end
+        summary_list.with_row do |row|
+          row.with_key { "Employment income frequency" }
+          row.with_value { @body["employment_income_frequency"] }
         end
       end %>
 
   <h2 class="govuk-heading-m">Your outgoings</h2>
   <%= govuk_summary_list do |summary_list|
         summary_list.with_row do |row|
-          row.with_key { "Rent" }
-          row.with_value { "£10.01" }
+          row.with_key { "Housing amount" }
+          row.with_value { number_to_currency_or_na(sprintf("%.2f", @body["housing_amount"].to_f / 100)) }
+        end
+        summary_list.with_row do |row|
+          row.with_key { "Housing frequency" }
+          row.with_value { @body["housing_frequency"] }
         end
       end %>
 
   <%= govuk_button_link_to "Populate fields and continue", new_providers_applicant_path %>
 
 <% end %>
-
-<p class="govuk-body"><%= @search_text %></p>
-
-<h2 class="govuk-heading-m">Retrieved info</h2>
-<p class="govuk-body"><%= @body %></p>
