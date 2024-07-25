@@ -430,6 +430,8 @@ module CCMS
           end
           let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
 
+          before { legal_aid_application.chances_of_success.map(&:destroy!) }
+
           it "sets DelegatedFunctionsApply to false" do
             expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
           end
@@ -442,6 +444,11 @@ module CCMS
           it "sets the PROC_DELEGATED_FUNCTIONS_DATE to true" do
             block = XmlExtractor.call(request_xml, :merits_assessment_proceeding, "PROC_DELEGATED_FUNCTIONS_DATE")
             expect(block).to have_date_response(35.days.ago.strftime("%d-%m-%Y"))
+          end
+
+          it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
+            block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
+            expect(block).not_to be_present
           end
         end
 
@@ -466,6 +473,8 @@ module CCMS
           end
           let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB059" } }
 
+          before { legal_aid_application.chances_of_success.map(&:destroy!) }
+
           it "sets DelegatedFunctionsApply to false" do
             expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
           end
@@ -478,6 +487,11 @@ module CCMS
           it "sets the PROC_DELEGATED_FUNCTIONS_DATE to true" do
             block = XmlExtractor.call(request_xml, :merits_assessment_proceeding, "PROC_DELEGATED_FUNCTIONS_DATE")
             expect(block).to have_date_response(35.days.ago.strftime("%d-%m-%Y"))
+          end
+
+          it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
+            block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
+            expect(block).not_to be_present
           end
         end
       end
