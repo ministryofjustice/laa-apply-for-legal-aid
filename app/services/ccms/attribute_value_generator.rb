@@ -280,6 +280,10 @@ module CCMS
       PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:code]
     end
 
+    def ccms_equivalent_prospects_of_success_present?(_options)
+      chances_of_success&.success_prospect&.present?
+    end
+
     def ccms_equivalent_prospects_of_success_valid?
       PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym].present?
     end
