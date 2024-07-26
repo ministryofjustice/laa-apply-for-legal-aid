@@ -6,9 +6,9 @@ module Providers
   module Draftable
     ENDPOINT = Flow::KeyPoint.path_for(journey: :providers, key_point: :home).freeze
 
-    def update_task_save_continue_or_draft(level, task)
+    def update_task_save_continue_or_draft(level, task, **)
       update_task(level, task)
-      save_continue_or_draft(@form)
+      save_continue_or_draft(@form, **)
     end
 
     def update_task(level, task)
