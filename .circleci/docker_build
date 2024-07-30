@@ -5,6 +5,6 @@ if [ "$IMAGE_EXISTS" = "true" ]; then
   echo "latest-$(cat .ruby-version) $1 image already exists"
 else
   echo "${DOCKER_HUB_PAT}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
-  docker build -f ./docker/apply_$1.dockerfile . -t ministryofjustice/apply-$1:latest-$(cat .ruby-version)
+  docker build -f ./docker/apply_$1.dockerfile . -t ministryofjustice/apply-$1:latest-$(cat .ruby-version) --progress=plain
   docker push ministryofjustice/apply-$1:latest-$(cat .ruby-version)
 fi
