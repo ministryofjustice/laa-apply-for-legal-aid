@@ -56,8 +56,9 @@ RUN addgroup -g 1000 -S appgroup \
 && adduser -u 1000 -S appuser -G appgroup
 
 # create app directory in conventional, existing dir /usr/src
-RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp && mkdir /usr/src/app/.cache
+RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp && mkdir -p /usr/src/app/.cache/puppeteer/chrome
 WORKDIR /usr/src/app
+RUN chown -R appuser:appgroup .cache
 
 ######################
 # DEPENDENCIES START #
