@@ -35,18 +35,18 @@ RUN apk --no-cache add --virtual build-dependencies \
 # Install Chromium and Puppeteer for PDF generation
 # Installs latest Chromium package available on Alpine (Chromium 108)
 RUN apk add --no-cache \
+        chromium \
         nss \
         freetype \
         harfbuzz \
         ca-certificates
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
-#ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-#ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Install latest version of Puppeteer
 RUN yarn add puppeteer
-RUN yarn puppeteer browsers install chrome@126
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
