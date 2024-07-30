@@ -78,6 +78,7 @@ RUN gem update --system \
 COPY package.json yarn.lock ./
 RUN yarn --prod
 RUN yarn puppeteer browsers install chrome@126
+RUN mv /root/.cache/puppeteer .cache/puppeteer
 
 ####################
 # DEPENDENCIES END #
