@@ -59,7 +59,7 @@ RUN addgroup -g 1000 -S appgroup \
 RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp && mkdir -p /usr/src/app/.cache/puppeteer/chrome
 WORKDIR /usr/src/app
 RUN chown -R appuser:appgroup .cache
-RUN chmod -777 .cache
+RUN chmod 777 .cache
 
 ######################
 # DEPENDENCIES START #
