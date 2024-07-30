@@ -35,7 +35,6 @@ RUN apk --no-cache add --virtual build-dependencies \
 # Install Chromium and Puppeteer for PDF generation
 # Installs latest Chromium package available on Alpine (Chromium 108)
 RUN apk add --no-cache \
-        chromium \
         nss \
         freetype \
         harfbuzz \
@@ -47,7 +46,7 @@ RUN apk add --no-cache \
 
 # Install latest version of Puppeteer
 RUN yarn add puppeteer
-RUN yarn puppeteer install chrome@126
+RUN yarn puppeteer browsers install chrome@126
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
