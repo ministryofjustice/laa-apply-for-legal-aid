@@ -20,6 +20,6 @@ Grover.configure do |config|
       right: "20mm",
     },
     launch_args: ["--no-sandbox"],
-    timeout: 0, # TODO: 30 JUl 2024 - this is _no_ timeout and should be increased to make it more realistic when we know it fixes the issue!
+    timeout: 30_000, # TODO: 30 JUl 2024 - this is _no_ timeout and should be increased to make it more realistic when we know it fixes the issue!
   }
 end
