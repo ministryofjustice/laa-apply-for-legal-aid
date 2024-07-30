@@ -58,8 +58,6 @@ RUN addgroup -g 1000 -S appgroup \
 # create app directory in conventional, existing dir /usr/src
 RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp && mkdir -p /usr/src/app/.cache/puppeteer/chrome
 WORKDIR /usr/src/app
-RUN chown -R appuser:appgroup .cache
-RUN chmod 777 .cache
 
 ######################
 # DEPENDENCIES START #
@@ -78,7 +76,9 @@ RUN gem update --system \
 COPY package.json yarn.lock ./
 RUN yarn --prod
 RUN yarn puppeteer browsers install chrome@126
-RUN mv /root/.cache/puppeteer .cache/puppeteer
+RUN mv /root/.cache/puppeteer .cache/
+RUN chown -R appuser:appgroup .cache
+RUN chmod 777 .cache
 
 ####################
 # DEPENDENCIES END #
