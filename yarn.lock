@@ -5045,7 +5045,7 @@ puppeteer-core@22.14.0:
     devtools-protocol "0.0.1312386"
     ws "^8.18.0"
 
-puppeteer@^22.14.0:
+puppeteer@^22.13.1:
   version "22.14.0"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-22.14.0.tgz#11697c929f5d9d7eac5a3438a0ff12dc65aedcbe"
   integrity sha512-MGTR6/pM8zmWbTdazb6FKnwIihzsSEXBPH49mFFU96DNZpQOevCAZMnjBZGlZRGRzRK6aADCavR6SQtrbv5dQw==
