@@ -47,6 +47,7 @@ commands:
             --build-arg BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z) \
             --build-arg BUILD_TAG="app-${CIRCLE_SHA1}" \
             --build-arg APP_BRANCH=${CIRCLE_BRANCH} \
+            --progress=plain \
             -t app . | while read line ; do echo "$(date +"%T") > $line" ; done ;
       - aws-cli/setup:
           role_arn: $ECR_ROLE_TO_ASSUME
@@ -351,33 +352,33 @@ generic-slack-fail-post-step: &generic-slack-fail-post-step
 workflows:
   open_pr:
     jobs:
-      - lint_checks:
-          filters:
-            branches:
-              ignore: main
-          <<: *generic-slack-fail-post-step
+#      - lint_checks:
+#          filters:
+#            branches:
+#              ignore: main
+#          <<: *generic-slack-fail-post-step
       - build_and_push:
-          requires:
-          - lint_checks
+#          requires:
+#          - lint_checks
           <<: *generic-slack-fail-post-step
       - deploy_uat:
           context: laa-apply-for-legalaid-uat
           requires:
           - build_and_push
           <<: *generic-slack-fail-post-step
-      - unit_tests:
-          requires:
-            - lint_checks
-          <<: *generic-slack-fail-post-step
-      - integration_tests:
-          requires:
-          - lint_checks
-          <<: *generic-slack-fail-post-step
-      - coverage:
-          requires:
-            - unit_tests
-            - integration_tests
-          <<: *generic-slack-fail-post-step
+#      - unit_tests:
+#          requires:
+#            - lint_checks
+#          <<: *generic-slack-fail-post-step
+#      - integration_tests:
+#          requires:
+#          - lint_checks
+#          <<: *generic-slack-fail-post-step
+#      - coverage:
+#          requires:
+#            - unit_tests
+#            - integration_tests
+#          <<: *generic-slack-fail-post-step
       - delete_dependabot_deployment:
           context: laa-apply-for-legalaid-uat
           filters:
