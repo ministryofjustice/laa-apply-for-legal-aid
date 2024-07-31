@@ -96,9 +96,9 @@ ENV BUILD_DATE=${BUILD_DATE}
 ENV BUILD_TAG=${BUILD_TAG}
 ENV APP_BRANCH=${APP_BRANCH}
 
-USER 1000
-
 # Install latest version of Puppeteer
 RUN yarn add puppeteer
+
+USER 1000
 
 CMD "./docker/run"
