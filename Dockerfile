@@ -11,6 +11,7 @@ RUN set -ex
 # - postgresql-dev for pg/activerecord gems
 # - git for installing gems referred to use a git:// uri
 #
+RUN apk update
 RUN apk --no-cache add --virtual build-dependencies \
                     build-base \
                     libxml2-dev \
@@ -33,7 +34,6 @@ RUN apk --no-cache add --virtual build-dependencies \
                   bash
 
 # Install Chromium and Puppeteer for PDF generation
-# Installs latest Chromium package available on Alpine (Chromium 108)
 RUN apk add --no-cache \
         chromium \
         nss \
@@ -41,12 +41,15 @@ RUN apk add --no-cache \
         harfbuzz \
         ca-certificates
 
+RUN apk update
+
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+# ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 #
 ## Install latest version of Puppeteer
-RUN yarn add puppeteer
+# already instead in package.json
+# RUN yarn add puppeteer
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
