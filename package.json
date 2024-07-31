@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "esbuild app/javascript/*.* --bundle --loader:.gif=dataurl --sourcemap --minify --outdir=app/assets/builds --public-path=assets --target=es6",
     "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --style=compressed --load-path=node_modules --quiet-deps",
-    "postinstall": "rm -rf node_modules/resolve/test/resolver/multirepo node_modules/eslint-plugin-react/node_modules/resolve/test/resolver/multirepo"
+    "postinstall": "rm -rf node_modules/resolve/test/resolver/multirepo node_modules/eslint-plugin-react/node_modules/resolve/test/resolver/multirepo && yarn puppeteer browsers install chrome"
   },
   "dependencies": {
     "@rails/ujs": "^7.1.3",
