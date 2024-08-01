@@ -11,7 +11,7 @@ RUN set -ex
 # - postgresql-dev for pg/activerecord gems
 # - git for installing gems referred to use a git:// uri
 #
-RUN apk update
+RUN apk update && apk upgrade
 RUN apk --no-cache add --virtual build-dependencies \
                     build-base \
                     libxml2-dev \
@@ -77,7 +77,7 @@ RUN gem update --system \
 && bundle install
 
 COPY package.json yarn.lock ./
-RUN yarn --prod
+RUN yarn --frozen-lockfile
 
 ####################
 # DEPENDENCIES END #
