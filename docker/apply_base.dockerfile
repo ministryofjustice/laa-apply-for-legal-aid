@@ -1,5 +1,5 @@
-FROM ruby:3.3.4-alpine3.20
-MAINTAINER apply for legal aid team
+FROM ruby:3.3.4-alpine3.19
+LABEL maintainer="apply for legal aid team"
 
 # fail early and print all commands
 RUN set -ex
@@ -32,7 +32,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-liberation \
                   bash
 
-# Install Chromium and Puppeteer for PDF generation
+# Install Chromium and Puppeteer for PDF generation
 # Installs latest Chromium package available on Alpine (Chromium 108)
 RUN apk add --no-cache \
         chromium \
@@ -46,7 +46,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Install latest version of Puppeteer
-RUN yarn add puppeteer
+RUN yarn add puppeteer@22.7.1
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
