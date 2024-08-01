@@ -195,6 +195,8 @@ jobs:
         name: Install Puppeteer with Chromium
         command: |
           yarn add puppeteer
+          echo $(ls .cache/puppeteer/chrome)
+          echo $(chromium --version)
     - run:
         name: Setup Code Climate test-reporter
         command: |
