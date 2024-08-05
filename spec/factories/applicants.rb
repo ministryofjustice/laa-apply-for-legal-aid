@@ -11,12 +11,6 @@ FactoryBot.define do
     student_finance_amount { nil }
     changed_last_name { false }
 
-    trait :with_only_correspondence_address do
-      # TODO: delete this trait when Setting.home_address? is removed
-      # Colin, 21 Jun 2024
-      addresses { build_list(:address, 1) }
-    end
-
     trait :with_address do
       same_correspondence_and_home_address { true }
       addresses { build_list(:address, 1, :as_home_address) }
