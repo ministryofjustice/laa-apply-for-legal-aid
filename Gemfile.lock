@@ -203,7 +203,7 @@ GEM
       bigdecimal
     cucumber-gherkin (27.0.0)
       cucumber-messages (>= 19.1.4, < 23)
-    cucumber-html-formatter (21.4.1)
+    cucumber-html-formatter (21.5.0)
       cucumber-messages (> 19, < 25)
     cucumber-messages (22.0.0)
     cucumber-rails (3.0.0)
