@@ -28,7 +28,8 @@
   <div class="govuk-grid-row search-field govuk-!-margin-top-0">
     <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
       <%= govuk_error_message(error_message) %>
-      <input class="govuk-input <%= input_error_class %>" id="proceeding-search-input" name="proceeding-search-input" type="text" autocomplete="off">
+      <label for="autocomplete-default">TEST using accessible autocomplete. JavaScript is ON</label>
+      <div id="autocomplete-container"></div>
     </div>
 
     <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
@@ -46,9 +47,10 @@
       url: providers_legal_aid_application_proceedings_types_path,
       local: true,
     ) do |form| %>
+
   <noscript>
-  <div class="govuk-grid-row govuk-!-margin-top-0">
-    <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
+    <div class="govuk-grid-row govuk-!-margin-top-0">
+      <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
         <label for="datalist">TEST using datalink. JavaScript is OFF</label>
         <input list="proceeding-types" name="proceeding" id="proceeding" class="govuk-input">
         <datalist id="proceeding-types">
@@ -61,6 +63,7 @@
       </div>
     </div>
   </noscript>
+
   <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-body"><%= t ".no_results" %></span>
