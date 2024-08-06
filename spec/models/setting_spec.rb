@@ -14,7 +14,6 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
-        expect(rec.home_address?).to be false
         expect(rec.special_childrens_act?).to be false
       end
     end
@@ -30,7 +29,6 @@ RSpec.describe Setting do
           alert_via_sentry: true,
           linked_applications: true,
           collect_hmrc_data: true,
-          home_address: false,
           special_childrens_act: true,
         )
       end
@@ -45,7 +43,6 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
-        expect(rec.home_address?).to be false
         expect(rec.special_childrens_act?).to be true
       end
     end
@@ -63,7 +60,6 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
-      expect(described_class.home_address?).to be false
       expect(described_class.special_childrens_act?).to be false
     end
   end

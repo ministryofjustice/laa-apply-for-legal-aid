@@ -16,6 +16,10 @@ FactoryBot.define do
       addresses { build_list(:address, 1, :as_home_address) }
     end
 
+    trait :with_correspondence_address do
+      addresses { build_list(:address, 1) }
+    end
+
     trait :with_address_for_xml_fixture do
       same_correspondence_and_home_address { true }
       addresses { build_list(:address, 1, :as_home_address, :with_address_for_xml_fixture) }

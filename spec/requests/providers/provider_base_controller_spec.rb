@@ -41,7 +41,7 @@ module Providers
       end
     end
 
-    describe "PATCH /providers/applications/:legal_aid_application_id/address" do
+    describe "PATCH /providers/applications/:legal_aid_application_id/correspondence_address/enter_correspondence_address" do
       before do
         login_as logged_in_provider
         patch providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application), params: address_params
@@ -51,7 +51,7 @@ module Providers
         let(:logged_in_provider) { provider }
 
         it "is successful" do
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
+          expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_care_of_path)
         end
       end
 
@@ -59,7 +59,7 @@ module Providers
         let(:logged_in_provider) { provider_in_same_firm }
 
         it "is successful" do
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
+          expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_care_of_path)
         end
       end
 
