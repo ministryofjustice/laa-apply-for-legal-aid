@@ -163,7 +163,8 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    childprocess (5.0.0)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     coderay (1.1.3)
