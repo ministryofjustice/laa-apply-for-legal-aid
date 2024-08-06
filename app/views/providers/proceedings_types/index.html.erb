@@ -46,22 +46,21 @@
       url: providers_legal_aid_application_proceedings_types_path,
       local: true,
     ) do |form| %>
+  <noscript>
   <div class="govuk-grid-row govuk-!-margin-top-0">
     <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
-        <%= form.govuk_radio_buttons_fieldset :id, legend: { text: nil, hidden: true } do %>
+        <label for="datalist">TEST using datalink. JavaScript is OFF</label>
+        <input list="proceeding-types" name="proceeding" id="proceeding" class="govuk-input">
+        <datalist id="proceeding-types">
           <% @proceeding_types.each do |proceeding_type| %>
-            <div id="<%= proceeding_type.ccms_code %>" class="govuk-grid-row proceeding-item">
-              <%= form.govuk_radio_button(
-                    :id,
-                    proceeding_type.ccms_code,
-                    label: { text: proceeding_type.meaning },
-                    hint: { text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})" },
-                  ) %>
-            </div>
+            <option value="<%= proceeding_type.meaning %>">
+              <%= proceeding_type.ccms_category_law %> (<%= proceeding_type.ccms_matter %>)
+            </option>
           <% end %>
-        <% end %>
+        </datalist>
+      </div>
     </div>
-  </div>
+  </noscript>
   <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-body"><%= t ".no_results" %></span>
