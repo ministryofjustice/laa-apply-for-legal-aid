@@ -11,5 +11,7 @@ bundle exec rails db:prepare db:seed
 # Remove irb prompts from rails console
 echo 'IRB.conf[:USE_AUTOCOMPLETE] = false' >> ~/.irbrc
 
+bundle exec rake smoke_test:pdf
+
 # Start the Puma server
 bundle exec puma -C config/puma.rb
