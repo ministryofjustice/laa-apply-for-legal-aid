@@ -4,6 +4,7 @@ namespace :smoke_test do
     Timeout.timeout(5) { Grover.new("test").to_pdf.size }
     Rails.logger.info "PDF generation succeeded"
   rescue Timeout::Error
+    Sentry.capture_message("PDF generation failed during deploy smoke test")
     raise StandardError, "PDF generation failed"
   end
 end
