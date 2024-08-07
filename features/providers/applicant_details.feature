@@ -7,6 +7,9 @@ Feature: Applicant details
     Then I enter last name at birth 'Smith'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
@@ -140,6 +143,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
@@ -203,6 +209,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     And I enter a building number name '100'
@@ -217,6 +226,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'XX1 1XX'
     Then I click find address
@@ -299,6 +311,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '10-1-1980'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
@@ -355,6 +370,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '10-12-1961'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
@@ -420,6 +438,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address

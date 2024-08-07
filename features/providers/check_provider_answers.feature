@@ -74,13 +74,18 @@ Feature: Checking client details answers backwards and forwards
   @javascript @vcr
   Scenario: I am able to return and amend the client's address
     Given I complete the passported journey as far as check your answers for client details
-    And I should see "Transport For London"
-    And I should not see "Home address"
+    And I should see "Home address Transport For London"
+    And I should see "Correspondence address Transport For London"
 
     When I click Check Your Answers Change link for "address"
+    Then I should be on a page with title "Where should we send your client's correspondence?"
+
+    When I choose "Another UK residential address"
+    And I click "Save and continue"
     Then I should be on a page with title "Find your client's correspondence address"
 
-    When I click 'Find address'
+    When I enter a postcode 'SW1H 9EA'
+    And I click 'Find address'
     And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
     Then I should be on a page with title "Check your answers"
@@ -213,6 +218,9 @@ Feature: Checking client details answers backwards and forwards
   Scenario: I want to change address from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
@@ -224,6 +232,9 @@ Feature: Checking client details answers backwards and forwards
   Scenario: I want to change address manually from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'XX1 1XX'
     Then I click find address
