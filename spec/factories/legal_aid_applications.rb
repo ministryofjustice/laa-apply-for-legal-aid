@@ -291,6 +291,12 @@ FactoryBot.define do
       end
     end
 
+    trait :merits_parental_responsibilities do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :merits_parental_responsibilities)
+      end
+    end
+
     trait :submitting_assessment do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :submitting_assessment)

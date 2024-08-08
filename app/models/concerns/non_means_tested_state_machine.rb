@@ -3,6 +3,22 @@ class NonMeansTestedStateMachine < BaseStateMachine
     CCMS::Requestors::NonMeansTestedCaseAddRequestor
   end
 
+  aasm do
+    state :merits_parental_responsibilities
+    state :merits_parental_responsibilities_all_rejected
+
+    event :provider_recording_parental_responsibilities do
+      transitions from: :provider_entering_merits, to: :merits_parental_responsibilities
+      transitions from: :merits_parental_responsibilities, to: :merits_parental_responsibilities
+      transitions from: :merits_parental_responsibilities_all_rejected, to: :merits_parental_responsibilities_all_rejected
+    end
+
+    event :rejected_all_parental_responsibilities do
+      transitions from: :provider_entering_merits, to: :merits_parental_responsibilities_all_rejected
+      transitions from: :merits_parental_responsibilities, to: :merits_parental_responsibilities_all_rejected
+      transitions from: :merits_parental_responsibilities_all_rejected, to: :merits_parental_responsibilities_all_rejected
+    end
+  end
   # The following methods override events that are not applicable for a
   # non-means-tested journey but which, nonetheless, must be responded to when calls
   # are made to legal_aid_application#checking_answers? or refered to by other "helper"

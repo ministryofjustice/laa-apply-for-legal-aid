@@ -2,6 +2,7 @@ module Providers
   module ProceedingMeritsTask
     class DoesClientHaveParentalResponsibilitiesController < ProviderBaseController
       def show
+        legal_aid_application.provider_recording_parental_responsibilities!
         @form = Providers::ProceedingMeritsTask::ParentalResponsibilitiesForm.new(model: proceeding)
       end
 
@@ -12,7 +13,7 @@ module Providers
           return redirect_to providers_merits_task_list_is_client_child_subject_path(merits_task_list_id)
         end
 
-        render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :client_relationship_to_proceeding)
+        render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :client_relationship_to_proceeding, reshow_check_client: legal_aid_application.merits_parental_responsibilities_all_rejected?)
       end
 
     private

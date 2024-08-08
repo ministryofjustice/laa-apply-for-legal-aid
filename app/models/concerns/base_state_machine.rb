@@ -133,7 +133,13 @@ class BaseStateMachine < ApplicationRecord
 
     event :provider_enter_merits do
       transitions from: :checking_non_passported_means, to: :provider_entering_merits
-      transitions from: :applicant_details_checked, to: :provider_entering_merits, guard: :non_means_tested?
+      transitions from: %i[
+                    merits_parental_responsibilities_all_rejected
+                    merits_parental_responsibilities
+                    applicant_details_checked
+                  ],
+                  to: :provider_entering_merits,
+                  guard: :non_means_tested?
     end
 
     event :check_merits_answers do
@@ -144,8 +150,13 @@ class BaseStateMachine < ApplicationRecord
                     assessment_submitted
                   ],
                   to: :checking_merits_answers
-
       transitions from: :applicant_details_checked, to: :checking_merits_answers, guard: :non_means_tested?
+      transitions from: %i[
+                    merits_parental_responsibilities_all_rejected
+                    merits_parental_responsibilities
+                  ],
+                  to: :checking_merits_answers,
+                  guard: :non_means_tested?
     end
 
     event :generate_reports do
