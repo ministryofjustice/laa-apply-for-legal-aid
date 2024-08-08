@@ -2,10 +2,12 @@ module Providers
   module ProceedingMeritsTask
     class CheckWhoClientIsController < ProviderBaseController
       def show
+        legal_aid_application.rejected_all_parental_responsibilities!
         @relationship_to_child = @proceeding.relationship_to_child
       end
 
       def update
+        legal_aid_application.provider_enter_merits!
         continue_or_draft
       end
 
