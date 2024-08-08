@@ -45,8 +45,5 @@ RUN apk add --no-cache \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Install latest version of Puppeteer
-RUN yarn add puppeteer@22.15.0
-
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*

@@ -191,9 +191,9 @@ jobs:
           libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
           fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
     - run:
-        name: Install Puppeteer with Chromium
+        name: Install Puppeteer browser
         command: |
-          yarn add puppeteer@22.15.0
+          yarn puppeteer browsers install chrome
     - run:
         name: Setup Code Climate test-reporter
         command: |
