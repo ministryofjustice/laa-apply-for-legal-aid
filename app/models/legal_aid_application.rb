@@ -125,6 +125,10 @@ class LegalAidApplication < ApplicationRecord
            :use_ccms?,
            :summary_state,
            :ccms_reason,
+           :provider_recording_parental_responsibilities!,
+           :rejected_all_parental_responsibilities!,
+           :merits_parental_responsibilities?,
+           :merits_parental_responsibilities_all_rejected?,
            to: :state_machine_proxy
 
   scope :latest, -> { order(created_at: :desc) }
