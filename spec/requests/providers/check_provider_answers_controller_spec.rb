@@ -16,7 +16,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
     )
   end
 
-  let(:applicant) { create(:applicant, :with_only_correspondence_address) } # TODO: revert to :with_address when Setting.home_address? is deleted
+  let(:applicant) { create(:applicant, :with_address) }
   let(:application_id) { application.id }
   let(:parsed_html) { Nokogiri::HTML(response.body) }
   let(:proceeding_name) { application.lead_proceeding.name }

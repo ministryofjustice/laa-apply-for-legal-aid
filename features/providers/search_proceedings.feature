@@ -15,6 +15,9 @@ Feature: Search proceedings
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
@@ -39,6 +42,9 @@ Feature: Search proceedings
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address

@@ -59,7 +59,6 @@ RSpec.describe Admin::SettingsController do
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.linked_applications?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
-      expect(setting.home_address?).to be(true)
       expect(setting.special_childrens_act?).to be(true)
     end
 

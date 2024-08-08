@@ -34,7 +34,7 @@ RSpec.describe Providers::Draftable do
 
         it "redirects provider to next step of the submission" do
           patch_request
-          expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_lookup_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_choice_path(application))
         end
 
         it "sets the application as no longer draft" do

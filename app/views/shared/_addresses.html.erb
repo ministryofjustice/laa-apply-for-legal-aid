@@ -25,16 +25,14 @@
       <%= govuk_inset_text(text: t("errors.address.#{form.object.lookup_error}")) %>
     <% end %>
 
-    <% if Setting.home_address? && location.eql?("correspondence") %>
-      <div class="govuk-!-padding-bottom-2">
-        <p class="govuk-body"><%= t(".guidance.first") %></p>
-        <p class="govuk-body"><%= t(".guidance.second") %></p>
-      </div>
+    <% if location.eql?("correspondence") %>
+      <p class="govuk-body"><%= t(".guidance.first") %></p>
+      <p class="govuk-body govuk-!-padding-bottom-2"><%= t(".guidance.second") %></p>
     <% end %>
 
     <%= form.govuk_text_field :address_line_one, label: { text: t(".address_line_one") } %>
     <%= form.govuk_text_field :address_line_two, label: { text: t(".address_line_two") } %>
-    <%= form.govuk_text_field :address_line_three, label: { text: t(".address_line_three") } if Setting.home_address? && location.eql?("correspondence") %>
+    <%= form.govuk_text_field :address_line_three, label: { text: t(".address_line_three") } if location.eql?("correspondence") %>
     <%= form.govuk_text_field :city, label: { text: t(".city") }, width: "two-thirds" %>
     <%= form.govuk_text_field :county, label: { text: t(".county") }, width: "two-thirds" %>
     <%= form.govuk_text_field :postcode, label: { text: t(".postcode") }, hint: nil, width: 10 %>

@@ -653,7 +653,7 @@ Given("I complete the passported journey as far as check your answers for client
     postcode: "SW1H 9EA",
     lookup_used: true,
     applicant:,
-    location: Setting.home_address? ? "home" : "correspondence",
+    location: "home",
   )
   @legal_aid_application = create(
     :legal_aid_application,
@@ -1195,7 +1195,7 @@ Then("I pause") do
 end
 
 Then("I am on the postcode entry page") do
-  expect(page).to have_content("Find your client's correspondence address")
+  expect(page).to have_content("Find your client's home address")
 end
 
 Then(/^I click find address$/) do

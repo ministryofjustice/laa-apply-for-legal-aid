@@ -22,18 +22,8 @@ RSpec.describe CheckProviderAnswersHelper do
     context "when location is correspondence" do
       let(:location) { "correspondence" }
 
-      context "when lookup_used is false" do
-        it "returns the address choice path" do
-          expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/where_to_send_correspondence?locale=en#postcode"
-        end
-      end
-
-      context "when lookup_used is true" do
-        let(:lookup_used) { true }
-
-        it "returns the address lookup path" do
-          expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/find_correspondence_address?locale=en#postcode"
-        end
+      it "returns the address choice path" do
+        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/where_to_send_correspondence?locale=en"
       end
     end
   end

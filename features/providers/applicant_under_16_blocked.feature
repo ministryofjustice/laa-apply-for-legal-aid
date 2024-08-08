@@ -8,6 +8,9 @@ Feature: Applicant under 16 blocked
     Then I choose 'No'
     And I enter a date of birth that will make me 16 today
     And I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
 
     When I enter a postcode 'SW1H 9EA'

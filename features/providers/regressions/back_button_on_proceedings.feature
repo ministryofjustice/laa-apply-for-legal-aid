@@ -6,6 +6,9 @@ Feature: Using the back button on proceedings should not lock a user out
     Then I choose 'No'
     And I enter the date of birth '03-04-1999'
     And I click 'Save and continue'
+    Then I should be on a page showing "Where should we send your client's correspondence?"
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
     Then I am on the postcode entry page
 
     When I enter a postcode 'SW1H 9EA'
@@ -22,7 +25,7 @@ Feature: Using the back button on proceedings should not lock a user out
 
     When I click link "Back"
     And I click link "Back"
-    Then I should be on a page showing "Select your client's correspondence address"
+    Then I should be on a page showing "Select your client's home address"
 
     When I click "Use this address"
     Then I should be on a page showing 'Do you want to add another proceeding?'

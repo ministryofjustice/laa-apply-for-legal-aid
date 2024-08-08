@@ -3,8 +3,6 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe ApplicantAddRequestor, :ccms do
-      before { allow(Setting).to receive(:home_address?).and_return true }
-
       let(:expected_xml) { ccms_data_from_file "applicant_add_request.xml" }
       let(:expected_tx_id) { "20190101121530000000" }
       let(:last_name_at_birth) { nil }
