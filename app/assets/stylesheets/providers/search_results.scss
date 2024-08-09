@@ -7,10 +7,6 @@
   background-color: mix(govuk-colour("white"), govuk-colour("yellow"), 50%);
 }
 
-#search-field {
-  display: none;
-}
-
 .proceeding-item {
   display: block;
 
@@ -27,10 +23,6 @@
 }
 
 .js-enabled {
-  #search-field {
-    display: block;
-  }
-
   .proceeding-item,
   .organisation-item,
   .country-item,
