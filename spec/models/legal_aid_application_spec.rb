@@ -867,6 +867,74 @@ RSpec.describe LegalAidApplication do
 
       it { is_expected.to eq 12_000 }
     end
+
+    context "when the application is is an associated family linked application" do
+      let(:lead_application) { create(:legal_aid_application) }
+
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD") }
+
+      it { is_expected.to eq 0 }
+    end
+  end
+
+  describe "#default_delegated_functions_cost_limitation" do
+    subject(:default_delegated_functions_cost_limitation) { legal_aid_application.default_delegated_functions_cost_limitation }
+
+    before do
+      create(:proceeding, :da006, legal_aid_application:, delegated_functions_cost_limitation: 5_000, lead_proceeding: true)
+      create(:proceeding, :se013, legal_aid_application:, delegated_functions_cost_limitation: 10_000)
+    end
+
+    it { is_expected.to eq 5_000 }
+
+    context "when the application is is an associated family linked application" do
+      let(:lead_application) { create(:legal_aid_application) }
+
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD") }
+
+      it { is_expected.to eq 0 }
+    end
+  end
+
+  describe "#additional_family_lead_delegated_functions_cost_limitation" do
+    subject(:additional_family_lead_delegated_functions_cost_limitation) { legal_aid_application.additional_family_lead_delegated_functions_cost_limitation }
+
+    before do
+      create(:proceeding, :da006, legal_aid_application:, delegated_functions_cost_limitation: 5_000, lead_proceeding: true)
+      create(:proceeding, :se013, legal_aid_application:, delegated_functions_cost_limitation: 10_000)
+    end
+
+    it { is_expected.to eq 2_500 }
+
+    context "when the application is is an associated family linked application" do
+      let(:lead_application) { create(:legal_aid_application) }
+
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD") }
+
+      it { is_expected.to eq 0 }
+    end
+  end
+
+  describe "#family_linked_associated_application?" do
+    subject(:family_linked_associated_application?) { legal_aid_application.family_linked_associated_application? }
+
+    let(:lead_application) { create(:legal_aid_application) }
+
+    context "when the application does not have a lead application" do
+      it { is_expected.to be false }
+    end
+
+    context "when the application has been legal linked" do
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "LEGAL") }
+
+      it { is_expected.to be false }
+    end
+
+    context "when the application has been family linked" do
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD") }
+
+      it { is_expected.to be true }
+    end
   end
 
   describe "#bank_transactions" do
@@ -1927,6 +1995,47 @@ RSpec.describe LegalAidApplication do
 
     context "when there are special childrens act proceedings" do
       before { create(:proceeding, :pb003, legal_aid_application:, substantive_cost_limitation: 24_999) }
+
+      it { is_expected.to be false }
+    end
+
+    context "when the application is is an associated family linked application" do
+      let(:lead_application) { create(:legal_aid_application) }
+
+      before do
+        create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD")
+        create(:proceeding, :da001, legal_aid_application:, substantive_cost_limitation: 24_999)
+      end
+
+      it { is_expected.to be false }
+    end
+  end
+
+  describe "#emergency_cost_overridable?" do
+    subject { legal_aid_application.emergency_cost_overridable? }
+
+    let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_delegated_functions_on_proceedings, explicit_proceedings: %i[da001], df_options: { DA001: [Time.zone.today, Time.zone.today] }) }
+
+    context "when the provider has used delegated functions" do
+      it { is_expected.to be true }
+    end
+
+    context "when the provider has not used delegated functions" do
+      let(:legal_aid_application) { create(:legal_aid_application) }
+
+      it { is_expected.to be false }
+    end
+
+    context "when there are special childrens act proceedings" do
+      before { legal_aid_application.proceedings << create(:proceeding, :pb003) }
+
+      it { is_expected.to be false }
+    end
+
+    context "when the application is is an associated family linked application" do
+      let(:lead_application) { create(:legal_aid_application) }
+
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD") }
 
       it { is_expected.to be false }
     end
