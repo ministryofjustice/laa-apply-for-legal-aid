@@ -81,5 +81,24 @@ module LegalFramework
         end
       end
     end
+
+    describe "#reset_to_not_started!" do
+      context "with dependencies" do
+        it "raises an exception" do
+          expect {
+            serialized_merits_task.reset_to_not_started!
+          }.to raise_error RuntimeError, /Unmet dependency/
+        end
+      end
+
+      context "when successful" do
+        let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
+
+        it "marks the task as not_started" do
+          serialized_merits_task.reset_to_not_started!
+          expect(serialized_merits_task.state).to eq :not_started
+        end
+      end
+    end
   end
 end
