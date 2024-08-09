@@ -26,5 +26,11 @@ module LegalFramework
 
       @state = :ignored
     end
+
+    def reset_to_not_started!
+      raise "Unmet dependency #{@dependencies.join(',')} for task #{@name}" if @dependencies.any?
+
+      @state = :not_started
+    end
   end
 end
