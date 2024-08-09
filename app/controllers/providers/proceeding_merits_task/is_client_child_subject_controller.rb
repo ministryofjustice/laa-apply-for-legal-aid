@@ -10,6 +10,7 @@ module Providers
         @form = Providers::ProceedingMeritsTask::ChildSubjectForm.new(form_params)
         if @form.relationship_to_child.eql?("false") && !draft_selected?
           @form.save!
+          legal_aid_application.legal_framework_merits_task_list.reset_to_not_started!(proceeding.ccms_code.to_sym, :client_relationship_to_proceeding)
           return redirect_to providers_merits_task_list_check_who_client_is_path(merits_task_list_id)
         end
 
