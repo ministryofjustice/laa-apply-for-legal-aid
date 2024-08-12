@@ -72,29 +72,8 @@ Feature: Checking client details answers backwards and forwards
       | What was your client's last name at birth? | Bloggs |
 
   @javascript @vcr
-  Scenario: I am able to return and amend the client's address
-    Given I complete the passported journey as far as check your answers for client details
-    And I should see "Home address Transport For London"
-    And I should see "Correspondence address Transport For London"
-
-    When I click Check Your Answers Change link for "address"
-    Then I should be on a page with title "Where should we send your client's correspondence?"
-
-    When I choose "Another UK residential address"
-    And I click "Save and continue"
-    Then I should be on a page with title "Find your client's correspondence address"
-
-    When I enter a postcode 'SW1H 9EA'
-    And I click 'Find address'
-    And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
-    And I click 'Use this address'
-    Then I should be on a page with title "Check your answers"
-    And I should see "British Transport Police"
-
-  @javascript @vcr
   Scenario: I am able to return and amend the client's home address
-    Given the feature flag for home_address is enabled
-    And I complete the passported journey as far as check your answers for client details
+    Given I complete the passported journey as far as check your answers for client details
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
@@ -116,8 +95,7 @@ Feature: Checking client details answers backwards and forwards
 
   @javascript @vcr
   Scenario: I am able to return and amend the client's correspondence address
-    Given the feature flag for home_address is enabled
-    And I complete the passported journey as far as check your answers for client details
+    Given I complete the passported journey as far as check your answers for client details
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
@@ -131,6 +109,9 @@ Feature: Checking client details answers backwards and forwards
     When I click 'Find address'
     And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
+    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
     And the "Client details" check your answers section should contain:
       | question | answer |
