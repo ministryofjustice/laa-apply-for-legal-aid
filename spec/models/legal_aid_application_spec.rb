@@ -1954,6 +1954,26 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#related_proceedings" do
+    subject { legal_aid_application.related_proceedings }
+
+    let(:core_proceeding) { create(:proceeding, :pb003) }
+
+    before { legal_aid_application.proceedings << core_proceeding }
+
+    context "when the application does not have related sca proceedings" do
+      it { is_expected.to eq [] }
+    end
+
+    context "when there are special childrens act proceedings" do
+      let(:related_proceeding) { create(:proceeding, :pb007) }
+
+      before { legal_aid_application.proceedings << related_proceeding }
+
+      it { is_expected.to eq [related_proceeding] }
+    end
+  end
+
 private
 
   def uploaded_evidence_output
