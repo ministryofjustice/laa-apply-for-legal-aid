@@ -12,8 +12,8 @@
                collection: @legal_aid_application.proceedings.in_order_of_addition, as: :proceeding,
                locals: { translation_path: "providers.limitations.show" } %>
 
+    <h2 class="govuk-heading-l"><%= t(".cost_heading") %></h2>
     <% if @legal_aid_application.display_emergency_certificate? %>
-      <h2 class="govuk-heading-l"><%= t(".cost_heading") %></h2>
       <h3 class="govuk-heading-m"><%= t(".emergency_certificate") %></h3>
 
       <p class="govuk-body">
@@ -58,11 +58,14 @@
       <% end %>
     <% end %>
 
-    <% title_translation = @legal_aid_application.used_delegated_functions? ? ".substantive_certificate" : ".cost_heading" %>
     <%= render partial: "providers/limitations/cost_limits",
-               locals: { title_translation_path: title_translation, form: } %>
-    <div class="govuk-!-padding-bottom-6"></div>
+               locals: { form: } %>
 
+    <%= if @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
+          govuk_warning_text(text: t(".family_warning"))
+        end %>
+
+    <div class="govuk-!-padding-bottom-6"></div>
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
