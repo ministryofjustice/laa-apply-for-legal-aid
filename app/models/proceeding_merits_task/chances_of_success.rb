@@ -24,7 +24,7 @@ module ProceedingMeritsTask
       poor: "poor".freeze,
       borderline: "borderline".freeze,
       not_known: "not_known".freeze,
-    }, _prefix: true
+    }, prefix: true
 
     def self.prospects_unlikely_to_succeed
       success_prospects.except(:likely).keys

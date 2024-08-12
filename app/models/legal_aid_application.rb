@@ -155,7 +155,7 @@ class LegalAidApplication < ApplicationRecord
       mortgage: "mortgage".freeze,
       owned_outright: "owned_outright".freeze,
     },
-    _prefix: true,
+    prefix: true,
   )
 
   def lead_proceeding
