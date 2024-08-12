@@ -466,7 +466,7 @@ GEM
       iniparse (~> 1.4)
       rexml (~> 3.2)
     pagy (8.6.3)
-    parallel (1.26.1)
+    parallel (1.26.2)
     parser (3.3.4.2)
       ast (~> 2.4.1)
       racc
