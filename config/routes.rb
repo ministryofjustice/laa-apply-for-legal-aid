@@ -279,7 +279,7 @@ Rails.application.routes.draw do
         resource :child_subject, only: %i[show update], path: "client_is_child_subject"
         resources :heard_as_alternatives, only: %i[show update], path: "will_proceeding_be_heard_as_an_alternative"
         resource :change_of_names, only: %i[show update]
-        resource :confirm_delete_core_proceeding, only: :show
+        resource :confirm_delete_core_proceeding, only: %i[show destroy]
       end
       scope module: :proceeding_loop do
         resources :delegated_functions, only: %i[show update]
