@@ -15,6 +15,7 @@ module LegalFramework
           @sca_related = pt_hash["sca_related"]
         end
 
+        # TODO: remove the below when the SCA feature flag is removed
         def not_sca?
           [@sca_core, @sca_related].all?(false)
         end
@@ -30,7 +31,11 @@ module LegalFramework
       end
 
       def call
-        JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        result = JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        # TODO: remove the below when the SCA feature flag is removed
+        # filter out SCA applications
+        result.select(&:not_sca?) unless Setting.special_childrens_act?
+        result
       end
 
     private
