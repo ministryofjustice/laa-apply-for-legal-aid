@@ -28,11 +28,7 @@
   <div class="govuk-grid-row search-field govuk-!-margin-top-0">
     <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
       <%= govuk_error_message(error_message) %>
-      <input class="govuk-input <%= input_error_class %>" id="proceeding-search-input" name="proceeding-search-input" type="text" autocomplete="off">
-    </div>
-
-    <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
-      <p><%= govuk_link_to t(".clear_search"), "#", class: "govuk-!-font-size-19", id: "clear-proceeding-search" %></p>
+      <div id="autocomplete-container"></div>
     </div>
   </div>
 </div>
@@ -46,22 +42,20 @@
       url: providers_legal_aid_application_proceedings_types_path,
       local: true,
     ) do |form| %>
+  <noscript>
   <div class="govuk-grid-row govuk-!-margin-top-0">
     <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
-        <%= form.govuk_radio_buttons_fieldset :id, legend: { text: nil, hidden: true } do %>
-          <% @proceeding_types.each do |proceeding_type| %>
-            <div id="<%= proceeding_type.ccms_code %>" class="govuk-grid-row proceeding-item">
-              <%= form.govuk_radio_button(
-                    :id,
-                    proceeding_type.ccms_code,
-                    label: { text: proceeding_type.meaning },
-                    hint: { text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})" },
-                  ) %>
-            </div>
-          <% end %>
+      <input list="proceeding-types" name="proceeding" id="proceeding" class="govuk-input">
+      <datalist id="proceeding-types">
+        <% @proceeding_types.each do |proceeding_type| %>
+          <option value="<%= proceeding_type.meaning %>">
+            <%= proceeding_type.ccms_category_law %> (<%= proceeding_type.ccms_matter %>)
+          </option>
         <% end %>
+      </datalist>
     </div>
   </div>
+  </noscript>
   <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-body"><%= t ".no_results" %></span>
