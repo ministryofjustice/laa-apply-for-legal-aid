@@ -2,12 +2,14 @@ module Providers
   class ProceedingsTypesController < ProviderBaseController
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
+      @form = Proceedings::ProceedingsTypesForm.new(model: legal_aid_application)
       proceeding_types
       excluded_codes
     end
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_types
     def create
+      @form = Proceedings::ProceedingsTypesForm.new(form_params)
       return continue_or_draft if draft_selected?
 
       added_proceeding = run_transaction

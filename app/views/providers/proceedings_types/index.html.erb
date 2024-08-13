@@ -9,6 +9,12 @@
                    {}
                  end,
     ) %>
+<%= form_with(
+      url: providers_legal_aid_application_proceedings_types_path(@legal_aid_application),
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
 
 <% error_message = @legal_aid_application.errors[:"proceeding-search-input"]&.to_sentence %>
 <% form_group_error_class = error_message.present? ? "govuk-form-group--error" : "" %>
@@ -25,10 +31,14 @@
     </label>
   </h2>
 
+  <% proceeding_data = @proceeding_types.map do |proceeding|
+       OpenStruct.new(id: proceeding.ccms_code, name: proceeding.meaning, matter_type: "#{proceeding.ccms_matter}, #{proceeding.ccms_category_law}")
+     end %>
+
   <div class="govuk-grid-row search-field govuk-!-margin-top-0">
     <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
       <%= govuk_error_message(error_message) %>
-      <div id="autocomplete-container"></div>
+      <%= form.govuk_collection_select :proceeding, proceeding_data, :id, proceeding_data %>
     </div>
   </div>
 </div>
@@ -68,3 +78,4 @@
   </div>
 <% end %>
 <div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic="true" role="alert"></div>
+<% end %>
