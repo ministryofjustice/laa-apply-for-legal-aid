@@ -1769,6 +1769,13 @@ en:
         error: Select yes if your client is the child subject of this proceeding
         show:
           page_title: Is your client the child subject of this proceeding?
+      confirm_delete_core_proceedings:
+        show:
+          page_title: Are you sure you want to delete '%{proceeding}'?
+          paragraph: "These proceedings will also be deleted:"
+          yes_button: Yes, delete it
+          no_button: No, do not delete it
+          warning: You cannot undo this action
     proceeding_loop:
       single_proceeding: Proceeding 1
       multi_proceeding: Proceeding %{position} of %{total}

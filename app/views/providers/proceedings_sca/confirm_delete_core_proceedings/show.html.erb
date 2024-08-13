@@ -1,6 +1,6 @@
-<h1 class="govuk-heading-xl"><%= "Are you sure you want to delete '#{@proceeding.meaning}'" %></h1>
+<h1 class="govuk-heading-xl"><%= t(".page_title", proceeding: @proceeding.meaning) %></h1>
 
-<p>These proceedings will also be deleted:</p>
+<p><%= t(".paragraph") %></p>
 
 <ul class="govuk-list govuk-list--bullet">
   <% @legal_aid_application.related_proceedings.each do |proceeding| %>
@@ -8,14 +8,14 @@
   <% end %>
 </ul>
 
-<%= govuk_warning_text(text: "You cannot undo this action") %>
+<%= govuk_warning_text(text: t(".warning")) %>
 
 <div class='govuk-button-group'>
   <%= form_for(@legal_aid_application, url: providers_legal_aid_applications_path) do |form| %>
     <%= form.govuk_submit(
-          "Yes, delete it",
+          t(".yes_button"),
           warning: true,
         ) %>
-    <%= govuk_button_link_to "No, do not delete it", providers_legal_aid_applications_path %>
+    <%= govuk_button_link_to t(".no_button"), providers_legal_aid_applications_path %>
   <% end %>
 </div>
