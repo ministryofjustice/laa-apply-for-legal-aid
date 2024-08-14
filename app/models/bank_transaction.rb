@@ -23,7 +23,7 @@ class BankTransaction < ApplicationRecord
 
   scope :by_account_most_recent_first, -> { order(bank_account_id: :asc, happened_at: :desc, created_at: :desc) }
 
-  enum operation: {
+  enum :operation, {
     credit: "credit".freeze,
     debit: "debit".freeze,
   }

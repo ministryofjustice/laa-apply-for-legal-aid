@@ -150,12 +150,12 @@ class LegalAidApplication < ApplicationRecord
   scope :submitted_applications, -> { joins(:state_machine).where(state_machine_proxies: { aasm_state: CCMS_SUBMITTED_STATES }).order(created_at: :desc) }
 
   enum(
-    own_home: {
+    :own_home, {
       no: "no".freeze,
       mortgage: "mortgage".freeze,
       owned_outright: "owned_outright".freeze,
     },
-    _prefix: true,
+    prefix: true
   )
 
   def lead_proceeding

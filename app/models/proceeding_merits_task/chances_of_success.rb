@@ -18,13 +18,13 @@ module ProceedingMeritsTask
       not_known: 1,
     }.freeze
 
-    enum success_prospect: {
+    enum :success_prospect, {
       likely: "likely".freeze,
       marginal: "marginal".freeze,
       poor: "poor".freeze,
       borderline: "borderline".freeze,
       not_known: "not_known".freeze,
-    }, _prefix: true
+    }, prefix: true
 
     def self.prospects_unlikely_to_succeed
       success_prospects.except(:likely).keys
