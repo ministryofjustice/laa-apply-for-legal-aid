@@ -9,6 +9,7 @@ module Providers
 
       def destroy
         remove_proceedings
+        replace_last_page_in_history(providers_legal_aid_applications_path)
 
         return redirect_to providers_legal_aid_application_proceedings_types_path if proceedings.empty?
 
