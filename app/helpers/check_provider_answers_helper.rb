@@ -1,9 +1,9 @@
 module CheckProviderAnswersHelper
-  def change_address_link(legal_aid_application, location)
-    if location == "correspondence"
-      providers_legal_aid_application_correspondence_address_choice_path(legal_aid_application.id)
-    elsif location == "home"
-      providers_legal_aid_application_home_address_status_path(legal_aid_application.id)
+  def change_address_link(legal_aid_application)
+    if legal_aid_application.applicant.correspondence_address_choice.eql?("office")
+      providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application)
+    else
+      providers_legal_aid_application_correspondence_address_lookup_path(legal_aid_application)
     end
   end
 
