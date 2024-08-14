@@ -6,7 +6,7 @@ class Applicant < ApplicationRecord
 
   NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
 
-  enum correspondence_address_choice: {
+  enum :correspondence_address_choice, {
     home: "home".freeze,
     residence: "residence".freeze,
     office: "office".freeze,

@@ -1,5 +1,5 @@
 class Feedback < ApplicationRecord
-  enum satisfaction: {
+  enum :satisfaction, {
     very_dissatisfied: 0,
     dissatisfied: 1,
     neither_dissatisfied_nor_satisfied: 2,
@@ -7,7 +7,7 @@ class Feedback < ApplicationRecord
     very_satisfied: 4,
   }
 
-  enum difficulty: {
+  enum :difficulty, {
     very_difficult: 0,
     difficult: 1,
     neither_difficult_nor_easy: 2,

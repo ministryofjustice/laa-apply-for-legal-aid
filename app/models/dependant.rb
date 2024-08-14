@@ -10,7 +10,7 @@ class Dependant < ApplicationRecord
     assets_value: 0.0,
   }.freeze
 
-  enum relationship: {
+  enum :relationship, {
     child_relative: "child_relative".freeze,
     adult_relative: "adult_relative".freeze,
   }
