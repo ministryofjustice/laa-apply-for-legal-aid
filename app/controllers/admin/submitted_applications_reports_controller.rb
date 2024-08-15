@@ -8,8 +8,8 @@ module Admin
     def show
       @pagy, @applications = pagy(
         LegalAidApplication.submitted_applications.includes(:ccms_submission).reorder("ccms_submissions.created_at DESC"),
-        items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1],
+        limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
+        size: 5,
       )
     end
   end

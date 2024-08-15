@@ -7,8 +7,8 @@ module Admin
     def index
       @pagy, @applications = pagy(
         LegalAidApplication.latest,
-        items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1],
+        limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
+        size: 5,
       )
     end
 
@@ -16,8 +16,8 @@ module Admin
       if search_params.present?
         @pagy, @applications = pagy(
           search_application_results,
-          items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-          size: [1, 1, 1, 1],
+          limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
+          size: 5,
         )
       elsif search_params.nil?
         @error = t(".error")
