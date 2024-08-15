@@ -587,6 +587,10 @@ class LegalAidApplication < ApplicationRecord
     ].compact_blank.join(", ")
   end
 
+  def related_proceedings
+    proceedings.where(sca_type: "related")
+  end
+
 private
 
   def expired_by_2023_surname_at_birth_issue?
