@@ -20,4 +20,10 @@ RSpec.describe Flow::Steps::Addresses::CorrespondenceAddressManualsStep, type: :
 
     it { is_expected.to eq :check_provider_answers }
   end
+
+  describe "#carry_on_sub_flow" do
+    subject { described_class.carry_on_sub_flow }
+
+    it { is_expected.to be true }
+  end
 end
