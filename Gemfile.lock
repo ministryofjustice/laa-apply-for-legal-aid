@@ -673,7 +673,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (6.3.1)
       activesupport (>= 5.2.0)
-    sidekiq (7.3.0)
+    sidekiq (7.3.1)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       logger
@@ -840,7 +840,7 @@ DEPENDENCIES
   sentry-ruby
   sentry-sidekiq
   shoulda-matchers (~> 6.3)
-  sidekiq (~> 7.3.0)
+  sidekiq (~> 7.3.1)
   sidekiq-status (~> 3.0.3)
   simple_command
   simplecov
