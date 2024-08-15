@@ -30,8 +30,8 @@ module Providers
     def applications
       @pagy, @legal_aid_applications = pagy(
         applications_query,
-        items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1], # control of how many elements shown in page info
+        limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
+        size: 5, # control of how many elements shown in page info
       )
       @initial_sort = { created_at: :desc }
     end

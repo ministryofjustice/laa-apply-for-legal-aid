@@ -8,8 +8,8 @@ module Admin
     def show
       @pagy, @feedback = pagy(
         Feedback.all,
-        items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1],
+        limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
+        size: 5,
       )
     end
   end
