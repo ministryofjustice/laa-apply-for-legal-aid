@@ -39,6 +39,8 @@ en:
         provider_submitted: Submitted by provider
         provider_assessing_means: In progress
         provider_entering_merits: Means test completed
+        merits_parental_responsibilities: SCA relationship
+        merits_parental_responsibilities_all_rejected: SCA relationship all no
         provider_confirming_applicant_eligibility: In progress
         generating_reports: Generating reports
         submitting_assessment: Submitting application
