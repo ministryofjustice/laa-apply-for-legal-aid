@@ -80,6 +80,8 @@ module LaaApplyForLegalAid
     config.x.email_domain.suffix = ENV.fetch("APPLY_EMAIL", nil)
 
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
+    config.x.provider_details_api.url = ENV.fetch("PROVIDER_DETAILS_API_URL", nil)
+    config.x.provider_details_api.auth_key = ENV.fetch("PROVIDER_DETAILS_API_AUTH_KEY", nil)
 
     config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
     config.x.legal_framework_api_host_for_js = ENV.fetch("LEGAL_FRAMEWORK_API_HOST_JS", config.x.legal_framework_api_host)

@@ -190,6 +190,16 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: providerDetailsUrl
+  - name: PROVIDER_DETAILS_API_URL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: providerDetailsAPIUrl
+  - name: PROVIDER_DETAILS_API_AUTH_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: providerDetailsAPIAuthKey
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:
