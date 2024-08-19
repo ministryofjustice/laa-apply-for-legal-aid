@@ -19,8 +19,8 @@ module CCMS
       }.freeze
 
       SPECIAL_CHARACTER_REPLACEMENTS = {
-        "‘" => "\u0027", # opening curly quote
-        "’" => "\u0027", # closing curly quote
+        "‘" => "&apos;", # opening curly quote
+        "’" => "&apos;", # closing curly quote
       }.freeze
 
       attr_reader :namespaces
