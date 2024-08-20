@@ -274,6 +274,8 @@ GEM
     faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
       logger
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
     faraday-net_http (3.1.1)
       net-http
     ffi (1.17.0)
@@ -406,6 +408,7 @@ GEM
     multi_test (1.1.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
+    multipart-post (2.4.1)
     mutex_m (0.2.0)
     nenv (0.3.0)
     nesty (1.0.2)
@@ -782,6 +785,8 @@ DEPENDENCIES
   erb_lint (= 0.6.0)
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
+  faraday
+  faraday-multipart
   geckoboard-ruby
   google-apis-sheets_v4
   govuk-components
