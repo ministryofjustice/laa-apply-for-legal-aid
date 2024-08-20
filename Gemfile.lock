@@ -783,6 +783,7 @@ DEPENDENCIES
   erb_lint (= 0.6.0)
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
+  faraday
   geckoboard-ruby
   google-apis-sheets_v4
   govuk-components
