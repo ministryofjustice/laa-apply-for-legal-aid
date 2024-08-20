@@ -95,7 +95,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
                :with_proceedings,
                set_lead_proceeding: :da001)
       end
-      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
+      let(:proceeding) { create(:proceeding, :da004) }
       let(:params) do
         {
           id: proceeding.ccms_code,
