@@ -1546,6 +1546,7 @@ en:
       show:
         page_title: Do you want to add another proceeding?
         existing: You have added %{count}
+        inset: You will only be shown the proceedings that can be added to the ones you have selected.
         remove: Remove
     providers:
       show:

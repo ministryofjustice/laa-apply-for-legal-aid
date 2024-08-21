@@ -33,7 +33,9 @@
     <% end %>
 
     <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
-                                            legend: { text: content_for(:page_title), tag: "h2", size: "m" } %>
+                                            legend: { text: content_for(:page_title), tag: "h2", size: "m" } do %>
+      <%= govuk_inset_text(text: t(".inset")) %>
+    <% end %>
 
     <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
