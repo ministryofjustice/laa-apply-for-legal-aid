@@ -66,12 +66,10 @@ module PDA
 
     def query_api
       conn.get url
-    rescue StandardError => e
-      raise ApiError, "Provider details error: #{e.class} :: #{e.message}"
     end
 
     def raise_error
-      raise ApiError, "Retrieval Failed: (#{response.status}) #{response.body}"
+      raise ApiError, "API Call Failed: (#{response.status}) #{response.body}"
     end
 
     def raise_record_not_found_error

@@ -62,7 +62,7 @@ module PDA
     end
 
     def provider_details
-      @provider_details ||= PDA::ProviderDetailsRetriever.call(provider.username)
+      @provider_details ||= PDA::ProviderDetailsRetriever.call(username)
     end
   end
 end
