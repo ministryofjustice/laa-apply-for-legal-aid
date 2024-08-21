@@ -21,7 +21,7 @@ Feature: Checking client details answers backwards and forwards
       | Does your client have a partner | No |
   
   @javascript
-  Scenario: Send client's mail another residential address
+  Scenario: Send client's mail to another residential address
     Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
     Then the following sections should exist:
       | tag | section |
