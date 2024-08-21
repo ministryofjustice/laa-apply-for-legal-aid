@@ -642,6 +642,7 @@ Given("I complete the passported journey as far as check your answers for client
     date_of_birth: "10-01-1980",
     email: "test@test.com",
     same_correspondence_and_home_address: true,
+    correspondence_address_choice: "home",
     has_partner: false,
   )
   create(
@@ -654,6 +655,116 @@ Given("I complete the passported journey as far as check your answers for client
     lookup_used: true,
     applicant:,
     location: "home",
+  )
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_passported_state_machine,
+    :at_entering_applicant_details,
+    :with_proceedings,
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001,
+    applicant:,
+  )
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
+  login_as @legal_aid_application.provider
+
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
+Given("I complete the passported journey as far as check your answers and send correspondence to another uk residential address") do
+  applicant = create(
+    :applicant,
+    first_name: "Test",
+    last_name: "Walker",
+    national_insurance_number: "JA293483A",
+    date_of_birth: "10-01-1980",
+    email: "test@test.com",
+    same_correspondence_and_home_address: false,
+    correspondence_address_choice: "residence",
+    has_partner: false,
+    no_fixed_residence: false,
+  )
+  create(
+    :address,
+    address_line_one: "Transport For London",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    lookup_used: true,
+    applicant:,
+    location: "home",
+  )
+  create(
+    :address,
+    address_line_one: "British Transport Police",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    lookup_used: true,
+    applicant:,
+    location: "correspondence",
+    care_of: "person",
+    care_of_first_name: "Brian",
+    care_of_last_name: "Surname",
+  )
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_passported_state_machine,
+    :at_entering_applicant_details,
+    :with_proceedings,
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001,
+    applicant:,
+  )
+  create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
+  login_as @legal_aid_application.provider
+
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
+Given("I complete the passported journey as far as check your answers and send correspondence to a uk office address") do
+  applicant = create(
+    :applicant,
+    first_name: "Test",
+    last_name: "Walker",
+    national_insurance_number: "JA293483A",
+    date_of_birth: "10-01-1980",
+    email: "test@test.com",
+    same_correspondence_and_home_address: false,
+    correspondence_address_choice: "office",
+    has_partner: false,
+    no_fixed_residence: false,
+  )
+  create(
+    :address,
+    address_line_one: "Transport For London",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    lookup_used: true,
+    applicant:,
+    location: "home",
+  )
+  create(
+    :address,
+    address_line_one: "British Transport Police",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    lookup_used: true,
+    applicant:,
+    location: "correspondence",
+    care_of: "person",
+    care_of_first_name: "Brian",
+    care_of_last_name: "Surname",
   )
   @legal_aid_application = create(
     :legal_aid_application,

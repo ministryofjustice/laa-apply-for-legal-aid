@@ -2,28 +2,29 @@ require "rails_helper"
 
 RSpec.describe CheckProviderAnswersHelper do
   let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-  let(:applicant) { create(:applicant, address:, same_correspondence_and_home_address:, no_fixed_residence:) }
+  let(:applicant) { create(:applicant, address:, same_correspondence_and_home_address:, no_fixed_residence:, correspondence_address_choice:) }
   let(:same_correspondence_and_home_address) { false }
   let(:no_fixed_residence) { false }
   let(:lookup_used) { false }
+  let(:correspondence_address_choice) { "home" }
   let(:address) { create(:address, lookup_used:) }
 
   describe ".change_address_link" do
-    subject(:link) { helper.change_address_link(legal_aid_application, location) }
+    subject(:link) { helper.change_address_link(legal_aid_application) }
 
-    context "when location is home" do
-      let(:location) { "home" }
+    let(:location) { "correspondence" }
 
-      it "returns the home_address_different_address path" do
-        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/home_address/status?locale=en"
+    context "when mail is sent to office address" do
+      let(:correspondence_address_choice) { "office" }
+
+      it "returns the address choice path" do
+        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/enter_correspondence_address?locale=en"
       end
     end
 
-    context "when location is correspondence" do
-      let(:location) { "correspondence" }
-
+    context "when mail is not sent to office address" do
       it "returns the address choice path" do
-        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/where_to_send_correspondence?locale=en"
+        expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/find_correspondence_address?locale=en"
       end
     end
   end

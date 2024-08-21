@@ -1,7 +1,6 @@
 Feature: Checking client details answers backwards and forwards
-
   @javascript
-  Scenario: I am able to see the client details
+  Scenario: Send client's mail to their home address
     Given I complete the passported journey as far as check your answers for client details
 
     Then the following sections should exist:
@@ -17,8 +16,32 @@ Feature: Checking client details answers backwards and forwards
       | Last name | Walker |
       | Has your client ever changed their last name? | No |
       | Date of birth | 10 January 1980 |
-      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | National Insurance number | JA293483A |
+      | Does your client have a partner | No |
+  
+  @javascript
+  Scenario: Send client's mail another residential address
+    Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | Proceedings |
+      | h2  | Inherent jurisdiction high court injunction proceeding details |
+      | h2  | What happens next |
+
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | First name | Test |
+      | Last name | Walker |
+      | Has your client ever changed their last name? | No |
+      | Date of birth | 10 January 1980 |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Care of recipient | Brian Surname |
+      | Client has a home address? | Yes |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | National Insurance number | JA293483A |
+      | Does your client have a partner | No |
 
   @javascript
   Scenario: I am able to return and amend the client's name
@@ -76,12 +99,8 @@ Feature: Checking client details answers backwards and forwards
     Given I complete the passported journey as far as check your answers for client details
     And the "Client details" check your answers section should contain:
       | question | answer |
-      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
     When I click Check Your Answers Change link for "home address"
-    Then I should be on a page with title "Does your client have a home address?"
-    And I choose 'Yes'
-    Then I click 'Save and continue'
     Then I should be on a page with title "Find your client's home address"
     Then I enter a postcode 'SW1H 9EA'
     When I click 'Find address'
@@ -89,25 +108,21 @@ Feature: Checking client details answers backwards and forwards
     And I click 'Use this address'
     Then I should be on a page with title "Check your answers"
     And the "Client details" check your answers section should contain:
-      | question | answer |
-      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | question     | answer                                                      |
       | Home address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
 
   @javascript @vcr
   Scenario: I am able to return and amend the client's correspondence address
-    Given I complete the passported journey as far as check your answers for client details
+    Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
     And the "Client details" check your answers section should contain:
-      | question | answer |
-      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | question               | answer                                                      |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address           | Transport For London\n98 Petty France\nLondon\nSW1H 9EA     |
     When I click Check Your Answers Change link for "address"
-    Then I should be on a page with title "Where should we send your client's correspondence?"
-    And I choose 'Another UK residential address'
-    Then I click 'Save and continue'
     Then I should be on a page with title "Find your client's correspondence address"
     Then I enter a postcode 'SW1H 9EA'
     When I click 'Find address'
-    And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
+    And I choose an address 'C P S, 102 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
     Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
     When I choose "No"
@@ -115,9 +130,32 @@ Feature: Checking client details answers backwards and forwards
     Then I should be on a page with title "Check your answers"
     And the "Client details" check your answers section should contain:
       | question | answer |
-      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Correspondence address | C P S\n102 Petty France\nLondon\nSW1H 9EA |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
 
+  @javascript @vcr
+  Scenario: I am able to return and amend the client's correspondence address which is an office
+    Given I complete the passported journey as far as check your answers and send correspondence to a uk office address
+    And the "Client details" check your answers section should contain:
+      | question               | answer                                                      |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address           | Transport For London\n98 Petty France\nLondon\nSW1H 9EA     |
+    When I click Check Your Answers Change link for "address"
+    Then I should be on a page with title "Enter your client's correspondence address"
+    Then I enter address line one 'Fake Company'
+    Then I enter address line two 'Fake Road'
+    Then I enter city 'Fake City'
+    Then I enter postcode 'XX1 1XX'
+    Then I click 'Save and continue'
+
+    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "Check your answers"
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Correspondence address | Fake Company\nFake Road\nFake City\nXX1 1XX |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
 
   @javascript @vcr
   Scenario: I am able to return and amend the client's overseas home address
@@ -128,9 +166,6 @@ Feature: Checking client details answers backwards and forwards
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | Home address | Alemannenstrasse 1\nStuttgart D-12345 |
     When I click Check Your Answers Change link for "home address"
-    Then I should be on a page with title "Does your client have a home address?"
-    And I choose 'Yes'
-    Then I click 'Save and continue'
     Then I should be on a page with title "Find your client's home address"
     And I click link "Enter a non-UK address"
     And I enter a country "France"
@@ -196,27 +231,10 @@ Feature: Checking client details answers backwards and forwards
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
-  Scenario: I want to change address from the check your answers page
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Address'
-    Then I should be on a page showing "Where should we send your client's correspondence?"
-    When I choose "My client's UK home address"
-    And I click "Save and continue"
-    Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9EA'
-    Then I click find address
-    Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Use this address'
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript @vcr
   Scenario: I want to change address manually from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
-    Then I should be on a page showing "Where should we send your client's correspondence?"
-    When I choose "My client's UK home address"
-    And I click "Save and continue"
-    Then I am on the postcode entry page
+    Then I should be on a page showing "Find your client's correspondence address"
     Then I enter a postcode 'XX1 1XX'
     Then I click find address
     Then I click link "Enter an address manually"
@@ -224,4 +242,7 @@ Feature: Checking client details answers backwards and forwards
     Then I enter city 'Fake City'
     Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
+    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing 'Check your answers'
