@@ -725,7 +725,8 @@ GEM
     uber (0.1.0)
     unicode-display_width (2.5.0)
     uri (0.13.0)
-    vcr (6.2.0)
+    vcr (6.3.1)
+      base64
     version_gem (1.1.4)
     view_component (3.13.0)
       activesupport (>= 5.2.0, < 8.0)
@@ -782,6 +783,7 @@ DEPENDENCIES
   erb_lint (= 0.6.0)
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
+  faraday
   geckoboard-ruby
   google-apis-sheets_v4
   govuk-components
