@@ -11,9 +11,11 @@
         template: :basic,
       ) do %>
 
-    <%= form.govuk_fieldset legend: { text: t(".heading"), tag: "h1", size: "xl" } do %>
-      <%= form.govuk_text_field :search_laa_reference, label: { text: t(".hint") } %>
-    <% end %>
+    <%= form.govuk_text_field :search_laa_reference,
+                              label: { text: t(".heading"), tag: "h1", size: "xl" },
+                              hint: { text: t(".hint") },
+                              extra_letter_spacing: true,
+                              width: 10 %>
 
     <%= next_action_buttons(continue_button_text: t("generic.search"), show_draft: true, form:) %>
   <% end %>
