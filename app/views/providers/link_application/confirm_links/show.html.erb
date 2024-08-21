@@ -19,15 +19,15 @@
           actions: false,
         ) do |summary_list| %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".laa_reference"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".laa_reference")) %>
         <%= row.with_value(text: @legal_aid_application.target_application&.application_ref) %>
       <% end %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".client"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".client")) %>
         <%= row.with_value(text: @legal_aid_application.target_application&.applicant&.full_name) %>
       <% end %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".proceedings"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".proceedings")) %>
         <%= row.with_value(text: @legal_aid_application.target_application&.proceedings&.map(&:meaning)&.join(", ")) %>
       <% end %>
     <% end %>
