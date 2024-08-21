@@ -1,4 +1,4 @@
-module ProviderDetailsAPI
+module PDA
   class ProviderDetailsRetriever
     ApiError = Class.new(StandardError)
     ApiRecordNotFoundError = Class.new(StandardError)
@@ -42,7 +42,7 @@ module ProviderDetailsAPI
   private
 
     def url
-      @url ||= "#{Rails.configuration.x.provider_details_api.url}/#{encoded_uri}/provider-offices"
+      @url ||= "#{Rails.configuration.x.pda.url}/#{encoded_uri}/provider-offices"
     end
 
     def encoded_uri
@@ -52,7 +52,7 @@ module ProviderDetailsAPI
     def headers
       {
         "accept" => "application/json",
-        "X-Authorization" => Rails.configuration.x.provider_details_api.auth_key,
+        "X-Authorization" => Rails.configuration.x.pda.auth_key,
       }
     end
 

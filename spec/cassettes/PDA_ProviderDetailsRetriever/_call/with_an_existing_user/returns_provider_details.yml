@@ -10,7 +10,7 @@ http_interactions:
       Accept:
       - application/json
       X-Authorization:
-      - "<PROVIDER_DETAILS_API_AUTH_KEY>"
+      - "<PDA_AUTH_KEY>"
       User-Agent:
       - Faraday v2.10.1
       Accept-Encoding:
@@ -21,7 +21,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 21 Aug 2024 07:03:02 GMT
+      - Wed, 21 Aug 2024 08:30:58 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -51,5 +51,5 @@ http_interactions:
       string: '{"firm":{"firmId":3959183,"firmNumber":"50736","ccmsFirmId":0,"firmName":"DT
         SCRIPT PROVIDER 1"},"user":{"userId":454031,"ccmsContactId":0,"userLogin":"DT_SCRIPT_USER1","name":"Dts
         User1"},"officeCodes":[{"firmOfficeCode":"2Q242F","ccmsProviderOfficeId":34406595}]}'
-  recorded_at: Wed, 21 Aug 2024 07:03:02 GMT
+  recorded_at: Wed, 21 Aug 2024 08:30:58 GMT
 recorded_with: VCR 6.2.0

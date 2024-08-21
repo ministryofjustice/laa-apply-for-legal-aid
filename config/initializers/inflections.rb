@@ -22,5 +22,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "MIS"
   inflect.acronym "HMRC"
   inflect.acronym "SCA"
-  inflect.acronym "API"
+  inflect.acronym "PDA"
 end

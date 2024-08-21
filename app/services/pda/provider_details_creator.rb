@@ -1,4 +1,4 @@
-module ProviderDetailsAPI
+module PDA
   class ProviderDetailsCreator
     def self.call(provider)
       new(provider).call
@@ -62,7 +62,7 @@ module ProviderDetailsAPI
     end
 
     def provider_details
-      @provider_details ||= ProviderDetailsAPI::ProviderDetailsRetriever.call(provider.username)
+      @provider_details ||= PDA::ProviderDetailsRetriever.call(provider.username)
     end
   end
 end

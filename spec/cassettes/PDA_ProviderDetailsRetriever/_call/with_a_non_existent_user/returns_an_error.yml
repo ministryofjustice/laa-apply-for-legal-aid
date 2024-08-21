@@ -10,7 +10,7 @@ http_interactions:
       Accept:
       - application/json
       X-Authorization:
-      - "<PROVIDER_DETAILS_API_AUTH_KEY>"
+      - "<PDA_AUTH_KEY>"
       User-Agent:
       - Faraday v2.10.1
       Accept-Encoding:
@@ -21,7 +21,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 21 Aug 2024 07:03:02 GMT
+      - Wed, 21 Aug 2024 08:30:58 GMT
       Content-Length:
       - '0'
       Connection:
@@ -47,5 +47,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Wed, 21 Aug 2024 07:03:02 GMT
+  recorded_at: Wed, 21 Aug 2024 08:30:58 GMT
 recorded_with: VCR 6.2.0

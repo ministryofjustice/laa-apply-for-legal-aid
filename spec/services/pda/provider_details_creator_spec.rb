@@ -4,7 +4,7 @@ FirmStruct = Struct.new(:id, :name)
 OfficeStruct = Struct.new(:id, :code)
 ProviderDetailsStruct = Struct.new(:firm_id, :contact_id, :firm_name, :offices)
 
-RSpec.describe ProviderDetailsAPI::ProviderDetailsCreator do
+RSpec.describe PDA::ProviderDetailsCreator do
   describe ".call" do
     context "when the firm does not exist" do
       it "creates the firm" do
@@ -262,7 +262,7 @@ RSpec.describe ProviderDetailsAPI::ProviderDetailsCreator do
   end
 
   def stub_provider_details_retriever(provider:, firm:, offices:, contact_id: 104)
-    allow(ProviderDetailsAPI::ProviderDetailsRetriever)
+    allow(PDA::ProviderDetailsRetriever)
       .to receive(:call)
       .with(provider.username)
       .and_return(api_response(firm:, offices:, contact_id:))
