@@ -12,10 +12,17 @@ module Providers
         @form = ::HomeAddress::StatusForm.new(form_params)
         @correspondence_address = applicant.address
 
+        delete_home_address if form_params[:no_fixed_residence].eql?("true")
+
         render :show unless save_continue_or_draft(@form)
       end
 
     private
+
+      def delete_home_address
+        applicant.home_address = nil
+        applicant.save!
+      end
 
       def applicant
         legal_aid_application.applicant
