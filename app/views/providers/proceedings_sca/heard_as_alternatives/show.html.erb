@@ -4,7 +4,7 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title: t(".page_title.#{@amount}"),
+  <%= page_template page_title: t(".page_title.multiple"),
                     template: :basic,
                     form: do %>
     <%= form.govuk_collection_radio_buttons :heard_as_alternative,
