@@ -450,6 +450,11 @@ module CCMS
             block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
             expect(block).not_to be_present
           end
+
+          it "sets the APPLY_CASE_MEANS_REVIEW value to false" do
+            block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+            expect(block).to have_boolean_response true
+          end
         end
 
         context "when not auto-granting an SCA application" do
@@ -492,6 +497,11 @@ module CCMS
           it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
             block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
             expect(block).not_to be_present
+          end
+
+          it "sets the APPLY_CASE_MEANS_REVIEW value to false" do
+            block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+            expect(block).to have_boolean_response false
           end
         end
       end
