@@ -15,32 +15,55 @@ module LegalFramework
           @sca_related = pt_hash["sca_related"]
         end
 
+        # TODO: remove the below when the SCA feature flag is removed
         def not_sca?
           [@sca_core, @sca_related].all?(false)
         end
       end
 
-      def initialize(params)
+      def self.call(legal_aid_application)
+        new(legal_aid_application).call
+      end
+
+      def initialize(legal_aid_application)
         super()
-        @provider = params[:provider]
+        @legal_aid_application = legal_aid_application
       end
 
       def call
-        Setting.special_childrens_act? ? unfiltered_payload : filtered_payload
-      end
-
-      def path
-        "/proceeding_types/all"
+        result = JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        # TODO: remove the below when the SCA feature flag is removed
+        # filter out SCA applications
+        result.select!(&:not_sca?) unless Setting.special_childrens_act?
+        result
       end
 
     private
 
-      def unfiltered_payload
-        JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+      def request_body
+        {
+          current_proceedings: @legal_aid_application.proceedings&.map(&:ccms_code)&.join(","),
+          allowed_categories: %w[MAT], # TODO: replace with details from new PDA, for now hardcoded to only current category type
+          search_term: "", # TODO: add optional parameter to the initializer, but for now leave always empty
+        }.to_json
       end
 
-      def filtered_payload
-        unfiltered_payload.select(&:not_sca?)
+      def request
+        conn.post do |request|
+          request.url url
+          request.headers["Content-Type"] = "application/json"
+          request.body = request_body
+        end
+      end
+
+      def path
+        "/proceeding_types/filter"
+      end
+
+      def headers
+        {
+          "Content-Type" => "application/json",
+        }
       end
     end
   end
