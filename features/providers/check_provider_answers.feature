@@ -253,6 +253,37 @@ Feature: Checking client details answers backwards and forwards
       | Care of recipient          | Brian Surname                                               |
       | Client has a home address? | Yes                                                         |
 
+  @javascript @vcr
+  Scenario: I am able to change from "A UK office address" to "My client's UK home address"
+    Given I complete the passported journey as far as check your answers and send correspondence to a uk office address
+    And the "Client details" check your answers section should contain:
+      | question               | answer                                                      |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address           | Transport For London\n98 Petty France\nLondon\nSW1H 9EA     |
+    When I click Check Your Answers Change link for "correspondence address choice"
+    Then I should be on a page with title "Where should we send your client's correspondence?"
+
+    When I choose "My client's UK home address"
+    And I click "Save and continue"
+    Then I should be on a page with title "Find your client's home address"
+
+    When I click "Find address"
+    Then I should be on a page with title "Select your client's home address"
+
+    When I choose "Transport For London, 98 Petty France, London, SW1H 9EA"
+    And I click "Use this address"
+
+    Then I should be on a page with title "Check your answers"
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+
+    And the "Client details" check your answers section should not contain:
+      | question |
+      | Correspondence address |
+      | Care of recipient |
+      | Client has a home address? |
+
   @javascript
   Scenario: I am able to return and remove the client's national insurance number
     Given I complete the passported journey as far as check your answers for client details
