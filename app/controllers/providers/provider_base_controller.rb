@@ -9,6 +9,16 @@ module Providers
 
   private
 
+    def delete_home_address
+      applicant.home_address = nil
+      applicant.save!
+    end
+
+    def delete_correspondence_address
+      applicant.address = nil
+      applicant.save!
+    end
+
     def display_employment_income?
       @legal_aid_application.cfe_result.version >= 4 &&
         @legal_aid_application.cfe_result.jobs?

@@ -19,11 +19,6 @@ module Providers
 
     private
 
-      def delete_home_address
-        applicant.home_address = nil
-        applicant.save!
-      end
-
       def applicant
         legal_aid_application.applicant
       end
