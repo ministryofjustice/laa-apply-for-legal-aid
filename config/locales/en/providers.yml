@@ -892,6 +892,7 @@ en:
         emergency: Emergency
         substantive: Substantive
         substantive_due: "Substantive due: %{date}"
+        backdated_to: "Backdated to: %{date}"
         col_and_ref: and Ref
         col_and_state: and Status
         delete: Delete
