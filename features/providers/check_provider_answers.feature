@@ -179,6 +179,49 @@ Feature: Checking client details answers backwards and forwards
       | Home address | Grande Rue 2\nMarseille F-54321\nFrance |
 
   @javascript @vcr
+  Scenario: I am able to change from "My client's UK home address" to "Another UK residential address"
+    Given I complete the passported journey as far as check your answers for client details
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+    When I click Check Your Answers Change link for "correspondence address choice"
+    Then I should be on a page with title "Where should we send your client's correspondence?"
+
+    When I choose "Another UK residential address"
+    And I click "Save and continue"
+    Then I should be on a page with title "Find your client's correspondence address"
+
+    When I enter a postcode 'SW1H 9EA'
+    And I click 'Find address'
+    And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
+    And I click 'Use this address'
+    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+
+    When I choose "Yes, a person"
+    And I enter First name "Brian"
+    And I enter Last name "Surname"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client have a home address"
+    
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page with title "Find your client's home address"
+
+    # Postcode is already prepopulated
+    When I click "Find address"
+    Then I should be on a page with title "Select your client's home address"
+
+    When I choose "Transport For London, 98 Petty France, London, SW1H 9EA"
+    And I click "Use this address"
+    Then I should be on a page with title "Check your answers"
+    And the "Client details" check your answers section should contain:
+      | question                   | answer                                                      |
+      | Correspondence address     | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address               | Transport For London\n98 Petty France\nLondon\nSW1H 9EA     |
+      | Care of recipient          | Brian Surname                                               |
+      | Client has a home address? | Yes                                                         |
+
+  @javascript @vcr
   Scenario: I am able to change from "Another UK residential address" to "My client's UK home address"
     Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
     And the "Client details" check your answers section should contain:
