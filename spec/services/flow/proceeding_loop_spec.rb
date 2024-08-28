@@ -45,6 +45,21 @@ RSpec.describe Flow::ProceedingLoop do
           it { is_expected.to be :emergency_defaults }
         end
 
+        context "when the SCA proceeding has used delegated functions" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: %i[pb003 pb007],
+                   set_lead_proceeding: :pb007,
+                   df_options:,
+                   provider_step:)
+          end
+          let(:df_options) { { pb003: [10.days.ago, 10.days.ago], pb007: [10.days.ago, 10.days.ago], DA005: [nil, nil] } }
+
+          it { is_expected.to be :substantive_defaults }
+        end
+
         context "and the proceeding has not used delegated functions" do
           it { is_expected.to be :substantive_defaults }
         end
