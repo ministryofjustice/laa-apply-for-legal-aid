@@ -8,7 +8,10 @@
       <%= govuk_summary_list do |summary_list| %>
         <% @legal_aid_application.proceedings.order(:created_at).each do |proceeding| %>
           <%= summary_list.with_row(html_attributes: { id: "proceeding_type_#{proceeding.ccms_code}" }) do |row| %>
-            <%= row.with_value { proceeding.meaning } %>
+            <%= row.with_value do %>
+              <%= proceeding.meaning %><br>
+              <span class="govuk-hint"><%= proceeding.category_of_law %> (<%= proceeding.matter_type %>)</span>
+            <% end %>
             <% if proceeding.sca_type == "core" && @legal_aid_application.related_proceedings.any? %>
               <%= row.with_action(
                     text: t(".remove"),
