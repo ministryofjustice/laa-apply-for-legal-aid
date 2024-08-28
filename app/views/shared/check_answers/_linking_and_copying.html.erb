@@ -33,7 +33,7 @@
           end
         end
       end %>
-  <% if all_linked_applications_details(@legal_aid_application).present? %>
+  <% if @legal_aid_application&.lead_linked_application&.confirm_link? && all_linked_applications_details(@legal_aid_application).present? %>
     <div class="govuk-grid-row" id="app-check-your-answers__other_links">
       <div class="govuk-grid-column-full">
         <h2 class="govuk-heading-m"><%= t ".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}" %></h2>
