@@ -1699,12 +1699,11 @@ en:
         hint: We'll use this to send your client a link to the service.
     proceedings_sca:
       heard_togethers:
-        error: Select yes if this proceeding will be heard together with any special children act core proceedings
+        error: Select yes if this proceeding will be heard together with any special children act proceedings
         show:
-          page_title: Will this proceeding be heard together with any special children act core proceedings?
-          page_heading:
+          page_title:
             single: Will this proceeding be heard together with the '%{core_sca}' proceeding?
-            multiple: Will this proceeding be heard together with any of the core proceedings?
+            multiple: Will this proceeding be heard together with any of the special children act proceedings?
       supervision_orders:
         error: Select yes if the application is to vary, discharge or extend a supervision order
         show:
@@ -1717,14 +1716,10 @@ en:
       heard_as_alternatives:
         show:
           error:
-            Select yes if this proceeding will be heard as an alternative to any of
-            the special children act core proceedings
+            Select yes if this proceeding will be heard as an alternative to any of the special children act proceedings
           page_title:
-            single:
-              Will this proceeding be heard as an alternative to the '%{proceeding}' proceeding?
-            multiple:
-              Will this proceeding be heard as an alternative to any of the special
-              children act core proceedings?
+            single: Will this proceeding be heard as an alternative to the '%{proceeding}' proceeding?
+            multiple: Will this proceeding be heard as an alternative to any of the special children act proceedings?
       change_of_names:
         error: Select yes if this proceeding is for a change of name application
         show:

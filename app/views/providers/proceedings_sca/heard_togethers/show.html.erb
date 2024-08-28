@@ -5,13 +5,13 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title: t(".page_title"), form:, template: :basic do %>
+  <%= page_template page_title: t(".page_title.multiple"), form:, template: :basic do %>
     <%= form.govuk_collection_radio_buttons :heard_together,
                                             yes_no_options,
                                             :value,
                                             :label,
                                             caption: { text: @current_proceeding.meaning, size: "xl" },
-                                            legend: { text: t(".page_heading.#{@amount}", core_sca: @core_proceedings.first.meaning), size: "xl", tag: "h1" } do %>
+                                            legend: { text: t(".page_title.#{@amount}", core_sca: @core_proceedings.first.meaning), size: "xl", tag: "h1" } do %>
                                               <% if @amount.eql?("multiple") %>
                                                 <p class="govuk-body">These are:</p>
                                                 <%= govuk_list @core_proceedings.pluck(:meaning), type: :bullet %>

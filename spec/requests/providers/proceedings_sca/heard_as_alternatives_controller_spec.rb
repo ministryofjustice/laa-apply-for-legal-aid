@@ -23,7 +23,8 @@ RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
       context "when there is one core proceeding" do
         it "returns http success" do
           expect(response).to have_http_status(:ok)
-          expect(unescaped_response_body).to include(I18n.t("providers.proceedings_sca.heard_as_alternatives.show.page_title.single"))
+          expect(response.body).to include("Will this proceeding be heard as an alternative to the &#39;Child assessment order&#39; proceeding?").once
+          expect(response.body).to include("Will this proceeding be heard as an alternative to any of the special children act proceedings?").once
         end
       end
 
@@ -79,7 +80,7 @@ RSpec.describe Providers::ProceedingsSCA::HeardAsAlternativesController do
 
         it "renders the same page with an error message" do
           expect(response).to have_http_status(:unprocessable_content)
-          expect(response.body).to include("Select yes if this proceeding will be heard as an alternative to any of the special children act core proceedings").twice
+          expect(response.body).to include("Select yes if this proceeding will be heard as an alternative to any of the special children act proceedings").twice
         end
       end
     end
