@@ -284,6 +284,39 @@ Feature: Checking client details answers backwards and forwards
       | Care of recipient |
       | Client has a home address? |
 
+  @javascript @vcr
+  Scenario: I am able to change from "Another UK residential address" to "A UK office address"
+    Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
+    And the "Client details" check your answers section should contain:
+      | question               | answer                                                      |
+      | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address           | Transport For London\n98 Petty France\nLondon\nSW1H 9EA     |
+    When I click Check Your Answers Change link for "correspondence address choice"
+    Then I should be on a page with title "Where should we send your client's correspondence?"
+
+    When I choose "A UK office address"
+    And I click "Save and continue"
+    Then I should be on a page with title "Enter your client's correspondence address"
+
+    When I enter address line one 'British Transport Police'
+    And I enter address line two '98 Petty France'
+    And I enter city 'London'
+    And I enter a postcode 'SW1H 9EA'
+    And I click 'Save and continue'
+    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+
+    When I choose "Yes, a person"
+    And I enter First name "Brian"
+    And I enter Last name "Surname"
+    And I click "Save and continue"
+    Then I should be on a page with title "Check your answers"
+    And the "Client details" check your answers section should contain:
+      | question                   | answer                                                      |
+      | Correspondence address     | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
+      | Home address               | Transport For London\n98 Petty France\nLondon\nSW1H 9EA     |
+      | Care of recipient          | Brian Surname                                               |
+      | Client has a home address? | Yes                                                         |
+
   @javascript
   Scenario: I am able to return and remove the client's national insurance number
     Given I complete the passported journey as far as check your answers for client details
