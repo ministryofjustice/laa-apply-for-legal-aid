@@ -68,7 +68,7 @@ module PDA
     end
 
     def firm_ccms_id_matches?
-      @firm_ccms_id_matches ||= firm.ccms_id.eql?(result.firm_id)
+      @firm_ccms_id_matches ||= firm.ccms_id.eql?(result.firm_id.to_s)
     end
 
     def firm_name_matches?
