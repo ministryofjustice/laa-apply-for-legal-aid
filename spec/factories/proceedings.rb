@@ -36,6 +36,12 @@ FactoryBot.define do
       used_delegated_functions_reported_on { Time.zone.today }
     end
 
+    trait :no_substantive_level_of_service do
+      substantive_level_of_service { nil }
+      substantive_level_of_service_name { nil }
+      substantive_level_of_service_stage { nil }
+    end
+
     transient do
       no_scope_limitations { false }
     end
