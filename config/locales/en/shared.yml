@@ -592,6 +592,11 @@ en:
             question: Emergency level of service
           substantive:
             question: Substantive level of service
+        scope_limits:
+          emergency:
+            question: Emergency scope limitations
+          substantive:
+            question: Substantive scope limitations
       delegated_functions:
         not_used: Not used
         section_delegated:
