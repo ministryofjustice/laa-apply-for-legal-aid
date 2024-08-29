@@ -190,6 +190,16 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: providerDetailsUrl
+  - name: PDA_URL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: pdaUrl
+  - name: PDA_AUTH_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: pdaAuthKey
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:

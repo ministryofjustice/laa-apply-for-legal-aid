@@ -17,6 +17,7 @@ class ProviderDetailsCreator
       contact_id:,
     )
     provider.update!(selected_office: nil) if should_clear_selected_office?
+    CompareProviderDetailsWorker.perform_async(provider.id)
   end
 
 private

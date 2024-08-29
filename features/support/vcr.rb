@@ -26,6 +26,7 @@ VCR.configure do |vcr_config|
   vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT>") { ENV.fetch("LAA_PORTAL_IDP_CERT", nil) }
   vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT_FINGERPRINT>") { ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT", nil) }
   vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM>") { ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM", nil) }
+  vcr_config.filter_sensitive_data("<PDA_AUTH_KEY>") { ENV.fetch("PDA_AUTH_KEY", nil) }
 end
 
 VCR.cucumber_tags do |t|
