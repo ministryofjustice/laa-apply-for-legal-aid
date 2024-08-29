@@ -19,8 +19,6 @@ RSpec.describe Addresses::CareOfForm, type: :form do
   describe "#save" do
     subject(:call_save) { instance.save }
 
-    before { call_save }
-
     context "with care of person chosen" do
       let(:care_of) { "person" }
       let(:care_of_last_name) { "Smith" }
@@ -28,6 +26,7 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_organisation_name) { nil }
 
       it "updates the address care_of fields" do
+        call_save
         expect(address.care_of).to eq "person"
         expect(address.care_of_last_name).to eq "Smith"
         expect(address.care_of_first_name).to eq "Bob"
@@ -42,6 +41,7 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_organisation_name) { "An Organisation Name" }
 
       it "updates the address care_of fields" do
+        call_save
         expect(address.care_of).to eq "organisation"
         expect(address.care_of_last_name).to be_nil
         expect(address.care_of_first_name).to be_nil
@@ -56,10 +56,25 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_organisation_name) { nil }
 
       it "updates the address care_of fields" do
+        call_save
         expect(address.care_of).to eq "no"
         expect(address.care_of_last_name).to be_nil
         expect(address.care_of_first_name).to be_nil
         expect(address.care_of_organisation_name).to be_nil
+      end
+
+      context "when changing from another option to no" do
+        let(:address) do
+          create(:address, care_of_first_name: "first_name",
+                           care_of_last_name: "last_name",
+                           care_of_organisation_name: "organisation_name")
+        end
+
+        it "clears previously entered 'care of' information" do
+          expect { call_save }.to change(address, :care_of_last_name).from("last_name").to(nil)
+            .and change(address, :care_of_first_name).from("first_name").to(nil)
+            .and change(address, :care_of_organisation_name).from("organisation_name").to(nil)
+        end
       end
     end
 
@@ -68,6 +83,8 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_last_name) { nil }
       let(:care_of_first_name) { nil }
       let(:care_of_organisation_name) { nil }
+
+      before { call_save }
 
       it "is invalid" do
         expect(instance).not_to be_valid
@@ -85,6 +102,8 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_first_name) { nil }
       let(:care_of_organisation_name) { nil }
 
+      before { call_save }
+
       it "is invalid" do
         expect(instance).not_to be_valid
       end
@@ -100,6 +119,8 @@ RSpec.describe Addresses::CareOfForm, type: :form do
       let(:care_of_last_name) { nil }
       let(:care_of_first_name) { nil }
       let(:care_of_organisation_name) { nil }
+
+      before { call_save }
 
       it "is invalid" do
         expect(instance).not_to be_valid

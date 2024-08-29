@@ -72,27 +72,6 @@ RSpec.describe Providers::CorrespondenceAddress::ChoicesController do
           patch_request
           expect(response).to have_http_status(:redirect)
         end
-
-        context "when 'My client's UK home address' is chosen" do
-          let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-          let(:applicant) { create(:applicant, no_fixed_residence: true) }
-
-          it "deletes the home address" do
-            patch_request
-            expect(applicant.reload.no_fixed_residence).to be_nil
-          end
-        end
-
-        context "when 'Another UK residential address' is chosen" do
-          let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-          let(:applicant) { create(:applicant, no_fixed_residence: true) }
-          let(:correspondence_address_choice) { "residence" }
-
-          it "does not delete the home address" do
-            patch_request
-            expect(applicant.reload.no_fixed_residence).to be true
-          end
-        end
       end
 
       context "with form submitted using Save as draft button" do

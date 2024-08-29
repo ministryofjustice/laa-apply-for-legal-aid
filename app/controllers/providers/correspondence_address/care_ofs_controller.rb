@@ -10,19 +10,10 @@ module Providers
       def update
         @form = Addresses::CareOfForm.new(form_params)
 
-        delete_care_of_information if form_params[:care_of].eql?("no")
-
         render :show unless save_continue_or_draft(@form)
       end
 
     private
-
-      def delete_care_of_information
-        address.care_of_first_name = ""
-        address.care_of_last_name = ""
-        address.care_of_organisation_name = ""
-        address.save!
-      end
 
       def address
         @address ||= legal_aid_application.applicant.address

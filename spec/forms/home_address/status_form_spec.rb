@@ -14,13 +14,20 @@ RSpec.describe HomeAddress::StatusForm, type: :form do
   describe "#save" do
     subject(:call_save) { instance.save }
 
-    before { call_save }
-
     context "with yes chosen" do
       let(:no_fixed_residence) { "true" }
 
       it "sets no_fixed_residence to true" do
+        call_save
         expect(applicant.no_fixed_residence?).to be true
+      end
+
+      context "when changing from another option to no" do
+        let(:applicant) { create(:applicant, :with_address) }
+
+        it "clears previously entered home address information" do
+          expect { call_save }.to change(applicant, :home_address).to(nil)
+        end
       end
     end
 
@@ -28,12 +35,15 @@ RSpec.describe HomeAddress::StatusForm, type: :form do
       let(:no_fixed_residence) { "false" }
 
       it "sets no_fixed_residence to false" do
+        call_save
         expect(applicant.no_fixed_residence?).to be false
       end
     end
 
     context "with no answer chosen" do
       let(:no_fixed_residence) { "" }
+
+      before { call_save }
 
       it "is invalid" do
         expect(instance).not_to be_valid

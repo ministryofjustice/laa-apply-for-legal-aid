@@ -99,13 +99,6 @@ RSpec.describe Providers::CorrespondenceAddress::CareOfsController do
           expect(applicant.reload.address.care_of).to eq "no"
         end
 
-        it "clears previously entered 'care of' information" do
-          patch_request
-          expect(applicant.reload.address.care_of_first_name).to eq ""
-          expect(applicant.reload.address.care_of_last_name).to eq ""
-          expect(applicant.reload.address.care_of_organisation_name).to eq ""
-        end
-
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)

@@ -10,12 +10,6 @@ module Providers
       def update
         @form = Addresses::ChoiceForm.new(form_params)
 
-        delete_no_fixed_residence if form_params[:correspondence_address_choice].eql?("home")
-
-        if form_params[:correspondence_address_choice].eql?("office") && !applicant.correspondence_address_choice.eql?("office")
-          delete_correspondence_address
-        end
-
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -23,11 +17,6 @@ module Providers
 
       def applicant
         legal_aid_application.applicant
-      end
-
-      def delete_no_fixed_residence
-        applicant.no_fixed_residence = nil
-        applicant.save!
       end
 
       def form_params
