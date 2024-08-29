@@ -40,6 +40,9 @@ module Proceedings
         attributes[:substantive_level_of_service_name] = nil
         attributes[:substantive_level_of_service_stage] = nil
       else
+        model.update!(substantive_level_of_service:,
+                      substantive_level_of_service_name:,
+                      substantive_level_of_service_stage:)
         model.scope_limitations.create!(scope_type: :substantive,
                                         code: substantive_scope_limitation_code,
                                         meaning: substantive_scope_limitation_meaning,
