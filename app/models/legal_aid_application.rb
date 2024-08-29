@@ -411,7 +411,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def substantive_cost_overridable?
-    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT && !special_children_act_proceedings?
+    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT && !special_children_act_proceedings? && !family_linked_associated_application?
+  end
+
+  def emergency_cost_overridable?
+    display_emergency_certificate? && !family_linked_associated_application?
   end
 
   def substantive_cost_limitation
@@ -423,11 +427,23 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def default_substantive_cost_limitation
+    return 0.0 if family_linked_associated_application?
+
     proceedings.map(&:substantive_cost_limitation).max
   end
 
   def default_delegated_functions_cost_limitation
+    return 0.0 if family_linked_associated_application?
+
     lead_proceeding.delegated_functions_cost_limitation
+  end
+
+  def additional_family_lead_delegated_functions_cost_limitation
+    default_delegated_functions_cost_limitation / 2
+  end
+
+  def family_linked_associated_application?
+    lead_linked_application&.link_type_code == "FC_LEAD"
   end
 
   def find_or_create_ccms_submission

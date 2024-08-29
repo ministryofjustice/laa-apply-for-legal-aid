@@ -933,6 +933,9 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
         default_limit_is: The default emergency cost limit is
+        emergency_certificate_details_heading: What to add for family link applications
+        emergency_certificate_details: You can request %{limit} more for each application that will be family linked to this one
+        family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
       proceeding_type:
         client_role: "Client role: "
         details_heading: Scope limitations

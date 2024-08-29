@@ -12,8 +12,8 @@
                collection: @legal_aid_application.proceedings.in_order_of_addition, as: :proceeding,
                locals: { translation_path: "providers.limitations.show" } %>
 
+    <h2 class="govuk-heading-l"><%= t(".cost_heading") %></h2>
     <% if @legal_aid_application.display_emergency_certificate? %>
-      <h2 class="govuk-heading-l"><%= t(".cost_heading") %></h2>
       <h3 class="govuk-heading-m"><%= t(".emergency_certificate") %></h3>
 
       <p class="govuk-body">
@@ -26,31 +26,46 @@
                 ) %>
           </strong>
         </p>
-        <%= form.govuk_radio_buttons_fieldset(:emergency_cost_override,
-                                              legend: { size: "s", tag: "h2", text: t(".cost_override_question") }) do %>
-          <%= form.govuk_radio_button(:emergency_cost_override, true, link_errors: true, label: { text: t("generic.yes") }) do %>
-            <%= form.govuk_text_field(
-                  :emergency_cost_requested,
-                  label: { text: t(".enter_cost_limit") },
-                  value: number_to_currency_or_original_string(@form.emergency_cost_requested),
-                  prefix_text: t("currency.gbp"),
-                  width: "one-third",
-                ) %>
 
-          <%= form.govuk_text_area(
-                :emergency_cost_reasons,
-                label: { text: t(".enter_cost_reasons") },
-              ) %>
+        <% if Setting.linked_applications? && !@legal_aid_application.family_linked_associated_application? %>
+          <%= govuk_details(summary_text: t(".emergency_certificate_details_heading")) do %>
+            <p><%= sanitize(t(".emergency_certificate_details", limit: "<strong>#{gds_number_to_currency(
+                     @legal_aid_application.additional_family_lead_delegated_functions_cost_limitation,
+                     precision: 0,
+                   )}</strong>")) %></p>
+          <% end %>
         <% end %>
-        <%= form.govuk_radio_button(:emergency_cost_override, false, label: { text: t("generic.no") }) %>
+
+        <% if @legal_aid_application.emergency_cost_overridable? %>
+          <%= form.govuk_radio_buttons_fieldset(:emergency_cost_override,
+                                                legend: { size: "s", tag: "h2", text: t(".cost_override_question") }) do %>
+            <%= form.govuk_radio_button(:emergency_cost_override, true, link_errors: true, label: { text: t("generic.yes") }) do %>
+              <%= form.govuk_text_field(
+                    :emergency_cost_requested,
+                    label: { text: t(".enter_cost_limit") },
+                    value: number_to_currency_or_original_string(@form.emergency_cost_requested),
+                    prefix_text: t("currency.gbp"),
+                    width: "one-third",
+                  ) %>
+
+            <%= form.govuk_text_area(
+                  :emergency_cost_reasons,
+                  label: { text: t(".enter_cost_reasons") },
+                ) %>
+          <% end %>
+          <%= form.govuk_radio_button(:emergency_cost_override, false, label: { text: t("generic.no") }) %>
+        <% end %>
       <% end %>
     <% end %>
 
-    <% title_translation = @legal_aid_application.used_delegated_functions? ? ".substantive_certificate" : ".cost_heading" %>
     <%= render partial: "providers/limitations/cost_limits",
-               locals: { title_translation_path: title_translation, form: } %>
-    <div class="govuk-!-padding-bottom-6"></div>
+               locals: { form: } %>
 
+    <%= if @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
+          govuk_warning_text(text: t(".family_warning"))
+        end %>
+
+    <div class="govuk-!-padding-bottom-6"></div>
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
