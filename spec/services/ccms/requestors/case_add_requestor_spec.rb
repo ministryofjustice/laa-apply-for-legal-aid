@@ -428,6 +428,17 @@ module CCMS
                    domestic_abuse_summary:,
                    office:)
           end
+
+          let(:applicant) do
+            create(:applicant,
+                   first_name: "AUTO-GRANT Shery",
+                   last_name: "Ledner",
+                   last_name_at_birth:,
+                   national_insurance_number: "EG587804M",
+                   date_of_birth: Date.new(1977, 4, 10),
+                   address:,
+                   has_partner: false)
+          end
           let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
 
           before { legal_aid_application.chances_of_success.map(&:destroy!) }
@@ -475,6 +486,17 @@ module CCMS
                    opponents:,
                    domestic_abuse_summary:,
                    office:)
+          end
+
+          let(:applicant) do
+            create(:applicant,
+                   first_name: "Shery",
+                   last_name: "Ledner",
+                   last_name_at_birth:,
+                   national_insurance_number: "EG587804M",
+                   date_of_birth: Date.new(1977, 4, 10),
+                   address:,
+                   has_partner: false)
           end
           let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB059" } }
 

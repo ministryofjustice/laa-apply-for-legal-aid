@@ -185,7 +185,7 @@ class LegalAidApplication < ApplicationRecord
 
   def auto_grant_special_children_act?
     # Auto grant pb003 - all other proceedings in SCA or without should not auto-grant
-    proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB003") }
+    special_children_act_proceedings? && applicant.first_name.starts_with?("AUTO-GRANT")
   end
 
   def evidence_is_required?
