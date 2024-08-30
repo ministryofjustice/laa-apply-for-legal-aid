@@ -549,6 +549,7 @@ en:
           court_order: Court order
           court_application: Court application
           expert_report: Expert report
+          parental_responsibility: Parental responsibility evidence
         evidence_upload_heading: Supporting evidence
       children_involved:
         involved-children-heading: Children involved in this application
