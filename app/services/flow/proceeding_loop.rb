@@ -48,7 +48,7 @@ module Flow
         when "emergency_defaults"
           current_proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
         when "substantive_defaults"
-          if current_proceeding.accepted_substantive_defaults
+          if current_proceeding.accepted_substantive_defaults || current_proceeding.special_childrens_act?
             if @application.checking_answers? && next_incomplete_proceeding.nil?
               :limitations
             else
