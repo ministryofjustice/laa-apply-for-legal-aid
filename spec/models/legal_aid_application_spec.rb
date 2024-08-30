@@ -433,8 +433,9 @@ RSpec.describe LegalAidApplication do
     end
 
     it "calls on rails notification service" do
-      expect(ActiveSupport::Notifications).to receive(:instrument).with(any_args)
+      allow(ActiveSupport::Notifications).to receive(:instrument)
       legal_aid_application.merits_complete!
+      expect(ActiveSupport::Notifications).to have_received(:instrument).with("dashboard.application_submitted")
     end
   end
 
