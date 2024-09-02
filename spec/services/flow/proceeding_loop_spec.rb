@@ -45,6 +45,21 @@ RSpec.describe Flow::ProceedingLoop do
           it { is_expected.to be :emergency_defaults }
         end
 
+        context "when the SCA proceeding has used delegated functions" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: %i[pb003 pb007],
+                   set_lead_proceeding: :pb007,
+                   df_options:,
+                   provider_step:)
+          end
+          let(:df_options) { { pb003: [10.days.ago, 10.days.ago], pb007: [10.days.ago, 10.days.ago] } }
+
+          it { is_expected.to be :substantive_defaults }
+        end
+
         context "and the proceeding has not used delegated functions" do
           it { is_expected.to be :substantive_defaults }
         end
@@ -93,6 +108,24 @@ RSpec.describe Flow::ProceedingLoop do
           before { proceeding.update!(accepted_emergency_defaults: false) }
 
           it { is_expected.to be :substantive_level_of_service }
+        end
+
+        context "and the provider has used an SCA proceeding" do
+          before { proceeding.update!(accepted_emergency_defaults: nil) }
+
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: %i[pb003 pb007],
+                   set_lead_proceeding: :pb007,
+                   df_options:,
+                   provider_step:)
+          end
+          let(:df_options) { { pb003: [10.days.ago, 10.days.ago], pb007: [10.days.ago, 10.days.ago], DA005: [nil, nil] } }
+          let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.first }
+
+          it { is_expected.to be :client_involvement_type }
         end
 
         context "when used_delegated functions_date > one month ago - test for ap-3537" do

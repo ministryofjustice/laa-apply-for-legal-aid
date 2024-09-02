@@ -13,9 +13,9 @@
         form:,
       ) do %>
 
-    <div class="govuk-!-padding-bottom-2"></div>
+    <div class="govuk-!-padding-bottom-2 govuk-hint">This branch it pointed at CCMS PRE_PROD (Staging) as the auto-grant rules do not run on UAT</div>
     <%= form.govuk_fieldset legend: { text: t(".name") } do %>
-      <%= form.govuk_text_field :first_name, label: { text: "First name" }, width: "three-quarters" %>
+      <%= form.govuk_text_field :first_name, label: { text: "First name" }, width: "three-quarters", hint: { text: "If the first name starts with AUTO-GRANT the SCA_AUTO_GRANT flag will be set in the CCMS payload" } %>
       <%= form.govuk_text_field :last_name, label: { text: "Last name" }, width: "three-quarters" %>
     <% end %>
     <%= form.govuk_radio_buttons_fieldset :changed_last_name,

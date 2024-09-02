@@ -54,9 +54,13 @@
                 end
                 row.with_cell(html_attributes: { class: "sortable-cell" }, text: application.application_ref)
                 row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": application.used_delegated_functions?.to_s }) do
-                  if application.used_delegated_functions?
+                  if application.special_children_act_proceedings? && application.used_delegated_functions?
+                    concat t(".substantive")
+                    concat tag.span(class: "govuk-body-s govuk-!-display-block") {
+                      t(".backdated_to", date: l(application.used_delegated_functions_on, format: :short_date))
+                    }
+                  elsif application.used_delegated_functions?
                     concat t(".emergency")
-
                     if application.substantive_application_deadline_on? && application.summary_state == :in_progress
                       concat tag.span(class: "govuk-body-s govuk-!-display-block") {
                         t(".substantive_due", date: l(application.substantive_application_deadline_on, format: :short_date))

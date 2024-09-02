@@ -16,6 +16,7 @@ class TestProviderPopulator
     "LAWRENCE & CO SOLICITORS CDS LLP" => [33_230, %w[0Q974B:85981]],
     "Rose & Co." => [809, %w[6F910X:28 7F320X:29]],
     "Keen & Co." => [101, %w[5F101X:30 7F101X:31]],
+    "TALBOTS LAW LTD" => [771, %w[0H568B:83447 2M878L:179928 2M012V:145842 0H707C:83449 2Q671X:62387405 2P833L:8330396]],
   }.freeze
 
   TEST_PROVIDERS = {
@@ -29,7 +30,7 @@ class TestProviderPopulator
     "firm2-user1" => ["Firm2 & Co.", "firm2-user1@example.com", 107],
     "ahernk" => ["Ahern & Co.", "katharine.ahern@digital.justice.gov.uk", 109],
     "MARTIN.RONAN@DAVIDGRAY.CO.UK" => ["David Gray LLP", "martin.ronan@example.com", 494_000],
-    "BENREID" => ["Test firm for portal login", "benreid@example.co.uk", 107],
+    "BENREID" => ["TALBOTS LAW LTD", "benreid@example.co.uk", 107],
     "HFITZSIMONS@EDWARDHAYES.CO.UK" => ["EDWARD HAYES LLP", "hfitzsimons@example.com", 2_453_773],
     "LHARRISON@TBILAW.CO.UK" => ["LAWRENCE & CO SOLICITORS CDS LLP", "LHARRISON@example.com", 954_474],
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
