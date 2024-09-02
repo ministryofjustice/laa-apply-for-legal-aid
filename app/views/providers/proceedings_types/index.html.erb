@@ -55,7 +55,7 @@
                     :id,
                     proceeding_type.ccms_code,
                     label: { text: proceeding_type.meaning },
-                    hint: { text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})" },
+                    hint: { text: "#{proceeding_type.ccms_matter.humanize}, #{proceeding_type.ccms_category_law}" },
                   ) %>
             </div>
           <% end %>

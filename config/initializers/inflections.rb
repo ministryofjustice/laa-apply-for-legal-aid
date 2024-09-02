@@ -23,4 +23,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "HMRC"
   inflect.acronym "SCA"
   inflect.acronym "PDA"
+  inflect.acronym "S8"
+  inflect.acronym "DA"
 end
