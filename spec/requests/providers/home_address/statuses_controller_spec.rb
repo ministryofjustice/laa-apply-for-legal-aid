@@ -42,11 +42,11 @@ RSpec.describe Providers::HomeAddress::StatusesController do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "when yes chosen" do
-      let(:params) { { applicant: { no_fixed_residence: "true" } } }
+    context "when applicant does have a home address" do
+      let(:params) { { applicant: { no_fixed_residence: "false" } } }
 
       it "records the answer" do
-        expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(true)
+        expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(false)
       end
 
       it "redirects to the next page" do
@@ -55,11 +55,16 @@ RSpec.describe Providers::HomeAddress::StatusesController do
       end
     end
 
-    context "when no chosen" do
-      let(:params) { { applicant: { no_fixed_residence: "false" } } }
+    context "when applicant does not have a home address" do
+      let(:params) { { applicant: { no_fixed_residence: "true" } } }
 
       it "records the answer" do
-        expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(false)
+        expect { patch_request }.to change { applicant.reload.no_fixed_residence }.from(nil).to(true)
+      end
+
+      it "deletes the home address" do
+        patch_request
+        expect(applicant.reload.home_address).to be_nil
       end
 
       it "redirects to the next page" do
