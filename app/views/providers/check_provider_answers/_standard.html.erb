@@ -17,7 +17,7 @@
              address: @address,
              read_only: @read_only) %>
 
-  <%= if @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
+  <%= if @legal_aid_application&.lead_linked_application&.confirm_link == true && @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
         govuk_warning_text(text: t(".copy_case.family_warning"))
       end %>
 
