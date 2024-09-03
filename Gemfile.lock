@@ -312,7 +312,7 @@ GEM
     govuk_notify_rails (3.0.0)
       notifications-ruby-client (~> 6.2)
       rails (>= 4.1.0)
-    grover (1.1.9)
+    grover (1.1.10)
       combine_pdf (~> 1.0)
       nokogiri (~> 1.0)
     guard (2.18.1)
