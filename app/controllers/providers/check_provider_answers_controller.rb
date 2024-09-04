@@ -20,7 +20,8 @@ module Providers
           source_application = LegalAidApplication.find(legal_aid_application.copy_case_id)
           case_cloned_response = CopyCase::ClonerService.call(legal_aid_application, source_application)
           legal_aid_application.update!(case_cloned: case_cloned_response)
-        elsif destroy_lead_linked_application?
+        end
+        if destroy_lead_linked_application?
           legal_aid_application.lead_linked_application.destroy!
           legal_aid_application.update!(copy_case: nil, copy_case_id: nil)
         end
@@ -40,8 +41,9 @@ module Providers
     def destroy_lead_linked_application?
       application_link = legal_aid_application.lead_linked_application
       return false unless application_link
+      return false if application_link.confirm_link == true
 
-      application_link.link_type_code == "false" || application_link == false
+      true
     end
 
     def update_applicant_age_for_means_test_purposes!

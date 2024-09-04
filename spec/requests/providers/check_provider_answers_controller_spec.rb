@@ -335,7 +335,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
             end
 
             context "when the provider does not want to link or copy" do
-              let(:link_type_code) { "false" }
+              let(:confirm_link) { false }
               let(:copy_case) { false }
 
               it "deletes the lead_linked_application amd copy data" do
