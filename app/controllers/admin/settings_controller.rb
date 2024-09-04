@@ -24,7 +24,6 @@ module Admin
                                       :enable_ccms_submission,
                                       :linked_applications,
                                       :collect_hmrc_data,
-                                      :home_address,
                                       :special_childrens_act)
     end
 
