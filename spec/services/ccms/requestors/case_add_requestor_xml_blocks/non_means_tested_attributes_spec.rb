@@ -967,7 +967,7 @@ module CCMS
 
           it "adds APP_IS_FAMILY attribute with value from application to merits assessment section" do
             block = XmlExtractor.call(xml, :global_merits, "APP_IS_FAMILY")
-            expect(block).to have_boolean_response(proceeding.category_of_law == "family")
+            expect(block).to have_boolean_response(proceeding.category_of_law == "Family")
           end
 
           it "adds CAT_OF_LAW_DESCRIPTION attribute with value from application to merits assessment section" do

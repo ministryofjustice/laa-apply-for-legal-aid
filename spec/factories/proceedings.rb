@@ -63,7 +63,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { nil }
       name { "inherent_jurisdiction_high_court_injunction" }
       matter_type { "Domestic Abuse" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
       client_involvement_type_ccms_code { "A" }
@@ -90,7 +90,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { Time.zone.today }
       name { "variation_or_discharge_under_section_protection_from_harassment_act" }
       matter_type { "Domestic Abuse" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
       client_involvement_type_ccms_code { "A" }
@@ -114,7 +114,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { Time.zone.today }
       name { "occupation_order" }
       matter_type { "Domestic Abuse" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
       client_involvement_type_ccms_code { "A" }
@@ -138,7 +138,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { Time.zone.today }
       name { "extend_variation_or_discharge_part_iv" }
       matter_type { "Domestic Abuse" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
       client_involvement_type_ccms_code { "A" }
@@ -162,7 +162,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { Time.zone.today }
       name { "nonmolestation_order" }
       matter_type { "Domestic Abuse" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
       client_involvement_type_ccms_code { "A" }
@@ -186,7 +186,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { nil }
       name { "prohibited_steps_order_s8" }
       matter_type { "section 8 children (S8)" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
       client_involvement_type_ccms_code { "A" }
@@ -210,7 +210,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { nil }
       name { "specified_issue_order_s8" }
       matter_type { "Section 8 orders" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
       client_involvement_type_ccms_code { "A" }
@@ -234,7 +234,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { nil }
       name { "child_arrangements_order_contact" }
       matter_type { "Section 8 orders" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
       client_involvement_type_ccms_code { "A" }
@@ -258,7 +258,7 @@ FactoryBot.define do
       used_delegated_functions_reported_on { nil }
       name { "child_arrangements_order_residence" }
       matter_type { "Section 8 orders" }
-      category_of_law { "family" }
+      category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
       client_involvement_type_ccms_code { "A" }
@@ -290,7 +290,7 @@ FactoryBot.define do
     used_delegated_functions_reported_on { nil }
     name { "CAO contact-Appeal" }
     matter_type { "Section 8 orders" }
-    category_of_law { "family" }
+    category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KSEC8" }
     client_involvement_type_ccms_code { "A" }
@@ -309,7 +309,7 @@ FactoryBot.define do
     used_delegated_functions_reported_on { nil }
     name { "child_assessment_order_sca" }
     matter_type { "special children act (SCA)" }
-    category_of_law { "family" }
+    category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KPBLW" }
     client_involvement_type_ccms_code { "A" }
@@ -332,7 +332,7 @@ FactoryBot.define do
     used_delegated_functions_reported_on { nil }
     name { "app_contact_child_in_care_sca" }
     matter_type { "special children act (SCA)" }
-    category_of_law { "family" }
+    category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KPBLW" }
     client_involvement_type_ccms_code { "A" }
@@ -352,7 +352,7 @@ FactoryBot.define do
     used_delegated_functions_reported_on { nil }
     name { "app_for_supervision_order_sca" }
     matter_type { "special children act (SCA)" }
-    category_of_law { "family" }
+    category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KPBLW" }
     client_involvement_type_ccms_code { "A" }

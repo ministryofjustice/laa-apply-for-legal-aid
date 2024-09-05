@@ -16,7 +16,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
            used_delegated_functions_reported_on: Time.zone.today,
            name: "inherent_jurisdiction_high_court_injunction",
            matter_type: "Domestic Abuse",
-           category_of_law: "family",
+           category_of_law: "Family",
            category_law_code: "MAT",
            ccms_matter_code: "MINJN",
            client_involvement_type_ccms_code: "A",

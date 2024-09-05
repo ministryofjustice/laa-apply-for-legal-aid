@@ -209,7 +209,7 @@ module CCMS
     end
 
     def lead_proceeding_category_of_law_is_family?(_options)
-      lead_proceeding.category_of_law == "family"
+      lead_proceeding.category_of_law == "Family"
     end
 
     def lead_proceeding_meaning(_options)
