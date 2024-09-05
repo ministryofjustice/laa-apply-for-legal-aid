@@ -411,7 +411,7 @@ GEM
     nesty (1.0.2)
     net-http (0.4.1)
       uri
-    net-imap (0.4.15)
+    net-imap (0.4.16)
       date
       net-protocol
     net-pop (0.1.2)
