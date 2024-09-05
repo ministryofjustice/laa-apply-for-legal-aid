@@ -583,8 +583,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     retriable (3.1.2)
-    rexml (3.3.6)
-      strscan
+    rexml (3.3.7)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -704,7 +703,6 @@ GEM
     stringio (3.1.1)
     strong_migrations (2.0.0)
       activerecord (>= 6.1)
-    strscan (3.1.0)
     super_diff (0.12.1)
       attr_extras (>= 6.2.4)
       diff-lcs
