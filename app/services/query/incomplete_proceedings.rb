@@ -25,9 +25,9 @@ module Query
         (
             NOT EXISTS (select 'has_scope_limitations' FROM scope_limitations where (proceeding_id = proceedings.id))
             OR (used_delegated_functions IS NULL)
-            OR (accepted_substantive_defaults IS NULL AND matter_type != 'Special Children Act')
+            OR (accepted_substantive_defaults IS NULL AND ccms_matter_code != 'KPBLW')
             OR (client_involvement_type_ccms_code IS NULL)
-            OR (used_delegated_functions = true AND accepted_emergency_defaults IS NULL AND matter_type != 'Special Children Act')
+            OR (used_delegated_functions = true AND accepted_emergency_defaults IS NULL AND ccms_matter_code != 'KPBLW')
             OR (accepted_substantive_defaults = false
                 AND (substantive_level_of_service IS NULL
                     OR substantive_level_of_service_name IS NULL
