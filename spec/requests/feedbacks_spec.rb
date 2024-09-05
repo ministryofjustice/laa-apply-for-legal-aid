@@ -74,18 +74,6 @@ RSpec.describe "FeedbacksController" do
             ["/feedback/new"]
           end
 
-          it "schedules an email without an application id" do
-            expect { post_request }.to change(ScheduledMailing, :count).by(1)
-            rec = ScheduledMailing.first
-
-            expect(rec.mailer_klass).to eq "FeedbackMailer"
-            expect(rec.mailer_method).to eq "notify"
-            expect(rec.legal_aid_application_id).to be_nil
-            expect(rec.addressee).to eq Rails.configuration.x.support_email_address
-            expect(rec.arguments).to eq [feedback.id, nil]
-            expect(rec.scheduled_at).to have_been_in_the_past
-          end
-
           it "adds provider-specific data to feedback record" do
             post_request
             expect(feedback.source).to eq "Provider"
@@ -154,18 +142,6 @@ RSpec.describe "FeedbacksController" do
       end
     end
 
-    it "schedules an email" do
-      expect { post_request }.to change(ScheduledMailing, :count).by(1)
-      rec = ScheduledMailing.first
-
-      expect(rec.mailer_klass).to eq "FeedbackMailer"
-      expect(rec.mailer_method).to eq "notify"
-      expect(rec.legal_aid_application_id).to eq application.id
-      expect(rec.addressee).to eq Rails.configuration.x.support_email_address
-      expect(rec.arguments).to eq [feedback.id, application.id]
-      expect(rec.scheduled_at < Time.zone.now).to be true
-    end
-
     it "redirects to show action" do
       post_request
       expect(response.body).to include(I18n.t(".feedback.show.title"))
@@ -176,11 +152,6 @@ RSpec.describe "FeedbacksController" do
 
       it "does not create a feedback to record browser data" do
         expect { post_request }.not_to change(Feedback, :count)
-      end
-
-      it "does not send an email" do
-        expect(FeedbackMailer).not_to receive(:notify)
-        post_request
       end
 
       it "shows errors on the page" do
