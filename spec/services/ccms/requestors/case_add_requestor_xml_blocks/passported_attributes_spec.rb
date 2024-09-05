@@ -1359,7 +1359,7 @@ module CCMS
 
           it "populates APP_IS_FAMILY" do
             block = XmlExtractor.call(xml, :global_merits, "APP_IS_FAMILY")
-            expect(block).to have_boolean_response(proceeding.category_of_law == "Family")
+            expect(block).to have_boolean_response(proceeding.category_of_law == "family")
           end
 
           it "populates CAT_OF_LAW_DESCRIPTION" do
