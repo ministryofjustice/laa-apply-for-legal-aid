@@ -8,7 +8,6 @@ module Settings
                   :enable_ccms_submission,
                   :linked_applications,
                   :collect_hmrc_data,
-                  :home_address,
                   :special_childrens_act
 
     validates :mock_true_layer_data,
@@ -17,7 +16,6 @@ module Settings
               :enable_ccms_submission,
               :linked_applications,
               :collect_hmrc_data,
-              :home_address,
               :special_childrens_act,
               presence: true
   end
