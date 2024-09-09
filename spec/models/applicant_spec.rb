@@ -167,6 +167,18 @@ RSpec.describe Applicant do
         expect(age).to be 17
       end
     end
+
+    context "when sca application" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings, applicant:) }
+
+      before do
+        applicant.age_for_means_test_purposes = 48
+      end
+
+      it "returns age stored in age_for_means_test_purposes" do
+        expect(age).to be 48
+      end
+    end
   end
 
   describe "#under_18?" do
