@@ -185,7 +185,7 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "prohibited_steps_order_s8" }
-      matter_type { "Children - section 8" }
+      matter_type { "section 8 children (S8)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
@@ -308,7 +308,7 @@ FactoryBot.define do
     used_delegated_functions_on { nil }
     used_delegated_functions_reported_on { nil }
     name { "child_assessment_order_sca" }
-    matter_type { "Special Children Act" }
+    matter_type { "special children act (SCA)" }
     category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KPBLW" }
@@ -331,7 +331,7 @@ FactoryBot.define do
     used_delegated_functions_on { nil }
     used_delegated_functions_reported_on { nil }
     name { "app_contact_child_in_care_sca" }
-    matter_type { "Special Children Act" }
+    matter_type { "special children act (SCA)" }
     category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KPBLW" }
@@ -351,7 +351,7 @@ FactoryBot.define do
     used_delegated_functions_on { nil }
     used_delegated_functions_reported_on { nil }
     name { "app_for_supervision_order_sca" }
-    matter_type { "Special Children Act" }
+    matter_type { "special children act (SCA)" }
     category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KPBLW" }

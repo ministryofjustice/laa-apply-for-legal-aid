@@ -13,7 +13,7 @@ module CFEResults
               income_contribution: 0.0,
               matter_types: [
                 {
-                  matter_type: "Domestic abuse",
+                  matter_type: "domestic abuse (DA)",
                   result: "no_assessment",
                 },
               ],

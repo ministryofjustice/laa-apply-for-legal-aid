@@ -45,7 +45,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law: "Family",
         ccms_category_law_code: "MAT",
         ccms_matter_code: "MINJN",
-        ccms_matter: "Domestic abuse",
+        ccms_matter: "domestic abuse (DA)",
       },
       {
         ccms_code: "SE097",
@@ -57,7 +57,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law: "Family",
         ccms_category_law_code: "MAT",
         ccms_matter_code: "KSEC8",
-        ccms_matter: "Children - section 8",
+        ccms_matter: "section 8 children (S8)",
       },
       {
         ccms_code: "DA003",
@@ -69,7 +69,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law: "Family",
         ccms_category_law_code: "MAT",
         ccms_matter_code: "MINJN",
-        ccms_matter: "Domestic abuse",
+        ccms_matter: "domestic abuse (DA)",
       },
       {
         ccms_code: "SE016E",
@@ -81,7 +81,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law: "Family",
         ccms_category_law_code: "MAT",
         ccms_matter_code: "KSEC8",
-        ccms_matter: "Children - section 8",
+        ccms_matter: "section 8 children (S8)",
       },
       {
         ccms_code: "DA006",
@@ -93,7 +93,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law: "Family",
         ccms_category_law_code: "MAT",
         ccms_matter_code: "MINJN",
-        ccms_matter: "Domestic abuse",
+        ccms_matter: "domestic abuse (DA)",
       },
       {
         ccms_code: "PB003",
@@ -105,7 +105,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law: "Family",
         ccms_category_law_code: "MAT",
         ccms_matter_code: "KPBLW",
-        ccms_matter: "Special Children Act",
+        ccms_matter: "special children act (SCA)",
       },
     ].to_json
   end
