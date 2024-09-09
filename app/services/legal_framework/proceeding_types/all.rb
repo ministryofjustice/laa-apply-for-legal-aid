@@ -42,7 +42,7 @@ module LegalFramework
 
       def request_body
         {
-          current_proceedings: @legal_aid_application.proceedings&.map(&:ccms_code)&.join(","),
+          current_proceedings: @legal_aid_application.proceedings&.map(&:ccms_code),
           allowed_categories: %w[MAT], # TODO: replace with details from new PDA, for now hardcoded to only current category type
           search_term: "", # TODO: add optional parameter to the initializer, but for now leave always empty
         }.to_json
