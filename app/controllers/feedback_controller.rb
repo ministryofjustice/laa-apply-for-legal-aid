@@ -23,11 +23,6 @@ class FeedbackController < ApplicationController
     @display_close_tab_msg = params["signed_out"].present?
 
     if @feedback.save
-      ScheduledMailing.send_now!(mailer_klass: FeedbackMailer,
-                                 mailer_method: :notify,
-                                 legal_aid_application_id: application_id,
-                                 addressee: Rails.configuration.x.support_email_address,
-                                 arguments: [@feedback.id, application_id])
       render :show
     else
       render :new

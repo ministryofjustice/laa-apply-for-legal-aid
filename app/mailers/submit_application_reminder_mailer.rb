@@ -8,7 +8,7 @@ class SubmitApplicationReminderMailer < BaseApplyMailer
     !scheduled_mailing.legal_aid_application.state.in?(INELIGIBLE_STATES)
   end
 
-  def notify_provider(application_id, name, to = support_email_address)
+  def notify_provider(application_id, name, to = Rails.configuration.x.support_email_address)
     application = LegalAidApplication.find(application_id)
     template_name :reminder_to_submit_an_application
     set_personalisation(
