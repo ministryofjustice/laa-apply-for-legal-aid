@@ -7,7 +7,7 @@
     <p class="govuk-body"><%= t(".paragraph") %></p>
   <% end %>
 
-  <%= render("shared/check_answers/relationship_to_child", proceeding: @proceeding, relationship_to_child: @relationship_to_child) %>
+  <%= render("shared/check_answers/relationship_to_child", proceeding: @proceeding, relationship_to_child: @relationship_to_child, read_only: false) %>
 
   <%= next_action_buttons_with_form(
         url: providers_merits_task_list_check_who_client_is_path(@proceeding),

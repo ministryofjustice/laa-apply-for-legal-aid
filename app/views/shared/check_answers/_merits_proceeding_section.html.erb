@@ -96,7 +96,7 @@
     <% end %>
 
     <% if proceeding.relationship_to_child %>
-      <%= render("shared/check_answers/relationship_to_child", proceeding:, relationship_to_child: proceeding.relationship_to_child) %>
+      <%= render("shared/check_answers/relationship_to_child", proceeding:, relationship_to_child: proceeding.relationship_to_child, read_only:) %>
     <% end %>
 
     <%= govuk_summary_list(actions: !read_only) do |summary_list| %>
