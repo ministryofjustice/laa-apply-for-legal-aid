@@ -22,7 +22,13 @@
       <% end %>
     </p>
 
-    <p class="govuk-body"><%= t(".keep_a_copy") %></p>
+    <p class="govuk-body">
+      <% if @legal_aid_application.non_means_tested? %>
+        <%= t(".keep_a_copy.non_means_tested") %>
+      <% else %>
+        <%= t(".keep_a_copy.means_tested") %>
+      <% end %>
+    </p>
 
     <p class="govuk-body"><%= t(".audit") %></p>
 

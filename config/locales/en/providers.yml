@@ -1643,8 +1643,10 @@ en:
           non_means_tested: |
             Print the application and get the person acting for %{applicant_name} to sign it. For example,
             a litigation friend, a professional children’s guardian or a parental order report.
-        keep_a_copy: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
         audit: You may need to show this if you’re audited by the LAA in the future.
+        keep_a_copy:
+          means_tested: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
+          non_means_tested: You'll need to keep a copy of it on file, along with any evidence you included.
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?
