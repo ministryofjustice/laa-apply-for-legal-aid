@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_22_082922) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_13_145848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1003,6 +1003,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_082922) do
     t.uuid "provider_uploader_id"
     t.index ["legal_aid_application_id"], name: "index_statement_of_cases_on_legal_aid_application_id"
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
+  end
+
+  create_table "temp_contract_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "success"
+    t.string "office_code"
+    t.json "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
