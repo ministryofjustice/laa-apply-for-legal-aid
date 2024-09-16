@@ -75,6 +75,7 @@ RSpec.describe "provider confirm office" do
 
     context "when the provider is authenticated" do
       before do
+        allow(ProviderContractDetailsWorker).to receive(:perform_async).and_return(true)
         login_as provider
         patch_request
       end

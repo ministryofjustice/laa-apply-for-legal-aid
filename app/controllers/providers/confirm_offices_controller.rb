@@ -12,7 +12,11 @@ module Providers
 
     def update
       if form.valid?
-        return redirect_to providers_legal_aid_applications_path if form.confirm_office?
+        if form.confirm_office?
+          # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
+          ProviderContractDetailsWorker.perform_async(firm.offices.first.code)
+          return redirect_to providers_legal_aid_applications_path
+        end
 
         current_provider.update!(selected_office: nil)
         return redirect_to providers_select_office_path
@@ -43,6 +47,8 @@ module Providers
       return providers_invalid_login_path if current_provider.invalid_login?
 
       if firm.offices.count == 1
+        # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
+        ProviderContractDetailsWorker.perform_async(firm.offices.first.code)
         current_provider.update!(selected_office: firm.offices.first)
         return providers_legal_aid_applications_path
       end
