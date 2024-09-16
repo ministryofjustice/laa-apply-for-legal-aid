@@ -18,7 +18,20 @@ RSpec.describe Flow::Steps::ProviderStart::HasNationalInsuranceNumbersStep, type
       it { is_expected.to eq :check_provider_answers }
     end
 
-    context "when not overriding the DWP result" do
+    context "with SCA application" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when applicant is under 18" do
+      let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
+      let(:applicant) { create(:applicant, :under_18_for_means_test_purposes) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when application is means-tested and not overriding the DWP result" do
       it { is_expected.to eq :client_has_partners }
     end
   end
