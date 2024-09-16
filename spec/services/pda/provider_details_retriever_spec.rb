@@ -26,7 +26,7 @@ RSpec.describe PDA::ProviderDetailsRetriever, :vcr do
 
     context "when there is an error calling the api" do
       before do
-        stub_request(:get, "#{Rails.configuration.x.pda.url}/#{username}/provider-offices")
+        stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-user/#{username}/provider-offices")
           .to_return(body: "An error has occurred", status: 500)
       end
 
