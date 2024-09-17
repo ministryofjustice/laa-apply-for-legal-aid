@@ -8,6 +8,9 @@ Feature: Applicant under 16 blocked
     Then I choose 'No'
     And I enter a date of birth that will make me 16 today
     And I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
