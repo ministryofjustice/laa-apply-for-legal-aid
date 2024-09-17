@@ -1,0 +1,39 @@
+<%= form_with(
+      model: @form,
+      scope: :applicant,
+      url: providers_legal_aid_application_previous_references_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".title"),
+        template: :basic,
+        form:,
+      ) do %>
+
+    <%= form.govuk_radio_buttons_fieldset(
+          :applied_previously,
+          legend: { size: "xl", text: t(".heading"), tag: "h1" },
+        ) do %>
+
+      <div class="govuk-body"><%= t(".type_of_work_text") %></div>
+      <div class="govuk-body"><%= t(".previous_records_text") %></div>
+
+      <%= form.govuk_radio_button :applied_previously, true, label: { text: t("generic.yes") }, link_errors: true do %>
+        <%= form.govuk_text_field(
+              :previous_reference,
+              label: { text: t(".ccms_ref_num") },
+              hint: { text: t(".ccms_ref_hint") },
+              width: "one-third",
+            ) %>
+    <% end %>
+      <%= form.govuk_radio_button :applied_previously, false, label: { text: t("generic.no") }, link_errors: false %>
+    <% end %>
+
+    <%= next_action_buttons(
+          form:,
+          show_draft: true,
+        ) %>
+  <% end %>
+<% end %>
