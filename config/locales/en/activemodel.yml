@@ -159,6 +159,11 @@ en:
               too_many_decimals: &student_error Student loan amount must be an amount of money, like 10,000
               not_a_number: *student_error
               greater_than_or_equal_to: *student_error
+            applied_previously:
+              inclusion: Select yes if your client has applied for civil legal aid before
+            previous_reference:
+              blank: Enter the reference number for any previous application
+              not_valid: Enter the reference number in the correct format 
         aggregated_cash_income:
           credits:
             attributes:
