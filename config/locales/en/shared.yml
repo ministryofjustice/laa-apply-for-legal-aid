@@ -385,6 +385,8 @@ en:
         upper_limit_label: Capital upper limit
         total: Total capital assessed
       client_details:
+        previous_application_reference: Previous application reference
+        has_applied_before: Has applied before?
         correspondence_address_choice: Where to send client's mail
         correspondence_choice:
           home: My client's UK home address
