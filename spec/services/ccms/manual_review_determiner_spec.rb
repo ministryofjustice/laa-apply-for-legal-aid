@@ -304,6 +304,16 @@ module CCMS
           end
         end
 
+        context "with inconsistent dwp override values" do
+          # This replicates a production application that presented caseworkers with a dilemma,
+          # we were unable to replicate the steps taken to get to this state
+          before { create(:dwp_override, legal_aid_application:, has_evidence_of_benefit: nil, passporting_benefit: nil) }
+
+          it "does not add dwp_override to reason" do
+            expect(review_reasons_result).not_to include(:dwp_override)
+          end
+        end
+
         context "with client further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
 

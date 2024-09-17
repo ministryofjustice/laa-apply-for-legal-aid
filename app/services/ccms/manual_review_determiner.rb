@@ -32,7 +32,7 @@ module CCMS
     end
 
     def manual_review_required?
-      dwp_override.present? ||
+      dwp_overridden? ||
         manually_review_all_non_passported? ||
         capital_contribution_required? ||
         has_restrictions? ||
@@ -61,7 +61,7 @@ module CCMS
 
     def application_review_reasons
       application_review_reasons = []
-      application_review_reasons << :dwp_override if dwp_override
+      application_review_reasons << :dwp_override if dwp_overridden?
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
       application_review_reasons << :non_passported if non_passported?
@@ -71,6 +71,10 @@ module CCMS
       application_review_reasons << :partner_uploaded_bank_statements if partner_uploading_bank_statements?
       application_review_reasons << :ineligible if cfe_result.ineligible?
       application_review_reasons
+    end
+
+    def dwp_overridden?
+      dwp_override.present? && dwp_override.values_at(:passporting_benefit, :has_evidence_of_benefit).all?(&:present?)
     end
 
     def manually_review_all_non_passported?
