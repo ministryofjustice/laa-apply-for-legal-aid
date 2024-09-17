@@ -4,8 +4,8 @@ module Addresses
 
     attr_accessor :country_code, :address_line_one, :address_line_two, :city, :county, :postcode
 
-    validates :address_line_one, presence: true, unless: :draft?
     validate :validate_country_code, unless: :draft?
+    validates :address_line_one, presence: true, unless: :draft?
 
     def countries
       @countries ||= ::LegalFramework::NonUkHomeAddresses::All.call
