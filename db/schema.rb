@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_13_145848) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_05_104607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -140,6 +140,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_13_145848) do
     t.boolean "no_fixed_residence"
     t.string "correspondence_address_choice"
     t.boolean "shared_benefit_with_partner"
+    t.boolean "applied_previously"
+    t.string "previous_reference"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
