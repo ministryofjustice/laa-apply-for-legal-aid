@@ -190,6 +190,7 @@ Rails.application.routes.draw do
       resource :has_other_proceedings, only: %i[show update destroy]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
+      resource :previous_references, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :has_national_insurance_number, only: %i[show update]
       resources :check_benefits, only: [:index]
