@@ -35,7 +35,7 @@ RSpec.describe MoneyHelper do
     let(:result) { number_to_currency_or_original_string(value) }
 
     context "when a number" do
-      let(:value) { BigDecimal("12_345.5", 12) }
+      let(:value) { BigDecimal(12_345.5, 12) }
 
       it "formats the currency" do
         expect(result).to eq "12,345.50"
@@ -185,7 +185,7 @@ RSpec.describe MoneyHelper do
     end
 
     context "when a BigDecimal" do
-      let(:value) { BigDecimal("12345.25") }
+      let(:value) { BigDecimal(12_345.25, 12) }
 
       it "displays pounds and pence when BigDecimal" do
         expect(result).to eq "£12,345.25"
