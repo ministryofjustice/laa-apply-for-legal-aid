@@ -49,7 +49,7 @@ module CheckAnswersHelper
   end
 
   def number_to_currency_or_na(number)
-    number.to_d == BigDecimal("999_999_999_999.0") ? "N/a" : gds_number_to_currency(number)
+    number.to_d == BigDecimal(999_999_999_999.0, 12) ? "N/a" : gds_number_to_currency(number)
   end
 
   def safe_yes_or_no(value)
