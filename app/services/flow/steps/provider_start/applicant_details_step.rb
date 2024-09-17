@@ -7,7 +7,7 @@ module Flow
           if application.overriding_dwp_result?
             :has_national_insurance_numbers
           else
-            :correspondence_address_choices
+            :previous_references
           end
         end,
         check_answers: :check_provider_answers,
