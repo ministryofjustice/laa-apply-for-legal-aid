@@ -1,12 +1,12 @@
 import accessibleAutocomplete from 'accessible-autocomplete'
 
+const screenReaderMessageDelay = 1000 // wait before updating the screen reader message, to avoid interrupting queue
+const searchInputBox = document.querySelector('.country-select')
+
 accessibleAutocomplete.enhanceSelectElement({
   defaultValue: '',
-  selectElement: document.querySelector('#non-uk-home-address-country-code-field')
+  selectElement: searchInputBox
 })
-
-const screenReaderMessageDelay = 1000 // wait before updating the screen reader message, to avoid interrupting queue
-const searchInputBox = document.querySelector('#non-uk-home-address-country-code-field')
 
 document
   .querySelector('#clear-country-search')
