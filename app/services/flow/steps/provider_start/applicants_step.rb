@@ -3,7 +3,7 @@ module Flow
     module ProviderStart
       ApplicantsStep = Step.new(
         path: ->(_) { Steps.urls.new_providers_applicant_path },
-        forward: :correspondence_address_choices,
+        forward: :previous_references,
       )
     end
   end
