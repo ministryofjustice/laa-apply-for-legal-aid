@@ -19,6 +19,9 @@ Feature: Linking cases back button use
     And I choose 'No'
     And I enter the date of birth '01-01-1999'
     And I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page with title "Where should we send your client's correspondence?"
 
     When I choose 'Another UK residential address'
