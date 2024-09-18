@@ -34,7 +34,7 @@ executors:
           NODE_OPTIONS: --openssl-legacy-provider
       - image: cimg/postgres:14.10
       - image: cimg/redis:6.2
-      - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
+      - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-5cd6693
 
 commands:
   build-and-push-to-ecr:
