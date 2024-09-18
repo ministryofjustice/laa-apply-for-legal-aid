@@ -69,7 +69,7 @@ RSpec.describe PDA::CurrentContracts do
       let(:body) { "" }
 
       it "records the expected value" do
-        expect(TempContractData).to receive(:create!).with({ success: false, office_code: "4S404O", response: { error: "Retrieval Failed: (204) " } })
+        expect(TempContractData).to receive(:create!).with({ success: false, office_code: "4S404O", response: { error: "Retrieval for 4S404O failed, no data found: (204) " } })
         call
       end
     end

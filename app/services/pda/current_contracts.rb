@@ -55,7 +55,7 @@ module PDA
     end
 
     def log_record_not_found_error
-      message = "Retrieval Failed: (#{response.status}) #{response.body}"
+      message = "Retrieval for #{@office_code} failed, no data found: (#{response.status}) #{response.body}"
       create_temp_contract_data({ error: message })
     end
 
