@@ -1,10 +1,10 @@
 require "rails_helper"
 
-FirmStruct = Struct.new(:id, :name)
-OfficeStruct = Struct.new(:id, :code)
-ProviderDetailsStruct = Struct.new(:firm_id, :contact_id, :firm_name, :offices)
-
 RSpec.describe PDA::CompareProviderDetails do
+  let(:firm_struct) { Struct.new(:id, :name) }
+  let(:office_struct) { Struct.new(:id, :code) }
+  let(:provider_details_struct) { Struct.new(:firm_id, :contact_id, :firm_name, :offices) }
+
   describe ".call" do
     subject(:call) { described_class.call(provider.id) }
 
@@ -23,8 +23,8 @@ RSpec.describe PDA::CompareProviderDetails do
     let(:ccms_firm_id) { "1" }
     let(:ccms_office_id) { "2" }
     let(:contact_id) { 104 }
-    let(:ccms_firm) { FirmStruct.new(ccms_firm_id, firm_name) }
-    let(:ccms_office) { OfficeStruct.new(ccms_office_id, office_code) }
+    let(:ccms_firm) { firm_struct.new(ccms_firm_id, firm_name) }
+    let(:ccms_office) { office_struct.new(ccms_office_id, office_code) }
 
     context "when PDA returns details that match the provider's details" do
       before do
@@ -53,7 +53,7 @@ RSpec.describe PDA::CompareProviderDetails do
       end
 
       context "when the firm.ccms_id does not match" do
-        let(:ccms_firm) { FirmStruct.new(3, firm_name) }
+        let(:ccms_firm) { firm_struct.new(3, firm_name) }
 
         it "logs that the details do not match" do
           expect(Rails.logger).to receive(:info).with("PDA::CompareProviderDetails:: Provider #{provider.id} #{ccms_firm.id} does not match firm.ccms_id #{firm.ccms_id}")
@@ -62,7 +62,7 @@ RSpec.describe PDA::CompareProviderDetails do
       end
 
       context "when the firm.name does not match" do
-        let(:ccms_firm) { FirmStruct.new(ccms_firm_id, "Wrong firm name") }
+        let(:ccms_firm) { firm_struct.new(ccms_firm_id, "Wrong firm name") }
 
         it "logs that the details do not match" do
           expect(Rails.logger).to receive(:info).with("PDA::CompareProviderDetails:: Provider #{provider.id} #{ccms_firm.name} does not match firm.name #{firm.name}")
@@ -81,7 +81,7 @@ RSpec.describe PDA::CompareProviderDetails do
 
       context "when the office details do not match" do
         context "when the office codes do not match" do
-          let(:ccms_office) { OfficeStruct.new(ccms_office_id, "9R678Y") }
+          let(:ccms_office) { office_struct.new(ccms_office_id, "9R678Y") }
 
           it "logs that the details do not match" do
             expect(Rails.logger).to receive(:info).with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"#{ccms_office.id} #{ccms_office.code}\"] does not match [\"#{office.ccms_id} #{office.code}\"]")
@@ -90,7 +90,7 @@ RSpec.describe PDA::CompareProviderDetails do
         end
 
         context "when the office returned by PDA does not exist in apply" do
-          let(:ccms_office) { OfficeStruct.new(3, office_code) }
+          let(:ccms_office) { office_struct.new(3, office_code) }
 
           it "logs that the details do not match" do
             expect(Rails.logger).to receive(:info).with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"#{ccms_office.id} #{ccms_office.code}\"] does not match [\"#{office.ccms_id} #{office.code}\"]")
@@ -161,6 +161,6 @@ RSpec.describe PDA::CompareProviderDetails do
   end
 
   def api_response(firm:, offices:, contact_id:)
-    ProviderDetailsStruct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
+    provider_details_struct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
   end
 end
