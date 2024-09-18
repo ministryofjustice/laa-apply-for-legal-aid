@@ -175,7 +175,7 @@ Feature: Review and print your application
 
     And I should see 'Non means tested'
     And I should see 'Print the application and get the person acting for'
-    And I should see 'For example, a litigation friend, a professional children’s guardian or a parental order report.'
+    And I should see "For example, a litigation friend, a professional children's guardian or a parental order report."
 
     Then the following sections should not exist:
       | tag | section |
