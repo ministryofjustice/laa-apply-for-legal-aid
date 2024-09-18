@@ -96,10 +96,20 @@ ADMIN_PASSWORD=
 brew bundle
 ```
 
+You may need to switch postgres versions to match version used by app
+```
+brew services list
+...
+brew services stop postgresql@XX
+brew services start postgresql@14
+```
+
 4. From the root of the project execute the following command:
 ```
+[bin/spring stop] *
 bin/setup
 ```
+\* possibly needed if spring started and errors encountered when running a command like `rails db:migrate:status`
 
 5. Once setup, you can run the dev binstub to run the server, sidekiq, and watch
 for JS and CSS changes.
