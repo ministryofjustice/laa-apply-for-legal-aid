@@ -1,15 +1,15 @@
 require "rails_helper"
 
-FirmStruct = Struct.new(:id, :name)
-OfficeStruct = Struct.new(:id, :code)
-ProviderDetailsStruct = Struct.new(:firm_id, :contact_id, :firm_name, :offices)
-
 RSpec.describe PDA::ProviderDetailsCreator do
+  let(:firm_struct) { Struct.new(:id, :name) }
+  let(:office_struct) { Struct.new(:id, :code) }
+  let(:provider_details_struct) { Struct.new(:firm_id, :contact_id, :firm_name, :offices) }
+
   describe ".call" do
     context "when the firm does not exist" do
       it "creates the firm" do
-        ccms_firm = FirmStruct.new(1, "Test Firm")
-        ccms_office = OfficeStruct.new(1, "6D424Y")
+        ccms_firm = firm_struct.new(1, "Test Firm")
+        ccms_office = office_struct.new(1, "6D424Y")
         provider = create(:provider, username: "test-user")
         stub_provider_details_retriever(
           provider:,
@@ -26,9 +26,9 @@ RSpec.describe PDA::ProviderDetailsCreator do
       end
 
       it "creates the offices" do
-        ccms_firm = FirmStruct.new(1, "Test Firm")
-        ccms_office1 = OfficeStruct.new(1, "6D424Y")
-        ccms_office2 = OfficeStruct.new(2, "4C880Q")
+        ccms_firm = firm_struct.new(1, "Test Firm")
+        ccms_office1 = office_struct.new(1, "6D424Y")
+        ccms_office2 = office_struct.new(2, "4C880Q")
         provider = create(:provider, username: "test-user")
         stub_provider_details_retriever(
           provider:,
@@ -54,8 +54,8 @@ RSpec.describe PDA::ProviderDetailsCreator do
       end
 
       it "updates the provider" do
-        ccms_firm = FirmStruct.new(1, "Test Firm")
-        ccms_office = OfficeStruct.new(1, "6D424Y")
+        ccms_firm = firm_struct.new(1, "Test Firm")
+        ccms_office = office_struct.new(1, "6D424Y")
         provider = create(:provider, name: nil, username: "test-user")
         stub_provider_details_retriever(
           provider:,
@@ -74,8 +74,8 @@ RSpec.describe PDA::ProviderDetailsCreator do
 
     context "when the provider's office is not returned from the API" do
       it "clears the selected office" do
-        ccms_firm = FirmStruct.new(1, "Test Firm")
-        ccms_office = OfficeStruct.new(1, "6D424Y")
+        ccms_firm = firm_struct.new(1, "Test Firm")
+        ccms_office = office_struct.new(1, "6D424Y")
         office = create(:office, code: "6D456C")
         provider = create(
           :provider,
@@ -96,8 +96,8 @@ RSpec.describe PDA::ProviderDetailsCreator do
 
     context "when the provider's office is returned from the API" do
       it "does not clear the selected office" do
-        ccms_firm = FirmStruct.new(1, "Test Firm")
-        ccms_office = OfficeStruct.new(1, "6D456C")
+        ccms_firm = firm_struct.new(1, "Test Firm")
+        ccms_office = office_struct.new(1, "6D456C")
         office = create(
           :office,
           ccms_id: ccms_office.id,
@@ -122,8 +122,8 @@ RSpec.describe PDA::ProviderDetailsCreator do
 
     context "when the firm already exists with one of the offices" do
       it "does not create the firm" do
-        ccms_firm = FirmStruct.new(1, "Existing Firm")
-        ccms_office = OfficeStruct.new(1, "6D456C")
+        ccms_firm = firm_struct.new(1, "Existing Firm")
+        ccms_office = office_struct.new(1, "6D456C")
         existing_firm = create(
           :firm,
           ccms_id: ccms_firm.id,
@@ -148,9 +148,9 @@ RSpec.describe PDA::ProviderDetailsCreator do
       end
 
       it "updates the firms offices" do
-        ccms_firm = FirmStruct.new(1, "Existing Firm")
-        ccms_office1 = OfficeStruct.new(1, "6D456C")
-        ccms_office2 = OfficeStruct.new(2, "4C880Q")
+        ccms_firm = firm_struct.new(1, "Existing Firm")
+        ccms_office1 = office_struct.new(1, "6D456C")
+        ccms_office2 = office_struct.new(2, "4C880Q")
         existing_firm = create(
           :firm,
           ccms_id: ccms_firm.id,
@@ -182,8 +182,8 @@ RSpec.describe PDA::ProviderDetailsCreator do
       end
 
       it "updates the firm's name" do
-        ccms_firm = FirmStruct.new(1, "New Firm Name")
-        ccms_office = OfficeStruct.new(1, "6D456C")
+        ccms_firm = firm_struct.new(1, "New Firm Name")
+        ccms_office = office_struct.new(1, "6D456C")
         existing_firm = create(
           :firm,
           ccms_id: ccms_firm.id,
@@ -210,10 +210,10 @@ RSpec.describe PDA::ProviderDetailsCreator do
 
     context "when another provider has the same firm, but different offices" do
       it "only adds offices to the correct provider" do
-        ccms_firm = FirmStruct.new(1, "New Firm Name")
-        ccms_office1 = OfficeStruct.new(1, "6D456C")
-        ccms_office2 = OfficeStruct.new(2, "4C880Q")
-        ccms_office3 = OfficeStruct.new(3, "9R678Y")
+        ccms_firm = firm_struct.new(1, "New Firm Name")
+        ccms_office1 = office_struct.new(1, "6D456C")
+        ccms_office2 = office_struct.new(2, "4C880Q")
+        ccms_office3 = office_struct.new(3, "9R678Y")
         provider = create(:provider, username: "test-user")
         other_provider = create(:provider, username: "other-user")
         stub_provider_details_retriever(
@@ -269,6 +269,6 @@ RSpec.describe PDA::ProviderDetailsCreator do
   end
 
   def api_response(firm:, offices:, contact_id:)
-    ProviderDetailsStruct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
+    provider_details_struct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
   end
 end
