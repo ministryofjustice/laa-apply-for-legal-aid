@@ -59,6 +59,7 @@
 }
 
 .govuk-link-right {
+  @extend %govuk-body-m;
   float: right;
 }
 
