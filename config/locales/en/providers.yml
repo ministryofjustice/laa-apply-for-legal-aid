@@ -1323,6 +1323,9 @@ en:
       show:
         heading: Merits report
         client_details_heading: Client details
+        previous_legal_aid: Previous Legal Aid
+        has_applied_before: Has your client applied for civil legal aid before?
+        previous_application_reference: Previous CCMS reference number
         applying_for: What you’re applying for
         delegated_functions: Delegated functions
         emergency_cost_limit: Emergency cost limit
