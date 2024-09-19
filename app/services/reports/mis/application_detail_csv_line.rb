@@ -165,6 +165,12 @@ module Reports
           "Has partner?",
           "Contrary interest?",
           "Partner DWP challenge?",
+          "Family linked?",
+          "Family link lead?",
+          "Number of family links",
+          "Legal Linked?",
+          "Legal link lead?",
+          "Number of legal links",
         ]
       end
 
@@ -198,6 +204,7 @@ module Reports
         hmrc_data
         banking_data
         partner
+        linked_applications
         sanitise
       end
 
@@ -410,6 +417,25 @@ module Reports
         if laa.applicant_has_partner?
           @line << yesno(!laa.applicant_has_partner_with_no_contrary_interest? || nil)
           @line << yesno(laa&.partner&.shared_benefit_with_applicant? || laa&.applicant&.shared_benefit_with_partner? || nil)
+        else
+          @line << nil
+          @line << nil
+        end
+      end
+
+      def linked_applications
+        @line << yesno(laa.family_linked?)
+        if laa.family_linked?
+          @line << laa.family_linked_lead_or_associated
+          @line << laa.family_linked_applications_count
+        else
+          @line << nil
+          @line << nil
+        end
+        @line << yesno(laa.legal_linked?)
+        if laa.legal_linked?
+          @line << laa.legal_linked_lead_or_associated
+          @line << laa.legal_linked_applications_count
         else
           @line << nil
           @line << nil
