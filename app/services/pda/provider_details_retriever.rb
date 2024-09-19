@@ -42,7 +42,7 @@ module PDA
   private
 
     def url
-      @url ||= "#{Rails.configuration.x.pda.url}/#{encoded_uri}/provider-offices"
+      @url ||= "#{Rails.configuration.x.pda.url}/provider-user/#{encoded_uri}/provider-offices"
     end
 
     def encoded_uri

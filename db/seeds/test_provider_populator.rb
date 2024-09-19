@@ -7,7 +7,7 @@ class TestProviderPopulator
     "Test3 & Co." => [825, %w[3T823E:9 2T825E:10 3T825E:11]],
     "Firm1 & Co." => [805, %w[1F805I:12 2F805I:13 3F805I:14 4F805I:15]],
     "Firm2 & Co." => [806, %w[2F805I:16 3F805I:17 4F805I:18]],
-    "David Gray LLP" => [19_148, ["0B721W:137570"]],
+    "David Gray LLP" => [19_148, %w[0X395U:137570 2N078D:180736]],
     "Test firm for portal login" => [807, %w[9F805X:21 3X805Z:22]],
     "Ahern & Co." => [808, %w[9F808X:21 3X808Z:22]],
     "Sugarman & daughters" => [810, %w[6F810X:25 6X810Z:26]],

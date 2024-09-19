@@ -69,7 +69,7 @@ Rails.application.configure do
   config.x.provider_details.url = "http://dummy-provider-details-api/"
 
   # Test url for provider details api
-  config.x.pda.url = "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk/provider-user"
+  config.x.pda.url = "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]

@@ -11,6 +11,8 @@ module Providers
       @form = Providers::OfficeForm.new(form_params)
 
       if @form.save
+        # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
+        ProviderContractDetailsWorker.perform_async(Office.find(form_params[:selected_office_id]).code)
         redirect_to providers_legal_aid_applications_path
       else
         render :show
