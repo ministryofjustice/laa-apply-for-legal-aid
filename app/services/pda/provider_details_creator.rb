@@ -38,7 +38,7 @@ module PDA
     end
 
     def offices
-      provider_details.offices.map do |ccms_office|
+      provider_details.firm_offices.map do |ccms_office|
         Office.find_or_initialize_by(ccms_id: ccms_office.id) do |office|
           office.code = ccms_office.code
         end

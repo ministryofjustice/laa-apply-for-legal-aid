@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe PDA::ProviderDetailsCreator do
   let(:firm_struct) { Struct.new(:id, :name) }
   let(:office_struct) { Struct.new(:id, :code) }
-  let(:provider_details_struct) { Struct.new(:firm_id, :contact_id, :firm_name, :offices) }
+  let(:provider_details_struct) { Struct.new(:firm_id, :contact_id, :firm_name, :firm_offices) }
 
   describe ".call" do
     context "when the firm does not exist" do
@@ -14,7 +14,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office],
+          firm_offices: [ccms_office],
         )
 
         described_class.call(provider)
@@ -33,7 +33,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office1, ccms_office2],
+          firm_offices: [ccms_office1, ccms_office2],
         )
 
         described_class.call(provider)
@@ -60,7 +60,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office],
+          firm_offices: [ccms_office],
         )
 
         described_class.call(provider)
@@ -85,7 +85,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office],
+          firm_offices: [ccms_office],
         )
 
         described_class.call(provider)
@@ -111,7 +111,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office],
+          firm_offices: [ccms_office],
         )
 
         described_class.call(provider)
@@ -139,7 +139,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office],
+          firm_offices: [ccms_office],
         )
 
         described_class.call(provider)
@@ -166,7 +166,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office1, ccms_office2],
+          firm_offices: [ccms_office1, ccms_office2],
         )
 
         described_class.call(provider)
@@ -199,7 +199,7 @@ RSpec.describe PDA::ProviderDetailsCreator do
         stub_provider_details_retriever(
           provider:,
           firm: ccms_firm,
-          offices: [ccms_office],
+          firm_offices: [ccms_office],
         )
 
         described_class.call(provider)
@@ -220,13 +220,13 @@ RSpec.describe PDA::ProviderDetailsCreator do
           provider:,
           contact_id: 105,
           firm: ccms_firm,
-          offices: [ccms_office1, ccms_office2],
+          firm_offices: [ccms_office1, ccms_office2],
         )
         stub_provider_details_retriever(
           provider: other_provider,
           contact_id: 106,
           firm: ccms_firm,
-          offices: [ccms_office2, ccms_office3],
+          firm_offices: [ccms_office2, ccms_office3],
         )
 
         described_class.call(provider)
@@ -261,14 +261,14 @@ RSpec.describe PDA::ProviderDetailsCreator do
     end
   end
 
-  def stub_provider_details_retriever(provider:, firm:, offices:, contact_id: 104)
+  def stub_provider_details_retriever(provider:, firm:, firm_offices:, contact_id: 104)
     allow(PDA::ProviderDetailsRetriever)
       .to receive(:call)
       .with(provider.username)
-      .and_return(api_response(firm:, offices:, contact_id:))
+      .and_return(api_response(firm:, firm_offices:, contact_id:))
   end
 
-  def api_response(firm:, offices:, contact_id:)
-    provider_details_struct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
+  def api_response(firm:, firm_offices:, contact_id:)
+    provider_details_struct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, firm_offices:)
   end
 end
