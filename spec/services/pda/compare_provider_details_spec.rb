@@ -1,4 +1,5 @@
 require "rails_helper"
+require_relative "provider_details_request_stubs"
 
 RSpec.describe PDA::CompareProviderDetails do
   describe ".call" do
@@ -14,13 +15,13 @@ RSpec.describe PDA::CompareProviderDetails do
     let(:ccms_firm_id) { 99_999 }
     let(:firm_name) { "Test firm" }
 
-    let(:provider) { create(:provider, contact_id: 494_000) }
+    let(:provider) { create(:provider, username: "test-user", contact_id: 494_000) }
     let(:contact_id) { 494_000 }
 
     let(:offices) do
       [
-        create(:office, ccms_id: 111_111, code: "0A000B"),
-        create(:office, ccms_id: 222_222, code: "1A111B"),
+        create(:office, ccms_id: 111_111, code: "1A111B"),
+        create(:office, ccms_id: 222_222, code: "2A222B"),
       ]
     end
 
@@ -93,7 +94,7 @@ RSpec.describe PDA::CompareProviderDetails do
           call
           expect(Rails.logger)
             .to have_received(:info)
-            .with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"111111 0A000B\", \"222222 1A111B\"] does not match [\"333333 2A222B\"]")
+            .with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"111111 1A111B\", \"222222 2A222B\"] does not match [\"333333 2A222B\"]")
         end
       end
 
@@ -106,7 +107,7 @@ RSpec.describe PDA::CompareProviderDetails do
           call
           expect(Rails.logger)
             .to have_received(:info)
-            .with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"111111 0A000B\", \"222222 1A111B\"] does not match [\"111111 0A000B\"]")
+            .with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"111111 1A111B\", \"222222 2A222B\"] does not match [\"111111 1A111B\"]")
         end
       end
 
@@ -121,7 +122,7 @@ RSpec.describe PDA::CompareProviderDetails do
           call
           expect(Rails.logger)
             .to have_received(:info)
-            .with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"111111 0A000B\", \"222222 1A111B\"] does not match [\"111111 0A000B\", \"222222 1A111B\", \"333333 2A222B\"]")
+            .with("PDA::CompareProviderDetails:: Provider #{provider.id} [\"111111 1A111B\", \"222222 2A222B\"] does not match [\"111111 1A111B\", \"222222 2A222B\", \"333333 2A222B\"]")
         end
       end
     end
@@ -152,85 +153,8 @@ RSpec.describe PDA::CompareProviderDetails do
         call
         expect(Rails.logger)
           .to have_received(:info)
-          .with("PDA::CompareProviderDetails:: User #{provider.id} PDA::ProviderDetailsRetriever::ApiError")
+          .with(/PDA::CompareProviderDetails:: User #{provider.id} API Call Failed/)
       end
     end
-  end
-
-  def stub_provider_offices
-    stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-user/.*/provider-offices})
-      .to_return(
-        status: 200,
-        body: provider_offices_json,
-        headers: { "Content-Type" => "application/json; charset=utf-8" },
-      )
-  end
-
-  def provider_offices_json
-    {
-      firm: {
-        ccmsFirmId: 99_999,
-        firmId: 1639,
-        firmName: "Test firm",
-        firmNumber: "1639",
-      },
-      officeCodes: [
-        {
-          ccmsFirmOfficeId: 111_111,
-          firmOfficeCode: "0A000B",
-        },
-        {
-          ccmsFirmOfficeId: 222_222,
-          firmOfficeCode: "1A111B",
-        },
-      ],
-      user: {
-        ccmsContactId: 494_000,
-      },
-    }.to_json
-  end
-
-  def stub_provider_firm_offices
-    stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-firms/.*/provider-offices})
-    .to_return(
-      status: 200,
-      body: provider_firm_offices_json,
-      headers: { "Content-Type" => "application/json; charset=utf-8" },
-    )
-  end
-
-  def provider_firm_offices_json
-    {
-      firm: {
-        ccmsFirmId: 99_999,
-        firmId: 1639,
-        firmName: "Test firm",
-        firmNumber: "1639",
-      },
-      offices: [
-        {
-          ccmsFirmOfficeId: 111_111,
-          firmOfficeCode: "0A000B",
-        },
-        {
-          ccmsFirmOfficeId: 222_222,
-          firmOfficeCode: "1A111B",
-        },
-      ],
-    }.to_json
-  end
-
-  def stub_provider_details_retriever_record_not_found(provider:)
-    allow(PDA::ProviderDetailsRetriever)
-      .to receive(:call)
-      .with(provider.username)
-      .and_raise(PDA::ProviderDetailsRetriever::ApiRecordNotFoundError)
-  end
-
-  def stub_provider_details_retriever_api_error(provider:)
-    allow(PDA::ProviderDetailsRetriever)
-      .to receive(:call)
-      .with(provider.username)
-      .and_raise(PDA::ProviderDetailsRetriever::ApiError)
   end
 end
