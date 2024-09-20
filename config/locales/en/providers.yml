@@ -5,7 +5,7 @@ en:
       show:
         title: Has your client applied for civil legal aid before?
         heading: Has your client applied for civil legal aid before?
-        type_of_work_text: By this, we mean certificated and licensed work. You don't need to tell us about controlled work and family mediation. 
+        type_of_work_text: By this, we mean certificated and licensed work. You do not need to tell us about controlled work and family mediation. 
         previous_records_text: We'll find any previous records to make sure any contributions we calculate are correct.
         ccms_ref_num: Give the CCMS reference number for any previous application
         ccms_ref_hint: For example, 300001234567. This is on any letter from the LAA (Legal aid agency).
