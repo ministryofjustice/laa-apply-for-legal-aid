@@ -218,6 +218,160 @@ RSpec.describe ApplicationDigest do
           end
         end
       end
+
+      describe "linked application fields" do
+        context "when the application has no linked applications" do
+          it "returns the expected data" do
+            application_digest
+
+            expect(digest.family_linked).to be false
+            expect(digest.family_linked_lead_or_associated).to be_nil
+            expect(digest.number_of_family_linked_applications).to eq 0
+            expect(digest.legal_linked).to be false
+            expect(digest.legal_linked_lead_or_associated).to be_nil
+            expect(digest.number_of_legal_linked_applications).to eq 0
+          end
+        end
+
+        context "when the application is a lead family linked application" do
+          let(:linked_application) { create(:legal_aid_application) }
+
+          before do
+            LinkedApplication.create!(lead_application_id: laa.id, associated_application_id: linked_application.id, link_type_code: "FC_LEAD", confirm_link: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+
+            expect(digest.family_linked).to be true
+            expect(digest.family_linked_lead_or_associated).to eq "Lead"
+            expect(digest.number_of_family_linked_applications).to eq 1
+            expect(digest.legal_linked).to be false
+            expect(digest.legal_linked_lead_or_associated).to be_nil
+            expect(digest.number_of_legal_linked_applications).to eq 0
+          end
+        end
+
+        context "when the application is an associated family linked application" do
+          let(:linked_application) { create(:legal_aid_application) }
+
+          before do
+            LinkedApplication.create!(lead_application_id: linked_application.id, associated_application_id: laa.id, link_type_code: "FC_LEAD", confirm_link: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+
+            expect(digest.family_linked).to be true
+            expect(digest.family_linked_lead_or_associated).to eq "Associated"
+            expect(digest.number_of_family_linked_applications).to eq 1
+            expect(digest.legal_linked).to be false
+            expect(digest.legal_linked_lead_or_associated).to be_nil
+            expect(digest.number_of_legal_linked_applications).to eq 0
+          end
+        end
+
+        context "when the application is a lead legal linked application" do
+          let(:linked_application) { create(:legal_aid_application) }
+          let(:another_associated_application) { create(:legal_aid_application) }
+
+          before do
+            LinkedApplication.create!(lead_application_id: laa.id, associated_application_id: linked_application.id, link_type_code: "LEGAL", confirm_link: true)
+            LinkedApplication.create!(lead_application_id: laa.id, associated_application_id: another_associated_application.id, link_type_code: "LEGAL", confirm_link: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+
+            expect(digest.family_linked).to be false
+            expect(digest.family_linked_lead_or_associated).to be_nil
+            expect(digest.number_of_family_linked_applications).to eq 0
+            expect(digest.legal_linked).to be true
+            expect(digest.legal_linked_lead_or_associated).to eq "Lead"
+            expect(digest.number_of_legal_linked_applications).to eq 2
+          end
+        end
+
+        context "when the application is an associated legal linked application to a lead application with one other asociated application" do
+          let(:lead_application) { create(:legal_aid_application) }
+          let(:another_associated_application) { create(:legal_aid_application) }
+
+          before do
+            LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: laa.id, link_type_code: "LEGAL", confirm_link: true)
+            LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: another_associated_application.id, link_type_code: "LEGAL", confirm_link: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+
+            expect(digest.family_linked).to be false
+            expect(digest.family_linked_lead_or_associated).to be_nil
+            expect(digest.number_of_family_linked_applications).to eq 0
+            expect(digest.legal_linked).to be true
+            expect(digest.legal_linked_lead_or_associated).to eq "Associated"
+            expect(digest.number_of_legal_linked_applications).to eq 2
+          end
+        end
+
+        context "when the application is both a lead family linked application and a lead legal linked application" do
+          let(:family_linked_application) { create(:legal_aid_application) }
+          let(:legal_linked_application) { create(:legal_aid_application) }
+
+          before do
+            LinkedApplication.create!(lead_application_id: laa.id, associated_application_id: family_linked_application.id, link_type_code: "FC_LEAD", confirm_link: true)
+            LinkedApplication.create!(lead_application_id: laa.id, associated_application_id: legal_linked_application.id, link_type_code: "LEGAL", confirm_link: true)
+          end
+
+          it "returns the expected data" do
+            application_digest
+
+            expect(digest.family_linked).to be true
+            expect(digest.family_linked_lead_or_associated).to eq "Lead"
+            expect(digest.number_of_family_linked_applications).to eq 1
+            expect(digest.legal_linked).to be true
+            expect(digest.legal_linked_lead_or_associated).to eq "Lead"
+            expect(digest.number_of_legal_linked_applications).to eq 1
+          end
+        end
+
+        context "when the provider has started but not completed the linking process" do
+          context "when the provider has not selected the lead application to link to" do
+            before do
+              LinkedApplication.create!(associated_application_id: laa.id, link_type_code: "FC_LEAD")
+            end
+
+            it "returns the expected data" do
+              application_digest
+
+              expect(digest.family_linked).to be false
+              expect(digest.family_linked_lead_or_associated).to be_nil
+              expect(digest.number_of_family_linked_applications).to eq 0
+              expect(digest.legal_linked).to be false
+              expect(digest.legal_linked_lead_or_associated).to be_nil
+              expect(digest.number_of_legal_linked_applications).to eq 0
+            end
+
+            context "when the provider has not confirmed the link" do
+              let(:linked_application) { create(:legal_aid_application) }
+
+              before do
+                LinkedApplication.create!(lead_application_id: linked_application.id, associated_application_id: laa.id, link_type_code: "FC_LEAD")
+              end
+
+              it "returns the expected data" do
+                application_digest
+
+                expect(digest.family_linked).to be false
+                expect(digest.family_linked_lead_or_associated).to be_nil
+                expect(digest.number_of_family_linked_applications).to eq 0
+                expect(digest.legal_linked).to be false
+                expect(digest.legal_linked_lead_or_associated).to be_nil
+                expect(digest.number_of_legal_linked_applications).to eq 0
+              end
+            end
+          end
+        end
+      end
     end
 
     context "when no digest record exists for this application" do

@@ -11,6 +11,8 @@ class ApplicationDigest < ApplicationRecord
     contrary_interest
     partner_dwp_challenge
     non_means_tested
+    family_linked
+    legal_linked
   ].freeze
 
   class << self
@@ -54,6 +56,12 @@ class ApplicationDigest < ApplicationRecord
         partner_dwp_challenge: laa&.partner&.shared_benefit_with_applicant? || laa.applicant.shared_benefit_with_partner,
         applicant_age: applicant_age(laa),
         non_means_tested: laa.non_means_tested?,
+        family_linked: laa.family_linked?,
+        family_linked_lead_or_associated: laa.family_linked_lead_or_associated,
+        number_of_family_linked_applications: laa.family_linked_applications_count,
+        legal_linked: laa.legal_linked?,
+        legal_linked_lead_or_associated: laa.legal_linked_lead_or_associated,
+        number_of_legal_linked_applications: laa.legal_linked_applications_count,
       }
     end
 

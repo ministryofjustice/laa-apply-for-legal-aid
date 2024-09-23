@@ -459,13 +459,13 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def family_linked_lead_or_associated
-    return "" unless family_linked?
+    return nil unless family_linked?
 
     @family_linked_lead_or_associated ||= family_linked_associated_application? ? "Associated" : "Lead"
   end
 
   def legal_linked_lead_or_associated
-    return "" unless legal_linked?
+    return nil unless legal_linked?
 
     @legal_linked_lead_or_associated ||= legal_linked_associated_application? ? "Associated" : "Lead"
   end
