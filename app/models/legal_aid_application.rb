@@ -461,13 +461,13 @@ class LegalAidApplication < ApplicationRecord
   def family_linked_lead_or_associated
     return nil unless family_linked?
 
-    @family_linked_lead_or_associated ||= family_linked_associated_application? ? "Associated" : "Lead"
+    family_linked_associated_application? ? "Associated" : "Lead"
   end
 
   def legal_linked_lead_or_associated
     return nil unless legal_linked?
 
-    @legal_linked_lead_or_associated ||= legal_linked_associated_application? ? "Associated" : "Lead"
+    legal_linked_associated_application? ? "Associated" : "Lead"
   end
 
   def family_linked_applications_count
@@ -476,30 +476,6 @@ class LegalAidApplication < ApplicationRecord
 
   def legal_linked_applications_count
     @legal_linked_applications_count ||= legal_linked_associated_application? ? associated_legal_linked_count : lead_legal_linked_count
-  end
-
-  def associated_family_linked_count
-    return 0 unless lead_application
-
-    lead_application.associated_linked_applications.where(link_type_code: "FC_LEAD", confirm_link: true).count
-  end
-
-  def lead_family_linked_count
-    return 0 unless associated_applications
-
-    associated_linked_applications.where(lead_application: id, link_type_code: "FC_LEAD", confirm_link: true).count
-  end
-
-  def associated_legal_linked_count
-    return 0 unless lead_application
-
-    lead_application.associated_linked_applications&.where(link_type_code: "LEGAL", confirm_link: true)&.count
-  end
-
-  def lead_legal_linked_count
-    return 0 unless associated_applications
-
-    associated_linked_applications.where(lead_application: id, link_type_code: "LEGAL", confirm_link: true).count
   end
 
   def find_or_create_ccms_submission
@@ -717,5 +693,29 @@ private
     required_document_categories.each do |category|
       errors.add(:required_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
     end
+  end
+
+  def associated_family_linked_count
+    return 0 unless lead_application
+
+    lead_application.associated_linked_applications.where(link_type_code: "FC_LEAD", confirm_link: true).count
+  end
+
+  def lead_family_linked_count
+    return 0 unless associated_applications
+
+    associated_linked_applications.where(lead_application: id, link_type_code: "FC_LEAD", confirm_link: true).count
+  end
+
+  def associated_legal_linked_count
+    return 0 unless lead_application
+
+    lead_application.associated_linked_applications&.where(link_type_code: "LEGAL", confirm_link: true)&.count
+  end
+
+  def lead_legal_linked_count
+    return 0 unless associated_applications
+
+    associated_linked_applications.where(lead_application: id, link_type_code: "LEGAL", confirm_link: true).count
   end
 end

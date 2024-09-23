@@ -938,6 +938,154 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#legal_linked_associated_application?" do
+    subject(:legal_linked_associated_application?) { legal_aid_application.legal_linked_associated_application? }
+
+    let(:lead_application) { create(:legal_aid_application) }
+
+    context "when the application does not have a lead application" do
+      it { is_expected.to be false }
+    end
+
+    context "when the application has been family linked" do
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD") }
+
+      it { is_expected.to be false }
+    end
+
+    context "when the application has been legal linked" do
+      before { create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "LEGAL") }
+
+      it { is_expected.to be true }
+    end
+  end
+
+  describe "#family_linked_lead_or_associated" do
+    subject(:family_linked_lead_or_associated) { legal_aid_application.family_linked_lead_or_associated }
+
+    let(:linked_application) { create(:legal_aid_application) }
+
+    context "when the application does not have a lead application" do
+      it { is_expected.to be_nil }
+    end
+
+    context "when the application is a lead legal_linked application" do
+      before { create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "LEGAL", confirm_link: true) }
+
+      it { is_expected.to be_nil }
+    end
+
+    context "when the application is a lead family_linked application" do
+      before { create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "FC_LEAD", confirm_link: true) }
+
+      it { is_expected.to eq "Lead" }
+    end
+
+    context "when the application is an associated family_linked application" do
+      before { create(:linked_application, lead_application: linked_application, associated_application: legal_aid_application, link_type_code: "FC_LEAD", confirm_link: true) }
+
+      it { is_expected.to eq "Associated" }
+    end
+  end
+
+  describe "#legal_linked_lead_or_associated" do
+    subject(:legal_linked_lead_or_associated) { legal_aid_application.legal_linked_lead_or_associated }
+
+    let(:linked_application) { create(:legal_aid_application) }
+
+    context "when the application does not have a lead application" do
+      it { is_expected.to be_nil }
+    end
+
+    context "when the application is a lead family_linked application" do
+      before { create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "FC_LEAD", confirm_link: true) }
+
+      it { is_expected.to be_nil }
+    end
+
+    context "when the application is a lead legal_linked application" do
+      before { create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "LEGAL", confirm_link: true) }
+
+      it { is_expected.to eq "Lead" }
+    end
+
+    context "when the application is an associated legal_linked application" do
+      before { create(:linked_application, lead_application: linked_application, associated_application: legal_aid_application, link_type_code: "LEGAL", confirm_link: true) }
+
+      it { is_expected.to eq "Associated" }
+    end
+  end
+
+  describe "#family_linked_applications_count" do
+    subject(:family_linked_applications_count) { legal_aid_application.family_linked_applications_count }
+
+    let(:linked_application) { create(:legal_aid_application) }
+    let(:another_linked_application) { create(:legal_aid_application) }
+
+    context "when the application is not linked" do
+      it { is_expected.to be 0 }
+    end
+
+    context "when the application has been legal linked" do
+      before { create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "LEGAL", confirm_link: true) }
+
+      it { is_expected.to eq 0 }
+    end
+
+    context "when the application is a lead application with two associated family linked applications" do
+      before do
+        create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "FC_LEAD", confirm_link: true)
+        create(:linked_application, lead_application: legal_aid_application, associated_application: another_linked_application, link_type_code: "FC_LEAD", confirm_link: true)
+      end
+
+      it { is_expected.to eq 2 }
+    end
+
+    context "when the application is associated to a lead application with one other family linked application" do
+      before do
+        create(:linked_application, lead_application: linked_application, associated_application: legal_aid_application, link_type_code: "FC_LEAD", confirm_link: true)
+        create(:linked_application, lead_application: linked_application, associated_application: another_linked_application, link_type_code: "FC_LEAD", confirm_link: true)
+      end
+
+      it { is_expected.to eq 2 }
+    end
+  end
+
+  describe "#legal_linked_applications_count" do
+    subject(:legal_linked_applications_count) { legal_aid_application.legal_linked_applications_count }
+
+    let(:linked_application) { create(:legal_aid_application) }
+    let(:another_linked_application) { create(:legal_aid_application) }
+
+    context "when the application is not linked" do
+      it { is_expected.to be 0 }
+    end
+
+    context "when the application has been family linked" do
+      before { create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "FC_LEAD", confirm_link: true) }
+
+      it { is_expected.to eq 0 }
+    end
+
+    context "when the application is a lead application with two associated legal linked applications" do
+      before do
+        create(:linked_application, lead_application: legal_aid_application, associated_application: linked_application, link_type_code: "LEGAL", confirm_link: true)
+        create(:linked_application, lead_application: legal_aid_application, associated_application: another_linked_application, link_type_code: "LEGAL", confirm_link: true)
+      end
+
+      it { is_expected.to eq 2 }
+    end
+
+    context "when the application is associated to a lead application with one other legal linked application" do
+      before do
+        create(:linked_application, lead_application: linked_application, associated_application: legal_aid_application, link_type_code: "LEGAL", confirm_link: true)
+        create(:linked_application, lead_application: linked_application, associated_application: another_linked_application, link_type_code: "LEGAL", confirm_link: true)
+      end
+
+      it { is_expected.to eq 2 }
+    end
+  end
+
   describe "#bank_transactions" do
     subject(:bank_transactions) { legal_aid_application.bank_transactions }
 
