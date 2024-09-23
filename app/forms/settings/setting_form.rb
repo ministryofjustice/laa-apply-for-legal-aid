@@ -8,7 +8,8 @@ module Settings
                   :enable_ccms_submission,
                   :linked_applications,
                   :collect_hmrc_data,
-                  :special_childrens_act
+                  :special_childrens_act,
+                  :means_test_review_a
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -17,6 +18,7 @@ module Settings
               :linked_applications,
               :collect_hmrc_data,
               :special_childrens_act,
+              :means_test_review_a,
               presence: true
   end
 end
