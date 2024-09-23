@@ -43,7 +43,7 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create(:dwp_override, legal_aid_application:) }
+          before { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
           context "when passported, no contrib, no_restrictions" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
@@ -133,7 +133,7 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create(:dwp_override, legal_aid_application:) }
+          before { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
           context "and the application is passported" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true) }
@@ -297,10 +297,20 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create(:dwp_override, legal_aid_application:) }
+          before { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
           it "adds the dwp review to the cfe result reasons" do
             expect(review_reasons_result).to eq override_reasons
+          end
+        end
+
+        context "with inconsistent dwp override values" do
+          # This replicates a production application that presented caseworkers with a dilemma,
+          # we were unable to replicate the steps taken to get to this state
+          before { create(:dwp_override, legal_aid_application:, has_evidence_of_benefit: nil, passporting_benefit: nil) }
+
+          it "does not add dwp_override to reason" do
+            expect(review_reasons_result).not_to include(:dwp_override)
           end
         end
 
