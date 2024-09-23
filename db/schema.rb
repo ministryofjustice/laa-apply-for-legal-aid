@@ -176,6 +176,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_23_104047) do
     t.boolean "partner_dwp_challenge"
     t.integer "applicant_age"
     t.boolean "non_means_tested"
+    t.boolean "family_linked"
+    t.string "family_linked_lead_or_associated"
+    t.integer "number_of_family_linked_applications"
+    t.boolean "legal_linked"
+    t.string "legal_linked_lead_or_associated"
+    t.integer "number_of_legal_linked_applications"
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
