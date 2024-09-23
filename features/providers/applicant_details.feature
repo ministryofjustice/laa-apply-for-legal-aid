@@ -7,6 +7,9 @@ Feature: Applicant details
     Then I enter last name at birth 'Smith'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
@@ -143,6 +146,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
@@ -209,6 +215,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+     Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
@@ -226,6 +235,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+     Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
@@ -311,6 +323,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '10-1-1980'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
@@ -370,6 +385,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '10-12-1961'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
@@ -438,6 +456,9 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
     When I choose "My client's UK home address"
     And I click "Save and continue"
