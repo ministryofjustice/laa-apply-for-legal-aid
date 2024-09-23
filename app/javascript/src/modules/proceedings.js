@@ -109,6 +109,7 @@ function showResults (results, inputText) {
   if (results.length > 0) {
     deselectPreviousProceedingItem()
     const codes = results.map(obj => obj.ccms_code)
+    let shown = 0
     let proceedingsContainer = document.querySelector('.govuk-radios') // with MP flag on
     if (proceedingsContainer == null) { proceedingsContainer = document.querySelector('#proceeding-list') } // with MP flag off
     codes.forEach((code, idx) => {
@@ -119,12 +120,9 @@ function showResults (results, inputText) {
       // proceedings is turned off, then codes will only contain those proceeding types
       // that are not filtered out by the LegalFramework::ProceedingTypes::All service,
       // so we just ignore them here if they aren't in the list
-      if (element == null) {
-        show(document.querySelector('.no-proceeding-items'))
-        ariaText = `No results found matching ${inputText}`
-        return
-      }
+      if (element == null) { return }
 
+      shown++ // increment the count if this code is actually shown to the user
       // We want to highlight anything in the label or hint text that
       // matches the user's search criteria
       const label = element.querySelector('label')
@@ -153,11 +151,18 @@ function showResults (results, inputText) {
       proceedingsContainer.insertBefore(element, proceedingsContainer.children[idx])
       // show hidden proceedings item
       show(element)
-      hide(document.querySelector('.no-proceeding-items'))
     })
-    // the below alerts screen reader users that results appeared on the page
-    const pluralizedMatches = pluralize(codes.length, 'match', 'matches')
-    ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move to options`
+    // once we have looped over all returned codes, check if any were shown to the user
+    // and set the appropriate ariaText and show/hide the no-proceedings found element
+    if (shown > 0) {
+      // the below alerts screen reader users that results appeared on the page
+      const pluralizedMatches = pluralize(codes.length, 'match', 'matches')
+      ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move to options`
+      hide(document.querySelector('.no-proceeding-items'))
+    } else {
+      show(document.querySelector('.no-proceeding-items'))
+      ariaText = `No results found matching ${inputText}`
+    }
   } else {
     show(document.querySelector('.no-proceeding-items'))
     ariaText = `No results found matching ${inputText}`
