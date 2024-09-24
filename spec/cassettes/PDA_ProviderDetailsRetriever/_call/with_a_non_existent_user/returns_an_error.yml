@@ -12,18 +12,16 @@ http_interactions:
       X-Authorization:
       - "<PDA_AUTH_KEY>"
       User-Agent:
-      - Faraday v2.10.1
+      - Faraday v2.12.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
-      code: 200
+      code: 204
       message: ''
     headers:
       Date:
-      - Wed, 21 Aug 2024 08:30:58 GMT
-      Content-Length:
-      - '0'
+      - Fri, 20 Sep 2024 11:00:30 GMT
       Connection:
       - keep-alive
       Vary:
@@ -47,5 +45,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Wed, 21 Aug 2024 08:30:58 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Fri, 20 Sep 2024 11:00:30 GMT
+recorded_with: VCR 6.3.1

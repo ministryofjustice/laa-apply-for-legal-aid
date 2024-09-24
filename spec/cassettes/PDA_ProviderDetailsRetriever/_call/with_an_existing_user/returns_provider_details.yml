@@ -12,7 +12,7 @@ http_interactions:
       X-Authorization:
       - "<PDA_AUTH_KEY>"
       User-Agent:
-      - Faraday v2.10.1
+      - Faraday v2.12.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -21,7 +21,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 21 Aug 2024 08:30:58 GMT
+      - Fri, 20 Sep 2024 11:00:30 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -48,8 +48,65 @@ http_interactions:
       - DENY
     body:
       encoding: UTF-8
-      string: '{"firm":{"firmId":3959183,"firmNumber":"50736","ccmsFirmId":0,"firmName":"DT
+      string: '{"firm":{"firmId":3959183,"firmNumber":"50736","ccmsFirmId":10835831,"firmName":"DT
         SCRIPT PROVIDER 1"},"user":{"userId":454031,"ccmsContactId":0,"userLogin":"DT_SCRIPT_USER1","name":"Dts
-        User1"},"officeCodes":[{"firmOfficeCode":"2Q242F","ccmsProviderOfficeId":34406595}]}'
-  recorded_at: Wed, 21 Aug 2024 08:30:58 GMT
-recorded_with: VCR 6.2.0
+        User1","emailAddress":"deepak.tanna@digital.justice.gov.uk","portalStatus":"Active"},"officeCodes":[{"firmOfficeId":145434,"ccmsFirmOfficeId":34406595,"firmOfficeCode":"2Q242F","officeName":"2Q242F,1
+        Skyscraper","officeCodeAlt":"DT Script Office 1"}]}'
+  recorded_at: Fri, 20 Sep 2024 11:00:30 GMT
+- request:
+    method: get
+    uri: https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk/provider-firms/3959183/provider-offices
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      X-Authorization:
+      - "<PDA_AUTH_KEY>"
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Fri, 20 Sep 2024 11:00:30 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Access-Control-Request-Headers
+      - Access-Control-Request-Method
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - DENY
+    body:
+      encoding: UTF-8
+      string: '{"firm":{"firmId":3959183,"firmNumber":"50736","ccmsFirmId":10835831,"firmName":"DT
+        SCRIPT PROVIDER 1"},"offices":[{"firmOfficeId":145434,"ccmsFirmOfficeId":34406595,"firmOfficeCode":"2Q242F","officeName":"2Q242F,1
+        Skyscraper","officeCodeAlt":"DT Script Office 1","addressLine1":"1 Skyscraper","addressLine2":"1
+        Some Road","addressLine3":null,"addressLine4":null,"city":"Metropolis","county":null,"postCode":"LE1
+        1AA","dxCentre":null,"dxNumber":null,"telephoneAreaCode":"01162","telephoneNumber":"555124","faxAreaCode":null,"faxNumber":null,"emailAddress":"me@email.uk","vatRegistrationNumber":null,"type":"Legal
+        Services Provider","headOffice":"N/A","creationDate":"2023-11-10","lscRegion":"Midlands","lscBidZone":"Leicester","lscAreaOffice":"Nottingham","cjsForceName":"Leicestershire","localAuthority":"City
+        of Leicester","policeStationAreaName":"Leicester","dutySolicitorAreaName":"Leicester"}]}'
+  recorded_at: Fri, 20 Sep 2024 11:00:30 GMT
+recorded_with: VCR 6.3.1

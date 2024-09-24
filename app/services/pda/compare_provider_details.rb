@@ -31,10 +31,10 @@ module PDA
       if match?
         log_message("Provider #{@provider.id} results match.")
       else
-        log_message("Provider #{@provider.id} #{result.firm_id} does not match firm.ccms_id #{firm.ccms_id}") unless firm_ccms_id_matches?
-        log_message("Provider #{@provider.id} #{result.firm_name} does not match firm.name #{firm.name}") unless firm_name_matches?
+        log_message("Provider #{@provider.id} #{result.firm_id} does not match firm.ccms_id #{old_firm.ccms_id}") unless firm_ccms_id_matches?
+        log_message("Provider #{@provider.id} \"#{result.firm_name}\" does not match firm.name \"#{old_firm.name}\"") unless firm_name_matches?
         log_message("Provider #{@provider.id} #{result.contact_id} does not match provider.contact_id #{@provider.contact_id}") unless contact_id_matches?
-        log_message("Provider #{@provider.id} #{pda_office_details} does not match #{provider_office_details}") unless offices_match?
+        log_message("Provider #{@provider.id} #{new_office_details} does not match #{old_office_details}") unless offices_match?
       end
     end
 
@@ -51,28 +51,12 @@ module PDA
       ].all?
     end
 
-    def firm
-      @firm ||= @provider.firm
-    end
-
-    def provider_offices
-      @provider_offices ||= @provider.offices
-    end
-
-    def provider_office_details
-      @provider_office_details ||= provider_offices.map { |office| "#{office.ccms_id} #{office.code}" }.to_s
-    end
-
-    def pda_office_details
-      @pda_office_details ||= result.offices.map { |office| "#{office.id} #{office.code}" }.to_s
-    end
-
     def firm_ccms_id_matches?
-      @firm_ccms_id_matches ||= firm.ccms_id.eql?(result.firm_id.to_s)
+      @firm_ccms_id_matches ||= old_firm.ccms_id.eql?(result.firm_id.to_s)
     end
 
     def firm_name_matches?
-      @firm_name_matches ||= firm.name.eql?(result.firm_name)
+      @firm_name_matches ||= old_firm.name.eql?(result.firm_name)
     end
 
     def contact_id_matches?
@@ -80,15 +64,35 @@ module PDA
     end
 
     def offices_match?
-      return false if provider_offices.count != result.offices.count
+      sorted_new_provider_offices == sorted_old_provider_offices
+    end
 
-      result.offices.each do |office|
-        provider_office = provider_offices.find_by!(ccms_id: office.id)
-        return false if provider_office.code != office.code
-      end
-      true
-    rescue ActiveRecord::RecordNotFound
-      false
+    def old_firm
+      @old_firm ||= @provider.firm
+    end
+
+    def old_office_details
+      @old_office_details ||= old_provider_offices.map { |office| "#{office.ccms_id} #{office.code}" }.to_s
+    end
+
+    def sorted_old_provider_offices
+      @sorted_old_provider_offices ||= old_provider_offices.map { |o| [o.ccms_id.to_s, o.code.to_s] }.sort
+    end
+
+    def old_provider_offices
+      @old_provider_offices ||= @provider.offices
+    end
+
+    def new_office_details
+      @new_office_details ||= new_provider_offices.map { |office| "#{office.id} #{office.code}" }.to_s
+    end
+
+    def sorted_new_provider_offices
+      @sorted_new_provider_offices ||= new_provider_offices.map { |o| [o.id.to_s, o.code.to_s] }.sort
+    end
+
+    def new_provider_offices
+      @new_provider_offices ||= result.firm_offices
     end
   end
 end

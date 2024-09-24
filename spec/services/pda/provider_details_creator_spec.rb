@@ -1,92 +1,55 @@
 require "rails_helper"
+require_relative "provider_details_request_stubs"
 
 RSpec.describe PDA::ProviderDetailsCreator do
   let(:firm_struct) { Struct.new(:id, :name) }
   let(:office_struct) { Struct.new(:id, :code) }
-  let(:provider_details_struct) { Struct.new(:firm_id, :contact_id, :firm_name, :offices) }
+  let(:provider_details_struct) { Struct.new(:firm_id, :contact_id, :firm_name, :firm_offices) }
+
+  before do
+    stub_provider_offices
+    stub_other_provider_offices
+    stub_provider_firm_offices
+  end
 
   describe ".call" do
     context "when the firm does not exist" do
       it "creates the firm" do
-        ccms_firm = firm_struct.new(1, "Test Firm")
-        ccms_office = office_struct.new(1, "6D424Y")
         provider = create(:provider, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
 
         described_class.call(provider)
 
         expect(provider.firm).to have_attributes(
-          ccms_id: "1",
-          name: "Test Firm",
+          ccms_id: "99999",
+          name: "Test firm",
         )
       end
 
       it "creates the offices" do
-        ccms_firm = firm_struct.new(1, "Test Firm")
-        ccms_office1 = office_struct.new(1, "6D424Y")
-        ccms_office2 = office_struct.new(2, "4C880Q")
         provider = create(:provider, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office1, ccms_office2],
-        )
 
         described_class.call(provider)
 
         offices = provider.firm.offices
         expect(offices).to contain_exactly(
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office1.id.to_s,
-            code: ccms_office1.code,
-          ),
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office2.id.to_s,
-            code: ccms_office2.code,
-          ),
+          have_attributes(class: Office, ccms_id: "111111", code: "1A111B"),
+          have_attributes(class: Office, ccms_id: "222222", code: "2A222B"),
         )
       end
 
       it "updates the provider" do
-        ccms_firm = firm_struct.new(1, "Test Firm")
-        ccms_office = office_struct.new(1, "6D424Y")
         provider = create(:provider, name: nil, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
 
         described_class.call(provider)
 
-        expect(provider).to have_attributes(
-          name: "",
-          contact_id: 104,
-        )
+        expect(provider).to have_attributes(name: "", contact_id: 494_000)
       end
     end
 
-    context "when the provider's office is not returned from the API" do
+    context "when the provider's selected office is not returned from the API" do
       it "clears the selected office" do
-        ccms_firm = firm_struct.new(1, "Test Firm")
-        ccms_office = office_struct.new(1, "6D424Y")
         office = create(:office, code: "6D456C")
-        provider = create(
-          :provider,
-          username: "test-user",
-          selected_office: office,
-        )
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
+        provider = create(:provider, username: "test-user", selected_office: office)
 
         described_class.call(provider)
 
@@ -94,25 +57,10 @@ RSpec.describe PDA::ProviderDetailsCreator do
       end
     end
 
-    context "when the provider's office is returned from the API" do
+    context "when the provider's selected office is returned from the API" do
       it "does not clear the selected office" do
-        ccms_firm = firm_struct.new(1, "Test Firm")
-        ccms_office = office_struct.new(1, "6D456C")
-        office = create(
-          :office,
-          ccms_id: ccms_office.id,
-          code: ccms_office.code,
-        )
-        provider = create(
-          :provider,
-          username: "test-user",
-          selected_office: office,
-        )
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
+        office = create(:office, ccms_id: "111111", code: "1A111B")
+        provider = create(:provider, username: "test-user", selected_office: office)
 
         described_class.call(provider)
 
@@ -122,153 +70,64 @@ RSpec.describe PDA::ProviderDetailsCreator do
 
     context "when the firm already exists with one of the offices" do
       it "does not create the firm" do
-        ccms_firm = firm_struct.new(1, "Existing Firm")
-        ccms_office = office_struct.new(1, "6D456C")
-        existing_firm = create(
-          :firm,
-          ccms_id: ccms_firm.id,
-          name: "Existing Firm",
-        )
-        _existing_office = create(
-          :office,
-          firm: existing_firm,
-          ccms_id: ccms_office.id,
-          code: ccms_office.code,
-        )
+        existing_firm = create(:firm, ccms_id: "99999", name: "Test firm")
+
         provider = create(:provider, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
 
-        described_class.call(provider)
-
+        expect { described_class.call(provider) }.not_to change(Firm, :count)
         expect(provider.firm).to eq(existing_firm)
       end
 
       it "updates the firms offices" do
-        ccms_firm = firm_struct.new(1, "Existing Firm")
-        ccms_office1 = office_struct.new(1, "6D456C")
-        ccms_office2 = office_struct.new(2, "4C880Q")
-        existing_firm = create(
-          :firm,
-          ccms_id: ccms_firm.id,
-          name: "Existing Firm",
-        )
-        existing_office = create(
+        existing_firm = create(:firm, ccms_id: "99999", name: "Test firm")
+
+        _existing_office = create(
           :office,
           firm: existing_firm,
-          ccms_id: ccms_office1.id,
-          code: ccms_office1.code,
-        )
-        provider = create(:provider, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office1, ccms_office2],
+          ccms_id: "777777",
+          code: "5A555B",
         )
 
-        described_class.call(provider)
+        provider = create(:provider, username: "test-user")
+
+        expect { described_class.call(provider) }.to change(Office, :count).by(2)
 
         expect(existing_firm.offices).to contain_exactly(
-          existing_office,
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office2.id.to_s,
-            code: ccms_office2.code,
-          ),
+          have_attributes(class: Office, ccms_id: "777777", code: "5A555B"),
+          have_attributes(class: Office, ccms_id: "111111", code: "1A111B"),
+          have_attributes(class: Office, ccms_id: "222222", code: "2A222B"),
         )
       end
 
       it "updates the firm's name" do
-        ccms_firm = firm_struct.new(1, "New Firm Name")
-        ccms_office = office_struct.new(1, "6D456C")
-        existing_firm = create(
-          :firm,
-          ccms_id: ccms_firm.id,
-          name: "Old Firm Name",
-        )
-        _existing_office = create(
-          :office,
-          firm: existing_firm,
-          ccms_id: ccms_office.id,
-          code: ccms_office.code,
-        )
+        existing_firm = create(:firm, ccms_id: "99999", name: "Old firm name")
         provider = create(:provider, username: "test-user")
-        stub_provider_details_retriever(
-          provider:,
-          firm: ccms_firm,
-          offices: [ccms_office],
-        )
 
-        described_class.call(provider)
-
-        expect(existing_firm.reload.name).to eq("New Firm Name")
+        expect { described_class.call(provider) }
+          .to change { existing_firm.reload.name }
+            .from("Old firm name")
+            .to("Test firm")
       end
     end
 
     context "when another provider has the same firm, but different offices" do
-      it "only adds offices to the correct provider" do
-        ccms_firm = firm_struct.new(1, "New Firm Name")
-        ccms_office1 = office_struct.new(1, "6D456C")
-        ccms_office2 = office_struct.new(2, "4C880Q")
-        ccms_office3 = office_struct.new(3, "9R678Y")
+      it "associates all the firm's offices with each provider" do
         provider = create(:provider, username: "test-user")
         other_provider = create(:provider, username: "other-user")
-        stub_provider_details_retriever(
-          provider:,
-          contact_id: 105,
-          firm: ccms_firm,
-          offices: [ccms_office1, ccms_office2],
-        )
-        stub_provider_details_retriever(
-          provider: other_provider,
-          contact_id: 106,
-          firm: ccms_firm,
-          offices: [ccms_office2, ccms_office3],
-        )
 
         described_class.call(provider)
         described_class.call(other_provider)
 
         expect(provider.offices).to contain_exactly(
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office1.id.to_s,
-            code: ccms_office1.code,
-          ),
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office2.id.to_s,
-            code: ccms_office2.code,
-          ),
+          have_attributes(class: Office, ccms_id: "111111", code: "1A111B"),
+          have_attributes(class: Office, ccms_id: "222222", code: "2A222B"),
         )
 
         expect(other_provider.offices).to contain_exactly(
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office2.id.to_s,
-            code: ccms_office2.code,
-          ),
-          have_attributes(
-            class: Office,
-            ccms_id: ccms_office3.id.to_s,
-            code: ccms_office3.code,
-          ),
+          have_attributes(class: Office, ccms_id: "111111", code: "1A111B"),
+          have_attributes(class: Office, ccms_id: "222222", code: "2A222B"),
         )
       end
     end
-  end
-
-  def stub_provider_details_retriever(provider:, firm:, offices:, contact_id: 104)
-    allow(PDA::ProviderDetailsRetriever)
-      .to receive(:call)
-      .with(provider.username)
-      .and_return(api_response(firm:, offices:, contact_id:))
-  end
-
-  def api_response(firm:, offices:, contact_id:)
-    provider_details_struct.new(firm_id: firm.id, contact_id:, firm_name: firm.name, offices:)
   end
 end

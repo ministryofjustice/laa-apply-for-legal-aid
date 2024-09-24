@@ -2,22 +2,24 @@ module PDA
   class ProviderDetailsRetriever
     ApiError = Class.new(StandardError)
     ApiRecordNotFoundError = Class.new(StandardError)
-    class Response
+    class Result
       OfficeStruct = Struct.new(:id, :code)
 
       attr_reader :firm_id,
                   :contact_id,
                   :firm_name,
-                  :offices
+                  :provider_offices,
+                  :firm_offices
 
-      def initialize(json_response)
-        response = JSON.parse(json_response)
-        firm = response["firm"]
+      def initialize(result)
+        firm = result["firm"]
         @firm_id = firm["ccmsFirmId"]
         @firm_name = firm["firmName"]
-        user = response["user"]
+
+        user = result["user"]
         @contact_id = user["ccmsContactId"]
-        @offices = response["officeCodes"].map { |office| OfficeStruct.new(id: office["ccmsProviderOfficeId"], code: office["firmOfficeCode"]) }
+        @provider_offices = result["officeCodes"].map { |office| OfficeStruct.new(id: office["ccmsFirmOfficeId"], code: office["firmOfficeCode"]) }
+        @firm_offices = result["firm_offices"].map { |office| OfficeStruct.new(id: office["ccmsFirmOfficeId"], code: office["firmOfficeCode"]) }
       end
     end
 
@@ -30,23 +32,42 @@ module PDA
     end
 
     def call
-      body = response.body
-
-      raise_error unless response.status.eql?(200)
-
-      raise_record_not_found_error if body.empty?
-
-      Response.new(body)
+      Result.new(result)
     end
 
   private
 
-    def url
-      @url ||= "#{Rails.configuration.x.pda.url}/provider-user/#{encoded_uri}/provider-offices"
+    def result
+      firm_id = provider_offices.dig("firm", "firmId")
+      firm_offices = provider_firm_offices(firm_id)
+
+      provider_offices.merge("firm_offices" => firm_offices["offices"])
     end
 
-    def encoded_uri
+    def provider_offices
+      return @provider_offices if @provider_offices
+
+      response = conn.get("/provider-user/#{encoded_username}/provider-offices")
+      handle_errors(response)
+
+      @provider_offices = JSON.parse(response.body)
+    end
+
+    def provider_firm_offices(firm_id)
+      return @provider_firm_offices if @provider_firm_offices
+
+      response = conn.get("/provider-firms/#{firm_id}/provider-offices")
+      handle_errors(response)
+
+      @provider_firm_offices = JSON.parse(response.body)
+    end
+
+    def encoded_username
       URI.encode_www_form_component(@username).gsub("+", "%20")
+    end
+
+    def conn
+      @conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers:)
     end
 
     def headers
@@ -56,23 +77,16 @@ module PDA
       }
     end
 
-    def conn
-      @conn ||= Faraday.new(url:, headers:)
+    def handle_errors(response)
+      raise_error(response) unless response.success?
+      raise_record_not_found_error(response) if response.body.empty?
     end
 
-    def response
-      @response ||= query_api
-    end
-
-    def query_api
-      conn.get url
-    end
-
-    def raise_error
+    def raise_error(response)
       raise ApiError, "API Call Failed: (#{response.status}) #{response.body}"
     end
 
-    def raise_record_not_found_error
+    def raise_record_not_found_error(response)
       raise ApiRecordNotFoundError, "Retrieval Failed: (#{response.status}) #{response.body}"
     end
   end
