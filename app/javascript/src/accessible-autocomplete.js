@@ -7,7 +7,8 @@ function enhanceSelectElement (searchSelectItem) {
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue: '',
     selectElement: searchSelectItem,
-    inputClasses: 'govuk-body'
+    inputClasses: 'govuk-body',
+    name: 'country'
   })
 
   addSearchInputListeners()
