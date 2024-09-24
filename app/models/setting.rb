@@ -35,6 +35,10 @@ class Setting < ApplicationRecord
     setting.special_childrens_act
   end
 
+  def self.means_test_review_a?
+    setting.means_test_review_a
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

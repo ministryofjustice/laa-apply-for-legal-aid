@@ -44,6 +44,7 @@ RSpec.describe Admin::SettingsController do
           collect_hmrc_data: "true",
           home_address: "true",
           special_childrens_act: "true",
+          means_test_review_a: "true",
         },
       }
     end
@@ -60,6 +61,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.linked_applications?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
       expect(setting.special_childrens_act?).to be(true)
+      expect(setting.means_test_review_a?).to be(true)
     end
 
     it "create settings if they do not exist" do

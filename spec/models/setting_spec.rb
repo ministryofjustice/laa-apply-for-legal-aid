@@ -10,11 +10,13 @@ RSpec.describe Setting do
         expect(rec.mock_true_layer_data?).to be false
         expect(rec.manually_review_all_cases?).to be true
         expect(rec.allow_welsh_translation?).to be false
+        expect(rec.enable_ccms_submission?).to be true
         expect(rec.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
         expect(rec.alert_via_sentry?).to be true
         expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.special_childrens_act?).to be false
+        expect(rec.means_test_review_a?).to be false
       end
     end
 
@@ -23,13 +25,14 @@ RSpec.describe Setting do
         described_class.setting.update!(
           mock_true_layer_data: true,
           manually_review_all_cases: false,
-          allow_welsh_translation: false,
+          allow_welsh_translation: true,
           enable_ccms_submission: false,
           bank_transaction_filename: "my_special_file.csv",
-          alert_via_sentry: true,
+          alert_via_sentry: false,
           linked_applications: true,
           collect_hmrc_data: true,
           special_childrens_act: true,
+          means_test_review_a: true,
         )
       end
 
@@ -37,13 +40,14 @@ RSpec.describe Setting do
         rec = described_class.setting
         expect(rec.mock_true_layer_data?).to be true
         expect(rec.manually_review_all_cases?).to be false
-        expect(rec.allow_welsh_translation?).to be false
+        expect(rec.allow_welsh_translation?).to be true
         expect(rec.enable_ccms_submission?).to be false
         expect(rec.bank_transaction_filename).to eq "my_special_file.csv"
-        expect(rec.alert_via_sentry?).to be true
+        expect(rec.alert_via_sentry?).to be false
         expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.special_childrens_act?).to be true
+        expect(rec.means_test_review_a?).to be true
       end
     end
   end
@@ -61,6 +65,7 @@ RSpec.describe Setting do
       expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.special_childrens_act?).to be false
+      expect(described_class.means_test_review_a?).to be false
     end
   end
 end

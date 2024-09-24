@@ -76,6 +76,16 @@
           legend: { text: t(".labels.special_childrens_act") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :means_test_review_a,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.means_test_review_a") },
+          legend: { text: t(".labels.means_test_review_a") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>

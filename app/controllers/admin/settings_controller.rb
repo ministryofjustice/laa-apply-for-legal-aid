@@ -24,7 +24,8 @@ module Admin
                                       :enable_ccms_submission,
                                       :linked_applications,
                                       :collect_hmrc_data,
-                                      :special_childrens_act)
+                                      :special_childrens_act,
+                                      :means_test_review_a)
     end
 
     def setting
