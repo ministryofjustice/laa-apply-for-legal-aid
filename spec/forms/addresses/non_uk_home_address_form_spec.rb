@@ -14,7 +14,7 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
   let(:applicant_id) { applicant.id }
   let(:address_params) do
     {
-      country_name:,
+      country_code:,
       address_line_one:,
       address_line_two:,
       city:,
@@ -29,20 +29,20 @@ RSpec.describe Addresses::NonUkHomeAddressForm, :vcr, type: :form do
 
     describe "Country" do
       context "when country field is blank" do
-        let(:country_name) { "" }
+        let(:country_code) { "" }
 
         it "returns a presence error on country field" do
           expect(form).not_to be_valid
-          expect(form.errors[:country_name]).to contain_exactly("Search for and select a country")
+          expect(form.errors[:country_code]).to contain_exactly("Search for and select a country")
         end
       end
 
       context "when country field is populated with an invalid country" do
-        let(:country_name) { "invalid" }
+        let(:country_code) { "invalid" }
 
         it "returns a presence error on country field" do
           expect(form).not_to be_valid
-          expect(form.errors[:country_name]).to contain_exactly("Search for and select a country")
+          expect(form.errors[:country_code]).to contain_exactly("Search for and select a country")
         end
       end
     end
