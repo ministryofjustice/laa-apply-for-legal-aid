@@ -16,6 +16,7 @@ $govuk-assets-path: "/";
 // If you absolutely need to override gov.uk styles, don't,
 // instead create new classes or ids with a prefix based on the app name.
 
+@import "accessible-autocomplete";
 @import "admin";
 @import "bank-selection";
 @import "check-your-answers";
