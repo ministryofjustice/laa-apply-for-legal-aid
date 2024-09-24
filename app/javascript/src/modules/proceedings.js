@@ -160,13 +160,16 @@ function showResults (results, inputText) {
       ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move to options`
       hide(document.querySelector('.no-proceeding-items'))
     } else {
-      show(document.querySelector('.no-proceeding-items'))
-      ariaText = `No results found matching ${inputText}`
+      showNoResults(inputText)
     }
   } else {
-    show(document.querySelector('.no-proceeding-items'))
-    ariaText = `No results found matching ${inputText}`
+    showNoResults(inputText)
   }
+}
+
+function showNoResults (inputText) {
+  show(document.querySelector('.no-proceeding-items'))
+  ariaText = `No results found matching ${inputText}`
 }
 
 // Hide any search results and the 'no results found' text
