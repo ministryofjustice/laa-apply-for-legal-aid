@@ -524,6 +524,10 @@ en:
         police_notified: Have the police been notified?
         understands_terms_of_court_order: Do all parties have the mental capacity to understand the terms of a court order?
         warning_letter_sent: Has a warning letter been sent to the opponent?
+      separate_representation:
+        heading: Separate representation
+        separate_representation: Client wants separate representation?
+        confirmed: Confirmed
       undertaking:
         heading: Client offer of undertakings
         undertaking_offered: Has the client offered undertakings?
