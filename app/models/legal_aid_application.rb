@@ -446,36 +446,32 @@ class LegalAidApplication < ApplicationRecord
     lead_linked_application&.link_type_code == "FC_LEAD"
   end
 
-  def legal_linked_associated_application?
-    lead_linked_application&.link_type_code == "LEGAL"
-  end
-
   def family_linked?
-    @family_linked ||= family_linked_applications_count.positive?
+    @family_linked ||= associated_family_linked_application? || lead_family_linked_application?
   end
 
   def legal_linked?
-    @legal_linked ||= legal_linked_applications_count.positive?
+    @legal_linked ||= associated_legal_linked_application? || lead_legal_linked_application?
   end
 
   def family_linked_lead_or_associated
     return nil unless family_linked?
 
-    family_linked_associated_application? ? "Associated" : "Lead"
+    lead_family_linked_application? ? "Lead" : "Associated"
   end
 
   def legal_linked_lead_or_associated
     return nil unless legal_linked?
 
-    legal_linked_associated_application? ? "Associated" : "Lead"
+    lead_legal_linked_application? ? "Lead" : "Associated"
   end
 
   def family_linked_applications_count
-    @family_linked_applications_count ||= family_linked_associated_application? ? associated_family_linked_count : lead_family_linked_count
+    lead_family_linked_application? ? family_linked_count + 1 : nil
   end
 
   def legal_linked_applications_count
-    @legal_linked_applications_count ||= legal_linked_associated_application? ? associated_legal_linked_count : lead_legal_linked_count
+    lead_legal_linked_application? ? legal_linked_count + 1 : nil
   end
 
   def find_or_create_ccms_submission
@@ -695,27 +691,27 @@ private
     end
   end
 
-  def associated_family_linked_count
-    return 0 unless lead_application
-
-    lead_application.associated_linked_applications.where(link_type_code: "FC_LEAD", confirm_link: true).count
+  def lead_family_linked_application?
+    family_linked_count.positive?
   end
 
-  def lead_family_linked_count
-    return 0 unless associated_applications
-
-    associated_linked_applications.where(lead_application: id, link_type_code: "FC_LEAD", confirm_link: true).count
+  def lead_legal_linked_application?
+    legal_linked_count.positive?
   end
 
-  def associated_legal_linked_count
-    return 0 unless lead_application
-
-    lead_application.associated_linked_applications&.where(link_type_code: "LEGAL", confirm_link: true)&.count
+  def associated_family_linked_application?
+    family_linked_associated_application? && lead_linked_application&.confirm_link == true
   end
 
-  def lead_legal_linked_count
-    return 0 unless associated_applications
+  def associated_legal_linked_application?
+    lead_linked_application&.link_type_code == "LEGAL" && lead_linked_application&.confirm_link == true
+  end
 
-    associated_linked_applications.where(lead_application: id, link_type_code: "LEGAL", confirm_link: true).count
+  def family_linked_count
+    @family_linked_count ||= LinkedApplication.where(lead_application_id: id, link_type_code: "FC_LEAD", confirm_link: true).count
+  end
+
+  def legal_linked_count
+    @legal_linked_count ||= LinkedApplication.where(lead_application_id: id, link_type_code: "LEGAL", confirm_link: true).count
   end
 end

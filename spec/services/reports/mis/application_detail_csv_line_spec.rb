@@ -737,7 +737,7 @@ module Reports
             it "returns the expected data" do
               expect(value_for("Family linked?")).to eq "Yes"
               expect(value_for("Family link lead?")).to eq "Lead"
-              expect(value_for("Number of family links")).to eq 1
+              expect(value_for("Number of family links")).to eq 2
               expect(value_for("Legal Linked?")).to eq "No"
               expect(value_for("Legal link lead?")).to be_nil
               expect(value_for("Number of legal links")).to be_nil
@@ -754,7 +754,7 @@ module Reports
             it "returns the expected data" do
               expect(value_for("Family linked?")).to eq "Yes"
               expect(value_for("Family link lead?")).to eq "Associated"
-              expect(value_for("Number of family links")).to eq 1
+              expect(value_for("Number of family links")).to be_nil
               expect(value_for("Legal Linked?")).to eq "No"
               expect(value_for("Legal link lead?")).to be_nil
               expect(value_for("Number of legal links")).to be_nil
@@ -776,7 +776,7 @@ module Reports
               expect(value_for("Number of family links")).to be_nil
               expect(value_for("Legal Linked?")).to eq "Yes"
               expect(value_for("Legal link lead?")).to eq "Lead"
-              expect(value_for("Number of legal links")).to eq 2
+              expect(value_for("Number of legal links")).to eq 3
             end
           end
 
@@ -795,7 +795,7 @@ module Reports
               expect(value_for("Number of family links")).to be_nil
               expect(value_for("Legal Linked?")).to eq "Yes"
               expect(value_for("Legal link lead?")).to eq "Associated"
-              expect(value_for("Number of legal links")).to eq 2
+              expect(value_for("Number of legal links")).to be_nil
             end
           end
 
@@ -811,10 +811,10 @@ module Reports
             it "returns the expected data" do
               expect(value_for("Family linked?")).to eq "Yes"
               expect(value_for("Family link lead?")).to eq "Lead"
-              expect(value_for("Number of family links")).to eq 1
+              expect(value_for("Number of family links")).to eq 2
               expect(value_for("Legal Linked?")).to eq "Yes"
               expect(value_for("Legal link lead?")).to eq "Lead"
-              expect(value_for("Number of legal links")).to eq 1
+              expect(value_for("Number of legal links")).to eq 2
             end
           end
 

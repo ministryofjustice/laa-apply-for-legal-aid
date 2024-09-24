@@ -226,10 +226,10 @@ RSpec.describe ApplicationDigest do
 
             expect(digest.family_linked).to be false
             expect(digest.family_linked_lead_or_associated).to be_nil
-            expect(digest.number_of_family_linked_applications).to eq 0
+            expect(digest.number_of_family_linked_applications).to be_nil
             expect(digest.legal_linked).to be false
             expect(digest.legal_linked_lead_or_associated).to be_nil
-            expect(digest.number_of_legal_linked_applications).to eq 0
+            expect(digest.number_of_legal_linked_applications).to be_nil
           end
         end
 
@@ -245,10 +245,10 @@ RSpec.describe ApplicationDigest do
 
             expect(digest.family_linked).to be true
             expect(digest.family_linked_lead_or_associated).to eq "Lead"
-            expect(digest.number_of_family_linked_applications).to eq 1
+            expect(digest.number_of_family_linked_applications).to eq 2
             expect(digest.legal_linked).to be false
             expect(digest.legal_linked_lead_or_associated).to be_nil
-            expect(digest.number_of_legal_linked_applications).to eq 0
+            expect(digest.number_of_legal_linked_applications).to be_nil
           end
         end
 
@@ -264,10 +264,10 @@ RSpec.describe ApplicationDigest do
 
             expect(digest.family_linked).to be true
             expect(digest.family_linked_lead_or_associated).to eq "Associated"
-            expect(digest.number_of_family_linked_applications).to eq 1
+            expect(digest.number_of_family_linked_applications).to be_nil
             expect(digest.legal_linked).to be false
             expect(digest.legal_linked_lead_or_associated).to be_nil
-            expect(digest.number_of_legal_linked_applications).to eq 0
+            expect(digest.number_of_legal_linked_applications).to be_nil
           end
         end
 
@@ -285,20 +285,18 @@ RSpec.describe ApplicationDigest do
 
             expect(digest.family_linked).to be false
             expect(digest.family_linked_lead_or_associated).to be_nil
-            expect(digest.number_of_family_linked_applications).to eq 0
+            expect(digest.number_of_family_linked_applications).to be_nil
             expect(digest.legal_linked).to be true
             expect(digest.legal_linked_lead_or_associated).to eq "Lead"
-            expect(digest.number_of_legal_linked_applications).to eq 2
+            expect(digest.number_of_legal_linked_applications).to eq 3
           end
         end
 
-        context "when the application is an associated legal linked application to a lead application with one other asociated application" do
+        context "when the application is an associated legal linked application" do
           let(:lead_application) { create(:legal_aid_application) }
-          let(:another_associated_application) { create(:legal_aid_application) }
 
           before do
             LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: laa.id, link_type_code: "LEGAL", confirm_link: true)
-            LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: another_associated_application.id, link_type_code: "LEGAL", confirm_link: true)
           end
 
           it "returns the expected data" do
@@ -306,10 +304,10 @@ RSpec.describe ApplicationDigest do
 
             expect(digest.family_linked).to be false
             expect(digest.family_linked_lead_or_associated).to be_nil
-            expect(digest.number_of_family_linked_applications).to eq 0
+            expect(digest.number_of_family_linked_applications).to be_nil
             expect(digest.legal_linked).to be true
             expect(digest.legal_linked_lead_or_associated).to eq "Associated"
-            expect(digest.number_of_legal_linked_applications).to eq 2
+            expect(digest.number_of_legal_linked_applications).to be_nil
           end
         end
 
@@ -327,10 +325,10 @@ RSpec.describe ApplicationDigest do
 
             expect(digest.family_linked).to be true
             expect(digest.family_linked_lead_or_associated).to eq "Lead"
-            expect(digest.number_of_family_linked_applications).to eq 1
+            expect(digest.number_of_family_linked_applications).to eq 2
             expect(digest.legal_linked).to be true
             expect(digest.legal_linked_lead_or_associated).to eq "Lead"
-            expect(digest.number_of_legal_linked_applications).to eq 1
+            expect(digest.number_of_legal_linked_applications).to eq 2
           end
         end
 
@@ -345,10 +343,10 @@ RSpec.describe ApplicationDigest do
 
               expect(digest.family_linked).to be false
               expect(digest.family_linked_lead_or_associated).to be_nil
-              expect(digest.number_of_family_linked_applications).to eq 0
+              expect(digest.number_of_family_linked_applications).to be_nil
               expect(digest.legal_linked).to be false
               expect(digest.legal_linked_lead_or_associated).to be_nil
-              expect(digest.number_of_legal_linked_applications).to eq 0
+              expect(digest.number_of_legal_linked_applications).to be_nil
             end
 
             context "when the provider has not confirmed the link" do
@@ -363,10 +361,10 @@ RSpec.describe ApplicationDigest do
 
                 expect(digest.family_linked).to be false
                 expect(digest.family_linked_lead_or_associated).to be_nil
-                expect(digest.number_of_family_linked_applications).to eq 0
+                expect(digest.number_of_family_linked_applications).to be_nil
                 expect(digest.legal_linked).to be false
                 expect(digest.legal_linked_lead_or_associated).to be_nil
-                expect(digest.number_of_legal_linked_applications).to eq 0
+                expect(digest.number_of_legal_linked_applications).to be_nil
               end
             end
           end
