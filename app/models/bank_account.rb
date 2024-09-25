@@ -38,7 +38,7 @@ class BankAccount < ApplicationRecord
   end
 
   def has_tax_credits?
-    meta_data_codes = bank_transactions.pluck(:meta_data).pluck(:code)
+    meta_data_codes = bank_transactions.pluck(:meta_data).compact.pluck(:code)
     meta_data_codes.include?("TC") || meta_data_codes.include?("WTC") || meta_data_codes.include?("CTC")
   end
 
