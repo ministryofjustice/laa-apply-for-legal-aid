@@ -1,9 +1,7 @@
 .clear-search {
-  position: relative;
-  bottom: 40px;
-  margin-top: auto;
-}
+  margin-top: 50px;
 
-.clear-search-parent {
-  display: flex;
+  &-error {
+    margin-top: 90px;
+  }
 }

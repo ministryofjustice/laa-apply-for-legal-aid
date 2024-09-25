@@ -14,7 +14,7 @@ function enhanceSelectElement (searchSelectItem) {
   addSearchInputListeners()
 
   if (document.querySelector('#non-uk-home-address-country-code-error')) {
-    addErrorClass()
+    addErrorClasses()
   }
 }
 
@@ -32,8 +32,9 @@ function addSearchInputListeners () {
     })
 }
 
-function addErrorClass () {
+function addErrorClasses () {
   document.querySelector('.autocomplete__input').classList.add('govuk-input--error')
+  document.querySelector('.clear-search').classList.add('clear-search-error')
 }
 
 document.addEventListener('DOMContentLoaded', () => {
