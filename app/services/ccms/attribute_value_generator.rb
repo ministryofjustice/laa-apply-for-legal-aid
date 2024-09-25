@@ -105,6 +105,10 @@ module CCMS
       legal_aid_application.used_delegated_functions_on.strftime("%d-%m-%Y")
     end
 
+    def backdated_sca_application?(_options)
+      legal_aid_application.special_children_act_proceedings? && legal_aid_application.used_delegated_functions?
+    end
+
     def app_amendment_type(_options)
       legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB"
     end
@@ -278,6 +282,10 @@ module CCMS
       return unless ccms_equivalent_prospects_of_success_valid?
 
       PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:code]
+    end
+
+    def ccms_equivalent_prospects_of_success_present?(_options)
+      chances_of_success&.success_prospect&.present?
     end
 
     def ccms_equivalent_prospects_of_success_valid?
