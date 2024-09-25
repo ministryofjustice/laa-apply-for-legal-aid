@@ -15,7 +15,7 @@
 
     <%= hidden_field_tag "legal-framework-api-host", nil, { "data-uri": Rails.configuration.x.legal_framework_api_host_for_js } %>
 
-    <div class="govuk-grid-row clear-search-parent">
+    <div class="govuk-grid-row">
       <div class="govuk-grid-column-three-quarters govuk-list">
         <%= form.govuk_collection_select :country_code,
                                          @form.countries,
