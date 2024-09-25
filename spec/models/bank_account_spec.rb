@@ -48,7 +48,7 @@ RSpec.describe BankAccount do
     end
   end
 
-  describe "#benefits" do
+  describe "#has_benefits?" do
     it "returns true if benefits present" do
       bank_account = create(:bank_account)
       create(:bank_transaction, :benefits, bank_account:)
