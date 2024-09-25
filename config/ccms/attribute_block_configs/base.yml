@@ -4079,6 +4079,16 @@ global_merits:
     br100_meaning: the special children act application can be auto granted
     response_type: boolean
     user_defined: false
+  SCA_DEVOLVED_POWERS:
+    generate_block?: '#application_special_children_act_proceedings?'
+    value: '#application_used_delegated_functions?'
+    response_type: boolean
+    user_defined: true
+  DATE_DEVOLVED_POWERS_USED:
+    generate_block?: '#backdated_sca_application?'
+    value: '#used_delegated_functions_on'
+    response_type: date
+    user_defined: true
   CLIENT_DIVORCED:
     generate_block?: false
     value: false
@@ -4868,6 +4878,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   FAMILY_PROSPECTS_OF_SUCCESS:
+    generate_block?: "#ccms_equivalent_prospects_of_success_present?"
     value: "#ccms_equivalent_prospects_of_success"
     br100_meaning: 'Fam: The Family Prospects Of Success For The Proceeding'
     response_type: text
