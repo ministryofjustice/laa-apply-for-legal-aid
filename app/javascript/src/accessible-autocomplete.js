@@ -7,11 +7,15 @@ function enhanceSelectElement (searchSelectItem) {
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue: '',
     selectElement: searchSelectItem,
-    inputClasses: 'govuk-body',
+    inputClasses: 'govuk-input',
     name: 'country'
   })
 
   addSearchInputListeners()
+
+  if (document.querySelector('#non-uk-home-address-country-code-error')) {
+    addErrorClass()
+  }
 }
 
 function addSearchInputListeners () {
@@ -26,6 +30,10 @@ function addSearchInputListeners () {
       searchInputBox.value = ''
       setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay)
     })
+}
+
+function addErrorClass () {
+  document.querySelector('.autocomplete__input').classList.add('govuk-input--error')
 }
 
 document.addEventListener('DOMContentLoaded', () => {
