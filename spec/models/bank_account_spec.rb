@@ -62,10 +62,16 @@ RSpec.describe BankAccount do
     end
   end
 
-  describe "#tax_credits" do
+  describe "#has_tax_credits?" do
     it "returns false if tax credits not present" do
       bank_account = create(:bank_account)
       create(:bank_transaction, :benefits, bank_account:)
+      expect(bank_account.has_tax_credits?).to be false
+    end
+
+    it "returns false if meta_data for all transactions is nil" do
+      bank_account = create(:bank_account)
+      create(:bank_transaction, :uncategorised_debit_transaction, meta_data: nil, bank_account:)
       expect(bank_account.has_tax_credits?).to be false
     end
 
