@@ -3,6 +3,7 @@ $govuk-new-link-styles: true;
 $govuk-new-typography-scale: true;
 $govuk-assets-path: "/";
 
+@import "accessible-autocomplete/src/autocomplete";
 @import "govuk-frontend/dist/govuk/index";
 @import "@ministryofjustice/frontend/moj/settings/measurements";
 @import "@ministryofjustice/frontend/moj/objects/width-container";
@@ -44,4 +45,3 @@ $govuk-assets-path: "/";
 @import "dropzone/src/basic";
 @import "providers/summary_list_action_width";
 @import "primary_navigation";
-@import "accessible-autocomplete/src/autocomplete";
