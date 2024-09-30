@@ -171,6 +171,7 @@ module Reports
           "Legal Linked?",
           "Legal link lead?",
           "Number of legal links",
+          "No fixed address",
         ]
       end
 
@@ -205,6 +206,7 @@ module Reports
         banking_data
         partner
         linked_applications
+        home_address
         sanitise
       end
 
@@ -440,6 +442,10 @@ module Reports
           @line << nil
           @line << nil
         end
+      end
+
+      def home_address
+        @line << yesno(laa.applicant.no_fixed_residence?)
       end
 
       def yesno(value)

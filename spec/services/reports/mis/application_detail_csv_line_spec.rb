@@ -866,6 +866,32 @@ module Reports
             expect(value_for("Applicant age")).to be_nil
           end
         end
+
+        describe "applicant address" do
+          context "when they have no fixed residence" do
+            let(:applicant) { create(:applicant, no_fixed_residence: true) }
+
+            it "sets no_fixed_address to true" do
+              expect(value_for("No fixed address")).to eq "Yes"
+            end
+          end
+
+          context "when they have a home address" do
+            let(:applicant) { create(:applicant, no_fixed_residence: false) }
+
+            it "sets no_fixed_address to false" do
+              expect(value_for("No fixed address")).to eq "No"
+            end
+          end
+
+          context "when the question is not answered (legacy applications)" do
+            let(:applicant) { create(:applicant, no_fixed_residence: nil) }
+
+            it "sets no_fixed_address to false" do
+              expect(value_for("No fixed address")).to eq "No"
+            end
+          end
+        end
       end
 
       def value_for(name)
