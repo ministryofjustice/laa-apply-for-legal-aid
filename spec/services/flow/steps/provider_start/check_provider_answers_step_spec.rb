@@ -16,9 +16,25 @@ RSpec.describe Flow::Steps::ProviderStart::CheckProviderAnswersStep, type: :requ
     subject(:forward_step) { described_class.forward.call(legal_aid_application) }
 
     context "when the applicant is under 16" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings:, applicant:) }
       let(:age_for_means_test_purposes) { 15 }
 
-      it { is_expected.to eq :use_ccms_under16s }
+      context "and all the proceedings are section 8 proceedings" do
+        let(:explicit_proceedings) { %i[se013 se014] }
+
+        it { is_expected.to eq :confirm_non_means_tested_applications }
+
+        it "sets the state machine" do
+          forward_step
+          expect(legal_aid_application.state_machine.type).to eq "NonMeansTestedStateMachine"
+        end
+      end
+
+      context "and some of the proceedings are non section 8 proceedings" do
+        let(:explicit_proceedings) { %i[se013 da001] }
+
+        it { is_expected.to eq :use_ccms_under16s }
+      end
     end
 
     context "when the applicant is under 18" do
