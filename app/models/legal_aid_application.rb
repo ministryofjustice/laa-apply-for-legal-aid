@@ -446,6 +446,34 @@ class LegalAidApplication < ApplicationRecord
     lead_linked_application&.link_type_code == "FC_LEAD"
   end
 
+  def family_linked?
+    @family_linked ||= associated_family_linked_application? || lead_family_linked_application?
+  end
+
+  def legal_linked?
+    @legal_linked ||= associated_legal_linked_application? || lead_legal_linked_application?
+  end
+
+  def family_linked_lead_or_associated
+    return nil unless family_linked?
+
+    lead_family_linked_application? ? "Lead" : "Associated"
+  end
+
+  def legal_linked_lead_or_associated
+    return nil unless legal_linked?
+
+    lead_legal_linked_application? ? "Lead" : "Associated"
+  end
+
+  def family_linked_applications_count
+    lead_family_linked_application? ? family_linked_count + 1 : nil
+  end
+
+  def legal_linked_applications_count
+    lead_legal_linked_application? ? legal_linked_count + 1 : nil
+  end
+
   def find_or_create_ccms_submission
     create_ccms_submission! unless ccms_submission
     ccms_submission
@@ -661,5 +689,29 @@ private
     required_document_categories.each do |category|
       errors.add(:required_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
     end
+  end
+
+  def lead_family_linked_application?
+    family_linked_count.positive?
+  end
+
+  def lead_legal_linked_application?
+    legal_linked_count.positive?
+  end
+
+  def associated_family_linked_application?
+    family_linked_associated_application? && lead_linked_application&.confirm_link == true
+  end
+
+  def associated_legal_linked_application?
+    lead_linked_application&.link_type_code == "LEGAL" && lead_linked_application&.confirm_link == true
+  end
+
+  def family_linked_count
+    @family_linked_count ||= LinkedApplication.where(lead_application_id: id, link_type_code: "FC_LEAD", confirm_link: true).count
+  end
+
+  def legal_linked_count
+    @legal_linked_count ||= LinkedApplication.where(lead_application_id: id, link_type_code: "LEGAL", confirm_link: true).count
   end
 end
