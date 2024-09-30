@@ -4,6 +4,7 @@ module FlowHelper
     method: :post,
     show_continue: true,
     show_draft: false,
+    inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
     draft_button_text: t("generic.save_and_come_back_later")
   )
@@ -12,6 +13,7 @@ module FlowHelper
       next_action_buttons(
         show_continue:,
         show_draft:,
+        inverse_continue:,
         form:,
         continue_button_text:,
         draft_button_text:,
@@ -24,6 +26,7 @@ module FlowHelper
     continue_id: :continue,
     show_continue: true,
     show_draft: false,
+    inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
     draft_button_text: t("generic.save_and_come_back_later")
   )
@@ -34,6 +37,7 @@ module FlowHelper
       form:,
       show_continue:,
       show_draft:,
+      inverse_continue:,
       continue_button_text:,
       draft_button_text:,
     )

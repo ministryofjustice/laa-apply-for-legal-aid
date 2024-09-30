@@ -2,6 +2,7 @@
   <% if show_continue %>
     <%= form.govuk_submit(
           continue_button_text,
+          inverse: inverse_continue,
           id: continue_id,
           name: "continue_button",
           value: continue_button_text,
