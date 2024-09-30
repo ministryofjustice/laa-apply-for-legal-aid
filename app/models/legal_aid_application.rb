@@ -179,6 +179,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KSEC8") }
   end
 
+  def all_section_8_proceedings?
+    proceedings.all? { |proceeding| proceeding.ccms_matter_code.eql?("KSEC8") }
+  end
+
   def special_children_act_proceedings?
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
   end
