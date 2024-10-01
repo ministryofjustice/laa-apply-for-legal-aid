@@ -108,6 +108,22 @@ RSpec.describe Providers::Partners::RegularOutgoingsForm do
       end
     end
 
+    context "when none plus one outgoings type is selected" do
+      it "is invalid" do
+        rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
+        params = {
+          "transaction_type_ids" => ["", "none", rent_or_mortgage.id],
+          legal_aid_application:,
+        }
+
+        form = described_class.new(params)
+
+        expect(form).not_to be_valid
+        expect(form.errors).to be_added(:transaction_type_ids, :none_and_another_option_selected)
+        expect(form.errors.messages[:transaction_type_ids]).to include("If you select 'The partner makes none of these payments', you cannot select any of the other options")
+      end
+    end
+
     context "when the correct attributes are provided" do
       it "is valid" do
         legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner)

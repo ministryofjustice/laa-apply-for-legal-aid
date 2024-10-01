@@ -163,7 +163,7 @@ en:
               inclusion: Select yes if your client has applied for civil legal aid before
             previous_reference:
               blank: Enter the reference number for any previous application
-              not_valid: Enter the reference number in the correct format 
+              not_valid: Enter the reference number in the correct format
         aggregated_cash_income:
           credits:
             attributes:
@@ -743,8 +743,6 @@ en:
               too_many_decimals: Enter a number with no more than 2 decimal places
             friends_or_family_frequency:
               inclusion: Select how often your client receives income from friends or family
-            transaction_type_ids:
-              blank: Select at least one of the options
             maintenance_in_amount:
               greater_than: Enter a number greater than 0
               not_a_number: Enter the amount of maintenance received
@@ -763,8 +761,11 @@ en:
               too_many_decimals: Enter a number with no more than 2 decimal places
             pension_frequency:
               inclusion: Select how often your client receives pension income
+            transaction_type_ids:
+              blank: Select at least one of the options
+              none_and_another_option_selected: If you select 'My client does not get any of these payments', you cannot select any of the other options
         providers/means/regular_outgoings_form:
-          attributes:
+          attributes: &regular_outgoings_attributes
             rent_or_mortgage_amount:
               greater_than: Enter a number greater than 0
               not_a_number: Enter the amount paid for housing
@@ -791,6 +792,7 @@ en:
               inclusion: Select how often your client makes legal aid payments
             transaction_type_ids:
               blank: Select at least one of the options
+              none_and_another_option_selected: If you select 'My client makes none of these payments', you cannot select any of the other options
         providers/partners/regular_income_form:
           attributes:
             <<: *regular_income_attributes
@@ -802,34 +804,22 @@ en:
               inclusion: Select how often the partner receives income from property or lodgers
             pension_frequency:
               inclusion: Select how often the partner receives pension income
+            transaction_type_ids:
+              none_and_another_option_selected: If you select 'The partner does not get any of these payments', you cannot select any of the other options
         providers/partners/regular_outgoings_form:
           attributes:
-            rent_or_mortgage_amount:
-              greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for housing
-              too_many_decimals: Enter a number with no more than 2 decimal places
+            <<: *regular_outgoings_attributes
             rent_or_mortgage_frequency:
-              inclusion: Select how often your client makes housing payments
-            child_care_amount:
-              greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for childcare
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              inclusion: Select how often the partner makes housing payments
             child_care_frequency:
-              inclusion: Select how often your client makes childcare payments
-            maintenance_out_amount:
-              greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for maintenance
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              inclusion: Select how often the partner makes childcare payments
             maintenance_out_frequency:
-              inclusion: Select how often your client makes maintenance payments
-            legal_aid_amount:
-              greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for legal aid
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              inclusion: Select how often the partner makes maintenance payments
             legal_aid_frequency:
-              inclusion: Select how often your client makes legal aid payments
+              inclusion: Select how often the partner makes legal aid payments
             transaction_type_ids:
               blank: Select at least one of the options
+              none_and_another_option_selected: If you select 'The partner makes none of these payments', you cannot select any of the other options
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only
