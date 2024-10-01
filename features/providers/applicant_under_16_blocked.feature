@@ -62,10 +62,3 @@ Feature: Applicant under 16 blocked
 
     When I click 'Save and continue'
     Then I should be on a page showing "You need to apply using CCMS"
-
-  @javascript
-  Scenario: I am warned not to use the service for under 16 year olds
-    Given I visit the application service
-    When I should be on a page with title "Apply for legal aid"
-    Then I should see "But do not use this service if:"
-    And I should see "the client is under 16 years old"

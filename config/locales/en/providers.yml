@@ -1605,12 +1605,10 @@ en:
         dont_use_service:
           list_title: "But do not use this service if:"
           list:
-            - the client is under 16 years old
             - the client is self-employed or is a member of the armed forces
             - you want to make an emergency application and delegated functions have not been used
             - you want to amend a submitted application
           linked_applications_list:
-            - the client is under 16 years old
             - the client is self-employed or is a member of the armed forces
             - you want to make an emergency application and delegated functions have not been used
             - you want to make both a family link and legal link to your application
