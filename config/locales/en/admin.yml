@@ -76,6 +76,7 @@ en:
           collect_hmrc_data: Collect HMRC data
           special_childrens_act: Enable Special Childrens Act
           means_test_review_a: Enable Means Test Review (MTR) A
+          public_law_family: Enable Public Law Family
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -88,6 +89,7 @@ en:
           collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
           special_childrens_act: Select Yes to enable the special childrens act matter type
           means_test_review_a: Select Yes to enable the Means Test Review (MTR) A feature
+          public_law_family: Select Yes to enable Public Law Family feature
 
       update:
         notice: Settings have been updated
