@@ -495,5 +495,32 @@ RSpec.describe ApplicationDigest do
         end
       end
     end
+
+    describe "applicant address" do
+      context "when they have no fixed residence" do
+        before { laa.applicant.update(no_fixed_residence: true) }
+
+        it "sets no_fixed_address to true" do
+          application_digest
+          expect(digest.no_fixed_address).to be true
+        end
+      end
+
+      context "when they have a home address" do
+        before { laa.applicant.update(no_fixed_residence: false) }
+
+        it "sets no_fixed_address to false" do
+          application_digest
+          expect(digest.no_fixed_address).to be false
+        end
+      end
+
+      context "when the question is not answered (legacy applications)" do
+        it "sets no_fixed_address to false" do
+          application_digest
+          expect(digest.no_fixed_address).to be false
+        end
+      end
+    end
   end
 end

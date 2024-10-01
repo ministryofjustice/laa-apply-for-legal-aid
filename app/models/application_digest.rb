@@ -13,6 +13,7 @@ class ApplicationDigest < ApplicationRecord
     non_means_tested
     family_linked
     legal_linked
+    no_fixed_address
   ].freeze
 
   class << self
@@ -62,6 +63,7 @@ class ApplicationDigest < ApplicationRecord
         legal_linked: laa.legal_linked?,
         legal_linked_lead_or_associated: laa.legal_linked_lead_or_associated,
         number_of_legal_linked_applications: laa.legal_linked_applications_count,
+        no_fixed_address: laa.applicant.no_fixed_residence?,
       }
     end
 
