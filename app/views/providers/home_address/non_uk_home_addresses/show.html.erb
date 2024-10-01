@@ -28,13 +28,6 @@
       <div class="govuk-grid-column-one-quarter clear-search" style="display: none;">
         <p class="govuk-body"><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
       </div>
-
-    </div>
-
-    <div class="govuk-grid-row no-country-items govuk-!-margin-bottom-5" style="display: none;">
-      <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-body govuk-!-padding-bottom-9"><%= t(".no_results") %></span>
-      </div>
     </div>
 
     <%= form.govuk_fieldset legend: { text: t(".address") } do %>
