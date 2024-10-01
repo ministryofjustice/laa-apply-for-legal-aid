@@ -9,49 +9,48 @@
                     form: do %>
 
     <% if @legal_aid_application.involved_children.count > 0 %>
-    <h1 class="govuk-heading-xl">
-      <%= t(".existing", count: pluralize(@legal_aid_application.involved_children.count, "child").to_s) %>
-    </h1>
+      <h1 class="govuk-heading-xl">
+        <%= t(".existing", count: pluralize(@legal_aid_application.involved_children.count, "child").to_s) %>
+      </h1>
 
-    <%= govuk_table do |table|
-          table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+      <%= govuk_table do |table|
+            table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
 
-          table.with_head do |head|
-            head.with_row do |row|
-              row.with_cell(text: "Name")
-              row.with_cell(text: "Date of birth")
-              row.with_cell(colspan: 2, scope: "colgroup") do
-                tag.span("Change or remove child", class: "govuk-visually-hidden")
-              end
-            end
-          end
-
-          table.with_body do |body|
-            @legal_aid_application.involved_children.order(:created_at).each do |involved_child|
-              body.with_row do |row|
-                row.with_cell(text: involved_child.full_name)
-                row.with_cell(text: involved_child.date_of_birth)
-                row.with_cell do
-                  govuk_link_to(
-                    t("generic.change"),
-                    providers_legal_aid_application_involved_child_path(@legal_aid_application, involved_child),
-                    class: "change-link",
-                    "aria-label": involved_child.full_name,
-                  )
-                end
-                row.with_cell do
-                  govuk_link_to(
-                    t(".remove"),
-                    providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
-                    class: "change-link",
-                    "aria-label": involved_child.full_name,
-                  )
+            table.with_head do |head|
+              head.with_row do |row|
+                row.with_cell(text: "Name")
+                row.with_cell(text: "Date of birth")
+                row.with_cell(colspan: 2, scope: "colgroup") do
+                  tag.span("Change or remove child", class: "govuk-visually-hidden")
                 end
               end
             end
-          end
-        end %>
 
+            table.with_body do |body|
+              @legal_aid_application.involved_children.order(:created_at).each do |involved_child|
+                body.with_row do |row|
+                  row.with_cell(text: involved_child.full_name)
+                  row.with_cell(text: involved_child.date_of_birth)
+                  row.with_cell do
+                    govuk_link_to(
+                      t("generic.change"),
+                      providers_legal_aid_application_involved_child_path(@legal_aid_application, involved_child),
+                      class: "change-link",
+                      "aria-label": involved_child.full_name,
+                    )
+                  end
+                  row.with_cell do
+                    govuk_link_to(
+                      t(".remove"),
+                      providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
+                      class: "change-link",
+                      "aria-label": involved_child.full_name,
+                    )
+                  end
+                end
+              end
+            end
+          end %>
     <% end %>
 
     <%= form.govuk_collection_radio_buttons :has_other_involved_child,
@@ -60,6 +59,6 @@
                                             :label,
                                             legend: { text: t(".add_another"), size: "l", tag: "h2" } %>
 
-      <%= next_action_buttons(show_draft: true, form:) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
