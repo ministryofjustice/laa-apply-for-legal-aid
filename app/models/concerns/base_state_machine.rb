@@ -13,7 +13,6 @@ class BaseStateMachine < ApplicationRecord
     no_applicant_consent
     non_passported
     offline_accounts
-    under_16_blocked
     unknown
     applicant_self_employed
     applicant_armed_forces

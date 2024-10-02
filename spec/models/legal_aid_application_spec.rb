@@ -1318,30 +1318,6 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#under_16_blocked?" do
-    subject { legal_aid_application.under_16_blocked? }
-
-    let(:legal_aid_application) { build(:legal_aid_application, applicant:) }
-
-    context "with applicant age of 15" do
-      let(:applicant) { build(:applicant, age_for_means_test_purposes: 15) }
-
-      it { is_expected.to be true }
-    end
-
-    context "with applicant age of 16" do
-      let(:applicant) { build(:applicant, age_for_means_test_purposes: 16) }
-
-      it { is_expected.to be false }
-    end
-
-    context "with applicant age of nil" do
-      let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
-
-      it { is_expected.to be false }
-    end
-  end
-
   describe "#generated_reports" do
     let(:legal_aid_application) { create(:legal_aid_application, :generating_reports) }
     let(:submit_applications_to_ccms) { true }
