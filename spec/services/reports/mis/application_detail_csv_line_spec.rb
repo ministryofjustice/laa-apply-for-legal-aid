@@ -892,6 +892,24 @@ module Reports
             end
           end
         end
+
+        describe "previous reference" do
+          context "when the provider has entered a previous reference" do
+            let(:applicant) { create(:applicant, previous_reference: "30000123456") }
+
+            it "sets no_fixed_address to true" do
+              expect(value_for("Previous CCMS ref?")).to eq "Yes"
+            end
+          end
+
+          context "when the provider has not entered a previous reference" do
+            let(:applicant) { create(:applicant, previous_reference: nil) }
+
+            it "sets no_fixed_address to false" do
+              expect(value_for("Previous CCMS ref?")).to eq "No"
+            end
+          end
+        end
       end
 
       def value_for(name)
