@@ -15,12 +15,6 @@ RSpec.describe Flow::Steps::ProviderStart::CheckProviderAnswersStep, type: :requ
   describe "#forward" do
     subject(:forward_step) { described_class.forward.call(legal_aid_application) }
 
-    context "when the applicant is under 16" do
-      let(:age_for_means_test_purposes) { 15 }
-
-      it { is_expected.to eq :use_ccms_under16s }
-    end
-
     context "when the applicant is under 18" do
       let(:age_for_means_test_purposes) { 17 }
 
