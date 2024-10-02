@@ -172,6 +172,7 @@ module Reports
           "Legal link lead?",
           "Number of legal links",
           "No fixed address",
+          "Previous CCMS ref?",
         ]
       end
 
@@ -207,6 +208,7 @@ module Reports
         partner
         linked_applications
         home_address
+        previous_ccms_ref
         sanitise
       end
 
@@ -446,6 +448,10 @@ module Reports
 
       def home_address
         @line << yesno(laa.applicant.no_fixed_residence?)
+      end
+
+      def previous_ccms_ref
+        @line << yesno(laa.applicant.previous_reference.present?)
       end
 
       def yesno(value)
