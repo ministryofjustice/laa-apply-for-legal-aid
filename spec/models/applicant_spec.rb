@@ -247,30 +247,6 @@ RSpec.describe Applicant do
     end
   end
 
-  describe "#under_16_blocked?" do
-    subject { applicant.under_16_blocked? }
-
-    let(:applicant) { build(:applicant) }
-
-    context "with age_for_means_test_purposes of 15" do
-      before { applicant.age_for_means_test_purposes = 15 }
-
-      it { is_expected.to be true }
-    end
-
-    context "with age_for_means_test_purposes of 16" do
-      before { applicant.age_for_means_test_purposes = 16 }
-
-      it { is_expected.to be false }
-    end
-
-    context "with age_for_means_test_purposes of nil" do
-      before { applicant.age_for_means_test_purposes = nil }
-
-      it { is_expected.to be false }
-    end
-  end
-
   describe "#receives_financial_support?" do
     subject { legal_aid_application.applicant.receives_financial_support? }
 

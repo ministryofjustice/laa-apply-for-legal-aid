@@ -111,7 +111,6 @@ RSpec.describe BaseStateMachine do
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :no_applicant_consent) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :non_passported) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :offline_accounts) }
-    it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :under_16_blocked) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :applicant_self_employed) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :applicant_armed_forces) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :partner_self_employed) }

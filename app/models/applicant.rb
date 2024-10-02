@@ -50,7 +50,7 @@ class Applicant < ApplicationRecord
   end
 
   def age
-    return age_for_means_test_purposes if no_means_test_required? || under_16_blocked? || legal_aid_application&.special_children_act_proceedings?
+    return age_for_means_test_purposes if no_means_test_required? || legal_aid_application&.special_children_act_proceedings?
 
     AgeCalculator.call(date_of_birth, legal_aid_application.calculation_date)
   end
@@ -62,11 +62,6 @@ class Applicant < ApplicationRecord
   def under_18?
     age_for_means_test_purposes.present? &&
       age_for_means_test_purposes < 18
-  end
-
-  def under_16_blocked?
-    age_for_means_test_purposes.present? &&
-      age_for_means_test_purposes < 16
   end
 
   def child?
