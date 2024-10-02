@@ -39,6 +39,10 @@ class Setting < ApplicationRecord
     setting.means_test_review_a
   end
 
+  def self.public_law_family?
+    setting.public_law_family
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
