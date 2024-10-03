@@ -31,10 +31,6 @@ RSpec.describe BaseStateMachine do
     let(:event) { :applicant_details_checked }
 
     context "without guard" do
-      before do
-        allow(CleanupCapitalAttributes).to receive(:call)
-      end
-
       it { is_expected.to transition_from(:checking_applicant_details).to(:applicant_details_checked).on_event(event) }
       it { is_expected.to transition_from(:use_ccms).to(:applicant_details_checked).on_event(event) }
       it { is_expected.to transition_from(:delegated_functions_used).to(:applicant_details_checked).on_event(event) }

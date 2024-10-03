@@ -85,10 +85,5 @@ RSpec.describe "check your answers requests" do
       patch_request
       expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.current)
     end
-
-    it "syncs the application" do
-      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
-      patch_request
-    end
   end
 end
