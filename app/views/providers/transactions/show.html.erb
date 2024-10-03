@@ -1,7 +1,13 @@
 <%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"),
                   caption: t("generic.client_means_caption"), column_width: "full", template: :default do %>
 
-  <div class="govuk-body"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
+  <% if I18n.exists?("transaction_types.#{@transaction_type.name}.inset_paras") %>
+    <% t("transaction_types.#{@transaction_type.name}.inset_paras").each_line do |para| %>
+      <p class="govuk-body"><%= para %></p>
+    <% end %>
+  <% else %>
+    <div class="govuk-body"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
+  <% end %>
 
   <% if %w[benefits excluded_benefits].include?(@transaction_type.name) %>
     <%= render "shared/means/cost_of_living_and_disregarded_benefits" %>

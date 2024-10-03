@@ -74,7 +74,7 @@ Feature: non_passported_journey with means
 
     When I click 'Save and continue'
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
-    And I should see "Benefits None"
+    And I should see "Benefits, charitable or government payments None"
 
     When I click 'Save and continue'
     Then I should be on a page with title "What you need to do"

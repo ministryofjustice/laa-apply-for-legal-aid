@@ -163,7 +163,7 @@ en:
               inclusion: Select yes if your client has applied for civil legal aid before
             previous_reference:
               blank: Enter the reference number for any previous application
-              not_valid: Enter the reference number in the correct format 
+              not_valid: Enter the reference number in the correct format
         aggregated_cash_income:
           credits:
             attributes:

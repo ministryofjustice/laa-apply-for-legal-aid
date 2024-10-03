@@ -25,7 +25,7 @@ en:
         providers:
           means: &revealing_checkbox_labels
             cash_incomes:
-              check_box_benefits: Benefits
+              check_box_benefits: Benefits, charitable or government payments
               check_box_friends_or_family: Financial help from friends or family
               check_box_maintenance_in: Maintenance payments from a former partner
               check_box_property_or_lodger: Income from a property or lodger
