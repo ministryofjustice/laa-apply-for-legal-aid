@@ -8,10 +8,7 @@
   h1,
   h2,
   ul,
-  label,
-  a,
-  a:link,
-  a:visited {
+  label {
     color: govuk-colour("white");
   }
 
@@ -38,27 +35,6 @@
     float: none;
   }
 
-  #continue,
-  a.white-button,
-  button.white-button {
-    color: #1d70b8;
-    background: #ffffff;
-    box-shadow: 0 2px 0 #001526;
-    font-weight: bold;
-
-    &:focus {
-      background-color: #ffdd00;
-    }
-
-    &:active {
-      box-shadow: inset 0 0 0 1px #ffdd00;
-    }
-
-    &:hover {
-      background-color: #d0d3d6;
-    }
-  }
-
   .govuk-radios__label::before,
   & ::after {
     border-color: govuk-colour("black");
@@ -71,6 +47,7 @@
     color: govuk-colour("white");
   }
 }
+
 @media (min-width: 769px) {
   .interruption-panel {
     padding: 60px;
