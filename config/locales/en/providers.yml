@@ -129,7 +129,7 @@ en:
       other_income:
         title: "%{individual} other income"
         income: "%{individual} income"
-        benefits: Benefits
+        benefits: Benefits, charitable or government payments
         friends_or_family: Financial help from friends or family
         maintenance: Maintenance payments from a former partner
         property_or_lodger: Income from property or lodger

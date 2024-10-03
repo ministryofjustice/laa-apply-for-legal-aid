@@ -85,7 +85,7 @@ Feature: Review and print your application
 
     And the "Income, regular payments and assets" review section should contain:
       | question |
-      | Benefits total |
+      | Benefits, charitable or government payments total |
       | Financial help from friends or family total |
       | Maintenance payments from a former partner total |
       | Income from a property or lodger total |
@@ -144,7 +144,7 @@ Feature: Review and print your application
       | h2  | Your client's capital |
 
     And I should see "Passported"
-    And I should not see "Benefits total"
+    And I should not see "Benefits, charitable or government payments total"
     And I should not see "Housing benefit total"
     And I should not see "Disregarded benefits total"
     And I should not see "Financial help from friends or family total"
