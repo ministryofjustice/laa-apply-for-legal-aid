@@ -103,11 +103,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(application.reload.state).to eq "applicant_details_checked"
         end
 
-        it "syncs the application" do
-          expect(CleanupCapitalAttributes).to receive(:call).with(application)
-          patch_request
-        end
-
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)

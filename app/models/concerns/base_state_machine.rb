@@ -77,8 +77,7 @@ class BaseStateMachine < ApplicationRecord
                     delegated_functions_used
                     overriding_dwp_result
                   ],
-                  to: :applicant_details_checked,
-                  after: proc { |legal_aid_application| CleanupCapitalAttributes.call(legal_aid_application) }
+                  to: :applicant_details_checked
 
       transitions from: :provider_entering_merits, to: :applicant_details_checked, guard: proc { non_means_tested? }
     end
