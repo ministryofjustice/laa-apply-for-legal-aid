@@ -31,6 +31,8 @@ module Providers
       end
 
       def process_invalid_application
+        AlertManager.capture_exception("#{self.class}##{__method__} called for legal aid application id of #{params[:legal_aid_application_id] || 'nil'}")
+        Rails.logger.error("#{self.class}##{__method__} called for legal aid application id of #{params[:legal_aid_application_id] || 'nil'}")
         redirect_to error_path(:page_not_found)
       end
 
