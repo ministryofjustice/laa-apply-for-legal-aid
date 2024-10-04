@@ -42,6 +42,7 @@
        data-uri="<%= Rails.configuration.x.legal_framework_api_host_for_js %>"
        value="<%= @excluded_codes %>">
 <%= form_with(
+      model: nil,
       url: providers_legal_aid_application_proceedings_types_path,
       local: true,
     ) do |form| %>

@@ -9,7 +9,7 @@ module FlowHelper
     draft_button_text: t("generic.save_and_come_back_later")
   )
 
-    form_with(url:, method:, local: true) do |form|
+    form_with(model: nil, url:, method:, local: true) do |form|
       next_action_buttons(
         show_continue:,
         show_draft:,
