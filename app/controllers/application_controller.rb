@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def page_not_found
+  def page_not_found(exception)
+    AlertManager.capture_exception(exception)
+    Rails.logger.error(exception.message)
     update_locale
     redirect_to error_path(:page_not_found, default_url_options)
   end
