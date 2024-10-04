@@ -4,7 +4,7 @@
   </p>
 <% else %>
   <%= form_with(
-        model: @form.presence || false,
+        model: @form,
         url:,
         method: :delete,
         local: true,

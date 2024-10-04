@@ -1,8 +1,7 @@
 Feature: Mock saml test
   @javascript
   Scenario: A provider can login with mock saml data from the start page
-    Given the provider account has been created
-    And I visit the root page
+    Given I visit the root page
     And I click link 'start'
     When I enter the email address 'test1@example.com'
     And I enter the password 'password'

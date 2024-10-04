@@ -25,7 +25,7 @@
   <%= render partial: "upload_evidence" %>
 
   <%= form_with(
-        model: @submission_form.presence || false,
+        model: @submission_form,
         url: providers_legal_aid_application_uploaded_evidence_collection_path,
         method: :patch,
         local: true,
