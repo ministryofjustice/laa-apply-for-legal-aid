@@ -17,6 +17,12 @@ RSpec.describe Flow::Steps::ProviderCapital::VehicleDetailsStep, type: :request 
 
       it { is_expected.to eq providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application, vehicle) }
     end
+
+    context "when a user has somehow stored an invalid vehicle id (BUG AP-5365)" do
+      let(:provider_step_params) { { id: "new" } }
+
+      it { is_expected.to eq new_providers_legal_aid_application_means_vehicle_detail_path(legal_aid_application) }
+    end
   end
 
   describe "#forward" do
