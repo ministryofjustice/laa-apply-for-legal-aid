@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 private
 
   def page_not_found(exception)
+    # TODO: alerting and logging added to handle bug AP-5365 but could keep in?!
     AlertManager.capture_exception(exception)
     Rails.logger.error(exception.message)
     update_locale
