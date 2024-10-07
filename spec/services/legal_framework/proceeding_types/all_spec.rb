@@ -4,12 +4,14 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
   subject(:all) { described_class.new(legal_aid_application) }
 
   before do
-    allow(Setting).to receive(:special_childrens_act?).and_return(sca_enabled)
+    allow(Setting).to receive_messages(special_childrens_act?: sca_enabled, public_law_family?: plf_enabled)
     stub_request(:post, uri).to_return(body: all_proceeding_types_payload)
   end
 
   let(:legal_aid_application) { create :legal_aid_application }
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types/filter" }
+  let(:sca_enabled) { false }
+  let(:plf_enabled) { false }
 
   describe ".call" do
     subject(:call) { all.call }
@@ -24,11 +26,26 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
       end
     end
 
-    context "when the special children act setting is off" do
-      let(:sca_enabled) { false }
-
+    context "when the special children act setting and public law family settings are off" do
       it "returns the expected proceedings" do
         expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006]
+      end
+    end
+
+    context "when the public law family setting is on" do
+      let(:plf_enabled) { true }
+
+      it "returns the expected proceedings" do
+        expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PBM01]
+      end
+    end
+
+    context "when all matter types flags are on" do
+      let(:sca_enabled) { true }
+      let(:plf_enabled) { true }
+
+      it "returns the expected proceedings" do
+        expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003 PBM01]
       end
     end
   end
@@ -106,6 +123,18 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_category_law_code: "MAT",
         ccms_matter_code: "KPBLW",
         ccms_matter: "special children act (SCA)",
+      },
+      {
+        ccms_code: "PBM01",
+        meaning: "Declaration for overseas adoption-Pub Law-Fam",
+        description: "to be updated when the actual value is known!",
+        full_s8_only: false,
+        sca_core: false,
+        sca_related: false,
+        ccms_category_law: "Family",
+        ccms_category_law_code: "MAT",
+        ccms_matter_code: "KPBLB",
+        ccms_matter: "public law family (PLF)",
       },
     ].to_json
   end
