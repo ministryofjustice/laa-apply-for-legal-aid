@@ -805,6 +805,7 @@ en:
             pension_frequency:
               inclusion: Select how often the partner receives pension income
             transaction_type_ids:
+              blank: Select at least one of the options
               none_and_another_option_selected: If you select 'The partner does not get any of these payments', you cannot select any of the other options
         providers/partners/regular_outgoings_form:
           attributes:
