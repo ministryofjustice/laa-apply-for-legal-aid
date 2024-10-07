@@ -7,24 +7,25 @@ module Providers
 
       def update
         synchronize_debit_transaction_types
+        validate
 
-        if none_selected?
-          legal_aid_application.update!(no_debit_transaction_types_selected: true)
+        if legal_aid_application.errors.present?
+          return continue_or_draft if draft_selected?
 
-          return continue_or_draft
-        elsif transaction_types_selected?
-          legal_aid_application.update!(no_debit_transaction_types_selected: false)
+          render :show
+        else
+          legal_aid_application.update!(no_debit_transaction_types_selected: none_selected?)
 
-          return continue_or_draft
+          continue_or_draft
         end
-
-        return continue_or_draft if draft_selected?
-
-        legal_aid_application.errors.add :transaction_type_ids, t(".none_selected")
-        render :show
       end
 
     private
+
+      def validate
+        legal_aid_application.errors.add :transaction_type_ids, t(".none_and_another_option_selected") if none_selected? && transaction_types_selected?
+        legal_aid_application.errors.add :transaction_type_ids, t(".none_selected") if [none_selected?, transaction_types_selected?].all?(false)
+      end
 
       def legal_aid_application_params
         params.require(:legal_aid_application).permit(transaction_type_ids: [])
