@@ -59,7 +59,7 @@ env:
   - name: ORDNANCE_SURVEY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ordnanceSurveyApiKey
   - name: SECRET_KEY_BASE
     valueFrom:
@@ -203,12 +203,12 @@ env:
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: trueLayerClientId
   - name: TRUE_LAYER_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: trueLayerClientSecret
   - name: TRUE_LAYER_ENABLE_MOCK
     valueFrom:
@@ -270,7 +270,7 @@ env:
   - name: GECKOBOARD_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: geckoboardApiKey
   - name: GOOGLE_TAG_MANAGER_TRACKING_ID
     valueFrom:
@@ -324,12 +324,12 @@ env:
   - name: HMRC_API_UID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: hmrcApiUid
   - name: HMRC_API_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: hmrcApiSecret
   - name: HMRC_DURATION_CHECK
     valueFrom:
