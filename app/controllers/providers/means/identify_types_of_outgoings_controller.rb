@@ -23,8 +23,16 @@ module Providers
     private
 
       def validate
-        legal_aid_application.errors.add :transaction_type_ids, t(".none_and_another_option_selected") if none_selected? && transaction_types_selected?
-        legal_aid_application.errors.add :transaction_type_ids, t(".none_selected") if [none_selected?, transaction_types_selected?].all?(false)
+        legal_aid_application.errors.add :transaction_type_ids, error_message_for_none_and_another_option_selected if none_selected? && transaction_types_selected?
+        legal_aid_application.errors.add :transaction_type_ids, error_message_for_none_selected if [none_selected?, transaction_types_selected?].all?(false)
+      end
+
+      def error_message_for_none_selected
+        I18n.t("providers.means.identify_types_of_outgoings.transaction_type_ids.errors.none_selected")
+      end
+
+      def error_message_for_none_and_another_option_selected
+        I18n.t("providers.means.identify_types_of_outgoings.transaction_type_ids.errors.none_and_another_option_selected")
       end
 
       def legal_aid_application_params

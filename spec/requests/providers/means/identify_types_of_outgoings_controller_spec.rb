@@ -63,7 +63,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       it "displays an error" do
         request
         expect(response.body).to match("govuk-error-summary")
-        expect(unescaped_response_body).to match(I18n.t("providers.means.identify_types_of_outgoings.update.none_selected"))
+        expect(unescaped_response_body).to match("Select if your client makes any regular payments")
         expect(unescaped_response_body).not_to include("translation missing")
       end
 
