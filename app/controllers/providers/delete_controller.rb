@@ -7,7 +7,11 @@ module Providers
     def destroy
       @legal_aid_application.discard
       @legal_aid_application.scheduled_mailings.map(&:cancel!)
-
+      flash[:hash] = {
+        title_text: t("generic.success"),
+        success: true,
+        heading_text: t("providers.legal_aid_applications.destroy"),
+      }
       redirect_to providers_legal_aid_applications_path
     end
   end
