@@ -88,12 +88,12 @@ env:
   - name: BC_CLIENT_ORG_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: benefitCheckerClientOrgId
   - name: BC_CLIENT_USER_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: benefitCheckerClientUserId
   - name: BC_WSDL_URL
     valueFrom:
@@ -108,12 +108,12 @@ env:
   - name: CCMS_SOA_AWS_GATEWAY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ccmsSoaAwsGatewayApiKey
   - name: CCMS_SOA_CLIENT_USERNAME
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ccmsSoaClientUsername
   - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
     valueFrom:
@@ -123,7 +123,7 @@ env:
   - name: CCMS_SOA_CLIENT_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ccmsSoaClientPassword
   - name: CCMS_SOA_USER_ROLE
     valueFrom:
@@ -163,7 +163,7 @@ env:
   - name: LAA_PORTAL_IDP_CERT
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: laaPortalIdpCert
   - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
     valueFrom:
@@ -173,12 +173,12 @@ env:
   - name: LAA_PORTAL_CERTIFICATE
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: laaPortalCertificate
   - name: LAA_PORTAL_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: laaPortalSecretKey
   - name: LAA_PORTAL_MOCK_SAML
     valueFrom:
@@ -198,7 +198,7 @@ env:
   - name: PDA_AUTH_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: pdaAuthKey
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
