@@ -1,7 +1,5 @@
 module Banking
   class StateBenefitAnalyserService
-    Struct.new("Benefit", :code, :label, :name, :excluded?)
-
     def self.call(legal_aid_application)
       new(legal_aid_application).call
     end
@@ -9,11 +7,9 @@ module Banking
     def initialize(legal_aid_application)
       @benefit_transactions_found = false
       @legal_aid_application = legal_aid_application
-      @state_benefit_codes = {}
     end
 
     def call
-      load_state_benefit_types
       @legal_aid_application.bank_transactions.credit.each { |txn| process_transaction(txn) }
       update_legal_aid_transaction_types if @benefit_transactions_found
     end
@@ -32,19 +28,6 @@ module Banking
       identify_state_benefit(txn) if state_benefit_payment_pattern?(txn.description)
     end
 
-    def load_state_benefit_types
-      state_benefit_list.each do |sb_hash|
-        next if sb_hash["dwp_code"].nil?
-
-        store_benefit(sb_hash)
-      end
-    end
-
-    def store_benefit(sb_hash)
-      benefit = Struct::Benefit.new(sb_hash["dwp_code"], sb_hash["label"], sb_hash["name"], sb_hash["exclude_from_gross_income"])
-      @state_benefit_codes[benefit.code] = benefit
-    end
-
     def identify_state_benefit(txn)
       matches = txn.description.scan(regex_pattern).uniq
       if matches.count > 1
@@ -52,7 +35,7 @@ module Banking
       else
         @benefit_transactions_found = true
         dwp_code = matches.flatten.first
-        benefit = @state_benefit_codes[dwp_code]
+        benefit = state_benefit_types[dwp_code]
         process_known_benefit(txn, benefit)
       end
     end
@@ -93,7 +76,7 @@ module Banking
     end
 
     def keys
-      @keys ||= @state_benefit_codes.keys.join("|").gsub("/", '\/')
+      @keys ||= state_benefit_types.keys.join("|").gsub("/", '\/')
     end
 
     def update_legal_aid_transaction_types
@@ -103,8 +86,8 @@ module Banking
       @legal_aid_application.save!
     end
 
-    def state_benefit_list
-      CFECivil::ObtainStateBenefitTypesService.call
+    def state_benefit_types
+      @state_benefit_types ||= Banking::StateBenefitsLoader.call
     end
   end
 end
