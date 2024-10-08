@@ -491,6 +491,16 @@ module CCMS
               block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
               expect(block).to have_boolean_response true
             end
+
+            it "sets ApplicationAmendmentType to SUB" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUB"
+            end
+
+            it "excludes the DevolvedPowersDate block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
+              expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
+            end
           end
 
           context "when the application is not backdated" do
@@ -559,6 +569,16 @@ module CCMS
               block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
               expect(block).to have_boolean_response true
             end
+
+            it "sets ApplicationAmendmentType to SUB" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUB"
+            end
+
+            it "excludes the DevolvedPowersDate" do
+              block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
+              expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
+            end
           end
 
           context "when auto-granting an SCA application" do
@@ -617,6 +637,16 @@ module CCMS
             it "sets the APPLY_CASE_MEANS_REVIEW value to true (no caseworker review needed)" do
               block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
               expect(block).to have_boolean_response true
+            end
+
+            it "sets ApplicationAmendmentType to SUB" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUB"
+            end
+
+            it "excludes the DevolvedPowersDate block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
+              expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
             end
           end
         end

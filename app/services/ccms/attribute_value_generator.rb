@@ -110,7 +110,7 @@ module CCMS
     end
 
     def app_amendment_type(_options)
-      legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB"
+      legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
     end
 
     def provider_firm_id(_options)
