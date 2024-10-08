@@ -3,6 +3,10 @@ module DelegatedFunctions
     proceedings.any?(&:used_delegated_functions?)
   end
 
+  def non_sca_used_delegated_functions?
+    used_delegated_functions? && !special_children_act_proceedings?
+  end
+
   def used_delegated_functions_on
     earliest_delegated_functions_date
   end
