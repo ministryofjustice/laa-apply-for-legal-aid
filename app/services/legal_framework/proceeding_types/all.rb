@@ -2,7 +2,7 @@ module LegalFramework
   module ProceedingTypes
     class All < BaseApiCall
       class ProceedingTypeStruct
-        attr_reader :ccms_code, :meaning, :description, :ccms_category_law, :ccms_matter_code, :ccms_matter, :sca_core, :sca_related
+        attr_reader :ccms_code, :meaning, :description, :ccms_category_law, :ccms_matter_code, :ccms_matter, :sca_core, :sca_related, :plf
 
         def initialize(pt_hash)
           @ccms_code = pt_hash["ccms_code"]
@@ -13,11 +13,17 @@ module LegalFramework
           @ccms_matter = pt_hash["ccms_matter"]
           @sca_core = pt_hash["sca_core"]
           @sca_related = pt_hash["sca_related"]
+          @plf = pt_hash["ccms_matter_code"] == "KPBLB"
         end
 
         # TODO: remove the below when the SCA feature flag is removed
         def not_sca?
           [@sca_core, @sca_related].all?(false)
+        end
+
+        # TODO: remove the below when the PLF feature flag is removed
+        def not_plf?
+          @plf == false
         end
       end
 
@@ -35,6 +41,11 @@ module LegalFramework
         # TODO: remove the below when the SCA feature flag is removed
         # filter out SCA applications
         result.select!(&:not_sca?) unless Setting.special_childrens_act?
+
+        # TODO: remove the below when the PLF feature flag is removed
+        # Filter out PLF applications
+        result.select!(&:not_plf?) unless Setting.public_law_family?
+
         result
       end
 
