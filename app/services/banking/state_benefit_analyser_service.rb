@@ -20,10 +20,6 @@ module Banking
       @included_benefit_transaction_type ||= TransactionType.find_by(name: "benefits")
     end
 
-    def excluded_benefit_transaction_type
-      @excluded_benefit_transaction_type ||= TransactionType.find_by(name: "excluded_benefits")
-    end
-
     def process_transaction(txn)
       identify_state_benefit(txn) if state_benefit_payment_pattern?(txn.description)
     end
@@ -54,8 +50,9 @@ module Banking
     end
 
     def process_known_benefit(txn, benefit)
-      transaction_type = benefit.excluded? ? excluded_benefit_transaction_type : included_benefit_transaction_type
-      txn.update!(transaction_type:, meta_data: known_meta(benefit))
+      return if benefit.excluded?
+
+      txn.update!(transaction_type: included_benefit_transaction_type, meta_data: known_meta(benefit))
     end
 
     def known_meta(benefit)
@@ -76,13 +73,11 @@ module Banking
     end
 
     def keys
-      @keys ||= state_benefit_types.keys.join("|").gsub("/", '\/')
+      @keys ||= state_benefit_types.keys.join("|").gsub("\\", "\\\\").gsub("/", '\/')
     end
 
     def update_legal_aid_transaction_types
-      [included_benefit_transaction_type, excluded_benefit_transaction_type].each do |tt|
-        @legal_aid_application.transaction_types << tt unless @legal_aid_application.transaction_types.include?(tt)
-      end
+      @legal_aid_application.transaction_types << included_benefit_transaction_type unless @legal_aid_application.transaction_types.include?(included_benefit_transaction_type)
       @legal_aid_application.save!
     end
 

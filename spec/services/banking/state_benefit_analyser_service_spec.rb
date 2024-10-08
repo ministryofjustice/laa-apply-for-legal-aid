@@ -7,7 +7,6 @@ RSpec.describe Banking::StateBenefitAnalyserService do
   let(:bank_account1) { create(:bank_account, bank_provider:) }
   let(:nino) { "YS327299B" }
   let!(:included_benefit_transaction_type) { create(:transaction_type, :benefits) }
-  let!(:excluded_benefit_transaction_type) { create(:transaction_type, :excluded_benefits) }
 
   describe ".call" do
     subject(:call) { described_class.call(legal_aid_application) }
@@ -49,7 +48,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     end
 
     context "when the DWP payment for this applicant has a recognised code" do
-      context "and there is an included benefit" do
+      context "and it's an included benefit" do
         before { create_list(:bank_transaction, 1, :credit, description: "010101010101-CHB", bank_account: bank_account1) }
 
         it "marks the transaction as a state benefit" do
@@ -64,15 +63,14 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           expect(tx.meta_data).to eq({ code: "CHB", label: "child_benefit", name: "Child Benefit", selected_by: "System" })
         end
 
-        it "adds both included and excluded transaction types to the legal aid application" do
+        it "adds included transaction types to the legal aid application" do
           expect(legal_aid_application.transaction_types.count).to be_zero
           call
           expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
-          expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
         end
       end
 
-      context "and it's with child benefit under a new code HMRC CHILD BENEFIT" do
+      context "and it's a child benefit under a new code HMRC CHILD BENEFIT" do
         before do
           create_list(:bank_transaction, 1, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1)
           call
@@ -89,26 +87,48 @@ RSpec.describe Banking::StateBenefitAnalyserService do
         end
       end
 
-      context "when there is an excluded benefit" do
+      context "and it's an excluded/disregarded benefit" do
         before { create_list(:bank_transaction, 1, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1) }
+
+        it "does not mark the transaction as a state benefit" do
+          call
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.transaction_type_id).to be_nil
+        end
+
+        it "does not update the meta data with the label of the state benefit" do
+          call
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.meta_data).to be_nil
+        end
+
+        it "adds included transaction types to the legal aid application" do
+          expect(legal_aid_application.transaction_types.count).to be_zero
+          call
+
+          expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
+        end
+      end
+
+      context "and it's a an included benefit whose DWP code requires escaping" do
+        before { create_list(:bank_transaction, 1, :credit, description: "0101010 T/P", bank_account: bank_account1) }
 
         it "marks the transaction as a state benefit" do
           call
           tx = legal_aid_application.reload.bank_transactions.first
-          expect(tx.transaction_type_id).to eq excluded_benefit_transaction_type.id
+          expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
         end
 
         it "updates the meta data with the label of the state benefit" do
           call
           tx = legal_aid_application.reload.bank_transactions.first
-          expect(tx.meta_data).to eq({ code: "DLA", label: "disability_living_allowance", name: "Disability Living Allowance", selected_by: "System" })
+          expect(tx.meta_data).to eq({ code: "T/P", label: "training_payment", name: "Training Payment", selected_by: "System" })
         end
 
-        it "adds both included and excluded transaction types to the legal aid application" do
+        it "adds included transaction types to the legal aid application" do
           expect(legal_aid_application.transaction_types.count).to be_zero
           call
           expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
-          expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
         end
       end
     end
