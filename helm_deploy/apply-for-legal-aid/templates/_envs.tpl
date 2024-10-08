@@ -54,7 +54,7 @@ env:
   - name: GOVUK_NOTIFY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: govukNotifyApiKey
   - name: ORDNANCE_SURVEY_API_KEY
     valueFrom:
@@ -69,7 +69,7 @@ env:
   - name: SENTRY_DSN
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: sentryDsn
   - name: RAILS_ENV
     value: production
@@ -218,12 +218,12 @@ env:
   - name: GOOGLE_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleClientId
   - name: GOOGLE_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleClientSecret
   - name: SIDEKIQ_WEB_UI_PASSWORD
     valueFrom:
@@ -314,7 +314,7 @@ env:
   - name: SLACK_ALERT_EMAIL
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: slackAlertEmail
   - name: HMRC_API_HOST
     valueFrom:
@@ -344,12 +344,12 @@ env:
   - name: GOOGLE_SHEETS_PRIVATE_KEY_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleSheetsPrivateKeyId
   - name: GOOGLE_SHEETS_PRIVATE_KEY_VALUE
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleSheetsPrivateKeyValue
   - name: GOOGLE_SHEETS_CLIENT_EMAIL
     valueFrom:
@@ -399,7 +399,7 @@ env:
   - name: SLACK_ALERT_WEBHOOK
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: slackAlertWebhook
   - name: COLLECT_HMRC_DATA
     valueFrom:
