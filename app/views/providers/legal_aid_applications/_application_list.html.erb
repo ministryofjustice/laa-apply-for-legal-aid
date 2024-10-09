@@ -77,4 +77,10 @@
       end
     end %>
 
+<% if @scope == :in_progress %>
+  <p class="govuk-body">
+    <%= govuk_link_to "See applications you cannot submit", voided_providers_legal_aid_applications_path %>
+  </p>
+<% end %>
+
 <%= render "shared/partials/pagination", pagy: @pagy %>
