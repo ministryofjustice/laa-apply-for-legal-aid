@@ -8,12 +8,12 @@ env:
   - name: POSTGRES_USER
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: postgresqlUsername
   - name: POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: postgresqlPassword
   - name: POSTGRES_HOST
     value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
@@ -64,7 +64,7 @@ env:
   - name: SECRET_KEY_BASE
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: secretKeyBase
   - name: SENTRY_DSN
     valueFrom:
@@ -238,7 +238,7 @@ env:
   - name: REDIS_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: redisPassword
   {{ else }}
   - name: REDIS_HOST
@@ -379,17 +379,17 @@ env:
   - name: ENCRYPTION_PRIMARY_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: encryptionPrimaryKey
   - name: ENCRYPTION_DETERMINISTIC_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: encryptionDeterministicKey
   - name: ENCRYPTION_KEY_DERIVATION_SALT
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: encryptionKeyDerivationSalt
   - name: MAINTENANCE_MODE
     valueFrom:
