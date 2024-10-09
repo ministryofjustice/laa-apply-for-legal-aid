@@ -32,7 +32,7 @@ module Populators
 
     def mark_old_as_archived
       TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update!(archived_at: Time.current)
-      TransactionType.find_by(name: "student_loan").update!(archived_at: Time.current)
+      TransactionType.active.find_by(name: "student_loan")&.update!(archived_at: Time.current)
     end
 
     def update_other_income_types
