@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_18_071246) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_09_151640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -425,6 +425,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_071246) do
     t.boolean "has_assets_more_than_threshold"
     t.decimal "assets_value"
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
+  end
+
+  create_table "discretionary_disregards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "backdated_benefits"
+    t.boolean "compensation_for_personal_harm"
+    t.boolean "criminal_injuries_compensation"
+    t.boolean "grenfell_tower_fire_victims"
+    t.boolean "london_emergencies_trust"
+    t.boolean "national_emergencies_trust"
+    t.boolean "loss_or_harm_relating_to_this_application"
+    t.boolean "victims_of_overseas_terrorism_compensation"
+    t.boolean "we_love_manchester_emergency_fund"
+    t.boolean "none_selected"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "legal_aid_application_id"
+    t.index ["legal_aid_application_id"], name: "index_discretionary_disregards_on_legal_aid_application_id"
   end
 
   create_table "document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1110,6 +1127,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_071246) do
   add_foreign_key "chances_of_successes", "proceedings", on_delete: :cascade
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
+  add_foreign_key "discretionary_disregards", "legal_aid_applications"
   add_foreign_key "domestic_abuse_summaries", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"
