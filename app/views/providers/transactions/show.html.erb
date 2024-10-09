@@ -98,7 +98,7 @@
                   end
                 else
                   row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": t("activemodel.attributes.transaction_types.name.#{@transaction_type.name}"), id: "Category-#{builder.object.id}" }) do
-                    concat govuk_tag(text: t("activemodel.attributes.transaction_types.name.#{@transaction_type.name}"))
+                    concat govuk_tag(text: t("activemodel.attributes.transaction_types.name.#{builder.object.transaction_type.name}"))
                   end
                 end
               end

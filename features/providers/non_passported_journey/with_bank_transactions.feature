@@ -39,8 +39,14 @@ Feature: non_passported_journey with bank transactions
     And I click 'Save and continue'
 
     Then I click the '2nd' link 'View statements and add transactions'
+    And I should see govuk-tag "Financial help"
     Then I select the first checkbox
     And I click 'Save and continue'
+
+    Then I click the '2nd' link 'View statements and add transactions'
+    And I should see govuk-tag "Financial help"
+    And I should see govuk-tag "Pension"
+    Then I click 'Save and continue'
 
     Then I click 'Save and continue'
 
