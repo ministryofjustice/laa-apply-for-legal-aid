@@ -132,6 +132,10 @@ Rails.application.routes.draw do
     resources :cookies, only: %i[show update]
 
     resources :legal_aid_applications, path: "applications", only: %i[index create] do
+      collection do
+        get :submitted
+        get :in_progress
+      end
       namespace :means do
         resource :cash_outgoing, only: %i[show update]
         resource :full_employment_details, only: %i[show update]

@@ -1,6 +1,6 @@
 <%= page_template(page_title: t(".heading_1"), back_link: :none) do %>
 
-  <%= govuk_start_button(text: t("generic.new_app"), href: providers_declaration_path, html_attributes: { id: "start" }) %>
+  <%= govuk_button_link_to(t("generic.new_app"), providers_declaration_path, html_attributes: { id: "start" }) %>
 
 <% end %>
 
