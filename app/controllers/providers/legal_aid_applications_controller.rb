@@ -8,16 +8,16 @@ module Providers
     DEFAULT_PAGE_SIZE = 20
 
     def index
-      applications
+      applications(applications_query)
     end
 
     def submitted
-      submitted_applications
+      applications(submitted_query)
       render "index"
     end
 
     def in_progress
-      in_progress_applications
+      applications(in_progress_query)
       render "index"
     end
 
@@ -43,27 +43,9 @@ module Providers
       @scope = params[:action].to_sym
     end
 
-    def applications
+    def applications(query)
       @pagy, @legal_aid_applications = pagy(
-        applications_query,
-        limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: 5, # control of how many elements shown in page info
-      )
-      @initial_sort = { created_at: :desc }
-    end
-
-    def submitted_applications
-      @pagy, @legal_aid_applications = pagy(
-        submitted_query,
-        limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: 5, # control of how many elements shown in page info
-      )
-      @initial_sort = { created_at: :desc }
-    end
-
-    def in_progress_applications
-      @pagy, @legal_aid_applications = pagy(
-        in_progress_query,
+        query,
         limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
         size: 5, # control of how many elements shown in page info
       )
