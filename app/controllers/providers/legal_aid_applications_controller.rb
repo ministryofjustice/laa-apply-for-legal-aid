@@ -21,9 +21,13 @@ module Providers
       render "index"
     end
 
+    def voided
+      applications(voided_query)
+    end
+
     def search
       if search_term.present?
-        applications
+        applications(applications_query)
         log_search
       elsif search_term == ""
         @error = t(".error")
@@ -53,24 +57,37 @@ module Providers
     end
 
     def applications_query
-      query = current_provider.firm.legal_aid_applications.kept.includes(:applicant, :chances_of_success).latest
+      query = firms_applications.includes(:applicant, :chances_of_success).latest
       return query if search_term.blank?
 
       query.search(search_term)
     end
 
     def submitted_query
-      query = current_provider.firm.legal_aid_applications.kept.includes(:applicant, :chances_of_success).where.not(merits_submitted_at: nil).latest
-      return query if search_term.blank?
-
-      query.search(search_term)
+      firms_applications.includes(:applicant, :chances_of_success).where.not(merits_submitted_at: nil).latest
     end
 
     def in_progress_query
-      query = current_provider.firm.legal_aid_applications.kept.includes(:applicant, :chances_of_success).where(merits_submitted_at: nil).latest
-      return query if search_term.blank?
+      firms_applications.includes(:applicant, :chances_of_success).where(merits_submitted_at: nil)
+                                                                  .where.not(created_at: ...Date.new(2024))
+                                                                  .where("provider_step IS NOT NULL OR provider_step IN (?)",
+                                                                         excluded_steps)
+                                                                  .latest
+    end
 
-      query.search(search_term)
+    def voided_query
+      firms_applications.includes(:applicant, :chances_of_success).where(created_at: ...Date.new(2024))
+                                                                  .where("provider_step IS NULL OR provider_step NOT IN (?)",
+                                                                         excluded_steps)
+                                                                  .latest
+    end
+
+    def firms_applications
+      current_provider.firm.legal_aid_applications.kept
+    end
+
+    def excluded_steps
+      %w[end_of_applications submitted_applications use_ccms use_ccms_employed use_ccms_under16s]
     end
 
     def search_term
