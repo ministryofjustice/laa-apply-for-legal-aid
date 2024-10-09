@@ -48,7 +48,7 @@ env:
   - name: ADMIN_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: adminPassword
   {{ end }}
   - name: GOVUK_NOTIFY_API_KEY
@@ -228,7 +228,7 @@ env:
   - name: SIDEKIQ_WEB_UI_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: sidekiqWebUiPassword
   {{ if .Values.redis.enabled }}
   - name: REDIS_PROTOCOL
