@@ -5,6 +5,7 @@ module Providers
     attr_reader :transaction_type_ids, :legal_aid_application
 
     validates :transaction_type_ids, presence: true, unless: :none_selected?
+    validate :none_and_another_checkbox_not_both_checked
     validate :all_regular_transactions_valid
 
     def initialize(params = {})
@@ -35,11 +36,7 @@ module Providers
     alias_method :save!, :save
 
     def transaction_type_ids=(ids)
-      @transaction_type_ids = if none_selected?
-                                []
-                              else
-                                [ids].flatten.compact_blank
-                              end
+      @transaction_type_ids = [ids].flatten.compact_blank
     end
 
     def transaction_type_options
@@ -109,6 +106,7 @@ module Providers
 
     def build_legal_aid_application_transaction_types
       transaction_type_ids.each do |transaction_type_id|
+        next if transaction_type_id == none_selected
         next if owner_has_transaction_type?(transaction_type_id)
 
         legal_aid_application.legal_aid_application_transaction_types.build(
@@ -131,7 +129,7 @@ module Providers
           .where(transaction_type: transaction_type_conditions)
           .where(owner_type:)
           .where.not(transaction_type: transaction_type_exclusions)
-          .where.not(transaction_type_id: transaction_type_ids)
+          .where.not(transaction_type_id: transaction_type_ids - [none_selected])
           .destroy_all
       end
     end
@@ -157,6 +155,14 @@ module Providers
 
     def transaction_types
       transaction_type_options.where(id: transaction_type_ids)
+    end
+
+    def none_and_another_checkbox_not_both_checked
+      errors.add(:transaction_type_ids, :none_and_another_option_selected) if none_and_another_checkbox_checked?
+    end
+
+    def none_and_another_checkbox_checked?
+      regular_transactions.any? && none_selected?
     end
 
     def all_regular_transactions_valid

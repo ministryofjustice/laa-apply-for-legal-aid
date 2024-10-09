@@ -7,24 +7,33 @@ module Providers
 
       def update
         synchronize_credit_transaction_types
+        validate
 
-        if none_selected?
-          legal_aid_application.update!(no_credit_transaction_types_selected: true)
+        if legal_aid_application.errors.present?
+          return continue_or_draft if draft_selected?
 
-          return continue_or_draft
-        elsif transaction_types_selected?
-          legal_aid_application.update!(no_credit_transaction_types_selected: false)
+          render :show
+        else
+          legal_aid_application.update!(no_credit_transaction_types_selected: none_selected?)
 
-          return continue_or_draft
+          continue_or_draft
         end
-
-        return continue_or_draft if draft_selected?
-
-        legal_aid_application.errors.add :transaction_type_ids, t(".none_selected")
-        render :show
       end
 
     private
+
+      def validate
+        legal_aid_application.errors.add :transaction_type_ids, error_message_for_none_and_another_option_selected if none_selected? && transaction_types_selected?
+        legal_aid_application.errors.add :transaction_type_ids, error_message_for_none_selected if [none_selected?, transaction_types_selected?].all?(false)
+      end
+
+      def error_message_for_none_selected
+        I18n.t("providers.means.identify_types_of_incomes.transaction_type_ids.errors.none_selected")
+      end
+
+      def error_message_for_none_and_another_option_selected
+        I18n.t("providers.means.identify_types_of_incomes.transaction_type_ids.errors.none_and_another_option_selected")
+      end
 
       def transaction_type_params
         params

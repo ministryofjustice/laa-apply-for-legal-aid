@@ -5,7 +5,7 @@ en:
       show:
         title: Has your client applied for civil legal aid before?
         heading: Has your client applied for civil legal aid before?
-        type_of_work_text: By this, we mean certificated and licensed work. You do not need to tell us about controlled work and family mediation. 
+        type_of_work_text: By this, we mean certificated and licensed work. You do not need to tell us about controlled work and family mediation.
         previous_records_text: We'll find any previous records to make sure any contributions we calculate are correct.
         ccms_ref_num: Give the CCMS reference number for any previous application
         ccms_ref_hint: For example, 300001234567. This is on any letter from the LAA (Legal aid agency).
@@ -963,8 +963,10 @@ en:
             benefits: For example, Child Benefit or tax credits.
             maintenance_in: This includes child maintenance.
             pension: This includes State, workplace and personal pensions.
-        update:
-          none_selected: Select if your client receives any types of income
+        transaction_type_ids:
+          errors:
+            none_selected: Select if your client receives any types of income
+            none_and_another_option_selected: If you select 'My client does not get any of these payments', you cannot select any of the other options
       cash_incomes:
         show:
           page_title: Select payments your client receives in cash
@@ -977,8 +979,10 @@ en:
             child_care: For example, to a childminder, nanny or nursery.
             maintenance_out: This includes child maintenance.
           none_of_these: My client makes none of these payments
-        update:
-          none_selected: Select if your client makes any regular payments
+        transaction_type_ids:
+          errors:
+            none_selected: Select if your client makes any regular payments
+            none_and_another_option_selected: If you select 'My client makes none of these payments', you cannot select any of the other options
       cash_outgoings:
         show:
           page_heading: Select payments your client pays in cash

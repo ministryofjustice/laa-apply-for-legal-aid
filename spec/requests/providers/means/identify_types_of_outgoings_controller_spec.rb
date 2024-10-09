@@ -63,7 +63,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       it "displays an error" do
         request
         expect(response.body).to match("govuk-error-summary")
-        expect(unescaped_response_body).to match(I18n.t("providers.means.identify_types_of_outgoings.update.none_selected"))
+        expect(unescaped_response_body).to match("Select if your client makes any regular payments")
         expect(unescaped_response_body).not_to include("translation missing")
       end
 
@@ -119,6 +119,23 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
       it "does not delete transaction types" do
         expect { request }.not_to change(TransactionType, :count)
+      end
+    end
+
+    context "when no option has been chosen" do
+      let(:params) { { legal_aid_application: { transaction_type_ids: [] } } }
+
+      it "displays an error" do
+        request
+        expect(page).to have_content("Select if your client makes any regular payments")
+      end
+
+      it "does not add transaction types to the application" do
+        expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
+      end
+
+      it "does not change no_debit_transaction_types_selected" do
+        expect { request }.not_to change { legal_aid_application.reload.no_debit_transaction_types_selected }
       end
     end
 
@@ -230,6 +247,30 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
             expect(response).to have_http_status(:redirect)
           end
         end
+      end
+    end
+
+    context 'when "none selected" and another type has been selected' do
+      let(:params) do
+        {
+          legal_aid_application: {
+            none_selected: "true",
+            transaction_type_ids: outgoing_types.map(&:id),
+          },
+        }
+      end
+
+      it "displays an error" do
+        request
+        expect(page).to have_content("If you select 'My client makes none of these payments', you cannot select any of the other options")
+      end
+
+      it "synchronizes transaction types to the application" do
+        expect { request }.to change(LegalAidApplicationTransactionType, :count)
+      end
+
+      it "does not change no_debit_transaction_types_selected" do
+        expect { request }.not_to change { legal_aid_application.reload.no_debit_transaction_types_selected }
       end
     end
 
