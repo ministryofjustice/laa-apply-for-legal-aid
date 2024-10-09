@@ -4,6 +4,7 @@ $govuk-new-typography-scale: true;
 $govuk-assets-path: "/";
 
 @import "govuk-frontend/dist/govuk/index";
+@import "@ministryofjustice/frontend/moj/components/sub-navigation/sub-navigation";
 
 // Project specific
 
