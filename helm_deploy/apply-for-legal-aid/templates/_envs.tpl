@@ -64,7 +64,7 @@ env:
   - name: SECRET_KEY_BASE
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: secretKeyBase
   - name: SENTRY_DSN
     valueFrom:
