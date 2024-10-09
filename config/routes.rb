@@ -164,6 +164,7 @@ Rails.application.routes.draw do
         resource :other_assets, only: %i[show update]
         resource :restrictions, only: %i[show update]
         resource :policy_disregards, only: %i[show update]
+        resource :payments_to_review, only: %i[show update], controller: "payments_to_review"
         resource :check_income_answers, only: %i[show update]
         resource :add_other_state_benefits, only: %i[show update]
         resources :state_benefits, only: %i[new show update]

@@ -1,0 +1,8 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_means_payments_to_review_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: "Payments to be reviewed", template: :basic, form: do %>
+    <h1 class="govuk-heading-xl"><%= page_title %></h1>
+  <% end %>
+<% end %>
