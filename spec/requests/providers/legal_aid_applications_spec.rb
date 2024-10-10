@@ -154,7 +154,7 @@ RSpec.describe "providers legal aid application requests" do
       end
 
       it "displays no results" do
-        expect(response.body).to include("No results")
+        expect(response.body).to include("You have <strong>0</strong> applications")
       end
     end
   end
