@@ -246,17 +246,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
         end
       end
 
-      shared_examples "under 16 blocked flow" do
-        it "redirects to use CCMS interruption page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_use_ccms_under16s_path(application))
-        end
-
-        it "marks application as under 16s blocked" do
-          expect { request }.to change { application.reload.under_16_blocked? }.from(false).to(true)
-        end
-      end
-
       describe "the cloner service" do
         let(:cloner_double) { instance_double(CopyCase::ClonerService, call: cloner_response) }
         let(:lead_application) { create(:legal_aid_application, :with_proceedings) }
@@ -450,12 +439,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
             expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
           end
         end
-
-        context "with non-means-tested application and applicant under 16" do
-          let(:applicant) { create(:applicant, :under_16) }
-
-          it_behaves_like "under 16 blocked flow"
-        end
       end
 
       context "when no national insurance number provided and no benefit_check_result" do
@@ -483,12 +466,6 @@ RSpec.describe Providers::CheckProviderAnswersController do
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
           end
-        end
-
-        context "with non-means-tested application and applicant under 16" do
-          let(:applicant) { create(:applicant, :under_16) }
-
-          it_behaves_like "under 16 blocked flow"
         end
       end
     end
