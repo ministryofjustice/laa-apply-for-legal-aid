@@ -379,17 +379,17 @@ env:
   - name: ENCRYPTION_PRIMARY_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: encryptionPrimaryKey
   - name: ENCRYPTION_DETERMINISTIC_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: encryptionDeterministicKey
   - name: ENCRYPTION_KEY_DERIVATION_SALT
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: encryptionKeyDerivationSalt
   - name: MAINTENANCE_MODE
     valueFrom:
