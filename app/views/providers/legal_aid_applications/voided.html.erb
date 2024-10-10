@@ -1,0 +1,11 @@
+<%= page_template(page_title: t(".heading"), column_width: "full") do %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body"><%= t(".paragraph") %></p>
+
+    </div>
+    <div class="govuk-grid-column-full">
+      <%= render "application_list", legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
+    </div>
+  </div>
+<% end %>

@@ -3,15 +3,31 @@ module Providers
     include Pagy::Backend
     legal_aid_application_not_required!
 
+    before_action :set_scope, only: %i[submitted in_progress]
+
     DEFAULT_PAGE_SIZE = 20
 
     def index
-      applications
+      applications(applications_query)
+    end
+
+    def submitted
+      applications(submitted_query)
+      render "index"
+    end
+
+    def in_progress
+      applications(in_progress_query)
+      render "index"
+    end
+
+    def voided
+      applications(voided_query)
     end
 
     def search
       if search_term.present?
-        applications
+        applications(applications_query)
         log_search
       elsif search_term == ""
         @error = t(".error")
@@ -27,9 +43,13 @@ module Providers
 
   private
 
-    def applications
+    def set_scope
+      @scope = params[:action].to_sym
+    end
+
+    def applications(query)
       @pagy, @legal_aid_applications = pagy(
-        applications_query,
+        query,
         limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
         size: 5, # control of how many elements shown in page info
       )
@@ -37,10 +57,37 @@ module Providers
     end
 
     def applications_query
-      query = current_provider.firm.legal_aid_applications.kept.includes(:applicant, :chances_of_success).latest
+      query = firms_applications.includes(:applicant, :chances_of_success).latest
       return query if search_term.blank?
 
       query.search(search_term)
+    end
+
+    def submitted_query
+      firms_applications.includes(:applicant, :chances_of_success).where.not(merits_submitted_at: nil).latest
+    end
+
+    def in_progress_query
+      firms_applications.includes(:applicant, :chances_of_success).where(merits_submitted_at: nil)
+                                                                  .where.not(created_at: ...Date.new(2024))
+                                                                  .where("provider_step IS NOT NULL OR provider_step IN (?)",
+                                                                         excluded_steps)
+                                                                  .latest
+    end
+
+    def voided_query
+      firms_applications.includes(:applicant, :chances_of_success).where(created_at: ...Date.new(2024))
+                                                                  .where("provider_step IS NULL OR provider_step NOT IN (?)",
+                                                                         excluded_steps)
+                                                                  .latest
+    end
+
+    def firms_applications
+      current_provider.firm.legal_aid_applications.kept
+    end
+
+    def excluded_steps
+      %w[end_of_applications submitted_applications use_ccms use_ccms_employed use_ccms_under16s]
     end
 
     def search_term
