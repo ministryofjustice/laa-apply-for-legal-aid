@@ -28,7 +28,7 @@
                 concat tag.span(class: "sort-direction-indicator")
               end
             end
-            if @scope == :in_progress
+            unless @scope == :completed
               row.with_cell do
                 concat t(".action")
                 concat tag.span(class: "sort-direction-indicator")
@@ -60,16 +60,14 @@
                   t(".substantive")
                 end
               end
-              if @scope == :in_progress
+              unless @scope == :completed
                 row.with_cell do
-                  unless application.summary_state == :submitted
-                    govuk_link_to(
-                      t(".delete"),
-                      providers_legal_aid_application_delete_path(application),
-                      secondary: true,
-                      suffix: t(".delete_suffix", reference: application.application_ref, applicant: application.applicant_full_name),
-                    )
-                  end
+                  govuk_link_to(
+                    t(".delete"),
+                    providers_legal_aid_application_delete_path(application),
+                    secondary: true,
+                    suffix: t(".delete_suffix", reference: application.application_ref, applicant: application.applicant_full_name),
+                  )
                 end
               end
             end
