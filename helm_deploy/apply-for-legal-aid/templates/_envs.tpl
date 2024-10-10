@@ -108,12 +108,12 @@ env:
   - name: CCMS_SOA_AWS_GATEWAY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ccmsSoaAwsGatewayApiKey
   - name: CCMS_SOA_CLIENT_USERNAME
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ccmsSoaClientUsername
   - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
     valueFrom:
@@ -123,7 +123,7 @@ env:
   - name: CCMS_SOA_CLIENT_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ccmsSoaClientPassword
   - name: CCMS_SOA_USER_ROLE
     valueFrom:
