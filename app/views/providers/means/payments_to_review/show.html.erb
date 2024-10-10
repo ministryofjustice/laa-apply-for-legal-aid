@@ -2,21 +2,21 @@
               url: providers_legal_aid_application_means_payments_to_review_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: "Payments to be reviewed", template: :basic, form: do %>
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
-    <p><%= "We may be able to disregard some payments your client gets based on the rules and guidelines. These are called discretionary disregards." %></p>
+    <p><%= t(".details") %></p>
     <%= form.govuk_check_boxes_fieldset :discretionary_disregards,
-                                        legend: { text: "Select if your client has received any of these payments", size: "l", tag: "h2" } do %>
-      <div class="govuk-hint"><%= "These are one-off payments. Do not include any regular payments." %></div>
-      <div class="govuk-hint"><%= "Select all that apply." %></div>
+                                        legend: { text: t(".h2-heading"), size: "l", tag: "h2" } do %>
+      <div class="govuk-hint"><%= t(".hint") %></div>
+      <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
       <div class="deselect-group" data-deselect-ctrl="#discretionary-disregards-none-selected-true-field">
         <% Providers::DiscretionaryDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
-          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: checkbox } %>
+          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
         <% end %>
       </div>
 
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: "None of these" } %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
     <% end %>
 
   <%= next_action_buttons(show_draft: true, form:) %>
