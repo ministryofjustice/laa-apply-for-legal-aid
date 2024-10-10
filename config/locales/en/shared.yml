@@ -18,7 +18,7 @@ en:
         providers:
           means: &revealing_checkbox_labels
             cash_incomes:
-              check_box_benefits: Benefits
+              check_box_benefits: Benefits, charitable or government payments
               check_box_friends_or_family: Financial help from friends or family
               check_box_maintenance_in: Maintenance payments from a former partner
               check_box_property_or_lodger: Income from a property or lodger
@@ -209,7 +209,7 @@ en:
         line_3: You still need to provide details of the case before we can grant legal aid.
     cost_of_living_and_disregarded_benefits:
       title:
-        Government Cost of Living Payments and disregarded benefits
+        What not to include
     cost_of_living:
       header: Government Cost of Living Payments
       text: "Government Cost of Living Payments are disregarded from the financial eligibility calculation, for example:"
@@ -242,23 +242,27 @@ en:
       low_income:
         heading: Low income benefits
         list:
-        - Benefit Transfer Advance (Universal Credit)
         - Budgeting Advance
-        - Council Tax Reduction
-        - Earnings Top-up (ETU)
         - Housing Benefit
         - Social Fund Funeral Payment
         - Social Fund payments
+        - Universal Credit advance payments
       other:
         heading: Other benefits
         list:
         - Armed Forces Independence Payment
+        - Compensation for miscarriage of justice
         - Foster Carers Allowance
         - Grenfell Tower Residents' Discretionary Fund
         - Grenfell Tower fire victims payments
+        - Infected Blood Support Scheme, which includes Infected Blood
+        - Interim Compensation Payment Scheme, Infected Blodd Further
+        - Interim Compensation Payment Schem, Infected Blood
+        - Compensation Scheme or ealier support schemes
+        - Modern Slavery Victim Care Contract (MSVCC) payments
+        - Scotland and Northen Ireland Redress Schemes for historical child abuse payments
         - War Pensions Scheme payments
         - War Widow(er) Pension
-        - Widow's Pension lump sum payments
         - Windrush Compensation Scheme Payments
     means_report:
       item:
