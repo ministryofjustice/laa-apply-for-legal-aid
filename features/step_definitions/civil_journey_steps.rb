@@ -33,8 +33,16 @@ Given("I have an existing office") do
   @registered_provider.update!(selected_office: office)
 end
 
-Given(/^I visit the applications page$/) do
-  visit providers_legal_aid_applications_path
+Given(/^I visit the in progress applications page$/) do
+  visit in_progress_providers_legal_aid_applications_path
+end
+
+Given(/^I visit the submitted applications page$/) do
+  visit submitted_providers_legal_aid_applications_path
+end
+
+Given(/^I visit the voided applications page$/) do
+  visit voided_providers_legal_aid_applications_path
 end
 
 Given("I have previously created multiple applications") do
@@ -85,6 +93,7 @@ Given("I have created but not submitted an application") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
+    :at_entering_applicant_details,
     :draft,
     :initiated,
     provider: create(:provider),
@@ -1316,7 +1325,7 @@ Then("I am on the application confirmation page") do
 end
 
 Then("I am on the legal aid applications page") do
-  expect(page).to have_content("Applications")
+  expect(page).to have_content("Your applications")
 end
 
 Then("I am on the About the Financial Assessment page") do
