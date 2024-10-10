@@ -6,14 +6,12 @@
           <%= link_to "Submitted",
                       submitted_providers_legal_aid_applications_path,
                       "aria-current": @scope == :submitted ? "page" : nil,
-                      role: "tab",
                       class: "moj-sub-navigation__link" %>
         </li>
         <li class="moj-sub-navigation__item">
           <%= link_to "In progress",
                       in_progress_providers_legal_aid_applications_path,
                       "aria-current": @scope == :in_progress ? "page" : nil,
-                      role: "tab",
                       class: "moj-sub-navigation__link" %>
         </li>
 

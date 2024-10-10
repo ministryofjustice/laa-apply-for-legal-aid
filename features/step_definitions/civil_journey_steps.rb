@@ -101,6 +101,19 @@ Given("I have created but not submitted an application") do
   login_as @legal_aid_application.provider
 end
 
+Given("I have created a voided application") do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :draft,
+    :initiated,
+    provider: create(:provider),
+    provider_step: "chances_of_success",
+    created_at: Date.parse("2023-12-25"),
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given("I previously created a passported application and left on the {string} page") do |provider_step|
   @legal_aid_application = create(
     :application,
@@ -158,6 +171,10 @@ end
 
 Given(/^I view the previously created application$/) do
   find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a").click
+end
+
+Then(/^I should see the previously created application$/) do
+  expect(page).to have_content(@legal_aid_application.applicant.full_name)
 end
 
 Then(/^I should not see the previously created application$/) do
