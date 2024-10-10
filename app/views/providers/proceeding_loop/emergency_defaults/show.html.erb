@@ -6,11 +6,9 @@
     ) do |form| %>
   <%= page_template template: :basic, form: do %>
     <span class="govuk-caption-xl"><%= position_in_array(@proceeding) %></span>
-    <h1 class="govuk-heading-xl govuk-!-margin-bottom-4"><%= @proceeding.meaning %></h1>
+    <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
 
     <h2 class="govuk-heading-m"><%= t(".h2_header") %></h2>
-
-    <div class="govuk-!-padding-1"></div>
 
     <p><strong><%= t(".los_header") %></strong> <%= form.object.emergency_level_of_service_name %></p>
     <p><strong><%= t(".scope_header") %></strong> <%= form.object.delegated_functions_scope_limitation_meaning %></p>
