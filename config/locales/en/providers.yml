@@ -906,6 +906,7 @@ en:
         delete: Delete
         delete_html: Delete <span class="govuk-visually-hidden">application %{reference} for %{applicant_name}</span>
         delete_suffix: " application %{reference} for %{applicant}"
+        no_applications_html: You have <strong>0</strong> applications.
       destroy: You deleted the application
       voided:
         heading: Applications you cannot submit
