@@ -10,7 +10,6 @@ class ApplicantCompleteMeans
   end
 
   def call
-    CleanupCapitalAttributes.call(legal_aid_application)
     legal_aid_application.update!(
       provider_step: intended_provider_step,
       completed_at: Time.current,

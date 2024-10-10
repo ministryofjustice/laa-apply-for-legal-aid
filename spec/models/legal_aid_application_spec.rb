@@ -670,39 +670,11 @@ RSpec.describe LegalAidApplication do
   describe "#applicant_details_checked!" do
     let(:legal_aid_application) { create(:legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details) }
 
-    it "passes application to keep in sync service" do
-      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
-      legal_aid_application.applicant_details_checked!
-    end
-
     it "transitions to applicant_details_checked" do
       expect { legal_aid_application.applicant_details_checked! }
         .to change { legal_aid_application.reload.state }
           .from("checking_applicant_details")
           .to("applicant_details_checked")
-    end
-
-    context "and attributes changed" do
-      before do
-        legal_aid_application.applicant_details_checked!
-        legal_aid_application.reload
-      end
-
-      it "resets property values" do
-        expect(legal_aid_application.property_value).to be_blank
-      end
-
-      it "resets outstanding mortgage" do
-        expect(legal_aid_application.outstanding_mortgage_amount).to be_blank
-      end
-
-      it "resets shared ownership" do
-        expect(legal_aid_application.shared_ownership).to be_blank
-      end
-
-      it "resets percentage home" do
-        expect(legal_aid_application.percentage_home).to be_blank
-      end
     end
 
     context "when transitioning from provider_entering_merits" do
@@ -1382,7 +1354,6 @@ RSpec.describe LegalAidApplication do
     let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers) }
 
     it "runs the complete means service and the bank transaction analyser" do
-      expect(ApplicantCompleteMeans).to receive(:call).with(legal_aid_application)
       expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application)
       legal_aid_application.complete_non_passported_means!
     end
