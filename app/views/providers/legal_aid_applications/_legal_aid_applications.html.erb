@@ -44,7 +44,7 @@
           end
 
           table.with_body do |body|
-            legal_aid_applications.each_with_index do |application, index|
+            legal_aid_applications.each do |application|
               body.with_row do |row|
                 row.with_cell(html_attributes: { class: "sortable-cell", "data-sort-value": application.applicant_full_name }) do
                   link_to_application(application.applicant_full_name, application)
@@ -74,24 +74,14 @@
                   govuk_tag(text: t(application.summary_state, scope: %i[enums legal_aid_application summary_state]), colour: tag_colour(application))
                 end
                 row.with_cell do
-                  concat render partial: "shared/partials/modal_dialogue", locals: { application:, index: }
-
                   unless application.summary_state == :submitted
                     concat govuk_button_link_to(
                       t(".delete"),
                       providers_legal_aid_application_delete_path(application),
-                      class: "govuk-!-margin-1 no-script",
+                      class: "govuk-!-margin-1",
                       secondary: true,
                       suffix: t(".delete_suffix", reference: application.application_ref, applicant: application.applicant_full_name),
                     )
-
-                    concat tag.button(
-                      class: "govuk-button govuk-button--secondary govuk-!-margin-0 script hidden",
-                      id: "#{application.application_ref}-modal-btn",
-                      "data-modal-open-target": "modal-#{application.id}",
-                    ) {
-                             t(".delete_html", reference: application.application_ref, applicant_name: application.applicant.full_name)
-                           }
                   end
                 end
               end

@@ -7,9 +7,19 @@
     <dd><%= @legal_aid_application.applicant.full_name %></dd>
 
     <dt>
+      <strong><%= t(".start_date") %>:</strong>
+    </dt>
+    <dd><%= l(@legal_aid_application.created_at.to_date, format: :short_date) %></dd>
+
+    <dt>
       <strong><%= t(".reference") %>:</strong>
     </dt>
     <dd><%= @legal_aid_application.application_ref %></dd>
+
+    <dt>
+      <strong><%= t(".status") %>:</strong>
+    </dt>
+    <dd><%= t(@legal_aid_application.summary_state, scope: %i[enums legal_aid_application summary_state]) %></dd>
   </dl>
 </div>
 
