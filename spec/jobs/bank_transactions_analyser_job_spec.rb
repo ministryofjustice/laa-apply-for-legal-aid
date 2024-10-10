@@ -10,7 +10,6 @@ module Banking
     before do
       allow(BankTransactionBalanceCalculator).to receive(:call).with(legal_aid_application)
       allow(BankTransactionsTrimmer).to receive(:call).with(legal_aid_application)
-      allow(StateBenefitAnalyserService).to receive(:call).with(legal_aid_application)
       allow(ProviderEmailService).to receive(:new).with(legal_aid_application).and_return(provider_email_service)
     end
 
@@ -25,13 +24,7 @@ module Banking
         bank_transaction_analyser_job
       end
 
-      it "calls the StateBenefitAnalyserService" do
-        expect(StateBenefitAnalyserService).to receive(:call).with(legal_aid_application)
-        bank_transaction_analyser_job
-      end
-
       it "updates the state" do
-        allow(StateBenefitAnalyserService).to receive(:call).with(legal_aid_application)
         bank_transaction_analyser_job
         expect(legal_aid_application.reload.state).to eq("provider_assessing_means")
       end
