@@ -86,7 +86,6 @@ Feature: Review and print your application
     And the "Income, regular payments and assets" review section should contain:
       | question |
       | Benefits total |
-      | Disregarded benefits total |
       | Financial help from friends or family total |
       | Maintenance payments from a former partner total |
       | Income from a property or lodger total |
