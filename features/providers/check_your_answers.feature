@@ -324,7 +324,6 @@ Feature: Checking answers backwards and forwards
     And the "Payments your client receives" section's questions and answers should match:
       | question | answer |
       | Benefits | £666.00 |
-      | Disregarded benefits | None |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | Yes, but none specified |
       | Income from a property or lodger | None |
