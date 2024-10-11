@@ -32,19 +32,9 @@ module CCMS
       end
 
       def document_type(xml)
-        case @document_type
-        when "bank_statement_evidence_pdf", "part_bank_state_evidence_pdf", "bank_transaction_report"
-          xml.__send__(:"casebio:DocumentType", "BSTMT")
-        when "client_employment_evidence_pdf", "part_employ_evidence_pdf", "employment_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "PAYSLIP")
-        when "court_order_pdf", "court_application_or_order_pdf", "court_application_pdf"
-          xml.__send__(:"casebio:DocumentType", "COURT_ORD")
-        when "expert_report_pdf", "gateway_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "EX_RPT")
-        when "benefit_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "BEN_LTR")
-        when "statement_of_case_pdf"
-          xml.__send__(:"casebio:DocumentType", "STATE")
+        document_category = DocumentCategory.find_by(name: @document_type)
+        if document_category.present?
+          xml.__send__(:"casebio:DocumentType", document_category.ccms_document_type)
         else
           xml.__send__(:"casebio:DocumentType", "ADMIN1")
         end
