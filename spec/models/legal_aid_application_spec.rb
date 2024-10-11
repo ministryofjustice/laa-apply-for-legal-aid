@@ -488,7 +488,7 @@ RSpec.describe LegalAidApplication do
       let(:legal_aid_application) { create(:legal_aid_application, applicant:, transaction_types: [transaction_type]) }
 
       context "with income transactions" do
-        let(:transaction_type) { create(:transaction_type, :credit, name: "salary") }
+        let(:transaction_type) { create(:transaction_type, :credit) }
 
         it "returns false" do
           create(:bank_transaction, :credit, transaction_type:, bank_account:)
@@ -510,7 +510,7 @@ RSpec.describe LegalAidApplication do
       let(:legal_aid_application) { create(:legal_aid_application, applicant:, transaction_types: [transaction_type]) }
 
       context "with income transactions" do
-        let(:transaction_type) { create(:transaction_type, :credit, name: "salary") }
+        let(:transaction_type) { create(:transaction_type, :credit) }
 
         it "returns true" do
           create(:bank_transaction, :credit, transaction_type: nil, bank_account:)
