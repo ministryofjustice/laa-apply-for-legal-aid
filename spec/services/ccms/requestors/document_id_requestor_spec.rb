@@ -9,6 +9,8 @@ module CCMS
       let(:requestor) { described_class.new(case_ccms_reference, "my_login", type) }
       let(:type) { "means_report" }
 
+      before { DocumentCategoryPopulator.call }
+
       describe "XML request" do
         context "when the attachment is a means report" do
           let(:type) { "means_report" }
@@ -130,6 +132,24 @@ module CCMS
               transaction_id: expected_tx_id,
               matching: %w[
                 <casebio:DocumentType>BEN_LTR</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
+              ],
+            )
+          end
+        end
+
+        context "when sent a legacy document" do
+          let(:type) { "employment_evidence_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>ADMIN1</casebio:DocumentType>
                 <casebio:Channel>E</casebio:Channel>
               ],
             )
