@@ -156,25 +156,6 @@ RSpec.describe Providers::TransactionsController do
         end
       end
 
-      context "when there are identified benefits" do
-        let!(:benefits_transaction_type) { create(:transaction_type, :benefits) }
-        let!(:selected_transactions) { [bank_transaction, bank_transaction_other_applicant, benefit_bank_transaction, child_benefit_bank_transaction] }
-        let!(:benefit_bank_transaction) { create(:bank_transaction, :benefits, bank_account:, meta_data: nil) }
-        let!(:child_benefit_bank_transaction) do
-          create(:bank_transaction, :benefits, bank_account:, meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
-        end
-        let(:params) do
-          {
-            transaction_type: benefits_transaction_type.name,
-            transaction_ids: selected_transactions.pluck(:id),
-          }
-        end
-
-        it "does not change the meta data for the pre-analysed data" do
-          expect { patch_request }.not_to change { child_benefit_bank_transaction.reload.meta_data }
-        end
-      end
-
       context "when being set to friends_or_family" do
         let!(:friends_or_family_transaction_type) { create(:transaction_type, :friends_or_family) }
         let!(:selected_transactions) { [bank_transaction, bank_transaction_other_applicant, friends_or_family_bank_transaction] }

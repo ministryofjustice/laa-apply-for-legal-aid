@@ -39,7 +39,7 @@ RSpec.describe BankTransaction do
   end
 
   context "with serialization of meta data" do
-    context "and meta data is null" do
+    context "when meta data is null" do
       let(:tx) { create(:bank_transaction) }
 
       it "returns nil" do
@@ -55,11 +55,11 @@ RSpec.describe BankTransaction do
     end
 
     context "when meta data is populated" do
+      let(:tx) { create(:bank_transaction, :friends_or_family, :manually_chosen) }
+
       it "returns a hash" do
-        bt = create(:bank_transaction, :with_meta)
-        expect(bt.meta_data[:code]).to eq "UC"
-        expect(bt.meta_data[:name]).to eq "Universal credit"
-        expect(bt.meta_data[:label]).to eq "universal_credit"
+        expect(tx.meta_data)
+          .to match(a_hash_including(code: "XXXX", label: "manually_chosen", name: "Friends Or Family", category: "Friends Or Family", selected_by: "Provider"))
       end
     end
   end

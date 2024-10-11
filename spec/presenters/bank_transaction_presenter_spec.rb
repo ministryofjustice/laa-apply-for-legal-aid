@@ -74,11 +74,11 @@ RSpec.describe BankTransactionPresenter do
         it { is_expected.to be_nil }
       end
 
-      context "when the transaction has been categorized" do
-        let(:transaction) { create(:bank_transaction, :benefits) }
+      context "when the transaction has been manually categorized" do
+        let(:transaction) { create(:bank_transaction, :benefits, :manually_chosen) }
 
         it "displays the transaction_type name" do
-          expect(category).to eq "Child Benefit"
+          expect(category).to eq "Benefits"
         end
       end
     end

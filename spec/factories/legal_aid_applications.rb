@@ -922,10 +922,10 @@ FactoryBot.define do
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :benefits,
+                 :manually_chosen,
                  happened_at: count.days.ago,
                  bank_account:,
-                 operation: "credit",
-                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
+                 operation: "credit")
         end
       end
     end
@@ -937,10 +937,10 @@ FactoryBot.define do
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :benefits,
+                 :manually_chosen,
                  happened_at: count.days.ago,
                  bank_account:,
-                 operation: "credit",
-                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
+                 operation: "credit")
         end
       end
     end
@@ -952,11 +952,11 @@ FactoryBot.define do
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :benefits,
+                 :manually_chosen,
                  happened_at: count.days.ago,
                  amount: 111,
                  bank_account:,
-                 operation: "credit",
-                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
+                 operation: "credit")
         end
       end
     end
