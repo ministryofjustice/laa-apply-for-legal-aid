@@ -1,28 +1,28 @@
-name,submit_to_ccms,ccms_document_type,display_on_evidence_upload,mandatory
-bank_transaction_report,TRUE,BSTMT,FALSE,FALSE
+name,submit_to_ccms,ccms_document_type,display_on_evidence_upload,mandatory,file_extension,description
+bank_transaction_report,TRUE,BSTMT,FALSE,FALSE,csv,Open Banking Report
 benefit_evidence,FALSE,,TRUE,TRUE
-benefit_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
+benefit_evidence_pdf,TRUE,BEN_LTR,FALSE,FALSE,pdf,Passporting Evidence
 client_employment_evidence,FALSE,,TRUE,TRUE
-client_employment_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
+client_employment_evidence_pdf,TRUE,PAYSLIP,FALSE,FALSE,pdf,Client Employment
 part_employ_evidence,FALSE,,TRUE,TRUE
-part_employ_evidence_pdf,TRUE,ADMIN1,FALSE,FALSE
+part_employ_evidence_pdf,TRUE,PAYSLIP,FALSE,FALSE,pdf,Partner Employment
 gateway_evidence,FALSE,,TRUE,FALSE
-gateway_evidence_pdf,TRUE,STATE,FALSE,FALSE
-means_report,TRUE,ADMIN1,FALSE,FALSE
-merits_report,TRUE,ADMIN1,FALSE,FALSE
+gateway_evidence_pdf,TRUE,EX_RPT,FALSE,FALSE,pdf,Gateway Evidence
+means_report,TRUE,REPORT,FALSE,FALSE,pdf,Means Report
+merits_report,TRUE,REPORT,FALSE,FALSE,pdf,Merits Report
 statement_of_case,FALSE,,FALSE,FALSE
-statement_of_case_pdf,TRUE,ADMIN1,FALSE,FALSE
+statement_of_case_pdf,TRUE,STATE,FALSE,FALSE,pdf,Statement of Case
 bank_statement_evidence,FALSE,,FALSE,FALSE
-bank_statement_evidence_pdf,TRUE,BSTMT,FALSE,FALSE
+bank_statement_evidence_pdf,TRUE,BSTMT,FALSE,FALSE,pdf,Client Statement
 court_application,FALSE,,TRUE,FALSE
-court_application_pdf,TRUE,ADMIN1,FALSE,FALSE
+court_application_pdf,TRUE,COURT_ORD,FALSE,FALSE,pdf,Court Application
 court_order,FALSE,,TRUE,TRUE
-court_order_pdf,TRUE,ADMIN1,FALSE,FALSE
+court_order_pdf,TRUE,COURT_ORD,FALSE,FALSE,pdf,Court Order
 expert_report,FALSE,,TRUE,FALSE
-expert_report_pdf,TRUE,ADMIN1,FALSE,FALSE
+expert_report_pdf,TRUE,EX_RPT,FALSE,FALSE,pdf,Expert Report
 court_application_or_order,FALSE,,TRUE,TRUE
-court_application_or_order_pdf,TRUE,ADMIN1,FALSE,FALSE
+court_application_or_order_pdf,TRUE,COURT_ORD,FALSE,FALSE,pdf,Court Order or Application
 part_bank_state_evidence,FALSE,,FALSE,FALSE
-part_bank_state_evidence_pdf,TRUE,BSTMT,FALSE,FALSE
+part_bank_state_evidence_pdf,TRUE,BSTMT,FALSE,FALSE,pdf,Partner Statement
 parental_responsibility,FALSE,,TRUE,TRUE
-parental_responsibility_pdf,TRUE,EX_RPT,FALSE,FALSE
+parental_responsibility_pdf,TRUE,COURT_ORD,FALSE,FALSE,pdf,PR Evidence
