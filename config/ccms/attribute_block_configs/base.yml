@@ -3144,7 +3144,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   DELEG_FUNCTIONS_DATE_MERITS:
-    generate_block?: '#application_used_delegated_functions?'
+    generate_block?: '#application_non_sca_used_delegated_functions?'
     value: '#used_delegated_functions_on'
     br100_meaning: 'Emg: The Delegated Functions Date'
     response_type: date
@@ -4033,7 +4033,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   DELEGATED_FUNCTIONS_DATE:
-    generate_block?: '#application_used_delegated_functions?'
+    generate_block?: '#application_non_sca_used_delegated_functions?'
     value: '#used_delegated_functions_on'
     br100_meaning: 'App: Delegated functions date'
     response_type: date
