@@ -6,12 +6,13 @@
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <p><%= t(".details") %></p>
     <%= form.govuk_check_boxes_fieldset :discretionary_disregards,
-                                        legend: { text: t(".h2-heading"), size: "l", tag: "h2" } do %>
+                                        legend: { text: t(".h2-heading"), size: "l", tag: "h2" },
+                                        form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
       <div class="govuk-hint"><%= t(".hint") %></div>
       <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
       <div class="deselect-group" data-deselect-ctrl="#discretionary-disregards-none-selected-true-field">
         <% Providers::DiscretionaryDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
-          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
+          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") }, hint: { text: t(".#{checkbox}_hint", default: "") } %>
         <% end %>
       </div>
 

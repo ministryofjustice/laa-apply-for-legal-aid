@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Flow::Steps::ProviderCapital::PolicyDisregardsStep, type: :request do
-  let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
+  let(:legal_aid_application) { build_stubbed(:legal_aid_application, :with_applicant) }
   let(:passported?) { nil }
   let(:provider_checking_or_checked_citizens_means_answers?) { nil }
 

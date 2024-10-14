@@ -1264,6 +1264,7 @@ en:
           hint: These are one-off payments. Do not include any regular payments.
           backdated_benefits: Backdated benefits and child maintenance payments received more than 24 months ago
           compensation_for_personal_harm: Compensation, damages or ex-gratia payments for personal harm
+          compensation_for_personal_harm_hint: For example, payments to victims of abuse
           criminal_injuries_compensation: Criminal Injuries Compensation Scheme payment
           grenfell_tower_fire_victims: Grenfell Tower fire victims payment
           london_emergencies_trust: London Emergencies Trust payment
