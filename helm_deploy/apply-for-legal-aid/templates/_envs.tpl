@@ -108,12 +108,12 @@ env:
   - name: CCMS_SOA_AWS_GATEWAY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-ccms-connection
         key: ccmsSoaAwsGatewayApiKey
   - name: CCMS_SOA_CLIENT_USERNAME
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-ccms-connection
         key: ccmsSoaClientUsername
   - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
     valueFrom:
@@ -123,7 +123,7 @@ env:
   - name: CCMS_SOA_CLIENT_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-ccms-connection
         key: ccmsSoaClientPassword
   - name: CCMS_SOA_USER_ROLE
     valueFrom:
@@ -163,7 +163,7 @@ env:
   - name: LAA_PORTAL_IDP_CERT
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-portal-connection
         key: laaPortalIdpCert
   - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
     valueFrom:
@@ -173,12 +173,12 @@ env:
   - name: LAA_PORTAL_CERTIFICATE
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-portal-connection
         key: laaPortalCertificate
   - name: LAA_PORTAL_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-portal-connection
         key: laaPortalSecretKey
   - name: LAA_PORTAL_MOCK_SAML
     valueFrom:
