@@ -40,5 +40,5 @@ Feature: Deleting applications
     And I should be on a page showing "You have 0 applications."
     And I should not see the previously created application
 
-    When I visit the in progress applications page
+    Then I click link "Back"
     Then I should not see "See applications you cannot submit"
