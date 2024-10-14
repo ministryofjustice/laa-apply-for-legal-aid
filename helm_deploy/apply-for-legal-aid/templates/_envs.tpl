@@ -88,12 +88,12 @@ env:
   - name: BC_CLIENT_ORG_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: benefitCheckerClientOrgId
   - name: BC_CLIENT_USER_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: benefitCheckerClientUserId
   - name: BC_WSDL_URL
     valueFrom:
