@@ -13,7 +13,7 @@ module Providers
       if @form.save
         # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(Office.find(form_params[:selected_office_id]).code)
-        redirect_to providers_legal_aid_applications_path
+        redirect_to submitted_providers_legal_aid_applications_path
       else
         render :show
       end

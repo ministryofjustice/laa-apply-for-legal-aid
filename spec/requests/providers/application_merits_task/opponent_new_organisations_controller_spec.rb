@@ -147,7 +147,7 @@ module Providers
 
           it "redirects to provider draft endpoint" do
             request_update
-            expect(response).to redirect_to providers_legal_aid_applications_path
+            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
           end
 
           it "does not set the task to complete" do

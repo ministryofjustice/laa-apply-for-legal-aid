@@ -15,7 +15,7 @@ module Providers
         if form.confirm_office?
           # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
           ProviderContractDetailsWorker.perform_async(firm.offices.first.code)
-          return redirect_to providers_legal_aid_applications_path
+          return redirect_to submitted_providers_legal_aid_applications_path
         end
 
         current_provider.update!(selected_office: nil)
@@ -50,7 +50,7 @@ module Providers
         # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(firm.offices.first.code)
         current_provider.update!(selected_office: firm.offices.first)
-        return providers_legal_aid_applications_path
+        return submitted_providers_legal_aid_applications_path
       end
 
       return providers_select_office_path unless current_provider.selected_office

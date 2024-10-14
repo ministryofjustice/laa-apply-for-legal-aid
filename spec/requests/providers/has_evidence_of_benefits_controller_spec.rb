@@ -138,7 +138,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       let(:params) { { draft_button: "Save as draft" } }
 
       it "redirects to the list of applications" do
-        expect(response).to redirect_to providers_legal_aid_applications_path
+        expect(response).to redirect_to submitted_providers_legal_aid_applications_path
       end
     end
   end
