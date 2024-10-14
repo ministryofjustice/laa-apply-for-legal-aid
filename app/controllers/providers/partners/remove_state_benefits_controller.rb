@@ -12,7 +12,7 @@ module Providers
         if form.valid?
           regular_transaction&.destroy! if form.remove_state_benefit?
           if partner_state_benefits.count.zero?
-            replace_last_page_in_history(providers_legal_aid_applications_path)
+            replace_last_page_in_history(submitted_providers_legal_aid_applications_path)
           end
           return go_forward(partner_state_benefits.any?)
         end

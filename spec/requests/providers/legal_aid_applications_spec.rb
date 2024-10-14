@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "providers legal aid application requests" do
-  describe "GET /providers/applications" do
-    subject(:get_request) { get providers_legal_aid_applications_path(params) }
+  describe "GET /providers/applications/submitted" do
+    subject(:get_request) { get submitted_providers_legal_aid_applications_path(params) }
 
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:provider) { legal_aid_application.provider }
@@ -280,8 +280,8 @@ RSpec.describe "providers legal aid application requests" do
     end
   end
 
-  describe "POST /providers/applications" do
-    subject(:post_request) { post providers_legal_aid_applications_path }
+  describe "POST /providers/applications/submitted" do
+    subject(:post_request) { post submitted_providers_legal_aid_applications_path }
 
     let(:legal_aid_application) { LegalAidApplication.last }
 

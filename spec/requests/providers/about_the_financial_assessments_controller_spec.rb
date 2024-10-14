@@ -163,7 +163,7 @@ RSpec.describe "about financial assessments requests" do
 
         it "redirects provider to provider's applications page" do
           submit_patch
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
+          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do

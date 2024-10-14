@@ -131,7 +131,7 @@ Rails.application.routes.draw do
     resource :invalid_login, only: :show
     resources :cookies, only: %i[show update]
 
-    resources :legal_aid_applications, path: "applications", only: %i[index create] do
+    resources :legal_aid_applications, path: "applications", only: %i[create] do
       collection do
         get :submitted
         get :in_progress
