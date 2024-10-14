@@ -324,12 +324,12 @@ env:
   - name: HMRC_API_UID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: hmrcApiUid
   - name: HMRC_API_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: hmrcApiSecret
   - name: HMRC_DURATION_CHECK
     valueFrom:
