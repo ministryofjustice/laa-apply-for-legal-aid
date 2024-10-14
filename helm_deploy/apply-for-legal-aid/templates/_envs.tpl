@@ -163,7 +163,7 @@ env:
   - name: LAA_PORTAL_IDP_CERT
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-portal-connection
         key: laaPortalIdpCert
   - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
     valueFrom:
@@ -173,12 +173,12 @@ env:
   - name: LAA_PORTAL_CERTIFICATE
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-portal-connection
         key: laaPortalCertificate
   - name: LAA_PORTAL_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: staging-portal-connection
         key: laaPortalSecretKey
   - name: LAA_PORTAL_MOCK_SAML
     valueFrom:
