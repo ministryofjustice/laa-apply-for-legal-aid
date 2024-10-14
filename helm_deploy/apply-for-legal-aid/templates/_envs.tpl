@@ -163,7 +163,7 @@ env:
   - name: LAA_PORTAL_IDP_CERT
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: laaPortalIdpCert
   - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
     valueFrom:
@@ -173,12 +173,12 @@ env:
   - name: LAA_PORTAL_CERTIFICATE
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: laaPortalCertificate
   - name: LAA_PORTAL_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: laaPortalSecretKey
   - name: LAA_PORTAL_MOCK_SAML
     valueFrom:
@@ -198,7 +198,7 @@ env:
   - name: PDA_AUTH_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: pdaAuthKey
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
