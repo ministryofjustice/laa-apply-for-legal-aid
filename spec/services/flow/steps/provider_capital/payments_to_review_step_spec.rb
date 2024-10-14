@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::ProviderCapital::PolicyDisregardsStep, type: :request do
+RSpec.describe Flow::Steps::ProviderCapital::PaymentsToReviewStep, type: :request do
   let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
   let(:passported?) { nil }
   let(:provider_checking_or_checked_citizens_means_answers?) { nil }
@@ -13,7 +13,7 @@ RSpec.describe Flow::Steps::ProviderCapital::PolicyDisregardsStep, type: :reques
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eql providers_legal_aid_application_means_policy_disregards_path(legal_aid_application) }
+    it { is_expected.to eql providers_legal_aid_application_means_payments_to_review_path(legal_aid_application) }
   end
 
   describe "#forward" do
@@ -27,12 +27,6 @@ RSpec.describe Flow::Steps::ProviderCapital::PolicyDisregardsStep, type: :reques
 
     context "when passported is not true" do
       it { is_expected.to eq :check_capital_answers }
-    end
-
-    context "when means_test_review_a is enabled" do
-      before { allow(Setting).to receive(:means_test_review_a?).and_return(true) }
-
-      it { is_expected.to eq :payments_to_review }
     end
   end
 
