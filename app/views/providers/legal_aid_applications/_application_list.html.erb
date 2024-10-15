@@ -28,7 +28,7 @@
                 concat tag.span(class: "sort-direction-indicator")
               end
             end
-            unless @scope == :completed
+            if @scope.in? %i[in_progress voided]
               row.with_cell do
                 concat t(".action")
                 concat tag.span(class: "sort-direction-indicator")
@@ -60,7 +60,7 @@
                   t(".substantive")
                 end
               end
-              unless @scope == :completed
+              if @scope.in? %i[in_progress voided]
                 row.with_cell do
                   govuk_link_to(
                     t(".delete"),

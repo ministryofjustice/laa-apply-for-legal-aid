@@ -3,7 +3,7 @@ module Providers
     include Pagy::Backend
     legal_aid_application_not_required!
 
-    before_action :set_scope, only: %i[submitted in_progress]
+    before_action :set_scope, only: %i[in_progress search submitted voided]
 
     DEFAULT_PAGE_SIZE = 20
 

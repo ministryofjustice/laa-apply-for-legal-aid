@@ -56,7 +56,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
 
         it "show page information" do
           get_request
-          expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 6 results")
+          expect(page).to have_css(".app-pagination__info", text: "Showing 1 to 3 of 6 results")
         end
 
         it "shows pagination" do
@@ -92,7 +92,7 @@ RSpec.describe Admin::LegalAidApplicationsController do
 
       it "shows the matching application" do
         expect(response.body).to include(legal_aid_applications.first.application_ref)
-        expect(response.body).to include("Showing 1 of 1 result")
+        expect(response.body).to have_css(".app-pagination__info", text: "Showing 1 of 1 result")
       end
     end
   end
