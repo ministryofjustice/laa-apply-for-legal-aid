@@ -78,7 +78,7 @@
   <p class="govuk-body"><%= t(".no_applications_html") %></p>
 <% end %>
 
-<% if @scope == :in_progress && LegalAidApplication.any?(&:expired?) %>
+<% if @scope == :in_progress && @voided_applications.any? %>
   <p class="govuk-body">
     <%= govuk_link_to "See applications you cannot submit", voided_providers_legal_aid_applications_path %>
   </p>
