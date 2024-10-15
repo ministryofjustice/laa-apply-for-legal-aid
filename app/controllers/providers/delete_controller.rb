@@ -21,7 +21,7 @@ module Providers
   private
 
     def set_redirect_url
-      session[:previous_url] ||= request.referer
+      session[:previous_url] = request.referer
     end
 
     def redirect_to_page_before_last

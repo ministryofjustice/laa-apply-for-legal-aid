@@ -12,7 +12,7 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
     Then I should be on a page with title "Opponent"
@@ -88,7 +88,7 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
     Then I should be on a page with title "Opponent"
@@ -99,7 +99,7 @@ Feature: Merits task list
     And I should be on a page showing "Do you need to add another opponent?"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
     Then I should be on a page with title "Opponent"
@@ -133,7 +133,7 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
     When I click 'Save and come back later'
-    Then I should be on the 'applications' page showing 'Applications'
+    Then I should be on the 'applications/submitted' page showing 'Your applications'
 
   @javascript @clamav
   Scenario: Uploading a file for statement of case
@@ -145,7 +145,7 @@ Feature: Merits task list
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
     Then I should be on a page with title "Opponent"
@@ -201,7 +201,7 @@ Feature: Merits task list
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
     Then I should be on a page with title "Opponent"
@@ -249,4 +249,3 @@ Feature: Merits task list
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
     And I should not see "Passported"
-
