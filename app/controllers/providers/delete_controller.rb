@@ -20,6 +20,8 @@ module Providers
 
   private
 
+    # TODO: 15 OCT 2024 @agoldstone93
+    # Consider adding the methods below to the Backable concern
     def set_redirect_url
       session[:previous_url] = request.referer
     end
