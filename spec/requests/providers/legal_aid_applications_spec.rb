@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "providers legal aid application requests" do
-  describe "GET /providers/applications/submitted" do
-    subject(:get_request) { get submitted_providers_legal_aid_applications_path(params) }
+  describe "GET /providers/applications/in_progress" do
+    subject(:get_request) { get in_progress_providers_legal_aid_applications_path(params) }
 
-    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, provider_step: :proceedings_types) }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
     let(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
@@ -94,7 +94,7 @@ RSpec.describe "providers legal aid application requests" do
 
         context "and more applications than page size" do
           # Creating 4 additional means there are now 5 applications
-          before { create_list(:legal_aid_application, 4, :with_applicant, provider:) }
+          before { create_list(:legal_aid_application, 4, :with_applicant, provider:, provider_step: :proceedings_types) }
 
           let(:params) { { page_size: 3 } }
 
@@ -280,8 +280,8 @@ RSpec.describe "providers legal aid application requests" do
     end
   end
 
-  describe "POST /providers/applications/submitted" do
-    subject(:post_request) { post submitted_providers_legal_aid_applications_path }
+  describe "POST /providers/applications" do
+    subject(:post_request) { post providers_legal_aid_applications_path }
 
     let(:legal_aid_application) { LegalAidApplication.last }
 
