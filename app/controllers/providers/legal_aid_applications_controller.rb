@@ -7,9 +7,7 @@ module Providers
 
     DEFAULT_PAGE_SIZE = 20
 
-    def index
-      applications(applications_query)
-    end
+    def index; end
 
     def submitted
       applications(submitted_query)
@@ -58,7 +56,6 @@ module Providers
 
     def applications_query
       query = firms_applications.includes(:applicant, :chances_of_success).latest
-      return query if search_term.blank?
 
       query.search(search_term)
     end
