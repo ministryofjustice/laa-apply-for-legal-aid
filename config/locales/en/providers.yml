@@ -1612,12 +1612,10 @@ en:
         dont_use_service:
           list_title: "But do not use this service if:"
           list:
-            - the client is under 16 years old
             - the client is self-employed or is a member of the armed forces
             - you want to make an emergency application and delegated functions have not been used
             - you want to amend a submitted application
           linked_applications_list:
-            - the client is under 16 years old
             - the client is self-employed or is a member of the armed forces
             - you want to make an emergency application and delegated functions have not been used
             - you want to make both a family link and legal link to your application
@@ -1704,9 +1702,6 @@ en:
         ineligible_employed:
           - self-employed
           - a member of the armed forces
-    use_ccms_under16s:
-      show:
-        warning: You cannot use this service if your client is under 16 years old
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
