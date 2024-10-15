@@ -16,17 +16,19 @@
                               @legal_aid_application.outgoing_cash_transaction_types_for(individual)
                             end %>
 
-<% if cash_transaction_types.none? %>
-  <div class="govuk-body"><%= t("generic.none") %></div>
-<% end %>
-
 <% cash_transactions = @legal_aid_application.cash_transactions.where(owner_type: individual) %>
 
 <%= govuk_summary_list(
+      card: { title: t(".#{type}_heading", individual_with_determiner:) },
       actions: false,
       classes: "govuk-!-margin-bottom-9",
       html_attributes: { "data-check-your-answers-section": t(".#{type}_heading", individual_with_determiner:).parameterize },
     ) do |summary_list| %>
+  <% if cash_transaction_types.none? %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_value { t("generic.none") } %>
+    <% end %>
+  <% end %>
   <% cash_transaction_types.each do |category| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{category.label_name.parameterize}-cash-#{type}-#{individual.downcase}" }) do |row| %>
       <%= row.with_key(text: category.label_name, classes: "govuk-!-width-one-half") %>

@@ -10,7 +10,8 @@
            end
    end %>
 
-<%= govuk_summary_list(actions: !read_only,
+<%= govuk_summary_list(card: { title: t("providers.means.check_income_answers.dependants.heading") },
+                       actions: !read_only,
                        classes: "govuk-!-margin-bottom-9",
                        html_attributes: { id: "dependants-questions" }) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__dependants" }) do |row| %>
@@ -44,6 +45,7 @@
       <% end %>
     </div>
     <%= govuk_summary_list(
+          card: { title: "Dependant #{index + 1}: #{dependant.name}" },
           actions: false,
           classes: "govuk-!-margin-bottom-9",
           html_attributes: { id: "app-check-your-answers__dependants_#{index + 1}_items" },
