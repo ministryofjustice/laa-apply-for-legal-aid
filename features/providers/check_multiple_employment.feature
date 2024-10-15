@@ -29,7 +29,7 @@ Feature: Check multiple employment
     And I click 'Save and continue'
     Then I should be on a page showing "Which of these payments does your client pay?"
 
-    When I select 'Housing payments'
+    When I select 'Childcare'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client pays in cash"
 
@@ -46,7 +46,7 @@ Feature: Check multiple employment
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
 
     Then I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select housing payments'
+    Then I should be on a page showing 'Select childcare payments'
 
     Then I select the first checkbox
     And I click 'Save and continue'

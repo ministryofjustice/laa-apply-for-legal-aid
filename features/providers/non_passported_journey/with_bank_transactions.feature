@@ -60,13 +60,36 @@ Feature: non_passported_journey with bank transactions
 
     When I click the '3rd' link 'View statements and add transactions'
     Then I select the first checkbox
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
+    And I click 'Save and continue'
 
+    When I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
 
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on the 'housing_benefits' page showing "Does your client get Housing Benefit?"
+
+    When I choose 'Yes'
+    And I fill "providers-means-housing-benefit-form-housing-benefit-amount-field" with "101"
+    And I choose 'Every week'
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
+
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on the 'check_income_answers' page showing "Check your answers"
+
+    And the following sections within "applicant" should exist:
+      | tag | section |
+      | h2  | Your client's income |
+      | h3  | Payments your client receives |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
+
+    And the following sections should exist:
+      | tag | section |
+      | h3  | Housing Benefit |
+      | h2  | Dependants |

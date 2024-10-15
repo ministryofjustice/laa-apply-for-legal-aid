@@ -620,7 +620,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def housing_benefit_regular_transaction_applicable?
-    uploading_bank_statements? && housing_payments?
+    housing_payments?
   end
 
   def truelayer_path?

@@ -38,7 +38,6 @@ RSpec.describe Flow::Steps::ProviderIncome::CashOutgoingsStep, type: :request do
 
       before do
         allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(true)
-        allow(application).to receive(:uploading_bank_statements?).and_return(true)
       end
 
       it { is_expected.to eq :housing_benefits }
@@ -49,7 +48,6 @@ RSpec.describe Flow::Steps::ProviderIncome::CashOutgoingsStep, type: :request do
 
       before do
         allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(false)
-        allow(application).to receive(:uploading_bank_statements?).and_return(true)
       end
 
       it { is_expected.to eq :has_dependants }
@@ -62,7 +60,7 @@ RSpec.describe Flow::Steps::ProviderIncome::CashOutgoingsStep, type: :request do
     context "when uploading bank statements" do
       before { allow(application).to receive(:uploading_bank_statements?).and_return(true) }
 
-      context "when there are housing payments for applicant" do
+      context "with housing payments for applicant" do
         let(:applicant) { create(:applicant, has_partner: false) }
 
         before do
@@ -72,7 +70,7 @@ RSpec.describe Flow::Steps::ProviderIncome::CashOutgoingsStep, type: :request do
         it { is_expected.to eq :housing_benefits }
       end
 
-      context "when there are no housing payments for applicant" do
+      context "with no housing payments for applicant" do
         let(:applicant) { create(:applicant, has_partner: false) }
 
         before do
