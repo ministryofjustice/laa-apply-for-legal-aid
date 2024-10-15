@@ -218,12 +218,12 @@ env:
   - name: GOOGLE_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleClientId
   - name: GOOGLE_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleClientSecret
   - name: SIDEKIQ_WEB_UI_PASSWORD
     valueFrom:
@@ -344,12 +344,12 @@ env:
   - name: GOOGLE_SHEETS_PRIVATE_KEY_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleSheetsPrivateKeyId
   - name: GOOGLE_SHEETS_PRIVATE_KEY_VALUE
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleSheetsPrivateKeyValue
   - name: GOOGLE_SHEETS_CLIENT_EMAIL
     valueFrom:
