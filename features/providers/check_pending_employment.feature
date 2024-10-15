@@ -28,7 +28,7 @@ Feature: Check pending employment
     And I click 'Save and continue'
     Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
 
-    When I select 'Housing'
+    When I select 'Childcare'
     And I click 'Save and continue'
     Then I should be on a page showing "Select payments your client pays in cash"
 
@@ -45,7 +45,7 @@ Feature: Check pending employment
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
 
     When I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select housing payments'
+    Then I should be on a page showing 'Select childcare payments'
     When I select the first checkbox
     And I click 'Save and continue'
     And I click 'Save and continue'
