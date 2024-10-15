@@ -16,6 +16,7 @@ module Providers
 
     def in_progress
       applications(in_progress_query)
+      @voided_applications = voided_query
       render "index"
     end
 
