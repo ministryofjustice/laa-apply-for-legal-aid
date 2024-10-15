@@ -6,11 +6,15 @@ module Flow
         forward: lambda do |application|
           if application.applicant.has_partner_with_no_contrary_interest?
             :partner_about_financial_means
+          elsif application.housing_payments_for?("Applicant")
+            :housing_benefits
           else
             :has_dependants
           end
         end,
-        check_answers: :check_income_answers,
+        check_answers: lambda do |application|
+          application.housing_payments_for?("Applicant") ? :housing_benefits : :check_income_answers
+        end,
       )
     end
   end
