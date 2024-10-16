@@ -37,6 +37,8 @@ class BankAccount < ApplicationRecord
     "#{bank_provider.name} #{name}"
   end
 
+  # TODO: this will cease to be useful/variable following AP-5336 (removal of autocategorisation)
+  # what should it default to for CCMS injection - false?
   def has_tax_credits?
     meta_data_codes = bank_transactions.pluck(:meta_data).compact.pluck(:code)
     meta_data_codes.include?("TC") || meta_data_codes.include?("WTC") || meta_data_codes.include?("CTC")

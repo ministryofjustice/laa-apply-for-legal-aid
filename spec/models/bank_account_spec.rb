@@ -57,7 +57,7 @@ RSpec.describe BankAccount do
     end
 
     it "returns false if benefits not present" do
-      create(:bank_transaction, :with_meta_tax, bank_account:)
+      create(:bank_transaction, :friends_or_family, bank_account:)
       expect(bank_account.has_benefits?).to be false
     end
   end
