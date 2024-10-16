@@ -433,40 +433,40 @@ module CCMS
         end
 
         describe "SCA applications" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_positive_benefit_check_result,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: %i[pb003],
+                   set_lead_proceeding: :pb003,
+                   df_options: { PB003: [10.days.ago.to_date, 1.day.ago.to_date] },
+                   applicant:,
+                   vehicles:,
+                   other_assets_declaration:,
+                   savings_amount:,
+                   provider:,
+                   opponents:,
+                   domestic_abuse_summary:,
+                   office:)
+          end
+
+          let(:applicant) do
+            create(:applicant,
+                   first_name: "Shery",
+                   last_name: "Ledner",
+                   last_name_at_birth:,
+                   national_insurance_number: "EG587804M",
+                   date_of_birth: Date.new(1977, 4, 10),
+                   address:,
+                   has_partner: false)
+          end
+          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
+
+          before { legal_aid_application.chances_of_success.map(&:destroy!) }
+
           context "when the application has been backdated using delegated functions" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_everything,
-                     :with_positive_benefit_check_result,
-                     :with_proceedings,
-                     :with_delegated_functions_on_proceedings,
-                     explicit_proceedings: %i[pb003],
-                     set_lead_proceeding: :pb003,
-                     df_options: { PB003: [10.days.ago.to_date, 1.day.ago.to_date] },
-                     applicant:,
-                     vehicles:,
-                     other_assets_declaration:,
-                     savings_amount:,
-                     provider:,
-                     opponents:,
-                     domestic_abuse_summary:,
-                     office:)
-            end
-
-            let(:applicant) do
-              create(:applicant,
-                     first_name: "Shery",
-                     last_name: "Ledner",
-                     last_name_at_birth:,
-                     national_insurance_number: "EG587804M",
-                     date_of_birth: Date.new(1977, 4, 10),
-                     address:,
-                     has_partner: false)
-            end
-            let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
-
-            before { legal_aid_application.chances_of_success.map(&:destroy!) }
-
             it "sets DelegatedFunctionsApply to false" do
               expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
             end
@@ -541,20 +541,6 @@ module CCMS
                      office:)
             end
 
-            let(:applicant) do
-              create(:applicant,
-                     first_name: "Shery",
-                     last_name: "Ledner",
-                     last_name_at_birth:,
-                     national_insurance_number: "EG587804M",
-                     date_of_birth: Date.new(1977, 4, 10),
-                     address:,
-                     has_partner: false)
-            end
-            let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
-
-            before { legal_aid_application.chances_of_success.map(&:destroy!) }
-
             it "sets DelegatedFunctionsApply to false" do
               expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
             end
@@ -602,39 +588,6 @@ module CCMS
           end
 
           context "when auto-granting an SCA application" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_everything,
-                     :with_positive_benefit_check_result,
-                     :with_proceedings,
-                     :with_delegated_functions_on_proceedings,
-                     explicit_proceedings: %i[pb003],
-                     set_lead_proceeding: :pb003,
-                     df_options: { PB003: [35.days.ago.to_date, 30.days.ago.to_date] },
-                     applicant:,
-                     vehicles:,
-                     other_assets_declaration:,
-                     savings_amount:,
-                     provider:,
-                     opponents:,
-                     domestic_abuse_summary:,
-                     office:)
-            end
-
-            let(:applicant) do
-              create(:applicant,
-                     first_name: "Shery",
-                     last_name: "Ledner",
-                     last_name_at_birth:,
-                     national_insurance_number: "EG587804M",
-                     date_of_birth: Date.new(1977, 4, 10),
-                     address:,
-                     has_partner: false)
-            end
-            let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
-
-            before { legal_aid_application.chances_of_success.map(&:destroy!) }
-
             it "sets DelegatedFunctionsApply to false" do
               expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
             end
@@ -646,7 +599,7 @@ module CCMS
 
             it "sets the PROC_DELEGATED_FUNCTIONS_DATE to true" do
               block = XmlExtractor.call(request_xml, :merits_assessment_proceeding, "PROC_DELEGATED_FUNCTIONS_DATE")
-              expect(block).to have_date_response(35.days.ago.strftime("%d-%m-%Y"))
+              expect(block).to have_date_response(10.days.ago.strftime("%d-%m-%Y"))
             end
 
             it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
