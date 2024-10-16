@@ -1,0 +1,29 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_means_policy_disregards_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
+  <%= page_template page_title: t(".h1-heading.#{individual}"), template: :basic, form: do %>
+
+    <%= form.govuk_check_boxes_fieldset :policy_disregards,
+                                        legend: { text: page_title, size: "xl", tag: "h1" },
+                                        hint: { text: t("generic.select_all_that_apply") },
+                                        form_group: { class: @form.errors[:england_infected_blood_support].any? ? "govuk-form-group--error" : "" } do %>
+      <% if @form.errors[:england_infected_blood_support].any? %>
+        <p class="govuk-error-message" id="savings-amount-cash-error">
+          <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:england_infected_blood_support].first %></p>
+      <% end %>
+    <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
+      <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
+        <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
+      <% end %>
+    </div>
+
+    <%= form.govuk_radio_divider %>
+    <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+
+  <% end %>
+
+  <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
