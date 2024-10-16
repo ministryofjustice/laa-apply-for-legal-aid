@@ -651,7 +651,8 @@ en:
           attributes:
             base:
               none_selected: Select if your client has received any of these payments
-              none_and_another_option_selected: If you select 'My client has not received any of these payments', you cannot select any of the other options
+              none_selected_with_partner: Select which schemes or trusts have paid either your client or their partner, or select 'None of these payments'
+              none_and_another_option_selected: Your client must either receive one or more of these payments or none
         proceeding:
           attributes:
             client_involvement_type_ccms_code:
