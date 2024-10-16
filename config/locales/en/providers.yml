@@ -1259,8 +1259,12 @@ en:
       payments_to_review:
         show:
           h1-heading: Payments to be reviewed
-          details: We may be able to disregard some payments your client gets based on the rules and guidelines. These are called discretionary disregards.
-          h2-heading: Select if your client has received any of these payments
+          details:
+            client: We may be able to disregard some payments your client gets based on the rules and guidelines. These are called discretionary disregards.
+            partner: We may be able to disregard some payments your client or their partner gets based on the rules and guidelines. These are called discretionary disregards.
+          h2-heading:
+            client: Select if your client has received any of these payments
+            partner: Select if your client or their partner has received any of these payments
           hint: These are one-off payments. Do not include any regular payments.
           backdated_benefits: Backdated benefits and child maintenance payments received more than 24 months ago
           compensation_for_personal_harm: Compensation, damages or ex-gratia payments for personal harm
