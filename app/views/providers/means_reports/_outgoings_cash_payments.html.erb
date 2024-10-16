@@ -4,8 +4,8 @@
 <% cash_debits = @legal_aid_application.cash_transactions.debits.order(:transaction_date) %>
 <% debit_categories = TransactionType.debits %>
 
-<% if !@legal_aid_application.transaction_types.debits.exists? %>
-  <div class="govuk-body"> <%= t("generic.none") %> </div>
+<% unless @legal_aid_application.transaction_types.debits.exists? %>
+<div class="govuk-body"> <%= t("generic.none") %> </div>
 <% end %>
 
 <dl id="outgoings-cash-payments-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -33,4 +33,5 @@
             ) %>
       <% end %>
     <% end %>
-  <% end %>>
+  <% end %>
+</dl>
