@@ -256,7 +256,7 @@ Feature: Means report
 
     And the Outgoings questions and answers should match:
       | question | answer |
-      | Client housing payments | £125 |
+      | Client housing payments (any declared housing benefits have been deducted from this total) | £125 |
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |

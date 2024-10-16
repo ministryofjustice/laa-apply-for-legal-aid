@@ -28,7 +28,7 @@ module Providers
 
       def individual
         show_for_partner = legal_aid_application.housing_payments_for?("Partner")
-        show_for_client = legal_aid_application.housing_payments_for?("Applicant") && legal_aid_application.uploading_bank_statements?
+        show_for_client = legal_aid_application.housing_payments_for?("Applicant")
         if show_for_partner && show_for_client
           I18n.t("generic.client_or_partner")
         else

@@ -1,9 +1,9 @@
 module MeansReportHelper
-  TransactionTypeItem = Struct.new(:name, :value_method, :scope, :suppress_border, :addendum)
+  TransactionTypeItem = Struct.new(:name, :value_method, :scope, :suppress_border)
 
-  def outgoings_detail_items(legal_aid_application)
+  def outgoings_detail_items
     [
-      TransactionTypeItem.new(:housing, :moe_housing, "outgoing", false, housing_payment_addendum(legal_aid_application)),
+      TransactionTypeItem.new(:housing, :moe_housing, "outgoing", false),
       TransactionTypeItem.new(:childcare, :moe_childcare, "outgoing", false),
       TransactionTypeItem.new(:maintenance_out, :moe_maintenance_out, "outgoing", false),
       TransactionTypeItem.new(:legal_aid, :moe_legal_aid, "outgoing", true),
@@ -47,9 +47,5 @@ private
       TransactionTypeItem.new(:student_loan, :mei_student_loan, "income", false),
       TransactionTypeItem.new(:pension, :mei_pension, "income", true),
     ]
-  end
-
-  def housing_payment_addendum(legal_aid_application)
-    t("shared.means_report.item.outgoing.housing_addendum") if legal_aid_application.uploading_bank_statements?
   end
 end

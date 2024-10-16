@@ -100,7 +100,7 @@ def expect_matching_questions_and_answers(actual_selector:, expected_table:)
   expected = expected_table.hashes.map(&:symbolize_keys)
   actual = actual_questions_and_answers_in(selector: actual_selector)
 
-  expect(actual).to match_array(expected)
+  expect(actual).to match_array(expected), SuperDiff.diff(expected, actual)
 end
 
 def actual_questions_and_answers_in(selector:)
