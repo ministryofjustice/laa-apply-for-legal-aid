@@ -54,12 +54,12 @@ env:
   - name: GOVUK_NOTIFY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: govukNotifyApiKey
   - name: ORDNANCE_SURVEY_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: ordnanceSurveyApiKey
   - name: SECRET_KEY_BASE
     valueFrom:
@@ -69,7 +69,7 @@ env:
   - name: SENTRY_DSN
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: sentryDsn
   - name: RAILS_ENV
     value: production
@@ -270,7 +270,7 @@ env:
   - name: GECKOBOARD_API_KEY
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: geckoboardApiKey
   - name: GOOGLE_TAG_MANAGER_TRACKING_ID
     valueFrom:
@@ -314,7 +314,7 @@ env:
   - name: SLACK_ALERT_EMAIL
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: slackAlertEmail
   - name: HMRC_API_HOST
     valueFrom:
@@ -399,7 +399,7 @@ env:
   - name: SLACK_ALERT_WEBHOOK
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: slackAlertWebhook
   - name: COLLECT_HMRC_DATA
     valueFrom:
