@@ -5,7 +5,7 @@
 
     <%= f.govuk_check_boxes_fieldset :transaction_type_ids,
                                      legend: { tag: "h1", size: "xl" },
-                                     caption: { text: caption, size: "l" } do %>
+                                     caption: { text: caption, size: "xl" } do %>
 
       <% @form.transaction_type_options.each_with_index do |transaction_type, index| %>
         <%= f.govuk_check_box :transaction_type_ids,

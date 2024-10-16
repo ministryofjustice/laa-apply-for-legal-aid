@@ -9,7 +9,7 @@
                                               <p class="govuk-hint"><%= hint_line %></p>
                                             <% end
                                           end,
-                                          caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "l" },
+                                          caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "xl" },
                                           legend: { text: content_for(:page_title), tag: "h1", size: "xl" } do %>
       <%= form.govuk_radio_button(:student_finance, true, label: { text: t("generic.yes") }, checked: @receives_student_finance, link_errors: true) do %>
         <%= form.govuk_text_field(
