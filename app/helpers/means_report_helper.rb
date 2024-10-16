@@ -19,7 +19,6 @@ module MeansReportHelper
   def deductions_detail_items(legal_aid_application)
     items = [TransactionTypeItem.new(:dependants_allowance, :dependants_allowance, "deductions", false)]
     items.append(TransactionTypeItem.new(:partner_allowance, :partner_allowance, "deductions", false)) if legal_aid_application.applicant.has_partner_with_no_contrary_interest?
-    items.append(TransactionTypeItem.new(:disregarded_state_benefits, :disregarded_state_benefits, "deductions", true)) unless legal_aid_application.uploading_bank_statements?
     items
   end
 

@@ -111,7 +111,6 @@ en:
         title: Deductions
         dependants_allowance: Dependants allowance
         partner_allowance: Partner allowance
-        excluded_benefits: Income from benefits excluded from calculation
         total_deductions: Total deductions
         table_caption: Deductions
         type_of_deduction: Type of deductions

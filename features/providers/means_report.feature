@@ -96,10 +96,6 @@ Feature: Means report
       | Dependants allowance |
       | Total deductions |
 
-    And the Deductions questions should not exist:
-      | question |
-      | Income from benefits excluded from calculation |
-
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
@@ -266,7 +262,6 @@ Feature: Means report
     And the Deductions questions should exist:
       | question |
       | Dependants allowance |
-      | Client income from benefits excluded from calculation |
       | Total deductions |
 
     And the Caseworker review questions should exist:
