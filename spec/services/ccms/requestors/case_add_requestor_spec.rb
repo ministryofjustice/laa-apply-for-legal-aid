@@ -507,8 +507,8 @@ module CCMS
               expect(block.children.text).to eq "SUB"
             end
 
-            it "excludes the DevolvedPowersDate" do
-              block = XmlExtractor.call(request_xml, :devolved_powers_date)
+            it "excludes the DevolvedPowersDate block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
               expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
             end
 
@@ -596,7 +596,7 @@ module CCMS
             end
 
             it "excludes the DevolvedPowersDate" do
-              block = XmlExtractor.call(request_xml, :devolved_powers_date)
+              block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
               expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
             end
           end
@@ -664,8 +664,8 @@ module CCMS
               expect(block.children.text).to eq "SUB"
             end
 
-            it "excludes the DevolvedPowersDate" do
-              block = XmlExtractor.call(request_xml, :devolved_powers_date)
+            it "excludes the DevolvedPowersDate block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
               expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
             end
           end
