@@ -430,6 +430,16 @@ module CCMS
             block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
             expect(block).to be_present
           end
+
+          it "excludes the APP_INCLUDES_SCA_PROCS block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "APP_INCLUDES_SCA_PROCS")
+            expect(block).not_to be_present, "Expected block for attribute APP_INCLUDES_SCA_PROCS not to be generated, but was \n #{block}"
+          end
+
+          it "excludes the APP_IS_SCA_RELATED block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "APP_IS_SCA_RELATED")
+            expect(block).not_to be_present, "Expected block for attribute APP_IS_SCA_RELATED not to be generated, but was \n #{block}"
+          end
         end
 
         describe "SCA applications" do
@@ -620,6 +630,47 @@ module CCMS
             it "excludes the DevolvedPowersDate block" do
               block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
               expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
+            end
+          end
+
+          context "when the application contains only a core proceeding" do
+            it "sets APP_INCLUDES_SCA_PROCS to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_INCLUDES_SCA_PROCS")
+              expect(block).to have_boolean_response true
+            end
+
+            it "excludes the APP_IS_SCA_RELATED block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_IS_SCA_RELATED")
+              expect(block).not_to be_present, "Expected block for attribute APP_IS_SCA_RELATED not to be generated, but was \n #{block}"
+            end
+          end
+
+          context "when the application contains both a core and related proceeding" do
+            let(:legal_aid_application) do
+              create(:legal_aid_application,
+                     :with_everything,
+                     :with_positive_benefit_check_result,
+                     :with_proceedings,
+                     explicit_proceedings: %i[pb003 pb007],
+                     set_lead_proceeding: :pb003,
+                     applicant:,
+                     vehicles:,
+                     other_assets_declaration:,
+                     savings_amount:,
+                     provider:,
+                     opponents:,
+                     domestic_abuse_summary:,
+                     office:)
+            end
+
+            it "sets APP_INCLUDES_SCA_PROCS to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_INCLUDES_SCA_PROCS")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets APP_IS_SCA_RELATED to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_IS_SCA_RELATED")
+              expect(block).to have_boolean_response true
             end
           end
         end
