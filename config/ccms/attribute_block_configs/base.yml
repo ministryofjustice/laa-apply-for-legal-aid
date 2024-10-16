@@ -3213,11 +3213,16 @@ global_merits:
       Work Conducted'
     response_type: boolean
     user_defined: true
+  APP_INCLUDES_SCA_PROCS:
+    generate_block?: '#application_special_children_act_core_proceedings?'
+    value: true
+    br100_meaning: The Application Includes Special Children Act Proceedings
+    response_type: boolean
+    user_defined: false
   APP_IS_SCA_RELATED:
-    generate_block?: false
-    value: false
-    br100_meaning: The Application Is In Relation To Special Children Act Or Related
-      Proceedings
+    generate_block?: '#application_special_children_act_related_proceedings?'
+    value: true
+    br100_meaning: The Application Is In Relation To Special Children Act Or Related Proceedings
     response_type: boolean
     user_defined: false
   EVIDENCE_OMBUDSMAN_COMP_RPT:
@@ -3696,12 +3701,6 @@ global_merits:
     generate_block?: false
     value: false
     br100_meaning: The Case Is In Relation To Education
-    response_type: boolean
-    user_defined: false
-  APP_INCLUDES_SCA_PROCS:
-    generate_block?: false
-    value: false
-    br100_meaning: The Application Includes Special Children Act Proceedings
     response_type: boolean
     user_defined: false
   REASON_SEPARATE_REP_REQ:

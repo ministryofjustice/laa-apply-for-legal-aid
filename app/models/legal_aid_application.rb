@@ -183,6 +183,14 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
   end
 
+  def special_children_act_core_proceedings?
+    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.sca_type == "core" }
+  end
+
+  def special_children_act_related_proceedings?
+    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.sca_type == "related" }
+  end
+
   def auto_grant_special_children_act?
     # TODO: Colin 3 Oct 24
     # Adding this but it may not be fully accurate as the auto-grant investigating work is ongoing
