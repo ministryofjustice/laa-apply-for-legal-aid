@@ -1087,7 +1087,7 @@ en:
           h1-heading: Your client's home
           values_question:
             client: How much is the home they usually live in worth?
-            partner: How much is the home your client and their partner usually live in worth?
+            partner: How much is the home worth where your client and their partner usually live?
             legacy:
               client: How much is the home your client lives in worth?
               partner: How much is the home your client and their partner live in worth?

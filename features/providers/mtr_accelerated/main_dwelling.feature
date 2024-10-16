@@ -117,10 +117,10 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
     When I choose "Yes, with a mortgage or loan"
     Then I click "Save and continue"
     Then I should be on a page showing "Your client's home"
-    And I should see "How much is the home your client and their partner usually live in worth?"
+    And I should see "How much is the home worth where your client and their partner usually live?"
 
     When I click link 'Back'
     And I choose "Yes, owned outright"
     Then I click "Save and continue"
     Then I should be on a page showing "Your client's home"
-    And I should see "How much is the home your client and their partner usually live in worth?"
+    And I should see "How much is the home worth where your client and their partner usually live?"
