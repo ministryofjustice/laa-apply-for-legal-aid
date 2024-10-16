@@ -40,6 +40,7 @@ module CFECivil
             Components::OtherIncome,
             Components::IrregularIncomes,
             Components::Employments,
+            Components::RegularTransactions,
             Components::CashTransactions,
             Components::Partner,
           ])
