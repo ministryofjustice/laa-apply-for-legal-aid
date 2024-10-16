@@ -203,12 +203,12 @@ env:
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: trueLayerClientId
   - name: TRUE_LAYER_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: trueLayerClientSecret
   - name: TRUE_LAYER_ENABLE_MOCK
     valueFrom:
