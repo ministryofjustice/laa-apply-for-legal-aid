@@ -33,7 +33,7 @@
     "postcss": "^8.4.47",
     "puppeteer": "^23.5.1",
     "standard": "^17.1.2",
-    "stylelint": "^16.9.0",
+    "stylelint": "^16.10.0",
     "stylelint-config-gds": "^2.0.0",
     "stylelint-order": "^6.0.4"
   },
