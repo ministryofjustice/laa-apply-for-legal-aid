@@ -11,9 +11,10 @@ module Flow
               return :outgoings_summary
             end
           end
+
           if application.applicant.has_partner_with_no_contrary_interest?
             :partner_about_financial_means
-          elsif application.uploading_bank_statements? && application.housing_payments_for?("Applicant")
+          elsif application.housing_payments_for?("Applicant")
             :housing_benefits
           else
             :has_dependants

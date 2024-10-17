@@ -9,36 +9,12 @@ RSpec.describe MeansReportHelper do
   end
 
   describe "#outgoings_detail_items" do
-    subject(:items) { outgoings_detail_items(legal_aid_application) }
+    subject(:items) { outgoings_detail_items }
 
     it_behaves_like "transaction type item list"
 
     it "has expected items" do
       expect(items.map(&:name)).to eq(%i[housing childcare maintenance_out legal_aid])
-    end
-
-    context "with housing item" do
-      subject(:housing_item) { items.first }
-
-      context "when an application is uploading_bank_statements?" do
-        before do
-          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
-        end
-
-        it "addendum matches expected text" do
-          expect(housing_item.addendum).to eq(" (any declared housing benefits have been deducted from this total)")
-        end
-      end
-
-      context "when an application is not uploading_bank_statements?" do
-        before do
-          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
-        end
-
-        it "addendum is nil" do
-          expect(housing_item.addendum).to be_nil
-        end
-      end
     end
   end
 
@@ -82,19 +58,17 @@ RSpec.describe MeansReportHelper do
 
     it_behaves_like "transaction type item list"
 
-    context "when application is not uploading_bank_statements?" do
-      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
-
-      it "has expected items" do
-        expect(items.map(&:name)).to eql(%i[dependants_allowance disregarded_state_benefits])
-      end
+    it "has expected items" do
+      expect(items.map(&:name)).to eql(%i[dependants_allowance])
     end
 
-    context "when application is uploading_bank_statements?" do
-      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
+    context "when application has partner with no contrary interest" do
+      before do
+        allow(applicant).to receive(:has_partner_with_no_contrary_interest?).and_return(true)
+      end
 
       it "has expected items" do
-        expect(items.map(&:name)).to eql(%i[dependants_allowance])
+        expect(items.map(&:name)).to eql(%i[dependants_allowance partner_allowance])
       end
     end
   end

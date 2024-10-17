@@ -113,10 +113,6 @@ Feature: Means report when partner is present
       | Dependants allowance |
       | Total deductions |
 
-    And the Deductions questions should not exist:
-      | question |
-      | Income from benefits excluded from calculation |
-
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
