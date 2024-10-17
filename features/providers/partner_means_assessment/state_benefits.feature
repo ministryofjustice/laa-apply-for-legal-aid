@@ -38,7 +38,7 @@ Feature: partner_means_assessment state benefits handling
     And I choose "Every 4 weeks"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does the partner get any other benefits?"
+    Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
     And I should see "You have added 2 benefits"
     And I should see "Child benefit"
     And I should see "The doubt"
@@ -48,7 +48,7 @@ Feature: partner_means_assessment state benefits handling
     And I fill "Description" with "in kind"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does the partner get any other benefits?"
+    Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
     And I should see "You have added 2 benefits"
     And I should see "Child benefit"
     And I should see "in kind"
