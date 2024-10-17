@@ -65,7 +65,7 @@ Given("I have created and submitted an application") do
     :with_everything,
     :with_passported_state_machine,
     :with_merits_submitted_at,
-    :initiated,
+    :generating_reports,
     provider: create(:provider),
   )
   login_as @legal_aid_application.provider
