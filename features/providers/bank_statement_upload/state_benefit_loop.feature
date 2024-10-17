@@ -43,7 +43,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I choose "Every 4 weeks"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does your client receive any other benefits, charitable or government payments?"
+    Then I should be on a page with title matching "Does your client get any other benefits, charitable or government payments?"
     And I should see "You added 2 benefit, charitable or government payments"
     And I should see "Child benefit"
     And I should see "The doubt"
@@ -53,7 +53,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I fill "Description" with "in kind"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does your client receive any other benefits, charitable or government payments?"
+    Then I should be on a page with title matching "Does your client get any other benefits, charitable or government payments?"
     And I should see "You added 2 benefit, charitable or government payments"
     And I should see "Child benefit"
     And I should see "in kind"
