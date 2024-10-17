@@ -26,7 +26,7 @@ Feature: partner_means_assessment state benefits handling
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Does the partner get any other benefits?"
-    And I should see "You have added 1 benefit"
+    And I should see "You added 1 benefit, charitable or government payment"
     And I should see "Child benefit"
 
     When I choose "Yes"
@@ -39,7 +39,7 @@ Feature: partner_means_assessment state benefits handling
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
-    And I should see "You have added 2 benefits"
+    And I should see "You added 2 benefit, charitable or government payments"
     And I should see "Child benefit"
     And I should see "The doubt"
 
@@ -49,7 +49,7 @@ Feature: partner_means_assessment state benefits handling
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
-    And I should see "You have added 2 benefits"
+    And I should see "You added 2 benefit, charitable or government payments"
     And I should see "Child benefit"
     And I should see "in kind"
     And I should not see "The doubt"
@@ -61,7 +61,7 @@ Feature: partner_means_assessment state benefits handling
     And I click "Save and continue"
 
     Then I should be on a page with title matching "Does the partner get any other benefits?"
-    And I should see "You have added 1 benefit"
+    And I should see "You added 1 benefit, charitable or government payment"
     And I should see "Child benefit"
     And I should not see "in kind"
 
