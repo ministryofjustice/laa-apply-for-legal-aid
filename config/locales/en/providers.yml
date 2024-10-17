@@ -129,7 +129,7 @@ en:
       other_income:
         title: "%{individual} other income"
         income: "%{individual} income"
-        benefits: Benefits
+        benefits: Benefits, charitable or government payments
         friends_or_family: Financial help from friends or family
         maintenance: Maintenance payments from a former partner
         property_or_lodger: Income from property or lodger
@@ -725,15 +725,15 @@ en:
             - a member of the armed forces
       receives_state_benefits:
         show:
-          page_title: Does the partner get any benefits?
+          page_title: Does the partner get any benefits, charitable or government payments?
       state_benefits:
         new:
-          page_title: Add benefit details
+          page_title: Add benefit, charitable or government payment details
         show:
-          page_title: Amend benefit details
+          page_title: Amend benefit, charitable or government payment details
       add_other_state_benefits:
         show:
-          page_title: Does the partner get any other benefits?
+          page_title: Does the partner get any other benefits, charitable or government payments?
       remove_state_benefits:
         show:
           page_title: "Are you sure you want to remove %{name}?"
@@ -1246,15 +1246,15 @@ en:
           none_of_these: None of these schemes or trusts
       receives_state_benefits:
         show:
-          page_title: Does your client get any benefits?
+          page_title: Does your client get any benefits, charitable or government payments?
       state_benefits:
         new:
-          page_title: Add benefit details
+          page_title: Add benefit, charitable or government payment details
         show:
-          page_title: Amend benefit details
+          page_title: Amend benefit, charitable or government payment details
       add_other_state_benefits:
         show:
-          page_title: Does your client receive any other benefits?
+          page_title: Does your client receive get any other benefits, charitable or government payments?
       remove_state_benefits:
         show:
           page_title: "Are you sure you want to remove %{name}?"

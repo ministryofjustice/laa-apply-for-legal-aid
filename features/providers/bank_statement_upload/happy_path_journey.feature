@@ -20,14 +20,14 @@ Feature: Bank statement upload journey happy path
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page with title matching "Does your client get any benefits?"
+    Then I should be on a page with title matching "Does your client get any benefits, charitable or government payments?"
     And I choose "No"
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
-    And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
+    And I should see govuk-details 'What not to include'
 
-    When I open the section 'Government Cost of Living Payments and disregarded benefits'
+    When I open the section 'What not to include'
     Then the following sections should exist:
       | tag | section |
       | h2  | Government Cost of Living Payments |
@@ -95,14 +95,14 @@ Feature: Bank statement upload journey happy path
     And I should see "hello_world.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does your client get any benefits?"
+    Then I should be on a page with title matching "Does your client get any benefits, charitable or government payments?"
     And I choose "No"
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
-    And I should see govuk-details 'Government Cost of Living Payments and disregarded benefits'
+    And I should see govuk-details 'What not to include'
 
-    When I open the section 'Government Cost of Living Payments and disregarded benefits'
+    When I open the section 'What not to include'
     Then the following sections should exist:
       | tag | section |
       | h2  | Government Cost of Living Payments |
