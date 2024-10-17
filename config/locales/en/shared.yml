@@ -1077,7 +1077,9 @@ en:
         benefits_amount: Enter amount
         benefits_frequency: Select frequency
       add_other_state_benefits:
-        existing: "You have added %{count}"
+        existing:
+          one: "You added %{count} benefit, charitable or government payment"
+          other: "You added %{count} benefit, charitable or government payments"
         remove: Remove
         warning:
           delete: Are you sure you want to delete this benefit?
