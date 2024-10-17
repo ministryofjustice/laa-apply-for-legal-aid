@@ -728,9 +728,9 @@ en:
           page_title: Does the partner get any benefits, charitable or government payments?
       state_benefits:
         new:
-          page_title: Add benefit details
+          page_title: Add benefit, charitable or government payment details
         show:
-          page_title: Amend benefit details
+          page_title: Amend benefit, charitable or government payment details
       add_other_state_benefits:
         show:
           page_title: Does the partner get any other benefits, charitable or government payments?
@@ -1260,9 +1260,9 @@ en:
           page_title: Does your client get any benefits, charitable or government payments?
       state_benefits:
         new:
-          page_title: Add benefit details
+          page_title: Add benefit, charitable or government payment details
         show:
-          page_title: Amend benefit details
+          page_title: Amend benefit, charitable or government payment details
       add_other_state_benefits:
         show:
           page_title: Does your client receive any other benefits, charitable or government payments?

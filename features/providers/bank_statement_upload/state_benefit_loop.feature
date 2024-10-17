@@ -24,7 +24,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I choose "Yes"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Add benefit details"
+    Then I should be on a page with title matching "Add benefit, charitable or government payment details"
     And I fill "Description" with "Child benefit"
     And I fill "Amount" with "21.80"
     And I choose "Every week"
@@ -37,7 +37,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     When I choose "Yes"
     And I click "Save and continue"
 
-    Then I should be on a page with title matching "Add benefit details"
+    Then I should be on a page with title matching "Add benefit, charitable or government payment details"
     And I fill "Description" with "The doubt"
     And I fill "Amount" with "52.70"
     And I choose "Every 4 weeks"
@@ -49,7 +49,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I should see "The doubt"
 
     When I click change for "The doubt"
-    Then I should be on a page with title matching "Amend benefit details"
+    Then I should be on a page with title matching "Amend benefit, charitable or government payment details"
     And I fill "Description" with "in kind"
 
     When I click "Save and continue"

@@ -1071,7 +1071,7 @@ en:
     state_benefits:
       new_benefit_form:
         details: Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
-        benefits_description: Benefit
+        benefits_description: Benefit, charitable or government payment
         benefits_amount: Enter amount
         benefits_frequency: Select frequency
       add_other_state_benefits:
