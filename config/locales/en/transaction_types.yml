@@ -76,7 +76,7 @@ en:
     benefits:
       inset_paras: |
         Include those received in the last 3 months
-        Do not include Housing Benefit, Government Cost of Living Payments or any other disregarded benefits and payments.
+        Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
     child_care:
       inset_text: Select every childcare payment your client made in the past 3 months.
     excluded_benefits:
