@@ -1,36 +1,37 @@
-<h1 class="govuk-heading-xl"><%= t(".page_title") %></h1>
-<div class="govuk-panel__body">
-  <dl class="govuk-list inline-list">
-    <dt>
-      <strong><%= t(".applicant") %>:</strong>
-    </dt>
-    <dd><%= @legal_aid_application.applicant.full_name %></dd>
+<%= page_template(page_title: t(".page_title"), back_link: :none) do %>
+      <div class="govuk-panel__body">
+        <dl class="govuk-list inline-list">
+          <dt>
+            <strong><%= t(".applicant") %>:</strong>
+          </dt>
+          <dd><%= @legal_aid_application.applicant.full_name %></dd>
 
-    <dt>
-      <strong><%= t(".start_date") %>:</strong>
-    </dt>
-    <dd><%= l(@legal_aid_application.created_at.to_date, format: :short_date) %></dd>
+          <dt>
+            <strong><%= t(".start_date") %>:</strong>
+          </dt>
+          <dd><%= l(@legal_aid_application.created_at.to_date, format: :short_date) %></dd>
 
-    <dt>
-      <strong><%= t(".reference") %>:</strong>
-    </dt>
-    <dd><%= @legal_aid_application.application_ref %></dd>
+          <dt>
+            <strong><%= t(".reference") %>:</strong>
+          </dt>
+          <dd><%= @legal_aid_application.application_ref %></dd>
 
-    <dt>
-      <strong><%= t(".status") %>:</strong>
-    </dt>
-    <dd><%= t(@legal_aid_application.summary_state, scope: %i[enums legal_aid_application summary_state]) %></dd>
-  </dl>
-</div>
+          <dt>
+            <strong><%= t(".status") %>:</strong>
+          </dt>
+          <dd><%= t(@legal_aid_application.summary_state, scope: %i[enums legal_aid_application summary_state]) %></dd>
+        </dl>
+      </div>
 
-<%= govuk_warning_text(text: t(".warning")) %>
+      <%= govuk_warning_text(text: t(".warning")) %>
 
-<div class='govuk-button-group'>
-  <%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
-    <%= form.govuk_submit(
-          t(".yes_button"),
-          warning: true,
-        ) %>
-    <%= govuk_button_link_to t(".no_button"), submitted_providers_legal_aid_applications_path %>
-  <% end %>
-</div>
+      <div class='govuk-button-group'>
+        <%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
+          <%= form.govuk_submit(
+                t(".yes_button"),
+                warning: true,
+              ) %>
+          <%= govuk_button_link_to t(".no_button"), submitted_providers_legal_aid_applications_path %>
+        <% end %>
+      </div>
+<% end %>
