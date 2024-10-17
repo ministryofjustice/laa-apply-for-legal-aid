@@ -15,7 +15,7 @@ Feature: partner_means_assessment state benefits handling
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does the partner get any benefits"
+    Then I should be on a page with title "Does the partner get any benefits, charitable or government payments?"
     And I choose "Yes"
 
     When I click "Save and continue"
@@ -85,7 +85,7 @@ Feature: partner_means_assessment state benefits handling
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does the partner get any benefits"
+    Then I should be on a page with title "Does the partner get any benefits, charitable or government payments"
 
     When I choose "No"
     And I click "Save and continue"

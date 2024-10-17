@@ -20,7 +20,7 @@ Feature: Bank statement upload journey state_benefit loop feature
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page with title matching "Does your client get any benefits?"
+    Then I should be on a page with title matching "Does your client get any benefits, charitable or government payments?"
     And I choose "Yes"
 
     When I click "Save and continue"
