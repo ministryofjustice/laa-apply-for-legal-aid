@@ -1265,7 +1265,7 @@ en:
           page_title: Amend benefit, charitable or government payment details
       add_other_state_benefits:
         show:
-          page_title: Does your client receive any other benefits, charitable or government payments?
+          page_title: Does your client receive get any other benefits, charitable or government payments?
       remove_state_benefits:
         show:
           page_title: "Are you sure you want to remove %{name}?"
