@@ -945,7 +945,7 @@ en:
         info: Cash means physical money like banknotes and coins.
       regular_income:
         hints:
-          benefits: For example Child Benefit or tax credits. Do not include Housing Benefit, Government Cost of Living Payments or any other disregarded benefits and payments.
+          benefits: For example Child Benefit or tax credits. Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
           friends_or_family: >-
             Select if a friend or relative regularly gives %{individual} money to help with
             living costs. Do not include one-off payments.
@@ -1070,7 +1070,9 @@ en:
       no_files: Files uploaded will appear here.
     state_benefits:
       new_benefit_form:
-        details: Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
+        inset_paras: |
+          These are regular payments, do not include one-off payments
+          Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
         benefits_description: Benefit, charitable or government payment
         benefits_amount: Enter amount
         benefits_frequency: Select frequency
