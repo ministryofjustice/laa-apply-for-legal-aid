@@ -11,7 +11,7 @@
         notification_banner_title: t("generic.important"),
         notification_banner_text: t(".banner.your_client_needs_to"),
         back_link: {
-          path: providers_legal_aid_applications_path,
+          path: submitted_providers_legal_aid_applications_path,
           text: t("generic.home"),
           method: :get,
         },
@@ -22,7 +22,7 @@
                address: @address,
                read_only: @read_only) %>
     <%= next_action_buttons_with_form(
-          url: providers_legal_aid_applications_path,
+          url: submitted_providers_legal_aid_applications_path,
           method: :get,
           show_draft: false,
           continue_button_text: t("generic.back_to_your_applications"),

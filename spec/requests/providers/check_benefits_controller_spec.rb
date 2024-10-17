@@ -173,7 +173,7 @@ RSpec.describe Providers::CheckBenefitsController do
         let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "displays the providers applications page" do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
         end
 
         it "sets the application as draft" do
@@ -185,7 +185,7 @@ RSpec.describe Providers::CheckBenefitsController do
         let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "displays providers applications page" do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
         end
       end
 
@@ -193,7 +193,7 @@ RSpec.describe Providers::CheckBenefitsController do
         let(:application) { create(:legal_aid_application, :with_undetermined_benefit_check_result) }
 
         it "displays providers applications page" do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
         end
       end
     end

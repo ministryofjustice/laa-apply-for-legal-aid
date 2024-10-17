@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "providers legal aid application requests" do
-  describe "GET /providers/applications" do
-    subject(:get_request) { get providers_legal_aid_applications_path(params) }
+  describe "GET /providers/applications/in_progress" do
+    subject(:get_request) { get in_progress_providers_legal_aid_applications_path(params) }
 
-    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, provider_step: :proceedings_types) }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
     let(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
@@ -94,13 +94,13 @@ RSpec.describe "providers legal aid application requests" do
 
         context "and more applications than page size" do
           # Creating 4 additional means there are now 5 applications
-          before { create_list(:legal_aid_application, 4, :with_applicant, provider:) }
+          before { create_list(:legal_aid_application, 4, :with_applicant, provider:, provider_step: :proceedings_types) }
 
           let(:params) { { page_size: 3 } }
 
           it "show page information" do
             get_request
-            expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
+            expect(page).to have_css(".app-pagination__info", text: "Showing 1 to 3 of 5 results")
           end
 
           it "shows pagination" do
@@ -154,7 +154,7 @@ RSpec.describe "providers legal aid application requests" do
       end
 
       it "displays no results" do
-        expect(response.body).to include("No results")
+        expect(response.body).to include("You have <strong>0</strong> applications")
       end
     end
   end

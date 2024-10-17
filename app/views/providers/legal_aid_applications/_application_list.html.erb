@@ -1,0 +1,90 @@
+<% if @legal_aid_applications.any? %>
+  <%= govuk_table(html_attributes: { "data-module": "moj-sortable-table" }) do |table|
+        table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_description"))
+
+        table.with_head do |head|
+          head.with_row do |row|
+            row.with_cell(html_attributes: { "aria-sort": "none" }) do
+              tag.span(class: "aria-sort-description") do
+                concat t(".applicant_name")
+                concat tag.span(class: "sort-direction-indicator")
+              end
+            end
+            row.with_cell(html_attributes: { "aria-sort": "descending" }) do
+              tag.span(class: "aria-sort-description") do
+                concat t(".created_at")
+                concat tag.span(class: "sort-direction-indicator")
+              end
+            end
+            row.with_cell do
+              tag.span(class: "aria-sort-description") do
+                concat t(".application_ref_html")
+                concat tag.span(class: "sort-direction-indicator")
+              end
+            end
+            row.with_cell(html_attributes: { "aria-sort": "none" }) do
+              tag.span(class: "aria-sort-description") do
+                concat t(".certificate_type")
+                concat tag.span(class: "sort-direction-indicator")
+              end
+            end
+            if @scope.in? %i[in_progress voided]
+              row.with_cell do
+                concat t(".action")
+                concat tag.span(class: "sort-direction-indicator")
+              end
+            end
+          end
+        end
+
+        table.with_body do |body|
+          @legal_aid_applications.each do |application|
+            name = @scope == :voided ? application.applicant_full_name : link_to_application(application.applicant_full_name, application)
+            body.with_row do |row|
+              row.with_cell(text: name, html_attributes: { "data-sort-value": application.applicant_full_name })
+              row.with_cell(text: l(application.created_at.to_date, format: :short_date), html_attributes: { "data-sort-value": application.created_at.to_i })
+              row.with_cell { application.application_ref }
+              row.with_cell do
+                if application.special_children_act_proceedings? && application.used_delegated_functions?
+                  concat t(".substantive")
+                  concat tag.span(class: "govuk-body-s govuk-!-display-block") {
+                    t(".backdated_to", date: l(application.used_delegated_functions_on, format: :short_date))
+                  }
+                elsif application.used_delegated_functions?
+                  concat t(".emergency")
+                  if application.substantive_application_deadline_on? && application.summary_state == :in_progress
+                    concat tag.span(class: "govuk-body-s govuk-!-margin-bottom-0 govuk-!-display-block") {
+                      t(".substantive_due", date: l(application.substantive_application_deadline_on, format: :short_date))
+                    }
+                  end
+                else
+                  t(".substantive")
+                end
+              end
+              if @scope.in? %i[in_progress voided]
+                row.with_cell do
+                  govuk_link_to(
+                    t(".delete"),
+                    providers_legal_aid_application_delete_path(application),
+                    secondary: true,
+                    suffix: t(".delete_suffix", reference: application.application_ref, applicant: application.applicant_full_name),
+                  )
+                end
+              end
+            end
+          end
+        end
+      end %>
+<% else %>
+  <p class="govuk-body"><%= t(".no_applications_html") %></p>
+<% end %>
+
+<% if @scope == :in_progress && @voided_applications.any? %>
+  <p class="govuk-body">
+    <%= govuk_link_to "See applications you cannot submit", voided_providers_legal_aid_applications_path %>
+  </p>
+<% end %>
+
+<% if @legal_aid_applications.any? %>
+  <%= render "shared/partials/pagination", pagy: @pagy %>
+<% end %>
