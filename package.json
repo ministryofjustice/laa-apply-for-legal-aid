@@ -22,9 +22,9 @@
     "sass": "^1.79.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.7",
+    "@babel/core": "^7.25.8",
     "@babel/plugin-transform-runtime": "^7.25.7",
-    "@babel/preset-env": "^7.25.7",
+    "@babel/preset-env": "^7.25.8",
     "@testing-library/jest-dom": "^6.6.1",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
