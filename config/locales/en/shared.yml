@@ -468,7 +468,7 @@ en:
       benefits_income:
         applicant:
           heading: Client benefits
-          question: Does your client get any benefits?
+          question: Does your client get any benefits, charitable or government payments?
           change_aria: whether your client receives benefits
         partner:
           heading: Partner benefits
