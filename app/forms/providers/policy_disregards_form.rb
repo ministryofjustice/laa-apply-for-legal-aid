@@ -1,6 +1,7 @@
 module Providers
   class PolicyDisregardsForm < BaseForm
     form_for PolicyDisregards
+    include DisregardsHandling
 
     SINGLE_VALUE_ATTRIBUTES = %i[
       england_infected_blood_support
@@ -16,32 +17,17 @@ module Providers
 
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
 
-    validate :validate_any_checkbox_checked, unless: :draft?
-    validate :validate_no_account_and_another_checkbox_not_both_checked, unless: :draft?
-
-    def has_partner_with_no_contrary_interest?
-      model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
-    end
-
   private
-
-    def any_checkbox_checked?
-      checkbox_hash.values.any?(&:present?)
-    end
 
     def checkbox_hash
       CHECK_BOXES_ATTRIBUTES.index_with { |attribute| __send__(attribute) }
-    end
-
-    def none_and_another_checkbox_checked?
-      checkbox_hash[:none_selected].present? && checkbox_hash.except(:none_selected).values.any?(&:present?)
     end
 
     def validate_any_checkbox_checked
       errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked?
     end
 
-    def validate_no_account_and_another_checkbox_not_both_checked
+    def validate_no_disregard_and_another_checkbox_not_both_checked
       errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
     end
 
