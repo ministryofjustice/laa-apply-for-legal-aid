@@ -25,7 +25,7 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
         it "returns the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
           expect(response.body).to include("You have added 0 benefits")
-          expect(response.body).to include("Does the partner get any other benefits?")
+          expect(response.body).to include("Does the partner get any other benefits, charitable or government payments?")
         end
       end
 
@@ -61,7 +61,7 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
         it "returns an the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
           expect(response.body).to include("You have added 2 benefits")
-          expect(response.body).to include("Does the partner get any other benefits?")
+          expect(response.body).to include("Does the partner get any other benefits, charitable or government payments?")
         end
       end
     end
