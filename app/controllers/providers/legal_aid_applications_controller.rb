@@ -56,36 +56,27 @@ module Providers
     end
 
     def applications_query
-      query = firms_applications.includes(:applicant, :chances_of_success).latest
+      query = firms_applications.includes(:applicant, :chances_of_success).excluding(firms_applications.voided_applications)
 
       query.search(search_term)
     end
 
     def submitted_query
-      firms_applications.includes(:applicant, :chances_of_success).where.not(merits_submitted_at: nil).latest
+      firms_applications.submitted_applications
     end
 
     def in_progress_query
-      firms_applications.includes(:applicant, :chances_of_success).where(merits_submitted_at: nil)
-                                                                  .where.not(created_at: ...Date.new(2024))
-                                                                  .where("provider_step IS NOT NULL OR provider_step IN (?)",
-                                                                         excluded_steps)
-                                                                  .latest
+      firms_applications.includes(:applicant, :chances_of_success)
+                        .excluding(firms_applications.voided_applications)
+                        .excluding(firms_applications.submitted_applications)
     end
 
     def voided_query
-      firms_applications.includes(:applicant, :chances_of_success).where(created_at: ...Date.new(2024))
-                                                                  .where("provider_step IS NULL OR provider_step NOT IN (?)",
-                                                                         excluded_steps)
-                                                                  .latest
+      firms_applications.voided_applications
     end
 
     def firms_applications
       current_provider.firm.legal_aid_applications.kept
-    end
-
-    def excluded_steps
-      %w[end_of_applications submitted_applications use_ccms use_ccms_employed use_ccms_under16s]
     end
 
     def search_term
