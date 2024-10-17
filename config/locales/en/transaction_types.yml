@@ -72,7 +72,7 @@ en:
       rent_or_mortgage: Select housing payments
       salary: Select salary or wage payments
       student_loan: Select student loan or grant payments
-      excluded_benefits: Select government Cost of Living Payments and disregarded benefits
+      excluded_benefits: Select Government Cost of Living Payments and disregarded benefits
     benefits:
       inset_paras: |
         Include those received in the last 3 months
