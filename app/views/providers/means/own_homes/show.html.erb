@@ -1,22 +1,25 @@
-<% heading = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? ".h1_heading_with_partner" : ".h1_heading" %>
+<% prefix = Setting.means_test_review_a? ? "" : ".legacy"
+   heading = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "#{prefix}.h1_heading_with_partner" : "#{prefix}.h1_heading" %>
 <%= form_with(
       model: @form,
       url: providers_legal_aid_application_means_own_home_path(@legal_aid_application),
       method: :patch,
       local: true,
     ) do |form| %>
-    <%= page_template page_title: t(heading), form:, template: :basic do %>
+    <%= page_template(page_title: t(heading),
+                      form:,
+                      template: :basic) do %>
 
-    <% options = [
-         [:mortgage, t(".mortgage")],
-         [:owned_outright, t(".owned_outright")],
-         [:no, t(".no")],
-       ] %>
+      <% options = [
+           [:mortgage, t(".mortgage")],
+           [:owned_outright, t(".owned_outright")],
+           [:no, t(".no")],
+         ] %>
 
-    <%= form.govuk_collection_radio_buttons(:own_home, options, :first, :second,
-                                            legend: { size: "xl", tag: "h1", text: content_for(:page_title) }) %>
+        <%= form.govuk_collection_radio_buttons(:own_home, options, :first, :second,
+                                                legend: { size: "xl", tag: "h1", text: content_for(:page_title) },
+                                                hint: { text: Setting.means_test_review_a? ? t(".hint") : "" }) %>
 
-    <%= next_action_buttons(show_draft: true, form:) %>
-
-  <% end %>
+      <%= next_action_buttons(show_draft: true, form:) %>
+    <% end %>
 <% end %>

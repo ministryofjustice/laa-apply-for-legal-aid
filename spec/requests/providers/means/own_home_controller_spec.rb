@@ -15,25 +15,48 @@ RSpec.describe "provider own home requests" do
 
     context "when the provider is authenticated" do
       before do
+        allow(Setting).to receive(:means_test_review_a?).and_return(means_test_flag)
         login_as provider
         request
       end
+
+      let(:means_test_flag) { true }
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
       end
 
       context "without a partner" do
-        it "shows the correct content" do
-          expect(response.body).not_to include(I18n.t("providers.means.own_homes.show.h1_heading_with_partner"))
+        context "when the means_test_review_a flag is enabled" do
+          it "shows the correct content" do
+            expect(response.body).to include(I18n.t("providers.means.own_homes.show.h1_heading"))
+          end
+        end
+
+        context "when the means_test_review_a flag is turned off" do
+          let(:means_test_flag) { false }
+
+          it "shows the correct content" do
+            expect(response.body).to include(I18n.t("providers.means.own_homes.show.legacy.h1_heading"))
+          end
         end
       end
 
       context "with a partner" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
 
-        it "shows the correct content" do
-          expect(response.body).to include(I18n.t("providers.means.own_homes.show.h1_heading_with_partner"))
+        context "when the means_test_review_a flag is enabled" do
+          it "shows the correct content" do
+            expect(response.body).to include(I18n.t("providers.means.own_homes.show.h1_heading_with_partner"))
+          end
+        end
+
+        context "when the means_test_review_a flag is turned off" do
+          let(:means_test_flag) { false }
+
+          it "shows the correct content" do
+            expect(response.body).to include(I18n.t("providers.means.own_homes.show.legacy.h1_heading_with_partner"))
+          end
         end
       end
     end

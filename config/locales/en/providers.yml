@@ -1073,8 +1073,12 @@ en:
           assets: Do they have assets worth more than £8,000?
       own_homes:
         show:
-          h1_heading: Does your client own the home that they live in?
-          h1_heading_with_partner: Does your client or their partner own the home your client lives in?
+          h1_heading: Does your client own the home they usually live in?
+          h1_heading_with_partner: Does your client or their partner own the home your client usually lives in?
+          hint: This is where your client normally lives, even if they have temporarily left their home due to domestic abuse.
+          legacy:
+            h1_heading: Does your client own the home that they live in?
+            h1_heading_with_partner: Does your client or their partner own the home your client lives in?
           mortgage: Yes, with a mortgage or loan
           'no': 'No'
           owned_outright: Yes, owned outright
@@ -1082,8 +1086,11 @@ en:
         show:
           h1-heading: Your client's home
           values_question:
-            client: How much is the home your client lives in worth?
-            partner: How much is the home your client and their partner live in worth?
+            client: How much is the home they usually live in worth?
+            partner: How much is the home worth where your client and their partner usually live?
+            legacy:
+              client: How much is the home your client lives in worth?
+              partner: How much is the home your client and their partner live in worth?
           values_hint: You can use property websites to find the estimated value.
           mortgage_question: How much is left to pay on the mortgage?
           mortgage_hint:
