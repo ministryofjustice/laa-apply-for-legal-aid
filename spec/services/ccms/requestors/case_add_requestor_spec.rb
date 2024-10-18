@@ -520,6 +520,37 @@ module CCMS
             end
           end
 
+          describe "parental_responsibility values" do
+            context "when its a secure accommodation order proceeding and the client is a child" do
+              before { proceeding.update!(ccms_code: "PB006", client_involvement_type_ccms_code: "W") }
+
+              it "sets CLIENT_CHILD_SUBJECT_TO_SAO" do
+                block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_TO_SAO")
+                expect(block).to have_boolean_response true
+              end
+
+              it "sets CLIENT_CHILD_SUBJECT_OF_PROC" do
+                block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_OF_PROC")
+                expect(block).to have_boolean_response true
+              end
+            end
+
+            context "when its a non SAO proceeding and the client is a child" do
+              before { proceeding.update!(client_involvement_type_ccms_code: "W") }
+
+              it "sets CLIENT_CHILD_SUBJECT_TO_SAO" do
+                block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_TO_SAO")
+                expect(block).to have_boolean_response false
+              end
+
+              it "sets CLIENT_CHILD_SUBJECT_OF_PROC" do
+                block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_OF_PROC")
+                expect(block).to have_boolean_response true
+              end
+            end
+            # CLIENT_CHILD_SUBJECT_OF_PROC
+          end
+
           context "when the application has been backdated using delegated functions" do
             it "sets DelegatedFunctionsApply to false" do
               expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
