@@ -1,6 +1,7 @@
 import './src/jquery'
 
 import { initAll } from 'govuk-frontend'
+import { initAll as initAllMoJ } from '@ministryofjustice/frontend'
 import Rails from '@rails/ujs'
 
 // require polyfills via core-js
@@ -24,4 +25,5 @@ import './src/table-sort'
 import './src/worker_waiter'
 
 initAll()
+initAllMoJ()
 Rails.start()

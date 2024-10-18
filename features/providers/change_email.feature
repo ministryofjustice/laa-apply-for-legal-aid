@@ -65,7 +65,8 @@ Feature: Change applicant email address
     And I should see "We've sent an email to testagain@test.com"
     When I click link 'Back to your applications'
     Then I am on the legal aid applications page
-    When I click link 'Test User'
+    When I click link 'In progress'
+    And I click link 'Test User'
     Then I should be on the 'check_provider_answers' page showing 'Your client needs to complete their part of the application before you can continue.'
     And I should see "We've sent an email to testagain@test.com'
     When I click link 'Change email and resend link'

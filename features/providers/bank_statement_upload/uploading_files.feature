@@ -37,7 +37,7 @@ Feature: Bank statement file upload
     And I should see 'acceptable.pdf Uploaded'
 
     When I click 'Save and come back later'
-    Then I should be on a page with title "Applications"
+    Then I should be on a page with title "Your applications"
 
   Scenario: Deleting a file
     Given csrf is enabled

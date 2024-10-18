@@ -29,7 +29,7 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
       let(:params) { { applicant: { has_partner: "" }, draft_button: "Save and come back later" } }
 
       it "redirects to the list of applications" do
-        expect(response).to redirect_to providers_legal_aid_applications_path
+        expect(response).to redirect_to submitted_providers_legal_aid_applications_path
       end
     end
 

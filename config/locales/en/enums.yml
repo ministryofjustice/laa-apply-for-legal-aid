@@ -47,6 +47,6 @@ en:
         submission_paused: Submission paused
         use_ccms: use_ccms
       summary_state:
-        expired: Voided
+        expired: Cannot be submitted
         in_progress: In progress
         submitted: Submitted
