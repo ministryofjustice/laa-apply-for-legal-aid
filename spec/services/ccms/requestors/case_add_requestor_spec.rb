@@ -450,6 +450,16 @@ module CCMS
             block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCA")
             expect(block).not_to be_present, "Expected block for attribute CASE_OWNER_SCA not to be generated, but was \n #{block}"
           end
+
+          it "excludes the MERITS_ROUTING_NAME block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+            expect(block).not_to be_present, "Expected block for attribute MERITS_ROUTING_NAME not to be generated, but was \n #{block}"
+          end
+
+          it "sets MERITS_ROUTING" do
+            block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+            expect(block).to have_text_response "SFM"
+          end
         end
 
         describe "SCA applications" do
@@ -495,6 +505,18 @@ module CCMS
             it "sets CASE_OWNER_SCA to true" do
               block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCA")
               expect(block).to have_boolean_response true
+            end
+          end
+
+          describe "routing" do
+            it "sets MERITS_ROUTING_NAME" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+              expect(block).to have_text_response "SCA"
+            end
+
+            it "sets MERITS_ROUTING" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+              expect(block).to have_text_response "SCA"
             end
           end
 

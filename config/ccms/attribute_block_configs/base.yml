@@ -3014,7 +3014,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   MERITS_ROUTING:
-    value: SFM
+    value: "#app_routing"
     br100_meaning: merits routing owner
     response_type: text
     user_defined: false
@@ -3271,8 +3271,8 @@ global_merits:
     response_type: number
     user_defined: false
   MERITS_ROUTING_NAME:
-    generate_block?: false
-    value: Standard Family Merits
+    generate_block?: "#application_special_children_act_proceedings?"
+    value: "#app_routing_name"
     br100_meaning: merits routing name
     response_type: text
     user_defined: false
