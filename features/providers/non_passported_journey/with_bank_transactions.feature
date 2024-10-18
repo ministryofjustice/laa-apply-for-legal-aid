@@ -46,12 +46,12 @@ Feature: non_passported_journey with bank transactions
     And I click 'Save and continue'
 
     Then I click the '2nd' link 'View statements and add transactions'
-    And I should see govuk-tag "Benefits"
+    And I should see govuk-tag "Benefits and support"
     Then I select the first checkbox
     And I click 'Save and continue'
 
     Then I click the '2nd' link 'View statements and add transactions'
-    And I should see govuk-tag "Benefits"
+    And I should see govuk-tag "Benefits and support"
     And I should see govuk-tag "Financial help"
     Then I click 'Save and continue'
 
