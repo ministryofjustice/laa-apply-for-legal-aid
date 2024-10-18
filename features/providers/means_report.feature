@@ -96,10 +96,6 @@ Feature: Means report
       | Dependants allowance |
       | Total deductions |
 
-    And the Deductions questions should not exist:
-      | question |
-      | Income from benefits excluded from calculation |
-
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
@@ -256,7 +252,7 @@ Feature: Means report
 
     And the Outgoings questions and answers should match:
       | question | answer |
-      | Client housing payments | £125 |
+      | Client housing payments (any declared housing benefits have been deducted from this total) | £125 |
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
@@ -266,7 +262,6 @@ Feature: Means report
     And the Deductions questions should exist:
       | question |
       | Dependants allowance |
-      | Client income from benefits excluded from calculation |
       | Total deductions |
 
     And the Caseworker review questions should exist:

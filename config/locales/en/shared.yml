@@ -264,14 +264,10 @@ en:
       item:
         deductions:
           dependants_allowance: Dependants allowance
-          disregarded_state_benefits: Income from benefits excluded from calculation
           partner_allowance: Partner allowance
           client:
             dependants_allowance: Dependants allowance
-            disregarded_state_benefits: Client income from benefits excluded from calculation
             partner_allowance: Partner allowance
-          partner:
-            disregarded_state_benefits: Partner income from benefits excluded from calculation
         income:
           benefits: Benefits
           employment: Gross employment income
@@ -306,20 +302,17 @@ en:
             student_loan: Partner student loan or grant
             pension: Partner pension
         outgoing:
-          housing: "Housing payments%{addendum}"
-          housing_addendum: " (any declared housing benefits have been deducted from this total)"
+          housing: "Housing payments (any declared housing benefits have been deducted from this total)"
           childcare: Childcare payments
           maintenance_out: Maintenance payments to a former partner
           legal_aid: Payments towards legal aid in a criminal case
           client:
-            housing: "Client housing payments%{addendum}"
-            housing_addendum: " (any declared housing benefits have been deducted from this total)"
+            housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
             childcare: Client childcare payments
             maintenance_out: Client maintenance payments to a former partner
             legal_aid: Client payments towards legal aid in a criminal case
           partner:
-            housing: "Partner housing payments%{addendum}"
-            housing_addendum: " (any declared housing benefits have been deducted from this total)"
+            housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
             childcare: Partner childcare payments
             maintenance_out: Partner maintenance payments to a former partner
             legal_aid: Partner payments towards legal aid in a criminal case

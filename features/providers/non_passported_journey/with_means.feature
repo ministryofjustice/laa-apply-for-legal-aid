@@ -57,6 +57,10 @@ Feature: non_passported_journey with means
     Then I should be on a page with title "Sort your client's regular payments into categories"
 
     When I click 'Save and continue'
+    Then I should be on the 'housing_benefits' page showing "Does your client get Housing Benefit?"
+
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
 
     When I choose "No"
