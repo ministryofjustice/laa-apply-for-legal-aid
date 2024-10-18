@@ -81,6 +81,9 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I should see "Child benefit"
     And I should not see "in kind"
 
+    When I click "Save and continue"
+    Then I should see govuk error summary "Select yes if your client gets other benefits, charitable or government payments"
+
     When I choose "No"
     And I click "Save and continue"
 

@@ -99,7 +99,7 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
 
       it "renders the same page with an error message" do
         expect(response).to have_http_status(:unprocessable_content)
-        expect(response.body).to include("Select yes if they have received other benefits").twice
+        expect(response.body).to include("Select yes if your client gets other benefits, charitable or government payments").twice
       end
     end
 

@@ -25,7 +25,7 @@
         <% end %>
       <% end %>
     <% end %>
-    <%= form.govuk_collection_radio_buttons :add_another_state_benefit,
+    <%= form.govuk_collection_radio_buttons form.object.input_name,
                                             yes_no_options,
                                             :value,
                                             :label,

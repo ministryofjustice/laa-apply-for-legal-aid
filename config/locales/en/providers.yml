@@ -864,7 +864,10 @@ en:
         error_with_partner: Select whether your client or their partner has any other vehicles
     add_another_state_benefits:
       show:
-        error: Select yes if they have received other benefits
+        error: Select yes if your client gets other benefits, charitable or government payments
+    add_another_partner_state_benefits:
+      show:
+        error: Select yes if the partner gets other benefits, charitable or government payments
     invalid_logins:
       show:
         permission_title: You do not have permission to view this page
@@ -965,7 +968,7 @@ en:
           page_heading: Which of these payments does your client get?
           none_of_these: My client does not get any of these payments
           hints:
-            friends_or_family: This includes any regular payments your client gets from their friends or family. Do not include one-off payments..
+            friends_or_family: This includes any regular payments your client gets from their friends or family. Do not include one-off payments.
             benefits: For example, Child Benefit or tax credits.
             maintenance_in: This includes child maintenance.
             pension: This includes State, workplace and personal pensions.
