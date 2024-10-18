@@ -3369,8 +3369,8 @@ global_merits:
     response_type: boolean
     user_defined: true
   CASE_OWNER_SCA:
-    generate_block?: false
-    value: false
+    generate_block?: "#application_special_children_act_proceedings?"
+    value: "#application_special_children_act_proceedings?"
     br100_meaning: Meaning not defined in BR100
     response_type: boolean
     user_defined: false
@@ -3683,7 +3683,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   CASE_OWNER_STD_FAMILY_MERITS:
-    value: true
+    value: "#non_sca_application?"
     br100_meaning: The Case Owner Is The Standard Family Merits Team
     response_type: boolean
     user_defined: false

@@ -109,6 +109,10 @@ module CCMS
       legal_aid_application.special_children_act_proceedings? && legal_aid_application.used_delegated_functions?
     end
 
+    def non_sca_application?(_options)
+      legal_aid_application.proceedings.none? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
+    end
+
     def app_amendment_type(_options)
       legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
     end
