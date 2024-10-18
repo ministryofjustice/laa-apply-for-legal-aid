@@ -440,6 +440,16 @@ module CCMS
             block = XmlExtractor.call(request_xml, :global_merits, "APP_IS_SCA_RELATED")
             expect(block).not_to be_present, "Expected block for attribute APP_IS_SCA_RELATED not to be generated, but was \n #{block}"
           end
+
+          it "sets CASE_OWNER_STD_FAMILY_MERITS to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+            expect(block).to have_boolean_response true
+          end
+
+          it "excludes the CASE_OWNER_SCA block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCA")
+            expect(block).not_to be_present, "Expected block for attribute CASE_OWNER_SCA not to be generated, but was \n #{block}"
+          end
         end
 
         describe "SCA applications" do
@@ -475,6 +485,18 @@ module CCMS
           let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
 
           before { legal_aid_application.chances_of_success.map(&:destroy!) }
+
+          describe "UWQ group ownership" do
+            it "sets CASE_OWNER_STD_FAMILY_MERITS to false" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+              expect(block).to have_boolean_response false
+            end
+
+            it "sets CASE_OWNER_SCA to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCA")
+              expect(block).to have_boolean_response true
+            end
+          end
 
           context "when the application has been backdated using delegated functions" do
             it "sets DelegatedFunctionsApply to false" do
