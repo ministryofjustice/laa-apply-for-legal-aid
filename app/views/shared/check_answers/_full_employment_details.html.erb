@@ -21,7 +21,7 @@
   <% end %>
 </div>
 
-<%= govuk_summary_list(actions: false, classes: "govuk-!-margin-bottom-9", html_attributes: { id: "employment-income-questions" }) do |summary_list| %>
+<%= govuk_summary_list(card: { title: t(".employment", individual:) }, actions: false, classes: "govuk-!-margin-bottom-9", html_attributes: { id: "employment-income-questions" }) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__full_employment_details" }) do |row| %>
     <%= row.with_key(text: t(".details", individual_with_determiner:).upcase_first, classes: "govuk-!-width-one-half") %>
     <%= row.with_value { content.presence || "-" } %>
