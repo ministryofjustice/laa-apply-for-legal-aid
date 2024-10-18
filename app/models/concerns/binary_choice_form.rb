@@ -26,21 +26,23 @@ class BinaryChoiceForm
     @error = error
   end
 
+  attr_reader :input_name
+
 private
 
   def input_present?
-    errors.add @input_name.to_sym, error_message if blank_value? || bad_value?
+    errors.add input_name.to_sym, error_message if blank_value? || bad_value?
   end
 
   def blank_value?
-    __send__(@input_name).blank?
+    __send__(input_name).blank?
   end
 
   def bad_value?
-    %w[true false].exclude? __send__(@input_name)
+    %w[true false].exclude? __send__(input_name)
   end
 
   def error_message
-    @error.nil? ? I18n.t("#{@journey.to_s.pluralize}.#{@input_name.to_s.pluralize}.#{@action}.error") : @error
+    @error.nil? ? I18n.t("#{@journey.to_s.pluralize}.#{input_name.to_s.pluralize}.#{@action}.error") : @error
   end
 end
