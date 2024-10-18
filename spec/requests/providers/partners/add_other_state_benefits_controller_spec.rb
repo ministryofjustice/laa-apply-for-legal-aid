@@ -24,8 +24,8 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
       context "and no benefits have been added" do
         it "returns the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("You have added 0 benefits")
-          expect(response.body).to include("Does the partner get any other benefits?")
+          expect(response.body).to include("You added 0 benefit, charitable or government payments")
+          expect(response.body).to include("Does the partner get any other benefits, charitable or government payments?")
         end
       end
 
@@ -42,8 +42,8 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
 
         it "returns an the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("You have added 1 benefit")
-          expect(response.body).to include("Does the partner get any other benefits?")
+          expect(response.body).to include("You added 1 benefit, charitable or government payment")
+          expect(response.body).to include("Does the partner get any other benefits, charitable or government payments?")
         end
       end
 
@@ -60,26 +60,26 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
 
         it "returns an the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("You have added 2 benefits")
-          expect(response.body).to include("Does the partner get any other benefits?")
+          expect(response.body).to include("You added 2 benefit, charitable or government payments")
+          expect(response.body).to include("Does the partner get any other benefits, charitable or government payments?")
         end
       end
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/means/add_other_state_benefits" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/partners/add_other_state_benefits" do
     subject(:make_request) { patch providers_legal_aid_application_partners_add_other_state_benefits_path(legal_aid_application), params: }
 
     let(:params) do
       {
         binary_choice_form: {
-          add_another_state_benefit:,
+          add_another_partner_state_benefit:,
         },
       }
     end
 
     context "when the provider provides a response" do
-      let(:add_another_state_benefit) { "true" }
+      let(:add_another_partner_state_benefit) { "true" }
 
       it "redirects to the next page" do
         expect(response).to have_http_status(:redirect)
@@ -87,11 +87,11 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
     end
 
     context "when the provider does not provide a response" do
-      let(:add_another_state_benefit) { "" }
+      let(:add_another_partner_state_benefit) { "" }
 
       it "renders the same page with an error message" do
         expect(response).to have_http_status(:unprocessable_content)
-        expect(response.body).to include("Select yes if they have received other benefits").twice
+        expect(response.body).to include("Select yes if the partner gets other benefits, charitable or government payments").twice
       end
     end
 
@@ -99,7 +99,7 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_means_income) }
 
       context "and no more benefits are to be added" do
-        let(:add_another_state_benefit) { "false" }
+        let(:add_another_partner_state_benefit) { "false" }
 
         it "redirects to the next page" do
           expect(response).to have_http_status(:redirect)
@@ -107,7 +107,7 @@ RSpec.describe Providers::Partners::AddOtherStateBenefitsController do
       end
 
       context "and more benefits are to be added" do
-        let(:add_another_state_benefit) { "true" }
+        let(:add_another_partner_state_benefit) { "true" }
 
         it "redirects to the next page" do
           expect(response).to have_http_status(:redirect)

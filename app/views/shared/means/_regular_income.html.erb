@@ -5,8 +5,6 @@
     <span class="govuk-caption-xl"><%= caption %></span>
     <%= f.govuk_check_boxes_fieldset :transaction_type_ids, legend: { tag: "h1", size: "xl" } do %>
 
-      <%= render "shared/means/cost_of_living_and_disregarded_benefits" %>
-
       <% @form.transaction_type_options.each_with_index do |transaction_type, index| %>
         <%= f.govuk_check_box :transaction_type_ids,
                               transaction_type.id,
