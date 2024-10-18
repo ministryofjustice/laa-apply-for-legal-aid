@@ -43,7 +43,7 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
         it "returns an the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
           expect(response.body).to include("You added 1 benefit, charitable or government payment")
-          expect(response.body).to include("Does your client receive any other benefits?")
+          expect(response.body).to include("Does your client get any other benefits, charitable or government payments?")
         end
       end
 
