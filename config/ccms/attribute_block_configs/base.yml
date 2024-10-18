@@ -2985,6 +2985,18 @@ global_merits:
       is required
     response_type: boolean
     user_defined: false
+  CLIENT_CHILD_SUBJECT_TO_SAO:
+    generate_block?: "#application_special_children_act_proceedings?"
+    value: "#child_subject_to_sao?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_CHILD_SUBJECT_OF_PROC:
+    generate_block?: "#application_special_children_act_proceedings?"
+    value: "#child_subject_of_proceeding?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
   EVIDENCE_COPY_PR_ORDER:
     value: false
     br100_meaning: A copy of order bestowing parental responsibility upon client

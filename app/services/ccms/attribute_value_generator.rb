@@ -125,6 +125,14 @@ module CCMS
       legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
     end
 
+    def child_subject_to_sao?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code == "W" }
+    end
+
+    def child_subject_of_proceeding?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code == "W" }
+    end
+
     def provider_firm_id(_options)
       legal_aid_application.provider.firm.ccms_id
     end
