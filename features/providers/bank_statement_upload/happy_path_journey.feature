@@ -25,16 +25,7 @@ Feature: Bank statement upload journey happy path
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
-    And I should see govuk-details 'What not to include'
-
-    When I open the section 'What not to include'
-    Then the following sections should exist:
-      | tag | section |
-      | h2  | Government Cost of Living Payments |
-      | h2  | Disregarded benefits |
-      | h3  | Carer and disability benefits |
-      | h3  | Low income benefits |
-      | h3  | Other benefits |
+    And I should not see 'What not to include'
 
     Then I check "Pension"
     Then I should see "Monthly"
@@ -96,10 +87,6 @@ Feature: Bank statement upload journey happy path
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Does your client get any benefits, charitable or government payments?"
-    And I choose "No"
-
-    When I click "Save and continue"
-    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
     And I should see govuk-details 'What not to include'
 
     When I open the section 'What not to include'
@@ -110,6 +97,11 @@ Feature: Bank statement upload journey happy path
       | h3  | Carer and disability benefits |
       | h3  | Low income benefits |
       | h3  | Other benefits |
+
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
+    And I should not see 'What not to include'
 
     Then I check "Pension"
     Then I should see "Monthly"

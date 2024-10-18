@@ -34,7 +34,7 @@ Feature: non_passported_journey with bank transactions
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And the following sections should exist:
       | tag | section |
-      | h2  | 1. Benefits |
+      | h2  | 1. Benefits, charitable or government payments |
       | h2  | 2. Financial help from friends or family |
       | h2  | 3. Pension |
 
