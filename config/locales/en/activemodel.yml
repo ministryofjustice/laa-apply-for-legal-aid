@@ -61,7 +61,7 @@ en:
         file_deleted: "%{file_name} has been successfully deleted."
       transaction_types:
         name:
-          benefits: Benefits
+          benefits: Benefits and support
           excluded_benefits: Disregarded
           friends_or_family: Financial help
           maintenance_in: Maintenance
