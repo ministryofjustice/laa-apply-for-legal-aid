@@ -2,7 +2,25 @@ module Providers
   class PolicyDisregardsForm < BaseForm
     form_for PolicyDisregards
 
-    SINGLE_VALUE_ATTRIBUTES = %i[
+    MANDATORY_DISREGARDS_ATTRIBUTES = %i[
+      backdated_benefits
+      backdated_community_care
+      budgeting_advances
+      compensation_miscarriage_of_justice
+      government_cost_of_living
+      independent_living_fund
+      infected_blood_support
+      modern_slavery
+      account_of_benefit
+      historical_child_abuse
+      social_fund
+      vaccine_damage
+      variant_creutzfeldt_jakob_disease
+      welsh_independent_living_grant
+      windrush_compensation_scheme
+    ].freeze
+
+    LEGACY_DISREGARDS_ATTRIBUTES = %i[
       england_infected_blood_support
       vaccine_damage_payments
       variant_creutzfeldt_jakob_disease
@@ -12,9 +30,12 @@ module Providers
       london_emergencies_trust
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map(&:to_sym) + %i[none_selected]).freeze
+    def self.check_box_attributes
+      attributes = Setting.means_test_review_a? ? MANDATORY_DISREGARDS_ATTRIBUTES : LEGACY_DISREGARDS_ATTRIBUTES
+      (attributes.map(&:to_sym) + %i[none_selected]).freeze
+    end
 
-    attr_accessor(*CHECK_BOXES_ATTRIBUTES)
+    attr_accessor(*check_box_attributes)
 
     validate :validate_any_checkbox_checked, unless: :draft?
     validate :validate_no_account_and_another_checkbox_not_both_checked, unless: :draft?
@@ -30,7 +51,11 @@ module Providers
     end
 
     def checkbox_hash
-      CHECK_BOXES_ATTRIBUTES.index_with { |attribute| __send__(attribute) }
+      check_box_attributes.index_with { |attribute| __send__(attribute) }
+    end
+
+    def check_box_attributes
+      self.class.check_box_attributes
     end
 
     def none_and_another_checkbox_checked?
@@ -38,11 +63,11 @@ module Providers
     end
 
     def validate_any_checkbox_checked
-      errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked?
+      errors.add check_box_attributes.first.to_sym, error_message_for_none_selected unless any_checkbox_checked?
     end
 
     def validate_no_account_and_another_checkbox_not_both_checked
-      errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
+      errors.add check_box_attributes.first.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
     end
 
     def error_message_for_none_selected
