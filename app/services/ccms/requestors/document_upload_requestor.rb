@@ -36,35 +36,24 @@ module CCMS
       def document(xml)
         xml.__send__(:"casebio:CCMSDocumentID", ccms_document_id)
         document_type(xml)
+        file_extension(xml)
         xml.__send__(:"casebio:Channel", "E")
         xml.__send__(:"casebio:BinData", document_encoded_base64)
       end
 
       def document_type(xml)
-        case @document_type
-        when "bank_transaction_report"
-          xml.__send__(:"casebio:DocumentType", "BSTMT")
-          xml.__send__(:"casebio:FileExtension", "csv")
-        when "bank_statement_evidence_pdf", "part_bank_state_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "BSTMT")
-          xml.__send__(:"casebio:FileExtension", "pdf")
-        when "client_employment_evidence_pdf", "part_employ_evidence_pdf", "employment_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "PAYSLIP")
-          xml.__send__(:"casebio:FileExtension", "pdf")
-        when "court_order_pdf", "court_application_or_order_pdf", "court_application_pdf"
-          xml.__send__(:"casebio:DocumentType", "COURT_ORD")
-          xml.__send__(:"casebio:FileExtension", "pdf")
-        when "expert_report_pdf", "gateway_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "EX_RPT")
-          xml.__send__(:"casebio:FileExtension", "pdf")
-        when "benefit_evidence_pdf"
-          xml.__send__(:"casebio:DocumentType", "BEN_LTR")
-          xml.__send__(:"casebio:FileExtension", "pdf")
-        when "statement_of_case_pdf"
-          xml.__send__(:"casebio:DocumentType", "STATE")
-          xml.__send__(:"casebio:FileExtension", "pdf")
+        document_category = DocumentCategory.find_by(name: @document_type)
+        if document_category.present?
+          xml.__send__(:"casebio:DocumentType", document_category.ccms_document_type)
         else
           xml.__send__(:"casebio:DocumentType", "ADMIN1")
+        end
+      end
+
+      def file_extension(xml)
+        if @document_type == "bank_transaction_report"
+          xml.__send__(:"casebio:FileExtension", "csv")
+        else
           xml.__send__(:"casebio:FileExtension", "pdf")
         end
       end

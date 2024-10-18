@@ -10,6 +10,8 @@ module CCMS
       let(:document_encoded_base64) { "JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiA" }
       let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login") }
 
+      before { DocumentCategoryPopulator.call }
+
       describe "XML request" do
         context "when sent a normal document" do
           include_context "with ccms soa configuration"
@@ -165,6 +167,24 @@ module CCMS
               transaction_id: expected_tx_id,
               matching: %w[
                 <casebio:DocumentType>STATE</casebio:DocumentType>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
+              ],
+            )
+          end
+        end
+
+        context "when sent a legacy document" do
+          let(:type) { "employment_evidence_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>ADMIN1</casebio:DocumentType>
                 <casebio:FileExtension>pdf</casebio:FileExtension>
               ],
             )
