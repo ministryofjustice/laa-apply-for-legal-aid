@@ -113,6 +113,14 @@ module CCMS
       legal_aid_application.proceedings.none? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
     end
 
+    def app_routing(_options)
+      legal_aid_application.special_children_act_proceedings? ? "SCA" : "SFM"
+    end
+
+    def app_routing_name(_options)
+      legal_aid_application.special_children_act_proceedings? ? "SCA" : "Standard Family Merits"
+    end
+
     def app_amendment_type(_options)
       legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
     end
