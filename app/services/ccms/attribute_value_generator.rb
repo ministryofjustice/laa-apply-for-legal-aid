@@ -105,8 +105,32 @@ module CCMS
       legal_aid_application.used_delegated_functions_on.strftime("%d-%m-%Y")
     end
 
+    def backdated_sca_application?(_options)
+      legal_aid_application.special_children_act_proceedings? && legal_aid_application.used_delegated_functions?
+    end
+
+    def non_sca_application?(_options)
+      legal_aid_application.proceedings.none? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
+    end
+
+    def app_routing(_options)
+      legal_aid_application.special_children_act_proceedings? ? "SCA" : "SFM"
+    end
+
+    def app_routing_name(_options)
+      legal_aid_application.special_children_act_proceedings? ? "SCA" : "Standard Family Merits"
+    end
+
     def app_amendment_type(_options)
-      legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB"
+      legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
+    end
+
+    def child_subject_to_sao?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code == "W" }
+    end
+
+    def child_subject_of_proceeding?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code == "W" }
     end
 
     def provider_firm_id(_options)
@@ -278,6 +302,10 @@ module CCMS
       return unless ccms_equivalent_prospects_of_success_valid?
 
       PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:code]
+    end
+
+    def ccms_equivalent_prospects_of_success_present?(_options)
+      chances_of_success&.success_prospect&.present?
     end
 
     def ccms_equivalent_prospects_of_success_valid?
@@ -467,7 +495,7 @@ module CCMS
     end
 
     def bypass_manual_review_in_ccms?(_options)
-      !manual_case_review_required?
+      !manual_case_review_required? || legal_aid_application.auto_grant_special_children_act?
     end
 
     def manual_case_review_required?
