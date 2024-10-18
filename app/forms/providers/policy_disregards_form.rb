@@ -2,7 +2,7 @@ module Providers
   class PolicyDisregardsForm < BaseForm
     form_for PolicyDisregards
 
-    SINGLE_VALUE_ATTRIBUTES = %i[
+    MANDATORY_DISREGARDS_ATTRIBUTES = %i[
       backdated_benefits
       backdated_community_care
       budgeting_advances
@@ -20,7 +20,7 @@ module Providers
       windrush_compensation_scheme
     ].freeze
 
-    LEGACY_ATTRIBUTES = %i[
+    LEGACY_DISREGARDS_ATTRIBUTES = %i[
       england_infected_blood_support
       vaccine_damage_payments
       variant_creutzfeldt_jakob_disease
@@ -30,28 +30,18 @@ module Providers
       london_emergencies_trust
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = generate_check_box_attributes
+    def self.check_box_attributes
+      attributes = Setting.means_test_review_a? ? MANDATORY_DISREGARDS_ATTRIBUTES : LEGACY_DISREGARDS_ATTRIBUTES
+      (attributes.map(&:to_sym) + %i[none_selected]).freeze
+    end
 
-    attr_accessor(*CHECK_BOXES_ATTRIBUTES)
+    attr_accessor(*check_box_attributes)
 
     validate :validate_any_checkbox_checked, unless: :draft?
     validate :validate_no_account_and_another_checkbox_not_both_checked, unless: :draft?
 
-    def initialize(params = {})
-      @transaction_type_ids = params["transaction_type_ids"] || existing_transaction_type_ids
-      generate_check_box_attributes
-
-      super
-    end
-
     def has_partner_with_no_contrary_interest?
       model.legal_aid_application.applicant&.has_partner_with_no_contrary_interest?
-    end
-
-    def generate_check_box_attributes
-      attributes = Setting.means_test_review_a? ? SINGLE_VALUE_ATTRIBUTES : LEGACY_ATTRIBUTES
-      @check_boxes_attributes = (attributes.map(&:to_sym) + %i[none_selected]).freeze
-      attr_accessor(*@check_boxes_attributes)
     end
 
   private
@@ -61,7 +51,11 @@ module Providers
     end
 
     def checkbox_hash
-      @check_boxes_attributes.index_with { |attribute| __send__(attribute) }
+      check_box_attributes.index_with { |attribute| __send__(attribute) }
+    end
+
+    def check_box_attributes
+      self.class.check_box_attributes
     end
 
     def none_and_another_checkbox_checked?
@@ -69,11 +63,11 @@ module Providers
     end
 
     def validate_any_checkbox_checked
-      errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked?
+      errors.add check_box_attributes.first.to_sym, error_message_for_none_selected unless any_checkbox_checked?
     end
 
     def validate_no_account_and_another_checkbox_not_both_checked
-      errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
+      errors.add check_box_attributes.first.to_sym, error_message_for_none_and_another_option_selected if none_and_another_checkbox_checked?
     end
 
     def error_message_for_none_selected

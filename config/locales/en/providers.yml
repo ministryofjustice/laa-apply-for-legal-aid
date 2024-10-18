@@ -1246,7 +1246,7 @@ en:
             - their assets are the subject matter of dispute (SMOD)
             - their assets are held under a restraint order
       policy_disregards:
-        show:
+        mandatory_disregards:
           h1-heading: Disregarded payments
           paragraph:
             client: These payments are not counted, but we still need to know about them to understand your client’s finances. They are called mandatory disregards.
@@ -1273,7 +1273,7 @@ en:
           welsh_independent_living_grant: Welsh Independent Living Grant
           windrush_compensation_scheme: Windrush Compensation Scheme payment
           none_of_these: My client has not received any of these payments
-        legacy:
+        legacy_disregards:
           h1-heading:
             client: Which schemes or trusts have paid your client?
             partner: Which schemes or trusts have paid either your client or their partner?

@@ -13,17 +13,17 @@
         <p class="govuk-error-message" id="savings-amount-cash-error">
           <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:england_infected_blood_support].first %></p>
       <% end %>
-    <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
-      <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
-        <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
-      <% end %>
-    </div>
 
-    <%= form.govuk_radio_divider %>
-    <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+      <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
+        <% Providers::PolicyDisregardsForm::LEGACY_DISREGARDS_ATTRIBUTES.each do |checkbox| %>
+          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
+        <% end %>
+      </div>
 
-  <% end %>
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+    <% end %>
 
-  <%= next_action_buttons(show_draft: true, form:) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
