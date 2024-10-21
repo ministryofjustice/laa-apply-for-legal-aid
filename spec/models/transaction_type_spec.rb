@@ -138,7 +138,7 @@ RSpec.describe TransactionType do
     describe "#child?" do
       context "when is a child" do
         it "returns true" do
-          expect(excluded_benefits.child?).to be true
+          expect(housing_benefit.child?).to be true
         end
       end
 
@@ -158,7 +158,7 @@ RSpec.describe TransactionType do
 
       context "when is a child" do
         it "returns parent" do
-          expect(excluded_benefits.parent_or_self).to eq benefits
+          expect(housing_benefit.parent_or_self).to eq benefits
         end
       end
     end
@@ -167,6 +167,7 @@ RSpec.describe TransactionType do
       context "when a disregarded benefit type" do
         it "returns true" do
           expect(excluded_benefits.disregarded_benefit?).to be true
+          expect(housing_benefit.disregarded_benefit?).to be true
         end
       end
 

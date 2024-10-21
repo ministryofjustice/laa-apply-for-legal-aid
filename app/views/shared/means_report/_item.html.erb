@@ -1,9 +1,8 @@
-<% addendum = local_assigns[:addendum] || nil %>
 <% suppress_border ||= false %>
 <% css_border_klass = suppress_border ? "govuk-summary-list__row--no-border" : "" %>
 <div class="govuk-summary-list__row  normal-word-break" id="<%= "means-merits-report__#{name}" %>">
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
-    <%= t(".#{scope}.client.#{name}", addendum:) %>
+    <%= t(".#{scope}.client.#{name}") %>
   </dt>
   <!--  in-line styling due to issues around pdf generation in our production envs -->
   <dd class="govuk-summary-list__value govuk-!-text-align-right">
@@ -14,7 +13,7 @@
   <% unless partner_exclude_items.include?(value_method) %>
     <div class="<%= "govuk-summary-list__row  normal-word-break #{css_border_klass}" %>" id="<%= "means-merits-report__partner_#{name}" %>">
       <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-        <%= t(".#{scope}.partner.#{name}", addendum:) %>
+        <%= t(".#{scope}.partner.#{name}") %>
       </dt>
       <!--  in-line styling due to issues around pdf generation in our production envs -->
       <dd class="govuk-summary-list__value govuk-!-text-align-right">

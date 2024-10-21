@@ -280,13 +280,13 @@ Given("I start the means application") do
   )
 end
 
-Given("I start the merits application with bank transactions with no transaction type category") do
+Given("I start the means application with bank transactions with no transaction type category") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
     :with_proceedings,
     :with_non_passported_state_machine,
-    :provider_entering_merits,
+    :provider_assessing_means,
     :with_transaction_period,
     :with_uncategorised_credit_transactions,
     :with_uncategorised_debit_transactions,

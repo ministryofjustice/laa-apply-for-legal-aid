@@ -55,6 +55,19 @@
     <% end %>
   </section>
 
+<!-- HOUSING BENEFIT -->
+
+  <section class="print-no-break govuk-!-padding-top-8">
+    <% if @legal_aid_application.housing_payments? %>
+      <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? t("generic.client_or_partner") : t("generic.client") %>
+      <%= render(
+            "shared/check_answers/housing_benefit",
+            read_only: true,
+            individual:,
+          ) %>
+    <% end %>
+  </section>
+
 <!--  PARTNER INCOME -->
 
   <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && !@legal_aid_application.applicant_receives_benefit? %>
@@ -66,7 +79,7 @@
 
 <!-- CAPITAL -->
 
-  <section class="print-no-break govuk-!-padding-top-8">
+  <section class="print-no-break">
     <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
     <%= render "shared/check_answers/assets", read_only: true, individual: %>
   </section>

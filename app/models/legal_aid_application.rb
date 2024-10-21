@@ -619,10 +619,6 @@ class LegalAidApplication < ApplicationRecord
     TransactionType.where(id: owners_transaction_types).for_outgoing_type?(:rent_or_mortgage)
   end
 
-  def housing_benefit_regular_transaction_applicable?
-    uploading_bank_statements? && housing_payments?
-  end
-
   def truelayer_path?
     provider_received_citizen_consent == true
   end
