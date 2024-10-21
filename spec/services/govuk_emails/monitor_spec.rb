@@ -137,13 +137,13 @@ RSpec.describe GovukEmails::Monitor do
           end
         end
 
-        it "captures alert message" do
-          expect(AlertManager).to receive(:capture_message).with("Unable to deliver mail to #{legal_aid_application.applicant.email} - ScheduledMailing record #{scheduled_mailing.id}")
+        it "does not alert" do
+          expect(AlertManager).not_to receive(:capture_message)
           call
         end
 
-        it "creates 2 more scheduled_mailings to send alert emails to the provider and apply team", :aggregate_failures do
-          expect { call }.to change(ScheduledMailing, :count).by(2)
+        it "creates 1 more scheduled_mailings to send alert emails to the provider", :aggregate_failures do
+          expect { call }.to change(ScheduledMailing, :count).by(1)
 
           undelivered_mailings = ScheduledMailing.where(mailer_klass: "UndeliverableEmailAlertMailer")
 
@@ -151,27 +151,21 @@ RSpec.describe GovukEmails::Monitor do
             .to contain_exactly(have_attributes(
                                   legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
                                   mailer_klass: "UndeliverableEmailAlertMailer",
-                                  mailer_method: "notify_apply_team",
-                                  addressee: Rails.configuration.x.support_email_address,
-                                  arguments: [scheduled_mailing.id],
-                                ), have_attributes(
-                                     legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
-                                     mailer_klass: "UndeliverableEmailAlertMailer",
-                                     mailer_method: "notify_provider",
-                                     addressee: legal_aid_application.provider.email,
-                                     arguments: expected_provider_args,
-                                   ))
+                                  mailer_method: "notify_provider",
+                                  addressee: legal_aid_application.provider.email,
+                                  arguments: expected_provider_args,
+                                ))
 
           expect(undelivered_mailings.map(&:scheduled_at)).to all(have_been_in_the_past)
         end
 
-        it "enqueues 2 jobs to send emails" do
+        it "enqueues 1 job to send emails" do
           ActiveJob::Base.queue_adapter = :test
 
           expect { call }.to have_enqueued_job(ScheduledMailingsDeliveryJob)
                               .on_queue("default")
                               .at(:no_wait)
-                              .twice
+                              .once
 
           ActiveJob::Base.queue_adapter = :sidekiq
         end
