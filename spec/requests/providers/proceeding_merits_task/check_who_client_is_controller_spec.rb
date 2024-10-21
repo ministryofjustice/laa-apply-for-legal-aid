@@ -4,7 +4,7 @@ module Providers
   module ProceedingMeritsTask
     RSpec.describe CheckWhoClientIsController do
       let(:smtl) { create(:legal_framework_merits_task_list, :pb003_pb059, legal_aid_application:) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :merits_parental_responsibilities, :with_non_means_tested_state_machine, explicit_proceedings: %i[pb003 pb059]) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :merits_parental_responsibilities, :with_sca_state_machine, explicit_proceedings: %i[pb003 pb059]) }
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "PB003") }
       let(:login) { login_as legal_aid_application.provider }
 

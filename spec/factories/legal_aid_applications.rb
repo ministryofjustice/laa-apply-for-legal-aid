@@ -166,6 +166,10 @@ FactoryBot.define do
       state_machine factory: :non_means_tested_state_machine
     end
 
+    trait :with_sca_state_machine do
+      state_machine factory: :special_children_act_state_machine
+    end
+
     trait :with_base_state_machine do
       state_machine factory: :base_state_machine
     end
