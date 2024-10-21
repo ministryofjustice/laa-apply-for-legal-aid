@@ -26,19 +26,19 @@ Sidekiq.configure_server do |config|
 
   if Rails.env.production? && Rails.configuration.x.kubernetes_deployment
     config.server_middleware do |chain|
+      Rails.logger.info "[SidekiqPrometheusExporter] Chaining middleware..."
       chain.add PrometheusExporter::Instrumentation::Sidekiq
     end
 
-    config.death_handlers << lambda { |job, _ex|
-      PrometheusExporter::Client.default.send_json(
-        type: "sidekiq",
-        name: job["class"],
-        dead: true,
-      )
-    }
+    config.death_handlers << PrometheusExporter::Instrumentation::Sidekiq.death_handler
 
     config.on :startup do
+      Rails.logger.info "[SidekiqPrometheusExporter] Startup instrumention details..."
+
       PrometheusExporter::Instrumentation::Process.start type: "sidekiq"
+      PrometheusExporter::Instrumentation::SidekiqProcess.start
+      PrometheusExporter::Instrumentation::SidekiqQueue.start(all_queues: true)
+      PrometheusExporter::Instrumentation::SidekiqStats.start
     end
 
     at_exit do
