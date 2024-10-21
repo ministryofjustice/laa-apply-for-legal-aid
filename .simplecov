@@ -2,6 +2,7 @@ SimpleCov.start "rails" do
   add_filter "config/"
   add_filter "spec/"
   add_filter "services/migration_helpers/"
+  add_filter "lib/tasks/"
 
   add_filter "lib/tasks/helpers/cfe_api_displayer.rb"
   add_filter "lib/tasks/helpers/cfe_payload_recorder.rb"
