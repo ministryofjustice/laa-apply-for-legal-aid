@@ -5,7 +5,7 @@ RSpec.describe Test::GenerateErrorController do
     it "calls the Alert Manager" do
       expect(AlertManager).to receive(:capture_exception)
       get "/test/trapped_error"
-      expect(response).to redirect_to providers_legal_aid_applications_path
+      expect(response).to redirect_to submitted_providers_legal_aid_applications_path
     end
   end
 

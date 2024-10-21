@@ -33,8 +33,16 @@ Given("I have an existing office") do
   @registered_provider.update!(selected_office: office)
 end
 
-Given(/^I visit the applications page$/) do
-  visit providers_legal_aid_applications_path
+Given(/^I visit the in progress applications page$/) do
+  visit in_progress_providers_legal_aid_applications_path
+end
+
+Given(/^I visit the submitted applications page$/) do
+  visit submitted_providers_legal_aid_applications_path
+end
+
+Given(/^I visit the voided applications page$/) do
+  visit voided_providers_legal_aid_applications_path
 end
 
 Given("I have previously created multiple applications") do
@@ -57,7 +65,7 @@ Given("I have created and submitted an application") do
     :with_everything,
     :with_passported_state_machine,
     :with_merits_submitted_at,
-    :initiated,
+    :generating_reports,
     provider: create(:provider),
   )
   login_as @legal_aid_application.provider
@@ -85,9 +93,23 @@ Given("I have created but not submitted an application") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
+    :at_entering_applicant_details,
     :draft,
     :initiated,
     provider: create(:provider),
+  )
+  login_as @legal_aid_application.provider
+end
+
+Given("I have created a voided application") do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :draft,
+    :initiated,
+    provider: create(:provider),
+    provider_step: "chances_of_success",
+    created_at: Date.parse("2023-12-25"),
   )
   login_as @legal_aid_application.provider
 end
@@ -149,6 +171,10 @@ end
 
 Given(/^I view the previously created application$/) do
   find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a").click
+end
+
+Then(/^I should see the previously created application$/) do
+  expect(page).to have_content(@legal_aid_application.applicant.full_name)
 end
 
 Then(/^I should not see the previously created application$/) do
@@ -1316,7 +1342,7 @@ Then("I am on the application confirmation page") do
 end
 
 Then("I am on the legal aid applications page") do
-  expect(page).to have_content("Applications")
+  expect(page).to have_content("Your applications")
 end
 
 Then("I am on the About the Financial Assessment page") do

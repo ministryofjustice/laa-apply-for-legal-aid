@@ -149,7 +149,7 @@ RSpec.describe "provider own home requests" do
 
         context "when owned outright" do
           it "redirects to provider applications home page" do
-            expect(response).to redirect_to providers_legal_aid_applications_path
+            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
           end
 
           it "updates the record to match" do
@@ -161,7 +161,7 @@ RSpec.describe "provider own home requests" do
           let(:own_home) { "mortgage" }
 
           it "redirects to the applications page" do
-            expect(response).to redirect_to providers_legal_aid_applications_path
+            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
           end
 
           it "updates the record to match" do
@@ -172,7 +172,7 @@ RSpec.describe "provider own home requests" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the applications list page" do
-              expect(response).to redirect_to(providers_legal_aid_applications_path)
+              expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
             end
           end
         end
@@ -181,7 +181,7 @@ RSpec.describe "provider own home requests" do
           let(:own_home) { "no" }
 
           it "redirects to the applications page" do
-            expect(response).to redirect_to providers_legal_aid_applications_path
+            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
           end
 
           it "updates the record to match" do
@@ -192,7 +192,7 @@ RSpec.describe "provider own home requests" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the applications list page" do
-              expect(response).to redirect_to(providers_legal_aid_applications_path)
+              expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
             end
           end
         end
@@ -202,7 +202,7 @@ RSpec.describe "provider own home requests" do
 
           it "redirects provider to provider's applications page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_applications_path)
+            expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
           end
 
           it "does not update the record" do

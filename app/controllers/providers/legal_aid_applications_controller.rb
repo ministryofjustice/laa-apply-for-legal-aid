@@ -3,15 +3,30 @@ module Providers
     include Pagy::Backend
     legal_aid_application_not_required!
 
+    before_action :set_scope, only: %i[in_progress search submitted voided]
+
     DEFAULT_PAGE_SIZE = 20
 
-    def index
-      applications
+    def index; end
+
+    def submitted
+      applications(submitted_query)
+      render "index"
+    end
+
+    def in_progress
+      applications(in_progress_query)
+      @voided_applications = voided_query
+      render "index"
+    end
+
+    def voided
+      applications(voided_query)
     end
 
     def search
       if search_term.present?
-        applications
+        applications(applications_query)
         log_search
       elsif search_term == ""
         @error = t(".error")
@@ -27,9 +42,13 @@ module Providers
 
   private
 
-    def applications
+    def set_scope
+      @scope = params[:action].to_sym
+    end
+
+    def applications(query)
       @pagy, @legal_aid_applications = pagy(
-        applications_query,
+        query,
         limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
         size: 5, # control of how many elements shown in page info
       )
@@ -37,10 +56,27 @@ module Providers
     end
 
     def applications_query
-      query = current_provider.firm.legal_aid_applications.kept.includes(:applicant, :chances_of_success).latest
-      return query if search_term.blank?
+      query = firms_applications.includes(:applicant, :chances_of_success).excluding(firms_applications.voided_applications)
 
       query.search(search_term)
+    end
+
+    def submitted_query
+      firms_applications.submitted_applications
+    end
+
+    def in_progress_query
+      firms_applications.includes(:applicant, :chances_of_success)
+                        .excluding(firms_applications.voided_applications)
+                        .excluding(firms_applications.submitted_applications)
+    end
+
+    def voided_query
+      firms_applications.voided_applications
+    end
+
+    def firms_applications
+      current_provider.firm.legal_aid_applications.kept
     end
 
     def search_term

@@ -32,7 +32,7 @@ RSpec.describe ApplicationHelper do
         allow(request).to receive(:path_info).and_return("/providers/test")
       end
 
-      it { is_expected.to eq(providers_legal_aid_applications_url) }
+      it { is_expected.to eq(submitted_providers_legal_aid_applications_url) }
     end
 
     context "when called on citizens journey" do

@@ -82,7 +82,7 @@ module Providers
             end
 
             it "redirects to provider applications home page" do
-              expect(response).to redirect_to providers_legal_aid_applications_path
+              expect(response).to redirect_to submitted_providers_legal_aid_applications_path
             end
 
             context "with nothing specified" do
@@ -90,7 +90,7 @@ module Providers
               let(:success_prospect_details) { nil }
 
               it "redirects to provider applications home page" do
-                expect(response).to redirect_to providers_legal_aid_applications_path
+                expect(response).to redirect_to submitted_providers_legal_aid_applications_path
               end
             end
           end

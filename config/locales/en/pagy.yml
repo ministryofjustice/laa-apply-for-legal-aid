@@ -3,9 +3,9 @@
 en:
   pagy:
     info:
-      multiple_pages: "Showing %{from} - %{to} of %{count} %{item_name}"
+      multiple_pages: "Showing <strong>%{from}</strong> to <strong>%{to}</strong> of <strong>%{count}</strong> %{item_name}"
       no_items: "No %{item_name}"
-      single_page: "Showing %{count} of %{count} %{item_name}"
+      single_page: "Showing <strong>%{count}</strong> of <strong>%{count}</strong> %{item_name}"
     item_name:
       one: "result"
       other: "results"

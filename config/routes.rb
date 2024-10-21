@@ -131,7 +131,13 @@ Rails.application.routes.draw do
     resource :invalid_login, only: :show
     resources :cookies, only: %i[show update]
 
-    resources :legal_aid_applications, path: "applications", only: %i[index create] do
+    resources :legal_aid_applications, path: "applications", only: %i[create] do
+      collection do
+        get :submitted
+        get :in_progress
+        get :voided
+        get :search
+      end
       namespace :means do
         resource :cash_outgoing, only: %i[show update]
         resource :full_employment_details, only: %i[show update]
@@ -164,7 +170,6 @@ Rails.application.routes.draw do
         resource :receives_state_benefits, only: %i[show update]
         resources :remove_state_benefits, only: %i[show update]
       end
-      get :search, on: :collection
       namespace :correspondence_address do
         resource :choice, only: %i[show update], path: "where_to_send_correspondence"
         resource :care_of, only: %i[show update], path: "care_of_recipient"

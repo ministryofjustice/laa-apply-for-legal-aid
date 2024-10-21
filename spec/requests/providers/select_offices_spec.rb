@@ -59,7 +59,7 @@ RSpec.describe "provider selects office" do
       end
 
       it "redirects to the legal aid applications page" do
-        expect(response).to redirect_to providers_legal_aid_applications_path
+        expect(response).to redirect_to submitted_providers_legal_aid_applications_path
       end
 
       context "when the params are invalid - nothing specified" do

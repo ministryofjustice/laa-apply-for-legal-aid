@@ -53,7 +53,7 @@ RSpec.describe Admin::SubmittedApplicationsReportsController do
 
         it "show page information" do
           get_request
-          expect(page).to have_css(".app-pagination__info", text: "Showing 1 - 3 of 5 results")
+          expect(page).to have_css(".app-pagination__info", text: "Showing 1 to 3 of 5 results")
         end
 
         it "shows pagination" do

@@ -13,7 +13,7 @@ module Providers
           vehicle&.destroy! if form.remove_vehicle?
           if legal_aid_application.vehicles.count.zero?
             legal_aid_application.update!(own_vehicle: nil)
-            replace_last_page_in_history(providers_legal_aid_applications_path)
+            replace_last_page_in_history(submitted_providers_legal_aid_applications_path)
           end
           return go_forward(legal_aid_application.vehicles.any?)
         end

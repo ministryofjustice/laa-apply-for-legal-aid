@@ -287,7 +287,8 @@ Feature: Checking answers backwards and forwards
       Given I complete the application and view the check your answers page
       Then I am on the read only version of the check your answers page
       Then I click 'Back to your applications'
-      Then I should be on a page showing 'Applications'
+      Then I should be on a page showing 'Your applications'
+      Then I click link "In progress"
       Then I view the previously created application
       Then I am on the read only version of the check your answers page
 
