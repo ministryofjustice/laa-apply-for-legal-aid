@@ -25,7 +25,7 @@
              transaction_type:,
              owner_type: individual,
            ) %>
-        <% if @legal_aid_application.uploading_bank_statements? || individual.eql?("Partner") %>
+        <% if @legal_aid_application.client_uploading_bank_statements? || individual.eql?("Partner") %>
           <p><%= regular_transaction_amount %></p>
           <% unless regular_transaction_amount.eql?("None") %>
             <p><%= regular_transaction_frequency %></p>
