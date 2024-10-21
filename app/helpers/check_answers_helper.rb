@@ -16,17 +16,6 @@ module CheckAnswersHelper
     )
   end
 
-  def check_answer_no_link(question:, answer:, name:, no_border: false, read_only: false)
-    render(
-      "shared/check_answers/no_link_item",
-      name:,
-      question:,
-      answer:,
-      read_only:,
-      no_border:,
-    )
-  end
-
   # Creates both the outer `div` and the inner list items
   def check_answer_change_link(name:, url:, question:, read_only: false)
     render(
@@ -35,16 +24,6 @@ module CheckAnswersHelper
       url:,
       question:,
       read_only:,
-    )
-  end
-
-  def check_long_question_no_link(question:, answer:, name:, no_border: false)
-    render(
-      "shared/check_answers/no_link_long_item",
-      name:,
-      question:,
-      answer:,
-      no_border:,
     )
   end
 
