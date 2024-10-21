@@ -24,7 +24,6 @@ Given "I have completed a non-passported unemployed application with bank statem
   )
 
   login_as @legal_aid_application.provider
-
   visit(providers_legal_aid_application_open_banking_consents_path(@legal_aid_application))
 end
 

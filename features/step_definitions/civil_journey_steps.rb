@@ -1087,6 +1087,14 @@ Then(/^proceeding suggestions has (results|no results)$/) do |results|
   end
 end
 
+Given("I click Check Your Answers Change link for applicant {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  within "#app-check-your-answers__applicant__#{question_id}" do
+    click_on("Change")
+  end
+end
+
 Given("I click Check Your Answers Change link for {string}") do |question|
   question_id = question.parameterize(separator: "_")
 
