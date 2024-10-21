@@ -69,6 +69,7 @@ module Providers
       firms_applications.includes(:applicant, :chances_of_success)
                         .excluding(firms_applications.voided_applications)
                         .excluding(firms_applications.submitted_applications)
+                        .latest
     end
 
     def voided_query
