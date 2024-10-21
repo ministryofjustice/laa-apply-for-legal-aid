@@ -4,7 +4,7 @@ module Flow
       CashOutgoingsStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
         forward: lambda do |application|
-          unless application.uploading_bank_statements?
+          unless application.client_uploading_bank_statements?
             if application.income_types?
               return :income_summary
             elsif application.outgoing_types?
@@ -21,11 +21,10 @@ module Flow
           end
         end,
         check_answers: lambda do |application|
-          if application.uploading_bank_statements?
-            application.housing_payments_for?("Applicant") ? :housing_benefits : :check_income_answers
-          else
-            :outgoings_summary
-          end
+          return :outgoings_summary if application.outgoing_types? && !application.client_uploading_bank_statements?
+          return :housing_benefit if application.housing_payments_for?("Applicant") || application.housing_payments_for?("Partner")
+
+          :check_income_answers
         end,
       )
     end
