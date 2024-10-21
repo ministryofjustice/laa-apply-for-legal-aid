@@ -1,0 +1,17 @@
+---
+proceeding_merits:
+  FAMILY_PROSPECTS_OF_SUCCESS:
+    generate_block?: false
+global_merits:
+  CASE_OWNER_SCA:
+    generate_block?: true
+    value: true
+    br100_meaning: Meaning not defined in BR100
+    response_type: boolean
+    user_defined: false
+  CASE_OWNER_STD_FAMILY_MERITS:
+    generate_block?: true
+    value: false
+    br100_meaning: The Case Owner Is The Standard Family Merits Team
+    response_type: boolean
+    user_defined: false

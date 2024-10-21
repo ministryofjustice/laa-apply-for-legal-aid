@@ -1,0 +1,115 @@
+require "rails_helper"
+
+module CCMS
+  module Requestors
+    RSpec.describe SpecialChildrenActCaseAddRequestor, :ccms do
+      describe "#call" do
+        let(:expected_tx_id) { "202011241154290000006983477" }
+
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_sca_state_machine,
+                 :with_positive_benefit_check_result,
+                 :with_proceedings,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: %i[pb003],
+                 set_lead_proceeding: :pb003,
+                 df_options: { PB003: [10.days.ago.to_date, 1.day.ago.to_date] },
+                 applicant:,
+                 vehicles:,
+                 other_assets_declaration:,
+                 savings_amount:,
+                 provider:,
+                 opponents:,
+                 domestic_abuse_summary:,
+                 office:)
+        end
+
+        let(:applicant) do
+          create(:applicant,
+                 first_name: "Shery",
+                 last_name: "Ledner",
+                 last_name_at_birth:,
+                 national_insurance_number: "EG587804M",
+                 date_of_birth: Date.new(1977, 4, 10),
+                 address:,
+                 has_partner: false)
+        end
+        let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PB003" } }
+        let(:last_name_at_birth) { nil }
+        let(:chances_of_success) { proceeding.chances_of_success }
+        let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
+        let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
+
+        let(:other_assets_declaration) do
+          create(:other_assets_declaration,
+                 valuable_items_value: 144_524.74,
+                 money_owed_value: 100,
+                 inherited_assets_value: 200,
+                 land_value: 300,
+                 timeshare_property_value: 400,
+                 second_home_value: 500,
+                 trust_value: 600)
+        end
+
+        let(:address) { create(:address, address_line_one: "10 Foobar Lane", address_line_two: "Bluewater", city: "Ipswich", county: "Essex", postcode: "GH08NY") }
+        let(:provider) { create(:provider, username: "saturnina", firm:, email: "patrick_rath@example.net") }
+        let(:firm) { create(:firm, ccms_id: 169) }
+        let(:opponents) { create_list(:opponent, 1, first_name: "Joffrey", last_name: "Test-Opponent") }
+        let(:submission) { create(:submission, :case_ref_obtained, case_ccms_reference: "300000000001", legal_aid_application:) }
+        let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
+        let(:cfe_result) { cfe_submission.cfe_result }
+        let(:office) { create(:office, ccms_id: "4727432767") }
+        let(:savings_amount) { create(:savings_amount, :all_nil) }
+        let(:requestor) { described_class.new(submission, {}) }
+        let(:involved_child1) { legal_aid_application.reload.involved_children.find_by(first_name: "First", last_name: "TestChild") }
+        let(:involved_child2) { legal_aid_application.reload.involved_children.find_by(first_name: "Second", last_name: "TestChild") }
+
+        let(:request_xml) { requestor.__send__(:request_xml) }
+        let(:expected_request_xml) { ccms_data_from_file("case_add_request.xml") }
+        let(:request_created_at) { Time.zone.parse("2020-11-24T11:54:29.000") }
+
+        before do
+          create(:cfe_v6_result, submission: cfe_submission)
+          create(:involved_child, full_name: "First TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application:)
+          create(:involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application:)
+          legal_aid_application.reload
+          legal_aid_application.update!(opponents:)
+          allow(Rails.configuration.x.ccms_soa).to receive_messages(client_username: "FakeUser", client_password: "FakePassword", client_password_type: "password_type")
+          allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+          allow(legal_aid_application).to receive(:calculation_date).and_return(Date.new(2020, 3, 25))
+          allow(proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
+          allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+        end
+
+        describe "#call" do
+          before do
+            allow(Faraday::SoapCall).to receive(:new).and_return(soap_call)
+            stub_request(:post, expected_url)
+          end
+
+          let(:soap_call) { instance_double(Faraday::SoapCall) }
+          let(:expected_xml) { requestor.__send__(:request_xml) }
+          let(:expected_url) { extract_url_from(requestor.__send__(:wsdl_location)) }
+
+          it "invokes the faraday soap_call" do
+            expect(soap_call).to receive(:call).with(expected_xml).once
+            requestor.call
+          end
+        end
+
+        describe "ownership" do
+          it "sets CASE_OWNER_SCA to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCA")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets CASE_OWNER_STD_FAMILY_MERITS to false" do
+            block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+            expect(block).to have_boolean_response false
+          end
+        end
+      end
+    end
+  end
+end
