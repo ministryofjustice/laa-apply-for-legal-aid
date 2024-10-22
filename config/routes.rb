@@ -172,6 +172,7 @@ Rails.application.routes.draw do
 
         namespace :capital_disregards do
           resource :discretionary, only: %i[show update], path: "payments_to_review", controller: "discretionary"
+          # TODO: add disregards routes
         end
       end
       namespace :correspondence_address do
