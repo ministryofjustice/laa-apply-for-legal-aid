@@ -152,6 +152,16 @@ module CCMS
             block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
             expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
           end
+
+          it "excludes the DELEG_FUNCTIONS_DATE_MERITS block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "DELEG_FUNCTIONS_DATE_MERITS")
+            expect(block).not_to be_present
+          end
+
+          it "excludes the DELEGATED_FUNCTIONS_DATE block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "DELEGATED_FUNCTIONS_DATE")
+            expect(block).not_to be_present
+          end
         end
       end
     end
