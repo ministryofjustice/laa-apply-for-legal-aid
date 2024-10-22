@@ -23,7 +23,7 @@ RSpec.describe Providers::Partners::StateBenefitsController do
     context "when the provider is authenticated" do
       it "returns an the expected page with the correct heading" do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Add benefit details")
+        expect(response.body).to include("Add benefit, charitable or government payment details")
       end
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe Providers::Partners::StateBenefitsController do
     context "when the use has clicked the change link for an existing benefit payment" do
       it "returns an the expected page with the correct heading" do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Amend benefit details")
+        expect(response.body).to include("Amend benefit, charitable or government payment details")
       end
     end
   end

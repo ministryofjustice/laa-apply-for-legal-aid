@@ -24,8 +24,8 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
       context "and no benefits have been added" do
         it "returns the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("You have added 0 benefits")
-          expect(response.body).to include("Does your client receive any other benefits?")
+          expect(response.body).to include("You added 0 benefit, charitable or government payments")
+          expect(response.body).to include("Does your client get any other benefits, charitable or government payments?")
         end
       end
 
@@ -42,8 +42,8 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
 
         it "returns an the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("You have added 1 benefit")
-          expect(response.body).to include("Does your client receive any other benefits?")
+          expect(response.body).to include("You added 1 benefit, charitable or government payment")
+          expect(response.body).to include("Does your client get any other benefits, charitable or government payments?")
         end
       end
 
@@ -60,8 +60,8 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
 
         it "returns an the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("You have added 2 benefits")
-          expect(response.body).to include("Does your client receive any other benefits?")
+          expect(response.body).to include("You added 2 benefit, charitable or government payments")
+          expect(response.body).to include("Does your client get any other benefits, charitable or government payments?")
         end
       end
     end
@@ -99,7 +99,7 @@ RSpec.describe Providers::Means::AddOtherStateBenefitsController do
 
       it "renders the same page with an error message" do
         expect(response).to have_http_status(:unprocessable_content)
-        expect(response.body).to include("Select yes if they have received other benefits").twice
+        expect(response.body).to include("Select yes if your client gets other benefits, charitable or government payments").twice
       end
     end
 

@@ -18,7 +18,7 @@ en:
         providers:
           means: &revealing_checkbox_labels
             cash_incomes:
-              check_box_benefits: Benefits
+              check_box_benefits: Benefits, charitable or government payments
               check_box_friends_or_family: Financial help from friends or family
               check_box_maintenance_in: Maintenance payments from a former partner
               check_box_property_or_lodger: Income from a property or lodger
@@ -209,7 +209,7 @@ en:
         line_3: You still need to provide details of the case before we can grant legal aid.
     cost_of_living_and_disregarded_benefits:
       title:
-        Government Cost of Living Payments and disregarded benefits
+        What not to include
     cost_of_living:
       header: Government Cost of Living Payments
       text: "Government Cost of Living Payments are disregarded from the financial eligibility calculation, for example:"
@@ -280,7 +280,7 @@ en:
           student_loan: Student loan or grant
           pension: Pension
           client:
-            benefits: Client benefits
+            benefits: Client benefits, charitable or government payments
             employment: Client gross employment income
             fixed_employment_deduction: Client fixed employment deduction
             family_help: Client financial help from friends or family
@@ -291,7 +291,7 @@ en:
             student_loan: Client student loan or grant
             pension: Client pension
           partner:
-            benefits: Partner benefits
+            benefits: Partner benefits, charitable or government payments
             employment: Partner gross employment income
             fixed_employment_deduction: Partner fixed employment deduction
             family_help: Partner financial help from friends or family
@@ -468,7 +468,7 @@ en:
       benefits_income:
         applicant:
           heading: Client benefits
-          question: Does your client get any benefits?
+          question: Does your client get any benefits, charitable or government payments?
           change_aria: whether your client receives benefits
         partner:
           heading: Partner benefits
@@ -810,7 +810,7 @@ en:
                 trust_value: Enter the estimated total value
                 hint:
                   check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
-                  check_box_money_owed_value: Do not include any government Cost of Living Payments owed to your client.
+                  check_box_money_owed_value: Do not include any Government Cost of Living Payments owed to your client.
       shared_ownership_form:
         friend_family_member_or_other_individual: Yes, a friend, family member or other individual
         housing_assocation_or_landlord: Yes, a housing association or landlord
@@ -945,7 +945,7 @@ en:
         info: Cash means physical money like banknotes and coins.
       regular_income:
         hints:
-          benefits: For example Child Benefit or tax credits. Do not include Housing Benefit government Cost of Living Payments or any other disregarded benefits.
+          benefits: For example Child Benefit or tax credits. Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
           friends_or_family: >-
             Select if a friend or relative regularly gives %{individual} money to help with
             living costs. Do not include one-off payments.
@@ -1070,19 +1070,23 @@ en:
       no_files: Files uploaded will appear here.
     state_benefits:
       new_benefit_form:
-        details: Do not include Housing Benefit, government Cost of Living Payments, or any other disregarded benefits.
-        benefits_description: Benefit
+        inset_paras: |
+          These are regular payments, do not include one-off payments.
+          Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
+        benefits_description: Benefit, charitable or government payment
         benefits_amount: Enter amount
         benefits_frequency: Select frequency
       add_other_state_benefits:
-        existing: "You have added %{count}"
+        existing:
+          one: "You added %{count} benefit, charitable or government payment"
+          other: "You added %{count} benefit, charitable or government payments"
         remove: Remove
         warning:
           delete: Are you sure you want to delete this benefit?
       receives_state_benefits:
         details: |
           For example, Child Benefit or tax credits.
-          Do not include Housing Benefit, government Cost of Living Payments, or any other disregarded benefits.
+          Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
     ineligible_reasons:
       gross_income: gross income
       disposable_income: disposable income

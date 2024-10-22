@@ -70,7 +70,7 @@ Feature: Means report
       | Client income tax | -£204.15 |
       | Client national insurance | -£161.64 |
       | Client fixed employment deduction | -£45 |
-      | Client benefits | £75 |
+      | Client benefits, charitable or government payments | £75 |
       | Client financial help from friends or family | £0 |
       | Client maintenance payments | £0 |
       | Client income from property or lodger | £0 |
@@ -238,7 +238,7 @@ Feature: Means report
       | Client income tax | -£204.15 |
       | Client national insurance | -£161.64 |
       | Client fixed employment deduction | -£45 |
-      | Client benefits | £75 |
+      | Client benefits, charitable or government payments | £75 |
       | Client financial help from friends or family | £0 |
       | Client maintenance payments | £0 |
       | Client income from property or lodger | £0 |

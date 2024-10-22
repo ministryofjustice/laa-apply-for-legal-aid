@@ -15,41 +15,41 @@ Feature: partner_means_assessment state benefits handling
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does the partner get any benefits"
+    Then I should be on a page with title "Does the partner get any benefits, charitable or government payments?"
     And I choose "Yes"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Add benefit details"
+    Then I should be on a page with title matching "Add benefit, charitable or government payment details"
     And I fill "Description" with "Child benefit"
     And I fill "Amount" with "21.80"
     And I choose "Every week"
 
     When I click "Save and continue"
     Then I should be on a page with title matching "Does the partner get any other benefits?"
-    And I should see "You have added 1 benefit"
+    And I should see "You added 1 benefit, charitable or government payment"
     And I should see "Child benefit"
 
     When I choose "Yes"
     And I click "Save and continue"
 
-    Then I should be on a page with title matching "Add benefit details"
+    Then I should be on a page with title matching "Add benefit, charitable or government payment details"
     And I fill "Description" with "The doubt"
     And I fill "Amount" with "52.70"
     And I choose "Every 4 weeks"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does the partner get any other benefits?"
-    And I should see "You have added 2 benefits"
+    Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
+    And I should see "You added 2 benefit, charitable or government payments"
     And I should see "Child benefit"
     And I should see "The doubt"
 
     When I click change for "The doubt"
-    Then I should be on a page with title matching "Amend benefit details"
+    Then I should be on a page with title matching "Amend benefit, charitable or government payment details"
     And I fill "Description" with "in kind"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does the partner get any other benefits?"
-    And I should see "You have added 2 benefits"
+    Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
+    And I should see "You added 2 benefit, charitable or government payments"
     And I should see "Child benefit"
     And I should see "in kind"
     And I should not see "The doubt"
@@ -60,14 +60,17 @@ Feature: partner_means_assessment state benefits handling
     When I choose "Yes"
     And I click "Save and continue"
 
-    Then I should be on a page with title matching "Does the partner get any other benefits?"
-    And I should see "You have added 1 benefit"
+    Then I should be on a page with title matching "Does the partner get any other benefits, charitable or government payments?"
+    And I should see "You added 1 benefit, charitable or government payment"
     And I should see "Child benefit"
     And I should not see "in kind"
 
+    When I click "Save and continue"
+    Then I should see govuk error summary "Select yes if the partner gets other benefits, charitable or government payments"
+
     When I choose "No"
     And I click "Save and continue"
-
+    Then I should be on a page with title matching "Which of these payments does the partner get?"
 
   @javascript
   Scenario: I am able to skip state benefits questions when the the partner does not receive them
@@ -85,7 +88,7 @@ Feature: partner_means_assessment state benefits handling
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does the partner get any benefits"
+    Then I should be on a page with title "Does the partner get any benefits, charitable or government payments"
 
     When I choose "No"
     And I click "Save and continue"

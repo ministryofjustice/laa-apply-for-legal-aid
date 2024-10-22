@@ -69,7 +69,7 @@ Feature: Means report when partner is present
       | Client income tax | -£204.15 |
       | Client national insurance | -£161.64 |
       | Client fixed employment deduction | -£45 |
-      | Client benefits | £75 |
+      | Client benefits, charitable or government payments | £75 |
       | Client financial help from friends or family | £0 |
       | Client maintenance payments | £0 |
       | Client income from property or lodger | £0 |
@@ -79,7 +79,7 @@ Feature: Means report when partner is present
       | Partner income tax | -£235.20 |
       | Partner national insurance | -£171.86 |
       | Partner fixed employment deduction | -£45 |
-      | Partner benefits | £86.67 |
+      | Partner benefits, charitable or government payments | £86.67 |
       | Partner financial help from friends or family | £166.67 |
       | Partner maintenance payments | £21 |
       | Partner income from property or lodger | £200 |

@@ -55,8 +55,9 @@ cy:
       student_loan: stnemyap tnarg ro naol tneduts tceleS
       excluded_benefits: stnemyap stifeneb dedragersid tceleS
     benefits:
-      inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap stifeneb yreve
-        tceleS"
+      inset_paras: |
+        shtnom 3 tsal eht ni deviecer esoht edulcnI
+        .shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap stifeneb yreve tceleS
     child_care:
       inset_text: ".shtnom 3 tsap eht ni edam tneilc ruoy tnemyap eracdlihc yreve
         tceleS"

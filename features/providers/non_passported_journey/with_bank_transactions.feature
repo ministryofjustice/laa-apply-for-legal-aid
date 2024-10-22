@@ -12,7 +12,7 @@ Feature: non_passported_journey with bank transactions
     And I click 'Save and continue'
 
     Then I should be on a page with title "Select payments your client receives in cash"
-    And I should see "Benefits"
+    And I should see "Benefits, charitable or government payments"
     And I should see "Financial help from friends or family"
     And I should see "Pension"
     When I select 'My client receives none of these payments in cash'
@@ -34,7 +34,7 @@ Feature: non_passported_journey with bank transactions
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And the following sections should exist:
       | tag | section |
-      | h2  | 1. Benefits |
+      | h2  | 1. Benefits, charitable or government payments |
       | h2  | 2. Financial help from friends or family |
       | h2  | 3. Pension |
 
@@ -46,12 +46,12 @@ Feature: non_passported_journey with bank transactions
     And I click 'Save and continue'
 
     Then I click the '2nd' link 'View statements and add transactions'
-    And I should see govuk-tag "Benefits"
+    And I should see govuk-tag "Benefits and support"
     Then I select the first checkbox
     And I click 'Save and continue'
 
     Then I click the '2nd' link 'View statements and add transactions'
-    And I should see govuk-tag "Benefits"
+    And I should see govuk-tag "Benefits and support"
     And I should see govuk-tag "Financial help"
     Then I click 'Save and continue'
 

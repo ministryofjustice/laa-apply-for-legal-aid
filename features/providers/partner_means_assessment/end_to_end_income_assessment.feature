@@ -15,7 +15,7 @@ Feature: partner_means_assessment full journey
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does the partner get any benefits"
+    Then I should be on a page with title "Does the partner get any benefits, charitable or government payments?"
 
     When I choose "No"
     And I click "Save and continue"
@@ -53,7 +53,7 @@ Feature: partner_means_assessment full journey
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title matching "Does your client get any benefits?"
+    Then I should be on a page with title matching "Does your client get any benefits, charitable or government payments?"
     And I choose "No"
 
     When I click "Save and continue"
@@ -97,7 +97,7 @@ Feature: partner_means_assessment full journey
     Then I should see "acceptable.pdf Uploaded"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does the partner get any benefits"
+    Then I should be on a page with title "Does the partner get any benefits, charitable or government payments?"
 
     When I choose "No"
     And I click "Save and continue"
