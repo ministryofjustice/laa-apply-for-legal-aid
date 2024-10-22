@@ -122,6 +122,18 @@ module CCMS
           end
         end
 
+        describe "routing" do
+          it "sets MERITS_ROUTING_NAME" do
+            block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+            expect(block).to have_text_response "SCA"
+          end
+
+          it "sets MERITS_ROUTING" do
+            block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+            expect(block).to have_text_response "SCA"
+          end
+        end
+
         describe "proceeding type records" do
           context "when the application contains only a core proceeding" do
             it "sets APP_INCLUDES_SCA_PROCS to true" do

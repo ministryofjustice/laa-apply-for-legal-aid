@@ -37,3 +37,15 @@ global_merits:
     br100_meaning: The Application Is In Relation To Special Children Act Or Related Proceedings
     response_type: boolean
     user_defined: false
+  MERITS_ROUTING:
+    generate_block?: true
+    value: "SCA"
+    br100_meaning: merits routing owner
+    response_type: text
+    user_defined: false
+  MERITS_ROUTING_NAME:
+    generate_block?: true
+    value: "SCA"
+    br100_meaning: merits routing name
+    response_type: text
+    user_defined: false
