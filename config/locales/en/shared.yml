@@ -223,43 +223,82 @@ en:
         - Payments for those who are not served by mains gas
     disregarded_benefits:
       header: Disregarded benefits
-      text: The following benefits are disregarded from the financial eligibility calculation.
-      carer_disability:
-        heading: Carer and disability benefits
-        list:
-        - Attendance Allowance
-        - Carer's Allowance
-        - Community Care Direct Payments
-        - Constant Attendance Allowance
-        - Disability Living Allowance
-        - Exceptionally Severe Disablement Allowance
-        - Independent Living Fund
-        - Payments on account of benefit
-        - Personal Independence Payments (PIP)
-        - Severe Disablement Allowance
-        - Special Education Needs (SEN) Direct Payment
-        - Welsh Independent Living Grant
-      low_income:
-        heading: Low income benefits
-        list:
-        - Benefit Transfer Advance (Universal Credit)
-        - Budgeting Advance
-        - Council Tax Reduction
-        - Earnings Top-up (ETU)
-        - Housing Benefit
-        - Social Fund Funeral Payment
-        - Social Fund payments
-      other:
-        heading: Other benefits
-        list:
-        - Armed Forces Independence Payment
-        - Foster Carers Allowance
-        - Grenfell Tower Residents' Discretionary Fund
-        - Grenfell Tower fire victims payments
-        - War Pensions Scheme payments
-        - War Widow(er) Pension
-        - Widow's Pension lump sum payments
-        - Windrush Compensation Scheme Payments
+      text: The following benefits are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
+      mtra:
+        carer_disability:
+          heading: Carer and disability benefits
+          list_html:
+          - Attendance Allowance
+          - Carer's Allowance
+          - Community Care Direct Payments
+          - Constant Attendance Allowance
+          - Disability Living Allowance
+          - Exceptionally Severe Disablement Allowance
+          - Independent Living Fund
+          - Payments on account of benefit
+          - Personal Independence Payments (PIP)
+          - Severe Disablement Allowance
+          - Special Education Needs (SEN) Direct Payment
+          - Welsh Independent Living Grant
+        low_income:
+          heading: Low income benefits
+          list_html:
+          - Budgeting Advance
+          - Housing Benefit
+          - Social Fund Funeral Payment
+          - Social Fund payments
+          - Universal Credit advance payments
+        other:
+          heading: Other benefits
+          list_html:
+          - Armed Forces Independence Payment
+          - Compensation for miscarriage of justice
+          - Foster Carers Allowance
+          - Grenfell Tower Residents' Discretionary Fund
+          - Grenfell Tower fire victims payments
+          - "Infected Blood Support Scheme<br>Includes Infected Blood Interim Compensation Payment Scheme, Infected Blood Further Interim Compensation Scheme, Infected Blood Compensation Scheme, arrangements made under section 56(1) of the Victims and Prisoners Act 2024 or earlier support schemes"
+          - Modern Slavery Victim Care Contract (MSVCC) payments
+          - Scotland and Northern Ireland Redress Schemes for historical child abuse payment
+          - War Pensions Scheme payments
+          - War Widow(er) Pension
+          - Windrush Compensation Scheme Payments
+      pre_mtra:
+        carer_disability:
+          heading: Carer and disability benefits
+          list_html:
+          - Attendance Allowance
+          - Carer's Allowance
+          - Community Care Direct Payments
+          - Constant Attendance Allowance
+          - Disability Living Allowance
+          - Exceptionally Severe Disablement Allowance
+          - Independent Living Fund
+          - Payments on account of benefit
+          - Personal Independence Payments (PIP)
+          - Severe Disablement Allowance
+          - Special Education Needs (SEN) Direct Payment
+          - Welsh Independent Living Grant
+        low_income:
+          heading: Low income benefits
+          list_html:
+          - Benefit Transfer Advance (Universal Credit)
+          - Budgeting Advance
+          - Council Tax Reduction
+          - Earnings Top-up (ETU)
+          - Housing Benefit
+          - Social Fund Funeral Payment
+          - Social Fund payments
+        other:
+          heading: Other benefits
+          list_html:
+          - Armed Forces Independence Payment
+          - Foster Carers Allowance
+          - Grenfell Tower Residents' Discretionary Fund
+          - Grenfell Tower fire victims payments
+          - War Pensions Scheme payments
+          - War Widow(er) Pension
+          - Widow's Pension lump sum payments
+          - Windrush Compensation Scheme Payments
     means_report:
       item:
         deductions:

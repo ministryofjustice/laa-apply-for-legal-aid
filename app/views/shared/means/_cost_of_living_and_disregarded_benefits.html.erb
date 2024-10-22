@@ -2,19 +2,21 @@
   <h2 class="govuk-heading-m"><%= t("shared.cost_of_living.header") %></h2>
   <p><%= t("shared.cost_of_living.text") %></p>
 
-  <ul class="govuk-list">
+  <ul class="govuk-list govuk-list--bullet">
     <% t("shared.cost_of_living.list").each do |item| %>
       <li><%= item %></li>
     <% end %>
   </ul>
 
+  <% mtra_scope = Setting.setting.means_test_review_a? ? :mtra : :pre_mtra %>
+
   <h2 class="govuk-heading-m"><%= t("shared.disregarded_benefits.header") %></h2>
   <p class="govuk-body"><%= t("shared.disregarded_benefits.text") %></p>
 
   <% %w[carer_disability low_income other].each do |category| %>
-    <h3 class="govuk-heading-s"><%= t("shared.disregarded_benefits.#{category}.heading") %></h3>
-    <ul class="govuk-list">
-      <% t("shared.disregarded_benefits.#{category}.list").each do |item| %>
+    <h3 class="govuk-heading-s"><%= t("shared.disregarded_benefits.#{mtra_scope}.#{category}.heading") %></h3>
+    <ul class="govuk-list govuk-list--bullet">
+      <% t("shared.disregarded_benefits.#{mtra_scope}.#{category}.list_html").each do |item| %>
         <li><%= item %></li>
       <% end %>
     </ul>
