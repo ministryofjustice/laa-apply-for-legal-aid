@@ -49,6 +49,19 @@ module LegalFramework
       end
     end
 
+    describe ".reset_to_not_started!" do
+      subject(:reset_to_not_started) { merits_task_list.reset_to_not_started!(:application, task_name) }
+
+      let(:task_name) { :latest_incident_details }
+
+      it { is_expected.to be true }
+
+      it "updates the state of the task" do
+        reset_to_not_started
+        expect(merits_task_list).to have_not_started_task(:application, :latest_incident_details)
+      end
+    end
+
     describe ".can_proceed?" do
       subject(:can_proceed) { merits_task_list.can_proceed? }
 
