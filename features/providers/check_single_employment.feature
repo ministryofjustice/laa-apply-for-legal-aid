@@ -5,7 +5,7 @@ Feature: Check single employment
     And csrf is enabled
     And an applicant named Langley Yorke has completed his true layer interaction
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I click link 'Langley Yorke'
     Then I should be on a page showing "Continue Langley Yorke's financial assessment"
 

@@ -6,7 +6,7 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
     And the feature flag for means_test_review_a is disabled
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I view the previously created application
     Then I am on the check your answers page for other assets
 
@@ -68,7 +68,7 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
     And the feature flag for means_test_review_a is enabled
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I view the previously created application
     Then I am on the check your answers page for other assets
 

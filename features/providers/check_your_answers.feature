@@ -3,7 +3,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and change no property to owned with a mortgage and shared with a partner
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
@@ -31,7 +31,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and change no property to owned with a mortgage and not shared with a partner
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
@@ -59,7 +59,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and not change property owned and come straight back to check passported answers
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
@@ -71,7 +71,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and change Bank Accounts and be taken back to the check your answers page for other assets
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'offline accounts link'
@@ -86,7 +86,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and not change Bank Accounts to have any values then come straight back to the check your answers page
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'offline accounts link'
@@ -99,7 +99,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and change Savings and Investments and be taken back to the check your answers page for other assets
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
@@ -117,7 +117,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and not change Savings and Investments to have any values then come straight back to the check your answers page
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
@@ -130,7 +130,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and change Other Assets and be taken to the restrictions page
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
@@ -147,7 +147,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and not change Other Assets to have any values then come straight back to the check your answers page
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
@@ -160,7 +160,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to go back and select multiple disregards then come straight back to the check your answers page
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
-    Then I visit the applications page
+    Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for policy disregards
     And I click Check Your Answers Change link for 'policy disregards'
