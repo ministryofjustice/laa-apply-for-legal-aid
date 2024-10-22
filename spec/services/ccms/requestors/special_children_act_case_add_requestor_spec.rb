@@ -134,6 +134,36 @@ module CCMS
           end
         end
 
+        describe "parental_responsibility values" do
+          context "when its a secure accommodation order proceeding and the client is a child" do
+            before { proceeding.update!(ccms_code: "PB006", client_involvement_type_ccms_code: "W") }
+
+            it "sets CLIENT_CHILD_SUBJECT_TO_SAO" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_TO_SAO")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets CLIENT_CHILD_SUBJECT_OF_PROC" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_OF_PROC")
+              expect(block).to have_boolean_response true
+            end
+          end
+
+          context "when its a non SAO proceeding and the client is a child" do
+            before { proceeding.update!(client_involvement_type_ccms_code: "W") }
+
+            it "sets CLIENT_CHILD_SUBJECT_TO_SAO" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_TO_SAO")
+              expect(block).to have_boolean_response false
+            end
+
+            it "sets CLIENT_CHILD_SUBJECT_OF_PROC" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_OF_PROC")
+              expect(block).to have_boolean_response true
+            end
+          end
+        end
+
         describe "proceeding type records" do
           context "when the application contains only a core proceeding" do
             it "sets APP_INCLUDES_SCA_PROCS to true" do

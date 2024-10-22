@@ -49,3 +49,15 @@ global_merits:
     br100_meaning: merits routing name
     response_type: text
     user_defined: false
+  CLIENT_CHILD_SUBJECT_TO_SAO:
+    generate_block?: true
+    value: "#child_subject_to_sao?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_CHILD_SUBJECT_OF_PROC:
+    generate_block?: true
+    value: "#child_subject_of_proceeding?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
