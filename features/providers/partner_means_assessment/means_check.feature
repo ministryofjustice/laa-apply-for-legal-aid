@@ -27,7 +27,7 @@ Feature: partner_means_assessment means check
     And csrf is enabled
     And an applicant named Ida Paisley with a partner has completed their true layer interactions
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I click link 'Ida Paisley'
     Then I should be on a page showing "Continue Ida Paisley's financial assessment"
 

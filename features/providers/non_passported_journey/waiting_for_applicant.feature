@@ -22,7 +22,7 @@ Feature: non_passported_journey waiting for applicant
     Then I should be on the 'about_the_financial_assessment' page showing 'Send your client a link to access the service'
     When I click 'Send link'
     Then I should be on the 'application_confirmation' page showing "We've shared your application with your client"
-    When I visit the applications page
+    When I visit the in progress applications page
     And I view the first application in the table
     Then I should be on the 'check_provider_answers' page showing 'Your application'
     And I should not see 'What happens next'

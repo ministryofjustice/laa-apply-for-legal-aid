@@ -6,7 +6,7 @@ Feature: Check pending employment
     And csrf is enabled
     And an applicant named John Pending has completed his true layer interaction
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I click link 'John Pending'
     Then I should be on a page showing "Continue John Pending's financial assessment"
 

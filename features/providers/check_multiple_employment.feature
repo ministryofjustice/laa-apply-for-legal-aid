@@ -6,7 +6,7 @@ Feature: Check multiple employment
     And csrf is enabled
     And an applicant named Ida Paisley has completed his true layer interaction
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I click link 'Ida Paisley'
     Then I should be on a page showing "Continue Ida Paisley's financial assessment"
 
@@ -171,7 +171,7 @@ Feature: Check multiple employment
     And csrf is enabled
     And an applicant named John Jobseeker has completed his true layer interaction
 
-    When I visit the applications page
+    When I visit the in progress applications page
     And I click link 'John Jobseeker'
     Then I should be on a page showing "Continue John Jobseeker's financial assessment"
 
