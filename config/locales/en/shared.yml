@@ -280,7 +280,7 @@ en:
           student_loan: Student loan or grant
           pension: Pension
           client:
-            benefits: Client benefits
+            benefits: Client benefits, charitable or government payments
             employment: Client gross employment income
             fixed_employment_deduction: Client fixed employment deduction
             family_help: Client financial help from friends or family
@@ -291,7 +291,7 @@ en:
             student_loan: Client student loan or grant
             pension: Client pension
           partner:
-            benefits: Partner benefits
+            benefits: Partner benefits, charitable or government payments
             employment: Partner gross employment income
             fixed_employment_deduction: Partner fixed employment deduction
             family_help: Partner financial help from friends or family
