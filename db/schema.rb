@@ -440,6 +440,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_22_133251) do
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 
+  create_table "disregards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "name", null: false
+    t.boolean "mandatory", null: false
+    t.decimal "amount"
+    t.date "date_received"
+    t.string "payment_reason"
+    t.string "account_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_disregards_on_legal_aid_application_id"
+  end
+
   create_table "document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.boolean "submit_to_ccms", default: false, null: false
@@ -1126,6 +1139,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_22_133251) do
   add_foreign_key "chances_of_successes", "proceedings", on_delete: :cascade
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
+  add_foreign_key "disregards", "legal_aid_applications"
   add_foreign_key "domestic_abuse_summaries", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"

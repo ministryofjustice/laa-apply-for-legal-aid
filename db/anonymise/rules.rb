@@ -104,6 +104,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   dependants: {
     name: -> { Faker::Name.name },
   },
+  disregards: {},
   document_categories: {},
   domestic_abuse_summaries: {
     warning_letter_sent_details: Faker::Lorem.paragraph(sentence_count: 2),
