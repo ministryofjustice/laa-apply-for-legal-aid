@@ -15,15 +15,6 @@ global_merits:
     br100_meaning: The Application Is In Relation To Special Children Act Or Related Proceedings
     response_type: boolean
     user_defined: false
-  DATE_DEVOLVED_POWERS_USED:
-    generate_block?: '#backdated_sca_application?'
-    value: '#used_delegated_functions_on'
-    response_type: date
-    user_defined: true
-  DELEG_FUNCTIONS_DATE_MERITS:
-    generate_block?: false
-  DELEGATED_FUNCTIONS_DATE:
-    generate_block?: false
   CASE_OWNER_SCA:
     generate_block?: true
     value: true
@@ -36,15 +27,72 @@ global_merits:
     br100_meaning: The Case Owner Is The Standard Family Merits Team
     response_type: boolean
     user_defined: false
+  CLIENT_HAS_PR:
+    generate_block?: "#client_non_biological_parent?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_HAS_PR_ORDER:
+    generate_block?: "#client_court_ordered_parental_responsibility?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
   CLIENT_CHILD_SUBJECT_OF_PROC:
-    generate_block?: true
-    value: "#child_subject_of_proceeding?"
+    generate_block?: "#child_subject_of_proceeding?"
+    value: true
     br100_meaning: #TODO: find out if these are important
     response_type: boolean
     user_defined: false
   CLIENT_CHILD_SUBJECT_TO_SAO:
+    generate_block?: "#child_subject_to_sao?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_PARENT_OF_CHILD_PROC:
+    generate_block?: "#client_biological_parent?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  COPY_PR_AGREEMENT:
+    generate_block?: "#client_parental_responsibility_agreement?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  COPY_PR_ORDER:
+    generate_block?: "#client_court_ordered_parental_responsibility?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  DATE_DEVOLVED_POWERS_USED:
+    generate_block?: '#backdated_sca_application?'
+    value: '#used_delegated_functions_on'
+    response_type: date
+    user_defined: true
+  DELEG_FUNCTIONS_DATE_MERITS:
+    generate_block?: false
+  DELEGATED_FUNCTIONS_DATE:
+    generate_block?: false
+  EVIDENCE_COPY_PR_ORDER:
     generate_block?: true
-    value: "#child_subject_to_sao?"
+    value: "#client_court_ordered_parental_responsibility?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  EVIDENCE_PR_AGREEMENT:
+    generate_block?: true
+    value: "#client_parental_responsibility_agreement?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  MERITS_EVIDENCE_REQD:
+    generate_block?: true
+    value: "#client_non_biological_parent?"
     br100_meaning: #TODO: find out if these are important
     response_type: boolean
     user_defined: false
@@ -71,3 +119,9 @@ global_merits:
     value: '#application_used_delegated_functions?'
     response_type: boolean
     user_defined: true
+  SCA_PR_AGREEMENT:
+    generate_block?: "#client_parental_responsibility_agreement?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false

@@ -117,6 +117,22 @@ module CCMS
       legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code == "W" }
     end
 
+    def client_biological_parent?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "biological" }
+    end
+
+    def client_non_biological_parent?(_options)
+      client_court_ordered_parental_responsibility?(nil) || client_parental_responsibility_agreement?(nil)
+    end
+
+    def client_court_ordered_parental_responsibility?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "court_order" }
+    end
+
+    def client_parental_responsibility_agreement?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "parental_responsibility_agreement" }
+    end
+
     def child_subject_of_proceeding?(_options)
       legal_aid_application.proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code == "W" }
     end

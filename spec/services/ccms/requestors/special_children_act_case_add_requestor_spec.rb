@@ -152,14 +152,161 @@ module CCMS
           context "when its a non SAO proceeding and the client is a child" do
             before { proceeding.update!(client_involvement_type_ccms_code: "W") }
 
-            it "sets CLIENT_CHILD_SUBJECT_TO_SAO" do
+            it "excludes the CLIENT_CHILD_SUBJECT_TO_SAO block" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_TO_SAO")
-              expect(block).to have_boolean_response false
+              expect(block).not_to be_present
             end
 
             it "sets CLIENT_CHILD_SUBJECT_OF_PROC" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_CHILD_SUBJECT_OF_PROC")
               expect(block).to have_boolean_response true
+            end
+          end
+
+          context "when the parent is the biological parent of at least one child" do
+            before { proceeding.update!(relationship_to_child: "biological") }
+
+            it "sets CLIENT_PARENT_OF_CHILD_PROC" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
+              expect(block).to have_boolean_response true
+            end
+
+            it "excludes the CLIENT_HAS_PR" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_HAS_PR")
+              expect(block).not_to be_present
+            end
+
+            it "sets MERITS_EVIDENCE_REQD block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_EVIDENCE_REQD")
+              expect(block).to have_boolean_response false
+            end
+
+            it "excludes the CLIENT_HAS_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_HAS_PR_ORDER")
+              expect(block).not_to be_present
+            end
+
+            it "sets EVIDENCE_COPY_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "EVIDENCE_COPY_PR_ORDER")
+              expect(block).to have_boolean_response false
+            end
+
+            it "excludes the COPY_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_ORDER")
+              expect(block).not_to be_present
+            end
+
+            it "excludes the SCA_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "SCA_PR_AGREEMENT")
+              expect(block).not_to be_present
+            end
+
+            it "sets EVIDENCE_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "EVIDENCE_PR_AGREEMENT")
+              expect(block).to have_boolean_response false
+            end
+
+            it "excludes the COPY_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_AGREEMENT")
+              expect(block).not_to be_present
+            end
+          end
+
+          context "when the parent has a parental responsibility agreement for at least one child" do
+            before { proceeding.update!(relationship_to_child: "parental_responsibility_agreement") }
+
+            it "excludes the CLIENT_PARENT_OF_CHILD_PROC" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
+              expect(block).not_to be_present
+            end
+
+            it "sets CLIENT_HAS_PR" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_HAS_PR")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets MERITS_EVIDENCE_REQD block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_EVIDENCE_REQD")
+              expect(block).to have_boolean_response true
+            end
+
+            it "excludes the CLIENT_HAS_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_HAS_PR_ORDER")
+              expect(block).not_to be_present
+            end
+
+            it "sets EVIDENCE_COPY_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "EVIDENCE_COPY_PR_ORDER")
+              expect(block).to have_boolean_response false
+            end
+
+            it "excludes the COPY_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_ORDER")
+              expect(block).not_to be_present
+            end
+
+            it "sets SCA_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "SCA_PR_AGREEMENT")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets EVIDENCE_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "EVIDENCE_PR_AGREEMENT")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets COPY_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_AGREEMENT")
+              expect(block).to have_boolean_response true
+            end
+          end
+
+          context "when the parent has court ordered parental responsibility for at least one child" do
+            before { proceeding.update!(relationship_to_child: "court_order") }
+
+            it "sets CLIENT_PARENT_OF_CHILD_PROC" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
+              expect(block).not_to be_present
+            end
+
+            it "sets CLIENT_HAS_PR" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_HAS_PR")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets MERITS_EVIDENCE_REQD block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_EVIDENCE_REQD")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets CLIENT_HAS_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_HAS_PR_ORDER")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets EVIDENCE_COPY_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "EVIDENCE_COPY_PR_ORDER")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets COPY_PR_ORDER block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_ORDER")
+              expect(block).to have_boolean_response true
+            end
+
+            it "excludes the SCA_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "SCA_PR_AGREEMENT")
+              expect(block).not_to be_present
+            end
+
+            it "sets EVIDENCE_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "EVIDENCE_PR_AGREEMENT")
+              expect(block).to have_boolean_response false
+            end
+
+            it "excludes the COPY_PR_AGREEMENT block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_AGREEMENT")
+              expect(block).not_to be_present
             end
           end
         end
