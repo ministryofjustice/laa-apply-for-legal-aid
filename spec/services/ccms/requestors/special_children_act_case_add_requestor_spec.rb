@@ -214,8 +214,23 @@ module CCMS
             expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
           end
 
+          it "sets the SCA_AUTO_GRANT to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets the SCA_DEVOLVED_POWERS to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_DEVOLVED_POWERS")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets the DATE_DEVOLVED_POWERS_USED to the DF date" do
+            block = XmlExtractor.call(request_xml, :global_merits, "DATE_DEVOLVED_POWERS_USED")
+            expect(block).to have_date_response(10.days.ago.strftime("%d-%m-%Y"))
+          end
+
           it "sets the PROC_DELEGATED_FUNCTIONS_DATE to the DF date" do
-            block = XmlExtractor.call(request_xml, :merits_assessment_proceeding, "PROC_DELEGATED_FUNCTIONS_DATE")
+            block = XmlExtractor.call(request_xml, :global_merits, "PROC_DELEGATED_FUNCTIONS_DATE")
             expect(block).to have_date_response(10.days.ago.strftime("%d-%m-%Y"))
           end
 

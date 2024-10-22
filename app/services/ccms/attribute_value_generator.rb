@@ -109,6 +109,10 @@ module CCMS
       legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
     end
 
+    def backdated_sca_application?(_options)
+      legal_aid_application.special_children_act_proceedings? && legal_aid_application.used_delegated_functions?
+    end
+
     def child_subject_to_sao?(_options)
       legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code == "W" }
     end
