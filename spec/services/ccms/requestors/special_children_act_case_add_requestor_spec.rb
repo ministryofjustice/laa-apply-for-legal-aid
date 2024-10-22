@@ -250,6 +250,70 @@ module CCMS
             expect(block).not_to be_present
           end
         end
+
+        context "when the application is not backdated" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_sca_state_machine,
+                   :with_positive_benefit_check_result,
+                   :with_proceedings,
+                   explicit_proceedings: %i[pb003],
+                   set_lead_proceeding: :pb003,
+                   applicant:,
+                   vehicles:,
+                   other_assets_declaration:,
+                   savings_amount:,
+                   provider:,
+                   opponents:,
+                   domestic_abuse_summary:,
+                   office:)
+          end
+
+          it "sets DelegatedFunctionsApply to false" do
+            expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")
+          end
+
+          it "sets the SCA_AUTO_GRANT to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets the SCA_DEVOLVED_POWERS to false" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_DEVOLVED_POWERS")
+            expect(block).to have_boolean_response false
+          end
+
+          it "excludes the DATE_DEVOLVED_POWERS_USED block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "DATE_DEVOLVED_POWERS_USED")
+            expect(block).not_to be_present
+          end
+
+          it "excludes the PROC_DELEGATED_FUNCTIONS_DATE block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "PROC_DELEGATED_FUNCTIONS_DATE")
+            expect(block).not_to be_present
+          end
+
+          it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
+            # this merits question is not asked in SCA proceedings
+            block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
+            expect(block).not_to be_present
+          end
+
+          it "sets the APPLY_CASE_MEANS_REVIEW value to true (no caseworker review needed)" do
+            block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets ApplicationAmendmentType to SUB" do
+            block = XmlExtractor.call(request_xml, :application_amendment_type)
+            expect(block.children.text).to eq "SUB"
+          end
+
+          it "excludes the DevolvedPowersDate" do
+            block = XmlExtractor.call(request_xml, :global_merits, "DEVOLVED_POWERS_DATE")
+            expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
+          end
+        end
       end
     end
   end
