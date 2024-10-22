@@ -98,6 +98,18 @@ module CCMS
           end
         end
 
+        describe "auto-granting" do
+          it "sets the SCA_AUTO_GRANT to true" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).to have_boolean_response true
+          end
+
+          it "sets the APPLY_CASE_MEANS_REVIEW value to true (no caseworker review needed)" do
+            block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+            expect(block).to have_boolean_response true
+          end
+        end
+
         describe "ownership" do
           it "sets CASE_OWNER_SCA to true" do
             block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCA")
