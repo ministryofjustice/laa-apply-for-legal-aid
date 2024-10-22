@@ -122,6 +122,51 @@ module CCMS
           end
         end
 
+        describe "proceeding type records" do
+          context "when the application contains only a core proceeding" do
+            it "sets APP_INCLUDES_SCA_PROCS to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_INCLUDES_SCA_PROCS")
+              expect(block).to have_boolean_response true
+            end
+
+            it "excludes the APP_IS_SCA_RELATED block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_IS_SCA_RELATED")
+              expect(block).not_to be_present, "Expected block for attribute APP_IS_SCA_RELATED not to be generated, but was \n #{block}"
+            end
+          end
+
+          context "when the application contains both a core and related proceeding" do
+            let(:legal_aid_application) do
+              create(:legal_aid_application,
+                     :with_sca_state_machine,
+                     :with_positive_benefit_check_result,
+                     :with_proceedings,
+                     :with_delegated_functions_on_proceedings,
+                     explicit_proceedings: %i[pb003 pb007],
+                     set_lead_proceeding: :pb003,
+                     df_options: { PB003: [10.days.ago.to_date, 1.day.ago.to_date] },
+                     applicant:,
+                     vehicles:,
+                     other_assets_declaration:,
+                     savings_amount:,
+                     provider:,
+                     opponents:,
+                     domestic_abuse_summary:,
+                     office:)
+            end
+
+            it "sets APP_INCLUDES_SCA_PROCS to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_INCLUDES_SCA_PROCS")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets APP_IS_SCA_RELATED to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "APP_IS_SCA_RELATED")
+              expect(block).to have_boolean_response true
+            end
+          end
+        end
+
         context "when the application has been backdated using delegated functions" do
           it "sets DelegatedFunctionsApply to false" do
             expect(request_xml).to have_xml("//casebio:DelegatedFunctionsApply", "false")

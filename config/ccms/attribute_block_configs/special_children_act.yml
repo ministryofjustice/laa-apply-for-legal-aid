@@ -25,3 +25,15 @@ global_merits:
     generate_block?: false
   DELEGATED_FUNCTIONS_DATE:
     generate_block?: false
+  APP_INCLUDES_SCA_PROCS:
+    generate_block?: true
+    value: true
+    br100_meaning: The Application Includes Special Children Act Proceedings
+    response_type: boolean
+    user_defined: false
+  APP_IS_SCA_RELATED:
+    generate_block?: '#application_special_children_act_related_proceedings?'
+    value: true
+    br100_meaning: The Application Is In Relation To Special Children Act Or Related Proceedings
+    response_type: boolean
+    user_defined: false
