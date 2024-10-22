@@ -227,7 +227,7 @@ en:
       mtra:
         carer_disability:
           heading: Carer and disability benefits
-          list:
+          list_html:
           - Attendance Allowance
           - Carer's Allowance
           - Community Care Direct Payments
@@ -242,7 +242,7 @@ en:
           - Welsh Independent Living Grant
         low_income:
           heading: Low income benefits
-          list:
+          list_html:
           - Budgeting Advance
           - Housing Benefit
           - Social Fund Funeral Payment
@@ -250,14 +250,14 @@ en:
           - Universal Credit advance payments
         other:
           heading: Other benefits
-          list:
+          list_html:
           - Armed Forces Independence Payment
           - Compensation for miscarriage of justice
           - Foster Carers Allowance
           - Grenfell Tower Residents' Discretionary Fund
           - Grenfell Tower fire victims payments
-          - Infected Blood Support Scheme (includes Infected Blood Interim Compensation Payment Scheme, Infected Blood Further Interim Compensation Scheme, Infected Blood Compensation Scheme or earlier support schemes)
-          - Modern Slavery Viction Care Contract (MSVCC) payments
+          - "Infected Blood Support Scheme<br>Includes Infected Blood Interim Compensation Payment Scheme, Infected Blood Further Interim Compensation Scheme, Infected Blood Compensation Scheme, arrangements made under section 56(1) of the Victims and Prisoners Act 2024 or earlier support schemes"
+          - Modern Slavery Victim Care Contract (MSVCC) payments
           - Scotland and Northern Ireland Redress Schemes for historical child abuse payment
           - War Pensions Scheme payments
           - War Widow(er) Pension
@@ -265,7 +265,7 @@ en:
       pre_mtra:
         carer_disability:
           heading: Carer and disability benefits
-          list:
+          list_html:
           - Attendance Allowance
           - Carer's Allowance
           - Community Care Direct Payments
@@ -280,7 +280,7 @@ en:
           - Welsh Independent Living Grant
         low_income:
           heading: Low income benefits
-          list:
+          list_html:
           - Benefit Transfer Advance (Universal Credit)
           - Budgeting Advance
           - Council Tax Reduction
@@ -290,7 +290,7 @@ en:
           - Social Fund payments
         other:
           heading: Other benefits
-          list:
+          list_html:
           - Armed Forces Independence Payment
           - Foster Carers Allowance
           - Grenfell Tower Residents' Discretionary Fund
