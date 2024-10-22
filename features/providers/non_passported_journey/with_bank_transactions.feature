@@ -12,7 +12,7 @@ Feature: non_passported_journey with bank transactions
     And I click 'Save and continue'
 
     Then I should be on a page with title "Select payments your client receives in cash"
-    And I should see "Benefits"
+    And I should see "Benefits, charitable or government payments"
     And I should see "Financial help from friends or family"
     And I should see "Pension"
     When I select 'My client receives none of these payments in cash'
