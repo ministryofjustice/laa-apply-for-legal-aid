@@ -547,26 +547,43 @@ en:
         matter_opposed_reason: Why is the Section 8 matter opposed by your client or the other party?
         matter_opposed_reason_heading: Why the matter is opposed
       opponent_details:
-        allegation_denies_all: Does the client wholly or substantially deny any allegations?
-        bail_conditions_set: Have bail conditions been set?
+        allegation:
+          heading: Allegation
+          denies_all: Does the client wholly or substantially deny any allegations?
+          additional_information: Additional information
         opponent: Opponent
         opponent-heading: Opponent details
-        police_notified: Have the police been notified?
-        understands_terms_of_court_order: Do all parties have the mental capacity to understand the terms of a court order?
-        warning_letter_sent: Has a warning letter been sent to the opponent?
+        domestic_abuse:
+          heading: Domestic abuse summary
+          warning_letter_reasons: Why a warning letter has not been sent
+          police_notified_details: Police action taken
+          police_not_notified: Why the police have not been notified
+          bail_conditions_set: Have bail conditions been set?
+          bail_conditions: Bail conditions
+        statement_of_case:
+          heading: Statement of case
+          file_names: File names
+          statement: Statement
+        mental_capacity:
+          heading: Mental capacity
+          understands_terms: All parties have the mental capacity to understand the terms of a court order?
+          reasons: Why you think the court would enforce a breach of an order
       separate_representation:
         heading: Separate representation
         separate_representation: Client wants separate representation?
         confirmed: Confirmed
       undertaking:
         heading: Client offer of undertakings
-        undertaking_offered: Has the client offered undertakings?
+        undertaking_offered_question: Has the client offered undertakings?
+        undertaking_offered_what: What undertakings have been offered?
+        undertaking_offered_why: Why have undertakings not been offered?
       urgency:
         heading: Nature of urgency and hearing date
         hearing_date_set: Has a date been set for the hearing?
         nature_of_urgency: What is the nature of the urgency?
       merits_proceeding_section:
         attempts_to_settle: What attempts have been made to settle the matter?
+        chances_of_success_details: Details on the chance of a successful outcome
         linked_children: Which children are covered under this proceeding?
         opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
         opponents_application_reason: Reason for applying for legal aid at this stage
@@ -575,6 +592,7 @@ en:
         success_prospect: What is the chance of a successful outcome?
         specific_issue: What specific issue do you want to determine at court?
         vary_order: Why are you making a new application?
+        what_is_prohibited: What you're asking to be prohibited
       supporting_evidence:
         evidence_types:
           benefit_evidence: Benefit evidence
@@ -592,9 +610,9 @@ en:
         child: Child
       relationship_to_child:
         biological_parent: Client is the biological parent of any child involved?
-        parental_responsibilities: Client has parental responsibility for any child involved?
         child_subject: Client is a child subject of this proceeding?
         court_order: Yes, under a court order
+        parental_responsibilities: Client has parental responsibility for any child involved?
         parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       full_employment_details:
         employment: "%{individual} employment income"
