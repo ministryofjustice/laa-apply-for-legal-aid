@@ -22,9 +22,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>REPORT</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>REPORT</casebio:DocumentType>",
+                "<casebio:Text>Means Report</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end
@@ -40,9 +41,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>BSTMT</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>BSTMT</casebio:DocumentType>",
+                "<casebio:Text>Open Banking Report</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end
@@ -58,9 +60,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>BSTMT</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>BSTMT</casebio:DocumentType>",
+                "<casebio:Text>Client Statement</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end
@@ -76,9 +79,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>EX_RPT</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>EX_RPT</casebio:DocumentType>",
+                "<casebio:Text>Gateway Evidence</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end
@@ -94,9 +98,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>PAYSLIP</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>PAYSLIP</casebio:DocumentType>",
+                "<casebio:Text>Client Employment</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end
@@ -112,9 +117,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>COURT_ORD</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>COURT_ORD</casebio:DocumentType>",
+                "<casebio:Text>Court Order or Application</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end
@@ -130,9 +136,10 @@ module CCMS
             expect(requestor.formatted_xml).to be_soap_envelope_with(
               command: "casebim:DocumentUploadRQ",
               transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>BEN_LTR</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
+              matching: [
+                "<casebio:DocumentType>BEN_LTR</casebio:DocumentType>",
+                "<casebio:Text>Passporting Evidence</casebio:Text>",
+                "<casebio:Channel>E</casebio:Channel>",
               ],
             )
           end

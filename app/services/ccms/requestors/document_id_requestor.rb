@@ -35,6 +35,7 @@ module CCMS
         document_category = DocumentCategory.find_by(name: @document_type)
         if document_category.present?
           xml.__send__(:"casebio:DocumentType", document_category.ccms_document_type)
+          xml.__send__(:"casebio:Text", document_category.description)
         else
           xml.__send__(:"casebio:DocumentType", "ADMIN1")
         end
