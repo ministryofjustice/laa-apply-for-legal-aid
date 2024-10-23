@@ -647,7 +647,7 @@ en:
               none_selected: Select if your client has received any of these payments
               none_selected_with_partner: Select which schemes or trusts have paid either your client or their partner, or select 'None of these payments'
               none_and_another_option_selected: If you select 'None of these schemes or trusts', you cannot select any of the other options
-        discretionary_policy_disregards:
+        discretionary_capital_disregards:
           attributes:
             base:
               none_selected: Select if your client has received any of these payments

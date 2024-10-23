@@ -1,5 +1,5 @@
 <%= form_with(model: @form,
-              url: providers_legal_aid_application_means_policy_disregards_discretionary_path(@legal_aid_application),
+              url: providers_legal_aid_application_means_capital_disregards_discretionary_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
   <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
@@ -12,7 +12,7 @@
       <div class="govuk-hint"><%= t(".hint") %></div>
       <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
       <div class="deselect-group" data-deselect-ctrl="#discretionary-disregards-none-selected-true-field">
-        <% Providers::PolicyDisregards::DiscretionaryForm::DISREGARD_TYPES.each do |disregard_type| %>
+        <% Providers::CapitalDisregards::DiscretionaryForm::DISREGARD_TYPES.each do |disregard_type| %>
           <%= form.govuk_check_box :discretionary_disregards, disregard_type, link_errors: true, label: { text: t(".#{disregard_type}") }, hint: { text: t(".#{disregard_type}_hint", default: "") } %>
         <% end %>
       </div>

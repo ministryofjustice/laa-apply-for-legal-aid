@@ -170,7 +170,7 @@ Rails.application.routes.draw do
         resource :receives_state_benefits, only: %i[show update]
         resources :remove_state_benefits, only: %i[show update]
 
-        namespace :policy_disregards do
+        namespace :capital_disregards do
           resource :discretionary, only: %i[show update], path: "payments_to_review", controller: "discretionary"
         end
       end
