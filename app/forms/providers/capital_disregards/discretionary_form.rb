@@ -1,5 +1,5 @@
 module Providers
-  module PolicyDisregards
+  module CapitalDisregards
     class DiscretionaryForm < BaseForm
       form_for LegalAidApplication
 
@@ -44,11 +44,11 @@ module Providers
       end
 
       def error_message_for_none_selected
-        I18n.t("activemodel.errors.models.discretionary_policy_disregards.attributes.base.#{error_key('none_selected')}")
+        I18n.t("activemodel.errors.models.discretionary_capital_disregards.attributes.base.#{error_key('none_selected')}")
       end
 
       def error_message_for_none_and_another_option_selected
-        I18n.t("activemodel.errors.models.discretionary_policy_disregards.attributes.base.none_and_another_option_selected")
+        I18n.t("activemodel.errors.models.discretionary_capital_disregards.attributes.base.none_and_another_option_selected")
       end
     end
   end
