@@ -22,7 +22,7 @@ module Flow
         end,
         check_answers: lambda do |application|
           return :outgoings_summary if application.outgoing_types? && !application.client_uploading_bank_statements?
-          return :housing_benefit if application.housing_payments_for?("Applicant") || application.housing_payments_for?("Partner")
+          return :housing_benefits if application.housing_payments_for?("Applicant") || application.housing_payments_for?("Partner")
 
           :check_income_answers
         end,

@@ -12,7 +12,7 @@ RSpec.describe TransactionTypeHelper do
 
     context "when on bank statement upload journey" do
       before do
-        allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
+        allow(legal_aid_application).to receive(:client_uploading_bank_statements?).and_return(true)
       end
 
       context "with transaction types with positive amounts" do

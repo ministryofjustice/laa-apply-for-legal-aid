@@ -18,14 +18,14 @@ RSpec.describe Flow::Steps::ProviderIncome::CashIncomesStep, type: :request do
   describe "#check_answers" do
     subject { described_class.check_answers.call(legal_aid_application) }
 
-    context "when application has attached bank statement(s)" do
-      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
+    context "when on bank statement uploading journey" do
+      before { allow(legal_aid_application).to receive(:client_uploading_bank_statements?).and_return(true) }
 
       it { is_expected.to eq :check_income_answers }
     end
 
-    context "when application does not have attached bank statement(s)" do
-      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
+    context "when on open banking journey (not uploading bank statements)" do
+      before { allow(legal_aid_application).to receive(:client_uploading_bank_statements?).and_return(false) }
 
       it { is_expected.to eq :income_summary }
     end
