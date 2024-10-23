@@ -1245,6 +1245,37 @@ en:
             - their home has been repossessed
             - their assets are the subject matter of dispute (SMOD)
             - their assets are held under a restraint order
+      capital_disregards:
+        mandatory_disregards:
+          show:
+            h1-heading: Disregarded payments
+            paragraph:
+              client: These payments are not counted, but we still need to know about them to understand your client’s finances. They are called mandatory disregards.
+              partner: These payments are not counted, but we still need to know about them to understand your client and their partner’s finances. They are called mandatory disregards.
+            h2-heading:
+              client: Select if your client has received any of these payments
+              partner: Select if your client or their partner has received any of these payments
+            hint-text_html: |
+                      These are one-off payments. Do not include any regular payments.<br><br>
+                      Select all that apply.
+            backdated_benefits: Backdated benefits and child maintenance payments received in the last 24 months
+            backdated_community_care: Backdated Community Care payments
+            budgeting_advances: Budgeting Advances
+            compensation_miscarriage_of_justice: Compensation for miscarriage of justice
+            government_cost_of_living: Government cost of living payment
+            government_cost_of_living_hint: For example, Pensioner Cost of Living Payment, Cost of Living Payment, Disability Cost of Living Payment, Household support fund, Council tax rebate, Energy Bills Support Scheme (EBSS), Payments for those who are not served by mains gas
+            independent_living_fund: Independent Living Fund payment
+            infected_blood_support: Infected Blood Support Scheme payment
+            infected_blood_support_hint: Includes Infected Blood Interim Compensation Payment Scheme, Infected Blood Further Interim Compensation Payment Scheme, Infected Blood Compensation Scheme, arrangements made under section 56(1) of the Victims and Prisoners Act 2024, or earlier support schemes
+            modern_slavery: Modern Slavery Victim Care Contract (MSVCC) payment
+            account_of_benefit: Payments on Account of Benefit
+            historical_child_abuse: Scotland and Northern Ireland Redress Schemes for historical child abuse payment
+            social_fund: Social Fund payment
+            vaccine_damage: Vaccine Damage Payment
+            variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust payment
+            welsh_independent_living_grant: Welsh Independent Living Grant
+            windrush_compensation_scheme: Windrush Compensation Scheme payment
+            none_of_these: My client has not received any of these payments
       policy_disregards:
         show:
           h1-heading:
