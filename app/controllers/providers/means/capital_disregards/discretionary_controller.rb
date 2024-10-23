@@ -14,7 +14,9 @@ module Providers
       private
 
         def form_params
-          params.require(:legal_aid_application).permit(:none_selected, discretionary_disregards: [])
+          merge_with_model(legal_aid_application) do
+            params.require(:legal_aid_application).permit(discretionary_capital_disregards: []).merge(none_selected: params[:legal_aid_application][:none_selected])
+          end
         end
       end
     end

@@ -6,14 +6,14 @@
   <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <p><%= t(".details.#{individual}") %></p>
-    <%= form.govuk_check_boxes_fieldset :discretionary_disregards,
+    <%= form.govuk_check_boxes_fieldset :discretionary_capital_disregards,
                                         legend: { text: t(".h2-heading.#{individual}"), size: "l", tag: "h2" },
                                         form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
       <div class="govuk-hint"><%= t(".hint") %></div>
       <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
-      <div class="deselect-group" data-deselect-ctrl="#discretionary-disregards-none-selected-true-field">
+      <div class="deselect-group" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
         <% Providers::CapitalDisregards::DiscretionaryForm::DISREGARD_TYPES.each do |disregard_type| %>
-          <%= form.govuk_check_box :discretionary_disregards, disregard_type, link_errors: true, label: { text: t(".#{disregard_type}") }, hint: { text: t(".#{disregard_type}_hint", default: "") } %>
+          <%= form.govuk_check_box :discretionary_capital_disregards, disregard_type, link_errors: true, label: { text: t(".#{disregard_type}") }, hint: { text: t(".#{disregard_type}_hint", default: "") } %>
         <% end %>
       </div>
 
