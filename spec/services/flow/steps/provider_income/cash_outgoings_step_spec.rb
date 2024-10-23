@@ -58,33 +58,50 @@ RSpec.describe Flow::Steps::ProviderIncome::CashOutgoingsStep, type: :request do
     subject { described_class.check_answers.call(application) }
 
     context "when uploading bank statements" do
-      before { allow(application).to receive(:uploading_bank_statements?).and_return(true) }
+      before { allow(application).to receive(:client_uploading_bank_statements?).and_return(true) }
 
       context "with housing payments for applicant" do
-        let(:applicant) { create(:applicant, has_partner: false) }
-
         before do
           allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(true)
+          allow(application).to receive(:housing_payments_for?).with("Partner").and_return(false)
         end
 
         it { is_expected.to eq :housing_benefits }
       end
 
-      context "with no housing payments for applicant" do
-        let(:applicant) { create(:applicant, has_partner: false) }
-
+      context "with housing payments for partner" do
         before do
           allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(false)
+          allow(application).to receive(:housing_payments_for?).with("Partner").and_return(true)
+        end
+
+        it { is_expected.to eq :housing_benefits }
+      end
+
+      context "with no housing payments for applican or partnert" do
+        before do
+          allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(false)
+          allow(application).to receive(:housing_payments_for?).with("Partner").and_return(false)
         end
 
         it { is_expected.to eq :check_income_answers }
       end
     end
 
-    context "when not uploading bank statements" do
-      before { allow(application).to receive(:uploading_bank_statements?).and_return(false) }
+    context "when on open banking journey (not uploading bank statements) with debits" do
+      before do
+        allow(application).to receive_messages(client_uploading_bank_statements?: false, outgoing_types?: true)
+      end
 
       it { is_expected.to eq :outgoings_summary }
+    end
+
+    context "when on open banking journey (not uploading bank statements) without debits" do
+      before do
+        allow(application).to receive_messages(client_uploading_bank_statements?: false, outgoing_types?: false)
+      end
+
+      it { is_expected.to eq :check_income_answers }
     end
   end
 end
