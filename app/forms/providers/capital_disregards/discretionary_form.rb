@@ -15,24 +15,37 @@ module Providers
         we_love_manchester_emergency_fund
       ].freeze
 
-      attr_accessor :discretionary_disregards, :none_selected
+      CHECK_BOXES_ATTRIBUTES = (DISREGARD_TYPES + [:none_selected]).freeze
+
+      attr_accessor(*CHECK_BOXES_ATTRIBUTES, :discretionary_capital_disregards, :none_selected)
 
       validate :validate_any_checkbox_checked, unless: :draft?
       validate :validate_no_account_and_another_checkbox_not_both_checked, unless: :draft?
 
+      def initialize(*args)
+        model.discretionary_capital_disregards.each do |disregard|
+          __send__(:"#{disregard.name}=", "true")
+        end
+
+        super
+      end
+
       def save
-        false unless valid?
+        return false unless valid?
+
+        model.discretionary_capital_disregards.destroy_all
+        discretionary_capital_disregards.each { |disregard| model.discretionary_capital_disregards.create!(name: disregard, mandatory: false) }
       end
       alias_method :save!, :save
 
     private
 
       def any_checkbox_checked?
-        discretionary_disregards.reject { |disregard| disregard == "" }.any? || none_selected == "true"
+        none_selected == "true" || discretionary_capital_disregards
       end
 
       def none_and_another_checkbox_checked?
-        none_selected == "true" && discretionary_disregards.reject { |disregard| disregard == "" }.any?
+        none_selected == "true" && discretionary_capital_disregards
       end
 
       def validate_any_checkbox_checked
