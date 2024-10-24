@@ -106,7 +106,54 @@ module CCMS
     end
 
     def app_amendment_type(_options)
-      legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB"
+      legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
+    end
+
+    def backdated_sca_application?(_options)
+      legal_aid_application.special_children_act_proceedings? && legal_aid_application.used_delegated_functions?
+    end
+
+    def child_subject_to_sao?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code == "W" }
+    end
+
+    def special_children_act_related_proceedings?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.sca_type == "related" }
+    end
+
+    def auto_grant_special_children_act?(_options)
+      legal_aid_application.special_children_act_proceedings? && auto_grant_exclusions
+    end
+
+    def auto_grant_exclusions
+      # If any of these are true then auto-granting should not occur
+      # This list is not definitive, it is accurate for the initial release of SCA, Oct 2024
+      # e.g. when Apply starts handling high-cost cases we could add a test for claims > £25,000
+      [
+        special_children_act_related_proceedings?(nil),
+        client_court_ordered_parental_responsibility?(nil),
+        client_parental_responsibility_agreement?(nil),
+      ].none?
+    end
+
+    def client_biological_parent?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "biological" }
+    end
+
+    def client_non_biological_parent?(_options)
+      client_court_ordered_parental_responsibility?(nil) || client_parental_responsibility_agreement?(nil)
+    end
+
+    def client_court_ordered_parental_responsibility?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "court_order" }
+    end
+
+    def client_parental_responsibility_agreement?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "parental_responsibility_agreement" }
+    end
+
+    def child_subject_of_proceeding?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code == "W" }
     end
 
     def provider_firm_id(_options)
@@ -467,7 +514,7 @@ module CCMS
     end
 
     def bypass_manual_review_in_ccms?(_options)
-      !manual_case_review_required?
+      !manual_case_review_required? || auto_grant_special_children_act?(nil)
     end
 
     def manual_case_review_required?
