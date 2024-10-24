@@ -6,7 +6,7 @@ RSpec.describe Providers::CapitalDisregards::DiscretionaryForm do
   let(:application) { create(:legal_aid_application) }
 
   let(:none_selected) { "" }
-  let(:discretionary_capital_disregards) { %w[national_emergencies_trust] }
+  let(:discretionary_capital_disregards) { %w[backdated_benefits national_emergencies_trust] }
   let(:discretionary_capital_disregards_params) do
     {
       discretionary_capital_disregards:,
@@ -19,8 +19,27 @@ RSpec.describe Providers::CapitalDisregards::DiscretionaryForm do
 
     before { call_save }
 
+    it "is valid" do
+      expect(form).to be_valid
+    end
+
     it "updates the capital_discretionary_disregards" do
-      expect(application.discretionary_capital_disregards.count).to eq 1
+      expect(application.discretionary_capital_disregards.count).to eq 2
+      expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
+      expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
+    end
+
+    context "with nothing" do
+      let(:none_selected) { "true" }
+      let(:discretionary_capital_disregards) { nil }
+
+      it "is valid" do
+        expect(form).to be_valid
+      end
+
+      it "does not create any capital discretionary disregards" do
+        expect(application.discretionary_capital_disregards.count).to eq 0
+      end
     end
 
     context "when the form is not valid" do
@@ -57,33 +76,52 @@ RSpec.describe Providers::CapitalDisregards::DiscretionaryForm do
 
     before { call_save_as_draft }
 
-    it "updates the capital_discretionary_disregards" do
-      expect(application.discretionary_capital_disregards.count).to eq 1
+    it "is valid" do
+      expect(form).to be_valid
     end
 
-    context "when the form is not valid" do
-      context "when none_selected not selected and nothing selected" do
-        let(:discretionary_capital_disregards) { nil }
+    it "updates the capital_discretionary_disregards" do
+      expect(application.discretionary_capital_disregards.count).to eq 2
+      expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
+      expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
+    end
 
-        it "is valid" do
-          expect(form).to be_valid
-        end
+    context "with nothing" do
+      let(:none_selected) { "true" }
+      let(:discretionary_capital_disregards) { nil }
 
-        it "updates the capital_discretionary_disregards" do
-          expect(application.discretionary_capital_disregards.count).to eq 0
-        end
+      it "is valid" do
+        expect(form).to be_valid
       end
 
-      context "when none_selected is true and another checkbox selected" do
-        let(:none_selected) { "true" }
+      it "does not create any capital discretionary disregards" do
+        expect(application.discretionary_capital_disregards.count).to eq 0
+      end
+    end
 
-        it "is valid" do
-          expect(form).to be_valid
-        end
+    context "when none_selected not selected and nothing selected" do
+      let(:discretionary_capital_disregards) { nil }
 
-        it "updates the capital_discretionary_disregards" do
-          expect(application.discretionary_capital_disregards.count).to eq 1
-        end
+      it "is valid" do
+        expect(form).to be_valid
+      end
+
+      it "updates the capital_discretionary_disregards" do
+        expect(application.discretionary_capital_disregards.count).to eq 0
+      end
+    end
+
+    context "when none_selected is true and another checkbox selected" do
+      let(:none_selected) { "true" }
+
+      it "is valid" do
+        expect(form).to be_valid
+      end
+
+      it "updates the capital_discretionary_disregards" do
+        expect(application.discretionary_capital_disregards.count).to eq 2
+        expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
+        expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
       end
     end
   end
