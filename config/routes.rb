@@ -169,6 +169,10 @@ Rails.application.routes.draw do
         resources :state_benefits, only: %i[new show update]
         resource :receives_state_benefits, only: %i[show update]
         resources :remove_state_benefits, only: %i[show update]
+
+        namespace :capital_disregards do
+          # TODO: add disregards routes
+        end
       end
       namespace :correspondence_address do
         resource :choice, only: %i[show update], path: "where_to_send_correspondence"
