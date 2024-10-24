@@ -109,6 +109,15 @@ RSpec.describe "providers legal aid application requests" do
           end
         end
 
+        context "and navigating to a page that doesn't exist" do
+          let(:params) { { page: 12 } }
+
+          it "successfully redirects to page that exists" do
+            get_request
+            expect(response).to have_http_status(:ok)
+          end
+        end
+
         context "when an application has been discarded" do
           before { create(:legal_aid_application, :discarded, provider:) }
 
