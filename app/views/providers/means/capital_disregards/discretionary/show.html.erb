@@ -6,7 +6,7 @@
   <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <p><%= t(".details.#{individual}") %></p>
-    <%= form.govuk_check_boxes_fieldset :discretionary_capital_disregards,
+    <%= form.govuk_check_boxes_fieldset :discretionary_disregards,
                                         legend: { text: t(".h2-heading.#{individual}"), size: "l", tag: "h2" },
                                         form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
       <div class="govuk-hint"><%= t(".hint") %></div>

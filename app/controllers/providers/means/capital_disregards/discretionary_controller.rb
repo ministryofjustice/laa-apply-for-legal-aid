@@ -2,6 +2,7 @@ module Providers
   module Means
     module CapitalDisregards
       class DiscretionaryController < ProviderBaseController
+        prefix_step_with :capital_disregards
         def show
           @form = Providers::CapitalDisregards::DiscretionaryForm.new(model: legal_aid_application)
         end
