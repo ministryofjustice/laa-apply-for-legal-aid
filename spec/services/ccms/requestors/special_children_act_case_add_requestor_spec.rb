@@ -259,6 +259,17 @@ module CCMS
               block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_AGREEMENT")
               expect(block).to have_boolean_response true
             end
+
+            it "sets the SCA_AUTO_GRANT to false" do
+              block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+              expect(block).to have_boolean_response false
+            end
+
+            it "leaves APPLY_CASE_MEANS_REVIEW value as true (no means caseworker review needed)" do
+              # Only merits caseworker review should be needed
+              block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+              expect(block).to have_boolean_response true
+            end
           end
 
           context "when the parent has court ordered parental responsibility for at least one child" do
@@ -308,6 +319,17 @@ module CCMS
               block = XmlExtractor.call(request_xml, :global_merits, "COPY_PR_AGREEMENT")
               expect(block).not_to be_present
             end
+
+            it "sets the SCA_AUTO_GRANT to false" do
+              block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+              expect(block).to have_boolean_response false
+            end
+
+            it "leaves APPLY_CASE_MEANS_REVIEW value as true (no means caseworker review needed)" do
+              # Only merits caseworker review should be needed
+              block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+              expect(block).to have_boolean_response true
+            end
           end
         end
 
@@ -342,6 +364,19 @@ module CCMS
                      opponents:,
                      domestic_abuse_summary:,
                      office:)
+            end
+
+            describe "it does not auto-grant" do
+              it "sets the SCA_AUTO_GRANT to false" do
+                block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+                expect(block).to have_boolean_response false
+              end
+
+              it "leaves APPLY_CASE_MEANS_REVIEW value as true (no means caseworker review needed)" do
+                # Only merits caseworker review should be needed
+                block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
+                expect(block).to have_boolean_response true
+              end
             end
 
             it "sets APP_INCLUDES_SCA_PROCS to true" do

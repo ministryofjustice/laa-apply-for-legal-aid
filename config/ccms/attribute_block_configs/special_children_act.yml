@@ -84,7 +84,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   APP_IS_SCA_RELATED:
-    generate_block?: '#application_special_children_act_related_proceedings?'
+    generate_block?: '#special_children_act_related_proceedings?'
     value: true
     br100_meaning: The Application Is In Relation To Special Children Act Or Related Proceedings
     response_type: boolean
@@ -192,7 +192,7 @@ global_merits:
     user_defined: false
   SCA_AUTO_GRANT:
     generate_block?: true
-    value: '#application_auto_grant_special_children_act?'
+    value: '#auto_grant_special_children_act?'
     br100_meaning: the special children act application can be auto granted
     response_type: boolean
     user_defined: false

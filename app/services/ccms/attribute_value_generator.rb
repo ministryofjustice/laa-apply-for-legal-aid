@@ -117,6 +117,25 @@ module CCMS
       legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code == "W" }
     end
 
+    def special_children_act_related_proceedings?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.sca_type == "related" }
+    end
+
+    def auto_grant_special_children_act?(_options)
+      legal_aid_application.special_children_act_proceedings? && auto_grant_exclusions
+    end
+
+    def auto_grant_exclusions
+      # If any of these are true then auto-granting should not occur
+      # This list is not definitive, it is accurate for the initial release of SCA, Oct 2024
+      # e.g. when Apply starts handling high-cost cases we could add a test for claims > £25,000
+      [
+        special_children_act_related_proceedings?(nil),
+        client_court_ordered_parental_responsibility?(nil),
+        client_parental_responsibility_agreement?(nil),
+      ].none?
+    end
+
     def client_biological_parent?(_options)
       legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") && proceeding.relationship_to_child == "biological" }
     end
@@ -495,7 +514,7 @@ module CCMS
     end
 
     def bypass_manual_review_in_ccms?(_options)
-      !manual_case_review_required? || legal_aid_application.auto_grant_special_children_act?
+      !manual_case_review_required? || auto_grant_special_children_act?(nil)
     end
 
     def manual_case_review_required?
