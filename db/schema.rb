@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_18_081039) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_22_133251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -285,6 +285,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_081039) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
+  end
+
+  create_table "capital_disregards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "name", null: false
+    t.boolean "mandatory", null: false
+    t.decimal "amount"
+    t.date "date_received"
+    t.string "payment_reason"
+    t.string "account_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_capital_disregards_on_legal_aid_application_id"
   end
 
   create_table "cash_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1105,6 +1118,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_081039) do
   add_foreign_key "bank_providers", "applicants"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications", on_delete: :cascade
+  add_foreign_key "capital_disregards", "legal_aid_applications"
   add_foreign_key "ccms_submission_documents", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
