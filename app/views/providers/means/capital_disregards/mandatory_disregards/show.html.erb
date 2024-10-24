@@ -1,5 +1,5 @@
 <%= form_with(model: @form,
-              url: providers_legal_aid_application_means_policy_disregards_path(@legal_aid_application),
+              url: providers_legal_aid_application_means_capital_disregards_mandatory_disregards_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
   <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
@@ -11,19 +11,26 @@
                                         legend: { text: t(".h2-heading.#{individual}"), size: "l", tag: "h1" },
                                         hint: { text: t(".hint-text_html") },
                                         form_group: { class: @form.errors[:backdated_benefits].any? ? "govuk-form-group--error" : "" } do %>
-      <% if @form.errors[:england_infected_blood_support].any? %>
+      <% if @form.errors[:backdated_benefits].any? %>
         <p class="govuk-error-message" id="savings-amount-cash-error">
           <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:backdated_benefits].first %></p>
       <% end %>
 
       <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
-        <% Providers::Means::CapitalDisregards::MandatoryDisregardsForm::MANDATORY_DISREGARDS_ATTRIBUTES.each do |checkbox| %>
-          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") }, hint: { text: t(".#{checkbox}_hint", default: "") } %>
+        <% MandatoryDisregardType.values.each_with_index do |disregard_type, idx| %>
+          <%= form.govuk_check_box :mandatory_capital_disregards,
+                                   disregard_type.to_s,
+                                   link_errors: idx.zero?,
+                                   label: { text: t(".#{disregard_type}") },
+                                   hint: { text: t(".#{disregard_type}_hint", default: "") } %>
         <% end %>
       </div>
 
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+      <%= form.govuk_check_box :mandatory_capital_disregards,
+                               :none_of_these,
+                               exclusive: true,
+                               label: { text: t(".none_of_these") } %>
 
     <% end %>
 
