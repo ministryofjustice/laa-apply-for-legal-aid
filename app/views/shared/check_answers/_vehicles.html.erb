@@ -15,6 +15,7 @@
 </div>
 
 <%= govuk_summary_list(
+      card: { title: t(".#{journey_type}.heading") },
       actions: !read_only,
       classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "vehicles-questions" },
@@ -28,6 +29,7 @@
 <% if @legal_aid_application.vehicles.any? %>
   <% @legal_aid_application.vehicles.each_with_index do |vehicle, index| %>
     <%= govuk_summary_list(
+          card: { title: t(".providers.vehicle_index", sequence: index + 1) },
           actions: !read_only,
           classes: "govuk-!-margin-bottom-9",
           html_attributes: { id: "vehicle-questions__#{index}" },
