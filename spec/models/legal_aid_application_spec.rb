@@ -1877,30 +1877,72 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#has_transaction_type?" do
-    subject { laa.has_transaction_type?(transaction_type) }
+    subject(:has_transaction_type?) { laa.has_transaction_type?(transaction_type, owner_query) }
 
-    let!(:benefits) { create(:transaction_type, :benefits) }
-    let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+    let(:laa) { create(:legal_aid_application, :with_applicant_and_partner_with_no_contrary_interest) }
+    let(:benefits) { create(:transaction_type, :benefits) }
+    let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
 
-    context "when application has that transaction type" do
-      let(:laa) { create(:legal_aid_application, transaction_types: [benefits]) }
-      let(:transaction_type) { benefits }
+    context "when application has that transaction type for the Applicant" do
+      before do
+        create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application: laa,
+          transaction_type: benefits,
+          owner_type: "Applicant",
+          owner_id: laa.applicant.id,
+        )
+      end
 
-      it { is_expected.to be_truthy }
+      it "returns true when querying that type for applicant" do
+        expect(laa).to have_transaction_type(benefits, "Applicant")
+      end
+
+      it "returns false when querying that type for partner" do
+        expect(laa).not_to have_transaction_type(benefits, "Partner")
+      end
+
+      it "returns false when querying a type that the applicant does not have" do
+        expect(laa).not_to have_transaction_type(rent_or_mortgage, "Applicant")
+      end
     end
 
-    context "when application does not have that transaction type" do
-      let(:laa) { create(:legal_aid_application, transaction_types: [benefits]) }
-      let(:transaction_type) { rent_or_mortgage }
+    context "when application has that transaction type for the partner" do
+      before do
+        create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application: laa,
+          transaction_type: benefits,
+          owner_type: "Partner",
+          owner_id: laa.partner.id,
+        )
+      end
 
-      it { is_expected.to be_falsey }
+      it "returns false when querying that type for applicant" do
+        expect(laa).not_to have_transaction_type(benefits, "Applicant")
+      end
+
+      it "returns true when querying that type for partner" do
+        expect(laa).to have_transaction_type(benefits, "Partner")
+      end
+
+      it "returns false when querying a type that the partner does not have" do
+        expect(laa).not_to have_transaction_type(rent_or_mortgage, "Partner")
+      end
     end
 
     context "when application does not have any transaction types" do
-      let(:laa) { create(:legal_aid_application, transaction_types: []) }
-      let(:transaction_type) { benefits }
+      before do
+        legal_aid_application.legal_aid_application_transaction_types.destroy_all
+      end
 
-      it { is_expected.to be_falsey }
+      it "returns false when querying a type for applicant" do
+        expect(laa).not_to have_transaction_type(benefits, "Applicant")
+      end
+
+      it "returns false when querying a type for partner" do
+        expect(laa).not_to have_transaction_type(benefits, "Partner")
+      end
     end
   end
 

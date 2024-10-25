@@ -2,12 +2,15 @@ require "rails_helper"
 
 RSpec.describe TransactionTypeHelper do
   let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:owner_type) { "Applicant" }
 
   describe "#answer_for_transaction_type" do
     subject do
       transaction_type = instance_double(TransactionType, id: "a-stubbed-uuid")
+
       helper.answer_for_transaction_type(legal_aid_application:,
-                                         transaction_type:)
+                                         transaction_type:,
+                                         owner_type:)
     end
 
     context "when on bank statement upload journey" do

@@ -1,7 +1,7 @@
 module TransactionTypeHelper
-  def answer_for_transaction_type(legal_aid_application:, transaction_type:)
+  def answer_for_transaction_type(legal_aid_application:, transaction_type:, owner_type:)
     total = legal_aid_application.transactions_total_by_category(transaction_type.id)
-    has_transaction_type = legal_aid_application.has_transaction_type?(transaction_type)
+    has_transaction_type = legal_aid_application.has_transaction_type?(transaction_type, owner_type)
 
     if has_transaction_type && total.zero?
       legal_aid_application.client_uploading_bank_statements? ? t("generic.yes") : t("generic.yes_but_none")

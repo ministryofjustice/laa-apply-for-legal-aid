@@ -910,14 +910,28 @@ FactoryBot.define do
     trait :with_maintenance_in_category do
       after :create do |application|
         maintenance_in = TransactionType.where(name: "maintenance_in").first || create(:transaction_type, :maintenance_in)
-        application.transaction_types << maintenance_in
+
+        create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application: application,
+          transaction_type: maintenance_in,
+          owner_type: "Applicant",
+          owner_id: application.applicant.id,
+        )
       end
     end
 
     trait :with_maintenance_out_category do
       after :create do |application|
         maintenance_out = TransactionType.where(name: "maintenance_out").first || create(:transaction_type, :maintenance_out)
-        application.transaction_types << maintenance_out
+
+        create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application: application,
+          transaction_type: maintenance_out,
+          owner_type: "Applicant",
+          owner_id: application.applicant.id,
+        )
       end
     end
 
@@ -957,10 +971,20 @@ FactoryBot.define do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
         bank_account = create(:bank_account, bank_provider:)
+        benefits = TransactionType.where(name: "benefits").first || create(:transaction_type, :benefits)
+
+        create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application: application,
+          transaction_type: benefits,
+          owner_type: "Applicant",
+          owner_id: application.applicant.id,
+        )
+
         [90, 60, 30].each do |count|
           create(:bank_transaction,
-                 :benefits,
                  :manually_chosen,
+                 transaction_type: benefits,
                  happened_at: count.days.ago,
                  amount: 111,
                  bank_account:,
@@ -1012,13 +1036,23 @@ FactoryBot.define do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
         bank_account = create(:bank_account, bank_provider:)
+        rent_or_mortgage = TransactionType.where(name: "rent_or_mortgage").first || create(:transaction_type, :rent_or_mortgage)
+
         [90, 60, 30].each do |count|
           create(:bank_transaction,
-                 :rent_or_mortgage,
+                 transaction_type: rent_or_mortgage,
                  happened_at: count.days.ago,
                  amount: 111,
                  bank_account:,
                  operation: "debit")
+
+          create(
+            :legal_aid_application_transaction_type,
+            legal_aid_application: application,
+            transaction_type: rent_or_mortgage,
+            owner_type: "Applicant",
+            owner_id: application.applicant.id,
+          )
         end
       end
     end
