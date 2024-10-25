@@ -45,16 +45,5 @@ RSpec.describe CitizenEmailService do
 
       send_email
     end
-
-    it "notifies the dashboard" do
-      allow(ActiveSupport::Notifications).to receive(:instrument)
-
-      send_email
-
-      expect(ActiveSupport::Notifications).to have_received(:instrument).with(
-        "dashboard.applicant_emailed",
-        legal_aid_application_id: legal_aid_application.id,
-      )
-    end
   end
 end

@@ -13,7 +13,6 @@ class CitizenEmailService
       addressee: applicant.email_address,
       arguments: mailer_args,
     )
-    notify_dashboard
   end
 
 private
@@ -21,13 +20,6 @@ private
   attr_reader :legal_aid_application
 
   delegate :applicant, :provider, to: :legal_aid_application, allow_nil: true
-
-  def notify_dashboard
-    ActiveSupport::Notifications.instrument(
-      "dashboard.applicant_emailed",
-      legal_aid_application_id: legal_aid_application.id,
-    )
-  end
 
   def mailer_args
     [

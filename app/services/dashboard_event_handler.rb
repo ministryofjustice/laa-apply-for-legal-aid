@@ -39,8 +39,7 @@ private
        firm_created
        feedback_created
        application_submitted
-       declined_open_banking
-       applicant_emailed]
+       declined_open_banking]
   end
 
   def application_created
@@ -70,9 +69,5 @@ private
 
   def application_submitted
     Dashboard::UpdaterJob.perform_later("Applications")
-  end
-
-  def applicant_emailed
-    Dashboard::ApplicantEmailJob.perform_later(LegalAidApplication.find(payload[:legal_aid_application_id]))
   end
 end

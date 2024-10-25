@@ -149,13 +149,4 @@ RSpec.describe DashboardEventHandler do
       legal_aid_application.merits_complete!
     end
   end
-
-  context "when an applicant is emailed" do
-    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
-    it "fires the applicant_email job" do
-      expect(Dashboard::ApplicantEmailJob).to receive(:perform_later).at_least(:once)
-      CitizenEmailService.new(legal_aid_application).send_email
-    end
-  end
 end

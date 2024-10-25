@@ -123,19 +123,16 @@ module LaaApplyForLegalAid
     config.x.suspended_geckoboard_updater_jobs = {
       development: %w[
         Dashboard::FeedbackItemJob
-        Dashboard::ApplicantEmailJob
         Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
       test: %w[
         Dashboard::FeedbackItemJob
-        Dashboard::ApplicantEmailJob
         Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
       uat: %w[
         Dashboard::FeedbackItemJob
-        Dashboard::ApplicantEmailJob
         Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
