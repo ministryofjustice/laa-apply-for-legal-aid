@@ -1,56 +1,32 @@
 version: 2
 updates:
-- package-ecosystem: bundler
-  directory: "/"
-  allow:
-    - dependency-type: "all"
-  schedule:
-    interval: daily
-    time: "21:00"
-    timezone: Europe/London
-  groups:
-    aws-gems:
-      patterns:
-        - "aws-*"
-    axe-gems:
-      patterns:
-        - "axe-core-*"
-    bundling-gems:
-      patterns:
-        - "*bundling-rails"
-    rubocop-gems:
-      patterns:
-        - "rubocop-*"
-    govuk-gems:
-      patterns:
-        - "govuk*"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: prometheus_exporter
-    versions:
-    - "> 0.4.17"
-  reviewers:
-  - "ministryofjustice/laa-apply-for-legal-aid"
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: weekly
-    day: wednesday
-    time: "21:15"
-    timezone: Europe/London
-  open-pull-requests-limit: 10
-  reviewers:
-  - "ministryofjustice/laa-apply-for-legal-aid"
-  groups:
-    # Specify a name for the group, which will be used in pull request titles and branch names
-    npm-babel:
-      # Define patterns to include dependencies in the group (based on # dependency name)
-      patterns:
-        - "*babel*"
-    npm-stylelint:
-      patterns:
-        - "stylelint*"
-    npm-jest:
-      # Define patterns to include dependencies in the group (based on # dependency name)
-      patterns:
-        - "jest*"
+  - package-ecosystem: "bundler"
+    directory: "/"
+    allow:
+      - dependency-type: "all"
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "21:00"
+      timezone: Europe/London
+    groups:
+      bundler:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "ministryofjustice/laa-apply-for-legal-aid"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "21:15"
+      timezone: Europe/London
+    groups:
+      npm:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "ministryofjustice/laa-apply-for-legal-aid"
