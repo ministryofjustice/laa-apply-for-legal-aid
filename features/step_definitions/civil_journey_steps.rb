@@ -887,6 +887,26 @@ Given("I complete the journey as far as check passported answers with multiple p
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
+Given("I complete the journey as far as check merits answers with an SCA proceeding without merits tasks") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_non_passported_state_machine,
+    :with_positive_benefit_check_result,
+    :with_proceedings,
+    :with_applicant,
+    :with_opponent,
+    :provider_entering_merits,
+    explicit_proceedings: %i[pb059],
+    set_lead_proceeding: :pb059,
+  )
+  create(:legal_framework_merits_task_list, :pb059_with_no_tasks, legal_aid_application: @legal_aid_application)
+  @legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
+
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
 Given("I complete the non-passported journey as far as check your answers") do
   applicant = create(
     :applicant,
