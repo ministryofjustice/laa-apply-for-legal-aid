@@ -22,6 +22,10 @@ module TaskListHelper
     __send__(url, proceeding_id(application, ccms_code))
   end
 
+  def merits_task_list_empty_for?(legal_aid_application, proceeding)
+    legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, proceeding.ccms_code.to_sym)[:tasks].empty?
+  end
+
 private
 
   def application_has_no_involved_children?(legal_aid_application)
