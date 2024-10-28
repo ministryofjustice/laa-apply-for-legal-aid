@@ -200,6 +200,26 @@ Given("I have completed a non-means tested journey with merits") do
   login_as @legal_aid_application.provider
 end
 
+Given("I have completed a backdated special children act journey") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_applicant_and_address,
+    :with_non_means_tested_state_machine, # needs updating to SCA state machine when available
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_proceedings,
+    :with_delegated_functions_on_proceedings,
+    explicit_proceedings: %i[pb059],
+    set_lead_proceeding: :pb059,
+    df_options: { PB059: [10.days.ago.to_date, 1.day.ago.to_date] },
+  )
+
+  @legal_aid_application.applicant.update!(email: nil)
+  create :legal_framework_merits_task_list, :pb059_with_no_tasks, legal_aid_application: @legal_aid_application
+
+  login_as @legal_aid_application.provider
+end
+
 When("I view the review and print your application page") do
   visit(providers_legal_aid_application_review_and_print_application_path(@legal_aid_application))
 end
