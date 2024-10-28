@@ -33,6 +33,6 @@
 <%= render("shared/check_answers/supporting_evidence", read_only:) %>
 
 <!--This is to prevent the separate representation section from showing up anywhere other than the merits report -->
-<% if @legal_aid_application.summary_state.to_s == 'submitted' && @legal_aid_application.special_children_act_proceedings? %>
+<% if controller_name == 'merits_reports' && @legal_aid_application.special_children_act_proceedings? %>
   <%= render("shared/check_answers/separate_representation") %>
 <% end %>
