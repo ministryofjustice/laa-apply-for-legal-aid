@@ -1,4 +1,6 @@
 <% @legal_aid_application.proceedings.each do |proceeding| %>
+  <% next if merits_task_list_empty_for?(@legal_aid_application, proceeding) %>
+
   <section class="print-no-break govuk-!-padding-top-6">
     <h2 class="govuk-heading-l"><%= proceeding.meaning %></h2>
 

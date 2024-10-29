@@ -405,6 +405,26 @@ FactoryBot.define do
       end
     end
 
+    trait :pb059_with_no_tasks do
+      lfa_response do
+        {
+          request_id: "2a614e1a-a3d5-49ca-949a-c3248483d274",
+          success: true,
+          application: {
+            tasks: {
+              opponent_name: [],
+            },
+          },
+          proceedings: [
+            {
+              ccms_code: "PB059",
+              tasks: {},
+            },
+          ],
+        }
+      end
+    end
+
     trait :broken_opponent do
       lfa_response do
         {
