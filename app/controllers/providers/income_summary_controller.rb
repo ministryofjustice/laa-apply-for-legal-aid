@@ -1,16 +1,14 @@
 module Providers
   class IncomeSummaryController < ProviderBaseController
     def index
-      @bank_transactions = bank_transactions
-      @cash_transactions = cash_transactions
+      setup
     end
 
     def create
       return continue_or_draft if draft_selected?
 
       if uncategorized_transactions?
-        @bank_transactions = bank_transactions
-        @cash_transactions = cash_transactions
+        setup
         render :index
       else
         go_forward
@@ -18,6 +16,13 @@ module Providers
     end
 
   private
+
+    def setup
+      @transaction_types = TransactionType.where(id: @legal_aid_application.individual_transaction_type_ids("Applicant")).credits
+      @total_transaction_types = TransactionType.credits
+      @bank_transactions = bank_transactions
+      @cash_transactions = cash_transactions
+    end
 
     def uncategorized_transactions?
       @legal_aid_application.uncategorised_transactions?(:credit)

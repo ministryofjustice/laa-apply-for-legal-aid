@@ -1,7 +1,7 @@
 <%= render(
       "shared/transactions_summary",
-      transaction_types: @legal_aid_application.transaction_types.debits,
-      total_transaction_types: TransactionType.debits,
+      transaction_types: @transaction_types,
+      total_transaction_types: @total_transaction_types,
       type: "regular payments",
       list_path: "outgoings_summary",
       add_another_url: providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
