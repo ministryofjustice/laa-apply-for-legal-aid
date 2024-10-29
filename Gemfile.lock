@@ -468,7 +468,7 @@ GEM
       childprocess (>= 0.6.3, < 6)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    pagy (9.1.0)
+    pagy (9.1.1)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
@@ -477,7 +477,7 @@ GEM
       optimist (~> 3.0)
     pg (1.5.9)
     pg_dump_anonymize (0.1.2)
-    prometheus_exporter (2.0.8)
+    prometheus_exporter (2.1.1)
       webrick
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
@@ -553,7 +553,7 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
-    rails-i18n (7.0.9)
+    rails-i18n (7.0.10)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
     railties (7.2.1.2)
@@ -730,7 +730,7 @@ GEM
     vcr (6.3.1)
       base64
     version_gem (1.1.4)
-    view_component (3.14.0)
+    view_component (3.16.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -740,7 +740,7 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webdack-uuid_migration (1.4.0)
+    webdack-uuid_migration (1.5.0)
       activerecord (>= 4.0)
     webmock (3.24.0)
       addressable (>= 2.8.0)
@@ -858,7 +858,7 @@ DEPENDENCIES
   tzinfo-data
   vcr
   view_component
-  webdack-uuid_migration (~> 1.4.0)
+  webdack-uuid_migration (~> 1.5.0)
   webmock
   webrick
 
