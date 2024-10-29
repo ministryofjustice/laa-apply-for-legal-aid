@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CapitalDisregards::DiscretionaryForm do
+RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryForm do
   subject(:form) { described_class.new(discretionary_capital_disregards_params.merge(model: application)) }
 
   let(:application) { create(:legal_aid_application) }

@@ -3,12 +3,13 @@ module Providers
     module CapitalDisregards
       class DiscretionaryController < ProviderBaseController
         prefix_step_with :capital_disregards
+
         def show
-          @form = Providers::CapitalDisregards::DiscretionaryForm.new(model: legal_aid_application)
+          @form = DiscretionaryForm.new(model: legal_aid_application)
         end
 
         def update
-          @form = Providers::CapitalDisregards::DiscretionaryForm.new(form_params)
+          @form = DiscretionaryForm.new(form_params)
           render :show unless save_continue_or_draft(@form)
         end
 

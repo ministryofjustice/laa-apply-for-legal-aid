@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::ProviderCapital::CapitalDisregardsDiscretionaryStep, type: :request do
+RSpec.describe Flow::Steps::ProviderCapitalDisregards::DiscretionaryStep, type: :request do
   let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
   let(:passported?) { nil }
   let(:provider_checking_or_checked_citizens_means_answers?) { nil }

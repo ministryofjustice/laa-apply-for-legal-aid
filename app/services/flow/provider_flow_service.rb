@@ -7,6 +7,7 @@ module Flow
               .deep_merge(Flows::ProviderDWPOverride::STEPS)
               .deep_merge(Flows::ProviderIncome::STEPS)
               .deep_merge(Flows::ProviderCapital::STEPS)
+              .deep_merge(Flows::ProviderCapitalDisregards::STEPS)
               .deep_merge(Flows::ProviderDependants::STEPS)
               .deep_merge(Flows::ProviderMerits::STEPS)
               .deep_merge(Flows::ProviderBlocked::STEPS)

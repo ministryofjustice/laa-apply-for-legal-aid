@@ -12,7 +12,7 @@
       <div class="govuk-hint"><%= t(".hint") %></div>
       <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
       <div class="deselect-group" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
-        <% Providers::CapitalDisregards::DiscretionaryForm::DISREGARD_TYPES.each do |disregard_type| %>
+        <% Providers::Means::CapitalDisregards::DiscretionaryForm::DISREGARD_TYPES.each do |disregard_type| %>
           <%= form.govuk_check_box :discretionary_capital_disregards, disregard_type, link_errors: true, label: { text: t(".#{disregard_type}") }, hint: { text: t(".#{disregard_type}_hint", default: "") } %>
         <% end %>
       </div>
