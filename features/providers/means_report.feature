@@ -76,8 +76,8 @@ Feature: Means report
       | Client income from property or lodger | £0 |
       | Client student loan or grant | £0 |
       | Client pension | £0 |
+      | Total income | |
 
-    And I should see "Total income"
     And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
       | Details for client |
@@ -88,8 +88,7 @@ Feature: Means report
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-
-    And I should see "Total outgoings"
+      | Total outgoings | £225 |
 
     And the Deductions questions should exist:
       | question |
@@ -252,8 +251,8 @@ Feature: Means report
       | Client income from property or lodger | £0 |
       | Client student loan or grant | £0 |
       | Client pension | £0 |
+      | Total income | |
 
-    And I should see "Total income"
     And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
       | Details for client |
@@ -264,8 +263,7 @@ Feature: Means report
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-
-    And I should see "Total outgoings"
+      | Total outgoings | £225 |
 
     And the Deductions questions should exist:
       | question |

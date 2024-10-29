@@ -1,9 +1,0 @@
-<section>
-  <dl id="deductions-details-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-    <% deductions_detail_items(@legal_aid_application).each do |item| %>
-      <%= render "shared/means_report/item", item.to_h %>
-    <% end %>
-    <%= render "shared/means_report/total", name: "total_deductions", value_method: :total_deductions %>
-  </dl>
-
-</section>

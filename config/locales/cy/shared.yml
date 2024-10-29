@@ -96,25 +96,25 @@ cy:
         - You still need to provide details of the case before we can decide if they’re
           eligible.
     means_report:
-      item:
-        deductions:
-          dependants_allowance: ecnawolla stnadnepeD
-        income:
+      income_details:
+        total_income: emocni latoT
+        client:
           benefits: stifeneB
           family_help: ylimaf ro sdneirf morf pleh laicnaniF
           maintenance_in: stnemyap ecnanetniaM
           property_or_lodger: regdol ro ytreporp morf emocnI
           student_loan: tnarg ro naol tnedutS
           pension: noisneP
-        outgoing:
+      outgoings_details:
+        total_outgoings: sgniogtuo latoT
+        client:
           housing: stnemyap gnisuoH
           childcare: stnemyap eracdlihC
           maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
           legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-      total:
-        total_income: emocni latoT
-        total_outgoings: sgniogtuo latoT
+      deductions_details:
         total_deductions: snoitcuded latoT
+        dependants_allowance: ecnawolla stnadnepeD
     check_answers:
       assets:
         assets:

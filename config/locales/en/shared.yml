@@ -302,65 +302,49 @@ en:
           - Widow's Pension lump sum payments
           - Windrush Compensation Scheme Payments
     means_report:
-      item:
-        deductions:
+      income_details:
+        total_income: Total income
+        client:
+          benefits: Client benefits, charitable or government payments
+          employment: Client gross employment income
+          fixed_employment_deduction: Client fixed employment deduction
+          family_help: Client financial help from friends or family
+          income_tax: Client income tax
+          maintenance_in: Client maintenance payments
+          national_insurance: Client national insurance
+          property_or_lodger: Client income from property or lodger
+          student_loan: Client student loan or grant
+          pension: Client pension
+        partner:
+          benefits: Partner benefits, charitable or government payments
+          employment: Partner gross employment income
+          fixed_employment_deduction: Partner fixed employment deduction
+          family_help: Partner financial help from friends or family
+          income_tax: Partner income tax
+          maintenance_in: Partner maintenance payments
+          national_insurance: Partner national insurance
+          property_or_lodger: Partner income from property or lodger
+          student_loan: Partner student loan or grant
+          pension: Partner pension
+      outgoings_details:
+        total_outgoings: Total outgoings
+        client:
+          housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
+          childcare: Client childcare payments
+          maintenance_out: Client maintenance payments to a former partner
+          legal_aid: Client payments towards legal aid in a criminal case
+        partner:
+          housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
+          childcare: Partner childcare payments
+          maintenance_out: Partner maintenance payments to a former partner
+          legal_aid: Partner payments towards legal aid in a criminal case
+      deductions_details:
+        total_deductions: Total deductions
+        dependants_allowance: Dependants allowance
+        partner_allowance: Partner allowance
+        client:
           dependants_allowance: Dependants allowance
           partner_allowance: Partner allowance
-          client:
-            dependants_allowance: Dependants allowance
-            partner_allowance: Partner allowance
-        income:
-          benefits: Benefits
-          employment: Gross employment income
-          fixed_employment_deduction: Fixed employment deduction
-          family_help: Financial help from friends or family
-          income_tax: Income tax
-          maintenance_in: Maintenance payments
-          national_insurance: National insurance
-          property_or_lodger: Income from property or lodger
-          student_loan: Student loan or grant
-          pension: Pension
-          client:
-            benefits: Client benefits, charitable or government payments
-            employment: Client gross employment income
-            fixed_employment_deduction: Client fixed employment deduction
-            family_help: Client financial help from friends or family
-            income_tax: Client income tax
-            maintenance_in: Client maintenance payments
-            national_insurance: Client national insurance
-            property_or_lodger: Client income from property or lodger
-            student_loan: Client student loan or grant
-            pension: Client pension
-          partner:
-            benefits: Partner benefits, charitable or government payments
-            employment: Partner gross employment income
-            fixed_employment_deduction: Partner fixed employment deduction
-            family_help: Partner financial help from friends or family
-            income_tax: Partner income tax
-            maintenance_in: Partner maintenance payments
-            national_insurance: Partner national insurance
-            property_or_lodger: Partner income from property or lodger
-            student_loan: Partner student loan or grant
-            pension: Partner pension
-        outgoing:
-          housing: "Housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Childcare payments
-          maintenance_out: Maintenance payments to a former partner
-          legal_aid: Payments towards legal aid in a criminal case
-          client:
-            housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
-            childcare: Client childcare payments
-            maintenance_out: Client maintenance payments to a former partner
-            legal_aid: Client payments towards legal aid in a criminal case
-          partner:
-            housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
-            childcare: Partner childcare payments
-            maintenance_out: Partner maintenance payments to a former partner
-            legal_aid: Partner payments towards legal aid in a criminal case
-      total:
-        total_income: Total income
-        total_outgoings: Total outgoings
-        total_deductions: Total deductions
     check_answers:
       capital_disregard_details:
         mandatory:
