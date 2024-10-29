@@ -74,6 +74,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     merchant: -> { Faker::Company.name },
   },
   benefit_check_results: {},
+  capital_disregards: {},
   cash_transactions: {},
   ccms_submission_documents: {},
   ccms_submission_histories: {
