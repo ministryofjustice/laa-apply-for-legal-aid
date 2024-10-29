@@ -17,7 +17,7 @@ RSpec.describe Reports::Merits::DelegatedFunctionsComponent, type: :component do
     end
 
     it "renders the proceeding heading" do
-      expect(page).to have_css("h3", text: "Test proceeding meaning")
+      expect(page).to have_css("h2", text: "Test proceeding meaning")
     end
 
     it "renders the delegated functions summary list", :aggregate_failures do
