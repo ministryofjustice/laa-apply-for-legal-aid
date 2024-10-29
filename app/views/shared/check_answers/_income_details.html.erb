@@ -1,9 +1,0 @@
-<section>
-  <dl id="income-details-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-    <% income_detail_items(@legal_aid_application).each do |item| %>
-      <%= render "shared/means_report/item", item.to_h %>
-    <% end %>
-    <%= render "shared/means_report/total", name: "total_income", value_method: :combined_total_gross_income_assessed %>
-  </dl>
-
-</section>

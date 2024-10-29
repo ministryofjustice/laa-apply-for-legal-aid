@@ -1,8 +1,0 @@
-<section>
-  <dl id="outgoings-details-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-    <% outgoings_detail_items.each do |item| %>
-      <%= render "shared/means_report/item", item.to_h %>
-    <% end %>
-    <%= render "shared/means_report/total", name: "total_outgoings", value_method: :total_monthly_outgoings %>
-  </dl>
-</section>

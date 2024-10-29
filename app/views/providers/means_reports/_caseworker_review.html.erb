@@ -1,48 +1,34 @@
-  <section class="print-no-break">
-    <h2 class="govuk-heading-l"><%= t("providers.means_reports.caseworker_review_section_heading") %></h2>
+<section class="print-no-break">
+  <h2 class="govuk-heading-l"><%= t("providers.means_reports.caseworker_review_section_heading") %></h2>
 
-    <section>
-      <dl id="caseworker-review-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-
-        <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
-          <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-            <%= t(".required") %>
-          </dt>
-          <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_required_answer">
-            <%= yes_no(@manual_review_determiner.manual_review_required?) %>
-          </dd>
-        </div>
-
-        <% if @manual_review_determiner.manual_review_required? %>
-
-          <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
-            <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-              <%= t(".reasons") %>
-            </dt>
-            <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_reasons">
-              <% @manual_review_determiner.review_reasons.each do |reason| %>
-                <%= t(".reason.#{reason}") %>
-                <br>
-              <% end %>
-            </dd>
-          </div>
-
-          <% @manual_review_determiner.review_categories_by_reason&.each do |reason, categories| %>
-            <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required-#{reason}" %>">
-              <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-                <%= t(".category-#{reason}") %>
-              </dt>
-              <dd class="<%= "govuk-summary-list__value ovuk-!-text-align-right" %>" id="<%= "review-reason-#{reason}" %>">
-                <% categories.each do |category| %>
-                  <%= t(".category.#{category}") %>
-                  <br>
-                <% end %>
-              </dd>
-            </div>
+  <%= govuk_summary_list(
+        card: { title: t("providers.means_reports.caseworker_review_section_heading") },
+        actions: false,
+        html_attributes: { id: "caseworker-review-questions" },
+      ) do |summary_list| %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_key(text: t(".required"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value(text: yes_no(@manual_review_determiner.manual_review_required?)) %>
+    <% end %>
+    <% if @manual_review_determiner.manual_review_required? %>
+      <%= summary_list.with_row do |row| %>
+        <%= row.with_key(text: t(".reasons")) %>
+        <%= row.with_value do %>
+          <% @manual_review_determiner.review_reasons.each do |reason| %>
+              <%= t(".reason.#{reason}") %><br>
           <% end %>
-
         <% end %>
-      </dl>
-      <hr>
-    </section>
+      <% end %>
+      <% @manual_review_determiner.review_categories_by_reason&.each do |reason, categories| %>
+        <%= summary_list.with_row do |row| %>
+          <%= row.with_key(text: t(".category-#{reason}"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value do %>
+            <% categories.each do |category| %>
+                <%= t(".category.#{category}") %><br>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 </section>

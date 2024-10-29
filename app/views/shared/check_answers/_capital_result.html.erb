@@ -1,31 +1,20 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
-
-<dl id="capital-result-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= check_answer_link(
-        name: :total_capital_assessed,
-        question: t(".total"),
-        answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_capital),
-        read_only:,
-      ) %>
-
-  <%= check_answer_link(
-        name: :capital_lower_limit,
-        question: t(".lower_limit_label"),
-        answer: gds_number_to_currency(Rails.configuration.x.capital_result.lower_limit),
-        read_only:,
-      ) %>
-
-  <%= check_answer_link(
-        name: :capital_upper_limit,
-        question: t(".upper_limit_label"),
-        answer: gds_number_to_currency(Rails.configuration.x.capital_result.upper_limit),
-        read_only:,
-      ) %>
-
-  <%= check_answer_link(
-        name: :capital_contribution,
-        question: t(".contribution"),
-        answer: gds_number_to_currency(@legal_aid_application.cfe_result.capital_contribution),
-        read_only:,
-      ) %>
-</dl>
+<%= govuk_summary_list(card: { title: heading },
+                       actions: false,
+                       html_attributes: { id: "capital-result-questions" }) do |summary_list| %>
+    <% summary_list.with_row(classes: "app-check-your-answers__total_capital_assessed") do |row|
+         row.with_key(text: t(".total"), classes: "govuk-!-width-one-half")
+         row.with_value { gds_number_to_currency(@legal_aid_application.cfe_result.total_capital) }
+       end %>
+    <% summary_list.with_row(classes: "app-check-your-answers__capital_lower_limit") do |row|
+         row.with_key { t(".lower_limit_label") }
+         row.with_value(text: gds_number_to_currency(Rails.configuration.x.capital_result.lower_limit))
+       end %>
+    <% summary_list.with_row(classes: "app-check-your-answers__capital_upper_limit") do |row|
+         row.with_key { t(".upper_limit_label") }
+         row.with_value(text: gds_number_to_currency(Rails.configuration.x.capital_result.upper_limit))
+       end %>
+    <% summary_list.with_row(classes: "app-check-your-answers__capital_contribution") do |row|
+         row.with_key { t(".contribution") }
+         row.with_value(text: gds_number_to_currency(@legal_aid_application.cfe_result.capital_contribution))
+       end %>
+<% end %>
