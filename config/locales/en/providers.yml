@@ -1246,7 +1246,7 @@ en:
             - their assets are the subject matter of dispute (SMOD)
             - their assets are held under a restraint order
       capital_disregards:
-        mandatory_disregards:
+        mandatory:
           show:
             h1-heading: Disregarded payments
             paragraph:

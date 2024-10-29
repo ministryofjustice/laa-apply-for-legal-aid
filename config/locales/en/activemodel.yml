@@ -551,6 +551,12 @@ en:
               blank: Select if you want to link this application with another one
             confirm_link:
               blank: Select if you want to link to the application
+        mandatory_capital_disregards:
+          attributes:
+            base:
+              none_selected: Select if your client has received any of these payments
+              none_selected_with_partner: Select if your client or their partner has received any of these payments, or select 'My client has not received any of these payments'
+              none_and_another_option_selected: Your client must either receive one or more of these payments or none
         other_assets_declaration:
           attributes:
             valuable_items_value:

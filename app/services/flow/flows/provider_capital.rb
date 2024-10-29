@@ -16,7 +16,6 @@ module Flow
         other_assets: Steps::ProviderCapital::OtherAssetsStep,
         restrictions: Steps::ProviderCapital::RestrictionsStep,
         policy_disregards: Steps::ProviderCapital::PolicyDisregardsStep,
-        mandatory_disregards: Steps::ProviderCapitalDisregards::MandatoryDisregardsStep,
         check_passported_answers: Steps::ProviderCapital::CheckPassportedAnswersStep,
         check_capital_answers: Steps::ProviderCapital::CheckCapitalAnswersStep,
         capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,

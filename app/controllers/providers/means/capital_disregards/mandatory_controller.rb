@@ -1,13 +1,13 @@
 module Providers
   module Means
     module CapitalDisregards
-      class MandatoryDisregardsController < ProviderBaseController
+      class MandatoryController < ProviderBaseController
         def show
-          @form = Providers::Means::CapitalDisregards::MandatoryDisregardsForm.new(model: legal_aid_application)
+          @form = Providers::Means::CapitalDisregards::MandatoryForm.new(model: legal_aid_application)
         end
 
         def update
-          @form = Providers::Means::CapitalDisregards::MandatoryDisregardsForm.new(form_params)
+          @form = Providers::Means::CapitalDisregards::MandatoryForm.new(form_params)
           render :show unless save_continue_or_draft(@form)
         end
 
