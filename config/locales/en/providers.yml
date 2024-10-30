@@ -1862,6 +1862,8 @@ en:
       client_involvement_type:
         show:
           question: What is your client's role in this proceeding?
+          sao_question: Your client's role in this proceeding
+          sao_text: For special children act, when you apply for a secure accommodation order, your client must be the child subject of this proceeding.
       delegated_functions:
         show:
           question: Have you used delegated functions for this proceeding?

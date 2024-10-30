@@ -194,6 +194,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
   end
 
+  def has_sca_secure_accommodation_order_proceeding?
+    proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") }
+  end
+
   def evidence_is_required?
     RequiredDocumentCategoryAnalyser.call(self)
     required_document_categories.any?
