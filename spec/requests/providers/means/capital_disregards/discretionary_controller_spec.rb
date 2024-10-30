@@ -34,7 +34,7 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryController do
     let(:discretionary_capital_disregards) { %w[backdated_benefits national_emergencies_trust] }
     let(:params) do
       {
-        legal_aid_application: {
+        providers_means_capital_disregards_discretionary_form: {
           discretionary_capital_disregards:,
           none_selected:,
         },
@@ -69,7 +69,7 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryController do
 
         context "with nothing" do
           let(:none_selected) { "true" }
-          let(:discretionary_capital_disregards) { nil }
+          let(:discretionary_capital_disregards) { [] }
 
           context "with 'none of these' checkbox selected" do
             it "redirects to the next page" do
