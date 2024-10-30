@@ -46,7 +46,7 @@ module Providers
     end
 
     def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.capital_disregards.attributes.base.#{error_key('none_selected')}")
+      I18n.t("activemodel.errors.models.policy_disregards.attributes.base.#{error_key('none_selected')}")
     end
 
     def error_message_for_none_and_another_option_selected

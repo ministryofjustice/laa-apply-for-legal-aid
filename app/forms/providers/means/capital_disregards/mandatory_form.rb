@@ -1,10 +1,10 @@
 module Providers
   module Means
     module CapitalDisregards
-      class MandatoryForm < BaseForm
-        form_for LegalAidApplication
+      class MandatoryForm
+        include ActiveModel::Model
 
-        MANDATORY_DISREGARD_TYPES = %i[
+        DISREGARD_TYPES = %i[
           backdated_benefits
           backdated_community_care
           budgeting_advances
@@ -22,32 +22,70 @@ module Providers
           windrush_compensation_scheme
         ].freeze
 
-        attr_accessor :mandatory_capital_disregards, :none_selected
+        attr_reader :mandatory_capital_disregards
+        attr_accessor :legal_aid_application, :none_selected
 
         validate :validate_any_checkbox_checked, unless: :draft?
         validate :validate_none_selected_and_another_checkbox_not_both_checked, unless: :draft?
 
+        def initialize(params = {})
+          self.legal_aid_application = params.delete(:model)
+          self.mandatory_capital_disregards = params["mandatory_capital_disregards"] || existing_mandatory_disregards
+
+          super
+        end
+
+        def mandatory_capital_disregards=(names)
+          @mandatory_capital_disregards = [names].flatten.compact_blank
+        end
+
+        def save_as_draft
+          @draft = true
+          save!
+        end
+
+        def draft?
+          @draft
+        end
+
         def save
           return false unless valid?
 
-          # TODO: don't destroy all, compare with existing disregards
-          model.capital_disregards.where(mandatory: true).destroy_all
-          mandatory_capital_disregards&.each { |disregard| model.capital_disregards.create!(name: disregard, mandatory: true) }
+          destroy_previous_disregards!
+          create_new_disregards!
         end
         alias_method :save!, :save
 
-        def disregard_types
-          MANDATORY_DISREGARD_TYPES
-        end
-
       private
 
+        # create new records if they don't already exist
+        def create_new_disregards!
+          return unless mandatory_capital_disregards
+
+          mandatory_capital_disregards&.reject { |disregard|
+            existing_mandatory_disregards.include?(disregard)
+          }&.each { |disregard| legal_aid_application.capital_disregards.create!(name: disregard, mandatory: true) }
+        end
+
+        # destroy only the records which already exist but aren't selected
+        def destroy_previous_disregards!
+          legal_aid_application.mandatory_capital_disregards&.where&.not(name: mandatory_capital_disregards)&.destroy_all
+        end
+
+        def existing_mandatory_disregards
+          legal_aid_application.mandatory_capital_disregards.pluck(:name)
+        end
+
+        def none_selected?
+          none_selected == "true"
+        end
+
         def any_checkbox_checked?
-          none_selected == "true" || mandatory_capital_disregards
+          none_selected? || mandatory_capital_disregards.any?
         end
 
         def none_and_another_checkbox_checked?
-          none_selected == "true" && mandatory_capital_disregards
+          none_selected? && mandatory_capital_disregards.any?
         end
 
         def validate_any_checkbox_checked
@@ -59,11 +97,17 @@ module Providers
         end
 
         def error_message_for_none_selected
-          I18n.t("activemodel.errors.models.mandatory_capital_disregards.attributes.base.#{error_key('none_selected')}")
+          I18n.t("activemodel.errors.models.mandatory_capital_disregards.attributes.base.none_selected")
         end
 
         def error_message_for_none_and_another_option_selected
-          I18n.t("activemodel.errors.models.mandatory_capital_disregards.attributes.base.none_and_another_option_selected")
+          I18n.t("activemodel.errors.models.mandatory_capital_disregards.attributes.base.#{error_key('none_and_another_option_selected')}")
+        end
+
+        def error_key(key_name)
+          return "#{key_name}_with_partner" if legal_aid_application&.applicant&.has_partner_with_no_contrary_interest?
+
+          key_name
         end
       end
     end

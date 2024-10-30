@@ -2,6 +2,8 @@ module Providers
   module Means
     module CapitalDisregards
       class MandatoryController < ProviderBaseController
+        prefix_step_with :capital_disregards
+
         def show
           @form = Providers::Means::CapitalDisregards::MandatoryForm.new(model: legal_aid_application)
         end
@@ -15,9 +17,9 @@ module Providers
 
         def form_params
           merge_with_model(legal_aid_application) do
-            params.require(:legal_aid_application)
-                  .permit(mandatory_capital_disregards: [])
-                  .merge(none_selected: params[:legal_aid_application][:none_selected])
+            params.require(:providers_means_capital_disregards_mandatory_form)
+                  .permit(:none_selected, mandatory_capital_disregards: [])
+                  .merge(legal_aid_application:)
           end
         end
       end

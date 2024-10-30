@@ -7,20 +7,14 @@
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <p class="govuk-body govuk-!-margin-bottom-6"><%= t(".paragraph.#{individual}") %></p>
 
-    <%= form.govuk_check_boxes_fieldset :policy_disregards,
+    <%= form.govuk_check_boxes_fieldset :mandatory_capital_disregards,
                                         legend: { text: t(".h2-heading.#{individual}"), size: "l", tag: "h1" },
                                         hint: { text: t(".hint-text_html") },
                                         form_group: { class: @form.errors[:mandatory_capital_disregards].any? ? "govuk-form-group--error" : "" } do %>
-      <% if @form.errors[:mandatory_capital_disregards].any? %>
-        <p class="govuk-error-message" id="savings-amount-cash-error">
-          <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:mandatory_capital_disregards].first %></p>
-      <% end %>
-
-      <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
-        <% @form.disregard_types.each_with_index do |disregard_type, idx| %>
-        <%# Providers::Means::CapitalDisregards::MandatoryForm::MANDATORY_DISREGARD_TYPES.each_with_index do |disregard_type, idx| %>
+      <div class="deselect-group" data-deselect-ctrl="#providers-means-capital-disregards-mandatory-form-none-selected-true-field">
+        <% Providers::Means::CapitalDisregards::MandatoryForm::DISREGARD_TYPES.each_with_index do |disregard_type, idx| %>
           <%= form.govuk_check_box :mandatory_capital_disregards,
-                                   disregard_type,
+                                   disregard_type.to_s,
                                    link_errors: idx.zero?,
                                    label: { text: t(".#{disregard_type}") },
                                    hint: { text: t(".#{disregard_type}_hint", default: "") } %>

@@ -34,11 +34,11 @@ RSpec.describe Providers::Means::CapitalDisregards::MandatoryController do
     let(:mandatory_capital_disregards) { %w[backdated_benefits government_cost_of_living] }
     let(:params) do
       {
-        legal_aid_application: {
+        providers_means_capital_disregards_mandatory_form: {
           mandatory_capital_disregards:,
           none_selected:,
         },
-        continue_button: "Continue",
+        continue_button: "Save and continue",
       }
     end
 

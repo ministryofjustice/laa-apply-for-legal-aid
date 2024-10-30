@@ -253,7 +253,7 @@ RSpec.describe "provider other assets requests" do
               let(:mtr2a_flag) { true }
 
               it "redirects to the mandatory_disregards page" do
-                expect(response).to redirect_to(providers_legal_aid_application_means_capital_disregards_mandatory_disregards_path(application))
+                expect(response).to redirect_to(providers_legal_aid_application_means_capital_disregards_mandatory_path(application))
               end
             end
 
