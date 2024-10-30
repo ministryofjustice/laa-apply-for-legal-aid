@@ -19,8 +19,8 @@ module Reports::Merits
 
     def row(key, value)
       {
-        key: { text: key },
-        value: { text: value, classes: "govuk-!-text-align-right" },
+        key: { text: key, classes: "govuk-!-width-one-half" },
+        value: { text: value },
       }
     end
 
