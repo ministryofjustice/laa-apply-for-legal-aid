@@ -171,7 +171,7 @@ Rails.application.routes.draw do
         resources :remove_state_benefits, only: %i[show update]
 
         namespace :capital_disregards do
-          # TODO: add disregards routes
+          resource :discretionary, only: %i[show update], path: "payments_to_review", controller: "discretionary"
         end
       end
       namespace :correspondence_address do
