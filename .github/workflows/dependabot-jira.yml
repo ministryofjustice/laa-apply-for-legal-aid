@@ -24,5 +24,9 @@ jobs:
         with:
           project: AP
           issuetype: Maintenance
-          summary: "Dependabot PR in ${{ github.repository }}: ${{ github.event.pull_request.title }}"
-          description: ${{ github.event.pull_request.body }}
+          summary: "Apply Dependabot PR: ${{ github.event.pull_request.title }}"
+          description: |
+            Please view the PR for further information.
+            PR link: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}
+
+            In addition, please resolve other issues, if any.
