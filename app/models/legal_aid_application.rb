@@ -245,6 +245,10 @@ class LegalAidApplication < ApplicationRecord
     legal_aid_application_transaction_types.where(owner_type:).map(&:transaction_type).pluck(:id)
   end
 
+  def applicant_transaction_type_ids
+    individual_transaction_type_ids("Applicant")
+  end
+
   def income_cash_transaction_types_for(owner_type)
     TransactionType.where(id: individual_transaction_type_ids(owner_type)).not_children.credits
   end

@@ -15,7 +15,7 @@
       <div class="deselect-group govuk-!-padding-bottom-1" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
         <% TransactionType.credits.not_children.each_with_index do |transaction_type, index| %>
           <%= form.govuk_check_box(
-                :transaction_type_ids,
+                :applicant_transaction_type_ids,
                 transaction_type.id,
                 link_errors: index.zero?,
                 label: { text: t("transaction_types.names.providers.#{transaction_type.name}") },
