@@ -103,12 +103,16 @@ RSpec.describe LegalAidApplicationTransactionType do
         bank_provider = create(:bank_provider, applicant: legal_aid_application.applicant)
         bank_account = create(:bank_account, bank_provider:)
 
-        create_list(:bank_transaction, 6, bank_account:, transaction_type: credit_transaction_type)
-        create_list(:bank_transaction, 3, bank_account:, transaction_type: debit_transaction_type)
+        create_list(:bank_transaction, 6, :manually_chosen, bank_account:, transaction_type: credit_transaction_type)
+        create_list(:bank_transaction, 3, :manually_chosen, bank_account:, transaction_type: debit_transaction_type)
       end
 
       context "when destroying object instance" do
         let(:action) { instance.destroy! }
+
+        it "removes meta-data from transactions" do
+          expect { action }.to change(legal_aid_application.bank_transactions.where(meta_data: nil), :count).by(6)
+        end
 
         it "removes associated bank transaction categorisation" do
           expect { action }.to change(legal_aid_application.bank_transactions.where(transaction_type: credit_transaction_type), :count).by(-6)

@@ -4,8 +4,10 @@ Feature: Bank statement upload check your answers
     And I am logged in as a provider
     And csrf is enabled
     And an applicant named Ida Paisley with a partner has completed their true layer interactions
-    And the client has a transaction named "babysitting" categorised as "Financial help from friends or family"
-    And the partner has a how much how many payment categorised as "Maintenance payments from a former partner"
+    And the client has a credit transaction named "babysitting" categorised as friends_or_family
+    And the client has a debit transaction named "after school club" categorised as child_care
+    And the partner has a how much how often payment categorised as maintenance_in
+    And the partner has a how much how often payment categorised as maintenance_out
 
     When I visit the check income answers page
     Then the "Payments your client receives" section's questions and answers should match:
