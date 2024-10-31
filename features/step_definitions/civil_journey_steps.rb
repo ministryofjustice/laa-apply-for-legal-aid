@@ -392,7 +392,6 @@ Given("I start the means application and the applicant has uploaded transaction 
     :provider_assessing_means,
     :with_policy_disregards,
     :with_transaction_period,
-    :with_benefits_transactions,
     :with_cfe_v5_result,
     :with_proceedings,
     applicant: @applicant,
