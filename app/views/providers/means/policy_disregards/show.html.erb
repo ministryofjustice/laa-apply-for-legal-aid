@@ -14,8 +14,8 @@
           <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:england_infected_blood_support].first %></p>
       <% end %>
       <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
-        <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
-          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: true, label: { text: t(".#{checkbox}") } %>
+        <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each_with_index do |checkbox, idx| %>
+          <%= form.govuk_check_box checkbox, true, "", multiple: false, link_errors: idx.zero?, label: { text: t(".#{checkbox}") } %>
         <% end %>
       </div>
 
