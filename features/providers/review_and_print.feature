@@ -182,4 +182,24 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h2  | Your client's capital |
 
+  Scenario: For a backdated SCA journey
+    Given I have completed a backdated special children act journey
+    When I view the review and print your application page
 
+    Then the following sections should exist:
+      | tag | section |
+      | h1  | Review and print your application |
+      | h2  | Client details |
+      | h2  | What you're applying for |
+      | h2  | Income, regular payments and assets |
+      | h2  | Case details |
+      | h1  | Print your application |
+
+    And I should see 'Delegated functions'
+    And I should not see 'Email address'
+    And I should not see 'Emergency level of service'
+    And I should not see 'Emergency scope limits'
+
+    And the following sections should not exist:
+      | tag | section |
+      | h2  | Emergency cost limit |

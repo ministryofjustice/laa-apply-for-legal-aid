@@ -48,7 +48,7 @@
     <%= render("shared/check_answers/proceeding_details_section") %>
   </section>
 
-  <% if @legal_aid_application.used_delegated_functions? %>
+  <% if @legal_aid_application.non_sca_used_delegated_functions? %>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>

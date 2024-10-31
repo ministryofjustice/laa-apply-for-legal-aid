@@ -10,13 +10,15 @@
         <%= row.with_key(text: t(".delegated_functions"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") } %>
       <% end %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_level_of_service-#{index}" }) do |row| %>
-        <%= row.with_key(text: t(".emergency_level_of_service"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value { proceeding.emergency_level_of_service_name } %>
-      <% end %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_scope_limits-#{index}" }) do |row| %>
-        <%= row.with_key(text: t(".emergency_scope_limits"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value { scope_limits(proceeding, "emergency") } %>
+      <% if @legal_aid_application.non_sca_used_delegated_functions? %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_level_of_service-#{index}" }) do |row| %>
+          <%= row.with_key(text: t(".emergency_level_of_service"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { proceeding.emergency_level_of_service_name } %>
+        <% end %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_scope_limits-#{index}" }) do |row| %>
+          <%= row.with_key(text: t(".emergency_scope_limits"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { scope_limits(proceeding, "emergency") } %>
+        <% end %>
       <% end %>
     <% end %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__substantive_level_of_service-#{index}" }) do |row| %>
