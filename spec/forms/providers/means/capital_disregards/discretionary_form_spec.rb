@@ -4,9 +4,9 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryForm do
   subject(:form) { described_class.new(discretionary_capital_disregards_params.merge(model: application)) }
 
   let(:application) { create(:legal_aid_application) }
-
   let(:none_selected) { "" }
   let(:discretionary_capital_disregards) { %w[backdated_benefits national_emergencies_trust] }
+
   let(:discretionary_capital_disregards_params) do
     {
       discretionary_capital_disregards:,
@@ -19,53 +19,75 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryForm do
 
     before { call_save }
 
-    it "is valid" do
-      expect(form).to be_valid
-    end
+    context "when the form is valid" do
+      it { expect(form).to be_valid }
 
-    it "updates the capital_discretionary_disregards" do
-      expect(application.discretionary_capital_disregards.count).to eq 2
-      expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
-      expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
-    end
-
-    context "with nothing" do
-      let(:none_selected) { "true" }
-      let(:discretionary_capital_disregards) { nil }
-
-      it "is valid" do
-        expect(form).to be_valid
+      it "updates the capital_discretionary_disregards" do
+        expect(application.discretionary_capital_disregards.count).to eq 2
+        expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
+        expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
       end
 
-      it "does not create any capital discretionary disregards" do
-        expect(application.discretionary_capital_disregards.count).to eq 0
+      context "with none_selected is selected and nothing else selected" do
+        let(:none_selected) { "true" }
+        let(:discretionary_capital_disregards) { [] }
+
+        it { expect(form).to be_valid }
+
+        it "does not create any capital discretionary disregards" do
+          expect(application.discretionary_capital_disregards.count).to eq 0
+        end
       end
     end
 
     context "when the form is not valid" do
-      context "when none_selected not selected and nothing selected" do
-        let(:discretionary_capital_disregards) { nil }
+      context "without partner and nothing selected" do
+        let(:none_selected) { "" }
+        let(:discretionary_capital_disregards) { [] }
 
-        it "is invalid" do
-          expect(form).not_to be_valid
-        end
+        it { expect(form).not_to be_valid }
 
-        it "adds custom blank error message" do
+        it "adds custom blank error message for client" do
           error_messages = form.errors.messages.values.flatten
-          expect(error_messages).to include(I18n.t("activemodel.errors.models.discretionary_capital_disregards.attributes.base.none_selected"))
+          expect(error_messages).to include("Select if your client has received any of these payments")
         end
       end
 
-      context "when none_selected is true and another checkbox selected" do
-        let(:none_selected) { "true" }
+      context "with partner and nothing selected" do
+        let(:application) { create(:legal_aid_application, applicant: create(:applicant, :with_partner_with_no_contrary_interest)) }
+        let(:none_selected) { "" }
+        let(:discretionary_capital_disregards) { [] }
 
-        it "is invalidt" do
-          expect(form).not_to be_valid
-        end
+        it { expect(form).not_to be_valid }
 
-        it "adds custom blank error message" do
+        it "adds custom blank error message for client or partner" do
           error_messages = form.errors.messages.values.flatten
-          expect(error_messages).to include(I18n.t("activemodel.errors.models.discretionary_capital_disregards.attributes.base.none_and_another_option_selected"))
+          expect(error_messages).to include("Select if your client or their partner has received any of these payments")
+        end
+      end
+
+      context "without partner and none_selected plus another checkbox selected" do
+        let(:none_selected) { "true" }
+        let(:discretionary_capital_disregards) { %w[national_emergencies_trust] }
+
+        it { expect(form).not_to be_valid }
+
+        it "adds custom blank error message for client" do
+          error_messages = form.errors.messages.values.flatten
+          expect(error_messages).to include("Your client must either receive one or more of these payments or none")
+        end
+      end
+
+      context "with partner and none_selected plus another checkbox selected" do
+        let(:application) { create(:legal_aid_application, applicant: create(:applicant, :with_partner_with_no_contrary_interest)) }
+        let(:none_selected) { "true" }
+        let(:discretionary_capital_disregards) { %w[national_emergencies_trust] }
+
+        it { expect(form).not_to be_valid }
+
+        it "adds custom blank error message for client or partner" do
+          error_messages = form.errors.messages.values.flatten
+          expect(error_messages).to include("Your client or their partner must either receive one or more of these payments or none")
         end
       end
     end
@@ -76,35 +98,31 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryForm do
 
     before { call_save_as_draft }
 
-    it "is valid" do
-      expect(form).to be_valid
-    end
+    context "when the form is valid" do
+      it { expect(form).to be_valid }
 
-    it "updates the capital_discretionary_disregards" do
-      expect(application.discretionary_capital_disregards.count).to eq 2
-      expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
-      expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
-    end
-
-    context "with nothing" do
-      let(:none_selected) { "true" }
-      let(:discretionary_capital_disregards) { nil }
-
-      it "is valid" do
-        expect(form).to be_valid
+      it "updates the capital_discretionary_disregards" do
+        expect(application.discretionary_capital_disregards.count).to eq 2
+        expect(application.discretionary_capital_disregards.pluck(:mandatory)).to contain_exactly(false, false)
+        expect(application.discretionary_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits national_emergencies_trust])
       end
 
-      it "does not create any capital discretionary disregards" do
-        expect(application.discretionary_capital_disregards.count).to eq 0
+      context "with none_selected is selected and nothing else selected" do
+        let(:none_selected) { "true" }
+        let(:discretionary_capital_disregards) { [] }
+
+        it { expect(form).to be_valid }
+
+        it "does not create any capital discretionary disregards" do
+          expect(application.discretionary_capital_disregards.count).to eq 0
+        end
       end
     end
 
     context "when none_selected not selected and nothing selected" do
-      let(:discretionary_capital_disregards) { nil }
+      let(:discretionary_capital_disregards) { [] }
 
-      it "is valid" do
-        expect(form).to be_valid
-      end
+      it { expect(form).to be_valid }
 
       it "updates the capital_discretionary_disregards" do
         expect(application.discretionary_capital_disregards.count).to eq 0
@@ -114,9 +132,7 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryForm do
     context "when none_selected is true and another checkbox selected" do
       let(:none_selected) { "true" }
 
-      it "is valid" do
-        expect(form).to be_valid
-      end
+      it { expect(form).to be_valid }
 
       it "updates the capital_discretionary_disregards" do
         expect(application.discretionary_capital_disregards.count).to eq 2

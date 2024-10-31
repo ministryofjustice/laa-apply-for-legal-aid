@@ -1,0 +1,95 @@
+Feature: Discretionary capital disregards question and flow
+# TODO: This flow file can be moved to a full flow non-passported journey feature after the MTR-A feature flag is removed
+
+  @javascript
+  Scenario: When the MTR-A feature flag is off I should not see the discretionary capital disregard question in the flow
+    Given the feature flag for means_test_review_a is disabled
+    And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
+    Then I should be on the "check_income_answers" page showing "Check your answers"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "What you need to do"
+
+    When I click "Continue"
+    Then I should be on a page with title "Does your client own the home that they live in?"
+    And I choose 'No'
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Does your client own a vehicle?"
+    And I choose 'No'
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which bank accounts does your client have?"
+    And I select "None of these"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which savings or investments does your client have?"
+    And I select "None of these savings or investments"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which assets does your client have?"
+    And I select "None of these assets"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which schemes or trusts have paid your client?"
+    And I select "None of these schemes or trusts"
+
+    When I click "Save and continue"
+    Then I should be on the "check_capital_answers" page showing "Check your answers"
+
+  @javascript
+  Scenario: When the MTR-A feature flag is on I should see the discretionary capital disregard question in the flow
+    Given the feature flag for means_test_review_a is enabled
+    And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
+    Then I should be on the "check_income_answers" page showing "Check your answers"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "What you need to do"
+
+    When I click "Continue"
+    Then I should be on a page with title "Does your client own the home they usually live in?"
+    And I choose 'No'
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Does your client own a vehicle?"
+    And I choose 'No'
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which bank accounts does your client have?"
+    And I select "None of these"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which savings or investments does your client have?"
+    And I select "None of these savings or investments"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which assets does your client have?"
+    And I select "None of these assets"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Which schemes or trusts have paid your client?"
+    And I select "None of these schemes or trusts"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Payments to be reviewed"
+    And I should see "Select if your client has received any of these payments"
+    And the following sections should exist:
+      | tag | section |
+      | .govuk-checkboxes__label  | Backdated benefits and child maintenance payments received more than 24 months ago |
+      | .govuk-checkboxes__label  | Compensation, damages or ex-gratia payments for personal harm |
+      | .govuk-checkboxes__label  | Criminal Injuries Compensation Scheme payment |
+      | .govuk-checkboxes__label  | Grenfell Tower fire victims payment |
+      | .govuk-checkboxes__label  | London Emergencies Trust payment |
+      | .govuk-checkboxes__label  | National Emergencies Trust (NET) payment |
+      | .govuk-checkboxes__label  | Payments covering loss or harm related to proceedings in this application |
+      | .govuk-checkboxes__label  | Victims of Overseas Terrorism Compensation Scheme (VOTCS) 2012 payment |
+      | .govuk-checkboxes__label  | We Love Manchester Emergency Fund payment |
+    And I select "London Emergencies Trust payment"
+
+    When I click "Save and continue"
+    Then I should be on the "check_capital_answers" page showing "Check your answers"
+
+    When I click link "Back"
+    Then I should be on a page with title "Payments to be reviewed"
+    And the checkbox for Grenfell Tower fire victims payment should be unchecked
+    And the checkbox for London Emergencies Trust payment should be checked
