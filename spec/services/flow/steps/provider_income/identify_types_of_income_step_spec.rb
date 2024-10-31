@@ -34,16 +34,10 @@ RSpec.describe Flow::Steps::ProviderIncome::IdentifyTypesOfIncomeStep, type: :re
       it { is_expected.to eq :cash_incomes }
     end
 
-    context "when application has attached bank statement(s)" do
-      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
+    context "when application has no income types" do
+      before { allow(legal_aid_application).to receive(:income_types?).and_return(false) }
 
       it { is_expected.to eq :check_income_answers }
-    end
-
-    context "when application does not have attached bank statement(s)" do
-      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
-
-      it { is_expected.to eq :income_summary }
     end
   end
 end

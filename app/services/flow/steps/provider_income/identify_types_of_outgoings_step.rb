@@ -15,9 +15,7 @@ module Flow
           end
         end,
         check_answers: lambda do |application|
-          return :cash_outgoings if application.outgoing_types?
-
-          application.uploading_bank_statements? ? :check_income_answers : :outgoings_summary
+          application.outgoing_types? ? :cash_outgoings : :check_income_answers
         end,
       )
     end

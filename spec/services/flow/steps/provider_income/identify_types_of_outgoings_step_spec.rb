@@ -55,16 +55,10 @@ RSpec.describe Flow::Steps::ProviderIncome::IdentifyTypesOfOutgoingsStep, type: 
       it { is_expected.to eq :cash_outgoings }
     end
 
-    context "when application has attached bank statement(s)" do
-      before { allow(application).to receive(:uploading_bank_statements?).and_return(true) }
+    context "when application has no outgoing types" do
+      before { allow(application).to receive(:outgoing_types?).and_return(false) }
 
       it { is_expected.to eq :check_income_answers }
-    end
-
-    context "when application does not have attached bank statement(s)" do
-      before { allow(application).to receive(:uploading_bank_statements?).and_return(false) }
-
-      it { is_expected.to eq :outgoings_summary }
     end
   end
 end

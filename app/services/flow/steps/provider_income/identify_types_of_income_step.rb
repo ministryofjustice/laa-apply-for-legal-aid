@@ -7,9 +7,7 @@ module Flow
           application.income_types? ? :cash_incomes : :student_finances
         end,
         check_answers: lambda do |application|
-          return :cash_incomes if application.income_types?
-
-          application.uploading_bank_statements? ? :check_income_answers : :income_summary
+          application.income_types? ? :cash_incomes : :check_income_answers
         end,
       )
     end

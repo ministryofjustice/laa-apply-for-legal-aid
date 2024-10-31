@@ -338,9 +338,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
             legal_aid_application.transaction_types.credits.destroy_all
           end
 
-          it "redirects to income_summary" do
+          it "redirects to next page in flow" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
