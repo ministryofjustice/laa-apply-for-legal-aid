@@ -71,7 +71,7 @@
   <% if :means_test.in?(attributes) %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__means_test" }) do |row| %>
       <%= row.with_key(text: t(".means_tested"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: yes_no(!@legal_aid_application.non_means_tested?)) %>
+      <%= row.with_value(text: means_tested_description(@legal_aid_application)) %>
     <% end %>
   <% end %>
 
