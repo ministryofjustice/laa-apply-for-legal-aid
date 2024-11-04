@@ -99,6 +99,19 @@ RSpec.describe Providers::Means::ReceivesStateBenefitsController do
           end
         end
       end
+
+      context "when form submitted with Save as draft button" do
+        let(:params) do
+          {
+            applicant: { receives_state_benefits: "true" },
+            draft_button: "Save and come back later",
+          }
+        end
+
+        it "redirects to the list of applications" do
+          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+        end
+      end
     end
   end
 end
