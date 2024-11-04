@@ -53,6 +53,10 @@ RSpec.describe Providers::Means::CapitalDisregards::MandatoryController do
         expect(legal_aid_application.mandatory_capital_disregards.pluck(:mandatory)).to contain_exactly(true, true)
         expect(legal_aid_application.mandatory_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits government_cost_of_living])
       end
+
+      it "redirects to the next page" do
+        expect(response).to redirect_to providers_legal_aid_application_means_capital_disregards_discretionary_path(legal_aid_application)
+      end
     end
 
     context "when checking passported answers" do
