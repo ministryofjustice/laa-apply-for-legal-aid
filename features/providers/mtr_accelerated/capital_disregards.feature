@@ -67,8 +67,26 @@ Feature: Discretionary capital disregards question and flow
     And I select "None of these assets"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Which schemes or trusts have paid your client?"
-    And I select "None of these schemes or trusts"
+    Then I should be on a page with title "Disregarded payments"
+    And I should see "Select if your client has received any of these payments"
+    And the following sections should exist:
+      | tag | section |
+      | .govuk-checkboxes__label  | Backdated benefits and child maintenance payments received in the last 24 months |
+      | .govuk-checkboxes__label  | Backdated Community Care payments |
+      | .govuk-checkboxes__label  | Budgeting Advances |
+      | .govuk-checkboxes__label  | Compensation for miscarriage of justice|
+      | .govuk-checkboxes__label  | Government cost of living payment |
+      | .govuk-checkboxes__label  | Independent Living Fund payment |
+      | .govuk-checkboxes__label  | Infected Blood Support Scheme payment |
+      | .govuk-checkboxes__label  | Modern Slavery Victim Care Contract (MSVCC) payment |
+      | .govuk-checkboxes__label  | Payments on Account of Benefit |
+      | .govuk-checkboxes__label  | Scotland and Northern Ireland Redress Schemes for historical child abuse payment |
+      | .govuk-checkboxes__label  | Social Fund payment |
+      | .govuk-checkboxes__label  | Vaccine Damage Payment |
+      | .govuk-checkboxes__label  | Variant Creutzfeldt-Jakob disease (vCJD) Trust payment |
+      | .govuk-checkboxes__label  | Welsh Independent Living Grant |
+      | .govuk-checkboxes__label  | Windrush Compensation Scheme payment |
+    And I select "Infected Blood Support Scheme payment"
 
     When I click "Save and continue"
     Then I should be on a page with title "Payments to be reviewed"
@@ -93,3 +111,8 @@ Feature: Discretionary capital disregards question and flow
     Then I should be on a page with title "Payments to be reviewed"
     And the checkbox for Grenfell Tower fire victims payment should be unchecked
     And the checkbox for London Emergencies Trust payment should be checked
+
+    When I click link "Back"
+    Then I should be on a page with title "Disregarded payments"
+    And the checkbox for Government cost of living payment should be unchecked
+    And the checkbox for Infected Blood Support Scheme payment should be checked
