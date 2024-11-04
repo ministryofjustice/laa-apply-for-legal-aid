@@ -34,6 +34,13 @@ Feature: Bank statement upload check your answers
     And the checkbox for Maintenance payments from a former partner should be unchecked
 
   @javascript
+  Scenario: Viewing client outgoings
+    When I click Check Your Answers Change link for "payments your client makes"
+    Then I should be on a page with title "Which of these payments does your client pay?"
+    And the checkbox for Childcare payments should be checked
+    And the checkbox for Maintenance payments to a former partner should be unchecked
+
+  @javascript
   Scenario: Viewing partner payments
     When I click Check Your Answers Change link for "payments the partner receives"
     Then I should be on the "regular_incomes" page showing "Which of these payments does the partner get?"
