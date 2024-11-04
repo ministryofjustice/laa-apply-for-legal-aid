@@ -65,6 +65,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :associated_applications, class_name: "LegalAidApplication", through: :associated_linked_applications
   has_many :capital_disregards, dependent: :destroy
   has_many :discretionary_capital_disregards, -> { where(mandatory: "false") }, class_name: "CapitalDisregard"
+  has_many :mandatory_capital_disregards, -> { where(mandatory: "true") }, class_name: "CapitalDisregard"
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
