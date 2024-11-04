@@ -46,6 +46,12 @@
     border-left: $govuk-border-width-wide solid govuk-colour("white");
     color: govuk-colour("white");
   }
+
+  .govuk-list--bullet{
+    a:visited{
+      color: govuk-colour("white");
+    }
+  }
 }
 
 @media (min-width: 769px) {
