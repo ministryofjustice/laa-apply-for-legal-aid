@@ -48,13 +48,13 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     let(:params) do
       {
         legal_aid_application: {
-          transaction_type_ids:,
+          applicant_transaction_type_ids:,
         },
       }
     end
 
     context "when no transaction types selected" do
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
 
       it "does not add transaction types to the application" do
         expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
@@ -74,7 +74,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when transaction types selected" do
-      let(:transaction_type_ids) { outgoing_types.map(&:id) }
+      let(:applicant_transaction_type_ids) { outgoing_types.map(&:id) }
 
       it "adds transaction types to the application" do
         expect { request }.to change(LegalAidApplicationTransactionType, :count).by(outgoing_types.length)
@@ -109,7 +109,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when application has transaction types of other kind" do
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
       let(:other_transaction_type) { create(:transaction_type, :credit) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [other_transaction_type]) }
 
@@ -123,7 +123,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when no option has been chosen" do
-      let(:params) { { legal_aid_application: { transaction_type_ids: [] } } }
+      let(:params) { { legal_aid_application: { applicant_transaction_type_ids: [] } } }
 
       it "displays an error" do
         request
@@ -255,7 +255,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         {
           legal_aid_application: {
             none_selected: "true",
-            transaction_type_ids: outgoing_types.map(&:id),
+            applicant_transaction_type_ids: outgoing_types.map(&:id),
           },
         }
       end
@@ -275,7 +275,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when the wrong transaction type is passed in" do
-      let(:transaction_type_ids) { income_types.map(&:id) }
+      let(:applicant_transaction_type_ids) { income_types.map(&:id) }
 
       it "does not add the transaction types" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
@@ -310,7 +310,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         end
 
         context "with debit transaction type" do
-          let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :debit).id] } } }
+          let(:params) { { legal_aid_application: { applicant_transaction_type_ids: [create(:transaction_type, :debit).id] } } }
 
           it "redirects to the next step" do
             request
@@ -337,7 +337,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         end
 
         context "with debit transaction types" do
-          let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :debit).id] } } }
+          let(:params) { { legal_aid_application: { applicant_transaction_type_ids: [create(:transaction_type, :debit).id] } } }
 
           it "redirects to the next step" do
             request
@@ -349,7 +349,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
 
       before { request }
 
@@ -357,7 +357,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when form submitted with Save as draft button" do
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects to the list of applications" do
