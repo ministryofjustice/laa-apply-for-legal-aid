@@ -13,7 +13,11 @@ module Flow
           end
         end,
         check_answers: lambda do |application|
-          application.housing_payments_for?("Applicant") ? :housing_benefits : :check_income_answers
+          if application.housing_payments_for?("Applicant") || application.housing_payments_for?("Partner")
+            :housing_benefits
+          else
+            :check_income_answers
+          end
         end,
       )
     end

@@ -5,7 +5,7 @@ class LegalAidApplicationTransactionType < ApplicationRecord
   scope :credits, -> { includes(:transaction_type).where(transaction_types: { operation: :credit }) }
   scope :debits, -> { includes(:transaction_type).where(transaction_types: { operation: :debit }) }
 
-  after_commit :cascade_delete_cash_transactions, on: :destroy
+  after_commit :cascade_delete_cash_transactions, :cascade_update_bank_transactions, on: :destroy
 
 private
 
@@ -14,5 +14,12 @@ private
       .cash_transactions
       .where(transaction_type_id:)
       .destroy_all
+  end
+
+  def cascade_update_bank_transactions
+    legal_aid_application
+      .bank_transactions
+      .where(transaction_type_id:)
+      .update!(transaction_type_id: nil)
   end
 end

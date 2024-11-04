@@ -608,8 +608,8 @@ class LegalAidApplication < ApplicationRecord
     attachments&.part_bank_state_evidence&.exists?
   end
 
-  def has_transaction_type?(transaction_type)
-    legal_aid_application_transaction_types.map(&:transaction_type_id).include?(transaction_type.id)
+  def has_transaction_type?(transaction_type, owner_type)
+    legal_aid_application_transaction_types.where(owner_type:).map(&:transaction_type_id).include?(transaction_type.id)
   end
 
   def housing_payments?

@@ -1,24 +1,31 @@
 require "rails_helper"
 
 RSpec.describe Providers::OutgoingsSummaryController do
-  let(:transaction_type) { create(:transaction_type, :debit_with_standard_name) }
-  let(:other_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
+  include Capybara
+
+  let(:maintenance_out) { create(:transaction_type, :maintenance_out) }
+  let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+
   let(:legal_aid_application) do
+    application = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine)
+
     create(
-      :legal_aid_application,
-      :with_applicant,
-      :with_transaction_period,
-      :with_non_passported_state_machine,
-      transaction_types: [transaction_type],
+      :legal_aid_application_transaction_type,
+      legal_aid_application: application,
+      transaction_type: maintenance_out,
+      owner_type: "Applicant",
+      owner_id: application.applicant.id,
     )
+
+    application
   end
+
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
 
   before do
-    create(:transaction_type, :debit, name: "legal_aid")
     TransactionType.delete_all
-    other_transaction_type
+    rent_or_mortgage
     login
   end
 
@@ -38,76 +45,112 @@ RSpec.describe Providers::OutgoingsSummaryController do
       expect(response).to have_http_status(:ok)
     end
 
-    it "displays a section for all transaction types linked to this application" do
+    it "displays a section for all debit transaction types linked to this application" do
       get_request
-      name = transaction_type.name
-      legend = I18n.t("transaction_types.names.providers.#{name}")
-      expect(parsed_response_body.css("ol li##{name}").text).to match(/#{legend}/)
+
+      expect(page).to have_css("ol li#maintenance_out h2", text: /maintenance/i)
     end
 
     it "does not display a section for transaction types not linked to this application" do
       get_request
-      expect(parsed_response_body.css("ol li h2#outgoing-type-#{other_transaction_type.name}").size).to be_zero
+
+      expect(page).to have_no_css("ol li", text: /housing/i)
     end
 
-    context "without all transaction types selected" do
+    context "when not all transaction types selected" do
       it "displays an Add additional outgoings types section" do
         get_request
-        expect(response.body).to include("Add another type of regular payment")
+
+        expect(page).to have_link("Add another type of regular payment")
       end
     end
 
     context "with all transaction types selected" do
-      let(:legal_aid_application) do
+      before do
         create(
-          :legal_aid_application,
-          :with_applicant,
-          :with_non_passported_state_machine,
-          transaction_types: [transaction_type, other_transaction_type],
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: rent_or_mortgage,
+          owner_type: "Applicant",
+          owner_id: legal_aid_application.applicant.id,
         )
       end
 
       it "does not display an Add additional outgoing types section" do
-        get providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application)
-        expect(response.body).not_to include("Add another type of regular payment")
+        get_request
+
+        expect(page).to have_no_link("Add another type of income")
       end
     end
 
     context "with assigned (by type) transactions" do
-      let(:applicant) { create(:applicant) }
-      let(:bank_provider) { create(:bank_provider, applicant:) }
-      let(:bank_account) { create(:bank_account, bank_provider:) }
-      let(:transaction_type) { create(:transaction_type, :debit) }
-      let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
+      let(:legal_aid_application) do
+        application = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine)
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
 
-      it "displays bank transaction" do
+        create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application: application,
+          transaction_type: maintenance_out,
+          owner_type: "Applicant",
+          owner_id: application.applicant.id,
+        )
+
+        create(:bank_transaction, :debit,
+               transaction_type: maintenance_out,
+               bank_account:,
+               description: "Money to partner")
+
+        application
+      end
+
+      it "displays bank transactions that have been categorised" do
         get_request
-        expect(legal_aid_application.bank_transactions).to include(bank_transaction)
-        expect(response.body).to include(bank_transaction.description)
+
+        within("li#maintenance_out") do
+          expect(page).to have_content("Money to partner")
+        end
       end
 
       it "displays a link to add more transaction of this type" do
         get_request
-        path = providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: transaction_type.name)
-        expect(response.body).to include(path)
+        path = providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: maintenance_out.name)
+
+        within("li#maintenance_out") do
+          expect(page).to have_link("View statements and add transactions", href: path)
+        end
       end
     end
   end
 
   describe "POST /providers/outgoings_summary" do
-    let(:applicant) { create(:applicant) }
-    let(:bank_provider) { create(:bank_provider, applicant:) }
-    let(:bank_account) { create(:bank_account, bank_provider:) }
-    let(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
-    let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
+    subject(:post_request) { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
+
+    let(:legal_aid_application) do
+      application = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine)
+      bank_provider = create(:bank_provider, applicant: application.applicant)
+      bank_account = create(:bank_account, bank_provider:)
+
+      create(
+        :legal_aid_application_transaction_type,
+        legal_aid_application: application,
+        transaction_type: maintenance_out,
+        owner_type: "Applicant",
+        owner_id: application.applicant.id,
+      )
+
+      create(:bank_transaction, :debit,
+             transaction_type: maintenance_out,
+             bank_account:,
+             description: "Money to partner")
+
+      application
+    end
 
     let(:submit_button) { { continue_button: "Continue" } }
 
-    before do
-      bank_transaction
-      post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button
-    end
+    before { post_request }
 
     it "redirects to the next page" do
       expect(response).to have_http_status(:redirect)
@@ -128,7 +171,13 @@ RSpec.describe Providers::OutgoingsSummaryController do
     end
 
     context "when the transaction type category has no bank transactions" do
-      let(:bank_transaction) { create(:bank_transaction, :debit, transaction_type: nil, bank_account:) }
+      subject(:post_request) { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
+
+      let(:applicant) { create(:applicant) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [rent_or_mortgage]) }
+      let(:submit_button) { { continue_button: "Continue" } }
+
+      before { post_request }
 
       it "renders successfully" do
         expect(response).to have_http_status(:ok)

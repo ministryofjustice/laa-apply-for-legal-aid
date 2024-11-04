@@ -301,6 +301,27 @@ Given("I start the means application with bank transactions with no transaction 
   )
 end
 
+Given("I start the means application with bank transactions and have a partner with no contrary interest") do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant_and_partner_with_no_contrary_interest,
+    :with_proceedings,
+    :with_non_passported_state_machine,
+    :provider_assessing_means,
+    :with_transaction_period,
+    :with_uncategorised_credit_transactions,
+    :with_uncategorised_debit_transactions,
+  )
+
+  create :legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application,
+  )
+end
+
 Given("I start the merits application with student finance") do
   @legal_aid_application = create(
     :application,

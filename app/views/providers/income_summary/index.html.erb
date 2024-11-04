@@ -1,7 +1,7 @@
 <%= render(
       "shared/transactions_summary",
-      transaction_types: @legal_aid_application.transaction_types.credits,
-      total_transaction_types: TransactionType.credits,
+      transaction_types: @transaction_types,
+      total_transaction_types: @total_transaction_types,
       type: "income",
       list_path: "income_summary",
       add_another_url: providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application),

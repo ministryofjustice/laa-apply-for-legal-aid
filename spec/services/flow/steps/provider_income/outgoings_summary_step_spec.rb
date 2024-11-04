@@ -41,16 +41,29 @@ RSpec.describe Flow::Steps::ProviderIncome::OutgoingsSummaryStep, type: :request
 
       before do
         allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(true)
+        allow(application).to receive(:housing_payments_for?).with("Partner").and_return(false)
       end
 
       it { is_expected.to eq :housing_benefits }
     end
 
-    context "when there are no housing payments for applicant" do
+    context "when there are housing payments for partner" do
       let(:applicant) { create(:applicant, has_partner: false) }
 
       before do
         allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(false)
+        allow(application).to receive(:housing_payments_for?).with("Partner").and_return(true)
+      end
+
+      it { is_expected.to eq :housing_benefits }
+    end
+
+    context "when there are no housing payments for applicant or partner" do
+      let(:applicant) { create(:applicant, has_partner: false) }
+
+      before do
+        allow(application).to receive(:housing_payments_for?).with("Applicant").and_return(false)
+        allow(application).to receive(:housing_payments_for?).with("Partner").and_return(false)
       end
 
       it { is_expected.to eq :check_income_answers }
