@@ -5,6 +5,12 @@ module Providers
         type
       end
 
+      def destroy
+        legal_aid_application.proceedings.order(:created_at).last.destroy!
+        replace_last_page_in_history(submitted_providers_legal_aid_applications_path)
+        redirect_to providers_legal_aid_application_proceedings_types_path
+      end
+
     private
 
       def type

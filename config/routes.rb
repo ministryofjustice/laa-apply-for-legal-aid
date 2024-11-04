@@ -283,6 +283,7 @@ Rails.application.routes.draw do
 
       scope module: :proceedings_sca do
         get "/interrupt/:type", to: "interrupts#show", as: "sca_interrupt"
+        delete "/interrupt/:type", to: "interrupts#destroy"
         resource :proceeding_issue_statuses, only: %i[show update], path: "proceeding_issue_status"
         resources :heard_togethers, only: %i[show update], path: "will_proceedings_be_heard_together"
         resource :supervision_orders, only: %i[show update], path: "supervision_order_changes"
