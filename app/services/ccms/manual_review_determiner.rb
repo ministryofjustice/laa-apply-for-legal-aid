@@ -15,6 +15,7 @@ module CCMS
              :non_passported?,
              :has_restrictions?,
              :policy_disregards?,
+             :capital_disregards?,
              :manually_entered_employment_information?,
              :manual_client_employment_information?,
              :manual_partner_employment_information?,
@@ -37,6 +38,7 @@ module CCMS
         capital_contribution_required? ||
         has_restrictions? ||
         policy_disregards? ||
+        capital_disregards? ||
         manually_entered_employment_information? ||
         uploading_bank_statements?
     end
@@ -64,6 +66,7 @@ module CCMS
       application_review_reasons << :dwp_override if dwp_overridden?
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
+      application_review_reasons << :capital_disregards if capital_disregards?
       application_review_reasons << :non_passported if non_passported?
       application_review_reasons << :client_further_employment_details if manual_client_employment_information?
       application_review_reasons << :partner_further_employment_details if manual_partner_employment_information?

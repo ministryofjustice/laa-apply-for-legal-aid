@@ -182,6 +182,23 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#capital_disregards?" do
+    context "with no capital disregard record" do
+      it "returns false" do
+        expect(legal_aid_application.capital_disregards).to be_empty
+        expect(legal_aid_application.capital_disregards?).to be false
+      end
+    end
+
+    context "with capital_disregards record" do
+      before { create(:capital_disregard, legal_aid_application:) }
+
+      it "returns true" do
+        expect(legal_aid_application.capital_disregards?).to be true
+      end
+    end
+  end
+
   describe "#add_benefit_check_result" do
     let(:benefit_check_response) do
       {

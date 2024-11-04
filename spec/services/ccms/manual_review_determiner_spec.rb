@@ -200,7 +200,7 @@ module CCMS
         context "with policy_disregards" do
           before do
             allow(legal_aid_application).to receive(:policy_disregards?).and_return(true)
-            create(:cfe_v4_result, submission: cfe_submission)
+            create(:cfe_v6_result, submission: cfe_submission)
           end
 
           it "returns true" do
@@ -211,7 +211,29 @@ module CCMS
         context "without policy_disregards" do
           before do
             allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-            create(:cfe_v4_result, submission: cfe_submission)
+            create(:cfe_v6_result, submission: cfe_submission)
+          end
+
+          it "returns false" do
+            expect(manual_review_required).to be false
+          end
+        end
+
+        context "with capital_disregards" do
+          before do
+            allow(legal_aid_application).to receive(:capital_disregards?).and_return(true)
+            create(:cfe_v6_result, submission: cfe_submission)
+          end
+
+          it "returns true" do
+            expect(manual_review_required).to be true
+          end
+        end
+
+        context "without capital_disregards" do
+          before do
+            allow(legal_aid_application).to receive(:capital_disregards?).and_return(false)
+            create(:cfe_v6_result, submission: cfe_submission)
           end
 
           it "returns false" do
@@ -222,7 +244,7 @@ module CCMS
         context "with client further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant_and_extra_info) }
 
-          before { create(:cfe_v4_result, submission: cfe_submission) }
+          before { create(:cfe_v6_result, submission: cfe_submission) }
 
           it "returns true" do
             expect(manual_review_required).to be true
@@ -232,7 +254,7 @@ module CCMS
         context "with partner further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_partner_and_extra_info) }
 
-          before { create(:cfe_v4_result, submission: cfe_submission) }
+          before { create(:cfe_v6_result, submission: cfe_submission) }
 
           it "returns true" do
             expect(manual_review_required).to be true
@@ -242,7 +264,7 @@ module CCMS
         context "without further employment information" do
           let(:legal_aid_application) { create(:legal_aid_application, :with_employed_applicant) }
 
-          before { create(:cfe_v4_result, submission: cfe_submission) }
+          before { create(:cfe_v6_result, submission: cfe_submission) }
 
           it "returns false" do
             expect(manual_review_required).to be false
@@ -365,6 +387,46 @@ module CCMS
 
           it "adds ineligible to the review reasons" do
             expect(review_reasons_result).to include(:ineligible)
+          end
+        end
+
+        context "with policy_disregards" do
+          before do
+            create(:policy_disregards, legal_aid_application:, vaccine_damage_payments: true)
+          end
+
+          it "adds capital_disregards to the review reasons" do
+            expect(review_reasons_result).to include(:policy_disregards)
+          end
+        end
+
+        context "without policy_disregards" do
+          before do
+            create(:policy_disregards, legal_aid_application:)
+          end
+
+          it "does not add policy_disregards to the review reasons" do
+            expect(review_reasons_result).not_to include(:policy_disregards)
+          end
+        end
+
+        context "with capital_disregards" do
+          before do
+            create(:capital_disregard, legal_aid_application:)
+          end
+
+          it "adds capital_disregards to the review reasons" do
+            expect(review_reasons_result).to include(:capital_disregards)
+          end
+        end
+
+        context "without capital_disregards" do
+          before do
+            legal_aid_application.capital_disregards.destroy_all
+          end
+
+          it "does not add capital_disregards to the review reasons" do
+            expect(review_reasons_result).not_to include(:capital_disregards)
           end
         end
       end

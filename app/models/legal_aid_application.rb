@@ -561,6 +561,10 @@ class LegalAidApplication < ApplicationRecord
     policy_disregards&.any? ? true : false
   end
 
+  def capital_disregards?
+    capital_disregards&.any? ? true : false
+  end
+
   def transactions_total_by_type(transaction_type, category_id)
     __send__(:"#{transaction_type}_transactions").amounts.fetch(category_id, 0)
   end

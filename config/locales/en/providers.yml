@@ -1450,6 +1450,7 @@ en:
           unknown_frequency: Frequency unknown
           residual_balance: Capital Contribution - Residual Balance Check
           policy_disregards: Discretionary disregards selected
+          capital_disregards: Capital disregards declared
           multi_benefit: Multiple benefits in single bank transaction
           dwp_override: Provider disagrees with DWP result
           restrictions: Restrictions on client's assets
