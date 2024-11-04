@@ -49,7 +49,11 @@ class DateFieldBuilder
 
   # An array of the data stored in the form's date part fields
   def from_form
-    @from_form ||= fields.map { |field| form.__send__(field) }
+    @from_form ||= fields.map do |field|
+      result = form.__send__(field)
+      result.strip! if result.is_a?(String)
+      result
+    end
   end
 
   def parts_hash
