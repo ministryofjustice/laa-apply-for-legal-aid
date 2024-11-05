@@ -51,6 +51,19 @@ RSpec.describe ManualReviewDetailer do
       end
     end
 
+    context "when there are restrictions, without policy disregards, with capital disregards and with extra employment information" do
+      before do
+        allow(legal_aid_application).to receive_messages(has_restrictions?: true, policy_disregards?: false, capital_disregards?: true)
+        allow(applicant).to receive(:extra_employment_information?).and_return(true)
+      end
+
+      it "returns an array with three entries" do
+        expect(described_class.call(legal_aid_application)).to eq [I18n.t("shared.assessment_results.manual_check_required.restrictions"),
+                                                                   I18n.t("shared.assessment_results.manual_check_required.policy_disregards"),
+                                                                   I18n.t("shared.assessment_results.manual_check_required.extra_employment_information")]
+      end
+    end
+
     context "when there are restrictions, with policy disregards and with full employment details manually entered by the provider" do
       before do
         allow(legal_aid_application).to receive_messages(has_restrictions?: true, policy_disregards?: true, full_employment_details: "test details")
