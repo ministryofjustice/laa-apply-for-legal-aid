@@ -9,12 +9,8 @@ module Providers
 
       def update
         @form = ReceivesStateBenefitsForm.new(form_params)
-        if @form.save
-          remove_state_benefits unless partner.receives_state_benefits?
-          go_forward(partner.receives_state_benefits?)
-        else
-          render :show
-        end
+        remove_state_benefits unless @form.receives_state_benefits?
+        render :show unless save_continue_or_draft(@form, receives_state_benefits: @form.receives_state_benefits?)
       end
 
     private
