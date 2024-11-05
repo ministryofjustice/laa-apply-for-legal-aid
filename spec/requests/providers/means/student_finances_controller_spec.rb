@@ -158,5 +158,20 @@ RSpec.describe Providers::Means::StudentFinancesController do
 
       it_behaves_like "an authenticated provider from a different firm"
     end
+
+    context "when form submitted with Save as draft button" do
+      let(:params) do
+        {
+          applicant: { student_finance:, student_finance_amount: },
+          draft_button: "Save and come back later",
+        }
+      end
+
+      it "redirects to the list of applications" do
+        login_as provider
+        request
+        expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+      end
+    end
   end
 end

@@ -8,13 +8,8 @@ module Providers
 
       def update
         @form = ::Applicants::StudentFinanceForm.new(student_finance_params)
-
-        if @form.save
-          remove_student_finance_amount unless student_finance?
-          go_forward unless save_continue_or_draft(@form)
-        else
-          render :show
-        end
+        remove_student_finance_amount unless @form.student_finance?
+        render :show unless save_continue_or_draft(@form)
       end
 
     private
