@@ -7,9 +7,17 @@ class ResultsPanelSelector
     @legal_aid_application = legal_aid_application
   end
 
+  attr_reader :legal_aid_application
+
+  delegate :has_restrictions?,
+           :policy_disregards?,
+           :capital_disregards?,
+           :manually_entered_employment_information?,
+           to: :legal_aid_application
+
   def call
     return eligible_or_non_eligible if %w[eligible ineligible].include?(assessment_result)
-    return "shared/assessment_results/manual_check_required" if restrictions? || disregards? || manually_entered_employment_information?
+    return "shared/assessment_results/manual_check_required" if has_restrictions? || disregards? || manually_entered_employment_information?
 
     "shared/assessment_results/#{cfe_result}#{capital_contribution}#{income_contribution}"
   end
@@ -36,16 +44,8 @@ private
     "_income" if @legal_aid_application.cfe_result.income_contribution_required?
   end
 
-  def restrictions?
-    @legal_aid_application.has_restrictions?
-  end
-
   def disregards?
-    @legal_aid_application.policy_disregards?
-  end
-
-  def manually_entered_employment_information?
-    @legal_aid_application.manually_entered_employment_information?
+    policy_disregards? || capital_disregards?
   end
 
   def eligible_or_non_eligible
