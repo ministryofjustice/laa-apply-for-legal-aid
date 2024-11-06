@@ -501,6 +501,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_113058) do
 
   create_table "feature_flags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.string "title"
     t.text "description"
     t.boolean "active"
     t.datetime "start_at"

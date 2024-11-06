@@ -14,6 +14,7 @@ Seeder.monitor Office
 Seeder.monitor Firm
 Seeder.monitor Provider
 Seeder.monitor DocumentCategory
+Seeder.monitor FeatureFlag
 
 Dir[Rails.root.join("db/seeds/*.rb")].each do |seed|
   load seed
