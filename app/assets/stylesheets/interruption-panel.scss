@@ -48,7 +48,7 @@
   }
 
   .govuk-list--bullet{
-    a:visited{
+    a, a:visited{
       color: govuk-colour("white");
     }
   }
