@@ -1,0 +1,25 @@
+<%= page_template page_title: @feature_flag.name, back_link: :none do
+      form_with(
+        model: @feature_flag,
+        url: admin_feature_flag_path,
+        method: :patch,
+        local: true,
+      ) do |form| %>
+
+    <% if @feature_flag.start_at? %>
+      <%= form.govuk_date_field :start_at, legend: { text: @feature_flag.title, size: "m" }, hint: { text: @feature_flag.description } %>
+    <% else %>
+      <%= form.govuk_collection_radio_buttons(
+            :active,
+            yes_no_options,
+            :value,
+            :label,
+            inline: true,
+            legend: { text: @feature_flag.title },
+            hint: { text: @feature_flag.description },
+          ) %>
+    <% end %>
+
+    <%= form.govuk_submit(t("generic.submit")) %>
+  <% end %>
+<% end %>

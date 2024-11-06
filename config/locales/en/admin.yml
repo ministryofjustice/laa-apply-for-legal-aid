@@ -63,6 +63,9 @@ en:
         response: Response
         response_is_nil: Response is nil
         expand: Expand
+    feature_flags:
+      index:
+        heading_1: Feature flags
     settings:
       show:
         heading_1: Settings

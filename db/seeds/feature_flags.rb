@@ -1,7 +1,8 @@
 class FeatureFlagPopulate
   FEATURE_FLAGS = [
     # {
-    #   name: "Example on/off flag",
+    #   name: :example_on_off,
+    #   title: "Example on/off flag",
     #   description: "Example to create a standard, on/off, feature flag",
     # },
     {

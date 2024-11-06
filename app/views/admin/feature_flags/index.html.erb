@@ -1,0 +1,27 @@
+<%= page_template page_title: t(".heading_1"), column_width: :full, back_link: :none do
+      govuk_table(html_attributes: { class: "govuk-!-width-full" }) do |table|
+        table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".heading_1"))
+
+        table.with_head do |head|
+          head.with_row do |row|
+            row.with_cell(html_attributes: { class: "govuk-!-width-one-quarter" }, text: "Feature flag")
+            row.with_cell(html_attributes: { class: "govuk-!-width-one-quarter" }, text: "Description")
+            row.with_cell(text: "Current state")
+            row.with_cell(text: "Action")
+          end
+        end
+
+        table.with_body do |body|
+          @feature_flags.each do |feature_flag|
+            body.with_row do |row|
+              row.with_cell(text: feature_flag.title)
+              row.with_cell(text: feature_flag.description)
+              row.with_cell(text: feature_flag.state)
+              row.with_cell do
+                govuk_link_to("change", admin_feature_flag_path(feature_flag))
+              end
+            end
+          end
+        end
+      end
+    end %>

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       delete :destroy_all, on: :collection
     end
     resource :settings, only: %i[show update]
+    resources :feature_flags, only: %i[index show update]
     resources :ccms_queues, only: %i[index show] do
       member do
         get "reset_and_restart"
