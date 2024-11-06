@@ -100,11 +100,9 @@
 <% end %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>
-<div class="govuk-!-padding-bottom-8"></div>
+  <section class="print-no-break">
+    <h3 class="govuk-heading-m"><%= t(".bank_statement_heading") %></h3>
 
-<section class="print-no-break">
-  <h3 class="govuk-heading-m"><%= t(".bank_statement_heading") %></h3>
-  <% if @legal_aid_application.uploading_bank_statements? %>
     <% has_partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
     <%= govuk_summary_list(card: { title: t(".bank_statement_heading") }, actions: false, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
       <% if @legal_aid_application.client_uploading_bank_statements? %>
@@ -132,6 +130,5 @@
         <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</section>
+  </section>
 <% end %>
