@@ -1,7 +1,6 @@
 <h2 class="govuk-heading-m"><%= t(".#{journey_type}.heading#{individual}") %></h2>
 <%= govuk_summary_list(
       card: { title: t(".#{journey_type}.heading#{individual}") },
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "restrictions-on-clients-assets-questions" },
     ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__restrictions" }) do |row| %>

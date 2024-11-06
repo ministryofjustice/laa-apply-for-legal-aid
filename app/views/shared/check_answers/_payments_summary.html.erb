@@ -14,7 +14,6 @@
 <%= govuk_summary_list(
       card: { title: payment_type },
       actions: false,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { "data-check-your-answers-section": payment_type.parameterize },
     ) do |summary_list| %>
   <% transaction_types.each do |transaction_type| %>

@@ -1,6 +1,6 @@
 <% @legal_aid_application.proceedings.each_with_index do |proceeding, index| %>
   <h2 class="govuk-heading-m"><%= proceeding.meaning %></h2>
-  <%= govuk_summary_list(card: { title: proceeding.meaning }, actions: false, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
+  <%= govuk_summary_list(card: { title: proceeding.meaning }, actions: false) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__client_role-#{index}" }) do |row| %>
       <%= row.with_key(text: t(".client_role"), classes: "govuk-!-width-one-half") %>
       <%= row.with_value { proceeding.client_involvement_type_description } %>

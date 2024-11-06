@@ -4,7 +4,7 @@
            providers_legal_aid_application_means_has_dependants_path
          end %>
 
-<%= govuk_summary_list(card: { title: t("providers.means.check_income_answers.dependants.heading") }, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
+<%= govuk_summary_list(card: { title: t("providers.means.check_income_answers.dependants.heading") }) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__dependants" }) do |row| %>
     <%= row.with_key(text: t("shared.check_answers.dependants.has_dependants", individual:), classes: "govuk-!-width-one-half") %>
     <%= row.with_value { yes_no(@legal_aid_application.has_dependants) } %>
@@ -37,7 +37,6 @@
     <%= govuk_summary_list(
           card: { title: "Dependant #{index + 1}: #{dependant.name}" },
           actions: false,
-          classes: "govuk-!-margin-bottom-9",
           html_attributes: { id: "app-check-your-answers__dependants_#{index + 1}_items" },
         ) do |summary_list| %>
       <% dependant_hash(dependant)&.fetch(:items, [])&.each_with_index do |item, index| %>

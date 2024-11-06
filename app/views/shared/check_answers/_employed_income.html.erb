@@ -26,7 +26,6 @@
 <%= govuk_summary_list(
       card: { title: t(".#{individual}.heading") },
       actions: false,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "employment-#{individual}-notes-questions" },
     ) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__extra_employment_information" }) do |row| %>

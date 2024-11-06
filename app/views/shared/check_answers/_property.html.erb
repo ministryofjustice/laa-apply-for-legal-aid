@@ -4,7 +4,6 @@
 <%= govuk_summary_list(
       card: { title: t("shared.check_answers.assets.property.heading_own_home") },
       actions: !read_only,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "property-question" },
     ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own_home" }) do |row| %>
@@ -23,7 +22,6 @@
   <%= govuk_summary_list(
         card: { title: t("shared.check_answers.assets.property.heading_property_details#{individual}") },
         actions: !read_only,
-        classes: "govuk-!-margin-bottom-9",
         html_attributes: { id: "property-details-questions" },
       ) do |summary_list| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__property_value" }) do |row| %>

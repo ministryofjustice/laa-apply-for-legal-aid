@@ -5,7 +5,7 @@
         question: t(".opponent-heading"),
         read_only:,
       ) %>
-  <%= govuk_summary_list(card: { title: t(".opponent-heading") }, actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+  <%= govuk_summary_list(card: { title: t(".opponent-heading") }, actions: !read_only) do |summary_list| %>
     <% opponents.order(:created_at).each_with_index do |opponent, i| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_#{i + 1}" }) do |row| %>
         <%= row.with_key(text: "#{t('.opponent')} #{i + 1}", classes: "govuk-!-width-one-half") %>
@@ -14,7 +14,7 @@
     <% end %>
   <% end %>
   <% if parties_mental_capacity %>
-    <%= govuk_summary_list(card: { title: t(".mental_capacity.heading") }, actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".mental_capacity.heading") }, actions: !read_only) do |summary_list| %>
       <%= summary_list.with_row(
             html_attributes: { id: "app-check-your-answers__opponent_understands_terms_of_court_order" },
           ) do |row| %>
@@ -41,7 +41,7 @@
   <% end %>
 
   <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
-    <%= govuk_summary_list(card: { title: t(".domestic_abuse.heading") }, actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".domestic_abuse.heading") }, actions: !read_only) do |summary_list| %>
       <% unless domestic_abuse_summary.warning_letter_sent? %>
         <%= summary_list.with_row(
               html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" },
@@ -92,7 +92,7 @@
   <% end %>
 
   <% unless @legal_aid_application.special_children_act_proceedings? %>
-    <%= govuk_summary_list(card: { title: t(".statement_of_case.heading") }, actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".statement_of_case.heading") }, actions: !read_only) do |summary_list| %>
       <% if attachments_with_size(statement_of_case&.original_attachments).present? %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case_file" }) do |row| %>
           <%= row.with_key(text: t(".statement_of_case.file_names"), classes: "govuk-!-width-one-half") %>
@@ -125,7 +125,7 @@
   <% end %>
 
   <% if @legal_aid_application.allegation %>
-    <%= govuk_summary_list(card: { title: t(".allegation.heading") }, actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".allegation.heading") }, actions: !read_only) do |summary_list| %>
       <%= summary_list.with_row(
             html_attributes: { id: "app-check-your-answers__allegation_denies_all" },
           ) do |row| %>
