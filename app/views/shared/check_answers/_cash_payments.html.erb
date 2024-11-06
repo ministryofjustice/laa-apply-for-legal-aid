@@ -21,7 +21,6 @@
 <%= govuk_summary_list(
       card: { title: t(".#{type}_heading", individual_with_determiner:) },
       actions: false,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { "data-check-your-answers-section": t(".#{type}_heading", individual_with_determiner:).parameterize },
     ) do |summary_list| %>
   <% if cash_transaction_types.none? %>

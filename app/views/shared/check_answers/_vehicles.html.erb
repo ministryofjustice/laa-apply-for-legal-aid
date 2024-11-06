@@ -17,7 +17,6 @@
 <%= govuk_summary_list(
       card: { title: t(".#{journey_type}.heading") },
       actions: !read_only,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "vehicles-questions" },
     ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own-vehicle" }) do |row| %>
@@ -31,7 +30,6 @@
     <%= govuk_summary_list(
           card: { title: t(".providers.vehicle_index", sequence: index + 1) },
           actions: !read_only,
-          classes: "govuk-!-margin-bottom-9",
           html_attributes: { id: "vehicle-questions__#{index}" },
         ) do |summary_list| %>
 

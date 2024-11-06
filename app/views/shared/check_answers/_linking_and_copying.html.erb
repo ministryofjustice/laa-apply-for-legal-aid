@@ -7,7 +7,6 @@
   </div>
   <%= govuk_summary_list(card: { title: t(".section_linking.heading") },
                          actions: !read_only,
-                         classes: "govuk-!-margin-bottom-9",
                          html_attributes: { id: "app-check-your-answers__linking_items" }) do |summary_list|
         summary_list.with_row(classes: "app-check-your-answers__linking_question") do |row|
           row.with_key(text: t(".section_linking.linked"), classes: "govuk-!-width-one-half")
@@ -40,7 +39,7 @@
         <h2 class="govuk-heading-m"><%= t ".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}" %></h2>
       </div>
     </div>
-    <%= govuk_summary_list(card: { title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}") }, actions: false, classes: "govuk-!-margin-bottom-9") do |summary_list|
+    <%= govuk_summary_list(card: { title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}") }, actions: false) do |summary_list|
           all_linked_applications(@legal_aid_application).each do |application|
             summary_list.with_row do |row|
               row.with_key(text: application.applicant.full_name, classes: "govuk-!-width-one-half")
@@ -66,7 +65,6 @@
     </div>
     <%= govuk_summary_list(card: { title: t(".section_copying.heading") },
                            actions: !read_only,
-                           classes: "govuk-!-margin-bottom-9",
                            html_attributes: { id: "app-check-your-answers__copying_items" }) do |summary_list|
           summary_list.with_row(classes: "app-check-your-answers__copy_question") do |row|
             row.with_key(text: t(".section_copying.question"), classes: "govuk-!-width-one-half")

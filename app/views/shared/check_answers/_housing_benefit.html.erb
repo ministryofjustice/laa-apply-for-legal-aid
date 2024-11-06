@@ -19,7 +19,6 @@
 <%= govuk_summary_list(
       card: { title: t(".heading") },
       actions: false,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { "data-check-your-answers-section": t(".heading").parameterize },
     ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__housing_benefit_question" }) do |row| %>

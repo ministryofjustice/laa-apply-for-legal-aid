@@ -104,7 +104,7 @@
     <h3 class="govuk-heading-m"><%= t(".bank_statement_heading") %></h3>
 
     <% has_partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-    <%= govuk_summary_list(card: { title: t(".bank_statement_heading") }, actions: false, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".bank_statement_heading") }, actions: false) do |summary_list| %>
       <% if @legal_aid_application.client_uploading_bank_statements? %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_client" }) do |row| %>
           <%= row.with_key(text: has_partner ? t(".bank_statement_question_with_partner") : t(".bank_statement_question"), classes: "govuk-!-width-one-half") %>
