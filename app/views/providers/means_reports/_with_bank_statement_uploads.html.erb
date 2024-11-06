@@ -57,6 +57,7 @@
 <%= render "shared/check_answers/assets", read_only: true, individual: "" %>
 
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
+    <div class="govuk-!-padding-bottom-8"></div>
     <%= render "caseworker_review" %>
 <% end %>
 
