@@ -10,16 +10,16 @@ RSpec.describe Flow::Steps::ProviderMeansStateBenefits::ReceivesStateBenefitsSte
   end
 
   describe "#forward" do
-    subject { described_class.forward.call(application, receives_state_benefits) }
+    subject { described_class.forward.call(application, options) }
 
     context "when applicant receives state benefits" do
-      let(:receives_state_benefits) { true }
+      let(:options) { { receives_state_benefits: true } }
 
       it { is_expected.to eq :state_benefits }
     end
 
     context "when applicant does not receive state benefits" do
-      let(:receives_state_benefits) { false }
+      let(:options) { { receives_state_benefits: false } }
 
       it { is_expected.to eq :regular_incomes }
     end
