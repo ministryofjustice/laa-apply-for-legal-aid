@@ -21,10 +21,20 @@ RSpec.describe Flow::Steps::ProviderCapital::RestrictionsStep, type: :request do
   describe "#forward" do
     subject { described_class.forward.call(legal_aid_application) }
 
-    context "when capture_policy_disregards is true" do
+    context "when capture_policy_disregards is true and mtr2 accelerated measures is disabled" do
+      before { allow(Setting).to receive(:means_test_review_a?).and_return(false) }
+
       let(:capture_policy_disregards?) { true }
 
       it { is_expected.to eq :policy_disregards }
+    end
+
+    context "when capture_policy_disregards is true and mtr2 accelerated measures is enabled" do
+      before { allow(Setting).to receive(:means_test_review_a?).and_return(true) }
+
+      let(:capture_policy_disregards?) { true }
+
+      it { is_expected.to eq :capital_disregards_mandatory }
     end
 
     context "when passported is true" do
