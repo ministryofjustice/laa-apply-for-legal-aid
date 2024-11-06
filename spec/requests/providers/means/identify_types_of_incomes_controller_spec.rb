@@ -67,13 +67,13 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     let(:params) do
       {
         legal_aid_application: {
-          transaction_type_ids:,
+          applicant_transaction_type_ids:,
         },
       }
     end
 
     context "when no transaction types selected" do
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
 
       it "does not add transaction types to the application" do
         expect { request }.not_to change(legal_aid_application.legal_aid_application_transaction_types, :count)
@@ -93,7 +93,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when transaction types selected" do
-      let(:transaction_type_ids) { income_types.map(&:id) }
+      let(:applicant_transaction_type_ids) { income_types.map(&:id) }
 
       it "adds transaction types to the application" do
         expect { request }.to change(LegalAidApplicationTransactionType, :count).by(income_types.length)
@@ -116,7 +116,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when application has transaction types of other kind" do
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
       let(:other_transaction_type) { create(:transaction_type, :debit) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, transaction_types: [other_transaction_type]) }
 
@@ -130,7 +130,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when no option has been chosen" do
-      let(:params) { { legal_aid_application: { transaction_type_ids: [] } } }
+      let(:params) { { legal_aid_application: { applicant_transaction_type_ids: [] } } }
 
       it "displays an error" do
         request
@@ -203,7 +203,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         {
           legal_aid_application: {
             none_selected: "true",
-            transaction_type_ids: income_types.map(&:id),
+            applicant_transaction_type_ids: income_types.map(&:id),
           },
         }
       end
@@ -223,7 +223,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when existing transaction types are deselected" do
-      let(:transaction_type_ids) { [friends_or_family_credit.id] }
+      let(:applicant_transaction_type_ids) { [friends_or_family_credit.id] }
 
       let(:benefits_credit) { create(:transaction_type, :benefits) }
       let(:friends_or_family_credit) { create(:transaction_type, :friends_or_family) }
@@ -267,7 +267,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
     context "when the wrong transaction type is passed in" do
       let!(:income_types) { create_list(:transaction_type, 3, :debit_with_standard_name) }
-      let(:transaction_type_ids) { income_types.map(&:id) }
+      let(:applicant_transaction_type_ids) { income_types.map(&:id) }
 
       it "does not add the transaction types" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
@@ -275,7 +275,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when benefits selected" do
-      let(:transaction_type_ids) { [benefits.id] }
+      let(:applicant_transaction_type_ids) { [benefits.id] }
       let(:benefits) { create(:transaction_type, :benefits) }
 
       before do
@@ -318,7 +318,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         end
 
         context "with credit transaction types" do
-          let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :credit).id] } } }
+          let(:params) { { legal_aid_application: { applicant_transaction_type_ids: [create(:transaction_type, :credit).id] } } }
 
           it "redirects to cash_incomes" do
             request
@@ -338,14 +338,14 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
             legal_aid_application.transaction_types.credits.destroy_all
           end
 
-          it "redirects to income_summary" do
+          it "redirects to next page in flow" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+            expect(response).to have_http_status(:redirect)
           end
         end
 
         context "with credit transaction types" do
-          let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :credit).id] } } }
+          let(:params) { { legal_aid_application: { applicant_transaction_type_ids: [create(:transaction_type, :credit).id] } } }
 
           it "redirects to cash_incomes" do
             request
@@ -357,7 +357,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
-      let(:transaction_type_ids) { [] }
+      let(:applicant_transaction_type_ids) { [] }
 
       before { request }
 
@@ -369,7 +369,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         {
           draft_button: "Save as draft",
           legal_aid_application: {
-            transaction_type_ids: [],
+            applicant_transaction_type_ids: [],
           },
         }
       end

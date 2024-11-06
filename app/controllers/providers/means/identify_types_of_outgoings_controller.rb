@@ -23,8 +23,8 @@ module Providers
     private
 
       def validate
-        legal_aid_application.errors.add :transaction_type_ids, error_message_for_none_and_another_option_selected if none_selected? && transaction_types_selected?
-        legal_aid_application.errors.add :transaction_type_ids, error_message_for_none_selected if [none_selected?, transaction_types_selected?].all?(false)
+        legal_aid_application.errors.add :applicant_transaction_type_ids, error_message_for_none_and_another_option_selected if none_selected? && transaction_types_selected?
+        legal_aid_application.errors.add :applicant_transaction_type_ids, error_message_for_none_selected if [none_selected?, transaction_types_selected?].all?(false)
       end
 
       def error_message_for_none_selected
@@ -36,11 +36,11 @@ module Providers
       end
 
       def legal_aid_application_params
-        params.require(:legal_aid_application).permit(transaction_type_ids: [])
+        params.require(:legal_aid_application).permit(applicant_transaction_type_ids: [])
       end
 
       def transaction_types
-        @transaction_types ||= TransactionType.debits.where(id: legal_aid_application_params[:transaction_type_ids])
+        @transaction_types ||= TransactionType.debits.where(id: legal_aid_application_params[:applicant_transaction_type_ids])
       end
 
       def transaction_types_selected?

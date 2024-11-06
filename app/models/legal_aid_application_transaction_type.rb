@@ -20,6 +20,6 @@ private
     legal_aid_application
       .bank_transactions
       .where(transaction_type_id:)
-      .update!(transaction_type_id: nil)
+      .update!(transaction_type_id: nil, meta_data: nil)
   end
 end
