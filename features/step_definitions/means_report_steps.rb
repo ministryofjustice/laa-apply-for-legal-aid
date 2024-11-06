@@ -279,7 +279,7 @@ Then("the \"Bank accounts\", for open banking accounts, questions should exist:"
 end
 
 Then("the \"Bank accounts\", for open banking accounts, questions and answers table should exist:") do |table|
-  expect_questions_and_answers_in_table(selector: "#applicant-bank-accounts-details", expected: table)
+  expect_matching_questions_and_answers(actual_selector: "#applicant-bank-accounts-details", expected_table: table)
 end
 
 Then("the \"Your client's accounts\" questions should exist:") do |table|
