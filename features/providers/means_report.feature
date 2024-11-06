@@ -205,7 +205,7 @@ Feature: Means report
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
-      | h3  | Client's bank accounts |
+      | h2  | Client's bank accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -295,7 +295,7 @@ Feature: Means report
       | question |
       | How much is the home your client lives in worth? |
       | How much is left to pay on the mortgage? |
-      |Does your client own the home with anyone else? |
+      | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
 
     And the Vehicle ownership question should exist:
@@ -315,8 +315,8 @@ Feature: Means report
 
     And the "Bank accounts", for open banking accounts, questions and answers table should exist:
       | question | answer |
-      | Account Name, 12345678, 000000 | 75.57 |
-      | Second Account, 87654321, 999999 | 57.57 |
+      | Account Name, 12345678, 000000 | £75.57 |
+      | Second Account, 87654321, 999999 | £57.57 |
 
     And the "Your client's accounts" questions should exist:
       | question |
