@@ -116,6 +116,29 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
+    context "with spaces in dates" do
+      let(:params) do
+        {
+          first_name: attributes[:first_name],
+          last_name: attributes[:last_name],
+          date_of_birth_1i: "1990  ",
+          date_of_birth_2i: "3 ",
+          date_of_birth_3i: " 2",
+          changed_last_name: "false",
+          model: applicant,
+        }
+      end
+
+      it "creates applicant successfully" do
+        expect { form.save }.to change(Applicant, :count)
+      end
+
+      it "saves the date" do
+        form.save!
+        expect(Applicant.last.date_of_birth).to eq(Date.new(1990, 3, 2))
+      end
+    end
+
     context "with invalid date_of_birth elements" do
       let(:params) do
         {
