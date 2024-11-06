@@ -853,6 +853,74 @@ module Reports
           end
         end
 
+        describe "child client involvement type" do
+          context "when the provider has selected child subject for any of the application proceedings" do
+            before { legal_aid_application.proceedings << proceeding }
+
+            let(:proceeding) { create(:proceeding, :pb059, client_involvement_type_ccms_code: "W") }
+
+            it "sets child subject client involement type to Yes" do
+              expect(value_for("Child subject client involvment type?")).to eq "Yes"
+            end
+          end
+
+          context "when the provider has not selected child subject for any of the application proceedings" do
+            it "sets child subject client involement type to No" do
+              expect(value_for("Child subject client involvment type?")).to eq "No"
+            end
+          end
+        end
+
+        describe "SCA fields" do
+          context "when the application has no SCA proceedings" do
+            it "returns the expected data" do
+              expect(value_for("Biological parent relationship?")).to be_nil
+              expect(value_for("Parental responsibility order relationship?")).to be_nil
+              expect(value_for("Child subject relationship?")).to be_nil
+            end
+          end
+
+          context "when the application has an sca proceeding" do
+            let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child:) }
+
+            before { legal_aid_application.proceedings << sca_proceeding }
+
+            context "when the application has a proceeding with relationship_to_child biological" do
+              let(:relationship_to_child) { "biological" }
+
+              it "returns the expected data" do
+                expect(value_for("Biological parent relationship?")).to eq "Yes"
+                expect(value_for("Parental responsibility order relationship?")).to eq "No"
+                expect(value_for("Child subject relationship?")).to eq "No"
+              end
+            end
+
+            context "when the application has a proceeding with relationship_to_child court_order" do
+              let(:relationship_to_child) { "court_order" }
+
+              before { legal_aid_application.proceedings << sca_proceeding }
+
+              it "returns the expected data" do
+                expect(value_for("Biological parent relationship?")).to eq "No"
+                expect(value_for("Parental responsibility order relationship?")).to eq "Yes"
+                expect(value_for("Child subject relationship?")).to eq "No"
+              end
+            end
+
+            context "when the application has a proceeding with relationship_to_child child_subject" do
+              let(:relationship_to_child) { "child_subject" }
+
+              before { legal_aid_application.proceedings << sca_proceeding }
+
+              it "returns the expected data" do
+                expect(value_for("Biological parent relationship?")).to eq "No"
+                expect(value_for("Parental responsibility order relationship?")).to eq "No"
+                expect(value_for("Child subject relationship?")).to eq "Yes"
+              end
+            end
+          end
+        end
+
         context "when the applicant age cannot be generated" do
           let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
           let(:applicant) do

@@ -650,6 +650,18 @@ class LegalAidApplication < ApplicationRecord
     proceedings.where(sca_type: "related")
   end
 
+  def biological_parent?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("biological") }
+  end
+
+  def parental_responsibility_order?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("court_order") }
+  end
+
+  def child_subject?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("child_subject") }
+  end
+
 private
 
   def expired_by_2023_surname_at_birth_issue?

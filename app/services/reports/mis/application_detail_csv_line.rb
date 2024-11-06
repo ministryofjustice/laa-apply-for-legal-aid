@@ -173,6 +173,10 @@ module Reports
           "Number of legal links",
           "No fixed address",
           "Previous CCMS ref?",
+          "Child subject client involvment type?",
+          "Biological parent relationship?",
+          "Parental responsibility order relationship?",
+          "Child subject relationship?",
         ]
       end
 
@@ -209,6 +213,8 @@ module Reports
         linked_applications
         home_address
         previous_ccms_ref
+        child_client_involvement_type
+        sca
         sanitise
       end
 
@@ -452,6 +458,22 @@ module Reports
 
       def previous_ccms_ref
         @line << yesno(laa.applicant.previous_reference.present?)
+      end
+
+      def child_client_involvement_type
+        @line << yesno(proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code.eql?("W") })
+      end
+
+      def sca
+        if laa.special_children_act_proceedings?
+          @line << yesno(laa.biological_parent?)
+          @line << yesno(laa.parental_responsibility_order?)
+          @line << yesno(laa.child_subject?)
+        else
+          @line << nil
+          @line << nil
+          @line << nil
+        end
       end
 
       def yesno(value)
