@@ -64,4 +64,8 @@ class Proceeding < ApplicationRecord
   def special_childrens_act?
     ccms_matter_code == "KPBLW"
   end
+
+  def domestic_abuse?
+    ccms_matter_code == "MINJN"
+  end
 end
