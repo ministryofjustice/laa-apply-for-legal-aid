@@ -11,7 +11,7 @@
     </div>
 
     <div class='govuk-button-group'>
-      <%= govuk_button_link_to t(".#{@type}.applications"), submitted_providers_legal_aid_applications_path, inverse: true, role: "button" %>
+      <%= govuk_button_link_to t(".#{@type}.applications"), providers_legal_aid_application_sca_interrupt_path(@legal_aid_application, @type), method: :delete, inverse: true, role: "button" %>
     </div>
   <% end %>
 </div>
