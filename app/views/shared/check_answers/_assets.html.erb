@@ -187,4 +187,10 @@
           ) %>
     <% end %>
   </section>
+
+  <section class="print-no-break">
+    <% if Setting.means_test_review_a? %>
+      <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
+    <% end %>
+  </section>
 </section>
