@@ -177,6 +177,7 @@ module Reports
           "Biological parent relationship?",
           "Parental responsibility order relationship?",
           "Child subject relationship?",
+          "Autogranted?",
         ]
       end
 
@@ -215,6 +216,7 @@ module Reports
         previous_ccms_ref
         child_client_involvement_type
         sca
+        autogranted
         sanitise
       end
 
@@ -474,6 +476,10 @@ module Reports
           @line << nil
           @line << nil
         end
+      end
+
+      def autogranted
+        @line << yesno(laa.auto_grant_special_children_act?(nil))
       end
 
       def yesno(value)

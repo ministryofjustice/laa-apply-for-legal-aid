@@ -921,6 +921,24 @@ module Reports
           end
         end
 
+        describe "autogranted" do
+          context "when the application is autogranted" do
+            before { allow(legal_aid_application).to receive(:auto_grant_special_children_act?).and_return(true) }
+
+            it "sets autogranted? to Yes" do
+              expect(value_for("Autogranted?")).to eq "Yes"
+            end
+          end
+
+          context "when the application is not autogranted" do
+            before { allow(legal_aid_application).to receive(:auto_grant_special_children_act?).and_return(false) }
+
+            it "sets autogranted? to Yes" do
+              expect(value_for("Autogranted?")).to eq "No"
+            end
+          end
+        end
+
         context "when the applicant age cannot be generated" do
           let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
           let(:applicant) do
