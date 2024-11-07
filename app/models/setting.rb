@@ -36,7 +36,7 @@ class Setting < ApplicationRecord
   end
 
   def self.means_test_review_a?
-    setting.means_test_review_a
+    setting.means_test_review_a && Time.zone.today >= Rails.configuration.x.mtr_a_start_date
   end
 
   def self.public_law_family?

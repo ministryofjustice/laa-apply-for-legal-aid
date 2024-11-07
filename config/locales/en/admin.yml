@@ -88,7 +88,7 @@ en:
           linked_applications: Select Yes to enable the linking and copying cases feature for solicitors
           collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
           special_childrens_act: Select Yes to enable the special childrens act matter type
-          means_test_review_a: Select Yes to enable the Means Test Review (MTR) A feature
+          means_test_review_a: Select Yes to enable the Means Test Review (MTR) A feature after %{date}
           public_law_family: Select Yes to enable Public Law Family feature
 
       update:
