@@ -1265,6 +1265,8 @@ en:
           london_emergencies_trust: The London Emergencies Trust
           none_of_these: None of these schemes or trusts
       capital_disregards:
+        payment_reason_for: "For: %{reason}"
+        held_in: Held in %{account_name}
         discretionary:
           backdated_benefits: Backdated benefits and child maintenance payments received more than 24 months ago
           compensation_for_personal_harm: Compensation, damages or ex-gratia payments for personal harm
@@ -1422,6 +1424,13 @@ en:
       assets_heading: &assets_heading Property, savings and other assets
       benefit_check_heading: Passported means
       benefit_check_question: In receipt of passporting benefit
+      capital_disregards:
+        heading: Capital disregards
+        discretionary:
+          heading: Discretionary disregards
+        mandatory:
+          heading: Mandatory disregards
+
       capital_result_heading: &capital_result_heading Capital result
       caseworker_review_section_heading: Caseworker Review
       child_dependants: Child dependants
