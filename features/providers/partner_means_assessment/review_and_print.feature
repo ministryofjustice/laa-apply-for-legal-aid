@@ -44,7 +44,7 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     Then the following sections should not exist:
       | tag | section |
@@ -87,7 +87,7 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     Then the following sections should not exist:
       | tag | section |
@@ -125,7 +125,7 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     Then the following sections should not exist:
       | tag | section |

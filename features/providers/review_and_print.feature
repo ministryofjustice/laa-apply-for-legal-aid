@@ -36,7 +36,7 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     Then the following sections should not exist:
       | tag | section |
@@ -69,7 +69,7 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     Then the following sections should not exist:
       | tag | section |
@@ -129,7 +129,7 @@ Feature: Review and print your application
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     Then the following sections should not exist:
       | tag | section |
@@ -170,7 +170,7 @@ Feature: Review and print your application
       | h2  | What you're applying for |
       | h2  | Inherent jurisdiction high court injunction |
       | h2  | Income, regular payments and assets |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     And I should see 'Non means tested'
     And I should see 'Print the application and get the person acting for'
@@ -193,7 +193,7 @@ Feature: Review and print your application
       | h2  | What you're applying for |
       | h2  | Income, regular payments and assets |
       | h2  | Case details |
-      | h1  | Print your application |
+      | h2  | Print your application |
 
     And I should see 'Delegated functions'
     And I should not see 'Email address'
