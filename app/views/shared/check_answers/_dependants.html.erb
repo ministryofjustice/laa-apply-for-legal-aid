@@ -44,7 +44,7 @@
       <% end %>
     </div>
     <%= govuk_summary_list(
-          card: { title: "Dependant #{index + 1}: #{dependant.name}" },
+          card: { title: t(".dependant_name", position: index + 1, name: dependant.name) },
           actions: false,
           html_attributes: { id: "app-check-your-answers__dependants_#{index + 1}_items" },
         ) do |summary_list| %>

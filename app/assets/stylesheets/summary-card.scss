@@ -1,3 +1,7 @@
 .bold-border-top {
-  border-top: 2px solid #000000
+  border-top: 2px solid govuk-colour("black");
+}
+
+.govuk-summary-card {
+  break-inside: avoid;
 }

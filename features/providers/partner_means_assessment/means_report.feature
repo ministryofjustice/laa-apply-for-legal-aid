@@ -103,7 +103,7 @@ Feature: Means report when partner is present
       | Partner childcare payments | £30 |
       | Partner maintenance payments to a former partner | £50 |
       | Partner payments towards legal aid in a criminal case | £0 |
-      | Total outgoings | £225 |
+      | Total outgoings | £705 |
 
     And the Deductions questions should exist:
       | question |

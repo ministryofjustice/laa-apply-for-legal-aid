@@ -418,6 +418,7 @@ en:
         upper_limit_label: Capital upper limit
         total: Total capital assessed
       client_details:
+        heading: Client details
         previous_application_reference: Previous application reference
         has_applied_before: Has applied before?
         correspondence_address_choice: Where to send client's mail
@@ -462,6 +463,7 @@ en:
         nino: National Insurance number
         has_partner: Does your client have a partner?
       dependants:
+        dependant_name: "Dependant %{position}: %{name}"
         has_dependants: Does %{individual} have any dependants?
         add-new: Add dependant
         delete: Delete dependant
@@ -472,6 +474,7 @@ en:
         income: Do they receive any income?
         assets: Do they have assets worth more than £8,000?
       emergency_costs:
+        heading: Emergency cost limit
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
@@ -633,6 +636,7 @@ en:
         income_heading: Payments %{individual_with_determiner} receives in cash
         outgoings_heading: Payments %{individual_with_determiner} makes in cash
       proceedings_details:
+        heading: Proceedings
         proceeding: Proceeding
         section_proceeding:
           client_involvement_type: Client involvement type
