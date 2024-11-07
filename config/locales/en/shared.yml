@@ -360,6 +360,23 @@ en:
         total_outgoings: Total outgoings
         total_deductions: Total deductions
     check_answers:
+      capital_disregard_details:
+        mandatory:
+          heading: Disregarded payment %{count}
+        discretionary:
+          heading: Payment to be reviewed %{count}
+        questions:
+          payment_type: Payment type
+          payment_reason: What the payment is for
+          amount_and_date_received: Amount and date received
+          bank_account_name: Bank account
+      capital_disregards:
+        heading: One-off payments your client received
+        heading_with_partner: One-off payments your client or their partner received
+        mandatory:
+          heading: Disregarded payments
+        discretionary:
+          heading: Payments to be reviewed
       assets:
         assets:
           other_assets: Which assets does your client have?

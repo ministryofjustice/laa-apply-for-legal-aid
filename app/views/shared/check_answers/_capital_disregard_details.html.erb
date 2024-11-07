@@ -1,0 +1,41 @@
+<% capital_disregard_type = capital_disregard.mandatory? ? "mandatory" : "discretionary" %>
+<% capital_disregard_name = t("providers.means.capital_disregards.#{capital_disregard_type}.#{capital_disregard.name}") %>
+
+<%= govuk_summary_list(
+      actions: !read_only,
+      classes: "govuk-!-margin-bottom-9",
+      html_attributes: { id: "capital-disregard-questions_#{index}" },
+    ) do |summary_list| %>
+
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__capital_disregard_#{index}_change_link" }) do |row| %>
+    <%= row.with_key(text: t(".#{capital_disregard_type}.heading", count: index + 1), classes: "govuk-!-width-one-half govuk-heading-m") %>
+    <%= row.with_value(text: nil) %>
+    <%= row.with_action(
+          text: t("generic.change"),
+          href: providers_legal_aid_application_means_capital_disregards_add_detail_path(@legal_aid_application, capital_disregard),
+          visually_hidden_text: capital_disregard_name,
+        ) %>
+  <% end %>
+
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__payment_type" }) do |row| %>
+    <%= row.with_key(text: t(".questions.payment_type"), classes: "govuk-!-width-one-half") %>
+    <%= row.with_value { capital_disregard_name } %>
+  <% end %>
+
+  <% if capital_disregard.payment_reason.present? %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__payment_reason" }) do |row| %>
+      <%= row.with_key(text: t(".questions.payment_reason"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { capital_disregard.payment_reason } %>
+    <% end %>
+  <% end %>
+
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__amount_and_date_received" }) do |row| %>
+    <%= row.with_key(text: t(".questions.amount_and_date_received"), classes: "govuk-!-width-one-half") %>
+    <%= row.with_value { amount_and_date_received(capital_disregard) } %>
+  <% end %>
+
+  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_account_name" }) do |row| %>
+    <%= row.with_key(text: t(".questions.bank_account_name"), classes: "govuk-!-width-one-half") %>
+    <%= row.with_value { capital_disregard.account_name } %>
+  <% end %>
+<% end %>
