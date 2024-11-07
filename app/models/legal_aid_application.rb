@@ -650,15 +650,15 @@ class LegalAidApplication < ApplicationRecord
     proceedings.where(sca_type: "related")
   end
 
-  def biological_parent?
+  def biological_parent_relationship?
     proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("biological") }
   end
 
-  def parental_responsibility_order?
+  def parental_responsibility_order_relationship?
     proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("court_order") }
   end
 
-  def child_subject?
+  def child_subject_relationship?
     proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("child_subject") }
   end
 

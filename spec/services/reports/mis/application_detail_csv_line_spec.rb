@@ -853,7 +853,7 @@ module Reports
           end
         end
 
-        describe "child client involvement type" do
+        describe "child subject client involvement type" do
           context "when the provider has selected child subject for any of the application proceedings" do
             before { legal_aid_application.proceedings << proceeding }
 
@@ -933,7 +933,7 @@ module Reports
           context "when the application is not autogranted" do
             before { allow(legal_aid_application).to receive(:auto_grant_special_children_act?).and_return(false) }
 
-            it "sets autogranted? to Yes" do
+            it "sets autogranted? to No" do
               expect(value_for("Autogranted?")).to eq "No"
             end
           end

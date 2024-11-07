@@ -2194,6 +2194,54 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#biological_parent_relationship?" do
+    subject { legal_aid_application.biological_parent_relationship? }
+
+    context "with a proceeding with a biological_parent relationship" do
+      before { legal_aid_application.proceedings << sca_proceeding }
+
+      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "biological") }
+
+      it { is_expected.to be true }
+    end
+
+    context "without a proceeding with a biological parent relationship" do
+      it { is_expected.to be false }
+    end
+  end
+
+  describe "#parental_responsibility_order_relationship?" do
+    subject { legal_aid_application.parental_responsibility_order_relationship? }
+
+    context "with a proceeding with a parental_responsibility_order relationship" do
+      before { legal_aid_application.proceedings << sca_proceeding }
+
+      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "court_order") }
+
+      it { is_expected.to be true }
+    end
+
+    context "without a proceeding with a parental_responsibility_order relationship" do
+      it { is_expected.to be false }
+    end
+  end
+
+  describe "#child_subject_relationship?" do
+    subject { legal_aid_application.child_subject_relationship? }
+
+    context "with a proceeding with a child_subject relationship" do
+      before { legal_aid_application.proceedings << sca_proceeding }
+
+      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "child_subject") }
+
+      it { is_expected.to be true }
+    end
+
+    context "without a proceeding with a child_subject relationship" do
+      it { is_expected.to be false }
+    end
+  end
+
 private
 
   def uploaded_evidence_output

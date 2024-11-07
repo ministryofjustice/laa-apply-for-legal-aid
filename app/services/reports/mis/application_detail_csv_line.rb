@@ -214,7 +214,7 @@ module Reports
         linked_applications
         home_address
         previous_ccms_ref
-        child_client_involvement_type
+        child_subject_client_involvement_type
         sca
         autogranted
         sanitise
@@ -462,15 +462,15 @@ module Reports
         @line << yesno(laa.applicant.previous_reference.present?)
       end
 
-      def child_client_involvement_type
+      def child_subject_client_involvement_type
         @line << yesno(proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code.eql?("W") })
       end
 
       def sca
         if laa.special_children_act_proceedings?
-          @line << yesno(laa.biological_parent?)
-          @line << yesno(laa.parental_responsibility_order?)
-          @line << yesno(laa.child_subject?)
+          @line << yesno(laa.biological_parent_relationship?)
+          @line << yesno(laa.parental_responsibility_order_relationship?)
+          @line << yesno(laa.child_subject_relationship?)
         else
           @line << nil
           @line << nil
