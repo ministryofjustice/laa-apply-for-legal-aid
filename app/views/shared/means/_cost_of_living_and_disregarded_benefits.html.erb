@@ -8,7 +8,7 @@
     <% end %>
   </ul>
 
-  <% mtra_scope = Setting.setting.means_test_review_a? ? :mtra : :pre_mtra %>
+  <% mtra_scope = Setting.means_test_review_a? ? :mtra : :pre_mtra %>
 
   <h2 class="govuk-heading-m"><%= t("shared.disregarded_benefits.header") %></h2>
   <p class="govuk-body"><%= t("shared.disregarded_benefits.text") %></p>
