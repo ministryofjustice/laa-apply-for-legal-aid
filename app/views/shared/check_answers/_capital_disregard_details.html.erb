@@ -4,7 +4,7 @@
 <%= govuk_summary_list(
       actions: !read_only,
       classes: "govuk-!-margin-bottom-9",
-      html_attributes: { id: "capital-disregard-questions_#{index}" },
+      html_attributes: { id: "#{capital_disregard_type}-capital-disregard-questions_#{index}" },
     ) do |summary_list| %>
 
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__capital_disregard_#{index}_change_link" }) do |row| %>

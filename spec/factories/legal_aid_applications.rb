@@ -541,6 +541,35 @@ FactoryBot.define do
       policy_disregards { build(:policy_disregards, :with_selected_values) }
     end
 
+    trait :with_mandatory_capital_disregards do
+      after(:create) do |application|
+        create(
+          :capital_disregard,
+          legal_aid_application: application,
+          mandatory: true,
+          name: "budgeting_advances",
+          amount: 1001,
+          date_received: Date.new(2024, 8, 8),
+          account_name: "Halifax",
+        )
+      end
+    end
+
+    trait :with_discretionary_capital_disregards do
+      after(:create) do |application|
+        create(
+          :capital_disregard,
+          legal_aid_application: application,
+          mandatory: false,
+          name: "compensation_for_personal_harm",
+          payment_reason: "life changing injuries",
+          amount: 1002,
+          date_received: Date.new(2024, 8, 8),
+          account_name: "Halifax",
+        )
+      end
+    end
+
     trait :with_savings_amount do
       savings_amount { build(:savings_amount, :with_values) }
     end
