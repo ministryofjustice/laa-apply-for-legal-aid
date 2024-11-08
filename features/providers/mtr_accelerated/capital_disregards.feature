@@ -1,5 +1,5 @@
 Feature: mandatory and discretionary capital disregards questions and flow
-# TODO: This flow file can be moved to a full flow non-passported journey feature after the MTR-A feature flag is removed
+# TODO: AP-5493 - This flow file can be moved to a full flow non-passported journey feature after the MTR-A feature flag is removed
 
   @javascript
   Scenario: When the MTR-A feature flag is off I should not see the mandatory or discretionary capital disregard questions in the flow
