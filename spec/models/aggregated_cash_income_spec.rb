@@ -214,7 +214,7 @@ RSpec.describe AggregatedCashIncome do
         end
 
         it "populates the errors" do
-          error_msg = "Amount must be an amount of money, like 1,000"
+          error_msg = "Amount must be an amount of money, like 1000"
           expect(aci.errors[:benefits1][0]).to eq error_msg
         end
       end
@@ -315,7 +315,7 @@ RSpec.describe AggregatedCashIncome do
 
           it "populates the errors" do
             call_update
-            expect(aci.errors[:benefits2]).to include "Amount must be an amount of money, like 1,000"
+            expect(aci.errors[:benefits2]).to include "Amount must be an amount of money, like 1000"
           end
         end
 

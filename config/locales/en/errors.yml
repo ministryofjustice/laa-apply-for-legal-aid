@@ -3,12 +3,12 @@ en:
   errors:
     aggregated_cash_income:
       blank: "Enter the cash amount received %{category} in %{month}"
-      invalid_type: Amount must be an amount of money, like 1,000
+      invalid_type: Amount must be an amount of money, like 1000
       negative: Amount must be more than or equal to zero
       too_many_decimals: Amount must not include more than 2 decimal numbers
     aggregated_cash_outgoings:
       blank: "Enter the cash amount paid %{category} in %{month}"
-      invalid_type: Amount must be an amount of money, like 1,000
+      invalid_type: Amount must be an amount of money, like 1000
       negative: Amount must be more than or equal to zero
       too_many_decimals: Amount must not include more than 2 decimal numbers
     applicant_bank_accounts:

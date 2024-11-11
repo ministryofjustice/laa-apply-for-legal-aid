@@ -168,7 +168,7 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          error_msg = "Amount must be an amount of money, like 1,000"
+          error_msg = "Amount must be an amount of money, like 1000"
           expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
         end
       end
@@ -265,7 +265,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:rent_or_mortgage2]).to include "Amount must be an amount of money, like 1,000"
+            expect(aco.errors[:rent_or_mortgage2]).to include "Amount must be an amount of money, like 1000"
           end
         end
 
