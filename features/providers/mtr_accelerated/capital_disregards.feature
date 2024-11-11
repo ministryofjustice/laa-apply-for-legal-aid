@@ -87,6 +87,9 @@ Feature: mandatory and discretionary capital disregards questions and flow
       | .govuk-checkboxes__label  | Variant Creutzfeldt-Jakob disease (vCJD) Trust payment |
       | .govuk-checkboxes__label  | Welsh Independent Living Grant |
       | .govuk-checkboxes__label  | Windrush Compensation Scheme payment |
+  
+    And I should see "For example, Pensioner Cost of Living Payment, Cost of Living Payment"
+    And I should see "Includes Infected Blood Interim Compensation Payment Scheme"
     And I select "Infected Blood Support Scheme payment"
     And I click "Save and continue"
 
@@ -113,6 +116,7 @@ Feature: mandatory and discretionary capital disregards questions and flow
       | tag | section |
       | .govuk-checkboxes__label  | Backdated benefits and child maintenance payments received more than 24 months ago |
       | .govuk-checkboxes__label  | Compensation, damages or ex-gratia payments for personal harm |
+      | .govuk-checkboxes__hint   | For example, payments to victims of abuse |
       | .govuk-checkboxes__label  | Criminal Injuries Compensation Scheme payment |
       | .govuk-checkboxes__label  | Grenfell Tower fire victims payment |
       | .govuk-checkboxes__label  | London Emergencies Trust payment |
