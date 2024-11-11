@@ -3,8 +3,11 @@ require "rails_helper"
 RSpec.describe "digest:", type: :task do
   before do
     Rails.application.load_tasks if Rake::Task.tasks.empty?
-    allow(HostEnv).to receive(:uat?).and_return(false)
+    allow(HostEnv).to receive(:staging_or_production?).and_return(staging_or_production)
+    allow(Rails.logger).to receive(:info)
   end
+
+  let(:staging_or_production) { true }
 
   describe "extract" do
     subject(:task) { Rake::Task["digest:extract"] }
@@ -19,11 +22,30 @@ RSpec.describe "digest:", type: :task do
     end
 
     context "when host env is uat" do
-      before { allow(HostEnv).to receive(:uat?).and_return(true) }
+      before do
+        allow(ENV).to receive(:fetch)
+        allow(ENV).to receive(:fetch).with("BYPASS", nil).and_return(bypass)
+      end
 
-      it "does not the service" do
-        task.execute
-        expect(DigestExtractor).not_to have_received(:call)
+      let(:staging_or_production) { false }
+
+      context "and the BYPASS value is missing" do
+        let(:bypass) { nil }
+
+        it "does not call the service" do
+          task.execute
+          expect(DigestExtractor).not_to have_received(:call)
+          expect(Rails.logger).to have_received(:info).once
+        end
+      end
+
+      context "and the BYPASS value is present" do
+        let(:bypass) { "true" }
+
+        it "calls the service" do
+          task.execute
+          expect(DigestExtractor).to have_received(:call)
+        end
       end
     end
   end
@@ -41,11 +63,30 @@ RSpec.describe "digest:", type: :task do
     end
 
     context "when host env is uat" do
-      before { allow(HostEnv).to receive(:uat?).and_return(true) }
+      before do
+        allow(ENV).to receive(:fetch)
+        allow(ENV).to receive(:fetch).with("BYPASS", nil).and_return(bypass)
+      end
 
-      it "does not call the service" do
-        task.execute
-        expect(DigestExporter).not_to have_received(:call)
+      let(:staging_or_production) { false }
+
+      context "and the BYPASS value is missing" do
+        let(:bypass) { nil }
+
+        it "does not call the service" do
+          task.execute
+          expect(DigestExporter).not_to have_received(:call)
+          expect(Rails.logger).to have_received(:info).once
+        end
+      end
+
+      context "and the BYPASS value is present" do
+        let(:bypass) { "true" }
+
+        it "calls the service" do
+          task.execute
+          expect(DigestExporter).to have_received(:call)
+        end
       end
     end
   end
@@ -66,11 +107,30 @@ RSpec.describe "digest:", type: :task do
     end
 
     context "when host env is uat" do
-      before { allow(HostEnv).to receive(:uat?).and_return(true) }
+      before do
+        allow(ENV).to receive(:fetch)
+        allow(ENV).to receive(:fetch).with("BYPASS", nil).and_return(bypass)
+      end
 
-      it "does not call the service" do
-        task.execute
-        expect(setting).not_to have_received(:update!)
+      let(:staging_or_production) { false }
+
+      context "and the BYPASS value is missing" do
+        let(:bypass) { nil }
+
+        it "does not call the service" do
+          task.execute
+          expect(setting).not_to have_received(:update!)
+          expect(Rails.logger).to have_received(:info).once
+        end
+      end
+
+      context "and the BYPASS value is present" do
+        let(:bypass) { "true" }
+
+        it "calls the service" do
+          task.execute
+          expect(setting).to have_received(:update!)
+        end
       end
     end
   end
