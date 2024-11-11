@@ -159,6 +159,9 @@ module LaaApplyForLegalAid
 
     config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
 
+    # TODO: Remove with Setting.means_test_review_a feature flag #
+    config.x.mtr_a_start_date = Date.parse(ENV.fetch("MTR_A_START_DATE", "2024-11-20"))
+
     # automatically include locale in the query string when generating urls with url_helpers
     Rails.application.routes.default_url_options[:locale] = I18n.locale
     config.i18n.default_locale = :en

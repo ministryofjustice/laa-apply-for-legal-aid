@@ -71,5 +71,36 @@ RSpec.describe Setting do
       expect(described_class.means_test_review_a?).to be false
       expect(described_class.public_law_family?).to be false
     end
+
+    describe ".means_test_review_a?" do
+      subject { described_class.means_test_review_a? }
+
+      context "when the flag is true and a date has been set in the future" do
+        before do
+          described_class.setting.update!(means_test_review_a: true)
+          allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.tomorrow)
+        end
+
+        it { is_expected.to be false }
+      end
+
+      context "when the flag is true and a date has been set in the past" do
+        before do
+          described_class.setting.update!(means_test_review_a: true)
+          allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.yesterday)
+        end
+
+        it { is_expected.to be true }
+      end
+
+      context "when the flag is false and a date has been set in the past" do
+        before do
+          described_class.setting.update!(means_test_review_a: false)
+          allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.yesterday)
+        end
+
+        it { is_expected.to be false }
+      end
+    end
   end
 end

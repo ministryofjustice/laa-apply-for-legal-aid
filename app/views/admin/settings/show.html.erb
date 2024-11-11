@@ -82,7 +82,7 @@
           :value,
           :label,
           inline: true,
-          hint: { text: t(".hints.means_test_review_a") },
+          hint: { text: t(".hints.means_test_review_a", date: Rails.configuration.x.mtr_a_start_date.to_fs) },
           legend: { text: t(".labels.means_test_review_a") },
         ) %>
 

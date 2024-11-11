@@ -67,6 +67,7 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
   Scenario: When the MTR-A feature flag is on and the client has no partner I should see the legacy pages
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
     And the feature flag for means_test_review_a is enabled
+    And the MTR-A start date is in the past
 
     When I visit the in progress applications page
     And I view the previously created application
@@ -91,6 +92,7 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
   Scenario: When the MTR-A feature flag is on and the client a partner I should see the legacy pages
     Given I complete the journey as far as check client details with a partner
     And the feature flag for means_test_review_a is enabled
+    And the MTR-A start date is in the past
 
     When I click "Save and continue"
     Then I should be on a page with title "DWP records show that your client does not get a passporting benefit"

@@ -301,6 +301,8 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: policyDisregardsStartDate
+  - name: MTR_A_START_DATE
+    value: {{ .Values.mtr_a_start_date | quote }}
   - name: LEGAL_FRAMEWORK_API_HOST
     valueFrom:
       secretKeyRef:

@@ -40,6 +40,7 @@ Feature: Discretionary capital disregards question and flow
   @javascript
   Scenario: When the MTR-A feature flag is on I should see the discretionary capital disregard question in the flow
     Given the feature flag for means_test_review_a is enabled
+    And the MTR-A start date is in the past
     And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
