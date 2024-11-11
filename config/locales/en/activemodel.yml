@@ -669,6 +669,7 @@ en:
             amount:
               not_a_number: Enter a number for the amount received
               blank: Enter a number for the amount received
+              too_many_decimals: Amount received must not include more than 2 decimal numbers
             date_received:
               blank: Enter a date in the correct format for when the payment is received
               date_not_valid: Enter a date in the correct format for when the payment is received
