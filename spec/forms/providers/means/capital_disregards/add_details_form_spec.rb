@@ -46,7 +46,61 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
 
       it "adds an error message" do
         error_messages = form.errors.messages.values.flatten
-        expect(error_messages).to include(I18n.t("activemodel.errors.models.capital_disregard.attributes.amount.blank"))
+        expect(error_messages).to include("Enter a number for the amount received")
+      end
+    end
+
+    context "when amount contains more than two decimals" do
+      let(:amount) { 14.555 }
+
+      it "is invalid" do
+        expect(form).not_to be_valid
+      end
+
+      it "adds an error message" do
+        error_messages = form.errors.messages.values.flatten
+        expect(error_messages).to include("Amount received must not include more than 2 decimal numbers")
+      end
+    end
+
+    context "when the account name is left blank" do
+      let(:account_name) { "" }
+
+      it "is invalid" do
+        expect(form).not_to be_valid
+      end
+
+      it "adds an error message" do
+        error_messages = form.errors.messages.values.flatten
+        expect(error_messages).to include("Enter which account the payment is in")
+      end
+    end
+
+    context "when the date received is left blank" do
+      let(:date_received) { Date.new }
+
+      it "is invalid" do
+        expect(form).not_to be_valid
+      end
+
+      it "adds an error message" do
+        error_messages = form.errors.messages.values.flatten
+        expect(error_messages).to include("Enter a date in the correct format for when the payment is received")
+      end
+    end
+
+    context "when the payment reason is blank" do
+      let(:capital_disregard) { create(:capital_disregard, name:) }
+      let(:name) { "compensation_for_personal_harm" }
+      let(:payment_reason) { "" }
+
+      it "is invalid" do
+        expect(form).not_to be_valid
+      end
+
+      it "adds an error message" do
+        error_messages = form.errors.messages.values.flatten
+        expect(error_messages).to include("Enter what the payment is for")
       end
     end
   end
