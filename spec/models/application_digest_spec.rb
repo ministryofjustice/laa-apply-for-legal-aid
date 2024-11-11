@@ -537,13 +537,18 @@ RSpec.describe ApplicationDigest do
           expect(digest.parental_responsibility_agreement).to be false
           expect(digest.parental_responsibility_court_order).to be false
           expect(digest.child_subject).to be false
+          expect(digest.parental_responsibility_evidence).to be false
         end
       end
 
       context "when the application has a proceeding with relationship_to_child parental_responsibility_agreement" do
         let(:relationship_to_child) { "parental_responsibility_agreement" }
+        let(:parental_responsibility_evidence) { create(:attachment, :parental_responsibility, attachment_name: "parental_responsibility") }
 
-        before { laa.proceedings << sca_proceeding }
+        before do
+          laa.proceedings << sca_proceeding
+          laa.attachments << parental_responsibility_evidence
+        end
 
         it "returns the expected data" do
           application_digest
@@ -551,6 +556,7 @@ RSpec.describe ApplicationDigest do
           expect(digest.parental_responsibility_agreement).to be true
           expect(digest.parental_responsibility_court_order).to be false
           expect(digest.child_subject).to be false
+          expect(digest.parental_responsibility_evidence).to be true
         end
       end
 
@@ -565,6 +571,7 @@ RSpec.describe ApplicationDigest do
           expect(digest.parental_responsibility_agreement).to be false
           expect(digest.parental_responsibility_court_order).to be true
           expect(digest.child_subject).to be false
+          expect(digest.parental_responsibility_evidence).to be false
         end
       end
 
@@ -579,6 +586,7 @@ RSpec.describe ApplicationDigest do
           expect(digest.parental_responsibility_agreement).to be false
           expect(digest.parental_responsibility_court_order).to be false
           expect(digest.child_subject).to be true
+          expect(digest.parental_responsibility_evidence).to be false
         end
       end
     end

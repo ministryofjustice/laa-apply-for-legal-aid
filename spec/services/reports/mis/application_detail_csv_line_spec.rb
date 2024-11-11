@@ -878,6 +878,7 @@ module Reports
               expect(value_for("Parental responsibility agreement relationship?")).to be_nil
               expect(value_for("Parental responsibility court order relationship?")).to be_nil
               expect(value_for("Child subject relationship?")).to be_nil
+              expect(value_for("Parental responsibility evidence?")).to be_nil
             end
           end
 
@@ -894,6 +895,7 @@ module Reports
                 expect(value_for("Parental responsibility agreement relationship?")).to eq "No"
                 expect(value_for("Parental responsibility court order relationship?")).to eq "No"
                 expect(value_for("Child subject relationship?")).to eq "No"
+                expect(value_for("Parental responsibility evidence?")).to be_nil
               end
             end
 
@@ -905,17 +907,22 @@ module Reports
                 expect(value_for("Parental responsibility agreement relationship?")).to eq "Yes"
                 expect(value_for("Parental responsibility court order relationship?")).to eq "No"
                 expect(value_for("Child subject relationship?")).to eq "No"
+                expect(value_for("Parental responsibility evidence?")).to eq "No"
               end
             end
 
             context "when the application has a proceeding with relationship_to_child court_order" do
               let(:relationship_to_child) { "court_order" }
+              let(:parental_responsibility_evidence) { create(:attachment, :parental_responsibility, attachment_name: "parental_responsibility") }
+
+              before { legal_aid_application.attachments << parental_responsibility_evidence }
 
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "No"
                 expect(value_for("Parental responsibility agreement relationship?")).to eq "No"
                 expect(value_for("Parental responsibility court order relationship?")).to eq "Yes"
                 expect(value_for("Child subject relationship?")).to eq "No"
+                expect(value_for("Parental responsibility evidence?")).to eq "Yes"
               end
             end
 
@@ -927,6 +934,7 @@ module Reports
                 expect(value_for("Parental responsibility agreement relationship?")).to eq "No"
                 expect(value_for("Parental responsibility court order relationship?")).to eq "No"
                 expect(value_for("Child subject relationship?")).to eq "Yes"
+                expect(value_for("Parental responsibility evidence?")).to be_nil
               end
             end
           end

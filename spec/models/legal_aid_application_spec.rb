@@ -2258,6 +2258,21 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#parental_responsibility_evidence?" do
+    subject { legal_aid_application.parental_responsibility_evidence? }
+
+    context "with aan application that has parental responsibility evidence" do
+      let(:legal_aid_application) { create(:legal_aid_application, attachments: [parental_responsibility_evidence]) }
+      let(:parental_responsibility_evidence) { create(:attachment, :parental_responsibility, attachment_name: "parental_responsibility") }
+
+      it { is_expected.to be true }
+    end
+
+    context "without a proceeding with a child_subject relationship" do
+      it { is_expected.to be false }
+    end
+  end
+
 private
 
   def uploaded_evidence_output

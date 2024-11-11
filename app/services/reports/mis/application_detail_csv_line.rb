@@ -178,6 +178,7 @@ module Reports
           "Parental responsibility agreement relationship?",
           "Parental responsibility court order relationship?",
           "Child subject relationship?",
+          "Parental responsibility evidence?",
           "Autogranted?",
         ]
       end
@@ -473,7 +474,11 @@ module Reports
           @line << yesno(laa.parental_responsibility_agreement_relationship?)
           @line << yesno(laa.parental_responsibility_court_order_relationship?)
           @line << yesno(laa.child_subject_relationship?)
+          @line << if laa.parental_responsibility_agreement_relationship? || laa.parental_responsibility_court_order_relationship?
+                     yesno(laa.parental_responsibility_evidence?)
+                   end
         else
+          @line << nil
           @line << nil
           @line << nil
           @line << nil

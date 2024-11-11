@@ -18,6 +18,7 @@ class ApplicationDigest < ApplicationRecord
     parental_responsibility_agreement
     parental_responsibility_court_order
     child_subject
+    parental_responsibility_evidence
     autogranted
   ].freeze
 
@@ -73,6 +74,7 @@ class ApplicationDigest < ApplicationRecord
         parental_responsibility_agreement: laa.parental_responsibility_agreement_relationship?,
         parental_responsibility_court_order: laa.parental_responsibility_court_order_relationship?,
         child_subject: laa.child_subject_relationship?,
+        parental_responsibility_evidence: laa.parental_responsibility_evidence?,
         autogranted: laa.auto_grant_special_children_act?(nil),
       }
     end
