@@ -300,6 +300,15 @@ RSpec.describe AggregatedCashIncome do
         end
       end
 
+      context "with valid comma separate monetary params" do
+        let(:params) { valid_params.merge(benefits1: "1,222,222.33") }
+
+        it "creates the expected cash income records" do
+          expect { call_update }.to change(CashTransaction, :count).by(6)
+          expect(CashTransaction.pluck(:amount)).to include(1_222_222.33)
+        end
+      end
+
       context "with invalid params" do
         context "and non-numeric values" do
           let(:params) { non_numeric_params }

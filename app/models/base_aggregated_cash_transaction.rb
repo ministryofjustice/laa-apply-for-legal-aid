@@ -88,9 +88,20 @@ private
   end
 
   def update_cash_attributes(params)
-    params.each do |key, value|
+    cleaned_params = clean_attributes(params)
+    cleaned_params.each do |key, value|
       __send__(:"#{key}=", value)
     end
+  end
+
+  def clean_attributes(params)
+    params.each.with_object({}) do |(k, v), new_hash|
+      new_hash[k] = cash_transaction_amount_field?(k) ? v.to_s.tr("£,", "") : v
+    end
+  end
+
+  def cash_transaction_amount_field?(param_name)
+    self.class.cash_transaction_categories.map(&:to_s).any? { |category| param_name.start_with?(category) }
   end
 
   def save_cash_transaction_records
