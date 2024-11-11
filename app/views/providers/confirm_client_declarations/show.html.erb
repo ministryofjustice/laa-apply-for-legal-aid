@@ -8,7 +8,7 @@
   <%= page_template page_title: t(".h1-heading"), form: do %>
 
     <% provider_firm_name = @legal_aid_application.provider.firm.name %>
-    <% if @legal_aid_application.non_means_tested? %>
+    <% if @legal_aid_application.applicant&.under_18? %>
       <% i18n_prefix = "non_means_tested" %>
     <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
       <% i18n_prefix = "means_tested" %>
