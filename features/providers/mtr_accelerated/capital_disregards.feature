@@ -97,11 +97,16 @@ Feature: mandatory and discretionary capital disregards questions and flow
 
     When I click "Save and continue"
     Then I should be on a page showing "Add details for 'Infected Blood Support Scheme payment'"
-    And I fill 'amount' with '100'
+    
+    When I click "Save and continue"
+    Then I should see govuk error summary "Enter a number for the amount received"
+    And I should see govuk error summary "Enter which account the payment is in"
+    And I should see govuk error summary "Enter a date in the correct format for when the payment is received"
+
+    When I fill 'amount' with '100'
     And I fill 'account name' with 'Barclays'
     And I enter the 'date received' date of 50 days ago
-
-    When I click "Save and continue"
+    And I click "Save and continue"
     Then I should be on a page with title "Payments to be reviewed"
     And I should see "Select if your client has received any of these payments"
     And the following sections should exist:
