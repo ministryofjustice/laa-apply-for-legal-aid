@@ -534,7 +534,22 @@ RSpec.describe ApplicationDigest do
         it "returns the expected data" do
           application_digest
           expect(digest.biological_parent).to be true
-          expect(digest.parental_responsibility_order).to be false
+          expect(digest.parental_responsibility_agreement).to be false
+          expect(digest.parental_responsibility_court_order).to be false
+          expect(digest.child_subject).to be false
+        end
+      end
+
+      context "when the application has a proceeding with relationship_to_child parental_responsibility_agreement" do
+        let(:relationship_to_child) { "parental_responsibility_agreement" }
+
+        before { laa.proceedings << sca_proceeding }
+
+        it "returns the expected data" do
+          application_digest
+          expect(digest.biological_parent).to be false
+          expect(digest.parental_responsibility_agreement).to be true
+          expect(digest.parental_responsibility_court_order).to be false
           expect(digest.child_subject).to be false
         end
       end
@@ -547,7 +562,8 @@ RSpec.describe ApplicationDigest do
         it "returns the expected data" do
           application_digest
           expect(digest.biological_parent).to be false
-          expect(digest.parental_responsibility_order).to be true
+          expect(digest.parental_responsibility_agreement).to be false
+          expect(digest.parental_responsibility_court_order).to be true
           expect(digest.child_subject).to be false
         end
       end
@@ -560,7 +576,8 @@ RSpec.describe ApplicationDigest do
         it "returns the expected data" do
           application_digest
           expect(digest.biological_parent).to be false
-          expect(digest.parental_responsibility_order).to be false
+          expect(digest.parental_responsibility_agreement).to be false
+          expect(digest.parental_responsibility_court_order).to be false
           expect(digest.child_subject).to be true
         end
       end

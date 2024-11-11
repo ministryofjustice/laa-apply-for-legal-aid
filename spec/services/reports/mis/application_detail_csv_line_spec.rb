@@ -875,7 +875,8 @@ module Reports
           context "when the application has no SCA proceedings" do
             it "returns the expected data" do
               expect(value_for("Biological parent relationship?")).to be_nil
-              expect(value_for("Parental responsibility order relationship?")).to be_nil
+              expect(value_for("Parental responsibility agreement relationship?")).to be_nil
+              expect(value_for("Parental responsibility court order relationship?")).to be_nil
               expect(value_for("Child subject relationship?")).to be_nil
             end
           end
@@ -890,7 +891,19 @@ module Reports
 
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "Yes"
-                expect(value_for("Parental responsibility order relationship?")).to eq "No"
+                expect(value_for("Parental responsibility agreement relationship?")).to eq "No"
+                expect(value_for("Parental responsibility court order relationship?")).to eq "No"
+                expect(value_for("Child subject relationship?")).to eq "No"
+              end
+            end
+
+            context "when the application has a proceeding with relatitionship_to_child parental_responsibl;ity_agreement" do
+              let(:relationship_to_child) { "parental_responsibility_agreement" }
+
+              it "returns the expected data" do
+                expect(value_for("Biological parent relationship?")).to eq "No"
+                expect(value_for("Parental responsibility agreement relationship?")).to eq "Yes"
+                expect(value_for("Parental responsibility court order relationship?")).to eq "No"
                 expect(value_for("Child subject relationship?")).to eq "No"
               end
             end
@@ -898,11 +911,10 @@ module Reports
             context "when the application has a proceeding with relationship_to_child court_order" do
               let(:relationship_to_child) { "court_order" }
 
-              before { legal_aid_application.proceedings << sca_proceeding }
-
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "No"
-                expect(value_for("Parental responsibility order relationship?")).to eq "Yes"
+                expect(value_for("Parental responsibility agreement relationship?")).to eq "No"
+                expect(value_for("Parental responsibility court order relationship?")).to eq "Yes"
                 expect(value_for("Child subject relationship?")).to eq "No"
               end
             end
@@ -910,11 +922,10 @@ module Reports
             context "when the application has a proceeding with relationship_to_child child_subject" do
               let(:relationship_to_child) { "child_subject" }
 
-              before { legal_aid_application.proceedings << sca_proceeding }
-
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "No"
-                expect(value_for("Parental responsibility order relationship?")).to eq "No"
+                expect(value_for("Parental responsibility agreement relationship?")).to eq "No"
+                expect(value_for("Parental responsibility court order relationship?")).to eq "No"
                 expect(value_for("Child subject relationship?")).to eq "Yes"
               end
             end

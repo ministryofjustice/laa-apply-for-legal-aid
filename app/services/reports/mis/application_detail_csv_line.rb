@@ -175,7 +175,8 @@ module Reports
           "Previous CCMS ref?",
           "Child subject client involvment type?",
           "Biological parent relationship?",
-          "Parental responsibility order relationship?",
+          "Parental responsibility agreement relationship?",
+          "Parental responsibility court order relationship?",
           "Child subject relationship?",
           "Autogranted?",
         ]
@@ -469,9 +470,11 @@ module Reports
       def sca
         if laa.special_children_act_proceedings?
           @line << yesno(laa.biological_parent_relationship?)
-          @line << yesno(laa.parental_responsibility_order_relationship?)
+          @line << yesno(laa.parental_responsibility_agreement_relationship?)
+          @line << yesno(laa.parental_responsibility_court_order_relationship?)
           @line << yesno(laa.child_subject_relationship?)
         else
+          @line << nil
           @line << nil
           @line << nil
           @line << nil
