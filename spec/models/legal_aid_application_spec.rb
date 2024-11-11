@@ -2174,28 +2174,6 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#display_emergency_certificate?" do
-    subject { legal_aid_application.display_emergency_certificate? }
-
-    let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_delegated_functions_on_proceedings, explicit_proceedings: %i[da001], df_options: { DA001: [Time.zone.today, Time.zone.today] }) }
-
-    context "when the provider has used delegated functions" do
-      it { is_expected.to be true }
-    end
-
-    context "when the provider has not used delegated functions" do
-      let(:legal_aid_application) { create(:legal_aid_application) }
-
-      it { is_expected.to be false }
-    end
-
-    context "when there are special childrens act proceedings" do
-      before { legal_aid_application.proceedings << create(:proceeding, :pb003) }
-
-      it { is_expected.to be false }
-    end
-  end
-
   describe "#related_proceedings" do
     subject { legal_aid_application.related_proceedings }
 
