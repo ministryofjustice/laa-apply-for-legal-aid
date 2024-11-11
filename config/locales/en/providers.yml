@@ -1823,7 +1823,7 @@ en:
               - select a different proceeding or matter type
               - go back and change your answer
               - use legal help
-            options: "You can (choose one of the following):"
+            options: "You can do one of the following:"
             applications: Select a different proceeding or matter type
           heard_as_alternatives:
             <<: *default
