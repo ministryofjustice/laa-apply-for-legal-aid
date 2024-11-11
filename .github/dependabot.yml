@@ -9,6 +9,16 @@ updates:
       day: tuesday
       time: "21:00"
       timezone: Europe/London
+    ignore:
+      - dependency-name: rails
+        versions:
+          - ">= 8.0.0"
+      - dependency-name: action*
+        versions:
+          - ">= 8.0.0"
+      - dependency-name: active*
+        versions:
+          - ">= 8.0.0"
     groups:
       bundler:
         patterns:
