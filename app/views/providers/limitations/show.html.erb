@@ -13,7 +13,7 @@
                locals: { translation_path: "providers.limitations.show" } %>
 
     <h2 class="govuk-heading-l"><%= t(".cost_heading") %></h2>
-    <% if @legal_aid_application.display_emergency_certificate? %>
+    <% if @legal_aid_application.non_sca_used_delegated_functions? %>
       <h3 class="govuk-heading-m"><%= t(".emergency_certificate") %></h3>
 
       <p class="govuk-body">
