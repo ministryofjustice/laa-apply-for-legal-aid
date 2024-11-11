@@ -71,16 +71,20 @@ Given("I have created and submitted an application") do
   login_as @legal_aid_application.provider
 end
 
-Given(/^I have created an application for a (\d*?) year old$/) do |age|
+Given(/^I have created (an|an SCA) application for a (\d*?) year old$/) do |type, age|
   applicant = create(:applicant,
                      age_for_means_test_purposes: age,
                      date_of_birth: Time.zone.today - age.to_i.years)
+  proceeding = type == "an SCA" ? :pb059 : :da004
   @legal_aid_application = create(
     :application,
     :with_everything,
     :with_passported_state_machine,
     :checking_merits_answers,
     :initiated,
+    :with_proceedings,
+    explicit_proceedings: [proceeding],
+    set_lead_proceeding: proceeding,
     applicant:,
     provider: create(:provider),
     provider_step: "confirm_client_declarations",
