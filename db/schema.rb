@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_30_094958) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_07_092712) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -183,6 +183,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_094958) do
     t.string "legal_linked_lead_or_associated"
     t.integer "number_of_legal_linked_applications"
     t.boolean "no_fixed_address"
+    t.boolean "biological_parent"
+    t.boolean "parental_responsibility_agreement"
+    t.boolean "parental_responsibility_court_order"
+    t.boolean "child_subject"
+    t.boolean "parental_responsibility_evidence"
+    t.boolean "autogranted"
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
