@@ -10,7 +10,14 @@ module Providers
 
         def update
           @form = DiscretionaryForm.new(form_params)
-          render :show unless save_continue_or_draft(@form)
+          return continue_or_draft if draft_selected?
+
+          if @form.valid?
+            @form.save!
+            go_forward(@legal_aid_application.next_incomplete_discretionary_disregard)
+          else
+            render :show
+          end
         end
 
       private
