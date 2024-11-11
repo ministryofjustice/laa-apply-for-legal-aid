@@ -650,6 +650,14 @@ class LegalAidApplication < ApplicationRecord
     proceedings.where(sca_type: "related")
   end
 
+  def next_incomplete_discretionary_disregard
+    discretionary_capital_disregards.select(&:incomplete?).min_by(&:name)
+  end
+
+  def next_incomplete_mandatory_disregard
+    mandatory_capital_disregards.select(&:incomplete?).min_by(&:name)
+  end
+
 private
 
   def expired_by_2023_surname_at_birth_issue?

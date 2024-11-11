@@ -660,6 +660,19 @@ en:
               none_selected_with_partner: Select if your client or their partner has received any of these payments
               none_and_another_option_selected: Your client must either receive one or more of these payments or none
               none_and_another_option_selected_with_partner: Your client or their partner must either receive one or more of these payments or none
+        capital_disregard:
+          attributes:
+            payment_reason:
+              blank: Enter what the payment is for
+            account_name:
+              blank: Enter which account the payment is in
+            amount:
+              not_a_number: Enter a number for the amount received
+              blank: Enter a number for the amount received
+            date_received:
+              blank: Enter a date in the correct format for when the payment is received
+              date_not_valid: Enter a date in the correct format for when the payment is received
+              date_is_in_the_future: Date should be in the past
         proceeding:
           attributes:
             client_involvement_type_ccms_code:

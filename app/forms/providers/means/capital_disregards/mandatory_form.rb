@@ -30,7 +30,7 @@ module Providers
 
         def initialize(params = {})
           self.legal_aid_application = params.delete(:model)
-          self.mandatory_capital_disregards = params["mandatory_capital_disregards"] || existing_mandatory_disregards
+          self.mandatory_capital_disregards = params["mandatory_capital_disregards"] || existing_mandatory_capital_disregards
 
           super
         end
@@ -51,28 +51,39 @@ module Providers
         def save
           return false unless valid?
 
-          destroy_previous_disregards!
-          create_new_disregards!
+          ApplicationRecord.transaction do
+            synchronize_mandatory_capital_disregards
+          end
         end
         alias_method :save!, :save
 
       private
 
-        # create new records if they don't already exist
-        def create_new_disregards!
-          return unless mandatory_capital_disregards
+        def synchronize_mandatory_capital_disregards
+          existing = existing_mandatory_capital_disregards
 
-          mandatory_capital_disregards&.reject { |disregard|
-            existing_mandatory_disregards.include?(disregard)
-          }&.each { |disregard| legal_aid_application.capital_disregards.create!(name: disregard, mandatory: true) }
+          keep = mandatory_capital_disregards.each_with_object([]) do |disregard_type, arr|
+            next unless DISREGARD_TYPES.include?(disregard_type.to_sym)
+
+            add_mandatory_capital_disregard!(disregard_type) if existing.exclude?(disregard_type)
+            arr.append(disregard_type)
+          end
+
+          destroy_all_mandatory_capital_disregards(except: keep)
         end
 
-        # destroy only the records which already exist but aren't selected
-        def destroy_previous_disregards!
-          legal_aid_application.mandatory_capital_disregards&.where&.not(name: mandatory_capital_disregards)&.destroy_all
+        def add_mandatory_capital_disregard!(disregard_type)
+          legal_aid_application.capital_disregards.create!(name: disregard_type, mandatory: true)
         end
 
-        def existing_mandatory_disregards
+        def destroy_all_mandatory_capital_disregards(except:)
+          legal_aid_application
+            .mandatory_capital_disregards
+            .where.not(name: except)
+            .destroy_all
+        end
+
+        def existing_mandatory_capital_disregards
           legal_aid_application.mandatory_capital_disregards.pluck(:name)
         end
 

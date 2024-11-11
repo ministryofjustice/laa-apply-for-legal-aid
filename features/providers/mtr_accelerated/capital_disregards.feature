@@ -1,8 +1,8 @@
-Feature: Discretionary capital disregards question and flow
+Feature: mandatory and discretionary capital disregards questions and flow
 # TODO: This flow file can be moved to a full flow non-passported journey feature after the MTR-A feature flag is removed
 
   @javascript
-  Scenario: When the MTR-A feature flag is off I should not see the discretionary capital disregard question in the flow
+  Scenario: When the MTR-A feature flag is off I should not see the mandatory or discretionary capital disregard questions in the flow
     Given the feature flag for means_test_review_a is disabled
     And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
@@ -38,7 +38,7 @@ Feature: Discretionary capital disregards question and flow
     Then I should be on the "check_capital_answers" page showing "Check your answers"
 
   @javascript
-  Scenario: When the MTR-A feature flag is on I should see the discretionary capital disregard question in the flow
+  Scenario: When the MTR-A feature flag is on I should see the mandatory and discretionary capital disregard question in the flow
     Given the feature flag for means_test_review_a is enabled
     And the MTR-A start date is in the past
     And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
@@ -88,6 +88,18 @@ Feature: Discretionary capital disregards question and flow
       | .govuk-checkboxes__label  | Welsh Independent Living Grant |
       | .govuk-checkboxes__label  | Windrush Compensation Scheme payment |
     And I select "Infected Blood Support Scheme payment"
+    And I click "Save and continue"
+
+    When I click link "Back"
+    Then I should be on a page with title "Disregarded payments"
+    And the checkbox for Government cost of living payment should be unchecked
+    And the checkbox for Infected Blood Support Scheme payment should be checked
+
+    When I click "Save and continue"
+    Then I should be on a page showing "Add details for 'Infected Blood Support Scheme payment'"
+    And I fill 'amount' with '100'
+    And I fill 'account name' with 'Barclays'
+    And I enter the 'date received' date of 50 days ago
 
     When I click "Save and continue"
     Then I should be on a page with title "Payments to be reviewed"
@@ -106,14 +118,18 @@ Feature: Discretionary capital disregards question and flow
     And I select "London Emergencies Trust payment"
 
     When I click "Save and continue"
-    Then I should be on the "check_capital_answers" page showing "Check your answers"
+    Then I should be on a page showing "Add details for 'London Emergencies Trust payment'"
 
     When I click link "Back"
     Then I should be on a page with title "Payments to be reviewed"
     And the checkbox for Grenfell Tower fire victims payment should be unchecked
     And the checkbox for London Emergencies Trust payment should be checked
 
-    When I click link "Back"
-    Then I should be on a page with title "Disregarded payments"
-    And the checkbox for Government cost of living payment should be unchecked
-    And the checkbox for Infected Blood Support Scheme payment should be checked
+    When I click "Save and continue"
+    Then I should be on a page showing "Add details for 'London Emergencies Trust payment'"
+    And I fill 'amount' with '200'
+    And I fill 'account name' with 'Halifax'
+    And I enter the 'date received' date of 20 days ago
+
+    When I click "Save and continue"
+    Then I should be on a page showing "Check your answers"

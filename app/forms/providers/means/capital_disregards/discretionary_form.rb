@@ -57,6 +57,8 @@ module Providers
           existing = existing_discretionary_capital_disregards
 
           keep = discretionary_capital_disregards.each_with_object([]) do |disregard_type, arr|
+            next unless DISREGARD_TYPES.include?(disregard_type.to_sym)
+
             add_discretionary_capital_disregard!(disregard_type) if existing.exclude?(disregard_type)
             arr.append(disregard_type)
           end

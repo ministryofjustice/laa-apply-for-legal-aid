@@ -54,16 +54,16 @@ RSpec.describe Providers::Means::CapitalDisregards::MandatoryController do
         expect(legal_aid_application.mandatory_capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits government_cost_of_living])
       end
 
-      it "redirects to the next page" do
-        expect(response).to redirect_to providers_legal_aid_application_means_capital_disregards_discretionary_path(legal_aid_application)
+      it "redirects to the add_details page" do
+        expect(response).to redirect_to providers_legal_aid_application_means_capital_disregards_add_detail_path(legal_aid_application, legal_aid_application.next_incomplete_mandatory_disregard)
       end
     end
 
     context "when checking passported answers" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
-      it "redirects to the check passported answers page" do
-        expect(response).to redirect_to providers_legal_aid_application_check_passported_answers_path(legal_aid_application)
+      it "redirects to add_details page" do
+        expect(response).to redirect_to providers_legal_aid_application_means_capital_disregards_add_detail_path(legal_aid_application, legal_aid_application.next_incomplete_mandatory_disregard)
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Providers::Means::CapitalDisregards::MandatoryController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
       it "redirects to the non-passported capital CYA page" do
-        expect(response).to redirect_to providers_legal_aid_application_check_capital_answers_path(legal_aid_application)
+        expect(response).to redirect_to providers_legal_aid_application_means_capital_disregards_add_detail_path(legal_aid_application, legal_aid_application.next_incomplete_mandatory_disregard)
       end
     end
 
