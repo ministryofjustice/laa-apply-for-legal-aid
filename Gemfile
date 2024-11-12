@@ -6,7 +6,7 @@ ruby file: ".ruby-version"
 gem "aasm", "~> 5.5.0"
 gem "active_model_serializers", "~> 0.10.14"
 gem "csv"
-gem "discard", "~> 1.3"
+gem "discard", "~> 1.4"
 gem "faraday"
 gem "geckoboard-ruby"
 gem "google-apis-sheets_v4"
@@ -120,7 +120,7 @@ group :development, :test do
   gem "rubocop-performance"
 
   # Available in dev env for generators
-  gem "rspec-rails", "~> 7.0"
+  gem "rspec-rails", "~> 7.1"
 end
 
 group :development do
