@@ -37,7 +37,6 @@ Feature: Means report when partner is present
       | h2  | Student finance |
       | h2  | Employed income result |
       | h2  | Declared cash income |
-      | h2  | Dependants |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
 
@@ -112,6 +111,15 @@ Feature: Means report when partner is present
       | question |
       | Dependants allowance |
       | Total deductions |
+
+    And the Dependants questions should exist:
+      | question |
+      | Does your client or their partner have any dependants? |
+
+    And the Dependants detail questions should exist:
+      | Name |
+      | Date of birth	|
+      | What is their relationship to your client or their partner? |
 
     And the Caseworker review section should contain:
       | question | answer |
