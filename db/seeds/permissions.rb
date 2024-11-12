@@ -1,6 +1,7 @@
 class PermissionsPopulator
   ROLES = {
     # "example.permission.group" => "Description of example group",
+    "special_children_act" => "Allow the firm to access SCA proceedings",
   }.freeze
 
   def self.run
