@@ -40,6 +40,35 @@ RSpec.describe Provider do
         expect(provider.user_permissions).to be_empty
       end
     end
+
+    context "when the firm has SCA permissions" do
+      let(:firm) { create(:firm, :with_sca_permissions) }
+      let(:provider) { create(:provider, :with_no_permissions, firm:) }
+
+      it "returns a value" do
+        expect(provider.user_permissions).to be_a(ActiveRecord::Relation)
+      end
+    end
+  end
+
+  describe "sca_permissions?" do
+    context "with no permissions for provider and their firm" do
+      let(:firm) { create(:firm, :with_no_permissions) }
+      let(:provider) { create(:provider, :with_no_permissions, firm:) }
+
+      it "returns false" do
+        expect(provider.sca_permissions?).to be false
+      end
+    end
+
+    context "when the firm has SCA permissions" do
+      let(:firm) { create(:firm, :with_sca_permissions) }
+      let(:provider) { create(:provider, :with_no_permissions, firm:) }
+
+      it "returns a value" do
+        expect(provider.sca_permissions?).to be true
+      end
+    end
   end
 
   describe "#cms_apply_role?" do
