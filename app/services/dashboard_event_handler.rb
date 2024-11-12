@@ -37,7 +37,6 @@ private
        provider_updated
        ccms_submission_saved
        firm_created
-       feedback_created
        application_submitted
        declined_open_banking]
   end
@@ -61,10 +60,6 @@ private
 
   def firm_created
     Dashboard::UpdaterJob.perform_later("NumberProviderFirms")
-  end
-
-  def feedback_created
-    Dashboard::FeedbackItemJob.perform_later(Feedback.find(payload[:feedback_id]))
   end
 
   def application_submitted

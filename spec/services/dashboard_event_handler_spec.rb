@@ -122,13 +122,6 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "when feedback is created" do
-    it "fires the FeedbackItemJob job" do
-      expect(Dashboard::FeedbackItemJob).to receive(:perform_later)
-      create(:feedback)
-    end
-  end
-
   context "when an application is completed" do
     let(:legal_aid_application) do
       create(:legal_aid_application, :with_proceedings,
