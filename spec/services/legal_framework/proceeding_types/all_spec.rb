@@ -21,8 +21,20 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
     context "when the special children act setting is on" do
       let(:sca_enabled) { true }
 
-      it "returns the expected proceedings" do
-        expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003]
+      context "and the firm has SCA permissions enabled" do
+        let(:firm) { create(:firm, :with_sca_permissions) }
+        let(:provider) { create(:provider, :with_no_permissions, firm:) }
+        let(:legal_aid_application) { create :legal_aid_application, provider: }
+
+        it "returns the expected proceedings" do
+          expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003]
+        end
+      end
+
+      context "and the firm does not have SCA permissions enabled" do
+        it "returns the expected proceedings" do
+          expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006]
+        end
       end
     end
 
@@ -44,8 +56,20 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
       let(:sca_enabled) { true }
       let(:plf_enabled) { true }
 
-      it "returns the expected proceedings" do
-        expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003 PBM01]
+      context "and the firm has SCA permissions enabled" do
+        let(:firm) { create(:firm, :with_sca_permissions) }
+        let(:provider) { create(:provider, :with_no_permissions, firm:) }
+        let(:legal_aid_application) { create :legal_aid_application, provider: }
+
+        it "returns the expected proceedings" do
+          expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003 PBM01]
+        end
+      end
+
+      context "and the firm does not have SCA permissions enabled" do
+        it "returns the expected proceedings" do
+          expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PBM01]
+        end
       end
     end
   end
