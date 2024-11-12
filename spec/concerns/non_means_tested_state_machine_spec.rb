@@ -19,6 +19,7 @@ RSpec.describe NonMeansTestedStateMachine do
     it { is_expected.to transition_from(:provider_entering_merits).to(:merits_parental_responsibilities).on_event(event) }
     it { is_expected.to transition_from(:merits_parental_responsibilities).to(:merits_parental_responsibilities).on_event(event) }
     it { is_expected.to transition_from(:merits_parental_responsibilities_all_rejected).to(:merits_parental_responsibilities_all_rejected).on_event(event) }
+    it { is_expected.to transition_from(:checking_merits_answers).to(:merits_parental_responsibilities).on_event(event) }
   end
 
   describe "#rejected_all_parental_responsibilities" do
