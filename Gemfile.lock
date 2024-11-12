@@ -726,7 +726,7 @@ GEM
       tzinfo (>= 1.0.0)
     uber (0.1.0)
     unicode-display_width (2.6.0)
-    uri (1.0.1)
+    uri (0.13.1)
     useragent (0.16.10)
     vcr (6.3.1)
       base64
@@ -857,6 +857,7 @@ DEPENDENCIES
   super_diff
   table_print
   tzinfo-data
+  uri (< 1.0.0)
   vcr
   view_component
   webdack-uuid_migration (~> 1.5.0)
