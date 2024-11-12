@@ -597,6 +597,21 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           outgoing_cash_transaction,
         )
       end
+
+      it "cleans the regular transaction amount of humanized characters" do
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
+        pension = create(:transaction_type, :pension)
+        params = {
+          "transaction_type_ids" => ["", pension.id],
+          "pension_amount" => "£2,333.66",
+          "pension_frequency" => "monthly",
+        }.merge(legal_aid_application:)
+
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.regular_transactions.first).to have_attributes(amount: 2_333.66)
+      end
     end
   end
 end

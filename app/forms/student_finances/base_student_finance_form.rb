@@ -10,5 +10,9 @@ module StudentFinances
     def student_finance?
       student_finance.eql?("true")
     end
+
+    def attributes_to_clean
+      %i[student_finance_amount]
+    end
   end
 end
