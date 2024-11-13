@@ -17,11 +17,11 @@ en:
           The maximum you can request is currently £25,000. You can request
           more after a caseworker has processed your application.
       providers_means_regular_income_form:
-        transaction_type_ids: Select all that apply. Do not include Housing Benefit, Government Cost of Living Payments, or any other disregarded benefits and payments.
+        transaction_type_ids: Select all that apply.
       providers_means_regular_outgoings_form:
-        transaction_type_ids: Select all that apply
+        transaction_type_ids: Select all that apply.
       providers_partners_regular_outgoings_form:
-        transaction_type_ids: Select all that apply
+        transaction_type_ids: Select all that apply.
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:
