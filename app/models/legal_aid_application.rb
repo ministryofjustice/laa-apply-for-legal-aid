@@ -192,6 +192,50 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") }
   end
 
+  def special_children_act_related_proceedings?
+    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.sca_type.eql?("related") }
+  end
+
+  def client_court_ordered_parental_responsibility?
+    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("court_order") }
+  end
+  alias_method :parental_responsibility_court_order_relationship?, :client_court_ordered_parental_responsibility?
+
+  def client_parental_responsibility_agreement?
+    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("parental_responsibility_agreement") }
+  end
+  alias_method :parental_responsibility_agreement_relationship?, :client_parental_responsibility_agreement?
+
+  def client_biological_parent?
+    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("biological") }
+  end
+  alias_method :biological_parent_relationship?, :client_biological_parent?
+
+  def child_subject_relationship?
+    # This is similar to the AttributeValueGenerator.child_subject_of_proceeding? method but is unique
+    # as it is used to generate reports and, for the reports, we only want to look at the merits task answer
+    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("child_subject") }
+  end
+
+  def parental_responsibility_evidence?
+    attachments&.parental_responsibility&.exists?
+  end
+
+  def auto_grant_special_children_act?
+    special_children_act_proceedings? && auto_grant_exclusions
+  end
+
+  def auto_grant_exclusions
+    # If any of these are true then auto-granting should not occur
+    # This list is not definitive, it is accurate for the initial release of SCA, Oct 2024
+    # e.g. when Apply starts handling high-cost cases we could add a test for claims > £25,000
+    [
+      special_children_act_related_proceedings?,
+      client_court_ordered_parental_responsibility?,
+      client_parental_responsibility_agreement?,
+    ].none?
+  end
+
   def evidence_is_required?
     RequiredDocumentCategoryAnalyser.call(self)
     required_document_categories.any?
@@ -642,31 +686,6 @@ class LegalAidApplication < ApplicationRecord
 
   def related_proceedings
     proceedings.where(sca_type: "related")
-  end
-
-  def biological_parent_relationship?
-    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("biological") }
-  end
-
-  def parental_responsibility_court_order_relationship?
-    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("court_order") }
-  end
-
-  def parental_responsibility_agreement_relationship?
-    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("parental_responsibility_agreement") }
-  end
-
-  def child_subject_relationship?
-    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("child_subject") }
-  end
-
-  def parental_responsibility_evidence?
-    attachments&.parental_responsibility&.exists?
-  end
-
-  def auto_grant_special_children_act?(_options)
-    # TODO: extract autogrant logic into model
-    false
   end
 
   def next_incomplete_discretionary_disregard
