@@ -86,12 +86,31 @@ RSpec.describe Providers::Partners::StudentFinancesController do
       end
 
       context "when the provider selects `No`" do
+        let(:student_finance) { "false" }
+
         it "updates the partner" do
           login_as provider
           request
 
           expect(partner.reload.student_finance).to be false
           expect(partner.reload.student_finance_amount).to be_nil
+        end
+      end
+
+      context "when the provider selects `No` after previously selecting `Yes` and adding an amount" do
+        before do
+          partner.update!(student_finance: true, student_finance_amount: 1_000.22)
+        end
+
+        let(:student_finance) { "false" }
+        let(:student_finance_amount) { 1_000.22 }
+
+        it "updates the partner" do
+          login_as provider
+
+          expect { request }.to change { partner.reload.attributes.symbolize_keys }
+            .from(hash_including(student_finance: true, student_finance_amount: 1_000.22))
+            .to(hash_including(student_finance: false, student_finance_amount: nil))
         end
       end
 

@@ -11,7 +11,13 @@
                                           end,
                                           caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "xl" },
                                           legend: { text: content_for(:page_title), tag: "h1", size: "xl" } do %>
-      <%= form.govuk_radio_button(:student_finance, true, label: { text: t("generic.yes") }, checked: @receives_student_finance, link_errors: true) do %>
+
+      <%= form.govuk_radio_button(
+            :student_finance,
+            true,
+            label: { text: t("generic.yes") },
+            link_errors: true,
+          ) do %>
         <%= form.govuk_text_field(
               :student_finance_amount,
               label: { text: t(".amount_label") },
@@ -20,7 +26,12 @@
               width: "one-quarter",
             ) %>
       <% end %>
-      <%= form.govuk_radio_button(:student_finance, false, label: { text: t("generic.no") }, checked: @receives_student_finance == false) %>
+
+      <%= form.govuk_radio_button(
+            :student_finance,
+            false,
+            label: { text: t("generic.no") },
+          ) %>
     <% end %>
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
