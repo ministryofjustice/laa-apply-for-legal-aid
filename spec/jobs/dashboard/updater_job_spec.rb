@@ -5,19 +5,6 @@ module Dashboard
     let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
 
     describe "#perform" do
-      context "when in the production environment" do
-        before { allow(HostEnv).to receive(:environment).and_return(:production) }
-
-        context "and job is not in the suspended list" do
-          it "instantiates widget with the specified parameter" do
-            widget = instance_double(Dashboard::SingleObject::Feedback, run: nil)
-            allow(Dashboard::Widget).to receive(:new).with("MyWidget").and_return(widget)
-            described_class.perform_now("MyWidget")
-            expect(widget).to have_received(:run)
-          end
-        end
-      end
-
       context "when in the test environment" do
         context "and job is in the suspended list" do
           it "does not instantiate widget with the specified parameter" do

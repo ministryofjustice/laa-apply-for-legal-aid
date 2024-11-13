@@ -122,15 +122,12 @@ module LaaApplyForLegalAid
     # list geckoboard updater jobs which are suspended by host environment
     config.x.suspended_geckoboard_updater_jobs = {
       development: %w[
-        Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
       test: %w[
-        Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
       uat: %w[
-        Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
       staging: [],

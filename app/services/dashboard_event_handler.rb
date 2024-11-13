@@ -34,19 +34,13 @@ private
 
   def valid_events
     %w[application_created
-       provider_updated
        ccms_submission_saved
-       firm_created
        application_submitted
        declined_open_banking]
   end
 
   def application_created
     Dashboard::UpdaterJob.perform_later("Applications") if payload[:state] == "initiated"
-  end
-
-  def provider_updated
-    Dashboard::ProviderDataJob.perform_later(Provider.find(payload[:provider_id]))
   end
 
   def ccms_submission_saved
@@ -56,10 +50,6 @@ private
 
   def declined_open_banking
     Dashboard::UpdaterJob.perform_later("PercentageDeclinedOpenBanking")
-  end
-
-  def firm_created
-    Dashboard::UpdaterJob.perform_later("NumberProviderFirms")
   end
 
   def application_submitted

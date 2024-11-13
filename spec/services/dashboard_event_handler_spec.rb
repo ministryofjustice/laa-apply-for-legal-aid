@@ -31,26 +31,6 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context "when a provider is updated" do
-    before do
-      allow_any_instance_of(described_class).to receive(:firm_created)
-    end
-
-    it "fires a ProviderDataJob event" do
-      expect_any_instance_of(described_class).to receive(:provider_updated).and_call_original
-      expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(:once)
-
-      create(:provider)
-    end
-  end
-
-  context "when a firm is created" do
-    it "fires a NumberProviderFirms job" do
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with("NumberProviderFirms")
-      create(:firm)
-    end
-  end
-
   context "when a ccms_submission is saved" do
     subject(:create_ccms_submission) { create(:ccms_submission, aasm_state: state) }
 
@@ -137,7 +117,6 @@ RSpec.describe DashboardEventHandler do
     end
 
     it "fires the submitted applications job" do
-      expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(:once)
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(:once)
       legal_aid_application.merits_complete!
     end
