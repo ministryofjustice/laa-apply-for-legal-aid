@@ -403,6 +403,24 @@ module CCMS
                                      .and have_xml("#{address_xpath}/common:AddressLine3", "Placeholder City")
           end
         end
+
+        describe "non-SCA applications" do
+          it "excludes the SCA_AUTO_GRANT block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
+            expect(block).not_to be_present
+          end
+
+          it "excludes the SCA_DEVOLVED_POWERS block" do
+            block = XmlExtractor.call(request_xml, :global_merits, "SCA_DEVOLVED_POWERS")
+            expect(block).not_to be_present
+          end
+
+          it "includes the FAMILY_PROSPECTS_OF_SUCCESS block" do
+            # this merits question is asked in all non-SCA proceedings
+            block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
+            expect(block).to be_present
+          end
+        end
       end
     end
   end
