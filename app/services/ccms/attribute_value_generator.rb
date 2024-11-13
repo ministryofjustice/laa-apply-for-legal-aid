@@ -109,6 +109,28 @@ module CCMS
       legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB"
     end
 
+    def backdated_sca_application?(_options)
+      legal_aid_application.special_children_act_proceedings? && legal_aid_application.used_delegated_functions?
+    end
+
+    def child_subject_to_sao?(_options)
+      legal_aid_application.proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") && proceeding.client_involvement_type_ccms_code.eql?("W") }
+    end
+
+    def child_subject_of_proceeding?(_options)
+      # This is similar to the LegalAidApplication.child_subject_relationship? but is unique
+      # as it is used to generate CCMS data. For the sake of CCMS we don't care if they've answered the question
+      # as Client Involvement Type or using the merits task, just that there is a child subject on the application
+      legal_aid_application.proceedings.any? do |proceeding|
+        proceeding.special_childrens_act? &&
+          (proceeding.relationship_to_child.eql?("child_subject") || proceeding.client_involvement_type_ccms_code.eql?("W"))
+      end
+    end
+
+    def client_non_biological_parent?(_options)
+      legal_aid_application.client_court_ordered_parental_responsibility? || legal_aid_application.client_parental_responsibility_agreement?
+    end
+
     def provider_firm_id(_options)
       legal_aid_application.provider.firm.ccms_id
     end
@@ -467,7 +489,7 @@ module CCMS
     end
 
     def bypass_manual_review_in_ccms?(_options)
-      !manual_case_review_required?
+      !manual_case_review_required? || legal_aid_application.auto_grant_special_children_act?
     end
 
     def manual_case_review_required?
