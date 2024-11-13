@@ -11,6 +11,14 @@ Feature: Disregarded benefits list changes for MTR-Accelerated measures
     Then I should see govuk-details 'What not to include'
 
     When I open the section 'What not to include'
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Government Cost of Living Payments |
+      | h2  | Disregarded benefits |
+      | h3  | Carer and disability benefits |
+      | h3  | Low income benefits |
+      | h3  | Other benefits |
+
     Then I should see 'They are known as mandatory disregards'
     And I should see 'Benefit Transfer Advance \(Universal Credit\)'
     And I should see 'Council Tax Reduction'
@@ -34,6 +42,14 @@ Feature: Disregarded benefits list changes for MTR-Accelerated measures
     Then I should see govuk-details 'What not to include'
 
     When I open the section 'What not to include'
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Government Cost of Living Payments |
+      | h2  | Disregarded benefits and payments |
+      | h3  | Carer and disability |
+      | h3  | Low income |
+      | h3  | Other |
+
     Then I should see 'They are known as mandatory disregards'
     And I should not see 'Benefit Transfer Advance'
     And I should not see 'Council Tax Reduction'

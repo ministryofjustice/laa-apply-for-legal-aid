@@ -222,11 +222,11 @@ en:
         - Energy Bills Support Scheme (EBSS)
         - Payments for those who are not served by mains gas
     disregarded_benefits:
-      header: Disregarded benefits
-      text: The following benefits are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
       mtra:
+        header: Disregarded benefits and payments
+        text: The following are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
         carer_disability:
-          heading: Carer and disability benefits
+          heading: Carer and disability
           list_html:
           - Attendance Allowance
           - Carer's Allowance
@@ -241,7 +241,7 @@ en:
           - Special Education Needs (SEN) Direct Payment
           - Welsh Independent Living Grant
         low_income:
-          heading: Low income benefits
+          heading: Low income
           list_html:
           - Budgeting Advance
           - Housing Benefit
@@ -249,7 +249,7 @@ en:
           - Social Fund payments
           - Universal Credit advance payments
         other:
-          heading: Other benefits
+          heading: Other
           list_html:
           - Armed Forces Independence Payment
           - Compensation for miscarriage of justice
@@ -263,6 +263,8 @@ en:
           - War Widow(er) Pension
           - Windrush Compensation Scheme Payments
       pre_mtra:
+        header: Disregarded benefits
+        text: The following benefits are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
         carer_disability:
           heading: Carer and disability benefits
           list_html:

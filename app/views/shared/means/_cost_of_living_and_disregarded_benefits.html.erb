@@ -10,8 +10,8 @@
 
   <% mtra_scope = Setting.means_test_review_a? ? :mtra : :pre_mtra %>
 
-  <h2 class="govuk-heading-m"><%= t("shared.disregarded_benefits.header") %></h2>
-  <p class="govuk-body"><%= t("shared.disregarded_benefits.text") %></p>
+  <h2 class="govuk-heading-m"><%= t("shared.disregarded_benefits.#{mtra_scope}.header") %></h2>
+  <p class="govuk-body"><%= t("shared.disregarded_benefits.#{mtra_scope}.text") %></p>
 
   <% %w[carer_disability low_income other].each do |category| %>
     <h3 class="govuk-heading-s"><%= t("shared.disregarded_benefits.#{mtra_scope}.#{category}.heading") %></h3>
