@@ -338,6 +338,9 @@ FactoryBot.define do
     client_involvement_type_ccms_code { "A" }
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     sca_type { "related" }
+    after(:create) do |proceeding, evaluator|
+      create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
+    end
   end
 
   trait :pb059 do
