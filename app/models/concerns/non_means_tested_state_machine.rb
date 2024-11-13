@@ -11,6 +11,7 @@ class NonMeansTestedStateMachine < BaseStateMachine
       transitions from: :provider_entering_merits, to: :merits_parental_responsibilities
       transitions from: :merits_parental_responsibilities, to: :merits_parental_responsibilities
       transitions from: :merits_parental_responsibilities_all_rejected, to: :merits_parental_responsibilities_all_rejected
+      transitions from: :checking_merits_answers, to: :merits_parental_responsibilities
     end
 
     event :rejected_all_parental_responsibilities do
