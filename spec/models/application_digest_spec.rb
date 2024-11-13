@@ -522,5 +522,82 @@ RSpec.describe ApplicationDigest do
         end
       end
     end
+
+    describe "sca fields" do
+      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child:) }
+
+      before { laa.proceedings << sca_proceeding }
+
+      context "when the application has a proceeding with relationship_to_child biological" do
+        let(:relationship_to_child) { "biological" }
+
+        it "returns the expected data" do
+          application_digest
+          expect(digest.biological_parent).to be true
+          expect(digest.parental_responsibility_agreement).to be false
+          expect(digest.parental_responsibility_court_order).to be false
+          expect(digest.child_subject).to be false
+          expect(digest.parental_responsibility_evidence).to be false
+        end
+      end
+
+      context "when the application has a proceeding with relationship_to_child parental_responsibility_agreement" do
+        let(:relationship_to_child) { "parental_responsibility_agreement" }
+        let(:parental_responsibility_evidence) { create(:attachment, :parental_responsibility, attachment_name: "parental_responsibility") }
+
+        before do
+          laa.proceedings << sca_proceeding
+          laa.attachments << parental_responsibility_evidence
+        end
+
+        it "returns the expected data" do
+          application_digest
+          expect(digest.biological_parent).to be false
+          expect(digest.parental_responsibility_agreement).to be true
+          expect(digest.parental_responsibility_court_order).to be false
+          expect(digest.child_subject).to be false
+          expect(digest.parental_responsibility_evidence).to be true
+        end
+      end
+
+      context "when the application has a proceeding with relationship_to_child court_order" do
+        let(:relationship_to_child) { "court_order" }
+
+        before { laa.proceedings << sca_proceeding }
+
+        it "returns the expected data" do
+          application_digest
+          expect(digest.biological_parent).to be false
+          expect(digest.parental_responsibility_agreement).to be false
+          expect(digest.parental_responsibility_court_order).to be true
+          expect(digest.child_subject).to be false
+          expect(digest.parental_responsibility_evidence).to be false
+        end
+      end
+
+      context "when the application has a proceeding with relationship_to_child child_subject" do
+        let(:relationship_to_child) { "child_subject" }
+
+        before { laa.proceedings << sca_proceeding }
+
+        it "returns the expected data" do
+          application_digest
+          expect(digest.biological_parent).to be false
+          expect(digest.parental_responsibility_agreement).to be false
+          expect(digest.parental_responsibility_court_order).to be false
+          expect(digest.child_subject).to be true
+          expect(digest.parental_responsibility_evidence).to be false
+        end
+      end
+    end
+
+    describe "autogranted" do
+      context "when the application is not autogranted" do
+        it "returns autogranted false" do
+          application_digest
+          expect(digest.autogranted).to be false
+        end
+      end
+    end
   end
 end

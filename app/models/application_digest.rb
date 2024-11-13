@@ -14,6 +14,12 @@ class ApplicationDigest < ApplicationRecord
     family_linked
     legal_linked
     no_fixed_address
+    biological_parent
+    parental_responsibility_agreement
+    parental_responsibility_court_order
+    child_subject
+    parental_responsibility_evidence
+    autogranted
   ].freeze
 
   class << self
@@ -64,6 +70,12 @@ class ApplicationDigest < ApplicationRecord
         legal_linked_lead_or_associated: laa.legal_linked_lead_or_associated,
         number_of_legal_linked_applications: laa.legal_linked_applications_count,
         no_fixed_address: laa.applicant.no_fixed_residence?,
+        biological_parent: laa.biological_parent_relationship?,
+        parental_responsibility_agreement: laa.parental_responsibility_agreement_relationship?,
+        parental_responsibility_court_order: laa.parental_responsibility_court_order_relationship?,
+        child_subject: laa.child_subject_relationship?,
+        parental_responsibility_evidence: laa.parental_responsibility_evidence?,
+        autogranted: laa.auto_grant_special_children_act?(nil),
       }
     end
 

@@ -650,6 +650,31 @@ class LegalAidApplication < ApplicationRecord
     proceedings.where(sca_type: "related")
   end
 
+  def biological_parent_relationship?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("biological") }
+  end
+
+  def parental_responsibility_court_order_relationship?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("court_order") }
+  end
+
+  def parental_responsibility_agreement_relationship?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("parental_responsibility_agreement") }
+  end
+
+  def child_subject_relationship?
+    proceedings.any? { |proceeding| proceeding.relationship_to_child.eql?("child_subject") }
+  end
+
+  def parental_responsibility_evidence?
+    attachments&.parental_responsibility&.exists?
+  end
+
+  def auto_grant_special_children_act?(_options)
+    # TODO: extract autogrant logic into model
+    false
+  end
+
 private
 
   def expired_by_2023_surname_at_birth_issue?

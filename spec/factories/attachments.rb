@@ -32,6 +32,12 @@ FactoryBot.define do
       attachment_name { "bank_transaction_report.csv" }
     end
 
+    trait :parental_responsibility do
+      attachment_type { "parental_responsibility" }
+      sequence(:attachment_name) { |n| "parental_responsibility_#{n}" }
+      sequence(:original_filename) { "original_filename.pdf" }
+    end
+
     trait :uploaded_evidence_collection do
       attachment_type { "uncategorised" }
       attachment_name { "uploaded_evidence_collection" }

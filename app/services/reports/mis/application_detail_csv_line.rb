@@ -173,6 +173,13 @@ module Reports
           "Number of legal links",
           "No fixed address",
           "Previous CCMS ref?",
+          "Child subject client involvment type?",
+          "Biological parent relationship?",
+          "Parental responsibility agreement relationship?",
+          "Parental responsibility court order relationship?",
+          "Child subject relationship?",
+          "Parental responsibility evidence?",
+          "Autogranted?",
         ]
       end
 
@@ -209,6 +216,9 @@ module Reports
         linked_applications
         home_address
         previous_ccms_ref
+        child_subject_client_involvement_type
+        sca
+        autogranted
         sanitise
       end
 
@@ -452,6 +462,32 @@ module Reports
 
       def previous_ccms_ref
         @line << yesno(laa.applicant.previous_reference.present?)
+      end
+
+      def child_subject_client_involvement_type
+        @line << yesno(proceedings.any? { |proceeding| proceeding.client_involvement_type_ccms_code.eql?("W") })
+      end
+
+      def sca
+        if laa.special_children_act_proceedings?
+          @line << yesno(laa.biological_parent_relationship?)
+          @line << yesno(laa.parental_responsibility_agreement_relationship?)
+          @line << yesno(laa.parental_responsibility_court_order_relationship?)
+          @line << yesno(laa.child_subject_relationship?)
+          @line << if laa.parental_responsibility_agreement_relationship? || laa.parental_responsibility_court_order_relationship?
+                     yesno(laa.parental_responsibility_evidence?)
+                   end
+        else
+          @line << nil
+          @line << nil
+          @line << nil
+          @line << nil
+          @line << nil
+        end
+      end
+
+      def autogranted
+        @line << yesno(laa.auto_grant_special_children_act?(nil))
       end
 
       def yesno(value)
