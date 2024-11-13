@@ -6,7 +6,7 @@ ruby file: ".ruby-version"
 gem "aasm", "~> 5.5.0"
 gem "active_model_serializers", "~> 0.10.14"
 gem "csv"
-gem "discard", "~> 1.3"
+gem "discard", "~> 1.4"
 gem "faraday"
 gem "geckoboard-ruby"
 gem "google-apis-sheets_v4"
@@ -103,6 +103,13 @@ gem "view_component"
 # Catching unsafe migrations in development
 gem "strong_migrations"
 
+# TODO: Added on 12 Nov 2024 - CB - review as part of AP-5513
+# The 1.0.0+ version of URI deprecated certain URI pattern names
+# this in turn broke CookieJar, a deprecated gem, that is used in em-http-request, that is
+# required by puffing-billy.  Rather than strip out puffing-billy or wait weeks for the
+# maintainers of upstream gems to agree a path, we are locking this below the breaking change
+gem "uri", "< 1.0.0"
+
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -120,7 +127,7 @@ group :development, :test do
   gem "rubocop-performance"
 
   # Available in dev env for generators
-  gem "rspec-rails", "~> 7.0"
+  gem "rspec-rails", "~> 7.1"
 end
 
 group :development do

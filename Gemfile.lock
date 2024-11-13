@@ -105,8 +105,8 @@ GEM
     attr_extras (7.1.0)
     awesome_print (1.9.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.1001.0)
-    aws-sdk-core (3.211.0)
+    aws-partitions (1.1005.0)
+    aws-sdk-core (3.212.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
@@ -114,18 +114,18 @@ GEM
     aws-sdk-kms (1.95.0)
       aws-sdk-core (~> 3, >= 3.210.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.169.0)
+    aws-sdk-s3 (1.170.1)
       aws-sdk-core (~> 3, >= 3.210.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.10.1)
       aws-eventstream (~> 1, >= 1.0.2)
-    axe-core-api (4.10.1)
+    axe-core-api (4.10.2)
       dumb_delegator
       ostruct
       virtus
-    axe-core-cucumber (4.10.1)
-      axe-core-api (= 4.10.1)
+    axe-core-cucumber (4.10.2)
+      axe-core-api (= 4.10.2)
       dumb_delegator
       ostruct
       virtus
@@ -135,7 +135,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.2.0)
     bcrypt (3.1.20)
-    benchmark (0.3.0)
+    benchmark (0.4.0)
     better_html (2.1.1)
       actionview (>= 6.0)
       activesupport (>= 6.0)
@@ -170,7 +170,7 @@ GEM
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    combine_pdf (1.0.26)
+    combine_pdf (1.0.28)
       matrix
       ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.3.4)
@@ -234,8 +234,8 @@ GEM
       ruby-saml (~> 1.7)
     dibber (0.7.0)
     diff-lcs (1.5.1)
-    discard (1.3.0)
-      activerecord (>= 4.2, < 8)
+    discard (1.4.0)
+      activerecord (>= 4.2, < 9.0)
     docile (1.4.1)
     dotenv (3.1.4)
     drb (2.2.1)
@@ -302,11 +302,11 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (>= 0.16, < 2.a)
-    govuk-components (5.7.0)
+    govuk-components (5.7.1)
       html-attributes-utils (~> 1.0.0, >= 1.0.0)
       pagy (>= 6, < 10)
-      view_component (>= 3.9, < 3.17)
-    govuk_design_system_formbuilder (5.7.0)
+      view_component (>= 3.18, < 3.21)
+    govuk_design_system_formbuilder (5.7.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -342,7 +342,7 @@ GEM
     guard-rubocop (1.5.0)
       guard (~> 2.0)
       rubocop (< 2.0)
-    hashdiff (1.1.1)
+    hashdiff (1.1.2)
     hashie (5.0.0)
     highline (3.1.1)
       reline
@@ -374,7 +374,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.7.6)
+    json (2.8.1)
     json_expressions (0.9.0)
     jsonapi-renderer (0.2.2)
     jwt (2.9.3)
@@ -403,7 +403,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
     minitest (5.25.1)
-    msgpack (1.7.3)
+    msgpack (1.7.5)
     multi_json (1.15.0)
     multi_test (1.1.0)
     multi_xml (0.7.1)
@@ -411,9 +411,9 @@ GEM
     mutex_m (0.2.0)
     nenv (0.3.0)
     nesty (1.0.2)
-    net-http (0.4.1)
+    net-http (0.5.0)
       uri
-    net-imap (0.5.0)
+    net-imap (0.5.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -462,15 +462,15 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    optimist (3.1.0)
+    optimist (3.2.0)
     orm_adapter (0.5.0)
     os (1.1.4)
-    ostruct (0.6.0)
+    ostruct (0.6.1)
     overcommit (0.64.1)
       childprocess (>= 0.6.3, < 6)
       iniparse (~> 1.4)
       rexml (>= 3.3.9)
-    pagy (9.1.1)
+    pagy (9.2.2)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -498,7 +498,7 @@ GEM
     pry-stack_explorer (0.6.1)
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
-    psych (5.1.2)
+    psych (5.2.0)
       stringio
     public_suffix (6.0.1)
     puffing-billy (4.0.0)
@@ -577,7 +577,7 @@ GEM
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
-    reline (0.5.10)
+    reline (0.5.11)
       io-console (~> 0.5)
     representable (3.2.0)
       declarative (< 0.1.0)
@@ -600,7 +600,7 @@ GEM
     rspec-mocks (3.13.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (7.0.1)
+    rspec-rails (7.1.0)
       actionpack (>= 7.0)
       activesupport (>= 7.0)
       railties (>= 7.0)
@@ -658,7 +658,7 @@ GEM
       nokogiri (>= 1.13.10)
       rexml
     rubyzip (2.3.2)
-    securerandom (0.3.1)
+    securerandom (0.3.2)
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
@@ -704,8 +704,8 @@ GEM
       hashie
       version_gem (~> 1.1, >= 1.1.1)
     spring (4.2.1)
-    stringio (3.1.1)
-    strong_migrations (2.0.2)
+    stringio (3.1.2)
+    strong_migrations (2.1.0)
       activerecord (>= 6.1)
     super_diff (0.13.0)
       attr_extras (>= 6.2.4)
@@ -718,7 +718,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.3.2)
     thread_safe (0.3.6)
-    timeout (0.4.1)
+    timeout (0.4.2)
     trailblazer-option (0.1.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -731,8 +731,8 @@ GEM
     vcr (6.3.1)
       base64
     version_gem (1.1.4)
-    view_component (3.16.0)
-      activesupport (>= 5.2.0, < 8.0)
+    view_component (3.20.0)
+      activesupport (>= 5.2.0, < 8.1)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
     virtus (2.0.0)
@@ -782,7 +782,7 @@ DEPENDENCIES
   devise
   devise_saml_authenticatable (>= 1.7.0)
   dibber
-  discard (~> 1.3)
+  discard (~> 1.4)
   dotenv
   erb_lint (= 0.7.0)
   factory_bot_rails (>= 6.2.0)
@@ -836,7 +836,7 @@ DEPENDENCIES
   rails-controller-testing
   redis
   rexml
-  rspec-rails (~> 7.0)
+  rspec-rails (~> 7.1)
   rspec-sidekiq
   rspec_junit_formatter
   rubocop-govuk
@@ -857,6 +857,7 @@ DEPENDENCIES
   super_diff
   table_print
   tzinfo-data
+  uri (< 1.0.0)
   vcr
   view_component
   webdack-uuid_migration (~> 1.5.0)
