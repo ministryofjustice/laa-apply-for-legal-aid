@@ -1,0 +1,27 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_means_capital_disregards_add_detail_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <% mandatory_or_discretionary = @capital_disregard.mandatory? ? "mandatory" : "discretionary" %>
+
+  <%= page_template(
+        page_title: t(".page_title", name: @capital_disregard.name),
+        template: :basic,
+        form:,
+      ) do %>
+
+    <%= form.govuk_fieldset legend: { text: t(".page_title", name: t("providers.means.capital_disregards.#{mandatory_or_discretionary}.#{@capital_disregard.name}")), size: "xl", tag: "h1" } do %>
+      <% if @capital_disregard.name.in?(["compensation_for_personal_harm", "loss_or_harm_relating_to_this_application"]) %>
+        <%= form.govuk_text_field :payment_reason, label: { text: t(".payment_reason") } %>
+      <% end %>
+      <%= form.govuk_text_field :amount, width: "one-quarter", label: { text: t(".amount") }, prefix_text: "£" %>
+      <%= form.govuk_text_field :account_name, width: "three-quarters", label: { text: t(".bank_account") }, hint: { text: t(".bank_account_hint") } %>
+      <%= form.govuk_date_field :date_received, legend: { text: t(".received_date"), size: "s", class: "govuk-body govuk-!-font-weight-regular" } %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

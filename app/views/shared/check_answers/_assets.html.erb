@@ -1,4 +1,5 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+<% means_report = false unless local_assigns.key?(:means_report) %>
 <% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
 <% showing_bank_accounts = @legal_aid_application.partner_uploading_bank_statements? ||
@@ -16,6 +17,7 @@
 <% if showing_bank_accounts %>
   <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
 <% end %>
+
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
 
@@ -83,6 +85,8 @@
                     else
                       :offline_accounts
                     end %>
+
+    <%#  offline savings accounts for partner %>
     <div class="govuk-grid-row" id="app-check-your-answers__partner_offline_accounts_link">
       <% if read_only == false %>
         <div class="govuk-grid-column-two-thirds">
@@ -99,6 +103,7 @@
         </div>
       <% end %>
     </div>
+
     <%= govuk_summary_list(classes: "govuk-!-margin-bottom-9", html_attributes: { "data-test": "partner-bank-accounts" }) do |summary_list| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_offline_current_accounts" }) do |row| %>
         <%= row.with_key(text: t(".assets.partner_current_account"), classes: "govuk-!-width-one-half") %>
@@ -110,6 +115,7 @@
       <% end %>
     <% end %>
 
+    <%#  offline savings accounts for bank statement uploads or passported %>
     <% if @legal_aid_application.uploading_bank_statements? || !@legal_aid_application.non_passported? %>
       <div class="govuk-grid-row" id="app-check-your-answers__joint_offline_accounts_link">
         <% if read_only == false %>
@@ -140,12 +146,14 @@
     <% end %>
   <% end %>
 
+  <%#  offline savings accounts for non-passpoted truelayer %>
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
     <div class="govuk-!-padding-bottom-9">
       <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
     </div>
   <% end %>
 
+  <%#  savings and investments %>
   <div class="govuk-!-padding-bottom-9">
     <%= render(
           "shared/check_answers/one_link_section",
@@ -160,6 +168,7 @@
         ) %>
   </div>
 
+  <%#  other assets %>
   <%= render(
         "shared/check_answers/one_link_section",
         name: :other_assets,
@@ -173,8 +182,10 @@
         read_only:,
       ) %>
 
+  <%#  asset restrictions %>
   <%= render("shared/check_answers/restrictions", read_only:, individual:) if @legal_aid_application.own_capital? %>
 
+  <%#  policy disregards %>
   <section class="print-no-break">
     <% if @legal_aid_application.policy_disregards.present? %>
       <%= render(
@@ -185,6 +196,17 @@
             answer_hash: policy_disregards_list(@legal_aid_application.policy_disregards),
             read_only:,
           ) %>
+    <% end %>
+  </section>
+
+  <%#  capital disregards %>
+  <section class="print-no-break">
+    <% if Setting.means_test_review_a? %>
+      <% if means_report %>
+        <%= render("providers/means_reports/capital_disregards", read_only:, individual:) %>
+      <% else %>
+        <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
+      <% end %>
     <% end %>
   </section>
 </section>

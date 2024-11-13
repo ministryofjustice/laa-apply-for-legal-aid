@@ -11,15 +11,14 @@
                                         form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
       <div class="govuk-hint"><%= t(".hint") %></div>
       <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
-
       <div class="deselect-group" data-deselect-ctrl="#providers-means-capital-disregards-discretionary-form-none-selected-true-field">
         <% Providers::Means::CapitalDisregards::DiscretionaryForm::DISREGARD_TYPES.each_with_index do |disregard_type, index| %>
           <%= form.govuk_check_box(
                 :discretionary_capital_disregards,
                 disregard_type.to_s,
                 link_errors: index.zero?,
-                label: { text: t(".#{disregard_type}") },
-                hint: { text: t(".#{disregard_type}_hint", default: "") },
+                label: { text: t("providers.means.capital_disregards.discretionary.#{disregard_type}") },
+                hint: { text: t("providers.means.capital_disregards.discretionary.#{disregard_type}_hint", default: "") },
               ) %>
         <% end %>
       </div>
