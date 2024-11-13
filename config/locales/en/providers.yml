@@ -326,8 +326,8 @@ en:
       show:
         h1-heading: Check your answers
         h2-heading: Your client's capital
-        chances_of_success_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
-        chances_of_success_h2: What happens next
+        what_happens_next: What happens next
+        what_happens_next_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
     check_provider_answers:
       standard:
         title: Check your answers

@@ -152,19 +152,17 @@
   <% end %>
 
   <%#  savings and investments %>
-  <div class="govuk-!-padding-bottom-9">
-    <%= render(
-          "shared/check_answers/one_link_section",
-          name: :savings_and_investments,
-          url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-          question: t(".assets.savings_and_investments#{individual}"),
-          answer_hash: capital_assets_list(
-            @legal_aid_application,
-            locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
-          ),
-          read_only:,
-        ) %>
-  </div>
+  <%= render(
+        "shared/check_answers/one_link_section",
+        name: :savings_and_investments,
+        url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
+        question: t(".assets.savings_and_investments#{individual}"),
+        answer_hash: capital_assets_list(
+          @legal_aid_application,
+          locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
+        ),
+        read_only:,
+      ) %>
 
   <%#  other assets %>
   <%= render(
