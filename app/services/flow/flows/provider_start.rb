@@ -30,6 +30,7 @@ module Flow
         proceedings_sca_heard_togethers: Steps::ProceedingsSCA::HeardTogethersStep,
         proceedings_sca_heard_as_alternatives: Steps::ProceedingsSCA::HeardAsAlternativesStep,
         proceedings_sca_change_of_names: Steps::ProceedingsSCA::ChangeOfNamesStep,
+        proceedings_sca_interrupts: Steps::ProceedingsSCA::InterruptsStep,
         has_other_proceedings: Steps::ProviderStart::HasOtherProceedingsStep,
         limitations: Steps::ProviderStart::LimitationsStep,
         has_national_insurance_numbers: Steps::ProviderStart::HasNationalInsuranceNumbersStep,

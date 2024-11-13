@@ -1,6 +1,7 @@
 module Providers
   module ProceedingsSCA
     class InterruptsController < ProviderBaseController
+      prefix_step_with :proceedings_sca
       def show
         type
       end
