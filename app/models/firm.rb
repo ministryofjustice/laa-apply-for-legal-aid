@@ -6,10 +6,6 @@ class Firm < ApplicationRecord
   has_many :actor_permissions, as: :permittable
   has_many :permissions, through: :actor_permissions
 
-  after_create do
-    ActiveSupport::Notifications.instrument "dashboard.firm_created"
-  end
-
   def self.search(search_term)
     if search_term
       where("name ILIKE ?", "%#{search_term}%")

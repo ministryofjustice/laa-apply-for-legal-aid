@@ -267,11 +267,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminAllowCreateTestApplications
-  - name: GECKOBOARD_API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: geckoboardApiKey
   - name: GOOGLE_TAG_MANAGER_TRACKING_ID
     valueFrom:
       secretKeyRef:

@@ -3,8 +3,6 @@ require "sidekiq-status"
 require "prometheus_exporter/client"
 require "prometheus_exporter/instrumentation"
 
-module Dashboard; end
-
 redis_url = Rails.configuration.x.redis.base_url
 
 Sidekiq.configure_client do |config|

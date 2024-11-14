@@ -65,7 +65,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController do
         let(:client_declaration_confirmed) { "" }
         let(:submit_button) { { draft_button: "Save as draft" } }
 
-        it "sets the application as draft and redirects to the dashboard", :aggregate_failures do
+        it "sets the application as draft and redirects to the your applications page", :aggregate_failures do
           expect(legal_aid_application.reload).to be_draft
           expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
         end

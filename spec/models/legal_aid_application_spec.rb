@@ -448,12 +448,6 @@ RSpec.describe LegalAidApplication do
         expect(legal_aid_application.reload.merits_submitted_at).to eq(date)
       end
     end
-
-    it "calls on rails notification service" do
-      allow(ActiveSupport::Notifications).to receive(:instrument)
-      legal_aid_application.merits_complete!
-      expect(ActiveSupport::Notifications).to have_received(:instrument).with("dashboard.application_submitted")
-    end
   end
 
   describe "#summary_state" do
@@ -1388,28 +1382,6 @@ RSpec.describe LegalAidApplication do
       context "when there is a legal aid transaction type of the required type" do
         it "returns true" do
           expect(legal_aid_application.transaction_types.for_outgoing_type?("maintenance_out")).to be true
-        end
-      end
-    end
-  end
-
-  describe "after_save hook" do
-    context "when an application is created" do
-      let(:application) { create(:legal_aid_application, :with_proceedings) }
-
-      it { expect(application.used_delegated_functions?).to be false }
-
-      context "and the used_delegated_functions is changed and saved" do
-        subject(:after_save_hook) { application.save }
-
-        before do
-          ActiveJob::Base.queue_adapter = :test
-        end
-
-        after { ActiveJob::Base.queue_adapter = :sidekiq }
-
-        it "fires an ActiveSupport::Notification" do
-          expect { after_save_hook }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
         end
       end
     end

@@ -95,8 +95,6 @@ module LaaApplyForLegalAid
     config.x.true_layer.enable_mock = ENV["TRUE_LAYER_ENABLE_MOCK"] == "true"
     config.x.true_layer.banks = YAML.load_file(Rails.root.join("config/banks.yml"))["banks"]
 
-    config.x.geckoboard.api_key = ENV.fetch("GECKOBOARD_API_KEY", nil)
-
     config.x.bc_use_dev_mock = ENV.fetch("BC_USE_DEV_MOCK", nil)
     config.x.ordnance_survey_api_key = ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil)
 
@@ -118,21 +116,6 @@ module LaaApplyForLegalAid
     config.active_job.queue_adapter = :sidekiq
 
     config.x.slack_alert_email = ENV.fetch("SLACK_ALERT_EMAIL", nil)
-
-    # list geckoboard updater jobs which are suspended by host environment
-    config.x.suspended_geckoboard_updater_jobs = {
-      development: %w[
-        Dashboard::UpdaterJob
-      ],
-      test: %w[
-        Dashboard::UpdaterJob
-      ],
-      uat: %w[
-        Dashboard::UpdaterJob
-      ],
-      staging: [],
-      production: [],
-    }
 
     redis_protocol = ENV.fetch("REDIS_PROTOCOL", "rediss")
     redis_password = ENV.fetch("REDIS_PASSWORD", nil)
