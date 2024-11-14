@@ -19,6 +19,10 @@ module Providers
         RegularTransaction.frequencies_for(state_benefit_transaction_type)
       end
 
+      def attributes_to_clean
+        %i[amount]
+      end
+
     private
 
       def state_benefit_transaction_type

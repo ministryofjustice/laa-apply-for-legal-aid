@@ -88,7 +88,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for "applicant student finance"
+    When I click Check Your Answers Change link for applicant 'student_finance'
     And I choose "Yes"
     And I enter amount "5000"
 

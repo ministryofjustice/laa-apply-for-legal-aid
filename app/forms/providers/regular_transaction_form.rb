@@ -13,7 +13,7 @@ module Providers
       @legal_aid_application = params.delete(:legal_aid_application)
       @transaction_type_ids = params["transaction_type_ids"] || existing_transaction_type_ids
       owner.present?
-      assign_regular_transaction_attributes
+      assign_existing_regular_transaction_attributes
 
       super
     end
@@ -96,7 +96,7 @@ module Providers
         .pluck(:transaction_type_id)
     end
 
-    def assign_regular_transaction_attributes
+    def assign_existing_regular_transaction_attributes
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
         public_send(:"#{transaction_type.name}_amount=", transaction.amount)
@@ -168,7 +168,7 @@ module Providers
     def all_regular_transactions_valid
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
-        transaction.amount = public_send(:"#{transaction_type.name}_amount")
+        transaction.amount = clean_amount(public_send(:"#{transaction_type.name}_amount"))
         transaction.frequency = public_send(:"#{transaction_type.name}_frequency")
 
         next if transaction.valid?
@@ -180,6 +180,10 @@ module Providers
           )
         end
       end
+    end
+
+    def clean_amount(amount)
+      amount.to_s.tr("£,", "")
     end
 
     def add_regular_transaction_error_to_form(transaction_type, error)

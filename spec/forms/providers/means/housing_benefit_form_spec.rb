@@ -454,6 +454,21 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         )
       end
 
+      it "cleans the housing benefit regular transactions amount of humanized characters" do
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
+        transaction_type = create(:transaction_type, :housing_benefit)
+        params = {
+          "transaction_type_ids" => transaction_type.id,
+          "housing_benefit_amount" => "£1,543.66",
+          "housing_benefit_frequency" => "weekly",
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.regular_transactions.first).to have_attributes(amount: 1_543.66)
+      end
+
       context "when a housing benefit regular transaction already exists" do
         it "does not create another legal aid application transaction type" do
           legal_aid_application = create(:legal_aid_application, :with_applicant)

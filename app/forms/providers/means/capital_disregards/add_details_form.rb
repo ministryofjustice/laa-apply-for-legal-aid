@@ -41,6 +41,10 @@ module Providers
           @date_received = attributes[:date_received] = date_received_fields.form_date
         end
 
+        def attributes_to_clean
+          [:amount]
+        end
+
       private
 
         def exclude_from_model

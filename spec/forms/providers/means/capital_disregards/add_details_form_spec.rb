@@ -32,9 +32,24 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
     end
 
     it "updates the capital_disregard" do
-      expect(application.capital_disregards.first.amount).to eq 123
-      expect(application.capital_disregards.first.account_name).to eq "Barclays"
-      expect(application.capital_disregards.first.date_received).to eq Date.new(2024, 2, 1)
+      expect(application.capital_disregards.first)
+        .to have_attributes(
+          amount: 123,
+          account_name: "Barclays",
+          date_received: Date.new(2024, 2, 1),
+        )
+    end
+
+    context "with humanized monetary value" do
+      let(:amount) { "£1,244.55" }
+
+      it "is valid" do
+        expect(form).to be_valid
+      end
+
+      it "saves the monetary result" do
+        expect(application.capital_disregards.first.amount).to eq(1_244.55)
+      end
     end
 
     context "when amount is missing" do

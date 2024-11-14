@@ -62,6 +62,12 @@ RSpec.describe Providers::Means::StateBenefitForm do
       it { expect(validation).to be false }
     end
 
+    context "when the amount is humanized monetary value" do
+      let(:amount) { "£1,000" }
+
+      it { expect(validation).to be true }
+    end
+
     context "when the frequency is not valid" do
       let(:frequency) { "NOT-A-FREQUENCY" }
 
@@ -91,6 +97,18 @@ RSpec.describe Providers::Means::StateBenefitForm do
           params[:model] = model
           expect { save_form }.to change(legal_aid_application.regular_transactions, :count).by(1)
           expect(legal_aid_application.regular_transactions.first.description).to eq "New State Benefit"
+        end
+      end
+
+      context "with humanized monetary value" do
+        let(:model) { RegularTransaction.new(legal_aid_application:, transaction_type_id: transaction_type.id) }
+        let(:amount) { "£1,244.55" }
+
+        it "saves the new transaction" do
+          params[:model] = model
+          save_form
+
+          expect(legal_aid_application.regular_transactions.first.amount).to eq(1_244.55)
         end
       end
     end

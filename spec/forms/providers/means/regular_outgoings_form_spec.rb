@@ -470,6 +470,21 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           .to contain_exactly([rent_or_mortgage.id, 250.50, "weekly"], [child_care.id, 100, "monthly"])
       end
 
+      it "cleans the regular transaction amount of humanized characters" do
+        legal_aid_application = create(:legal_aid_application, :with_applicant)
+        rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
+        params = {
+          "transaction_type_ids" => ["", rent_or_mortgage.id],
+          "rent_or_mortgage_amount" => "£2,333.55",
+          "rent_or_mortgage_frequency" => "monthly",
+        }.merge(legal_aid_application:)
+
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.regular_transactions.first).to have_attributes(amount: 2_333.55)
+      end
+
       it "destroys any existing housing benefit transactions if housing " \
          "payments are not selected" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)

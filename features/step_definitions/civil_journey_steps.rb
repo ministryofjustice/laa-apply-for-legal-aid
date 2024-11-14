@@ -1139,6 +1139,14 @@ Given("I click Check Your Answers Change link for applicant {string}") do |quest
   end
 end
 
+Given("I click Check Your Answers Change link for partner {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  within "#app-check-your-answers__partner__#{question_id}" do
+    click_on("Change")
+  end
+end
+
 Given("I click Check Your Answers Change link for {string}") do |question|
   question_id = question.parameterize(separator: "_")
 
