@@ -24,7 +24,7 @@
                                 hint: { text: t(".estimated_value.use_car_valuation_sites") },
                                 value: number_to_currency_or_original_string(@form.model.estimated_value),
                                 width: "one-third",
-                                prefix_text: "£" %>
+                                prefix_text: t("currency.gbp") %>
 
       <%= form.govuk_radio_buttons_fieldset(:payments_remain,
                                             legend: { text: t(".remaining_payments.question"), tag: "h2", size: "m" },
