@@ -68,6 +68,16 @@
 
   <div class="govuk-!-padding-bottom-8"></div>
 
+  <% individual_text = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+                         "your client or their partner"
+                       else
+                         "your client"
+                       end %>
+  <section class="print-no-break">
+    <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading") %></h2>
+    <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true, means_report: true %>
+  </section>
+
   <%= render "caseworker_review" %>
 <% end %>
 

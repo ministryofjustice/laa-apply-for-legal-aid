@@ -15,6 +15,7 @@ Feature: Means report
       | h3  | Client employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
+      | h2  | Dependants |
       | h2  | Caseworker Review |
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
@@ -38,7 +39,6 @@ Feature: Means report
       | h2  | Student finance |
       | h2  | Employed income result |
       | h2  | Declared cash income |
-      | h2  | Dependants |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
 
@@ -95,6 +95,15 @@ Feature: Means report
       | question |
       | Dependants allowance |
       | Total deductions |
+    
+    And the Dependants questions should exist:
+      | question |
+      | Does your client have any dependants? |
+
+    And the Dependants detail questions should exist:
+      | Name |
+      | Date of birth	|
+      | What is their relationship to your client? |
 
     And the Caseworker review section should contain:
       | question | answer |
@@ -205,7 +214,6 @@ Feature: Means report
       | h2  | Student finance |
       | h2  | Employed income result |
       | h2  | Declared cash income |
-      | h2  | Dependants |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
       | h3  | Bank statements |

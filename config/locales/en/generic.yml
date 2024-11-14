@@ -61,7 +61,7 @@ en:
     submit: Submit
     submit_and_continue: Submit and continue
     success: Success
-    tell_us: Your statement must include
+    tell_us: "Your statement must include:"
     total: Total
     toggle_navigation: Show or hide Top Level Navigation
     undefined: Undefined
