@@ -306,12 +306,12 @@ env:
   - name: LEGAL_FRAMEWORK_API_HOST
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: legalFrameworkApiHost
   - name: LEGAL_FRAMEWORK_API_HOST_JS
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: legalFrameworkApiHostJS
   - name: SLACK_ALERT_EMAIL
     valueFrom:
@@ -376,7 +376,7 @@ env:
   - name: GOOGLE_DATA_STUDIO_URL
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleDataStudioUrl
   - name: ENCRYPTION_PRIMARY_KEY
     valueFrom:
