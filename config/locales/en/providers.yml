@@ -1866,7 +1866,7 @@ en:
           change_of_name:
             <<: *default
             title_html: Change of name applications are not eligible for legal aid
-            paragraph: You can go back and change your answer if this is not a change of names application
+            paragraph: You can go back and change your answer if this is not a change of name application.
             change: Change your answer
             applications: Back to your applications
       child_subjects:
