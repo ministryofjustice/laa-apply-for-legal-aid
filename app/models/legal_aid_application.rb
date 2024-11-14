@@ -70,6 +70,8 @@ class LegalAidApplication < ApplicationRecord
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
 
+  after_create { find_or_create_state_machine }
+
   validate :validate_document_categories
 
   delegate :bank_transactions, :under_18?, to: :applicant, allow_nil: true
@@ -501,6 +503,7 @@ class LegalAidApplication < ApplicationRecord
     end
     state_machine
   end
+  alias_method :find_or_create_state_machine, :state_machine_proxy
 
   def change_state_machine_type(state_machine_type)
     save!
