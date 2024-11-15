@@ -1697,7 +1697,7 @@ en:
         use_service:
           list_title: "You can use it for one, or a combination of these applications:"
           list:
-            - domestic abuse
+            - domestic abuse, except DAPO (domestic abuse protection orders)
             - section 8
         dont_use_service:
           list_title: "But do not use this service if:"
