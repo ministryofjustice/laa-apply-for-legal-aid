@@ -1,6 +1,7 @@
 module V1
   class UploadedEvidenceCollectionsController < ApiController
     include MalwareScanning
+
     def create
       return head :not_found unless legal_aid_application
 
