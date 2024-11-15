@@ -140,7 +140,7 @@ Feature: Check pending employment
 
     When I upload an evidence file named 'hello_world.pdf'
     And I sleep for 2 seconds
-    Then I should be able to categorise 'hello_world.pdf' as 'Client's employment evidence'
+    And I select a category of "Client's employment evidence" for the file "hello_world.pdf"
 
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
