@@ -19,7 +19,7 @@ Feature: Checking client details answers backwards and forwards
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | National Insurance number | JA293483A |
       | Does your client have a partner | No |
-  
+
   @javascript
   Scenario: Send client's mail to another residential address
     Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
@@ -159,8 +159,7 @@ Feature: Checking client details answers backwards and forwards
 
   @javascript @vcr
   Scenario: I am able to return and amend the client's overseas home address
-    Given the feature flag for home_address is enabled
-    And I complete the passported journey as far as check your answers with an overseas address
+    Given  I complete the passported journey as far as check your answers with an overseas address
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
@@ -202,7 +201,7 @@ Feature: Checking client details answers backwards and forwards
     And I enter Last name "Surname"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client have a home address"
-    
+
     When I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page with title "Find your client's home address"

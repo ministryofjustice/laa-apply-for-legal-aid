@@ -3,7 +3,6 @@ Feature: Linking cases back button use
   Scenario: Complete flow reversion with back button
     Given I have created and submitted an application with the application reference 'L-123-456'
     And the feature flag for linked_applications is enabled
-    And the feature flag for home_address is enabled
 
     When I visit the application service
     And I click link "Sign in"
