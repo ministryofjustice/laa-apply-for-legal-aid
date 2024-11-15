@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk/provider-user/DT_SCRIPT_USER1/provider-offices
+    uri: https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk/provider-users/DT_SCRIPT_USER1/provider-offices
     body:
       encoding: US-ASCII
       string: ''
