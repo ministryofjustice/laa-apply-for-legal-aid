@@ -24,7 +24,7 @@ export function initFileUploadCategorisation (categorisationSelectLists) {
         extract attachment id and name/type from select list
         and use to update attachment asynchronously
       */
-      const attachmentId = e.target.name.match(/\[(.*)\]/)[1]
+      const attachmentId = e.target.name.match(/^uploaded_evidence_collection\[(.*)\]/)[1]
       const attachmentType = e.target.value
       updateAttachment(attachmentId, attachmentType)
     })
