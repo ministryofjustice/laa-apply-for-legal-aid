@@ -1432,8 +1432,6 @@ en:
 
       capital_result_heading: &capital_result_heading Capital result
       caseworker_review_section_heading: Caseworker Review
-      deductions-section-heading: &deductions-section-heading Deductions
-      debits-section-heading: &debits-section-heading Outgoings
       employment_heading: &employment_heading Employment income
       proceeding_eligibility: Proceeding eligibility
       student_finance_heading: Student finance
@@ -1514,8 +1512,7 @@ en:
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading
-        debits-section-heading: *debits-section-heading
-        deductions-section-heading: *deductions-section-heading
+        outgoings-and-deductions-section-heading: Outgoings and deductions
         employment_heading: *employment_heading
         employment_details:
           client: &client_employment_details Client's details
