@@ -23,15 +23,6 @@ RSpec.describe AlertManager do
           expect(SlackAlerter).not_to receive(:capture_exception).with(exception)
           described_class.capture_exception(exception)
         end
-
-        context "with ignorable exception" do
-          let(:exception) { Geckoboard::UnexpectedStatusError.new("You have exceeded the API rate limit blah blah blah") }
-
-          it "ignores the error" do
-            expect(Sentry).not_to receive(:capture_exception)
-            described_class.capture_exception(exception)
-          end
-        end
       end
 
       context "when in a non-production environment" do

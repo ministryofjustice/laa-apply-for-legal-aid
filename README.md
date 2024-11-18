@@ -36,10 +36,6 @@ The laa-apply-for-legal-aid system is a web service for solicitors that provide 
     - [True Layer](#true-layer)
 - [**Check Financial Eligibility Service**](#check-financial-eligibility-service)
 - [**Legal Framework API Service**](#legal-framework-api-service)
-- [**Geckoboard Dashboard**](#geckoboard-dashboard)
-    - [1. Create a widget data provider](#1-create-a-widget-data-provider)
-    - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
-    - [3. Add the widget to the Geckoboard dashboard](#3-add-the-widget-to-the-geckoboard-dashboard)
 - [**Troubleshooting**](#troubleshooting)
 - [**Maintenance mode**](#docs/maintenance_mode.md)
 
@@ -467,39 +463,6 @@ The URL for this service should be set using the environment variable `CFE_CIVIL
 ## Legal Framework API Service
 
 The URL for this service should be set using the environment variable `LEGAL_FRAMEWORK_API_HOST`.
-
----
-
-## Geckoboard Dashboard
-
-Several sets of statistics are exported to Geckoboard for displaying on an application dashboard.
-
-### How to add a new widget to the dashboard
-
-There are three steps to creating a new widget for the Geckoboard dashboard
-
-### 1. Create a widget data provider
-
-Create a new class in the `app/models/dashboard/widget_data_providers` directory. This should define three class methods:
-
-* `.handle` - the name of the widget, which will be qualified with a project name and environment.  For example `my_widget` would become `apply_for_legal_aid.production.my_widget` in the list of datasets on Geckoboard
-* `.dataset_defintion` - the list of fields that will be in the dataset (see https://developer.geckoboard.com/hc/en-us/sections/360002865451-Getting-started for details on how to define and provide data for a dataset.)
-* `.data` - the actual data that will be sent to Geckoboard every time it is run.
-
-This data provider will be used by the `Dashboard::Widget` class when called with the name of the data provider as a parameter.
-
-### 2. Add a cronjob to run it
-
-Create a yaml configuration file for each cronjob under `./helm_deploy/apply_for_legal_aid/templates` by copying the `.dashboard_template_cron.yaml.sample` file and configure it to run the command `rake job:dashboard:update[the WidgetDataProvider class name here]` with
-your chosen cron job schedule.
-
-### 3. Add the widget to the Geckoboard dashboard
-
-Once the job has been run at least once, you will be able to select the dataset as a data source when adding a new widget.
-
-----
-
-
 
 ## Troubleshooting
 

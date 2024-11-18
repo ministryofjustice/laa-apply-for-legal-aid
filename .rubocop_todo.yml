@@ -24,5 +24,4 @@ RSpec/AnyInstance:
     - 'spec/services/ccms/submitters/obtain_applicant_reference_service_spec.rb'
     - 'spec/services/ccms/submitters/obtain_case_reference_service_spec.rb'
     - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
-    - 'spec/services/dashboard_event_handler_spec.rb'
     - 'spec/services/metrics/send_metrics_spec.rb'

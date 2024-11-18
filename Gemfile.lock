@@ -280,7 +280,6 @@ GEM
     ffi (1.17.0)
     ffi (1.17.0-x86_64-darwin)
     formatador (1.1.0)
-    geckoboard-ruby (0.4.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-apis-core (0.15.1)
@@ -788,7 +787,6 @@ DEPENDENCIES
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   faraday
-  geckoboard-ruby
   google-apis-sheets_v4
   govuk-components
   govuk_design_system_formbuilder

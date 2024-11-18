@@ -398,41 +398,96 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "state machine" do
-    subject(:legal_aid_application) { create(:legal_aid_application) }
+    let(:legal_aid_application) { create(:legal_aid_application) }
 
-    it 'is created with a default state of "initiated"' do
-      expect(legal_aid_application.state).to eq("initiated")
-    end
+    describe "#state" do
+      it 'is created with a default state of "initiated"' do
+        expect(legal_aid_application.state).to eq("initiated")
+      end
 
-    context "when initialising a new object" do
-      it "instantiates the default state machine" do
-        expect(legal_aid_application.state_machine_proxy.type).to eq "PassportedStateMachine"
-        expect(legal_aid_application.state).to eq "initiated"
+      context "when advancing state" do
+        it "advances state and saves" do
+          expect { legal_aid_application.enter_applicant_details! }
+            .to change(legal_aid_application, :state)
+              .from("initiated")
+              .to("entering_applicant_details")
+        end
+      end
+
+      context "when loading an existing record and advancing state" do
+        before { legal_aid_application.enter_applicant_details! }
+
+        it "is in the expected state and can be advanced" do
+          expect(legal_aid_application.state).to eq "entering_applicant_details"
+          legal_aid_application.check_applicant_details!
+          expect(legal_aid_application.state).to eq "checking_applicant_details"
+        end
       end
     end
 
-    context "with advancing state" do
-      it "advances state and saves" do
-        legal_aid_application.enter_applicant_details!
-        expect(legal_aid_application.state).to eq "entering_applicant_details"
+    describe "#find_or_create_state_machine" do
+      context "without a state machine relation" do
+        let(:legal_aid_application) { build(:legal_aid_application) }
+
+        it "creates the default state_machine relation" do
+          expect { legal_aid_application.find_or_create_state_machine }
+            .to change(legal_aid_application, :state_machine)
+              .from(nil)
+              .to(instance_of(PassportedStateMachine))
+        end
+      end
+
+      context "with an existing state machine relation" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine) }
+
+        it "returns the state_machine relation" do
+          expect { legal_aid_application.find_or_create_state_machine }
+          .not_to change(legal_aid_application, :state_machine)
+            .from(instance_of(NonPassportedStateMachine))
+        end
       end
     end
 
-    context "when loading an existing record and advancing state" do
-      before { legal_aid_application.enter_applicant_details! }
+    describe "#state_machine_proxy" do
+      context "without a state machine relation" do
+        let(:legal_aid_application) { build(:legal_aid_application) }
 
-      it "is in the expected state and can be advanced" do
-        expect(legal_aid_application.state).to eq "entering_applicant_details"
-        legal_aid_application.check_applicant_details!
-        expect(legal_aid_application.state).to eq "checking_applicant_details"
+        it "creates the default state_machine relation" do
+          expect { legal_aid_application.state_machine_proxy }
+            .to change(legal_aid_application, :state_machine)
+              .from(nil)
+              .to(instance_of(PassportedStateMachine))
+        end
       end
-    end
 
-    context "when switching state machines" do
-      it "switches to the new state machine" do
-        expect(legal_aid_application.state_machine).to be_instance_of(PassportedStateMachine)
-        legal_aid_application.change_state_machine_type("NonPassportedStateMachine")
-        expect(legal_aid_application.state_machine).to be_instance_of(NonPassportedStateMachine)
+      context "with an existing state machine relation" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine) }
+
+        it "returns the state_machine relation" do
+          expect { legal_aid_application.state_machine_proxy }
+          .not_to change(legal_aid_application, :state_machine)
+            .from(instance_of(NonPassportedStateMachine))
+        end
+      end
+
+      describe "#change_state_machine_type" do
+        it "switches to the new state machine" do
+          expect { legal_aid_application.change_state_machine_type("NonPassportedStateMachine") }
+          .to change(legal_aid_application, :state_machine)
+            .from(instance_of(PassportedStateMachine))
+            .to(instance_of(NonPassportedStateMachine))
+        end
+      end
+
+      describe "#after_create" do
+        let(:legal_aid_application) { build(:legal_aid_application) }
+
+        it "creates the default state_machine relation" do
+          expect { legal_aid_application.save! }
+            .to change(legal_aid_application, :state_machine)
+              .from(nil)
+              .to(instance_of(PassportedStateMachine))
+        end
       end
     end
   end
@@ -447,12 +502,6 @@ RSpec.describe LegalAidApplication do
         legal_aid_application.merits_complete!
         expect(legal_aid_application.reload.merits_submitted_at).to eq(date)
       end
-    end
-
-    it "calls on rails notification service" do
-      allow(ActiveSupport::Notifications).to receive(:instrument)
-      legal_aid_application.merits_complete!
-      expect(ActiveSupport::Notifications).to have_received(:instrument).with("dashboard.application_submitted")
     end
   end
 
@@ -1388,28 +1437,6 @@ RSpec.describe LegalAidApplication do
       context "when there is a legal aid transaction type of the required type" do
         it "returns true" do
           expect(legal_aid_application.transaction_types.for_outgoing_type?("maintenance_out")).to be true
-        end
-      end
-    end
-  end
-
-  describe "after_save hook" do
-    context "when an application is created" do
-      let(:application) { create(:legal_aid_application, :with_proceedings) }
-
-      it { expect(application.used_delegated_functions?).to be false }
-
-      context "and the used_delegated_functions is changed and saved" do
-        subject(:after_save_hook) { application.save }
-
-        before do
-          ActiveJob::Base.queue_adapter = :test
-        end
-
-        after { ActiveJob::Base.queue_adapter = :sidekiq }
-
-        it "fires an ActiveSupport::Notification" do
-          expect { after_save_hook }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_least(1).times
         end
       end
     end

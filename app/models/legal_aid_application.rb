@@ -69,14 +69,8 @@ class LegalAidApplication < ApplicationRecord
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
-  after_create do
-    ActiveSupport::Notifications.instrument "dashboard.application_created", id:, state:
-  end
 
-  after_save do
-    ActiveSupport::Notifications.instrument "dashboard.declined_open_banking" if saved_change_to_open_banking_consent?
-    ActiveSupport::Notifications.instrument("dashboard.provider_updated", provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
-  end
+  after_create { find_or_create_state_machine }
 
   validate :validate_document_categories
 
@@ -509,6 +503,7 @@ class LegalAidApplication < ApplicationRecord
     end
     state_machine
   end
+  alias_method :find_or_create_state_machine, :state_machine_proxy
 
   def change_state_machine_type(state_machine_type)
     save!
@@ -546,7 +541,6 @@ class LegalAidApplication < ApplicationRecord
 
   def merits_complete!
     update!(merits_submitted_at: Time.current) unless merits_submitted_at?
-    ActiveSupport::Notifications.instrument "dashboard.application_submitted"
   end
 
   def summary_state
