@@ -1,11 +1,6 @@
 <%= page_template(page_title: t(".heading_1"), back_link: :none) do %>
   <div class="govuk-button-group">
     <%= govuk_button_link_to(t("generic.new_app"), providers_declaration_path, html_attributes: { id: "start" }) %>
-    <%= govuk_button_link_to t(".search_applications"),
-                             search_providers_legal_aid_applications_path,
-                             class: "govuk-!-margin-bottom-1",
-                             secondary: true %>
-
   </div>
 <% end %>
 <%= render "legal_aid_applications", legal_aid_applications: @legal_aid_applications, pagy: @pagy %>

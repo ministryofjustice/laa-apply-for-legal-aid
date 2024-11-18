@@ -1,6 +1,7 @@
 module Providers
   class DeleteController < ProviderBaseController
     def show
+      @scope = :delete
       set_redirect_url
 
       redirect_to submitted_providers_legal_aid_applications_path if @legal_aid_application.discarded?

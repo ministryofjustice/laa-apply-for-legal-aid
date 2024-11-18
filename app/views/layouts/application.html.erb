@@ -39,6 +39,29 @@
             html_attributes: { role: "complementary" },
           ) %>
 
+      <div class="moj-primary-navigation">
+        <div class="moj-primary-navigation__container">
+          <div class="moj-primary-navigation__nav">
+            <nav class="moj-primary-navigation" aria-label="Primary navigation">
+              <ul class="moj-primary-navigation__list">
+                <li class="moj-primary-navigation__item">
+                  <%= link_to "Your applications",
+                              submitted_providers_legal_aid_applications_path,
+                              "aria-current": @scope.in?(%i[in_progress submitted voided delete]) ? "page" : nil,
+                              class: "moj-primary-navigation__link" %>
+                </li>
+                <li class="moj-primary-navigation__item">
+                  <%= link_to "Search",
+                              search_providers_legal_aid_applications_path,
+                              "aria-current": @scope == :search ? "page" : nil,
+                              class: "moj-primary-navigation__link" %>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
       <div class="govuk-grid-row" role="navigation">
         <div class="govuk-grid-column-one-half show-empty">
           <%= content_for(:navigation) %>
@@ -99,6 +122,7 @@
 
         <%= yield %>
       </main>
+
     </div>
 
     <%= render partial: "layouts/footer" %>
