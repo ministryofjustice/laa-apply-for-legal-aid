@@ -13,8 +13,7 @@ Feature: Means report
       | h2  | Income result |
       | h2  | Income |
       | h3  | Client employment income |
-      | h2  | Outgoings |
-      | h2  | Deductions |
+      | h2  | Outgoings and deductions |
       | h2  | Dependants |
       | h2  | Caseworker Review |
       | h2  | Capital result |
@@ -82,18 +81,14 @@ Feature: Means report
       | Do you need to tell us anything else about your client's employment? |
       | Details for client |
 
-    And the Outgoings questions and answers should match:
+    And the Outgoings and deductions questions and answers should match:
       | question | answer |
       | Client housing payments (any declared housing benefits have been deducted from this total) | £125 |
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-      | Total outgoings | £225 |
-
-    And the Deductions questions should exist:
-      | question |
-      | Dependants allowance |
-      | Total deductions |
+      | Dependants allowance | £0 | 
+      | Total outgoings and deductions | £225 |
     
     And the Dependants questions should exist:
       | question |
@@ -191,8 +186,7 @@ Feature: Means report
       | h2  | Income result |
       | h2  | Income |
       | h3  | Client employment income |
-      | h2  | Outgoings |
-      | h2  | Deductions |
+      | h2  | Outgoings and deductions |
       | h2  | Caseworker Review |
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
@@ -257,18 +251,14 @@ Feature: Means report
       | Do you need to tell us anything else about your client's employment? |
       | Details for client |
 
-    And the Outgoings questions and answers should match:
+    And the Outgoings and deductions questions and answers should match:
       | question | answer |
       | Client housing payments (any declared housing benefits have been deducted from this total) | £125 |
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-      | Total outgoings | £225 |
-
-    And the Deductions questions should exist:
-      | question |
-      | Dependants allowance |
-      | Total deductions |
+      | Dependants allowance | £0 |
+      | Total outgoings and deductions | £225 |
 
     And the Caseworker review questions should exist:
       | question |
@@ -384,8 +374,7 @@ Feature: Means report
       | h2  | Income result |
       | h2  | Income |
       | h2  | Employed income result |
-      | h2  | Outgoings |
-      | h2  | Deductions |
+      | h2  | Outgoings and deductions |
       | h2  | Declared income categories |
       | h2  | Student finance |
       | h2  | Declared cash income |
