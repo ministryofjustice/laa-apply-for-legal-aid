@@ -3,18 +3,20 @@ module V1
     def update
       return head :not_found unless attachment
 
-      attachment.update!(attachment_type: form_params[:attachment_type])
+      attachment.update!(attachment_type: attachment_params[:type])
       head :ok
+    rescue ActiveRecord::RecordInvalid
+      head :bad_request
     end
 
   private
 
     def attachment
-      @attachment ||= Attachment.find_by(id: form_params[:attachment_id])
+      @attachment ||= Attachment.find_by(id: params[:id])
     end
 
-    def form_params
-      params.permit(%i[attachment_id attachment_type])
+    def attachment_params
+      params.require(:attachment).permit(:type)
     end
   end
 end

@@ -9,12 +9,11 @@ async function updateAttachment (attachmentId, attachmentType) {
     method: 'patch',
     url,
     data: {
-      attachment_id: attachmentId,
-      attachment_type: attachmentType
+      attachment: { type: attachmentType }
     }
   })
 
-  return response.data.data
+  return response.status
 }
 
 export function initFileUploadCategorisation (categorisationSelectLists) {
