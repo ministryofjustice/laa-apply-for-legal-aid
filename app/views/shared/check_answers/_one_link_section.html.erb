@@ -14,8 +14,8 @@
 </div>
 
 <%= govuk_summary_list(
+      card: { title: question },
       actions: !read_only,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "app-check-your-answers__#{name}_items" },
     ) do |summary_list| %>
   <% if answer_hash.present? %>

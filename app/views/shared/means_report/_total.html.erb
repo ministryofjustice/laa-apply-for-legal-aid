@@ -1,9 +1,0 @@
-<div class="govuk-summary-list__total-row  normal-word-break" id="<%= "means-merits-report__#{name}" %>">
-  <dt class="govuk-summary-list__key govuk-!-width-one-half">
-    <%= t(".#{name}") %>
-  </dt>
-  <!--  in-line styling due to issues around pdf generation in our production envs -->
-  <dd class="govuk-summary-list__value govuk-!-text-align-right">
-    <%= gds_number_to_currency(@cfe_result.__send__(value_method)) %>
-  </dd>
-</div>

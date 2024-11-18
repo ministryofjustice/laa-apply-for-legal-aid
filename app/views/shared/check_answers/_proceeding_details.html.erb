@@ -14,7 +14,10 @@
   </div>
 </div>
 
-<%= govuk_summary_list(actions: false, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
+<%= govuk_summary_list(
+      card: { title: proceeding.meaning },
+      actions: false,
+    ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_client_involvement_type" }) do |row| %>
     <%= row.with_key(text: t(".client_involvement_type_details.question"), classes: "govuk-!-width-one-half") %>
     <%= row.with_value { proceeding.client_involvement_type_description } %>

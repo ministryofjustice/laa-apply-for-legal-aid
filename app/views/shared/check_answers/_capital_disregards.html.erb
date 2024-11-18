@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m"><%= t(".heading#{individual}") %></h2>
 <%= govuk_summary_list(
+      card: { title: t(".heading#{individual}") },
       actions: !read_only,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "capital-disregards-questions" },
     ) do |summary_list| %>
 

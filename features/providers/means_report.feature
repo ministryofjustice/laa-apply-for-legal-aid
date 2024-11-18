@@ -76,8 +76,8 @@ Feature: Means report
       | Client income from property or lodger | £0 |
       | Client student loan or grant | £0 |
       | Client pension | £0 |
+      | Total income | |
 
-    And I should see "Total income"
     And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
       | Details for client |
@@ -88,8 +88,7 @@ Feature: Means report
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-
-    And I should see "Total outgoings"
+      | Total outgoings | £225 |
 
     And the Deductions questions should exist:
       | question |
@@ -206,7 +205,7 @@ Feature: Means report
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
-      | h3  | Client's bank accounts |
+      | h2  | Client's bank accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -252,8 +251,8 @@ Feature: Means report
       | Client income from property or lodger | £0 |
       | Client student loan or grant | £0 |
       | Client pension | £0 |
+      | Total income | |
 
-    And I should see "Total income"
     And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
       | Details for client |
@@ -264,8 +263,7 @@ Feature: Means report
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-
-    And I should see "Total outgoings"
+      | Total outgoings | £225 |
 
     And the Deductions questions should exist:
       | question |
@@ -297,7 +295,7 @@ Feature: Means report
       | question |
       | How much is the home your client lives in worth? |
       | How much is left to pay on the mortgage? |
-      |Does your client own the home with anyone else? |
+      | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
 
     And the Vehicle ownership question should exist:
@@ -317,8 +315,8 @@ Feature: Means report
 
     And the "Bank accounts", for open banking accounts, questions and answers table should exist:
       | question | answer |
-      | Account Name, 12345678, 000000 | 75.57 |
-      | Second Account, 87654321, 999999 | 57.57 |
+      | Account Name, 12345678, 000000 | £75.57 |
+      | Second Account, 87654321, 999999 | £57.57 |
 
     And the "Your client's accounts" questions should exist:
       | question |

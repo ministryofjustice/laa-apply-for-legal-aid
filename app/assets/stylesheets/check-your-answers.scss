@@ -45,6 +45,7 @@
   border-top: 3px solid #000000;
   border-bottom: 1px solid #000000;
   font-weight: bold;
+
   @include govuk-media-query($from: tablet) {
     display: table-row;
   }
@@ -70,6 +71,6 @@
   }
 }
 
-.print-no-break > .govuk-body {
+.print-no-break>.govuk-body {
   word-wrap: break-word;
 }

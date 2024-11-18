@@ -1,21 +1,15 @@
 <% capital_disregard_type = capital_disregard.mandatory? ? "mandatory" : "discretionary" %>
 <% capital_disregard_name = t("providers.means.capital_disregards.#{capital_disregard_type}.#{capital_disregard.name}") %>
 
+<% action_link = govuk_link_to(t("generic.change"),
+                               providers_legal_aid_application_means_capital_disregards_add_detail_path(@legal_aid_application, capital_disregard),
+                               visually_hidden_suffix: capital_disregard_name,
+                               id: "app-check-your-answers__capital_disregard_#{index}_change_link") %>
 <%= govuk_summary_list(
-      actions: !read_only,
-      classes: "govuk-!-margin-bottom-9",
+      card: { title: t(".#{capital_disregard_type}.heading", count: index + 1), actions: read_only ? [] : [action_link] },
+      actions: false,
       html_attributes: { id: "#{capital_disregard_type}-capital-disregard-questions_#{index}" },
     ) do |summary_list| %>
-
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__capital_disregard_#{index}_change_link" }) do |row| %>
-    <%= row.with_key(text: t(".#{capital_disregard_type}.heading", count: index + 1), classes: "govuk-!-width-one-half govuk-heading-m") %>
-    <%= row.with_value(text: nil) %>
-    <%= row.with_action(
-          text: t("generic.change"),
-          href: providers_legal_aid_application_means_capital_disregards_add_detail_path(@legal_aid_application, capital_disregard),
-          visually_hidden_text: capital_disregard_name,
-        ) %>
-  <% end %>
 
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__payment_type" }) do |row| %>
     <%= row.with_key(text: t(".questions.payment_type"), classes: "govuk-!-width-one-half") %>

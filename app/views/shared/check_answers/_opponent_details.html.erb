@@ -5,132 +5,147 @@
         question: t(".opponent-heading"),
         read_only:,
       ) %>
-  <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+  <%= govuk_summary_list(card: { title: t(".opponent-heading") }, actions: !read_only) do |summary_list| %>
     <% opponents.order(:created_at).each_with_index do |opponent, i| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_#{i + 1}" }) do |row| %>
         <%= row.with_key(text: "#{t('.opponent')} #{i + 1}", classes: "govuk-!-width-one-half") %>
         <%= row.with_value { sanitize("#{opponent.full_name},<br>#{opponent_type_description(opponent)}") } %>
       <% end %>
     <% end %>
-
-    <% if parties_mental_capacity %>
+  <% end %>
+  <% if parties_mental_capacity %>
+    <%= govuk_summary_list(card: { title: t(".mental_capacity.heading") }, actions: !read_only) do |summary_list| %>
       <%= summary_list.with_row(
-            classes: "govuk-summary-list__row--no-border",
             html_attributes: { id: "app-check-your-answers__opponent_understands_terms_of_court_order" },
           ) do |row| %>
-        <%= row.with_key(text: t(".understands_terms_of_court_order"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".mental_capacity.understands_terms"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value(text: yes_no(parties_mental_capacity.understands_terms_of_court_order)) %>
         <%= row.with_action(
               text: t("generic.change"),
               href: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
-              visually_hidden_text: t(".understands_terms_of_court_order"),
+              visually_hidden_text: t(".mental_capacity.understands_terms"),
             ) %>
       <% end %>
+      <% unless parties_mental_capacity.understands_terms_of_court_order? %>
+        <%= summary_list.with_row do |row| %>
+          <%= row.with_key(text: t(".mental_capacity.reasons"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: parties_mental_capacity.understands_terms_of_court_order_details) %>
+          <%= row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
+                visually_hidden_text: t(".mental_capacity.reasons"),
+              ) %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-
-  <% if parties_mental_capacity %>
-    <div class='govuk-body'><%= parties_mental_capacity.understands_terms_of_court_order_details %></div>
-
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
   <% end %>
 
   <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
-    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
-      <%= summary_list.with_row(
-            classes: "govuk-summary-list__row--no-border",
-            html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" },
-          ) do |row| %>
-        <%= row.with_key(text: t(".warning_letter_sent"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: yes_no(domestic_abuse_summary.warning_letter_sent)) %>
-        <%= row.with_action(
-              text: t("generic.change"),
-              href: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-              visually_hidden_text: t(".warning_letter_sent"),
-            ) %>
+    <%= govuk_summary_list(card: { title: t(".domestic_abuse.heading") }, actions: !read_only) do |summary_list| %>
+      <% unless domestic_abuse_summary.warning_letter_sent? %>
+        <%= summary_list.with_row(
+              html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" },
+            ) do |row| %>
+          <%= row.with_key(text: t(".domestic_abuse.warning_letter_reasons"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: domestic_abuse_summary.warning_letter_sent_details) %>
+          <%= row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
+                visually_hidden_text: t(".domestic_abuse.warning_letter_reasons"),
+              ) %>
+        <% end %>
       <% end %>
-    <% end %>
-    <div class='govuk-body'><%= domestic_abuse_summary.warning_letter_sent_details %></div>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
 
-    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
-      <%= summary_list.with_row(
-            classes: "govuk-summary-list__row--no-border",
-            html_attributes: { id: "app-check-your-answers__police_notified" },
-          ) do |row| %>
-        <%= row.with_key(text: t(".police_notified"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: yes_no(domestic_abuse_summary.police_notified)) %>
+      <% police_question = domestic_abuse_summary.police_notified? ? "police_notified_details" : "police_not_notified" %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" }) do |row| %>
+        <%= row.with_key(text: t(".domestic_abuse.#{police_question}"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: domestic_abuse_summary.police_notified_details) %>
         <%= row.with_action(
               text: t("generic.change"),
               href: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-              visually_hidden_text: t(".police_notified"),
+              visually_hidden_text: t(".domestic_abuse.#{police_question}"),
             ) %>
       <% end %>
-    <% end %>
-    <div class='govuk-body'><%= domestic_abuse_summary.police_notified_details %></div>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
 
-    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
-      <%= summary_list.with_row(
-            classes: "govuk-summary-list__row--no-border",
-            html_attributes: { id: "app-check-your-answers__bail_conditions_set" },
-          ) do |row| %>
-        <%= row.with_key(text: t(".bail_conditions_set"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: yes_no(domestic_abuse_summary.bail_conditions_set)) %>
-        <%= row.with_action(
-              text: t("generic.change"),
-              href: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-              visually_hidden_text: t(".bail_conditions_set"),
-            ) %>
+      <% if domestic_abuse_summary.bail_conditions_set %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bail_conditions" }) do |row| %>
+          <%= row.with_key(text: t(".domestic_abuse.bail_conditions"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: domestic_abuse_summary.bail_conditions_set_details) %>
+          <%= row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
+                visually_hidden_text: t(".domestic_abuse.bail_conditions"),
+              ) %>
+        <% end %>
+      <% else %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bail_conditions_set" }) do |row| %>
+          <%= row.with_key(text: t(".domestic_abuse.bail_conditions_set"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: yes_no(domestic_abuse_summary.bail_conditions_set)) %>
+          <%= row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
+                visually_hidden_text: t(".domestic_abuse.bail_conditions_set"),
+              ) %>
+        <% end %>
       <% end %>
     <% end %>
-    <div class='govuk-body'><%= domestic_abuse_summary.bail_conditions_set_details %></div>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
   <% end %>
 
   <% unless @legal_aid_application.special_children_act_proceedings? %>
-    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
-      <%= summary_list.with_row(
-            classes: "govuk-summary-list__row--no-border",
-            html_attributes: { id: "app-check-your-answers__statement_of_case" },
-          ) do |row| %>
-        <%= row.with_key(text: t("shared.check_answers.merits.statement-of-case-heading"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value do %>
-          <% if attachments_with_size(statement_of_case&.original_attachments).present? %>
+    <%= govuk_summary_list(card: { title: t(".statement_of_case.heading") }, actions: !read_only) do |summary_list| %>
+      <% if attachments_with_size(statement_of_case&.original_attachments).present? %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case_file" }) do |row| %>
+          <%= row.with_key(text: t(".statement_of_case.file_names"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value do %>
             <ul class="govuk-list">
               <% attachments_with_size(statement_of_case&.original_attachments).each do |item| %>
                 <li><%= item %></li>
               <% end %>
             </ul>
           <% end %>
+          <%= row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+                visually_hidden_text: t("shared.check_answers.merits.statement-of-case-heading"),
+              ) %>
         <% end %>
-        <%= row.with_action(
-              text: t("generic.change"),
-              href: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
-              visually_hidden_text: t("shared.check_answers.merits.statement-of-case-heading"),
-            ) %>
+      <% end %>
+      <% if statement_of_case.statement? %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case" }) do |row| %>
+          <%= row.with_key(text: t(".statement_of_case.statement"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: statement_of_case&.statement) %>
+          <%= row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+                visually_hidden_text: t(".statement_of_case.statement"),
+              ) %>
+        <% end %>
       <% end %>
     <% end %>
-    <div class='govuk-body'><%= statement_of_case&.statement %></div>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
   <% end %>
 
   <% if @legal_aid_application.allegation %>
-    <%= govuk_summary_list(actions: !read_only, classes: "govuk-!-margin-bottom-2") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".allegation.heading") }, actions: !read_only) do |summary_list| %>
       <%= summary_list.with_row(
-            classes: "govuk-summary-list__row--no-border",
             html_attributes: { id: "app-check-your-answers__allegation_denies_all" },
           ) do |row| %>
-        <%= row.with_key(text: t(".allegation_denies_all"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".allegation.denies_all"), classes: "govuk-!-width-one-half") %>
         <%= row.with_value(text: yes_no(allegation.denies_all)) %>
         <%= row.with_action(
               text: t("generic.change"),
               href: providers_legal_aid_application_client_denial_of_allegation_path(@legal_aid_application),
-              visually_hidden_text: t(".allegation_denies_all"),
+              visually_hidden_text: t(".allegation.denies_all"),
+            ) %>
+      <% end %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__allegation_denies_all" }) do |row| %>
+        <%= row.with_key(text: t(".allegation.additional_information"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: allegation.additional_information) %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_client_denial_of_allegation_path(@legal_aid_application),
+              visually_hidden_text: t(".allegation.additional_information"),
             ) %>
       <% end %>
     <% end %>
-    <p class='govuk-body'><%= allegation.additional_information %></p>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full">
   <% end %>
 </section>

@@ -326,8 +326,8 @@ en:
       show:
         h1-heading: Check your answers
         h2-heading: Your client's capital
-        chances_of_success_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
-        chances_of_success_h2: What happens next
+        what_happens_next: What happens next
+        what_happens_next_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
     check_provider_answers:
       standard:
         title: Check your answers
@@ -1420,7 +1420,6 @@ en:
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
     means_reports:
-      adult_dependants: Adult dependants
       assets_heading: &assets_heading Property, savings and other assets
       benefit_check_heading: Passported means
       benefit_check_question: In receipt of passporting benefit
@@ -1433,17 +1432,9 @@ en:
 
       capital_result_heading: &capital_result_heading Capital result
       caseworker_review_section_heading: Caseworker Review
-      child_dependants: Child dependants
       deductions-section-heading: &deductions-section-heading Deductions
       debits-section-heading: &debits-section-heading Outgoings
-      dependants_heading: Dependants
       employment_heading: &employment_heading Employment income
-      income_cash_payments_heading: Declared cash income
-      income_categories_heading: Declared income categories
-      income_details_heading: &income_details_heading Income
-      income_result_heading: &income_result_heading Income result
-      outgoings_cash_payments_heading: Declared cash outgoings
-      outgoings_categories_heading: Declared outgoings categories
       proceeding_eligibility: Proceeding eligibility
       student_finance_heading: Student finance
       income_cash_payments:
@@ -1520,10 +1511,6 @@ en:
         client_details_heading: Client details
         evidence_upload_heading: Supporting evidence
         heading: Means report
-      with_bank_statement_uploads:
-        assets_heading: *assets_heading
-        income_details_heading: *income_details_heading
-        income_result_heading: Employed income result
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading
@@ -1539,8 +1526,8 @@ en:
         full_employment_details:
           client: *client_employment_details
           partner: *partner_employment_details
-        income_details_heading: *income_details_heading
-        income_result_heading: *income_result_heading
+        income_details_heading: Income
+        income_result_heading: Income result
 
         bank_statement_heading: Bank statements
         bank_statement_question: Uploaded bank statements

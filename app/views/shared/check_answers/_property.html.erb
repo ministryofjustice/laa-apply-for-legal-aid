@@ -2,8 +2,8 @@
 
 <h3 class="govuk-heading-m"><%= t("shared.check_answers.assets.property.heading_own_home") %></h3>
 <%= govuk_summary_list(
+      card: { title: t("shared.check_answers.assets.property.heading_own_home") },
       actions: !read_only,
-      classes: "govuk-!-margin-bottom-9",
       html_attributes: { id: "property-question" },
     ) do |summary_list| %>
   <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own_home" }) do |row| %>
@@ -20,8 +20,8 @@
 <% if @legal_aid_application.own_home? %>
   <h3 class="govuk-heading-m"><%= t("shared.check_answers.assets.property.heading_property_details#{individual}") %></h3>
   <%= govuk_summary_list(
+        card: { title: t("shared.check_answers.assets.property.heading_property_details#{individual}") },
         actions: !read_only,
-        classes: "govuk-!-margin-bottom-9",
         html_attributes: { id: "property-details-questions" },
       ) do |summary_list| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__property_value" }) do |row| %>

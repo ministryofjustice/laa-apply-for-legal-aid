@@ -9,7 +9,7 @@
     <%= t(".income_result_heading") %>
   </h2>
 
-  <%= render "shared/check_answers/income_result", read_only: true %>
+  <%= render "shared/check_answers/income_result", read_only: true, heading: t(".income_result_heading") %>
 
   <% if @legal_aid_application.applicant.state_benefits.any? %>
     <section class="print-no-break">
@@ -27,7 +27,7 @@
     <h2 class="govuk-heading-m">
       <%= t(".income_details_heading") %>
     </h2>
-    <%= render "shared/check_answers/income_details" %>
+    <%= render "shared/means_report/income_details", heading: t(".income_details_heading") %>
   </section>
 
   <section class="print-no-break">
@@ -56,14 +56,12 @@
 
   <section class="print-no-break">
     <h2 class="govuk-heading-l"><%= t(".debits-section-heading") %></h2>
-    <%= render "shared/check_answers/outgoings_details" %>
+    <%= render "shared/means_report/outgoings_details", heading: t(".debits-section-heading") %>
   </section>
-
-  <div class="govuk-!-padding-bottom-8"></div>
 
   <section class="print-no-break">
     <h2 class="govuk-heading-l"><%= t(".deductions-section-heading") %></h2>
-    <%= render "shared/check_answers/deductions_details" %>
+    <%= render "shared/means_report/deductions_details", heading: t(".deductions-section-heading") %>
   </section>
 
   <div class="govuk-!-padding-bottom-8"></div>
@@ -86,7 +84,7 @@
     <%= t(".capital_result_heading") %>
   </h2>
 
-  <%= render "shared/check_answers/capital_result", read_only: true %>
+  <%= render "shared/check_answers/capital_result", heading: t(".capital_result_heading") %>
 </section>
 
 <h2 class="govuk-heading-m">
@@ -102,13 +100,11 @@
 <% end %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>
-<div class="govuk-!-padding-bottom-8"></div>
+  <section class="print-no-break">
+    <h3 class="govuk-heading-m"><%= t(".bank_statement_heading") %></h3>
 
-<section class="print-no-break">
-  <h3 class="govuk-heading-m"><%= t(".bank_statement_heading") %></h3>
-  <% if @legal_aid_application.uploading_bank_statements? %>
     <% has_partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-    <%= govuk_summary_list(actions: false, classes: "govuk-!-margin-bottom-9") do |summary_list| %>
+    <%= govuk_summary_list(card: { title: t(".bank_statement_heading") }, actions: false) do |summary_list| %>
       <% if @legal_aid_application.client_uploading_bank_statements? %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_client" }) do |row| %>
           <%= row.with_key(text: has_partner ? t(".bank_statement_question_with_partner") : t(".bank_statement_question"), classes: "govuk-!-width-one-half") %>
@@ -134,6 +130,5 @@
         <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</section>
+  </section>
 <% end %>

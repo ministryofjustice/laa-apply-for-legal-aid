@@ -84,8 +84,7 @@ Feature: Means report when partner is present
       | Partner income from property or lodger | £200 |
       | Partner student loan or grant | £100 |
       | Partner pension | £30 |
-
-    And I should see "Total income"
+      | Total income | | 
 
     And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
@@ -104,8 +103,7 @@ Feature: Means report when partner is present
       | Partner childcare payments | £30 |
       | Partner maintenance payments to a former partner | £50 |
       | Partner payments towards legal aid in a criminal case | £0 |
-
-    And I should see "Total outgoings"
+      | Total outgoings | £705 |
 
     And the Deductions questions should exist:
       | question |

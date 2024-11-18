@@ -1,18 +1,10 @@
-<dl class="govuk-summary-list govuk-summary-list--no-border">
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      <%= t(".apply_ref") %>
-    </dt>
-    <dd class="govuk-summary-list__value">
-      <%= legal_aid_application.application_ref %>
-    </dd>
-  </div>
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      <%= t(".ccms_ref_html") %>
-    </dt>
-    <dd class="govuk-summary-list__value">
-      <%= legal_aid_application.case_ccms_reference %>
-    </dd>
-  </div>
-</dl>
+<%= govuk_summary_list(classes: "govuk-summary-list--no-border") do |summary_list| %>
+  <%= summary_list.with_row do |row| %>
+    <%= row.with_key(text: t(".apply_ref")) %>
+    <%= row.with_value(text: legal_aid_application.application_ref) %>
+  <% end %>
+  <%= summary_list.with_row do |row| %>
+    <%= row.with_key(text: t(".ccms_ref_html")) %>
+    <%= row.with_value(text: legal_aid_application.case_ccms_reference) %>
+  <% end %>
+<% end %>

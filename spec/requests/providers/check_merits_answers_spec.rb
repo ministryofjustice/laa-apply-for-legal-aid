@@ -15,9 +15,11 @@ RSpec.describe "check merits answers requests" do
              :with_attempts_to_settle,
              :with_involved_children,
              :provider_entering_merits,
+             domestic_abuse_summary:,
              explicit_proceedings: %i[da001 se014])
     end
     let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
+    let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
 
     before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
@@ -45,10 +47,10 @@ RSpec.describe "check merits answers requests" do
         scope = "shared.check_answers"
         expect(response.body).to include(I18n.t("latest_incident_details.notification_of_latest_incident", scope:))
         expect(response.body).to include(I18n.t("latest_incident_details.date_of_latest_incident", scope:))
-        expect(response.body).to include(I18n.t("opponent_details.understands_terms_of_court_order", scope:))
-        expect(response.body).to include(I18n.t("opponent_details.warning_letter_sent", scope:))
-        expect(response.body).to include(I18n.t("opponent_details.police_notified", scope:))
-        expect(response.body).to include(I18n.t("opponent_details.bail_conditions_set", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.mental_capacity.understands_terms", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.domestic_abuse.warning_letter_reasons", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.domestic_abuse.police_notified_details", scope:))
+        expect(response.body).to include(I18n.t("opponent_details.domestic_abuse.bail_conditions", scope:))
         expect(response.body).to include(I18n.t("merits.items.statement_of_case", scope:))
         expect(response.body).to include(I18n.t("merits_proceeding_section.prospects_of_success", scope:))
         expect(response.body).to include(I18n.t("merits_proceeding_section.success_prospect", scope:))

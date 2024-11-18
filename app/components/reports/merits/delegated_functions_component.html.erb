@@ -1,14 +1,13 @@
-<h3 class="govuk-heading-s">
-  <%= @proceeding.meaning %>
-</h3>
-
 <% if @proceeding.used_delegated_functions? %>
   <%= govuk_summary_list(
+        card: { title: @proceeding.meaning },
         rows:,
         actions: false,
-        classes: "govuk-!-margin-bottom-9",
       ) %>
 <% else %>
+  <h3 class="govuk-heading-s">
+    <%= @proceeding.meaning %>
+  </h3>
   <p class="govuk-body govuk-!-margin-bottom-9">
     <%= t(".not_used") %>
   </p>
