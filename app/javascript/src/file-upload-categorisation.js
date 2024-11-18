@@ -23,7 +23,7 @@ export function initFileUploadCategorisation (categorisationSelectLists) {
         extract attachment id and name/type from select list
         and use to update attachment asynchronously
       */
-      const attachmentId = e.target.name.match(/^uploaded_evidence_collection\[(.*)\]/)[1]
+      const attachmentId = e.target.dataset.attachmentId
       const attachmentType = e.target.value
       updateAttachment(attachmentId, attachmentType)
     })
@@ -31,7 +31,7 @@ export function initFileUploadCategorisation (categorisationSelectLists) {
 }
 
 document.addEventListener('DOMContentLoaded', event => {
-  const categorisationSelectLists = document.querySelectorAll('select[id^="uploaded-evidence-collection-"]')
+  const categorisationSelectLists = document.querySelectorAll('[data-categorisation-select]')
 
   if (categorisationSelectLists.length) {
     initFileUploadCategorisation(categorisationSelectLists)

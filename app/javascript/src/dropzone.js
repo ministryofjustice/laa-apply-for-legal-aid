@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', event => {
       fileSection.innerHTML = xmlHttp.responseText
 
       // reintialise eventhandlers for categorisation select lists
-      const categorisationSelectLists = document.querySelectorAll('select[id^="uploaded-evidence-collection-"]')
+      const categorisationSelectLists = document.querySelectorAll('[data-categorisation-select]')
       if (categorisationSelectLists.length) {
         initFileUploadCategorisation(categorisationSelectLists)
       }
