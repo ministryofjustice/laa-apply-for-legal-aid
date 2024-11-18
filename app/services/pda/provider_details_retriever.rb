@@ -47,7 +47,7 @@ module PDA
     def provider_offices
       return @provider_offices if @provider_offices
 
-      response = conn.get("/provider-user/#{encoded_username}/provider-offices")
+      response = conn.get("/provider-users/#{encoded_username}/provider-offices")
       handle_errors(response)
 
       @provider_offices = JSON.parse(response.body)

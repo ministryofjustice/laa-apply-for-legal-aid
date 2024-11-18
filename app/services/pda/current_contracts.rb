@@ -27,7 +27,7 @@ module PDA
   private
 
     def url
-      @url ||= "#{Rails.configuration.x.pda.url}/provider-office/#{@office_code}/office-contract-details"
+      @url ||= "#{Rails.configuration.x.pda.url}/provider-offices/#{@office_code}/office-contract-details"
     end
 
     def headers

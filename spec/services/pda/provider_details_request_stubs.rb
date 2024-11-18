@@ -2,7 +2,7 @@
 # provider offices
 ###################
 def stub_provider_offices
-  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-user/test-user/provider-offices})
+  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-users/test-user/provider-offices})
     .to_return(
       status: 200,
       body: provider_offices_json,
@@ -31,7 +31,7 @@ def provider_offices_json
 end
 
 def stub_other_provider_offices
-  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-user/other-user/provider-offices})
+  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-users/other-user/provider-offices})
     .to_return(
       status: 200,
       body: other_provider_offices_json,
@@ -96,11 +96,11 @@ end
 # errors
 #################
 def stub_provider_details_retriever_record_not_found(provider:)
-  stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-user/#{provider.username}/provider-offices")
+  stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}/provider-offices")
     .to_return(body: nil, status: 204)
 end
 
 def stub_provider_details_retriever_api_error(provider:)
-  stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-user/#{provider.username}/provider-offices")
+  stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}/provider-offices")
     .to_return(body: "An error has occurred", status: 500)
 end

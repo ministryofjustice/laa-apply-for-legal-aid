@@ -5,7 +5,7 @@ RSpec.describe PDA::CurrentContracts do
     subject(:call) { described_class.call(office_code) }
 
     before do
-      stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-office/#{office_code}/office-contract-details")
+      stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/office-contract-details")
         .to_return(body:, status:)
     end
 
