@@ -1829,7 +1829,7 @@ en:
               - go back and change your answer
               - use legal help
             options: "You can do one of the following:"
-            proceedings: Select a different proceeding or matter type
+            proceedings: Remove the proceeding and select a new one
           heard_as_alternatives:
             <<: *default
             title_html: You cannot submit this application under special children act

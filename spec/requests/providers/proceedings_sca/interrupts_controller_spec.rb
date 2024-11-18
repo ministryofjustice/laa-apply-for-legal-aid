@@ -29,7 +29,7 @@ RSpec.describe Providers::ProceedingsSCA::InterruptsController do
 
       it "shows text for a supervision order and a button to select a different proceeding" do
         expect(response.body).to include("For special children act, a supervision order cannot be varied, discharged or extended")
-        expect(response.body).to include("Select a different proceeding or matter type")
+        expect(response.body).to include("Remove the proceeding and select a new one")
       end
 
       context "when passed an unknown type" do
@@ -37,7 +37,7 @@ RSpec.describe Providers::ProceedingsSCA::InterruptsController do
 
         it "shows default text and a button to select a different proceeding" do
           expect(response.body).to include("You cannot choose a special children act proceeding if it has not been issued")
-          expect(response.body).to include("Select a different proceeding or matter type")
+          expect(response.body).to include("Remove the proceeding and select a new one")
         end
       end
     end
