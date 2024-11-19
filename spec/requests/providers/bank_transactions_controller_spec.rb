@@ -47,7 +47,7 @@ RSpec.describe Providers::BankTransactionsController do
       expect { patch_request }.to change { bank_transaction.reload.meta_data }.to(nil)
     end
 
-    context "when bank_transaction does not belong to this application" do
+    context "when bank_transaction does not belong to this application", :show_exceptions do
       let(:bank_account) { create(:bank_account) }
 
       it "does not remove the assocation with the transaction type" do
@@ -56,7 +56,7 @@ RSpec.describe Providers::BankTransactionsController do
 
       it "redirects to page_not_found" do
         patch_request
-        expect(response).to redirect_to "/error/page_not_found?locale=en"
+        expect(response).to render_template("errors/show/_page_not_found")
       end
     end
   end

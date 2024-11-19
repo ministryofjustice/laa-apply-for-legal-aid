@@ -143,5 +143,9 @@ module LaaApplyForLegalAid
 
     config.assets.paths << Rails.root.join("node_modules/govuk-frontend/dist/govuk/assets")
     config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")
+
+    config.exceptions_app = lambda { |env|
+      ErrorsController.action(:show).call(env)
+    }
   end
 end

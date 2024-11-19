@@ -4,18 +4,7 @@ class ApplicationController < ActionController::Base
   include OmniauthPathHelper
   helper_method :omniauth_login_start_path
 
-  # See also catch all route at end of config/routes.rb
-  rescue_from ActiveRecord::RecordNotFound, with: :page_not_found
-
 private
-
-  def page_not_found(exception)
-    # TODO: alerting and logging added to handle bug AP-5365 but could keep in?!
-    AlertManager.capture_exception(exception)
-    Rails.logger.error(exception.message)
-    update_locale
-    redirect_to error_path(:page_not_found, default_url_options)
-  end
 
   def default_url_options
     { locale: I18n.locale }

@@ -57,12 +57,13 @@ RSpec.describe Citizens::LegalAidApplicationsController do
       end
     end
 
-    context "when no matching legal aid application exists" do
+    context "when no matching legal aid application exists", :show_exceptions do
       let(:token) { SecureRandom.uuid }
 
-      it "redirects to error page (page not found)" do
+      it "renders page not found" do
         request
-        expect(response).to redirect_to(error_path(:page_not_found))
+        expect(response).to have_http_status(:not_found)
+        expect(response).to render_template("errors/show/_page_not_found")
       end
     end
 
