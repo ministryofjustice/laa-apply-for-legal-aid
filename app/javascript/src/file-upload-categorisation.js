@@ -16,7 +16,7 @@ async function updateAttachment (attachmentId, attachmentType) {
   return response.status
 }
 
-export function initFileUploadCategorisation (categorisationSelectLists) {
+function addCategorisationEventListener (categorisationSelectLists) {
   categorisationSelectLists.forEach((select) => {
     select.addEventListener('change', (e) => {
       /*
@@ -30,10 +30,14 @@ export function initFileUploadCategorisation (categorisationSelectLists) {
   })
 }
 
-document.addEventListener('DOMContentLoaded', event => {
+export function initFileUploadCategorisation () {
   const categorisationSelectLists = document.querySelectorAll('[data-categorisation-select]')
 
   if (categorisationSelectLists.length) {
-    initFileUploadCategorisation(categorisationSelectLists)
+    addCategorisationEventListener(categorisationSelectLists)
   }
+}
+
+document.addEventListener('DOMContentLoaded', event => {
+  initFileUploadCategorisation()
 })
