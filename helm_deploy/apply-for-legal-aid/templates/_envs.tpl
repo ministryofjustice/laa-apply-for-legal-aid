@@ -356,7 +356,7 @@ env:
   - name: GOOGLE_SHEETS_CLIENT_EMAIL
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: googleSheetsClientEmail
   - name: GOOGLE_SHEETS_CLIENT_ID
     valueFrom:
