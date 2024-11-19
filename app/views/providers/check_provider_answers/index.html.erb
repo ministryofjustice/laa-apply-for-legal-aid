@@ -1,11 +1,154 @@
-<% pass_through = {
-     applicant: @applicant,
-     partner: @partner,
-     address: @address,
-     read_only: @read_only,
-   } %>
+<% if @read_only
+     notification_banner_title = t("generic.important")
+     notification_banner_text = t(".banner.your_client_needs_to")
+   end %>
+<% if @legal_aid_application.copy_case? && flash[:hash].nil?
+     notification_banner_title = t("generic.important")
+     notification_banner_text = t(".copy_case.heading", application_ref: application_ref_non_breaking(@source_application.application_ref))
+   end %>
+
 <% if @read_only %>
-  <%= render "providers/check_provider_answers/read_only", pass_through %>
-<% else %>
-  <%= render "providers/check_provider_answers/standard", pass_through %>
+  <% content_for(:before_page_title) do %>
+    <p class="govuk-body"><%= t(".sent_email_text", email: @legal_aid_application.applicant.email) %></p>
+
+    <%= govuk_button_link_to t(".change_email_button"),
+                             providers_legal_aid_application_email_address_path,
+                             role: "button",
+                             secondary: true,
+                             id: "change-email" %>
+  <% end %>
+<% end %>
+
+<%= page_template(
+      page_title: @read_only ? t(".title_truelayer") : t(".title"),
+      caption: @read_only ? nil : t(".caption"),
+      notification_banner_title:,
+      notification_banner_text:,
+      column_width: "full",
+      back_link: {
+        path: @read_only ? submitted_providers_legal_aid_applications_path : reset_providers_legal_aid_application_check_provider_answers_path,
+        text: @read_only ? t("generic.home") : t("generic.back"),
+        method: @read_only ? :get : :post,
+      },
+    ) do %>
+
+  <h2 class="govuk-heading-l"><%= t(".section_client.heading") %></h2>
+
+  <%= render("shared/check_answers/client_details",
+             attributes: %i[first_name last_name last_name_at_birth applied_previously date_of_birth national_insurance_number employment_status correspondence_choice address care_of home_address has_partner],
+             applicant: @applicant,
+             address: @address,
+             read_only: @read_only) %>
+
+  <% if @legal_aid_application.applicant_has_partner? %>
+    <%= render("shared/check_answers/partner_details",
+               attributes: %i[contrary_interest first_name last_name date_of_birth national_insurance_number],
+               partner: @partner,
+               read_only: @read_only) %>
+  <% end %>
+
+  <%= render("shared/check_answers/linking_and_copying", read_only: @read_only) %>
+
+  <div class="govuk-grid-row" id="app-check-your-answers__proceedings">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m"><%= t ".section_proceeding.heading" %></h2>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <%= unless @show_linked_proceedings || @read_only
+            govuk_link_to(
+              t("generic.change"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application),
+              visually_hidden_suffix: t(".section_proceeding.heading"),
+              class: "govuk-link-right"
+            )
+          end %>
+    </div>
+  </div>
+
+  <%= govuk_summary_list(card: { title: t(".section_proceeding.heading") }, actions: false) do |summary_list| %>
+    <%= @source_application.proceedings_by_name.each_with_index do |proceeding, i| %>
+      <%= summary_list.with_row(classes: "app-check-your-answers__#{proceeding.name}_proceeding") do |row| %>
+        <%= row.with_key(text: "#{t('.proceeding')} #{i + 1}", classes: "govuk-!-width-one-half") %>
+        <%= row.with_value { proceeding.meaning } %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% @source_application.proceedings.in_order_of_addition.each do |proceeding| %>
+    <%= render(
+          "shared/check_answers/proceeding_details",
+          proceeding:,
+          read_only: @read_only,
+        ) %>
+  <% end %>
+
+  <% if @source_application.used_delegated_functions? && !@source_application.special_children_act_proceedings? %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <% unless @show_linked_proceedings || @read_only %>
+          <p><%= govuk_link_to(
+                   t("generic.change"),
+                   providers_legal_aid_application_limitations_path(@legal_aid_application),
+                   visually_hidden_suffix: t(".emergency_cost_limit"),
+                   class: "govuk-link-right",
+                 ) %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <%= render(
+          "shared/check_answers/emergency_costs",
+          legal_aid_application: @source_application,
+          read_only: @read_only,
+        ) %>
+  <% end %>
+
+  <% if @source_application.substantive_cost_overridable? %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
+      </div>
+      <% unless @show_linked_proceedings || @read_only %>
+        <div class="govuk-grid-column-one-third">
+          <p><%= govuk_link_to t(".change"), providers_legal_aid_application_limitations_path(@legal_aid_application), class: "govuk-link-right" %></p>
+        </div>
+      <% end %>
+    </div>
+    <%= render(
+          "shared/check_answers/substantive_costs",
+          legal_aid_application: @source_application,
+          heading: t(".substantive_cost_limit"),
+          read_only: @read_only,
+        ) %>
+  <% end %>
+
+  <% unless @read_only %>
+    <%= if @legal_aid_application&.lead_linked_application&.confirm_link == true && @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
+          govuk_warning_text(text: t(".copy_case.family_warning"))
+        end %>
+
+    <% if @applicant.national_insurance_number? %>
+      <h2 class="govuk-heading-m"><%= t(".section_next.heading") %></h2>
+
+      <p class="govuk-body govuk-!-margin-bottom-9">
+        <%= t(".section_next.content") %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <% if @read_only %>
+    <%= next_action_buttons_with_form(
+          url: submitted_providers_legal_aid_applications_path,
+          method: :get,
+          show_draft: false,
+          continue_button_text: t("generic.back_to_your_applications"),
+        ) %>
+  <% else %>
+    <%= next_action_buttons_with_form(
+          url: continue_providers_legal_aid_application_check_provider_answers_path,
+          method: :patch,
+          show_draft: true,
+        ) %>
+  <% end %>
 <% end %>
