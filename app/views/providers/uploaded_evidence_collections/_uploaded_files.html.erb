@@ -37,7 +37,8 @@
                                                :last,
                                                label: { text: t(".select_a_category_label", filename: attachment.document.filename), class: "govuk-visually-hidden" },
                                                options: { selected: @required_documents.size > 1 ? attachment.attachment_type : @attachment_type_options.first },
-                                               class: [select_error]
+                                               class: [select_error],
+                                               data: { categorisation_select: true, attachment_id: attachment.id }
                 end
                 row.with_cell do
                   govuk_button_to(

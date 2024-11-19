@@ -3,6 +3,11 @@ When("I have completed a non-passported application and reached the evidence upl
     :application,
     :with_applicant,
     :with_non_passported_state_machine,
+    :with_domestic_abuse_summary,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
     :provider_entering_merits,
     :with_proceedings, explicit_proceedings: %i[se014 da001]
   )
@@ -36,12 +41,22 @@ Then(/^I upload the fixture file named ['|"](.*?)['|"]/) do |filename|
   attach_file(Rails.root.join("spec/fixtures/files/#{filename}"), class: "dz-hidden-input", make_visible: true, wait: 30)
 end
 
-Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|
-  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//select/option[text()=\"#{category}\"]").select_option
+Then("I select a category of {string} for the file {string}") do |category, filename|
+  within("tr", text: filename) do
+    select(category)
+  end
 end
 
-Then(/^I click delete for the file ['|"](.*?)['|"]/) do |filename|
-  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//button[contains(@class,'button-as-link')]").click
+Then("I should see the file {string} categorised as {string}") do |filename, category|
+  within("tr", text: filename) do
+    expect(page).to have_select("Select a category", selected: category)
+  end
+end
+
+Then("I click delete for the file {string}") do |filename|
+  within("tr", text: filename) do
+    click_link_or_button("Delete")
+  end
 end
 
 Given("csrf is enabled") do

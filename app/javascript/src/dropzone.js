@@ -1,5 +1,6 @@
 import Dropzone from 'dropzone'
 import imgLoading from '../../assets/images/loading-small.gif'
+import { initFileUploadCategorisation } from './file-upload-categorisation'
 
 const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
 
@@ -126,6 +127,13 @@ document.addEventListener('DOMContentLoaded', event => {
       xmlHttp.open('GET', url, false) // false for synchronous request
       xmlHttp.send(null)
       fileSection.innerHTML = xmlHttp.responseText
+
+      // reintialise eventhandlers for categorisation select lists
+      const categorisationSelectLists = document.querySelectorAll('[data-categorisation-select]')
+      if (categorisationSelectLists.length) {
+        initFileUploadCategorisation(categorisationSelectLists)
+      }
+
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay)
     })
     dropzone.on('error', (file, response) => {
