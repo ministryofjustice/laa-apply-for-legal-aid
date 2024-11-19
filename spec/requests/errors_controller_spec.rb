@@ -2,12 +2,17 @@ require "rails_helper"
 
 RSpec.describe ErrorsController do
   describe "actions that result in error pages being shown" do
-    describe "unknown page" do
+    context "when unknown page" do
       context "with default locale" do
-        before { get "/unknown/path" }
-
         it "redirect to page not found" do
+          get "/unknown/path"
           expect(response).to redirect_to("/error/page_not_found?locale=en")
+        end
+
+        it "has status 404" do
+          get "/unknown/path"
+          follow_redirect!
+          expect(response).to have_http_status(:not_found)
         end
       end
 
@@ -19,12 +24,19 @@ RSpec.describe ErrorsController do
         before { get "/unknown/path", params: { locale: "cy" } }
 
         it "redirect to page not found" do
+          get "/unknown/path", params: { locale: "cy" }
           expect(response).to redirect_to("/error/page_not_found?locale=cy")
+        end
+
+        it "has status 404" do
+          get "/unknown/path", params: { locale: "cy" }
+          follow_redirect!
+          expect(response).to have_http_status(:not_found)
         end
       end
     end
 
-    describe "object not found" do
+    context "when object not found" do
       context "with default locale" do
         before { get feedback_path(SecureRandom.uuid) }
 
@@ -53,7 +65,7 @@ RSpec.describe ErrorsController do
     before { get_error }
 
     it "renders successfully" do
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:not_found)
     end
 
     it "displays the correct header" do
