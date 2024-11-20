@@ -1,13 +1,13 @@
 require "rails_helper"
 require "sidekiq/testing"
 
-RSpec.describe "SamlSessionsController" do
+RSpec.describe SamlSessionsController do
   let(:firm) { create(:firm, offices: [office]) }
   let(:office) { create(:office) }
   let(:provider) { create(:provider, firm:, selected_office: office, offices: [office], username:) }
   let(:username) { "bob the builder" }
   let(:provider_details_api_url) { "#{Rails.configuration.x.provider_details.url}#{username.gsub(' ', '%20')}" }
-  let(:provider_details_api_reponse) { api_response.to_json }
+  let(:provider_details_api_response) { api_response.to_json }
   let(:enable_mock_saml) { false }
 
   before do
@@ -48,7 +48,7 @@ RSpec.describe "SamlSessionsController" do
 
     before do
       allow_any_instance_of(Warden::Proxy).to receive(:authenticate!).and_return(provider)
-      stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_reponse, status:)
+      stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_response, status:)
     end
 
     context "when on staging or production" do
