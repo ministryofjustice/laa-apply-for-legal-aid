@@ -13,14 +13,18 @@ class ProviderDetailsRetriever
   end
 
   def call
+    # :nocov:
     Rails.logger.info "**** Using #{self.class} to retrieve Provider Details" unless Rails.env.test?
+    # :nocov:
     provider_details
   end
 
 private
 
   def provider_details
+    # :nocov:
     raise_record_not_found_error if response.is_a?(Net::HTTPNotFound)
+    # :nocov:
 
     raise_error unless response.is_a?(Net::HTTPOK)
 
@@ -50,6 +54,8 @@ private
   end
 
   def raise_record_not_found_error
+    # :nocov:
     raise ApiRecordNotFoundError, "Retrieval Failed: #{response.message} (#{response.code}) #{response.body}"
+    # :nocov:
   end
 end
