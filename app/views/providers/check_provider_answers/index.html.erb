@@ -33,7 +33,6 @@
     ) do %>
 
   <h2 class="govuk-heading-l"><%= t(".section_client.heading") %></h2>
-
   <%= render("shared/check_answers/client_details",
              attributes: %i[first_name last_name last_name_at_birth applied_previously date_of_birth national_insurance_number employment_status correspondence_choice address care_of home_address has_partner],
              applicant: @applicant,
@@ -41,6 +40,7 @@
              read_only: @read_only) %>
 
   <% if @legal_aid_application.applicant_has_partner? %>
+    <h2 class="govuk-heading-l"><%= t(".section_partner.heading") %></h2>
     <%= render("shared/check_answers/partner_details",
                attributes: %i[contrary_interest first_name last_name date_of_birth national_insurance_number],
                partner: @partner,
