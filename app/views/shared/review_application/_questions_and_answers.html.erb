@@ -32,11 +32,11 @@
   </section>
 
   <% if @legal_aid_application.applicant_has_partner? %>
+    <h2 class="govuk-heading-l"><%= t(".partner_details_heading") %></h2>
     <%= render(
           "shared/check_answers/partner_details",
           attributes: %i[contrary_interest first_name last_name date_of_birth national_insurance_number],
           partner: @legal_aid_application.partner,
-          heading: "govuk-heading-l",
           read_only: true,
         ) %>
   <% end %>

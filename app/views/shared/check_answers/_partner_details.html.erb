@@ -1,6 +1,4 @@
-<% read_only = false unless local_assigns.key?(:read_only)
-   heading_class = local_assigns.key?(:heading) ? local_assigns[:heading] : "govuk-heading-m" %>
-<h2 class="<%= heading_class %>"><%= t ".section_heading" %></h2>
+<% read_only = false unless local_assigns.key?(:read_only) %>
 <%= govuk_summary_list(card: { title: t(".section_heading") },
                        html_attributes: { id: "partner-details-questions" },
                        actions: !read_only) do |summary_list| %>

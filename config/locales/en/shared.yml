@@ -972,6 +972,7 @@ en:
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
         client_details_heading: Client details
+        partner_details_heading: Partner details
         proceedings_details_heading: What you're applying for
         change: Change
         emergency_cost_limit: Emergency cost limit
