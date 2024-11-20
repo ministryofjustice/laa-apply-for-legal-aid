@@ -12,7 +12,7 @@ RSpec/AnyInstance:
     - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
     - 'spec/requests/providers/uploaded_evidence_collection_spec.rb'
     - 'spec/requests/providers/use_ccms_controller_spec.rb'
-    - 'spec/requests/saml_sessions_spec.rb'
+    - 'spec/requests/saml_sessions_controller_spec.rb'
     - 'spec/services/ccms/attribute_configuration_spec.rb'
     - 'spec/services/ccms/manual_review_determiner_spec.rb'
     - 'spec/services/ccms/payload_generators/entity_attributes_generator_spec.rb'
