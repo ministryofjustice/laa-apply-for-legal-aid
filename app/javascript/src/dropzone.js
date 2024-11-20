@@ -128,11 +128,8 @@ document.addEventListener('DOMContentLoaded', event => {
       xmlHttp.send(null)
       fileSection.innerHTML = xmlHttp.responseText
 
-      // reintialise eventhandlers for categorisation select lists
-      const categorisationSelectLists = document.querySelectorAll('[data-categorisation-select]')
-      if (categorisationSelectLists.length) {
-        initFileUploadCategorisation(categorisationSelectLists)
-      }
+      // reinitialise event handlers for categorisation select lists
+      initFileUploadCategorisation()
 
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay)
     })
