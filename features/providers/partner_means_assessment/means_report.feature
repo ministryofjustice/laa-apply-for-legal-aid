@@ -12,8 +12,7 @@ Feature: Means report when partner is present
       | h2  | Income result |
       | h2  | Income |
       | h3  | Client employment income |
-      | h2  | Outgoings |
-      | h2  | Deductions |
+      | h2  | Outgoings and deductions |
       | h2  | Caseworker Review |
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
@@ -93,7 +92,7 @@ Feature: Means report when partner is present
       | Do you need to tell us anything else about the partner's employment? |
       | Details for client |
 
-    And the Outgoings questions and answers should match:
+    And the Outgoings and deductions questions and answers should match:
       | question | answer |
       | Client housing payments (any declared housing benefits have been deducted from this total) | £125 |
       | Client childcare payments | £0 |
@@ -103,12 +102,9 @@ Feature: Means report when partner is present
       | Partner childcare payments | £30 |
       | Partner maintenance payments to a former partner | £50 |
       | Partner payments towards legal aid in a criminal case | £0 |
-      | Total outgoings | £705 |
-
-    And the Deductions questions should exist:
-      | question |
-      | Dependants allowance |
-      | Total deductions |
+      | Dependants allowance | £0 |
+      | Partner allowance | £211.32 |
+      | Total outgoings and deductions | £916.32 |
 
     And the Dependants questions should exist:
       | question |

@@ -105,16 +105,14 @@ cy:
           property_or_lodger: regdol ro ytreporp morf emocnI
           student_loan: tnarg ro naol tnedutS
           pension: noisneP
-      outgoings_details:
-        total_outgoings: sgniogtuo latoT
+      outgoings_and_deductions_details:
+        total_outgoings_and_deductions: snoitcuded dna sgnitugo latoT
         client:
           housing: stnemyap gnisuoH
           childcare: stnemyap eracdlihC
           maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
           legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-      deductions_details:
-        total_deductions: snoitcuded latoT
-        dependants_allowance: ecnawolla stnadnepeD
+          dependants_allowance: ecnawolla stnadnepeD
     check_answers:
       assets:
         assets:

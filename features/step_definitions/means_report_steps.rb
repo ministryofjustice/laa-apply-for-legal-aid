@@ -349,8 +349,8 @@ Then("the Capital result questions should exist:") do |table|
   expect_questions_in(selector: "#capital-result-questions", expected: table)
 end
 
-Then("the Outgoings questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#outgoings-details-questions", expected_table: table)
+Then("the Outgoings and deductions questions and answers should match:") do |table|
+  expect_matching_questions_and_answers(actual_selector: "#outgoings-and-deductions-details-questions", expected_table: table)
 end
 
 Then("the Declared income categories questions should exist:") do |table|
