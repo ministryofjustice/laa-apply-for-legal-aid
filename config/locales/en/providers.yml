@@ -339,6 +339,8 @@ en:
           family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
         section_client:
           heading: Client
+        section_partner:
+          heading: Partner
         section_proceeding:
           heading: Proceedings
         section_delegated:
@@ -1439,6 +1441,7 @@ en:
       show:
         heading: Merits report
         client_details_heading: Client details
+        partner_details_heading: Partner details
         previous_legal_aid: Previous Legal Aid
         has_applied_before: Has your client applied for civil legal aid before?
         previous_application_reference: Previous CCMS reference number
@@ -1534,6 +1537,7 @@ en:
           non_passported: Non-Passported application
       show:
         client_details_heading: Client details
+        partner_details_heading: Partner details
         evidence_upload_heading: Supporting evidence
         heading: Means report
       with_cfe_result_details:
