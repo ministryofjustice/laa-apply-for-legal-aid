@@ -43,6 +43,7 @@
           unless read_only
             govuk_link_to(t("generic.change"),
                           providers_legal_aid_application_link_application_copy_path(@legal_aid_application),
+                          id: "app-check-your-answers__copying",
                           visually_hidden_suffix: t(".section_copying.heading"))
           end
         end

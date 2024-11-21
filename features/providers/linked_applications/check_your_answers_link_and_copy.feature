@@ -72,7 +72,7 @@ Scenario: If I change the linked from Family to No
 
 @javascript @vcr
 Scenario: If I change the copied from Yes to No
-  When I click Check Your Answers Change link for "copying"
+  When I click Check Your Answers summary card Change link for "copying"
   Then I should be on a page with title "Do you want to copy the proceedings and merits from L-123-456 to this one?"
 
   When I choose "No, I need to make changes"

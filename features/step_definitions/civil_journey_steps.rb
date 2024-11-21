@@ -1155,6 +1155,12 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   end
 end
 
+Given("I click Check Your Answers summary card Change link for {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  page.find_by_id("app-check-your-answers__#{question_id}").click
+end
+
 Given("I click Check Your Answers Change link for vehicle {string}") do |vehicle|
   steps %(Then the page should be axe clean excluding ".govuk-radios__input, .govuk-accordion__section-content") if run_axe?
 
