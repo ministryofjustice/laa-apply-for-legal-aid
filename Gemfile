@@ -61,7 +61,7 @@ gem "jwt"
 
 # background processing
 gem "redis"
-gem "sidekiq", "~> 7.3.5"
+gem "sidekiq", "~> 7.3.6"
 gem "sidekiq-status", "~> 3.0.3"
 
 # URL and path parsing
@@ -107,7 +107,7 @@ gem "strong_migrations"
 # this in turn broke CookieJar, a deprecated gem, that is used in em-http-request, that is
 # required by puffing-billy.  Rather than strip out puffing-billy or wait weeks for the
 # maintainers of upstream gems to agree a path, we are locking this below the breaking change
-gem "uri", "< 1.0.0"
+gem "uri", "< 2.0.0"
 
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
