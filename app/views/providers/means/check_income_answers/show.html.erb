@@ -6,6 +6,10 @@
 
 <%= page_template(page_title: t(".h1-heading")) do %>
 
+  <%= govuk_inset_text do %>
+    <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
+  <% end %>
+
   <%= render "providers/means/check_income_answers/applicant_income_assessment" %>
 
   <%= render "providers/means/check_income_answers/partner_income_assessment" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>

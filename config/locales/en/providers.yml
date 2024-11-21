@@ -1344,6 +1344,7 @@ en:
     check_capital_answers:
       show:
         h1-heading: Check your answers
+        inset_text: You cannot change the answers on this page once you save and continue.
         capital-section-heading: Your client's capital
         capital-section-heading_with_partner: Your client's and their partner's capital
         what_happens_next:
