@@ -482,7 +482,7 @@ en:
         does_your_client: Does %{individual} get Housing Benefit?
       linking_and_copying:
         section_linking:
-          heading: Cases linked to this one
+          heading: Linking
           linked: Link to another application?
           FC_LEAD: Family link made to
           LEGAL: Legal link made to
@@ -973,6 +973,7 @@ en:
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
         client_details_heading: Client details
         partner_details_heading: Partner details
+        linking_and_copying_heading: Cases linked to this one
         proceedings_details_heading: What you're applying for
         change: Change
         emergency_cost_limit: Emergency cost limit

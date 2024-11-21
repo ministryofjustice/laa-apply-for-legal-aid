@@ -689,6 +689,13 @@ class LegalAidApplication < ApplicationRecord
     ].compact_blank.join(", ")
   end
 
+  def link_description_without_name
+    [
+      "<span class='no-wrap'>#{application_ref}</span>",
+      proceedings&.map(&:meaning)&.join(" "),
+    ].compact_blank.join("<br>")
+  end
+
   def related_proceedings
     proceedings.where(sca_type: "related")
   end
