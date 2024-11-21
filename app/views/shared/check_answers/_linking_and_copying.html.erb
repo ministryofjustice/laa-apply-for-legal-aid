@@ -23,6 +23,7 @@
         end
       end
     end %>
+
 <% if @legal_aid_application&.lead_linked_application&.confirm_link? && all_linked_applications_details(@legal_aid_application).present? %>
   <%= govuk_summary_card(title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}")) do |card|
         card.with_summary_list(actions: false) do |summary_list|
@@ -37,25 +38,25 @@
 <% end %>
 
 <% if @legal_aid_application&.lead_linked_application&.confirm_link? && @legal_aid_application&.lead_linked_application&.link_type_code.eql?("FC_LEAD") %>
-  <%= govuk_summary_card(title: t(".section_copying.heading")) do |card| %>
-    <% card.with_action do
-         unless read_only
-           govuk_link_to(t("generic.change"),
-                         providers_legal_aid_application_link_application_copy_path(@legal_aid_application),
-                         visually_hidden_suffix: t(".section_copying.heading"))
-         end
-       end %>
-    <% card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__copying_items" }) do |summary_list| %>
-        <% summary_list.with_row(classes: "app-check-your-answers__copy_question") do |row|
-          row.with_key(text: t(".section_copying.question"), classes: "govuk-!-width-one-third")
-          row.with_value { safe_yes_or_no(@legal_aid_application.copy_case?) }
+  <%= govuk_summary_card(title: t(".section_copying.heading")) do |card|
+        card.with_action do
+          unless read_only
+            govuk_link_to(t("generic.change"),
+                          providers_legal_aid_application_link_application_copy_path(@legal_aid_application),
+                          visually_hidden_suffix: t(".section_copying.heading"))
+          end
         end
-        if @legal_aid_application.copy_case?
-          summary_list.with_row(classes: "app-check-your-answers__copying_case") do |row|
-            row.with_key(text: t(".section_copying.copied"))
-            row.with_value(text: sanitize(@source_application.link_description))
+        card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__copying_items" }) do |summary_list|
+          summary_list.with_row(classes: "app-check-your-answers__copy_question") do |row|
+            row.with_key(text: t(".section_copying.question"), classes: "govuk-!-width-one-third")
+            row.with_value { safe_yes_or_no(@legal_aid_application.copy_case?) }
+          end
+          if @legal_aid_application.copy_case?
+            summary_list.with_row(classes: "app-check-your-answers__copying_case") do |row|
+              row.with_key(text: t(".section_copying.copied"))
+              row.with_value(text: sanitize(@source_application.link_description))
+            end
           end
         end
       end %>
-  <% end %>
 <% end %>
