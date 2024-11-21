@@ -70,10 +70,9 @@ RSpec.describe SamlSessionsController do
 
           it "updates the record with firm and offices" do
             post_request
-            firm = Firm.find_by(ccms_id: raw_details_response.dig(:firm, :ccmsFirmId))
-            expect(provider.firm_id).to eq firm.id
-            expect(firm.offices.size).to eq 1
-            expect(firm.offices.first.ccms_id).to eq raw_details_response[:officeCodes].first[:ccmsFirmOfficeId].to_s
+            expect(provider.firm.ccms_id).to eq "10835831"
+            expect(provider.firm.offices.size).to eq 1
+            expect(provider.firm.offices.first.ccms_id).to eq "34406595"
           end
 
           context "when mock_saml is activated" do
@@ -181,10 +180,9 @@ RSpec.describe SamlSessionsController do
 
           it "updates the record with firm and offices" do
             post_request
-            firm = Firm.find_by(ccms_id: raw_details_response.dig(:firm, :ccmsFirmId))
-            expect(provider.firm_id).to eq firm.id
-            expect(firm.offices.size).to eq 1
-            expect(firm.offices.first.ccms_id).to eq raw_details_response[:officeCodes].first[:ccmsFirmOfficeId].to_s
+            expect(provider.firm.ccms_id).to eq "10835831"
+            expect(provider.firm.offices.size).to eq 1
+            expect(provider.firm.offices.first.ccms_id).to eq "34406595"
           end
 
           it "displays the start page" do
@@ -226,25 +224,17 @@ RSpec.describe SamlSessionsController do
     {
       firm: {
         firmId: 3_959_183,
-        firmNumber: "50736",
         ccmsFirmId: 10_835_831,
-        firmName: "DT SCRIPT PROVIDER 1",
+        # trimmed for stub usage
       },
       user: {
-        userId: 454_031,
-        ccmsContactId: 0,
-        userLogin: "DT_SCRIPT_USER1",
-        name: "Dts User1",
-        emailAddress: "deepak.tanna@digital.justice.gov.uk",
-        portalStatus: "Active",
+        # trimmed for stub usage
       },
       officeCodes: [
         {
           firmOfficeId: 145_434,
           ccmsFirmOfficeId: 34_406_595,
-          firmOfficeCode: "2Q242F",
-          officeName: "2Q242F,1 Skyscraper",
-          officeCodeAlt: "DT Script Office 1",
+          # trimmed for stub usage
         },
       ],
     }
@@ -254,42 +244,14 @@ RSpec.describe SamlSessionsController do
     {
       firm: {
         firmId: 3_959_183,
-        firmNumber: "50736",
         ccmsFirmId: 10_835_831,
-        firmName: "DT SCRIPT PROVIDER 1",
+        # trimmed for stub usage
       },
       offices: [
         {
           firmOfficeId: 145_434,
           ccmsFirmOfficeId: 34_406_595,
-          firmOfficeCode: "2Q242F",
-          officeName: "2Q242F,1 Skyscraper",
-          officeCodeAlt: "DT Script Office 1",
-          addressLine1: "1 Skyscraper",
-          addressLine2: "1 Some Road",
-          addressLine3: "",
-          addressLine4: "",
-          city: "Metropolis",
-          county: "",
-          postCode: "LE1 1AA",
-          dxCentre: "",
-          dxNumber: "",
-          telephoneAreaCode: "01162",
-          telephoneNumber: "555124",
-          faxAreaCode: "",
-          faxNumber: "",
-          emailAddress: "me@email.uk",
-          vatRegistrationNumber: "",
-          type: "Legal Services Provider",
-          headOffice: "N/A",
-          creationDate: "2023-11-10",
-          lscRegion: "Midlands",
-          lscBidZone: "Leicester",
-          lscAreaOffice: "Nottingham",
-          cjsForceName: "Leicestershire",
-          localAuthority: "City of Leicester",
-          policeStationAreaName: "Leicester",
-          dutySolicitorAreaName: "Leicester",
+          # trimmed for stub usage
         },
       ],
     }
