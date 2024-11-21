@@ -22,6 +22,7 @@ updates:
     groups:
       bundler:
         patterns:
+          - "rubocop*"
           - "*"
     open-pull-requests-limit: 10
     reviewers:
