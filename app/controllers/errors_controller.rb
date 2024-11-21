@@ -12,12 +12,23 @@ class ErrorsController < ApplicationController
 
 private
 
+  def status_code
+    exception = request.env["action_dispatch.exception"]
+    return unless exception
+
+    @status_code = exception.try(:status_code) || ActionDispatch::ExceptionWrapper.new(request.env, exception).status_code
+  end
+
   def error
     return @error if @error
 
-    @error = error_param[:id]
+    @error = error_from_status_or_params
     @error = :page_not_found unless supported_errors.key?(@error&.to_sym)
     @error
+  end
+
+  def error_from_status_or_params
+    (500..599).cover?(status_code) ? :internal_server_error : error_param[:id]
   end
 
   def status_for(error)
@@ -29,6 +40,7 @@ private
       page_not_found: :not_found,
       access_denied: :ok,
       assessment_already_completed: :ok,
+      internal_server_error: :internal_server_error,
     }
   end
 

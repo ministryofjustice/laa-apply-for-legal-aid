@@ -53,6 +53,34 @@ RSpec.describe ErrorsController, :show_exceptions do
     end
   end
 
+  context "when internal server error due to code fault" do
+    let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
+
+    before do
+      allow(Feedback).to receive(:find).and_raise { ArgumentError.new("dummy arg to emulate 500 internal server error") }
+    end
+
+    context "with default locale" do
+      it "responds with http status" do
+        get_invalid_id
+        expect(response).to have_http_status(:internal_server_error)
+      end
+
+      it "renders page not found" do
+        get_invalid_id
+        expect(response).to render_template("errors/show/_internal_server_error")
+      end
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get feedback_path(SecureRandom.uuid, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "ecivres ruo htiw gnorw tnew gnihtemos ,yrroS")
+      end
+    end
+  end
+
   describe "GET /error/page_not_found" do
     subject(:get_error) { get error_path(:page_not_found) }
 
@@ -133,6 +161,34 @@ RSpec.describe ErrorsController, :show_exceptions do
         get error_path(:access_denied, locale: :cy)
         expect(page)
           .to have_css("h1", text: "deined sseccA")
+      end
+    end
+  end
+
+  describe "GET /error/internal_server_error" do
+    subject(:get_error) { get error_path(:internal_server_error) }
+
+    it "responds with internal_server_error/500 status" do
+      get_error
+      expect(response).to have_http_status(:internal_server_error)
+    end
+
+    it "renders internal_server_error" do
+      get_error
+      expect(response).to render_template("errors/show/_internal_server_error")
+    end
+
+    it "displays the correct header" do
+      get_error
+      expect(page)
+        .to have_css("h1", text: "Sorry, something went wrong with our service")
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get error_path(:internal_server_error, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "ecivres ruo htiw gnorw tnew gnihtemos ,yrroS")
       end
     end
   end
