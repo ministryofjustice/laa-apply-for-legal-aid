@@ -1,81 +1,61 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
-<% if Setting.linked_applications? %>
-  <div class="govuk-grid-row" id="app-check-your-answers__linking">
-    <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m"><%= t ".section_linking.heading" %></h2>
-    </div>
-  </div>
-  <%= govuk_summary_list(card: { title: t(".section_linking.heading") },
-                         actions: !read_only,
-                         html_attributes: { id: "app-check-your-answers__linking_items" }) do |summary_list|
+<%= govuk_summary_card(title: t(".section_linking.heading")) do |card|
+      card.with_summary_list(actions: !read_only, html_attributes: { id: "app-check-your-answers__linking_items" }) do |summary_list|
         summary_list.with_row(classes: "app-check-your-answers__linking_question") do |row|
-          row.with_key(text: t(".section_linking.linked"), classes: "govuk-!-width-one-half")
+          row.with_key(text: t(".section_linking.linked"), classes: "govuk-!-width-one-third")
           row.with_value { safe_yes_or_no(@legal_aid_application&.lead_linked_application&.confirm_link? || t("generic.no")) }
-          unless read_only
-            row.with_action(
-              text: t("generic.change"),
-              href: providers_legal_aid_application_link_application_make_link_path(@legal_aid_application),
-              visually_hidden_text: t(".section_linking.linked"),
-            )
-          end
+          row.with_action(
+            text: t("generic.change"),
+            href: providers_legal_aid_application_link_application_make_link_path(@legal_aid_application),
+            visually_hidden_text: t(".section_linking.linked"),
+          )
         end
         if @legal_aid_application&.lead_linked_application&.confirm_link?
           summary_list.with_row(classes: "app-check-your-answers__linking_case") do |row|
             row.with_key(text: t(".section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}"))
             row.with_value(text: sanitize(@legal_aid_application.lead_linked_application.target_application.link_description))
-            unless read_only
-              row.with_action(
-                text: t("generic.change"),
-                href: providers_legal_aid_application_link_application_find_link_application_path(@legal_aid_application),
-                visually_hidden_text: [t(".section_linking.aria_prefix"), t(".section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}")].join(" "),
-              )
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_link_application_find_link_application_path(@legal_aid_application),
+              visually_hidden_text: [t(".section_linking.aria_prefix"), t(".section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}")].join(" "),
+            )
+          end
+        end
+      end
+    end %>
+<% if @legal_aid_application&.lead_linked_application&.confirm_link? && all_linked_applications_details(@legal_aid_application).present? %>
+  <%= govuk_summary_card(title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}")) do |card|
+        card.with_summary_list(actions: false) do |summary_list|
+          all_linked_applications(@legal_aid_application).each do |application|
+            summary_list.with_row do |row|
+              row.with_key(text: application.applicant.full_name, classes: "govuk-!-width-one-third")
+              row.with_value { sanitize(application.link_description_without_name) }
             end
           end
         end
       end %>
-  <% if @legal_aid_application&.lead_linked_application&.confirm_link? && all_linked_applications_details(@legal_aid_application).present? %>
-    <div class="govuk-grid-row" id="app-check-your-answers__other_links">
-      <div class="govuk-grid-column-full">
-        <h2 class="govuk-heading-m"><%= t ".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}" %></h2>
-      </div>
-    </div>
-    <%= govuk_summary_list(card: { title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}") }, actions: false) do |summary_list|
-          all_linked_applications(@legal_aid_application).each do |application|
-            summary_list.with_row do |row|
-              row.with_key(text: application.applicant.full_name, classes: "govuk-!-width-one-half")
-              row.with_value { sanitize(application.link_description) }
-            end
-          end
-        end %>
-  <% end %>
+<% end %>
 
-  <% if @legal_aid_application&.lead_linked_application&.confirm_link? && @legal_aid_application&.lead_linked_application&.link_type_code.eql?("FC_LEAD") %>
-    <div class="govuk-grid-row" id="app-check-your-answers__copying">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t ".section_copying.heading" %></h2>
-      </div>
-      <div class="govuk-grid-column-one-third">
-        <%= unless read_only
-              govuk_link_to(
-                t("generic.change"), providers_legal_aid_application_link_application_copy_path(@legal_aid_application),
-                class: "govuk-link-right"
-              )
-            end %>
-      </div>
-    </div>
-    <%= govuk_summary_list(card: { title: t(".section_copying.heading") },
-                           actions: !read_only,
-                           html_attributes: { id: "app-check-your-answers__copying_items" }) do |summary_list|
-          summary_list.with_row(classes: "app-check-your-answers__copy_question") do |row|
-            row.with_key(text: t(".section_copying.question"), classes: "govuk-!-width-one-half")
-            row.with_value { safe_yes_or_no(@legal_aid_application.copy_case?) }
+<% if @legal_aid_application&.lead_linked_application&.confirm_link? && @legal_aid_application&.lead_linked_application&.link_type_code.eql?("FC_LEAD") %>
+  <%= govuk_summary_card(title: t(".section_copying.heading")) do |card| %>
+    <% card.with_action do
+         unless read_only
+           govuk_link_to(t("generic.change"),
+                         providers_legal_aid_application_link_application_copy_path(@legal_aid_application),
+                         visually_hidden_suffix: t(".section_copying.heading"))
+         end
+       end %>
+    <% card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__copying_items" }) do |summary_list| %>
+        <% summary_list.with_row(classes: "app-check-your-answers__copy_question") do |row|
+          row.with_key(text: t(".section_copying.question"), classes: "govuk-!-width-one-third")
+          row.with_value { safe_yes_or_no(@legal_aid_application.copy_case?) }
+        end
+        if @legal_aid_application.copy_case?
+          summary_list.with_row(classes: "app-check-your-answers__copying_case") do |row|
+            row.with_key(text: t(".section_copying.copied"))
+            row.with_value(text: sanitize(@source_application.link_description))
           end
-          if @legal_aid_application.copy_case?
-            summary_list.with_row(classes: "app-check-your-answers__copying_case") do |row|
-              row.with_key(text: t(".section_copying.copied"))
-              row.with_value(text: sanitize(@source_application.link_description))
-            end
-          end
-        end %>
+        end
+      end %>
   <% end %>
 <% end %>
