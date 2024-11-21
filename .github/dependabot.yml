@@ -20,9 +20,11 @@ updates:
         versions:
           - ">= 8.0.0"
     groups:
-      bundler:
+      rubocop:
         patterns:
           - "rubocop*"
+      bundler:
+        patterns:
           - "*"
     open-pull-requests-limit: 10
     reviewers:
