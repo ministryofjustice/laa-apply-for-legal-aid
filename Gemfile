@@ -102,13 +102,6 @@ gem "view_component"
 # Catching unsafe migrations in development
 gem "strong_migrations"
 
-# TODO: Added on 12 Nov 2024 - CB - review as part of AP-5513
-# The 1.0.0+ version of URI deprecated certain URI pattern names
-# this in turn broke CookieJar, a deprecated gem, that is used in em-http-request, that is
-# required by puffing-billy.  Rather than strip out puffing-billy or wait weeks for the
-# maintainers of upstream gems to agree a path, we are locking this below the breaking change
-gem "uri", "< 1.0.0"
-
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
