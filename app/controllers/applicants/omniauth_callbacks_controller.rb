@@ -2,14 +2,12 @@
 # Note that you may need to restart the server to apply changes to this file.
 module Applicants
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    class MissingApplicantError < StandardError; end
     before_action :authenticate_applicant!, only: [:true_layer]
     skip_back_history_for :true_layer, :failure
 
     def true_layer
       unless applicant
         set_flash_message(:error, :failure, kind: "TrueLayer", reason: "Unable to find matching application")
-        AlertManager.capture_exception(MissingApplicantError.new("Unable to find applicant on return from TrueLayer"))
         redirect_to citizens_consent_path
         return
       end

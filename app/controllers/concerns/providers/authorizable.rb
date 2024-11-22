@@ -33,7 +33,7 @@ module Providers
             if current_policy.show_submitted_application?
               redirect_to_show_path
             else
-              redirect_to_auth_error_path
+              redirect_to error_path(:access_denied)
             end
           end
         end
@@ -43,15 +43,6 @@ module Providers
         redirect_to providers_legal_aid_application_submitted_application_path(legal_aid_application)
       end
 
-      def redirect_to_auth_error_path
-        begin
-          raise AuthController::AuthorizationError, "Provider not authorised"
-        rescue StandardError => e
-          AlertManager.capture_exception(e)
-        end
-        redirect_to error_path(:access_denied)
-      end
-
       def current_policy
         Pundit.policy pundit_user, legal_aid_application
       end
@@ -59,11 +50,6 @@ module Providers
       def authorize_portal_user?
         return false if current_provider.portal_enabled?
 
-        begin
-          raise AuthController::AuthorizationError, "Provider not enabled on the portal"
-        rescue StandardError => e
-          AlertManager.capture_exception(e)
-        end
         redirect_to error_path(:access_denied)
       end
 

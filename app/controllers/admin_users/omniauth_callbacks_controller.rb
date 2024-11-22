@@ -12,12 +12,7 @@ module AdminUsers
     end
 
     def failure(reason: "Process cancelled")
-      begin
-        set_flash_message(:error, :failure, kind: "Google", reason:)
-        raise AuthController::AuthorizationError, "Kind: Google, reason: #{reason}"
-      rescue StandardError => e
-        AlertManager.capture_exception(e)
-      end
+      set_flash_message(:error, :failure, kind: "Google", reason:)
       redirect_to error_path(:access_denied)
     end
 
