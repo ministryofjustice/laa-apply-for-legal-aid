@@ -34,7 +34,7 @@ module Faraday
   private
 
     def parse_url(input)
-      if input.match?(URI::DEFAULT_PARSER.regexp[:ABS_URI])
+      if input.match?(URI::ABS_URI)
         # if wsdl_url is a URL return it
         @url = input
       elsif File.file?(input)
