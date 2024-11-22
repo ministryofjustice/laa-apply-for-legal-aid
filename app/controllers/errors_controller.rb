@@ -5,12 +5,31 @@
 # as mentioned here https://guides.rubyonrails.org/configuring.html#config-exceptions-app
 #
 class ErrorsController < ApplicationController
-  before_action :update_locale
+  before_action :update_locale, :set_error_name
   def show
-    render :show, status: status_for(error)
+    render :show, status: status_for(@error_name)
   end
 
 private
+
+  def set_error_name
+    return @error_name if @error_name
+
+    @error_name = error_name_from_status_or_params
+    @error_name = :page_not_found unless supported_errors.key?(@error_name&.to_sym)
+    @error_name
+  end
+
+  def error_name_from_status_or_params
+    case status_code
+    when 404
+      :page_not_found
+    when (500..599)
+      :internal_server_error
+    else
+      error_param[:id]
+    end
+  end
 
   def status_code
     exception = request.env["action_dispatch.exception"]
@@ -19,20 +38,8 @@ private
     @status_code = exception.try(:status_code) || ActionDispatch::ExceptionWrapper.new(request.env, exception).status_code
   end
 
-  def error
-    return @error if @error
-
-    @error = error_from_status_or_params
-    @error = :page_not_found unless supported_errors.key?(@error&.to_sym)
-    @error
-  end
-
-  def error_from_status_or_params
-    (500..599).cover?(status_code) ? :internal_server_error : error_param[:id]
-  end
-
-  def status_for(error)
-    supported_errors.fetch(error.to_sym, :not_found)
+  def status_for(error_name)
+    supported_errors.fetch(error_name.to_sym, :not_found)
   end
 
   def supported_errors

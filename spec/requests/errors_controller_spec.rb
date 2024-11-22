@@ -53,7 +53,7 @@ RSpec.describe ErrorsController, :show_exceptions do
     end
   end
 
-  context "when internal server error due to code fault" do
+  context "when internal server error/500 due to code fault" do
     let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
 
     before do
@@ -61,12 +61,12 @@ RSpec.describe ErrorsController, :show_exceptions do
     end
 
     context "with default locale" do
-      it "responds with http status" do
+      it "responds with expected http status" do
         get_invalid_id
         expect(response).to have_http_status(:internal_server_error)
       end
 
-      it "renders page not found" do
+      it "renders internal server error" do
         get_invalid_id
         expect(response).to render_template("errors/show/_internal_server_error")
       end
