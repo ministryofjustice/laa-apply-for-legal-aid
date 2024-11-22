@@ -26,6 +26,8 @@ updates:
       bundler:
         patterns:
           - "*"
+        exclude-patterns:
+          - "rubocop*"
     open-pull-requests-limit: 10
     reviewers:
       - "ministryofjustice/laa-apply-for-legal-aid"
