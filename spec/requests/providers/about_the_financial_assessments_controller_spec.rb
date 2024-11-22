@@ -33,11 +33,13 @@ RSpec.describe "about financial assessments requests" do
         expect(unescaped_response_body).to include(I18n.t("providers.about_the_financial_assessments.show.title"))
       end
 
-      context "when the application does not exist" do
+      context "when the application does not exist", :show_exceptions do
         let(:application_id) { SecureRandom.uuid }
 
-        it "redirects to an error" do
-          expect(response).to redirect_to(error_path(:page_not_found))
+        it "renders page not found page" do
+          expect(response)
+            .to have_http_status(:not_found)
+            .and render_template("errors/show/_page_not_found")
         end
       end
 
@@ -83,7 +85,7 @@ RSpec.describe "about financial assessments requests" do
         login_as application.provider
       end
 
-      context "when the application does not exist" do
+      context "when the application does not exist", :show_exceptions do
         let(:application_id) { SecureRandom.uuid }
 
         it "redirects to and error page without calling the email service" do
@@ -91,7 +93,9 @@ RSpec.describe "about financial assessments requests" do
 
           submit_patch
 
-          expect(response).to redirect_to(error_path(:page_not_found))
+          expect(response)
+            .to have_http_status(:not_found)
+            .and render_template("errors/show/_page_not_found")
         end
       end
 
