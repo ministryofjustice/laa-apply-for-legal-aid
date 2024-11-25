@@ -634,6 +634,9 @@ en:
       cash_payments:
         income_heading: Payments %{individual_with_determiner} receives in cash
         outgoings_heading: Payments %{individual_with_determiner} makes in cash
+      proceedings:
+        heading: Proceedings
+        proceeding: Proceeding
       proceedings_details:
         heading: Proceedings
         proceeding: Proceeding
@@ -658,16 +661,16 @@ en:
             question: Emergency scope limitations
           substantive:
             question: Substantive scope limitations
+        final_hearing:
+          date:
+            question: Final hearing date
+          details:
+            question: Reasons for not listing final hearing
       delegated_functions:
         not_used: Not used
         section_delegated:
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
-      final_hearing:
-        date:
-          question: Final hearing date
-        details:
-          question: Reasons for not listing final hearing
       scope_limits:
         emergency:
           question: Emergency scope limitations
