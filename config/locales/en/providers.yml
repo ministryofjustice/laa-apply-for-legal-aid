@@ -333,7 +333,6 @@ en:
         title: Check your answers
         title_truelayer: Your application
         caption: Client details and what they are applying for
-        proceeding: Proceeding
         copy_case:
           heading: The proceedings and merits information was copied from %{application_ref}.
           family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
@@ -344,7 +343,7 @@ en:
         section_linking_and_copying:
           heading: Cases linked to this one
         section_proceeding:
-          heading: Proceedings
+          heading: What you're applying for
         section_delegated:
           heading: Delegated functions
         section_emergency:

@@ -1,68 +1,63 @@
-<div class="govuk-grid-row" id="app-check-your-answers__proceeding_<%= proceeding.meaning.parameterize(separator: "_") %>">
-  <div class="govuk-grid-column-three-quarters">
-    <h2 class="govuk-heading-m"><%= proceeding.meaning %> <%= t(".description") %></h2>
-  </div>
-  <div class="govuk-grid-column-one-quarter">
-    <% unless @read_only || @show_linked_proceedings %>
-      <%= govuk_link_to(
-            t("generic.change"),
-            providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
-            visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}",
-            class: "govuk-link-right",
-          ) %>
-    <% end %>
-  </div>
-</div>
+<% @source_application.proceedings.in_order_of_addition.each do |proceeding| %>
+  <%= govuk_summary_card(title: proceeding.meaning) do |card|
+        card.with_action do
+          unless @show_linked_proceedings || @read_only
+            govuk_link_to(t("generic.change"),
+                          providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
+                          visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}")
+          end
+        end
 
-<%= govuk_summary_list(
-      card: { title: proceeding.meaning },
-      actions: false,
-    ) do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_client_involvement_type" }) do |row| %>
-    <%= row.with_key(text: t(".client_involvement_type_details.question"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { proceeding.client_involvement_type_description } %>
-  <% end %>
+        card.with_summary_list(actions: false) do |summary_list|
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_client_involvement_type" }) do |row|
+            row.with_key(text: t(".client_involvement_type_details.question"), classes: "govuk-!-width-one-third")
+            row.with_value { proceeding.client_involvement_type_description }
+          end
 
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_used_delegated_functions_on" }) do |row| %>
-    <%= row.with_key(text: t(".delegated_function_details.question"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".delegated_function_details.not_used") } %>
-  <% end %>
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_used_delegated_functions_on" }) do |row|
+            row.with_key(text: t(".delegated_function_details.question"))
+            row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".delegated_function_details.not_used") }
+          end
 
-  <% if proceeding.used_delegated_functions? && !proceeding.special_childrens_act? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_level_of_service_#{proceeding.id}" }) do |row| %>
-      <%= row.with_key(text: t(".level_of_service.emergency.question"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { proceeding.send(:emergency_level_of_service_name) } %>
-    <% end %>
+          if proceeding.used_delegated_functions? && !proceeding.special_childrens_act?
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_level_of_service_#{proceeding.id}" }) do |row|
+              row.with_key(text: t(".level_of_service.emergency.question"))
+              row.with_value { proceeding.send(:emergency_level_of_service_name) }
+            end
 
-    <%= render(
-          "shared/check_answers/final_hearing",
-          proceeding:,
-          level_of_service: :emergency,
-          read_only:,
-          summary_list:,
-        ) %>
+            final_hearings_emergency = proceeding.final_hearings.send(:emergency)
+            if final_hearings_emergency.any?
+              final_hearing_emergency = final_hearings_emergency.first
+              summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_final_hearing" }) do |row|
+                row.with_key(text: final_hearing_emergency.listed? ? t(".final_hearing.date.question") : t(".final_hearing.details.question"))
+                row.with_value(text: final_hearing_emergency.listed? ? final_hearing_emergency.date&.strftime("%-d %B %Y") : final_hearing_emergency.details)
+              end
+            end
 
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_scope_limitations_#{proceeding.id}" }) do |row| %>
-      <%= row.with_key(text: t(".scope_limits.emergency.question"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { scope_limits(proceeding, "emergency") } %>
-    <% end %>
-  <% end %>
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_scope_limitations_#{proceeding.id}" }) do |row|
+              row.with_key(text: t(".scope_limits.emergency.question"))
+              row.with_value { scope_limits(proceeding, "emergency") }
+            end
+          end
 
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_substantive_level_of_service_#{proceeding.id}" }) do |row| %>
-    <%= row.with_key(text: t(".level_of_service.substantive.question"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { proceeding.send(:substantive_level_of_service_name) } %>
-  <% end %>
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_substantive_level_of_service_#{proceeding.id}" }) do |row|
+            row.with_key(text: t(".level_of_service.substantive.question"))
+            row.with_value { proceeding.send(:substantive_level_of_service_name) }
+          end
 
-  <%= render(
-        "shared/check_answers/final_hearing",
-        proceeding:,
-        level_of_service: :substantive,
-        read_only:,
-        summary_list:,
-      ) %>
+          final_hearings_substantive = proceeding.final_hearings.send(:substantive)
+          if final_hearings_substantive.any?
+            final_hearing_substantive = final_hearings_substantive.first
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_final_hearing" }) do |row|
+              row.with_key(text: final_hearing_substantive.listed? ? t(".final_hearing.date.question") : t(".final_hearing.details.question"))
+              row.with_value(text: final_hearing_substantive.listed? ? final_hearing_substantive.date&.strftime("%-d %B %Y") : final_hearing_substantive.details)
+            end
+          end
 
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_substantive_scope_limitations_#{proceeding.id}" }) do |row| %>
-    <%= row.with_key(text: t(".scope_limits.substantive.question"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { scope_limits(proceeding, "substantive") } %>
-  <% end %>
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_substantive_scope_limitations_#{proceeding.id}" }) do |row|
+            row.with_key(text: t(".scope_limits.substantive.question"))
+            row.with_value { scope_limits(proceeding, "substantive") }
+          end
+        end
+      end %>
 <% end %>
