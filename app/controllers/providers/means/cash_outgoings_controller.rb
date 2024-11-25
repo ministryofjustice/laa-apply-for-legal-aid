@@ -3,16 +3,13 @@ module Providers
     class CashOutgoingsController < ProviderBaseController
       before_action :setup_cash_outgoings, only: %i[show update]
 
-      def show
-        @none_selected = legal_aid_application.no_cash_outgoings?
-      end
+      def show; end
 
       def update
         if aggregated_cash_outgoings.update(form_params)
           update_no_cash_outgoings(form_params)
           go_forward
         else
-          @none_selected = form_params[:none_selected] == "true"
           render :show
         end
       end
