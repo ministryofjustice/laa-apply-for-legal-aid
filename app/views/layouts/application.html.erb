@@ -39,6 +39,8 @@
             html_attributes: { role: "complementary" },
           ) %>
 
+      <%= render partial: "layouts/primary_navigation" if @scope.in?(%i[in_progress submitted voided delete]) %>
+
       <div class="govuk-grid-row" role="navigation">
         <div class="govuk-grid-column-one-half show-empty">
           <%= content_for(:navigation) %>
@@ -99,6 +101,7 @@
 
         <%= yield %>
       </main>
+
     </div>
 
     <%= render partial: "layouts/footer" %>

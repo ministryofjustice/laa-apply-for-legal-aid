@@ -7,5 +7,5 @@ Feature: Search applications
     Then I click link "Sign in"
     Then I choose 'London'
     Then I click 'Save and continue'
-    Then I click link "Search applications"
+    Then I click link 'Search'
     Then I should be on a page showing "Search applications"

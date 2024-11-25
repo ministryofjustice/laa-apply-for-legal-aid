@@ -4,8 +4,11 @@ $govuk-new-typography-scale: true;
 $govuk-assets-path: "/";
 
 @import "govuk-frontend/dist/govuk/index";
+@import "@ministryofjustice/frontend/moj/settings/measurements";
+@import "@ministryofjustice/frontend/moj/objects/width-container";
 @import "@ministryofjustice/frontend/moj/components/sub-navigation/sub-navigation";
 @import "@ministryofjustice/frontend/moj/components/sortable-table/sortable-table";
+@import "@ministryofjustice/frontend/moj/components/primary-navigation/primary-navigation";
 
 // Project specific
 
@@ -39,3 +42,4 @@ $govuk-assets-path: "/";
 @import "dropzone/src/dropzone";
 @import "dropzone/src/basic";
 @import "providers/summary_list_action_width";
+@import "primary_navigation";
