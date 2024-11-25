@@ -24,11 +24,11 @@ module Portal
       name_list.each do |name|
         if Portal::NameValidator.call(name)
           @matched = Array(@matched).push(name)
-          puts "#{name.display_name} okay"
+          Rails.logger.info "#{name.display_name} okay"
           update_status(:good)
         else
           @unmatched = Array(@unmatched).push(name)
-          puts "#{name.display_name} bad"
+          Rails.logger.info "#{name.display_name} bad"
           update_status(:bad)
         end
       end
