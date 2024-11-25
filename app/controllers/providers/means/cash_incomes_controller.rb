@@ -3,16 +3,13 @@ module Providers
     class CashIncomesController < ProviderBaseController
       before_action :setup_variables, only: %i[show update]
 
-      def show
-        @none_selected = legal_aid_application.no_cash_income?
-      end
+      def show; end
 
       def update
         if aggregated_cash_income.update(form_params)
           update_no_cash_income(form_params)
           go_forward
         else
-          @none_selected = form_params[:none_selected] == "true"
           render :show
         end
       end
