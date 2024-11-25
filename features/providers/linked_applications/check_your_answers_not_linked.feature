@@ -15,7 +15,7 @@ Background: I have started an application and not linked or copied it
     | h2  | Client details |
     | h2  | Cases linked to this one |
     | h2  | Proceedings |
-    | h2  | Non-molestation order proceeding details |
+    | h2  | Non-molestation order |
   And the "linking items" list's questions, answers and action presence should match:
     | question | answer | action |
     | Link to another application? | No | true |
@@ -54,10 +54,10 @@ Scenario: When I change it to be a linked case
     | h2  | Client details |
     | h2  | Cases linked to this one |
     | h2  | Proceedings |
-    | h2  | Inherent jurisdiction high court injunction proceeding details |
+    | h2  | Inherent jurisdiction high court injunction |
   And the following sections should not exist:
     | tag | section |
-    | h2  | Non-molestation order proceeding details |
+    | h2  | Non-molestation order |
   And the "copying items" list's questions and answers should match:
     | question | answer |
     | Copy from another application? | Yes |

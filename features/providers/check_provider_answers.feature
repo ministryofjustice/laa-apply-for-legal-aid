@@ -8,7 +8,7 @@ Feature: Checking client details answers backwards and forwards
       | tag | section |
       | h2  | Client details |
       | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction proceeding details |
+      | h2  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:
@@ -28,7 +28,7 @@ Feature: Checking client details answers backwards and forwards
       | tag | section |
       | h2  | Client details |
       | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction proceeding details |
+      | h2  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:
@@ -420,7 +420,7 @@ Feature: Checking client details answers backwards and forwards
   @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Proceedings'
+    And I click Check Your Answers summary card Change link for 'Proceedings'
     And I click the first link 'Remove'
     And I search for proceeding 'Non-molestation order'
     Then I choose a 'Non-molestation order' radio button

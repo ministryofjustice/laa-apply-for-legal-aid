@@ -1,0 +1,21 @@
+<%= govuk_summary_card(title: t(".heading")) do |card|
+      card.with_action do
+        unless @show_linked_proceedings || @read_only
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application),
+                        id: "app-check-your-answers__proceedings",
+                        visually_hidden_suffix: t(".heading"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        @source_application.proceedings_by_name.each_with_index do |proceeding, i|
+          summary_list.with_row(classes: "app-check-your-answers__#{proceeding.name}_proceeding") do |row|
+            row.with_key(text: "#{t('.proceeding')} #{i + 1}", classes: "govuk-!-width-one-third")
+            row.with_value do %>
+                <%= proceeding.meaning %> <br>
+                <%= "#{proceeding.matter_type.humanize}, #{proceeding.category_of_law.downcase}" %>
+            <% end
+          end
+        end
+      end
+    end %>
