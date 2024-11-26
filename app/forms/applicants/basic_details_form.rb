@@ -38,9 +38,6 @@ module Applicants
     )
 
     def save
-      # raise internal server error
-      nil.test if first_name&.downcase == "joely"
-
       if changed_last_name.to_s == "false"
         attributes[:last_name_at_birth] = nil
       end
