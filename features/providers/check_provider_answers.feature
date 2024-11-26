@@ -18,7 +18,7 @@ Feature: Checking client details answers backwards and forwards
       | Last name at birth | Same as last name |
       | Date of birth | 10 January 1980 |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | National Insurance number | JA293483A |
+      | National Insurance number | JA 29 34 83 A |
       | Client has a partner | No |
 
   @javascript
@@ -41,7 +41,7 @@ Feature: Checking client details answers backwards and forwards
       | Care of recipient | Brian Surname |
       | Client has a home address? | Yes |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | National Insurance number | JA293483A |
+      | National Insurance number | JA 29 34 83 A |
       | Client has a partner | No |
 
   @javascript
@@ -396,7 +396,7 @@ Feature: Checking client details answers backwards and forwards
     Given I complete the passported journey as far as check your answers for client details
     And the "Client details" check your answers section should contain:
       | question | answer |
-      | National Insurance number | JA293483A |
+      | National Insurance number | JA 29 34 83 A |
 
     And the following sections should exist:
       | tag | section |

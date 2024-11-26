@@ -170,7 +170,7 @@
         if :national_insurance_number.in?(attributes)
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__national_insurance_number" }) do |row|
             row.with_key(text: t(".nino"))
-            row.with_value(text: applicant.national_insurance_number || t("generic.not_provided"))
+            row.with_value(text: nino_with_spaces(applicant.national_insurance_number) || t("generic.not_provided"))
             row.with_action(
               text: t("generic.change"),
               href: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
