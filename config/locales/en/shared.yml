@@ -666,6 +666,14 @@ en:
             question: Final hearing date
           details:
             question: Reasons for not listing final hearing
+        cost_limits:
+          heading: Cost limits
+          emergency_cost_limit: Emergency cost limit
+          request_higher_emergency: Higher emergency cost limit requested
+          higher_emergency_reasons: Reason for higher emergency cost limit
+          substantive_cost_limit: Substantive cost limit
+          request_higher_substantive: Higher substantive cost limit requested
+          higher_substantive_reasons: Reason for higher emergency cost limit
       delegated_functions:
         not_used: Not used
         section_delegated:
