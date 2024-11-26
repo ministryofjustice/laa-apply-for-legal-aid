@@ -108,6 +108,11 @@ module CCMS
             block = XmlExtractor.call(request_xml, :global_merits, "APPLY_CASE_MEANS_REVIEW")
             expect(block).to have_boolean_response true
           end
+
+          it "sets the MEANS_TASK_AUTO_GEN value to true" do
+            block = XmlExtractor.call(request_xml, :global_means, "MEANS_TASK_AUTO_GEN")
+            expect(block).to have_boolean_response true
+          end
         end
 
         describe "ownership" do
@@ -263,6 +268,11 @@ module CCMS
             it "sets the SCA_AUTO_GRANT to false" do
               block = XmlExtractor.call(request_xml, :global_merits, "SCA_AUTO_GRANT")
               expect(block).to have_boolean_response false
+            end
+
+            it "excludes the MEANS_TASK_AUTO_GEN block" do
+              block = XmlExtractor.call(request_xml, :global_means, "MEANS_TASK_AUTO_GEN")
+              expect(block).not_to be_present
             end
 
             it "leaves APPLY_CASE_MEANS_REVIEW value as true (no means caseworker review needed)" do
