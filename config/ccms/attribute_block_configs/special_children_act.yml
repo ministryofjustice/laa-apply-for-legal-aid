@@ -73,7 +73,11 @@ global_means:
     response_type: boolean
     user_defined: false
   MEANS_TASK_AUTO_GEN:
-    generate_block?: false
+    generate_block?: '#application_auto_grant_special_children_act?'
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
   PASSPORTED_NINO:
     generate_block?: false
 global_merits:
