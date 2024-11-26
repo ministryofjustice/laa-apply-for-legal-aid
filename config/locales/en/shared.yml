@@ -722,6 +722,7 @@ en:
       applicant_form:
         page_title: Enter your client's details
         name: Name
+        aria_label: Client's name
         email_label: Email address
         changed_last_name: Has your client ever changed their last name?
         changed_last_name_hint: For example, through marriage or deed poll
