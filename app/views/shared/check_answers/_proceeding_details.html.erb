@@ -61,3 +61,57 @@
         end
       end %>
 <% end %>
+
+<% if @source_application.used_delegated_functions? && !@source_application.special_children_act_proceedings? || @source_application.substantive_cost_overridable? %>
+  <%= govuk_summary_card(title: t(".cost_limits.heading"), html_attributes: { id: "app-check-your-answers__cost_limits" }) do |card|
+        card.with_action do
+          unless @show_linked_proceedings || @read_only
+            govuk_link_to(t("generic.change"),
+                          providers_legal_aid_application_limitations_path(@legal_aid_application),
+                          visually_hidden_suffix: t(".cost_limits.heading"))
+          end
+        end
+
+        card.with_summary_list(actions: false) do |summary_list|
+          unless @legal_aid_application.emergency_cost_override
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
+              row.with_key(text: t(".cost_limits.emergency_cost_limit"), classes: "govuk-!-width-one-third")
+              row.with_value { gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation) }
+            end
+          end
+
+          unless @legal_aid_application.default_delegated_functions_cost_limitation.zero? || @legal_aid_application.default_delegated_functions_cost_limitation.nil?
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
+              row.with_key(text: t(".cost_limits.request_higher_emergency"))
+              row.with_value { @legal_aid_application.emergency_cost_override? ? gds_number_to_currency(@legal_aid_application.emergency_cost_requested, precision: 2) : yes_no(@legal_aid_application.emergency_cost_override?) }
+            end
+          end
+
+          if @legal_aid_application.emergency_cost_override
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_reasons" }) do |row|
+              row.with_key(text: t(".cost_limits.higher_emergency_reasons"))
+              row.with_value { @legal_aid_application.emergency_cost_reasons }
+            end
+          end
+
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
+            row.with_key(text: t(".cost_limits.substantive_cost_limit"))
+            row.with_value { gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation) }
+          end
+
+          unless @legal_aid_application.default_substantive_cost_limitation.zero? || @legal_aid_application.substantive_cost_override.nil?
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__cost_requested" }) do |row|
+              row.with_key(text: t(".cost_limits.request_higher_substantive"))
+              row.with_value { @legal_aid_application.substantive_cost_override? ? gds_number_to_currency(@legal_aid_application.substantive_cost_requested, precision: 2) : yes_no(@legal_aid_application.substantive_cost_override?) }
+            end
+          end
+
+          if @legal_aid_application.substantive_cost_override
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_reasons" }) do |row|
+              row.with_key(text: t(".cost_limits.higher_substantive_reasons"))
+              row.with_value { @legal_aid_application.substantive_cost_reasons }
+            end
+          end
+        end
+      end %>
+<% end %>
