@@ -9,7 +9,7 @@ module Flow
         forward: lambda do |_application, proceeding|
           case proceeding.ccms_code
           when "PB019", "PB020", "PB023", "PB024"
-            :proceedings_sca_change_of_names
+            :change_of_names
           else
             :has_other_proceedings
           end

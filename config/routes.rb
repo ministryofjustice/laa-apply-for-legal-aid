@@ -276,6 +276,7 @@ Rails.application.routes.draw do
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]
       resource :confirm_client_declaration, only: %i[show update]
+      resource :change_of_names, only: %i[show update]
       resource :review_and_print_application, only: [:show] do
         patch :continue
         patch :reset
@@ -292,7 +293,6 @@ Rails.application.routes.draw do
         resource :supervision_orders, only: %i[show update], path: "supervision_order_changes"
         resource :child_subject, only: %i[show update], path: "client_is_child_subject"
         resources :heard_as_alternatives, only: %i[show update], path: "will_proceeding_be_heard_as_an_alternative"
-        resource :change_of_names, only: %i[show update]
         resource :confirm_delete_core_proceeding, only: %i[show destroy]
       end
       scope module: :proceeding_loop do
