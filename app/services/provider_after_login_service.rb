@@ -27,11 +27,11 @@ private
   end
 
   def call_provider_details_api
-    ProviderDetailsCreator.call(@provider)
+    PDA::ProviderDetailsCreator.call(@provider)
     @provider.clear_invalid_login!
-  rescue ProviderDetailsRetriever::ApiRecordNotFoundError
+  rescue PDA::ProviderDetailsRetriever::ApiRecordNotFoundError
     @provider.update!(invalid_login_details: "api_details_user_not_found")
-  rescue ProviderDetailsRetriever::ApiError
+  rescue PDA::ProviderDetailsRetriever::ApiError
     @provider.update!(invalid_login_details: "provider_details_api_error")
   end
 end

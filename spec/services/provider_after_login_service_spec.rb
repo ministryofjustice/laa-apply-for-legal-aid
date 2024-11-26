@@ -21,7 +21,7 @@ RSpec.describe ProviderAfterLoginService do
       let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, invalid_login_details: "provider_details_api_error") }
 
       context "and the provider cannot be found on Provider Details API" do
-        before { allow(ProviderDetailsCreator).to receive(:call).and_raise(ProviderDetailsRetriever::ApiRecordNotFoundError) }
+        before { allow(PDA::ProviderDetailsCreator).to receive(:call).and_raise(PDA::ProviderDetailsRetriever::ApiRecordNotFoundError) }
 
         it "updates the provider invalid login details" do
           call
@@ -30,7 +30,7 @@ RSpec.describe ProviderAfterLoginService do
       end
 
       context "and the provider found on Provider Details API" do
-        before { allow(ProviderDetailsCreator).to receive(:call).with(provider) }
+        before { allow(PDA::ProviderDetailsCreator).to receive(:call).with(provider) }
 
         it "does not update invalid login details" do
           call
@@ -39,7 +39,7 @@ RSpec.describe ProviderAfterLoginService do
       end
 
       context "and the provider details API not available" do
-        before { allow(ProviderDetailsCreator).to receive(:call).and_raise(ProviderDetailsRetriever::ApiError) }
+        before { allow(PDA::ProviderDetailsCreator).to receive(:call).and_raise(PDA::ProviderDetailsRetriever::ApiError) }
 
         it "updates the provider invalid login details" do
           call
