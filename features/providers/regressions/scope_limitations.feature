@@ -39,6 +39,10 @@ Feature: Scope limitations not being set
     When I choose a 'Prohibited steps order' radio button
     And I click 'Save and continue'
 
+    Then I should be on a page showing 'Is this proceeding for a change of name application?'
+    When I choose 'No'
+    And I click 'Save and continue'
+
     Then I should be on a page showing 'You have added 2 proceedings'
     And I should be on a page showing 'Child arrangements order (residence)'
     And I should be on a page showing 'Prohibited steps order'
@@ -52,6 +56,10 @@ Feature: Scope limitations not being set
     Then I should be on a page showing 'Specific Issue Order'
     And proceeding suggestions has results
     When I choose a 'Specific Issue Order' radio button
+    And I click 'Save and continue'
+
+    Then I should be on a page showing 'Is this proceeding for a change of name application?'
+    When I choose 'No'
     And I click 'Save and continue'
 
     Then I should be on a page showing 'You have added 3 proceedings'

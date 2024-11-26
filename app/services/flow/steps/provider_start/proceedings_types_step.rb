@@ -11,7 +11,7 @@ module Flow
           elsif proceeding.sca_type == "related"
             :proceedings_sca_heard_togethers
           elsif PROHIBITED_STEPS_OR_SPECIFIC_ISSUE_REGEXP.match?(proceeding.ccms_code)
-            :proceedings_sca_change_of_names
+            :change_of_names
           else
             :has_other_proceedings
           end

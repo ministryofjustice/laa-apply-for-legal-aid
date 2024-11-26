@@ -50,7 +50,7 @@ RSpec.describe Providers::ChangeOfNamesController do
       it "redirects to the next page" do
         patch_request
         expect(response).to have_http_status(:redirect)
-        expect(response).to redirect_to(providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "change_of_name"))
+        expect(response).to redirect_to(providers_legal_aid_application_change_of_names_interrupt_path(legal_aid_application))
       end
     end
 

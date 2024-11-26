@@ -277,6 +277,7 @@ Rails.application.routes.draw do
       resource :has_evidence_of_benefit, only: %i[show update]
       resource :confirm_client_declaration, only: %i[show update]
       resource :change_of_names, only: %i[show update]
+      get "/change_of_names_interrupt", to: "change_of_names_interrupts#show", as: "change_of_names_interrupt"
       resource :review_and_print_application, only: [:show] do
         patch :continue
         patch :reset

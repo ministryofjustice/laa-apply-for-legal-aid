@@ -10,7 +10,7 @@ module Providers
 
       @proceeding = legal_aid_application.proceedings.last
       if form.valid?
-        return redirect_to providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "change_of_name") if form.change_of_name?
+        return redirect_to providers_legal_aid_application_change_of_names_interrupt_path(legal_aid_application) if form.change_of_name?
 
         return go_forward
       end

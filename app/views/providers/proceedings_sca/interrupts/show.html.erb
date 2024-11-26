@@ -6,19 +6,12 @@
       <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
         <p class="govuk-body"><%= t(".#{@type}.paragraph") %></p>
       <% end %>
-      <% unless @type == "change_of_name" %>
-        <p class="govuk-body"><%= t(".#{@type}.options") %></p>
-        <%= govuk_list t(".#{@type}.option_bullets_html"), type: :bullet %>
-      <% end %>
+      <p class="govuk-body"><%= t(".#{@type}.options") %></p>
+      <%= govuk_list t(".#{@type}.option_bullets_html"), type: :bullet %>
     </div>
 
     <div class='govuk-button-group'>
-      <% if @type == "change_of_name" %>
-        <%= govuk_button_link_to t(".#{@type}.change"), providers_legal_aid_application_change_of_names_path, inverse: true, role: "button" %>
-        <%= govuk_button_link_to t(".#{@type}.applications"), in_progress_providers_legal_aid_applications_path, inverse: true, role: "button" %>
-      <% else %>
-        <%= govuk_button_link_to t(".#{@type}.proceedings"), providers_legal_aid_application_sca_interrupt_path(@legal_aid_application, @type), method: :delete, inverse: true, role: "button" %>
-      <% end %>
+      <%= govuk_button_link_to t(".#{@type}.proceedings"), providers_legal_aid_application_sca_interrupt_path(@legal_aid_application, @type), method: :delete, inverse: true, role: "button" %>
     </div>
   <% end %>
 </div>
