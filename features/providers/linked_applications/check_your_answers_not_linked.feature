@@ -22,7 +22,7 @@ Background: I have started an application and not linked or copied it
   And the following sections should not exist:
     | tag | section |
     | h1  | Copying |
-    | h2  | Inherent jurisdiction high court injunction proceeding details |
+    | h2  | Inherent jurisdiction high court injunction |
 
 @javascript @vcr
 Scenario: When I change it to be a linked case

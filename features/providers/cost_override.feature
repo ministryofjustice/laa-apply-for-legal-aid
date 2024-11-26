@@ -68,7 +68,11 @@ Feature: Emergency cost override
     Then I should be on a page with title "Does your client have a partner?"
     When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    Then I should see "Emergency cost limit"
+    Then the "Cost limits" list's questions and answers should match:
+      | question | answer |
+      | Higher emergency cost limit requested | £5,000 |
+      | Reason for higher emergency cost limit | This is why I require extra funding |
+      | Substantive cost limit | £25,000 |
 
   @javascript @vcr
   Scenario: Provider should be able to request a higher substantive cost limit when the default substantive cost limit is below the 25,000 threshold
