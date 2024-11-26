@@ -1,48 +1,82 @@
 require "rails_helper"
 
-RSpec.describe ErrorsController do
-  describe "actions that result in error pages being shown" do
-    describe "unknown page" do
-      context "with default locale" do
-        before { get "/unknown/path" }
+# Requires mocking the config neccessary to display error pages as on production
+# environments, or errors will be handled as for test/development environment
+#  - i.e rendering the helpful rails error pages.
+#
+RSpec.describe ErrorsController, :show_exceptions do
+  context "when page not found due to path not existing" do
+    let(:get_invalid_path) { get("/unknown/path") }
 
-        it "redirect to page not found" do
-          expect(response).to redirect_to("/error/page_not_found?locale=en")
-        end
+    context "with default locale" do
+      it "responds with http status" do
+        get_invalid_path
+        expect(response).to have_http_status(:not_found)
       end
 
-      context "with Welsh locale" do
-        around do |example|
-          I18n.with_locale(:cy) { example.run }
-        end
-
-        before { get "/unknown/path", params: { locale: "cy" } }
-
-        it "redirect to page not found" do
-          expect(response).to redirect_to("/error/page_not_found?locale=cy")
-        end
+      it "renders page not found" do
+        get_invalid_path
+        expect(response).to render_template("errors/show/_page_not_found")
       end
     end
 
-    describe "object not found" do
-      context "with default locale" do
-        before { get feedback_path(SecureRandom.uuid) }
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get("/unknown/path", params: { locale: :cy })
+        expect(page)
+          .to have_css("h1", text: "dnuof ton egaP")
+      end
+    end
+  end
 
-        it "redirect to page not found" do
-          expect(response).to redirect_to("/error/page_not_found?locale=en")
-        end
+  context "when page not found due to object not found" do
+    let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
+
+    context "with default locale" do
+      it "responds with http status" do
+        get_invalid_id
+        expect(response).to have_http_status(:not_found)
       end
 
-      context "with Welsh locale" do
-        around do |example|
-          I18n.with_locale(:cy) { example.run }
-        end
+      it "renders page not found" do
+        get_invalid_id
+        expect(response).to render_template("errors/show/_page_not_found")
+      end
+    end
 
-        before { get feedback_path(SecureRandom.uuid, locale: :cy) }
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get feedback_path(SecureRandom.uuid, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "dnuof ton egaP")
+      end
+    end
+  end
 
-        it "redirect to page not found" do
-          expect(response).to redirect_to("/error/page_not_found?locale=cy")
-        end
+  context "when internal server error/500 due to code fault" do
+    let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
+
+    before do
+      allow(Feedback).to receive(:find).and_raise { ArgumentError.new("dummy arg to emulate 500 internal server error") }
+    end
+
+    context "with default locale" do
+      it "responds with expected http status" do
+        get_invalid_id
+        expect(response).to have_http_status(:internal_server_error)
+      end
+
+      it "renders internal server error" do
+        get_invalid_id
+        expect(response).to render_template("errors/show/_internal_server_error")
+      end
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get feedback_path(SecureRandom.uuid, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "ecivres ruo htiw gnorw tnew gnihtemos ,yrroS")
       end
     end
   end
@@ -50,46 +84,112 @@ RSpec.describe ErrorsController do
   describe "GET /error/page_not_found" do
     subject(:get_error) { get error_path(:page_not_found) }
 
-    before { get_error }
-
-    it "renders successfully" do
-      expect(response).to have_http_status(:ok)
+    it "responds with not_found/404 status" do
+      get_error
+      expect(response).to have_http_status(:not_found)
     end
 
-    it "displays the correct header" do
-      expect(page).to have_css("h1", text: t("page_not_found.page_title"))
+    it "renders page not found" do
+      get_error
+      expect(response).to render_template("errors/show/_page_not_found")
+    end
+
+    it "displays the correct content" do
+      get_error
+      expect(page)
+        .to have_css("h1", text: "Page not found")
+        .and have_content("If you typed the web address, check it is correct.")
+        .and have_content("If you pasted the web address, check you copied the entire address.")
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get error_path(:page_not_found, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "dnuof ton egaP")
+      end
     end
   end
 
   describe "GET /error/assessment_already_completed" do
     subject(:get_error) { get error_path(:assessment_already_completed) }
 
-    before { get_error }
-
-    it "renders successfully" do
+    it "responds with ok/200 status" do
+      get_error
       expect(response).to have_http_status(:ok)
     end
 
+    it "renders assessment_already_completed" do
+      get_error
+      expect(response).to render_template("errors/show/_assessment_already_completed")
+    end
+
     it "displays the correct header" do
-      expect(page).to have_css("h1", text: t("assessment_already_completed.page_title"))
+      get_error
+      expect(page).to have_css("h1", text: "You've already shared your financial information")
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get error_path(:assessment_already_completed, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "tnemssessa laicnanif ruoy detelpmoc ydaerla ev'uoY")
+      end
     end
   end
 
   describe "GET /error/access_denied" do
     subject(:get_error) { get error_path(:access_denied) }
 
-    before { get_error }
-
-    it "renders successfully" do
+    it "responds with ok/200 status" do
+      get_error
       expect(response).to have_http_status(:ok)
     end
 
+    it "renders assessment_already_completed" do
+      get_error
+      expect(response).to render_template("errors/show/_access_denied")
+    end
+
     it "displays the correct header" do
-      expect(page).to have_css("h1", text: t("access_denied.page_title"))
+      get_error
+      expect(page).to have_css("h1", text: "Access denied")
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get error_path(:access_denied, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "deined sseccA")
+      end
     end
   end
 
-  def t(key, **)
-    I18n.t(key, scope: %i[errors show], **)
+  describe "GET /error/internal_server_error" do
+    subject(:get_error) { get error_path(:internal_server_error) }
+
+    it "responds with internal_server_error/500 status" do
+      get_error
+      expect(response).to have_http_status(:internal_server_error)
+    end
+
+    it "renders internal_server_error" do
+      get_error
+      expect(response).to render_template("errors/show/_internal_server_error")
+    end
+
+    it "displays the correct header" do
+      get_error
+      expect(page)
+        .to have_css("h1", text: "Sorry, something went wrong with our service")
+    end
+
+    context "with Welsh locale" do
+      it "displays the correct content" do
+        get error_path(:internal_server_error, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "ecivres ruo htiw gnorw tnew gnihtemos ,yrroS")
+      end
+    end
   end
 end

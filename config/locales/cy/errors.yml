@@ -34,6 +34,8 @@ cy:
       access_denied:
         page_title: deined sseccA
         permission_text: uoy ot elbissecca yltnerruc ton si egap ehT
+      internal_server_error:
+        page_title: ecivres ruo htiw gnorw tnew gnihtemos ,yrroS
   problem:
     index:
       title: ecivres eht htiw melborp a si ereht ,yrroS

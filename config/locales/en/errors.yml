@@ -38,6 +38,8 @@ en:
       access_denied:
         page_title: Access denied
         permission_text: The page is not currently accessible to you
+      internal_server_error:
+        page_title: Sorry, something went wrong with our service
   problem:
     index:
       title: Sorry, there is a problem with the service
