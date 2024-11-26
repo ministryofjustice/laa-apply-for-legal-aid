@@ -67,7 +67,7 @@ When("I have neither linked or copied an application") do
   LinkedApplication.find_or_create_by!(associated_application: @legal_aid_application,
                                        link_type_code: "false")
   @legal_aid_application.proceedings.destroy_all
-  create(:proceeding, :da004, legal_aid_application: @legal_aid_application)
+  create(:proceeding, :da004, legal_aid_application: @legal_aid_application, lead_proceeding: true)
 end
 
 Then("I visit the check_provider_answers page") do

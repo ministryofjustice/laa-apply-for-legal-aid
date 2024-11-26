@@ -350,7 +350,6 @@ en:
           heading: Covered under an emergency certificate
         section_substantive:
           heading: Covered under a substantive certificate
-        emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
         section_next:
           heading: What happens next
