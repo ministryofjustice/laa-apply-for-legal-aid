@@ -283,7 +283,7 @@ module CCMS
     end
 
     def outstanding_mortgage?(_options)
-      !legal_aid_application&.own_home_no? && legal_aid_application&.own_home_mortgage? && legal_aid_application&.outstanding_mortgage_amount
+      !legal_aid_application&.own_home_no? && legal_aid_application&.own_home_mortgage? && legal_aid_application.outstanding_mortgage_amount
     end
 
     def outstanding_mortgage_amount(_options)
