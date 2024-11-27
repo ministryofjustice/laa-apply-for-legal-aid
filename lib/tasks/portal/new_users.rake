@@ -1,7 +1,7 @@
 namespace :portal do
   desc "Generate a script for new apply users"
   task :new_users, [:names] => :environment do |_task, args|
-    Dir[Rails.root.join("lib/tasks/portal/*.rb")].each { |f| require f }
+    Rails.root.glob("lib/tasks/portal/*.rb").each { |f| require f }
 
     if args[:names].nil?
       Rails.logger.info "call with rake:portal:new_users[pipe|separated|list|of|names]"
