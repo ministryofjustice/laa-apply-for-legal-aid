@@ -1,0 +1,218 @@
+---
+# differences from base.yml only applied
+global_means:
+  MEANS_REQD:
+    generate_block?: true
+    value: false
+    br100_meaning: means required
+    response_type: boolean
+    user_defined: false
+  IS_PASSPORTED:
+    generate_block?: false
+  BEN_DOB:
+    generate_block?: false
+  BEN_NI_NO:
+    generate_block?: false
+  BEN_SURNAME:
+    generate_block?: false
+  BEN_AWARD_DATE:
+    generate_block?: false
+  GB_INPUT_B_14WP2_8A:
+    generate_block?: false
+  GB_INPUT_B_3WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_14WP2_7A:
+    generate_block?: false
+  GB_INPUT_B_8WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_16WP2_7A:
+    generate_block?: false
+  GB_INPUT_B_5WP1_18A:
+    generate_block?: false
+  CLIENT_ELIGIBILITY:
+    generate_block?: false
+  PUI_CLIENT_ELIGIBILITY:
+    generate_block?: false
+  GB_INPUT_B_7WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_4WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_6WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_5WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_2WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_9WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_10WP2_1A:
+    generate_block?: false
+  GB_INPUT_B_1WP2_36A:
+    generate_block?: false
+  GB_INPUT_B_13WP2_7A:
+    generate_block?: false
+  GB_INPUT_B_15WP2_8A:
+    generate_block?: false
+  GB_INPUT_B_6WP3_240A:
+    generate_block?: false
+  GB_INPUT_B_1WP3_165A:
+    generate_block?: false
+  GB_INPUT_B_11WP2_3A:
+    generate_block?: false
+  GB_INPUT_B_12WP2_2A:
+    generate_block?: false
+  GB_INPUT_D_18WP2_1A:
+    generate_block?: false
+  GB_RFLAG_B_2WP3_01A:
+    generate_block?: false
+  DATE_ASSESSMENT_STARTED:
+    generate_block?: false
+  GB_INFER_B_1WP1_1A:
+    value: true
+    br100_meaning: The application is non means tested
+    response_type: boolean
+    user_defined: false
+  MEANS_TASK_AUTO_GEN:
+    generate_block?: '#application_auto_grant_special_children_act?'
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  PASSPORTED_NINO:
+    generate_block?: false
+global_merits:
+  APP_INCLUDES_SCA_PROCS:
+    generate_block?: true
+    value: true
+    br100_meaning: The Application Includes Special Children Act Proceedings
+    response_type: boolean
+    user_defined: false
+  APP_IS_SCA_RELATED:
+    generate_block?: '#application_special_children_act_related_proceedings?'
+    value: true
+    br100_meaning: The Application Is In Relation To Special Children Act Or Related Proceedings
+    response_type: boolean
+    user_defined: false
+  CASE_OWNER_SCA:
+    generate_block?: true
+    value: true
+    br100_meaning: Meaning not defined in BR100
+    response_type: boolean
+    user_defined: false
+  CASE_OWNER_STD_FAMILY_MERITS:
+    generate_block?: true
+    value: false
+    br100_meaning: The Case Owner Is The Standard Family Merits Team
+    response_type: boolean
+    user_defined: false
+  CLIENT_HAS_PR:
+    generate_block?: "#client_non_biological_parent?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_HAS_PR_ORDER:
+    generate_block?: "#application_client_court_ordered_parental_responsibility?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_CHILD_SUBJECT_OF_PROC:
+    generate_block?: "#child_subject_of_proceeding?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_CHILD_SUBJECT_TO_SAO:
+    generate_block?: "#child_subject_to_sao?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  CLIENT_PARENT_OF_CHILD_PROC:
+    generate_block?: "#application_client_biological_parent?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  COPY_PR_AGREEMENT:
+    generate_block?: "#application_client_parental_responsibility_agreement?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  COPY_PR_ORDER:
+    generate_block?: "#application_client_court_ordered_parental_responsibility?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  COPY_SEPARATE_STATEMENT:
+    generate_block?: false
+  DATE_ASSESSMENT_STARTED:
+    generate_block?: false
+  DATE_CLIENT_VISITED_FIRM:
+    generate_block?: false
+  DATE_DEVOLVED_POWERS_USED:
+    generate_block?: '#backdated_sca_application?'
+    value: '#used_delegated_functions_on'
+    response_type: date
+    user_defined: true
+  DELEG_FUNCTIONS_DATE_MERITS:
+    generate_block?: false
+  DELEGATED_FUNCTIONS_DATE:
+    generate_block?: false
+  EVIDENCE_COPY_PR_ORDER:
+    generate_block?: true
+    value: "#application_client_court_ordered_parental_responsibility?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  EVIDENCE_PR_AGREEMENT:
+    generate_block?: true
+    value: "#application_client_parental_responsibility_agreement?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  GB_INFER_T_6WP1_66A:
+    generate_block?: false
+  MERITS_EVIDENCE_REQD:
+    generate_block?: true
+    value: "#client_non_biological_parent?"
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  MERITS_ROUTING:
+    generate_block?: true
+    value: "SCA"
+    br100_meaning: merits routing owner
+    response_type: text
+    user_defined: false
+  MERITS_ROUTING_NAME:
+    generate_block?: true
+    value: "SCA"
+    br100_meaning: merits routing name
+    response_type: text
+    user_defined: false
+  SCA_AUTO_GRANT:
+    generate_block?: true
+    value: '#application_auto_grant_special_children_act?'
+    br100_meaning: the special children act application can be auto granted
+    response_type: boolean
+    user_defined: false
+  SCA_DEVOLVED_POWERS:
+    generate_block?: true
+    value: '#application_used_delegated_functions?'
+    response_type: boolean
+    user_defined: true
+  SCA_PR_AGREEMENT:
+    generate_block?: "#application_client_parental_responsibility_agreement?"
+    value: true
+    br100_meaning: #TODO: find out if these are important
+    response_type: boolean
+    user_defined: false
+  URGENT_HEARING_DATE:
+    generate_block?: false
+proceeding_merits:
+  FAMILY_PROSPECTS_OF_SUCCESS:
+    generate_block?: false

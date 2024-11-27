@@ -35,5 +35,22 @@ RSpec.describe Flow::Steps::ProviderStart::CheckProviderAnswersStep, type: :requ
 
       it { is_expected.to eq :no_national_insurance_numbers }
     end
+
+    context "when the application has an SCA proceeding" do
+      let(:legal_aid_application) do
+        create(:legal_aid_application,
+               :with_proceedings,
+               explicit_proceedings: %i[pb003],
+               set_lead_proceeding: :pb003,
+               applicant:)
+      end
+
+      it { is_expected.to eq :confirm_non_means_tested_applications }
+
+      it "sets the state machine" do
+        forward_step
+        expect(legal_aid_application.state_machine.type).to eq "SpecialChildrenActStateMachine"
+      end
+    end
   end
 end

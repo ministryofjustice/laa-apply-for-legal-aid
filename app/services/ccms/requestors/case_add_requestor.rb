@@ -106,8 +106,8 @@ module CCMS
         xml.__send__(:"casebio:Proceedings") { generate_proceedings(xml) }
         xml.__send__(:"casebio:MeansAssesments") { generate_means_assessment(xml) }
         xml.__send__(:"casebio:MeritsAssesments") { generate_merits_assessment(xml) }
-        xml.__send__(:"casebio:DevolvedPowersDate", @legal_aid_application.used_delegated_functions_on.to_fs(:ccms_date)) if @legal_aid_application.used_delegated_functions?
-        xml.__send__(:"casebio:ApplicationAmendmentType", @legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB")
+        xml.__send__(:"casebio:DevolvedPowersDate", @legal_aid_application.used_delegated_functions_on.to_fs(:ccms_date)) if @legal_aid_application.non_sca_used_delegated_functions?
+        xml.__send__(:"casebio:ApplicationAmendmentType", @legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB")
         xml.__send__(:"casebio:LARDetails") { generate_lar_details(xml) }
       end
 
