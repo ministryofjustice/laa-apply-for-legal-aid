@@ -20,7 +20,7 @@ RSpec.describe ErrorsController, :show_exceptions do
       end
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get("/unknown/path", params: { locale: :cy })
         expect(page)
@@ -44,7 +44,7 @@ RSpec.describe ErrorsController, :show_exceptions do
       end
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get feedback_path(SecureRandom.uuid, locale: :cy)
         expect(page)
@@ -72,7 +72,7 @@ RSpec.describe ErrorsController, :show_exceptions do
       end
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get feedback_path(SecureRandom.uuid, locale: :cy)
         expect(page)
@@ -102,7 +102,7 @@ RSpec.describe ErrorsController, :show_exceptions do
         .and have_content("If you pasted the web address, check you copied the entire address.")
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get error_path(:page_not_found, locale: :cy)
         expect(page)
@@ -129,7 +129,7 @@ RSpec.describe ErrorsController, :show_exceptions do
       expect(page).to have_css("h1", text: "You've already shared your financial information")
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get error_path(:assessment_already_completed, locale: :cy)
         expect(page)
@@ -156,7 +156,7 @@ RSpec.describe ErrorsController, :show_exceptions do
       expect(page).to have_css("h1", text: "Access denied")
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get error_path(:access_denied, locale: :cy)
         expect(page)
@@ -184,7 +184,7 @@ RSpec.describe ErrorsController, :show_exceptions do
         .to have_css("h1", text: "Sorry, something went wrong with our service")
     end
 
-    context "with Welsh locale" do
+    context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
         get error_path(:internal_server_error, locale: :cy)
         expect(page)
