@@ -26,6 +26,6 @@ class PolicyDisregards < ApplicationRecord
 private
 
   def build_attribute_array
-    DISREGARDS.map { |att| att.to_s if send(att) }.select(&:present?)
+    DISREGARDS.map { |att| att.to_s if send(att) }.compact_blank
   end
 end
