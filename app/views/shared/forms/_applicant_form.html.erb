@@ -13,7 +13,6 @@
         form:,
       ) do %>
 
-    <div class="govuk-!-padding-bottom-2"></div>
     <%= form.govuk_fieldset legend: { text: t(".name") },
                             "aria-label": t(".aria_label") do %>
       <%= form.govuk_text_field :first_name, label: { text: "First name" }, width: "three-quarters" %>
@@ -27,11 +26,9 @@
       <% end %>
       <%= form.govuk_radio_button :changed_last_name, false, label: { text: t("generic.no") } %>
     <% end %>
-    <div class="govuk-!-padding-bottom-4"></div>
+
     <%= form.govuk_date_field :date_of_birth, legend: { text: t("shared.forms.date_input_fields.date_of_birth_label") },
                                               hint: { text: t("shared.forms.date_input_fields.date_of_birth_hint") } %>
-
-    <div class="govuk-!-padding-bottom-2"></div>
 
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
