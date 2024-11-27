@@ -29,5 +29,11 @@ RSpec.describe Flow::Steps::ProviderStart::ProceedingsTypesStep, type: :request 
 
       it { is_expected.to eq :proceedings_sca_heard_togethers }
     end
+
+    context "when the chosen proceeding is a s8 prohibited steps order proceeding" do
+      let(:proceeding) { build_stubbed(:proceeding, :se003) }
+
+      it { is_expected.to eq :change_of_names }
+    end
   end
 end
