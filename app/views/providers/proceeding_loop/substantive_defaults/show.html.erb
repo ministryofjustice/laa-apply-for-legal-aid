@@ -26,11 +26,7 @@
         <%= form.hidden_field :substantive_scope_limitation_description %>
         <%= form.hidden_field :substantive_scope_limitation_code %>
 
-        <%= form.govuk_radio_button :accepted_substantive_defaults, true, label: { text: t("generic.yes") }, link_errors: true do %>
-          <% if form.object.additional_params.present? %>
-            <%= pp form.object.additional_params %>
-          <% end %>
-        <% end %>
+        <%= form.govuk_radio_button :accepted_substantive_defaults, true, label: { text: t("generic.yes") }, link_errors: true %>
         <%= form.govuk_radio_button :accepted_substantive_defaults, false, label: { text: t("generic.no") } %>
       <% end %>
     <% end %>
