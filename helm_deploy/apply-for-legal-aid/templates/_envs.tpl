@@ -301,12 +301,12 @@ env:
   - name: LEGAL_FRAMEWORK_API_HOST
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: uat-lfa-connection
         key: legalFrameworkApiHost
   - name: LEGAL_FRAMEWORK_API_HOST_JS
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
+        name: uat-lfa-connection
         key: legalFrameworkApiHostJS
   - name: SLACK_ALERT_EMAIL
     valueFrom:
