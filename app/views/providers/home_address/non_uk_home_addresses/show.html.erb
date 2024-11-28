@@ -22,10 +22,10 @@
                                          :code,
                                          :description,
                                          class: "country-select",
-                                         options: { include_blank: "Select a country" },
+                                         options: { include_blank: t(".select_country") },
                                          label: { text: "Country", size: "m" } %>
       </div>
-      <div class="govuk-grid-column-one-quarter clear-search" style="display: none;">
+      <div class="govuk-grid-column-one-quarter clear-search hidden">
         <p class="govuk-body"><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
       </div>
     </div>
