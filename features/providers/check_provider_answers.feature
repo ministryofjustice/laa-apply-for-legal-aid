@@ -2,6 +2,7 @@ Feature: Checking client details answers backwards and forwards
   @javascript
   Scenario: Send client's mail to their home address
     Given I complete the passported journey as far as check your answers for client details
+    Then I should see 'You cannot change the answers on this page once you save and continue.'
 
     Then the following sections should exist:
       | tag | section |

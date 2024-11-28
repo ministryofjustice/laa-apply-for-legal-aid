@@ -2,6 +2,10 @@
 
 <%= page_template(page_title: t(".h1-heading")) do %>
 
+  <%= govuk_inset_text do %>
+    <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
+  <% end %>
+
   <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
 
   <%= render "shared/check_answers/assets", individual: %>

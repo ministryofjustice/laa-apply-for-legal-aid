@@ -18,6 +18,10 @@
         form:,
       ) do %>
 
+    <%= govuk_inset_text do %>
+      <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
+    <% end %>
+
     <%= render(
           "shared/check_answers/merits",
           incident: @legal_aid_application.latest_incident,
