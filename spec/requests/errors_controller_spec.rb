@@ -9,7 +9,7 @@ RSpec.describe ErrorsController, :show_exceptions do
     let(:get_invalid_path) { get("/unknown/path") }
 
     context "with default locale" do
-      it "responds with http status" do
+      it "responds with expected http status" do
         get_invalid_path
         expect(response).to have_http_status(:not_found)
       end
@@ -25,6 +25,30 @@ RSpec.describe ErrorsController, :show_exceptions do
         get("/unknown/path", params: { locale: :cy })
         expect(page)
           .to have_css("h1", text: "dnuof ton egaP")
+      end
+    end
+  end
+
+  context "when page not found due to non-html format" do
+    let(:get_invalid_path) { get("/unknown/path.xml") }
+
+    context "with default locale" do
+      it "responds with expected http status" do
+        get_invalid_path
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "renders not found plain text" do
+        get_invalid_path
+        expect(response.body).to eq("Not found")
+      end
+    end
+
+    context "with Welsh locale", :use_welsh_locale do
+      it "displays the correct content" do
+        get("/unknown/path.xml", params: { locale: :cy })
+
+        expect(response.body).to eq("Not found")
       end
     end
   end
