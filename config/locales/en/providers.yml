@@ -1371,19 +1371,26 @@ en:
         nature_of_urgency: Nature of urgency and hearing date
         why_matter_opposed: Why the matter is opposed
         laspo: Section 8 and LASPO
+        court_order_copy: The court order
+        second_appeal: The second appeal
+        matter_opposed: If the matter is opposed
         # Proceeding level tasks
         chances_of_success_html: <span class="govuk-visually-hidden">%{proceeding} </span>Chances of success
         children_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Children involved in this proceeding
         attempts_to_settle_html: <span class="govuk-visually-hidden">%{proceeding} </span>Attempts to settle
         specific_issue_html: <span class="govuk-visually-hidden">%{proceeding} </span>Specific Issue
+        plf_specific_issue_html: <span class="govuk-visually-hidden">%{proceeding} </span>Specific Issue
         prohibited_steps_html: <span class="govuk-visually-hidden">%{proceeding} </span>Prohibited steps
         opponents_application_html: <span class="govuk-visually-hidden">%{proceeding} </span>Opponent application
         vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Reason for new application
+        plf_vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Changes since the original order was made
         client_relationship_to_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Who your client is in the proceeding
+        client_child_care_assessment_html: <span class="govuk-visually-hidden">%{proceeding} </span>Assessment of your client
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
           complete: Completed
+          ignored: Ignored (TODO)
         urls:
           latest_incident_details: date_client_told_incident
           opponent_name: opponent_individual
@@ -1408,6 +1415,12 @@ en:
           opponents_application: opponents_application
           client_relationship_to_proceeding: is_client_biological_parent
           check_who_client_is: check_who_client_is
+          court_order_copy: court_order_copy
+          second_appeal: second_appeal
+          matter_opposed: matter_opposed
+          plf_specific_issue: plf_specific_issue
+          plf_vary_order: plf_vary_order
+          client_child_care_assessment: client_child_care_assessment
     merits_reports:
       show:
         heading: Merits report

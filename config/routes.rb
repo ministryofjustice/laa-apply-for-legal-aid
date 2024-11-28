@@ -363,6 +363,10 @@ Rails.application.routes.draw do
         resource :statement_of_case, only: %i[show update destroy] do
           get "/list", to: "statement_of_cases#list"
         end
+
+        resource :court_order_copy, only: %i[show update]
+        resource :second_appeal, only: %i[show update]
+        resource :matter_opposed, only: %i[show update]
       end
     end
 
@@ -381,6 +385,10 @@ Rails.application.routes.draw do
         resource :does_client_have_parental_responsibility, only: %i[show update]
         resource :is_client_child_subject, only: %i[show update], controller: :is_client_child_subject, path: "is_client_a_child_subject_of_proceeding"
         resource :check_who_client_is, only: %i[show update]
+
+        resource :plf_specific_issue, only: %i[show update], controller: "specific_issue"
+        resource :plf_vary_order, only: %i[show update], controller: "vary_order"
+        resource :client_child_care_assessment, only: %i[show update]
       end
     end
   end
