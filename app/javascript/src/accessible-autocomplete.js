@@ -21,7 +21,7 @@ function enhanceSelectElement (searchSelectItem) {
 function addSearchInputListeners () {
   const searchInputBox = document.querySelector('.autocomplete__input')
 
-  document.querySelector('.clear-search').style.display = 'block'
+  document.querySelector('.clear-search').classList.remove('hidden')
 
   document
     .querySelector('#clear-country-search')
