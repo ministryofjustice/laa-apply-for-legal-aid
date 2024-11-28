@@ -32,6 +32,12 @@
       },
     ) do %>
 
+  <% unless @read_only %>
+    <%= govuk_inset_text do %>
+      <p class="govuk-body"><%= t("generic.cya_inset_text") %></p>
+    <% end %>
+  <% end %>
+
   <h2 class="govuk-heading-l"><%= t(".section_client.heading") %></h2>
   <%= render("shared/check_answers/client_details",
              attributes: %i[first_name last_name last_name_at_birth applied_previously date_of_birth national_insurance_number employment_status correspondence_choice address care_of home_address has_partner],
