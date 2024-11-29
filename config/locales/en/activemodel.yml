@@ -332,7 +332,7 @@ en:
         proceeding_merits_task/vary_order:
           attributes:
             details:
-              blank: Enter reason for making a new application
+              blank: Enter details of the changes since the original order was made
         partner:
           attributes:
             date_of_birth:
