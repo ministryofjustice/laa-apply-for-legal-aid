@@ -7,7 +7,10 @@
 class ErrorsController < ApplicationController
   before_action :update_locale, :set_error_name
   def show
-    render :show, status: status_for(@error_name)
+    respond_to do |format|
+      format.html { render :show, status: status_for(@error_name) }
+      format.all { render plain: "Not found", status: :not_found }
+    end
   end
 
 private
