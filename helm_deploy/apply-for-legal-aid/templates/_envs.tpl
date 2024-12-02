@@ -151,8 +151,6 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: laaLandingPageURL
-  - name: PROVIDER_DETAILS_URL
-    value: {{ .Values.provider_details.url | quote }}
   - name: PDA_URL
     value: {{ .Values.pda.url | quote }}
   - name: PDA_AUTH_KEY

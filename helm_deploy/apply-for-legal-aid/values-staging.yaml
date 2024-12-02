@@ -110,9 +110,6 @@ omniauth_entraid:
   mock_auth_enabled: false
   redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
-provider_details:
-  url: "https://preprod-pda-api-laa-ccms-preprod.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/"
-
 pda:
   url: "https://laa-provider-details-api-preprod.apps.live.cloud-platform.service.justice.gov.uk"
 

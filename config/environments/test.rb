@@ -73,9 +73,6 @@ Rails.application.configure do
     config.log_level = :fatal
   end
 
-  # Dummy url for provider details api
-  config.x.provider_details.url = "http://dummy-provider-details-api/"
-
   # Test url for provider details api
   config.x.pda.url = "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
