@@ -35,6 +35,7 @@ module Proceedings
       return false unless valid?
 
       model.scope_limitations.where(scope_type: :substantive).destroy_all
+
       if accepted_substantive_defaults&.to_s == "false"
         attributes[:substantive_level_of_service] = nil
         attributes[:substantive_level_of_service_name] = nil

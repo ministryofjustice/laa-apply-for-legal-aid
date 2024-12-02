@@ -21,6 +21,7 @@ module Proceedings
 
       level = levels_of_service.find { |lvl| lvl["level"] == emergency_level_of_service.to_i }
       attributes[:emergency_level_of_service_name] = level["name"]
+      attributes[:emergency_level_of_service_stage] = level["stage"]
       super
     end
     alias_method :save!, :save
