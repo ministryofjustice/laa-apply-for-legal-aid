@@ -79,7 +79,6 @@ module LaaApplyForLegalAid
 
     config.x.email_domain.suffix = ENV.fetch("APPLY_EMAIL", nil)
 
-    config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
     config.x.pda.url = ENV.fetch("PDA_URL", nil)
     config.x.pda.auth_key = ENV.fetch("PDA_AUTH_KEY", nil)
 
