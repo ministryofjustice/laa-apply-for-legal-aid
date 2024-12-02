@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Flow::Steps::ProceedingsSCA::ChangeOfNamesStep, type: :request do
+RSpec.describe Flow::Steps::ProviderStart::ChangeOfNamesStep, type: :request do
   let(:legal_aid_application) { build_stubbed(:legal_aid_application) }
 
   describe "#path" do

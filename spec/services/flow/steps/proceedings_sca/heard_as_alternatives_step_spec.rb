@@ -27,13 +27,13 @@ RSpec.describe Flow::Steps::ProceedingsSCA::HeardAsAlternativesStep, type: :requ
     context "and the proceeding is a Prohibited steps order" do
       let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PB019") }
 
-      it { is_expected.to be :proceedings_sca_change_of_names }
+      it { is_expected.to be :change_of_names }
     end
 
     context "and the proceeding is a Specific issue order vary order" do
       let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PB024") }
 
-      it { is_expected.to be :proceedings_sca_change_of_names }
+      it { is_expected.to be :change_of_names }
     end
 
     context "and the proceeding is neither SIO or PIO" do

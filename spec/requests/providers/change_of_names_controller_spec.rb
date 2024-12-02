@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ProceedingsSCA::ChangeOfNamesController do
+RSpec.describe Providers::ChangeOfNamesController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001]) }
   let(:login_provider) { login_as legal_aid_application.provider }
 
@@ -13,7 +13,7 @@ RSpec.describe Providers::ProceedingsSCA::ChangeOfNamesController do
     end
 
     it "renders show with ok status" do
-      expect(response).to have_http_status(:ok).and render_template("providers/proceedings_sca/change_of_names/show")
+      expect(response).to have_http_status(:ok).and render_template("providers/change_of_names/show")
     end
 
     context "when not authenticated" do
@@ -50,7 +50,7 @@ RSpec.describe Providers::ProceedingsSCA::ChangeOfNamesController do
       it "redirects to the next page" do
         patch_request
         expect(response).to have_http_status(:redirect)
-        expect(response).to redirect_to(providers_legal_aid_application_sca_interrupt_path(legal_aid_application, "change_of_name"))
+        expect(response).to redirect_to(providers_legal_aid_application_change_of_names_interrupt_path(legal_aid_application))
       end
     end
 
