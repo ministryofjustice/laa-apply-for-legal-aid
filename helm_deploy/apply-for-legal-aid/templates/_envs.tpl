@@ -373,6 +373,11 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: googleDataStudioUrl
+  - name: RESEARCH_PANEL_FORM_LINK
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: researchLink
   - name: ENCRYPTION_PRIMARY_KEY
     valueFrom:
       secretKeyRef:

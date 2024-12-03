@@ -70,6 +70,7 @@ module ApplicationHelper
     {
       t("layouts.application.footer.contact") => contact_path,
       t("layouts.application.footer.feedback") => new_feedback_path,
+      t("layouts.application.footer.research_panel") => ENV.fetch("RESEARCH_PANEL_FORM_LINK", root_path),
       # Currently we can only update and store cookie preferences for the provider, citizen users are shown the generic GOV.UK cookies page
       t("layouts.application.footer.cookies") => (current_provider ? providers_cooky_path(current_provider) : "https://www.gov.uk/help/cookies"),
       t("layouts.application.footer.privacy_policy") => privacy_policy_index_path,
