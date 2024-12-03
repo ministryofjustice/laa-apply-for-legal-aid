@@ -38,6 +38,18 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryForm do
           expect(application.discretionary_capital_disregards.count).to eq 0
         end
       end
+
+      context "with an existing mandatory disregard for backdated benefits" do
+        let(:mandatory_capital_disregard) { create(:capital_disregard, :mandatory, name: "backdated_benefits") }
+
+        before { application.capital_disregards << mandatory_capital_disregard }
+
+        it "updates the capital_discretionary_disregards" do
+          expect(application.discretionary_capital_disregards.count).to eq 2
+          expect(application.mandatory_capital_disregards.count).to eq 1
+          expect(application.capital_disregards.pluck(:name)).to match_array(%w[backdated_benefits backdated_benefits national_emergencies_trust])
+        end
+      end
     end
 
     context "when the form is not valid" do
