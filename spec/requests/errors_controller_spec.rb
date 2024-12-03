@@ -57,7 +57,7 @@ RSpec.describe ErrorsController, :show_exceptions do
     let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
 
     context "with default locale" do
-      it "responds with http status" do
+      it "responds with expected http status" do
         get_invalid_id
         expect(response).to have_http_status(:not_found)
       end
@@ -74,6 +74,23 @@ RSpec.describe ErrorsController, :show_exceptions do
         expect(page)
           .to have_css("h1", text: "dnuof ton egaP")
       end
+    end
+  end
+
+  context "when page not found due to legal_aid_application not found" do
+    let(:get_invalid_id) { get providers_legal_aid_application_previous_references_path(legal_aid_application_id: SecureRandom.uuid) }
+    let(:provider) { create(:provider) }
+
+    before { sign_in provider }
+
+    it "responds with expected http status" do
+      get_invalid_id
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "renders page not found" do
+      get_invalid_id
+      expect(response).to render_template("errors/show/_page_not_found")
     end
   end
 

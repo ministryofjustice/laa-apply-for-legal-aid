@@ -27,11 +27,12 @@ RSpec.describe "Provider access", type: :request do
     expect(response).to redirect_to(error_path(:access_denied))
   end
 
-  it "allows missing application to be caught by not found" do
+  it "allows missing application to be caught by not found", :show_exceptions do
     login_as other_provider
 
     get providers_legal_aid_application_correspondence_address_lookup_path(SecureRandom.uuid)
 
-    expect(response).to redirect_to(error_path(:page_not_found))
+    expect(response).to have_http_status(:not_found)
+    expect(response).to render_template("errors/show/_page_not_found")
   end
 end

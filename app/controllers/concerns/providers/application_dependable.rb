@@ -16,8 +16,9 @@ module Providers
       before_action :encode_upload_header
       before_action :set_legal_aid_application
 
+      # Let ActiveRecord::RecordNotFound bubble up for handling by exceptions_app as a 404
       def legal_aid_application
-        @legal_aid_application ||= LegalAidApplication.find_by(id: params[:legal_aid_application_id])
+        @legal_aid_application ||= LegalAidApplication.find(params[:legal_aid_application_id])
       end
       delegate :applicant, to: :legal_aid_application
 
@@ -25,13 +26,8 @@ module Providers
 
       def set_legal_aid_application
         return if self.class.legal_aid_application_not_required?
-        return process_invalid_application if legal_aid_application.blank?
 
         legal_aid_application.update!(provider_step:, provider_step_params:) unless provider_step == :delete
-      end
-
-      def process_invalid_application
-        redirect_to error_path(:page_not_found)
       end
 
       def provider_step_params

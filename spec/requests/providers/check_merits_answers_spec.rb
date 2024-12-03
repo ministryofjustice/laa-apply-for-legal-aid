@@ -228,7 +228,7 @@ RSpec.describe "check merits answers requests" do
       context "when there are required document categories" do
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
-          allow(LegalAidApplication).to receive(:find_by).and_return(application)
+          allow(LegalAidApplication).to receive(:find).and_return(application)
           allow(application).to receive(:evidence_is_required?).and_return(true)
         end
 
