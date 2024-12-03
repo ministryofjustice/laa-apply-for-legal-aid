@@ -183,7 +183,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           expect(unescaped_response_body).to include(partner.first_name)
           expect(unescaped_response_body).to include(partner.last_name)
           expect(unescaped_response_body).to include(partner.date_of_birth.to_s)
-          expect(unescaped_response_body).to include(partner.national_insurance_number)
+          expect(unescaped_response_body).to include("JA 12 34 56 D")
         end
       end
     end
