@@ -418,6 +418,26 @@ Feature: Checking client details answers backwards and forwards
     And I should not see "to check their benefit status"
 
   @javascript @vcr
+  Scenario: Client has a partner
+    Given I complete the journey as far as check client details with a partner
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | Partner's details |
+      | h2  | Proceedings |
+      | h2  | Inherent jurisdiction high court injunction |
+      | h2  | What happens next |
+
+    And the "Partner details" check your answers section should contain:
+      | question | answer |
+      | Partner has a contrary interest? | No |
+      | First name | Test |
+      | Last name | Partner |
+      | Date of birth | 11 February 1981 |
+      | National Insurance number | BC 29 34 83 A |
+
+  @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers summary card Change link for 'Proceedings'
