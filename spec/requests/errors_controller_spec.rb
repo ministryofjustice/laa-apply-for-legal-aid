@@ -81,7 +81,7 @@ RSpec.describe ErrorsController, :show_exceptions do
     let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
 
     before do
-      allow(Feedback).to receive(:find).and_raise { ArgumentError.new("dummy arg to emulate 500 internal server error") }
+      allow(Feedback).to receive(:find).and_raise { ArgumentError.new("dummy error to emulate 500 internal server error") }
     end
 
     context "with default locale" do
@@ -101,6 +101,27 @@ RSpec.describe ErrorsController, :show_exceptions do
         get feedback_path(SecureRandom.uuid, locale: :cy)
         expect(page)
           .to have_css("h1", text: "ecivres ruo htiw gnorw tnew gnihtemos ,yrroS")
+      end
+    end
+  end
+
+  context "when access denied/403 due to attempt to access another providers application" do
+    let(:not_their_application) { create(:legal_aid_application, provider: create(:provider)) }
+    let(:get_unauthorized) { get providers_legal_aid_application_previous_references_path(not_their_application) }
+
+    before do
+      sign_in create(:provider)
+      get_unauthorized
+      follow_redirect! # required because currently handled via a redirect
+    end
+
+    context "with default locale" do
+      it "responds with expected http status" do
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      it "renders access denied" do
+        expect(response).to render_template("errors/show/_access_denied")
       end
     end
   end
@@ -165,9 +186,9 @@ RSpec.describe ErrorsController, :show_exceptions do
   describe "GET /error/access_denied" do
     subject(:get_error) { get error_path(:access_denied) }
 
-    it "responds with ok/200 status" do
+    it "responds with forbidden/403 status" do
       get_error
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:forbidden)
     end
 
     it "renders assessment_already_completed" do

@@ -48,7 +48,7 @@ private
   def supported_errors
     {
       page_not_found: :not_found,
-      access_denied: :ok,
+      access_denied: :forbidden,
       assessment_already_completed: :ok,
       internal_server_error: :internal_server_error,
     }
