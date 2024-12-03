@@ -57,7 +57,7 @@
           if :national_insurance_number.in?(attributes)
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_national_insurance_number" }) do |row|
               row.with_key(text: t(".nino"))
-              row.with_value(text: partner.national_insurance_number || t("generic.not_provided"))
+              row.with_value(text: nino_with_spaces(partner.national_insurance_number) || t("generic.not_provided"))
               row.with_action(
                 text: t("generic.change"),
                 href: providers_legal_aid_application_partners_details_path(@legal_aid_application),
