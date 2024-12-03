@@ -64,13 +64,6 @@ commands:
             fi
 
 references:
-  decrypt_secrets: &decrypt_secrets
-    run:
-      name: Decrypt secrets file
-      command: |
-        echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
-        git-crypt unlock git-crypt.key
-
   authenticate_k8s_live: &authenticate_k8s_live
     run:
       name: Authenticate with cluster
@@ -127,8 +120,6 @@ jobs:
     - checkout
     - setup_remote_docker
     - *update_packages
-    - run: sudo apt-get install -y git-crypt
-    - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
@@ -169,7 +160,6 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
@@ -228,7 +218,6 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
@@ -279,7 +268,6 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - *decrypt_secrets
     - build-and-push-to-ecr
 
   deploy_uat: &deploy_uat
@@ -288,7 +276,6 @@ jobs:
     - checkout
     - setup_remote_docker
     - *authenticate_k8s_live
-    - *decrypt_secrets
     - run:
         name: Helm deployment to UAT
         command: |
@@ -302,7 +289,6 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - *decrypt_secrets
     - *authenticate_k8s_live
     - run:
         name: Helm deployment to staging
@@ -320,7 +306,6 @@ jobs:
     - checkout
     - setup_remote_docker
     - *authenticate_k8s_live
-    - *decrypt_secrets
     - run:
         name: Helm deployment to production
         command: |
