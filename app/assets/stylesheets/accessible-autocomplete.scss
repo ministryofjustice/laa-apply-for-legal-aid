@@ -1,7 +1,9 @@
 .clear-search {
-  margin-top: 50px;
+  @include govuk-media-query($from: desktop) {
+    margin-top: 50px;
 
-  &-error {
-    margin-top: 90px;
+    &-error {
+      margin-top: 90px;
+    }
   }
 }

@@ -16,7 +16,7 @@
     <%= hidden_field_tag "legal-framework-api-host", nil, { "data-uri": Rails.configuration.x.legal_framework_api_host_for_js } %>
 
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-three-quarters govuk-list">
+      <div class="govuk-grid-column-two-thirds govuk-list">
         <%= form.govuk_collection_select :country_code,
                                          @form.countries,
                                          :code,
@@ -25,7 +25,7 @@
                                          options: { include_blank: t(".select_country") },
                                          label: { text: "Country", size: "m" } %>
       </div>
-      <div class="govuk-grid-column-one-quarter clear-search hidden">
+      <div class="govuk-grid-column-one-third clear-search hidden">
         <p class="govuk-body"><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
       </div>
     </div>
