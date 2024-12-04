@@ -594,8 +594,7 @@ en:
         prospects_of_success: Is the chance of a successful outcome 50% or better?
         success_prospect: What is the chance of a successful outcome?
         specific_issue: What specific issue do you want to determine at court?
-        vary_order_title: Changes since original order was made 
-        vary_order: Details of the changes
+        vary_order: Changes since original order was made
         what_is_prohibited: What you're asking to be prohibited
       supporting_evidence:
         evidence_types:
