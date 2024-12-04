@@ -39,7 +39,7 @@
             html_attributes: { role: "complementary" },
           ) %>
 
-      <%= render partial: "layouts/primary_navigation" if @scope.in?(%i[in_progress submitted voided delete]) %>
+      <%= render partial: "layouts/primary_navigation" if @scope.in?(%i[in_progress submitted voided delete search]) %>
 
       <div class="govuk-grid-row" role="navigation">
         <div class="govuk-grid-column-one-half show-empty">
