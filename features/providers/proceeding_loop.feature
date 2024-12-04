@@ -135,6 +135,7 @@ Feature: Loop through proceeding questions
     Then I should be on a page showing "Proceeding 2 of 2"
     And I should be on a page showing "Enforcement order 11J"
     And I should see "For the substantive application, select the level of service"
+    And no radio is preselected
 
     When I choose "Family Help (Higher)"
     And I click 'Save and continue'

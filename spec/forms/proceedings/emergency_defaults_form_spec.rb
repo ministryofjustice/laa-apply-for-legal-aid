@@ -21,15 +21,20 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
            ccms_matter_code: "MINJN",
            client_involvement_type_ccms_code: "A",
            client_involvement_type_description: "Applicant/Claimant/Petitioner",
+           substantive_level_of_service: nil,
+           substantive_level_of_service_name: nil,
+           substantive_level_of_service_stage: nil,
            emergency_level_of_service: nil,
            emergency_level_of_service_name: nil,
            emergency_level_of_service_stage: nil)
   end
+
   let(:params) do
     {
       accepted_emergency_defaults: accepted,
     }
   end
+
   let(:form_params) { params.merge(model: proceeding) }
 
   describe "validation" do
@@ -134,10 +139,6 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
   describe "#save" do
     subject(:save_form) { form.save }
 
-    before { save_form unless skip_subject }
-
-    let(:skip_subject) { false }
-
     context "when the submission is valid" do
       context "and the user accepts the defaults" do
         let(:params) do
@@ -150,17 +151,31 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
         end
 
         it "updates the accepted_emergency_defaults value" do
-          expect(proceeding.reload.accepted_emergency_defaults).to be true
+          expect { save_form }.to change(proceeding, :accepted_emergency_defaults).from(nil).to(true)
         end
 
         it "sets the default values" do
-          expect(proceeding.reload.emergency_level_of_service).to eq 3
-          expect(proceeding.reload.emergency_level_of_service_name).to eq "Full Representation"
-          expect(proceeding.reload.emergency_level_of_service_stage).to eq 8
+          expect { save_form }.to change { proceeding.reload.attributes.symbolize_keys }
+            .from(
+              hash_including(
+                {
+                  emergency_level_of_service: nil,
+                  emergency_level_of_service_name: nil,
+                  emergency_level_of_service_stage: nil,
+                },
+              ),
+            ).to(
+              hash_including(
+                {
+                  emergency_level_of_service: 3,
+                  emergency_level_of_service_name: "Full Representation",
+                  emergency_level_of_service_stage: 8,
+                },
+              ),
+            )
         end
 
         context "when the default is submitted with a hearing date" do
-          let(:skip_subject) { true }
           let(:params) do
             {
               accepted_emergency_defaults: true,
@@ -174,11 +189,13 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           end
 
           it "creates a scope_limitation object" do
-            expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
-                                                                                                    meaning: "Interim order inc. return date",
-                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                                                                                    hearing_date: Date.yesterday)
+            expect { save_form }.to change(proceeding.reload.scope_limitations, :count).by(1)
+
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
+              .to have_attributes(code: "CV117",
+                                  meaning: "Interim order inc. return date",
+                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                  hearing_date: Date.yesterday)
           end
         end
 
@@ -192,7 +209,6 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
             )
           end
 
-          let(:skip_subject) { true }
           let(:params) do
             {
               accepted_emergency_defaults: true,
@@ -208,22 +224,24 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           it "deletes the existing emergency scope limitations and creates one new emergency scope limitation" do
             save_form
             expect(proceeding.scope_limitations.where(scope_type: :emergency).count).to eq 1
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
-                                                                                                    meaning: "Interim order inc. return date",
-                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                                                                                    hearing_date: Date.yesterday)
+
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
+              .to have_attributes(code: "CV117",
+                                  meaning: "Interim order inc. return date",
+                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                  hearing_date: Date.yesterday)
           end
         end
 
         context "without calling the subject" do
-          let(:skip_subject) { true }
-
           it "creates a scope_limitation object" do
-            expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
-                                                                                                    meaning: "Interim order inc. return date",
-                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                                                                                    hearing_date: nil)
+            expect { save_form }.to change(proceeding.reload.scope_limitations, :count).by(1)
+
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
+              .to have_attributes(code: "CV117",
+                                  meaning: "Interim order inc. return date",
+                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                  hearing_date: nil)
           end
         end
       end
@@ -232,20 +250,33 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
         let(:accepted) { "false" }
 
         it "updates the accepted_emergency_defaults value" do
-          expect(proceeding.reload.accepted_emergency_defaults).to be false
+          expect { save_form }.to change(proceeding, :accepted_emergency_defaults).from(nil).to(false)
         end
 
-        it "sets the default values" do
-          expect(proceeding.reload.emergency_level_of_service).to be_nil
-          expect(proceeding.reload.emergency_level_of_service_name).to be_nil
-          expect(proceeding.reload.emergency_level_of_service_stage).to be_nil
+        it "clears the default values" do
+          expect { save_form }.to change { proceeding.reload.attributes.symbolize_keys }
+          .from(
+            hash_including(
+              {
+                emergency_level_of_service: nil,
+                emergency_level_of_service_name: nil,
+                emergency_level_of_service_stage: nil,
+              },
+            ),
+          ).to(
+            hash_including(
+              {
+                emergency_level_of_service: nil,
+                emergency_level_of_service_name: nil,
+                emergency_level_of_service_stage: nil,
+              },
+            ),
+          )
         end
 
         context "without calling the subject" do
-          let(:skip_subject) { true }
-
           it "does not create a scope_limitation object" do
-            expect { save_form }.not_to change(proceeding.scope_limitations, :count)
+            expect { save_form }.not_to change(proceeding.reload.scope_limitations, :count)
           end
         end
       end
@@ -259,14 +290,13 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
       end
 
       it "generates the expected error message" do
-        expect(form.errors.map(&:attribute)).to eq [:accepted_emergency_defaults]
+        form.validate
+        expect(form.errors.map(&:attribute)).to include(:accepted_emergency_defaults)
       end
 
       context "without calling the subject" do
-        let(:skip_subject) { true }
-
         it "does not create a scope_limitation object" do
-          expect { save_form }.not_to change(proceeding.scope_limitations, :count)
+          expect { save_form }.not_to change(proceeding.reload.scope_limitations, :count)
         end
       end
     end
@@ -274,10 +304,6 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
 
   describe "#save_as_draft" do
     subject(:save_form_draft) { form.save_as_draft }
-
-    before { save_form_draft unless skip_subject }
-
-    let(:skip_subject) { false }
 
     context "when the submission is valid" do
       context "and the user accepts the defaults" do
@@ -291,17 +317,31 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
         end
 
         it "updates the accepted_emergency_defaults value" do
-          expect(proceeding.reload.accepted_emergency_defaults).to be true
+          expect { save_form_draft }.to change(proceeding, :accepted_emergency_defaults).from(nil).to(true)
         end
 
         it "sets the default values" do
-          expect(proceeding.reload.emergency_level_of_service).to eq 3
-          expect(proceeding.reload.emergency_level_of_service_name).to eq "Full Representation"
-          expect(proceeding.reload.emergency_level_of_service_stage).to eq 8
+          expect { save_form_draft }.to change { proceeding.reload.attributes.symbolize_keys }
+          .from(
+            hash_including(
+              {
+                emergency_level_of_service: nil,
+                emergency_level_of_service_name: nil,
+                emergency_level_of_service_stage: nil,
+              },
+            ),
+          ).to(
+            hash_including(
+              {
+                emergency_level_of_service: 3,
+                emergency_level_of_service_name: "Full Representation",
+                emergency_level_of_service_stage: 8,
+              },
+            ),
+          )
         end
 
         context "when the default is submitted with a hearing date" do
-          let(:skip_subject) { true }
           let(:params) do
             {
               accepted_emergency_defaults: true,
@@ -315,11 +355,13 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           end
 
           it "creates a scope_limitation object" do
-            expect { save_form_draft }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
-                                                                                                    meaning: "Interim order inc. return date",
-                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                                                                                    hearing_date: Date.yesterday)
+            expect { save_form_draft }.to change(proceeding.reload.scope_limitations, :count).by(1)
+
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
+              .to have_attributes(code: "CV117",
+                                  meaning: "Interim order inc. return date",
+                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                  hearing_date: Date.yesterday)
           end
         end
 
@@ -333,7 +375,6 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
             )
           end
 
-          let(:skip_subject) { true }
           let(:params) do
             {
               accepted_emergency_defaults: true,
@@ -349,22 +390,24 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           it "deletes the existing emergency scope limitations and creates one new emergency scope limitation" do
             save_form_draft
             expect(proceeding.scope_limitations.where(scope_type: :emergency).count).to eq 1
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
-                                                                                                    meaning: "Interim order inc. return date",
-                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                                                                                    hearing_date: Date.yesterday)
+
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
+              .to have_attributes(code: "CV117",
+                                  meaning: "Interim order inc. return date",
+                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                  hearing_date: Date.yesterday)
           end
         end
 
         context "without calling the subject" do
-          let(:skip_subject) { true }
-
           it "creates a scope_limitation object" do
-            expect { save_form_draft }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
-                                                                                                    meaning: "Interim order inc. return date",
-                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                                                                                    hearing_date: nil)
+            expect { save_form_draft }.to change(proceeding.reload.scope_limitations, :count).by(1)
+
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
+              .to have_attributes(code: "CV117",
+                                  meaning: "Interim order inc. return date",
+                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                  hearing_date: nil)
           end
         end
       end
@@ -373,20 +416,33 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
         let(:accepted) { "false" }
 
         it "updates the accepted_emergency_defaults value" do
-          expect(proceeding.reload.accepted_emergency_defaults).to be false
+          expect { save_form_draft }.to change(proceeding, :accepted_emergency_defaults).from(nil).to(false)
         end
 
-        it "sets the default values" do
-          expect(proceeding.reload.emergency_level_of_service).to be_nil
-          expect(proceeding.reload.emergency_level_of_service_name).to be_nil
-          expect(proceeding.reload.emergency_level_of_service_stage).to be_nil
+        it "clears the default values" do
+          expect { save_form_draft }.to change { proceeding.reload.attributes.symbolize_keys }
+          .from(
+            hash_including(
+              {
+                emergency_level_of_service: nil,
+                emergency_level_of_service_name: nil,
+                emergency_level_of_service_stage: nil,
+              },
+            ),
+          ).to(
+            hash_including(
+              {
+                emergency_level_of_service: nil,
+                emergency_level_of_service_name: nil,
+                emergency_level_of_service_stage: nil,
+              },
+            ),
+          )
         end
 
         context "without calling the subject" do
-          let(:skip_subject) { true }
-
           it "does not create a scope_limitation object" do
-            expect { save_form_draft }.not_to change(proceeding.scope_limitations, :count)
+            expect { save_form_draft }.not_to change(proceeding.reload.scope_limitations, :count)
           end
         end
       end
@@ -395,13 +451,12 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
     context "when the user doesn't answer the question" do
       let(:accepted) { "" }
 
-      it "is invalid" do
+      it "is valid" do
+        save_form_draft
         expect(form).to be_valid
       end
 
       context "without calling the subject" do
-        let(:skip_subject) { true }
-
         it "does not create a scope_limitation object" do
           expect { save_form_draft }.not_to change(proceeding.scope_limitations, :count)
         end

@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.2
+      - Faraday v2.12.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,21 +21,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Sep 2022 14:15:06 GMT
+      - Wed, 04 Dec 2024 14:36:51 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '477'
       Connection:
       - keep-alive
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
-      - 1; mode=block
+      - '0'
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Permitted-Cross-Domain-Policies:
       - none
       Referrer-Policy:
@@ -47,11 +45,11 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1c2d31dd766c9ece9091e75f171659c2
+      - ebfc0cbc8bf01e01ab66b932e03b20e5
       X-Runtime:
-      - '0.008945'
+      - '0.011003'
       Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
+      - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA001","delegated_functions_used":true,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
@@ -59,5 +57,5 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Wed, 07 Sep 2022 14:15:06 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Wed, 04 Dec 2024 14:36:51 GMT
+recorded_with: VCR 6.3.1

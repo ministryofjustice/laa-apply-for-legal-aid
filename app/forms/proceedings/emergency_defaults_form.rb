@@ -32,12 +32,19 @@ module Proceedings
     end
 
     def save
-      return false unless super
+      return false unless valid?
 
       model.scope_limitations.where(scope_type: :emergency).destroy_all
 
-      case accepted_emergency_defaults&.to_s
-      when "true"
+      if accepted_emergency_defaults&.to_s == "false"
+        attributes[:emergency_level_of_service] = nil
+        attributes[:emergency_level_of_service_name] = nil
+        attributes[:emergency_level_of_service_stage] = nil
+      else
+        model.update!(emergency_level_of_service:,
+                      emergency_level_of_service_name:,
+                      emergency_level_of_service_stage:)
+
         new_scope = {
           scope_type: :emergency,
           code: delegated_functions_scope_limitation_code,
@@ -46,11 +53,9 @@ module Proceedings
         }
         new_scope[:hearing_date] = hearing_date if hearing_date.present?
         model.scope_limitations.create!(new_scope)
-      else
-        attributes[:emergency_level_of_service] = nil
-        attributes[:emergency_level_of_service_name] = nil
-        attributes[:emergency_level_of_service_stage] = nil
       end
+
+      super
     end
     alias_method :save!, :save
 
