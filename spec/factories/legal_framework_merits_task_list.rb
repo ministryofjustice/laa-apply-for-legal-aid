@@ -11,6 +11,10 @@ FactoryBot.define do
       serialized_data { build(:legal_framework_serializable_merits_task_list, :da001_da004_se014).to_yaml }
     end
 
+    trait :da001_da004_as_defendant_se014 do
+      serialized_data { build(:legal_framework_serializable_merits_task_list, :da001_da004_as_defendant_se014).to_yaml }
+    end
+
     trait :da001_as_defendant do
       serialized_data { build(:legal_framework_serializable_merits_task_list, :da001_as_defendant).to_yaml }
     end

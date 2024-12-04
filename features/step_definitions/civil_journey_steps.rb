@@ -892,7 +892,10 @@ Given("I complete the passported journey as far as check your answers with an ov
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
-Given("I complete the journey as far as check passported answers with multiple proceedings") do
+Given("I complete the journey as far as check merits answers with multiple proceedings") do
+  matter_opposition = create(:matter_opposition)
+  allegation = create(:allegation)
+  undertaking = create(:undertaking)
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -907,17 +910,22 @@ Given("I complete the journey as far as check passported answers with multiple p
     :with_gateway_evidence,
     :with_policy_disregards,
     :with_benefits_transactions,
-    explicit_proceedings: %i[da001 da005],
+    :with_involved_children,
+    :with_opponent,
+    matter_opposition:,
+    allegation:,
+    undertaking:,
+    explicit_proceedings: %i[da001 da004 se014],
     set_lead_proceeding: :da001,
   )
-  create(:legal_framework_merits_task_list, :da001_da005_as_applicant, legal_aid_application: @legal_aid_application)
+  create(:legal_framework_merits_task_list, :da001_da004_as_defendant_se014, legal_aid_application: @legal_aid_application)
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
 
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
-Given("I complete the journey as far as check merits answers with an SCA proceeding without merits tasks") do
+Given("I complete the journey as far as check merits answers with SCA proceedings with merits tasks") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_non_passported_state_machine,
@@ -926,10 +934,11 @@ Given("I complete the journey as far as check merits answers with an SCA proceed
     :with_applicant,
     :with_opponent,
     :checking_merits_answers,
-    explicit_proceedings: %i[pb059],
-    set_lead_proceeding: :pb059,
+    explicit_proceedings: %i[pb003 pb059],
+    set_lead_proceeding: :pb003,
   )
-  create(:legal_framework_merits_task_list, :pb059_with_no_tasks, legal_aid_application: @legal_aid_application)
+  @legal_aid_application.proceedings.find_by(ccms_code: "PB003").update!(relationship_to_child: "biological")
+  create(:legal_framework_merits_task_list, :pb003_pb059, legal_aid_application: @legal_aid_application)
   @legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
