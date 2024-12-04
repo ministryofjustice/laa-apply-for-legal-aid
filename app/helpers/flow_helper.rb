@@ -8,7 +8,6 @@ module FlowHelper
     continue_button_text: t("generic.save_and_continue"),
     draft_button_text: t("generic.save_and_come_back_later")
   )
-
     form_with(url:, method:, local: true) do |form|
       next_action_buttons(
         show_continue:,
@@ -30,7 +29,6 @@ module FlowHelper
     continue_button_text: t("generic.save_and_continue"),
     draft_button_text: t("generic.save_and_come_back_later")
   )
-
     render(
       "shared/forms/next_action_buttons",
       continue_id:,
