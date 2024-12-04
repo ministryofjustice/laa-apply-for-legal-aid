@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.9.0
+      - Faraday v2.12.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,11 +21,11 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 23 Apr 2024 10:50:28 GMT
+      - Mon, 02 Dec 2024 14:28:26 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '1291'
+      - '1337'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -41,18 +41,18 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"0628cdb3a0d7f056459a0eb5a468514c"
+      - W/"2e821012a1459f1865a3fbd2f0effcc3"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f7015085252721418097b4faa9488c25
+      - 2143dba9fa6901b7b5c08068371c6019
       X-Runtime:
-      - '0.015309'
+      - '0.015725'
       Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
+      - max-age=31536000; includeSubDomains
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJzdWNjZXNzIjp0cnVlLCJjY21zX2NvZGUiOiJTRTAxNCIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKHJlc2lkZW5jZSkiLCJjY21zX2NhdGVnb3J5X2xhd19jb2RlIjoiTUFUIiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwibmFtZSI6ImNoaWxkX2FycmFuZ2VtZW50c19vcmRlcl9yZXNpZGVuY2UiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUiLCJmdWxsX3M4X29ubHkiOmZhbHNlLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgiLCJjb3N0X2xpbWl0YXRpb25zIjp7InN1YnN0YW50aXZlIjp7InN0YXJ0X2RhdGUiOiIxOTcwLTAxLTAxIiwidmFsdWUiOiIyNTAwMC4wIn0sImRlbGVnYXRlZF9mdW5jdGlvbnMiOnsic3RhcnRfZGF0ZSI6IjIwMjEtMDktMTMiLCJ2YWx1ZSI6IjIyNTAuMCJ9fSwiZGVmYXVsdF9zY29wZV9saW1pdGF0aW9ucyI6eyJzdWJzdGFudGl2ZSI6eyJjb2RlIjoiRk0wNTkiLCJtZWFuaW5nIjoiRkhIIENoaWxkcmVuIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIEZhbWlseSBIZWxwIChIaWdoZXIpIGFuZCB0byBhbGwgc3RlcHMgbmVjZXNzYXJ5IHRvIG5lZ290aWF0ZSBhbmQgY29uY2x1ZGUgYSBzZXR0bGVtZW50LiBUbyBpbmNsdWRlIHRoZSBpc3N1ZSBvZiBwcm9jZWVkaW5ncyBhbmQgcmVwcmVzZW50YXRpb24gaW4gdGhvc2UgcHJvY2VlZGluZ3Mgc2F2ZSBpbiByZWxhdGlvbiB0byBvciBhdCBhIGNvbnRlc3RlZCBmaW5hbCBoZWFyaW5nLiJ9LCJkZWxlZ2F0ZWRfZnVuY3Rpb25zIjp7ImNvZGUiOiJDVjExNyIsIm1lYW5pbmciOiJJbnRlcmltIG9yZGVyIGluYy4gcmV0dXJuIGRhdGUiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gYWxsIHN0ZXBzIG5lY2Vzc2FyeSB0byBhcHBseSBmb3IgYW4gaW50ZXJpbSBvcmRlcjsgd2hlcmUgYXBwbGljYXRpb24gaXMgbWFkZSB3aXRob3V0IG5vdGljZSB0byBpbmNsdWRlIHJlcHJlc2VudGF0aW9uIG9uIHRoZSByZXR1cm4gZGF0ZS4ifX0sInNlcnZpY2VfbGV2ZWxzIjpbeyJsZXZlbCI6MSwibmFtZSI6IkZhbWlseSBIZWxwIChIaWdoZXIpIiwic3RhZ2UiOjEsInByb2NlZWRpbmdfZGVmYXVsdCI6dHJ1ZX0seyJsZXZlbCI6MywibmFtZSI6IkZ1bGwgUmVwcmVzZW50YXRpb24iLCJzdGFnZSI6OCwicHJvY2VlZGluZ19kZWZhdWx0IjpmYWxzZX1dfQ==
-  recorded_at: Tue, 23 Apr 2024 10:50:28 GMT
-recorded_with: VCR 6.2.0
+        eyJzdWNjZXNzIjp0cnVlLCJjY21zX2NvZGUiOiJTRTAxNCIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKENBTykgLSByZXNpZGVuY2UiLCJjY21zX2NhdGVnb3J5X2xhd19jb2RlIjoiTUFUIiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwibmFtZSI6ImNoaWxkX2FycmFuZ2VtZW50c19vcmRlcl9yZXNpZGVuY2UiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUiLCJmdWxsX3M4X29ubHkiOmZhbHNlLCJzY2FfY29yZSI6ZmFsc2UsInNjYV9yZWxhdGVkIjpmYWxzZSwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlciI6InNlY3Rpb24gOCBjaGlsZHJlbiAoUzgpIiwiY29zdF9saW1pdGF0aW9ucyI6eyJzdWJzdGFudGl2ZSI6eyJzdGFydF9kYXRlIjoiMTk3MC0wMS0wMSIsInZhbHVlIjoiMjUwMDAuMCJ9LCJkZWxlZ2F0ZWRfZnVuY3Rpb25zIjp7InN0YXJ0X2RhdGUiOiIyMDIxLTA5LTEzIiwidmFsdWUiOiIyMjUwLjAifX0sImRlZmF1bHRfc2NvcGVfbGltaXRhdGlvbnMiOnsic3Vic3RhbnRpdmUiOnsiY29kZSI6IkZNMDU5IiwibWVhbmluZyI6IkZISCBDaGlsZHJlbiIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byBGYW1pbHkgSGVscCAoSGlnaGVyKSBhbmQgdG8gYWxsIHN0ZXBzIG5lY2Vzc2FyeSB0byBuZWdvdGlhdGUgYW5kIGNvbmNsdWRlIGEgc2V0dGxlbWVudC4gVG8gaW5jbHVkZSB0aGUgaXNzdWUgb2YgcHJvY2VlZGluZ3MgYW5kIHJlcHJlc2VudGF0aW9uIGluIHRob3NlIHByb2NlZWRpbmdzIHNhdmUgaW4gcmVsYXRpb24gdG8gb3IgYXQgYSBjb250ZXN0ZWQgZmluYWwgaGVhcmluZy4ifSwiZGVsZWdhdGVkX2Z1bmN0aW9ucyI6eyJjb2RlIjoiQ1YxMTciLCJtZWFuaW5nIjoiSW50ZXJpbSBvcmRlciBpbmMuIHJldHVybiBkYXRlIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIGFsbCBzdGVwcyBuZWNlc3NhcnkgdG8gYXBwbHkgZm9yIGFuIGludGVyaW0gb3JkZXI7IHdoZXJlIGFwcGxpY2F0aW9uIGlzIG1hZGUgd2l0aG91dCBub3RpY2UgdG8gaW5jbHVkZSByZXByZXNlbnRhdGlvbiBvbiB0aGUgcmV0dXJuIGRhdGUuIn19LCJzZXJ2aWNlX2xldmVscyI6W3sibGV2ZWwiOjEsIm5hbWUiOiJGYW1pbHkgSGVscCAoSGlnaGVyKSIsInN0YWdlIjoxLCJwcm9jZWVkaW5nX2RlZmF1bHQiOnRydWV9LHsibGV2ZWwiOjMsIm5hbWUiOiJGdWxsIFJlcHJlc2VudGF0aW9uIiwic3RhZ2UiOjgsInByb2NlZWRpbmdfZGVmYXVsdCI6ZmFsc2V9XX0=
+  recorded_at: Mon, 02 Dec 2024 14:28:26 GMT
+recorded_with: VCR 6.3.1
