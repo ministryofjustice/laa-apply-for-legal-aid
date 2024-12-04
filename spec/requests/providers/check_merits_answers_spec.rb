@@ -16,10 +16,12 @@ RSpec.describe "check merits answers requests" do
              :with_involved_children,
              :provider_entering_merits,
              domestic_abuse_summary:,
+             matter_opposition:,
              explicit_proceedings: %i[da001 se014])
     end
     let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
     let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
+    let(:matter_opposition) { create(:matter_opposition) }
 
     before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
@@ -57,22 +59,28 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "displays the correct URLs for changing values" do
-        expect(response.body).to have_change_link(:incident_details, providers_legal_aid_application_date_client_told_incident_path)
-        expect(response.body).to have_change_link(:opponents, providers_legal_aid_application_has_other_opponent_path(application))
-        expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_date_client_told_incident_path)
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_has_other_opponent_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_opponents_mental_capacity_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_domestic_abuse_summary_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_has_other_involved_children_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_matter_opposed_reason_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_in_scope_of_laspo_path(application))
+        expect(response.body).to have_link("Change", href: providers_legal_aid_application_statement_of_case_path(application))
+        expect(response.body).to have_link("Change", href: providers_merits_task_list_linked_children_path(application.proceedings.find_by(ccms_code: "SE014")))
         application.proceedings.each do |proceeding|
           expect(response.body).to have_change_link(:success_likely,
                                                     providers_merits_task_list_chances_of_success_index_path(proceeding))
         end
       end
 
-      it "displays the question When did your client tell you about the latest domestic abuse incident" do
-        expect(response.body).to include(I18n.t("shared.forms.date_input_fields.told_on_label"))
+      it "displays the question Date your client told you about the latest incident details" do
+        expect(response.body).to include(I18n.t("shared.check_answers.latest_incident_details.notification_of_latest_incident"))
         expect(response.body).to include(application.latest_incident.told_on.to_s)
       end
 
-      it "displays the question When did the incident occur?" do
-        expect(response.body).to include(I18n.t("shared.forms.date_input_fields.occurred_on_label"))
+      it "displays the question Date of incident" do
+        expect(response.body).to include(I18n.t("shared.check_answers.latest_incident_details.date_of_latest_incident"))
         expect(response.body).to include(application.latest_incident.occurred_on.to_s)
       end
 
