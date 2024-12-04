@@ -51,7 +51,7 @@ module HMRC
         errors << error(:income, "income must be an array") unless income.is_a?(Array)
 
         errors << error(:income, "inPayPeriod1 must be numeric") if income&.any? do |payment|
-          !payment&.dig("grossEarningsForNics")&.dig("inPayPeriod1").is_a?(Numeric)
+          !payment&.dig("grossEarningsForNics", "inPayPeriod1").is_a?(Numeric)
         end
 
         errors << error(:income, "paymentDate must be a valid iso8601 formatted date") if income&.any? do |payment|
