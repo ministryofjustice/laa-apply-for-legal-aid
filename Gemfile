@@ -114,6 +114,7 @@ group :development, :test do
   gem "nokogiri", ">= 1.12.5"
   gem "overcommit"
   gem "pry-byebug"
+  gem "rails-i18n", "< 8.0.0" # TODO: remove entire line when updating to Rails 8
   gem "rspec_junit_formatter"
   gem "rubocop-govuk", require: false
   gem "rubocop-performance"
