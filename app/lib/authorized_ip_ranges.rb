@@ -20,7 +20,7 @@ class AuthorizedIpRanges
 private
 
   def parse_ipaddrs_config
-    cidr_hash = YAML.load_file(Rails.root.join("config/ipaddrs.crypt.yml"))
+    cidr_hash = YAML.load_file(Rails.root.join("config/ipaddrs.yml"))
     cidr_array = cidr_hash.map { |_name, ranges| ranges }.flatten
     cidr_array.map { |cidr| IPAddr.new(cidr) }
   end

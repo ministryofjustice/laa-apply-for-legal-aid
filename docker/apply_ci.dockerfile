@@ -8,5 +8,4 @@ RUN sudo apt-get install -y --no-install-recommends \
                             postgresql-client \
                             clamav-daemon \
                             clamav \
-                            clamdscan \
-                            git-crypt
+                            clamdscan

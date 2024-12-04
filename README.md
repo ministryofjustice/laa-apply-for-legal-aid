@@ -72,15 +72,7 @@ brew bundle
 
 ## Initial setup
 
-Git-crypt is used for encryption. It uses either your personal public key or a symmetric key.
-
-1. To obtain the symmetric key you will need to get access to 1Password. Liase with a team member for this. Once you have the the key you can unlock:
-
-```sh
-git-crypt unlock path-to-symmetric-key
-```
-
-2. Copy the `.env.sample` file and name the new file `.env.development`
+1. Copy the `.env.sample` file and name the new file `.env.development`
 
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
 ```bash
@@ -113,29 +105,6 @@ for JS and CSS changes.
 ```
 bin/dev
 ```
-
-### Encrypting sensitive data
-We use git-crypt to encrypt sensitive data so that it can be stored in the same repo as all the other code,
-yet still be inaccessible to unauthorised users.
-
-#### Adding a new encrypted file
-This can be a bit tricky, so follow these steps:
-- ```git-crypt unlock <PATH_TO_FILE_CONTAINING_KEY>```
-- Add a new line to `.gitattributes` to ensure the new file is encrypted
-
-  ```<path_to_file_to_be_encrypted> filter=git-crypt diff=git-crypt```
-- Add the file you want to be encrypted
-- Add the new file to git, and commit it
-  ```git add .```
-
-  ```git comit -m '<message>```
-
-- Lock the repo
-  ```git-crypt lock```
-
-You should now check by looking at the file either in your editor or on the command line to ensure the
-file you've just added is in fact encrypted.
-
 
 ### Malware check of uploaded files
 
@@ -238,10 +207,6 @@ will cause any failing tests or unhandled exceptions to automatically open a `pr
 The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid) but requires approval to the desired environment.
 
 A build is only triggered by Circle CI when a pull request is opened in GitHub, this also applies to `Draft` pull requests.
-
-**NOTE:** **git-crypt** is required to store secrets required for **uat**, **staging** and **production** environments.
-To be able to modify those secrets, **git-crypt** needs to be set up according to the following
-[guide](https://user-guide.cloud-platform.service.justice.gov.uk/tasks.html#git-crypt).
 
 * For more information on howto setup **Helm** in your local environment refer to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/002-app-deploy-helm/#installing-and-configuring-helm-and-tiller).
 * For more deployment information refer to the specific [README](./helm_deploy/apply-for-legal-aid/README.md)
