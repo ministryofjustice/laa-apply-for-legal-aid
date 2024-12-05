@@ -25,3 +25,15 @@ RSpec/AnyInstance:
     - 'spec/services/ccms/submitters/obtain_case_reference_service_spec.rb'
     - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
     - 'spec/services/metrics/send_metrics_spec.rb'
+
+Style/SafeNavigationChainLength:
+  Exclude:
+    - app/controllers/concerns/address_handling.rb
+    - app/models/uploaded_evidence_collection.rb
+    - app/presenters/applicant_account_presenter.rb
+    - app/services/flow/steps/addresses/correspondence_address_choices_step.rb
+    - app/services/reports/base_report_creator.rb
+    - spec/i18n_spec.rb
+    - app/views/providers/link_application/confirm_links/show.html.erb
+    - app/views/providers/uploaded_evidence_collections/_upload_evidence.html.erb
+    - app/views/shared/check_answers/_assets.html.erb
