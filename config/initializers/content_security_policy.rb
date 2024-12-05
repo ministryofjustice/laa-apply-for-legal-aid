@@ -16,7 +16,8 @@ Rails.application.config.content_security_policy do |policy|
                     "https://www.googletagmanager.com"
   policy.connect_src :self,
                      GOOGLE_ANALYTICS_DOMAIN,
-                     "https://*.justice.gov.uk"
+                     "https://*.justice.gov.uk",
+                     "http://127.0.0.1:3000"
 end
 Rails.application.config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
 Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
