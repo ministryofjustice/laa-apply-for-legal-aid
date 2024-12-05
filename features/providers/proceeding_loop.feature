@@ -259,3 +259,80 @@ Feature: Loop through proceeding questions
 
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a National Insurance number?"
+
+  Scenario: No preselected emergency or substantive levels of service
+    Given I search for proceeding type "Enforcement order 11J"
+    And I choose "Enforcement order 11J"
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Do you want to add another proceeding?"
+    And I should be on a page showing "You have added 1 proceeding"
+    And I should be on a page showing "Enforcement order 11J"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page with title "Enforcement order 11J"
+    And I should be on a page showing "What is your client's role in this proceeding?"
+
+    When I choose "Applicant, claimant or petitioner"
+    And I click 'Save and continue'
+    And I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "Have you used delegated functions for this proceeding?"
+
+    When I choose "Yes"
+    And I enter the 'delegated functions on' date of 1 day ago
+    And I click 'Save and continue'
+    And I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "Do you want to use the default level of service and scope for the emergency application?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "For the emergency application, select the level of service"
+
+    # Test that no checkbox is prefilled
+    When I click 'Save and continue'
+    Then I should see govuk error summary "Select a level of service"
+
+    When I choose "Family Help (Higher)"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "For the emergency application, select the scope"
+
+    When I select "Blood Tests or DNA Tests"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "Do you want to use the default level of service and scope for the substantive application?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "For the substantive application, select the level of service"
+
+    # Test that no checkbox is prefilled
+    When I click 'Save and continue'
+    Then I should see govuk error summary "Select a level of service"
+
+    When I choose "Full Representation"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "Has the proceeding been listed for a final contested hearing?"
+
+    When I choose "Yes"
+    And I enter the 'date' date of 1 day ago
+    And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 1"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "For the substantive application, select the scope"
+
+    When I select "Exchange of Evidence"
+    And I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "What you're applying for"

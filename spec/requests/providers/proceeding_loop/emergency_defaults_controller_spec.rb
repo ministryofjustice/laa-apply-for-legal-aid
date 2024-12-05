@@ -2,19 +2,30 @@ require "rails_helper"
 
 RSpec.describe "EmergencyDefaultsController", :vcr do
   let(:application) do
-    create(:legal_aid_application,
-           :with_proceedings,
-           :with_delegated_functions_on_proceedings,
-           explicit_proceedings: %i[da001],
-           df_options: { DA001: [10.days.ago, 10.days.ago] },
-           substantive_application_deadline_on: 10.days.from_now)
+    create(
+      :legal_aid_application,
+      :with_proceedings,
+      :with_delegated_functions_on_proceedings,
+      explicit_proceedings: %i[da001],
+      df_options: { DA001: [10.days.ago, 10.days.ago] },
+      substantive_application_deadline_on: 10.days.from_now,
+    ).tap do |app|
+      app.proceedings.first.update!(
+        emergency_level_of_service: nil,
+        emergency_level_of_service_name: nil,
+        emergency_level_of_service_stage: nil,
+        substantive_level_of_service: nil,
+        substantive_level_of_service_name: nil,
+        substantive_level_of_service_stage: nil,
+      )
+    end
   end
-  let(:application_id) { application.id }
-  let(:proceeding_id) { application.proceedings.first.id }
+
+  let(:proceeding) { application.proceedings.first }
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/emergency_defaults/:proceeding_id" do
-    subject(:get_sd) { get "/providers/applications/#{application_id}/emergency_defaults/#{proceeding_id}" }
+    subject(:get_sd) { get "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}" }
 
     context "when the provider is not authenticated" do
       before { get_sd }
@@ -41,7 +52,7 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
   end
 
   describe "POST /providers/applications/:legal_aid_application_id/emergency_defaults/:proceeding_id" do
-    subject(:post_sd) { patch "/providers/applications/#{application_id}/emergency_defaults/#{proceeding_id}", params: }
+    subject(:post_sd) { patch "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}", params: }
 
     before { allow(DelegatedFunctionsDateService).to receive(:call).and_return(true) }
 
@@ -62,7 +73,6 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        post_sd
       end
 
       context "when the Continue button is pressed" do
@@ -78,7 +88,29 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
           end
 
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+            post_sd
+            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
+          end
+
+          it "sets the default emergency levels of service" do
+            expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+              .from(
+                hash_including(
+                  {
+                    emergency_level_of_service: nil,
+                    emergency_level_of_service_name: nil,
+                    emergency_level_of_service_stage: nil,
+                  },
+                ),
+              ).to(
+                hash_including(
+                  {
+                    emergency_level_of_service: 3,
+                    emergency_level_of_service_name: "Full Representation",
+                    emergency_level_of_service_stage: 8,
+                  },
+                ),
+              )
           end
         end
 
@@ -92,7 +124,29 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
           end
 
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application_id, proceeding_id))
+            post_sd
+            expect(response.body).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application.id, proceeding.id))
+          end
+
+          it "clears the emergency levels of service" do
+            expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+              .from(
+                hash_including(
+                  {
+                    emergency_level_of_service: nil,
+                    emergency_level_of_service_name: nil,
+                    emergency_level_of_service_stage: nil,
+                  },
+                ),
+              ).to(
+                hash_including(
+                  {
+                    emergency_level_of_service: nil,
+                    emergency_level_of_service_name: nil,
+                    emergency_level_of_service_stage: nil,
+                  },
+                ),
+              )
           end
         end
 
@@ -111,7 +165,8 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
 
           context "when the date is within the last month" do
             it "continues through the sub flow" do
-              expect(response).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application_id))
+              post_sd
+              expect(response).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application.id))
             end
           end
         end

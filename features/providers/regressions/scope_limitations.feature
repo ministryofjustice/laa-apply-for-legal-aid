@@ -82,18 +82,18 @@ Feature: Scope limitations not being set
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
     When I choose 'No'
     And I click 'Save and continue'
-
     Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nFor the emergency application, select the level of service'
-    When I click 'Save and continue'
 
+    When I choose "Family Help (Higher)"
+    And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nFor the emergency application, select the scope'
+
     # clicks back until on add_other_proceedings
     When I click link "Back"
-    When I click link "Back"
-    When I click link "Back"
-    When I click link "Back"
-    When I click link "Back"
-
+    And I click link "Back"
+    And I click link "Back"
+    And I click link "Back"
+    And I click link "Back"
     Then I should be on a page showing 'You have added 3 proceedings'
     And I should be on a page showing 'Child arrangements order (residence)'
     And I should be on a page showing 'Prohibited steps order'

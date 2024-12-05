@@ -49,6 +49,7 @@ module Proceedings
                                         meaning: substantive_scope_limitation_meaning,
                                         description: substantive_scope_limitation_description)
       end
+
       super
     end
     alias_method :save!, :save
