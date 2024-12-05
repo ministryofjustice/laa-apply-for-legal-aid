@@ -28,8 +28,14 @@ function addSearchInputListeners () {
     .addEventListener('click', (event) => {
       event.preventDefault()
       searchInputBox.value = ''
+      clearSearch()
       setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay)
     })
+}
+
+function clearSearch () {
+  const selectedItem = document.querySelector('.country-select option[selected]')
+  if (selectedItem) selectedItem.removeAttribute('selected')
 }
 
 function addErrorClasses () {
