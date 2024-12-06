@@ -2,29 +2,29 @@ module Addresses
   class NonUkHomeAddressForm < BaseForm
     form_for Address
 
-    attr_accessor :country_name, :address_line_one, :address_line_two, :city, :county, :postcode
+    attr_accessor :country_code, :address_line_one, :address_line_two, :city, :county, :postcode
 
+    validate :validate_country_code, unless: :draft?
     validates :address_line_one, presence: true, unless: :draft?
-    validate :validate_country_name, unless: :draft?
 
     def countries
       @countries ||= ::LegalFramework::NonUkHomeAddresses::All.call
     end
 
     def save
-      model.update!(country_code: get_country_code) if valid?
+      model.update!(country_name: get_country_name) if valid?
       super
     end
     alias_method :save!, :save
 
-    def validate_country_name
-      errors.add(:country_name, I18n.t("activemodel.errors.models.address.attributes.country_name.invalid")) unless countries.map(&:description).include?(country_name)
+    def validate_country_code
+      errors.add(:country_code, I18n.t("activemodel.errors.models.address.attributes.country_name.invalid")) unless countries.map(&:code).include?(country_code)
     end
 
-    def get_country_code
-      return if country_name.blank?
+    def get_country_name
+      return if country_code.blank?
 
-      countries.find { |country| country.description == country_name }.code
+      countries.find { |country| country.code == country_code }.description
     end
   end
 end
