@@ -27,9 +27,6 @@ RSpec.describe CFECivil::Components::OtherIncome do
     let!(:maintenance_week_ago) { create(:bank_transaction, :maintenance_in, bank_account:, amount: 125.0, happened_at: 1.week.ago) }
     let!(:friends_today) { create(:bank_transaction, :friends_or_family, bank_account:, amount: 60.0, happened_at: Time.zone.today) }
     let!(:friends_week_ago) { create(:bank_transaction, :friends_or_family, bank_account:, amount: 60.0, happened_at: 1.week.ago) }
-    let!(:student_loan_today) { create(:bank_transaction, :student_loan, bank_account:, amount: 355.66, happened_at: Time.zone.today) }
-    let!(:student_loan_week_ago) { create(:bank_transaction, :student_loan, bank_account:, amount: 355.67, happened_at: 1.week.ago) }
-    let!(:student_loan_two_week_ago) { create(:bank_transaction, :student_loan, bank_account:, amount: 355.68, happened_at: 2.weeks.ago) }
     let(:today) { Time.zone.today.strftime("%Y-%m-%d") }
     let(:one_week_ago) { 1.week.ago.strftime("%Y-%m-%d") }
     let(:two_weeks_ago) { 2.weeks.ago.strftime("%Y-%m-%d") }
@@ -49,14 +46,6 @@ RSpec.describe CFECivil::Components::OtherIncome do
             payments: [
               { date: one_week_ago, amount: 125.0, client_id: maintenance_week_ago.id },
               { date: today, amount: 250.0, client_id: maintenance_today.id },
-            ],
-          },
-          {
-            source: "Student loan",
-            payments: [
-              { date: two_weeks_ago, amount: 355.68, client_id: student_loan_two_week_ago.id },
-              { date: one_week_ago, amount: 355.67, client_id: student_loan_week_ago.id },
-              { date: today, amount: 355.66, client_id: student_loan_today.id },
             ],
           },
         ],

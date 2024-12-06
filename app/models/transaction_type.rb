@@ -10,7 +10,6 @@ class TransactionType < ApplicationRecord
       friends_or_family
       maintenance_in
       property_or_lodger
-      student_loan
       pension
     ],
     debit: %i[
@@ -30,7 +29,6 @@ class TransactionType < ApplicationRecord
     friends_or_family
     maintenance_in
     property_or_lodger
-    student_loan
     pension
   ].freeze
 

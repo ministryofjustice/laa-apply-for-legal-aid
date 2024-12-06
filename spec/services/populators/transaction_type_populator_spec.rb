@@ -9,7 +9,7 @@ module Populators
       let(:credit_names) { names[:credit] }
       let(:debit_names) { names[:debit] }
       let(:total) { credit_names.length + debit_names.length }
-      let(:archived_credit_names) { %i[student_loan excluded_benefits] }
+      let(:archived_credit_names) { %i[excluded_benefits] }
 
       it "creates instances from names" do
         expect { call }.to change(TransactionType, :count).by(total)
@@ -45,16 +45,6 @@ module Populators
           }.to change(TransactionType, :count).by(total)
         end
 
-        it "does not set archived_at for aleady deactivated student_loan" do
-          travel_to(yesterday) do
-            described_class.call
-            expect(TransactionType.find_by(name: "student_loan").archived_at).to be_within(1.second).of(yesterday)
-          end
-
-          described_class.call
-          expect(TransactionType.find_by(name: "student_loan").archived_at).to be_within(1.second).of(yesterday)
-        end
-
         it "does not set archived_at for aleady deactivated excluded_benefits" do
           travel_to(yesterday) do
             described_class.call
@@ -74,11 +64,6 @@ module Populators
         it "sets the archived_at date" do
           call
           expect(TransactionType.find_by(name: "council_tax").archived_at).not_to be_nil
-        end
-
-        it "explicitly sets the archived_at date for student_loan" do
-          call
-          expect(TransactionType.find_by(name: "student_loan").archived_at).not_to be_nil
         end
 
         it "explicitly sets the archived_at date for excluded_benefits" do

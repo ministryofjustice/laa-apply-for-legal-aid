@@ -69,11 +69,6 @@ FactoryBot.define do
       transaction_type { TransactionType.where(name: "property_or_lodger").first || create(:transaction_type, :property_or_lodger) }
     end
 
-    trait :student_loan do
-      operation { "credit" }
-      transaction_type { TransactionType.where(name: "student_loan").first || create(:transaction_type, :student_loan) }
-    end
-
     trait :pension do
       operation { "credit" }
       transaction_type { TransactionType.where(name: "pension").first || create(:transaction_type, :pension) }

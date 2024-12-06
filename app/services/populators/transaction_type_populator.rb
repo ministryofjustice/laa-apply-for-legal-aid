@@ -34,16 +34,15 @@ module Populators
     # "deactivation/archiving" this would mean the test environment and UAT branches would not reflect the
     # real world data, as they would not be seeded with that transaction type at all. Archiving a type explicitly,
     # aside from being clearer, therefore allows us identify test suite failures and manually test on UAT with
-    # like-real-world data as well as enable use to conditional logic for existing applications with that transaction
-    # tyoe that we may want to handle differently
+    # like-real-world data as well as enable use of conditional logic for existing applications with that transaction
+    # type that we may want to handle differently.
     #
-    # After a period of time and once we are confident the impact would be minimal we could then remove the transaction type
+    # After a period of time, once we are confident the impact would be minimal, we could then remove the transaction type
     # from the TransactionType::NAMES constant AND possibly delete the old transaction type (and associated bank transactions??)
     #
     def mark_old_as_archived
       TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update!(archived_at: Time.current)
 
-      TransactionType.active.find_by(name: "student_loan")&.update!(archived_at: Time.current)
       TransactionType.active.find_by(name: "excluded_benefits")&.update!(archived_at: Time.current)
     end
 
