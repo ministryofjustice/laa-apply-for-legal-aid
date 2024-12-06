@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_15_143002) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_02_152952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -303,7 +303,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_15_143002) do
     t.string "account_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["legal_aid_application_id", "name"], name: "index_capital_disregards_on_legal_aid_application_id_and_name", unique: true
+    t.index ["legal_aid_application_id", "name", "mandatory"], name: "idx_on_legal_aid_application_id_name_mandatory_f4f47d6261", unique: true
     t.index ["legal_aid_application_id"], name: "index_capital_disregards_on_legal_aid_application_id"
   end
 
