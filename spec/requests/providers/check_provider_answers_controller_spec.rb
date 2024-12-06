@@ -101,8 +101,8 @@ RSpec.describe Providers::CheckProviderAnswersController do
         expect(unescaped_response_body).to include(applicant.first_name)
         expect(unescaped_response_body).to include(applicant.last_name)
         expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
-        expect(unescaped_response_body).to include(applicant.national_insurance_number)
-        expect(unescaped_response_body).to include("Does your client have a partner?")
+        expect(unescaped_response_body).to include("JA 12 34 56 D")
+        expect(unescaped_response_body).to include("Client has a partner")
       end
 
       it "formats the address correctly" do
@@ -145,7 +145,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           expect(unescaped_response_body).to include(applicant.first_name)
           expect(unescaped_response_body).to include(applicant.last_name)
           expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
-          expect(unescaped_response_body).to include(applicant.national_insurance_number)
+          expect(unescaped_response_body).to include("JA 12 34 56 D")
           expect(unescaped_response_body).to include(address.address_line_one)
           expect(unescaped_response_body).to include(address.city)
           expect(unescaped_response_body).to include(address.pretty_postcode)
@@ -183,7 +183,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           expect(unescaped_response_body).to include(partner.first_name)
           expect(unescaped_response_body).to include(partner.last_name)
           expect(unescaped_response_body).to include(partner.date_of_birth.to_s)
-          expect(unescaped_response_body).to include(partner.national_insurance_number)
+          expect(unescaped_response_body).to include("JA 12 34 56 D")
         end
       end
     end
