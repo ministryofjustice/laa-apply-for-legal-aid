@@ -45,6 +45,7 @@ RSpec.describe Admin::SettingsController do
           home_address: "true",
           special_childrens_act: "true",
           public_law_family: "true",
+          service_maintenance_mode: "true",
         },
       }
     end
@@ -62,6 +63,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.collect_hmrc_data?).to be(true)
       expect(setting.special_childrens_act?).to be(true)
       expect(setting.public_law_family?).to be(true)
+      expect(setting.service_maintenance_mode?).to be(true)
     end
 
     it "create settings if they do not exist" do

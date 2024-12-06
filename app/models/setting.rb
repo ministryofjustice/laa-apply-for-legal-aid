@@ -39,6 +39,10 @@ class Setting < ApplicationRecord
     setting.public_law_family
   end
 
+  def self.service_maintenance_mode?
+    setting.service_maintenance_mode
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

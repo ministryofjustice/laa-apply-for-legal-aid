@@ -25,7 +25,8 @@ module Admin
                                       :linked_applications,
                                       :collect_hmrc_data,
                                       :special_childrens_act,
-                                      :public_law_family)
+                                      :public_law_family,
+                                      :service_maintenance_mode)
     end
 
     def setting

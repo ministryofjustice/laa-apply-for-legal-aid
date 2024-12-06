@@ -76,6 +76,7 @@ en:
           collect_hmrc_data: Collect HMRC data
           special_childrens_act: Enable Special Childrens Act
           public_law_family: Enable Public Law Family
+          service_maintenance_mode: Enable maintenance mode
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -88,6 +89,7 @@ en:
           collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
           special_childrens_act: Select Yes to enable the special childrens act matter type
           public_law_family: Select Yes to enable Public Law Family feature
+          :service_maintenance_mode: Select Yes to put the service into maintenance mode
 
       update:
         notice: Settings have been updated

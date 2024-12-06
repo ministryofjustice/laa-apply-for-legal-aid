@@ -9,7 +9,8 @@ module Settings
                   :linked_applications,
                   :collect_hmrc_data,
                   :special_childrens_act,
-                  :public_law_family
+                  :public_law_family,
+                  :service_maintenance_mode
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -19,6 +20,7 @@ module Settings
               :collect_hmrc_data,
               :special_childrens_act,
               :public_law_family,
+              :service_maintenance_mode,
               presence: true
   end
 end
