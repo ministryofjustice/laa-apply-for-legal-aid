@@ -691,7 +691,7 @@ global_means:
     generate_block?: false
   GB_INPUT_B_9WP3_353A:
     generate_block?: true
-    value: '#income_type_student_loan?'
+    value: '#applicant_student_finance?'
     br100_meaning: 'Client Student Income: Receives a student loan/grant or bursary?'
     response_type: boolean
     user_defined: true
