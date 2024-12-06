@@ -16,7 +16,6 @@ en:
         property_or_lodger: Income from a property or lodger
         rent_or_mortgage: Housing payments
         salary: Salary or wages
-        student_loan: Student loan or grant
       providers:
         benefits: Benefits, charitable or government payments
         child_care: Childcare payments
@@ -30,7 +29,6 @@ en:
         property_or_lodger: Income from a property or lodger
         rent_or_mortgage: Housing payments
         salary: Salary or wages
-        student_loan: Student loan or grant
       error_message:
         benefits: in benefits
         friends_or_family: from friends or family
@@ -59,7 +57,6 @@ en:
       property_or_lodger: Property
       rent_or_mortgage: Housing
       salary: Salary
-      student_loan: Student loan
     page_titles:
       benefits: Select any benefits, charitable or government payments
       child_care: Select childcare payments
@@ -71,7 +68,6 @@ en:
       property_or_lodger: Select payments from a property or lodger
       rent_or_mortgage: Select housing payments
       salary: Select salary or wage payments
-      student_loan: Select student loan or grant payments
       excluded_benefits: Select Government Cost of Living Payments and disregarded benefits
     benefits:
       inset_paras: |
@@ -101,7 +97,5 @@ en:
       inset_text: Select every payment your client received from property or a lodger in the past 3 months.
     rent_or_mortgage:
       inset_text: Select every housing payment your client made in the past 3 months.
-    student_loan:
-      inset_text: Select every student loan or grant payment your client received in the past 3 months.
     pension:
       inset_text: Select every pension payment your client received in the past 3 months.
