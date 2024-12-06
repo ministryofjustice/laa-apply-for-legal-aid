@@ -131,8 +131,6 @@ module LaaApplyForLegalAid
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"
 
-    config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
-
     # TODO: Remove with Setting.means_test_review_a feature flag #
     config.x.mtr_a_start_date = Date.parse(ENV.fetch("MTR_A_START_DATE", "2024-11-20"))
 
