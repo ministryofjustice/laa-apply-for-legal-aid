@@ -502,8 +502,7 @@ en:
           confirmed: I confirm this specific issue proceeding is not for a change of name application
       vary_order:
         show:
-          h1-heading: Why are you making a new application?
-          hint-text: Tell us what has changed since the original order was made.
+          h1-heading: What has changed since the original order was made?
       is_client_biological_parent:
         show:
           page_title: Is your client the biological parent of any children involved?
@@ -1378,7 +1377,7 @@ en:
         specific_issue_html: <span class="govuk-visually-hidden">%{proceeding} </span>Specific Issue
         prohibited_steps_html: <span class="govuk-visually-hidden">%{proceeding} </span>Prohibited steps
         opponents_application_html: <span class="govuk-visually-hidden">%{proceeding} </span>Opponent application
-        vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Reason for new application
+        vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Changes since original order was made
         client_relationship_to_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Who your client is in the proceeding
         states:
           not_started: Not started
