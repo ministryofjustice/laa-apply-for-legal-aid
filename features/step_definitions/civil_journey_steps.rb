@@ -329,7 +329,7 @@ end
 Given("I start the merits application with student finance") do
   @legal_aid_application = create(
     :application,
-    :with_applicant_with_student_loan,
+    :with_applicant_with_student_finance,
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
