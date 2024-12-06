@@ -451,11 +451,9 @@ module CCMS
         end
 
         describe "GB_INPUT_B_9WP3_353A" do
-          context "when the applicant has a student loan/grant" do
-            let(:student_loan_income) { create(:transaction_type, :credit, name: "student_loan") }
-
+          context "when the applicant has student finance" do
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: student_loan_income)
+              legal_aid_application.applicant.update!(student_finance: true)
             end
 
             it "returns true" do
@@ -463,15 +461,17 @@ module CCMS
               expect(block).to have_boolean_response true
               expect(block).to be_user_defined
             end
+          end
 
-            context "when the applicant has no student loan/grant" do
-              before { legal_aid_application.transaction_types.delete_all }
+          context "when the applicant has no student finance" do
+            before do
+              legal_aid_application.applicant.update!(student_finance: false)
+            end
 
-              it "returns false" do
-                block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP3_353A")
-                expect(block).to have_boolean_response false
-                expect(block).to be_user_defined
-              end
+            it "returns false" do
+              block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP3_353A")
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
             end
           end
         end
