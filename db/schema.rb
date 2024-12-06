@@ -1017,6 +1017,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_093840) do
     t.boolean "special_childrens_act", default: false, null: false
     t.boolean "means_test_review_a", default: false, null: false
     t.boolean "public_law_family", default: false, null: false
+    t.boolean "service_maintenance_mode", default: false, null: false
   end
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
