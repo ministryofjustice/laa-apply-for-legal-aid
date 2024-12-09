@@ -25,7 +25,6 @@ module Admin
                                       :linked_applications,
                                       :collect_hmrc_data,
                                       :special_childrens_act,
-                                      :means_test_review_a,
                                       :public_law_family)
     end
 
