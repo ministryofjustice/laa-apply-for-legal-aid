@@ -115,9 +115,7 @@ Feature: Entering humanized monetary amounts on various forms
     And I should see "£2,322.22"
 
   Scenario: I can enter humanized monetary amounts like 1,000 for mandatory capital disregards
-    Given the feature flag for means_test_review_a is enabled
-    And the MTR-A start date is in the past
-    And I have completed the income and capital sections of a non-passported application with bank statement uploads post-MTRA
+    Given I have completed the income and capital sections of a non-passported application with bank statement uploads
     When I am viewing the means capital check your answers page
 
     When I click link "Change Budgeting Advances"
@@ -128,9 +126,7 @@ Feature: Entering humanized monetary amounts on various forms
     And I should see "£1,654.33"
 
   Scenario: I can enter humanized monetary amounts like 1,000 for discretionary capital disregards
-    Given the feature flag for means_test_review_a is enabled
-    And the MTR-A start date is in the past
-    And I have completed the income and capital sections of a non-passported application with bank statement uploads post-MTRA
+    Given I have completed the income and capital sections of a non-passported application with bank statement uploads
     When I am viewing the means capital check your answers page
 
     When I click link "Change Compensation, damages or ex-gratia payments for personal harm"
