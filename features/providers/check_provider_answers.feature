@@ -19,7 +19,7 @@ Feature: Checking client details answers backwards and forwards
       | Date of birth | 10 January 1980 |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | National Insurance number | JA 29 34 83 A |
-      | Client has a partner | No |
+      | Client has a partner? | No |
 
   @javascript
   Scenario: Send client's mail to another residential address
@@ -42,7 +42,7 @@ Feature: Checking client details answers backwards and forwards
       | Client has a home address? | Yes |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
       | National Insurance number | JA 29 34 83 A |
-      | Client has a partner | No |
+      | Client has a partner? | No |
 
   @javascript
   Scenario: I am able to return and amend the client's name
