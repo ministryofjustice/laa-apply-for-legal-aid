@@ -22,6 +22,7 @@ module Flow
         in_scope_of_laspos: Steps::ProviderMerits::InScopeOfLasposStep,
         nature_of_urgencies: Steps::ProviderMerits::NatureOfUrgenciesStep,
         matter_opposed_reasons: Steps::ProviderMerits::MatterOpposedReasonsStep,
+        second_appeals: Steps::ProviderMerits::SecondAppealsStep,
         chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
         success_prospects: Steps::ProviderMerits::SuccessProspectsStep,
         opponents_application: Steps::ProviderMerits::OpponentsApplicationStep,

@@ -24,6 +24,10 @@
   <% end %>
 <% end %>
 
+<% if @legal_aid_application.legal_framework_merits_task_list.includes_task?(:application, :second_appeal) %>
+  <%= render("shared/check_answers/second_appeal", read_only:) %>
+<% end %>
+
 <%= render("shared/check_answers/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
 
 <%= render("shared/check_answers/gateway_evidence", read_only:, gateway_evidence:) if gateway_evidence %>

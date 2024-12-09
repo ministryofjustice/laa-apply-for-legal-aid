@@ -368,6 +368,7 @@ Rails.application.routes.draw do
         resource :statement_of_case, only: %i[show update destroy] do
           get "/list", to: "statement_of_cases#list"
         end
+        resource :second_appeal, only: %i[show update]
       end
     end
 

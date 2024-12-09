@@ -288,6 +288,10 @@ en:
               blank: Select yes if bail conditions have been set
             bail_conditions_set_details:
               blank: Give details of the bail conditions
+        application_merits_task/appeal:
+          attributes:
+            second_appeal:
+              blank: Select yes if this is a second appeal
         opponent:
           attributes:
             police_notified_details_true:
@@ -536,6 +540,7 @@ en:
               accepted: Confirm this information is correct and that you'll get a signed declaration
             separate_representation_required:
               blank: Confirm your client wants separate representation
+
         linked_application:
           attributes:
             search_ref:

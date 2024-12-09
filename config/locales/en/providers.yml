@@ -661,6 +661,10 @@ en:
           hearing-date-set: Has a date been set for the hearing?
           hearing-date: Enter the date
           hearing-date-hint: For example, 12 11 2007
+      second_appeals:
+        show:
+          page_title: Is this a second appeal?
+          hint: This question will help us decide if a specialist caseworker should review your application.
     partners:
       about_financial_means:
         show:
@@ -1371,6 +1375,7 @@ en:
         nature_of_urgency: Nature of urgency and hearing date
         why_matter_opposed: Why the matter is opposed
         laspo: Section 8 and LASPO
+        second_appeal: The second appeal
         # Proceeding level tasks
         chances_of_success_html: <span class="govuk-visually-hidden">%{proceeding} </span>Chances of success
         children_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Children involved in this proceeding
@@ -1408,6 +1413,7 @@ en:
           opponents_application: opponents_application
           client_relationship_to_proceeding: is_client_biological_parent
           check_who_client_is: check_who_client_is
+          second_appeal: second_appeal
     merits_reports:
       show:
         heading: Merits report
