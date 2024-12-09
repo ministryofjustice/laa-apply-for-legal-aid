@@ -14,7 +14,6 @@ cy:
         property_or_lodger: regdol ro ytreporp a morf emocnI
         rent_or_mortgage: stnemyap gnisuoH
         salary: segaw ro yralaS
-        student_loan: tnarg ro naol tnedutS
       providers:
         benefits: stifeneB
         child_care: stnemyap eracdlihC
@@ -27,7 +26,6 @@ cy:
         property_or_lodger: regdol ro ytreporp a morf emocnI
         rent_or_mortgage: stnemyap gnisuoH
         salary: segaw ro yralaS
-        student_loan: tnarg ro naol tnedutS
     table_label:
       benefits: stifeneB
       child_care: eracdlihC
@@ -40,7 +38,6 @@ cy:
       property_or_lodger: ytreporP
       rent_or_mortgage: gnisuoH
       salary: yralaS
-      student_loan: naol tnedutS
     page_titles:
       benefits: stnemyap stifeneb tceleS
       child_care: stnemyap eracdlihc tceleS
@@ -52,7 +49,6 @@ cy:
       property_or_lodger: regdol ro ytreporp a morf stnemyap tceleS
       rent_or_mortgage: stnemyap gnisuoh tceleS
       salary: stnemyap egaw ro yralas tceleS
-      student_loan: stnemyap tnarg ro naol tneduts tceleS
       excluded_benefits: stnemyap stifeneb dedragersid tceleS
     benefits:
       inset_paras: |
@@ -91,9 +87,6 @@ cy:
         ruoy tnemyap yreve tceleS"
     rent_or_mortgage:
       inset_text: ".shtnom 3 tsap eht ni edam tneilc ruoy tnemyap gnisuoh yreve tceleS"
-    student_loan:
-      inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap tnarg ro naol
-        tneduts yreve tceleS"
     pension:
       inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap noisnep yreve
         tceleS"

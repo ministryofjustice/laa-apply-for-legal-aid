@@ -40,7 +40,7 @@ Given("I have completed truelayer application with merits") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
-    :with_applicant_with_student_loan,
+    :with_applicant_with_student_finance,
     :with_non_passported_state_machine,
     :with_restrictions,
     :with_vehicle,

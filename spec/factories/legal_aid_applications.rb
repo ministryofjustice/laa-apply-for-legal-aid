@@ -71,7 +71,7 @@ FactoryBot.define do
       applicant { build(:applicant, :with_address, with_bank_accounts:, same_correspondence_and_home_address: true, has_partner: false) }
     end
 
-    trait :with_applicant_with_student_loan do
+    trait :with_applicant_with_student_finance do
       transient do
         with_bank_accounts { 0 }
       end

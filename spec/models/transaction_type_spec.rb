@@ -81,7 +81,7 @@ RSpec.describe TransactionType do
     it "returns all other_income type TransactionTypes" do
       Populators::TransactionTypePopulator.call
       names = described_class.other_income.pluck(:name)
-      expect(names).to eq %w[friends_or_family maintenance_in property_or_lodger student_loan pension]
+      expect(names).to eq %w[friends_or_family maintenance_in property_or_lodger pension]
     end
   end
 
@@ -194,8 +194,8 @@ RSpec.describe TransactionType do
 
     describe "active" do
       it "does not return records with a date in archived at" do
-        described_class.find_by(name: "student_loan").update!(archived_at: Time.current)
-        expect(described_class.active.pluck(:name)).not_to include("student_loan")
+        described_class.find_by(name: "excluded_benefits").update!(archived_at: Time.current)
+        expect(described_class.active.pluck(:name)).not_to include("excluded_benefits")
       end
     end
   end
