@@ -5,7 +5,7 @@ module Flow
         path: ->(application) { Steps.urls.providers_legal_aid_application_means_restrictions_path(application) },
         forward: lambda do |application|
           if application.capture_policy_disregards?
-            Setting.means_test_review_a? ? :capital_disregards_mandatory : :policy_disregards
+            :capital_disregards_mandatory
           else
             application.passported? ? :check_passported_answers : :check_capital_answers
           end
