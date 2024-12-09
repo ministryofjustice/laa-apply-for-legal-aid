@@ -78,7 +78,7 @@ Feature: Pathways from check your answers
   @javascript @vcr
   Scenario: I go back and change the proceedings on an application with multiple proceedings
     Given I complete the journey as far as check client details with multiple proceedings selected
-    When I click Check Your Answers Change link for 'Proceedings'
+    When I click Check Your Answers summary card Change link for 'Proceedings'
     Then I should be on a page showing 'Do you want to add another proceeding?'
     And I should be on a page showing 'Inherent jurisdiction high court injunction'
     And I should be on a page showing 'Occupation order'
