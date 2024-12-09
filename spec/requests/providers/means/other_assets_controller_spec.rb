@@ -208,7 +208,6 @@ RSpec.describe "provider other assets requests" do
             let(:mtr2a_flag) { false }
 
             before do
-              allow(Setting).to receive(:means_test_review_a?).and_return(mtr2a_flag)
               allow(application).to receive(:capture_policy_disregards?).and_return(policy_disregards)
               patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
@@ -249,18 +248,8 @@ RSpec.describe "provider other assets requests" do
               end
             end
 
-            context "when MTR2A flag is on" do
-              let(:mtr2a_flag) { true }
-
-              it "redirects to the mandatory_disregards page" do
-                expect(response).to redirect_to(providers_legal_aid_application_means_capital_disregards_mandatory_path(application))
-              end
-            end
-
-            context "when MTR2A flag is off" do
-              it "redirects to the legacy policy_disregards page" do
-                expect(response).to redirect_to(providers_legal_aid_application_means_policy_disregards_path(application))
-              end
+            it "redirects to the mandatory_disregards page" do
+              expect(response).to redirect_to(providers_legal_aid_application_means_capital_disregards_mandatory_path(application))
             end
           end
         end

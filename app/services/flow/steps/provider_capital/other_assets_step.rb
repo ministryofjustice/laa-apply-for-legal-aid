@@ -7,7 +7,7 @@ module Flow
           if application.own_capital?
             :restrictions
           elsif application.capture_policy_disregards?
-            Setting.means_test_review_a? ? :capital_disregards_mandatory : :policy_disregards
+            :capital_disregards_mandatory
           else
             application.passported? ? :check_passported_answers : :check_capital_answers
           end
