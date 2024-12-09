@@ -96,9 +96,6 @@ laa_portal:
   idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
   mockSaml: "false"
 
-provider_details:
-  url: "https://ccms-pda.legalservices.gov.uk/api/providerDetails"
-
 pda:
   url: "https://laa-provider-details-api-prod.apps.live.cloud-platform.service.justice.gov.uk"
 

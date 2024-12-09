@@ -99,9 +99,6 @@ laa_portal:
 provider_details:
   url: "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails"
 
-pda:
-  url: "https://laa-provider-details-api-preprod.apps.live.cloud-platform.service.justice.gov.uk"
-
 trueLayer:
   enableMock: "true"
 
