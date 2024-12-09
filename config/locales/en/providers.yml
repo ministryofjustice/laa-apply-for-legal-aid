@@ -1792,6 +1792,38 @@ en:
         page_title: Enter your client's email address
         label: Email address
         hint: We'll use this to send your client a link to the service.
+    proceeding_interrupts:
+      related_orders:
+        show:
+          page_title: Which of these orders does this proceeding relate to?
+          hint: These are orders set out in schedule 1, part 1, paragraph 1 of LASPO.
+          orders:
+            care: Care order under section 31 Children Act
+            supervision: Supervision order
+            secure_accommodation: Secure accommodation order
+            placement: Placement order
+            adoption: Adoption order
+            emergency_protection: Emergency protection order
+            child_assessment: Child assessment order
+            parenting: Parenting orders under section 8 of the Crime and Disorder Act 1998
+            child_safety: Child safety orders under section 11 of the Crime and Disorder Act 1998
+          none_of_these: None of these orders relate to this proceeding
+      interrupts:
+        show:
+          proceeding_issue_status: &default
+            title_html: This is not a public law family matter
+            paragraph: This is because it does not relate to an application or order set out in schedule 1, part 1, paragraph 1 of LASPO.
+            option_bullets_html:
+              - select a different proceeding or matter type
+              - go back and change your answer
+              - use legal help
+            options: "You can do one of the following:"
+            proceedings: Remove the proceeding and select a new one
+          none_selected:
+            <<: *default
+            title_html: This is not a public law family matter
+            paragraph: This is because it does not relate to an application or order set out in schedule 1, part 1, paragraph 1 of LASPO.
+            proceedings: Select a different proceeding
     proceedings_sca:
       heard_togethers:
         error: Select yes if this proceeding will be heard together with any special children act proceedings
@@ -1845,6 +1877,11 @@ en:
             option_bullets_html:
               - select a different proceeding or matter type
               - go back and change your answer
+          plf_none_selected:
+            <<: *default
+            title_html: This is not a public law family matter
+            paragraph: This is because it does not relate to an application or order set out in schedule 1, part 1, paragraph 1 of LASPO.
+            proceedings: Select a different proceeding
       child_subjects:
         error: Select yes if your client is the child subject of this proceeding
         show:

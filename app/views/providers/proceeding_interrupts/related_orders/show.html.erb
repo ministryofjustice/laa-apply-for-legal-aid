@@ -1,0 +1,33 @@
+<%= form_with(
+      url: providers_legal_aid_application_related_order_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"),
+                    template: :basic,
+                    form: do %>
+    <%= form.govuk_check_boxes_fieldset :related_orders,
+                                        legend: { text: t(".page_title"), size: "l", tag: "h1" },
+                                        caption: { text: @proceeding.meaning, size: "xl" },
+                                        form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
+      <div class="govuk-hint"><%= t(".hint") %></div>
+      <div class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
+      <div class="deselect-group" data-deselect-ctrl="#proceeding-none-selected-true-field">
+        <% Providers::ProceedingInterrupts::RelatedOrdersForm::ORDER_TYPES.each_with_index do |order, index| %>
+          <%= form.govuk_check_box(
+                :related_orders,
+                order.to_s,
+                link_errors: index.zero?,
+                label: { text: t("providers.proceeding_interrupts.related_orders.show.orders.#{order}") },
+                hint: { text: t("providers.proceeding_interrupts.related_orders.show.orders.#{order}_hint", default: "") },
+              ) %>
+        <% end %>
+      </div>
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
