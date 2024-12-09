@@ -1,0 +1,21 @@
+
+<%= form_with(
+      url: providers_legal_aid_application_second_appeal_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"),
+                    template: :basic,
+                    form: do %>
+
+    <%= form.govuk_collection_radio_buttons :second_appeal,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                            hint: { text: t(".hint") } %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

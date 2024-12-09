@@ -43,6 +43,7 @@ module Flow
         prohibited_steps: :prohibited_steps,
         laspo: :in_scope_of_laspos,
         nature_of_urgency: :nature_of_urgencies,
+        second_appeal: :second_appeals,
         vary_order: :vary_order,
         opponents_application: :opponents_application,
         client_relationship_to_proceeding: :is_client_biological_parent,

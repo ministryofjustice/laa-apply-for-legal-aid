@@ -4,6 +4,7 @@ module LegalFramework
   RSpec.describe MeritsTaskList do
     let(:application) { create(:legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8) }
     let(:merits_task_list) { described_class.create!(legal_aid_application_id: application.id, serialized_data: dummy_serialized_merits_task_list.to_yaml) }
+    let(:dummy_serialized_merits_task_list) { build(:legal_framework_serializable_merits_task_list) }
 
     describe ".create!" do
       it "adds a new record" do
@@ -11,7 +12,7 @@ module LegalFramework
       end
     end
 
-    describe ".task_list" do
+    describe "#task_list" do
       it "returns the serialized data" do
         expect(merits_task_list.task_list).to be_an_instance_of(SerializableMeritsTaskList)
       end
@@ -25,7 +26,7 @@ module LegalFramework
       end
     end
 
-    describe ".mark_as_complete" do
+    describe "#mark_as_complete!" do
       subject(:mark_as_complete) { merits_task_list.mark_as_complete!(:application, task_name) }
 
       let(:task_name) { :latest_incident_details }
@@ -49,7 +50,7 @@ module LegalFramework
       end
     end
 
-    describe ".can_proceed?" do
+    describe "#can_proceed?" do
       subject(:can_proceed) { merits_task_list.can_proceed? }
 
       context "when not all tasks are complete" do
@@ -100,8 +101,29 @@ module LegalFramework
       end
     end
 
-    def dummy_serialized_merits_task_list
-      build(:legal_framework_serializable_merits_task_list)
+    describe "#includes_task?" do
+      subject(:includes_task?) { merits_task_list.includes_task?(group, task) }
+
+      context "when group does not exist" do
+        let(:group) { :rubbish }
+        let(:task) { :latest_incident_details }
+
+        it { is_expected.to be_falsey }
+      end
+
+      context "when task does not exist" do
+        let(:group) { :application }
+        let(:task) { :rubbish }
+
+        it { is_expected.to be_falsey }
+      end
+
+      context "when group and task exist" do
+        let(:group) { :application }
+        let(:task) { :latest_incident_details }
+
+        it { is_expected.to be_truthy }
+      end
     end
   end
 end

@@ -24,5 +24,9 @@ module LegalFramework
       all_task_states = application_states + proceeding_states
       (all_task_states.uniq - %i[complete ignored]).empty?
     end
+
+    def includes_task?(group, task)
+      task_list.tasks[group]&.map(&:name)&.include?(task)
+    end
   end
 end

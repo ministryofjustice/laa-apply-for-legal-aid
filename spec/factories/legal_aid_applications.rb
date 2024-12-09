@@ -453,6 +453,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_public_law_family_appeal do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :pbm01a)
+      end
+    end
+
     trait :with_multiple_sca_proceedings do
       after(:create) do |application|
         application.proceedings << create(:proceeding, :pb003)
