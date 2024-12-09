@@ -1119,9 +1119,6 @@ en:
           values_question:
             client: How much is the home they usually live in worth?
             partner: How much is the home worth where your client and their partner usually live?
-            legacy:
-              client: How much is the home your client lives in worth?
-              partner: How much is the home your client and their partner live in worth?
           values_hint: You can use property websites to find the estimated value.
           mortgage_question: How much is left to pay on the mortgage?
           mortgage_hint:
