@@ -5,6 +5,19 @@ Feature: Check merits answers
     Then I should be on a page showing "Fake gateway evidence file"
     Then I should be on a page showing "Fake file name 1 (15.7 KB)"
     Then I should be on a page showing "Statement of case text entered here"
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h2  | Case details |
+      | h2  | Opponent details |
+      | h2  | Mental capacity |
+      | h2  | Domestic abuse summary |
+      | h2  | Statement of case |
+      | h2  | Supporting evidence |
+
+    And the following sections should not exist:
+      | tag | section |
+      | h2  | Supervision order |
 
   @javascript
   Scenario: On an SCA application where a proceeding has no questions on the merits task list
