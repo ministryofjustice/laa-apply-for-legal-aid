@@ -62,7 +62,7 @@ Given("I have completed the income and capital sections of a non-passported appl
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed the income and capital sections of a non-passported application with open banking transactions post-MTRA") do
+Given("I have completed the income and capital sections of a non-passported application with open banking transactions") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -103,7 +103,7 @@ Given("I have completed the income and capital sections of a non-passported appl
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed the income and capital sections of a non-passported application with bank statement uploads post-MTRA") do
+Given("I have completed the income and capital sections of a non-passported application with bank statement uploads") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -136,7 +136,7 @@ Given("I have completed the income and capital sections of a non-passported appl
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed the capital sections of passported application post-MTRA") do
+Given("I have completed the capital sections of passported application") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,

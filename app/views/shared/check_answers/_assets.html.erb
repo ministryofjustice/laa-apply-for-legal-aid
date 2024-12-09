@@ -197,12 +197,10 @@
 
   <%#  capital disregards %>
   <section class="print-no-break">
-    <% if Setting.means_test_review_a? %>
-      <% if means_report %>
-        <%= render("providers/means_reports/capital_disregards", read_only:, individual:) %>
-      <% else %>
-        <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
-      <% end %>
+    <% if means_report %>
+      <%= render("providers/means_reports/capital_disregards", read_only:, individual:) %>
+    <% else %>
+      <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
     <% end %>
   </section>
 </section>

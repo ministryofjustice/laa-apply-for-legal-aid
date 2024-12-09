@@ -5,15 +5,14 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <% prefix = Setting.means_test_review_a? ? "" : "legacy."
-     individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
+  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "partner" : "client" %>
 
   <%= page_template page_title: t(".h1-heading"), form:, template: :basic do %>
 
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".h1-heading") } do %>
 
       <%= form.govuk_text_field :property_value,
-                                label: { text: t(".values_question.#{prefix}#{individual}"), tag: "h2", size: "m" },
+                                label: { text: t(".values_question.#{individual}"), tag: "h2", size: "m" },
                                 hint: { text: t(".values_hint") },
                                 prefix_text: t("currency.gbp"),
                                 classes: "govuk-!-margin-top-6",

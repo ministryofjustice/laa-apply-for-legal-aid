@@ -19,21 +19,7 @@ RSpec.describe Flow::Steps::ProviderCapital::PolicyDisregardsStep, type: :reques
   describe "#forward" do
     subject { described_class.forward.call(legal_aid_application) }
 
-    context "when passported is true" do
-      let(:passported?) { true }
-
-      it { is_expected.to eq :check_passported_answers }
-    end
-
-    context "when passported is not true" do
-      it { is_expected.to eq :check_capital_answers }
-    end
-
-    context "when means_test_review_a is enabled" do
-      before { allow(Setting).to receive(:means_test_review_a?).and_return(true) }
-
-      it { is_expected.to eq :capital_disregards_discretionary }
-    end
+    it { is_expected.to eq :capital_disregards_discretionary }
   end
 
   describe "#check_answers" do

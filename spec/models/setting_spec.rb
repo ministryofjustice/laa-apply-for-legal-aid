@@ -16,7 +16,6 @@ RSpec.describe Setting do
         expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.special_childrens_act?).to be false
-        expect(rec.means_test_review_a?).to be false
         expect(rec.public_law_family?).to be false
       end
     end
@@ -33,7 +32,6 @@ RSpec.describe Setting do
           linked_applications: true,
           collect_hmrc_data: true,
           special_childrens_act: true,
-          means_test_review_a: true,
           public_law_family: true,
         )
       end
@@ -49,7 +47,6 @@ RSpec.describe Setting do
         expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.special_childrens_act?).to be true
-        expect(rec.means_test_review_a?).to be true
         expect(rec.public_law_family?).to be true
       end
     end
@@ -68,39 +65,7 @@ RSpec.describe Setting do
       expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.special_childrens_act?).to be false
-      expect(described_class.means_test_review_a?).to be false
       expect(described_class.public_law_family?).to be false
-    end
-
-    describe ".means_test_review_a?" do
-      subject { described_class.means_test_review_a? }
-
-      context "when the flag is true and a date has been set in the future" do
-        before do
-          described_class.setting.update!(means_test_review_a: true)
-          allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.tomorrow)
-        end
-
-        it { is_expected.to be false }
-      end
-
-      context "when the flag is true and a date has been set in the past" do
-        before do
-          described_class.setting.update!(means_test_review_a: true)
-          allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.yesterday)
-        end
-
-        it { is_expected.to be true }
-      end
-
-      context "when the flag is false and a date has been set in the past" do
-        before do
-          described_class.setting.update!(means_test_review_a: false)
-          allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.yesterday)
-        end
-
-        it { is_expected.to be false }
-      end
     end
   end
 end
