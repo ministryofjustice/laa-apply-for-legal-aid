@@ -1110,9 +1110,6 @@ en:
           h1_heading: Does your client own the home they usually live in?
           h1_heading_with_partner: Does your client or their partner own the home your client usually lives in?
           hint: This is where your client normally lives, even if they have temporarily left their home due to domestic abuse.
-          legacy:
-            h1_heading: Does your client own the home that they live in?
-            h1_heading_with_partner: Does your client or their partner own the home your client lives in?
           mortgage: Yes, with a mortgage or loan
           'no': 'No'
           owned_outright: Yes, owned outright
