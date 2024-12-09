@@ -37,7 +37,6 @@ module CCMS
                                 |proceeding
                                 |outgoing
                                 |savings_amount
-                                |income_type
                                 |vehicle
                                 )_(\S+)$}x
     APPLICANT_REGEX = /^applicant_(\S+)$/
@@ -54,7 +53,6 @@ module CCMS
     OTHER_PARTY = /^other_party_(\S+)$/
     PROCEEDING_REGEX = /^proceeding_(\S+)$/
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/
-    INCOME_TYPE_REGEX = /^income_type_(\S+)$/
     VEHICLE_REGEX = /^vehicle_(\S+)$/
     OUTGOING = /^outgoing_(\S+)$/
 
@@ -465,8 +463,6 @@ module CCMS
         options[:vehicle].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
-      when INCOME_TYPE_REGEX
-        legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp("?"))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when PARTIES_MENTAL_CAPACITY
