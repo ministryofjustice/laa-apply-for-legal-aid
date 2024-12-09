@@ -1,13 +1,8 @@
 @javascript
 Feature: Check capital income answers
-# TODO: AP-5493 - these tests can be moved to the `feaures/providers/` folder once mtra switched on and stable
-# They can provide a basis for a feature test suite for excercisng the various check your answer pages and flows
-#
 
   Scenario: For a non-passported, bank statement upload journey
-    Given the feature flag for means_test_review_a is enabled
-    And the MTR-A start date is in the past
-    And I have completed the income and capital sections of a non-passported application with bank statement uploads post-MTRA
+    Given I have completed the income and capital sections of a non-passported application with bank statement uploads
     When I am viewing the means capital check your answers page
 
     Then the following sections should exist:
@@ -54,9 +49,7 @@ Feature: Check capital income answers
       | Bank account | Halifax |
 
   Scenario: For a non-passported truelayer bank transactions journey
-    Given the feature flag for means_test_review_a is enabled
-    And the MTR-A start date is in the past
-    And I have completed the income and capital sections of a non-passported application with open banking transactions post-MTRA
+    Given I have completed the income and capital sections of a non-passported application with open banking transactions
     When I am viewing the means capital check your answers page
 
     Then the following sections should exist:
@@ -103,9 +96,7 @@ Feature: Check capital income answers
       | Bank account | Halifax |
 
   Scenario: For a passported journey
-    Given the feature flag for means_test_review_a is enabled
-    And the MTR-A start date is in the past
-    And I have completed the capital sections of passported application post-MTRA
+    Given I have completed the capital sections of passported application
     When I am viewing the passported capital check your answers page
 
     Then the following sections should exist:
