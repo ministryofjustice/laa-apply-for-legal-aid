@@ -362,4 +362,42 @@ FactoryBot.define do
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     sca_type { "core" }
   end
+
+  trait :pbm05 do
+    lead_proceeding { false }
+    ccms_code { "PBM05" }
+    meaning { "Contact with a child in care" }
+    description { "to be represented on an application for contact with a child in care." }
+    substantive_cost_limitation { 25_000 }
+    delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "contact_with_child_in_care" }
+    matter_type { "public law family (PLF)" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLB" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+  end
+
+  trait :pbm16 do
+    lead_proceeding { false }
+    ccms_code { "PBM16" }
+    meaning { "Prohibited steps order" }
+    description { "to be represented on an application for a prohibited steps order." }
+    substantive_cost_limitation { 25_000 }
+    delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "prohibited_steps_order_plf" }
+    matter_type { "public law family (PLF)" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLB" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+  end
 end

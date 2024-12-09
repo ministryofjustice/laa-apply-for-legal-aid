@@ -286,6 +286,10 @@ Rails.application.routes.draw do
         resource :block, only: %i[show], path: "voided-application"
       end
 
+      scope module: :proceeding_interrupts do
+        resources :related_orders, only: %i[show update]
+      end
+
       scope module: :proceedings_sca do
         get "/interrupt/:type", to: "interrupts#show", as: "sca_interrupt"
         delete "/interrupt/:type", to: "interrupts#destroy"

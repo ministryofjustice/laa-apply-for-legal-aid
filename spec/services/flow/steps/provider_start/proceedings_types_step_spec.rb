@@ -35,5 +35,17 @@ RSpec.describe Flow::Steps::ProviderStart::ProceedingsTypesStep, type: :request 
 
       it { is_expected.to eq :change_of_names }
     end
+
+    context "when the chosen proceeding is a PLF proceeding matching the list" do
+      let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PBM18A") }
+
+      it { is_expected.to eq :related_orders }
+    end
+
+    context "when the chosen proceeding is a PLF proceeding that does not match the list" do
+      let(:proceeding) { build_stubbed(:proceeding, ccms_code: "PBM03") }
+
+      it { is_expected.to eq :has_other_proceedings }
+    end
   end
 end
