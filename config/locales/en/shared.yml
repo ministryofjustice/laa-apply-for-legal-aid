@@ -501,9 +501,9 @@ en:
         heading: LASPO
         question: Are the Section 8 proceedings you're applying for in scope of LASPO?
       latest_incident_details:
-        date_of_latest_incident: When did the incident occur?
         latest-incident-heading: Latest incident details
-        notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
+        date_of_latest_incident: Date of incident
+        notification_of_latest_incident: Date your client contacted you about the latest incident
       matter_opposition:
         matter_opposed_reason: Why is the Section 8 matter opposed by your client or the other party?
         matter_opposed_reason_heading: Why the matter is opposed
