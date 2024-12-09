@@ -536,6 +536,8 @@ en:
               accepted: Confirm this information is correct and that you'll get a signed declaration
             separate_representation_required:
               blank: Confirm your client wants separate representation
+            second_appeal:
+              blank: Select yes if this is a second appeal
         linked_application:
           attributes:
             search_ref:
