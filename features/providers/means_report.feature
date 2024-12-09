@@ -24,7 +24,7 @@ Feature: Means report
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | Capital disregards |
       | h3  | Bank statements |
 
     Then the following sections should not exist:
@@ -40,6 +40,7 @@ Feature: Means report
       | h2  | Declared cash income |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
+      | h2  | Payments from scheme or charities |
 
     And the Client details questions should exist:
       | question |
@@ -53,6 +54,10 @@ Feature: Means report
       | question |
       | Extend, variation or discharge - Part IV |
       | Variation or discharge under section 5 protection from harassment act 1997 |
+
+    And the Passported means question and answer should match:
+      | question | answer |
+      | In receipt of passporting benefit | No |
 
     And the Income result questions should exist:
       | question |
@@ -87,9 +92,9 @@ Feature: Means report
       | Client childcare payments | £0 |
       | Client maintenance payments to a former partner | £0 |
       | Client payments towards legal aid in a criminal case | £100 |
-      | Dependants allowance | £0 | 
+      | Dependants allowance | £0 |
       | Total outgoings and deductions | £225 |
-    
+
     And the Dependants questions should exist:
       | question |
       | Does your client have any dependants? |
@@ -102,8 +107,11 @@ Feature: Means report
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
-      | Review reasons | Client's bank statements uploaded |
+      | Review reasons | Restrictions on client's assets |
+      | Review reasons | Capital disregards declared |
       | Review reasons | Non-Passported application |
+      | Review reasons | Client's further employment details |
+      | Review reasons | Client's bank statements uploaded |
 
     And the Capital result questions should exist:
       | question |
@@ -114,11 +122,11 @@ Feature: Means report
 
     And the Property question should exist:
       | question |
-      | Does your client own the home that they live in? |
+      | Does your client own the home they usually live in? |
 
     And the Property details questions should exist:
       | question |
-      | How much is the home your client lives in worth? |
+      | How much is the home they usually live in worth? |
       | How much is left to pay on the mortgage? |
       | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
@@ -164,15 +172,10 @@ Feature: Means report
       | Is your client banned from selling or borrowing against their assets? |
       | Details of restrictions |
 
-    And the "Payments from scheme or charities" questions should exist:
-      | question |
-      | England Infected Blood Support Scheme |
-      | Vaccine Damage Payments Scheme |
-      | Variant Creutzfeldt-Jakob disease (vCJD) Trust |
-      | Criminal Injuries Compensation Scheme |
-      | National Emergencies Trust (NET) |
-      | We Love Manchester Emergency Fund |
-      | The London Emergencies Trust |
+    And the Capital disregards questions and answers should match:
+      | question | answer |
+      | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
+      | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
 
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed a non-passported application with truelayer
@@ -187,6 +190,7 @@ Feature: Means report
       | h2  | Income |
       | h3  | Client employment income |
       | h2  | Outgoings and deductions |
+      | h2  | Dependants |
       | h2  | Caseworker Review |
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
@@ -198,7 +202,7 @@ Feature: Means report
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | Capital disregards |
       | h2  | Client's bank accounts |
 
     Then the following sections should not exist:
@@ -209,6 +213,7 @@ Feature: Means report
       | h2  | Declared cash income |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
+      | h2  | Payments from scheme or charities |
       | h3  | Bank statements |
 
     And the Client details questions should exist:
@@ -223,6 +228,10 @@ Feature: Means report
       | question |
       | Extend, variation or discharge - Part IV |
       | Variation or discharge under section 5 protection from harassment act 1997 |
+
+    And the Passported means question and answer should match:
+      | question | answer |
+      | In receipt of passporting benefit | No |
 
     And the Income result questions should exist:
       | question |
@@ -260,15 +269,22 @@ Feature: Means report
       | Dependants allowance | £0 |
       | Total outgoings and deductions | £225 |
 
-    And the Caseworker review questions should exist:
+    And the Dependants questions should exist:
       | question |
-      | Caseworker review required? |
-      | Review reasons |
+      | Does your client have any dependants? |
+
+    And the Dependants detail questions should exist:
+      | Name |
+      | Date of birth	|
+      | What is their relationship to your client? |
 
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
+      | Review reasons | Restrictions on client's assets |
+      | Review reasons | Capital disregards declared |
       | Review reasons | Non-Passported application |
+      | Review reasons | Client's further employment details |
 
     And the Capital result questions should exist:
       | question |
@@ -279,11 +295,11 @@ Feature: Means report
 
     And the Property question should exist:
       | question |
-      | Does your client own the home that they live in? |
+      | Does your client own the home they usually live in? |
 
     And the Property details questions should exist:
       | question |
-      | How much is the home your client lives in worth? |
+      | How much is the home they usually live in worth? |
       | How much is left to pay on the mortgage? |
       | Does your client own the home with anyone else? |
       | What percentage of the home does your client legally own? |
@@ -339,15 +355,10 @@ Feature: Means report
       | Is your client banned from selling or borrowing against their assets? |
       | Details of restrictions |
 
-    And the "Payments from scheme or charities" questions should exist:
-      | question |
-      | England Infected Blood Support Scheme |
-      | Vaccine Damage Payments Scheme |
-      | Variant Creutzfeldt-Jakob disease (vCJD) Trust |
-      | Criminal Injuries Compensation Scheme |
-      | National Emergencies Trust (NET) |
-      | We Love Manchester Emergency Fund |
-      | The London Emergencies Trust |
+    And the Capital disregards questions and answers should match:
+      | question | answer |
+      | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
+      | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
 
   Scenario: For a passported journey
     Given I have completed a passported application
@@ -366,7 +377,7 @@ Feature: Means report
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | Capital disregards |
       | h2  | Caseworker Review |
 
     Then the following sections should not exist:
@@ -381,7 +392,12 @@ Feature: Means report
       | h2  | Dependants |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
+      | h2  | Payments from scheme or charities |
       | h3  | Bank statements |
+
+    And the Passported means question and answer should match:
+      | question | answer |
+      | In receipt of passporting benefit | Yes |
 
   Scenario: For a non means tested journey
     Given I have completed a non means tested application
@@ -410,6 +426,7 @@ Feature: Means report
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
+      | h2  | Capital disregards |
       | h3  | Bank statements |
       | h3  | Your client's accounts|
 

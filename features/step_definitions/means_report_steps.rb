@@ -1,53 +1,4 @@
-# TODO: AP-5493 - can be deleted post-MTRA
 Given(/^I have completed a non-passported (employed|employed with partner) application with bank statement uploads$/) do |optional_partner|
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
-    :with_employed_applicant_and_extra_info,
-    :with_non_passported_state_machine,
-    :with_vehicle,
-    :with_transaction_period,
-    :with_rent_or_mortgage_regular_transaction,
-    :with_housing_benefit_regular_transaction,
-    :with_other_assets_declaration,
-    :with_policy_disregards,
-    :with_restrictions,
-    :with_fixed_offline_accounts,
-    :with_dependant,
-    :with_own_home_mortgaged,
-    :with_merits_statement_of_case,
-    :with_opponent,
-    :with_incident,
-    :with_parties_mental_capacity,
-    :with_domestic_abuse_summary,
-    :with_chances_of_success,
-    :assessment_submitted,
-    property_value: 599_999.99,
-    outstanding_mortgage_amount: 399_999.99,
-    shared_ownership: "partner_or_ex_partner",
-    percentage_home: 33.33,
-    explicit_proceedings: %i[da002 da006],
-    set_lead_proceeding: :da002,
-    provider_received_citizen_consent: false,
-    attachments: [build(:attachment, :bank_statement)],
-  )
-
-  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
-
-  cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
-  if optional_partner == "employed with partner"
-    create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
-    create(:partner, :with_extra_employment_information, legal_aid_application: @legal_aid_application)
-    @legal_aid_application.applicant.update!(has_partner: true, partner_has_contrary_interest: false)
-  else
-    create(:cfe_v6_result, submission: cfe_submission, legal_aid_application: @legal_aid_application)
-  end
-
-  login_as @legal_aid_application.provider
-end
-
-# TODO: AP-5493 - can be renamed to remove the post-MTRA, post MTRA
-Given(/^I have completed a non-passported (employed|employed with partner) application with bank statement uploads post-MTRA$/) do |optional_partner|
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -95,7 +46,6 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
   login_as @legal_aid_application.provider
 end
 
-# TODO: can be deleted post MTRA
 Given(/^I have completed a (non-passported|non-passported with partner) application with truelayer$/) do |optional_partner|
   bank_provider = create(:bank_provider)
   create(
@@ -123,72 +73,6 @@ Given(/^I have completed a (non-passported|non-passported with partner) applicat
     :with_vehicle,
     :with_transaction_period,
     :with_other_assets_declaration,
-    :with_policy_disregards,
-    :with_savings_amount,
-    :with_open_banking_consent,
-    :with_consent,
-    :with_dependant,
-    :with_cfe_v6_result,
-    :with_own_home_mortgaged,
-    :with_merits_statement_of_case,
-    :with_incident,
-    :with_opponent,
-    :with_parties_mental_capacity,
-    :with_domestic_abuse_summary,
-    :with_chances_of_success,
-    :assessment_submitted,
-    property_value: 599_999.99,
-    outstanding_mortgage_amount: 399_999.99,
-    shared_ownership: "partner_or_ex_partner",
-    percentage_home: 33.33,
-    explicit_proceedings: %i[da002 da006],
-    set_lead_proceeding: :da002,
-  )
-
-  @legal_aid_application.applicant.update!(bank_providers: [bank_provider])
-
-  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
-
-  cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
-  if optional_partner == "non-passported with partner"
-    create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
-    create(:partner, :with_extra_employment_information, legal_aid_application: @legal_aid_application)
-    @legal_aid_application.applicant.update!(has_partner: true, partner_has_contrary_interest: false)
-  else
-    create(:cfe_v6_result, submission: cfe_submission, legal_aid_application: @legal_aid_application)
-  end
-
-  login_as @legal_aid_application.provider
-end
-
-# TODO: AP-5493 can be renamed to remove the post-MTRA, post MTRA
-Given(/^I have completed a (non-passported|non-passported with partner) application with truelayer post-MTRA$/) do |optional_partner|
-  bank_provider = create(:bank_provider)
-  create(
-    :bank_account,
-    bank_provider:,
-    name: "Account Name",
-    account_number: "12345678",
-    sort_code: "000000",
-    balance: "75.57",
-  )
-  create(
-    :bank_account,
-    bank_provider:,
-    name: "Second Account",
-    account_number: "87654321",
-    sort_code: "999999",
-    balance: "57.57",
-  )
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
-    :with_employed_applicant_and_extra_info,
-    :with_non_passported_state_machine,
-    :with_restrictions,
-    :with_vehicle,
-    :with_transaction_period,
-    :with_other_assets_declaration,
     :with_mandatory_capital_disregards,
     :with_discretionary_capital_disregards,
     :with_savings_amount,
@@ -228,41 +112,7 @@ Given(/^I have completed a (non-passported|non-passported with partner) applicat
   login_as @legal_aid_application.provider
 end
 
-# TODO: can be deleted post MTRA
 Given("I have completed a passported application") do
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
-    :with_applicant_and_address,
-    :with_passported_state_machine,
-    :with_savings_amount,
-    :with_restrictions,
-    :with_vehicle,
-    :with_transaction_period,
-    :with_other_assets_declaration,
-    :with_policy_disregards,
-    :with_savings_amount,
-    :with_cfe_v5_result,
-    :with_own_home_mortgaged,
-    :with_merits_statement_of_case,
-    :with_opponent,
-    :with_incident,
-    :with_chances_of_success,
-    :assessment_submitted,
-    provider_received_citizen_consent: true,
-    property_value: 599_999.99,
-    outstanding_mortgage_amount: 399_999.99,
-    shared_ownership: "partner_or_ex_partner",
-    percentage_home: 33.33,
-    explicit_proceedings: %i[da002 da006],
-    set_lead_proceeding: :da002,
-  )
-
-  login_as @legal_aid_application.provider
-end
-
-# TODO: AP-5493 - can be renamed to remove the post-MTRA, post MTRA
-Given("I have completed a passported application post-MTRA") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
