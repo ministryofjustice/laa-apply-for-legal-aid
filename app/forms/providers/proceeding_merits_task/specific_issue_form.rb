@@ -3,9 +3,9 @@ module Providers
     class SpecificIssueForm < BaseForm
       form_for ::ProceedingMeritsTask::SpecificIssue
 
-      attr_accessor :confirmed, :details, :proceeding_id
+      attr_accessor :details, :proceeding_id
 
-      validates :details, :confirmed, presence: true
+      validates :details, presence: true
     end
   end
 end
