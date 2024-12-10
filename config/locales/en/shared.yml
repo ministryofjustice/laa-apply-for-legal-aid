@@ -498,8 +498,8 @@ en:
         heading: Supporting evidence
         gateway_evidence: Upload supporting evidence
       laspo:
-        heading: LASPO
-        question: Are the Section 8 proceedings you're applying for in scope of LASPO?
+        heading: Section 8 and LASPO
+        question: Section 8 proceedings are in the scope of LASPO?
       latest_incident_details:
         latest-incident-heading: Latest incident details
         date_of_latest_incident: Date of incident
