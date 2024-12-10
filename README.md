@@ -14,8 +14,6 @@ The laa-apply-for-legal-aid system is a web service for solicitors that provide 
 - [**Documentation for developers**](#documentation-for-developers)
 - [**Dependencies**](#dependencies)
 - [**Initial setup**](#initial-setup)
-    - [Encrypting sensitive data](#encrypting-sensitive-data)
-        - [Adding a new encrypted file](#adding-a-new-encrypted-file)
 - [**Deployment**](#deployment)
     - [UAT Deployments](#uat-deployments)
 - [**Dev: running locally**](#dev-running-locally)
