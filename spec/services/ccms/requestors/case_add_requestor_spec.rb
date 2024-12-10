@@ -101,7 +101,7 @@ module CCMS
             request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
             expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
 
-            expect(request_hash).to match(expected_request_hash)
+            expect(request_hash.as_json).to match_json_expression(expected_request_hash.as_json)
           end
         end
 
@@ -114,7 +114,7 @@ module CCMS
               request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
               expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
 
-              expect(request_hash).to match(expected_request_hash)
+              expect(request_hash.as_json).to match_json_expression(expected_request_hash.as_json)
             end
           end
         end
@@ -130,8 +130,7 @@ module CCMS
             travel_to(request_created_at) do
               request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
               expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
-
-              expect(request_hash).to match(expected_request_hash)
+              expect(request_hash.as_json).to match_json_expression(expected_request_hash.as_json)
             end
           end
         end
@@ -145,7 +144,7 @@ module CCMS
                 request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
                 expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
 
-                expect(request_hash).to match(expected_request_hash)
+                expect(request_hash.as_json).to match_json_expression(expected_request_hash.as_json)
               end
             end
           end
@@ -164,7 +163,7 @@ module CCMS
                 request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
                 expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
 
-                expect(request_hash).to match(expected_request_hash)
+                expect(request_hash.as_json).to match_json_expression(expected_request_hash.as_json)
               end
             end
           end
