@@ -534,8 +534,8 @@ en:
         separate_representation: Client wants separate representation?
         confirmed: Confirmed
       undertaking:
-        heading: Client offer of undertakings
-        undertaking_offered_question: Has the client offered undertakings?
+        heading: Offer of undertakings
+        undertaking_offered_question: Undertakings offered
         undertaking_offered_what: What undertakings have been offered?
         undertaking_offered_why: Why have undertakings not been offered?
       urgency:
