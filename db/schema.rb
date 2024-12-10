@@ -1021,7 +1021,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_093840) do
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_id", null: false
-    t.boolean "confirmed"
     t.string "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
