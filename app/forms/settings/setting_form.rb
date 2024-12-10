@@ -9,7 +9,6 @@ module Settings
                   :linked_applications,
                   :collect_hmrc_data,
                   :special_childrens_act,
-                  :means_test_review_a,
                   :public_law_family
 
     validates :mock_true_layer_data,
@@ -19,7 +18,6 @@ module Settings
               :linked_applications,
               :collect_hmrc_data,
               :special_childrens_act,
-              :means_test_review_a,
               :public_law_family,
               presence: true
   end

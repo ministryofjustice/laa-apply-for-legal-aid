@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_06_121926) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_10_093547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1005,7 +1005,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_121926) do
     t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false
     t.boolean "special_childrens_act", default: false, null: false
-    t.boolean "means_test_review_a", default: false, null: false
     t.boolean "public_law_family", default: false, null: false
   end
 
