@@ -548,15 +548,20 @@ en:
         original_judge_level_question: Original case heard by
         court_type_question: Appeal will be heard in
       merits_proceeding_section:
+        attempts_to_settle_heading: Attempts to settle
         attempts_to_settle: What attempts have been made to settle the matter?
-        chances_of_success_details: Details on the chance of a successful outcome
-        linked_children: Which children are covered under this proceeding?
+        chances_of_success_heading: Chances of success
+        chances_of_success_details: Why legal aid should be granted
+        linked_children_heading: Children covered
+        linked_children: Children covered under this proceeding?
+        relationship_to_child_heading: Who is your client in the proceeding
         opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
         opponents_application_reason: Reason for applying for legal aid at this stage
         prohibited_steps: Is the prohibited step to prevent removal from the UK?
-        prospects_of_success: Is the chance of a successful outcome 50% or better?
-        success_prospect: What is the chance of a successful outcome?
-        specific_issue: What specific issue do you want to determine at court?
+        prospects_of_success: Chance of a successful outcome is 50% or better?
+        success_prospect: Chance of a successful outcome?
+        specific_issue_heading: Specific issue
+        specific_issue: Specific issue to be determined at court
         vary_order: Changes since original order was made
         what_is_prohibited: What you're asking to be prohibited
       supporting_evidence:
