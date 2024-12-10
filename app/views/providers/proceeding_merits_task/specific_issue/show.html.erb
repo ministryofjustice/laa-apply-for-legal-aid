@@ -25,9 +25,6 @@
           legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
           rows: 8,
         ) %>
-    <%= form.govuk_check_boxes_fieldset :confirmed, legend: nil do %>
-      <p><%= form.govuk_check_box :confirmed, true, "", multiple: false, link_errors: true, label: { text: t(".confirmed") } %></p>
-    <% end %>
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>
