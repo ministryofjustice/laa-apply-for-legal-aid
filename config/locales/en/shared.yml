@@ -570,7 +570,7 @@ en:
           court_application: Court application
           expert_report: Expert report
           parental_responsibility: Parental responsibility evidence
-        evidence_upload_heading: Supporting evidence
+        evidence_upload_heading: Files to support the application
       children_involved:
         involved-children-heading: Children involved in this application
         child: Child
