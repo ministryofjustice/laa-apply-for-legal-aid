@@ -642,7 +642,13 @@ Given("I complete the journey as far as check client details with a partner") do
     lookup_used: true,
     applicant:,
   )
-  partner = create(:partner)
+  partner = create(
+    :partner,
+    first_name: "Test",
+    last_name: "Partner",
+    national_insurance_number: "BC293483A",
+    date_of_birth: "11-02-1981",
+  )
   @legal_aid_application = create(
     :application,
     :with_proceedings,
@@ -1153,6 +1159,12 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   within "#app-check-your-answers__#{question_id}" do
     click_on("Change")
   end
+end
+
+Given("I click Check Your Answers summary card Change link for {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  page.find_by_id("app-check-your-answers__#{question_id}").click
 end
 
 Given("I click Check Your Answers Change link for vehicle {string}") do |vehicle|

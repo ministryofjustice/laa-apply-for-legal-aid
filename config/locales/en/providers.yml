@@ -329,35 +329,36 @@ en:
         what_happens_next: What happens next
         what_happens_next_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
     check_provider_answers:
-      standard:
+      index:
         title: Check your answers
+        title_truelayer: Your application
+        caption: Client details and what they are applying for
         copy_case:
           heading: The proceedings and merits information was copied from %{application_ref}.
           family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
-        section_next:
-          heading: What happens next
-          content: We'll use your client's name, date of birth and National Insurance number to check their benefit status with the Department for Work and Pensions (DWP).
-      read_only:
-        title: Your application
-        banner:
-          your_client_needs_to: Your client needs to complete their part of the application before you can continue.
-        sent_email_text: "We've sent an email to %{email}"
-        change_email_button: Change email and resend link
-      shared:
-        change: Change
-        proceeding: Proceeding
         section_client:
-          heading: Client details
+          heading: Client
+        section_partner:
+          heading: Partner
+        section_linking_and_copying:
+          heading: Cases linked to this one
         section_proceeding:
-          heading: Proceedings
+          heading: What you're applying for
         section_delegated:
           heading: Delegated functions
         section_emergency:
           heading: Covered under an emergency certificate
         section_substantive:
           heading: Covered under a substantive certificate
-        emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
+        section_next:
+          heading: What happens next
+          content: We'll use your client's name, date of birth and National Insurance number to check their benefit status with the Department for Work and Pensions (DWP).
+        banner:
+          your_client_needs_to: Your client needs to complete their part of the application before you can continue.
+        sent_email_text: "We've sent an email to %{email}"
+        change_email_button: Change email and resend link
+
     applicant_bank_accounts:
       show:
         heading: Your client's bank accounts
@@ -1411,6 +1412,7 @@ en:
       show:
         heading: Merits report
         client_details_heading: Client details
+        partner_details_heading: Partner details
         previous_legal_aid: Previous Legal Aid
         has_applied_before: Has your client applied for civil legal aid before?
         previous_application_reference: Previous CCMS reference number
@@ -1506,6 +1508,7 @@ en:
           non_passported: Non-Passported application
       show:
         client_details_heading: Client details
+        partner_details_heading: Partner details
         evidence_upload_heading: Supporting evidence
         heading: Means report
       with_cfe_result_details:

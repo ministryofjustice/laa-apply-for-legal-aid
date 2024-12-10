@@ -32,16 +32,23 @@
   </section>
 
   <% if @legal_aid_application.applicant_has_partner? %>
+    <h2 class="govuk-heading-l"><%= t(".partner_details_heading") %></h2>
     <%= render(
           "shared/check_answers/partner_details",
           attributes: %i[contrary_interest first_name last_name date_of_birth national_insurance_number],
           partner: @legal_aid_application.partner,
-          heading: "govuk-heading-l",
           read_only: true,
         ) %>
   <% end %>
 
-  <%= render("shared/check_answers/linking_and_copying", read_only: true) %>
+  <% if Setting.linked_applications? %>
+    <div class="govuk-grid-row" id="app-check-your-answers__linking">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l"><%= t(".linking_and_copying_heading") %></h2>
+      </div>
+    </div>
+    <%= render("shared/check_answers/linking_and_copying", read_only: true) %>
+  <% end %>
 
   <section class="proceeding_details print-no-break">
     <h2 class="govuk-heading-l"><%= t(".proceedings_details_heading") %></h2>

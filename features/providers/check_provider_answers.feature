@@ -8,18 +8,18 @@ Feature: Checking client details answers backwards and forwards
       | tag | section |
       | h2  | Client details |
       | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction proceeding details |
+      | h2  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:
       | question | answer |
       | First name | Test |
       | Last name | Walker |
-      | Has your client ever changed their last name? | No |
+      | Last name at birth | Same as last name |
       | Date of birth | 10 January 1980 |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | National Insurance number | JA293483A |
-      | Does your client have a partner | No |
+      | National Insurance number | JA 29 34 83 A |
+      | Client has a partner? | No |
 
   @javascript
   Scenario: Send client's mail to another residential address
@@ -28,21 +28,21 @@ Feature: Checking client details answers backwards and forwards
       | tag | section |
       | h2  | Client details |
       | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction proceeding details |
+      | h2  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:
       | question | answer |
       | First name | Test |
       | Last name | Walker |
-      | Has your client ever changed their last name? | No |
+      | Last name at birth | Same as last name |
       | Date of birth | 10 January 1980 |
       | Correspondence address | British Transport Police\n98 Petty France\nLondon\nSW1H 9EA |
       | Care of recipient | Brian Surname |
       | Client has a home address? | Yes |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
-      | National Insurance number | JA293483A |
-      | Does your client have a partner | No |
+      | National Insurance number | JA 29 34 83 A |
+      | Client has a partner? | No |
 
   @javascript
   Scenario: I am able to return and amend the client's name
@@ -51,7 +51,7 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Test |
       | Last name | Walker |
-      | Has your client ever changed their last name? | No |
+      | Last name at birth | Same as last name |
 
     And I should not see "What was your client's last name at birth?"
 
@@ -66,7 +66,7 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Fred |
       | Last name | Bloggs |
-      | Has your client ever changed their last name? | No |
+      | Last name at birth | Same as last name |
 
   @javascript
   Scenario: I am able to return and amend the client's last name at birth
@@ -75,11 +75,11 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Test |
       | Last name | Walker |
-      | Has your client ever changed their last name? | No |
+      | Last name at birth | Same as last name |
 
     And I should not see "What was your client's last name at birth?"
 
-    When I click Check Your Answers Change link for "Changed last name"
+    When I click Check Your Answers Change link for "Last name at birth"
     Then I should be on a page with title "Enter your client's details"
 
     And I choose 'Yes'
@@ -92,8 +92,7 @@ Feature: Checking client details answers backwards and forwards
       | question | answer |
       | First name | Test |
       | Last name | Walker |
-      | Has your client ever changed their last name? | Yes |
-      | What was your client's last name at birth? | Bloggs |
+      | Last name at birth | Bloggs |
 
   @javascript @vcr
   Scenario: I am able to return and amend the client's home address
@@ -245,10 +244,10 @@ Feature: Checking client details answers backwards and forwards
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
 
     And the "Client details" check your answers section should not contain:
       | question |
-      | Correspondence address |
       | Care of recipient |
       | Client has a home address? |
 
@@ -320,10 +319,10 @@ Feature: Checking client details answers backwards and forwards
     And the "Client details" check your answers section should contain:
       | question | answer |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
+      | Correspondence address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
 
     And the "Client details" check your answers section should not contain:
       | question |
-      | Correspondence address |
       | Care of recipient |
       | Client has a home address? |
 
@@ -397,7 +396,7 @@ Feature: Checking client details answers backwards and forwards
     Given I complete the passported journey as far as check your answers for client details
     And the "Client details" check your answers section should contain:
       | question | answer |
-      | National Insurance number | JA293483A |
+      | National Insurance number | JA 29 34 83 A |
 
     And the following sections should exist:
       | tag | section |
@@ -419,9 +418,29 @@ Feature: Checking client details answers backwards and forwards
     And I should not see "to check their benefit status"
 
   @javascript @vcr
+  Scenario: Client has a partner
+    Given I complete the journey as far as check client details with a partner
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | Partner's details |
+      | h2  | Proceedings |
+      | h2  | Inherent jurisdiction high court injunction |
+      | h2  | What happens next |
+
+    And the "Partner details" check your answers section should contain:
+      | question | answer |
+      | Partner has a contrary interest? | No |
+      | First name | Test |
+      | Last name | Partner |
+      | Date of birth | 11 February 1981 |
+      | National Insurance number | BC 29 34 83 A |
+
+  @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Proceedings'
+    And I click Check Your Answers summary card Change link for 'Proceedings'
     And I click the first link 'Remove'
     And I search for proceeding 'Non-molestation order'
     Then I choose a 'Non-molestation order' radio button
