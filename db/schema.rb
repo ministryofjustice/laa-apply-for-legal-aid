@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_06_121926) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_10_160206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -634,7 +634,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_121926) do
     t.boolean "no_credit_transaction_types_selected"
     t.boolean "no_debit_transaction_types_selected"
     t.boolean "provider_received_citizen_consent"
-    t.boolean "student_finance"
     t.datetime "discarded_at", precision: nil
     t.datetime "merits_submitted_at", precision: nil
     t.boolean "in_scope_of_laspo"
