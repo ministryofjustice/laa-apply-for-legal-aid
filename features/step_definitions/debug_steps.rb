@@ -23,11 +23,6 @@ And(/^the provider has SCA permissions$/) do
   @registered_provider.firm.permissions << sca_permission
 end
 
-And(/^the MTR-A start date is in the past$/) do
-  # TODO: Remove when removing Setting.means_test_review_a
-  allow(Rails.configuration.x).to receive(:mtr_a_start_date).and_return(Date.yesterday)
-end
-
 When(/^I sleep for (.*?) seconds$/) do |num_secs|
   sleep num_secs.to_i
 end
