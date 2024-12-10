@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_06_121926) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_09_132733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -657,6 +657,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_121926) do
     t.uuid "copy_case_id"
     t.boolean "case_cloned"
     t.boolean "separate_representation_required"
+    t.boolean "second_appeal"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"

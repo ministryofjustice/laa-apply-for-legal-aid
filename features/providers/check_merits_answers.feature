@@ -17,3 +17,31 @@ Feature: Check merits answers
     And the following sections should not exist:
       | tag | section |
       | h2  | Supervision order |
+
+  @javascript
+  Scenario: On a PLF application where a proceeding has second appeal merits task list item
+    Given I complete the journey as far as check merits answers with a PLF proceeding with second appeal question
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h2  | Opponent details |
+      | h2  | Statement of case |
+      | h2  | Children involved in this application |
+
+    And the "Second appeal" check your answers section should contain:
+      | question | answer |
+      | Second appeal? | No |
+
+    When I click Check Your Answers Change link for 'second_appeal_heading'
+    Then I should be on a page with title "Is this a second appeal?"
+    And I should be on a page showing "Is this a second appeal?"
+    And I should see "This question will help us decide if a specialist caseworker should review your application."
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the "Second appeal" check your answers section should contain:
+      | question | answer |
+      | Second appeal? | Yes |
+
