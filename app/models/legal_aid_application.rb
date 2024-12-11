@@ -7,7 +7,7 @@ class LegalAidApplication < ApplicationRecord
   # data..
   self.ignored_columns += %w[student_finance]
 
-  ProceedingStruct = Struct.new(:name, :meaning, :proceeding)
+  ProceedingStruct = Struct.new(:name, :meaning, :matter_type, :category_of_law, :proceeding)
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
@@ -176,12 +176,14 @@ class LegalAidApplication < ApplicationRecord
     # returns an array of ProceedingStruct containing:
     # - name of the proceeding type
     # - meaning of the proceeding type
+    # - the matter type
+    # - the category of law
     # - the Proceeding
     #
     # in the order they were added to the LegalAidApplication
     #
     proceedings.in_order_of_addition.map do |proceeding|
-      ProceedingStruct.new(proceeding.name, proceeding.meaning, proceeding)
+      ProceedingStruct.new(proceeding.name, proceeding.meaning, proceeding.matter_type, proceeding.category_of_law, proceeding)
     end
   end
 
@@ -687,6 +689,13 @@ class LegalAidApplication < ApplicationRecord
       "<span class='no-wrap'>#{application_ref}</span>",
       proceedings&.map(&:meaning)&.join(", "),
     ].compact_blank.join(", ")
+  end
+
+  def link_description_without_name
+    [
+      "<span class='no-wrap'>#{application_ref}</span>",
+      proceedings&.map(&:meaning)&.join(" "),
+    ].compact_blank.join("<br>")
   end
 
   def related_proceedings

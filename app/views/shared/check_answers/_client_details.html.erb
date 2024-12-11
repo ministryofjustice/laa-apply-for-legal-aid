@@ -1,206 +1,206 @@
-<%= govuk_summary_list(card: { title: t(".heading") },
-                       html_attributes: { id: "client-details-questions" },
-                       actions: !read_only) do |summary_list| %>
-  <% if :first_name.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__first_name" }) do |row| %>
-      <%= row.with_key(text: t(".first_name"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.first_name) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :first_name),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.first_name')}",
-          ) %>
-    <% end %>
-  <% end %>
-
-  <% if :last_name.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__last_name" }) do |row| %>
-      <%= row.with_key(text: t(".last_name"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.last_name) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.last_name')}",
-          ) %>
-    <% end %>
-  <% end %>
-
-  <% if :changed_last_name.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__changed_last_name" }) do |row| %>
-      <%= row.with_key(text: t(".changed_last_name"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: yes_no(applicant.changed_last_name)) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :changed_last_name),
-            visually_hidden_text: t(".changed_last_name"),
-          ) %>
-    <% end %>
-  <% end %>
-
-  <% if :last_name_at_birth.in?(attributes) && !applicant.last_name_at_birth.nil? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__last_name_at_birth" }) do |row| %>
-      <%= row.with_key(text: t(".last_name_at_birth"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.last_name_at_birth.presence || applicant.last_name) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name_at_birth),
-            visually_hidden_text: t(".last_name_at_birth"),
-          ) %>
-    <% end %>
-  <% end %>
-
-  <% if :date_of_birth.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__date_of_birth" }) do |row| %>
-      <%= row.with_key(text: t(".dob"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.date_of_birth) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.dob')}",
-          ) %>
-    <% end %>
-  <% end %>
-
-  <% if :age.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__age" }) do |row| %>
-      <%= row.with_key(text: t(".age_question"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: t(".age", years: applicant.age)) %>
-    <% end %>
-  <% end %>
-
-  <% if :means_test.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__means_test" }) do |row| %>
-      <%= row.with_key(text: t(".means_tested"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: means_tested_description(@legal_aid_application)) %>
-    <% end %>
-  <% end %>
-
-  <% if :applied_previously.in?(attributes) %>
-    <% if applicant.applied_previously %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row| %>
-        <%= row.with_key(text: t(".previous_application_reference"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: applicant.previous_reference) %>
-        <%= row.with_action(
+<%= govuk_summary_card(title: t(".heading")) do |card|
+      card.with_summary_list(html_attributes: { id: "client-details-questions" }, actions: !read_only) do |summary_list|
+        if :first_name.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__first_name" }) do |row|
+            row.with_key(text: t(".first_name"), classes: "govuk-!-width-one-third")
+            row.with_value(text: applicant.first_name)
+            row.with_action(
               text: t("generic.change"),
-              href: providers_legal_aid_application_previous_references_path(@legal_aid_application),
-              visually_hidden_text: t(".previous_application_reference"),
-            ) %>
-      <% end %>
-    <% else %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row| %>
-        <%= row.with_key(text: t(".has_applied_before"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: yes_no(applicant.applied_previously)) %>
-        <%= row.with_action(
+              href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :first_name),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.first_name')}",
+            )
+          end
+        end
+
+        if :last_name.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__last_name" }) do |row|
+            row.with_key(text: t(".last_name"))
+            row.with_value(text: applicant.last_name)
+            row.with_action(
               text: t("generic.change"),
-              href: providers_legal_aid_application_previous_references_path(@legal_aid_application),
-              visually_hidden_text: t(".has_applied_before"),
-            ) %>
-      <% end %>
-    <% end %>
-  <% end %>
+              href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.last_name')}",
+            )
+          end
+        end
 
-  <% if :correspondence_choice.in?(attributes) && applicant.correspondence_address_choice.present? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__correspondence_address_choice" }) do |row| %>
-      <%= row.with_key(text: t(".correspondence_address_choice"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: t(".correspondence_choice.#{applicant.correspondence_address_choice}")) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_correspondence_address_choice_path,
-            visually_hidden_text: t(".correspondence_address_choice"),
-          ) %>
-    <% end %>
-  <% end %>
+        if :changed_last_name.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__changed_last_name" }) do |row|
+            row.with_key(text: t(".changed_last_name"))
+            row.with_value(text: yes_no(applicant.changed_last_name))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :changed_last_name),
+              visually_hidden_text: t(".changed_last_name"),
+            )
+          end
+        end
 
-  <% if :address.in?(attributes) && !applicant.correspondence_address_choice.eql?("home") %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__address" }) do |row| %>
-      <%= row.with_key(text: t(".address"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: correspondence_address_text(applicant)) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: change_address_link(@legal_aid_application),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.address')}",
-          ) %>
-    <% end %>
-  <% end %>
+        if :last_name_at_birth.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__last_name_at_birth" }) do |row|
+            row.with_key(text: read_only ? t(".last_name_at_birth_question") : t(".last_name_at_birth"))
+            row.with_value(text: applicant.last_name_at_birth.nil? ? t(".same_as_last_name") : applicant.last_name_at_birth)
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name_at_birth),
+              visually_hidden_text: t(".last_name_at_birth"),
+            )
+          end
+        end
 
-  <% if :care_of.in?(attributes) && !applicant.same_correspondence_and_home_address? && applicant.address&.care_of.present? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__care_of_recipient" }) do |row| %>
-      <%= row.with_key(text: t(".care_of_recipient"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.address&.care_of_recipient || t("generic.none")) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_correspondence_address_care_of_path(@legal_aid_application),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.care_of_recipient')}",
-          ) %>
-    <% end %>
-  <% end %>
+        if :date_of_birth.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__date_of_birth" }) do |row|
+            row.with_key(text: t(".dob"))
+            row.with_value(text: applicant.date_of_birth)
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.dob')}",
+            )
+          end
+        end
 
-  <% if :home_address.in?(attributes)
-       unless applicant.no_fixed_residence.nil?
-         summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_home_address" }) do |row|
-           row.with_key(text: t(".has_home_address"), classes: "govuk-!-width-one-half")
-           row.with_value(text: t(".home_address_display.#{client_has_home_address?(applicant)}"))
-           row.with_action(
-             text: t("generic.change"),
-             href: providers_legal_aid_application_home_address_status_path(@legal_aid_application),
-             visually_hidden_text: t(".has_home_address"),
-           )
-         end
-       end
+        if :age.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__age" }) do |row|
+            row.with_key(text: t(".age_question"))
+            row.with_value(text: t(".age", years: applicant.age))
+          end
+        end
 
-       if applicant.home_address.present? && client_has_home_address?(applicant)
-         summary_list.with_row(html_attributes: { id: "app-check-your-answers__home_address" }) do |row|
-           row.with_key(text: t(".home_address"), classes: "govuk-!-width-one-half")
-           row.with_value(text: address_with_line_breaks(applicant.home_address))
-           row.with_action(
-             text: t("generic.change"),
-             href: providers_legal_aid_application_home_address_lookup_path(@legal_aid_application),
-             visually_hidden_text: "#{t('.aria_prefix')} #{t('.home_address')}",
-           )
-         end
-       end
-     end %>
+        if :means_test.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__means_test" }) do |row|
+            row.with_key(text: t(".means_tested"))
+            row.with_value(text: means_tested_description(@legal_aid_application))
+          end
+        end
 
-  <% if :employment_status.in?(attributes) && !applicant.employed.nil? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__employment_status" }) do |row| %>
-      <%= row.with_key(text: t(".employment_status"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.employment_status) %>
-    <% end %>
-  <% end %>
+        if :applied_previously.in?(attributes)
+          if applicant.applied_previously
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row|
+              row.with_key(text: t(".previous_application_reference"))
+              row.with_value(text: applicant.previous_reference)
+              row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_previous_references_path(@legal_aid_application),
+                visually_hidden_text: t(".previous_application_reference"),
+              )
+            end
+          else
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row|
+              row.with_key(text: t(".has_applied_before"))
+              row.with_value(text: yes_no(applicant.applied_previously))
+              row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_previous_references_path(@legal_aid_application),
+                visually_hidden_text: t(".has_applied_before"),
+              )
+            end
+          end
+        end
 
-  <% if :national_insurance_number.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__national_insurance_number" }) do |row| %>
-      <%= row.with_key(text: t(".nino"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.national_insurance_number || t("generic.not_provided")) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
-            visually_hidden_text: "#{t('.aria_prefix')} #{t('.nino')}",
-          ) %>
-    <% end %>
-  <% end %>
+        if :correspondence_choice.in?(attributes) && applicant.correspondence_address_choice.present?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__correspondence_address_choice" }) do |row|
+            row.with_key(text: t(".correspondence_address_choice"))
+            row.with_value(text: t(".correspondence_choice.#{applicant.correspondence_address_choice}"))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_correspondence_address_choice_path,
+              visually_hidden_text: t(".correspondence_address_choice"),
+            )
+          end
+        end
 
-  <% if :email.in?(attributes) && applicant.email.present? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__email" }) do |row| %>
-      <%= row.with_key(text: t(".email"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: applicant.email) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :email),
-            visually_hidden_text: "#{t('.aria_prefix')} {#{t('.email')}",
-          ) %>
-    <% end %>
-  <% end %>
+        if :address.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__address" }) do |row|
+            row.with_key(text: t(".address"))
+            row.with_value(text: correspondence_address_text(applicant))
+            row.with_action(
+              text: t("generic.change"),
+              href: change_address_link(@legal_aid_application),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.address')}",
+            )
+          end
+        end
 
-  <% if :has_partner.in?(attributes) %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_partner" }) do |row| %>
-      <%= row.with_key(text: t(".has_partner"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: yes_no(applicant.has_partner?)) %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: providers_legal_aid_application_client_has_partner_path(@legal_aid_application),
-            visually_hidden_text: t(".has_partner_aria_label"),
-          ) %>
-    <% end %>
-  <% end %>
-<% end %>
+        if :care_of.in?(attributes) && !applicant.same_correspondence_and_home_address? && applicant.address&.care_of.present?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__care_of_recipient" }) do |row|
+            row.with_key(text: t(".care_of_recipient"))
+            row.with_value(text: applicant.address&.care_of_recipient || t("generic.none"))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_correspondence_address_care_of_path(@legal_aid_application),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.care_of_recipient')}",
+            )
+          end
+        end
+
+        if :home_address.in?(attributes)
+          unless applicant.no_fixed_residence.nil?
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_home_address" }) do |row|
+              row.with_key(text: t(".has_home_address"))
+              row.with_value(text: t(".home_address_display.#{client_has_home_address?(applicant)}"))
+              row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_home_address_status_path(@legal_aid_application),
+                visually_hidden_text: t(".has_home_address"),
+              )
+            end
+          end
+
+          if applicant.home_address.present? && client_has_home_address?(applicant)
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__home_address" }) do |row|
+              row.with_key(text: t(".home_address"))
+              row.with_value(text: address_with_line_breaks(applicant.home_address))
+              row.with_action(
+                text: t("generic.change"),
+                href: providers_legal_aid_application_home_address_lookup_path(@legal_aid_application),
+                visually_hidden_text: "#{t('.aria_prefix')} #{t('.home_address')}",
+              )
+            end
+          end
+        end
+
+        if :employment_status.in?(attributes) && !applicant.employed.nil?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__employment_status" }) do |row|
+            row.with_key(text: t(".employment_status"))
+            row.with_value(text: applicant.employment_status)
+          end
+        end
+
+        if :national_insurance_number.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__national_insurance_number" }) do |row|
+            row.with_key(text: t(".nino"))
+            row.with_value(text: nino_with_spaces(applicant.national_insurance_number) || t("generic.not_provided"))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.nino')}",
+            )
+          end
+        end
+
+        if :email.in?(attributes) && applicant.email.present?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__email" }) do |row|
+            row.with_key(text: t(".email"))
+            row.with_value(text: applicant.email)
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :email),
+              visually_hidden_text: "#{t('.aria_prefix')} {#{t('.email')}",
+            )
+          end
+        end
+
+        if :has_partner.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_partner" }) do |row|
+            row.with_key(text: t(".has_partner"))
+            row.with_value(text: yes_no(applicant.has_partner?))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_client_has_partner_path(@legal_aid_application),
+              visually_hidden_text: t(".has_partner_aria_label"),
+            )
+          end
+        end
+      end
+    end %>

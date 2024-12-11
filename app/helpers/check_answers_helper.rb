@@ -16,6 +16,12 @@ module CheckAnswersHelper
     number.to_d == BigDecimal("999_999_999_999.0", 12) ? "N/a" : gds_number_to_currency(number)
   end
 
+  def nino_with_spaces(national_insurance_number)
+    return nil if national_insurance_number.blank?
+
+    national_insurance_number.scan(/.{1,2}/).join(" ")
+  end
+
   def safe_yes_or_no(value)
     return value unless boolean?(value)
 
