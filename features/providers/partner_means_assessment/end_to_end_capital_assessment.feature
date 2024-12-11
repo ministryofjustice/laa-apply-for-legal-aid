@@ -44,10 +44,14 @@ Feature: partner_means_assessment full journey
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page with title "Which schemes or trusts have paid either your client or their partner?"
+    Then I should be on a page showing "Disregarded payments"
 
-    When I select "None of these schemes or trusts"
-    And I click "Save and continue"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
 
   @javascript
@@ -108,8 +112,12 @@ Feature: partner_means_assessment full journey
     When I choose "Yes"
     And I fill "restrictions_details" with "Some details of restrictions"
     And I click "Save and continue"
-    Then I should be on a page with title "Which schemes or trusts have paid either your client or their partner?"
+    Then I should be on a page showing "Disregarded payments"
 
-    When I select "Criminal Injuries Compensation Scheme"
-    And I click "Save and continue"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
