@@ -1,5 +1,5 @@
-FROM ruby:3.3.5-alpine3.20
-MAINTAINER apply for legal aid team
+FROM ruby:3.3.6-alpine3.21
+LABEL org.opencontainers.image.authors="apply for legal aid team"
 
 # fail early and print all commands
 RUN set -ex
