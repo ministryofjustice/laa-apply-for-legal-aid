@@ -2,11 +2,6 @@ class LegalAidApplication < ApplicationRecord
   include Discard::Model
   include DelegatedFunctions
 
-  # This column was moved to applicant and partner models/tables so needs dropping.
-  # ignoring for now so we can test and deploy code to confirm impact without losing
-  # data..
-  self.ignored_columns += %w[student_finance]
-
   ProceedingStruct = Struct.new(:name, :meaning, :matter_type, :category_of_law, :proceeding)
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
