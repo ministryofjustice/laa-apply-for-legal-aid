@@ -124,7 +124,7 @@ Feature: Completing and checking means answers backwards and forwards
     And I should see "Tell us about your client's capital"
 
     When I click 'Continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
 
     When I choose "No"
     Then I click 'Save and continue'

@@ -10,7 +10,7 @@ Feature: partner_means_assessment full journey
     And I should see "Tell us about your client and their partner's capital"
 
     When I click "Continue"
-    Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
+    Then I should be on a page with title "Does your client or their partner own the home your client usually lives in?"
 
     When I choose "No"
     And I click "Save and continue"
@@ -61,7 +61,7 @@ Feature: partner_means_assessment full journey
     And I should see "Tell us about your client and their partner's capital"
 
     When I click "Continue"
-    Then I should be on a page with title "Does your client or their partner own the home your client lives in?"
+    Then I should be on a page with title "Does your client or their partner own the home your client usually lives in?"
 
     Then I choose "Yes, with a mortgage or loan"
     Then I click "Save and continue"

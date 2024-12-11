@@ -85,7 +85,7 @@ Feature: non_passported_journey with means
     And I should see "Tell us about your client's capital"
 
     When I click 'Continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
 
     When I choose "No"
     And I click 'Save and continue'

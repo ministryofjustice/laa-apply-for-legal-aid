@@ -8,7 +8,7 @@ Feature: passported_journey completes application
     Then I click 'Continue'
     Then I should be on a page showing "What you need to do"
     Then I click 'Continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's home"
@@ -49,7 +49,7 @@ Feature: passported_journey completes application
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then  I should be on a page with title "Is the opponent an individual or an organisation?"
+    Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
     Then I should be on a page with title "Opponent"
@@ -130,7 +130,7 @@ Feature: passported_journey completes application
     And I click 'Save and continue'
     Then I should be on a page showing "What you need to do"
     And I click 'Continue'
-    And I should be on a page showing 'Does your client own the home that they live in?'
+    And I should be on a page showing 'Does your client own the home they usually live in?'
 
   @javascript @vcr
   Scenario: A negative benefit check allows the solicitor to override the result

@@ -50,7 +50,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page with title "What you need to do"
     And I should see "Tell us about your client's capital"
     When I click "Continue"
-    Then I am on the "Does your client own the home that they live in?" page
+    Then I am on the "Does your client own the home they usually live in?" page
     Then I choose "legal-aid-application-own-home-no-field"
     Then I click 'Save and continue'
     Then I am on the "Does your client own a vehicle?" page
@@ -69,8 +69,11 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Is your client banned from selling or borrowing against their assets?" page
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I am on the "Which schemes or trusts have paid your client?" page
-    Then I check "policy-disregards-none-selected-true-field"
+    Then I should be on a page showing "Disregarded payments"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+    When I check "My client has not received any of these payments"
     Then I click 'Save and continue'
     Then I am on the "Check your answers" page
     Then I click 'Save and continue'
@@ -182,7 +185,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page with title "What you need to do"
     And I should see "Tell us about your client's capital"
     Then I click 'Continue'
-    Then I am on the "Does your client own the home that they live in?" page
+    Then I am on the "Does your client own the home they usually live in?" page
     Then I choose "legal-aid-application-own-home-no-field"
     Then I click 'Save and continue'
     Then I am on the "Does your client own a vehicle?" page
@@ -201,9 +204,12 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Is your client banned from selling or borrowing against their assets?" page
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I am on the "Which schemes or trusts have paid your client?" page
-    Then I check "policy-disregards-none-selected-true-field"
-    Then I click 'Save and continue'
+    Then I should be on a page showing "Disregarded payments"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
     Then I am on the "Check your answers" page
     Then I click 'Save and continue'
     Then I am on the "may need to pay towards legal aid" page
