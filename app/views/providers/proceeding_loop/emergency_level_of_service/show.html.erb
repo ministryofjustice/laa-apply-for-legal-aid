@@ -11,7 +11,8 @@
       <%= form.govuk_radio_buttons_fieldset(:emergency_level_of_service, legend: { text: t(".instruction"), tag: "h2", size: "m" }) do %>
         <% form.object.levels_of_service.each_with_index do |level, idx| %>
           <% hint = level["name"] == "Full Representation" ? t(".hint_text") : "" %>
-          <%= form.govuk_radio_button :emergency_level_of_service, level["level"],
+          <%= form.govuk_radio_button :emergency_level_of_service,
+                                      level["level"],
                                       link_errors: idx.zero?,
                                       label: { text: level["name"] },
                                       hint: { text: hint } %>

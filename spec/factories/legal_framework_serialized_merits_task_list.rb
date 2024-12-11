@@ -432,7 +432,6 @@ FactoryBot.define do
           application: {
             tasks: {
               opponent_name: [],
-              nature_of_urgency: [],
               statement_of_case: [],
               children_application: [],
               second_appeal: [],

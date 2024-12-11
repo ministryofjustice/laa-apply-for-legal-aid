@@ -292,6 +292,9 @@ en:
           attributes:
             second_appeal:
               blank: Select yes if this is a second appeal
+            original_judge_level:
+              blank: Select what level of judge heard the original case
+              inclusion: Select what level of judge heard the original case from the available list
         opponent:
           attributes:
             police_notified_details_true:

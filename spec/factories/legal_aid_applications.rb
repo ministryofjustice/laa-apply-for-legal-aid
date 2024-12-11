@@ -651,8 +651,16 @@ FactoryBot.define do
     end
 
     trait :with_second_appeal do
-      after(:create) do |application|
-        create(:appeal, legal_aid_application: application, second_appeal: nil)
+      transient do
+        second_appeal { nil }
+        original_judge_level { nil }
+      end
+
+      after(:create) do |application, evaluator|
+        create(:appeal,
+               legal_aid_application: application,
+               second_appeal: evaluator.second_appeal,
+               original_judge_level: evaluator.original_judge_level)
       end
     end
 
