@@ -22,7 +22,7 @@ Feature: Means report when partner is present
       | h2  | Which savings or investments does either your client or their partner have? |
       | h2  | Which assets does either your client or their partner have? |
       | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | Your client's and the partner's payments from schemes or charities |
+      | h2  | Capital disregards |
       | h3  | Bank statements |
 
     Then the following sections should not exist:
@@ -130,11 +130,11 @@ Feature: Means report when partner is present
 
     And the Property question should exist:
       | question |
-      | Does your client or their partner own the home that they live in? |
+      | Does your client or their partner own the home your client usually lives in? |
 
     And the Property details questions should exist:
       | question |
-      | How much is the home your client and their partner live in worth? |
+      | How much is the home your client and their partner usually live in worth? |
       | How much is left to pay on the mortgage? |
       | Does your client or their partner own the home with anyone else? |
       | What percentage of the home do your client and their partner legally own? |
@@ -188,12 +188,7 @@ Feature: Means report when partner is present
       | Is your client or their partner banned from selling or borrowing against their assets? |
       | Details of restrictions |
 
-    And the "Payments from scheme or charities" questions should exist:
-      | question |
-      | England Infected Blood Support Scheme |
-      | Vaccine Damage Payments Scheme |
-      | Variant Creutzfeldt-Jakob disease (vCJD) Trust |
-      | Criminal Injuries Compensation Scheme |
-      | National Emergencies Trust (NET) |
-      | We Love Manchester Emergency Fund |
-      | The London Emergencies Trust |
+    And the Capital disregards questions and answers should match:
+      | question | answer |
+      | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
+      | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
