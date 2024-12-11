@@ -10,6 +10,9 @@
         <% t(".use_service.list").each do |item| %>
           <li><%= item %></li>
         <% end %>
+        <% if Setting.special_childrens_act? && current_provider&.sca_permissions? %>
+          <li><%= t(".use_service.sca_option") %></li>
+        <% end %>
       </ul>
 
       <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
