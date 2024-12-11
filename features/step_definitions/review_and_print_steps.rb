@@ -104,7 +104,6 @@ Given("I have completed truelayer application with merits and no student finance
   )
 
   @legal_aid_application.applicant.update!(student_finance: false, student_finance_amount: nil)
-
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
