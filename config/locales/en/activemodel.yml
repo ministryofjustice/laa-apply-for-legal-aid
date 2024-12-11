@@ -755,6 +755,11 @@ en:
               too_many_decimals: Enter a number with no more than 2 decimal places
             frequency:
               inclusion: "Select how often %{party} gets the benefit"
+        related_orders:
+          attributes:
+            base:
+              none_selected: Select which orders the proceeding relates to
+              none_and_another_option_selected: The proceeding must either relate to one or more of these orders or none
         providers/means/regular_income_form:
           attributes: &regular_income_attributes
             benefits_amount:
