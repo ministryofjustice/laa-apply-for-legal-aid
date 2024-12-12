@@ -144,11 +144,14 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "None of these assets"
     And I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
+    Then I should be on a page showing "Disregarded payments"
 
-    When I select 'England Infected Blood Support Scheme'
+    When I check "My client has not received any of these payments"
     And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
 
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
 

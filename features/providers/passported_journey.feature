@@ -36,8 +36,11 @@ Feature: passported_journey completes application
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
-    When I select 'None of these schemes or trusts'
+    Then I should be on a page showing "Disregarded payments"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+    When I check "My client has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
