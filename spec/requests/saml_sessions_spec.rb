@@ -1,15 +1,13 @@
 require "rails_helper"
 require "sidekiq/testing"
 
-RSpec.describe SamlSessionsController do
+RSpec.describe "SamlSessionsController" do
   let(:firm) { create(:firm, offices: [office]) }
   let(:office) { create(:office) }
   let(:provider) { create(:provider, firm:, selected_office: office, offices: [office], username:) }
   let(:username) { "bob the builder" }
-  let(:firm_id) { "3959183" }
-  let(:provider_details_api_url) { "#{Rails.configuration.x.pda.url}/provider-users/#{username.gsub(' ', '%20')}/provider-offices" }
-  let(:provider_firms_api_url) { "#{Rails.configuration.x.pda.url}/provider-firms/#{firm_id}/provider-offices" }
-  let(:provider_details_api_response) { api_response.to_json }
+  let(:provider_details_api_url) { "#{Rails.configuration.x.provider_details.url}#{username.gsub(' ', '%20')}" }
+  let(:provider_details_api_reponse) { api_response.to_json }
   let(:enable_mock_saml) { false }
 
   before do
@@ -50,8 +48,7 @@ RSpec.describe SamlSessionsController do
 
     before do
       allow_any_instance_of(Warden::Proxy).to receive(:authenticate!).and_return(provider)
-      stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_response, status:)
-      stub_request(:get, provider_firms_api_url).to_return(body: firm_response.to_json, status:)
+      stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_reponse, status:)
     end
 
     context "when on staging or production" do
@@ -64,15 +61,16 @@ RSpec.describe SamlSessionsController do
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
 
           it "calls the Provider details api" do
-            expect(PDA::ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
+            expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
             post_request
           end
 
           it "updates the record with firm and offices" do
             post_request
-            expect(provider.firm.ccms_id).to eq "10835831"
-            expect(provider.firm.offices.size).to eq 1
-            expect(provider.firm.offices.first.ccms_id).to eq "34406595"
+            firm = Firm.find_by(ccms_id: raw_details_response[:providerFirmId])
+            expect(provider.firm_id).to eq firm.id
+            expect(firm.offices.size).to eq 1
+            expect(firm.offices.first.ccms_id).to eq raw_details_response[:providerOffices].first[:id].to_s
           end
 
           context "when mock_saml is activated" do
@@ -98,7 +96,7 @@ RSpec.describe SamlSessionsController do
           before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
           it "does not call the ProviderDetailsCreator" do
-            expect(PDA::ProviderDetailsCreator).not_to receive(:call)
+            expect(ProviderDetailsCreator).not_to receive(:call)
             post_request
           end
 
@@ -114,12 +112,12 @@ RSpec.describe SamlSessionsController do
         end
 
         context "and the provider does not exist on Provider details api" do
-          let(:api_response) { blank_response }
-          let(:status) { 204 }
+          let(:api_response) { raw_404_response }
+          let(:status) { 404 }
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
 
           it "calls the Provider details creator" do
-            expect(PDA::ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
+            expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
             post_request
           end
 
@@ -156,7 +154,7 @@ RSpec.describe SamlSessionsController do
         it "uses a worker to update details" do
           ProviderDetailsCreatorWorker.clear
           expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id).and_call_original
-          expect(PDA::ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
+          expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
           post_request
           ProviderDetailsCreatorWorker.drain
         end
@@ -174,15 +172,16 @@ RSpec.describe SamlSessionsController do
           let(:provider) { create(:provider, :created_by_devise, :with_ccms_apply_role, username:) }
 
           it "calls the Provider details api" do
-            expect(PDA::ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
+            expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
             post_request
           end
 
           it "updates the record with firm and offices" do
             post_request
-            expect(provider.firm.ccms_id).to eq "10835831"
-            expect(provider.firm.offices.size).to eq 1
-            expect(provider.firm.offices.first.ccms_id).to eq "34406595"
+            firm = Firm.find_by(ccms_id: raw_details_response[:providerFirmId])
+            expect(provider.firm_id).to eq firm.id
+            expect(firm.offices.size).to eq 1
+            expect(firm.offices.first.ccms_id).to eq raw_details_response[:providerOffices].first[:id].to_s
           end
 
           it "displays the start page" do
@@ -201,7 +200,7 @@ RSpec.describe SamlSessionsController do
           it "does not schedule a job to update the provider details" do
             expect(provider).to receive(:update_details).and_call_original
             expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
-            expect(PDA::ProviderDetailsCreator).not_to receive(:call).with(provider)
+            expect(ProviderDetailsCreator).not_to receive(:call).with(provider)
             post_request
           end
         end
@@ -222,38 +221,34 @@ RSpec.describe SamlSessionsController do
 
   def raw_details_response
     {
-      firm: {
-        firmId: 3_959_183,
-        ccmsFirmId: 10_835_831,
-        # trimmed for stub usage
-      },
-      user: {
-        # trimmed for stub usage
-      },
-      officeCodes: [
+      providerFirmId: 22_381,
+      contactUserId: 29_562,
+      contacts: [
         {
-          firmOfficeId: 145_434,
-          ccmsFirmOfficeId: 34_406_595,
-          # trimmed for stub usage
+          id: 568_352,
+          name: "SALLYCORNHILL",
+        },
+        {
+          id: 2_017_809,
+          name: username,
+        },
+      ],
+      providerOffices: [
+        {
+          id: 81_693,
+          name: "Test1 and Co",
         },
       ],
     }
   end
 
-  def firm_response
+  def raw_404_response
     {
-      firm: {
-        firmId: 3_959_183,
-        ccmsFirmId: 10_835_831,
-        # trimmed for stub usage
-      },
-      offices: [
-        {
-          firmOfficeId: 145_434,
-          ccmsFirmOfficeId: 34_406_595,
-          # trimmed for stub usage
-        },
-      ],
+      timestamp: "2020-10-27T12:15:13.639+0000",
+      status: 404,
+      error: "Not Found",
+      message: "No records found for [bob%20the%20builder]",
+      path: "/api/providerDetails/bob%20the%20builder",
     }
   end
 

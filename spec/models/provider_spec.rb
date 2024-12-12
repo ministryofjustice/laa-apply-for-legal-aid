@@ -7,7 +7,7 @@ RSpec.describe Provider do
   describe "#update_details" do
     context "when firm exists" do
       it "does not call provider details creator immediately" do
-        expect(PDA::ProviderDetailsCreator).not_to receive(:call).with(provider)
+        expect(ProviderDetailsCreator).not_to receive(:call).with(provider)
         provider.update_details
       end
 

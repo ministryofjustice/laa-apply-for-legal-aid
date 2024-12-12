@@ -21,7 +21,7 @@ class Provider < ApplicationRecord
   end
 
   def update_details_directly
-    PDA::ProviderDetailsCreator.call(self)
+    ProviderDetailsCreator.call(self)
   end
 
   def sca_permissions?
