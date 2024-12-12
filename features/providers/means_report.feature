@@ -425,7 +425,7 @@ Feature: Means report
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | One-off payments your client received |
       | h2  | Capital disregards |
       | h3  | Bank statements |
       | h3  | Your client's accounts|

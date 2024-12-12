@@ -320,7 +320,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | One-off payments your client received |
 
     And the "Payments your client receives" section's questions and answers should match:
       | question | answer |
@@ -352,7 +352,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | One-off payments your client received |
 
     Then the following sections should not exist:
       | tag | section |
