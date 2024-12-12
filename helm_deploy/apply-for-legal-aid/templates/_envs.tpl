@@ -185,11 +185,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: laaPortalMockSaml
-  - name: PROVIDER_DETAILS_URL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: providerDetailsUrl
   - name: PDA_URL
     valueFrom:
       secretKeyRef:
