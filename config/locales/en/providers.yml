@@ -1681,7 +1681,7 @@ en:
         heading: Apply for civil legal aid
         intro: Providers can use this service to apply for civil legal aid for their clients.
         use_service:
-          list_title: "You can use it for"
+          list_title: "You can use it for:"
           list:
             - domestic abuse, except DAPO (domestic abuse protection orders)
             - section 8
