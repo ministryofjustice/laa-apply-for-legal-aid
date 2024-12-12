@@ -1681,10 +1681,11 @@ en:
         heading: Apply for civil legal aid
         intro: Providers can use this service to apply for civil legal aid for their clients.
         use_service:
-          list_title: "You can use it for one, or a combination of these applications:"
+          list_title: "You can use it for"
           list:
             - domestic abuse, except DAPO (domestic abuse protection orders)
             - section 8
+          sca_option: special children act
         dont_use_service:
           list_title: "But do not use this service if:"
           list:
@@ -1697,7 +1698,7 @@ en:
             - you want to make both a family link and legal link to your application
             - you want to amend a submitted application
         use_ccms_para_html: |
-          If any of these apply, or you want to apply for different proceedings, use
+          If any of these apply, or you want to apply for other proceedings, use
           <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and
           Cost Management System'>CCMS</abbr> (Client and Cost Management System)</a>
           instead.
