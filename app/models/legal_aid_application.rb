@@ -34,6 +34,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :allegation, class_name: "ApplicationMeritsTask::Allegation", dependent: :destroy
   has_one :undertaking, class_name: "ApplicationMeritsTask::Undertaking", dependent: :destroy
   has_one :urgency, class_name: "ApplicationMeritsTask::Urgency", dependent: :destroy
+  has_one :appeal, class_name: "ApplicationMeritsTask::Appeal", dependent: :destroy
   has_many :attempts_to_settles, class_name: "ProceedingMeritsTask::AttemptsToSettle", through: :proceedings
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types

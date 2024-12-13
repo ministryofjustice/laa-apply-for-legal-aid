@@ -453,6 +453,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_public_law_family_appeal do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :pbm01a)
+      end
+    end
+
     trait :with_multiple_sca_proceedings do
       after(:create) do |application|
         application.proceedings << create(:proceeding, :pb003)
@@ -642,6 +648,12 @@ FactoryBot.define do
 
     trait :with_domestic_abuse_summary do
       domestic_abuse_summary { build(:domestic_abuse_summary) }
+    end
+
+    trait :with_second_appeal do
+      after(:create) do |application|
+        create(:appeal, legal_aid_application: application, second_appeal: nil)
+      end
     end
 
     trait :with_restrictions do

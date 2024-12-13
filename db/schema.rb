@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_10_160206) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_11_093840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -103,6 +103,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_160206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_allegations_on_legal_aid_application_id"
+  end
+
+  create_table "appeals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.boolean "second_appeal"
+    t.string "original_judge_level"
+    t.string "court_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_appeals_on_legal_aid_application_id"
   end
 
   create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1117,6 +1127,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_160206) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "applicants"
   add_foreign_key "allegations", "legal_aid_applications"
+  add_foreign_key "appeals", "legal_aid_applications"
   add_foreign_key "attempts_to_settles", "proceedings"
   add_foreign_key "bank_account_holders", "bank_providers"
   add_foreign_key "bank_accounts", "bank_providers"

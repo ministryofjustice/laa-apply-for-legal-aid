@@ -282,7 +282,7 @@ FactoryBot.define do
     lead_proceeding { false }
     ccms_code { "SE013A" }
     meaning { "CAO contact-Appeal" }
-    description { "o be represented on an application for a child arrangements order-who the child(ren) spend time with. Appeals only." }
+    description { "to be represented on an application for a child arrangements order-who the child(ren) spend time with. Appeals only." }
     substantive_cost_limitation { 25_000 }
     delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
     used_delegated_functions { nil }
@@ -393,6 +393,25 @@ FactoryBot.define do
     used_delegated_functions_on { nil }
     used_delegated_functions_reported_on { nil }
     name { "prohibited_steps_order_plf" }
+    matter_type { "public law family (PLF)" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLB" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+  end
+
+  trait :pbm01a do
+    lead_proceeding { false }
+    ccms_code { "PBM01A" }
+    meaning { "Declaration for overseas adoption - appeal" }
+    description { "to be represented on an application for a declaration as to an overseas adoption.  Appeals only." }
+    substantive_cost_limitation { 5000 }
+    delegated_functions_cost_limitation { 2250 }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "declaration_for_overseas_adoption_appeal" }
     matter_type { "public law family (PLF)" }
     category_of_law { "Family" }
     category_law_code { "MAT" }
