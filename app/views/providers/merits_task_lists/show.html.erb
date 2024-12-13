@@ -19,6 +19,8 @@
 
         <%= govuk_task_list(id_prefix: "task-list_case-details") do |task_list|
               @merits_tasks[:application].each do |task|
+                next if task.state.eql?(:ignored)
+
                 task_list.with_item(
                   title: t(".#{task.name}"),
                   href: _task_url(task.name, @legal_aid_application, task.state),

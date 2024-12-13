@@ -330,8 +330,6 @@ en:
           attributes:
             details:
               blank: Enter details of the specific issue
-            confirmed:
-              blank: You must confirm this specific issue proceeding is not for a change of name application
         proceeding_merits_task/vary_order:
           attributes:
             details:

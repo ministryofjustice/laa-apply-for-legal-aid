@@ -36,12 +36,10 @@ module Providers
         subject(:patch_specific_issues) { patch providers_merits_task_list_specific_issue_path(proceeding_two), params: params.merge(submit_button) }
 
         let(:details) { Faker::Lorem.paragraph }
-        let(:confirmed) { true }
         let(:params) do
           {
             proceeding_merits_task_specific_issue: {
               details:,
-              confirmed: confirmed.to_s,
             },
           }
         end
@@ -61,7 +59,6 @@ module Providers
 
             it "updates the record" do
               expect(proceeding_two.specific_issue.reload.details).to eq(details)
-              expect(proceeding_two.specific_issue.reload.confirmed).to eq(confirmed)
             end
 
             it "sets the task to complete" do
@@ -83,7 +80,6 @@ module Providers
             it "updates the record" do
               expect(proceeding_two.specific_issue.reload).to have_attributes(
                 details:,
-                confirmed:,
               )
             end
 
