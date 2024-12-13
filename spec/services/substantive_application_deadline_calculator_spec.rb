@@ -1,4 +1,3 @@
-require "rspec"
 require "rails_helper"
 
 RSpec.describe SubstantiveApplicationDeadlineCalculator, :vcr do
