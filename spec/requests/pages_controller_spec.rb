@@ -18,12 +18,12 @@ RSpec.describe PagesController, :clamav do
 
   context "when in maintenance mode" do
     before do
-      allow(Rails.application.config.x).to receive(:maintenance_mode).and_return(true)
+      Setting.setting.update!(service_maintenance_mode: true)
       Rails.application.reload_routes!
     end
 
     after do
-      allow(Rails.application.config.x).to receive(:maintenance_mode).and_return(false)
+      Setting.setting.update!(service_maintenance_mode: false)
       Rails.application.reload_routes!
     end
 
