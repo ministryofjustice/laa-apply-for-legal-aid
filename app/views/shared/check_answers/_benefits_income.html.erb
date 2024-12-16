@@ -8,54 +8,35 @@
            end %>
 <% end %>
 
-<h2 class="govuk-heading-m"><%= t(".#{transactions_for}.heading") %></h2>
-<%= govuk_summary_list(card: { title: t(".#{transactions_for}.heading") }, actions: !read_only, html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits" }) do |row| %>
-    <%= row.with_key(text: t(".#{transactions_for}.question"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { yes_no(individual.receives_state_benefits?) } %>
-    <%= row.with_action(
-          text: t("generic.change"),
-          href: url,
-          visually_hidden_text: t(".#{transactions_for}.change_aria"),
-        ) %>
+<%= govuk_summary_card(title: t(".#{transactions_for}.heading"), html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |card| %>
+  <% unless read_only %>
+    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".#{transactions_for}.change_aria"))} %>
+  <% end %>
+  <% card.with_summary_list(html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |summary_list| %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits" }) do |row| %>
+      <%= row.with_key(text: t(".#{transactions_for}.question"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { yes_no(individual.receives_state_benefits?) } %>
+    <% end %>
   <% end %>
 <% end %>
 
 <% state_benefits.each_with_index do |state_benefit, index| %>
-  <div class="govuk-grid-row" id="app-check-your-answers__<%= transactions_for %>__state_benefits_<%= index + 1 %>">
-    <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m"><%= t(".benefit_heading", index: index + 1) %></h2>
-    </div>
 
+  <%= govuk_summary_card(title: t(".benefit_heading", index: index + 1), html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}" }) do |card| %>
     <% unless read_only %>
-      <div class="govuk-grid-column-one-third align-text-right">
-        <p>
-          <%= govuk_link_to(
-                t("generic.change"),
-                state_benefit_partial_url(:change_benefits, version, @legal_aid_application, state_benefit),
-                "aria-label": "#{t('generic.change')} #{t('.benefit_heading', index: index + 1)}",
-              ) %>
-        </p>
-      </div>
+      <%= card.with_action { govuk_link_to(t("generic.change"),
+                             state_benefit_partial_url(:change_benefits, version, @legal_aid_application, state_benefit),
+                             "aria-label": "#{t('generic.change')} #{t('.benefit_heading', index: index + 1)}")} %>
     <% end %>
-  </div>
-
-  <%= govuk_summary_list(
-        card: { title: t(".benefit_heading", index: index + 1) },
-        actions: false,
-        html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}_items" },
-      ) do |summary_list| %>
-    <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t(".type"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: state_benefit.description) %>
-    <% end %>
-    <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t(".amount"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: number_to_currency(state_benefit.amount)) %>
-    <% end %>
-    <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t(".frequency"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: t("transaction_types.frequencies.#{state_benefit.frequency}")) %>
+    <% card.with_summary_list(html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}_items" }) do |summary_list| %>
+      <%= summary_list.with_row do |row| %>
+        <%= row.with_key(text: t(".type"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: state_benefit.description)%>
+      <% end %>
+      <%= summary_list.with_row do |row| %>
+        <%= row.with_key(text: t(".amount"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: "#{number_to_currency(state_benefit.amount)} #{t("transaction_types.frequencies.#{state_benefit.frequency}").downcase}") %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
