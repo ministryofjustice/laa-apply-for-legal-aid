@@ -7,6 +7,9 @@ RSpec.describe SamlIdpController do
 
     before do
       allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(true)
+
+      # Ensure that the service is not in maintenance mode why running the tests
+      allow(Setting).to receive(:service_maintenance_mode?).and_return(false)
     end
 
     context "when the username and password is in config/initializers/mock_saml.rb" do

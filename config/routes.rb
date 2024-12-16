@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   get "status", to: "status#ping", format: :json
   get "data", to: "status#data"
 
-  match "(*any)", to: "pages#servicedown", via: :all if Rails.application.config.x.maintenance_mode
-
-  root to: "providers/start#index"
-
   require "sidekiq/web"
   require "sidekiq-status/web"
   mount Sidekiq::Web => "/sidekiq"
@@ -20,17 +16,7 @@ Rails.application.routes.draw do
   post "/saml/auth" => "saml_idp#create"
 
   devise_for :providers, controllers: { saml_sessions: "saml_sessions" }
-  devise_for :applicants
   devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
-
-  devise_scope :applicant do
-    match(
-      "auth/true_layer/callback",
-      to: "applicants/omniauth_callbacks#true_layer",
-      via: %i[get puts],
-      as: :applicant_true_layer_omniauth_callback,
-    )
-  end
 
   devise_scope :admin_user do
     match(
@@ -42,13 +28,6 @@ Rails.application.routes.draw do
   end
 
   get "auth/failure", to: "auth#failure"
-
-  resource :contact, only: [:show]
-  resources :accessibility_statement, only: [:index]
-  resources :privacy_policy, only: [:index]
-  resources :feedback, only: %i[new create show]
-  resources :errors, only: [:show], path: :error
-  resources :problem, only: :index
 
   namespace :admin do
     root to: "legal_aid_applications#index"
@@ -92,6 +71,37 @@ Rails.application.routes.draw do
     get "admin_report_provider_emails", to: "reports#download_provider_emails_report", as: "provider_emails_csv"
     get "admin_report_user_feedbacks", to: "reports#download_user_feedbacks_report", as: "user_feedbacks_csv"
   end
+
+  # Routes are only loaded once when rails server is started,
+  # therefore the default settings are loaded on start,
+  # and further changes via admin/settings will not be loaded.
+  # Advance constraints and lambdas allow us to do dynamic things
+  # https://guides.rubyonrails.org/routing.html#advanced-constraints
+  #
+  # If any routes below are required while in maintenance mode
+  # move them above the servicedown matcher
+  # match "(*any)", to: "pages#servicedown", via: :all if Rails.application.config.x.maintenance_mode
+  match "(*any)", to: "pages#servicedown", via: :all, constraints: ->(_request) { Setting.service_maintenance_mode? }
+
+  root to: "providers/start#index"
+
+  devise_for :applicants
+
+  devise_scope :applicant do
+    match(
+      "auth/true_layer/callback",
+      to: "applicants/omniauth_callbacks#true_layer",
+      via: %i[get puts],
+      as: :applicant_true_layer_omniauth_callback,
+    )
+  end
+
+  resource :contact, only: [:show]
+  resources :accessibility_statement, only: [:index]
+  resources :privacy_policy, only: [:index]
+  resources :feedback, only: %i[new create show]
+  resources :errors, only: [:show], path: :error
+  resources :problem, only: :index
 
   namespace "v1" do
     resources :legal_aid_applications, only: [:destroy]
