@@ -1326,8 +1326,8 @@ en:
           show:
             h1-heading: Disregarded payments
             paragraph:
-              client: These payments are not counted, but we still need to know about them to understand your client’s finances. They are called mandatory disregards.
-              partner: These payments are not counted, but we still need to know about them to understand your client and their partner’s finances. They are called mandatory disregards.
+              client: These payments are not counted, but we still need to know about them to understand your client's finances. They are called mandatory disregards.
+              partner: These payments are not counted, but we still need to know about them to understand your client and their partner's finances. They are called mandatory disregards.
             h2-heading:
               client: Select if your client has received any of these payments
               partner: Select if your client or their partner has received any of these payments
