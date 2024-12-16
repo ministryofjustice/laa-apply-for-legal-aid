@@ -512,8 +512,9 @@ en:
           heading: Allegation
           denies_all: Does the client wholly or substantially deny any allegations?
           additional_information: Additional information
-        opponent: Opponent
         opponent-heading: Opponent details
+        opponent_name: Opponent %{number} name
+        opponent_type: Opponent %{number} type
         domestic_abuse:
           heading: Domestic abuse summary
           warning_letter_reasons: Why a warning letter has not been sent
