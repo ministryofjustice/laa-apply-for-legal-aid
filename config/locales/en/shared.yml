@@ -579,7 +579,8 @@ en:
         evidence_upload_heading: Files to support the application
       children_involved:
         involved-children-heading: Children involved in this application
-        child: Child
+        child_name: Child %{number} name
+        child_date_of_birth: Child %{number} date of birth
       relationship_to_child:
         biological_parent: Client is the biological parent of any child involved?
         child_subject: Client is a child subject of this proceeding?
