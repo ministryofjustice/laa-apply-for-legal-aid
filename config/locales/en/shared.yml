@@ -457,27 +457,22 @@ en:
       employed_income:
         employment: Employment income
         employment_details: Details
-        partner:
-          heading: Partner employment income
-          employment_details: Details for partner
-          employment_question: Do you need to tell us anything else about the partner's employment?
-        client:
-          heading: Client employment income
-          employment_details: Details for client
-          employment_question: Do you need to tell us anything else about your client's employment?
+        heading: "#{individual} employment income"
+        details_for: "Details for #{individual}"
+        question: "Do you need to tell us anything else about #{individual_with_determiner}'s employment?"
+        aria_label: "Change #{individual_with_determiner}'s employment details"
       benefits_income:
         applicant:
-          heading: Client benefits
-          question: Does your client get any benefits, charitable or government payments?
+          heading: Client benefits, charitable or government payments
+          question: Client gets benefits, charitable or government payments?
           change_aria: whether your client receives benefits
         partner:
-          heading: Partner benefits
-          question: Does the partner get any benefits?
+          heading: Partner benefits, charitable or government payments
+          question: Partner gets benefits, charitable or government payments?
           change_aria: whether the partner receives benefits
-        benefit_heading: "Benefit %{index}"
+        benefit_heading: "Benefits, charitable or government payment %{index}"
         type: Benefit type
-        amount: Amount
-        frequency: Frequency
+        amount: Benefit amount
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
@@ -591,8 +586,8 @@ en:
         parental_responsibilities: Client has parental responsibility for any child involved?
         parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       full_employment_details:
-        employment: "%{individual} employment income"
-        details: "%{individual_with_determiner}'s employment details"
+        employment: Employment income
+        details: "Anything else about %{individual_with_determiner}'s employment"
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:

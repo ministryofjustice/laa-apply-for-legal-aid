@@ -1115,13 +1115,13 @@ en:
         applicant_income_assessment:
           income-heading: Your client's income
           outgoings-heading: Your client's outgoings
-          credits-section-heading: Payments your client receives
-          debits-section-heading: Payments your client makes
+          credits-section-heading: Payments your client gets
+          debits-section-heading: Payments your client pays
         partner_income_assessment:
           income-heading: The partner's income
           outgoings-heading: The partner's outgoings
-          credits-section-heading: Payments the partner receives
-          debits-section-heading: Payments the partner makes
+          credits-section-heading: Payments the partner gets
+          debits-section-heading: Payments the partner pays
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?
