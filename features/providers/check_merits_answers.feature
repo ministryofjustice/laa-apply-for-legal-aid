@@ -34,7 +34,11 @@ Feature: Check merits answers
       | question | answer |
       | Second appeal? | No |
       | Original case heard by | Recorder Circuit Judge (HHJ) |
+      | Appeal will be heard in | Any other court |
 
+    #################################
+    # ECCT question 1 and 3 only needed
+    #################################
     When I click Check Your Answers Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
     And I should be on a page showing "Is this a second appeal?"
@@ -42,17 +46,24 @@ Feature: Check merits answers
 
     When I choose "Yes"
     And I click "Save and continue"
+    Then I should be on the 'second_appeal_court_type' page showing 'Which court will the second appeal be heard in?'
 
-    # TODO: AP-5531/5532 - should go to question 3 "Which court will the second appeal be heard in?"
+    When I choose "Supreme court"
+    And I click "Save and continue"
+
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | Yes |
+      | Appeal will be heard in | Supreme court |
 
     And the "Second appeal" check your answers section should not contain:
       | question |
       | Original case heard by |
 
+    #################################
+    # ECCT question 1 and 2 only needed
+    #################################
     When I click Check Your Answers Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
 
@@ -63,10 +74,6 @@ Feature: Check merits answers
     And I should be on a page showing "What level of judge heard the original case?"
     And I should see "This question will help us decide if a specialist caseworker should review your application."
 
-    # Test the old value was cleared
-    When I click "Save and continue"
-    Then I should see govuk error summary "Select what level of judge heard the original case"
-
     When I choose "Deputy District Judge (DDJ)"
     And I click "Save and continue"
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
@@ -74,3 +81,30 @@ Feature: Check merits answers
       | question | answer |
       | Second appeal? | No |
       | Original case heard by | Deputy District Judge (DDJ) |
+
+    And the "Second appeal" check your answers section should not contain:
+      | question |
+      | Appeal will be heard in |
+
+    #####################################
+    # ECCT question 1, 2 and 4 needed
+    #####################################
+    When I click Check Your Answers Change link for 'second_appeal_heading'
+    Then I should be on a page with title "Is this a second appeal?"
+
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "What level of judge heard the original case?"
+
+    When I choose "High Court Judge (J)"
+    And I click "Save and continue"
+    Then I should be on the 'appeal_court_type' page showing 'Which court will the appeal be heard in?'
+
+    When I choose "Any other court"
+    And I click "Save and continue"
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the "Second appeal" check your answers section should contain:
+      | question | answer |
+      | Second appeal? | No |
+      | Original case heard by | High Court Judge (J) |
+      | Appeal will be heard in | Any other court |

@@ -59,14 +59,39 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealForm do
       end
     end
 
-    context "when second_appeal previously false and original_judge_level exists" do
-      let(:appeal) { create(:appeal, second_appeal: false, original_judge_level: "district_judge") }
+    context "when second_appeal previously false and original_judge_level and appeal court_type exists" do
+      let(:appeal) do
+        create(:appeal,
+               second_appeal: false,
+               original_judge_level: "recorder_circuit_judge",
+               court_type: "other_court")
+      end
 
-      context "when second_appeal changed to true" do
+      context "when second_appeal changed" do
         let(:second_appeal) { "true" }
 
         it "clears original_judge_level" do
-          expect { save_form }.to change { appeal.reload.original_judge_level }.from("district_judge").to(nil)
+          expect { save_form }.to change { appeal.reload.original_judge_level }.from("recorder_circuit_judge").to(nil)
+        end
+
+        it "clears court_type" do
+          expect { save_form }.to change { appeal.reload.court_type }.from("other_court").to(nil)
+        end
+      end
+    end
+
+    context "when second_appeal previously true and appeal court_type exists" do
+      let(:appeal) do
+        create(:appeal,
+               second_appeal: true,
+               court_type: "court_of_appeal")
+      end
+
+      context "when second_appeal changed" do
+        let(:second_appeal) { "false" }
+
+        it "clears court_type" do
+          expect { save_form }.to change { appeal.reload.court_type }.from("court_of_appeal").to(nil)
         end
       end
     end

@@ -24,8 +24,7 @@ RSpec.describe Flow::Steps::ProviderMerits::SecondAppealsStep, type: :request do
     context "when second_appeal is true" do
       let(:second_appeal) { true }
 
-      # TODO: AP-5531/5532 - should go to question 3 "Which court will the second appeal be heard in?"
-      it { is_expected.to eq :merits_task_lists }
+      it { is_expected.to eq :second_appeal_court_types }
     end
 
     context "when second_appeal is false" do
@@ -41,8 +40,7 @@ RSpec.describe Flow::Steps::ProviderMerits::SecondAppealsStep, type: :request do
     context "when second_appeal is true" do
       let(:second_appeal) { true }
 
-      # TODO: AP-5531/5532 - should go to question 3 "Which court will the second appeal be heard in?"
-      it { is_expected.to eq :check_merits_answers }
+      it { is_expected.to eq :second_appeal_court_types }
     end
 
     context "when second_appeal is false" do

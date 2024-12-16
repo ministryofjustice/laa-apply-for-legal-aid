@@ -65,6 +65,13 @@ Feature: Public law family merits appeal question flow
     # Original (case) judge level
     #############################
     Then I should be on the 'original_case_judge_level' page showing 'What level of judge heard the original case?'
+    And I should see "This question will help us decide if a specialist caseworker should review your application."
+    And I should be on a page showing "Family Panel Magistrates (Justices/JP)"
+    And I should be on a page showing "Deputy District Judge (DDJ)"
+    And I should be on a page showing "District Judge (DJ)"
+    And I should be on a page showing "Recorder Circuit Judge (HHJ)"
+    And I should be on a page showing "High Court Judge (J)"
+    And I should see "Including those sitting as such with s9 ticket"
 
     # Test the error
     When I click "Save and continue"
@@ -73,7 +80,21 @@ Feature: Public law family merits appeal question flow
     When I choose "Recorder Circuit Judge (HHJ)"
     And I click "Save and continue"
 
-    # TODO: 5532 - should go to appeal court type question 4 or next merit loop flow question
+    #############################
+    # First appeal court type
+    #############################
+    Then I should be on the 'appeal_court_type' page showing 'Which court will the appeal be heard in?'
+    And I should see "This question will help us decide if a specialist caseworker should review your application."
+    And I should see "Court of appeal"
+    And I should see "Supreme court"
+    And I should see "Any other court"
+
+    # Test the error
+    And I click "Save and continue"
+    Then I should see govuk error summary "Select which court the appeal will be heard in"
+
+    When I choose "Any other court"
+    And I click "Save and continue"
     Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
 
     ############################
@@ -85,7 +106,21 @@ Feature: Public law family merits appeal question flow
     When I choose "Yes"
     And I click "Save and continue"
 
-    # TODO: 5531 - should go to appeal court type question 3
+    #############################
+    # Second appeal court type
+    #############################
+    Then I should be on the 'second_appeal_court_type' page showing 'Which court will the second appeal be heard in?'
+    And I should see "This question will help us decide if a specialist caseworker should review your application."
+    And I should see "Court of appeal"
+    And I should see "Supreme court"
+    And I should not see "Any other court"
+
+    # Test the error
+    And I click "Save and continue"
+    Then I should see govuk error summary "Select which court the appeal will be heard in"
+
+    When I choose "Court of appeal"
+    And I click "Save and continue"
     Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
 
     ############################
@@ -104,3 +139,26 @@ Feature: Public law family merits appeal question flow
     Then I should be on the 'original_case_judge_level' page showing 'What level of judge heard the original case?'
     When I click "Save and continue"
     Then I should see govuk error summary "Select what level of judge heard the original case"
+
+    When I choose "High Court Judge (J)"
+    And I click "Save and continue"
+
+    ################################
+    # First appeal court
+    # Test the old value was cleared
+    ################################
+    Then I should be on the 'appeal_court_type' page showing 'Which court will the appeal be heard in?'
+    When I click "Save and continue"
+    Then I should see govuk error summary "Select which court the appeal will be heard in"
+
+
+    ################################
+    # Original (case) judge level
+    # Test next question flow
+    ################################
+    When I click link "Back"
+    Then I should be on the 'original_case_judge_level' page showing 'What level of judge heard the original case?'
+
+    When I choose "Family Panel Magistrates (Justices/JP)"
+    And I click "Save and continue"
+    Then I should be on the 'merits_task_list' page showing 'Provide details of the case'

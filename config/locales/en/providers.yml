@@ -1,5 +1,15 @@
 ---
 en:
+  appeal_court_types:
+    supreme_court: &supreme_court Supreme court
+    court_of_appeal: &court_of_appeal Court of appeal
+    other_court: &other_court Any other court
+  original_judge_levels:
+    family_panel_magistrates: &family_panel_magistrates Family Panel Magistrates (Justices/JP)
+    deputy_district_judge: &deputy_district_judge Deputy District Judge (DDJ)
+    district_judge: &district_judge District Judge (DJ)
+    recorder_circuit_judge: &recorder_circuit_judge Recorder Circuit Judge (HHJ)
+    high_court_judge: &high_court_judge High Court Judge (J)
   providers:
     previous_references:
       show:
@@ -664,25 +674,43 @@ en:
         show:
           page_title: Is this a second appeal?
           hint: This question will help us decide if a specialist caseworker should review your application.
+      second_appeal_court_types:
+        show:
+          page_title: Which court will the second appeal be heard in?
+          hint: This question will help us decide if a specialist caseworker should review your application.
+          court_of_appeal:
+            label: *court_of_appeal
+          supreme_court:
+            label: *supreme_court
       original_judge_levels:
         show:
           page_title: What level of judge heard the original case?
           hint: This question will help us decide if a specialist caseworker should review your application.
           family_panel_magistrates:
-            label: Family Panel Magistrates (Justices/JP)
+            label: *family_panel_magistrates
             label_hint: ""
           deputy_district_judge:
-            label: Deputy District Judge (DDJ)
+            label: *deputy_district_judge
             label_hint: ""
           district_judge:
-            label: District Judge (DJ)
+            label: *district_judge
             label_hint: ""
           recorder_circuit_judge:
-            label: Recorder Circuit Judge (HHJ)
+            label: *recorder_circuit_judge
             label_hint: ""
           high_court_judge:
-            label: High Court Judge (J)
+            label: *high_court_judge
             label_hint: Including those sitting as such with s9 ticket
+      first_appeal_court_types:
+        show:
+          page_title: Which court will the appeal be heard in?
+          hint: This question will help us decide if a specialist caseworker should review your application.
+          court_of_appeal:
+            label: *court_of_appeal
+          supreme_court:
+            label: *supreme_court
+          other_court:
+            label: *other_court
     partners:
       about_financial_means:
         show:

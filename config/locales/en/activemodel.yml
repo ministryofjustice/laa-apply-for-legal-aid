@@ -295,6 +295,9 @@ en:
             original_judge_level:
               blank: Select what level of judge heard the original case
               inclusion: Select what level of judge heard the original case from the available list
+            court_type:
+              blank: Select which court the appeal will be heard in
+              inclusion: Select which court the appeal will be heard in from the available list
         opponent:
           attributes:
             police_notified_details_true:

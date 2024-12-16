@@ -7,19 +7,19 @@ module Providers
 
       validates :second_appeal, presence: true, unless: :draft?
 
-      set_callback :save, :before, :sync_original_judge_level
-
-      # Alternative callback
-      # set_callback :validation, :after, :sync_original_judge_level
+      set_callback :save, :before, :sync_second_appeal_details
 
     private
 
-      def sync_original_judge_level
-        attributes["original_judge_level"] = nil if second_appeal?
+      def sync_second_appeal_details
+        if second_appeal_changed?
+          attributes["original_judge_level"] = nil
+          attributes["court_type"] = nil
+        end
       end
 
-      def second_appeal?
-        attributes["second_appeal"] == "true"
+      def second_appeal_changed?
+        attributes["second_appeal"] != model.second_appeal.to_s
       end
     end
   end

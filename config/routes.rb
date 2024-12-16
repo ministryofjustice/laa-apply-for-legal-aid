@@ -370,6 +370,8 @@ Rails.application.routes.draw do
         end
         resource :second_appeal, only: %i[show update]
         resource :original_judge_level, only: %i[show update], path: "original_case_judge_level"
+        resource :first_appeal_court_type, only: %i[show update], path: "appeal_court_type"
+        resource :second_appeal_court_type, only: %i[show update]
       end
     end
 

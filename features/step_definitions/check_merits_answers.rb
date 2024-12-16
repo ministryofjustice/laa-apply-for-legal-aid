@@ -14,6 +14,7 @@ Given("I complete the journey as far as check merits answers with a PLF proceedi
     set_lead_proceeding: :pbm01a,
     second_appeal: false,
     original_judge_level: "recorder_circuit_judge",
+    court_type: "other_court",
   )
   create(:legal_framework_merits_task_list, :pbm01a_as_applicant, legal_aid_application: @legal_aid_application)
 
