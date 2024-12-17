@@ -108,18 +108,18 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealsController do
         end
       end
 
-      context "when user changes answer" do
+      context "when user changes answer from No to Yes" do
         before do
-          legal_aid_application.appeal = create(:appeal, second_appeal: false)
+          legal_aid_application.appeal = create(:appeal, second_appeal: false, original_judge_level: "district_judge")
         end
 
         let(:second_appeal) { true }
 
-        it "updates the appeal record" do
+        it "updates the second_appeal and clears the original_judge_level" do
           expect { post_second_appeal }
-            .to change { legal_aid_application.reload.appeal.second_appeal }
-              .from(false)
-              .to(true)
+            .to change { legal_aid_application.reload.appeal.attributes.symbolize_keys }
+              .from(hash_including(second_appeal: false, original_judge_level: "district_judge"))
+              .to(hash_including(second_appeal: true, original_judge_level: nil))
         end
       end
     end
@@ -165,6 +165,21 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealsController do
         it "redirects to the list of applications" do
           post_second_appeal
           expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+        end
+      end
+
+      context "when user changes answer from No to Yes" do
+        before do
+          legal_aid_application.appeal = create(:appeal, second_appeal: false, original_judge_level: "district_judge")
+        end
+
+        let(:second_appeal) { true }
+
+        it "updates the second_appeal and clears the original_judge_level" do
+          expect { post_second_appeal }
+            .to change { legal_aid_application.reload.appeal.attributes.symbolize_keys }
+              .from(hash_including(second_appeal: false, original_judge_level: "district_judge"))
+              .to(hash_including(second_appeal: true, original_judge_level: nil))
         end
       end
     end

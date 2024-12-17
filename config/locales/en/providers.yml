@@ -664,6 +664,25 @@ en:
         show:
           page_title: Is this a second appeal?
           hint: This question will help us decide if a specialist caseworker should review your application.
+      original_judge_levels:
+        show:
+          page_title: What level of judge heard the original case?
+          hint: This question will help us decide if a specialist caseworker should review your application.
+          family_panel_magistrates:
+            label: Family Panel Magistrates (Justices/JP)
+            label_hint: ""
+          deputy_district_judge:
+            label: Deputy District Judge (DDJ)
+            label_hint: ""
+          district_judge:
+            label: District Judge (DJ)
+            label_hint: ""
+          recorder_circuit_judge:
+            label: Recorder Circuit Judge (HHJ)
+            label_hint: ""
+          high_court_judge:
+            label: High Court Judge (J)
+            label_hint: Including those sitting as such with s9 ticket
     partners:
       about_financial_means:
         show:

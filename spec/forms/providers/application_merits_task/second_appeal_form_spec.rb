@@ -58,6 +58,18 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealForm do
         expect { save_form }.to change { appeal.reload.second_appeal }.from(nil).to(false)
       end
     end
+
+    context "when second_appeal previously false and original_judge_level exists" do
+      let(:appeal) { create(:appeal, second_appeal: false, original_judge_level: "district_judge") }
+
+      context "when second_appeal changed to true" do
+        let(:second_appeal) { "true" }
+
+        it "clears original_judge_level" do
+          expect { save_form }.to change { appeal.reload.original_judge_level }.from("district_judge").to(nil)
+        end
+      end
+    end
   end
 
   describe "#save_as_draft" do

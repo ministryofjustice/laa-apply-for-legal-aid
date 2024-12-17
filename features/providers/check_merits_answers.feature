@@ -28,10 +28,12 @@ Feature: Check merits answers
       | h2  | Opponent details |
       | h2  | Statement of case |
       | h2  | Children involved in this application |
+      | h2  | Second appeal |
 
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | No |
+      | Original case heard by | Recorder Circuit Judge (HHJ) |
 
     When I click Check Your Answers Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
@@ -40,8 +42,35 @@ Feature: Check merits answers
 
     When I choose "Yes"
     And I click "Save and continue"
+
+    # TODO: AP-5531/5532 - should go to question 3 "Which court will the second appeal be heard in?"
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | Yes |
 
+    And the "Second appeal" check your answers section should not contain:
+      | question |
+      | Original case heard by |
+
+    When I click Check Your Answers Change link for 'second_appeal_heading'
+    Then I should be on a page with title "Is this a second appeal?"
+
+    When I choose "No"
+    And I click "Save and continue"
+
+    Then I should be on a page with title "What level of judge heard the original case?"
+    And I should be on a page showing "What level of judge heard the original case?"
+    And I should see "This question will help us decide if a specialist caseworker should review your application."
+
+    # Test the old value was cleared
+    When I click "Save and continue"
+    Then I should see govuk error summary "Select what level of judge heard the original case"
+
+    When I choose "Deputy District Judge (DDJ)"
+    And I click "Save and continue"
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the "Second appeal" check your answers section should contain:
+      | question | answer |
+      | Second appeal? | No |
+      | Original case heard by | Deputy District Judge (DDJ) |

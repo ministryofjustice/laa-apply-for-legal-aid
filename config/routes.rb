@@ -369,6 +369,7 @@ Rails.application.routes.draw do
           get "/list", to: "statement_of_cases#list"
         end
         resource :second_appeal, only: %i[show update]
+        resource :original_judge_level, only: %i[show update], path: "original_case_judge_level"
       end
     end
 

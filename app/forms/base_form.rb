@@ -1,6 +1,8 @@
 class BaseForm
   include ActiveModel::Model
   include ActiveModel::Validations::Callbacks
+  include ActiveSupport::Callbacks
+  define_callbacks :save, :validation
 
   attr_writer :model
 
@@ -57,12 +59,16 @@ class BaseForm
   end
 
   def save
-    return false unless valid?
+    run_callbacks :validation do
+      return false unless valid?
+    end
 
     return true if assignable_attributes.empty?
 
-    model.attributes = clean_attributes(assignable_attributes)
-    model.save!(validate: false)
+    run_callbacks :save do
+      model.attributes = clean_attributes(assignable_attributes)
+      model.save!(validate: false)
+    end
   end
   alias_method :save!, :save
 

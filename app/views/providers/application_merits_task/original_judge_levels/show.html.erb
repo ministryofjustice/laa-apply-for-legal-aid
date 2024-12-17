@@ -1,0 +1,26 @@
+<%= form_with(
+      url: providers_legal_aid_application_original_judge_level_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"),
+                    template: :basic,
+                    form: do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:original_judge_level,
+                                          legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                          hint: { text: t(".hint") })do %>
+
+      <% form.object.judge_levels.each_with_index do |judge_level, idx| %>
+        <%= form.govuk_radio_button :original_judge_level,
+                                    judge_level,
+                                    link_errors: idx.zero?,
+                                    label: { text: t(".#{judge_level}.label") },
+                                    hint: { text: t(".#{judge_level}.label_hint") } %>
+      <% end %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
