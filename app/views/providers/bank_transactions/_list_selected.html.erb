@@ -16,6 +16,17 @@
             row.with_cell(text: l(bank_transaction.happened_at.to_date, format: :short_date))
             row.with_cell(text: bank_transaction.description)
             row.with_cell(text: value_with_currency_unit(bank_transaction.amount, bank_transaction.currency))
+
+            row.with_cell do
+              govuk_link_to(
+                t(".remove_link"),
+                providers_legal_aid_application_remove_bank_transaction_path(@legal_aid_application, bank_transaction),
+                class: "change-link",
+                "aria-label": "#{bank_transaction.description}",
+                visually_hidden_text: "#{t(".remove_link")} #{bank_transaction.description} #{value_with_currency_unit(bank_transaction.amount, bank_transaction.currency)} #{l(bank_transaction.happened_at.to_date, format: :short_date)}",
+              )
+            end
+
             row.with_cell do
               govuk_button_to(
                 t(".remove_link"),
