@@ -34,40 +34,6 @@ Given("I have completed the income and capital sections of a non-passported appl
     :with_proceedings,
     :with_employed_applicant,
     :with_non_passported_state_machine,
-    :with_fixed_offline_savings_accounts,
-    :with_restrictions,
-    :with_maintenance_in_category,
-    :with_fixed_benefits_transactions,
-    :with_fixed_benefits_cash_transactions,
-    :with_maintenance_in_category,
-    :with_fixed_rent_or_mortage_transactions,
-    :with_fixed_rent_or_mortage_cash_transactions,
-    :with_maintenance_out_category,
-    :with_transaction_period,
-    :with_policy_disregards,
-    :with_open_banking_consent,
-    :with_consent,
-    :with_dependant,
-    :with_own_home_mortgaged,
-    :checking_non_passported_means,
-    property_value: rand(1...1_000_000.0).round(2),
-    outstanding_mortgage_amount: rand(1...1_000_000.0).round(2),
-    shared_ownership: LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample,
-    percentage_home: rand(1...99.0).round(2),
-    explicit_proceedings: %i[da002 da006],
-    set_lead_proceeding: :da002,
-  )
-  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
-
-  login_as @legal_aid_application.provider
-end
-
-Given("I have completed the income and capital sections of a non-passported application with open banking transactions post-MTRA") do
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
-    :with_employed_applicant,
-    :with_non_passported_state_machine,
     :with_open_banking_consent,
     :with_consent,
     :with_transaction_period,
@@ -103,7 +69,7 @@ Given("I have completed the income and capital sections of a non-passported appl
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed the income and capital sections of a non-passported application with bank statement uploads post-MTRA") do
+Given("I have completed the income and capital sections of a non-passported application with bank statement uploads") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -136,7 +102,7 @@ Given("I have completed the income and capital sections of a non-passported appl
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed the capital sections of passported application post-MTRA") do
+Given("I have completed the capital sections of passported application") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,

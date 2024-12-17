@@ -2,46 +2,8 @@ Feature: mandatory and discretionary capital disregards questions and flow
 # TODO: AP-5493 - This flow file can be moved to a full flow non-passported journey feature after the MTR-A feature flag is removed
 
   @javascript
-  Scenario: When the MTR-A feature flag is off I should not see the mandatory or discretionary capital disregard questions in the flow
-    Given the feature flag for means_test_review_a is disabled
-    And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
-    Then I should be on the "check_income_answers" page showing "Check your answers"
-
-    When I click "Save and continue"
-    Then I should be on a page with title "What you need to do"
-
-    When I click "Continue"
-    Then I should be on a page with title "Does your client own the home that they live in?"
-    And I choose 'No'
-
-    When I click "Save and continue"
-    Then I should be on a page with title "Does your client own a vehicle?"
-    And I choose 'No'
-
-    When I click "Save and continue"
-    Then I should be on a page with title "Which bank accounts does your client have?"
-    And I select "None of these"
-
-    When I click "Save and continue"
-    Then I should be on a page with title "Which savings or investments does your client have?"
-    And I select "None of these savings or investments"
-
-    When I click "Save and continue"
-    Then I should be on a page with title "Which assets does your client have?"
-    And I select "None of these assets"
-
-    When I click "Save and continue"
-    Then I should be on a page with title "Which schemes or trusts have paid your client?"
-    And I select "None of these schemes or trusts"
-
-    When I click "Save and continue"
-    Then I should be on the "check_capital_answers" page showing "Check your answers"
-
-  @javascript
   Scenario: When the MTR-A feature flag is on I should see the mandatory and discretionary capital disregard question in the flow
-    Given the feature flag for means_test_review_a is enabled
-    And the MTR-A start date is in the past
-    And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
+    Given I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
     When I click "Save and continue"

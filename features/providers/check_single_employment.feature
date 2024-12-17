@@ -61,7 +61,7 @@ Feature: Check single employment
     And I should see "Tell us about your client's capital"
 
     When I click 'Continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
 
     When I choose "No"
     And I click 'Save and continue'
@@ -84,9 +84,13 @@ Feature: Check single employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Which schemes or trusts have paid your client?"
+    Then I should be on a page showing "Disregarded payments"
 
-    When I check "None of these schemes or trusts"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+
+    When I check "My client has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
 

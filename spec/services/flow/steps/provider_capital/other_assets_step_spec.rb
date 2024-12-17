@@ -32,7 +32,7 @@ RSpec.describe Flow::Steps::ProviderCapital::OtherAssetsStep, type: :request do
     context "when capture_policy_disregards is true" do
       let(:capture_policy_disregards?) { true }
 
-      it { is_expected.to eq :policy_disregards }
+      it { is_expected.to eq :capital_disregards_mandatory }
     end
 
     context "when passported is true" do

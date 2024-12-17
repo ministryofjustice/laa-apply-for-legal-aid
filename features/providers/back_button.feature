@@ -10,7 +10,7 @@
 #    Then I click 'Continue'
 #    Then I should be on a page showing "Before you continue"
 #    Then I click 'Save and continue'
-#    Then I should be on a page showing "Does your client own the home that they live in?"
+#    Then I should be on a page showing "Does your client own the home they usually live in?"
 #    Then I choose "Yes, with a mortgage or loan"
 #    Then I click 'Save and continue'
 #    Then I should be on a page showing "How much is your client's home worth?"
@@ -69,7 +69,7 @@
 #    Then I click link "Back"
 #    Then I should be on a page showing "How much is your client's home worth?"
 #    Then I click link "Back"
-#    Then I should be on a page showing "Does your client own the home that they live in?"
+#    Then I should be on a page showing "Does your client own the home they usually live in?"
 #    Then I click 'Save and continue'
 #    Then I click 'Save and continue'
 #    Then I click 'Save and continue'

@@ -21,7 +21,7 @@ Feature: non_passported_journey with capital
     Then I should be on a page with title "What you need to do"
     And I should see "Tell us about your client's capital"
     When I click 'Continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's home"
@@ -65,9 +65,12 @@ Feature: non_passported_journey with capital
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
-    Then I select 'England Infected Blood Support Scheme'
-    Then I click 'Save and continue'
+    Then I should be on a page showing "Disregarded payments"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Payments to be reviewed"
+    When I check "My client has not received any of these payments"
+    And I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 
   @javascript @vcr

@@ -85,7 +85,7 @@ Feature: non_passported_journey with means
     And I should see "Tell us about your client's capital"
 
     When I click 'Continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
 
     When I choose "No"
     And I click 'Save and continue'
@@ -111,9 +111,19 @@ Feature: non_passported_journey with means
     When I choose 'Yes'
     And I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     And I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or trusts'
+    Then I should be on a page showing "Disregarded payments"
 
-    When I select 'England Infected Blood Support Scheme'
+    When I check "Infected Blood Support Scheme payment"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Add details for 'Infected Blood Support Scheme payment'"
+
+    When I fill "amount" with "100"
+    And I fill 'account name' with 'Halifax'
+    And I enter the 'date received' date of 20 days ago
+    And I click "Save and continue"
+    Then I should be on a page showing "Payments to be reviewed"
+
+    When I check "My client has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
 

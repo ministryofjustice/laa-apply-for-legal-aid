@@ -40,7 +40,7 @@ Feature: Review and print your application
       | h2  | Which savings or investments does either your client or their partner have? |
       | h2  | Which assets does either your client or their partner have? |
       | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | Your client's and the partner's payments from schemes or charities |
+      | h2  | One-off payments your client or their partner received |
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
@@ -83,7 +83,7 @@ Feature: Review and print your application
       | h2  | Which savings or investments does either your client or their partner have? |
       | h2  | Which assets does either your client or their partner have? |
       | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | Your client's and the partner's payments from schemes or charities |
+      | h2  | One-off payments your client or their partner received |
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |
@@ -121,7 +121,7 @@ Feature: Review and print your application
       | h2  | Which savings or investments does either your client or their partner have? |
       | h2  | Which assets does either your client or their partner have? |
       | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | Your client's and the partner's payments from schemes or charities |
+      | h2  | One-off payments your client or their partner received |
       | h2  | Case details |
       | h2  | Latest incident details |
       | h2  | Opponent details |

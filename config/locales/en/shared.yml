@@ -222,85 +222,46 @@ en:
         - Energy Bills Support Scheme (EBSS)
         - Payments for those who are not served by mains gas
     disregarded_benefits:
-      mtra:
-        header: Disregarded benefits and payments
-        text: The following are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
-        carer_disability:
-          heading: Carer and disability
-          list_html:
-          - Attendance Allowance
-          - Carer's Allowance
-          - Community Care Direct Payments
-          - Constant Attendance Allowance
-          - Disability Living Allowance
-          - Exceptionally Severe Disablement Allowance
-          - Independent Living Fund
-          - Payments on account of benefit
-          - Personal Independence Payments (PIP)
-          - Severe Disablement Allowance
-          - Special Education Needs (SEN) Direct Payment
-          - Welsh Independent Living Grant
-        low_income:
-          heading: Low income
-          list_html:
-          - Budgeting Advance
-          - Housing Benefit
-          - Social Fund Funeral Payment
-          - Social Fund payments
-          - Universal Credit advance payments
-        other:
-          heading: Other
-          list_html:
-          - Armed Forces Independence Payment
-          - Compensation for miscarriage of justice
-          - Foster Carers Allowance
-          - Grenfell Tower Residents' Discretionary Fund
-          - Grenfell Tower fire victims payments
-          - "Infected Blood Support Scheme<br>Includes Infected Blood Interim Compensation Payment Scheme, Infected Blood Further Interim Compensation Scheme, Infected Blood Compensation Scheme, arrangements made under section 56(1) of the Victims and Prisoners Act 2024 or earlier support schemes"
-          - Modern Slavery Victim Care Contract (MSVCC) payments
-          - Scotland and Northern Ireland Redress Schemes for historical child abuse payment
-          - War Pensions Scheme payments
-          - War Widow(er) Pension
-          - Windrush Compensation Scheme Payments
-      pre_mtra:
-        header: Disregarded benefits
-        text: The following benefits are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
-        carer_disability:
-          heading: Carer and disability benefits
-          list_html:
-          - Attendance Allowance
-          - Carer's Allowance
-          - Community Care Direct Payments
-          - Constant Attendance Allowance
-          - Disability Living Allowance
-          - Exceptionally Severe Disablement Allowance
-          - Independent Living Fund
-          - Payments on account of benefit
-          - Personal Independence Payments (PIP)
-          - Severe Disablement Allowance
-          - Special Education Needs (SEN) Direct Payment
-          - Welsh Independent Living Grant
-        low_income:
-          heading: Low income benefits
-          list_html:
-          - Benefit Transfer Advance (Universal Credit)
-          - Budgeting Advance
-          - Council Tax Reduction
-          - Earnings Top-up (ETU)
-          - Housing Benefit
-          - Social Fund Funeral Payment
-          - Social Fund payments
-        other:
-          heading: Other benefits
-          list_html:
-          - Armed Forces Independence Payment
-          - Foster Carers Allowance
-          - Grenfell Tower Residents' Discretionary Fund
-          - Grenfell Tower fire victims payments
-          - War Pensions Scheme payments
-          - War Widow(er) Pension
-          - Widow's Pension lump sum payments
-          - Windrush Compensation Scheme Payments
+      header: Disregarded benefits and payments
+      text: The following are disregarded from the financial eligibility calculation. They are known as mandatory disregards.
+      carer_disability:
+        heading: Carer and disability
+        list_html:
+        - Attendance Allowance
+        - Carer's Allowance
+        - Community Care Direct Payments
+        - Constant Attendance Allowance
+        - Disability Living Allowance
+        - Exceptionally Severe Disablement Allowance
+        - Independent Living Fund
+        - Payments on account of benefit
+        - Personal Independence Payments (PIP)
+        - Severe Disablement Allowance
+        - Special Education Needs (SEN) Direct Payment
+        - Welsh Independent Living Grant
+      low_income:
+        heading: Low income
+        list_html:
+        - Budgeting Advance
+        - Housing Benefit
+        - Social Fund Funeral Payment
+        - Social Fund payments
+        - Universal Credit advance payments
+      other:
+        heading: Other
+        list_html:
+        - Armed Forces Independence Payment
+        - Compensation for miscarriage of justice
+        - Foster Carers Allowance
+        - Grenfell Tower Residents' Discretionary Fund
+        - Grenfell Tower fire victims payments
+        - "Infected Blood Support Scheme<br>Includes Infected Blood Interim Compensation Payment Scheme, Infected Blood Further Interim Compensation Scheme, Infected Blood Compensation Scheme, arrangements made under section 56(1) of the Victims and Prisoners Act 2024 or earlier support schemes"
+        - Modern Slavery Victim Care Contract (MSVCC) payments
+        - Scotland and Northern Ireland Redress Schemes for historical child abuse payment
+        - War Pensions Scheme payments
+        - War Widow(er) Pension
+        - Windrush Compensation Scheme Payments
+
     means_report:
       income_details:
         total_income: Total income
@@ -390,11 +351,6 @@ en:
           own_home_with_partner: Does your client or their partner own the home your client usually lives in?
           property_value: How much is the home they usually live in worth?
           property_value_with_partner: How much is the home your client and their partner usually live in worth?
-          legacy:
-            own_home: Does your client own the home that they live in?
-            own_home_with_partner: Does your client or their partner own the home that they live in?
-            property_value: How much is the home your client lives in worth?
-            property_value_with_partner: How much is the home your client and their partner live in worth?
           outstanding_mortgage: How much is left to pay on the mortgage?
           shared_ownership: Does your client own the home with anyone else?
           shared_ownership_with_partner: Does your client or their partner own the home with anyone else?

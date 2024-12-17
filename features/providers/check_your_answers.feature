@@ -7,7 +7,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's home"
@@ -35,7 +35,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's home"
@@ -63,7 +63,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
-    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'No'
@@ -183,7 +183,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to change property value via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Own home'
-      Then I should be on a page showing 'Does your client own the home that they live in?'
+      Then I should be on a page showing 'Does your client own the home they usually live in?'
       Then I click 'Save and continue'
       Then I should be on a page showing "Your client's home"
       Then I fill 'Property value' with '500000'
@@ -198,7 +198,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to remove property details via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Own home'
-      Then I should be on a page showing 'Does your client own the home that they live in?'
+      Then I should be on a page showing 'Does your client own the home they usually live in?'
       Then I choose 'No'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
@@ -320,7 +320,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | One-off payments your client received |
 
     And the "Payments your client receives" section's questions and answers should match:
       | question | answer |
@@ -352,7 +352,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | One-off payments your client received |
 
     Then the following sections should not exist:
       | tag | section |
