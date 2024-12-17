@@ -4,11 +4,12 @@
           unless @show_linked_proceedings || @read_only
             govuk_link_to(t("generic.change"),
                           providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
+                          id: "app-check-your-answers__#{proceeding.ccms_code.downcase}",
                           visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}")
           end
         end
 
-        card.with_summary_list(actions: false) do |summary_list|
+        card.with_summary_list(actions: false, html_attributes: { id: "#{proceeding.ccms_code.downcase}-questions" }) do |summary_list|
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_client_involvement_type" }) do |row|
             row.with_key(text: t(".client_involvement_type_details.question"), classes: "govuk-!-width-one-third")
             row.with_value { proceeding.client_involvement_type_description }
@@ -34,7 +35,7 @@
               end
             end
 
-            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_scope_limitations_#{proceeding.id}" }) do |row|
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.ccms_code.downcase}_emergency_scope_limitations" }) do |row|
               row.with_key(text: t(".scope_limits.emergency.question"))
               row.with_value { scope_limits(proceeding, "emergency") }
             end
@@ -54,7 +55,7 @@
             end
           end
 
-          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_substantive_scope_limitations_#{proceeding.id}" }) do |row|
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.ccms_code.downcase}_substantive_scope_limitations" }) do |row|
             row.with_key(text: t(".scope_limits.substantive.question"))
             row.with_value { scope_limits(proceeding, "substantive") }
           end

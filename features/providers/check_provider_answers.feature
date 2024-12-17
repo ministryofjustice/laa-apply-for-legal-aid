@@ -479,3 +479,87 @@ Feature: Checking client details answers backwards and forwards
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing 'Check your answers'
+
+  @javascript @vcr
+  Scenario: Multiple scope limitations are displayed as expected
+    Given I have created an application with da004 proceedings with delegated functions
+    And I view the check provider answers page
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | Proceedings |
+      | h2  | Non-molestation order |
+      | h2  | What happens next |
+
+    And the "DA004" proceeding check your answers section should contain:
+      | question | answer |
+      | Client role	| Applicant/Claimant/Petitioner |
+      | Emergency level of service | Full Representation |
+      | Emergency scope limitations |	Interim order inc. return date\nLimited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement. To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing. |
+      | Substantive level of service | Full Representation |
+      | Substantive scope limitations |	Final hearing\nLimited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order. |
+    And the Delegated functions answer for DA004 should match \d{1,2} \w+ \d{4}
+
+    And the emergency scope limitation Interim order inc. return date heading for DA004 should not be bold
+    And the substantive scope limitation Final hearing heading for DA004 should not be bold
+
+    When I click Check Your Answers summary card Change link for "DA004"
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
+
+    When I click "Save and continue"
+    Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
+
+    When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the emergency application?'
+
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should see "Proceeding 1\nNon-molestation order"
+    And I should see "You cannot change the default level of service for the emergency application for this proceeding."
+
+    When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    Then I should see 'Proceeding 1\nNon-molestation order\nFor the emergency application, select the scope'
+
+    When I select "Hearing"
+    And I enter the "hearing date" date of 2 months in the future
+    And I select "Warrant of arrest FLA"
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    And I should see 'Do you want to use the default level of service and scope for the substantive application?'
+
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should see "Proceeding 1\nNon-molestation order"
+    And I should see "You cannot change the default level of service for the substantive application for this proceeding."
+
+    When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
+    Then I should see 'Proceeding 1\nNon-molestation order\nFor the substantive application, select the scope'
+
+    When I select "Hearing/Adjournment"
+    And I enter the "hearing date" date of 3 months in the future
+    And I click 'Save and continue'
+    Then I should be on a page with title "What you're applying for"
+
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page with title "Check your answers"
+
+    And the "DA004" proceeding check your answers section should contain:
+      | question | answer |
+      | Client role	| Applicant, claimant or petitioner |
+      | Emergency level of service | Full Representation |
+      | Substantive level of service | Full Representation |
+    And the Delegated functions answer for DA004 should match \d{1,2} \w+ \d{4}
+
+    And the emergency scope limitation Hearing heading for DA004 should be bold
+    And the Emergency scope limitations answer for DA004 should match Limited to all steps up to and including the hearing on \d{1,2} \w+ \d{4}
+    And the Emergency scope limitations answer for DA004 should not match Date\: \d{1,2} \w+ \d{4}
+    And the emergency scope limitation Warrant of arrest FLA heading for DA004 should be bold
+    And the Emergency scope limitations answer for DA004 should match As to an order under Part IV Family Law Act 1996 limited to an application for the issue of a warrant of arrest.
+
+    And the substantive scope limitation Hearing/Adjournment heading for DA004 should not be bold
+    And the Substantive scope limitations answer for DA004 should match Limited to all steps \(including any adjournment thereof\) up to and including the hearing on
