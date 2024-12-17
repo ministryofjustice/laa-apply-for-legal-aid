@@ -32,5 +32,12 @@ FactoryBot.define do
       meaning { "General Report" }
       description { "Limited to obtaining a report from [see additional limitation notes]" }
     end
+
+    trait :substantive_cv027 do
+      scope_type { 0 }
+      code { "CV027" }
+      meaning { "Hearing/Adjournment" }
+      description { "Limited to all steps (including any adjournment thereof) up to and including the hearing on" }
+    end
   end
 end
