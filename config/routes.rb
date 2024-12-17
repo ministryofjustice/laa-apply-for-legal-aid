@@ -258,6 +258,8 @@ Rails.application.routes.draw do
       resources :bank_transactions, only: [] do
         patch "remove_transaction_type", on: :member
       end
+      resources :remove_bank_transactions, only: %i[show update]
+
       resource :check_capital_answers, only: %i[show update]
 
       resource :use_ccms, only: %i[show]

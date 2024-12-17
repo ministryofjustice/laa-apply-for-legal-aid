@@ -1,0 +1,17 @@
+<%= form_with(
+      url: providers_legal_aid_application_remove_bank_transaction_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title", description: @bank_transaction.description), form:, template: :basic do %>
+
+    <%= form.govuk_collection_radio_buttons :remove_bank_transaction,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" } %>
+
+    <%= next_action_buttons(form:) %>
+  <% end %>
+<% end %>

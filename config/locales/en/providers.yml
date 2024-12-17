@@ -68,6 +68,10 @@ en:
         col_remove: Remove transaction
         remove_link: Remove
         caption: "Transactions added for %{category}"
+    remove_bank_transactions:
+      show:
+        page_title: Are you sure you want to remove the bank transaction %{description} from the application?
+        error: Select yes if you want to remove the bank transaction %{description} from the application.
 
     capital_assessment_results:
       additional_property:
