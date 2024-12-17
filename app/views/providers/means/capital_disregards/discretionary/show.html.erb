@@ -24,7 +24,7 @@
       </div>
 
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these") } %>
+      <%= form.govuk_check_box :none_selected, true, "", multiple: false, label: { text: t(".none_of_these.#{individual}") } %>
     <% end %>
 
   <%= next_action_buttons(show_draft: true, form:) %>

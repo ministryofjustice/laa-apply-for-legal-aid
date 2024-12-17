@@ -46,11 +46,11 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page showing "Disregarded payments"
 
-    When I check "My client has not received any of these payments"
+    When I check "My client or their partner has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Payments to be reviewed"
 
-    When I check "My client has not received any of these payments"
+    When I check "My client or their partner has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
 
@@ -114,10 +114,10 @@ Feature: partner_means_assessment full journey
     And I click "Save and continue"
     Then I should be on a page showing "Disregarded payments"
 
-    When I check "My client has not received any of these payments"
+    When I check "My client or their partner has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Payments to be reviewed"
 
-    When I check "My client has not received any of these payments"
+    When I check "My client or their partner has not received any of these payments"
     And I click 'Save and continue'
     Then I should be on a page with title "Check your answers"

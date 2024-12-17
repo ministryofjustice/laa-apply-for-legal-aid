@@ -1303,8 +1303,9 @@ en:
               client: Select if your client has received any of these payments
               partner: Select if your client or their partner has received any of these payments
             hint: These are one-off payments. Do not include any regular payments.
-
-            none_of_these: My client has not received any of these payments
+            none_of_these:
+              client: My client has not received any of these payments
+              partner: My client or their partner has not received any of these payments
         mandatory:
           backdated_benefits: Backdated benefits and child maintenance payments received in the last 24 months
           backdated_community_care: Backdated Community Care payments
@@ -1326,15 +1327,17 @@ en:
           show:
             h1-heading: Disregarded payments
             paragraph:
-              client: These payments are not counted, but we still need to know about them to understand your client’s finances. They are called mandatory disregards.
-              partner: These payments are not counted, but we still need to know about them to understand your client and their partner’s finances. They are called mandatory disregards.
+              client: These payments are not counted, but we still need to know about them to understand your client's finances. They are called mandatory disregards.
+              partner: These payments are not counted, but we still need to know about them to understand your client and their partner's finances. They are called mandatory disregards.
             h2-heading:
               client: Select if your client has received any of these payments
               partner: Select if your client or their partner has received any of these payments
             hint-text_html: |
               These are one-off payments. Do not include any regular payments.<br><br>
               Select all that apply.
-            none_of_these: My client has not received any of these payments
+            none_of_these:
+              client: My client has not received any of these payments
+              partner: My client or their partner has not received any of these payments
         add_details:
           show:
             page_title: Add details for '%{name}'
