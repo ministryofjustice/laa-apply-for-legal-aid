@@ -1,10 +1,4 @@
 Grover.configure do |config|
-  protocol = if Rails.env.development?
-               "http://"
-             else
-               "https://"
-             end
-
   config.options = {
     format: "A4",
     emulate_media: "print",
@@ -12,7 +6,7 @@ Grover.configure do |config|
     bypass_csp: true,
     cache: false,
     wait_until: "networkidle2",
-    display_url: protocol + ENV.fetch("HOST", "localhost:3002"),
+    display_url: Rails.configuration.x.application.host_url,
     margin: {
       top: "10mm",
       bottom: "10mm",
