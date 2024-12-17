@@ -16,10 +16,10 @@ Feature: Check partner employment evidence upload
 
     When I upload an evidence file named 'hello_world.pdf'
     And I sleep for 2 seconds
-    And I select a category of 'Client's employment evidence' for the file 'hello_world.pdf'
+    And I select a category of "Client's employment evidence" for the file 'hello_world.pdf'
     When I upload an evidence file named 'hello_world1.pdf'
     And I sleep for 2 seconds
-    And I select a category of 'Partner's employment evidence' for the file 'hello_world1.pdf'
+    And I select a category of "Partner's employment evidence" for the file 'hello_world1.pdf'
     And I click 'Save and continue'
 
   @javascript @vcr @hmrc_use_dev_mock
