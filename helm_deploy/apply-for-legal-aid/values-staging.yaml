@@ -138,8 +138,5 @@ hmrc_interface:
 service_account:
   name: laa-apply-for-legalaid-staging-irsa
 
-maintenance_mode:
-  enabled: "false"
-
 collect_hmrc_data:
   enabled: "false"

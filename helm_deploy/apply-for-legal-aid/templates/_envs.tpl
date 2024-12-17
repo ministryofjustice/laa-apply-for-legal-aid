@@ -393,11 +393,6 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: encryptionKeyDerivationSalt
-  - name: MAINTENANCE_MODE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: maintenanceMode
   - name: SLACK_ALERT_WEBHOOK
     valueFrom:
       secretKeyRef:

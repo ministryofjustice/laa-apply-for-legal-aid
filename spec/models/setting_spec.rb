@@ -18,6 +18,7 @@ RSpec.describe Setting do
         expect(rec.special_childrens_act?).to be false
         expect(rec.means_test_review_a?).to be false
         expect(rec.public_law_family?).to be false
+        expect(rec.service_maintenance_mode?).to be false
       end
     end
 
@@ -35,6 +36,7 @@ RSpec.describe Setting do
           special_childrens_act: true,
           means_test_review_a: true,
           public_law_family: true,
+          service_maintenance_mode: true,
         )
       end
 
@@ -51,6 +53,7 @@ RSpec.describe Setting do
         expect(rec.special_childrens_act?).to be true
         expect(rec.means_test_review_a?).to be true
         expect(rec.public_law_family?).to be true
+        expect(rec.service_maintenance_mode?).to be true
       end
     end
   end
@@ -70,6 +73,7 @@ RSpec.describe Setting do
       expect(described_class.special_childrens_act?).to be false
       expect(described_class.means_test_review_a?).to be false
       expect(described_class.public_law_family?).to be false
+      expect(described_class.service_maintenance_mode?).to be false
     end
 
     describe ".means_test_review_a?" do
