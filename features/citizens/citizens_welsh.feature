@@ -80,7 +80,8 @@ Feature: Citizen journey in Welsh
     Given An application has been created
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'tnemetats ytilibisseccA'
-    Then I should be on a page showing 'ecivres siht gnisU'
+    Then I should be on a page with title 'Accessibility statement (Welsh placeholder)'
+    Then I should be on a page showing 'Using this service'
     Then I return to English
 
   @javascript @vcr
