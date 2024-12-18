@@ -1,15 +1,16 @@
 <section class="print-no-break govuk-!-padding-top-6">
-  <%= check_answer_change_link(
-        name: :matter_opposed_reason_heading,
-        url: providers_legal_aid_application_matter_opposed_reason_path(@legal_aid_application),
-        question: t(".matter_opposed_reason_heading"),
-        read_only:,
-      ) %>
-
-  <%= govuk_summary_list(card: { title: t(".matter_opposed_reason_heading") }, actions: false) do |summary_list| %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__matter_opposed_reason" }) do |row| %>
-      <%= row.with_key(text: t(".matter_opposed_reason"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: @legal_aid_application.matter_opposition.reason) %>
+  <%= govuk_summary_card(title: t(".matter_opposed_reason_heading"), html_attributes: { id: "app-check-your-answers__matter_opposition" }) do |card| %>
+    <% unless read_only %>
+      <% card.with_action do %>
+        <%= govuk_link_to(t("generic.change"),
+                          providers_legal_aid_application_matter_opposed_reason_path(@legal_aid_application), visually_hidden_text: t(".matter_opposed_reason_heading")) %>
+      <% end %>
+    <% end %>
+    <%= card.with_summary_list(actions: false) do |summary_list| %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__matter_opposed_reason" }) do |row| %>
+        <%= row.with_key(text: t(".matter_opposed_reason"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_value(text: @legal_aid_application.matter_opposition.reason) %>
+      <% end %>
     <% end %>
   <% end %>
 </section>

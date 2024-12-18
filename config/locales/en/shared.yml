@@ -498,12 +498,12 @@ en:
         heading: Supporting evidence
         gateway_evidence: Upload supporting evidence
       laspo:
-        heading: LASPO
-        question: Are the Section 8 proceedings you're applying for in scope of LASPO?
+        heading: Section 8 and LASPO
+        question: Section 8 proceedings are in the scope of LASPO?
       latest_incident_details:
-        date_of_latest_incident: When did the incident occur?
         latest-incident-heading: Latest incident details
-        notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
+        date_of_latest_incident: Date of incident
+        notification_of_latest_incident: Date your client contacted you about the latest incident
       matter_opposition:
         matter_opposed_reason: Why is the Section 8 matter opposed by your client or the other party?
         matter_opposed_reason_heading: Why the matter is opposed
@@ -512,8 +512,9 @@ en:
           heading: Allegation
           denies_all: Does the client wholly or substantially deny any allegations?
           additional_information: Additional information
-        opponent: Opponent
         opponent-heading: Opponent details
+        opponent_name: Opponent %{number} name
+        opponent_type: Opponent %{number} type
         domestic_abuse:
           heading: Domestic abuse summary
           warning_letter_reasons: Why a warning letter has not been sent
@@ -534,8 +535,8 @@ en:
         separate_representation: Client wants separate representation?
         confirmed: Confirmed
       undertaking:
-        heading: Client offer of undertakings
-        undertaking_offered_question: Has the client offered undertakings?
+        heading: Offer of undertakings
+        undertaking_offered_question: Undertakings offered
         undertaking_offered_what: What undertakings have been offered?
         undertaking_offered_why: Why have undertakings not been offered?
       urgency:
@@ -547,15 +548,20 @@ en:
         second_appeal_question: Second appeal?
         original_judge_level_question: Original case heard by
       merits_proceeding_section:
+        attempts_to_settle_heading: Attempts to settle
         attempts_to_settle: What attempts have been made to settle the matter?
-        chances_of_success_details: Details on the chance of a successful outcome
-        linked_children: Which children are covered under this proceeding?
+        chances_of_success_heading: Chances of success
+        chances_of_success_details: Why legal aid should be granted
+        linked_children_heading: Children covered
+        linked_children: Children covered under this proceeding?
+        relationship_to_child_heading: Who is your client in the proceeding
         opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
         opponents_application_reason: Reason for applying for legal aid at this stage
         prohibited_steps: Is the prohibited step to prevent removal from the UK?
-        prospects_of_success: Is the chance of a successful outcome 50% or better?
-        success_prospect: What is the chance of a successful outcome?
-        specific_issue: What specific issue do you want to determine at court?
+        prospects_of_success: Chance of a successful outcome is 50% or better?
+        success_prospect: Chance of a successful outcome?
+        specific_issue_heading: Specific issue
+        specific_issue: Specific issue to be determined at court
         vary_order: Changes since original order was made
         what_is_prohibited: What you're asking to be prohibited
       supporting_evidence:
@@ -569,10 +575,11 @@ en:
           court_application: Court application
           expert_report: Expert report
           parental_responsibility: Parental responsibility evidence
-        evidence_upload_heading: Supporting evidence
+        evidence_upload_heading: Files to support the application
       children_involved:
         involved-children-heading: Children involved in this application
-        child: Child
+        child_name: Child %{number} name
+        child_date_of_birth: Child %{number} date of birth
       relationship_to_child:
         biological_parent: Client is the biological parent of any child involved?
         child_subject: Client is a child subject of this proceeding?
