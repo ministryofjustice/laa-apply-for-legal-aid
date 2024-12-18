@@ -51,11 +51,11 @@ And("I view the check provider answers page") do
 end
 
 Then("the {string} proceeding check your answers section should contain:") do |proceeding_code, table|
-  expect_questions_and_answers_in(selector: "##{proceeding_code.downcase}-questions", expected: table)
+  expect_questions_and_answers_in(selector: "##{proceeding_code}-questions".downcase, expected: table)
 end
 
 Then(/^the (.*) answer for the (.*) proceeding (should|should not) match (.*)$/) do |question, proceeding_code, match, regex|
-  selector = "##{proceeding_code.downcase}-questions"
+  selector = "##{proceeding_code}-questions".downcase
   answer = Regexp.new(regex)
   within(selector) do
     expect(page).to have_css("dt", text: question), "expected to find tag \"dt\" with text: \"#{question}\""
@@ -68,8 +68,8 @@ Then(/^the (.*) answer for the (.*) proceeding (should|should not) match (.*)$/)
 end
 
 Then(/^the (emergency|substantive) scope limitation (.*) heading for (.*) should (be|not be) bold$/) do |type, text, proceeding_code, match|
-  within("##{proceeding_code.downcase}-questions") do
-    within("#app-check-your-answers__#{proceeding_code.downcase}_#{type}_scope_limitations") do
+  within("##{proceeding_code}-questions".downcase) do
+    within("#app-check-your-answers__#{proceeding_code}_#{type}_scope_limitations".downcase) do
       if match == "be"
         expect(page).to have_css("span.single-scope-limit-heading", text:, visible: :visible)
       else
