@@ -418,8 +418,9 @@ en:
         nino: National Insurance number
         has_partner: Does your client have a partner?
       dependants:
-        dependant_name: "Dependant %{position}: %{name}"
-        has_dependants: Does %{individual} have any dependants?
+        dependant_name: "Dependant %{position}"
+        client_has_dependants: Client has dependants?
+        client_with_partner_has_dependants: Client or their partner has dependants?
         add-new: Add dependant
         delete: Delete dependant
         name: Name
@@ -435,6 +436,8 @@ en:
         new_limit_reasons: Reason
       housing_benefit:
         heading: Housing Benefit
+        card_title: Housing benefit details
+        amount: Amount of housing benefit
         does_your_client: Does %{individual} get Housing Benefit?
       linking_and_copying:
         section_linking:
@@ -594,12 +597,12 @@ en:
           no_transactions: "No"
       student_finance:
         heading: Student finance
-        does_your_client: Does %{individual_text} get student finance?
+        question: "%{individual_text} gets student finance?"
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
       cash_payments:
-        income_heading: Payments %{individual_with_determiner} receives in cash
-        outgoings_heading: Payments %{individual_with_determiner} makes in cash
+        income_heading: Payments %{individual_with_determiner} gets in cash
+        outgoings_heading: Payments %{individual_with_determiner} pays in cash
       proceedings:
         heading: Proceedings
         proceeding: Proceeding

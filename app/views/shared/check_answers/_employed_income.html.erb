@@ -10,7 +10,7 @@
 
 <%= govuk_summary_card(title: t(".heading", individual_with_determiner:).upcase_first) do |card| %>
   <% unless read_only %>
-    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t('.aria_label', individual_with_determiner:)) } %>
+    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".aria_label", individual_with_determiner:)) } %>
   <% end %>
   <%= card.with_summary_list(html_attributes: { id: "employment-#{individual}-notes-questions" }) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__extra_employment_information" }) do |row| %>

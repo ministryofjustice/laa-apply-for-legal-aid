@@ -1,8 +1,8 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<%= govuk_summary_card(title: payment_type, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: "_")}" }) do |card| %>
+<%= govuk_summary_card(title: payment_type, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: '_')}" }) do |card| %>
   <% unless read_only %>
-    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}")} %>
+    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}") } %>
   <% end %>
   <% card.with_summary_list(html_attributes: { "data-check-your-answers-section": payment_type.parameterize }) do |summary_list| %>
     <% transaction_types.each do |transaction_type| %>
@@ -10,10 +10,10 @@
         <%= row.with_key(text: transaction_type.label_name, classes: "govuk-!-width-one-half") %>
         <%= row.with_value do %>
           <% regular_transaction_amount, regular_transaction_frequency = regular_transaction_answer_by_type(
-            legal_aid_application: @legal_aid_application,
-            transaction_type:,
-            owner_type: individual,
-            ) %>
+               legal_aid_application: @legal_aid_application,
+               transaction_type:,
+               owner_type: individual,
+             ) %>
           <% if @legal_aid_application.client_uploading_bank_statements? || individual.eql?("Partner") %>
             <p><%= regular_transaction_amount %></p>
             <% unless regular_transaction_amount.eql?("None") %>

@@ -33,7 +33,7 @@
     <section>
       <%= govuk_summary_list(actions: false, classes: "govuk-!-margin-top-6") do |summary_list| %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__student_finance_question" }) do |row| %>
-          <%= row.with_key(text: t("shared.check_answers.student_finance.does_your_client", individual_text: "your client"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_key(text: t("shared.check_answers.student_finance.question", individual_text: "your client"), classes: "govuk-!-width-one-half") %>
           <%= row.with_value(text: yes_no(@legal_aid_application.applicant.student_finance?), classes: "govuk-!-text-align-right") %>
         <% end %>
       <% end %>

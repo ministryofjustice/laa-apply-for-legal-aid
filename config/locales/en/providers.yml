@@ -1123,8 +1123,9 @@ en:
           credits-section-heading: Payments the partner gets
           debits-section-heading: Payments the partner pays
         dependants:
-          heading: Dependants
-          has_dependants: Does your client have any dependants?
+          heading: Any dependants
+          client_with_partner_has_dependants: Client or their partner has dependants?
+          client_has_dependants: Client has dependants?
           add-new: Add dependant
           delete: Delete dependant
           name: Name

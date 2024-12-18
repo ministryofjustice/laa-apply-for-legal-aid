@@ -1,16 +1,16 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<% unless read_only %>
-  <% url = if individual.receives_state_benefits?
+<% unless read_only
+     url = if individual.receives_state_benefits?
              state_benefit_partial_url(:add_benefits, version, @legal_aid_application)
            else
              state_benefit_partial_url(:receive_benefits, version, @legal_aid_application)
-           end %>
-<% end %>
+           end
+   end %>
 
 <%= govuk_summary_card(title: t(".#{transactions_for}.heading"), html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |card| %>
   <% unless read_only %>
-    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".#{transactions_for}.change_aria"))} %>
+    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".#{transactions_for}.change_aria")) } %>
   <% end %>
   <% card.with_summary_list(html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits" }) do |row| %>
@@ -23,19 +23,21 @@
 <% state_benefits.each_with_index do |state_benefit, index| %>
 
   <%= govuk_summary_card(title: t(".benefit_heading", index: index + 1), html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}" }) do |card| %>
-    <% unless read_only %>
-      <%= card.with_action { govuk_link_to(t("generic.change"),
-                             state_benefit_partial_url(:change_benefits, version, @legal_aid_application, state_benefit),
-                             "aria-label": "#{t('generic.change')} #{t('.benefit_heading', index: index + 1)}")} %>
-    <% end %>
+    <%= unless read_only
+          card.with_action do
+            govuk_link_to(t("generic.change"),
+                          state_benefit_partial_url(:change_benefits, version, @legal_aid_application, state_benefit),
+                          "aria-label": [t("generic.change"), t(".benefit_heading", index: index + 1)].join(" "))
+          end
+        end %>
     <% card.with_summary_list(html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}_items" }) do |summary_list| %>
       <%= summary_list.with_row do |row| %>
         <%= row.with_key(text: t(".type"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: state_benefit.description)%>
+        <%= row.with_value(text: state_benefit.description) %>
       <% end %>
       <%= summary_list.with_row do |row| %>
         <%= row.with_key(text: t(".amount"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: "#{number_to_currency(state_benefit.amount)} #{t("transaction_types.frequencies.#{state_benefit.frequency}").downcase}") %>
+        <%= row.with_value(text: [number_to_currency(state_benefit.amount), t("transaction_types.frequencies.#{state_benefit.frequency}").downcase].join(" ")) %>
       <% end %>
     <% end %>
   <% end %>
