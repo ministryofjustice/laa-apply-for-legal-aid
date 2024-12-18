@@ -54,7 +54,7 @@ Then("the {string} proceeding check your answers section should contain:") do |p
   expect_questions_and_answers_in(selector: "##{proceeding_code.downcase}-questions", expected: table)
 end
 
-Then(/^the (.*) answer for (.*) (should|should not) match (.*)$/) do |question, proceeding_code, match, regex|
+Then(/^the (.*) answer for the (.*) proceeding (should|should not) match (.*)$/) do |question, proceeding_code, match, regex|
   selector = "##{proceeding_code.downcase}-questions"
   answer = Regexp.new(regex)
   within(selector) do

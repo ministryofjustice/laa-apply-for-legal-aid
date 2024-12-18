@@ -499,7 +499,7 @@ Feature: Checking client details answers backwards and forwards
       | Emergency scope limitations |	Interim order inc. return date\nLimited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement. To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing. |
       | Substantive level of service | Full Representation |
       | Substantive scope limitations |	Final hearing\nLimited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order. |
-    And the Delegated functions answer for DA004 should match \d{1,2} \w+ \d{4}
+    And the Delegated functions answer for the DA004 proceeding should match \d{1,2} \w+ \d{4}
 
     And the emergency scope limitation Interim order inc. return date heading for DA004 should not be bold
     And the substantive scope limitation Final hearing heading for DA004 should not be bold
@@ -556,10 +556,10 @@ Feature: Checking client details answers backwards and forwards
     And the Delegated functions answer for DA004 should match \d{1,2} \w+ \d{4}
 
     And the emergency scope limitation Hearing heading for DA004 should be bold
-    And the Emergency scope limitations answer for DA004 should match Limited to all steps up to and including the hearing on \d{1,2} \w+ \d{4}
-    And the Emergency scope limitations answer for DA004 should not match Date\: \d{1,2} \w+ \d{4}
+    And the Emergency scope limitations answer for the DA004 proceeding should match Limited to all steps up to and including the hearing on \d{1,2} \w+ \d{4}
+    And the Emergency scope limitations answer for the DA004 proceeding should not match Date\: \d{1,2} \w+ \d{4}
     And the emergency scope limitation Warrant of arrest FLA heading for DA004 should be bold
-    And the Emergency scope limitations answer for DA004 should match As to an order under Part IV Family Law Act 1996 limited to an application for the issue of a warrant of arrest.
+    And the Emergency scope limitations answer for the DA004 proceeding should match As to an order under Part IV Family Law Act 1996 limited to an application for the issue of a warrant of arrest.
 
     And the substantive scope limitation Hearing/Adjournment heading for DA004 should not be bold
-    And the Substantive scope limitations answer for DA004 should match Limited to all steps \(including any adjournment thereof\) up to and including the hearing on
+    And the Substantive scope limitations answer for the DA004 proceeding should match Limited to all steps \(including any adjournment thereof\) up to and including the hearing on
