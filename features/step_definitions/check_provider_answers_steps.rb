@@ -67,7 +67,7 @@ Then(/^the (.*) answer for the (.*) proceeding (should|should not) match (.*)$/)
   end
 end
 
-Then(/^the (emergency|substantive) scope limitation (.*) heading for (.*) should (be|not be) bold$/) do |type, text, proceeding_code, match|
+Then(/^the ([eE]mergency|[sS]ubstantive) scope limitation (.*) heading for (.*) should (be|not be) bold$/) do |type, text, proceeding_code, match|
   within("##{proceeding_code}-questions".downcase) do
     within("#app-check-your-answers__#{proceeding_code}_#{type}_scope_limitations".downcase) do
       if match == "be"
