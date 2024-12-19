@@ -1,0 +1,25 @@
+<%= form_with(
+      url: providers_legal_aid_application_second_appeal_court_type_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"),
+                    template: :basic,
+                    form: do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:court_type,
+                                          legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                          hint: { text: t(".hint") })do %>
+
+      <% form.object.court_types.each_with_index do |court_type, idx| %>
+        <%= form.govuk_radio_button :court_type,
+                                    court_type,
+                                    link_errors: idx.zero?,
+                                    label: { text: t(".#{court_type}.label") } %>
+      <% end %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

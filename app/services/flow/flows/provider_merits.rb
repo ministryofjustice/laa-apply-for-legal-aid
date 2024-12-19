@@ -23,6 +23,8 @@ module Flow
         nature_of_urgencies: Steps::ProviderMerits::NatureOfUrgenciesStep,
         matter_opposed_reasons: Steps::ProviderMerits::MatterOpposedReasonsStep,
         second_appeals: Steps::ProviderMerits::SecondAppealsStep,
+        second_appeal_court_types: Steps::ProviderMerits::SecondAppealCourtTypesStep,
+        first_appeal_court_types: Steps::ProviderMerits::FirstAppealCourtTypesStep,
         original_judge_levels: Steps::ProviderMerits::OriginalJudgeLevelsStep,
         chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
         success_prospects: Steps::ProviderMerits::SuccessProspectsStep,

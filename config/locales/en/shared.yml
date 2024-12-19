@@ -546,6 +546,7 @@ en:
         heading: Second appeal
         second_appeal_question: Second appeal?
         original_judge_level_question: Original case heard by
+        court_type_question: Appeal will be heard in
       merits_proceeding_section:
         attempts_to_settle: What attempts have been made to settle the matter?
         chances_of_success_details: Details on the chance of a successful outcome

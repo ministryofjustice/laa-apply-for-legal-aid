@@ -79,6 +79,17 @@ RSpec.describe Providers::ApplicationMeritsTask::OriginalJudgeLevelForm do
           .to("district_judge")
       end
     end
+
+    context "when value changed and court_type already exists" do
+      let(:appeal) { create(:appeal, original_judge_level: "high_court_judge", court_type: "other_court") }
+      let(:original_judge_level) { "district_judge" }
+
+      it "clears the court_type" do
+        expect { save_form }.to change { appeal.reload.court_type }
+          .from("other_court")
+          .to(nil)
+      end
+    end
   end
 
   describe "#save_as_draft" do

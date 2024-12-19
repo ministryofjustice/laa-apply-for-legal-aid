@@ -654,13 +654,15 @@ FactoryBot.define do
       transient do
         second_appeal { nil }
         original_judge_level { nil }
+        court_type { nil }
       end
 
       after(:create) do |application, evaluator|
         create(:appeal,
                legal_aid_application: application,
                second_appeal: evaluator.second_appeal,
-               original_judge_level: evaluator.original_judge_level)
+               original_judge_level: evaluator.original_judge_level,
+               court_type: evaluator.court_type)
       end
     end
 
