@@ -9,9 +9,21 @@ RSpec.describe "accessibility statement page" do
 
     it "display accessibility information" do
       get accessibility_statement_index_path
-      expect(response.body).to include(I18n.t("accessibility_statement.index.testing.heading"))
-      expect(response.body).to include(I18n.t("accessibility_statement.index.ehrc.heading"))
-      expect(response.body).to include(I18n.t("accessibility_statement.index.accessibility.problems"))
+
+      expect(page)
+        .to have_css("h1", text: "Accessibility statement")
+        .and have_css("h2", text: "How you should be able to use this website")
+        .and have_css("h2", text: "Feedback and contact information")
+        .and have_css("h2", text: "Enforcement procedure")
+        .and have_css("h2", text: "Technical information about this service’s accessibility")
+        .and have_css("h2", text: "Compliance status")
+        .and have_css("h2", text: "Non-accessible content")
+        .and have_css("h2", text: "Third-party content")
+        .and have_css("h2", text: "What we’re doing to improve accessibility")
+        .and have_css("h2", text: "Preparation of this accessibility statement")
+        .and have_link("AbilityNet has advice on making your device easier to use", href: "https://mcmw.abilitynet.org.uk/")
+        .and have_link("contact the Equality Advisory and Support Service (EASS).", href: "https://www.equalityadvisoryservice.com/")
+        .and have_link("Web Content Accessibility Guidelines (WCAG) version 2.1", href: "https://www.w3.org/TR/WCAG21/")
     end
   end
 end

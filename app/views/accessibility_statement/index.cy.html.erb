@@ -1,0 +1,80 @@
+<%= page_template page_title: "Accessibility statement for Apply for civil legal aid service (Welsh placeholder)" do %>
+  <p class="govuk-body">
+    This accessibility statement applies to the ‘Apply for civil legal aid service’ (apply-for-legal-aid.service.justice.gov.uk). The service is owned by the Legal Aid Agency (LAA).
+  </p>
+
+  <h2 class="govuk-heading-m">How you should be able to use this website</h2>
+
+  <p class="govuk-body">
+    We want as many people as possible to be able to use this service. You should be able to:
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+     <li>change colours, contrast levels and fonts</li>
+     <li>zoom in up to 300% without the text spilling off the screen</li>
+     <li>navigate most of the website using just a keyboard</li>
+     <li>navigate most of the website using speech recognition software</li>
+     <li>listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)</li>
+  </ul>
+
+  <p class="govuk-body">
+    We also make the website text as simple as possible to understand.
+  </p>
+
+  <p class="govuk-body">
+    <%= govuk_link_to("AbilityNet has advice on making your device easier to use", "https://mcmw.abilitynet.org.uk/") %> if you have a disability.
+  </p>
+
+  <h2 class="govuk-heading-m">Feedback and contact information</h2>
+
+  <p class="govuk-body">
+    We’re always looking to improve the accessibility of this service. If you find any problems that are not listed on this page or think we’re not
+    meeting accessibility requirements, email apply-for-civil-legal-aid@digital.justice.gov.uk giving details of the issue and any assistive technology you are using.
+  </p>
+
+  <p class="govuk-body">If you need information on this service in a different format, email apply-for-civil-legal-aid@digital.justice.gov.uk. We’ll consider your request and get back to you in 8 days</p>
+
+  <h2 class="govuk-heading-m">Enforcement procedure</h2>
+
+  <p class="govuk-body">
+    The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2)
+    Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint, <%= govuk_link_to("contact the Equality Advisory and Support Service (EASS).", "https://www.equalityadvisoryservice.com/") %>
+  </p>
+
+  <h2 class="govuk-heading-m">Technical information about this service’s accessibility</h2>
+
+  <p class="govuk-body">The LAA is committed to making its service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.</p>
+
+  <h2 class="govuk-heading-m">Compliance status</h2>
+
+  <p class="govuk-body">
+    This service is partially compliant with the <%= govuk_link_to("Web Content Accessibility Guidelines (WCAG) version 2.1", "https://www.w3.org/TR/WCAG21/") %> AA standard,
+    due to the non-compliances listed below.
+  </p>
+
+  <h2 class="govuk-heading-m">Non-accessible content</h2>
+
+  <p class="govuk-body">The content listed below is non-accessible for the following reasons.</p>
+
+  <h3 class="govuk-heading-s">Non-compliance with the accessibility regulations</h2>
+  <ol class="govuk-list govuk-list--number">
+    <li>Conditionally revealed input on some pages not communicated to screen reader users. This fails WCAG 2.1 success criterion 4.1.3 (Status Messages)</li>
+    <li>Remove actions on some pages not communicated to screen reader users. This fails WCAG 2.1 success criterion 1.3.1 (Info and Relationships)</li>
+  </ol>
+
+  <h2 class="govuk-heading-m">Third-party content</h2>
+
+  <p class="govuk-body">This service engages a third-party open banking provider called TrueLayer.</p>
+
+  <p class="govuk-body">This service may direct some users to third-party websites and applications. We do not control these third-party websites and are not responsible for their accessibility compliance.</p>
+
+  <h2 class="govuk-heading-m">What we’re doing to improve accessibility</h2>
+
+  <p class="govuk-body">We will monitor the accessibility of this website and fix any accessibility issues reported to us.</p>
+
+  <h2 class="govuk-heading-m">Preparation of this accessibility statement</h2>
+
+  <p class="govuk-body">This statement was prepared on 26 October 2020. It was last updated on 20 December 2024.</p>
+
+  <p class="govuk-body">This website was last tested on 1 September 2023 against the WCAG 2.1 AA standard. The test was carried out by UserVision.</p>
+<% end %>
