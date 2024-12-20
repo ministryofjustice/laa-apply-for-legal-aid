@@ -17,7 +17,7 @@ RSpec.describe "accessibility statement page" do
         .and have_css("h2", text: "Enforcement procedure")
         .and have_css("h2", text: "Technical information about this service’s accessibility")
         .and have_css("h2", text: "Compliance status")
-        .and have_css("h2", text: "Content that’s not within the scope of the accessibility regulations")
+        .and have_css("h2", text: "Non-accessible content")
         .and have_css("h2", text: "Third-party content")
         .and have_css("h2", text: "What we’re doing to improve accessibility")
         .and have_css("h2", text: "Preparation of this accessibility statement")
