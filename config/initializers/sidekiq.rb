@@ -22,6 +22,12 @@ Sidekiq.configure_server do |config|
   # accepts :expiration (optional)
   Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes.to_i
 
+  config.capsule("unsafe") do |cap|
+    cap.concurrency = 1
+    cap.queues = %w[reports_creator] # strict priority
+    # cap.queues = %w[queue_a,3 queue_b,1] # weighted
+  end
+
   if Rails.env.production? && Rails.configuration.x.kubernetes_deployment
     config.server_middleware do |chain|
       Rails.logger.info "[SidekiqPrometheusExporter] Chaining middleware..."
