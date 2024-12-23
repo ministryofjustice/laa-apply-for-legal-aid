@@ -11,11 +11,10 @@
         form:,
       ) do %>
 
-    <div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic="true" role="alert"></div>
-
     <%= hidden_field_tag "legal-framework-api-host", nil, { "data-uri": Rails.configuration.x.legal_framework_api_host_for_js } %>
 
-    <div class="govuk-grid-row">
+    <div class="govuk-grid-row autocomplete-component">
+      <div class="govuk-visually-hidden screen-reader-messages" aria-live="polite" aria-atomic="true" role="alert"></div>
       <div class="govuk-grid-column-two-thirds govuk-list">
         <%= form.govuk_collection_select :country_code,
                                          @form.countries,
@@ -26,7 +25,7 @@
                                          label: { text: "Country", size: "m" } %>
       </div>
       <div class="govuk-grid-column-one-third clear-search hidden">
-        <p class="govuk-body"><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
+        <p class="govuk-body"><%= govuk_link_to t(".clear_search"), "#" %></p>
       </div>
     </div>
 

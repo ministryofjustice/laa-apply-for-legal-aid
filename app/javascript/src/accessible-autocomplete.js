@@ -1,48 +1,51 @@
 import accessibleAutocomplete from 'accessible-autocomplete'
 
 const screenReaderMessageDelay = 1000 // wait before updating the screen reader message, to avoid interrupting queue
-const searchSelectItem = document.querySelector('.country-select')
 
-function enhanceSelectElement (searchSelectItem) {
+function enhanceSelectElement (autocompleteComponent) {
+  const searchSelectItem = autocompleteComponent.querySelector('.country-select')
+  const clearSearchButton = autocompleteComponent.querySelector('.clear-search')
+  const selectName = searchSelectItem.getAttribute('name')
+
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue: '',
     selectElement: searchSelectItem,
     inputClasses: 'govuk-input',
-    name: 'country'
+    name: selectName
   })
 
-  addSearchInputListeners()
+  addSearchInputListeners(autocompleteComponent, clearSearchButton)
 
-  if (document.querySelector('#non-uk-home-address-country-code-error')) {
-    addErrorClasses()
+  if (autocompleteComponent.querySelector('.govuk-error-message')) {
+    addErrorClasses(autocompleteComponent, clearSearchButton)
   }
 }
 
-function addSearchInputListeners () {
-  const searchInputBox = document.querySelector('.autocomplete__input')
+function addSearchInputListeners (autocompleteComponent, clearSearchButton) {
+  const searchInputBox = autocompleteComponent.querySelector('.autocomplete__input')
+  clearSearchButton.classList.remove('hidden')
 
-  document.querySelector('.clear-search').classList.remove('hidden')
-
-  document
-    .querySelector('#clear-country-search')
+  clearSearchButton
     .addEventListener('click', (event) => {
       event.preventDefault()
       searchInputBox.value = ''
-      clearSearch()
-      setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay)
+      clearSearch(autocompleteComponent)
+      setTimeout(() => { autocompleteComponent.querySelector('.screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay)
     })
 }
 
-function clearSearch () {
-  const selectedItem = document.querySelector('.country-select option[selected]')
+function clearSearch (autocompleteComponent) {
+  const selectedItem = autocompleteComponent.querySelector('.country-select option[selected]')
   if (selectedItem) selectedItem.removeAttribute('selected')
 }
 
-function addErrorClasses () {
-  document.querySelector('.autocomplete__input').classList.add('govuk-input--error')
-  document.querySelector('.clear-search').classList.add('clear-search-error')
+function addErrorClasses (autocompleteComponent, clearSearchButton) {
+  autocompleteComponent.querySelector('.autocomplete__input').classList.add('govuk-input--error')
+  clearSearchButton.classList.add('clear-search-error')
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (searchSelectItem) enhanceSelectElement(searchSelectItem)
+  const autocompleteComponent = document.querySelector('.autocomplete-component')
+
+  if (autocompleteComponent) enhanceSelectElement(autocompleteComponent)
 })
