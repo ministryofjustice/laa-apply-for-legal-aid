@@ -1,6 +1,5 @@
-<div class="interruption-panel">
-  <%= page_template(template: :basic) do %>
-    <h1 class="govuk-heading-l"><%= t(".title") %></h1>
-    <p><%= t(".they_will_check") %></p>
+<%= page_template(template: :basic, column_width: "full") do %>
+  <%= interruption_card(heading: t(".title")) do %>
+    <p class="govuk-body moj-interruption-card__body"><%= t(".they_will_check") %></p>
   <% end %>
-</div>
+<% end %>
