@@ -22,22 +22,27 @@
       </div>
     </div>
 
-    <%= form.govuk_radio_buttons_fieldset(:confirm_dwp_result,
-                                          legend: { size: "l", tag: "h2", text: t(".is_this_correct") },
-                                          classes: "govuk-!-margin-bottom-6") do %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
 
-      <% if display_hmrc_text? %>
-        <p class="govuk-body"><%= t(".hmrc_text") %></p>
-      <% end %>
+        <%= form.govuk_radio_buttons_fieldset(:confirm_dwp_result,
+                                              legend: { size: "l", tag: "h2", text: t(".is_this_correct") },
+                                              classes: "govuk-!-margin-bottom-6") do %>
 
-      <%= form.govuk_radio_button :confirm_dwp_result, "dwp_correct", link_errors: true, label: { text: t("generic.yes") } %>
-      <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_false", label: { text: t(".option_no") } %>
-      <% if @legal_aid_application.applicant.has_partner? %>
-        <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_true", label: { text: t(".option_partner") } %>
-      <% end %>
+          <% if display_hmrc_text? %>
+            <p class="govuk-body"><%= t(".hmrc_text") %></p>
+          <% end %>
 
-      <% end %>
+          <%= form.govuk_radio_button :confirm_dwp_result, "dwp_correct", link_errors: true, label: { text: t("generic.yes") } %>
+          <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_false", label: { text: t(".option_no") } %>
+          <% if @legal_aid_application.applicant.has_partner? %>
+            <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_true", label: { text: t(".option_partner") } %>
+          <% end %>
 
-    <%= next_action_buttons(show_draft: true, form:) %>
+        <% end %>
+
+        <%= next_action_buttons(show_draft: true, form:) %>
+      </div>
+    </div>
   <% end %>
 <% end %>
