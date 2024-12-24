@@ -1912,7 +1912,7 @@ en:
             title_html: You cannot submit this application under special children act
             paragraph: This is because it needs to be means and merits tested.
             option_bullets_html:
-              - check for a different matter type in this service or <a href="https://portal.legalservices.gov.uk/">use CCMS</a>
+              - check for a different matter type in this service or <a class="govuk-link govuk-link--inverse" href="https://portal.legalservices.gov.uk/">use CCMS</a>
               - go back and change your answer
             proceedings: Check for another matter type
           supervision:
