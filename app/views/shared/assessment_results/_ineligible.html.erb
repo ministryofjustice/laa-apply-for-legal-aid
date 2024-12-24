@@ -1,9 +1,9 @@
-<h1 class="govuk-heading-l">
+<h1 class="govuk-heading-l moj-interruption-card__heading">
   <%= t(".heading", name: @legal_aid_application.applicant_full_name) %>
 </h1>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <p class="govuk-body"><%= sanitize(t(".detail", ineligible_reasons: ineligible_reasons(@cfe_result))) %></p>
+    <p class="govuk-body moj-interruption-card__body"><%= sanitize(t(".detail", ineligible_reasons: ineligible_reasons(@cfe_result))) %></p>
   </div>
 </div>

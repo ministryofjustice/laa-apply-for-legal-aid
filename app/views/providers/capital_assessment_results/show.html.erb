@@ -4,8 +4,10 @@
       column_width: :full,
     ) do %>
 
-  <div class="interruption-panel">
-    <%= render @result_partial %>
+  <div class="moj-interruption-card">
+    <div class="moj-interruption-card__content">
+      <%= render @result_partial %>
+    </div>
   </div>
 
   <%= render "result_details" %>
