@@ -1584,7 +1584,8 @@ en:
 
     no_national_insurance_numbers:
       show:
-        title: You will have to do a full means test as part of this application. This is because you do not have a National Insurance number for your client.
+        title: You will have to do a full means test as part of this application
+        body: This is because you do not have a National Insurance number for your client.
         tab_title: We need to check your client's financial eligibility
 
     offline_accounts:
