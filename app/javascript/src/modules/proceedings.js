@@ -92,6 +92,7 @@ function searchOnUserInput (searchInputBox) {
     .querySelector('#clear-proceeding-search')
     .addEventListener('click', () => {
       searchInputBox.value = ''
+      deselectPreviousProceedingItem()
       hideProceeedingsItems()
       setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay)
     })
