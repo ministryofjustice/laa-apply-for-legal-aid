@@ -15,6 +15,10 @@ end
 
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url }
+  config.capsule("report_capsule") do |cap|
+    cap.concurrency = 2
+    cap.queues = %w[report_creator]
+  end
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_server_middleware config, expiration: 30.minutes.to_i
