@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-3.3.6
+FROM ministryofjustice/apply-base:latest-3.4.1
 LABEL org.opencontainers.image.authors="apply for legal aid team"
 
 # add non-root user and group with alpine first available uid, 1000

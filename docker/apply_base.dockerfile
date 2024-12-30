@@ -1,4 +1,4 @@
-FROM ruby:3.3.6-alpine3.21
+FROM ruby:3.4.1-alpine3.21
 LABEL org.opencontainers.image.authors="apply for legal aid team"
 
 # fail early and print all commands
