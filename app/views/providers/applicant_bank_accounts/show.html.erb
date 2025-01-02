@@ -6,7 +6,9 @@
     ) do |form| %>
   <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
-    <%= govuk_fieldset_header page_title %>
+    <h1 class="govuk-heading-xl">
+      <%= page_title %>
+    </h1>
 
     <p class="govuk-body"><%= t(".previously_told") %></p>
 
