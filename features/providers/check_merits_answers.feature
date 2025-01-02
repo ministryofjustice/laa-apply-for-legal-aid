@@ -9,7 +9,7 @@ Feature: Check merits answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Case details |
-      | h2  | Opponent details |
+      | h2  | Opponents |
       | h2  | Mental capacity |
       | h2  | Domestic abuse summary |
       | h2  | Statement of case |
@@ -23,7 +23,7 @@ Feature: Check merits answers
       | h2  | Child arrangements order (residence) |
       | h2  | Chances of success |
       | h2  | Children covered |
-      | h2  | Files to support the application |
+      | h2  | Supporting evidence |
 
     And the following sections should not exist:
       | tag | section |
@@ -36,7 +36,7 @@ Feature: Check merits answers
     And the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
-      | h2  | Opponent details |
+      | h2  | Opponents |
       | h2  | Statement of case |
       | h2  | Children involved in this application |
       | h2  | Second appeal |
@@ -127,7 +127,7 @@ Feature: Check merits answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Case details |
-      | h2  | Opponent details |
+      | h2  | Opponents |
       | h2  | Child assessment order |
       | h2  | Supervision order |
-      | h2  | Who is your client in the proceeding |
+      | h2  | Who your client is in the proceeding |

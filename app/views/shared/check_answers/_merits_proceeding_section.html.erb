@@ -95,7 +95,7 @@
       <% end %>
 
       <% if proceeding.prohibited_steps %>
-        <%= govuk_summary_card(title: t(".prohibited_steps"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }) do |card| %>
+        <%= govuk_summary_card(title: t(".prohibited_steps_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -128,7 +128,7 @@
 
     <% unless proceeding.special_childrens_act? %>
       <% if proceeding.vary_order %>
-        <%= govuk_summary_card(title: t(".vary_order"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }) do |card| %>
+        <%= govuk_summary_card(title: t(".vary_order_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -145,7 +145,7 @@
       <% end %>
 
       <% if proceeding.opponents_application %>
-        <%= govuk_summary_card(title: t(".opponents_application_question")) do |card| %>
+        <%= govuk_summary_card(title: t(".opponents_application_heading")) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
