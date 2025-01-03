@@ -16,30 +16,6 @@ module GovUkFormHelper
     ]
   end
 
-  # Either passing in the heading text and let this method sort out its formatting,
-  # or define the heading content manually by wrapping this method around a formated header.
-  # So:
-  #   <%= govuk_fieldset_header 'My Heading' %>
-  #
-  # or
-  #
-  #   <%= govuk_fieldset_header do %>
-  #     <h1 class="govuk-fieldset__heading">My Heading</h1>
-  #   <% end %>
-  #
-  # Both result in the same output
-
-  def govuk_fieldset_header(text = nil, size: "xl", padding_below: nil, &)
-    heading = text ? content_tag(:h1, text, class: "govuk-fieldset__heading") : capture(&)
-    padding_class = padding_below && "govuk-!-padding-bottom-#{padding_below}"
-    render(
-      "shared/forms/fieldset_header",
-      heading:,
-      size:,
-      padding_class:,
-    )
-  end
-
   def govuk_error_message(text, args = {})
     return if text.blank?
 

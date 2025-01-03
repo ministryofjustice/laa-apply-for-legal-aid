@@ -6,30 +6,26 @@
     ) do |form| %>
   <%= page_template page_title: t(".heading"), template: :basic, form: do %>
 
-    <%= govuk_fieldset_header page_title %>
+    <h1 class="govuk-heading-xl">
+      <%= page_title %>
+    </h1>
 
     <p class="govuk-body"><%= t(".previously_told") %></p>
 
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        <% @applicant_accounts.each do |applicant_account| %>
-          <% applicant_account.bank_accounts.each do |bank_account| %>
-            <ul class="govuk-list govuk-!-margin-bottom-4">
-              <li>
-                <strong><%= t(".account") %>: </strong>
-                <%= bank_account.bank_and_account_name %>
-              </li>
-              <li>
-                <strong><%= t(".balance") %>: </strong>
-                <%= value_with_currency_unit(bank_account.balance, bank_account.currency) %>
-              </li>
-            </ul>
-          <% end %>
-      <% end %>
-      </div>
-    </div>
-
-    <div class="govuk-!-padding-bottom-4"></div>
+    <%= govuk_summary_list(actions: false, borders: false) do |summary_list|
+          @applicant_accounts.each do |applicant_account|
+            applicant_account.bank_accounts.each do |bank_account|
+              summary_list.with_row do |row|
+                row.with_key { t(".account") }
+                row.with_value { bank_account.bank_and_account_name }
+              end
+              summary_list.with_row do |row|
+                row.with_key { t(".balance") }
+                row.with_value { value_with_currency_unit(bank_account.balance, bank_account.currency) }
+              end
+            end
+          end
+        end %>
 
     <%= form.govuk_radio_buttons_fieldset :applicant_bank_account,
                                           legend: { size: "m", tag: "h2", text: t(".offline_savings_accounts") },
