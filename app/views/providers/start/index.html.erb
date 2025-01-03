@@ -4,29 +4,27 @@
 
     <p class="govuk-body"><%= t(".intro") %></p>
 
-    <div class="maximize-text-width">
-      <p class="govuk-body"><%= t(".use_service.list_title") %></p>
-      <ul class="govuk-list govuk-list--bullet">
-        <% t(".use_service.list").each do |item| %>
+    <p class="govuk-body"><%= t(".use_service.list_title") %></p>
+    <ul class="govuk-list govuk-list--bullet">
+      <% t(".use_service.list").each do |item| %>
+        <li><%= item %></li>
+      <% end %>
+      <% if Setting.special_childrens_act? && current_provider&.sca_permissions? %>
+        <li><%= t(".use_service.sca_option") %></li>
+      <% end %>
+    </ul>
+
+    <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
+    <ul class="govuk-list govuk-list--bullet">
+      <% if Setting.linked_applications? %>
+        <% t(".dont_use_service.linked_applications_list").each do |item| %>
           <li><%= item %></li>
         <% end %>
-        <% if Setting.special_childrens_act? && current_provider&.sca_permissions? %>
-          <li><%= t(".use_service.sca_option") %></li>
-        <% end %>
-      </ul>
-
-      <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
-      <ul class="govuk-list govuk-list--bullet">
-        <% if Setting.linked_applications? %>
-          <% t(".dont_use_service.linked_applications_list").each do |item| %>
-            <li><%= item %></li>
-          <% end %>
-        <% else t(".dont_use_service.list").each do |item| %>
-            <li><%= item %></li>
-        <% end %>
-        <% end %>
-      </ul>
-    </div>
+      <% else t(".dont_use_service.list").each do |item| %>
+          <li><%= item %></li>
+      <% end %>
+      <% end %>
+    </ul>
 
     <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
     <p class="govuk-body"><%= t(".progress_saved") %></p>

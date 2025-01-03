@@ -9,6 +9,7 @@ $govuk-assets-path: "/";
 @import "@ministryofjustice/frontend/moj/components/sub-navigation/sub-navigation";
 @import "@ministryofjustice/frontend/moj/components/sortable-table/sortable-table";
 @import "@ministryofjustice/frontend/moj/components/primary-navigation/primary-navigation";
+@import "@ministryofjustice/frontend/moj/components/interruption-card/interruption-card";
 
 // Project specific
 
@@ -21,7 +22,6 @@ $govuk-assets-path: "/";
 @import "check-your-answers";
 @import "govuk-mods";
 @import "helpers";
-@import "interruption-panel";
 @import "language-switcher";
 @import "layout";
 @import "long-email-truncation";

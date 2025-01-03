@@ -1584,7 +1584,8 @@ en:
 
     no_national_insurance_numbers:
       show:
-        title: You will have to do a full means test as part of this application. This is because you do not have a National Insurance number for your client.
+        title: You will have to do a full means test as part of this application
+        body: This is because you do not have a National Insurance number for your client.
         tab_title: We need to check your client's financial eligibility
 
     offline_accounts:
@@ -1912,7 +1913,7 @@ en:
             title_html: You cannot submit this application under special children act
             paragraph: This is because it needs to be means and merits tested.
             option_bullets_html:
-              - check for a different matter type in this service or <a href="https://portal.legalservices.gov.uk/">use CCMS</a>
+              - check for a different matter type in this service or <a class="govuk-link govuk-link--inverse" href="https://portal.legalservices.gov.uk/">use CCMS</a>
               - go back and change your answer
             proceedings: Check for another matter type
           supervision:

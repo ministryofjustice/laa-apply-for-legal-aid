@@ -1,19 +1,16 @@
-<div class="interruption-panel">
-  <%= page_template(page_title: t(".title_html"), column_width: "full", template: :basic) do %>
-    <%= page_heading(size: "l") %>
+<div class="moj-interruption-card">
+  <div class="moj-interruption-card__content">
+    <%= page_template(page_title: t(".title_html"), template: :basic) do %>
+      <%= page_heading(size: "l", classes: "moj-interruption-card__heading") %>
 
-    <div class="maximize-text-width">
-      <p class="govuk-body"><%= t(".body_text") %></p>
-      <p class="govuk-body"><%= t(".options") %></p>
-      <ul class="govuk-list govuk-list--bullet">
-        <% t(".option_bullets").each do |bullet| %>
-          <li><%= bullet %></li>
-        <% end %>
-      </ul>
-    </div>
+      <p class="govuk-body moj-interruption-card__body"><%= t(".body_text") %></p>
+      <p class="govuk-body moj-interruption-card__body"><%= t(".options") %></p>
 
-    <div class='govuk-button-group'>
-      <%= govuk_button_link_to t(".applications"), submitted_providers_legal_aid_applications_path, inverse: true, role: "button" %>
-    </div>
-  <% end %>
+      <%= govuk_list t(".option_bullets"), type: :bullet, classes: "moj-interruption-card__body" %>
+
+      <div class='govuk-button-group'>
+        <%= govuk_button_link_to t(".applications"), submitted_providers_legal_aid_applications_path, inverse: true, role: "button" %>
+      </div>
+    <% end %>
+  </div>
 </div>
