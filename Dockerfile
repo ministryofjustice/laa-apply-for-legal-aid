@@ -1,5 +1,10 @@
-FROM ministryofjustice/apply-base:latest-3.3.6
-LABEL org.opencontainers.image.authors="apply for legal aid team"
+FROM ministryofjustice/apply-base:latest-3.4.1
+
+LABEL org.opencontainers.image.vendor="Ministry of Justice" \
+      org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@digital.justice.gov.uk)" \
+      org.opencontainers.image.title="Apply for civil legal aid" \
+      org.opencontainers.image.description="Web service to apply for legal aid in civil matters" \
+      org.opencontainers.image.url="https://github.com/ministryofjustice/laa-apply-for-legal-aid"
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \
