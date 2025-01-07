@@ -1418,6 +1418,7 @@ en:
           page_title: "Are you sure you want to remove %{name}?"
     check_capital_answers:
       show:
+        caption: Capital assessment
         h1-heading: Check your answers
         capital-section-heading: Your client's capital
         capital-section-heading_with_partner: Your client's and their partner's capital
