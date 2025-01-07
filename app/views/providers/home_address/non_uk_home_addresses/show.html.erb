@@ -11,38 +11,21 @@
         form:,
       ) do %>
 
-    <div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic="true" role="alert"></div>
-
     <%= hidden_field_tag "legal-framework-api-host", nil, { "data-uri": Rails.configuration.x.legal_framework_api_host_for_js } %>
-    <div id="search-field" class="govuk-grid-row">
-      <div class="govuk-grid-column-three-quarters">
-        <%= form.govuk_text_field :country_name, label: { text: t(".country"), size: "m" }, form_group: { class: "govuk-!-margin-bottom-0" } %>
-      </div>
-      <div class="govuk-grid-column-one-quarter govuk-!-margin-top-8 clear-search">
-        <p><%= govuk_link_to t(".clear_search"), "#", id: "clear-country-search" %></p>
-      </div>
-    </div>
 
-    <div class="govuk-grid-row">
-      <div id="country-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
-        <%= form.govuk_radio_buttons_fieldset :country_name, legend: { text: t(".country"), hidden: true } do %>
-          <% @form.countries.each_with_index do |country, index| %>
-            <div id="<%= country.code %>" class="country-item">
-              <%= form.govuk_radio_button(
-                    :country_name,
-                    country.description,
-                    label: { text: country.description },
-                    link_errors: index.zero?,
-                  ) %>
-            </div>
-          <% end %>
-        <% end %>
+    <div class="govuk-grid-row autocomplete-component">
+      <div class="govuk-visually-hidden screen-reader-messages" aria-live="polite" aria-atomic="true" role="alert"></div>
+      <div class="govuk-grid-column-two-thirds govuk-list">
+        <%= form.govuk_collection_select :country_code,
+                                         @form.countries,
+                                         :code,
+                                         :description,
+                                         class: "country-select",
+                                         options: { include_blank: t(".select_country") },
+                                         label: { text: "Country", size: "m" } %>
       </div>
-    </div>
-
-    <div class="govuk-grid-row no-country-items govuk-!-margin-bottom-5" style="display: none;">
-      <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-body govuk-!-padding-bottom-9"><%= t(".no_results") %></span>
+      <div class="govuk-grid-column-one-third clear-search hidden">
+        <p class="govuk-body"><%= govuk_link_to t(".clear_search"), "#" %></p>
       </div>
     </div>
 

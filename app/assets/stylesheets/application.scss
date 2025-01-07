@@ -3,6 +3,7 @@ $govuk-new-link-styles: true;
 $govuk-new-typography-scale: true;
 $govuk-assets-path: "/";
 
+@import "accessible-autocomplete/src/autocomplete";
 @import "govuk-frontend/dist/govuk/index";
 @import "@ministryofjustice/frontend/moj/settings/measurements";
 @import "@ministryofjustice/frontend/moj/objects/width-container";
@@ -16,6 +17,7 @@ $govuk-assets-path: "/";
 // If you absolutely need to override gov.uk styles, don't,
 // instead create new classes or ids with a prefix based on the app name.
 
+@import "accessible-autocomplete";
 @import "admin";
 @import "bank-selection";
 @import "check-your-answers";
