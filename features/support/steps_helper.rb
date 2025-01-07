@@ -33,7 +33,7 @@ Then("I choose {string}") do |option|
 end
 
 Then("I choose the {string} frequency for {string}") do |frequency, field|
-  parts = [field, "frequency", frequency]
+  parts = [field, +"frequency", frequency]
   parts.each(&:downcase!)
   field_id = parts.join(" ").gsub(/\s+/, "-")
   id = find("input[id*=#{field_id}", visible: false)[:id]

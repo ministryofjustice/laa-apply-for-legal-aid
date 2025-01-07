@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HashFormatHelper
   # These methods add classes to the HTML structure
   def format_hash(hash, html = "")
@@ -19,7 +21,7 @@ private
 
   def build_dl_array(key, value)
     content_tag(:dl, class: "govuk-body kvp govuk-!-margin-bottom-0") do
-      dl_contents = ""
+      dl_contents = +""
       dl_contents << content_tag(:dt, standardize_key(key))
       value.each do |val|
         dl_contents << if val.is_a?(Hash)
@@ -34,7 +36,7 @@ private
 
   def build_dl(key, value)
     content_tag(:dl, class: "govuk-body kvp govuk-!-margin-bottom-0") do
-      dl_contents = ""
+      dl_contents = +""
       dl_contents << content_tag(:dt, standardize_key(key))
       dl_contents << if standard_type?(value)
                        content_tag(:dd, value.to_s.capitalize)
