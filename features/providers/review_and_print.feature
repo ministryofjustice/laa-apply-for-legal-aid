@@ -35,7 +35,7 @@ Feature: Review and print your application
       | h2  | Payments from scheme or charities |
       | h2  | Case details |
       | h2  | Latest incident details |
-      | h2  | Opponent details |
+      | h2  | Opponents |
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -68,7 +68,7 @@ Feature: Review and print your application
       | h2  | Payments from scheme or charities |
       | h2  | Case details |
       | h2  | Latest incident details |
-      | h2  | Opponent details |
+      | h2  | Opponents |
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -128,7 +128,7 @@ Feature: Review and print your application
       | h2  | Payments from scheme or charities |
       | h2  | Case details |
       | h2  | Latest incident details |
-      | h2  | Opponent details |
+      | h2  | Opponents |
       | h2  | Print your application |
 
     Then the following sections should not exist:
