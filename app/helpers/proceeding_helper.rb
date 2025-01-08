@@ -21,20 +21,6 @@ module ProceedingHelper
 private
 
   def scope_limitation_details(scope_limitation)
-    sole_scope_limitation = scope_limitation.proceeding.scope_limitations.where(scope_type: scope_limitation.scope_type).count.eql?(1)
-    scope_limitation_meaning = if sole_scope_limitation
-                                 scope_limitation.meaning
-                               else
-                                 "<span class=\"single-scope-limit-heading\">#{scope_limitation.meaning}</span>".html_safe
-                               end
-    scope_limitation_details = [scope_limitation_meaning, scope_limitation.description]
-
-    if scope_limitation.hearing_date && scope_limitation.description.exclude?(scope_limitation.hearing_date.to_s)
-      scope_limitation_details[1] = "#{scope_limitation.description} #{scope_limitation.hearing_date}"
-    elsif scope_limitation.limitation_note
-      scope_limitation_details << "Note: #{scope_limitation.limitation_note}"
-    end
-
-    safe_join(scope_limitation_details, "<br>".html_safe)
+    safe_join(ScopeLimitationDetailBuilder.call(scope_limitation), "<br>".html_safe)
   end
 end
