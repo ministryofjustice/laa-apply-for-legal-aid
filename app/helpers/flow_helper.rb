@@ -6,7 +6,8 @@ module FlowHelper
     show_draft: false,
     inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
-    draft_button_text: t("generic.save_and_come_back_later")
+    draft_button_text: t("generic.save_and_come_back_later"),
+    container_class: nil
   )
     form_with(url:, method:, local: true) do |form|
       next_action_buttons(
@@ -16,6 +17,7 @@ module FlowHelper
         form:,
         continue_button_text:,
         draft_button_text:,
+        container_class:,
       )
     end
   end
@@ -27,7 +29,8 @@ module FlowHelper
     show_draft: false,
     inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
-    draft_button_text: t("generic.save_and_come_back_later")
+    draft_button_text: t("generic.save_and_come_back_later"),
+    container_class: nil
   )
     render(
       "shared/forms/next_action_buttons",
@@ -38,6 +41,7 @@ module FlowHelper
       inverse_continue:,
       continue_button_text:,
       draft_button_text:,
+      container_class: ["govuk-button-group", container_class].compact.join(" "),
     )
   end
 
