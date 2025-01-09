@@ -1,27 +1,22 @@
 <% read_only = false unless local_assigns[:read_only] %>
-<div class="govuk-grid-row" id="app-check-your-answers__vehicles">
-  <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= t(".#{journey_type}.heading") %></h3>
-  </div>
-  <div class="govuk-grid-column-one-third">
+
+<h3 class="govuk-heading-m"><%= t(".#{journey_type}.heading") %></h3>
+<%= govuk_summary_card(title: t(".#{journey_type}.card_heading"), html_attributes: { id: "app-check-your-answers__vehicles" }) do |card| %>
+  <% card.with_action do %>
     <% if !read_only %>
       <% if @legal_aid_application.vehicles.any? %>
-        <p><%= govuk_link_to t("generic.change"), providers_legal_aid_application_means_add_other_vehicles_path(@legal_aid_application), class: "govuk-link-right" %></p>
+        <%= govuk_link_to t("generic.change"), providers_legal_aid_application_means_add_other_vehicles_path(@legal_aid_application) %>
       <% else %>
-        <p><%= govuk_link_to t("generic.change"), check_answer_url_for(journey_type, :vehicles, @legal_aid_application), class: "govuk-link-right" %></p>
+        <%= govuk_link_to t("generic.change"), check_answer_url_for(journey_type, :vehicles, @legal_aid_application) %>
       <% end %>
     <% end %>
-  </div>
-</div>
+  <% end %>
 
-<%= govuk_summary_list(
-      card: { title: t(".#{journey_type}.heading") },
-      actions: !read_only,
-      html_attributes: { id: "vehicles-questions" },
-    ) do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own-vehicle" }) do |row| %>
-    <%= row.with_key(text: t(".providers.own#{individual}"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { yes_no(@legal_aid_application.own_vehicle?) } %>
+  <%= card.with_summary_list(actions: false) do |summary_list| %>
+    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own-vehicle" }) do |row| %>
+      <%= row.with_key(text: t(".providers.own#{individual}"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_value { yes_no(@legal_aid_application.own_vehicle?) } %>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -36,7 +31,6 @@
                   actions: read_only ? [] : [action_link] },
           html_attributes: { id: "vehicle-questions__#{index}" },
         ) do |summary_list| %>
-
       <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_owner" }) do |row| %>
           <%= row.with_key(text: t(".#{journey_type}.owner"), classes: "govuk-!-width-one-half") %>

@@ -640,10 +640,11 @@ en:
       vehicles:
         providers:
           heading: Vehicles
-          own: Does your client own a vehicle?
+          card_heading: Vehicles owned
+          own: Client owns a vehicle?
           own_with_partner: Does your client or their partner own a vehicle?
           owner: Who owns the vehicle?
-          estimated_value: What is the estimated value of the vehicle?
+          estimated_value: Worth of the vehicle
           payment_remaining: Are there any payments left on the vehicle?
           more_than_three_years_old: The vehicle was bought more than three years ago?
           used_regularly: Is the vehicle in regular use?
