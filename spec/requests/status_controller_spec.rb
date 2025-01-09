@@ -58,9 +58,9 @@ RSpec.describe StatusController, :clamav do
       end
     end
 
-    context "when an infrastructure problem exists" do
+    context "when an sidekiq/redis problem exists" do
       before do
-        allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad, "error")
+        allow(ActiveRecord::Base.connection).to receive(:database_exists?).and_return(true)
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
         connection = instance_double(HTTPClient::Connection)
@@ -73,9 +73,45 @@ RSpec.describe StatusController, :clamav do
       let(:failed_healthcheck) do
         {
           checks: {
-            database: false,
+            database: true,
             redis: false,
             sidekiq: false,
+            sidekiq_queue: true,
+            malware_scanner: {
+              positive: true,
+              negative: true,
+            },
+          },
+        }.to_json
+      end
+
+      it "returns status bad gateway" do
+        expect(response).to have_http_status :bad_gateway
+      end
+
+      it "returns the expected response report" do
+        expect(response.body).to eq(failed_healthcheck)
+      end
+    end
+
+    context "when database not available" do
+      before do
+        allow(ActiveRecord::Base.connection).to receive(:database_exists?).and_return(false)
+        allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
+
+        connection = instance_double(HTTPClient::Connection)
+        allow(connection).to receive(:info).and_return("some info about redis")
+        allow(Sidekiq).to receive(:redis).and_yield(connection)
+
+        get "/healthcheck"
+      end
+
+      let(:failed_healthcheck) do
+        {
+          checks: {
+            database: false,
+            redis: true,
+            sidekiq: true,
             sidekiq_queue: true,
             malware_scanner: {
               positive: true,
