@@ -645,7 +645,8 @@ en:
           own_with_partner: Does your client or their partner own a vehicle?
           owner: Who owns the vehicle?
           estimated_value: Worth of the vehicle
-          payment_remaining: Are there any payments left on the vehicle?
+          payment_remaining: There are payments left on the vehicle?
+          payment_amount: Amount left to pay
           more_than_three_years_old: The vehicle was bought more than three years ago?
           used_regularly: Is the vehicle in regular use?
           vehicle_index: Vehicle %{sequence}
