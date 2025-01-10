@@ -5,7 +5,7 @@ RSpec.describe Providers::ChangeOfNamesInterruptsController do
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/change_of_names_interrupts" do
-    subject(:get_request) { get providers_legal_aid_application_change_of_names_interrupt_path(legal_aid_application, display) }
+    subject(:get_request) { get providers_legal_aid_application_change_of_names_interrupt_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
