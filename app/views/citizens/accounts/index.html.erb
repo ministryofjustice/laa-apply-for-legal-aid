@@ -44,7 +44,7 @@
     <p><%= govuk_link_to t(".link_other_account"), citizens_banks_path %></p>
 
     <div class="govuk-!-padding-top-3">
-      <%= next_action_link(continue_text: t("generic.continue")) %>
+      <%= govuk_button_link_to(t("generic.continue"), forward_path) %>
     </div>
   </div>
 </div>

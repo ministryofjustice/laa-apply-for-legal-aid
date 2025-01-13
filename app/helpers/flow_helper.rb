@@ -44,9 +44,4 @@ module FlowHelper
       container_class: ["govuk-button-group", container_class].compact.join(" "),
     )
   end
-
-  def next_action_link(continue_id: :continue, continue_text: t("generic.save_and_continue"), html_class: nil)
-    klasses = ["govuk-button", html_class].compact.join(" ")
-    govuk_link_to(continue_text, forward_path, id: continue_id, class: klasses)
-  end
 end

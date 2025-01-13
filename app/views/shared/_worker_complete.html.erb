@@ -4,14 +4,10 @@
 <% continue_text = locals[:continue_text] || nil %>
 
 <%= page_template page_title: heading do %>
-  <p>
-    <%= intro_text %>
-  </p>
-  <p>
-    <%= balance_text %>
-  </p>
-  <div class="govuk-!-padding-top-3">
-    <%= next_action_link(continue_text:) %>
-  </div>
+  <p class="govuk-body"><%= intro_text %></p>
+  <p class="govuk-body"><%= balance_text %></p>
+
+  <%= govuk_button_link_to(continue_text, forward_path) %>
+
   <span role="status" id="complete"></span>
 <% end %>
