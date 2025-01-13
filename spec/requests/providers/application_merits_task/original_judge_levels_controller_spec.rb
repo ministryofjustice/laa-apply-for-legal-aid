@@ -79,9 +79,9 @@ RSpec.describe Providers::ApplicationMeritsTask::OriginalJudgeLevelsController d
               .to("district_judge")
         end
 
-        it "redirects to the next page", skip: "TODO: AP-5531/5532" do
+        it "redirects to the next page" do
           post_original_judge_level
-          expect(response).to redirect_to(:appeal_court_type)
+          expect(response).to redirect_to(flow_forward_path)
         end
       end
 

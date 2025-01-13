@@ -70,9 +70,9 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealsController do
           expect(legal_aid_application.reload.appeal.second_appeal).to be true
         end
 
-        it "redirects to the next page", skip: "TODO: AP-5530" do
+        it "redirects to the next page" do
           post_second_appeal
-          expect(response).to redirect_to(:second_appeal_court)
+          expect(response).to redirect_to(providers_legal_aid_application_second_appeal_court_type_path)
         end
       end
 
@@ -88,9 +88,9 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealsController do
           expect(legal_aid_application.reload.appeal.second_appeal).to be false
         end
 
-        it "redirects to the next page", skip: "TODO: AP-5530" do
+        it "redirects to the next page" do
           post_second_appeal
-          expect(response).to redirect_to(:original_judge_level)
+          expect(response).to redirect_to(providers_legal_aid_application_original_judge_level_path)
         end
       end
 
