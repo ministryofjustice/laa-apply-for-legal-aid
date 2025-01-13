@@ -68,6 +68,7 @@ en:
         col_remove: Remove transaction
         remove_link: Remove
         caption: "Transactions added for %{category}"
+        removal_confirmation: "You removed transaction %{happened_at} %{description} from the list"
 
     capital_assessment_results:
       additional_property:
