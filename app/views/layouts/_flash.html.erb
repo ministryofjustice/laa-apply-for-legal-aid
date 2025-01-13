@@ -1,0 +1,42 @@
+<div id="flash">
+  <% if flash[:error] %>
+    <div class="govuk-error-summary">
+      <h2 class="govuk-error-summary__title"><%= flash[:error] %></h2>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <%= govuk_notification_banner(
+          title_text: t("generic.important"),
+          text: flash[:notice],
+        ) %>
+  <% end %>
+
+  <% if flash[:hash] && flash[:hash].symbolize_keys! %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <% if flash[:hash][:text] && flash[:hash][:heading_text] %>
+          <%= govuk_notification_banner(title_text: flash[:hash][:title_text],
+                                        success: flash[:hash][:success]) do |nb| %>
+            <% nb.with_heading(text: flash[:hash][:heading_text],
+                               link_text: flash[:hash][:link_text],
+                               link_href: flash[:hash][:link_href]) %>
+            <p><%= flash[:hash][:text] %></p>
+          <% end %>
+        <% elsif flash[:hash][:heading_text] %>
+          <%= govuk_notification_banner(title_text: flash[:hash][:title_text],
+                                        success: flash[:hash][:success]) do |nb|
+                nb.with_heading(text: flash[:hash][:heading_text],
+                                link_text: flash[:hash][:link_text],
+                                link_href: flash[:hash][:link_href])
+              end %>
+        <% else %>
+          <%= govuk_notification_banner(title_text: flash[:hash][:title_text],
+                                        success: flash[:hash][:success],
+                                        text: flash[:hash][:text]) %>
+        <% end %>
+      </div>
+    </div>
+    <% flash.clear %>
+  <% end %>
+</div>
