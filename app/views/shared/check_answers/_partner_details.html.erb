@@ -1,5 +1,5 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
-<%= govuk_summary_card(title: t(".section_heading")) do |card|
+<%= govuk_summary_card(title: t(".section_heading"), heading_level: 3) do |card|
       card.with_summary_list(html_attributes: { id: "partner-details-questions" }, actions: !read_only) do |summary_list|
         if :contrary_interest.in?(attributes)
           summary_list.with_row do |row|
