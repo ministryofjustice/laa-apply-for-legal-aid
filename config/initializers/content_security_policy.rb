@@ -8,7 +8,8 @@ Rails.application.config.content_security_policy do |policy|
                  GOOGLE_ANALYTICS_DOMAIN,
                  "www.googletagmanager.com",
                  "https://truelayer-client-logos.s3-eu-west-1.amazonaws.com",
-                 "https://truelayer-provider-assets.s3.amazonaws.com"
+                 "https://truelayer-provider-assets.s3.amazonaws.com",
+                 "https://providers-assets.truelayer.com"
   policy.object_src :none
   policy.style_src :self, :unsafe_inline
   policy.script_src :self,
