@@ -2,18 +2,6 @@
 cy:
   transaction_types:
     names:
-      citizens:
-        benefits: stifeneB
-        child_care: stnemyap eracdlihC
-        excluded_benefits: stifeneb dedragersiD
-        friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
-        legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-        maintenance_in: rentrap remrof a morf stnemyap ecnanetniaM
-        maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
-        pension: noisneP
-        property_or_lodger: regdol ro ytreporp a morf emocnI
-        rent_or_mortgage: stnemyap gnisuoH
-        salary: segaw ro yralaS
       providers:
         benefits: stifeneB
         child_care: stnemyap eracdlihC

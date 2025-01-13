@@ -1,21 +1,6 @@
 en:
   transaction_types:
     names:
-      # TODO: remove this as we don't actually show transaction categories to citizens anymore, however these categories are still
-      # being used in a few places, and have tests and helper methods which will also need to be updated/removed
-      citizens:
-        benefits: Benefits, charitable or government payments
-        child_care: Childcare payments
-        excluded_benefits: Disregarded benefits
-        friends_or_family: Financial help from friends or family
-        housing_benefit: Housing Benefit
-        legal_aid: Payments towards legal aid in a criminal case
-        maintenance_in: Maintenance payments from a former partner
-        maintenance_out: Maintenance payments to a former partner
-        pension: Pension
-        property_or_lodger: Income from a property or lodger
-        rent_or_mortgage: Housing payments
-        salary: Salary or wages
       providers:
         benefits: Benefits, charitable or government payments
         child_care: Childcare payments
