@@ -138,8 +138,8 @@ Feature: Means report
     And the Vehicles questions should exist:
       | What is the estimated value of the vehicle? |
       | Are there any payments left on the vehicle? |
-      | The vehicle was bought more than three years ago? |
-      | Is the vehicle in regular use? |
+      | Vehicle was bought over 3 years ago? |
+      | Vehicle is in regular use? |
 
     And the "Bank accounts", for static bank account totals, questions should exist:
       | question |
@@ -315,8 +315,8 @@ Feature: Means report
     And the Vehicles questions should exist:
       | What is the estimated value of the vehicle? |
       | Are there any payments left on the vehicle? |
-      | The vehicle was bought more than three years ago? |
-      | Is the vehicle in regular use? |
+      | Vehicle was bought over 3 years ago? |
+      | Vehicle is in regular use? |
 
     And the "Bank accounts", for open banking accounts, questions should exist:
       | question |

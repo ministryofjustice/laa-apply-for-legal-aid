@@ -75,8 +75,8 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       it "does not display other vehicle questions" do
         expect(response.body).not_to include("What is the estimated value of the vehicle?")
         expect(response.body).not_to include("Are there any payments left on the vehicle?")
-        expect(response.body).not_to include("The vehicle was bought more than three years ago?")
-        expect(response.body).not_to include("Is the vehicle in regular use?")
+        expect(response.body).not_to include("Vehicle was bought over 3 years ago?")
+        expect(response.body).not_to include("Vehicle is in regular use?")
       end
     end
 
