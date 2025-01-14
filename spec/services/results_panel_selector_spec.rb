@@ -11,7 +11,7 @@ RSpec.describe ResultsPanelSelector do
       let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
       it "returns the eligible partial name" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/eligible"
+        expect(described_class.call(legal_aid_application)).to eq "eligible"
       end
     end
 
@@ -23,7 +23,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct income specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/partially_eligible_income"
+        expect(described_class.call(legal_aid_application)).to eq "partially_eligible_income"
       end
     end
 
@@ -35,7 +35,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/partially_eligible_capital"
+        expect(described_class.call(legal_aid_application)).to eq "partially_eligible_capital"
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the income_contribution name" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -86,7 +86,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -98,7 +98,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the income_contribution name" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -110,7 +110,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -122,7 +122,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
 
@@ -134,7 +134,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it "returns the correct capital specific partial" do
-        expect(described_class.call(legal_aid_application)).to eq "shared/assessment_results/manual_check_required"
+        expect(described_class.call(legal_aid_application)).to eq "manual_check_required"
       end
     end
   end

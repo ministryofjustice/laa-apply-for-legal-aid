@@ -1,8 +1,6 @@
-<div class="interruption-panel">
-  <%= page_template(page_title: t(".tab_title"), column_width: :full, template: :basic) do %>
-    <h1 class="govuk-heading-m govuk-!-padding-bottom-4">
-      <%= t(".title") %>
-    </h1>
+<%= page_template(page_title: t(".tab_title"), template: :basic, column_width: "full") do %>
+  <% interruption_card(heading: t(".title")) do %>
+    <p class="govuk-body moj-interruption-card__body"><%= t(".body") %></p>
 
     <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_no_national_insurance_number_path,
@@ -10,6 +8,7 @@
           show_draft: true,
           inverse_continue: true,
           continue_button_text: t("generic.continue"),
+          container_class: "moj-interruption-card__actions",
         ) %>
   <% end %>
-</div>
+<% end %>

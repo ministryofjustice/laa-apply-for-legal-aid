@@ -1,17 +1,14 @@
-<div class="interruption-panel">
-  <%= page_template(page_title: t(".#{@type}.title_html"), column_width: "full", template: :basic) do %>
-    <%= page_heading(size: "l") %>
+<%= page_template(page_title: t(".#{@type}.title_html"), template: :basic, column_width: "full") do %>
+  <%= interruption_card(heading: t(".#{@type}.title_html")) do %>
 
-    <div class="maximize-text-width">
-      <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
-        <p class="govuk-body"><%= t(".#{@type}.paragraph") %></p>
-      <% end %>
-      <p class="govuk-body"><%= t(".#{@type}.options") %></p>
-      <%= govuk_list t(".#{@type}.option_bullets_html"), type: :bullet %>
-    </div>
+    <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
+      <p class="govuk-body moj-interruption-card__body"><%= t(".#{@type}.paragraph") %></p>
+    <% end %>
+    <p class="govuk-body moj-interruption-card__body"><%= t(".#{@type}.options") %></p>
+    <%= govuk_list t(".#{@type}.option_bullets_html"), type: :bullet, classes: "moj-interruption-card__body" %>
 
-    <div class='govuk-button-group'>
+    <div class='govuk-button-group moj-interruption-card__actions'>
       <%= govuk_button_link_to t(".#{@type}.proceedings"), providers_legal_aid_application_sca_interrupt_path(@legal_aid_application, @type), method: :delete, inverse: true, role: "button" %>
     </div>
   <% end %>
-</div>
+<% end %>

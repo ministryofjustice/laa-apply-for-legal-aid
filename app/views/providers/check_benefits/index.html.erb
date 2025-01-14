@@ -1,16 +1,15 @@
 <% result_namespace = @legal_aid_application.applicant_receives_benefit? ? ".positive_result" : ".negative_result" %>
 
-<div class="interruption-panel">
-  <%= page_template(page_title: t("#{result_namespace}.tab_title"), column_width: :full, template: :basic) do %>
-    <h1 class="govuk-heading-l">
-      <%= t("#{result_namespace}.title") %>
-    </h1>
+<%= page_template(page_title: t("#{result_namespace}.tab_title"), template: :basic, column_width: "full") do %>
+  <%= interruption_card(heading: t("#{result_namespace}.title")) do %>
     <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_check_benefit_path,
           method: :patch,
           show_draft: true,
           inverse_continue: true,
           continue_button_text: t("generic.continue"),
+          container_class: "moj-interruption-card__actions",
         ) %>
+
   <% end %>
-</div>
+<% end %>

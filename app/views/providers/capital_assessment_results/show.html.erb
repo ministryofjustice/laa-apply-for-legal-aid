@@ -4,9 +4,9 @@
       column_width: :full,
     ) do %>
 
-  <div class="interruption-panel">
-    <%= render @result_partial %>
-  </div>
+  <%= interruption_card(heading: t("shared.assessment_results.#{@result_partial}.heading", name: @legal_aid_application.applicant_full_name)) do %>
+    <%= render "shared/assessment_results/#{@result_partial}" %>
+  <% end %>
 
   <%= render "result_details" %>
 

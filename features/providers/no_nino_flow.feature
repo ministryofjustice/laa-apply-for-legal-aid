@@ -65,7 +65,7 @@ Feature: No national insurance number for applicant
     Then I should be on a page with title 'Check your answers'
 
     When I click 'Save and continue'
-    Then I should be on a page showing "You will have to do a full means test as part of this application. This is because you do not have a National Insurance number for your client"
+    Then I should be on a page showing "You will have to do a full means test as part of this application"
 
     When I click link 'Back'
     Then I should be on a page with title 'Check your answers'
