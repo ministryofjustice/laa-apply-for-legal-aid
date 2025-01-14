@@ -60,6 +60,9 @@ RUN bundle config --local without 'test development'
 # Build nokogiri using system libraries
 RUN bundle config build.nokogiri --use-system-libraries
 
+# Ensure Git is available for Bundler
+RUN git --version
+
 # Install gems with verbose output
 RUN bundle install --verbose
 
