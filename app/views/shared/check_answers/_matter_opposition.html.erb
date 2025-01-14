@@ -1,5 +1,5 @@
 <section class="print-no-break govuk-!-padding-top-6">
-  <%= govuk_summary_card(title: t(".matter_opposed_reason_heading"), html_attributes: { id: "app-check-your-answers__matter_opposition" }) do |card| %>
+  <%= govuk_summary_card(title: t(".matter_opposed_reason_heading"), html_attributes: { id: "app-check-your-answers__matter_opposition" }, heading_level: 3) do |card| %>
     <% unless read_only %>
       <% card.with_action do %>
         <%= govuk_link_to(t("generic.change"),

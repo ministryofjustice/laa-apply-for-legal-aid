@@ -1,6 +1,6 @@
 <% if @legal_aid_application.latest_incident %>
   <section class="print-no-break">
-    <%= govuk_summary_card(title: t(".latest-incident-heading"), html_attributes: { id: "app-check-your-answers__latest_incident_details" }) do |card| %>
+    <%= govuk_summary_card(title: t(".latest-incident-heading"), html_attributes: { id: "app-check-your-answers__latest_incident_details" }, heading_level: 3) do |card| %>
       <% unless read_only %>
         <% card.with_action do %>
           <%= govuk_link_to(t("generic.change"),

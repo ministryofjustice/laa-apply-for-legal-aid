@@ -5,7 +5,7 @@
     <h2 class="govuk-heading-l"><%= proceeding.meaning %></h2>
 
     <% if proceeding.chances_of_success %>
-      <%= govuk_summary_card(title: t(".chances_of_success_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_chances_of_success" }) do |card| %>
+      <%= govuk_summary_card(title: t(".chances_of_success_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_chances_of_success" }, heading_level: 3) do |card| %>
         <%= card.with_summary_list(actions: !read_only) do |summary_list| %>
           <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_likely" }) do |row| %>
             <%= row.with_key(text: t(".prospects_of_success"), classes: "govuk-!-width-one-half") %>
@@ -44,7 +44,7 @@
 
     <% if proceeding.attempts_to_settle || proceeding.section8? || proceeding.specific_issue || proceeding.prohibited_steps || proceeding.special_childrens_act? %>
       <% if proceeding.attempts_to_settle %>
-        <%= govuk_summary_card(title: t(".attempts_to_settle_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle" }) do |card| %>
+        <%= govuk_summary_card(title: t(".attempts_to_settle_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle" }, heading_level: 3) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -61,7 +61,7 @@
       <% end %>
 
       <% if proceeding.section8? || (proceeding.special_childrens_act? && proceeding.client_involvement_type_ccms_code.in?(["A", "D"])) %>
-        <%= govuk_summary_card(title: t(".linked_children_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children" }) do |card| %>
+        <%= govuk_summary_card(title: t(".linked_children_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children" }, heading_level: 3) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -78,7 +78,7 @@
       <% end %>
 
       <% if proceeding.specific_issue %>
-        <%= govuk_summary_card(title: t(".specific_issue_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_specific_issue" }) do |card| %>
+        <%= govuk_summary_card(title: t(".specific_issue_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_specific_issue" }, heading_level: 3) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -95,7 +95,7 @@
       <% end %>
 
       <% if proceeding.prohibited_steps %>
-        <%= govuk_summary_card(title: t(".prohibited_steps_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }) do |card| %>
+        <%= govuk_summary_card(title: t(".prohibited_steps_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }, heading_level: 3) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -119,7 +119,7 @@
     <% end %>
 
     <% if proceeding.relationship_to_child %>
-      <%= govuk_summary_card(title: t(".relationship_to_child_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_relationship_to_child" }) do |card| %>
+      <%= govuk_summary_card(title: t(".relationship_to_child_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_relationship_to_child" }, heading_level: 3) do |card| %>
         <%= card.with_summary_list(actions: !read_only) do |summary_list| %>
           <%= render("shared/check_answers/relationship_to_child", summary_list:, proceeding:, relationship_to_child: proceeding.relationship_to_child) %>
         <% end %>
@@ -128,7 +128,7 @@
 
     <% unless proceeding.special_childrens_act? %>
       <% if proceeding.vary_order %>
-        <%= govuk_summary_card(title: t(".vary_order_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }) do |card| %>
+        <%= govuk_summary_card(title: t(".vary_order_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }, heading_level: 3) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
@@ -145,7 +145,7 @@
       <% end %>
 
       <% if proceeding.opponents_application %>
-        <%= govuk_summary_card(title: t(".opponents_application_heading")) do |card| %>
+        <%= govuk_summary_card(title: t(".opponents_application_heading"), heading_level: 3) do |card| %>
           <% unless read_only %>
             <% card.with_action do %>
               <%= govuk_link_to(t("generic.change"),
