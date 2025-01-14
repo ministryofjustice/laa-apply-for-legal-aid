@@ -60,8 +60,8 @@ RUN bundle config --local without 'test development'
 # Build nokogiri using system libraries
 RUN bundle config build.nokogiri --use-system-libraries
 
-# Install gems
-RUN bundle install
+# Install gems with verbose output
+RUN bundle install --verbose
 
 COPY package.json yarn.lock ./
 RUN yarn --prod

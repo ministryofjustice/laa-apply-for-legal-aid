@@ -47,7 +47,6 @@ commands:
             --build-arg BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z) \
             --build-arg BUILD_TAG="app-${CIRCLE_SHA1}" \
             --build-arg APP_BRANCH=${CIRCLE_BRANCH} \
-            --cache-from ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest \
             -t app . | while read line ; do echo "$(date +"%T") > $line" ; done ;
       - aws-cli/setup:
           role_arn: $ECR_ROLE_TO_ASSUME
