@@ -44,6 +44,9 @@ FROM base AS builder
 RUN addgroup -g 1000 -S appgroup \
 && adduser -u 1000 -S appuser -G appgroup
 
+# Install Git in the builder stage
+RUN apk add --no-cache git
+
 # create app directory in conventional, existing dir /usr/src
 RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp
 WORKDIR /usr/src/app
