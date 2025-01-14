@@ -51,12 +51,17 @@ WORKDIR /usr/src/app
 # Env vars needed for dependency install and asset precompilation
 COPY .ruby-version Gemfile Gemfile.lock ./
 
-# only install production dependencies,
-# build nokogiri using libxml2-dev, libxslt-dev
-RUN gem update --system \
-&& bundle config --local without 'test development' \
-&& bundle config build.nokogiri --use-system-libraries \
-&& bundle install
+# Update RubyGems system software
+RUN gem update --system
+
+# Configure bundler to exclude test and development groups
+RUN bundle config --local without 'test development'
+
+# Build nokogiri using system libraries
+RUN bundle config build.nokogiri --use-system-libraries
+
+# Install gems
+RUN bundle install
 
 COPY package.json yarn.lock ./
 RUN yarn --prod
