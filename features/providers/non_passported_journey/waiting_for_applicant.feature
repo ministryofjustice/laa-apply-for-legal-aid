@@ -29,7 +29,7 @@ Feature: non_passported_journey waiting for applicant
     But I should see 'Your client needs to complete their part of the application before you can continue.'
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
+      | h3  | Client details |
 
     And the "Client details" check your answers section should contain:
       | Employment status | Not employed |
