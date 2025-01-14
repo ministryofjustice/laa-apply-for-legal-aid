@@ -33,10 +33,10 @@ Feature: Bank statement upload journey happy path
     And I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Select payments your client receives in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
     And I should see "Pension"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "My client gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client get student finance?"
 
@@ -109,10 +109,10 @@ Feature: Bank statement upload journey happy path
     And I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Select payments your client receives in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
     And I should see "Pension"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "My client gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on a page with title "Does your client get student finance?"
 

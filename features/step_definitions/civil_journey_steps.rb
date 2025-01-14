@@ -1192,7 +1192,7 @@ Given("I click Check Your Answers Change link for proceeding {string}") do |ques
 end
 
 Given("I click Check Your Answers Change link for dependant {string}") do |dependant|
-  within "#app-check-your-answers__dependants_#{dependant}" do
+  within "#app-check-your-answers__dependant_#{dependant}" do
     click_on("Change")
   end
 end

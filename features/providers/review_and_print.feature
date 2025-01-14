@@ -17,13 +17,13 @@ Feature: Review and print your application
       | h2  | Emergency cost limit |
       | h3  | Bank statements |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h3  | Housing Benefit |
       | h2  | Your client's capital |
       | h3  | Property |
@@ -74,13 +74,13 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | Your client's capital |
 
     And the "Income, regular payments and assets" review section should contain:
@@ -103,7 +103,7 @@ Feature: Review and print your application
     Given I have completed truelayer application with merits and no student finance
     When I view the review and print your application page
     Then I should not see "Student loan"
-    And the answer to the "Does your client get student finance?" question should be "No"
+    And the answer to the "Client gets student finance?" question should be "No"
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits
@@ -134,13 +134,13 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | Your client's capital |
 
     And I should see "Passported"

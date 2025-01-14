@@ -16,21 +16,21 @@ Feature: Review and print your application
       | h2  | Emergency cost limit |
       | h2  | Your client's income |
       | h3  | Bank statements |
-      | h3  | Client employment income |
-      | h2  | Client benefits |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Client benefits, charitable or government payments |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | The partner's income |
-      | h2  | Partner benefits |
-      | h3  | Payments the partner receives |
-      | h3  | Payments the partner receives in cash |
+      | h3  | Partner benefits, charitable or government payments |
+      | h3  | Payments the partner gets |
+      | h3  | Payments the partner gets in cash |
       | h2  | The partner's outgoings |
-      | h3  | Payments the partner makes |
-      | h3  | Payments the partner makes in cash|
+      | h3  | Payments the partner pays |
+      | h3  | Payments the partner pays in cash|
       | h3  | Housing Benefit |
       | h2  | Your client and their partner's capital |
       | h3  | Property |
@@ -69,12 +69,12 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
       | h2  | The partner's income |
-      | h3  | Payments the partner receives |
-      | h3  | Payments the partner receives in cash |
+      | h3  | Payments the partner gets |
+      | h3  | Payments the partner gets in cash |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
-      | h3  | Payments the partner makes |
-      | h3  | Payments the partner makes in cash|
+      | h3  | Payments the partner pays |
+      | h3  | Payments the partner pays in cash|
       | h3  | Property |
       | h3  | Your client's and their partner's property |
       | h3  | Vehicles |
@@ -92,11 +92,11 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | Your client's capital |
 
   Scenario: For a passported journey
@@ -130,19 +130,19 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | The partner's income |
-      | h3  | Payments the partner receives |
-      | h3  | Payments the partner receives in cash |
+      | h3  | Payments the partner gets |
+      | h3  | Payments the partner gets in cash |
       | h2  | The partner's outgoings |
-      | h3  | Payments the partner makes |
-      | h3  | Payments the partner makes in cash|
+      | h3  | Payments the partner pays |
+      | h3  | Payments the partner pays in cash|
       | h2  | Your client's capital |
 
     And I should see "Passported"

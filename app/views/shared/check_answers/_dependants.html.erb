@@ -12,12 +12,12 @@
            end
    end %>
 
-<%= govuk_summary_card(title: t("providers.means.check_income_answers.dependants.heading"), html_attributes: { id: "app-check-your-answers__dependants" }) do |card| %>
+<%= govuk_summary_card(title: t("providers.means.check_income_answers.dependants.heading-h3"), html_attributes: { id: "app-check-your-answers__dependants" }) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t("shared.check_answers.dependants.#{individual}_has_dependants")}") } %>
   <% end %>
   <%= card.with_summary_list do |summary_list| %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__dependants" }) do |row| %>
+    <%= summary_list.with_row do |row| %>
       <%= row.with_key(text: t("shared.check_answers.dependants.#{individual}_has_dependants"), classes: "govuk-!-width-one-half") %>
       <%= row.with_value { yes_no(@legal_aid_application.has_dependants) } %>
     <% end %>
@@ -27,7 +27,7 @@
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
     <%= govuk_summary_card(title: t(".dependant_name", position: index + 1),
-                           html_attributes: { id: "app-check-your-answers__dependants_#{index + 1}_items" }) do |card| %>
+                           html_attributes: { id: "app-check-your-answers__dependant_#{index + 1}" }) do |card| %>
       <% unless read_only %>
         <%= card.with_action { govuk_link_to(t("generic.change"), providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant), "aria-label": "#{t('generic.change')} Dependant #{index + 1}: #{dependant.name}") } %>
       <% end %>

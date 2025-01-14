@@ -41,8 +41,9 @@ module DependantHelper
   end
 
   def relationship(dependant)
+    partner = dependant.legal_aid_application.applicant_has_partner? ? "_with_partner" : ""
     build_ostruct(
-      t("relationship", scope: "providers.means.check_income_answers.dependants"),
+      t("relationship#{partner}", scope: "providers.means.check_income_answers.dependants"),
       dependant.relationship.nil? ? "" : t(dependant.relationship, scope: "shared.forms.dependants.relationship.option"),
     )
   end

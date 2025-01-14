@@ -49,15 +49,16 @@
           read_only: false,
           url: providers_legal_aid_application_means_cash_income_path,
           individual: "Applicant",
-          individual_with_determiner: "your client",
+          individual_with_determiner: t("generic.client"),
           type: :income,
         ) %>
   <% end %>
 
   <%= render(
         "shared/check_answers/student_finance",
-        individual_text: "your client",
-        individual: @legal_aid_application.applicant,
+        individual: "Client",
+        individual_with_determiner: t("generic.client"),
+        model: @legal_aid_application.applicant,
         url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
         read_only: false,
       ) %>
@@ -78,7 +79,7 @@
           read_only: false,
           url: providers_legal_aid_application_means_cash_outgoing_path,
           individual: "Applicant",
-          individual_with_determiner: "your client",
+          individual_with_determiner: t("generic.client"),
           type: :outgoings,
         ) %>
   <% end %>

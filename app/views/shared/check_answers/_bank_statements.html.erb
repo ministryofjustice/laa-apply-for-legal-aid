@@ -8,7 +8,7 @@
 
 <% individual = partner ? "Partner" : "Client" %>
 
-<%= govuk_summary_card(title: t(".section_heading")) do |card| %>
+<%= govuk_summary_card(title: t(".section_heading"), html_attributes: { id: "app-check-your-answers__bank_statements" }, heading_level: 3) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{individual} #{t('.bank_statement_question')}") } %>
   <% end %>

@@ -9,7 +9,7 @@ Feature: non_passported_journey with means
 
     When I select 'Pension'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
 
     When I select "Pension"
     Then I enter pension1 '100'
@@ -67,11 +67,11 @@ Feature: non_passported_journey with means
     And I click 'Save and continue'
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "Payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on a page with title "Which of these payments does your client get?"
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
 
     When I click 'Save and continue'
     Then I should be on a page showing "Sort your client's income into categories"

@@ -11,11 +11,11 @@ Feature: non_passported_journey with bank transactions
     And I select 'Benefits'
     And I click 'Save and continue'
 
-    Then I should be on a page with title "Select payments your client receives in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
     And I should see "Benefits, charitable or government payments"
     And I should see "Financial help from friends or family"
     And I should see "Pension"
-    When I select 'My client receives none of these payments in cash'
+    When I select 'My client gets none of these payments in cash'
     And I click 'Save and continue'
 
     Then I should be on a page showing "Does your client get student finance?"
@@ -84,10 +84,10 @@ Feature: non_passported_journey with bank transactions
     And the following sections within "applicant" should exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Payments your client receives |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
+      | h3  | Payments your client pays |
 
     And the following sections should exist:
       | tag | section |
@@ -106,10 +106,10 @@ Feature: non_passported_journey with bank transactions
     And I select 'Financial help from friends or family'
     And I click 'Save and continue'
 
-    Then I should be on a page with title "Select payments your client receives in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
     And I should see "Benefits, charitable or government payments"
     And I should see "Financial help from friends or family"
-    When I select 'My client receives none of these payments in cash'
+    When I select 'My client gets none of these payments in cash'
     And I click 'Save and continue'
 
     Then I should be on a page showing "Does your client get student finance?"
@@ -199,21 +199,21 @@ Feature: non_passported_journey with bank transactions
     And the following sections within "applicant" should exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Payments your client receives |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
+      | h3  | Payments your client pays |
 
     And the following sections should exist:
       | tag | section |
       | h2  | The partner's income |
       | h3  | Bank statements |
-      | h2  | Partner benefits |
-      | h3  | Payments the partner receives |
-      | h3  | Payments the partner receives in cash |
+      | h3  | Partner benefits, charitable or government payments |
+      | h3  | Payments the partner gets |
+      | h3  | Payments the partner gets in cash |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
-      | h3  | Payments the partner makes |
-      | h3  | Payments the partner makes in cash |
+      | h3  | Payments the partner pays |
+      | h3  | Payments the partner pays in cash |
       | h3  | Housing Benefit |
       | h2  | Dependants |

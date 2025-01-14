@@ -18,9 +18,9 @@ Feature: Check pending employment
     Then I should be on a page showing "Which of these payments does your client get?"
     When I select 'Pension'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "My client gets none of these payments in cash"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client get student finance?"
 

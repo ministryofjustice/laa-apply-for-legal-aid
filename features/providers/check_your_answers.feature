@@ -301,15 +301,15 @@ Feature: Checking answers backwards and forwards
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
+      | h3  | Payments your client pays |
       | h2  | Dependants |
 
-    And I should not see "Payments your client receives in cash"
-    And I should not see "Payments your client makes in cash"
+    And I should not see "Payments your client gets in cash"
+    And I should not see "Payments your client pays in cash"
 
     Then the following sections should not exist:
       | tag | section |
@@ -322,7 +322,7 @@ Feature: Checking answers backwards and forwards
       | h2  | Restrictions on your client's assets |
       | h2  | One-off payments your client received |
 
-    And the "Payments your client receives" section's questions and answers should match:
+    And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Benefits, charitable or government payments | £666.00 |
       | Financial help from friends or family | None |
@@ -330,7 +330,7 @@ Feature: Checking answers backwards and forwards
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "Payments your client makes" section's questions and answers should match:
+    And the "Payments your client pays" section's questions and answers should match:
       | question | answer |
       | Housing payments | £999.00 |
       | Childcare payments | None |
@@ -357,10 +357,10 @@ Feature: Checking answers backwards and forwards
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | "Payments your client receives in cash" |
-      | h3  | "Payments your client makes in cash"    |
+      | h3  | Payments your client pays |
+      | h3  | "Payments your client gets in cash" |
+      | h3  | "Payments your client pays in cash"    |

@@ -29,7 +29,7 @@ en:
       two_weekly: Every 2 weeks
       four_weekly: Every 4 weeks
       monthly: Monthly
-      three_monthly: Total in the last 3 months
+      three_monthly: Total in last 3 months
     table_label:
       benefits: Benefits
       child_care: Childcare

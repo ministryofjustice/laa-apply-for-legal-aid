@@ -26,13 +26,13 @@ Feature: Check capital income answers
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client receives in cash |
-      | h3  | Payments your client makes in cash |
+      | h3  | Payments your client pays |
+      | h3  | Payments your client gets in cash |
+      | h3  | Payments your client pays in cash |
       | h2  | Payments from scheme or charities |
 
     And the Disregarded payment 1 questions and answers should match:
@@ -73,13 +73,13 @@ Feature: Check capital income answers
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client receives in cash |
-      | h3  | Payments your client makes in cash    |
+      | h3  | Payments your client pays |
+      | h3  | Payments your client gets in cash |
+      | h3  | Payments your client pays in cash    |
       | h2  | Payments from scheme or charities |
 
     And the Disregarded payment 1 questions and answers should match:
@@ -120,13 +120,13 @@ Feature: Check capital income answers
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client receives in cash |
-      | h3  | Payments your client makes in cash    |
+      | h3  | Payments your client pays |
+      | h3  | Payments your client gets in cash |
+      | h3  | Payments your client pays in cash    |
       | h2  | Payments from scheme or charities |
 
     And the Disregarded payment 1 questions and answers should match:

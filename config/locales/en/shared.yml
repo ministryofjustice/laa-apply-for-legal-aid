@@ -458,12 +458,11 @@ en:
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
       employed_income:
-        employment: Employment income
+        heading: Employment income
         employment_details: Details
-        heading: "#{individual} employment income"
-        details_for: "Details for #{individual}"
-        question: "Do you need to tell us anything else about #{individual_with_determiner}'s employment?"
-        aria_label: "Change #{individual_with_determiner}'s employment details"
+        details_for: "Details for %{individual_with_determiner}"
+        question: "Do you need to tell us anything else about %{individual_with_determiner}'s employment?"
+        aria_label: "Change %{individual_with_determiner}'s employment details"
       benefits_income:
         applicant:
           heading: Client benefits, charitable or government payments
@@ -597,9 +596,9 @@ en:
           no_transactions: "No"
       student_finance:
         heading: Student finance
-        question: "%{individual_text} gets student finance?"
+        question: "%{individual} gets student finance?"
         how_much: Amount of student finance
-        info_html: '<strong>%{student_finance}</strong> this academic year.'
+        amount: "%{amount} a year"
       cash_payments:
         income_heading: Payments %{individual_with_determiner} gets in cash
         outgoings_heading: Payments %{individual_with_determiner} pays in cash
@@ -938,15 +937,15 @@ en:
       income_payments_and_assets_for_bank_statement_upload:
         capital-heading: "Your client's capital"
         capital-heading_with_partner: "Your client and their partner's capital"
-        credits-section-heading: Payments your client receives
-        debits-section-heading: Payments your client makes
+        credits-section-heading: Payments your client gets
+        debits-section-heading: Payments your client pays
         income-heading: Your client's income
         outgoings-heading: Your client's outgoings
       partner_income:
         income-heading: The partner's income
         outgoings-heading: The partner's outgoings
-        credits-section-heading: Payments the partner receives
-        debits-section-heading: Payments the partner makes
+        credits-section-heading: Payments the partner gets
+        debits-section-heading: Payments the partner pays
       questions_and_answers:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference

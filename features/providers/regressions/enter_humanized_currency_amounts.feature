@@ -47,7 +47,7 @@ Feature: Entering humanized monetary amounts on various forms
     And I have completed a non-passported employed application for "client" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for applicant 'state_benefits'
+    When I click Check Your Answers Change link for applicant 'state_benefits_question'
     And I choose "Yes"
     And I click 'Save and continue'
 
@@ -79,15 +79,15 @@ Feature: Entering humanized monetary amounts on various forms
     And I have completed a non-passported employed application for "client" with bank statements as far as the end of the means income section
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "Payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on a page with title "Which of these payments does your client get?"
     And I select "Financial help from friends or family"
     And I fill "Friends or family" with "£1,112.33"
     And I choose the "Monthly" frequency for "Friends or family"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Select payments your client receives in cash"
-    And I select "My client receives none of these payments in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
+    And I select "My client gets none of these payments in cash"
     And I click 'Save and continue'
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
     And I should see "£1,112.33"
@@ -97,7 +97,7 @@ Feature: Entering humanized monetary amounts on various forms
     And I have completed a non-passported employed application for "client" with bank statements as far as the end of the means income section
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "Payments your client makes"
+    When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on a page with title "Which of these payments does your client pay?"
     And I select "Maintenance payments to a former partner"
     And I fill "Maintenance out" with "£2,322.22"

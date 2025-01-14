@@ -12,7 +12,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Client employment income |
+      | h3  | Employment income |
       | h2  | Outgoings and deductions |
       | h2  | Dependants |
       | h2  | Caseworker Review |
@@ -97,7 +97,7 @@ Feature: Means report
 
     And the Dependants questions should exist:
       | question |
-      | Does your client have any dependants? |
+      | Client has dependants? |
 
     And the Dependants detail questions should exist:
       | Name |
@@ -188,7 +188,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Client employment income |
+      | h3  | Employment income |
       | h2  | Outgoings and deductions |
       | h2  | Dependants |
       | h2  | Caseworker Review |
@@ -271,7 +271,7 @@ Feature: Means report
 
     And the Dependants questions should exist:
       | question |
-      | Does your client have any dependants? |
+      | Client has dependants? |
 
     And the Dependants detail questions should exist:
       | Name |
@@ -413,7 +413,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Client employment income |
+      | h3  | Employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |

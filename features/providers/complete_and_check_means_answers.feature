@@ -9,9 +9,9 @@ Feature: Completing and checking means answers backwards and forwards
 
     Then I select 'Pension'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "My client gets none of these payments in cash"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client get student finance?"
 
@@ -57,9 +57,9 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select 'Pension'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "My client gets none of these payments in cash"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client get student finance?"
 
@@ -99,7 +99,7 @@ Feature: Completing and checking means answers backwards and forwards
     And I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for "Payments your client makes"
+    When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on a page with title "Which of these payments does your client pay?"
 
     When I click 'Save and continue'

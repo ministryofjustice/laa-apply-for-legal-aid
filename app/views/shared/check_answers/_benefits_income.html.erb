@@ -8,7 +8,7 @@
            end
    end %>
 
-<%= govuk_summary_card(title: t(".#{transactions_for}.heading"), html_attributes: { id: "state-benefit-section-#{transactions_for}" }) do |card| %>
+<%= govuk_summary_card(title: t(".#{transactions_for}.heading"), heading_level: 3, html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_question" }) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".#{transactions_for}.change_aria")) } %>
   <% end %>
@@ -22,7 +22,7 @@
 
 <% state_benefits.each_with_index do |state_benefit, index| %>
 
-  <%= govuk_summary_card(title: t(".benefit_heading", index: index + 1), html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}" }) do |card| %>
+  <%= govuk_summary_card(title: t(".benefit_heading", index: index + 1), heading_level: 3, html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}" }) do |card| %>
     <%= unless read_only
           card.with_action do
             govuk_link_to(t("generic.change"),

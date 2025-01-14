@@ -216,11 +216,11 @@ Then("the Student finance questions should exist:") do |table|
 end
 
 Then("the Dependants questions should exist:") do |table|
-  expect_questions_in(selector: "#dependants-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__dependants", expected: table)
 end
 
 Then("the Dependants detail questions should exist:") do |table|
-  expect_questions_in(selector: "#app-check-your-answers__dependants_1_items", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__dependant_1", expected: table)
 end
 
 Then("the Declared outgoings categories questions should exist:") do |table|

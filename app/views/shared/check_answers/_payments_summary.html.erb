@@ -1,6 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<%= govuk_summary_card(title: payment_type, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: '_')}" }) do |card| %>
+<%= govuk_summary_card(title: payment_type, heading_level: 3, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: '_')}" }) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}") } %>
   <% end %>

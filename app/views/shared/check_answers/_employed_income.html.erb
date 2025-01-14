@@ -1,14 +1,16 @@
 <% if partner
      individual = "partner"
+     individual_with_determiner = "the partner"
      model = @legal_aid_application.partner
      url = providers_legal_aid_application_partners_employment_income_path(@legal_aid_application)
    else
      individual = "client"
+     individual_with_determiner = "your partner"
      model = @legal_aid_application.applicant
      url = providers_legal_aid_application_means_employment_income_path(@legal_aid_application)
    end %>
 
-<%= govuk_summary_card(title: t(".heading", individual_with_determiner:).upcase_first) do |card| %>
+<%= govuk_summary_card(title: t(".heading").upcase_first, heading_level: 3) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".aria_label", individual_with_determiner:)) } %>
   <% end %>
