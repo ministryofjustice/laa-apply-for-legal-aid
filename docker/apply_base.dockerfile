@@ -18,6 +18,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                     postgresql-dev \
                     git \
                     curl \
+                    yaml-dev \
 && apk --no-cache add \
                   postgresql-client \
                   nodejs \
