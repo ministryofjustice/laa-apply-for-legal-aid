@@ -297,6 +297,7 @@ en:
           partner_current_account: Partner's current accounts
           joint_savings_account: Joint savings accounts
           joint_current_account: Joint current accounts
+          bank_account_card_heading: Bank accounts
           client_bank_accounts: Your client's accounts
           clients_bank_accounts: Client's bank accounts
           money_in_bank_accounts: Money in bank accounts
