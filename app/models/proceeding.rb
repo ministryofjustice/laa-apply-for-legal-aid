@@ -10,6 +10,7 @@ class Proceeding < ApplicationRecord
 
   has_one :chances_of_success, class_name: "ProceedingMeritsTask::ChancesOfSuccess", dependent: :destroy
   has_one :prohibited_steps, class_name: "ProceedingMeritsTask::ProhibitedSteps", dependent: :destroy
+  has_one :child_care_assessment, class_name: "ProceedingMeritsTask::ChildCareAssessment", dependent: :destroy
 
   has_many :final_hearings, dependent: :destroy
   has_many :proceeding_linked_children, class_name: "ProceedingMeritsTask::ProceedingLinkedChild", dependent: :destroy

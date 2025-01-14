@@ -390,6 +390,7 @@ Rails.application.routes.draw do
         resource :does_client_have_parental_responsibility, only: %i[show update]
         resource :is_client_child_subject, only: %i[show update], controller: :is_client_child_subject, path: "is_client_a_child_subject_of_proceeding"
         resource :check_who_client_is, only: %i[show update]
+        resource :child_care_assessment, only: %i[show update], path: "assessment_of_client"
       end
     end
   end

@@ -340,6 +340,10 @@ en:
           attributes:
             details:
               blank: Enter details of the changes since the original order was made
+        proceeding_merits_task/child_care_assessment:
+          attributes:
+            assessed:
+              inclusion: Select yes if the local authority has assessed your client's ability to care for the children involved
         partner:
           attributes:
             date_of_birth:

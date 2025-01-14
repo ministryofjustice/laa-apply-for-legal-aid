@@ -531,6 +531,11 @@ en:
         show:
           page_title: Check who your client is
           paragraph: You must answer 'yes' to one of these questions. Check your answers and change the one that is wrong.
+      child_care_assessments:
+        show:
+          h1-heading: Has the local authority assessed your client's ability to care for the children involved?
+          radio_hint_yes: You'll need to upload supporting evidence later.
+          hint: For example, if your client is the grandparent, the local authority may check if they could be a suitable carer.
     application_merits_task:
       involved_children:
         new:
@@ -1429,6 +1434,7 @@ en:
         opponents_application_html: <span class="govuk-visually-hidden">%{proceeding} </span>Opponent application
         vary_order_html: <span class="govuk-visually-hidden">%{proceeding} </span>Changes since original order was made
         client_relationship_to_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Who your client is in the proceeding
+        client_child_care_assessment_html: <span class="govuk-visually-hidden">%{proceeding} </span>Assessment of your client
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -1458,6 +1464,7 @@ en:
           client_relationship_to_proceeding: is_client_biological_parent
           check_who_client_is: check_who_client_is
           second_appeal: second_appeal
+          client_child_care_assessment: child_care_assessment
     merits_reports:
       show:
         heading: Merits report
