@@ -217,3 +217,60 @@ Feature: non_passported_journey with bank transactions
       | h3  | Payments the partner makes in cash |
       | h3  | Housing Benefit |
       | h2  | Dependants |
+
+  @javascript
+  Scenario: Selects and then removes income and outgoings bank transactions
+    Given I start the means application with bank transactions with no transaction type category
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
+    Then I click 'Continue'
+
+    Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
+    And I select 'Benefits'
+    And I click 'Save and continue'
+
+    Then I should be on a page with title "Select payments your client receives in cash"
+    When I select 'My client receives none of these payments in cash'
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Does your client get student finance?"
+    When I choose "No"
+    And I click 'Save and continue'
+
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which of these payments does your client pay?"
+    Then I select 'Housing'
+    And I click 'Save and continue'
+
+    Then I should be on a page with title "Select payments your client pays in cash"
+    And I should see 'Housing'
+    When I select 'None of the above'
+    And I click 'Save and continue'
+
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And the following sections should exist:
+      | tag | section |
+      | h2  | 1. Benefits, charitable or government payments |
+
+    Then I click the first link 'View statements and add transactions'
+    Then I select the first checkbox
+
+    When I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+    When I click the first link or button 'Remove'
+    Then I should see govuk-notification-banner "You removed transaction \d{1,2} [A-Z]\w{2} \d{4} .* from the list"
+
+    When I click the first link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And I click 'Save and continue'
+
+    When I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    Then I click the first link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+
+    When I click the first link or button 'Remove'
+    Then I should see govuk-notification-banner "You removed transaction \d{1,2} [A-Z]\w{2} \d{4} .* from the list"
