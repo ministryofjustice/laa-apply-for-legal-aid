@@ -47,6 +47,7 @@ commands:
             --build-arg BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z) \
             --build-arg BUILD_TAG="app-${CIRCLE_SHA1}" \
             --build-arg APP_BRANCH=${CIRCLE_BRANCH} \
+            --cache-from ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest \
             -t app . | while read line ; do echo "$(date +"%T") > $line" ; done ;
       - aws-cli/setup:
           role_arn: $ECR_ROLE_TO_ASSUME
@@ -118,7 +119,8 @@ jobs:
     executor: linting-executor
     steps:
     - checkout
-    - setup_remote_docker
+    - setup_remote_docker:
+        docker_layer_caching: true
     - *update_packages
     - *restore_gems_cache
     - *install_gems
@@ -218,6 +220,8 @@ jobs:
     executor: test-executor
     steps:
     - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
@@ -267,14 +271,14 @@ jobs:
     executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker
+    - setup_remote_docker:
+        docker_layer_caching: true
     - build-and-push-to-ecr
 
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker
     - *authenticate_k8s_live
     - run:
         name: Helm deployment to UAT
@@ -288,7 +292,6 @@ jobs:
     executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker
     - *authenticate_k8s_live
     - run:
         name: Helm deployment to staging
@@ -304,7 +307,6 @@ jobs:
     executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker
     - *authenticate_k8s_live
     - run:
         name: Helm deployment to production
@@ -320,7 +322,6 @@ jobs:
     executor: cloud-platform-executor
     steps:
     - checkout
-    - setup_remote_docker
     - *authenticate_k8s_live
     - run:
         name: Delete dependabot deployment
