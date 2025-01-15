@@ -19,9 +19,7 @@
 <% if @legal_aid_application.involved_children.any? %>
   <%= render("shared/check_answers/children_involved", read_only:) %>
 
-  <% if @legal_aid_application.section_8_proceedings? %>
-    <%= render("shared/check_answers/laspo", read_only:) %>
-  <% end %>
+  <%= render("shared/check_answers/laspo", read_only:) if @legal_aid_application.section_8_proceedings? %>
 <% end %>
 
 <% if @legal_aid_application.legal_framework_merits_task_list.includes_task?(:application, :second_appeal) %>
