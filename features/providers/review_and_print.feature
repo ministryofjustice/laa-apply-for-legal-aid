@@ -7,10 +7,10 @@ Feature: Review and print your application
     When I view the review and print your application page
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
+      | h3  | Client details |
       | h2  | Cases linked to this one |
-      | h2  | All applications with a family link to this one |
-      | h2  | Copying |
+      | h3  | All applications with a family link to this one |
+      | h3  | Copying |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
@@ -34,8 +34,8 @@ Feature: Review and print your application
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h2  | Case details |
-      | h2  | Latest incident details |
-      | h2  | Opponents |
+      | h3  | Latest incident details |
+      | h3  | Opponents |
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -50,7 +50,7 @@ Feature: Review and print your application
 
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
+      | h3  | Client details |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
@@ -67,8 +67,8 @@ Feature: Review and print your application
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h2  | Case details |
-      | h2  | Latest incident details |
-      | h2  | Opponents |
+      | h3  | Latest incident details |
+      | h3  | Opponents |
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -111,7 +111,7 @@ Feature: Review and print your application
 
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
+      | h3  | Client details |
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
@@ -127,8 +127,8 @@ Feature: Review and print your application
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h2  | Case details |
-      | h2  | Latest incident details |
-      | h2  | Opponents |
+      | h3  | Latest incident details |
+      | h3  | Opponents |
       | h2  | Print your application |
 
     Then the following sections should not exist:

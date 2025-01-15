@@ -1,4 +1,4 @@
-<%= govuk_summary_card(title: t(".heading")) do |card|
+<%= govuk_summary_card(title: t(".heading"), heading_level: 3) do |card|
       card.with_summary_list(html_attributes: { id: "client-details-questions" }, actions: !read_only) do |summary_list|
         if :first_name.in?(attributes)
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__first_name" }) do |row|

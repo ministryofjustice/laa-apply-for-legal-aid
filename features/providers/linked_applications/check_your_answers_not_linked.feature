@@ -12,17 +12,17 @@ Background: I have started an application and not linked or copied it
   And the following sections should exist:
     | tag | section |
     | h1  | Check your answers |
-    | h2  | Client details |
+    | h3  | Client details |
     | h2  | Cases linked to this one |
-    | h2  | Proceedings |
-    | h2  | Non-molestation order |
+    | h3  | Proceedings |
+    | h3  | Non-molestation order |
   And the "linking items" list's questions, answers and action presence should match:
     | question | answer | action |
     | Link to another application? | No | true |
   And the following sections should not exist:
     | tag | section |
-    | h1  | Copying |
-    | h2  | Inherent jurisdiction high court injunction |
+    | h3  | Copying |
+    | h3  | Inherent jurisdiction high court injunction |
 
 @javascript @vcr
 Scenario: When I change it to be a linked case
@@ -51,13 +51,13 @@ Scenario: When I change it to be a linked case
   And the following sections should exist:
     | tag | section |
     | h1  | Check your answers |
-    | h2  | Client details |
+    | h3  | Client details |
     | h2  | Cases linked to this one |
-    | h2  | Proceedings |
-    | h2  | Inherent jurisdiction high court injunction |
+    | h3  | Proceedings |
+    | h3  | Inherent jurisdiction high court injunction |
   And the following sections should not exist:
     | tag | section |
-    | h2  | Non-molestation order |
+    | h3  | Non-molestation order |
   And the "copying items" list's questions and answers should match:
     | question | answer |
     | Copy from another application? | Yes |

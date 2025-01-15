@@ -1,5 +1,5 @@
 <% @source_application.proceedings.in_order_of_addition.each do |proceeding| %>
-  <%= govuk_summary_card(title: proceeding.meaning) do |card|
+  <%= govuk_summary_card(title: proceeding.meaning, heading_level: 3) do |card|
         card.with_action do
           unless @show_linked_proceedings || @read_only
             govuk_link_to(t("generic.change"),
@@ -64,7 +64,7 @@
 <% end %>
 
 <% if @source_application.used_delegated_functions? && !@source_application.special_children_act_proceedings? || @source_application.substantive_cost_overridable? %>
-  <%= govuk_summary_card(title: t(".cost_limits.heading"), html_attributes: { id: "app-check-your-answers__cost_limits" }) do |card|
+  <%= govuk_summary_card(title: t(".cost_limits.heading"), html_attributes: { id: "app-check-your-answers__cost_limits" }, heading_level: 3) do |card|
         card.with_action do
           unless @show_linked_proceedings || @read_only
             govuk_link_to(t("generic.change"),

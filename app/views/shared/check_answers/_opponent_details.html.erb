@@ -1,5 +1,5 @@
 <section class="print-no-break govuk-!-padding-top-6">
-  <%= govuk_summary_card(title: t(".opponent-heading"), html_attributes: { id: "app-check-your-answers__opponent" }) do |card| %>
+  <%= govuk_summary_card(title: t(".opponent-heading"), html_attributes: { id: "app-check-your-answers__opponent" }, heading_level: 3) do |card| %>
     <% unless read_only %>
       <% card.with_action do %>
         <%= govuk_link_to(t("generic.change"),
@@ -20,7 +20,7 @@
     <% end %>
   <% end %>
   <% if parties_mental_capacity %>
-    <%= govuk_summary_card(title: t(".mental_capacity.heading", html_attributes: { id: "app-check-your-answers__mental_capacity" })) do |card| %>
+    <%= govuk_summary_card(title: t(".mental_capacity.heading"), html_attributes: { id: "app-check-your-answers__mental_capacity" }, heading_level: 3) do |card| %>
       <% unless read_only %>
         <% card.with_action do %>
           <%= govuk_link_to(t("generic.change"),
@@ -43,7 +43,7 @@
   <% end %>
 
   <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
-    <%= govuk_summary_card(title: t(".domestic_abuse.heading"), html_attributes: { id: "app-check-your-answers__domestic_abuse" }) do |card| %>
+    <%= govuk_summary_card(title: t(".domestic_abuse.heading"), html_attributes: { id: "app-check-your-answers__domestic_abuse" }, heading_level: 3) do |card| %>
       <% unless read_only %>
         <% card.with_action do %>
           <%= govuk_link_to(t("generic.change"),
@@ -82,7 +82,7 @@
   <% end %>
 
   <% unless @legal_aid_application.special_children_act_proceedings? %>
-    <%= govuk_summary_card(title: t(".statement_of_case.heading"), html_attributes: { id: "app-check-your-answers__statement_of_case" }) do |card| %>
+    <%= govuk_summary_card(title: t(".statement_of_case.heading"), html_attributes: { id: "app-check-your-answers__statement_of_case" }, heading_level: 3) do |card| %>
       <% unless read_only %>
         <% card.with_action do %>
           <%= govuk_link_to(t("generic.change"),
@@ -113,7 +113,7 @@
   <% end %>
 
   <% if @legal_aid_application.allegation %>
-    <%= govuk_summary_card(title: t(".allegation.heading"), html_attributes: { id: "app-check-your-answers__allegation" }) do |card| %>
+    <%= govuk_summary_card(title: t(".allegation.heading"), html_attributes: { id: "app-check-your-answers__allegation" }, heading_level: 3) do |card| %>
       <% unless read_only %>
         <% card.with_action do %>
           <%= govuk_link_to(t("generic.change"),

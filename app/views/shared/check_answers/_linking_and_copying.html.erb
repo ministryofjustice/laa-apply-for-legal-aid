@@ -1,5 +1,5 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
-<%= govuk_summary_card(title: t(".section_linking.heading")) do |card|
+<%= govuk_summary_card(title: t(".section_linking.heading"), heading_level: 3) do |card|
       card.with_summary_list(actions: !read_only, html_attributes: { id: "app-check-your-answers__linking_items" }) do |summary_list|
         summary_list.with_row(classes: "app-check-your-answers__linking_question") do |row|
           row.with_key(text: t(".section_linking.linked"), classes: "govuk-!-width-one-third")
@@ -25,7 +25,7 @@
     end %>
 
 <% if @legal_aid_application&.lead_linked_application&.confirm_link? && all_linked_applications_details(@legal_aid_application).present? %>
-  <%= govuk_summary_card(title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}")) do |card|
+  <%= govuk_summary_card(title: t(".other_links_section.#{@legal_aid_application.lead_linked_application.link_type_code}"), heading_level: 3) do |card|
         card.with_summary_list(actions: false) do |summary_list|
           all_linked_applications(@legal_aid_application).each do |application|
             summary_list.with_row do |row|
@@ -38,7 +38,7 @@
 <% end %>
 
 <% if @legal_aid_application&.lead_linked_application&.confirm_link? && @legal_aid_application&.lead_linked_application&.link_type_code.eql?("FC_LEAD") %>
-  <%= govuk_summary_card(title: t(".section_copying.heading")) do |card|
+  <%= govuk_summary_card(title: t(".section_copying.heading"), heading_level: 3) do |card|
         card.with_action do
           unless read_only
             govuk_link_to(t("generic.change"),

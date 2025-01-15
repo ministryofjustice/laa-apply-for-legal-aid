@@ -9,21 +9,21 @@ Feature: Check merits answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Case details |
-      | h2  | Opponents |
-      | h2  | Mental capacity |
-      | h2  | Domestic abuse summary |
-      | h2  | Statement of case |
-      | h2  | Children involved in this application |
-      | h2  | Section 8 and LASPO |
-      | h2  | Why the matter is opposed |
-      | h2  | Allegation |
-      | h2  | Offer of undertakings |
+      | h3  | Opponents |
+      | h3  | Mental capacity |
+      | h3  | Domestic abuse summary |
+      | h3  | Statement of case |
+      | h3  | Children involved in this application |
+      | h3  | Section 8 and LASPO |
+      | h3  | Why the matter is opposed |
+      | h3  | Allegation |
+      | h3  | Offer of undertakings |
       | h2  | Inherent jurisdiction high court injunction |
       | h2  | Non-molestation order |
       | h2  | Child arrangements order (residence) |
-      | h2  | Chances of success |
-      | h2  | Children covered |
-      | h2  | Supporting evidence |
+      | h3  | Chances of success |
+      | h3  | Children covered |
+      | h3  | Supporting evidence |
 
     And the following sections should not exist:
       | tag | section |
@@ -36,9 +36,9 @@ Feature: Check merits answers
     And the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
-      | h2  | Opponents |
-      | h2  | Statement of case |
-      | h2  | Children involved in this application |
+      | h3  | Opponents |
+      | h3  | Statement of case |
+      | h3  | Children involved in this application |
       | h2  | Second appeal |
 
     And the "Second appeal" check your answers section should contain:
@@ -127,7 +127,7 @@ Feature: Check merits answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Case details |
-      | h2  | Opponents |
+      | h3  | Opponents |
       | h2  | Child assessment order |
       | h2  | Supervision order |
-      | h2  | Who your client is in the proceeding |
+      | h3  | Who your client is in the proceeding |

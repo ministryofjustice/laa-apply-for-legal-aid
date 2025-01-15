@@ -1,4 +1,4 @@
-<%= govuk_summary_card(title: t(".heading")) do |card|
+<%= govuk_summary_card(title: t(".heading"), heading_level: 3) do |card|
       card.with_action do
         unless @show_linked_proceedings || @read_only
           govuk_link_to(t("generic.change"),

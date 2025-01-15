@@ -13,10 +13,10 @@ Background: I have started linking and copying a submitted application
   And the following sections should exist:
     | tag | section |
     | h1  | Check your answers |
-    | h2  | Client details |
+    | h3  | Client details |
     | h2  | Cases linked to this one |
-    | h2  | Copying |
-    | h2  | Proceedings |
+    | h3  | Copying |
+    | h3  | Proceedings |
   And the "linking items" list's questions, answers and action presence should match:
     | question | answer | action |
     | Link to another application? | Yes | true |

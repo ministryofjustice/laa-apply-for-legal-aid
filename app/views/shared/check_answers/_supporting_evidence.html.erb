@@ -2,7 +2,7 @@
   <section class="print-no-break govuk-!-padding-top-6">
     <h2 class="govuk-heading-l"><%= t(".evidence_upload_heading") %></h2>
 
-    <%= govuk_summary_card(title: t(".evidence_upload_heading", html_attributes: { id: "app-check-your-answers__supporting_evidence" })) do |card| %>
+    <%= govuk_summary_card(title: t(".evidence_upload_heading"), html_attributes: { id: "app-check-your-answers__supporting_evidence" }, heading_level: 3) do |card| %>
       <% unless read_only %>
         <% card.with_action do %>
           <%= govuk_link_to(t("generic.change"),

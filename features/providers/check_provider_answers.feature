@@ -6,9 +6,9 @@ Feature: Checking client details answers backwards and forwards
 
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
-      | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction |
+      | h3  | Client details |
+      | h3  | Proceedings |
+      | h3  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:
@@ -26,9 +26,9 @@ Feature: Checking client details answers backwards and forwards
     Given I complete the passported journey as far as check your answers and send correspondence to another uk residential address
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
-      | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction |
+      | h3  | Client details |
+      | h3  | Proceedings |
+      | h3  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Client details" check your answers section should contain:
@@ -423,10 +423,10 @@ Feature: Checking client details answers backwards and forwards
 
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
-      | h2  | Partner's details |
-      | h2  | Proceedings |
-      | h2  | Inherent jurisdiction high court injunction |
+      | h3  | Client details |
+      | h3  | Partner's details |
+      | h3  | Proceedings |
+      | h3  | Inherent jurisdiction high court injunction |
       | h2  | What happens next |
 
     And the "Partner details" check your answers section should contain:
@@ -487,9 +487,9 @@ Feature: Checking client details answers backwards and forwards
 
     Then the following sections should exist:
       | tag | section |
-      | h2  | Client details |
-      | h2  | Proceedings |
-      | h2  | Non-molestation order |
+      | h3  | Client details |
+      | h3  | Proceedings |
+      | h3  | Non-molestation order |
       | h2  | What happens next |
 
     And the "DA004" proceeding check your answers section should contain:

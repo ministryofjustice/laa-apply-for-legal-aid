@@ -13,13 +13,13 @@ Background: I have started linking to a submitted application
   And the following sections should exist:
     | tag | section |
     | h1  | Check your answers |
-    | h2  | Client details |
+    | h3  | Client details |
     | h2  | Cases linked to this one |
-    | h2  | Proceedings |
-    | h2  | Non-molestation order |
+    | h3  | Proceedings |
+    | h3  | Non-molestation order |
   And the following sections should not exist:
     | tag | section |
-    | h2  | Inherent jurisdiction high court injunction |
+    | h3  | Inherent jurisdiction high court injunction |
   And the "linking items" list's questions, answers and action presence should match:
     | question | answer | action |
     | Link to another application? | Yes | true |
@@ -40,13 +40,13 @@ Scenario: If I change the copy case from No to Yes
   And the following sections should exist:
     | tag | section |
     | h1  | Check your answers |
-    | h2  | Client details |
+    | h3  | Client details |
     | h2  | Cases linked to this one |
-    | h2  | Proceedings |
-    | h2  | Inherent jurisdiction high court injunction |
+    | h3  | Proceedings |
+    | h3  | Inherent jurisdiction high court injunction |
   And the following sections should not exist:
     | tag | section |
-    | h2  | Non-molestation order |
+    | h3  | Non-molestation order |
   And the "copying items" list's questions and answers should match:
     | question | answer |
     | Copy from another application? | Yes |
