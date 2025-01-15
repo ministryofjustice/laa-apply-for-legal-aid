@@ -1,14 +1,14 @@
 module Providers
   class ChangeOfNamesController < ProviderBaseController
     def show
-      @proceeding = legal_aid_application.proceedings.last
+      @proceeding = legal_aid_application.proceedings.order(:created_at).last
       form
     end
 
     def update
       return continue_or_draft if draft_selected?
 
-      @proceeding = legal_aid_application.proceedings.last
+      @proceeding = legal_aid_application.proceedings.order(:created_at).last
       if form.valid?
         return redirect_to providers_legal_aid_application_change_of_names_interrupt_path(legal_aid_application) if form.change_of_name?
 
