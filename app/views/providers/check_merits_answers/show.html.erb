@@ -19,7 +19,7 @@
       ) do %>
 
     <%= govuk_inset_text do %>
-      <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
+      <p class="govuk-body"><%= t("generic.cya_inset_text") %></p>
     <% end %>
 
     <%= render(
@@ -34,7 +34,6 @@
           urgency: @legal_aid_application&.urgency,
           read_only: false,
         ) %>
-    <div class="govuk-!-padding-bottom-6"></div>
 
     <% if @legal_aid_application.special_children_act_proceedings? %>
       <%= form.govuk_check_boxes_fieldset :separate_representation_required, legend: nil do %>
