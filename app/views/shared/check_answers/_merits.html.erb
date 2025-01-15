@@ -1,6 +1,6 @@
 <h2 class="govuk-heading-l"><%= t(".case-details-heading") %></h2>
 
-<%= render("shared/check_answers/latest_incident_details", read_only:, incident:) %>
+<%= render("shared/check_answers/latest_incident_details", read_only:, incident:) if @legal_aid_application.latest_incident %>
 
 <%= render(
       "shared/check_answers/opponent_details",
