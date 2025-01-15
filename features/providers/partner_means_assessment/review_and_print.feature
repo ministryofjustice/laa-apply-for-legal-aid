@@ -31,7 +31,7 @@ Feature: Review and print your application
       | h2  | The partner's outgoings |
       | h3  | Payments the partner pays |
       | h3  | Payments the partner pays in cash|
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Your client and their partner's capital |
       | h3  | Property |
       | h3  | Your client's and their partner's property |

@@ -20,7 +20,7 @@ Feature: Bank statement upload check your answers
     And the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
@@ -47,7 +47,7 @@ Feature: Bank statement upload check your answers
 
     And the "Payments your client pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\nTotal in last 3 months |
+      | Housing payments | £1,600.00\ntotal in last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
@@ -55,7 +55,7 @@ Feature: Bank statement upload check your answers
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
       | Does your client get Housing Benefit? | Yes |
-      | Amount | £1,200.00\nTotal in last 3 months |
+      | Amount | £1,200.00\ntotal in last 3 months |
 
     When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
@@ -79,7 +79,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
-    And I should see "Every 2 weeks"
+    And I should see "every 2 weeks"
 
     When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
@@ -113,7 +113,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "£500.00"
-    And I should see "Monthly"
+    And I should see "monthly"
 
     When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"

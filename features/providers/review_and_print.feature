@@ -24,7 +24,7 @@ Feature: Review and print your application
       | h2  | Your client's outgoings |
       | h3  | Payments your client pays |
       | h3  | Payments your client pays in cash|
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -102,8 +102,8 @@ Feature: Review and print your application
   Scenario: For a non-passported truelayer bank transactions journey without student finance
     Given I have completed truelayer application with merits and no student finance
     When I view the review and print your application page
-    Then I should not see "Student loan"
-    And the answer to the "Client gets student finance?" question should be "No"
+    Then I should not see "Amount of student finance"
+    And the answer for 'applicant student finance question' should be 'No'
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits

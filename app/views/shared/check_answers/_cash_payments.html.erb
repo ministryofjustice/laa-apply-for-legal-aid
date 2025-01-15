@@ -19,11 +19,11 @@
     <% end %>
     <% cash_transaction_types.each do |category| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{category.label_name.parameterize}-cash-#{type}-#{individual.downcase}" }) do |row| %>
-        <%= row.with_key(text: category.label_name, classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: category.label_name, classes: "govuk-!-width-one-third") %>
         <%= row.with_value do %>
           <% if cash_transactions.for_transaction_type(category.id).any? %>
             <% cash_transactions.for_transaction_type(category.id).each do |ctx| %>
-              <%= "#{gds_number_to_currency(ctx.amount, precision: 2)} in #{ctx.transaction_date.strftime('%B')}" %> <br>
+              <%= "#{gds_number_to_currency(ctx.amount, precision: 2)} in #{ctx.transaction_date.strftime('%B %Y')}" %> <br>
             <% end %>
           <% else %>
             <%= t("generic.none") %>

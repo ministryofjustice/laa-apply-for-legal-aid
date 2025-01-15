@@ -91,7 +91,7 @@ Feature: non_passported_journey with bank transactions
 
     And the following sections should exist:
       | tag | section |
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Dependants |
 
   @javascript
@@ -215,5 +215,5 @@ Feature: non_passported_journey with bank transactions
       | h2  | The partner's outgoings |
       | h3  | Payments the partner pays |
       | h3  | Payments the partner pays in cash |
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Dependants |

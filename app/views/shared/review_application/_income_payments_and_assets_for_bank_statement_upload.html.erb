@@ -112,7 +112,7 @@
       <%= render(
             "shared/check_answers/housing_benefit",
             read_only: true,
-            individual:,
+            partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
           ) %>
     <% end %>
   </section>

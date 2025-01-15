@@ -435,10 +435,11 @@ en:
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
       housing_benefit:
-        heading: Housing Benefit
+        heading: Housing benefit
         card_title: Housing benefit details
-        amount: Amount of housing benefit
-        does_your_client: Does %{individual} get Housing Benefit?
+        amount: Amount of Housing benefit
+        question_client_only: Client gets Housing benefit?
+        question_client_with_partner: Client or their partner gets Housing benefit?
       linking_and_copying:
         section_linking:
           heading: Linking
