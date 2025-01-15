@@ -1,0 +1,19 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_court_order_copy_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
+    <%= form.govuk_radio_buttons_fieldset :plf_court_order, legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <%= form.govuk_radio_button :plf_court_order,
+                                  true,
+                                  link_errors: true,
+                                  label: { text: t("generic.yes") },
+                                  hint: { text: t(".yes-hint") } %>
+      <%= form.govuk_radio_button :plf_court_order, false, label: { text: t("generic.no") } %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
