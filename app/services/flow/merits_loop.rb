@@ -48,7 +48,7 @@ module Flow
         opponents_application: :opponents_application,
         client_relationship_to_proceeding: :is_client_biological_parent,
         client_child_care_assessment: :child_care_assessments,
-        court_order_copies: :plf_court_order,
+        court_order_copy: :court_order_copies,
       }[task]
     end
 
