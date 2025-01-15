@@ -75,20 +75,6 @@ RSpec.describe Providers::SubmittedApplicationsController do
       end
     end
 
-    context "when application has been completed using old GatewayEvidence model" do
-      let(:legal_aid_application) do
-        create(:legal_aid_application,
-               :with_everything,
-               :with_proceedings,
-               :with_cfe_v5_result,
-               :with_old_gateway_evidence)
-      end
-
-      it "can be viewed on the submitted_application page" do
-        expect(response.body).to include("Fake old gateway evidence file (15.7 KB)")
-      end
-    end
-
     describe "linked application header" do
       context "when this is the lead application for no cases" do
         it { expect(response.body).to have_no_css("govuk-notification-banner") }

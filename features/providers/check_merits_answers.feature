@@ -23,7 +23,7 @@ Feature: Check merits answers
       | h2  | Child arrangements order (residence) |
       | h3  | Chances of success |
       | h3  | Children covered |
-      | h3  | Supporting evidence |
+      | h3  | Files to support the application |
 
     And the following sections should not exist:
       | tag | section |
