@@ -466,6 +466,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_public_law_family_prohibited_steps_order do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :pbm16)
+      end
+    end
+
     trait :with_opponents_application_proceeding do
       after(:create) do |application|
         application.proceedings << create(:proceeding, :da001, :opponents_application)
