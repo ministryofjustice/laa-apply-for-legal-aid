@@ -494,9 +494,6 @@ en:
         items:
           statement_of_case: Statement of case
           full_name: Name
-      gateway_evidence:
-        heading: Supporting evidence
-        gateway_evidence: Upload supporting evidence
       laspo:
         heading: Section 8 and LASPO
         question: Section 8 proceedings are in scope of LASPO?
