@@ -538,10 +538,10 @@ en:
         hearing_date_set: Has a date been set for the hearing?
         nature_of_urgency: Nature of the urgency
       second_appeal:
-        heading: Second appeal
+        heading: Second appeal details
         second_appeal_question: Second appeal?
-        original_judge_level_question: Original case heard by
-        court_type_question: Appeal will be heard in
+        original_judge_level_question: Level of judge in original case
+        court_type_question: Where the %{appeal_num} will be heard
       merits_proceeding_section:
         attempts_to_settle_heading: Attempts to settle
         attempts_to_settle: Details of correspondence or mediation

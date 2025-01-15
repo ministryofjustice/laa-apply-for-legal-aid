@@ -39,18 +39,18 @@ Feature: Check merits answers
       | h3  | Opponents |
       | h3  | Statement of case |
       | h3  | Children involved in this application |
-      | h2  | Second appeal |
+      | h3  | Second appeal details |
 
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | No |
-      | Original case heard by | Recorder Circuit Judge (HHJ) |
-      | Appeal will be heard in | Any other court |
+      | Level of judge in original case | Recorder Circuit Judge (HHJ) |
+      | Where the appeal will be heard | Any other court |
 
     ###################################
     # ECCT question 1 and 3 only needed
-    ###################################
-    When I click Check Your Answers Change link for 'second_appeal_heading'
+    #################################
+    When I click Check Your Answers summary card Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
     And I should be on a page showing "Is this a second appeal?"
     And I should see "This question will help us decide if a specialist caseworker should review your application."
@@ -66,16 +66,16 @@ Feature: Check merits answers
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | Yes |
-      | Appeal will be heard in | Supreme court |
+      | Where the second appeal will be heard | Supreme court |
 
     And the "Second appeal" check your answers section should not contain:
       | question |
-      | Original case heard by |
+      | Level of judge in original case |
 
     ###################################
     # ECCT question 1 and 2 only needed
-    ###################################
-    When I click Check Your Answers Change link for 'second_appeal_heading'
+    #################################
+    When I click Check Your Answers summary card Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
 
     When I choose "No"
@@ -91,16 +91,16 @@ Feature: Check merits answers
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | No |
-      | Original case heard by | Deputy District Judge (DDJ) |
+      | Level of judge in original case | Deputy District Judge (DDJ) |
 
     And the "Second appeal" check your answers section should not contain:
       | question |
-      | Appeal will be heard in |
+      | Where the appeal will be heard |
 
     ###################################
     # ECCT question 1, 2 and 4 needed
-    ###################################
-    When I click Check Your Answers Change link for 'second_appeal_heading'
+    #####################################
+    When I click Check Your Answers summary card Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
 
     When I choose "No"
@@ -117,8 +117,8 @@ Feature: Check merits answers
     And the "Second appeal" check your answers section should contain:
       | question | answer |
       | Second appeal? | No |
-      | Original case heard by | High Court Judge (J) |
-      | Appeal will be heard in | Any other court |
+      | Level of judge in original case | High Court Judge (J) |
+      | Where the appeal will be heard | Any other court |
 
   @javascript
   Scenario: On a PLF application where a proceeding has child care assessment merits task list item
