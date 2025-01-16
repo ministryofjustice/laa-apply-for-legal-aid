@@ -46,7 +46,7 @@ Feature: Bank statement upload check your answers
 
     And the "Payments the partner pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\ntotal in last 3 months |
+      | Housing payments | £1,600.00 total in last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |

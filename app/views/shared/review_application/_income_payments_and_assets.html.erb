@@ -25,14 +25,16 @@
 
 <!-- STUDENT FINANCE -->
 
-  <%= render(
-        "shared/check_answers/student_finance",
-        individual: "Client",
-        individual_with_determiner: t("generic.client"),
-        model: @legal_aid_application.applicant,
-        url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-        read_only: false,
-      ) %>
+  <% unless @legal_aid_application.applicant_receives_benefit? %>
+    <%= render(
+          "shared/check_answers/student_finance",
+          individual: "Client",
+          individual_with_determiner: t("generic.client"),
+          model: @legal_aid_application.applicant,
+          url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
+          read_only: false,
+        ) %>
+  <% end %>
 
 <!-- OUTGOINGS -->
 

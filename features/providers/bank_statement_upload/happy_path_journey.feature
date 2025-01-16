@@ -28,7 +28,7 @@ Feature: Bank statement upload journey happy path
     And I should not see 'What not to include'
 
     Then I check "Pension"
-    Then I should see "monthly"
+    Then I should see "Monthly"
     And I fill "Pension amount" with "100"
     And I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
 
@@ -104,7 +104,7 @@ Feature: Bank statement upload journey happy path
     And I should not see 'What not to include'
 
     Then I check "Pension"
-    Then I should see "monthly"
+    Then I should see "Monthly"
     And I fill "Pension amount" with "100"
     And I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
 

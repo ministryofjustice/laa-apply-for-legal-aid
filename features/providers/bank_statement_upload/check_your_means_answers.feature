@@ -47,15 +47,14 @@ Feature: Bank statement upload check your answers
 
     And the "Payments your client pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\ntotal in last 3 months |
+      | Housing payments | £1,600.00 total in last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
 
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
-      | Does your client get Housing Benefit? | Yes |
-      | Amount | £1,200.00\ntotal in last 3 months |
+      | Amount of Housing benefit | £1,200.00\ntotal in last 3 months |
 
     When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
@@ -94,8 +93,7 @@ Feature: Bank statement upload check your answers
 
     When I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And the answer for "applicant student finance question" should be "Yes"
-    And the answer for "student finance annual amount" should be "£5,000"
+    And the answer for "applicant student finance annual amount" should be "£5,000"
 
     When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"

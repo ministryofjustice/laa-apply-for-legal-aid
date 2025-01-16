@@ -59,13 +59,15 @@
 
   <!--STUDENT FINANCE -->
 
-  <%= render(
-        "shared/check_answers/student_finance",
-        individual: "Client",
-        individual_with_determiner: t("generic.client"),
-        model: @legal_aid_application.applicant,
-        read_only: true,
-      ) %>
+  <% unless @legal_aid_application.applicant_receives_benefit? %>
+    <%= render(
+          "shared/check_answers/student_finance",
+          individual: "Client",
+          individual_with_determiner: t("generic.client"),
+          model: @legal_aid_application.applicant,
+          read_only: true,
+        ) %>
+  <% end %>
 
   <!--OUTGOINGS -->
 

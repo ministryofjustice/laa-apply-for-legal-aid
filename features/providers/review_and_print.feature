@@ -5,6 +5,7 @@ Feature: Review and print your application
     Given I have completed a bank statement upload application with merits
     And the feature flag for linked_applications is enabled
     When I view the review and print your application page
+
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
@@ -58,6 +59,7 @@ Feature: Review and print your application
       | h2  | Income, regular payments and assets |
       | h3  | Income |
       | h3  | Regular payments |
+      | h3  | Student finance |
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Bank accounts |
@@ -77,7 +79,6 @@ Feature: Review and print your application
       | h3  | Employment income |
       | h3  | Payments your client gets |
       | h3  | Payments your client gets in cash |
-      | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | Payments your client pays |
       | h3  | Payments your client pays in cash|
@@ -90,7 +91,6 @@ Feature: Review and print your application
       | Maintenance payments from a former partner total |
       | Income from a property or lodger total |
       | Pension total |
-      | Student loan |
 
     And I should not see "Housing benefit total"
 

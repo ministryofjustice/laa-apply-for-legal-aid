@@ -22,7 +22,7 @@ Feature: Bank statement upload check your answers
       | question | answer |
       | Benefits, charitable or government payments | None |
       | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | £50.00\nevery week |
+      | Maintenance payments from a former partner | £50.00 every week |
       | Income from a property or lodger | None |
       | Pension | None |
 
