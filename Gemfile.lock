@@ -777,7 +777,7 @@ DEPENDENCIES
   capybara (>= 3.36.0, < 4.0)
   cssbundling-rails
   csv
-  cucumber
+  cucumber (>= 9.2.1)
   cucumber-rails (>= 2.4.0)
   database_cleaner
   devise
@@ -864,7 +864,7 @@ DEPENDENCIES
   webrick
 
 RUBY VERSION
-   ruby 3.3.6p108
+   ruby 3.4.1p0
 
 BUNDLED WITH
    2.6.2

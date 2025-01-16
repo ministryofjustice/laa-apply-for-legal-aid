@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module LanguageSwitcherHelper
   def language_links
-    links = ""
+    links = +""
 
     I18n.available_locales.each do |locale|
       link = I18n.locale == locale ? t("generic.#{locale}") : govuk_link_to(t("generic.#{locale}"), url_for(locale:))
