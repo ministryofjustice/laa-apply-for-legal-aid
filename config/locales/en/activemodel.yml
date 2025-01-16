@@ -344,6 +344,10 @@ en:
           attributes:
             assessed:
               inclusion: Select yes if the local authority has assessed your client's ability to care for the children involved
+            result:
+              inclusion: Select if the assessment was positive or negative
+            details:
+              blank: Enter how the negative assessment will be challenged
         partner:
           attributes:
             date_of_birth:

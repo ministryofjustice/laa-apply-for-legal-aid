@@ -18,35 +18,29 @@ RSpec.describe Flow::Steps::ProviderMerits::ChildCareAssessmentStep, type: :requ
   describe "#forward" do
     subject { described_class.forward.call(legal_aid_application) }
 
-    # TODO: remove for AP-5533
-    it { is_expected.to eq :fake_next_step }
-
-    context "when assessed is true", skip: "TODO: AP-5533" do
+    context "when assessed is true" do
       before { create(:child_care_assessment, assessed: true, proceeding:) }
 
-      it { is_expected.to eq :child_care_assessment_result }
+      it { is_expected.to eq :child_care_assessment_results }
     end
 
-    context "when assessed is false", skip: "TODO: AP-5533" do
+    context "when assessed is false" do
       before { create(:child_care_assessment, assessed: false, proceeding:) }
 
-      it { is_expected.to eq :child_care_assessment_result }
+      it { is_expected.to eq :fake_next_step }
     end
   end
 
   describe "#check_answers" do
     subject { described_class.check_answers.call(legal_aid_application) }
 
-    # TODO: remove for AP-5533
-    it { is_expected.to eq :check_merits_answers }
-
-    context "when assessed is true", skip: "TODO: AP-5533" do
+    context "when assessed is true" do
       before { create(:child_care_assessment, assessed: true, proceeding:) }
 
-      it { is_expected.to eq :child_care_assessment_result }
+      it { is_expected.to eq :child_care_assessment_results }
     end
 
-    context "when assessed is false", skip: "TODO: AP-5533" do
+    context "when assessed is false" do
       before { create(:child_care_assessment, assessed: false, proceeding:) }
 
       it { is_expected.to eq :check_merits_answers }

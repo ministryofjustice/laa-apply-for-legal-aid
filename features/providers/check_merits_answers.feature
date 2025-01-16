@@ -140,13 +140,60 @@ Feature: Check merits answers
     When I click the govuk-summary-card titled "Assessment of your client" Change link
     Then I should be on a page with title "Special guardianship order - Has the local authority assessed your client's ability to care for the children involved?"
 
-    # TODO: AP-5533: should goto assessment result page
+    #############################################
+    # Child care assessment of client
+    # assessment yes, assessment result positive
+    #############################################
     When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on the 'assessment_result' page showing "Was the assessment positive or negative?"
+
+    When I choose "Positive"
     And I click "Save and continue"
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the govuk-summary-card titled "Assessment of your client" should contain:
       | question | answer |
       | Client's ability to care was assessed by the local authority? | Yes |
+      | Assessment result | Positive |
+    And I should not see "How the result will be challenged"
+
+    When I click the govuk-summary-card titled "Assessment of your client" Change link
+    Then I should be on the 'assessment_of_client' page showing "Has the local authority assessed your client's ability to care for the children involved?"
+
+    #################################
+    # Child care assessment of client
+    # assessment yes, assessment result negative
+    #################################
+    When I click 'Save and continue'
+    Then I should be on the 'assessment_result' page showing "Was the assessment positive or negative?"
+
+    When I choose "Negative"
+    And I should see "How will the negative assessment be challenged?"
+    And I fill "proceeding-merits-task-child-care-assessment-details-field" with "I will challenge the negative assessment by..."
+    And I click "Save and continue"
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the govuk-summary-card titled "Assessment of your client" should contain:
+      | question | answer |
+      | Client's ability to care was assessed by the local authority? | Yes |
+      | Assessment result | Negative |
+      | How the result will be challenged | I will challenge the negative assessment by... |
+
+    #################################
+    # Child care assessment of client
+    # assessment no
+    #################################
+    When I click the govuk-summary-card titled "Assessment of your client" Change link
+    Then I should be on the 'assessment_of_client' page showing "Has the local authority assessed your client's ability to care for the children involved?"
+
+    When I choose "No"
+    When I click 'Save and continue'
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the govuk-summary-card titled "Assessment of your client" should contain:
+      | question | answer |
+      | Client's ability to care was assessed by the local authority? | No |
+
+    And I should not see "Assessment result"
+    And I should not see "How the result will be challenged"
 
   @javascript
   Scenario: On an SCA application where a proceeding has no questions on the merits task list

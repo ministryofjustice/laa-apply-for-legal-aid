@@ -537,6 +537,13 @@ en:
           h1-heading: Has the local authority assessed your client's ability to care for the children involved?
           radio_hint_yes: You'll need to upload supporting evidence later
           hint: For example, if your client is the grandparent, the local authority may check if they could be a suitable carer
+      child_care_assessment_results:
+        show:
+          h1-heading: Was the assessment positive or negative?
+          label:
+            positive: Positive
+            negative: Negative
+            details: How will the negative assessment be challenged?
     application_merits_task:
       involved_children:
         new:
