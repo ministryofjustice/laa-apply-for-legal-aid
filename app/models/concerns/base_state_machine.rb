@@ -9,7 +9,7 @@ class BaseStateMachine < ApplicationRecord
   end
 
   def log_status_change
-    Rails.logger.info "Log::Status::Change laa: #{legal_aid_application.id} event: #{aasm.current_event} from: #{aasm.from_state} to: #{aasm.to_state}"
+    Rails.logger.info "BaseStateMachine::StateChange, laa_id: #{legal_aid_application.id}, event: #{aasm.current_event}, from: #{aasm.from_state}, to: #{aasm.to_state}"
   end
 
   VALID_CCMS_REASONS = %i[
