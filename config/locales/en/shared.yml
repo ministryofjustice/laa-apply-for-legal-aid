@@ -492,6 +492,7 @@ en:
         items:
           statement_of_case: Statement of case
           full_name: Name
+        evidence_upload_heading: Supporting evidence
       laspo:
         heading: Section 8 and LASPO
         question: Section 8 proceedings are in scope of LASPO?
@@ -574,7 +575,6 @@ en:
           court_application: Court application
           expert_report: Expert report
           parental_responsibility: Parental responsibility evidence
-        evidence_upload_heading: Supporting evidence
         evidence_upload: Files to support the application
       children_involved:
         involved-children-heading: Children involved in this application

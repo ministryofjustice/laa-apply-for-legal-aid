@@ -37,7 +37,10 @@
   <%= render("shared/check_answers/merits_proceeding_section", read_only:, proceeding:) %>
 <% end %>
 
-<%= render("shared/check_answers/supporting_evidence", read_only:) %>
+<% if @legal_aid_application.uploaded_evidence_collection %>
+  <h2 class="govuk-heading-l"><%= t(".evidence_upload_heading") %></h2>
+  <%= render("shared/check_answers/supporting_evidence", read_only:) %>
+<% end %>
 
 <!--This is to prevent the separate representation section from showing up anywhere other than the merits report -->
 <% if controller_name == 'merits_reports' && @legal_aid_application.special_children_act_proceedings? %>

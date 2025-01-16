@@ -2327,9 +2327,10 @@ RSpec.describe LegalAidApplication do
 private
 
   def uploaded_evidence_output
+    evidence_collection = laa.uploaded_evidence_collection.original_attachments.sort_by(&:original_filename)
     {
-      "benefit_evidence" => ["Fake Benefit Evidence 1", "Fake Benefit Evidence 2"],
-      "gateway_evidence" => ["Fake Gateway Evidence 1", "Fake Gateway Evidence 2"],
+      "gateway_evidence" => [evidence_collection.third, evidence_collection.fourth],
+      "benefit_evidence" => [evidence_collection.first, evidence_collection.second],
     }
   end
 end

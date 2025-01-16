@@ -629,8 +629,7 @@ class LegalAidApplication < ApplicationRecord
   def uploaded_evidence_by_category
     return if uploaded_evidence_collection.nil?
 
-    out = uploaded_evidence_collection.original_attachments.group_by(&:attachment_type)
-    out.transform_values { |attachment| attachment.map(&:original_filename) }
+    uploaded_evidence_collection.original_attachments.group_by(&:attachment_type)
   end
 
   def manually_entered_employment_information?
