@@ -60,6 +60,10 @@ Then("I click the first link {string}") do |link_name|
   first(:link, link_name).click
 end
 
+Then("I click the first link or button {string}") do |name|
+  click_on(name, match: :first)
+end
+
 Then("I click the {string} link {string}") do |nth, link_name|
   all(:link, link_name)[nth.to_i - 1].click
 end

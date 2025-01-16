@@ -24,6 +24,12 @@ Then("I should see govuk-tag {string}") do |text|
   expect(page).to have_css(".govuk-tag", text:)
 end
 
+Then("I should see govuk-notification-banner {string}") do |text|
+  expect(page)
+    .to have_css(".govuk-notification-banner", text: /#{text}/),
+        "expected to find govuk-notification-banner with text matching: \"#{text}\""
+end
+
 And(/^I should (see|not see) a ['|"](.*?)['|"] button$/) do |visibility, text|
   if visibility == "see"
     expect(page).to have_button(text:)
