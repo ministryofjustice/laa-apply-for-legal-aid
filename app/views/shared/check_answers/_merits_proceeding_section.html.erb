@@ -126,6 +126,20 @@
       <% end %>
     <% end %>
 
+    <% if proceeding.child_care_assessment %>
+      <%= govuk_summary_card(title: t(".child_care_assessment_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_child_care_assessment" }, heading_level: 3) do |card| %>
+        <% unless read_only %>
+          <% card.with_action do %>
+            <%= govuk_link_to(t("generic.change"),
+                              providers_merits_task_list_child_care_assessment_path(proceeding), visually_hidden_text: t(".child_care_assessment_heading")) %>
+          <% end %>
+        <% end %>
+        <%= card.with_summary_list(actions: false) do |summary_list| %>
+          <%= render("shared/check_answers/child_care_assessment", summary_list:, proceeding:, child_care_assessment: proceeding.child_care_assessment) %>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <% unless proceeding.special_childrens_act? %>
       <% if proceeding.vary_order %>
         <%= govuk_summary_card(title: t(".vary_order_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }, heading_level: 3) do |card| %>
