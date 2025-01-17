@@ -151,7 +151,6 @@ Feature: Public law family merits appeal question flow
     When I click "Save and continue"
     Then I should see govuk error summary "Select which court the appeal will be heard in"
 
-
     ################################
     # Original (case) judge level
     # Test next question flow
