@@ -257,6 +257,7 @@ en:
             You do not need to do a means test as your client was under 18
             when you first used delegated functions on this case
           sca_proceeding: You do not need to do a means test for special children act proceedings
+          plf_non_means_tested: You do not need to do a means test for parental placement and adoption cases under public law family
         tab_title: No means test required
     check_client_details:
       show:

@@ -1,6 +1,8 @@
 <%= page_template(page_title: t(".tab_title"), template: :basic, column_width: "full") do %>
   <% heading = if @legal_aid_application.special_children_act_proceedings?
                  t(".title.sca_proceeding")
+               elsif @legal_aid_application.plf_non_means_tested_proceeding?
+                 t(".title.plf_non_means_tested")
                elsif @legal_aid_application.used_delegated_functions?
                  t(".title.under_18_when_delegated_functions_used")
                else
