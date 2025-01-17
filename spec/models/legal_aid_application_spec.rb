@@ -1648,6 +1648,30 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#plf_non_means_tested_proceeding?" do
+    context "with a plf non means tested proceeding" do
+      let(:laa) do
+        create(:legal_aid_application,
+               :with_proceedings,
+               explicit_proceedings: %i[pbm40],
+               set_lead_proceeding: :pbm40)
+      end
+
+      it "returns true" do
+        expect(laa.plf_non_means_tested_proceeding?).to be true
+      end
+    end
+
+    context "without special children act proceedings" do
+      let(:laa) { create(:legal_aid_application) }
+
+      it "returns false" do
+        create(:proceeding, :da001, legal_aid_application: laa)
+        expect(laa.plf_non_means_tested_proceeding?).to be false
+      end
+    end
+  end
+
   describe "#online_current_accounts_balance" do
     let(:laa) { create(:legal_aid_application, :with_applicant) }
 

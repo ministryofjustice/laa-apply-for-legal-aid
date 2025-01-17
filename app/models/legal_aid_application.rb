@@ -187,6 +187,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KSEC8") }
   end
 
+  def plf_non_means_tested_proceeding?
+    proceedings.any? { |proceeding| proceeding.ccms_code.in?(%w[PBM40 PBM40E PBM45 PBM45E]) }
+  end
+
   def special_children_act_proceedings?
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
   end
@@ -371,7 +375,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def non_means_tested?
-    applicant&.no_means_test_required? || special_children_act_proceedings?
+    applicant&.no_means_test_required? || special_children_act_proceedings? || plf_non_means_tested_proceeding?
   end
 
   def benefit_check_result_needs_updating?

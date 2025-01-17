@@ -438,4 +438,23 @@ FactoryBot.define do
     client_involvement_type_ccms_code { "A" }
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
   end
+
+  trait :pbm40 do
+    lead_proceeding { false }
+    ccms_code { "PBM40" }
+    meaning { "Placement order - parent or parental responsibility" }
+    description { "To represent a parent or person with parental responsibility on an application for a placement order." }
+    substantive_cost_limitation { 5000 }
+    delegated_functions_cost_limitation { 2250 }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "placement_order_parent_or_parental_responsibility_plf" }
+    matter_type { "public law family (PLF)" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLB" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+  end
 end
