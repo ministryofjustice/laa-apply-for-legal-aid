@@ -8,6 +8,10 @@ class BaseStateMachine < ApplicationRecord
     EnableCCMSSubmission.call || ENV.fetch("LOCAL_CCMS_OVERRIDE", "false") == "true"
   end
 
+  def log_status_change
+    Rails.logger.info "BaseStateMachine::StateChange, laa_id: #{legal_aid_application.id}, event: #{aasm.current_event}, from: #{aasm.from_state}, to: #{aasm.to_state}"
+  end
+
   VALID_CCMS_REASONS = %i[
     no_online_banking
     no_applicant_consent
@@ -42,6 +46,8 @@ class BaseStateMachine < ApplicationRecord
     state :assessment_submitted
     state :use_ccms
     state :delegated_functions_used
+
+    after_all_transitions :log_status_change
 
     event :enter_applicant_details do
       transitions from: %i[

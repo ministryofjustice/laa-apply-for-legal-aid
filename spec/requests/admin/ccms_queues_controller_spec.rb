@@ -23,7 +23,7 @@ RSpec.describe Admin::CCMSQueuesController do
     context "when there are no applications on the queue" do
       it "displays a warning message" do
         get_index
-        expect(response.body).to include("Queue is empty")
+        expect(response.body).to include("The sidekiq queue is empty")
       end
     end
 
@@ -33,6 +33,22 @@ RSpec.describe Admin::CCMSQueuesController do
       it "has a link to the application" do
         get_index
         expect(response.body).to include(admin_ccms_queue_path(ccms_submission.id))
+      end
+    end
+
+    context "when there are no paused applications" do
+      it "displays a warning message" do
+        get_index
+        expect(response.body).to include("There are no paused submissions")
+      end
+    end
+
+    context "when there is a paused application" do
+      let!(:legal_aid_application) { create(:legal_aid_application, :submission_paused) }
+
+      it "has a link to the application" do
+        get_index
+        expect(response.body).to include(admin_legal_aid_applications_submission_path(legal_aid_application))
       end
     end
   end
