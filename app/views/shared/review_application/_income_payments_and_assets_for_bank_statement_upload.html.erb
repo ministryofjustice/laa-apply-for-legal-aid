@@ -59,7 +59,7 @@
 
   <!--STUDENT FINANCE -->
 
-  <% unless @legal_aid_application.applicant_receives_benefit? %>
+  <% if @legal_aid_application.non_passported? %>
     <%= render(
           "shared/check_answers/student_finance",
           individual: "Client",

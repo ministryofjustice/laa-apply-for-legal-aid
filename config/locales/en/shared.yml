@@ -603,6 +603,7 @@ en:
       cash_payments:
         income_heading: Payments %{individual_with_determiner} gets in cash
         outgoings_heading: Payments %{individual_with_determiner} pays in cash
+        amount_and_date: "%{amount} in %{month}"
       proceedings:
         heading: Proceedings
         proceeding: Proceeding

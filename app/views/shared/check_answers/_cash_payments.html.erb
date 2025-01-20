@@ -23,7 +23,7 @@
         <%= row.with_value do %>
           <% if cash_transactions.for_transaction_type(category.id).any? %>
             <% cash_transactions.for_transaction_type(category.id).each do |ctx| %>
-              <%= "#{gds_number_to_currency(ctx.amount, precision: 2)} in #{ctx.transaction_date.strftime('%B %Y')}" %> <br>
+              <%= t(".amount_and_date", amount: gds_number_to_currency(ctx.amount, precision: 2), month: ctx.transaction_date.strftime("%B %Y")) %> <br>
             <% end %>
           <% else %>
             <%= t("generic.none") %>
