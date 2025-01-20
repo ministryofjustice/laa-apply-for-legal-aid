@@ -139,10 +139,8 @@ RSpec.describe "check passported answers requests" do
       end
 
       it "displays the correct URLs for changing values" do
-        expect(response.body).to have_change_link(:own_home, providers_legal_aid_application_means_own_home_path(application))
-        expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_means_property_details_path(application))
-        expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_means_property_details_path(application))
-        expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_means_property_details_path(application))
+        expect(response.body).to have_change_link(:property_ownership, providers_legal_aid_application_means_own_home_path(application))
+        expect(response.body).not_to have_change_link(:property_details_questions, providers_legal_aid_application_means_own_home_path(application))
         expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
@@ -198,6 +196,14 @@ RSpec.describe "check passported answers requests" do
                  :with_own_home_owned_outright,
                  :with_passported_state_machine,
                  :provider_entering_means)
+        end
+
+        it "displays the correct URLs for changing values" do
+          expect(response.body).to have_change_link(:property_ownership, providers_legal_aid_application_means_own_home_path(application))
+          expect(response.body).to have_change_link(:property_details_questions, providers_legal_aid_application_means_property_details_path(application))
+          expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
+          expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
+          expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
         end
 
         it "does not display property value" do
