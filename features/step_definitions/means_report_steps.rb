@@ -240,7 +240,7 @@ Then("the Caseworker review section should contain:") do |table|
 end
 
 Then("the Property question should exist:") do |table|
-  expect_questions_in(selector: "#property-question", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__property_ownership", expected: table)
 end
 
 Then("the Property details questions should exist:") do |table|
