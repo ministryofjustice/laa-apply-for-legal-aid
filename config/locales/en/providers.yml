@@ -534,8 +534,8 @@ en:
       child_care_assessments:
         show:
           h1-heading: Has the local authority assessed your client's ability to care for the children involved?
-          radio_hint_yes: You'll need to upload supporting evidence later.
-          hint: For example, if your client is the grandparent, the local authority may check if they could be a suitable carer.
+          radio_hint_yes: You'll need to upload supporting evidence later
+          hint: For example, if your client is the grandparent, the local authority may check if they could be a suitable carer
     application_merits_task:
       involved_children:
         new:

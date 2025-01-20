@@ -79,7 +79,7 @@ Feature: Public law family merits appeal question flow
     And I click 'Save and continue'
 
     Then I should be on the 'assessment_of_client' page showing "Has the local authority assessed your client's ability to care for the children involved?"
-    And I should see "For example, if your client is the grandparent, the local authority may check if they could be a suitable carer."
+    And I should see "For example, if your client is the grandparent, the local authority may check if they could be a suitable carer"
     And I should see "You'll need to upload supporting evidence later"
 
     # Test the error
