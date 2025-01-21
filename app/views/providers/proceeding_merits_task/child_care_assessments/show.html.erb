@@ -1,0 +1,24 @@
+<%= form_with(
+      model: @form,
+      url: providers_merits_task_list_child_care_assessment_path(@proceeding),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template page_title: t(".h1-heading"),
+                    head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
+                    template: :basic,
+                    form: do %>
+    <%= form.govuk_collection_radio_buttons :assessed,
+                                            yes_no_options(yes: t(".radio_hint_yes")),
+                                            :value, # value_method
+                                            :label, # text_method
+                                            :radio_hint, # hint_method
+                                            bold_labels: false,
+                                            caption: { text: @proceeding.meaning, size: "xl" },
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                            hint: { text: t(".hint") } %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

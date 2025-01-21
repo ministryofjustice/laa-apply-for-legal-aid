@@ -47,9 +47,9 @@ Feature: Check merits answers
       | Original case heard by | Recorder Circuit Judge (HHJ) |
       | Appeal will be heard in | Any other court |
 
-    #################################
+    ###################################
     # ECCT question 1 and 3 only needed
-    #################################
+    ###################################
     When I click Check Your Answers Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
     And I should be on a page showing "Is this a second appeal?"
@@ -72,9 +72,9 @@ Feature: Check merits answers
       | question |
       | Original case heard by |
 
-    #################################
+    ###################################
     # ECCT question 1 and 2 only needed
-    #################################
+    ###################################
     When I click Check Your Answers Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
 
@@ -97,9 +97,9 @@ Feature: Check merits answers
       | question |
       | Appeal will be heard in |
 
-    #####################################
+    ###################################
     # ECCT question 1, 2 and 4 needed
-    #####################################
+    ###################################
     When I click Check Your Answers Change link for 'second_appeal_heading'
     Then I should be on a page with title "Is this a second appeal?"
 
@@ -119,6 +119,34 @@ Feature: Check merits answers
       | Second appeal? | No |
       | Original case heard by | High Court Judge (J) |
       | Appeal will be heard in | Any other court |
+
+  @javascript
+  Scenario: On a PLF application where a proceeding has child care assessment merits task list item
+    Given I complete the journey as far as check merits answers with a PLF proceeding child care assessment question
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h3  | Opponents |
+      | h3  | Statement of case |
+      | h3  | Children involved in this application |
+      | h3  | Chances of success |
+      | h3  | Assessment of your client |
+
+    And the govuk-summary-card titled "Assessment of your client" should contain:
+      | question | answer |
+      | Client's ability to care was assessed by the local authority? | No |
+
+    When I click the govuk-summary-card titled "Assessment of your client" Change link
+    Then I should be on a page with title "Special guardianship order - Has the local authority assessed your client's ability to care for the children involved?"
+
+    # TODO: AP-5533: should goto assessment result page
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the govuk-summary-card titled "Assessment of your client" should contain:
+      | question | answer |
+      | Client's ability to care was assessed by the local authority? | Yes |
 
   @javascript
   Scenario: On an SCA application where a proceeding has no questions on the merits task list

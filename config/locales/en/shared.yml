@@ -552,6 +552,7 @@ en:
         attempts_to_settle: Details of correspondence or mediation
         chances_of_success_heading: Chances of success
         chances_of_success_details: Why legal aid should be granted
+        child_care_assessment_heading: Assessment of your client
         linked_children_heading: Children covered
         linked_children: Children covered under this proceeding
         relationship_to_child_heading: Who your client is in the proceeding
@@ -584,6 +585,8 @@ en:
         involved-children-heading: Children involved in this application
         child_name: Child %{number} name
         child_date_of_birth: Child %{number} date of birth
+      child_care_assessment:
+        assessed: Client's ability to care was assessed by the local authority?
       relationship_to_child:
         biological_parent: Client is the biological parent of any child involved?
         child_subject: Client is a child subject of this proceeding?

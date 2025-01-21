@@ -494,6 +494,31 @@ FactoryBot.define do
       end
     end
 
+    trait :pbm32_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              opponent_name: [],
+              statement_of_case: [],
+              children_application: [],
+            },
+          },
+          proceedings: [
+            {
+              ccms_code: "PBM32",
+              tasks: {
+                children_proceeding: [:children_application],
+                chances_of_success: [],
+                client_child_care_assessment: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
     trait :broken_opponent do
       lfa_response do
         {

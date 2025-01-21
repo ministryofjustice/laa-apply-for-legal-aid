@@ -58,6 +58,20 @@ Then("the following sections should not exist:") do |table|
   end
 end
 
+Then("the govuk-summary-card titled {string} should contain:") do |card_title, table|
+  element = page.find(class: "govuk-summary-card", text: card_title)
+
+  expect_questions_and_answers_in(selector: element[:id].prepend("#"), expected: table)
+end
+
+When("I click the govuk-summary-card titled {string} Change link") do |card_title|
+  element = page.find(class: "govuk-summary-card", text: card_title)
+
+  within("#{element[:id].prepend('#')} .govuk-summary-card__action") do
+    click_on "Change"
+  end
+end
+
 Given("I insert cassette {string}") do |string|
   VCR.insert_cassette(string, record: :once, allow_playback_repeats: true)
 end

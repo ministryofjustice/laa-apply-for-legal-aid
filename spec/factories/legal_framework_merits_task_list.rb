@@ -59,6 +59,10 @@ FactoryBot.define do
       serialized_data { build(:legal_framework_serializable_merits_task_list, :pbm01a).to_yaml }
     end
 
+    trait :pbm32_as_applicant do
+      serialized_data { build(:legal_framework_serializable_merits_task_list, :pbm32_as_applicant).to_yaml }
+    end
+
     trait :broken_opponent do
       serialized_data { build(:legal_framework_serializable_merits_task_list, :broken_opponent).to_yaml }
     end

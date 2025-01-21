@@ -34,6 +34,7 @@ module Flow
         linked_children: Steps::ProviderMerits::LinkedChildrenStep,
         specific_issue: Steps::ProviderMerits::SpecificIssueStep,
         vary_order: Steps::ProviderMerits::VaryOrderStep,
+        child_care_assessments: Steps::ProviderMerits::ChildCareAssessmentStep,
         is_client_biological_parent: Steps::ProviderMerits::BiologicalParentStep,
         does_client_have_parental_responsibilities: Steps::ProviderMerits::ParentalResponsibilitiesStep,
         is_client_child_subject: Steps::ProviderMerits::ChildSubjectStep,

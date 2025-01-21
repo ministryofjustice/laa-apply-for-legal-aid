@@ -40,3 +40,37 @@ end
 Then("the \"Second appeal\" check your answers section should not contain:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__second_appeal", expected: table, negate: true)
 end
+
+Given("I complete the journey as far as check merits answers with a PLF proceeding child care assessment question") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_non_passported_state_machine,
+    :with_positive_benefit_check_result,
+    :with_proceedings,
+    :with_applicant,
+    :with_opponent,
+    :with_merits_statement_of_case,
+    :with_involved_children,
+    :with_chances_of_success,
+    :checking_merits_answers,
+    explicit_proceedings: %i[pbm32],
+    set_lead_proceeding: :pbm32,
+  )
+
+  create(:child_care_assessment, assessed: false, proceeding: @legal_aid_application.proceedings.find_by(ccms_code: "PBM32"))
+  create(:legal_framework_merits_task_list, :pbm32_as_applicant, legal_aid_application: @legal_aid_application)
+
+  # Mark other merits questions as complete to enable CYA flow for child care assessment
+  %i[opponent_name statement_of_case children_application].each do |merit_task|
+    @legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, merit_task)
+  end
+
+  %i[children_proceeding chances_of_success client_child_care_assessment].each do |merit_task|
+    @legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:PBM32, merit_task)
+  end
+
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
+
+  steps %(Then I should be on a page showing 'Check your answers')
+end
