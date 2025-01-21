@@ -429,15 +429,6 @@ en:
               blank: Select if your client has received any of these benefits
             has_evidence_of_benefit:
               blank: Select yes if you have evidence that your client receives %{passporting_benefit}
-        gateway_evidence:
-          attributes:
-            original_file:
-              content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
-              file_empty: The selected file is empty
-              file_too_big: The selected file must be smaller than %{size}MB
-              file_virus: The selected file contains a virus
-              system_down: There was a problem uploading your file - try again
-              no_file_chosen: Attach a file
         incident:
           attributes:
             told_on:
