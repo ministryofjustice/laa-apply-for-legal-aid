@@ -52,5 +52,17 @@ RSpec.describe Flow::Steps::ProviderStart::CheckProviderAnswersStep, type: :requ
         expect(legal_aid_application.state_machine.type).to eq "SpecialChildrenActStateMachine"
       end
     end
+
+    context "when the application has a non means tested PLF proceeding" do
+      let(:legal_aid_application) do
+        create(:legal_aid_application,
+               :with_proceedings,
+               explicit_proceedings: %i[pbm40],
+               set_lead_proceeding: :pbm40,
+               applicant:)
+      end
+
+      it { is_expected.to eq :confirm_non_means_tested_applications }
+    end
   end
 end
