@@ -25,7 +25,6 @@ class LegalAidApplication < ApplicationRecord
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
   has_one :statement_of_case, class_name: "ApplicationMeritsTask::StatementOfCase", dependent: :destroy
-  has_one :gateway_evidence, dependent: :destroy
   has_one :uploaded_evidence_collection, dependent: :destroy
   has_many :opponents, class_name: "ApplicationMeritsTask::Opponent", dependent: :destroy
   has_one :domestic_abuse_summary, class_name: "ApplicationMeritsTask::DomesticAbuseSummary", dependent: :destroy
