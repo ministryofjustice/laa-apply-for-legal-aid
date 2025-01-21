@@ -61,7 +61,7 @@ gem "jwt"
 
 # background processing
 gem "redis"
-gem "sidekiq", "~> 7.3.7"
+gem "sidekiq", "~> 7.3.8"
 gem "sidekiq-status", "~> 3.0.3"
 
 # URL and path parsing
@@ -106,7 +106,7 @@ group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv"
-  gem "erb_lint", "0.8.0", require: false
+  gem "erb_lint", "0.9.0", require: false
   gem "hirb"
   gem "htmlentities"
   gem "i18n-tasks"
