@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_14_142619) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_21_090656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -558,15 +558,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_142619) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "ccms_id"
     t.string "name"
-  end
-
-  create_table "gateway_evidences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
-    t.uuid "provider_uploader_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["legal_aid_application_id"], name: "index_gateway_evidences_on_legal_aid_application_id"
-    t.index ["provider_uploader_id"], name: "index_gateway_evidences_on_provider_uploader_id"
   end
 
   create_table "hmrc_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1157,7 +1148,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_142619) do
   add_foreign_key "employment_payments", "employments"
   add_foreign_key "employments", "legal_aid_applications"
   add_foreign_key "final_hearings", "proceedings"
-  add_foreign_key "gateway_evidences", "legal_aid_applications"
   add_foreign_key "hmrc_responses", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
