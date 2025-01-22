@@ -1,6 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_own_home"), html_attributes: { id: "app-check-your-answers__property_ownership" }) do |card| %>
+<%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_own_home"), heading_level: 3, html_attributes: { id: "app-check-your-answers__property_ownership" }) do |card| %>
   <% unless read_only %>
     <% card.with_action do %>
       <%= govuk_link_to(t("generic.change"),
@@ -18,7 +18,7 @@
 <% end %>
 
 <% if @legal_aid_application.own_home? %>
-  <%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_property_details#{individual}"), html_attributes: { id: "app-check-your-answers__property_details_questions" }) do |card| %>
+  <%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_property_details#{individual}"), heading_level: 3, html_attributes: { id: "app-check-your-answers__property_details_questions" }) do |card| %>
     <% unless read_only %>
       <% card.with_action do %>
         <%= govuk_link_to(t("generic.change"),
