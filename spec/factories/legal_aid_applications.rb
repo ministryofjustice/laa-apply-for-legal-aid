@@ -630,12 +630,6 @@ FactoryBot.define do
       end
     end
 
-    trait :with_old_gateway_evidence do
-      after(:create) do |application|
-        create(:gateway_evidence, :with_original_file_attached, legal_aid_application: application)
-      end
-    end
-
     trait :with_opponent do
       after(:create) do |application|
         create_list(:opponent, 1, legal_aid_application: application)

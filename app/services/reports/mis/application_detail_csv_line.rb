@@ -16,7 +16,6 @@ module Reports
                :dwp_override,
                :emergency_cost_override?,
                :emergency_cost_requested,
-               :gateway_evidence,
                :involved_children,
                :lead_proceeding,
                :office,
@@ -137,8 +136,6 @@ module Reports
           "Fully eligible (means)?",
           "Partially eligible (means)?",
           "Number of children involved",
-          "Supporting evidence uploaded?",
-          "Number of items of evidence",
           "Parties can understand?",
           "Ability to understand details",
           "Warning letter sent?",
@@ -380,8 +377,6 @@ module Reports
         @line << yesno(cfe_result&.eligible?)
         @line << yesno(cfe_result&.partially_eligible?)
         @line << involved_children.count
-        @line << yesno(gateway_evidence.present?)
-        @line << gateway_evidence_count
       end
 
       def parties_mental_capacity_attrs
@@ -519,10 +514,6 @@ module Reports
 
       def convert_employment_type_to_string(value)
         value.humanize if laa.applicant.send(:"#{value}?")
-      end
-
-      def gateway_evidence_count
-        gateway_evidence.present? ? laa.attachments.gateway_evidence_pdf.count : ""
       end
 
       def proceedings_df_used
