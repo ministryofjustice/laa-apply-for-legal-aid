@@ -51,7 +51,7 @@ module CFE
     end
 
     def populate_review_categories_by_reason
-      result = Hash.new([])
+      result = Hash.new([].freeze)
       @hash.each do |category, reason_hash|
         case reason_hash
         when Array
