@@ -1,0 +1,18 @@
+<% if [true, false].include?(@legal_aid_application.plf_court_order) %>
+  <section class="print-no-break govuk-!-padding-top-6">
+    <%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__plf_court_order" }, heading_level: 3) do |card| %>
+      <% unless read_only %>
+        <% card.with_action do %>
+          <%= govuk_link_to(t("generic.change"),
+                            providers_legal_aid_application_court_order_copy_path(@legal_aid_application), visually_hidden_text: t(".heading")) %>
+        <% end %>
+      <% end %>
+      <%= card.with_summary_list(actions: false) do |summary_list| %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__plf_court_order_description" }) do |row| %>
+          <%= row.with_key(text: t(".description"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value(text: yes_no(@legal_aid_application.plf_court_order?)) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
