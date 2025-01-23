@@ -47,15 +47,15 @@ RSpec.describe "check merits answers requests" do
 
       it "displays the correct questions" do
         scope = "shared.check_answers"
-        expect(response.body).to include(I18n.t("latest_incident_details.notification_of_latest_incident", scope:))
-        expect(response.body).to include(I18n.t("latest_incident_details.date_of_latest_incident", scope:))
-        expect(response.body).to include(I18n.t("parties_mental_capacity.understands_terms", scope:))
-        expect(response.body).to include(I18n.t("domestic_abuse_summary.warning_letter_reasons", scope:))
-        expect(response.body).to include(I18n.t("domestic_abuse_summary.police_notified_details", scope:))
-        expect(response.body).to include(I18n.t("domestic_abuse_summary.bail_conditions", scope:))
+        expect(response.body).to include(I18n.t("merits.latest_incident_details.notification_of_latest_incident", scope:))
+        expect(response.body).to include(I18n.t("merits.latest_incident_details.date_of_latest_incident", scope:))
+        expect(response.body).to include(I18n.t("merits.parties_mental_capacity.understands_terms", scope:))
+        expect(response.body).to include(I18n.t("merits.domestic_abuse_summary.warning_letter_reasons", scope:))
+        expect(response.body).to include(I18n.t("merits.domestic_abuse_summary.police_notified_details", scope:))
+        expect(response.body).to include(I18n.t("merits.domestic_abuse_summary.bail_conditions", scope:))
         expect(response.body).to include(I18n.t("merits.items.statement_of_case", scope:))
-        expect(response.body).to include(I18n.t("merits_proceeding_section.prospects_of_success", scope:))
-        expect(response.body).to include(I18n.t("merits_proceeding_section.success_prospect", scope:))
+        expect(response.body).to include(I18n.t("merits.merits_proceeding_section.prospects_of_success", scope:))
+        expect(response.body).to include(I18n.t("merits.merits_proceeding_section.success_prospect", scope:))
       end
 
       it "displays the correct URLs for changing values" do
@@ -75,12 +75,12 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "displays the question Date your client told you about the latest incident details" do
-        expect(response.body).to include(I18n.t("shared.check_answers.latest_incident_details.notification_of_latest_incident"))
+        expect(response.body).to include(I18n.t("shared.check_answers.merits.latest_incident_details.notification_of_latest_incident"))
         expect(response.body).to include(application.latest_incident.told_on.to_s)
       end
 
       it "displays the question Date of incident" do
-        expect(response.body).to include(I18n.t("shared.check_answers.latest_incident_details.date_of_latest_incident"))
+        expect(response.body).to include(I18n.t("shared.check_answers.merits.latest_incident_details.date_of_latest_incident"))
         expect(response.body).to include(application.latest_incident.occurred_on.to_s)
       end
 
@@ -105,11 +105,11 @@ RSpec.describe "check merits answers requests" do
       end
 
       it "displays linked children" do
-        expect(response.body).to include(I18n.t("shared.check_answers.merits_proceeding_section.linked_children"))
+        expect(response.body).to include(I18n.t("shared.check_answers.merits.merits_proceeding_section.linked_children"))
       end
 
       it "displays attempts to settle" do
-        expect(response.body).to include(I18n.t("shared.check_answers.merits_proceeding_section.attempts_to_settle"))
+        expect(response.body).to include(I18n.t("shared.check_answers.merits.merits_proceeding_section.attempts_to_settle"))
       end
 
       it 'changes the state to "checking_merits_answers"' do
