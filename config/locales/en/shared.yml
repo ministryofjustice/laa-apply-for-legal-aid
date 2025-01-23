@@ -578,6 +578,10 @@ en:
             court_application: Court application
             expert_report: Expert report
             parental_responsibility: Parental responsibility evidence
+            local_authority_assessment: Assessment
+            grounds_of_appeal: Grounds of appeal
+            counsel_opinion: Counsel's opinion
+            judgement: Judgement
           evidence_upload: Files to support the application
         children_involved:
           involved-children-heading: Children involved in this application

@@ -23,6 +23,10 @@ RSpec.describe DocumentCategory do
         court_order
         expert_report
         parental_responsibility
+        local_authority_assessment
+        grounds_of_appeal
+        counsel_opinion
+        judgement
       ]
     end
 
@@ -51,6 +55,10 @@ RSpec.describe DocumentCategory do
         expert_report_pdf
         part_bank_state_evidence_pdf
         parental_responsibility_pdf
+        local_authority_assessment_pdf
+        grounds_of_appeal_pdf
+        counsel_opinion_pdf
+        judgement_pdf
       ]
     end
 
