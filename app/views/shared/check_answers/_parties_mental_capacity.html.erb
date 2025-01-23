@@ -1,0 +1,20 @@
+<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__mental_capacity" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application), visually_hidden_text: t(".heading"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_understands_terms_of_court_order" }) do |row|
+          row.with_key(text: t(".understands_terms"), classes: "govuk-!-width-one-third")
+          row.with_value(text: yes_no(parties_mental_capacity.understands_terms_of_court_order))
+        end
+        unless parties_mental_capacity.understands_terms_of_court_order?
+          summary_list.with_row do |row|
+            row.with_key(text: t(".reasons"))
+            row.with_value(text: parties_mental_capacity.understands_terms_of_court_order_details)
+          end
+        end
+      end
+    end %>

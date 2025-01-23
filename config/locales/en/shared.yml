@@ -503,29 +503,29 @@ en:
       matter_opposition:
         matter_opposed_reason: Reasons why the matter is opposed
         matter_opposed_reason_heading: Why the matter is opposed
-      opponent_details:
-        allegation:
-          heading: Allegation
-          denies_all: Client wholly or substantially denies any allegations?
-          additional_information: Why you think there is merit
-        opponent-heading: Opponents
-        opponent_name: Opponent %{number} name
-        opponent_type: Opponent %{number} type
-        domestic_abuse:
-          heading: Domestic abuse summary
-          warning_letter_reasons: Why a warning letter has not been sent
-          police_notified_details: Police action taken
-          police_not_notified: Why the police have not been notified
-          bail_conditions_set: Have bail conditions been set?
-          bail_conditions: Bail conditions
-        statement_of_case:
-          heading: Statement of case
-          file_names: File names
-          statement: Statement
-        mental_capacity:
-          heading: Mental capacity
-          understands_terms: All parties can understand terms of a court order?
-          reasons: Why you think the court would enforce a breach of an order
+      allegation:
+        heading: Allegation
+        denies_all: Client wholly or substantially denies any allegations?
+        additional_information: Why you think there is merit
+      opponents:
+        heading: Opponents
+        name: Opponent %{number} name
+        type: Opponent %{number} type
+      domestic_abuse_summary:
+        heading: Domestic abuse summary
+        warning_letter_reasons: Why a warning letter has not been sent
+        police_notified_details: Police action taken
+        police_not_notified: Why the police have not been notified
+        bail_conditions_set: Have bail conditions been set?
+        bail_conditions: Bail conditions
+      statement_of_case:
+        heading: Statement of case
+        file_names: File names
+        statement: Statement
+      parties_mental_capacity:
+        heading: Mental capacity
+        understands_terms: All parties can understand terms of a court order?
+        reasons: Why you think the court would enforce a breach of an order
       separate_representation:
         heading: Separate representation
         separate_representation: Client wants separate representation?
