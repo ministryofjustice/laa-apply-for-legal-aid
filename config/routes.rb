@@ -373,6 +373,7 @@ Rails.application.routes.draw do
         resource :first_appeal_court_type, only: %i[show update], path: "appeal_court_type"
         resource :second_appeal_court_type, only: %i[show update]
         resource :court_order_copy, only: %i[show update], path: "court_order"
+        resource :is_matter_opposed, only: %i[show update]
       end
     end
 
