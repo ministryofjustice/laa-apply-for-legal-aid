@@ -86,13 +86,22 @@ Feature: Public law family merits appeal question flow
     When I click "Save and continue"
     Then I should see govuk error summary "Select yes if the local authority has assessed your client's ability to care for the children involved"
 
-    # TODO: AP-5533: should goto assessment result page
-    # When I choose "Yes"
-    # And I click "Save and continue"
-    # Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    #################################
+    # Child care assessment of client
+    # assessment yes, assessment result positive
+    #################################
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on the 'assessment_result' page showing "Was the assessment positive or negative?"
 
-    When I choose "No"
-    And I click 'Save and continue'
+    # Test the error
+    When I click "Save and continue"
+    Then I should see govuk error summary "Select if the assessment was positive or negative"
+    Then I should not see "Enter how the negative assessment will be challenged"
+
+    When I choose "Positive"
+    And I click "Save and continue"
+
     Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
     And I should see 'Opponents Completed'
     And I should see 'Statement of case Completed'
@@ -103,9 +112,55 @@ Feature: Public law family merits appeal question flow
     And I should see 'Chances of success Completed'
     And I should see 'Assessment of your client Completed'
 
+    #################################
+    # Child care assessment of client
+    # assessment yes, assessment result negative
+    #################################
+    When I click 'Save and continue'
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the govuk-summary-card titled "Assessment of your client" should contain:
+      | question | answer |
+      | Client's ability to care was assessed by the local authority? | Yes |
+      | Assessment result | Positive |
+
+    And I should not see "How the result will be challenged"
+
+    When I click the govuk-summary-card titled "Assessment of your client" Change link
+    Then I should be on the 'assessment_of_client' page showing "Has the local authority assessed your client's ability to care for the children involved?"
+
+    When I click 'Save and continue'
+    Then I should be on the 'assessment_result' page showing "Was the assessment positive or negative?"
+
+    When I choose "Negative"
+    Then I should see "How will the negative assessment be challenged?"
+
+    # Test the error
+    When I click "Save and continue"
+    Then I should see govuk error summary "Enter how the negative assessment will be challenged"
+    And I should not see "Select if the assessment was positive or negative"
+
+    When I fill "proceeding-merits-task-child-care-assessment-details-field-error" with "I will challenge the negative assessment by..."
+    And I click "Save and continue"
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers'
+    And the govuk-summary-card titled "Assessment of your client" should contain:
+      | question | answer |
+      | Client's ability to care was assessed by the local authority? | Yes |
+      | Assessment result | Negative |
+      | How the result will be challenged | I will challenge the negative assessment by... |
+
+    #################################
+    # Child care assessment of client
+    # assessment no
+    #################################
+    When I click the govuk-summary-card titled "Assessment of your client" Change link
+    Then I should be on the 'assessment_of_client' page showing "Has the local authority assessed your client's ability to care for the children involved?"
+
+    When I choose "No"
     When I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the govuk-summary-card titled "Assessment of your client" should contain:
       | question | answer |
       | Client's ability to care was assessed by the local authority? | No |
 
+    And I should not see "Assessment result"
+    And I should not see "How the result will be challenged"

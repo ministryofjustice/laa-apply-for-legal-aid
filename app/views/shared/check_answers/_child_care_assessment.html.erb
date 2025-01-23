@@ -1,4 +1,21 @@
 <%= summary_list.with_row do |row|
       row.with_key(text: t("shared.check_answers.child_care_assessment.assessed"), classes: "govuk-!-width-one-half")
       row.with_value(text: yes_no(child_care_assessment.assessed?))
+
+      row.with_key(text: t("shared.check_answers.child_care_assessment.assessed"), classes: "govuk-!-width-one-half")
+      row.with_value(text: yes_no(child_care_assessment.assessed?))
+
+      if child_care_assessment.assessed?
+        summary_list.with_row do |row|
+          row.with_key(text: t("shared.check_answers.child_care_assessment.result"))
+          row.with_value(text: child_care_assessment.result? ? "Positive" : "Negative")
+        end
+
+        unless child_care_assessment.result?
+          summary_list.with_row do |row|
+            row.with_key(text: t("shared.check_answers.child_care_assessment.details"))
+            row.with_value(text: child_care_assessment.details)
+          end
+        end
+      end
     end %>

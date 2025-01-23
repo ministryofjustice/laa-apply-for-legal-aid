@@ -584,6 +584,8 @@ en:
         child_date_of_birth: Child %{number} date of birth
       child_care_assessment:
         assessed: Client's ability to care was assessed by the local authority?
+        result: Assessment result
+        details: How the result will be challenged
       relationship_to_child:
         biological_parent: Client is the biological parent of any child involved?
         child_subject: Client is a child subject of this proceeding?

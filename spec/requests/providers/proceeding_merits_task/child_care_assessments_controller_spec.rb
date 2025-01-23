@@ -83,11 +83,9 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
               .to have_task_in_state(:PBM32, :client_child_care_assessment, :not_started)
           end
 
-          it "redirects to the assessment result page", skip: "TODO: AP-5533" do
+          it "redirects to the assessment result page" do
             patch_request
-            expect(response)
-              .to have_http_status(:redirect)
-              .and render_template("providers/proceeding_merits_task/child_care_assessment_results/show")
+            expect(response).to redirect_to(providers_merits_task_list_child_care_assessment_result_path)
           end
         end
 
@@ -100,11 +98,11 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
               .to have_task_in_state(:PBM32, :client_child_care_assessment, :complete)
           end
 
-          it "redirects to the next page in flow", skip: "TODO: AP-5533" do
+          it "redirects to the next page in flow" do
+            allow(Flow::MeritsLoop).to receive(:forward_flow).and_return(:check_merits_answers)
+
             patch_request
-            expect(response)
-              .to have_http_status(:redirect)
-              .and render_template("providers/proceeding_merits_task/child_care_assessment_results/show")
+            expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
           end
         end
 
@@ -195,10 +193,10 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
         context "when no selected" do
           let(:assessed) { "false" }
 
-          it "updates the task to be completed", skip: "TODO: wider question of whether we should be updating the task for draft, if complete. Currently we are not because it does not save task update if draft!" do
+          it "does NOT update the task to be completed" do
             patch_request
             expect(legal_aid_application.legal_framework_merits_task_list)
-              .to have_task_in_state(:PBM32, :client_child_care_assessment, :complete)
+              .to have_task_in_state(:PBM32, :client_child_care_assessment, :not_started)
           end
 
           it "redirects to provider applications home page" do
