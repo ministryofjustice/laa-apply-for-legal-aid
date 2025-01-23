@@ -75,7 +75,7 @@ module CCMS
       end
 
       def extract_raw_value(config)
-        if config[:value] == true || config[:value] == false
+        if [true, false].include?(config[:value])
           config[:value]
         else
           method_name?(config[:value]) ? get_attr_value(config[:value]) : config[:value]

@@ -60,7 +60,7 @@ module PuffingBillyHelper
 private
 
   def organisation_search_term_stubs
-    Hash.new({ success: false, data: [] }).merge(
+    Hash.new({ success: false, data: [] }.freeze).merge(
       {
         "bab" =>
         {
@@ -155,7 +155,7 @@ private
   end
 
   def proceeding_search_term_stubs
-    Hash.new({ success: false, data: [] }).merge(
+    Hash.new({ success: false, data: [] }.freeze).merge(
       {
         "Non-molestation order" =>
         {
