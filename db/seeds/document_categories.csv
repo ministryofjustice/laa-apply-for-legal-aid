@@ -26,3 +26,11 @@ part_bank_state_evidence,FALSE,,FALSE,FALSE
 part_bank_state_evidence_pdf,TRUE,BSTMT,FALSE,FALSE,pdf,Partner Statement
 parental_responsibility,FALSE,,TRUE,TRUE
 parental_responsibility_pdf,TRUE,COURT_ORD,FALSE,FALSE,pdf,PR Evidence
+local_authority_assessment,FALSE,,TRUE,TRUE
+local_authority_assessment_pdf,TRUE,EX_RPT,FALSE,FALSE,pdf,Local Authority Assessment
+grounds_of_appeal,FALSE,,TRUE,FALSE
+grounds_of_appeal_pdf,TRUE,APL_EV,FALSE,FALSE,pdf,Grounds of Appeal
+counsel_opinion,FALSE,,TRUE,FALSE
+counsel_opinion_pdf,TRUE,COUNSEL,FALSE,FALSE,pdf,Counsel's opinion
+judgement,FALSE,,TRUE,FALSE
+judgement_pdf,TRUE,OUT_EV,FALSE,FALSE,pdf,Judgement
