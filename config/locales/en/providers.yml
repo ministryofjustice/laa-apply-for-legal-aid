@@ -1487,6 +1487,7 @@ en:
           second_appeal: second_appeal
           client_child_care_assessment: child_care_assessment
           court_order_copy: court_order_copy
+          matter_opposed: is_matter_opposed
     merits_reports:
       show:
         heading: Merits report
