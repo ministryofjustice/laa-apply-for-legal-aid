@@ -10,8 +10,6 @@
 
 <%= render("shared/check_answers/merits/children_involved", read_only:) if @legal_aid_application.involved_children.any? %>
 
-<%= render("shared/check_answers/merits/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
-
 <%= render("shared/check_answers/merits/urgency", read_only:, urgency:) if @legal_aid_application.urgency %>
 
 <% if @legal_aid_application.legal_framework_merits_task_list.includes_task?(:application, :second_appeal) %>
@@ -19,6 +17,10 @@
 <% end %>
 
 <%= render("shared/check_answers/plf_court_order", read_only:) if [true, false].include?(@legal_aid_application.plf_court_order) %>
+
+<%= render("shared/check_answers/merits/matter_opposition", read_only:) if matter_opposition && matter_opposition.reason.present? %>
+
+<%= render("shared/check_answers/merits/is_matter_opposed", read_only:) if matter_opposition && [true, false].include?(matter_opposition.matter_opposed) %>
 
 <%= render("shared/check_answers/merits/allegation", allegation:, read_only:) if @legal_aid_application.allegation %>
 
