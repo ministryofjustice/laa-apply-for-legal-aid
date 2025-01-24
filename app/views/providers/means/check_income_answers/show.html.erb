@@ -4,7 +4,7 @@
                   "your client"
                 end %>
 
-<%= page_template(page_title: t(".h1-heading")) do %>
+<%= page_template(page_title: t(".h1-heading"), column_width: "full") do %>
 
   <%= govuk_inset_text do %>
     <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
@@ -18,13 +18,13 @@
     <%= render(
           "shared/check_answers/housing_benefit",
           read_only: false,
-          individual:,
+          partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
         ) %>
   <% end %>
 
-  <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading") %></h2>
+  <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
 
-  <%= render "shared/check_answers/dependants", individual: %>
+  <%= render "shared/check_answers/dependants" %>
 
   <h3 class="govuk-heading-m"><%= t(".what_happens_next.heading") %></h3>
   <p class="govuk-body govuk-!-margin-bottom-8"><%= t(".what_happens_next.text", individual:) %></p>

@@ -11,7 +11,7 @@ Feature: Means report when partner is present
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
-      | h3  | Client employment income |
+      | h3  | Employment income |
       | h2  | Outgoings and deductions |
       | h2  | Caseworker Review |
       | h2  | Capital result |
@@ -83,7 +83,7 @@ Feature: Means report when partner is present
       | Partner income from property or lodger | £200 |
       | Partner student loan or grant | £100 |
       | Partner pension | £30 |
-      | Total income | | 
+      | Total income | |
 
     And the 'Client' employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
@@ -108,7 +108,7 @@ Feature: Means report when partner is present
 
     And the Dependants questions should exist:
       | question |
-      | Does your client or their partner have any dependants? |
+      | Client or their partner has dependants? |
 
     And the Dependants detail questions should exist:
       | Name |

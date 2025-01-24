@@ -818,8 +818,8 @@ en:
           page_heading: Select payments the partner pays in cash
       cash_incomes:
         show:
-          page_title: Select payments the partner receives in cash
-          none_of_the_above: The partner receives none of these payments in cash
+          page_title: Select payments the partner gets in cash
+          none_of_the_above: The partner gets none of these payments in cash
     has_national_insurance_numbers:
       show:
         page_title: Does your client have a National Insurance number?
@@ -1048,8 +1048,8 @@ en:
             none_and_another_option_selected: If you select 'My client does not get any of these payments', you cannot select any of the other options
       cash_incomes:
         show:
-          page_title: Select payments your client receives in cash
-          none_of_the_above: My client receives none of these payments in cash
+          page_title: Select payments your client gets in cash
+          none_of_the_above: My client gets none of these payments in cash
       identify_types_of_outgoings:
         show:
           page_heading: Which of these payments does your client pay?
@@ -1129,24 +1129,27 @@ en:
         applicant_income_assessment:
           income-heading: Your client's income
           outgoings-heading: Your client's outgoings
-          credits-section-heading: Payments your client receives
-          debits-section-heading: Payments your client makes
+          credits-section-heading: Payments your client gets
+          debits-section-heading: Payments your client pays
         partner_income_assessment:
           income-heading: The partner's income
           outgoings-heading: The partner's outgoings
-          credits-section-heading: Payments the partner receives
-          debits-section-heading: Payments the partner makes
+          credits-section-heading: Payments the partner gets
+          debits-section-heading: Payments the partner pays
         dependants:
-          heading: Dependants
-          has_dependants: Does your client have any dependants?
+          heading-h2: Dependants
+          heading-h3: Any dependants
+          client_with_partner_has_dependants: Client or their partner has dependants?
+          client_has_dependants: Client has dependants?
           add-new: Add dependant
           delete: Delete dependant
           name: Name
           date_of_birth: Date of birth
-          relationship: What is their relationship to your client?
-          in_full_time_education: Are they in full-time education or training?
-          income: Do they receive any income?
-          assets: Do they have assets worth more than £8,000?
+          relationship: Relationship to your client?
+          relationship_with_partner: Relationship to your client or their partner?
+          in_full_time_education: In full-time education or training?
+          income: Has income?
+          assets: Has assets worth more than £8,000?
       own_homes:
         show:
           h1_heading: Does your client own the home they usually live in?

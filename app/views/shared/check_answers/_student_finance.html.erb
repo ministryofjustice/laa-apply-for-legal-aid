@@ -1,24 +1,18 @@
-<div class="govuk-grid-row" id="app-check-your-answers__<%= individual.class.to_s.downcase %>__student_finance">
-  <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= t(".heading") %></h3>
-  </div>
+<%= govuk_summary_card(title: t(".heading"), heading_level: 3, html_attributes: { id: "app-check-your-answers__#{model.class.to_s.downcase}__student_finance" }) do |card| %>
   <% unless read_only %>
-    <div class="govuk-grid-column-one-third align-text-right">
-      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{individual_text}'s #{t('.heading')}") %></p>
-    </div>
+    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{individual_with_determiner}'s #{t('.heading')}") } %>
   <% end %>
-</div>
-
-<%= govuk_summary_list(card: { title: t(".heading") }, actions: false) do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{individual.class.to_s.downcase}_student_finance_question" }) do |row| %>
-    <%= row.with_key(text: t(".does_your_client", individual_text:), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { yes_no(individual.student_finance?) } %>
-  <% end %>
-
-  <% if individual.student_finance? %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__student_finance_annual_amount" }) do |row| %>
-      <%= row.with_key(text: t(".how_much"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { gds_number_to_currency(individual.student_finance_amount) } %>
+  <% card.with_summary_list do |summary_list| %>
+    <% if model.student_finance? %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{model.class.to_s.downcase}_student_finance_annual_amount" }) do |row| %>
+        <%= row.with_key(text: t(".how_much"), classes: "govuk-!-width-one-third") %>
+        <%= row.with_value(text: t(".amount", amount: gds_number_to_currency(model.student_finance_amount))) %>
+      <% end %>
+    <% else %>
+      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{model.class.to_s.downcase}_student_finance_question" }) do |row| %>
+        <%= row.with_key(text: t(".question", individual:), classes: "govuk-!-width-one-third") %>
+        <%= row.with_value { yes_no(model.student_finance?) } %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

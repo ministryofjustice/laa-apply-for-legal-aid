@@ -9,8 +9,8 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
     Then I select 'Pension'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
-    When I select "My client receives none of these payments in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
+    When I select "My client gets none of these payments in cash"
     And I click 'Save and continue'
 
     Then I should be on a page showing "Does your client get student finance?"
@@ -144,8 +144,8 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
     Then I select 'Pension'
     And I click 'Save and continue'
-    Then I should be on a page showing "Select payments your client receives in cash"
-    When I select "My client receives none of these payments in cash"
+    Then I should be on a page showing "Select payments your client gets in cash"
+    When I select "My client gets none of these payments in cash"
     And I click 'Save and continue'
 
     Then I should be on a page showing "Does your client get student finance?"

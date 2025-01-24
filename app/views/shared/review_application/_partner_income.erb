@@ -59,8 +59,9 @@
 
 <%= render(
       "shared/check_answers/student_finance",
-      individual_text: t("generic.partner"),
-      individual: @legal_aid_application.partner,
+      individual: "Partner",
+      individual_with_determiner: t("generic.partner"),
+      model: @legal_aid_application.partner,
       read_only: true,
     ) %>
 

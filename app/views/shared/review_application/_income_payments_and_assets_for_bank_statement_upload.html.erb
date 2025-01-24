@@ -59,12 +59,15 @@
 
   <!--STUDENT FINANCE -->
 
-  <%= render(
-        "shared/check_answers/student_finance",
-        individual_text: t("generic.client"),
-        individual: @legal_aid_application.applicant,
-        read_only: true,
-      ) %>
+  <% if @legal_aid_application.non_passported? %>
+    <%= render(
+          "shared/check_answers/student_finance",
+          individual: "Client",
+          individual_with_determiner: t("generic.client"),
+          model: @legal_aid_application.applicant,
+          read_only: true,
+        ) %>
+  <% end %>
 
   <!--OUTGOINGS -->
 
@@ -111,7 +114,7 @@
       <%= render(
             "shared/check_answers/housing_benefit",
             read_only: true,
-            individual:,
+            partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
           ) %>
     <% end %>
   </section>

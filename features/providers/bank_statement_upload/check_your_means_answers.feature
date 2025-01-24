@@ -9,18 +9,18 @@ Feature: Bank statement upload check your answers
       | tag | section |
       | h2  | Your client's income |
       | h3  | Bank statements |
-      | h3  | Client employment income |
-      | h2  | Client benefits |
-      | h3  | Payments your client receives |
+      | h3  | Employment income |
+      | h3  | Client benefits, charitable or government payments |
+      | h3  | Payments your client gets |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash |
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash |
 
     And the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
@@ -35,27 +35,26 @@ Feature: Bank statement upload check your answers
       | h2  | Payments from scheme or charities |
 
     And I should see "Uploaded bank statements"
-    And I should see 'Does your client get student finance?'
+    And I should see 'Client gets student finance?'
     And I should not see "Your client's accounts"
 
-    And the "Payments your client receives" section's questions and answers should match:
+    And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "Payments your client makes" section's questions and answers should match:
+    And the "Payments your client pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\nTotal in the last 3 months |
+      | Housing payments | £1,600.00 total in last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
 
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
-      | Does your client get Housing Benefit? | Yes |
-      | Amount | £1,200.00\nTotal in the last 3 months |
+      | Amount of Housing benefit | £1,200.00\ntotal in last 3 months |
 
     When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
@@ -65,7 +64,7 @@ Feature: Bank statement upload check your answers
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "hello_world.pdf"
 
-    When I click Check Your Answers Change link for "Payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
 
     When I check "Pension"
@@ -73,15 +72,15 @@ Feature: Bank statement upload check your answers
     And I choose "providers-means-regular-income-form-pension-frequency-two-weekly-field"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Select payments your client receives in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
 
-    When I check "My client receives none of these payments in cash"
+    When I check "My client gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
-    And I should see "Every 2 weeks"
+    And I should see "every 2 weeks"
 
-    When I click Check Your Answers Change link for "Payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on the "regular_incomes" page showing "Which of these payments does your client get?"
 
     When I check "My client does not get any of these payments"
@@ -94,10 +93,9 @@ Feature: Bank statement upload check your answers
 
     When I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And the answer for "applicant student finance question" should be "Yes"
-    And the answer for "student finance annual amount" should be "£5,000"
+    And the answer for "applicant student finance annual amount" should be "£5,000"
 
-    When I click Check Your Answers Change link for "Payments your client makes"
+    When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "Maintenance payments to a former partner"
     And I fill "Maintenance out amount" with "500"
@@ -113,9 +111,9 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "£500.00"
-    And I should see "Monthly"
+    And I should see "monthly"
 
-    When I click Check Your Answers Change link for "Payments your client makes"
+    When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
@@ -134,7 +132,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for "Payments your client makes"
+    When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does your client pay?"
     And I check "My client makes none of these payments"
     And I click "Save and continue"
@@ -145,17 +143,17 @@ Feature: Bank statement upload check your answers
     Given csrf is enabled
     And I have completed a non-passported non-employed application for "applicant" with bank statements as far as the end of the means income section
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And I should not see 'Client employment income'
+    And I should not see 'Employment income'
     And the following sections within 'applicant' should exist:
       | tag | section |
       | h3  | Bank statements |
       | h2  | Your client's income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash |
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash |
 
     And the following sections should exist:
       | tag | section |

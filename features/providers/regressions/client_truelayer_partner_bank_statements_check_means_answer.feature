@@ -10,7 +10,7 @@ Feature: Bank statement upload check your answers
     And the partner has a how much how often payment categorised as maintenance_out
 
     When I visit the check income answers page
-    Then the "Payments your client receives" section's questions and answers should match:
+    Then the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Benefits, charitable or government payments | None |
       | Financial help from friends or family | £44.00 |
@@ -18,45 +18,45 @@ Feature: Bank statement upload check your answers
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "Payments the partner receives" section's questions and answers should match:
+    And the "Payments the partner gets" section's questions and answers should match:
       | question | answer |
       | Benefits, charitable or government payments | None |
       | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | £50.00\nEvery week |
+      | Maintenance payments from a former partner | £50.00 every week |
       | Income from a property or lodger | None |
       | Pension | None |
 
   @javascript
   Scenario: Viewing client payments
-    When I click Check Your Answers Change link for "payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on a page with title "Which of these payments does your client get?"
     And the checkbox for Financial help from friends or family should be checked
     And the checkbox for Maintenance payments from a former partner should be unchecked
 
   @javascript
   Scenario: Viewing client outgoings
-    When I click Check Your Answers Change link for "payments your client makes"
+    When I click Check Your Answers Change link for "Payments your client pays"
     Then I should be on a page with title "Which of these payments does your client pay?"
     And the checkbox for Childcare payments should be checked
     And the checkbox for Maintenance payments to a former partner should be unchecked
 
   @javascript
   Scenario: Viewing partner payments
-    When I click Check Your Answers Change link for "payments the partner receives"
+    When I click Check Your Answers Change link for "Payments the partner gets"
     Then I should be on the "regular_incomes" page showing "Which of these payments does the partner get?"
     And the checkbox for Financial help from friends or family should be unchecked
     And the checkbox for Maintenance payments from a former partner should be checked
 
   @javascript
   Scenario: De-selecting and re-selecting client payments
-    When I click Check Your Answers Change link for "payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on a page with title "Which of these payments does your client get?"
     And the checkbox for Financial help from friends or family should be checked
 
     When I select "My client does not get any of these payments"
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
-    And the "Payments your client receives" section's questions and answers should match:
+    And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Benefits, charitable or government payments | None |
       | Financial help from friends or family | None |
@@ -64,14 +64,14 @@ Feature: Bank statement upload check your answers
       | Income from a property or lodger | None |
       | Pension | None |
 
-    When I click Check Your Answers Change link for "payments your client receives"
+    When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on a page with title "Which of these payments does your client get?"
 
     When I select "Financial help from friends or family"
     And I click "Save and continue"
-    Then I should be on the "cash_income" page showing "Select payments your client receives in cash"
+    Then I should be on the "cash_income" page showing "Select payments your client gets in cash"
 
-    When I select "My client receives none of these payments in cash"
+    When I select "My client gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on the "income_summary" page showing "Sort your client's income into categories"
 

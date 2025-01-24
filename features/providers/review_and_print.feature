@@ -5,6 +5,7 @@ Feature: Review and print your application
     Given I have completed a bank statement upload application with merits
     And the feature flag for linked_applications is enabled
     When I view the review and print your application page
+
     Then the following sections should exist:
       | tag | section |
       | h3  | Client details |
@@ -17,14 +18,14 @@ Feature: Review and print your application
       | h2  | Emergency cost limit |
       | h3  | Bank statements |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
-      | h3  | Housing Benefit |
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
+      | h3  | Housing benefit |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -58,6 +59,7 @@ Feature: Review and print your application
       | h2  | Income, regular payments and assets |
       | h3  | Income |
       | h3  | Regular payments |
+      | h3  | Student finance |
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Bank accounts |
@@ -74,13 +76,12 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
-      | h3  | Student finance |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | Your client's capital |
 
     And the "Income, regular payments and assets" review section should contain:
@@ -90,7 +91,6 @@ Feature: Review and print your application
       | Maintenance payments from a former partner total |
       | Income from a property or lodger total |
       | Pension total |
-      | Student loan |
 
     And I should not see "Housing benefit total"
 
@@ -102,8 +102,8 @@ Feature: Review and print your application
   Scenario: For a non-passported truelayer bank transactions journey without student finance
     Given I have completed truelayer application with merits and no student finance
     When I view the review and print your application page
-    Then I should not see "Student loan"
-    And the answer to the "Does your client get student finance?" question should be "No"
+    Then I should not see "Amount of student finance"
+    And the answer for 'applicant student finance question' should be 'No'
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits
@@ -134,13 +134,13 @@ Feature: Review and print your application
     Then the following sections should not exist:
       | tag | section |
       | h2  | Your client's income |
-      | h3  | Client employment income |
-      | h3  | Payments your client receives |
-      | h3  | Payments your client receives in cash |
+      | h3  | Employment income |
+      | h3  | Payments your client gets |
+      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
-      | h3  | Payments your client makes |
-      | h3  | Payments your client makes in cash|
+      | h3  | Payments your client pays |
+      | h3  | Payments your client pays in cash|
       | h2  | Your client's capital |
 
     And I should see "Passported"

@@ -64,7 +64,7 @@ Feature: partner_means_assessment full journey
     And I choose the "Monthly" frequency for "Pension"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Select payments your client receives in cash"
+    Then I should be on a page with title "Select payments your client gets in cash"
 
     When I select "Pension"
     And I record monthly payments of 100 for "Pension"
@@ -111,11 +111,11 @@ Feature: partner_means_assessment full journey
     And I fill "Pension" with "150"
     And I choose the "Weekly" frequency for "Pension"
     And I click "Save and continue"
-    Then I should be on a page with title "Select payments the partner receives in cash"
+    Then I should be on a page with title "Select payments the partner gets in cash"
     And I should see "Financial help from friends or family"
     And I should see "Pension"
 
-    When I select "The partner receives none of these payments in cash"
+    When I select "The partner gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on a page with title "Does the partner get student finance?"
 

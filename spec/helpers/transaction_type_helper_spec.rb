@@ -93,7 +93,7 @@ RSpec.describe TransactionTypeHelper do
                frequency: "weekly")
       end
 
-      it { is_expected.to eq(["£250.00", "Every week"]) }
+      it { is_expected.to eq(["£250.00", "every week"]) }
     end
 
     context "when no regular transactions exist" do

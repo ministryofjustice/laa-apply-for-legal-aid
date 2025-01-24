@@ -1,29 +1,21 @@
 <% if partner
-     individual = "Partner"
      individual_with_determiner = t("generic.partner")
      url = providers_legal_aid_application_partners_full_employment_details_path(@legal_aid_application)
      content = @legal_aid_application.partner.full_employment_details
    else
-     individual = "Client"
      individual_with_determiner = t("generic.client")
      url = providers_legal_aid_application_means_full_employment_details_path(@legal_aid_application)
      content = @legal_aid_application.full_employment_details
    end %>
 
-<div class="govuk-grid-row" id="app-check-your-answers__employment">
-  <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= t(".employment", individual:) %></h3>
-  </div>
-  <% unless read_only %>
-    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
-      <p><%= govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{individual_with_determiner}'s #{t('.employment')}") %></p>
-    </div>
-  <% end %>
-</div>
-
-<%= govuk_summary_list(card: { title: t(".employment", individual:) }, actions: false, html_attributes: { id: "employment-income-questions" }) do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__full_employment_details" }) do |row| %>
-    <%= row.with_key(text: t(".details", individual_with_determiner:).upcase_first, classes: "govuk-!-width-one-half") %>
-    <%= row.with_value { content.presence || "-" } %>
+<%= govuk_summary_card(title: t(".employment"), heading_level: 3) do |card| %>
+    <% unless read_only %>
+      <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{individual_with_determiner}'s #{t('.employment')}") } %>
+    <% end %>
+    <%= card.with_summary_list(html_attributes: { id: "app-check-your-answers__full_employment_details" }) do |summary_list| %>
+    <%= summary_list.with_row do |row| %>
+      <%= row.with_key(text: t(".details", individual_with_determiner:).upcase_first, classes: "govuk-!-width-one-third") %>
+      <%= row.with_value { content.presence || "-" } %>
+    <% end %>
   <% end %>
 <% end %>

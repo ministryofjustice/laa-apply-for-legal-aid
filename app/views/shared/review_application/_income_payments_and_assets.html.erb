@@ -25,19 +25,15 @@
 
 <!-- STUDENT FINANCE -->
 
-  <% if @legal_aid_application.applicant.student_finance? %>
-    <%= render "shared/student_finances_table",
-               student_finance_amount: @legal_aid_application.applicant.student_finance_amount,
-               period: @legal_aid_application.year_to_calculation_date %>
-  <% else %>
-    <section>
-      <%= govuk_summary_list(actions: false, classes: "govuk-!-margin-top-6") do |summary_list| %>
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__student_finance_question" }) do |row| %>
-          <%= row.with_key(text: t("shared.check_answers.student_finance.does_your_client", individual_text: "your client"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value(text: yes_no(@legal_aid_application.applicant.student_finance?), classes: "govuk-!-text-align-right") %>
-        <% end %>
-      <% end %>
-    </section>
+  <% if @legal_aid_application.non_passported? %>
+    <%= render(
+          "shared/check_answers/student_finance",
+          individual: "Client",
+          individual_with_determiner: t("generic.client"),
+          model: @legal_aid_application.applicant,
+          url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
+          read_only: false,
+        ) %>
   <% end %>
 
 <!-- OUTGOINGS -->
@@ -63,7 +59,7 @@
       <%= render(
             "shared/check_answers/housing_benefit",
             read_only: true,
-            individual:,
+            partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
           ) %>
     <% end %>
   </section>

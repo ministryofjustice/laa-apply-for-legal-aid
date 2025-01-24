@@ -106,4 +106,4 @@ Feature: Bank statement upload journey state_benefit loop feature
     Then I should be on a page with title matching "Check your answers"
     And I should see "Child benefit"
     And I should see "£21.80"
-    And I should see "Every week"
+    And I should see "every week"

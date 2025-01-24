@@ -1,41 +1,29 @@
 <% if partner
      individual = "partner"
+     individual_with_determiner = t("generic.partner")
      model = @legal_aid_application.partner
-     change_url = providers_legal_aid_application_partners_employment_income_path(@legal_aid_application)
+     url = providers_legal_aid_application_partners_employment_income_path(@legal_aid_application)
    else
      individual = "client"
+     individual_with_determiner = t("generic.client")
      model = @legal_aid_application.applicant
-     change_url = providers_legal_aid_application_means_employment_income_path(@legal_aid_application)
+     url = providers_legal_aid_application_means_employment_income_path(@legal_aid_application)
    end %>
-<div class="govuk-grid-row" id="app-check-your-answers__#{individual}_employment">
-  <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= t(".#{individual}.heading") %></h3>
-  </div>
-  <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
-    <% unless read_only %>
-      <p>
-        <%= govuk_link_to(
-              t("generic.change"), change_url,
-              class: "change-link"
-            ) %>
-      </p>
-    <% end %>
-  </div>
-</div>
 
-<%= govuk_summary_list(
-      card: { title: t(".#{individual}.heading") },
-      actions: false,
-      html_attributes: { id: "employment-#{individual}-notes-questions" },
-    ) do |summary_list| %>
+<%= govuk_summary_card(title: t(".heading").upcase_first, heading_level: 3) do |card| %>
+  <% unless read_only %>
+    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".aria_label", individual_with_determiner:)) } %>
+  <% end %>
+  <%= card.with_summary_list(html_attributes: { id: "employment-#{individual}-notes-questions" }) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__extra_employment_information" }) do |row| %>
-      <%= row.with_key(text: t(".#{individual}.employment_question"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_key(text: t(".question", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
       <%= row.with_value(text: safe_yes_or_no(model.extra_employment_information?)) %>
     <% end %>
     <% if model.extra_employment_information? %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__extra_employment_information_details" }) do |row| %>
-        <%= row.with_key(text: t(".#{individual}.employment_details"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".details_for", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
         <%= row.with_value(text: model.extra_employment_information_details) %>
       <% end %>
     <% end %>
   <% end %>
+<% end %>

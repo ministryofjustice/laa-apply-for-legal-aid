@@ -418,8 +418,9 @@ en:
         nino: National Insurance number
         has_partner: Does your client have a partner?
       dependants:
-        dependant_name: "Dependant %{position}: %{name}"
-        has_dependants: Does %{individual} have any dependants?
+        dependant_name: "Dependant %{position}"
+        client_has_dependants: Client has dependants?
+        client_with_partner_has_dependants: Client or their partner has dependants?
         add-new: Add dependant
         delete: Delete dependant
         name: Name
@@ -434,8 +435,11 @@ en:
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
       housing_benefit:
-        heading: Housing Benefit
-        does_your_client: Does %{individual} get Housing Benefit?
+        heading: Housing benefit
+        card_title: Housing benefit details
+        amount: Amount of Housing benefit
+        question_client_only: Client gets Housing benefit?
+        question_client_with_partner: Client or their partner gets Housing benefit?
       linking_and_copying:
         section_linking:
           heading: Linking
@@ -455,29 +459,23 @@ en:
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
       employed_income:
-        employment: Employment income
+        heading: Employment income
         employment_details: Details
-        partner:
-          heading: Partner employment income
-          employment_details: Details for partner
-          employment_question: Do you need to tell us anything else about the partner's employment?
-        client:
-          heading: Client employment income
-          employment_details: Details for client
-          employment_question: Do you need to tell us anything else about your client's employment?
+        details_for: "Details for %{individual_with_determiner}"
+        question: "Do you need to tell us anything else about %{individual_with_determiner}'s employment?"
+        aria_label: "Change %{individual_with_determiner}'s employment details"
       benefits_income:
         applicant:
-          heading: Client benefits
-          question: Does your client get any benefits, charitable or government payments?
+          heading: Client benefits, charitable or government payments
+          question: Client gets benefits, charitable or government payments?
           change_aria: whether your client receives benefits
         partner:
-          heading: Partner benefits
-          question: Does the partner get any benefits?
+          heading: Partner benefits, charitable or government payments
+          question: Partner gets benefits, charitable or government payments?
           change_aria: whether the partner receives benefits
-        benefit_heading: "Benefit %{index}"
+        benefit_heading: "Benefits, charitable or government payment %{index}"
         type: Benefit type
-        amount: Amount
-        frequency: Frequency
+        amount: Benefit amount
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
@@ -593,20 +591,21 @@ en:
         parental_responsibilities: Client has parental responsibility for any child involved?
         parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       full_employment_details:
-        employment: "%{individual} employment income"
-        details: "%{individual_with_determiner}'s employment details"
+        employment: Employment income
+        details: "Anything else about %{individual_with_determiner}'s employment"
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:
           no_transactions: "No"
       student_finance:
         heading: Student finance
-        does_your_client: Does %{individual_text} get student finance?
+        question: "%{individual} gets student finance?"
         how_much: Amount of student finance
-        info_html: '<strong>%{student_finance}</strong> this academic year.'
+        amount: "%{amount} a year"
       cash_payments:
-        income_heading: Payments %{individual_with_determiner} receives in cash
-        outgoings_heading: Payments %{individual_with_determiner} makes in cash
+        income_heading: Payments %{individual_with_determiner} gets in cash
+        outgoings_heading: Payments %{individual_with_determiner} pays in cash
+        amount_and_date: "%{amount} in %{month}"
       proceedings:
         heading: Proceedings
         proceeding: Proceeding
@@ -942,15 +941,15 @@ en:
       income_payments_and_assets_for_bank_statement_upload:
         capital-heading: "Your client's capital"
         capital-heading_with_partner: "Your client and their partner's capital"
-        credits-section-heading: Payments your client receives
-        debits-section-heading: Payments your client makes
+        credits-section-heading: Payments your client gets
+        debits-section-heading: Payments your client pays
         income-heading: Your client's income
         outgoings-heading: Your client's outgoings
       partner_income:
         income-heading: The partner's income
         outgoings-heading: The partner's outgoings
-        credits-section-heading: Payments the partner receives
-        debits-section-heading: Payments the partner makes
+        credits-section-heading: Payments the partner gets
+        debits-section-heading: Payments the partner pays
       questions_and_answers:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference

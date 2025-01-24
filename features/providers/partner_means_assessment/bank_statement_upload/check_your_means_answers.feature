@@ -9,17 +9,17 @@ Feature: Bank statement upload check your answers
       | tag | section |
       | h2  | The partner's income |
       | h3  | Bank statements |
-      | h3  | Partner employment income |
-      | h2  | Partner benefits |
-      | h3  | Payments the partner receives |
+      | h3  | Employment income |
+      | h3  | Partner benefits, charitable or government payments |
+      | h3  | Payments the partner gets |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
-      | h3  | Payments the partner makes |
-      | h3  | Payments the partner makes in cash |
+      | h3  | Payments the partner pays |
+      | h3  | Payments the partner pays in cash |
 
     And the following sections should exist:
       | tag | section |
-      | h3  | Housing Benefit |
+      | h3  | Housing benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
@@ -34,27 +34,26 @@ Feature: Bank statement upload check your answers
       | h2  | Payments from scheme or charities |
 
     And I should see "Uploaded bank statements"
-    And I should see 'Does the partner get student finance?'
+    And I should see 'Partner gets student finance?'
     And I should not see 'Does the partner have any savings accounts they cannot access online?'
 
-    And the "Payments the partner receives" section's questions and answers should match:
+    And the "Payments the partner gets" section's questions and answers should match:
       | question | answer |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "Payments the partner makes" section's questions and answers should match:
+    And the "Payments the partner pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00\nTotal in the last 3 months |
+      | Housing payments | £1,600.00 total in last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
 
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
-      | Does your client or their partner get Housing Benefit? | Yes |
-      | Amount | £1,200.00\nTotal in the last 3 months |
+      | Amount of Housing benefit | £1,200.00\ntotal in last 3 months |
 
     When I click Check Your Answers Change link for "bank statements partner"
     And I upload an evidence file named "hello_world.pdf"
@@ -64,7 +63,7 @@ Feature: Bank statement upload check your answers
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "hello_world.pdf"
 
-    When I click Check Your Answers Change link for "Payments the partner receives"
+    When I click Check Your Answers Change link for "Payments the partner gets"
     Then I should be on the "regular_incomes" page showing "Which of these payments does the partner get?"
 
     When I check "Pension"
@@ -73,15 +72,15 @@ Feature: Bank statement upload check your answers
     And I choose "providers-partners-regular-income-form-pension-frequency-two-weekly-field"
 
     When I click "Save and continue"
-    Then I should be on a page with title "Select payments the partner receives in cash"
+    Then I should be on a page with title "Select payments the partner gets in cash"
 
-    When I check "The partner receives none of these payments in cash"
+    When I check "The partner gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "1,000.00"
-    And I should see "Every 2 weeks"
+    And I should see "every 2 weeks"
 
-    When I click Check Your Answers Change link for "Payments the partner receives"
+    When I click Check Your Answers Change link for "Payments the partner gets"
     Then I should be on the "regular_incomes" page showing "Which of these payments does the partner get?"
 
     When I check "The partner does not get any of these payments"
@@ -94,10 +93,9 @@ Feature: Bank statement upload check your answers
 
     When I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And the answer for "partner student finance question" should be "Yes"
-    And the answer for "student finance annual amount" should be "£5,000"
+    And the answer for "partner student finance annual amount" should be "£5,000"
 
-    When I click Check Your Answers Change link for "Payments the partner makes"
+    When I click Check Your Answers Change link for "Payments the partner pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does the partner pay?"
     And I check "Maintenance payments to a former partner"
     And I fill "Maintenance out amount" with "500"
@@ -113,9 +111,9 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
     And I should see "£500.00"
-    And I should see "Monthly"
+    And I should see "monthly"
 
-    When I click Check Your Answers Change link for "Payments the partner makes"
+    When I click Check Your Answers Change link for "Payments the partner pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does the partner pay?"
     And I check "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
@@ -135,7 +133,7 @@ Feature: Bank statement upload check your answers
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
 
-    When I click Check Your Answers Change link for "Payments the partner makes"
+    When I click Check Your Answers Change link for "Payments the partner pays"
     Then I should be on the "regular_outgoings" page showing "Which of these payments does the partner pay?"
     And I check "The partner makes none of these payments"
     And I click "Save and continue"
@@ -153,12 +151,12 @@ Feature: Bank statement upload check your answers
       | h1  | Check your answers |
       | h3  | Bank statements |
       | h2  | The partner's income |
-      | h3  | Payments the partner receives |
-      | h3  | Payments the partner receives in cash |
+      | h3  | Payments the partner gets |
+      | h3  | Payments the partner gets in cash |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
-      | h3  | Payments the partner makes |
-      | h3  | Payments the partner makes in cash |
+      | h3  | Payments the partner pays |
+      | h3  | Payments the partner pays in cash |
       | h2  | Dependants |
 
     And the following sections should not exist:
