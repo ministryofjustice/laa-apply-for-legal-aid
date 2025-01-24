@@ -4,7 +4,7 @@
       method: :patch,
     ) do |f| %>
   <%= page_template page_title: t(".page_heading"), template: :basic, form: f do %>
-    <%= f.govuk_collection_radio_buttons :is_matter_opposed,
+    <%= f.govuk_collection_radio_buttons :matter_opposed,
                                          yes_no_options,
                                          :value,
                                          :label,
