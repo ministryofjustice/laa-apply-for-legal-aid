@@ -218,8 +218,6 @@ cy:
           attributes:
             application_purpose:
               blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
-            success_prospect:
-              blank: emoctuo lufsseccus a fo ecnahc eht tceleS
             success_likely:
               blank: retteb ro %05 si emoctuo lufsseccus a fo ecnahc eht fi sey tceleS
             success_prospect_details:
@@ -376,8 +374,6 @@ cy:
           attributes:
             application_purpose:
               blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
-            success_prospect:
-              blank: emoctuo lufsseccus a fo ecnahc eht tceleS
             success_likely:
               blank: retteb ro %05 si emoctuo lufsseccus a fo ecnahc eht fi sey tceleS
             success_prospect_details:

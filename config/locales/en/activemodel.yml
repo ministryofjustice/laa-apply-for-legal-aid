@@ -423,8 +423,6 @@ en:
           attributes:
             application_purpose:
               blank: Enter details of why your client is applying for legal aid
-            success_prospect:
-              blank: Select the chance of a successful outcome
             success_likely:
               blank: Select yes if the chance of a successful outcome is 50% or better
             success_prospect_details:
@@ -715,8 +713,6 @@ en:
           attributes:
             application_purpose:
               blank: Enter details of why your client is applying for legal aid
-            success_prospect:
-              blank: Select the chance of a successful outcome
             success_likely:
               blank: Select yes if the chance of a successful outcome is 50% or better
             success_prospect_details:
