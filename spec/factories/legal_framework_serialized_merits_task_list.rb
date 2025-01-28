@@ -519,6 +519,31 @@ FactoryBot.define do
       end
     end
 
+    trait :pbm16_defendant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              opponent_name: [],
+              statement_of_case: [],
+              children_application: [],
+              court_order_copy: [],
+            },
+          },
+          proceedings: [
+            {
+              ccms_code: "PBM16",
+              tasks: {
+                children_proceeding: [:children_application],
+                opponents_application: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
     trait :broken_opponent do
       lfa_response do
         {

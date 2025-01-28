@@ -15,6 +15,7 @@ module Flow
         has_other_opponents: Steps::ProviderMerits::HasOtherOpponentsStep,
         remove_opponent: Steps::ProviderMerits::RemoveOpponentStep,
         opponents_mental_capacities: Steps::ProviderMerits::OpponentsMentalCapacitiesStep,
+        court_order_copies: Steps::ProviderMerits::CourtOrderCopiesStep,
         domestic_abuse_summaries: Steps::ProviderMerits::DomesticAbuseSummariesStep,
         statement_of_cases: Steps::ProviderMerits::StatementOfCasesStep,
         client_denial_of_allegations: Steps::ProviderMerits::ClientDenialOfAllegationsStep,

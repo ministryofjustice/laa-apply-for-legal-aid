@@ -677,6 +677,10 @@ en:
           h1-heading: Has the client offered undertakings?
           no-hint: Tell us why the client has not offered undertakings. This will help us assess the application.
           yes-hint: Tell us what undertakings the client has offered and if they were accepted. This will help us assess the application.
+      court_order_copies:
+        show:
+          h1-heading: Do you have a copy of the court order for this application?
+          yes-hint: We will ask you to upload a copy of the court order at the end of this application
       nature_of_urgencies:
         show:
           h1-heading: What is the nature of the urgency?
@@ -1436,6 +1440,7 @@ en:
         why_matter_opposed: Why the matter is opposed
         laspo: Section 8 and LASPO
         second_appeal: The second appeal
+        court_order_copy: The court order
         # Proceeding level tasks
         chances_of_success_html: <span class="govuk-visually-hidden">%{proceeding} </span>Chances of success
         children_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Children involved in this proceeding
@@ -1476,6 +1481,7 @@ en:
           check_who_client_is: check_who_client_is
           second_appeal: second_appeal
           client_child_care_assessment: child_care_assessment
+          court_order_copy: court_order_copy
     merits_reports:
       show:
         heading: Merits report

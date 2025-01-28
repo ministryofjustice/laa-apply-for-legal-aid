@@ -472,6 +472,8 @@ en:
                 blank: Select yes if your client uses online banking
               citizens:
                 blank_html: Select yes if you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>
+            plf_court_order:
+              inclusion: Select yes if you have a copy of the court order for this application
             in_scope_of_laspo:
               blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
             emergency_cost_override:

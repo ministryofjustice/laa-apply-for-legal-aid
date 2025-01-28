@@ -606,6 +606,9 @@ en:
         income_heading: Payments %{individual_with_determiner} gets in cash
         outgoings_heading: Payments %{individual_with_determiner} pays in cash
         amount_and_date: "%{amount} in %{month}"
+      plf_court_order:
+        heading: Court order
+        description: Has a copy of the court order?
       proceedings:
         heading: Proceedings
         proceeding: Proceeding
