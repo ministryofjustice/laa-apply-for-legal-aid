@@ -6,7 +6,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'own_home'
+    And I click Check Your Answers Change link for 'property_ownership'
     Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
@@ -21,8 +21,8 @@ Feature: Checking answers backwards and forwards
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-    And the answer for 'Property value' should be '£200,000'
+    And the answer for 'Property ownership' should be 'Yes, with a mortgage or loan'
+    And the answer for 'Property details questions' should be '£200,000'
     And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be 'Yes, an ex-partner'
     And the answer for 'Percentage home' should be '50.00%'
@@ -34,7 +34,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'own_home'
+    And I click Check Your Answers Change link for 'property_ownership'
     Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
@@ -49,8 +49,8 @@ Feature: Checking answers backwards and forwards
     And I fill 'Restrictions details' with "Restrictions include:"
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-    And the answer for 'Property value' should be '£200,000'
+    And the answer for 'Property ownership' should be 'Yes, with a mortgage or loan'
+    And the answer for 'Property details questions' should be '£200,000'
     And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be "No"
     And the answer for 'Restrictions' should be 'Yes'
@@ -62,11 +62,11 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'own_home'
+    And I click Check Your Answers Change link for 'property_ownership'
     Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And the answer for 'Own home' should be 'No'
+    And the answer for 'Property ownership' should be 'No'
 
   @javascript
   Scenario: I am able to go back and change Bank Accounts and be taken back to the check your answers page for other assets
@@ -182,7 +182,7 @@ Feature: Checking answers backwards and forwards
     @javascript
     Scenario: I want to change property value via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'Own home'
+      And I click Check Your Answers Change link for 'Property ownership'
       Then I should be on a page showing 'Does your client own the home they usually live in?'
       Then I click 'Save and continue'
       Then I should be on a page showing "Your client's home"
@@ -191,18 +191,18 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
-      And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-      And the answer for 'Property value' should be '£500,000'
+      And the answer for 'Property ownership' should be 'Yes, with a mortgage or loan'
+      And the answer for 'Property details questions' should be '£500,000'
 
     @javascript
     Scenario: I want to remove property details via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'Own home'
+      And I click Check Your Answers Change link for 'Property ownership'
       Then I should be on a page showing 'Does your client own the home they usually live in?'
       Then I choose 'No'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
-      And the answer for 'Own home' should be 'No'
+      And the answer for 'Property ownership' should be 'No'
 
     @javascript
     Scenario: I want to view bank accounts via the capital check your answers page
