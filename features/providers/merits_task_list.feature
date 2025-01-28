@@ -52,12 +52,12 @@ Feature: Merits task list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application Completed'
     And I should see 'Children involved in this proceeding Not started'
     When I click the first link 'Chances of success'
-    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 45% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'
     When I click the last link 'Chances of success'
-    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 45% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'linked_children' page showing 'Which children are covered under this proceeding?'
@@ -72,7 +72,7 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     Then I click Check Your Merits Answers Change link for 'Success Likely' for 'Inherent jurisdiction high court injunction'
-    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 45% or better?'
     And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
 
@@ -229,11 +229,8 @@ Feature: Merits task list
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click the last link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the chance of a successful outcome?"
-    Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'

@@ -114,12 +114,12 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
     When I click the first link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
     When I click the last link 'Chances of success'
-    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 45% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I click 'Save and continue'
@@ -249,12 +249,12 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
     When I click the first link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
     When I click the last link 'Chances of success'
-    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 45% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I click 'Save and continue'
