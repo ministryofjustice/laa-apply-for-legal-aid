@@ -26,7 +26,7 @@ RSpec.describe Providers::ApplicationMeritsTask::IsMatterOpposedController do
 
     context "when the application has a matter opposition" do
       it "displays the reason" do
-        _matter_opposition = create(
+        create(
           :matter_opposition,
           legal_aid_application:,
           matter_opposed: true,
