@@ -12,14 +12,14 @@
           back_link: {},
         ) do %>
 
-    <%= form.govuk_collection_radio_buttons(
-          :success_likely,
-          yes_no_options,
-          :value,
-          :label,
-          legend: { size: "xl", tag: "h1", text: content_for(:page_title) },
-          caption: { text: @proceeding.meaning, size: "xl" },
-        ) %>
+    <%= form.govuk_radio_buttons_fieldset(:success_likely,
+                                          legend: { size: "xl", tag: "h1", text: content_for(:page_title) },
+                                          caption: { text: @proceeding.meaning, size: "xl" }) do %>
+        <%= form.govuk_radio_button :success_likely, true, link_errors: true, label: { text: t("generic.yes") } %>
+        <%= form.govuk_radio_button :success_likely, false, label: { text: t("generic.no") } do
+              form.govuk_text_area :success_prospect_details, label: { text: t(".success_prospect_details") }, rows: 5
+            end %>
+    <% end %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>

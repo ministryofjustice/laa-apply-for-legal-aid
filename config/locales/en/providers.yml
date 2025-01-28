@@ -480,7 +480,8 @@ en:
           error: At least one child must be covered under this proceeding
       chances_of_success:
         index:
-          h1-heading: Is the chance of a successful outcome 50% or better?
+          h1-heading: Is the chance of a successful outcome 45% or better?
+          success_prospect_details: Tell us why legal aid should be granted
       opponents_application:
         show:
           h1_heading: Do you have a copy of the opponent's application to the court or a copy of the court order?
