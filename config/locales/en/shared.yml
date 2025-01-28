@@ -308,14 +308,14 @@ en:
           heading_property_details: Your client's property
           heading_property_details_with_partner: Your client's and their partner's property
           own_home: Client owns the home they usually live in?
-          own_home_with_partner: Does your client or their partner own the home your client usually lives in?
+          own_home_with_partner: Client or their partner owns the home they usually live in?
           property_value: Worth of the home they usually live in
-          property_value_with_partner: How much is the home your client and their partner usually live in worth?
+          property_value_with_partner: Worth of the home they usually live in
           outstanding_mortgage: Amount left to pay on the mortgage
           shared_ownership: The home is owned with someone else?
-          shared_ownership_with_partner: Does your client or their partner own the home with anyone else?
+          shared_ownership_with_partner: The home is owned with someone else?
           percentage_home: Percentage of the home legally owned by the client
-          percentage_home_with_partner: What percentage of the home do your client and their partner legally own?
+          percentage_home_with_partner: Percentage of the home legally owned by the client and their partner
       offline_savings_accounts:
         heading: Your client's accounts
         offline_savings_accounts: Has savings accounts they cannot access online
@@ -643,8 +643,8 @@ en:
           heading: Vehicles
           card_heading: Vehicles owned
           own: Client owns a vehicle?
-          own_with_partner: Does your client or their partner own a vehicle?
-          owner: Who owns the vehicle?
+          own_with_partner: Client or their partner owns a vehicle?
+          owner: Owner of the vehicle
           estimated_value: Worth of the vehicle
           payment_remaining: There are payments left on the vehicle?
           payment_amount: Amount left to pay
