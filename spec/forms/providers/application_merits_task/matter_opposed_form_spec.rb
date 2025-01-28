@@ -16,8 +16,16 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedForm do
       end
     end
 
-    context "when matter_opposed is not blank" do
+    context "when matter_opposed is true" do
       let(:matter_opposed) { "true" }
+
+      it "is valid" do
+        expect(form).to be_valid
+      end
+    end
+
+    context "when matter_opposed is false" do
+      let(:matter_opposed) { "false" }
 
       it "is valid" do
         expect(form).to be_valid
@@ -40,13 +48,24 @@ RSpec.describe Providers::ApplicationMeritsTask::MatterOpposedForm do
       end
     end
 
-    context "when the form is valid" do
+    context "when the form is passed true" do
       let(:matter_opposed) { "true" }
 
       it "creates a matter opposition record" do
         expect(matter_opposition).to have_attributes(
           legal_aid_application_id: legal_aid_application.id,
           matter_opposed: true,
+        )
+      end
+    end
+
+    context "when the form is passed false" do
+      let(:matter_opposed) { "false" }
+
+      it "creates a matter opposition record" do
+        expect(matter_opposition).to have_attributes(
+          legal_aid_application_id: legal_aid_application.id,
+          matter_opposed: false,
         )
       end
     end
