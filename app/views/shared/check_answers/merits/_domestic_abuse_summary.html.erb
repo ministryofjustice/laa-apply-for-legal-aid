@@ -1,0 +1,36 @@
+<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__domestic_abuse" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application), visually_hidden_text: t(".heading"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        unless domestic_abuse_summary.warning_letter_sent?
+          summary_list.with_row(
+            html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" },
+          ) do |row|
+            row.with_key(text: t(".warning_letter_reasons"), classes: "govuk-!-width-one-third")
+            row.with_value(text: domestic_abuse_summary.warning_letter_sent_details)
+          end
+        end
+
+        police_question = domestic_abuse_summary.police_notified? ? "police_notified_details" : "police_not_notified"
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" }) do |row|
+          row.with_key(text: t(".#{police_question}"), classes: "govuk-!-width-one-third")
+          row.with_value(text: domestic_abuse_summary.police_notified_details)
+        end
+
+        if domestic_abuse_summary.bail_conditions_set
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__bail_conditions" }) do |row|
+            row.with_key(text: t(".bail_conditions"))
+            row.with_value(text: domestic_abuse_summary.bail_conditions_set_details)
+          end
+        else
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__bail_conditions_set" }) do |row|
+            row.with_key(text: t(".bail_conditions_set"))
+            row.with_value(text: yes_no(domestic_abuse_summary.bail_conditions_set))
+          end
+        end
+      end
+    end %>

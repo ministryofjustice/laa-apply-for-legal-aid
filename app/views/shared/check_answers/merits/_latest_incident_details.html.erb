@@ -1,0 +1,18 @@
+<%= govuk_summary_card(title: t(".latest-incident-heading"), html_attributes: { id: "app-check-your-answers__latest_incident_details" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application), visually_hidden_text: t(".latest-incident-heading"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__notification_of_latest_incident" }) do |row|
+          row.with_key(text: t(".notification_of_latest_incident"), classes: "govuk-!-width-one-third")
+          row.with_value(text: incident&.told_on)
+        end
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__date_of_latest_incident" }) do |row|
+          row.with_key(text: t(".date_of_latest_incident"))
+          row.with_value(text: incident&.occurred_on)
+        end
+      end
+    end %>

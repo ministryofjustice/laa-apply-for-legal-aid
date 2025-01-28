@@ -1,42 +1,46 @@
 <h2 class="govuk-heading-l"><%= t(".case-details-heading") %></h2>
 
-<%= render("shared/check_answers/latest_incident_details", read_only:, incident:) %>
+<%= render("shared/check_answers/merits/latest_incident_details", read_only:, incident:) if @legal_aid_application.latest_incident %>
 
-<%= render(
-      "shared/check_answers/opponent_details",
-      allegation:,
-      domestic_abuse_summary:,
-      opponents:,
-      parties_mental_capacity:,
-      read_only:,
-      statement_of_case:,
-    ) %>
+<%= render("shared/check_answers/merits/opponents", opponents:, read_only:) %>
 
-<%= render("shared/check_answers/undertaking", read_only:, undertaking:) if @legal_aid_application.undertaking %>
+<%= render("shared/check_answers/merits/parties_mental_capacity", parties_mental_capacity:, read_only:) if parties_mental_capacity %>
 
-<%= render("shared/check_answers/urgency", read_only:, urgency:) if @legal_aid_application.urgency %>
+<%= render("shared/check_answers/merits/domestic_abuse_summary", domestic_abuse_summary:, read_only:) if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
 
-<% if @legal_aid_application.involved_children.any? %>
-  <%= render("shared/check_answers/children_involved", read_only:) %>
+<%= render("shared/check_answers/merits/children_involved", read_only:) if @legal_aid_application.involved_children.any? %>
 
-  <% if @legal_aid_application.section_8_proceedings? %>
-    <%= render("shared/check_answers/laspo", read_only:) %>
-  <% end %>
-<% end %>
+<%= render("shared/check_answers/merits/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
+
+<%= render("shared/check_answers/merits/urgency", read_only:, urgency:) if @legal_aid_application.urgency %>
 
 <% if @legal_aid_application.legal_framework_merits_task_list.includes_task?(:application, :second_appeal) %>
-  <%= render("shared/check_answers/second_appeal", read_only:) %>
+  <%= render("shared/check_answers/merits/second_appeal", read_only:) %>
 <% end %>
 
-<%= render("shared/check_answers/matter_opposition", read_only:) if @legal_aid_application.matter_opposition %>
+<%= render("shared/check_answers/plf_court_order", read_only:) if [true, false].include?(@legal_aid_application.plf_court_order) %>
 
-<%= render("shared/check_answers/plf_court_order", read_only:) %>
+<%= render("shared/check_answers/merits/allegation", allegation:, read_only:) if @legal_aid_application.allegation %>
 
-<%= render("shared/check_answers/merits_proceeding_section", read_only:) %>
+<%= render("shared/check_answers/merits/laspo", read_only:) if @legal_aid_application.section_8_proceedings? && @legal_aid_application.involved_children.any? %>
 
-<%= render("shared/check_answers/supporting_evidence", read_only:) %>
+<%= render("shared/check_answers/merits/undertaking", read_only:, undertaking:) if @legal_aid_application.undertaking %>
+
+<%= render("shared/check_answers/merits/statement_of_case", read_only:, statement_of_case:) unless @legal_aid_application.special_children_act_proceedings? %>
+
+<% @legal_aid_application.proceedings.each do |proceeding| %>
+  <% next if merits_task_list_empty_for?(@legal_aid_application, proceeding) %>
+
+  <h2 class="govuk-heading-l"><%= proceeding.meaning %></h2>
+  <%= render("shared/check_answers/merits/merits_proceeding_section", read_only:, proceeding:) %>
+<% end %>
+
+<% if @legal_aid_application.uploaded_evidence_collection %>
+  <h2 class="govuk-heading-l"><%= t(".evidence_upload_heading") %></h2>
+  <%= render("shared/check_answers/merits/supporting_evidence", read_only:) %>
+<% end %>
 
 <!--This is to prevent the separate representation section from showing up anywhere other than the merits report -->
 <% if controller_name == 'merits_reports' && @legal_aid_application.special_children_act_proceedings? %>
-  <%= render("shared/check_answers/separate_representation") %>
+  <%= render("shared/check_answers/merits/separate_representation") %>
 <% end %>

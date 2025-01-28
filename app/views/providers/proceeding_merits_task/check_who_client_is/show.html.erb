@@ -8,7 +8,7 @@
   <% end %>
 
   <%= govuk_summary_list(card: { title: page_title }, actions: true) do |summary_list| %>
-    <%= render("shared/check_answers/relationship_to_child", summary_list:, proceeding: @proceeding, relationship_to_child: @relationship_to_child) %>
+    <%= render("shared/check_answers/relationship_to_child", summary_list:, proceeding: @proceeding, relationship_to_child: @relationship_to_child, first_column_width: "one-half") %>
   <% end %>
 
   <%= next_action_buttons_with_form(

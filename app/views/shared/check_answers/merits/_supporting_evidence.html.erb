@@ -1,0 +1,16 @@
+<%= govuk_summary_card(title: t(".evidence_upload"), html_attributes: { id: "app-check-your-answers__supporting_evidence" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application), visually_hidden_text: t(".evidence_upload"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        @legal_aid_application.uploaded_evidence_by_category.each do |category, attachments|
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{category}" }) do |row|
+            row.with_key(text: t(".evidence_types.#{category}"), classes: "govuk-!-width-one-third")
+            row.with_value(text: govuk_list(attachments_with_size(attachments)))
+          end
+        end
+      end
+    end %>

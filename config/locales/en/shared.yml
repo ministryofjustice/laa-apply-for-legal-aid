@@ -492,25 +492,26 @@ en:
         items:
           statement_of_case: Statement of case
           full_name: Name
-      laspo:
-        heading: Section 8 and LASPO
-        question: Section 8 proceedings are in scope of LASPO?
-      latest_incident_details:
-        latest-incident-heading: Latest incident details
-        date_of_latest_incident: Date of incident
-        notification_of_latest_incident: Date your client contacted you about the latest incident
-      matter_opposition:
-        matter_opposed_reason: Reasons why the matter is opposed
-        matter_opposed_reason_heading: Why the matter is opposed
-      opponent_details:
+        evidence_upload_heading: Supporting evidence
+        laspo:
+          heading: Section 8 and LASPO
+          question: Section 8 proceedings are in scope of LASPO?
+        latest_incident_details:
+          latest-incident-heading: Latest incident details
+          date_of_latest_incident: Date of incident
+          notification_of_latest_incident: Date your client contacted you about the latest incident
+        matter_opposition:
+          matter_opposed_reason: Reasons why the matter is opposed
+          matter_opposed_reason_heading: Why the matter is opposed
         allegation:
           heading: Allegation
           denies_all: Client wholly or substantially denies any allegations?
           additional_information: Why you think there is merit
-        opponent-heading: Opponents
-        opponent_name: Opponent %{number} name
-        opponent_type: Opponent %{number} type
-        domestic_abuse:
+        opponents:
+          heading: Opponents
+          name: Opponent %{number} name
+          type: Opponent %{number} type
+        domestic_abuse_summary:
           heading: Domestic abuse summary
           warning_letter_reasons: Why a warning letter has not been sent
           police_notified_details: Police action taken
@@ -521,65 +522,64 @@ en:
           heading: Statement of case
           file_names: File names
           statement: Statement
-        mental_capacity:
+        parties_mental_capacity:
           heading: Mental capacity
           understands_terms: All parties can understand terms of a court order?
           reasons: Why you think the court would enforce a breach of an order
-      separate_representation:
-        heading: Separate representation
-        separate_representation: Client wants separate representation?
-        confirmed: Confirmed
-      undertaking:
-        heading: Offer of undertakings
-        undertaking_offered_what: Undertakings offered
-        undertaking_offered_why: Why undertakings have not been offered
-      urgency:
-        heading: Nature of urgency and hearing date
-        hearing_date_set: Has a date been set for the hearing?
-        nature_of_urgency: Nature of the urgency
-      second_appeal:
-        heading: Second appeal
-        second_appeal_question: Second appeal?
-        original_judge_level_question: Original case heard by
-        court_type_question: Appeal will be heard in
-      merits_proceeding_section:
-        attempts_to_settle_heading: Attempts to settle
-        attempts_to_settle: Details of correspondence or mediation
-        chances_of_success_heading: Chances of success
-        chances_of_success_details: Why legal aid should be granted
-        child_care_assessment_heading: Assessment of your client
-        linked_children_heading: Children covered
-        linked_children: Children covered under this proceeding
-        relationship_to_child_heading: Who your client is in the proceeding
-        opponents_application_heading: Opponent's application
-        opponents_application_question: You have a copy of the opponent's application or court order?
-        opponents_application_reason: Reason for applying for legal aid at this stage
-        prohibited_steps_heading: Prohibited steps details
-        prohibited_steps: To prevent removal from the UK?
-        prospects_of_success: Chance of a successful outcome is 50% or better?
-        success_prospect: Chance of a successful outcome
-        specific_issue_heading: Specific issue
-        specific_issue: Specific issue to be determined at court
-        vary_order_heading: Changes since original order was made
-        vary_order: Details about the changes
-        what_is_prohibited: What you're asking to be prohibited
-      supporting_evidence:
-        evidence_types:
-          benefit_evidence: Benefit evidence
-          client_employment_evidence: Client's employment evidence
-          part_employ_evidence: Partner's employment evidence
-          gateway_evidence: Gateway evidence
-          court_application_or_order: Court application or order
-          court_order: Court order
-          court_application: Court application
-          expert_report: Expert report
-          parental_responsibility: Parental responsibility evidence
-        evidence_upload_heading: Supporting evidence
-        evidence_upload: Files to support the application
-      children_involved:
-        involved-children-heading: Children involved in this application
-        child_name: Child %{number} name
-        child_date_of_birth: Child %{number} date of birth
+        separate_representation:
+          heading: Separate representation
+          separate_representation: Client wants separate representation?
+          confirmed: Confirmed
+        undertaking:
+          heading: Offer of undertakings
+          undertaking_offered_what: Undertakings offered
+          undertaking_offered_why: Why undertakings have not been offered
+        urgency:
+          heading: Nature of urgency and hearing date
+          hearing_date_set: Has a date been set for the hearing?
+          nature_of_urgency: Nature of the urgency
+        second_appeal:
+          heading: Second appeal details
+          second_appeal_question: Second appeal?
+          original_judge_level_question: Level of judge in original case
+          court_type_question: Where the %{appeal_num} will be heard
+        merits_proceeding_section:
+          attempts_to_settle_heading: Attempts to settle
+          attempts_to_settle: Details of correspondence or mediation
+          chances_of_success_heading: Chances of success
+          chances_of_success_details: Why legal aid should be granted
+          child_care_assessment_heading: Assessment of your client
+          linked_children_heading: Children covered
+          linked_children: Children covered under this proceeding
+          relationship_to_child_heading: Who your client is in the proceeding
+          opponents_application_heading: Opponent's application
+          opponents_application_question: You have a copy of the opponent's application or court order?
+          opponents_application_reason: Reason for applying for legal aid at this stage
+          prohibited_steps_heading: Prohibited steps details
+          prohibited_steps: To prevent removal from the UK?
+          prospects_of_success: Chance of a successful outcome is 50% or better?
+          success_prospect: Chance of a successful outcome
+          specific_issue_heading: Specific issue
+          specific_issue: Specific issue to be determined at court
+          vary_order_heading: Changes since original order was made
+          vary_order: Details about the changes
+          what_is_prohibited: What you're asking to be prohibited
+        supporting_evidence:
+          evidence_types:
+            benefit_evidence: Benefit evidence
+            client_employment_evidence: Client's employment evidence
+            part_employ_evidence: Partner's employment evidence
+            gateway_evidence: Gateway evidence
+            court_application_or_order: Court application or order
+            court_order: Court order
+            court_application: Court application
+            expert_report: Expert report
+            parental_responsibility: Parental responsibility evidence
+          evidence_upload: Files to support the application
+        children_involved:
+          involved-children-heading: Children involved in this application
+          child_name: Child %{number} name
+          child_date_of_birth: Child %{number} date of birth
       child_care_assessment:
         assessed: Client's ability to care was assessed by the local authority?
         result: Assessment result

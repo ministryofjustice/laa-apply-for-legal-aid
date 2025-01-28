@@ -1,0 +1,20 @@
+<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__opponent" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_has_other_opponent_path(@legal_aid_application), visually_hidden_text: t(".heading"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        opponents.order(:created_at).each_with_index do |opponent, i|
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_name_#{i + 1}" }) do |row|
+            row.with_key(text: t(".name", number: i + 1).to_s, classes: "govuk-!-width-one-third")
+            row.with_value { opponent.full_name }
+          end
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_type_#{i + 1}" }) do |row|
+            row.with_key(text: t(".type", number: i + 1).to_s)
+            row.with_value { opponent_type_description(opponent) }
+          end
+        end
+      end
+    end %>

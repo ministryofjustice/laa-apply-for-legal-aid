@@ -1759,9 +1759,9 @@ RSpec.describe LegalAidApplication do
 
   describe "uploaded_evidence_by_category" do
     let(:laa) { create(:legal_aid_application) }
+    let!(:collection) { create(:uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa) }
 
     before do
-      create(:uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa)
       DocumentCategory.populate
     end
 
@@ -1774,14 +1774,17 @@ RSpec.describe LegalAidApplication do
     end
 
     context "when evidence has been uploaded" do
-      it "returns a hash of evidence filenames grouped by category" do
-        actual = laa.uploaded_evidence_by_category
-        expected = uploaded_evidence_output
-
-        expect(actual.keys.sort).to eq expected.keys.sort
-        actual.each do |key, ids|
-          expect(ids).to match_array(expected[key])
-        end
+      it "returns a hash of evidence attachments grouped by category" do
+        expect(laa.uploaded_evidence_by_category).to eq({
+          "gateway_evidence" => [
+            find_attachment(collection.original_attachments, "Fake Gateway Evidence 1"),
+            find_attachment(collection.original_attachments, "Fake Gateway Evidence 2"),
+          ],
+          "benefit_evidence" => [
+            find_attachment(collection.original_attachments, "Fake Benefit Evidence 1"),
+            find_attachment(collection.original_attachments, "Fake Benefit Evidence 2"),
+          ],
+        })
       end
     end
   end
@@ -2326,10 +2329,7 @@ RSpec.describe LegalAidApplication do
 
 private
 
-  def uploaded_evidence_output
-    {
-      "benefit_evidence" => ["Fake Benefit Evidence 1", "Fake Benefit Evidence 2"],
-      "gateway_evidence" => ["Fake Gateway Evidence 1", "Fake Gateway Evidence 2"],
-    }
+  def find_attachment(evidence_collection, filename)
+    evidence_collection.find { |attachment| attachment.original_filename == filename }
   end
 end

@@ -1,0 +1,30 @@
+<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__second_appeal" }, heading_level: 3) do |card|
+      card.with_action do
+        govuk_link_to(t("generic.change"),
+                      providers_legal_aid_application_second_appeal_path(@legal_aid_application),
+                      visually_hidden_text: t(".heading"),
+                      id: "app-check-your-answers__second_appeal_heading")
+      end
+
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__second_appeal-row" }) do |row|
+          row.with_key(text: t(".second_appeal_question"), classes: "govuk-!-width-one-third")
+          row.with_value(text: yes_no(@legal_aid_application.appeal.second_appeal?))
+        end
+
+        unless @legal_aid_application.appeal.second_appeal?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__original_judge_level-row" }) do |row|
+            row.with_key(text: t(".original_judge_level_question"))
+            row.with_value(text: t("original_judge_levels.#{@legal_aid_application.appeal.original_judge_level}"))
+          end
+        end
+
+        appeal_num = @legal_aid_application.appeal.second_appeal? ? "second appeal" : "appeal"
+        if @legal_aid_application.appeal.court_type?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__court_type-row" }) do |row|
+            row.with_key(text: t(".court_type_question", appeal_num:))
+            row.with_value(text: t("appeal_court_types.#{@legal_aid_application.appeal.court_type}"))
+          end
+        end
+      end
+    end %>

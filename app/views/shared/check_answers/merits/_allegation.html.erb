@@ -1,0 +1,20 @@
+<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__allegation" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_client_denial_of_allegation_path(@legal_aid_application), visually_hidden_text: t(".heading"))
+        end
+      end
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__allegation_denies_all" }) do |row|
+          row.with_key(text: t(".denies_all"), classes: "govuk-!-width-one-third")
+          row.with_value(text: yes_no(allegation.denies_all))
+        end
+        unless @legal_aid_application.allegation.denies_all?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__allegation_denies_all" }) do |row|
+            row.with_key(text: t(".additional_information"))
+            row.with_value(text: allegation.additional_information)
+          end
+        end
+      end
+    end %>

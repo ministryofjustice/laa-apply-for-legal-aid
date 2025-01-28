@@ -1,5 +1,5 @@
 <%= summary_list.with_row do |row|
-      row.with_key(text: t("shared.check_answers.relationship_to_child.biological_parent"), classes: "govuk-!-width-one-half")
+      row.with_key(text: t("shared.check_answers.relationship_to_child.biological_parent"), classes: "govuk-!-width-#{first_column_width}")
       row.with_value(text: yes_no(relationship_to_child.eql?("biological")))
       row.with_action(text: t("generic.change"), href: providers_merits_task_list_is_client_biological_parent_path(proceeding), visually_hidden_text: t("shared.check_answers.relationship_to_child.biological_parent"))
     end

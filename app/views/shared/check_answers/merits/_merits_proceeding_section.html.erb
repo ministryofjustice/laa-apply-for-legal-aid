@@ -1,0 +1,176 @@
+<% if proceeding.chances_of_success %>
+  <%= govuk_summary_card(title: t(".chances_of_success_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_chances_of_success" }, heading_level: 3) do |card|
+        card.with_summary_list(actions: !read_only) do |summary_list|
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_likely" }) do |row|
+            row.with_key(text: t(".prospects_of_success"), classes: "govuk-!-width-one-third")
+            row.with_value(text: yes_no(proceeding.chances_of_success.success_likely))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_merits_task_list_chances_of_success_index_path(proceeding),
+              visually_hidden_text: t(".prospects_of_success"),
+            )
+          end
+          unless proceeding.chances_of_success.success_likely?
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_prospect" }) do |row|
+              row.with_key(text: t(".success_prospect"))
+              row.with_value(text: t("shared.forms.success_prospect.#{proceeding.chances_of_success.success_prospect}"))
+              row.with_action(
+                text: t("generic.change"),
+                href: providers_merits_task_list_success_prospects_path(proceeding),
+                visually_hidden_text: t(".success_prospect"),
+              )
+            end
+          end
+          if proceeding.chances_of_success.success_prospect_details
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_prospect" }) do |row|
+              row.with_key(text: t(".chances_of_success_details"))
+              row.with_value(text: proceeding.chances_of_success.success_prospect_details)
+              row.with_action(
+                text: t("generic.change"),
+                href: providers_merits_task_list_success_prospects_path(proceeding),
+                visually_hidden_text: t(".chances_of_success_details"),
+              )
+            end
+          end
+        end
+      end %>
+<% end %>
+
+<% if proceeding.attempts_to_settle || proceeding.section8? || proceeding.specific_issue || proceeding.prohibited_steps || proceeding.special_childrens_act? %>
+  <% if proceeding.attempts_to_settle %>
+     <%= govuk_summary_card(title: t(".attempts_to_settle_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle" }, heading_level: 3) do |card|
+           unless read_only
+             card.with_action do
+               govuk_link_to(t("generic.change"),
+                             providers_merits_task_list_attempts_to_settle_path(proceeding), visually_hidden_text: t(".attempts_to_settle_heading"))
+             end
+           end
+           card.with_summary_list(actions: false) do |summary_list|
+             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle_made" }) do |row|
+               row.with_key(text: t(".attempts_to_settle"), classes: "govuk-!-width-one-third")
+               row.with_value(text: proceeding.attempts_to_settle.attempts_made)
+             end
+           end
+         end %>
+  <% end %>
+
+  <% if proceeding.section8? || (proceeding.special_childrens_act? && proceeding.client_involvement_type_ccms_code.in?(["A", "D"])) %>
+     <%= govuk_summary_card(title: t(".linked_children_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children" }, heading_level: 3) do |card|
+           unless read_only
+             card.with_action do
+               govuk_link_to(t("generic.change"),
+                             providers_merits_task_list_linked_children_path(proceeding), visually_hidden_text: t(".linked_children_heading"))
+             end
+           end
+           card.with_summary_list(actions: false) do |summary_list|
+             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children_details" }) do |row|
+               row.with_key(text: t(".linked_children"), classes: "govuk-!-width-one-third")
+               row.with_value(text: linked_children_names(proceeding))
+             end
+           end
+         end %>
+  <% end %>
+
+  <% if proceeding.specific_issue %>
+     <%= govuk_summary_card(title: t(".specific_issue_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_specific_issue" }, heading_level: 3) do |card|
+           unless read_only
+             card.with_action do
+               govuk_link_to(t("generic.change"),
+                             providers_merits_task_list_specific_issue_path(proceeding), visually_hidden_text: t(".specific_issue_heading"))
+             end
+           end
+           card.with_summary_list(actions: false) do |summary_list|
+             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_specific_issue_details" }) do |row|
+               row.with_key(text: t(".specific_issue"), classes: "govuk-!-width-one-third")
+               row.with_value(text: proceeding.specific_issue.details)
+             end
+           end
+         end %>
+  <% end %>
+
+  <% if proceeding.prohibited_steps %>
+    <%= govuk_summary_card(title: t(".prohibited_steps_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }, heading_level: 3) do |card|
+          unless read_only
+            card.with_action do
+              govuk_link_to(t("generic.change"),
+                            providers_merits_task_list_prohibited_steps_path(proceeding), visually_hidden_text: t(".prohibited_steps"))
+            end
+          end
+          card.with_summary_list(actions: false) do |summary_list|
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }) do |row|
+              row.with_key(text: t(".prohibited_steps"), classes: "govuk-!-width-one-third")
+              row.with_value(text: yes_no(proceeding.prohibited_steps.uk_removal))
+            end
+            unless proceeding.prohibited_steps.uk_removal
+              summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps_details" }) do |row|
+                row.with_key(text: t(".what_is_prohibited"))
+                row.with_value(text: proceeding.prohibited_steps.details)
+              end
+            end
+          end
+        end %>
+  <% end %>
+<% end %>
+
+<% if proceeding.relationship_to_child %>
+  <%= govuk_summary_card(title: t(".relationship_to_child_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_relationship_to_child" }, heading_level: 3) do |card|
+        card.with_summary_list(actions: !read_only) do |summary_list|
+          render("shared/check_answers/relationship_to_child", summary_list:, proceeding:, relationship_to_child: proceeding.relationship_to_child, first_column_width: "one-third")
+        end
+      end %>
+<% end %>
+
+<% if proceeding.child_care_assessment %>
+  <%= govuk_summary_card(title: t(".child_care_assessment_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_child_care_assessment" }, heading_level: 3) do |card|
+        unless read_only
+          card.with_action do
+            govuk_link_to(t("generic.change"),
+                          providers_merits_task_list_child_care_assessment_path(proceeding), visually_hidden_text: t(".child_care_assessment_heading"))
+          end
+        end
+        card.with_summary_list(actions: false) do |summary_list|
+          render("shared/check_answers/child_care_assessment", summary_list:, proceeding:, child_care_assessment: proceeding.child_care_assessment)
+        end
+      end %>
+<% end %>
+
+<% unless proceeding.special_childrens_act? %>
+  <% if proceeding.vary_order %>
+    <%= govuk_summary_card(title: t(".vary_order_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order" }, heading_level: 3) do |card|
+          unless read_only
+            card.with_action do
+              govuk_link_to(t("generic.change"), providers_merits_task_list_vary_order_path(proceeding), visually_hidden_text: t(".vary_order"))
+            end
+          end
+          card.with_summary_list(actions: false) do |summary_list|
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order_details" }) do |row|
+              row.with_key(text: t(".vary_order"), classes: "govuk-!-width-one-third")
+              row.with_value(text: proceeding.vary_order.details)
+            end
+          end
+        end %>
+  <% end %>
+
+  <% if proceeding.opponents_application %>
+    <%= govuk_summary_card(title: t(".opponents_application_heading"), heading_level: 3) do |card|
+          unless read_only
+            card.with_action do
+              govuk_link_to(t("generic.change"),
+                            providers_merits_task_list_opponents_application_path(proceeding), visually_hidden_text: t(".opponents_application_question"))
+            end
+          end
+          card.with_summary_list(actions: false) do |summary_list|
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_opponents_application" }) do |row|
+              row.with_key(text: t(".opponents_application_question"), classes: "govuk-!-width-one-third")
+              row.with_value(text: yes_no(proceeding.opponents_application.has_opponents_application))
+            end
+            if proceeding.opponents_application.reason_for_applying
+              summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_opponents_application_reason" }) do |row|
+                row.with_key(text: t(".opponents_application_reason"))
+                row.with_value(text: proceeding.opponents_application.reason_for_applying)
+              end
+            end
+          end
+        end %>
+  <% end %>
+<% end %>
