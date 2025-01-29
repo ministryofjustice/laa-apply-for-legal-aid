@@ -26,10 +26,6 @@ module ProceedingMeritsTask
       not_known: "not_known".freeze,
     }, prefix: true
 
-    def self.prospects_unlikely_to_succeed
-      success_prospects.except(:likely).keys
-    end
-
     def pretty_success_prospect
       PRETTY_SUCCESS_PROSPECTS[success_prospect.to_sym]
     end
