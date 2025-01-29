@@ -3,9 +3,9 @@ module ProceedingMeritsTask
     belongs_to :proceeding
 
     PRETTY_SUCCESS_PROSPECTS = {
-      likely: "Likely (>50%)",
-      marginal: "Marginal (45-49%)",
-      poor: "Poor (<45%)",
+      likely: "Likely",
+      marginal: "Marginal",
+      poor: "Poor",
       borderline: "Borderline",
       not_known: "Uncertain",
     }.freeze
