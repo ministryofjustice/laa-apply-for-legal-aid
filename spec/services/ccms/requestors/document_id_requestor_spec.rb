@@ -7,159 +7,188 @@ module CCMS
       let(:expected_tx_id) { "20190101121530000000" }
       let(:case_ccms_reference) { "1234567890" }
       let(:requestor) { described_class.new(case_ccms_reference, "my_login", type) }
-      let(:type) { "means_report" }
+      let(:type) { nil }
 
       before { DocumentCategoryPopulator.call }
 
       describe "XML request" do
+        context "when sent an uncatergorised document" do
+          let(:type) { nil }
+
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
+                "<casebio:DocumentType>ADMIN1</casebio:DocumentType>",
+                "<casebio:Channel>E</casebio:Channel>",
+              ]
+            end
+          end
+        end
+
         context "when the attachment is a means report" do
           let(:type) { "means_report" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>REPORT</casebio:DocumentType>",
                 "<casebio:Text>Means Report</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when the attachment is a bank_transaction_report" do
           let(:type) { "bank_transaction_report" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>BSTMT</casebio:DocumentType>",
                 "<casebio:Text>Open Banking Report</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when the attachment is a bank_statement_evidence_pdf" do
           let(:type) { "bank_statement_evidence_pdf" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>BSTMT</casebio:DocumentType>",
                 "<casebio:Text>Client Statement</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when sent a gateway evidence document" do
           let(:type) { "gateway_evidence_pdf" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>EX_RPT</casebio:DocumentType>",
                 "<casebio:Text>Gateway Evidence</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when sent a client employment evidence document" do
           let(:type) { "client_employment_evidence_pdf" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>PAYSLIP</casebio:DocumentType>",
                 "<casebio:Text>Client Employment</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when sent a court_application_or_order_pdf document" do
           let(:type) { "court_application_or_order_pdf" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>COURT_ORD</casebio:DocumentType>",
                 "<casebio:Text>Court Order or Application</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when sent a benefit_evidence_pdf document" do
           let(:type) { "benefit_evidence_pdf" }
 
-          include_context "with ccms soa configuration"
-
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: [
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
                 "<casebio:DocumentType>BEN_LTR</casebio:DocumentType>",
                 "<casebio:Text>Passporting Evidence</casebio:Text>",
                 "<casebio:Channel>E</casebio:Channel>",
-              ],
-            )
+              ]
+            end
           end
         end
 
         context "when sent a legacy document" do
           let(:type) { "employment_evidence_pdf" }
 
-          include_context "with ccms soa configuration"
+          it_behaves_like "a Document Upload Request XML generator" do
+            let(:matching) do
+              [
+                "<casebio:DocumentType>ADMIN1</casebio:DocumentType>",
+                "<casebio:Channel>E</casebio:Channel>",
+              ]
+            end
+          end
+        end
+      end
 
-          it "generates the expected XML" do
-            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-            expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: "casebim:DocumentUploadRQ",
-              transaction_id: expected_tx_id,
-              matching: %w[
-                <casebio:DocumentType>ADMIN1</casebio:DocumentType>
-                <casebio:Channel>E</casebio:Channel>
-              ],
-            )
+      context "when sent a local authority assessment document" do
+        let(:type) { "local_authority_assessment_pdf" }
+
+        it_behaves_like "a Document Upload Request XML generator" do
+          let(:matching) do
+            [
+              "<casebio:DocumentType>EX_RPT</casebio:DocumentType>",
+              "<casebio:Text>Local Authority Assessment</casebio:Text>",
+              "<casebio:Channel>E</casebio:Channel>",
+            ]
+          end
+        end
+      end
+
+      context "when sent a grounds of appeal document" do
+        let(:type) { "grounds_of_appeal_pdf" }
+
+        it_behaves_like "a Document Upload Request XML generator" do
+          let(:matching) do
+            [
+              "<casebio:DocumentType>APL_EV</casebio:DocumentType>",
+              "<casebio:Text>Grounds of Appeal</casebio:Text>",
+              "<casebio:Channel>E</casebio:Channel>",
+            ]
+          end
+        end
+      end
+
+      context "when sent a counsel's opinion document" do
+        let(:type) { "counsel_opinion_pdf" }
+
+        it_behaves_like "a Document Upload Request XML generator" do
+          let(:matching) do
+            [
+              "<casebio:DocumentType>COUNSEL</casebio:DocumentType>",
+              "<casebio:Text>Counsel's opinion</casebio:Text>",
+              "<casebio:Channel>E</casebio:Channel>",
+            ]
+          end
+        end
+      end
+
+      context "when sent a judgement document" do
+        let(:type) { "judgement_pdf" }
+
+        it_behaves_like "a Document Upload Request XML generator" do
+          let(:matching) do
+            [
+              "<casebio:DocumentType>OUT_EV</casebio:DocumentType>",
+              "<casebio:Text>Judgement</casebio:Text>",
+              "<casebio:Channel>E</casebio:Channel>",
+            ]
           end
         end
       end
