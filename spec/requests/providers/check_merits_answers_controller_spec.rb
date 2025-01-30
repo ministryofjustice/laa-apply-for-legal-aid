@@ -70,7 +70,7 @@ RSpec.describe Providers::CheckMeritsAnswersController do
         expect(response.body).to have_link("Change", href: providers_merits_task_list_linked_children_path(application.proceedings.find_by(ccms_code: "SE014")))
         application.proceedings.each do |proceeding|
           expect(response.body).to have_change_link(:success_likely,
-                                                    providers_merits_task_list_chances_of_success_index_path(proceeding))
+                                                    providers_merits_task_list_chances_of_success_path(proceeding))
         end
       end
 

@@ -6,7 +6,7 @@
             row.with_value(text: yes_no(proceeding.chances_of_success.success_likely))
             row.with_action(
               text: t("generic.change"),
-              href: providers_merits_task_list_chances_of_success_index_path(proceeding),
+              href: providers_merits_task_list_chances_of_success_path(proceeding),
               visually_hidden_text: t(".prospects_of_success"),
             )
           end
@@ -16,7 +16,7 @@
               row.with_value(text: proceeding.chances_of_success.success_prospect_details)
               row.with_action(
                 text: t("generic.change"),
-                href: providers_merits_task_list_chances_of_success_index_path(proceeding),
+                href: providers_merits_task_list_chances_of_success_path(proceeding),
                 visually_hidden_text: t(".chances_of_success_details"),
               )
             end

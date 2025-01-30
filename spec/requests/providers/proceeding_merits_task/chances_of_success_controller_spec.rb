@@ -14,7 +14,7 @@ module Providers
       end
 
       describe "GET /providers/merits_task_list/:id/chances_of_success" do
-        subject(:get_request) { get providers_merits_task_list_chances_of_success_index_path(proceeding) }
+        subject(:get_request) { get providers_merits_task_list_chances_of_success_path(proceeding) }
 
         it "renders successfully" do
           get_request
@@ -32,8 +32,8 @@ module Providers
 
       describe "POST /providers/merits_task_list/:id/chances_of_success" do
         subject(:post_request) do
-          post(
-            providers_merits_task_list_chances_of_success_index_path(proceeding),
+          patch(
+            providers_merits_task_list_chances_of_success_path(proceeding),
             params: params.merge(submit_button),
           )
         end

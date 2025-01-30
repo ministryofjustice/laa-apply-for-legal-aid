@@ -12,7 +12,7 @@ RSpec.describe Flow::Steps::ProviderMerits::ChancesOfSuccessStep, type: :request
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eql providers_merits_task_list_chances_of_success_index_path(proceeding) }
+    it { is_expected.to eql providers_merits_task_list_chances_of_success_path(proceeding) }
   end
 
   describe "#forward" do
