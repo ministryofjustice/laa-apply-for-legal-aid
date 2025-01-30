@@ -94,9 +94,11 @@ search:
 #   deepl_api_key: "48E92789-57A3-466A-9959-1A1A1A1A1A1A"
 
 ## Do not consider these keys missing:
-# ignore_missing:
-# - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
-# - '{devise,simple_form}.*'
+ignore_missing:
+- uploaded_evidence_helper.multiple_evidence_message.list_text
+- uploaded_evidence_helper.single_evidence_message.section_8_evidence
+- uploaded_evidence_helper.single_evidence_message.single_item
+- uploaded_evidence_helper.single_evidence_message.single_non_specific_item
 
 ## Consider these keys used:
 # ignore_unused:
@@ -125,9 +127,14 @@ search:
 ## e.g. in case of a relative key defined in a helper method.
 ## In these cases you can use the built-in PatternMapper to map patterns to keys, e.g.:
 #
-# <%# I18n::Tasks.add_scanner 'I18n::Tasks::Scanners::PatternMapper',
-#       only: %w(*.html.haml *.html.slim),
-#       patterns: [['= title\b', '.page_title']] %>
+<%# I18n::Tasks.add_scanner 'I18n::Tasks::Scanners::PatternMapper',
+                            only: %w(*.html.erb),
+                            patterns: [
+                              ['<%=\s*evidence_message\b', '.section_8_evidence']
+                              ['<%=\s*evidence_message\b', '.single_item']
+                              ['<%=\s*evidence_message\b', '.single_non_specific_item']
+                              ['<%=\s*evidence_message\b', '.list_text']
+                            ] %>
 #
 # The PatternMapper can also match key literals via a special %{key} interpolation, e.g.:
 #
