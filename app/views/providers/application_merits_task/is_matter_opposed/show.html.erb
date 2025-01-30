@@ -1,0 +1,15 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_is_matter_opposed_path(@legal_aid_application),
+      method: :patch,
+    ) do |f| %>
+  <%= page_template page_title: t(".page_heading"), template: :basic, form: f do %>
+    <%= f.govuk_collection_radio_buttons :matter_opposed,
+                                         yes_no_options,
+                                         :value,
+                                         :label,
+                                         legend: { text: t(".page_heading"), size: "xl", tag: "h1" } %>
+
+    <%= next_action_buttons(show_draft: true, form: f) %>
+  <% end %>
+<% end %>

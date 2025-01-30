@@ -1,7 +1,7 @@
 require "rails_helper"
 require "sidekiq/testing"
 
-RSpec.describe "check merits answers requests" do
+RSpec.describe Providers::CheckMeritsAnswersController do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_merits_answers" do

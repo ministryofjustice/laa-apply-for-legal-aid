@@ -575,6 +575,9 @@ en:
       in_scope_of_laspos:
         show:
           page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
+      is_matter_opposed:
+        show:
+          page_heading: Is the matter opposed by your client?
       matter_opposed_reasons:
         show:
           page_heading: Why is the Section 8 matter opposed by your client or the other party?
@@ -1442,6 +1445,7 @@ en:
         laspo: Section 8 and LASPO
         second_appeal: The second appeal
         court_order_copy: The court order
+        matter_opposed: If the matter is opposed
         # Proceeding level tasks
         chances_of_success_html: <span class="govuk-visually-hidden">%{proceeding} </span>Chances of success
         children_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Children involved in this proceeding
@@ -1483,6 +1487,7 @@ en:
           second_appeal: second_appeal
           client_child_care_assessment: child_care_assessment
           court_order_copy: court_order_copy
+          matter_opposed: is_matter_opposed
     merits_reports:
       show:
         heading: Merits report

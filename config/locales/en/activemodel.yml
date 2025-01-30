@@ -236,6 +236,8 @@ en:
           attributes:
             reason:
               blank: Enter why the Section 8 matter is opposed
+            matter_opposed:
+              inclusion: Select yes if the matter is opposed by your client
         application_merits_task/undertaking:
           attributes:
             offered:
