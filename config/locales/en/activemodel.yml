@@ -980,7 +980,7 @@ en:
               court_application_missing: Upload the application to court for Section 8 proceedings
               court_order_missing: Upload the court order %{matter_type}
               parental_responsibility_missing: Upload the evidence of your client's parental responsibility
-              local_authority_assessment_missing: Upload the local authority assessment
+              local_authority_assessment_missing: Upload the evidence of the local authority's assessment
               file_empty: The selected file is empty
               file_too_big: The selected file must be smaller than %{size}MB
               file_virus: "%{file_name} contains a virus"

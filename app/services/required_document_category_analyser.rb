@@ -14,6 +14,8 @@ class RequiredDocumentCategoryAnalyser
     required_document_categories << "client_employment_evidence" if @application.employment_evidence_required?
     required_document_categories << "part_employ_evidence" if @application&.partner&.employment_evidence_required?
     required_document_categories << "court_application_or_order" if has_opponents_application? && !has_listed_final_hearing?
+    required_document_categories << "court_order" if @application.plf_court_order?
+    required_document_categories << "local_authority_assessment" if has_local_authority_assessment?
 
     if has_listed_final_hearing? && !has_opponents_application?
       required_document_categories << "court_order"
@@ -57,7 +59,7 @@ private
     @application.proceedings.any? { |proceeding| proceeding.relationship_to_child.in?(%w[court_order parental_responsibility_agreement]) }
   end
 
-  def local_authority_assessed?
+  def has_local_authority_assessment?
     @application.proceedings.any? { |proceeding| proceeding.child_care_assessment&.assessed? }
   end
 end
