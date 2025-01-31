@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.2].define(version: 2025_01_24_104720) do
+=======
+ActiveRecord::Schema[7.2].define(version: 2025_01_31_101012) do
+>>>>>>> bb0dea653 (AP-4415: Add optional document categories to legal_aid_applications)
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -668,6 +672,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_24_104720) do
     t.boolean "case_cloned"
     t.boolean "separate_representation_required"
     t.boolean "plf_court_order"
+    t.string "optional_document_categories", default: [], null: false, array: true
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"

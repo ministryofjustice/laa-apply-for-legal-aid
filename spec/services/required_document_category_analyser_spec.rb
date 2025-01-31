@@ -199,7 +199,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
           create(:proceeding, :pbm32, legal_aid_application: application)
         end
 
-        it "updates optional_document_categories to have several evidence types" do
+        it "updates required_document_categories to have several optional evidence types" do
           expect { call }.to change(application, :required_document_categories)
             .from([])
             .to(%w[grounds_of_appeal counsel_opinion judgement])

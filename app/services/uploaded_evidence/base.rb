@@ -28,7 +28,7 @@ module UploadedEvidence
     end
 
     def attachment_type_options
-      @attachment_type_options = required_documents.map { |rd| [rd, attachment_type_name(rd)] }
+      @attachment_type_options = required_and_optional_documents.map { |rd| [rd, attachment_type_name(rd)] }
       @attachment_type_options << %w[uncategorised Uncategorised]
       @attachment_type_options
     end
@@ -58,7 +58,15 @@ module UploadedEvidence
     end
 
     def required_documents
-      @required_documents = legal_aid_application.required_document_categories
+      @required_documents ||= legal_aid_application.required_document_categories
+    end
+
+    def optional_documents
+      @optional_documents ||= legal_aid_application.optional_document_categories
+    end
+
+    def required_and_optional_documents
+      @required_and_optional_documents ||= required_documents + optional_documents
     end
 
     def submission_form

@@ -1610,6 +1610,33 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#optional_document_categories" do
+    let(:laa) { create(:legal_aid_application) }
+
+    before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[grounds_of_appeal counsel_opinion judgement] }
+
+    it "defaults to an empty array" do
+      expect(laa.optional_document_categories).to eq []
+    end
+
+    it "allows a valid document category to be added" do
+      laa.optional_document_categories << "grounds_of_appeal"
+      laa.save!
+      expect(laa.optional_document_categories).to eq %w[grounds_of_appeal]
+    end
+
+    it "allows multiple valid document categories to be added" do
+      laa.optional_document_categories = %w[grounds_of_appeal counsel_opinion]
+      laa.save!
+      expect(laa.optional_document_categories).to eq %w[grounds_of_appeal counsel_opinion]
+    end
+
+    it "errors when an invalid document category is added" do
+      laa.optional_document_categories << "invalid_evidence"
+      expect { laa.save! }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
+
   describe "#section_8_proceedings?" do
     context "with section 8 proceedings" do
       let(:laa) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
@@ -1686,6 +1713,48 @@ RSpec.describe LegalAidApplication do
       it "returns false" do
         create(:proceeding, :da001, legal_aid_application: laa)
         expect(laa.plf_non_means_tested_proceeding?).to be false
+      end
+    end
+  end
+
+  describe "#evidence_is_required?" do
+    subject(:evidence_is_required) { laa.evidence_is_required? }
+
+    before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[gateway_evidence grounds_of_appeal counsel_opinion judgement] }
+
+    context "with required_document_categories" do
+      let(:laa) { create(:legal_aid_application, :with_applicant, :with_proceedings, explicit_proceedings: %i[se003]) }
+
+      it { is_expected.to be true }
+
+      it "updates required and optional document categories as expected" do
+        evidence_is_required
+        expect(laa.required_document_categories).not_to be_empty
+        expect(laa.optional_document_categories).to be_empty
+      end
+    end
+
+    context "with optional_document_categories" do
+      let(:laa) { create(:legal_aid_application, :with_applicant, :with_proceedings, explicit_proceedings: %i[pbm32]) }
+
+      it { is_expected.to be true }
+
+      it "updates required and optional document categories as expected" do
+        evidence_is_required
+        expect(laa.required_document_categories).to be_empty
+        expect(laa.optional_document_categories).not_to be_empty
+      end
+    end
+
+    context "with neither required nor optional document categories" do
+      let(:laa) { create(:legal_aid_application, :with_applicant, :with_proceedings, explicit_proceedings: %i[da001]) }
+
+      it { is_expected.to be false }
+
+      it "updates required and optional document categories as expected" do
+        evidence_is_required
+        expect(laa.required_document_categories).to be_empty
+        expect(laa.optional_document_categories).to be_empty
       end
     end
   end
