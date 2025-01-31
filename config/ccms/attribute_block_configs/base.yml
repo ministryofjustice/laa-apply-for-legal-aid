@@ -3559,7 +3559,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   ECF_FLAG:
-    value: false
+    value: '#second_appeal?'
     br100_meaning: ECF Flag
     response_type: boolean
     user_defined: true
