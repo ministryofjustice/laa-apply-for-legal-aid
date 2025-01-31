@@ -118,7 +118,7 @@ Feature: Public law family merits appeal question flow
 
     # Test the error
     When I click 'Save and continue'
-    Then I should see govuk error summary "Upload the local authority assessment"
+    Then I should see govuk error summary "Upload the evidence of the local authority's assessment"
 
     When I upload an evidence file named 'hello_world.pdf'
     Then I should see 'hello_world.pdf'
