@@ -27,10 +27,27 @@ RSpec.describe "DelegatedFunctionsController" do
         expect(response).to have_http_status(:ok)
       end
 
-      it "displays the proceeding header" do
-        expect(response.body).to include("Proceeding 1")
-        expect(response.body).to include("Inherent jurisdiction high court injunction")
-        expect(response.body).to include("Have you used delegated functions for this proceeding?")
+      context "with a non-Special children act (non-SCA) proceeding" do
+        it "displays expected header, question and [not] hint" do
+          expect(response.body)
+            .to include("Proceeding 1")
+            .and include("Inherent jurisdiction high court injunction")
+            .and include("Have you used delegated functions for this proceeding?")
+
+          expect(response.body).not_to include("Answer this, even for special children act")
+        end
+      end
+
+      context "with an Special children act (SCA) proceeding" do
+        let(:application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pb003], set_lead_proceeding: :pb003) }
+
+        it "displays expected header, question and SCA hint" do
+          expect(response.body)
+            .to include("Proceeding 1")
+            .and include("Child assessment order")
+            .and include("Have you used delegated functions for this proceeding?")
+            .and include("Answer this, even for special children act")
+        end
       end
     end
   end
