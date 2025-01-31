@@ -282,12 +282,15 @@ en:
           heading: Payments to be reviewed
       assets:
         assets:
+          savings_and_assets_heading: Savings and assets
+          savings_and_investments: "Your client's savings or investments"
+          savings_and_investments_with_partner: "Your client or their partner's savings or investments"
           other_assets: Which assets does your client have?
           other_assets_with_partner: Which assets does either your client or their partner have?
           policy_disregards: Payments from scheme or charities
           policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
-          savings_and_investments: Which savings or investments does your client have?
-          savings_and_investments_with_partner: Which savings or investments does either your client or their partner have?
+          savings_and_investments: Your client's savings or investments
+          savings_and_investments_with_partner: Your client or their partner's savings or investments
           bank_accounts: Bank accounts
           current_accounts: Current accounts
           savings_accounts: Savings accounts
@@ -766,6 +769,7 @@ en:
               check_box_other_person_account: Access to another person's bank account
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_plc_shares: Shares in a PLC
+              none_label: Savings or investments your client or their partner have
             means:
               savings_and_investments:
                 cash: Enter the total amount
