@@ -5,18 +5,17 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
 
   before do
     allow(Setting).to receive_messages(special_childrens_act?: sca_enabled, public_law_family?: plf_enabled)
-    stub_request(:post, uri).to_return(body: all_proceeding_types_payload)
+    stub_request(:post, uri).to_return(body:)
   end
 
   let(:legal_aid_application) { create :legal_aid_application }
+  let(:body) { all_proceeding_types_payload }
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types/filter" }
   let(:sca_enabled) { false }
   let(:plf_enabled) { false }
 
   describe ".call" do
     subject(:call) { all.call }
-
-    before { call }
 
     context "when the special children act setting is on" do
       let(:sca_enabled) { true }
@@ -46,6 +45,14 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
 
       it "returns the expected proceedings" do
         expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003 PBM01]
+      end
+    end
+
+    context "when the requested application returns no proceedings" do
+      let(:body) { no_proceedings_returned }
+
+      it "raises the expected error" do
+        expect { call }.to raise_error LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError, "No proceedings matched"
       end
     end
   end
@@ -137,5 +144,9 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
         ccms_matter: "public law family (PLF)",
       },
     ].to_json
+  end
+
+  def no_proceedings_returned
+    { "success" => false, "data" => [] }.to_json
   end
 end
