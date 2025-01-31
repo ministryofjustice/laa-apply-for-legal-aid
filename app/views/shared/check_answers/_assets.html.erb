@@ -140,8 +140,8 @@
             <%= govuk_link_to(t("generic.change"),
                               check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
                               "aria-label": "#{t('generic.change')} #{t('.assets.joint_bank_accounts')} values") %>
-            <% end %>
           <% end %>
+        <% end %>
         <%= card.with_summary_list(actions: false) do |summary_list| %>
           <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_current_accounts" }) do |row| %>
             <%= row.with_key(text: t(".assets.joint_current_account"), classes: "govuk-!-width-one-half") %>
@@ -163,18 +163,35 @@
     </div>
   <% end %>
 
+  <h3 class="govuk-heading-l"><%= t(".assets.savings_and_assets_heading") %></h3>
+
   <%#  savings and investments %>
-  <%= render(
-        "shared/check_answers/one_link_section",
-        name: :savings_and_investments,
-        url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-        question: t(".assets.savings_and_investments#{individual}"),
-        answer_hash: capital_assets_list(
-          @legal_aid_application,
-          locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
-        ),
-        read_only:,
-      ) %>
+  <%= govuk_summary_card(title: t(".assets.savings_and_investments#{individual}"),
+                         html_attributes: { id: "app-check-your-answers__savings_and_investments_items" }) do |card| %>
+    <% unless read_only %>
+      <% card.with_action do %>
+        <%= govuk_link_to(t("generic.change"),
+                          check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
+                          visually_hidden_suffix: t(".assets.savings_and_investments#{individual}")) %>
+      <% end %>
+    <% end %>
+    <% card.with_summary_list do |summary_list| %>
+      <% hash = @legal_aid_application.savings_amount.amount_attributes&.reject! { |a| a.end_with?("accounts") } %>
+      <% if hash.values.all?(&:nil?) %>
+        <% summary_list.with_row(html_attributes: { id: "app-check-your-answers__savings_and_investments" }) do |row| %>
+          <%= row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.none_label"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { t("generic.none") } %>
+        <% end %>
+      <% else %>
+        <% hash.compact.each do |item| %>
+          <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__savings_and_investments" }) do |row| %>
+            <%= row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.check_box_#{item.first}"), classes: "govuk-!-width-one-half") %>
+            <%= row.with_value { gds_number_to_currency(item.second) } %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 
   <%#  other assets %>
   <%= render(
