@@ -8,14 +8,14 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.10.1
+      - Faraday v2.12.2
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Tue, 27 Aug 2024 15:11:11 GMT
+      - Fri, 31 Jan 2025 13:20:36 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -37,8 +37,8 @@ http_interactions:
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"112\",\r\n    \"lastupdate\"
-        : \"2024-08-23\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"115\",\r\n    \"lastupdate\"
+        : \"2025-01-30\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"84, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n
         \     \"BUILDING_NUMBER\" : \"84\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
@@ -133,5 +133,5 @@ http_interactions:
         \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
         \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Tue, 27 Aug 2024 15:11:11 GMT
+  recorded_at: Fri, 31 Jan 2025 13:20:36 GMT
 recorded_with: VCR 6.3.1

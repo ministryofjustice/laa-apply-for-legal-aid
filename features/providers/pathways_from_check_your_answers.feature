@@ -106,10 +106,10 @@ Feature: Pathways from check your answers
     Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'
     Then I search for proceeding 'Child arrangements order'
     Then proceeding suggestions has results
-    Then I choose a 'Child arrangements order (contact)' radio button
+    Then I choose a 'Child arrangements order (CAO) - contact' radio button
     And I click 'Save and continue'
     Then I should be on the 'has_other_proceedings' page showing 'Do you want to add another proceeding?'
-    And I should be on a page showing 'Child arrangements order (contact)'
+    And I should be on a page showing 'Child arrangements order (CAO) - contact'
     Then I choose 'No'
     And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 2\nNon-molestation order\nWhat is your client's role in this proceeding?'
@@ -122,13 +122,13 @@ Feature: Pathways from check your answers
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(contact\)\nWhat is your client's role in this proceeding?'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact\nWhat is your client's role in this proceeding?'
     When I choose 'Applicant, claimant or petitioner'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(contact\)\nHave you used delegated functions for this proceeding?'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(contact\)'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact'
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
     When I choose 'Yes'
     And I click 'Save and continue'
@@ -136,7 +136,7 @@ Feature: Pathways from check your answers
     When I click 'Save and continue'
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
-    And I should be on a page showing 'Child arrangements order (contact)'
+    And I should be on a page showing 'Child arrangements order (CAO) - contact'
 
   @javascript @vcr
   Scenario: I click the back button on the DWP override page
