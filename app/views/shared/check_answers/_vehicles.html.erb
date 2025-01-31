@@ -43,13 +43,8 @@
           <%= row.with_value { gds_number_to_currency(vehicle.estimated_value) } %>
         <% end %>
 
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_estimated_values" }) do |row| %>
-          <%= row.with_key(text: t(".#{journey_type}.payment_remaining"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value { yes_no(vehicle.payment_remaining.positive?) } %>
-        <% end %>
-
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_remaining_payments" }) do |row| %>
-          <%= row.with_key(text: t(".#{journey_type}.payment_amount"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_key(text: t(".#{journey_type}.payment_remaining"), classes: "govuk-!-width-one-half") %>
           <%= row.with_value { gds_number_to_currency(vehicle.payment_remaining) } %>
         <% end %>
 
