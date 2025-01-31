@@ -495,5 +495,9 @@ module CCMS
     def chances_of_success
       legal_aid_application.lead_proceeding.chances_of_success
     end
+
+    def second_appeal?(_options)
+      legal_aid_application&.appeal&.second_appeal? || false
+    end
   end
 end
