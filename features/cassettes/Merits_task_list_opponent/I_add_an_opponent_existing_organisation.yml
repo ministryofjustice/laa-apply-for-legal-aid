@@ -17,7 +17,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:27:20 GMT
+      - Fri, 31 Jan 2025 16:23:31 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -41,9 +41,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0d94d840a5ae208988537b692e73fda3
+      - 9d91479bea5ffc8cc6748bff41bad34f
       x-runtime:
-      - '0.130398'
+      - '0.031042'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1536,7 +1536,7 @@ http_interactions:
         Health Service","ccms_type_code":"NHS"},{"name":"Yorkshire \u0026 The Humber
         Government Office Region","ccms_opponent_id":"378921","ccms_type_text":"Government
         Department","ccms_type_code":"GOVT"}]'
-  recorded_at: Fri, 31 Jan 2025 13:27:20 GMT
+  recorded_at: Fri, 31 Jan 2025 16:23:31 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/organisation_searches/all
@@ -1554,7 +1554,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:27:25 GMT
+      - Fri, 31 Jan 2025 16:23:37 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1578,9 +1578,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d42f0614658cb7e6cf53a7fc9cdcafe5
+      - ba52ddd2e2a49d5fb896189d0afe52fc
       x-runtime:
-      - '0.030510'
+      - '0.028108'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -3073,5 +3073,5 @@ http_interactions:
         Health Service","ccms_type_code":"NHS"},{"name":"Yorkshire \u0026 The Humber
         Government Office Region","ccms_opponent_id":"378921","ccms_type_text":"Government
         Department","ccms_type_code":"GOVT"}]'
-  recorded_at: Fri, 31 Jan 2025 13:27:25 GMT
+  recorded_at: Fri, 31 Jan 2025 16:23:37 GMT
 recorded_with: VCR 6.3.1

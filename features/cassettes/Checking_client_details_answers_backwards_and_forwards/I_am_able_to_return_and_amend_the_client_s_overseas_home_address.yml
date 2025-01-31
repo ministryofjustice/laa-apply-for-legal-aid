@@ -17,7 +17,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:20:18 GMT
+      - Fri, 31 Jan 2025 16:16:29 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -41,9 +41,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 765e12bd887cbf1a76615e4eec4450c6
+      - 2f64c5abc3c9f4ef3f52ab77c4200ed8
       x-runtime:
-      - '0.017376'
+      - '0.008473'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -107,7 +107,7 @@ http_interactions:
         Bolivarian Republic of"},{"code":"VNM","description":"Viet Nam"},{"code":"VGB","description":"Virgin
         Islands, British"},{"code":"VIR","description":"Virgin Islands, U.S."},{"code":"WLF","description":"Wallis
         and Futuna"},{"code":"ESH","description":"Western Sahara"},{"code":"YEM","description":"Yemen"},{"code":"ZMB","description":"Zambia"},{"code":"ZWE","description":"Zimbabwe"}]'
-  recorded_at: Fri, 31 Jan 2025 13:20:17 GMT
+  recorded_at: Fri, 31 Jan 2025 16:16:29 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/countries/all
@@ -125,7 +125,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:20:19 GMT
+      - Fri, 31 Jan 2025 16:16:31 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -149,9 +149,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5f343d600c5572f596090480fda47883
+      - 369a46615ccbcff42d621b2c7028c93a
       x-runtime:
-      - '0.016456'
+      - '0.006691'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -215,5 +215,5 @@ http_interactions:
         Bolivarian Republic of"},{"code":"VNM","description":"Viet Nam"},{"code":"VGB","description":"Virgin
         Islands, British"},{"code":"VIR","description":"Virgin Islands, U.S."},{"code":"WLF","description":"Wallis
         and Futuna"},{"code":"ESH","description":"Western Sahara"},{"code":"YEM","description":"Yemen"},{"code":"ZMB","description":"Zambia"},{"code":"ZWE","description":"Zimbabwe"}]'
-  recorded_at: Fri, 31 Jan 2025 13:20:19 GMT
+  recorded_at: Fri, 31 Jan 2025 16:16:31 GMT
 recorded_with: VCR 6.3.1
