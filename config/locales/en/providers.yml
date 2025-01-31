@@ -1725,6 +1725,9 @@ en:
         existing: You have added %{count}
         inset: You will only be shown the proceedings that can be added to the ones you have selected.
         remove: Remove
+        no_more_proceedings:
+          page_title: You have added all the allowed proceedings
+          caption: No more proceedings can be added to the ones you have chosen
     providers:
       show:
         account_number: Account number

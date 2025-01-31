@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::HasOtherProceedingsController do
+RSpec.describe Providers::HasOtherProceedingsController, :vcr do
   let(:legal_aid_application) do
     create(:legal_aid_application,
            :with_proceedings,
@@ -24,17 +24,26 @@ RSpec.describe Providers::HasOtherProceedingsController do
   end
 
   describe "GET /providers/:application_id/has_other_proceedings" do
-    before do
-      get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
-    end
-
     it "shows the page" do
+      get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(I18n.t("providers.has_other_proceedings.show.page_title"))
     end
 
     it "shows the current number of proceedings" do
+      get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
       expect(response.body).to include("You have added 2 proceedings")
+    end
+
+    context "when all available proceedings have been added" do
+      before do
+        allow(LegalFramework::ProceedingTypes::All).to receive(:call).and_raise(LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError)
+      end
+
+      it "renders the limited page" do
+        get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
+        expect(response.body).to include "You have added all the allowed proceedings"
+      end
     end
   end
 
