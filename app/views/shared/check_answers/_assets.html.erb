@@ -14,15 +14,13 @@
 <section class="print-no-break">
   <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
-  <% if showing_bank_accounts %>
-    <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
-  <% end %>
-
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
 
     <% if read_only %>
-      <%= govuk_summary_card(title: t(".assets.clients_bank_accounts"), html_attributes: { id: "applicant-bank-accounts-details" }) do |card| %>
+      <%= govuk_summary_card(title: t(".assets.clients_bank_accounts"),
+                             heading_level: 3,
+                             html_attributes: { id: "applicant-bank-accounts-details" }) do |card| %>
         <% unless read_only %>
           <% card.with_action do %>
             <%= govuk_link_to(t("generic.change"),
@@ -42,7 +40,9 @@
 
   <h3 class="govuk-heading-m"><%= t(".assets.money_in_bank_accounts") %></h3>
 
-      <%= govuk_summary_card(title: t(".assets.money_in_bank_accounts"), html_attributes: { "data-test": "applicant-bank-accounts" }) do |card| %>
+      <%= govuk_summary_card(title: t(".assets.money_in_bank_accounts"),
+                             heading_level: 3,
+                             html_attributes: { "data-test": "applicant-bank-accounts" }) do |card| %>
           <%= card.with_summary_list(actions: false) do |summary_list| %>
             <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__online_current_accounts" }) do |row| %>
               <%= row.with_key(text: @legal_aid_application&.applicant&.has_partner? ? t(".assets.client_current_account") : t(".assets.current_accounts"), classes: "govuk-!-width-one-half") %>
@@ -60,7 +60,7 @@
   <% else %>
     <!-- passported and non-passported bank statement uploaded -->
     <div class="govuk-grid-row" id="app-check-your-answers__offline_accounts_link">
-      <% if read_only == false %>
+      <% unless read_only %>
         <div class="govuk-grid-column-two-thirds">
           <h3 class="govuk-heading-m"><%= t(".assets.bank_account_card_heading") %></h3>
         </div>
@@ -68,6 +68,7 @@
     </div>
 
     <%= govuk_summary_card(title: t(".assets.client_bank_accounts"),
+                           heading_level: 3,
                            html_attributes: { id: "app-check-your-answers__bank_accounts_items", "data-test": "applicant-bank-accounts" }) do |card| %>
       <% card.with_action do %>
         <%= govuk_link_to(
@@ -99,58 +100,57 @@
 
     <%#  offline savings accounts for partner %>
     <div class="govuk-grid-row" id="app-check-your-answers__partner_offline_accounts_link">
-      <% if read_only == false %>
-        <div class="govuk-grid-column-two-thirds">
-          <h3 class="govuk-heading-m"><%= t(".assets.partner_bank_accounts") %></h3>
-        </div>
-        <div class="govuk-grid-column-one-third align-text-right">
-          <p>
-            <%= govuk_link_to(
-                  t("generic.change"),
-                  check_answer_url_for(journey_type, change_url, @legal_aid_application),
-                  "aria-label": "#{t('generic.change')} #{t('.assets.partner_bank_accounts')}",
-                ) %>
-          </p>
-        </div>
+      <% unless read_only %>
       <% end %>
     </div>
-    <%= govuk_summary_list(card: { title: t(".assets.partner_bank_accounts") }, html_attributes: { "data-test": "partner-bank-accounts" }) do |summary_list| %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_offline_current_accounts" }) do |row| %>
-        <%= row.with_key(text: t(".assets.partner_current_account"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_current_accounts) : t("generic.none") } %>
+
+    <%= govuk_summary_card(title: t(".assets.partner_bank_accounts"),
+                           heading_level: 3,
+                           html_attributes: { "data-test": "partner-bank-accounts" }) do |card| %>
+      <% card.with_action do %>
+        <%= govuk_link_to(
+              t("generic.change"),
+              check_answer_url_for(journey_type, change_url, @legal_aid_application),
+              "aria-label": "#{t('generic.change')} #{t('.assets.partner_bank_accounts')} values",
+            ) %>
       <% end %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_offline_savings_accounts" }) do |row| %>
-        <%= row.with_key(text: t(".assets.partner_savings_account"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_savings_accounts) : t("generic.none") } %>
+      <%= card.with_summary_list(actions: false) do |summary_list| %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_offline_current_accounts" }) do |row| %>
+          <%= row.with_key(text: t(".assets.partner_current_account"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_current_accounts) : t("generic.none") } %>
+        <% end %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_offline_savings_accounts" }) do |row| %>
+          <%= row.with_key(text: t(".assets.partner_savings_account"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { @legal_aid_application.savings_amount.partner_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_savings_accounts) : t("generic.none") } %>
+        <% end %>
       <% end %>
     <% end %>
 
     <%#  offline savings accounts for bank statement uploads or passported %>
     <% if @legal_aid_application.uploading_bank_statements? || !@legal_aid_application.non_passported? %>
-      <div class="govuk-grid-row" id="app-check-your-answers__joint_offline_accounts_link">
-        <% if read_only == false %>
-          <div class="govuk-grid-column-two-thirds">
-            <h3 class="govuk-heading-m"><%= t(".assets.joint_bank_accounts") %></h3>
-          </div>
-          <div class="govuk-grid-column-one-third align-text-right">
-            <p>
-              <%= govuk_link_to(
-                    t("generic.change"),
-                    check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
-                    "aria-label": "#{t('generic.change')} #{t('.assets.joint_bank_accounts')} values",
-                  ) %>
-            </p>
-          </div>
+      <div class="govuk-grid-row" id="app-check-your-answers__joint_offline_accounts_link"></div>
+        <% unless read_only %>
         <% end %>
-      </div>
-      <%= govuk_summary_list(card: { title: t(".assets.joint_bank_accounts") }, html_attributes: { "data-test": "joint-bank-accounts" }) do |summary_list| %>
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_current_accounts" }) do |row| %>
-          <%= row.with_key(text: t(".assets.joint_current_account"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value { @legal_aid_application.savings_amount.joint_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_current_accounts) : t("generic.none") } %>
-        <% end %>
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_savings_accounts" }) do |row| %>
-          <%= row.with_key(text: t(".assets.joint_savings_account"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value { @legal_aid_application.savings_amount.joint_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_savings_accounts) : t("generic.none") } %>
+
+      <%= govuk_summary_card(title: t(".assets.joint_bank_accounts"),
+                             heading_level: 3,
+                             html_attributes: { "data-test": "joint-bank-accounts" }) do |card| %>
+        <% unless read_only %>
+          <% card.with_action do %>
+            <%= govuk_link_to(t("generic.change"),
+                              check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
+                              "aria-label": "#{t('generic.change')} #{t('.assets.joint_bank_accounts')} values") %>
+            <% end %>
+          <% end %>
+        <%= card.with_summary_list(actions: false) do |summary_list| %>
+          <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_current_accounts" }) do |row| %>
+            <%= row.with_key(text: t(".assets.joint_current_account"), classes: "govuk-!-width-one-half") %>
+            <%= row.with_value { @legal_aid_application.savings_amount.joint_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_current_accounts) : t("generic.none") } %>
+          <% end %>
+          <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_savings_accounts" }) do |row| %>
+            <%= row.with_key(text: t(".assets.joint_savings_account"), classes: "govuk-!-width-one-half") %>
+            <%= row.with_value { @legal_aid_application.savings_amount.joint_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_savings_accounts) : t("generic.none") } %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

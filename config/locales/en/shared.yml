@@ -291,12 +291,12 @@ en:
           bank_accounts: Bank accounts
           current_accounts: Current accounts
           savings_accounts: Savings accounts
-          client_current_account: Client's current accounts
-          client_savings_account: Client's savings accounts
-          partner_savings_account: Partner's savings accounts
-          partner_current_account: Partner's current accounts
-          joint_savings_account: Joint savings accounts
-          joint_current_account: Joint current accounts
+          client_current_account: Current account
+          client_savings_account: Savings account
+          partner_savings_account: Savings account
+          partner_current_account: Current account
+          joint_savings_account: Savings account
+          joint_current_account: Current account
           bank_account_card_heading: Bank accounts
           client_bank_accounts: Your client's accounts
           clients_bank_accounts: Client's bank accounts
