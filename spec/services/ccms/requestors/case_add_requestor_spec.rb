@@ -420,6 +420,51 @@ module CCMS
             expect(block).to be_present
           end
         end
+
+        describe "when the application has a PLF Appeal proceeding" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_positive_benefit_check_result,
+                   :with_second_appeal,
+                   :with_proceedings,
+                   explicit_proceedings: %i[pbm01a],
+                   set_lead_proceeding: :pbm01a,
+                   applicant:,
+                   vehicles:,
+                   other_assets_declaration:,
+                   savings_amount:,
+                   provider:,
+                   opponents:,
+                   domestic_abuse_summary:,
+                   office:,
+                   second_appeal:,
+                   original_judge_level: nil,
+                   court_type:)
+          end
+
+          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PBM01A" } }
+
+          context "and the provider answered no to the Second Appeal merits question" do
+            let(:second_appeal) { false }
+            let(:court_type) { "court_of_appeal" }
+
+            it "sets the ECF_FLAG value to false" do
+              block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
+              expect(block).to have_boolean_response false
+            end
+          end
+
+          context "and the provider answered yes to the Second Appeal merits question" do
+            let(:second_appeal) { true }
+            let(:court_type) { "court_of_appeal" }
+
+            it "sets the ECF_FLAG value to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
+              expect(block).to have_boolean_response true
+            end
+          end
+        end
       end
     end
   end
