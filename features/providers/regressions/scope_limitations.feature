@@ -22,11 +22,11 @@ Feature: Scope limitations not being set
     Then I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'SE014'
     And proceeding suggestions has results
-    And I choose a 'Child arrangements order (residence)' radio button
+    And I choose a 'Child arrangements order (CAO) - residence' radio button
     When I click 'Save and continue'
 
     Then I should be on a page showing 'You have added 1 proceeding'
-    And I should be on a page showing 'Child arrangements order (residence)'
+    And I should be on a page showing 'Child arrangements order (CAO) - residence'
     And I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'Yes'
     And I click 'Save and continue'
@@ -44,7 +44,7 @@ Feature: Scope limitations not being set
     And I click 'Save and continue'
 
     Then I should be on a page showing 'You have added 2 proceedings'
-    And I should be on a page showing 'Child arrangements order (residence)'
+    And I should be on a page showing 'Child arrangements order (CAO) - residence'
     And I should be on a page showing 'Prohibited steps order'
     And I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'Yes'
@@ -53,9 +53,9 @@ Feature: Scope limitations not being set
     Then I should be on a page showing 'Search for legal proceedings'
     When I search for proceeding 'SE004'
     And proceeding suggestions has results
-    Then I should be on a page showing 'Specific Issue Order'
+    Then I should be on a page showing 'Specific issue order'
     And proceeding suggestions has results
-    When I choose a 'Specific Issue Order' radio button
+    When I choose a 'Specific issue order' radio button
     And I click 'Save and continue'
 
     Then I should be on a page showing 'Is this proceeding for a change of name application?'
@@ -63,30 +63,30 @@ Feature: Scope limitations not being set
     And I click 'Save and continue'
 
     Then I should be on a page showing 'You have added 3 proceedings'
-    And I should be on a page showing 'Child arrangements order (residence)'
+    And I should be on a page showing 'Child arrangements order (CAO) - residence'
     And I should be on a page showing 'Prohibited steps order'
-    And I should be on a page showing 'Specific Issue Order'
+    And I should be on a page showing 'Specific issue order'
     And I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
 
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nWhat is your client's role in this proceeding?'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nWhat is your client's role in this proceeding?'
     When I choose 'Applicant, claimant or petitioner'
     And I click 'Save and continue'
 
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nHave you used delegated functions for this proceeding?'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 2 days ago
     When I click 'Save and continue'
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nFor the emergency application, select the level of service'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nFor the emergency application, select the level of service'
 
     When I choose "Family Help (Higher)"
     And I click 'Save and continue'
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nFor the emergency application, select the scope'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nFor the emergency application, select the scope'
 
     # clicks back until on add_other_proceedings
     When I click link "Back"
@@ -95,13 +95,13 @@ Feature: Scope limitations not being set
     And I click link "Back"
     And I click link "Back"
     Then I should be on a page showing 'You have added 3 proceedings'
-    And I should be on a page showing 'Child arrangements order (residence)'
+    And I should be on a page showing 'Child arrangements order (CAO) - residence'
     And I should be on a page showing 'Prohibited steps order'
-    And I should be on a page showing 'Specific Issue Order'
+    And I should be on a page showing 'Specific issue order'
     And I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
     # at this point proceeding one is incomplete and should be resumed
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(residence\)\nWhat is your client's role in this proceeding?'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nWhat is your client's role in this proceeding?'
     When I choose 'Applicant, claimant or petitioner'
     And I click 'Save and continue'
