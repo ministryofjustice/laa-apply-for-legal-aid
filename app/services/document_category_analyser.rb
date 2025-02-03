@@ -27,7 +27,7 @@ class DocumentCategoryAnalyser
     end
 
     allowed_document_categories << "parental_responsibility" if has_parental_responsibility?
-    allowed_document_categories << "local_authority_assessment" if local_authority_assessed?
+    allowed_document_categories << "local_authority_assessment" if has_local_authority_assessment?
     allowed_document_categories << "court_order" if @application.plf_court_order?
 
     if @application.public_law_family_proceedings?
@@ -57,7 +57,7 @@ private
     @application.proceedings.any? { |proceeding| proceeding.relationship_to_child.in?(%w[court_order parental_responsibility_agreement]) }
   end
 
-  def local_authority_assessed?
+  def has_local_authority_assessment?
     @application.proceedings.any? { |proceeding| proceeding.child_care_assessment&.assessed? }
   end
 end
