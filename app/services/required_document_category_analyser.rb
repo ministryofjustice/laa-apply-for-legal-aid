@@ -14,23 +14,28 @@ class RequiredDocumentCategoryAnalyser
     required_document_categories << "client_employment_evidence" if @application.employment_evidence_required?
     required_document_categories << "part_employ_evidence" if @application&.partner&.employment_evidence_required?
     required_document_categories << "court_application_or_order" if has_opponents_application? && !has_listed_final_hearing?
+
     if has_listed_final_hearing? && !has_opponents_application?
       required_document_categories << "court_order"
       required_document_categories << "expert_report"
     end
+
     if has_listed_final_hearing? && has_opponents_application?
       required_document_categories << "court_order"
       required_document_categories << "court_application"
       required_document_categories << "expert_report"
     end
+
     required_document_categories << "parental_responsibility" if has_parental_responsibility?
     required_document_categories << "local_authority_assessment" if local_authority_assessed?
     required_document_categories << "court_order" if @application.plf_court_order?
+
     if @application.public_law_family_proceedings?
       required_document_categories << "grounds_of_appeal"
       required_document_categories << "counsel_opinion"
       required_document_categories << "judgement"
     end
+
     @application.update!(required_document_categories:)
   end
 
