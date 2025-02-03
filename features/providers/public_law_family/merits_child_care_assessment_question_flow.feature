@@ -2,7 +2,8 @@ Feature: Public law family merits appeal question flow
 
   @javascript
   Scenario: When application is for public law family matter requiring child care assessment
-    Given I complete the journey as far as merits task list for a PLF proceeding with child care assessment question
+    Given csrf is enabled
+    When I complete the journey as far as merits task list for a PLF proceeding with child care assessment question
     Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
 
     Then I should see "About the application"
@@ -111,6 +112,17 @@ Feature: Public law family merits appeal question flow
     And I should see 'Children involved in this proceeding Completed'
     And I should see 'Chances of success Completed'
     And I should see 'Assessment of your client Completed'
+
+    When I click 'Save and continue'
+    Then I should be on a page with title 'Upload supporting evidence'
+
+    # Test the error
+    When I click 'Save and continue'
+    Then I should see govuk error summary "Upload the local authority assessment"
+
+    When I upload an evidence file named 'hello_world.pdf'
+    Then I should see 'hello_world.pdf'
+    And I select a category of "Assessment" for the file "hello_world.pdf"
 
     #################################
     # Child care assessment of client
