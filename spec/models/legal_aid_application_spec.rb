@@ -1583,7 +1583,7 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "required_document_categories" do
+  describe "#required_document_categories" do
     let(:laa) { create(:legal_aid_application) }
 
     before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[benefit_evidence gateway_evidence] }
@@ -1644,6 +1644,24 @@ RSpec.describe LegalAidApplication do
       it "returns false" do
         create(:proceeding, :da001, legal_aid_application: laa)
         expect(laa.special_children_act_proceedings?).to be false
+      end
+    end
+  end
+
+  describe "#public_law_family_proceedings?" do
+    context "with public law family proceedings" do
+      let(:laa) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pbm32], set_lead_proceeding: :pbm32) }
+
+      it "returns true" do
+        expect(laa.public_law_family_proceedings?).to be true
+      end
+    end
+
+    context "without public law family proceedings" do
+      let(:laa) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001], set_lead_proceeding: :da001) }
+
+      it "returns false" do
+        expect(laa.public_law_family_proceedings?).to be false
       end
     end
   end
