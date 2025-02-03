@@ -38,9 +38,9 @@ module LegalFramework
 
       def call
         result = JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
-        # TODO: remove the below when the SCA feature flag is removed
-        # filter out SCA applications
-        result.select!(&:not_sca?) unless Setting.special_childrens_act? && @legal_aid_application.provider.sca_permissions?
+        # TODO: remove below when the SCA feature flag is removed
+        # Filter out SCA applications
+        result.select!(&:not_sca?) unless Setting.special_childrens_act?
 
         # TODO: remove the below when the PLF feature flag is removed
         # Filter out PLF applications

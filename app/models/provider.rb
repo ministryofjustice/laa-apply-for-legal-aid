@@ -24,10 +24,6 @@ class Provider < ApplicationRecord
     ProviderDetailsCreator.call(self)
   end
 
-  def sca_permissions?
-    user_permissions.map(&:role).include?("special_children_act")
-  end
-
   def user_permissions
     permissions.empty? ? firm_permissions : permissions
   end

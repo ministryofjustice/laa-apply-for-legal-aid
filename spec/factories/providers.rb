@@ -18,6 +18,13 @@ FactoryBot.define do
       permissions { [] }
     end
 
+    trait :with_dummy_permission do
+      permissions do
+        dummy_permission = create(:permission, :dummy_permission)
+        [dummy_permission]
+      end
+    end
+
     trait :created_by_devise do
       firm { nil }
       name { nil }

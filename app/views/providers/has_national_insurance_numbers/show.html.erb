@@ -9,7 +9,7 @@
 
     <%= form.govuk_radio_buttons_fieldset(:has_national_insurance_number,
                                           legend: { text: page_title, size: "xl", tag: "h1" },
-                                          hint: { text: Setting.special_childrens_act? && @legal_aid_application.provider.sca_permissions? ? nil : t(".hint") }) do %>
+                                          hint: { text: Setting.special_childrens_act? ? nil : t(".hint") }) do %>
 
       <%= form.govuk_radio_button(
             :has_national_insurance_number,

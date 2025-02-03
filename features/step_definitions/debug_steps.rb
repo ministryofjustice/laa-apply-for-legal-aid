@@ -17,12 +17,6 @@ When(/^the feature flag for (.*?) is (enabled|disabled)$/) do |flag, enabled|
   Setting.setting.update!("#{flag}": value)
 end
 
-And(/^the provider has SCA permissions$/) do
-  # TODO: Remove when removing Setting.special_children_act
-  sca_permission = Permission.find_by(role: "special_children_act") || create(:permission, :special_children_act)
-  @registered_provider.firm.permissions << sca_permission
-end
-
 When(/^I sleep for (.*?) seconds$/) do |num_secs|
   sleep num_secs.to_i
 end
