@@ -901,8 +901,9 @@ en:
         part_employ_evidence: evidence of the partner's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
         court_application: the application to court for Section 8 proceedings (optional)
-        court_order: the court order %{matter_type}
+        court_order: the court order for Section 8 proceedings
         court_application_or_order: the application to court or court order for Section 8 proceedings
+        plf_court_order: the court order
         expert_report: expert reports - for example, a CAFCASS report (optional)
         parental_responsibility: evidence of your client's parental responsibility
         local_authority_assessment: evidence of the local authority's assessment

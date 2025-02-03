@@ -26,9 +26,8 @@ private
     mandatory_evidence_types.each do |type|
       next if categorised_evidence_types.include?(type)
 
-      matter_type = legal_aid_application.public_law_family_proceedings? ? "" : "for Section 8 proceedings"
       # link the error message to the dropzone
-      errors.add("dz-upload-button", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit_title, matter_type:), mandatory_evidence: true)
+      errors.add("dz-upload-button", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit_title), mandatory_evidence: true)
     end
 
     mandatory_evidence_types.all? { |mandatory_type| categorised_evidence_types.include?(mandatory_type) }

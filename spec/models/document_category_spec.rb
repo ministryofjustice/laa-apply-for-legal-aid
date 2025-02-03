@@ -27,6 +27,7 @@ RSpec.describe DocumentCategory do
         grounds_of_appeal
         counsel_opinion
         judgement
+        plf_court_order
       ]
     end
 
@@ -59,6 +60,7 @@ RSpec.describe DocumentCategory do
         grounds_of_appeal_pdf
         counsel_opinion_pdf
         judgement_pdf
+        plf_court_order_pdf
       ]
     end
 

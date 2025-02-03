@@ -157,7 +157,7 @@ RSpec.describe DocumentCategoryAnalyser do
 
         it "updates the allowed_document_categories with court_order" do
           call
-          expect(application.allowed_document_categories).to eq %w[court_order]
+          expect(application.allowed_document_categories).to eq %w[plf_court_order]
         end
       end
 
@@ -166,7 +166,7 @@ RSpec.describe DocumentCategoryAnalyser do
 
         it "does not update the allowed_document_categories with court_order" do
           call
-          expect(application.allowed_document_categories).not_to include("court_order")
+          expect(application.allowed_document_categories).not_to include("plf_court_order")
         end
       end
 

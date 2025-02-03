@@ -41,6 +41,8 @@ class DocumentCategoryValidator < ActiveModel::Validator
     counsel_opinion_pdf
     judgement
     judgement_pdf
+    plf_court_order
+    plf_court_order_pdf
   ].freeze
 
   def validate(record)

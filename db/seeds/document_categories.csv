@@ -34,3 +34,5 @@ counsel_opinion,FALSE,,TRUE,FALSE
 counsel_opinion_pdf,TRUE,COUNSEL,FALSE,FALSE,pdf,Counsel's opinion
 judgement,FALSE,,TRUE,FALSE
 judgement_pdf,TRUE,OUT_EV,FALSE,FALSE,pdf,Judgement
+plf_court_order,FALSE,,TRUE,TRUE
+plf_court_order_pdf,TRUE,COURT_ORD,FALSE,FALSE,pdf,Court Order

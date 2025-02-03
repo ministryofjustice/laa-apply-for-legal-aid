@@ -23,11 +23,10 @@ private
   end
 
   def multiple_evidence_message(legal_aid_application)
-    matter_type = legal_aid_application.public_law_family_proceedings? ? "" : "for Section 8 proceedings"
     content_tag(:div, t("#{prefix}.list_text"), class: "govuk-body") +
       govuk_list(
         legal_aid_application.allowed_document_categories.map do |evidence|
-          t("#{prefix}.#{evidence}", benefit: legal_aid_application&.dwp_override&.passporting_benefit&.titleize, matter_type:)
+          t("#{prefix}.#{evidence}", benefit: legal_aid_application&.dwp_override&.passporting_benefit&.titleize)
         end,
         type: :bullet,
       )

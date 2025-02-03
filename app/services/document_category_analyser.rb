@@ -28,14 +28,14 @@ class DocumentCategoryAnalyser
 
     allowed_document_categories << "parental_responsibility" if has_parental_responsibility?
     allowed_document_categories << "local_authority_assessment" if has_local_authority_assessment?
-    allowed_document_categories << "court_order" if @application.plf_court_order?
+    allowed_document_categories << "plf_court_order" if @application.plf_court_order?
 
     if @application.public_law_family_proceedings?
       allowed_document_categories << "grounds_of_appeal"
       allowed_document_categories << "counsel_opinion"
       allowed_document_categories << "judgement"
-
     end
+
     @application.update!(allowed_document_categories:)
   end
 
