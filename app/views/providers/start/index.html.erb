@@ -9,7 +9,7 @@
       <% t(".use_service.list").each do |item| %>
         <li><%= item %></li>
       <% end %>
-      <% if Setting.special_childrens_act? && current_provider&.sca_permissions? %>
+      <% if Setting.special_childrens_act? %>
         <li><%= t(".use_service.sca_option") %></li>
       <% end %>
     </ul>
