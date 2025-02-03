@@ -5,6 +5,7 @@ module Providers
 
       def show
         @form = Addresses::ChoiceForm.new(model: applicant)
+        legal_aid_application.enter_applicant_details! unless no_state_change_required?
       end
 
       def update
@@ -14,6 +15,10 @@ module Providers
       end
 
     private
+
+      def no_state_change_required?
+        legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?
+      end
 
       def applicant
         legal_aid_application.applicant
