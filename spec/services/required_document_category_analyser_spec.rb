@@ -106,7 +106,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
       end
     end
 
-    context "when the application is SCA" do
+    context "when the application is a Special children act (SCA) matter" do
       let(:application) { create(:legal_aid_application, :with_applicant) }
 
       before { create(:proceeding, :pb003, relationship_to_child:, legal_aid_application: application) }
@@ -144,6 +144,65 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
         it "leaves the required_document_categories empty" do
           call
           expect(application.required_document_categories).to be_empty
+        end
+      end
+    end
+
+    context "when the application is a Public law family (PLF) matter" do
+      let(:application) { create(:legal_aid_application, :with_applicant, plf_court_order:) }
+      let(:plf_court_order) { nil }
+
+      context "with copy of the court order answered \"yes\"" do
+        let(:plf_court_order) { true }
+
+        it "updates the required_document_categories with court_order" do
+          call
+          expect(application.required_document_categories).to eq %w[court_order]
+        end
+      end
+
+      context "with copy of the court order answered \"no\"" do
+        let(:plf_court_order) { false }
+
+        it "does not update the required_document_categories with court_order" do
+          call
+          expect(application.required_document_categories).not_to include("court_order")
+        end
+      end
+
+      context "with client that has had a local authority child care assessment" do
+        before do
+          proceeding = create(:proceeding, :pbm32, legal_aid_application: application)
+          create(:child_care_assessment, proceeding:, assessed: true)
+        end
+
+        it "updates the required_document_categories with local_authority_assessment" do
+          call
+          expect(application.required_document_categories).to include("local_authority_assessment")
+        end
+      end
+
+      context "with client that has NOT had a local authority child care assessment" do
+        before do
+          proceeding = create(:proceeding, :pbm32, legal_aid_application: application)
+          create(:child_care_assessment, proceeding:, assessed: false)
+        end
+
+        it "does not update the required_document_categories with local_authority_assessment" do
+          call
+          expect(application.required_document_categories).not_to include("local_authority_assessment")
+        end
+      end
+
+      context "with any PLF matter" do
+        before do
+          create(:proceeding, :pbm32, legal_aid_application: application)
+        end
+
+        it "updates optional_document_categories to have several evidence types" do
+          expect { call }.to change(application, :required_document_categories)
+            .from([])
+            .to(%w[grounds_of_appeal counsel_opinion judgement])
         end
       end
     end
