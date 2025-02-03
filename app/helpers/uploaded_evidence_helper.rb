@@ -30,7 +30,6 @@ private
           t("#{prefix}.#{evidence}", benefit: legal_aid_application&.dwp_override&.passporting_benefit&.titleize, matter_type:)
         end,
         type: :bullet,
-        classes: "govuk-!-padding-bottom-2",
       )
   end
 
