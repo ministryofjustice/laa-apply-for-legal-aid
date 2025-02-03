@@ -247,8 +247,8 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def evidence_is_required?
-    RequiredDocumentCategoryAnalyser.call(self)
-    required_document_categories.any?
+    DocumentCategoryAnalyser.call(self)
+    allowed_document_categories.any?
   end
 
   def cfe_result
@@ -763,8 +763,8 @@ private
   end
 
   def validate_document_categories
-    required_document_categories.each do |category|
-      errors.add(:required_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
+    allowed_document_categories.each do |category|
+      errors.add(:allowed_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
     end
   end
 

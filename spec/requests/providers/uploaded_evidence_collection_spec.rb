@@ -271,7 +271,7 @@ module Providers
               before do
                 create(:dwp_override, legal_aid_application:)
                 allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
-                allow(legal_aid_application).to receive(:required_document_categories).and_return(missing_categories)
+                allow(legal_aid_application).to receive(:allowed_document_categories).and_return(missing_categories)
                 allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
                 legal_aid_application.reload
               end
@@ -329,7 +329,7 @@ module Providers
               before do
                 create(:dwp_override, legal_aid_application:)
                 allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
-                allow(legal_aid_application).to receive(:required_document_categories).and_return(missing_categories)
+                allow(legal_aid_application).to receive(:allowed_document_categories).and_return(missing_categories)
                 allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
                 legal_aid_application.reload
               end
@@ -398,7 +398,7 @@ module Providers
               before do
                 create(:dwp_override, legal_aid_application:)
                 allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
-                allow(legal_aid_application).to receive(:required_document_categories).and_return(missing_categories)
+                allow(legal_aid_application).to receive(:allowed_document_categories).and_return(missing_categories)
                 allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
                 legal_aid_application.reload
               end

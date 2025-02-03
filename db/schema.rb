@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_24_104720) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_03_164133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -654,7 +654,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_24_104720) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
-    t.string "required_document_categories", default: [], null: false, array: true
+    t.string "allowed_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
     t.string "full_employment_details"

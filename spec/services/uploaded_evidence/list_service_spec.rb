@@ -4,7 +4,7 @@ module UploadedEvidence
   RSpec.describe ListService do
     let(:laa) { create(:legal_aid_application) }
     let(:params) { nil }
-    let(:required_document_categories) { %w[gateway_evidence employment_evidence] }
+    let(:allowed_document_categories) { %w[gateway_evidence employment_evidence] }
 
     let(:expected_attachment_type_options) do
       [
@@ -32,7 +32,7 @@ module UploadedEvidence
       let(:service) { described_class.new(controller) }
 
       it "populates options for drop down list of document categories" do
-        allow(laa).to receive(:required_document_categories).and_return(required_document_categories)
+        allow(laa).to receive(:allowed_document_categories).and_return(allowed_document_categories)
         service.call
         expect(service.attachment_type_options).to eq expected_attachment_type_options
       end

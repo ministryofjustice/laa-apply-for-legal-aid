@@ -1,6 +1,6 @@
 module UploadedEvidenceHelper
   def evidence_message(legal_aid_application, evidence_type_translation)
-    if legal_aid_application.required_document_categories.size == 1
+    if legal_aid_application.allowed_document_categories.size == 1
       single_evidence_message(legal_aid_application, evidence_type_translation)
     else
       multiple_evidence_message(legal_aid_application)
@@ -10,7 +10,7 @@ module UploadedEvidenceHelper
 private
 
   def single_evidence_message(legal_aid_application, evidence_type_translation)
-    evidence = legal_aid_application.required_document_categories.first
+    evidence = legal_aid_application.allowed_document_categories.first
     content_tag(:div, class: "govuk-body") do
       if legal_aid_application.section_8_proceedings?
         t("#{prefix}.section_8_evidence")
@@ -26,7 +26,7 @@ private
     matter_type = legal_aid_application.public_law_family_proceedings? ? "" : "for Section 8 proceedings"
     content_tag(:div, t("#{prefix}.list_text"), class: "govuk-body") +
       govuk_list(
-        legal_aid_application.required_document_categories.map do |evidence|
+        legal_aid_application.allowed_document_categories.map do |evidence|
           t("#{prefix}.#{evidence}", benefit: legal_aid_application&.dwp_override&.passporting_benefit&.titleize, matter_type:)
         end,
         type: :bullet,

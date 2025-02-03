@@ -1,7 +1,7 @@
 module Providers
   class UploadedEvidenceCollectionsController < ProviderBaseController
     def show
-      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      DocumentCategoryAnalyser.call(legal_aid_application)
       @service = UploadedEvidence::PopulateUploadFormService.call(self)
       copy_instance_variables
     end
@@ -21,7 +21,7 @@ module Providers
     end
 
     def list
-      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      DocumentCategoryAnalyser.call(legal_aid_application)
       @service = UploadedEvidence::ListService.call(self)
       @required_documents = @service.required_documents
       @attachment_type_options = @service.attachment_type_options
