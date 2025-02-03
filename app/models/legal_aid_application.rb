@@ -186,6 +186,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KSEC8") }
   end
 
+  def public_law_family_proceedings?
+    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLB") }
+  end
+
   def plf_non_means_tested_proceeding?
     proceedings.any? { |proceeding| proceeding.ccms_code.in?(%w[PBM40 PBM40E PBM45 PBM45E]) }
   end

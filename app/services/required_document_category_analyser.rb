@@ -24,6 +24,13 @@ class RequiredDocumentCategoryAnalyser
       required_document_categories << "expert_report"
     end
     required_document_categories << "parental_responsibility" if has_parental_responsibility?
+    required_document_categories << "local_authority_assessment" if local_authority_assessed?
+    required_document_categories << "court_order" if @application.plf_court_order?
+    if @application.public_law_family_proceedings?
+      required_document_categories << "grounds_of_appeal"
+      required_document_categories << "counsel_opinion"
+      required_document_categories << "judgement"
+    end
     @application.update!(required_document_categories:)
   end
 
@@ -43,5 +50,9 @@ private
 
   def has_parental_responsibility?
     @application.proceedings.any? { |proceeding| proceeding.relationship_to_child.in?(%w[court_order parental_responsibility_agreement]) }
+  end
+
+  def local_authority_assessed?
+    @application.proceedings.any? { |proceeding| proceeding.child_care_assessment&.assessed? }
   end
 end
