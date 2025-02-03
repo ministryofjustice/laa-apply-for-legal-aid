@@ -12,7 +12,7 @@ RSpec.describe Flow::Steps::ProviderMerits::ChancesOfSuccessStep, type: :request
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eql providers_merits_task_list_chances_of_success_index_path(proceeding) }
+    it { is_expected.to eql providers_merits_task_list_chances_of_success_path(proceeding) }
   end
 
   describe "#forward" do
@@ -29,12 +29,12 @@ RSpec.describe Flow::Steps::ProviderMerits::ChancesOfSuccessStep, type: :request
     context "when chances_of_success is false" do
       let(:success_likely) { false }
 
-      it { is_expected.to eq :success_prospects }
+      it { is_expected.to eq :merits_task_lists }
     end
   end
 
   describe "#check_answers" do
-    subject { described_class.check_answers.call(legal_aid_application) }
+    subject { described_class.check_answers }
 
     before { create(:chances_of_success, success_likely:, success_prospect_details: "details", proceeding:) }
 
@@ -47,7 +47,7 @@ RSpec.describe Flow::Steps::ProviderMerits::ChancesOfSuccessStep, type: :request
     context "when chances_of_success is false" do
       let(:success_likely) { false }
 
-      it { is_expected.to eq :success_prospects }
+      it { is_expected.to eq :check_merits_answers }
     end
   end
 end

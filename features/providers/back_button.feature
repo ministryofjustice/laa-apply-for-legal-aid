@@ -109,7 +109,7 @@
 #    Then I should be on a page showing "hello_world.pdf"
 #    Then I should be on a page showing "Uploaded"
 #    Then I click 'Save and continue'
-#    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+#    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
 #    Then I choose "No"
 #    Then I click 'Save and continue'
 #    Then I should be on a page showing "What is the chance of a successful outcome?"
@@ -125,7 +125,7 @@
 #    And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
 #    And I should be on a page showing "Confirm the following"
 #    Then I click link "Back"
-#    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+#    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
 #    Then I click link "Back"
 #    Then I should be on a page showing "Provide a statement of case"
 #    Then I click link "Back"

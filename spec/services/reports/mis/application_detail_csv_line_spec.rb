@@ -309,7 +309,7 @@ module Reports
 
             describe "chances of success" do
               it "returns the chances of success of the first proceeding, lead or not" do
-                expect(value_for("Prospects of success")).to eq "Likely (>50%)"
+                expect(value_for("Prospects of success")).to eq "Likely"
               end
             end
           end

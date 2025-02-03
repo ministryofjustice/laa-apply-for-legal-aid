@@ -14,7 +14,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess do
       let(:prospect) { "likely" }
 
       it "generates the correct pretty text" do
-        expect(chances_of_success.pretty_success_prospect).to eq "Likely (>50%)"
+        expect(chances_of_success.pretty_success_prospect).to eq "Likely"
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess do
       let(:prospect) { "marginal" }
 
       it "generates the correct pretty text" do
-        expect(chances_of_success.pretty_success_prospect).to eq "Marginal (45-49%)"
+        expect(chances_of_success.pretty_success_prospect).to eq "Marginal"
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess do
       let(:prospect) { "poor" }
 
       it "generates the correct pretty text" do
-        expect(chances_of_success.pretty_success_prospect).to eq "Poor (<45%)"
+        expect(chances_of_success.pretty_success_prospect).to eq "Poor"
       end
     end
 

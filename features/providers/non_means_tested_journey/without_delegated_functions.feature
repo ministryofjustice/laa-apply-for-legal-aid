@@ -116,12 +116,8 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
 
     When I click the last link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     And I choose "No"
-
-    When I click 'Save and continue'
-    Then I should be on a page showing "What is the chance of a successful outcome?"
-    And I choose "Borderline"
     And I fill "Success prospect details" with "Prospects of success"
 
     When I click 'Save and continue'

@@ -83,11 +83,8 @@ Feature: passported_journey completes application
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the chance of a successful outcome?"
-    Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'

@@ -1,4 +1,4 @@
-CHANGE_LINKS_CONTAINING_UUIDS = %i[success_likely success_prospects].freeze
+CHANGE_LINKS_CONTAINING_UUIDS = %i[success_likely].freeze
 
 RSpec::Matchers.define :have_change_link do |field_name, expected_link|
   match do |actual|

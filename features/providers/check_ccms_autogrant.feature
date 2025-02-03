@@ -65,7 +65,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'
@@ -140,7 +140,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Completed'

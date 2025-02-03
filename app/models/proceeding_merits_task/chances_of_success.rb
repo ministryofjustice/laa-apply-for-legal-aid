@@ -3,9 +3,9 @@ module ProceedingMeritsTask
     belongs_to :proceeding
 
     PRETTY_SUCCESS_PROSPECTS = {
-      likely: "Likely (>50%)",
-      marginal: "Marginal (45-49%)",
-      poor: "Poor (<45%)",
+      likely: "Likely",
+      marginal: "Marginal",
+      poor: "Poor",
       borderline: "Borderline",
       not_known: "Uncertain",
     }.freeze
@@ -25,10 +25,6 @@ module ProceedingMeritsTask
       borderline: "borderline".freeze,
       not_known: "not_known".freeze,
     }, prefix: true
-
-    def self.prospects_unlikely_to_succeed
-      success_prospects.except(:likely).keys
-    end
 
     def pretty_success_prospect
       PRETTY_SUCCESS_PROSPECTS[success_prospect.to_sym]

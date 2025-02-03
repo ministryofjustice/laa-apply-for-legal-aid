@@ -14,7 +14,7 @@ module Providers
       end
 
       describe "GET /providers/merits_task_list/:id/chances_of_success" do
-        subject(:get_request) { get providers_merits_task_list_chances_of_success_index_path(proceeding) }
+        subject(:get_request) { get providers_merits_task_list_chances_of_success_path(proceeding) }
 
         it "renders successfully" do
           get_request
@@ -32,8 +32,8 @@ module Providers
 
       describe "POST /providers/merits_task_list/:id/chances_of_success" do
         subject(:post_request) do
-          post(
-            providers_merits_task_list_chances_of_success_index_path(proceeding),
+          patch(
+            providers_merits_task_list_chances_of_success_path(proceeding),
             params: params.merge(submit_button),
           )
         end
@@ -44,8 +44,9 @@ module Providers
                                       proceeding:)
         end
         let(:success_likely) { "true" }
+        let(:success_prospect_details) { nil }
         let(:params) do
-          { proceeding_merits_task_chances_of_success: { success_likely: } }
+          { proceeding_merits_task_chances_of_success: { success_likely:, success_prospect_details: } }
         end
         let(:submit_button) { {} }
 
@@ -74,33 +75,37 @@ module Providers
         context "when false is selected" do
           let(:success_likely) { "false" }
 
-          it "sets chances_of_success to false" do
-            expect { post_request }.to change { chances_of_success.reload.success_likely }.to(false)
-          end
+          context "and details are provided" do
+            let(:success_prospect_details) { "reasons" }
 
-          it "does not change success_prospect" do
-            expect { post_request }.not_to change { chances_of_success.reload.success_prospect }
-          end
+            it "sets chances_of_success to false" do
+              expect { post_request }.to change { chances_of_success.reload.success_likely }.to(false)
+            end
 
-          it "does not change success_prospect_details" do
-            expect { post_request }.not_to change { chances_of_success.reload.success_prospect_details }
-          end
+            it "does not change success_prospect" do
+              expect { post_request }.to change { chances_of_success.reload.success_prospect }.to("not_known")
+            end
 
-          it "does not set the task to complete" do
-            post_request
-            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:DA001, :chances_of_success)
-          end
+            it "updates success_prospect_details" do
+              expect { post_request }.to change { chances_of_success.reload.success_prospect_details }.to("reasons")
+            end
 
-          it "redirects to next page" do
-            post_request
-            expect(response).to have_http_status(:redirect)
+            it "sets the task to complete" do
+              post_request
+              expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:DA001, :chances_of_success)
+            end
+
+            it "redirects to next page" do
+              post_request
+              expect(response).to have_http_status(:redirect)
+            end
           end
 
           context "when success_prospect was :likely" do
             let(:success_prospect) { :likely }
 
             it "sets success_prospect to nil" do
-              expect { post_request }.to change { chances_of_success.reload.success_prospect }.to(nil)
+              expect { post_request }.to change { chances_of_success.reload.success_prospect }.to("not_known")
             end
           end
         end
@@ -118,7 +123,7 @@ module Providers
 
             it "redirects back to the answers page" do
               post_request
-              expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(proceeding))
+              expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
             end
           end
         end
@@ -138,7 +143,7 @@ module Providers
 
           it "the response includes the error message" do
             post_request
-            expect(response.body).to include(I18n.t("activemodel.errors.models.proceeding_merits_task/chances_of_success.attributes.success_likely.blank"))
+            expect(response.body).to include("Select yes if the chance of a successful outcome is 45% or better")
           end
         end
 

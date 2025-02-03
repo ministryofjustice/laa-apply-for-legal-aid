@@ -95,7 +95,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "redirects to the first proceeding merits task" do
         patch_vary_order
-        expect(response).to redirect_to(providers_merits_task_list_chances_of_success_index_path(proceeding))
+        expect(response).to redirect_to(providers_merits_task_list_chances_of_success_path(proceeding))
       end
     end
 

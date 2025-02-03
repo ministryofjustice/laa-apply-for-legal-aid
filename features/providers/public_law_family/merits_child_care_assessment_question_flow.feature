@@ -70,7 +70,7 @@ Feature: Public law family merits appeal question flow
 
     When I select 'John Doe Jr'
     And I click 'Save and continue'
-    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 45% or better?'
 
     #################################
     # Child care assessment of client

@@ -1,0 +1,26 @@
+<%= form_with(
+      model: @form,
+      url: providers_merits_task_list_chances_of_success_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+    <%= page_template(
+          page_title: t(".h1-heading"),
+          head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
+          template: :basic,
+          form:,
+          back_link: {},
+        ) do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:success_likely,
+                                          legend: { size: "xl", tag: "h1", text: content_for(:page_title) },
+                                          caption: { text: @proceeding.meaning, size: "xl" }) do %>
+        <%= form.govuk_radio_button :success_likely, true, link_errors: true, label: { text: t("generic.yes") } %>
+        <%= form.govuk_radio_button :success_likely, false, label: { text: t("generic.no") } do
+              form.govuk_text_area :success_prospect_details, label: { text: t(".success_prospect_details") }, rows: 5
+            end %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

@@ -134,7 +134,7 @@ Feature: Check single employment
     Then I should be on a page showing "Provide details of the case"
 
     When I click link 'Chances of success'
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
 
     When I choose "Yes"
     And I click 'Save and continue'

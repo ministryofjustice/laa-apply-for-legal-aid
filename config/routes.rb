@@ -379,14 +379,13 @@ Rails.application.routes.draw do
 
     resources :merits_task_list, only: [] do
       scope module: :proceeding_merits_task do
-        resources :chances_of_success, only: %i[index create]
+        resource :chances_of_success, only: %i[show update], controller: "chances_of_success"
 
         resource :attempts_to_settle, only: %i[show update], controller: "attempts_to_settle"
         resource :linked_children, only: %i[show update]
         resource :opponents_application, only: %i[show update], controller: "opponents_application"
         resource :prohibited_steps, only: %i[show update]
         resource :specific_issue, only: %i[show update], controller: "specific_issue"
-        resource :success_prospects, only: %i[show update]
         resource :vary_order, only: %i[show update], controller: "vary_order", path: "changes_since_original"
         resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
         resource :does_client_have_parental_responsibility, only: %i[show update]

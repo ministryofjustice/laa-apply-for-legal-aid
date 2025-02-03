@@ -29,7 +29,6 @@ module Flow
         first_appeal_court_types: Steps::ProviderMerits::FirstAppealCourtTypesStep,
         original_judge_levels: Steps::ProviderMerits::OriginalJudgeLevelsStep,
         chances_of_success: Steps::ProviderMerits::ChancesOfSuccessStep,
-        success_prospects: Steps::ProviderMerits::SuccessProspectsStep,
         opponents_application: Steps::ProviderMerits::OpponentsApplicationStep,
         attempts_to_settle: Steps::ProviderMerits::AttemptsToSettleStep,
         prohibited_steps: Steps::ProviderMerits::ProhibitedStepsStep,

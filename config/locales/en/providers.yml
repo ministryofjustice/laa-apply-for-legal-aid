@@ -479,8 +479,9 @@ en:
           h1-heading: Which children are covered under this proceeding?
           error: At least one child must be covered under this proceeding
       chances_of_success:
-        index:
-          h1-heading: Is the chance of a successful outcome 50% or better?
+        show:
+          h1-heading: Is the chance of a successful outcome 45% or better?
+          success_prospect_details: Tell us why legal aid should be granted
       opponents_application:
         show:
           h1_heading: Do you have a copy of the opponent's application to the court or a copy of the court order?
@@ -504,9 +505,6 @@ en:
           error: Select if your client has parental responsibility for any children involved
         child_subject:
           error: Select yes if your client is a child subject of the proceeding
-      success_prospects:
-        show:
-          h1-heading: What is the chance of a successful outcome?
       specific_issue:
         show:
           h1-heading:
@@ -1468,7 +1466,7 @@ en:
           opponent_mental_capacity: opponents_mental_capacity
           domestic_abuse_summary: domestic_abuse_summary
           statement_of_case: statement_of_case
-          chances_of_success: chances_of_success_index
+          chances_of_success: chances_of_success
           children_application: involved_child
           why_matter_opposed: matter_opposed_reason
           has_other_involved_children: has_other_involved_children
