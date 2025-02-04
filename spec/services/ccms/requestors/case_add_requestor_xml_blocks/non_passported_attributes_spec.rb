@@ -577,6 +577,13 @@ module CCMS
           end
         end
 
+        describe "MEANS_ROUTING" do
+          it "is set to MANB" do
+            block = XmlExtractor.call(xml, :global_means, "MEANS_ROUTING")
+            expect(block).to have_text_response "MANB"
+          end
+        end
+
         def will_attributes
           %w[
             WILL_INPUT_B_2WP2_10A

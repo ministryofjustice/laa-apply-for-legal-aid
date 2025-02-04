@@ -540,7 +540,7 @@ global_means:
     response_type: text
     generate_block?: true
   MEANS_ROUTING:
-    value: BCM
+    value: '#means_routing'
     br100_meaning: means routing
     user_defined: false
     response_type: text

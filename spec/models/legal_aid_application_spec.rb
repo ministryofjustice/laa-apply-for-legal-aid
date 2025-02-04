@@ -2344,6 +2344,36 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "ecct_routing?" do
+    subject { legal_aid_application.ecct_routing? }
+
+    context "when there is no appeal" do
+      it { is_expected.to be false }
+    end
+
+    context "when there is an appeal" do
+      let(:legal_aid_application) do
+        create(:legal_aid_application,
+               :with_second_appeal,
+               second_appeal:,
+               original_judge_level: nil,
+               court_type:)
+      end
+      let(:second_appeal) { false }
+      let(:court_type) { "court_of_appeal" }
+
+      context "and second_appeal is false" do
+        it { is_expected.to be false }
+      end
+
+      context "and second_appeal is true" do
+        let(:second_appeal) { true }
+
+        it { is_expected.to be true }
+      end
+    end
+  end
+
 private
 
   def find_attachment(evidence_collection, filename)
