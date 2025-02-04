@@ -36,37 +36,28 @@ RSpec.describe Provider do
       let(:firm) { create(:firm, :with_no_permissions) }
       let(:provider) { create(:provider, :with_no_permissions, firm:) }
 
-      it "returns false" do
+      it "returns empty array" do
         expect(provider.user_permissions).to be_empty
       end
     end
 
-    context "when the firm has SCA permissions" do
-      let(:firm) { create(:firm, :with_sca_permissions) }
-      let(:provider) { create(:provider, :with_no_permissions, firm:) }
-
-      it "returns a value" do
-        expect(provider.user_permissions).to be_a(ActiveRecord::Relation)
-      end
-    end
-  end
-
-  describe "sca_permissions?" do
-    context "with no permissions for provider and their firm" do
+    context "with permission for provider but not firm" do
       let(:firm) { create(:firm, :with_no_permissions) }
-      let(:provider) { create(:provider, :with_no_permissions, firm:) }
+      let(:provider) { create(:provider, :with_dummy_permission, firm:) }
 
-      it "returns false" do
-        expect(provider.sca_permissions?).to be false
+      it "returns the providers permission" do
+        expect(provider.user_permissions).to be_a(ActiveRecord::Relation)
+        expect(provider.user_permissions.first).to be(provider.permissions.first)
       end
     end
 
-    context "when the firm has SCA permissions" do
-      let(:firm) { create(:firm, :with_sca_permissions) }
+    context "with permission for firm but not provider" do
+      let(:firm) { create(:firm, :with_dummy_permission) }
       let(:provider) { create(:provider, :with_no_permissions, firm:) }
 
-      it "returns a value" do
-        expect(provider.sca_permissions?).to be true
+      it "returns the firms permission" do
+        expect(provider.user_permissions).to be_a(ActiveRecord::Relation)
+        expect(provider.user_permissions.first).to be(firm.permissions.first)
       end
     end
   end
