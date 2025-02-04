@@ -453,6 +453,11 @@ module CCMS
               block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
               expect(block).to have_boolean_response false
             end
+
+            it "sets MERITS_ROUTING" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+              expect(block).to have_text_response "SFM"
+            end
           end
 
           context "and the provider answered yes to the Second Appeal merits question" do
@@ -462,6 +467,11 @@ module CCMS
             it "sets the ECF_FLAG value to true" do
               block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
               expect(block).to have_boolean_response true
+            end
+
+            it "sets MERITS_ROUTING" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+              expect(block).to have_text_response "ECF"
             end
           end
         end

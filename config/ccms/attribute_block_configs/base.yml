@@ -3014,7 +3014,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   MERITS_ROUTING:
-    value: SFM
+    value: "#merits_routing"
     br100_meaning: merits routing owner
     response_type: text
     user_defined: false

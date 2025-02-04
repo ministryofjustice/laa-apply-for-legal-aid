@@ -499,5 +499,9 @@ module CCMS
     def second_appeal?(_options)
       legal_aid_application&.appeal&.second_appeal? || false
     end
+
+    def merits_routing(_options)
+      legal_aid_application&.appeal&.second_appeal? ? "ECF" : "SFM"
+    end
   end
 end
