@@ -458,6 +458,21 @@ module CCMS
               block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
               expect(block).to have_text_response "SFM"
             end
+
+            it "excludes the MERITS_ROUTING_NAME block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+              expect(block).not_to be_present
+            end
+
+            it "excludes the CASE_OWNER_STD_FAMILY_MERITS block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets ApplicationAmendmentType to SUB" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUB"
+            end
           end
 
           context "and the provider answered yes to the Second Appeal merits question" do
@@ -472,6 +487,21 @@ module CCMS
             it "sets MERITS_ROUTING" do
               block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
               expect(block).to have_text_response "ECF"
+            end
+
+            it "sets MERITS_ROUTING_NAME" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+              expect(block).to have_text_response "ECF Team"
+            end
+
+            it "excludes the CASE_OWNER_STD_FAMILY_MERITS block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+              expect(block).to have_boolean_response false
+            end
+
+            it "sets ApplicationAmendmentType to ECF" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "ECF"
             end
           end
         end

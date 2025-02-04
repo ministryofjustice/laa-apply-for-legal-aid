@@ -500,8 +500,16 @@ module CCMS
       legal_aid_application&.appeal&.second_appeal? || false
     end
 
+    def case_owner_std_family_merits(_options)
+      legal_aid_application&.appeal&.second_appeal? ? false : true
+    end
+
     def merits_routing(_options)
       legal_aid_application&.appeal&.second_appeal? ? "ECF" : "SFM"
+    end
+
+    def merits_routing_name(_options)
+      legal_aid_application&.appeal&.second_appeal? ? "ECF Team" : "Standard Family Merits"
     end
   end
 end
