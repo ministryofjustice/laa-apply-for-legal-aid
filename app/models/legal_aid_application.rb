@@ -246,6 +246,10 @@ class LegalAidApplication < ApplicationRecord
     ].none?
   end
 
+  def ecct_routing?
+    appeal.present? && appeal.second_appeal?
+  end
+
   def evidence_is_required?
     DocumentCategoryAnalyser.call(self)
     allowed_document_categories.any?
