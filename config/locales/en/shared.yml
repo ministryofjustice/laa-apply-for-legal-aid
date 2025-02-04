@@ -321,6 +321,10 @@ en:
           heading: Disregarded payments
         discretionary:
           heading: Payments to be reviewed
+      applied_previously:
+        has_applied_before: Has your client applied for civil legal aid before?
+        previous_application_reference: Previous CCMS reference number
+        previous_legal_aid: Previous Legal Aid
       assets:
         assets:
           other_assets: Which assets does your client have?
