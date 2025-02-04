@@ -25,6 +25,24 @@ RSpec.describe Providers::CorrespondenceAddress::ChoicesController do
         expect(unescaped_response_body).to include("Where should we send your client's correspondence?")
       end
     end
+
+    context "when the state is initiated" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :initiated) }
+
+      it "fires the enter_applicant_details event and changes the state to entering_applicant_details" do
+        login_as provider
+        expect { get_request }.to change { legal_aid_application.reload.state }.from("initiated").to("entering_applicant_details")
+      end
+    end
+
+    context "when the state is entering_applicant_details" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :entering_applicant_details) }
+
+      it "skips the enter_applicant_details event" do
+        login_as provider
+        expect { get_request }.not_to change { legal_aid_application.reload.state }
+      end
+    end
   end
 
   describe "PATCH/providers/applications/:legal_aid_application_id/where_to_send_correspondence" do
