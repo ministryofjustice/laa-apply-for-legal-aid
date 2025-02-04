@@ -322,9 +322,9 @@ en:
         discretionary:
           heading: Payments to be reviewed
       applied_previously:
+        heading: Previous Legal Aid
         has_applied_before: Has your client applied for civil legal aid before?
         previous_application_reference: Previous CCMS reference number
-        previous_legal_aid: Previous Legal Aid
       assets:
         assets:
           other_assets: Which assets does your client have?
@@ -657,6 +657,9 @@ en:
           request_higher_substantive: Higher substantive cost limit requested
           higher_substantive_reasons: Reason for higher emergency cost limit
       delegated_functions:
+        reported_on: Date reported
+        used_on: Date delegated functions were used
+        days_to_report: Days to report
         not_used: Not used
         section_delegated:
           used_delegated_functions: Have you used delegated functions?

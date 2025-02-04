@@ -1492,8 +1492,8 @@ en:
         client_details_heading: Client details
         partner_details_heading: Partner details
         previous_legal_aid_heading: Previous Legal Aid
-        applying_for: What you’re applying for
-        delegated_functions: Delegated functions
+        applying_for: What you're applying for
+        delegated_functions_heading: Delegated functions
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
     means_reports:

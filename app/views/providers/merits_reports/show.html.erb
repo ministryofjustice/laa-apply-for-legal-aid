@@ -22,7 +22,6 @@
   <% end %>
 
   <h2 class="govuk-heading-m"><%= t(".previous_legal_aid_heading") %></h2>
-
   <%= render(
         "shared/check_answers/applied_previously",
         legal_aid_application: @legal_aid_application,
@@ -30,7 +29,6 @@
       ) %>
 
   <h2 class="govuk-heading-m"><%= t(".applying_for") %></h2>
-
   <%= render(
         "shared/check_answers/proceedings_details",
         legal_aid_application: @legal_aid_application,
@@ -38,17 +36,15 @@
         show_client_involvment_type: true,
       ) %>
 
-  <h2 class="govuk-heading-m"><%= t ".delegated_functions" %></h2>
-
+  <h2 class="govuk-heading-m"><%= t ".delegated_functions_heading" %></h2>
   <%= render(
-        Reports::Merits::DelegatedFunctionsComponent.with_collection(
-          @legal_aid_application.proceedings.in_order_of_addition,
-        ),
+        "shared/check_answers/delegated_functions",
+        proceedings: @legal_aid_application.proceedings.in_order_of_addition,
+        read_only: true,
       ) %>
 
   <% if @legal_aid_application.non_sca_used_delegated_functions? %>
     <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
-
     <%= render(
           "shared/check_answers/emergency_costs",
           legal_aid_application: @legal_aid_application,
@@ -58,7 +54,6 @@
 
   <% if @legal_aid_application.substantive_cost_overridable? %>
     <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
-
     <%= render(
           "shared/check_answers/substantive_costs",
           legal_aid_application: @legal_aid_application,

@@ -183,6 +183,27 @@ def expect_matching_questions_and_answers(actual_selector:, expected_table:)
   expect(actual).to match_array(expected), SuperDiff.diff(expected, actual)
 end
 
+def expect_regex_match_for_questions_and_answers(actual_selector:, expected_table:)
+  expected = expected_table.hashes.map(&:symbolize_keys)
+  actual = actual_questions_and_answers_in(selector: actual_selector)
+
+  expected.each do |expected_row|
+    match_found = false
+
+    actual.each do |actual_row|
+      next unless actual_row[:question].match?(expected_row[:question])
+
+      expect(actual_row[:question]).to match(expected_row[:question])
+      expect(actual_row[:answer]).to match(expected_row[:answer])
+      match_found = true
+    end
+
+    next if match_found
+
+    expect(1).to eql(2), "No matching questions and answers for #{expected_row[:question]}, #{expected_row[:answer]}!"
+  end
+end
+
 def actual_questions_and_answers_in(selector:)
   actual = []
 
