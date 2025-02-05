@@ -294,7 +294,7 @@ Then("the \"Payments from scheme or charities\" questions should exist:") do |ta
 end
 
 Then("the Capital disregards questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#capital-disregards-questions", expected_table: table)
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__capital_disregards", expected_table: table)
 end
 
 Then("the client Bank statements questions and answers should match:") do |table|

@@ -224,26 +224,22 @@
   <%#  asset restrictions %>
   <%= render("shared/check_answers/restrictions", read_only:, individual:) if @legal_aid_application.own_capital? %>
 
-  <%#  policy disregards %>
-  <section class="print-no-break">
-    <% if @legal_aid_application.policy_disregards.present? %>
-      <%= render(
-            "shared/check_answers/one_link_section",
-            name: :policy_disregards,
-            url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
-            question: t(".assets.policy_disregards#{individual}"),
-            answer_hash: policy_disregards_list(@legal_aid_application.policy_disregards),
-            read_only:,
-          ) %>
-    <% end %>
-  </section>
+  <%#  policy disregards - to be removed as part of AP-5510 when there are no applications with policy disregards %>
+  <% if @legal_aid_application.policy_disregards.present? %>
+    <%= render(
+          "shared/check_answers/one_link_section",
+          name: :policy_disregards,
+          url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
+          question: t(".assets.policy_disregards#{individual}"),
+          answer_hash: policy_disregards_list(@legal_aid_application.policy_disregards),
+          read_only:,
+        ) %>
+  <% end %>
 
   <%#  capital disregards %>
-  <section class="print-no-break">
-    <% if means_report %>
-      <%= render("providers/means_reports/capital_disregards", read_only:, individual:) %>
-    <% else %>
-      <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
-    <% end %>
-  </section>
+  <% if means_report %>
+    <%= render("providers/means_reports/capital_disregards", read_only:, individual:) %>
+  <% else %>
+    <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
+  <% end %>
 </section>
