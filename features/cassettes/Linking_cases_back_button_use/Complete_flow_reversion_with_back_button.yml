@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:25:11 GMT
+      - Fri, 31 Jan 2025 16:21:22 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -133,7 +133,7 @@ http_interactions:
         \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
         \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 31 Jan 2025 13:25:11 GMT
+  recorded_at: Fri, 31 Jan 2025 16:21:21 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -151,7 +151,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:25:20 GMT
+      - Fri, 31 Jan 2025 16:21:30 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -175,9 +175,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ff04b94e8bfd982d2a50d3a980933819
+      - 820d455956178ff42802ce71167bd858
       x-runtime:
-      - '0.026381'
+      - '0.033789'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -601,5 +601,5 @@ http_interactions:
         - enforcement","description":"to be represented on an application for or to
         extend an emergency protection order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"}]'
-  recorded_at: Fri, 31 Jan 2025 13:25:20 GMT
+  recorded_at: Fri, 31 Jan 2025 16:21:30 GMT
 recorded_with: VCR 6.3.1

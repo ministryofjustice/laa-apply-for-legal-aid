@@ -2,7 +2,8 @@
               url: providers_legal_aid_application_has_other_proceedings_path,
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
+  <% page_title_prefix = @form.remaining_proceedings.zero? ? ".no_more_proceedings" : "" %>
+  <%= page_template page_title: t("#{page_title_prefix}.page_title"), template: :basic, form: do %>
     <% if @legal_aid_application.proceedings.any? %>
       <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.proceedings.count, "proceeding").to_s) %></h1>
       <%= govuk_summary_list do |summary_list| %>
@@ -35,9 +36,14 @@
       <% end %>
     <% end %>
 
-    <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
-                                            legend: { text: content_for(:page_title), tag: "h2", size: "m" } do %>
-      <%= govuk_inset_text(text: t(".inset")) %>
+    <% if @form.remaining_proceedings.zero? %>
+      <h2 class="govuk-heading-l"><%= content_for(:page_title) %></h2>
+      <p class="govuk-body"><%= t(".no_more_proceedings.caption") %></p>
+    <% else %>
+      <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
+                                              legend: { text: content_for(:page_title), tag: "h2", size: "m" } do %>
+        <%= govuk_inset_text(text: t(".inset")) %>
+      <% end %>
     <% end %>
 
     <%= next_action_buttons(form:, show_draft: true) %>

@@ -1,6 +1,8 @@
 module LegalFramework
   module ProceedingTypes
     class All < BaseApiCall
+      class NoMatchingProceedingsFoundError < StandardError; end
+
       class ProceedingTypeStruct
         attr_reader :ccms_code, :meaning, :description, :ccms_category_law, :ccms_matter_code, :ccms_matter, :sca_core, :sca_related, :plf
 
@@ -37,9 +39,12 @@ module LegalFramework
       end
 
       def call
-        result = JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
-        # TODO: remove below when the SCA feature flag is removed
-        # Filter out SCA applications
+        parsed_body = JSON.parse(request.body)
+        raise NoMatchingProceedingsFoundError, "No proceedings matched" if parsed_body.is_a?(Hash) && parsed_body["success"] == false
+
+        result = parsed_body.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        # TODO: remove the below when the SCA feature flag is removed
+        # filter out SCA applications
         result.select!(&:not_sca?) unless Setting.special_childrens_act?
 
         # TODO: remove the below when the PLF feature flag is removed

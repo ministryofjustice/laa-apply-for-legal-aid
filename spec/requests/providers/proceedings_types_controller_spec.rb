@@ -34,6 +34,17 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
         expect(response.body).not_to include("govuk-form-group--error")
       end
 
+      context "when there are no available proceedings to show" do
+        before do
+          allow(LegalFramework::ProceedingTypes::All).to receive(:call).and_raise(LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError)
+        end
+
+        it "redirects to the has_other_proceedings page" do
+          get_request
+          expect(response).to redirect_to providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
+        end
+      end
+
       describe "back link" do
         context "when the applicant's address used address lookup service", :vcr do
           let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address_lookup) }

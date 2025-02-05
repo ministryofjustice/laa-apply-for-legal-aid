@@ -8,6 +8,12 @@ module LegalAidApplications
 
     delegate :proceedings, to: :model
 
+    def remaining_proceedings
+      @remaining_proceedings ||= LegalFramework::ProceedingTypes::All.call(model).count
+    rescue LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError
+      0
+    end
+
     def draft!
       @draft = true
     end

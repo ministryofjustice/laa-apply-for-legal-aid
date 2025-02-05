@@ -17,7 +17,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:27:29 GMT
+      - Fri, 31 Jan 2025 16:23:40 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -41,9 +41,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 16d18611bad79c748ee5813dcfb425c7
+      - 3db09ab999d75b2fa39e701287bc4934
       x-runtime:
-      - '0.051604'
+      - '0.031404'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1536,7 +1536,7 @@ http_interactions:
         Health Service","ccms_type_code":"NHS"},{"name":"Yorkshire \u0026 The Humber
         Government Office Region","ccms_opponent_id":"378921","ccms_type_text":"Government
         Department","ccms_type_code":"GOVT"}]'
-  recorded_at: Fri, 31 Jan 2025 13:27:29 GMT
+  recorded_at: Fri, 31 Jan 2025 16:23:40 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/organisation_types/all
@@ -1554,7 +1554,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:27:30 GMT
+      - Fri, 31 Jan 2025 16:23:41 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1578,9 +1578,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 808e95bd076ada9f9fd0e1635a5063b7
+      - a4d51df7ea4f24e393b55dc8b3e82d0d
       x-runtime:
-      - '0.007152'
+      - '0.008145'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1593,7 +1593,7 @@ http_interactions:
         Health Service"},{"ccms_code":"PART","description":"Partnership"},{"ccms_code":"POLICE","description":"Police
         Authority"},{"ccms_code":"PLC","description":"Public Limited Company"},{"ccms_code":"SOLE","description":"Sole
         Trader"}]'
-  recorded_at: Fri, 31 Jan 2025 13:27:30 GMT
+  recorded_at: Fri, 31 Jan 2025 16:23:41 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/organisation_types/all
@@ -1611,7 +1611,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:27:30 GMT
+      - Fri, 31 Jan 2025 16:23:42 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1635,9 +1635,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f716dab60edb8bc29e2c7668838ef8fd
+      - 62c4240cd52ad2dd54e0e418b060d5dc
       x-runtime:
-      - '0.002582'
+      - '0.004998'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1650,5 +1650,5 @@ http_interactions:
         Health Service"},{"ccms_code":"PART","description":"Partnership"},{"ccms_code":"POLICE","description":"Police
         Authority"},{"ccms_code":"PLC","description":"Public Limited Company"},{"ccms_code":"SOLE","description":"Sole
         Trader"}]'
-  recorded_at: Fri, 31 Jan 2025 13:27:30 GMT
+  recorded_at: Fri, 31 Jan 2025 16:23:42 GMT
 recorded_with: VCR 6.3.1

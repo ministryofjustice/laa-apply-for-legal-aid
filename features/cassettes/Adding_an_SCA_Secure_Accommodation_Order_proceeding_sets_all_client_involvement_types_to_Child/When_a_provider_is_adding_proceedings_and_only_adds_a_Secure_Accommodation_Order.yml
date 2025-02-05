@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:02 GMT
+      - Fri, 31 Jan 2025 16:36:40 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -133,7 +133,7 @@ http_interactions:
         \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
         \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 31 Jan 2025 13:41:02 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:40 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -151,7 +151,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:03 GMT
+      - Fri, 31 Jan 2025 16:36:41 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -175,9 +175,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b4abf3d9f044976f9a939dd7a5e95ce2
+      - da1c3cc5c8e1d1f6ca33c3d888f7aa85
       x-runtime:
-      - '0.029187'
+      - '0.028465'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -601,7 +601,7 @@ http_interactions:
         - enforcement","description":"to be represented on an application for or to
         extend an emergency protection order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"}]'
-  recorded_at: Fri, 31 Jan 2025 13:41:03 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:41 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -619,7 +619,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:04 GMT
+      - Fri, 31 Jan 2025 16:36:42 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -643,9 +643,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c2d9bcacfc5b040adeb6b9f807e8fc8e
+      - 53ec01d296d75e6dd7f7122e6bf78654
       x-runtime:
-      - '0.025538'
+      - '0.032426'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1069,7 +1069,7 @@ http_interactions:
         - enforcement","description":"to be represented on an application for or to
         extend an emergency protection order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"}]'
-  recorded_at: Fri, 31 Jan 2025 13:41:04 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:42 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/PB003
@@ -1087,7 +1087,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:05 GMT
+      - Fri, 31 Jan 2025 16:36:43 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1111,9 +1111,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 88b1c5869233070d9141998a340a09a2
+      - 2241220697b38fdd60ede8a8ab09c05c
       x-runtime:
-      - '0.013873'
+      - '0.006754'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1126,7 +1126,110 @@ http_interactions:
         hearing","description":"Limited to all steps up to and including final hearing
         and any action necessary to implement (but not enforce) the order."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 31 Jan 2025 13:41:04 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:42 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
+    body:
+      encoding: UTF-8
+      string: '{"current_proceedings":["PB003"],"allowed_categories":["MAT"],"search_term":""}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 31 Jan 2025 16:36:44 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '7399'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"b3b4fb9d561a3414aacb2b86be0e9bbb"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 8ec7af5538f97eebdea225e76bc33308
+      x-runtime:
+      - '0.027683'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '[{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB052","meaning":"Special guardianship
+        order","description":"to be represented on an application for a Special Guardianship
+        Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB030","meaning":"Child arrangements order
+        (CAO) - residence","description":"to be represented on an application for
+        a child arrangements order-where the child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB004","meaning":"Emergency protection
+        order - extend","description":"to be represented on an application for or
+        to extend an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB012","meaning":"Recovery of children
+        order","description":"to be represented on an application for the recovery
+        of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB006","meaning":"Secure accommodation
+        order","description":"to be represented on an application for a secure accommodation
+        order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB024","meaning":"Specific issue order
+        - vary or discharge","description":"to be represented on an application to
+        vary or discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB005","meaning":"Emergency protection
+        order - discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB007","meaning":"Contact with a child
+        in care","description":"to be represented on an application for contact with
+        a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB029","meaning":"Child arrangements order
+        (CAO) - contact","description":"to be represented on an application for a
+        child arrangements order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB026","meaning":"Emergency protection
+        order","description":"to be represented on an application for an emergency
+        protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB021","meaning":"Contact order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB023","meaning":"Prohibited steps order
+        - vary or discharge","description":"to be represented on an application to
+        vary or discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB014","meaning":"End contact with a child
+        in care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"}]'
+  recorded_at: Fri, 31 Jan 2025 16:36:44 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/PB003
@@ -1144,7 +1247,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:06 GMT
+      - Fri, 31 Jan 2025 16:36:45 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1168,16 +1271,16 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 961ea779c5f6e9bfb3a498b7119b6fb0
+      - 95c094c69e60e8c41958cabb8f872c06
       x-runtime:
-      - '0.002434'
+      - '0.002516'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"D","description":"Respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"}]}'
-  recorded_at: Fri, 31 Jan 2025 13:41:06 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:45 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1195,7 +1298,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:08 GMT
+      - Fri, 31 Jan 2025 16:36:45 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1219,9 +1322,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e19ab6a57bc00775f317d74adfc26765
+      - ed743ffc98c0c326d30705b688cae000
       x-runtime:
-      - '0.030056'
+      - '0.023142'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1280,7 +1383,7 @@ http_interactions:
         in care","description":"to be represented on an application to terminate contact
         with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"}]'
-  recorded_at: Fri, 31 Jan 2025 13:41:08 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:45 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1298,7 +1401,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:09 GMT
+      - Fri, 31 Jan 2025 16:36:46 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1322,9 +1425,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 074167a0ceb8b03a8eb7f48d67ec07f7
+      - edebda805f4052abd84e571f0cd1e3ee
       x-runtime:
-      - '0.025879'
+      - '0.034376'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1383,7 +1486,110 @@ http_interactions:
         in care","description":"to be represented on an application to terminate contact
         with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"}]'
-  recorded_at: Fri, 31 Jan 2025 13:41:09 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:46 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
+    body:
+      encoding: UTF-8
+      string: '{"current_proceedings":["PB003"],"allowed_categories":["MAT"],"search_term":""}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 31 Jan 2025 16:36:48 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '7399'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"b3b4fb9d561a3414aacb2b86be0e9bbb"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 2aa4031d9409b38fbc6f4f9356aaf250
+      x-runtime:
+      - '0.025085'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '[{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB052","meaning":"Special guardianship
+        order","description":"to be represented on an application for a Special Guardianship
+        Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB030","meaning":"Child arrangements order
+        (CAO) - residence","description":"to be represented on an application for
+        a child arrangements order-where the child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB004","meaning":"Emergency protection
+        order - extend","description":"to be represented on an application for or
+        to extend an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB012","meaning":"Recovery of children
+        order","description":"to be represented on an application for the recovery
+        of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB006","meaning":"Secure accommodation
+        order","description":"to be represented on an application for a secure accommodation
+        order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB024","meaning":"Specific issue order
+        - vary or discharge","description":"to be represented on an application to
+        vary or discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB005","meaning":"Emergency protection
+        order - discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB007","meaning":"Contact with a child
+        in care","description":"to be represented on an application for contact with
+        a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB029","meaning":"Child arrangements order
+        (CAO) - contact","description":"to be represented on an application for a
+        child arrangements order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB026","meaning":"Emergency protection
+        order","description":"to be represented on an application for an emergency
+        protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB021","meaning":"Contact order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB023","meaning":"Prohibited steps order
+        - vary or discharge","description":"to be represented on an application to
+        vary or discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB014","meaning":"End contact with a child
+        in care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"}]'
+  recorded_at: Fri, 31 Jan 2025 16:36:48 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/PB006
@@ -1401,7 +1607,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 13:41:09 GMT
+      - Fri, 31 Jan 2025 16:36:48 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1425,9 +1631,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 989507be0c45cc64b06a95b11aa2f94b
+      - 054df434a04dd2e990869f3d514c6e3c
       x-runtime:
-      - '0.008229'
+      - '0.008218'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1441,5 +1647,105 @@ http_interactions:
         hearing","description":"Limited to all steps up to and including final hearing
         and any action necessary to implement (but not enforce) the order."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 31 Jan 2025 13:41:09 GMT
+  recorded_at: Fri, 31 Jan 2025 16:36:48 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
+    body:
+      encoding: UTF-8
+      string: '{"current_proceedings":["PB003","PB006"],"allowed_categories":["MAT"],"search_term":""}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 31 Jan 2025 16:36:50 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '7036'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"b936fd965dfc257322688c2ef28382aa"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 94c89c60b28db662508ed2df4ac0f17d
+      x-runtime:
+      - '0.024492'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '[{"ccms_code":"PB059","meaning":"Supervision order","description":"to
+        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB057","meaning":"Care order","description":"to
+        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB019","meaning":"Prohibited steps order","description":"to
+        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB052","meaning":"Special guardianship
+        order","description":"to be represented on an application for a Special Guardianship
+        Order .","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB030","meaning":"Child arrangements order
+        (CAO) - residence","description":"to be represented on an application for
+        a child arrangements order-where the child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB004","meaning":"Emergency protection
+        order - extend","description":"to be represented on an application for or
+        to extend an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB027","meaning":"Parental responsibility","description":"to
+        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB012","meaning":"Recovery of children
+        order","description":"to be represented on an application for the recovery
+        of a child(ren).","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB024","meaning":"Specific issue order
+        - vary or discharge","description":"to be represented on an application to
+        vary or discharge a specific issues order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB005","meaning":"Emergency protection
+        order - discharge","description":"to be represented on an application to discharge
+        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB007","meaning":"Contact with a child
+        in care","description":"to be represented on an application for contact with
+        a child in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB029","meaning":"Child arrangements order
+        (CAO) - contact","description":"to be represented on an application for a
+        child arrangements order-who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB022","meaning":"Residence - vary or discharge","description":"to
+        be represented on an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB026","meaning":"Emergency protection
+        order","description":"to be represented on an application for an emergency
+        protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB021","meaning":"Contact order - vary
+        or discharge","description":"to be represented on an application to vary or
+        discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB051","meaning":"Placement order","description":"to
+        be represented on an application for a placement order .","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB020","meaning":"Specific issue order","description":"to
+        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB023","meaning":"Prohibited steps order
+        - vary or discharge","description":"to be represented on an application to
+        vary or discharge a prohibitive steps order.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"},{"ccms_code":"PB014","meaning":"End contact with a child
+        in care","description":"to be represented on an application to terminate contact
+        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":true,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        children act (SCA)"}]'
+  recorded_at: Fri, 31 Jan 2025 16:36:50 GMT
 recorded_with: VCR 6.3.1
