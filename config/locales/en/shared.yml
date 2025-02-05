@@ -285,8 +285,8 @@ en:
           savings_and_assets_heading: Savings and assets
           savings_and_investments: "Your client's savings or investments"
           savings_and_investments_with_partner: "Your client or their partner's savings or investments"
-          other_assets: Which assets does your client have?
-          other_assets_with_partner: Which assets does either your client or their partner have?
+          other_assets: Your client's assets
+          other_assets_with_partner: Your client or their partner's assets
           policy_disregards: Payments from scheme or charities
           policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
           savings_and_investments: Your client's savings or investments
@@ -747,6 +747,7 @@ en:
               trust_value: Enter the estimated total value
               hint:
                 check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
+              none_label: Assets your client and their partner have
             offline_accounts:
               check_box_offline_current_accounts: Client's current accounts
               check_box_offline_savings_accounts: Client's savings accounts
