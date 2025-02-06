@@ -337,8 +337,10 @@ en:
 
     check_passported_answers:
       show:
+        caption: Capital assessment
         h1-heading: Check your answers
         h2-heading: Your client's capital
+        h2-heading_with_partner: Your client and their partner's capital
         what_happens_next: What happens next
         what_happens_next_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
     check_provider_answers:
