@@ -2,10 +2,6 @@
 <% means_report = false unless local_assigns.key?(:means_report) %>
 <% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
 <% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
-<% showing_bank_accounts = @legal_aid_application.partner_uploading_bank_statements? ||
-     (@legal_aid_application.applicant.bank_accounts.empty? && read_only) ||
-     @legal_aid_application&.savings_amount&.offline_savings_accounts.present? ||
-     @legal_aid_application&.savings_amount&.offline_current_accounts.present? %>
 
 <section class="print-no-break">
   <%= render "shared/check_answers/property", read_only:, individual: %>
@@ -13,6 +9,8 @@
 
 <section class="print-no-break">
   <%= render "shared/check_answers/vehicles", read_only:, individual: %>
+
+  <h2 class="govuk-heading-l"><%= t(".assets.bank_accounts_heading") %></h2>
 
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
@@ -37,6 +35,7 @@
             <% end %>
           <% end %>
         <% end %>
+      <% end %>
 
       <h3 class="govuk-heading-m"><%= t(".assets.money_in_bank_accounts") %></h3>
 
@@ -55,17 +54,9 @@
           <% end %>
       <% end %>
     <% end %>
-  <% end %>
 
   <% else %>
     <!-- passported and non-passported bank statement uploaded -->
-    <div class="govuk-grid-row" id="app-check-your-answers__offline_accounts_link">
-      <% unless read_only %>
-        <div class="govuk-grid-column-two-thirds">
-          <h2 class="govuk-heading-l"><%= t(".assets.bank_account_card_heading") %></h2>
-        </div>
-      <% end %>
-    </div>
 
     <%= govuk_summary_card(title: t(".assets.client_bank_accounts"),
                            heading_level: 3,
