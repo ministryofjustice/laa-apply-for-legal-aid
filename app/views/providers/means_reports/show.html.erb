@@ -3,8 +3,10 @@
   <% @cfe_result = cfe_result if @cfe_result.nil? %>
   <% @manual_review_determiner = manual_review_determiner if @manual_review_determiner.nil? %>
 
+  <%# shared with merits report %>
   <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
 
+  <%# shared with CYA, RandP and merits report %>
   <h2 class="govuk-heading-m"><%= t(".client_details_heading") %></h2>
   <%= render(
         "shared/check_answers/client_details",
@@ -13,6 +15,7 @@
         read_only: true,
       ) %>
 
+  <%# shared with CYA, RandP and merits report %>
   <% if @legal_aid_application.applicant_has_partner? %>
     <h2 class="govuk-heading-m"><%= t(".partner_details_heading") %></h2>
     <%= render(
@@ -23,6 +26,7 @@
         ) %>
   <% end %>
 
+  <%# not shared %>
   <%= render "with_cfe_result_details" unless @legal_aid_application.non_means_tested? %>
 
 <% end %>
