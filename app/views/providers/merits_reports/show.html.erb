@@ -1,10 +1,8 @@
 <%= page_template page_title: t(".heading"), back_link: :none do %>
   <% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
 
-  <%# shared with means report %>
   <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
 
-  <%# shared with CYA, RandP and means report %>
   <h2 class="govuk-heading-m"><%= t(".client_details_heading") %></h2>
   <%= render(
         "shared/check_answers/client_details",
@@ -13,7 +11,6 @@
         read_only: true,
       ) %>
 
-  <%# shared with CYA, RandP and means report %>
   <% if @legal_aid_application.applicant_has_partner? %>
     <h2 class="govuk-heading-m"><%= t(".partner_details_heading") %></h2>
     <%= render(
@@ -24,19 +21,15 @@
         ) %>
   <% end %>
 
-  <%# not shared %>
   <h2 class="govuk-heading-m"><%= t(".previous_legal_aid_heading") %></h2>
   <%= render("applied_previously", legal_aid_application: @legal_aid_application) %>
 
-  <%# not shared %>
   <h2 class="govuk-heading-m"><%= t(".applying_for") %></h2>
   <%= render("proceeding_details", legal_aid_application: @legal_aid_application) %>
 
-  <%# not shared %>
   <h2 class="govuk-heading-m"><%= t ".delegated_functions_heading" %></h2>
   <%= render("delegated_functions", proceedings: @legal_aid_application.proceedings.in_order_of_addition) %>
 
-  <%# shared with RandP %>
   <% if @legal_aid_application.non_sca_used_delegated_functions? %>
     <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
     <%= render(
@@ -46,7 +39,6 @@
         ) %>
   <% end %>
 
-  <%# shared with RandP %>
   <% if @legal_aid_application.substantive_cost_overridable? %>
     <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
     <%= render(
@@ -57,7 +49,6 @@
         ) %>
   <% end %>
 
-  <%# shared with CYA and RandP %>
   <%= render(
         "shared/check_answers/merits",
         incident: @legal_aid_application.latest_incident,
