@@ -26,27 +26,15 @@
 
   <%# not shared %>
   <h2 class="govuk-heading-m"><%= t(".previous_legal_aid_heading") %></h2>
-  <%= render(
-        "shared/check_answers/applied_previously",
-        legal_aid_application: @legal_aid_application,
-        read_only: true,
-      ) %>
+  <%= render("applied_previously", legal_aid_application: @legal_aid_application) %>
 
   <%# not shared %>
   <h2 class="govuk-heading-m"><%= t(".applying_for") %></h2>
-  <%= render(
-        "shared/check_answers/proceedings_details",
-        legal_aid_application: @legal_aid_application,
-        read_only: true,
-      ) %>
+  <%= render("proceeding_details", legal_aid_application: @legal_aid_application) %>
 
   <%# not shared %>
   <h2 class="govuk-heading-m"><%= t ".delegated_functions_heading" %></h2>
-  <%= render(
-        "shared/check_answers/delegated_functions",
-        proceedings: @legal_aid_application.proceedings.in_order_of_addition,
-        read_only: true,
-      ) %>
+  <%= render("delegated_functions", proceedings: @legal_aid_application.proceedings.in_order_of_addition) %>
 
   <%# shared with RandP %>
   <% if @legal_aid_application.non_sca_used_delegated_functions? %>

@@ -40,7 +40,7 @@ Then("the Previous Legal Aid questions and answers should match:") do |table|
 end
 
 Then("the What you're applying for questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__proceedings_details__summary", expected_table: table)
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__proceeding_details__summary", expected_table: table)
 end
 
 Then("the {string} questions and answers should match:") do |id, table|
