@@ -1423,7 +1423,7 @@ en:
         caption: Capital assessment
         h1-heading: Check your answers
         capital-section-heading: Your client's capital
-        capital-section-heading_with_partner: Your client's and their partner's capital
+        capital-section-heading_with_partner: Your client and their partner's capital
         what_happens_next:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
