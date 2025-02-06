@@ -308,7 +308,7 @@ en:
         property:
           heading_own_home: Property
           heading_property_details: Your client's property
-          heading_property_details_with_partner: Your client's and their partner's property
+          heading_property_details_with_partner: Your client and their partner's property
           own_home: Client owns the home they usually live in?
           own_home_with_partner: Client or their partner owns the home they usually live in?
           property_value: Worth of the home they usually live in
