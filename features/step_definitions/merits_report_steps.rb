@@ -54,7 +54,7 @@ Then("I can see {string} within {string}") do |text, selector|
 end
 
 Then("the Emergency cost limit questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__emergency_cost_overrides", expected_table: table)
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__emergency_cost_override__summary", expected_table: table)
 end
 
 Then("the Opponents questions and answers should match:") do |table|
