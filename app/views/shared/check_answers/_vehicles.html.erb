@@ -1,6 +1,6 @@
 <% read_only = false unless local_assigns[:read_only] %>
 
-<h3 class="govuk-heading-m"><%= t(".#{journey_type}.heading") %></h3>
+<h2 class="govuk-heading-l"><%= t(".#{journey_type}.heading") %></h2>
 <%= govuk_summary_card(title: t(".#{journey_type}.card_heading"), html_attributes: { id: "app-check-your-answers__vehicles" }) do |card| %>
   <% card.with_action do %>
     <% if !read_only %>
