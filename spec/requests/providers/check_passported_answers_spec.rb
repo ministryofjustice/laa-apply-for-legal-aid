@@ -42,7 +42,7 @@ RSpec.describe "check passported answers requests" do
         expect(response.body).to include(gds_number_to_currency(application.property_value, unit: "£"))
         expect(response.body).to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: "£"))
         expect(response.body).to include(I18n.t("shared.forms.shared_ownership_form.#{application.shared_ownership}"))
-        expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 2))
+        expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 0))
         expect(response.body).to include(I18n.t("shared.check_answers.assets.property.own_home"))
         expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.property_value"))
         expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.outstanding_mortgage"))
