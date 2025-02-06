@@ -36,11 +36,11 @@ When("I view the merits report") do
 end
 
 Then("the Previous Legal Aid questions and answers should match:") do |table|
-  expect_regex_match_for_questions_and_answers(actual_selector: "#app-check-your-answers__applied_previously_summary", expected_table: table)
+  expect_regex_match_for_questions_and_answers(actual_selector: "#app-check-your-answers__applied_previously__summary", expected_table: table)
 end
 
 Then("the What you're applying for questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__proceeding_details", expected_table: table)
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__proceedings_details__summary", expected_table: table)
 end
 
 Then("the {string} questions and answers should match:") do |id, table|

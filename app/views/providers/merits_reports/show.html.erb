@@ -1,8 +1,10 @@
 <%= page_template page_title: t(".heading"), back_link: :none do %>
   <% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
 
+  <%# shared with means report %>
   <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
 
+  <%# shared with CYA, RandP and means report %>
   <h2 class="govuk-heading-m"><%= t(".client_details_heading") %></h2>
   <%= render(
         "shared/check_answers/client_details",
@@ -11,6 +13,7 @@
         read_only: true,
       ) %>
 
+  <%# shared with CYA, RandP and means report %>
   <% if @legal_aid_application.applicant_has_partner? %>
     <h2 class="govuk-heading-m"><%= t(".partner_details_heading") %></h2>
     <%= render(
@@ -21,6 +24,7 @@
         ) %>
   <% end %>
 
+  <%# not shared %>
   <h2 class="govuk-heading-m"><%= t(".previous_legal_aid_heading") %></h2>
   <%= render(
         "shared/check_answers/applied_previously",
@@ -28,14 +32,15 @@
         read_only: true,
       ) %>
 
+  <%# not shared %>
   <h2 class="govuk-heading-m"><%= t(".applying_for") %></h2>
   <%= render(
         "shared/check_answers/proceedings_details",
         legal_aid_application: @legal_aid_application,
         read_only: true,
-        show_client_involvment_type: true,
       ) %>
 
+  <%# not shared %>
   <h2 class="govuk-heading-m"><%= t ".delegated_functions_heading" %></h2>
   <%= render(
         "shared/check_answers/delegated_functions",
@@ -43,6 +48,7 @@
         read_only: true,
       ) %>
 
+  <%# shared with RandP %>
   <% if @legal_aid_application.non_sca_used_delegated_functions? %>
     <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
     <%= render(
@@ -52,6 +58,7 @@
         ) %>
   <% end %>
 
+  <%# shared with RandP %>
   <% if @legal_aid_application.substantive_cost_overridable? %>
     <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
     <%= render(
@@ -62,6 +69,7 @@
         ) %>
   <% end %>
 
+  <%# shared with CYA and RandP %>
   <%= render(
         "shared/check_answers/merits",
         incident: @legal_aid_application.latest_incident,

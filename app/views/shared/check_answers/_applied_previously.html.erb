@@ -1,11 +1,14 @@
-<%= govuk_summary_list(card: { title: t(".heading") },
-                       html_attributes: { id: "app-check-your-answers__applied_previously_summary" }) do |summary_list| %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row| %>
-      <%= row.with_key(text: t(".has_applied_before"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: yes_no(@legal_aid_application.applicant.applied_previously)) %>
-    <% end %>
-  <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__previous_reference" }) do |row| %>
-    <%= row.with_key(text: t(".previous_application_reference"), classes: "govuk-!-width-one-half") %>
-    <%= row.with_value(text: @legal_aid_application.applicant.previous_reference.presence || "-") %>
-  <% end %>
-<% end %>
+<%= govuk_summary_card(title: t(".heading"),
+                       heading_level: 3,
+                       html_attributes: { id: "app-check-your-answers__applied_previously__card" }) do |card|
+      card.with_summary_list(actions: !read_only, html_attributes: { id: "app-check-your-answers__applied_previously__summary" }) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row|
+          row.with_key(text: t(".has_applied_before"), classes: "govuk-!-width-one-half")
+          row.with_value(text: yes_no(@legal_aid_application.applicant.applied_previously))
+        end
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__previous_reference" }) do |row|
+          row.with_key(text: t(".previous_application_reference"), classes: "govuk-!-width-one-half")
+          row.with_value(text: @legal_aid_application.applicant.previous_reference.presence || "-")
+        end
+      end
+    end %>

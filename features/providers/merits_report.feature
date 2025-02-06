@@ -15,9 +15,9 @@ Feature: Merits report
       | h2  | Previous Legal Aid |
       | h2  | What you're applying for |
       | h2  | Delegated functions |
-      | h2  | Inherent jurisdiction high court injunction |
-      | h2  | Non-molestation order |
-      | h2  | Child arrangements order (residence) |
+      | h3  | Inherent jurisdiction high court injunction |
+      | h3  | Non-molestation order |
+      | h3  | Child arrangements order (residence) |
       | h2  | Case details |
       | h3  | Opponents |
       | h3  | Mental capacity |
@@ -54,9 +54,9 @@ Feature: Merits report
       | Proceeding 2 | Non-molestation order |
       | Proceeding 3 | Child arrangements order (residence) |
 
-    And I can see "Not used" within "#delegated-functions-question__inherent_jurisdiction_high_court_injunction"
+    And I can see "Not used" within "#app-check-your-answers__delegated_functions__inherent_jurisdiction_high_court_injunction"
 
-    And the "delegated-functions-question__nonmolestation_order" questions and answers should match:
+    And the "app-check-your-answers__delegated_functions__nonmolestation_order" questions and answers should match:
       | question | answer |
       | Date report | \d{1,2} [JFMASOND].* \d{4}  |
       | Date delegated functions were used | \d{1,2} [JFMASOND].+ \d{4}  |
