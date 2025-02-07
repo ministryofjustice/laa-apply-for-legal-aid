@@ -5,29 +5,21 @@
 <%= render "receives_benefits" %>
 
 <% if @legal_aid_application.non_passported? %>
-
   <%# not shared %>
   <%= render "income_result" %>
 
   <% if @legal_aid_application.applicant.state_benefits.any? %>
-    <section class="print-no-break">
-      <%# not shared %>
-      <%= render "shared/check_answers/benefits_breakdown", partner: false %>
-    </section>
+    <%# not shared %>
+    <%= render "benefits_breakdown", partner: false %>
   <% end %>
 
   <% if @legal_aid_application.partner&.state_benefits&.any? %>
-    <section class="print-no-break">
-      <%# not shared %>
-      <%= render "shared/check_answers/benefits_breakdown", partner: true %>
-    </section>
+    <%# not shared %>
+    <%= render "benefits_breakdown", partner: true %>
   <% end %>
 
-  <section class="print-no-break">
-    <h2 class="govuk-heading-m"><%= t(".income_details_heading") %></h2>
-    <%# not shared %>
-    <%= render "shared/means_report/income_details", heading: t(".income_details_heading") %>
-  </section>
+  <%# not shared %>
+  <%= render "income_details" %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.applicant.extra_employment_information? %>

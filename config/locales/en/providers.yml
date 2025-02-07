@@ -1514,6 +1514,12 @@ en:
         not_used: Not used
     means_reports:
       assets_heading: &assets_heading Property, savings and other assets
+      benefits_breakdown:
+        heading: Benefits breakdown
+        client:
+          heading: Client benefits breakdown
+        partner:
+          heading: Partner benefits breakdown
       benefit_check_heading: Passported means
       benefit_check_question: In receipt of passporting benefit
       capital_disregards:
@@ -1621,7 +1627,31 @@ en:
         full_employment_details:
           client: *client_employment_details
           partner: *partner_employment_details
-        income_details_heading: Income
+      income_details:
+        heading: Income
+        total_income: Total income
+        client:
+          benefits: Client benefits, charitable or government payments
+          employment: Client gross employment income
+          fixed_employment_deduction: Client fixed employment deduction
+          family_help: Client financial help from friends or family
+          income_tax: Client income tax
+          maintenance_in: Client maintenance payments
+          national_insurance: Client national insurance
+          property_or_lodger: Client income from property or lodger
+          student_loan: Client student loan or grant
+          pension: Client pension
+        partner:
+          benefits: Partner benefits, charitable or government payments
+          employment: Partner gross employment income
+          fixed_employment_deduction: Partner fixed employment deduction
+          family_help: Partner financial help from friends or family
+          income_tax: Partner income tax
+          maintenance_in: Partner maintenance payments
+          national_insurance: Partner national insurance
+          property_or_lodger: Partner income from property or lodger
+          student_loan: Partner student loan or grant
+          pension: Partner pension
       income_result:
         heading: Income result
         total_disposable_income: Total disposable income assessed
