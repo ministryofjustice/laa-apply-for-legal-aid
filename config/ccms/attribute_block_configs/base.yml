@@ -1669,8 +1669,8 @@ global_means:
     response_type: boolean
     user_defined: true
   MEANS_ROUTING:
-    generate_block?: false
-    value: MANB
+    generate_block?: '#application_ecct_routing?'
+    value: '#means_routing'
     br100_meaning: means routing
     response_type: text
     user_defined: false

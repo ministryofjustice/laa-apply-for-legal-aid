@@ -464,7 +464,7 @@ module CCMS
               expect(block).not_to be_present
             end
 
-            it "excludes the CASE_OWNER_STD_FAMILY_MERITS block" do
+            it "sets CASE_OWNER_STD_FAMILY_MERITS to true" do
               block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
               expect(block).to have_boolean_response true
             end
@@ -472,6 +472,11 @@ module CCMS
             it "sets ApplicationAmendmentType to SUB" do
               block = XmlExtractor.call(request_xml, :application_amendment_type)
               expect(block.children.text).to eq "SUB"
+            end
+
+            it "excludes the MEANS_ROUTING block" do
+              block = XmlExtractor.call(request_xml, :global_means, "MEANS_ROUTING")
+              expect(block).not_to be_present
             end
           end
 
@@ -494,7 +499,7 @@ module CCMS
               expect(block).to have_text_response "ECF Team"
             end
 
-            it "excludes the CASE_OWNER_STD_FAMILY_MERITS block" do
+            it "sets CASE_OWNER_STD_FAMILY_MERITS to false" do
               block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
               expect(block).to have_boolean_response false
             end
@@ -502,6 +507,13 @@ module CCMS
             it "sets ApplicationAmendmentType to ECF" do
               block = XmlExtractor.call(request_xml, :application_amendment_type)
               expect(block.children.text).to eq "ECF"
+            end
+
+            context "when the application is passported" do
+              it "sets MEANS_ROUTING to CAM" do
+                block = XmlExtractor.call(request_xml, :global_means, "MEANS_ROUTING")
+                expect(block).to have_text_response "CAM"
+              end
             end
           end
         end
