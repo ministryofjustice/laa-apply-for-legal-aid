@@ -471,13 +471,6 @@ en:
         benefit_heading: "Benefits, charitable or government payment %{index}"
         type: Benefit type
         amount: Benefit amount
-      income_result:
-        total_disposable_income: Total disposable income assessed
-        total_gross_income: Total gross income assessed
-        gross_income_limit: Gross income limit
-        disposable_income_lower_limit: Disposable income lower limit
-        disposable_income_upper_limit: Disposable income upper limit
-        disposable_income_contribution: Income contribution
       merits: &merits
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.

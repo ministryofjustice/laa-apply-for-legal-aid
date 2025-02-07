@@ -7,8 +7,7 @@
 <% if @legal_aid_application.non_passported? %>
 
   <%# not shared %>
-  <h2 class="govuk-heading-m"><%= t(".income_result_heading") %></h2>
-  <%= render "shared/check_answers/income_result", read_only: true, heading: t(".income_result_heading") %>
+  <%= render "income_result" %>
 
   <% if @legal_aid_application.applicant.state_benefits.any? %>
     <section class="print-no-break">

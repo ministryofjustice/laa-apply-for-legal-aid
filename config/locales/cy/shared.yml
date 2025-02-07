@@ -143,13 +143,6 @@ cy:
         first_name: eman tsriF
         last_name: eman tsaL
         nino: rebmun ecnarusnI lanoitaN
-      income_result:
-        total_disposable_income: dessessa emocni elbasopsid latoT
-        total_gross_income: dessessa emocni ssorg latoT
-        gross_income_limit: timil emocni ssorG
-        disposable_income_lower_limit: timil rewol emocni elbasopsiD
-        disposable_income_upper_limit: timil reppu emocni elbasopsiD
-        disposable_income_contribution: noitubirtnoc emocnI
       merits:
         complete-application-heading: noitacilppa eht etelpmoC
         complete-application-text: ".tcerroc era gnidivorp era uoy sliated eht ,egdelwonk

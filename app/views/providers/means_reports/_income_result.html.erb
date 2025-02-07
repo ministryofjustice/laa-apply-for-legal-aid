@@ -1,5 +1,7 @@
 <section class="print-no-break">
-  <%= govuk_summary_card(title: heading,
+  <h2 class="govuk-heading-m"><%= t(".heading") %></h2>
+
+  <%= govuk_summary_card(title: t(".heading"),
                          heading_level: 3,
                          html_attributes: { id: "app-check-your-answers__income_result__card" }) do |card|
         card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__income_result__summary" }) do |summary_list|
