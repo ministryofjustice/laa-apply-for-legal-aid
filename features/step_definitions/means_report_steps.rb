@@ -200,7 +200,7 @@ Then("the Deductions questions should not exist:") do |table|
 end
 
 Then("the Capital result questions should exist:") do |table|
-  expect_questions_in(selector: "#capital-result-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__capital_result__summary", expected: table)
 end
 
 Then("the Outgoings and deductions questions and answers should match:") do |table|
