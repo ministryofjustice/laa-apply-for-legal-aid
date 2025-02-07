@@ -7,7 +7,7 @@ module Admin
     # GET /admin/feedback
     def show
       @pagy, @feedback = pagy(
-        Feedback.all,
+        Feedback.order(created_at: :desc),
         limit: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
         size: 5,
       )
