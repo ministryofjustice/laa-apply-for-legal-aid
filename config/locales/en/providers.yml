@@ -1616,7 +1616,6 @@ en:
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading
-        outgoings-and-deductions-section-heading: Outgoings and deductions
         employment_heading: *employment_heading
         employment_details:
           client: &client_employment_details Client's details
@@ -1627,6 +1626,23 @@ en:
         full_employment_details:
           client: *client_employment_details
           partner: *partner_employment_details
+      outgoings_and_deductions_details:
+        heading: Outgoings and deductions
+        total_outgoings_and_deductions: Total outgoings and deductions
+        client:
+          housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
+          childcare: Client childcare payments
+          maintenance_out: Client maintenance payments to a former partner
+          legal_aid: Client payments towards legal aid in a criminal case
+          dependants_allowance: Dependants allowance
+          partner_allowance: Partner allowance
+        partner:
+          housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
+          childcare: Partner childcare payments
+          maintenance_out: Partner maintenance payments to a former partner
+          legal_aid: Partner payments towards legal aid in a criminal case
+        dependants_allowance: Dependants allowance
+        partner_allowance: Partner allowance
       income_details:
         heading: Income
         total_income: Total income

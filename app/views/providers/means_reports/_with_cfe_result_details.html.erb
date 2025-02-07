@@ -49,11 +49,8 @@
     <% end %>
   </section>
 
-  <section class="print-no-break">
-    <%# not shared %>
-    <h2 class="govuk-heading-l"><%= t(".outgoings-and-deductions-section-heading") %></h2>
-    <%= render "shared/means_report/outgoings_and_deductions_details", heading: t(".outgoings-and-deductions-section-heading") %>
-  </section>
+  <%# not shared %>
+  <%= render "outgoings_and_deductions_details" %>
 
   <div class="govuk-!-padding-bottom-8"></div>
 

@@ -262,23 +262,6 @@ en:
         - War Widow(er) Pension
         - Windrush Compensation Scheme Payments
 
-    means_report:
-      outgoings_and_deductions_details:
-        total_outgoings_and_deductions: Total outgoings and deductions
-        client:
-          housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Client childcare payments
-          maintenance_out: Client maintenance payments to a former partner
-          legal_aid: Client payments towards legal aid in a criminal case
-          dependants_allowance: Dependants allowance
-          partner_allowance: Partner allowance
-        partner:
-          housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Partner childcare payments
-          maintenance_out: Partner maintenance payments to a former partner
-          legal_aid: Partner payments towards legal aid in a criminal case
-        dependants_allowance: Dependants allowance
-        partner_allowance: Partner allowance
     check_answers:
       capital_disregard_details:
         mandatory:
