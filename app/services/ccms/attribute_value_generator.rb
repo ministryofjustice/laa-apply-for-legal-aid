@@ -504,6 +504,10 @@ module CCMS
       legal_aid_application&.appeal&.second_appeal? ? false : true
     end
 
+    def means_routing(_options)
+      legal_aid_application.passported? ? "CAM" : "MANB"
+    end
+
     def merits_routing(_options)
       legal_aid_application&.appeal&.second_appeal? ? "ECF" : "SFM"
     end
