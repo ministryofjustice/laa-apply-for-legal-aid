@@ -1619,7 +1619,7 @@ en:
           partner: *partner_employment_details
         income_details_heading: Income
         income_result_heading: Income result
-
+      uploaded_bank_statements:
         bank_statement_heading: Bank statements
         bank_statement_question: Uploaded bank statements
         bank_statement_question_with_partner: Client’s uploaded bank statements

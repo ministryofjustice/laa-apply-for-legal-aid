@@ -297,6 +297,6 @@ Then("the Capital disregards questions and answers should match:") do |table|
   expect_matching_questions_and_answers(actual_selector: "#capital-disregards-questions", expected_table: table)
 end
 
-Then("the \"Bank statements\" questions should exist:") do |table|
-  expect_questions_in(selector: "#app-check-your-answers__bank_statements", expected: table)
+Then("the client Bank statements questions and answers should match:") do |table|
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__bank_statements_client__summary", expected_table: table)
 end
