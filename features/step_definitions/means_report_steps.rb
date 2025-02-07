@@ -191,32 +191,12 @@ Then("the Income questions and answers should match:") do |table|
   expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__income_details__summary", expected_table: table)
 end
 
-Then("the Deductions questions should exist:") do |table|
-  expect_questions_in(selector: "#deductions-details-questions", expected: table)
-end
-
-Then("the Deductions questions should not exist:") do |table|
-  expect_questions_in(selector: "#deductions-details-questions", expected: table, negate: true)
-end
-
 Then("the Capital result questions should exist:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__capital_result__summary", expected: table)
 end
 
 Then("the Outgoings and deductions questions and answers should match:") do |table|
   expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__outgoings_and_deductions_details__summary", expected_table: table)
-end
-
-Then("the Declared income categories questions should exist:") do |table|
-  expect_questions_in(selector: "#income-category-questions", expected: table)
-end
-
-Then("the Declared cash income questions should exist:") do |table|
-  expect_questions_in(selector: "#income-cash-payments-questions", expected: table)
-end
-
-Then("the Student finance questions should exist:") do |table|
-  expect_questions_in(selector: "#student-finance-questions", expected: table)
 end
 
 Then("the Dependants questions should exist:") do |table|
