@@ -81,11 +81,8 @@
   <%= render "caseworker_review" %>
 <% end %>
 
-<section class="print-no-break">
-  <%# not shared %>
-  <h2 class="govuk-heading-m"><%= t(".capital_result_heading") %></h2>
-  <%= render "shared/check_answers/capital_result", heading: t(".capital_result_heading") %>
-</section>
+<%# not shared %>
+<%= render "capital_result" %>
 
 <%# shared CYA pages and RandP %>
 <h2 class="govuk-heading-m"><%= t(".assets_heading") %></h2>

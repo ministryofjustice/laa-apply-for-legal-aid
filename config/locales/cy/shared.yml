@@ -132,11 +132,6 @@ cy:
           shared_ownership: "?esle enoyna htiw emoh rieht nwo tneilc ruoy seoD"
       bank_transaction_table:
         total: latot %{text}
-      capital_result:
-        contribution: noitubirtnoc latipaC
-        lower_limit_label: timil rewol latipaC
-        upper_limit_label: timil reppu latipaC
-        total: dessessa latipac latoT
       client_details:
         address: sserdda ecnednopserroC
         employment_status: sutats tnemyolpmE

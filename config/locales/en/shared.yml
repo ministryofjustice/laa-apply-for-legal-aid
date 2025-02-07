@@ -365,11 +365,6 @@ en:
       bank_statements:
         section_heading: Bank statements
         bank_statement_question: Uploaded bank statements
-      capital_result:
-        contribution: Capital contribution
-        lower_limit_label: Capital lower limit
-        upper_limit_label: Capital upper limit
-        total: Total capital assessed
       client_details:
         heading: Client details
         previous_application_reference: Previous application reference
