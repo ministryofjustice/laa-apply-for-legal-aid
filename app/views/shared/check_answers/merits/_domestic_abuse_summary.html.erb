@@ -16,7 +16,7 @@
         end
 
         police_question = domestic_abuse_summary.police_notified? ? "police_notified_details" : "police_not_notified"
-        summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" }) do |row|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__police_notified_details" }) do |row|
           row.with_key(text: t(".#{police_question}"), classes: "govuk-!-width-one-third")
           row.with_value(text: domestic_abuse_summary.police_notified_details)
         end

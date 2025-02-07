@@ -1,8 +1,0 @@
-en:
-  reports:
-    merits:
-      delegated_functions_component:
-        date_reported: Date reported
-        date_used: Date delegated functions were used
-        days_to_report: Days to report
-        not_used: Not used

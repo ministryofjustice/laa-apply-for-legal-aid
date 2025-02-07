@@ -616,8 +616,6 @@ en:
         heading: Proceedings
         proceeding: Proceeding
       proceedings_details:
-        heading: Proceedings
-        proceeding: Proceeding
         section_proceeding:
           client_involvement_type: Client involvement type
           client_involvement_type_applicant: Applicant
@@ -653,7 +651,6 @@ en:
           request_higher_substantive: Higher substantive cost limit requested
           higher_substantive_reasons: Reason for higher emergency cost limit
       delegated_functions:
-        not_used: Not used
         section_delegated:
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
@@ -963,7 +960,7 @@ en:
         client_details_heading: Client details
         partner_details_heading: Partner details
         linking_and_copying_heading: Cases linked to this one
-        proceedings_details_heading: What you're applying for
+        proceeding_details_section_heading: What you're applying for
         change: Change
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit

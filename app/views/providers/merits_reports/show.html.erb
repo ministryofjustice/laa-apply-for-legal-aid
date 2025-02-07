@@ -21,40 +21,17 @@
         ) %>
   <% end %>
 
-  <h2 class="govuk-heading-m"><%= t(".previous_legal_aid") %></h2>
-
-  <%= govuk_summary_list(card: { title: t(".previous_legal_aid") },
-                         html_attributes: { id: "previous-legal-aid-question" }) do |summary_list| %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row| %>
-        <%= row.with_key(text: t(".has_applied_before"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value(text: yes_no(@legal_aid_application.applicant.applied_previously)) %>
-      <% end %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row| %>
-      <%= row.with_key(text: t(".previous_application_reference"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: @legal_aid_application.applicant.previous_reference.presence || "-") %>
-    <% end %>
-  <% end %>
+  <h2 class="govuk-heading-m"><%= t(".previous_legal_aid_heading") %></h2>
+  <%= render("applied_previously", legal_aid_application: @legal_aid_application) %>
 
   <h2 class="govuk-heading-m"><%= t(".applying_for") %></h2>
+  <%= render("proceeding_details", legal_aid_application: @legal_aid_application) %>
 
-  <%= render(
-        "shared/check_answers/proceedings_details",
-        legal_aid_application: @legal_aid_application,
-        read_only: true,
-        show_client_involvment_type: true,
-      ) %>
-
-  <h2 class="govuk-heading-m"><%= t ".delegated_functions" %></h2>
-
-  <%= render(
-        Reports::Merits::DelegatedFunctionsComponent.with_collection(
-          @legal_aid_application.proceedings.in_order_of_addition,
-        ),
-      ) %>
+  <h2 class="govuk-heading-m"><%= t ".delegated_functions_heading" %></h2>
+  <%= render("delegated_functions", proceedings: @legal_aid_application.proceedings.in_order_of_addition) %>
 
   <% if @legal_aid_application.non_sca_used_delegated_functions? %>
     <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
-
     <%= render(
           "shared/check_answers/emergency_costs",
           legal_aid_application: @legal_aid_application,
@@ -64,7 +41,6 @@
 
   <% if @legal_aid_application.substantive_cost_overridable? %>
     <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
-
     <%= render(
           "shared/check_answers/substantive_costs",
           legal_aid_application: @legal_aid_application,

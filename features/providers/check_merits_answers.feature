@@ -1,6 +1,6 @@
 Feature: Check merits answers
   @javascript @vcr
-  Scenario: Checking merits answers for an application with multiple procedings
+  Scenario: Checking merits answers for an application with multiple proceedings
     Given I complete the journey as far as check merits answers with multiple proceedings
     Then I should be on a page showing "Fake gateway evidence file"
     Then I should be on a page showing "Fake file name 1 (15.7 KB)"

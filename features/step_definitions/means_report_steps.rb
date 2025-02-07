@@ -171,6 +171,10 @@ Then("the Client details questions should exist:") do |table|
   expect_questions_in(selector: "#client-details-questions", expected: table)
 end
 
+Then("the Client questions and answers should match:") do |table|
+  expect_regex_match_for_questions_and_answers(actual_selector: "#client-details-questions", expected_table: table)
+end
+
 Then("the Proceeding eligibility questions should exist:") do |table|
   expect_questions_in(selector: "#proceeding-eligibility-questions", expected: table)
 end

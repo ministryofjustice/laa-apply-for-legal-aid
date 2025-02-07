@@ -647,7 +647,16 @@ FactoryBot.define do
     end
 
     trait :with_domestic_abuse_summary do
-      domestic_abuse_summary { build(:domestic_abuse_summary) }
+      transient do
+        police_notified { true }
+        police_notified_details { "details of police notification or not" }
+      end
+
+      domestic_abuse_summary do
+        build(:domestic_abuse_summary,
+              police_notified: police_notified,
+              police_notified_details: police_notified_details)
+      end
     end
 
     trait :with_second_appeal do

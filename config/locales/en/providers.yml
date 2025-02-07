@@ -1491,13 +1491,23 @@ en:
         heading: Merits report
         client_details_heading: Client details
         partner_details_heading: Partner details
-        previous_legal_aid: Previous Legal Aid
-        has_applied_before: Has your client applied for civil legal aid before?
-        previous_application_reference: Previous CCMS reference number
-        applying_for: What you’re applying for
-        delegated_functions: Delegated functions
+        previous_legal_aid_heading: Previous Legal Aid
+        applying_for: What you're applying for
+        delegated_functions_heading: Delegated functions
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
+      applied_previously:
+        heading: Previous Legal Aid
+        has_applied_before: Has your client applied for civil legal aid before?
+        previous_application_reference: Previous CCMS reference number
+      proceeding_details:
+        heading: Proceedings
+        proceeding: Proceeding
+      delegated_functions:
+        reported_on: Date reported
+        used_on: Date delegated functions were used
+        days_to_report: Days to report
+        not_used: Not used
     means_reports:
       assets_heading: &assets_heading Property, savings and other assets
       benefit_check_heading: Passported means
