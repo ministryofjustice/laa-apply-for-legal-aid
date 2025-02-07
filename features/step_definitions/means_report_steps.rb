@@ -168,11 +168,11 @@ When("I view the means report") do
 end
 
 Then("the Client details questions should exist:") do |table|
-  expect_questions_in(selector: "#client-details-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__client_details__summary", expected: table)
 end
 
 Then("the Client questions and answers should match:") do |table|
-  expect_regex_match_for_questions_and_answers(actual_selector: "#client-details-questions", expected_table: table)
+  expect_regex_match_for_questions_and_answers(actual_selector: "#app-check-your-answers__client_details__summary", expected_table: table)
 end
 
 Then("the Proceeding eligibility questions should exist:") do |table|
