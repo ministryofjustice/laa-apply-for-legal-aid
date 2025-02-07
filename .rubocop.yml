@@ -23,6 +23,11 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
 
+Style/CombinableLoops:
+  Exclude:
+    - app/views/shared/means_report/_income_details.html.erb
+    - app/views/shared/means_report/_outgoings_and_deductions_details.html.erb
+
 Style/ZeroLengthPredicate:
   Exclude:
     - app/controllers/status_controller.rb
