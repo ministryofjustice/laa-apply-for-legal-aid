@@ -1491,9 +1491,6 @@ en:
         heading: Merits report
         client_details_heading: Client details
         partner_details_heading: Partner details
-        previous_legal_aid_heading: Previous Legal Aid
-        applying_for: What you're applying for
-        delegated_functions_heading: Delegated functions
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
       applied_previously:
@@ -1501,9 +1498,11 @@ en:
         has_applied_before: Has your client applied for civil legal aid before?
         previous_application_reference: Previous CCMS reference number
       proceeding_details:
-        heading: Proceedings
+        heading: What you're applying for
+        card_title: Proceedings
         proceeding: Proceeding
       delegated_functions:
+        heading: Delegated functions
         reported_on: Date reported
         used_on: Date delegated functions were used
         days_to_report: Days to report

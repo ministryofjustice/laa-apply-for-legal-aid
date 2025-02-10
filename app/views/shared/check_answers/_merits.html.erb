@@ -38,8 +38,10 @@
 <% end %>
 
 <% if @legal_aid_application.uploaded_evidence_collection %>
-  <h2 class="govuk-heading-l"><%= t(".evidence_upload_heading") %></h2>
-  <%= render("shared/check_answers/merits/supporting_evidence", read_only:) %>
+  <section class="print-no-break">
+    <h2 class="govuk-heading-l"><%= t(".evidence_upload_heading") %></h2>
+    <%= render("shared/check_answers/merits/supporting_evidence", read_only:) %>
+  </section>
 <% end %>
 
 <!--This is to prevent the separate representation section from showing up anywhere other than the merits report -->
