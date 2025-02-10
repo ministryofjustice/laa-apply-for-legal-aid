@@ -27,8 +27,8 @@
           <% end %>
         <% end %>
 
-        <% @legal_aid_application&.applicant&.bank_accounts&.each do |account| %>
-          <%= card.with_summary_list(actions: false) do |summary_list| %>
+        <%= card.with_summary_list(actions: false) do |summary_list| %>
+          <% @legal_aid_application&.applicant&.bank_accounts&.each do |account| %>
             <%= summary_list.with_row do |row| %>
               <%= row.with_key(text: "#{account.name}, #{account.account_number}, #{account.sort_code}", classes: "govuk-!-width-one-half") %>
               <%= row.with_value { gds_number_to_currency(account.balance).to_s } %>
@@ -154,10 +154,11 @@
     </div>
   <% end %>
 
-  <h3 class="govuk-heading-l"><%= t(".assets.savings_and_assets_heading") %></h3>
+  <h2 class="govuk-heading-l"><%= t(".assets.savings_and_assets_heading") %></h2>
 
   <%#  savings and investments %>
   <%= govuk_summary_card(title: t(".assets.savings_and_investments#{individual}"),
+                         heading_level: 3,
                          html_attributes: { id: "app-check-your-answers__savings_and_investments_items" }) do |card| %>
     <% unless read_only %>
       <% card.with_action do %>
@@ -168,13 +169,13 @@
     <% end %>
     <% card.with_summary_list do |summary_list| %>
       <% if capital_amounts_list(@legal_aid_application).nil? %>
-        <% summary_list.with_row(html_attributes: { id: "app-check-your-answers__savings_and_investments" }) do |row| %>
+        <% summary_list.with_row do |row| %>
           <%= row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.none_label"), classes: "govuk-!-width-one-half") %>
           <%= row.with_value { t("generic.none") } %>
         <% end %>
       <% else %>
         <% capital_amounts_list(@legal_aid_application).each do |item| %>
-          <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__savings_and_investments" }) do |row| %>
+          <%= summary_list.with_row do |row| %>
             <%= row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.check_box_#{item.first}"), classes: "govuk-!-width-one-half") %>
             <%= row.with_value { gds_number_to_currency(item.second) } %>
           <% end %>
@@ -185,6 +186,7 @@
 
   <%#  other assets %>
   <%= govuk_summary_card(title: t(".assets.other_assets#{individual}"),
+                         heading_level: 3,
                          html_attributes: { id: "app-check-your-answers__other_assets_items" }) do |card| %>
     <% unless read_only %>
       <% card.with_action do %>
@@ -195,13 +197,13 @@
     <% end %>
     <% card.with_summary_list do |summary_list| %>
       <% if capital_assets_list(@legal_aid_application).nil? %>
-        <% summary_list.with_row(html_attributes: { id: "app-check-your-answers__other_assets" }) do |row| %>
+        <% summary_list.with_row do |row| %>
           <%= row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.other_assets.none_label"), classes: "govuk-!-width-one-half") %>
           <%= row.with_value { t("generic.none") } %>
         <% end %>
       <% else %>
         <% capital_assets_list(@legal_aid_application).each do |item| %>
-          <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__other_assets" }) do |row| %>
+          <%= summary_list.with_row do |row| %>
             <%= row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.other_assets.check_box_#{item.first}"), classes: "govuk-!-width-one-half") %>
             <%= row.with_value { item.first.eql?("second_home_percentage") ? capital_amount_text(item.second, :percentage) : gds_number_to_currency(item.second) } %>
           <% end %>

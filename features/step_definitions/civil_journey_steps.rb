@@ -1432,7 +1432,7 @@ end
 
 Then("I am on the check your answers page for other assets") do
   expect(page).to have_content("Check your answers")
-  expect(page).to have_content("Which assets does your client have?")
+  expect(page).to have_content("Your client's assets")
 end
 
 Then("I am on the check your answers page for policy disregards") do

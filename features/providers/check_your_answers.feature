@@ -25,7 +25,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Property details questions' should be '£200,000'
     And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be 'Yes, an ex-partner'
-    And the answer for 'Percentage home' should be '50.00%'
+    And the answer for 'Percentage home' should be '50%'
     And the answer for 'Restrictions' should be 'No'
 
   @javascript
@@ -74,7 +74,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'offline accounts link'
+    And I click Check Your Answers Change link for 'bank accounts items'
     Then I should be on a page showing 'Which bank accounts does your client have?'
     Then I select 'Savings account'
     Then I fill 'offline_savings_accounts' with '678.99'
@@ -89,7 +89,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'offline accounts link'
+    And I click Check Your Answers Change link for 'bank accounts items'
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select 'None of these'
     Then I click 'Save and continue'
@@ -102,7 +102,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'savings and investments'
+    And I click Check Your Answers Change link for 'savings and investments items'
     Then I should be on a page showing 'Which savings or investments does your client have?'
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
@@ -120,7 +120,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'savings and investments'
+    And I click Check Your Answers Change link for 'savings and investments items'
     Then I should be on a page showing 'Which savings or investments does your client have?'
     Then I select 'None of these savings or investments'
     Then I click 'Save and continue'
@@ -133,7 +133,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'other assets'
+    And I click Check Your Answers Change link for 'other assets items'
     Then I should be on a page showing 'Which assets does your client have?'
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
@@ -150,7 +150,7 @@ Feature: Checking answers backwards and forwards
     Then I visit the in progress applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    And I click Check Your Answers Change link for 'other assets'
+    And I click Check Your Answers Change link for 'other assets items'
     Then I should be on a page showing 'Which assets does your client have?'
     Then I select 'None of these assets'
     Then I click 'Save and continue'
@@ -207,7 +207,7 @@ Feature: Checking answers backwards and forwards
     @javascript
     Scenario: I want to view bank accounts via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'offline accounts link'
+      And I click Check Your Answers Change link for 'bank accounts items'
       Then I should be on a page showing "Which bank accounts does your client have?"
       Then I select 'None of these'
       Then I click 'Save and continue'
@@ -216,7 +216,7 @@ Feature: Checking answers backwards and forwards
     @javascript
     Scenario: I want to view savings via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'Savings and investments'
+      And I click Check Your Answers Change link for 'Savings and investments items'
       Then I should be on a page showing 'Which savings or investments does your client have?'
       Then I click 'Save and continue'
       Then I click 'Save and continue'
@@ -225,7 +225,7 @@ Feature: Checking answers backwards and forwards
     @javascript
     Scenario: I want to view other assets via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'Other assets'
+      And I click Check Your Answers Change link for 'other assets items'
       Then I should be on a page showing 'Which assets does your client have?'
       Then I click 'Save and continue'
       Then I click 'Save and continue'
@@ -235,7 +235,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to add and remove restrictions via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing 'Is your client banned from selling or borrowing against their assets?'
+      Then I should be on a page with title 'Is your client banned from selling or borrowing against their assets?'
       Then I choose 'Yes'
       Then I fill "Restrictions details" with 'Restraint or freezing order'
       Then I click 'Save and continue'
@@ -347,12 +347,16 @@ Feature: Checking answers backwards and forwards
       | h1  | Check your answers |
       | h2  | Your client's capital |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
+      | h2  | Bank accounts |
       | h3  | Your client's accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | One-off payments your client received |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
 
     Then the following sections should not exist:
       | tag | section |

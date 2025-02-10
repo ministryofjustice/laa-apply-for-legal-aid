@@ -76,7 +76,7 @@ Feature: non_passported_journey with capital
   @javascript @vcr
   Scenario: Using the back button to change none_of_these checkboxes
     Given I am checking answers on the check capital answers page
-    When I click Check Your Answers Change link for 'Savings and investments'
+    When I click Check Your Answers Change link for 'Savings and investments items'
     Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
     When I select "None of these savings or investments"
     And I click "Save and continue"
@@ -92,7 +92,7 @@ Feature: non_passported_journey with capital
     And I click "Save and continue"
     And I click "Save and continue"
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
-    When I click Check Your Answers Change link for 'Other assets'
+    When I click Check Your Answers Change link for 'Other assets items'
     Then I should be on the "other_assets" page showing "Which assets does your client have?"
     When I select "None of these assets"
     And I click "Save and continue"
