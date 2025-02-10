@@ -5,51 +5,42 @@
 <%= render "receives_benefits" %>
 
 <% if @legal_aid_application.non_passported? %>
-  <%# not shared %>
   <%= render "income_result" %>
 
   <% if @legal_aid_application.applicant.state_benefits.any? %>
-    <%# not shared %>
     <%= render "benefits_breakdown", partner: false %>
   <% end %>
 
   <% if @legal_aid_application.partner&.state_benefits&.any? %>
-    <%# not shared %>
     <%= render "benefits_breakdown", partner: true %>
   <% end %>
 
-  <%# not shared %>
   <%= render "income_details" %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.applicant.extra_employment_information? %>
-      <%# shared CYA pages and RandP %>
       <%= render "shared/check_answers/employed_income", partner: false, read_only: true %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <% if @legal_aid_application.full_employment_details? %>
-      <%# shared CYA pages and RandP %>
       <%= render "shared/check_answers/full_employment_details", individual: "Your client", read_only: true, partner: false %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <% if @legal_aid_application.partner&.extra_employment_information? %>
-      <%# shared CYA pages and RandP %>
       <%= render "shared/check_answers/employed_income", partner: true, read_only: true %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <% if @legal_aid_application.partner&.full_employment_details? %>
-      <%# shared CYA pages and RandP %>
       <%= render "shared/check_answers/full_employment_details", individual: "The partner", read_only: true, partner: true %>
     <% end %>
   </section>
 
-  <%# not shared %>
   <%= render "outgoings_and_deductions_details" %>
 
   <div class="govuk-!-padding-bottom-8"></div>
@@ -60,32 +51,24 @@
                          "your client"
                        end %>
   <section class="print-no-break">
-    <%# shared CYA pages %>
     <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
     <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true, means_report: true %>
   </section>
 
-  <%# not shared %>
   <%= render "caseworker_review" %>
 <% end %>
 
-<%# not shared %>
 <%= render "capital_result" %>
 
-<%# shared CYA pages and RandP %>
 <h2 class="govuk-heading-m"><%= t(".assets_heading") %></h2>
 <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 <%= render "shared/check_answers/assets", means_report: true, read_only: true, individual: %>
 
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
     <div class="govuk-!-padding-bottom-8"></div>
-
-    <%# not shared %>
     <%= render "caseworker_review" %>
 <% end %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>
-
-  <%# not shared %>
   <%= render "uploaded_bank_statements" %>
 <% end %>
