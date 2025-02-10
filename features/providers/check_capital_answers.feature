@@ -9,19 +9,19 @@ Feature: Check capital income answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client's capital |
-      | h2  | Property |
-      | h2  | Your client's property |
+      | h3  | Property |
+      | h3  | Your client's property |
       | h2  | Vehicles |
-      | h2  | Vehicles owned |
-      | h2  | Vehicle 1 |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Your client's accounts |
+      | h3  | Your client's accounts |
       | h2  | Savings and assets |
-      | h2  | Your client's savings or investments |
-      | h2  | Your client's assets |
-      | h2  | One-off payments your client received |
-      | h2  | Disregarded payment 1 |
-      | h2  | Payment to be reviewed 1 |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h3  | What happens next |
 
     Then the following sections should not exist:
@@ -55,19 +55,19 @@ Feature: Check capital income answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client's capital |
-      | h2  | Property |
-      | h2  | Your client's property |
+      | h3  | Property |
+      | h3  | Your client's property |
       | h2  | Vehicles |
-      | h2  | Vehicles owned |
-      | h2  | Vehicle 1 |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Your client's accounts |
+      | h3  | Your client's accounts |
       | h2  | Savings and assets |
-      | h2  | Your client's savings or investments |
-      | h2  | Your client's assets |
-      | h2  | One-off payments your client received |
-      | h2  | Disregarded payment 1 |
-      | h2  | Payment to be reviewed 1 |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h3  | What happens next |
 
     Then the following sections should not exist:
@@ -101,19 +101,19 @@ Feature: Check capital income answers
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client's capital |
-      | h2  | Property |
-      | h2  | Your client's property |
+      | h3  | Property |
+      | h3  | Your client's property |
       | h2  | Vehicles |
-      | h2  | Vehicles owned |
-      | h2  | Vehicle 1 |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Your client's accounts |
+      | h3  | Your client's accounts |
       | h2  | Savings and assets |
-      | h2  | Your client's savings or investments |
-      | h2  | Your client's assets |
-      | h2  | One-off payments your client received |
-      | h2  | Disregarded payment 1 |
-      | h2  | Payment to be reviewed 1 |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h3  | What happens next |
 
     Then the following sections should not exist:
@@ -140,29 +140,28 @@ Feature: Check capital income answers
       | Bank account | Halifax |
 
   Scenario: For a non-passported client and their partner, bank statement upload journey
-    Given I have completed the income and capital sections of a non-passported application with bank statement uploads
+    Given I have completed the income and capital sections of a non-passported application with bank statement uploads and partner
     When I am viewing the means capital check your answers page
 
     Then the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client and their partner's capital |
-      | h2  | Property |
-      | h2  | Your client and their partner's property |
+      | h3  | Property |
+      | h3  | Your client and their partner's property |
       | h2  | Vehicles |
-      | h2  | Vehicles owned |
-      | h2  | Vehicle 1 |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Your client's accounts |
-      | h2  | The partner's accounts |
-      | h2  | Joint accounts |
+      | h3  | Your client's accounts |
+      | h3  | The partner's accounts |
+      | h3  | Joint accounts |
       | h2  | Savings and assets |
-      | h2  | Your client or their partner's savings or investments |
-      | h2  | Your client or their partner's assets |
-      | h2  | Restrictions on your client or their partner's assets |
-      | h2  | One-off payments your client or their partner received |
-      | h2  | Disregarded payment 1 |
-      | h2  | Payment to be reviewed 1 |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
+      | h3  | One-off payments your client or their partner received |
+      | h3  | Payment to be reviewed 1 |
       | h3  | What happens next |
 
     Then the following sections should not exist:
@@ -187,28 +186,28 @@ Feature: Check capital income answers
       | Bank account | Halifax |
 
   Scenario: For a non-passported client and their partner, truelayer bank transactions journey
-    Given I have completed the income and capital sections of a non-passported application with open banking transactions
+    Given I have completed the income and capital sections of a non-passported application with open banking transactions and partner
     When I am viewing the means capital check your answers page
 
     Then the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client and their partner's capital |
-      | h2  | Property |
-      | h2  | Your client and their partner's property |
+      | h3  | Property |
+      | h3  | Your client and their partner's property |
       | h2  | Vehicles |
-      | h2  | Vehicles owned |
-      | h2  | Vehicle 1 |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Your client's accounts |
-      | h2  | The partner's accounts |
+      | h3  | Your client's accounts |
+      | h3  | The partner's accounts |
       | h2  | Savings and assets |
-      | h2  | Your client or their partner's savings or investments |
-      | h2  | Your client or their partner's assets |
-      | h2  | Restrictions on your client or their partner's assets |
-      | h2  | One-off payments your client or their partner received |
-      | h2  | Disregarded payment 1 |
-      | h2  | Payment to be reviewed 1 |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
+      | h3  | One-off payments your client or their partner received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h3  | What happens next |
 
     Then the following sections should not exist:
@@ -218,12 +217,6 @@ Feature: Check capital income answers
       | h2  | Your client's savings or investments |
       | h2  | Your client's assets |
       | h2  | One-off payments your client received |
-
-    # TODO: Add this later on
-    # And the Your client's bank accounts summary list questions should exist:
-    #   | question |
-    #   | Has savings accounts they cannot access online |
-    #   | Amount in offline savings accounts |
 
     And the Disregarded payment 1 questions and answers should match:
       | question | answer |
@@ -239,28 +232,28 @@ Feature: Check capital income answers
       | Bank account | Halifax |
 
   Scenario: For a passported client and their partner journey
-    Given I have completed the capital sections of passported application
+    Given I have completed the capital sections of passported application and have a partner
     When I am viewing the passported capital check your answers page
 
     Then the following sections should exist:
       | tag | section |
       | h1  | Check your answers |
       | h2  | Your client and their partner's capital |
-      | h2  | Property |
-      | h2  | Your client and their partner's property |
+      | h3  | Property |
+      | h3  | Your client and their partner's property |
       | h2  | Vehicles |
-      | h2  | Vehicles owned |
-      | h2  | Vehicle 1 |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Your client's accounts |
-      | h2  | The partner's accounts |
+      | h3  | Your client's accounts |
+      | h3  | The partner's accounts |
       | h2  | Savings and assets |
-      | h2  | Your client or their partner's savings or investments |
-      | h2  | Your client or their partner's assets |
-      | h2  | Restrictions on your client or their partner's assets |
-      | h2  | One-off payments your client or their partner received |
-      | h2  | Disregarded payment 1 |
-      | h2  | Payment to be reviewed 1 |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
+      | h3  | One-off payments your client or their partner received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h3  | What happens next |
 
     Then the following sections should not exist:

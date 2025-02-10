@@ -105,7 +105,7 @@ cy:
             fo sepyt hcihW"
           client_savings_account: tnuocca sgnivaS
           client_current_account: tnuocca tnerruC
-          bank_accounts: "?evah tneilc ruoy seod stnuocca knab hcihW"
+          bank_accounts_heading: "?evah tneilc ruoy seod stnuocca knab hcihW"
         property:
           outstanding_mortgage: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si
             tahW"

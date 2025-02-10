@@ -244,11 +244,11 @@ Then("the Property question should exist:") do |table|
 end
 
 Then("the Property details questions should exist:") do |table|
-  expect_questions_in(selector: "#property-details-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__property_details_questions", expected: table)
 end
 
 Then("the Vehicle ownership question should exist:") do |table|
-  expect_questions_in(selector: "#vehicles-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__own-vehicle", expected: table)
 end
 
 Then("the Vehicles questions should exist:") do |table|
@@ -286,7 +286,7 @@ Then("the \"Which assets does your client have?\" questions should exist:") do |
 end
 
 Then("the \"Restrictions on your client's assets\" questions should exist:") do |table|
-  expect_questions_in(selector: "#restrictions-on-clients-assets-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__restrictions", expected: table)
 end
 
 Then("the \"Payments from scheme or charities\" questions should exist:") do |table|
