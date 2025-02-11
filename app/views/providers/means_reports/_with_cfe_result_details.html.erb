@@ -43,8 +43,6 @@
 
   <%= render "outgoings_and_deductions_details" %>
 
-  <div class="govuk-!-padding-bottom-8"></div>
-
   <% individual_text = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
                          "your client or their partner"
                        else
