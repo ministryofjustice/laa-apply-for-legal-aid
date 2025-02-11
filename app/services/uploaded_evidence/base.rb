@@ -58,7 +58,7 @@ module UploadedEvidence
     end
 
     def required_documents
-      @required_documents = legal_aid_application.required_document_categories
+      @required_documents = legal_aid_application.allowed_document_categories
     end
 
     def submission_form

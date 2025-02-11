@@ -30,26 +30,9 @@
 
   <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
-    <div class="govuk-!-padding-bottom-6"></div>
-
-      <% if @required_documents.size == 1 %>
-        <% if  @legal_aid_application.section_8_proceedings? %>
-          <div class="govuk-body"><%= t(".section_8_evidence") %></div>
-        <% elsif @evidence_type_translation.present? %>
-          <div class="govuk-body"><%= t(".single_item", evidence_type: @evidence_type_translation) %></div>
-        <% else %>
-          <div class="govuk-body"><%= t(".single_non_specific_item", item: t(".#{@required_documents.first}")) %></div>
-        <% end %>
-      <% else %>
-        <div class="govuk-body"><%= t(".list_text") %></div>
-        <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
-          <% @required_documents.each do |evidence| %>
-            <li><%= t(".#{evidence}", benefit: @legal_aid_application&.dwp_override&.passporting_benefit&.titleize) %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
-    <div class="govuk-!-padding-bottom-4"></div>
+    <div class="govuk-!-padding-top-6 govuk-!-padding-bottom-4">
+      <%= evidence_message(@legal_aid_application, @evidence_type_translation) %>
+    </div>
 
     <div class="dropzone__upload">
       <div class="govuk-form-group script hidden <%= form_group_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">

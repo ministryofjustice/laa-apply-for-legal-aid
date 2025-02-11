@@ -1583,29 +1583,29 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "required_document_categories" do
+  describe "#allowed_document_categories" do
     let(:laa) { create(:legal_aid_application) }
 
     before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[benefit_evidence gateway_evidence] }
 
     it "defaults to an empty array" do
-      expect(laa.required_document_categories).to eq []
+      expect(laa.allowed_document_categories).to eq []
     end
 
     it "allows a valid document category to be added" do
-      laa.required_document_categories << "benefit_evidence"
+      laa.allowed_document_categories << "benefit_evidence"
       laa.save!
-      expect(laa.required_document_categories).to eq %w[benefit_evidence]
+      expect(laa.allowed_document_categories).to eq %w[benefit_evidence]
     end
 
     it "allows multiple valid document categories to be added" do
-      laa.required_document_categories = %w[gateway_evidence benefit_evidence]
+      laa.allowed_document_categories = %w[gateway_evidence benefit_evidence]
       laa.save!
-      expect(laa.required_document_categories).to eq %w[gateway_evidence benefit_evidence]
+      expect(laa.allowed_document_categories).to eq %w[gateway_evidence benefit_evidence]
     end
 
     it "errors when an invalid document category is added" do
-      laa.required_document_categories << "invalid_evidence"
+      laa.allowed_document_categories << "invalid_evidence"
       expect { laa.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
@@ -1644,6 +1644,24 @@ RSpec.describe LegalAidApplication do
       it "returns false" do
         create(:proceeding, :da001, legal_aid_application: laa)
         expect(laa.special_children_act_proceedings?).to be false
+      end
+    end
+  end
+
+  describe "#public_law_family_proceedings?" do
+    context "with public law family proceedings" do
+      let(:laa) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pbm32], set_lead_proceeding: :pbm32) }
+
+      it "returns true" do
+        expect(laa.public_law_family_proceedings?).to be true
+      end
+    end
+
+    context "without public law family proceedings" do
+      let(:laa) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001], set_lead_proceeding: :da001) }
+
+      it "returns false" do
+        expect(laa.public_law_family_proceedings?).to be false
       end
     end
   end

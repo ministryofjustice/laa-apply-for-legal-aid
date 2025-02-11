@@ -38,7 +38,7 @@ private
   end
 
   def application_evidence_types
-    legal_aid_application.required_document_categories
+    legal_aid_application.allowed_document_categories
   end
 
   def categorised_evidence_types

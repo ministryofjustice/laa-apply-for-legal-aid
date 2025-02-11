@@ -35,5 +35,5 @@ Style/SafeNavigationChainLength:
     - app/services/reports/base_report_creator.rb
     - spec/i18n_spec.rb
     - app/views/providers/link_application/confirm_links/show.html.erb
-    - app/views/providers/uploaded_evidence_collections/_upload_evidence.html.erb
+    - app/helpers/uploaded_evidence_helper.rb
     - app/views/shared/check_answers/_assets.html.erb

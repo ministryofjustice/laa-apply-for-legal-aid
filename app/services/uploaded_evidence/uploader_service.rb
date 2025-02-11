@@ -8,7 +8,7 @@ module UploadedEvidence
         @error_message = error_message
       end
 
-      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      DocumentCategoryAnalyser.call(legal_aid_application)
       required_documents
       attachment_type_options
 
