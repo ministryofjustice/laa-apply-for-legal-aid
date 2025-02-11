@@ -5,17 +5,30 @@
 <%= form.govuk_check_box field_name, true, "", link_errors: true, multiple: false, label: { text: controller_t("check_box_#{name}") } do %>
   <div class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint", default: "") %></div>
   <% (1..number_of_fields).each do |number| %>
-    <% error = model.errors.messages[:"#{name}#{number}"][0] %>
+
+    <%# Emulate govuk error handling for the dynamically rendered fields %>
+    <% id = "#{model.model_name.to_s.underscore.dasherize}-#{name.dasherize}#{number}-field"
+       input_classes = "govuk-input"
+       form_group_classes = "govuk-form-group"
+       error = model.errors.messages[:"#{name}#{number}"][0]
+
+       if error
+         input_classes += " govuk-input--error"
+         form_group_classes += " govuk-form-group--error"
+         id += "-error"
+       end %>
+
     <% if error %>
-      <% error_class = "govuk-form-group--error"
-         error_id = "#{model.model_name.to_s.underscore.dasherize}-#{name.dasherize}#{number}" %>
-      <p class='govuk-error-message' id="<%= error_id %>"><%= error %></p>
+        <p class='govuk-error-message'><%= error %></p>
     <% end %>
+
     <%= form.govuk_text_field "#{name}#{number}",
-                              label: { text: model.period(number) },
+                              id: id,
+                              label: { text: model.period(number), for: id },
                               value: model.__send__(:"#{name}#{number}"),
                               prefix_text: defined?(input_prefix) ? input_prefix : nil,
-                              form_group: { classes: error_class },
+                              form_group: { class: form_group_classes },
+                              class: input_classes,
                               width: "one-third" %>
   <% end %>
 <% end %>
