@@ -1793,16 +1793,15 @@ RSpec.describe LegalAidApplication do
 
     context "when evidence has been uploaded" do
       it "returns a hash of evidence attachments grouped by category" do
-        expect(laa.uploaded_evidence_by_category).to eq({
-          "gateway_evidence" => [
-            find_attachment(collection.original_attachments, "Fake Gateway Evidence 1"),
-            find_attachment(collection.original_attachments, "Fake Gateway Evidence 2"),
-          ],
-          "benefit_evidence" => [
-            find_attachment(collection.original_attachments, "Fake Benefit Evidence 1"),
-            find_attachment(collection.original_attachments, "Fake Benefit Evidence 2"),
-          ],
-        })
+        # Added sort to ensure the order is consistent. Without it we got flickering tests with attachments out of order
+        expect(laa.uploaded_evidence_by_category["gateway_evidence"].sort).to eq [
+          find_attachment(collection.original_attachments, "Fake Gateway Evidence 1"),
+          find_attachment(collection.original_attachments, "Fake Gateway Evidence 2"),
+        ].sort
+        expect(laa.uploaded_evidence_by_category["benefit_evidence"].sort).to eq [
+          find_attachment(collection.original_attachments, "Fake Benefit Evidence 1"),
+          find_attachment(collection.original_attachments, "Fake Benefit Evidence 2"),
+        ].sort
       end
     end
   end
