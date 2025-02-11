@@ -75,7 +75,7 @@
   section.print-no-break,
   dl,
   h2 {
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .print-header-wrapper {
