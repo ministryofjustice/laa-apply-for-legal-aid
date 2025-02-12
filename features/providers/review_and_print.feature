@@ -28,12 +28,18 @@ Feature: Review and print your application
       | h3  | Housing benefit |
       | h2  | Your client's capital |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h3  | Your client's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Payments from scheme or charities |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -61,13 +67,18 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h3  | Student finance |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
       | h3  | Your client's accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Payments from scheme or charities |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -120,12 +131,18 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h3  | Your client's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Payments from scheme or charities |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
