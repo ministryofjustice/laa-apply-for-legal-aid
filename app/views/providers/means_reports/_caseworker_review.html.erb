@@ -1,34 +1,32 @@
 <section class="print-no-break">
-  <h2 class="govuk-heading-l"><%= t("providers.means_reports.caseworker_review_section_heading") %></h2>
+  <h2 class="govuk-heading-m"><%= t("providers.means_reports.caseworker_review_section_heading") %></h2>
 
-  <%= govuk_summary_list(
-        card: { title: t("providers.means_reports.caseworker_review_section_heading") },
-        actions: false,
-        html_attributes: { id: "caseworker-review-questions" },
-      ) do |summary_list| %>
-    <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t(".required"), classes: "govuk-!-width-one-half") %>
-      <%= row.with_value(text: yes_no(@manual_review_determiner.manual_review_required?)) %>
-    <% end %>
-    <% if @manual_review_determiner.manual_review_required? %>
-      <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".reasons")) %>
-        <%= row.with_value do %>
-          <% @manual_review_determiner.review_reasons.each do |reason| %>
-              <%= t(".reason.#{reason}") %><br>
-          <% end %>
-        <% end %>
-      <% end %>
-      <% @manual_review_determiner.review_categories_by_reason&.each do |reason, categories| %>
-        <%= summary_list.with_row do |row| %>
-          <%= row.with_key(text: t(".category-#{reason}"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value do %>
-            <% categories.each do |category| %>
-                <%= t(".category.#{category}") %><br>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= govuk_summary_card(title: t("providers.means_reports.caseworker_review_section_heading"),
+                         heading_level: 3,
+                         html_attributes: { id: "app-check-your-answers__caseworker_review__card" }) do |card|
+        card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__caseworker_review__summary" }) do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key(text: t(".required"), classes: "govuk-!-width-one-half")
+            row.with_value(text: yes_no(@manual_review_determiner.manual_review_required?))
+          end
+
+          if @manual_review_determiner.manual_review_required?
+            summary_list.with_row do |row|
+              row.with_key(text: t(".reasons"))
+              row.with_value do
+                safe_join(@manual_review_determiner.review_reasons.map { |reason| t(".reason.#{reason}") }, tag.br)
+              end
+            end
+
+            @manual_review_determiner.review_categories_by_reason&.each do |reason, categories|
+              summary_list.with_row do |row|
+                row.with_key(text: t(".category-#{reason}"), classes: "govuk-!-width-one-half")
+                row.with_value do
+                  safe_join(categories.map { |category| t(".category.#{category}") }, tag.br)
+                end
+              end
+            end
+          end
+        end
+      end %>
 </section>

@@ -5,30 +5,17 @@
 <%= render "receives_benefits" %>
 
 <% if @legal_aid_application.non_passported? %>
-  <h2 class="govuk-heading-m">
-    <%= t(".income_result_heading") %>
-  </h2>
-
-  <%= render "shared/check_answers/income_result", read_only: true, heading: t(".income_result_heading") %>
+  <%= render "income_result" %>
 
   <% if @legal_aid_application.applicant.state_benefits.any? %>
-    <section class="print-no-break">
-      <%= render "shared/check_answers/benefits_breakdown", partner: false %>
-    </section>
+    <%= render "benefits_breakdown", partner: false %>
   <% end %>
 
   <% if @legal_aid_application.partner&.state_benefits&.any? %>
-    <section class="print-no-break">
-      <%= render "shared/check_answers/benefits_breakdown", partner: true %>
-    </section>
+    <%= render "benefits_breakdown", partner: true %>
   <% end %>
 
-  <section class="print-no-break">
-    <h2 class="govuk-heading-m">
-      <%= t(".income_details_heading") %>
-    </h2>
-    <%= render "shared/means_report/income_details", heading: t(".income_details_heading") %>
-  </section>
+  <%= render "income_details" %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.applicant.extra_employment_information? %>
@@ -54,12 +41,7 @@
     <% end %>
   </section>
 
-  <section class="print-no-break">
-    <h2 class="govuk-heading-l"><%= t(".outgoings-and-deductions-section-heading") %></h2>
-    <%= render "shared/means_report/outgoings_and_deductions_details", heading: t(".outgoings-and-deductions-section-heading") %>
-  </section>
-
-  <div class="govuk-!-padding-bottom-8"></div>
+  <%= render "outgoings_and_deductions_details" %>
 
   <% individual_text = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
                          "your client or their partner"
@@ -67,63 +49,24 @@
                          "your client"
                        end %>
   <section class="print-no-break">
-    <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
+    <h2 class="govuk-heading-m"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
     <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true, means_report: true %>
   </section>
 
   <%= render "caseworker_review" %>
 <% end %>
 
-<section class="print-no-break">
-  <h2 class="govuk-heading-m">
-    <%= t(".capital_result_heading") %>
-  </h2>
+<%= render "capital_result" %>
 
-  <%= render "shared/check_answers/capital_result", heading: t(".capital_result_heading") %>
-</section>
-
-<h2 class="govuk-heading-m">
-  <%= t(".assets_heading") %>
-</h2>
+<h2 class="govuk-heading-m"><%= t(".assets_heading") %></h2>
 <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 <%= render "shared/check_answers/assets", means_report: true, read_only: true, individual: %>
 
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
     <div class="govuk-!-padding-bottom-8"></div>
-
     <%= render "caseworker_review" %>
 <% end %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>
-  <section class="print-no-break">
-    <h3 class="govuk-heading-m"><%= t(".bank_statement_heading") %></h3>
-
-    <% has_partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-    <%= govuk_summary_list(card: { title: t(".bank_statement_heading") }, actions: false) do |summary_list| %>
-      <% if @legal_aid_application.client_uploading_bank_statements? %>
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_client" }) do |row| %>
-          <%= row.with_key(text: has_partner ? t(".bank_statement_question_with_partner") : t(".bank_statement_question"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value do %>
-            <ul class="govuk-list">
-              <% attachments_with_size(@legal_aid_application.attachments.bank_statement_evidence).each do |answer| %>
-                <li><%= answer %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      <% end %>
-      <% if has_partner && @legal_aid_application.partner_uploading_bank_statements? %>
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_partner" }) do |row| %>
-          <%= row.with_key(text: t(".partner_bank_statement_question"), classes: "govuk-!-width-one-half") %>
-          <%= row.with_value do %>
-            <ul class="govuk-list">
-              <% attachments_with_size(@legal_aid_application.attachments.part_bank_state_evidence).each do |answer| %>
-                <li><%= answer %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </section>
+  <%= render "uploaded_bank_statements" %>
 <% end %>

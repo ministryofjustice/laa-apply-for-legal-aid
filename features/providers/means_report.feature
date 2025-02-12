@@ -177,6 +177,10 @@ Feature: Means report
       | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
       | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
 
+    And the client Bank statements questions and answers should match:
+      | question | answer |
+      | Uploaded bank statements | original_filename.pdf (15.7 KB) |
+
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed a non-passported application with truelayer
     When I view the means report

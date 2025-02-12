@@ -168,11 +168,11 @@ When("I view the means report") do
 end
 
 Then("the Client details questions should exist:") do |table|
-  expect_questions_in(selector: "#client-details-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__client_details__summary", expected: table)
 end
 
 Then("the Client questions and answers should match:") do |table|
-  expect_regex_match_for_questions_and_answers(actual_selector: "#client-details-questions", expected_table: table)
+  expect_regex_match_for_questions_and_answers(actual_selector: "#app-check-your-answers__client_details__summary", expected_table: table)
 end
 
 Then("the Proceeding eligibility questions should exist:") do |table|
@@ -184,39 +184,19 @@ Then("the Passported means question and answer should match:") do |table|
 end
 
 Then("the Income result questions should exist:") do |table|
-  expect_questions_in(selector: "#income-result-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__income_result__summary", expected: table)
 end
 
 Then("the Income questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#income-details-questions", expected_table: table)
-end
-
-Then("the Deductions questions should exist:") do |table|
-  expect_questions_in(selector: "#deductions-details-questions", expected: table)
-end
-
-Then("the Deductions questions should not exist:") do |table|
-  expect_questions_in(selector: "#deductions-details-questions", expected: table, negate: true)
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__income_details__summary", expected_table: table)
 end
 
 Then("the Capital result questions should exist:") do |table|
-  expect_questions_in(selector: "#capital-result-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__capital_result__summary", expected: table)
 end
 
 Then("the Outgoings and deductions questions and answers should match:") do |table|
-  expect_matching_questions_and_answers(actual_selector: "#outgoings-and-deductions-details-questions", expected_table: table)
-end
-
-Then("the Declared income categories questions should exist:") do |table|
-  expect_questions_in(selector: "#income-category-questions", expected: table)
-end
-
-Then("the Declared cash income questions should exist:") do |table|
-  expect_questions_in(selector: "#income-cash-payments-questions", expected: table)
-end
-
-Then("the Student finance questions should exist:") do |table|
-  expect_questions_in(selector: "#student-finance-questions", expected: table)
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__outgoings_and_deductions_details__summary", expected_table: table)
 end
 
 Then("the Dependants questions should exist:") do |table|
@@ -236,11 +216,11 @@ Then("the Declared cash outgoings questions should exist:") do |table|
 end
 
 Then("the Employment income result questions should exist:") do |table|
-  expect_questions_in(selector: "#income-result-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__income_result__summary", expected: table)
 end
 
 Then("the Employment income result questions should not exist:") do |table|
-  expect_questions_in(selector: "#income-result-questions", expected: table, negate: true)
+  expect_questions_in(selector: "#app-check-your-answers__income_result__summary", expected: table, negate: true)
 end
 
 Then("the {string} employment notes questions should exist:") do |individual, table|
@@ -252,11 +232,11 @@ Then("the Employment income questions should exist:") do |table|
 end
 
 Then("the Caseworker review questions should exist:") do |table|
-  expect_questions_in(selector: "#caseworker-review-questions", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__caseworker_review__summary", expected: table)
 end
 
 Then("the Caseworker review section should contain:") do |table|
-  expect_questions_and_answers_in(selector: "#caseworker-review-questions", expected: table)
+  expect_questions_and_answers_in(selector: "#app-check-your-answers__caseworker_review__summary", expected: table)
 end
 
 Then("the Property question should exist:") do |table|
@@ -317,6 +297,6 @@ Then("the Capital disregards questions and answers should match:") do |table|
   expect_matching_questions_and_answers(actual_selector: "#capital-disregards-questions", expected_table: table)
 end
 
-Then("the \"Bank statements\" questions should exist:") do |table|
-  expect_questions_in(selector: "#app-check-your-answers__bank_statements", expected: table)
+Then("the client Bank statements questions and answers should match:") do |table|
+  expect_matching_questions_and_answers(actual_selector: "#app-check-your-answers__bank_statements_client__summary", expected_table: table)
 end

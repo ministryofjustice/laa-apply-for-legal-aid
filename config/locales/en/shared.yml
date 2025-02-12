@@ -262,47 +262,6 @@ en:
         - War Widow(er) Pension
         - Windrush Compensation Scheme Payments
 
-    means_report:
-      income_details:
-        total_income: Total income
-        client:
-          benefits: Client benefits, charitable or government payments
-          employment: Client gross employment income
-          fixed_employment_deduction: Client fixed employment deduction
-          family_help: Client financial help from friends or family
-          income_tax: Client income tax
-          maintenance_in: Client maintenance payments
-          national_insurance: Client national insurance
-          property_or_lodger: Client income from property or lodger
-          student_loan: Client student loan or grant
-          pension: Client pension
-        partner:
-          benefits: Partner benefits, charitable or government payments
-          employment: Partner gross employment income
-          fixed_employment_deduction: Partner fixed employment deduction
-          family_help: Partner financial help from friends or family
-          income_tax: Partner income tax
-          maintenance_in: Partner maintenance payments
-          national_insurance: Partner national insurance
-          property_or_lodger: Partner income from property or lodger
-          student_loan: Partner student loan or grant
-          pension: Partner pension
-      outgoings_and_deductions_details:
-        total_outgoings_and_deductions: Total outgoings and deductions
-        client:
-          housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Client childcare payments
-          maintenance_out: Client maintenance payments to a former partner
-          legal_aid: Client payments towards legal aid in a criminal case
-          dependants_allowance: Dependants allowance
-          partner_allowance: Partner allowance
-        partner:
-          housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Partner childcare payments
-          maintenance_out: Partner maintenance payments to a former partner
-          legal_aid: Partner payments towards legal aid in a criminal case
-        dependants_allowance: Dependants allowance
-        partner_allowance: Partner allowance
     check_answers:
       capital_disregard_details:
         mandatory:
@@ -365,11 +324,6 @@ en:
       bank_statements:
         section_heading: Bank statements
         bank_statement_question: Uploaded bank statements
-      capital_result:
-        contribution: Capital contribution
-        lower_limit_label: Capital lower limit
-        upper_limit_label: Capital upper limit
-        total: Total capital assessed
       client_details:
         heading: Client details
         previous_application_reference: Previous application reference
@@ -476,13 +430,6 @@ en:
         benefit_heading: "Benefits, charitable or government payment %{index}"
         type: Benefit type
         amount: Benefit amount
-      income_result:
-        total_disposable_income: Total disposable income assessed
-        total_gross_income: Total gross income assessed
-        gross_income_limit: Gross income limit
-        disposable_income_lower_limit: Disposable income lower limit
-        disposable_income_upper_limit: Disposable income upper limit
-        disposable_income_contribution: Income contribution
       merits: &merits
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
@@ -705,12 +652,6 @@ en:
             client: My client
             partner: The partner
             client_and_partner: My client and their partner
-      benefits_breakdown:
-        heading: Benefits breakdown
-        client:
-          heading: Client benefits breakdown
-        partner:
-          heading: Partner benefits breakdown
     forms:
       applicant_form:
         page_title: Enter your client's details

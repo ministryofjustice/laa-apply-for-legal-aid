@@ -1,9 +1,9 @@
 Then("the \"Client details\" check your answers section should contain:") do |table|
-  expect_questions_and_answers_in(selector: "#client-details-questions", expected: table)
+  expect_questions_and_answers_in(selector: "#app-check-your-answers__client_details__summary", expected: table)
 end
 
 Then("the \"Client details\" check your answers section should not contain:") do |table|
-  expect_questions_in(selector: "#client-details-questions", expected: table, negate: true)
+  expect_questions_in(selector: "#app-check-your-answers__client_details__summary", expected: table, negate: true)
 end
 
 Then("the \"Partner details\" check your answers section should contain:") do |table|

@@ -95,24 +95,7 @@ cy:
           income.
         - You still need to provide details of the case before we can decide if they’re
           eligible.
-    means_report:
-      income_details:
-        total_income: emocni latoT
-        client:
-          benefits: stifeneB
-          family_help: ylimaf ro sdneirf morf pleh laicnaniF
-          maintenance_in: stnemyap ecnanetniaM
-          property_or_lodger: regdol ro ytreporp morf emocnI
-          student_loan: tnarg ro naol tnedutS
-          pension: noisneP
-      outgoings_and_deductions_details:
-        total_outgoings_and_deductions: snoitcuded dna sgnitugo latoT
-        client:
-          housing: stnemyap gnisuoH
-          childcare: stnemyap eracdlihC
-          maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
-          legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-          dependants_allowance: ecnawolla stnadnepeD
+
     check_answers:
       assets:
         assets:
@@ -132,11 +115,6 @@ cy:
           shared_ownership: "?esle enoyna htiw emoh rieht nwo tneilc ruoy seoD"
       bank_transaction_table:
         total: latot %{text}
-      capital_result:
-        contribution: noitubirtnoc latipaC
-        lower_limit_label: timil rewol latipaC
-        upper_limit_label: timil reppu latipaC
-        total: dessessa latipac latoT
       client_details:
         address: sserdda ecnednopserroC
         employment_status: sutats tnemyolpmE
@@ -148,13 +126,6 @@ cy:
         first_name: eman tsriF
         last_name: eman tsaL
         nino: rebmun ecnarusnI lanoitaN
-      income_result:
-        total_disposable_income: dessessa emocni elbasopsid latoT
-        total_gross_income: dessessa emocni ssorg latoT
-        gross_income_limit: timil emocni ssorG
-        disposable_income_lower_limit: timil rewol emocni elbasopsiD
-        disposable_income_upper_limit: timil reppu emocni elbasopsiD
-        disposable_income_contribution: noitubirtnoc emocnI
       merits:
         complete-application-heading: noitacilppa eht etelpmoC
         complete-application-text: ".tcerroc era gnidivorp era uoy sliated eht ,egdelwonk
