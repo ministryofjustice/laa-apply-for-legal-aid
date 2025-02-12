@@ -71,7 +71,7 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
       end
 
       it "raises the expected error" do
-        expect { call }.to raise_error(JSON::ParserError, "unexpected token at 'Boom!'")
+        expect { call }.to raise_error(JSON::ParserError, "unexpected character: 'Boom!'")
       end
     end
   end
