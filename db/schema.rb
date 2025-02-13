@@ -152,6 +152,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_17_104841) do
     t.boolean "shared_benefit_with_partner"
     t.boolean "applied_previously"
     t.string "previous_reference"
+    t.string "relationship_to_children"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
