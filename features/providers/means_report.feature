@@ -178,6 +178,8 @@ Feature: Means report
       | question | answer |
       | Uploaded bank statements | original_filename.pdf (15.7 KB) |
 
+    And I should not see any change links
+
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed a non-passported application with truelayer
     When I view the means report
@@ -360,6 +362,8 @@ Feature: Means report
       | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
       | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
 
+    And I should not see any change links
+
   Scenario: For a passported journey
     Given I have completed a passported application
     When I view the means report
@@ -404,6 +408,8 @@ Feature: Means report
       | question | answer |
       | In receipt of passporting benefit | Yes |
 
+    And I should not see any change links
+
   Scenario: For a non means tested journey
     Given I have completed a non means tested application
     When I view the means report
@@ -435,7 +441,9 @@ Feature: Means report
       | h3  | Bank statements |
       | h3  | Your client's accounts|
 
-   And the "Client details" check your answers section should contain:
-    | question | answer |
-    | Age at computation date | 17 years old |
-    | Was the client means-tested? | No |
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Age at computation date | 17 years old |
+      | Was the client means-tested? | No |
+
+    And I should not see any change links

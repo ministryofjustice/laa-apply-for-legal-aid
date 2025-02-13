@@ -51,6 +51,8 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
 
+    And I should not see any change links
+
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed truelayer application with merits
     When I view the review and print your application page
@@ -109,12 +111,14 @@ Feature: Review and print your application
     And I should see "Childcare payments"
     And I should see "Maintenance payments to a former partner"
     And I should see "Payments towards legal aid in a criminal case"
+    And I should not see any change links
 
   Scenario: For a non-passported truelayer bank transactions journey without student finance
     Given I have completed truelayer application with merits and no student finance
     When I view the review and print your application page
     Then I should not see "Amount of student finance"
     And the answer for 'applicant student finance question' should be 'No'
+    And I should not see any change links
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits
@@ -177,6 +181,8 @@ Feature: Review and print your application
     And I should see 'Print the application and get your client to sign the declaration.'
     And I should not see 'Print the application and get the person acting for'
 
+    And I should not see any change links
+
   Scenario: For a non-means tested journey
     Given I have completed a non-means tested journey with merits
     When I view the review and print your application page
@@ -199,6 +205,8 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h2  | Your client's capital |
 
+    And I should not see any change links
+
   Scenario: For a backdated SCA journey
     Given I have completed a backdated special children act journey
     When I view the review and print your application page
@@ -220,3 +228,5 @@ Feature: Review and print your application
     And the following sections should not exist:
       | tag | section |
       | h2  | Emergency cost limit |
+
+    And I should not see any change links

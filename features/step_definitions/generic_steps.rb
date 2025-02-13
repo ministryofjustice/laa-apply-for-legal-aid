@@ -76,6 +76,10 @@ Given("I insert cassette {string}") do |string|
   VCR.insert_cassette(string, record: :once, allow_playback_repeats: true)
 end
 
+Then("I should not see any change links") do
+  expect(page).to have_no_link("Change")
+end
+
 def expect_questions_in(expected:, selector:, negate: false)
   within(selector) do
     expected.hashes.each do |row|

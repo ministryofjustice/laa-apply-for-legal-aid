@@ -111,3 +111,5 @@ Feature: Merits report
       | question | answer |
       | File names | Fake file name 1 (15.7 KB) |
       | Statement | Statement of case text entered here |
+
+    And I should not see any change links

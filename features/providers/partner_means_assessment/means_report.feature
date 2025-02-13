@@ -190,3 +190,5 @@ Feature: Means report when partner is present
       | question | answer |
       | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
       | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
+
+    And I should not see any change links
