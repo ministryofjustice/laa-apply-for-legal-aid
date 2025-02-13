@@ -274,7 +274,7 @@ Then("the \"Bank accounts\", for open banking accounts, questions and answers ta
 end
 
 Then("the \"Your client's accounts\" questions should exist:") do |table|
-  expect_questions_in(selector: "[data-test=\"offline-savings-accounts\"]", expected: table)
+  expect_questions_in(selector: "#app-check-your-answers__offline_savings_accounts", expected: table)
 end
 
 Then("the \"Which savings or investments does your client have?\" questions should exist:") do |table|
