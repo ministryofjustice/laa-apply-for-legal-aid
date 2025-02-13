@@ -2,18 +2,6 @@
 
 #print-logo {
   display: none;
-  padding-bottom: 12mm;
-  font-family: sans-serif;
-  font-size: 8.45mm;
-  font-weight: 700;
-  line-height: 16mm;
-
-  img {
-    display: inline;
-    position: relative;
-    top: .2em;
-    height: 10mm;
-  }
 }
 
 @media print {
@@ -46,7 +34,7 @@
   }
 
   #print-logo {
-    display: inline;
+    display: inline-block;
   }
 
   .govuk-grid-column-two-thirds {
