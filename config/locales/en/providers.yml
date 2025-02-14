@@ -567,6 +567,31 @@ en:
         show: &remove_show
           page_title: Are you sure you want to remove %{name} from the application?
           error: Select yes if you want to remove %{name} from the application.
+      client_is_biological_parent:
+        show:
+          page_title: Is your client the biological parent of any children involved?
+      client_is_child_subject:
+        show:
+          page_title: Is your client a child subject of this proceeding?
+      client_has_parental_responsibilities:
+        show:
+          page_title: Does your client have parental responsibility for any children involved?
+          paragraph: You'll need to upload supporting evidence later if they do.
+          choice_one: Yes, under a court order
+          choice_two: Yes, they have a parental responsibility agreement
+          choice_three: No, they do not have parental responsibility
+      client_check_parental_answers:
+        show:
+          page_title: Check who your client is
+          paragraph: You must answer 'yes' to one of these questions. Check your answers and change the one that is wrong.
+      relationship_to_children:
+        biological_parent:
+          error: Select yes if your client is the biological parent of any children involved
+        parental_responsibilities:
+          error: Select if your client has parental responsibility for any children involved
+        child_subject:
+          error:
+            Select yes if your client is a child subject of the proceeding
       remove_opponent:
         show: *remove_show
       date_client_told_incidents:
@@ -1452,6 +1477,8 @@ en:
         second_appeal: The second appeal
         court_order_copy: The court order
         matter_opposed: If the matter is opposed
+        client_relationship_to_children: Who your client is in this application
+        client_relationship_to_proceeding: Who your client is in this application
         # Proceeding level tasks
         chances_of_success_html: <span class="govuk-visually-hidden">%{proceeding} </span>Chances of success
         children_proceeding_html: <span class="govuk-visually-hidden">%{proceeding} </span>Children involved in this proceeding
@@ -1488,6 +1515,8 @@ en:
           nature_of_urgency: nature_of_urgencies
           vary_order: vary_order
           opponents_application: opponents_application
+          client_relationship_to_children: client_is_biological_parent
+          client_check_parental_answer: client_check_parental_answer
           client_relationship_to_proceeding: is_client_biological_parent
           check_who_client_is: check_who_client_is
           second_appeal: second_appeal

@@ -1,0 +1,21 @@
+<%= summary_list.with_row do |row|
+      row.with_key(text: t("shared.check_answers.relationship_to_children.biological_parent"), classes: "govuk-!-width-#{first_column_width}")
+      row.with_value(text: yes_no(relationship_to_children.eql?("biological")))
+      row.with_action(text: t("generic.change"), href: providers_legal_aid_application_is_client_biological_parent_path(@legal_aid_application), visually_hidden_text: t("shared.check_answers.relationship_to_children.biological_parent"))
+    end
+
+    unless relationship_to_children.eql?("biological")
+      summary_list.with_row do |row|
+        row.with_key(text: t("shared.check_answers.relationship_to_children.parental_responsibilities"))
+        row.with_value(text: relationship_to_children.nil? || relationship_to_children.eql?("child_subject") ? t("generic.no") : t("shared.check_answers.relationship_to_children.#{relationship_to_children}"))
+        row.with_action(text: t("generic.change"), href: providers_legal_aid_application_does_client_have_parental_responsibility_path(@legal_aid_application), visually_hidden_text: t("shared.check_answers.relationship_to_children.parental_responsibilities"))
+      end
+
+      if relationship_to_children.eql?("child_subject") || relationship_to_children.nil?
+        summary_list.with_row do |row|
+          row.with_key(text: t("shared.check_answers.relationship_to_children.child_subject"))
+          row.with_value(text: yes_no(relationship_to_children.eql?("child_subject")))
+          row.with_action(text: t("generic.change"), href: providers_legal_aid_application_is_client_child_subject_path(@legal_aid_application), visually_hidden_text: t("shared.check_answers.relationship_to_children.child_subject"))
+        end
+      end
+    end %>
