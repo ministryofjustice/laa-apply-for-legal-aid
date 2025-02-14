@@ -550,6 +550,7 @@ en:
         parental_responsibilities: Client has parental responsibility for any child involved?
         parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       relationship_to_children:
+        heading: Who your client is in the proceeding
         biological_parent: Client is the biological parent of any child involved?
         child_subject: Client is a child subject of this proceeding?
         court_order: Yes, under a court order

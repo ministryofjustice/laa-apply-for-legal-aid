@@ -30,6 +30,8 @@
 
 <%= render("shared/check_answers/merits/statement_of_case", read_only:, statement_of_case:) unless @legal_aid_application.special_children_act_proceedings? %>
 
+<%= render("shared/check_answers/relationship_to_children", read_only:, relationship_to_children: @legal_aid_application.applicant.relationship_to_children, first_column_width: "one-third") if @legal_aid_application.applicant.relationship_to_children? %>
+
 <% @legal_aid_application.proceedings.each do |proceeding| %>
   <% next if merits_task_list_empty_for?(@legal_aid_application, proceeding) %>
 
