@@ -6,7 +6,7 @@ RSpec.describe SecureApplicationFinder do
     create(
       :citizen_access_token,
       legal_aid_application:,
-      expires_on: Date.new(2025, 2, 14),
+      expires_on: Time.zone.today + 2.years,
     )
   end
 
