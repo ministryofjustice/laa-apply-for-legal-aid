@@ -1,0 +1,20 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_client_is_child_subject_path,
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
+    <% options = [
+         [:child_subject, t("generic.yes")],
+         [false, t("generic.no")],
+       ] %>
+
+    <%= form.govuk_collection_radio_buttons :relationship_to_children,
+                                            options,
+                                            :first,
+                                            :second,
+                                            hint: { text: "" },
+                                            legend: { text: page_title, tag: "h1", size: "xl" } %>
+
+    <%= next_action_buttons show_draft: true, form: %>
+  <% end %>
+<% end %>

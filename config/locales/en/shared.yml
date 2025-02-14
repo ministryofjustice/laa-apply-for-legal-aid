@@ -545,6 +545,12 @@ en:
         court_order: Yes, under a court order
         parental_responsibilities: Client has parental responsibility for any child involved?
         parental_responsibility_agreement: Yes, they have a parental responsibility agreement
+      relationship_to_children:
+        biological_parent: Client is the biological parent of any child involved?
+        child_subject: Client is a child subject of this proceeding?
+        court_order: Yes, under a court order
+        parental_responsibilities: Client has parental responsibility for any child involved?
+        parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       full_employment_details:
         employment: Employment income
         details: "Anything else about %{individual_with_determiner}'s employment"
