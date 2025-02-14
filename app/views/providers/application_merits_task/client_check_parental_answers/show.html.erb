@@ -1,0 +1,19 @@
+<% page_title = t(".page_title") %>
+
+<%= page_template page_title:, template: :basic do %>
+
+  <h1 class="govuk-heading-xl"><%= page_title %></h1>
+  <% if @relationship_to_children.nil? %>
+    <p class="govuk-body"><%= t(".paragraph") %></p>
+  <% end %>
+
+  <%= render("shared/check_answers/relationship_to_children", read_only: false, relationship_to_children: @relationship_to_children, first_column_width: "one-half") %>
+
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_client_check_parental_answer_path(@legal_aid_application),
+        method: :patch,
+        show_continue: !@relationship_to_children.nil?,
+        show_draft: true,
+      ) %>
+
+<% end %>
