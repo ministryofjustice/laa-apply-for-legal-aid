@@ -28,12 +28,18 @@ Feature: Review and print your application
       | h3  | Housing benefit |
       | h2  | Your client's capital |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h3  | Your client's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Payments from scheme or charities |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -44,6 +50,8 @@ Feature: Review and print your application
       | h2  | Income, regular payments and assets |
       | h3  | Income |
       | h3  | Regular payments |
+
+    And I should not see any change links
 
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed truelayer application with merits
@@ -61,13 +69,18 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h3  | Student finance |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
       | h3  | Your client's accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Payments from scheme or charities |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -98,12 +111,14 @@ Feature: Review and print your application
     And I should see "Childcare payments"
     And I should see "Maintenance payments to a former partner"
     And I should see "Payments towards legal aid in a criminal case"
+    And I should not see any change links
 
   Scenario: For a non-passported truelayer bank transactions journey without student finance
     Given I have completed truelayer application with merits and no student finance
     When I view the review and print your application page
     Then I should not see "Amount of student finance"
     And the answer for 'applicant student finance question' should be 'No'
+    And I should not see any change links
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits
@@ -120,12 +135,18 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Payments from scheme or charities |
+      | h3  | Your client's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
+      | h3  | One-off payments your client received |
+      | h3  | Payments from scheme or charities |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -160,6 +181,8 @@ Feature: Review and print your application
     And I should see 'Print the application and get your client to sign the declaration.'
     And I should not see 'Print the application and get the person acting for'
 
+    And I should not see any change links
+
   Scenario: For a non-means tested journey
     Given I have completed a non-means tested journey with merits
     When I view the review and print your application page
@@ -182,6 +205,8 @@ Feature: Review and print your application
       | h3  | Regular payments |
       | h2  | Your client's capital |
 
+    And I should not see any change links
+
   Scenario: For a backdated SCA journey
     Given I have completed a backdated special children act journey
     When I view the review and print your application page
@@ -203,3 +228,5 @@ Feature: Review and print your application
     And the following sections should not exist:
       | tag | section |
       | h2  | Emergency cost limit |
+
+    And I should not see any change links

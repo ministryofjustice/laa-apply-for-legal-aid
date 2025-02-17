@@ -33,13 +33,21 @@ Feature: Review and print your application
       | h3  | Housing benefit |
       | h2  | Your client and their partner's capital |
       | h3  | Property |
-      | h3  | Your client's and their partner's property |
-      | h3  | Vehicles |
+      | h3  | Your client and their partner's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does either your client or their partner have? |
-      | h2  | Which assets does either your client or their partner have? |
-      | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | One-off payments your client or their partner received |
+      | h3  | Your client's accounts |
+      | h3  | The partner's accounts |
+      | h3  | Joint accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
+      | h3  | One-off payments your client or their partner received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -74,14 +82,20 @@ Feature: Review and print your application
       | h3  | Payments the partner pays |
       | h3  | Payments the partner pays in cash|
       | h3  | Property |
-      | h3  | Your client's and their partner's property |
-      | h3  | Vehicles |
+      | h3  | Your client and their partner's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
       | h3  | Your client's accounts |
-      | h2  | Which savings or investments does either your client or their partner have? |
-      | h2  | Which assets does either your client or their partner have? |
-      | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | One-off payments your client or their partner received |
+      | h3  | The partner's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
+      | h3  | One-off payments your client or their partner received |
+      | h3  | Disregarded payment 1 |
+      | h3  | Payment to be reviewed 1 |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |
@@ -112,13 +126,19 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
       | h3  | Property |
-      | h3  | Your client's and their partner's property |
-      | h3  | Vehicles |
+      | h3  | Your client and their partner's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does either your client or their partner have? |
-      | h2  | Which assets does either your client or their partner have? |
-      | h2  | Restrictions on your client's or their partner's assets |
-      | h2  | One-off payments your client or their partner received |
+      | h3  | Your client's accounts |
+      | h3  | The partner's accounts |
+      | h3  | Joint accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
+      | h3  | One-off payments your client or their partner received |
       | h2  | Case details |
       | h3  | Latest incident details |
       | h3  | Opponents |

@@ -75,8 +75,8 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       it "does not display other vehicle questions" do
         expect(response.body).not_to include("What is the estimated value of the vehicle?")
         expect(response.body).not_to include("Are there any payments left on the vehicle?")
-        expect(response.body).not_to include("The vehicle was bought more than three years ago?")
-        expect(response.body).not_to include("Is the vehicle in regular use?")
+        expect(response.body).not_to include("Vehicle was bought over 3 years ago?")
+        expect(response.body).not_to include("Vehicle is in regular use?")
       end
     end
 
@@ -96,7 +96,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       context "and they have offline bank_accounts" do
         it "shows the partner bank values" do
           expect(page).to have_css("#app-check-your-answers__partner_offline_savings_accounts",
-                                   text: "Partner's savings accounts")
+                                   text: "Savings account")
         end
       end
     end

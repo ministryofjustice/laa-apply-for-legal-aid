@@ -1000,6 +1000,7 @@ en:
             payment_remaining:
               blank: Enter the amount left to pay
               not_a_number: The amount left to pay must be an amount of money, like 5,000
+              greater_than: Enter a number greater than 0
               greater_than_or_equal_to: The amount left to pay must be 0 or more
               too_many_decimals: The amount left to pay must not include more than 2 decimal numbers
             payments_remain:
