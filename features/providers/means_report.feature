@@ -166,7 +166,7 @@ Feature: Means report
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is your client banned from selling or borrowing against their assets? |
+      | Client is banned from selling or borrowing against assets? |
       | Details of restrictions |
 
     And the Capital disregards questions and answers should match:
@@ -354,7 +354,7 @@ Feature: Means report
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is your client banned from selling or borrowing against their assets? |
+      | Client is banned from selling or borrowing against assets? |
       | Details of restrictions |
 
     And the Capital disregards questions and answers should match:

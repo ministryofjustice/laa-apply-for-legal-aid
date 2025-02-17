@@ -638,7 +638,7 @@ en:
         providers:
           heading: Restrictions on your client's assets
           heading_with_partner: Restrictions on your client or their partner's assets
-          question: Is your client banned from selling or borrowing against their assets?
+          question: Client is banned from selling or borrowing against assets?
           question_with_partner: Client or their partner is prohibited from selling or borrowing against their assets?
       vehicles:
         providers:
