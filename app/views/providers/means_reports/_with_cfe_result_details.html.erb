@@ -58,15 +58,17 @@
 
 <%= render "capital_result" %>
 
-<h2 class="govuk-heading-m"><%= t(".assets_heading") %></h2>
-<% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-<%= render "shared/check_answers/assets", means_report: true, read_only: true, individual: %>
+<section class="print-no-break">
+  <h2 class="govuk-heading-m"><%= t(".assets_heading") %></h2>
+  <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+  <%= render "shared/check_answers/assets", means_report: true, read_only: true, individual: %>
 
-<% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
-    <div class="govuk-!-padding-bottom-8"></div>
-    <%= render "caseworker_review" %>
-<% end %>
+  <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
+      <div class="govuk-!-padding-bottom-8"></div>
+      <%= render "caseworker_review" %>
+  <% end %>
 
-<% if @legal_aid_application.uploading_bank_statements? %>
-  <%= render "uploaded_bank_statements" %>
-<% end %>
+  <% if @legal_aid_application.uploading_bank_statements? %>
+    <%= render "uploaded_bank_statements" %>
+  <% end %>
+<section class="print-no-break">

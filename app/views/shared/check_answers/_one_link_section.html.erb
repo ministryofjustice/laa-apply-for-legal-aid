@@ -13,28 +13,29 @@
   <% end %>
 </div>
 
-<%= govuk_summary_list(
-      card: { title: question },
-      actions: !read_only,
-      html_attributes: { id: "app-check-your-answers__#{name}_items" },
-    ) do |summary_list| %>
-  <% if answer_hash.present? %>
-    <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
-      <% name = item.name || "#{name}_#{index}" %>
+  <%= govuk_summary_list(
+        card: { title: question },
+        actions: !read_only,
+        html_attributes: { id: "app-check-your-answers__#{name}_items" },
+      ) do |summary_list| %>
+    <% if answer_hash.present? %>
+      <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
+        <% name = item.name || "#{name}_#{index}" %>
+        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
+          <%= row.with_key(text: item.label, classes: "govuk-!-width-one-half") %>
+          <%= row.with_value { safe_yes_or_no(item.amount_text) } %>
+        <% end %>
+      <% end %>
+    <% else %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
-        <%= row.with_key(text: item.label, classes: "govuk-!-width-one-half") %>
-        <%= row.with_value { safe_yes_or_no(item.amount_text) } %>
+        <%= row.with_key(text: question, classes: "govuk-!-width-one-half") %>
+        <%= row.with_value { t("generic.none_declared") } %>
+        <%= row.with_action(
+              text: t("generic.change"),
+              href: url,
+              visually_hidden_text: question,
+            ) %>
       <% end %>
     <% end %>
-  <% else %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{name}" }) do |row| %>
-      <%= row.with_key(text: question, classes: "govuk-!-width-one-half") %>
-      <%= row.with_value { t("generic.none_declared") } %>
-      <%= row.with_action(
-            text: t("generic.change"),
-            href: url,
-            visually_hidden_text: question,
-          ) %>
-    <% end %>
   <% end %>
-<% end %>
+</section>

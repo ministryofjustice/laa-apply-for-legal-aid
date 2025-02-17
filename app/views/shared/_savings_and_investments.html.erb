@@ -1,45 +1,47 @@
-<% if @cfe_result.liquid_capital_items.any? %>
-  <h2 class="govuk-heading-m"><%= t(".savings_and_investments") %></h2>
+<section class="print-no-break">
+  <% if @cfe_result.liquid_capital_items.any? %>
+    <h2 class="govuk-heading-m"><%= t(".savings_and_investments") %></h2>
 
-  <%= govuk_table do |table|
-        table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
+    <%= govuk_table do |table|
+          table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
 
-        table.with_head do |head|
-          head.with_row do |row|
-            row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".savings_and_investments_type"))
-            row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
-          end
-        end
-
-        if @cfe_result.version_6?
-          table.with_body do |body|
-            body.with_row do |row|
-              row.with_cell(header: true, text: t(".current_accounts"))
-              row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.current_accounts))
-            end
-            body.with_row do |row|
-              row.with_cell(header: true, text: t(".savings_accounts"))
-              row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.savings_accounts))
+          table.with_head do |head|
+            head.with_row do |row|
+              row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".savings_and_investments_type"))
+              row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
             end
           end
-        else
-          table.with_body do |body|
-            @cfe_result.liquid_capital_items.each do |item|
-              next unless capital_items_to_display?(@legal_aid_application, item)
 
+          if @cfe_result.version_6?
+            table.with_body do |body|
               body.with_row do |row|
-                row.with_cell(header: true, text: item_description(@legal_aid_application, item))
-                row.with_cell(numeric: true, text: gds_number_to_currency(item[:value]))
+                row.with_cell(header: true, text: t(".current_accounts"))
+                row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.current_accounts))
+              end
+              body.with_row do |row|
+                row.with_cell(header: true, text: t(".savings_accounts"))
+                row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.savings_accounts))
+              end
+            end
+          else
+            table.with_body do |body|
+              @cfe_result.liquid_capital_items.each do |item|
+                next unless capital_items_to_display?(@legal_aid_application, item)
+
+                body.with_row do |row|
+                  row.with_cell(header: true, text: item_description(@legal_aid_application, item))
+                  row.with_cell(numeric: true, text: gds_number_to_currency(item[:value]))
+                end
+              end
+            end
+
+            table.with_foot do |foot|
+              foot.with_row do |row|
+                row.with_cell(header: true, text: t(".assessed_amount"))
+                row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_savings))
               end
             end
           end
-
-          table.with_foot do |foot|
-            foot.with_row do |row|
-              row.with_cell(header: true, text: t(".assessed_amount"))
-              row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_savings))
-            end
-          end
-        end
-      end %>
-<% end %>
+        end %>
+  <% end %>
+</section>
