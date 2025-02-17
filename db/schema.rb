@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_17_104841) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_17_105318) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -199,6 +199,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_17_104841) do
     t.boolean "child_subject"
     t.boolean "parental_responsibility_evidence"
     t.boolean "autogranted"
+    t.boolean "ecct_routed"
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 

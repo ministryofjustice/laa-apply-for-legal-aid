@@ -20,6 +20,7 @@ class ApplicationDigest < ApplicationRecord
     child_subject
     parental_responsibility_evidence
     autogranted
+    ecct_routed
   ].freeze
 
   class << self
@@ -76,6 +77,7 @@ class ApplicationDigest < ApplicationRecord
         child_subject: laa.child_subject_relationship?,
         parental_responsibility_evidence: laa.parental_responsibility_evidence?,
         autogranted: laa.auto_grant_special_children_act?,
+        ecct_routed: laa.ecct_routing?,
       }
     end
 
