@@ -62,7 +62,7 @@ module Providers
       return if page_history.empty?
 
       temp_page_history = page_history
-      temp_page_history.delete_if { |path| path.include?("check_benefits") }
+      temp_page_history.delete_if { |path| path.include?("check_benefit") }
       page_history_service.write(temp_page_history)
     end
 

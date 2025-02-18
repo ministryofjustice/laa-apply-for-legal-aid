@@ -2,7 +2,7 @@ module Flow
   module Steps
     module ProviderStart
       CheckBenefitsStep = Step.new(
-        path: ->(application) { Steps.urls.providers_legal_aid_application_check_benefits_path(application) },
+        path: ->(application) { Steps.urls.providers_legal_aid_application_check_benefit_path(application) },
         forward: lambda do |application, dwp_override_non_passported|
           if application.applicant_receives_benefit?
             application.change_state_machine_type("PassportedStateMachine")
