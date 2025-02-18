@@ -1,8 +1,13 @@
 FactoryBot.define do
   factory :feedback do
     done_all_needed { Faker::Boolean.boolean }
+    done_all_needed_reason { nil }
     satisfaction { Feedback.satisfactions.keys.sample }
+    satisfaction_reason { Faker::Lorem.paragraph }
     difficulty { Feedback.difficulties.keys.sample }
+    difficulty_reason { Faker::Lorem.paragraph }
+    time_taken_satisfaction { Feedback.time_taken_satisfactions.keys.sample }
+    time_taken_satisfaction_reason { Faker::Lorem.paragraph }
     improvement_suggestion { Faker::Lorem.paragraph }
     os { %w[Linux Windows Mac].sample }
     browser { %w[IE Chrome Safari Firefox Opera].sample }

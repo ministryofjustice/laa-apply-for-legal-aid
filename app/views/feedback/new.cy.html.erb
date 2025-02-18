@@ -1,0 +1,22 @@
+<%= page_template page_title: "[Welsh] Help us improve the Apply for legal aid service", show_errors_for: @feedback, back_link: back_button do %>
+
+  <h2 class="govuk-heading-m">About your answers</h2>
+  <p class="govuk-body">
+    We’ll use your answers to help improve the service. Please do not share personal information in your answers.
+    All information you provide will be treated in confidence and your answers won’t be shared outside The
+    Ministry of Justice.
+  </p>
+
+  <h2 class="govuk-heading-m">About your personal information</h2>
+  <p class="govuk-body">
+    If you want to participate in future research we will ask you for some personal information so that we
+    can contact you. Findings produced from this research will not contain any personal information.
+    You can <%= govuk_link_to("read about how we look after your personal information", "https://docs.google.com/document/d/e/2PACX-1vSry_IGP6aBrhW2m-MbkXpujwjcuO7fnyjRQM0aM6H7TIn8JTA34WU5G7TUqM-1uJ3TDHISg5oOMWpq/pub") %>.
+  </p>
+
+  <p class="govuk-body">
+    If you require helpdesk support please <%= govuk_link_to("contact us", "/contact") %>.
+  </p>
+
+  <%= render partial: "form" %>
+<% end %>

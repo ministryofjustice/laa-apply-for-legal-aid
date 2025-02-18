@@ -1,6 +1,6 @@
 require "super_diff/rspec-rails"
 
-# before and after hooks for feature tests
+# before, after and around hooks for feature tests
 #
 Before("@hmrc_use_dev_mock") do
   allow(Rails.configuration.x).to receive(:hmrc_use_dev_mock).and_return(true)
@@ -19,4 +19,11 @@ Before("not @clamav") do
     .to receive(:capture3)
     .with(/clamdscan/, any_args)
     .and_return([stdout, stderr, status])
+end
+
+Around("@disable-rack-attack") do |_scenario, block|
+  Rack::Attack.reset!
+  Rack::Attack.enabled = false
+  block.call
+  Rack::Attack.enabled = true
 end

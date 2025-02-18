@@ -27,6 +27,11 @@ en:
               blank: Select how easy or difficult it was to apply for legal aid using the new service
             done_all_needed:
               inclusion: Select yes if you were you able to do what you needed today
+            contact_name:
+              blank: Enter a contact name and email or neither
+            contact_email:
+              blank: Enter a contact name and email or neither
+              invalid: Enter a valid email address
         legal_aid_application:
           attributes:
             base:
