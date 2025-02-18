@@ -203,9 +203,8 @@ Rails.application.routes.draw do
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
       resource :previous_references, only: %i[show update]
-      resource :check_benefit, only: %i[index update]
+      resource :check_benefit, only: %i[show update]
       resource :has_national_insurance_number, only: %i[show update]
-      resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :about_financial_means, only: %i[show update]
       resource :open_banking_consents, only: %i[show update], path: "does-client-use-online-banking"

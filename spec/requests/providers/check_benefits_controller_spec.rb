@@ -10,8 +10,8 @@ RSpec.describe Providers::CheckBenefitsController do
   let(:login) { login_as application.provider }
   let(:provider) { create(:provider) }
 
-  describe "GET /providers/applications/:application_id/check_benefits", :vcr do
-    subject(:get_request) { get "/providers/applications/#{application.id}/check_benefits" }
+  describe "GET /providers/applications/:application_id/check_benefit", :vcr do
+    subject(:get_request) { get "/providers/applications/#{application.id}/check_benefit" }
 
     before { login }
 
@@ -206,7 +206,7 @@ RSpec.describe Providers::CheckBenefitsController do
       let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider:) }
 
       it "displays positive DWP result content" do
-        get "/providers/applications/#{application.id}/check_benefits"
+        get "/providers/applications/#{application.id}/check_benefit"
         expect(response.body).to include("DWP records show that your client receives a passporting benefit")
       end
     end

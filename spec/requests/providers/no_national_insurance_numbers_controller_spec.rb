@@ -43,7 +43,7 @@ RSpec.describe Providers::NoNationalInsuranceNumbersController do
 
         it "redirects to check benefits" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_check_benefit_path(application))
         end
       end
     end

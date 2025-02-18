@@ -3,7 +3,7 @@ module Providers
     include ApplicantDetailsCheckable
     include BenefitCheckSkippable
 
-    def index
+    def show
       details_checked! unless details_checked? || legal_aid_application.non_passported?
       @applicant = legal_aid_application.applicant
       return skip_benefit_check_and_go_forward! if known_issue_prevents_benefit_check?
