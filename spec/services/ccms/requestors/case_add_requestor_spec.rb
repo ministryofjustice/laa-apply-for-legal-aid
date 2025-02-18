@@ -516,6 +516,29 @@ module CCMS
               end
             end
           end
+
+          context "and the client is a respondent" do
+            let(:second_appeal) { false }
+            let(:court_type) { "court_of_appeal" }
+
+            before do
+              proceeding.chances_of_success.destroy!
+              proceeding.update!(client_involvement_type_ccms_code: "D",
+                                 client_involvement_type_description: "Defendant or respondent")
+            end
+
+            it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
+              # this merits question is not asked in PLF proceedings where the client is not an Applicant or Joined Party
+              block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
+              expect(block).not_to be_present
+            end
+
+            it "excludes the PROSPECTS_OF_SUCCESS block" do
+              # this merits question is not asked in PLF proceedings where the client is not an Applicant or Joined Party
+              block = XmlExtractor.call(request_xml, :proceeding_merits, "PROSPECTS_OF_SUCCESS")
+              expect(block).not_to be_present
+            end
+          end
         end
       end
     end
