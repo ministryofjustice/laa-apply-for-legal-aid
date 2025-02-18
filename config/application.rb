@@ -23,6 +23,7 @@ module LaaApplyForLegalAid
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
     # If you're upgrading and haven't set `cookies_serializer` previously, your cookie serializer
     # was `:marshal`. Convert all cookies to JSON, using the `:hybrid` formatter.
@@ -155,8 +156,6 @@ module LaaApplyForLegalAid
 
     config.assets.paths << Rails.root.join("node_modules/govuk-frontend/dist/govuk/assets")
     config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")
-
-    # config.eager_load_paths << Rails.root.join("extras")
 
     config.exceptions_app = lambda { |env|
       ErrorsController.action(:show).call(env)
