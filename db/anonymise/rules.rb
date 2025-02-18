@@ -120,8 +120,14 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   employments: {},
   employment_payments: {},
   feedbacks: {
+    done_all_needed_reason: -> { Faker::Lorem.paragraph(sentence_count: 2) },
+    difficulty_reason: -> { Faker::Lorem.paragraph(sentence_count: 2) },
+    satisfaction_reason: -> { Faker::Lorem.paragraph(sentence_count: 2) },
+    time_taken_satisfaction_reason: -> { Faker::Lorem.paragraph(sentence_count: 2) },
     improvement_suggestion: -> { Faker::Lorem.paragraph(sentence_count: 2) },
     email: -> { Faker::Internet.email },
+    contact_email: -> { Faker::Internet.email },
+    contact_name: -> { Faker::Name.name },
   },
   final_hearings: {},
   firms: {

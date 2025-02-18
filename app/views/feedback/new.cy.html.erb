@@ -1,0 +1,42 @@
+<%= page_template page_title: "[Welsh] Help us improve the Apply for legal aid service", show_errors_for: @feedback, back_link: back_button do %>
+
+  <h2 class="govuk-heading-m">About your answers</h2>
+  <p class="govuk-body">
+    We’ll use your answers to help improve the service. Please do not share personal information in your answers.
+    All information you provide will be treated in confidence and your answers won’t be shared outside The
+    Ministry of Justice.
+  </p>
+
+  <h2 class="govuk-heading-m">About your personal information</h2>
+  <p class="govuk-body">
+    If you want to participate in future research we will ask you for some personal information so that we
+    can contact you. Findings produced from this research will not contain any personal information.
+    You can <%= govuk_link_to("read about how we look after your personal information", "https://docs.google.com/document/d/e/2PACX-1vSry_IGP6aBrhW2m-MbkXpujwjcuO7fnyjRQM0aM6H7TIn8JTA34WU5G7TUqM-1uJ3TDHISg5oOMWpq/pub") %>.
+    This survey has been created on SurveyMonkey. <%= govuk_link_to("View the SurveyMonkey privacy notice", "https://www.surveymonkey.com/mp/legal/privacy/") %>.
+  </p>
+
+  <p class="govuk-heading-m">
+    If you require helpdesk support please contact
+  </p>
+
+   <p class="govuk-heading-m">
+    <%= t("contacts.show.case_enquiries.heading") %>
+  </p>
+
+  <p class="govuk-body">
+    <%= t("contacts.show.case_enquiries.phone_number") %>
+  </p>
+
+  <p class="govuk-heading-m">
+    <%= t("contacts.show.technical_support.heading") %>
+  </p>
+
+  <p class="govuk-body">
+    <%= t("contacts.show.technical_support.email_text") %>
+    <a href="mailto:">
+      <%= t("contacts.show.technical_support.email_address") %>
+    </a>
+  </p>
+
+  <%= render partial: "form" %>
+<% end %>

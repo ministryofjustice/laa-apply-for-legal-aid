@@ -15,6 +15,15 @@ class Feedback < ApplicationRecord
     very_easy: 4,
   }
 
+  enum :time_taken_satisfaction, {
+    unable: 0,
+    quick: 1,
+    moderate: 2,
+    neither_too_much_nor_too_little: 3,
+    alot: 4,
+    great_deal: 5,
+  }
+
   validates :satisfaction, :difficulty, presence: true
 
   validates :done_all_needed, inclusion: { in: [true, false] }

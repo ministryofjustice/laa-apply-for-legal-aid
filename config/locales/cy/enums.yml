@@ -14,6 +14,13 @@ cy:
         neither_difficult_nor_easy: tluciffid ron ysae rehtieN
         easy: ysaE
         very_easy: ysae yreV
+      time_taken_satisfaction:
+        great_deal: It was a great deal of time 
+        alot: It was a lot of time
+        neither_too_much_nor_too_little: Neither too much or too little time
+        moderate: It was a  moderate amount of time
+        quick: It was very quick
+        unable: I was unable to use this service
     legal_aid_application:
       state:
         applicant_details_checked: dekcehc srewsnA
