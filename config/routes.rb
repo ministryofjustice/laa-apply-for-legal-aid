@@ -46,7 +46,8 @@ Rails.application.routes.draw do
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
   resources :privacy_policy, only: [:index]
-  resources :feedback, only: %i[new create show]
+  resources :feedback, only: %i[new create]
+  get "/feedback/thanks", to: "feedback#thanks"
   resources :errors, only: [:show], path: :error
   resources :problem, only: :index
 

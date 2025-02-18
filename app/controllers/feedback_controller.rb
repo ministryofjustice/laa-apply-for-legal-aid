@@ -1,10 +1,6 @@
 class FeedbackController < ApplicationController
   before_action :update_return_path, :update_locale
 
-  def show
-    @feedback = Feedback.find(params[:id])
-  end
-
   def new
     @journey = source
     @feedback = Feedback.new
@@ -23,11 +19,13 @@ class FeedbackController < ApplicationController
     @display_close_tab_msg = params["signed_out"].present?
 
     if @feedback.save
-      render :show
+      redirect_to feedback_thanks_path
     else
       render :new
     end
   end
+
+  def thanks; end
 
 private
 
@@ -72,7 +70,17 @@ private
 
   def feedback_params
     params.require(:feedback).permit(
-      :done_all_needed, :satisfaction, :difficulty, :improvement_suggestion
+      :done_all_needed,
+      :done_all_needed_reason,
+      :satisfaction,
+      :satisfaction_reason,
+      :difficulty,
+      :difficulty_reason,
+      :time_taken_satisfaction,
+      :time_taken_satisfaction_reason,
+      :improvement_suggestion,
+      :contact_name,
+      :contact_email,
     ).merge(browser_meta_data)
   end
 

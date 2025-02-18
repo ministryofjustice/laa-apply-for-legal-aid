@@ -1,0 +1,79 @@
+  <%= form_with(model: @feedback, url: feedback_index_path, method: :post, local: true) do |form| %>
+    <% applicant_email_hint = @journey == :citizen ? t(".applicant_email_hint") : "" %>
+
+    <%= form.govuk_radio_buttons_fieldset :done_all_needed, legend: { text: t(".done_all_needed") } do %>
+      <%= form.govuk_radio_button :done_all_needed, true, link_errors: true, label: { text: t("generic.yes") } %>
+      <%= form.govuk_radio_button :done_all_needed, false, label: { text: t("generic.no") } do %>
+        <%= form.govuk_text_area :done_all_needed_reason, label: { text: t(".done_all_needed_reason") }, rows: 3 %>
+      <% end %>
+    <% end %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :difficulty,
+          Feedback.difficulties.keys.reverse,
+          ->(option) { option },
+          ->(option) { t(option, scope: %i[enums feedback difficulty]) },
+          legend: { text: t(".difficulty") },
+        ) %>
+
+    <%= form.govuk_text_area(
+          :difficulty_reason,
+          label: { hidden: true },
+          hint: { text: t(".difficulty_reason") },
+          rows: 3,
+          width: "full",
+        ) %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :time_taken_satisfaction,
+          Feedback.time_taken_satisfactions.keys.reverse,
+          ->(option) { option },
+          ->(option) { t(option, scope: %i[enums feedback time_taken_satisfaction]) },
+          legend: { text: t(".time_taken_satisfaction") },
+        ) %>
+
+    <%= form.govuk_text_area(
+          :time_taken_satisfaction_reason,
+          label: { hidden: true },
+          hint: { text: t(".time_taken_satisfaction_reason") },
+          rows: 3,
+          width: "full",
+        ) %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :satisfaction,
+          Feedback.satisfactions.keys.reverse,
+          ->(option) { option },
+          ->(option) { t(option, scope: %i[enums feedback satisfaction]) },
+          legend: { text: t(".satisfaction") },
+        ) %>
+
+    <%= form.govuk_text_area(
+          :satisfaction_reason,
+          label: { hidden: true },
+          hint: { text: t(".satisfaction_reason") },
+          rows: 3,
+          width: "full",
+        ) %>
+
+    <%= form.govuk_text_area(
+          :improvement_suggestion,
+          label: { text: t(".improvement_suggestion"), size: "m" },
+          hint: { text: applicant_email_hint },
+          rows: 4,
+          width: "full",
+        ) %>
+
+    <p class="govuk-heading-m">
+      <%= t(".contacts_for_future_research") %>
+    <p>
+
+    <%= form.govuk_text_field(:contact_name, label: { size: "m", text: t(".contact_name") }) %>
+    <%= form.govuk_text_field(:contact_email, label: { size: "m", text: t(".contact_email") }) %>
+
+    <%= hidden_field_tag "signed_out", @signed_out %>
+    <%= hidden_field_tag "application_id", @application_id %>
+    <%= hidden_field_tag "submission_feedback", @submission_feedback %>
+
+    <%= form.govuk_submit t("generic.send") %>
+  <% end %>
