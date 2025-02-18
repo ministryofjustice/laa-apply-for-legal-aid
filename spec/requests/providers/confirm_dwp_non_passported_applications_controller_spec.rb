@@ -29,7 +29,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
 
     describe "back link" do
       let(:page1) { providers_legal_aid_application_check_provider_answers_path(application) }
-      let(:page2) { providers_legal_aid_application_check_benefits_path(application) }
+      let(:page2) { providers_legal_aid_application_check_benefit_path(application) }
 
       before do
         login_as application.provider
