@@ -31,8 +31,9 @@ module CCMS
         end
         let!(:proceeding) { legal_aid_application.reload.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let!(:chances_of_success) do
-          create(:chances_of_success, :with_optional_text, proceeding:)
+          create(:chances_of_success, :with_optional_text, proceeding:) unless skip_chance_of_success
         end
+        let(:skip_chance_of_success) { false }
 
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
@@ -160,6 +161,26 @@ module CCMS
                 block = XmlExtractor.call(xml, :proceeding_merits, attr_name)
                 expect(block).to have_boolean_response expected_result
                 expect(block).not_to(be_user_defined)
+              end
+            end
+          end
+
+          context "when chances of success are not present" do
+            let(:skip_chance_of_success) { true }
+            let(:expected_results) do
+              %w[
+                FAM_PROSP_50_OR_BETTER
+                FAM_PROSP_BORDER_UNCERT_POOR
+                FAM_PROSP_MARGINAL
+                FAM_PROSP_POOR
+                FAM_PROSP_UNCERTAIN
+              ]
+            end
+
+            it "does not generate any of the attribute blocks" do
+              expected_results.each do |attr_name|
+                block = XmlExtractor.call(xml, :proceeding_merits, attr_name)
+                expect(block).not_to be_present
               end
             end
           end

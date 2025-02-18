@@ -492,8 +492,32 @@ module CCMS
       ManualReviewDeterminer.new(legal_aid_application).manual_review_required?
     end
 
+    def output_chances_of_success?(_options)
+      chances_of_success.present?
+    end
+
     def chances_of_success
       legal_aid_application.lead_proceeding.chances_of_success
+    end
+
+    def second_appeal?(_options)
+      legal_aid_application&.appeal&.second_appeal? || false
+    end
+
+    def case_owner_std_family_merits(_options)
+      legal_aid_application&.appeal&.second_appeal? ? false : true
+    end
+
+    def means_routing(_options)
+      legal_aid_application.passported? ? "CAM" : "MANB"
+    end
+
+    def merits_routing(_options)
+      legal_aid_application&.appeal&.second_appeal? ? "ECF" : "SFM"
+    end
+
+    def merits_routing_name(_options)
+      legal_aid_application&.appeal&.second_appeal? ? "ECF Team" : "Standard Family Merits"
     end
   end
 end

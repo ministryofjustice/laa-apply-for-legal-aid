@@ -39,6 +39,7 @@ module Reports
                :used_delegated_functions_reported_on,
                :lowest_prospect_of_success,
                :hmrc_responses,
+               :ecct_routing?,
                :vehicles, to: :laa
 
       delegate :case_ccms_reference, to: :ccms_submission
@@ -177,6 +178,7 @@ module Reports
           "Child subject relationship?",
           "Parental responsibility evidence?",
           "Autogranted?",
+          "ECCT routed?",
         ]
       end
 
@@ -216,6 +218,7 @@ module Reports
         child_subject_client_involvement_type
         sca
         autogranted
+        ecct_routed
         sanitise
       end
 
@@ -479,6 +482,10 @@ module Reports
           @line << nil
           @line << nil
         end
+      end
+
+      def ecct_routed
+        @line << yesno(laa.ecct_routing?)
       end
 
       def autogranted

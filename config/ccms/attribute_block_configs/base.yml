@@ -1669,8 +1669,8 @@ global_means:
     response_type: boolean
     user_defined: true
   MEANS_ROUTING:
-    generate_block?: false
-    value: MANB
+    generate_block?: '#application_ecct_routing?'
+    value: '#means_routing'
     br100_meaning: means routing
     response_type: text
     user_defined: false
@@ -3014,7 +3014,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   MERITS_ROUTING:
-    value: SFM
+    value: "#merits_routing"
     br100_meaning: merits routing owner
     response_type: text
     user_defined: false
@@ -3266,8 +3266,8 @@ global_merits:
     response_type: number
     user_defined: false
   MERITS_ROUTING_NAME:
-    generate_block?: false
-    value: Standard Family Merits
+    generate_block?: '#application_ecct_routing?'
+    value: "#merits_routing_name"
     br100_meaning: merits routing name
     response_type: text
     user_defined: false
@@ -3559,7 +3559,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   ECF_FLAG:
-    value: false
+    value: '#second_appeal?'
     br100_meaning: ECF Flag
     response_type: boolean
     user_defined: true
@@ -3678,7 +3678,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   CASE_OWNER_STD_FAMILY_MERITS:
-    value: true
+    value: "#case_owner_std_family_merits"
     br100_meaning: The Case Owner Is The Standard Family Merits Team
     response_type: boolean
     user_defined: false
@@ -4868,6 +4868,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   FAMILY_PROSPECTS_OF_SUCCESS:
+    generate_block?: "#output_chances_of_success?"
     value: "#ccms_equivalent_prospects_of_success"
     br100_meaning: 'Fam: The Family Prospects Of Success For The Proceeding'
     response_type: text
