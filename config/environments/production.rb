@@ -21,8 +21,8 @@ Rails.application.configure do
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # Store uploaded files on amazon (see config/storage.yml for options).
+  config.active_storage.service = :amazon
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # config.assume_ssl = true
@@ -44,7 +44,7 @@ Rails.application.configure do
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Prevent health checks from clogging up the logs.
-  config.silence_healthcheck_path = "/up"
+  config.silence_healthcheck_path = "/status"
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
@@ -98,7 +98,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Only use :id for inspections in production.
-  config.active_record.attributes_for_inspect = [:id]
+  config.active_record.attributes_for_inspect = :all
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
@@ -114,7 +114,6 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST", nil)
   Rails.application.routes.default_url_options[:protocol] = Rails.env.production? ? "https" : "http"
 
-  config.active_storage.service = :amazon
   config.x.application.host_url = "https://#{config.x.application.host}"
 
   config.x.policy_disregards_start_date = Date.parse(ENV.fetch("POLICY_DISREGARDS_START_DATE", "2021-1-8"))
