@@ -15,7 +15,7 @@ RSpec.describe CapitalHelper do
       let(:amount) { 12.34 }
       let(:type) { :percentage }
 
-      it { is_expected.to eq "12.34%" }
+      it { is_expected.to eq "12%" }
     end
 
     context "when is not nil and not a percentage" do

@@ -302,7 +302,7 @@ en:
           joint_current_account: Current account
           client_bank_accounts: Your client's accounts
           clients_bank_accounts: Client's bank accounts
-          money_in_bank_accounts: Money in bank accounts
+          money_in_bank_accounts: Total in bank accounts
           partner_bank_accounts: The partner's accounts
           joint_bank_accounts: Joint accounts
         property:
@@ -320,7 +320,7 @@ en:
           percentage_home_with_partner: Percentage of the home legally owned by the client and their partner
       offline_savings_accounts:
         heading: Your client's accounts
-        offline_savings_accounts: Has savings accounts they cannot access online
+        offline_savings_accounts: Has savings accounts they cannot access online?
         offline_savings_amount: Amount in offline savings accounts
       bank_transaction_table:
         total: '%{text} total'

@@ -248,7 +248,7 @@ Feature: Completing and checking means answers backwards and forwards
   @javascript
   Scenario: I change the applicant answers about offline savings accounts
     Given I am checking answers on the check capital answers page
-    Then I should be on a page showing 'Has savings accounts they cannot access online'
+    Then I should be on a page showing 'Has savings accounts they cannot access online?'
     And I should be on a page showing 'Amount in offline savings accounts'
     And the answer for 'has offline savings' should be 'Yes'
     Then I click Check Your Answers Change link for 'offline savings accounts'

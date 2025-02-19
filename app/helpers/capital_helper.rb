@@ -21,7 +21,7 @@ module CapitalHelper
     if amount.nil?
       t("generic.no")
     elsif type == :percentage
-      number_to_percentage(amount, precision: 2)
+      number_to_percentage(amount, precision: 0)
     else
       gds_number_to_currency(amount)
     end

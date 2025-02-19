@@ -328,7 +328,7 @@ Feature: Means report
 
     And the "Your client's accounts" questions should exist:
       | question |
-      | Has savings accounts they cannot access online |
+      | Has savings accounts they cannot access online? |
       | Amount in offline savings accounts |
 
     And the "Which savings or investments does your client have?" questions should exist:

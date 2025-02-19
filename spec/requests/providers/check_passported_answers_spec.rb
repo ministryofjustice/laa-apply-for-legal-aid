@@ -155,7 +155,7 @@ RSpec.describe "check passported answers requests" do
       it "displays the correct assets details" do
         application.other_assets_declaration.amount_attributes.each do |attr, amount|
           expected = if attr == "second_home_percentage"
-                       number_to_percentage(amount, precision: 2)
+                       number_to_percentage(amount, precision: 0)
                      else
                        gds_number_to_currency(amount, unit: "£")
                      end
