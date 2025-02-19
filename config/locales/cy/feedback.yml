@@ -15,7 +15,7 @@ cy:
       contacts_for_future_research: 6. If you are happy to be contacted for future research opportunities with the LAA, please provide your contact details.
       contact_email: Email
       contact_name: Name
-    show:
+    thanks:
       close_tab: You can close this tab or page.
       link: Back to your application
       title: Thank you for your feedback

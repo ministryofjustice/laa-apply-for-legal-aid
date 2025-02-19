@@ -61,3 +61,26 @@ Feature: Provider feedback
     When I fill "Email" with "Joe@Bloggs"
     And I click "Send"
     Then I should be on a page with title "Thank you for your feedback"
+
+    When I click link "Back to your application"
+    Then I should be on the Applicant page
+
+  @javascript @vcr @disable-rack-attack
+  Scenario: Enter the minimum feedback from provider signout journey
+    Given I start the journey as far as the applicant page
+    When I click link "Sign out"
+    Then I should be on a page with title "Help us improve the Apply for legal aid service"
+    Then I should be on a page showing "You have been signed out"
+
+    # This is just to that test error page rerender does not muck up later back page functionality
+    When I click "Send"
+    Then I should see govuk error summary "Select yes if you were you able to do what you needed today"
+
+    When I choose "Yes"
+    And I choose "Easy"
+    And I choose "Satisfied"
+    And I click "Send"
+    Then I should be on a page with title "Thank you for your feedback"
+
+    When I click link "Back to your application"
+    Then I should be on a page with title "Sign in - Apply for legal aid"
