@@ -178,7 +178,7 @@ RSpec.describe "FeedbacksController" do
       end
     end
 
-    context "without all mandatory params only" do
+    context "with all mandatory params only" do
       let(:params) do
         {
           feedback:
@@ -198,6 +198,17 @@ RSpec.describe "FeedbacksController" do
         post_request
         follow_redirect!
         expect(page).to have_content("Thank you for your feedback")
+      end
+    end
+
+    # NOTE: exercises edge case where feedback page was accessed directly, not via a link on the service,
+    # and is submitted with or without errors.
+    context "when there is no originating page - i.e. session[feedback_return_path] is nil" do
+      let(:originating_page) { nil }
+
+      it "can still be submitted successfully" do
+        post_request
+        expect(response).to redirect_to feedback_thanks_path
       end
     end
 

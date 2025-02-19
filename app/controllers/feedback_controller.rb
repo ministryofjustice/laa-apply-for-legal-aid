@@ -65,7 +65,13 @@ private
   def originating_page
     return "submission_feedback" if submission_feedback?
 
-    params["signed_out"].present? ? destroy_provider_session_path : URI(session["feedback_return_path"]).path.split("/").last
+    params["signed_out"].present? ? destroy_provider_session_path : originating_last_path
+  end
+
+  def originating_last_path
+    return unless session["feedback_return_path"]
+
+    URI(session["feedback_return_path"]).path.split("/").last
   end
 
   def feedback_params
