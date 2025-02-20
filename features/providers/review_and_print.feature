@@ -186,7 +186,7 @@ Feature: Review and print your application
       | h2  | What you're applying for |
       | h2  | Extend, variation or discharge - Part IV |
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
-      | h2  | Emergency cost limit |
+      | h3  | Cost limits |
       | h2  | Income, regular payments and assets |
       | h3  | Income |
       | h3  | Regular payments |
