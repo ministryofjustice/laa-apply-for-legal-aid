@@ -893,6 +893,8 @@ en:
         other_income: Other income
         passported: Passported
         payments: Regular payments
+        capital-heading: Your client's capital
+        capital-heading_with_partner: Your client and their partner's capital
       income_payments_and_assets_for_bank_statement_upload:
         capital-heading: "Your client's capital"
         capital-heading_with_partner: "Your client and their partner's capital"

@@ -68,6 +68,7 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
       | h3  | Student finance |
+      | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Your client's property |
       | h2  | Vehicles |
@@ -95,7 +96,6 @@ Feature: Review and print your application
       | h2  | Your client's outgoings |
       | h3  | Payments your client pays |
       | h3  | Payments your client pays in cash|
-      | h2  | Your client's capital |
 
     And the "Income, regular payments and assets" review section should contain:
       | question |
@@ -134,6 +134,7 @@ Feature: Review and print your application
       | h2  | Income, regular payments and assets |
       | h3  | Income |
       | h3  | Regular payments |
+      | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Your client's property |
       | h2  | Vehicles |
@@ -162,7 +163,6 @@ Feature: Review and print your application
       | h2  | Your client's outgoings |
       | h3  | Payments your client pays |
       | h3  | Payments your client pays in cash|
-      | h2  | Your client's capital |
 
     And I should see "Passported"
     And I should not see "Benefits, charitable or government payments total"
