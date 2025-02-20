@@ -48,35 +48,8 @@
 
   <section class="proceeding_details print-no-break">
     <h2 class="govuk-heading-l"><%= t(".proceeding_details_section_heading") %></h2>
-    <%= render("shared/check_answers/proceeding_details_section") %>
+    <%= render("shared/check_answers/proceeding_details") %>
   </section>
-
-  <% if @legal_aid_application.non_sca_used_delegated_functions? %>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
-      </div>
-    </div>
-    <%= render(
-          "shared/check_answers/emergency_costs",
-          legal_aid_application: @legal_aid_application,
-          read_only: true,
-        ) %>
-  <% end %>
-
-  <% if @legal_aid_application.substantive_cost_overridable? %>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
-      </div>
-    </div>
-    <%= render(
-          "shared/check_answers/substantive_costs",
-          legal_aid_application: @legal_aid_application,
-          heading: t(".substantive_cost_limit"),
-          read_only: true,
-        ) %>
-  <% end %>
 
   <% if @legal_aid_application.non_means_tested? %>
     <section class="print-no-break govuk-!-margin-bottom-6">

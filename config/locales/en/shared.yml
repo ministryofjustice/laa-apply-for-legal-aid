@@ -622,14 +622,6 @@ en:
           question: Emergency scope limitations
         substantive:
           question: Substantive scope limitations
-      proceeding_details_section:
-        heading: proceeding details
-        client_role: Client role
-        delegated_functions: Delegated functions
-        emergency_level_of_service: Emergency level of service
-        emergency_scope_limits: Emergency scope limits
-        substantive_level_of_service: Substantive level of service
-        substantive_scope_limits: Substantive scope limits
       emergency_limitations:
         form_of_service: &form Form of service
         costs: &costs Costs you can incur
