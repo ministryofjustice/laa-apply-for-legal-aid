@@ -6,7 +6,8 @@
 <%= page_template page_title: t(".heading"),
                   back_link: :none,
                   notification_banner_title:,
-                  notification_banner_text: do %>
+                  notification_banner_text:,
+                  column_width: "full" do %>
   <%= print_button t(".print_button") %>
 
   <%= render "shared/review_application/questions_and_answers" %>
