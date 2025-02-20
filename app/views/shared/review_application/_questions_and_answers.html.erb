@@ -42,11 +42,7 @@
   <% end %>
 
   <% if Setting.linked_applications? %>
-    <div class="govuk-grid-row" id="app-check-your-answers__linking">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-l"><%= t(".linking_and_copying_heading") %></h2>
-      </div>
-    </div>
+    <h2 class="govuk-heading-l"><%= t(".linking_and_copying_heading") %></h2>
     <%= render("shared/check_answers/linking_and_copying", read_only: true) %>
   <% end %>
 
