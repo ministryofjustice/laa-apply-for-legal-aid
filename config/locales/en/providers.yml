@@ -1695,7 +1695,7 @@ en:
       show:
         client:
           h1-heading: Which bank accounts does your client have?
-          h2-heading: Your client's offline accounts
+          h2-heading: Your client's accounts
           offline_current_accounts: Current account
           offline_savings_accounts: Savings account
           revealing:
@@ -1707,7 +1707,7 @@ en:
               offline_savings_accounts: Include accounts with a negative balance or no money in them.
         partner:
           h1-heading: Which bank accounts do your client and their partner have?
-          h2-heading: The partner's offline accounts
+          h2-heading: The partner's accounts
           offline_current_accounts: Current account
           offline_savings_accounts: Savings account
           revealing:

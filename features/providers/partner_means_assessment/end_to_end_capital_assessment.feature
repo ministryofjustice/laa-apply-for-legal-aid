@@ -21,8 +21,8 @@ Feature: partner_means_assessment full journey
     Then I should be on a page with title "Which bank accounts do your client and their partner have?"
     And the following sections should exist:
       | tag | section |
-      | h2  | Your client's offline accounts |
-      | h2  | The partner's offline accounts |
+      | h2  | Your client's accounts |
+      | h2  | The partner's accounts |
       | h2  | Joint accounts |
 
     When I select "Current account" in "client accounts"

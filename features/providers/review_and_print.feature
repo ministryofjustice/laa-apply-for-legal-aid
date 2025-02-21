@@ -75,7 +75,7 @@ Feature: Review and print your application
       | h3  | Vehicles owned |
       | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h3  | Your client's accounts |
+      | h3  | Your client's offline accounts |
       | h2  | Savings and assets |
       | h3  | Your client's savings or investments |
       | h3  | Your client's assets |
