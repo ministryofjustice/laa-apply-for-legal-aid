@@ -919,8 +919,8 @@ en:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
-        client_details_heading: Client details
-        partner_details_heading: Partner details
+        client_details_heading: Client
+        partner_details_heading: Partner
         linking_and_copying_heading: Cases linked to this one
         proceeding_details_section_heading: What you're applying for
         change: Change
