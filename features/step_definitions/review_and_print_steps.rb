@@ -40,7 +40,7 @@ Given("I have completed truelayer application with merits") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
-    :with_applicant_with_student_finance,
+    :with_employed_applicant_with_student_finance,
     :with_non_passported_state_machine,
     :with_restrictions,
     :with_vehicle,
@@ -225,12 +225,12 @@ When("I view the review and print your application page") do
   visit(providers_legal_aid_application_review_and_print_application_path(@legal_aid_application))
 end
 
-Then("the \"Income, regular payments and assets\" review section should contain:") do |table|
+Then("the \"Payments your client gets\" review section should contain:") do |table|
   expectations = table.hashes.map(&:symbolize_keys)
 
-  within(".income_payments_and_assets") do
-    expectations.each do |expectated|
-      expect(page).to have_css(".govuk-table__header", text: expectated[:question])
+  within("#app-check-your-answers__payments_your_client_gets") do
+    expectations.each do |expected|
+      expect(page).to have_content(expected[:question])
     end
   end
 end
