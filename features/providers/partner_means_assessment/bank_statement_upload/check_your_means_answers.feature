@@ -19,7 +19,7 @@ Feature: Bank statement upload check your answers
 
     And the following sections should exist:
       | tag | section |
-      | h3  | Housing benefit |
+      | h2  | Housing benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
