@@ -172,7 +172,7 @@ en:
           - savings and investments
           - other assets
     check_benefits:
-      index:
+      show:
         details_used: "We used the following details to check your client's benefits status with the DWP:"
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.

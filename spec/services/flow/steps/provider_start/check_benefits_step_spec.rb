@@ -7,7 +7,7 @@ RSpec.describe Flow::Steps::ProviderStart::CheckBenefitsStep, type: :request do
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eq providers_legal_aid_application_check_benefits_path(legal_aid_application) }
+    it { is_expected.to eq providers_legal_aid_application_check_benefit_path(legal_aid_application) }
   end
 
   describe "#forward" do
