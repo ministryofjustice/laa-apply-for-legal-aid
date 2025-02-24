@@ -9,7 +9,7 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
     And I view the previously created application
     Then I am on the check your answers page for other assets
 
-    When I click Check Your Answers Change link for 'own_home'
+    When I click Check Your Answers Change link for 'property_ownership'
     Then I should be on a page showing "Does your client own the home they usually live in?"
     And I should see "This is where your client normally lives, even if they have temporarily left their home due to domestic abuse."
 

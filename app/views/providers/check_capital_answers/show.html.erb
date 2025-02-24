@@ -1,6 +1,6 @@
 <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 
-<%= page_template(page_title: t(".h1-heading")) do %>
+<%= page_template(page_title: t(".h1-heading"), caption: t(".caption"), column_width: "full") do %>
 
   <%= govuk_inset_text do %>
     <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>

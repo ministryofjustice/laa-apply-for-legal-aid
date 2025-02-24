@@ -32,7 +32,7 @@
           individual_with_determiner: t("generic.client"),
           model: @legal_aid_application.applicant,
           url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-          read_only: false,
+          read_only: true,
         ) %>
   <% end %>
 
@@ -77,6 +77,8 @@
 
   <section class="print-no-break">
     <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
+    <h2 class="govuk-heading-l"><%= t(".capital-heading#{individual}") %></h2>
+
     <%= render "shared/check_answers/assets", read_only: true, individual: %>
   </section>
 </section>

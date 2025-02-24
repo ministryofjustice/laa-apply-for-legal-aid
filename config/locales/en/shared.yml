@@ -282,42 +282,46 @@ en:
           heading: Payments to be reviewed
       assets:
         assets:
-          other_assets: Which assets does your client have?
-          other_assets_with_partner: Which assets does either your client or their partner have?
+          savings_and_assets_heading: Savings and assets
+          savings_and_investments: Your client's savings or investments
+          savings_and_investments_with_partner: "Your client or their partner's savings or investments"
+          other_assets: Your client's assets
+          other_assets_with_partner: Your client or their partner's assets
           policy_disregards: Payments from scheme or charities
           policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
-          savings_and_investments: Which savings or investments does your client have?
-          savings_and_investments_with_partner: Which savings or investments does either your client or their partner have?
-          bank_accounts: Bank accounts
+          savings_and_investments: Your client's savings or investments
+          savings_and_investments_with_partner: Your client or their partner's savings or investments
+          bank_accounts_heading: Bank accounts
           current_accounts: Current accounts
           savings_accounts: Savings accounts
-          client_current_account: Client's current accounts
-          client_savings_account: Client's savings accounts
-          partner_savings_account: Partner's savings accounts
-          partner_current_account: Partner's current accounts
-          joint_savings_account: Joint savings accounts
-          joint_current_account: Joint current accounts
+          client_current_account: Current account
+          client_savings_account: Savings account
+          partner_savings_account: Savings account
+          partner_current_account: Current account
+          joint_savings_account: Savings account
+          joint_current_account: Current account
           client_bank_accounts: Your client's accounts
           clients_bank_accounts: Client's bank accounts
+          total_in_bank_accounts: Total in bank accounts
           money_in_bank_accounts: Money in bank accounts
           partner_bank_accounts: The partner's accounts
           joint_bank_accounts: Joint accounts
         property:
           heading_own_home: Property
           heading_property_details: Your client's property
-          heading_property_details_with_partner: Your client's and their partner's property
-          own_home: Does your client own the home they usually live in?
-          own_home_with_partner: Does your client or their partner own the home your client usually lives in?
-          property_value: How much is the home they usually live in worth?
-          property_value_with_partner: How much is the home your client and their partner usually live in worth?
-          outstanding_mortgage: How much is left to pay on the mortgage?
-          shared_ownership: Does your client own the home with anyone else?
-          shared_ownership_with_partner: Does your client or their partner own the home with anyone else?
-          percentage_home: What percentage of the home does your client legally own?
-          percentage_home_with_partner: What percentage of the home do your client and their partner legally own?
+          heading_property_details_with_partner: Your client and their partner's property
+          own_home: Client owns the home they usually live in?
+          own_home_with_partner: Client or their partner owns the home they usually live in?
+          property_value: Worth of the home they usually live in
+          property_value_with_partner: Worth of the home they usually live in
+          outstanding_mortgage: Amount left to pay on the mortgage
+          shared_ownership: The home is owned with someone else?
+          shared_ownership_with_partner: The home is owned with someone else?
+          percentage_home: Percentage of the home legally owned by the client
+          percentage_home_with_partner: Percentage of the home legally owned by the client and their partner
       offline_savings_accounts:
-        heading: Your client's accounts
-        offline_savings_accounts: Has savings accounts they cannot access online
+        heading: Your client's offline accounts
+        offline_savings_accounts: Has savings accounts they cannot access online?
         offline_savings_amount: Amount in offline savings accounts
       bank_transaction_table:
         total: '%{text} total'
@@ -634,19 +638,20 @@ en:
           question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
         providers:
           heading: Restrictions on your client's assets
-          heading_with_partner: Restrictions on your client's or their partner's assets
-          question: Is your client banned from selling or borrowing against their assets?
-          question_with_partner: Is your client or their partner banned from selling or borrowing against their assets?
+          heading_with_partner: Restrictions on your client or their partner's assets
+          question: Client is banned from selling or borrowing against assets?
+          question_with_partner: Client or their partner is prohibited from selling or borrowing against their assets?
       vehicles:
         providers:
           heading: Vehicles
-          own: Does your client own a vehicle?
-          own_with_partner: Does your client or their partner own a vehicle?
-          owner: Who owns the vehicle?
-          estimated_value: What is the estimated value of the vehicle?
-          payment_remaining: Are there any payments left on the vehicle?
-          more_than_three_years_old: The vehicle was bought more than three years ago?
-          used_regularly: Is the vehicle in regular use?
+          card_heading: Vehicles owned
+          own: Client owns a vehicle?
+          own_with_partner: Client or their partner owns a vehicle?
+          owner: Owner of the vehicle
+          estimated_value: Worth of the vehicle
+          payment_remaining: Amount left to pay
+          more_than_three_years_old: Vehicle was bought over 3 years ago?
+          used_regularly: Vehicle is in regular use?
           vehicle_index: Vehicle %{sequence}
           options:
             client: My client
@@ -742,6 +747,7 @@ en:
               trust_value: Enter the estimated total value
               hint:
                 check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
+              none_label: Assets your client and their partner have
             offline_accounts:
               check_box_offline_current_accounts: Client's current accounts
               check_box_offline_savings_accounts: Client's savings accounts
@@ -764,6 +770,7 @@ en:
               check_box_other_person_account: Access to another person's bank account
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_plc_shares: Shares in a PLC
+              none_label: Savings or investments your client or their partner have
             means:
               savings_and_investments:
                 cash: Enter the total amount
@@ -887,6 +894,8 @@ en:
         other_income: Other income
         passported: Passported
         payments: Regular payments
+        capital-heading: Your client's capital
+        capital-heading_with_partner: Your client and their partner's capital
       income_payments_and_assets_for_bank_statement_upload:
         capital-heading: "Your client's capital"
         capital-heading_with_partner: "Your client and their partner's capital"

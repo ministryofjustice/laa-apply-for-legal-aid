@@ -2,7 +2,7 @@
 
 <div class="govuk-grid-row" id="app-check-your-answers__<%= name %><%= answer_hash.present? ? "" : "_header" %>">
   <div class="govuk-grid-column-two-thirds">
-    <h2 class="govuk-heading-m"><%= question %></h2>
+    <h3 class="govuk-heading-m"><%= question %></h3>
   </div>
   <% if answer_hash.present? && !read_only %>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">

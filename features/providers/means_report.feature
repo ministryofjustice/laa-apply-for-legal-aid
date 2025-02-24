@@ -19,18 +19,15 @@ Feature: Means report
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
+      | h3  | Your client's accounts |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
       | h2  | Capital disregards |
       | h3  | Bank statements |
-
-    Then the following sections should not exist:
-      | tag | section |
-      | h3  | Your client's accounts |
-      | h3  | Client's bank accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -122,24 +119,24 @@ Feature: Means report
 
     And the Property question should exist:
       | question |
-      | Does your client own the home they usually live in? |
+      | Client owns the home they usually live in? |
 
     And the Property details questions should exist:
       | question |
-      | How much is the home they usually live in worth? |
-      | How much is left to pay on the mortgage? |
-      | Does your client own the home with anyone else? |
-      | What percentage of the home does your client legally own? |
+      | Worth of the home they usually live in |
+      | Amount left to pay on the mortgage |
+      | The home is owned with someone else? |
+      | Percentage of the home legally owned by the client |
 
     And the Vehicle ownership question should exist:
       | question |
-      | Does your client own a vehicle? |
+      | Client owns a vehicle? |
 
     And the Vehicles questions should exist:
-      | What is the estimated value of the vehicle? |
-      | Are there any payments left on the vehicle? |
-      | The vehicle was bought more than three years ago? |
-      | Is the vehicle in regular use? |
+      | Worth of the vehicle |
+      | Amount left to pay |
+      | Vehicle was bought over 3 years ago? |
+      | Vehicle is in regular use? |
 
     And the "Bank accounts", for static bank account totals, questions should exist:
       | question |
@@ -169,7 +166,7 @@ Feature: Means report
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is your client banned from selling or borrowing against their assets? |
+      | Client is banned from selling or borrowing against assets? |
       | Details of restrictions |
 
     And the Capital disregards questions and answers should match:
@@ -180,6 +177,8 @@ Feature: Means report
     And the client Bank statements questions and answers should match:
       | question | answer |
       | Uploaded bank statements | original_filename.pdf (15.7 KB) |
+
+    And I should not see any change links
 
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed a non-passported application with truelayer
@@ -199,15 +198,14 @@ Feature: Means report
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h3  | Your client's accounts |
-      | h2  | Property, savings and other assets |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
-      | h2  | Capital disregards |
-      | h2  | Client's bank accounts |
+      | h3  | Your client's offline accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
 
     Then the following sections should not exist:
       | tag | section |
@@ -299,24 +297,24 @@ Feature: Means report
 
     And the Property question should exist:
       | question |
-      | Does your client own the home they usually live in? |
+      | Client owns the home they usually live in? |
 
     And the Property details questions should exist:
       | question |
-      | How much is the home they usually live in worth? |
-      | How much is left to pay on the mortgage? |
-      | Does your client own the home with anyone else? |
-      | What percentage of the home does your client legally own? |
+      | Worth of the home they usually live in |
+      | Amount left to pay on the mortgage |
+      | The home is owned with someone else? |
+      | Percentage of the home legally owned by the client |
 
     And the Vehicle ownership question should exist:
       | question |
-      | Does your client own a vehicle? |
+      | Client owns a vehicle? |
 
     And the Vehicles questions should exist:
-      | What is the estimated value of the vehicle? |
-      | Are there any payments left on the vehicle? |
-      | The vehicle was bought more than three years ago? |
-      | Is the vehicle in regular use? |
+      | Worth of the vehicle |
+      | Amount left to pay |
+      | Vehicle was bought over 3 years ago? |
+      | Vehicle is in regular use? |
 
     And the "Bank accounts", for open banking accounts, questions should exist:
       | question |
@@ -330,7 +328,7 @@ Feature: Means report
 
     And the "Your client's accounts" questions should exist:
       | question |
-      | Has savings accounts they cannot access online |
+      | Has savings accounts they cannot access online? |
       | Amount in offline savings accounts |
 
     And the "Which savings or investments does your client have?" questions should exist:
@@ -356,13 +354,15 @@ Feature: Means report
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is your client banned from selling or borrowing against their assets? |
+      | Client is banned from selling or borrowing against assets? |
       | Details of restrictions |
 
     And the Capital disregards questions and answers should match:
       | question | answer |
       | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
       | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
+
+    And I should not see any change links
 
   Scenario: For a passported journey
     Given I have completed a passported application
@@ -376,11 +376,16 @@ Feature: Means report
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h3  | Your client's property |
+      | h2  | Vehicles |
+      | h3  | Vehicles owned |
+      | h3  | Vehicle 1 |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does your client have? |
-      | h2  | Which assets does your client have? |
-      | h2  | Restrictions on your client's assets |
+      | h3  | Your client's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client's savings or investments |
+      | h3  | Your client's assets |
+      | h3  | Restrictions on your client's assets |
       | h2  | Capital disregards |
       | h2  | Caseworker Review |
 
@@ -402,6 +407,8 @@ Feature: Means report
     And the Passported means question and answer should match:
       | question | answer |
       | In receipt of passporting benefit | Yes |
+
+    And I should not see any change links
 
   Scenario: For a non means tested journey
     Given I have completed a non means tested application
@@ -434,7 +441,9 @@ Feature: Means report
       | h3  | Bank statements |
       | h3  | Your client's accounts|
 
-   And the "Client details" check your answers section should contain:
-    | question | answer |
-    | Age at computation date | 17 years old |
-    | Was the client means-tested? | No |
+    And the "Client details" check your answers section should contain:
+      | question | answer |
+      | Age at computation date | 17 years old |
+      | Was the client means-tested? | No |
+
+    And I should not see any change links

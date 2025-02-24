@@ -42,7 +42,7 @@ RSpec.describe "check passported answers requests" do
         expect(response.body).to include(gds_number_to_currency(application.property_value, unit: "£"))
         expect(response.body).to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: "£"))
         expect(response.body).to include(I18n.t("shared.forms.shared_ownership_form.#{application.shared_ownership}"))
-        expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 2))
+        expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 0))
         expect(response.body).to include(I18n.t("shared.check_answers.assets.property.own_home"))
         expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.property_value"))
         expect(unescaped_response_body).to include(I18n.t("shared.check_answers.assets.property.outstanding_mortgage"))
@@ -139,10 +139,8 @@ RSpec.describe "check passported answers requests" do
       end
 
       it "displays the correct URLs for changing values" do
-        expect(response.body).to have_change_link(:own_home, providers_legal_aid_application_means_own_home_path(application))
-        expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_means_property_details_path(application))
-        expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_means_property_details_path(application))
-        expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_means_property_details_path(application))
+        expect(response.body).to have_change_link(:property_ownership, providers_legal_aid_application_means_own_home_path(application))
+        expect(response.body).not_to have_change_link(:property_details_questions, providers_legal_aid_application_means_own_home_path(application))
         expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
@@ -157,7 +155,7 @@ RSpec.describe "check passported answers requests" do
       it "displays the correct assets details" do
         application.other_assets_declaration.amount_attributes.each do |attr, amount|
           expected = if attr == "second_home_percentage"
-                       number_to_percentage(amount, precision: 2)
+                       number_to_percentage(amount, precision: 0)
                      else
                        gds_number_to_currency(amount, unit: "£")
                      end
@@ -200,6 +198,14 @@ RSpec.describe "check passported answers requests" do
                  :provider_entering_means)
         end
 
+        it "displays the correct URLs for changing values" do
+          expect(response.body).to have_change_link(:property_ownership, providers_legal_aid_application_means_own_home_path(application))
+          expect(response.body).to have_change_link(:property_details_questions, providers_legal_aid_application_means_property_details_path(application))
+          expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
+          expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
+          expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
+        end
+
         it "does not display property value" do
           expect(response.body).not_to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: "£"))
           expect(response.body).not_to include("Outstanding mortgage")
@@ -234,8 +240,8 @@ RSpec.describe "check passported answers requests" do
         it "does not display other vehicle questions" do
           expect(response.body).not_to include("What is the estimated value of the vehicle?")
           expect(response.body).not_to include("Are there any payments left on the vehicle?")
-          expect(response.body).not_to include("The vehicle was bought more than three years ago?")
-          expect(response.body).not_to include("Is the vehicle in regular use?")
+          expect(response.body).not_to include("Vehicle was bought over 3 years ago?")
+          expect(response.body).not_to include("Vehicle is in regular use?")
         end
       end
     end

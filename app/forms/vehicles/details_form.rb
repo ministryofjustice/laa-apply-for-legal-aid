@@ -24,7 +24,7 @@ module Vehicles
     validates :payments_remain, presence: { unless: :draft? }
     validates(
       :payment_remaining,
-      currency: { greater_than_or_equal_to: 0, allow_blank: true },
+      currency: { greater_than: 0, allow_blank: true },
       presence: { unless: :draft? },
       if: :payments_remain?,
     )

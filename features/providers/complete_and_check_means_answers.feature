@@ -248,7 +248,7 @@ Feature: Completing and checking means answers backwards and forwards
   @javascript
   Scenario: I change the applicant answers about offline savings accounts
     Given I am checking answers on the check capital answers page
-    Then I should be on a page showing 'Has savings accounts they cannot access online'
+    Then I should be on a page showing 'Has savings accounts they cannot access online?'
     And I should be on a page showing 'Amount in offline savings accounts'
     And the answer for 'has offline savings' should be 'Yes'
     Then I click Check Your Answers Change link for 'offline savings accounts'
@@ -263,15 +263,14 @@ Feature: Completing and checking means answers backwards and forwards
   @javascript
   Scenario: I go back and change the answer to second home from the check capital answers page
     Given I am checking answers on the check capital answers page
-    Then I should be on a page showing 'Which assets does your client have?'
+    Then I should be on a page showing "Your client's savings or investments"
     And I should be on a page showing 'Second property or holiday home estimated value'
-    Then I click Check Your Answers Change link for 'other assets'
+    Then I click Check Your Answers Change link for 'other assets items'
     And I should be on a page showing 'Which assets does your client have?'
     And I should be on a page showing 'Select all that apply'
     Then I deselect 'Second property or holiday home'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on the 'check_capital_answers' page showing 'Check your answers'
-    And the answer for 'Second home' should be 'No'
-    And I should not see 'Second property or holiday home estimated value'
+    And I should not see 'Second property or holiday home'
 

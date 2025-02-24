@@ -17,18 +17,16 @@ Feature: Means report when partner is present
       | h2  | Capital result |
       | h2  | Property, savings and other assets |
       | h3  | Property |
-      | h3  | Vehicles |
+      | h2  | Vehicles |
       | h2  | Bank accounts |
-      | h2  | Which savings or investments does either your client or their partner have? |
-      | h2  | Which assets does either your client or their partner have? |
-      | h2  | Restrictions on your client's or their partner's assets |
+      | h3  | Your client's accounts |
+      | h3  | The partner's accounts |
+      | h2  | Savings and assets |
+      | h3  | Your client or their partner's savings or investments |
+      | h3  | Your client or their partner's assets |
+      | h3  | Restrictions on your client or their partner's assets |
       | h2  | Capital disregards |
       | h3  | Bank statements |
-
-    Then the following sections should not exist:
-      | tag | section |
-      | h3  | Your client's accounts |
-      | h3  | Client's bank accounts |
 
     Then the following sections should not exist:
       | tag | section |
@@ -130,37 +128,37 @@ Feature: Means report when partner is present
 
     And the Property question should exist:
       | question |
-      | Does your client or their partner own the home your client usually lives in? |
+      | Client or their partner owns the home they usually live in? |
 
     And the Property details questions should exist:
       | question |
-      | How much is the home your client and their partner usually live in worth? |
-      | How much is left to pay on the mortgage? |
-      | Does your client or their partner own the home with anyone else? |
-      | What percentage of the home do your client and their partner legally own? |
+      | Worth of the home they usually live in |
+      | Amount left to pay on the mortgage |
+      | The home is owned with someone else? |
+      | Percentage of the home legally owned by the client and their partner |
 
     And the Vehicle ownership question should exist:
       | question |
-      | Does your client or their partner own a vehicle? |
+      | Client or their partner owns a vehicle? |
 
     And the Vehicles questions should exist:
-      | What is the estimated value of the vehicle? |
-      | Are there any payments left on the vehicle? |
-      | The vehicle was bought more than three years ago? |
-      | Is the vehicle in regular use? |
+      | Worth of the vehicle |
+      | Amount left to pay |
+      | Vehicle was bought over 3 years ago? |
+      | Vehicle is in regular use? |
 
     And the 'Applicant' "Bank accounts", for static bank account totals, questions should exist:
       | question |
-      | Client's current accounts |
-      | Client's savings accounts |
+      | Current account |
+      | Savings account |
     And the 'Partner' "Bank accounts", for static bank account totals, questions should exist:
       | question |
-      | Partner's current accounts |
-      | Partner's savings accounts |
+      | Current account |
+      | Savings account |
     And the 'Joint' "Bank accounts", for static bank account totals, questions should exist:
       | question |
-      | Joint current accounts |
-      | Joint savings accounts |
+      | Current account |
+      | Savings account |
 
     And the "Which savings or investments does your client have?" questions should exist:
       | question |
@@ -185,10 +183,12 @@ Feature: Means report when partner is present
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Is your client or their partner banned from selling or borrowing against their assets? |
+      | Client or their partner is prohibited from selling or borrowing against their assets? |
       | Details of restrictions |
 
     And the Capital disregards questions and answers should match:
       | question | answer |
       | Mandatory disregards | Budgeting Advances\n£1,001 on 8 August 2024\nHeld in Halifax |
       | Discretionary disregards | Compensation, damages or ex-gratia payments for personal harm\nFor: life changing injuries\n£1,002 on 8 August 2024\nHeld in Halifax |
+
+    And I should not see any change links
