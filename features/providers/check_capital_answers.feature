@@ -22,7 +22,7 @@ Feature: Check capital income answers
       | h3  | One-off payments your client received |
       | h3  | Disregarded payment 1 |
       | h3  | Payment to be reviewed 1 |
-      | h3  | What happens next |
+      | h2  | What happens next |
 
     Then the following sections should not exist:
       | tag | section |
@@ -68,7 +68,7 @@ Feature: Check capital income answers
       | h3  | One-off payments your client received |
       | h3  | Disregarded payment 1 |
       | h3  | Payment to be reviewed 1 |
-      | h3  | What happens next |
+      | h2  | What happens next |
 
     Then the following sections should not exist:
       | tag | section |
@@ -114,7 +114,7 @@ Feature: Check capital income answers
       | h3  | One-off payments your client received |
       | h3  | Disregarded payment 1 |
       | h3  | Payment to be reviewed 1 |
-      | h3  | What happens next |
+      | h2  | What happens next |
 
     Then the following sections should not exist:
       | tag | section |
@@ -162,7 +162,7 @@ Feature: Check capital income answers
       | h3  | Restrictions on your client or their partner's assets |
       | h3  | One-off payments your client or their partner received |
       | h3  | Payment to be reviewed 1 |
-      | h3  | What happens next |
+      | h2  | What happens next |
 
     Then the following sections should not exist:
       | tag | section |
@@ -208,7 +208,7 @@ Feature: Check capital income answers
       | h3  | One-off payments your client or their partner received |
       | h3  | Disregarded payment 1 |
       | h3  | Payment to be reviewed 1 |
-      | h3  | What happens next |
+      | h2  | What happens next |
 
     Then the following sections should not exist:
       | tag | section |
@@ -254,7 +254,7 @@ Feature: Check capital income answers
       | h3  | One-off payments your client or their partner received |
       | h3  | Disregarded payment 1 |
       | h3  | Payment to be reviewed 1 |
-      | h3  | What happens next |
+      | h2  | What happens next |
 
     Then the following sections should not exist:
       | tag | section |
