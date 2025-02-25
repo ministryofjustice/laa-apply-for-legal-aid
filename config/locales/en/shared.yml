@@ -937,6 +937,8 @@ en:
           heading: Client declaration
           signature: "Client signature:"
           date: "Date:"
+        capital-section-heading: Your client's capital
+        capital-section-heading_with_partner: Your client and their partner's capital
     means:
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.
