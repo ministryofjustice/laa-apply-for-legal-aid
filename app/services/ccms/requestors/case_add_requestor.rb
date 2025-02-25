@@ -107,7 +107,7 @@ module CCMS
         xml.__send__(:"casebio:MeansAssesments") { generate_means_assessment(xml) }
         xml.__send__(:"casebio:MeritsAssesments") { generate_merits_assessment(xml) }
         xml.__send__(:"casebio:DevolvedPowersDate", @legal_aid_application.used_delegated_functions_on.to_fs(:ccms_date)) if @legal_aid_application.non_sca_used_delegated_functions?
-        xml.__send__(:"casebio:ApplicationAmendmentType", @legal_aid_application.non_sca_used_delegated_functions? ? "SUBDP" : "SUB")
+        xml.__send__(:"casebio:ApplicationAmendmentType", generate_application_amendment_type)
         xml.__send__(:"casebio:LARDetails") { generate_lar_details(xml) }
       end
 
@@ -151,6 +151,18 @@ module CCMS
 
       def generate_lar_details(xml)
         xml.__send__(:"casebio:LARScopeFlag", true)
+      end
+
+      def generate_application_amendment_type
+        if @legal_aid_application.non_sca_used_delegated_functions?
+          "SUBDP"
+        elsif @legal_aid_application.ecct_routing?
+          # the team is currently named ECCT (Exceptional and Complex Cases Team), but were
+          # previously named ECF (Exceptional Case Funding) and that is what CCMS expects
+          "ECF"
+        else
+          "SUB"
+        end
       end
 
       def generate_client(xml)

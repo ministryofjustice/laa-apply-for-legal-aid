@@ -420,6 +420,126 @@ module CCMS
             expect(block).to be_present
           end
         end
+
+        describe "when the application has a PLF Appeal proceeding" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_positive_benefit_check_result,
+                   :with_second_appeal,
+                   :with_proceedings,
+                   explicit_proceedings: %i[pbm01a],
+                   set_lead_proceeding: :pbm01a,
+                   applicant:,
+                   vehicles:,
+                   other_assets_declaration:,
+                   savings_amount:,
+                   provider:,
+                   opponents:,
+                   domestic_abuse_summary:,
+                   office:,
+                   second_appeal:,
+                   original_judge_level: nil,
+                   court_type:)
+          end
+
+          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "PBM01A" } }
+
+          context "and the provider answered no to the Second Appeal merits question" do
+            let(:second_appeal) { false }
+            let(:court_type) { "court_of_appeal" }
+
+            it "sets the ECF_FLAG value to false" do
+              block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
+              expect(block).to have_boolean_response false
+            end
+
+            it "sets MERITS_ROUTING" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+              expect(block).to have_text_response "SFM"
+            end
+
+            it "excludes the MERITS_ROUTING_NAME block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+              expect(block).not_to be_present
+            end
+
+            it "sets CASE_OWNER_STD_FAMILY_MERITS to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets ApplicationAmendmentType to SUB" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "SUB"
+            end
+
+            it "excludes the MEANS_ROUTING block" do
+              block = XmlExtractor.call(request_xml, :global_means, "MEANS_ROUTING")
+              expect(block).not_to be_present
+            end
+          end
+
+          context "and the provider answered yes to the Second Appeal merits question" do
+            let(:second_appeal) { true }
+            let(:court_type) { "court_of_appeal" }
+
+            it "sets the ECF_FLAG value to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets MERITS_ROUTING" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
+              expect(block).to have_text_response "ECF"
+            end
+
+            it "sets MERITS_ROUTING_NAME" do
+              block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
+              expect(block).to have_text_response "ECF Team"
+            end
+
+            it "sets CASE_OWNER_STD_FAMILY_MERITS to false" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
+              expect(block).to have_boolean_response false
+            end
+
+            it "sets ApplicationAmendmentType to ECF" do
+              block = XmlExtractor.call(request_xml, :application_amendment_type)
+              expect(block.children.text).to eq "ECF"
+            end
+
+            context "when the application is passported" do
+              it "sets MEANS_ROUTING to CAM" do
+                block = XmlExtractor.call(request_xml, :global_means, "MEANS_ROUTING")
+                expect(block).to have_text_response "CAM"
+              end
+            end
+          end
+
+          context "and the client is a respondent" do
+            let(:second_appeal) { false }
+            let(:court_type) { "court_of_appeal" }
+
+            before do
+              proceeding.chances_of_success.destroy!
+              proceeding.update!(client_involvement_type_ccms_code: "D",
+                                 client_involvement_type_description: "Defendant or respondent")
+            end
+
+            it "excludes the FAMILY_PROSPECTS_OF_SUCCESS block" do
+              # this merits question is not asked in PLF proceedings where the client is not an Applicant or Joined Party
+              block = XmlExtractor.call(request_xml, :proceeding_merits, "FAMILY_PROSPECTS_OF_SUCCESS")
+              expect(block).not_to be_present
+            end
+
+            it "excludes the PROSPECTS_OF_SUCCESS block" do
+              # this merits question is not asked in PLF proceedings where the client is not an Applicant or Joined Party
+              block = XmlExtractor.call(request_xml, :proceeding_merits, "PROSPECTS_OF_SUCCESS")
+              expect(block).not_to be_present
+            end
+          end
+        end
       end
     end
   end

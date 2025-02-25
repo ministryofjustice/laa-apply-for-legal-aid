@@ -85,7 +85,7 @@ module CCMS
             ["global_means", "GB_INPUT_B_13WP3_49A", "text", true, "None of the above"],
             ["global_means", "MARITIAL_STATUS", "text", true, "U"],
             ["global_means", "MEANS_OPA_RELEASE", "text", false, "12.2"],
-            ["global_means", "MEANS_ROUTING", "text", false, "BCM"],
+            ["global_means", "MEANS_ROUTING", "text", false, "MANB"],
             ["global_means", "POA_OR_BILL_FLAG", "text", true, "N/A"],
             ["global_means", "RB_VERSION_DATE_MEANS", "date", false, "29-11-2019"],
             ["global_means", "RB_VERSION_NUMBER_MEANS", "text", false, "v2.31.6"],
