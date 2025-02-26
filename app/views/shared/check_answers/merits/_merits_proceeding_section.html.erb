@@ -101,14 +101,6 @@
   <% end %>
 <% end %>
 
-<% if proceeding.relationship_to_child %>
-  <%= govuk_summary_card(title: t(".relationship_to_child_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_relationship_to_child" }, heading_level: 3) do |card|
-        card.with_summary_list(actions: !read_only) do |summary_list|
-          render("shared/check_answers/relationship_to_child", summary_list:, proceeding:, relationship_to_child: proceeding.relationship_to_child, first_column_width: "one-third")
-        end
-      end %>
-<% end %>
-
 <% if proceeding.child_care_assessment %>
   <%= govuk_summary_card(title: t(".child_care_assessment_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_child_care_assessment" }, heading_level: 3) do |card|
         unless read_only
