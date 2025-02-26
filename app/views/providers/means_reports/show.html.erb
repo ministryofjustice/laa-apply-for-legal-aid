@@ -5,7 +5,7 @@
 
   <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
 
-  <h2 class="govuk-heading-m"><%= t(".client_details_heading") %></h2>
+  <h2 class="govuk-heading-m print-no-break-after"><%= t(".client_details_heading") %></h2>
   <%= render(
         "shared/check_answers/client_details",
         attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth age means_test national_insurance_number care_of home_address],
@@ -14,7 +14,7 @@
       ) %>
 
   <% if @legal_aid_application.applicant_has_partner? %>
-    <h2 class="govuk-heading-m"><%= t(".partner_details_heading") %></h2>
+    <h2 class="govuk-heading-m print-no-break-after"><%= t(".partner_details_heading") %></h2>
     <%= render(
           "shared/check_answers/partner_details",
           attributes: %i[first_name last_name date_of_birth national_insurance_number],

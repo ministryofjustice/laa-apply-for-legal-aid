@@ -1,50 +1,48 @@
-<section class="print-no-break">
-  <h2 class="govuk-heading-m"><%= t(".heading") %></h2>
+<h2 class="govuk-heading-m print-no-break-after"><%= t(".heading") %></h2>
 
-  <%= govuk_summary_card(title: t(".heading"),
-                         heading_level: 3,
-                         html_attributes: { id: "app-check-your-answers__outgoings_and_deductions_details__card" }) do |card|
-        card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__outgoings_and_deductions_details__summary" }) do |summary_list|
-          outgoings_detail_items.each do |item|
-            summary_list.with_row do |row|
-              row.with_key(text: t(".client.#{item.name}"), classes: "govuk-!-width-one-half")
-              row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method)) }
-            end
-          end
-
-          outgoings_detail_items.each do |item|
-            next unless @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && partner_exclude_items.exclude?(item.value_method)
-
-            summary_list.with_row do |row|
-              row.with_key(text: t(".partner.#{item.name}"), classes: "govuk-!-width-one-half")
-              row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method, partner: true)) }
-            end
-          end
-
-          deductions_detail_items(@legal_aid_application).each do |item|
-            summary_list.with_row do |row|
-              row.with_key(text: t(".client.#{item.name}"), classes: "govuk-!-width-one-half")
-              row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method)) }
-            end
-
-            next unless @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && partner_exclude_items.exclude?(item.value_method)
-
-            summary_list.with_row do |row|
-              row.with_key(text: t(".partner.#{item.name}"), classes: "govuk-!-width-one-half")
-              row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method, partner: true)) }
-            end
-          end
-
-          result = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
-                     @cfe_result.__send__(:total_monthly_outgoings) + @cfe_result.__send__(:total_monthly_outgoings, partner: true) + @cfe_result.__send__(:total_deductions)
-                   else
-                     @cfe_result.__send__(:total_monthly_outgoings) + @cfe_result.__send__(:total_deductions)
-                   end
-
-          summary_list.with_row(classes: "bold-border-top") do |row|
-            row.with_key { t(".total_outgoings_and_deductions") }
-            row.with_value(text: gds_number_to_currency(gds_number_to_currency(result)), html_attributes: { class: "govuk-!-font-weight-bold" })
+<%= govuk_summary_card(title: t(".heading"),
+                       heading_level: 3,
+                       html_attributes: { id: "app-check-your-answers__outgoings_and_deductions_details__card" }) do |card|
+      card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__outgoings_and_deductions_details__summary" }) do |summary_list|
+        outgoings_detail_items.each do |item|
+          summary_list.with_row do |row|
+            row.with_key(text: t(".client.#{item.name}"), classes: "govuk-!-width-one-half")
+            row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method)) }
           end
         end
-      end %>
-</section>
+
+        outgoings_detail_items.each do |item|
+          next unless @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && partner_exclude_items.exclude?(item.value_method)
+
+          summary_list.with_row do |row|
+            row.with_key(text: t(".partner.#{item.name}"), classes: "govuk-!-width-one-half")
+            row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method, partner: true)) }
+          end
+        end
+
+        deductions_detail_items(@legal_aid_application).each do |item|
+          summary_list.with_row do |row|
+            row.with_key(text: t(".client.#{item.name}"), classes: "govuk-!-width-one-half")
+            row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method)) }
+          end
+
+          next unless @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && partner_exclude_items.exclude?(item.value_method)
+
+          summary_list.with_row do |row|
+            row.with_key(text: t(".partner.#{item.name}"), classes: "govuk-!-width-one-half")
+            row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method, partner: true)) }
+          end
+        end
+
+        result = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+                   @cfe_result.__send__(:total_monthly_outgoings) + @cfe_result.__send__(:total_monthly_outgoings, partner: true) + @cfe_result.__send__(:total_deductions)
+                 else
+                   @cfe_result.__send__(:total_monthly_outgoings) + @cfe_result.__send__(:total_deductions)
+                 end
+
+        summary_list.with_row(classes: "bold-border-top") do |row|
+          row.with_key { t(".total_outgoings_and_deductions") }
+          row.with_value(text: gds_number_to_currency(gds_number_to_currency(result)), html_attributes: { class: "govuk-!-font-weight-bold" })
+        end
+      end
+    end %>
