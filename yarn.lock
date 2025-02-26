@@ -1383,13 +1383,10 @@
   dependencies:
     buffer "^6.0.3"
 
-"@ministryofjustice/frontend@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-3.3.1.tgz#aa743b56dd31e8e1373f20a5791afb234804eaba"
-  integrity sha512-4npwkub8xkhp+YFUK9MIm8armTTs7hzkvT33Ijetxi6aI4Ezzym7XPv4XjQavYAewmv+CHv6WqbBCqtJrWwtmg==
-  dependencies:
-    govuk-frontend "^5.0.0"
-    moment "^2.27.0"
+"@ministryofjustice/frontend@^3.6.2":
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-3.6.2.tgz#3bda8180d7268818c29545395ba388b380e1e8b5"
+  integrity sha512-x3vmqT4c3V1nQXOojIZIUKenmgVe5YITobU/TOdPK80Eeb4h9XLvutKHNfTYRcvQgStfP49aZl8pRbxJRQoXHA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -2229,10 +2226,10 @@ chokidar@^4.0.0:
   dependencies:
     readdirp "^4.0.1"
 
-chromium-bidi@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-1.3.0.tgz#59051cae1532444f2642e612f917100ce720a90f"
-  integrity sha512-G3x1bkST13kmbL7+dT/oRkNH/7C4UqG+0YQpmySrzXspyOhYgDNc6lhSGpj3cuexvH25WTENhTYq2Tt9JRXtbw==
+chromium-bidi@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-2.0.0.tgz#f2f59a0c89cd1b2965e89e36b82c9e18e847deed"
+  integrity sha512-8VmyVj0ewSY4pstZV0Y3rCUUwpomam8uWgHZf1XavRxJEP4vU9/dcpNuoyB+u4AQxPo96CASXz5CHPvdH+dSeQ==
   dependencies:
     mitt "^3.0.1"
     zod "^3.24.1"
@@ -3388,7 +3385,7 @@ gopd@^1.0.1:
   dependencies:
     get-intrinsic "^1.1.3"
 
-govuk-frontend@^5.0.0, govuk-frontend@^5.8.0:
+govuk-frontend@^5.8.0:
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.8.0.tgz#da1b03cb4f2ba1f6036be0dac3c5327c3405174c"
   integrity sha512-6l3f/YhDUCWjpmSW3CL95Hg8B+ZLzTf2WYo25ZtCs2Lb8UIzxxxFI8LxG7Ey/z04UuPhUunqFhTwSkQyJ69XbQ==
@@ -4596,11 +4593,6 @@ mitt@^3.0.1:
   resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.1.tgz#ea36cf0cc30403601ae074c8f77b7092cdab36d1"
   integrity sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==
 
-moment@^2.27.0:
-  version "2.30.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
-  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
-
 ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
@@ -4961,10 +4953,10 @@ postcss-value-parser@^4.2.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.4.32, postcss@^8.5.1, postcss@^8.5.2:
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.2.tgz#e7b99cb9d2ec3e8dd424002e7c16517cb2b846bd"
-  integrity sha512-MjOadfU3Ys9KYoX0AdkBlFEF1Vx37uCCeN4ZHnmwm9FfpbsGWMZeBLMmmpY+6Ocqod7mkdZ0DT31OlbsFrLlkA==
+postcss@^8.4.32, postcss@^8.5.1, postcss@^8.5.3:
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.3.tgz#1463b6f1c7fb16fe258736cba29a2de35237eafb"
+  integrity sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==
   dependencies:
     nanoid "^3.3.8"
     picocolors "^1.1.1"
@@ -5043,28 +5035,28 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.1.tgz#027422e2faec0b25e1549c3e1bd8309b9133b6e5"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
-puppeteer-core@24.2.1:
-  version "24.2.1"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.2.1.tgz#a7a3a82902452094d746e483404767f0e16fed98"
-  integrity sha512-bCypUh3WXzETafv1TCFAjIUnI8BiQ/d+XvEfEXDLcIMm9CAvROqnBmbt79yBjwasoDZsgfXnUmIJU7Y27AalVQ==
+puppeteer-core@24.3.0:
+  version "24.3.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.3.0.tgz#7fe2e8b69923825640d1452b1083f90d2f21619e"
+  integrity sha512-x8kQRP/xxtiFav6wWuLzrctO0HWRpSQy+JjaHbqIl+d5U2lmRh2pY9vh5AzDFN0EtOXW2pzngi9RrryY1vZGig==
   dependencies:
     "@puppeteer/browsers" "2.7.1"
-    chromium-bidi "1.3.0"
+    chromium-bidi "2.0.0"
     debug "^4.4.0"
     devtools-protocol "0.0.1402036"
     typed-query-selector "^2.12.0"
-    ws "^8.18.0"
+    ws "^8.18.1"
 
-puppeteer@^24.2.1:
-  version "24.2.1"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.2.1.tgz#e2e0370d84b788a12dcfc1cff6a970ce37ecc2e8"
-  integrity sha512-Euno62ou0cd0dTkOYTNioSOsFF4VpSnz4ldD38hi9ov9xCNtr8DbhmoJRUx+V9OuPgecueZbKOohRrnrhkbg3Q==
+puppeteer@^24.3.0:
+  version "24.3.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.3.0.tgz#27b58257053df2cec590ec0bc4874017a90157e6"
+  integrity sha512-wYEx+NnEM1T6ncHB+IsTovUgx+JlZ0pv0sRGTb8IzoTeOILvyUcdU2h34bYEQ1iG5maz1VQA5eI4kzIyAVh90A==
   dependencies:
     "@puppeteer/browsers" "2.7.1"
-    chromium-bidi "1.3.0"
+    chromium-bidi "2.0.0"
     cosmiconfig "^9.0.0"
     devtools-protocol "0.0.1402036"
-    puppeteer-core "24.2.1"
+    puppeteer-core "24.3.0"
     typed-query-selector "^2.12.0"
 
 pure-rand@^6.0.0:
@@ -5310,10 +5302,10 @@ safe-regex-test@^1.0.3:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass@^1.85.0:
-  version "1.85.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.85.0.tgz#0127ef697d83144496401553f0a0e87be83df45d"
-  integrity sha512-3ToiC1xZ1Y8aU7+CkgCI/tqyuPXEmYGJXO7H4uqp0xkLXUqp88rQQ4j1HmP37xSJLbCJPaIiv+cT1y+grssrww==
+sass@^1.85.1:
+  version "1.85.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.85.1.tgz#18ab0bb48110ae99163778f06445b406148ca0d5"
+  integrity sha512-Uk8WpxM5v+0cMR0XjX9KfRIacmSG86RH4DCCZjLU2rFh5tyutt9siAXJ7G+YfxQ99Q6wrRMbMlVl6KqUms71ag==
   dependencies:
     chokidar "^4.0.0"
     immutable "^5.0.2"
@@ -6168,10 +6160,10 @@ ws@^8.11.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.17.1.tgz#9293da530bb548febc95371d90f9c878727d919b"
   integrity sha512-6XQFvXTkbfUOZOKKILFG1PDK2NDQs4azKQl26T0YS5CxqWLgXajbPZ+h4gZekJyRqFU8pvnbAbbs/3TgRPy+GQ==
 
-ws@^8.18.0:
-  version "8.18.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.0.tgz#0d7505a6eafe2b0e712d232b42279f53bc289bbc"
-  integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
+ws@^8.18.1:
+  version "8.18.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.1.tgz#ea131d3784e1dfdff91adb0a4a116b127515e3cb"
+  integrity sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
