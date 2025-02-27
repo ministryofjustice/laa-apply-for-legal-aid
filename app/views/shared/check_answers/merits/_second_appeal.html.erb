@@ -1,9 +1,11 @@
 <%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__second_appeal" }, heading_level: 3) do |card|
-      card.with_action do
-        govuk_link_to(t("generic.change"),
-                      providers_legal_aid_application_second_appeal_path(@legal_aid_application),
-                      visually_hidden_text: t(".heading"),
-                      id: "app-check-your-answers__second_appeal_heading")
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_second_appeal_path(@legal_aid_application),
+                        visually_hidden_text: t(".heading"),
+                        id: "app-check-your-answers__second_appeal_heading")
+        end
       end
 
       card.with_summary_list(actions: false) do |summary_list|
