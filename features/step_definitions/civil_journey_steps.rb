@@ -519,6 +519,57 @@ Given("I have started an application and reached the proceedings list") do
   steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
 end
 
+Given("I have started an application, added all available proceedings, and reached the proceedings list") do
+  @legal_aid_application = create(:legal_aid_application,
+                                  :with_applicant_and_address_lookup)
+  create(:proceeding, :pbm40, legal_aid_application: @legal_aid_application)
+  create(:proceeding,
+         :with_scope_limitations,
+         :without_df_date,
+         legal_aid_application: @legal_aid_application,
+         substantive_cost_limitation: 25_000,
+         delegated_functions_cost_limitation: 2_250,
+         name: "placement_order_parent_or_parental_responsibility_plf_enforcement",
+         ccms_code: "PBM40E",
+         matter_type: "public law family (PLF)",
+         category_of_law: "Family",
+         category_law_code: "MAT",
+         ccms_matter_code: "KPBLB",
+         meaning: "Placement order - parent or parental responsibility - enforcement",
+         description: "To represent a parent or person with parental responsibility on an application for a placement order. Enforcement only.")
+  create(:proceeding,
+         :with_scope_limitations,
+         :without_df_date,
+         legal_aid_application: @legal_aid_application,
+         substantive_cost_limitation: 25_000,
+         delegated_functions_cost_limitation: 2_250,
+         ccms_code: "PBM45",
+         matter_type: "public law family (PLF)",
+         category_of_law: "Family",
+         category_law_code: "MAT",
+         ccms_matter_code: "KPBLB",
+         name: "declaration_of_parentage",
+         meaning: "Adoption order - parent or parental responsibility",
+         description: "To represent a parent or person with parental responsibility on an application for an adoption order.")
+  create(:proceeding,
+         :with_scope_limitations,
+         :without_df_date,
+         legal_aid_application: @legal_aid_application,
+         substantive_cost_limitation: 25_000,
+         delegated_functions_cost_limitation: 2_250,
+         ccms_code: "PBM45E",
+         matter_type: "public law family (PLF)",
+         category_of_law: "Family",
+         category_law_code: "MAT",
+         ccms_matter_code: "KPBLB",
+         name: "declaration_of_parentage_enforcement",
+         meaning: "Adoption order - parent or parental responsibility - enforcement",
+         description: "To represent a parent or person with parental responsibility on an application for a placement order. Enforcement only.")
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'You have added all the allowed proceedings')
+end
+
 Given("I have started an application with multiple proceedings and reached the check your answers page") do
   @legal_aid_application = create(
     :legal_aid_application,
