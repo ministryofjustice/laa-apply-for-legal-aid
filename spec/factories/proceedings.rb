@@ -46,6 +46,13 @@ FactoryBot.define do
       no_scope_limitations { false }
     end
 
+    trait :with_scope_limitations do
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
+      end
+    end
+
     trait :da001 do
       lead_proceeding { true }
       ccms_code { "DA001" }
@@ -460,5 +467,9 @@ FactoryBot.define do
     ccms_matter_code { "KPBLB" }
     client_involvement_type_ccms_code { "A" }
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    after(:create) do |proceeding, evaluator|
+      create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+      create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
+    end
   end
 end
