@@ -758,8 +758,6 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webdack-uuid_migration (1.5.0)
-      activerecord (>= 4.0)
     webmock (3.25.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -876,7 +874,6 @@ DEPENDENCIES
   tzinfo-data
   vcr
   view_component
-  webdack-uuid_migration (~> 1.5.0)
   webmock
   webrick
 
