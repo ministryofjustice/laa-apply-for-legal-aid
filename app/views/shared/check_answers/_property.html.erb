@@ -13,7 +13,7 @@
 
   <%= card.with_summary_list(actions: false) do |summary_list| %>
     <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t("shared.check_answers.assets.property.own_home#{individual}"), classes: "govuk-!-width-one-half") %>
+      <%= row.with_key(text: t("shared.check_answers.assets.property.own_home#{individual}"), classes: "govuk-!-width-one-third") %>
       <%= row.with_value { @legal_aid_application.own_home.blank? ? "" : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}") } %>
     <% end %>
   <% end %>
@@ -33,23 +33,23 @@
 
     <%= card.with_summary_list(actions: false) do |summary_list| %>
       <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t("shared.check_answers.assets.property.property_value#{individual}"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t("shared.check_answers.assets.property.property_value#{individual}"), classes: "govuk-!-width-one-third") %>
         <%= row.with_value { gds_number_to_currency(@legal_aid_application.property_value) } %>
       <% end %>
 
       <% if @legal_aid_application.own_home_mortgage? %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__outstanding_mortgage" }) do |row| %>
-          <%= row.with_key(text: t("shared.check_answers.assets.property.outstanding_mortgage"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_key(text: t("shared.check_answers.assets.property.outstanding_mortgage")) %>
           <%= row.with_value { gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount) } %>
         <% end %>
 
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__shared_ownership" }) do |row| %>
-          <%= row.with_key(text: t("shared.check_answers.assets.property.shared_ownership#{individual}"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_key(text: t("shared.check_answers.assets.property.shared_ownership#{individual}")) %>
           <%= row.with_value { @legal_aid_application.shared_ownership.blank? ? "" : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}") } %>
         <% end %>
 
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__percentage_home" }) do |row| %>
-          <%= row.with_key(text: t("shared.check_answers.assets.property.percentage_home#{individual}"), classes: "govuk-!-width-one-half") %>
+          <%= row.with_key(text: t("shared.check_answers.assets.property.percentage_home#{individual}")) %>
           <%= row.with_value { number_to_percentage(@legal_aid_application.percentage_home, precision: 0) } %>
         <% end %>
       <% end %>
