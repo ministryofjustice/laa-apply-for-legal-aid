@@ -14,12 +14,8 @@ module TaskListHelper
     __send__(url, legal_aid_application)
   end
 
-  def proceeding_task_url(name, application, ccms_code, status)
-    url = if name.eql?(:client_relationship_to_proceeding)
-            :"providers_merits_task_list_#{new_proceeding_url_fragment(name, status)}_path"
-          else
-            :"providers_merits_task_list_#{url_fragment(name)}_path"
-          end
+  def proceeding_task_url(name, application, ccms_code)
+    url = :"providers_merits_task_list_#{url_fragment(name)}_path"
 
     __send__(url, proceeding_id(application, ccms_code))
   end
@@ -36,11 +32,6 @@ private
 
   def new_proceeding_application_url_fragment(name, status)
     name = "client_check_parental_answer" if status.eql?(:complete)
-    I18n.t("providers.merits_task_lists.show.urls.#{name}")
-  end
-
-  def new_proceeding_url_fragment(name, status)
-    name = "check_who_client_is" if status.eql?(:complete)
     I18n.t("providers.merits_task_lists.show.urls.#{name}")
   end
 
