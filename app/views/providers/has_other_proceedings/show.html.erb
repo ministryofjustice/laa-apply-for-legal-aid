@@ -39,6 +39,7 @@
     <% if @form.remaining_proceedings.zero? %>
       <h2 class="govuk-heading-l"><%= content_for(:page_title) %></h2>
       <p class="govuk-body"><%= t(".no_more_proceedings.caption") %></p>
+      <%= form.hidden_field :has_other_proceeding, value: "false" %>
     <% else %>
       <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
                                               legend: { text: content_for(:page_title), tag: "h2", size: "m" } do %>
