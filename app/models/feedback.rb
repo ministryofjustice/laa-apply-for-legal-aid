@@ -16,12 +16,11 @@ class Feedback < ApplicationRecord
   }
 
   enum :time_taken_satisfaction, {
-    unable: 0,
-    great_deal: 1,
-    alot: 2,
-    neither_too_much_nor_too_little: 3,
-    moderate: 4,
-    quick: 5,
+    great_deal: 0,
+    alot: 1,
+    neither_too_much_nor_too_little: 2,
+    moderate: 3,
+    quick: 4,
   }
 
   validates :satisfaction, :difficulty, presence: true

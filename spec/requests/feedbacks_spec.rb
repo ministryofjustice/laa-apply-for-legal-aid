@@ -276,10 +276,10 @@ RSpec.describe "FeedbacksController" do
       expect(page)
         .to have_content("1. Were you able to do what you needed today?")
         .and have_content("2. How easy or difficult was it to use this service?")
-        .and have_content("3. What do you think about the amount of time it took you to use this service? (optional)")
+        .and have_content("3. What do you think about the amount of time it took you to use this service?")
         .and have_content("4. Overall, how satisfied were you with this service?")
-        .and have_content("5. Do you have any other feedback or suggestions on how we could improve the service?")
-        .and have_content("6. If you are happy to be contacted for future research opportunities with the LAA, please provide your contact details.")
+        .and have_content("5. Do you have any feedback or suggestions on how we could improve the service?")
+        .and have_content("6. If you're happy to be contacted for research opportunities with the Legal Aid Agency (LAA), please provide your contact details")
     end
 
     it "has a hidden form field to show whether the feedback originates from a submission email with false value" do
@@ -325,10 +325,10 @@ RSpec.describe "FeedbacksController" do
       expect(page)
         .to have_content("1. Were you able to do what you needed today?")
         .and have_content("2. How easy or difficult was it to use this service?")
-        .and have_content("3. What do you think about the amount of time it took you to use this service? (optional)")
+        .and have_content("3. What do you think about the amount of time it took you to use this service?")
         .and have_content("4. Overall, how satisfied were you with this service?")
-        .and have_content("5. Do you have any other feedback or suggestions on how we could improve the service?")
-        .and have_content("6. If you are happy to be contacted for future research opportunities with the LAA, please provide your contact details.")
+        .and have_content("5. Do you have any feedback or suggestions on how we could improve the service?")
+        .and have_content("6. If you're happy to be contacted for research opportunities with the Legal Aid Agency (LAA), please provide your contact details")
     end
 
     it "has a hidden form field to show whether the feedback originates from a submission email with true value" do

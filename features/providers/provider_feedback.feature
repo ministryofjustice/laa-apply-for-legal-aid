@@ -5,17 +5,15 @@ Feature: Provider feedback
     When I click link "feedback"
     Then I should be on a page with title "Help us improve the Apply for legal aid service"
     And I should be on a page showing "Help us improve the Apply for legal aid service"
-    And I should be on a page showing "About your answers"
     And I should be on a page showing "We’ll use your answers to help improve the service"
-    And I should be on a page showing "About your personal information"
-    And I should be on a page showing "If you want to participate in future research we will ask you for some personal"
+    And I should see a link with text "See how we protect your personal information"
 
     And I should be on a page showing "1. Were you able to do what you needed today?"
     And I should be on a page showing "2. How easy or difficult was it to use this service?"
-    And I should be on a page showing "3. What do you think about the amount of time it took you to use this service? (optional)"
+    And I should be on a page showing "3. What do you think about the amount of time it took you to use this service?"
     And I should be on a page showing "4. Overall, how satisfied were you with this service?"
-    And I should be on a page showing "5. Do you have any other feedback or suggestions on how we could improve the service?"
-    And I should be on a page showing "6. If you are happy to be contacted for future research opportunities with the LAA, please provide your contact details."
+    And I should be on a page showing "5. Do you have any feedback or suggestions on how we could improve the service?"
+    And I should be on a page showing "6. If you're happy to be contacted for research opportunities with the Legal Aid Agency (LAA), please provide your contact details"
 
     # Test the mandatory field errors
     When I click "Send"
