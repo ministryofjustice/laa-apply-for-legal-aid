@@ -16,7 +16,7 @@ module UploadedEvidence
     end
 
     def attachment_type_options
-      attachment_type_options = required_documents.map { |rd| [rd, rd.humanize] }
+      attachment_type_options = allowed_documents.map { |rd| [rd, rd.humanize] }
       attachment_type_options << %w[uncategorised Uncategorised]
       attachment_type_options
     end

@@ -30,10 +30,10 @@ module UploadedEvidence
       let(:service) { described_class.new(controller) }
       let(:dwp_override) { instance_double DWPOverride, passporting_benefit: "income_related_employment_and_support_allowance" }
 
-      it "populates the list of required documents" do
+      it "populates the list of allowed documents" do
         allow(laa).to receive(:allowed_document_categories).and_return(allowed_document_categories)
         service.call
-        expect(service.required_documents).to eq allowed_document_categories
+        expect(service.allowed_documents).to eq allowed_document_categories
       end
 
       it "populates the upload form" do

@@ -9,7 +9,7 @@ module UploadedEvidence
       end
 
       DocumentCategoryAnalyser.call(legal_aid_application)
-      required_documents
+      allowed_documents
       attachment_type_options
 
       @next_action = :show

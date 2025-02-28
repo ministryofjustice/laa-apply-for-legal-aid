@@ -23,7 +23,7 @@ module Providers
     def list
       DocumentCategoryAnalyser.call(legal_aid_application)
       @service = UploadedEvidence::ListService.call(self)
-      @required_documents = @service.required_documents
+      @allowed_documents = @service.allowed_documents
       @attachment_type_options = @service.attachment_type_options
       @uploaded_evidence_collection = @service.uploaded_evidence_collection
       render partial: "uploaded_files", locals: { attachments: @service.uploaded_evidence_collection.original_attachments }
@@ -37,7 +37,7 @@ module Providers
       @error_message = @service.error_message
       @evidence_type_translation = @service.evidence_type_translation
       @mandatory_evidence_errors = @service.mandatory_evidence_errors
-      @required_documents = @service.required_documents
+      @allowed_documents = @service.allowed_documents
       @submission_form = @service.submission_form
       @successful_upload = @service.successful_upload
       @successfully_deleted = @service.successfully_deleted
