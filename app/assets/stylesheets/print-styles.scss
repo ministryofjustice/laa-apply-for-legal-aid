@@ -66,6 +66,10 @@
     break-inside: avoid;
   }
 
+  .print-no-break-after {
+    break-after: avoid;
+  }
+
   .print-header-wrapper {
     position: relative;
   }
