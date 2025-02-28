@@ -6,6 +6,10 @@ Then("I should be on a page with title matching {string}") do |title|
   expect(page).to have_title(/#{title}/)
 end
 
+Then("I should see a link with text {string}") do |locator|
+  expect(page).to have_link(locator)
+end
+
 Then("I should see govuk error summary {string}") do |error_text|
   summary = page.find("div.govuk-error-summary > div[role='alert']")
   expect(summary).to have_css(

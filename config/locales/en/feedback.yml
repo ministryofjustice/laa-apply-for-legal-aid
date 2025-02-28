@@ -1,14 +1,21 @@
 ---
 en:
   feedback:
-    new:
+    form:
       applicant_email_hint: Please provide your email address if you'd like a response
-      difficulty: How easy or difficult was it to use this service?
-      done_all_needed: Were you able to do what you needed today?
-      satisfaction: Overall, how satisfied were you with this service?
-      improvement_suggestion: Do you have any other feedback or suggestions on how we could improve the service?
-      title: Help us improve this service
-    show:
+      done_all_needed: 1. Were you able to do what you needed today?
+      done_all_needed_reason: If no, please let us know what you were trying to do and what prevented you from doing it
+      difficulty: 2. How easy or difficult was it to use this service?
+      difficulty_reason: Explain your answer
+      time_taken_satisfaction: 3. What do you think about the amount of time it took you to use this service?
+      time_taken_satisfaction_reason: Explain your answer
+      satisfaction: 4. Overall, how satisfied were you with this service?
+      satisfaction_reason: Explain your answer
+      improvement_suggestion: 5. Do you have any feedback or suggestions on how we could improve the service?
+      contacts_for_future_research: 6. If you're happy to be contacted for research opportunities with the Legal Aid Agency (LAA), please provide your contact details
+      contact_email: Email
+      contact_name: Name
+    thanks:
       close_tab: You can close this tab or page.
       link: Back to your application
       title: Thank you for your feedback
