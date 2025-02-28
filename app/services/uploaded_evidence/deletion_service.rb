@@ -15,12 +15,6 @@ module UploadedEvidence
       @uploaded_evidence_collection ||= legal_aid_application.uploaded_evidence_collection || legal_aid_application.build_uploaded_evidence_collection
     end
 
-    def attachment_type_options
-      attachment_type_options = required_documents.map { |rd| [rd, rd.humanize] }
-      attachment_type_options << %w[uncategorised Uncategorised]
-      attachment_type_options
-    end
-
   private
 
     def delete_original_and_pdf_files

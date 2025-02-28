@@ -1,4 +1,5 @@
 require "rails_helper"
+require_relative "shared_examples_for_uploaded_evidence"
 
 module UploadedEvidence
   RSpec.describe DeletionService do
@@ -23,7 +24,7 @@ module UploadedEvidence
       let(:params) { { delete_button: "Delete", attachment_id: attachment.id } }
       let(:service) { described_class.new(controller) }
 
-      it "Deletes the attachment" do
+      it "deletes the attachment" do
         expect { service.call }.to change(Attachment, :count).by(-1)
       end
 
@@ -37,5 +38,7 @@ module UploadedEvidence
         expect(service.next_action).to eq :show
       end
     end
+
+    it_behaves_like "An uploaded evidence service"
   end
 end
