@@ -1,4 +1,5 @@
 require "rails_helper"
+require_relative "shared_examples_for_uploaded_evidence"
 
 module UploadedEvidence
   RSpec.describe ListService do
@@ -37,5 +38,7 @@ module UploadedEvidence
         expect(service.attachment_type_options).to eq expected_attachment_type_options
       end
     end
+
+    it_behaves_like "An uploaded evidence service"
   end
 end
