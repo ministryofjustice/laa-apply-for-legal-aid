@@ -976,7 +976,7 @@ en:
               content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
               client_employment_evidence_missing: Upload your client's employment evidence
               part_employ_evidence_missing: Upload the partner's employment evidence
-              court_application_or_order_missing: Upload the application to court or the court order for Section 8 proceedings
+              court_application_or_order_missing: Upload the opponents' application to court or the court order
               court_application_missing: Upload the application to court for Section 8 proceedings
               court_order_missing: Upload the court order for Section 8 proceedings
               plf_court_order_missing: Upload the court order
