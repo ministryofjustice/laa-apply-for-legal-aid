@@ -48,6 +48,28 @@ RSpec.describe TaskListHelper do
     end
   end
 
+  describe "#_task_url" do
+    describe "client relationship to children" do
+      subject(:_task_url) { helper._task_url(task_name, application, status) }
+
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_proceedings, explicit_proceedings: %i[pb003 pb059]) }
+      let(:proceeding) { application.applicant }
+      let(:task_name) { :client_relationship_to_children }
+
+      context "when status is complete" do
+        let(:status) { :complete }
+
+        it { is_expected.to eq providers_legal_aid_application_client_check_parental_answer_path(application) }
+      end
+
+      context "when status is not started" do
+        let(:status) { :not_started }
+
+        it { is_expected.to eq providers_legal_aid_application_client_is_biological_parent_path(application) }
+      end
+    end
+  end
+
   describe "#proceeding_task_url" do
     context "when client relationship to proceeding" do
       subject(:proceeding_task_url) { helper.proceeding_task_url(task_name, application, ccms_code, status) }
