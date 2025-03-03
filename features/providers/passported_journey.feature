@@ -105,7 +105,6 @@ Feature: passported_journey completes application
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
-    Then I should be on a page showing "Passported"
 
   @javascript @vcr
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change

@@ -918,8 +918,6 @@ en:
         change: Change
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
-        no_means_test_income_heading: Income, regular payments and assets
-        non_means_tested: Non means tested
         section_delegated:
           heading: Delegated functions
         section_emergency:

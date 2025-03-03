@@ -51,12 +51,7 @@
     <%= render("shared/check_answers/proceeding_details") %>
   </section>
 
-  <% if @legal_aid_application.non_means_tested? %>
-    <section class="print-no-break govuk-!-margin-bottom-6">
-      <h2 class="govuk-heading-l"><%= t(".no_means_test_income_heading") %></h2>
-      <%= govuk_tag(text: t(".non_means_tested"), classes: ["govuk-!-margin-bottom-4"]) %>
-    </section>
-  <% else %>
+  <% unless @legal_aid_application.non_means_tested? || @legal_aid_application.passported? %>
     <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: true) %>
 
     <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: true) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
@@ -72,12 +67,12 @@
     <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
     <%= render "shared/check_answers/dependants", read_only: true %>
 
-    <% individual = @source_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
-    <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
-
-    <%= render "shared/check_answers/assets", read_only: true, individual: %>
-
   <% end %>
+
+  <% individual = @source_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
+  <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
+
+  <%= render "shared/check_answers/assets", read_only: true, individual: %>
 
   <section class="merits page_break_before">
     <%= render(
