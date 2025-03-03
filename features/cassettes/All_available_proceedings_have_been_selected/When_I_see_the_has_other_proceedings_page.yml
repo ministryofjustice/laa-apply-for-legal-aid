@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
+    body:
+      encoding: UTF-8
+      string: '{"current_proceedings":["PBM40","PBM40E","PBM45","PBM45E"],"allowed_categories":["MAT"],"search_term":""}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 27 Feb 2025 12:04:13 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '27'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"cf26ca1ee8f9c63a951189dc0c043e1f"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - d59a627f66b8960ce50e38653038e0ff
+      x-runtime:
+      - '0.069246'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":false,"data":[]}'
+  recorded_at: Thu, 27 Feb 2025 12:04:13 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
+    body:
+      encoding: UTF-8
+      string: '{"current_proceedings":["PBM40","PBM40E","PBM45","PBM45E"],"allowed_categories":["MAT"],"search_term":""}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 27 Feb 2025 12:04:13 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '27'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"cf26ca1ee8f9c63a951189dc0c043e1f"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 704185d97f2af8f41a48ce5c16f8c698
+      x-runtime:
+      - '0.082332'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":false,"data":[]}'
+  recorded_at: Thu, 27 Feb 2025 12:04:13 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/PBM40
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 27 Feb 2025 12:04:15 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '320'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - e3fdb2f83d711f4c32377333848ea3b0
+      x-runtime:
+      - '0.005977'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+        party"}]}'
+  recorded_at: Thu, 27 Feb 2025 12:04:15 GMT
+recorded_with: VCR 6.3.1
