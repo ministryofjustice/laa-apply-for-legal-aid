@@ -1,12 +1,12 @@
 <% if @legal_aid_application.cfe_result.assessment_result == 'eligible' %>
-  <p class="govuk-body moj-interruption-card__body"><%= t(".line1_eligible") %></p>
+  <p><%= t(".line1_eligible") %></p>
 <% elsif @details.length > 1 %>
-  <p class="govuk-body moj-interruption-card__body"><%= t(".line1_multi") %></p>
+  <p><%= t(".line1_multi") %></p>
   <% @details.each do |detail| %>
-    <p class="govuk-body moj-interruption-card__body"><%= t(".detail", detail:) %></p>
+    <p><%= t(".detail", detail:) %></p>
   <% end %>
 <% else %>
-  <p class="govuk-body moj-interruption-card__body"><%= t(".line1", detail: @details[0]) %></p>
+  <p><%= t(".line1", detail: @details[0]) %></p>
 <% end %>
-<p class="govuk-body moj-interruption-card__body"><%= t(".line2") %></p>
-<p class="govuk-body moj-interruption-card__body"><%= t(".line3") %></p>
+<p><%= t(".line2") %></p>
+<p><%= t(".line3") %></p>

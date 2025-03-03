@@ -2087,11 +2087,12 @@ en:
         show:
           heading: Is this proceeding for a change of name application?
     change_of_names_interrupts:
+      actions:
+        change: Change your answer
+        applications: Back to your applications
       show:
         title_html: Change of name applications are not eligible for legal aid
         paragraph: You can go back and change your answer if this is not a change of name application.
-        change: Change your answer
-        applications: Back to your applications
     proceeding_loop:
       single_proceeding: Proceeding 1
       multi_proceeding: Proceeding %{position} of %{total}
@@ -2151,6 +2152,8 @@ en:
       enter_limitation_note_error: Enter a limitation note for %{scope_limitation}
     interrupt:
       blocks:
+        actions:
+          applications: Make a new application
         show:
           title_html: You cannot submit this application
           body_text: This is because the application will be missing information after recent updates to the service.
@@ -2158,4 +2161,4 @@ en:
           option_bullets:
             - make a new application for your client if you still need to submit one
             - go back to your applications
-          applications: Make a new application
+

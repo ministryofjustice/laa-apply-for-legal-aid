@@ -1,0 +1,5 @@
+<%= govuk_button_link_to(t("providers.proceedings_sca.interrupts.show.#{@type}.proceedings"),
+                         providers_legal_aid_application_sca_interrupt_path(@legal_aid_application, @type),
+                         method: :delete,
+                         inverse: true,
+                         role: "button") %>
