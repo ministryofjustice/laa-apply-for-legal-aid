@@ -7,6 +7,8 @@
 
   <% if bank_statement_upload %>
     <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only:, partner: false) %>
+  <% elsif @legal_aid_application.cfe_result.present? && display_employment_income? %>
+    <%= render "shared/employment_income_table" %>
   <% end %>
 
   <% if @legal_aid_application.applicant.hmrc_employment_income? %>

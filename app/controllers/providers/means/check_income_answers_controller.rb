@@ -2,6 +2,7 @@ module Providers
   module Means
     class CheckIncomeAnswersController < ProviderBaseController
       before_action :set_transaction_types, only: :show
+      helper_method :display_employment_income?
 
       def show
         legal_aid_application.check_means_income! unless legal_aid_application.checking_means_income?
