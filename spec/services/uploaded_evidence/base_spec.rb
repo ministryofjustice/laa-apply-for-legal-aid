@@ -1,5 +1,5 @@
 require "rails_helper"
-
+require_relative "shared_examples_for_uploaded_evidence"
 module UploadedEvidence
   RSpec.describe Base do
     subject(:base_service_call) { described_class.call(controller) }
@@ -43,5 +43,7 @@ module UploadedEvidence
         end
       end
     end
+
+    it_behaves_like "An uploaded evidence service"
   end
 end

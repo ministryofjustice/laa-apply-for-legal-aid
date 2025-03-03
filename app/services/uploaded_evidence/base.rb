@@ -28,7 +28,7 @@ module UploadedEvidence
     end
 
     def attachment_type_options
-      @attachment_type_options = required_documents.map { |rd| [rd, attachment_type_name(rd)] }
+      @attachment_type_options = allowed_documents.map { |rd| [rd, attachment_type_name(rd)] }
       @attachment_type_options << %w[uncategorised Uncategorised]
       @attachment_type_options
     end
@@ -40,7 +40,7 @@ module UploadedEvidence
     end
 
     def evidence_type_translation
-      return unless required_documents.include?("benefit_evidence")
+      return unless allowed_documents.include?("benefit_evidence")
 
       I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{passporting_benefit}")
     end
@@ -57,8 +57,8 @@ module UploadedEvidence
       @upload_form ||= Providers::UploadedEvidenceCollectionForm.new(uploaded_evidence_collection_params)
     end
 
-    def required_documents
-      @required_documents = legal_aid_application.allowed_document_categories
+    def allowed_documents
+      @allowed_documents = legal_aid_application.allowed_document_categories
     end
 
     def submission_form
@@ -66,7 +66,7 @@ module UploadedEvidence
     end
 
     def populate_upload_form
-      required_documents
+      allowed_documents
       @upload_form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
       attachment_type_options
       evidence_type_translation
