@@ -27,9 +27,54 @@ RSpec.describe Providers::ProceedingsSCA::InterruptsController do
         expect(response).to have_http_status(:ok)
       end
 
-      it "shows text for a supervision order and a button to select a different proceeding" do
-        expect(response.body).to include("For special children act, a supervision order cannot be varied, discharged or extended")
-        expect(response.body).to include("Remove the proceeding and select a new one")
+      context "when passed a type of 'heard_as_alternatives'" do
+        let(:display) { "heard_as_alternatives" }
+
+        it "shows the expected interrupt content" do
+          expect(page)
+            .to have_content("You cannot submit this application under special children act")
+            .and have_content("This is because it needs to be means and merits tested")
+            .and have_content("check for a different matter type in this service or use CCMS")
+            .and have_content("go back and change your answer")
+            .and have_content("Check for another matter type")
+        end
+      end
+
+      context "when passed a type of 'supervision'" do
+        let(:display) { "supervision" }
+
+        it "shows the expected interrupt content" do
+          expect(page)
+            .to have_content("For special children act, a supervision order cannot be varied, discharged or extended")
+            .and have_content("select a different proceeding or matter type")
+            .and have_content("go back and change your answer")
+            .and have_content("Remove the proceeding and select a new one")
+        end
+      end
+
+      context "when passed a type of 'child_subject'" do
+        let(:display) { "child_subject" }
+
+        it "shows the expected interrupt content" do
+          expect(page)
+            .to have_content("For special children act, your client must be the child subject of the proceeding")
+            .and have_content("select a different proceeding or matter type")
+            .and have_content("go back and change your answer")
+            .and have_content("Remove the proceeding and select a new one")
+        end
+      end
+
+      context "when passed a type of 'plf_none_selected'" do
+        let(:display) { "plf_none_selected" }
+
+        it "shows the expected interrupt content" do
+          expect(page)
+            .to have_content("This is not a public law family matter")
+            .and have_content("This is because it does not relate to an application or order set out in schedule 1, part 1, paragraph 1 of LASPO.")
+            .and have_content("select a different proceeding in this service or use CCMS")
+            .and have_content("go back and change your answer")
+            .and have_content("Select a different proceeding")
+        end
       end
 
       context "when passed an unknown type" do

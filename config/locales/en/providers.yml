@@ -2067,6 +2067,9 @@ en:
             <<: *default
             title_html: This is not a public law family matter
             paragraph: This is because it does not relate to an application or order set out in schedule 1, part 1, paragraph 1 of LASPO.
+            option_bullets_html:
+              - select a different proceeding in this service or <a class="govuk-link govuk-link--inverse" href="https://portal.legalservices.gov.uk/">use CCMS</a>
+              - go back and change your answer
             proceedings: Select a different proceeding
       child_subjects:
         error: Select yes if your client is the child subject of this proceeding
