@@ -27,7 +27,7 @@ RSpec.shared_examples "An uploaded evidence service" do
         ["client_employment_evidence", "Client's employment evidence"],
         ["part_employ_evidence", "Partner's employment evidence"],
         ["gateway_evidence", "Gateway evidence"],
-        ["court_application_or_order", "Court application or order"],
+        ["court_application_or_order", "Opponents' court application or order"],
         ["court_order", "Court order"],
         ["court_application", "Court application"],
         ["expert_report", "Expert report"],
