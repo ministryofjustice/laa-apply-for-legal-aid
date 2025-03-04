@@ -3,7 +3,7 @@ en:
   shared:
     partials:
       cookie_banner:
-        title: Cookies on Apply for legal aid
+        title: Cookies on Apply for civil legal aid
         we_use_some: We use some essential cookies to make this service work.
         wed_also_like: "We'd also like to use analytics cookies so we can understand how you use the service and make improvements."
         accept: Accept analytics cookies
@@ -836,7 +836,7 @@ en:
           Your solicitor will look at your bank statements and put your transactions into the categories you select.
           We need this information to check if you qualify financially for legal aid.
     page-title:
-      suffix: Apply for legal aid  - GOV.UK
+      suffix: Apply for civil legal aid  - GOV.UK
     property_results:
       property: Property
       hint_text: Property disregards and deductions were calculated using the information you provided.

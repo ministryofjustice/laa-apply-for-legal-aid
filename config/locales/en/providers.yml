@@ -187,18 +187,18 @@ en:
           provide_details: provide details of the case
     cookies:
       show:
-        page_title: Cookies on Apply for legal aid
+        page_title: Cookies on Apply for civil legal aid
         success_message: Your cookie settings were saved
         go_back_html: <a class="govuk-link" href="%{link}">Go back</a> to the page you were looking at.
         cookies_are_files: Cookies are files saved on your phone, tablet or computer when you visit a website.
-        we_use_cookies: We use cookies to store information about how you use Apply for legal aid, such as the pages you visit.
+        we_use_cookies: We use cookies to store information about how you use Apply for civil legal aid, such as the pages you visit.
         heading_2: Cookies that measure website use
         we_use_ga: We use Google Analytics to measure how you use the service so we can improve it based on user needs.
         we_do_not_allow: We do not allow Google to use or share the data about how you use this site.
         google_analytics: "Google Analytics sets cookies that store anonymised information about:"
         list:
           - how you got to the site
-          - the pages you visit on Apply for legal aid, and how long you spend on each page
+          - the pages you visit on Apply for civil legal aid, and how long you spend on each page
           - what you click on while you're visiting the site
         use_this_cookie: Use this cookie to measure my website use
         do_not_use: Do not use this cookie to measure my website use
@@ -228,7 +228,7 @@ en:
           no_hint: Correspondence will be addressed to the client
     confirm_dwp_non_passported_applications:
       show:
-        tab_title: DWP records show that your client does not get a passporting benefit – Apply for Legal Aid - GOV.UK
+        tab_title: DWP records show that your client does not get a passporting benefit – Apply for Civil Legal Aid - GOV.UK
         title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit
         is_this_correct: Are the DWP records correct?
         option_no: No, my client gets a passporting benefit
@@ -1765,7 +1765,7 @@ en:
         heading_h2: How it works
         list_heading_one: 1. Get started
         your_client_will: Your client will receive an email clearly labelled from the Legal Aid Agency (LAA) asking them to share 3 months of bank statements.
-        theres_a_link: There's a link in the email directing them to 'Apply for legal aid' to get started.
+        theres_a_link: There's a link in the email directing them to 'Apply for civil legal aid' to get started.
         list_heading_two: 2. Select a bank
         your_client_selects: Your client selects their bank then signs in to their online banking website or app.
         image_alt_1: GOV.UK page asking the user to select from a list of banks.

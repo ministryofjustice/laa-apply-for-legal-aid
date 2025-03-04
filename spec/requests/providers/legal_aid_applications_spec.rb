@@ -133,7 +133,7 @@ RSpec.describe "providers legal aid application requests" do
 
         it "displays the cookie banner" do
           get_request
-          expect(response.body).to include("Cookies on Apply for legal aid")
+          expect(response.body).to include("Cookies on Apply for civil legal aid")
         end
       end
 
@@ -142,7 +142,7 @@ RSpec.describe "providers legal aid application requests" do
 
         it "does not display the cookie banner" do
           get_request
-          expect(response.body).not_to include("Cookies on Apply for legal aid")
+          expect(response.body).not_to include("Cookies on Apply for civil legal aid")
         end
       end
 
@@ -151,7 +151,7 @@ RSpec.describe "providers legal aid application requests" do
 
         it "displays the cookie banner" do
           get_request
-          expect(response.body).to include("Cookies on Apply for legal aid")
+          expect(response.body).to include("Cookies on Apply for civil legal aid")
         end
       end
     end

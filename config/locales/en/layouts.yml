@@ -29,7 +29,7 @@ en:
         feedback: feedback
         phase: Beta
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
-        title: Apply for legal aid
+        title: Apply for civil legal aid
         notice: Notice
     logout:
       admin: Admin sign out
