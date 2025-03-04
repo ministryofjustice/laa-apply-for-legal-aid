@@ -1,6 +1,12 @@
 <%= page_template page_title: "Help us improve the Apply for legal aid service", show_errors_for: @feedback, back_link: back_button do %>
 
   <p class="govuk-body">
+    If you have problems using this service, email <a href="mailto:">
+      <%= t("contacts.show.technical_support.email_address") %>
+    </a> to get help.
+  </p>
+
+  <p class="govuk-body">
     We’ll use your answers to help improve the service. Anything you provide will be confidential and will not be shared outside the
     Ministry of Justice.
   </p>
@@ -15,8 +21,4 @@
   </p>
 
   <%= render partial: "form" %>
-
-  <p class="govuk-body">
-    <%= govuk_link_to("Contact us", "/contact") %> for help and support.
-  </p>
 <% end %>
