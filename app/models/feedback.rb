@@ -23,8 +23,8 @@ class Feedback < ApplicationRecord
     quick: 4,
   }
 
-  validates :satisfaction, :difficulty, presence: true
   validates :done_all_needed, inclusion: { in: [true, false] }
+  validates :difficulty, :satisfaction, presence: true
 
   validates :contact_name, presence: true, unless: ->(feedback) { feedback.contact_email.blank? }
   validates :contact_email, presence: true, unless: ->(feedback) { feedback.contact_name.blank? }
