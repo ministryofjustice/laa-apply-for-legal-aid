@@ -228,7 +228,7 @@ en:
           no_hint: Correspondence will be addressed to the client
     confirm_dwp_non_passported_applications:
       show:
-        tab_title: DWP records show that your client does not get a passporting benefit – Apply for Civil Legal Aid - GOV.UK
+        tab_title: DWP records show that your client does not get a passporting benefit – Apply for civil legal aid - GOV.UK
         title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit
         is_this_correct: Are the DWP records correct?
         option_no: No, my client gets a passporting benefit
