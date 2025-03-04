@@ -90,8 +90,10 @@ module Reports
                first_name: "Johnny",
                last_name: "WALKER",
                date_of_birth:,
-               national_insurance_number: "JA293483A")
+               national_insurance_number: "JA293483A",
+               relationship_to_children:)
       end
+      let(:relationship_to_children) { nil }
 
       let(:provider) do
         create(:provider,
@@ -883,12 +885,12 @@ module Reports
           end
 
           context "when the application has an sca proceeding" do
-            let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child:) }
+            let(:sca_proceeding) { create(:proceeding, :pb059) }
 
             before { legal_aid_application.proceedings << sca_proceeding }
 
             context "when the application has a proceeding with relationship_to_child biological" do
-              let(:relationship_to_child) { "biological" }
+              let(:relationship_to_children) { "biological" }
 
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "Yes"
@@ -900,7 +902,7 @@ module Reports
             end
 
             context "when the application has a proceeding with relatitionship_to_child parental_responsibl;ity_agreement" do
-              let(:relationship_to_child) { "parental_responsibility_agreement" }
+              let(:relationship_to_children) { "parental_responsibility_agreement" }
 
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "No"
@@ -912,7 +914,7 @@ module Reports
             end
 
             context "when the application has a proceeding with relationship_to_child court_order" do
-              let(:relationship_to_child) { "court_order" }
+              let(:relationship_to_children) { "court_order" }
               let(:parental_responsibility_evidence) { create(:attachment, :parental_responsibility, attachment_name: "parental_responsibility") }
 
               before { legal_aid_application.attachments << parental_responsibility_evidence }
@@ -927,7 +929,7 @@ module Reports
             end
 
             context "when the application has a proceeding with relationship_to_child child_subject" do
-              let(:relationship_to_child) { "child_subject" }
+              let(:relationship_to_children) { "child_subject" }
 
               it "returns the expected data" do
                 expect(value_for("Biological parent relationship?")).to eq "No"
