@@ -10,6 +10,10 @@ Then("I should see a link with text {string}") do |locator|
   expect(page).to have_link(locator)
 end
 
+Then("I should see a mailto link text {string} for email {string}") do |locator, email|
+  expect(page).to have_link(locator, href: "mailto:#{email}")
+end
+
 Then("I should see govuk error summary {string}") do |error_text|
   summary = page.find("div.govuk-error-summary > div[role='alert']")
   expect(summary).to have_css(

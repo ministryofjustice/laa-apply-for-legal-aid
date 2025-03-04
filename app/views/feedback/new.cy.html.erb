@@ -1,9 +1,8 @@
 <%= page_template page_title: "[Welsh] Help us improve the Apply for legal aid service", show_errors_for: @feedback, back_link: back_button do %>
 
   <p class="govuk-body">
-    If you have problems using this service, email <a href="mailto:">
-      <%= t("contacts.show.technical_support.email_address") %>
-    </a> to get help.
+    If you have problems using this service, email <%= govuk_link_to(Rails.configuration.x.support_email_address, "mailto:#{Rails.configuration.x.support_email_address}") %>
+    to get help.
   </p>
 
   <p class="govuk-body">
