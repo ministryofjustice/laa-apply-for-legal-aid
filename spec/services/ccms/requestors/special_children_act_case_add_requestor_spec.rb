@@ -168,8 +168,8 @@ module CCMS
             end
           end
 
-          context "when the parent is the biological parent of at least one child" do
-            before { proceeding.update!(relationship_to_child: "biological") }
+          context "when the parent is the biological parent of the children" do
+            before { applicant.update!(relationship_to_children: "biological") }
 
             it "sets CLIENT_PARENT_OF_CHILD_PROC" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
@@ -217,8 +217,8 @@ module CCMS
             end
           end
 
-          context "when the parent has a parental responsibility agreement for at least one child" do
-            before { proceeding.update!(relationship_to_child: "parental_responsibility_agreement") }
+          context "when the parent has a parental responsibility agreement of the children" do
+            before { applicant.update!(relationship_to_children: "parental_responsibility_agreement") }
 
             it "excludes the CLIENT_PARENT_OF_CHILD_PROC" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
@@ -282,8 +282,8 @@ module CCMS
             end
           end
 
-          context "when the parent has court ordered parental responsibility for at least one child" do
-            before { proceeding.update!(relationship_to_child: "court_order") }
+          context "when the parent has court ordered parental responsibility of the children" do
+            before { applicant.update!(relationship_to_children: "court_order") }
 
             it "sets CLIENT_PARENT_OF_CHILD_PROC" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
