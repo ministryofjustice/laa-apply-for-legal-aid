@@ -1,0 +1,25 @@
+<%= govuk_summary_card(title: t(".card_heading"),
+                       heading_level: 3,
+                       html_attributes: { "data-test": "joint-bank-accounts" }) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(
+            t("generic.change"),
+            check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
+            "aria-label": "#{t('generic.change')} #{t('.aria_label')} values",
+          )
+        end
+      end
+
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_current_accounts" }) do |row|
+          row.with_key(text: t(".current_accounts"), classes: "govuk-!-width-one-third")
+          row.with_value { @legal_aid_application.savings_amount.joint_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_current_accounts) : t("generic.none") }
+        end
+
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__joint_offline_savings_accounts" }) do |row|
+          row.with_key(text: t(".savings_accounts"), classes: "govuk-!-width-one-third")
+          row.with_value { @legal_aid_application.savings_amount.joint_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.joint_offline_savings_accounts) : t("generic.none") }
+        end
+      end
+    end %>
