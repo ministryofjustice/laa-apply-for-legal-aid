@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m"><%= t("providers.means_reports.proceeding_eligibility") %></h2>
+<h2 class="govuk-heading-m print-no-break-after"><%= t("providers.means_reports.proceeding_eligibility") %></h2>
 
 <%= govuk_summary_list(card: { title: t("providers.means_reports.proceeding_eligibility") }, actions: false, html_attributes: { id: "proceeding-eligibility-questions" }) do |summary_list| %>
   <% results.each do |proceeding_type, result| %>

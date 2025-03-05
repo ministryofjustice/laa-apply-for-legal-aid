@@ -6,8 +6,7 @@
      data_source = @legal_aid_application.applicant
    end %>
 
-<section class="print-no-break">
-  <h2 class="govuk-heading-m"><%= t(".#{individual}.heading") %></h2>
+  <h2 class="govuk-heading-m print-no-break-after"><%= t(".#{individual}.heading") %></h2>
 
   <%= govuk_summary_card(title: t(".#{individual}.heading"),
                          heading_level: 3,
@@ -21,4 +20,3 @@
           end
         end
       end %>
-</section>
