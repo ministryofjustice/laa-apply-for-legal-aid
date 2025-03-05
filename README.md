@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/687f23bf19d8c76a9467/maintainability)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/687f23bf19d8c76a9467/test_coverage)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/test_coverage)
 
-# LAA Apply for legal aid
+# LAA Apply for civil legal aid
 
 The laa-apply-for-legal-aid system is a web service for solicitors that provide legal aid services. The service enables users to submit applications for legal aid on-line.
 

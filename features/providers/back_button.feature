@@ -160,7 +160,7 @@
 #    Then I click link "Contact"
 #    Then I should be on a page showing "Contact us"
 #    Then I click link "Back"
-#    Then I should be on a page showing "Apply for legal aid"
+#    Then I should be on a page showing "Apply for civil legal aid"
 #
 #  @javascript @vcr
 #  Scenario: Enter feedback within provider journey then click Back

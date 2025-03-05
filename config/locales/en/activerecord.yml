@@ -24,7 +24,7 @@ en:
             satisfaction:
               blank: Select how satisfied you were with the service
             difficulty:
-              blank: Select how easy or difficult it was to apply for legal aid using the new service
+              blank: Select how easy or difficult it was to apply for civil legal aid using the new service
             done_all_needed:
               inclusion: Select yes if you were you able to do what you needed today
             contact_name:

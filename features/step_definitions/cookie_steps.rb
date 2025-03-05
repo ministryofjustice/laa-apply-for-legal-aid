@@ -12,7 +12,7 @@ Given("I start the journey without cookie preferences") do
     Then I choose 'London'
     Then I click 'Save and continue'
     Then I am on the legal aid applications page
-    And I should see 'Cookies on Apply for legal aid'
+    And I should see 'Cookies on Apply for civil legal aid'
   )
 end
 
@@ -30,6 +30,6 @@ Given("I start the journey with expired cookie preferences") do
     Then I choose 'London'
     Then I click 'Save and continue'
     Then I am on the legal aid applications page
-    And I should see 'Cookies on Apply for legal aid'
+    And I should see 'Cookies on Apply for civil legal aid'
   )
 end
