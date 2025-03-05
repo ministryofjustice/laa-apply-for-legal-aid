@@ -5,8 +5,7 @@ en:
       h1-heading: Contact us
       case_enquiries:
         heading: Case enquiries
-        phone_number: 'Telephone: 0203 8144 350'
+        phone_number: "Telephone: 0203 8144 350"
       technical_support:
         heading: Technical support
-        email_text: 'Email:'
-        email_address: apply-for-civil-legal-aid@digital.justice.gov.uk
+        email_text: "Email:"

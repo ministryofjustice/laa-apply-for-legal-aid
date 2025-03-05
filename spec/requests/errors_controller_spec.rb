@@ -54,7 +54,12 @@ RSpec.describe ErrorsController, :show_exceptions do
   end
 
   context "when page not found due to object not found" do
-    let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
+    let(:get_invalid_id) { get admin_firm_providers_path(SecureRandom.uuid) }
+    let(:admin_user) { create(:admin_user) }
+
+    before do
+      sign_in admin_user
+    end
 
     context "with default locale" do
       it "responds with expected http status" do
@@ -70,7 +75,7 @@ RSpec.describe ErrorsController, :show_exceptions do
 
     context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
-        get feedback_path(SecureRandom.uuid, locale: :cy)
+        get admin_firm_providers_path(SecureRandom.uuid, locale: :cy)
         expect(page)
           .to have_css("h1", text: "dnuof ton egaP")
       end
@@ -95,10 +100,12 @@ RSpec.describe ErrorsController, :show_exceptions do
   end
 
   context "when internal server error/500 due to code fault" do
-    let(:get_invalid_id) { get feedback_path(SecureRandom.uuid) }
+    let(:get_invalid_id) { get admin_firm_providers_path(SecureRandom.uuid) }
+    let(:admin_user) { create(:admin_user) }
 
     before do
-      allow(Feedback).to receive(:find).and_raise { ArgumentError.new("dummy error to emulate 500 internal server error") }
+      sign_in admin_user
+      allow(Firm).to receive(:find).and_raise { ArgumentError.new("dummy error to emulate 500 internal server error") }
     end
 
     context "with default locale" do
@@ -115,7 +122,7 @@ RSpec.describe ErrorsController, :show_exceptions do
 
     context "with Welsh locale", :use_welsh_locale do
       it "displays the correct content" do
-        get feedback_path(SecureRandom.uuid, locale: :cy)
+        get admin_firm_providers_path(SecureRandom.uuid, locale: :cy)
         expect(page)
           .to have_css("h1", text: "ecivres ruo htiw gnorw tnew gnihtemos ,yrroS")
       end

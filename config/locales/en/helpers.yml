@@ -30,7 +30,7 @@ en:
       feedback:
         done_all_needed:
           <<: *true_false
-        improvement_suggestion: Do you have any other feedback or suggestions on how we could improve the service?
+        improvement_suggestion: Do you have any feedback or suggestions on how we could improve the service?
       merits_assessment:
         application_purpose: Please give details of why your client is applying for legal aid
         success_prospect_details: Tell us why legal aid should be granted

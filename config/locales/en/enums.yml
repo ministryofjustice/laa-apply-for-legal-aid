@@ -14,6 +14,12 @@ en:
         neither_difficult_nor_easy: Neither easy nor difficult
         easy: Easy
         very_easy: Very easy
+      time_taken_satisfaction:
+        great_deal: It was a great deal of time
+        alot: It was a lot of time
+        neither_too_much_nor_too_little: Neither too much or too little time
+        moderate: It was a  moderate amount of time
+        quick: It was very quick
     legal_aid_application:
       state:
         applicant_details_checked: Answers checked

@@ -13,9 +13,7 @@
 
   <p class="govuk-body">
     <%= t(".technical_support.email_text") %>
-    <a href="mailto:">
-      <%= t(".technical_support.email_address") %>
-    </a>
+    <%= govuk_link_to(Rails.configuration.x.support_email_address, "mailto:#{Rails.configuration.x.support_email_address}") %>
   </p>
 
 <% end %>

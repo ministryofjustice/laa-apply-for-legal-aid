@@ -15,7 +15,18 @@ class Feedback < ApplicationRecord
     very_easy: 4,
   }
 
-  validates :satisfaction, :difficulty, presence: true
+  enum :time_taken_satisfaction, {
+    great_deal: 0,
+    alot: 1,
+    neither_too_much_nor_too_little: 2,
+    moderate: 3,
+    quick: 4,
+  }
 
   validates :done_all_needed, inclusion: { in: [true, false] }
+  validates :difficulty, :satisfaction, presence: true
+
+  validates :contact_name, presence: true, unless: ->(feedback) { feedback.contact_email.blank? }
+  validates :contact_email, presence: true, unless: ->(feedback) { feedback.contact_name.blank? }
+  validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 end

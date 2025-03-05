@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_17_105318) do
-  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema[8.0].define(version: 2025_02_17_150948) do  # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
 
@@ -541,6 +540,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_17_105318) do
     t.string "email"
     t.string "originating_page"
     t.uuid "legal_aid_application_id"
+    t.text "done_all_needed_reason"
+    t.text "difficulty_reason"
+    t.text "satisfaction_reason"
+    t.integer "time_taken_satisfaction"
+    t.text "time_taken_satisfaction_reason"
+    t.string "contact_name"
+    t.string "contact_email"
   end
 
   create_table "final_hearings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -10,8 +10,9 @@ RSpec.describe "contact page" do
     it "display contact information" do
       get contact_path
 
-      expect(response.body).to include(I18n.t("contacts.show.case_enquiries.phone_number"))
-      expect(response.body).to include(I18n.t("contacts.show.technical_support.email_address"))
+      expect(page)
+        .to have_content("Telephone: 0203 8144 350")
+        .and have_link("apply-for-civil-legal-aid@digital.justice.gov.uk", href: "mailto:apply-for-civil-legal-aid@digital.justice.gov.uk")
     end
   end
 end
