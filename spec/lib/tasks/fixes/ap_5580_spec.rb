@@ -7,7 +7,7 @@ RSpec.describe "fixes:ap_5580", type: :task do
     Rails.application.load_tasks if Rake::Task.tasks.empty?
     Rake::Task["fixes:ap_5580"].reenable
     allow(Rails.logger).to receive(:info)
-    allow($stdout).to receive(:write) if ENV["CI"] # comment this out if using binding.pry in this file
+    allow($stdout).to receive(:write) # comment this out if using binding.pry in this file
     create(:legal_framework_merits_task_list, serialized_data:, legal_aid_application:)
   end
 
