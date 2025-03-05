@@ -174,7 +174,7 @@ RSpec.describe "FeedbacksController" do
 
       it "shows errors on the page" do
         post_request
-        expect(page).to have_content("Select how easy or difficult it was to apply for legal aid using the new service")
+        expect(page).to have_content("Select how easy or difficult it was to apply for civil legal aid using the new service")
       end
     end
 

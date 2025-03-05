@@ -3,10 +3,10 @@ Feature: Provider feedback
   Scenario: Enter the minimum feedback required within provider journey
     Given I start the journey as far as the applicant page
     When I click link "feedback"
-    Then I should be on a page with title "Help us improve the Apply for legal aid service"
+    Then I should be on a page with title "Help us improve the Apply for civil legal aid service"
     And I should be on a page showing "If you have problems using this service, email apply-for-civil-legal-aid@digital.justice.gov.uk to get help."
     And I should see a mailto link text "apply-for-civil-legal-aid@digital.justice.gov.uk" for email "apply-for-civil-legal-aid@digital.justice.gov.uk"
-    And I should be on a page showing "Help us improve the Apply for legal aid service"
+    And I should be on a page showing "Help us improve the Apply for civil legal aid service"
     And I should be on a page showing "We’ll use your answers to help improve the service"
     And I should see a link with text "See how we protect your personal information"
 
@@ -21,7 +21,7 @@ Feature: Provider feedback
     When I click "Send"
     Then I should see govuk error summary "Select yes if you were you able to do what you needed today"
     And I should see govuk error summary "Select how satisfied you were with the service"
-    And I should see govuk error summary "Select how easy or difficult it was to apply for legal aid using the new service"
+    And I should see govuk error summary "Select how easy or difficult it was to apply for civil legal aid using the new service"
 
     When I choose "Yes"
     And I choose "Easy"
@@ -36,7 +36,7 @@ Feature: Provider feedback
   Scenario: Enter all feedback possible within provider journey
     Given I start the journey as far as the applicant page
     When I click link "feedback"
-    Then I should be on a page with title "Help us improve the Apply for legal aid service"
+    Then I should be on a page with title "Help us improve the Apply for civil legal aid service"
 
     When I choose "No"
     And I fill "feedback-done-all-needed-reason-field" with "could not complete..."
@@ -69,7 +69,7 @@ Feature: Provider feedback
   Scenario: Enter the minimum feedback from provider signout journey
     Given I start the journey as far as the applicant page
     When I click link "Sign out"
-    Then I should be on a page with title "Help us improve the Apply for legal aid service"
+    Then I should be on a page with title "Help us improve the Apply for civil legal aid service"
     Then I should be on a page showing "You have been signed out"
 
     # This is just to that test error page rerender does not muck up later back page functionality
@@ -83,4 +83,4 @@ Feature: Provider feedback
     Then I should be on a page with title "Thank you for your feedback"
 
     When I click link "Back to your application"
-    Then I should be on a page with title "Sign in - Apply for legal aid"
+    Then I should be on a page with title "Sign in - Apply for civil legal aid"

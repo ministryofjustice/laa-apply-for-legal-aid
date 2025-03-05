@@ -89,5 +89,5 @@ Feature: Citizen journey in Welsh
     Given An application has been created
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'kcabdeeF'
-    Then I should be on a page with title "[Welsh] Help us improve the Apply for legal aid service"
+    Then I should be on a page with title "[Welsh] Help us improve the Apply for civil legal aid service"
     Then I return to English
