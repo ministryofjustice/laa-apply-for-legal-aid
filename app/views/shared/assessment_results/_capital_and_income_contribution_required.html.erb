@@ -1,7 +1,8 @@
-<p><%= t(".line_1") %></p>
+<p class="govuk-body moj-interruption-card__body"><%= t(".line_1") %></p>
 <%= govuk_list t(".details",
                  capital_contribution: gds_number_to_currency(@cfe_result.capital_contribution),
                  income_contribution: gds_number_to_currency(@cfe_result.income_contribution)),
-               type: :bullet %>
+               type: :bullet,
+               classes: "moj-interruption-card__body" %>
 
-<p><%= t(".line_2") %></p>
+<p class="govuk-body moj-interruption-card__body"><%= t(".line_2") %></p>

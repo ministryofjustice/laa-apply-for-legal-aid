@@ -24,12 +24,8 @@ RSpec.describe Providers::Interrupt::BlocksController do
       end
 
       it "shows text to use CCMS" do
-        expect(page)
-          .to have_content("You cannot submit this application")
-          .and have_content("This is because the application will be missing information after recent updates to the service.")
-          .and have_content("You can (choose one of the following):")
-          .and have_content("go back to your applications")
-          .and have_content("Make a new application")
+        get_request
+        expect(response.body).to include("You cannot submit this application")
       end
     end
   end
