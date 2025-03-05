@@ -3,7 +3,16 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l moj-interruption-card__heading"><%= heading %></h1>
-        <%= body %>
+        <% if body.present? %>
+        <div class="govuk-body moj-interruption-card__body">
+          <%= body %>
+        </div>
+        <% end %>
+        <% if actions.present? %>
+        <div class="govuk-button-group moj-interruption-card__actions">
+          <%= actions.call %>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>

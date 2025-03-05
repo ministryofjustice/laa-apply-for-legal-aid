@@ -1,12 +1,8 @@
 <%= page_template(page_title: t(".title_html"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".title_html")) do %>
-    <p class="govuk-body moj-interruption-card__body"><%= t(".body_text") %></p>
-    <p class="govuk-body moj-interruption-card__body"><%= t(".options") %></p>
+  <%= interruption_card(heading: t(".title_html"), actions: -> { render "actions" }) do %>
+    <p><%= t(".body_text") %></p>
+    <p><%= t(".options") %></p>
 
-    <%= govuk_list t(".option_bullets"), type: :bullet, classes: "moj-interruption-card__body" %>
-
-    <div class="govuk-button-group moj-interruption-card__actions">
-      <%= govuk_button_link_to t(".applications"), submitted_providers_legal_aid_applications_path, inverse: true, role: "button" %>
-    </div>
+    <%= govuk_list t(".option_bullets"), type: :bullet %>
   <% end %>
 <% end %>
