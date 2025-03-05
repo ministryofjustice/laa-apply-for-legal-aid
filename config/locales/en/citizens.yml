@@ -44,15 +44,15 @@ en:
     check_answers:
       index:
         h1-heading: Check your answers and submit information
-        bank_accounts:
-          heading: Your bank accounts
-          account: Account
-          bank: Bank
-          account_number: Account number
-          sort_code: Sort code
-          balance: Balance
-        link_other_account: Add another bank account
         submit_button: Agree and submit
+      bank_accounts:
+        heading: Your bank accounts
+        account: Account %{index}
+        bank: Bank
+        account_number: Account number
+        sort_code: Sort code
+        balance: Balance
+        link_other_account: Add another bank account
     contact_providers:
       show:
         title: Contact your solicitor to continue your application
