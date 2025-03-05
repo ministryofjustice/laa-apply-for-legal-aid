@@ -121,7 +121,7 @@ module CCMS
       # as Client Involvement Type or using the merits task, just that there is a child subject on the application
       legal_aid_application.proceedings.any? do |proceeding|
         proceeding.special_childrens_act? &&
-          (proceeding.relationship_to_child.eql?("child_subject") || proceeding.client_involvement_type_ccms_code.eql?("W"))
+          (legal_aid_application.applicant.relationship_to_children.eql?("child_subject") || proceeding.client_involvement_type_ccms_code.eql?("W"))
       end
     end
 
