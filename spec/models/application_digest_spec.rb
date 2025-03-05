@@ -524,12 +524,15 @@ RSpec.describe ApplicationDigest do
     end
 
     describe "sca fields" do
-      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child:) }
+      let(:sca_proceeding) { create(:proceeding, :pb059) }
 
-      before { laa.proceedings << sca_proceeding }
+      before do
+        laa.proceedings << sca_proceeding
+        laa.applicant.update!(relationship_to_children:)
+      end
 
       context "when the application has a proceeding with relationship_to_child biological" do
-        let(:relationship_to_child) { "biological" }
+        let(:relationship_to_children) { "biological" }
 
         it "returns the expected data" do
           application_digest
@@ -542,7 +545,7 @@ RSpec.describe ApplicationDigest do
       end
 
       context "when the application has a proceeding with relationship_to_child parental_responsibility_agreement" do
-        let(:relationship_to_child) { "parental_responsibility_agreement" }
+        let(:relationship_to_children) { "parental_responsibility_agreement" }
         let(:parental_responsibility_evidence) { create(:attachment, :parental_responsibility, attachment_name: "parental_responsibility") }
 
         before do
@@ -561,7 +564,7 @@ RSpec.describe ApplicationDigest do
       end
 
       context "when the application has a proceeding with relationship_to_child court_order" do
-        let(:relationship_to_child) { "court_order" }
+        let(:relationship_to_children) { "court_order" }
 
         before { laa.proceedings << sca_proceeding }
 
@@ -576,7 +579,7 @@ RSpec.describe ApplicationDigest do
       end
 
       context "when the application has a proceeding with relationship_to_child child_subject" do
-        let(:relationship_to_child) { "child_subject" }
+        let(:relationship_to_children) { "child_subject" }
 
         before { laa.proceedings << sca_proceeding }
 

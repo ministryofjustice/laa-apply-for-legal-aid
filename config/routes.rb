@@ -364,6 +364,10 @@ Rails.application.routes.draw do
         resource :domestic_abuse_summary, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
         resource :nature_of_urgencies, only: %i[show update]
+        resource :client_is_biological_parent, only: %i[show update], controller: :client_is_biological_parent, path: :is_client_biological_parent
+        resource :client_has_parental_responsibility, only: %i[show update], path: :does_client_have_parental_responsibility
+        resource :client_is_child_subject, only: %i[show update], controller: :client_is_child_subject, path: "is_client_a_child_subject_of_proceeding"
+        resource :client_check_parental_answer, only: %i[show update], path: :check_who_your_client_is
         resource :statement_of_case, only: %i[show update destroy] do
           get "/list", to: "statement_of_cases#list"
         end
@@ -386,10 +390,12 @@ Rails.application.routes.draw do
         resource :prohibited_steps, only: %i[show update]
         resource :specific_issue, only: %i[show update], controller: "specific_issue"
         resource :vary_order, only: %i[show update], controller: "vary_order", path: "changes_since_original"
+        # delete this section when transition to application complete
         resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
         resource :does_client_have_parental_responsibility, only: %i[show update]
         resource :is_client_child_subject, only: %i[show update], controller: :is_client_child_subject, path: "is_client_a_child_subject_of_proceeding"
         resource :check_who_client_is, only: %i[show update]
+        # delete this section when transition to application complete
         resource :child_care_assessment, only: %i[show update], path: "assessment_of_client"
         resource :child_care_assessment_result, only: %i[show update], path: "assessment_result"
       end

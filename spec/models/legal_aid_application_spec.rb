@@ -2268,15 +2268,15 @@ RSpec.describe LegalAidApplication do
   describe "#biological_parent_relationship?" do
     subject { legal_aid_application.biological_parent_relationship? }
 
-    context "with a proceeding with a biological_parent relationship" do
-      before { legal_aid_application.proceedings << sca_proceeding }
-
-      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "biological") }
+    context "when the applicant has a biological_parent relationship" do
+      before { create(:applicant, legal_aid_application:, relationship_to_children: "biological") }
 
       it { is_expected.to be true }
     end
 
-    context "without a proceeding with a biological parent relationship" do
+    context "when the applicant does not have a biological parent relationship" do
+      before { create(:applicant, legal_aid_application:, relationship_to_children: nil) }
+
       it { is_expected.to be false }
     end
   end
@@ -2285,14 +2285,14 @@ RSpec.describe LegalAidApplication do
     subject { legal_aid_application.parental_responsibility_court_order_relationship? }
 
     context "with a proceeding with a parental_responsibility_court_order relationship" do
-      before { legal_aid_application.proceedings << sca_proceeding }
-
-      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "court_order") }
+      before { create(:applicant, legal_aid_application:, relationship_to_children: "court_order") }
 
       it { is_expected.to be true }
     end
 
     context "without a proceeding with a parental_responsibility_court_order relationship" do
+      before { create(:applicant, legal_aid_application:, relationship_to_children: nil) }
+
       it { is_expected.to be false }
     end
   end
@@ -2301,14 +2301,14 @@ RSpec.describe LegalAidApplication do
     subject { legal_aid_application.parental_responsibility_agreement_relationship? }
 
     context "with a proceeding with a parental_responsibility_agreement relationship" do
-      before { legal_aid_application.proceedings << sca_proceeding }
-
-      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "parental_responsibility_agreement") }
+      before { create(:applicant, legal_aid_application:, relationship_to_children: "parental_responsibility_agreement") }
 
       it { is_expected.to be true }
     end
 
     context "without a proceeding with a parental_responsibility_agreement relationship" do
+      before { create(:applicant, legal_aid_application:, relationship_to_children: nil) }
+
       it { is_expected.to be false }
     end
   end
@@ -2317,14 +2317,14 @@ RSpec.describe LegalAidApplication do
     subject { legal_aid_application.child_subject_relationship? }
 
     context "with a proceeding with a child_subject relationship" do
-      before { legal_aid_application.proceedings << sca_proceeding }
-
-      let(:sca_proceeding) { create(:proceeding, :pb059, relationship_to_child: "child_subject") }
+      before { create(:applicant, legal_aid_application:, relationship_to_children: "child_subject") }
 
       it { is_expected.to be true }
     end
 
     context "without a proceeding with a child_subject relationship" do
+      before { create(:applicant, legal_aid_application:, relationship_to_children: nil) }
+
       it { is_expected.to be false }
     end
   end

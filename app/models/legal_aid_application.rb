@@ -207,24 +207,24 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def client_court_ordered_parental_responsibility?
-    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("court_order") }
+    applicant.relationship_to_children.eql?("court_order")
   end
   alias_method :parental_responsibility_court_order_relationship?, :client_court_ordered_parental_responsibility?
 
   def client_parental_responsibility_agreement?
-    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("parental_responsibility_agreement") }
+    applicant.relationship_to_children.eql?("parental_responsibility_agreement")
   end
   alias_method :parental_responsibility_agreement_relationship?, :client_parental_responsibility_agreement?
 
   def client_biological_parent?
-    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("biological") }
+    applicant.relationship_to_children.eql?("biological")
   end
   alias_method :biological_parent_relationship?, :client_biological_parent?
 
   def child_subject_relationship?
     # This is similar to the AttributeValueGenerator.child_subject_of_proceeding? method but is unique
     # as it is used to generate reports and, for the reports, we only want to look at the merits task answer
-    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.relationship_to_child.eql?("child_subject") }
+    applicant.relationship_to_children.eql?("child_subject")
   end
 
   def parental_responsibility_evidence?
