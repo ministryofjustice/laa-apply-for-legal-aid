@@ -24,7 +24,7 @@ module Providers
 
         def form_params
           params
-            .expect(providers_means_capital_disregards_discretionary_form: [:none_selected, discretionary_capital_disregards: []])
+            .expect(providers_means_capital_disregards_discretionary_form: [:none_selected, {discretionary_capital_disregards: []}])
             .merge(legal_aid_application:)
         end
       end
