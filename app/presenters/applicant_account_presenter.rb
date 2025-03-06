@@ -7,9 +7,7 @@ class ApplicantAccountPresenter
     @bank_provider = bank_provider
   end
 
-  def main_account_holder
-    @bank_provider.main_account_holder
-  end
+  delegate :main_account_holder, to: :@bank_provider
 
   def main_account_holder_name
     main_account_holder&.full_name
