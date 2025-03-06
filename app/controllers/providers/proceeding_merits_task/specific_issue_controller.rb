@@ -26,7 +26,7 @@ module Providers
 
       def form_params
         merge_with_model(specific_issue) do
-          params.require(:proceeding_merits_task_specific_issue).permit(:details)
+          params.expect(proceeding_merits_task_specific_issue: [:details])
         end
       end
     end

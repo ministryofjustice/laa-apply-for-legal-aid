@@ -21,7 +21,7 @@ module Providers
       merge_with_model(applicant) do
         next {} unless params[:applicant]
 
-        params.require(:applicant).permit(:employed, :self_employed, :armed_forces, :none_selected)
+        params.expect(applicant: [:employed, :self_employed, :armed_forces, :none_selected])
       end
     end
   end

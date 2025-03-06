@@ -32,7 +32,7 @@ module Providers
 
       def form_params
         merge_with_model(proceeding) do
-          params.require(:proceeding).permit(:relationship_to_child)
+          params.expect(proceeding: [:relationship_to_child])
         end
       end
     end

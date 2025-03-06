@@ -31,7 +31,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:add_another_vehicle)
+        params.expect(binary_choice_form: [:add_another_vehicle])
       end
 
       def error_message

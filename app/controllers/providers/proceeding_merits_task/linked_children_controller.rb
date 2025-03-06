@@ -26,7 +26,7 @@ module Providers
 
       def form_params
         merge_with_model(proceeding) do
-          params.require(:proceeding_merits_task_proceeding_linked_child).permit(linked_children: [])
+          params.expect(proceeding_merits_task_proceeding_linked_child: [linked_children: []])
         end
       end
     end

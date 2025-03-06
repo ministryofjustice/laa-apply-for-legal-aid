@@ -26,7 +26,7 @@ module Providers
 
       def form_params
         merge_with_model(vary_order) do
-          params.require(:proceeding_merits_task_vary_order).permit(:details)
+          params.expect(proceeding_merits_task_vary_order: [:details])
         end
       end
     end

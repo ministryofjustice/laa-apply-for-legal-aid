@@ -16,7 +16,7 @@ private
   end
 
   def address_list_params
-    params.require(:address_selection).permit(list: [])[:list]
+    params.expect(address_selection: [list: []])[:list]
   end
 
   def build_addresses_from_form_data

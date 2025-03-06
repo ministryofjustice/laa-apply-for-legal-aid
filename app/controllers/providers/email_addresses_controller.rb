@@ -17,7 +17,7 @@ module Providers
 
     def form_params
       merge_with_model(applicant) do
-        params.require(:applicant).permit(:email)
+        params.expect(applicant: [:email])
       end
     end
   end

@@ -18,7 +18,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(urgency) do
-          params.require(:application_merits_task_urgency).permit(:nature_of_urgency, :hearing_date_set, :hearing_date)
+          params.expect(application_merits_task_urgency: [:nature_of_urgency, :hearing_date_set, :hearing_date])
         end
         convert_date_params(merged_params)
       end

@@ -32,13 +32,13 @@ module Providers
 
     def address_selection_form_params
       merge_with_model(address, addresses: @addresses) do
-        params.require(:address_selection).permit(:lookup_id, :postcode).merge(location:)
+        params.expect(address_selection: [:lookup_id, :postcode]).merge(location:)
       end
     end
 
     def address_form_params
       merge_with_model(address) do
-        params.require(:address_selection).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode).merge(location:)
+        params.expect(address_selection: [:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode]).merge(location:)
       end
     end
   end

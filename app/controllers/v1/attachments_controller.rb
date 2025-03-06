@@ -16,7 +16,7 @@ module V1
     end
 
     def attachment_params
-      params.require(:attachment).permit(:type)
+      params.expect(attachment: [:type])
     end
   end
 end

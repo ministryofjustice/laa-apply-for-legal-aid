@@ -18,7 +18,7 @@ module Providers
         merge_with_model(legal_aid_application) do
           return {} unless params[:legal_aid_application]
 
-          params.require(:legal_aid_application).permit(:in_scope_of_laspo)
+          params.expect(legal_aid_application: [:in_scope_of_laspo])
         end
       end
 

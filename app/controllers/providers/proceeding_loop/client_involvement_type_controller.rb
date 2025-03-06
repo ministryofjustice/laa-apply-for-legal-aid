@@ -26,7 +26,7 @@ module Providers
         merge_with_model(proceeding) do
           return {} unless params[:proceeding]
 
-          params.require(:proceeding).permit(:client_involvement_type_ccms_code)
+          params.expect(proceeding: [:client_involvement_type_ccms_code])
         end
       end
     end

@@ -29,7 +29,7 @@ module Providers
       merge_with_model(current_provider) do
         next {} unless params[:provider]
 
-        params.require(:provider).permit(:selected_office_id)
+        params.expect(provider: [:selected_office_id])
       end
     end
   end

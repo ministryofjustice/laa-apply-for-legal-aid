@@ -44,7 +44,7 @@ module Providers
       merge_with_model(dwp_override) do
         return {} unless params[:dwp_override]
 
-        params.require(:dwp_override).permit(:has_evidence_of_benefit)
+        params.expect(dwp_override: [:has_evidence_of_benefit])
       end
     end
   end

@@ -14,7 +14,7 @@ module Providers
         merge_with_model(legal_aid_application) do
           return {} unless params[:legal_aid_application]
 
-          params.require(:legal_aid_application).permit(:plf_court_order)
+          params.expect(legal_aid_application: [:plf_court_order])
         end
       end
     end

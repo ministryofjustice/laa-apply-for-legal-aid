@@ -23,7 +23,7 @@ module Providers
         merge_with_model(partner) do
           next {} unless params[:partner]
 
-          params.require(:partner).permit(:full_employment_details)
+          params.expect(partner: [:full_employment_details])
         end
       end
     end

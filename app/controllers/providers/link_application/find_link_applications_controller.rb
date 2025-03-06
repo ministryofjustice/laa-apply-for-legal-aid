@@ -55,7 +55,7 @@ module Providers
 
       def form_params
         merge_with_model(linked_application) do
-          params.require(:linked_application).permit(:search_laa_reference)
+          params.expect(linked_application: [:search_laa_reference])
         end
       end
     end

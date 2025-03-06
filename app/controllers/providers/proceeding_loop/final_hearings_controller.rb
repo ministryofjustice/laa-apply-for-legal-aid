@@ -36,7 +36,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(final_hearing) do
-          params.require(:final_hearing).permit(:listed, :date, :details)
+          params.expect(final_hearing: [:listed, :date, :details])
         end
         convert_date_params(merged_params)
       end

@@ -40,7 +40,7 @@ module Providers
 
       def state_benefit_params
         merge_with_model(state_benefit_transaction) do
-          params.require(:regular_transaction).permit(:transaction_type_id, :description, :amount, :frequency)
+          params.expect(regular_transaction: [:transaction_type_id, :description, :amount, :frequency])
         end
       end
     end

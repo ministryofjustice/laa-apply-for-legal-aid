@@ -25,7 +25,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:is_individual)
+        params.expect(binary_choice_form: [:is_individual])
       end
     end
   end

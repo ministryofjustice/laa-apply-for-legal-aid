@@ -54,7 +54,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:heard_as_alternative)
+        params.expect(binary_choice_form: [:heard_as_alternative])
       end
 
       def error_message

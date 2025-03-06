@@ -33,7 +33,7 @@ module Providers
 
         def form_params
           merged_params = merge_with_model(capital_disregard) do
-            params.require(:capital_disregard).permit(:payment_reason, :amount, :account_name, :date_received)
+            params.expect(capital_disregard: [:payment_reason, :amount, :account_name, :date_received])
           end
           convert_date_params(merged_params)
         end
