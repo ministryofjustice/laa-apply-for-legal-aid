@@ -33,7 +33,7 @@ module Providers
       def form_params
         merge_with_model(opponent) do
           params.expect(
-            application_merits_task_opponent: %i[first_name last_name]
+            application_merits_task_opponent: %i[first_name last_name],
           )
         end
       end
