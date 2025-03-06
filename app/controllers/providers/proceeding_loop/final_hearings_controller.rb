@@ -36,7 +36,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(final_hearing) do
-          params.expect(final_hearing: [:listed, :date, :details])
+          params.expect(final_hearing: %i[listed date details])
         end
         convert_date_params(merged_params)
       end

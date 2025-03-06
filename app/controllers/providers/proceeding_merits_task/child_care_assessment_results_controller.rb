@@ -29,8 +29,8 @@ module Providers
         merge_with_model(child_care_assessment) do
           params
             .expect(
-              proceeding_merits_task_child_care_assessment: [:result,
-                                                             :details],
+              proceeding_merits_task_child_care_assessment: %i[result
+                                                             details],
             )
         end
       end

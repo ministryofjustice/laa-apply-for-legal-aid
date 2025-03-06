@@ -84,7 +84,7 @@ module Citizens
     def form_params
       return {} unless params[:binary_choice_form]
 
-      params.expect(binary_choice_form: [:additional_account, :has_offline_accounts])
+      params.expect(binary_choice_form: %i[additional_account has_offline_accounts])
     end
   end
 end

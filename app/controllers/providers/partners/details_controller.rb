@@ -20,7 +20,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(partner) do
-          params.expect(partner: [:first_name, :last_name, :date_of_birth, :has_national_insurance_number, :national_insurance_number])
+          params.expect(partner: %i[first_name last_name date_of_birth has_national_insurance_number national_insurance_number])
         end
         convert_date_params(merged_params)
       end
