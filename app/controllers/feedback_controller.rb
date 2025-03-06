@@ -77,16 +77,16 @@ private
   def feedback_params
     params.expect(
       feedback: %i[done_all_needed
-                 done_all_needed_reason
-                 satisfaction
-                 satisfaction_reason
-                 difficulty
-                 difficulty_reason
-                 time_taken_satisfaction
-                 time_taken_satisfaction_reason
-                 improvement_suggestion
-                 contact_name
-                 contact_email],
+                   done_all_needed_reason
+                   satisfaction
+                   satisfaction_reason
+                   difficulty
+                   difficulty_reason
+                   time_taken_satisfaction
+                   time_taken_satisfaction_reason
+                   improvement_suggestion
+                   contact_name
+                   contact_email],
     ).merge(browser_meta_data)
   end
 

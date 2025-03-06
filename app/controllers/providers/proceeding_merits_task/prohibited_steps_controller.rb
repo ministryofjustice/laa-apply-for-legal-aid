@@ -29,8 +29,8 @@ module Providers
           params
             .expect(
               proceeding_merits_task_prohibited_steps: %i[uk_removal
-                                                        details
-                                                        confirmed_not_change_of_name],
+                                                          details
+                                                          confirmed_not_change_of_name],
             )
         end
       end

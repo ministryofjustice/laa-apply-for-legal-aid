@@ -30,7 +30,7 @@ module Providers
           params
             .expect(
               proceeding_merits_task_child_care_assessment: %i[result
-                                                             details],
+                                                               details],
             )
         end
       end

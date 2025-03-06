@@ -28,13 +28,13 @@ module Providers
         merged_params = merge_with_model(proceeding) do
           params
                 .expect(proceeding: %i[accepted_emergency_defaults
-                                     emergency_level_of_service
-                                     emergency_level_of_service_name
-                                     emergency_level_of_service_stage
-                                     delegated_functions_scope_limitation_meaning
-                                     delegated_functions_scope_limitation_description
-                                     delegated_functions_scope_limitation_code
-                                     hearing_date])
+                                       emergency_level_of_service
+                                       emergency_level_of_service_name
+                                       emergency_level_of_service_stage
+                                       delegated_functions_scope_limitation_meaning
+                                       delegated_functions_scope_limitation_description
+                                       delegated_functions_scope_limitation_code
+                                       hearing_date])
         end
         convert_date_params(merged_params)
       end

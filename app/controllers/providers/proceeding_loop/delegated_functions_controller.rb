@@ -36,7 +36,7 @@ module Providers
           return {} unless params[:proceeding]
 
           params.expect(proceeding: %i[used_delegated_functions
-                                     used_delegated_functions_on])
+                                       used_delegated_functions_on])
         end
         convert_date_params(merged_params)
       end
