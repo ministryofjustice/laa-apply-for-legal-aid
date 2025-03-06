@@ -49,15 +49,15 @@ cy:
     check_answers:
       index:
         h1-heading: noitamrofni timbus dna srewsna ruoy kcehC
-        bank_accounts:
-          heading: stnuocca knab ruoY
-          account: tnuoccA
-          bank: knaB
-          account_number: rebmun tnuoccA
-          sort_code: edoc troS
-          balance: ecnalaB
-        link_other_account: tnuocca knab rehtona ddA
         submit_button: timbus dna eergA
+      bank_accounts:
+        heading: stnuocca knab ruoY
+        account: tnuoccA
+        bank: knaB
+        account_number: rebmun tnuoccA
+        sort_code: edoc troS
+        balance: ecnalaB
+        link_other_account: tnuocca knab rehtona ddA
     contact_providers:
       show:
         title: noitacilppa ruoy eunitnoc ot roticilos ruoy tcatnoC
