@@ -44,8 +44,8 @@
 
 <%#  savings and investments %>
 <%= govuk_summary_card(title: t(".assets.savings_and_investments#{individual}"),
-                        heading_level: 3,
-                        html_attributes: { id: "app-check-your-answers__savings_and_investments_items" }) do |card|
+                       heading_level: 3,
+                       html_attributes: { id: "app-check-your-answers__savings_and_investments_items" }) do |card|
       unless read_only
         card.with_action do
           govuk_link_to(
@@ -75,8 +75,8 @@
 
 <%#  other assets %>
 <%= govuk_summary_card(title: t(".assets.other_assets#{individual}"),
-                        heading_level: 3,
-                        html_attributes: { id: "app-check-your-answers__other_assets_items" }) do |card|
+                       heading_level: 3,
+                       html_attributes: { id: "app-check-your-answers__other_assets_items" }) do |card|
       unless read_only
         card.with_action do
           govuk_link_to(
