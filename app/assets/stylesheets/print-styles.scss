@@ -100,6 +100,11 @@
     max-width: 200px;
     height: auto;
   }
+
+  // Remove grey box that was appearing on the print version of the page
+  .govuk-template {
+    background-color: govuk-colour("white");
+  }
 }
 
 @page {
