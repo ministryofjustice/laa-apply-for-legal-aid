@@ -615,11 +615,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def policy_disregards?
-    policy_disregards&.any? ? true : false
+    policy_disregards&.any? || false
   end
 
   def capital_disregards?
-    capital_disregards&.any? ? true : false
+    capital_disregards&.any? || false
   end
 
   def transactions_total_by_type(transaction_type, category_id)

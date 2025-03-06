@@ -22,11 +22,7 @@ module Providers
         return :missing_message if @found_application.blank?
         return :voided_or_deleted_message if @found_application.discarded? || @found_application.expired?
 
-        if @found_application.merits_submitted_at.present?
-          true
-        else
-          :not_submitted_message
-        end
+        @found_application.merits_submitted_at.present? || :not_submitted_message
       end
 
       def exclude_from_model
