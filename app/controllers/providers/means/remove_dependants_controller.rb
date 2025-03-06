@@ -39,7 +39,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:remove_dependant)
+        params.expect(binary_choice_form: [:remove_dependant])
       end
 
       def error_message

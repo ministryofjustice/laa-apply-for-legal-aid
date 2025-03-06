@@ -30,8 +30,7 @@ module Providers
       def form_params
         merge_with_model(proceeding) do
           params
-            .require(:proceeding)
-            .permit(:none_selected, related_orders: [])
+            .expect(proceeding: [:none_selected, related_orders: []])
         end
       end
     end

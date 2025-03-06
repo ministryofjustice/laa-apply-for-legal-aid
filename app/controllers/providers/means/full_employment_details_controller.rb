@@ -19,7 +19,7 @@ module Providers
         merge_with_model(legal_aid_application) do
           return {} unless params[:legal_aid_application]
 
-          params.require(:legal_aid_application).permit(:full_employment_details)
+          params.expect(legal_aid_application: [:full_employment_details])
         end
       end
 

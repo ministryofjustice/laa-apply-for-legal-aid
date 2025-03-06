@@ -28,12 +28,12 @@ module Providers
         return { model: vehicle } if params[:vehicle].nil?
 
         merge_with_model(vehicle) do
-          params.require(:vehicle).permit(:owner,
+          params.expect(vehicle: [:owner,
                                           :estimated_value,
                                           :more_than_three_years_old,
                                           :payment_remaining,
                                           :payments_remain,
-                                          :used_regularly)
+                                          :used_regularly])
         end
       end
     end

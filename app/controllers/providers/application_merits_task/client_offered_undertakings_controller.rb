@@ -18,7 +18,7 @@ module Providers
 
       def form_params
         merge_with_model(undertaking) do
-          params.require(:application_merits_task_undertaking).permit(:offered, :additional_information_true, :additional_information_false)
+          params.expect(application_merits_task_undertaking: [:offered, :additional_information_true, :additional_information_false])
         end
       end
     end

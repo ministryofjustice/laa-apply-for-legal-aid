@@ -20,7 +20,7 @@ module Providers
       merge_with_model(current_provider) do
         next {} unless params[:provider]
 
-        params.require(:provider).permit(:cookies_enabled)
+        params.expect(provider: [:cookies_enabled])
       end
     end
   end

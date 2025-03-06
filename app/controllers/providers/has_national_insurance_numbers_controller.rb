@@ -17,7 +17,7 @@ module Providers
 
     def form_params
       merge_with_model(applicant) do
-        params.require(:applicant).permit(:has_national_insurance_number, :national_insurance_number)
+        params.expect(applicant: [:has_national_insurance_number, :national_insurance_number])
       end
     end
   end

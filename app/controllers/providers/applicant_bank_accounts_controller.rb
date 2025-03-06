@@ -35,7 +35,7 @@ module Providers
 
     def form_params
       merge_with_model(savings_amount) do
-        params.require(:savings_amount).permit(:offline_savings_accounts, :applicant_bank_account)
+        params.expect(savings_amount: [:offline_savings_accounts, :applicant_bank_account])
       end
     end
   end

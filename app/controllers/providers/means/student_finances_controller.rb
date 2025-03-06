@@ -18,7 +18,7 @@ module Providers
 
       def form_params
         merge_with_model(applicant) do
-          params.require(:applicant).permit(:student_finance, :student_finance_amount)
+          params.expect(applicant: [:student_finance, :student_finance_amount])
         end
       end
     end

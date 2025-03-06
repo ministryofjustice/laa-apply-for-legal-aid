@@ -30,7 +30,7 @@ module Providers
 
       def form_params
         merge_with_model(attempts_to_settle) do
-          params.require(:proceeding_merits_task_attempts_to_settle).permit(:attempts_made)
+          params.expect(proceeding_merits_task_attempts_to_settle: [:attempts_made])
         end
       end
     end

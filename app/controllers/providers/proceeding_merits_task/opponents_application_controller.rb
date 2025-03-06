@@ -26,7 +26,7 @@ module Providers
 
       def form_params
         merge_with_model(opponents_application) do
-          params.require(:proceeding_merits_task_opponents_application).permit(:has_opponents_application, :reason_for_applying)
+          params.expect(proceeding_merits_task_opponents_application: [:has_opponents_application, :reason_for_applying])
         end
       end
     end

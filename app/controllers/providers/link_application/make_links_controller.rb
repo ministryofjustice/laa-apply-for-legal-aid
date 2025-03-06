@@ -19,7 +19,7 @@ module Providers
         merge_with_model(linked_application) do
           next {} unless params[:linked_application]
 
-          params.require(:linked_application).permit(:link_type_code)
+          params.expect(linked_application: [:link_type_code])
         end
       end
 

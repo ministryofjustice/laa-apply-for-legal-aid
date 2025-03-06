@@ -32,8 +32,8 @@ module Providers
 
       def form_params
         merge_with_model(opponent) do
-          params.require(:application_merits_task_opponent).permit(
-            :name, :organisation_type_ccms_code
+          params.expect(
+            application_merits_task_opponent: [:name, :organisation_type_ccms_code]
           )
         end
       end

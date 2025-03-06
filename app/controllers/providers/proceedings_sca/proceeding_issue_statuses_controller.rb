@@ -35,7 +35,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:proceeding_issue_status)
+        params.expect(binary_choice_form: [:proceeding_issue_status])
       end
 
       def error_message

@@ -43,7 +43,7 @@ module Providers
 
     def form_params
       merged_params = merge_with_model(applicant) do
-        params.require(:applicant).permit(:first_name, :last_name, :date_of_birth, :changed_last_name, :last_name_at_birth)
+        params.expect(applicant: [:first_name, :last_name, :date_of_birth, :changed_last_name, :last_name_at_birth])
       end
       convert_date_params(merged_params)
     end

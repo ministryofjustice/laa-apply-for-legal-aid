@@ -37,8 +37,7 @@ module Providers
 
       def transaction_type_params
         params
-          .require(:legal_aid_application)
-          .permit(:none_selected, applicant_transaction_type_ids: [])
+          .expect(legal_aid_application: [:none_selected, applicant_transaction_type_ids: []])
       end
 
       def transaction_types

@@ -19,7 +19,7 @@ module Providers
 
       def form_params
         merge_with_model(appeal) do
-          params.require(:application_merits_task_appeal).permit(:second_appeal)
+          params.expect(application_merits_task_appeal: [:second_appeal])
         end
       end
     end

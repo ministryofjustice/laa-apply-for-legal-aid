@@ -35,7 +35,7 @@ module Providers
     def form_params
       return {} unless params[:binary_choice_form]
 
-      params.require(:binary_choice_form).permit(:change_of_name)
+      params.expect(binary_choice_form: [:change_of_name])
     end
   end
 end

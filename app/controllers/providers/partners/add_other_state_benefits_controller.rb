@@ -32,7 +32,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:add_another_partner_state_benefit)
+        params.expect(binary_choice_form: [:add_another_partner_state_benefit])
       end
     end
   end

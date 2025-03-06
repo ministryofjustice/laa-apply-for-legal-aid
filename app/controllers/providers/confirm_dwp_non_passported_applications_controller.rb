@@ -46,7 +46,7 @@ module Providers
       merge_with_model(partner) do
         return {} unless params[:partner]
 
-        params.require(:partner).permit(:confirm_dwp_result)
+        params.expect(partner: [:confirm_dwp_result])
       end
     end
 

@@ -23,7 +23,7 @@ module Providers
 
       def form_params
         merge_with_model(applicant) do
-          params.require(:applicant).permit(:no_fixed_residence)
+          params.expect(applicant: [:no_fixed_residence])
         end
       end
     end

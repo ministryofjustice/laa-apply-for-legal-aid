@@ -23,7 +23,7 @@ module Providers
         merge_with_model(address) do
           next {} unless params[:address]
 
-          params.require(:address).permit(:care_of, :care_of_first_name, :care_of_last_name, :care_of_organisation_name)
+          params.expect(address: [:care_of, :care_of_first_name, :care_of_last_name, :care_of_organisation_name])
         end
       end
     end
