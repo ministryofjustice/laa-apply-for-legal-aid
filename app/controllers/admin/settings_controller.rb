@@ -19,13 +19,13 @@ module Admin
 
     def form_params
       params.expect(setting: [:mock_true_layer_data,
-                                      :manually_review_all_cases,
-                                      :allow_welsh_translation,
-                                      :enable_ccms_submission,
-                                      :linked_applications,
-                                      :collect_hmrc_data,
-                                      :special_childrens_act,
-                                      :public_law_family])
+                              :manually_review_all_cases,
+                              :allow_welsh_translation,
+                              :enable_ccms_submission,
+                              :linked_applications,
+                              :collect_hmrc_data,
+                              :special_childrens_act,
+                              :public_law_family])
     end
 
     def setting

@@ -29,11 +29,11 @@ module Providers
 
         merge_with_model(vehicle) do
           params.expect(vehicle: [:owner,
-                                          :estimated_value,
-                                          :more_than_three_years_old,
-                                          :payment_remaining,
-                                          :payments_remain,
-                                          :used_regularly])
+                                  :estimated_value,
+                                  :more_than_three_years_old,
+                                  :payment_remaining,
+                                  :payments_remain,
+                                  :used_regularly])
         end
       end
     end

@@ -20,8 +20,8 @@ module Providers
         merge_with_model(domestic_abuse_summary) do
           params.expect(
             application_merits_task_domestic_abuse_summary: [:warning_letter_sent, :warning_letter_sent_details,
-            :police_notified, :police_notified_details_true, :police_notified_details_false,
-            :bail_conditions_set, :bail_conditions_set_details]
+                                                             :police_notified, :police_notified_details_true, :police_notified_details_false,
+                                                             :bail_conditions_set, :bail_conditions_set_details]
           )
         end
       end
