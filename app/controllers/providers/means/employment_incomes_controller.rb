@@ -29,7 +29,7 @@ module Providers
         merge_with_model(applicant) do
           return {} unless params[:applicant]
 
-          params.expect(applicant: [:extra_employment_information, :extra_employment_information_details])
+          params.expect(applicant: %i[extra_employment_information extra_employment_information_details])
         end
       end
     end

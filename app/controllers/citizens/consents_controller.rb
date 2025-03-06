@@ -33,7 +33,7 @@ module Citizens
       merge_with_model(legal_aid_application) do
         return {} unless params[:legal_aid_application]
 
-        params.expect(legal_aid_application: [:open_banking_consent, :open_banking_consent_choice_at])
+        params.expect(legal_aid_application: %i[open_banking_consent open_banking_consent_choice_at])
       end
     end
   end

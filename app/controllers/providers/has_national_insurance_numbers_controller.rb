@@ -17,7 +17,7 @@ module Providers
 
     def form_params
       merge_with_model(applicant) do
-        params.expect(applicant: [:has_national_insurance_number, :national_insurance_number])
+        params.expect(applicant: %i[has_national_insurance_number national_insurance_number])
       end
     end
   end

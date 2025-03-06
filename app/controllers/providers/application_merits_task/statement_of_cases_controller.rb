@@ -84,7 +84,7 @@ module Providers
       def statement_of_case_params
         params[:application_merits_task_statement_of_case] = { original_file: [], statement: nil } unless params.key?(:application_merits_task_statement_of_case)
         merge_with_model(statement_of_case, provider_uploader: current_provider) do
-          params.expect(application_merits_task_statement_of_case: [:statement, :original_file])
+          params.expect(application_merits_task_statement_of_case: %i[statement original_file])
         end
       end
 

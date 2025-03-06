@@ -32,7 +32,7 @@ module Providers
       def form_params
         merge_with_model(non_uk_home_address) do
           params.expect(
-            non_uk_home_address: [:country_name, :address_line_one, :address_line_two, :city, :county]
+            non_uk_home_address: %i[country_name address_line_one address_line_two city county]
           ).merge(postcode: nil)
         end
       end
