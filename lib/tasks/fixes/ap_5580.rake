@@ -48,7 +48,7 @@ namespace :fixes do
         ref: legal_aid_application.application_ref,
         proceedings: count,
         proceeding_states: all_client_relationship_to_proceeding_states(legal_aid_application).uniq,
-        proceeding_answers: uniq_proceeding_relationships(legal_aid_application),
+        proceeding_answers: uniq_proceeding_relationships(legal_aid_application).sort,
       }
 
       unless dry_run
