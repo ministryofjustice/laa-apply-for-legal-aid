@@ -391,12 +391,6 @@ Rails.application.routes.draw do
         resource :prohibited_steps, only: %i[show update]
         resource :specific_issue, only: %i[show update], controller: "specific_issue"
         resource :vary_order, only: %i[show update], controller: "vary_order", path: "changes_since_original"
-        # delete this section when transition to application complete
-        resource :is_client_biological_parent, only: %i[show update], controller: :is_client_biological_parent
-        resource :does_client_have_parental_responsibility, only: %i[show update]
-        resource :is_client_child_subject, only: %i[show update], controller: :is_client_child_subject, path: "is_client_a_child_subject_of_proceeding"
-        resource :check_who_client_is, only: %i[show update]
-        # delete this section when transition to application complete
         resource :child_care_assessment, only: %i[show update], path: "assessment_of_client"
         resource :child_care_assessment_result, only: %i[show update], path: "assessment_result"
       end

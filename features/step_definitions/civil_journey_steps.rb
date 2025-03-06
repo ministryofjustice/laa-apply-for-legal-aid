@@ -988,8 +988,8 @@ Given("I complete the journey as far as check merits answers with SCA proceeding
     explicit_proceedings: %i[pb003 pb059],
     set_lead_proceeding: :pb003,
   )
-  @legal_aid_application.proceedings.find_by(ccms_code: "PB003").update!(relationship_to_child: "biological")
-  create(:legal_framework_merits_task_list, :pb003_pb059, legal_aid_application: @legal_aid_application)
+  @legal_aid_application.applicant.update!(relationship_to_children: "biological")
+  create(:legal_framework_merits_task_list, :pb003_pb059_application, legal_aid_application: @legal_aid_application)
   @legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))

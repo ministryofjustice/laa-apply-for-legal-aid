@@ -109,10 +109,13 @@ RSpec.describe DocumentCategoryAnalyser do
     context "when the application is a Special children act (SCA) matter" do
       let(:application) { create(:legal_aid_application, :with_applicant) }
 
-      before { create(:proceeding, :pb003, relationship_to_child:, legal_aid_application: application) }
+      before do
+        create(:proceeding, :pb003, legal_aid_application: application)
+        application.applicant.update!(relationship_to_children:)
+      end
 
       context "and the client has parental responsibility" do
-        let(:relationship_to_child) { "parental_responsibility_agreement" }
+        let(:relationship_to_children) { "parental_responsibility_agreement" }
 
         it "updates the allowed_document_categories with parental_responsibility" do
           call
@@ -121,7 +124,7 @@ RSpec.describe DocumentCategoryAnalyser do
       end
 
       context "and the client has court_ordered responsibility" do
-        let(:relationship_to_child) { "court_order" }
+        let(:relationship_to_children) { "court_order" }
 
         it "updates the allowed_document_categories with parental_responsibility" do
           call
@@ -130,7 +133,7 @@ RSpec.describe DocumentCategoryAnalyser do
       end
 
       context "and the client is a biological parent" do
-        let(:relationship_to_child) { "biological" }
+        let(:relationship_to_children) { "biological" }
 
         it "leaves the allowed_document_categories empty" do
           call
@@ -139,7 +142,7 @@ RSpec.describe DocumentCategoryAnalyser do
       end
 
       context "and the client has no parental responsibility" do
-        let(:relationship_to_child) { nil }
+        let(:relationship_to_children) { nil }
 
         it "leaves the allowed_document_categories empty" do
           call
