@@ -17,9 +17,9 @@ module Providers
           next {} unless params[:legal_aid_application]
 
           params.expect(legal_aid_application: [:property_value,
-                                                        :outstanding_mortgage_amount,
-                                                        :shared_ownership,
-                                                        :percentage_home])
+                                                :outstanding_mortgage_amount,
+                                                :shared_ownership,
+                                                :percentage_home])
         end
       end
     end
