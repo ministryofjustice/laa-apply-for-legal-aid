@@ -148,11 +148,6 @@ RSpec.describe Providers::SubmittedApplicationsController do
         expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_tax)
       end
 
-      it "displays the Other income header" do
-        get_request
-        expect(unescaped_response_body).to include I18n.t("shared.review_application.income_payments_and_assets.other_income")
-      end
-
       it "does not display the extra employment information details" do
         get_request
         expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.employment_details")

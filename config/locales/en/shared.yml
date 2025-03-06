@@ -622,14 +622,6 @@ en:
           question: Emergency scope limitations
         substantive:
           question: Substantive scope limitations
-      proceeding_details_section:
-        heading: proceeding details
-        client_role: Client role
-        delegated_functions: Delegated functions
-        emergency_level_of_service: Emergency level of service
-        emergency_scope_limits: Emergency scope limits
-        substantive_level_of_service: Substantive level of service
-        substantive_scope_limits: Substantive scope limits
       emergency_limitations:
         form_of_service: &form Form of service
         costs: &costs Costs you can incur
@@ -919,15 +911,13 @@ en:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
-        client_details_heading: Client details
-        partner_details_heading: Partner details
+        client_details_heading: Client
+        partner_details_heading: Partner
         linking_and_copying_heading: Cases linked to this one
         proceeding_details_section_heading: What you're applying for
         change: Change
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
-        no_means_test_income_heading: Income, regular payments and assets
-        non_means_tested: Non means tested
         section_delegated:
           heading: Delegated functions
         section_emergency:
@@ -945,6 +935,8 @@ en:
           heading: Client declaration
           signature: "Client signature:"
           date: "Date:"
+        capital-section-heading: Your client's capital
+        capital-section-heading_with_partner: Your client and their partner's capital
     means:
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.

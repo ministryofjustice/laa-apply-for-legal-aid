@@ -1161,6 +1161,7 @@ en:
       check_income_answers:
         show:
           h1-heading: Check your answers
+          caption: Means assessment
           what_happens_next:
             heading: What happens next
             text: You'll need to answer questions about %{individual}'s capital so we can calculate their financial eligibility for legal aid.

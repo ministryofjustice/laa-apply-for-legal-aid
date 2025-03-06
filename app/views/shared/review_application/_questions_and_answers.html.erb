@@ -42,56 +42,37 @@
   <% end %>
 
   <% if Setting.linked_applications? %>
-    <div class="govuk-grid-row" id="app-check-your-answers__linking">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-l"><%= t(".linking_and_copying_heading") %></h2>
-      </div>
-    </div>
+    <h2 class="govuk-heading-l"><%= t(".linking_and_copying_heading") %></h2>
     <%= render("shared/check_answers/linking_and_copying", read_only: true) %>
   <% end %>
 
   <section class="proceeding_details print-no-break">
     <h2 class="govuk-heading-l"><%= t(".proceeding_details_section_heading") %></h2>
-    <%= render("shared/check_answers/proceeding_details_section") %>
+    <%= render("shared/check_answers/proceeding_details") %>
   </section>
 
-  <% if @legal_aid_application.non_sca_used_delegated_functions? %>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
-      </div>
-    </div>
-    <%= render(
-          "shared/check_answers/emergency_costs",
-          legal_aid_application: @legal_aid_application,
-          read_only: true,
-        ) %>
+  <% unless @legal_aid_application.non_means_tested? || @legal_aid_application.passported? %>
+    <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: true) %>
+
+    <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: true) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+
+    <% if @legal_aid_application.housing_payments? %>
+      <%= render(
+            "shared/check_answers/housing_benefit",
+            read_only: true,
+            partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
+          ) %>
+    <% end %>
+
+    <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
+    <%= render "shared/check_answers/dependants", read_only: true %>
+
   <% end %>
 
-  <% if @legal_aid_application.substantive_cost_overridable? %>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
-      </div>
-    </div>
-    <%= render(
-          "shared/check_answers/substantive_costs",
-          legal_aid_application: @legal_aid_application,
-          heading: t(".substantive_cost_limit"),
-          read_only: true,
-        ) %>
-  <% end %>
+  <% individual = @source_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
+  <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
 
-  <% if @legal_aid_application.non_means_tested? %>
-    <section class="print-no-break govuk-!-margin-bottom-6">
-      <h2 class="govuk-heading-l"><%= t(".no_means_test_income_heading") %></h2>
-      <%= govuk_tag(text: t(".non_means_tested"), classes: ["govuk-!-margin-bottom-4"]) %>
-    </section>
-  <% elsif @legal_aid_application.uploading_bank_statements? %>
-    <%= render "shared/review_application/income_payments_and_assets_for_bank_statement_upload" %>
-  <% else %>
-    <%= render "shared/review_application/income_payments_and_assets" %>
-  <% end %>
+  <%= render "shared/check_answers/assets", read_only: true, individual: %>
 
   <section class="merits page_break_before">
     <%= render(

@@ -3,7 +3,7 @@
                        html_attributes: { id: "app-check-your-answers__capital_disregards" }) do |card| %>
     <% card.with_summary_list(actions: !read_only) do |summary_list| %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-mandatory_capital_disregards" }) do |row| %>
-        <%= row.with_key(text: t(".mandatory.heading"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".mandatory.heading"), classes: "govuk-!-width-one-third") %>
         <%= row.with_value { @legal_aid_application.mandatory_capital_disregards.any? ? mandatory_capital_disregards_list(@legal_aid_application) : t("generic.none") } %>
         <% unless read_only %>
           <%= row.with_action(
@@ -15,7 +15,7 @@
       <% end %>
 
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-discretionary_capital_disregards" }) do |row| %>
-        <%= row.with_key(text: t(".discretionary.heading"), classes: "govuk-!-width-one-half") %>
+        <%= row.with_key(text: t(".discretionary.heading"), classes: "govuk-!-width-one-third") %>
         <%= row.with_value(text: @legal_aid_application.discretionary_capital_disregards.any? ? discretionary_capital_disregards_list(@legal_aid_application) : t("generic.none")) %>
         <% unless read_only %>
           <%= row.with_action(

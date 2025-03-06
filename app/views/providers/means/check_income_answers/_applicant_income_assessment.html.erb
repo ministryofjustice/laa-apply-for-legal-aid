@@ -1,10 +1,14 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+
 <% bank_statement_upload = @legal_aid_application.client_uploading_bank_statements? %>
 
 <section class="applicant">
-  <h2 class="govuk-heading-l govuk-!-margin-bottom-8"><%= t(".income-heading") %></h2>
+  <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
   <% if bank_statement_upload %>
-    <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false, partner: false) %>
+    <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only:, partner: false) %>
+  <% elsif @legal_aid_application.cfe_result.present? && display_employment_income? %>
+    <%= render "shared/employment_income_table" %>
   <% end %>
 
   <% if @legal_aid_application.applicant.hmrc_employment_income? %>
@@ -12,17 +16,17 @@
       <%= render(
             "shared/check_answers/full_employment_details",
             individual: "Your client",
-            read_only: false,
+            read_only:,
             partner: false,
           ) %>
     <% else %>
-      <%= render "shared/check_answers/employed_income", partner: false, read_only: false %>
+      <%= render "shared/check_answers/employed_income", partner: false, read_only: %>
     <% end %>
   <% elsif @legal_aid_application.applicant.employed? %>
     <%= render(
           "shared/check_answers/full_employment_details",
           individual: "Your client",
-          read_only: false,
+          read_only:,
           partner: false,
         ) %>
   <% end %>
@@ -32,7 +36,8 @@
                transactions_for: "applicant",
                individual: @legal_aid_application.applicant,
                state_benefits: @legal_aid_application.applicant.state_benefits,
-               version: "means") %>
+               version: "means",
+               read_only:) %>
   <% end %>
 
   <%= render(
@@ -41,16 +46,17 @@
         url: bank_statement_upload ? providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application),
         transaction_types: @credit_transaction_types,
         individual: "Applicant",
+        read_only:,
       ) %>
 
   <% if bank_statement_upload %>
     <%= render(
           "shared/check_answers/cash_payments",
-          read_only: false,
           url: providers_legal_aid_application_means_cash_income_path,
           individual: "Applicant",
           individual_with_determiner: t("generic.client"),
           type: :income,
+          read_only:,
         ) %>
   <% end %>
 
@@ -60,10 +66,10 @@
         individual_with_determiner: t("generic.client"),
         model: @legal_aid_application.applicant,
         url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-        read_only: false,
+        read_only:,
       ) %>
 
-  <h2 class="govuk-heading-l govuk-!-margin-top-8 govuk-!-margin-bottom-8"><%= t(".outgoings-heading") %></h2>
+  <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
 
   <%= render(
         "shared/check_answers/payments_summary",
@@ -71,16 +77,17 @@
         url: bank_statement_upload ? providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
         transaction_types: @debit_transaction_types,
         individual: "Applicant",
+        read_only:,
       ) %>
 
   <% if bank_statement_upload %>
     <%= render(
           "shared/check_answers/cash_payments",
-          read_only: false,
           url: providers_legal_aid_application_means_cash_outgoing_path,
           individual: "Applicant",
           individual_with_determiner: t("generic.client"),
           type: :outgoings,
+          read_only:,
         ) %>
   <% end %>
 </section>

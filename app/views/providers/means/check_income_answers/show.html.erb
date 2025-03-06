@@ -4,15 +4,15 @@
                   "your client"
                 end %>
 
-<%= page_template(page_title: t(".h1-heading"), column_width: "full") do %>
+<%= page_template(page_title: t(".h1-heading"), caption: t(".caption"), column_width: "full") do %>
 
   <%= govuk_inset_text do %>
     <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
   <% end %>
 
-  <%= render "providers/means/check_income_answers/applicant_income_assessment" %>
+  <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: false) %>
 
-  <%= render "providers/means/check_income_answers/partner_income_assessment" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+  <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: false) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 
   <% if @legal_aid_application.housing_payments? %>
     <%= render(
