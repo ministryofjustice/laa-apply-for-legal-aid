@@ -887,21 +887,6 @@ en:
       restrictions: Restrictions on your client's assets
       none: None
     review_application:
-      income_payments_and_assets:
-        heading: Income, regular payments and assets
-        income: Income
-        other_income: Other income
-        passported: Passported
-        payments: Regular payments
-        capital-heading: Your client's capital
-        capital-heading_with_partner: Your client and their partner's capital
-      income_payments_and_assets_for_bank_statement_upload:
-        capital-heading: "Your client's capital"
-        capital-heading_with_partner: "Your client and their partner's capital"
-        credits-section-heading: Payments your client gets
-        debits-section-heading: Payments your client pays
-        income-heading: Your client's income
-        outgoings-heading: Your client's outgoings
       partner_income:
         income-heading: The partner's income
         outgoings-heading: The partner's outgoings
