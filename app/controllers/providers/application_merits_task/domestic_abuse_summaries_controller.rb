@@ -25,7 +25,7 @@ warning_letter_sent_details
 police_notified_details_true 
 police_notified_details_false
                                                                bail_conditions_set 
-bail_conditions_set_details]
+bail_conditions_set_details],
           )
         end
       end
