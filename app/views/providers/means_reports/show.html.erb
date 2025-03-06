@@ -3,7 +3,11 @@
   <% @cfe_result = cfe_result if @cfe_result.nil? %>
   <% @manual_review_determiner = manual_review_determiner if @manual_review_determiner.nil? %>
 
+  <p class="govuk-body"><%= govuk_tag(text: t(".review_required")) if @manual_review_determiner.manual_review_required? %></p>
+
   <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
+
+  <%= render "caseworker_review" if @manual_review_determiner.manual_review_required? %>
 
   <h2 class="govuk-heading-m print-no-break-after"><%= t(".client_details_heading") %></h2>
   <%= render(
