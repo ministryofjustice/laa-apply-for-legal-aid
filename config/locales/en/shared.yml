@@ -505,7 +505,6 @@ en:
           child_care_assessment_heading: Assessment of your client
           linked_children_heading: Children covered
           linked_children: Children covered under this proceeding
-#          relationship_to_child_heading: Who your client is in the proceeding
           opponents_application_heading: Opponent's application
           opponents_application_question: You have a copy of the opponent's application or court order?
           opponents_application_reason: Reason for applying for legal aid at this stage
@@ -543,13 +542,6 @@ en:
         assessed: Client's ability to care was assessed by the local authority?
         result: Assessment result
         details: How the result will be challenged
-      relationship_to_children:
-        heading: Who your client is in the proceeding
-        biological_parent: Client is the biological parent of any child involved?
-        child_subject: Client is a child subject of this proceeding?
-        court_order: Yes, under a court order
-        parental_responsibilities: Client has parental responsibility for any child involved?
-        parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       relationship_to_children:
         heading: Who your client is in the proceeding
         biological_parent: Client is the biological parent of any child involved?
