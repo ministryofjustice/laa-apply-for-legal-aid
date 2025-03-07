@@ -1,26 +1,26 @@
-
-
-  <%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__statement_of_case" }, heading_level: 3) do |card|
-        unless read_only
-          card.with_action do
-            govuk_link_to(t("generic.change"),
-                          providers_legal_aid_application_statement_of_case_path(@legal_aid_application), visually_hidden_text: t(".heading"))
-          end
+<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__statement_of_case" }, heading_level: 3) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        providers_legal_aid_application_statement_of_case_path(@legal_aid_application), visually_hidden_text: t(".heading"))
         end
-        card.with_summary_list(actions: false) do |summary_list|
-          if attachments_with_size(statement_of_case&.original_attachments).present?
-            summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case_file" }) do |row|
-              row.with_key(text: t(".file_names"), classes: "govuk-!-width-one-third")
-              row.with_value do
-                govuk_list attachments_with_size(statement_of_case&.original_attachments)
-              end
-            end
-          end
-          if statement_of_case.statement?
-            summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case_statement" }) do |row|
-              row.with_key(text: t(".statement"), classes: "govuk-!-width-one-third")
-              row.with_value(text: statement_of_case&.statement)
+      end
+
+      card.with_summary_list(actions: false) do |summary_list|
+        if attachments_with_size(statement_of_case&.original_attachments).present?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case_file" }) do |row|
+            row.with_key(text: t(".file_names"), classes: "govuk-!-width-one-third")
+            row.with_value do
+              govuk_list attachments_with_size(statement_of_case&.original_attachments)
             end
           end
         end
-      end %>
+
+        if statement_of_case.statement?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__statement_of_case_statement" }) do |row|
+            row.with_key(text: t(".statement"), classes: "govuk-!-width-one-third")
+            row.with_value(text: statement_of_case&.statement)
+          end
+        end
+      end
+    end %>
