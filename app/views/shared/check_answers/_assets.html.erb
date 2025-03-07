@@ -45,44 +45,18 @@
   <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
 <% end %>
 
+<h2 class="govuk-heading-l print-no-break-after"><%= t(".savings_and_assets_heading") %></h2>
+
 <%#  savings and investments %>
 <%= render("shared/check_answers/savings_and_investments", read_only:, individual:) %>
 
 <%#  other assets %>
-<%= govuk_summary_card(title: t(".assets.other_assets#{individual}"),
-                       heading_level: 3,
-                       html_attributes: { id: "app-check-your-answers__other_assets_items" }) do |card|
-      unless read_only
-        card.with_action do
-          govuk_link_to(
-            t("generic.change"),
-            check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
-            visually_hidden_suffix: t(".assets.other_assets#{individual}"),
-          )
-        end
-      end
-
-      card.with_summary_list do |summary_list|
-        if capital_assets_list(@legal_aid_application).nil?
-          summary_list.with_row do |row|
-            row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.other_assets.none_label"), classes: "govuk-!-width-one-third")
-            row.with_value { t("generic.none") }
-          end
-        else
-          capital_assets_list(@legal_aid_application).each do |item|
-            summary_list.with_row do |row|
-              row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.other_assets.check_box_#{item.first}"), classes: "govuk-!-width-one-third")
-              row.with_value { item.first.eql?("second_home_percentage") ? capital_amount_text(item.second, :percentage) : gds_number_to_currency(item.second) }
-            end
-          end
-        end
-      end
-    end %>
+<%= render("shared/check_answers/other_assets", read_only:, individual:) %>
 
 <%#  asset restrictions %>
 <%= render("shared/check_answers/restrictions", read_only:, individual:) if @legal_aid_application.own_capital? %>
 
-<%#  policy disregards - to be removed as part of AP-5510 when there are no applications with policy disregards %>
+<%#  TODO: policy disregards - to be removed as part of AP-5510 when there are no applications with policy disregards %>
 <% if @legal_aid_application.policy_disregards.present? %>
   <%= render(
         "shared/check_answers/one_link_section",
