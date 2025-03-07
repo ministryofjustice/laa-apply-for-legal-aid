@@ -283,9 +283,9 @@ en:
       assets:
         bank_accounts_heading: Bank accounts
         savings_and_assets_heading: Savings and assets
-        assets:
-          policy_disregards: Payments from scheme or charities
-          policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
+        policy_disregards_legacy:
+          question: Payments from scheme or charities
+          question_with_partner: Your client's and the partner's payments from schemes or charities
         property:
           heading_own_home: Property
           heading_property_details: Your client's property
