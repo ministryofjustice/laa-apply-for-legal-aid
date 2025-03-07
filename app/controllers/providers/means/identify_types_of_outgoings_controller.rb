@@ -36,7 +36,7 @@ module Providers
       end
 
       def legal_aid_application_params
-        params.expect(legal_aid_application: [applicant_transaction_type_ids: []])
+        params.expect(legal_aid_application: [:none_selected, { applicant_transaction_type_ids: [] }])
       end
 
       def transaction_types
