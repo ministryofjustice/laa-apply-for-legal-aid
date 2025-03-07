@@ -38,7 +38,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:child_subject)
+        params.expect(binary_choice_form: [:child_subject])
       end
     end
   end

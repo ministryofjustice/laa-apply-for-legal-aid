@@ -23,7 +23,7 @@ module Providers
         merge_with_model(legal_aid_application) do
           return {} unless params[:legal_aid_application]
 
-          params.require(:legal_aid_application).permit(:has_dependants)
+          params.expect(legal_aid_application: [:has_dependants])
         end
       end
 

@@ -21,7 +21,7 @@ module Providers
         merge_with_model(appeal) do
           return {} unless params[:application_merits_task_appeal]
 
-          params.require(:application_merits_task_appeal).permit(:original_judge_level)
+          params.expect(application_merits_task_appeal: [:original_judge_level])
         end
       end
     end

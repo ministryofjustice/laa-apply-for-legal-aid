@@ -40,7 +40,7 @@ module Providers
     def form_params
       return {} unless params[:binary_choice_form]
 
-      params.require(:binary_choice_form).permit(:confirm_office)
+      params.expect(binary_choice_form: [:confirm_office])
     end
 
     def determine_where_next

@@ -18,7 +18,7 @@ module Providers
 
       def form_params
         merge_with_model(matter_opposition) do
-          params.require(:application_merits_task_matter_opposition).permit(:matter_opposed)
+          params.expect(application_merits_task_matter_opposition: [:matter_opposed])
         end
       end
     end

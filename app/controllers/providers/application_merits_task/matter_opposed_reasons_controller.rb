@@ -23,8 +23,7 @@ module Providers
       def matter_opposition_params
         merge_with_model(matter_opposition) do
           params
-            .require(:application_merits_task_matter_opposition)
-            .permit(:reason)
+            .expect(application_merits_task_matter_opposition: [:reason])
             .merge(legal_aid_application_id: legal_aid_application.id)
         end
       end

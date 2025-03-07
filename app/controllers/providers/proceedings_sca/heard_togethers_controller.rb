@@ -57,7 +57,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:heard_together)
+        params.expect(binary_choice_form: [:heard_together])
       end
     end
   end

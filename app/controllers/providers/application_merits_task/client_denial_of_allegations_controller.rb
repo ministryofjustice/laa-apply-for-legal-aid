@@ -18,7 +18,7 @@ module Providers
 
       def form_params
         merge_with_model(allegation) do
-          params.require(:application_merits_task_allegation).permit(:denies_all, :additional_information)
+          params.expect(application_merits_task_allegation: %i[denies_all additional_information])
         end
       end
     end

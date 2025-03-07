@@ -21,8 +21,7 @@ module Providers
 
       def housing_benefit_params
         params
-          .require(:providers_means_housing_benefit_form)
-          .permit(:transaction_type_ids, :housing_benefit_amount, :housing_benefit_frequency)
+          .expect(providers_means_housing_benefit_form: %i[transaction_type_ids housing_benefit_amount housing_benefit_frequency])
           .merge(legal_aid_application:)
       end
 

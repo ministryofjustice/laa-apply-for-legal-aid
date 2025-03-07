@@ -30,7 +30,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:has_other_involved_child)
+        params.expect(binary_choice_form: [:has_other_involved_child])
       end
     end
   end

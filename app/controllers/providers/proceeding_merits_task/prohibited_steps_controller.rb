@@ -27,11 +27,10 @@ module Providers
       def form_params
         merge_with_model(prohibited_steps) do
           params
-            .require(:proceeding_merits_task_prohibited_steps)
-            .permit(
-              :uk_removal,
-              :details,
-              :confirmed_not_change_of_name,
+            .expect(
+              proceeding_merits_task_prohibited_steps: %i[uk_removal
+                                                          details
+                                                          confirmed_not_change_of_name],
             )
         end
       end

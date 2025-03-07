@@ -33,7 +33,7 @@ module Providers
       merge_with_model(legal_aid_application) do
         next {} unless params[:legal_aid_application]
 
-        params.require(:legal_aid_application).permit(:separate_representation_required)
+        params.expect(legal_aid_application: [:separate_representation_required])
       end
     end
   end

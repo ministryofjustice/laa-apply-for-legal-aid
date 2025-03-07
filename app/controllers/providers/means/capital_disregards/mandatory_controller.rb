@@ -24,8 +24,8 @@ module Providers
 
         def form_params
           merge_with_model(legal_aid_application) do
-            params.require(:providers_means_capital_disregards_mandatory_form)
-                  .permit(:none_selected, mandatory_capital_disregards: [])
+            params
+                  .expect(providers_means_capital_disregards_mandatory_form: [:none_selected, { mandatory_capital_disregards: [] }])
                   .merge(legal_aid_application:)
           end
         end

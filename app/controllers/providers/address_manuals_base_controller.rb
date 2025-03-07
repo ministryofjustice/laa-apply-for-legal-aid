@@ -17,7 +17,7 @@ module Providers
 
     def form_params
       merge_with_model(address) do
-        params.require(:address).permit(*address_attributes).merge(location:)
+        params.expect(address: [*address_attributes]).merge(location:)
       end
     end
   end

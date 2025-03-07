@@ -27,7 +27,7 @@ module Providers
         return { model: proceeding } if form_submitted_without_selection?
 
         merge_with_model(proceeding) do
-          params.require(:proceeding).permit(:emergency_level_of_service)
+          params.expect(proceeding: [:emergency_level_of_service])
         end
       end
 

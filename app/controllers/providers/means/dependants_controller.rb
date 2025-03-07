@@ -35,7 +35,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(dependant) do
-          params.require(:dependant).permit(*LegalAidApplications::DependantForm::MODEL_ATTRIBUTES)
+          params.expect(dependant: [*LegalAidApplications::DependantForm::MODEL_ATTRIBUTES])
         end
         convert_date_params(merged_params)
       end

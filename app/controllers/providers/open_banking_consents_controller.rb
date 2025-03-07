@@ -17,7 +17,7 @@ module Providers
       merge_with_model(legal_aid_application) do
         return {} unless params[:legal_aid_application]
 
-        params.require(:legal_aid_application).permit(:provider_received_citizen_consent)
+        params.expect(legal_aid_application: [:provider_received_citizen_consent])
       end
     end
   end

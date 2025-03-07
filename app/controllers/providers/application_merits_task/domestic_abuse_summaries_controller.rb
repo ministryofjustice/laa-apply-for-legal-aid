@@ -18,10 +18,14 @@ module Providers
 
       def form_params
         merge_with_model(domestic_abuse_summary) do
-          params.require(:application_merits_task_domestic_abuse_summary).permit(
-            :warning_letter_sent, :warning_letter_sent_details,
-            :police_notified, :police_notified_details_true, :police_notified_details_false,
-            :bail_conditions_set, :bail_conditions_set_details
+          params.expect(
+            application_merits_task_domestic_abuse_summary: %i[warning_letter_sent
+                                                               warning_letter_sent_details
+                                                               police_notified
+                                                               police_notified_details_true
+                                                               police_notified_details_false
+                                                               bail_conditions_set
+                                                               bail_conditions_set_details],
           )
         end
       end

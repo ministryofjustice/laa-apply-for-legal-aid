@@ -21,7 +21,7 @@ module Providers
 
       def form_params
         merge_with_model(partner) do
-          params.require(:partner).permit(:receives_state_benefits)
+          params.expect(partner: [:receives_state_benefits])
         end
       end
 

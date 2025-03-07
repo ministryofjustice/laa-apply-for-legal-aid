@@ -9,6 +9,14 @@ module CCMS
 
       CONFIG_METHOD_REGEX = /^#(\S+)/
 
+      RESPONSE_TYPES = {
+        text: :extract_raw_value,
+        number: :extract_raw_value,
+        boolean: :extract_raw_value,
+        currency: :extract_as_currency,
+        date: :extract_as_date,
+      }.freeze
+
       def self.call(requestor, xml, entity_name, options = {})
         new(requestor, xml, entity_name, options).call
       end
@@ -55,14 +63,6 @@ module CCMS
       def boolean?(value)
         value.is_a?(TrueClass) || value.is_a?(FalseClass)
       end
-
-      RESPONSE_TYPES = {
-        text: :extract_raw_value,
-        number: :extract_raw_value,
-        boolean: :extract_raw_value,
-        currency: :extract_as_currency,
-        date: :extract_as_date,
-      }.freeze
 
       def extract_response_value(config)
         method_to_call = RESPONSE_TYPES[config[:response_type].to_sym]

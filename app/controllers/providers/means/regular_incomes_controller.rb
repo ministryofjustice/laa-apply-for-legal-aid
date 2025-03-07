@@ -19,8 +19,7 @@ module Providers
 
       def regular_income_params
         params
-          .require(:providers_means_regular_income_form)
-          .permit(regular_transaction_params, transaction_type_ids: [])
+          .expect(providers_means_regular_income_form: [regular_transaction_params, { transaction_type_ids: [] }])
           .merge(legal_aid_application:)
       end
 

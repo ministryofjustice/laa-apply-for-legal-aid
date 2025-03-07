@@ -35,8 +35,8 @@ module Providers
         merged_params = merge_with_model(proceeding) do
           return {} unless params[:proceeding]
 
-          params.require(:proceeding).permit(:used_delegated_functions,
-                                             :used_delegated_functions_on)
+          params.expect(proceeding: %i[used_delegated_functions
+                                       used_delegated_functions_on])
         end
         convert_date_params(merged_params)
       end
