@@ -8,20 +8,19 @@
 
 <% individual = partner ? "Partner" : "Client" %>
 
-<%= govuk_summary_card(title: t(".section_heading"), html_attributes: { id: "app-check-your-answers__bank_statements_#{individual.downcase}" }, heading_level: 3) do |card| %>
-  <% unless read_only %>
-    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{individual} #{t('.bank_statement_question')}") } %>
-  <% end %>
-  <%= card.with_summary_list do |summary_list| %>
-    <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t(".bank_statement_question"), classes: "govuk-!-width-one-third") %>
-      <%= row.with_value do %>
-        <ul class="govuk-list">
-          <% attachments_with_size(bank_statements).each do |answer| %>
-            <li><%= answer %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= govuk_summary_card(title: t(".section_heading"),
+                       heading_level: 3,
+                       html_attributes: { id: "app-check-your-answers__bank_statements_#{individual.downcase}" }) do |card|
+      unless read_only
+        card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{individual} #{t('.bank_statement_question')}") }
+      end
+
+      card.with_summary_list do |summary_list|
+        summary_list.with_row do |row|
+          row.with_key(text: t(".bank_statement_question"), classes: "govuk-!-width-one-third")
+          row.with_value do
+            govuk_list(attachments_with_size(bank_statements))
+          end
+        end
+      end
+    end %>
