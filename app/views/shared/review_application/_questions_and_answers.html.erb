@@ -66,13 +66,14 @@
 
     <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
     <%= render "shared/check_answers/dependants", read_only: true %>
-
   <% end %>
 
-  <% individual = @source_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
-  <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
+  <% unless @legal_aid_application.non_means_tested? %>
+    <% individual = @source_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
+    <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
 
-  <%= render "shared/check_answers/assets", read_only: true, individual: %>
+    <%= render "shared/check_answers/assets", read_only: true, individual: %>
+  <% end %>
 
   <section class="merits page_break_before">
     <%= render(
