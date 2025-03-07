@@ -282,9 +282,8 @@ en:
           heading: Payments to be reviewed
       assets:
         bank_accounts_heading: Bank accounts
+        savings_and_assets_heading: Savings and assets
         assets:
-          other_assets: Your client's assets
-          other_assets_with_partner: Your client or their partner's assets
           policy_disregards: Payments from scheme or charities
           policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
         property:
@@ -328,9 +327,11 @@ en:
         current_accounts: Current account
         savings_accounts: Savings account
       savings_and_investments:
-        heading: Savings and assets
         card_heading: Your client's savings or investments
         card_heading_with_partner: Your client or their partner's savings or investments
+      other_assets:
+        card_heading: Your client's assets
+        card_heading_with_partner: Your client or their partner's assets
       bank_transaction_table:
         total: '%{text} total'
       bank_statements:
