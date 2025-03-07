@@ -5,7 +5,7 @@
 
 <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".assets.bank_accounts_heading") %></h2>
+<h2 class="govuk-heading-l print-no-break-after"><%= t(".bank_accounts_heading") %></h2>
 
 <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
   <!-- non-passported truelayer only -->
@@ -45,38 +45,8 @@
   <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
 <% end %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".assets.savings_and_assets_heading") %></h2>
-
 <%#  savings and investments %>
-<%= govuk_summary_card(title: t(".assets.savings_and_investments#{individual}"),
-                       heading_level: 3,
-                       html_attributes: { id: "app-check-your-answers__savings_and_investments_items" }) do |card|
-      unless read_only
-        card.with_action do
-          govuk_link_to(
-            t("generic.change"),
-            check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-            visually_hidden_suffix: t(".assets.savings_and_investments#{individual}"),
-          )
-        end
-      end
-
-      card.with_summary_list do |summary_list|
-        if capital_amounts_list(@legal_aid_application).nil?
-          summary_list.with_row do |row|
-            row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.none_label"), classes: "govuk-!-width-one-third")
-            row.with_value { t("generic.none") }
-          end
-        else
-          capital_amounts_list(@legal_aid_application).each do |item|
-            summary_list.with_row do |row|
-              row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.check_box_#{item.first}"), classes: "govuk-!-width-one-third")
-              row.with_value { gds_number_to_currency(item.second) }
-            end
-          end
-        end
-      end
-    end %>
+<%= render("shared/check_answers/savings_and_investments", read_only:, individual:) %>
 
 <%#  other assets %>
 <%= govuk_summary_card(title: t(".assets.other_assets#{individual}"),
