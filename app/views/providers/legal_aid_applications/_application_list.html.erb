@@ -39,9 +39,9 @@
 
         table.with_body do |body|
           @legal_aid_applications.each do |application|
-            name = @scope == :voided ? application.applicant_full_name : link_to_application(application.applicant_full_name, application)
+            name = @scope == :voided ? application.applicant_full_name : link_to_application(application.applicant_full_name || t("generic.not_provided"), application)
             body.with_row do |row|
-              row.with_cell(text: name, html_attributes: { "data-sort-value": application.applicant_full_name })
+              row.with_cell(text: name, html_attributes: { "data-sort-value": application.applicant_full_name || t("generic.not_provided") })
               row.with_cell(text: l(application.created_at.to_date, format: :short_date), html_attributes: { "data-sort-value": application.created_at.to_i })
               row.with_cell { application.application_ref }
               row.with_cell do

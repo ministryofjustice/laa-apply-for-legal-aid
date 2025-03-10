@@ -5,10 +5,20 @@
       <li><%= bullet %></li>
     <% end %>
   </ul>
-  <%= next_action_buttons_with_form(
-        url: providers_legal_aid_applications_path,
-        method: :post,
-        show_draft: false,
-        continue_button_text: t(".continue_button"),
-      ) %>
+
+  <% if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true" %>
+     <%= next_action_buttons_with_form(
+           url: providers_legal_aid_application_task_list_path(TaskList::StartPageCollection::NEW_RECORD),
+           method: :post,
+           show_draft: false,
+           continue_button_text: t(".continue_button"),
+         ) %>
+  <% else %>
+    <%= next_action_buttons_with_form(
+          url: providers_legal_aid_applications_path,
+          method: :post,
+          show_draft: false,
+          continue_button_text: t(".continue_button"),
+        ) %>
+  <% end %>
 <% end %>
