@@ -1,0 +1,20 @@
+<%= govuk_summary_card(title: t(".card_heading"),
+                       heading_level: 3,
+                       html_attributes: { id: "applicant-bank-accounts-details" }) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(t("generic.change"),
+                        check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
+                        "aria-label": "#{t('generic.change')} #{t('.aria_label')} values")
+        end
+      end
+
+      card.with_summary_list(actions: false) do |summary_list|
+        @legal_aid_application.applicant&.bank_accounts&.each do |account|
+          summary_list.with_row do |row|
+            row.with_key(text: "#{account.name}, #{account.account_number}, #{account.sort_code}", classes: "govuk-!-width-one-third")
+            row.with_value { gds_number_to_currency(account.balance).to_s }
+          end
+        end
+      end
+    end %>

@@ -1,15 +1,15 @@
-<h2 class="govuk-heading-l"><%= t(".heading") %></h2>
-<%= govuk_summary_card(title: t(".heading")) do |card| %>
-  <% card.with_summary_list(html_attributes: { id: "app-check-your-answers__capital_disregards" }, actions: false) do |summary_list| %>
+<h2 class="govuk-heading-l print-no-break-after"><%= t(".heading") %></h2>
 
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-mandatory_capital_disregards" }) do |row| %>
-      <%= row.with_key(text: t(".mandatory.heading"), classes: "govuk-!-width-one-third") %>
-      <%= row.with_value { @legal_aid_application.mandatory_capital_disregards.any? ? mandatory_capital_disregards_detailed_list(@legal_aid_application) : t("generic.none") } %>
-    <% end %>
+<%= govuk_summary_card(title: t(".heading")) do |card|
+      card.with_summary_list(html_attributes: { id: "app-check-your-answers__capital_disregards" }, actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-mandatory_capital_disregards" }) do |row|
+          row.with_key(text: t(".mandatory.heading"), classes: "govuk-!-width-one-third")
+          row.with_value { @legal_aid_application.mandatory_capital_disregards.any? ? mandatory_capital_disregards_detailed_list(@legal_aid_application) : t("generic.none") }
+        end
 
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-discretionary_capital_disregards" }) do |row| %>
-      <%= row.with_key(text: t(".discretionary.heading")) %>
-      <%= row.with_value(text: @legal_aid_application.discretionary_capital_disregards.any? ? discretionary_capital_disregards_detailed_list(@legal_aid_application) : t("generic.none")) %>
-    <% end %>
-  <% end %>
-<% end %>
+        summary_list.with_row(html_attributes: { id: "app-check-your-discretionary_capital_disregards" }) do |row|
+          row.with_key(text: t(".discretionary.heading"))
+          row.with_value(text: @legal_aid_application.discretionary_capital_disregards.any? ? discretionary_capital_disregards_detailed_list(@legal_aid_application) : t("generic.none"))
+        end
+      end
+    end %>

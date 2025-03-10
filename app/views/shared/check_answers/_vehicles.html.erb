@@ -1,65 +1,67 @@
 <% read_only = false unless local_assigns[:read_only] %>
 
 <h2 class="govuk-heading-l print-no-break-after"><%= t(".#{journey_type}.heading") %></h2>
-<%= govuk_summary_card(title: t(".#{journey_type}.card_heading"), heading_level: 3, html_attributes: { id: "app-check-your-answers__vehicles" }) do |card| %>
-  <% card.with_action do %>
-    <% if !read_only %>
-      <% if @legal_aid_application.vehicles.any? %>
-        <%= govuk_link_to t("generic.change"), providers_legal_aid_application_means_add_other_vehicles_path(@legal_aid_application) %>
-      <% else %>
-        <%= govuk_link_to t("generic.change"), check_answer_url_for(journey_type, :vehicles, @legal_aid_application) %>
-      <% end %>
-    <% end %>
-  <% end %>
 
-  <%= card.with_summary_list(actions: false) do |summary_list| %>
-    <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__own-vehicle" }) do |row| %>
-      <%= row.with_key(text: t(".providers.own#{individual}"), classes: "govuk-!-width-one-third") %>
-      <%= row.with_value { yes_no(@legal_aid_application.own_vehicle?) } %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= govuk_summary_card(title: t(".#{journey_type}.card_heading"), heading_level: 3, html_attributes: { id: "app-check-your-answers__vehicles" }) do |card|
+      card.with_action do
+        unless read_only
+          if @legal_aid_application.vehicles.any?
+            govuk_link_to t("generic.change"), providers_legal_aid_application_means_add_other_vehicles_path(@legal_aid_application)
+          else
+            govuk_link_to t("generic.change"), check_answer_url_for(journey_type, :vehicles, @legal_aid_application)
+          end
+        end
+      end
+
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__own-vehicle" }) do |row|
+          row.with_key(text: t(".providers.own#{individual}"), classes: "govuk-!-width-one-third")
+          row.with_value { yes_no(@legal_aid_application.own_vehicle?) }
+        end
+      end
+    end %>
 
 <% if @legal_aid_application.vehicles.any? %>
   <% @legal_aid_application.vehicles.each_with_index do |vehicle, index| %>
     <%= govuk_summary_card(title: t(".providers.vehicle_index", sequence: index + 1),
                            heading_level: 3,
-                           html_attributes: { id: "vehicle-questions__#{index}" }) do |card| %>
-      <% card.with_action do %>
-        <% if !read_only %>
-          <% govuk_link_to(t("generic.change"), providers_legal_aid_application_means_vehicle_detail_path(@legal_aid_application, vehicle),
-                           visually_hidden_suffix: t(".providers.vehicle_index", sequence: index + 1),
-                           id: "app-check-your-answers__vehicle__#{index}_change_link") %>
-        <% end %>
-      <% end %>
-      <%= card.with_summary_list(actions: false) do |summary_list| %>
-        <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-          <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_owner" }) do |row| %>
-            <%= row.with_key(text: t(".#{journey_type}.owner"), classes: "govuk-!-width-one-third") %>
-            <%= row.with_value { t(".providers.options.#{vehicle.owner}") } %>
-          <% end %>
-        <% end %>
+                           html_attributes: { id: "vehicle-questions__#{index}" }) do |card|
+          card.with_action do
+            unless read_only
+              govuk_link_to(t("generic.change"), providers_legal_aid_application_means_vehicle_detail_path(@legal_aid_application, vehicle),
+                            visually_hidden_suffix: t(".providers.vehicle_index", sequence: index + 1),
+                            id: "app-check-your-answers__vehicle__#{index}_change_link")
+            end
+          end
 
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_estimated_values" }) do |row| %>
-          <%= row.with_key(text: t(".#{journey_type}.estimated_value"), classes: "govuk-!-width-one-third") %>
-          <%= row.with_value { gds_number_to_currency(vehicle.estimated_value) } %>
-        <% end %>
+          card.with_summary_list(actions: false) do |summary_list|
+            if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
+              summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicles_owner" }) do |row|
+                row.with_key(text: t(".#{journey_type}.owner"), classes: "govuk-!-width-one-third")
+                row.with_value { t(".providers.options.#{vehicle.owner}") }
+              end
+            end
 
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_remaining_payments" }) do |row| %>
-          <%= row.with_key(text: t(".#{journey_type}.payment_remaining")) %>
-          <%= row.with_value { gds_number_to_currency(vehicle.payment_remaining) } %>
-        <% end %>
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_estimated_values" }) do |row|
+              row.with_key(text: t(".#{journey_type}.estimated_value"), classes: "govuk-!-width-one-third")
+              row.with_value { gds_number_to_currency(vehicle.estimated_value) }
+            end
 
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_ages" }) do |row| %>
-          <%= row.with_key(text: t(".#{journey_type}.more_than_three_years_old")) %>
-          <%= row.with_value { yes_no(vehicle.more_than_three_years_old?) } %>
-        <% end %>
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_remaining_payments" }) do |row|
+              row.with_key(text: t(".#{journey_type}.payment_remaining"))
+              row.with_value { gds_number_to_currency(vehicle.payment_remaining) }
+            end
 
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_regular_uses" }) do |row| %>
-          <%= row.with_key(text: t(".#{journey_type}.used_regularly")) %>
-          <%= row.with_value { yes_no(vehicle.used_regularly) } %>
-        <% end %>
-      <% end %>
-    <% end %>
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_ages" }) do |row|
+              row.with_key(text: t(".#{journey_type}.more_than_three_years_old"))
+              row.with_value { yes_no(vehicle.more_than_three_years_old?) }
+            end
+
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__vehicle__#{index}_regular_uses" }) do |row|
+              row.with_key(text: t(".#{journey_type}.used_regularly"))
+              row.with_value { yes_no(vehicle.used_regularly) }
+            end
+          end
+        end %>
   <% end %>
 <% end %>

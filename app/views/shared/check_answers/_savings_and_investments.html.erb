@@ -1,0 +1,29 @@
+<%= govuk_summary_card(title: t(".card_heading#{individual}"),
+                       heading_level: 3,
+                       html_attributes: { id: "app-check-your-answers__savings_and_investments_items" }) do |card|
+      unless read_only
+        card.with_action do
+          govuk_link_to(
+            t("generic.change"),
+            check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
+            visually_hidden_suffix: t(".card_heading#{individual}"),
+          )
+        end
+      end
+
+      card.with_summary_list do |summary_list|
+        if capital_amounts_list(@legal_aid_application).nil?
+          summary_list.with_row do |row|
+            row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.none_label"), classes: "govuk-!-width-one-third")
+            row.with_value { t("generic.none") }
+          end
+        else
+          capital_amounts_list(@legal_aid_application).each do |item|
+            summary_list.with_row do |row|
+              row.with_key(text: t("shared.forms.revealing_checkbox.attribute.providers.savings_and_investments.check_box_#{item.first}"), classes: "govuk-!-width-one-third")
+              row.with_value { gds_number_to_currency(item.second) }
+            end
+          end
+        end
+      end
+    end %>

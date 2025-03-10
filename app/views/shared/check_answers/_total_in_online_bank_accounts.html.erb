@@ -1,0 +1,19 @@
+
+<% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
+<% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
+
+<%= govuk_summary_card(title: t(".card_heading"),
+                       heading_level: 3,
+                       html_attributes: { "data-test": "applicant-bank-accounts" }) do |card|
+      card.with_summary_list(actions: false) do |summary_list|
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__online_current_accounts" }) do |row|
+          row.with_key(text: t(".current_accounts"), classes: "govuk-!-width-one-third")
+          row.with_value { online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t("generic.none") }
+        end
+
+        summary_list.with_row(html_attributes: { id: "app-check-your-answers__online_savings_accounts" }) do |row|
+          row.with_key(text: t(".savings_accounts"), classes: "govuk-!-width-one-third")
+          row.with_value { online_savings_accounts.present? ? gds_number_to_currency(online_savings_accounts) : t("generic.none") }
+        end
+      end
+    end %>

@@ -98,14 +98,12 @@ cy:
 
     check_answers:
       assets:
-        assets:
-          other_assets: "?evah tneilc ruoy seod stessa fo sepyt hcihW"
-          policy_disregards: seitirahc ro emehcs morf stnemyaP
-          savings_and_investments: "?evah tneilc ruoy seod stnemtsevni ro sgnivas
-            fo sepyt hcihW"
-          client_savings_account: tnuocca sgnivaS
-          client_current_account: tnuocca tnerruC
-          bank_accounts_heading: "?evah tneilc ruoy seod stnuocca knab hcihW"
+        bank_accounts_heading: Bank accounts
+        total_in_online_bank_accounts_heading: Total in bank accounts
+        savings_and_assets_heading: Savings and assets
+        policy_disregards_legacy:
+          question: Payments from scheme or charities
+          question_with_partner: Your client's and the partner's payments from schemes or charities
         property:
           outstanding_mortgage: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si
             tahW"

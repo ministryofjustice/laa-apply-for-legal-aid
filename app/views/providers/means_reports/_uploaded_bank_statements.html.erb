@@ -4,33 +4,24 @@
 
 <%= govuk_summary_card(title: t(".bank_statement_heading"),
                        heading_level: 3,
-                       html_attributes: { id: "app-check-your-answers__bank_statements_client__card" }) do |card| %>
+                       html_attributes: { id: "app-check-your-answers__bank_statements_client__card" }) do |card|
+      card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__bank_statements_client__summary" }) do |summary_list|
+        if @legal_aid_application.client_uploading_bank_statements?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_client_summary" }) do |row|
+            row.with_key(text: has_partner ? t(".bank_statement_question_with_partner") : t(".bank_statement_question"), classes: "govuk-!-width-one-third")
+            row.with_value do
+              govuk_list(attachments_with_size(@legal_aid_application.attachments.bank_statement_evidence))
+            end
+          end
+        end
 
-  <% card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__bank_statements_client__summary" }) do |summary_list| %>
-    <% if @legal_aid_application.client_uploading_bank_statements? %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_client_summary" }) do |row| %>
-        <%= row.with_key(text: has_partner ? t(".bank_statement_question_with_partner") : t(".bank_statement_question"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value do %>
-          <ul class="govuk-list">
-            <% attachments_with_size(@legal_aid_application.attachments.bank_statement_evidence).each do |answer| %>
-              <li><%= answer %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-    <% end %>
-
-    <% if has_partner && @legal_aid_application.partner_uploading_bank_statements? %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_partner_summary" }) do |row| %>
-        <%= row.with_key(text: t(".partner_bank_statement_question"), classes: "govuk-!-width-one-half") %>
-        <%= row.with_value do %>
-          <ul class="govuk-list">
-            <% attachments_with_size(@legal_aid_application.attachments.part_bank_state_evidence).each do |answer| %>
-              <li><%= answer %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
+        if has_partner && @legal_aid_application.partner_uploading_bank_statements?
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_statements_partner_summary" }) do |row|
+            row.with_key(text: t(".partner_bank_statement_question"), classes: "govuk-!-width-one-third")
+            row.with_value do
+              govuk_list(attachments_with_size(@legal_aid_application.attachments.part_bank_state_evidence))
+            end
+          end
+        end
+      end
+    end %>
