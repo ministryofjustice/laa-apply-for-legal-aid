@@ -28,7 +28,7 @@ module Providers
         merge_with_model(applicant) do
           next {} unless params[:applicant]
 
-          params.require(:applicant).permit(:correspondence_address_choice)
+          params.expect(applicant: [:correspondence_address_choice])
         end
       end
     end

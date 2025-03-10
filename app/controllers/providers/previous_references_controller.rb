@@ -13,7 +13,7 @@ module Providers
 
     def form_params
       merge_with_model(applicant) do
-        params.require(:applicant).permit(:applied_previously, :previous_reference)
+        params.expect(applicant: %i[applied_previously previous_reference])
       end
     end
   end

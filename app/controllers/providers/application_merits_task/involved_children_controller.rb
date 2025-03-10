@@ -34,7 +34,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(involved_child) do
-          params.require(:application_merits_task_involved_child).permit(*InvolvedChildForm::MODEL_ATTRIBUTES)
+          params.expect(application_merits_task_involved_child: [*InvolvedChildForm::MODEL_ATTRIBUTES])
         end
         convert_date_params(merged_params)
       end

@@ -36,12 +36,12 @@ module Providers
 
     def form_params
       merge_with_model(legal_aid_application) do
-        params.require(:legal_aid_application).permit(:emergency_cost_override,
-                                                      :emergency_cost_requested,
-                                                      :emergency_cost_reasons,
-                                                      :substantive_cost_override,
-                                                      :substantive_cost_requested,
-                                                      :substantive_cost_reasons)
+        params.expect(legal_aid_application: %i[emergency_cost_override
+                                                emergency_cost_requested
+                                                emergency_cost_reasons
+                                                substantive_cost_override
+                                                substantive_cost_requested
+                                                substantive_cost_reasons])
       end
     end
   end

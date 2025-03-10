@@ -18,8 +18,8 @@ module Providers
 
       def form_params
         merge_with_model(parties_mental_capacity) do
-          params.require(:application_merits_task_parties_mental_capacity).permit(
-            :understands_terms_of_court_order, :understands_terms_of_court_order_details
+          params.expect(
+            application_merits_task_parties_mental_capacity: %i[understands_terms_of_court_order understands_terms_of_court_order_details],
           )
         end
       end

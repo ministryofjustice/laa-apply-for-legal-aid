@@ -32,7 +32,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:confirm_delegated_functions_date)
+        params.expect(binary_choice_form: [:confirm_delegated_functions_date])
       end
     end
   end

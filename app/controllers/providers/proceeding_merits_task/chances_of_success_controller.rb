@@ -28,7 +28,7 @@ module Providers
         merge_with_model(chances_of_success) do
           next {} unless params[:proceeding_merits_task_chances_of_success]
 
-          params.require(:proceeding_merits_task_chances_of_success).permit(:success_likely, :success_prospect_details)
+          params.expect(proceeding_merits_task_chances_of_success: %i[success_likely success_prospect_details])
         end
       end
     end

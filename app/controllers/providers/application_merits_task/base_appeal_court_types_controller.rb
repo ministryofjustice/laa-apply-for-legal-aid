@@ -27,7 +27,7 @@ module Providers
         merge_with_model(appeal) do
           return {} unless params[:application_merits_task_appeal]
 
-          params.require(:application_merits_task_appeal).permit(:court_type)
+          params.expect(application_merits_task_appeal: [:court_type])
         end
       end
     end

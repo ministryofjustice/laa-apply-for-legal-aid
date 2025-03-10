@@ -26,7 +26,7 @@ module Admin
 
       def firm_params
         params[:firm] = { permission_ids: [] } if params[:firm].nil?
-        params.require(:firm).permit(permission_ids: [])
+        params.expect(firm: [permission_ids: []])
       end
     end
   end

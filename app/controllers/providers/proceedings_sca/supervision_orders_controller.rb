@@ -23,7 +23,7 @@ module Providers
       def form_params
         return {} unless params[:binary_choice_form]
 
-        params.require(:binary_choice_form).permit(:change_supervision_order)
+        params.expect(binary_choice_form: [:change_supervision_order])
       end
 
       def form

@@ -28,10 +28,9 @@ module Providers
       def form_params
         merge_with_model(child_care_assessment) do
           params
-            .require(:proceeding_merits_task_child_care_assessment)
-            .permit(
-              :result,
-              :details,
+            .expect(
+              proceeding_merits_task_child_care_assessment: %i[result
+                                                               details],
             )
         end
       end

@@ -39,7 +39,7 @@ RSpec.describe "ClientInvolvementTypeController", :vcr do
     let(:params) do
       {
         proceeding: {
-          client_involvement_type: "A",
+          client_involvement_type_ccms_code: "A",
         },
       }
     end

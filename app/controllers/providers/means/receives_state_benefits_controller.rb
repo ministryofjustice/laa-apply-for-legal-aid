@@ -19,7 +19,7 @@ module Providers
 
       def form_params
         merge_with_model(applicant) do
-          params.require(:applicant).permit(:receives_state_benefits)
+          params.expect(applicant: [:receives_state_benefits])
         end
       end
 

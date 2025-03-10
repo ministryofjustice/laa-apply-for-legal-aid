@@ -16,11 +16,11 @@ module Providers
         merge_with_model(legal_aid_application) do
           next {} unless params[:legal_aid_application]
 
-          params.require(:legal_aid_application).permit(:own_home,
-                                                        :property_value,
-                                                        :outstanding_mortgage_amount,
-                                                        :shared_ownership,
-                                                        :percentage_home)
+          params.expect(legal_aid_application: %i[own_home
+                                                  property_value
+                                                  outstanding_mortgage_amount
+                                                  shared_ownership
+                                                  percentage_home])
         end
       end
     end

@@ -75,18 +75,18 @@ private
   end
 
   def feedback_params
-    params.require(:feedback).permit(
-      :done_all_needed,
-      :done_all_needed_reason,
-      :satisfaction,
-      :satisfaction_reason,
-      :difficulty,
-      :difficulty_reason,
-      :time_taken_satisfaction,
-      :time_taken_satisfaction_reason,
-      :improvement_suggestion,
-      :contact_name,
-      :contact_email,
+    params.expect(
+      feedback: %i[done_all_needed
+                   done_all_needed_reason
+                   satisfaction
+                   satisfaction_reason
+                   difficulty
+                   difficulty_reason
+                   time_taken_satisfaction
+                   time_taken_satisfaction_reason
+                   improvement_suggestion
+                   contact_name
+                   contact_email],
     ).merge(browser_meta_data)
   end
 

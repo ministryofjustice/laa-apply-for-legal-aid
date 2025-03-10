@@ -58,7 +58,7 @@ module Providers
       merge_with_model(legal_aid_application) do
         return {} unless params[:legal_aid_application]
 
-        params.require(:legal_aid_application).permit(:has_other_proceeding)
+        params.expect(legal_aid_application: [:has_other_proceeding])
       end
     end
   end

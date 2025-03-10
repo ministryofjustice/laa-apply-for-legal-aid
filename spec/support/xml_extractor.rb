@@ -60,7 +60,7 @@ class XmlExtractor
   def extract
     doc = Nokogiri::XML(@xml).remove_namespaces!
     xpath = if @attribute_name.nil?
-              (XPATHS[@section]).to_s
+              XPATHS[@section].to_s
             else
               "#{XPATHS[@section]}[Attribute='#{@attribute_name}']"
             end

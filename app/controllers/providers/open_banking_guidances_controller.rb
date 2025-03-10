@@ -28,7 +28,7 @@ module Providers
     def form_params
       return {} unless params[:binary_choice_form]
 
-      params.require(:binary_choice_form).permit(:can_client_use_truelayer)
+      params.expect(binary_choice_form: [:can_client_use_truelayer])
     end
   end
 end

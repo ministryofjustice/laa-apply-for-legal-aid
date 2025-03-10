@@ -25,7 +25,7 @@ module Providers
 
       def form_params
         merge_with_model(applicant) do
-          params.require(:applicant).permit(:relationship_to_children)
+          params.expect(applicant: [:relationship_to_children])
         end
       end
     end
