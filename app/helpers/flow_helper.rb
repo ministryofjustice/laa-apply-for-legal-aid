@@ -6,7 +6,7 @@ module FlowHelper
     show_draft: false,
     inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
-    draft_button_text: t("generic.save_and_come_back_later"),
+    draft_button_text: ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true" ? t("generic.save_and_go_to_task_list") : t("generic.save_and_come_back_later"),
     container_class: nil
   )
     form_with(url:, method:, local: true) do |form|
@@ -29,7 +29,7 @@ module FlowHelper
     show_draft: false,
     inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
-    draft_button_text: t("generic.save_and_come_back_later"),
+    draft_button_text: ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true" ? t("generic.save_and_go_to_task_list") : t("generic.save_and_come_back_later"),
     container_class: nil
   )
     render(

@@ -4,6 +4,8 @@ module ProvidersHelper
   end
 
   def url_for_application(legal_aid_application)
+    return providers_legal_aid_application_task_list_path(legal_aid_application) if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
+
     name = if legal_aid_application.expired?
              :providers_blocked
            else

@@ -1,0 +1,17 @@
+en:
+  task_list:
+    heading:
+      client_details: About your client
+      about_the_case: About the case
+    status:
+      cannot_start: Cannot start yet
+      completed: Completed
+      in_progress: In progress
+      not_applicable: Not applicable
+      not_started: Not yet started
+      unreachable: Unreachable!
+    task:
+      applicants: Client details
+      has_national_insurance_numbers: National Insurance
+      proceedings_types: Proceedings
+      check_provider_answers: Check your answers
