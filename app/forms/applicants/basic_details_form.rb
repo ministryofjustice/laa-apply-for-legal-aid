@@ -25,7 +25,7 @@ module Applicants
     validates :first_name, presence: true, unless: proc { draft? && last_name.present? }
     validates :last_name, presence: true, unless: proc { draft? && first_name.present? }
     validates :date_of_birth, presence: true, unless: :draft_and_not_partially_complete_date_of_birth?
-    validates :changed_last_name, inclusion: %w[true false], unless: :draft?
+    validates :changed_last_name, inclusion: [true, false, "true", "false"], unless: :draft?
     validates :last_name_at_birth, presence: true, unless: proc { draft? || changed_last_name.to_s != "true" }
 
     validates(

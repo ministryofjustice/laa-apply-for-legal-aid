@@ -558,6 +558,7 @@ class LegalAidApplication < ApplicationRecord
       save!
       create_state_machine(type: "PassportedStateMachine")
     end
+
     state_machine
   end
   alias_method :find_or_create_state_machine, :state_machine_proxy
