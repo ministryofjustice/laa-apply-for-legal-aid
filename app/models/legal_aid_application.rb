@@ -368,6 +368,15 @@ class LegalAidApplication < ApplicationRecord
     )
   end
 
+  # TODO: this logic is placeholder only for now and needs checking
+  # Logic: Until a benefit checks has been performed we do not know if they
+  # are passported (nor non-passported). Equally, if they have not reached
+  # that point we cannot tell if they are non-means-tested for sure. Therefore
+  # the "journey type" is unknowm.
+  def journey_unknown?
+    benefit_check_result.nil?
+  end
+
   def applicant_receives_benefit?
     return true if dwp_override&.has_evidence_of_benefit?
 
@@ -558,6 +567,7 @@ class LegalAidApplication < ApplicationRecord
       save!
       create_state_machine(type: "PassportedStateMachine")
     end
+
     state_machine
   end
   alias_method :find_or_create_state_machine, :state_machine_proxy
