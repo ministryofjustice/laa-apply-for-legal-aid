@@ -1625,10 +1625,11 @@ en:
           ineligible: Applicant is ineligible
           non_passported: Non-Passported application
       show:
+        heading: Means report
+        review_required: Review required
         client_details_heading: Client details
         partner_details_heading: Partner details
         evidence_upload_heading: Supporting evidence
-        heading: Means report
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading

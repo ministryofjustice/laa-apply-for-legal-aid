@@ -3,6 +3,7 @@ Grover.configure do |config|
     format: "A4",
     emulate_media: "print",
     prefer_css_page_size: true,
+    print_background: true,
     bypass_csp: true,
     cache: false,
     wait_until: "networkidle2",
