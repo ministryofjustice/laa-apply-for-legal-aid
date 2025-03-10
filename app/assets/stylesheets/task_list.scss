@@ -1,0 +1,30 @@
+@use "./imports" as *;
+
+.app-task-list__task-name {
+  display: block;
+
+  @include govuk-media-query($from: 450px) {
+    float: left;
+  }
+}
+
+.app-task-list__tag {
+  margin-top: govuk-spacing(2);
+  margin-bottom: govuk-spacing(1);
+
+  @include govuk-media-query($from: 450px) {
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+}
+
+.app-task-list__aside {
+  border-top: 3px solid $govuk-brand-colour;
+  @include govuk-responsive-margin(5, "left", $adjustment: 0);
+  @include govuk-responsive-padding(5, "top", $adjustment: 0);
+}
+
+.govuk-task-list__items {
+  padding-left: 0;
+}
