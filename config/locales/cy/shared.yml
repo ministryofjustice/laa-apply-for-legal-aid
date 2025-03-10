@@ -99,6 +99,7 @@ cy:
     check_answers:
       assets:
         bank_accounts_heading: Bank accounts
+        total_in_online_bank_accounts_heading: Total in bank accounts
         savings_and_assets_heading: Savings and assets
         policy_disregards_legacy:
           question: Payments from scheme or charities

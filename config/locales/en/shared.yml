@@ -282,6 +282,7 @@ en:
           heading: Payments to be reviewed
       assets:
         bank_accounts_heading: Bank accounts
+        total_in_online_bank_accounts_heading: Total in bank accounts
         savings_and_assets_heading: Savings and assets
         policy_disregards_legacy:
           question: Payments from scheme or charities
@@ -308,7 +309,6 @@ en:
         card_heading: Client's bank accounts
         aria_label: Your client's accounts
       total_in_online_bank_accounts:
-        heading: Total in bank accounts
         card_heading: Money in bank accounts
         current_accounts: Current accounts
         savings_accounts: Savings accounts
@@ -319,13 +319,13 @@ en:
       partner_bank_accounts:
         card_heading: The partner's accounts
         aria_label: The partner's accounts
-        current_accounts: Current account
-        savings_accounts: Savings account
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
       joint_bank_accounts:
         card_heading: Joint accounts
         aria_label: Joint accounts
-        current_accounts: Current account
-        savings_accounts: Savings account
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
       savings_and_investments:
         card_heading: Your client's savings or investments
         card_heading_with_partner: Your client or their partner's savings or investments
