@@ -54,7 +54,7 @@ private
   end
 
   def has_parental_responsibility?
-    @application.proceedings.any? { |proceeding| proceeding.relationship_to_child.in?(%w[court_order parental_responsibility_agreement]) }
+    @application.applicant.relationship_to_children.in?(%w[court_order parental_responsibility_agreement])
   end
 
   def has_local_authority_assessment?

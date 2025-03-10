@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_17_150948) do  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema[8.0].define(version: 2025_03_05_080311) do
+  # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
 
@@ -895,7 +896,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_17_150948) do  # These are ext
     t.boolean "accepted_emergency_defaults"
     t.boolean "accepted_substantive_defaults"
     t.string "sca_type"
-    t.string "relationship_to_child"
     t.string "related_orders", default: [], null: false, array: true
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
