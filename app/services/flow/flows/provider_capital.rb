@@ -18,8 +18,8 @@ module Flow
         policy_disregards: Steps::ProviderCapital::PolicyDisregardsStep,
         check_passported_answers: Steps::ProviderCapital::CheckPassportedAnswersStep,
         check_capital_answers: Steps::ProviderCapital::CheckCapitalAnswersStep,
-        capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep,
-        capital_income_assessment_results: Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep,
+        capital_assessment_results: Steps::ProviderCapital::CapitalAssessmentResultsStep, # Passported means assessment result from CFE
+        capital_income_assessment_results: Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep, # Non-passported means assessment result from CFE
         means_reports: Steps::ProviderCapital::MeansReportsStep,
       }.freeze
     end

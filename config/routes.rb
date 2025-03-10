@@ -134,6 +134,8 @@ Rails.application.routes.draw do
     resources :cookies, only: %i[show update]
 
     resources :legal_aid_applications, path: "applications", only: %i[create] do
+      resource :task_list, only: %i[show] # if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
+
       collection do
         get :submitted
         get :in_progress

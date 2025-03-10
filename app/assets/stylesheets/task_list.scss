@@ -1,0 +1,24 @@
+@use "./imports" as *;
+
+.app-task-list__task-name {
+  display: block;
+
+  @include govuk-media-query($from: 450px) {
+    float: left;
+  }
+}
+
+.app-task-list__tag {
+  margin-top: govuk-spacing(2);
+  margin-bottom: govuk-spacing(1);
+
+  @include govuk-media-query($from: 450px) {
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+}
+
+.govuk-task-list__items {
+  padding-left: 0;
+}
