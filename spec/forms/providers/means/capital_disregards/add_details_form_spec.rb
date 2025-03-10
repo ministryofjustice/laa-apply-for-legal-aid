@@ -104,6 +104,62 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
       end
     end
 
+    context "when the disregard is backdated benefits" do
+      context "and it is mandatory" do
+        let(:capital_disregard) { create(:capital_disregard, :mandatory) }
+
+        context "and the date is within the last 2 years" do
+          let(:date_received) { 2.years.ago }
+
+          it "is valid" do
+            expect(form).to be_valid
+          end
+
+          it "saves the date received" do
+            expect(application.capital_disregards.first.date_received).to eq(Time.zone.today - 2.years)
+          end
+        end
+
+        context "and the date is more than 2 years ago" do
+          let(:date_received) { 3.years.ago }
+
+          it "is invalid" do
+            expect(form).not_to be_valid
+          end
+
+          it "adds an error message" do
+            expect(form.errors[:date_received]).to include("Enter a date that is within the last 24 months")
+          end
+        end
+      end
+
+      context "and it is discretionary" do
+        context "and the date is more than 2 years ago" do
+          let(:date_received) { 3.years.ago }
+
+          it "is valid" do
+            expect(form).to be_valid
+          end
+
+          it "saves the date received" do
+            expect(application.capital_disregards.first.date_received).to eq(Time.zone.today - 3.years)
+          end
+        end
+
+        context "and the date is within the last 2 years" do
+          let(:date_received) { 2.years.ago }
+
+          it "is invalid" do
+            expect(form).not_to be_valid
+          end
+
+          it "adds an error message" do
+            expect(form.errors[:date_received]).to include("Enter a date that is over 24 months ago")
+          end
+        end
+      end
+    end
+
     context "when the payment reason is blank" do
       let(:capital_disregard) { create(:capital_disregard, name:) }
       let(:name) { "compensation_for_personal_harm" }
@@ -133,6 +189,62 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
       expect(application.capital_disregards.first.amount).to eq 123
       expect(application.capital_disregards.first.account_name).to eq "Barclays"
       expect(application.discretionary_capital_disregards.first.date_received).to eq Date.new(2024, 2, 1)
+    end
+
+    context "when the disregard is backdated benefits" do
+      context "and it is mandatory" do
+        let(:capital_disregard) { create(:capital_disregard, :mandatory) }
+
+        context "and the date is within the last 2 years" do
+          let(:date_received) { 2.years.ago }
+
+          it "is valid" do
+            expect(form).to be_valid
+          end
+
+          it "saves the date received" do
+            expect(application.capital_disregards.first.date_received).to eq(Time.zone.today - 2.years)
+          end
+        end
+
+        context "and the date is more than 2 years ago" do
+          let(:date_received) { 3.years.ago }
+
+          it "is invalid" do
+            expect(form).not_to be_valid
+          end
+
+          it "adds an error message" do
+            expect(form.errors[:date_received]).to include("Enter a date that is within the last 24 months")
+          end
+        end
+      end
+
+      context "and it is discretionary" do
+        context "and the date is more than 2 years ago" do
+          let(:date_received) { 3.years.ago }
+
+          it "is valid" do
+            expect(form).to be_valid
+          end
+
+          it "saves the date received" do
+            expect(application.capital_disregards.first.date_received).to eq(Time.zone.today - 3.years)
+          end
+        end
+
+        context "and the date is within the last 2 years" do
+          let(:date_received) { 2.years.ago }
+
+          it "is invalid" do
+            expect(form).not_to be_valid
+          end
+
+          it "adds an error message" do
+            expect(form.errors[:date_received]).to include("Enter a date that is over 24 months ago")
+          end
+        end
+      end
     end
   end
 end
