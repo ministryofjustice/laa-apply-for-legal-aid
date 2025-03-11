@@ -179,6 +179,18 @@ RSpec.describe Applicant do
         expect(age).to be 48
       end
     end
+
+    context "when the application has non-means-tested plf proceedings" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_non_means_tested_proceeding, applicant:) }
+
+      before do
+        applicant.age_for_means_test_purposes = 49
+      end
+
+      it "returns age stored in age_for_means_test_purposes" do
+        expect(age).to be 49
+      end
+    end
   end
 
   describe "#under_18?" do
