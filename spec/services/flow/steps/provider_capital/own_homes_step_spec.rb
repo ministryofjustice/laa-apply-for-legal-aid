@@ -20,7 +20,17 @@ RSpec.describe Flow::Steps::ProviderCapital::OwnHomesStep, type: :request do
     context "when the user selects that the applicant does not own their home" do
       let(:own_home) { "no" }
 
-      it { is_expected.to eq :vehicles }
+      context "and they have previously said there is a vehicle" do
+        let(:legal_aid_application) { create(:legal_aid_application, own_home:) }
+
+        before { create(:vehicle, legal_aid_application:) }
+
+        it { is_expected.to eq :add_other_vehicles }
+      end
+
+      context "and they have previously said there is no vehicle" do
+        it { is_expected.to eq :vehicles }
+      end
     end
   end
 
