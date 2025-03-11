@@ -17,7 +17,7 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
   let(:payment_reason) { nil }
   let(:amount) { 123 }
   let(:account_name) { "Barclays" }
-  let(:date_received) { Date.new(2024, 2, 1) }
+  let(:date_received) { Date.new(2023, 2, 1) }
   let(:date_received_3i) { date_received.day }
   let(:date_received_2i) { date_received.month }
   let(:date_received_1i) { date_received.year }
@@ -36,7 +36,7 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
         .to have_attributes(
           amount: 123,
           account_name: "Barclays",
-          date_received: Date.new(2024, 2, 1),
+          date_received: Date.new(2023, 2, 1),
         )
     end
 
@@ -188,7 +188,7 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
     it "updates the capital_disregard" do
       expect(application.capital_disregards.first.amount).to eq 123
       expect(application.capital_disregards.first.account_name).to eq "Barclays"
-      expect(application.discretionary_capital_disregards.first.date_received).to eq Date.new(2024, 2, 1)
+      expect(application.discretionary_capital_disregards.first.date_received).to eq Date.new(2023, 2, 1)
     end
 
     context "when the disregard is backdated benefits" do
