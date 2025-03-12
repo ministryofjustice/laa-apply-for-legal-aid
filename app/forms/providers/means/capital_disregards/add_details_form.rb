@@ -21,6 +21,8 @@ module Providers
         validates :account_name, presence: { unless: :draft? }
         validates :date_received, date: { not_in_the_future: true }, presence: { unless: :draft? }
 
+        validate :validate_backdated_benefits
+
         def payments_reason_needed?
           model.name.in?(%w[compensation_for_personal_harm loss_or_harm_relating_to_this_application])
         end
@@ -59,6 +61,28 @@ module Providers
             prefix: :date_received_,
             suffix: :gov_uk,
           )
+        end
+
+        def validate_backdated_benefits
+          return if errors.include?(:date_received)
+
+          two_years_ago = 2.years.ago.to_date
+
+          if model.name.eql?("backdated_benefits")
+            if model.mandatory && date_received < two_years_ago
+              errors.add :date_received, error_message_for_mandatory_backdated_benefits_over_2_years
+            elsif !model.mandatory && date_received >= two_years_ago
+              errors.add :date_received, error_message_for_discretionary_backdated_benefits_within_2_years
+            end
+          end
+        end
+
+        def error_message_for_mandatory_backdated_benefits_over_2_years
+          I18n.t("activemodel.errors.models.capital_disregard.attributes.date_received.over_2_years_ago")
+        end
+
+        def error_message_for_discretionary_backdated_benefits_within_2_years
+          I18n.t("activemodel.errors.models.capital_disregard.attributes.date_received.within_2_years")
         end
       end
     end

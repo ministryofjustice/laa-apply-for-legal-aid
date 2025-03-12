@@ -683,6 +683,8 @@ en:
               blank: Enter a date in the correct format for when the payment is received
               date_not_valid: Enter a date in the correct format for when the payment is received
               date_is_in_the_future: Date should be in the past
+              over_2_years_ago: Enter a date that is within the last 24 months
+              within_2_years: Enter a date that is over 24 months ago
         proceeding:
           attributes:
             client_involvement_type_ccms_code:
