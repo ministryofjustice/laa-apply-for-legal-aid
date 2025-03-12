@@ -47,7 +47,7 @@ updates:
     groups:
       moj-frontend:
         patterns:
-          - "ministryofjustice/frontend"
+          - "@ministryofjustice/frontend"
       npm:
         patterns:
           - "*"
