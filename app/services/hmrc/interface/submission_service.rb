@@ -35,7 +35,7 @@ module HMRC
       end
 
       def date_values
-        @date_values ||= { start_date: application.transaction_period_finish_on - Rails.configuration.x.hmrc_interface.duration_check.to_i.months,
+        @date_values ||= { start_date: application.transaction_period_finish_on - Rails.configuration.x.hmrc_interface.duration_check.to_i.days,
                            end_date: application.transaction_period_finish_on }
       end
 
