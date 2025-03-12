@@ -126,7 +126,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
           let(:expected_error) do
             <<~MESSAGE
               CCMS submission id:  failed
-              Moving CCMS::SubmissionProcessWorker to dead set, it failed with: /An error occured
+              Moving CCMS::SubmissionProcessWorker to dead set, it failed with: /An error occurred
             MESSAGE
           end
 

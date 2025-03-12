@@ -97,7 +97,7 @@ RSpec.describe HMRC::SubmissionWorker do
           let(:expected_error) do
             <<~MESSAGE
               HMRC submission id:  failed
-              Moving HMRC::SubmissionWorker to dead set, it failed with: /An error occured
+              Moving HMRC::SubmissionWorker to dead set, it failed with: /An error occurred
             MESSAGE
           end
 

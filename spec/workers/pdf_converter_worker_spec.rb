@@ -24,7 +24,7 @@ RSpec.describe PdfConverterWorker, type: :worker do
       let(:expected_error) do
         <<~MESSAGE
           Attachment id:  failed
-          Moving PdfConverterWorker to dead set, it failed with: /An error occured
+          Moving PdfConverterWorker to dead set, it failed with: /An error occurred
         MESSAGE
       end
 
