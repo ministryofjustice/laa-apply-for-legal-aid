@@ -138,7 +138,7 @@ RSpec.describe HMRC::ResultWorker do
           let(:expected_error) do
             <<~MESSAGE
               HMRC result check for id:  failed
-              Moving HMRC::ResultWorker to dead set, it failed with: /An error occured
+              Moving HMRC::ResultWorker to dead set, it failed with: /An error occurred
             MESSAGE
           end
 
