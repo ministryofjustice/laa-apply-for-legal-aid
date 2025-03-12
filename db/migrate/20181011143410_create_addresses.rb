@@ -1,6 +1,6 @@
 class CreateAddresses < ActiveRecord::Migration[5.2]
   def change
-    create_table :addresses do |t|
+    create_table :addresses, id: :uuid do |t|
       t.string :address_line_one
       t.string :address_line_two
       t.string :city
