@@ -43,13 +43,11 @@ module Providers
 
         let(:uk_removal) { "true" }
         let(:details) { "" }
-        let(:confirmed_not_change_of_name) { "" }
         let(:params) do
           {
             proceeding_merits_task_prohibited_steps: {
               uk_removal:,
               details:,
-              confirmed_not_change_of_name:,
             },
           }
         end

@@ -3,14 +3,12 @@ module Providers
     class ProhibitedStepsForm < BaseForm
       form_for ::ProceedingMeritsTask::ProhibitedSteps
 
-      attr_accessor :uk_removal, :details, :proceeding_id, :confirmed_not_change_of_name
+      attr_accessor :uk_removal, :details, :proceeding_id
 
       before_validation :clear_details, if: :uk_removal?
 
       validates :uk_removal, inclusion: { in: %w[true false] }
       validates :details, presence: true, if: :requires_details?
-      validates :confirmed_not_change_of_name, inclusion: { in: %w[true] },
-                                               if: :requires_details?
 
     private
 
