@@ -9,22 +9,6 @@ updates:
       day: tuesday
       time: "21:00"
       timezone: Europe/London
-    ignore:
-      - dependency-name: rails
-        versions:
-          - ">= 8.0.0"
-      - dependency-name: rails-i18n
-        versions:
-          - ">= 8.0.0"
-      - dependency-name: railties
-        versions:
-          - ">= 8.0.0"
-      - dependency-name: action*
-        versions:
-          - ">= 8.0.0"
-      - dependency-name: active*
-        versions:
-          - ">= 8.0.0"
     groups:
       rubocop:
         patterns:
@@ -44,10 +28,14 @@ updates:
       day: tuesday
       time: "21:15"
       timezone: Europe/London
+    ignore:
+      - dependency-name: @ministryofjustice/frontend
+        versions:
+          - ">= 4.0.0"
     groups:
       moj-frontend:
         patterns:
-          - "@ministryofjustice/frontend"
+          - "*frontend*"
       npm:
         patterns:
           - "*"
