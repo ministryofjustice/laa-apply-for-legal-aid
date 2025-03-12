@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_05_080311) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_12_140551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -916,7 +916,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_080311) do
     t.string "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "confirmed_not_change_of_name"
     t.index ["proceeding_id"], name: "index_prohibited_steps_on_proceeding_id"
   end
 
