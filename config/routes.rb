@@ -134,7 +134,9 @@ Rails.application.routes.draw do
     resources :cookies, only: %i[show update]
 
     resources :legal_aid_applications, path: "applications", only: %i[create] do
-      resource :task_list, only: %i[create]
+      resource :task_list, only: %i[show create]
+
+      resource :applicants, only: %i[show create], controller: "task_list/applicants"
 
       collection do
         get :submitted

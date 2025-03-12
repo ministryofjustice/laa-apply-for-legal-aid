@@ -2,6 +2,8 @@
 
 module Task
   class Base
+    include Rails.application.routes.url_helpers
+
     def self.build(name, **)
       class_name = "Task::#{name.camelize}"
 
@@ -12,35 +14,48 @@ module Task
       end
     end
 
-    attr_accessor :application, :item_statuses
+    # attr_accessor :application, :item_statuses
+    attr_accessor :application
 
-    def initialize(application:, item_statuses: TaskList::ItemStatus.new)
+    def initialize(application:)
       @application = application
-      @item_statuses = item_statuses
     end
 
+    def path
+      raise "Implement in subclass"
+    end
+
+    # Default for subclasses is to use a "task tastus" object of the same name.
+    # You may prefer override in subclasses, particualrly if additional arguments
+    # need passing.
     def status
-      item_statuses.self_status(task: self)
+      task_status_klass = "TaskStatus::#{self.class.to_s.demodulize}"
+
+      if self.class.const_defined?(task_status_klass)
+        task_status_klass.constantize.new(application).call
+      else
+        raise "#{task_status_klass} not implemented!"
+      end
     end
 
-    def current_status
-    end
+    # def current_status
+    # end
 
-    def not_applicable?
-    end
+    # def not_applicable?
+    # end
 
-    def not_startable?
-    end
+    # def not_startable?
+    # end
 
-    def in_progress?
-    end
+    # def in_progress?
+    # end
 
-    def completed?
-      task_forms.map(&:completed?)
-    end
+    # def completed?
+    #   task_forms.map(&:completed?)
+    # end
 
-    def task_forms
-      []
-    end
+    # def task_forms
+    #   []
+    # end
   end
 end

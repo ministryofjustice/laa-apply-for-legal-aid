@@ -5,21 +5,27 @@ module Providers
     include Authorizable
     include ApplicationDependable
 
-    def create
-      @tasklist = TaskList::StartPageCollection.new(
+    def show
+      legal_aid_application
+
+      @tasklist = ::TaskList::StartPageCollection.new(
         view_context, application: legal_aid_application
       )
+    end
 
-      render :show
+    def create
+      legal_aid_application
+
+      redirect_to providers_legal_aid_application_task_list_path(legal_aid_application.id)
     end
 
     def legal_aid_application
       @legal_aid_application ||=
-        LegalAidApplication.find_by(id: params[:legal_aid_application_id]) || LegalAidApplication.create!(provider: current_provider, office: current_provider.selected_office)
+        LegalAidApplication.find_by(id: task_list_params[:legal_aid_application_id]) || LegalAidApplication.create!(provider: current_provider, office: current_provider.selected_office)
     end
 
-    # def application_task_list_params
-    #   params.expect(legal_aid_application: [:id])
-    # end
+    def task_list_params
+      params.permit(%i[legal_aid_application_id locale])
+    end
   end
 end

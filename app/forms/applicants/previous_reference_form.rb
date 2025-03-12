@@ -8,7 +8,7 @@ module Applicants
 
     before_validation :normalise_previous_reference
 
-    validates :applied_previously, inclusion: %w[true false], unless: :draft?
+    validates :applied_previously, inclusion: [true, false, "true", "false"], unless: :draft?
     validates :previous_reference, presence: true, if: :applied_previously?, unless: :draft?
     validate :validate_previous_reference, unless: :draft?
 

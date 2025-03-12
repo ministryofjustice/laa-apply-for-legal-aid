@@ -5,7 +5,7 @@ module TaskList
     delegate :size, to: :all_tasks
     delegate :tag, :safe_join, to: :view
 
-    def initialize(view, application:, show_index: false)
+    def initialize(view, application:, show_index: true)
       @view = view
       @application = application
       @show_index = show_index
@@ -36,7 +36,7 @@ module TaskList
           name: name,
           tasks: tasks,
           index: show_index ? index : nil,
-          item_statuses: item_statuses,
+          # item_statuses: item_statuses,
         )
       end
     end
@@ -47,8 +47,8 @@ module TaskList
       self.class::SECTIONS
     end
 
-    def item_statuses
-      @item_statuses ||= ItemStatus.new
-    end
+    # def item_statuses
+    #   @item_statuses ||= ItemStatus.new
+    # end
   end
 end

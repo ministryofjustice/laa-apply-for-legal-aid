@@ -1,10 +1,8 @@
 module Task
   class Applicants < Base
     # uri/path to the section start page/form
-    delegate :path, to: :ApplicantsStep
-
-    # IF NEEDED? the form that the start page uses?!
-    def form
+    def path
+      providers_legal_aid_application_applicants_path(application)
     end
   end
 end

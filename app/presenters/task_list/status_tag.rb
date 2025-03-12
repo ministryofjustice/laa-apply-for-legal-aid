@@ -4,12 +4,13 @@ module TaskList
 
     DEFAULT_CLASSES = %w[app-task-list__tag].freeze
 
-    STATUS_CLASSES = {
-      ::TaskStatus::COMPLETED => nil,
-      ::TaskStatus::IN_PROGRESS => "govuk-tag govuk-tag--light-blue",
-      ::TaskStatus::NOT_STARTED => "govuk-tag govuk-tag--blue",
-      ::TaskStatus::UNREACHABLE => nil,
-      ::TaskStatus::NOT_APPLICABLE => "govuk-tag govuk-tag--grey",
+    STATUS_TAG_CLASSES = {
+      ::Task::Status::COMPLETED => nil,
+      ::Task::Status::IN_PROGRESS => "govuk-tag govuk-tag--light-blue",
+      ::Task::Status::NOT_STARTED => "govuk-tag govuk-tag--blue",
+      ::Task::Status::UNREACHABLE => nil,
+      ::Task::Status::CANNOT_START => "govuk-tag govuk-tag--grey",
+      ::Task::Status::NOT_APPLICABLE => "govuk-tag govuk-tag--grey",
     }.freeze
 
     def initialize(application, name:, status:)
@@ -26,7 +27,7 @@ module TaskList
   private
 
     def tag_classes
-      DEFAULT_CLASSES | Array(STATUS_CLASSES.fetch(status))
+      DEFAULT_CLASSES | Array(STATUS_TAG_CLASSES.fetch(status))
     end
   end
 end

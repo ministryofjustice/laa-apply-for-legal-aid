@@ -867,6 +867,11 @@ en:
     task_lists:
       show:
         page_title: Make a new application 
+        reference_number: Reference number
+        application_completeness: Application %{completeness}
+        application_completeness_detail: You have completed %{completed_count} of %{incompleted_count} sections
+        complete: complete
+        incomplete: incomplete
     delegated_confirmation:
       index:
         page-heading: You told us you've used delegated functions

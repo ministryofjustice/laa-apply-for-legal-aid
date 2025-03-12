@@ -1,11 +1,27 @@
 <%= page_template(page_title: t(".page_title"), template: :basic, column_width: "full") do %>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-xl"><%= t(".page_title") %></h2>
+
+        <p class="govuk-body">
+          <strong>
+            <%= t(".application_completeness", completeness: t(".#{TaskStatus::Application.new(@legal_aid_application).call}"))%>
+          </strong>
+          <br>
+          <%= t(".application_completeness_detail", completed_count: "0 (todo)", incompleted_count: "3 (todo)")%>
+        </p>
+
         <%= @tasklist.render %>
 
         <p class="govuk-body">
-          <%= govuk_link_to t("generic.back_to_your_applications"), submitted_providers_legal_aid_applications_path %>
+          <%= govuk_button_link_to t("generic.back_to_your_applications"), submitted_providers_legal_aid_applications_path, secondary: true, role: "button" %>
         </p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <aside class="app-task-list__aside" role="complementary" aria-labelledby="aside-title">
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-0"><%= t(".reference_number") %></h2>
+          <p class="govuk-body-s"><%= @legal_aid_application.application_ref %></p>
+        </aside>
       </div>
     </div>
 <% end %>

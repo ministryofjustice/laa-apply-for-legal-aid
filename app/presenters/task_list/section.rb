@@ -1,14 +1,22 @@
 module TaskList
   class Section < BaseRenderer
-    attr_reader :tasks, :index, :item_statuses
+    # attr_reader :tasks, :index, :item_statuses
+    attr_reader :tasks, :index
 
-    def initialize(application, name:, tasks:, index:, item_statuses:)
+    def initialize(application, name:, tasks:, index:)
       super(application, name:)
 
-      @item_statuses = item_statuses
       @tasks = tasks
       @index = index
     end
+
+    # def initialize(application, name:, tasks:, index:, item_statuses:)
+    #   super(application, name:)
+
+    #   @item_statuses = item_statuses
+    #   @tasks = tasks
+    #   @index = index
+    # end
 
     def render
       tag.li do
@@ -22,7 +30,8 @@ module TaskList
       @items ||= tasks.map do |name|
         name = name.call(application) if name.respond_to?(:call)
 
-        Item.new(application, name:, item_statuses:)
+        # Item.new(application, name:, item_statuses:)
+        Item.new(application, name:)
       end
     end
 
@@ -32,8 +41,8 @@ module TaskList
       tag.h2 class: "govuk-task-list__section" do
         if index
           tag.span class: "govuk-task-list__section-number" do
-            "#{index}."
-          end.concat t!("tasklist.heading.#{name}")
+            "#{index}. ".concat(t!("tasklist.heading.#{name}"))
+          end
         else
           t!("tasklist.heading.#{name}")
         end

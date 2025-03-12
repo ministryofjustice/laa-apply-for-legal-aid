@@ -2,13 +2,17 @@ module TaskList
   class Item < BaseRenderer
     delegate :status, to: :task
     delegate :completed?, to: :status
-    attr_reader :item_statuses
+    # attr_reader :item_statuses
 
-    def initialize(application, name:, item_statuses:)
-      super(application, name:)
-
-      @item_statuses = item_statuses
+    def initialize(application, name:)
+      super
     end
+
+    # def initialize(application, name:, item_statuses:)
+    #   super(application, name:)
+
+    #   @item_statuses = item_statuses
+    # end
 
     def render
       tag.li class: "govuk-task-list__item govuk-task-list__item--with-link" do
@@ -27,7 +31,7 @@ module TaskList
     end
 
     def task_link
-      if status.enabled?
+      if Task::Status.enabled?(status)
         tag.a t!("tasklist.task.#{name}"),
               class: "govuk-link govuk-task-list__link",
               href: task.path,
@@ -42,7 +46,8 @@ module TaskList
     end
 
     def task
-      @task ||= Task::Base.build(name, application:, item_statuses:)
+      # @task ||= Task::Base.build(name, application:, item_statuses:)
+      @task ||= Task::Base.build(name, application:)
     end
   end
 end

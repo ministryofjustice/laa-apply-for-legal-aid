@@ -5,7 +5,8 @@
       <li><%= bullet %></li>
     <% end %>
   </ul>
- <% if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true" %>
+
+  <% if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true" %>
      <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_task_list_path(TaskList::StartPageCollection::NEW_RECORD),
           method: :post,
