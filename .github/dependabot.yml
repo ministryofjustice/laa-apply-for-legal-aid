@@ -45,6 +45,9 @@ updates:
       time: "21:15"
       timezone: Europe/London
     groups:
+      moj-frontend:
+        patterns:
+          - "ministryofjustice/frontend"
       npm:
         patterns:
           - "*"
