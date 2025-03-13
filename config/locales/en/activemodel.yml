@@ -322,8 +322,6 @@ en:
               inclusion: Select yes if the prohibited step is to remove your client from the UK
             details:
               blank: Enter information to explain what you would like prohibited
-            confirmed_not_change_of_name:
-              inclusion: You must confirm this prohibited steps proceeding is not for a change of name application
         proceeding_merits_task/opponents_application:
           attributes:
             has_opponents_application:

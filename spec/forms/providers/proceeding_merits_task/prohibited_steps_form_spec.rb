@@ -9,13 +9,11 @@ module Providers
         {
           uk_removal:,
           details:,
-          confirmed_not_change_of_name:,
         }
       end
 
       let(:uk_removal) { "true" }
       let(:details) { "" }
-      let(:confirmed_not_change_of_name) { "" }
 
       describe "#valid?" do
         context "when all fields are valid" do
@@ -37,17 +35,11 @@ module Providers
             it "is invalid" do
               expect(prohibited_steps_form).not_to be_valid
               expect(prohibited_steps_form.errors).to be_added(:details, :blank)
-              expect(prohibited_steps_form.errors).to be_added(
-                :confirmed_not_change_of_name,
-                :inclusion,
-                value: "",
-              )
             end
           end
 
           context "and required fields are provided" do
             let(:details) { "some text input" }
-            let(:confirmed_not_change_of_name) { "true" }
 
             it { expect(prohibited_steps_form).to be_valid }
           end
