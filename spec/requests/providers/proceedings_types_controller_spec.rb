@@ -35,8 +35,13 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr do
       end
 
       context "when there are no available proceedings to show" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+
         before do
-          allow(LegalFramework::ProceedingTypes::All).to receive(:call).and_raise(LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError)
+          create(:proceeding, :pbm40, legal_aid_application:)
+          create(:proceeding, :pbm40e, legal_aid_application:)
+          create(:proceeding, :pbm45, legal_aid_application:)
+          create(:proceeding, :pbm45e, legal_aid_application:)
         end
 
         it "redirects to the has_other_proceedings page" do
