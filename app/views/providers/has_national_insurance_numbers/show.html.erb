@@ -7,9 +7,7 @@
 
   <%= page_template page_title: t(".page_title"), template: :basic, form: do %>
 
-    <%= form.govuk_radio_buttons_fieldset(:has_national_insurance_number,
-                                          legend: { text: page_title, size: "xl", tag: "h1" },
-                                          hint: { text: Setting.special_childrens_act? ? nil : t(".hint") }) do %>
+    <%= form.govuk_radio_buttons_fieldset(:has_national_insurance_number, legend: { text: page_title, size: "xl", tag: "h1" }) do %>
 
       <%= form.govuk_radio_button(
             :has_national_insurance_number,

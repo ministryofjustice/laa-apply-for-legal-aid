@@ -6,7 +6,6 @@ Feature: Start page
     Given I am logged in as a provider
     And the feature flag for collect_hmrc_data is enabled
     And the feature flag for linked_applications is enabled
-    And the feature flag for special_childrens_act is enabled
     And the feature flag for public_law_family is enabled
 
     When I visit the application service
