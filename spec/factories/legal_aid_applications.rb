@@ -735,6 +735,9 @@ FactoryBot.define do
     end
 
     trait :with_everything do
+      transient do
+        without_vehicle { false }
+      end
       populate_vehicle { true }
       with_applicant
       with_non_passported_state_machine
@@ -758,6 +761,10 @@ FactoryBot.define do
       with_savings_amount
       with_open_banking_consent
       with_consent
+
+      after :create do |application, evaluator|
+        application.vehicles.destroy_all if evaluator.without_vehicle
+      end
     end
 
     trait :with_everything_and_address do

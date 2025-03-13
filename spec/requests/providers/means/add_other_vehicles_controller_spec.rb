@@ -30,11 +30,23 @@ RSpec.describe Providers::Means::AddOtherVehiclesController do
       end
 
       context "and a vehicle has been added" do
+        let(:setup) { create(:vehicle, estimated_value: 1_234, used_regularly: true, more_than_three_years_old: true, legal_aid_application:) }
+
+        it "returns the expected page with the correct heading" do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include("You have added 1 vehicle")
+          expect(response.body).to have_css("dt", text: "Vehicle worth £1,234")
+        end
+      end
+
+      context "and an incomplete vehicle has been added" do
         let(:setup) { create_list(:vehicle, 1, legal_aid_application:) }
 
         it "returns the expected page with the correct heading" do
           expect(response).to have_http_status(:ok)
           expect(response.body).to include("You have added 1 vehicle")
+          expect(response.body).to have_css("dt", text: "Vehicle record")
+          expect(response.body).to have_css("dd", text: "Incomplete")
         end
       end
 

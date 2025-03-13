@@ -4,6 +4,28 @@ RSpec.describe Vehicle do
   describe "#purchased_on" do
     let(:vehicle) { create(:vehicle, purchased_on:, more_than_three_years_old:) }
 
+    describe "#complete?" do
+      subject { vehicle.complete? }
+
+      context "when all questions have been answered" do
+        let(:vehicle) { create(:vehicle, estimated_value: 10_000, used_regularly: true, more_than_three_years_old: true) }
+
+        it { is_expected.to be true }
+      end
+
+      context "when questions responses are partially complete" do
+        let(:vehicle) { create(:vehicle, estimated_value: 10_000) }
+
+        it { is_expected.to be false }
+      end
+
+      context "when questions responses are completely missing" do
+        let(:vehicle) { create(:vehicle) }
+
+        it { is_expected.to be false }
+      end
+    end
+
     context "when purchased_on is populated" do
       let(:purchased_on) { 6.months.ago.to_date }
       let(:more_than_three_years_old) { nil }
