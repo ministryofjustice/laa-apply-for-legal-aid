@@ -838,10 +838,6 @@ en:
     has_national_insurance_numbers:
       show:
         page_title: Does your client have a National Insurance number?
-        hint: |
-          We'll use your client's National Insurance number to check if they receive
-          a passported benefit. If you do not have it you may have to do a means
-          assessment for them.
         nino_label: Enter National Insurance number
     has_other_involved_children:
       show:
@@ -1856,7 +1852,7 @@ en:
           list:
             - domestic abuse, except DAPO (domestic abuse protection orders)
             - section 8
-          sca_option: special children act
+            - special children act
         dont_use_service:
           list_title: "But do not use this service if:"
           list:

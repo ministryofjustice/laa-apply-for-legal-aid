@@ -31,10 +31,6 @@ class Setting < ApplicationRecord
     setting.collect_hmrc_data
   end
 
-  def self.special_childrens_act?
-    setting.special_childrens_act
-  end
-
   def self.public_law_family?
     setting.public_law_family
   end

@@ -9,9 +9,6 @@
       <% t(".use_service.list").each do |item| %>
         <li><%= item %></li>
       <% end %>
-      <% if Setting.special_childrens_act? %>
-        <li><%= t(".use_service.sca_option") %></li>
-      <% end %>
     </ul>
 
     <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
@@ -21,14 +18,14 @@
           <li><%= item %></li>
         <% end %>
       <% else t(".dont_use_service.list").each do |item| %>
-          <li><%= item %></li>
+        <li><%= item %></li>
       <% end %>
-      <% end %>
-    </ul>
+    <% end %>
+  </ul>
 
-    <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
-    <p class="govuk-body"><%= t(".progress_saved") %></p>
+  <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
+  <p class="govuk-body"><%= t(".progress_saved") %></p>
 
-    <%= govuk_start_button(text: t("generic.sign_in"), href: providers_confirm_office_path, html_attributes: { id: "start" }) %>
-  </div>
+  <%= govuk_start_button(text: t("generic.sign_in"), href: providers_confirm_office_path, html_attributes: { id: "start" }) %>
+</div>
 </div>
