@@ -29,7 +29,7 @@ updates:
       time: "21:15"
       timezone: Europe/London
     ignore:
-      - dependency-name: @ministryofjustice/frontend
+      - dependency-name: "@ministryofjustice/frontend"
         versions:
           - ">= 4.0.0"
     groups:
