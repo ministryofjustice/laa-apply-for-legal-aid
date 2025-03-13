@@ -1,10 +1,11 @@
 // stylelint-disable selector-max-id
+@use "sass:color";
 
 %highlight {
   margin-right: 1px;
   padding: 2px 0 0;
   border-bottom: 3px solid govuk-colour("yellow");
-  background-color: mix(govuk-colour("white"), govuk-colour("yellow"), 50%);
+  background-color: color.mix(govuk-colour("white"), govuk-colour("yellow"), 50%);
 }
 
 #search-field {
