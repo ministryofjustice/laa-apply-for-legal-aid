@@ -31,10 +31,10 @@ RSpec.describe HMRC::Interface::SubmissionService do
       expect(call.keys).to match_array %i[id _links]
     end
 
-    context "when the number of months is changed" do
-      before { allow(Rails.configuration.x.hmrc_interface).to receive(:duration_check).and_return("4") }
+    context "when the number of days is changed" do
+      before { allow(Rails.configuration.x.hmrc_interface).to receive(:duration_check).and_return("93") }
 
-      let(:start_date) { Time.zone.today - 4.months }
+      let(:start_date) { Time.zone.today - 93.days }
 
       it "honours the date values" do
         call
@@ -103,7 +103,7 @@ RSpec.describe HMRC::Interface::SubmissionService do
           last_name: owner.last_name,
           dob: owner.date_of_birth,
           nino: owner.national_insurance_number,
-          start_date: Time.zone.today - 3.months,
+          start_date: Time.zone.today - 93.days,
           end_date: Time.zone.today,
         },
       }.to_json
