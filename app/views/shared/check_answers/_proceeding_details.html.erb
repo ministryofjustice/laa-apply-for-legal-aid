@@ -20,7 +20,7 @@
             row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".delegated_function_details.not_used") }
           end
 
-          if proceeding.used_delegated_functions? && !proceeding.special_childrens_act?
+          if proceeding.used_delegated_functions? && !proceeding.special_children_act?
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_level_of_service_#{proceeding.id}" }) do |row|
               row.with_key(text: t(".level_of_service.emergency.question"))
               row.with_value { proceeding.send(:emergency_level_of_service_name) }

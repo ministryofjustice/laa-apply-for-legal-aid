@@ -203,7 +203,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def special_children_act_related_proceedings?
-    proceedings.any? { |proceeding| proceeding.special_childrens_act? && proceeding.sca_type.eql?("related") }
+    proceedings.any? { |proceeding| proceeding.special_children_act? && proceeding.sca_type.eql?("related") }
   end
 
   def client_court_ordered_parental_responsibility?

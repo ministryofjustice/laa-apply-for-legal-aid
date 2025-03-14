@@ -17,7 +17,7 @@ module Proceedings
                   :substantive_scope_limitation_code,
                   :additional_params
 
-    validates :accepted_substantive_defaults, presence: true, unless: proc { draft? || model.special_childrens_act? }
+    validates :accepted_substantive_defaults, presence: true, unless: proc { draft? || model.special_children_act? }
 
     def initialize(*args)
       super
