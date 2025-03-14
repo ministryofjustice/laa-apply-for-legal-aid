@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
+    body:
+      encoding: UTF-8
+      string: '{"current_proceedings":["PBM40","PBM40E","PBM45","PBM45E"],"allowed_categories":["MAT"],"search_term":""}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 13 Mar 2025 13:59:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"cf26ca1ee8f9c63a951189dc0c043e1f"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 78b555d8fc14adb3454539fbeedb6064
+      X-Runtime:
+      - '0.080828'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":false,"data":[]}'
+  recorded_at: Thu, 13 Mar 2025 13:59:00 GMT
+recorded_with: VCR 6.3.1

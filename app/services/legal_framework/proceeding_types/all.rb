@@ -40,9 +40,8 @@ module LegalFramework
 
       def call
         parsed_body = JSON.parse(request.body)
-        raise NoMatchingProceedingsFoundError, "No proceedings matched" if parsed_body.is_a?(Hash) && parsed_body["success"] == false
 
-        result = parsed_body.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        result = parsed_body["data"].map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
         # TODO: remove the below when the SCA feature flag is removed
         # filter out SCA applications
         result.select!(&:not_sca?) unless Setting.special_childrens_act?
