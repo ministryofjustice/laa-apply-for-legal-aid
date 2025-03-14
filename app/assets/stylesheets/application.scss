@@ -2,6 +2,7 @@ $govuk-global-styles: true;
 $govuk-new-link-styles: true;
 $govuk-new-typography-scale: true;
 $govuk-assets-path: "/";
+$govuk-new-organisation-colours: true;
 
 @import "govuk-frontend/dist/govuk/index";
 @import "@ministryofjustice/frontend/moj/settings/measurements";
