@@ -183,7 +183,7 @@ Feature: Means report when partner is present
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |
-      | Client or their partner is prohibited from selling or borrowing against their assets? |
+      | Client or their partner is banned from selling or borrowing against assets? |
       | Details of restrictions |
 
     And the Capital disregards questions and answers should match:

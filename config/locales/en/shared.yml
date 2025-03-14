@@ -281,31 +281,12 @@ en:
         discretionary:
           heading: Payments to be reviewed
       assets:
-        assets:
-          savings_and_assets_heading: Savings and assets
-          savings_and_investments: Your client's savings or investments
-          savings_and_investments_with_partner: "Your client or their partner's savings or investments"
-          other_assets: Your client's assets
-          other_assets_with_partner: Your client or their partner's assets
-          policy_disregards: Payments from scheme or charities
-          policy_disregards_with_partner: Your client's and the partner's payments from schemes or charities
-          savings_and_investments: Your client's savings or investments
-          savings_and_investments_with_partner: Your client or their partner's savings or investments
-          bank_accounts_heading: Bank accounts
-          current_accounts: Current accounts
-          savings_accounts: Savings accounts
-          client_current_account: Current account
-          client_savings_account: Savings account
-          partner_savings_account: Savings account
-          partner_current_account: Current account
-          joint_savings_account: Savings account
-          joint_current_account: Current account
-          client_bank_accounts: Your client's accounts
-          clients_bank_accounts: Client's bank accounts
-          total_in_bank_accounts: Total in bank accounts
-          money_in_bank_accounts: Money in bank accounts
-          partner_bank_accounts: The partner's accounts
-          joint_bank_accounts: Joint accounts
+        bank_accounts_heading: Bank accounts
+        total_in_online_bank_accounts_heading: Total in bank accounts
+        savings_and_assets_heading: Savings and assets
+        policy_disregards_legacy:
+          question: Payments from scheme or charities
+          question_with_partner: Your client's and the partner's payments from schemes or charities
         property:
           heading_own_home: Property
           heading_property_details: Your client's property
@@ -319,10 +300,38 @@ en:
           shared_ownership_with_partner: The home is owned with someone else?
           percentage_home: Percentage of the home legally owned by the client
           percentage_home_with_partner: Percentage of the home legally owned by the client and their partner
+      client_bank_accounts:
+        card_heading: Your client's accounts
+        aria_label: Your client's accounts
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
+      client_online_bank_accounts:
+        card_heading: Client's bank accounts
+        aria_label: Your client's accounts
+      total_in_online_bank_accounts:
+        card_heading: Money in bank accounts
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
       offline_savings_accounts:
         heading: Your client's offline accounts
         offline_savings_accounts: Has savings accounts they cannot access online?
         offline_savings_amount: Amount in offline savings accounts
+      partner_bank_accounts:
+        card_heading: The partner's accounts
+        aria_label: The partner's accounts
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
+      joint_bank_accounts:
+        card_heading: Joint accounts
+        aria_label: Joint accounts
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
+      savings_and_investments:
+        card_heading: Your client's savings or investments
+        card_heading_with_partner: Your client or their partner's savings or investments
+      other_assets:
+        card_heading: Your client's assets
+        card_heading_with_partner: Your client or their partner's assets
       bank_transaction_table:
         total: '%{text} total'
       bank_statements:
@@ -632,7 +641,7 @@ en:
           heading: Restrictions on your client's assets
           heading_with_partner: Restrictions on your client or their partner's assets
           question: Client is banned from selling or borrowing against assets?
-          question_with_partner: Client or their partner is prohibited from selling or borrowing against their assets?
+          question_with_partner: Client or their partner is banned from selling or borrowing against assets?
       vehicles:
         providers:
           heading: Vehicles
