@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_12_140551) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_13_140248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -1024,7 +1024,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_140551) do
     t.datetime "cfe_compare_run_at"
     t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false
-    t.boolean "special_childrens_act", default: false, null: false
     t.boolean "public_law_family", default: false, null: false
   end
 

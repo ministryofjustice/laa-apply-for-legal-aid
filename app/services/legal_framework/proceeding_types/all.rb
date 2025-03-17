@@ -18,11 +18,6 @@ module LegalFramework
           @plf = pt_hash["ccms_matter_code"] == "KPBLB"
         end
 
-        # TODO: remove the below when the SCA feature flag is removed
-        def not_sca?
-          [@sca_core, @sca_related].all?(false)
-        end
-
         # TODO: remove the below when the PLF feature flag is removed
         def not_plf?
           @plf == false
@@ -43,9 +38,6 @@ module LegalFramework
         raise NoMatchingProceedingsFoundError, "No proceedings matched" if parsed_body.is_a?(Hash) && parsed_body["success"] == false
 
         result = parsed_body.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
-        # TODO: remove the below when the SCA feature flag is removed
-        # filter out SCA applications
-        result.select!(&:not_sca?) unless Setting.special_childrens_act?
 
         # TODO: remove the below when the PLF feature flag is removed
         # Filter out PLF applications

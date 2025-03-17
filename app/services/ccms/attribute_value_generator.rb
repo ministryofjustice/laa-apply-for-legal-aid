@@ -120,7 +120,7 @@ module CCMS
       # as it is used to generate CCMS data. For the sake of CCMS we don't care if they've answered the question
       # as Client Involvement Type or using the merits task, just that there is a child subject on the application
       legal_aid_application.proceedings.any? do |proceeding|
-        proceeding.special_childrens_act? &&
+        proceeding.special_children_act? &&
           (legal_aid_application.applicant.relationship_to_children.eql?("child_subject") || proceeding.client_involvement_type_ccms_code.eql?("W"))
       end
     end

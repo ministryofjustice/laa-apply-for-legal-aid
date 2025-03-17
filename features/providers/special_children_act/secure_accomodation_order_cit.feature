@@ -2,7 +2,6 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
   @javascript @vcr
   Scenario: When a provider is adding proceedings and only adds a Secure Accommodation Order
     Given I start the journey as far as the applicant page
-    And the feature flag for special_childrens_act is enabled
 
     When I enter name 'Test', 'User'
     Then I choose 'No'
