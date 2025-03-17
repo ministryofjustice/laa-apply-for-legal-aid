@@ -4,7 +4,7 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: "gov_uk_bank_holid
   subject(:update_worker) { bank_holiday_update_worker.perform }
 
   let(:bank_holiday_update_worker) { described_class.new }
-  let(:stale_date) { Time.current.utc - described_class::UPDATE_INTERVAL - 2.hours }
+  let(:stale_date) { Time.current.utc - 1.month - 2.hours }
 
   context "when it is current" do
     before { create(:bank_holiday) }
