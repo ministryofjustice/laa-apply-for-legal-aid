@@ -11,21 +11,35 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
   describe "GET /providers/merits_task_list/:id/child_care_assessments" do
     subject(:get_request) { get providers_merits_task_list_child_care_assessment_path(proceeding) }
 
+    before do
+      login_as provider
+      get_request
+    end
+
     context "when the provider is not authenticated" do
-      before { get_request }
+      let(:provider) { nil }
 
       it_behaves_like "a provider not authenticated"
     end
 
     context "when the provider is authenticated" do
-      before do
-        login_as provider
-        get_request
-      end
-
       it "returns http success" do
         expect(response).to have_http_status(:ok)
         expect(response).to render_template("providers/proceeding_merits_task/child_care_assessments/show")
+      end
+    end
+
+    context "when there is not local_authority_assessment evidence already uploaded" do
+      it "does not display the banner" do
+        expect(response.body).to have_no_text("Any related files you uploaded will be deleted if you change your answer")
+      end
+    end
+
+    context "when there is local_authority_assessment evidence already uploaded" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_local_authority_assessment_attached, :with_proceedings, explicit_proceedings: [:pbm32]) }
+
+      it "does display the banner" do
+        expect(response.body).to have_text("Any related files you uploaded will be deleted if you change your answer")
       end
     end
   end
@@ -87,6 +101,14 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
             patch_request
             expect(response).to redirect_to(providers_merits_task_list_child_care_assessment_result_path)
           end
+
+          context "when there is local_authority_assessment evidence already uploaded" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_local_authority_assessment_attached, :with_proceedings, explicit_proceedings: [:pbm32]) }
+
+            it "does not delete the uploaded evidence" do
+              expect(legal_aid_application.attachments.local_authority_assessment.first).not_to be_nil
+            end
+          end
         end
 
         context "when no selected" do
@@ -103,6 +125,15 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
 
             patch_request
             expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
+          end
+
+          context "when there is local_authority_assessment evidence already uploaded" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_local_authority_assessment_attached, :with_proceedings, explicit_proceedings: [:pbm32]) }
+
+            it "deletes the uploaded evidence" do
+              patch_request
+              expect(legal_aid_application.attachments.local_authority_assessment.first).to be_nil
+            end
           end
         end
 

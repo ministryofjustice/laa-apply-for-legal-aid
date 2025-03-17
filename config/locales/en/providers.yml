@@ -692,7 +692,6 @@ en:
         show:
           h1-heading: Do you have a copy of the court order for this application?
           yes-hint: We will ask you to upload a copy of the court order at the end of this application
-          banner_text: Any related files you uploaded will be deleted if you change your answer
       nature_of_urgencies:
         show:
           h1-heading: What is the nature of the urgency?
