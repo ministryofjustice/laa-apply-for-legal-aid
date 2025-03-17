@@ -43,6 +43,11 @@ FactoryBot.define do
       attachment_name { "uploaded_evidence_collection" }
     end
 
+    trait :plf_court_order do
+      attachment_type { "plf_court_order" }
+      attachment_name { "plf_court_order.pdf" }
+    end
+
     after(:build) do |attachment|
       filepath = Rails.root.join("spec/fixtures/files/documents/hello_world.pdf")
 
