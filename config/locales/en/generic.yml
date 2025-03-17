@@ -68,6 +68,7 @@ en:
     undefined: Undefined
     upload: Upload
     upload_file: Upload a file
+    uploaded_files_will_be_deleted: Any related files you uploaded will be deleted if you change your answer
     view: View
     'yes': 'Yes'
     yes_but_none: Yes, but none specified
