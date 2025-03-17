@@ -127,7 +127,7 @@ module LaaApplyForLegalAid
     config.x.hmrc_interface.host = ENV.fetch("HMRC_API_HOST", nil)
     config.x.hmrc_interface.client_id = ENV.fetch("HMRC_API_UID", nil)
     config.x.hmrc_interface.client_secret = ENV.fetch("HMRC_API_SECRET", nil)
-    config.x.hmrc_interface.duration_check = ENV.fetch("HMRC_DURATION_CHECK", 3)
+    config.x.hmrc_interface.duration_check = ENV.fetch("HMRC_DURATION_CHECK", 93)
 
     config.active_job.queue_adapter = :sidekiq
 
