@@ -4,7 +4,17 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title: t(".h1-heading"), template: :basic, form: do %>
+
+  <% if @display_banner %>
+    <% notification_banner_title = t("generic.important") %>
+    <% notification_banner_text = t(".banner_text") %>
+  <% end %>
+
+  <%= page_template page_title: t(".h1-heading"),
+                    template: :basic,
+                    form:,
+                    notification_banner_title:,
+                    notification_banner_text: do %>
     <%= form.govuk_radio_buttons_fieldset :plf_court_order, legend: { size: "xl", tag: "h1", text: page_title } do %>
       <%= form.govuk_radio_button :plf_court_order,
                                   true,
