@@ -1274,6 +1274,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_local_authority_assessment_attached do
+      after :create do |application|
+        create(:attachment, :local_authority_assessment, legal_aid_application: application)
+      end
+    end
+
     trait :with_ccms_submission do
       after :create do |application|
         create(:ccms_submission, :case_created, legal_aid_application: application)
