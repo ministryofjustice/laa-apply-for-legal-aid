@@ -38,6 +38,26 @@ module Providers::ApplicationMeritsTask
       end
     end
 
+    describe "#copy_of_court_order?" do
+      subject(:form) { described_class.new(params) }
+
+      context "when plf_court_order is 'true'" do
+        let(:plf_court_order) { "true" }
+
+        it "returns true" do
+          expect(form.copy_of_court_order?).to be true
+        end
+      end
+
+      context "when plf_court_order is 'false'" do
+        let(:plf_court_order) { "false" }
+
+        it "returns false" do
+          expect(form.copy_of_court_order?).to be false
+        end
+      end
+    end
+
     describe "#save" do
       subject(:save_form) { described_class.new(params).save }
 

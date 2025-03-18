@@ -7,7 +7,16 @@ module Providers
 
       def update
         @form = ApplicationMeritsTask::PLFCourtOrderForm.new(form_params)
-        render :show unless update_task_save_continue_or_draft(:application, :court_order_copy)
+
+        update_task(:application, :court_order_copy)
+        return continue_or_draft if draft_selected?
+
+        if @form.valid?
+          @form.save!
+          return go_forward(@form.copy_of_court_order?)
+        end
+
+        render :show
       end
 
       def form_params
