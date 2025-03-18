@@ -3,10 +3,8 @@ class BankHolidayUpdateWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 
-  UPDATE_INTERVAL = 2.days
-
   def perform
-    return true if last_updated.updated_at > UPDATE_INTERVAL.ago
+    return true if last_updated.updated_at > 1.month.ago
     return last_updated.touch if stored_data_current?
 
     lastest_data.save!
