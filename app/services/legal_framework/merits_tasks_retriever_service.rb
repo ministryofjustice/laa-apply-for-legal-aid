@@ -21,6 +21,7 @@ module LegalFramework
           ccms_code: proceeding.ccms_code,
           delegated_functions_used: proceeding.used_delegated_functions,
           client_involvement_type: proceeding.client_involvement_type_ccms_code,
+          substantive_level_of_service: proceeding.substantive_level_of_service,
         }
       end
     end
