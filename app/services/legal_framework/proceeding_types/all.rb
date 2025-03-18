@@ -35,9 +35,7 @@ module LegalFramework
 
       def call
         parsed_body = JSON.parse(request.body)
-        raise NoMatchingProceedingsFoundError, "No proceedings matched" if parsed_body.is_a?(Hash) && parsed_body["success"] == false
-
-        result = parsed_body.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        result = parsed_body["data"].map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
 
         # TODO: remove the below when the PLF feature flag is removed
         # Filter out PLF applications

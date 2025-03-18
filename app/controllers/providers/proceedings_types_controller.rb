@@ -4,8 +4,7 @@ module Providers
     def index
       proceeding_types
       excluded_codes
-    rescue LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError
-      redirect_to providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
+      redirect_to providers_legal_aid_application_has_other_proceedings_path(legal_aid_application) if proceeding_types.count.zero?
     end
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_types
