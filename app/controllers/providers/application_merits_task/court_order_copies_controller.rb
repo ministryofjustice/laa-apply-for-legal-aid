@@ -13,7 +13,15 @@ module Providers
 
         delete_evidence(plf_court_order_evidence) if plf_court_order_attached? && @form.plf_court_order.eql?("false")
 
-        render :show unless update_task_save_continue_or_draft(:application, :court_order_copy)
+        update_task(:application, :court_order_copy)
+        return continue_or_draft if draft_selected?
+
+        if @form.valid?
+          @form.save!
+          return go_forward(@form.copy_of_court_order?)
+        else
+          render :show
+        end
       end
 
       def form_params
