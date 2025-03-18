@@ -131,7 +131,8 @@ googleSheets:
 
 checkFinancialEligibility:
   # this is routed using internal K8s addresses as it is only referred to in service calls
-  civil_host: "http://cfe-civil.cfe-civil-production.svc.cluster.local"
+  # civil_host: "http://cfe-civil.cfe-civil-production.svc.cluster.local"
+  civil_host: "https://el-2127-uprate-partn-cfe-civil-uat.cloud-platform.service.justice.gov.uk"
 
 email_domain:
   suffix: "@digital.justice"
