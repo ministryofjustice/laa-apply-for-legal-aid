@@ -8,7 +8,7 @@
         card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__proceeding_details__summary" }) do |summary_list|
           legal_aid_application.proceedings_by_name.each_with_index do |proceeding, i|
             summary_list.with_row(classes: "app-check-your-answers__#{proceeding.name}__row") do |row|
-              row.with_key(text: "#{t('.proceeding')} #{i + 1}", classes: "govuk-!-width-one-half")
+              row.with_key(text: "#{t('.proceeding')} #{i + 1}", classes: "govuk-!-width-one-third")
               row.with_value { proceeding.meaning }
             end
           end
