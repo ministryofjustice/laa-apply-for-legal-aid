@@ -1853,6 +1853,11 @@ en:
             - domestic abuse, except DAPO (domestic abuse protection orders)
             - section 8
             - special children act
+          with_plf_list:
+            - domestic abuse, except DAPO (domestic abuse protection orders)
+            - section 8
+            - special children act
+            - public law family
         dont_use_service:
           list_title: "But do not use this service if:"
           list:
