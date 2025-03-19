@@ -1,4 +1,4 @@
-FROM ruby:3.4.1-alpine3.21
+FROM ruby:3.4.2-alpine3.21
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@digital.justice.gov.uk)" \
