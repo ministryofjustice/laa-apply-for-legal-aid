@@ -35,7 +35,7 @@ module Admin
         format.csv do
           tempfile = Tempfile.new("user_feedbacks_report")
           CSV.open(tempfile, "w", write_headers: true, headers: %w[date time source satisfaction difficulty improvement_suggestion]) do |csv|
-            Feedback.order(created_at: :desc).each do |feedback|
+            Feedback.order(created_at: :asc).each do |feedback|
               feedback_date = feedback.created_at.strftime("%Y-%m-%d")
               feedback_time = feedback.created_at.strftime("%H:%M")
               csv << [feedback_date, feedback_time, feedback.source, feedback.satisfaction, feedback.difficulty, feedback.improvement_suggestion]
