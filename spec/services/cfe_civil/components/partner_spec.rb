@@ -50,7 +50,7 @@ RSpec.describe CFECivil::Components::Partner do
                legal_aid_application:,
                estimated_value: 2345.0,
                payment_remaining: 321.0,
-               purchased_on: Date.new(2020, 5, 18),
+               more_than_three_years_old: true,
                used_regularly: true,
                owner: "partner")
       end
@@ -69,7 +69,7 @@ RSpec.describe CFECivil::Components::Partner do
             vehicles: [
               value: 2345.0,
               loan_amount_outstanding: 321.0,
-              date_of_purchase: "2020-05-18",
+              date_of_purchase: 4.years.ago.to_date,
               in_regular_use: true,
             ],
             regular_transactions: [],
