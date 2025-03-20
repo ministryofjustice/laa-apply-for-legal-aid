@@ -28,7 +28,7 @@ module CFECivil
           {
             value: vehicle.estimated_value.to_f,
             loan_amount_outstanding: vehicle.payment_remaining.to_f,
-            date_of_purchase: vehicle.purchased_on&.strftime("%Y-%m-%d"),
+            date_of_purchase: vehicle.cfe_civil_purchase_date&.strftime("%Y-%m-%d"),
             in_regular_use: vehicle.used_regularly,
           }
         end
