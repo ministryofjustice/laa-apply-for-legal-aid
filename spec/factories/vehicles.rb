@@ -6,7 +6,7 @@ FactoryBot.define do
       estimated_value { Faker::Commerce.price(range: 2000..10_000) }
       owner { "client" }
       payment_remaining { Faker::Commerce.price(range: 100..1_000) }
-      purchased_on { Faker::Date.between(from: 20.years.ago, to: 2.days.ago) }
+      more_than_three_years_old { true }
       used_regularly { Faker::Boolean.boolean }
     end
 
@@ -14,7 +14,7 @@ FactoryBot.define do
       estimated_value { Faker::Commerce.price(range: 2000..10_000) }
       owner { "partner" }
       payment_remaining { Faker::Commerce.price(range: 100..1_000) }
-      purchased_on { Faker::Date.between(from: 20.years.ago, to: 2.days.ago) }
+      more_than_three_years_old { true }
       used_regularly { Faker::Boolean.boolean }
     end
 
