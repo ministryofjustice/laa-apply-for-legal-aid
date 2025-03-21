@@ -3,6 +3,7 @@ module Providers
     class ChildCareAssessmentsController < ProviderBaseController
       def show
         @form = ChildCareAssessmentForm.new(model: child_care_assessment)
+        @display_banner = local_authority_assessment_attached?
       end
 
       def update
@@ -11,6 +12,10 @@ module Providers
         if @form.assessed?
           save_continue_or_draft(@form)
         else
+          if local_authority_assessment_attached?
+            local_authority_assessment_evidence.delete
+            local_authority_assessment_pdf.delete if local_authority_assessment_pdf.present?
+          end
           render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :client_child_care_assessment)
         end
       end
@@ -27,6 +32,18 @@ module Providers
 
       def legal_aid_application
         @legal_aid_application ||= proceeding.legal_aid_application
+      end
+
+      def local_authority_assessment_attached?
+        local_authority_assessment_evidence.present?
+      end
+
+      def local_authority_assessment_evidence
+        legal_aid_application.attachments.find { |attachment| attachment[:attachment_type] == "local_authority_assessment" }
+      end
+
+      def local_authority_assessment_pdf
+        legal_aid_application.attachments.find { |attachment| attachment[:attachment_type] == "local_authority_assessment_pdf" }
       end
 
       def form_params

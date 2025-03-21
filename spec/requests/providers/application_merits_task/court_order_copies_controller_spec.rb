@@ -26,6 +26,20 @@ module Providers
 
           it_behaves_like "a provider not authenticated"
         end
+
+        context "when there is not PLF court order evidence already uploaded" do
+          it "does not display the banner" do
+            expect(response.body).to have_no_text("Any related files you uploaded will be deleted if you change your answer")
+          end
+        end
+
+        context "when there is PLF court order evidence already uploaded" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_prohibited_steps_order, :with_plf_court_order_attached) }
+
+          it "does display the banner" do
+            expect(response.body).to have_text("Any related files you uploaded will be deleted if you change your answer")
+          end
+        end
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/court_order" do
@@ -61,6 +75,14 @@ module Providers
           it "redirects to the next page" do
             expect(response).to redirect_to(flow_forward_path)
           end
+
+          context "when there is PLF court order evidence already uploaded" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_prohibited_steps_order, :with_plf_court_order_attached) }
+
+            it "does not delete the uploaded evidence" do
+              expect(legal_aid_application.attachments.plf_court_order.first).not_to be_nil
+            end
+          end
         end
 
         context "when the user chooses no" do
@@ -72,6 +94,14 @@ module Providers
 
           it "redirects to the next page" do
             expect(response).to redirect_to(flow_forward_path)
+          end
+
+          context "when there is PLF court order evidence already uploaded" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_prohibited_steps_order, :with_plf_court_order_attached) }
+
+            it "deletes the uploaded evidence" do
+              expect(legal_aid_application.attachments.plf_court_order.first).to be_nil
+            end
           end
         end
 

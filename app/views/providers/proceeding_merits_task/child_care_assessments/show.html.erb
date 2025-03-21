@@ -5,9 +5,16 @@
       local: true,
     ) do |form| %>
 
+  <% if @display_banner %>
+    <% notification_banner_title = t("generic.important") %>
+    <% notification_banner_text = t("generic.uploaded_files_will_be_deleted") %>
+  <% end %>
+
   <%= page_template page_title: t(".h1-heading"),
                     head_title: "#{@proceeding.meaning} - " + t(".h1-heading"),
                     template: :basic,
+                    notification_banner_title:,
+                    notification_banner_text:,
                     form: do %>
     <%= form.govuk_collection_radio_buttons :assessed,
                                             yes_no_options(yes: t(".radio_hint_yes")),
