@@ -305,7 +305,7 @@ module Reports
         @line << vehicles.first.estimated_value
         @line << (nil_or_zero?(vehicles.first.payment_remaining) ? "No" : "Yes")
         @line << (nil_or_zero?(vehicles.first.payment_remaining) ? "" : vehicles.first.payment_remaining)
-        @line << vehicles.first.purchased_on&.strftime("%Y-%m-%d")
+        @line << vehicles.first.cfe_civil_purchase_date # TODO: change description and response to be more than 3 years old?
         @line << yesno(vehicles.first.used_regularly?)
       end
 

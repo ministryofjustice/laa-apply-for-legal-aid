@@ -26,7 +26,7 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
                                   1,
                                   estimated_value: 5_000,
                                   payment_remaining: 250,
-                                  purchased_on: Date.new(2023, 1, 10),
+                                  more_than_three_years_old: true,
                                   used_regularly: true),
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end
@@ -95,7 +95,7 @@ RSpec.describe CFECivil::SubmissionBuilder, :vcr do
                                   1,
                                   estimated_value: 5_000,
                                   payment_remaining: 250,
-                                  purchased_on: Date.new(2023, 1, 10),
+                                  more_than_three_years_old: true,
                                   used_regularly: true),
              other_assets_declaration: build(:other_assets_declaration, :all_nil))
     end

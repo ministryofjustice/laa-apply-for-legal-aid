@@ -397,7 +397,7 @@ module CCMS
           end
 
           context "when the applicant has vehicle" do
-            before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years.ago.to_date, used_regularly: regular_use }
+            before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, more_than_three_years_old: true, used_regularly: regular_use }
 
             let(:regular_use) { true }
 
