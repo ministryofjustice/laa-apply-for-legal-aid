@@ -3,18 +3,18 @@
                        html_attributes: { id: "app-check-your-answers__emergency_cost_override__card" }) do |card|
       card.with_summary_list(actions: !read_only, html_attributes: { id: "app-check-your-answers__emergency_cost_override__summary" }) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
-          row.with_key(text: t(".request_higher_limit"), classes: "govuk-!-width-one-half")
+          row.with_key(text: t(".request_higher_limit"), classes: "govuk-!-width-one-third")
           row.with_value { yes_no(@legal_aid_application.emergency_cost_override) }
         end
 
         if @legal_aid_application.emergency_cost_override
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_requested" }) do |row|
-            row.with_key(text: t(".new_cost_limit"), classes: "govuk-!-width-one-half")
+            row.with_key(text: t(".new_cost_limit"))
             row.with_value { gds_number_to_currency(@legal_aid_application.emergency_cost_requested, precision: 2) }
           end
 
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_reasons" }) do |row|
-            row.with_key(text: t(".new_limit_reasons"), classes: "govuk-!-width-one-half")
+            row.with_key(text: t(".new_limit_reasons"))
             row.with_value { @legal_aid_application.emergency_cost_reasons }
           end
         end
