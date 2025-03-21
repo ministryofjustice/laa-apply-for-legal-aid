@@ -8,8 +8,9 @@
       <div class="govuk-error-summary__body">
         <ul class="govuk-list govuk-error-summary__list">
           <% model.errors.attribute_names.each do |attribute| %>
+            <% input_id = "#{model.class.name.underscore.tr('_', '-')}-#{attribute.to_s.tr('_', '-')}-field-error" %>
             <li>
-              <%= govuk_link_to model.errors[attribute].first, "##{attribute_prefix}#{attribute}" %>
+              <%= govuk_link_to model.errors[attribute].first, "##{input_id}" %>
             </li>
           <% end %>
         </ul>
