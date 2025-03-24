@@ -182,6 +182,7 @@ cy:
               file_virus: suriv a sniatnoc elif detceles ehT
               system_down: niaga yrt - elif ruoy gnidaolpu melborp a saw erehT
               no_file_chosen: elif eno tsael ta esoohc tsum uoY
+            statement:
               blank: txet retne ro elif a hcattA
         applications/proceedings_form:
           attributes:
