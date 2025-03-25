@@ -1,5 +1,32 @@
-  <%= form_with(model: @feedback, url: feedback_index_path, method: :post, local: true) do |form| %>
-    <% applicant_email_hint = @journey == :citizen ? t(".applicant_email_hint") : "" %>
+<%= form_with(
+      model: @feedback,
+      url: feedback_index_path,
+      method: :post,
+      local: true,
+    ) do |form| %>
+  <% applicant_email_hint = @journey == :citizen ? t(".applicant_email_hint") : "" %>
+
+  <%= page_template(
+        page_title: t(".page_title"),
+        back_link: back_button,
+        form:,
+      ) do %>
+
+    <p class="govuk-body">
+      <%= t(".paragraph_1_html", support_email_address: govuk_link_to(Rails.configuration.x.support_email_address, "mailto:#{Rails.configuration.x.support_email_address}")) %>
+    </p>
+
+    <p class="govuk-body">
+       <%= t(".paragraph_2") %>
+    </p>
+
+    <p class="govuk-body">
+      <%= t(".paragraph_3_html", protect_personal_info: govuk_link_to(t(".protect_personal_info"), "https://docs.google.com/document/d/e/2PACX-1vSry_IGP6aBrhW2m-MbkXpujwjcuO7fnyjRQM0aM6H7TIn8JTA34WU5G7TUqM-1uJ3TDHISg5oOMWpq/pub", target: "_blank")) %>.
+    </p>
+
+    <p class="govuk-body">
+      <%= t(".paragraph_4") %>
+    </p>
 
     <%= form.govuk_radio_buttons_fieldset :done_all_needed, legend: { text: t(".done_all_needed") } do %>
       <%= form.govuk_radio_button :done_all_needed, true, link_errors: true, label: { text: t("generic.yes") } %>
@@ -77,3 +104,4 @@
 
     <%= form.govuk_submit t("generic.send") %>
   <% end %>
+<% end %>
