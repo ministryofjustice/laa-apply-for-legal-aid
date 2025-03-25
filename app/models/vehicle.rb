@@ -1,6 +1,5 @@
 class Vehicle < ApplicationRecord
   belongs_to :legal_aid_application
-  self.ignored_columns += %w[purchased_on]
 
   def complete?
     [
