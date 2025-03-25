@@ -7,7 +7,7 @@
   <% applicant_email_hint = @journey == :citizen ? t(".applicant_email_hint") : "" %>
 
   <%= page_template(
-        page_title: "Help us improve the Apply for civil legal aid service",
+        page_title: t(".page_title"),
         back_link: back_button,
         form:,
       ) do %>
@@ -21,7 +21,7 @@
     </p>
 
     <p class="govuk-body">
-      <%= t(".paragraph_3_html", protect_personal_info: govuk_link_to("See how we protect your personal information", "https://docs.google.com/document/d/e/2PACX-1vSry_IGP6aBrhW2m-MbkXpujwjcuO7fnyjRQM0aM6H7TIn8JTA34WU5G7TUqM-1uJ3TDHISg5oOMWpq/pub", target: "_blank")) %>.
+      <%= t(".paragraph_3_html", protect_personal_info: govuk_link_to(t(".protect_personal_info"), "https://docs.google.com/document/d/e/2PACX-1vSry_IGP6aBrhW2m-MbkXpujwjcuO7fnyjRQM0aM6H7TIn8JTA34WU5G7TUqM-1uJ3TDHISg5oOMWpq/pub", target: "_blank")) %>.
     </p>
 
     <p class="govuk-body">
