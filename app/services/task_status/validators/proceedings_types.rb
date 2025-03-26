@@ -1,9 +1,9 @@
 module TaskStatus
   module Validators
-    class Proceedings
-      def initialize(application)
-        @application = application
-      end
+    class ProceedingsTypes < Base
+      # def initialize(application)
+      #   @application = application
+      # end
 
       def valid?
         return false if proceedings.empty?
@@ -17,7 +17,7 @@ module TaskStatus
 
     private
 
-      attr_reader :application
+      # attr_reader :application
 
       delegate :proceedings, to: :application
 

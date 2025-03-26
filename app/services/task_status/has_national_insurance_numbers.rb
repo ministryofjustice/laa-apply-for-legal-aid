@@ -11,25 +11,12 @@ module TaskStatus
 
   private
 
-    delegate :applicant, to: :application
-
     def completed?
-      forms.all?(&:valid?) &&
-        validators.all?(&:valid?)
+      has_national_insurance_numbers_validator.valid?
     end
 
-    def forms
-      [
-        has_national_insurance_number_form,
-      ]
-    end
-
-    def validators
-      []
-    end
-
-    def has_national_insurance_number_form
-      @has_national_insurance_number_form ||= ::Applicants::HasNationalInsuranceNumberForm.new(model: applicant)
+    def has_national_insurance_numbers_validator
+      @has_national_insurance_numbers_validator ||= Validators::HasNationalInsuranceNumbers.new(application)
     end
   end
 end

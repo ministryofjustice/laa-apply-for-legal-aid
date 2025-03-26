@@ -13,22 +13,11 @@ module TaskStatus
   private
 
     def completed?
-      forms.all?(&:valid?) &&
-        validators.all?(&:valid?)
-    end
-
-    def forms
-      []
-    end
-
-    def validators
-      [
-        proceedings_validator,
-      ]
+      proceedings_validator.valid?
     end
 
     def proceedings_validator
-      @proceedings_validator ||= Validators::Proceedings.new(application)
+      @proceedings_validator ||= Validators::ProceedingsTypes.new(application)
     end
   end
 end

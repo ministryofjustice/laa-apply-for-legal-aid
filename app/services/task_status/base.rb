@@ -10,6 +10,8 @@ module TaskStatus
   class Base
     attr_accessor :application
 
+    delegate :applicant, to: :application
+
     def initialize(application)
       @application = application
     end
