@@ -28,7 +28,7 @@ module StatementOfCases
     def statement_present_or_file_uploaded
       return if file_present_or_draft?
 
-      @errors.add(:original_file, :blank) if statement.blank?
+      @errors.add(:statement, :blank) if statement.blank?
     end
 
     def file_present_or_draft?

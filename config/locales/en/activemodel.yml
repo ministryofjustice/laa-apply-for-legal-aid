@@ -315,6 +315,7 @@ en:
               file_virus: "%{file_name} contains a virus"
               system_down: There was a problem uploading your file - try again
               no_file_chosen: You must choose at least one file
+            statement:
               blank: Attach a file or enter text
         proceeding_merits_task/prohibited_steps:
           attributes:
