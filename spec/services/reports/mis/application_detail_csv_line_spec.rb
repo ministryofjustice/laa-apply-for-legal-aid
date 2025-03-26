@@ -373,13 +373,13 @@ module Reports
               expect(value_for("Vehicle 1 value")).to eq ""
               expect(value_for("Vehicle 1 Outstanding loan?")).to eq ""
               expect(value_for("Vehicle 1 Loan remaining")).to eq ""
-              expect(value_for("Vehicle 1 Date purchased")).to eq ""
+              expect(value_for("Vehicle 1 >3 years old")).to eq ""
               expect(value_for("Vehicle 1 In Regular use?")).to eq ""
             end
           end
 
           context "when there is a vehicle" do
-            let(:purchase_date) { Date.new(2020, 1, 1) }
+            let(:more_than_three_years_old) { true }
             let(:used_regularly) { true }
 
             before do
@@ -389,7 +389,7 @@ module Reports
                           estimated_value: 12_000,
                           payment_remaining:,
                           used_regularly:,
-                          purchased_on: purchase_date)
+                          more_than_three_years_old: more_than_three_years_old)
             end
 
             context "and it's in regular use, no loan outstanding" do
@@ -400,7 +400,7 @@ module Reports
                 expect(value_for("Vehicle 1 value")).to eq 12_000
                 expect(value_for("Vehicle 1 Outstanding loan?")).to eq "No"
                 expect(value_for("Vehicle 1 Loan remaining")).to eq ""
-                expect(value_for("Vehicle 1 Date purchased")).to eq "2020-01-01"
+                expect(value_for("Vehicle 1 >3 years old")).to eq 4.years.ago.strftime("%Y-%m-%d")
                 expect(value_for("Vehicle 1 In Regular use?")).to eq "Yes"
               end
             end
@@ -414,7 +414,7 @@ module Reports
                 expect(value_for("Vehicle 1 value")).to eq 12_000
                 expect(value_for("Vehicle 1 Outstanding loan?")).to eq "No"
                 expect(value_for("Vehicle 1 Loan remaining")).to eq ""
-                expect(value_for("Vehicle 1 Date purchased")).to eq "2020-01-01"
+                expect(value_for("Vehicle 1 >3 years old")).to eq 4.years.ago.strftime("%Y-%m-%d")
                 expect(value_for("Vehicle 1 In Regular use?")).to eq "No"
               end
             end
@@ -427,7 +427,7 @@ module Reports
                 expect(value_for("Vehicle 1 value")).to eq 12_000
                 expect(value_for("Vehicle 1 Outstanding loan?")).to eq "Yes"
                 expect(value_for("Vehicle 1 Loan remaining")).to eq 4_566
-                expect(value_for("Vehicle 1 Date purchased")).to eq "2020-01-01"
+                expect(value_for("Vehicle 1 >3 years old")).to eq 4.years.ago.strftime("%Y-%m-%d")
                 expect(value_for("Vehicle 1 In Regular use?")).to eq "Yes"
               end
             end

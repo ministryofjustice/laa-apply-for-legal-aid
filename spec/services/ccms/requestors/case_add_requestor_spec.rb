@@ -35,7 +35,7 @@ module CCMS
         let(:last_name_at_birth) { nil }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:chances_of_success) { proceeding.chances_of_success }
-        let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true) }
+        let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, more_than_three_years_old: true, used_regularly: true) }
         let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
 
         let(:other_assets_declaration) do

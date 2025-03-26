@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Vehicle do
   describe "#purchased_on" do
-    let(:vehicle) { create(:vehicle, purchased_on:, more_than_three_years_old:) }
+    let(:vehicle) { create(:vehicle, more_than_three_years_old:) }
 
     describe "#complete?" do
       subject { vehicle.complete? }
@@ -26,32 +26,19 @@ RSpec.describe Vehicle do
       end
     end
 
-    context "when purchased_on is populated" do
-      let(:purchased_on) { 6.months.ago.to_date }
-      let(:more_than_three_years_old) { nil }
+    context "when more than three years old" do
+      let(:more_than_three_years_old) { true }
 
-      it "returns the purchased on date" do
-        expect(vehicle.purchased_on).to eq purchased_on
+      it "returns a date 4 years ago" do
+        expect(vehicle.cfe_civil_purchase_date).to eq 4.years.ago.to_date
       end
     end
 
-    context "when purchased_on is nil" do
-      let(:purchased_on) { nil }
+    context "when less than three years old" do
+      let(:more_than_three_years_old) { false }
 
-      context "when more than three years old" do
-        let(:more_than_three_years_old) { true }
-
-        it "returns a date 4 years ago" do
-          expect(vehicle.purchased_on).to eq 4.years.ago.to_date
-        end
-      end
-
-      context "when less than three years old" do
-        let(:more_than_three_years_old) { false }
-
-        it "returns a date 2 years ago" do
-          expect(vehicle.purchased_on).to eq 2.years.ago.to_date
-        end
+      it "returns a date 2 years ago" do
+        expect(vehicle.cfe_civil_purchase_date).to eq 2.years.ago.to_date
       end
     end
   end

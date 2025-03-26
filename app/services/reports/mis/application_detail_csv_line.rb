@@ -102,7 +102,7 @@ module Reports
           "Vehicle 1 value",
           "Vehicle 1 Outstanding loan?",
           "Vehicle 1 Loan remaining",
-          "Vehicle 1 Date purchased",
+          "Vehicle 1 >3 years old",
           "Vehicle 1 In Regular use?",
           "Current acct?",
           "Savings acct?",
@@ -305,7 +305,7 @@ module Reports
         @line << vehicles.first.estimated_value
         @line << (nil_or_zero?(vehicles.first.payment_remaining) ? "No" : "Yes")
         @line << (nil_or_zero?(vehicles.first.payment_remaining) ? "" : vehicles.first.payment_remaining)
-        @line << vehicles.first.purchased_on&.strftime("%Y-%m-%d")
+        @line << vehicles.first.cfe_civil_purchase_date&.strftime("%Y-%m-%d")
         @line << yesno(vehicles.first.used_regularly?)
       end
 
