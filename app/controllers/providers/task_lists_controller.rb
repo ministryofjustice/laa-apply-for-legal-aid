@@ -11,6 +11,8 @@ module Providers
       @task_list = ::TaskList::StartPageCollection.new(
         view_context, application: legal_aid_application
       )
+
+      legal_aid_application.check_task_list!
     end
 
     def create
