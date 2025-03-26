@@ -1,4 +1,5 @@
 // stylelint-disable declaration-no-important, selector-max-id
+@use "node_modules/govuk-frontend/dist/govuk" as *;
 
 .dropzone {
   display: flex;

@@ -1,4 +1,5 @@
 // stylelint-disable declaration-no-important, selector-max-id, selector-no-qualifying-type
+@use "node_modules/govuk-frontend/dist/govuk" as *;
 
 #clear-search-div {
   padding-top: 5px;
