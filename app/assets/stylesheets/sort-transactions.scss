@@ -1,4 +1,5 @@
 // stylelint-disable declaration-no-important
+@use "node_modules/govuk-frontend/dist/govuk" as *;
 
 .display-table {
   display: table

@@ -1,3 +1,5 @@
+@use "node_modules/govuk-frontend/dist/govuk" as *;
+
 .admin-page {
   .app-navigation {
     @media (min-width: 40.0625em) {
