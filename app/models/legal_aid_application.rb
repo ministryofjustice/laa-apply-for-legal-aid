@@ -128,6 +128,11 @@ class LegalAidApplication < ApplicationRecord
            :merits_parental_responsibilities_all_rejected?,
            to: :state_machine_proxy
 
+  # editable journey task list state machine related delegations
+  delegate :check_task_list!,
+           :checking_task_list?,
+           to: :state_machine_proxy
+
   scope :latest, -> { order(created_at: :desc) }
   scope :search, lambda { |term|
     attributes = [
@@ -557,8 +562,14 @@ class LegalAidApplication < ApplicationRecord
   def state_machine_proxy
     if state_machine.nil?
       save!
-      create_state_machine(type: "PassportedStateMachine")
+
+      if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
+        create_state_machine(type: "EditableApplicationStateMachine")
+      else
+        create_state_machine(type: "PassportedStateMachine")
+      end
     end
+
     state_machine
   end
   alias_method :find_or_create_state_machine, :state_machine_proxy
