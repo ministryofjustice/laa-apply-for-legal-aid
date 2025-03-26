@@ -10,7 +10,7 @@
     "postinstall": "rm -rf node_modules/resolve/test/resolver/multirepo node_modules/eslint-plugin-react/node_modules/resolve/test/resolver/multirepo"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "<4.0.0",
+    "@ministryofjustice/frontend": "^4.0.1",
     "@rails/ujs": "^7.1.501",
     "axios": "^1.8.4",
     "core-js": "^3.41.0",
