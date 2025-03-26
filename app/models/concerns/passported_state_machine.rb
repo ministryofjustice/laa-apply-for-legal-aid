@@ -18,6 +18,7 @@ class PassportedStateMachine < BaseStateMachine
                   after: proc { |_legal_aid_application|
                     update!(ccms_reason: nil) unless ccms_reason.nil?
                   }
+      transitions from: :stateless, to: :stateless
     end
 
     event :check_passported_answers do
@@ -27,10 +28,12 @@ class PassportedStateMachine < BaseStateMachine
                     provider_entering_merits
                   ],
                   to: :checking_passported_answers
+      transitions from: :stateless, to: :stateless
     end
 
     event :complete_passported_means do
       transitions from: :checking_passported_answers, to: :provider_entering_merits
+      transitions from: :stateless, to: :stateless
     end
   end
 

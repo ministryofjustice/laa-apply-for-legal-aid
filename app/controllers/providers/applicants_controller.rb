@@ -29,6 +29,10 @@ module Providers
       )
     end
 
+    def feature_flag_true?
+      true
+    end
+
     def applicant
       @applicant ||= Applicant.new
     end

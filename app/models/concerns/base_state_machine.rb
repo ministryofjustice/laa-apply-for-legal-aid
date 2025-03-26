@@ -32,8 +32,13 @@ class BaseStateMachine < ApplicationRecord
 
   include AASM
 
+  def feature_flag_active?
+    true
+  end
+
   aasm do
-    state :initiated, initial: true
+    state :initiated, initial: true, unless: :feature_flag_active?
+    state :stateless, initial: true, if: :feature_flag_active?
     state :entering_applicant_details
     state :checking_applicant_details
     state :applicant_details_checked
@@ -58,6 +63,7 @@ class BaseStateMachine < ApplicationRecord
                     use_ccms
                   ],
                   to: :entering_applicant_details
+      transitions from: :stateless, to: :stateless
     end
 
     event :check_applicant_details do
@@ -71,6 +77,7 @@ class BaseStateMachine < ApplicationRecord
                   to: :checking_applicant_details
 
       transitions from: :provider_entering_merits, to: :checking_applicant_details, guard: :non_means_tested?
+      transitions from: :stateless, to: :stateless
     end
 
     event :applicant_details_checked do
@@ -85,6 +92,7 @@ class BaseStateMachine < ApplicationRecord
                   to: :applicant_details_checked
 
       transitions from: :provider_entering_merits, to: :applicant_details_checked, guard: proc { non_means_tested? }
+      transitions from: :stateless, to: :stateless
     end
 
     event :override_dwp_result do
@@ -104,6 +112,7 @@ class BaseStateMachine < ApplicationRecord
                     provider_confirming_applicant_eligibility
                   ],
                   to: :delegated_functions_used
+      transitions from: :stateless, to: :stateless
     end
 
     event :use_ccms do
@@ -125,6 +134,7 @@ class BaseStateMachine < ApplicationRecord
 
                     update!(ccms_reason: reason)
                   }
+      transitions from: :stateless, to: :stateless
     end
 
     event :reset do
@@ -133,6 +143,7 @@ class BaseStateMachine < ApplicationRecord
       transitions from: :checking_passported_answers, to: :provider_entering_means
       transitions from: :checking_merits_answers, to: :provider_entering_merits
       transitions from: :provider_entering_merits, to: :provider_entering_merits
+      transitions from: :stateless, to: :stateless
     end
 
     event :provider_enter_merits do
@@ -144,6 +155,7 @@ class BaseStateMachine < ApplicationRecord
                   ],
                   to: :provider_entering_merits,
                   guard: :non_means_tested?
+      transitions from: :stateless, to: :stateless
     end
 
     event :check_merits_answers do
@@ -161,10 +173,11 @@ class BaseStateMachine < ApplicationRecord
                   ],
                   to: :checking_merits_answers,
                   guard: :non_means_tested?
+      transitions from: :stateless, to: :stateless
     end
 
     event :generate_reports do
-      transitions from: :checking_merits_answers, to: :generating_reports,
+      transitions from: %i[checking_merits_answers stateless], to: :generating_reports,
                   after: proc { |legal_aid_application|
                     ReportsCreatorWorker.perform_async(legal_aid_application.id)
                     PostSubmissionProcessingJob.perform_later(legal_aid_application.id, "#{Rails.configuration.x.application.host_url}/feedback/new")

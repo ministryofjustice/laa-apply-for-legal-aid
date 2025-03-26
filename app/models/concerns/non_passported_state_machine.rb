@@ -23,12 +23,14 @@ class NonPassportedStateMachine < BaseStateMachine
                     checking_applicant_details
                   ],
                   to: :provider_confirming_applicant_eligibility
+      transitions from: :stateless, to: :stateless
     end
 
     event :await_applicant do
       transitions from: :provider_confirming_applicant_eligibility, to: :awaiting_applicant
       transitions from: :delegated_functions_used, to: :awaiting_applicant
       transitions from: :awaiting_applicant, to: :awaiting_applicant
+      transitions from: :stateless, to: :stateless
     end
 
     event :applicant_enter_means do
@@ -41,10 +43,12 @@ class NonPassportedStateMachine < BaseStateMachine
                   after: proc { |_legal_aid_application|
                     update!(ccms_reason: nil) unless ccms_reason.nil?
                   }
+      transitions from: :stateless, to: :stateless
     end
 
     event :check_citizen_answers do
       transitions from: :applicant_entering_means, to: :checking_citizen_answers
+      transitions from: :stateless, to: :stateless
     end
 
     event :complete_non_passported_means do
@@ -53,10 +57,12 @@ class NonPassportedStateMachine < BaseStateMachine
                     ApplicantCompleteMeans.call(legal_aid_application)
                     BankTransactionsAnalyserJob.perform_later(legal_aid_application)
                   }
+      transitions from: :stateless, to: :stateless
     end
 
     event :complete_bank_transaction_analysis do
       transitions from: :analysing_bank_transactions, to: :provider_assessing_means
+      transitions from: :stateless, to: :stateless
     end
 
     event :provider_assess_means do
@@ -65,6 +71,7 @@ class NonPassportedStateMachine < BaseStateMachine
                            checking_means_income
                            checking_non_passported_means],
                   to: :provider_assessing_means
+      transitions from: :stateless, to: :stateless
     end
 
     event :assess_partner_means do
@@ -75,6 +82,7 @@ class NonPassportedStateMachine < BaseStateMachine
                     use_ccms
                   ],
                   to: :assessing_partner_means
+      transitions from: :stateless, to: :stateless
     end
 
     event :check_non_passported_means do
@@ -84,6 +92,7 @@ class NonPassportedStateMachine < BaseStateMachine
                     checking_means_income
                   ],
                   to: :checking_non_passported_means
+      transitions from: :stateless, to: :stateless
     end
 
     event :reset_to_applicant_entering_means do
@@ -97,6 +106,7 @@ class NonPassportedStateMachine < BaseStateMachine
                     assessing_partner_means
                   ],
                   to: :checking_means_income
+      transitions from: :stateless, to: :stateless
     end
   end
 
