@@ -1042,7 +1042,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_114131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccms_reason"
-    t.string "aasm_task_list_state"
   end
 
   create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
