@@ -32,6 +32,15 @@ class BaseStateMachine < ApplicationRecord
 
   include AASM
 
+  # aasm(:task_list, column: "aasm_task_list_state") do
+  #   state :initiated_primary_task_list, initial: true
+  #   state :checking_primary_task_list
+
+  #   event :checking_primary_task_list do
+  #     transitions from: :initiated_primary_task_list, to: :checking_primary_task_list
+  #   end
+  # end
+
   aasm do
     state :initiated, initial: true
     state :entering_applicant_details
