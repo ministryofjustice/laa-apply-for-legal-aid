@@ -1,34 +1,27 @@
 module TaskStatus
+  StatusData = Data.define(:value, :tag_classes)
+
   class ValueObject
     attr_accessor :value
 
-    VALUES = [
-      COMPLETED = :completed,
-      IN_PROGRESS = :in_progress,
-      NOT_STARTED = :not_started,
-      CANNOT_START = :cannot_start,
-      UNREACHABLE = :unreachable,
-      NOT_APPLICABLE = :not_applicable,
-      UNKNOWN = :unknown,
+    STATUSES = [
+      COMPLETED = StatusData.new(:completed, nil),
+      IN_PROGRESS = StatusData.new(:in_progress, "govuk-tag govuk-tag--light-blue"),
+      NOT_STARTED =  StatusData.new(:not_started, "govuk-tag govuk-tag--blue"),
+      CANNOT_START = StatusData.new(:cannot_start, "govuk-tag govuk-tag--grey"),
+      UNREACHABLE = StatusData.new(:unreachable, nil),
+      NOT_APPLICABLE = StatusData.new(:not_applicable, "govuk-tag govuk-tag--grey"),
+      UNKNOWN = StatusData.new(:unknown, nil),
     ].freeze
 
-    TAG_CLASSES = {
-      COMPLETED => nil,
-      IN_PROGRESS => "govuk-tag govuk-tag--light-blue",
-      NOT_STARTED => "govuk-tag govuk-tag--blue",
-      UNREACHABLE => nil,
-      CANNOT_START => "govuk-tag govuk-tag--grey",
-      NOT_APPLICABLE => "govuk-tag govuk-tag--grey",
-    }.freeze
-
     # add getter? and setter methods for each status value
-    VALUES.each do |status|
-      define_method :"#{status}?" do
-        value == status
+    STATUSES.each do |status|
+      define_method :"#{status.value}?" do
+        value == status.value
       end
 
-      define_method :"#{status}!" do
-        self.value = status
+      define_method :"#{status.value}!" do
+        self.value = status.value
         self
       end
     end
@@ -37,18 +30,19 @@ module TaskStatus
       @value = :unknown
     end
 
+    # Should this be part of the value object as it represents presentation layer logic?!
+    delegate :tag_classes, to: :current_status
+
     def valid?
-      VALUES.include?(value)
+      STATUSES.include?(current_status)
     end
 
     def enabled?
-      [COMPLETED, IN_PROGRESS, NOT_STARTED].include?(value)
+      [COMPLETED, IN_PROGRESS, NOT_STARTED].include?(current_status)
     end
 
-    # Should this be part of the value object as it represents presentation layer logic?!
-    # See StatusTag class
-    def tag_classes
-      TAG_CLASSES[value]
+    def current_status
+      STATUSES.find { |status| status.value == value }
     end
   end
 end
