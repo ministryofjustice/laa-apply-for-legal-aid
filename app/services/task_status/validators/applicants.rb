@@ -1,20 +1,7 @@
 module TaskStatus
   module Validators
     class Applicants < Base
-      # def initialize(application)
-      #   @application = application
-      # end
-
-      # def valid?
-      #   forms.all?(&:valid?) &&
-      #     validators.all?(&:valid?)
-      # end
-
     private
-
-      # attr_reader :application
-
-      # delegate :applicant, to: :application
 
       def forms
         [
