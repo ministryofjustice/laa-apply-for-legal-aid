@@ -54,7 +54,7 @@ module Admin
           headers = ApplicationDigest.first.attributes.keys - %w[id created_at updated_at]
 
           CSV.open(tempfile, "w", write_headers: true, headers: headers) do |csv|
-            ApplicationDigest.order(create_at: :desc).find_each do |record|
+            ApplicationDigest.find_each do |record|
               csv << record.attributes.slice(*headers).values
             end
           end
