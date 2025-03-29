@@ -131,6 +131,59 @@ module CCMS
             )
           end
         end
+
+        context "when the applicant has a name containing special characters" do
+          context "when the last name contains an opening single curly quote" do
+            before do
+              applicant.update!(last_name: "O‘Hare")
+            end
+
+            it "generates the expected XML" do
+              allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+              expect(requestor.formatted_xml).to be_soap_envelope_with(
+                command: "clientbim:ClientAddRQ",
+                transaction_id: expected_tx_id,
+                matching: [
+                  "<common:Surname>O'Hare</common:Surname>",
+                  "<common:SurnameAtBirth>O'Hare</common:SurnameAtBirth>",
+                  "<clientbio:NINumber>QQ123456Q</clientbio:NINumber>",
+                  "<common:AddressLine1>102 Petty France</common:AddressLine1>",
+                  "<common:AddressLine2>St James Park</common:AddressLine2>",
+                  "<common:City>London</common:City>",
+                  "<common:County>Westminster</common:County>",
+                  "<common:Country>GBR</common:Country>",
+                  "<common:PostalCode>SW1H 9AJ</common:PostalCode>",
+                ],
+              )
+            end
+          end
+
+          context "when the first name contains a closing single curly quote" do
+            before do
+              applicant.update!(first_name: "L’Novo")
+            end
+
+            it "generates the expected XML" do
+              allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+              expect(requestor.formatted_xml).to be_soap_envelope_with(
+                command: "clientbim:ClientAddRQ",
+                transaction_id: expected_tx_id,
+                matching: [
+                  "<common:Surname>Hurlock</common:Surname>",
+                  "<common:FirstName>L'Novo</common:FirstName>",
+                  "<common:SurnameAtBirth>Hurlock</common:SurnameAtBirth>",
+                  "<clientbio:NINumber>QQ123456Q</clientbio:NINumber>",
+                  "<common:AddressLine1>102 Petty France</common:AddressLine1>",
+                  "<common:AddressLine2>St James Park</common:AddressLine2>",
+                  "<common:City>London</common:City>",
+                  "<common:County>Westminster</common:County>",
+                  "<common:Country>GBR</common:Country>",
+                  "<common:PostalCode>SW1H 9AJ</common:PostalCode>",
+                ],
+              )
+            end
+          end
+        end
       end
 
       describe "#transaction_request_id" do

@@ -25,7 +25,7 @@ module CCMS
         let(:applicant) do
           create(:applicant,
                  first_name: "Shery",
-                 last_name: "Ledner",
+                 last_name:,
                  last_name_at_birth:,
                  national_insurance_number: "EG587804M",
                  date_of_birth: Date.new(1977, 4, 10),
@@ -33,6 +33,7 @@ module CCMS
                  has_partner: false)
         end
         let(:last_name_at_birth) { nil }
+        let(:last_name) { "Ledner" }
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:chances_of_success) { proceeding.chances_of_success }
         let(:vehicles) { create_list(:vehicle, 1, estimated_value: 3030, payment_remaining: 881, more_than_three_years_old: true, used_regularly: true) }
@@ -115,6 +116,21 @@ module CCMS
               expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
 
               expect(request_hash.as_json).to match_json_expression(expected_request_hash.as_json)
+            end
+          end
+        end
+
+        context "when the case data contains special characters" do
+          let(:request_xml) { requestor.__send__(:formatted_xml) }
+          let(:expected_request_xml) { ccms_data_from_file("case_add_request_contains_special_characters.xml") }
+          let(:last_name) { "O’‘Hare" }
+
+          it "generates the expected xml" do
+            travel_to(request_created_at) do
+              request_hash = Hash.from_xml(request_xml).deep_symbolize_keys!
+              expected_request_hash = Hash.from_xml(expected_request_xml).deep_symbolize_keys!
+
+              expect(request_hash).to match(expected_request_hash)
             end
           end
         end
