@@ -1,6 +1,8 @@
 module Providers
   module ProceedingMeritsTask
     class ChildCareAssessmentsController < ProviderBaseController
+      include DeleteAttachments
+
       def show
         @form = ChildCareAssessmentForm.new(model: child_care_assessment)
         @display_banner = local_authority_assessment_attached?
@@ -12,10 +14,8 @@ module Providers
         if @form.assessed?
           save_continue_or_draft(@form)
         else
-          if local_authority_assessment_attached?
-            local_authority_assessment_evidence.delete
-            local_authority_assessment_pdf.delete if local_authority_assessment_pdf.present?
-          end
+          delete_evidence(local_authority_assessment_evidence) if local_authority_assessment_attached?
+
           render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :client_child_care_assessment)
         end
       end
@@ -39,11 +39,7 @@ module Providers
       end
 
       def local_authority_assessment_evidence
-        legal_aid_application.attachments.find { |attachment| attachment[:attachment_type] == "local_authority_assessment" }
-      end
-
-      def local_authority_assessment_pdf
-        legal_aid_application.attachments.find { |attachment| attachment[:attachment_type] == "local_authority_assessment_pdf" }
+        @local_authority_assessment_evidence ||= find_attachments_starting_with("local_authority_assessment")
       end
 
       def form_params
