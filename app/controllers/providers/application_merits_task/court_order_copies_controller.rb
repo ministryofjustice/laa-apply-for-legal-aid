@@ -1,6 +1,8 @@
 module Providers
   module ApplicationMeritsTask
     class CourtOrderCopiesController < ProviderBaseController
+      include DeleteAttachments
+
       def show
         @form = ApplicationMeritsTask::PLFCourtOrderForm.new(model: legal_aid_application)
         @display_banner = plf_court_order_attached?
@@ -9,10 +11,7 @@ module Providers
       def update
         @form = ApplicationMeritsTask::PLFCourtOrderForm.new(form_params)
 
-        if plf_court_order_attached? && @form.plf_court_order.eql?("false")
-          plf_court_order_evidence.delete
-          plf_court_order_pdf.delete if plf_court_order_pdf.present?
-        end
+        delete_evidence(plf_court_order_evidence) if plf_court_order_attached? && @form.plf_court_order.eql?("false")
 
         render :show unless update_task_save_continue_or_draft(:application, :court_order_copy)
       end
@@ -32,11 +31,7 @@ module Providers
       end
 
       def plf_court_order_evidence
-        legal_aid_application.attachments.find { |attachment| attachment[:attachment_type] == "plf_court_order" }
-      end
-
-      def plf_court_order_pdf
-        legal_aid_application.attachments.find { |attachment| attachment[:attachment_type] == "plf_court_order_pdf" }
+        @plf_court_order_evidence ||= find_attachments_starting_with("plf_court_order")
       end
     end
   end
