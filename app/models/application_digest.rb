@@ -131,13 +131,4 @@ class ApplicationDigest < ApplicationRecord
       nil
     end
   end
-
-  def to_google_sheet_row
-    ApplicationDigest.column_headers.map { |column_name| format_column(column_name, __send__(column_name)) }
-  end
-
-  # Google sheets doesn't recognise Ruby true and false
-  def format_column(column_name, value)
-    column_name.in?(BOOLEAN_COLUMNS) ? value.to_s.upcase : value
-  end
 end
