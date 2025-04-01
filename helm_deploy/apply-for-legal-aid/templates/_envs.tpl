@@ -368,11 +368,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: googleSheetsCFEComparisonSpreadsheetId
-  - name: GOOGLE_DATA_STUDIO_URL
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleDataStudioUrl
   - name: RESEARCH_PANEL_FORM_LINK
     valueFrom:
       secretKeyRef:
