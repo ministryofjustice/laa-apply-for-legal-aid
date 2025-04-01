@@ -17,16 +17,6 @@ namespace :digest do
     DigestExtractor.call
   end
 
-  desc "Run DigestExporter to export digest records to google sheet"
-  task export: :environment do
-    if !HostEnv.staging_or_production? && ENV.fetch("BYPASS", nil).nil?
-      Rails.logger.info warning_message("export")
-      next
-    end
-
-    DigestExporter.call
-  end
-
   namespace :extraction_date do
     desc "Reset the last_extracted date so that all application_digest records are refreshed"
     task reset: :environment do
