@@ -1,37 +1,9 @@
 class ApplicationDigest < ApplicationRecord
-  COLUMNS_TO_OMIT = %w[id updated_at created_at].freeze
-  BOOLEAN_COLUMNS = %w[
-    use_ccms
-    passported
-    df_used
-    employed
-    hmrc_data_used
-    referred_to_caseworker
-    has_partner
-    contrary_interest
-    partner_dwp_challenge
-    non_means_tested
-    family_linked
-    legal_linked
-    no_fixed_address
-    biological_parent
-    parental_responsibility_agreement
-    parental_responsibility_court_order
-    child_subject
-    parental_responsibility_evidence
-    autogranted
-    ecct_routed
-  ].freeze
-
   class << self
     def create_or_update!(legal_aid_application_id)
       attrs = map_attrs(legal_aid_application_id)
       rec = find_by(legal_aid_application_id:)
       rec.nil? ? create!(attrs) : rec.update!(attrs)
-    end
-
-    def column_headers
-      columns.map(&:name) - COLUMNS_TO_OMIT
     end
 
   private
@@ -130,14 +102,5 @@ class ApplicationDigest < ApplicationRecord
     rescue NoMethodError
       nil
     end
-  end
-
-  def to_google_sheet_row
-    ApplicationDigest.column_headers.map { |column_name| format_column(column_name, __send__(column_name)) }
-  end
-
-  # Google sheets doesn't recognise Ruby true and false
-  def format_column(column_name, value)
-    column_name.in?(BOOLEAN_COLUMNS) ? value.to_s.upcase : value
   end
 end
