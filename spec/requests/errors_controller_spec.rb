@@ -261,4 +261,32 @@ RSpec.describe ErrorsController, :show_exceptions do
       end
     end
   end
+
+  describe "GET /error/benefit_checker_down" do
+    subject(:get_error) { get error_path(:benefit_checker_down) }
+
+    it "responds with internal_server_error/500 status" do
+      get_error
+      expect(response).to have_http_status(:internal_server_error)
+    end
+
+    it "renders benefit_checker_down" do
+      get_error
+      expect(response).to render_template("errors/show/_benefit_checker_down")
+    end
+
+    it "displays the correct header" do
+      get_error
+      expect(page)
+        .to have_css("h1", text: "Sorry, there is a problem")
+    end
+
+    context "with Welsh locale", :use_welsh_locale do
+      it "displays the correct content" do
+        get error_path(:benefit_checker_down, locale: :cy)
+        expect(page)
+          .to have_css("h1", text: "melborp a si ereht ,yrroS")
+      end
+    end
+  end
 end

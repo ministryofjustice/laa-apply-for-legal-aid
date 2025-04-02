@@ -51,6 +51,7 @@ private
       access_denied: :forbidden,
       assessment_already_completed: :ok,
       internal_server_error: :internal_server_error,
+      benefit_checker_down: :internal_server_error,
     }
   end
 
