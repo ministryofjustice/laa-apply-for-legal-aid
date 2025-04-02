@@ -262,16 +262,4 @@ RSpec.describe StatusController, :clamav do
       end
     end
   end
-
-  describe "#data" do
-    before do
-      allow(ENV).to receive(:fetch)
-                      .with("GOOGLE_DATA_STUDIO_URL", nil)
-                      .and_return("https://fake.datastudio.com/")
-    end
-
-    it "redirects to the current google data studio url" do
-      expect(get("/data")).to redirect_to "https://fake.datastudio.com/"
-    end
-  end
 end
