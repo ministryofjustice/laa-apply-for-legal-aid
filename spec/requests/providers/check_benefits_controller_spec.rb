@@ -74,7 +74,7 @@ RSpec.describe Providers::CheckBenefitsController do
 
       it "redirects to the Problem page" do
         get_request
-        expect(response).to redirect_to(problem_index_path)
+        expect(response).to redirect_to(error_path(:benefit_checker_down))
       end
     end
 

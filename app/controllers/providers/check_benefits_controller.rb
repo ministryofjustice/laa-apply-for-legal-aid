@@ -20,7 +20,7 @@ module Providers
   private
 
     def check_benefits
-      redirect_to problem_index_path unless legal_aid_application.add_benefit_check_result
+      redirect_to error_path(:benefit_checker_down) unless legal_aid_application.add_benefit_check_result
     end
 
     def known_issue_prevents_benefit_check?
