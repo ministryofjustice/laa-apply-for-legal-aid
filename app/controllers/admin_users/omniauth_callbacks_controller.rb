@@ -25,15 +25,15 @@ module AdminUsers
   private
 
     def admin_user
-      @admin_user ||= AdminUser.find_by(email:)
+      @admin_user ||= AdminUser.find_by(uid:)
     end
 
     def access_token
       request.env["omniauth.auth"]
     end
 
-    def email
-      access_token.info["email"]
+    def uid
+      access_token.uid
     end
   end
 end
