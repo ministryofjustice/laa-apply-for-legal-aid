@@ -1,5 +1,6 @@
 // Footers are usually used provide a summary of the table contents.
 // They are not part of the GOV.UK Design System so custom styles are required.
+@use "./imports" as *;
 
 .govuk-table__foot {
   border-top: 2px solid govuk-colour("black");

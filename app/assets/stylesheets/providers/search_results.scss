@@ -1,5 +1,6 @@
 // stylelint-disable selector-max-id
 @use "sass:color";
+@use "../imports" as *;
 
 %highlight {
   margin-right: 1px;

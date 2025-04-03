@@ -1,4 +1,5 @@
 // Recommended - Use these styles for the check your answers pattern
+@use "./imports" as *;
 
 .app-check-your-answers {
   border-top: 1px solid $govuk-border-colour;

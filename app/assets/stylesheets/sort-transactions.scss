@@ -1,4 +1,5 @@
 // stylelint-disable declaration-no-important
+@use "./imports" as *;
 
 .display-table {
   display: table
