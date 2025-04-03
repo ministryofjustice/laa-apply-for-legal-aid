@@ -7,7 +7,7 @@ module TaskStatus
       # if so then this task can be started.
       #
       status.cannot_start!
-      status.not_started! if section_statuses.all?(&:completed?)
+      status.not_started! if section_results.all?(&:completed?)
 
       # status.in_progress? if in_progress?
       status.completed! if completed?
@@ -31,7 +31,9 @@ module TaskStatus
       false
     end
 
-    def section_statuses
+    # TODO: this requires the instantiating and calling of the whole section's tasks and validators and is
+    # therefore not effecient. We should be able to reuse the already collected results.
+    def section_results
       [
         Applicants.new(application).call,
         ProceedingsTypes.new(application).call,

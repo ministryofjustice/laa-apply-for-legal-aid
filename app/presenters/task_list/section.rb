@@ -17,16 +17,6 @@ module TaskList
       end
     end
 
-    def items
-      @items ||= tasks.map do |name|
-        name = name.call(application) if name.respond_to?(:call)
-
-        Task::Base.build(application, name)
-      end
-    end
-
-  private
-
     def section_header
       tag.h2 class: "govuk-task-list__section" do
         if index
@@ -44,6 +34,14 @@ module TaskList
         safe_join(
           items.map(&:render),
         )
+      end
+    end
+
+    def items
+      @items ||= tasks.map do |name|
+        name = name.call(application) if name.respond_to?(:call)
+
+        Task::Base.build(application, name)
       end
     end
   end
