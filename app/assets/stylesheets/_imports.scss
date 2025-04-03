@@ -1,0 +1,9 @@
+@use "govuk-frontend/dist/govuk" as * with (
+  $govuk-new-organisation-colours: true,
+  $govuk-global-styles: true,
+  $govuk-new-typography-scale: true,
+  $govuk-assets-path: "/"
+);
+@forward "@ministryofjustice/frontend/moj/all" with (
+  $govuk-new-organisation-colours: true,
+);
