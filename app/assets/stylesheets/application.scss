@@ -1,46 +1,32 @@
-$govuk-global-styles: true;
-$govuk-new-link-styles: true;
-$govuk-new-typography-scale: true;
-$govuk-assets-path: "/";
-$govuk-new-organisation-colours: true;
-
-@import "govuk-frontend/dist/govuk/index";
-@import "@ministryofjustice/frontend/moj/settings/measurements";
-@import "@ministryofjustice/frontend/moj/objects/width-container";
-@import "@ministryofjustice/frontend/moj/components/sub-navigation/sub-navigation";
-@import "@ministryofjustice/frontend/moj/components/sortable-table/sortable-table";
-@import "@ministryofjustice/frontend/moj/components/primary-navigation/primary-navigation";
-@import "@ministryofjustice/frontend/moj/components/interruption-card/interruption-card";
-
 // Project specific
 
 // Everything below this comment should be project specific.
 // If you absolutely need to override gov.uk styles, don't,
 // instead create new classes or ids with a prefix based on the app name.
 
-@import "admin";
-@import "bank-selection";
-@import "check-your-answers";
-@import "govuk-mods";
-@import "helpers";
-@import "language-switcher";
-@import "layout";
-@import "long-email-truncation";
-@import "modal-dialogue";
-@import "dropzone";
-@import "no-wrap";
-@import "pagination";
-@import "print-styles";
-@import "submissions";
-@import "table-sort";
-@import "tables";
-@import "sort-transactions";
-@import "summary-card";
-@import "width-style-correction";
-@import "citizens/spinner";
-@import "providers/legal_aid_applications";
-@import "providers/search_results";
-@import "dropzone/src/dropzone";
-@import "dropzone/src/basic";
-@import "providers/summary_list_action_width";
-@import "primary_navigation";
+@forward "layout";
+@forward "admin";
+@forward "bank-selection";
+@forward "check-your-answers";
+@forward "govuk-mods";
+@forward "helpers";
+@forward "language-switcher";
+@forward "long-email-truncation";
+@forward "modal-dialogue";
+@forward "dropzone";
+@forward "no-wrap";
+@forward "pagination";
+@forward "print-styles";
+@forward "submissions";
+@forward "table-sort";
+@forward "tables";
+@forward "sort-transactions";
+@forward "summary-card";
+@forward "width-style-correction";
+@forward "citizens/spinner";
+@forward "providers/legal_aid_applications";
+@forward "providers/search_results";
+@forward "dropzone/src/dropzone";
+@forward "dropzone/src/basic";
+@forward "providers/summary_list_action_width";
+@forward "primary_navigation";
