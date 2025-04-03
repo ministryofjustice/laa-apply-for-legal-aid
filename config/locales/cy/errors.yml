@@ -36,6 +36,13 @@ cy:
         permission_text: uoy ot elbissecca yltnerruc ton si egap ehT
       internal_server_error:
         page_title: ecivres ruo htiw gnorw tnew gnihtemos ,yrroS
+      benefit_checker_down:
+        page_title: melborp a si ereht ,yrroS
+        text:
+          - .retal niaga yrT
+          - .srewsna ruoy devas eW
+          - .niaga gnikrow s’ti ecno noitacilppa siht eunitnoc nac uoY .gnidnopser ton si htiw tcennoc ot gniyrt er’ew ecivres ehT
+        link: snoitacilppa ruoy ot kcaB
   problem:
     index:
       title: ecivres eht htiw melborp a si ereht ,yrroS

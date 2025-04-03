@@ -40,6 +40,13 @@ en:
         permission_text: The page is not currently accessible to you
       internal_server_error:
         page_title: Sorry, something went wrong with our service
+      benefit_checker_down:
+        page_title: Sorry, there is a problem
+        text:
+          - Try again later.
+          - We saved your answers.
+          - The service we’re trying to connect with is not responding. You can continue this application once it’s working again.
+        link: Back to your applications
   problem:
     index:
       title: Sorry, there is a problem with the service
