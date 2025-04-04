@@ -1,4 +1,5 @@
 // stylelint-disable declaration-no-important
+@use "./imports" as *;
 
 .small-loading-image {
   height: 22px;

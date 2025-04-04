@@ -1,3 +1,5 @@
+@use "./imports" as *;
+
 .language-switcher {
   margin-top: govuk-spacing(3);
   margin-bottom: govuk-spacing(3);

@@ -1383,10 +1383,10 @@
   dependencies:
     buffer "^6.0.3"
 
-"@ministryofjustice/frontend@<4.0.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-3.7.0.tgz#fd694f79d06f1c5a2ba581c1f5c89506810aa4a6"
-  integrity sha512-o84Sqy+1jqc1vaxIZfyG4VwJzdpDUK88O9COJFVLcFmW+Np80onlFlGAVjDUxNHYvtBdJx40w1dayq53wmtxgQ==
+"@ministryofjustice/frontend@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-4.0.1.tgz#5e9ed308e208982179e26e7884173bce553eec87"
+  integrity sha512-LljgnzLtTIw9z8mw/pK1xLIyR3TtHrFa9Z/i7X+6odzN5MlQ0dYLDXunoAhniXeOlXz5sNbdsmGuf/iNxv0keA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -2036,10 +2036,22 @@ balanced-match@^2.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-2.0.0.tgz#dc70f920d78db8b858535795867bf48f820633d9"
   integrity sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==
 
+bare-env@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/bare-env/-/bare-env-3.0.0.tgz#d61bf1fd7d1b590120f936d429a6c062db761882"
+  integrity sha512-0u964P5ZLAxTi+lW4Kjp7YRJQ5gZr9ycYOtjLxsSrupgMz3sn5Z9n4SH/JIifHwvadsf1brA2JAjP+9IOWwTiw==
+  dependencies:
+    bare-os "^3.0.1"
+
 bare-events@^2.0.0, bare-events@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/bare-events/-/bare-events-2.3.1.tgz#5af2ee0be9578f81e3c1aa9bc3a6a2bcf22307ce"
   integrity sha512-sJnSOTVESURZ61XgEleqmP255T6zTYwHPwE4r6SssIh0U9/uDvfpdoJYpVUerJJZH2fueO+CdT8ZT+OC/7aZDA==
+
+bare-events@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/bare-events/-/bare-events-2.5.4.tgz#16143d435e1ed9eafd1ab85f12b89b3357a41745"
+  integrity sha512-+gFfDkR8pj4/TrWCGUGWmJIkBwuxPS5F+a5yWjOHQt2hHvNZd5YLzadjmDUtFmMM4y429bnKLa8bYBMHcYdnQA==
 
 bare-fs@^4.0.1:
   version "4.0.1"
@@ -2049,6 +2061,13 @@ bare-fs@^4.0.1:
     bare-events "^2.0.0"
     bare-path "^3.0.0"
     bare-stream "^2.0.0"
+
+bare-module-resolve@^1.6.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/bare-module-resolve/-/bare-module-resolve-1.10.2.tgz#c394a13ba1c9c06f7d59804fb62ab9550d3b0c0a"
+  integrity sha512-C9COe/GhWfVXKytW3DElTkiBU+Gb2OXeaVkdGdRB/lp26TVLESHkTGS876iceAGdvtPgohfp9nX8vXHGvN3++Q==
+  dependencies:
+    bare-semver "^1.0.0"
 
 bare-os@^3.0.1:
   version "3.4.0"
@@ -2062,12 +2081,163 @@ bare-path@^3.0.0:
   dependencies:
     bare-os "^3.0.1"
 
+bare-pipe@^4.0.0:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/bare-pipe/-/bare-pipe-4.0.5.tgz#7c0a139ae8e468031f214a6c315969f68bde9014"
+  integrity sha512-pGI5lPp0QMecENYm1KxAeM0pomByCB4ubUt2C78xaagH4et6Bc2OTzM0y3Bc91AT8ERIG4iNPmAKVjgaxYcwIQ==
+  dependencies:
+    bare-events "^2.0.0"
+    bare-stream "^2.0.0"
+
+bare-runtime-android-arm64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-android-arm64/-/bare-runtime-android-arm64-1.17.3.tgz#ec9b38893a02721557ed5b9c58a07a703cedb384"
+  integrity sha512-WzD+w9BcvPvwriAL848C45IN9/tngLx8cyErg71vnszYVz+OBsu/o/6Z2GKXGqR2dAboc4pe/e+9uvS9ksyb7Q==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-android-arm@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-android-arm/-/bare-runtime-android-arm-1.17.3.tgz#80976b9db6c9da527b81c80fe960b13e4aba5756"
+  integrity sha512-6RYBIYAHOuld+ZbgA9idv76TJRZ2v+MPHDxexIdBEyDgn6d4LuR8JG2LVb8SfH6GmI93Ofij2D2LfPf7OLSdqA==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-android-ia32@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-android-ia32/-/bare-runtime-android-ia32-1.17.3.tgz#1d14e884e055b0d6acffc34f0431d993ec74538e"
+  integrity sha512-+NjlHAvQuDCY5aYEpQYNZlMrULHU6sls6WctDpOWo/ATiMwp+e9IOPI2GILYwOJCiDG05PWQFx12uw6OucDX6w==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-android-x64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-android-x64/-/bare-runtime-android-x64-1.17.3.tgz#d020372171123101563c14fe756021e7ac997ab1"
+  integrity sha512-vtUkINGyFbjVfswR+KHBD+ZWkIN0RDH8bSZB0lf4f77Nn22REcfvhEZpvUeGtMIK+C6+2vkKpxodiXLePxSaEw==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-darwin-arm64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-darwin-arm64/-/bare-runtime-darwin-arm64-1.17.3.tgz#91ab175fd45634e76fcaa7b84676956583de3fd4"
+  integrity sha512-C4QGYGHTUtTNughs4BWto2J38B8uRwgYYpo4SJqsWy1OG0RYp9OSiN1YqpSVq3qHAwIEit8VfmWxbpg1TGUKTQ==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-darwin-x64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-darwin-x64/-/bare-runtime-darwin-x64-1.17.3.tgz#2f68e162519c1ba998c8368532230b227dcfbec6"
+  integrity sha512-rN6eXv4rJgwS68sM74uPXajtPDjn2oMO+AhlbE53vMetLOzxafsAGC/j9NxXj83nrlwHIYkiQ0gmAyLWPy72FQ==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-ios-arm64-simulator@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-ios-arm64-simulator/-/bare-runtime-ios-arm64-simulator-1.17.3.tgz#496d933210bf8d6c76df941cdbaf355e8e5bd5d9"
+  integrity sha512-yb0Co1dZWsHIZCawfdXDfrDV0WNuOWaZvuRwMy8uReArfEB+jPFRkauKTb3o1GVdZ83VGave6zGy8FMEI7nKpA==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-ios-arm64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-ios-arm64/-/bare-runtime-ios-arm64-1.17.3.tgz#db8f4c070f03854b07e19038059e08995b0727a4"
+  integrity sha512-QbKYM1Wvqg+jT9bD3SwVkZhilC4gXzTw5hfDtRksykXCaeQDJLyzVrrGhaR79HiJXs/DqdCeWQtf9/sr5WXmGA==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-ios-x64-simulator@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-ios-x64-simulator/-/bare-runtime-ios-x64-simulator-1.17.3.tgz#44321e52b7ca3f6e851b6442538d94c5f95a2bb9"
+  integrity sha512-wczBnAGSl1ZHxNi/CtZHsSRJUC9pvCkiKFIpHgL2HZj4CpK5OV9MgYf3VT+/OA/5ad3Kjx3ZsVjTY41BKcF25Q==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-linux-arm64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-linux-arm64/-/bare-runtime-linux-arm64-1.17.3.tgz#6f0d3d2cff9caca33bce58e3a4e0e0b0e78fc053"
+  integrity sha512-JNgu5kgszSPI1iQOzTV1oixrdNWYgJDSfGoAd1M+PUzpXLuQs52d+2IUkxUgLjrU0TNOmwyeVMnDlNEvrGUqHA==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-linux-x64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-linux-x64/-/bare-runtime-linux-x64-1.17.3.tgz#07ca68ee309b744d7e3de68dab3417923bc5d747"
+  integrity sha512-WDs4SAEPiOfxXbF8lA8CHDaRpnxIyQcAoqrdMAW+CC8kcrxUOD4cqYLt7wvJRX3oXD5h99B7L4iF1ZThYLXZjA==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-win32-arm64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-win32-arm64/-/bare-runtime-win32-arm64-1.17.3.tgz#984bfbb7150a18c2e65894734f6fcd9c65045a97"
+  integrity sha512-pu5LmtyzjMrbgS3bXzRIVLyZNXtOZFnca5P0ZX8nKepakYaZKNCro1TeVkSDpv9n56VG4e/mdqR6dy4zlOoBdw==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime-win32-x64@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime-win32-x64/-/bare-runtime-win32-x64-1.17.3.tgz#81c3a5e85b15c5cb5bff1bb3415d1bf63d4e81e0"
+  integrity sha512-a79TWAPZL2oG7DqWp8IzpYd8oCczEwLOSMEHkB7VaNNkxF5AzbdI1YtuNjKaiyeYS+VCSdRjJMiv7br/QkX72w==
+  dependencies:
+    require-asset "^1.0.2"
+
+bare-runtime@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare-runtime/-/bare-runtime-1.17.3.tgz#4ce78331b4b4a93ae350e972c4012ed728111ba2"
+  integrity sha512-oiE+rUr682zMEiMqeS6pegugCJo8A8NI3oinsxEk5PMk2LSZ58istHgnNDJeCiJ9g02GQ2ZyPLl04uO03xmESw==
+  dependencies:
+    bare-os "^3.0.1"
+    bare-path "^3.0.0"
+    bare-subprocess "^5.0.0"
+  optionalDependencies:
+    bare-runtime-android-arm "1.17.3"
+    bare-runtime-android-arm64 "1.17.3"
+    bare-runtime-android-ia32 "1.17.3"
+    bare-runtime-android-x64 "1.17.3"
+    bare-runtime-darwin-arm64 "1.17.3"
+    bare-runtime-darwin-x64 "1.17.3"
+    bare-runtime-ios-arm64 "1.17.3"
+    bare-runtime-ios-arm64-simulator "1.17.3"
+    bare-runtime-ios-x64-simulator "1.17.3"
+    bare-runtime-linux-arm64 "1.17.3"
+    bare-runtime-linux-x64 "1.17.3"
+    bare-runtime-win32-arm64 "1.17.3"
+    bare-runtime-win32-x64 "1.17.3"
+
+bare-semver@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/bare-semver/-/bare-semver-1.0.1.tgz#4737d660785f07cb723cefa6b022089e59120a61"
+  integrity sha512-UtggzHLiTrmFOC/ogQ+Hy7VfoKoIwrP1UFcYtTxoCUdLtsIErT8+SWtOC2DH/snT9h+xDrcBEPcwKei1mzemgg==
+
 bare-stream@^2.0.0:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/bare-stream/-/bare-stream-2.6.5.tgz#bba8e879674c4c27f7e27805df005c15d7a2ca07"
   integrity sha512-jSmxKJNJmHySi6hC42zlZnq00rga4jjxcgNZjY9N5WlOe/iOoGRtdwGsHzQv2RlH2KOYMwGUXhf2zXd32BA9RA==
   dependencies:
     streamx "^2.21.0"
+
+bare-subprocess@^5.0.0:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/bare-subprocess/-/bare-subprocess-5.0.3.tgz#899e9e4da62c0c13dbb4bdb517769e4ca4f771f8"
+  integrity sha512-iCx8kfvqClPAQGsbL2RfMubB6EYoZ67ZhaEIpn6wIqIa60p4zLAlGJyEQQtXPo/5dclbpgzWre5hvJ7HzXC/aA==
+  dependencies:
+    bare-env "^3.0.0"
+    bare-events "^2.5.4"
+    bare-os "^3.0.1"
+    bare-pipe "^4.0.0"
+
+bare-url@^2.1.0:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/bare-url/-/bare-url-2.1.5.tgz#ae9b68f3063a0a8a2f8b30f222f9d393c7af7334"
+  integrity sha512-lNImB5KLN+ggw+SYDYvqf/yCizXIyq8U/nWBlx7m4pc4TKS24SB/1WWskzGacon5cVVAC6qUzCYzI/aMYCf4Ng==
+  dependencies:
+    bare-path "^3.0.0"
+
+bare@^1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/bare/-/bare-1.17.3.tgz#208a8a90b30e549edca38501642f4499783c17f8"
+  integrity sha512-2O0DjLm5yDbL5h2r/s71xgNG8Fl0kjNXIylhjbuKQxH/emUw/w4TuhWygLutGDXz/V+DJt+pORbOOzdZ7UX0+Q==
+  dependencies:
+    bare-runtime "1.17.3"
 
 base64-js@^1.3.1:
   version "1.5.1"
@@ -4585,6 +4755,11 @@ mitt@^3.0.1:
   resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.1.tgz#ea36cf0cc30403601ae074c8f77b7092cdab36d1"
   integrity sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==
 
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
+
 ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
@@ -5195,6 +5370,14 @@ regjsparser@^0.9.1:
   integrity sha512-dQUtn90WanSNl+7mQKcXAgZxvUe7Z0SqXlgzv0za4LwiUhyzBC58yQO3liFoUgu8GiJVInAhJjkj1N0EtQ5nkQ==
   dependencies:
     jsesc "~0.5.0"
+
+require-asset@^1.0.2:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/require-asset/-/require-asset-1.1.0.tgz#cf320497fd0baa8452778100dda42771e7ef25ee"
+  integrity sha512-X4MXkttYxIEAWr74QsHnGAhUStqCmKPi86OMzh9fnGyPPjduD8qSHEw5N2iApFrs82DBuQ+yesDxajDl/yxT3Q==
+  dependencies:
+    bare-module-resolve "^1.6.2"
+    bare-url "^2.1.0"
 
 require-directory@^2.1.1:
   version "2.1.1"
