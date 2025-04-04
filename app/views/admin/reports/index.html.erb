@@ -26,7 +26,9 @@
                   report[:report_link].present? ? govuk_link_to(report[:report_link][:text], report[:report_link][:href], class: report[:report_link][:class], rel: report[:report_link][:rel], target: report[:report_link][:target]) : ""
                 end
                 row.with_cell do
-                  govuk_link_to(report[:path_text], __send__(report[:path], format: :csv))
+                  govuk_link_to(__send__(report[:path], format: :csv)) do
+                    report[:path_text]
+                  end
                 end
               end
             end
