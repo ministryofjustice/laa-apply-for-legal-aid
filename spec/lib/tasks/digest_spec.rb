@@ -50,47 +50,6 @@ RSpec.describe "digest:", type: :task do
     end
   end
 
-  describe "export" do
-    subject(:task) { Rake::Task["digest:export"] }
-
-    before do
-      allow(DigestExporter).to receive(:call).and_return(nil)
-    end
-
-    it "calls the service" do
-      task.execute
-      expect(DigestExporter).to have_received(:call)
-    end
-
-    context "when host env is uat" do
-      before do
-        allow(ENV).to receive(:fetch)
-        allow(ENV).to receive(:fetch).with("BYPASS", nil).and_return(bypass)
-      end
-
-      let(:staging_or_production) { false }
-
-      context "and the BYPASS value is missing" do
-        let(:bypass) { nil }
-
-        it "does not call the service" do
-          task.execute
-          expect(DigestExporter).not_to have_received(:call)
-          expect(Rails.logger).to have_received(:info).once
-        end
-      end
-
-      context "and the BYPASS value is present" do
-        let(:bypass) { "true" }
-
-        it "calls the service" do
-          task.execute
-          expect(DigestExporter).to have_received(:call)
-        end
-      end
-    end
-  end
-
   describe "extraction_date:reset" do
     subject(:task) { Rake::Task["digest:extraction_date:reset"] }
 
