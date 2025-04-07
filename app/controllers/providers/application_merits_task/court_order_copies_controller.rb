@@ -18,7 +18,7 @@ module Providers
 
         if @form.valid?
           @form.save!
-          return go_forward(@form.copy_of_court_order?)
+          go_forward(@form.copy_of_court_order?)
         else
           render :show
         end
