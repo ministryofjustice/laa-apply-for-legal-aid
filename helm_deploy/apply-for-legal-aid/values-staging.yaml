@@ -22,7 +22,7 @@ service:
 ## rule triggered once on the SoC page so this has been implemented and will be monitored
 ingress:
   enabled: true
-  className: modsec-non-prod
+  className: modsec
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "apply-for-legal-aid-laa-apply-for-legalaid-staging-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
