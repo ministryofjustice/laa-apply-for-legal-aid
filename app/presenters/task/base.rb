@@ -75,8 +75,10 @@ module Task
     end
 
     def status_tag
-      tag.div id: tag_id, class: status_tag_classes do
-        t!("task_list.status.#{status.value}")
+      tag.div id: tag_id, class: "govuk-task-list__status" do
+        tag.div class: status_tag_classes do
+          t!("task_list.status.#{status.value}")
+        end
       end
     end
 
