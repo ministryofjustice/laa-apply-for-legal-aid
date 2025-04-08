@@ -15,6 +15,15 @@ module TaskList
           "proceedings_types", # Steps::ProviderStart::ProceedingsTypesStep,
           "has_national_insurance_numbers", # Steps::ProviderStart::HasNationalInsuranceNumbersStep
           "check_provider_answers", # Steps::ProviderStart::CheckProviderAnswersStep
+          "check_benefits", # Steps::ProviderStart::CheckBenefitsStep
+          # ^^ THIS SECTION IS CONDITIONAL. it should perhaps not exist as depending on answers to previous
+          # questions it would be different AND if answers change (*such as age) it would need to change the forward path
+          # and even remove/soft-delete/discard existing data (e.g. means test answers).
+          # [
+          #   "check_benefits", # Steps::ProviderStart::CheckBenefitsStep
+          #   "confirm_non_means_tested_application", # Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep
+          #   "no_national_insurance_numbers", # Steps::ProviderStart::NoNationalInsuranceNumbersStep
+          # ],
         ],
       ],
     ].freeze

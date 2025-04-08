@@ -50,6 +50,22 @@ class EditableApplicationStateMachine < BaseStateMachine
     false
   end
 
+  def applicant_details_checked?
+    false
+  end
+
+  def applicant_details_checked!(_self)
+    false
+  end
+
+  def provider_entering_means?
+    false
+  end
+
+  def provider_enter_means!
+    false
+  end
+
   def provider_assessing_means?
     false
   end
@@ -73,6 +89,14 @@ class EditableApplicationStateMachine < BaseStateMachine
 
   # will probably need handling
   def await_applicant!
+    false
+  end
+
+  def overriding_dwp_result?
+    false
+  end
+
+  def override_dwp_result!(_self)
     false
   end
 end
