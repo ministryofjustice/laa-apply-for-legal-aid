@@ -24,6 +24,6 @@ RSpec.describe Flow::Steps::ProviderMerits::ChildCareAssessmentResultStep, type:
   describe "#check_answers" do
     subject { described_class.check_answers }
 
-    it { is_expected.to eq :check_merits_answers }
+    it { is_expected.to eq :uploaded_evidence_collections }
   end
 end
