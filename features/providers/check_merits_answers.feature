@@ -123,6 +123,7 @@ Feature: Check merits answers
   @javascript
   Scenario: On a PLF application where a proceeding has child care assessment merits task list item
     Given I complete the journey as far as check merits answers with a PLF proceeding child care assessment question
+    And csrf is enabled
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the following sections should exist:
       | tag | section |
@@ -153,7 +154,6 @@ Feature: Check merits answers
     Then I should be on a page with title 'Upload supporting evidence'
 
     When I upload an evidence file named 'hello_world.pdf'
-    And I sleep for 2 seconds
     Then I should see 'hello_world.pdf'
     And I select a category of "Assessment" for the file "hello_world.pdf"
 
