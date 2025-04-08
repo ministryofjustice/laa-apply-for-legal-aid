@@ -4,7 +4,7 @@ namespace :ccms_submissions do
     ScheduledCCMSSubmissionsToggleJob.perform_later(:turn_off)
   end
 
-  desc "Turn off ccms submissions"
+  desc "Turn on ccms submissions"
   task turn_on: :environment do
     ScheduledCCMSSubmissionsToggleJob.perform_later(:turn_on)
   end
