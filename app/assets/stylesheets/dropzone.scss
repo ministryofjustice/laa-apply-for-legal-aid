@@ -1,4 +1,5 @@
 // stylelint-disable declaration-no-important, selector-max-id
+@use "./imports" as *;
 
 .dropzone {
   display: flex;
