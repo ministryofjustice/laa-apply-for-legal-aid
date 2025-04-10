@@ -7,7 +7,6 @@ module Providers
       let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
-      let(:i18n_error_path) { "activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file" }
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
 
       describe "GET /providers/applications/:legal_aid_application_id/statement_of_case" do
@@ -219,7 +218,7 @@ module Providers
 
             it "returns error message" do
               patch_request
-              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+              error = "#{original_file.original_filename} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
               expect(response.body).to include(error)
             end
           end
@@ -261,7 +260,7 @@ module Providers
 
             it "returns error message" do
               patch_request
-              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+              error = "#{original_file.original_filename} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
               expect(response.body).to include(error)
             end
 
@@ -275,8 +274,7 @@ module Providers
 
               it "returns error message" do
                 patch_request
-                error = I18n.t("#{i18n_error_path}.blank")
-                expect(response.body).to include(error)
+                expect(response.body).to include("Attach a file or enter text")
               end
             end
           end
@@ -293,8 +291,7 @@ module Providers
 
             it "returns error message" do
               patch_request
-              error = I18n.t("#{i18n_error_path}.system_down")
-              expect(response.body).to include(error)
+              expect(response.body).to include("There was a problem uploading your file - try again")
             end
           end
         end
@@ -311,7 +308,7 @@ module Providers
               it "fails" do
                 patch_request
                 expect(response.body).to include("There is a problem")
-                expect(response.body).to include(I18n.t("#{i18n_error_path}.blank"))
+                expect(response.body).to include("Attach a file or enter text")
               end
             end
 
@@ -344,7 +341,7 @@ module Providers
 
               it "does not save the object and raise an error" do
                 patch_request
-                error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+                error = "#{original_file.original_filename} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
               end
@@ -359,18 +356,21 @@ module Providers
 
               it "does not save the object and raise an error" do
                 patch_request
-                error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+                error = "#{original_file.original_filename} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
               end
             end
 
             context "when file is too big" do
-              before { allow(StatementOfCases::StatementOfCaseForm).to receive(:max_file_size).and_return(0) }
+              before do
+                allow(StatementOfCases::StatementOfCaseForm)
+                  .to receive(:max_file_size).and_return(0.megabytes)
+              end
 
               it "does not save the object and raise an error" do
                 patch_request
-                error = I18n.t("#{i18n_error_path}.file_too_big", size: 0, file_name: original_file.original_filename)
+                error = "#{original_file.original_filename} must be smaller than 0MB"
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
               end
@@ -381,7 +381,7 @@ module Providers
 
               it "does not save the object and raise an error" do
                 patch_request
-                error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
+                error = "#{original_file.original_filename} has no content"
                 expect(response.body).to include(error)
                 expect(statement_of_case).to be_nil
               end
@@ -396,7 +396,7 @@ module Providers
                 expect(response).to have_http_status(:ok)
               end
 
-              it "displays error" do
+              it "displays error link on statement text field" do
                 patch_request
                 expect(response.body).to match 'id="application-merits-task-statement-of-case-original-file-error"'
               end
@@ -406,7 +406,7 @@ module Providers
 
                 it "does not save the object and raise an error" do
                   patch_request
-                  error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
+                  error = "#{original_file.original_filename} contains a virus"
                   expect(response.body).to include(error)
                   expect(statement_of_case).to be_nil
                 end
