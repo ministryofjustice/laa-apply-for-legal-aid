@@ -152,5 +152,3 @@ maintenance_mode:
 
 collect_hmrc_data:
   enabled: "false"
-
-env: uat
