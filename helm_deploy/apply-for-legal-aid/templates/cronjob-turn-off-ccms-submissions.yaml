@@ -1,3 +1,4 @@
+{{- if eq .Values.env "uat" }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -44,3 +45,4 @@ spec:
               capabilities:
                 drop: [ "ALL" ]
           restartPolicy: Never
+{{- end }}
