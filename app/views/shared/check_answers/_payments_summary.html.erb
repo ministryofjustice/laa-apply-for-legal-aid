@@ -1,5 +1,16 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
+<% individual = partner ? "Partner" : "Applicant" %>
+<% if credit
+     payment_type = t(".credits_section_heading.#{individual.downcase}")
+     transaction_types = @credit_transaction_types
+     url = @legal_aid_application.client_uploading_bank_statements? ? providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application)
+   else
+     payment_type = t(".debits_section_heading.#{individual.downcase}")
+     transaction_types = @debit_transaction_types
+     url = @legal_aid_application.client_uploading_bank_statements? ? providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_outgoings_path(@legal_aid_application)
+   end %>
+
 <%= govuk_summary_card(title: payment_type, heading_level: 3, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: '_')}" }) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}") } %>
