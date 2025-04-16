@@ -1,12 +1,14 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<% url = if partner
-           providers_legal_aid_application_partners_bank_statements_path(@legal_aid_application)
-         else
-           providers_legal_aid_application_bank_statements_path(@legal_aid_application)
-         end %>
-
-<% individual = partner ? "Partner" : "Client" %>
+<% if partner
+     individual = "Partner"
+     url = providers_legal_aid_application_partners_bank_statements_path(@legal_aid_application)
+     bank_statements = @legal_aid_application.attachments.part_bank_state_evidence
+   else
+     individual = "Client"
+     url = providers_legal_aid_application_bank_statements_path(@legal_aid_application)
+     bank_statements = @legal_aid_application.attachments.bank_statement_evidence
+   end %>
 
 <%= govuk_summary_card(title: t(".section_heading"),
                        heading_level: 3,
@@ -19,7 +21,7 @@
         summary_list.with_row do |row|
           row.with_key(text: t(".bank_statement_question"), classes: "govuk-!-width-one-third")
           row.with_value do
-            govuk_list(attachments_with_size(@legal_aid_application.attachments.bank_statement_evidence))
+            govuk_list(attachments_with_size(bank_statements))
           end
         end
       end

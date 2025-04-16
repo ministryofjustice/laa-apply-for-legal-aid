@@ -57,11 +57,7 @@
     <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: true) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 
     <% if @legal_aid_application.housing_payments? %>
-      <%= render(
-            "shared/check_answers/housing_benefit",
-            read_only: true,
-            partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
-          ) %>
+      <%= render("shared/check_answers/housing_benefit", read_only: true, partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?) %>
     <% end %>
 
     <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>

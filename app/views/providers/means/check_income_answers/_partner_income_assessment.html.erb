@@ -3,29 +3,29 @@
 <section class="partner">
   <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
-  <%= render("shared/check_answers/bank_statements", partner: true) %>
+  <%= render("shared/check_answers/bank_statements", partner: true, read_only:) %>
 
   <% if @legal_aid_application.partner.hmrc_employment_income? %>
     <% if @legal_aid_application.partner.has_multiple_employments? %>
-      <%= render("shared/check_answers/full_employment_details", partner: true) %>
+      <%= render("shared/check_answers/full_employment_details", partner: true, read_only:) %>
     <% else %>
-      <%= render("shared/check_answers/employed_income", partner: true) %>
+      <%= render("shared/check_answers/employed_income", partner: true, read_only:) %>
     <% end %>
   <% elsif @legal_aid_application.partner.employed? %>
-    <%= render("shared/check_answers/full_employment_details", partner: true) %>
+    <%= render("shared/check_answers/full_employment_details", partner: true, read_only:) %>
   <% end %>
 
-  <%= render("shared/check_answers/benefits_income", partner: true) %>
+  <%= render("shared/check_answers/benefits_income", partner: true, read_only:) %>
 
-  <%= render("shared/check_answers/payments_summary", partner: true, credit: true) %>
+  <%= render("shared/check_answers/payments_summary", partner: true, credit: true, read_only:) %>
 
-  <%= render("shared/check_answers/cash_payments", partner: true, type: :income) %>
+  <%= render("shared/check_answers/cash_payments", partner: true, type: :income, read_only:) %>
 
-  <%= render("shared/check_answers/student_finance", partner: true) %>
+  <%= render("shared/check_answers/student_finance", partner: true, read_only:) %>
 
   <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
 
-  <%= render("shared/check_answers/payments_summary", partner: true, credit: false) %>
+  <%= render("shared/check_answers/payments_summary", partner: true, credit: false, read_only:) %>
 
-  <%= render("shared/check_answers/cash_payments", partner: true, type: :outgoings) %>
+  <%= render("shared/check_answers/cash_payments", partner: true, type: :outgoings, read_only:) %>
 </section>

@@ -17,7 +17,7 @@ Feature: Review and print your application
 
       | h2  | Cases linked to this one |
       | h3  | Linking |
-      
+
       | h2  | What you're applying for |
       | h3  | Extend, variation or discharge - Part IV |
       | h3  | Variation or discharge under section 5 protection from harassment act 1997 |
@@ -47,7 +47,7 @@ Feature: Review and print your application
       | h2  | The partner's outgoings |
       | h3  | Payments the partner pays |
       | h3  | Payments the partner pays in cash|
-      
+
       | h2  | Housing benefit |
       | h3  | Housing benefit details |
 
@@ -65,7 +65,7 @@ Feature: Review and print your application
       | h2  | Bank accounts |
       | h3  | Your client's accounts |
       | h3  | The partner's accounts |
-      
+
       | h2  | Savings and assets |
       | h3  | Your client or their partner's savings or investments |
       | h3  | Your client or their partner's assets |
@@ -87,7 +87,7 @@ Feature: Review and print your application
 
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h3  | Chances of success |
-      
+
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -114,7 +114,7 @@ Feature: Review and print your application
 
       | h2  | Cases linked to this one |
       | h3  | Linking |
-      
+
       | h2  | What you're applying for |
       | h3  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h3  | Extend, variation or discharge - Part IV |
@@ -157,7 +157,7 @@ Feature: Review and print your application
       | h3  | Money in bank accounts |
       | h3  | The partner's accounts |
       | h3  | Your client's offline accounts |
-      
+
       | h2  | Savings and assets |
       | h3  | Your client or their partner's savings or investments |
       | h3  | Your client or their partner's assets |
@@ -179,7 +179,7 @@ Feature: Review and print your application
 
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h3  | Chances of success |
-      
+
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -202,7 +202,7 @@ Feature: Review and print your application
 
       | h2  | Cases linked to this one |
       | h3  | Linking |
-      
+
       | h2  | What you're applying for |
       | h3  | Extend, variation or discharge - Part IV |
       | h3  | Variation or discharge under section 5 protection from harassment act 1997 |
@@ -241,7 +241,7 @@ Feature: Review and print your application
 
       | h2  | Variation or discharge under section 5 protection from harassment act 1997 |
       | h3  | Chances of success |
-      
+
       | h2  | Print your application |
 
     Then the following sections should not exist:
@@ -251,11 +251,11 @@ Feature: Review and print your application
       | h3  | Payments your client gets |
       | h3  | Payments your client gets in cash |
       | h3  | Student finance |
-      
+
       | h2  | Your client's outgoings |
       | h3  | Payments your client pays |
       | h3  | Payments your client pays in cash|
-      
+
       | h2  | Housing Benefit |
       | h3  | Housing benefit details |
 
