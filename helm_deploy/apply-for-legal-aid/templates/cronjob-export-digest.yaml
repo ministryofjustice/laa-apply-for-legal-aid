@@ -12,6 +12,7 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   schedule: '15 {{ $startHour }} * * *'
+  timeZone: "Europe/London"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
