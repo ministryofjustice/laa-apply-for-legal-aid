@@ -1,3 +1,5 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+
 <% if partner
      individual = "Partner"
      individual_with_determiner = t("generic.partner")

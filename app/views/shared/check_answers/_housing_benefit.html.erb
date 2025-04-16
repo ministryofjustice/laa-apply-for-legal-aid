@@ -2,7 +2,7 @@
 
 <% with_partner = partner ? "client_with_partner" : "client_only" %>
 
-<h3 class="govuk-heading-l"><%= t(".heading") %></h3>
+<h2 class="govuk-heading-l"><%= t(".heading") %></h2>
 <%= govuk_summary_card(
       title: t(".card_title"),
       html_attributes: { id: "app-check-your-answers__housing_benefit", "data-check-your-answers-section": t(".heading").parameterize },
