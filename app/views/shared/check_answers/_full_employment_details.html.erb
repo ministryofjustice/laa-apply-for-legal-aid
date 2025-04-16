@@ -10,14 +10,16 @@
      content = @legal_aid_application.full_employment_details
    end %>
 
-<%= govuk_summary_card(title: t(".employment"), heading_level: 3) do |card| %>
-    <% unless read_only %>
-      <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{individual_with_determiner}'s #{t('.employment')}") } %>
-    <% end %>
-    <%= card.with_summary_list(html_attributes: { id: "app-check-your-answers__full_employment_details" }) do |summary_list| %>
-    <%= summary_list.with_row do |row| %>
-      <%= row.with_key(text: t(".details", individual_with_determiner:).upcase_first, classes: "govuk-!-width-one-third") %>
-      <%= row.with_value { content.presence || "-" } %>
-    <% end %>
-  <% end %>
+<% if content %>
+  <%= govuk_summary_card(title: t(".employment"), heading_level: 3) do |card|
+        unless read_only
+          card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{individual_with_determiner}'s #{t('.employment')}") }
+        end
+        card.with_summary_list(html_attributes: { id: "app-check-your-answers__full_employment_details" }) do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key(text: t(".details", individual_with_determiner:).upcase_first, classes: "govuk-!-width-one-third")
+            row.with_value { content }
+          end
+        end
+      end %>
 <% end %>
