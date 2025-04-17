@@ -1,3 +1,5 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+
 <% if partner
      individual_with_determiner = t("generic.partner")
      url = providers_legal_aid_application_partners_full_employment_details_path(@legal_aid_application)

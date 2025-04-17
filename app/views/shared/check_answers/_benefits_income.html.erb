@@ -1,12 +1,16 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<% unless read_only
-     url = if individual.receives_state_benefits?
-             state_benefit_partial_url(:add_benefits, version, @legal_aid_application)
-           else
-             state_benefit_partial_url(:receive_benefits, version, @legal_aid_application)
-           end
+<% if partner
+     individual = @legal_aid_application.partner
+     transactions_for = "partner"
+     version = "partners"
+   else
+     individual = @legal_aid_application.applicant
+     transactions_for = "applicant"
+     version = "means"
    end %>
+
+<% url = individual.receives_state_benefits? ? state_benefit_partial_url(:add_benefits, version, @legal_aid_application) : state_benefit_partial_url(:receive_benefits, version, @legal_aid_application) unless read_only %>
 
 <%= govuk_summary_card(title: t(".#{transactions_for}.heading"), heading_level: 3, html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_question" }) do |card| %>
   <% unless read_only %>
@@ -20,7 +24,7 @@
   <% end %>
 <% end %>
 
-<% state_benefits.each_with_index do |state_benefit, index| %>
+<% individual.state_benefits.each_with_index do |state_benefit, index| %>
 
   <%= govuk_summary_card(title: t(".benefit_heading", index: index + 1), heading_level: 3, html_attributes: { id: "app-check-your-answers__#{transactions_for}__state_benefits_#{index + 1}" }) do |card| %>
     <%= unless read_only
