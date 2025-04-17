@@ -121,6 +121,26 @@ module Providers
             expect(response).to redirect_to submitted_providers_legal_aid_applications_path
           end
         end
+
+        context "when checking merits answers" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_prohibited_steps_order, :checking_merits_answers) }
+
+          context "when the user chooses yes" do
+            let(:params) { { legal_aid_application: { plf_court_order: true } } }
+
+            it "redirects to the upload supporting evidence page" do
+              expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path)
+            end
+          end
+
+          context "when the user chooses no" do
+            let(:params) { { legal_aid_application: { plf_court_order: false } } }
+
+            it "redirects to the check merits answers page" do
+              expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path)
+            end
+          end
+        end
       end
     end
   end

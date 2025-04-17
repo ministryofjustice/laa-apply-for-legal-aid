@@ -153,6 +153,10 @@ Feature: Public law family merits appeal question flow
 
     When I fill "proceeding-merits-task-child-care-assessment-details-field-error" with "I will challenge the negative assessment by..."
     And I click "Save and continue"
+    Then I should be on a page with title 'Upload supporting evidence'
+    Then I should see 'hello_world.pdf'
+
+    When I click "Save and continue"
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the govuk-summary-card titled "Assessment of your client" should contain:
       | question | answer |
