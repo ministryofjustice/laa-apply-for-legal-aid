@@ -8,6 +8,7 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
   let(:pension) { create(:transaction_type, :pension) }
   let(:bank_provider) { create(:bank_provider, applicant:) }
   let(:bank_account) { create(:bank_account, bank_provider:) }
+  let(:provider_received_citizen_consent) { true }
 
   let(:legal_aid_application) do
     create(:legal_aid_application,
@@ -16,6 +17,7 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
            :checking_means_income,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
+           provider_received_citizen_consent:,
            df_options: { DA001: Date.current },
            applicant:,
            provider:)
@@ -50,8 +52,11 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
     end
 
     context "when the provider is authenticated" do
+      let(:regular_transaction) { nil }
+
       before do
         login_as provider
+        regular_transaction
         request
       end
 
@@ -63,10 +68,60 @@ RSpec.describe Providers::Means::CheckIncomeAnswersController do
         expect(legal_aid_application.reload).to be_checking_means_income
       end
 
-      it "displays the bank transaction data" do
-        total_amount = bank_transactions.sum(&:amount)
-        expect(total_amount).not_to be_zero
-        expect(response.body).to include(ActiveSupport::NumberHelper.gds_number_to_currency(total_amount))
+      context "when the client does truelayer journey" do
+        it "displays the bank transaction data" do
+          total_amount = bank_transactions.sum(&:amount)
+          expect(total_amount).not_to be_zero
+          expect(response.body).to include(ActiveSupport::NumberHelper.gds_number_to_currency(total_amount))
+        end
+      end
+
+      context "when the client is uploading bank statements" do
+        let(:provider_received_citizen_consent) { false }
+
+        context "and has no incoming regular payments" do
+          it "doesn't display the cash payments summary card" do
+            expect(response.body).not_to include("Payments your client gets in cash")
+          end
+
+          it "shows only one line within 'Payments your client gets' summary card" do
+            expect(response.body).to include("Payments received by your client")
+          end
+        end
+
+        context "and has incoming regular payments" do
+          let(:regular_transaction) { create(:regular_transaction, :friends_or_family, legal_aid_application:, owner_type: "Applicant") }
+
+          it "displays the cash payments summary card" do
+            expect(response.body).to include("Payments your client gets in cash")
+          end
+
+          it "shows only one line within 'Payments your client gets' summary card" do
+            expect(response.body).to include("Financial help from friends or family")
+          end
+        end
+
+        context "and has no outgoing regular payments" do
+          it "doesn't display the cash payments summary card" do
+            expect(response.body).not_to include("Payments your client pays in cash")
+          end
+
+          it "shows only one line within 'Payments your client pays' summary card" do
+            expect(response.body).to include("Payments paid by your client")
+          end
+        end
+
+        context "and has outgoing regular payments" do
+          let(:regular_transaction) { create(:regular_transaction, :maintenance_out, legal_aid_application:, owner_type: "Applicant") }
+
+          it "displays the cash payments summary card" do
+            expect(response.body).to include("Payments your client pays in cash")
+          end
+
+          it "shows only one line within 'Payments your client pays' summary card" do
+            expect(response.body).to include("Maintenance payments to a former partner")
+          end
+        end
       end
     end
   end
