@@ -117,9 +117,6 @@ admin:
 google_tag_manager:
   trackingId: "GTM-WJPHDBF"
 
-googleSheets:
-  cfe_comparison_sheet_id: "1lIctvlc6Ccsq89OUxjdol_GPBxB1xBNJS4khAh9rnR4"
-
 checkFinancialEligibility:
   # this is routed using internal K8s addresses as it is only referred to in service calls
   civil_host: "http://cfe-civil.cfe-civil-production.svc.cluster.local"
