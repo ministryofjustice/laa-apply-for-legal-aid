@@ -32,7 +32,7 @@ executors:
         environment:
           RAILS_ENV: test
           NODE_OPTIONS: --openssl-legacy-provider
-      - image: cimg/postgres:14.10
+      - image: cimg/postgres:17.4
       - image: cimg/redis:6.2
       - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-5cd6693
 
