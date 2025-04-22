@@ -20,8 +20,18 @@ RSpec.describe Flow::Steps::ProviderMerits::CourtOrderCopiesStep, type: :request
   end
 
   describe "#check_answers" do
-    subject { described_class.check_answers }
+    subject { described_class.check_answers.call(legal_aid_application, copy_of_court_order) }
 
-    it { is_expected.to eq :check_merits_answers }
+    context "when `copy_of_court_order` is `true`" do
+      let(:copy_of_court_order) { true }
+
+      it { is_expected.to eq(:uploaded_evidence_collections) }
+    end
+
+    context "when `copy_of_court_order` is `false`" do
+      let(:copy_of_court_order) { false }
+
+      it { is_expected.to eq :check_merits_answers }
+    end
   end
 end

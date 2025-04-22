@@ -10,7 +10,7 @@ module Flow
           proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
           Flow::MeritsLoop.forward_flow(application, proceeding.ccms_code.to_sym)
         end,
-        check_answers: :check_merits_answers,
+        check_answers: :uploaded_evidence_collections,
       )
     end
   end

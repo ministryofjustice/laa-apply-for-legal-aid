@@ -123,6 +123,7 @@ Feature: Check merits answers
   @javascript
   Scenario: On a PLF application where a proceeding has child care assessment merits task list item
     Given I complete the journey as far as check merits answers with a PLF proceeding child care assessment question
+    And csrf is enabled
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the following sections should exist:
       | tag | section |
@@ -150,6 +151,13 @@ Feature: Check merits answers
 
     When I choose "Positive"
     And I click "Save and continue"
+    Then I should be on a page with title 'Upload supporting evidence'
+
+    When I upload an evidence file named 'hello_world.pdf'
+    Then I should see 'hello_world.pdf'
+    And I select a category of "Assessment" for the file "hello_world.pdf"
+
+    When I click "Save and continue"
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the govuk-summary-card titled "Assessment of your client" should contain:
       | question | answer |
@@ -171,6 +179,10 @@ Feature: Check merits answers
     And I should see "How will the negative assessment be challenged?"
     And I fill "proceeding-merits-task-child-care-assessment-details-field" with "I will challenge the negative assessment by..."
     And I click "Save and continue"
+    Then I should be on a page with title 'Upload supporting evidence'
+    Then I should see 'hello_world.pdf'
+
+    When I click "Save and continue"
     Then I should be on the 'check_merits_answers' page showing 'Check your answers'
     And the govuk-summary-card titled "Assessment of your client" should contain:
       | question | answer |
