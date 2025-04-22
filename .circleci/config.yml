@@ -193,13 +193,8 @@ jobs:
     - run:
         name: Run ruby tests
         command: |
-          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
-          echo "${TESTFILES}"
-          bundle exec rspec --format progress \
-          --format RspecJunitFormatter \
-          -o /tmp/test-results/rspec/rspec.xml \
-          -- ${TESTFILES}
-
+          circleci tests glob "spec/**/*_spec.rb" | \
+          circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml" --verbose --split-by=timings --timings-type=filename
     - store_test_results:
         path: /tmp/test-results/rspec
 
@@ -207,7 +202,8 @@ jobs:
         name: Stash Coverage Results
         command: |
           mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json
+          # suppress error if no file exists (can occur if running only failed tests)
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json 2>/dev/null || :
     - persist_to_workspace:
         root: .
         paths:
@@ -231,9 +227,8 @@ jobs:
     - run:
         name: Run integration tests
         command: |
-          TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
-          echo "${TESTFILES}"
-          bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
+          circleci tests glob "features/**/*.feature" | \
+          circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty" --verbose --split-by=timings
     - store_artifacts:
         path: tmp/capybara
     - store_test_results:
@@ -242,7 +237,8 @@ jobs:
         name: Stash Coverage Results
         command: |
           mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json
+          # suppress error if no file exists (can occur if running only failed tests)
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json 2>/dev/null || :
     - persist_to_workspace:
         root: .
         paths:
