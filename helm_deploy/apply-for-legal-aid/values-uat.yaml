@@ -10,7 +10,7 @@ service:
 
 ingress:
   enabled: true
-  className: default
+  className: default-non-prod
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: '100'
   path: /
