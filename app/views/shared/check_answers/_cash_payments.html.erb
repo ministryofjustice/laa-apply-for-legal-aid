@@ -42,12 +42,6 @@
       <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t(".#{type}_heading", individual_with_determiner:)}") } %>
     <% end %>
     <% card.with_summary_list(html_attributes: { "data-check-your-answers-section": t(".#{type}_heading", individual_with_determiner:).parameterize }) do |summary_list| %>
-      <% if cash_transaction_types.nil? %>
-        <%= summary_list.with_row do |row| %>
-          <%= row.with_value { t("generic.none") } %>
-          <%= row.with_key(text: t(".#{type}_heading_none", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
-        <% end %>
-      <% end %>
       <% cash_transaction_types.each do |category| %>
         <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{category.label_name.parameterize}-cash-#{type}-#{individual.downcase}" }) do |row| %>
           <%= row.with_key(text: category.label_name, classes: "govuk-!-width-one-third") %>
