@@ -569,9 +569,11 @@ en:
         credits_section_heading:
           applicant: Payments your client gets
           partner: Payments the partner gets
+          none: Payments received by %{individual_with_determiner}
         debits_section_heading:
           applicant: Payments your client pays
           partner: Payments the partner pays
+          none: Payments paid by %{individual_with_determiner}
       student_finance:
         heading: Student finance
         question: "%{individual} gets student finance?"
