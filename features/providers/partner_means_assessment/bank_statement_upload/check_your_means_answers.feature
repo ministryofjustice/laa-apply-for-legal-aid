@@ -39,10 +39,7 @@ Feature: Bank statement upload check your answers
 
     And the "Payments the partner gets" section's questions and answers should match:
       | question | answer |
-      | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | None |
-      | Income from a property or lodger | None |
-      | Pension | None |
+      | Payments received by the partner | None |
 
     And the "Payments the partner pays" section's questions and answers should match:
       | question | answer |
@@ -152,16 +149,16 @@ Feature: Bank statement upload check your answers
       | h3  | Bank statements |
       | h2  | The partner's income |
       | h3  | Payments the partner gets |
-      | h3  | Payments the partner gets in cash |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
       | h3  | Payments the partner pays |
-      | h3  | Payments the partner pays in cash |
       | h2  | Dependants |
 
     And the following sections should not exist:
       | tag | section |
       | h2  | The partner's capital |
+      | h3  | Payments the partner gets in cash |
+      | h3  | Payments the partner pays in cash |
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Which bank accounts does the partner have? |

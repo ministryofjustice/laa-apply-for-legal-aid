@@ -41,7 +41,7 @@ Feature: Bank statement upload check your answers
     And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | None |
+      | Maintenance payments from a former partner | £500.00 every week |
       | Income from a property or lodger | None |
       | Pension | None |
 
@@ -149,11 +149,9 @@ Feature: Bank statement upload check your answers
       | h3  | Bank statements |
       | h2  | Your client's income |
       | h3  | Payments your client gets |
-      | h3  | Payments your client gets in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | Payments your client pays |
-      | h3  | Payments your client pays in cash |
 
     And the following sections should exist:
       | tag | section |
@@ -163,6 +161,8 @@ Feature: Bank statement upload check your answers
     And the following sections should not exist:
       | tag | section |
       | h2  | Your client's capital |
+      | h3  | Payments your client gets in cash |
+      | h3  | Payments your client pays in cash |
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Which bank accounts does your client have? |

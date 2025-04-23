@@ -210,13 +210,16 @@ Feature: non_passported_journey with bank transactions
       | h3  | Bank statements |
       | h3  | Partner benefits, charitable or government payments |
       | h3  | Payments the partner gets |
-      | h3  | Payments the partner gets in cash |
       | h3  | Student finance |
       | h2  | The partner's outgoings |
       | h3  | Payments the partner pays |
-      | h3  | Payments the partner pays in cash |
       | h2  | Housing benefit |
       | h2  | Dependants |
+
+    And the following sections should not exist:
+      | tag | section |
+      | h3  | Payments the partner gets in cash |
+      | h3  | Payments the partner pays in cash |
 
   @javascript
   Scenario: Selects and then removes income and outgoings bank transactions

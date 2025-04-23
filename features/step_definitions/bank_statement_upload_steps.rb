@@ -36,6 +36,7 @@ Given "I have completed a non-passported employed application for {string} with 
       :with_maintenance_in_category,
       :with_rent_or_mortgage_regular_transaction,
       :with_housing_benefit_regular_transaction,
+      :with_maintenance_in_regular_transaction,
       :with_savings_amount,
       :without_open_banking_consent,
       :checking_means_income,
