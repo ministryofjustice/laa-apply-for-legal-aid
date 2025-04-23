@@ -7,15 +7,23 @@ module TaskStatus
       # if so then this task can be started.
       #
       status.cannot_start!
-      status.not_started! if section_results.all?(&:completed?)
-
-      # status.in_progress? if in_progress?
-      status.completed! if completed?
+      status.not_started! if not_started?
+      status.in_progress! if in_progress?
+      status.complete! if completed?
 
       status
     end
 
   private
+
+    def not_started?
+      previous_sections.all?(&:completed?)
+    end
+
+    # TODO: § could check if state has ever been "checking_applicant_details" but not "applicant_details_checked"
+    def in_progress?
+      false
+    end
 
     # § TODO: to determine the status of a CYA page and whether it is in progress or complete we may need to track/store
     # state changes and then use that data to determine the status of this CYA task.
@@ -26,14 +34,9 @@ module TaskStatus
       application.checking_applicant_details?
     end
 
-    # TODO: § could check if state has ever been "checking_applicant_details" but not "applicant_details_checked"
-    def in_progress?
-      false
-    end
-
     # TODO: this requires the instantiating and calling of the whole section's tasks and validators and is
     # therefore not effecient. We should be able to reuse the already collected results.
-    def section_results
+    def previous_sections
       [
         Applicants.new(application).call,
         ProceedingsTypes.new(application).call,

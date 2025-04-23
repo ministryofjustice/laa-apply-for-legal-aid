@@ -12,11 +12,11 @@ module TaskStatus
       status = ValueObject.new
 
       # TODO: we might need a history of transitions
-      status.cannot_start! unless section_results.all?(&:completed?)
+      status.cannot_start! unless previous_sections.all?(&:completed?)
 
-      status.not_started! if section_results.all?(&:completed?) && !application.checking_applicant_details?
+      status.not_started! if previous_sections.all?(&:completed?) && !application.checking_applicant_details?
 
-      status.completed! if section_results.all?(&:completed?) && (non_means_tested? || passported? || non_passported? || benefits_confirmed?)
+      status.completed! if previous_sections.all?(&:completed?) && (non_means_tested? || passported? || non_passported? || benefits_confirmed?)
 
       status
     end
@@ -30,8 +30,8 @@ module TaskStatus
       !application&.applicant&.national_insurance_number? || true
     end
 
-    def section_results
-      @section_results ||= [
+    def previous_sections
+      @previous_sections ||= [
         Applicants.new(application).call,
         ProceedingsTypes.new(application).call,
         HasNationalInsuranceNumbers.new(application).call,

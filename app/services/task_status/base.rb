@@ -10,7 +10,7 @@ module TaskStatus
   class Base
     attr_accessor :application
 
-    delegate :applicant, to: :application
+    delegate :applicant, :passported?, :non_passported?, :non_means_tested?, to: :application
 
     def initialize(application)
       @application = application

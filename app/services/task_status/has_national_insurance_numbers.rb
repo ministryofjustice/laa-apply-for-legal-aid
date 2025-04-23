@@ -3,13 +3,23 @@ module TaskStatus
     def call
       status = ValueObject.new
 
-      applicant.present? ? status.not_started! : status.cannot_start!
-      status.in_progress! unless applicant&.has_national_insurance_number.nil?
+      status.cannot_start!
+
+      status.not_started! if not_started?
+      status.in_progress! if in_progress?
       status.completed! if completed?
       status
     end
 
   private
+
+    def not_started?
+      applicant.present?
+    end
+
+    def in_progress?
+      !applicant&.has_national_insurance_number.nil?
+    end
 
     def completed?
       has_national_insurance_numbers_validator.valid?

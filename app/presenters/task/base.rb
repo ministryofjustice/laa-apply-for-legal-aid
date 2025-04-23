@@ -29,6 +29,8 @@ module Task
     end
 
     def render
+      return unless displayed?
+
       tag.li class: "govuk-task-list__item govuk-task-list__item--with-link" do
         safe_join(
           [task_name, status_tag],
@@ -38,6 +40,10 @@ module Task
 
     def path
       raise "Implement in subclass"
+    end
+
+    def displayed?
+      true
     end
 
     # Default for subclasses is to use a "task status" object of the same name.

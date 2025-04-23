@@ -58,6 +58,14 @@ class EditableApplicationStateMachine < BaseStateMachine
     false
   end
 
+  def use_ccms!(_use_ccms_reason)
+    false
+  end
+
+  def provider_confirm_applicant_eligibility!
+    false
+  end
+
   def provider_entering_means?
     false
   end
