@@ -5,7 +5,7 @@
 <section class="applicant">
   <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
-  <%= render("shared/check_answers/bank_statements", partner: false, read_only:) if @legal_aid_application.client_uploading_bank_statements? %>
+  <%= render("shared/check_answers/bank_statements", partner: false, read_only:) if bank_statement_upload %>
 
   <%= render "shared/employment_income_table" if @legal_aid_application.cfe_result.present? && display_employment_income? %>
 
@@ -19,14 +19,12 @@
     <%= render("shared/check_answers/full_employment_details", partner: false, read_only:) %>
   <% end %>
 
-  <%= render("shared/check_answers/benefits_income", partner: false, read_only:) if @legal_aid_application.client_uploading_bank_statements? %>
+  <%= render("shared/check_answers/benefits_income", partner: false, read_only:) if bank_statement_upload %>
 
   <!--  Income payments-->
   <%= render("shared/check_answers/payments_summary", credit: true, partner: false, read_only:) %>
 
-  <% if bank_statement_upload %>
-    <%= render("shared/check_answers/cash_payments", partner: false, type: :income, read_only:) %>
-  <% end %>
+  <%= render("shared/check_answers/cash_payments", partner: false, type: :income, read_only:) if bank_statement_upload %>
 
   <%= render("shared/check_answers/student_finance", partner: false, read_only:) %>
 
