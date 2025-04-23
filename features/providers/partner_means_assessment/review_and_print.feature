@@ -26,7 +26,6 @@ Feature: Review and print your application
       # Means assessment
       | h2  | Your client's income |
       | h3  | Bank statements |
-      | h3  | Employment income |
       | h3  | Client benefits, charitable or government payments |
       | h3  | Payments your client gets |
       | h3  | Payments your client gets in cash |
@@ -122,7 +121,6 @@ Feature: Review and print your application
 
       # Means assessment
       | h2  | Your client's income |
-      | h3  | Employment income |
       | h3  | Payments your client gets |
       | h3  | Student finance |
 
