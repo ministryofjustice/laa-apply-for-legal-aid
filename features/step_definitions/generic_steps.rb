@@ -66,6 +66,12 @@ Then("the following sections should not exist:") do |table|
   end
 end
 
+Then("I should see the following checkboxes checked or unchecked:") do |table|
+  table.hashes.each do |row|
+    expect(page).to have_field(row[:checkbox_id], visible: :all, checked: ActiveModel::Type::Boolean.new.cast(row[:checked]))
+  end
+end
+
 Then("the govuk-summary-card titled {string} should contain:") do |card_title, table|
   element = page.find(class: "govuk-summary-card", text: card_title)
 

@@ -714,6 +714,34 @@ Given("I complete the journey as far as check client details with a partner") do
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
+Given("I complete the non-passported journey as far as the employment status page for a partner") do
+  applicant = create(:applicant, :with_partner_with_no_contrary_interest)
+  create(
+    :address,
+    address_line_one: "Transport For London",
+    address_line_two: "98 Petty France",
+    city: "London",
+    county: nil,
+    postcode: "SW1H 9EA",
+    lookup_used: true,
+    applicant:,
+  )
+  partner = create(:partner)
+  @legal_aid_application = create(
+    :application,
+    :with_proceedings,
+    :with_non_passported_state_machine,
+    :at_entering_applicant_details,
+    :provider_confirming_applicant_eligibility,
+    applicant:,
+    partner:,
+  )
+
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_partners_employed_index_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'employment ')
+end
+
 Given("I complete the journey as far as the employment status page for a partner with no NI number") do
   applicant = create(:applicant, :with_partner)
   create(
