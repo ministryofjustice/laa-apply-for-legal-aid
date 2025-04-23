@@ -118,6 +118,26 @@ RSpec.describe Partners::DetailsForm, type: :form do
       end
     end
 
+    context "with a two digit year greater than current year" do
+      let(:current_year) { Time.current.strftime("%y").to_i }
+      let(:date_of_birth) { Date.new(current_year + 1, 1, 1) }
+
+      it "sets the date of birth to be 19xx" do
+        partner_form.save!
+        expect(legal_aid_application.reload.partner).to have_attributes(date_of_birth: Date.new("19#{current_year + 1}".to_i, 1, 1))
+      end
+    end
+
+    context "with a two digit year less than current year" do
+      let(:current_year) { Time.current.strftime("%y").to_i }
+      let(:date_of_birth) { Date.new(current_year - 1, 1, 1) }
+
+      it "sets the date of birth to be 19xx" do
+        partner_form.save!
+        expect(legal_aid_application.reload.partner).to have_attributes(date_of_birth: Date.new("20#{current_year - 1}".to_i, 1, 1))
+      end
+    end
+
     context "with invalid dob elements" do
       let(:params) do
         {
