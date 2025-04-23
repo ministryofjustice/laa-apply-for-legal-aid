@@ -202,8 +202,13 @@ jobs:
         name: Stash Coverage Results
         command: |
           mkdir coverage_results
-          # suppress error if no file exists (can occur if running only failed tests)
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json 2>/dev/null || :
+
+          # Only copy coverage if main run, not re-run
+          if [ ${CIRCLE_WORKFLOW_ID} = ${CIRCLE_WORKFLOW_WORKSPACE_ID} ]
+          then
+            # suppress error if no file exists (can occur if running only failed tests)
+            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json 2>/dev/null || :
+          fi
     - persist_to_workspace:
         root: .
         paths:
@@ -237,8 +242,13 @@ jobs:
         name: Stash Coverage Results
         command: |
           mkdir coverage_results
-          # suppress error if no file exists (can occur if running only failed tests)
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json 2>/dev/null || :
+
+          # Only copy coverage if main run, not re-run
+          if [ ${CIRCLE_WORKFLOW_ID} = ${CIRCLE_WORKFLOW_WORKSPACE_ID} ]
+          then
+            # suppress error if no file exists (can occur if running only failed tests)
+            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json 2>/dev/null || :
+          fi
     - persist_to_workspace:
         root: .
         paths:
