@@ -105,7 +105,7 @@ private
     when 4
       year
     when 2
-      century = @method.eql?(:date_of_birth) && year > Time.current.strftime("%y") ? "19" : "20"
+      century = @method.eql?(:date_of_birth) && year.to_i > Time.current.strftime("%y").to_i ? "19" : "20"
       "#{century}#{year}"
     else
       raise YearError, "Year is incorrect length"
