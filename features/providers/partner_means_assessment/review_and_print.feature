@@ -37,7 +37,6 @@ Feature: Review and print your application
 
       | h2  | The partner's income |
       | h3  | Bank statements |
-      | h3  | Employment income |
       | h3  | Partner benefits, charitable or government payments |
       | h3  | Payments the partner gets |
       | h3  | Payments the partner gets in cash |
@@ -129,7 +128,6 @@ Feature: Review and print your application
 
       | h2  | The partner's income |
       | h3  | Bank statements |
-      | h3  | Employment income |
       | h3  | Partner benefits, charitable or government payments |
       | h3  | Payments the partner gets |
       | h3  | Payments the partner gets in cash |
