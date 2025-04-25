@@ -1,0 +1,43 @@
+<%= form_with(
+      url: providers_legal_aid_application_statement_of_case_path,
+      model: @form,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+  <%= page_template page_title: t(".page_title"),
+                    template: :basic,
+                    form: do %>
+    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" } do %>
+      <p class="govuk-body"><%= t("generic.tell_us") %></p>
+
+      <%= govuk_list @legal_aid_application.proceedings.any?(&:domestic_abuse?) ? t(".bullets_domestic_abuse") : t(".bullets"), type: :bullet %>
+
+      <%= govuk_warning_text(text: t(".warning_text")) %>
+
+      <%= form.govuk_check_boxes_fieldset :choice,
+                                          legend: { text: t(".choice.heading") },
+                                          hint: { text: t(".choice.hint") } do %>
+        <%= form.govuk_check_box(
+              :upload,
+              true,
+              "",
+              link_errors: true,
+              multiple: true,
+              label: { text: t(".choices.upload") },
+            ) %>
+        <%= form.govuk_check_box(
+              :typed,
+              true,
+              "",
+              link_errors: true,
+              multiple: true,
+              label: { text: t(".choices.typed") },
+            ) do %>
+          <%= form.govuk_text_area :statement, rows: 15 %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>

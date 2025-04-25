@@ -308,6 +308,10 @@ en:
               blank: Tell us why the police have not been notified
         application_merits_task/statement_of_case:
           attributes:
+            choice:
+              blank: Select how you will provide the statement of case
+            statement:
+              blank: Provide a typed statement of case
             original_file:
               content_type_invalid: "%{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
               file_empty: "%{file_name} has no content"
