@@ -648,7 +648,7 @@ en:
           bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
           police_notified_no: Tell us why the police have not been notified
           police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
-      statement_of_cases:
+      statement_of_case_uploads:
         show:
           bullets:
             - what's happened in the case so far
