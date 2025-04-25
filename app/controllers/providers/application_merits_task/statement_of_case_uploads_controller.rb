@@ -1,6 +1,6 @@
 module Providers
   module ApplicationMeritsTask
-    class StatementOfCasesController < ProviderBaseController
+    class StatementOfCaseUploadsController < ProviderBaseController
       def show
         populate_form
       end
