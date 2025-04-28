@@ -53,7 +53,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -79,7 +79,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -109,7 +109,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let(:cfe_result) { create(:cfe_v3_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -121,7 +121,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
         end
 
         context "when contribution required" do
-          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -139,7 +139,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
 
       context "with no policy disregards" do
         context "when eligible" do
-          let(:cfe_result) { create(:cfe_v3_result, :eligible) }
+          let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -151,7 +151,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
         end
 
         context "when contribution required" do
-          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
+          let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -176,7 +176,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
       end
 
       context "when eligible" do
-        let(:cfe_result) { create(:cfe_v4_result, :eligible) }
+        let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -191,7 +191,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
       end
 
       context "when capital contribution required" do
-        let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
+        let(:cfe_result) { create(:cfe_v6_result, :with_capital_contribution_required) }
         let(:add_policy_disregards?) { false }
 
         it "returns http success" do
@@ -248,11 +248,11 @@ RSpec.describe Providers::CapitalAssessmentResultsController do
     end
 
     context "with unknown result" do
-      let(:cfe_result) { create(:cfe_v3_result, result: {}.to_json) }
+      let(:cfe_result) { create(:cfe_v6_result, result: { result_summary: { overall_result: { result: "foobar" } } }.to_json) }
       let(:before_tasks) { login_provider }
 
       it "raises error" do
-        expect { get_request }.to raise_error(/Unknown capital_assessment_result/)
+        expect { get_request }.to raise_error(/Unknown result using #{described_class}: 'foobar'/)
       end
     end
   end
