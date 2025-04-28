@@ -9,6 +9,14 @@ class BaseEmployedForm < BaseForm
 
 private
 
+  def initialize(params = {})
+    EMPLOYMENT_TYPES.each do |employment_type|
+      send("#{employment_type}=", params[:model].send(employment_type))
+    end
+
+    super
+  end
+
   def any_checkbox_checked?
     checkbox_hash.values.any?(&:present?)
   end

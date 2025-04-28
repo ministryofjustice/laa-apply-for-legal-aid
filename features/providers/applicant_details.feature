@@ -191,9 +191,9 @@ Feature: Applicant details
     Then I click 'Save and continue'
     Then I should be on a page showing "What you need to do"
     When I click 'Continue'
-    And I should be on a page showing "What is your client's employment status?"
-    And I select "None of the above"
-    When I click 'Save and continue'
+    Then I should be on a page showing "What is your client's employment status?"
+    When I select "None of the above"
+    When I click "Save and continue"
     Then I should be on a page with title "Does your client use online banking?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
