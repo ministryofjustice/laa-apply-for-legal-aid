@@ -103,6 +103,24 @@ module Proceedings
               date: Time.zone.today,
             )
           end
+
+          context "and the year is greater than the current year" do
+            let(:current_year) { Time.current.strftime("%y").to_i }
+            let(:date_1i) { current_year + 1 }
+
+            it "sets the final hearing date to be 20xx" do
+              expect(final_hearing).to have_attributes(date: Date.new("20#{current_year + 1}".to_i, Time.zone.today.month, Time.zone.today.day))
+            end
+          end
+
+          context "and the year is less than the current year" do
+            let(:current_year) { Time.current.strftime("%y").to_i }
+            let(:date_1i) { current_year - 1 }
+
+            it "sets the final hearing date to be 20xx" do
+              expect(final_hearing).to have_attributes(date: Date.new("20#{current_year - 1}".to_i, Time.zone.today.month, Time.zone.today.day))
+            end
+          end
         end
       end
 
