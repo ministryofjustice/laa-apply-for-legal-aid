@@ -1146,8 +1146,6 @@ en:
         applicant_income_assessment:
           income-heading: Your client's income
           outgoings-heading: Your client's outgoings
-          credits-section-heading: Payments your client gets
-          debits-section-heading: Payments your client pays
         partner_income_assessment:
           income-heading: The partner's income
           outgoings-heading: The partner's outgoings

@@ -5,89 +5,33 @@
 <section class="applicant">
   <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
-  <% if bank_statement_upload %>
-    <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only:, partner: false) %>
-  <% elsif @legal_aid_application.cfe_result.present? && display_employment_income? %>
-    <%= render "shared/employment_income_table" %>
-  <% end %>
+  <%= render("shared/check_answers/bank_statements", partner: false, read_only:) if bank_statement_upload %>
+
+  <%= render "shared/employment_income_table" if @legal_aid_application.cfe_result.present? && display_employment_income? %>
 
   <% if @legal_aid_application.applicant.hmrc_employment_income? %>
     <% if @legal_aid_application.applicant.has_multiple_employments? %>
-      <%= render(
-            "shared/check_answers/full_employment_details",
-            individual: "Your client",
-            read_only:,
-            partner: false,
-          ) %>
+      <%= render("shared/check_answers/full_employment_details", partner: false, read_only:) %>
     <% else %>
-      <%= render "shared/check_answers/employed_income", partner: false, read_only: %>
+      <%= render("shared/check_answers/employed_income", partner: false, read_only:) %>
     <% end %>
   <% elsif @legal_aid_application.applicant.employed? %>
-    <%= render(
-          "shared/check_answers/full_employment_details",
-          individual: "Your client",
-          read_only:,
-          partner: false,
-        ) %>
+    <%= render("shared/check_answers/full_employment_details", partner: false, read_only:) %>
   <% end %>
 
-  <% if bank_statement_upload %>
-    <%= render("shared/check_answers/benefits_income",
-               transactions_for: "applicant",
-               individual: @legal_aid_application.applicant,
-               state_benefits: @legal_aid_application.applicant.state_benefits,
-               version: "means",
-               read_only:) %>
-  <% end %>
+  <%= render("shared/check_answers/benefits_income", partner: false, read_only:) if bank_statement_upload %>
 
-  <%= render(
-        "shared/check_answers/payments_summary",
-        payment_type: t(".credits-section-heading"),
-        url: bank_statement_upload ? providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_income_path(@legal_aid_application),
-        transaction_types: @credit_transaction_types,
-        individual: "Applicant",
-        read_only:,
-      ) %>
+  <!--  Income payments-->
+  <%= render("shared/check_answers/payments_summary", credit: true, partner: false, read_only:) %>
 
-  <% if bank_statement_upload %>
-    <%= render(
-          "shared/check_answers/cash_payments",
-          url: providers_legal_aid_application_means_cash_income_path,
-          individual: "Applicant",
-          individual_with_determiner: t("generic.client"),
-          type: :income,
-          read_only:,
-        ) %>
-  <% end %>
+  <%= render("shared/check_answers/cash_payments", partner: false, type: :income, read_only:) if bank_statement_upload %>
 
-  <%= render(
-        "shared/check_answers/student_finance",
-        individual: "Client",
-        individual_with_determiner: t("generic.client"),
-        model: @legal_aid_application.applicant,
-        url: providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-        read_only:,
-      ) %>
+  <%= render("shared/check_answers/student_finance", partner: false, read_only:) %>
 
   <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
 
-  <%= render(
-        "shared/check_answers/payments_summary",
-        payment_type: t(".debits-section-heading"),
-        url: bank_statement_upload ? providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application) : providers_legal_aid_application_means_identify_types_of_outgoing_path(@legal_aid_application),
-        transaction_types: @debit_transaction_types,
-        individual: "Applicant",
-        read_only:,
-      ) %>
+  <!--  Outgoing payments-->
+  <%= render("shared/check_answers/payments_summary", credit: false, partner: false, read_only:) %>
 
-  <% if bank_statement_upload %>
-    <%= render(
-          "shared/check_answers/cash_payments",
-          url: providers_legal_aid_application_means_cash_outgoing_path,
-          individual: "Applicant",
-          individual_with_determiner: t("generic.client"),
-          type: :outgoings,
-          read_only:,
-        ) %>
-  <% end %>
+  <%= render("shared/check_answers/cash_payments", partner: false, type: :outgoings, read_only:) if bank_statement_upload %>
 </section>

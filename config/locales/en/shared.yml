@@ -565,6 +565,13 @@ en:
         no_transactions: "No"
         html:
           no_transactions: "No"
+      payments_summary:
+        credits_section_heading:
+          applicant: Payments your client gets
+          partner: Payments the partner gets
+        debits_section_heading:
+          applicant: Payments your client pays
+          partner: Payments the partner pays
       student_finance:
         heading: Student finance
         question: "%{individual} gets student finance?"
@@ -892,8 +899,7 @@ en:
       partner_income:
         income-heading: The partner's income
         outgoings-heading: The partner's outgoings
-        credits-section-heading: Payments the partner gets
-        debits-section-heading: Payments the partner pays
+
       questions_and_answers:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference

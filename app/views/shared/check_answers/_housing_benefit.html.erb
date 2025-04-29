@@ -1,15 +1,14 @@
-<h2 class="govuk-heading-l"><%= t(".heading") %></h3>
+<% read_only = false unless local_assigns.key?(:read_only) %>
 
 <% with_partner = partner ? "client_with_partner" : "client_only" %>
 
+<h2 class="govuk-heading-l"><%= t(".heading") %></h2>
 <%= govuk_summary_card(
       title: t(".card_title"),
       html_attributes: { id: "app-check-your-answers__housing_benefit", "data-check-your-answers-section": t(".heading").parameterize },
       heading_level: 3,
     ) do |card| %>
-  <% unless read_only %>
-    <%= card.with_action { govuk_link_to(t("generic.change"), providers_legal_aid_application_means_housing_benefits_path(@legal_aid_application), "aria-label": t(".card_title")) } %>
-  <% end %>
+  <%= card.with_action { govuk_link_to(t("generic.change"), providers_legal_aid_application_means_housing_benefits_path(@legal_aid_application), "aria-label": t(".card_title")) } unless read_only %>
   <%= card.with_summary_list do |summary_list| %>
     <% if @legal_aid_application.applicant_in_receipt_of_housing_benefit? %>
       <% housing_benefit_type = TransactionType.find_by(name: "housing_benefit") %>

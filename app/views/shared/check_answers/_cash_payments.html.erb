@@ -1,4 +1,23 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+
+<% if partner
+     individual = "Partner"
+     individual_with_determiner = t("generic.partner")
+     url = if type.eql?(:income)
+             providers_legal_aid_application_partners_cash_income_path
+           else
+             providers_legal_aid_application_partners_cash_outgoing_path
+           end
+   else
+     individual = "Applicant"
+     individual_with_determiner = t("generic.client")
+     url = if type.eql?(:income)
+             providers_legal_aid_application_means_cash_income_path
+           else
+             providers_legal_aid_application_means_cash_outgoing_path
+           end
+   end %>
+
 <% cash_transaction_types = if type.eql?(:income)
                               @legal_aid_application.income_cash_transaction_types_for(individual)
                             elsif type.eql?(:outgoings)
