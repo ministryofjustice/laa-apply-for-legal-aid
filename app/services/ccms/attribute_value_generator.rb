@@ -76,6 +76,7 @@ module CCMS
     end
 
     def method_missing(method, *args)
+      # binding.pry if method.match?(/success_prospect_likely/)
       if standardly_named_method?(method)
         call_standard_method(method, args.first)
       else
@@ -289,6 +290,7 @@ module CCMS
     end
 
     def ccms_equivalent_prospects_of_success(_options)
+      # TODO: This is the lead proceedings value. is that correct? Could use options here
       return unless ccms_equivalent_prospects_of_success_valid?
 
       PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:text]
