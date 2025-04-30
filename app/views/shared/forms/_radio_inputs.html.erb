@@ -4,7 +4,7 @@
       <%= radio_button_tag(
             field_name,
             value,
-            (selected == value),
+            selected == value,
             class: "govuk-radios__input",
           ) %>
       <%= label_tag "#{field_name}_#{value}", label, class: "govuk-label govuk-radios__label" %>

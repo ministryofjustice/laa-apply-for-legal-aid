@@ -95,7 +95,7 @@ RSpec.describe "cfe_result factory" do
   describe "with no traits" do
     let(:cfe_result) { create(:cfe_v3_result) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "has no contributions" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -109,7 +109,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :eligible" do
     let(:cfe_result) { create(:cfe_v3_result, :eligible) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "has no contributions" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -123,7 +123,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :not_eligible" do
     let(:cfe_result) { create(:cfe_v3_result, :not_eligible) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is not eligible with no contributions" do
       expect(cfe_result.assessment_result).to eq "ineligible"
@@ -137,7 +137,7 @@ RSpec.describe "cfe_result factory" do
   describe "no capital" do
     let(:cfe_result) { create(:cfe_v3_result, :no_capital) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "all capital items are zero" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -151,7 +151,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :with_capital_contribution_required" do
     let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is eligible with a contribution" do
       expect(cfe_result.assessment_result).to eq "contribution_required"
@@ -165,7 +165,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :no_additional_properties" do
     let(:cfe_result) { create(:cfe_v3_result, :no_additional_properties) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -183,7 +183,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :with_additional_properties" do
     let(:cfe_result) { create(:cfe_v3_result, :with_additional_properties) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -201,7 +201,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :no_vehicles" do
     let(:cfe_result) { create(:cfe_v3_result, :no_vehicles) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -219,7 +219,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait: with_maintenance_received" do
     let(:cfe_result) { create(:cfe_v3_result, :with_maintenance_received) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -233,7 +233,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :no_mortgage_costs" do
     let(:cfe_result) { create(:cfe_v3_result, :with_no_mortgage_costs) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -251,7 +251,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :with_income_contribution_required" do
     let(:cfe_result) { create(:cfe_v3_result, :with_income_contribution_required) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
 
     it "requires a contribution" do
       expect(cfe_result.assessment_result).to eq "contribution_required"
@@ -265,7 +265,7 @@ RSpec.describe "cfe_result factory" do
   describe "trait :with_capital_and_income_contributions_required" do
     let(:cfe_result) { create(:cfe_v3_result, :with_capital_and_income_contributions_required) }
 
-    include_examples "has the correct structure for v3"
+    it_behaves_like "has the correct structure for v3"
     it "requires both contributions" do
       expect(cfe_result.assessment_result).to eq "contribution_required"
       expect(cfe_result.capital_assessment_result).to eq "contribution_required"
