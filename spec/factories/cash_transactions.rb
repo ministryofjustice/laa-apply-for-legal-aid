@@ -23,5 +23,13 @@ FactoryBot.define do
     trait :rent_or_mortgage do
       transaction_type { TransactionType.where(name: "rent_or_mortgage").first || create(:transaction_type, :rent_or_mortgage) }
     end
+
+    trait :maintenance_in do
+      transaction_type { TransactionType.find_by(name: "maintenance_in") || create(:transaction_type, :maintenance_in) }
+    end
+
+    trait :maintenance_out do
+      transaction_type { TransactionType.find_by(name: "maintenance_out") || create(:transaction_type, :maintenance_out) }
+    end
   end
 end
