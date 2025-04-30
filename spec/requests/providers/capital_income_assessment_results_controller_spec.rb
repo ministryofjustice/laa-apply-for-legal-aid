@@ -428,13 +428,11 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
     end
 
     context "with unknown result" do
-      let(:cfe_result) { create(:cfe_v6_result, result: {}.to_json) }
-      let(:before_tasks) do
-        login_provider
-      end
+      let(:cfe_result) { create(:cfe_v6_result, result: { result_summary: { overall_result: { result: "foobar" } } }.to_json) }
+      let(:before_tasks) { login_provider }
 
       it "raises error" do
-        expect { get_request }.to raise_error(/Unknown capital_income_assessment_result/)
+        expect { get_request }.to raise_error(/Unknown result using #{described_class}: 'foobar'/)
       end
     end
 
