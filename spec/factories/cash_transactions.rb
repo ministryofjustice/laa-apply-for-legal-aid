@@ -31,5 +31,9 @@ FactoryBot.define do
     trait :maintenance_out do
       transaction_type { TransactionType.find_by(name: "maintenance_out") || create(:transaction_type, :maintenance_out) }
     end
+
+    trait :benefits do
+      transaction_type { TransactionType.find_by(name: "benefits") || create(:transaction_type, :benefits) }
+    end
   end
 end
