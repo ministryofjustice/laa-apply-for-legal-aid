@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
-      describe "#call" do
+      describe "XML request" do
         subject(:requestor) { described_class.new(submission, {}) }
 
         let(:request_xml) { requestor.formatted_xml }

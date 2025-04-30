@@ -76,7 +76,6 @@ module CCMS
     end
 
     def method_missing(method, *args)
-      # binding.pry if method.match?(/success_prospect_likely/)
       if standardly_named_method?(method)
         call_standard_method(method, args.first)
       else
@@ -495,14 +494,13 @@ module CCMS
     end
 
     def lead_proceeding_chances_of_success?(_options)
-      # pp "lead_proceeding_chances_of_success?"
-
       chances_of_success.present?
     end
 
     def proceeding_chances_of_success?(options)
-      proceeding = options[:proceeding]
-      proceeding.chances_of_success.present?
+      options[:chances_of_success].present?
+      # proceeding = options[:proceeding]
+      # proceeding.chances_of_success.present?
     end
 
     def chances_of_success
