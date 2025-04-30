@@ -1,5 +1,9 @@
 require "rails_helper"
 
+# DO NOT EXTEND this spec
+# Use the spec/ccms/requestors/case_add_requestor_xml_blocks
+# directory and subfiles.
+#
 module CCMS
   module Requestors
     RSpec.describe CaseAddRequestor, :ccms do
@@ -538,42 +542,6 @@ module CCMS
               block = XmlExtractor.call(request_xml, :proceeding_merits, "PROSPECTS_OF_SUCCESS")
               expect(block).not_to be_present
             end
-          end
-        end
-
-        describe "new rules regarding no chances of success questions" do
-          let(:legal_aid_application) do
-            create(:legal_aid_application,
-                   :with_everything,
-                   :with_negative_benefit_check_result,
-                   :with_proceedings,
-                   explicit_proceedings: %i[da004 se014 se003],
-                   set_lead_proceeding: :da004,
-                   applicant:,
-                   vehicles:,
-                   other_assets_declaration:,
-                   savings_amount:,
-                   provider:,
-                   opponents:,
-                   domestic_abuse_summary:,
-                   office:)
-          end
-          let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
-
-          it "does not generate any chance of success records" do
-            expect(legal_aid_application.non_passported?).to be true
-            expect(proceeding.chances_of_success).to be_present
-            expect(legal_aid_application.proceedings.detect { |p| p.ccms_code == "SE014" }.chances_of_success).not_to be_present
-            expect(legal_aid_application.proceedings.detect { |p| p.ccms_code == "SE003" }.chances_of_success).not_to be_present
-            # 5698 rules for whether question asked
-            # the below is wrong, it _should_ be generated for the DA004 block of code, but not for the other two
-            # it feels like we should have a count test of I expect the key once but I'm not sure we have another
-            # example of where we need to do this :/
-            expect(XmlExtractor.call(request_xml, :proceeding_merits, "FAM_PROSP_50_OR_BETTER")).not_to be_present
-            expect(XmlExtractor.call(request_xml, :proceeding_merits, "FAM_PROSP_BORDER_UNCERT_POOR")).not_to be_present
-            expect(XmlExtractor.call(request_xml, :proceeding_merits, "FAM_PROSP_MARGINAL")).not_to be_present
-            expect(XmlExtractor.call(request_xml, :proceeding_merits, "FAM_PROSP_POOR")).not_to be_present
-            expect(XmlExtractor.call(request_xml, :proceeding_merits, "FAM_PROSP_UNCERTAIN")).not_to be_present
           end
         end
       end

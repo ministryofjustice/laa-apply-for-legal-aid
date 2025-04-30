@@ -433,10 +433,10 @@ module CCMS
       # :nocov:
 
       def generate_merits_proceeding_instance(xml, proceeding)
+        # pp test: { proceeding_code: proceeding.ccms_code, chance_of_success: proceeding.chances_of_success.present? }
         xml.__send__(:"common:Instances") do
           xml.__send__(:"common:InstanceLabel", proceeding.case_p_num)
           xml.__send__(:"common:Attributes") do
-            Rails.logger test: { proceeding_code: proceeding.ccms_code, chance_of_success: proceeding.chances_of_success.present? }
             EntityAttributesGenerator.call(self,
                                            xml,
                                            :proceeding_merits,

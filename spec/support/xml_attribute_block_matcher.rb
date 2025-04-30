@@ -111,6 +111,10 @@ module XMLBlockMatchers
     failure_message do
       SuperDiff::Differs::Hash.call(expected, actual_hash, indent_level: 0)
     end
+
+    failure_message_when_negated do
+      SuperDiff::Differs::Hash.call(expected, actual_hash, indent_level: 0)
+    end
   end
 
   def validate_expectation(actual, expected_value, expected_response_type)

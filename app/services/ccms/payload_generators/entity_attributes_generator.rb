@@ -31,6 +31,7 @@ module CCMS
 
       def call
         @attr_config.each do |attribute_name, config|
+          # pp "EntityAttributesGenerator" => { attribute_name:, generating_block: generate_attribute_block?(config) } if attribute_name.match?(/FAM_PROSP.*/)
           next unless generate_attribute_block?(config)
 
           response_value = extract_response_value(config)

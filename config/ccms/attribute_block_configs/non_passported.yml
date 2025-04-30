@@ -843,7 +843,7 @@ global_means:
     user_defined: false
     br100_meaning: "The proceeding's prospect of success"
     response_type: text
-    generate_block?: "#output_chances_of_success?"
+    generate_block?: "#lead_proceeding_chances_of_success?"
     value: '#ccms_code_prospects_of_success'
   OUT_GB_INFER_C_29WP3_18A:
     generate_block?: false
@@ -1897,19 +1897,19 @@ proceeding_merits:
     response_type: currency
     generate_block?: true
   FAM_PROSP_50_OR_BETTER:
-    generate_block?: "#output_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: '#chances_of_success_success_prospect_likely?'
   FAM_PROSP_BORDER_UNCERT_POOR:
-    generate_block?: "#output_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: '#chances_of_success_success_prospect_borderline?'
   FAM_PROSP_MARGINAL:
-    generate_block?: "#output_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: '#chances_of_success_success_prospect_marginal?'
   FAM_PROSP_POOR:
-    generate_block?: "#output_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: '#chances_of_success_success_prospect_poor?'
   FAM_PROSP_UNCERTAIN:
-    generate_block?: "#output_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: '#chances_of_success_success_prospect_not_known?'
   FAM_PROSP_BORDERLINE_UNCERT:
     generate_block?: true
