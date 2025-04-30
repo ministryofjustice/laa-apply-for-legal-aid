@@ -32,10 +32,23 @@ module TransactionTypeHelper
   end
 
   def transactions_for(legal_aid_application:, credit_or_debit:, regular_or_cash:, individual:)
+    if individual == "Applicant" && !legal_aid_application.client_uploading_bank_statements?
+      return online_banking_transactions_for(legal_aid_application:)
+    end
+
     if regular_or_cash == :regular
       regular_transactions_for(legal_aid_application:, credit_or_debit:, individual:)
     else
       cash_transactions_for(legal_aid_application:, credit_or_debit:, individual:)
+    end
+  end
+
+  def online_banking_transactions_for(legal_aid_application:)
+    legal_aid_application.transaction_types.to_h do |transaction_type|
+      [
+        transaction_type.name,
+        answer_for_transaction_type(legal_aid_application:, transaction_type:, owner_type: "Applicant"),
+      ]
     end
   end
 

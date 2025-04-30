@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TransactionTypeHelper do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner) }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:owner_type) { "Applicant" }
 
   describe "#answer_for_transaction_type" do
@@ -102,6 +102,7 @@ RSpec.describe TransactionTypeHelper do
   end
 
   describe "#format_transactions" do
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :without_open_banking_consent) }
     let(:formatted_transactions) do
       helper.format_transactions(legal_aid_application:, credit_or_debit:, regular_or_cash:, individual:)
     end
@@ -150,6 +151,33 @@ RSpec.describe TransactionTypeHelper do
                 { label: "Pension", value: "None" },
               ]
             end
+          end
+        end
+
+        context "with truelayer journey and incoming cash transactions and bank transactions" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_open_banking_consent, with_bank_accounts: 1) }
+          let(:benefits) { create(:transaction_type, :benefits) }
+
+          before do
+            create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: benefits, owner_type: individual)
+
+            create(:cash_transaction, :benefits, legal_aid_application:, owner_type: individual, owner_id: legal_aid_application.applicant.id,
+                                                 transaction_date: Date.new(2021, 1, 1), month_number: 1, amount: 1.0)
+            create(:cash_transaction, :benefits, legal_aid_application:, owner_type: individual, owner_id: legal_aid_application.applicant.id,
+                                                 transaction_date: Date.new(2021, 2, 1), month_number: 2, amount: 2.0)
+            create(:cash_transaction, :benefits, legal_aid_application:, owner_type: individual, owner_id: legal_aid_application.applicant.id,
+                                                 transaction_date: Date.new(2021, 3, 1), month_number: 3, amount: 3.0)
+            create(:bank_transaction, :benefits, happened_at: Date.new(2021, 1, 1), amount: 100, bank_account: legal_aid_application.applicant.bank_accounts.first)
+          end
+
+          it "returns a hash of formatted key value pairs" do
+            expect(formatted_transactions).to eq [
+              { label: "Financial help from friends or family", value: "None" },
+              { label: "Benefits, charitable or government payments", value: "£106.00" },
+              { label: "Maintenance payments from a former partner", value: "None" },
+              { label: "Income from a property or lodger", value: "None" },
+              { label: "Pension", value: "None" },
+            ]
           end
         end
       end
@@ -234,6 +262,32 @@ RSpec.describe TransactionTypeHelper do
                 { label: "Payments towards legal aid in a criminal case", value: "None" },
               ]
             end
+          end
+        end
+
+        context "with truelayer journey and outgoing cash transactions and bank transactions" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_open_banking_consent, with_bank_accounts: 1) }
+          let(:maintenance_out) { TransactionType.find_by(name: "maintenance_out") }
+
+          before do
+            create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: maintenance_out, owner_type: individual)
+
+            create(:cash_transaction, :maintenance_out, legal_aid_application:, owner_type: individual, owner_id: legal_aid_application.applicant.id,
+                                                        transaction_date: Date.new(2021, 1, 1), month_number: 1, amount: 1.0)
+            create(:cash_transaction, :maintenance_out, legal_aid_application:, owner_type: individual, owner_id: legal_aid_application.applicant.id,
+                                                        transaction_date: Date.new(2021, 2, 1), month_number: 2, amount: 2.0)
+            create(:cash_transaction, :maintenance_out, legal_aid_application:, owner_type: individual, owner_id: legal_aid_application.applicant.id,
+                                                        transaction_date: Date.new(2021, 3, 1), month_number: 3, amount: 3.0)
+            create(:bank_transaction, :maintenance_out, happened_at: Date.new(2021, 1, 1), amount: 100, bank_account: legal_aid_application.applicant.bank_accounts.first)
+          end
+
+          it "returns a hash of formatted key value pairs" do
+            expect(formatted_transactions).to eq [
+              { label: "Housing payments", value: "None" },
+              { label: "Maintenance payments to a former partner", value: "£106.00" },
+              { label: "Childcare payments", value: "None" },
+              { label: "Payments towards legal aid in a criminal case", value: "None" },
+            ]
           end
         end
       end
