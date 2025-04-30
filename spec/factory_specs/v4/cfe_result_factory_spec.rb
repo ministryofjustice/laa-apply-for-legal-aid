@@ -149,7 +149,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "with no traits" do
     let(:cfe_result) { create(:cfe_v4_result) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "has no contributions" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -161,7 +161,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :eligible" do
     let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "has no contributions" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -173,7 +173,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :not_eligible" do
     let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is not eligible with no contributions" do
       expect(cfe_result.assessment_result).to eq "ineligible"
@@ -185,7 +185,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "no capital" do
     let(:cfe_result) { create(:cfe_v4_result, :no_capital) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "all capital items are zero" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -197,7 +197,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_capital_contribution_required" do
     let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is eligible with a contribution" do
       expect(cfe_result.assessment_result).to eq "contribution_required"
@@ -209,7 +209,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :no_additional_properties" do
     let(:cfe_result) { create(:cfe_v4_result, :no_additional_properties) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -225,7 +225,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_additional_properties" do
     let(:cfe_result) { create(:cfe_v4_result, :with_additional_properties) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -241,7 +241,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_no_vehicles" do
     let(:cfe_result) { create(:cfe_v4_result, :with_no_vehicles) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -257,7 +257,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait: with_maintenance_received" do
     let(:cfe_result) { create(:cfe_v4_result, :with_maintenance_received) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -269,7 +269,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_mortgage_costs" do
     let(:cfe_result) { create(:cfe_v4_result, :with_mortgage_costs) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "is eligible" do
       expect(cfe_result.assessment_result).to eq "eligible"
@@ -285,7 +285,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_income_contribution_required" do
     let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "requires a contribution" do
       expect(cfe_result.assessment_result).to eq "contribution_required"
@@ -297,7 +297,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_capital_and_income_contributions_required" do
     let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
     it "requires both contributions" do
       expect(cfe_result.assessment_result).to eq "contribution_required"
       expect(cfe_result.capital_contribution).not_to be_zero
@@ -308,7 +308,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_total_deductions" do
     let(:cfe_result) { create(:cfe_v4_result, :with_total_deductions) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
     it "has total deductions" do
       expect(cfe_result.total_deductions).not_to be_zero
     end
@@ -317,7 +317,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_total_gross_income" do
     let(:cfe_result) { create(:cfe_v4_result, :with_total_gross_income) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
     it "has total deductions" do
       expect(cfe_result.total_gross_income_assessed).not_to be_zero
     end
@@ -326,7 +326,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_monthly_income_equivalents" do
     let(:cfe_result) { create(:cfe_v4_result, :with_monthly_income_equivalents) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "has correct values" do
       expect(cfe_result.mei_friends_or_family).to eq 10.0
@@ -339,7 +339,7 @@ RSpec.describe "cfe_result version 4 factory" do
   describe "trait :with_monthly_outgoing_equivalents" do
     let(:cfe_result) { create(:cfe_v4_result, :with_monthly_outgoing_equivalents) }
 
-    include_examples "has the correct structure for v4"
+    it_behaves_like "has the correct structure for v4"
 
     it "has correct values" do
       expect(cfe_result.moe_housing).to eq 135.0
