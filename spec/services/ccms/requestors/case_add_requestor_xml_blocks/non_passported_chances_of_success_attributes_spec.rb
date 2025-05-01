@@ -96,7 +96,7 @@ module CCMS
           end
         end
 
-        context "with a multiple proceedings with and without a chance of success object, lead has chance of success" do
+        context "with a multiple proceedings with and without a chance of success object, lead with chance of success" do
           let(:legal_aid_application) do
             create(:legal_aid_application,
                    :with_everything,
@@ -144,6 +144,62 @@ module CCMS
             chances_of_success_attributes.each do |attr_name|
               expect(xml_nodeset.to_s).not_to include(attr_name), "xml block contains #{attr_name} when it should not!"
             end
+          end
+        end
+
+        context "with a multiple proceedings with and without a chance of success object, lead without chance of success" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_negative_benefit_check_result,
+                   :with_cfe_v6_result,
+                   applicant:,
+                   provider:,
+                   office:).tap do |laa|
+              create(:proceeding, :se003, proceeding_case_id: 66_000_001, legal_aid_application: laa, lead_proceeding: true)
+              create(:proceeding, :da004, :with_chances_of_success, proceeding_case_id: 66_000_002, legal_aid_application: laa, lead_proceeding: false, success_prospect: "likely")
+              create(:proceeding, :se014, proceeding_case_id: 66_000_003, legal_aid_application: laa, lead_proceeding: false)
+            end
+          end
+
+          it "generates the chance of success attributes for DA004, excluding FAMILY_PROSPECTS_OF_SUCCESS" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000002")
+
+            expect(xml_nodeset)
+              .to have_xml_attributes(
+                PROCEEDING_NAME: "DA004",
+                FAM_PROSP_50_OR_BETTER: "true",
+                FAM_PROSP_BORDER_UNCERT_POOR: "false",
+                FAM_PROSP_MARGINAL: "false",
+                FAM_PROSP_POOR: "false",
+                FAM_PROSP_UNCERTAIN: "false",
+              )
+
+            expect(xml_nodeset.to_s).not_to include("FAMILY_PROSPECTS_OF_SUCCESS")
+          end
+
+          it "does not generate the chance of success attributes for SE003, nor FAMILY_PROSPECTS_OF_SUCCESS" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000001")
+
+            expect(xml_nodeset).to have_xml_attributes(PROCEEDING_NAME: "SE003")
+
+            chances_of_success_attributes.each do |attr_name|
+              expect(xml_nodeset.to_s).not_to include(attr_name), "xml block contains #{attr_name} when it should not!"
+            end
+
+            expect(xml_nodeset.to_s).not_to include("FAMILY_PROSPECTS_OF_SUCCESS")
+          end
+
+          it "does not generate the chance of success attributes for SE014, nor FAMILY_PROSPECTS_OF_SUCCESS" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000003")
+
+            expect(xml_nodeset).to have_xml_attributes(PROCEEDING_NAME: "SE014")
+
+            chances_of_success_attributes.each do |attr_name|
+              expect(xml_nodeset.to_s).not_to include(attr_name), "xml block contains #{attr_name} when it should not!"
+            end
+
+            expect(xml_nodeset.to_s).not_to include("FAMILY_PROSPECTS_OF_SUCCESS")
           end
         end
 
