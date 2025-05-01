@@ -106,14 +106,9 @@ module CCMS
                    provider:,
                    office:).tap do |laa|
               create(:proceeding, :se003, proceeding_case_id: 66_000_001, legal_aid_application: laa, lead_proceeding: false)
-              create(:proceeding, :da004, proceeding_case_id: 66_000_002, legal_aid_application: laa, lead_proceeding: true)
+              create(:proceeding, :da004, :with_chances_of_success, proceeding_case_id: 66_000_002, legal_aid_application: laa, lead_proceeding: true, success_prospect: "likely")
               create(:proceeding, :se014, proceeding_case_id: 66_000_003, legal_aid_application: laa, lead_proceeding: false)
             end
-          end
-
-          before do
-            proceeding = legal_aid_application.proceedings.find_by(ccms_code: "DA004")
-            create(:chances_of_success, proceeding: proceeding, success_prospect: "likely")
           end
 
           it "generates the chance of success attributes for DA004" do
