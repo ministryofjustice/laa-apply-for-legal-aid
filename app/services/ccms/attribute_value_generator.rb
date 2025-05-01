@@ -289,7 +289,6 @@ module CCMS
     end
 
     def ccms_equivalent_prospects_of_success(_options)
-      # TODO: This is the lead proceedings value. is that correct? Could use options here
       return unless ccms_equivalent_prospects_of_success_valid?
 
       PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:text]
