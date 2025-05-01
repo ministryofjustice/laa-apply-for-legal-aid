@@ -4,6 +4,7 @@ Feature: Means report when partner is present
   Scenario: For a non-passported, non-TrueLayer application when the client is employed
     Given I have completed a non-passported employed with partner application with bank statement uploads
     When I view the means report
+
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
@@ -113,11 +114,20 @@ Feature: Means report when partner is present
       | Date of birth	|
       | What is their relationship to your client or their partner? |
 
+    # TODO: Check `residual_balance` review reason too?
+    # TODO: Check `unknown_frequency` review reason too?
+    # TODO: Check `refunds` review reason too?
+    # TODO: Check `amount_variation` review reason too?
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
-      | Review reasons | Client's bank statements uploaded |
+      | Review reasons | Review why some capital assets cannot be used towards legal aid |
+      | Review reasons | Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation |
       | Review reasons | Non-Passported application |
+      | Review reasons | Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC |
+      | Review reasons | Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC |
+      | Review reasons | Check uploaded bank statements for the client's account details. Open banking was not used |
+      | Review reasons | Check uploaded bank statements for the partner's account details. Open banking was not used |
 
     And the Capital result questions should exist:
       | question |

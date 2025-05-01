@@ -13,7 +13,7 @@
             summary_list.with_row do |row|
               row.with_key(text: t(".reasons"))
               row.with_value do
-                safe_join(@manual_review_determiner.review_reasons.map { |reason| t(".reason.#{reason}") }, tag.br)
+                safe_join(@manual_review_determiner.review_reasons.map { |reason| t(".reason.#{reason}") }, tag.br * 2)
               end
             end
 

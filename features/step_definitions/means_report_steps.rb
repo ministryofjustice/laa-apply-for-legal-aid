@@ -33,7 +33,7 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
     provider_received_citizen_consent: false,
-    attachments: [build(:attachment, :bank_statement)],
+    attachments: [build(:attachment, :client_bank_statement), build(:attachment, :partner_bank_statement)],
   )
 
   create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
