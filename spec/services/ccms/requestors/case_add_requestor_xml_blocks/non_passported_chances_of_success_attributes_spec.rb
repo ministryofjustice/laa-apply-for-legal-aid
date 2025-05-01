@@ -150,66 +150,66 @@ module CCMS
               expect(xml_nodeset.to_s).not_to include(attr_name), "xml block contains #{attr_name} when it should not!"
             end
           end
+        end
 
-          context "with a multiple proceedings with different chances of success object" do
-            let(:legal_aid_application) do
-              create(:legal_aid_application,
-                     :with_everything,
-                     :with_negative_benefit_check_result,
-                     :with_cfe_v6_result,
-                     applicant:,
-                     provider:,
-                     office:).tap do |laa|
-                create(:proceeding, :with_chances_of_success, :da001, proceeding_case_id: 66_000_001, legal_aid_application: laa, lead_proceeding: false, success_prospect: "likely")
-                create(:proceeding, :with_chances_of_success, :da002, proceeding_case_id: 66_000_002, legal_aid_application: laa, lead_proceeding: true, success_prospect: "marginal")
-                create(:proceeding, :with_chances_of_success, :da004, proceeding_case_id: 66_000_003, legal_aid_application: laa, lead_proceeding: false, success_prospect: "poor")
-              end
+        context "with a multiple proceedings with different chances of success object" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_negative_benefit_check_result,
+                   :with_cfe_v6_result,
+                   applicant:,
+                   provider:,
+                   office:).tap do |laa|
+              create(:proceeding, :with_chances_of_success, :da001, proceeding_case_id: 66_000_001, legal_aid_application: laa, lead_proceeding: false, success_prospect: "likely")
+              create(:proceeding, :with_chances_of_success, :da002, proceeding_case_id: 66_000_002, legal_aid_application: laa, lead_proceeding: true, success_prospect: "marginal")
+              create(:proceeding, :with_chances_of_success, :da004, proceeding_case_id: 66_000_003, legal_aid_application: laa, lead_proceeding: false, success_prospect: "poor")
             end
+          end
 
-            it "generates the chance of success attributes for DA001" do
-              xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000001")
+          it "generates the chance of success attributes for DA001" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000001")
 
-              expect(xml_nodeset)
-                .to have_xml_attributes(
-                  PROCEEDING_NAME: "DA001",
-                  FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: This is the lead proceedings value. is that correct?
-                  FAM_PROSP_50_OR_BETTER: "true",
-                  FAM_PROSP_BORDER_UNCERT_POOR: "false",
-                  FAM_PROSP_MARGINAL: "false",
-                  FAM_PROSP_POOR: "false",
-                  FAM_PROSP_UNCERTAIN: "false",
-                )
-            end
+            expect(xml_nodeset)
+              .to have_xml_attributes(
+                PROCEEDING_NAME: "DA001",
+                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: This is the lead proceedings value. is that correct?
+                FAM_PROSP_50_OR_BETTER: "true",
+                FAM_PROSP_BORDER_UNCERT_POOR: "false",
+                FAM_PROSP_MARGINAL: "false",
+                FAM_PROSP_POOR: "false",
+                FAM_PROSP_UNCERTAIN: "false",
+              )
+          end
 
-            it "generates the chance of success attributes for DA002" do
-              xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000002")
+          it "generates the chance of success attributes for DA002" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000002")
 
-              expect(xml_nodeset)
-                .to have_xml_attributes(
-                  PROCEEDING_NAME: "DA002",
-                  FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: This is the lead proceedings value, regardless. is that correct?
-                  FAM_PROSP_50_OR_BETTER: "false",
-                  FAM_PROSP_BORDER_UNCERT_POOR: "false",
-                  FAM_PROSP_MARGINAL: "true",
-                  FAM_PROSP_POOR: "false",
-                  FAM_PROSP_UNCERTAIN: "false",
-                )
-            end
+            expect(xml_nodeset)
+              .to have_xml_attributes(
+                PROCEEDING_NAME: "DA002",
+                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: This is the lead proceedings value, regardless. is that correct?
+                FAM_PROSP_50_OR_BETTER: "false",
+                FAM_PROSP_BORDER_UNCERT_POOR: "false",
+                FAM_PROSP_MARGINAL: "true",
+                FAM_PROSP_POOR: "false",
+                FAM_PROSP_UNCERTAIN: "false",
+              )
+          end
 
-            it "generates the chance of success attributes for DA004" do
-              xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000003")
+          it "generates the chance of success attributes for DA004" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000003")
 
-              expect(xml_nodeset)
-                .to have_xml_attributes(
-                  PROCEEDING_NAME: "DA004",
-                  FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: This is the lead proceedings value. is that correct?
-                  FAM_PROSP_50_OR_BETTER: "false",
-                  FAM_PROSP_BORDER_UNCERT_POOR: "false",
-                  FAM_PROSP_MARGINAL: "false",
-                  FAM_PROSP_POOR: "true",
-                  FAM_PROSP_UNCERTAIN: "false",
-                )
-            end
+            expect(xml_nodeset)
+              .to have_xml_attributes(
+                PROCEEDING_NAME: "DA004",
+                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: This is the lead proceedings value. is that correct?
+                FAM_PROSP_50_OR_BETTER: "false",
+                FAM_PROSP_BORDER_UNCERT_POOR: "false",
+                FAM_PROSP_MARGINAL: "false",
+                FAM_PROSP_POOR: "true",
+                FAM_PROSP_UNCERTAIN: "false",
+              )
           end
         end
       end
