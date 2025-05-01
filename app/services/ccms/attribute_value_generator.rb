@@ -497,12 +497,6 @@ module CCMS
       chances_of_success.present?
     end
 
-    def proceeding_chances_of_success?(options)
-      options[:chances_of_success].present?
-      # proceeding = options[:proceeding]
-      # proceeding.chances_of_success.present?
-    end
-
     def chances_of_success
       legal_aid_application.lead_proceeding.chances_of_success
     end
