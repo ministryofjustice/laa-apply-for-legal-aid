@@ -104,11 +104,11 @@ Feature: Means report
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
-      | Review reasons | Restrictions on client's assets |
-      | Review reasons | Capital disregards declared |
+      | Review reasons | Review why some capital assets cannot be used towards legal aid |
+      | Review reasons | Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation  |
       | Review reasons | Non-Passported application |
-      | Review reasons | Client's further employment details |
-      | Review reasons | Client's bank statements uploaded |
+      | Review reasons | Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC |
+      | Review reasons | Check uploaded bank statements for the client's account details. Open banking was not used |
 
     And the Capital result questions should exist:
       | question |
@@ -283,10 +283,10 @@ Feature: Means report
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
-      | Review reasons | Restrictions on client's assets |
-      | Review reasons | Capital disregards declared |
+      | Review reasons | Review why some capital assets cannot be used towards legal aid |
+      | Review reasons | Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation  |
       | Review reasons | Non-Passported application |
-      | Review reasons | Client's further employment details |
+      | Review reasons | Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC |
 
     And the Capital result questions should exist:
       | question |

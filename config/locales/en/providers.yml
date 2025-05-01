@@ -1603,20 +1603,20 @@ en:
           we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
           london_emergencies_trust: The London Emergencies Trust
         reason:
-          amount_variation: Monthly value unknown (variations)
-          unknown_frequency: Frequency unknown
-          residual_balance: Capital Contribution - Residual Balance Check
-          policy_disregards: Discretionary disregards selected
-          capital_disregards: Capital disregards declared
+          amount_variation: The monthly value for some income or outgoings contains large variations. Refer to 'Variation Category' to see which are impacted and need to be reviewed
+          unknown_frequency: How often some income was received or outgoings were paid could not be calculated. Refer to 'Frequency Category' to see which are impacted and need to be reviewed
+          residual_balance: Check current account's residual balance to ensure capital contribution is correct
+          policy_disregards: Discretionary disregards selected # CFE policy disregard review reason.
+          capital_disregards: Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation
           multi_benefit: Multiple benefits in single bank transaction
-          dwp_override: Provider disagrees with DWP result
-          restrictions: Restrictions on client's assets
-          client_further_employment_details: Client's further employment details
-          partner_further_employment_details: Partner's further employment details
+          dwp_override: Review evidence disputing the DWP's 'not passported' result
+          restrictions: Review why some capital assets cannot be used towards legal aid
+          client_further_employment_details: Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC
+          partner_further_employment_details: Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC
           multiple_employments: Multiple employments
-          refunds: Tax or NI refunds
-          client_uploaded_bank_statements: Client's bank statements uploaded
-          partner_uploaded_bank_statements: Partner's bank statements uploaded
+          refunds: Verify what the correct tax and NI deductions should be. HMRC data shows a refund to the client
+          client_uploaded_bank_statements: Check uploaded bank statements for the client's account details. Open banking was not used
+          partner_uploaded_bank_statements: Check uploaded bank statements for the partner's account details. Open banking was not used
           ineligible: Applicant is ineligible
           non_passported: Non-Passported application
       show:
