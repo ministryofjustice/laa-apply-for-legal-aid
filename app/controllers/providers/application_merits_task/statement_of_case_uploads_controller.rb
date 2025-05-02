@@ -2,14 +2,14 @@ module Providers
   module ApplicationMeritsTask
     class StatementOfCaseUploadsController < ProviderBaseController
       def show
-        populate_form
+        @form = StatementOfCaseUploadForm.new(model: statement_of_case)
       end
 
       def update
-        form
         if upload_button_pressed?
           perform_upload
-        elsif update_task_save_continue_or_draft(:application, :statement_of_case)
+        elsif save_continue_or_draft(form)
+          update_task(:application, :statement_of_case)
           convert_new_files_to_pdf
         else
           render :show
@@ -19,7 +19,7 @@ module Providers
       def destroy
         original_file = delete_original_and_pdf_files
         @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
-        populate_form
+        @form = StatementOfCaseUploadForm.new(model: statement_of_case)
         render :show
       end
 
@@ -27,18 +27,18 @@ module Providers
         render partial: "shared/uploaded_files",
                locals: {
                  attachments: legal_aid_application.attachments.statement_of_case,
-                 url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+                 url: providers_legal_aid_application_statement_of_case_upload_path(@legal_aid_application),
                }
       end
 
     private
 
-      def task_list_should_update?
-        application_has_task_list? && !draft_selected?
+      def statement_of_case
+        @statement_of_case ||= legal_aid_application.statement_of_case || legal_aid_application.build_statement_of_case
       end
 
-      def populate_form
-        @form = StatementOfCases::StatementOfCaseForm.new(model: statement_of_case)
+      def form
+        @form ||= StatementOfCaseUploadForm.new(statement_of_case_params)
       end
 
       def perform_upload
@@ -77,19 +77,13 @@ module Providers
         params[:upload_button].present?
       end
 
-      def form
-        @form ||= StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
-      end
-
       def statement_of_case_params
-        params[:application_merits_task_statement_of_case] = { original_file: [], statement: nil } unless params.key?(:application_merits_task_statement_of_case)
-        merge_with_model(statement_of_case, provider_uploader: current_provider) do
-          params.expect(application_merits_task_statement_of_case: %i[statement original_file])
-        end
-      end
+        return { model: statement_of_case } if params[:application_merits_task_statement_of_case].nil?
 
-      def statement_of_case
-        @statement_of_case ||= legal_aid_application.statement_of_case || legal_aid_application.build_statement_of_case
+        params[:application_merits_task_statement_of_case] = { original_file: [] } unless params.key?(:application_merits_task_statement_of_case)
+        merge_with_model(statement_of_case, provider_uploader: current_provider) do
+          params.expect(application_merits_task_statement_of_case: %i[original_file])
+        end
       end
 
       def delete_original_and_pdf_files
