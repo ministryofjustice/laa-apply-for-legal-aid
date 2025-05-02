@@ -18,6 +18,7 @@ module Flow
         court_order_copies: Steps::ProviderMerits::CourtOrderCopiesStep,
         domestic_abuse_summaries: Steps::ProviderMerits::DomesticAbuseSummariesStep,
         statement_of_cases: Steps::ProviderMerits::StatementOfCasesStep,
+        statement_of_case_uploads: Steps::ProviderMerits::StatementOfCaseUploadsStep,
         client_denial_of_allegations: Steps::ProviderMerits::ClientDenialOfAllegationsStep,
         client_offered_undertakings: Steps::ProviderMerits::ClientOfferedUndertakingsStep,
         in_scope_of_laspos: Steps::ProviderMerits::InScopeOfLasposStep,
