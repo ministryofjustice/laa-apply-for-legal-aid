@@ -371,7 +371,7 @@ Rails.application.routes.draw do
         resource :client_check_parental_answer, only: %i[show update], path: :check_who_your_client_is
         resource :statement_of_case, only: %i[show update]
         resource :statement_of_case_upload, only: %i[show update destroy] do
-          get "/list", to: "statement_of_cases#list"
+          get "/list", to: "statement_of_case_uploads#list"
         end
         resource :second_appeal, only: %i[show update]
         resource :original_judge_level, only: %i[show update], path: "original_case_judge_level"
