@@ -107,7 +107,9 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I fill "Bail conditions set details" with "Foo bar"
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Provide a statement of case"
+    Then I should be on a page showing "Statement of case"
+
+    When I select "Type a statement"
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
     And I fill "Application merits task statement of case statement field" with "Statement of case"
