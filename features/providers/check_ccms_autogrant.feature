@@ -60,7 +60,8 @@ Feature: Checking ccms means does NOT auto grant
     Then I fill "application-merits-task-domestic-abuse-summary-police-notified-details-true-field" with "Mike test"
     Then I choose "application-merits-task-domestic-abuse-summary-bail-conditions-set-field"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Provide a statement of case"
+    Then I should be on a page showing "Statement of case"
+    When I select "Type a statement"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
@@ -135,7 +136,8 @@ Feature: Checking ccms means does NOT auto grant
     Then I fill "application-merits-task-domestic-abuse-summary-police-notified-details-true-field" with "Mike test"
     Then I choose "application-merits-task-domestic-abuse-summary-bail-conditions-set-field"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Provide a statement of case"
+    Then I should be on a page showing "Statement of case"
+    When I select "Type a statement"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
