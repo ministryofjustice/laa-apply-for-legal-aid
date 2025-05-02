@@ -10,18 +10,38 @@ RSpec.describe Flow::Steps::ProviderMerits::StatementOfCasesStep, type: :request
   end
 
   describe "#forward" do
-    subject { described_class.forward.call(legal_aid_application) }
+    subject { described_class.forward.call(legal_aid_application, uploaded:) }
 
-    before do
-      allow(Flow::MeritsLoop).to receive(:forward_flow).and_return(:merits_task_lists)
+    context "when uploaded is false" do
+      let(:uploaded) { false }
+
+      before do
+        allow(Flow::MeritsLoop).to receive(:forward_flow).and_return(:merits_task_lists)
+      end
+
+      it { is_expected.to eq :merits_task_lists }
     end
 
-    it { is_expected.to eq :merits_task_lists }
+    context "when uploaded is true" do
+      let(:uploaded) { true }
+
+      it { is_expected.to eq :statement_of_case_uploads }
+    end
   end
 
   describe "#check_answers" do
-    subject { described_class.check_answers }
+    subject { described_class.check_answers.call(legal_aid_application, uploaded:) }
 
-    it { is_expected.to eq :check_merits_answers }
+    context "when uploaded is false" do
+      let(:uploaded) { false }
+
+      it { is_expected.to eq :check_merits_answers }
+    end
+
+    context "when uploaded is true" do
+      let(:uploaded) { true }
+
+      it { is_expected.to eq :statement_of_case_uploads }
+    end
   end
 end
