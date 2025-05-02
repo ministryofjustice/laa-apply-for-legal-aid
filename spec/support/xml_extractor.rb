@@ -47,23 +47,31 @@ class XmlExtractor
     merits_assessment_proceeding: %(//MeritsAssesments//AssesmentDetails//Entity[EntityName = "PROCEEDING"]//Instances/Attributes/Attribute),
   }.freeze
 
-  def self.call(xml, section, attribute_name = nil)
-    new(xml, section, attribute_name).extract
+  def self.call(xml, section, attribute_name = nil, instance_label = nil)
+    new(xml, section, attribute_name, instance_label).extract
   end
 
-  def initialize(xml, section, attribute_name)
+  attr_reader :xml, :section, :attribute_name, :instance_label
+
+  def initialize(xml, section, attribute_name, instance_label)
     @xml = xml
     @section = section
     @attribute_name = attribute_name
+    @instance_label = instance_label
   end
 
   def extract
-    doc = Nokogiri::XML(@xml).remove_namespaces!
-    xpath = if @attribute_name.nil?
-              XPATHS[@section].to_s
+    doc = Nokogiri::XML(xml).remove_namespaces!
+
+    # Allow extracting of instances of entities.
+    # e.g. there are mutiple instances of proceedings within the proceeding_merits PROCEEDING entity
+    xpath = if instance_label.present?
+              XPATHS[section].sub("//Attributes/Attribute", "/Instances[InstanceLabel = \"#{instance_label}\"]//Attributes/Attribute")
             else
-              "#{XPATHS[@section]}[Attribute='#{@attribute_name}']"
+              XPATHS[section]
             end
+
+    xpath = "#{xpath}[Attribute='#{attribute_name}']" if attribute_name.present?
 
     doc.xpath(xpath)
   end

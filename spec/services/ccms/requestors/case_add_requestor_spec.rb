@@ -1,5 +1,9 @@
 require "rails_helper"
 
+# DO NOT EXTEND this spec
+# Use the spec/ccms/requestors/case_add_requestor_xml_blocks
+# directory and subfiles.
+#
 module CCMS
   module Requestors
     RSpec.describe CaseAddRequestor, :ccms do

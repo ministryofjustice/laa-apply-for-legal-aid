@@ -492,7 +492,7 @@ module CCMS
       ManualReviewDeterminer.new(legal_aid_application).manual_review_required?
     end
 
-    def output_chances_of_success?(_options)
+    def lead_proceeding_chances_of_success?(_options)
       chances_of_success.present?
     end
 

@@ -53,6 +53,26 @@ FactoryBot.define do
       end
     end
 
+    trait :with_chances_of_success do
+      transient do
+        success_likely { nil }
+        application_purpose { nil }
+        success_prospect { "likely" }
+        success_prospect_details { nil }
+      end
+
+      after(:create) do |proceeding, evaluator|
+        proceeding.chances_of_success = create(
+          :chances_of_success,
+          success_likely: evaluator.success_likely,
+          application_purpose: evaluator.application_purpose,
+          success_prospect: evaluator.success_prospect,
+          success_prospect_details: evaluator.success_prospect_details,
+          proceeding:,
+        )
+      end
+    end
+
     trait :da001 do
       lead_proceeding { true }
       ccms_code { "DA001" }
