@@ -1115,6 +1115,68 @@ module CFEResults
         result
       end
 
+      # NOTE: this is a fake setup to exercise a CFE result with remarks that result in "all" review reasons
+      # Amend to add any new remarks as necessary.
+      def self.with_all_remarks
+        result = with_partner
+
+        # mark with all known client and partner remarks that can be returned by CFE so we can display their
+        # case worker review reasons.
+        remarks = {
+          client_employment: {
+            multiple_employments: [],
+          },
+          client_employment_gross_income: {
+            amount_variation: [],
+            unknown_frequency: [],
+          },
+          client_employment_nic: {
+            amount_variation: [],
+            refunds: [],
+          },
+          client_employment_tax: {
+            amount_variation: [],
+            refunds: [],
+          },
+          client_state_benefit_payment: {
+            amount_variation: [],
+            unknown_frequency: [],
+          },
+          client_current_account_balance: {
+            residual_balance: [],
+          },
+          partner_employment: {
+            multiple_employments: [],
+          },
+          partner_employment_gross_income: {
+            amount_variation: [],
+            unknown_frequency: [],
+          },
+          partner_employment_nic: {
+            amount_variation: [],
+            refunds: [],
+          },
+          partner_employment_tax: {
+            amount_variation: [],
+            refunds: [],
+          },
+          partner_state_benefit_payment: {
+            amount_variation: [],
+            unknown_frequency: [],
+          },
+          partner_current_account_balance: {
+            residual_balance: [],
+          },
+        }
+        result[:assessment][:remarks] = remarks
+
+        result[:result_summary][:overall_result][:result] = "ineligible"
+        result[:result_summary][:overall_result][:proceeding_types].each do |pt|
+          pt[:result] = "not_eligible"
+        end
+        result
+      end
+
       def self.without_partner_jobs
         result = with_partner
         result[:assessment][:partner_gross_income][:employment_income] = []

@@ -4,7 +4,6 @@ Feature: Means report when partner is present
   Scenario: For a non-passported, non-TrueLayer application when the client is employed
     Given I have completed a non-passported employed with partner application with bank statement uploads
     When I view the means report
-
     Then the following sections should exist:
       | tag | section |
       | h2  | Client details |
@@ -114,13 +113,14 @@ Feature: Means report when partner is present
       | Date of birth	|
       | What is their relationship to your client or their partner? |
 
-    # TODO: Check `residual_balance` review reason too?
-    # TODO: Check `unknown_frequency` review reason too?
-    # TODO: Check `refunds` review reason too?
-    # TODO: Check `amount_variation` review reason too?
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
+      | Review reasons | The monthly value for some income or outgoings contains large variations. Refer to 'Variation Category' to see which are impacted and need to be reviewed |
+      | Review reasons | Multiple employments |
+      | Review reasons | Verify what the correct tax and NI deductions should be. HMRC data shows a refund to the client |
+      | Review reasons | Check current account's residual balance to ensure capital contribution is correct |
+      | Review reasons | How often some income was received or outgoings were paid could not be calculated. Refer to 'Frequency Category' to see which are impacted and need to be reviewed |
       | Review reasons | Review why some capital assets cannot be used towards legal aid |
       | Review reasons | Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation |
       | Review reasons | Non-Passported application |
@@ -128,6 +128,25 @@ Feature: Means report when partner is present
       | Review reasons | Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC |
       | Review reasons | Check uploaded bank statements for the client's account details. Open banking was not used |
       | Review reasons | Check uploaded bank statements for the partner's account details. Open banking was not used |
+      | Review reasons | Applicant is ineligible |
+      | Review categories - Multiple employments | Client's employment |
+      | Review categories - Multiple employments | Partner's employment |
+      | Review categories - Monthly value | Client's employment gross income |
+      | Review categories - Monthly value | Client's employment National Insurance contributions |
+      | Review categories - Monthly value | Client's employment income tax |
+      | Review categories - Monthly value | Client's state benefits |
+      | Review categories - Monthly value | Partner's employment gross income |
+      | Review categories - Monthly value | Partner's employment National Insurance contributions |
+      | Review categories - Monthly value | Partner's employment income tax |
+      | Review categories - Monthly value | Partner's state benefits |
+      | Review categories - Frequency | Client's employment gross income |
+      | Review categories - Frequency | Client's state benefits |
+      | Review categories - Frequency | Partner's employment gross income |
+      | Review categories - Frequency | Partner's state benefits |
+      | Review categories - Tax or NI refunds | Client's employment National Insurance contributions |
+      | Review categories - Tax or NI refunds | Client's employment income tax |
+      | Review categories - Tax or NI refunds | Partner's employment National Insurance contributions |
+      | Review categories - Tax or NI refunds | Partner's employment income tax |
 
     And the Capital result questions should exist:
       | question |

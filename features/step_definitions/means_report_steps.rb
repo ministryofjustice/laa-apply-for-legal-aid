@@ -40,8 +40,8 @@ Given(/^I have completed a non-passported (employed|employed with partner) appli
 
   cfe_submission = create(:cfe_submission, legal_aid_application: @legal_aid_application)
   if optional_partner == "employed with partner"
-    create(:cfe_v6_result, :with_partner, submission: cfe_submission, legal_aid_application: @legal_aid_application)
     create(:partner, :with_extra_employment_information, legal_aid_application: @legal_aid_application)
+    create(:cfe_v6_result, :with_all_remarks, submission: cfe_submission, legal_aid_application: @legal_aid_application)
     @legal_aid_application.applicant.update!(has_partner: true, partner_has_contrary_interest: false)
   else
     create(:cfe_v6_result, submission: cfe_submission, legal_aid_application: @legal_aid_application)
