@@ -19,8 +19,6 @@ updates:
         exclude-patterns:
           - "rubocop*"
     open-pull-requests-limit: 10
-    reviewers:
-      - "ministryofjustice/laa-apply-for-legal-aid"
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -36,5 +34,3 @@ updates:
         patterns:
           - "*"
     open-pull-requests-limit: 10
-    reviewers:
-      - "ministryofjustice/laa-apply-for-legal-aid"
