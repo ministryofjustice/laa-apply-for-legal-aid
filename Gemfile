@@ -118,7 +118,7 @@ group :development, :test do
   gem "rubocop-performance"
 
   # Available in dev env for generators
-  gem "rspec-rails", "~> 7.1"
+  gem "rspec-rails", "~> 8.0"
 end
 
 group :development do
