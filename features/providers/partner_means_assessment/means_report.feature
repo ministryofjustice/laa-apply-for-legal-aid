@@ -117,7 +117,7 @@ Feature: Means report when partner is present
       | question | answer |
       | Caseworker review required? | Yes |
       | Review reasons | The monthly value for some income or outgoings contains large variations. Refer to 'Variation Category' to see which are impacted and need to be reviewed |
-      | Review reasons | Multiple employments |
+      | Review reasons | Request wageslips for the client. HMRC data shows they've had multiple employments |
       | Review reasons | Verify what the correct tax and NI deductions should be. HMRC data shows a refund to the client |
       | Review reasons | Check current account's residual balance to ensure capital contribution is correct |
       | Review reasons | How often some income was received or outgoings were paid could not be calculated. Refer to 'Frequency Category' to see which are impacted and need to be reviewed |
@@ -128,7 +128,7 @@ Feature: Means report when partner is present
       | Review reasons | Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC |
       | Review reasons | Check uploaded bank statements for the client's account details. Open banking was not used |
       | Review reasons | Check uploaded bank statements for the partner's account details. Open banking was not used |
-      | Review reasons | Applicant is ineligible |
+      | Review reasons | Applicant is ineligible. Check the overall means result |
       | Review categories - Multiple employments | Client's employment |
       | Review categories - Multiple employments | Partner's employment |
       | Review categories - Monthly value | Client's employment gross income |
