@@ -33,7 +33,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-jsdom-global": "^4.0.0",
     "postcss": "^8.5.3",
-    "puppeteer": "^24.8.0",
+    "puppeteer": "^24.8.1",
     "standard": "^17.1.2",
     "stylelint": "^16.19.1",
     "stylelint-config-gds": "^2.0.0",
