@@ -28,10 +28,6 @@ updates:
       day: tuesday
       time: "21:15"
       timezone: Europe/London
-    ignore:
-      - dependency-name: "@ministryofjustice/frontend"
-        versions:
-          - ">= 5.0.0"
     groups:
       moj-frontend:
         patterns:

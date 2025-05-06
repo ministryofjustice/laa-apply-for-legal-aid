@@ -1383,10 +1383,10 @@
   dependencies:
     buffer "^6.0.3"
 
-"@ministryofjustice/frontend@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-4.0.2.tgz#6cc8c1e817ba5a264773ed4ffcad37826ed387d3"
-  integrity sha512-UhzWIaIHNBcU1yhtSTAftbv8KaSmGq9+sSb+jTtXtFE/dCkhOAgojBn2glI4O2uWTjqIFPrOmN/N2DRfrx0sLA==
+"@ministryofjustice/frontend@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-5.1.2.tgz#0eb44cd9f1e2e322dd24792f1e2bd66f8f4b56da"
+  integrity sha512-ZpxmefOMLdm4CQGctz4KLIlbgJGHTjhJXohKAygZoA+/pP+paGmbeGIDkdjW7wRF5etld+ERZ9yqNeoMmm+VAw==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
