@@ -143,12 +143,10 @@ RSpec.describe TransactionTypeHelper do
                                                          transaction_date: Date.new(2021, 3, 1), month_number: 3, amount: 333.0)
             end
 
-            it "returns a hash of formatted key value pairs" do
+            it "returns a hash of formatted key value pairs for categories which have either regular or cash transactions" do
               expect(formatted_transactions).to eq [
                 { label: "Financial help from friends or family", value: "None" },
                 { label: "Maintenance payments from a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-                { label: "Income from a property or lodger", value: "None" },
-                { label: "Pension", value: "None" },
               ]
             end
           end
@@ -210,8 +208,6 @@ RSpec.describe TransactionTypeHelper do
             expect(formatted_transactions).to eq [
               { label: "Financial help from friends or family", value: "None" },
               { label: "Maintenance payments from a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-              { label: "Income from a property or lodger", value: "None" },
-              { label: "Pension", value: "None" },
             ]
           end
         end
@@ -224,9 +220,9 @@ RSpec.describe TransactionTypeHelper do
 
       before do
         create(:regular_transaction, :rent_or_mortgage, legal_aid_application:, owner_type: individual)
-        create(:regular_transaction, :child_care, legal_aid_application:, owner_type: individual)
+        create(:transaction_type, :child_care)
+        create(:regular_transaction, :maintenance_out, legal_aid_application:, owner_type: individual)
         create(:transaction_type, :legal_aid)
-        create(:transaction_type, :maintenance_out)
       end
 
       context "and individual is applicant" do
@@ -236,8 +232,8 @@ RSpec.describe TransactionTypeHelper do
           it "returns a hash of formatted key value pairs" do
             expect(formatted_transactions).to eq [
               { label: "Housing payments", value: "£500.00 every week" },
-              { label: "Maintenance payments to a former partner", value: "None" },
-              { label: "Childcare payments", value: "£500.00 every week" },
+              { label: "Maintenance payments to a former partner", value: "£500.00 every week" },
+              { label: "Childcare payments", value: "None" },
               { label: "Payments towards legal aid in a criminal case", value: "None" },
             ]
           end
@@ -258,8 +254,6 @@ RSpec.describe TransactionTypeHelper do
               expect(formatted_transactions).to eq [
                 { label: "Housing payments", value: "None" },
                 { label: "Maintenance payments to a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-                { label: "Childcare payments", value: "None" },
-                { label: "Payments towards legal aid in a criminal case", value: "None" },
               ]
             end
           end
@@ -298,8 +292,8 @@ RSpec.describe TransactionTypeHelper do
         it "returns a hash of formatted key value pairs" do
           expect(formatted_transactions).to eq [
             { label: "Housing payments", value: "£500.00 every week" },
-            { label: "Maintenance payments to a former partner", value: "None" },
-            { label: "Childcare payments", value: "£500.00 every week" },
+            { label: "Maintenance payments to a former partner", value: "£500.00 every week" },
+            { label: "Childcare payments", value: "None" },
             { label: "Payments towards legal aid in a criminal case", value: "None" },
           ]
         end
@@ -320,8 +314,6 @@ RSpec.describe TransactionTypeHelper do
             expect(formatted_transactions).to eq [
               { label: "Housing payments", value: "None" },
               { label: "Maintenance payments to a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-              { label: "Childcare payments", value: "None" },
-              { label: "Payments towards legal aid in a criminal case", value: "None" },
             ]
           end
         end

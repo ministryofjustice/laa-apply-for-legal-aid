@@ -22,14 +22,20 @@ module TransactionTypeHelper
   end
 
   def format_transactions(legal_aid_application:, credit_or_debit:, regular_or_cash:, individual:)
-    transaction_types(legal_aid_application:, credit_or_debit:).map do |type|
-      transactions = transactions_for(legal_aid_application:, credit_or_debit:, regular_or_cash:, individual:)
+    transactions = transactions_for(legal_aid_application:, credit_or_debit:, regular_or_cash:, individual:)
+    types = transaction_types(legal_aid_application:, credit_or_debit:)
+
+    types.filter_map do |type|
+      next if regular_or_cash == :cash && !type.name.in?(regular_transactions_for(legal_aid_application:, credit_or_debit:, individual:).keys)
+
       {
         label: type.label_name,
         value: transactions[type.name] || t("generic.none"),
       }
     end
   end
+
+private
 
   def transactions_for(legal_aid_application:, credit_or_debit:, regular_or_cash:, individual:)
     if individual == "Applicant" && !legal_aid_application.client_uploading_bank_statements?
