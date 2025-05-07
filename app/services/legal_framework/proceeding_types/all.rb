@@ -30,9 +30,7 @@ module LegalFramework
 
       def call
         parsed_body = JSON.parse(request.body)
-        result = parsed_body["data"].map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
-
-        result
+        parsed_body["data"].map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
       end
 
     private
