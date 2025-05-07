@@ -1166,6 +1166,20 @@ FactoryBot.define do
       end
     end
 
+    trait :with_maintenance_in_regular_transaction do
+      after(:create) do |application|
+        application.transaction_types << (TransactionType.find_by(name: "maintenance_in") || create(:transaction_type, :maintenance_in))
+        create(:regular_transaction, :maintenance_in, legal_aid_application: application, owner_id: application.applicant.id, owner_type: "Applicant")
+      end
+    end
+
+    trait :with_partner_maintenance_in_regular_transaction do
+      after(:create) do |application|
+        application.transaction_types << (TransactionType.find_by(name: "maintenance_in") || create(:transaction_type, :rent_or_mortgage))
+        create(:regular_transaction, :maintenance_in, legal_aid_application: application, owner_id: application.applicant.id, owner_type: "Partner")
+      end
+    end
+
     trait :with_housing_benefit_regular_transaction do
       after(:build) do |application|
         application.applicant_in_receipt_of_housing_benefit = true

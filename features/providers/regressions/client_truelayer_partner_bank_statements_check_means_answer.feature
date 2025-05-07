@@ -58,11 +58,7 @@ Feature: Bank statement upload check your answers
     Then I should be on a page with title "Check your answers"
     And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
-      | Benefits, charitable or government payments | None |
-      | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | None |
-      | Income from a property or lodger | None |
-      | Pension | None |
+      | Payments received by your client | None |
 
     When I click Check Your Answers Change link for "Payments your client gets"
     Then I should be on a page with title "Which of these payments does your client get?"
