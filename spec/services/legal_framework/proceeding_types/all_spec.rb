@@ -4,28 +4,18 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
   subject(:all) { described_class.new(legal_aid_application) }
 
   before do
-    allow(Setting).to receive_messages(public_law_family?: plf_enabled)
     stub_request(:post, uri).to_return(body:)
   end
 
   let(:legal_aid_application) { create :legal_aid_application }
   let(:body) { all_proceeding_types_payload }
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types/filter" }
-  let(:plf_enabled) { false }
 
   describe ".call" do
     subject(:call) { all.call }
 
-    context "when the plf flag is off" do
-      it "returns the expected proceedings" do
-        expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003]
-      end
-    end
-
-    context "when the plf flag is on" do
-      let(:plf_enabled) { true }
-
-      it "returns the expected proceedings" do
+    context "when all proceedings returned" do
+      it "returns the expected proceedings array" do
         expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006 PB003 PBM01]
       end
     end

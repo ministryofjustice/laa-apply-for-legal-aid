@@ -1,4 +1,6 @@
 class Setting < ApplicationRecord
+  self.ignored_columns += %w[public_law_family]
+
   def self.mock_true_layer_data?
     setting.mock_true_layer_data?
   end
@@ -29,10 +31,6 @@ class Setting < ApplicationRecord
 
   def self.collect_hmrc_data?
     setting.collect_hmrc_data
-  end
-
-  def self.public_law_family?
-    setting.public_law_family
   end
 
   def self.setting

@@ -17,11 +17,6 @@ module LegalFramework
           @sca_related = pt_hash["sca_related"]
           @plf = pt_hash["ccms_matter_code"] == "KPBLB"
         end
-
-        # TODO: remove the below when the PLF feature flag is removed
-        def not_plf?
-          @plf == false
-        end
       end
 
       def self.call(legal_aid_application)
@@ -36,10 +31,6 @@ module LegalFramework
       def call
         parsed_body = JSON.parse(request.body)
         result = parsed_body["data"].map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
-
-        # TODO: remove the below when the PLF feature flag is removed
-        # Filter out PLF applications
-        result.select!(&:not_plf?) unless Setting.public_law_family?
 
         result
       end
