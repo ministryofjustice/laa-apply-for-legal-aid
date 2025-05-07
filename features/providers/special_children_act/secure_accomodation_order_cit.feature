@@ -21,10 +21,10 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
     When I click 'Use this address'
 
     Then I should be on a page showing "What does your client want legal aid for?"
-    When I search for proceeding 'Child assessment order'
+    When I search for proceeding 'Child assessment order SCA'
     Then proceeding suggestions has results
 
-    When I choose a proceeding type 'Child assessment order' radio button
+    When I choose a 'Child assessment order' radio button
     And I click 'Save and continue'
 
     Then I should be on the "proceeding_issue_status" page showing "Has this proceeding been issued?"
@@ -46,10 +46,10 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
     And I click 'Save and continue'
 
     Then I should be on a page showing "What does your client want legal aid for?"
-    When I search for proceeding 'secure accommodation order'
+    When I search for proceeding 'secure accommodation order SCA'
     Then proceeding suggestions has results
 
-    When I choose a proceeding type 'Secure accommodation order' radio button
+    When I choose a 'Secure accommodation order' radio button
     And I click 'Save and continue'
     Then I should be on the "proceeding_issue_status" page showing "Has this proceeding been issued?"
 

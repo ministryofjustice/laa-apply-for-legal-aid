@@ -20,7 +20,7 @@ Feature: Emergency cost override
     And I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    When I choose a proceeding type 'Non-molestation order' radio button
+    When I choose a 'Non-molestation order' radio button
     When I click 'Save and continue'
     Then I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'

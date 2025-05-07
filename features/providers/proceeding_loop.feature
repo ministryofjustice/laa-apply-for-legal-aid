@@ -29,8 +29,8 @@ Feature: Loop through proceeding questions
     And I should be on a page showing "What does your client want legal aid for?"
 
   Scenario: When provider does not accept default levels of service
-    Given I search for proceeding type "Child arrangements order CAO"
-    And I choose "Child arrangements order (CAO) - residence - appeal"
+    Given I search for proceeding type "Child arrangements order CAO Section 8"
+    And I choose a "Child arrangements order (CAO) - residence - appeal" radio button
 
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to add another proceeding?"
@@ -169,8 +169,8 @@ Feature: Loop through proceeding questions
     Then I should be on a page with title "Does your client have a National Insurance number?"
 
   Scenario: When provider accepts default levels of service
-    Given I search for proceeding type "Child arrangements order CAO"
-    And I choose "Child arrangements order (CAO) - residence - appeal"
+    Given I search for proceeding type "Child arrangements order CAO Section 8"
+    And I choose a "Child arrangements order (CAO) - residence - appeal" radio button
 
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to add another proceeding?"

@@ -170,7 +170,7 @@ Given("the setting to manually review all cases is enabled") do
 end
 
 Then("I choose a {string} radio button") do |radio_button_name|
-  choose(radio_button_name, allow_label_click: true)
+  choose(radio_button_name, allow_label_click: true, match: :first)
 end
 
 Given(/^I view the previously created application$/) do
@@ -1338,10 +1338,6 @@ end
 
 Then("I select a proceeding type and continue") do
   find_by_id("proceeding-list").first(:button, "Select and continue").click
-end
-
-Then("I choose a proceeding type {string} radio button") do |radio_button_name|
-  choose(radio_button_name, allow_label_click: true)
 end
 
 Then("I select proceeding type {int}") do |index|
