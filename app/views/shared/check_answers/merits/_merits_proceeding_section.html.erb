@@ -25,7 +25,7 @@
       end %>
 <% end %>
 
-<% if proceeding.attempts_to_settle || proceeding.section8? || proceeding.specific_issue || proceeding.prohibited_steps || proceeding.special_children_act? %>
+<% if proceeding.attempts_to_settle || proceeding.involved_children.any? || proceeding.section8? || proceeding.specific_issue || proceeding.prohibited_steps || proceeding.special_children_act? %>
   <% if proceeding.attempts_to_settle %>
      <%= govuk_summary_card(title: t(".attempts_to_settle_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle" }, heading_level: 3) do |card|
            unless read_only
@@ -43,7 +43,7 @@
          end %>
   <% end %>
 
-  <% if proceeding.section8? || (proceeding.special_children_act? && proceeding.client_involvement_type_ccms_code.in?(["A", "D"])) %>
+  <% if proceeding.involved_children.any? %>
      <%= govuk_summary_card(title: t(".linked_children_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children" }, heading_level: 3) do |card|
            unless read_only
              card.with_action do
