@@ -130,10 +130,6 @@ cy:
           ruoy fo tseb eht ot ,taht gnimrifnoc era uoy noitacilppa siht gnittimbus
           yB"
         case-details-heading: sliated esaC
-      no_link_cash_transaction_item:
-        no_transactions: 'oN'
-        html:
-          no_transactions: 'oN'
       proceedings_details:
         section_proceeding:
           client_involvement_type: epyt tnemevlovni tneilC

@@ -25,8 +25,6 @@ class CashTransaction < ApplicationRecord
       .group_by(&:parent_transaction_type)
   }
 
-  scope :for_transaction_type, ->(tt_id) { where(transaction_type_id: tt_id).order(transaction_date: :asc) }
-
   def self.amounts
     group(:transaction_type_id).sum(:amount)
   end
