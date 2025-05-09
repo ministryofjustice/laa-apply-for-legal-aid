@@ -330,8 +330,6 @@ GEM
       activesupport (>= 6.1.4.4)
     htmlentities (4.3.4)
     http_parser.rb (0.8.0)
-    httpclient (2.9.0)
-      mutex_m
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     i18n-tasks (1.0.15)
@@ -392,7 +390,6 @@ GEM
     multi_test (1.1.0)
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
-    mutex_m (0.3.0)
     nenv (0.3.0)
     nesty (1.0.2)
     net-http (0.6.0)
@@ -783,7 +780,6 @@ DEPENDENCIES
   guard-rubocop
   hirb
   htmlentities
-  httpclient
   i18n-tasks
   jsbundling-rails
   json_expressions

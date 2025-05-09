@@ -107,7 +107,6 @@ group :development, :test do
   gem "erb_lint", "0.9.0", require: false
   gem "hirb"
   gem "htmlentities"
-  gem "httpclient"
   gem "i18n-tasks"
   gem "json_expressions"
   gem "nokogiri", ">= 1.12.5"
