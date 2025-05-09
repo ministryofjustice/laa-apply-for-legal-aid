@@ -36,8 +36,9 @@ Feature: Public law family merits appeal question flow
     ############################
     # statement of case
     ############################
-    Then I should be on a page showing "Provide a statement of case"
-    When I fill "Application merits task statement of case statement field" with "Statement of case"
+    Then I should be on a page showing "Statement of case"
+    When I select "Type a statement"
+    And I fill "Application merits task statement of case statement field" with "Statement of case"
     And I click 'Save and continue'
 
     ############################

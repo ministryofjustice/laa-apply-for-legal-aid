@@ -1049,6 +1049,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_071703) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.uuid "provider_uploader_id"
+    t.boolean "upload"
+    t.boolean "typed"
     t.index ["legal_aid_application_id"], name: "index_statement_of_cases_on_legal_aid_application_id"
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
   end

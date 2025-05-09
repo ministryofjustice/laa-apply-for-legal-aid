@@ -126,9 +126,10 @@ Feature: Check pending employment
     And I fill "application-merits-task-domestic-abuse-summary-police-notified-details-true-field" with "Single employment test"
     And I choose "application-merits-task-domestic-abuse-summary-bail-conditions-set-field"
     And I click 'Save and continue'
-    Then I should be on a page showing "Provide a statement of case"
+    Then I should be on a page showing "Statement of case"
 
-    When I fill "application-merits-task-statement-of-case-statement-field" with "Statement of case"
+    When I select "Type a statement"
+    And I fill "application-merits-task-statement-of-case-statement-field" with "Statement of case"
     And I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
 
