@@ -43,7 +43,6 @@ RSpec.describe Admin::SettingsController do
           linked_applications: "true",
           collect_hmrc_data: "true",
           home_address: "true",
-          public_law_family: "true",
         },
       }
     end
@@ -59,7 +58,6 @@ RSpec.describe Admin::SettingsController do
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.linked_applications?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
-      expect(setting.public_law_family?).to be(true)
     end
 
     it "create settings if they do not exist" do

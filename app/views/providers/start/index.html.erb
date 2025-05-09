@@ -6,7 +6,7 @@
 
     <p class="govuk-body"><%= t(".use_service.list_title") %></p>
 
-    <%= govuk_list Setting.public_law_family? ? t(".use_service.with_plf_list") : t(".use_service.list"), type: :bullet %>
+    <%= govuk_list t(".use_service.list"), type: :bullet %>
 
     <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
 

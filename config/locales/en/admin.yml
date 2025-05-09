@@ -81,7 +81,6 @@ en:
           enable_evidence_upload: Enable the new evidence upload feature
           linked_applications: Enable linking and copying cases
           collect_hmrc_data: Collect HMRC data
-          public_law_family: Enable Public Law Family
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -92,7 +91,6 @@ en:
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           linked_applications: Select Yes to enable the linking and copying cases feature for solicitors
           collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
-          public_law_family: Select Yes to enable Public Law Family feature
 
       update:
         notice: Settings have been updated

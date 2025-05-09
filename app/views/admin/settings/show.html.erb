@@ -66,16 +66,6 @@
           legend: { text: t(".labels.collect_hmrc_data") },
         ) %>
 
-    <%= form.govuk_collection_radio_buttons(
-          :public_law_family,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.public_law_family") },
-          legend: { text: t(".labels.public_law_family") },
-        ) %>
-
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>

@@ -22,7 +22,7 @@ Feature: Using the back button on proceedings should not lock a user out
     Then I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    When I choose a proceeding type 'Non-molestation order' radio button
+    When I choose a 'Non-molestation order' radio button
     And I click 'Save and continue'
     Then I should be on a page showing 'Do you want to add another proceeding?'
 

@@ -23,8 +23,7 @@ module Admin
                                 allow_welsh_translation
                                 enable_ccms_submission
                                 linked_applications
-                                collect_hmrc_data
-                                public_law_family])
+                                collect_hmrc_data])
     end
 
     def setting
