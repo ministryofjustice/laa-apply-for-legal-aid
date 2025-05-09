@@ -338,41 +338,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: hmrcUseDevMock
-  - name: GOOGLE_SHEETS_PRIVATE_KEY_ID
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleSheetsPrivateKeyId
-  - name: GOOGLE_SHEETS_PRIVATE_KEY_VALUE
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleSheetsPrivateKeyValue
-  - name: GOOGLE_SHEETS_CLIENT_EMAIL
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleSheetsClientEmail
-  - name: GOOGLE_SHEETS_CLIENT_ID
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleSheetsClientId
-  - name: GOOGLE_SHEETS_SPREADSHEET_ID
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleSheetsSpreadsheetId
-  - name: CFE_COMPARISON_SHEET_ID
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: googleSheetsCFEComparisonSpreadsheetId
-  - name: GOOGLE_DATA_STUDIO_URL
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleDataStudioUrl
   - name: RESEARCH_PANEL_FORM_LINK
     valueFrom:
       secretKeyRef:

@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get "ping", to: "status#ping", format: :json
   get "healthcheck", to: "status#status", format: :json
   get "status", to: "status#ping", format: :json
-  get "data", to: "status#data"
 
   match "(*any)", to: "pages#servicedown", via: :all if Rails.application.config.x.maintenance_mode
 

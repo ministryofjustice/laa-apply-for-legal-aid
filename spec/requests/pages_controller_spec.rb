@@ -75,25 +75,5 @@ RSpec.describe PagesController, :clamav do
         it { expect(response.body).to include("Service temporarily unavailable") }
       end
     end
-
-    context "when /ping request made" do
-      before { get "/ping" }
-
-      it { expect(response).to be_ok }
-    end
-
-    context "when /healthcheck request made" do
-      before do
-        allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
-        allow(Sidekiq::RetrySet).to receive(:new).and_return(instance_double(Sidekiq::RetrySet, size: 0))
-        allow(Sidekiq::DeadSet).to receive(:new).and_return(instance_double(Sidekiq::DeadSet, size: 0))
-        connection = instance_double(HTTPClient::Connection)
-        allow(connection).to receive(:info).and_return(redis_version: "7.0.0")
-        allow(Sidekiq).to receive(:redis).and_yield(connection)
-        get "/healthcheck"
-      end
-
-      it { expect(response).to be_ok }
-    end
   end
 end

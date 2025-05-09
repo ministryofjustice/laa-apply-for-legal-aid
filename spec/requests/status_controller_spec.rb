@@ -6,9 +6,9 @@ RSpec.describe StatusController, :clamav do
       allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
       allow(Sidekiq::RetrySet).to receive(:new).and_return(instance_double(Sidekiq::RetrySet, size: 0))
       allow(Sidekiq::DeadSet).to receive(:new).and_return(instance_double(Sidekiq::DeadSet, size: 0))
-      connection = instance_double(HTTPClient::Connection)
-      allow(connection).to receive(:info).and_return(redis_version: "5.0.0")
-      allow(Sidekiq).to receive(:redis).and_yield(connection)
+      client = instance_double(Sidekiq::RedisClientAdapter::CompatClient)
+      allow(client).to receive(:info).and_return(redis_version: "5.0.0")
+      allow(Sidekiq).to receive(:redis).and_yield(client)
     end
 
     context "when failed Sidekiq jobs exist" do
@@ -63,9 +63,9 @@ RSpec.describe StatusController, :clamav do
         allow(ActiveRecord::Base.connection).to receive(:database_exists?).and_return(true)
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
-        connection = instance_double(HTTPClient::Connection)
-        allow(connection).to receive(:info).and_raise(Redis::CannotConnectError)
-        allow(Sidekiq).to receive(:redis).and_yield(connection)
+        client = instance_double(Sidekiq::RedisClientAdapter::CompatClient)
+        allow(client).to receive(:info).and_raise(Redis::CannotConnectError)
+        allow(Sidekiq).to receive(:redis).and_yield(client)
 
         get "/healthcheck"
       end
@@ -99,9 +99,9 @@ RSpec.describe StatusController, :clamav do
         allow(ActiveRecord::Base.connection).to receive(:database_exists?).and_return(false)
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
 
-        connection = instance_double(HTTPClient::Connection)
-        allow(connection).to receive(:info).and_return("some info about redis")
-        allow(Sidekiq).to receive(:redis).and_yield(connection)
+        client = instance_double(Sidekiq::RedisClientAdapter::CompatClient)
+        allow(client).to receive(:info).and_return("some info about redis")
+        allow(Sidekiq).to receive(:redis).and_yield(client)
 
         get "/healthcheck"
       end
@@ -197,8 +197,8 @@ RSpec.describe StatusController, :clamav do
       before do
         allow(ActiveRecord::Base.connection).to receive(:active?).and_return(true)
 
-        connection = instance_double(HTTPClient::Connection, info: {})
-        allow(Sidekiq).to receive(:redis).and_yield(connection)
+        client = instance_double(Sidekiq::RedisClientAdapter::CompatClient, info: {})
+        allow(Sidekiq).to receive(:redis).and_yield(client)
 
         get "/healthcheck"
       end
@@ -260,18 +260,6 @@ RSpec.describe StatusController, :clamav do
       it 'returns "Not Available"' do
         expect(response.parsed_body.values).to be_all("Not Available")
       end
-    end
-  end
-
-  describe "#data" do
-    before do
-      allow(ENV).to receive(:fetch)
-                      .with("GOOGLE_DATA_STUDIO_URL", nil)
-                      .and_return("https://fake.datastudio.com/")
-    end
-
-    it "redirects to the current google data studio url" do
-      expect(get("/data")).to redirect_to "https://fake.datastudio.com/"
     end
   end
 end

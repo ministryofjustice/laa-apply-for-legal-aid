@@ -24,10 +24,6 @@ class StatusController < ApiController
     }
   end
 
-  def data
-    redirect_to ENV.fetch("GOOGLE_DATA_STUDIO_URL", nil), allow_other_host: true
-  end
-
 private
 
   def redis_alive?
