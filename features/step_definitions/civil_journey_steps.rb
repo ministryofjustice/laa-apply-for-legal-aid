@@ -998,6 +998,9 @@ Given("I complete the journey as far as check merits answers with multiple proce
     set_lead_proceeding: :da001,
   )
   create(:legal_framework_merits_task_list, :da001_da004_as_defendant_se014, legal_aid_application: @legal_aid_application)
+
+  @legal_aid_application.proceedings.first.involved_children << @legal_aid_application.involved_children.first
+
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
 

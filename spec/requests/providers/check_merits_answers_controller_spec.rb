@@ -22,8 +22,13 @@ RSpec.describe Providers::CheckMeritsAnswersController do
     let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
     let(:domestic_abuse_summary) { create(:domestic_abuse_summary, :police_notified_true) }
     let(:matter_opposition) { create(:matter_opposition) }
+    let(:involved_child) { application.involved_children.first }
 
-    before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
+    before do
+      allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
+      application.proceedings.find_by(ccms_code: "SE014").involved_children << involved_child
+      application.save!
+    end
 
     context "when the provider is unauthenticated" do
       before { get_request }
