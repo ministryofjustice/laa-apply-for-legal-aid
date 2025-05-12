@@ -5,7 +5,7 @@ module Flow
         path: ->(application) { Steps.urls.providers_legal_aid_application_link_application_copy_path(application) },
         forward: lambda do |application|
           if application.copy_case?
-            :has_national_insurance_numbers
+            :client_has_partners
           else
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end
