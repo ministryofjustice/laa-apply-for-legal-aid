@@ -7,7 +7,7 @@ module Flow
           if application.overriding_dwp_result?
             :check_provider_answers
           else
-            :client_has_partners
+            :previous_references
           end
         end,
         check_answers: :check_provider_answers,
