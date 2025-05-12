@@ -116,8 +116,37 @@ Feature: Means report when partner is present
     And the Caseworker review section should contain:
       | question | answer |
       | Caseworker review required? | Yes |
-      | Review reasons | Client's bank statements uploaded |
+      | Review reasons | The monthly value for some income or outgoings contains large variations. Refer to 'Variation Category' to see which are impacted and need to be reviewed |
+      | Review reasons | Request wageslips for the client. HMRC data shows they've had multiple employments |
+      | Review reasons | Verify what the correct tax and NI deductions should be. HMRC data shows a refund to the client |
+      | Review reasons | Check current account's residual balance to ensure capital contribution is correct |
+      | Review reasons | How often some income was received or outgoings were paid could not be calculated. Refer to 'Frequency Category' to see which are impacted and need to be reviewed |
+      | Review reasons | Review why some capital assets cannot be used towards legal aid |
+      | Review reasons | Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation |
       | Review reasons | Non-Passported application |
+      | Review reasons | Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC |
+      | Review reasons | Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC |
+      | Review reasons | Check uploaded bank statements for the client's account details. Open banking was not used |
+      | Review reasons | Check uploaded bank statements for the partner's account details. Open banking was not used |
+      | Review reasons | Applicant is ineligible. Check the overall means result |
+      | Review categories - Multiple employments | Client's employment |
+      | Review categories - Multiple employments | Partner's employment |
+      | Review categories - Monthly value | Client's employment gross income |
+      | Review categories - Monthly value | Client's employment National Insurance contributions |
+      | Review categories - Monthly value | Client's employment income tax |
+      | Review categories - Monthly value | Client's state benefits |
+      | Review categories - Monthly value | Partner's employment gross income |
+      | Review categories - Monthly value | Partner's employment National Insurance contributions |
+      | Review categories - Monthly value | Partner's employment income tax |
+      | Review categories - Monthly value | Partner's state benefits |
+      | Review categories - Frequency | Client's employment gross income |
+      | Review categories - Frequency | Client's state benefits |
+      | Review categories - Frequency | Partner's employment gross income |
+      | Review categories - Frequency | Partner's state benefits |
+      | Review categories - Tax or NI refunds | Client's employment National Insurance contributions |
+      | Review categories - Tax or NI refunds | Client's employment income tax |
+      | Review categories - Tax or NI refunds | Partner's employment National Insurance contributions |
+      | Review categories - Tax or NI refunds | Partner's employment income tax |
 
     And the Capital result questions should exist:
       | question |

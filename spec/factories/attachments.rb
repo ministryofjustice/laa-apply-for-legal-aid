@@ -21,6 +21,10 @@ FactoryBot.define do
       sequence(:original_filename) { "original_filename.pdf" }
     end
 
+    trait :client_bank_statement do
+      bank_statement
+    end
+
     trait :partner_bank_statement do
       attachment_type { "part_bank_state_evidence" }
       sequence(:attachment_name) { |n| "part_bank_state_evidence_#{n}" }

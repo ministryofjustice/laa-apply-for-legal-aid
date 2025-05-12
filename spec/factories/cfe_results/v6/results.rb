@@ -128,6 +128,12 @@ module CFEResults
           result { CFEResults::V6::MockResults.with_partner.to_json }
         end
 
+        # NOTE: this is a fake setup to excercise a CFE result and remarks that result in "all" review reasons
+        # Amend to add any new remarks as necessary.
+        trait :with_all_remarks do
+          result { CFEResults::V6::MockResults.with_all_remarks.to_json }
+        end
+
         trait :without_partner_jobs do
           result { CFEResults::V6::MockResults.without_partner_jobs.to_json }
         end
