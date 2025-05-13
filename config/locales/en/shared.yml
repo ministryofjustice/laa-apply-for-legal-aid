@@ -561,10 +561,6 @@ en:
       full_employment_details:
         employment: Employment income
         details: "Anything else about %{individual_with_determiner}'s employment"
-      no_link_cash_transaction_item:
-        no_transactions: "No"
-        html:
-          no_transactions: "No"
       payments_summary:
         credits_section_heading:
           applicant: Payments your client gets

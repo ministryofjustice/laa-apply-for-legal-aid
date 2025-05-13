@@ -2,63 +2,35 @@
 
 <% individual = partner ? "Partner" : "Applicant"
    regular_payments = partner || @legal_aid_application.client_uploading_bank_statements?
-   url = payments_summary_partial_url(partner, credit, regular_payments, @legal_aid_application) %>
-
-<% individual_with_determiner = partner ? t("generic.partner") : t("generic.client") %>
+   url = payments_summary_partial_url(partner, credit, regular_payments, @legal_aid_application)
+   individual_with_determiner = partner ? t("generic.partner") : t("generic.client")
+   credit_or_debit = credit ? :credit : :debit %>
 
 <% if credit
      payment_type = t(".credits_section_heading.#{individual.downcase}")
-     transaction_types = @credit_transaction_types
      none_heading = t(".credits_section_heading.none", individual_with_determiner:)
    else
      payment_type = t(".debits_section_heading.#{individual.downcase}")
-     transaction_types = @debit_transaction_types
      none_heading = t(".debits_section_heading.none", individual_with_determiner:)
    end %>
 
-<% transactions = if @legal_aid_application.client_uploading_bank_statements? || individual.eql?("Partner")
-                    if credit
-                      @legal_aid_application.regular_transactions.where(owner_type: individual).credits.without_housing_benefits.without_disregarded_benefits.without_benefits
-                    else
-                      @legal_aid_application.regular_transactions.where(owner_type: individual).debits
-                    end
-                  else
-                    transaction_types.map { |t|
-                      answer_for_transaction_type(legal_aid_application: @legal_aid_application, transaction_type: t, owner_type: individual)
-                    }.reject { |value| value == "None" }
-                  end %>
-
-<%= govuk_summary_card(title: payment_type, heading_level: 3, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: '_')}" }) do |card| %>
-  <% unless read_only %>
-    <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}") } %>
-  <% end %>
-  <% card.with_summary_list(html_attributes: { "data-check-your-answers-section": payment_type.parameterize }) do |summary_list| %>
-    <% if transactions.blank? %>
-      <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{none_heading.parameterize}" }) do |row| %>
-        <%= row.with_key(text: none_heading, classes: "govuk-!-width-one-third") %>
-        <%= row.with_value { t("generic.none") } %>
-      <% end %>
-    <% else %>
-      <% transaction_types.each do |transaction_type| %>
-        <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transaction_type.label_name.parameterize}-#{individual.downcase}" }) do |row| %>
-          <%= row.with_key(text: transaction_type.label_name, classes: "govuk-!-width-one-third") %>
-          <%= row.with_value do %>
-            <% regular_transaction_amount, regular_transaction_frequency = regular_transaction_answer_by_type(
-                 legal_aid_application: @legal_aid_application,
-                 transaction_type:,
-                 owner_type: individual,
-               ) %>
-            <% if @legal_aid_application.client_uploading_bank_statements? || individual.eql?("Partner") %>
-              <%= regular_transaction_amount %>
-              <% unless regular_transaction_amount.eql?("None") %>
-                <%= regular_transaction_frequency %>
-              <% end %>
-            <% else %>
-              <%= answer_for_transaction_type(legal_aid_application: @legal_aid_application, transaction_type:, owner_type: individual) %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= govuk_summary_card(title: payment_type, heading_level: 3, html_attributes: { id: "app-check-your-answers__#{payment_type.parameterize(separator: '_')}" }) do |card|
+      unless read_only
+        card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{payment_type}") }
+      end
+      card.with_summary_list(html_attributes: { "data-check-your-answers-section": payment_type.parameterize }) do |summary_list|
+        if format_transactions(legal_aid_application: @legal_aid_application, credit_or_debit:, regular_or_cash: :regular, individual:).all? { |item| item[:value] == "None" }
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{none_heading.parameterize}" }) do |row|
+            row.with_key(text: none_heading, classes: "govuk-!-width-one-third")
+            row.with_value { t("generic.none") }
+          end
+        else
+          format_transactions(legal_aid_application: @legal_aid_application, credit_or_debit:, regular_or_cash: :regular, individual:).each do |transaction|
+            summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{transaction[:label].parameterize}-#{individual.downcase}" }) do |row|
+              row.with_key(text: transaction[:label], classes: "govuk-!-width-one-third")
+              row.with_value(text: transaction[:value])
+            end
+          end
+        end
+      end
+    end %>
