@@ -18,6 +18,12 @@ Feature: Linking cases back button use
     And I choose 'No'
     And I enter the date of birth '01-01-1999'
     And I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+
+    When I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
+
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
@@ -57,7 +63,7 @@ Feature: Linking cases back button use
 
     When I choose "Yes, the information will be the same"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client have a National Insurance number?"
+    Then I should be on a page with title "Does your client have a partner?"
 
     When I click link "Back"
     Then I should be on a page with title "Do you want to copy the proceedings and merits from L-123-456 to this one?"
