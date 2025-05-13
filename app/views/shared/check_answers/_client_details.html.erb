@@ -74,6 +74,18 @@
           end
         end
 
+        if :national_insurance_number.in?(attributes)
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__national_insurance_number" }) do |row|
+            row.with_key(text: t(".nino"))
+            row.with_value(text: nino_with_spaces(applicant.national_insurance_number) || t("generic.not_provided"))
+            row.with_action(
+              text: t("generic.change"),
+              href: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
+              visually_hidden_text: "#{t('.aria_prefix')} #{t('.nino')}",
+            )
+          end
+        end
+
         if :applied_previously.in?(attributes)
           if applicant.applied_previously
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__applied_previously" }) do |row|
@@ -164,18 +176,6 @@
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__employment_status" }) do |row|
             row.with_key(text: t(".employment_status"))
             row.with_value(text: applicant.employment_status)
-          end
-        end
-
-        if :national_insurance_number.in?(attributes)
-          summary_list.with_row(html_attributes: { id: "app-check-your-answers__national_insurance_number" }) do |row|
-            row.with_key(text: t(".nino"))
-            row.with_value(text: nino_with_spaces(applicant.national_insurance_number) || t("generic.not_provided"))
-            row.with_action(
-              text: t("generic.change"),
-              href: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
-              visually_hidden_text: "#{t('.aria_prefix')} #{t('.nino')}",
-            )
           end
         end
 
