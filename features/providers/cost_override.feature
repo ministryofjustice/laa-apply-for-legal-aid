@@ -6,6 +6,10 @@ Feature: Emergency cost override
     Then I choose 'No'
     And I enter the date of birth '03-04-1999'
     When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
@@ -44,10 +48,6 @@ Feature: Emergency cost override
     And I should see 'Do you want to request a higher emergency cost limit?'
     When I choose 'No'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'CB987654A'
-    When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
     When I click 'Save and continue'
@@ -55,15 +55,11 @@ Feature: Emergency cost override
     When I click link "Back"
     Then I should be on a page with title "Does your client have a partner?"
     When I click link "Back"
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    When I click link "Back"
     Then I should be on a page showing "What you're applying for"
     Then I should see "Do you want to request a higher emergency cost limit?"
     When I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
-    When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     When I click 'Save and continue'
