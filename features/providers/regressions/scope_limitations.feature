@@ -36,7 +36,7 @@ Feature: Scope limitations not being set
     And proceeding suggestions has results
     Then I should be on a page showing 'Prohibited steps order'
     And proceeding suggestions has results
-    When I choose a 'Prohibited steps order' radio button
+    When I choose a 'Prohibited steps order - enforcement' radio button
     And I click 'Save and continue'
 
     Then I should be on a page showing 'Is this proceeding for a change of name application?'
