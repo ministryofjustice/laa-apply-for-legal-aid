@@ -1,4 +1,4 @@
-<%= page_template(page_title: t(".heading_1"), back_link: :none) do %>
+<%= page_template(page_title: t(".heading_1"), back_link: :none, column_width: "full") do %>
   <div class="govuk-button-group">
     <%= govuk_button_link_to(t("generic.new_app"), providers_declaration_path, html_attributes: { id: "start" }) %>
   </div>

@@ -1,5 +1,6 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-<%= column_width %>">
+    <%= render(partial: "layouts/flash") %>
     <%= render(partial: "shared/forms/error_summary", locals: { model: show_errors_for }) if show_errors_for %>
     <%= form.govuk_error_summary if form %>
     <%= if notification_banner_title
