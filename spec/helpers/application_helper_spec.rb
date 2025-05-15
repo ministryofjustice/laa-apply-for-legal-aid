@@ -24,32 +24,6 @@ RSpec.describe ApplicationHelper do
   let(:journey_type) { :citizens }
   let(:provider) { create(:provider, username: "Test User") }
 
-  describe "#home_path" do
-    subject(:link) { home_path }
-
-    context "when called on provider journey" do
-      before do
-        allow(request).to receive(:path_info).and_return("/providers/test")
-      end
-
-      it { is_expected.to eq(submitted_providers_legal_aid_applications_path) }
-    end
-
-    context "when called on citizens journey" do
-      before do
-        allow(request).to receive(:path_info).and_return("/citizens/test")
-      end
-
-      it { is_expected.to eq("#") }
-    end
-  end
-
-  describe "#your_applications_default_tab_path" do
-    it "returns the path for the default tab on the your applications page" do
-      expect(helper.your_applications_default_tab_path).to eq(submitted_providers_legal_aid_applications_path)
-    end
-  end
-
   describe "#user_header_navigation" do
     context "when called on citizens journey" do
       it "returns no navigation items" do
