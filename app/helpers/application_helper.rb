@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def home_link
-    request.path_info.include?("providers") ? submitted_providers_legal_aid_applications_url : "#"
-  end
-
   def html_title
     default = t("shared.page-title.suffix")
     return default unless content_for?(:head_title) || content_for?(:page_title)
