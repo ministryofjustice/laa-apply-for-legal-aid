@@ -28,5 +28,5 @@
               location == "correspondence" ? providers_legal_aid_application_correspondence_address_manual_path(@legal_aid_application) : providers_legal_aid_application_home_address_manual_path(@legal_aid_application),
             ) %>
       </p>
-      <p><%= govuk_button_link_to(t("generic.save_and_come_back_later"), submitted_providers_legal_aid_applications_path, secondary: true) %></p>
+      <p><%= govuk_button_link_to(t("generic.save_and_come_back_later"), home_path, secondary: true) %></p>
 <% end %>

@@ -38,7 +38,7 @@ Given(/^I visit the in progress applications page$/) do
 end
 
 Given(/^I visit the submitted applications page$/) do
-  visit submitted_providers_legal_aid_applications_path
+  visit home_path
 end
 
 Given(/^I visit the voided applications page$/) do

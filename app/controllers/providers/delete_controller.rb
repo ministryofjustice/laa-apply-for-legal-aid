@@ -4,7 +4,7 @@ module Providers
       @scope = :delete
       set_redirect_url
 
-      redirect_to submitted_providers_legal_aid_applications_path if @legal_aid_application.discarded?
+      redirect_to home_path if @legal_aid_application.discarded?
     end
 
     def destroy
@@ -28,7 +28,7 @@ module Providers
     end
 
     def redirect_to_page_before_last
-      session[:previous_url].present? ? redirect_to(session[:previous_url]) : redirect_to(submitted_providers_legal_aid_applications_path)
+      session[:previous_url].present? ? redirect_to(session[:previous_url]) : redirect_to(home_path)
     end
   end
 end

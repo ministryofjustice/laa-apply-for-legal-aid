@@ -40,7 +40,7 @@ module ApplicationHelper
       header.with_navigation_item(text: current_provider.username, href: providers_provider_path, active: false)
       header.with_navigation_item(text: t("layouts.logout.provider"), href: destroy_provider_session_path, active: false, options: { method: :delete })
     else
-      header.with_navigation_item(text: t("layouts.login"), href: submitted_providers_legal_aid_applications_path, active: false)
+      header.with_navigation_item(text: t("layouts.login"), href: home_path, active: false)
     end
   end
 
