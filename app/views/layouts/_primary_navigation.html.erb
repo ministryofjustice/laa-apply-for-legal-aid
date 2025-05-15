@@ -5,7 +5,7 @@
         <ul class="moj-primary-navigation__list">
           <li class="moj-primary-navigation__item">
             <%= link_to "Your applications",
-                        submitted_providers_legal_aid_applications_path,
+                        home_path,
                         "aria-current": @scope.in?(%i[in_progress submitted voided delete]) ? "page" : nil,
                         class: "moj-primary-navigation__link" %>
           </li>

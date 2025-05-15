@@ -26,7 +26,7 @@
       notification_banner_text:,
       column_width: "full",
       back_link: {
-        path: @read_only ? submitted_providers_legal_aid_applications_path : reset_providers_legal_aid_application_check_provider_answers_path,
+        path: @read_only ? home_path : reset_providers_legal_aid_application_check_provider_answers_path,
         text: @read_only ? t("generic.home") : t("generic.back"),
         method: @read_only ? :get : :post,
       },
@@ -78,7 +78,7 @@
 
   <% if @read_only %>
     <%= next_action_buttons_with_form(
-          url: submitted_providers_legal_aid_applications_path,
+          url: home_path,
           method: :get,
           show_draft: false,
           continue_button_text: t("generic.back_to_your_applications"),
