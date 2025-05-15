@@ -1,6 +1,8 @@
 module Providers
   module ApplicationMeritsTask
     class StatementOfCaseUploadsController < ProviderBaseController
+      skip_back_history_for :list
+
       def show
         @form = StatementOfCaseUploadForm.new(model: statement_of_case)
       end
