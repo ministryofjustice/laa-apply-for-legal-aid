@@ -22,7 +22,7 @@ namespace :migrate do
   task statements_of_case: :environment do
     Rails.logger.info "== Before migration"
     records = ApplicationMeritsTask::StatementOfCase.all
-    text_target = records.where.not(statement: nil).count
+    text_target = records.where.not(statement: "").count
     upload_target = Attachment.statement_of_case.pluck(:legal_aid_application_id).uniq.count
     Rails.logger.info "Affected applications: #{records.count}"
     Rails.logger.info "Number with text statement: #{text_target}"
