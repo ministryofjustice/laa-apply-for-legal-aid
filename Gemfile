@@ -139,6 +139,7 @@ group :test do
       require: "action_dispatch/testing/integration/capybara/rspec"
   gem "axe-core-cucumber"
   gem "capybara", ">= 3.36.0", "< 4.0"
+  gem "capybara-lockstep"
   gem "cucumber", ">= 9.2.1", require: false
   gem "cucumber-rails", ">= 2.4.0", require: false
   gem "database_cleaner"

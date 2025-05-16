@@ -41,7 +41,11 @@ allowed_sites = [
 WebMock.disable_net_connect!(allow: allowed_sites, net_http_connect_on_start: true)
 
 Capybara.register_driver :headless_chrome do |app|
-  browser_options = Selenium::WebDriver::Chrome::Options.new(args: %w[start-maximized headless disable-gpu no-sandbox])
+  browser_options = Selenium::WebDriver::Chrome::Options.new(
+    args: %w[start-maximized headless disable-gpu no-sandbox],
+    unhandled_prompt_behavior: "ignore",
+  )
+
   chrome_options = {
     browser: :chrome,
     options: browser_options,

@@ -25,7 +25,7 @@ When(/^I visit the root page/) do
 end
 
 When(/^I submit to saml/) do
-  find("input[name*=commit]").click
+  click_button "Sign in"
 end
 
 Given("I have an existing office") do

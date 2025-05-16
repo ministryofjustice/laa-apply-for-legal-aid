@@ -87,4 +87,6 @@ Rails.application.configure do
   # This needs adding due to a rails 7.1.1 bug(?!) related to Unsafe threading and AR connection pool issues
   # see https://github.com/rails/rails/issues/46797 for a good description
   config.active_job.queue_adapter = :test
+
+  config.middleware.insert_before 0, Capybara::Lockstep::Middleware
 end
