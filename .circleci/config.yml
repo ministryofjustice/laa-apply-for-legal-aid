@@ -227,7 +227,6 @@ jobs:
     - *save_js_packages_cache
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
-    # - browser-tools/install-chromedriver # removed 31 Aug 2023 because version of chrome 116.0.5845.140 was not downloadable
     - run:
         name: Run integration tests
         command: |
