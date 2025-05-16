@@ -100,7 +100,8 @@
 #    Then I fill "Police notified details" with "Foo bar"
 #    Then I click 'Save and continue'
 #    And I should not see "Client received legal help"
-#    Then I should be on a page showing "Provide a statement of case"
+#    Then I should be on a page showing "Statement of case"
+#    When I select "Type a statement"
 #    Then I fill "Application merits task statement of case statement field" with "Statement of case"
 #    Then I upload a pdf file
 #    Then I click 'Upload'
@@ -127,7 +128,8 @@
 #    Then I click link "Back"
 #    Then I should be on a page showing "Is the chance of a successful outcome 45% or better?"
 #    Then I click link "Back"
-#    Then I should be on a page showing "Provide a statement of case"
+#    Then I should be on a page showing "Statement of case"
+#    When I select "Type a statement"
 #    Then I click link "Back"
 #    Then I should be on a page showing "Domestic abuse summary"
 #    Then I click link "Back"

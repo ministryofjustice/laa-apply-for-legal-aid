@@ -3,14 +3,14 @@ require "sidekiq/testing"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe StatementOfCasesController do
+    RSpec.describe StatementOfCaseUploadsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
 
-      describe "GET /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject(:get_request) { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
+      describe "GET /providers/applications/:legal_aid_application_id/statement_of_case_upload" do
+        subject(:get_request) { get providers_legal_aid_application_statement_of_case_upload_path(legal_aid_application) }
 
         context "when the provider is not authenticated" do
           before { get_request }
@@ -32,26 +32,11 @@ module Providers
           it "does not display error" do
             expect(response.body).not_to match 'id="application-merits-task-statement-of-case-original-file-error"'
           end
-
-          context "when no statement of case record exists for the application" do
-            it "displays an empty text box" do
-              expect(legal_aid_application.statement_of_case).to be_nil
-              expect(response.body).to have_text_area_with_id_and_content("application-merits-task-statement-of-case-statement-field", "")
-            end
-          end
-
-          context "when statement of case record already exists for the application" do
-            let(:soc) { legal_aid_application.create_statement_of_case(statement: "This is my case statement") }
-
-            it "displays the details of the statement on the page" do
-              expect(response.body).to have_text_area_with_id_and_content("application-merits-task-statement-of-case-statement-field", soc.statement)
-            end
-          end
         end
       end
 
-      describe "GET /providers/applications/:legal_aid_application_id/statement_of_case/list" do
-        subject(:get_request) { get list_providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
+      describe "GET /providers/applications/:legal_aid_application_id/statement_of_case_upload/list" do
+        subject(:get_request) { get list_providers_legal_aid_application_statement_of_case_upload_path(legal_aid_application) }
 
         context "when the provider is not authenticated" do
           before { get_request }
@@ -72,15 +57,14 @@ module Providers
         end
       end
 
-      describe "PATCH /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject(:patch_request) { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
+      describe "PATCH /providers/applications/:legal_aid_application_id/statement_of_case_upload" do
+        subject(:patch_request) { patch providers_legal_aid_application_statement_of_case_upload_path(legal_aid_application), params: }
 
         let(:entered_text) { Faker::Lorem.paragraph(sentence_count: 3) }
         let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
         let(:statement_of_case) { legal_aid_application.statement_of_case }
         let(:params_statement_of_case) do
           {
-            statement: entered_text,
             original_file:,
           }
         end
@@ -100,7 +84,6 @@ module Providers
 
         it "updates the record" do
           patch_request
-          expect(statement_of_case.reload.statement).to eq(entered_text)
           expect(statement_of_case.original_attachments.first).to be_present
         end
 
@@ -274,7 +257,7 @@ module Providers
 
               it "returns error message" do
                 patch_request
-                expect(response.body).to include("Attach a file or enter text")
+                expect(response.body).to include("You must choose at least one file")
               end
             end
           end
@@ -298,40 +281,19 @@ module Providers
 
         context "when continue button pressed" do
           context "and model has no files attached previously" do
-            context "and file is empty and text is empty" do
-              let(:params_statement_of_case) do
-                {
-                  statement: "",
-                }
-              end
+            context "and file is empty" do
+              let(:params_statement_of_case) { {} }
 
               it "fails" do
                 patch_request
                 expect(response.body).to include("There is a problem")
-                expect(response.body).to include("Attach a file or enter text")
-              end
-            end
-
-            context "when file is empty but text is entered" do
-              let(:params_statement_of_case) do
-                {
-                  statement: entered_text,
-                }
-              end
-
-              it "updates the statement text" do
-                patch_request
-                expect(statement_of_case.reload.statement).to eq(entered_text)
-                expect(statement_of_case.original_attachments.first).not_to be_present
+                expect(response.body).to include("You must choose at least one file")
               end
             end
 
             context "when text is empty but file is present" do
-              let(:entered_text) { "" }
-
               it "updates the file" do
                 patch_request
-                expect(statement_of_case.reload.statement).to eq("")
                 expect(statement_of_case.original_attachments.first).to be_present
               end
             end
@@ -364,7 +326,7 @@ module Providers
 
             context "when file is too big" do
               before do
-                allow(StatementOfCases::StatementOfCaseForm)
+                allow(StatementOfCaseUploadForm)
                   .to receive(:max_file_size).and_return(0.megabytes)
               end
 
@@ -417,39 +379,19 @@ module Providers
           context "when model already has files attached" do
             before { create(:statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application:) }
 
-            context "and text is empty" do
-              let(:entered_text) { "" }
+            context "with no additional file uploaded" do
+              let(:params_statement_of_case) { {} }
 
-              context "with no additional file uploaded" do
-                let(:params_statement_of_case) do
-                  {
-                    statement: entered_text,
-                  }
-                end
-
-                it "does not alter the record" do
-                  patch_request
-                  expect(statement_of_case.reload.statement).to eq("")
-                  expect(statement_of_case.original_attachments.count).to eq 1
-                end
-              end
-
-              context "when additional file uploaded" do
-                it "attaches the file" do
-                  patch_request
-                  expect(statement_of_case.reload.statement).to eq("")
-                  expect(statement_of_case.original_attachments.count).to eq 3
-                end
+              it "does not alter the record" do
+                patch_request
+                expect(statement_of_case.original_attachments.count).to eq 1
               end
             end
 
-            context "when text is entered and an additional file is uploaded" do
-              let(:entered_text) { "Now we have two attached files" }
-
-              it "updates the text and attaches the additional file" do
+            context "when additional file uploaded" do
+              it "attaches the file" do
                 patch_request
-                expect(statement_of_case.reload.statement).to eq entered_text
-                expect(statement_of_case.original_attachments.count).to eq 3
+                expect(statement_of_case.original_attachments.count).to eq 4
               end
             end
           end
@@ -460,7 +402,6 @@ module Providers
 
           it "updates the record" do
             patch_request
-            expect(statement_of_case.reload.statement).to eq(entered_text)
             expect(statement_of_case.original_attachments.first).to be_present
           end
 
@@ -475,7 +416,6 @@ module Providers
           end
 
           context "with nothing specified" do
-            let(:entered_text) { "" }
             let(:original_file) { nil }
 
             it "redirects to provider draft endpoint" do
@@ -486,8 +426,8 @@ module Providers
         end
       end
 
-      describe "DELETE /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject(:delete_request) { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
+      describe "DELETE /providers/applications/:legal_aid_application_id/statement_of_case_upload" do
+        subject(:delete_request) { delete providers_legal_aid_application_statement_of_case_upload_path(legal_aid_application), params: }
 
         let(:statement_of_case) { create(:statement_of_case, :with_original_file_attached) }
         let(:legal_aid_application) { statement_of_case.legal_aid_application }
