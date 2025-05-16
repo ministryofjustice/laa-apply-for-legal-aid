@@ -40,10 +40,8 @@ Feature: Merits task list
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page showing "Statement of case"
-
-    When I select "Type a statement"
-    And I fill "Application merits task statement of case statement field" with "Statement of case"
+    Then I should be on a page showing "Provide a statement of case"
+    When I fill "Application merits task statement of case statement field" with "Statement of case"
     And I click 'Save and continue'
     Then I should be on the 'matter_opposed_reason' page showing "Why is the Section 8 matter opposed by your client or the other party?"
     And I fill "Reason" with "Because it is opposed."
@@ -175,10 +173,8 @@ Feature: Merits task list
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page showing "Statement of case"
-    When I select "Upload a statement"
-    And I click 'Save and continue'
-    And I upload an evidence file named 'hello_world.pdf'
+    Then I should be on a page showing "Provide a statement of case"
+    When I upload an evidence file named 'hello_world.pdf'
     Then I should see 'hello_world.pdf'
     And I should see 1 uploaded files
     When I click 'Delete'
@@ -228,10 +224,8 @@ Feature: Merits task list
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
-    Then I should be on a page showing "Statement of case"
-
-    When I select "Type a statement"
-    And I fill "Application merits task statement of case statement field" with "Statement of case"
+    Then I should be on a page showing "Provide a statement of case"
+    Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success Not started'
     When I click the last link 'Chances of success'

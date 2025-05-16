@@ -12,6 +12,5 @@ module Providers
         attachment.destroy!
       end
     end
-    alias_method :delete_attachments, :delete_evidence
   end
 end

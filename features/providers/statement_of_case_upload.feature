@@ -6,9 +6,7 @@ Feature: Statement of case upload
     And I have completed the non-passported means assessment and start the merits assessment
     Then I should be on the 'merits_task_list' page showing 'Statement of case Not started'
     When I click link "Statement of case"
-    Then I should be on a page with title "Statement of case"
-    When I select "Upload a statement"
-    And I click "Save and continue"
+    Then I should be on a page with title "Provide a statement of case"
 
   Scenario: Uploading an acceptable statement of case
     When I upload the fixture file named 'acceptable.pdf'

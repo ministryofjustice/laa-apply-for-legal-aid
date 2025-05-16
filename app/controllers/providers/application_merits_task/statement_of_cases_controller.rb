@@ -1,33 +1,112 @@
 module Providers
   module ApplicationMeritsTask
     class StatementOfCasesController < ProviderBaseController
-      include DeleteAttachments
-
       def show
-        @form = ApplicationMeritsTask::StatementOfCaseChoiceForm.new(model: statement_of_case)
+        populate_form
       end
 
       def update
-        @form = StatementOfCaseChoiceForm.new(form_params)
-        delete_attachments(statements_of_case) if legal_aid_application.statement_of_case_uploaded? && @form.upload.eql?(false)
+        form
+        if upload_button_pressed?
+          perform_upload
+        elsif update_task_save_continue_or_draft(:application, :statement_of_case)
+          convert_new_files_to_pdf
+        else
+          render :show
+        end
+      end
 
-        render :show unless update_task_save_continue_or_draft(:application, :statement_of_case, uploaded: @form.upload)
+      def destroy
+        original_file = delete_original_and_pdf_files
+        @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
+        populate_form
+        render :show
+      end
+
+      def list
+        render partial: "shared/uploaded_files",
+               locals: {
+                 attachments: legal_aid_application.attachments.statement_of_case,
+                 url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+               }
       end
 
     private
+
+      def task_list_should_update?
+        application_has_task_list? && !draft_selected?
+      end
+
+      def populate_form
+        @form = StatementOfCases::StatementOfCaseForm.new(model: statement_of_case)
+      end
+
+      def perform_upload
+        form.upload_button_pressed = true
+        if form.save
+          @successful_upload = successful_upload
+        else
+          @error_message = error_message
+        end
+        render :show
+      end
+
+      def error_message
+        return if form.errors.blank?
+
+        "#{I18n.t('accessibility.problem_text')} #{form.errors.messages[:original_file].first}"
+      end
+
+      def files_deleted_message(deleted_file_name)
+        I18n.t("activemodel.attributes.uploaded_evidence_collection.file_deleted", file_name: deleted_file_name)
+      end
+
+      def successful_upload
+        return if form.errors.present?
+
+        I18n.t("activemodel.attributes.uploaded_evidence_collection.file_uploaded", file_name: form.original_file.original_filename)
+      end
+
+      def convert_new_files_to_pdf
+        statement_of_case.original_attachments.each do |attachment|
+          PdfConverterWorker.perform_async(attachment.id)
+        end
+      end
+
+      def upload_button_pressed?
+        params[:upload_button].present?
+      end
+
+      def form
+        @form ||= StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
+      end
+
+      def statement_of_case_params
+        params[:application_merits_task_statement_of_case] = { original_file: [], statement: nil } unless params.key?(:application_merits_task_statement_of_case)
+        merge_with_model(statement_of_case, provider_uploader: current_provider) do
+          params.expect(application_merits_task_statement_of_case: %i[statement original_file])
+        end
+      end
 
       def statement_of_case
         @statement_of_case ||= legal_aid_application.statement_of_case || legal_aid_application.build_statement_of_case
       end
 
-      def form_params
-        merge_with_model(statement_of_case) do
-          params.expect(application_merits_task_statement_of_case: [:statement, { upload: [], typed: [] }])
-        end
+      def delete_original_and_pdf_files
+        original_attachment = Attachment.find(attachment_id)
+        delete_attachment(Attachment.find(original_attachment.pdf_attachment_id)) if original_attachment.pdf_attachment_id.present?
+        delete_attachment(original_attachment)
+      rescue StandardError
+        original_attachment
       end
 
-      def statements_of_case
-        @statements_of_case ||= find_attachments_starting_with("statement_of_case")
+      def delete_attachment(attachment)
+        attachment.document.purge_later
+        attachment.destroy!
+      end
+
+      def attachment_id
+        params[:attachment_id]
       end
     end
   end

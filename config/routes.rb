@@ -369,9 +369,8 @@ Rails.application.routes.draw do
         resource :client_has_parental_responsibility, only: %i[show update], path: :does_client_have_parental_responsibility
         resource :client_is_child_subject, only: %i[show update], controller: :client_is_child_subject, path: "is_client_a_child_subject_of_proceeding"
         resource :client_check_parental_answer, only: %i[show update], path: :check_who_your_client_is
-        resource :statement_of_case, only: %i[show update]
-        resource :statement_of_case_upload, only: %i[show update destroy] do
-          get "/list", to: "statement_of_case_uploads#list"
+        resource :statement_of_case, only: %i[show update destroy] do
+          get "/list", to: "statement_of_cases#list"
         end
         resource :second_appeal, only: %i[show update]
         resource :original_judge_level, only: %i[show update], path: "original_case_judge_level"

@@ -74,14 +74,8 @@ Feature: passported_journey completes application
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
-    Then I should be on a page showing "Statement of case"
-
-    When I select "Upload a statement"
-    And I select "Type a statement"
-    And I fill "Application merits task statement of case statement field" with "Statement of case"
-    When I click 'Save and continue'
-    Then I should be on a page with title "Upload statement of case"
-
+    Then I should be on a page showing "Provide a statement of case"
+    Then I fill "Application merits task statement of case statement field" with "Statement of case"
     When I upload an evidence file named 'hello_world.pdf'
     Then I should not see "There was a problem uploading your file"
     Then I should be on a page showing "hello_world.pdf"
@@ -99,9 +93,6 @@ Feature: passported_journey completes application
     And I click Check Your Answers Change link for 'Statement of Case'
     Then I enter the application merits task statement of case statement field 'This is some test data for the statement of case'
     Then I click 'Save and continue'
-    Then I should be on a page with title "Upload statement of case"
-    And I should be on a page showing "hello_world.pdf"
-    When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case file' should be 'hello_world.pdf (15.7 KB)'
     And I should be on a page showing "This is some test data for the statement of case"
