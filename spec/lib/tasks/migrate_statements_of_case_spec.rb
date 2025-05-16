@@ -47,8 +47,26 @@ RSpec.describe "migrate:statements_of_case", type: :task do
       end
     end
 
-    context "when a statement of case exists with only a file upload" do
+    context "when a statement of case exists with only a file upload and statment is nil" do
       let(:statement_of_case) { create(:statement_of_case, :with_original_file_attached, statement: nil) }
+
+      it "logs the expected output" do
+        expect(Rails.logger).to receive(:info).with("== Before migration")
+        expect(Rails.logger).to receive(:info).with("Affected applications: 1")
+        expect(Rails.logger).to receive(:info).with("Number with text statement: 0")
+        expect(Rails.logger).to receive(:info).with("Number with files uploaded: 1")
+        expect(Rails.logger).to receive(:info).with("== After migration")
+        expect(Rails.logger).to receive(:info).with("Number with Typed: 0")
+        expect(Rails.logger).to receive(:info).with("Number with Upload: 1")
+        expect(Rails.logger).to receive(:info).with("Number with both: 0")
+        expect { task.invoke }.to change { statement_of_case.reload.attributes.symbolize_keys }
+                                         .from(hash_including(upload: nil, typed: nil))
+                                         .to(hash_including(upload: true, typed: false))
+      end
+    end
+
+    context "when a statement of case exists with only a file upload and statement is an empty string" do
+      let(:statement_of_case) { create(:statement_of_case, :with_original_file_attached, statement: "") }
 
       it "logs the expected output" do
         expect(Rails.logger).to receive(:info).with("== Before migration")
