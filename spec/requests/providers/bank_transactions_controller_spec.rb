@@ -52,11 +52,9 @@ RSpec.describe Providers::BankTransactionsController do
 
       it "redirects back" do
         patch_request
-        expect(response).to have_http_status(:redirect)
-        follow_redirect!
-
         happened_at = I18n.l(bank_transaction.happened_at.to_date, format: :short_date)
-        expect(response.body).to include("You removed transaction #{happened_at} JOE BLOGGS from the list")
+        expect(flash["hash"][:heading_text]).to eq("You removed transaction #{happened_at} JOE BLOGGS from the list")
+        expect(response).to have_http_status(:redirect)
       end
 
       context "with javascript enabled" do

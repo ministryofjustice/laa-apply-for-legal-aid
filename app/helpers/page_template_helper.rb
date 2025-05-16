@@ -54,7 +54,7 @@ module PageTemplateHelper
     page_heading_options: {},
     &content
   )
-    template = :default unless %i[form basic].include?(template)
+    template = :default unless template.eql?(:basic)
     content_for(:navigation) { back_link(**back_link) unless back_link == :none }
     has_errors = form&.object&.errors || show_errors_for&.errors
     page_title_possibly_with_error({ page_title:, head_title: }, has_errors)
