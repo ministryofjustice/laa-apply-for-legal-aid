@@ -18,7 +18,13 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     Then I choose 'No'
     And I enter a date of birth that will make me 18 tomorrow
     And I click 'Save and continue'
-     Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+
+    When I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    
     Then I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
@@ -57,11 +63,6 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     Then I should be on a page with title "What you're applying for"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-
-    When I choose "Yes"
-    And I enter national insurance number 'CB987654A'
-    And I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
     When I click 'Save and continue'

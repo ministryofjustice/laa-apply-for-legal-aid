@@ -12,9 +12,17 @@ RSpec.describe Flow::Steps::ProviderStart::LimitationsStep, type: :request do
   end
 
   describe "#forward" do
-    subject { described_class.forward }
+    subject { described_class.forward.call(legal_aid_application) }
 
-    it { is_expected.to eq :has_national_insurance_numbers }
+    context "when overriding the DWP result" do
+      before { allow(legal_aid_application).to receive(:overriding_dwp_result?).and_return(true) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when not overriding the DWP result" do
+      it { is_expected.to eq :client_has_partners }
+    end
   end
 
   describe "#check_answers" do

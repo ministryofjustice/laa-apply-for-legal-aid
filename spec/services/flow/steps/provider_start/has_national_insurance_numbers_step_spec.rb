@@ -19,7 +19,7 @@ RSpec.describe Flow::Steps::ProviderStart::HasNationalInsuranceNumbersStep, type
     end
 
     context "when not overriding the DWP result" do
-      it { is_expected.to eq :client_has_partners }
+      it { is_expected.to eq :previous_references }
     end
   end
 

@@ -10,17 +10,9 @@ RSpec.describe Flow::Steps::ProviderStart::ApplicantDetailsStep, type: :request 
   end
 
   describe "#forward" do
-    subject { described_class.forward.call(legal_aid_application) }
+    subject { described_class.forward }
 
-    context "when not overriding dwp result" do
-      it { is_expected.to eq :previous_references }
-    end
-
-    context "when overriding dwp result" do
-      let(:legal_aid_application) { create(:legal_aid_application, :overriding_dwp_result) }
-
-      it { is_expected.to eq :has_national_insurance_numbers }
-    end
+    it { is_expected.to eq :has_national_insurance_numbers }
   end
 
   describe "#check_answers" do

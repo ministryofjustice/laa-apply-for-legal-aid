@@ -14,7 +14,7 @@ RSpec.describe Flow::Steps::LinkedApplications::CopyStep, type: :request do
     subject { described_class.forward.call(legal_aid_application) }
 
     context "when the provider confirms they wish to copy the application" do
-      it { is_expected.to be :has_national_insurance_numbers }
+      it { is_expected.to be :client_has_partners }
     end
 
     context "when the provider confirms they do not wish to copy the application" do

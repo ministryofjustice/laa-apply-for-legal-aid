@@ -7,6 +7,10 @@ Feature: Applicant details
     Then I enter last name at birth 'Smith'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
@@ -120,10 +124,6 @@ Feature: Applicant details
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'CB987654A'
-    When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
     When I click 'Save and continue'
@@ -146,6 +146,10 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
@@ -176,10 +180,6 @@ Feature: Applicant details
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'CB987654A'
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
@@ -215,7 +215,11 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
-     Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
@@ -235,7 +239,11 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
-     Then I should be on a page showing "Has your client applied for civil legal aid before?"
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
+    Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
@@ -285,10 +293,6 @@ Feature: Applicant details
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'CB987654A'
-    When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
     When I click 'Save and continue'
@@ -323,6 +327,10 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '10-1-1980'
     Then I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'JA293483A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
@@ -367,10 +375,6 @@ Feature: Applicant details
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'JA293483A'
-    When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
     When I click 'Save and continue'
@@ -385,6 +389,10 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '10-12-1961'
     Then I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'JA293483B'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
@@ -416,10 +424,6 @@ Feature: Applicant details
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
-    When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'JA293483B'
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
@@ -456,6 +460,10 @@ Feature: Applicant details
     Then I choose 'No'
     Then I enter the date of birth '03-04-1999'
     Then I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'JA293483B'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"

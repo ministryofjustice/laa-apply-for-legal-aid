@@ -7,6 +7,10 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
     Then I choose 'No'
     And I enter the date of birth '03-04-1999'
     And I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
     Then I choose "No"
     And I click "Save and continue"
