@@ -650,7 +650,6 @@ en:
           police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
       statement_of_cases:
         show:
-          page_title: Statement of case
           bullets:
             - what's happened in the case so far
             - if any other parties are involved and their relationship to your client
@@ -662,20 +661,13 @@ en:
             - if any other parties are involved and their relationship to your client
             - why the proceedings are necessary
             - if anyone else might be able to fund the case
+          h1-heading: Provide a statement of case
+          warning: Warning
           warning_text: You must provide a complete statement of case now. You cannot do it later.
-          choice:
-            heading: How will you provide the statement of case?
-            hint: Select all that apply
-          choices:
-            upload: Upload a statement
-            typed: Type a statement
-      statement_of_case_uploads:
-        show:
-          page_title: Upload statement of case
-          size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
           h2-heading: Uploaded files
           no_files: Files uploaded will appear here.
           upload_file: Attach a file
+          size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
           dropzone_message: Drag and drop files here or
           choose_files_btn: Choose files
           file_not_uploaded_error: Upload the selected file
