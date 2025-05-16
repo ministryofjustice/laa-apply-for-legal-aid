@@ -48,11 +48,12 @@ namespace :migrate do
     ]
 
     pages_to_move = %w[previous_references] + addresses_pages + linking_and_copying_pages + proceedings
-
     applications = LegalAidApplication.where(provider_step: pages_to_move)
+    ids_of_applications_for_update = applications.pluck(:id)
+
     Rails.logger.info "Migrating legal aid applications: setting provider_step: has_national_insurance_numbers"
     Rails.logger.info "----------------------------------------"
-    Rails.logger.info "Number of applications that need to be moved: #{applications.where(provider_step: pages_to_move).count}"
+    Rails.logger.info "Number of applications that need to be moved: #{applications.count}"
     Rails.logger.info "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
     Benchmark.benchmark do |bm|
       bm.report("Migrate:") do
@@ -66,8 +67,8 @@ namespace :migrate do
       end
     end
     Rails.logger.info "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-    Rails.logger.info "Applications updated    : #{LegalAidApplication.where(provider_step: 'has_national_insurance_numbers').count}"
-    Rails.logger.info "Applications not updated: #{applications.where(provider_step: pages_to_move).count}"
+    Rails.logger.info "Applications updated    : #{LegalAidApplication.where(id: ids_of_applications_for_update).where(provider_step: 'has_national_insurance_numbers').count}"
+    Rails.logger.info "Applications not updated: #{LegalAidApplication.where(id: ids_of_applications_for_update).where(provider_step: pages_to_move).count}"
     Rails.logger.info "----------------------------------------"
   end
 end
