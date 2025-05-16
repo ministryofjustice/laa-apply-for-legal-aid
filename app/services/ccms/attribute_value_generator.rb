@@ -455,8 +455,9 @@ module CCMS
         partner.__send__(Regexp.last_match(1))
       when BANK_REGEX
         options[:bank_acct].__send__(Regexp.last_match(1))
-      when CHANCES_OF_SUCCESS
-        options[:chances_of_success].__send__(Regexp.last_match(1))
+      # AP-5975: Removed for coverage reasons but may need to reimplment for determining FAMILY_PROSPECTS_OF_SUCCESS
+      # when CHANCES_OF_SUCCESS
+      #   options[:chances_of_success].__send__(Regexp.last_match(1))
       when DEPENDANT_REGEX
         options[:dependant].__send__(Regexp.last_match(1))
       when VEHICLE_REGEX
