@@ -24,7 +24,6 @@ ingress:
   enabled: true
   className: modsec
   annotations:
-    nginx.ingress.kubernetes.io/permanent-redirect: https://laa-holding-page-production.apps.live.cloud-platform.service.justice.gov.uk
     external-dns.alpha.kubernetes.io/set-identifier: "apply-for-legal-aid-laa-apply-for-legalaid-production-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
