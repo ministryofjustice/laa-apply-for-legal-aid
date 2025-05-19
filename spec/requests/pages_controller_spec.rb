@@ -28,9 +28,8 @@ RSpec.describe PagesController, :clamav do
     end
 
     shared_examples "maintenance page" do
-      it { expect(response).to have_http_status(:ok) }
-      it { expect(response).to render_template("pages/servicedown") }
-      it { expect(response.body).to include("Sorry, the service is unavailable") }
+      it { expect(response).to have_http_status(:redirect) }
+      it { expect(response).to redirect_to("https://laa-holding-page-production.apps.live.cloud-platform.service.justice.gov.uk/") }
     end
 
     shared_examples "maintenance json" do
