@@ -36,7 +36,11 @@ jobs:
 #          command: monitor
 #          image: laa-apply-for-legalaid:scan
 #          args: --file=Dockerfile --severity-threshold=high
-
+      - name: upload sarif file
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk.sarif
+          path: ./
       - name: Replace security-severity "null" for license-related findings
         run: |
           sed -i 's/"security-severity": "null"/"security-severity": "0"/g' snyk.sarif
