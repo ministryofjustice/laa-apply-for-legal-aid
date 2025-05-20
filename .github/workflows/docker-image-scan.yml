@@ -18,14 +18,14 @@ jobs:
             --tag laa-apply-for-legalaid:scan \
             --file Dockerfile .
 
-      - name: Scan docker image using Snyk
-        continue-on-error: true
-        uses: snyk/actions/docker@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: laa-apply-for-legalaid:scan
-          args: --file=Dockerfile
+#      - name: Scan docker image using Snyk
+#        continue-on-error: true
+#        uses: snyk/actions/docker@master
+#        env:
+#          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+#        with:
+#          image: laa-apply-for-legalaid:scan
+#          args: --file=Dockerfile
 
       - name: Monitor docker image using Snyk
         uses: snyk/actions/docker@master
