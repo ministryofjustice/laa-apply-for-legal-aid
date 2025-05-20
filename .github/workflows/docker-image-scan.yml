@@ -7,8 +7,44 @@ on:
 
 jobs:
   scan-docker-image:
-    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/snyk.yml@main
-    with:
-      tag: "laa-apply-for-legalaid"
-    secrets:
-      snyk_token: ${{ secrets.SNYK_TOKEN }}
+    name: Scan docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #--v4.2.2
+
+      - name: Build docker image
+        run: |
+          docker build \
+            --tag laa-apply-for-legalaid:scan \
+            --file Dockerfile .
+
+      - name: Scan docker image using Snyk
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: laa-apply-for-legalaid:scan
+          args: --file=Dockerfile
+
+      - name: Monitor docker image using Snyk
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          image: laa-apply-for-legalaid:scan
+          args: --file=Dockerfile --severity-threshold=high
+
+      - name: Replace security-severity "null" for license-related findings
+        run: |
+          sed -i 's/"security-severity": "null"/"security-severity": "0"/g' snyk.sarif
+
+      - name: Replace security-severity "undefined" for license-related findings
+        run: |
+          sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk.sarif
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@45775bd8235c68ba998cffa5171334d58593da47 #--v3.28.15
+        with:
+          sarif_file: snyk.sarif
