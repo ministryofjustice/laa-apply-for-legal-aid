@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: snyk.sarif
-          path: ./
+          path: ./snyk.sarif
       - name: Replace security-severity "null" for license-related findings
         run: |
           sed -i 's/"security-severity": "null"/"security-severity": "0"/g' snyk.sarif
