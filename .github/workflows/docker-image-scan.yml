@@ -28,7 +28,7 @@ jobs:
           image: laa-apply-for-legalaid:scan
           args: |
             --file=Dockerfile
-            --exclude-node-modules
+            --exclude=node_modules
 
 #      - name: Monitor docker image using Snyk
 #        uses: snyk/actions/docker@master
