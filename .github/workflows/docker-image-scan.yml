@@ -28,8 +28,7 @@ jobs:
           image: laa-apply-for-legalaid:scan
           args: |
             --file=Dockerfile
-            --severity-threshold=high
-            --prune-repeated-subdependencies
+            --exclude-node-modules
 
 #      - name: Monitor docker image using Snyk
 #        uses: snyk/actions/docker@master
