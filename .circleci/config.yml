@@ -11,7 +11,7 @@ executors:
       - image: cimg/base:2020.01
   linting-executor:
     docker:
-      - image: cimg/ruby:3.4.3-browsers
+      - image: cimg/ruby:3.4.4-browsers
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
@@ -28,7 +28,7 @@ executors:
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest-3.4.3
+      - image: ministryofjustice/apply-ci:latest-3.4.4
         environment:
           RAILS_ENV: test
           NODE_OPTIONS: --openssl-legacy-provider
@@ -94,22 +94,22 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v3.4.3-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        - v3.4.4-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v3.4.3-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+        - v3.4.4-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v3.4.3-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        key: v3.4.4-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v3.4.3-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      key: v3.4.4-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
