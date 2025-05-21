@@ -1,7 +1,6 @@
 module UploadedEvidence
   class Base
     delegate :legal_aid_application,
-             :params,
              to: :controller
 
     attr_reader :controller, :successful_upload, :error_message, :successfully_deleted, :next_action

@@ -3,7 +3,6 @@ module GovukEmails
     attr_reader :scheduled_mail
 
     delegate :arguments,
-             :eligible_for_delivery?,
              :mailer_klass,
              :mailer_method, to: :scheduled_mail
 

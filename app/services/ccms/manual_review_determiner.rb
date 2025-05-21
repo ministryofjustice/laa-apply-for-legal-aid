@@ -9,8 +9,7 @@ module CCMS
   class ManualReviewDeterminer
     attr_reader :legal_aid_application
 
-    delegate :cfe_result,
-             :dwp_override,
+    delegate :dwp_override,
              :passported?,
              :non_passported?,
              :has_restrictions?,
