@@ -26,6 +26,7 @@ jobs:
         with:
           command: test
           image: laa-apply-for-legalaid:scan
+          args: --severity-threshold=critical --app-vulns
 #          args: --file=${{ inputs.dockerfile_path }} --platform=linux-x64
 #          args: --exclude-app-vulns --exclude=node_modules
 
