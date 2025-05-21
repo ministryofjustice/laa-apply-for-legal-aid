@@ -62,8 +62,6 @@ This means that overnight cronjobs on staging all fail as the DB is not present
   {{- end -}}
 {{- end -}}
 
-
-
 {{/*
 Function to return the name for a UAT redis chart master node host
 This duplicates bitnami/redis chart's internal logic whereby
@@ -72,5 +70,12 @@ If branch name contains "redis" then the redis-release-name appends "-master", o
 {{- define "apply-for-legal-aid.redis-uat-host" -}}
   {{- $redis_fullName := (include "common.names.fullname" .Subcharts.redis) -}}
   {{- printf "%s-master.%s.svc.cluster.local" $redis_fullName .Release.Namespace -}}
+{{- end -}}
+
+{{/*
+Function to return a list of whitelisted IPs allowed to access the service.
+*/}}
+{{- define "apply-for-legal-aid.whitelist" -}}
+    {{- .Values.pingdomIPs }},{{- .Values.sharedIPs }}
 {{- end -}}
 
