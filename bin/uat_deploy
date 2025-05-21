@@ -7,6 +7,9 @@ deploy() {
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-53 | sed 's/-$//')
   IDENTIFIER="$INGRESS_NAME-${K8S_NAMESPACE}-green"
 
+  PINGDOM_IPS=$(curl -s https://my.pingdom.com/probes/ipv4 | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
+  SHARED_IPS=$(curl -s https://raw.githubusercontent.com/ministryofjustice/laa-ip-allowlist/main/cidrs.txt | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
+
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
   helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
@@ -17,7 +20,9 @@ deploy() {
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
-                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER"
+                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
+                --set-string pingdomIPs="$PINGDOM_IPS" \
+                --set-string sharedIPs="$SHARED_IPS"
 }
 
 deploy
