@@ -225,6 +225,7 @@ jobs:
     - *restore_js_packages_cache
     - *install_js_packages
     - *save_js_packages_cache
+    - run: npm install jquery
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
     - run:
