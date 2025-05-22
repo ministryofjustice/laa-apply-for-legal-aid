@@ -316,7 +316,7 @@ RSpec.describe "provider other assets requests" do
           end
 
           it "redirects provider to provider's applications page" do
-            expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+            expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
           end
 
           context "with other_assets" do
@@ -327,7 +327,7 @@ RSpec.describe "provider other assets requests" do
               expect(application.reload.other_assets?).to be true
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+              expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
             end
           end
 
@@ -346,7 +346,7 @@ RSpec.describe "provider other assets requests" do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be true
-              expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+              expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
             end
           end
 
@@ -360,7 +360,7 @@ RSpec.describe "provider other assets requests" do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be true
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+              expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
             end
           end
 
@@ -374,7 +374,7 @@ RSpec.describe "provider other assets requests" do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+              expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
             end
           end
         end

@@ -361,7 +361,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
 
         it "redirects to provider's application list" do
           request
-          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
         end
       end
 
@@ -372,7 +372,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
 
         it "redirects to provider's application list" do
           request
-          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
         end
       end
     end
