@@ -135,7 +135,7 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
     When I click 'Save and come back later'
-    Then I should be on the 'applications/submitted' page showing 'Your applications'
+    Then I should be on the 'applications/in_progress' page showing 'Your applications'
 
   @javascript @clamav
   Scenario: Uploading a file for statement of case

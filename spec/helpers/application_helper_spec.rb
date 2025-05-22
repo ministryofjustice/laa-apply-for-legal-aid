@@ -24,26 +24,6 @@ RSpec.describe ApplicationHelper do
   let(:journey_type) { :citizens }
   let(:provider) { create(:provider, username: "Test User") }
 
-  describe "#home_link" do
-    subject(:link) { home_link }
-
-    context "when called on provider journey" do
-      before do
-        allow(request).to receive(:path_info).and_return("/providers/test")
-      end
-
-      it { is_expected.to eq(submitted_providers_legal_aid_applications_url) }
-    end
-
-    context "when called on citizens journey" do
-      before do
-        allow(request).to receive(:path_info).and_return("/citizens/test")
-      end
-
-      it { is_expected.to eq("#") }
-    end
-  end
-
   describe "#user_header_navigation" do
     context "when called on citizens journey" do
       it "returns no navigation items" do

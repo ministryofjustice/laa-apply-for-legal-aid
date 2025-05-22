@@ -73,7 +73,7 @@ RSpec.describe Providers::Partners::DetailsController do
 
       it "redirects provider to provider's applications page" do
         patch_partners_details
-        expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+        expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
       end
 
       it "creates a partner with the expected values" do

@@ -203,7 +203,7 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
 
         it "redirects to provider applications home page" do
           patch_request
-          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
         end
 
         context "when yes selected" do
@@ -217,7 +217,7 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
 
           it "redirects to provider applications home page" do
             patch_request
-            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+            expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
           end
         end
 
@@ -232,7 +232,7 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
 
           it "redirects to provider applications home page" do
             patch_request
-            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+            expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
           end
         end
 
@@ -241,7 +241,7 @@ RSpec.describe Providers::ProceedingMeritsTask::ChildCareAssessmentsController d
 
           it "redirects to provider applications home page" do
             patch_request
-            expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+            expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
           end
 
           it "leaves the task as not_started" do

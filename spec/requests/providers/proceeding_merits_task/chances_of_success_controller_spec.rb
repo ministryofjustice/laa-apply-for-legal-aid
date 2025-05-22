@@ -152,7 +152,7 @@ module Providers
 
           it "redirects provider to provider's applications page" do
             post_request
-            expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+            expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
           end
 
           it "sets the application as draft" do

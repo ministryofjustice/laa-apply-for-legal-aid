@@ -67,7 +67,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController do
 
         it "sets the application as draft and redirects to the your applications page", :aggregate_failures do
           expect(legal_aid_application.reload).to be_draft
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
     end
