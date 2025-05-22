@@ -9,7 +9,13 @@ Feature: No national insurance number for applicant
     Then I choose 'No'
     And I enter the date of birth '10-1-1980'
     And I click 'Save and continue'
+    Then I should be on a page with title "Does your client have a National Insurance number?"
+
+    When I choose "Yes"
+    And I enter national insurance number "JA123456D"
+    And I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
+
     Then I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
@@ -47,11 +53,6 @@ Feature: No national insurance number for applicant
     Then I should be on a page showing "What you're applying for"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a National Insurance number?"
-
-    When I choose "Yes"
-    And I enter national insurance number "JA123456D"
-    And I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
     And I choose "No"
     When I click 'Save and continue'

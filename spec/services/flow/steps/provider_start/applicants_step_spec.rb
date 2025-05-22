@@ -12,6 +12,6 @@ RSpec.describe Flow::Steps::ProviderStart::ApplicantsStep, type: :request do
   describe "#forward" do
     subject { described_class.forward }
 
-    it { is_expected.to eq :previous_references }
+    it { is_expected.to eq :has_national_insurance_numbers }
   end
 end
