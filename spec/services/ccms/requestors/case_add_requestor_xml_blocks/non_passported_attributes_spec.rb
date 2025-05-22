@@ -59,7 +59,8 @@ module CCMS
             false_attributes.each do |config_spec|
               entity, attribute, user_defined_ind = config_spec
               block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to have_boolean_response false
+              expect(block).to have_boolean_response(false)
+
               if user_defined_ind == true
                 expect(block).to be_user_defined
               else
@@ -967,6 +968,11 @@ module CCMS
             [:employment_entity, "OUT_EMP_INFER_C_15WP3_17A"],
             [:global_means, "OUT_GB_INFER_C_29WP3_18A"],
             [:global_means, "OUT_GB_PROC_C_34WP3_12A"],
+            [:proceeding_merits, "FAM_PROSP_50_OR_BETTER"],
+            [:proceeding_merits, "FAM_PROSP_BORDER_UNCERT_POOR"],
+            [:proceeding_merits, "FAM_PROSP_MARGINAL"],
+            [:proceeding_merits, "FAM_PROSP_POOR"],
+            [:proceeding_merits, "FAM_PROSP_UNCERTAIN"],
           ]
         end
       end

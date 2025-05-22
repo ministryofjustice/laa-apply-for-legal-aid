@@ -109,11 +109,11 @@ module XMLBlockMatchers
     end
 
     failure_message do
-      SuperDiff::Differs::Hash.call(expected, actual_hash, indent_level: 0)
+      SuperDiff::Basic::Differs::Hash.call(expected, actual_hash, indent_level: 0)
     end
 
     failure_message_when_negated do
-      SuperDiff::Differs::Hash.call(expected, actual_hash, indent_level: 0)
+      SuperDiff::Basic::Differs::Hash.call(expected, actual_hash, indent_level: 0)
     end
   end
 
