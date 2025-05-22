@@ -5,6 +5,56 @@ orbs:
   browser-tools: circleci/browser-tools@1.4.8
   slack: circleci/slack@5.0.0
 
+references:
+  authenticate_k8s_live: &authenticate_k8s_live
+    run:
+      name: Authenticate with cluster
+      command: |
+        echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
+        kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
+        kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
+        kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
+        kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
+
+  install_gems: &install_gems
+    run:
+      name: Install ruby gems
+      command: |
+        bundle config set --local path 'vendor/bundle'
+        bundle install --jobs=4 && bundle clean
+
+  install_js_packages: &install_js_packages
+    run:
+      name: Install Yarn packages
+      command: yarn --frozen-lockfile
+
+  update_packages: &update_packages
+    run:
+      name: Update packages
+      command: sudo apt-get update
+
+  restore_gems_cache: &restore_gems_cache
+    restore_cache:
+      keys:
+        - v3.4.4-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+
+  restore_js_packages_cache: &restore_js_packages_cache
+    restore_cache:
+      keys:
+        - v3.4.4-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+
+  save_gems_cache: &save_gems_cache
+    save_cache:
+        key: v3.4.4-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+  save_js_packages_cache: &save_js_packages_cache
+    save_cache:
+      key: v3.4.4-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      paths:
+        - node_modules
+
 executors:
   basic-executor:
     docker:
@@ -63,55 +113,22 @@ commands:
               docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
             fi
 
-references:
-  authenticate_k8s_live: &authenticate_k8s_live
-    run:
-      name: Authenticate with cluster
-      command: |
-        echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
-        kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
-        kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
-        kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
-        kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
-
-  install_gems: &install_gems
-    run:
-      name: Install ruby gems
-      command: |
-        bundle config set --local path 'vendor/bundle'
-        bundle install --jobs=4 && bundle clean
-
-  install_js_packages: &install_js_packages
-    run:
-      name: Install Yarn packages
-      command: yarn --frozen-lockfile
-
-  update_packages: &update_packages
-    run:
-      name: Update packages
-      command: sudo apt-get update
-
-  restore_gems_cache: &restore_gems_cache
-    restore_cache:
-      keys:
-        - v3.4.4-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
-
-  restore_js_packages_cache: &restore_js_packages_cache
-    restore_cache:
-      keys:
-        - v3.4.4-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-
-  save_gems_cache: &save_gems_cache
-    save_cache:
-        key: v3.4.4-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
-
-  save_js_packages_cache: &save_js_packages_cache
-    save_cache:
-      key: v3.4.4-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-      paths:
-        - node_modules
+  deploy-to-environment:
+      description: Deploy image to the specified environment
+      parameters:
+        environment:
+          description: Name of environment to deploy to
+          type: string
+      steps:
+        - aws-cli/setup:
+            role_arn: $ECR_ROLE_TO_ASSUME
+            region: $ECR_REGION
+        - checkout
+        - *authenticate_k8s_live
+        - run:
+            name: Deploy to << parameters.environment >>
+            command: |
+              ./bin/deploy << parameters.environment >>
 
 jobs:
   lint_checks:
@@ -269,51 +286,26 @@ jobs:
     - setup_remote_docker
     - build-and-push-to-ecr
 
-  deploy_uat: &deploy_uat
+  deploy-uat: &deploy-uat
     executor: cloud-platform-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - *authenticate_k8s_live
-    - run:
-        name: Helm deployment to UAT
-        command: |
-          ./bin/uat_deploy
+      - deploy-to-environment:
+          environment: uat
 
-  deploy_main_uat:
-    <<: *deploy_uat
+  deploy-main-uat:
+    <<: *deploy-uat
 
-  deploy_staging:
+  deploy-staging:
     executor: cloud-platform-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - *authenticate_k8s_live
-    - run:
-        name: Helm deployment to staging
-        command: |
-          helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
-                        --install --wait \
-                        --namespace=${K8S_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
-                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
-                        --set image.tag="${CIRCLE_SHA1}"
+      - deploy-to-environment:
+          environment: staging
 
-  deploy_production:
+  deploy-production:
     executor: cloud-platform-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - *authenticate_k8s_live
-    - run:
-        name: Helm deployment to production
-        command: |
-          helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
-                        --install --wait \
-                        --namespace=${K8S_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
-                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
-                        --set image.tag="${CIRCLE_SHA1}"
+      - deploy-to-environment:
+          environment: production
 
   delete_dependabot_deployment:
     executor: cloud-platform-executor
@@ -344,7 +336,7 @@ workflows:
           requires:
           - lint_checks
           <<: *generic-slack-fail-post-step
-      - deploy_uat:
+      - deploy-uat:
           context: laa-apply-for-legalaid-uat
           requires:
           - build_and_push
@@ -369,7 +361,7 @@ workflows:
               only:
                 - /dependabot.*/
           requires:
-          - deploy_uat
+          - deploy-uat
           <<: *generic-slack-fail-post-step
 
   merge_pr:
@@ -391,14 +383,14 @@ workflows:
           requires:
             - lint_checks
           <<: *generic-slack-fail-post-step
-      - deploy_main_uat:
+      - deploy-main-uat:
           context: laa-apply-for-legalaid-uat
           requires:
             - integration_tests
             - unit_tests
             - build_and_push
           <<: *generic-slack-fail-post-step
-      - deploy_staging:
+      - deploy-staging:
           context: laa-apply-for-legalaid-staging
           requires:
             - integration_tests
@@ -445,14 +437,14 @@ workflows:
               ]
             }
           requires:
-            - deploy_main_uat
-            - deploy_staging
+            - deploy-main-uat
+            - deploy-staging
       - hold_production:
           type: approval
           requires:
-            - deploy_main_uat
-            - deploy_staging
-      - deploy_production:
+            - deploy-main-uat
+            - deploy-staging
+      - deploy-production:
           context: laa-apply-for-legalaid-production
           requires:
             - hold_production
