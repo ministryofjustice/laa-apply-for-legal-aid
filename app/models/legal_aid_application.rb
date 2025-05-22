@@ -120,7 +120,6 @@ class LegalAidApplication < ApplicationRecord
            :overriding_dwp_result?,
            :submitting_assessment?,
            :use_ccms?,
-           :summary_state,
            :ccms_reason,
            :provider_recording_parental_responsibilities!,
            :rejected_all_parental_responsibilities!,
