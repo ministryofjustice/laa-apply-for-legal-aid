@@ -1,6 +1,7 @@
 module YourApplicationsHelper
   def home_path
-    request.path_info.include?("providers") ? your_applications_default_tab_path : "#"
+    substrings = ["providers", "/test/trapped_error"]
+    substrings.any? { |substr| request.path_info.include?(substr) } ? your_applications_default_tab_path : "#"
   end
 
   def your_applications_default_tab_path

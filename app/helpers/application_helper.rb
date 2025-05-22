@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include YourApplicationsHelper
+
   def html_title
     default = t("shared.page-title.suffix")
     return default unless content_for?(:head_title) || content_for?(:page_title)
