@@ -168,7 +168,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
             it "redirects to the list of applications" do
               patch_request
-              expect(response.body).to redirect_to submitted_providers_legal_aid_applications_path
+              expect(response.body).to redirect_to in_progress_providers_legal_aid_applications_path
             end
 
             it "sets the application as draft" do
@@ -185,7 +185,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
 
             it "redirects to the list of applications" do
               patch_request
-              expect(response.body).to redirect_to submitted_providers_legal_aid_applications_path
+              expect(response.body).to redirect_to in_progress_providers_legal_aid_applications_path
             end
 
             it "sets the application as draft" do

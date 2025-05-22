@@ -193,7 +193,7 @@ RSpec.describe Providers::Means::SavingsAndInvestmentsController do
 
         it "redirects to the providers application list" do
           patch_request
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
 
         context "when submitted with invalid input" do

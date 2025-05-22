@@ -181,7 +181,7 @@ RSpec.describe Providers::Means::PropertyDetailsController do
         end
 
         it "redirects to the applications page" do
-          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
         end
       end
 
@@ -189,7 +189,7 @@ RSpec.describe Providers::Means::PropertyDetailsController do
         let(:property_value) { "" }
 
         it "redirects provider to provider's applications page" do
-          expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
         end
       end
     end

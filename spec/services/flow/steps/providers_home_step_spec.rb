@@ -6,6 +6,6 @@ RSpec.describe Flow::Steps::ProvidersHomeStep, type: :request do
   describe "#path" do
     subject(:path) { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eql submitted_providers_legal_aid_applications_path }
+    it { is_expected.to eql in_progress_providers_legal_aid_applications_path }
   end
 end

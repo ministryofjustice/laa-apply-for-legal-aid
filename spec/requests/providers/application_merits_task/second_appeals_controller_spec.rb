@@ -146,7 +146,7 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealsController do
 
         it "redirects to the list of applications" do
           post_second_appeal
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
 
@@ -164,7 +164,7 @@ RSpec.describe Providers::ApplicationMeritsTask::SecondAppealsController do
 
         it "redirects to the list of applications" do
           post_second_appeal
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
 

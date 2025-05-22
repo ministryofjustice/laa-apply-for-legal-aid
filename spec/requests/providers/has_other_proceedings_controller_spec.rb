@@ -54,7 +54,7 @@ RSpec.describe Providers::HasOtherProceedingsController, :vcr do
       let(:params) { { legal_aid_application: { has_other_proceeding: "" }, draft_button: "Save and come back later" } }
 
       it "redirects to the list of applications" do
-        expect(response).to redirect_to submitted_providers_legal_aid_applications_path
+        expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
       end
     end
 
