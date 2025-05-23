@@ -103,7 +103,7 @@ laa_portal:
   idpSsoTargetUrl: "https://portal.uat.legalservices.gov.uk/oamfed/idp/samlv20"
   idpSloTargetUrl: "https://portal.uat.legalservices.gov.uk/oam/server/logout"
   idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
-  mockSaml: "true"
+  mockSaml: "false"
 
 provider_details:
   url: "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails"
