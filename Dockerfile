@@ -50,7 +50,7 @@ RUN apk del build-dependencies
 RUN yarn remove esbuild
 RUN yarn --prod
 RUN rm -rf node_modules/@esbuild node_modules/esbuild
-RUN yarn cache clean @esbuild
+RUN yarn cache clean esbuild
 
 # non-root/appuser should own only what they need to
 RUN chown -R appuser:appgroup log tmp db
