@@ -47,6 +47,15 @@ RUN NODE_OPTIONS=--openssl-legacy-provider bundle exec rake assets:precompile SE
 # tidy up installation - these are installed in the apply-base image
 RUN apk del build-dependencies
 
+# Cleanup to save space in the production image
+RUN rm -rf node_modules log/* && \
+    rm -rf /usr/local/bundle/cache && \
+    rm -rf .env && \
+    find /usr/local/bundle/gems -name "*.c" -delete && \
+    find /usr/local/bundle/gems -name "*.h" -delete && \
+    find /usr/local/bundle/gems -name "*.o" -delete && \
+    find /usr/local/bundle/gems -name "*.html" -delete
+
 # non-root/appuser should own only what they need to
 RUN chown -R appuser:appgroup log tmp db
 
