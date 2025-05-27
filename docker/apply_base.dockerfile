@@ -1,7 +1,7 @@
 FROM ruby:3.4.4-alpine3.21
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
-      org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@digital.justice.gov.uk)" \
+      org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
       org.opencontainers.image.title="Apply for civil legal aid - base image" \
       org.opencontainers.image.description="Web service to apply for legal aid in civil matters" \
       org.opencontainers.image.url="https://github.com/ministryofjustice/laa-apply-for-legal-aid"

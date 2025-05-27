@@ -21,7 +21,7 @@ class TestProviderPopulator
   TEST_PROVIDERS = {
     "test1" => ["Test & Co", "test1@example.com", 100],
     "will-c" => ["Will-c & Co.", "william.clarke@digital.justice.gov.uk", 101],
-    "test-sch" => ["Test-sch & Co.", "apply-for-civil-legal-aid@digital.justice.gov.uk", 102],
+    "test-sch" => ["Test-sch & Co.", "apply-for-civil-legal-aid@justice.gov.uk", 102],
     "test2" => ["Test2 & Co.", "test2@example.com", 103],
     "test3" => ["Test3 & Co.", "really-really-long-email-address@example.com", 104],
     "firm1-user1" => ["Firm1 & Co.", "firm1-user1@example.com", 105],
