@@ -55,11 +55,11 @@ Feature: Scope limitations not being set
     And I click 'Save and continue'
 
     Then I should be on a page showing 'Search for legal proceedings'
-    When I search for proceeding 'SE004'
+    When I search for proceeding 'SE004A'
     And proceeding suggestions has results
-    Then I should be on a page showing 'Specific issue order'
+    Then I should be on a page showing 'Specific issue order - appeal'
     And proceeding suggestions has results
-    When I choose a 'Specific issue order' radio button
+    When I choose a 'Specific issue order - appeal' radio button
     And I click 'Save and continue'
 
     Then I should be on a page showing 'Is this proceeding for a change of name application?'
@@ -69,7 +69,7 @@ Feature: Scope limitations not being set
     Then I should be on a page showing 'You have added 3 proceedings'
     And I should be on a page showing 'Child arrangements order (CAO) - residence'
     And I should be on a page showing 'Prohibited steps order'
-    And I should be on a page showing 'Specific issue order'
+    And I should be on a page showing 'Specific issue order - appeal'
     And I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
@@ -101,7 +101,7 @@ Feature: Scope limitations not being set
     Then I should be on a page showing 'You have added 3 proceedings'
     And I should be on a page showing 'Child arrangements order (CAO) - residence'
     And I should be on a page showing 'Prohibited steps order'
-    And I should be on a page showing 'Specific issue order'
+    And I should be on a page showing 'Specific issue order - appeal'
     And I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
