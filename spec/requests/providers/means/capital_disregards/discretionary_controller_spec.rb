@@ -96,7 +96,7 @@ RSpec.describe Providers::Means::CapitalDisregards::DiscretionaryController do
 
         it "redirects provider to provider's applications page" do
           patch providers_legal_aid_application_means_capital_disregards_discretionary_path(application), params: params.merge(submit_button)
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
     end

@@ -128,7 +128,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
         describe "back link" do
           it "points to the applications page" do
-            expect(response.body).to have_back_link(submitted_providers_legal_aid_applications_path)
+            expect(response.body).to have_back_link(in_progress_providers_legal_aid_applications_path)
           end
         end
 
@@ -488,7 +488,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
       it "redirects to provider legal applications home page" do
         request
-        expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+        expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
       end
 
       it "does not change the state to \"applicant_details_checked\"" do

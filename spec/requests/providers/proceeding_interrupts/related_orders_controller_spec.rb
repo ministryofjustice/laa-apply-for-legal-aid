@@ -93,7 +93,7 @@ RSpec.describe Providers::ProceedingInterrupts::RelatedOrdersController do
 
       context "when no choice is made" do
         it "redirects to the home page" do
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
 
@@ -101,7 +101,7 @@ RSpec.describe Providers::ProceedingInterrupts::RelatedOrdersController do
         let(:none_selected) { "true" }
 
         it "redirects to the home page" do
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
 
@@ -109,7 +109,7 @@ RSpec.describe Providers::ProceedingInterrupts::RelatedOrdersController do
         let(:related_orders) { %w[placement] }
 
         it "redirects to the home page" do
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
 
@@ -117,7 +117,7 @@ RSpec.describe Providers::ProceedingInterrupts::RelatedOrdersController do
         let(:related_orders) { %w[placement parenting] }
 
         it "redirects to the home page" do
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
     end

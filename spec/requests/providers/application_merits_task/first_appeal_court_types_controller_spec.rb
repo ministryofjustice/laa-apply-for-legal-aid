@@ -136,7 +136,7 @@ RSpec.describe Providers::ApplicationMeritsTask::FirstAppealCourtTypesController
 
         it "redirects to the list of applications" do
           post_first_appeal_court_type
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
 
@@ -151,7 +151,7 @@ RSpec.describe Providers::ApplicationMeritsTask::FirstAppealCourtTypesController
 
         it "redirects to the list of applications" do
           post_first_appeal_court_type
-          expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+          expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
         end
       end
     end

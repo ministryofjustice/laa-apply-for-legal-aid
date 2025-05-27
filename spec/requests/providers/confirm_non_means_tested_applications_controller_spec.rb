@@ -131,7 +131,7 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
       it "sets draft status and redirects provider to provider's applications page", :aggregate_failures do
         expect { request }.to change { application.reload.draft? }.from(false).to(true)
-        expect(response).to redirect_to(submitted_providers_legal_aid_applications_path)
+        expect(response).to redirect_to(in_progress_providers_legal_aid_applications_path)
       end
 
       it "leaves application in \"applicant_details_checked\" state" do
