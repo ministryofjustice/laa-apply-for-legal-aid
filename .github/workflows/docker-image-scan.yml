@@ -26,7 +26,7 @@ jobs:
         with:
           command: test
           image: laa-apply-for-legalaid:scan
-          args: --severity-threshold=critical --app-vulns --sarif-file-output=snyk_docker_test.sarif
+          args: --exclude-node-modules --project-name=laa-apply-for-legal-aid --platform=linux/amd64
 #          args: --file=${{ inputs.dockerfile_path }} --platform=linux-x64
 #          args: --exclude-app-vulns --exclude=node_modules
 
