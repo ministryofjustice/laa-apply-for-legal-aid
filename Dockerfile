@@ -47,6 +47,9 @@ RUN NODE_OPTIONS=--openssl-legacy-provider bundle exec rake assets:precompile SE
 # tidy up installation - these are installed in the apply-base image
 RUN apk del build-dependencies
 
+RUN yarn remove esbuild
+RUN yarn --prod
+
 # non-root/appuser should own only what they need to
 RUN chown -R appuser:appgroup log tmp db
 
