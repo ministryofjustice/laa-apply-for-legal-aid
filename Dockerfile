@@ -48,7 +48,7 @@ RUN NODE_OPTIONS=--openssl-legacy-provider bundle exec rake assets:precompile SE
 RUN apk del build-dependencies
 
 # Cleanup to save space in the production image
-RUN rm -rf node_modules log/* tmp/* /tmp && \
+RUN rm -rf node_modules log/* tmp/* && \
     rm -rf /usr/local/bundle/cache && \
     rm -rf .env && \
     find /usr/local/bundle/gems -name "*.c" -delete && \
